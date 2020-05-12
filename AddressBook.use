@@ -1,0 +1,88 @@
+model addressbook
+enum AddressType{
+default
+}
+
+class AddressBook
+attributes
+operations
+end
+
+class Person
+attributes
+	firstname : String
+	lastname : String
+operations
+end
+
+class Address
+attributes
+	street : String
+	zip : String
+	city : String
+	type : AddressType
+operations
+end
+
+class Country
+attributes
+	name : String
+operations
+end
+
+class FederalState
+attributes
+	name : String
+operations
+end
+
+composition xxx_AddressBook_persons between
+	AddressBook[0..1] role xxx_AddressBook_persons_src
+	Person[*] role persons
+end
+
+composition xxx_AddressBook_countries between
+	AddressBook[0..1] role xxx_AddressBook_countries_src
+	Country[*] role countries
+end
+
+composition xxx_Person_addresses between
+	Person[0..1] role xxx_Person_addresses_src
+	Address[*] role addresses
+end
+
+association xxx_Person_addressBook between
+	Person[*] role xxx_Person_addressBook_src
+	AddressBook[0..1] role addressBook
+end
+
+association xxx_Address_country between
+	Address[*] role xxx_Address_country_src
+	Country[0..1] role country
+end
+
+association xxx_Address_federalState between
+	Address[*] role xxx_Address_federalState_src
+	FederalState[0..1] role federalState
+end
+
+association xxx_Address_person between
+	Address[*] role xxx_Address_person_src
+	Person[0..1] role person
+end
+
+composition xxx_Country_federalStates between
+	Country[0..1] role xxx_Country_federalStates_src
+	FederalState[*] role federalStates
+end
+
+association xxx_Country_addressBook between
+	Country[*] role xxx_Country_addressBook_src
+	AddressBook[0..1] role addressBook
+end
+
+association xxx_FederalState_country between
+	FederalState[*] role xxx_FederalState_country_src
+	Country[0..1] role country
+end
+

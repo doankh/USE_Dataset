@@ -1,0 +1,185 @@
+model architecture
+abstract class AnalysedElement
+attributes
+	name : String
+	idAnalyzedElement : Integer
+	properties : Integer
+operations
+end
+
+class Type<AnalysedElement
+attributes
+	qualifiedName : String
+	source : Boolean
+	binary : Boolean
+operations
+end
+
+class ArchitectureFile<AnalysedElement
+attributes
+	path : String
+operations
+end
+
+abstract class Relationship
+attributes
+	relationShipId : Integer
+operations
+end
+
+class InheritanceDependency<Dependency
+attributes
+operations
+end
+
+class ReferenceDependency<Dependency
+attributes
+	uri : String
+	name : String
+operations
+end
+
+abstract class Dependency<Relationship
+attributes
+operations
+end
+
+class Library<AnalysedElement
+attributes
+operations
+end
+
+class RuntimeDependency<Dependency
+attributes
+operations
+end
+
+class InjectionDependency<RuntimeDependency
+attributes
+operations
+end
+
+class FieldReferenceDependency<ReferenceDependency
+attributes
+operations
+end
+
+class ImportReferenceDependency<ReferenceDependency
+attributes
+operations
+end
+
+class Project<AnalysedElement
+attributes
+operations
+end
+
+class Method<AnalysedElement
+attributes
+operations
+end
+
+class ReturnTypeRelationship<Relationship
+attributes
+operations
+end
+
+class ParameterRelationship<Relationship
+attributes
+operations
+end
+
+class CallRelationship<Relationship
+attributes
+operations
+end
+
+class Field<AnalysedElement
+attributes
+operations
+end
+
+class DeclaredType<Relationship
+attributes
+operations
+end
+
+abstract class Pattern<AnalysedElement
+attributes
+operations
+end
+
+abstract class Role<AnalysedElement
+attributes
+	attachedElement : String
+operations
+end
+
+abstract class RelationshipConstraint
+attributes
+operations
+	check(relationship : ExtensionRelationship):Boolean
+end
+
+class ExtensionRelationship<Relationship
+attributes
+operations
+	checkConstraint():Boolean
+end
+
+class RoleRelationship<Relationship
+attributes
+operations
+	checkConstraint():Boolean
+	getTarget()
+end
+
+class PatternRelationship<Relationship
+attributes
+	referenceName : String
+operations
+	checkConstraint():Boolean
+	getTarget()
+	getSource():Pattern
+end
+
+class Bop
+attributes
+operations
+end
+
+composition xxx_AnalysedElement_outgoingRelationships between
+	AnalysedElement[0..1] role xxx_AnalysedElement_outgoingRelationships_src
+	Relationship[*] role outgoingRelationships
+end
+
+association xxx_AnalysedElement_incomingRelationships between
+	AnalysedElement[0..1] role xxx_AnalysedElement_incomingRelationships_src
+	Relationship[*] role incomingRelationships
+end
+
+composition xxx_AnalysedElement_containedElements between
+	AnalysedElement[0..1] role xxx_AnalysedElement_containedElements_src
+	AnalysedElement[*] role containedElements
+end
+
+association xxx_AnalysedElement_parent between
+	AnalysedElement[*] role xxx_AnalysedElement_parent_src
+	AnalysedElement[0..1] role parent
+end
+
+association xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	AnalysedElement[1] role target
+end
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	AnalysedElement[1] role source
+end
+
+association xxx_InjectionDependency_mapping between
+	InjectionDependency[*] role xxx_InjectionDependency_mapping_src
+	AnalysedElement[0..1] role mapping
+end
+

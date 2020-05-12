@@ -1,0 +1,135 @@
+model ASL
+enum ProjectorType{
+default
+}
+
+class ASL
+attributes
+operations
+end
+
+abstract class Operation
+attributes
+operations
+end
+
+class LoadMetamodel<Operation
+attributes
+	name : String
+	path : String
+	nsUri : String
+	modelHandler : String
+operations
+end
+
+class LoadModel<Operation
+attributes
+	name : String
+	path : String
+	metamodel : String
+	inWorkspace : Boolean
+	fileExtensions : String
+operations
+end
+
+class Injector
+attributes
+	type : ProjectorType
+operations
+end
+
+class Extractor
+attributes
+	type : ProjectorType
+operations
+end
+
+class Param
+attributes
+	name : String
+	value : String
+operations
+end
+
+class SaveModel<Operation
+attributes
+	model_ : String
+	path : String
+operations
+end
+
+class ATL<Operation
+attributes
+	path : String
+operations
+end
+
+class InModel
+attributes
+	name : String
+	model_ : String
+operations
+end
+
+class OutModel
+attributes
+	name : String
+	model_ : String
+	metamodel : String
+operations
+end
+
+class Library
+attributes
+	name : String
+	path : String
+operations
+end
+
+class ApplyMarkers<Operation
+attributes
+	problemModel : String
+	fileToApplyMarkers : String
+operations
+end
+
+composition xxx_ASL_operations_ between
+	ASL[0..1] role xxx_ASL_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_LoadModel_injector between
+	LoadModel[*] role xxx_LoadModel_injector_src
+	Injector[0..1] role injector
+end
+
+composition xxx_Injector_params between
+	Injector[0..1] role xxx_Injector_params_src
+	Param[*] role params
+end
+
+composition xxx_Extractor_params between
+	Extractor[0..1] role xxx_Extractor_params_src
+	Param[*] role params
+end
+
+composition xxx_SaveModel_extractor between
+	SaveModel[*] role xxx_SaveModel_extractor_src
+	Extractor[0..1] role extractor
+end
+
+composition xxx_ATL_inModels between
+	ATL[0..1] role xxx_ATL_inModels_src
+	InModel[*] role inModels
+end
+
+composition xxx_ATL_outModels between
+	ATL[0..1] role xxx_ATL_outModels_src
+	OutModel[*] role outModels
+end
+
+composition xxx_ATL_libraries between
+	ATL[0..1] role xxx_ATL_libraries_src
+	Library[*] role libraries
+end
+

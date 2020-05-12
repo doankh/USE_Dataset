@@ -1,0 +1,564 @@
+model ActionsProv
+abstract class Action
+attributes
+operations
+end
+
+class OpaqueAction<Action
+attributes
+	body : String
+	language : String
+operations
+end
+
+class InputPin<Pin
+attributes
+operations
+end
+
+class OutputPin<Pin
+attributes
+operations
+end
+
+abstract class Pin
+attributes
+operations
+end
+
+class ValuePin<InputPin
+attributes
+operations
+end
+
+abstract class InvocationAction<Action
+attributes
+operations
+end
+
+abstract class CallAction<InvocationAction
+attributes
+	isSynchronous : String
+operations
+end
+
+class CallBehaviorAction<CallAction
+attributes
+operations
+end
+
+class CallOperationAction
+attributes
+operations
+end
+
+class SendSignalAction<InvocationAction
+attributes
+operations
+end
+
+class BroadcastSignalAction<InvocationAction
+attributes
+operations
+end
+
+class SendObjectAction<InvocationAction
+attributes
+operations
+end
+
+class CreateObjectAction<Action
+attributes
+operations
+end
+
+class DestroyObjectAction<Action
+attributes
+operations
+end
+
+class TestIdentityAction<Action
+attributes
+operations
+end
+
+class ReadSelfAction<Action
+attributes
+operations
+end
+
+class ValueSpecificationAction<Action
+attributes
+operations
+end
+
+abstract class StructuralFeatureAction<Action
+attributes
+operations
+end
+
+class ReadStructuralFeatureAction<StructuralFeatureAction
+attributes
+operations
+end
+
+abstract class WriteStructuralFeatureAction<StructuralFeatureAction
+attributes
+operations
+end
+
+class AddStructuralFeatureValueAction<WriteStructuralFeatureAction
+attributes
+operations
+end
+
+class RemoveStructuralFeatureValueAction<WriteStructuralFeatureAction
+attributes
+operations
+end
+
+class ClearStructuralFeatureAction<StructuralFeatureAction
+attributes
+operations
+end
+
+class LinkAction<Action
+attributes
+operations
+end
+
+abstract class LinkEndData
+attributes
+operations
+end
+
+class ReadLinkAction<LinkAction
+attributes
+operations
+end
+
+abstract class WriteLinkAction<LinkAction
+attributes
+operations
+end
+
+class CreateLinkAction<WriteLinkAction
+attributes
+operations
+end
+
+class LinkEndCreationData<LinkEndData
+attributes
+	isReplaceAll : String
+operations
+end
+
+class DestroyLinkAction<WriteLinkAction
+attributes
+operations
+end
+
+class LinkEndDestructionData<LinkEndData
+attributes
+	isDestroyDuplicates : String
+operations
+end
+
+class ReplyAction<Action
+attributes
+operations
+end
+
+class UnmarshallAction<Action
+attributes
+operations
+end
+
+class AcceptEventAction<Action
+attributes
+	isUnmarshall : String
+operations
+end
+
+class AcceptCallAction<AcceptEventAction
+attributes
+operations
+end
+
+class ReadExtendAction<Action
+attributes
+operations
+end
+
+class ReclassifyObjectAction<Action
+attributes
+	isReplaceAll : String
+operations
+end
+
+class ReadlsClassifiedObjectAction
+attributes
+operations
+end
+
+class StartClassifierBehaviorAction<Action
+attributes
+operations
+end
+
+class StartObjectBehaviorAction<CallAction
+attributes
+operations
+end
+
+class QualifierValue
+attributes
+operations
+end
+
+class ReadLinkObjectEndAction<Action
+attributes
+operations
+end
+
+class ReadLinkObjectEndQualifierAction<Action
+attributes
+operations
+end
+
+class CreateLinkObjectAction<CreateLinkAction
+attributes
+operations
+end
+
+class ReduceAction<Action
+attributes
+	isOrdered : String
+operations
+end
+
+abstract class VariableAction<Action
+attributes
+operations
+end
+
+class ReadVariableAction<VariableAction
+attributes
+operations
+end
+
+class WriteVariableAction<VariableAction
+attributes
+operations
+end
+
+class AddVariableValueAction<WriteVariableAction
+attributes
+operations
+end
+
+class RemoveVariableValueAction<WriteVariableAction
+attributes
+operations
+end
+
+class ClearVariableAction<VariableAction
+attributes
+operations
+end
+
+class RaiseExceptionAction<Action
+attributes
+operations
+end
+
+class ActionInputPin<InputPin
+attributes
+operations
+end
+
+composition xxx_Action_input between
+	Action[0..1] role xxx_Action_input_src
+	InputPin[*] role input
+end
+
+composition xxx_Action_output between
+	Action[0..1] role xxx_Action_output_src
+	OutputPin[*] role output
+end
+
+composition xxx_OpaqueAction_inputValue between
+	OpaqueAction[0..1] role xxx_OpaqueAction_inputValue_src
+	InputPin[*] role inputValue
+end
+
+composition xxx_OpaqueAction_outputValue between
+	OpaqueAction[0..1] role xxx_OpaqueAction_outputValue_src
+	OutputPin[*] role outputValue
+end
+
+composition xxx_InvocationAction_argument between
+	InvocationAction[0..1] role xxx_InvocationAction_argument_src
+	InputPin[*] role argument
+end
+
+composition xxx_CallAction_result between
+	CallAction[*] role xxx_CallAction_result_src
+	OutputPin[*] role result
+end
+
+composition xxx_CallOperationAction_target between
+	CallOperationAction[*] role xxx_CallOperationAction_target_src
+	InputPin[1] role target
+end
+
+composition xxx_SendSignalAction_target between
+	SendSignalAction[*] role xxx_SendSignalAction_target_src
+	InputPin[1] role target
+end
+
+composition xxx_SendObjectAction_target between
+	SendObjectAction[*] role xxx_SendObjectAction_target_src
+	InputPin[1] role target
+end
+
+composition xxx_SendObjectAction_request between
+	SendObjectAction[*] role xxx_SendObjectAction_request_src
+	InputPin[1] role request
+end
+
+composition xxx_CreateObjectAction_result between
+	CreateObjectAction[*] role xxx_CreateObjectAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_DestroyObjectAction_target between
+	DestroyObjectAction[*] role xxx_DestroyObjectAction_target_src
+	InputPin[1] role target
+end
+
+composition xxx_TestIdentityAction_result between
+	TestIdentityAction[*] role xxx_TestIdentityAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_TestIdentityAction_first between
+	TestIdentityAction[*] role xxx_TestIdentityAction_first_src
+	InputPin[1] role first
+end
+
+composition xxx_TestIdentityAction_second between
+	TestIdentityAction[*] role xxx_TestIdentityAction_second_src
+	InputPin[1] role second
+end
+
+composition xxx_ReadSelfAction_result between
+	ReadSelfAction[*] role xxx_ReadSelfAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ValueSpecificationAction_result between
+	ValueSpecificationAction[*] role xxx_ValueSpecificationAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_StructuralFeatureAction_object between
+	StructuralFeatureAction[*] role xxx_StructuralFeatureAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_ReadStructuralFeatureAction_result between
+	ReadStructuralFeatureAction[*] role xxx_ReadStructuralFeatureAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_WriteStructuralFeatureAction_value between
+	WriteStructuralFeatureAction[*] role xxx_WriteStructuralFeatureAction_value_src
+	InputPin[0..1] role value
+end
+
+composition xxx_WriteStructuralFeatureAction_result between
+	WriteStructuralFeatureAction[*] role xxx_WriteStructuralFeatureAction_result_src
+	OutputPin[0..1] role result
+end
+
+composition xxx_AddStructuralFeatureValueAction_insertAt between
+	AddStructuralFeatureValueAction[*] role xxx_AddStructuralFeatureValueAction_insertAt_src
+	InputPin[0..1] role insertAt
+end
+
+composition xxx_RemoveStructuralFeatureValueAction_removeAt between
+	RemoveStructuralFeatureValueAction[*] role xxx_RemoveStructuralFeatureValueAction_removeAt_src
+	InputPin[0..1] role removeAt
+end
+
+composition xxx_ClearStructuralFeatureAction_result between
+	ClearStructuralFeatureAction[*] role xxx_ClearStructuralFeatureAction_result_src
+	OutputPin[0..1] role result
+end
+
+composition xxx_LinkAction_inputValue between
+	LinkAction[0..1] role xxx_LinkAction_inputValue_src
+	InputPin[1..*] role inputValue
+end
+
+composition xxx_LinkAction_endData between
+	LinkAction[0..1] role xxx_LinkAction_endData_src
+	LinkEndData[2..*] role endData
+end
+
+association xxx_LinkEndData_value between
+	LinkEndData[*] role xxx_LinkEndData_value_src
+	InputPin[0..1] role value
+end
+
+composition xxx_LinkEndData_qualifier between
+	LinkEndData[0..1] role xxx_LinkEndData_qualifier_src
+	QualifierValue[*] role qualifier
+end
+
+composition xxx_ReadLinkAction_result between
+	ReadLinkAction[*] role xxx_ReadLinkAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_LinkEndCreationData_insertAt between
+	LinkEndCreationData[*] role xxx_LinkEndCreationData_insertAt_src
+	InputPin[0..1] role insertAt
+end
+
+composition xxx_LinkEndDestructionData_destroyAt between
+	LinkEndDestructionData[*] role xxx_LinkEndDestructionData_destroyAt_src
+	InputPin[0..1] role destroyAt
+end
+
+composition xxx_ReplyAction_returnInformation between
+	ReplyAction[*] role xxx_ReplyAction_returnInformation_src
+	InputPin[1] role returnInformation
+end
+
+composition xxx_ReplyAction_replyValue between
+	ReplyAction[0..1] role xxx_ReplyAction_replyValue_src
+	InputPin[*] role replyValue
+end
+
+composition xxx_UnmarshallAction_object between
+	UnmarshallAction[*] role xxx_UnmarshallAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_UnmarshallAction_result between
+	UnmarshallAction[0..1] role xxx_UnmarshallAction_result_src
+	OutputPin[1..*] role result
+end
+
+composition xxx_AcceptEventAction_result between
+	AcceptEventAction[0..1] role xxx_AcceptEventAction_result_src
+	OutputPin[*] role result
+end
+
+composition xxx_AcceptCallAction_returnInformation between
+	AcceptCallAction[*] role xxx_AcceptCallAction_returnInformation_src
+	OutputPin[1] role returnInformation
+end
+
+composition xxx_ReadExtendAction_result between
+	ReadExtendAction[*] role xxx_ReadExtendAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReclassifyObjectAction_object between
+	ReclassifyObjectAction[*] role xxx_ReclassifyObjectAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_ReadlsClassifiedObjectAction_result between
+	ReadlsClassifiedObjectAction[*] role xxx_ReadlsClassifiedObjectAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReadlsClassifiedObjectAction_object between
+	ReadlsClassifiedObjectAction[*] role xxx_ReadlsClassifiedObjectAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_StartClassifierBehaviorAction_object between
+	StartClassifierBehaviorAction[*] role xxx_StartClassifierBehaviorAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_StartObjectBehaviorAction_object between
+	StartObjectBehaviorAction[*] role xxx_StartObjectBehaviorAction_object_src
+	InputPin[1] role object
+end
+
+association xxx_QualifierValue_value between
+	QualifierValue[*] role xxx_QualifierValue_value_src
+	InputPin[1] role value
+end
+
+composition xxx_ReadLinkObjectEndAction_object between
+	ReadLinkObjectEndAction[*] role xxx_ReadLinkObjectEndAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_ReadLinkObjectEndAction_result between
+	ReadLinkObjectEndAction[*] role xxx_ReadLinkObjectEndAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReadLinkObjectEndQualifierAction_object between
+	ReadLinkObjectEndQualifierAction[*] role xxx_ReadLinkObjectEndQualifierAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_ReadLinkObjectEndQualifierAction_result between
+	ReadLinkObjectEndQualifierAction[*] role xxx_ReadLinkObjectEndQualifierAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_CreateLinkObjectAction_result between
+	CreateLinkObjectAction[*] role xxx_CreateLinkObjectAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReduceAction_result between
+	ReduceAction[*] role xxx_ReduceAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReduceAction_collection between
+	ReduceAction[*] role xxx_ReduceAction_collection_src
+	InputPin[1] role collection
+end
+
+composition xxx_ReadVariableAction_result between
+	ReadVariableAction[*] role xxx_ReadVariableAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_WriteVariableAction_value between
+	WriteVariableAction[*] role xxx_WriteVariableAction_value_src
+	InputPin[0..1] role value
+end
+
+composition xxx_AddVariableValueAction_insertAt between
+	AddVariableValueAction[*] role xxx_AddVariableValueAction_insertAt_src
+	InputPin[0..1] role insertAt
+end
+
+composition xxx_RemoveVariableValueAction_removeAt between
+	RemoveVariableValueAction[*] role xxx_RemoveVariableValueAction_removeAt_src
+	InputPin[0..1] role removeAt
+end
+
+composition xxx_RaiseExceptionAction_exception between
+	RaiseExceptionAction[*] role xxx_RaiseExceptionAction_exception_src
+	InputPin[1] role exception
+end
+
+composition xxx_ActionInputPin_fromAction between
+	ActionInputPin[*] role xxx_ActionInputPin_fromAction_src
+	Action[1] role fromAction
+end
+

@@ -1,0 +1,43 @@
+model anfelisa
+class AnfelisaDocument
+attributes
+operations
+end
+
+class Content
+attributes
+operations
+end
+
+class Text<Content
+attributes
+	text : String
+operations
+end
+
+class Tag<Content
+attributes
+operations
+end
+
+class Paragraph<Tag
+attributes
+operations
+end
+
+class ClickText<Tag
+attributes
+	options : String
+operations
+end
+
+composition xxx_AnfelisaDocument_contents between
+	AnfelisaDocument[0..1] role xxx_AnfelisaDocument_contents_src
+	Content[*] role contents
+end
+
+composition xxx_Paragraph_paragraphContents between
+	Paragraph[0..1] role xxx_Paragraph_paragraphContents_src
+	Content[*] role paragraphContents
+end
+

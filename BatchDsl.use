@@ -1,0 +1,73 @@
+model batchDsl
+class Script
+attributes
+operations
+end
+
+class PackageDeclare
+attributes
+	name : String
+operations
+end
+
+class ImportDeclare
+attributes
+	name : String
+	wildcard : Boolean
+operations
+end
+
+class BatchDsl
+attributes
+	comment : String
+	name : String
+operations
+end
+
+class BatchParameter
+attributes
+	comment : String
+	name : String
+	pattern : String
+	required : Boolean
+operations
+end
+
+class BatchStatement
+attributes
+	name : String
+	jobName : String
+	soon : Boolean
+operations
+end
+
+composition xxx_Script_package between
+	Script[*] role xxx_Script_package_src
+	PackageDeclare[0..1] role package
+end
+
+composition xxx_Script_imports between
+	Script[0..1] role xxx_Script_imports_src
+	ImportDeclare[*] role imports
+end
+
+composition xxx_Script_list between
+	Script[0..1] role xxx_Script_list_src
+	BatchDsl[*] role list
+end
+
+composition xxx_BatchDsl_params between
+	BatchDsl[0..1] role xxx_BatchDsl_params_src
+	BatchParameter[*] role params
+end
+
+composition xxx_BatchDsl_statements between
+	BatchDsl[0..1] role xxx_BatchDsl_statements_src
+	BatchStatement[*] role statements
+end
+
+association xxx_BatchStatement_after between
+	BatchStatement[0..1] role xxx_BatchStatement_after_src
+	BatchStatement[*] role after
+end
+

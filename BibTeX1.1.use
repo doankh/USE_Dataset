@@ -1,0 +1,126 @@
+model BibTeX
+class BibTeXFile
+attributes
+operations
+end
+
+class Author
+attributes
+	author : String
+operations
+end
+
+abstract class BibTeXEntry
+attributes
+	id : String
+operations
+end
+
+abstract class AuthoredEntry<BibTeXEntry
+attributes
+operations
+end
+
+abstract class DatedEntry<BibTeXEntry
+attributes
+	year : String
+operations
+end
+
+abstract class TitledEntry<BibTeXEntry
+attributes
+	title : String
+operations
+end
+
+abstract class BookTitledEntry<BibTeXEntry
+attributes
+	booktitle : String
+operations
+end
+
+class Article<TitledEntry
+attributes
+	journal : String
+operations
+end
+
+class TechReport<TitledEntry
+attributes
+operations
+end
+
+class Unpublished<TitledEntry
+attributes
+	note : String
+operations
+end
+
+class Manual<TitledEntry
+attributes
+operations
+end
+
+class Proceedings<TitledEntry
+attributes
+operations
+end
+
+class InProceedings<BookTitledEntry
+attributes
+operations
+end
+
+class Booklet<DatedEntry
+attributes
+operations
+end
+
+class Book<TitledEntry
+attributes
+	publisher : String
+operations
+end
+
+class InCollection<BookTitledEntry
+attributes
+operations
+end
+
+class InBook<Book
+attributes
+	chapter : Integer
+operations
+end
+
+class Misc<BibTeXEntry
+attributes
+operations
+end
+
+abstract class ThesisEntry<TitledEntry
+attributes
+	school : String
+operations
+end
+
+class PhDThesis<ThesisEntry
+attributes
+operations
+end
+
+class MasterThesis<ThesisEntry
+attributes
+operations
+end
+
+composition xxx_BibTeXFile_entries between
+	BibTeXFile[0..1] role xxx_BibTeXFile_entries_src
+	BibTeXEntry[*] role entries
+end
+
+composition xxx_AuthoredEntry_authors between
+	AuthoredEntry[0..1] role xxx_AuthoredEntry_authors_src
+	Author[1..*] role authors
+end
+

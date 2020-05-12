@@ -1,0 +1,97 @@
+model abstractcim
+class CimModel
+attributes
+operations
+end
+
+abstract class CimModelElement
+attributes
+	name : String
+operations
+end
+
+abstract class Interface<CimModelElement
+attributes
+operations
+end
+
+abstract class IPInterface<Interface
+attributes
+	ipV4Address : String
+	subnetMask : String
+operations
+end
+
+class Router<CimModelElement
+attributes
+operations
+end
+
+class EthernetIPInterface<IPInterface
+attributes
+	numPort : Integer
+operations
+end
+
+class ADSLIPInterface<IPInterface
+attributes
+operations
+end
+
+class WifiInterface<Interface
+attributes
+operations
+end
+
+class DHCPServer<CimModelElement
+attributes
+	startAddress : String
+	endAddress : String
+operations
+end
+
+class NATService<CimModelElement
+attributes
+operations
+end
+
+composition xxx_CimModel_contents between
+	CimModel[0..1] role xxx_CimModel_contents_src
+	CimModelElement[*] role contents
+end
+
+association xxx_Router_devices between
+	Router[0..1] role xxx_Router_devices_src
+	Interface[*] role devices
+end
+
+association xxx_Router_services between
+	Router[*] role xxx_Router_services_src
+	DHCPServer[0..1] role services
+end
+
+association xxx_Router_forwardingServices between
+	Router[*] role xxx_Router_forwardingServices_src
+	NATService[0..1] role forwardingServices
+end
+
+association xxx_Router_filterList between
+	Router[*] role xxx_Router_filterList_src
+	NATService[0..1] role filterList
+end
+
+association xxx_WifiInterface_endPoint between
+	WifiInterface[*] role xxx_WifiInterface_endPoint_src
+	IPInterface[0..1] role endPoint
+end
+
+association xxx_DHCPServer_bindsTo between
+	DHCPServer[*] role xxx_DHCPServer_bindsTo_src
+	IPInterface[0..1] role bindsTo
+end
+
+association xxx_NATService_endPoint between
+	NATService[*] role xxx_NATService_endPoint_src
+	IPInterface[0..1] role endPoint
+end
+

@@ -1,0 +1,644 @@
+model model_
+enum FolderType{
+default
+}
+
+abstract class Adapter
+attributes
+operations
+	getAdapter(adapter : String):String
+	setAdapter(adapter : String,object : String)
+end
+
+abstract class Identifier
+attributes
+	id : String
+operations
+end
+
+class Property
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class Properties
+attributes
+operations
+end
+
+abstract class Nameable
+attributes
+	name : String
+operations
+end
+
+abstract class TextContent
+attributes
+	content : String
+operations
+end
+
+abstract class Documentable
+attributes
+	documentation : String
+operations
+end
+
+abstract class Cloneable
+attributes
+operations
+	getCopy():String
+end
+
+abstract class FolderContainer
+attributes
+operations
+end
+
+class ArchimateModel<FolderContainer,Nameable,Identifier,ArchimateModelElement,Properties
+attributes
+	purpose : String
+	file : String
+	version : String
+operations
+	setDefaults()
+	addDerivedRelationsFolder():Folder
+	removeDerivedRelationsFolder()
+	getDefaultFolderForElement(element : String):Folder
+	getDefaultDiagramModel():DiagramModel
+	getDiagramModels():DiagramModel
+	getFolder(type : FolderType):Folder
+end
+
+abstract class ArchimateModelElement<Adapter
+attributes
+operations
+end
+
+class Folder<ArchimateModelElement,FolderContainer,Nameable,Identifier,Documentable,Properties
+attributes
+	type : FolderType
+operations
+end
+
+abstract class ArchimateElement<ArchimateModelElement,Identifier,Cloneable,Nameable,Documentable,Properties
+attributes
+operations
+end
+
+abstract class JunctionElement<ArchimateElement
+attributes
+operations
+end
+
+abstract class InterfaceElement<ArchimateElement
+attributes
+	interfaceType : Integer
+operations
+end
+
+class Junction<JunctionElement
+attributes
+operations
+end
+
+class AndJunction<JunctionElement
+attributes
+operations
+end
+
+class OrJunction<JunctionElement
+attributes
+operations
+end
+
+abstract class Relationship<ArchimateElement
+attributes
+operations
+end
+
+class AccessRelationship<Relationship
+attributes
+	accessType : Integer
+operations
+end
+
+class AggregationRelationship<Relationship
+attributes
+operations
+end
+
+class AssignmentRelationship<Relationship
+attributes
+operations
+end
+
+class AssociationRelationship<Relationship
+attributes
+operations
+end
+
+class CompositionRelationship<Relationship
+attributes
+operations
+end
+
+class FlowRelationship<Relationship
+attributes
+operations
+end
+
+class RealisationRelationship<Relationship
+attributes
+operations
+end
+
+class SpecialisationRelationship<Relationship
+attributes
+operations
+end
+
+class TriggeringRelationship<Relationship
+attributes
+operations
+end
+
+class UsedByRelationship<Relationship
+attributes
+operations
+end
+
+class InfluenceRelationship<Relationship
+attributes
+operations
+end
+
+abstract class BusinessLayerElement<ArchimateElement
+attributes
+operations
+end
+
+class BusinessActivity<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessActor<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessCollaboration<BusinessLayerElement
+attributes
+operations
+end
+
+class Contract<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessEvent<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessFunction<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessInteraction<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessInterface<BusinessLayerElement,InterfaceElement
+attributes
+operations
+end
+
+class Meaning<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessObject<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessProcess<BusinessLayerElement
+attributes
+operations
+end
+
+class Product<BusinessLayerElement
+attributes
+operations
+end
+
+class Representation<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessRole<BusinessLayerElement
+attributes
+operations
+end
+
+class BusinessService<BusinessLayerElement
+attributes
+operations
+end
+
+class Value<BusinessLayerElement
+attributes
+operations
+end
+
+class Location<BusinessLayerElement
+attributes
+operations
+end
+
+abstract class ApplicationLayerElement<ArchimateElement
+attributes
+operations
+end
+
+class ApplicationCollaboration<ApplicationLayerElement
+attributes
+operations
+end
+
+class ApplicationComponent<ApplicationLayerElement
+attributes
+operations
+end
+
+class ApplicationFunction<ApplicationLayerElement
+attributes
+operations
+end
+
+class ApplicationInteraction<ApplicationLayerElement
+attributes
+operations
+end
+
+class ApplicationInterface<ApplicationLayerElement,InterfaceElement
+attributes
+operations
+end
+
+class DataObject<ApplicationLayerElement
+attributes
+operations
+end
+
+class ApplicationService<ApplicationLayerElement
+attributes
+operations
+end
+
+abstract class TechnologyLayerElement<ArchimateElement
+attributes
+operations
+end
+
+class Artifact<TechnologyLayerElement
+attributes
+operations
+end
+
+class CommunicationPath<TechnologyLayerElement
+attributes
+operations
+end
+
+class Network<TechnologyLayerElement
+attributes
+operations
+end
+
+class InfrastructureInterface<TechnologyLayerElement,InterfaceElement
+attributes
+operations
+end
+
+class InfrastructureService<TechnologyLayerElement
+attributes
+operations
+end
+
+class InfrastructureFunction<TechnologyLayerElement
+attributes
+operations
+end
+
+class Node<TechnologyLayerElement
+attributes
+operations
+end
+
+class SystemSoftware<TechnologyLayerElement
+attributes
+operations
+end
+
+class Device<TechnologyLayerElement
+attributes
+operations
+end
+
+abstract class MotivationElement<ArchimateElement
+attributes
+operations
+end
+
+class Stakeholder<MotivationElement
+attributes
+operations
+end
+
+class Driver<MotivationElement
+attributes
+operations
+end
+
+class Assessment<MotivationElement
+attributes
+operations
+end
+
+class Goal<MotivationElement
+attributes
+operations
+end
+
+class Requirement<MotivationElement
+attributes
+operations
+end
+
+class Constraint<MotivationElement
+attributes
+operations
+end
+
+class Principle<MotivationElement
+attributes
+operations
+end
+
+abstract class ImplementationMigrationElement<ArchimateElement
+attributes
+operations
+end
+
+class WorkPackage<ImplementationMigrationElement
+attributes
+operations
+end
+
+class Deliverable<ImplementationMigrationElement
+attributes
+operations
+end
+
+class Plateau<ImplementationMigrationElement
+attributes
+operations
+end
+
+class Gap<ImplementationMigrationElement
+attributes
+operations
+end
+
+abstract class DiagramModelComponent<Identifier,Cloneable,Adapter,Nameable
+attributes
+operations
+end
+
+abstract class DiagramModelContainer<DiagramModelComponent
+attributes
+operations
+end
+
+abstract class DiagramModel<ArchimateModelElement,DiagramModelContainer,Documentable,Properties
+attributes
+	connectionRouterType : Integer
+operations
+end
+
+class DiagramModelReference<DiagramModelObject
+attributes
+operations
+end
+
+abstract class DiagramModelObject<DiagramModelComponent,FontAttribute
+attributes
+	fillColor : String
+operations
+	addConnection(connection : DiagramModelConnection)
+	removeConnection(connection : DiagramModelConnection)
+	setBounds(x : Integer,y : Integer,width : Integer,height : Integer)
+end
+
+class DiagramModelGroup<DiagramModelObject,DiagramModelContainer,Documentable,Properties
+attributes
+operations
+end
+
+class DiagramModelNote<DiagramModelObject,TextContent
+attributes
+operations
+end
+
+class DiagramModelImage<DiagramModelObject,BorderObject,DiagramModelImageProvider
+attributes
+operations
+end
+
+class DiagramModelConnection<DiagramModelComponent,FontAttribute,Properties,Documentable
+attributes
+	text : String
+	lineWidth : Integer
+	lineColor : String
+	type : Integer
+operations
+	connect(source : DiagramModelObject,target : DiagramModelObject)
+	disconnect()
+	reconnect()
+end
+
+class DiagramModelBendpoint<Cloneable
+attributes
+	startX : Integer
+	startY : Integer
+	endX : Integer
+	endY : Integer
+operations
+end
+
+abstract class FontAttribute
+attributes
+	font : String
+	fontColor : String
+	textAlignment : Integer
+	textPosition : Integer
+operations
+	getDefaultTextAlignment():Integer
+end
+
+abstract class BorderObject
+attributes
+	borderColor : String
+operations
+end
+
+abstract class DiagramModelImageProvider
+attributes
+	imagePath : String
+operations
+end
+
+class Bounds
+attributes
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+operations
+	getCopy():Bounds
+end
+
+abstract class Lockable
+attributes
+	locked : Boolean
+operations
+end
+
+class ArchimateDiagramModel<DiagramModel
+attributes
+	viewpoint : Integer
+operations
+end
+
+class DiagramModelArchimateObject<DiagramModelObject,DiagramModelContainer
+attributes
+	type : Integer
+operations
+	addArchimateElementToModel(parent : Folder)
+	removeArchimateElementFromModel()
+end
+
+class DiagramModelArchimateConnection<DiagramModelConnection
+attributes
+operations
+	addRelationshipToModel(parent : Folder)
+	removeRelationshipFromModel()
+end
+
+class SketchModel<DiagramModel
+attributes
+	background : Integer
+operations
+end
+
+class SketchModelSticky<DiagramModelObject,DiagramModelContainer,TextContent,Properties
+attributes
+operations
+end
+
+class SketchModelActor<DiagramModelObject,Documentable,Properties
+attributes
+operations
+end
+
+composition xxx_Properties_properties between
+	Properties[0..1] role xxx_Properties_properties_src
+	Property[*] role properties
+end
+
+composition xxx_FolderContainer_folders between
+	FolderContainer[0..1] role xxx_FolderContainer_folders_src
+	Folder[*] role folders
+end
+
+association xxx_ArchimateModelElement_archimateModel between
+	ArchimateModelElement[*] role xxx_ArchimateModelElement_archimateModel_src
+	ArchimateModel[0..1] role archimateModel
+end
+
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	ArchimateElement[0..1] role source
+end
+
+association xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	ArchimateElement[0..1] role target
+end
+
+association xxx_DiagramModelComponent_diagramModel between
+	DiagramModelComponent[*] role xxx_DiagramModelComponent_diagramModel_src
+	DiagramModel[0..1] role diagramModel
+end
+
+composition xxx_DiagramModelContainer_children between
+	DiagramModelContainer[0..1] role xxx_DiagramModelContainer_children_src
+	DiagramModelObject[*] role children
+end
+
+association xxx_DiagramModelReference_referencedModel between
+	DiagramModelReference[*] role xxx_DiagramModelReference_referencedModel_src
+	DiagramModel[0..1] role referencedModel
+end
+
+composition xxx_DiagramModelObject_bounds between
+	DiagramModelObject[*] role xxx_DiagramModelObject_bounds_src
+	Bounds[0..1] role bounds
+end
+
+composition xxx_DiagramModelObject_sourceConnections between
+	DiagramModelObject[0..1] role xxx_DiagramModelObject_sourceConnections_src
+	DiagramModelConnection[*] role sourceConnections
+end
+
+association xxx_DiagramModelObject_targetConnections between
+	DiagramModelObject[0..1] role xxx_DiagramModelObject_targetConnections_src
+	DiagramModelConnection[*] role targetConnections
+end
+
+association xxx_DiagramModelConnection_source between
+	DiagramModelConnection[*] role xxx_DiagramModelConnection_source_src
+	DiagramModelObject[0..1] role source
+end
+
+association xxx_DiagramModelConnection_target between
+	DiagramModelConnection[*] role xxx_DiagramModelConnection_target_src
+	DiagramModelObject[0..1] role target
+end
+
+composition xxx_DiagramModelConnection_bendpoints between
+	DiagramModelConnection[0..1] role xxx_DiagramModelConnection_bendpoints_src
+	DiagramModelBendpoint[*] role bendpoints
+end
+
+association xxx_DiagramModelArchimateObject_archimateElement between
+	DiagramModelArchimateObject[*] role xxx_DiagramModelArchimateObject_archimateElement_src
+	ArchimateElement[0..1] role archimateElement
+end
+
+association xxx_DiagramModelArchimateConnection_relationship between
+	DiagramModelArchimateConnection[*] role xxx_DiagramModelArchimateConnection_relationship_src
+	Relationship[0..1] role relationship
+end
+

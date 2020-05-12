@@ -1,0 +1,201 @@
+model ADELFE
+class Classifier
+attributes
+operations
+end
+
+class Environnement<Classifier
+attributes
+operations
+end
+
+class Element<Classifier
+attributes
+operations
+end
+
+class CooperativeAgent
+attributes
+operations
+end
+
+class Representation
+attributes
+operations
+end
+
+class Skill
+attributes
+operations
+end
+
+class Aptitude
+attributes
+operations
+end
+
+class Characteristic
+attributes
+operations
+end
+
+class Communication
+attributes
+operations
+end
+
+class AIP
+attributes
+operations
+end
+
+class CooperationRules
+attributes
+operations
+end
+
+class NCS
+attributes
+operations
+end
+
+class Incomprehension<NCS
+attributes
+operations
+end
+
+class Ambiguity<NCS
+attributes
+operations
+end
+
+class Incompetence<NCS
+attributes
+operations
+end
+
+class Unproductiveness<NCS
+attributes
+operations
+end
+
+class Concurrency<NCS
+attributes
+operations
+end
+
+class Conflict<NCS
+attributes
+operations
+end
+
+class Uselessness<NCS
+attributes
+operations
+end
+
+composition xxx_Environnement_element between
+	Environnement[*] role xxx_Environnement_element_src
+	Element[1] role element
+end
+
+association xxx_Element_environnement between
+	Element[*] role xxx_Element_environnement_src
+	Environnement[1] role environnement
+end
+
+association xxx_Element_action between
+	Element[*] role xxx_Element_action_src
+	CooperativeAgent[1] role action
+end
+
+association xxx_Element_perception between
+	Element[*] role xxx_Element_perception_src
+	CooperativeAgent[1] role perception
+end
+
+association xxx_CooperativeAgent_elementA between
+	CooperativeAgent[*] role xxx_CooperativeAgent_elementA_src
+	Element[1] role elementA
+end
+
+association xxx_CooperativeAgent_elementP between
+	CooperativeAgent[*] role xxx_CooperativeAgent_elementP_src
+	Element[1] role elementP
+end
+
+composition xxx_CooperativeAgent_representation between
+	CooperativeAgent[0..1] role xxx_CooperativeAgent_representation_src
+	Representation[1..*] role representation
+end
+
+composition xxx_CooperativeAgent_skill between
+	CooperativeAgent[0..1] role xxx_CooperativeAgent_skill_src
+	Skill[1..*] role skill
+end
+
+composition xxx_CooperativeAgent_aptitude between
+	CooperativeAgent[0..1] role xxx_CooperativeAgent_aptitude_src
+	Aptitude[*] role aptitude
+end
+
+composition xxx_CooperativeAgent_characteristic between
+	CooperativeAgent[0..1] role xxx_CooperativeAgent_characteristic_src
+	Characteristic[*] role characteristic
+end
+
+composition xxx_CooperativeAgent_communication between
+	CooperativeAgent[0..1] role xxx_CooperativeAgent_communication_src
+	Communication[*] role communication
+end
+
+association xxx_CooperativeAgent_observes between
+	CooperativeAgent[0..1] role xxx_CooperativeAgent_observes_src
+	CooperationRules[1..*] role observes
+end
+
+association xxx_Representation_cooperativeAgentR between
+	Representation[*] role xxx_Representation_cooperativeAgentR_src
+	CooperativeAgent[1] role cooperativeAgentR
+end
+
+association xxx_Representation_element between
+	Representation[*] role xxx_Representation_element_src
+	Element[1] role element
+end
+
+association xxx_Skill_cooperativeAgentS between
+	Skill[*] role xxx_Skill_cooperativeAgentS_src
+	CooperativeAgent[1] role cooperativeAgentS
+end
+
+association xxx_Aptitude_cooperativeAgentA between
+	Aptitude[*] role xxx_Aptitude_cooperativeAgentA_src
+	CooperativeAgent[1] role cooperativeAgentA
+end
+
+association xxx_Characteristic_cooperativeAgentCha between
+	Characteristic[*] role xxx_Characteristic_cooperativeAgentCha_src
+	CooperativeAgent[1] role cooperativeAgentCha
+end
+
+association xxx_Communication_cooperativeAgentCom between
+	Communication[*] role xxx_Communication_cooperativeAgentCom_src
+	CooperativeAgent[1] role cooperativeAgentCom
+end
+
+association xxx_Communication_aip between
+	Communication[0..1] role xxx_Communication_aip_src
+	AIP[*] role aip
+end
+
+association xxx_CooperationRules_detects between
+	CooperationRules[0..1] role xxx_CooperationRules_detects_src
+	NCS[1..*] role detects
+end
+
+association xxx_NCS_cooperationRules between
+	NCS[*] role xxx_NCS_cooperationRules_src
+	CooperationRules[1] role cooperationRules
+end
+

@@ -1,0 +1,577 @@
+model ACG
+enum Severity{
+	critic,
+	error,
+	warning
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class ACG<LocatedElement
+attributes
+	metamodel : String
+	startsWith : String
+operations
+end
+
+abstract class ACGElement<LocatedElement
+attributes
+operations
+end
+
+class Function<ACGElement
+attributes
+	context_ : String
+	name : String
+operations
+end
+
+class Attribute<ACGElement
+attributes
+	context_ : String
+	name : String
+operations
+end
+
+class Parameter<VariableDecl
+attributes
+operations
+end
+
+abstract class Node<StatementBlock
+attributes
+	element : String
+	mode : String
+operations
+end
+
+class ASMNode<Node
+attributes
+operations
+end
+
+class CodeNode<Node
+attributes
+operations
+end
+
+class SimpleNode<Node
+attributes
+operations
+end
+
+abstract class StatementBlock<LocatedElement
+attributes
+operations
+end
+
+abstract class Statement<LocatedElement
+attributes
+operations
+end
+
+abstract class CompoundStat<StatementBlock
+attributes
+operations
+end
+
+class ForEachStat<CompoundStat
+attributes
+operations
+end
+
+class OnceStat<CompoundStat
+attributes
+operations
+end
+
+class VariableStat<CompoundStat
+attributes
+operations
+end
+
+class OperationStat<CompoundStat
+attributes
+operations
+end
+
+class ConditionalStat<CompoundStat
+attributes
+operations
+end
+
+class LetStat<CompoundStat
+attributes
+operations
+end
+
+class AnalyzeStat<CompoundStat
+attributes
+	mode : String
+operations
+end
+
+class ReportStat<Statement
+attributes
+	severity : Severity
+operations
+end
+
+class FieldStat<Statement
+attributes
+operations
+end
+
+class ParamStat<Statement
+attributes
+operations
+end
+
+abstract class EmitStat<Statement
+attributes
+operations
+end
+
+class LabelStat<EmitStat
+attributes
+	name : String
+operations
+end
+
+class NewStat<EmitStat
+attributes
+operations
+end
+
+class DupStat<EmitStat
+attributes
+operations
+end
+
+class DupX1Stat<EmitStat
+attributes
+operations
+end
+
+class PopStat<EmitStat
+attributes
+operations
+end
+
+class SwapStat<EmitStat
+attributes
+operations
+end
+
+class IterateStat<EmitStat
+attributes
+operations
+end
+
+class EndIterateStat<EmitStat
+attributes
+operations
+end
+
+class GetAsmStat<EmitStat
+attributes
+operations
+end
+
+class FindMEStat<EmitStat
+attributes
+operations
+end
+
+class PushTStat<EmitStat
+attributes
+operations
+end
+
+class PushFStat<EmitStat
+attributes
+operations
+end
+
+abstract class EmitWithOperandStat<EmitStat
+attributes
+operations
+end
+
+class PushStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class PushIStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class PushDStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class LoadStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class StoreStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class CallStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class PCallStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class SuperCallStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class GetStat<EmitWithOperandStat
+attributes
+operations
+end
+
+class SetStat<EmitWithOperandStat
+attributes
+operations
+end
+
+abstract class EmitWithLabelRefStat<EmitStat
+attributes
+operations
+end
+
+class IfStat<EmitWithLabelRefStat
+attributes
+operations
+end
+
+class GotoStat<EmitWithLabelRefStat
+attributes
+operations
+end
+
+class VariableDecl<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class VariableExp<Expression
+attributes
+operations
+end
+
+class SelfExp<Expression
+attributes
+operations
+end
+
+class LastExp<Expression
+attributes
+operations
+end
+
+class IfExp<Expression
+attributes
+operations
+end
+
+class IsAExp<Expression
+attributes
+	type : String
+operations
+end
+
+class LetExp<Expression
+attributes
+operations
+end
+
+abstract class PropertyCallExp<Expression
+attributes
+	name : String
+operations
+end
+
+class NavigationExp<PropertyCallExp
+attributes
+operations
+end
+
+class IteratorExp<PropertyCallExp
+attributes
+operations
+end
+
+class OperationCallExp<PropertyCallExp
+attributes
+operations
+end
+
+class OperatorCallExp<OperationCallExp
+attributes
+operations
+end
+
+abstract class LiteralExp<Expression
+attributes
+operations
+end
+
+class OclUndefinedExp<LiteralExp
+attributes
+operations
+end
+
+abstract class CollectionExp<LiteralExp
+attributes
+operations
+end
+
+class SequenceExp<CollectionExp
+attributes
+operations
+end
+
+class BooleanExp<LiteralExp
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerExp<LiteralExp
+attributes
+	value : Integer
+operations
+end
+
+class StringExp<LiteralExp
+attributes
+	value : String
+operations
+end
+
+composition xxx_ACG_elements between
+	ACG[0..1] role xxx_ACG_elements_src
+	ACGElement[*] role elements
+end
+
+association xxx_ACGElement_acg between
+	ACGElement[*] role xxx_ACGElement_acg_src
+	ACG[1] role acg
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	Expression[1] role body
+end
+
+composition xxx_Attribute_body between
+	Attribute[*] role xxx_Attribute_body_src
+	Expression[1] role body
+end
+
+composition xxx_Node_guard between
+	Node[*] role xxx_Node_guard_src
+	Expression[0..1] role guard
+end
+
+composition xxx_ASMNode_name between
+	ASMNode[*] role xxx_ASMNode_name_src
+	Expression[1] role name
+end
+
+composition xxx_StatementBlock_statements between
+	StatementBlock[0..1] role xxx_StatementBlock_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ForEachStat_iterator between
+	ForEachStat[*] role xxx_ForEachStat_iterator_src
+	VariableDecl[1] role iterator
+end
+
+composition xxx_ForEachStat_collection between
+	ForEachStat[*] role xxx_ForEachStat_collection_src
+	Expression[1] role collection
+end
+
+composition xxx_VariableStat_definition between
+	VariableStat[*] role xxx_VariableStat_definition_src
+	Expression[1] role definition
+end
+
+composition xxx_VariableStat_name between
+	VariableStat[*] role xxx_VariableStat_name_src
+	Expression[1] role name
+end
+
+composition xxx_OperationStat_context_ between
+	OperationStat[*] role xxx_OperationStat_context__src
+	Expression[1] role context_
+end
+
+composition xxx_OperationStat_name between
+	OperationStat[*] role xxx_OperationStat_name_src
+	Expression[1] role name
+end
+
+composition xxx_ConditionalStat_condition between
+	ConditionalStat[*] role xxx_ConditionalStat_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ConditionalStat_elseStatements between
+	ConditionalStat[0..1] role xxx_ConditionalStat_elseStatements_src
+	Statement[*] role elseStatements
+end
+
+composition xxx_LetStat_variable between
+	LetStat[*] role xxx_LetStat_variable_src
+	VariableDecl[1] role variable
+end
+
+composition xxx_LetStat_value between
+	LetStat[*] role xxx_LetStat_value_src
+	Expression[1] role value
+end
+
+composition xxx_AnalyzeStat_target between
+	AnalyzeStat[*] role xxx_AnalyzeStat_target_src
+	Expression[1] role target
+end
+
+composition xxx_ReportStat_message between
+	ReportStat[*] role xxx_ReportStat_message_src
+	Expression[1] role message
+end
+
+composition xxx_FieldStat_name between
+	FieldStat[*] role xxx_FieldStat_name_src
+	Expression[1] role name
+end
+
+composition xxx_FieldStat_type between
+	FieldStat[*] role xxx_FieldStat_type_src
+	Expression[1] role type
+end
+
+composition xxx_ParamStat_name between
+	ParamStat[*] role xxx_ParamStat_name_src
+	Expression[1] role name
+end
+
+composition xxx_ParamStat_type between
+	ParamStat[*] role xxx_ParamStat_type_src
+	Expression[1] role type
+end
+
+composition xxx_LabelStat_id between
+	LabelStat[*] role xxx_LabelStat_id_src
+	Expression[0..1] role id
+end
+
+composition xxx_EmitWithOperandStat_operand between
+	EmitWithOperandStat[*] role xxx_EmitWithOperandStat_operand_src
+	Expression[1] role operand
+end
+
+association xxx_EmitWithLabelRefStat_label between
+	EmitWithLabelRefStat[*] role xxx_EmitWithLabelRefStat_label_src
+	LabelStat[1] role label
+end
+
+association xxx_VariableExp_variable between
+	VariableExp[*] role xxx_VariableExp_variable_src
+	VariableDecl[1] role variable
+end
+
+composition xxx_IfExp_condition between
+	IfExp[*] role xxx_IfExp_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_IfExp_thenExp between
+	IfExp[*] role xxx_IfExp_thenExp_src
+	Expression[1] role thenExp
+end
+
+composition xxx_IfExp_elseExp between
+	IfExp[*] role xxx_IfExp_elseExp_src
+	Expression[1] role elseExp
+end
+
+composition xxx_IsAExp_source between
+	IsAExp[*] role xxx_IsAExp_source_src
+	Expression[1] role source
+end
+
+composition xxx_LetExp_variable between
+	LetExp[*] role xxx_LetExp_variable_src
+	VariableDecl[1] role variable
+end
+
+composition xxx_LetExp_value between
+	LetExp[*] role xxx_LetExp_value_src
+	Expression[1] role value
+end
+
+composition xxx_LetExp_in_ between
+	LetExp[*] role xxx_LetExp_in__src
+	Expression[1] role in_
+end
+
+composition xxx_PropertyCallExp_source between
+	PropertyCallExp[*] role xxx_PropertyCallExp_source_src
+	Expression[1] role source
+end
+
+composition xxx_IteratorExp_iterator between
+	IteratorExp[*] role xxx_IteratorExp_iterator_src
+	VariableDecl[1] role iterator
+end
+
+composition xxx_IteratorExp_body between
+	IteratorExp[*] role xxx_IteratorExp_body_src
+	Expression[1] role body
+end
+
+composition xxx_OperationCallExp_arguments between
+	OperationCallExp[0..1] role xxx_OperationCallExp_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_CollectionExp_elements between
+	CollectionExp[0..1] role xxx_CollectionExp_elements_src
+	Expression[*] role elements
+end
+

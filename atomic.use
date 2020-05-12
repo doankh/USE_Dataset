@@ -1,0 +1,103 @@
+model atomic
+class AGraph
+attributes
+	corpus : String
+operations
+end
+
+class AToken<ANode
+attributes
+	text : String
+operations
+end
+
+abstract class ANode<XAnnotable
+attributes
+operations
+end
+
+abstract class XAnnotable
+attributes
+operations
+end
+
+class AStructured<ANode
+attributes
+operations
+end
+
+class AEdge
+attributes
+operations
+end
+
+class ATargetEdge
+attributes
+operations
+end
+
+composition xxx_AGraph_tokens between
+	AGraph[0..1] role xxx_AGraph_tokens_src
+	AToken[*] role tokens
+end
+
+composition xxx_AGraph_structures between
+	AGraph[0..1] role xxx_AGraph_structures_src
+	AStructured[*] role structures
+end
+
+composition xxx_AGraph_edges between
+	AGraph[0..1] role xxx_AGraph_edges_src
+	AEdge[*] role edges
+end
+
+association xxx_AToken_next between
+	AToken[*] role xxx_AToken_next_src
+	AToken[0..1] role next
+end
+
+association xxx_AToken_previous between
+	AToken[*] role xxx_AToken_previous_src
+	AToken[0..1] role previous
+end
+
+association xxx_AToken_graph between
+	AToken[*] role xxx_AToken_graph_src
+	AGraph[0..1] role graph
+end
+
+composition xxx_ANode_targetedges between
+	ANode[0..1] role xxx_ANode_targetedges_src
+	ATargetEdge[*] role targetedges
+end
+
+association xxx_AStructured_graph between
+	AStructured[*] role xxx_AStructured_graph_src
+	AGraph[1] role graph
+end
+
+association xxx_AEdge_graph between
+	AEdge[*] role xxx_AEdge_graph_src
+	AGraph[1] role graph
+end
+
+association xxx_AEdge_source between
+	AEdge[*] role xxx_AEdge_source_src
+	ANode[1] role source
+end
+
+association xxx_AEdge_target between
+	AEdge[*] role xxx_AEdge_target_src
+	ANode[1] role target
+end
+
+association xxx_ATargetEdge_target between
+	ATargetEdge[*] role xxx_ATargetEdge_target_src
+	ANode[1] role target
+end
+
+association xxx_ATargetEdge_graph between
+	ATargetEdge[*] role xxx_ATargetEdge_graph_src
+	AGraph[1] role graph
+end
+

@@ -1,0 +1,173 @@
+model PrimitiveTypes
+abstract class Element
+attributes
+	name : String
+operations
+end
+
+class Program<Element
+attributes
+operations
+end
+
+class Process<Element
+attributes
+	minId : Integer
+	maxId : Integer
+	instancesNb : Integer
+operations
+end
+
+class State<Element
+attributes
+	isInitial : Boolean
+operations
+end
+
+abstract class Transition
+attributes
+operations
+end
+
+class Trans<Transition
+attributes
+operations
+end
+
+class Strans<Transition
+attributes
+operations
+end
+
+class Transall<Transition
+attributes
+operations
+end
+
+class Guard<Element
+attributes
+operations
+end
+
+class Action<Element
+attributes
+operations
+end
+
+class Network<Element
+attributes
+operations
+end
+
+class Channel<Element
+attributes
+operations
+end
+
+class Message<Element
+attributes
+operations
+end
+
+class Variable<Element
+attributes
+	type : String
+	initValue : String
+operations
+end
+
+composition xxx_Program_processes between
+	Program[0..1] role xxx_Program_processes_src
+	Process[*] role processes
+end
+
+composition xxx_Program_networks between
+	Program[0..1] role xxx_Program_networks_src
+	Network[*] role networks
+end
+
+composition xxx_Process_states between
+	Process[0..1] role xxx_Process_states_src
+	State[*] role states_
+end
+
+composition xxx_Process_transitions between
+	Process[0..1] role xxx_Process_transitions_src
+	Transition[*] role transitions_
+end
+
+composition xxx_Process_initial between
+	Process[*] role xxx_Process_initial_src
+	Action[0..1] role initial
+end
+
+composition xxx_Process_variables between
+	Process[0..1] role xxx_Process_variables_src
+	Variable[*] role variables
+end
+
+association xxx_Process_connectedTo between
+	Process[0..1] role xxx_Process_connectedTo_src
+	Network[*] role connectedTo
+end
+
+association xxx_State_incoming between
+	State[0..1] role xxx_State_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_State_outgoing between
+	State[0..1] role xxx_State_outgoing_src
+	Transition[*] role outgoing
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[0..1] role guard
+end
+
+composition xxx_Transition_action between
+	Transition[*] role xxx_Transition_action_src
+	Action[0..1] role action
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	State[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+association xxx_Trans_waitFor between
+	Trans[*] role xxx_Trans_waitFor_src
+	Message[1] role waitFor
+end
+
+association xxx_Transall_waitFor between
+	Transall[*] role xxx_Transall_waitFor_src
+	Message[1] role waitFor
+end
+
+composition xxx_Network_channels between
+	Network[0..1] role xxx_Network_channels_src
+	Channel[*] role channels
+end
+
+composition xxx_Channel_messages between
+	Channel[0..1] role xxx_Channel_messages_src
+	Message[*] role messages
+end
+
+association xxx_Channel_source between
+	Channel[*] role xxx_Channel_source_src
+	Process[1] role source
+end
+
+association xxx_Channel_target between
+	Channel[*] role xxx_Channel_target_src
+	Process[1] role target
+end
+

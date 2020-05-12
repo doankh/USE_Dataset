@@ -1,0 +1,127 @@
+model PrimitiveTypes
+class AWKProgram
+attributes
+	name : String
+operations
+end
+
+class File
+attributes
+	name : String
+operations
+end
+
+class Record
+attributes
+operations
+end
+
+class Field
+attributes
+	value : String
+operations
+end
+
+class Script
+attributes
+	name : String
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+class Pattern
+attributes
+	regularExpression : String
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Instruction
+attributes
+	value : String
+operations
+end
+
+class InitialRule<Rule
+attributes
+operations
+end
+
+class FinalRule<Rule
+attributes
+operations
+end
+
+association xxx_AWKProgram_input between
+	AWKProgram[*] role xxx_AWKProgram_input_src
+	File[1] role input
+end
+
+association xxx_AWKProgram_output between
+	AWKProgram[*] role xxx_AWKProgram_output_src
+	File[1] role output
+end
+
+association xxx_AWKProgram_script between
+	AWKProgram[*] role xxx_AWKProgram_script_src
+	Script[1] role script
+end
+
+composition xxx_File_records between
+	File[0..1] role xxx_File_records_src
+	Record[*] role records
+end
+
+association xxx_Record_r_file between
+	Record[*] role xxx_Record_r_file_src
+	File[1] role r_file
+end
+
+composition xxx_Record_fields between
+	Record[0..1] role xxx_Record_fields_src
+	Field[*] role fields
+end
+
+association xxx_Field_f_record between
+	Field[*] role xxx_Field_f_record_src
+	Record[1] role f_record
+end
+
+composition xxx_Script_rules between
+	Script[0..1] role xxx_Script_rules_src
+	Rule[*] role rules
+end
+
+association xxx_Rule_r_script between
+	Rule[*] role xxx_Rule_r_script_src
+	Script[1] role r_script
+end
+
+association xxx_Rule_pattern between
+	Rule[*] role xxx_Rule_pattern_src
+	Pattern[1] role pattern
+end
+
+association xxx_Rule_action between
+	Rule[*] role xxx_Rule_action_src
+	Action[1] role action
+end
+
+composition xxx_Action_instructions between
+	Action[0..1] role xxx_Action_instructions_src
+	Instruction[*] role instructions
+end
+
+association xxx_Instruction_i_action between
+	Instruction[*] role xxx_Instruction_i_action_src
+	Action[1] role i_action
+end
+

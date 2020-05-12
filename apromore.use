@@ -1,0 +1,141 @@
+model apromore
+class CanonicalProcess
+attributes
+	uri : String
+	version : String
+	author : String
+operations
+end
+
+class Net
+attributes
+	ident : Integer
+operations
+end
+
+abstract class Node
+attributes
+	ident : Integer
+	name : String
+	configurable : Boolean
+operations
+end
+
+class Edge
+attributes
+	ident : Integer
+	condition : String
+	default : Boolean
+operations
+end
+
+class Work<Node
+attributes
+operations
+end
+
+class Event<Work
+attributes
+operations
+end
+
+class Message<Event
+attributes
+operations
+end
+
+class Time<Event
+attributes
+operations
+end
+
+class Task<Work
+attributes
+operations
+end
+
+class Routing<Node
+attributes
+operations
+end
+
+class Split<Routing
+attributes
+operations
+end
+
+class ORSplit<Split
+attributes
+operations
+end
+
+class XORSplit<Split
+attributes
+operations
+end
+
+class ANDSplit<Split
+attributes
+operations
+end
+
+class State<Routing
+attributes
+operations
+end
+
+class Join<Routing
+attributes
+operations
+end
+
+class ORJoin<Join
+attributes
+operations
+end
+
+class XORJoin<Join
+attributes
+operations
+end
+
+class ANDJoin<Join
+attributes
+operations
+end
+
+association xxx_CanonicalProcess_nets between
+	CanonicalProcess[0..1] role xxx_CanonicalProcess_nets_src
+	Net[1..*] role nets
+end
+
+composition xxx_CanonicalProcess_root between
+	CanonicalProcess[*] role xxx_CanonicalProcess_root_src
+	Net[0..1] role root
+end
+
+composition xxx_Net_nodes between
+	Net[0..1] role xxx_Net_nodes_src
+	Node[1..*] role nodes
+end
+
+composition xxx_Net_edges between
+	Net[0..1] role xxx_Net_edges_src
+	Edge[*] role edges
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	Node[0..1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	Node[0..1] role target
+end
+
+composition xxx_Task_subnet between
+	Task[*] role xxx_Task_subnet_src
+	Net[0..1] role subnet
+end
+

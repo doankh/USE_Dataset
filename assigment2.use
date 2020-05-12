@@ -1,0 +1,157 @@
+model assignment2
+enum BoleanOperatorType{
+default
+}
+
+class Person
+attributes
+	name : String
+	role : String
+operations
+end
+
+class WorkPiece
+attributes
+	id : String
+operations
+end
+
+class Step
+attributes
+	speed : Real
+	id : String
+operations
+end
+
+class Manufacturing<Step
+attributes
+operations
+end
+
+class QualityAssurance<Step
+attributes
+operations
+end
+
+class Transport<Step
+attributes
+operations
+end
+
+class IMS
+attributes
+	name : String
+operations
+end
+
+class Storage
+attributes
+	capacity : Real
+	isStart : Boolean
+	isEnd : Boolean
+	id : String
+operations
+end
+
+class InputCondition
+attributes
+	name : String
+operations
+end
+
+class Output
+attributes
+operations
+end
+
+class BooleanInputCondition<InputCondition
+attributes
+	BooleanOperator : BoleanOperatorType
+operations
+end
+
+class CompositeManufacturing<Step
+attributes
+operations
+end
+
+association xxx_Person_isResponsible between
+	Person[0..1] role xxx_Person_isResponsible_src
+	Step[*] role isResponsible
+end
+
+association xxx_Step_overseenBy between
+	Step[0..1] role xxx_Step_overseenBy_src
+	Person[*] role overseenBy
+end
+
+association xxx_Step_next between
+	Step[0..1] role xxx_Step_next_src
+	Step[*] role next
+end
+
+composition xxx_Step_input between
+	Step[0..1] role xxx_Step_input_src
+	InputCondition[1..*] role input
+end
+
+composition xxx_Step_output between
+	Step[0..1] role xxx_Step_output_src
+	Output[1..*] role output
+end
+
+association xxx_Step_storageTransition between
+	Step[0..1] role xxx_Step_storageTransition_src
+	Storage[*] role storageTransition
+end
+
+composition xxx_IMS_steps between
+	IMS[0..1] role xxx_IMS_steps_src
+	Step[*] role steps
+end
+
+composition xxx_IMS_workPieces between
+	IMS[0..1] role xxx_IMS_workPieces_src
+	WorkPiece[*] role workPieces
+end
+
+composition xxx_IMS_persons between
+	IMS[0..1] role xxx_IMS_persons_src
+	Person[*] role persons
+end
+
+composition xxx_IMS_storages between
+	IMS[0..1] role xxx_IMS_storages_src
+	Storage[*] role storages
+end
+
+association xxx_Storage_has between
+	Storage[0..1] role xxx_Storage_has_src
+	WorkPiece[*] role has
+end
+
+association xxx_Storage_transition between
+	Storage[0..1] role xxx_Storage_transition_src
+	Step[*] role transition
+end
+
+association xxx_InputCondition_requires between
+	InputCondition[*] role xxx_InputCondition_requires_src
+	WorkPiece[0..1] role requires
+end
+
+association xxx_Output_outputWorkpiece between
+	Output[*] role xxx_Output_outputWorkpiece_src
+	WorkPiece[0..1] role outputWorkpiece
+end
+
+association xxx_BooleanInputCondition_left between
+	BooleanInputCondition[*] role xxx_BooleanInputCondition_left_src
+	InputCondition[1] role left
+end
+
+association xxx_BooleanInputCondition_right between
+	BooleanInputCondition[*] role xxx_BooleanInputCondition_right_src
+	InputCondition[1] role right
+end
+

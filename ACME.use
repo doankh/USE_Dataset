@@ -1,0 +1,159 @@
+model ACME
+class ACMEFile
+attributes
+operations
+end
+
+abstract class ACMEEntry
+attributes
+operations
+end
+
+abstract class Element
+attributes
+	name : String
+operations
+end
+
+class Type<Element
+attributes
+operations
+end
+
+class System<Element,ACMEEntry
+attributes
+operations
+end
+
+class Representation
+attributes
+operations
+end
+
+abstract class Component<Element
+attributes
+operations
+end
+
+class ComponentInstance<Component
+attributes
+	instanceOf : String
+operations
+end
+
+class ComponentType<Component,ACMEEntry
+attributes
+	extend : String
+operations
+end
+
+class Port<Element
+attributes
+operations
+end
+
+class Connector<Element
+attributes
+operations
+end
+
+class Role<Element
+attributes
+operations
+end
+
+class Property
+attributes
+	name : String
+	val : String
+operations
+end
+
+abstract class Link
+attributes
+operations
+end
+
+class Attachment<Link
+attributes
+	comp : String
+	port : String
+	con : String
+	role : String
+operations
+end
+
+class Binding<Link
+attributes
+	compSrc : String
+	portSrc : String
+	compDest : String
+	portDest : String
+operations
+end
+
+composition xxx_ACMEFile_entries between
+	ACMEFile[0..1] role xxx_ACMEFile_entries_src
+	ACMEEntry[*] role entries
+end
+
+composition xxx_Element_representations between
+	Element[0..1] role xxx_Element_representations_src
+	Representation[*] role representations
+end
+
+composition xxx_Element_property between
+	Element[0..1] role xxx_Element_property_src
+	Property[*] role property
+end
+
+composition xxx_System_componentDeclaration between
+	System[0..1] role xxx_System_componentDeclaration_src
+	ComponentInstance[*] role componentDeclaration
+end
+
+composition xxx_System_connectorDeclaration between
+	System[0..1] role xxx_System_connectorDeclaration_src
+	Connector[*] role connectorDeclaration
+end
+
+composition xxx_System_attachments between
+	System[0..1] role xxx_System_attachments_src
+	Link[*] role attachments
+end
+
+composition xxx_System_bindings between
+	System[0..1] role xxx_System_bindings_src
+	Link[*] role bindings
+end
+
+composition xxx_Representation_systems between
+	Representation[0..1] role xxx_Representation_systems_src
+	System[*] role systems
+end
+
+composition xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[*] role ports
+end
+
+composition xxx_Connector_roles between
+	Connector[0..1] role xxx_Connector_roles_src
+	Role[*] role roles
+end
+
+association xxx_Connector_system between
+	Connector[*] role xxx_Connector_system_src
+	System[1] role system
+end
+
+association xxx_Link_systemBinding between
+	Link[*] role xxx_Link_systemBinding_src
+	System[1] role systemBinding
+end
+
+association xxx_Link_systemAttachment between
+	Link[*] role xxx_Link_systemAttachment_src
+	System[1] role systemAttachment
+end
+

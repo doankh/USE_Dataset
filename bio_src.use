@@ -1,0 +1,139 @@
+model bio_src
+class Model
+attributes
+operations
+end
+
+class Protein
+attributes
+	name : String
+	accession : String
+	created : String
+operations
+end
+
+class Gene
+attributes
+	name : String
+	type : String
+operations
+end
+
+class Reaction
+attributes
+	entry : String
+	name : String
+	comment : String
+	orthology : String
+	definition : String
+	equation : String
+operations
+end
+
+class Name
+attributes
+	id : String
+	name : String
+	uniqueName : String
+	class_ : String
+operations
+end
+
+class Node
+attributes
+	taxID : String
+	parentID : String
+	rank : String
+	emblCode : String
+operations
+end
+
+class Experiment
+attributes
+	contact : String
+	date : String
+	description : String
+operations
+end
+
+class ExperimentalData
+attributes
+	data : String
+	role : String
+operations
+end
+
+class FlowCytometrySample
+attributes
+	contact : String
+	date : String
+operations
+end
+
+class Probe
+attributes
+	data : String
+	type : String
+operations
+end
+
+composition xxx_Model_protein between
+	Model[0..1] role xxx_Model_protein_src
+	Protein[*] role protein
+end
+
+composition xxx_Model_genes between
+	Model[0..1] role xxx_Model_genes_src
+	Gene[*] role genes
+end
+
+composition xxx_Model_reactions between
+	Model[0..1] role xxx_Model_reactions_src
+	Reaction[*] role reactions
+end
+
+composition xxx_Model_names between
+	Model[0..1] role xxx_Model_names_src
+	Name[*] role names
+end
+
+composition xxx_Model_nodes between
+	Model[0..1] role xxx_Model_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_Model_experiments between
+	Model[0..1] role xxx_Model_experiments_src
+	Experiment[*] role experiments
+end
+
+composition xxx_Model_samples between
+	Model[0..1] role xxx_Model_samples_src
+	FlowCytometrySample[*] role samples
+end
+
+association xxx_Gene_protein between
+	Gene[*] role xxx_Gene_protein_src
+	Protein[1] role protein
+end
+
+association xxx_Node_tax between
+	Node[*] role xxx_Node_tax_src
+	Name[0..1] role tax
+end
+
+association xxx_Node_parent between
+	Node[*] role xxx_Node_parent_src
+	Name[0..1] role parent
+end
+
+composition xxx_Experiment_experimentalData between
+	Experiment[0..1] role xxx_Experiment_experimentalData_src
+	ExperimentalData[*] role experimentalData
+end
+
+composition xxx_FlowCytometrySample_probes between
+	FlowCytometrySample[0..1] role xxx_FlowCytometrySample_probes_src
+	Probe[*] role probes
+end
+

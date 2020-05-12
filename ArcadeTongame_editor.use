@@ -1,0 +1,94 @@
+model ArcadeTongame_editor
+class Game
+attributes
+	height : Real
+	width : Real
+operations
+end
+
+class Stage
+attributes
+	name : String
+operations
+end
+
+class StagesConnection
+attributes
+operations
+end
+
+abstract class Element
+attributes
+	name : String
+	position_x : Real
+	position_y : Real
+	size_x : Real
+	size_y : Real
+operations
+end
+
+abstract class Opener<Element
+attributes
+	isOpener : Boolean
+operations
+end
+
+class Wall<Opener
+attributes
+operations
+end
+
+class Sound<Opener
+attributes
+	filename : String
+operations
+end
+
+class Text<Opener
+attributes
+	text : String
+operations
+end
+
+class In<Element
+attributes
+	isStart : Boolean
+operations
+end
+
+class Out<Element
+attributes
+	isOpen : Boolean
+operations
+end
+
+composition xxx_Game_stages between
+	Game[0..1] role xxx_Game_stages_src
+	Stage[*] role stages
+end
+
+composition xxx_Game_stagesconnections between
+	Game[0..1] role xxx_Game_stagesconnections_src
+	StagesConnection[*] role stagesconnections
+end
+
+composition xxx_Stage_elements between
+	Stage[0..1] role xxx_Stage_elements_src
+	Element[*] role elements
+end
+
+association xxx_StagesConnection_source between
+	StagesConnection[*] role xxx_StagesConnection_source_src
+	Out[0..1] role source
+end
+
+association xxx_StagesConnection_target between
+	StagesConnection[*] role xxx_StagesConnection_target_src
+	In[0..1] role target
+end
+
+association xxx_Opener_opens between
+	Opener[*] role xxx_Opener_opens_src
+	Out[0..1] role opens
+end
+

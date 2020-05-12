@@ -1,0 +1,88 @@
+model ARFFx
+class Model
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+operations
+end
+
+class Instance
+attributes
+operations
+end
+
+class Value
+attributes
+	content : String
+operations
+end
+
+class Dimension
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class MetaData
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_Model_meta between
+	Model[0..1] role xxx_Model_meta_src
+	MetaData[*] role meta
+end
+
+composition xxx_Model_attributes_ between
+	Model[0..1] role xxx_Model_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Model_data between
+	Model[0..1] role xxx_Model_data_src
+	Instance[*] role data
+end
+
+composition xxx_Model_dimensions between
+	Model[0..1] role xxx_Model_dimensions_src
+	Dimension[*] role dimensions
+end
+
+composition xxx_Model_types between
+	Model[0..1] role xxx_Model_types_src
+	Type[*] role types
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Type[0..1] role type
+end
+
+association xxx_Attribute_dimension between
+	Attribute[*] role xxx_Attribute_dimension_src
+	Dimension[0..1] role dimension
+end
+
+composition xxx_Instance_values between
+	Instance[0..1] role xxx_Instance_values_src
+	Value[*] role values
+end
+
+association xxx_Value_ofAttribute between
+	Value[*] role xxx_Value_ofAttribute_src
+	Attribute[0..1] role ofAttribute
+end
+

@@ -1,0 +1,121 @@
+model api2mol
+enum StatementType{
+default
+}
+
+class Definition
+attributes
+	context_ : String
+operations
+end
+
+class DefaultMetaclassSection<Section
+attributes
+	metaclassName : String
+	attribute : String
+operations
+end
+
+class Mapping
+attributes
+	metaclass : String
+	instanceClass : String
+operations
+end
+
+abstract class Section
+attributes
+operations
+end
+
+class PropertySection<Section
+attributes
+	property : String
+operations
+end
+
+class NewSection<Section
+attributes
+operations
+end
+
+class MultipleSection<Section
+attributes
+operations
+end
+
+class ValueSection<Section
+attributes
+	metaValue : String
+	instanceValue : String
+operations
+end
+
+class Statement
+attributes
+	type : StatementType
+	variables : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class MethodCall<NamedElement
+attributes
+operations
+end
+
+class Parameter<NamedElement
+attributes
+operations
+end
+
+class Constructor<MethodCall
+attributes
+operations
+end
+
+composition xxx_Definition_defaultMetaclass between
+	Definition[*] role xxx_Definition_defaultMetaclass_src
+	DefaultMetaclassSection[1] role defaultMetaclass
+end
+
+composition xxx_Definition_mappings between
+	Definition[0..1] role xxx_Definition_mappings_src
+	Mapping[*] role mappings
+end
+
+composition xxx_Mapping_sections between
+	Mapping[0..1] role xxx_Mapping_sections_src
+	Section[*] role sections
+end
+
+composition xxx_PropertySection_statements between
+	PropertySection[0..1] role xxx_PropertySection_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_NewSection_constructors between
+	NewSection[0..1] role xxx_NewSection_constructors_src
+	Constructor[*] role constructors
+end
+
+composition xxx_MultipleSection_statements between
+	MultipleSection[0..1] role xxx_MultipleSection_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Statement_calls between
+	Statement[0..1] role xxx_Statement_calls_src
+	MethodCall[*] role calls
+end
+
+composition xxx_MethodCall_params between
+	MethodCall[0..1] role xxx_MethodCall_params_src
+	Parameter[*] role params
+end
+

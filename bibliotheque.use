@@ -1,0 +1,82 @@
+model example
+class ModeleBibliotheque
+attributes
+operations
+end
+
+class Bibliotheque
+attributes
+operations
+	emprunter(aa : Abonne,ee : Exemplaire)
+end
+
+class Livre
+attributes
+operations
+end
+
+class Abonne
+attributes
+operations
+end
+
+class Exemplaire
+attributes
+operations
+end
+
+composition xxx_ModeleBibliotheque_livres between
+	ModeleBibliotheque[0..1] role xxx_ModeleBibliotheque_livres_src
+	Livre[*] role livres
+end
+
+composition xxx_ModeleBibliotheque_abonnes between
+	ModeleBibliotheque[0..1] role xxx_ModeleBibliotheque_abonnes_src
+	Abonne[*] role abonnes
+end
+
+composition xxx_ModeleBibliotheque_exemplaires between
+	ModeleBibliotheque[0..1] role xxx_ModeleBibliotheque_exemplaires_src
+	Exemplaire[*] role exemplaires
+end
+
+association xxx_Bibliotheque_references between
+	Bibliotheque[0..1] role xxx_Bibliotheque_references_src
+	Livre[*] role references
+end
+
+association xxx_Bibliotheque_abonnes between
+	Bibliotheque[0..1] role xxx_Bibliotheque_abonnes_src
+	Abonne[*] role abonnes
+end
+
+association xxx_Livre_bibliotheque between
+	Livre[0..1] role xxx_Livre_bibliotheque_src
+	Bibliotheque[*] role bibliotheque
+end
+
+association xxx_Livre_exemplaires between
+	Livre[0..1] role xxx_Livre_exemplaires_src
+	Exemplaire[*] role exemplaires
+end
+
+association xxx_Abonne_bibliotheque between
+	Abonne[0..1] role xxx_Abonne_bibliotheque_src
+	Bibliotheque[*] role bibliotheque
+end
+
+association xxx_Abonne_emprunts between
+	Abonne[*] role xxx_Abonne_emprunts_src
+	Exemplaire[0..5] role emprunts
+end
+
+association xxx_Exemplaire_ouvrage between
+	Exemplaire[*] role xxx_Exemplaire_ouvrage_src
+	Livre[1] role ouvrage
+end
+
+association xxx_Exemplaire_emprunteur between
+	Exemplaire[*] role xxx_Exemplaire_emprunteur_src
+	Abonne[0..1] role emprunteur
+end
+

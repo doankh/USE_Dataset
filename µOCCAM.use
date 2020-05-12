@@ -1,0 +1,532 @@
+model PrimitiveTypes
+abstract class Process
+attributes
+operations
+end
+
+class StopProcess<Process
+attributes
+operations
+end
+
+class SkipProcess<Process
+attributes
+operations
+end
+
+abstract class Action<Process
+attributes
+operations
+end
+
+class Construction<Process
+attributes
+operations
+end
+
+class Instance<Process
+attributes
+	name : String
+operations
+end
+
+class Assignment<Action
+attributes
+operations
+end
+
+class Input<Action
+attributes
+operations
+end
+
+class Output<Action
+attributes
+operations
+end
+
+abstract class Sequence_<Construction
+attributes
+operations
+end
+
+class NormalSequence<Sequence_
+attributes
+operations
+end
+
+class ReplicatorSequence<Sequence_
+attributes
+operations
+end
+
+abstract class Conditional<Construction
+attributes
+operations
+end
+
+class NormalConditional<Conditional
+attributes
+operations
+end
+
+class ReplicatorConditional<Conditional
+attributes
+operations
+end
+
+class Loop<Construction
+attributes
+operations
+end
+
+abstract class Parallel<Construction
+attributes
+operations
+end
+
+class NormalParallel<Parallel
+attributes
+operations
+end
+
+class ReplicatorParallel<Parallel
+attributes
+operations
+end
+
+class Alternation<Construction
+attributes
+operations
+end
+
+class NormalAlternation<Parallel
+attributes
+operations
+end
+
+class ReplicatorAlternation<Parallel
+attributes
+operations
+end
+
+class Choice
+attributes
+operations
+end
+
+class BooleanRef
+attributes
+operations
+end
+
+class Alternative
+attributes
+operations
+end
+
+abstract class Guard
+attributes
+operations
+end
+
+class InputGuard<Guard
+attributes
+operations
+end
+
+class BooleanGuard<Guard
+attributes
+operations
+end
+
+class Replicator
+attributes
+	name : String
+operations
+end
+
+class Base
+attributes
+operations
+end
+
+class Count
+attributes
+operations
+end
+
+class Type
+attributes
+operations
+end
+
+class PrimitiveType
+attributes
+	isInt : Boolean
+	isChan : Boolean
+operations
+end
+
+class Literal
+attributes
+	integer : Integer
+operations
+end
+
+class Element
+attributes
+	name : String
+operations
+end
+
+class Subscript
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class Channel
+attributes
+operations
+end
+
+abstract class Operand
+attributes
+operations
+end
+
+class VariableOPerand<Variable
+attributes
+operations
+end
+
+class LiteralOperand<Literal
+attributes
+operations
+end
+
+class ExpressionOperand<Expression
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class MonadicExpression<Expression
+attributes
+operations
+end
+
+class DyadicExpression<Expression
+attributes
+operations
+end
+
+class SimpleExpression<Expression
+attributes
+operations
+end
+
+abstract class Specification<Process
+attributes
+operations
+end
+
+abstract class Declaration<Specification
+attributes
+operations
+end
+
+class TypeDeclaration<Declaration
+attributes
+operations
+end
+
+class IntDeclaration<Declaration
+attributes
+	name : String
+operations
+end
+
+class ValDeclaration<Declaration
+attributes
+	name : String
+operations
+end
+
+class Definition<Specification
+attributes
+	name : String
+operations
+end
+
+class Formal
+attributes
+	name : String
+operations
+end
+
+class ProcedureBody
+attributes
+	name : String
+operations
+end
+
+class Actual
+attributes
+operations
+end
+
+class MonadicOperator
+attributes
+	minus : Boolean
+	not_ : Boolean
+operations
+end
+
+class DyadicOperator
+attributes
+	plus : Boolean
+	minus : Boolean
+	star : Boolean
+	slash : Boolean
+	or_ : Boolean
+	inverseSlash : Boolean
+	and_ : Boolean
+	eq : Boolean
+	ne : Boolean
+	lt : Boolean
+	gt : Boolean
+	le : Boolean
+	ge : Boolean
+operations
+end
+
+composition xxx_Assignment_variable between
+	Assignment[*] role xxx_Assignment_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_Assignment_expression between
+	Assignment[*] role xxx_Assignment_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Input_channel between
+	Input[*] role xxx_Input_channel_src
+	Channel[1] role channel
+end
+
+composition xxx_Input_variable between
+	Input[*] role xxx_Input_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_Output_channel between
+	Output[*] role xxx_Output_channel_src
+	Channel[1] role channel
+end
+
+composition xxx_Output_expression between
+	Output[*] role xxx_Output_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Sequence_process between
+	Sequence_[*] role xxx_Sequence_process_src
+	Process[1] role process
+end
+
+composition xxx_ReplicatorSequence_replicator between
+	ReplicatorSequence[*] role xxx_ReplicatorSequence_replicator_src
+	Replicator[1] role replicator
+end
+
+composition xxx_Conditional_choice between
+	Conditional[*] role xxx_Conditional_choice_src
+	Choice[1] role choice
+end
+
+composition xxx_ReplicatorConditional_replicator between
+	ReplicatorConditional[*] role xxx_ReplicatorConditional_replicator_src
+	Replicator[1] role replicator
+end
+
+composition xxx_Loop_boolean between
+	Loop[*] role xxx_Loop_boolean_src
+	BooleanRef[1] role boolean
+end
+
+composition xxx_Loop_process between
+	Loop[*] role xxx_Loop_process_src
+	Process[1] role process
+end
+
+composition xxx_Parallel_process between
+	Parallel[*] role xxx_Parallel_process_src
+	Process[1] role process
+end
+
+composition xxx_ReplicatorParallel_replicator between
+	ReplicatorParallel[*] role xxx_ReplicatorParallel_replicator_src
+	Replicator[1] role replicator
+end
+
+composition xxx_Alternation_alternative between
+	Alternation[*] role xxx_Alternation_alternative_src
+	Alternative[1] role alternative
+end
+
+composition xxx_ReplicatorAlternation_replicator between
+	ReplicatorAlternation[*] role xxx_ReplicatorAlternation_replicator_src
+	Replicator[1] role replicator
+end
+
+composition xxx_Choice_boolean between
+	Choice[*] role xxx_Choice_boolean_src
+	BooleanRef[1] role boolean
+end
+
+composition xxx_Choice_process between
+	Choice[*] role xxx_Choice_process_src
+	Process[1] role process
+end
+
+composition xxx_BooleanRef_expression between
+	BooleanRef[*] role xxx_BooleanRef_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Alternative_guard between
+	Alternative[*] role xxx_Alternative_guard_src
+	Guard[1] role guard
+end
+
+composition xxx_Alternative_process between
+	Alternative[*] role xxx_Alternative_process_src
+	Process[1] role process
+end
+
+composition xxx_Guard_input between
+	Guard[*] role xxx_Guard_input_src
+	Input[1] role input
+end
+
+composition xxx_BooleanGuard_boolean between
+	BooleanGuard[*] role xxx_BooleanGuard_boolean_src
+	BooleanRef[1] role boolean
+end
+
+composition xxx_Replicator_base between
+	Replicator[*] role xxx_Replicator_base_src
+	Base[1] role base
+end
+
+composition xxx_Replicator_count between
+	Replicator[*] role xxx_Replicator_count_src
+	Count[1] role count
+end
+
+composition xxx_Base_expression between
+	Base[*] role xxx_Base_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Count_expression between
+	Count[*] role xxx_Count_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Type_primitiveType between
+	Type[*] role xxx_Type_primitiveType_src
+	PrimitiveType[1] role primitiveType
+end
+
+composition xxx_Type_expression between
+	Type[*] role xxx_Type_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Element_subscript between
+	Element[*] role xxx_Element_subscript_src
+	Subscript[0..1] role subscript
+end
+
+composition xxx_Subscript_expression between
+	Subscript[*] role xxx_Subscript_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Variable_element between
+	Variable[*] role xxx_Variable_element_src
+	Element[1] role element
+end
+
+composition xxx_Channel_element between
+	Channel[*] role xxx_Channel_element_src
+	Element[1] role element
+end
+
+composition xxx_Expression_operand between
+	Expression[*] role xxx_Expression_operand_src
+	Operand[1] role operand
+end
+
+composition xxx_MonadicExpression_monadicOperator between
+	MonadicExpression[*] role xxx_MonadicExpression_monadicOperator_src
+	MonadicOperator[1] role monadicOperator
+end
+
+composition xxx_DyadicExpression_operandRight between
+	DyadicExpression[*] role xxx_DyadicExpression_operandRight_src
+	Operand[1] role operandRight
+end
+
+composition xxx_DyadicExpression_dyadicOperator between
+	DyadicExpression[*] role xxx_DyadicExpression_dyadicOperator_src
+	DyadicOperator[1] role dyadicOperator
+end
+
+composition xxx_TypeDeclaration_type between
+	TypeDeclaration[*] role xxx_TypeDeclaration_type_src
+	Type[1] role type
+end
+
+composition xxx_IntDeclaration_expression between
+	IntDeclaration[*] role xxx_IntDeclaration_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ValDeclaration_expression between
+	ValDeclaration[*] role xxx_ValDeclaration_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Definition_procedureBody between
+	Definition[*] role xxx_Definition_procedureBody_src
+	ProcedureBody[1] role procedureBody
+end
+
+composition xxx_Formal_primitiveType between
+	Formal[*] role xxx_Formal_primitiveType_src
+	PrimitiveType[1] role primitiveType
+end
+
+composition xxx_ProcedureBody_process between
+	ProcedureBody[*] role xxx_ProcedureBody_process_src
+	Process[1] role process
+end
+
+composition xxx_Actual_element between
+	Actual[*] role xxx_Actual_element_src
+	Element[1] role element
+end
+

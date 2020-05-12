@@ -1,0 +1,124 @@
+model Biblioteca
+enum Genero{
+default
+}
+
+enum Estado{
+default
+}
+
+class Biblioteca
+attributes
+	direccion : String
+operations
+end
+
+class Libro
+attributes
+	ISBN : String
+	titulo : String
+	editorial : String
+	anioDeEdicion : Integer
+	genero : Genero
+	activo : Boolean
+operations
+end
+
+class Prestamo
+attributes
+	fechaDeInicio : String
+	fechaDeFin : String
+	fechaDeDevolucion : String
+operations
+end
+
+class Autor
+attributes
+	nombreCompleto : String
+	nacionalidad : String
+	fechaDeNacimiento : String
+operations
+end
+
+class Socio
+attributes
+	numeroDeSocio : Integer
+	nombreCompleto : String
+	telefono : String
+	direccion : String
+	edad : Integer
+	fechaDeNacimiento : String
+operations
+	existeSocio(nombreDeSocio : String):String
+	solicitarEjemplar(codigo : Integer):Prestamo
+	devolverEjemplar(codigo : Integer,fechaActual : String):Prestamo
+	generarMulta(prestamo : Prestamo):Multa
+	uniqueID()
+end
+
+class Multa
+attributes
+	fecha : String
+	monto : Integer
+	diasExcedidos : Integer
+	fechaDePago : String
+operations
+end
+
+class Ejemplar
+attributes
+	numeroDeEjemplar : Integer
+	estado : Estado
+operations
+end
+
+composition xxx_Biblioteca_libros between
+	Biblioteca[0..1] role xxx_Biblioteca_libros_src
+	Libro[*] role libros
+end
+
+composition xxx_Biblioteca_autores between
+	Biblioteca[0..1] role xxx_Biblioteca_autores_src
+	Autor[*] role autores
+end
+
+composition xxx_Biblioteca_socios between
+	Biblioteca[0..1] role xxx_Biblioteca_socios_src
+	Socio[*] role socios
+end
+
+association xxx_Libro_autor between
+	Libro[*] role xxx_Libro_autor_src
+	Autor[1] role autor
+end
+
+association xxx_Prestamo_ejemplar between
+	Prestamo[*] role xxx_Prestamo_ejemplar_src
+	Ejemplar[1] role ejemplar
+end
+
+association xxx_Prestamo_socio between
+	Prestamo[*] role xxx_Prestamo_socio_src
+	Socio[1] role socio
+end
+
+association xxx_Autor_obras between
+	Autor[0..1] role xxx_Autor_obras_src
+	Libro[1..*] role obras
+end
+
+association xxx_Socio_multas between
+	Socio[0..1] role xxx_Socio_multas_src
+	Multa[*] role multas
+end
+
+association xxx_Socio_prestamos between
+	Socio[*] role xxx_Socio_prestamos_src
+	Prestamo[0..3] role prestamos
+end
+
+association xxx_Multa_prestamo between
+	Multa[*] role xxx_Multa_prestamo_src
+	Prestamo[1] role prestamo
+end
+

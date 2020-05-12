@@ -1,0 +1,102 @@
+model acore
+enum AccessType{
+default
+}
+
+class AClass<ABasicClass
+attributes
+operations
+end
+
+class AInterface<ABasicClass
+attributes
+operations
+end
+
+class ACoreRoot
+attributes
+	title : String
+operations
+end
+
+class AAttribute<AClassChild
+attributes
+operations
+end
+
+class AOperation<AClassChild
+attributes
+operations
+end
+
+class ABasicClass
+attributes
+	name : String
+operations
+end
+
+class AParameter
+attributes
+	name : String
+	type : String
+operations
+end
+
+class AClassChild
+attributes
+	name : String
+	accessright : AccessType
+	dataType : String
+operations
+end
+
+association xxx_AClass_subClasses between
+	AClass[0..1] role xxx_AClass_subClasses_src
+	AClass[*] role subClasses
+end
+
+association xxx_AClass_implementedInterfaces between
+	AClass[0..1] role xxx_AClass_implementedInterfaces_src
+	AInterface[*] role implementedInterfaces
+end
+
+association xxx_AClass_associations between
+	AClass[0..1] role xxx_AClass_associations_src
+	AClass[*] role associations
+end
+
+association xxx_AClass_compositions between
+	AClass[0..1] role xxx_AClass_compositions_src
+	AClass[*] role compositions
+end
+
+association xxx_AClass_aggregations between
+	AClass[0..1] role xxx_AClass_aggregations_src
+	AClass[*] role aggregations
+end
+
+composition xxx_ACoreRoot_classes between
+	ACoreRoot[0..1] role xxx_ACoreRoot_classes_src
+	AClass[*] role classes
+end
+
+composition xxx_ACoreRoot_interfaces between
+	ACoreRoot[0..1] role xxx_ACoreRoot_interfaces_src
+	AInterface[*] role interfaces
+end
+
+composition xxx_AOperation_parameters between
+	AOperation[0..1] role xxx_AOperation_parameters_src
+	AParameter[*] role parameters
+end
+
+composition xxx_ABasicClass_operations_ between
+	ABasicClass[0..1] role xxx_ABasicClass_operations__src
+	AOperation[*] role operations_
+end
+
+composition xxx_ABasicClass_attributes_ between
+	ABasicClass[0..1] role xxx_ABasicClass_attributes__src
+	AAttribute[*] role attributes_
+end
+

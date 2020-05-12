@@ -1,0 +1,62 @@
+model BD
+enum TipoPrimitivo{
+default
+}
+
+class EsquemaBD<ElementoNombrado
+attributes
+operations
+end
+
+class Tabla<ElementoNombrado
+attributes
+operations
+end
+
+class Columna<ElementoNombrado
+attributes
+	tipo : TipoPrimitivo
+operations
+end
+
+abstract class ElementoNombrado
+attributes
+	nombre : String
+operations
+end
+
+class ClaveAjena
+attributes
+operations
+end
+
+composition xxx_EsquemaBD_tablas between
+	EsquemaBD[0..1] role xxx_EsquemaBD_tablas_src
+	Tabla[*] role tablas
+end
+
+composition xxx_Tabla_columnas between
+	Tabla[0..1] role xxx_Tabla_columnas_src
+	Columna[*] role columnas
+end
+
+association xxx_Tabla_clavePrimaria between
+	Tabla[*] role xxx_Tabla_clavePrimaria_src
+	Columna[0..1] role clavePrimaria
+end
+
+composition xxx_Tabla_clavesAjenas between
+	Tabla[0..1] role xxx_Tabla_clavesAjenas_src
+	ClaveAjena[*] role clavesAjenas
+end
+
+association xxx_ClaveAjena_columna between
+	ClaveAjena[*] role xxx_ClaveAjena_columna_src
+	Columna[1] role columna
+end
+
+association xxx_ClaveAjena_referencia between
+	ClaveAjena[*] role xxx_ClaveAjena_referencia_src
+	Tabla[1] role referencia
+end
+

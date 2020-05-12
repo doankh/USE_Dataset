@@ -1,0 +1,101 @@
+model ActivitiesReq
+abstract class Behavior<Class
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+abstract class Namespace
+attributes
+operations
+end
+
+abstract class RedefinableElement
+attributes
+operations
+end
+
+class TypedElement
+attributes
+operations
+end
+
+abstract class Pin
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+abstract class ValueSpecification
+attributes
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class State
+attributes
+operations
+end
+
+abstract class BehavioralFeature<Namespace,Feature
+attributes
+operations
+end
+
+abstract class Feature
+attributes
+operations
+end
+
+class Class
+attributes
+operations
+end
+
+class Variable<MultiplicityElement,TypedElement
+attributes
+operations
+end
+
+abstract class MultiplicityElement
+attributes
+operations
+end
+
+class OutputPin
+attributes
+operations
+end
+
+class InputPin
+attributes
+operations
+end
+
+abstract class Classifier
+attributes
+operations
+end
+

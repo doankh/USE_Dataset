@@ -1,0 +1,238 @@
+model apidesc
+enum ReturnKind{
+default
+}
+
+enum PrimitiveType{
+default
+}
+
+class ApiDescription
+attributes
+	apiName : String
+	metamodelName : String
+	mapperClassName : String
+operations
+end
+
+abstract class ClassMapping
+attributes
+operations
+end
+
+class SimpleClassMapping<ClassMapping
+attributes
+	metaclassName : String
+	canonicalClassName : String
+operations
+end
+
+abstract class CreationMechanism
+attributes
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class SetFeature<Statement
+attributes
+	valueKind : ReturnKind
+	strValue : String
+	intValue : Integer
+	boolValue : Boolean
+operations
+end
+
+class Constructor<CreationMechanism
+attributes
+operations
+end
+
+abstract class FeatureMapping
+attributes
+	featureName : String
+	constructorType : String
+	isMultivalued : Boolean
+operations
+end
+
+abstract class SetMechanism
+attributes
+operations
+end
+
+class SimpleSet<SetMechanism
+attributes
+operations
+end
+
+abstract class GetMechanism
+attributes
+operations
+end
+
+class SimpleGet<GetMechanism
+attributes
+	debugName : String
+operations
+end
+
+class GenericGet<SimpleGet
+attributes
+operations
+end
+
+class GenericSet<SimpleSet
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+	parameterTypes : String
+	returnType : String
+	returnVoid : String
+	returnArray : String
+	returnCollection : String
+operations
+end
+
+abstract class AttributeMapping<FeatureMapping
+attributes
+	type : String
+operations
+end
+
+class SimpleAttributeMapping<AttributeMapping
+attributes
+operations
+end
+
+class SimpleReferenceMapping<FeatureMapping
+attributes
+operations
+end
+
+class DeclaredElement
+attributes
+	name : String
+operations
+end
+
+class IteratorDescription<DeclaredElement
+attributes
+	iteratorClass : String
+operations
+end
+
+class IteratorGetter<GetMechanism
+attributes
+operations
+end
+
+class ObserverDescription<DeclaredElement
+attributes
+	observerClass : String
+operations
+end
+
+class UpdateMethod<Method
+attributes
+	interest : Integer
+operations
+end
+
+composition xxx_ApiDescription_classMappings between
+	ApiDescription[0..1] role xxx_ApiDescription_classMappings_src
+	ClassMapping[*] role classMappings
+end
+
+composition xxx_ApiDescription_declaredElements between
+	ApiDescription[0..1] role xxx_ApiDescription_declaredElements_src
+	DeclaredElement[*] role declaredElements
+end
+
+composition xxx_SimpleClassMapping_featureMappings between
+	SimpleClassMapping[0..1] role xxx_SimpleClassMapping_featureMappings_src
+	FeatureMapping[*] role featureMappings
+end
+
+composition xxx_SimpleClassMapping_creation between
+	SimpleClassMapping[*] role xxx_SimpleClassMapping_creation_src
+	CreationMechanism[1] role creation
+end
+
+composition xxx_CreationMechanism_statement between
+	CreationMechanism[0..1] role xxx_CreationMechanism_statement_src
+	Statement[*] role statement
+end
+
+association xxx_SetFeature_feature between
+	SetFeature[*] role xxx_SetFeature_feature_src
+	FeatureMapping[1] role feature
+end
+
+association xxx_Constructor_parameters between
+	Constructor[0..1] role xxx_Constructor_parameters_src
+	FeatureMapping[*] role parameters
+end
+
+composition xxx_FeatureMapping_setMethod between
+	FeatureMapping[*] role xxx_FeatureMapping_setMethod_src
+	SetMechanism[0..1] role setMethod
+end
+
+composition xxx_FeatureMapping_getMethod between
+	FeatureMapping[*] role xxx_FeatureMapping_getMethod_src
+	GetMechanism[0..1] role getMethod
+end
+
+composition xxx_SimpleSet_setter between
+	SimpleSet[*] role xxx_SimpleSet_setter_src
+	Method[1] role setter
+end
+
+composition xxx_SimpleGet_getter between
+	SimpleGet[*] role xxx_SimpleGet_getter_src
+	Method[1] role getter
+end
+
+association xxx_SimpleReferenceMapping_type between
+	SimpleReferenceMapping[*] role xxx_SimpleReferenceMapping_type_src
+	ClassMapping[1] role type
+end
+
+composition xxx_IteratorDescription_hasFinished between
+	IteratorDescription[*] role xxx_IteratorDescription_hasFinished_src
+	Method[1] role hasFinished
+end
+
+composition xxx_IteratorDescription_nextElement between
+	IteratorDescription[*] role xxx_IteratorDescription_nextElement_src
+	Method[1] role nextElement
+end
+
+composition xxx_IteratorDescription_currentElement between
+	IteratorDescription[*] role xxx_IteratorDescription_currentElement_src
+	Method[0..1] role currentElement
+end
+
+composition xxx_IteratorGetter_getIterator between
+	IteratorGetter[*] role xxx_IteratorGetter_getIterator_src
+	Method[1] role getIterator
+end
+
+association xxx_IteratorGetter_iterator between
+	IteratorGetter[*] role xxx_IteratorGetter_iterator_src
+	IteratorDescription[1] role iterator
+end
+
+composition xxx_ObserverDescription_updateMethods between
+	ObserverDescription[0..1] role xxx_ObserverDescription_updateMethods_src
+	UpdateMethod[*] role updateMethods
+end
+

@@ -1,0 +1,32 @@
+model analysis
+class ErrorFunction
+attributes
+operations
+	calculateError(reference : ReferenceScenarioDataMap,data : ReferenceScenarioDataMap):ErrorResult
+end
+
+class ThresholdErrorFunction<ErrorFunction
+attributes
+operations
+end
+
+class ReferenceScenarioDataMap
+attributes
+operations
+end
+
+class SimpleErrorFunction<ErrorFunction
+attributes
+operations
+end
+
+class ErrorResult
+attributes
+	errorByTimeStep : String
+	error : Real
+	referenceByTime : String
+	modelByTime : String
+	validationError : Real
+operations
+end
+

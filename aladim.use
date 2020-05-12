@@ -1,0 +1,183 @@
+model aladim
+class interfaceModel
+attributes
+	application : String
+operations
+end
+
+class interactionSpace
+attributes
+	name : String
+operations
+end
+
+abstract class compositeInteraction<Interaction
+attributes
+operations
+end
+
+class enterInformation<basicInteraction
+attributes
+operations
+end
+
+class selectInformation<basicInteraction
+attributes
+operations
+end
+
+class perceiveInforrmation<basicInteraction
+attributes
+operations
+end
+
+abstract class basicInteraction<Interaction
+attributes
+	name : String
+operations
+end
+
+class activate<basicInteraction
+attributes
+operations
+end
+
+class join<compositeInteraction
+attributes
+operations
+end
+
+class sequence<compositeInteraction
+attributes
+operations
+end
+
+class choose<compositeInteraction
+attributes
+operations
+end
+
+class repeat<compositeInteraction
+attributes
+operations
+end
+
+class combine<compositeInteraction
+attributes
+operations
+end
+
+abstract class Interaction
+attributes
+operations
+end
+
+class domainFunction
+attributes
+	name : String
+operations
+end
+
+class transitionAction
+attributes
+	name : String
+operations
+end
+
+abstract class transitionReaction
+attributes
+	name : String
+operations
+end
+
+class transitionReactionSuccess<transitionReaction
+attributes
+operations
+end
+
+class transitionReactionFail<transitionReaction
+attributes
+operations
+end
+
+class transitionNavigation
+attributes
+	name : String
+operations
+end
+
+class navigate<basicInteraction
+attributes
+operations
+end
+
+composition xxx_interfaceModel_interactionSpaces between
+	interfaceModel[0..1] role xxx_interfaceModel_interactionSpaces_src
+	interactionSpace[1..*] role interactionSpaces
+end
+
+composition xxx_interfaceModel_domainFunctions between
+	interfaceModel[0..1] role xxx_interfaceModel_domainFunctions_src
+	domainFunction[1..*] role domainFunctions
+end
+
+composition xxx_interfaceModel_reactions between
+	interfaceModel[0..1] role xxx_interfaceModel_reactions_src
+	transitionReaction[*] role reactions
+end
+
+composition xxx_interfaceModel_actions between
+	interfaceModel[0..1] role xxx_interfaceModel_actions_src
+	transitionAction[*] role actions
+end
+
+composition xxx_interfaceModel_navigations between
+	interfaceModel[0..1] role xxx_interfaceModel_navigations_src
+	transitionNavigation[*] role navigations
+end
+
+composition xxx_interactionSpace_interactions between
+	interactionSpace[0..1] role xxx_interactionSpace_interactions_src
+	Interaction[1..*] role interactions
+end
+
+composition xxx_compositeInteraction_basicInteractions between
+	compositeInteraction[0..1] role xxx_compositeInteraction_basicInteractions_src
+	basicInteraction[1..*] role basicInteractions
+end
+
+composition xxx_compositeInteraction_composites between
+	compositeInteraction[0..1] role xxx_compositeInteraction_composites_src
+	compositeInteraction[*] role composites
+end
+
+association xxx_transitionAction_taFrom between
+	transitionAction[*] role xxx_transitionAction_taFrom_src
+	interactionSpace[1] role taFrom
+end
+
+association xxx_transitionAction_taTo between
+	transitionAction[*] role xxx_transitionAction_taTo_src
+	domainFunction[1] role taTo
+end
+
+association xxx_transitionReaction_trFrom between
+	transitionReaction[*] role xxx_transitionReaction_trFrom_src
+	domainFunction[1] role trFrom
+end
+
+association xxx_transitionReaction_trTo between
+	transitionReaction[*] role xxx_transitionReaction_trTo_src
+	interactionSpace[1] role trTo
+end
+
+association xxx_transitionNavigation_tnFrom between
+	transitionNavigation[*] role xxx_transitionNavigation_tnFrom_src
+	interactionSpace[1] role tnFrom
+end
+
+association xxx_transitionNavigation_tnTo between
+	transitionNavigation[*] role xxx_transitionNavigation_tnTo_src
+	interactionSpace[1] role tnTo
+end
+

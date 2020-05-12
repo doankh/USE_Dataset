@@ -1,0 +1,1042 @@
+model AGATE
+abstract class Entity
+attributes
+operations
+end
+
+abstract class Object<Entity
+attributes
+	id : String
+operations
+end
+
+abstract class AGATEObject<Object
+attributes
+	notice : String
+	description : String
+	sensitivity : Integer
+	name : String
+	comment : String
+operations
+end
+
+class Objective<AGATEObject
+attributes
+	type : String
+	priority : Integer
+	indicator : String
+	traceability : String
+operations
+end
+
+class OperationalContext<AGATEObject
+attributes
+operations
+end
+
+class Project<AGATEObject
+attributes
+operations
+end
+
+class Standard<GenericStandard
+attributes
+operations
+end
+
+abstract class GenericStandard<AGATEObject
+attributes
+operations
+end
+
+class Threat<GenericThreat
+attributes
+	nature : String
+	DCSSI : String
+operations
+end
+
+abstract class GenericThreat<AGATEObject
+attributes
+operations
+end
+
+abstract class Vulnerability
+attributes
+	level : Integer
+operations
+end
+
+class TrafficClass<AGATEObject
+attributes
+operations
+end
+
+abstract class InterfaceCharacteristic<AGATEObject
+attributes
+	type : String
+operations
+end
+
+class ConfidentialityLevel<InterfaceCharacteristic
+attributes
+operations
+end
+
+class Protocol<InterfaceCharacteristic
+attributes
+	isoLevel : Integer
+operations
+end
+
+class Flow<InterfaceCharacteristic
+attributes
+	unit : String
+operations
+end
+
+class Other<InterfaceCharacteristic
+attributes
+operations
+end
+
+class ProjectContextElement<AGATEObject
+attributes
+	type : String
+operations
+end
+
+class DataClass<AGATEObject
+attributes
+operations
+end
+
+class Event<AGATEObject
+attributes
+operations
+end
+
+class Risk<AGATEObject
+attributes
+	disponibilityLevel : Integer
+	integrityLevel : Integer
+	confidencialityLevel : Integer
+operations
+end
+
+class Stake<AGATEObject
+attributes
+	type : String
+	relativeDate : String
+	unit : String
+	date : String
+operations
+end
+
+abstract class Requirement<AGATEObject
+attributes
+	criticality : Integer
+	priority : String
+	state : String
+operations
+end
+
+class CountermeasureRequirement<Requirement
+attributes
+	type : String
+	residualVulnerability : String
+operations
+end
+
+class TechnicalRequirement<Requirement
+attributes
+operations
+end
+
+class PerformanceRequirement<Requirement
+attributes
+operations
+end
+
+class InteroperabilityRequirement<Requirement
+attributes
+operations
+end
+
+class OperationalRequirement<Requirement
+attributes
+operations
+end
+
+class SecurityRequirement<Requirement
+attributes
+operations
+end
+
+abstract class Means<AGATEObject
+attributes
+operations
+end
+
+abstract class DomainRelation<AGATEObject
+attributes
+operations
+end
+
+class HierarchicalRelation<DomainRelation
+attributes
+operations
+end
+
+class FunctionalRelation<DomainRelation
+attributes
+operations
+end
+
+class Dependence<DomainRelation
+attributes
+	type : String
+operations
+end
+
+abstract class ArchitectureObject<AGATEObject
+attributes
+operations
+end
+
+abstract class ReusableObject<ArchitectureObject
+attributes
+	membership : String
+	confidentialityLevel : Integer
+operations
+end
+
+class Site<GenericSite
+attributes
+	type : String
+	localization : String
+operations
+end
+
+abstract class GenericSite<ReusableObject
+attributes
+operations
+end
+
+class Package<ReusableObject
+attributes
+operations
+end
+
+class Service<ReusableObject
+attributes
+	Statut : String
+operations
+end
+
+class TechnicalComponent<ReusableObject
+attributes
+	type : String
+	cots : Boolean
+	editor : Boolean
+	constructor : Boolean
+	version : String
+	technology : String
+	definedExtension : String
+	statut : String
+operations
+end
+
+class LogicalComponent<ReusableObject
+attributes
+	type : String
+	statut : String
+operations
+end
+
+class OperationalFunction<ReusableObject
+attributes
+operations
+end
+
+abstract class OrganizationObject<ReusableObject
+attributes
+operations
+end
+
+class Center<GenericCenter
+attributes
+operations
+end
+
+abstract class GenericCenter<OrganizationObject
+attributes
+operations
+end
+
+class InformationSystem<OrganizationObject
+attributes
+	nature : String
+	version : String
+	membershipCountry : String
+	currentLocation : String
+	startServiceDate : String
+	stopServiceDate : String
+	isGeneric : Boolean
+	functionalDomain : String
+	type : String
+operations
+end
+
+class Role<GenericRole
+attributes
+	type : String
+operations
+end
+
+abstract class GenericRole<OrganizationObject
+attributes
+operations
+end
+
+class Actor<GenericActor
+attributes
+operations
+end
+
+abstract class GenericActor<OrganizationObject
+attributes
+operations
+end
+
+class TelecomOperator<Actor
+attributes
+	contractType : String
+operations
+end
+
+abstract class CommunicationObject<ArchitectureObject
+attributes
+	confidentialityLevel : Integer
+operations
+end
+
+class Interface<CommunicationObject
+attributes
+operations
+end
+
+class Interconnection<CommunicationObject
+attributes
+	linkType : String
+operations
+end
+
+class InformationFlow<CommunicationObject
+attributes
+	priority : Integer
+	frequency : String
+	media : String
+	continuity : String
+	myContainer : String
+	time : String
+	availabilityRatio : String
+	integrity : Integer
+	interoperabilityLevel : Integer
+	mediumFlow : String
+	maximumFlow : String
+	duration : String
+	unitMediumFlow : String
+	averageEvent : String
+	maximumFlowOverOneDuration : String
+operations
+end
+
+class Traffic<CommunicationObject
+attributes
+	sequence : String
+	type : String
+	interoperabilityLevel : Integer
+operations
+end
+
+class Information<CommunicationObject
+attributes
+	format : String
+	storageSupport : String
+	persistence : String
+operations
+end
+
+abstract class ReferenceObject<Object
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ReferenceTechnicalComponent<ReferenceObject
+attributes
+operations
+end
+
+class TechnicalComponentReferenceFrame<ReferenceObject
+attributes
+operations
+end
+
+class ReferenceLogicalComponent<ReferenceObject
+attributes
+operations
+end
+
+class ReferenceService<ReferenceObject
+attributes
+operations
+end
+
+class ServiceReferenceFrame
+attributes
+operations
+end
+
+abstract class MADIOSObject<Object
+attributes
+operations
+end
+
+class Process<MADIOSObject
+attributes
+operations
+end
+
+class Procedure<MADIOSObject
+attributes
+operations
+end
+
+class Operation<MADIOSObject
+attributes
+operations
+end
+
+class Activity<MADIOSObject
+attributes
+operations
+end
+
+association xxx_AGATEObject_isValidIn between
+	AGATEObject[*] role xxx_AGATEObject_isValidIn_src
+	OperationalContext[1] role isValidIn
+end
+
+association xxx_AGATEObject_isAssociatedWith between
+	AGATEObject[*] role xxx_AGATEObject_isAssociatedWith_src
+	Stake[1] role isAssociatedWith
+end
+
+association xxx_Project_moi between
+	Project[*] role xxx_Project_moi_src
+	Role[1] role moi
+end
+
+association xxx_Project_moa between
+	Project[*] role xxx_Project_moa_src
+	Role[1] role moa
+end
+
+association xxx_Project_director between
+	Project[*] role xxx_Project_director_src
+	Role[1] role director
+end
+
+association xxx_Project_defines between
+	Project[0..1] role xxx_Project_defines_src
+	ProjectContextElement[*] role defines
+end
+
+association xxx_Project_associatedISs between
+	Project[0..1] role xxx_Project_associatedISs_src
+	InformationSystem[*] role associatedISs
+end
+
+association xxx_Standard_caracterizeIC between
+	Standard[0..1] role xxx_Standard_caracterizeIC_src
+	InterfaceCharacteristic[*] role caracterizeIC
+end
+
+association xxx_Standard_caracterizeTC between
+	Standard[0..1] role xxx_Standard_caracterizeTC_src
+	TechnicalComponent[*] role caracterizeTC
+end
+
+association xxx_Standard_caracterizeLC between
+	Standard[0..1] role xxx_Standard_caracterizeLC_src
+	LogicalComponent[*] role caracterizeLC
+end
+
+association xxx_Standard_caracterizeP between
+	Standard[0..1] role xxx_Standard_caracterizeP_src
+	Package[*] role caracterizeP
+end
+
+association xxx_Standard_caracterizeR between
+	Standard[0..1] role xxx_Standard_caracterizeR_src
+	Requirement[*] role caracterizeR
+end
+
+composition xxx_GenericStandard_composedOf between
+	GenericStandard[0..1] role xxx_GenericStandard_composedOf_src
+	Standard[*] role composedOf
+end
+
+association xxx_Threat_clarifies between
+	Threat[0..1] role xxx_Threat_clarifies_src
+	Vulnerability[*] role clarifies
+end
+
+composition xxx_GenericThreat_composedBy between
+	GenericThreat[0..1] role xxx_GenericThreat_composedBy_src
+	Threat[*] role composedBy
+end
+
+association xxx_Vulnerability_relatesTo between
+	Vulnerability[*] role xxx_Vulnerability_relatesTo_src
+	Entity[1] role relatesTo
+end
+
+association xxx_TrafficClass_traffic between
+	TrafficClass[0..1] role xxx_TrafficClass_traffic_src
+	Traffic[*] role traffic
+end
+
+association xxx_Risk_isCoveredByCR between
+	Risk[*] role xxx_Risk_isCoveredByCR_src
+	CountermeasureRequirement[1] role isCoveredByCR
+end
+
+association xxx_Risk_isCoveredByAO between
+	Risk[*] role xxx_Risk_isCoveredByAO_src
+	ArchitectureObject[1] role isCoveredByAO
+end
+
+association xxx_Risk_isCoveredByMO between
+	Risk[*] role xxx_Risk_isCoveredByMO_src
+	MADIOSObject[1] role isCoveredByMO
+end
+
+association xxx_Risk_isCoveredByDR between
+	Risk[*] role xxx_Risk_isCoveredByDR_src
+	DomainRelation[1] role isCoveredByDR
+end
+
+association xxx_Risk_relatesToRO between
+	Risk[*] role xxx_Risk_relatesToRO_src
+	ReusableObject[1] role relatesToRO
+end
+
+association xxx_Risk_relatesToCO between
+	Risk[*] role xxx_Risk_relatesToCO_src
+	CommunicationObject[1] role relatesToCO
+end
+
+association xxx_Risk_isGeneratedBy between
+	Risk[*] role xxx_Risk_isGeneratedBy_src
+	Threat[1] role isGeneratedBy
+end
+
+composition xxx_Stake_events between
+	Stake[0..1] role xxx_Stake_events_src
+	Event[*] role events
+end
+
+association xxx_Requirement_isCoveredBy between
+	Requirement[0..1] role xxx_Requirement_isCoveredBy_src
+	ArchitectureObject[*] role isCoveredBy
+end
+
+association xxx_Requirement_characterizes between
+	Requirement[0..1] role xxx_Requirement_characterizes_src
+	ArchitectureObject[*] role characterizes
+end
+
+association xxx_Means_isProvidedBy between
+	Means[*] role xxx_Means_isProvidedBy_src
+	OrganizationObject[1] role isProvidedBy
+end
+
+association xxx_FunctionalRelation_necessaryObjectOF between
+	FunctionalRelation[*] role xxx_FunctionalRelation_necessaryObjectOF_src
+	OperationalFunction[0..1] role necessaryObjectOF
+end
+
+association xxx_FunctionalRelation_dependentObjectOF between
+	FunctionalRelation[*] role xxx_FunctionalRelation_dependentObjectOF_src
+	OperationalFunction[0..1] role dependentObjectOF
+end
+
+association xxx_FunctionalRelation_necessaryObjectOO between
+	FunctionalRelation[*] role xxx_FunctionalRelation_necessaryObjectOO_src
+	OrganizationObject[0..1] role necessaryObjectOO
+end
+
+association xxx_FunctionalRelation_dependentObjectOO between
+	FunctionalRelation[*] role xxx_FunctionalRelation_dependentObjectOO_src
+	OrganizationObject[0..1] role dependentObjectOO
+end
+
+association xxx_FunctionalRelation_necessaryObjectP between
+	FunctionalRelation[*] role xxx_FunctionalRelation_necessaryObjectP_src
+	Package[1] role necessaryObjectP
+end
+
+association xxx_FunctionalRelation_dependentObjectP between
+	FunctionalRelation[*] role xxx_FunctionalRelation_dependentObjectP_src
+	Package[1] role dependentObjectP
+end
+
+association xxx_Dependence_necessaryObjectS between
+	Dependence[*] role xxx_Dependence_necessaryObjectS_src
+	Service[0..1] role necessaryObjectS
+end
+
+association xxx_Dependence_dependentObjectS between
+	Dependence[*] role xxx_Dependence_dependentObjectS_src
+	Service[0..1] role dependentObjectS
+end
+
+association xxx_Dependence_necessaryObjectLC between
+	Dependence[*] role xxx_Dependence_necessaryObjectLC_src
+	LogicalComponent[0..1] role necessaryObjectLC
+end
+
+association xxx_Dependence_dependentObjectLC between
+	Dependence[*] role xxx_Dependence_dependentObjectLC_src
+	LogicalComponent[0..1] role dependentObjectLC
+end
+
+association xxx_Dependence_necessaryObjectP between
+	Dependence[*] role xxx_Dependence_necessaryObjectP_src
+	Package[0..1] role necessaryObjectP
+end
+
+association xxx_Dependence_dependentObjectP between
+	Dependence[*] role xxx_Dependence_dependentObjectP_src
+	Package[0..1] role dependentObjectP
+end
+
+association xxx_Dependence_necessaryObjectC between
+	Dependence[*] role xxx_Dependence_necessaryObjectC_src
+	Center[0..1] role necessaryObjectC
+end
+
+association xxx_Dependence_dependentObjectC between
+	Dependence[*] role xxx_Dependence_dependentObjectC_src
+	Center[0..1] role dependentObjectC
+end
+
+association xxx_Dependence_necessaryObjectIS between
+	Dependence[*] role xxx_Dependence_necessaryObjectIS_src
+	InformationSystem[0..1] role necessaryObjectIS
+end
+
+association xxx_Dependence_dependentObjectIS between
+	Dependence[*] role xxx_Dependence_dependentObjectIS_src
+	InformationSystem[0..1] role dependentObjectIS
+end
+
+association xxx_ReusableObject_belongsTo between
+	ReusableObject[*] role xxx_ReusableObject_belongsTo_src
+	Entity[0..1] role belongsTo
+end
+
+association xxx_ReusableObject_isAttachedToIS between
+	ReusableObject[*] role xxx_ReusableObject_isAttachedToIS_src
+	InformationSystem[0..1] role isAttachedToIS
+end
+
+association xxx_ReusableObject_isAttachedToA between
+	ReusableObject[*] role xxx_ReusableObject_isAttachedToA_src
+	Actor[0..1] role isAttachedToA
+end
+
+association xxx_ReusableObject_isA between
+	ReusableObject[*] role xxx_ReusableObject_isA_src
+	Means[0..1] role isA
+end
+
+composition xxx_Site_deployedObjects between
+	Site[0..1] role xxx_Site_deployedObjects_src
+	ReusableObject[*] role deployedObjects
+end
+
+composition xxx_GenericSite_composedOf between
+	GenericSite[0..1] role xxx_GenericSite_composedOf_src
+	Site[*] role composedOf
+end
+
+composition xxx_Package_subPackage between
+	Package[0..1] role xxx_Package_subPackage_src
+	Package[*] role subPackage
+end
+
+association xxx_Package_time between
+	Package[0..1] role xxx_Package_time_src
+	Role[*] role time
+end
+
+composition xxx_Package_groupedObjects between
+	Package[0..1] role xxx_Package_groupedObjects_src
+	ReusableObject[*] role groupedObjects
+end
+
+association xxx_Package_isCoveredByLC between
+	Package[*] role xxx_Package_isCoveredByLC_src
+	LogicalComponent[1] role isCoveredByLC
+end
+
+association xxx_Package_isCoveredByTC between
+	Package[*] role xxx_Package_isCoveredByTC_src
+	TechnicalComponent[1] role isCoveredByTC
+end
+
+association xxx_Package_composedOf between
+	Package[0..1] role xxx_Package_composedOf_src
+	Interface[*] role composedOf
+end
+
+association xxx_Service_isASpecializationOf between
+	Service[*] role xxx_Service_isASpecializationOf_src
+	ReferenceService[1] role isASpecializationOf
+end
+
+association xxx_Service_isCoveredBy between
+	Service[*] role xxx_Service_isCoveredBy_src
+	LogicalComponent[1] role isCoveredBy
+end
+
+composition xxx_TechnicalComponent_composedOf between
+	TechnicalComponent[0..1] role xxx_TechnicalComponent_composedOf_src
+	TechnicalComponent[*] role composedOf
+end
+
+association xxx_TechnicalComponent_isASpecializationOf between
+	TechnicalComponent[*] role xxx_TechnicalComponent_isASpecializationOf_src
+	ReferenceTechnicalComponent[1] role isASpecializationOf
+end
+
+composition xxx_TechnicalComponent_interfaces between
+	TechnicalComponent[0..1] role xxx_TechnicalComponent_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_LogicalComponent_composedOf between
+	LogicalComponent[0..1] role xxx_LogicalComponent_composedOf_src
+	LogicalComponent[*] role composedOf
+end
+
+association xxx_LogicalComponent_isASpecializationOf between
+	LogicalComponent[*] role xxx_LogicalComponent_isASpecializationOf_src
+	ReferenceLogicalComponent[1] role isASpecializationOf
+end
+
+composition xxx_LogicalComponent_interfaces between
+	LogicalComponent[0..1] role xxx_LogicalComponent_interfaces_src
+	Interface[*] role interfaces
+end
+
+association xxx_LogicalComponent_isCoveredBy between
+	LogicalComponent[*] role xxx_LogicalComponent_isCoveredBy_src
+	TechnicalComponent[1] role isCoveredBy
+end
+
+composition xxx_OperationalFunction_composedOf between
+	OperationalFunction[0..1] role xxx_OperationalFunction_composedOf_src
+	OperationalFunction[*] role composedOf
+end
+
+association xxx_OperationalFunction_isCoveredByP between
+	OperationalFunction[0..1] role xxx_OperationalFunction_isCoveredByP_src
+	Package[*] role isCoveredByP
+end
+
+association xxx_OperationalFunction_isCoveredByS between
+	OperationalFunction[0..1] role xxx_OperationalFunction_isCoveredByS_src
+	Service[*] role isCoveredByS
+end
+
+association xxx_OrganizationObject_time between
+	OrganizationObject[0..1] role xxx_OrganizationObject_time_src
+	Role[*] role time
+end
+
+association xxx_OrganizationObject_subordinate between
+	OrganizationObject[*] role xxx_OrganizationObject_subordinate_src
+	HierarchicalRelation[1] role subordinate
+end
+
+association xxx_OrganizationObject_superior between
+	OrganizationObject[*] role xxx_OrganizationObject_superior_src
+	HierarchicalRelation[1] role superior
+end
+
+composition xxx_Center_deployedObjects between
+	Center[0..1] role xxx_Center_deployedObjects_src
+	ReusableObject[*] role deployedObjects
+end
+
+composition xxx_GenericCenter_centers between
+	GenericCenter[0..1] role xxx_GenericCenter_centers_src
+	Center[*] role centers
+end
+
+composition xxx_InformationSystem_composedOf between
+	InformationSystem[0..1] role xxx_InformationSystem_composedOf_src
+	InformationSystem[*] role composedOf
+end
+
+association xxx_InformationSystem_associatedProjects between
+	InformationSystem[0..1] role xxx_InformationSystem_associatedProjects_src
+	Project[*] role associatedProjects
+end
+
+composition xxx_InformationSystem_defines between
+	InformationSystem[0..1] role xxx_InformationSystem_defines_src
+	Objective[*] role defines
+end
+
+association xxx_InformationSystem_fulfills between
+	InformationSystem[0..1] role xxx_InformationSystem_fulfills_src
+	Role[*] role fulfills
+end
+
+association xxx_InformationSystem_fixes between
+	InformationSystem[0..1] role xxx_InformationSystem_fixes_src
+	OperationalContext[*] role fixes
+end
+
+association xxx_InformationSystem_usedBy between
+	InformationSystem[0..1] role xxx_InformationSystem_usedBy_src
+	Actor[*] role usedBy
+end
+
+composition xxx_InformationSystem_interfaces between
+	InformationSystem[0..1] role xxx_InformationSystem_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_GenericRole_roles between
+	GenericRole[0..1] role xxx_GenericRole_roles_src
+	Role[*] role roles
+end
+
+composition xxx_GenericActor_actors between
+	GenericActor[0..1] role xxx_GenericActor_actors_src
+	Actor[*] role actors
+end
+
+composition xxx_TelecomOperator_interfaces between
+	TelecomOperator[0..1] role xxx_TelecomOperator_interfaces_src
+	Interface[*] role interfaces
+end
+
+association xxx_CommunicationObject_belongsTo between
+	CommunicationObject[*] role xxx_CommunicationObject_belongsTo_src
+	Entity[0..1] role belongsTo
+end
+
+composition xxx_Interface_characteristics between
+	Interface[0..1] role xxx_Interface_characteristics_src
+	InterfaceCharacteristic[*] role characteristics
+end
+
+composition xxx_Interface_composedOf between
+	Interface[0..1] role xxx_Interface_composedOf_src
+	Interface[*] role composedOf
+end
+
+association xxx_Interconnection_between between
+	Interconnection[*] role xxx_Interconnection_between_src
+	Interface[2] role between_
+end
+
+association xxx_InformationFlow_transports between
+	InformationFlow[*] role xxx_InformationFlow_transports_src
+	Information[1] role transports
+end
+
+association xxx_InformationFlow_receiverP between
+	InformationFlow[*] role xxx_InformationFlow_receiverP_src
+	Package[1] role receiverP
+end
+
+association xxx_InformationFlow_transmitterP between
+	InformationFlow[*] role xxx_InformationFlow_transmitterP_src
+	Package[1] role transmitterP
+end
+
+association xxx_InformationFlow_receiverOO between
+	InformationFlow[*] role xxx_InformationFlow_receiverOO_src
+	OrganizationObject[1] role receiverOO
+end
+
+association xxx_InformationFlow_transmitterOO between
+	InformationFlow[*] role xxx_InformationFlow_transmitterOO_src
+	OrganizationObject[1] role transmitterOO
+end
+
+association xxx_InformationFlow_receiverOF between
+	InformationFlow[*] role xxx_InformationFlow_receiverOF_src
+	OperationalFunction[1] role receiverOF
+end
+
+association xxx_InformationFlow_transmitterOF between
+	InformationFlow[*] role xxx_InformationFlow_transmitterOF_src
+	OperationalFunction[1] role transmitterOF
+end
+
+association xxx_Traffic_trafficClass between
+	Traffic[*] role xxx_Traffic_trafficClass_src
+	TrafficClass[1] role trafficClass
+end
+
+association xxx_Traffic_dataClass between
+	Traffic[*] role xxx_Traffic_dataClass_src
+	DataClass[1] role dataClass
+end
+
+association xxx_Traffic_receiverP between
+	Traffic[*] role xxx_Traffic_receiverP_src
+	Package[0..1] role receiverP
+end
+
+association xxx_Traffic_transmitterP between
+	Traffic[*] role xxx_Traffic_transmitterP_src
+	Package[0..1] role transmitterP
+end
+
+association xxx_Traffic_receiverIS between
+	Traffic[*] role xxx_Traffic_receiverIS_src
+	InformationSystem[0..1] role receiverIS
+end
+
+association xxx_Traffic_transmitterIS between
+	Traffic[*] role xxx_Traffic_transmitterIS_src
+	InformationSystem[0..1] role transmitterIS
+end
+
+association xxx_Traffic_receiverC between
+	Traffic[*] role xxx_Traffic_receiverC_src
+	Center[0..1] role receiverC
+end
+
+association xxx_Traffic_transmitterC between
+	Traffic[*] role xxx_Traffic_transmitterC_src
+	Center[0..1] role transmitterC
+end
+
+association xxx_Traffic_receiverTO between
+	Traffic[*] role xxx_Traffic_receiverTO_src
+	TelecomOperator[0..1] role receiverTO
+end
+
+association xxx_Traffic_transmitterTO between
+	Traffic[*] role xxx_Traffic_transmitterTO_src
+	TelecomOperator[0..1] role transmitterTO
+end
+
+association xxx_Traffic_receiverLC between
+	Traffic[*] role xxx_Traffic_receiverLC_src
+	LogicalComponent[0..1] role receiverLC
+end
+
+association xxx_Traffic_transmitterLC between
+	Traffic[*] role xxx_Traffic_transmitterLC_src
+	LogicalComponent[0..1] role transmitterLC
+end
+
+association xxx_Traffic_receiverTC between
+	Traffic[*] role xxx_Traffic_receiverTC_src
+	TechnicalComponent[0..1] role receiverTC
+end
+
+association xxx_Traffic_transmitterTC between
+	Traffic[*] role xxx_Traffic_transmitterTC_src
+	TechnicalComponent[0..1] role transmitterTC
+end
+
+association xxx_Information_DataType between
+	Information[*] role xxx_Information_DataType_src
+	DataClass[0..1] role DataType
+end
+
+association xxx_ReferenceTechnicalComponent_composedOf between
+	ReferenceTechnicalComponent[0..1] role xxx_ReferenceTechnicalComponent_composedOf_src
+	ReferenceTechnicalComponent[*] role composedOf
+end
+
+association xxx_TechnicalComponentReferenceFrame_composedOf between
+	TechnicalComponentReferenceFrame[0..1] role xxx_TechnicalComponentReferenceFrame_composedOf_src
+	ReferenceTechnicalComponent[*] role composedOf
+end
+
+composition xxx_ReferenceLogicalComponent_composedOf between
+	ReferenceLogicalComponent[0..1] role xxx_ReferenceLogicalComponent_composedOf_src
+	ReferenceLogicalComponent[*] role composedOf
+end
+
+composition xxx_ReferenceService_composedOf between
+	ReferenceService[0..1] role xxx_ReferenceService_composedOf_src
+	ReferenceObject[*] role composedOf
+end
+
+composition xxx_ServiceReferenceFrame_composedOfRS between
+	ServiceReferenceFrame[0..1] role xxx_ServiceReferenceFrame_composedOfRS_src
+	ReferenceService[*] role composedOfRS
+end
+
+composition xxx_ServiceReferenceFrame_composedOfRLC between
+	ServiceReferenceFrame[0..1] role xxx_ServiceReferenceFrame_composedOfRLC_src
+	ReferenceLogicalComponent[*] role composedOfRLC
+end
+
+association xxx_Process_isCoveredByP between
+	Process[0..1] role xxx_Process_isCoveredByP_src
+	Package[*] role isCoveredByP
+end
+
+association xxx_Process_isCoveredByS between
+	Process[0..1] role xxx_Process_isCoveredByS_src
+	Service[*] role isCoveredByS
+end
+
+association xxx_Procedure_isCoveredByP between
+	Procedure[0..1] role xxx_Procedure_isCoveredByP_src
+	Package[*] role isCoveredByP
+end
+
+association xxx_Procedure_isCoveredByS between
+	Procedure[0..1] role xxx_Procedure_isCoveredByS_src
+	Service[*] role isCoveredByS
+end
+
+association xxx_Operation_isCoveredByP between
+	Operation[0..1] role xxx_Operation_isCoveredByP_src
+	Package[*] role isCoveredByP
+end
+
+association xxx_Operation_isCoveredByS between
+	Operation[0..1] role xxx_Operation_isCoveredByS_src
+	Service[*] role isCoveredByS
+end
+
+association xxx_Activity_isCoveredByP between
+	Activity[0..1] role xxx_Activity_isCoveredByP_src
+	Package[*] role isCoveredByP
+end
+
+association xxx_Activity_isisCoveredByS between
+	Activity[0..1] role xxx_Activity_isisCoveredByS_src
+	Service[*] role isisCoveredByS
+end
+

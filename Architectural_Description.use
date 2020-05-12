@@ -1,0 +1,81 @@
+model ArchitecturalDescription
+class Architecture
+attributes
+operations
+end
+
+class ArchitectureDescription
+attributes
+operations
+end
+
+class ArchitectureView
+attributes
+operations
+end
+
+class ArchitectureViewPoint
+attributes
+operations
+end
+
+class MainView
+attributes
+operations
+end
+
+class ModelElement
+attributes
+operations
+end
+
+association xxx_Architecture_describedBy between
+	Architecture[*] role xxx_Architecture_describedBy_src
+	ArchitectureDescription[1] role describedBy
+end
+
+association xxx_ArchitectureDescription_selects between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_selects_src
+	ArchitectureView[1..*] role selects
+end
+
+composition xxx_ArchitectureDescription_organizedBy between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_organizedBy_src
+	ArchitectureView[1..*] role organizedBy
+end
+
+association xxx_ArchitectureView_selectedBy between
+	ArchitectureView[0..1] role xxx_ArchitectureView_selectedBy_src
+	ArchitectureDescription[1..*] role selectedBy
+end
+
+composition xxx_ArchitectureView_constituents between
+	ArchitectureView[0..1] role xxx_ArchitectureView_constituents_src
+	ModelElement[1..*] role constituents
+end
+
+association xxx_ArchitectureView_conformsTo between
+	ArchitectureView[0..1] role xxx_ArchitectureView_conformsTo_src
+	ArchitectureViewPoint[1..*] role conformsTo
+end
+
+association xxx_ArchitectureViewPoint_defines between
+	ArchitectureViewPoint[*] role xxx_ArchitectureViewPoint_defines_src
+	MainView[1] role defines
+end
+
+association xxx_ArchitectureViewPoint_views between
+	ArchitectureViewPoint[0..1] role xxx_ArchitectureViewPoint_views_src
+	ArchitectureView[1..*] role views
+end
+
+association xxx_MainView_isProjectedOnto between
+	MainView[0..1] role xxx_MainView_isProjectedOnto_src
+	ArchitectureView[1..*] role isProjectedOnto
+end
+
+composition xxx_MainView_consistsOf between
+	MainView[0..1] role xxx_MainView_consistsOf_src
+	ModelElement[1..*] role consistsOf
+end
+

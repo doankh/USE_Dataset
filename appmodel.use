@@ -1,0 +1,62 @@
+model appmodel
+class Application
+attributes
+	name : String
+operations
+end
+
+class Dialog
+attributes
+	name : String
+operations
+end
+
+class DataObject
+attributes
+	name : String
+operations
+end
+
+class Role
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	exclude : Boolean
+operations
+end
+
+composition xxx_Application_Contains between
+	Application[0..1] role xxx_Application_Contains_src
+	Dialog[*] role Contains
+end
+
+composition xxx_Application_Attaches between
+	Application[0..1] role xxx_Application_Attaches_src
+	DataObject[*] role Attaches
+end
+
+composition xxx_Dialog_Activates between
+	Dialog[0..1] role xxx_Dialog_Activates_src
+	Dialog[*] role Activates
+end
+
+composition xxx_Dialog_Attaches between
+	Dialog[0..1] role xxx_Dialog_Attaches_src
+	DataObject[*] role Attaches
+end
+
+association xxx_DataObject_Contains between
+	DataObject[*] role xxx_DataObject_Contains_src
+	Role[0..1] role Contains
+end
+
+composition xxx_Role_Overrides between
+	Role[0..1] role xxx_Role_Overrides_src
+	Attribute[*] role Overrides
+end
+

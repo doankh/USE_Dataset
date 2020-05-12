@@ -1,0 +1,183 @@
+model atl2javamm
+class Rule
+attributes
+	name : String
+operations
+end
+
+class Transformation
+attributes
+	name : String
+operations
+end
+
+class InputPattern
+attributes
+operations
+end
+
+class OutputPattern
+attributes
+operations
+end
+
+class InputPatternElement
+attributes
+	name : String
+	type : String
+operations
+end
+
+class OutputPatternElement
+attributes
+	name : String
+	type : String
+operations
+end
+
+abstract class Binding
+attributes
+	feature : String
+operations
+end
+
+abstract class Model
+attributes
+	path : String
+	name : String
+	metamodel : String
+operations
+end
+
+class PrimitiveBinding<Binding
+attributes
+	value : String
+operations
+end
+
+class NavigationBinding<Binding
+attributes
+	value : String
+operations
+end
+
+class OutputpatternElementBinding<Binding
+attributes
+operations
+end
+
+class ResolveBinding<NavigationBinding
+attributes
+operations
+end
+
+class SourceModel<Model
+attributes
+operations
+end
+
+class TargetModel<Model
+attributes
+operations
+end
+
+association xxx_Rule_transformation between
+	Rule[*] role xxx_Rule_transformation_src
+	Transformation[1] role transformation
+end
+
+composition xxx_Rule_inputPattern between
+	Rule[*] role xxx_Rule_inputPattern_src
+	InputPattern[1] role inputPattern
+end
+
+composition xxx_Rule_outputPattern between
+	Rule[*] role xxx_Rule_outputPattern_src
+	OutputPattern[1] role outputPattern
+end
+
+composition xxx_Transformation_rules between
+	Transformation[0..1] role xxx_Transformation_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Transformation_sourceModel between
+	Transformation[*] role xxx_Transformation_sourceModel_src
+	SourceModel[1] role sourceModel
+end
+
+composition xxx_Transformation_targetModel between
+	Transformation[*] role xxx_Transformation_targetModel_src
+	TargetModel[1] role targetModel
+end
+
+composition xxx_InputPattern_inputPatternElements between
+	InputPattern[0..1] role xxx_InputPattern_inputPatternElements_src
+	InputPatternElement[*] role inputPatternElements
+end
+
+association xxx_InputPattern_rule between
+	InputPattern[*] role xxx_InputPattern_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_OutputPattern_outputPatternElements between
+	OutputPattern[0..1] role xxx_OutputPattern_outputPatternElements_src
+	OutputPatternElement[*] role outputPatternElements
+end
+
+association xxx_OutputPattern_rule between
+	OutputPattern[*] role xxx_OutputPattern_rule_src
+	Rule[1] role rule
+end
+
+association xxx_InputPatternElement_inputPattern between
+	InputPatternElement[*] role xxx_InputPatternElement_inputPattern_src
+	InputPattern[1] role inputPattern
+end
+
+association xxx_InputPatternElement_metamodel between
+	InputPatternElement[*] role xxx_InputPatternElement_metamodel_src
+	SourceModel[1] role metamodel
+end
+
+association xxx_OutputPatternElement_ouputPattern between
+	OutputPatternElement[*] role xxx_OutputPatternElement_ouputPattern_src
+	OutputPattern[1] role ouputPattern
+end
+
+composition xxx_OutputPatternElement_bindings between
+	OutputPatternElement[0..1] role xxx_OutputPatternElement_bindings_src
+	Binding[*] role bindings
+end
+
+association xxx_OutputPatternElement_metamodel between
+	OutputPatternElement[*] role xxx_OutputPatternElement_metamodel_src
+	TargetModel[1] role metamodel
+end
+
+association xxx_Binding_outputPatternElement between
+	Binding[*] role xxx_Binding_outputPatternElement_src
+	OutputPatternElement[1] role outputPatternElement
+end
+
+association xxx_NavigationBinding_inputPatternElement between
+	NavigationBinding[*] role xxx_NavigationBinding_inputPatternElement_src
+	InputPatternElement[1] role inputPatternElement
+end
+
+association xxx_OutputpatternElementBinding_value between
+	OutputpatternElementBinding[*] role xxx_OutputpatternElementBinding_value_src
+	OutputPatternElement[1] role value
+end
+
+association xxx_SourceModel_transformation between
+	SourceModel[*] role xxx_SourceModel_transformation_src
+	Transformation[1] role transformation
+end
+
+association xxx_TargetModel_transformation between
+	TargetModel[*] role xxx_TargetModel_transformation_src
+	Transformation[1] role transformation
+end
+

@@ -1,0 +1,34 @@
+model aBase
+enum BOOLEAN{
+default
+}
+
+class Value
+attributes
+operations
+end
+
+class IntValue<Value
+attributes
+	value : String
+operations
+end
+
+class RealValue<Value
+attributes
+	value : String
+operations
+end
+
+class StringValue<Value
+attributes
+	value : String
+operations
+end
+
+class BooleanValue<Value
+attributes
+	value : BOOLEAN
+operations
+end
+

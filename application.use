@@ -1,0 +1,330 @@
+model application
+enum SourceState{
+default
+}
+
+enum SourceActiveStates{
+default
+}
+
+enum PropertyTypes{
+default
+}
+
+class Source<ConfigurableElement
+attributes
+	bundleId : String
+	state : SourceState
+	activeState : SourceActiveStates
+	logLevel : String
+	removeDataOnStop : String
+	updateRound : Integer
+operations
+	getLogLevelIntValue():Integer
+	start()
+	stop()
+	pause()
+end
+
+class Mashup<Source
+attributes
+	workingDirectory : String
+	cacheAttachments : String
+	cacheDataSet : String
+	backupDataSet : String
+	backupIntervall : Integer
+	cacheDelay : Integer
+	sourceIdentCounter : Integer
+operations
+	getNewSourceIdent():Integer
+	getSourceWithIdent(ident : String):Source
+end
+
+class MappingRule
+attributes
+operations
+end
+
+class Configuration
+attributes
+operations
+end
+
+class Persistency
+attributes
+operations
+end
+
+class XMLFile<Persistency
+attributes
+operations
+end
+
+class Database<Persistency
+attributes
+operations
+end
+
+class Property
+attributes
+	Key : String
+	Value : String
+	hidden : String
+	changeable : String
+	possibleValues : String
+	helpText : String
+	required : String
+	propertyType : PropertyTypes
+operations
+	isValueList():Boolean
+	isValueRange():Boolean
+	getListOfValues():String
+	getMinValue():String
+	getMaxValue():String
+end
+
+class OCLRestrictedProperty<Property
+attributes
+	OCLRestriction : String
+operations
+end
+
+class MashupContainer
+attributes
+	backupConfiguration : String
+	backupIntervall : Integer
+	immediateSave : String
+	createAccountsAtLoginTry : String
+	identCounter : Integer
+operations
+	getConfigurationAdmins():MashupAdmin
+	setNewIdentFor(configurableElement : ConfigurableElement)
+	getNewIdentNumber():Integer
+	getMashupWithIdent(ident : String):Mashup
+	getSourceConfigurationWithIdent(ident : String):Source
+end
+
+class Interface<ConfigurableElement
+attributes
+	urlSuffix : String
+	frontEndCaching : String
+operations
+end
+
+class RESTInterface<Interface
+attributes
+	type : String
+operations
+end
+
+class FEEDInterface<Interface
+attributes
+	allowPersonFiltering : String
+	allowOrganisationFiltering : String
+	allowTypeFiltering : String
+	allowTagFiltering : String
+	allowMetaTagFiltering : String
+	allowCategoryFiltering : String
+	language : String
+	feedType : String
+	feedTitle : String
+operations
+end
+
+abstract class Security
+attributes
+operations
+end
+
+class OAuthConfig<Security
+attributes
+	useScopeInterfaceOnRedirect : String
+operations
+end
+
+class ApplicationKeyConfig<Security
+attributes
+	applicationKeys : String
+operations
+	hasApplicationKey(applicationKey : String):String
+end
+
+class OAuthClientConfig
+attributes
+	type : String
+	redirectionURL : String
+	name : String
+	description : String
+	clientID : String
+	clientSecret : String
+	code : String
+	grantType : String
+	refreshToken : String
+	accessToken : String
+	accessTokenCreationDate : String
+	accessTokenExpirationDate : String
+	forbiddenMetaTags : String
+	allowedMetaTags : String
+	oAuthScopeLevel : Integer
+operations
+end
+
+class OAuthAdmin
+attributes
+	username : String
+	passwordHash : String
+operations
+end
+
+class OAuthClientScope
+attributes
+	positiveTag : String
+	negativeTag : String
+	positiveMetaTag : String
+	negativeMetaTag : String
+	positiveCategory : String
+	negativeCategory : String
+	positivePerson : String
+	negativePerson : String
+	positiveOrganisation : String
+	negativeOrganisation : String
+	identSpecification : String
+	allowPersons : String
+	allowContents : String
+	allowOrganisations : String
+	maximumAge : String
+operations
+end
+
+class MashupAdmin
+attributes
+	provider : String
+	id : String
+	name : String
+	localIdent : String
+	isConfigurationAdmin : String
+	profileImage : String
+	email : String
+operations
+end
+
+abstract class ConfigurableElement
+attributes
+	name : String
+	configurationImage : String
+	description : String
+	changeable : String
+	hidden : String
+	ident : String
+operations
+	getProperty(key : String):Property
+	addProperty(key : String,value : String)
+	addProperty1(property : Property)
+	getPropertyValue(key : String):String
+	isPropertyTrue(key : String):Boolean
+	getPropertyValueElseDefault(key : String,defaultValue : String):String
+	isPropertyTrueElseDefault(key : String,defaultValue : String):Boolean
+	removeProperty(key : String)
+end
+
+composition xxx_Source_persistency between
+	Source[*] role xxx_Source_persistency_src
+	Persistency[0..1] role persistency
+end
+
+
+association xxx_Source_mashup between
+	Source[*] role xxx_Source_mashup_src
+	Mashup[0..1] role mashup
+end
+
+composition xxx_Mashup_mappingRules between
+	Mashup[0..1] role xxx_Mashup_mappingRules_src
+	MappingRule[*] role mappingRules
+end
+
+composition xxx_Mashup_sources between
+	Mashup[0..1] role xxx_Mashup_sources_src
+	Source[*] role sources
+end
+
+composition xxx_Mashup_interfaces between
+	Mashup[0..1] role xxx_Mashup_interfaces_src
+	Interface[*] role interfaces
+end
+
+association xxx_Mashup_mashupAdmins between
+	Mashup[0..1] role xxx_Mashup_mashupAdmins_src
+	MashupAdmin[*] role mashupAdmins
+end
+
+composition xxx_Configuration_properties between
+	Configuration[0..1] role xxx_Configuration_properties_src
+	Property[*] role properties
+end
+
+composition xxx_MashupContainer_mashups between
+	MashupContainer[0..1] role xxx_MashupContainer_mashups_src
+	Mashup[*] role mashups
+end
+
+composition xxx_MashupContainer_allMashupAdmins between
+	MashupContainer[0..1] role xxx_MashupContainer_allMashupAdmins_src
+	MashupAdmin[*] role allMashupAdmins
+end
+
+composition xxx_MashupContainer_defaultMashups between
+	MashupContainer[0..1] role xxx_MashupContainer_defaultMashups_src
+	Mashup[*] role defaultMashups
+end
+
+composition xxx_MashupContainer_sourceConfigurations between
+	MashupContainer[0..1] role xxx_MashupContainer_sourceConfigurations_src
+	Mashup[*] role sourceConfigurations
+end
+
+composition xxx_MashupContainer_interfaceConfigurations between
+	MashupContainer[0..1] role xxx_MashupContainer_interfaceConfigurations_src
+	Interface[*] role interfaceConfigurations
+end
+
+composition xxx_Interface_security between
+	Interface[*] role xxx_Interface_security_src
+	Security[0..1] role security
+end
+
+association xxx_Interface_mashup between
+	Interface[*] role xxx_Interface_mashup_src
+	Mashup[0..1] role mashup
+end
+
+association xxx_Security_interface between
+	Security[*] role xxx_Security_interface_src
+	Interface[0..1] role interface
+end
+
+composition xxx_OAuthConfig_clients between
+	OAuthConfig[0..1] role xxx_OAuthConfig_clients_src
+	OAuthClientConfig[*] role clients
+end
+
+composition xxx_OAuthConfig_admins between
+	OAuthConfig[0..1] role xxx_OAuthConfig_admins_src
+	OAuthAdmin[*] role admins
+end
+
+composition xxx_OAuthClientConfig_clientScope between
+	OAuthClientConfig[*] role xxx_OAuthClientConfig_clientScope_src
+	OAuthClientScope[0..1] role clientScope
+end
+
+association xxx_MashupAdmin_configurableMashups between
+	MashupAdmin[0..1] role xxx_MashupAdmin_configurableMashups_src
+	Mashup[*] role configurableMashups
+end
+
+composition xxx_ConfigurableElement_configuration between
+	ConfigurableElement[*] role xxx_ConfigurableElement_configuration_src
+	Configuration[1] role configuration
+end
+

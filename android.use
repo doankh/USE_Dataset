@@ -1,0 +1,251 @@
+model android
+enum LayoutType{
+default
+}
+
+enum InputType{
+default
+}
+
+enum ActionType{
+default
+}
+
+enum Length{
+default
+}
+
+enum Permissions{
+default
+}
+
+enum TypeAction{
+default
+}
+
+class Layout
+attributes
+	name : String
+	type : LayoutType
+operations
+end
+
+class Widget
+attributes
+	name : String
+	text : String
+	id : String
+operations
+end
+
+class Button<Widget
+attributes
+operations
+end
+
+class TextField<Widget
+attributes
+	input : InputType
+operations
+end
+
+class TextView<Widget
+attributes
+operations
+end
+
+class Aplication
+attributes
+	name : String
+	package : String
+	minSDK : Integer
+	targetSDK : Integer
+	versionCode : String
+	versionName : String
+	permissions : Permissions
+operations
+end
+
+class CreateString
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Activity
+attributes
+	name : String
+	package : String
+	main : Boolean
+operations
+end
+
+class Menu
+attributes
+	id : String
+operations
+end
+
+class Item
+attributes
+	tittle : String
+	order : Integer
+	showAsAction : TypeAction
+	id : String
+operations
+end
+
+class Action
+attributes
+	type : ActionType
+operations
+end
+
+class Dialog
+attributes
+	time : Length
+	text : String
+operations
+end
+
+class MetaApp
+attributes
+operations
+end
+
+association xxx_Layout_contains between
+	Layout[0..1] role xxx_Layout_contains_src
+	Widget[*] role contains
+end
+
+association xxx_Layout_layOn between
+	Layout[*] role xxx_Layout_layOn_src
+	Aplication[1] role layOn
+end
+
+association xxx_Layout_esMostrado between
+	Layout[0..1] role xxx_Layout_esMostrado_src
+	Activity[*] role esMostrado
+end
+
+association xxx_Widget_layoutOwner between
+	Widget[*] role xxx_Widget_layoutOwner_src
+	Layout[1] role layoutOwner
+end
+
+association xxx_Button_triggers between
+	Button[0..1] role xxx_Button_triggers_src
+	Action[*] role triggers
+end
+
+association xxx_Aplication_contains between
+	Aplication[0..1] role xxx_Aplication_contains_src
+	Layout[*] role contains
+end
+
+association xxx_Aplication_creates between
+	Aplication[0..1] role xxx_Aplication_creates_src
+	CreateString[*] role creates
+end
+
+association xxx_Aplication_run between
+	Aplication[0..1] role xxx_Aplication_run_src
+	Activity[*] role run
+end
+
+association xxx_CreateString_stored between
+	CreateString[*] role xxx_CreateString_stored_src
+	Aplication[1] role stored
+end
+
+association xxx_Activity_show between
+	Activity[*] role xxx_Activity_show_src
+	Menu[0..1] role show
+end
+
+association xxx_Activity_runsIn between
+	Activity[*] role xxx_Activity_runsIn_src
+	Aplication[1] role runsIn
+end
+
+association xxx_Activity_muestra between
+	Activity[*] role xxx_Activity_muestra_src
+	Layout[1] role muestra
+end
+
+association xxx_Menu_isShowed between
+	Menu[*] role xxx_Menu_isShowed_src
+	Activity[1] role isShowed
+end
+
+association xxx_Menu_hasItem between
+	Menu[0..1] role xxx_Menu_hasItem_src
+	Item[*] role hasItem
+end
+
+association xxx_Item_menuOwner between
+	Item[*] role xxx_Item_menuOwner_src
+	Menu[1] role menuOwner
+end
+
+association xxx_Action_buttonOwner between
+	Action[*] role xxx_Action_buttonOwner_src
+	Button[1] role buttonOwner
+end
+
+association xxx_Action_shows between
+	Action[*] role xxx_Action_shows_src
+	Dialog[1] role shows
+end
+
+association xxx_Dialog_actionOwner between
+	Dialog[*] role xxx_Dialog_actionOwner_src
+	Action[1] role actionOwner
+end
+
+composition xxx_MetaApp_createApp between
+	MetaApp[*] role xxx_MetaApp_createApp_src
+	Aplication[0..1] role createApp
+end
+
+composition xxx_MetaApp_createActivity between
+	MetaApp[0..1] role xxx_MetaApp_createActivity_src
+	Activity[*] role createActivity
+end
+
+composition xxx_MetaApp_createMenu between
+	MetaApp[0..1] role xxx_MetaApp_createMenu_src
+	Menu[*] role createMenu
+end
+
+composition xxx_MetaApp_create_String between
+	MetaApp[0..1] role xxx_MetaApp_create_String_src
+	CreateString[*] role create_String
+end
+
+composition xxx_MetaApp_createLayout between
+	MetaApp[0..1] role xxx_MetaApp_createLayout_src
+	Layout[*] role createLayout
+end
+
+composition xxx_MetaApp_createItem between
+	MetaApp[0..1] role xxx_MetaApp_createItem_src
+	Item[*] role createItem
+end
+
+composition xxx_MetaApp_createWidget between
+	MetaApp[0..1] role xxx_MetaApp_createWidget_src
+	Widget[*] role createWidget
+end
+
+composition xxx_MetaApp_createAction between
+	MetaApp[0..1] role xxx_MetaApp_createAction_src
+	Action[*] role createAction
+end
+
+composition xxx_MetaApp_createDialog between
+	MetaApp[0..1] role xxx_MetaApp_createDialog_src
+	Dialog[*] role createDialog
+end
+

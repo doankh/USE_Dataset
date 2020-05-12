@@ -1,0 +1,499 @@
+model arduino
+enum Time{
+default
+}
+
+enum BinaryIntegerOperatorKind{
+default
+}
+
+enum BinaryBooleanOperatorKind{
+default
+}
+
+enum UnaryIntegerOperatorKind{
+default
+}
+
+enum UnaryBooleanOperatorKind{
+default
+}
+
+enum Color{
+default
+}
+
+abstract class Board<NamedElement
+attributes
+operations
+end
+
+abstract class Module<NamedElement
+attributes
+operations
+end
+
+class DigitalPin<Pin
+attributes
+operations
+end
+
+abstract class Pin<NamedElement
+attributes
+	level : String
+operations
+end
+
+class AnalogPin<Pin
+attributes
+operations
+end
+
+class Sketch<NamedElement
+attributes
+operations
+end
+
+class Project
+attributes
+operations
+	execute()
+	main()
+	setup()
+	initializeModel(args : String)
+end
+
+abstract class Instruction
+attributes
+operations
+	execute()
+	finalize()
+end
+
+class ModuleAssignment<ModuleInstruction,Assignment
+attributes
+operations
+	execute()
+end
+
+abstract class ModuleInstruction<Instruction
+attributes
+operations
+	execute()
+end
+
+abstract class Control<Instruction
+attributes
+operations
+	evaluate()
+	execute()
+end
+
+abstract class Utilities<Instruction
+attributes
+operations
+	execute()
+end
+
+class Delay<Utilities
+attributes
+	unit : Time
+	value : String
+operations
+	execute()
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Repeat<Control
+attributes
+	iteration : String
+operations
+	execute()
+	evaluate()
+	finalize()
+end
+
+abstract class ModuleGet<Expression
+attributes
+operations
+end
+
+class While<Control
+attributes
+operations
+	evaluate()
+	execute()
+end
+
+abstract class BinaryExpression<Expression
+attributes
+operations
+end
+
+abstract class Variable<NamedElement
+attributes
+operations
+	evaluate()
+end
+
+class VariableAssignment<Instruction,Assignment
+attributes
+operations
+	execute()
+end
+
+class BinaryIntegerExpression<BinaryExpression,IntegerExpression
+attributes
+	operator : BinaryIntegerOperatorKind
+operations
+	evaluate()
+end
+
+class BinaryBooleanExpression<BinaryExpression,BooleanExpression
+attributes
+	operator : BinaryBooleanOperatorKind
+operations
+	evaluate()
+end
+
+abstract class Expression
+attributes
+operations
+	evaluate()
+end
+
+abstract class Constant<Expression
+attributes
+operations
+	evaluate()
+end
+
+class If<Control
+attributes
+operations
+	evaluate()
+	execute()
+end
+
+class IntegerConstant<Constant,IntegerExpression
+attributes
+	value : String
+operations
+	evaluate()
+end
+
+class BooleanConstant<Constant,BooleanExpression
+attributes
+	value : String
+operations
+	evaluate()
+end
+
+abstract class BooleanExpression<Expression
+attributes
+operations
+end
+
+abstract class IntegerExpression<Expression
+attributes
+operations
+end
+
+abstract class Assignment<Instruction
+attributes
+operations
+end
+
+class IntegerVariable<Variable
+attributes
+	initialValue : String
+	value : String
+operations
+	evaluate()
+end
+
+class BooleanVariable<Variable
+attributes
+	initialValue : String
+	value : String
+operations
+	evaluate()
+end
+
+class BooleanModuleGet<ModuleGet,BooleanExpression
+attributes
+operations
+	evaluate()
+end
+
+class IntegerModuleGet<ModuleGet,IntegerExpression
+attributes
+operations
+	evaluate()
+end
+
+abstract class UnaryExpression<Expression
+attributes
+operations
+end
+
+class UnaryBooleanExpression<UnaryExpression,BooleanExpression
+attributes
+	operator : UnaryBooleanOperatorKind
+operations
+end
+
+class UnaryIntegerExpression<UnaryExpression,IntegerExpression
+attributes
+	operator : UnaryIntegerOperatorKind
+operations
+end
+
+class VariableDeclaration<Instruction
+attributes
+operations
+	execute()
+end
+
+abstract class VariableRef<Expression
+attributes
+operations
+	evaluate()
+end
+
+class IntegerVariableRef<VariableRef,IntegerExpression
+attributes
+operations
+end
+
+class LED<ArduinoDigitalModule
+attributes
+	color : Color
+operations
+end
+
+class PushButton<ArduinoDigitalModule
+attributes
+operations
+end
+
+class Buzzer<ArduinoDigitalModule
+attributes
+operations
+end
+
+class RotationSensor<ArduinoAnalogModule
+attributes
+operations
+end
+
+class MicroServo<ArduinoDigitalModule
+attributes
+operations
+end
+
+class InfraRedSensor<ArduinoDigitalModule
+attributes
+operations
+end
+
+class AmbientLightSensor<ArduinoAnalogModule
+attributes
+operations
+end
+
+class SoundSensor<ArduinoAnalogModule
+attributes
+operations
+end
+
+class Fan<ArduinoDigitalModule
+attributes
+operations
+end
+
+class MusicPlayer<ArduinoAnalogModule
+attributes
+operations
+end
+
+abstract class ArduinoModule<Module
+attributes
+operations
+end
+
+class Block
+attributes
+operations
+	execute()
+end
+
+class ArduinoBoard<Board
+attributes
+operations
+end
+
+abstract class ArduinoDigitalModule<ArduinoModule
+attributes
+operations
+end
+
+abstract class ArduinoAnalogModule<ArduinoModule
+attributes
+operations
+end
+
+class BooleanVariableRef<VariableRef,BooleanExpression
+attributes
+operations
+end
+
+abstract class ArduinoCommunicationModule<ArduinoDigitalModule
+attributes
+operations
+	push()
+end
+
+class BluetoothTransceiver<ArduinoAnalogModule
+attributes
+	dataToSend : String
+	dataReceived : String
+operations
+	push()
+end
+
+association xxx_Board_project between
+	Board[*] role xxx_Board_project_src
+	Project[1] role project
+end
+
+composition xxx_DigitalPin_module between
+	DigitalPin[*] role xxx_DigitalPin_module_src
+	ArduinoDigitalModule[0..1] role module
+end
+
+composition xxx_AnalogPin_module between
+	AnalogPin[*] role xxx_AnalogPin_module_src
+	ArduinoAnalogModule[0..1] role module
+end
+
+association xxx_Sketch_project between
+	Sketch[*] role xxx_Sketch_project_src
+	Project[1] role project
+end
+
+composition xxx_Sketch_block between
+	Sketch[*] role xxx_Sketch_block_src
+	Block[0..1] role block
+end
+
+association xxx_Sketch_board between
+	Sketch[*] role xxx_Sketch_board_src
+	Board[0..1] role board
+end
+
+composition xxx_Project_boards between
+	Project[0..1] role xxx_Project_boards_src
+	Board[*] role boards
+end
+
+composition xxx_Project_sketches between
+	Project[0..1] role xxx_Project_sketches_src
+	Sketch[*] role sketches
+end
+
+association xxx_ModuleInstruction_module between
+	ModuleInstruction[*] role xxx_ModuleInstruction_module_src
+	Module[1] role module
+end
+
+composition xxx_Control_block between
+	Control[*] role xxx_Control_block_src
+	Block[1] role block
+end
+
+association xxx_ModuleGet_module between
+	ModuleGet[*] role xxx_ModuleGet_module_src
+	Module[1] role module
+end
+
+composition xxx_While_condition between
+	While[*] role xxx_While_condition_src
+	BooleanExpression[1] role condition
+end
+
+composition xxx_BinaryExpression_left between
+	BinaryExpression[*] role xxx_BinaryExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_BinaryExpression_right between
+	BinaryExpression[*] role xxx_BinaryExpression_right_src
+	Expression[0..1] role right
+end
+
+association xxx_VariableAssignment_variable between
+	VariableAssignment[*] role xxx_VariableAssignment_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_If_condition between
+	If[*] role xxx_If_condition_src
+	BooleanExpression[1] role condition
+end
+
+composition xxx_If_elseBlock between
+	If[*] role xxx_If_elseBlock_src
+	Block[0..1] role elseBlock
+end
+
+composition xxx_Assignment_operand between
+	Assignment[*] role xxx_Assignment_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_UnaryExpression_operand between
+	UnaryExpression[*] role xxx_UnaryExpression_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_VariableDeclaration_variable between
+	VariableDeclaration[*] role xxx_VariableDeclaration_variable_src
+	Variable[1] role variable
+end
+
+association xxx_IntegerVariableRef_variable between
+	IntegerVariableRef[*] role xxx_IntegerVariableRef_variable_src
+	IntegerVariable[1] role variable
+end
+
+composition xxx_Block_instructions between
+	Block[0..1] role xxx_Block_instructions_src
+	Instruction[*] role instructions
+end
+
+composition xxx_ArduinoBoard_digitalPins between
+	ArduinoBoard[0..1] role xxx_ArduinoBoard_digitalPins_src
+	DigitalPin[*] role digitalPins
+end
+
+composition xxx_ArduinoBoard_analogPins between
+	ArduinoBoard[0..1] role xxx_ArduinoBoard_analogPins_src
+	AnalogPin[*] role analogPins
+end
+
+association xxx_BooleanVariableRef_variable between
+	BooleanVariableRef[*] role xxx_BooleanVariableRef_variable_src
+	BooleanVariable[1] role variable
+end
+
+association xxx_BluetoothTransceiver_connectedTransceiver between
+	BluetoothTransceiver[0..1] role xxx_BluetoothTransceiver_connectedTransceiver_src
+	BluetoothTransceiver[*] role connectedTransceiver
+end
+

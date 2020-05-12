@@ -1,0 +1,191 @@
+model adaptiveSystem
+enum Orientation{
+default
+}
+
+enum Quantor{
+default
+}
+
+enum Temp{
+default
+}
+
+class AdaptiveSystem
+attributes
+	setWellformednessToOclets : Boolean
+operations
+end
+
+class Oclet
+attributes
+	name : String
+	orientation : Orientation
+	quantor : Quantor
+	wellFormed : Boolean
+operations
+end
+
+abstract class OccurrenceNet
+attributes
+	name : String
+operations
+end
+
+class DoNet<OccurrenceNet
+attributes
+operations
+end
+
+class PreNet<OccurrenceNet
+attributes
+operations
+end
+
+class AdaptiveProcess<OccurrenceNet
+attributes
+operations
+end
+
+abstract class Node
+attributes
+	name : String
+	abstract_ : Boolean
+	temp : Temp
+	disabledByAntiOclet : Boolean
+	disabledByConflict : Boolean
+operations
+end
+
+class Condition<Node
+attributes
+	token : Integer
+	marked : Boolean
+	maximal : Boolean
+	minimal : Boolean
+operations
+end
+
+class Event<Node
+attributes
+	saturated : Boolean
+	enabled : Boolean
+operations
+end
+
+class Arc
+attributes
+	weight : Integer
+operations
+end
+
+class ArcToEvent<Arc
+attributes
+operations
+end
+
+class ArcToCondition<Arc
+attributes
+operations
+end
+
+composition xxx_AdaptiveSystem_oclets between
+	AdaptiveSystem[0..1] role xxx_AdaptiveSystem_oclets_src
+	Oclet[*] role oclets
+end
+
+composition xxx_AdaptiveSystem_adaptiveProcess between
+	AdaptiveSystem[*] role xxx_AdaptiveSystem_adaptiveProcess_src
+	AdaptiveProcess[1] role adaptiveProcess
+end
+
+composition xxx_Oclet_preNet between
+	Oclet[*] role xxx_Oclet_preNet_src
+	PreNet[1] role preNet
+end
+
+composition xxx_Oclet_doNet between
+	Oclet[*] role xxx_Oclet_doNet_src
+	DoNet[1] role doNet
+end
+
+composition xxx_OccurrenceNet_nodes between
+	OccurrenceNet[0..1] role xxx_OccurrenceNet_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_OccurrenceNet_arcs between
+	OccurrenceNet[0..1] role xxx_OccurrenceNet_arcs_src
+	Arc[*] role arcs
+end
+
+association xxx_PreNet_markedConditions between
+	PreNet[0..1] role xxx_PreNet_markedConditions_src
+	Condition[*] role markedConditions
+end
+
+association xxx_AdaptiveProcess_markedConditions between
+	AdaptiveProcess[0..1] role xxx_AdaptiveProcess_markedConditions_src
+	Condition[*] role markedConditions
+end
+
+association xxx_Condition_preEvents between
+	Condition[0..1] role xxx_Condition_preEvents_src
+	Event[*] role preEvents
+end
+
+association xxx_Condition_postEvents between
+	Condition[0..1] role xxx_Condition_postEvents_src
+	Event[*] role postEvents
+end
+
+association xxx_Condition_incoming between
+	Condition[0..1] role xxx_Condition_incoming_src
+	ArcToCondition[*] role incoming
+end
+
+association xxx_Condition_outgoing between
+	Condition[0..1] role xxx_Condition_outgoing_src
+	ArcToEvent[*] role outgoing
+end
+
+association xxx_Event_preConditions between
+	Event[0..1] role xxx_Event_preConditions_src
+	Condition[*] role preConditions
+end
+
+association xxx_Event_postConditions between
+	Event[0..1] role xxx_Event_postConditions_src
+	Condition[*] role postConditions
+end
+
+association xxx_Event_incoming between
+	Event[0..1] role xxx_Event_incoming_src
+	ArcToEvent[*] role incoming
+end
+
+association xxx_Event_outgoing between
+	Event[0..1] role xxx_Event_outgoing_src
+	ArcToCondition[*] role outgoing
+end
+
+association xxx_ArcToEvent_source between
+	ArcToEvent[*] role xxx_ArcToEvent_source_src
+	Condition[0..1] role source
+end
+
+association xxx_ArcToEvent_destination between
+	ArcToEvent[*] role xxx_ArcToEvent_destination_src
+	Event[0..1] role destination
+end
+
+association xxx_ArcToCondition_source between
+	ArcToCondition[*] role xxx_ArcToCondition_source_src
+	Event[0..1] role source
+end
+
+association xxx_ArcToCondition_destination between
+	ArcToCondition[*] role xxx_ArcToCondition_destination_src
+	Condition[0..1] role destination
+end
+

@@ -1,0 +1,148 @@
+model arm
+abstract class ModelElement
+attributes
+	identifier : String
+	description : String
+	content : String
+operations
+end
+
+class TaggedValue
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Argument<ModelElement
+attributes
+operations
+end
+
+abstract class ArgumentElement<ModelElement
+attributes
+operations
+end
+
+abstract class ArgumentLink<ModelElement
+attributes
+operations
+end
+
+abstract class AssertedRelationship<ArgumentLink
+attributes
+operations
+end
+
+class Annotation<ArgumentLink
+attributes
+operations
+end
+
+class AssertedInference<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedEvidence<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedContext<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedCounterEvidence<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedChallenge<AssertedRelationship
+attributes
+operations
+end
+
+abstract class ReasoningElement<ArgumentElement
+attributes
+operations
+end
+
+class Claim<ReasoningElement
+attributes
+	assumed : Boolean
+	toBeSupported : Boolean
+operations
+end
+
+class EvidenceAssertion<Claim
+attributes
+operations
+end
+
+class InformationElement<ArgumentElement
+attributes
+operations
+end
+
+class ArgumentReasoning<ReasoningElement
+attributes
+operations
+end
+
+class CitationElement<ArgumentElement
+attributes
+operations
+end
+
+composition xxx_ModelElement_isTagged between
+	ModelElement[0..1] role xxx_ModelElement_isTagged_src
+	TaggedValue[*] role isTagged
+end
+
+composition xxx_Argument_containsArgumentElement between
+	Argument[0..1] role xxx_Argument_containsArgumentElement_src
+	ArgumentElement[*] role containsArgumentElement
+end
+
+composition xxx_Argument_containsArgumentLink between
+	Argument[0..1] role xxx_Argument_containsArgumentLink_src
+	ArgumentLink[*] role containsArgumentLink
+end
+
+composition xxx_Argument_containsArgument between
+	Argument[0..1] role xxx_Argument_containsArgument_src
+	Argument[*] role containsArgument
+end
+
+association xxx_ArgumentLink_target between
+	ArgumentLink[0..1] role xxx_ArgumentLink_target_src
+	ModelElement[*] role target
+end
+
+association xxx_ArgumentLink_source between
+	ArgumentLink[0..1] role xxx_ArgumentLink_source_src
+	ModelElement[*] role source
+end
+
+association xxx_ArgumentReasoning_describes between
+	ArgumentReasoning[0..1] role xxx_ArgumentReasoning_describes_src
+	AssertedInference[*] role describes
+end
+
+association xxx_ArgumentReasoning_hasStructure between
+	ArgumentReasoning[*] role xxx_ArgumentReasoning_hasStructure_src
+	Argument[0..1] role hasStructure
+end
+
+association xxx_CitationElement_refersToArgumentElement between
+	CitationElement[*] role xxx_CitationElement_refersToArgumentElement_src
+	ArgumentElement[0..1] role refersToArgumentElement
+end
+
+association xxx_CitationElement_refersToArgument between
+	CitationElement[*] role xxx_CitationElement_refersToArgument_src
+	Argument[0..1] role refersToArgument
+end
+

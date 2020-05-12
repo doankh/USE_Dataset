@@ -1,0 +1,237 @@
+model build
+enum BuildType{
+default
+}
+
+enum OS{
+default
+}
+
+enum WS{
+default
+}
+
+enum ARCH{
+default
+}
+
+enum ArchiveFormat{
+default
+}
+
+class Build
+attributes
+	type : BuildType
+	buildRoot : String
+	fetchTag : String
+	label : String
+	date : String
+	time : String
+	launchVM : String
+	builderURL : String
+	sendmail : Boolean
+operations
+end
+
+class Repository
+attributes
+	location : String
+	label : String
+operations
+end
+
+class Platform
+attributes
+	file : String
+	location : String
+	deltapack : String
+operations
+end
+
+class Config
+attributes
+	os : OS
+	ws : WS
+	arch : ARCH
+	archiveFormat : ArchiveFormat
+operations
+end
+
+class Map
+attributes
+	root : String
+	repo : String
+	tag : String
+operations
+end
+
+class Category
+attributes
+	name : String
+	label : String
+	description : String
+operations
+end
+
+class Contribution
+attributes
+	label : String
+operations
+end
+
+class Contact
+attributes
+	name : String
+	email : String
+operations
+end
+
+class Feature<InstallationUnit
+attributes
+	inProduct : Boolean
+operations
+end
+
+class Bundle<InstallationUnit
+attributes
+operations
+end
+
+class Compiler
+attributes
+	args : String
+	sourceVersion : String
+	targetVersion : String
+	verbose : Boolean
+	failOnError : Boolean
+	debugInfo : Boolean
+operations
+end
+
+class Promotion
+attributes
+	uploadDirectory : String
+	downloadDirectory : String
+	incubating : Boolean
+	baseURL : String
+	buildAlias : String
+operations
+end
+
+abstract class InstallationUnit
+attributes
+	id : String
+	version : String
+operations
+end
+
+class Product<InstallationUnit
+attributes
+operations
+end
+
+composition xxx_Build_platforms between
+	Build[0..1] role xxx_Build_platforms_src
+	Platform[1..*] role platforms
+end
+
+composition xxx_Build_configs between
+	Build[0..1] role xxx_Build_configs_src
+	Config[1..*] role configs
+end
+
+composition xxx_Build_map between
+	Build[*] role xxx_Build_map_src
+	Map[0..1] role map
+end
+
+composition xxx_Build_categories between
+	Build[0..1] role xxx_Build_categories_src
+	Category[*] role categories
+end
+
+composition xxx_Build_contributions between
+	Build[0..1] role xxx_Build_contributions_src
+	Contribution[*] role contributions
+end
+
+association xxx_Build_product between
+	Build[*] role xxx_Build_product_src
+	Product[0..1] role product
+end
+
+association xxx_Build_base between
+	Build[*] role xxx_Build_base_src
+	Platform[1] role base
+end
+
+association xxx_Build_builder between
+	Build[*] role xxx_Build_builder_src
+	Platform[1] role builder
+end
+
+composition xxx_Build_compiler between
+	Build[*] role xxx_Build_compiler_src
+	Compiler[0..1] role compiler
+end
+
+composition xxx_Build_promotion between
+	Build[*] role xxx_Build_promotion_src
+	Promotion[0..1] role promotion
+end
+
+composition xxx_Build_buildmaster between
+	Build[*] role xxx_Build_buildmaster_src
+	Contact[0..1] role buildmaster
+end
+
+composition xxx_Build_defaultMailList between
+	Build[0..1] role xxx_Build_defaultMailList_src
+	Contact[*] role defaultMailList
+end
+
+association xxx_Platform_config between
+	Platform[*] role xxx_Platform_config_src
+	Config[0..1] role config
+end
+
+association xxx_Category_features between
+	Category[0..1] role xxx_Category_features_src
+	Feature[*] role features
+end
+
+composition xxx_Contribution_contacts between
+	Contribution[0..1] role xxx_Contribution_contacts_src
+	Contact[*] role contacts
+end
+
+composition xxx_Contribution_features between
+	Contribution[0..1] role xxx_Contribution_features_src
+	Feature[*] role features
+end
+
+composition xxx_Contribution_repositories between
+	Contribution[0..1] role xxx_Contribution_repositories_src
+	Repository[*] role repositories
+end
+
+composition xxx_Contribution_bundles between
+	Contribution[0..1] role xxx_Contribution_bundles_src
+	Bundle[*] role bundles
+end
+
+composition xxx_Contribution_products between
+	Contribution[0..1] role xxx_Contribution_products_src
+	Product[*] role products
+end
+
+association xxx_Feature_category between
+	Feature[0..1] role xxx_Feature_category_src
+	Category[*] role category
+end
+
+association xxx_InstallationUnit_repo between
+	InstallationUnit[*] role xxx_InstallationUnit_repo_src
+	Repository[0..1] role repo
+end
+

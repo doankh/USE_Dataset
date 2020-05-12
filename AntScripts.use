@@ -1,0 +1,103 @@
+model AntScripts
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class DescribableElement
+attributes
+	description : String
+operations
+end
+
+abstract class CommentableElement
+attributes
+	comment : String
+operations
+end
+
+class Project<CommentableElement
+attributes
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+	location : String
+	refid : String
+	resource : String
+	file : String
+	url : String
+	environment : String
+	classpath : String
+	classpathref : String
+	prefix : String
+operations
+end
+
+class Target<CommentableElement
+attributes
+	if_ : String
+	unless : String
+operations
+end
+
+abstract class TaskElement<CommentableElement
+attributes
+operations
+end
+
+class Attribute<NamedElement
+attributes
+	value : String
+operations
+end
+
+class Task<TaskElement
+attributes
+operations
+end
+
+class TaskParameter<TaskElement
+attributes
+operations
+end
+
+composition xxx_Project_properties between
+	Project[0..1] role xxx_Project_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Project_targets between
+	Project[0..1] role xxx_Project_targets_src
+	Target[*] role targets
+end
+
+association xxx_Project_defaultTarget between
+	Project[*] role xxx_Project_defaultTarget_src
+	Target[0..1] role defaultTarget
+end
+
+composition xxx_Target_tasks between
+	Target[0..1] role xxx_Target_tasks_src
+	Task[*] role tasks
+end
+
+association xxx_Target_depends between
+	Target[0..1] role xxx_Target_depends_src
+	Target[*] role depends
+end
+
+composition xxx_TaskElement_attributes_ between
+	TaskElement[0..1] role xxx_TaskElement_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_TaskElement_elements between
+	TaskElement[0..1] role xxx_TaskElement_elements_src
+	TaskElement[*] role elements
+end
+

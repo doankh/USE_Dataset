@@ -1,0 +1,1065 @@
+model b3backend
+enum Visibility{
+default
+}
+
+enum ExecutionMode{
+default
+}
+
+enum Method{
+default
+}
+
+enum Type{
+default
+}
+
+enum BJavaCallType{
+default
+}
+
+abstract class BExpression
+attributes
+operations
+end
+
+abstract class BExecutionContext<ITypedValueContainer
+attributes
+	valueMap : String
+	funcStore : String
+	progressMonitor : String
+	injector : String
+operations
+	loadFunctions(clazz : String)
+	loadFunction(method : Method):BJavaFunction
+	defineFunction(function : IFunction):IFunction
+	findFunction(functionName : String,types : String):IFunction
+	getInvocationContext():BInvocationContext
+	createInnerContext():BExecutionContext
+	createWrappedInnerContext():BInnerContext
+	createOuterContext():BExecutionContext
+	isPropertyScope():Boolean
+	getContext(clazz : String)
+	getFunctionIterator()
+	getFunctionIterator1(name : String)
+	getFunctionIterator2(type : Type,functionType : String)
+	printStack()
+	printStackTrace()
+end
+
+class BIfExpression<BExpression
+attributes
+operations
+end
+
+class BSwitchExpression<BExpression
+attributes
+operations
+	hasUnreachableCase(chain : String,map : String):Boolean
+end
+
+class BCase
+attributes
+operations
+end
+
+class BTryExpression<BExpression
+attributes
+operations
+end
+
+class BCatch<ITypedValue
+attributes
+operations
+end
+
+abstract class BBinaryExpression<BExpression
+attributes
+operations
+end
+
+class BOrExpression<BBinaryExpression
+attributes
+operations
+end
+
+class BAndExpression<BBinaryExpression
+attributes
+operations
+end
+
+class BChainedExpression<BExpression
+attributes
+operations
+end
+
+abstract class BUnaryExpression<BExpression
+attributes
+operations
+end
+
+class BThrowExpression<BUnaryExpression
+attributes
+operations
+end
+
+class BUnaryOpExpression<BUnaryExpression
+attributes
+	functionName : String
+operations
+end
+
+class BUnaryPostOpExpression<BUnaryOpExpression
+attributes
+operations
+end
+
+class BBinaryOpExpression<BBinaryExpression
+attributes
+	functionName : String
+operations
+end
+
+class BCachedExpression<BUnaryExpression
+attributes
+operations
+end
+
+class BLiteralExpression<BExpression
+attributes
+	value : String
+operations
+end
+
+class BLiteralListExpression<BExpression
+attributes
+operations
+end
+
+class BLiteralMapExpression<BExpression
+attributes
+operations
+end
+
+class BMapEntry
+attributes
+operations
+end
+
+class BFeatureExpression<BExpression
+attributes
+	featureName : String
+operations
+end
+
+class BAtExpression<BExpression
+attributes
+operations
+end
+
+class BVariableExpression<BExpression
+attributes
+operations
+end
+
+abstract class BCallExpression<BParameterizedExpression
+attributes
+	name : String
+operations
+end
+
+abstract class BParameterizedExpression<BExpression
+attributes
+operations
+end
+
+class BLiteralAny<BPatternLiteralExpression
+attributes
+operations
+end
+
+class BCreateExpression<BParameterizedExpression,ITypedValue
+attributes
+operations
+end
+
+abstract class IFunction<IGenericDeclaration,BExpression
+attributes
+	visibility : Visibility
+	final : Boolean
+	executionMode : ExecutionMode
+	name : String
+	exceptionTypes : String
+	typeParameters : String
+	varArgs : Boolean
+	documentation : String
+	classFunction : Boolean
+	varargArrayType : Type
+operations
+end
+
+class BGuard
+attributes
+operations
+	accepts(function : IFunction,types : String):Boolean
+end
+
+class BSystemContext<BExecutionContext
+attributes
+operations
+	loadMethod(functionName : String,types : String):IFunction
+end
+
+class BContext<BExecutionContext
+attributes
+operations
+end
+
+class BInnerContext<BExecutionContext
+attributes
+operations
+end
+
+class BInvocationContext<BExecutionContext
+attributes
+	expressionCache : String
+operations
+end
+
+class BUnaryPreOpExpression<BUnaryOpExpression
+attributes
+operations
+end
+
+class BAssignmentExpression<BBinaryOpExpression
+attributes
+operations
+end
+
+class B3Function<BFunction
+attributes
+operations
+end
+
+class BJavaFunction<BFunction
+attributes
+	method : Method
+	callType : BJavaCallType
+	parameterTypes : String
+	parameterNames : String
+operations
+	isSystemCall():Boolean
+	isFunctionCall():Boolean
+	isMethodCall():Boolean
+	internalCall(ctx : BExecutionContext,parameters : String,parameterTypes : String):String
+end
+
+abstract class BFunctionContainer
+attributes
+operations
+end
+
+class BDefValue<BExpression,ITypedValue
+attributes
+	final : Boolean
+	immutable : Boolean
+operations
+end
+
+class BRegularExpression<BPatternLiteralExpression
+attributes
+	pattern : String
+operations
+end
+
+class BParameterList
+attributes
+operations
+end
+
+class BParameter
+attributes
+operations
+end
+
+class BParameterDeclaration<ITypedValue
+attributes
+	final : Boolean
+	immutable : Boolean
+operations
+end
+
+abstract class IType
+attributes
+operations
+end
+
+class B3FunctionType<IType
+attributes
+	varArgs : Boolean
+operations
+	getParameterTypesArray():String
+	isAssignableFrom(type : IType):Boolean
+	getReturnTypeForParameterTypes(types : String):Type
+end
+
+abstract class IParameterizedType<IType
+attributes
+operations
+end
+
+abstract class IGenericDeclaration
+attributes
+operations
+end
+
+class B3ParameterizedType<IParameterizedType
+attributes
+operations
+	getActualTypeArguments():String
+end
+
+abstract class IWildcardType<IType
+attributes
+operations
+end
+
+class B3WildcardType<IWildcardType
+attributes
+operations
+	getLowerBounds():String
+	getUpperBounds():String
+end
+
+abstract class ITypeVariable<IType
+attributes
+operations
+end
+
+class B3FuncTypeVariable
+attributes
+	bounds : String
+	name : String
+operations
+end
+
+class B3JavaImport<IType,ITypedValue
+attributes
+	qualifiedName : String
+	reexport : Boolean
+operations
+end
+
+class BLiteralType<BExpression
+attributes
+operations
+end
+
+abstract class BTypeCalculator
+attributes
+operations
+	getSignature(types : String):B3FunctionType
+	getConstraints(funcName : String,expr : BExpression,typeScheme : String,parameterConstraints : String,funcSelectConstraint : String)
+end
+
+class BInstanceContext<BInnerContext
+attributes
+	instance : String
+operations
+end
+
+class BDefProperty<BDefValue
+attributes
+	mutable : Boolean
+operations
+end
+
+class BPropertySet<BAdvice
+attributes
+	propertiesFile : String
+operations
+end
+
+class BDefaultPropertySet<BPropertySet
+attributes
+operations
+end
+
+abstract class BPropertyOperation<BExpression
+attributes
+operations
+	evaluateDefaults(ctx : BExecutionContext,allVisible : Boolean):String
+end
+
+class BPropertyDefinitionOperation<BPropertyOperation
+attributes
+operations
+end
+
+class BConditionalPropertyOperation<BPropertyOperation
+attributes
+operations
+end
+
+class BPropertySetOperation<BPropertyOperation
+attributes
+operations
+end
+
+class BAdvice<BExpression,ITypedValue
+attributes
+	documentation : String
+operations
+end
+
+class BConcern<BAdvice,BFunctionContainer
+attributes
+operations
+	evaluateIfMatching(candidate : String,ctx : BExecutionContext):Boolean
+	getConcernContextIterator()
+end
+
+class BWithExpression<BExpression
+attributes
+operations
+	createContext(ctx : BExecutionContext):BInnerContext
+	getEvaluationContext(ctx : BExecutionContext):BExecutionContext
+end
+
+abstract class BConcernContext<BExpression,BFunctionContainer
+attributes
+	documentation : String
+operations
+	matches(candidate : String,ctx : BExecutionContext):Boolean
+end
+
+class BFunction<BExpression,IFunction
+attributes
+operations
+end
+
+class BFunctionWrapper<BExpression,IFunction
+attributes
+	parameterMap : String
+	varargsName : String
+operations
+end
+
+class BNamePredicate
+attributes
+	name : String
+operations
+	matches(name : String):Boolean
+end
+
+class BFunctionNamePredicate<BExpression
+attributes
+operations
+	matches(name : String):Boolean
+end
+
+class BFunctionConcernContext<BConcernContext
+attributes
+	varArgs : Boolean
+	matchParameters : Boolean
+operations
+end
+
+class BParameterPredicate<ITypedValue
+attributes
+	typePredicateOp : String
+operations
+end
+
+class BProceedExpression<BExpression
+attributes
+operations
+end
+
+class BDelegatingContext<BInnerContext
+attributes
+operations
+end
+
+class BWrappingContext<BDelegatingContext
+attributes
+	parameters : String
+	parameterTypes : String
+	varargsName : String
+operations
+	mapContext(ctx : BExecutionContext,map : String,functionWrapper : BFunctionWrapper)
+end
+
+class B3MetaClass<IType
+attributes
+	instanceClass : String
+operations
+	isAssignableFrom(type : IType):Boolean
+end
+
+class BExpressionWrapper<BExpression
+attributes
+operations
+end
+
+class BWithContextExpression<BExpression,ITypedValue
+attributes
+operations
+end
+
+abstract class ITypedValueContainer
+attributes
+operations
+	getValue(name : String):String
+	getLValue(name : String):String
+	defineValue(name : String,value : String,type : IType):String
+	defineFinalValue(name : String,value : String,type : IType):String
+	defineVariableValue(name : String,value : String,type : IType):String
+	defineFinalVariableValue(name : String,value : String,type : IType):String
+	isFinal(name : String):Boolean
+	isImmutable(name : String):Boolean
+	getDeclaredValueType(name : String):IType
+	containsValue(name : String):Boolean
+	containsValue1(name : String,allVisible : Boolean):Boolean
+end
+
+class BCallFeature<BCallExpression
+attributes
+	call : Boolean
+operations
+end
+
+class BCallNamedFunction<BCallExpression
+attributes
+operations
+end
+
+class BCallFunction<BCallExpression
+attributes
+operations
+end
+
+class BPatternLiteralExpression<BExpression
+attributes
+operations
+	matches(candidate : String):Boolean
+end
+
+class BSimplePatternExpression<BPatternLiteralExpression
+attributes
+	pattern : String
+operations
+end
+
+abstract class INamedValue
+attributes
+	name : String
+operations
+end
+
+class B3Type<IType
+attributes
+	rawType : Type
+	defaultInference : Boolean
+operations
+end
+
+abstract class ITypedValue<INamedValue
+attributes
+operations
+end
+
+abstract class IVarName
+attributes
+	varName : String
+operations
+end
+
+class BTemplate<BExpression
+attributes
+operations
+end
+
+class BEchoExpression<BExpression
+attributes
+operations
+end
+
+class BLiteralByteArrayExpression<BExpression
+attributes
+	value : String
+	base64 : Boolean
+operations
+end
+
+class BLiteralInteger<BLiteralExpression
+attributes
+operations
+end
+
+class BTCPluggable<BTypeCalculator
+attributes
+operations
+end
+
+class BTCNumber<BTypeCalculator
+attributes
+operations
+end
+
+class BTCIntegral<BTCNumber
+attributes
+operations
+end
+
+class BTCBooleanLambda<BTCLastLambda
+attributes
+operations
+end
+
+class BTCFirstLambda<BTypeCalculator
+attributes
+operations
+end
+
+class BTCLastLambda<BTypeCalculator
+attributes
+operations
+end
+
+association xxx_BExecutionContext_parentContext between
+	BExecutionContext[*] role xxx_BExecutionContext_parentContext_src
+	BExecutionContext[0..1] role parentContext
+end
+
+association xxx_BExecutionContext_effectiveConcerns between
+	BExecutionContext[0..1] role xxx_BExecutionContext_effectiveConcerns_src
+	BConcern[*] role effectiveConcerns
+end
+
+composition xxx_BIfExpression_conditionExpr between
+	BIfExpression[*] role xxx_BIfExpression_conditionExpr_src
+	BExpression[0..1] role conditionExpr
+end
+
+composition xxx_BIfExpression_thenExpr between
+	BIfExpression[*] role xxx_BIfExpression_thenExpr_src
+	BExpression[0..1] role thenExpr
+end
+
+composition xxx_BIfExpression_elseExpr between
+	BIfExpression[*] role xxx_BIfExpression_elseExpr_src
+	BExpression[0..1] role elseExpr
+end
+
+composition xxx_BSwitchExpression_switchExpression between
+	BSwitchExpression[*] role xxx_BSwitchExpression_switchExpression_src
+	BExpression[0..1] role switchExpression
+end
+
+composition xxx_BSwitchExpression_caseList between
+	BSwitchExpression[0..1] role xxx_BSwitchExpression_caseList_src
+	BCase[*] role caseList
+end
+
+composition xxx_BCase_conditionExpr between
+	BCase[0..1] role xxx_BCase_conditionExpr_src
+	BExpression[*] role conditionExpr
+end
+
+composition xxx_BCase_thenExpr between
+	BCase[*] role xxx_BCase_thenExpr_src
+	BExpression[0..1] role thenExpr
+end
+
+composition xxx_BTryExpression_tryExpr between
+	BTryExpression[*] role xxx_BTryExpression_tryExpr_src
+	BExpression[0..1] role tryExpr
+end
+
+composition xxx_BTryExpression_catchBlocks between
+	BTryExpression[0..1] role xxx_BTryExpression_catchBlocks_src
+	BCatch[*] role catchBlocks
+end
+
+composition xxx_BTryExpression_finallyExpr between
+	BTryExpression[*] role xxx_BTryExpression_finallyExpr_src
+	BExpression[0..1] role finallyExpr
+end
+
+composition xxx_BCatch_catchExpr between
+	BCatch[*] role xxx_BCatch_catchExpr_src
+	BExpression[0..1] role catchExpr
+end
+
+composition xxx_BBinaryExpression_leftExpr between
+	BBinaryExpression[*] role xxx_BBinaryExpression_leftExpr_src
+	BExpression[0..1] role leftExpr
+end
+
+composition xxx_BBinaryExpression_rightExpr between
+	BBinaryExpression[*] role xxx_BBinaryExpression_rightExpr_src
+	BExpression[0..1] role rightExpr
+end
+
+composition xxx_BChainedExpression_expressions between
+	BChainedExpression[0..1] role xxx_BChainedExpression_expressions_src
+	BExpression[*] role expressions
+end
+
+composition xxx_BUnaryExpression_expr between
+	BUnaryExpression[*] role xxx_BUnaryExpression_expr_src
+	BExpression[0..1] role expr
+end
+
+composition xxx_BLiteralListExpression_entries between
+	BLiteralListExpression[0..1] role xxx_BLiteralListExpression_entries_src
+	BExpression[*] role entries
+end
+
+composition xxx_BLiteralListExpression_entryType between
+	BLiteralListExpression[*] role xxx_BLiteralListExpression_entryType_src
+	IType[0..1] role entryType
+end
+
+composition xxx_BLiteralMapExpression_entries between
+	BLiteralMapExpression[0..1] role xxx_BLiteralMapExpression_entries_src
+	BMapEntry[*] role entries
+end
+
+composition xxx_BLiteralMapExpression_keyType between
+	BLiteralMapExpression[*] role xxx_BLiteralMapExpression_keyType_src
+	IType[0..1] role keyType
+end
+
+composition xxx_BLiteralMapExpression_valueType between
+	BLiteralMapExpression[*] role xxx_BLiteralMapExpression_valueType_src
+	IType[0..1] role valueType
+end
+
+composition xxx_BMapEntry_key between
+	BMapEntry[*] role xxx_BMapEntry_key_src
+	BExpression[0..1] role key
+end
+
+composition xxx_BMapEntry_value between
+	BMapEntry[*] role xxx_BMapEntry_value_src
+	BExpression[0..1] role value
+end
+
+composition xxx_BFeatureExpression_objExpr between
+	BFeatureExpression[*] role xxx_BFeatureExpression_objExpr_src
+	BExpression[0..1] role objExpr
+end
+
+composition xxx_BAtExpression_objExpr between
+	BAtExpression[*] role xxx_BAtExpression_objExpr_src
+	BExpression[1] role objExpr
+end
+
+composition xxx_BAtExpression_indexExpr between
+	BAtExpression[*] role xxx_BAtExpression_indexExpr_src
+	BExpression[1] role indexExpr
+end
+
+association xxx_BVariableExpression_namedValue between
+	BVariableExpression[*] role xxx_BVariableExpression_namedValue_src
+	INamedValue[0..1] role namedValue
+end
+
+composition xxx_BCallExpression_funcExpr between
+	BCallExpression[*] role xxx_BCallExpression_funcExpr_src
+	BExpression[0..1] role funcExpr
+end
+
+composition xxx_BParameterizedExpression_parameterList between
+	BParameterizedExpression[*] role xxx_BParameterizedExpression_parameterList_src
+	BParameterList[0..1] role parameterList
+end
+
+composition xxx_BCreateExpression_typeExpr between
+	BCreateExpression[*] role xxx_BCreateExpression_typeExpr_src
+	BExpression[0..1] role typeExpr
+end
+
+composition xxx_BCreateExpression_contextBlock between
+	BCreateExpression[*] role xxx_BCreateExpression_contextBlock_src
+	BExpression[0..1] role contextBlock
+end
+
+composition xxx_IFunction_guard between
+	IFunction[*] role xxx_IFunction_guard_src
+	BGuard[0..1] role guard
+end
+
+composition xxx_IFunction_parameters between
+	IFunction[0..1] role xxx_IFunction_parameters_src
+	BParameterDeclaration[*] role parameters
+end
+
+composition xxx_IFunction_returnType between
+	IFunction[*] role xxx_IFunction_returnType_src
+	IType[0..1] role returnType
+end
+
+composition xxx_IFunction_typeCalculator between
+	IFunction[*] role xxx_IFunction_typeCalculator_src
+	BTypeCalculator[0..1] role typeCalculator
+end
+
+association xxx_IFunction_container between
+	IFunction[*] role xxx_IFunction_container_src
+	BFunctionContainer[0..1] role container
+end
+
+association xxx_BGuard_func between
+	BGuard[*] role xxx_BGuard_func_src
+	BJavaFunction[0..1] role func
+end
+
+association xxx_BInnerContext_outerContext between
+	BInnerContext[*] role xxx_BInnerContext_outerContext_src
+	BExecutionContext[1] role outerContext
+end
+
+composition xxx_B3Function_funcExpr between
+	B3Function[*] role xxx_B3Function_funcExpr_src
+	BExpression[0..1] role funcExpr
+end
+
+composition xxx_BFunctionContainer_functions between
+	BFunctionContainer[0..1] role xxx_BFunctionContainer_functions_src
+	IFunction[*] role functions
+end
+
+composition xxx_BDefValue_valueExpr between
+	BDefValue[*] role xxx_BDefValue_valueExpr_src
+	BExpression[0..1] role valueExpr
+end
+
+composition xxx_BParameterList_parameters between
+	BParameterList[0..1] role xxx_BParameterList_parameters_src
+	BParameter[*] role parameters
+end
+
+composition xxx_BParameter_expr between
+	BParameter[*] role xxx_BParameter_expr_src
+	BExpression[0..1] role expr
+end
+
+association xxx_B3FunctionType_functionType between
+	B3FunctionType[*] role xxx_B3FunctionType_functionType_src
+	IType[0..1] role functionType
+end
+
+association xxx_B3FunctionType_returnType between
+	B3FunctionType[*] role xxx_B3FunctionType_returnType_src
+	IType[0..1] role returnType
+end
+
+association xxx_B3FunctionType_parameterTypes between
+	B3FunctionType[0..1] role xxx_B3FunctionType_parameterTypes_src
+	IType[*] role parameterTypes
+end
+
+association xxx_B3FunctionType_typeCalculator between
+	B3FunctionType[*] role xxx_B3FunctionType_typeCalculator_src
+	BTypeCalculator[0..1] role typeCalculator
+end
+
+composition xxx_B3ParameterizedType_ownerType between
+	B3ParameterizedType[*] role xxx_B3ParameterizedType_ownerType_src
+	IType[0..1] role ownerType
+end
+
+association xxx_B3ParameterizedType_rawType between
+	B3ParameterizedType[*] role xxx_B3ParameterizedType_rawType_src
+	IType[0..1] role rawType
+end
+
+association xxx_B3ParameterizedType_actualArgumentsList between
+	B3ParameterizedType[0..1] role xxx_B3ParameterizedType_actualArgumentsList_src
+	IType[*] role actualArgumentsList
+end
+
+composition xxx_B3WildcardType_lowerBoundsList between
+	B3WildcardType[0..1] role xxx_B3WildcardType_lowerBoundsList_src
+	IType[*] role lowerBoundsList
+end
+
+composition xxx_B3WildcardType_upperBoundsList between
+	B3WildcardType[0..1] role xxx_B3WildcardType_upperBoundsList_src
+	IType[*] role upperBoundsList
+end
+
+composition xxx_B3FuncTypeVariable_genericDeclaration between
+	B3FuncTypeVariable[*] role xxx_B3FuncTypeVariable_genericDeclaration_src
+	IFunction[0..1] role genericDeclaration
+end
+
+composition xxx_BLiteralType_type between
+	BLiteralType[*] role xxx_BLiteralType_type_src
+	IType[0..1] role type
+end
+
+association xxx_BPropertySet_extends between
+	BPropertySet[*] role xxx_BPropertySet_extends_src
+	BPropertySet[0..1] role extends
+end
+
+composition xxx_BPropertySet_operations_ between
+	BPropertySet[0..1] role xxx_BPropertySet_operations__src
+	BPropertyOperation[*] role operations_
+end
+
+composition xxx_BPropertyDefinitionOperation_definition between
+	BPropertyDefinitionOperation[*] role xxx_BPropertyDefinitionOperation_definition_src
+	BDefProperty[0..1] role definition
+end
+
+composition xxx_BConditionalPropertyOperation_condExpr between
+	BConditionalPropertyOperation[*] role xxx_BConditionalPropertyOperation_condExpr_src
+	BExpression[0..1] role condExpr
+end
+
+composition xxx_BConditionalPropertyOperation_body between
+	BConditionalPropertyOperation[*] role xxx_BConditionalPropertyOperation_body_src
+	BPropertyOperation[0..1] role body
+end
+
+composition xxx_BPropertySetOperation_propertySet between
+	BPropertySetOperation[*] role xxx_BPropertySetOperation_propertySet_src
+	BPropertySet[0..1] role propertySet
+end
+
+association xxx_BConcern_superConcerns between
+	BConcern[0..1] role xxx_BConcern_superConcerns_src
+	BConcern[*] role superConcerns
+end
+
+composition xxx_BConcern_propertySets between
+	BConcern[0..1] role xxx_BConcern_propertySets_src
+	BPropertySet[*] role propertySets
+end
+
+composition xxx_BConcern_contexts between
+	BConcern[0..1] role xxx_BConcern_contexts_src
+	BConcernContext[*] role contexts
+end
+
+association xxx_BWithExpression_referencedAdvice between
+	BWithExpression[0..1] role xxx_BWithExpression_referencedAdvice_src
+	BAdvice[*] role referencedAdvice
+end
+
+composition xxx_BWithExpression_propertySets between
+	BWithExpression[0..1] role xxx_BWithExpression_propertySets_src
+	BPropertySet[*] role propertySets
+end
+
+composition xxx_BWithExpression_concerns between
+	BWithExpression[0..1] role xxx_BWithExpression_concerns_src
+	BConcern[*] role concerns
+end
+
+composition xxx_BWithExpression_funcExpr between
+	BWithExpression[*] role xxx_BWithExpression_funcExpr_src
+	BExpression[0..1] role funcExpr
+end
+
+association xxx_BFunctionWrapper_aroundExpr between
+	BFunctionWrapper[*] role xxx_BFunctionWrapper_aroundExpr_src
+	BExpression[1] role aroundExpr
+end
+
+association xxx_BFunctionWrapper_original between
+	BFunctionWrapper[*] role xxx_BFunctionWrapper_original_src
+	IFunction[0..1] role original
+end
+
+composition xxx_BNamePredicate_namePattern between
+	BNamePredicate[*] role xxx_BNamePredicate_namePattern_src
+	BPatternLiteralExpression[0..1] role namePattern
+end
+
+composition xxx_BFunctionNamePredicate_namePredicate between
+	BFunctionNamePredicate[*] role xxx_BFunctionNamePredicate_namePredicate_src
+	BNamePredicate[0..1] role namePredicate
+end
+
+composition xxx_BFunctionConcernContext_namePredicate between
+	BFunctionConcernContext[*] role xxx_BFunctionConcernContext_namePredicate_src
+	BFunctionNamePredicate[0..1] role namePredicate
+end
+
+composition xxx_BFunctionConcernContext_parameters between
+	BFunctionConcernContext[0..1] role xxx_BFunctionConcernContext_parameters_src
+	BParameterPredicate[*] role parameters
+end
+
+composition xxx_BFunctionConcernContext_funcExpr between
+	BFunctionConcernContext[*] role xxx_BFunctionConcernContext_funcExpr_src
+	BExpression[0..1] role funcExpr
+end
+
+association xxx_BWrappingContext_functionWrapper between
+	BWrappingContext[*] role xxx_BWrappingContext_functionWrapper_src
+	BFunctionWrapper[0..1] role functionWrapper
+end
+
+association xxx_BWrappingContext_wrappedContext between
+	BWrappingContext[*] role xxx_BWrappingContext_wrappedContext_src
+	BExecutionContext[0..1] role wrappedContext
+end
+
+association xxx_BExpressionWrapper_original between
+	BExpressionWrapper[*] role xxx_BExpressionWrapper_original_src
+	BExpression[0..1] role original
+end
+
+composition xxx_BWithContextExpression_expr between
+	BWithContextExpression[*] role xxx_BWithContextExpression_expr_src
+	BExpression[1] role expr
+end
+
+composition xxx_BWithContextExpression_contextBlock between
+	BWithContextExpression[*] role xxx_BWithContextExpression_contextBlock_src
+	BExpression[1] role contextBlock
+end
+
+association xxx_BCallNamedFunction_funcRef between
+	BCallNamedFunction[*] role xxx_BCallNamedFunction_funcRef_src
+	IFunction[0..1] role funcRef
+end
+
+composition xxx_ITypedValue_type between
+	ITypedValue[*] role xxx_ITypedValue_type_src
+	IType[0..1] role type
+end
+
+association xxx_BTemplate_closure between
+	BTemplate[*] role xxx_BTemplate_closure_src
+	BExecutionContext[0..1] role closure
+end
+
+composition xxx_BTemplate_expressions between
+	BTemplate[0..1] role xxx_BTemplate_expressions_src
+	BExpression[*] role expressions
+end
+
+composition xxx_BEchoExpression_expression between
+	BEchoExpression[*] role xxx_BEchoExpression_expression_src
+	BExpression[0..1] role expression
+end
+
+composition xxx_BEchoExpression_echoExpression between
+	BEchoExpression[*] role xxx_BEchoExpression_echoExpression_src
+	BExpression[0..1] role echoExpression
+end
+
+association xxx_BTCPluggable_func between
+	BTCPluggable[*] role xxx_BTCPluggable_func_src
+	BJavaFunction[0..1] role func
+end
+

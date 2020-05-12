@@ -1,0 +1,151 @@
+model aspectualacme
+class System<Element
+attributes
+operations
+end
+
+class Component<Element
+attributes
+operations
+end
+
+class Connector<Element
+attributes
+operations
+end
+
+class Attachment<AttachmentDeclaration
+attributes
+operations
+end
+
+class Role<Element
+attributes
+operations
+end
+
+class Port<Element
+attributes
+operations
+end
+
+class Element
+attributes
+	name : String
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+operations
+end
+
+class AspectualConnector<Connector
+attributes
+operations
+end
+
+class CrosscuttingRole<Role
+attributes
+operations
+end
+
+class BaseRole<Role
+attributes
+operations
+end
+
+class Glue
+attributes
+	glueType : String
+operations
+end
+
+class AttachmentDeclaration
+attributes
+operations
+end
+
+class Binding<AttachmentDeclaration
+attributes
+operations
+end
+
+class AspectualComponent<Component
+attributes
+	star : String
+operations
+end
+
+composition xxx_System_components between
+	System[0..1] role xxx_System_components_src
+	Component[*] role components
+end
+
+composition xxx_System_connectors between
+	System[0..1] role xxx_System_connectors_src
+	Connector[*] role connectors
+end
+
+composition xxx_System_attachments between
+	System[0..1] role xxx_System_attachments_src
+	AttachmentDeclaration[*] role attachments
+end
+
+composition xxx_Component_port between
+	Component[0..1] role xxx_Component_port_src
+	Port[*] role port
+end
+
+composition xxx_Connector_role between
+	Connector[0..1] role xxx_Connector_role_src
+	Role[*] role role
+end
+
+composition xxx_Element_property between
+	Element[0..1] role xxx_Element_property_src
+	Property[*] role property
+end
+
+composition xxx_AspectualConnector_baseRole between
+	AspectualConnector[0..1] role xxx_AspectualConnector_baseRole_src
+	BaseRole[*] role baseRole
+end
+
+composition xxx_AspectualConnector_crosscuttingRole between
+	AspectualConnector[0..1] role xxx_AspectualConnector_crosscuttingRole_src
+	CrosscuttingRole[*] role crosscuttingRole
+end
+
+composition xxx_AspectualConnector_glues between
+	AspectualConnector[0..1] role xxx_AspectualConnector_glues_src
+	Glue[*] role glues
+end
+
+association xxx_Glue_prefixRole between
+	Glue[*] role xxx_Glue_prefixRole_src
+	Role[0..1] role prefixRole
+end
+
+association xxx_Glue_suffixRole between
+	Glue[*] role xxx_Glue_suffixRole_src
+	Role[0..1] role suffixRole
+end
+
+association xxx_Glue_aspectualConnector between
+	Glue[*] role xxx_Glue_aspectualConnector_src
+	AspectualConnector[0..1] role aspectualConnector
+end
+
+association xxx_AttachmentDeclaration_attachedBaseElement between
+	AttachmentDeclaration[*] role xxx_AttachmentDeclaration_attachedBaseElement_src
+	Element[0..1] role attachedBaseElement
+end
+
+association xxx_AttachmentDeclaration_attachedToElement between
+	AttachmentDeclaration[*] role xxx_AttachmentDeclaration_attachedToElement_src
+	Element[0..1] role attachedToElement
+end
+

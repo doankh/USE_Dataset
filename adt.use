@@ -1,0 +1,153 @@
+model adt
+class ADT
+attributes
+	name : String
+operations
+end
+
+abstract class ASort
+attributes
+	name : String
+operations
+	isSubSortOf(sort : ASort):Boolean
+end
+
+class SubSort<ASort
+attributes
+operations
+end
+
+class Sort<ASort
+attributes
+operations
+end
+
+class Signature
+attributes
+	ops : String
+operations
+end
+
+class VariableDeclaration
+attributes
+	name : String
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+abstract class ATerm
+attributes
+	symbol : String
+operations
+end
+
+class Term<ATerm
+attributes
+operations
+end
+
+class Variable<ATerm
+attributes
+operations
+end
+
+class Equation
+attributes
+operations
+end
+
+composition xxx_ADT_signature between
+	ADT[*] role xxx_ADT_signature_src
+	Signature[1] role signature
+end
+
+composition xxx_ADT_variables between
+	ADT[0..1] role xxx_ADT_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_ADT_equations between
+	ADT[0..1] role xxx_ADT_equations_src
+	Equation[*] role equations
+end
+
+association xxx_SubSort_superSort between
+	SubSort[*] role xxx_SubSort_superSort_src
+	ASort[1] role superSort
+end
+
+association xxx_Signature_allOperations between
+	Signature[0..1] role xxx_Signature_allOperations_src
+	Operation[*] role allOperations
+end
+
+composition xxx_Signature_sorts between
+	Signature[0..1] role xxx_Signature_sorts_src
+	ASort[1..*] role sorts
+end
+
+composition xxx_Signature_operations_ between
+	Signature[0..1] role xxx_Signature_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_Signature_generators between
+	Signature[0..1] role xxx_Signature_generators_src
+	Operation[1..*] role generators
+end
+
+association xxx_VariableDeclaration_sort between
+	VariableDeclaration[*] role xxx_VariableDeclaration_sort_src
+	ASort[1] role sort
+end
+
+association xxx_Operation_returnType between
+	Operation[*] role xxx_Operation_returnType_src
+	ASort[1] role returnType
+end
+
+association xxx_Operation_formalParameters between
+	Operation[0..1] role xxx_Operation_formalParameters_src
+	ASort[*] role formalParameters
+end
+
+association xxx_ATerm_adt between
+	ATerm[*] role xxx_ATerm_adt_src
+	ADT[1] role adt
+end
+
+association xxx_ATerm_sort between
+	ATerm[*] role xxx_ATerm_sort_src
+	ASort[1] role sort
+end
+
+association xxx_Term_operationSymbol between
+	Term[*] role xxx_Term_operationSymbol_src
+	Operation[1] role operationSymbol
+end
+
+composition xxx_Term_subterms between
+	Term[0..1] role xxx_Term_subterms_src
+	ATerm[*] role subterms
+end
+
+association xxx_Variable_declaration between
+	Variable[*] role xxx_Variable_declaration_src
+	VariableDeclaration[0..1] role declaration
+end
+
+composition xxx_Equation_leftHandTerm between
+	Equation[*] role xxx_Equation_leftHandTerm_src
+	ATerm[1] role leftHandTerm
+end
+
+composition xxx_Equation_rightHandTerm between
+	Equation[*] role xxx_Equation_rightHandTerm_src
+	ATerm[1] role rightHandTerm
+end
+

@@ -1,0 +1,271 @@
+model anotherMicroserviceMetamodel
+enum RESTVerb{
+default
+}
+
+class Microservice
+attributes
+	uuid : String
+operations
+end
+
+class Configuration
+attributes
+operations
+end
+
+abstract class ExecutionEnvironment
+attributes
+operations
+end
+
+class Version
+attributes
+	versionString : String
+operations
+end
+
+class Endpoint
+attributes
+	ipAddress : String
+	port : String
+	url : String
+	protocol : String
+operations
+end
+
+class RESTOperation
+attributes
+	name : String
+	subPath : String
+	restVerb : RESTVerb
+operations
+end
+
+class MicroserviceType
+attributes
+	identifier : String
+operations
+end
+
+class MicroserviceRepository
+attributes
+operations
+end
+
+abstract class Host<ExecutionEnvironment
+attributes
+	hostname : String
+operations
+end
+
+abstract class Container<ExecutionEnvironment
+attributes
+operations
+end
+
+class VirtualHost<Host
+attributes
+operations
+end
+
+class PhysicalHost<Host
+attributes
+operations
+end
+
+class InfrastructureModel
+attributes
+operations
+end
+
+class DependencyModel
+attributes
+operations
+end
+
+class OperationToOperationCallingDependency
+attributes
+operations
+end
+
+class TimeSeries
+attributes
+operations
+end
+
+class TimeSeriesPoint
+attributes
+operations
+end
+
+class MicroserviceOperationTimeSeriesPoint<TimeSeriesPoint
+attributes
+operations
+end
+
+class MetaModelStructure
+attributes
+operations
+end
+
+association xxx_Microservice_environment between
+	Microservice[*] role xxx_Microservice_environment_src
+	ExecutionEnvironment[1] role environment
+end
+
+composition xxx_Microservice_endpoints between
+	Microservice[0..1] role xxx_Microservice_endpoints_src
+	Endpoint[1..*] role endpoints
+end
+
+association xxx_Microservice_microserviceType between
+	Microservice[*] role xxx_Microservice_microserviceType_src
+	MicroserviceType[1] role microserviceType
+end
+
+association xxx_Microservice_version between
+	Microservice[*] role xxx_Microservice_version_src
+	Version[1] role version
+end
+
+composition xxx_Configuration_microservices between
+	Configuration[0..1] role xxx_Configuration_microservices_src
+	Microservice[1..*] role microservices
+end
+
+association xxx_ExecutionEnvironment_microservices between
+	ExecutionEnvironment[0..1] role xxx_ExecutionEnvironment_microservices_src
+	Microservice[*] role microservices
+end
+
+association xxx_Endpoint_restOperations between
+	Endpoint[0..1] role xxx_Endpoint_restOperations_src
+	RESTOperation[1..*] role restOperations
+end
+
+composition xxx_MicroserviceType_restOperations between
+	MicroserviceType[0..1] role xxx_MicroserviceType_restOperations_src
+	RESTOperation[*] role restOperations
+end
+
+association xxx_MicroserviceType_microservices between
+	MicroserviceType[0..1] role xxx_MicroserviceType_microservices_src
+	Microservice[*] role microservices
+end
+
+composition xxx_MicroserviceType_versions between
+	MicroserviceType[0..1] role xxx_MicroserviceType_versions_src
+	Version[1..*] role versions
+end
+
+association xxx_MicroserviceType_dependencies between
+	MicroserviceType[0..1] role xxx_MicroserviceType_dependencies_src
+	OperationToOperationCallingDependency[*] role dependencies
+end
+
+composition xxx_MicroserviceRepository_microserviceTypes between
+	MicroserviceRepository[0..1] role xxx_MicroserviceRepository_microserviceTypes_src
+	MicroserviceType[1..*] role microserviceTypes
+end
+
+composition xxx_Host_containers between
+	Host[0..1] role xxx_Host_containers_src
+	Container[*] role containers
+end
+
+association xxx_Container_host between
+	Container[*] role xxx_Container_host_src
+	Host[1] role host
+end
+
+association xxx_VirtualHost_parentHost between
+	VirtualHost[*] role xxx_VirtualHost_parentHost_src
+	PhysicalHost[1] role parentHost
+end
+
+composition xxx_PhysicalHost_virtualHosts between
+	PhysicalHost[0..1] role xxx_PhysicalHost_virtualHosts_src
+	VirtualHost[*] role virtualHosts
+end
+
+composition xxx_InfrastructureModel_hosts between
+	InfrastructureModel[0..1] role xxx_InfrastructureModel_hosts_src
+	PhysicalHost[1..*] role hosts
+end
+
+composition xxx_DependencyModel_operationToOperationCallingDependencies between
+	DependencyModel[0..1] role xxx_DependencyModel_operationToOperationCallingDependencies_src
+	OperationToOperationCallingDependency[*] role operationToOperationCallingDependencies
+end
+
+association xxx_OperationToOperationCallingDependency_calledMicroservice between
+	OperationToOperationCallingDependency[*] role xxx_OperationToOperationCallingDependency_calledMicroservice_src
+	MicroserviceType[1] role calledMicroservice
+end
+
+association xxx_OperationToOperationCallingDependency_calledOperation between
+	OperationToOperationCallingDependency[*] role xxx_OperationToOperationCallingDependency_calledOperation_src
+	RESTOperation[1] role calledOperation
+end
+
+association xxx_OperationToOperationCallingDependency_callingOperation between
+	OperationToOperationCallingDependency[*] role xxx_OperationToOperationCallingDependency_callingOperation_src
+	RESTOperation[1] role callingOperation
+end
+
+association xxx_OperationToOperationCallingDependency_callingVersion between
+	OperationToOperationCallingDependency[*] role xxx_OperationToOperationCallingDependency_callingVersion_src
+	Version[1] role callingVersion
+end
+
+association xxx_OperationToOperationCallingDependency_callingMicroservice between
+	OperationToOperationCallingDependency[*] role xxx_OperationToOperationCallingDependency_callingMicroservice_src
+	MicroserviceType[1] role callingMicroservice
+end
+
+composition xxx_TimeSeries_timeSeriesPoints between
+	TimeSeries[0..1] role xxx_TimeSeries_timeSeriesPoints_src
+	TimeSeriesPoint[*] role timeSeriesPoints
+end
+
+association xxx_TimeSeriesPoint_timeSeries between
+	TimeSeriesPoint[*] role xxx_TimeSeriesPoint_timeSeries_src
+	TimeSeries[1] role timeSeries
+end
+
+association xxx_MicroserviceOperationTimeSeriesPoint_endpoint between
+	MicroserviceOperationTimeSeriesPoint[*] role xxx_MicroserviceOperationTimeSeriesPoint_endpoint_src
+	Endpoint[1] role endpoint
+end
+
+association xxx_MicroserviceOperationTimeSeriesPoint_restOperation between
+	MicroserviceOperationTimeSeriesPoint[*] role xxx_MicroserviceOperationTimeSeriesPoint_restOperation_src
+	RESTOperation[1] role restOperation
+end
+
+composition xxx_MetaModelStructure_infrastructure between
+	MetaModelStructure[*] role xxx_MetaModelStructure_infrastructure_src
+	InfrastructureModel[1] role infrastructure
+end
+
+composition xxx_MetaModelStructure_configurations between
+	MetaModelStructure[0..1] role xxx_MetaModelStructure_configurations_src
+	Configuration[1..*] role configurations
+end
+
+composition xxx_MetaModelStructure_dependencies between
+	MetaModelStructure[*] role xxx_MetaModelStructure_dependencies_src
+	DependencyModel[1] role dependencies
+end
+
+composition xxx_MetaModelStructure_timeSeries between
+	MetaModelStructure[*] role xxx_MetaModelStructure_timeSeries_src
+	TimeSeries[1] role timeSeries
+end
+
+composition xxx_MetaModelStructure_microserviceRepository between
+	MetaModelStructure[*] role xxx_MetaModelStructure_microserviceRepository_src
+	MicroserviceRepository[1] role microserviceRepository
+end
+

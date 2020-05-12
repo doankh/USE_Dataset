@@ -1,0 +1,131 @@
+model PrimitiveTypes
+class ModelElement
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class TaggedValue
+attributes
+	dataValue : String
+operations
+end
+
+class TagDefinition<ModelElement
+attributes
+	tagType : String
+operations
+end
+
+class Multiplicity
+attributes
+	value : String
+operations
+end
+
+class GeneralizableElement
+attributes
+operations
+end
+
+class Stereotype<GeneralizableElement
+attributes
+operations
+end
+
+class Geometry
+attributes
+	value : String
+operations
+end
+
+class Name
+attributes
+	value : String
+operations
+end
+
+association xxx_ModelElement_referenceTag between
+	ModelElement[0..1] role xxx_ModelElement_referenceTag_src
+	TaggedValue[*] role referenceTag
+end
+
+association xxx_ModelElement_stereotype between
+	ModelElement[0..1] role xxx_ModelElement_stereotype_src
+	Stereotype[*] role stereotype
+end
+
+association xxx_ModelElement_constraint between
+	ModelElement[0..1] role xxx_ModelElement_constraint_src
+	Constraint[*] role constraint
+end
+
+composition xxx_ModelElement_taggedValue between
+	ModelElement[0..1] role xxx_ModelElement_taggedValue_src
+	TaggedValue[*] role taggedValue
+end
+
+association xxx_Constraint_constrainedElement between
+	Constraint[0..1] role xxx_Constraint_constrainedElement_src
+	ModelElement[*] role constrainedElement
+end
+
+association xxx_Constraint_constrainedStereotype between
+	Constraint[*] role xxx_Constraint_constrainedStereotype_src
+	Stereotype[0..1] role constrainedStereotype
+end
+
+association xxx_TaggedValue_referenceValue between
+	TaggedValue[0..1] role xxx_TaggedValue_referenceValue_src
+	ModelElement[*] role referenceValue
+end
+
+association xxx_TaggedValue_type between
+	TaggedValue[*] role xxx_TaggedValue_type_src
+	TagDefinition[1] role type
+end
+
+association xxx_TagDefinition_multiplicity between
+	TagDefinition[*] role xxx_TagDefinition_multiplicity_src
+	Multiplicity[1] role multiplicity
+end
+
+association xxx_TagDefinition_typedValue between
+	TagDefinition[0..1] role xxx_TagDefinition_typedValue_src
+	TaggedValue[*] role typedValue
+end
+
+association xxx_TagDefinition_owner between
+	TagDefinition[*] role xxx_TagDefinition_owner_src
+	Stereotype[0..1] role owner
+end
+
+association xxx_Stereotype_icon between
+	Stereotype[*] role xxx_Stereotype_icon_src
+	Geometry[1] role icon
+end
+
+association xxx_Stereotype_baseClass between
+	Stereotype[0..1] role xxx_Stereotype_baseClass_src
+	Name[*] role baseClass
+end
+
+composition xxx_Stereotype_definedTag between
+	Stereotype[0..1] role xxx_Stereotype_definedTag_src
+	TagDefinition[*] role definedTag
+end
+
+composition xxx_Stereotype_stereotypeConstraint between
+	Stereotype[0..1] role xxx_Stereotype_stereotypeConstraint_src
+	Constraint[*] role stereotypeConstraint
+end
+
+association xxx_Stereotype_extendedElement between
+	Stereotype[0..1] role xxx_Stereotype_extendedElement_src
+	ModelElement[*] role extendedElement
+end
+

@@ -1,0 +1,54 @@
+model appdsl
+class App<NamedElement
+attributes
+operations
+end
+
+class Scene<NamedElement
+attributes
+operations
+end
+
+class Menu<ElementWithPosition,NamedElement
+attributes
+operations
+end
+
+class Item<ElementWithPosition,NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ElementWithPosition
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+composition xxx_App_scene between
+	App[0..1] role xxx_App_scene_src
+	Scene[*] role scene
+end
+
+composition xxx_Scene_menu between
+	Scene[0..1] role xxx_Scene_menu_src
+	Menu[*] role menu
+end
+
+composition xxx_Menu_item between
+	Menu[0..1] role xxx_Menu_item_src
+	Item[*] role item
+end
+
+association xxx_Item_transition between
+	Item[*] role xxx_Item_transition_src
+	Scene[0..1] role transition
+end
+

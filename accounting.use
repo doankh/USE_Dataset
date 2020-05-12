@@ -1,0 +1,122 @@
+model accounting
+enum InvoiceState{
+default
+}
+
+class Order
+attributes
+	id : String
+	paymentOffset : Integer
+	pricePerUnit : Real
+operations
+	validateUnitAmount(diagnosticChain : String,context_ : String):Boolean
+end
+
+class Deliverable
+attributes
+	dueDate : String
+	unitAmount : Real
+operations
+end
+
+class Invoice
+attributes
+	id : String
+	unitAmount : Real
+	invoiceDate : String
+	state : InvoiceState
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Client<NamedElement
+attributes
+operations
+end
+
+class Project<NamedElement
+attributes
+operations
+end
+
+class Employee<NamedElement
+attributes
+	emails : String
+operations
+end
+
+class ClientDatabase
+attributes
+operations
+end
+
+class EmployeeDatabase
+attributes
+operations
+end
+
+association xxx_Order_project between
+	Order[*] role xxx_Order_project_src
+	Project[1] role project
+end
+
+composition xxx_Order_deliverables between
+	Order[0..1] role xxx_Order_deliverables_src
+	Deliverable[*] role deliverables
+end
+
+composition xxx_Order_invoices between
+	Order[0..1] role xxx_Order_invoices_src
+	Invoice[*] role invoices
+end
+
+association xxx_Deliverable_order between
+	Deliverable[*] role xxx_Deliverable_order_src
+	Order[1] role order
+end
+
+association xxx_Invoice_advisor between
+	Invoice[*] role xxx_Invoice_advisor_src
+	Employee[0..1] role advisor
+end
+
+association xxx_Invoice_order between
+	Invoice[*] role xxx_Invoice_order_src
+	Order[1] role order
+end
+
+composition xxx_Client_projects between
+	Client[0..1] role xxx_Client_projects_src
+	Project[1..*] role projects
+end
+
+association xxx_Project_client between
+	Project[*] role xxx_Project_client_src
+	Client[1] role client
+end
+
+composition xxx_Project_orders between
+	Project[0..1] role xxx_Project_orders_src
+	Order[*] role orders
+end
+
+association xxx_Project_liason between
+	Project[*] role xxx_Project_liason_src
+	Employee[0..1] role liason
+end
+
+composition xxx_ClientDatabase_clients between
+	ClientDatabase[0..1] role xxx_ClientDatabase_clients_src
+	Client[*] role clients
+end
+
+composition xxx_EmployeeDatabase_employees between
+	EmployeeDatabase[0..1] role xxx_EmployeeDatabase_employees_src
+	Employee[*] role employees
+end
+

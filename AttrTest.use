@@ -1,0 +1,58 @@
+model TestPackage
+enum TestEnum{
+default
+}
+
+enum SubTestEnum{
+default
+}
+
+class TestClass<SuperClass,UberClass
+attributes
+	testAttr : String
+	testStringAttr : String
+	testRealAttr : String
+	testBooleanAttr : Boolean
+	testIntAttr : Integer
+	testAttr1 : Integer
+	testAttr2 : Integer
+	testAttr3 : Integer
+	testAttr4 : Integer
+	testAttr5 : Integer
+	testUnlimitedNaturalAttr : Integer
+	testAttr6 : Integer
+	testAttr7 : Integer
+	testAttr8 : Integer
+operations
+end
+
+abstract class TestInterface<SuperClass
+attributes
+operations
+end
+
+abstract class SuperClass
+attributes
+operations
+end
+
+abstract class UberClass
+attributes
+operations
+end
+
+class SubTestClass
+attributes
+	testIntAttr : Integer
+	testStringAttr : String
+	testRealAttr : String
+	testBooleanAttr : Boolean
+	testAttr : String
+operations
+end
+
+abstract class SubTestInterface
+attributes
+operations
+end
+

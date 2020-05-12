@@ -1,0 +1,85 @@
+model model_
+class ProfilingInstruction
+attributes
+	launchedTime : Integer
+	stackFrames : String
+	instructionID : Integer
+	content : String
+	launchedMemoryUsage : Integer
+	hasError : Boolean
+operations
+end
+
+class ProfilingOperation<ProfilingInstruction
+attributes
+	endTime : Integer
+	totalExecutedInstructions : Integer
+	endMemoryUsage : Integer
+	maxMemoryUsage : Integer
+	matchingOperation : Boolean
+operations
+end
+
+class ProfilingModel<ProfilingOperation
+attributes
+	modelName : String
+operations
+end
+
+class ATLOperation<ATLInstruction
+attributes
+	calls : Integer
+operations
+end
+
+class ATLInstruction
+attributes
+	ATLElementRef : String
+	name : String
+operations
+end
+
+class Context
+attributes
+	content : String
+operations
+end
+
+class ExecutionError
+attributes
+	message : String
+	error : String
+	frames : String
+operations
+end
+
+association xxx_ProfilingInstruction_parentOperation between
+	ProfilingInstruction[*] role xxx_ProfilingInstruction_parentOperation_src
+	ProfilingOperation[0..1] role parentOperation
+end
+
+association xxx_ProfilingInstruction_atlInstruction between
+	ProfilingInstruction[*] role xxx_ProfilingInstruction_atlInstruction_src
+	ATLInstruction[1] role atlInstruction
+end
+
+composition xxx_ProfilingOperation_executionInstructions between
+	ProfilingOperation[0..1] role xxx_ProfilingOperation_executionInstructions_src
+	ProfilingInstruction[*] role executionInstructions
+end
+
+composition xxx_ProfilingOperation_context_ between
+	ProfilingOperation[0..1] role xxx_ProfilingOperation_context__src
+	Context[*] role context_
+end
+
+composition xxx_ProfilingOperation_executionErrors between
+	ProfilingOperation[0..1] role xxx_ProfilingOperation_executionErrors_src
+	ExecutionError[*] role executionErrors
+end
+
+association xxx_ATLInstruction_profilingInstructions between
+	ATLInstruction[0..1] role xxx_ATLInstruction_profilingInstructions_src
+	ProfilingInstruction[*] role profilingInstructions
+end
+

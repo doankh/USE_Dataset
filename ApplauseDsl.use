@@ -1,0 +1,494 @@
+model applauseDsl
+enum SerializationFormat{
+default
+}
+
+enum TableViewStyle{
+default
+}
+
+enum CellType{
+default
+}
+
+enum CellAccessory{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class ModelElement
+attributes
+	name : String
+operations
+end
+
+class PropertyPathPart
+attributes
+	name : String
+operations
+end
+
+class TypeDescription
+attributes
+	many : Boolean
+operations
+end
+
+class Parameter<PropertyPathPart
+attributes
+operations
+end
+
+class ObjectReference<Expression,ScalarExpression,CollectionExpression
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class ScalarExpression
+attributes
+operations
+end
+
+class CollectionExpression
+attributes
+operations
+end
+
+class StringLiteral<Expression,ScalarExpression
+attributes
+	value : String
+operations
+end
+
+class StringFunction<Expression,ScalarExpression
+attributes
+operations
+end
+
+class CollectionLiteral<Expression,CollectionExpression
+attributes
+operations
+end
+
+class CollectionFunction<Expression,CollectionExpression
+attributes
+operations
+end
+
+class Application
+attributes
+	name : String
+operations
+end
+
+class Type<ModelElement
+attributes
+operations
+end
+
+class SimpleType<Type
+attributes
+	platformType : String
+operations
+end
+
+class Entity<Type
+attributes
+	runtimeType : Boolean
+operations
+end
+
+class Property<PropertyPathPart
+attributes
+	derived_ : Boolean
+operations
+end
+
+class ContentProvider<ModelElement
+attributes
+	storing : Boolean
+	many : Boolean
+operations
+end
+
+class ContentProviderImplementation
+attributes
+operations
+end
+
+class FetchingContentProviderImplementation<ContentProviderImplementation
+attributes
+	format : SerializationFormat
+operations
+end
+
+class CustomContentProviderImplementation<ContentProviderImplementation
+attributes
+operations
+end
+
+class ProviderConstruction
+attributes
+operations
+end
+
+class View<ModelElement
+attributes
+operations
+end
+
+class TabView<View
+attributes
+operations
+end
+
+class Tab
+attributes
+operations
+end
+
+class TableView<View
+attributes
+	style : TableViewStyle
+operations
+end
+
+class CustomView<View
+attributes
+	className : String
+operations
+end
+
+class ViewContentElement
+attributes
+operations
+end
+
+class Section<ViewContentElement
+attributes
+operations
+end
+
+class Cell<ViewContentElement
+attributes
+	type : CellType
+	accessory : CellAccessory
+operations
+end
+
+class CollectionIterator<PropertyPathPart
+attributes
+operations
+end
+
+class ViewAction
+attributes
+operations
+end
+
+class Selector<ViewAction
+attributes
+	name : String
+operations
+end
+
+class ExternalOpen<ViewAction
+attributes
+operations
+end
+
+class ViewCall<ViewAction
+attributes
+operations
+end
+
+class ProjectClass
+attributes
+	name : String
+operations
+end
+
+class StringConcat<StringFunction
+attributes
+operations
+end
+
+class StringReplace<StringFunction
+attributes
+operations
+end
+
+class StringUrlConform<StringFunction
+attributes
+operations
+end
+
+class StringSplit<CollectionFunction
+attributes
+operations
+end
+
+class ComplexProviderConstruction<ProviderConstruction
+attributes
+operations
+end
+
+class SimpleProviderConstruction<ProviderConstruction
+attributes
+operations
+end
+
+composition xxx_Model_application between
+	Model[*] role xxx_Model_application_src
+	Application[0..1] role application
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	ModelElement[*] role elements
+end
+
+association xxx_TypeDescription_type between
+	TypeDescription[*] role xxx_TypeDescription_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Parameter_description between
+	Parameter[*] role xxx_Parameter_description_src
+	TypeDescription[0..1] role description
+end
+
+composition xxx_Parameter_value between
+	Parameter[*] role xxx_Parameter_value_src
+	ProviderConstruction[0..1] role value
+end
+
+association xxx_ObjectReference_object between
+	ObjectReference[*] role xxx_ObjectReference_object_src
+	PropertyPathPart[0..1] role object
+end
+
+composition xxx_ObjectReference_tail between
+	ObjectReference[*] role xxx_ObjectReference_tail_src
+	ObjectReference[0..1] role tail
+end
+
+composition xxx_CollectionLiteral_items between
+	CollectionLiteral[0..1] role xxx_CollectionLiteral_items_src
+	ScalarExpression[*] role items
+end
+
+composition xxx_Application_background between
+	Application[*] role xxx_Application_background_src
+	ScalarExpression[0..1] role background
+end
+
+composition xxx_Application_startView between
+	Application[*] role xxx_Application_startView_src
+	ViewCall[0..1] role startView
+end
+
+association xxx_Entity_extends between
+	Entity[*] role xxx_Entity_extends_src
+	Entity[0..1] role extends
+end
+
+composition xxx_Entity_properties between
+	Entity[0..1] role xxx_Entity_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Property_description between
+	Property[*] role xxx_Property_description_src
+	TypeDescription[0..1] role description
+end
+
+composition xxx_ContentProvider_parameter between
+	ContentProvider[*] role xxx_ContentProvider_parameter_src
+	Parameter[0..1] role parameter
+end
+
+association xxx_ContentProvider_type between
+	ContentProvider[*] role xxx_ContentProvider_type_src
+	Type[0..1] role type
+end
+
+composition xxx_ContentProvider_implementation between
+	ContentProvider[*] role xxx_ContentProvider_implementation_src
+	ContentProviderImplementation[0..1] role implementation
+end
+
+composition xxx_FetchingContentProviderImplementation_url between
+	FetchingContentProviderImplementation[*] role xxx_FetchingContentProviderImplementation_url_src
+	ScalarExpression[0..1] role url
+end
+
+composition xxx_FetchingContentProviderImplementation_selection between
+	FetchingContentProviderImplementation[*] role xxx_FetchingContentProviderImplementation_selection_src
+	ScalarExpression[0..1] role selection
+end
+
+composition xxx_CustomContentProviderImplementation_providerClass between
+	CustomContentProviderImplementation[*] role xxx_CustomContentProviderImplementation_providerClass_src
+	ProjectClass[0..1] role providerClass
+end
+
+composition xxx_View_content between
+	View[*] role xxx_View_content_src
+	Parameter[0..1] role content
+end
+
+composition xxx_TabView_tabs between
+	TabView[0..1] role xxx_TabView_tabs_src
+	Tab[*] role tabs
+end
+
+composition xxx_Tab_title between
+	Tab[*] role xxx_Tab_title_src
+	ScalarExpression[0..1] role title
+end
+
+composition xxx_Tab_icon between
+	Tab[*] role xxx_Tab_icon_src
+	ScalarExpression[0..1] role icon
+end
+
+composition xxx_Tab_view between
+	Tab[*] role xxx_Tab_view_src
+	ViewCall[0..1] role view
+end
+
+composition xxx_TableView_variables between
+	TableView[0..1] role xxx_TableView_variables_src
+	Parameter[*] role variables
+end
+
+composition xxx_TableView_title between
+	TableView[*] role xxx_TableView_title_src
+	ScalarExpression[0..1] role title
+end
+
+composition xxx_TableView_titleImage between
+	TableView[*] role xxx_TableView_titleImage_src
+	ScalarExpression[0..1] role titleImage
+end
+
+composition xxx_TableView_sections between
+	TableView[0..1] role xxx_TableView_sections_src
+	Section[*] role sections
+end
+
+composition xxx_ViewContentElement_iterator between
+	ViewContentElement[*] role xxx_ViewContentElement_iterator_src
+	CollectionIterator[0..1] role iterator
+end
+
+composition xxx_Section_title between
+	Section[*] role xxx_Section_title_src
+	ScalarExpression[0..1] role title
+end
+
+composition xxx_Section_cells between
+	Section[0..1] role xxx_Section_cells_src
+	Cell[*] role cells
+end
+
+composition xxx_Cell_text between
+	Cell[*] role xxx_Cell_text_src
+	ScalarExpression[0..1] role text
+end
+
+composition xxx_Cell_details between
+	Cell[*] role xxx_Cell_details_src
+	ScalarExpression[0..1] role details
+end
+
+composition xxx_Cell_image between
+	Cell[*] role xxx_Cell_image_src
+	ScalarExpression[0..1] role image
+end
+
+composition xxx_Cell_action between
+	Cell[*] role xxx_Cell_action_src
+	ViewAction[0..1] role action
+end
+
+composition xxx_CollectionIterator_collection between
+	CollectionIterator[*] role xxx_CollectionIterator_collection_src
+	CollectionExpression[0..1] role collection
+end
+
+composition xxx_ExternalOpen_url between
+	ExternalOpen[*] role xxx_ExternalOpen_url_src
+	ScalarExpression[0..1] role url
+end
+
+association xxx_ViewCall_view between
+	ViewCall[*] role xxx_ViewCall_view_src
+	View[0..1] role view
+end
+
+composition xxx_ViewCall_provider between
+	ViewCall[*] role xxx_ViewCall_provider_src
+	ProviderConstruction[0..1] role provider
+end
+
+composition xxx_StringConcat_values between
+	StringConcat[0..1] role xxx_StringConcat_values_src
+	ScalarExpression[*] role values
+end
+
+composition xxx_StringReplace_value between
+	StringReplace[*] role xxx_StringReplace_value_src
+	ScalarExpression[0..1] role value
+end
+
+composition xxx_StringReplace_match between
+	StringReplace[*] role xxx_StringReplace_match_src
+	ScalarExpression[0..1] role match
+end
+
+composition xxx_StringReplace_replacement between
+	StringReplace[*] role xxx_StringReplace_replacement_src
+	ScalarExpression[0..1] role replacement
+end
+
+composition xxx_StringUrlConform_value between
+	StringUrlConform[*] role xxx_StringUrlConform_value_src
+	ScalarExpression[0..1] role value
+end
+
+composition xxx_StringSplit_value between
+	StringSplit[*] role xxx_StringSplit_value_src
+	ScalarExpression[0..1] role value
+end
+
+composition xxx_StringSplit_delimiter between
+	StringSplit[*] role xxx_StringSplit_delimiter_src
+	ScalarExpression[0..1] role delimiter
+end
+
+association xxx_ComplexProviderConstruction_provider between
+	ComplexProviderConstruction[*] role xxx_ComplexProviderConstruction_provider_src
+	ContentProvider[0..1] role provider
+end
+
+composition xxx_ComplexProviderConstruction_argument between
+	ComplexProviderConstruction[*] role xxx_ComplexProviderConstruction_argument_src
+	Expression[0..1] role argument
+end
+
+composition xxx_SimpleProviderConstruction_expression between
+	SimpleProviderConstruction[*] role xxx_SimpleProviderConstruction_expression_src
+	Expression[0..1] role expression
+end
+

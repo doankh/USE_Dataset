@@ -1,0 +1,127 @@
+model bio
+class Model
+attributes
+operations
+end
+
+class Protein
+attributes
+	Name : String
+	Accession : String
+	Created : String
+operations
+end
+
+class Gene
+attributes
+	Name : String
+	WID : String
+operations
+end
+
+class Synonym
+attributes
+	Name : String
+	WID : String
+	Gene_WID : String
+operations
+end
+
+class Reaction
+attributes
+	Entry : String
+	Name : String
+	Comment : String
+	Orthology : String
+operations
+end
+
+class ChemicalInfo
+attributes
+	Definition : String
+	Equation : String
+operations
+end
+
+class Taxon
+attributes
+	Id : String
+	Name : String
+	UniqueName : String
+	Class : String
+	ParentID : String
+	Rank : String
+	EmblCode : String
+operations
+end
+
+class Experiment
+attributes
+	Contact : String
+	Date : String
+	Description : String
+operations
+end
+
+class ExperimentalData
+attributes
+	Data : String
+	Role : String
+operations
+end
+
+composition xxx_Model_protein between
+	Model[0..1] role xxx_Model_protein_src
+	Protein[*] role protein
+end
+
+composition xxx_Model_genes between
+	Model[0..1] role xxx_Model_genes_src
+	Gene[*] role genes
+end
+
+composition xxx_Model_synonyms between
+	Model[0..1] role xxx_Model_synonyms_src
+	Synonym[*] role synonyms
+end
+
+composition xxx_Model_reactions between
+	Model[0..1] role xxx_Model_reactions_src
+	Reaction[*] role reactions
+end
+
+composition xxx_Model_taxonomies between
+	Model[0..1] role xxx_Model_taxonomies_src
+	Taxon[*] role taxonomies
+end
+
+association xxx_Gene_Protein between
+	Gene[*] role xxx_Gene_Protein_src
+	Protein[1] role Protein
+end
+
+association xxx_Synonym_Protein between
+	Synonym[*] role xxx_Synonym_Protein_src
+	Protein[0..1] role Protein
+end
+
+association xxx_Synonym_Gene between
+	Synonym[*] role xxx_Synonym_Gene_src
+	Gene[0..1] role Gene
+end
+
+composition xxx_Reaction_cofactor between
+	Reaction[*] role xxx_Reaction_cofactor_src
+	ChemicalInfo[1] role cofactor
+end
+
+association xxx_Taxon_Parent between
+	Taxon[*] role xxx_Taxon_Parent_src
+	Taxon[0..1] role Parent
+end
+
+composition xxx_Experiment_ExperimentalData between
+	Experiment[0..1] role xxx_Experiment_ExperimentalData_src
+	ExperimentalData[*] role ExperimentalData
+end
+

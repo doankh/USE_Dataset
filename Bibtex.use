@@ -1,0 +1,241 @@
+model PrimitiveTypes
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Bibtex
+attributes
+operations
+end
+
+abstract class Entry<LocatedElement
+attributes
+	key : String
+operations
+end
+
+class Article<Entry
+attributes
+operations
+end
+
+class Book<Entry
+attributes
+operations
+end
+
+class Inbook<Entry
+attributes
+operations
+end
+
+class Booklet<Entry
+attributes
+operations
+end
+
+class Inproceedings<Entry
+attributes
+operations
+end
+
+class Proceedings<Entry
+attributes
+operations
+end
+
+class Incollection<Entry
+attributes
+operations
+end
+
+class Techreport<Entry
+attributes
+operations
+end
+
+class PhdThesis<Entry
+attributes
+operations
+end
+
+class MastersThesis<Entry
+attributes
+operations
+end
+
+class Manual<Entry
+attributes
+operations
+end
+
+class Misc<Entry
+attributes
+operations
+end
+
+abstract class Field
+attributes
+	value : String
+operations
+end
+
+class Authors<Field
+attributes
+operations
+end
+
+class AuthorUrls<Field
+attributes
+operations
+end
+
+class Title<Field
+attributes
+operations
+end
+
+class Journal<Field
+attributes
+operations
+end
+
+class BookTitle<Field
+attributes
+operations
+end
+
+class Institution<Field
+attributes
+operations
+end
+
+class Organization<Field
+attributes
+operations
+end
+
+class Type<Field
+attributes
+operations
+end
+
+class Day<Field
+attributes
+operations
+end
+
+class Number<Field
+attributes
+operations
+end
+
+class Chapter<Field
+attributes
+operations
+end
+
+class Volume<Field
+attributes
+operations
+end
+
+class Series<Field
+attributes
+operations
+end
+
+class Pages<Field
+attributes
+operations
+end
+
+class Publisher<Field
+attributes
+operations
+end
+
+class Howpublished<Field
+attributes
+operations
+end
+
+class School<Field
+attributes
+operations
+end
+
+class Editor<Field
+attributes
+operations
+end
+
+class Edition<Field
+attributes
+operations
+end
+
+class Address<Field
+attributes
+operations
+end
+
+class Year<Field
+attributes
+operations
+end
+
+class Month<Field
+attributes
+operations
+end
+
+class Note<Field
+attributes
+operations
+end
+
+class Text<Field
+attributes
+operations
+end
+
+class AbstractField<Field
+attributes
+operations
+end
+
+class Isbn<Field
+attributes
+operations
+end
+
+class Issn<Field
+attributes
+operations
+end
+
+class Url<Field
+attributes
+operations
+end
+
+class Doi<Field
+attributes
+operations
+end
+
+composition xxx_Bibtex_entries between
+	Bibtex[0..1] role xxx_Bibtex_entries_src
+	Entry[*] role entries
+end
+
+composition xxx_Entry_fields between
+	Entry[0..1] role xxx_Entry_fields_src
+	Field[*] role fields
+end
+

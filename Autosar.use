@@ -1,0 +1,139 @@
+model Autosar
+class System
+attributes
+	shortName : String
+operations
+end
+
+class RootElement
+attributes
+operations
+end
+
+class SoftwareComposition
+attributes
+	shortName : String
+operations
+end
+
+class SystemMapping
+attributes
+	shortName : String
+operations
+end
+
+class CompositionType<ComponentType
+attributes
+operations
+end
+
+class ComponentPrototype
+attributes
+	shortName : String
+operations
+end
+
+abstract class PortPrototype
+attributes
+	shortName : String
+operations
+end
+
+class PPortPrototype<PortPrototype
+attributes
+operations
+end
+
+class RPortPrototype<PortPrototype
+attributes
+operations
+end
+
+abstract class ComponentType
+attributes
+	shortName : String
+operations
+end
+
+class EcuInstance
+attributes
+	shortName : String
+operations
+end
+
+class SwcToEcuMapping
+attributes
+	shortName : String
+operations
+end
+
+class SwCompToEcuMapping_component
+attributes
+operations
+end
+
+composition xxx_System_softwareComposition between
+	System[*] role xxx_System_softwareComposition_src
+	SoftwareComposition[1] role softwareComposition
+end
+
+composition xxx_System_mapping between
+	System[*] role xxx_System_mapping_src
+	SystemMapping[1] role mapping
+end
+
+composition xxx_RootElement_System between
+	RootElement[0..1] role xxx_RootElement_System_src
+	System[*] role System
+end
+
+composition xxx_RootElement_EcuInstance between
+	RootElement[0..1] role xxx_RootElement_EcuInstance_src
+	EcuInstance[*] role EcuInstance
+end
+
+composition xxx_RootElement_CompositionType between
+	RootElement[0..1] role xxx_RootElement_CompositionType_src
+	CompositionType[*] role CompositionType
+end
+
+association xxx_SoftwareComposition_softwareComposition between
+	SoftwareComposition[*] role xxx_SoftwareComposition_softwareComposition_src
+	CompositionType[1] role softwareComposition
+end
+
+composition xxx_SystemMapping_swMapping between
+	SystemMapping[0..1] role xxx_SystemMapping_swMapping_src
+	SwcToEcuMapping[*] role swMapping
+end
+
+composition xxx_CompositionType_component between
+	CompositionType[0..1] role xxx_CompositionType_component_src
+	ComponentPrototype[1..*] role component
+end
+
+association xxx_ComponentPrototype_type between
+	ComponentPrototype[*] role xxx_ComponentPrototype_type_src
+	ComponentType[1] role type
+end
+
+composition xxx_ComponentType_port between
+	ComponentType[0..1] role xxx_ComponentType_port_src
+	PortPrototype[*] role port
+end
+
+composition xxx_SwcToEcuMapping_component between
+	SwcToEcuMapping[0..1] role xxx_SwcToEcuMapping_component_src
+	SwCompToEcuMapping_component[1..*] role component
+end
+
+association xxx_SwcToEcuMapping_ecuInstance between
+	SwcToEcuMapping[*] role xxx_SwcToEcuMapping_ecuInstance_src
+	EcuInstance[1] role ecuInstance
+end
+
+association xxx_SwCompToEcuMapping_component_componentPrototype between
+	SwCompToEcuMapping_component[0..1] role xxx_SwCompToEcuMapping_component_componentPrototype_src
+	ComponentPrototype[*] role componentPrototype
+end
+

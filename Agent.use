@@ -1,0 +1,181 @@
+model Agent
+class Belief
+attributes
+	description : String
+	dynamic : Boolean
+	name : String
+operations
+end
+
+class Goal
+attributes
+	name : String
+	description : String
+	recur : Boolean
+operations
+end
+
+class Capabilities
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Plan
+attributes
+	name : String
+	type : String
+	description : String
+	priority : Integer
+operations
+end
+
+class Behaviour
+attributes
+	name : String
+	resident : String
+operations
+end
+
+class SemanticWebAgent
+attributes
+	name : String
+	description : String
+	properties : String
+operations
+end
+
+class SWSMatchmakerAgent<SemanticWebAgent
+attributes
+operations
+end
+
+class AgentState
+attributes
+	name : String
+operations
+end
+
+class Role
+attributes
+	name : String
+operations
+end
+
+class AgentType
+attributes
+	name : String
+operations
+end
+
+class AgentViewpoint
+attributes
+operations
+end
+
+composition xxx_Capabilities_uses between
+	Capabilities[0..1] role xxx_Capabilities_uses_src
+	Goal[*] role uses
+end
+
+composition xxx_Capabilities_applies between
+	Capabilities[0..1] role xxx_Capabilities_applies_src
+	Plan[*] role applies
+end
+
+composition xxx_Capabilities_includes between
+	Capabilities[0..1] role xxx_Capabilities_includes_src
+	Belief[*] role includes
+end
+
+association xxx_Plan_dispatches between
+	Plan[0..1] role xxx_Plan_dispatches_src
+	Goal[*] role dispatches
+end
+
+composition xxx_Behaviour_composed_of between
+	Behaviour[0..1] role xxx_Behaviour_composed_of_src
+	Behaviour[*] role composed_of
+end
+
+association xxx_Behaviour_executes between
+	Behaviour[0..1] role xxx_Behaviour_executes_src
+	Plan[*] role executes
+end
+
+association xxx_SemanticWebAgent_includes between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_includes_src
+	Capabilities[1..*] role includes
+end
+
+association xxx_SemanticWebAgent_plays between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_plays_src
+	Role[1..*] role plays
+end
+
+composition xxx_SemanticWebAgent_contains between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_contains_src
+	AgentState[1..*] role contains
+end
+
+composition xxx_SemanticWebAgent_has between
+	SemanticWebAgent[*] role xxx_SemanticWebAgent_has_src
+	AgentType[1] role has
+end
+
+association xxx_Role_has between
+	Role[0..1] role xxx_Role_has_src
+	Behaviour[1..*] role has
+end
+
+composition xxx_AgentViewpoint_containsRole between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsRole_src
+	Role[*] role containsRole
+end
+
+composition xxx_AgentViewpoint_containsSWA between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsSWA_src
+	SemanticWebAgent[*] role containsSWA
+end
+
+composition xxx_AgentViewpoint_containsBehaviour between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsBehaviour_src
+	Behaviour[*] role containsBehaviour
+end
+
+composition xxx_AgentViewpoint_containsCapabilities between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsCapabilities_src
+	Capabilities[*] role containsCapabilities
+end
+
+association xxx_AgentViewpoint_containsBelief between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsBelief_src
+	Belief[*] role containsBelief
+end
+
+association xxx_AgentViewpoint_containsGoal between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsGoal_src
+	Goal[*] role containsGoal
+end
+
+association xxx_AgentViewpoint_containsPlan between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsPlan_src
+	Plan[*] role containsPlan
+end
+
+association xxx_AgentViewpoint_containsMatchmakerAgent between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsMatchmakerAgent_src
+	SWSMatchmakerAgent[*] role containsMatchmakerAgent
+end
+
+association xxx_AgentViewpoint_containsAgentState between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsAgentState_src
+	AgentState[*] role containsAgentState
+end
+
+association xxx_AgentViewpoint_containsAgentType between
+	AgentViewpoint[0..1] role xxx_AgentViewpoint_containsAgentType_src
+	AgentType[*] role containsAgentType
+end
+

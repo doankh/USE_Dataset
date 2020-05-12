@@ -1,0 +1,280 @@
+model activitydiagram
+enum IntegerCalculationOperator{
+default
+}
+
+enum IntegerComparisionOperator{
+default
+}
+
+enum BooleanUnaryOperator{
+default
+}
+
+enum BooleanBinaryOperator{
+default
+}
+
+class Activity<NamedElement
+attributes
+operations
+end
+
+abstract class ActivityNode<NamedElement
+attributes
+operations
+end
+
+abstract class ActivityEdge<NamedElement
+attributes
+operations
+end
+
+class ControlFlow<ActivityEdge
+attributes
+operations
+end
+
+abstract class ControlNode<ActivityNode
+attributes
+operations
+end
+
+abstract class ExecutableNode<ActivityNode
+attributes
+operations
+end
+
+abstract class Action<ExecutableNode
+attributes
+operations
+end
+
+class OpaqueAction<Action
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class InitialNode<ControlNode
+attributes
+operations
+end
+
+abstract class FinalNode<ControlNode
+attributes
+operations
+end
+
+class ActivityFinalNode<FinalNode
+attributes
+operations
+end
+
+class ForkNode<ControlNode
+attributes
+operations
+end
+
+class JoinNode<ControlNode
+attributes
+operations
+end
+
+class MergeNode<ControlNode
+attributes
+operations
+end
+
+class DecisionNode<ControlNode
+attributes
+operations
+end
+
+abstract class Variable<NamedElement
+attributes
+operations
+end
+
+class IntegerVariable<Variable
+attributes
+operations
+end
+
+class StringVariable<Variable
+attributes
+operations
+end
+
+class BooleanVariable<Variable
+attributes
+operations
+end
+
+abstract class Value
+attributes
+operations
+end
+
+class StringValue<Value
+attributes
+	value : String
+operations
+end
+
+class BooleanValue<Value
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerValue<Value
+attributes
+	value : Integer
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class IntegerExpression<Expression
+attributes
+operations
+end
+
+abstract class BooleanExpression<Expression
+attributes
+operations
+end
+
+class IntegerCalculationExpression<IntegerExpression
+attributes
+	operator : IntegerCalculationOperator
+operations
+end
+
+class IntegerComparisonExpression<IntegerExpression
+attributes
+	operator : IntegerComparisionOperator
+operations
+end
+
+class BooleanUnaryExpression<BooleanExpression
+attributes
+	operator : BooleanUnaryOperator
+operations
+end
+
+class BooleanBinaryExpression<BooleanExpression
+attributes
+	operator : BooleanBinaryOperator
+operations
+end
+
+composition xxx_Activity_nodes between
+	Activity[0..1] role xxx_Activity_nodes_src
+	ActivityNode[*] role nodes
+end
+
+composition xxx_Activity_edges between
+	Activity[0..1] role xxx_Activity_edges_src
+	ActivityEdge[*] role edges
+end
+
+composition xxx_Activity_locals between
+	Activity[0..1] role xxx_Activity_locals_src
+	Variable[*] role locals
+end
+
+composition xxx_Activity_inputs between
+	Activity[0..1] role xxx_Activity_inputs_src
+	Variable[*] role inputs
+end
+
+association xxx_ActivityNode_outgoing between
+	ActivityNode[0..1] role xxx_ActivityNode_outgoing_src
+	ActivityEdge[*] role outgoing
+end
+
+association xxx_ActivityNode_incoming between
+	ActivityNode[0..1] role xxx_ActivityNode_incoming_src
+	ActivityEdge[*] role incoming
+end
+
+association xxx_ActivityNode_activity between
+	ActivityNode[*] role xxx_ActivityNode_activity_src
+	Activity[1] role activity
+end
+
+association xxx_ActivityEdge_source between
+	ActivityEdge[*] role xxx_ActivityEdge_source_src
+	ActivityNode[1] role source
+end
+
+association xxx_ActivityEdge_target between
+	ActivityEdge[*] role xxx_ActivityEdge_target_src
+	ActivityNode[1] role target
+end
+
+association xxx_ControlFlow_guard between
+	ControlFlow[*] role xxx_ControlFlow_guard_src
+	BooleanVariable[0..1] role guard
+end
+
+composition xxx_OpaqueAction_expressions between
+	OpaqueAction[0..1] role xxx_OpaqueAction_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_Variable_initialValue between
+	Variable[*] role xxx_Variable_initialValue_src
+	Value[0..1] role initialValue
+end
+
+association xxx_IntegerExpression_operand2 between
+	IntegerExpression[*] role xxx_IntegerExpression_operand2_src
+	IntegerVariable[0..1] role operand2
+end
+
+association xxx_IntegerExpression_operand1 between
+	IntegerExpression[*] role xxx_IntegerExpression_operand1_src
+	IntegerVariable[0..1] role operand1
+end
+
+association xxx_BooleanExpression_assignee between
+	BooleanExpression[*] role xxx_BooleanExpression_assignee_src
+	BooleanVariable[1] role assignee
+end
+
+association xxx_IntegerCalculationExpression_assignee between
+	IntegerCalculationExpression[*] role xxx_IntegerCalculationExpression_assignee_src
+	IntegerVariable[1] role assignee
+end
+
+association xxx_IntegerComparisonExpression_assignee between
+	IntegerComparisonExpression[*] role xxx_IntegerComparisonExpression_assignee_src
+	BooleanVariable[1] role assignee
+end
+
+association xxx_BooleanUnaryExpression_operand between
+	BooleanUnaryExpression[*] role xxx_BooleanUnaryExpression_operand_src
+	BooleanVariable[1] role operand
+end
+
+association xxx_BooleanBinaryExpression_operand1 between
+	BooleanBinaryExpression[*] role xxx_BooleanBinaryExpression_operand1_src
+	BooleanVariable[1] role operand1
+end
+
+association xxx_BooleanBinaryExpression_operand2 between
+	BooleanBinaryExpression[*] role xxx_BooleanBinaryExpression_operand2_src
+	BooleanVariable[1] role operand2
+end
+

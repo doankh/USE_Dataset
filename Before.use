@@ -1,0 +1,145 @@
+model minuml1
+enum PseudostateKind{
+default
+}
+
+class ModelElement
+attributes
+	name : String
+operations
+end
+
+class StateMachine<ModelElement
+attributes
+operations
+end
+
+class Activity<StateMachine
+attributes
+operations
+end
+
+class Partition<ModelElement
+attributes
+operations
+end
+
+abstract class StateVertex<ModelElement
+attributes
+operations
+end
+
+class State<StateVertex
+attributes
+operations
+end
+
+class CompositeState<State
+attributes
+operations
+end
+
+class ActionState<State
+attributes
+	isDynamic : Boolean
+operations
+end
+
+class Pseudostate<StateVertex
+attributes
+	kind : PseudostateKind
+operations
+end
+
+class ObjectFlowState<State
+attributes
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class Transition<ModelElement
+attributes
+operations
+end
+
+class Guard<ModelElement
+attributes
+operations
+end
+
+class BooleanExpression
+attributes
+	language : String
+	body : String
+operations
+end
+
+association xxx_ModelElement_partition between
+	ModelElement[*] role xxx_ModelElement_partition_src
+	Partition[1] role partition
+end
+
+composition xxx_StateMachine_top between
+	StateMachine[*] role xxx_StateMachine_top_src
+	State[1] role top
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Activity_parition between
+	Activity[0..1] role xxx_Activity_parition_src
+	Partition[*] role parition
+end
+
+association xxx_Partition_contents between
+	Partition[0..1] role xxx_Partition_contents_src
+	ModelElement[*] role contents
+end
+
+association xxx_StateVertex_outgoing between
+	StateVertex[0..1] role xxx_StateVertex_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_StateVertex_incoming between
+	StateVertex[0..1] role xxx_StateVertex_incoming_src
+	Transition[*] role incoming
+end
+
+composition xxx_CompositeState_subvertex between
+	CompositeState[0..1] role xxx_CompositeState_subvertex_src
+	StateVertex[*] role subvertex
+end
+
+composition xxx_ObjectFlowState_type between
+	ObjectFlowState[*] role xxx_ObjectFlowState_type_src
+	ModelElement[1] role type
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	StateVertex[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	StateVertex[1] role target
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[0..1] role guard
+end
+
+composition xxx_Guard_expression between
+	Guard[*] role xxx_Guard_expression_src
+	BooleanExpression[1] role expression
+end
+

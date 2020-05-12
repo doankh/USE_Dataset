@@ -1,0 +1,421 @@
+model ActivitiesProv
+class Activity
+attributes
+	isReadOnly : String
+	isSingleExecution : String
+operations
+end
+
+abstract class ActivityNode
+attributes
+operations
+end
+
+abstract class ActivityGroup
+attributes
+operations
+end
+
+abstract class ObjectNode<ActivityNode
+attributes
+operations
+end
+
+class ActivityParameterNode<ObjectNode
+attributes
+operations
+end
+
+abstract class ControlNode<ActivityNode
+attributes
+operations
+end
+
+class ActivityFinalNode<ControlNode,FinalNode
+attributes
+operations
+end
+
+class InitialNode<ControlNode
+attributes
+operations
+end
+
+abstract class ActivityEdge
+attributes
+operations
+end
+
+class ControlFlow<ActivityEdge
+attributes
+operations
+end
+
+class ObjectFlow<ActivityEdge
+attributes
+	isMulticast : String
+	isMultireceive : String
+	isControlType : String
+operations
+end
+
+class CentralBufferNode<ObjectNode
+attributes
+operations
+end
+
+abstract class FinalNode<ControlNode
+attributes
+operations
+end
+
+class FlowFinalNode<FinalNode
+attributes
+operations
+end
+
+class ForkNode<ControlNode
+attributes
+operations
+end
+
+class JoinNode<ControlNode
+attributes
+	isCombineDuplicate : String
+operations
+end
+
+class MergeNode<ControlNode
+attributes
+operations
+end
+
+class DecisionNode<ControlNode
+attributes
+operations
+end
+
+class ActivityPartition<ActivityGroup
+attributes
+operations
+end
+
+class DataStoreNode<CentralBufferNode
+attributes
+operations
+end
+
+class ParameterSet
+attributes
+operations
+end
+
+class InterruptibleActivityRegion<ActivityGroup
+attributes
+operations
+end
+
+class StructuredActivityNode<ExecutableNode,ActivityGroup
+attributes
+	mustIsolate : String
+operations
+end
+
+class ExecutableNode<ActivityNode
+attributes
+operations
+end
+
+class LoopNode<StructuredActivityNode
+attributes
+	isTestedFirst : String
+operations
+end
+
+class ConditionalNode<StructuredActivityNode
+attributes
+	isDeterminate : String
+	isAssumed : String
+operations
+end
+
+class Clause
+attributes
+operations
+end
+
+class SequenceNode<StructuredActivityNode
+attributes
+operations
+end
+
+class ExceptionHandler
+attributes
+operations
+end
+
+class ExpansionRegion<StructuredActivityNode
+attributes
+operations
+end
+
+class ExpansionNode<ObjectNode
+attributes
+operations
+end
+
+composition xxx_Activity_node between
+	Activity[0..1] role xxx_Activity_node_src
+	ActivityNode[*] role node
+end
+
+composition xxx_Activity_group between
+	Activity[0..1] role xxx_Activity_group_src
+	ActivityGroup[*] role group
+end
+
+composition xxx_Activity_edge between
+	Activity[0..1] role xxx_Activity_edge_src
+	ActivityEdge[*] role edge
+end
+
+association xxx_Activity_partition between
+	Activity[0..1] role xxx_Activity_partition_src
+	ActivityPartition[*] role partition
+end
+
+composition xxx_Activity_structuredNode between
+	Activity[0..1] role xxx_Activity_structuredNode_src
+	StructuredActivityNode[*] role structuredNode
+end
+
+association xxx_ActivityNode_inGroup between
+	ActivityNode[0..1] role xxx_ActivityNode_inGroup_src
+	ActivityGroup[*] role inGroup
+end
+
+association xxx_ActivityNode_redefinedNode between
+	ActivityNode[0..1] role xxx_ActivityNode_redefinedNode_src
+	ActivityNode[*] role redefinedNode
+end
+
+association xxx_ActivityNode_incoming between
+	ActivityNode[0..1] role xxx_ActivityNode_incoming_src
+	ActivityEdge[*] role incoming
+end
+
+association xxx_ActivityNode_outgoing between
+	ActivityNode[0..1] role xxx_ActivityNode_outgoing_src
+	ActivityEdge[*] role outgoing
+end
+
+association xxx_ActivityNode_inPartition between
+	ActivityNode[0..1] role xxx_ActivityNode_inPartition_src
+	ActivityPartition[*] role inPartition
+end
+
+association xxx_ActivityNode_inInterruptibleRegion between
+	ActivityNode[*] role xxx_ActivityNode_inInterruptibleRegion_src
+	InterruptibleActivityRegion[0..1] role inInterruptibleRegion
+end
+
+association xxx_ActivityNode_inStructuredNode between
+	ActivityNode[*] role xxx_ActivityNode_inStructuredNode_src
+	StructuredActivityNode[0..1] role inStructuredNode
+end
+
+composition xxx_ActivityGroup_subgroup between
+	ActivityGroup[0..1] role xxx_ActivityGroup_subgroup_src
+	ActivityGroup[*] role subgroup
+end
+
+association xxx_ActivityGroup_superGroup between
+	ActivityGroup[*] role xxx_ActivityGroup_superGroup_src
+	ActivityGroup[0..1] role superGroup
+end
+
+association xxx_ActivityGroup_inActivity between
+	ActivityGroup[*] role xxx_ActivityGroup_inActivity_src
+	Activity[0..1] role inActivity
+end
+
+association xxx_ActivityGroup_containedNode between
+	ActivityGroup[0..1] role xxx_ActivityGroup_containedNode_src
+	ActivityNode[*] role containedNode
+end
+
+association xxx_ActivityGroup_containedEdge between
+	ActivityGroup[0..1] role xxx_ActivityGroup_containedEdge_src
+	ActivityEdge[*] role containedEdge
+end
+
+association xxx_ActivityEdge_target between
+	ActivityEdge[*] role xxx_ActivityEdge_target_src
+	ActivityNode[1] role target
+end
+
+association xxx_ActivityEdge_source between
+	ActivityEdge[*] role xxx_ActivityEdge_source_src
+	ActivityNode[1] role source
+end
+
+association xxx_ActivityEdge_redefinedEdge between
+	ActivityEdge[0..1] role xxx_ActivityEdge_redefinedEdge_src
+	ActivityEdge[*] role redefinedEdge
+end
+
+association xxx_ActivityEdge_inGroup between
+	ActivityEdge[0..1] role xxx_ActivityEdge_inGroup_src
+	ActivityGroup[*] role inGroup
+end
+
+association xxx_ActivityEdge_inPartition between
+	ActivityEdge[0..1] role xxx_ActivityEdge_inPartition_src
+	ActivityPartition[*] role inPartition
+end
+
+association xxx_ActivityEdge_interrupts between
+	ActivityEdge[*] role xxx_ActivityEdge_interrupts_src
+	InterruptibleActivityRegion[0..1] role interrupts
+end
+
+association xxx_ActivityEdge_inStructuredNode between
+	ActivityEdge[*] role xxx_ActivityEdge_inStructuredNode_src
+	StructuredActivityNode[0..1] role inStructuredNode
+end
+
+association xxx_DecisionNode_decisionInputFlow between
+	DecisionNode[*] role xxx_DecisionNode_decisionInputFlow_src
+	ObjectFlow[0..1] role decisionInputFlow
+end
+
+association xxx_ActivityPartition_edge between
+	ActivityPartition[0..1] role xxx_ActivityPartition_edge_src
+	ActivityEdge[*] role edge
+end
+
+composition xxx_ActivityPartition_subpartition between
+	ActivityPartition[0..1] role xxx_ActivityPartition_subpartition_src
+	ActivityPartition[*] role subpartition
+end
+
+association xxx_ActivityPartition_superPartition between
+	ActivityPartition[*] role xxx_ActivityPartition_superPartition_src
+	ActivityPartition[0..1] role superPartition
+end
+
+association xxx_ActivityPartition_node between
+	ActivityPartition[0..1] role xxx_ActivityPartition_node_src
+	ActivityNode[*] role node
+end
+
+association xxx_InterruptibleActivityRegion_interruptingEdge between
+	InterruptibleActivityRegion[0..1] role xxx_InterruptibleActivityRegion_interruptingEdge_src
+	ActivityEdge[*] role interruptingEdge
+end
+
+association xxx_InterruptibleActivityRegion_node between
+	InterruptibleActivityRegion[0..1] role xxx_InterruptibleActivityRegion_node_src
+	ActivityNode[*] role node
+end
+
+association xxx_StructuredActivityNode_activity between
+	StructuredActivityNode[*] role xxx_StructuredActivityNode_activity_src
+	Activity[0..1] role activity
+end
+
+composition xxx_StructuredActivityNode_node between
+	StructuredActivityNode[0..1] role xxx_StructuredActivityNode_node_src
+	ActivityNode[*] role node
+end
+
+composition xxx_StructuredActivityNode_edge between
+	StructuredActivityNode[0..1] role xxx_StructuredActivityNode_edge_src
+	ActivityEdge[*] role edge
+end
+
+composition xxx_ExecutableNode_handler between
+	ExecutableNode[0..1] role xxx_ExecutableNode_handler_src
+	ExceptionHandler[*] role handler
+end
+
+association xxx_LoopNode_setupPart between
+	LoopNode[0..1] role xxx_LoopNode_setupPart_src
+	ExecutableNode[*] role setupPart
+end
+
+association xxx_LoopNode_bodyPart between
+	LoopNode[0..1] role xxx_LoopNode_bodyPart_src
+	ExecutableNode[*] role bodyPart
+end
+
+association xxx_LoopNode_test between
+	LoopNode[0..1] role xxx_LoopNode_test_src
+	ExecutableNode[1..*] role test
+end
+
+composition xxx_ConditionalNode_clause between
+	ConditionalNode[0..1] role xxx_ConditionalNode_clause_src
+	Clause[1..*] role clause
+end
+
+association xxx_ConditionalNode_test between
+	ConditionalNode[0..1] role xxx_ConditionalNode_test_src
+	ExecutableNode[1..*] role test
+end
+
+association xxx_ConditionalNode_body between
+	ConditionalNode[0..1] role xxx_ConditionalNode_body_src
+	ExecutableNode[1..*] role body
+end
+
+association xxx_Clause_predecessorClause between
+	Clause[0..1] role xxx_Clause_predecessorClause_src
+	Clause[*] role predecessorClause
+end
+
+association xxx_Clause_sucessorClause between
+	Clause[0..1] role xxx_Clause_sucessorClause_src
+	Clause[*] role sucessorClause
+end
+
+composition xxx_SequenceNode_executableNode between
+	SequenceNode[0..1] role xxx_SequenceNode_executableNode_src
+	ExecutableNode[*] role executableNode
+end
+
+association xxx_ExceptionHandler_handlerBody between
+	ExceptionHandler[*] role xxx_ExceptionHandler_handlerBody_src
+	ExecutableNode[1] role handlerBody
+end
+
+association xxx_ExceptionHandler_protectedNode between
+	ExceptionHandler[*] role xxx_ExceptionHandler_protectedNode_src
+	ExecutableNode[1] role protectedNode
+end
+
+association xxx_ExceptionHandler_exceptionInput between
+	ExceptionHandler[*] role xxx_ExceptionHandler_exceptionInput_src
+	ObjectNode[1] role exceptionInput
+end
+
+association xxx_ExpansionRegion_inputElement between
+	ExpansionRegion[0..1] role xxx_ExpansionRegion_inputElement_src
+	ExpansionNode[1..*] role inputElement
+end
+
+association xxx_ExpansionRegion_outputElement between
+	ExpansionRegion[0..1] role xxx_ExpansionRegion_outputElement_src
+	ExpansionNode[*] role outputElement
+end
+
+association xxx_ExpansionNode_regionAsInput between
+	ExpansionNode[*] role xxx_ExpansionNode_regionAsInput_src
+	ExpansionRegion[0..1] role regionAsInput
+end
+
+association xxx_ExpansionNode_regionAsOutput between
+	ExpansionNode[*] role xxx_ExpansionNode_regionAsOutput_src
+	ExpansionRegion[0..1] role regionAsOutput
+end
+

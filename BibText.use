@@ -1,0 +1,78 @@
+model BibText
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+class BibTextFile
+attributes
+	name : String
+	hasName : Boolean
+operations
+end
+
+abstract class BibTextEntry<LocatedElement
+attributes
+	key : String
+operations
+end
+
+class Article<BibTextEntry
+attributes
+operations
+end
+
+abstract class Attribute<LocatedElement
+attributes
+	value : String
+operations
+end
+
+class Year<Attribute
+attributes
+operations
+end
+
+class Author<BibTextEntry
+attributes
+	name : String
+operations
+end
+
+class RevenueLedger
+attributes
+	revenueInEUR : Integer
+operations
+end
+
+composition xxx_BibTextFile_entries between
+	BibTextFile[0..1] role xxx_BibTextFile_entries_src
+	BibTextEntry[*] role entries
+end
+
+composition xxx_BibTextEntry_attributes_ between
+	BibTextEntry[*] role xxx_BibTextEntry_attributes__src
+	Attribute[0..5] role attributes_
+end
+
+association xxx_Article_author between
+	Article[*] role xxx_Article_author_src
+	Author[1] role author
+end
+
+association xxx_Author_articles between
+	Author[0..1] role xxx_Author_articles_src
+	Article[*] role articles
+end
+
+composition xxx_Author_revenues between
+	Author[0..1] role xxx_Author_revenues_src
+	RevenueLedger[*] role revenues
+end
+
+association xxx_RevenueLedger_article between
+	RevenueLedger[*] role xxx_RevenueLedger_article_src
+	Article[1] role article
+end
+

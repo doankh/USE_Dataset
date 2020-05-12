@@ -1,0 +1,190 @@
+model avm
+enum AvmVisibility{
+default
+}
+
+abstract class AvmIdentifiable
+attributes
+operations
+	getName():String
+end
+
+abstract class AvmDefinition<AvmIdentifiable
+attributes
+operations
+	getQualifier():String
+	getCanonicalName():String
+	getQualifiedName():String
+end
+
+abstract class AvmDefinitionContainer
+attributes
+operations
+	getTypes()
+	getMembers()
+end
+
+abstract class AvmPackage<AvmDefinitionContainer,AvmDefinition,AvmReferable
+attributes
+operations
+end
+
+abstract class AvmType<AvmDefinition,AvmReferable
+attributes
+operations
+	isDynamic():Boolean
+	isFinal():Boolean
+	isInterface():Boolean
+	isClass():Boolean
+	calculateCommonType(other : AvmType):AvmType
+end
+
+abstract class AvmTypeReference
+attributes
+operations
+	getType():AvmType
+end
+
+abstract class AvmDeclaredElement<AvmDefinition
+attributes
+operations
+	getQualifier():String
+	getName():String
+	getVisibility():AvmVisibility
+end
+
+abstract class AvmDeclaredType<AvmDeclaredElement,AvmType
+attributes
+operations
+	getSuperTypes()
+	getExtendedClass():AvmTypeReference
+	getExtendedInterfaces()
+	getMembers()
+end
+
+abstract class AvmClass<AvmDeclaredType
+attributes
+operations
+end
+
+abstract class AvmInterface<AvmDeclaredType
+attributes
+operations
+end
+
+abstract class AvmMember<AvmDeclaredElement,AvmReferable
+attributes
+operations
+	isStatic():Boolean
+end
+
+abstract class AvmExecutable<AvmIdentifiable
+attributes
+operations
+	getParameters()
+	getReturnType():AvmTypeReference
+end
+
+abstract class AvmVariable<AvmReferable
+attributes
+operations
+	getType():AvmTypeReference
+	getName():String
+end
+
+abstract class AvmField<AvmMember,AvmVariable
+attributes
+operations
+	isConstant():Boolean
+	getType():AvmTypeReference
+end
+
+abstract class AvmProperty<AvmField
+attributes
+operations
+	isReadonly():Boolean
+	isWriteonly():Boolean
+	getGetter():AvmOperation
+	getSetter():AvmOperation
+end
+
+abstract class AvmNamespace<AvmMember
+attributes
+operations
+end
+
+abstract class AvmParameter<AvmVariable
+attributes
+operations
+	isRest():Boolean
+end
+
+abstract class AvmConstructor<AvmMember,AvmExecutable
+attributes
+operations
+end
+
+abstract class AvmOperation<AvmMember,AvmExecutable
+attributes
+operations
+	isFinal():Boolean
+	isNative():Boolean
+	isOverride():Boolean
+end
+
+abstract class AvmElement
+attributes
+	asdoc : String
+operations
+end
+
+class AvmNull<AvmType
+attributes
+operations
+end
+
+class AvmVoid<AvmType
+attributes
+operations
+end
+
+class AvmGeneric<AvmType
+attributes
+operations
+end
+
+class AvmVoidReference<AvmTypeReference
+attributes
+operations
+end
+
+class AvmNullReference<AvmTypeReference
+attributes
+operations
+end
+
+class AvmGenericReference<AvmTypeReference
+attributes
+operations
+end
+
+class AvmDeclaredTypeReference<AvmTypeReference
+attributes
+operations
+end
+
+abstract class AvmReferable<AvmIdentifiable
+attributes
+operations
+end
+
+association xxx_AvmDeclaredTypeReference_type between
+	AvmDeclaredTypeReference[*] role xxx_AvmDeclaredTypeReference_type_src
+	AvmType[0..1] role type
+end
+
+association xxx_AvmDeclaredTypeReference_parameter between
+	AvmDeclaredTypeReference[*] role xxx_AvmDeclaredTypeReference_parameter_src
+	AvmType[0..1] role parameter
+end
+

@@ -1,0 +1,446 @@
+model adl
+enum FlowTypeKind{
+default
+}
+
+enum AttributeType{
+default
+}
+
+class Definition<DefinitionOrTemplate,AbstractDefinition,AnnotationContainer
+attributes
+operations
+end
+
+class ParametricDefinition<Definition
+attributes
+operations
+end
+
+class Import<AnnotationContainer
+attributes
+	importedNamespace : String
+operations
+end
+
+class TypeDefinition<Definition
+attributes
+operations
+end
+
+class PrimitiveDefinition<ParametricDefinition
+attributes
+	abstract_ : String
+operations
+end
+
+class ParameterDecl
+attributes
+	name : String
+operations
+end
+
+class CompositeDefinition<ParametricDefinition
+attributes
+operations
+end
+
+class TemplateParameterDecl<DefinitionOrTemplate
+attributes
+operations
+end
+
+class DefinitionReference
+attributes
+operations
+end
+
+class DefinitionOrTemplate
+attributes
+	name : String
+operations
+end
+
+class TemplateParameter
+attributes
+operations
+end
+
+class TemplateParameterAssignment<TemplateParameter
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+class ParameterAssignment<Parameter
+attributes
+	name : String
+operations
+end
+
+class ParameterValue
+attributes
+operations
+end
+
+class Content<AnnotationContainer
+attributes
+operations
+end
+
+class Interface<Content
+attributes
+	name : String
+	collection : String
+operations
+end
+
+class TypeInterface<Interface
+attributes
+	signature : String
+operations
+end
+
+class FlowInterface<Interface
+attributes
+	optional : String
+operations
+end
+
+class ServerInterface<TypeInterface
+attributes
+operations
+end
+
+class ClientInterface<TypeInterface
+attributes
+	optional : String
+operations
+end
+
+class InputInterface<FlowInterface
+attributes
+operations
+end
+
+class OutputInterface<FlowInterface
+attributes
+operations
+end
+
+class FlowType
+attributes
+	type : AttributeType
+	path : String
+	kind : FlowTypeKind
+	name : String
+operations
+end
+
+class Attribute<Content
+attributes
+	name : String
+operations
+end
+
+class AttributeValue
+attributes
+operations
+end
+
+class Data<Implementation
+attributes
+operations
+end
+
+class Source<Implementation
+attributes
+operations
+end
+
+class Implementation<Content
+attributes
+	path : String
+	inlinedCode : String
+operations
+end
+
+class SubComponent<Content
+attributes
+	name : String
+operations
+end
+
+class AnonymousDefinition<AbstractDefinition,AnnotationContainer
+attributes
+operations
+end
+
+class AbstractDefinition
+attributes
+operations
+end
+
+class PrimitiveAnonymousDefinition<AnonymousDefinition
+attributes
+operations
+end
+
+class CompositeAnonymousDefinition<AnonymousDefinition
+attributes
+operations
+end
+
+class Binding<Content
+attributes
+operations
+end
+
+class Annotation
+attributes
+	name : String
+	annotationProcessed : Boolean
+operations
+end
+
+class AnnotationField
+attributes
+	name : String
+operations
+end
+
+class AnnotationValue
+attributes
+operations
+end
+
+class AnnotationAnnotationValue<AnnotationValue
+attributes
+operations
+end
+
+class ArrayValue<AnnotationValue
+attributes
+operations
+end
+
+class AnnotationContainer
+attributes
+operations
+end
+
+class Literal<AnnotationValue
+attributes
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	value : Integer
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class NullLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class PathLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class TemplateValue<TemplateParameter
+attributes
+operations
+end
+
+composition xxx_Definition_imports between
+	Definition[0..1] role xxx_Definition_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Definition_extends between
+	Definition[0..1] role xxx_Definition_extends_src
+	DefinitionReference[*] role extends
+end
+
+composition xxx_Definition_content between
+	Definition[0..1] role xxx_Definition_content_src
+	Content[*] role content
+end
+
+composition xxx_ParametricDefinition_parameters between
+	ParametricDefinition[0..1] role xxx_ParametricDefinition_parameters_src
+	ParameterDecl[*] role parameters
+end
+
+composition xxx_CompositeDefinition_templateParameters between
+	CompositeDefinition[0..1] role xxx_CompositeDefinition_templateParameters_src
+	TemplateParameterDecl[*] role templateParameters
+end
+
+composition xxx_TemplateParameterDecl_type between
+	TemplateParameterDecl[*] role xxx_TemplateParameterDecl_type_src
+	DefinitionReference[0..1] role type
+end
+
+association xxx_DefinitionReference_definition between
+	DefinitionReference[*] role xxx_DefinitionReference_definition_src
+	DefinitionOrTemplate[0..1] role definition
+end
+
+composition xxx_DefinitionReference_templateParameters between
+	DefinitionReference[0..1] role xxx_DefinitionReference_templateParameters_src
+	TemplateParameter[*] role templateParameters
+end
+
+composition xxx_DefinitionReference_parameters between
+	DefinitionReference[0..1] role xxx_DefinitionReference_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_TemplateParameter_value between
+	TemplateParameter[*] role xxx_TemplateParameter_value_src
+	DefinitionReference[0..1] role value
+end
+
+composition xxx_Parameter_value between
+	Parameter[*] role xxx_Parameter_value_src
+	ParameterValue[0..1] role value
+end
+
+composition xxx_ParameterValue_literal between
+	ParameterValue[*] role xxx_ParameterValue_literal_src
+	Literal[0..1] role literal
+end
+
+association xxx_ParameterValue_ref between
+	ParameterValue[*] role xxx_ParameterValue_ref_src
+	ParameterDecl[0..1] role ref
+end
+
+composition xxx_Interface_size between
+	Interface[*] role xxx_Interface_size_src
+	IntegerLiteral[0..1] role size
+end
+
+composition xxx_FlowInterface_type between
+	FlowInterface[*] role xxx_FlowInterface_type_src
+	FlowType[0..1] role type
+end
+
+composition xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	FlowType[0..1] role type
+end
+
+composition xxx_Attribute_value between
+	Attribute[*] role xxx_Attribute_value_src
+	AttributeValue[0..1] role value
+end
+
+composition xxx_AttributeValue_literal between
+	AttributeValue[*] role xxx_AttributeValue_literal_src
+	Literal[0..1] role literal
+end
+
+association xxx_AttributeValue_ref between
+	AttributeValue[*] role xxx_AttributeValue_ref_src
+	ParameterDecl[0..1] role ref
+end
+
+composition xxx_SubComponent_type between
+	SubComponent[*] role xxx_SubComponent_type_src
+	DefinitionReference[0..1] role type
+end
+
+composition xxx_SubComponent_anonymousDef between
+	SubComponent[*] role xxx_SubComponent_anonymousDef_src
+	AnonymousDefinition[0..1] role anonymousDef
+end
+
+composition xxx_AnonymousDefinition_content between
+	AnonymousDefinition[0..1] role xxx_AnonymousDefinition_content_src
+	Content[*] role content
+end
+
+association xxx_Binding_fromSubComp between
+	Binding[*] role xxx_Binding_fromSubComp_src
+	SubComponent[0..1] role fromSubComp
+end
+
+association xxx_Binding_fromItf between
+	Binding[*] role xxx_Binding_fromItf_src
+	Interface[0..1] role fromItf
+end
+
+composition xxx_Binding_fromIndex between
+	Binding[*] role xxx_Binding_fromIndex_src
+	IntegerLiteral[0..1] role fromIndex
+end
+
+association xxx_Binding_toSubComp between
+	Binding[*] role xxx_Binding_toSubComp_src
+	SubComponent[0..1] role toSubComp
+end
+
+association xxx_Binding_toItf between
+	Binding[*] role xxx_Binding_toItf_src
+	Interface[0..1] role toItf
+end
+
+composition xxx_Binding_tondex between
+	Binding[*] role xxx_Binding_tondex_src
+	IntegerLiteral[0..1] role tondex
+end
+
+composition xxx_Annotation_parameters between
+	Annotation[0..1] role xxx_Annotation_parameters_src
+	AnnotationField[*] role parameters
+end
+
+composition xxx_Annotation_addedContent between
+	Annotation[0..1] role xxx_Annotation_addedContent_src
+	Content[*] role addedContent
+end
+
+composition xxx_AnnotationField_value between
+	AnnotationField[*] role xxx_AnnotationField_value_src
+	AnnotationValue[0..1] role value
+end
+
+composition xxx_AnnotationAnnotationValue_value between
+	AnnotationAnnotationValue[*] role xxx_AnnotationAnnotationValue_value_src
+	Annotation[0..1] role value
+end
+
+composition xxx_ArrayValue_values between
+	ArrayValue[0..1] role xxx_ArrayValue_values_src
+	AnnotationValue[*] role values
+end
+
+composition xxx_AnnotationContainer_annotations between
+	AnnotationContainer[0..1] role xxx_AnnotationContainer_annotations_src
+	Annotation[*] role annotations
+end
+

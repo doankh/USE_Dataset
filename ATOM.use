@@ -1,0 +1,219 @@
+model PrimitiveTypes
+class ATOM
+attributes
+	title : String
+	id : String
+	subtitle : String
+	rights : String
+	icon : String
+	logo : String
+operations
+end
+
+class Entry
+attributes
+	title : String
+	id : String
+	rights : String
+	summary : String
+operations
+end
+
+class Source
+attributes
+	id : String
+	icon : String
+	logo : String
+	rights : String
+	title : String
+	subtitle : String
+operations
+end
+
+class Content
+attributes
+	type : String
+operations
+end
+
+class InLineXHTMLContent<Content
+attributes
+operations
+end
+
+class InLineOtherContent<Content
+attributes
+operations
+end
+
+class OutOfLineContent<Content
+attributes
+	src : String
+operations
+end
+
+class Generator
+attributes
+	uri : String
+	version : String
+operations
+end
+
+class Category
+attributes
+	term : String
+	scheme : String
+	label : String
+operations
+end
+
+class Link
+attributes
+	href : String
+	rel : String
+	type : String
+	hreflang : String
+	title : String
+	lenght : Integer
+operations
+end
+
+class Person
+attributes
+	name : String
+	uri : String
+	email : String
+operations
+end
+
+class Author<Person
+attributes
+operations
+end
+
+class Contributor<Person
+attributes
+operations
+end
+
+class Date
+attributes
+	day : Integer
+	month : Integer
+	year : Integer
+	hours : Integer
+	minutes : Integer
+	seconds : Integer
+operations
+end
+
+composition xxx_ATOM_links between
+	ATOM[0..1] role xxx_ATOM_links_src
+	Link[1..*] role links
+end
+
+composition xxx_ATOM_lastUpdate between
+	ATOM[*] role xxx_ATOM_lastUpdate_src
+	Date[1] role lastUpdate
+end
+
+composition xxx_ATOM_generator between
+	ATOM[*] role xxx_ATOM_generator_src
+	Generator[0..1] role generator
+end
+
+composition xxx_ATOM_categories between
+	ATOM[0..1] role xxx_ATOM_categories_src
+	Category[*] role categories
+end
+
+composition xxx_ATOM_authors between
+	ATOM[0..1] role xxx_ATOM_authors_src
+	Author[1..*] role authors
+end
+
+composition xxx_ATOM_contibutors between
+	ATOM[0..1] role xxx_ATOM_contibutors_src
+	Contributor[*] role contibutors
+end
+
+composition xxx_ATOM_entries between
+	ATOM[0..1] role xxx_ATOM_entries_src
+	Entry[*] role entries
+end
+
+composition xxx_Entry_links between
+	Entry[0..1] role xxx_Entry_links_src
+	Link[1..*] role links
+end
+
+composition xxx_Entry_source between
+	Entry[*] role xxx_Entry_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Entry_published between
+	Entry[*] role xxx_Entry_published_src
+	Date[0..1] role published
+end
+
+composition xxx_Entry_lastUpdate between
+	Entry[*] role xxx_Entry_lastUpdate_src
+	Date[1] role lastUpdate
+end
+
+composition xxx_Entry_content between
+	Entry[*] role xxx_Entry_content_src
+	Content[0..1] role content
+end
+
+composition xxx_Entry_categories between
+	Entry[0..1] role xxx_Entry_categories_src
+	Category[*] role categories
+end
+
+composition xxx_Entry_authors between
+	Entry[0..1] role xxx_Entry_authors_src
+	Author[1..*] role authors
+end
+
+composition xxx_Entry_contibutors between
+	Entry[0..1] role xxx_Entry_contibutors_src
+	Contributor[*] role contibutors
+end
+
+association xxx_Entry_atom between
+	Entry[*] role xxx_Entry_atom_src
+	ATOM[1] role atom
+end
+
+composition xxx_Source_links between
+	Source[0..1] role xxx_Source_links_src
+	Link[*] role links
+end
+
+composition xxx_Source_lastUpdate between
+	Source[*] role xxx_Source_lastUpdate_src
+	Date[0..1] role lastUpdate
+end
+
+composition xxx_Source_generator between
+	Source[*] role xxx_Source_generator_src
+	Generator[0..1] role generator
+end
+
+composition xxx_Source_contributors between
+	Source[0..1] role xxx_Source_contributors_src
+	Contributor[*] role contributors
+end
+
+composition xxx_Source_categories between
+	Source[0..1] role xxx_Source_categories_src
+	Category[*] role categories
+end
+
+composition xxx_Source_author between
+	Source[*] role xxx_Source_author_src
+	Author[0..1] role author
+end
+

@@ -1,0 +1,724 @@
+model AsmL
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Body<LocatedElement
+attributes
+operations
+end
+
+class InWhereHolds<LocatedElement
+attributes
+operations
+end
+
+class AsmLFile<LocatedElement
+attributes
+operations
+end
+
+abstract class AsmLElement<LocatedElement
+attributes
+operations
+end
+
+class VarDeclaration<VarOrMethod
+attributes
+	isConstant : Boolean
+	isDeclaration : Boolean
+	isLocal : Boolean
+	name : String
+operations
+end
+
+class Namespace<AsmLElement
+attributes
+	name : String
+operations
+end
+
+class Structure<AsmLElement
+attributes
+	name : String
+	superStructureName : String
+operations
+end
+
+abstract class VarOrCase<LocatedElement
+attributes
+operations
+end
+
+class Case<VarOrCase
+attributes
+	name : String
+operations
+end
+
+class Class<AsmLElement
+attributes
+	name : String
+	isAbstract : Boolean
+	superClassName : String
+operations
+end
+
+class VarOrMethod<LocatedElement
+attributes
+operations
+end
+
+class Enumeration<AsmLElement
+attributes
+	name : String
+operations
+end
+
+class Enumerator<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Function<AsmLElement
+attributes
+	name : String
+operations
+end
+
+class Method<VarOrMethod
+attributes
+	isAbstract : Boolean
+	isShared : Boolean
+	isEntryPoint : Boolean
+	isOverride : Boolean
+operations
+end
+
+class Parameter<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Main<Function
+attributes
+operations
+end
+
+class Initially<LocatedElement
+attributes
+operations
+end
+
+abstract class Rule<LocatedElement
+attributes
+operations
+end
+
+class SkipRule<Rule
+attributes
+operations
+end
+
+abstract class Step<Rule
+attributes
+	name : String
+operations
+end
+
+class StepUntilFixPoint<Step
+attributes
+operations
+end
+
+abstract class StepExpression<Step
+attributes
+operations
+end
+
+class StepWhile<StepExpression
+attributes
+operations
+end
+
+class StepUntil<StepExpression
+attributes
+operations
+end
+
+class StepForEach<Step
+attributes
+operations
+end
+
+class MethodInvocation<Rule
+attributes
+operations
+end
+
+abstract class UpdateRule<Rule
+attributes
+operations
+end
+
+class UpdateVarRule<UpdateRule
+attributes
+operations
+end
+
+class UpdateFieldRule<UpdateRule
+attributes
+operations
+end
+
+class UpdateMapRule<UpdateRule
+attributes
+operations
+end
+
+class ChooseRule<Rule
+attributes
+operations
+end
+
+class ForallRule<Rule
+attributes
+operations
+end
+
+class ConditionalRule<Rule
+attributes
+operations
+end
+
+class ElseIf<ConditionalRule
+attributes
+operations
+end
+
+class ReturnRule<Rule
+attributes
+operations
+end
+
+class AddRule<Rule
+attributes
+operations
+end
+
+class RemoveRule<Rule
+attributes
+operations
+end
+
+abstract class Type<AsmLElement
+attributes
+	withNull : Boolean
+operations
+end
+
+class NamedType<Type
+attributes
+	name : String
+operations
+end
+
+class MapType<Type
+attributes
+operations
+end
+
+class TupletType<Type
+attributes
+operations
+end
+
+class SetType<Type
+attributes
+operations
+end
+
+class SequenceType<Type
+attributes
+operations
+end
+
+abstract class Term<LocatedElement
+attributes
+operations
+end
+
+class VarTerm<Term
+attributes
+	name : String
+operations
+end
+
+class Operator<Term
+attributes
+	opName : String
+operations
+end
+
+class MapTerm<Term
+attributes
+	separator : String
+operations
+end
+
+class TulpletTerm<Term
+attributes
+operations
+end
+
+class MethodCallTerm<Term
+attributes
+	name : String
+operations
+end
+
+class NewInstance<MethodCallTerm
+attributes
+operations
+end
+
+class PredicateTerm<Term
+attributes
+operations
+end
+
+class ForAllTerm<PredicateTerm
+attributes
+operations
+end
+
+class ExistsTerm<PredicateTerm
+attributes
+	isUnique : Boolean
+operations
+end
+
+class AnyIn<PredicateTerm
+attributes
+operations
+end
+
+abstract class SetTerm<Term
+attributes
+operations
+end
+
+class EnumerateSet<SetTerm
+attributes
+operations
+end
+
+class RangeSet<SetTerm
+attributes
+operations
+end
+
+class AlgorithmSet<SetTerm
+attributes
+operations
+end
+
+abstract class SequenceTerm<Term
+attributes
+operations
+end
+
+class EnumerateSequence<SequenceTerm
+attributes
+operations
+end
+
+class RangeSequence<SequenceTerm
+attributes
+operations
+end
+
+abstract class Constant<Term
+attributes
+operations
+end
+
+class BooleanConstant<Constant
+attributes
+	val : Boolean
+operations
+end
+
+class IntegerConstant<Constant
+attributes
+	val : Integer
+operations
+end
+
+class StringConstant<Constant
+attributes
+	val : String
+operations
+end
+
+class NullConstant<Constant
+attributes
+operations
+end
+
+composition xxx_Body_rules between
+	Body[0..1] role xxx_Body_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_InWhereHolds_var between
+	InWhereHolds[*] role xxx_InWhereHolds_var_src
+	Term[1] role var
+end
+
+composition xxx_InWhereHolds_in_ between
+	InWhereHolds[*] role xxx_InWhereHolds_in__src
+	Term[1] role in_
+end
+
+composition xxx_InWhereHolds_where between
+	InWhereHolds[*] role xxx_InWhereHolds_where_src
+	Term[0..1] role where
+end
+
+composition xxx_InWhereHolds_holds between
+	InWhereHolds[*] role xxx_InWhereHolds_holds_src
+	Term[0..1] role holds
+end
+
+composition xxx_AsmLFile_elements between
+	AsmLFile[0..1] role xxx_AsmLFile_elements_src
+	AsmLElement[*] role elements
+end
+
+composition xxx_AsmLFile_main between
+	AsmLFile[*] role xxx_AsmLFile_main_src
+	Main[1] role main
+end
+
+association xxx_AsmLElement_file between
+	AsmLElement[*] role xxx_AsmLElement_file_src
+	AsmLFile[1] role file
+end
+
+composition xxx_VarDeclaration_type between
+	VarDeclaration[*] role xxx_VarDeclaration_type_src
+	Type[1] role type
+end
+
+composition xxx_Structure_varOrCase between
+	Structure[0..1] role xxx_Structure_varOrCase_src
+	VarOrCase[*] role varOrCase
+end
+
+association xxx_VarOrCase_ownerStructure between
+	VarOrCase[*] role xxx_VarOrCase_ownerStructure_src
+	Structure[1] role ownerStructure
+end
+
+composition xxx_Case_variables between
+	Case[0..1] role xxx_Case_variables_src
+	VarDeclaration[*] role variables
+end
+
+composition xxx_Class_varOrMethod between
+	Class[0..1] role xxx_Class_varOrMethod_src
+	VarOrMethod[*] role varOrMethod
+end
+
+association xxx_VarOrMethod_ownerClass between
+	VarOrMethod[*] role xxx_VarOrMethod_ownerClass_src
+	Class[1] role ownerClass
+end
+
+composition xxx_Enumeration_enumerators between
+	Enumeration[0..1] role xxx_Enumeration_enumerators_src
+	Enumerator[*] role enumerators
+end
+
+composition xxx_Enumerator_value between
+	Enumerator[*] role xxx_Enumerator_value_src
+	Term[0..1] role value
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	Body[1] role body
+end
+
+composition xxx_Method_returnType between
+	Method[*] role xxx_Method_returnType_src
+	Type[0..1] role returnType
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[1] role type
+end
+
+association xxx_Parameter_ownerMethod between
+	Parameter[*] role xxx_Parameter_ownerMethod_src
+	Method[1] role ownerMethod
+end
+
+association xxx_Main_mainFile between
+	Main[*] role xxx_Main_mainFile_src
+	AsmLFile[1] role mainFile
+end
+
+composition xxx_Main_initialisations between
+	Main[0..1] role xxx_Main_initialisations_src
+	Initially[*] role initialisations
+end
+
+composition xxx_Initially_id between
+	Initially[*] role xxx_Initially_id_src
+	VarTerm[1] role id
+end
+
+composition xxx_Initially_val between
+	Initially[*] role xxx_Initially_val_src
+	Term[1] role val
+end
+
+association xxx_Rule_ownerBody between
+	Rule[*] role xxx_Rule_ownerBody_src
+	Body[1] role ownerBody
+end
+
+composition xxx_StepExpression_expression between
+	StepExpression[*] role xxx_StepExpression_expression_src
+	Term[1] role expression
+end
+
+composition xxx_StepForEach_expressions between
+	StepForEach[0..1] role xxx_StepForEach_expressions_src
+	InWhereHolds[*] role expressions
+end
+
+composition xxx_MethodInvocation_called between
+	MethodInvocation[*] role xxx_MethodInvocation_called_src
+	MethodCallTerm[1] role called
+end
+
+composition xxx_UpdateRule_term between
+	UpdateRule[*] role xxx_UpdateRule_term_src
+	Term[1] role term
+end
+
+composition xxx_UpdateVarRule_updateVar between
+	UpdateVarRule[*] role xxx_UpdateVarRule_updateVar_src
+	Term[1] role updateVar
+end
+
+composition xxx_UpdateFieldRule_path between
+	UpdateFieldRule[0..1] role xxx_UpdateFieldRule_path_src
+	VarTerm[2..*] role path
+end
+
+composition xxx_UpdateMapRule_updateMap between
+	UpdateMapRule[*] role xxx_UpdateMapRule_updateMap_src
+	VarTerm[1] role updateMap
+end
+
+composition xxx_UpdateMapRule_parameters between
+	UpdateMapRule[0..1] role xxx_UpdateMapRule_parameters_src
+	Term[1..*] role parameters
+end
+
+composition xxx_ChooseRule_expressions between
+	ChooseRule[0..1] role xxx_ChooseRule_expressions_src
+	InWhereHolds[*] role expressions
+end
+
+composition xxx_ChooseRule_ifChoosenRules between
+	ChooseRule[*] role xxx_ChooseRule_ifChoosenRules_src
+	Body[1] role ifChoosenRules
+end
+
+composition xxx_ChooseRule_ifNotChoosenRule between
+	ChooseRule[*] role xxx_ChooseRule_ifNotChoosenRule_src
+	Body[0..1] role ifNotChoosenRule
+end
+
+composition xxx_ForallRule_expressions between
+	ForallRule[0..1] role xxx_ForallRule_expressions_src
+	InWhereHolds[*] role expressions
+end
+
+composition xxx_ForallRule_doRule between
+	ForallRule[*] role xxx_ForallRule_doRule_src
+	Body[1] role doRule
+end
+
+composition xxx_ConditionalRule_condition between
+	ConditionalRule[*] role xxx_ConditionalRule_condition_src
+	Term[1] role condition
+end
+
+composition xxx_ConditionalRule_thenRule between
+	ConditionalRule[*] role xxx_ConditionalRule_thenRule_src
+	Body[1] role thenRule
+end
+
+composition xxx_ConditionalRule_elseRule between
+	ConditionalRule[*] role xxx_ConditionalRule_elseRule_src
+	Body[0..1] role elseRule
+end
+
+composition xxx_ConditionalRule_elseIfRule between
+	ConditionalRule[*] role xxx_ConditionalRule_elseIfRule_src
+	ElseIf[0..1] role elseIfRule
+end
+
+composition xxx_ReturnRule_term between
+	ReturnRule[*] role xxx_ReturnRule_term_src
+	Term[1] role term
+end
+
+composition xxx_AddRule_val between
+	AddRule[*] role xxx_AddRule_val_src
+	Term[1] role val
+end
+
+composition xxx_AddRule_set between
+	AddRule[*] role xxx_AddRule_set_src
+	VarTerm[1] role set
+end
+
+composition xxx_RemoveRule_val between
+	RemoveRule[*] role xxx_RemoveRule_val_src
+	Term[1] role val
+end
+
+composition xxx_RemoveRule_set between
+	RemoveRule[*] role xxx_RemoveRule_set_src
+	VarTerm[1] role set
+end
+
+association xxx_Type_ownerDeclaration between
+	Type[*] role xxx_Type_ownerDeclaration_src
+	VarDeclaration[0..1] role ownerDeclaration
+end
+
+association xxx_Type_ownerMethod between
+	Type[*] role xxx_Type_ownerMethod_src
+	Method[0..1] role ownerMethod
+end
+
+association xxx_Type_ownerParameter between
+	Type[*] role xxx_Type_ownerParameter_src
+	Parameter[0..1] role ownerParameter
+end
+
+composition xxx_MapType_ofType between
+	MapType[*] role xxx_MapType_ofType_src
+	Type[1] role ofType
+end
+
+composition xxx_MapType_toType between
+	MapType[*] role xxx_MapType_toType_src
+	Type[1] role toType
+end
+
+composition xxx_TupletType_types between
+	TupletType[0..1] role xxx_TupletType_types_src
+	Type[2..*] role types
+end
+
+composition xxx_SetType_of between
+	SetType[*] role xxx_SetType_of_src
+	Type[1] role of
+end
+
+composition xxx_SequenceType_of between
+	SequenceType[*] role xxx_SequenceType_of_src
+	Type[1] role of
+end
+
+composition xxx_Operator_leftExp between
+	Operator[*] role xxx_Operator_leftExp_src
+	Term[1] role leftExp
+end
+
+composition xxx_Operator_rightExp between
+	Operator[*] role xxx_Operator_rightExp_src
+	Term[0..1] role rightExp
+end
+
+composition xxx_MapTerm_ofTerm between
+	MapTerm[*] role xxx_MapTerm_ofTerm_src
+	Term[1] role ofTerm
+end
+
+composition xxx_MapTerm_toTerm between
+	MapTerm[*] role xxx_MapTerm_toTerm_src
+	Term[1] role toTerm
+end
+
+composition xxx_TulpletTerm_terms between
+	TulpletTerm[0..1] role xxx_TulpletTerm_terms_src
+	Term[2..*] role terms
+end
+
+composition xxx_MethodCallTerm_parameters between
+	MethodCallTerm[0..1] role xxx_MethodCallTerm_parameters_src
+	Term[*] role parameters
+end
+
+composition xxx_PredicateTerm_expressions between
+	PredicateTerm[0..1] role xxx_PredicateTerm_expressions_src
+	InWhereHolds[*] role expressions
+end
+
+composition xxx_EnumerateSet_vals between
+	EnumerateSet[0..1] role xxx_EnumerateSet_vals_src
+	Term[*] role vals
+end
+
+composition xxx_RangeSet_minval between
+	RangeSet[*] role xxx_RangeSet_minval_src
+	Term[1] role minval
+end
+
+composition xxx_RangeSet_maxval between
+	RangeSet[*] role xxx_RangeSet_maxval_src
+	Term[1] role maxval
+end
+
+composition xxx_AlgorithmSet_expressions between
+	AlgorithmSet[0..1] role xxx_AlgorithmSet_expressions_src
+	InWhereHolds[*] role expressions
+end
+
+composition xxx_EnumerateSequence_vals between
+	EnumerateSequence[0..1] role xxx_EnumerateSequence_vals_src
+	Term[*] role vals
+end
+
+composition xxx_RangeSequence_minval between
+	RangeSequence[*] role xxx_RangeSequence_minval_src
+	Term[1] role minval
+end
+
+composition xxx_RangeSequence_maxval between
+	RangeSequence[*] role xxx_RangeSequence_maxval_src
+	Term[1] role maxval
+end
+

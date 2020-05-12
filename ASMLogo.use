@@ -1,0 +1,244 @@
+model kmLogo
+abstract class Instruction
+attributes
+operations
+end
+
+abstract class Primitive<Instruction
+attributes
+operations
+end
+
+class Back<Primitive
+attributes
+operations
+end
+
+class Forward<Primitive
+attributes
+operations
+end
+
+class Left<Primitive
+attributes
+operations
+end
+
+class Right<Primitive
+attributes
+operations
+end
+
+class PenDown<Primitive
+attributes
+operations
+end
+
+class PenUp<Primitive
+attributes
+operations
+end
+
+class Clear<Primitive
+attributes
+operations
+end
+
+abstract class Expression<Instruction
+attributes
+operations
+end
+
+abstract class BinaryExp<Expression
+attributes
+operations
+end
+
+class Constant<Expression
+attributes
+	integerValue : Integer
+operations
+end
+
+class ProcCall<Expression
+attributes
+operations
+end
+
+class ProcDeclaration<Instruction
+attributes
+	name : String
+operations
+end
+
+class Block<Instruction
+attributes
+operations
+end
+
+class If<ControlStructure
+attributes
+operations
+end
+
+class ControlStructure<Instruction
+attributes
+operations
+end
+
+class Repeat<ControlStructure
+attributes
+operations
+end
+
+class While<ControlStructure
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class ParameterCall<Expression
+attributes
+operations
+end
+
+class Plus<BinaryExp
+attributes
+operations
+end
+
+class Minus<BinaryExp
+attributes
+operations
+end
+
+class Mult<BinaryExp
+attributes
+operations
+end
+
+class Div<BinaryExp
+attributes
+operations
+end
+
+class Equals<BinaryExp
+attributes
+operations
+end
+
+class Greater<BinaryExp
+attributes
+operations
+end
+
+class Lower<BinaryExp
+attributes
+operations
+end
+
+class LogoProgram
+attributes
+operations
+end
+
+composition xxx_Back_steps between
+	Back[*] role xxx_Back_steps_src
+	Expression[1] role steps
+end
+
+composition xxx_Forward_steps between
+	Forward[*] role xxx_Forward_steps_src
+	Expression[1] role steps
+end
+
+composition xxx_Left_angle between
+	Left[*] role xxx_Left_angle_src
+	Expression[0..1] role angle
+end
+
+composition xxx_Right_angle between
+	Right[*] role xxx_Right_angle_src
+	Expression[0..1] role angle
+end
+
+composition xxx_BinaryExp_lhs between
+	BinaryExp[*] role xxx_BinaryExp_lhs_src
+	Expression[1] role lhs
+end
+
+composition xxx_BinaryExp_rhs between
+	BinaryExp[*] role xxx_BinaryExp_rhs_src
+	Expression[1] role rhs
+end
+
+composition xxx_ProcCall_actualArgs between
+	ProcCall[0..1] role xxx_ProcCall_actualArgs_src
+	Expression[*] role actualArgs
+end
+
+association xxx_ProcCall_declaration between
+	ProcCall[*] role xxx_ProcCall_declaration_src
+	ProcDeclaration[1] role declaration
+end
+
+composition xxx_ProcDeclaration_args between
+	ProcDeclaration[0..1] role xxx_ProcDeclaration_args_src
+	Parameter[*] role args
+end
+
+association xxx_ProcDeclaration_procCall between
+	ProcDeclaration[0..1] role xxx_ProcDeclaration_procCall_src
+	ProcCall[*] role procCall
+end
+
+composition xxx_ProcDeclaration_instructions between
+	ProcDeclaration[0..1] role xxx_ProcDeclaration_instructions_src
+	Instruction[*] role instructions
+end
+
+composition xxx_Block_instructions between
+	Block[0..1] role xxx_Block_instructions_src
+	Instruction[*] role instructions
+end
+
+composition xxx_If_thenPart between
+	If[*] role xxx_If_thenPart_src
+	Block[1] role thenPart
+end
+
+composition xxx_If_elsePart between
+	If[*] role xxx_If_elsePart_src
+	Block[0..1] role elsePart
+end
+
+composition xxx_ControlStructure_condition between
+	ControlStructure[*] role xxx_ControlStructure_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_Repeat_block between
+	Repeat[*] role xxx_Repeat_block_src
+	Block[1] role block
+end
+
+composition xxx_While_block between
+	While[*] role xxx_While_block_src
+	Block[1] role block
+end
+
+association xxx_ParameterCall_parameter between
+	ParameterCall[*] role xxx_ParameterCall_parameter_src
+	Parameter[1] role parameter
+end
+
+composition xxx_LogoProgram_instructions between
+	LogoProgram[0..1] role xxx_LogoProgram_instructions_src
+	Instruction[*] role instructions
+end
+

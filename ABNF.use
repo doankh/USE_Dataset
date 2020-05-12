@@ -1,0 +1,187 @@
+model abnf
+class RuleSet
+attributes
+operations
+end
+
+class Rule
+attributes
+	name : String
+	comment : String
+operations
+end
+
+class IncrementalAlternativRule<Rule
+attributes
+operations
+end
+
+abstract class RuleElement
+attributes
+operations
+end
+
+class RuleReference<RuleElement
+attributes
+operations
+end
+
+class OptionalSequence<RuleElement
+attributes
+operations
+end
+
+class Group<RuleElement
+attributes
+operations
+end
+
+class Alternative
+attributes
+operations
+end
+
+class Concatenation
+attributes
+operations
+end
+
+class Repetition
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+	repeat : Boolean
+operations
+end
+
+abstract class TerminalValue<RuleElement
+attributes
+operations
+end
+
+class BinaryTerminal<TerminalValue
+attributes
+	value : Integer
+operations
+end
+
+class DecimalTerminal<TerminalValue
+attributes
+	value : Integer
+operations
+end
+
+class HexadecimalTerminal<TerminalValue
+attributes
+	value : Integer
+operations
+end
+
+abstract class DecTerminalTail
+attributes
+	value : Integer
+operations
+end
+
+abstract class HexTerminalTail
+attributes
+	value : Integer
+operations
+end
+
+class DecRangeEnd<DecTerminalTail
+attributes
+operations
+end
+
+class HexRangeEnd<HexTerminalTail
+attributes
+operations
+end
+
+class AdditionalDecTerminal<DecTerminalTail
+attributes
+operations
+end
+
+class AdditionalHexTerminal<HexTerminalTail
+attributes
+operations
+end
+
+class StringTerminal<TerminalValue
+attributes
+	value : String
+operations
+end
+
+class Multiplicity
+attributes
+operations
+end
+
+composition xxx_RuleSet_rules between
+	RuleSet[0..1] role xxx_RuleSet_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Rule_alternatives between
+	Rule[0..1] role xxx_Rule_alternatives_src
+	Alternative[*] role alternatives
+end
+
+association xxx_RuleReference_rule between
+	RuleReference[*] role xxx_RuleReference_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_OptionalSequence_alternatives between
+	OptionalSequence[0..1] role xxx_OptionalSequence_alternatives_src
+	Alternative[*] role alternatives
+end
+
+composition xxx_Group_alternatives between
+	Group[0..1] role xxx_Group_alternatives_src
+	Alternative[*] role alternatives
+end
+
+composition xxx_Alternative_concatenation between
+	Alternative[0..1] role xxx_Alternative_concatenation_src
+	Concatenation[*] role concatenation
+end
+
+composition xxx_Concatenation_repetition between
+	Concatenation[0..1] role xxx_Concatenation_repetition_src
+	Repetition[*] role repetition
+end
+
+composition xxx_Repetition_element between
+	Repetition[*] role xxx_Repetition_element_src
+	RuleElement[1] role element
+end
+
+composition xxx_BinaryTerminal_tail between
+	BinaryTerminal[*] role xxx_BinaryTerminal_tail_src
+	DecTerminalTail[0..1] role tail
+end
+
+composition xxx_DecimalTerminal_tail between
+	DecimalTerminal[*] role xxx_DecimalTerminal_tail_src
+	DecTerminalTail[0..1] role tail
+end
+
+composition xxx_HexadecimalTerminal_tail between
+	HexadecimalTerminal[*] role xxx_HexadecimalTerminal_tail_src
+	HexTerminalTail[0..1] role tail
+end
+
+composition xxx_AdditionalDecTerminal_tail between
+	AdditionalDecTerminal[*] role xxx_AdditionalDecTerminal_tail_src
+	AdditionalDecTerminal[0..1] role tail
+end
+
+composition xxx_AdditionalHexTerminal_tail between
+	AdditionalHexTerminal[*] role xxx_AdditionalHexTerminal_tail_src
+	AdditionalHexTerminal[0..1] role tail
+end
+

@@ -1,0 +1,173 @@
+model arduinoml
+enum DigitalState{
+default
+}
+
+enum TimeComparison{
+default
+}
+
+enum AnalogComparison{
+default
+}
+
+class AMLMachine
+attributes
+	frequency : Integer
+operations
+end
+
+class AMLState<NamedElement
+attributes
+operations
+end
+
+abstract class Brick<NamedElement
+attributes
+	pin : Integer
+operations
+end
+
+class DigitalSensor<Brick
+attributes
+operations
+end
+
+class DigitalActuator<Brick
+attributes
+operations
+end
+
+class AnalogSensor<Brick
+attributes
+operations
+end
+
+class AnalogActuator<Brick
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class DigitalCondition<Condition
+attributes
+	dState : DigitalState
+operations
+end
+
+class DigitalAction<Action
+attributes
+	dState : DigitalState
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+class TimeCondition<Condition
+attributes
+	time : Integer
+	tComp : TimeComparison
+operations
+end
+
+class AnalogCondition<Condition
+attributes
+	aComp : AnalogComparison
+	value : Integer
+operations
+end
+
+abstract class AnalogAction<Action
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class AnalogActionValue<AnalogAction
+attributes
+	value : Integer
+operations
+end
+
+class AnalogActionSensor<AnalogAction
+attributes
+operations
+end
+
+composition xxx_AMLMachine_bricks between
+	AMLMachine[0..1] role xxx_AMLMachine_bricks_src
+	Brick[*] role bricks
+end
+
+composition xxx_AMLMachine_states_ between
+	AMLMachine[0..1] role xxx_AMLMachine_states__src
+	AMLState[1..*] role states_
+end
+
+association xxx_AMLMachine_start between
+	AMLMachine[*] role xxx_AMLMachine_start_src
+	AMLState[1] role start
+end
+
+composition xxx_AMLState_transitions_ between
+	AMLState[0..1] role xxx_AMLState_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_AMLState_actions between
+	AMLState[0..1] role xxx_AMLState_actions_src
+	Action[*] role actions
+end
+
+association xxx_Transition_goto between
+	Transition[*] role xxx_Transition_goto_src
+	AMLState[1] role goto
+end
+
+composition xxx_Transition_conditions between
+	Transition[0..1] role xxx_Transition_conditions_src
+	Condition[1..*] role conditions
+end
+
+association xxx_DigitalCondition_sensor between
+	DigitalCondition[*] role xxx_DigitalCondition_sensor_src
+	DigitalSensor[1] role sensor
+end
+
+association xxx_DigitalAction_actuator between
+	DigitalAction[*] role xxx_DigitalAction_actuator_src
+	DigitalActuator[1] role actuator
+end
+
+association xxx_AnalogCondition_sensor between
+	AnalogCondition[*] role xxx_AnalogCondition_sensor_src
+	AnalogSensor[1] role sensor
+end
+
+association xxx_AnalogAction_actuator between
+	AnalogAction[*] role xxx_AnalogAction_actuator_src
+	AnalogActuator[1] role actuator
+end
+
+association xxx_AnalogActionSensor_sensor between
+	AnalogActionSensor[*] role xxx_AnalogActionSensor_sensor_src
+	AnalogSensor[1] role sensor
+end
+

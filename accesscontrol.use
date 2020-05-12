@@ -1,0 +1,145 @@
+model AccessControl
+class Domain<NamedElement
+attributes
+operations
+end
+
+class Rule<NamedElement
+attributes
+operations
+end
+
+class Action<NamedElement
+attributes
+operations
+end
+
+class AccessControlPolicy
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Resource<NamedElement
+attributes
+operations
+end
+
+class Entity<Subject,NamedElement
+attributes
+	publicKeyModulus : String
+	publicKeyExponent : String
+operations
+end
+
+class Role<Subject,NamedElement
+attributes
+operations
+end
+
+class Effect<NamedElement
+attributes
+operations
+end
+
+class Condition
+attributes
+	expression : String
+operations
+end
+
+class TimingCondition<Condition
+attributes
+operations
+end
+
+class Subject
+attributes
+operations
+end
+
+association xxx_Domain_rules between
+	Domain[0..1] role xxx_Domain_rules_src
+	Rule[*] role rules
+end
+
+association xxx_Domain_roots between
+	Domain[0..1] role xxx_Domain_roots_src
+	Resource[*] role roots
+end
+
+association xxx_Rule_effect between
+	Rule[*] role xxx_Rule_effect_src
+	Effect[0..1] role effect
+end
+
+association xxx_Rule_action between
+	Rule[*] role xxx_Rule_action_src
+	Action[0..1] role action
+end
+
+composition xxx_Rule_condition between
+	Rule[*] role xxx_Rule_condition_src
+	Condition[0..1] role condition
+end
+
+association xxx_Rule_subject between
+	Rule[*] role xxx_Rule_subject_src
+	Subject[0..1] role subject
+end
+
+association xxx_Rule_target between
+	Rule[0..1] role xxx_Rule_target_src
+	Resource[*] role target
+end
+
+association xxx_Rule_source between
+	Rule[0..1] role xxx_Rule_source_src
+	Resource[*] role source
+end
+
+composition xxx_AccessControlPolicy_domains between
+	AccessControlPolicy[0..1] role xxx_AccessControlPolicy_domains_src
+	Domain[*] role domains
+end
+
+composition xxx_AccessControlPolicy_actions between
+	AccessControlPolicy[0..1] role xxx_AccessControlPolicy_actions_src
+	Action[*] role actions
+end
+
+composition xxx_AccessControlPolicy_entities between
+	AccessControlPolicy[0..1] role xxx_AccessControlPolicy_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_AccessControlPolicy_roles between
+	AccessControlPolicy[0..1] role xxx_AccessControlPolicy_roles_src
+	Role[*] role roles
+end
+
+composition xxx_AccessControlPolicy_rules between
+	AccessControlPolicy[0..1] role xxx_AccessControlPolicy_rules_src
+	Rule[*] role rules
+end
+
+association xxx_Entity_roles between
+	Entity[0..1] role xxx_Entity_roles_src
+	Role[*] role roles
+end
+
+association xxx_Role_parents between
+	Role[0..1] role xxx_Role_parents_src
+	Role[*] role parents
+end
+
+association xxx_Subject_rules between
+	Subject[0..1] role xxx_Subject_rules_src
+	Rule[*] role rules
+end
+

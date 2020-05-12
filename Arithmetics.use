@@ -1,0 +1,150 @@
+model arithmetics
+class Module
+attributes
+	name : String
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class Definition<Statement,AbstractDefinition
+attributes
+operations
+end
+
+class DeclaredParameter<AbstractDefinition
+attributes
+operations
+end
+
+class AbstractDefinition
+attributes
+	name : String
+operations
+end
+
+class Evaluation<Statement
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Plus<Expression
+attributes
+operations
+end
+
+class Minus<Expression
+attributes
+operations
+end
+
+class Multi<Expression
+attributes
+operations
+end
+
+class Div<Expression
+attributes
+operations
+end
+
+class NumberLiteral<Expression
+attributes
+	value : String
+operations
+end
+
+class FunctionCall<Expression
+attributes
+operations
+end
+
+composition xxx_Module_imports between
+	Module[0..1] role xxx_Module_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Module_statements between
+	Module[0..1] role xxx_Module_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Definition_args between
+	Definition[0..1] role xxx_Definition_args_src
+	DeclaredParameter[*] role args
+end
+
+composition xxx_Definition_expr between
+	Definition[*] role xxx_Definition_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_Evaluation_expression between
+	Evaluation[*] role xxx_Evaluation_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Plus_left between
+	Plus[*] role xxx_Plus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Plus_right between
+	Plus[*] role xxx_Plus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Minus_left between
+	Minus[*] role xxx_Minus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Minus_right between
+	Minus[*] role xxx_Minus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Multi_left between
+	Multi[*] role xxx_Multi_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Multi_right between
+	Multi[*] role xxx_Multi_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Div_left between
+	Div[*] role xxx_Div_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Div_right between
+	Div[*] role xxx_Div_right_src
+	Expression[0..1] role right
+end
+
+association xxx_FunctionCall_func between
+	FunctionCall[*] role xxx_FunctionCall_func_src
+	AbstractDefinition[0..1] role func
+end
+
+composition xxx_FunctionCall_args between
+	FunctionCall[0..1] role xxx_FunctionCall_args_src
+	Expression[*] role args
+end
+

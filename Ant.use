@@ -1,0 +1,474 @@
+model Ant
+class Project
+attributes
+	name : String
+	basedir : String
+	description : String
+operations
+end
+
+abstract class Property
+attributes
+operations
+end
+
+abstract class PropertyName<Property
+attributes
+	name : String
+operations
+end
+
+class PropertyValue<PropertyName
+attributes
+	value : String
+operations
+end
+
+class PropertyLocation<PropertyName
+attributes
+	location : String
+operations
+end
+
+class PropertyFile<Property
+attributes
+	file : String
+operations
+end
+
+class PropertyEnv<Property
+attributes
+	environment : String
+operations
+end
+
+class Target
+attributes
+	name : String
+	description : String
+	unless : String
+	ifCondition : String
+operations
+end
+
+abstract class Pattern
+attributes
+operations
+end
+
+abstract class Basic<Pattern
+attributes
+operations
+end
+
+class Mapper<Basic
+attributes
+	type : String
+	classname : String
+	classpath : String
+	classpathref : String
+	from_ : String
+	to : String
+operations
+end
+
+abstract class InExcludes<Basic
+attributes
+	name : String
+	ifCondition : String
+	unless : String
+operations
+end
+
+class Includes<InExcludes
+attributes
+operations
+end
+
+class Excludes<InExcludes
+attributes
+operations
+end
+
+class IncludesFile<InExcludes
+attributes
+operations
+end
+
+class ExcludesFile<InExcludes
+attributes
+operations
+end
+
+class FileList<Basic
+attributes
+	dir : String
+	files : String
+operations
+end
+
+class Filter<Basic
+attributes
+	token : String
+	value : String
+operations
+end
+
+class FiltersFile<Basic
+attributes
+	file : String
+operations
+end
+
+class PathElement<Basic
+attributes
+	path : String
+	location : String
+operations
+end
+
+abstract class Set_<Pattern
+attributes
+operations
+end
+
+class PatternSet<Set_
+attributes
+operations
+end
+
+class FileSet<Set_
+attributes
+	dir : String
+operations
+end
+
+class FilterSet<Set_
+attributes
+	starttoken : String
+	endtoken : String
+operations
+end
+
+class Path<Set_
+attributes
+	id : String
+	refid : String
+operations
+end
+
+class ClassPath<Set_
+attributes
+	refid : String
+operations
+end
+
+abstract class Task
+attributes
+operations
+end
+
+class TaskDef
+attributes
+	name : String
+	classname : String
+operations
+end
+
+class NewTask<Task
+attributes
+operations
+end
+
+class Attribut
+attributes
+	name : String
+	value : String
+operations
+end
+
+abstract class PreDefinedTask<Task
+attributes
+	id : String
+	taskname : String
+	description : String
+operations
+end
+
+abstract class ExecutionTask<PreDefinedTask
+attributes
+operations
+end
+
+class Exec<ExecutionTask
+attributes
+	executable : String
+	dir : String
+operations
+end
+
+class Java<ExecutionTask
+attributes
+	classname : String
+	jar : String
+	fork : String
+operations
+end
+
+abstract class MiscellaneousTask<PreDefinedTask
+attributes
+operations
+end
+
+class Echo<MiscellaneousTask
+attributes
+	message : String
+	file : String
+	append : String
+operations
+end
+
+class Tstamp<MiscellaneousTask
+attributes
+operations
+end
+
+class FormatTstamp
+attributes
+	property : String
+	pattern : String
+	offset : String
+	unit : String
+	locale : String
+operations
+end
+
+abstract class CompileTask<PreDefinedTask
+attributes
+operations
+end
+
+class Javac<CompileTask
+attributes
+	srcdir : String
+	destdir : String
+	debug : String
+	fork : String
+	optimize : String
+	deprecation : String
+operations
+end
+
+abstract class DocumentationTask<PreDefinedTask
+attributes
+operations
+end
+
+class Javadoc<DocumentationTask
+attributes
+	sourcepath : String
+	destdir : String
+	packagenames : String
+	defaultexcludes : String
+	author : String
+	version : String
+	use : String
+	windowtitle : String
+operations
+end
+
+abstract class ArchiveTask<PreDefinedTask
+attributes
+operations
+end
+
+class Jar<ArchiveTask
+attributes
+	jarfile : String
+	basedir : String
+	compress : String
+	encoding : String
+	manifest : String
+operations
+end
+
+abstract class FileTask<PreDefinedTask
+attributes
+operations
+end
+
+class Mkdir<FileTask
+attributes
+	dir : String
+operations
+end
+
+class Copy<FileTask
+attributes
+	file : String
+	presservelastmodified : String
+	tofile : String
+	todir : String
+	overwrite : String
+	filtering : String
+	flatten : String
+	includeEmptyDirs : String
+operations
+end
+
+class Delete<FileTask
+attributes
+	file : String
+	dir : String
+	verbose : String
+	quiet : String
+	failonerror : String
+	includeEmptyDirs : String
+	includes : String
+	includesfile : String
+	excludes : String
+	excludesfile : String
+	defaultexcludes : String
+operations
+end
+
+association xxx_Project_default between
+	Project[*] role xxx_Project_default_src
+	Target[1] role default
+end
+
+composition xxx_Project_path between
+	Project[*] role xxx_Project_path_src
+	Path[0..1] role path
+end
+
+composition xxx_Project_properties between
+	Project[0..1] role xxx_Project_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Project_taskdef between
+	Project[0..1] role xxx_Project_taskdef_src
+	TaskDef[*] role taskdef
+end
+
+composition xxx_Project_targets between
+	Project[0..1] role xxx_Project_targets_src
+	Target[1..*] role targets
+end
+
+association xxx_Target_depends between
+	Target[0..1] role xxx_Target_depends_src
+	Target[*] role depends
+end
+
+composition xxx_Target_tasks between
+	Target[0..1] role xxx_Target_tasks_src
+	Task[*] role tasks
+end
+
+composition xxx_PatternSet_inexcludes between
+	PatternSet[0..1] role xxx_PatternSet_inexcludes_src
+	InExcludes[1..*] role inexcludes
+end
+
+composition xxx_FileSet_patternset between
+	FileSet[0..1] role xxx_FileSet_patternset_src
+	PatternSet[*] role patternset
+end
+
+composition xxx_FileSet_include between
+	FileSet[0..1] role xxx_FileSet_include_src
+	Includes[*] role include
+end
+
+composition xxx_FileSet_exclude between
+	FileSet[0..1] role xxx_FileSet_exclude_src
+	Excludes[*] role exclude
+end
+
+composition xxx_FilterSet_filter between
+	FilterSet[0..1] role xxx_FilterSet_filter_src
+	Filter[*] role filter
+end
+
+composition xxx_FilterSet_filtersfile between
+	FilterSet[0..1] role xxx_FilterSet_filtersfile_src
+	FiltersFile[*] role filtersfile
+end
+
+composition xxx_Path_path between
+	Path[*] role xxx_Path_path_src
+	Path[0..1] role path
+end
+
+composition xxx_Path_pathElement between
+	Path[0..1] role xxx_Path_pathElement_src
+	PathElement[*] role pathElement
+end
+
+composition xxx_Path_fileset between
+	Path[0..1] role xxx_Path_fileset_src
+	FileSet[*] role fileset
+end
+
+composition xxx_ClassPath_pathElement between
+	ClassPath[0..1] role xxx_ClassPath_pathElement_src
+	PathElement[*] role pathElement
+end
+
+composition xxx_ClassPath_fileset between
+	ClassPath[0..1] role xxx_ClassPath_fileset_src
+	FileSet[*] role fileset
+end
+
+association xxx_Task_target between
+	Task[*] role xxx_Task_target_src
+	Target[1] role target
+end
+
+association xxx_NewTask_taskName between
+	NewTask[*] role xxx_NewTask_taskName_src
+	TaskDef[1] role taskName
+end
+
+composition xxx_NewTask_attributes_ between
+	NewTask[0..1] role xxx_NewTask_attributes__src
+	Attribut[*] role attributes_
+end
+
+composition xxx_Java_classPath between
+	Java[*] role xxx_Java_classPath_src
+	ClassPath[0..1] role classPath
+end
+
+composition xxx_Tstamp_format between
+	Tstamp[0..1] role xxx_Tstamp_format_src
+	FormatTstamp[*] role format
+end
+
+composition xxx_Javac_inExcludes between
+	Javac[0..1] role xxx_Javac_inExcludes_src
+	InExcludes[*] role inExcludes
+end
+
+composition xxx_Javac_classPath between
+	Javac[*] role xxx_Javac_classPath_src
+	ClassPath[0..1] role classPath
+end
+
+composition xxx_Copy_fileset between
+	Copy[*] role xxx_Copy_fileset_src
+	FileSet[0..1] role fileset
+end
+
+composition xxx_Copy_filterset between
+	Copy[*] role xxx_Copy_filterset_src
+	FilterSet[0..1] role filterset
+end
+
+composition xxx_Copy_mapper between
+	Copy[*] role xxx_Copy_mapper_src
+	Mapper[0..1] role mapper
+end
+

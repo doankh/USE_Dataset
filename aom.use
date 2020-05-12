@@ -1,0 +1,319 @@
+model aom
+enum AOMModifier{
+default
+}
+
+class AbstractObjectModel<MeasurableElement
+attributes
+operations
+end
+
+abstract class MeasurableElement
+attributes
+operations
+end
+
+class StringToObject
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class AOMElement
+attributes
+operations
+end
+
+abstract class AOMNamedElement<AOMElement
+attributes
+	name : String
+operations
+end
+
+abstract class AOMTypedElement<AOMElement
+attributes
+operations
+end
+
+abstract class AOMType<AOMNamedElement
+attributes
+	fqdn : String
+operations
+end
+
+class AOMClass<AOMType,MeasurableElement
+attributes
+	abstract_ : Boolean
+	interface : Boolean
+	innerClass : Boolean
+	anonymousClass : Boolean
+	modifier : AOMModifier
+	remainingLOC : Integer
+	LOC : Integer
+	static : Boolean
+operations
+end
+
+class AOMField<AOMVariableDef,MeasurableElement,AOMEntity
+attributes
+operations
+end
+
+class AOMMethod<AOMNamedElement,AOMTypedElement,MeasurableElement,AOMEntity
+attributes
+	signature : String
+	methodId : String
+	startLine : Integer
+	endLine : Integer
+	abstract_ : Boolean
+	LOC : Integer
+	static : Boolean
+	constructor : Boolean
+operations
+end
+
+class AOMScope
+attributes
+operations
+end
+
+class AOMParameter<AOMVariableDef
+attributes
+operations
+end
+
+abstract class AOMVariableDef<AOMTypedElement,AOMNamedElement
+attributes
+operations
+end
+
+class AOMLocalVariable<AOMVariableDef
+attributes
+operations
+end
+
+class AOMExternalType<AOMType
+attributes
+operations
+end
+
+abstract class AOMEntity
+attributes
+	occurrence : Integer
+operations
+end
+
+class StaticMethodCall<StaticDependency
+attributes
+	lineNumber : Integer
+	columnNumber : Integer
+	fileName : String
+operations
+end
+
+abstract class StaticDependency
+attributes
+operations
+end
+
+class StaticFieldAccess<StaticDependency
+attributes
+	lineNumber : Integer
+	columnNumber : Integer
+	fileName : String
+	dynamicAccessCount : Integer
+operations
+end
+
+abstract class DynamicDependency
+attributes
+operations
+end
+
+class DynamicMethodCall<DynamicDependency
+attributes
+	tid : Integer
+operations
+end
+
+composition xxx_AbstractObjectModel_classes between
+	AbstractObjectModel[0..1] role xxx_AbstractObjectModel_classes_src
+	AOMClass[*] role classes
+end
+
+composition xxx_AbstractObjectModel_externalTypes between
+	AbstractObjectModel[0..1] role xxx_AbstractObjectModel_externalTypes_src
+	AOMExternalType[*] role externalTypes
+end
+
+composition xxx_MeasurableElement_measuredDataSet between
+	MeasurableElement[0..1] role xxx_MeasurableElement_measuredDataSet_src
+	StringToObject[*] role measuredDataSet
+end
+
+association xxx_AOMTypedElement_type between
+	AOMTypedElement[*] role xxx_AOMTypedElement_type_src
+	AOMType[0..1] role type
+end
+
+association xxx_AOMType_referer between
+	AOMType[0..1] role xxx_AOMType_referer_src
+	AOMTypedElement[*] role referer
+end
+
+composition xxx_AOMClass_fields between
+	AOMClass[0..1] role xxx_AOMClass_fields_src
+	AOMField[*] role fields
+end
+
+composition xxx_AOMClass_methods between
+	AOMClass[0..1] role xxx_AOMClass_methods_src
+	AOMMethod[*] role methods
+end
+
+association xxx_AOMClass_ancestor between
+	AOMClass[0..1] role xxx_AOMClass_ancestor_src
+	AOMClass[*] role ancestor
+end
+
+association xxx_AOMClass_descendant between
+	AOMClass[0..1] role xxx_AOMClass_descendant_src
+	AOMClass[*] role descendant
+end
+
+association xxx_AOMField_owner between
+	AOMField[*] role xxx_AOMField_owner_src
+	AOMClass[0..1] role owner
+end
+
+association xxx_AOMField_staticReferer between
+	AOMField[0..1] role xxx_AOMField_staticReferer_src
+	StaticFieldAccess[*] role staticReferer
+end
+
+composition xxx_AOMMethod_parameters between
+	AOMMethod[0..1] role xxx_AOMMethod_parameters_src
+	AOMParameter[*] role parameters
+end
+
+association xxx_AOMMethod_owner between
+	AOMMethod[*] role xxx_AOMMethod_owner_src
+	AOMClass[0..1] role owner
+end
+
+association xxx_AOMMethod_staticReferer between
+	AOMMethod[0..1] role xxx_AOMMethod_staticReferer_src
+	StaticMethodCall[*] role staticReferer
+end
+
+association xxx_AOMMethod_overriding between
+	AOMMethod[*] role xxx_AOMMethod_overriding_src
+	AOMMethod[0..1] role overriding
+end
+
+association xxx_AOMMethod_overridedBy between
+	AOMMethod[0..1] role xxx_AOMMethod_overridedBy_src
+	AOMMethod[*] role overridedBy
+end
+
+composition xxx_AOMMethod_ownedScope between
+	AOMMethod[*] role xxx_AOMMethod_ownedScope_src
+	AOMScope[0..1] role ownedScope
+end
+
+association xxx_AOMMethod_dynamicReferer between
+	AOMMethod[0..1] role xxx_AOMMethod_dynamicReferer_src
+	DynamicMethodCall[*] role dynamicReferer
+end
+
+composition xxx_AOMScope_variables between
+	AOMScope[0..1] role xxx_AOMScope_variables_src
+	AOMLocalVariable[*] role variables
+end
+
+association xxx_AOMScope_owner between
+	AOMScope[*] role xxx_AOMScope_owner_src
+	AOMMethod[0..1] role owner
+end
+
+composition xxx_AOMScope_staticMethodCalls between
+	AOMScope[0..1] role xxx_AOMScope_staticMethodCalls_src
+	StaticMethodCall[*] role staticMethodCalls
+end
+
+composition xxx_AOMScope_dynamicMethodCalls between
+	AOMScope[0..1] role xxx_AOMScope_dynamicMethodCalls_src
+	DynamicMethodCall[*] role dynamicMethodCalls
+end
+
+composition xxx_AOMScope_staticFieldAccesses between
+	AOMScope[0..1] role xxx_AOMScope_staticFieldAccesses_src
+	StaticFieldAccess[*] role staticFieldAccesses
+end
+
+association xxx_AOMParameter_owner between
+	AOMParameter[*] role xxx_AOMParameter_owner_src
+	AOMMethod[0..1] role owner
+end
+
+association xxx_AOMLocalVariable_owner between
+	AOMLocalVariable[*] role xxx_AOMLocalVariable_owner_src
+	AOMScope[0..1] role owner
+end
+
+association xxx_StaticMethodCall_caller between
+	StaticMethodCall[*] role xxx_StaticMethodCall_caller_src
+	AOMScope[0..1] role caller
+end
+
+association xxx_StaticMethodCall_callee between
+	StaticMethodCall[*] role xxx_StaticMethodCall_callee_src
+	AOMMethod[0..1] role callee
+end
+
+association xxx_StaticMethodCall_callingType between
+	StaticMethodCall[*] role xxx_StaticMethodCall_callingType_src
+	AOMClass[0..1] role callingType
+end
+
+association xxx_StaticFieldAccess_accessingScope between
+	StaticFieldAccess[*] role xxx_StaticFieldAccess_accessingScope_src
+	AOMScope[0..1] role accessingScope
+end
+
+association xxx_StaticFieldAccess_accessedField between
+	StaticFieldAccess[*] role xxx_StaticFieldAccess_accessedField_src
+	AOMField[0..1] role accessedField
+end
+
+association xxx_StaticFieldAccess_accessingType between
+	StaticFieldAccess[*] role xxx_StaticFieldAccess_accessingType_src
+	AOMClass[0..1] role accessingType
+end
+
+association xxx_DynamicMethodCall_caller between
+	DynamicMethodCall[*] role xxx_DynamicMethodCall_caller_src
+	AOMScope[0..1] role caller
+end
+
+association xxx_DynamicMethodCall_callee between
+	DynamicMethodCall[*] role xxx_DynamicMethodCall_callee_src
+	AOMMethod[0..1] role callee
+end
+
+association xxx_DynamicMethodCall_previousCall between
+	DynamicMethodCall[*] role xxx_DynamicMethodCall_previousCall_src
+	DynamicMethodCall[0..1] role previousCall
+end
+
+association xxx_DynamicMethodCall_nextCalls between
+	DynamicMethodCall[0..1] role xxx_DynamicMethodCall_nextCalls_src
+	DynamicMethodCall[*] role nextCalls
+end
+
+association xxx_DynamicMethodCall_static between
+	DynamicMethodCall[*] role xxx_DynamicMethodCall_static_src
+	StaticMethodCall[0..1] role static
+end
+

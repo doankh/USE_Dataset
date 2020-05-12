@@ -1,0 +1,59 @@
+model aterms
+class ATerm<Symbol
+attributes
+operations
+end
+
+abstract class Definition
+attributes
+operations
+end
+
+abstract class Symbol
+attributes
+operations
+end
+
+class Value<Symbol
+attributes
+	literal : String
+operations
+end
+
+abstract class Cardinality<Definition
+attributes
+operations
+end
+
+class StarCardinality<Cardinality
+attributes
+	separator : String
+operations
+end
+
+class Reference<Definition
+attributes
+	name : String
+operations
+end
+
+composition xxx_ATerm_definitions between
+	ATerm[0..1] role xxx_ATerm_definitions_src
+	Definition[1..*] role definitions
+end
+
+composition xxx_ATerm_symbols between
+	ATerm[0..1] role xxx_ATerm_symbols_src
+	Symbol[1..*] role symbols
+end
+
+composition xxx_ATerm_production between
+	ATerm[*] role xxx_ATerm_production_src
+	Reference[1] role production
+end
+
+composition xxx_StarCardinality_production between
+	StarCardinality[*] role xxx_StarCardinality_production_src
+	Reference[1] role production
+end
+

@@ -1,0 +1,426 @@
+model PrimitiveTypes
+enum AccessUpdateType{
+	access,
+	update
+}
+
+enum AsmType{
+	function,
+	subasm
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class XAsmFile<LocatedElement
+attributes
+operations
+end
+
+class XAsmSpec<XAsmFile
+attributes
+operations
+end
+
+class Asm<LocatedElement
+attributes
+	returnType : String
+operations
+end
+
+class Signature<LocatedElement
+attributes
+	isMain : Boolean
+	name : String
+operations
+end
+
+class Argument<VariableDecl
+attributes
+	type : String
+operations
+end
+
+class Body<XAsmFile
+attributes
+operations
+end
+
+class MetaInformation<LocatedElement
+attributes
+	usedAs : AsmType
+operations
+end
+
+class AccessUpdateFunction<LocatedElement
+attributes
+	type : AccessUpdateType
+operations
+end
+
+abstract class Declaration<LocatedElement
+attributes
+operations
+end
+
+class Function<ElementDecl
+attributes
+	returnType : String
+	isExternal : Boolean
+operations
+end
+
+class Parameter<LocatedElement
+attributes
+	name : String
+	type : String
+operations
+end
+
+class Universe<Declaration
+attributes
+	name : String
+	contents : String
+operations
+end
+
+class Initialization<LocatedElement
+attributes
+operations
+end
+
+abstract class Term<LocatedElement
+attributes
+operations
+end
+
+abstract class Constant<Term
+attributes
+operations
+end
+
+class FunctionOrVariableTerm<Term
+attributes
+operations
+end
+
+class OperatorTerm<Term
+attributes
+	opName : String
+operations
+end
+
+class BooleanConstant<Constant
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerConstant<Constant
+attributes
+	value : Integer
+operations
+end
+
+class StringConstant<Constant
+attributes
+	value : String
+operations
+end
+
+class UndefConstant<Constant
+attributes
+operations
+end
+
+abstract class Rule<LocatedElement
+attributes
+	inSequence : Boolean
+operations
+end
+
+class SkipRule<Rule
+attributes
+operations
+end
+
+class AsmInvocation<Rule
+attributes
+	asmName : String
+operations
+end
+
+class UpdateRule<Rule
+attributes
+operations
+end
+
+class ChooseRule<Rule
+attributes
+operations
+end
+
+class DoForallRule<Rule
+attributes
+operations
+end
+
+class ConditionalRule<Rule
+attributes
+operations
+end
+
+class ElseIf<LocatedElement
+attributes
+operations
+end
+
+class ExtendRule<Rule
+attributes
+operations
+end
+
+abstract class ElementDecl<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class VariableDecl<ElementDecl
+attributes
+operations
+end
+
+class Extension<LocatedElement
+attributes
+operations
+end
+
+class ReturnRule<Rule
+attributes
+operations
+end
+
+composition xxx_XAsmSpec_Asm between
+	XAsmSpec[0..1] role xxx_XAsmSpec_Asm_src
+	Asm[1..*] role Asm
+end
+
+composition xxx_Asm_signature between
+	Asm[*] role xxx_Asm_signature_src
+	Signature[1] role signature
+end
+
+composition xxx_Asm_metaInformation between
+	Asm[*] role xxx_Asm_metaInformation_src
+	MetaInformation[1] role metaInformation
+end
+
+composition xxx_Asm_body between
+	Asm[*] role xxx_Asm_body_src
+	Body[1] role body
+end
+
+composition xxx_Signature_arguments between
+	Signature[0..1] role xxx_Signature_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_Body_declarations between
+	Body[0..1] role xxx_Body_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Body_initialization between
+	Body[*] role xxx_Body_initialization_src
+	Initialization[0..1] role initialization
+end
+
+composition xxx_Body_rules between
+	Body[0..1] role xxx_Body_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_MetaInformation_usedAsIn between
+	MetaInformation[0..1] role xxx_MetaInformation_usedAsIn_src
+	Signature[*] role usedAsIn
+end
+
+composition xxx_MetaInformation_accessUpdateFunctions between
+	MetaInformation[0..1] role xxx_MetaInformation_accessUpdateFunctions_src
+	AccessUpdateFunction[*] role accessUpdateFunctions
+end
+
+composition xxx_AccessUpdateFunction_functions between
+	AccessUpdateFunction[0..1] role xxx_AccessUpdateFunction_functions_src
+	Function[1..*] role functions
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Function_initTerm between
+	Function[*] role xxx_Function_initTerm_src
+	Term[0..1] role initTerm
+end
+
+association xxx_Universe_superUniverses between
+	Universe[0..1] role xxx_Universe_superUniverses_src
+	Universe[*] role superUniverses
+end
+
+composition xxx_Initialization_rules between
+	Initialization[0..1] role xxx_Initialization_rules_src
+	Rule[1..*] role rules
+end
+
+association xxx_FunctionOrVariableTerm_declaration between
+	FunctionOrVariableTerm[*] role xxx_FunctionOrVariableTerm_declaration_src
+	ElementDecl[1] role declaration
+end
+
+composition xxx_FunctionOrVariableTerm_terms between
+	FunctionOrVariableTerm[0..1] role xxx_FunctionOrVariableTerm_terms_src
+	Term[*] role terms
+end
+
+composition xxx_OperatorTerm_leftExp between
+	OperatorTerm[*] role xxx_OperatorTerm_leftExp_src
+	Term[1] role leftExp
+end
+
+composition xxx_OperatorTerm_rightExp between
+	OperatorTerm[*] role xxx_OperatorTerm_rightExp_src
+	Term[0..1] role rightExp
+end
+
+composition xxx_AsmInvocation_arguments between
+	AsmInvocation[0..1] role xxx_AsmInvocation_arguments_src
+	Term[*] role arguments
+end
+
+composition xxx_UpdateRule_function between
+	UpdateRule[*] role xxx_UpdateRule_function_src
+	FunctionOrVariableTerm[1] role function
+end
+
+composition xxx_UpdateRule_updateTerm between
+	UpdateRule[*] role xxx_UpdateRule_updateTerm_src
+	Term[1] role updateTerm
+end
+
+composition xxx_ChooseRule_chooseId between
+	ChooseRule[*] role xxx_ChooseRule_chooseId_src
+	VariableDecl[1] role chooseId
+end
+
+composition xxx_ChooseRule_inSet between
+	ChooseRule[*] role xxx_ChooseRule_inSet_src
+	Universe[0..1] role inSet
+end
+
+composition xxx_ChooseRule_guard between
+	ChooseRule[*] role xxx_ChooseRule_guard_src
+	Term[0..1] role guard
+end
+
+composition xxx_ChooseRule_ifChoosenRules between
+	ChooseRule[0..1] role xxx_ChooseRule_ifChoosenRules_src
+	Rule[1..*] role ifChoosenRules
+end
+
+composition xxx_ChooseRule_ifNotChoosenRule between
+	ChooseRule[*] role xxx_ChooseRule_ifNotChoosenRule_src
+	Rule[0..1] role ifNotChoosenRule
+end
+
+composition xxx_DoForallRule_id between
+	DoForallRule[*] role xxx_DoForallRule_id_src
+	VariableDecl[1] role id
+end
+
+composition xxx_DoForallRule_inSet between
+	DoForallRule[*] role xxx_DoForallRule_inSet_src
+	Universe[0..1] role inSet
+end
+
+composition xxx_DoForallRule_condition between
+	DoForallRule[*] role xxx_DoForallRule_condition_src
+	Term[0..1] role condition
+end
+
+composition xxx_DoForallRule_doRule between
+	DoForallRule[0..1] role xxx_DoForallRule_doRule_src
+	Rule[1..*] role doRule
+end
+
+composition xxx_ConditionalRule_condition between
+	ConditionalRule[*] role xxx_ConditionalRule_condition_src
+	Term[1] role condition
+end
+
+composition xxx_ConditionalRule_thenRule between
+	ConditionalRule[0..1] role xxx_ConditionalRule_thenRule_src
+	Rule[1..*] role thenRule
+end
+
+composition xxx_ConditionalRule_elseRule between
+	ConditionalRule[*] role xxx_ConditionalRule_elseRule_src
+	Rule[0..1] role elseRule
+end
+
+composition xxx_ConditionalRule_elseIfRule between
+	ConditionalRule[*] role xxx_ConditionalRule_elseIfRule_src
+	ElseIf[0..1] role elseIfRule
+end
+
+composition xxx_ElseIf_condition between
+	ElseIf[*] role xxx_ElseIf_condition_src
+	Term[1] role condition
+end
+
+composition xxx_ElseIf_thenRule between
+	ElseIf[0..1] role xxx_ElseIf_thenRule_src
+	Rule[1..*] role thenRule
+end
+
+composition xxx_ElseIf_elseRule between
+	ElseIf[*] role xxx_ElseIf_elseRule_src
+	Rule[0..1] role elseRule
+end
+
+composition xxx_ElseIf_elseIfRule between
+	ElseIf[*] role xxx_ElseIf_elseIfRule_src
+	ElseIf[0..1] role elseIfRule
+end
+
+composition xxx_ExtendRule_extensions between
+	ExtendRule[0..1] role xxx_ExtendRule_extensions_src
+	Extension[1..*] role extensions
+end
+
+composition xxx_ExtendRule_rules between
+	ExtendRule[0..1] role xxx_ExtendRule_rules_src
+	Rule[1..*] role rules
+end
+
+composition xxx_Extension_elements between
+	Extension[0..1] role xxx_Extension_elements_src
+	VariableDecl[1..*] role elements
+end
+
+composition xxx_Extension_universe between
+	Extension[*] role xxx_Extension_universe_src
+	Universe[1] role universe
+end
+
+composition xxx_ReturnRule_term between
+	ReturnRule[*] role xxx_ReturnRule_term_src
+	Term[1] role term
+end
+

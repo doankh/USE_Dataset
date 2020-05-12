@@ -1,0 +1,139 @@
+model api
+enum PrimitiveType{
+default
+}
+
+class Swagger
+attributes
+operations
+end
+
+class Operation
+attributes
+	title : String
+	description : String
+	path : String
+operations
+end
+
+class GET<Operation
+attributes
+operations
+end
+
+class PUT<Operation
+attributes
+operations
+end
+
+class DELETE<Operation
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	compulsory : Boolean
+	type : PrimitiveType
+operations
+end
+
+class Response
+attributes
+	code_status : String
+	description : String
+operations
+end
+
+class ModelOfResponse
+attributes
+operations
+end
+
+class POST<Operation
+attributes
+operations
+end
+
+class SpecificationAPI
+attributes
+	host : String
+	description : String
+	basePath : String
+	version : Real
+	bdserver : String
+	bduser : String
+	bdpass : String
+	bdname : String
+	apiName : String
+operations
+end
+
+class Class
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	value : PrimitiveType
+	isPK : Boolean
+	isFK : Boolean
+	refFK : String
+	refFKClass : String
+operations
+end
+
+class Reference
+attributes
+	refName : String
+	refUpperBound : Integer
+	refLowerBound : Integer
+	refClass : String
+	refedClass : String
+operations
+end
+
+composition xxx_Swagger_contains between
+	Swagger[*] role xxx_Swagger_contains_src
+	SpecificationAPI[0..1] role contains
+end
+
+composition xxx_Operation_responses between
+	Operation[0..1] role xxx_Operation_responses_src
+	Response[1..*] role responses
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Response_contains between
+	Response[*] role xxx_Response_contains_src
+	ModelOfResponse[1] role contains
+end
+
+composition xxx_ModelOfResponse_compose between
+	ModelOfResponse[0..1] role xxx_ModelOfResponse_compose_src
+	Class[*] role compose
+end
+
+composition xxx_ModelOfResponse_references between
+	ModelOfResponse[0..1] role xxx_ModelOfResponse_references_src
+	Reference[*] role references
+end
+
+composition xxx_SpecificationAPI_contains between
+	SpecificationAPI[0..1] role xxx_SpecificationAPI_contains_src
+	Operation[1..*] role contains
+end
+
+composition xxx_Class_compose between
+	Class[0..1] role xxx_Class_compose_src
+	Attribute[*] role compose
+end
+

@@ -1,0 +1,55 @@
+model preferences
+enum InstrumentationMode{
+default
+}
+
+enum ContainerType{
+default
+}
+
+class ModelElementPattern<Pattern
+attributes
+	handleIdentifier : String
+operations
+end
+
+class InstrumentationConfig
+attributes
+	mode : InstrumentationMode
+operations
+end
+
+class Pattern
+attributes
+	include : Boolean
+operations
+end
+
+class LibraryPattern<ContainerPattern
+attributes
+operations
+end
+
+class PackagePattern<Pattern
+attributes
+	packageName : String
+operations
+end
+
+class SourcePattern<Pattern
+attributes
+	sourcePath : String
+operations
+end
+
+class ContainerPattern<Pattern
+attributes
+	type : ContainerType
+operations
+end
+
+composition xxx_InstrumentationConfig_modelElements between
+	InstrumentationConfig[0..1] role xxx_InstrumentationConfig_modelElements_src
+	Pattern[*] role modelElements
+end
+

@@ -1,0 +1,194 @@
+model fr
+abstract class ModelElement<Visitable
+attributes
+	name : String
+	startLine : Integer
+	endLine : Integer
+	offset : Integer
+	package : String
+operations
+	getQualifiedName():String
+	getMethods()
+	getFields()
+end
+
+class Type<ModelElement
+attributes
+operations
+	accept(visitor : Visitor)
+end
+
+class Field<ModelElement,IntertypeDefinition
+attributes
+operations
+	accept(visitor : Visitor)
+end
+
+class Method<ModelElement,IntertypeDefinition
+attributes
+	implicitConstructor : Boolean
+	abstract_ : Boolean
+operations
+	accept(visitor : Visitor)
+end
+
+abstract class IntertypeDefinition
+attributes
+operations
+end
+
+class Project<ModelElement
+attributes
+operations
+	accept(visitor : Visitor)
+end
+
+abstract class Visitor
+attributes
+operations
+	visit(type : Type)
+	visitBefore(type : Type)
+	visitAfter(type : Type)
+	visit3(field : Field)
+	visitBefore3(field : Field)
+	visitAfter3(field : Field)
+	visit1(method : Method)
+	visitBefore1(method : Method)
+	visitAfter1(method : Method)
+	visit2(project : Project)
+	visitBefore2(project : Project)
+	visitAfter2(project : Project)
+end
+
+abstract class Visitable
+attributes
+operations
+	accept(visitor : Visitor)
+end
+
+class Invocation
+attributes
+operations
+end
+
+class Weaving
+attributes
+operations
+end
+
+class TypeReference
+attributes
+	dimensions : Integer
+operations
+end
+
+composition xxx_ModelElement_children between
+	ModelElement[0..1] role xxx_ModelElement_children_src
+	ModelElement[*] role children
+end
+
+association xxx_ModelElement_parent between
+	ModelElement[*] role xxx_ModelElement_parent_src
+	ModelElement[0..1] role parent
+end
+
+association xxx_Type_superTypes between
+	Type[0..1] role xxx_Type_superTypes_src
+	Type[*] role superTypes
+end
+
+association xxx_Type_subTypes between
+	Type[0..1] role xxx_Type_subTypes_src
+	Type[*] role subTypes
+end
+
+association xxx_Type_intertypeDefinitions between
+	Type[0..1] role xxx_Type_intertypeDefinitions_src
+	IntertypeDefinition[*] role intertypeDefinitions
+end
+
+composition xxx_Field_type between
+	Field[*] role xxx_Field_type_src
+	TypeReference[1] role type
+end
+
+association xxx_Field_referencedBy between
+	Field[0..1] role xxx_Field_referencedBy_src
+	Method[*] role referencedBy
+end
+
+composition xxx_Method_type between
+	Method[*] role xxx_Method_type_src
+	TypeReference[0..1] role type
+end
+
+association xxx_Method_invokedBy between
+	Method[0..1] role xxx_Method_invokedBy_src
+	Invocation[*] role invokedBy
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	TypeReference[*] role parameters
+end
+
+association xxx_Method_referencedFields between
+	Method[0..1] role xxx_Method_referencedFields_src
+	Field[*] role referencedFields
+end
+
+composition xxx_Method_invocations between
+	Method[0..1] role xxx_Method_invocations_src
+	Invocation[*] role invocations
+end
+
+association xxx_Method_wovenAdvices between
+	Method[0..1] role xxx_Method_wovenAdvices_src
+	Weaving[*] role wovenAdvices
+end
+
+composition xxx_Method_advisedMethods between
+	Method[0..1] role xxx_Method_advisedMethods_src
+	Weaving[*] role advisedMethods
+end
+
+association xxx_IntertypeDefinition_onType between
+	IntertypeDefinition[*] role xxx_IntertypeDefinition_onType_src
+	Type[0..1] role onType
+end
+
+composition xxx_Project_referencedTypes between
+	Project[0..1] role xxx_Project_referencedTypes_src
+	Type[*] role referencedTypes
+end
+
+association xxx_Invocation_invoker between
+	Invocation[*] role xxx_Invocation_invoker_src
+	Method[1] role invoker
+end
+
+association xxx_Invocation_invokedMethod between
+	Invocation[*] role xxx_Invocation_invokedMethod_src
+	Method[1] role invokedMethod
+end
+
+association xxx_Weaving_advice between
+	Weaving[*] role xxx_Weaving_advice_src
+	Method[0..1] role advice
+end
+
+association xxx_Weaving_method between
+	Weaving[*] role xxx_Weaving_method_src
+	Method[0..1] role method
+end
+
+association xxx_TypeReference_type between
+	TypeReference[*] role xxx_TypeReference_type_src
+	Type[1] role type
+end
+
+composition xxx_TypeReference_genericParameters between
+	TypeReference[0..1] role xxx_TypeReference_genericParameters_src
+	TypeReference[*] role genericParameters
+end
+

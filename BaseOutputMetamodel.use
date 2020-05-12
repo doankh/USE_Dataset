@@ -1,0 +1,38 @@
+model BaseNotationMetamodel
+abstract class RootNotationModel
+attributes
+operations
+end
+
+abstract class Token<NotationModelElement
+attributes
+operations
+end
+
+abstract class Lex<Location,Token
+attributes
+operations
+end
+
+abstract class Location
+attributes
+	line : Integer
+	column : Integer
+operations
+end
+
+abstract class NotationModelElement
+attributes
+operations
+end
+
+composition xxx_RootNotationModel_containedElements between
+	RootNotationModel[0..1] role xxx_RootNotationModel_containedElements_src
+	NotationModelElement[*] role containedElements
+end
+
+association xxx_RootNotationModel_root between
+	RootNotationModel[*] role xxx_RootNotationModel_root_src
+	NotationModelElement[0..1] role root
+end
+

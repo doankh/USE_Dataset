@@ -1,0 +1,66 @@
+model uml_20_to_21_triggersToEvents
+class System
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+abstract class Event
+attributes
+operations
+end
+
+class CallEvent<Event
+attributes
+operations
+end
+
+class SignalEvent<Event
+attributes
+operations
+end
+
+class TimeEvent<Event
+attributes
+operations
+end
+
+class ChangeEvent<Event
+attributes
+operations
+end
+
+class AnyRecieveEvent<Event
+attributes
+operations
+end
+
+composition xxx_System_transitions_ between
+	System[0..1] role xxx_System_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_System_events between
+	System[0..1] role xxx_System_events_src
+	Event[*] role events
+end
+
+composition xxx_Transition_triggers between
+	Transition[0..1] role xxx_Transition_triggers_src
+	Trigger[*] role triggers
+end
+
+association xxx_Trigger_event between
+	Trigger[*] role xxx_Trigger_event_src
+	Event[1] role event
+end
+

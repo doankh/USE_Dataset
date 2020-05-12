@@ -1,0 +1,45 @@
+model BaseUI
+abstract class Element
+attributes
+operations
+end
+
+class Layout<Element
+attributes
+	name : String
+operations
+end
+
+class Widget<Element
+attributes
+operations
+end
+
+class Label<Widget
+attributes
+	text : String
+operations
+end
+
+class InputBox<Widget
+attributes
+	capacity : Integer
+operations
+end
+
+class Button<Widget
+attributes
+	text : String
+operations
+end
+
+association xxx_Element_layout between
+	Element[*] role xxx_Element_layout_src
+	Layout[0..1] role layout
+end
+
+composition xxx_Layout_elements between
+	Layout[0..1] role xxx_Layout_elements_src
+	Element[*] role elements
+end
+

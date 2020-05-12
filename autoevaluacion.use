@@ -1,0 +1,70 @@
+model Autoevaluacion
+abstract class Hoja
+attributes
+	puntuacion : Real
+	penalizacion : Real
+operations
+end
+
+class Ejercicio
+attributes
+	enunciado : String
+	puntuacionEj : Real
+	categoria : String
+	name : String
+	order : Integer
+operations
+end
+
+abstract class Respuesta
+attributes
+	correctas : String
+	alternativas : String
+operations
+end
+
+class RespuestaUnica<Respuesta
+attributes
+operations
+end
+
+class RespuestaMultiple<Respuesta
+attributes
+operations
+end
+
+class TextoLibre<Respuesta
+attributes
+operations
+end
+
+class Ordenacion<Respuesta
+attributes
+operations
+end
+
+class Clasico<Hoja
+attributes
+operations
+end
+
+class Wizard<Hoja
+attributes
+operations
+end
+
+class WizardAdaptativo<Hoja
+attributes
+operations
+end
+
+composition xxx_Hoja_ejercicios between
+	Hoja[0..1] role xxx_Hoja_ejercicios_src
+	Ejercicio[1..*] role ejercicios
+end
+
+composition xxx_Ejercicio_respuesta between
+	Ejercicio[*] role xxx_Ejercicio_respuesta_src
+	Respuesta[1] role respuesta
+end
+

@@ -1,0 +1,138 @@
+model BDDModel
+class Model
+attributes
+operations
+end
+
+class Feature
+attributes
+	description : String
+	summary : String
+operations
+end
+
+abstract class Scenario
+attributes
+	description : String
+operations
+end
+
+class ScenarioSpecific<Scenario
+attributes
+operations
+end
+
+class ScenarioOutline<Scenario
+attributes
+operations
+end
+
+abstract class Content
+attributes
+	value : String
+operations
+end
+
+class Reference<Content
+attributes
+operations
+end
+
+class Word<Content
+attributes
+operations
+end
+
+class Example
+attributes
+	keys : String
+operations
+end
+
+class Background
+attributes
+operations
+end
+
+class Behavior
+attributes
+	description : String
+operations
+end
+
+class Sentence
+attributes
+operations
+end
+
+class Value
+attributes
+	elements : String
+operations
+end
+
+composition xxx_Model_Features between
+	Model[0..1] role xxx_Model_Features_src
+	Feature[*] role Features
+end
+
+composition xxx_Feature_Scenarios between
+	Feature[0..1] role xxx_Feature_Scenarios_src
+	Scenario[*] role Scenarios
+end
+
+composition xxx_Feature_Background between
+	Feature[*] role xxx_Feature_Background_src
+	Background[0..1] role Background
+end
+
+composition xxx_Feature_Behaviors between
+	Feature[0..1] role xxx_Feature_Behaviors_src
+	Behavior[*] role Behaviors
+end
+
+composition xxx_Scenario_GivenBlocks between
+	Scenario[0..1] role xxx_Scenario_GivenBlocks_src
+	Sentence[1..*] role GivenBlocks
+end
+
+composition xxx_Scenario_ThenBlocks between
+	Scenario[0..1] role xxx_Scenario_ThenBlocks_src
+	Sentence[1..*] role ThenBlocks
+end
+
+composition xxx_Scenario_WhenBlocks between
+	Scenario[0..1] role xxx_Scenario_WhenBlocks_src
+	Sentence[*] role WhenBlocks
+end
+
+composition xxx_ScenarioOutline_Examples between
+	ScenarioOutline[0..1] role xxx_ScenarioOutline_Examples_src
+	Example[1..*] role Examples
+end
+
+composition xxx_Example_values between
+	Example[0..1] role xxx_Example_values_src
+	Value[1..*] role values
+end
+
+composition xxx_Background_GivenBlocks between
+	Background[0..1] role xxx_Background_GivenBlocks_src
+	Sentence[1..*] role GivenBlocks
+end
+
+composition xxx_Behavior_RequiringBlocks between
+	Behavior[0..1] role xxx_Behavior_RequiringBlocks_src
+	Sentence[*] role RequiringBlocks
+end
+
+composition xxx_Behavior_EnsuringBlocks between
+	Behavior[0..1] role xxx_Behavior_EnsuringBlocks_src
+	Sentence[*] role EnsuringBlocks
+end
+
+composition xxx_Sentence_words between
+	Sentence[0..1] role xxx_Sentence_words_src
+	Content[1..*] role words
+end
+

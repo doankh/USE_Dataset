@@ -1,0 +1,100 @@
+model actionscripting
+class Block
+attributes
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class Conditional<Statement
+attributes
+operations
+end
+
+class Loop<Statement
+attributes
+operations
+end
+
+class VarDecl<Statement
+attributes
+	name : String
+operations
+end
+
+class Assignation<Statement
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+	eval(context_ : String)
+end
+
+class ConsoleOutput<Statement
+attributes
+	input : String
+operations
+end
+
+class Println<ConsoleOutput
+attributes
+operations
+end
+
+class Print<ConsoleOutput
+attributes
+operations
+end
+
+class Wait<Statement
+attributes
+	miliseconds : String
+operations
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Conditional_condition between
+	Conditional[*] role xxx_Conditional_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_Conditional_body between
+	Conditional[0..1] role xxx_Conditional_body_src
+	Statement[*] role body
+end
+
+composition xxx_Loop_guard between
+	Loop[*] role xxx_Loop_guard_src
+	Expression[1] role guard
+end
+
+composition xxx_Loop_body between
+	Loop[0..1] role xxx_Loop_body_src
+	Statement[*] role body
+end
+
+composition xxx_VarDecl_expr between
+	VarDecl[*] role xxx_VarDecl_expr_src
+	Expression[1] role expr
+end
+
+association xxx_Assignation_varRef between
+	Assignation[*] role xxx_Assignation_varRef_src
+	VarDecl[1] role varRef
+end
+
+composition xxx_Assignation_expression between
+	Assignation[*] role xxx_Assignation_expression_src
+	Expression[1] role expression
+end
+

@@ -1,0 +1,66 @@
+model ActionsReq
+abstract class NamedElement
+attributes
+operations
+end
+
+abstract class Classifier
+attributes
+operations
+end
+
+abstract class MultiplicityElement
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+abstract class ValueSpecification
+attributes
+operations
+end
+
+abstract class Behavior
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+class Signal
+attributes
+operations
+end
+
+abstract class StructuralFeature
+attributes
+operations
+end
+
+class Property
+attributes
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+

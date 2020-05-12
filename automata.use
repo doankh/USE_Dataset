@@ -1,0 +1,112 @@
+model automata
+enum DataType{
+default
+}
+
+enum BooleanOperator{
+default
+}
+
+enum StringOperator{
+default
+}
+
+enum NumberOperator{
+default
+}
+
+class Automaton
+attributes
+operations
+end
+
+class State
+attributes
+	name : String
+	initial : String
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Variable
+attributes
+	name : String
+	type : DataType
+operations
+end
+
+class Guard
+attributes
+operations
+end
+
+class BooleanGuard<Guard
+attributes
+	value : String
+	operator : BooleanOperator
+operations
+end
+
+class StringGuard<Guard
+attributes
+	value : String
+	operator : StringOperator
+operations
+end
+
+class NumberGuard<Guard
+attributes
+	value : String
+	operator : NumberOperator
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+composition xxx_Automaton_states_ between
+	Automaton[0..1] role xxx_Automaton_states__src
+	State[*] role states_
+end
+
+composition xxx_Automaton_transitions_ between
+	Automaton[0..1] role xxx_Automaton_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Automaton_variables between
+	Automaton[0..1] role xxx_Automaton_variables_src
+	Variable[*] role variables
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	State[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[1] role guard
+end
+
+association xxx_Guard_source between
+	Guard[*] role xxx_Guard_source_src
+	Variable[1] role source
+end
+
+association xxx_Action_target between
+	Action[*] role xxx_Action_target_src
+	Variable[1] role target
+end
+

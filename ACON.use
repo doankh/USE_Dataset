@@ -1,0 +1,144 @@
+model acon
+class Policy
+attributes
+operations
+end
+
+class Role
+attributes
+	name : String
+	isDelegable : Boolean
+operations
+end
+
+abstract class Rule
+attributes
+operations
+end
+
+class Resource
+attributes
+	name : String
+operations
+end
+
+class Action
+attributes
+	name : String
+	isDelegable : Boolean
+operations
+end
+
+class Context
+attributes
+	name : String
+	isActive : Boolean
+operations
+end
+
+class Permission<Rule
+attributes
+	name : String
+operations
+end
+
+abstract class Delegation<Rule
+attributes
+	isActive : Boolean
+	isMonotonic : Boolean
+operations
+end
+
+class User
+attributes
+	username : String
+operations
+end
+
+class RoleDelegation<Delegation
+attributes
+operations
+end
+
+class ActionDelegation<Delegation
+attributes
+operations
+end
+
+class Duration
+attributes
+	startDate : String
+	endDate : String
+operations
+end
+
+composition xxx_Policy_roles between
+	Policy[0..1] role xxx_Policy_roles_src
+	Role[*] role roles
+end
+
+composition xxx_Policy_rules between
+	Policy[0..1] role xxx_Policy_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Policy_resources between
+	Policy[0..1] role xxx_Policy_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_Policy_users between
+	Policy[0..1] role xxx_Policy_users_src
+	User[*] role users
+end
+
+composition xxx_Policy_contexts between
+	Policy[0..1] role xxx_Policy_contexts_src
+	Context[*] role contexts
+end
+
+association xxx_Rule_context_ between
+	Rule[*] role xxx_Rule_context__src
+	Context[1] role context_
+end
+
+composition xxx_Resource_actions between
+	Resource[0..1] role xxx_Resource_actions_src
+	Action[*] role actions
+end
+
+association xxx_Permission_role between
+	Permission[*] role xxx_Permission_role_src
+	Role[1] role role
+end
+
+association xxx_Permission_actions between
+	Permission[0..1] role xxx_Permission_actions_src
+	Action[1..*] role actions
+end
+
+association xxx_Delegation_delegator between
+	Delegation[*] role xxx_Delegation_delegator_src
+	User[1] role delegator
+end
+
+association xxx_Delegation_delegatee between
+	Delegation[*] role xxx_Delegation_delegatee_src
+	User[1] role delegatee
+end
+
+composition xxx_Delegation_duration between
+	Delegation[*] role xxx_Delegation_duration_src
+	Duration[0..1] role duration
+end
+
+association xxx_User_role between
+	User[*] role xxx_User_role_src
+	Role[1] role role
+end
+
+association xxx_ActionDelegation_delegatedActions between
+	ActionDelegation[0..1] role xxx_ActionDelegation_delegatedActions_src
+	Action[1..*] role delegatedActions
+end
+

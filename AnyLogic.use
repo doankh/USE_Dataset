@@ -1,0 +1,278 @@
+model AnyLogic
+class ModelElement
+attributes
+	id : Integer
+	name : String
+	excludeFromBuild : Boolean
+operations
+end
+
+class VisualModelElement<ModelElement
+attributes
+	publicFlag : Boolean
+	presentationFlag : Boolean
+	showLabel : Boolean
+operations
+end
+
+class Point
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Model<ModelElement
+attributes
+	engineVersion : Integer
+	javaPackageName : String
+operations
+end
+
+class ActiveObjectClass<ModelElement
+attributes
+	presentationTopGroupPersistent : Boolean
+	iconTopGroupPersistent : Boolean
+	generic : Boolean
+	genericParameters : String
+	agent : Boolean
+	environmentDefinesInitialLocation : Boolean
+operations
+end
+
+class Connector<VisualModelElement
+attributes
+	sourceConnectableName : String
+	targetConnectableName : String
+operations
+end
+
+class EmbeddedObject<VisualModelElement
+attributes
+	genericParametersSubstitute : String
+operations
+end
+
+class ActiveObjectClassRef
+attributes
+	packageName : String
+	className : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Shape<VisualModelElement
+attributes
+	asObject : Boolean
+	embeddedIcon : Boolean
+	rotation : Real
+operations
+end
+
+class EmbeddedObjectPresentation<Shape
+attributes
+operations
+end
+
+class Experiment<ModelElement
+attributes
+operations
+end
+
+class SimulationExperiment<Experiment
+attributes
+	presentationTopGroupPersistent : Boolean
+	iconTopGroupPersistent : Boolean
+	commandLineArguments : String
+	maximumMemory : Integer
+	randomSeed : Boolean
+	seedValue : Integer
+	vmArgs : String
+	absoluteAccuracy : Real
+	relativeAccuracy : Real
+	timeAccuracy : Real
+	fixedTimeStep : Real
+	enableAdaptiveFrameManagement : Boolean
+	enableAntiAliasing : Boolean
+	enablePanning : Boolean
+	enableZoom : Boolean
+	executionMode : String
+	cpuRatio : String
+	title : String
+	framesPerSecond : String
+	realTimeScale : String
+	useCalendar : Boolean
+	stopOption : String
+	initialDate : String
+	initialTime : String
+	finalDate : String
+	finalTime : String
+	modelTimeUnit : String
+operations
+end
+
+class Control<VisualModelElement
+attributes
+	width : Integer
+	height : Integer
+	asObject : Boolean
+	embeddedIcon : Boolean
+	fillColor : Integer
+	textColor : Integer
+	enableExpression : String
+	actionCode : String
+	labelText : String
+operations
+end
+
+class Button<Control
+attributes
+operations
+end
+
+class Frame
+attributes
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+operations
+end
+
+class Text<Shape
+attributes
+	color : Integer
+	text : String
+	alignment : String
+operations
+end
+
+class Font
+attributes
+	name : String
+	size : Integer
+	style : Integer
+operations
+end
+
+composition xxx_VisualModelElement_position between
+	VisualModelElement[*] role xxx_VisualModelElement_position_src
+	Point[1] role position
+end
+
+composition xxx_VisualModelElement_label between
+	VisualModelElement[*] role xxx_VisualModelElement_label_src
+	Point[1] role label
+end
+
+composition xxx_Model_activeObjectClasses between
+	Model[0..1] role xxx_Model_activeObjectClasses_src
+	ActiveObjectClass[*] role activeObjectClasses
+end
+
+composition xxx_Model_experiments between
+	Model[0..1] role xxx_Model_experiments_src
+	Experiment[*] role experiments
+end
+
+composition xxx_ActiveObjectClass_clientAreaTopLeft between
+	ActiveObjectClass[*] role xxx_ActiveObjectClass_clientAreaTopLeft_src
+	Point[1] role clientAreaTopLeft
+end
+
+composition xxx_ActiveObjectClass_connectors between
+	ActiveObjectClass[0..1] role xxx_ActiveObjectClass_connectors_src
+	Connector[*] role connectors
+end
+
+composition xxx_ActiveObjectClass_embeddedObjects between
+	ActiveObjectClass[0..1] role xxx_ActiveObjectClass_embeddedObjects_src
+	EmbeddedObject[*] role embeddedObjects
+end
+
+composition xxx_ActiveObjectClass_shapes between
+	ActiveObjectClass[0..1] role xxx_ActiveObjectClass_shapes_src
+	Shape[*] role shapes
+end
+
+association xxx_Connector_sourceEmbeddedObject between
+	Connector[*] role xxx_Connector_sourceEmbeddedObject_src
+	EmbeddedObject[1] role sourceEmbeddedObject
+end
+
+association xxx_Connector_targetEmbeddedObject between
+	Connector[*] role xxx_Connector_targetEmbeddedObject_src
+	EmbeddedObject[1] role targetEmbeddedObject
+end
+
+composition xxx_Connector_points between
+	Connector[0..1] role xxx_Connector_points_src
+	Point[*] role points
+end
+
+association xxx_EmbeddedObject_presentation between
+	EmbeddedObject[*] role xxx_EmbeddedObject_presentation_src
+	EmbeddedObjectPresentation[1] role presentation
+end
+
+composition xxx_EmbeddedObject_activeObjectClass between
+	EmbeddedObject[*] role xxx_EmbeddedObject_activeObjectClass_src
+	ActiveObjectClassRef[1] role activeObjectClass
+end
+
+composition xxx_EmbeddedObject_parameters between
+	EmbeddedObject[0..1] role xxx_EmbeddedObject_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_SimulationExperiment_activeObjectClass between
+	SimulationExperiment[*] role xxx_SimulationExperiment_activeObjectClass_src
+	ActiveObjectClass[1] role activeObjectClass
+end
+
+composition xxx_SimulationExperiment_clientAreaTopLeft between
+	SimulationExperiment[*] role xxx_SimulationExperiment_clientAreaTopLeft_src
+	Point[1] role clientAreaTopLeft
+end
+
+composition xxx_SimulationExperiment_frame between
+	SimulationExperiment[*] role xxx_SimulationExperiment_frame_src
+	Frame[1] role frame
+end
+
+composition xxx_SimulationExperiment_shapes between
+	SimulationExperiment[0..1] role xxx_SimulationExperiment_shapes_src
+	Shape[*] role shapes
+end
+
+composition xxx_SimulationExperiment_controls between
+	SimulationExperiment[0..1] role xxx_SimulationExperiment_controls_src
+	Control[*] role controls
+end
+
+composition xxx_SimulationExperiment_parameters between
+	SimulationExperiment[0..1] role xxx_SimulationExperiment_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_SimulationExperiment_uiProperties between
+	SimulationExperiment[0..1] role xxx_SimulationExperiment_uiProperties_src
+	Parameter[*] role uiProperties
+end
+
+composition xxx_Control_font between
+	Control[*] role xxx_Control_font_src
+	Font[1] role font
+end
+
+composition xxx_Text_font between
+	Text[*] role xxx_Text_font_src
+	Font[1] role font
+end
+

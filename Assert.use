@@ -1,0 +1,119 @@
+model Assert
+class Model
+attributes
+operations
+end
+
+class AssertionMethod
+attributes
+	Name : String
+operations
+end
+
+class Parameter
+attributes
+	Identifier : String
+operations
+end
+
+abstract class Type
+attributes
+operations
+end
+
+class ValueType<Type
+attributes
+	InteralType : String
+operations
+end
+
+class ArrayType<Type
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class UnaryExpression<Expression
+attributes
+	Operation : Boolean
+operations
+end
+
+class BinaryExpression<Expression
+attributes
+	Operator : String
+operations
+end
+
+class FunctionCall<Expression
+attributes
+	FunctionName : String
+operations
+end
+
+class Constant<Expression
+attributes
+	LiteralValue : String
+operations
+end
+
+class ParameterExpression<Expression
+attributes
+	Identifier : String
+operations
+end
+
+class NullExpression<Expression
+attributes
+operations
+end
+
+composition xxx_Model_assertations between
+	Model[0..1] role xxx_Model_assertations_src
+	AssertionMethod[*] role assertations
+end
+
+composition xxx_AssertionMethod_parameters between
+	AssertionMethod[*] role xxx_AssertionMethod_parameters_src
+	Parameter[1..3] role parameters
+end
+
+composition xxx_AssertionMethod_expression between
+	AssertionMethod[*] role xxx_AssertionMethod_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[1] role type
+end
+
+composition xxx_ArrayType_values between
+	ArrayType[0..1] role xxx_ArrayType_values_src
+	ValueType[*] role values
+end
+
+composition xxx_UnaryExpression_operand between
+	UnaryExpression[*] role xxx_UnaryExpression_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_BinaryExpression_left between
+	BinaryExpression[*] role xxx_BinaryExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_BinaryExpression_right between
+	BinaryExpression[*] role xxx_BinaryExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_FunctionCall_parameters between
+	FunctionCall[0..1] role xxx_FunctionCall_parameters_src
+	Expression[*] role parameters
+end
+
