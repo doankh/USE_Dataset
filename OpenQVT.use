@@ -1,0 +1,187 @@
+model OpenQVT
+class Variable
+attributes
+	name : String
+	type : String
+	value : String
+	visibility : String
+operations
+end
+
+class Context
+attributes
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+class RootRule<Rule
+attributes
+operations
+end
+
+class RuleSetCall<Rule
+attributes
+operations
+end
+
+class QARule<Rule
+attributes
+operations
+end
+
+class RuleSet
+attributes
+operations
+end
+
+class Service
+attributes
+	visibility : String
+	signature : String
+operations
+end
+
+class OCLService<Service
+attributes
+operations
+end
+
+class RTransService<Service
+attributes
+operations
+end
+
+class JavaService<Service
+attributes
+operations
+end
+
+abstract class RulePart
+attributes
+operations
+end
+
+class Action<RulePart
+attributes
+operations
+end
+
+class RTransAction<Action
+attributes
+operations
+end
+
+class JavaAction<Action
+attributes
+operations
+end
+
+class Query<RulePart
+attributes
+operations
+end
+
+class OCLFilter<Query
+attributes
+operations
+end
+
+class RTransQuery<Query
+attributes
+operations
+end
+
+class JavaQuery<Query
+attributes
+operations
+end
+
+class JavaFilter<Query
+attributes
+operations
+end
+
+association xxx_Variable_context_ between
+	Variable[*] role xxx_Variable_context__src
+	Context[1] role context_
+end
+
+composition xxx_Context_variables between
+	Context[0..1] role xxx_Context_variables_src
+	Variable[*] role variables
+end
+
+association xxx_Context_rule between
+	Context[*] role xxx_Context_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_Rule_context_ between
+	Rule[*] role xxx_Rule_context__src
+	Context[1] role context_
+end
+
+composition xxx_Rule_subRule between
+	Rule[*] role xxx_Rule_subRule_src
+	Rule[1] role subRule
+end
+
+association xxx_Rule_superRule between
+	Rule[*] role xxx_Rule_superRule_src
+	Rule[1] role superRule
+end
+
+composition xxx_Rule_services between
+	Rule[0..1] role xxx_Rule_services_src
+	Service[*] role services
+end
+
+association xxx_RootRule_ruleSet between
+	RootRule[*] role xxx_RootRule_ruleSet_src
+	RuleSet[1] role ruleSet
+end
+
+association xxx_RuleSetCall_ruleSet between
+	RuleSetCall[*] role xxx_RuleSetCall_ruleSet_src
+	RuleSet[1] role ruleSet
+end
+
+composition xxx_QARule_query between
+	QARule[*] role xxx_QARule_query_src
+	Query[1] role query
+end
+
+composition xxx_QARule_action between
+	QARule[*] role xxx_QARule_action_src
+	Action[1] role action
+end
+
+composition xxx_RuleSet_rootRule between
+	RuleSet[*] role xxx_RuleSet_rootRule_src
+	RootRule[1] role rootRule
+end
+
+association xxx_Service_rule between
+	Service[*] role xxx_Service_rule_src
+	Rule[1] role rule
+end
+
+association xxx_RulePart_service between
+	RulePart[*] role xxx_RulePart_service_src
+	Service[1] role service
+end
+
+association xxx_Action_qARule between
+	Action[*] role xxx_Action_qARule_src
+	QARule[1] role qARule
+end
+
+association xxx_Query_qARule between
+	Query[*] role xxx_Query_qARule_src
+	QARule[1] role qARule
+end
+

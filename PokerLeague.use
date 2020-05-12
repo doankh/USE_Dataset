@@ -1,0 +1,231 @@
+model pokerleague
+enum InvitationEventType{
+default
+}
+
+enum InvitationReply{
+default
+}
+
+abstract class Serializable
+attributes
+operations
+end
+
+class DataStructureVersion<Serializable
+attributes
+	id : Integer
+	currentVersion : String
+operations
+end
+
+class DataVersion<Serializable
+attributes
+	id : Integer
+	currentVersion : String
+operations
+end
+
+class Settings<Serializable
+attributes
+	id : Integer
+	adminPassword : String
+	defaultTimeZone : String
+operations
+end
+
+abstract class IdentifiableEntity<Serializable
+attributes
+	id : Integer
+	proxy : Boolean
+	obsolete : Boolean
+operations
+end
+
+abstract class DescribedEntity<IdentifiableEntity
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Player<IdentifiableEntity
+attributes
+	active : Boolean
+	nick : String
+	firstName : String
+	lastName : String
+	emailAddress : String
+operations
+end
+
+class PrizeMoneyRuleSet<DescribedEntity
+attributes
+operations
+end
+
+class PrizeMoneyRule<IdentifiableEntity
+attributes
+	numberOfPlayers : Integer
+operations
+end
+
+class PrizeMoneyFormula<IdentifiableEntity
+attributes
+	rank : Integer
+	relativePrizeMoney : Integer
+operations
+end
+
+class Competition<DescribedEntity
+attributes
+	startDate : String
+	endDate : String
+	minimalAttendance : Integer
+	defaultBuyIn : Integer
+	defaultMinPlayers : Integer
+	defaultMaxPlayers : Integer
+	defaultTournamentAnnouncementLead : Integer
+operations
+end
+
+class Tournament<DescribedEntity
+attributes
+	defaultBuyIn : Integer
+	tournamentAnnouncementLead : Integer
+	tournamentStart : String
+	tournamentEnd : String
+	minPlayers : Integer
+	maxPlayers : Integer
+operations
+end
+
+class Invitation<IdentifiableEntity
+attributes
+	reply : InvitationReply
+	ordinal : Integer
+	uuid : String
+operations
+end
+
+class InvitationEvent<IdentifiableEntity
+attributes
+	eventTime : String
+	eventType : InvitationEventType
+	sent : Boolean
+operations
+end
+
+class Game<IdentifiableEntity
+attributes
+	ordinal : Integer
+	buyIn : Integer
+operations
+end
+
+class PlayerInGame<IdentifiableEntity
+attributes
+	rank : Integer
+operations
+end
+
+composition xxx_PrizeMoneyRuleSet_prizeMoneyRules between
+	PrizeMoneyRuleSet[0..1] role xxx_PrizeMoneyRuleSet_prizeMoneyRules_src
+	PrizeMoneyRule[*] role prizeMoneyRules
+end
+
+association xxx_PrizeMoneyRule_prizeMoneyRuleSet between
+	PrizeMoneyRule[*] role xxx_PrizeMoneyRule_prizeMoneyRuleSet_src
+	PrizeMoneyRuleSet[0..1] role prizeMoneyRuleSet
+end
+
+composition xxx_PrizeMoneyRule_prizeMoneyFormulas between
+	PrizeMoneyRule[0..1] role xxx_PrizeMoneyRule_prizeMoneyFormulas_src
+	PrizeMoneyFormula[*] role prizeMoneyFormulas
+end
+
+association xxx_PrizeMoneyFormula_prizeMoneyRule between
+	PrizeMoneyFormula[*] role xxx_PrizeMoneyFormula_prizeMoneyRule_src
+	PrizeMoneyRule[0..1] role prizeMoneyRule
+end
+
+association xxx_Competition_defaultPrizeMoneyRuleSet between
+	Competition[*] role xxx_Competition_defaultPrizeMoneyRuleSet_src
+	PrizeMoneyRuleSet[0..1] role defaultPrizeMoneyRuleSet
+end
+
+composition xxx_Competition_tournaments between
+	Competition[0..1] role xxx_Competition_tournaments_src
+	Tournament[*] role tournaments
+end
+
+association xxx_Competition_players between
+	Competition[0..1] role xxx_Competition_players_src
+	Player[*] role players
+end
+
+association xxx_Tournament_defaultPrizeMoneyRuleSet between
+	Tournament[*] role xxx_Tournament_defaultPrizeMoneyRuleSet_src
+	PrizeMoneyRuleSet[0..1] role defaultPrizeMoneyRuleSet
+end
+
+composition xxx_Tournament_invitations between
+	Tournament[0..1] role xxx_Tournament_invitations_src
+	Invitation[*] role invitations
+end
+
+association xxx_Tournament_competition between
+	Tournament[*] role xxx_Tournament_competition_src
+	Competition[0..1] role competition
+end
+
+composition xxx_Tournament_games between
+	Tournament[0..1] role xxx_Tournament_games_src
+	Game[*] role games
+end
+
+association xxx_Invitation_tournament between
+	Invitation[*] role xxx_Invitation_tournament_src
+	Tournament[0..1] role tournament
+end
+
+association xxx_Invitation_player between
+	Invitation[*] role xxx_Invitation_player_src
+	Player[0..1] role player
+end
+
+composition xxx_Invitation_events between
+	Invitation[0..1] role xxx_Invitation_events_src
+	InvitationEvent[*] role events
+end
+
+association xxx_InvitationEvent_invitation between
+	InvitationEvent[*] role xxx_InvitationEvent_invitation_src
+	Invitation[0..1] role invitation
+end
+
+association xxx_Game_tournament between
+	Game[*] role xxx_Game_tournament_src
+	Tournament[0..1] role tournament
+end
+
+association xxx_Game_prizeMoneyRuleSet between
+	Game[*] role xxx_Game_prizeMoneyRuleSet_src
+	PrizeMoneyRuleSet[0..1] role prizeMoneyRuleSet
+end
+
+composition xxx_Game_playersInGame between
+	Game[0..1] role xxx_Game_playersInGame_src
+	PlayerInGame[*] role playersInGame
+end
+
+association xxx_PlayerInGame_player between
+	PlayerInGame[*] role xxx_PlayerInGame_player_src
+	Player[0..1] role player
+end
+
+association xxx_PlayerInGame_game between
+	PlayerInGame[*] role xxx_PlayerInGame_game_src
+	Game[0..1] role game
+end
+

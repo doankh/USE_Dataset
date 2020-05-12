@@ -1,0 +1,365 @@
+model rezept
+enum ModifikationsArt{
+default
+}
+
+enum KategorieArt{
+default
+}
+
+enum Verpackung{
+default
+}
+
+enum Stoff{
+default
+}
+
+enum DiaetArt{
+default
+}
+
+enum Waehrung{
+default
+}
+
+enum Masseinheit{
+default
+}
+
+enum MengenAngabe{
+default
+}
+
+class Rezept
+attributes
+	id : String
+	titel : String
+	untertitel : String
+	kategorie : KategorieArt
+	letzteAenderung : String
+	personen : Integer
+operations
+end
+
+class ProduktImport
+attributes
+operations
+end
+
+class Produkt
+attributes
+	name : String
+	verpackung : Verpackung
+	ean : String
+	uba : String
+	handler : String
+	hersteller : String
+	datumLetzteAenderung : String
+operations
+end
+
+class BuchBeschreibung
+attributes
+	titel : String
+	vorwort : String
+	datumPublished : String
+operations
+end
+
+class ProjektBeschreibung
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+	resourcesDir : String
+	siteURL : String
+operations
+end
+
+class Literaturquelle<Quelle
+attributes
+	beschreibung : String
+	modifikationsArt : ModifikationsArt
+operations
+end
+
+class Arbeitsschritt
+attributes
+	beschreibung : String
+operations
+end
+
+class Kommentar<Notiz
+attributes
+operations
+end
+
+class ProduktRef
+attributes
+	menge : String
+operations
+end
+
+class Zutat
+attributes
+	name : String
+operations
+end
+
+class Tipp<Notiz
+attributes
+operations
+end
+
+class RezeptImport
+attributes
+operations
+end
+
+abstract class Tag
+attributes
+operations
+end
+
+class StoffTag<Tag
+attributes
+	stoff : Stoff
+operations
+end
+
+class BenutzerTag<Tag
+attributes
+	bezeichnung : String
+operations
+end
+
+class Rezeptliste
+attributes
+	name : String
+operations
+end
+
+class DiaetTag<Tag
+attributes
+	diaet : DiaetArt
+operations
+end
+
+class Preis
+attributes
+	betrag : String
+	waehrung : Waehrung
+operations
+end
+
+abstract class Menge
+attributes
+operations
+end
+
+class Anmerkung<Notiz
+attributes
+operations
+end
+
+abstract class Notiz
+attributes
+	text : String
+operations
+end
+
+class BestimmteMenge<Menge
+attributes
+	betrag : String
+	einheit : Masseinheit
+	details : String
+operations
+end
+
+class UnbestimmteMenge<Menge
+attributes
+	menge : MengenAngabe
+operations
+end
+
+class Produktliste
+attributes
+	name : String
+operations
+end
+
+class Lizenz
+attributes
+	text : String
+	hinweis : String
+operations
+end
+
+class Autor
+attributes
+	vorname : String
+	nachname : String
+	organisationsName : String
+	modifikationsNotiz : String
+operations
+end
+
+class Personenquelle<Quelle
+attributes
+	personenBeschreibung : String
+operations
+end
+
+abstract class Quelle
+attributes
+operations
+end
+
+class Bild
+attributes
+	beschreibung : String
+	lizenz : String
+	urheber : String
+operations
+end
+
+abstract class AblagePfad
+attributes
+operations
+end
+
+class InternetPfad<AblagePfad
+attributes
+	url : String
+operations
+end
+
+class LokalerPfad<AblagePfad
+attributes
+	fileName : String
+operations
+end
+
+class Absatz
+attributes
+	titel : String
+	text : String
+operations
+end
+
+composition xxx_Rezept_quelle between
+	Rezept[*] role xxx_Rezept_quelle_src
+	Quelle[0..1] role quelle
+end
+
+composition xxx_Rezept_schritte between
+	Rezept[0..1] role xxx_Rezept_schritte_src
+	Arbeitsschritt[1..*] role schritte
+end
+
+composition xxx_Rezept_produkte between
+	Rezept[0..1] role xxx_Rezept_produkte_src
+	ProduktRef[*] role produkte
+end
+
+composition xxx_Rezept_zutaten between
+	Rezept[0..1] role xxx_Rezept_zutaten_src
+	Zutat[1..*] role zutaten
+end
+
+composition xxx_Rezept_tags between
+	Rezept[0..1] role xxx_Rezept_tags_src
+	Tag[1..*] role tags
+end
+
+composition xxx_Rezept_notizen between
+	Rezept[0..1] role xxx_Rezept_notizen_src
+	Notiz[*] role notizen
+end
+
+composition xxx_Rezept_bilder between
+	Rezept[0..1] role xxx_Rezept_bilder_src
+	Bild[*] role bilder
+end
+
+association xxx_ProduktImport_importedResource between
+	ProduktImport[*] role xxx_ProduktImport_importedResource_src
+	Produktliste[1] role importedResource
+end
+
+composition xxx_Produkt_preis between
+	Produkt[*] role xxx_Produkt_preis_src
+	Preis[0..1] role preis
+end
+
+composition xxx_Produkt_menge between
+	Produkt[*] role xxx_Produkt_menge_src
+	Menge[1] role menge
+end
+
+composition xxx_BuchBeschreibung_lizenz between
+	BuchBeschreibung[*] role xxx_BuchBeschreibung_lizenz_src
+	Lizenz[0..1] role lizenz
+end
+
+composition xxx_BuchBeschreibung_autoren between
+	BuchBeschreibung[0..1] role xxx_BuchBeschreibung_autoren_src
+	Autor[1..*] role autoren
+end
+
+composition xxx_BuchBeschreibung_imports between
+	BuchBeschreibung[0..1] role xxx_BuchBeschreibung_imports_src
+	RezeptImport[1..*] role imports
+end
+
+composition xxx_BuchBeschreibung_absatz between
+	BuchBeschreibung[0..1] role xxx_BuchBeschreibung_absatz_src
+	Absatz[*] role absatz
+end
+
+composition xxx_ProjektBeschreibung_buch between
+	ProjektBeschreibung[*] role xxx_ProjektBeschreibung_buch_src
+	BuchBeschreibung[1] role buch
+end
+
+composition xxx_Arbeitsschritt_notiz between
+	Arbeitsschritt[*] role xxx_Arbeitsschritt_notiz_src
+	Notiz[0..1] role notiz
+end
+
+association xxx_ProduktRef_produkt between
+	ProduktRef[*] role xxx_ProduktRef_produkt_src
+	Produkt[1] role produkt
+end
+
+composition xxx_Zutat_menge between
+	Zutat[*] role xxx_Zutat_menge_src
+	Menge[1] role menge
+end
+
+association xxx_RezeptImport_importedResource between
+	RezeptImport[*] role xxx_RezeptImport_importedResource_src
+	Rezeptliste[1] role importedResource
+end
+
+composition xxx_Rezeptliste_rezepte between
+	Rezeptliste[0..1] role xxx_Rezeptliste_rezepte_src
+	Rezept[1..*] role rezepte
+end
+
+composition xxx_Rezeptliste_imports between
+	Rezeptliste[0..1] role xxx_Rezeptliste_imports_src
+	ProduktImport[*] role imports
+end
+
+composition xxx_Produktliste_produkte between
+	Produktliste[0..1] role xxx_Produktliste_produkte_src
+	Produkt[1..*] role produkte
+end
+
+composition xxx_Bild_ablageOrt between
+	Bild[*] role xxx_Bild_ablageOrt_src
+	AblagePfad[1] role ablageOrt
+end
+

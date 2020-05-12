@@ -1,0 +1,47 @@
+model PrimitiveTypes
+abstract class Named
+attributes
+	name : String
+operations
+end
+
+class Table<Named
+attributes
+operations
+end
+
+class Column<Named
+attributes
+operations
+end
+
+class Type<Named
+attributes
+operations
+end
+
+composition xxx_Table_col between
+	Table[0..1] role xxx_Table_col_src
+	Column[*] role col
+end
+
+association xxx_Table_key between
+	Table[0..1] role xxx_Table_key_src
+	Column[*] role key
+end
+
+association xxx_Column_owner between
+	Column[*] role xxx_Column_owner_src
+	Table[1] role owner
+end
+
+association xxx_Column_keyOf between
+	Column[*] role xxx_Column_keyOf_src
+	Table[0..1] role keyOf
+end
+
+association xxx_Column_type between
+	Column[*] role xxx_Column_type_src
+	Type[1] role type
+end
+

@@ -1,0 +1,258 @@
+model mafproject
+abstract class ProjectSetElement
+attributes
+operations
+end
+
+class ProjectSet<ProjectSetElement
+attributes
+	id : String
+	author : String
+	description : String
+	version : String
+	created : String
+	modified : String
+operations
+end
+
+abstract class RepositoryEntry<ProjectSetElement
+attributes
+	repoID : String
+operations
+end
+
+abstract class RepositoryModelEntry<RepositoryEntry
+attributes
+	adapter : String
+operations
+end
+
+abstract class RepositoryVisualizerEntry<RepositoryEntry
+attributes
+	javaURI : String
+operations
+end
+
+class MetaModelEntry<RepositoryModelEntry
+attributes
+operations
+end
+
+class AttributionEntry<RepositoryModelEntry
+attributes
+operations
+end
+
+class ModelEntry<RepositoryModelEntry
+attributes
+operations
+end
+
+class ResultVisualizerEntry<RepositoryVisualizerEntry
+attributes
+operations
+end
+
+class StatusVisualizerEntry<RepositoryVisualizerEntry
+attributes
+operations
+end
+
+class ParameterElement<ProjectSetElement
+attributes
+operations
+end
+
+class ProjectSetParameters<ParameterElement
+attributes
+	coreSync : Boolean
+operations
+end
+
+class CoreParameters<ParameterElement
+attributes
+	logLevel : Integer
+	synchronizeResources : Boolean
+	autodisposePolicy : String
+	parametersAutoreset : Boolean
+	threadCount : String
+operations
+end
+
+class AttributionParameters<ParameterElement
+attributes
+	staticRuleCreation : Boolean
+	inheritancePolicy : String
+	mockJavaRules : Boolean
+operations
+end
+
+class InstantiationParameters<ParameterElement
+attributes
+	SynchronizeEvaluation : Boolean
+	SynchronizeAttributions : String
+	InstantiationPolicy : String
+	AutoDeletePolicy : String
+	ProblemMarkerPolicy : String
+	MeasurePerformance : Boolean
+	EvaluatorType : String
+	EvaluatorDebugMode : Boolean
+	EvaluationVisualizers : String
+	ValidateReferences : Boolean
+	MaxRuleInvoke : Integer
+	BlockStable : Boolean
+operations
+end
+
+class EvaluationElement<ProjectSetElement
+attributes
+operations
+end
+
+class EvaluationStrategy<EvaluationElement
+attributes
+	id : String
+	description : String
+operations
+end
+
+abstract class EvaluationDirective<EvaluationElement
+attributes
+	id : String
+operations
+end
+
+class EvaluationTarget<EvaluationDirective
+attributes
+	targetAttributionIDs : String
+	targetAttributeDefinitionIDs : String
+	targetAttributeOccurrenceIDs : String
+operations
+end
+
+class EvaluationMacro<EvaluationDirective
+attributes
+	path : String
+operations
+end
+
+class StringToStringMapEntry
+attributes
+	key : String
+	value : String
+operations
+end
+
+class InputResource<ProjectSetElement
+attributes
+	id : String
+	type : String
+	path : String
+operations
+end
+
+composition xxx_ProjectSet_parameters between
+	ProjectSet[*] role xxx_ProjectSet_parameters_src
+	ProjectSetParameters[0..1] role parameters
+end
+
+composition xxx_ProjectSet_metamodels between
+	ProjectSet[0..1] role xxx_ProjectSet_metamodels_src
+	MetaModelEntry[*] role metamodels
+end
+
+composition xxx_ProjectSet_attributions between
+	ProjectSet[0..1] role xxx_ProjectSet_attributions_src
+	AttributionEntry[*] role attributions
+end
+
+composition xxx_ProjectSet_models between
+	ProjectSet[0..1] role xxx_ProjectSet_models_src
+	ModelEntry[*] role models
+end
+
+composition xxx_ProjectSet_strategies between
+	ProjectSet[0..1] role xxx_ProjectSet_strategies_src
+	EvaluationStrategy[*] role strategies
+end
+
+composition xxx_ProjectSet_resultVisualizers between
+	ProjectSet[0..1] role xxx_ProjectSet_resultVisualizers_src
+	ResultVisualizerEntry[*] role resultVisualizers
+end
+
+composition xxx_ProjectSet_statusVisualizers between
+	ProjectSet[0..1] role xxx_ProjectSet_statusVisualizers_src
+	StatusVisualizerEntry[*] role statusVisualizers
+end
+
+composition xxx_RepositoryModelEntry_resources between
+	RepositoryModelEntry[0..1] role xxx_RepositoryModelEntry_resources_src
+	InputResource[*] role resources
+end
+
+association xxx_AttributionEntry_metamodel between
+	AttributionEntry[*] role xxx_AttributionEntry_metamodel_src
+	MetaModelEntry[0..1] role metamodel
+end
+
+composition xxx_AttributionEntry_parameters between
+	AttributionEntry[*] role xxx_AttributionEntry_parameters_src
+	AttributionParameters[0..1] role parameters
+end
+
+association xxx_ModelEntry_metamodel between
+	ModelEntry[*] role xxx_ModelEntry_metamodel_src
+	MetaModelEntry[0..1] role metamodel
+end
+
+composition xxx_ProjectSetParameters_coreParameters between
+	ProjectSetParameters[*] role xxx_ProjectSetParameters_coreParameters_src
+	CoreParameters[0..1] role coreParameters
+end
+
+composition xxx_AttributionParameters_javaRuleClasses between
+	AttributionParameters[0..1] role xxx_AttributionParameters_javaRuleClasses_src
+	StringToStringMapEntry[*] role javaRuleClasses
+end
+
+composition xxx_InstantiationParameters_EvaluatorParameters between
+	InstantiationParameters[0..1] role xxx_InstantiationParameters_EvaluatorParameters_src
+	StringToStringMapEntry[*] role EvaluatorParameters
+end
+
+composition xxx_EvaluationStrategy_directives between
+	EvaluationStrategy[0..1] role xxx_EvaluationStrategy_directives_src
+	EvaluationDirective[*] role directives
+end
+
+association xxx_EvaluationStrategy_visualizers between
+	EvaluationStrategy[0..1] role xxx_EvaluationStrategy_visualizers_src
+	ResultVisualizerEntry[*] role visualizers
+end
+
+composition xxx_EvaluationStrategy_parameters between
+	EvaluationStrategy[*] role xxx_EvaluationStrategy_parameters_src
+	InstantiationParameters[0..1] role parameters
+end
+
+association xxx_EvaluationTarget_metamodel between
+	EvaluationTarget[*] role xxx_EvaluationTarget_metamodel_src
+	MetaModelEntry[0..1] role metamodel
+end
+
+association xxx_EvaluationTarget_attribution between
+	EvaluationTarget[*] role xxx_EvaluationTarget_attribution_src
+	AttributionEntry[0..1] role attribution
+end
+
+association xxx_EvaluationTarget_model_ between
+	EvaluationTarget[*] role xxx_EvaluationTarget_model__src
+	ModelEntry[0..1] role model_
+end
+
+composition xxx_EvaluationTarget_parameters between
+	EvaluationTarget[*] role xxx_EvaluationTarget_parameters_src
+	InstantiationParameters[0..1] role parameters
+end
+

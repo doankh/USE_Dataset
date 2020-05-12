@@ -1,0 +1,109 @@
+model Factory
+enum BreakStates{
+default
+}
+
+class Factory
+attributes
+	name : String
+	author : String
+operations
+end
+
+abstract class Machine
+attributes
+	serialno : Integer
+operations
+end
+
+abstract class Processor<Machine,Breakable
+attributes
+operations
+end
+
+class Part
+attributes
+	timeStamp : Integer
+operations
+end
+
+class Assembler<Processor
+attributes
+	rate : String
+	priority : Boolean
+operations
+end
+
+class Packager<Processor
+attributes
+	numFinished : Integer
+operations
+end
+
+abstract class Checker<Machine
+attributes
+operations
+end
+
+class AssembledChecker<Checker
+attributes
+operations
+end
+
+class PackagedChecker<Checker
+attributes
+operations
+end
+
+abstract class Breakable
+attributes
+	state : BreakStates
+operations
+end
+
+class Operator<Breakable
+attributes
+	name : String
+operations
+end
+
+composition xxx_Factory_machines between
+	Factory[0..1] role xxx_Factory_machines_src
+	Machine[1..*] role machines
+end
+
+composition xxx_Factory_operators between
+	Factory[0..1] role xxx_Factory_operators_src
+	Operator[*] role operators
+end
+
+association xxx_Machine_operatedBy between
+	Machine[*] role xxx_Machine_operatedBy_src
+	Operator[0..1] role operatedBy
+end
+
+association xxx_Machine_factory between
+	Machine[*] role xxx_Machine_factory_src
+	Factory[1] role factory
+end
+
+composition xxx_Processor_parts between
+	Processor[0..1] role xxx_Processor_parts_src
+	Part[*] role parts
+end
+
+association xxx_AssembledChecker_checks between
+	AssembledChecker[*] role xxx_AssembledChecker_checks_src
+	Assembler[1] role checks
+end
+
+association xxx_PackagedChecker_checks between
+	PackagedChecker[0..1] role xxx_PackagedChecker_checks_src
+	Packager[*] role checks
+end
+
+association xxx_Operator_factory between
+	Operator[*] role xxx_Operator_factory_src
+	Factory[1] role factory
+end
+

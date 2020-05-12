@@ -1,0 +1,507 @@
+model PNML
+enum RotationType{
+	rtvertical,
+	rthorizontal,
+	rtdiagonal
+}
+
+enum ShapeType{
+	shtline,
+	shtcurve
+}
+
+enum StyleType{
+	sttsolid,
+	sttdash,
+	sttdot
+}
+
+enum DecorationType{
+	dtunderligne,
+	dtoverligne,
+	dtlinethrough
+}
+
+enum AlignType{
+	atleft,
+	atcenter,
+	atright
+}
+
+abstract class IdedElement
+attributes
+	id : String
+operations
+end
+
+class URI
+attributes
+	value : String
+operations
+end
+
+class Color
+attributes
+operations
+end
+
+class AnyElement
+attributes
+	name : String
+	text : String
+operations
+end
+
+class PNMLDocument
+attributes
+operations
+end
+
+class NetElement<IdedElement
+attributes
+operations
+end
+
+abstract class NetContent
+attributes
+operations
+end
+
+class ToolSpecific
+attributes
+	tool : String
+	version : String
+operations
+end
+
+abstract class LabeledElement
+attributes
+operations
+end
+
+class Label
+attributes
+	text : String
+operations
+end
+
+class Name<LabeledElement
+attributes
+operations
+end
+
+class Inscription<LabeledElement
+attributes
+operations
+end
+
+class InitialMarking<LabeledElement
+attributes
+operations
+end
+
+abstract class NetContentElement<NetContent
+attributes
+operations
+end
+
+class Arc<IdedElement
+attributes
+operations
+end
+
+class Node<IdedElement
+attributes
+operations
+end
+
+class Place<NetContentElement
+attributes
+operations
+end
+
+class Transition<NetContentElement
+attributes
+operations
+end
+
+abstract class Graphics
+attributes
+operations
+end
+
+class NetGraphics<Graphics
+attributes
+operations
+end
+
+class NodeGraphics<Graphics
+attributes
+operations
+end
+
+class EdgeGraphics<Graphics
+attributes
+operations
+end
+
+class AnnotationGraphics<Graphics
+attributes
+operations
+end
+
+abstract class Coordinate
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Position<Coordinate
+attributes
+operations
+end
+
+class Offset<Coordinate
+attributes
+operations
+end
+
+class Dimension
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class Fill
+attributes
+	gradientrotation : RotationType
+operations
+end
+
+class Line
+attributes
+	width : Integer
+	shape : ShapeType
+	style : StyleType
+operations
+end
+
+class Font
+attributes
+	family : String
+	style : String
+	weight : String
+	size : String
+	decoration : DecorationType
+	align : AlignType
+	rotation : Integer
+operations
+end
+
+composition xxx_PNMLDocument_xmlns between
+	PNMLDocument[*] role xxx_PNMLDocument_xmlns_src
+	URI[1] role xmlns
+end
+
+composition xxx_PNMLDocument_nets between
+	PNMLDocument[0..1] role xxx_PNMLDocument_nets_src
+	NetElement[1..*] role nets
+end
+
+composition xxx_NetElement_type between
+	NetElement[*] role xxx_NetElement_type_src
+	URI[1] role type
+end
+
+association xxx_NetElement_document between
+	NetElement[*] role xxx_NetElement_document_src
+	PNMLDocument[1] role document
+end
+
+composition xxx_NetElement_contents between
+	NetElement[0..1] role xxx_NetElement_contents_src
+	NetContent[*] role contents
+end
+
+composition xxx_NetElement_tools between
+	NetElement[0..1] role xxx_NetElement_tools_src
+	ToolSpecific[*] role tools
+end
+
+composition xxx_NetElement_netgraphics between
+	NetElement[*] role xxx_NetElement_netgraphics_src
+	NetGraphics[0..1] role netgraphics
+end
+
+composition xxx_NetElement_name between
+	NetElement[*] role xxx_NetElement_name_src
+	Name[0..1] role name
+end
+
+association xxx_NetContent_net between
+	NetContent[*] role xxx_NetContent_net_src
+	NetElement[1] role net
+end
+
+composition xxx_NetContent_name between
+	NetContent[*] role xxx_NetContent_name_src
+	Name[0..1] role name
+end
+
+composition xxx_ToolSpecific_anyelement between
+	ToolSpecific[0..1] role xxx_ToolSpecific_anyelement_src
+	AnyElement[*] role anyelement
+end
+
+association xxx_ToolSpecific_net between
+	ToolSpecific[*] role xxx_ToolSpecific_net_src
+	NetElement[0..1] role net
+end
+
+association xxx_ToolSpecific_arc between
+	ToolSpecific[*] role xxx_ToolSpecific_arc_src
+	Arc[0..1] role arc
+end
+
+association xxx_ToolSpecific_node between
+	ToolSpecific[*] role xxx_ToolSpecific_node_src
+	Node[0..1] role node
+end
+
+composition xxx_LabeledElement_labels between
+	LabeledElement[0..1] role xxx_LabeledElement_labels_src
+	Label[*] role labels
+end
+
+composition xxx_LabeledElement_annotationgraphics between
+	LabeledElement[*] role xxx_LabeledElement_annotationgraphics_src
+	AnnotationGraphics[0..1] role annotationgraphics
+end
+
+association xxx_Label_namedelement between
+	Label[*] role xxx_Label_namedelement_src
+	LabeledElement[1] role namedelement
+end
+
+association xxx_Name_net between
+	Name[*] role xxx_Name_net_src
+	NetElement[0..1] role net
+end
+
+association xxx_Name_netcontent between
+	Name[*] role xxx_Name_netcontent_src
+	NetContent[0..1] role netcontent
+end
+
+association xxx_Inscription_arc between
+	Inscription[*] role xxx_Inscription_arc_src
+	Arc[1] role arc
+end
+
+association xxx_InitialMarking_place between
+	InitialMarking[*] role xxx_InitialMarking_place_src
+	Place[1] role place
+end
+
+composition xxx_NetContentElement_node between
+	NetContentElement[*] role xxx_NetContentElement_node_src
+	Node[1] role node
+end
+
+association xxx_Arc_source between
+	Arc[*] role xxx_Arc_source_src
+	NetContentElement[1] role source
+end
+
+association xxx_Arc_target between
+	Arc[*] role xxx_Arc_target_src
+	NetContentElement[1] role target
+end
+
+composition xxx_Arc_tools between
+	Arc[0..1] role xxx_Arc_tools_src
+	ToolSpecific[*] role tools
+end
+
+composition xxx_Arc_edgegraphics between
+	Arc[*] role xxx_Arc_edgegraphics_src
+	EdgeGraphics[0..1] role edgegraphics
+end
+
+composition xxx_Arc_inscription between
+	Arc[*] role xxx_Arc_inscription_src
+	Inscription[0..1] role inscription
+end
+
+composition xxx_Node_netcontentelement between
+	Node[*] role xxx_Node_netcontentelement_src
+	NetContentElement[1] role netcontentelement
+end
+
+composition xxx_Node_tools between
+	Node[0..1] role xxx_Node_tools_src
+	ToolSpecific[*] role tools
+end
+
+composition xxx_Node_nodegraphics between
+	Node[*] role xxx_Node_nodegraphics_src
+	NodeGraphics[0..1] role nodegraphics
+end
+
+composition xxx_Place_initialmarking between
+	Place[*] role xxx_Place_initialmarking_src
+	InitialMarking[0..1] role initialmarking
+end
+
+association xxx_NetGraphics_net between
+	NetGraphics[*] role xxx_NetGraphics_net_src
+	NetElement[1] role net
+end
+
+association xxx_NodeGraphics_node between
+	NodeGraphics[*] role xxx_NodeGraphics_node_src
+	Node[1] role node
+end
+
+composition xxx_NodeGraphics_position between
+	NodeGraphics[*] role xxx_NodeGraphics_position_src
+	Position[1] role position
+end
+
+composition xxx_NodeGraphics_dimension between
+	NodeGraphics[*] role xxx_NodeGraphics_dimension_src
+	Dimension[0..1] role dimension
+end
+
+composition xxx_NodeGraphics_fill between
+	NodeGraphics[*] role xxx_NodeGraphics_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_NodeGraphics_line between
+	NodeGraphics[*] role xxx_NodeGraphics_line_src
+	Line[0..1] role line
+end
+
+association xxx_EdgeGraphics_arc between
+	EdgeGraphics[*] role xxx_EdgeGraphics_arc_src
+	Arc[1] role arc
+end
+
+composition xxx_EdgeGraphics_position between
+	EdgeGraphics[0..1] role xxx_EdgeGraphics_position_src
+	Position[*] role position
+end
+
+composition xxx_EdgeGraphics_fill between
+	EdgeGraphics[*] role xxx_EdgeGraphics_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_EdgeGraphics_line between
+	EdgeGraphics[*] role xxx_EdgeGraphics_line_src
+	Line[0..1] role line
+end
+
+association xxx_AnnotationGraphics_namedelement between
+	AnnotationGraphics[*] role xxx_AnnotationGraphics_namedelement_src
+	LabeledElement[1] role namedelement
+end
+
+composition xxx_AnnotationGraphics_offset between
+	AnnotationGraphics[*] role xxx_AnnotationGraphics_offset_src
+	Offset[1] role offset
+end
+
+composition xxx_AnnotationGraphics_font between
+	AnnotationGraphics[*] role xxx_AnnotationGraphics_font_src
+	Font[0..1] role font
+end
+
+composition xxx_AnnotationGraphics_fill between
+	AnnotationGraphics[*] role xxx_AnnotationGraphics_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_AnnotationGraphics_line between
+	AnnotationGraphics[*] role xxx_AnnotationGraphics_line_src
+	Line[0..1] role line
+end
+
+association xxx_Position_nodegraphics between
+	Position[*] role xxx_Position_nodegraphics_src
+	NodeGraphics[0..1] role nodegraphics
+end
+
+association xxx_Position_edgegraphics between
+	Position[*] role xxx_Position_edgegraphics_src
+	EdgeGraphics[0..1] role edgegraphics
+end
+
+association xxx_Offset_annotationgraphics between
+	Offset[*] role xxx_Offset_annotationgraphics_src
+	AnnotationGraphics[1] role annotationgraphics
+end
+
+association xxx_Dimension_nodegraphics between
+	Dimension[*] role xxx_Dimension_nodegraphics_src
+	NodeGraphics[1] role nodegraphics
+end
+
+composition xxx_Fill_interiorcolor between
+	Fill[*] role xxx_Fill_interiorcolor_src
+	Color[0..1] role interiorcolor
+end
+
+composition xxx_Fill_gradientcolor between
+	Fill[*] role xxx_Fill_gradientcolor_src
+	Color[0..1] role gradientcolor
+end
+
+composition xxx_Fill_image between
+	Fill[*] role xxx_Fill_image_src
+	URI[0..1] role image
+end
+
+association xxx_Fill_nodegraphics between
+	Fill[*] role xxx_Fill_nodegraphics_src
+	NodeGraphics[0..1] role nodegraphics
+end
+
+association xxx_Fill_edgegraphics between
+	Fill[*] role xxx_Fill_edgegraphics_src
+	EdgeGraphics[0..1] role edgegraphics
+end
+
+association xxx_Fill_annotationgraphics between
+	Fill[*] role xxx_Fill_annotationgraphics_src
+	AnnotationGraphics[0..1] role annotationgraphics
+end
+
+composition xxx_Line_color between
+	Line[*] role xxx_Line_color_src
+	Color[0..1] role color
+end
+
+association xxx_Line_nodegraphics between
+	Line[*] role xxx_Line_nodegraphics_src
+	NodeGraphics[0..1] role nodegraphics
+end
+
+association xxx_Line_edgegraphics between
+	Line[*] role xxx_Line_edgegraphics_src
+	EdgeGraphics[0..1] role edgegraphics
+end
+
+association xxx_Line_annotationgraphics between
+	Line[*] role xxx_Line_annotationgraphics_src
+	AnnotationGraphics[0..1] role annotationgraphics
+end
+
+association xxx_Font_annotationgraphics between
+	Font[*] role xxx_Font_annotationgraphics_src
+	AnnotationGraphics[1] role annotationgraphics
+end
+

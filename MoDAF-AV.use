@@ -1,0 +1,474 @@
+model PrimitiveTypes
+abstract class Element
+attributes
+	name : String
+	content : String
+operations
+end
+
+class MoDAFModel<Element
+attributes
+operations
+end
+
+class Enterprise<Element
+attributes
+operations
+end
+
+class Environment<ClassifiedElement
+attributes
+operations
+end
+
+class OperationalMission<Element
+attributes
+operations
+end
+
+class Architecture<Element
+attributes
+operations
+end
+
+class ArchitecturalDescription<Element
+attributes
+	approvialAuthority : String
+	architect : String
+	assumptionAndConstraints : String
+	creatingOrganisation : String
+	dateCompleted : String
+	purpose : String
+	recommendations : String
+	summaryOfFindings : String
+	tollsUsed : String
+operations
+end
+
+class ArchitecturalReference<Element
+attributes
+operations
+end
+
+class ArchitecturalProduct<Element
+attributes
+	description : String
+operations
+end
+
+class Elements<Element
+attributes
+operations
+end
+
+class ArchitecturalFramework<Element
+attributes
+operations
+end
+
+class View<Element
+attributes
+	framework : String
+	frameworkWebsite : String
+	viewCode : String
+	viewDescription : String
+	viewName : String
+operations
+end
+
+class Concern<Element
+attributes
+operations
+end
+
+class StakeholderHasConcern
+attributes
+operations
+end
+
+class Stakeholder<Element
+attributes
+operations
+end
+
+class MetaData
+attributes
+	dublinCoreElement : String
+	modMetaDataElement : String
+	name : String
+	body : String
+operations
+end
+
+class ArchitectureMetaData<MetaData
+attributes
+operations
+end
+
+class Taxonomy<Element
+attributes
+	date : String
+	url : String
+	version : String
+operations
+end
+
+abstract class ClassifiedElement<Element
+attributes
+operations
+end
+
+class Standard<ClassifiedElement
+attributes
+	identifier : String
+	publishedWebsite : String
+	publisher : String
+	version : String
+operations
+end
+
+class MeasurableProperty<ClassifiedElement
+attributes
+operations
+end
+
+class CapabilityRequirement<ClassifiedElement
+attributes
+operations
+end
+
+class Effect<ClassifiedElement
+attributes
+operations
+end
+
+class EnduringTask<ClassifiedElement
+attributes
+operations
+end
+
+class OperationalConstraint<ClassifiedElement
+attributes
+operations
+end
+
+class PostType<ClassifiedElement
+attributes
+operations
+end
+
+class OrganisationType<ClassifiedElement
+attributes
+operations
+end
+
+class RoleInOrganisation<ClassifiedElement
+attributes
+operations
+end
+
+class LocationType<ClassifiedElement
+attributes
+operations
+end
+
+class OperationalActivity<ClassifiedElement
+attributes
+operations
+end
+
+class Node<ClassifiedElement
+attributes
+operations
+end
+
+class InformationExchange<ClassifiedElement
+attributes
+	identifier : String
+	requirementText : String
+operations
+end
+
+class Competence<ClassifiedElement
+attributes
+operations
+end
+
+class InformationElement<ClassifiedElement
+attributes
+operations
+end
+
+class NodeConnectionType<ClassifiedElement
+attributes
+operations
+end
+
+class System<ClassifiedElement
+attributes
+operations
+end
+
+class DataElement<ClassifiedElement
+attributes
+operations
+end
+
+class SystemFunction<ClassifiedElement
+attributes
+operations
+end
+
+class SystemConnectionSpecification<ClassifiedElement
+attributes
+operations
+end
+
+class ProjectType<ClassifiedElement
+attributes
+operations
+end
+
+class Service<ClassifiedElement
+attributes
+operations
+end
+
+class Unit<ClassifiedElement
+attributes
+operations
+end
+
+class Dimension<ClassifiedElement
+attributes
+operations
+end
+
+class OrganisationProjectRelationship<ClassifiedElement
+attributes
+operations
+end
+
+class ProjectThreadType<ClassifiedElement
+attributes
+operations
+end
+
+class TimeExpression
+attributes
+	value : String
+operations
+end
+
+class LiteralSpecification
+attributes
+	value : String
+operations
+end
+
+class Property
+attributes
+	value : String
+operations
+end
+
+composition xxx_MoDAFModel_enterprise between
+	MoDAFModel[*] role xxx_MoDAFModel_enterprise_src
+	Enterprise[1] role enterprise
+end
+
+composition xxx_MoDAFModel_environment between
+	MoDAFModel[*] role xxx_MoDAFModel_environment_src
+	Environment[1] role environment
+end
+
+composition xxx_MoDAFModel_operationalMissions between
+	MoDAFModel[0..1] role xxx_MoDAFModel_operationalMissions_src
+	OperationalMission[1..*] role operationalMissions
+end
+
+composition xxx_MoDAFModel_architectures between
+	MoDAFModel[0..1] role xxx_MoDAFModel_architectures_src
+	Architecture[1..*] role architectures
+end
+
+composition xxx_MoDAFModel_architecturalDescription between
+	MoDAFModel[0..1] role xxx_MoDAFModel_architecturalDescription_src
+	ArchitecturalDescription[1..*] role architecturalDescription
+end
+
+composition xxx_MoDAFModel_architecturalReferences between
+	MoDAFModel[0..1] role xxx_MoDAFModel_architecturalReferences_src
+	ArchitecturalReference[1..*] role architecturalReferences
+end
+
+composition xxx_MoDAFModel_architecturalFrameworks between
+	MoDAFModel[0..1] role xxx_MoDAFModel_architecturalFrameworks_src
+	ArchitecturalFramework[1..*] role architecturalFrameworks
+end
+
+composition xxx_MoDAFModel_architectureMetadatas between
+	MoDAFModel[0..1] role xxx_MoDAFModel_architectureMetadatas_src
+	ArchitectureMetaData[*] role architectureMetadatas
+end
+
+composition xxx_MoDAFModel_metaDatas between
+	MoDAFModel[0..1] role xxx_MoDAFModel_metaDatas_src
+	MetaData[*] role metaDatas
+end
+
+composition xxx_MoDAFModel_stakeholders between
+	MoDAFModel[0..1] role xxx_MoDAFModel_stakeholders_src
+	Stakeholder[1..*] role stakeholders
+end
+
+composition xxx_MoDAFModel_stakeholderHasConcerns between
+	MoDAFModel[0..1] role xxx_MoDAFModel_stakeholderHasConcerns_src
+	StakeholderHasConcern[1..*] role stakeholderHasConcerns
+end
+
+association xxx_Enterprise_inhabits between
+	Enterprise[*] role xxx_Enterprise_inhabits_src
+	Environment[1] role inhabits
+end
+
+association xxx_Enterprise_fulfills between
+	Enterprise[0..1] role xxx_Enterprise_fulfills_src
+	OperationalMission[1..*] role fulfills
+end
+
+association xxx_Environment_influences between
+	Environment[*] role xxx_Environment_influences_src
+	Enterprise[1] role influences
+end
+
+association xxx_Architecture_enterprise between
+	Architecture[*] role xxx_Architecture_enterprise_src
+	Enterprise[1] role enterprise
+end
+
+association xxx_Architecture_describedBy between
+	Architecture[*] role xxx_Architecture_describedBy_src
+	ArchitecturalDescription[1] role describedBy
+end
+
+association xxx_ArchitecturalDescription_viewpoints between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_viewpoints_src
+	View[1..*] role viewpoints
+end
+
+composition xxx_ArchitecturalDescription_products between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_products_src
+	ArchitecturalProduct[1..*] role products
+end
+
+association xxx_ArchitecturalDescription_taxonomy between
+	ArchitecturalDescription[*] role xxx_ArchitecturalDescription_taxonomy_src
+	Taxonomy[1] role taxonomy
+end
+
+association xxx_ArchitecturalReference_referred between
+	ArchitecturalReference[*] role xxx_ArchitecturalReference_referred_src
+	ArchitecturalDescription[1] role referred
+end
+
+association xxx_ArchitecturalReference_referrer between
+	ArchitecturalReference[*] role xxx_ArchitecturalReference_referrer_src
+	ArchitecturalDescription[1] role referrer
+end
+
+composition xxx_ArchitecturalProduct_architecturalElements between
+	ArchitecturalProduct[0..1] role xxx_ArchitecturalProduct_architecturalElements_src
+	Elements[1..*] role architecturalElements
+end
+
+association xxx_ArchitecturalProduct_definingView between
+	ArchitecturalProduct[*] role xxx_ArchitecturalProduct_definingView_src
+	View[1] role definingView
+end
+
+association xxx_ArchitecturalProduct_addresses between
+	ArchitecturalProduct[0..1] role xxx_ArchitecturalProduct_addresses_src
+	Concern[*] role addresses
+end
+
+composition xxx_ArchitecturalFramework_ownedMember between
+	ArchitecturalFramework[0..1] role xxx_ArchitecturalFramework_ownedMember_src
+	View[1..*] role ownedMember
+end
+
+association xxx_View_definingFramework between
+	View[*] role xxx_View_definingFramework_src
+	ArchitecturalFramework[1] role definingFramework
+end
+
+composition xxx_View_usedToCover between
+	View[0..1] role xxx_View_usedToCover_src
+	Concern[*] role usedToCover
+end
+
+association xxx_Concern_adressedBy between
+	Concern[0..1] role xxx_Concern_adressedBy_src
+	ArchitecturalProduct[*] role adressedBy
+end
+
+association xxx_StakeholderHasConcern_client between
+	StakeholderHasConcern[*] role xxx_StakeholderHasConcern_client_src
+	Stakeholder[1] role client
+end
+
+association xxx_StakeholderHasConcern_supplier between
+	StakeholderHasConcern[*] role xxx_StakeholderHasConcern_supplier_src
+	Concern[1] role supplier
+end
+
+association xxx_StakeholderHasConcern_owner between
+	StakeholderHasConcern[*] role xxx_StakeholderHasConcern_owner_src
+	MoDAFModel[1] role owner
+end
+
+association xxx_ArchitectureMetaData_annotatedArchitecture between
+	ArchitectureMetaData[*] role xxx_ArchitectureMetaData_annotatedArchitecture_src
+	ArchitecturalDescription[1] role annotatedArchitecture
+end
+
+composition xxx_Taxonomy_contents between
+	Taxonomy[0..1] role xxx_Taxonomy_contents_src
+	ClassifiedElement[*] role contents
+end
+
+association xxx_ClassifiedElement_taxonomy between
+	ClassifiedElement[*] role xxx_ClassifiedElement_taxonomy_src
+	Taxonomy[1] role taxonomy
+end
+
+composition xxx_Standard_ratificationDate between
+	Standard[*] role xxx_Standard_ratificationDate_src
+	TimeExpression[1] role ratificationDate
+end
+
+composition xxx_Standard_withdrawalDate between
+	Standard[*] role xxx_Standard_withdrawalDate_src
+	TimeExpression[1] role withdrawalDate
+end
+
+composition xxx_MeasurableProperty_maxValue between
+	MeasurableProperty[*] role xxx_MeasurableProperty_maxValue_src
+	LiteralSpecification[0..1] role maxValue
+end
+
+composition xxx_MeasurableProperty_minValue between
+	MeasurableProperty[*] role xxx_MeasurableProperty_minValue_src
+	LiteralSpecification[0..1] role minValue
+end
+
+composition xxx_OperationalConstraint_nodeUsageContext between
+	OperationalConstraint[*] role xxx_OperationalConstraint_nodeUsageContext_src
+	Property[0..1] role nodeUsageContext
+end
+
+composition xxx_SystemFunction_systemUsageContext between
+	SystemFunction[*] role xxx_SystemFunction_systemUsageContext_src
+	Property[1] role systemUsageContext
+end
+

@@ -1,0 +1,128 @@
+model Gantt
+class Project
+attributes
+	name : String
+	company : String
+	ganttDividerLocation : Integer
+	ressourceDividerLocation : Integer
+	webLink : String
+operations
+end
+
+class Tasks
+attributes
+	color : String
+operations
+end
+
+class Task
+attributes
+	id : String
+	name : String
+	meeting : Boolean
+	color : String
+	expand : Boolean
+	complete : Integer
+	duration : Integer
+	priority : Integer
+operations
+end
+
+class Depend
+attributes
+	id : String
+	type : Integer
+	difference : Integer
+	hardness : String
+operations
+end
+
+class Ressource
+attributes
+	Id : String
+	name : String
+	fonction : String
+	contact : String
+	phone : String
+operations
+end
+
+class Date
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+operations
+end
+
+class Allocation
+attributes
+	taskId : String
+	ressourceId : String
+	name : String
+	function : String
+	responsible : Boolean
+	load : Integer
+operations
+end
+
+class Vacation
+attributes
+operations
+end
+
+class Description
+attributes
+operations
+end
+
+class Previous
+attributes
+operations
+end
+
+composition xxx_Project_viewDate between
+	Project[*] role xxx_Project_viewDate_src
+	Date[1] role viewDate
+end
+
+composition xxx_Project_viewIndex between
+	Project[*] role xxx_Project_viewIndex_src
+	Date[1] role viewIndex
+end
+
+composition xxx_Project_tasks between
+	Project[*] role xxx_Project_tasks_src
+	Tasks[1] role tasks
+end
+
+composition xxx_Project_ressources between
+	Project[0..1] role xxx_Project_ressources_src
+	Ressource[*] role ressources
+end
+
+composition xxx_Project_allocations between
+	Project[0..1] role xxx_Project_allocations_src
+	Allocation[*] role allocations
+end
+
+composition xxx_Tasks_tasks between
+	Tasks[0..1] role xxx_Tasks_tasks_src
+	Task[*] role tasks
+end
+
+composition xxx_Task_start between
+	Task[*] role xxx_Task_start_src
+	Date[1] role start
+end
+
+composition xxx_Task_depends between
+	Task[0..1] role xxx_Task_depends_src
+	Depend[*] role depends
+end
+
+association xxx_Depend_task between
+	Depend[*] role xxx_Depend_task_src
+	Task[1] role task
+end
+

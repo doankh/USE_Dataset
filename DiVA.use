@@ -1,0 +1,508 @@
+model diva
+enum Verdict{
+default
+}
+
+class VariabilityModel<ModelContainer
+attributes
+operations
+end
+
+class Invariant<Constraint
+attributes
+operations
+end
+
+abstract class Variable<NamedElement
+attributes
+operations
+end
+
+abstract class Model<DiVAModelElement
+attributes
+	uri : String
+operations
+end
+
+class BaseModel<Model
+attributes
+operations
+	weave()
+end
+
+class AspectModel<Model
+attributes
+operations
+end
+
+class EnumVariable<Variable
+attributes
+operations
+end
+
+class BooleanVariable<Variable
+attributes
+operations
+end
+
+abstract class Term<DiVAModelElement
+attributes
+operations
+end
+
+class AndTerm<NaryTerm
+attributes
+operations
+end
+
+class OrTerm<NaryTerm
+attributes
+operations
+end
+
+class NotTerm<Term
+attributes
+operations
+end
+
+abstract class NaryTerm<Term
+attributes
+operations
+end
+
+class VariantTerm<Term
+attributes
+operations
+end
+
+abstract class VariableTerm<Term
+attributes
+operations
+end
+
+class EnumTerm<VariableTerm
+attributes
+operations
+end
+
+class BooleanTerm<VariableTerm
+attributes
+operations
+end
+
+abstract class Rule<NamedElement
+attributes
+operations
+end
+
+class EnumLiteral<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement<DiVAModelElement
+attributes
+	name : String
+	id : String
+operations
+end
+
+abstract class Constraint<NamedElement
+attributes
+operations
+end
+
+class Variant<NamedElement,ModelContainer
+attributes
+	weaveLevel : Integer
+operations
+end
+
+class Dimension<NamedElement
+attributes
+	upper : Integer
+	lower : Integer
+operations
+end
+
+class Expression<DiVAModelElement
+attributes
+	text : String
+operations
+end
+
+class ContextExpression<Expression
+attributes
+operations
+end
+
+class VariantExpression<Expression
+attributes
+operations
+end
+
+class PriorityRule<Rule
+attributes
+operations
+end
+
+class Property<NamedElement
+attributes
+	direction : Integer
+operations
+end
+
+class PropertyLiteral<NamedElement
+attributes
+	value : Integer
+operations
+end
+
+class PropertyValue<DiVAModelElement
+attributes
+	value : Integer
+operations
+end
+
+class PropertyPriority<DiVAModelElement
+attributes
+	priority : Integer
+operations
+end
+
+class MultiplicityConstraint<Constraint
+attributes
+	upper : Integer
+	lower : Integer
+operations
+end
+
+class Annotation
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class DiVAModelElement
+attributes
+operations
+end
+
+class SimulationModel<DiVAModelElement
+attributes
+operations
+end
+
+class Context<NamedElement
+attributes
+	verdict : Verdict
+operations
+end
+
+class Configuration<ScoredElement
+attributes
+	verdict : Verdict
+operations
+end
+
+class ConfigVariant<ScoredElement
+attributes
+operations
+end
+
+class Scenario<NamedElement
+attributes
+operations
+end
+
+abstract class ScoredElement<DiVAModelElement
+attributes
+	totalScore : Integer
+operations
+end
+
+class Score<DiVAModelElement
+attributes
+	score : Integer
+operations
+end
+
+class Priority<DiVAModelElement
+attributes
+	priority : Integer
+operations
+end
+
+abstract class VariableValue<DiVAModelElement
+attributes
+operations
+end
+
+class BoolVariableValue<VariableValue
+attributes
+	bool : Boolean
+operations
+end
+
+class EnumVariableValue<VariableValue
+attributes
+operations
+end
+
+class ConfigurationModel
+attributes
+operations
+end
+
+class SuitableConfiguration
+attributes
+	score : Integer
+operations
+end
+
+class ContextModel
+attributes
+operations
+end
+
+abstract class ModelContainer
+attributes
+operations
+end
+
+composition xxx_VariabilityModel_context_ between
+	VariabilityModel[0..1] role xxx_VariabilityModel_context__src
+	Variable[*] role context_
+end
+
+composition xxx_VariabilityModel_property between
+	VariabilityModel[0..1] role xxx_VariabilityModel_property_src
+	Property[*] role property
+end
+
+composition xxx_VariabilityModel_dimension between
+	VariabilityModel[0..1] role xxx_VariabilityModel_dimension_src
+	Dimension[*] role dimension
+end
+
+composition xxx_VariabilityModel_rule between
+	VariabilityModel[0..1] role xxx_VariabilityModel_rule_src
+	Rule[*] role rule
+end
+
+composition xxx_VariabilityModel_constraint between
+	VariabilityModel[0..1] role xxx_VariabilityModel_constraint_src
+	Constraint[*] role constraint
+end
+
+composition xxx_VariabilityModel_simulation between
+	VariabilityModel[*] role xxx_VariabilityModel_simulation_src
+	SimulationModel[0..1] role simulation
+end
+
+composition xxx_Invariant_expression between
+	Invariant[*] role xxx_Invariant_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_EnumVariable_literal between
+	EnumVariable[0..1] role xxx_EnumVariable_literal_src
+	EnumLiteral[1..*] role literal
+end
+
+composition xxx_NotTerm_term between
+	NotTerm[*] role xxx_NotTerm_term_src
+	Term[1] role term
+end
+
+composition xxx_NaryTerm_term between
+	NaryTerm[0..1] role xxx_NaryTerm_term_src
+	Term[1..*] role term
+end
+
+association xxx_VariantTerm_variant between
+	VariantTerm[*] role xxx_VariantTerm_variant_src
+	Variant[1] role variant
+end
+
+association xxx_VariableTerm_variable between
+	VariableTerm[*] role xxx_VariableTerm_variable_src
+	Variable[1] role variable
+end
+
+association xxx_EnumTerm_value between
+	EnumTerm[*] role xxx_EnumTerm_value_src
+	EnumLiteral[1] role value
+end
+
+association xxx_Variant_type between
+	Variant[*] role xxx_Variant_type_src
+	Dimension[1] role type
+end
+
+composition xxx_Variant_propertyValue between
+	Variant[0..1] role xxx_Variant_propertyValue_src
+	PropertyValue[*] role propertyValue
+end
+
+composition xxx_Variant_dependency between
+	Variant[*] role xxx_Variant_dependency_src
+	VariantExpression[0..1] role dependency
+end
+
+composition xxx_Variant_available between
+	Variant[*] role xxx_Variant_available_src
+	ContextExpression[0..1] role available
+end
+
+composition xxx_Variant_required between
+	Variant[*] role xxx_Variant_required_src
+	ContextExpression[0..1] role required
+end
+
+composition xxx_Dimension_variant between
+	Dimension[0..1] role xxx_Dimension_variant_src
+	Variant[*] role variant
+end
+
+association xxx_Dimension_property between
+	Dimension[0..1] role xxx_Dimension_property_src
+	Property[*] role property
+end
+
+composition xxx_Dimension_constraints_ between
+	Dimension[0..1] role xxx_Dimension_constraints__src
+	MultiplicityConstraint[*] role constraints_
+end
+
+composition xxx_Expression_term between
+	Expression[*] role xxx_Expression_term_src
+	Term[1] role term
+end
+
+composition xxx_PriorityRule_context_ between
+	PriorityRule[*] role xxx_PriorityRule_context__src
+	ContextExpression[1] role context_
+end
+
+composition xxx_PriorityRule_priority between
+	PriorityRule[0..1] role xxx_PriorityRule_priority_src
+	PropertyPriority[*] role priority
+end
+
+composition xxx_Property_literal between
+	Property[0..1] role xxx_Property_literal_src
+	PropertyLiteral[*] role literal
+end
+
+association xxx_PropertyValue_property between
+	PropertyValue[*] role xxx_PropertyValue_property_src
+	Property[1] role property
+end
+
+association xxx_PropertyPriority_property between
+	PropertyPriority[*] role xxx_PropertyPriority_property_src
+	Property[1] role property
+end
+
+composition xxx_MultiplicityConstraint_available between
+	MultiplicityConstraint[*] role xxx_MultiplicityConstraint_available_src
+	ContextExpression[1] role available
+end
+
+composition xxx_DiVAModelElement_annotation between
+	DiVAModelElement[0..1] role xxx_DiVAModelElement_annotation_src
+	Annotation[*] role annotation
+end
+
+composition xxx_SimulationModel_scenario between
+	SimulationModel[0..1] role xxx_SimulationModel_scenario_src
+	Scenario[*] role scenario
+end
+
+association xxx_SimulationModel_model_ between
+	SimulationModel[*] role xxx_SimulationModel_model__src
+	VariabilityModel[1] role model_
+end
+
+composition xxx_Context_variable between
+	Context[0..1] role xxx_Context_variable_src
+	VariableValue[*] role variable
+end
+
+composition xxx_Context_configuration between
+	Context[0..1] role xxx_Context_configuration_src
+	Configuration[*] role configuration
+end
+
+composition xxx_Context_oracle between
+	Context[*] role xxx_Context_oracle_src
+	VariantExpression[0..1] role oracle
+end
+
+composition xxx_Context_priority between
+	Context[0..1] role xxx_Context_priority_src
+	Priority[*] role priority
+end
+
+composition xxx_Configuration_variant between
+	Configuration[0..1] role xxx_Configuration_variant_src
+	ConfigVariant[*] role variant
+end
+
+association xxx_ConfigVariant_variant between
+	ConfigVariant[*] role xxx_ConfigVariant_variant_src
+	Variant[1] role variant
+end
+
+composition xxx_Scenario_context_ between
+	Scenario[0..1] role xxx_Scenario_context__src
+	Context[*] role context_
+end
+
+composition xxx_ScoredElement_score between
+	ScoredElement[0..1] role xxx_ScoredElement_score_src
+	Score[*] role score
+end
+
+association xxx_Score_property between
+	Score[*] role xxx_Score_property_src
+	Property[1] role property
+end
+
+association xxx_Priority_property between
+	Priority[*] role xxx_Priority_property_src
+	Property[1] role property
+end
+
+association xxx_VariableValue_variable between
+	VariableValue[*] role xxx_VariableValue_variable_src
+	Variable[1] role variable
+end
+
+association xxx_EnumVariableValue_literal between
+	EnumVariableValue[*] role xxx_EnumVariableValue_literal_src
+	EnumLiteral[1] role literal
+end
+
+composition xxx_ConfigurationModel_configurations between
+	ConfigurationModel[0..1] role xxx_ConfigurationModel_configurations_src
+	SuitableConfiguration[*] role configurations
+end
+
+composition xxx_SuitableConfiguration_variant between
+	SuitableConfiguration[0..1] role xxx_SuitableConfiguration_variant_src
+	ConfigVariant[*] role variant
+end
+
+composition xxx_ContextModel_variable between
+	ContextModel[0..1] role xxx_ContextModel_variable_src
+	VariableValue[*] role variable
+end
+
+composition xxx_ModelContainer_model_ between
+	ModelContainer[*] role xxx_ModelContainer_model__src
+	Model[1] role model_
+end
+

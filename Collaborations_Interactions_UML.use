@@ -1,0 +1,211 @@
+model ExtendedUMLCorePackage
+class Package<ProviderClause
+attributes
+operations
+end
+
+class ProviderClause
+attributes
+operations
+end
+
+class CollaborationPackage
+attributes
+operations
+end
+
+class Collaboration
+attributes
+operations
+end
+
+class InteractionPackage
+attributes
+operations
+end
+
+class Interaction
+attributes
+operations
+end
+
+class AssociationRole
+attributes
+operations
+end
+
+class ClassifierRole
+attributes
+operations
+end
+
+class AssociationEndRole
+attributes
+operations
+end
+
+class Message
+attributes
+operations
+end
+
+class Request
+attributes
+operations
+end
+
+class Operation<Request
+attributes
+operations
+end
+
+class Interface
+attributes
+operations
+end
+
+composition xxx_ProviderClause_ownedEltColl between
+	ProviderClause[*] role xxx_ProviderClause_ownedEltColl_src
+	CollaborationPackage[1] role ownedEltColl
+end
+
+association xxx_ProviderClause_ownedEltInt between
+	ProviderClause[0..1] role xxx_ProviderClause_ownedEltInt_src
+	InteractionPackage[*] role ownedEltInt
+end
+
+association xxx_CollaborationPackage_ownedElt between
+	CollaborationPackage[*] role xxx_CollaborationPackage_ownedElt_src
+	Collaboration[1] role ownedElt
+end
+
+composition xxx_Collaboration_interaction between
+	Collaboration[0..1] role xxx_Collaboration_interaction_src
+	Interaction[*] role interaction
+end
+
+composition xxx_Collaboration_ownedEltAss between
+	Collaboration[*] role xxx_Collaboration_ownedEltAss_src
+	AssociationRole[1] role ownedEltAss
+end
+
+composition xxx_Collaboration_ownedEltClass between
+	Collaboration[*] role xxx_Collaboration_ownedEltClass_src
+	ClassifierRole[1] role ownedEltClass
+end
+
+association xxx_InteractionPackage_providerClause between
+	InteractionPackage[*] role xxx_InteractionPackage_providerClause_src
+	ProviderClause[1] role providerClause
+end
+
+association xxx_InteractionPackage_ownedElt between
+	InteractionPackage[*] role xxx_InteractionPackage_ownedElt_src
+	Interaction[1] role ownedElt
+end
+
+association xxx_Interaction_context_ between
+	Interaction[*] role xxx_Interaction_context__src
+	Collaboration[1] role context_
+end
+
+composition xxx_Interaction_message between
+	Interaction[0..1] role xxx_Interaction_message_src
+	Message[1..*] role message
+end
+
+composition xxx_AssociationRole_connection between
+	AssociationRole[*] role xxx_AssociationRole_connection_src
+	AssociationEndRole[2] role connection
+end
+
+composition xxx_ClassifierRole_associationEndRole between
+	ClassifierRole[0..1] role xxx_ClassifierRole_associationEndRole_src
+	AssociationEndRole[*] role associationEndRole
+end
+
+association xxx_ClassifierRole_receiverMess between
+	ClassifierRole[*] role xxx_ClassifierRole_receiverMess_src
+	Message[1] role receiverMess
+end
+
+association xxx_ClassifierRole_senderMess between
+	ClassifierRole[*] role xxx_ClassifierRole_senderMess_src
+	Message[1] role senderMess
+end
+
+composition xxx_ClassifierRole_availableFeature between
+	ClassifierRole[0..1] role xxx_ClassifierRole_availableFeature_src
+	Operation[*] role availableFeature
+end
+
+association xxx_ClassifierRole_base between
+	ClassifierRole[*] role xxx_ClassifierRole_base_src
+	Interface[1] role base
+end
+
+association xxx_AssociationEndRole_associationRole between
+	AssociationEndRole[*] role xxx_AssociationEndRole_associationRole_src
+	AssociationRole[1] role associationRole
+end
+
+association xxx_AssociationEndRole_type between
+	AssociationEndRole[*] role xxx_AssociationEndRole_type_src
+	ClassifierRole[1] role type
+end
+
+association xxx_Message_message between
+	Message[0..1] role xxx_Message_message_src
+	Message[*] role message
+end
+
+association xxx_Message_activator between
+	Message[*] role xxx_Message_activator_src
+	Message[0..1] role activator
+end
+
+association xxx_Message_interaction between
+	Message[0..1] role xxx_Message_interaction_src
+	Interaction[*] role interaction
+end
+
+association xxx_Message_receiver between
+	Message[*] role xxx_Message_receiver_src
+	ClassifierRole[1] role receiver
+end
+
+association xxx_Message_sender between
+	Message[*] role xxx_Message_sender_src
+	ClassifierRole[1] role sender
+end
+
+association xxx_Message_specification between
+	Message[*] role xxx_Message_specification_src
+	Request[1] role specification
+end
+
+association xxx_Request_message between
+	Request[0..1] role xxx_Request_message_src
+	Message[*] role message
+end
+
+association xxx_Operation_classifierRole between
+	Operation[0..1] role xxx_Operation_classifierRole_src
+	ClassifierRole[*] role classifierRole
+end
+
+association xxx_Operation_owner between
+	Operation[*] role xxx_Operation_owner_src
+	Interface[1] role owner
+end
+
+association xxx_Interface_classifierRole between
+	Interface[0..1] role xxx_Interface_classifierRole_src
+	ClassifierRole[*] role classifierRole
+end
+
+composition xxx_Interface_feature between
+	Interface[0..1] role xxx_Interface_feature_src
+	Operation[*] role feature
+end
+

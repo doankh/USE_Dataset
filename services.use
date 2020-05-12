@@ -1,0 +1,191 @@
+model services
+enum InterrestKindType{
+default
+}
+
+enum LifeCycleStateType{
+default
+}
+
+enum MaintenanceType{
+default
+}
+
+enum SecurityRatingType{
+default
+}
+
+enum ServiceClassType{
+default
+}
+
+enum ServiceKindType{
+default
+}
+
+enum UsageStateType{
+default
+}
+
+class CFSService<Service
+attributes
+	provider : String
+	scenario : String
+operations
+end
+
+class CIID
+attributes
+	commonCIID : String
+	localCIID : String
+operations
+end
+
+class RFSService<Service
+attributes
+	functionalCategory : String
+	location : String
+operations
+end
+
+class Service
+attributes
+	mostTopService : Boolean
+	serviceCategory : String
+	serviceCharacterCommon : Boolean
+	serviceClass : ServiceClassType
+	serviceKind : ServiceKindType
+	serviceSupport1 : String
+	ssDomain : String
+operations
+end
+
+class ServiceAdditional
+attributes
+	costCenter : String
+	history : String
+	kpi : String
+	lifeCycleState : LifeCycleStateType
+	link : String
+	report : String
+	usageState : UsageStateType
+operations
+end
+
+class ServiceContract
+attributes
+	oLA : String
+	sLA : String
+	uC : String
+	wLA : String
+operations
+end
+
+class ServiceDescription
+attributes
+	serviceDescriptionCommon : String
+	serviceDescriptionNational : String
+operations
+end
+
+class ServiceIncidentMgt
+attributes
+	businessImpact : String
+	maintenance : MaintenanceType
+	maintenanceWindow : String
+	monitoring : String
+operations
+end
+
+class ServiceInterrest
+attributes
+	contactUnit : String
+	interrestKind : InterrestKindType
+operations
+end
+
+class ServiceName
+attributes
+	alias : String
+	identifier : String
+	index : String
+	name : String
+operations
+end
+
+class ServiceProfile
+attributes
+	name : String
+operations
+end
+
+class ServiceSecurityMgt
+attributes
+	drPlanContact : String
+	drPlanRepository : String
+	drRecoveryPlan : Boolean
+	securityRating : SecurityRatingType
+operations
+end
+
+class ServiceSupport
+attributes
+	supportDays : String
+	supportHours : String
+operations
+end
+
+composition xxx_RFSService_serviceProfile between
+	RFSService[*] role xxx_RFSService_serviceProfile_src
+	ServiceProfile[0..1] role serviceProfile
+end
+
+composition xxx_Service_serviceName between
+	Service[*] role xxx_Service_serviceName_src
+	ServiceName[0..1] role serviceName
+end
+
+composition xxx_Service_serviceDescription between
+	Service[*] role xxx_Service_serviceDescription_src
+	ServiceDescription[0..1] role serviceDescription
+end
+
+composition xxx_Service_serviceSecurityMgt between
+	Service[*] role xxx_Service_serviceSecurityMgt_src
+	ServiceSecurityMgt[0..1] role serviceSecurityMgt
+end
+
+composition xxx_Service_serviceIncidentMgt between
+	Service[*] role xxx_Service_serviceIncidentMgt_src
+	ServiceIncidentMgt[0..1] role serviceIncidentMgt
+end
+
+composition xxx_Service_ciID between
+	Service[*] role xxx_Service_ciID_src
+	CIID[0..1] role ciID
+end
+
+composition xxx_Service_serviceInterrest between
+	Service[*] role xxx_Service_serviceInterrest_src
+	ServiceInterrest[0..1] role serviceInterrest
+end
+
+composition xxx_Service_serviceContracts between
+	Service[0..1] role xxx_Service_serviceContracts_src
+	ServiceContract[*] role serviceContracts
+end
+
+composition xxx_Service_serviceSupport between
+	Service[*] role xxx_Service_serviceSupport_src
+	ServiceSupport[0..1] role serviceSupport
+end
+
+composition xxx_Service_serviceMisc between
+	Service[*] role xxx_Service_serviceMisc_src
+	ServiceAdditional[0..1] role serviceMisc
+end
+
+composition xxx_Service_services between
+	Service[0..1] role xxx_Service_services_src
+	Service[*] role services
+end

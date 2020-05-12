@@ -1,0 +1,159 @@
+model dependencies
+enum Router{
+default
+}
+
+class Shape
+attributes
+	wasLayouting : Boolean
+operations
+end
+
+class Point
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Dimension
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class Subject<Shape
+attributes
+	externalId : String
+	opened : Boolean
+	useCustomStyle : Boolean
+	master : Boolean
+	loaded : Boolean
+operations
+end
+
+class Note<Shape
+attributes
+	text : String
+operations
+end
+
+class ShapeStyle
+attributes
+	backgroundColor : Integer
+	foregroundColor : Integer
+operations
+end
+
+class Connection
+attributes
+operations
+end
+
+class ConnectionStyle
+attributes
+	strokeColor : Integer
+operations
+end
+
+class Diagram
+attributes
+	router : Router
+operations
+end
+
+class Layer
+attributes
+	id : String
+	wasLayouting : Boolean
+operations
+end
+
+class Kind
+attributes
+	id : String
+	useCustomStyle : Boolean
+operations
+end
+
+composition xxx_Shape_location between
+	Shape[*] role xxx_Shape_location_src
+	Point[0..1] role location
+end
+
+composition xxx_Shape_size between
+	Shape[*] role xxx_Shape_size_src
+	Dimension[0..1] role size
+end
+
+composition xxx_Shape_style between
+	Shape[*] role xxx_Shape_style_src
+	ShapeStyle[0..1] role style
+end
+
+association xxx_Shape_sourceConnections between
+	Shape[0..1] role xxx_Shape_sourceConnections_src
+	Connection[*] role sourceConnections
+end
+
+composition xxx_Shape_targetConnections between
+	Shape[0..1] role xxx_Shape_targetConnections_src
+	Connection[*] role targetConnections
+end
+
+association xxx_Shape_parentLayer between
+	Shape[*] role xxx_Shape_parentLayer_src
+	Layer[0..1] role parentLayer
+end
+
+association xxx_Subject_kind between
+	Subject[*] role xxx_Subject_kind_src
+	Kind[0..1] role kind
+end
+
+association xxx_Connection_source between
+	Connection[*] role xxx_Connection_source_src
+	Shape[0..1] role source
+end
+
+association xxx_Connection_target between
+	Connection[*] role xxx_Connection_target_src
+	Shape[0..1] role target
+end
+
+composition xxx_Connection_style between
+	Connection[*] role xxx_Connection_style_src
+	ConnectionStyle[0..1] role style
+end
+
+association xxx_Diagram_currentLayer between
+	Diagram[*] role xxx_Diagram_currentLayer_src
+	Layer[0..1] role currentLayer
+end
+
+composition xxx_Diagram_kinds between
+	Diagram[0..1] role xxx_Diagram_kinds_src
+	Kind[*] role kinds
+end
+
+composition xxx_Diagram_layers between
+	Diagram[0..1] role xxx_Diagram_layers_src
+	Layer[*] role layers
+end
+
+association xxx_Diagram_layersHistory between
+	Diagram[0..1] role xxx_Diagram_layersHistory_src
+	Layer[*] role layersHistory
+end
+
+composition xxx_Layer_shapes between
+	Layer[0..1] role xxx_Layer_shapes_src
+	Shape[*] role shapes
+end
+
+composition xxx_Kind_style between
+	Kind[*] role xxx_Kind_style_src
+	ShapeStyle[0..1] role style
+end
+

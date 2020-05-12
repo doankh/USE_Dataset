@@ -1,0 +1,70 @@
+model qvtcconfig
+enum Mode{
+default
+}
+
+class Configuration
+attributes
+	mode : Mode
+operations
+end
+
+class Direction<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Import<NamedElement
+attributes
+	metamodelFile : String
+	metamodelUri : String
+	package : String
+operations
+end
+
+class Transformation<NamedElement
+attributes
+operations
+end
+
+association xxx_Configuration_inputDirection between
+	Configuration[*] role xxx_Configuration_inputDirection_src
+	Direction[1] role inputDirection
+end
+
+association xxx_Configuration_outputDirection between
+	Configuration[0..1] role xxx_Configuration_outputDirection_src
+	Direction[*] role outputDirection
+end
+
+composition xxx_Configuration_transformation between
+	Configuration[*] role xxx_Configuration_transformation_src
+	Transformation[1] role transformation
+end
+
+association xxx_Configuration_middle between
+	Configuration[*] role xxx_Configuration_middle_src
+	Direction[1] role middle
+end
+
+association xxx_Direction_imports between
+	Direction[0..1] role xxx_Direction_imports_src
+	Import[1..*] role imports
+end
+
+composition xxx_Transformation_direction between
+	Transformation[0..1] role xxx_Transformation_direction_src
+	Direction[*] role direction
+end
+
+composition xxx_Transformation_import between
+	Transformation[0..1] role xxx_Transformation_import_src
+	Import[*] role import
+end
+

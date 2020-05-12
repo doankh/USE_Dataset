@@ -1,0 +1,156 @@
+model ActorConcept
+class Actor
+attributes
+operations
+end
+
+class Goal
+attributes
+operations
+end
+
+class SoftGoal<Goal
+attributes
+operations
+end
+
+class HardGoal<Goal
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+class Plan
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+association xxx_Actor_dependencyE between
+	Actor[0..1] role xxx_Actor_dependencyE_src
+	Dependency[*] role dependencyE
+end
+
+association xxx_Actor_dependencyR between
+	Actor[0..1] role xxx_Actor_dependencyR_src
+	Dependency[*] role dependencyR
+end
+
+association xxx_Actor_goal between
+	Actor[0..1] role xxx_Actor_goal_src
+	Goal[*] role goal
+end
+
+association xxx_Actor_plan between
+	Actor[0..1] role xxx_Actor_plan_src
+	Plan[*] role plan
+end
+
+association xxx_Actor_resource between
+	Actor[0..1] role xxx_Actor_resource_src
+	Resource[*] role resource
+end
+
+association xxx_Goal_wanter between
+	Goal[*] role xxx_Goal_wanter_src
+	Actor[1] role wanter
+end
+
+association xxx_Goal_plan between
+	Goal[0..1] role xxx_Goal_plan_src
+	Plan[1..*] role plan
+end
+
+association xxx_Goal_dependencyWG between
+	Goal[0..1] role xxx_Goal_dependencyWG_src
+	Dependency[*] role dependencyWG
+end
+
+association xxx_Goal_dependencyG between
+	Goal[0..1] role xxx_Goal_dependencyG_src
+	Dependency[*] role dependencyG
+end
+
+association xxx_Dependency_dependee between
+	Dependency[*] role xxx_Dependency_dependee_src
+	Actor[1] role dependee
+end
+
+association xxx_Dependency_depender between
+	Dependency[*] role xxx_Dependency_depender_src
+	Actor[1] role depender
+end
+
+association xxx_Dependency_goal between
+	Dependency[*] role xxx_Dependency_goal_src
+	Goal[0..1] role goal
+end
+
+association xxx_Dependency_WhyG between
+	Dependency[*] role xxx_Dependency_WhyG_src
+	Goal[0..1] role WhyG
+end
+
+association xxx_Dependency_WhyR between
+	Dependency[*] role xxx_Dependency_WhyR_src
+	Resource[0..1] role WhyR
+end
+
+association xxx_Dependency_resourceD between
+	Dependency[*] role xxx_Dependency_resourceD_src
+	Resource[0..1] role resourceD
+end
+
+association xxx_Dependency_WhyP between
+	Dependency[*] role xxx_Dependency_WhyP_src
+	Plan[0..1] role WhyP
+end
+
+association xxx_Dependency_plan between
+	Dependency[*] role xxx_Dependency_plan_src
+	Plan[0..1] role plan
+end
+
+association xxx_Plan_isFulfilled between
+	Plan[*] role xxx_Plan_isFulfilled_src
+	Goal[1] role isFulfilled
+end
+
+association xxx_Plan_capableOf between
+	Plan[*] role xxx_Plan_capableOf_src
+	Actor[1] role capableOf
+end
+
+association xxx_Plan_dependencyWP between
+	Plan[0..1] role xxx_Plan_dependencyWP_src
+	Dependency[*] role dependencyWP
+end
+
+association xxx_Plan_dependencyP between
+	Plan[0..1] role xxx_Plan_dependencyP_src
+	Dependency[*] role dependencyP
+end
+
+association xxx_Resource_use between
+	Resource[*] role xxx_Resource_use_src
+	Actor[1] role use
+end
+
+association xxx_Resource_dependencyWR between
+	Resource[*] role xxx_Resource_dependencyWR_src
+	Dependency[1] role dependencyWR
+end
+
+association xxx_Resource_dependencyR between
+	Resource[*] role xxx_Resource_dependencyR_src
+	Dependency[1] role dependencyR
+end
+

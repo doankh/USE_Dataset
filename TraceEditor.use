@@ -1,0 +1,123 @@
+model traceeditor
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Transformation<NamedElement
+attributes
+operations
+end
+
+class TraceLink<NamedElement
+attributes
+operations
+end
+
+class Artefact<NamedElement
+attributes
+operations
+end
+
+class Dashboard
+attributes
+operations
+end
+
+class TraceEditor
+attributes
+operations
+end
+
+class TypeArtefact<NamedElement
+attributes
+operations
+end
+
+class LinkType<NamedElement
+attributes
+	description : String
+operations
+end
+
+class Configuration
+attributes
+operations
+end
+
+composition xxx_Transformation_traceLinks between
+	Transformation[0..1] role xxx_Transformation_traceLinks_src
+	TraceLink[*] role traceLinks
+end
+
+association xxx_TraceLink_sources between
+	TraceLink[0..1] role xxx_TraceLink_sources_src
+	Artefact[*] role sources
+end
+
+association xxx_TraceLink_targets between
+	TraceLink[0..1] role xxx_TraceLink_targets_src
+	Artefact[*] role targets
+end
+
+association xxx_TraceLink_type between
+	TraceLink[*] role xxx_TraceLink_type_src
+	LinkType[0..1] role type
+end
+
+association xxx_TraceLink_transformation between
+	TraceLink[*] role xxx_TraceLink_transformation_src
+	Transformation[0..1] role transformation
+end
+
+association xxx_Artefact_type between
+	Artefact[*] role xxx_Artefact_type_src
+	TypeArtefact[0..1] role type
+end
+
+composition xxx_Dashboard_sourceArtefacts between
+	Dashboard[0..1] role xxx_Dashboard_sourceArtefacts_src
+	Artefact[*] role sourceArtefacts
+end
+
+composition xxx_Dashboard_targetArtefacts between
+	Dashboard[0..1] role xxx_Dashboard_targetArtefacts_src
+	Artefact[*] role targetArtefacts
+end
+
+composition xxx_Dashboard_traceLinks between
+	Dashboard[0..1] role xxx_Dashboard_traceLinks_src
+	TraceLink[*] role traceLinks
+end
+
+composition xxx_Dashboard_transformations between
+	Dashboard[0..1] role xxx_Dashboard_transformations_src
+	Transformation[*] role transformations
+end
+
+composition xxx_TraceEditor_dashboard between
+	TraceEditor[*] role xxx_TraceEditor_dashboard_src
+	Dashboard[0..1] role dashboard
+end
+
+composition xxx_TraceEditor_configuration between
+	TraceEditor[*] role xxx_TraceEditor_configuration_src
+	Configuration[0..1] role configuration
+end
+
+association xxx_LinkType_subTypes between
+	LinkType[0..1] role xxx_LinkType_subTypes_src
+	LinkType[*] role subTypes
+end
+
+composition xxx_Configuration_linkTypes between
+	Configuration[0..1] role xxx_Configuration_linkTypes_src
+	LinkType[*] role linkTypes
+end
+
+composition xxx_Configuration_typeArtefacts between
+	Configuration[0..1] role xxx_Configuration_typeArtefacts_src
+	TypeArtefact[*] role typeArtefacts
+end
+

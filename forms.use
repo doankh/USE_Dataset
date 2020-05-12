@@ -1,0 +1,319 @@
+model forms
+enum AttributeType{
+default
+}
+
+enum ConditionType{
+default
+}
+
+enum CompositeConditionOperator{
+default
+}
+
+class EntityModel
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	mandatory : Boolean
+	type : AttributeType
+operations
+end
+
+class EnumerationType
+attributes
+	name : String
+operations
+end
+
+class EnumerationLiteral
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Relationship
+attributes
+	name : String
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class FormModel
+attributes
+operations
+end
+
+class Form
+attributes
+	name : String
+	title : String
+	description : String
+operations
+end
+
+class Page
+attributes
+	title : String
+operations
+end
+
+abstract class PageElement
+attributes
+	label : String
+	elementID : String
+operations
+end
+
+abstract class AttributePageElement<PageElement
+attributes
+operations
+end
+
+abstract class RelationshipPageElement<PageElement
+attributes
+operations
+end
+
+class TextFieldAttributePageElement<AttributePageElement
+attributes
+	format : String
+operations
+end
+
+class TextareaAttributePageElement<AttributePageElement
+attributes
+operations
+end
+
+class SelectionAttributePageElement<AttributePageElement
+attributes
+operations
+end
+
+class DateSelectionAttributePageElement<AttributePageElement
+attributes
+operations
+end
+
+class TimeSelectionAttributePageElement<AttributePageElement
+attributes
+operations
+end
+
+class ListRelationshipPageElement<RelationshipPageElement
+attributes
+operations
+end
+
+class TableRelationshipPageElement<RelationshipPageElement
+attributes
+operations
+end
+
+class Column
+attributes
+operations
+end
+
+abstract class Condition
+attributes
+	conditionID : String
+	type : ConditionType
+operations
+end
+
+class AttributeValueCondition<Condition
+attributes
+	value : String
+operations
+end
+
+class CompositeCondition<Condition
+attributes
+	operator : CompositeConditionOperator
+operations
+end
+
+composition xxx_EntityModel_entities between
+	EntityModel[0..1] role xxx_EntityModel_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_EntityModel_enumerations between
+	EntityModel[0..1] role xxx_EntityModel_enumerations_src
+	EnumerationType[*] role enumerations
+end
+
+association xxx_Entity_id between
+	Entity[*] role xxx_Entity_id_src
+	Attribute[1] role id
+end
+
+association xxx_Entity_superType between
+	Entity[*] role xxx_Entity_superType_src
+	Entity[0..1] role superType
+end
+
+association xxx_Entity_superTypes between
+	Entity[0..1] role xxx_Entity_superTypes_src
+	Entity[*] role superTypes
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Entity_relationships between
+	Entity[0..1] role xxx_Entity_relationships_src
+	Relationship[*] role relationships
+end
+
+association xxx_Attribute_enumerationType between
+	Attribute[*] role xxx_Attribute_enumerationType_src
+	EnumerationType[0..1] role enumerationType
+end
+
+association xxx_Attribute_entity between
+	Attribute[*] role xxx_Attribute_entity_src
+	Entity[0..1] role entity
+end
+
+composition xxx_EnumerationType_literals between
+	EnumerationType[0..1] role xxx_EnumerationType_literals_src
+	EnumerationLiteral[1..*] role literals
+end
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	Entity[0..1] role source
+end
+
+association xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	Entity[1] role target
+end
+
+association xxx_Relationship_opposite between
+	Relationship[*] role xxx_Relationship_opposite_src
+	Relationship[0..1] role opposite
+end
+
+composition xxx_FormModel_entityModel between
+	FormModel[*] role xxx_FormModel_entityModel_src
+	EntityModel[1] role entityModel
+end
+
+composition xxx_FormModel_forms between
+	FormModel[0..1] role xxx_FormModel_forms_src
+	Form[1..*] role forms
+end
+
+association xxx_FormModel_welcomeForm between
+	FormModel[*] role xxx_FormModel_welcomeForm_src
+	Form[1] role welcomeForm
+end
+
+association xxx_Form_entity between
+	Form[*] role xxx_Form_entity_src
+	Entity[1] role entity
+end
+
+composition xxx_Form_pages between
+	Form[0..1] role xxx_Form_pages_src
+	Page[*] role pages
+end
+
+composition xxx_Page_pageElements between
+	Page[0..1] role xxx_Page_pageElements_src
+	PageElement[*] role pageElements
+end
+
+composition xxx_Page_conditions between
+	Page[0..1] role xxx_Page_conditions_src
+	Condition[*] role conditions
+end
+
+association xxx_Page_form between
+	Page[*] role xxx_Page_form_src
+	Form[0..1] role form
+end
+
+composition xxx_PageElement_conditions between
+	PageElement[0..1] role xxx_PageElement_conditions_src
+	Condition[*] role conditions
+end
+
+association xxx_PageElement_page between
+	PageElement[*] role xxx_PageElement_page_src
+	Page[0..1] role page
+end
+
+association xxx_AttributePageElement_attribute between
+	AttributePageElement[*] role xxx_AttributePageElement_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_RelationshipPageElement_relationship between
+	RelationshipPageElement[*] role xxx_RelationshipPageElement_relationship_src
+	Relationship[1] role relationship
+end
+
+association xxx_RelationshipPageElement_editingForm between
+	RelationshipPageElement[*] role xxx_RelationshipPageElement_editingForm_src
+	Form[1] role editingForm
+end
+
+composition xxx_TableRelationshipPageElement_columns between
+	TableRelationshipPageElement[0..1] role xxx_TableRelationshipPageElement_columns_src
+	Column[1..*] role columns
+end
+
+association xxx_Column_attribute between
+	Column[*] role xxx_Column_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Column_table between
+	Column[*] role xxx_Column_table_src
+	TableRelationshipPageElement[0..1] role table
+end
+
+association xxx_Condition_page between
+	Condition[*] role xxx_Condition_page_src
+	Page[0..1] role page
+end
+
+association xxx_Condition_pageElement between
+	Condition[*] role xxx_Condition_pageElement_src
+	PageElement[0..1] role pageElement
+end
+
+association xxx_Condition_parentCondtion between
+	Condition[*] role xxx_Condition_parentCondtion_src
+	CompositeCondition[0..1] role parentCondtion
+end
+
+association xxx_AttributeValueCondition_trigger between
+	AttributeValueCondition[*] role xxx_AttributeValueCondition_trigger_src
+	AttributePageElement[1] role trigger
+end
+
+composition xxx_CompositeCondition_conditions between
+	CompositeCondition[*] role xxx_CompositeCondition_conditions_src
+	Condition[2] role conditions
+end
+

@@ -1,0 +1,51 @@
+model uforthrt
+class Program
+attributes
+	ip : Integer
+	variable_map : String
+	definition_map : String
+operations
+end
+
+class MemoryLocation
+attributes
+operations
+end
+
+class Variable
+attributes
+	pos : Integer
+operations
+end
+
+class Definition
+attributes
+	pos : Integer
+operations
+end
+
+class StackValue
+attributes
+operations
+end
+
+composition xxx_Program_memory between
+	Program[0..1] role xxx_Program_memory_src
+	MemoryLocation[*] role memory
+end
+
+composition xxx_Program_variables between
+	Program[0..1] role xxx_Program_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Program_definitions between
+	Program[0..1] role xxx_Program_definitions_src
+	Definition[*] role definitions
+end
+
+composition xxx_Program_data_stack between
+	Program[0..1] role xxx_Program_data_stack_src
+	StackValue[*] role data_stack
+end
+

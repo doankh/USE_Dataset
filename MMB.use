@@ -1,0 +1,65 @@
+model mmb
+class Model
+attributes
+	Name : String
+operations
+end
+
+class Automaton
+attributes
+	Name : String
+operations
+end
+
+class Mode
+attributes
+	Name : String
+	InitialState : Boolean
+	Shape : String
+	Dimension : Real
+operations
+end
+
+class Transition
+attributes
+	Event : String
+operations
+end
+
+class Modification
+attributes
+	VarName : String
+	VarType : String
+operations
+end
+
+composition xxx_Model_automata between
+	Model[0..1] role xxx_Model_automata_src
+	Automaton[1..*] role automata
+end
+
+composition xxx_Automaton_modes between
+	Automaton[0..1] role xxx_Automaton_modes_src
+	Mode[1..*] role modes
+end
+
+composition xxx_Automaton_transistions between
+	Automaton[0..1] role xxx_Automaton_transistions_src
+	Transition[*] role transistions
+end
+
+composition xxx_Mode_Modifications between
+	Mode[0..1] role xxx_Mode_Modifications_src
+	Modification[*] role Modifications
+end
+
+association xxx_Transition_sourceMode between
+	Transition[*] role xxx_Transition_sourceMode_src
+	Mode[1] role sourceMode
+end
+
+association xxx_Transition_targetMode between
+	Transition[*] role xxx_Transition_targetMode_src
+	Mode[1] role targetMode
+end
+

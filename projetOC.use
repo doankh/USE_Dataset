@@ -1,0 +1,71 @@
+model projetOC
+enum TypePiece{
+default
+}
+
+enum typeArrivee{
+default
+}
+
+enum typeDepart{
+default
+}
+
+class DE<Dispositif
+attributes
+	typeD : typeDepart
+operations
+	depart():Piece
+end
+
+class DT<Dispositif
+attributes
+operations
+	charger(da : DA)
+	decharger(de : DE)
+end
+
+class DA<Dispositif
+attributes
+	typeA : typeArrivee
+operations
+	arriver(typePiece : Piece)
+end
+
+abstract class Dispositif
+attributes
+	nom : String
+operations
+end
+
+class Piece
+attributes
+	type : TypePiece
+operations
+end
+
+class Systeme
+attributes
+operations
+end
+
+association xxx_Dispositif_piece between
+	Dispositif[*] role xxx_Dispositif_piece_src
+	Piece[0..1] role piece
+end
+
+association xxx_Piece_dispositif between
+	Piece[*] role xxx_Piece_dispositif_src
+	Dispositif[0..1] role dispositif
+end
+
+composition xxx_Systeme_dispositif between
+	Systeme[0..1] role xxx_Systeme_dispositif_src
+	Dispositif[*] role dispositif
+end
+
+composition xxx_Systeme_piece between
+	Systeme[0..1] role xxx_Systeme_piece_src
+	Piece[*] role piece
+end
+

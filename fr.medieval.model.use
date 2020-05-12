@@ -1,0 +1,74 @@
+model medieval
+class Media
+attributes
+	id : String
+	name : String
+	description : String
+operations
+	setPropertyValue(propertyName : String,propertyValue : String)
+	getPropertyValue(propertyName : String):String
+	getProperty(propertyName : String):Property
+end
+
+class Category
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+	visible : Boolean
+	readonly : Boolean
+operations
+end
+
+abstract class PropertyFilter
+attributes
+operations
+	isValid(property : Property):Boolean
+end
+
+class Panel
+attributes
+operations
+end
+
+association xxx_Media_category between
+	Media[*] role xxx_Media_category_src
+	Category[1] role category
+end
+
+association xxx_Media_parent between
+	Media[*] role xxx_Media_parent_src
+	Media[0..1] role parent
+end
+
+composition xxx_Media_children between
+	Media[0..1] role xxx_Media_children_src
+	Media[*] role children
+end
+
+composition xxx_Media_properties between
+	Media[0..1] role xxx_Media_properties_src
+	Property[*] role properties
+end
+
+association xxx_Category_elements between
+	Category[0..1] role xxx_Category_elements_src
+	Media[*] role elements
+end
+
+association xxx_Property_owner between
+	Property[*] role xxx_Property_owner_src
+	Media[1] role owner
+end
+
+association xxx_Panel_categories between
+	Panel[0..1] role xxx_Panel_categories_src
+	Category[*] role categories
+end
+

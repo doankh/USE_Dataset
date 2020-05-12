@@ -1,0 +1,246 @@
+model SmartHouse
+class House
+attributes
+	name : String
+	eprice : String
+	time : Integer
+	outtemp : String
+operations
+end
+
+class Gate
+attributes
+	outlocked : Boolean
+operations
+end
+
+class Security
+attributes
+	on : Boolean
+operations
+end
+
+class Person
+attributes
+	name : String
+operations
+end
+
+class WaterHeater
+attributes
+	temp : String
+	on : Boolean
+	boost : Boolean
+operations
+end
+
+class EV
+attributes
+	name : String
+	pluged : Boolean
+	level : Integer
+	charging : Boolean
+operations
+end
+
+class Room
+attributes
+	temp : Real
+	bright : String
+	air : Integer
+	name : String
+operations
+end
+
+class Heating
+attributes
+	name : String
+	level : Integer
+operations
+end
+
+class Window
+attributes
+	name : String
+	curtainOn : Boolean
+	opened : Boolean
+operations
+end
+
+class AirConditioner
+attributes
+	level : Integer
+	freshAir : Boolean
+operations
+end
+
+class Light
+attributes
+	level : Integer
+operations
+end
+
+class Projector
+attributes
+	on : Boolean
+	brightness : Integer
+	volume : Integer
+operations
+end
+
+class WashingMachine
+attributes
+	loaded : Boolean
+	on : Boolean
+operations
+end
+
+class Sensor
+attributes
+	temp : Boolean
+	air : Boolean
+	brightness : Boolean
+	battery : Integer
+	circle : String
+operations
+end
+
+class Cooker
+attributes
+	on : Boolean
+operations
+end
+
+class CoffeeMaker
+attributes
+	loaded : Boolean
+	on : Boolean
+	warming : Boolean
+operations
+end
+
+composition xxx_House_room between
+	House[0..1] role xxx_House_room_src
+	Room[*] role room
+end
+
+composition xxx_House_member between
+	House[0..1] role xxx_House_member_src
+	Person[*] role member
+end
+
+composition xxx_House_wh between
+	House[*] role xxx_House_wh_src
+	WaterHeater[0..1] role wh
+end
+
+composition xxx_House_ev between
+	House[0..1] role xxx_House_ev_src
+	EV[*] role ev
+end
+
+composition xxx_House_gate between
+	House[*] role xxx_House_gate_src
+	Gate[0..1] role gate
+end
+
+composition xxx_House_sec between
+	House[*] role xxx_House_sec_src
+	Security[0..1] role sec
+end
+
+association xxx_Gate_house between
+	Gate[*] role xxx_Gate_house_src
+	House[1] role house
+end
+
+association xxx_Security_house between
+	Security[*] role xxx_Security_house_src
+	House[1] role house
+end
+
+association xxx_WaterHeater_house between
+	WaterHeater[*] role xxx_WaterHeater_house_src
+	House[1] role house
+end
+
+association xxx_EV_house between
+	EV[*] role xxx_EV_house_src
+	House[1] role house
+end
+
+association xxx_Room_house between
+	Room[*] role xxx_Room_house_src
+	House[0..1] role house
+end
+
+composition xxx_Room_window between
+	Room[0..1] role xxx_Room_window_src
+	Window[*] role window
+end
+
+composition xxx_Room_heating between
+	Room[0..1] role xxx_Room_heating_src
+	Heating[*] role heating
+end
+
+composition xxx_Room_light between
+	Room[0..1] role xxx_Room_light_src
+	Light[*] role light
+end
+
+composition xxx_Room_ac between
+	Room[0..1] role xxx_Room_ac_src
+	AirConditioner[*] role ac
+end
+
+association xxx_Room_occupied between
+	Room[0..1] role xxx_Room_occupied_src
+	Person[*] role occupied
+end
+
+composition xxx_Room_sensor between
+	Room[0..1] role xxx_Room_sensor_src
+	Sensor[*] role sensor
+end
+
+composition xxx_Room_projector between
+	Room[*] role xxx_Room_projector_src
+	Projector[1] role projector
+end
+
+composition xxx_Room_cooker between
+	Room[*] role xxx_Room_cooker_src
+	Cooker[0..1] role cooker
+end
+
+composition xxx_Room_wm between
+	Room[*] role xxx_Room_wm_src
+	WashingMachine[0..1] role wm
+end
+
+composition xxx_Room_cm between
+	Room[*] role xxx_Room_cm_src
+	CoffeeMaker[0..1] role cm
+end
+
+association xxx_AirConditioner_room between
+	AirConditioner[*] role xxx_AirConditioner_room_src
+	Room[1] role room
+end
+
+association xxx_Projector_room between
+	Projector[*] role xxx_Projector_room_src
+	Room[1] role room
+end
+
+association xxx_WashingMachine_room between
+	WashingMachine[*] role xxx_WashingMachine_room_src
+	Room[1] role room
+end
+
+association xxx_CoffeeMaker_room between
+	CoffeeMaker[*] role xxx_CoffeeMaker_room_src
+	Room[1] role room
+end
+

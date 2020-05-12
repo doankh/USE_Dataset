@@ -1,0 +1,69 @@
+model Lexer
+abstract class LexicalState
+attributes
+operations
+end
+
+abstract class Macro
+attributes
+operations
+end
+
+class JFlexOptions
+attributes
+	className : String
+	implements : String
+	public : Boolean
+	userCode : String
+	initCode : String
+	throws : String
+	ctorarg : String
+	errorException : String
+	bufferSize : Integer
+	include : String
+	columnCounting : Boolean
+	cup : Boolean
+	unicode : Boolean
+	classLexer : String
+	lineCounting : Boolean
+operations
+end
+
+abstract class Spec
+attributes
+	languageName : String
+operations
+end
+
+class JFlexSpec<Spec,JFlexOptions
+attributes
+operations
+end
+
+class StartingState<LexicalState
+attributes
+operations
+end
+
+class State<LexicalState
+attributes
+operations
+end
+
+class SimpleRule<Rule
+attributes
+	regularGrammar : String
+	nameOfEClass : String
+operations
+end
+
+abstract class Rule
+attributes
+operations
+end
+
+composition xxx_Spec_rules between
+	Spec[0..1] role xxx_Spec_rules_src
+	Rule[*] role rules
+end
+

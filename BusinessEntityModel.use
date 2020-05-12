@@ -1,0 +1,91 @@
+model BusinessEntityModel
+class DataType
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Class
+attributes
+operations
+end
+
+abstract class BusinessEntityPropertySet<DataType
+attributes
+operations
+end
+
+abstract class BusinessRole<Action
+attributes
+operations
+end
+
+class Task
+attributes
+operations
+end
+
+class ArtifactRole<BusinessRole
+attributes
+operations
+end
+
+class PerformerRole<BusinessRole
+attributes
+operations
+end
+
+class OrganisationalUnit<BusinessRole
+attributes
+operations
+end
+
+class BusinessEntity<Class
+attributes
+operations
+end
+
+association xxx_BusinessRole_characterisedby between
+	BusinessRole[*] role xxx_BusinessRole_characterisedby_src
+	BusinessEntityPropertySet[1] role characterisedby
+end
+
+association xxx_BusinessRole_typ between
+	BusinessRole[*] role xxx_BusinessRole_typ_src
+	Class[1] role typ
+end
+
+association xxx_BusinessRole_task between
+	BusinessRole[0..1] role xxx_BusinessRole_task_src
+	Task[*] role task
+end
+
+association xxx_BusinessRole_fille between
+	BusinessRole[0..1] role xxx_BusinessRole_fille_src
+	BusinessEntity[1..*] role fille
+end
+
+association xxx_Task_associatedWith between
+	Task[0..1] role xxx_Task_associatedWith_src
+	BusinessRole[1..*] role associatedWith
+end
+
+association xxx_Task_needs between
+	Task[0..1] role xxx_Task_needs_src
+	ArtifactRole[*] role needs
+end
+
+association xxx_PerformerRole_perform between
+	PerformerRole[*] role xxx_PerformerRole_perform_src
+	Task[1] role perform
+end
+
+association xxx_BusinessEntity_placehold between
+	BusinessEntity[0..1] role xxx_BusinessEntity_placehold_src
+	BusinessRole[1..*] role placehold
+end
+

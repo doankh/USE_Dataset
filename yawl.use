@@ -1,0 +1,96 @@
+model yawl
+enum FactsType{
+default
+}
+
+enum CombinationType{
+default
+}
+
+class SpecificationSet
+attributes
+operations
+end
+
+class Specification
+attributes
+	uri : String
+operations
+end
+
+class Decomposition
+attributes
+	type : FactsType
+	rootNet : Boolean
+	name : String
+operations
+end
+
+abstract class ProcessControlElement
+attributes
+operations
+end
+
+class Task<ProcessControlElement
+attributes
+	name : String
+	joinType : CombinationType
+	splitType : CombinationType
+operations
+end
+
+class InputCondition<ProcessControlElement
+attributes
+operations
+end
+
+class OutputCondition<ProcessControlElement
+attributes
+operations
+end
+
+class MetaData
+attributes
+	title : String
+	creator : String
+	description : String
+	validFrom : String
+	version : String
+operations
+end
+
+composition xxx_SpecificationSet_specifications between
+	SpecificationSet[0..1] role xxx_SpecificationSet_specifications_src
+	Specification[*] role specifications
+end
+
+composition xxx_Specification_metaData between
+	Specification[*] role xxx_Specification_metaData_src
+	MetaData[0..1] role metaData
+end
+
+composition xxx_Specification_decompositions between
+	Specification[0..1] role xxx_Specification_decompositions_src
+	Decomposition[*] role decompositions
+end
+
+composition xxx_Decomposition_processControlElements between
+	Decomposition[0..1] role xxx_Decomposition_processControlElements_src
+	ProcessControlElement[*] role processControlElements
+end
+
+association xxx_ProcessControlElement_flowsInto between
+	ProcessControlElement[0..1] role xxx_ProcessControlElement_flowsInto_src
+	ProcessControlElement[*] role flowsInto
+end
+
+association xxx_ProcessControlElement_flowsOutOf between
+	ProcessControlElement[0..1] role xxx_ProcessControlElement_flowsOutOf_src
+	ProcessControlElement[*] role flowsOutOf
+end
+
+association xxx_ProcessControlElement_decomposesTo between
+	ProcessControlElement[*] role xxx_ProcessControlElement_decomposesTo_src
+	Decomposition[0..1] role decomposesTo
+end
+

@@ -1,0 +1,235 @@
+model probekit
+enum DataType{
+default
+}
+
+enum FragmentType{
+default
+}
+
+class ControlKey
+attributes
+	name : String
+	value : String
+operations
+end
+
+class ControlName
+attributes
+	lang : String
+	text : String
+operations
+end
+
+class DataItem
+attributes
+	name : String
+	type : DataType
+operations
+end
+
+class Description
+attributes
+	value : String
+	lang : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	code : String
+	fragmentAtClassScope : String
+	fragmentAtSharedScope : String
+operations
+end
+
+class Fragment
+attributes
+	code : String
+	type : FragmentType
+operations
+end
+
+class Import
+attributes
+	text : String
+operations
+end
+
+class InvocationObject
+attributes
+	name : String
+operations
+end
+
+class Label
+attributes
+	description : String
+	lang : String
+	name : String
+operations
+end
+
+class Name
+attributes
+	lang : String
+	text : String
+operations
+end
+
+class Probe
+attributes
+	fragmentAtClassScope : String
+operations
+end
+
+class Probekit
+attributes
+	fragmentAtSharedScope : String
+	id : String
+	version : String
+operations
+end
+
+class StaticField
+attributes
+	type : String
+operations
+end
+
+class Target
+attributes
+	className : String
+	method : String
+	package : String
+	signature : String
+	type : String
+operations
+end
+
+composition xxx_DocumentRoot_controlKey between
+	DocumentRoot[*] role xxx_DocumentRoot_controlKey_src
+	ControlKey[*] role controlKey
+end
+
+composition xxx_DocumentRoot_controlName between
+	DocumentRoot[*] role xxx_DocumentRoot_controlName_src
+	ControlName[*] role controlName
+end
+
+composition xxx_DocumentRoot_data between
+	DocumentRoot[*] role xxx_DocumentRoot_data_src
+	DataItem[*] role data
+end
+
+composition xxx_DocumentRoot_description between
+	DocumentRoot[*] role xxx_DocumentRoot_description_src
+	Description[*] role description
+end
+
+composition xxx_DocumentRoot_fragment between
+	DocumentRoot[*] role xxx_DocumentRoot_fragment_src
+	Fragment[*] role fragment
+end
+
+composition xxx_DocumentRoot_import between
+	DocumentRoot[*] role xxx_DocumentRoot_import_src
+	Import[*] role import
+end
+
+composition xxx_DocumentRoot_invocationObject between
+	DocumentRoot[*] role xxx_DocumentRoot_invocationObject_src
+	InvocationObject[*] role invocationObject
+end
+
+composition xxx_DocumentRoot_label between
+	DocumentRoot[*] role xxx_DocumentRoot_label_src
+	Label[*] role label
+end
+
+composition xxx_DocumentRoot_name between
+	DocumentRoot[*] role xxx_DocumentRoot_name_src
+	Name[*] role name
+end
+
+composition xxx_DocumentRoot_probe between
+	DocumentRoot[*] role xxx_DocumentRoot_probe_src
+	Probe[*] role probe
+end
+
+composition xxx_DocumentRoot_probekit between
+	DocumentRoot[*] role xxx_DocumentRoot_probekit_src
+	Probekit[*] role probekit
+end
+
+composition xxx_DocumentRoot_staticField between
+	DocumentRoot[*] role xxx_DocumentRoot_staticField_src
+	StaticField[*] role staticField
+end
+
+composition xxx_DocumentRoot_target between
+	DocumentRoot[*] role xxx_DocumentRoot_target_src
+	Target[*] role target
+end
+
+composition xxx_Fragment_data between
+	Fragment[0..1] role xxx_Fragment_data_src
+	DataItem[*] role data
+end
+
+composition xxx_Probe_name between
+	Probe[0..1] role xxx_Probe_name_src
+	Name[*] role name
+end
+
+composition xxx_Probe_description between
+	Probe[0..1] role xxx_Probe_description_src
+	Description[*] role description
+end
+
+composition xxx_Probe_controlKey between
+	Probe[*] role xxx_Probe_controlKey_src
+	ControlKey[0..1] role controlKey
+end
+
+composition xxx_Probe_controlName between
+	Probe[0..1] role xxx_Probe_controlName_src
+	ControlName[*] role controlName
+end
+
+composition xxx_Probe_target between
+	Probe[0..1] role xxx_Probe_target_src
+	Target[*] role target
+end
+
+composition xxx_Probe_import between
+	Probe[0..1] role xxx_Probe_import_src
+	Import[*] role import
+end
+
+composition xxx_Probe_fragment between
+	Probe[0..1] role xxx_Probe_fragment_src
+	Fragment[1..*] role fragment
+end
+
+composition xxx_Probe_invocationObject between
+	Probe[*] role xxx_Probe_invocationObject_src
+	InvocationObject[0..1] role invocationObject
+end
+
+composition xxx_Probe_staticField between
+	Probe[*] role xxx_Probe_staticField_src
+	StaticField[0..1] role staticField
+end
+
+composition xxx_Probekit_label between
+	Probekit[0..1] role xxx_Probekit_label_src
+	Label[*] role label
+end
+
+composition xxx_Probekit_probe between
+	Probekit[0..1] role xxx_Probekit_probe_src
+	Probe[1..*] role probe
+end
+

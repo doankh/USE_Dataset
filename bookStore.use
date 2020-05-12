@@ -1,0 +1,36 @@
+model BookStorePackage
+class BookStore
+attributes
+	owner : String
+	location : String
+operations
+end
+
+class Book
+attributes
+	name : String
+	isbn : String
+operations
+end
+
+class XClass
+attributes
+	owner : String
+operations
+end
+
+class YClass
+attributes
+operations
+end
+
+class ZClass
+attributes
+operations
+end
+
+composition xxx_BookStore_books between
+	BookStore[0..1] role xxx_BookStore_books_src
+	Book[*] role books
+end
+

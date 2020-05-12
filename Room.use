@@ -1,0 +1,1097 @@
+model room
+enum LiteralType{
+default
+}
+
+enum CommunicationType{
+default
+}
+
+enum ActorCommunicationType{
+default
+}
+
+class RoomModel
+attributes
+	name : String
+operations
+end
+
+class RoomClass
+attributes
+	name : String
+operations
+end
+
+class StructureClass<RoomClass
+attributes
+operations
+end
+
+class ActorContainerClass<StructureClass
+attributes
+operations
+end
+
+class VarDecl
+attributes
+	name : String
+operations
+end
+
+class RefableType
+attributes
+	ref : Boolean
+operations
+end
+
+class DataType<RoomClass
+attributes
+operations
+end
+
+class ComplexType<DataType
+attributes
+operations
+end
+
+class PrimitiveType<DataType
+attributes
+	type : LiteralType
+	targetName : String
+	castName : String
+	defaultValueLiteral : String
+operations
+end
+
+class ExternalType<ComplexType
+attributes
+	targetName : String
+operations
+end
+
+class DataClass<ComplexType
+attributes
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	size : Integer
+	defaultValueLiteral : String
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class StandardOperation<Operation
+attributes
+	destructor : Boolean
+operations
+end
+
+class PortOperation<Operation
+attributes
+operations
+end
+
+class GeneralProtocolClass<RoomClass
+attributes
+operations
+end
+
+class ProtocolClass<GeneralProtocolClass
+attributes
+	commType : CommunicationType
+operations
+end
+
+class CompoundProtocolClass<GeneralProtocolClass
+attributes
+operations
+end
+
+class SubProtocol
+attributes
+	name : String
+operations
+end
+
+class Message
+attributes
+	priv : Boolean
+	name : String
+operations
+end
+
+class PortClass
+attributes
+operations
+end
+
+class MessageHandler
+attributes
+operations
+end
+
+class InMessageHandler<MessageHandler
+attributes
+operations
+end
+
+class OutMessageHandler<MessageHandler
+attributes
+operations
+end
+
+class ProtocolSemantics
+attributes
+operations
+end
+
+class SemanticsRule
+attributes
+operations
+end
+
+class InSemanticsRule<SemanticsRule
+attributes
+operations
+end
+
+class OutSemanticsRule<SemanticsRule
+attributes
+operations
+end
+
+class ActorClass<ActorContainerClass
+attributes
+	abstract_ : Boolean
+	commType : ActorCommunicationType
+operations
+end
+
+class InterfaceItem
+attributes
+	name : String
+operations
+	getGeneralProtocol():GeneralProtocolClass
+end
+
+class Port<InterfaceItem
+attributes
+	conjugated : Boolean
+	multiplicity : Integer
+operations
+	isReplicated():Boolean
+end
+
+class ExternalPort
+attributes
+operations
+end
+
+class SAPRef<InterfaceItem
+attributes
+operations
+end
+
+class SPPRef<InterfaceItem
+attributes
+operations
+end
+
+class ServiceImplementation
+attributes
+operations
+end
+
+class LogicalSystem<StructureClass
+attributes
+operations
+end
+
+class ActorContainerRef
+attributes
+	name : String
+operations
+end
+
+class SubSystemRef<ActorContainerRef
+attributes
+operations
+end
+
+class SubSystemClass<ActorContainerClass
+attributes
+operations
+end
+
+class LogicalThread
+attributes
+	name : String
+	prio : Integer
+operations
+end
+
+class ActorInstancePath
+attributes
+	segments : String
+operations
+end
+
+class Binding
+attributes
+operations
+end
+
+class BindingEndPoint
+attributes
+operations
+end
+
+class LayerConnection
+attributes
+operations
+end
+
+class SAPoint
+attributes
+operations
+end
+
+class RefSAPoint<SAPoint
+attributes
+operations
+end
+
+class RelaySAPoint<SAPoint
+attributes
+operations
+end
+
+class SPPoint
+attributes
+operations
+end
+
+class ActorRef<ActorContainerRef
+attributes
+	size : Integer
+operations
+end
+
+class StateGraphNode<StateGraphItem
+attributes
+operations
+end
+
+class StateGraphItem
+attributes
+operations
+	getName():String
+end
+
+class State<StateGraphNode
+attributes
+operations
+	getName():String
+end
+
+class StateGraph
+attributes
+operations
+end
+
+class SimpleState<State
+attributes
+	name : String
+operations
+end
+
+class RefinedState<State
+attributes
+operations
+end
+
+class DetailCode
+attributes
+	commands : String
+operations
+end
+
+class TrPoint<StateGraphNode
+attributes
+	name : String
+operations
+end
+
+class TransitionPoint<TrPoint
+attributes
+	handler : Boolean
+operations
+end
+
+class EntryPoint<TrPoint
+attributes
+operations
+end
+
+class ExitPoint<TrPoint
+attributes
+operations
+end
+
+class ChoicePoint<StateGraphNode
+attributes
+	name : String
+operations
+end
+
+class Transition<StateGraphItem
+attributes
+	name : String
+operations
+end
+
+class NonInitialTransition<Transition
+attributes
+operations
+end
+
+class TransitionChainStartTransition<NonInitialTransition
+attributes
+operations
+end
+
+class InitialTransition<Transition
+attributes
+operations
+end
+
+class ContinuationTransition<NonInitialTransition
+attributes
+operations
+end
+
+class TriggeredTransition<TransitionChainStartTransition
+attributes
+operations
+end
+
+class GuardedTransition<TransitionChainStartTransition
+attributes
+operations
+end
+
+class CPBranchTransition<NonInitialTransition
+attributes
+operations
+end
+
+class RefinedTransition
+attributes
+operations
+end
+
+class TransitionTerminal
+attributes
+operations
+end
+
+class StateTerminal<TransitionTerminal
+attributes
+operations
+end
+
+class TrPointTerminal<TransitionTerminal
+attributes
+operations
+end
+
+class SubStateTrPointTerminal<TransitionTerminal
+attributes
+operations
+end
+
+class ChoicepointTerminal<TransitionTerminal
+attributes
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+class MessageFromIf
+attributes
+operations
+end
+
+class Guard
+attributes
+operations
+end
+
+class Documentation
+attributes
+	text : String
+operations
+end
+
+class Annotation
+attributes
+	name : String
+operations
+end
+
+class KeyValue
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+	importURI : String
+operations
+end
+
+composition xxx_RoomModel_docu between
+	RoomModel[*] role xxx_RoomModel_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_RoomModel_imports between
+	RoomModel[0..1] role xxx_RoomModel_imports_src
+	Import[*] role imports
+end
+
+composition xxx_RoomModel_primitiveTypes between
+	RoomModel[0..1] role xxx_RoomModel_primitiveTypes_src
+	PrimitiveType[*] role primitiveTypes
+end
+
+composition xxx_RoomModel_externalTypes between
+	RoomModel[0..1] role xxx_RoomModel_externalTypes_src
+	ExternalType[*] role externalTypes
+end
+
+composition xxx_RoomModel_dataClasses between
+	RoomModel[0..1] role xxx_RoomModel_dataClasses_src
+	DataClass[*] role dataClasses
+end
+
+composition xxx_RoomModel_protocolClasses between
+	RoomModel[0..1] role xxx_RoomModel_protocolClasses_src
+	GeneralProtocolClass[*] role protocolClasses
+end
+
+composition xxx_RoomModel_actorClasses between
+	RoomModel[0..1] role xxx_RoomModel_actorClasses_src
+	ActorClass[*] role actorClasses
+end
+
+composition xxx_RoomModel_subSystemClasses between
+	RoomModel[0..1] role xxx_RoomModel_subSystemClasses_src
+	SubSystemClass[*] role subSystemClasses
+end
+
+composition xxx_RoomModel_systems between
+	RoomModel[0..1] role xxx_RoomModel_systems_src
+	LogicalSystem[*] role systems
+end
+
+composition xxx_RoomClass_docu between
+	RoomClass[*] role xxx_RoomClass_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_StructureClass_annotations between
+	StructureClass[0..1] role xxx_StructureClass_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_StructureClass_bindings between
+	StructureClass[0..1] role xxx_StructureClass_bindings_src
+	Binding[*] role bindings
+end
+
+composition xxx_StructureClass_connections between
+	StructureClass[0..1] role xxx_StructureClass_connections_src
+	LayerConnection[*] role connections
+end
+
+composition xxx_ActorContainerClass_ifSPPs between
+	ActorContainerClass[0..1] role xxx_ActorContainerClass_ifSPPs_src
+	SPPRef[*] role ifSPPs
+end
+
+composition xxx_ActorContainerClass_userCode1 between
+	ActorContainerClass[*] role xxx_ActorContainerClass_userCode1_src
+	DetailCode[0..1] role userCode1
+end
+
+composition xxx_ActorContainerClass_userCode2 between
+	ActorContainerClass[*] role xxx_ActorContainerClass_userCode2_src
+	DetailCode[0..1] role userCode2
+end
+
+composition xxx_ActorContainerClass_userCode3 between
+	ActorContainerClass[*] role xxx_ActorContainerClass_userCode3_src
+	DetailCode[0..1] role userCode3
+end
+
+composition xxx_ActorContainerClass_actorRefs between
+	ActorContainerClass[0..1] role xxx_ActorContainerClass_actorRefs_src
+	ActorRef[*] role actorRefs
+end
+
+composition xxx_VarDecl_refType between
+	VarDecl[*] role xxx_VarDecl_refType_src
+	RefableType[0..1] role refType
+end
+
+association xxx_RefableType_type between
+	RefableType[*] role xxx_RefableType_type_src
+	DataType[0..1] role type
+end
+
+association xxx_DataClass_base between
+	DataClass[*] role xxx_DataClass_base_src
+	DataClass[0..1] role base
+end
+
+composition xxx_DataClass_annotations between
+	DataClass[0..1] role xxx_DataClass_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_DataClass_userCode1 between
+	DataClass[*] role xxx_DataClass_userCode1_src
+	DetailCode[0..1] role userCode1
+end
+
+composition xxx_DataClass_userCode2 between
+	DataClass[*] role xxx_DataClass_userCode2_src
+	DetailCode[0..1] role userCode2
+end
+
+composition xxx_DataClass_userCode3 between
+	DataClass[*] role xxx_DataClass_userCode3_src
+	DetailCode[0..1] role userCode3
+end
+
+composition xxx_DataClass_attributes_ between
+	DataClass[0..1] role xxx_DataClass_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_DataClass_operations_ between
+	DataClass[0..1] role xxx_DataClass_operations__src
+	StandardOperation[*] role operations_
+end
+
+composition xxx_Attribute_refType between
+	Attribute[*] role xxx_Attribute_refType_src
+	RefableType[0..1] role refType
+end
+
+composition xxx_Attribute_docu between
+	Attribute[*] role xxx_Attribute_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_Operation_arguments between
+	Operation[0..1] role xxx_Operation_arguments_src
+	VarDecl[*] role arguments
+end
+
+composition xxx_Operation_returntype between
+	Operation[*] role xxx_Operation_returntype_src
+	RefableType[0..1] role returntype
+end
+
+composition xxx_Operation_docu between
+	Operation[*] role xxx_Operation_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_Operation_detailCode between
+	Operation[*] role xxx_Operation_detailCode_src
+	DetailCode[0..1] role detailCode
+end
+
+association xxx_PortOperation_sendsMsg between
+	PortOperation[*] role xxx_PortOperation_sendsMsg_src
+	Message[0..1] role sendsMsg
+end
+
+composition xxx_GeneralProtocolClass_annotations between
+	GeneralProtocolClass[0..1] role xxx_GeneralProtocolClass_annotations_src
+	Annotation[*] role annotations
+end
+
+association xxx_ProtocolClass_base between
+	ProtocolClass[*] role xxx_ProtocolClass_base_src
+	ProtocolClass[0..1] role base
+end
+
+composition xxx_ProtocolClass_userCode1 between
+	ProtocolClass[*] role xxx_ProtocolClass_userCode1_src
+	DetailCode[0..1] role userCode1
+end
+
+composition xxx_ProtocolClass_userCode2 between
+	ProtocolClass[*] role xxx_ProtocolClass_userCode2_src
+	DetailCode[0..1] role userCode2
+end
+
+composition xxx_ProtocolClass_userCode3 between
+	ProtocolClass[*] role xxx_ProtocolClass_userCode3_src
+	DetailCode[0..1] role userCode3
+end
+
+composition xxx_ProtocolClass_incomingMessages between
+	ProtocolClass[0..1] role xxx_ProtocolClass_incomingMessages_src
+	Message[*] role incomingMessages
+end
+
+composition xxx_ProtocolClass_outgoingMessages between
+	ProtocolClass[0..1] role xxx_ProtocolClass_outgoingMessages_src
+	Message[*] role outgoingMessages
+end
+
+composition xxx_ProtocolClass_regular between
+	ProtocolClass[*] role xxx_ProtocolClass_regular_src
+	PortClass[0..1] role regular
+end
+
+composition xxx_ProtocolClass_conjugate between
+	ProtocolClass[*] role xxx_ProtocolClass_conjugate_src
+	PortClass[0..1] role conjugate
+end
+
+composition xxx_ProtocolClass_semantics between
+	ProtocolClass[*] role xxx_ProtocolClass_semantics_src
+	ProtocolSemantics[0..1] role semantics
+end
+
+composition xxx_CompoundProtocolClass_subProtocols between
+	CompoundProtocolClass[0..1] role xxx_CompoundProtocolClass_subProtocols_src
+	SubProtocol[*] role subProtocols
+end
+
+association xxx_SubProtocol_protocol between
+	SubProtocol[*] role xxx_SubProtocol_protocol_src
+	GeneralProtocolClass[0..1] role protocol
+end
+
+composition xxx_Message_data between
+	Message[*] role xxx_Message_data_src
+	VarDecl[0..1] role data
+end
+
+composition xxx_Message_docu between
+	Message[*] role xxx_Message_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_PortClass_userCode between
+	PortClass[*] role xxx_PortClass_userCode_src
+	DetailCode[0..1] role userCode
+end
+
+composition xxx_PortClass_attributes_ between
+	PortClass[0..1] role xxx_PortClass_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_PortClass_operations_ between
+	PortClass[0..1] role xxx_PortClass_operations__src
+	PortOperation[*] role operations_
+end
+
+composition xxx_PortClass_msgHandlers between
+	PortClass[0..1] role xxx_PortClass_msgHandlers_src
+	MessageHandler[*] role msgHandlers
+end
+
+association xxx_MessageHandler_msg between
+	MessageHandler[*] role xxx_MessageHandler_msg_src
+	Message[0..1] role msg
+end
+
+composition xxx_MessageHandler_detailCode between
+	MessageHandler[*] role xxx_MessageHandler_detailCode_src
+	DetailCode[0..1] role detailCode
+end
+
+composition xxx_ProtocolSemantics_rules between
+	ProtocolSemantics[0..1] role xxx_ProtocolSemantics_rules_src
+	SemanticsRule[*] role rules
+end
+
+association xxx_SemanticsRule_msg between
+	SemanticsRule[*] role xxx_SemanticsRule_msg_src
+	Message[0..1] role msg
+end
+
+composition xxx_SemanticsRule_followUps between
+	SemanticsRule[0..1] role xxx_SemanticsRule_followUps_src
+	SemanticsRule[*] role followUps
+end
+
+association xxx_ActorClass_base between
+	ActorClass[*] role xxx_ActorClass_base_src
+	ActorClass[0..1] role base
+end
+
+composition xxx_ActorClass_ifPorts between
+	ActorClass[0..1] role xxx_ActorClass_ifPorts_src
+	Port[*] role ifPorts
+end
+
+composition xxx_ActorClass_structureDocu between
+	ActorClass[*] role xxx_ActorClass_structureDocu_src
+	Documentation[0..1] role structureDocu
+end
+
+composition xxx_ActorClass_intPorts between
+	ActorClass[0..1] role xxx_ActorClass_intPorts_src
+	Port[*] role intPorts
+end
+
+composition xxx_ActorClass_extPorts between
+	ActorClass[0..1] role xxx_ActorClass_extPorts_src
+	ExternalPort[*] role extPorts
+end
+
+composition xxx_ActorClass_serviceImplementations between
+	ActorClass[0..1] role xxx_ActorClass_serviceImplementations_src
+	ServiceImplementation[*] role serviceImplementations
+end
+
+composition xxx_ActorClass_strSAPs between
+	ActorClass[0..1] role xxx_ActorClass_strSAPs_src
+	SAPRef[*] role strSAPs
+end
+
+composition xxx_ActorClass_attributes_ between
+	ActorClass[0..1] role xxx_ActorClass_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_ActorClass_behaviorDocu between
+	ActorClass[*] role xxx_ActorClass_behaviorDocu_src
+	Documentation[0..1] role behaviorDocu
+end
+
+composition xxx_ActorClass_behaviorAnnotations between
+	ActorClass[0..1] role xxx_ActorClass_behaviorAnnotations_src
+	Annotation[*] role behaviorAnnotations
+end
+
+composition xxx_ActorClass_operations_ between
+	ActorClass[0..1] role xxx_ActorClass_operations__src
+	StandardOperation[*] role operations_
+end
+
+composition xxx_ActorClass_stateMachine between
+	ActorClass[*] role xxx_ActorClass_stateMachine_src
+	StateGraph[0..1] role stateMachine
+end
+
+association xxx_Port_protocol between
+	Port[*] role xxx_Port_protocol_src
+	GeneralProtocolClass[0..1] role protocol
+end
+
+composition xxx_Port_docu between
+	Port[*] role xxx_Port_docu_src
+	Documentation[0..1] role docu
+end
+
+association xxx_ExternalPort_ifport between
+	ExternalPort[*] role xxx_ExternalPort_ifport_src
+	Port[0..1] role ifport
+end
+
+association xxx_SAPRef_protocol between
+	SAPRef[*] role xxx_SAPRef_protocol_src
+	ProtocolClass[0..1] role protocol
+end
+
+association xxx_SPPRef_protocol between
+	SPPRef[*] role xxx_SPPRef_protocol_src
+	ProtocolClass[0..1] role protocol
+end
+
+association xxx_ServiceImplementation_spp between
+	ServiceImplementation[*] role xxx_ServiceImplementation_spp_src
+	SPPRef[0..1] role spp
+end
+
+composition xxx_LogicalSystem_subSystems between
+	LogicalSystem[0..1] role xxx_LogicalSystem_subSystems_src
+	SubSystemRef[*] role subSystems
+end
+
+composition xxx_ActorContainerRef_docu between
+	ActorContainerRef[*] role xxx_ActorContainerRef_docu_src
+	Documentation[0..1] role docu
+end
+
+association xxx_SubSystemRef_type between
+	SubSystemRef[*] role xxx_SubSystemRef_type_src
+	SubSystemClass[0..1] role type
+end
+
+composition xxx_SubSystemClass_relayPorts between
+	SubSystemClass[0..1] role xxx_SubSystemClass_relayPorts_src
+	Port[*] role relayPorts
+end
+
+composition xxx_SubSystemClass_threads between
+	SubSystemClass[0..1] role xxx_SubSystemClass_threads_src
+	LogicalThread[*] role threads
+end
+
+composition xxx_LogicalThread_instances between
+	LogicalThread[0..1] role xxx_LogicalThread_instances_src
+	ActorInstancePath[*] role instances
+end
+
+composition xxx_Binding_endpoint1 between
+	Binding[*] role xxx_Binding_endpoint1_src
+	BindingEndPoint[0..1] role endpoint1
+end
+
+composition xxx_Binding_endpoint2 between
+	Binding[*] role xxx_Binding_endpoint2_src
+	BindingEndPoint[0..1] role endpoint2
+end
+
+association xxx_BindingEndPoint_actorRef between
+	BindingEndPoint[*] role xxx_BindingEndPoint_actorRef_src
+	ActorContainerRef[0..1] role actorRef
+end
+
+association xxx_BindingEndPoint_port between
+	BindingEndPoint[*] role xxx_BindingEndPoint_port_src
+	Port[0..1] role port
+end
+
+association xxx_BindingEndPoint_sub between
+	BindingEndPoint[*] role xxx_BindingEndPoint_sub_src
+	SubProtocol[0..1] role sub
+end
+
+composition xxx_LayerConnection_from_ between
+	LayerConnection[*] role xxx_LayerConnection_from__src
+	SAPoint[0..1] role from_
+end
+
+composition xxx_LayerConnection_to between
+	LayerConnection[*] role xxx_LayerConnection_to_src
+	SPPoint[0..1] role to
+end
+
+association xxx_RefSAPoint_ref between
+	RefSAPoint[*] role xxx_RefSAPoint_ref_src
+	ActorContainerRef[0..1] role ref
+end
+
+association xxx_RelaySAPoint_relay between
+	RelaySAPoint[*] role xxx_RelaySAPoint_relay_src
+	SPPRef[0..1] role relay
+end
+
+association xxx_SPPoint_ref between
+	SPPoint[*] role xxx_SPPoint_ref_src
+	ActorContainerRef[0..1] role ref
+end
+
+association xxx_SPPoint_service between
+	SPPoint[*] role xxx_SPPoint_service_src
+	SPPRef[0..1] role service
+end
+
+association xxx_ActorRef_type between
+	ActorRef[*] role xxx_ActorRef_type_src
+	ActorClass[0..1] role type
+end
+
+composition xxx_State_docu between
+	State[*] role xxx_State_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_State_entryCode between
+	State[*] role xxx_State_entryCode_src
+	DetailCode[0..1] role entryCode
+end
+
+composition xxx_State_exitCode between
+	State[*] role xxx_State_exitCode_src
+	DetailCode[0..1] role exitCode
+end
+
+composition xxx_State_doCode between
+	State[*] role xxx_State_doCode_src
+	DetailCode[0..1] role doCode
+end
+
+composition xxx_State_subgraph between
+	State[*] role xxx_State_subgraph_src
+	StateGraph[0..1] role subgraph
+end
+
+composition xxx_StateGraph_states_ between
+	StateGraph[0..1] role xxx_StateGraph_states__src
+	State[*] role states_
+end
+
+composition xxx_StateGraph_trPoints between
+	StateGraph[0..1] role xxx_StateGraph_trPoints_src
+	TrPoint[*] role trPoints
+end
+
+composition xxx_StateGraph_chPoints between
+	StateGraph[0..1] role xxx_StateGraph_chPoints_src
+	ChoicePoint[*] role chPoints
+end
+
+composition xxx_StateGraph_transitions_ between
+	StateGraph[0..1] role xxx_StateGraph_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_StateGraph_refinedTransitions between
+	StateGraph[0..1] role xxx_StateGraph_refinedTransitions_src
+	RefinedTransition[*] role refinedTransitions
+end
+
+association xxx_RefinedState_target between
+	RefinedState[*] role xxx_RefinedState_target_src
+	State[0..1] role target
+end
+
+composition xxx_ChoicePoint_docu between
+	ChoicePoint[*] role xxx_ChoicePoint_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_Transition_to between
+	Transition[*] role xxx_Transition_to_src
+	TransitionTerminal[0..1] role to
+end
+
+composition xxx_Transition_docu between
+	Transition[*] role xxx_Transition_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_Transition_action between
+	Transition[*] role xxx_Transition_action_src
+	DetailCode[0..1] role action
+end
+
+composition xxx_NonInitialTransition_from_ between
+	NonInitialTransition[*] role xxx_NonInitialTransition_from__src
+	TransitionTerminal[0..1] role from_
+end
+
+composition xxx_TriggeredTransition_triggers between
+	TriggeredTransition[0..1] role xxx_TriggeredTransition_triggers_src
+	Trigger[*] role triggers
+end
+
+composition xxx_GuardedTransition_guard between
+	GuardedTransition[*] role xxx_GuardedTransition_guard_src
+	DetailCode[0..1] role guard
+end
+
+composition xxx_CPBranchTransition_condition between
+	CPBranchTransition[*] role xxx_CPBranchTransition_condition_src
+	DetailCode[0..1] role condition
+end
+
+association xxx_RefinedTransition_target between
+	RefinedTransition[*] role xxx_RefinedTransition_target_src
+	Transition[0..1] role target
+end
+
+composition xxx_RefinedTransition_docu between
+	RefinedTransition[*] role xxx_RefinedTransition_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_RefinedTransition_action between
+	RefinedTransition[*] role xxx_RefinedTransition_action_src
+	DetailCode[0..1] role action
+end
+
+association xxx_StateTerminal_state between
+	StateTerminal[*] role xxx_StateTerminal_state_src
+	State[0..1] role state
+end
+
+association xxx_TrPointTerminal_trPoint between
+	TrPointTerminal[*] role xxx_TrPointTerminal_trPoint_src
+	TrPoint[0..1] role trPoint
+end
+
+association xxx_SubStateTrPointTerminal_trPoint between
+	SubStateTrPointTerminal[*] role xxx_SubStateTrPointTerminal_trPoint_src
+	TrPoint[0..1] role trPoint
+end
+
+association xxx_SubStateTrPointTerminal_state between
+	SubStateTrPointTerminal[*] role xxx_SubStateTrPointTerminal_state_src
+	State[0..1] role state
+end
+
+association xxx_ChoicepointTerminal_cp between
+	ChoicepointTerminal[*] role xxx_ChoicepointTerminal_cp_src
+	ChoicePoint[0..1] role cp
+end
+
+composition xxx_Trigger_msgFromIfPairs between
+	Trigger[0..1] role xxx_Trigger_msgFromIfPairs_src
+	MessageFromIf[*] role msgFromIfPairs
+end
+
+composition xxx_Trigger_guard between
+	Trigger[*] role xxx_Trigger_guard_src
+	Guard[0..1] role guard
+end
+
+association xxx_MessageFromIf_message between
+	MessageFromIf[*] role xxx_MessageFromIf_message_src
+	Message[0..1] role message
+end
+
+association xxx_MessageFromIf_from_ between
+	MessageFromIf[*] role xxx_MessageFromIf_from__src
+	InterfaceItem[0..1] role from_
+end
+
+composition xxx_Guard_guard between
+	Guard[*] role xxx_Guard_guard_src
+	DetailCode[0..1] role guard
+end
+
+composition xxx_Annotation_attributes_ between
+	Annotation[0..1] role xxx_Annotation_attributes__src
+	KeyValue[*] role attributes_
+end
+

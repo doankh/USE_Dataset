@@ -1,0 +1,562 @@
+model kevoree
+class ComponentInstance<NamedElement,Instance
+attributes
+operations
+end
+
+class ComponentType<LifeCycleTypeDefinition
+attributes
+operations
+end
+
+class ContainerNode<NamedElement,Instance
+attributes
+operations
+end
+
+class ContainerRoot
+attributes
+operations
+end
+
+abstract class PortType<TypeDefinition
+attributes
+	synchrone : Boolean
+operations
+end
+
+class Port
+attributes
+operations
+end
+
+class Namespace<NamedElement
+attributes
+operations
+end
+
+class Dictionary
+attributes
+operations
+end
+
+class DictionaryType
+attributes
+operations
+end
+
+class DictionaryAttribute<TypedElement
+attributes
+	optional : Boolean
+	state : Boolean
+	datatype : String
+	fragmentDependant : Boolean
+operations
+end
+
+class DictionaryValue
+attributes
+	value : String
+operations
+end
+
+class CompositeType<ComponentType
+attributes
+operations
+end
+
+class PortTypeRef<NamedElement
+attributes
+	optional : String
+	noDependency : String
+operations
+end
+
+class Wire
+attributes
+operations
+end
+
+class ServicePortType<PortType
+attributes
+	interface : String
+operations
+end
+
+class Operation<NamedElement
+attributes
+operations
+end
+
+class Parameter<NamedElement
+attributes
+	order : Integer
+operations
+end
+
+class TypedElement<NamedElement
+attributes
+operations
+end
+
+class MessagePortType<PortType
+attributes
+operations
+end
+
+class Repository
+attributes
+	url : String
+operations
+end
+
+class DeployUnit
+attributes
+	name : String
+	groupName : String
+	unitName : String
+	version : String
+	url : String
+	hashcode : String
+	type : String
+operations
+end
+
+class TypeLibrary<NamedElement
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class IntegrationPattern<NamedElement
+attributes
+operations
+end
+
+class ExtraFonctionalProperty
+attributes
+operations
+end
+
+class PortTypeMapping
+attributes
+	beanMethodName : String
+	serviceMethodName : String
+	paramTypes : String
+operations
+end
+
+class Channel<NamedElement,Instance
+attributes
+operations
+end
+
+class MBinding
+attributes
+operations
+end
+
+class NodeNetwork
+attributes
+operations
+end
+
+class NodeLink
+attributes
+	networkType : String
+	estimatedRate : Integer
+	lastCheck : String
+	zoneID : String
+operations
+end
+
+class NetworkProperty<NamedElement
+attributes
+	value : String
+	lastCheck : String
+operations
+end
+
+class ChannelType<LifeCycleTypeDefinition
+attributes
+	lowerBindings : Integer
+	upperBindings : Integer
+	lowerFragments : Integer
+	upperFragments : Integer
+operations
+end
+
+abstract class TypeDefinition<NamedElement
+attributes
+	factoryBean : String
+	bean : String
+	abstract_ : Boolean
+operations
+end
+
+class Instance<NamedElement
+attributes
+	metaData : String
+	started : Boolean
+operations
+end
+
+abstract class LifeCycleTypeDefinition<TypeDefinition
+attributes
+	startMethod : String
+	stopMethod : String
+	updateMethod : String
+operations
+end
+
+class Group<Instance
+attributes
+operations
+end
+
+class GroupType<LifeCycleTypeDefinition
+attributes
+operations
+end
+
+class NodeType<LifeCycleTypeDefinition
+attributes
+operations
+end
+
+class AdaptationPrimitiveType<NamedElement
+attributes
+operations
+end
+
+class AdaptationPrimitiveTypeRef
+attributes
+	maxTime : String
+operations
+end
+
+composition xxx_ComponentInstance_provided between
+	ComponentInstance[0..1] role xxx_ComponentInstance_provided_src
+	Port[*] role provided
+end
+
+composition xxx_ComponentInstance_required between
+	ComponentInstance[0..1] role xxx_ComponentInstance_required_src
+	Port[*] role required
+end
+
+association xxx_ComponentInstance_namespace between
+	ComponentInstance[*] role xxx_ComponentInstance_namespace_src
+	Namespace[0..1] role namespace
+end
+
+composition xxx_ComponentType_required between
+	ComponentType[0..1] role xxx_ComponentType_required_src
+	PortTypeRef[*] role required
+end
+
+composition xxx_ComponentType_integrationPatterns between
+	ComponentType[0..1] role xxx_ComponentType_integrationPatterns_src
+	IntegrationPattern[*] role integrationPatterns
+end
+
+composition xxx_ComponentType_extraFonctionalProperties between
+	ComponentType[*] role xxx_ComponentType_extraFonctionalProperties_src
+	ExtraFonctionalProperty[0..1] role extraFonctionalProperties
+end
+
+composition xxx_ComponentType_provided between
+	ComponentType[0..1] role xxx_ComponentType_provided_src
+	PortTypeRef[*] role provided
+end
+
+composition xxx_ContainerNode_components between
+	ContainerNode[0..1] role xxx_ContainerNode_components_src
+	ComponentInstance[*] role components
+end
+
+association xxx_ContainerNode_hosts between
+	ContainerNode[0..1] role xxx_ContainerNode_hosts_src
+	ContainerNode[*] role hosts
+end
+
+association xxx_ContainerNode_host between
+	ContainerNode[*] role xxx_ContainerNode_host_src
+	ContainerNode[0..1] role host
+end
+
+composition xxx_ContainerRoot_nodes between
+	ContainerRoot[0..1] role xxx_ContainerRoot_nodes_src
+	ContainerNode[*] role nodes
+end
+
+composition xxx_ContainerRoot_typeDefinitions between
+	ContainerRoot[0..1] role xxx_ContainerRoot_typeDefinitions_src
+	TypeDefinition[*] role typeDefinitions
+end
+
+composition xxx_ContainerRoot_repositories between
+	ContainerRoot[0..1] role xxx_ContainerRoot_repositories_src
+	Repository[*] role repositories
+end
+
+composition xxx_ContainerRoot_dataTypes between
+	ContainerRoot[0..1] role xxx_ContainerRoot_dataTypes_src
+	TypedElement[*] role dataTypes
+end
+
+composition xxx_ContainerRoot_libraries between
+	ContainerRoot[0..1] role xxx_ContainerRoot_libraries_src
+	TypeLibrary[*] role libraries
+end
+
+composition xxx_ContainerRoot_hubs between
+	ContainerRoot[0..1] role xxx_ContainerRoot_hubs_src
+	Channel[*] role hubs
+end
+
+composition xxx_ContainerRoot_mBindings between
+	ContainerRoot[0..1] role xxx_ContainerRoot_mBindings_src
+	MBinding[*] role mBindings
+end
+
+composition xxx_ContainerRoot_deployUnits between
+	ContainerRoot[0..1] role xxx_ContainerRoot_deployUnits_src
+	DeployUnit[*] role deployUnits
+end
+
+composition xxx_ContainerRoot_nodeNetworks between
+	ContainerRoot[0..1] role xxx_ContainerRoot_nodeNetworks_src
+	NodeNetwork[*] role nodeNetworks
+end
+
+composition xxx_ContainerRoot_groups between
+	ContainerRoot[0..1] role xxx_ContainerRoot_groups_src
+	Group[*] role groups
+end
+
+composition xxx_ContainerRoot_adaptationPrimitiveTypes between
+	ContainerRoot[0..1] role xxx_ContainerRoot_adaptationPrimitiveTypes_src
+	AdaptationPrimitiveType[*] role adaptationPrimitiveTypes
+end
+
+association xxx_Port_bindings between
+	Port[0..1] role xxx_Port_bindings_src
+	MBinding[*] role bindings
+end
+
+association xxx_Port_portTypeRef between
+	Port[*] role xxx_Port_portTypeRef_src
+	PortTypeRef[1] role portTypeRef
+end
+
+composition xxx_Namespace_childs between
+	Namespace[0..1] role xxx_Namespace_childs_src
+	Namespace[*] role childs
+end
+
+association xxx_Namespace_parent between
+	Namespace[*] role xxx_Namespace_parent_src
+	Namespace[0..1] role parent
+end
+
+composition xxx_Dictionary_values between
+	Dictionary[0..1] role xxx_Dictionary_values_src
+	DictionaryValue[*] role values
+end
+
+composition xxx_DictionaryType_attributes_ between
+	DictionaryType[0..1] role xxx_DictionaryType_attributes__src
+	DictionaryAttribute[*] role attributes_
+end
+
+composition xxx_DictionaryType_defaultValues between
+	DictionaryType[0..1] role xxx_DictionaryType_defaultValues_src
+	DictionaryValue[*] role defaultValues
+end
+
+association xxx_DictionaryValue_attribute between
+	DictionaryValue[*] role xxx_DictionaryValue_attribute_src
+	DictionaryAttribute[1] role attribute
+end
+
+association xxx_DictionaryValue_targetNode between
+	DictionaryValue[*] role xxx_DictionaryValue_targetNode_src
+	ContainerNode[0..1] role targetNode
+end
+
+association xxx_CompositeType_childs between
+	CompositeType[0..1] role xxx_CompositeType_childs_src
+	ComponentType[*] role childs
+end
+
+composition xxx_CompositeType_wires between
+	CompositeType[0..1] role xxx_CompositeType_wires_src
+	Wire[*] role wires
+end
+
+association xxx_PortTypeRef_ref between
+	PortTypeRef[*] role xxx_PortTypeRef_ref_src
+	PortType[1] role ref
+end
+
+composition xxx_PortTypeRef_mappings between
+	PortTypeRef[0..1] role xxx_PortTypeRef_mappings_src
+	PortTypeMapping[*] role mappings
+end
+
+association xxx_Wire_ports between
+	Wire[*] role xxx_Wire_ports_src
+	PortTypeRef[2] role ports
+end
+
+composition xxx_ServicePortType_operations_ between
+	ServicePortType[0..1] role xxx_ServicePortType_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Operation_returnType between
+	Operation[*] role xxx_Operation_returnType_src
+	TypedElement[0..1] role returnType
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	TypedElement[0..1] role type
+end
+
+association xxx_TypedElement_genericTypes between
+	TypedElement[0..1] role xxx_TypedElement_genericTypes_src
+	TypedElement[*] role genericTypes
+end
+
+association xxx_MessagePortType_filters between
+	MessagePortType[0..1] role xxx_MessagePortType_filters_src
+	TypedElement[*] role filters
+end
+
+association xxx_Repository_units between
+	Repository[0..1] role xxx_Repository_units_src
+	DeployUnit[*] role units
+end
+
+association xxx_DeployUnit_requiredLibs between
+	DeployUnit[0..1] role xxx_DeployUnit_requiredLibs_src
+	DeployUnit[*] role requiredLibs
+end
+
+association xxx_DeployUnit_targetNodeType between
+	DeployUnit[*] role xxx_DeployUnit_targetNodeType_src
+	NodeType[0..1] role targetNodeType
+end
+
+association xxx_TypeLibrary_subTypes between
+	TypeLibrary[0..1] role xxx_TypeLibrary_subTypes_src
+	TypeDefinition[*] role subTypes
+end
+
+composition xxx_IntegrationPattern_extraFonctionalProperties between
+	IntegrationPattern[0..1] role xxx_IntegrationPattern_extraFonctionalProperties_src
+	ExtraFonctionalProperty[*] role extraFonctionalProperties
+end
+
+association xxx_IntegrationPattern_portTypes between
+	IntegrationPattern[0..1] role xxx_IntegrationPattern_portTypes_src
+	PortTypeRef[*] role portTypes
+end
+
+association xxx_ExtraFonctionalProperty_portTypes between
+	ExtraFonctionalProperty[0..1] role xxx_ExtraFonctionalProperty_portTypes_src
+	PortTypeRef[*] role portTypes
+end
+
+association xxx_Channel_bindings between
+	Channel[0..1] role xxx_Channel_bindings_src
+	MBinding[*] role bindings
+end
+
+association xxx_MBinding_port between
+	MBinding[*] role xxx_MBinding_port_src
+	Port[1] role port
+end
+
+association xxx_MBinding_hub between
+	MBinding[*] role xxx_MBinding_hub_src
+	Channel[1] role hub
+end
+
+composition xxx_NodeNetwork_link between
+	NodeNetwork[0..1] role xxx_NodeNetwork_link_src
+	NodeLink[*] role link
+end
+
+association xxx_NodeNetwork_initBy between
+	NodeNetwork[*] role xxx_NodeNetwork_initBy_src
+	ContainerNode[0..1] role initBy
+end
+
+association xxx_NodeNetwork_target between
+	NodeNetwork[*] role xxx_NodeNetwork_target_src
+	ContainerNode[1] role target
+end
+
+composition xxx_NodeLink_networkProperties between
+	NodeLink[0..1] role xxx_NodeLink_networkProperties_src
+	NetworkProperty[*] role networkProperties
+end
+
+association xxx_TypeDefinition_deployUnits between
+	TypeDefinition[0..1] role xxx_TypeDefinition_deployUnits_src
+	DeployUnit[1..*] role deployUnits
+end
+
+composition xxx_TypeDefinition_dictionaryType between
+	TypeDefinition[*] role xxx_TypeDefinition_dictionaryType_src
+	DictionaryType[0..1] role dictionaryType
+end
+
+association xxx_TypeDefinition_superTypes between
+	TypeDefinition[0..1] role xxx_TypeDefinition_superTypes_src
+	TypeDefinition[*] role superTypes
+end
+
+association xxx_Instance_typeDefinition between
+	Instance[*] role xxx_Instance_typeDefinition_src
+	TypeDefinition[1] role typeDefinition
+end
+
+composition xxx_Instance_dictionary between
+	Instance[*] role xxx_Instance_dictionary_src
+	Dictionary[0..1] role dictionary
+end
+
+association xxx_Group_subNodes between
+	Group[0..1] role xxx_Group_subNodes_src
+	ContainerNode[*] role subNodes
+end
+
+association xxx_NodeType_managedPrimitiveTypes between
+	NodeType[0..1] role xxx_NodeType_managedPrimitiveTypes_src
+	AdaptationPrimitiveType[*] role managedPrimitiveTypes
+end
+
+composition xxx_NodeType_managedPrimitiveTypeRefs between
+	NodeType[0..1] role xxx_NodeType_managedPrimitiveTypeRefs_src
+	AdaptationPrimitiveTypeRef[*] role managedPrimitiveTypeRefs
+end
+
+association xxx_AdaptationPrimitiveTypeRef_ref between
+	AdaptationPrimitiveTypeRef[*] role xxx_AdaptationPrimitiveTypeRef_ref_src
+	AdaptationPrimitiveType[1] role ref
+end
+

@@ -1,0 +1,498 @@
+model sculptormetamodel
+enum InheritanceType{
+default
+}
+
+enum DiscriminatorType{
+default
+}
+
+enum HttpMethod{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+	doc : String
+	hint : String
+operations
+end
+
+class Application<NamedElement
+attributes
+	basePackage : String
+operations
+end
+
+class Service<NamedElement
+attributes
+	otherDependencies : String
+	gapClass : Boolean
+	webService : Boolean
+	remoteInterface : Boolean
+	localInterface : Boolean
+operations
+end
+
+class Repository<NamedElement
+attributes
+	otherDependencies : String
+	gapClass : Boolean
+operations
+end
+
+abstract class DomainObject<NamedElement
+attributes
+	abstract_ : Boolean
+	optimisticLocking : Boolean
+	cache : Boolean
+	package : String
+	databaseTable : String
+	extendsName : String
+	validate : String
+	gapClass : Boolean
+	discriminatorColumnValue : String
+	aggregateRoot : Boolean
+operations
+end
+
+class Reference<NamedElement
+attributes
+	many : Boolean
+	collectionType : String
+	cascade : String
+	orderBy : String
+	visibility : String
+	changeable : Boolean
+	required : Boolean
+	fetch : String
+	cache : Boolean
+	naturalKey : Boolean
+	inverse : Boolean
+	nullable : Boolean
+	databaseColumn : String
+	validate : String
+	transient : Boolean
+	databaseJoinTable : String
+	databaseJoinColumn : String
+operations
+end
+
+class TypedElement<NamedElement
+attributes
+	type : String
+	collectionType : String
+	mapKeyType : String
+operations
+end
+
+class DomainObjectTypedElement<TypedElement
+attributes
+operations
+end
+
+class Attribute<TypedElement
+attributes
+	changeable : Boolean
+	databaseType : String
+	nullable : Boolean
+	naturalKey : Boolean
+	visibility : String
+	required : Boolean
+	length : String
+	index : Boolean
+	databaseColumn : String
+	validate : String
+	transient : Boolean
+operations
+end
+
+class Operation<DomainObjectTypedElement
+attributes
+	throws : String
+	visibility : String
+operations
+end
+
+class Parameter<DomainObjectTypedElement
+attributes
+operations
+end
+
+class RepositoryOperation<Operation
+attributes
+	delegateToAccessObject : Boolean
+	accessObjectName : String
+operations
+end
+
+class ServiceOperation<Operation
+attributes
+operations
+end
+
+class ValueObject<DomainObject
+attributes
+	immutable : Boolean
+	persistent : Boolean
+operations
+end
+
+class Entity<DomainObject
+attributes
+	auditable : Boolean
+operations
+end
+
+class Module<NamedElement
+attributes
+	basePackage : String
+	external : Boolean
+	persistenceUnit : String
+operations
+end
+
+class BasicType<ValueObject
+attributes
+operations
+end
+
+class Consumer<NamedElement
+attributes
+	channel : String
+	otherDependencies : String
+operations
+end
+
+class Enum<DomainObject
+attributes
+	ordinal : Boolean
+operations
+end
+
+class EnumValue<NamedElement
+attributes
+operations
+end
+
+class EnumConstructorParameter
+attributes
+	value : String
+operations
+end
+
+class Inheritance
+attributes
+	discriminatorColumnName : String
+	discriminatorColumnLength : String
+	type : InheritanceType
+	discriminatorType : DiscriminatorType
+operations
+end
+
+class DataTransferObject<ValueObject
+attributes
+operations
+end
+
+class CommandEvent<Event
+attributes
+operations
+end
+
+class DomainEvent<Event
+attributes
+operations
+end
+
+class Subscribe
+attributes
+	eventBus : String
+	topic : String
+operations
+end
+
+abstract class Event<ValueObject
+attributes
+operations
+end
+
+class Publish
+attributes
+	eventBus : String
+	topic : String
+operations
+end
+
+class Trait<DomainObject
+attributes
+operations
+end
+
+class DomainObjectOperation<Operation
+attributes
+	abstract_ : Boolean
+operations
+end
+
+class Resource<NamedElement
+attributes
+	gapClass : Boolean
+	path : String
+operations
+end
+
+class ResourceOperation<Operation
+attributes
+	path : String
+	httpMethod : HttpMethod
+	returnString : String
+operations
+end
+
+composition xxx_Application_modules between
+	Application[0..1] role xxx_Application_modules_src
+	Module[*] role modules
+end
+
+composition xxx_Service_operations_ between
+	Service[0..1] role xxx_Service_operations__src
+	ServiceOperation[*] role operations_
+end
+
+association xxx_Service_repositoryDependencies between
+	Service[0..1] role xxx_Service_repositoryDependencies_src
+	Repository[*] role repositoryDependencies
+end
+
+association xxx_Service_module between
+	Service[*] role xxx_Service_module_src
+	Module[0..1] role module
+end
+
+association xxx_Service_serviceDependencies between
+	Service[0..1] role xxx_Service_serviceDependencies_src
+	Service[*] role serviceDependencies
+end
+
+association xxx_Service_subscribe between
+	Service[*] role xxx_Service_subscribe_src
+	Subscribe[0..1] role subscribe
+end
+
+composition xxx_Repository_operations_ between
+	Repository[0..1] role xxx_Repository_operations__src
+	RepositoryOperation[*] role operations_
+end
+
+association xxx_Repository_aggregateRoot between
+	Repository[*] role xxx_Repository_aggregateRoot_src
+	DomainObject[0..1] role aggregateRoot
+end
+
+association xxx_Repository_repositoryDependencies between
+	Repository[0..1] role xxx_Repository_repositoryDependencies_src
+	Repository[*] role repositoryDependencies
+end
+
+association xxx_Repository_subscribe between
+	Repository[*] role xxx_Repository_subscribe_src
+	Subscribe[0..1] role subscribe
+end
+
+composition xxx_DomainObject_references between
+	DomainObject[0..1] role xxx_DomainObject_references_src
+	Reference[*] role references
+end
+
+association xxx_DomainObject_extends between
+	DomainObject[*] role xxx_DomainObject_extends_src
+	DomainObject[0..1] role extends
+end
+
+composition xxx_DomainObject_attributes_ between
+	DomainObject[0..1] role xxx_DomainObject_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_DomainObject_repository between
+	DomainObject[*] role xxx_DomainObject_repository_src
+	Repository[0..1] role repository
+end
+
+association xxx_DomainObject_module between
+	DomainObject[*] role xxx_DomainObject_module_src
+	Module[0..1] role module
+end
+
+association xxx_DomainObject_inheritance between
+	DomainObject[*] role xxx_DomainObject_inheritance_src
+	Inheritance[0..1] role inheritance
+end
+
+association xxx_DomainObject_belongsToAggregate between
+	DomainObject[*] role xxx_DomainObject_belongsToAggregate_src
+	DomainObject[0..1] role belongsToAggregate
+end
+
+composition xxx_DomainObject_operations_ between
+	DomainObject[0..1] role xxx_DomainObject_operations__src
+	DomainObjectOperation[*] role operations_
+end
+
+association xxx_DomainObject_traits between
+	DomainObject[0..1] role xxx_DomainObject_traits_src
+	Trait[*] role traits
+end
+
+association xxx_Reference_opposite between
+	Reference[*] role xxx_Reference_opposite_src
+	Reference[0..1] role opposite
+end
+
+association xxx_Reference_to between
+	Reference[*] role xxx_Reference_to_src
+	DomainObject[1] role to
+end
+
+association xxx_Reference_from_ between
+	Reference[*] role xxx_Reference_from__src
+	DomainObject[0..1] role from_
+end
+
+association xxx_DomainObjectTypedElement_domainObjectType between
+	DomainObjectTypedElement[*] role xxx_DomainObjectTypedElement_domainObjectType_src
+	DomainObject[0..1] role domainObjectType
+end
+
+association xxx_DomainObjectTypedElement_mapKeyDomainObjectType between
+	DomainObjectTypedElement[*] role xxx_DomainObjectTypedElement_mapKeyDomainObjectType_src
+	DomainObject[0..1] role mapKeyDomainObjectType
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Operation_publish between
+	Operation[*] role xxx_Operation_publish_src
+	Publish[0..1] role publish
+end
+
+association xxx_RepositoryOperation_repository between
+	RepositoryOperation[*] role xxx_RepositoryOperation_repository_src
+	Repository[1] role repository
+end
+
+association xxx_ServiceOperation_delegate between
+	ServiceOperation[*] role xxx_ServiceOperation_delegate_src
+	RepositoryOperation[0..1] role delegate
+end
+
+association xxx_ServiceOperation_service between
+	ServiceOperation[*] role xxx_ServiceOperation_service_src
+	Service[1] role service
+end
+
+association xxx_ServiceOperation_serviceDelegate between
+	ServiceOperation[*] role xxx_ServiceOperation_serviceDelegate_src
+	ServiceOperation[0..1] role serviceDelegate
+end
+
+association xxx_Module_application between
+	Module[*] role xxx_Module_application_src
+	Application[0..1] role application
+end
+
+composition xxx_Module_domainObjects between
+	Module[0..1] role xxx_Module_domainObjects_src
+	DomainObject[*] role domainObjects
+end
+
+composition xxx_Module_consumers between
+	Module[0..1] role xxx_Module_consumers_src
+	Consumer[*] role consumers
+end
+
+composition xxx_Module_services between
+	Module[0..1] role xxx_Module_services_src
+	Service[*] role services
+end
+
+composition xxx_Module_resources between
+	Module[0..1] role xxx_Module_resources_src
+	Resource[*] role resources
+end
+
+association xxx_Consumer_module between
+	Consumer[*] role xxx_Consumer_module_src
+	Module[0..1] role module
+end
+
+association xxx_Consumer_repositoryDependencies between
+	Consumer[0..1] role xxx_Consumer_repositoryDependencies_src
+	Repository[*] role repositoryDependencies
+end
+
+association xxx_Consumer_serviceDependencies between
+	Consumer[0..1] role xxx_Consumer_serviceDependencies_src
+	Service[*] role serviceDependencies
+end
+
+association xxx_Consumer_messageRoot between
+	Consumer[*] role xxx_Consumer_messageRoot_src
+	DomainObject[0..1] role messageRoot
+end
+
+association xxx_Consumer_subscribe between
+	Consumer[*] role xxx_Consumer_subscribe_src
+	Subscribe[0..1] role subscribe
+end
+
+composition xxx_Enum_values between
+	Enum[0..1] role xxx_Enum_values_src
+	EnumValue[*] role values
+end
+
+composition xxx_EnumValue_parameters between
+	EnumValue[0..1] role xxx_EnumValue_parameters_src
+	EnumConstructorParameter[*] role parameters
+end
+
+association xxx_Publish_eventType between
+	Publish[*] role xxx_Publish_eventType_src
+	Event[0..1] role eventType
+end
+
+association xxx_DomainObjectOperation_domainObject between
+	DomainObjectOperation[*] role xxx_DomainObjectOperation_domainObject_src
+	DomainObject[0..1] role domainObject
+end
+
+association xxx_Resource_serviceDependencies between
+	Resource[0..1] role xxx_Resource_serviceDependencies_src
+	Service[*] role serviceDependencies
+end
+
+composition xxx_Resource_operations_ between
+	Resource[0..1] role xxx_Resource_operations__src
+	ResourceOperation[*] role operations_
+end
+
+association xxx_Resource_module between
+	Resource[*] role xxx_Resource_module_src
+	Module[0..1] role module
+end
+
+association xxx_ResourceOperation_resource between
+	ResourceOperation[*] role xxx_ResourceOperation_resource_src
+	Resource[0..1] role resource
+end
+
+association xxx_ResourceOperation_delegate between
+	ResourceOperation[*] role xxx_ResourceOperation_delegate_src
+	ServiceOperation[0..1] role delegate
+end
+

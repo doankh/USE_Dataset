@@ -1,0 +1,956 @@
+model nuopc7
+abstract class MappedElement
+attributes
+	mapsTo : String
+operations
+end
+
+class NUOPCApplication<MappedElement
+attributes
+	name : String
+operations
+end
+
+class NUOPCDriver<MappedElement
+attributes
+	driverName : String
+operations
+end
+
+class NUOPCDriver__StandardESMFImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__StandardNUOPCImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__GenericImports<MappedElement
+attributes
+	importsGenericSS : String
+operations
+end
+
+class NUOPCDriver__ImplementsSetServices<MappedElement
+attributes
+	n_SetServices : String
+	p_gcomp : String
+	p_rc : String
+operations
+end
+
+class NUOPCDriver__ImplementsSetServices__DerivesFromDriver<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP0<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelCount<MappedElement
+attributes
+	userRoutine : String
+	p_gcomp : String
+	p_rc : String
+	importsLabel : String
+	importsTypeIS : String
+	importsLabelIS : String
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelCount__InternalStateDeclaration<MappedElement
+attributes
+	internalStateName : String
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelCount__GetInternalState<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelCount__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelPetList<MappedElement
+attributes
+	userRoutine : String
+	p_gcomp : String
+	p_rc : String
+	importsLabel : String
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelPetList__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelServices<MappedElement
+attributes
+	userRoutine : String
+	p_gcomp : String
+	p_rc : String
+	importsLabel : String
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecSetModelServices__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap<MappedElement
+attributes
+	userRoutine : String
+	p_gcomp : String
+	p_rc : String
+	importsLabel : String
+operations
+end
+
+class NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Run<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Run__RunP1<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Finalize<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Finalize__FinalizeP1<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriver__Finalize__FinalizeP1__SpecFinalize<MappedElement
+attributes
+	userRoutine : String
+	p_gcomp : String
+	p_rc : String
+	importsLabel : String
+operations
+end
+
+class NUOPCDriver__Finalize__FinalizeP1__SpecFinalize__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriverAtmOcn<MappedElement
+attributes
+	driverName : String
+operations
+end
+
+class NUOPCDriverAtmOcn__StandardESMFImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriverAtmOcn__StandardNUOPCImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriverAtmOcn__GenericImports<MappedElement
+attributes
+	importsGenericSS : String
+operations
+end
+
+class NUOPCDriverAtmOcn__ConnectorImport<MappedElement
+attributes
+	importsSetServices : String
+operations
+end
+
+class NUOPCDriverAtmOcn__ImplementsSetServices<MappedElement
+attributes
+	n_SetServices : String
+	p_gcomp : String
+	p_rc : String
+operations
+end
+
+class NUOPCDriverAtmOcn__ImplementsSetServices__CallsCompDerive<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriverAtmOcn__SpecSetModelServices<MappedElement
+attributes
+	n_SetModelServices : String
+	p_gcomp : String
+	p_rc : String
+	phase : String
+	importsLabelSetModelServices : String
+	importsDriverAddComp : String
+operations
+end
+
+class NUOPCDriverAtmOcn__SpecSetModelServices__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCDriverAtmOcn__SpecSetModelServices__ChildCompDeclaration<MappedElement
+attributes
+	compRef : String
+operations
+end
+
+class NUOPCDriverAtmOcn__SpecSetModelServices__ConnectorDeclaration<MappedElement
+attributes
+	connRef : String
+operations
+end
+
+class NUOPCDriverAtmOcn__SpecSetModelServices__AddComp<MappedElement
+attributes
+	compLabel : String
+	compSS : String
+	compRef : String
+	rc : String
+operations
+end
+
+class NUOPCDriverAtmOcn__SpecSetModelServices__AddConnector<MappedElement
+attributes
+	srcLabel : String
+	dstLabel : String
+	compSS : String
+	compRef : String
+	rc : String
+operations
+end
+
+class NUOPCModel<MappedElement
+attributes
+	modelName : String
+operations
+end
+
+class NUOPCModel__StandardESMFImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__StandardNUOPCImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__GenericImports<MappedElement
+attributes
+	importsGenericSS : String
+operations
+end
+
+class NUOPCModel__ImplementsSetServices<MappedElement
+attributes
+	n_SetServices : String
+	p_gcomp : String
+	p_rc : String
+operations
+end
+
+class NUOPCModel__ImplementsSetServices__CallsCompDerive<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP0<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP1<MappedElement
+attributes
+	n_initP1 : String
+	p_gcomp : String
+	p_import : String
+	p_export : String
+	p_clock : String
+	p_rc : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP1__AdvertisesImportField<MappedElement
+attributes
+	importStandardName : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP1__AdvertisesExportField<MappedElement
+attributes
+	exportStandardName : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP1__Registered1<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2<MappedElement
+attributes
+	n_initP2 : String
+	p_gcomp : String
+	p_import : String
+	p_export : String
+	p_clock : String
+	p_rc : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__FieldDeclaration<MappedElement
+attributes
+	fieldName : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__GridDeclaration<MappedElement
+attributes
+	gridName : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__FieldAssignment<MappedElement
+attributes
+	name : String
+	typekind : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__RealizesImportField<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__DummyAssignment<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeExport<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__FieldDeclaration<MappedElement
+attributes
+	fieldName : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__GridDeclaration<MappedElement
+attributes
+	gridName : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__FieldAssignment<MappedElement
+attributes
+	name : String
+	typekind : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__RealizesExportField<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__DummyAssignment<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP2__Registered2<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP3<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP3__SpecSetClock<MappedElement
+attributes
+	n_SetClock : String
+	p_gcomp : String
+	p_rc : String
+	importsLabelSetClock : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP3__SpecSetClock__Clock<MappedElement
+attributes
+	name : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP3__SpecSetClock__TimeStep<MappedElement
+attributes
+	name : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP3__SpecSetClock__SetClockRegistered<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP3__SpecSetClock__SetStabilityTimeInterval<MappedElement
+attributes
+	mins : String
+	rc : String
+operations
+end
+
+class NUOPCModel__Initialize__InitP3__SpecSetClock__SetModelClock<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP4<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP4__SpecDataInitialize<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP5<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Initialize__InitP5__SpecDataInitialize<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Run<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Run__RunP1<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Run__RunP1__SpecSetRunClock<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Run__RunP1__SpecCheckImport<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Run__RunP1__SpecModelAdvance<MappedElement
+attributes
+	importsLabelModelAdvance : String
+operations
+end
+
+class NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase<MappedElement
+attributes
+	userRoutine : String
+	p_gcomp : String
+	p_rc : String
+	phase : String
+operations
+end
+
+class NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase__ModelAdvanceRegistered<MappedElement
+attributes
+operations
+end
+
+class NUOPCModel__Finalize<MappedElement
+attributes
+	n_finalize : String
+	p_gcomp : String
+	p_import : String
+	p_export : String
+	p_clock : String
+	p_rc : String
+	phase : String
+operations
+end
+
+class NUOPCModel__Finalize__Registered<MappedElement
+attributes
+operations
+end
+
+class NUOPCMediator<MappedElement
+attributes
+operations
+end
+
+composition xxx_NUOPCApplication_models between
+	NUOPCApplication[0..1] role xxx_NUOPCApplication_models_src
+	NUOPCModel[*] role models
+end
+
+composition xxx_NUOPCApplication_drivers between
+	NUOPCApplication[0..1] role xxx_NUOPCApplication_drivers_src
+	NUOPCDriver[*] role drivers
+end
+
+composition xxx_NUOPCApplication_driversAtmOcn between
+	NUOPCApplication[0..1] role xxx_NUOPCApplication_driversAtmOcn_src
+	NUOPCDriverAtmOcn[*] role driversAtmOcn
+end
+
+composition xxx_NUOPCDriver_standardESMFImport between
+	NUOPCDriver[*] role xxx_NUOPCDriver_standardESMFImport_src
+	NUOPCDriver__StandardESMFImport[1] role standardESMFImport
+end
+
+composition xxx_NUOPCDriver_standardNUOPCImport between
+	NUOPCDriver[*] role xxx_NUOPCDriver_standardNUOPCImport_src
+	NUOPCDriver__StandardNUOPCImport[1] role standardNUOPCImport
+end
+
+composition xxx_NUOPCDriver_genericImports between
+	NUOPCDriver[*] role xxx_NUOPCDriver_genericImports_src
+	NUOPCDriver__GenericImports[1] role genericImports
+end
+
+composition xxx_NUOPCDriver_implementsSetServices between
+	NUOPCDriver[*] role xxx_NUOPCDriver_implementsSetServices_src
+	NUOPCDriver__ImplementsSetServices[1] role implementsSetServices
+end
+
+composition xxx_NUOPCDriver_initialize between
+	NUOPCDriver[*] role xxx_NUOPCDriver_initialize_src
+	NUOPCDriver__Initialize[1] role initialize
+end
+
+composition xxx_NUOPCDriver_run between
+	NUOPCDriver[*] role xxx_NUOPCDriver_run_src
+	NUOPCDriver__Run[1] role run
+end
+
+composition xxx_NUOPCDriver_finalize between
+	NUOPCDriver[*] role xxx_NUOPCDriver_finalize_src
+	NUOPCDriver__Finalize[1] role finalize
+end
+
+composition xxx_NUOPCDriver__ImplementsSetServices_derivesFromDriver between
+	NUOPCDriver__ImplementsSetServices[*] role xxx_NUOPCDriver__ImplementsSetServices_derivesFromDriver_src
+	NUOPCDriver__ImplementsSetServices__DerivesFromDriver[1] role derivesFromDriver
+end
+
+composition xxx_NUOPCDriver__Initialize_initP0 between
+	NUOPCDriver__Initialize[*] role xxx_NUOPCDriver__Initialize_initP0_src
+	NUOPCDriver__Initialize__InitP0[1] role initP0
+end
+
+composition xxx_NUOPCDriver__Initialize_initP1 between
+	NUOPCDriver__Initialize[*] role xxx_NUOPCDriver__Initialize_initP1_src
+	NUOPCDriver__Initialize__InitP1[1] role initP1
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1_specSetModelCount between
+	NUOPCDriver__Initialize__InitP1[*] role xxx_NUOPCDriver__Initialize__InitP1_specSetModelCount_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount[1] role specSetModelCount
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1_specSetModelPetList between
+	NUOPCDriver__Initialize__InitP1[*] role xxx_NUOPCDriver__Initialize__InitP1_specSetModelPetList_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelPetList[0..1] role specSetModelPetList
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1_specSetModelServices between
+	NUOPCDriver__Initialize__InitP1[*] role xxx_NUOPCDriver__Initialize__InitP1_specSetModelServices_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelServices[1] role specSetModelServices
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1_specModifyInitializePhaseMap between
+	NUOPCDriver__Initialize__InitP1[*] role xxx_NUOPCDriver__Initialize__InitP1_specModifyInitializePhaseMap_src
+	NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap[0..1] role specModifyInitializePhaseMap
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelCount_internalStateDeclaration between
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount[*] role xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelCount_internalStateDeclaration_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount__InternalStateDeclaration[1] role internalStateDeclaration
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelCount_getInternalState between
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount[*] role xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelCount_getInternalState_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount__GetInternalState[1] role getInternalState
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelCount_registered between
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount[*] role xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelCount_registered_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelCount__Registered[1] role registered
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelPetList_registered between
+	NUOPCDriver__Initialize__InitP1__SpecSetModelPetList[*] role xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelPetList_registered_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelPetList__Registered[1] role registered
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelServices_registered between
+	NUOPCDriver__Initialize__InitP1__SpecSetModelServices[*] role xxx_NUOPCDriver__Initialize__InitP1__SpecSetModelServices_registered_src
+	NUOPCDriver__Initialize__InitP1__SpecSetModelServices__Registered[1] role registered
+end
+
+composition xxx_NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap_registered between
+	NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap[*] role xxx_NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap_registered_src
+	NUOPCDriver__Initialize__InitP1__SpecModifyInitializePhaseMap__Registered[1] role registered
+end
+
+composition xxx_NUOPCDriver__Run_runP1 between
+	NUOPCDriver__Run[*] role xxx_NUOPCDriver__Run_runP1_src
+	NUOPCDriver__Run__RunP1[1] role runP1
+end
+
+composition xxx_NUOPCDriver__Finalize_finalizeP1 between
+	NUOPCDriver__Finalize[*] role xxx_NUOPCDriver__Finalize_finalizeP1_src
+	NUOPCDriver__Finalize__FinalizeP1[1] role finalizeP1
+end
+
+composition xxx_NUOPCDriver__Finalize__FinalizeP1_specFinalize between
+	NUOPCDriver__Finalize__FinalizeP1[*] role xxx_NUOPCDriver__Finalize__FinalizeP1_specFinalize_src
+	NUOPCDriver__Finalize__FinalizeP1__SpecFinalize[0..1] role specFinalize
+end
+
+composition xxx_NUOPCDriver__Finalize__FinalizeP1__SpecFinalize_registered between
+	NUOPCDriver__Finalize__FinalizeP1__SpecFinalize[*] role xxx_NUOPCDriver__Finalize__FinalizeP1__SpecFinalize_registered_src
+	NUOPCDriver__Finalize__FinalizeP1__SpecFinalize__Registered[1] role registered
+end
+
+composition xxx_NUOPCDriverAtmOcn_standardESMFImport between
+	NUOPCDriverAtmOcn[*] role xxx_NUOPCDriverAtmOcn_standardESMFImport_src
+	NUOPCDriverAtmOcn__StandardESMFImport[1] role standardESMFImport
+end
+
+composition xxx_NUOPCDriverAtmOcn_standardNUOPCImport between
+	NUOPCDriverAtmOcn[*] role xxx_NUOPCDriverAtmOcn_standardNUOPCImport_src
+	NUOPCDriverAtmOcn__StandardNUOPCImport[1] role standardNUOPCImport
+end
+
+composition xxx_NUOPCDriverAtmOcn_genericImports between
+	NUOPCDriverAtmOcn[*] role xxx_NUOPCDriverAtmOcn_genericImports_src
+	NUOPCDriverAtmOcn__GenericImports[1] role genericImports
+end
+
+composition xxx_NUOPCDriverAtmOcn_connectorImport between
+	NUOPCDriverAtmOcn[*] role xxx_NUOPCDriverAtmOcn_connectorImport_src
+	NUOPCDriverAtmOcn__ConnectorImport[1] role connectorImport
+end
+
+composition xxx_NUOPCDriverAtmOcn_implementsSetServices between
+	NUOPCDriverAtmOcn[*] role xxx_NUOPCDriverAtmOcn_implementsSetServices_src
+	NUOPCDriverAtmOcn__ImplementsSetServices[1] role implementsSetServices
+end
+
+composition xxx_NUOPCDriverAtmOcn_specSetModelServices between
+	NUOPCDriverAtmOcn[*] role xxx_NUOPCDriverAtmOcn_specSetModelServices_src
+	NUOPCDriverAtmOcn__SpecSetModelServices[1] role specSetModelServices
+end
+
+composition xxx_NUOPCDriverAtmOcn__ImplementsSetServices_callsCompDerive between
+	NUOPCDriverAtmOcn__ImplementsSetServices[*] role xxx_NUOPCDriverAtmOcn__ImplementsSetServices_callsCompDerive_src
+	NUOPCDriverAtmOcn__ImplementsSetServices__CallsCompDerive[1] role callsCompDerive
+end
+
+composition xxx_NUOPCDriverAtmOcn__SpecSetModelServices_registered between
+	NUOPCDriverAtmOcn__SpecSetModelServices[*] role xxx_NUOPCDriverAtmOcn__SpecSetModelServices_registered_src
+	NUOPCDriverAtmOcn__SpecSetModelServices__Registered[1] role registered
+end
+
+composition xxx_NUOPCDriverAtmOcn__SpecSetModelServices_childCompDeclaration between
+	NUOPCDriverAtmOcn__SpecSetModelServices[*] role xxx_NUOPCDriverAtmOcn__SpecSetModelServices_childCompDeclaration_src
+	NUOPCDriverAtmOcn__SpecSetModelServices__ChildCompDeclaration[1] role childCompDeclaration
+end
+
+composition xxx_NUOPCDriverAtmOcn__SpecSetModelServices_connectorDeclaration between
+	NUOPCDriverAtmOcn__SpecSetModelServices[*] role xxx_NUOPCDriverAtmOcn__SpecSetModelServices_connectorDeclaration_src
+	NUOPCDriverAtmOcn__SpecSetModelServices__ConnectorDeclaration[1] role connectorDeclaration
+end
+
+composition xxx_NUOPCDriverAtmOcn__SpecSetModelServices_addComp between
+	NUOPCDriverAtmOcn__SpecSetModelServices[0..1] role xxx_NUOPCDriverAtmOcn__SpecSetModelServices_addComp_src
+	NUOPCDriverAtmOcn__SpecSetModelServices__AddComp[*] role addComp
+end
+
+composition xxx_NUOPCDriverAtmOcn__SpecSetModelServices_addConnector between
+	NUOPCDriverAtmOcn__SpecSetModelServices[0..1] role xxx_NUOPCDriverAtmOcn__SpecSetModelServices_addConnector_src
+	NUOPCDriverAtmOcn__SpecSetModelServices__AddConnector[*] role addConnector
+end
+
+composition xxx_NUOPCModel_standardESMFImport between
+	NUOPCModel[*] role xxx_NUOPCModel_standardESMFImport_src
+	NUOPCModel__StandardESMFImport[1] role standardESMFImport
+end
+
+composition xxx_NUOPCModel_standardNUOPCImport between
+	NUOPCModel[*] role xxx_NUOPCModel_standardNUOPCImport_src
+	NUOPCModel__StandardNUOPCImport[1] role standardNUOPCImport
+end
+
+composition xxx_NUOPCModel_genericImports between
+	NUOPCModel[*] role xxx_NUOPCModel_genericImports_src
+	NUOPCModel__GenericImports[1] role genericImports
+end
+
+composition xxx_NUOPCModel_implementsSetServices between
+	NUOPCModel[*] role xxx_NUOPCModel_implementsSetServices_src
+	NUOPCModel__ImplementsSetServices[1] role implementsSetServices
+end
+
+composition xxx_NUOPCModel_initialize between
+	NUOPCModel[*] role xxx_NUOPCModel_initialize_src
+	NUOPCModel__Initialize[1] role initialize
+end
+
+composition xxx_NUOPCModel_run between
+	NUOPCModel[*] role xxx_NUOPCModel_run_src
+	NUOPCModel__Run[1] role run
+end
+
+composition xxx_NUOPCModel_finalize between
+	NUOPCModel[*] role xxx_NUOPCModel_finalize_src
+	NUOPCModel__Finalize[0..1] role finalize
+end
+
+composition xxx_NUOPCModel__ImplementsSetServices_callsCompDerive between
+	NUOPCModel__ImplementsSetServices[*] role xxx_NUOPCModel__ImplementsSetServices_callsCompDerive_src
+	NUOPCModel__ImplementsSetServices__CallsCompDerive[1] role callsCompDerive
+end
+
+composition xxx_NUOPCModel__Initialize_initP0 between
+	NUOPCModel__Initialize[*] role xxx_NUOPCModel__Initialize_initP0_src
+	NUOPCModel__Initialize__InitP0[1] role initP0
+end
+
+composition xxx_NUOPCModel__Initialize_initP1 between
+	NUOPCModel__Initialize[*] role xxx_NUOPCModel__Initialize_initP1_src
+	NUOPCModel__Initialize__InitP1[1] role initP1
+end
+
+composition xxx_NUOPCModel__Initialize_initP2 between
+	NUOPCModel__Initialize[*] role xxx_NUOPCModel__Initialize_initP2_src
+	NUOPCModel__Initialize__InitP2[1] role initP2
+end
+
+composition xxx_NUOPCModel__Initialize_initP3 between
+	NUOPCModel__Initialize[*] role xxx_NUOPCModel__Initialize_initP3_src
+	NUOPCModel__Initialize__InitP3[1] role initP3
+end
+
+composition xxx_NUOPCModel__Initialize_initP4 between
+	NUOPCModel__Initialize[*] role xxx_NUOPCModel__Initialize_initP4_src
+	NUOPCModel__Initialize__InitP4[1] role initP4
+end
+
+composition xxx_NUOPCModel__Initialize_initP5 between
+	NUOPCModel__Initialize[*] role xxx_NUOPCModel__Initialize_initP5_src
+	NUOPCModel__Initialize__InitP5[1] role initP5
+end
+
+composition xxx_NUOPCModel__Initialize__InitP1_advertisesImportField between
+	NUOPCModel__Initialize__InitP1[0..1] role xxx_NUOPCModel__Initialize__InitP1_advertisesImportField_src
+	NUOPCModel__Initialize__InitP1__AdvertisesImportField[*] role advertisesImportField
+end
+
+composition xxx_NUOPCModel__Initialize__InitP1_advertisesExportField between
+	NUOPCModel__Initialize__InitP1[0..1] role xxx_NUOPCModel__Initialize__InitP1_advertisesExportField_src
+	NUOPCModel__Initialize__InitP1__AdvertisesExportField[*] role advertisesExportField
+end
+
+composition xxx_NUOPCModel__Initialize__InitP1_registered1 between
+	NUOPCModel__Initialize__InitP1[*] role xxx_NUOPCModel__Initialize__InitP1_registered1_src
+	NUOPCModel__Initialize__InitP1__Registered1[1] role registered1
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2_createAndRealizeImport between
+	NUOPCModel__Initialize__InitP2[0..1] role xxx_NUOPCModel__Initialize__InitP2_createAndRealizeImport_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport[*] role createAndRealizeImport
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2_createAndRealizeExport between
+	NUOPCModel__Initialize__InitP2[0..1] role xxx_NUOPCModel__Initialize__InitP2_createAndRealizeExport_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport[*] role createAndRealizeExport
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2_registered2 between
+	NUOPCModel__Initialize__InitP2[*] role xxx_NUOPCModel__Initialize__InitP2_registered2_src
+	NUOPCModel__Initialize__InitP2__Registered2[1] role registered2
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_fieldDeclaration between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_fieldDeclaration_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__FieldDeclaration[1] role fieldDeclaration
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_gridDeclaration between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_gridDeclaration_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__GridDeclaration[1] role gridDeclaration
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_fieldAssignment between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_fieldAssignment_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__FieldAssignment[1] role fieldAssignment
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_realizesImportField between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_realizesImportField_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__RealizesImportField[1] role realizesImportField
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_dummyAssignment between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeImport_dummyAssignment_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeImport__DummyAssignment[0..1] role dummyAssignment
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_fieldDeclaration between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_fieldDeclaration_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__FieldDeclaration[1] role fieldDeclaration
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_gridDeclaration between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_gridDeclaration_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__GridDeclaration[1] role gridDeclaration
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_fieldAssignment between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_fieldAssignment_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__FieldAssignment[1] role fieldAssignment
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_realizesExportField between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_realizesExportField_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__RealizesExportField[1] role realizesExportField
+end
+
+composition xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_dummyAssignment between
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport[*] role xxx_NUOPCModel__Initialize__InitP2__CreateAndRealizeExport_dummyAssignment_src
+	NUOPCModel__Initialize__InitP2__CreateAndRealizeExport__DummyAssignment[0..1] role dummyAssignment
+end
+
+composition xxx_NUOPCModel__Initialize__InitP3_specSetClock between
+	NUOPCModel__Initialize__InitP3[*] role xxx_NUOPCModel__Initialize__InitP3_specSetClock_src
+	NUOPCModel__Initialize__InitP3__SpecSetClock[0..1] role specSetClock
+end
+
+composition xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_clock between
+	NUOPCModel__Initialize__InitP3__SpecSetClock[*] role xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_clock_src
+	NUOPCModel__Initialize__InitP3__SpecSetClock__Clock[1] role clock
+end
+
+composition xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_timeStep between
+	NUOPCModel__Initialize__InitP3__SpecSetClock[*] role xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_timeStep_src
+	NUOPCModel__Initialize__InitP3__SpecSetClock__TimeStep[1] role timeStep
+end
+
+composition xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_setClockRegistered between
+	NUOPCModel__Initialize__InitP3__SpecSetClock[*] role xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_setClockRegistered_src
+	NUOPCModel__Initialize__InitP3__SpecSetClock__SetClockRegistered[1] role setClockRegistered
+end
+
+composition xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_setStabilityTimeInterval between
+	NUOPCModel__Initialize__InitP3__SpecSetClock[*] role xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_setStabilityTimeInterval_src
+	NUOPCModel__Initialize__InitP3__SpecSetClock__SetStabilityTimeInterval[0..1] role setStabilityTimeInterval
+end
+
+composition xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_setModelClock between
+	NUOPCModel__Initialize__InitP3__SpecSetClock[*] role xxx_NUOPCModel__Initialize__InitP3__SpecSetClock_setModelClock_src
+	NUOPCModel__Initialize__InitP3__SpecSetClock__SetModelClock[1] role setModelClock
+end
+
+composition xxx_NUOPCModel__Initialize__InitP4_specDataInitialize between
+	NUOPCModel__Initialize__InitP4[*] role xxx_NUOPCModel__Initialize__InitP4_specDataInitialize_src
+	NUOPCModel__Initialize__InitP4__SpecDataInitialize[1] role specDataInitialize
+end
+
+composition xxx_NUOPCModel__Initialize__InitP5_specDataInitialize between
+	NUOPCModel__Initialize__InitP5[*] role xxx_NUOPCModel__Initialize__InitP5_specDataInitialize_src
+	NUOPCModel__Initialize__InitP5__SpecDataInitialize[1] role specDataInitialize
+end
+
+composition xxx_NUOPCModel__Run_runP1 between
+	NUOPCModel__Run[*] role xxx_NUOPCModel__Run_runP1_src
+	NUOPCModel__Run__RunP1[1] role runP1
+end
+
+composition xxx_NUOPCModel__Run__RunP1_specSetRunClock between
+	NUOPCModel__Run__RunP1[*] role xxx_NUOPCModel__Run__RunP1_specSetRunClock_src
+	NUOPCModel__Run__RunP1__SpecSetRunClock[0..1] role specSetRunClock
+end
+
+composition xxx_NUOPCModel__Run__RunP1_specCheckImport between
+	NUOPCModel__Run__RunP1[*] role xxx_NUOPCModel__Run__RunP1_specCheckImport_src
+	NUOPCModel__Run__RunP1__SpecCheckImport[0..1] role specCheckImport
+end
+
+composition xxx_NUOPCModel__Run__RunP1_specModelAdvance between
+	NUOPCModel__Run__RunP1[*] role xxx_NUOPCModel__Run__RunP1_specModelAdvance_src
+	NUOPCModel__Run__RunP1__SpecModelAdvance[1] role specModelAdvance
+end
+
+composition xxx_NUOPCModel__Run__RunP1__SpecModelAdvance_modelAdvancePhase between
+	NUOPCModel__Run__RunP1__SpecModelAdvance[0..1] role xxx_NUOPCModel__Run__RunP1__SpecModelAdvance_modelAdvancePhase_src
+	NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase[1..*] role modelAdvancePhase
+end
+
+composition xxx_NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase_modelAdvanceRegistered between
+	NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase[*] role xxx_NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase_modelAdvanceRegistered_src
+	NUOPCModel__Run__RunP1__SpecModelAdvance__ModelAdvancePhase__ModelAdvanceRegistered[1] role modelAdvanceRegistered
+end
+
+composition xxx_NUOPCModel__Finalize_registered between
+	NUOPCModel__Finalize[*] role xxx_NUOPCModel__Finalize_registered_src
+	NUOPCModel__Finalize__Registered[1] role registered
+end
+

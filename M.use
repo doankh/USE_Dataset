@@ -1,0 +1,337 @@
+model M
+abstract class IdentifiedElement
+attributes
+	qualifiers : String
+	identifier : String
+operations
+end
+
+abstract class MElement<IdentifiedElement
+attributes
+operations
+end
+
+class MElementReference
+attributes
+	alias : String
+operations
+end
+
+class Module<MElement
+attributes
+operations
+end
+
+abstract class ModuleMember<MElement
+attributes
+operations
+end
+
+class ImportDirective
+attributes
+operations
+end
+
+class ExportDirective
+attributes
+operations
+end
+
+abstract class Value
+attributes
+operations
+end
+
+abstract class NumericalValue<Value
+attributes
+operations
+end
+
+class StringValue<Value
+attributes
+	value : String
+operations
+end
+
+class IntegerValue<NumericalValue
+attributes
+	value : Integer
+operations
+end
+
+class DecimalValue<NumericalValue
+attributes
+	value : Real
+operations
+end
+
+class BooleanValue<Value
+attributes
+	value : Boolean
+operations
+end
+
+class DerivedType<ModuleMember
+attributes
+operations
+end
+
+class TypeReference
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class IntrinsicTypeReference<TypeReference
+attributes
+	typeIdentifier : String
+operations
+end
+
+class DerivedTypeReference<TypeReference
+attributes
+operations
+end
+
+class Field<IdentifiedElement
+attributes
+operations
+end
+
+class Collection_<IdentifiedElement
+attributes
+operations
+end
+
+class ComputedValue<IdentifiedElement
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class InitializationExpression<Expression
+attributes
+operations
+end
+
+class WhereExpression<Expression
+attributes
+operations
+end
+
+class IdentityExpression<WhereExpression
+attributes
+operations
+end
+
+abstract class QueryExpression<Expression
+attributes
+operations
+end
+
+class EqualExpression<QueryExpression
+attributes
+operations
+end
+
+class InExpression<QueryExpression
+attributes
+operations
+end
+
+class CollectionExpression<Expression
+attributes
+operations
+end
+
+abstract class ValueExpression<Expression
+attributes
+operations
+end
+
+class DefaultValueExpression<ValueExpression
+attributes
+operations
+end
+
+class StandardValueExpression<ValueExpression
+attributes
+	value : String
+operations
+end
+
+class Language<ModuleMember
+attributes
+operations
+end
+
+class Entity<ModuleMember
+attributes
+operations
+end
+
+association xxx_MElementReference_referencedElement between
+	MElementReference[*] role xxx_MElementReference_referencedElement_src
+	MElement[1] role referencedElement
+end
+
+composition xxx_Module_imports between
+	Module[0..1] role xxx_Module_imports_src
+	ImportDirective[*] role imports
+end
+
+composition xxx_Module_exports between
+	Module[0..1] role xxx_Module_exports_src
+	ExportDirective[*] role exports
+end
+
+composition xxx_Module_moduleMembers between
+	Module[0..1] role xxx_Module_moduleMembers_src
+	ModuleMember[*] role moduleMembers
+end
+
+association xxx_ModuleMember_module between
+	ModuleMember[*] role xxx_ModuleMember_module_src
+	Module[1] role module
+end
+
+association xxx_ImportDirective_module between
+	ImportDirective[*] role xxx_ImportDirective_module_src
+	Module[1] role module
+end
+
+composition xxx_ImportDirective_importedElements between
+	ImportDirective[0..1] role xxx_ImportDirective_importedElements_src
+	MElementReference[1..*] role importedElements
+end
+
+association xxx_ExportDirective_module between
+	ExportDirective[*] role xxx_ExportDirective_module_src
+	Module[1] role module
+end
+
+association xxx_ExportDirective_exportedElements between
+	ExportDirective[0..1] role xxx_ExportDirective_exportedElements_src
+	ModuleMember[1..*] role exportedElements
+end
+
+composition xxx_DerivedType_supertypes between
+	DerivedType[0..1] role xxx_DerivedType_supertypes_src
+	TypeReference[*] role supertypes
+end
+
+composition xxx_DerivedType_fields between
+	DerivedType[0..1] role xxx_DerivedType_fields_src
+	Field[*] role fields
+end
+
+composition xxx_DerivedType_initializationExpression between
+	DerivedType[*] role xxx_DerivedType_initializationExpression_src
+	InitializationExpression[0..1] role initializationExpression
+end
+
+composition xxx_DerivedType_whereExpression between
+	DerivedType[*] role xxx_DerivedType_whereExpression_src
+	WhereExpression[0..1] role whereExpression
+end
+
+composition xxx_DerivedType_expression between
+	DerivedType[*] role xxx_DerivedType_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_TypeReference_subtype between
+	TypeReference[*] role xxx_TypeReference_subtype_src
+	DerivedType[0..1] role subtype
+end
+
+association xxx_TypeReference_field between
+	TypeReference[*] role xxx_TypeReference_field_src
+	Field[0..1] role field
+end
+
+association xxx_DerivedTypeReference_type between
+	DerivedTypeReference[*] role xxx_DerivedTypeReference_type_src
+	DerivedType[1] role type
+end
+
+association xxx_Field_owner between
+	Field[*] role xxx_Field_owner_src
+	DerivedType[1] role owner
+end
+
+composition xxx_Field_type between
+	Field[*] role xxx_Field_type_src
+	TypeReference[1] role type
+end
+
+association xxx_InitializationExpression_type between
+	InitializationExpression[*] role xxx_InitializationExpression_type_src
+	DerivedType[1] role type
+end
+
+composition xxx_InitializationExpression_values between
+	InitializationExpression[0..1] role xxx_InitializationExpression_values_src
+	Value[*] role values
+end
+
+association xxx_WhereExpression_type between
+	WhereExpression[*] role xxx_WhereExpression_type_src
+	DerivedType[1] role type
+end
+
+composition xxx_WhereExpression_queryExpressions between
+	WhereExpression[0..1] role xxx_WhereExpression_queryExpressions_src
+	QueryExpression[*] role queryExpressions
+end
+
+association xxx_IdentityExpression_identity between
+	IdentityExpression[*] role xxx_IdentityExpression_identity_src
+	Field[1] role identity
+end
+
+association xxx_QueryExpression_whereExpression between
+	QueryExpression[*] role xxx_QueryExpression_whereExpression_src
+	WhereExpression[1] role whereExpression
+end
+
+composition xxx_EqualExpression_leftValue between
+	EqualExpression[*] role xxx_EqualExpression_leftValue_src
+	ValueExpression[1] role leftValue
+end
+
+composition xxx_EqualExpression_rightValue between
+	EqualExpression[*] role xxx_EqualExpression_rightValue_src
+	ValueExpression[1] role rightValue
+end
+
+composition xxx_InExpression_value between
+	InExpression[*] role xxx_InExpression_value_src
+	ValueExpression[1] role value
+end
+
+composition xxx_InExpression_collection_ between
+	InExpression[*] role xxx_InExpression_collection__src
+	CollectionExpression[1] role collection_
+end
+
+association xxx_CollectionExpression_inExpression between
+	CollectionExpression[*] role xxx_CollectionExpression_inExpression_src
+	InExpression[1] role inExpression
+end
+
+composition xxx_CollectionExpression_collectionValue between
+	CollectionExpression[*] role xxx_CollectionExpression_collectionValue_src
+	ValueExpression[1] role collectionValue
+end
+
+composition xxx_StandardValueExpression_context_ between
+	StandardValueExpression[*] role xxx_StandardValueExpression_context__src
+	ValueExpression[0..1] role context_
+end
+

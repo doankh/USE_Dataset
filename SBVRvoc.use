@@ -1,0 +1,634 @@
+model SBVRvoc
+enum Verb{
+	is,
+	relevant,
+	comprises,
+	to,
+	work,
+	in_,
+	trades,
+	as,
+	are,
+	accepted,
+	generally,
+	important,
+	across,
+	share,
+	sets,
+	assigned,
+	by,
+	contains,
+	has,
+	specifies,
+	specified
+}
+
+enum ConjonctionnalKeyWord{
+	and_,
+	or_,
+	if_,
+	whether
+}
+
+enum ModalVerb{
+	must,
+	may,
+	never,
+	always
+}
+
+enum Join{
+	that,
+	who
+}
+
+enum Link{
+	of,
+	quoteS
+}
+
+enum Qualif{
+	the,
+	The,
+	a,
+	A,
+	an,
+	An,
+	Each,
+	each,
+	Some,
+	some,
+	At,
+	at,
+	Exactly,
+	exactly
+}
+
+enum EndOperator{
+	given,
+	thanone,
+	one,
+	isobligatorythat,
+	ispermittedthat,
+	isprohibitedthat,
+	isnecessarythat,
+	ispossiblethat,
+	isimpossiblethat,
+	isnotthecasethat,
+	least,
+	leastone,
+	most,
+	mostone,
+	leastnandatmostm,
+	andonlyif,
+	ornot,
+	not_,
+	of
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Root<LocatedElement
+attributes
+operations
+end
+
+class VocabularyEntry<LocatedElement
+attributes
+operations
+end
+
+abstract class Caption<LocatedElement
+attributes
+operations
+end
+
+class DefCaption<Caption
+attributes
+operations
+end
+
+class DescCaption<Caption
+attributes
+operations
+end
+
+class SrcCaption<Caption
+attributes
+operations
+end
+
+class DBCaption<Caption
+attributes
+operations
+end
+
+class GenCCaption<Caption
+attributes
+operations
+end
+
+class CTypCaption<Caption
+attributes
+operations
+end
+
+class Necessity<Caption
+attributes
+operations
+end
+
+class Possibility<Caption
+attributes
+operations
+end
+
+class RefSCaption<Caption
+attributes
+operations
+end
+
+class NoteCaption<Caption
+attributes
+operations
+end
+
+class ExCaption<Caption
+attributes
+operations
+end
+
+class SynCaption<Caption
+attributes
+operations
+end
+
+class SynFCaption<Caption
+attributes
+operations
+end
+
+class SeeCaption<Caption
+attributes
+operations
+end
+
+class SFCaption<Caption
+attributes
+operations
+end
+
+class NSURICaption<Caption
+attributes
+operations
+end
+
+abstract class PrimaryRepresentation<LocatedElement
+attributes
+operations
+end
+
+abstract class NotFactTypeRepresentation<PrimaryRepresentation
+attributes
+operations
+end
+
+class TermRepresentation<NotFactTypeRepresentation
+attributes
+operations
+end
+
+class NameRepresentation<NotFactTypeRepresentation
+attributes
+	hasThe : Boolean
+operations
+end
+
+class FactTypeFormRepresentation<PrimaryRepresentation
+attributes
+	verbExp : Verb
+operations
+end
+
+class ConceptDefinition<LocatedElement
+attributes
+operations
+end
+
+class ConceptSource<LocatedElement
+attributes
+operations
+end
+
+class Note<LocatedElement
+attributes
+operations
+end
+
+class Sentence<LocatedElement
+attributes
+operations
+end
+
+class NameSpaceURI<LocatedElement
+attributes
+operations
+end
+
+abstract class Word<LocatedElement
+attributes
+	val : String
+operations
+end
+
+class StringWord<Word
+attributes
+operations
+end
+
+class QuotedStringWord<Word
+attributes
+operations
+end
+
+class NameWord<Word
+attributes
+operations
+end
+
+class SBVRExpression<LocatedElement
+attributes
+	hasPoint : Boolean
+operations
+end
+
+class SBVRPropWithKW<LocatedElement
+attributes
+	conjonction : ConjonctionnalKeyWord
+	endConj : EndOperator
+operations
+end
+
+class ModalForm<LocatedElement
+attributes
+	modal : ModalVerb
+	isNeg : Boolean
+operations
+end
+
+class SimpleSBVRProp<LocatedElement
+attributes
+	verbs : Verb
+operations
+end
+
+class SubSBVRProp<LocatedElement
+attributes
+	join : Join
+	modalVerb : ModalVerb
+	verbs : Verb
+operations
+end
+
+class LinkSBVRConcept<LocatedElement
+attributes
+	link : Link
+operations
+end
+
+class ConjConcept<LocatedElement
+attributes
+	conjonction : ConjonctionnalKeyWord
+operations
+end
+
+abstract class Concept<LocatedElement
+attributes
+operations
+end
+
+class NameConcept<Concept
+attributes
+	the : Qualif
+operations
+end
+
+class ObjectConcept<Concept
+attributes
+operations
+end
+
+class StringConcept<Concept
+attributes
+operations
+end
+
+class NounConcept<LocatedElement
+attributes
+operations
+end
+
+class Qualification<LocatedElement
+attributes
+operations
+end
+
+abstract class GeneralConcept<LocatedElement
+attributes
+operations
+end
+
+class NameGConcept<GeneralConcept
+attributes
+operations
+end
+
+class NounGConcept<GeneralConcept
+attributes
+operations
+end
+
+class Qualifier<LocatedElement
+attributes
+	op : Qualif
+	endOperator : EndOperator
+operations
+end
+
+class ModalBegin<LocatedElement
+attributes
+	endOperator : EndOperator
+operations
+end
+
+class ModalBeginC<ModalBegin
+attributes
+operations
+end
+
+composition xxx_Root_entries between
+	Root[0..1] role xxx_Root_entries_src
+	VocabularyEntry[*] role entries
+end
+
+composition xxx_VocabularyEntry_primaryRep between
+	VocabularyEntry[*] role xxx_VocabularyEntry_primaryRep_src
+	PrimaryRepresentation[1] role primaryRep
+end
+
+composition xxx_VocabularyEntry_caption between
+	VocabularyEntry[0..1] role xxx_VocabularyEntry_caption_src
+	Caption[*] role caption
+end
+
+composition xxx_DefCaption_definition between
+	DefCaption[*] role xxx_DefCaption_definition_src
+	ConceptDefinition[1] role definition
+end
+
+composition xxx_DescCaption_description between
+	DescCaption[*] role xxx_DescCaption_description_src
+	Note[1] role description
+end
+
+composition xxx_SrcCaption_source between
+	SrcCaption[*] role xxx_SrcCaption_source_src
+	ConceptSource[1] role source
+end
+
+composition xxx_DBCaption_dictionaryBasis between
+	DBCaption[*] role xxx_DBCaption_dictionaryBasis_src
+	ConceptSource[1] role dictionaryBasis
+end
+
+composition xxx_GenCCaption_generalConcept between
+	GenCCaption[*] role xxx_GenCCaption_generalConcept_src
+	PrimaryRepresentation[1] role generalConcept
+end
+
+composition xxx_CTypCaption_conceptType between
+	CTypCaption[0..1] role xxx_CTypCaption_conceptType_src
+	PrimaryRepresentation[*] role conceptType
+end
+
+composition xxx_Necessity_exp between
+	Necessity[*] role xxx_Necessity_exp_src
+	SBVRExpression[1] role exp
+end
+
+composition xxx_Possibility_exp between
+	Possibility[*] role xxx_Possibility_exp_src
+	SBVRExpression[1] role exp
+end
+
+composition xxx_RefSCaption_referenceScheme between
+	RefSCaption[*] role xxx_RefSCaption_referenceScheme_src
+	PrimaryRepresentation[1] role referenceScheme
+end
+
+composition xxx_NoteCaption_note between
+	NoteCaption[*] role xxx_NoteCaption_note_src
+	Note[1] role note
+end
+
+composition xxx_ExCaption_example between
+	ExCaption[0..1] role xxx_ExCaption_example_src
+	SBVRExpression[*] role example
+end
+
+composition xxx_SynCaption_synonym between
+	SynCaption[0..1] role xxx_SynCaption_synonym_src
+	PrimaryRepresentation[*] role synonym
+end
+
+composition xxx_SynFCaption_synonymousForm between
+	SynFCaption[0..1] role xxx_SynFCaption_synonymousForm_src
+	SBVRExpression[*] role synonymousForm
+end
+
+composition xxx_SeeCaption_see between
+	SeeCaption[*] role xxx_SeeCaption_see_src
+	PrimaryRepresentation[0..1] role see
+end
+
+composition xxx_SFCaption_subjectField between
+	SFCaption[*] role xxx_SFCaption_subjectField_src
+	PrimaryRepresentation[0..1] role subjectField
+end
+
+composition xxx_NSURICaption_namespaceURI between
+	NSURICaption[*] role xxx_NSURICaption_namespaceURI_src
+	NameSpaceURI[0..1] role namespaceURI
+end
+
+composition xxx_TermRepresentation_term between
+	TermRepresentation[0..1] role xxx_TermRepresentation_term_src
+	StringWord[1..*] role term
+end
+
+composition xxx_NameRepresentation_name between
+	NameRepresentation[0..1] role xxx_NameRepresentation_name_src
+	NameWord[1..*] role name
+end
+
+composition xxx_FactTypeFormRepresentation_primaryRep1 between
+	FactTypeFormRepresentation[*] role xxx_FactTypeFormRepresentation_primaryRep1_src
+	NotFactTypeRepresentation[1] role primaryRep1
+end
+
+composition xxx_FactTypeFormRepresentation_primaryRep2 between
+	FactTypeFormRepresentation[*] role xxx_FactTypeFormRepresentation_primaryRep2_src
+	NotFactTypeRepresentation[1] role primaryRep2
+end
+
+composition xxx_ConceptDefinition_exp between
+	ConceptDefinition[*] role xxx_ConceptDefinition_exp_src
+	Concept[1] role exp
+end
+
+composition xxx_ConceptDefinition_conjexp between
+	ConceptDefinition[0..1] role xxx_ConceptDefinition_conjexp_src
+	ConjConcept[*] role conjexp
+end
+
+composition xxx_ConceptSource_source between
+	ConceptSource[0..1] role xxx_ConceptSource_source_src
+	Word[1..*] role source
+end
+
+composition xxx_Note_sentences between
+	Note[0..1] role xxx_Note_sentences_src
+	Sentence[1..*] role sentences
+end
+
+composition xxx_Sentence_words between
+	Sentence[0..1] role xxx_Sentence_words_src
+	Word[1..*] role words
+end
+
+composition xxx_NameSpaceURI_URI between
+	NameSpaceURI[0..1] role xxx_NameSpaceURI_URI_src
+	Word[1..*] role URI
+end
+
+composition xxx_SBVRExpression_firstProposition between
+	SBVRExpression[*] role xxx_SBVRExpression_firstProposition_src
+	SimpleSBVRProp[1] role firstProposition
+end
+
+composition xxx_SBVRExpression_nextProposition between
+	SBVRExpression[0..1] role xxx_SBVRExpression_nextProposition_src
+	SBVRPropWithKW[*] role nextProposition
+end
+
+composition xxx_SBVRPropWithKW_proposition between
+	SBVRPropWithKW[*] role xxx_SBVRPropWithKW_proposition_src
+	SimpleSBVRProp[1] role proposition
+end
+
+composition xxx_SimpleSBVRProp_modal between
+	SimpleSBVRProp[*] role xxx_SimpleSBVRProp_modal_src
+	ModalBegin[0..1] role modal
+end
+
+composition xxx_SimpleSBVRProp_concept1 between
+	SimpleSBVRProp[*] role xxx_SimpleSBVRProp_concept1_src
+	Concept[1] role concept1
+end
+
+composition xxx_SimpleSBVRProp_modalVerb between
+	SimpleSBVRProp[*] role xxx_SimpleSBVRProp_modalVerb_src
+	ModalForm[0..1] role modalVerb
+end
+
+composition xxx_SimpleSBVRProp_concept2 between
+	SimpleSBVRProp[*] role xxx_SimpleSBVRProp_concept2_src
+	Concept[1] role concept2
+end
+
+composition xxx_SubSBVRProp_concept2 between
+	SubSBVRProp[*] role xxx_SubSBVRProp_concept2_src
+	Concept[1] role concept2
+end
+
+composition xxx_LinkSBVRConcept_concept between
+	LinkSBVRConcept[*] role xxx_LinkSBVRConcept_concept_src
+	Concept[1] role concept
+end
+
+composition xxx_ConjConcept_concept between
+	ConjConcept[*] role xxx_ConjConcept_concept_src
+	Concept[1] role concept
+end
+
+composition xxx_Concept_subProp between
+	Concept[*] role xxx_Concept_subProp_src
+	SubSBVRProp[0..1] role subProp
+end
+
+composition xxx_Concept_linkedConcept between
+	Concept[*] role xxx_Concept_linkedConcept_src
+	LinkSBVRConcept[0..1] role linkedConcept
+end
+
+composition xxx_NameConcept_name between
+	NameConcept[0..1] role xxx_NameConcept_name_src
+	NameWord[1..*] role name
+end
+
+composition xxx_ObjectConcept_operatoredConcept between
+	ObjectConcept[*] role xxx_ObjectConcept_operatoredConcept_src
+	NounConcept[1] role operatoredConcept
+end
+
+composition xxx_ObjectConcept_qualify between
+	ObjectConcept[*] role xxx_ObjectConcept_qualify_src
+	Qualification[0..1] role qualify
+end
+
+composition xxx_StringConcept_stringWord between
+	StringConcept[0..1] role xxx_StringConcept_stringWord_src
+	QuotedStringWord[1..*] role stringWord
+end
+
+composition xxx_NounConcept_qualif between
+	NounConcept[*] role xxx_NounConcept_qualif_src
+	Qualifier[0..1] role qualif
+end
+
+composition xxx_NounConcept_noun between
+	NounConcept[0..1] role xxx_NounConcept_noun_src
+	StringWord[1..*] role noun
+end
+
+composition xxx_Qualification_generalConcept between
+	Qualification[0..1] role xxx_Qualification_generalConcept_src
+	GeneralConcept[1..*] role generalConcept
+end
+
+composition xxx_NameGConcept_name between
+	NameGConcept[*] role xxx_NameGConcept_name_src
+	NameConcept[1] role name
+end
+
+composition xxx_NounGConcept_noun between
+	NounGConcept[0..1] role xxx_NounGConcept_noun_src
+	StringWord[1..*] role noun
+end
+
+composition xxx_Qualifier_min between
+	Qualifier[*] role xxx_Qualifier_min_src
+	StringWord[0..1] role min
+end
+
+composition xxx_Qualifier_max between
+	Qualifier[*] role xxx_Qualifier_max_src
+	StringWord[0..1] role max
+end
+

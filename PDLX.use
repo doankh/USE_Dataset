@@ -1,0 +1,83 @@
+model pDLX
+enum WorkSequenceType{
+default
+}
+
+class Process
+attributes
+	name : String
+operations
+end
+
+class ProcessElement
+attributes
+operations
+end
+
+class WorkDefinition<ProcessElement
+attributes
+	name : String
+operations
+end
+
+class Ressource<ProcessElement
+attributes
+	name : String
+	quantity : Integer
+operations
+end
+
+class Need<ProcessElement
+attributes
+	quantity : Integer
+operations
+end
+
+class NeedSet<ProcessElement
+attributes
+	name : String
+operations
+end
+
+class WorkSequence<ProcessElement
+attributes
+	linkType : WorkSequenceType
+operations
+end
+
+class Guidance<ProcessElement
+attributes
+	text : String
+operations
+end
+
+composition xxx_Process_processElements between
+	Process[0..1] role xxx_Process_processElements_src
+	ProcessElement[*] role processElements
+end
+
+association xxx_Need_ressource between
+	Need[*] role xxx_Need_ressource_src
+	Ressource[0..1] role ressource
+end
+
+association xxx_Need_needSet between
+	Need[*] role xxx_Need_needSet_src
+	NeedSet[0..1] role needSet
+end
+
+association xxx_NeedSet_wd between
+	NeedSet[*] role xxx_NeedSet_wd_src
+	WorkDefinition[0..1] role wd
+end
+
+association xxx_WorkSequence_predecessor between
+	WorkSequence[*] role xxx_WorkSequence_predecessor_src
+	WorkDefinition[0..1] role predecessor
+end
+
+association xxx_WorkSequence_successor between
+	WorkSequence[*] role xxx_WorkSequence_successor_src
+	WorkDefinition[0..1] role successor
+end
+

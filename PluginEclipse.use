@@ -1,0 +1,193 @@
+model PluginEclipse
+enum Resolution{
+	Mandatory,
+	Optional
+}
+
+enum Visibility{
+	Private,
+	Reexport
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Eclipse<LocatedElement
+attributes
+operations
+end
+
+class Bundle<LocatedElement
+attributes
+	symbolicName : String
+	singleton : Boolean
+	manifestVersion : Integer
+operations
+end
+
+abstract class RequireBundleAttribute<LocatedElement
+attributes
+operations
+end
+
+class AttResolution<RequireBundleAttribute
+attributes
+	value : Resolution
+operations
+end
+
+class AttVisibility<RequireBundleAttribute
+attributes
+	value : Visibility
+operations
+end
+
+class Range<RequireBundleAttribute
+attributes
+	isLeftInclusive : Boolean
+	isRightInclusive : Boolean
+operations
+end
+
+class Version<LocatedElement
+attributes
+	major : Integer
+	minor : Integer
+	micro : Integer
+	qualification : String
+operations
+end
+
+class RequiredBundle<LocatedElement
+attributes
+operations
+end
+
+class ImportedPackage<LocatedElement
+attributes
+	resolution : Resolution
+operations
+end
+
+class ExportedPackage<LocatedElement
+attributes
+operations
+end
+
+class Package<LocatedElement
+attributes
+	fqn : String
+operations
+end
+
+class Xfriends<LocatedElement
+attributes
+operations
+end
+
+class Xinternal<ExportedPackage
+attributes
+	value : Boolean
+operations
+end
+
+composition xxx_Eclipse_bundles between
+	Eclipse[0..1] role xxx_Eclipse_bundles_src
+	Bundle[1..*] role bundles
+end
+
+composition xxx_Eclipse_packages between
+	Eclipse[0..1] role xxx_Eclipse_packages_src
+	Package[*] role packages
+end
+
+composition xxx_Bundle_require between
+	Bundle[0..1] role xxx_Bundle_require_src
+	RequiredBundle[*] role require
+end
+
+composition xxx_Bundle_version between
+	Bundle[*] role xxx_Bundle_version_src
+	Version[1] role version
+end
+
+composition xxx_Bundle_export between
+	Bundle[0..1] role xxx_Bundle_export_src
+	ExportedPackage[*] role export
+end
+
+composition xxx_Bundle_import between
+	Bundle[0..1] role xxx_Bundle_import_src
+	ImportedPackage[*] role import
+end
+
+composition xxx_Bundle_packages between
+	Bundle[0..1] role xxx_Bundle_packages_src
+	Package[*] role packages
+end
+
+composition xxx_Range_lowerBound between
+	Range[*] role xxx_Range_lowerBound_src
+	Version[1] role lowerBound
+end
+
+composition xxx_Range_upperBound between
+	Range[*] role xxx_Range_upperBound_src
+	Version[1] role upperBound
+end
+
+composition xxx_RequiredBundle_requireBundleAttribute between
+	RequiredBundle[0..1] role xxx_RequiredBundle_requireBundleAttribute_src
+	RequireBundleAttribute[*] role requireBundleAttribute
+end
+
+association xxx_RequiredBundle_bundle between
+	RequiredBundle[*] role xxx_RequiredBundle_bundle_src
+	Bundle[1] role bundle
+end
+
+association xxx_ImportedPackage_package between
+	ImportedPackage[*] role xxx_ImportedPackage_package_src
+	Package[1] role package
+end
+
+composition xxx_ImportedPackage_range between
+	ImportedPackage[*] role xxx_ImportedPackage_range_src
+	Range[0..1] role range
+end
+
+association xxx_ExportedPackage_package between
+	ExportedPackage[*] role xxx_ExportedPackage_package_src
+	Package[1] role package
+end
+
+composition xxx_ExportedPackage_version between
+	ExportedPackage[*] role xxx_ExportedPackage_version_src
+	Version[1] role version
+end
+
+composition xxx_ExportedPackage_xFriends between
+	ExportedPackage[*] role xxx_ExportedPackage_xFriends_src
+	Xfriends[1] role xFriends
+end
+
+association xxx_Package_importedBy between
+	Package[0..1] role xxx_Package_importedBy_src
+	ImportedPackage[*] role importedBy
+end
+
+association xxx_Package_exportedBy between
+	Package[*] role xxx_Package_exportedBy_src
+	ExportedPackage[0..1] role exportedBy
+end
+
+association xxx_Xfriends_bundles between
+	Xfriends[0..1] role xxx_Xfriends_bundles_src
+	Bundle[1..*] role bundles
+end
+

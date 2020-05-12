@@ -1,0 +1,101 @@
+model compiler
+class EqNetlist
+attributes
+operations
+end
+
+class Equipotential
+attributes
+operations
+end
+
+class EquipotFloat<Equipotential
+attributes
+operations
+end
+
+class EquipotInteger<Equipotential
+attributes
+operations
+end
+
+class EquipotString<Equipotential
+attributes
+operations
+end
+
+class Node23Index
+attributes
+operations
+end
+
+class EngineManager
+attributes
+operations
+end
+
+class EngineController
+attributes
+operations
+end
+
+class EqNetlistEvaluator
+attributes
+operations
+end
+
+class EqNetlistBuilder
+attributes
+operations
+end
+
+class BridgeManager
+attributes
+operations
+end
+
+class EngineNotifier
+attributes
+operations
+end
+
+composition xxx_EqNetlist_index between
+	EqNetlist[*] role xxx_EqNetlist_index_src
+	Node23Index[0..1] role index
+end
+
+association xxx_EqNetlist_eqPins between
+	EqNetlist[*] role xxx_EqNetlist_eqPins_src
+	Equipotential[0..1] role eqPins
+end
+
+association xxx_EngineManager_controller between
+	EngineManager[*] role xxx_EngineManager_controller_src
+	EngineController[0..1] role controller
+end
+
+composition xxx_EngineManager_netlistEvaluator between
+	EngineManager[*] role xxx_EngineManager_netlistEvaluator_src
+	EqNetlistEvaluator[0..1] role netlistEvaluator
+end
+
+composition xxx_EngineManager_notifier between
+	EngineManager[*] role xxx_EngineManager_notifier_src
+	EngineNotifier[0..1] role notifier
+end
+
+composition xxx_EngineManager_netlistBuilder between
+	EngineManager[*] role xxx_EngineManager_netlistBuilder_src
+	EqNetlistBuilder[0..1] role netlistBuilder
+end
+
+composition xxx_EngineManager_modelBehavManager between
+	EngineManager[*] role xxx_EngineManager_modelBehavManager_src
+	BridgeManager[0..1] role modelBehavManager
+end
+
+composition xxx_EngineManager_netlist between
+	EngineManager[*] role xxx_EngineManager_netlist_src
+	EqNetlist[0..1] role netlist
+end
+

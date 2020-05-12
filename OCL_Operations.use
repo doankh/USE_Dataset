@@ -1,0 +1,145 @@
+model OCLOperations
+abstract class OperationExp
+attributes
+operations
+end
+
+class PropertyOperation<OperationExp
+attributes
+	isMarkedPre : Boolean
+operations
+end
+
+class OclOperation<OperationExp
+attributes
+operations
+end
+
+class ConstExp<OperationExp
+attributes
+operations
+end
+
+class IntegerConstExp<ConstExp
+attributes
+	value : Integer
+operations
+end
+
+class StringConstExp<ConstExp
+attributes
+	value : String
+operations
+end
+
+class RealConstExp<ConstExp
+attributes
+	value : Real
+operations
+end
+
+class AttributeExp<PropertyOperation
+attributes
+operations
+end
+
+class Attribute
+attributes
+operations
+end
+
+class NaviguationExp<PropertyOperation
+attributes
+operations
+end
+
+class AssocationEnd
+attributes
+operations
+end
+
+class ClassifierOperation<PropertyOperation
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+abstract class OclExpression
+attributes
+operations
+end
+
+composition xxx_PropertyOperation_source between
+	PropertyOperation[*] role xxx_PropertyOperation_source_src
+	OclExpression[1] role source
+end
+
+composition xxx_OclOperation_arguments between
+	OclOperation[*] role xxx_OclOperation_arguments_src
+	OclExpression[1] role arguments
+end
+
+composition xxx_AttributeExp_attr between
+	AttributeExp[*] role xxx_AttributeExp_attr_src
+	Attribute[1] role attr
+end
+
+association xxx_Attribute_attrExp between
+	Attribute[0..1] role xxx_Attribute_attrExp_src
+	AttributeExp[*] role attrExp
+end
+
+composition xxx_NaviguationExp_assEnd between
+	NaviguationExp[*] role xxx_NaviguationExp_assEnd_src
+	AssocationEnd[1] role assEnd
+end
+
+composition xxx_NaviguationExp_qualifierValues between
+	NaviguationExp[*] role xxx_NaviguationExp_qualifierValues_src
+	OclExpression[1] role qualifierValues
+end
+
+association xxx_AssocationEnd_navExp between
+	AssocationEnd[0..1] role xxx_AssocationEnd_navExp_src
+	NaviguationExp[*] role navExp
+end
+
+composition xxx_ClassifierOperation_op between
+	ClassifierOperation[*] role xxx_ClassifierOperation_op_src
+	Operation[1] role op
+end
+
+composition xxx_ClassifierOperation_arguments between
+	ClassifierOperation[*] role xxx_ClassifierOperation_arguments_src
+	OclExpression[1] role arguments
+end
+
+association xxx_Operation_classOp between
+	Operation[0..1] role xxx_Operation_classOp_src
+	ClassifierOperation[*] role classOp
+end
+
+association xxx_OclExpression_propertyOperations between
+	OclExpression[0..1] role xxx_OclExpression_propertyOperations_src
+	PropertyOperation[*] role propertyOperations
+end
+
+association xxx_OclExpression_naviguationExps between
+	OclExpression[0..1] role xxx_OclExpression_naviguationExps_src
+	NaviguationExp[*] role naviguationExps
+end
+
+association xxx_OclExpression_classifierOperations between
+	OclExpression[0..1] role xxx_OclExpression_classifierOperations_src
+	ClassifierOperation[*] role classifierOperations
+end
+
+association xxx_OclExpression_oclOperations between
+	OclExpression[0..1] role xxx_OclExpression_oclOperations_src
+	OclOperation[*] role oclOperations
+end
+

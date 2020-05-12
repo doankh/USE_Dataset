@@ -1,0 +1,27 @@
+model PrimitiveTypes
+class Table
+attributes
+operations
+end
+
+class Row
+attributes
+operations
+end
+
+class Cell
+attributes
+	content : String
+operations
+end
+
+composition xxx_Table_rows between
+	Table[0..1] role xxx_Table_rows_src
+	Row[1..*] role rows
+end
+
+composition xxx_Row_cells between
+	Row[0..1] role xxx_Row_cells_src
+	Cell[1..*] role cells
+end
+

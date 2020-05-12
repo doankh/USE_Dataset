@@ -1,0 +1,325 @@
+model CompleteDSLPckg
+enum ArithmeticOperator{
+default
+}
+
+enum RelationalOperator{
+default
+}
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class IntegerLit<Literal
+attributes
+	value : String
+operations
+end
+
+class StringLit<Literal
+attributes
+	value : String
+operations
+end
+
+class BoolLit<Literal
+attributes
+	value : String
+operations
+end
+
+class ArithmeticExpression<Expression
+attributes
+	operator : ArithmeticOperator
+operations
+end
+
+class RelationalExpression<Expression
+attributes
+	operator : RelationalOperator
+operations
+end
+
+class VarRef<Expression
+attributes
+	ref : String
+operations
+end
+
+class Block
+attributes
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class Conditional<Statement
+attributes
+operations
+end
+
+class Loop<Statement
+attributes
+operations
+end
+
+class VarDecl<Statement
+attributes
+	name : String
+operations
+end
+
+class Assignation<Statement
+attributes
+operations
+end
+
+class ConsoleOutput<Statement
+attributes
+	input : String
+operations
+end
+
+class Println<ConsoleOutput
+attributes
+operations
+end
+
+class Print<ConsoleOutput
+attributes
+operations
+end
+
+class Wait<Statement
+attributes
+	miliseconds : String
+operations
+end
+
+class StateMachine<NamedElement
+attributes
+operations
+end
+
+class Region<NamedElement
+attributes
+operations
+end
+
+abstract class AbstractState<NamedElement
+attributes
+operations
+end
+
+class State<AbstractState
+attributes
+operations
+end
+
+class Transition<NamedElement
+attributes
+operations
+end
+
+class Trigger
+attributes
+	expression : String
+operations
+end
+
+abstract class Pseudostate<AbstractState
+attributes
+operations
+end
+
+class InitialState<Pseudostate
+attributes
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class NotTrigger<Trigger
+attributes
+operations
+end
+
+class AndTrigger<Trigger
+attributes
+operations
+end
+
+class OrTrigger<Trigger
+attributes
+operations
+end
+
+composition xxx_ArithmeticExpression_left between
+	ArithmeticExpression[*] role xxx_ArithmeticExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_ArithmeticExpression_right between
+	ArithmeticExpression[*] role xxx_ArithmeticExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_RelationalExpression_left between
+	RelationalExpression[*] role xxx_RelationalExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_RelationalExpression_right between
+	RelationalExpression[*] role xxx_RelationalExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Conditional_condition between
+	Conditional[*] role xxx_Conditional_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_Conditional_body between
+	Conditional[0..1] role xxx_Conditional_body_src
+	Statement[*] role body
+end
+
+composition xxx_Loop_guard between
+	Loop[*] role xxx_Loop_guard_src
+	Expression[1] role guard
+end
+
+composition xxx_Loop_body between
+	Loop[0..1] role xxx_Loop_body_src
+	Statement[*] role body
+end
+
+composition xxx_VarDecl_expr between
+	VarDecl[*] role xxx_VarDecl_expr_src
+	Expression[1] role expr
+end
+
+association xxx_Assignation_varRef between
+	Assignation[*] role xxx_Assignation_varRef_src
+	VarDecl[1] role varRef
+end
+
+composition xxx_Assignation_expression between
+	Assignation[*] role xxx_Assignation_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_StateMachine_regions between
+	StateMachine[0..1] role xxx_StateMachine_regions_src
+	Region[*] role regions
+end
+
+composition xxx_Region_subvertex between
+	Region[0..1] role xxx_Region_subvertex_src
+	AbstractState[*] role subvertex
+end
+
+composition xxx_Region_transitions_ between
+	Region[0..1] role xxx_Region_transitions__src
+	Transition[*] role transitions_
+end
+
+association xxx_Region_ownerStateMachine between
+	Region[*] role xxx_Region_ownerStateMachine_src
+	StateMachine[0..1] role ownerStateMachine
+end
+
+association xxx_AbstractState_incoming between
+	AbstractState[0..1] role xxx_AbstractState_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_AbstractState_outgoing between
+	AbstractState[0..1] role xxx_AbstractState_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_AbstractState_ownerRegion between
+	AbstractState[*] role xxx_AbstractState_ownerRegion_src
+	Region[1] role ownerRegion
+end
+
+composition xxx_State_entryAction between
+	State[*] role xxx_State_entryAction_src
+	Block[0..1] role entryAction
+end
+
+composition xxx_State_doAction between
+	State[*] role xxx_State_doAction_src
+	Block[0..1] role doAction
+end
+
+composition xxx_State_exitAction between
+	State[*] role xxx_State_exitAction_src
+	Block[0..1] role exitAction
+end
+
+composition xxx_Transition_trigger between
+	Transition[*] role xxx_Transition_trigger_src
+	Trigger[0..1] role trigger
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	AbstractState[1] role target
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	AbstractState[1] role source
+end
+
+composition xxx_NotTrigger_trigger between
+	NotTrigger[*] role xxx_NotTrigger_trigger_src
+	Trigger[1] role trigger
+end
+
+composition xxx_AndTrigger_left between
+	AndTrigger[*] role xxx_AndTrigger_left_src
+	Trigger[1] role left
+end
+
+composition xxx_AndTrigger_right between
+	AndTrigger[*] role xxx_AndTrigger_right_src
+	Trigger[1] role right
+end
+
+composition xxx_OrTrigger_left between
+	OrTrigger[*] role xxx_OrTrigger_left_src
+	Trigger[1] role left
+end
+
+composition xxx_OrTrigger_right between
+	OrTrigger[*] role xxx_OrTrigger_right_src
+	Trigger[1] role right
+end
+

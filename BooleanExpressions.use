@@ -1,0 +1,90 @@
+model booleanExpressions
+class Model
+attributes
+operations
+end
+
+class booleanExpression
+attributes
+operations
+end
+
+class booleanTerm
+attributes
+operations
+end
+
+class TimeConstraint<booleanTerm
+attributes
+	op : String
+	value : Integer
+operations
+end
+
+class BooleanVariable<booleanTerm
+attributes
+	variable : String
+operations
+end
+
+class VariableCondition<booleanTerm
+attributes
+	variable : String
+	relation : String
+	value : Integer
+operations
+end
+
+class Event
+attributes
+	eventName : String
+	eventExtension : String
+	nowEvent : Boolean
+operations
+end
+
+composition xxx_Model_expression between
+	Model[*] role xxx_Model_expression_src
+	booleanExpression[0..1] role expression
+end
+
+composition xxx_booleanExpression_notExpression between
+	booleanExpression[*] role xxx_booleanExpression_notExpression_src
+	booleanExpression[0..1] role notExpression
+end
+
+composition xxx_booleanExpression_orLeft between
+	booleanExpression[*] role xxx_booleanExpression_orLeft_src
+	booleanTerm[0..1] role orLeft
+end
+
+composition xxx_booleanExpression_orRight between
+	booleanExpression[*] role xxx_booleanExpression_orRight_src
+	booleanTerm[0..1] role orRight
+end
+
+composition xxx_booleanExpression_andLeft between
+	booleanExpression[*] role xxx_booleanExpression_andLeft_src
+	booleanTerm[0..1] role andLeft
+end
+
+composition xxx_booleanExpression_andRight between
+	booleanExpression[*] role xxx_booleanExpression_andRight_src
+	booleanTerm[0..1] role andRight
+end
+
+composition xxx_booleanExpression_booleanTerm between
+	booleanExpression[*] role xxx_booleanExpression_booleanTerm_src
+	booleanTerm[0..1] role booleanTerm
+end
+
+composition xxx_TimeConstraint_event2 between
+	TimeConstraint[*] role xxx_TimeConstraint_event2_src
+	Event[0..1] role event2
+end
+
+composition xxx_TimeConstraint_event1 between
+	TimeConstraint[*] role xxx_TimeConstraint_event1_src
+	Event[0..1] role event1
+end
+

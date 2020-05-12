@@ -1,0 +1,1310 @@
+model sbvr
+class Actuality<StateOfAffairs
+attributes
+operations
+end
+
+class StateOfAffairs<Thing
+attributes
+operations
+end
+
+class Thing
+attributes
+operations
+end
+
+class Name<Designation
+attributes
+operations
+end
+
+class Designation<Representation
+attributes
+	implicitlyIsUnderstood : Boolean
+operations
+	getSignifierText():String
+	setSignifierText(value : String)
+end
+
+class Representation<Actuality
+attributes
+operations
+end
+
+class Meaning<Thing
+attributes
+operations
+end
+
+class Expression<BindableTarget
+attributes
+operations
+end
+
+class BindableTarget<Thing
+attributes
+operations
+end
+
+class AdoptedDefinition<Definition
+attributes
+operations
+end
+
+class Definition<Representation
+attributes
+operations
+end
+
+class Advice<ElementOfGuidance
+attributes
+operations
+end
+
+class ElementOfGuidance<Proposition
+attributes
+	isPracticable : Boolean
+operations
+end
+
+class Proposition<Meaning
+attributes
+	isFalse : Boolean
+	isTrue : Boolean
+	isPossiblyTrue : Boolean
+	isObligatedToBeTrue : Boolean
+	isPermittedToBeTrue : Boolean
+	isNecessarilyTrue : Boolean
+operations
+end
+
+class Statement<Representation
+attributes
+operations
+end
+
+class AdviceOfContingency<AdviceOfPossibility
+attributes
+operations
+end
+
+class AdviceOfPossibility<Advice
+attributes
+operations
+end
+
+class AdviceOfOptionality<AdviceOfPermission
+attributes
+operations
+end
+
+class AdviceOfPermission<Advice
+attributes
+operations
+end
+
+class AdviceStatement<GuidanceStatement
+attributes
+operations
+end
+
+class GuidanceStatement<Statement
+attributes
+operations
+end
+
+class AggregationFormulation<ProjectingFormulation
+attributes
+operations
+end
+
+class ProjectingFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class LogicalFormulation<SemanticFormulation
+attributes
+operations
+end
+
+class SemanticFormulation<Thing
+attributes
+operations
+end
+
+class Projection<SemanticFormulation
+attributes
+operations
+end
+
+class Variable<BindableTarget
+attributes
+	isUnitary : Boolean
+operations
+end
+
+class PositiveInteger<NonnegativeInteger
+attributes
+operations
+end
+
+class NonnegativeInteger<Integer
+attributes
+operations
+end
+
+class Integer<Number
+attributes
+	value : String
+operations
+end
+
+class Number<Quantity
+attributes
+operations
+end
+
+class Quantity<NounConcept
+attributes
+operations
+end
+
+class NounConcept<Concept
+attributes
+operations
+end
+
+class Concept<Meaning
+attributes
+operations
+end
+
+class AttributiveNamespace<Namespace
+attributes
+operations
+end
+
+class Namespace<Thing
+attributes
+operations
+end
+
+class Uri<Text
+attributes
+operations
+end
+
+class Text<Expression
+attributes
+	value : String
+operations
+end
+
+class Characteristic<FactType
+attributes
+operations
+end
+
+class FactType<Concept
+attributes
+operations
+end
+
+class FactTypeForm<Representation
+attributes
+operations
+end
+
+class Placeholder<Designation
+attributes
+operations
+end
+
+class FactTypeRole<Role
+attributes
+operations
+end
+
+class Role<NounConcept
+attributes
+operations
+end
+
+class RoleBinding<Thing
+attributes
+operations
+end
+
+class ReferenceScheme<Thing
+attributes
+operations
+end
+
+class Set_<Thing
+attributes
+operations
+end
+
+class AuxiliaryVariable<Variable
+attributes
+operations
+end
+
+class AnswerNominalization<ProjectingFormulation
+attributes
+operations
+end
+
+class AssociativeFactType<FactType
+attributes
+operations
+end
+
+class AssortmentFactType<FactType
+attributes
+operations
+end
+
+class AtleastnQuantification<Quantification
+attributes
+operations
+end
+
+class Quantification<LogicalFormulation
+attributes
+operations
+end
+
+class AtmostnQuantification<Quantification
+attributes
+operations
+end
+
+class AtmostoneQuantification<AtmostnQuantification
+attributes
+operations
+end
+
+class AtomicFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class BagProjection<Projection
+attributes
+operations
+end
+
+class BinaryFactType<FactType
+attributes
+operations
+end
+
+class BinaryLogicalOperation<LogicalOperation
+attributes
+operations
+end
+
+class LogicalOperation<LogicalFormulation
+attributes
+operations
+end
+
+class BodyOfSharedConcepts<Thing
+attributes
+operations
+end
+
+class BodyOfSharedGuidance<Thing
+attributes
+operations
+end
+
+class BodyOfSharedMeanings<Set_
+attributes
+operations
+end
+
+class BusinessPolicy<ElementOfGovernance
+attributes
+operations
+end
+
+class ElementOfGovernance<ElementOfGuidance
+attributes
+	isDirectlyEnforceable : Boolean
+operations
+end
+
+class BusinessPolicyStatement<GuidanceStatement
+attributes
+operations
+end
+
+class BusinessRule<Rule
+attributes
+operations
+end
+
+class Rule<Proposition
+attributes
+operations
+end
+
+class BusinessVocabulary<Vocabulary
+attributes
+operations
+end
+
+class Vocabulary<Set_
+attributes
+operations
+end
+
+class CategorizationFactType<SpecializationFactType
+attributes
+operations
+end
+
+class SpecializationFactType<FactType
+attributes
+operations
+end
+
+class CategorizationScheme<Thing
+attributes
+operations
+end
+
+class CategorizationType<Concept
+attributes
+operations
+end
+
+class CharacteristicType<ConceptType
+attributes
+operations
+end
+
+class ConceptType<ObjectType
+attributes
+operations
+end
+
+class ObjectType<Concept
+attributes
+operations
+end
+
+class ClosedLogicalFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class ClosedSemanticFormulation<SemanticFormulation
+attributes
+operations
+end
+
+class ClosedProjection<Projection
+attributes
+operations
+end
+
+class CommunicationContent<Representation
+attributes
+operations
+end
+
+class Community<Thing
+attributes
+operations
+end
+
+class ConceptOfThingAsComposite<Concept
+attributes
+operations
+end
+
+class ConceptOfThingAsContinuant<Concept
+attributes
+operations
+end
+
+class ConceptOfThingAsDeveloped<Concept
+attributes
+operations
+end
+
+class ConceptOfThingAsOccurrent<Concept
+attributes
+operations
+end
+
+class ConceptOfThingAsPrimitive<Concept
+attributes
+operations
+end
+
+class ConceptOfThingAsUnitary<Concept
+attributes
+operations
+end
+
+class ConceptOfThingExistingDependently<Concept
+attributes
+operations
+end
+
+class ConceptOfThingExistingIndependently<Concept
+attributes
+operations
+end
+
+class ConceptualSchema<Thing
+attributes
+operations
+end
+
+class Conjunction<BinaryLogicalOperation
+attributes
+operations
+end
+
+class ContextOfThing<Segmentation
+attributes
+operations
+end
+
+class Segmentation<CategorizationScheme
+attributes
+operations
+end
+
+class ContextualizationFactType<SpecializationFactType
+attributes
+operations
+end
+
+class ContextualizedConcept<NounConcept
+attributes
+operations
+end
+
+class ContingencyStatement<StatementOfAdviceOfPossibility
+attributes
+operations
+end
+
+class StatementOfAdviceOfPossibility<AdviceStatement
+attributes
+operations
+end
+
+class DefiniteDescription<IntensionalDefinition
+attributes
+operations
+end
+
+class IntensionalDefinition<Definition
+attributes
+operations
+end
+
+class DerivableConcept<Concept
+attributes
+operations
+end
+
+class Description<Representation
+attributes
+operations
+end
+
+class DescriptiveExample<Representation
+attributes
+operations
+end
+
+class Disjunction<BinaryLogicalOperation
+attributes
+operations
+end
+
+class Equivalence<BinaryLogicalOperation
+attributes
+operations
+end
+
+class ExactlynQuantification<Quantification
+attributes
+operations
+end
+
+class ExactlyoneQuantification<ExactlynQuantification
+attributes
+operations
+end
+
+class ExclusiveDisjunction<BinaryLogicalOperation
+attributes
+operations
+end
+
+class ExistentialQuantification<AtleastnQuantification
+attributes
+operations
+end
+
+class ExplicitnessOfRepresentation<CategorizationScheme
+attributes
+operations
+end
+
+class ExtensionalDefinition<Definition
+attributes
+operations
+end
+
+class Facet<ContextualizedConcept
+attributes
+operations
+end
+
+class Fact<Proposition
+attributes
+operations
+end
+
+class FactModel<Thing
+attributes
+operations
+end
+
+class FactSymbol<Designation
+attributes
+operations
+end
+
+class FactTypeHasFactInFactModel
+attributes
+operations
+end
+
+class FactTypeNominalization<ProjectingFormulation
+attributes
+operations
+end
+
+class FactTypeRoleDesignation<Designation
+attributes
+operations
+end
+
+class FactTypeTemplating<CategorizationScheme
+attributes
+operations
+end
+
+class FormalRepresentation<Representation
+attributes
+operations
+end
+
+class FundamentalConcept<ObjectType
+attributes
+operations
+end
+
+class Icon<NonverbalDesignation
+attributes
+operations
+end
+
+class NonverbalDesignation<Designation
+attributes
+operations
+end
+
+class Implication<BinaryLogicalOperation
+attributes
+operations
+end
+
+class ImpossibilityStatement<StructuralRuleStatement
+attributes
+operations
+end
+
+class StructuralRuleStatement<RuleStatement
+attributes
+operations
+end
+
+class RuleStatement<GuidanceStatement
+attributes
+operations
+end
+
+class IndividualConcept<BindableTarget
+attributes
+operations
+end
+
+class InformalRepresentation<Representation
+attributes
+operations
+end
+
+class InstantiationFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class IsfacetofFactType<ContextualizationFactType
+attributes
+operations
+end
+
+class IspropertyofFactType<AssociativeFactType
+attributes
+operations
+end
+
+class IsroleofFactType<FactType
+attributes
+operations
+end
+
+class KindOfGuidanceStatement<CategorizationScheme
+attributes
+operations
+end
+
+class Language<Thing
+attributes
+operations
+end
+
+class LevelOfEnforcement<Thing
+attributes
+operations
+end
+
+class LogicalFormulationKind<ObjectType
+attributes
+operations
+end
+
+class LogicalNegation<LogicalOperation
+attributes
+operations
+end
+
+class ModalFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class NandFormulation<BinaryLogicalOperation
+attributes
+operations
+end
+
+class NecessityFormulation<ModalFormulation
+attributes
+operations
+end
+
+class NecessityStatement<StructuralRuleStatement
+attributes
+operations
+end
+
+class NonnecessityStatement<StatementOfAdviceOfPossibility
+attributes
+operations
+end
+
+class NonobligationStatement<StatementOfAdviceOfPermission
+attributes
+operations
+end
+
+class StatementOfAdviceOfPermission<AdviceStatement
+attributes
+operations
+end
+
+class NorFormulation<BinaryLogicalOperation
+attributes
+operations
+end
+
+class Note<Representation
+attributes
+operations
+end
+
+class NounConceptNominalization<ProjectingFormulation
+attributes
+operations
+end
+
+class NounForm<FactTypeForm
+attributes
+operations
+end
+
+class NumericRangeQuantification<Quantification
+attributes
+operations
+end
+
+class Objectification<LogicalFormulation
+attributes
+operations
+end
+
+class ObligationFormulation<ModalFormulation
+attributes
+operations
+end
+
+class ObligationStatement<OperativeBusinessRuleStatement
+attributes
+operations
+end
+
+class OperativeBusinessRuleStatement<RuleStatement
+attributes
+operations
+end
+
+class OperativeBusinessRule<BusinessRule
+attributes
+operations
+end
+
+class OptionalityStatement<StatementOfAdviceOfPermission
+attributes
+operations
+end
+
+class OwnedDefinition<Definition
+attributes
+operations
+end
+
+class PartitiveFactType<BinaryFactType
+attributes
+operations
+end
+
+class PermissibilityFormulation<ModalFormulation
+attributes
+operations
+end
+
+class PermissionStatement<StatementOfAdviceOfPermission
+attributes
+operations
+end
+
+class PossibilityFormulation<ModalFormulation
+attributes
+operations
+end
+
+class PossibilityStatement<StatementOfAdviceOfPossibility
+attributes
+operations
+end
+
+class PreferredDesignation<Designation
+attributes
+operations
+end
+
+class ProhibitedDesignation<Designation
+attributes
+operations
+end
+
+class ProhibitionStatement<OperativeBusinessRuleStatement
+attributes
+operations
+end
+
+class PropositionNominalization<LogicalFormulation
+attributes
+operations
+end
+
+class Question<Meaning
+attributes
+operations
+end
+
+class QuestionNominalization<ProjectingFormulation
+attributes
+operations
+end
+
+class RealworldNumericalCorrespondence<CategorizationScheme
+attributes
+operations
+end
+
+class Reference<Representation
+attributes
+operations
+end
+
+class RepresentationFormality<Segmentation
+attributes
+operations
+end
+
+class Res<Thing
+attributes
+operations
+end
+
+class RestrictedPermissionStatement<OperativeBusinessRuleStatement
+attributes
+operations
+end
+
+class RestrictedPossibilityStatement<StructuralRuleStatement
+attributes
+operations
+end
+
+class Rulebook<Set_
+attributes
+operations
+end
+
+class SemanticCommunity<Community
+attributes
+operations
+end
+
+class SpeechCommunity<Community
+attributes
+operations
+end
+
+class SententialForm<FactTypeForm
+attributes
+operations
+end
+
+class SetProjection<Projection
+attributes
+operations
+end
+
+class Situation<Thing
+attributes
+operations
+end
+
+class SituationalRole<Role
+attributes
+operations
+end
+
+class SpeechCommunityAdoptsAdoptedDefinitionCitingReference
+attributes
+operations
+end
+
+class StateOfAffairsInvolvesThingInRole
+attributes
+operations
+end
+
+class StructuralBusinessRule<StructuralRule
+attributes
+operations
+end
+
+class StructuralRule<Rule
+attributes
+operations
+end
+
+class SubjectField<Thing
+attributes
+operations
+end
+
+class Term<Designation
+attributes
+operations
+end
+
+class TerminologicalDictionary<Thing
+attributes
+operations
+end
+
+class ThingInContext<Segmentation
+attributes
+operations
+end
+
+class UniversalQuantification<Quantification
+attributes
+operations
+end
+
+class Viewpoint<Thing
+attributes
+operations
+end
+
+class VocabularyNamespace<Namespace
+attributes
+operations
+end
+
+class WhetherornotFormulation<BinaryLogicalOperation
+attributes
+operations
+end
+
+association xxx_Thing_name between
+	Thing[0..1] role xxx_Thing_name_src
+	Name[*] role name
+end
+
+association xxx_Designation_signifier between
+	Designation[*] role xxx_Designation_signifier_src
+	Expression[1] role signifier
+end
+
+association xxx_Representation_meaning between
+	Representation[*] role xxx_Representation_meaning_src
+	Meaning[1] role meaning
+end
+
+association xxx_Representation_expression between
+	Representation[*] role xxx_Representation_expression_src
+	Expression[1] role expression
+end
+
+association xxx_Meaning_representation between
+	Meaning[0..1] role xxx_Meaning_representation_src
+	Representation[*] role representation
+end
+
+association xxx_Proposition_statement between
+	Proposition[0..1] role xxx_Proposition_statement_src
+	Statement[*] role statement
+end
+
+association xxx_ProjectingFormulation_projection between
+	ProjectingFormulation[*] role xxx_ProjectingFormulation_projection_src
+	Projection[1] role projection
+end
+
+association xxx_Projection_constrainingFormulation between
+	Projection[*] role xxx_Projection_constrainingFormulation_src
+	LogicalFormulation[0..1] role constrainingFormulation
+end
+
+association xxx_Projection_projectionVariable between
+	Projection[0..1] role xxx_Projection_projectionVariable_src
+	Variable[1..*] role projectionVariable
+end
+
+association xxx_Projection_auxiliaryVariable between
+	Projection[0..1] role xxx_Projection_auxiliaryVariable_src
+	AuxiliaryVariable[*] role auxiliaryVariable
+end
+
+association xxx_Variable_restrictingFormulation between
+	Variable[*] role xxx_Variable_restrictingFormulation_src
+	LogicalFormulation[0..1] role restrictingFormulation
+end
+
+association xxx_Variable_projectionPosition between
+	Variable[*] role xxx_Variable_projectionPosition_src
+	PositiveInteger[0..1] role projectionPosition
+end
+
+association xxx_Variable_rangedoverConcept between
+	Variable[*] role xxx_Variable_rangedoverConcept_src
+	Concept[0..1] role rangedoverConcept
+end
+
+association xxx_Concept_attributiveNamespace between
+	Concept[0..1] role xxx_Concept_attributiveNamespace_src
+	AttributiveNamespace[*] role attributiveNamespace
+end
+
+association xxx_Concept_definition between
+	Concept[0..1] role xxx_Concept_definition_src
+	Definition[*] role definition
+end
+
+association xxx_Concept_moreGeneralConcept between
+	Concept[0..1] role xxx_Concept_moreGeneralConcept_src
+	Concept[*] role moreGeneralConcept
+end
+
+association xxx_Concept_category between
+	Concept[0..1] role xxx_Concept_category_src
+	Concept[*] role category
+end
+
+association xxx_Concept_essentialCharacteristic between
+	Concept[0..1] role xxx_Concept_essentialCharacteristic_src
+	Characteristic[*] role essentialCharacteristic
+end
+
+association xxx_Concept_instance between
+	Concept[0..1] role xxx_Concept_instance_src
+	Thing[*] role instance
+end
+
+association xxx_Concept_referenceScheme between
+	Concept[0..1] role xxx_Concept_referenceScheme_src
+	ReferenceScheme[*] role referenceScheme
+end
+
+association xxx_Concept_impliedCharacteristic between
+	Concept[0..1] role xxx_Concept_impliedCharacteristic_src
+	Characteristic[*] role impliedCharacteristic
+end
+
+association xxx_Concept_necessaryCharacteristic between
+	Concept[0..1] role xxx_Concept_necessaryCharacteristic_src
+	Characteristic[*] role necessaryCharacteristic
+end
+
+association xxx_Concept_designation between
+	Concept[0..1] role xxx_Concept_designation_src
+	Designation[*] role designation
+end
+
+association xxx_Concept_extension between
+	Concept[*] role xxx_Concept_extension_src
+	Set_[1] role extension
+end
+
+association xxx_Namespace_uri between
+	Namespace[0..1] role xxx_Namespace_uri_src
+	Uri[*] role uri
+end
+
+association xxx_FactType_factTypeForm between
+	FactType[0..1] role xxx_FactType_factTypeForm_src
+	FactTypeForm[*] role factTypeForm
+end
+
+association xxx_FactType_role between
+	FactType[0..1] role xxx_FactType_role_src
+	FactTypeRole[1..*] role role
+end
+
+association xxx_FactTypeForm_placeholder between
+	FactTypeForm[0..1] role xxx_FactTypeForm_placeholder_src
+	Placeholder[1..*] role placeholder
+end
+
+association xxx_Placeholder_startingCharacterPosition between
+	Placeholder[*] role xxx_Placeholder_startingCharacterPosition_src
+	PositiveInteger[0..1] role startingCharacterPosition
+end
+
+association xxx_FactTypeRole_roleBinding between
+	FactTypeRole[0..1] role xxx_FactTypeRole_roleBinding_src
+	RoleBinding[*] role roleBinding
+end
+
+association xxx_ReferenceScheme_simplyUsedRole between
+	ReferenceScheme[0..1] role xxx_ReferenceScheme_simplyUsedRole_src
+	FactTypeRole[*] role simplyUsedRole
+end
+
+association xxx_ReferenceScheme_identifyingCharacteristic between
+	ReferenceScheme[0..1] role xxx_ReferenceScheme_identifyingCharacteristic_src
+	Characteristic[*] role identifyingCharacteristic
+end
+
+association xxx_ReferenceScheme_extensionallyUsedRole between
+	ReferenceScheme[0..1] role xxx_ReferenceScheme_extensionallyUsedRole_src
+	FactTypeRole[*] role extensionallyUsedRole
+end
+
+association xxx_Set_cardinality between
+	Set_[*] role xxx_Set_cardinality_src
+	NonnegativeInteger[0..1] role cardinality
+end
+
+association xxx_Set_element between
+	Set_[0..1] role xxx_Set_element_src
+	Thing[*] role element
+end
+
+association xxx_AtleastnQuantification_minimumCardinality between
+	AtleastnQuantification[*] role xxx_AtleastnQuantification_minimumCardinality_src
+	NonnegativeInteger[1] role minimumCardinality
+end
+
+association xxx_Quantification_scopeFormulation between
+	Quantification[*] role xxx_Quantification_scopeFormulation_src
+	LogicalFormulation[0..1] role scopeFormulation
+end
+
+association xxx_AtmostnQuantification_maximumCardinality between
+	AtmostnQuantification[*] role xxx_AtmostnQuantification_maximumCardinality_src
+	NonnegativeInteger[1] role maximumCardinality
+end
+
+association xxx_AtomicFormulation_roleBinding between
+	AtomicFormulation[0..1] role xxx_AtomicFormulation_roleBinding_src
+	RoleBinding[*] role roleBinding
+end
+
+association xxx_BinaryLogicalOperation_logicalOperand2 between
+	BinaryLogicalOperation[0..1] role xxx_BinaryLogicalOperation_logicalOperand2_src
+	LogicalFormulation[*] role logicalOperand2
+end
+
+association xxx_BinaryLogicalOperation_logicalOperand1 between
+	BinaryLogicalOperation[0..1] role xxx_BinaryLogicalOperation_logicalOperand1_src
+	LogicalFormulation[*] role logicalOperand1
+end
+
+association xxx_LogicalOperation_logicalOperand between
+	LogicalOperation[*] role xxx_LogicalOperation_logicalOperand_src
+	LogicalFormulation[1] role logicalOperand
+end
+
+association xxx_BodyOfSharedMeanings_elementaryFactType between
+	BodyOfSharedMeanings[0..1] role xxx_BodyOfSharedMeanings_elementaryFactType_src
+	FactType[*] role elementaryFactType
+end
+
+association xxx_ObjectType_categorizationScheme between
+	ObjectType[0..1] role xxx_ObjectType_categorizationScheme_src
+	CategorizationScheme[*] role categorizationScheme
+end
+
+association xxx_ObjectType_categorizationType between
+	ObjectType[0..1] role xxx_ObjectType_categorizationType_src
+	CategorizationType[*] role categorizationType
+end
+
+association xxx_Community_uri between
+	Community[0..1] role xxx_Community_uri_src
+	Uri[*] role uri
+end
+
+association xxx_Community_subcommunity between
+	Community[0..1] role xxx_Community_subcommunity_src
+	Community[*] role subcommunity
+end
+
+association xxx_ExactlynQuantification_cardinality between
+	ExactlynQuantification[*] role xxx_ExactlynQuantification_cardinality_src
+	NonnegativeInteger[1] role cardinality
+end
+
+association xxx_FactTypeHasFactInFactModel_factType between
+	FactTypeHasFactInFactModel[*] role xxx_FactTypeHasFactInFactModel_factType_src
+	FactType[1] role factType
+end
+
+association xxx_FactTypeHasFactInFactModel_fact between
+	FactTypeHasFactInFactModel[*] role xxx_FactTypeHasFactInFactModel_fact_src
+	Fact[1] role fact
+end
+
+association xxx_FactTypeHasFactInFactModel_factModel between
+	FactTypeHasFactInFactModel[*] role xxx_FactTypeHasFactInFactModel_factModel_src
+	FactModel[1] role factModel
+end
+
+association xxx_Implication_consequent between
+	Implication[0..1] role xxx_Implication_consequent_src
+	LogicalFormulation[*] role consequent
+end
+
+association xxx_Implication_antecedent between
+	Implication[0..1] role xxx_Implication_antecedent_src
+	LogicalFormulation[*] role antecedent
+end
+
+association xxx_NumericRangeQuantification_maximumCardinality between
+	NumericRangeQuantification[*] role xxx_NumericRangeQuantification_maximumCardinality_src
+	NonnegativeInteger[1] role maximumCardinality
+end
+
+association xxx_NumericRangeQuantification_minimumCardinality between
+	NumericRangeQuantification[*] role xxx_NumericRangeQuantification_minimumCardinality_src
+	NonnegativeInteger[1] role minimumCardinality
+end
+
+association xxx_OperativeBusinessRule_levelOfEnforcement between
+	OperativeBusinessRule[0..1] role xxx_OperativeBusinessRule_levelOfEnforcement_src
+	LevelOfEnforcement[*] role levelOfEnforcement
+end
+
+association xxx_SemanticCommunity_speechCommunity between
+	SemanticCommunity[0..1] role xxx_SemanticCommunity_speechCommunity_src
+	SpeechCommunity[*] role speechCommunity
+end
+
+association xxx_SpeechCommunityAdoptsAdoptedDefinitionCitingReference_speechCommunity between
+	SpeechCommunityAdoptsAdoptedDefinitionCitingReference[*] role xxx_SpeechCommunityAdoptsAdoptedDefinitionCitingReference_speechCommunity_src
+	SpeechCommunity[1] role speechCommunity
+end
+
+association xxx_SpeechCommunityAdoptsAdoptedDefinitionCitingReference_adoptedDefinition between
+	SpeechCommunityAdoptsAdoptedDefinitionCitingReference[*] role xxx_SpeechCommunityAdoptsAdoptedDefinitionCitingReference_adoptedDefinition_src
+	AdoptedDefinition[1] role adoptedDefinition
+end
+
+association xxx_SpeechCommunityAdoptsAdoptedDefinitionCitingReference_reference between
+	SpeechCommunityAdoptsAdoptedDefinitionCitingReference[*] role xxx_SpeechCommunityAdoptsAdoptedDefinitionCitingReference_reference_src
+	Reference[1] role reference
+end
+
+association xxx_StateOfAffairsInvolvesThingInRole_stateOfAffairs between
+	StateOfAffairsInvolvesThingInRole[*] role xxx_StateOfAffairsInvolvesThingInRole_stateOfAffairs_src
+	StateOfAffairs[1] role stateOfAffairs
+end
+
+association xxx_StateOfAffairsInvolvesThingInRole_thing between
+	StateOfAffairsInvolvesThingInRole[*] role xxx_StateOfAffairsInvolvesThingInRole_thing_src
+	Thing[1] role thing
+end
+
+association xxx_StateOfAffairsInvolvesThingInRole_role between
+	StateOfAffairsInvolvesThingInRole[*] role xxx_StateOfAffairsInvolvesThingInRole_role_src
+	Role[1] role role
+end
+
+composition xxx_TerminologicalDictionary_uri between
+	TerminologicalDictionary[0..1] role xxx_TerminologicalDictionary_uri_src
+	Uri[*] role uri
+end
+
+association xxx_WhetherornotFormulation_inconsequent between
+	WhetherornotFormulation[0..1] role xxx_WhetherornotFormulation_inconsequent_src
+	LogicalFormulation[*] role inconsequent
+end
+
+association xxx_WhetherornotFormulation_consequent between
+	WhetherornotFormulation[0..1] role xxx_WhetherornotFormulation_consequent_src
+	LogicalFormulation[*] role consequent
+end
+

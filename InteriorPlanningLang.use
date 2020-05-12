@@ -1,0 +1,194 @@
+model interiorPlanningLang
+enum PlacementEnum{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class Room
+attributes
+	name : String
+	width : Real
+	depth : Real
+	height : Real
+operations
+end
+
+class Wall
+attributes
+operations
+end
+
+class Hole
+attributes
+	distance : Real
+	width : Real
+	low : Real
+	height : Real
+operations
+end
+
+class Point2D
+attributes
+	width : Real
+	depth : Real
+operations
+end
+
+class Object
+attributes
+	name : String
+operations
+end
+
+class SimpleObject<Object
+attributes
+	width : Real
+	depth : Real
+	height : Real
+operations
+end
+
+class ComposedObject<Object
+attributes
+operations
+end
+
+class SubObjectInstance
+attributes
+operations
+end
+
+class Instance
+attributes
+	name : String
+operations
+end
+
+class Location3D
+attributes
+	width : Real
+	depth : Real
+	height : Real
+	rotate : Real
+operations
+end
+
+class Location2D
+attributes
+	width : Real
+	depth : Real
+	rotate : Real
+operations
+end
+
+class Placement
+attributes
+	place : PlacementEnum
+	rotate : Real
+operations
+end
+
+class Option
+attributes
+operations
+end
+
+class ColorOption<Option
+attributes
+	colorName : String
+	red : Real
+	green : Real
+	blue : Real
+operations
+end
+
+class TextureOption<Option
+attributes
+	texture : String
+operations
+end
+
+composition xxx_Model_objects between
+	Model[0..1] role xxx_Model_objects_src
+	Object[*] role objects
+end
+
+composition xxx_Model_rooms between
+	Model[0..1] role xxx_Model_rooms_src
+	Room[*] role rooms
+end
+
+composition xxx_Room_walls between
+	Room[0..1] role xxx_Room_walls_src
+	Wall[*] role walls
+end
+
+composition xxx_Wall_start between
+	Wall[*] role xxx_Wall_start_src
+	Point2D[0..1] role start
+end
+
+composition xxx_Wall_end_ between
+	Wall[*] role xxx_Wall_end__src
+	Point2D[0..1] role end_
+end
+
+composition xxx_Wall_holes between
+	Wall[0..1] role xxx_Wall_holes_src
+	Hole[*] role holes
+end
+
+composition xxx_Wall_instances between
+	Wall[0..1] role xxx_Wall_instances_src
+	Instance[*] role instances
+end
+
+composition xxx_SimpleObject_options between
+	SimpleObject[0..1] role xxx_SimpleObject_options_src
+	Option[*] role options
+end
+
+composition xxx_ComposedObject_objectInstances between
+	ComposedObject[0..1] role xxx_ComposedObject_objectInstances_src
+	SubObjectInstance[*] role objectInstances
+end
+
+association xxx_SubObjectInstance_object between
+	SubObjectInstance[*] role xxx_SubObjectInstance_object_src
+	Object[0..1] role object
+end
+
+composition xxx_SubObjectInstance_location between
+	SubObjectInstance[*] role xxx_SubObjectInstance_location_src
+	Location3D[0..1] role location
+end
+
+composition xxx_SubObjectInstance_placement between
+	SubObjectInstance[*] role xxx_SubObjectInstance_placement_src
+	Placement[0..1] role placement
+end
+
+association xxx_Instance_object between
+	Instance[*] role xxx_Instance_object_src
+	Object[0..1] role object
+end
+
+composition xxx_Instance_location between
+	Instance[*] role xxx_Instance_location_src
+	Location2D[0..1] role location
+end
+
+composition xxx_Instance_placement between
+	Instance[*] role xxx_Instance_placement_src
+	Placement[0..1] role placement
+end
+
+association xxx_Placement_object between
+	Placement[*] role xxx_Placement_object_src
+	Instance[0..1] role object
+end
+

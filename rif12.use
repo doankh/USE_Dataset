@@ -1,0 +1,539 @@
+model rif12
+enum AccessPolicyAccessModeEnum{
+default
+}
+
+enum DatatypeDefinitionDateFormatEnum{
+default
+}
+
+class SpecHierarchyRoot<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+abstract class SpecElementWithUserDefinedAttributes<Identifiable
+attributes
+operations
+end
+
+abstract class Identifiable
+attributes
+	desc : String
+	identifier : String
+	lastChange : String
+	longName : String
+operations
+end
+
+class SpecType<Identifiable
+attributes
+operations
+end
+
+abstract class AttributeDefinition<Identifiable
+attributes
+operations
+end
+
+abstract class AttributeValue<Identifiable
+attributes
+operations
+end
+
+class SpecHierarchy<Identifiable
+attributes
+operations
+end
+
+class SpecObject<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+class SpecGroup<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+class RelationGroup<Identifiable
+attributes
+operations
+end
+
+class SpecRelation<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+abstract class DatatypeDefinition<Identifiable
+attributes
+operations
+end
+
+class AccessPolicy<Identifiable
+attributes
+	accessMode : AccessPolicyAccessModeEnum
+operations
+end
+
+class SpecGroupHierarchyRoot<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+class SpecGroupHierarchy<Identifiable
+attributes
+operations
+end
+
+class AttributeDefinitionComplex<AttributeDefinition
+attributes
+operations
+end
+
+abstract class DatatypeDefinitionComplex<DatatypeDefinition
+attributes
+	embedded : String
+operations
+end
+
+abstract class AttributeValueComplex<AttributeValue
+attributes
+operations
+end
+
+class AttributeDefinitionEnumeration<AttributeDefinition
+attributes
+	multiValued : String
+operations
+end
+
+class DatatypeDefinitionEnumeration<DatatypeDefinition
+attributes
+operations
+end
+
+class EnumValue<Identifiable
+attributes
+operations
+end
+
+class EmbeddedValue
+attributes
+	key : String
+	otherContent : String
+operations
+end
+
+class AttributeValueEnumeration<AttributeValue
+attributes
+operations
+end
+
+class AttributeDefinitionSimple<AttributeDefinition
+attributes
+operations
+end
+
+abstract class DatatypeDefinitionSimple<DatatypeDefinition
+attributes
+operations
+end
+
+class AttributeValueSimple<AttributeValue
+attributes
+	theValue : String
+operations
+end
+
+class AttributeValueEmbeddedDocument<AttributeValueComplex
+attributes
+operations
+end
+
+class AttributeValueEmbeddedFile<AttributeValueComplex
+attributes
+operations
+end
+
+class AttributeValueFileReference<AttributeValueComplex
+attributes
+	pathToFile : String
+operations
+end
+
+class AttributeValueXmlData<AttributeValueComplex
+attributes
+operations
+end
+
+class DatatypeDefinitionBinaryFile<DatatypeDefinitionComplex
+attributes
+	application : String
+	filenameSuffix : String
+	formatName : String
+	mimeType : String
+operations
+end
+
+class DatatypeDefinitionBoolean<DatatypeDefinitionSimple
+attributes
+operations
+end
+
+class DatatypeDefinitionDate<DatatypeDefinitionSimple
+attributes
+	format : DatatypeDefinitionDateFormatEnum
+operations
+end
+
+class DatatypeDefinitionDocument<DatatypeDefinitionComplex
+attributes
+operations
+end
+
+class DatatypeDefinitionInteger<DatatypeDefinitionSimple
+attributes
+	max : String
+	min : String
+operations
+end
+
+class DatatypeDefinitionReal<DatatypeDefinitionSimple
+attributes
+	accuracy : String
+	max : String
+	min : String
+operations
+end
+
+class DatatypeDefinitionString<DatatypeDefinitionSimple
+attributes
+	maxLength : String
+operations
+end
+
+class DatatypeDefinitionXmlData<DatatypeDefinitionComplex
+attributes
+	nameSpaceURI : String
+	schemaLocation : String
+operations
+end
+
+class RIF
+attributes
+operations
+end
+
+class RIFHeader
+attributes
+	author : String
+	comment : String
+	creationTime : String
+	identifier : String
+	sourceToolId : String
+	title : String
+operations
+end
+
+class RIFContent
+attributes
+operations
+end
+
+class RIFToolExtension
+attributes
+operations
+end
+
+class BinaryContent
+attributes
+operations
+end
+
+class XhtmlContent
+attributes
+operations
+end
+
+class XmlContent
+attributes
+operations
+end
+
+composition xxx_SpecHierarchyRoot_children between
+	SpecHierarchyRoot[0..1] role xxx_SpecHierarchyRoot_children_src
+	SpecHierarchy[*] role children
+end
+
+association xxx_SpecElementWithUserDefinedAttributes_type between
+	SpecElementWithUserDefinedAttributes[*] role xxx_SpecElementWithUserDefinedAttributes_type_src
+	SpecType[1] role type
+end
+
+composition xxx_SpecElementWithUserDefinedAttributes_values between
+	SpecElementWithUserDefinedAttributes[0..1] role xxx_SpecElementWithUserDefinedAttributes_values_src
+	AttributeValue[*] role values
+end
+
+composition xxx_SpecType_specAttributes between
+	SpecType[0..1] role xxx_SpecType_specAttributes_src
+	AttributeDefinition[*] role specAttributes
+end
+
+association xxx_SpecHierarchy_object between
+	SpecHierarchy[*] role xxx_SpecHierarchy_object_src
+	SpecObject[1] role object
+end
+
+association xxx_SpecHierarchy_values between
+	SpecHierarchy[0..1] role xxx_SpecHierarchy_values_src
+	AttributeValue[*] role values
+end
+
+composition xxx_SpecHierarchy_children between
+	SpecHierarchy[0..1] role xxx_SpecHierarchy_children_src
+	SpecHierarchy[*] role children
+end
+
+association xxx_SpecGroup_specObjects between
+	SpecGroup[0..1] role xxx_SpecGroup_specObjects_src
+	SpecObject[*] role specObjects
+end
+
+composition xxx_SpecGroup_relationGroups between
+	SpecGroup[0..1] role xxx_SpecGroup_relationGroups_src
+	RelationGroup[*] role relationGroups
+end
+
+association xxx_RelationGroup_specRelations between
+	RelationGroup[0..1] role xxx_RelationGroup_specRelations_src
+	SpecRelation[*] role specRelations
+end
+
+association xxx_RelationGroup_relationType between
+	RelationGroup[*] role xxx_RelationGroup_relationType_src
+	SpecType[0..1] role relationType
+end
+
+association xxx_SpecRelation_target between
+	SpecRelation[*] role xxx_SpecRelation_target_src
+	SpecObject[1] role target
+end
+
+association xxx_SpecRelation_source between
+	SpecRelation[*] role xxx_SpecRelation_source_src
+	SpecObject[1] role source
+end
+
+association xxx_AccessPolicy_specGroupHierarchyRoots between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specGroupHierarchyRoots_src
+	SpecGroupHierarchyRoot[*] role specGroupHierarchyRoots
+end
+
+association xxx_AccessPolicy_specGroups between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specGroups_src
+	SpecGroup[*] role specGroups
+end
+
+association xxx_AccessPolicy_attributeDefinitions between
+	AccessPolicy[0..1] role xxx_AccessPolicy_attributeDefinitions_src
+	AttributeDefinition[*] role attributeDefinitions
+end
+
+association xxx_AccessPolicy_relationGroups between
+	AccessPolicy[0..1] role xxx_AccessPolicy_relationGroups_src
+	RelationGroup[*] role relationGroups
+end
+
+association xxx_AccessPolicy_datatypeDefinitions between
+	AccessPolicy[0..1] role xxx_AccessPolicy_datatypeDefinitions_src
+	DatatypeDefinition[*] role datatypeDefinitions
+end
+
+association xxx_AccessPolicy_specRelations between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specRelations_src
+	SpecRelation[*] role specRelations
+end
+
+association xxx_AccessPolicy_attributeValues between
+	AccessPolicy[0..1] role xxx_AccessPolicy_attributeValues_src
+	AttributeValue[*] role attributeValues
+end
+
+association xxx_AccessPolicy_specTypes between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specTypes_src
+	SpecType[*] role specTypes
+end
+
+association xxx_AccessPolicy_specHierarchies between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specHierarchies_src
+	SpecHierarchy[*] role specHierarchies
+end
+
+association xxx_AccessPolicy_specObjects between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specObjects_src
+	SpecObject[*] role specObjects
+end
+
+association xxx_AccessPolicy_specHierarchyRoots between
+	AccessPolicy[0..1] role xxx_AccessPolicy_specHierarchyRoots_src
+	SpecHierarchyRoot[*] role specHierarchyRoots
+end
+
+composition xxx_SpecGroupHierarchyRoot_children between
+	SpecGroupHierarchyRoot[0..1] role xxx_SpecGroupHierarchyRoot_children_src
+	SpecGroupHierarchy[*] role children
+end
+
+association xxx_SpecGroupHierarchy_group between
+	SpecGroupHierarchy[*] role xxx_SpecGroupHierarchy_group_src
+	SpecGroup[1] role group
+end
+
+association xxx_AttributeDefinitionComplex_type between
+	AttributeDefinitionComplex[*] role xxx_AttributeDefinitionComplex_type_src
+	DatatypeDefinitionComplex[1] role type
+end
+
+composition xxx_AttributeDefinitionComplex_defaultValue between
+	AttributeDefinitionComplex[*] role xxx_AttributeDefinitionComplex_defaultValue_src
+	AttributeValueComplex[0..1] role defaultValue
+end
+
+association xxx_AttributeDefinitionEnumeration_type between
+	AttributeDefinitionEnumeration[*] role xxx_AttributeDefinitionEnumeration_type_src
+	DatatypeDefinitionEnumeration[1] role type
+end
+
+composition xxx_AttributeDefinitionEnumeration_defaultValue between
+	AttributeDefinitionEnumeration[*] role xxx_AttributeDefinitionEnumeration_defaultValue_src
+	AttributeValueEnumeration[0..1] role defaultValue
+end
+
+composition xxx_DatatypeDefinitionEnumeration_specifiedValues between
+	DatatypeDefinitionEnumeration[0..1] role xxx_DatatypeDefinitionEnumeration_specifiedValues_src
+	EnumValue[*] role specifiedValues
+end
+
+composition xxx_EnumValue_properties between
+	EnumValue[*] role xxx_EnumValue_properties_src
+	EmbeddedValue[1] role properties
+end
+
+association xxx_AttributeValueEnumeration_values between
+	AttributeValueEnumeration[0..1] role xxx_AttributeValueEnumeration_values_src
+	EnumValue[*] role values
+end
+
+association xxx_AttributeValueEnumeration_definition between
+	AttributeValueEnumeration[*] role xxx_AttributeValueEnumeration_definition_src
+	AttributeDefinitionEnumeration[1] role definition
+end
+
+association xxx_AttributeDefinitionSimple_type between
+	AttributeDefinitionSimple[*] role xxx_AttributeDefinitionSimple_type_src
+	DatatypeDefinitionSimple[1] role type
+end
+
+composition xxx_AttributeDefinitionSimple_defaultValue between
+	AttributeDefinitionSimple[*] role xxx_AttributeDefinitionSimple_defaultValue_src
+	AttributeValueSimple[0..1] role defaultValue
+end
+
+association xxx_AttributeValueSimple_definition between
+	AttributeValueSimple[*] role xxx_AttributeValueSimple_definition_src
+	AttributeDefinitionSimple[1] role definition
+end
+
+association xxx_AttributeValueEmbeddedDocument_definition between
+	AttributeValueEmbeddedDocument[*] role xxx_AttributeValueEmbeddedDocument_definition_src
+	AttributeDefinitionComplex[1] role definition
+end
+
+composition xxx_AttributeValueEmbeddedDocument_xhtmlContent between
+	AttributeValueEmbeddedDocument[*] role xxx_AttributeValueEmbeddedDocument_xhtmlContent_src
+	XhtmlContent[1] role xhtmlContent
+end
+
+association xxx_AttributeValueEmbeddedFile_definition between
+	AttributeValueEmbeddedFile[*] role xxx_AttributeValueEmbeddedFile_definition_src
+	AttributeDefinitionComplex[1] role definition
+end
+
+composition xxx_AttributeValueEmbeddedFile_binaryContent between
+	AttributeValueEmbeddedFile[*] role xxx_AttributeValueEmbeddedFile_binaryContent_src
+	BinaryContent[1] role binaryContent
+end
+
+association xxx_AttributeValueFileReference_definition between
+	AttributeValueFileReference[*] role xxx_AttributeValueFileReference_definition_src
+	AttributeDefinitionComplex[1] role definition
+end
+
+association xxx_AttributeValueXmlData_definition between
+	AttributeValueXmlData[*] role xxx_AttributeValueXmlData_definition_src
+	AttributeDefinitionComplex[1] role definition
+end
+
+composition xxx_AttributeValueXmlData_xmlContent between
+	AttributeValueXmlData[*] role xxx_AttributeValueXmlData_xmlContent_src
+	XmlContent[1] role xmlContent
+end
+
+composition xxx_RIF_header between
+	RIF[*] role xxx_RIF_header_src
+	RIFHeader[1] role header
+end
+
+composition xxx_RIF_coreContent between
+	RIF[*] role xxx_RIF_coreContent_src
+	RIFContent[1] role coreContent
+end
+
+composition xxx_RIF_toolExtensions between
+	RIF[*] role xxx_RIF_toolExtensions_src
+	RIFToolExtension[1] role toolExtensions
+end
+
+composition xxx_RIFContent_accessPolicies between
+	RIFContent[0..1] role xxx_RIFContent_accessPolicies_src
+	AccessPolicy[*] role accessPolicies
+end
+
+composition xxx_RIFContent_datatypes between
+	RIFContent[0..1] role xxx_RIFContent_datatypes_src
+	DatatypeDefinition[*] role datatypes
+end
+
+composition xxx_RIFContent_SpecHierarchyRoots between
+	RIFContent[0..1] role xxx_RIFContent_SpecHierarchyRoots_src
+	SpecHierarchyRoot[*] role SpecHierarchyRoots
+end
+
+composition xxx_RIFContent_specObjects between
+	RIFContent[0..1] role xxx_RIFContent_specObjects_src
+	SpecObject[*] role specObjects
+end
+
+composition xxx_RIFContent_specGroups between
+	RIFContent[0..1] role xxx_RIFContent_specGroups_src
+	SpecGroup[*] role specGroups
+end
+
+composition xxx_RIFContent_SpecGroupHierarchyRoots between
+	RIFContent[0..1] role xxx_RIFContent_SpecGroupHierarchyRoots_src
+	SpecGroupHierarchyRoot[*] role SpecGroupHierarchyRoots
+end
+
+composition xxx_RIFContent_specTypes between
+	RIFContent[0..1] role xxx_RIFContent_specTypes_src
+	SpecType[*] role specTypes
+end
+
+composition xxx_RIFContent_specRelations between
+	RIFContent[0..1] role xxx_RIFContent_specRelations_src
+	SpecRelation[*] role specRelations
+end
+

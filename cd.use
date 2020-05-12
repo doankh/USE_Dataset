@@ -1,0 +1,98 @@
+model diagramaclases
+enum TipoPrimitivo{
+default
+}
+
+enum TipoVisibilidad{
+default
+}
+
+class DiagramaClases<ElementoNombrado
+attributes
+operations
+end
+
+class Clase<ElementoNombrado
+attributes
+	aspecto : Boolean
+operations
+end
+
+class Atributo<ElementoNombrado
+attributes
+	tipo : TipoPrimitivo
+	visibilidad : TipoVisibilidad
+operations
+end
+
+class Metodo<ElementoNombrado
+attributes
+	visibilidad : TipoVisibilidad
+	tipoDevuelto : TipoPrimitivo
+operations
+end
+
+abstract class ElementoNombrado
+attributes
+	nombre : String
+operations
+end
+
+class Relacion<ElementoNombrado
+attributes
+	cardFuente : String
+	cardDestino : String
+operations
+end
+
+class Parametro<ElementoNombrado
+attributes
+	tipo : TipoPrimitivo
+operations
+end
+
+composition xxx_DiagramaClases_clases between
+	DiagramaClases[0..1] role xxx_DiagramaClases_clases_src
+	Clase[*] role clases
+end
+
+composition xxx_DiagramaClases_relaciones between
+	DiagramaClases[0..1] role xxx_DiagramaClases_relaciones_src
+	Relacion[*] role relaciones
+end
+
+composition xxx_Clase_atributos between
+	Clase[0..1] role xxx_Clase_atributos_src
+	Atributo[*] role atributos
+end
+
+composition xxx_Clase_metodos between
+	Clase[0..1] role xxx_Clase_metodos_src
+	Metodo[*] role metodos
+end
+
+association xxx_Clase_relacionesFuente between
+	Clase[0..1] role xxx_Clase_relacionesFuente_src
+	Relacion[*] role relacionesFuente
+end
+
+association xxx_Clase_relacionesDestino between
+	Clase[0..1] role xxx_Clase_relacionesDestino_src
+	Relacion[*] role relacionesDestino
+end
+
+composition xxx_Metodo_parametros between
+	Metodo[0..1] role xxx_Metodo_parametros_src
+	Parametro[*] role parametros
+end
+
+association xxx_Relacion_destino between
+	Relacion[*] role xxx_Relacion_destino_src
+	Clase[1] role destino
+end
+
+association xxx_Relacion_fuente between
+	Relacion[*] role xxx_Relacion_fuente_src
+	Clase[1] role fuente
+end
+

@@ -1,0 +1,442 @@
+model model_
+enum OperationType{
+default
+}
+
+enum BooleanConnector{
+default
+}
+
+class ModelElement
+attributes
+operations
+end
+
+class Comment<GraphicalElement
+attributes
+	text : String
+operations
+end
+
+class NamedElement<ModelElement
+attributes
+	name : String
+	icon : String
+operations
+end
+
+class Package<NamedElement
+attributes
+operations
+end
+
+class PackageableElement<NamedElement
+attributes
+operations
+end
+
+class ReferenceableElement<PackageableElement
+attributes
+operations
+end
+
+class Model<Package
+attributes
+	author : String
+	version : String
+	description : String
+	fileversion : String
+operations
+end
+
+class GraphicalElement<ModelElement
+attributes
+operations
+end
+
+class Scope<ModelElement
+attributes
+operations
+end
+
+class Activity<PackageableElement,Scope
+attributes
+	totalexecutiontime : Integer
+operations
+end
+
+class StructuredActivityNode<Scope,ExecutableNode
+attributes
+operations
+end
+
+class ActivityNode<NamedElement,GraphicalElement
+attributes
+operations
+end
+
+class ActivityEdge<ModelElement
+attributes
+operations
+end
+
+class GuardSpecification
+attributes
+	attribute : String
+	operation : OperationType
+	value : String
+	Description : String
+	subSpecificationConnector : BooleanConnector
+operations
+end
+
+class ExecutableNode<ActivityNode
+attributes
+operations
+end
+
+class Action<ExecutableNode
+attributes
+	targetexecutiontime : Integer
+operations
+end
+
+class ControlNode<ActivityNode
+attributes
+operations
+end
+
+class InitialNode<ControlNode
+attributes
+operations
+end
+
+class ForkNode<ControlNode
+attributes
+operations
+end
+
+class JoinNode<ControlNode
+attributes
+operations
+end
+
+class MergeNode<ControlNode
+attributes
+operations
+end
+
+class DecisionNode<ControlNode
+attributes
+operations
+end
+
+class FinalNode<ControlNode
+attributes
+operations
+end
+
+class Guard<NamedElement
+attributes
+	textualdescription : String
+	shortdescription : String
+operations
+end
+
+class ActivityLinkNode<ExecutableNode
+attributes
+operations
+end
+
+class Event<ExecutableNode
+attributes
+operations
+end
+
+class EventHandler<NamedElement
+attributes
+operations
+end
+
+class PrimitiveType<PackageableElement
+attributes
+operations
+end
+
+class StringType<PrimitiveType
+attributes
+operations
+end
+
+class IntegerType<PrimitiveType
+attributes
+operations
+end
+
+class Function<PackageableElement
+attributes
+operations
+end
+
+class Role<ReferenceableElement
+attributes
+operations
+end
+
+class OrganisationUnit<PackageableElement
+attributes
+operations
+end
+
+class Application<ReferenceableElement
+attributes
+	jarArchive : String
+	javaClass : String
+	method : String
+operations
+end
+
+class ApplicationType<PackageableElement
+attributes
+operations
+end
+
+class WebServiceApplication<Application
+attributes
+	Interface : String
+	Operation : String
+operations
+end
+
+class Data<ReferenceableElement
+attributes
+	value : String
+operations
+end
+
+class DataType<PackageableElement
+attributes
+operations
+end
+
+class Parameter<PackageableElement
+attributes
+	value : String
+operations
+end
+
+class DataMapping<PackageableElement
+attributes
+operations
+end
+
+class InformationType<PackageableElement
+attributes
+operations
+end
+
+class InputParameter<Parameter
+attributes
+operations
+end
+
+class OutputParameter<Parameter
+attributes
+operations
+end
+
+class ParameterMapping<PackageableElement
+attributes
+operations
+end
+
+composition xxx_ModelElement_ownedComment between
+	ModelElement[0..1] role xxx_ModelElement_ownedComment_src
+	Comment[*] role ownedComment
+end
+
+composition xxx_Package_subpackages between
+	Package[0..1] role xxx_Package_subpackages_src
+	Package[*] role subpackages
+end
+
+association xxx_Package_superpackage between
+	Package[*] role xxx_Package_superpackage_src
+	Package[0..1] role superpackage
+end
+
+composition xxx_Package_elements between
+	Package[0..1] role xxx_Package_elements_src
+	PackageableElement[*] role elements
+end
+
+association xxx_PackageableElement_package between
+	PackageableElement[*] role xxx_PackageableElement_package_src
+	Package[0..1] role package
+end
+
+composition xxx_Scope_nodes between
+	Scope[0..1] role xxx_Scope_nodes_src
+	ActivityNode[*] role nodes
+end
+
+composition xxx_Scope_edges between
+	Scope[0..1] role xxx_Scope_edges_src
+	ActivityEdge[*] role edges
+end
+
+composition xxx_Activity_eventHandler between
+	Activity[*] role xxx_Activity_eventHandler_src
+	EventHandler[0..1] role eventHandler
+end
+
+association xxx_ActivityNode_in_ between
+	ActivityNode[0..1] role xxx_ActivityNode_in__src
+	ActivityEdge[*] role in_
+end
+
+association xxx_ActivityNode_out between
+	ActivityNode[0..1] role xxx_ActivityNode_out_src
+	ActivityEdge[*] role out
+end
+
+association xxx_ActivityEdge_source between
+	ActivityEdge[*] role xxx_ActivityEdge_source_src
+	ActivityNode[1] role source
+end
+
+association xxx_ActivityEdge_target between
+	ActivityEdge[*] role xxx_ActivityEdge_target_src
+	ActivityNode[1] role target
+end
+
+composition xxx_ActivityEdge_guard between
+	ActivityEdge[*] role xxx_ActivityEdge_guard_src
+	Guard[0..1] role guard
+end
+
+association xxx_GuardSpecification_data between
+	GuardSpecification[*] role xxx_GuardSpecification_data_src
+	Data[1] role data
+end
+
+composition xxx_GuardSpecification_subSpecification between
+	GuardSpecification[0..1] role xxx_GuardSpecification_subSpecification_src
+	GuardSpecification[*] role subSpecification
+end
+
+association xxx_Action_performedBy between
+	Action[*] role xxx_Action_performedBy_src
+	Role[0..1] role performedBy
+end
+
+association xxx_Action_executedBy between
+	Action[*] role xxx_Action_executedBy_src
+	Application[0..1] role executedBy
+end
+
+association xxx_Action_realizes between
+	Action[*] role xxx_Action_realizes_src
+	Function[0..1] role realizes
+end
+
+association xxx_Action_inputs between
+	Action[0..1] role xxx_Action_inputs_src
+	Data[*] role inputs
+end
+
+association xxx_Action_outputs between
+	Action[0..1] role xxx_Action_outputs_src
+	Data[*] role outputs
+end
+
+composition xxx_Action_mappings between
+	Action[0..1] role xxx_Action_mappings_src
+	DataMapping[*] role mappings
+end
+
+composition xxx_Guard_detailedSpecification between
+	Guard[*] role xxx_Guard_detailedSpecification_src
+	GuardSpecification[0..1] role detailedSpecification
+end
+
+association xxx_ActivityLinkNode_linksto between
+	ActivityLinkNode[*] role xxx_ActivityLinkNode_linksto_src
+	Activity[1] role linksto
+end
+
+composition xxx_ActivityLinkNode_uses between
+	ActivityLinkNode[0..1] role xxx_ActivityLinkNode_uses_src
+	ParameterMapping[1..*] role uses
+end
+
+composition xxx_Function_subfunctions between
+	Function[0..1] role xxx_Function_subfunctions_src
+	Function[*] role subfunctions
+end
+
+association xxx_Role_performedBy between
+	Role[0..1] role xxx_Role_performedBy_src
+	OrganisationUnit[*] role performedBy
+end
+
+association xxx_OrganisationUnit_subUnit between
+	OrganisationUnit[0..1] role xxx_OrganisationUnit_subUnit_src
+	OrganisationUnit[*] role subUnit
+end
+
+association xxx_OrganisationUnit_belongsTo between
+	OrganisationUnit[0..1] role xxx_OrganisationUnit_belongsTo_src
+	OrganisationUnit[*] role belongsTo
+end
+
+association xxx_Application_type between
+	Application[*] role xxx_Application_type_src
+	ApplicationType[0..1] role type
+end
+
+composition xxx_Application_input between
+	Application[0..1] role xxx_Application_input_src
+	InputParameter[*] role input
+end
+
+composition xxx_Application_output between
+	Application[0..1] role xxx_Application_output_src
+	OutputParameter[*] role output
+end
+
+association xxx_Data_dataType between
+	Data[*] role xxx_Data_dataType_src
+	DataType[1] role dataType
+end
+
+association xxx_Data_informationType between
+	Data[*] role xxx_Data_informationType_src
+	InformationType[1] role informationType
+end
+
+composition xxx_Data_parameters between
+	Data[0..1] role xxx_Data_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_DataMapping_boundParameter between
+	DataMapping[*] role xxx_DataMapping_boundParameter_src
+	Parameter[1] role boundParameter
+end
+
+association xxx_DataMapping_parameter between
+	DataMapping[*] role xxx_DataMapping_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_ParameterMapping_source between
+	ParameterMapping[*] role xxx_ParameterMapping_source_src
+	PackageableElement[1] role source
+end
+
+association xxx_ParameterMapping_target between
+	ParameterMapping[*] role xxx_ParameterMapping_target_src
+	PackageableElement[1] role target
+end
+

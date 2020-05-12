@@ -1,0 +1,102 @@
+model octave
+class Function
+attributes
+	name : String
+operations
+end
+
+class ParameterList
+attributes
+operations
+end
+
+class Parameter
+attributes
+	parameter : String
+	defaultValue : Boolean
+	value : Integer
+operations
+end
+
+class FunctionReturn
+attributes
+operations
+end
+
+class ReturnList
+attributes
+operations
+end
+
+class ReturnItem
+attributes
+	name : String
+operations
+end
+
+class StatementList
+attributes
+operations
+end
+
+class Statement
+attributes
+	condition : String
+operations
+end
+
+class TildeParameter<Parameter
+attributes
+operations
+end
+
+class EmptyFunctionReturn<FunctionReturn
+attributes
+operations
+end
+
+composition xxx_Function_return between
+	Function[*] role xxx_Function_return_src
+	FunctionReturn[0..1] role return
+end
+
+composition xxx_Function_parameters between
+	Function[*] role xxx_Function_parameters_src
+	ParameterList[0..1] role parameters
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	StatementList[0..1] role body
+end
+
+composition xxx_ParameterList_parameters between
+	ParameterList[0..1] role xxx_ParameterList_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_FunctionReturn_returnItem between
+	FunctionReturn[*] role xxx_FunctionReturn_returnItem_src
+	ReturnList[0..1] role returnItem
+end
+
+composition xxx_ReturnList_item between
+	ReturnList[0..1] role xxx_ReturnList_item_src
+	ReturnItem[*] role item
+end
+
+composition xxx_StatementList_statements between
+	StatementList[0..1] role xxx_StatementList_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_StatementList_statement between
+	StatementList[0..1] role xxx_StatementList_statement_src
+	Statement[*] role statement
+end
+
+composition xxx_Statement_statements between
+	Statement[*] role xxx_Statement_statements_src
+	StatementList[0..1] role statements
+end
+

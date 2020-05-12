@@ -1,0 +1,464 @@
+model PrimitiveTypes
+class HTML
+attributes
+operations
+end
+
+class HTMLElement
+attributes
+	value : String
+operations
+end
+
+class HEAD<HTMLElement
+attributes
+operations
+end
+
+abstract class HEADElement<HTMLElement
+attributes
+operations
+end
+
+class LINK<HEADElement
+attributes
+	rel : String
+	title : String
+	ahref : String
+	type : String
+operations
+end
+
+class TITLE<HEADElement
+attributes
+operations
+end
+
+class BODY<HTMLElement
+attributes
+	background : String
+	bgcolor : String
+	text : String
+	link : String
+	alink : String
+	vlink : String
+operations
+end
+
+abstract class BODYElement<HTMLElement
+attributes
+operations
+end
+
+class H1<BODYElement
+attributes
+operations
+end
+
+class H2<BODYElement
+attributes
+operations
+end
+
+class H3<BODYElement
+attributes
+operations
+end
+
+class H4<BODYElement
+attributes
+operations
+end
+
+class EM<BODYElement
+attributes
+operations
+end
+
+class STRONG<BODYElement
+attributes
+operations
+end
+
+class B<BODYElement
+attributes
+operations
+end
+
+class I<BODYElement
+attributes
+operations
+end
+
+class TT<BODYElement
+attributes
+operations
+end
+
+class PRE<BODYElement
+attributes
+operations
+end
+
+class BIG<BODYElement
+attributes
+operations
+end
+
+class SMALL<BODYElement
+attributes
+operations
+end
+
+class SUB<BODYElement
+attributes
+operations
+end
+
+class SUP<BODYElement
+attributes
+operations
+end
+
+class STRIKE<BODYElement
+attributes
+operations
+end
+
+class FONT<BODYElement
+attributes
+	color : String
+	face : String
+	size : String
+operations
+end
+
+class IMG<BODYElement
+attributes
+	src : String
+	width : String
+	height : String
+	alt : String
+	align : String
+	vspace : String
+	hspace : String
+	ismap : String
+	usemap : String
+	border : String
+operations
+end
+
+class BR<BODYElement
+attributes
+	clear : String
+operations
+end
+
+class MAP<BODYElement
+attributes
+operations
+end
+
+class AREA<BODYElement
+attributes
+	shape : String
+	coords : String
+	ahref : String
+operations
+end
+
+class STYLE<BODYElement
+attributes
+operations
+end
+
+class EMBED<BODYElement
+attributes
+	src : String
+	width : String
+	height : String
+	align : String
+	vspace : String
+	hspace : String
+	border : String
+operations
+end
+
+class NOEMBED<BODYElement
+attributes
+operations
+end
+
+class SPAN<BODYElement
+attributes
+	style : String
+operations
+end
+
+class A<BODYElement
+attributes
+	ahref : String
+	name : String
+	id : String
+operations
+end
+
+class DIV<BODYElement
+attributes
+	align : String
+operations
+end
+
+class P<BODYElement
+attributes
+operations
+end
+
+abstract class TABLEElement<BODYElement
+attributes
+	bgcolor : String
+	background : String
+operations
+end
+
+class TABLE<TABLEElement
+attributes
+	border : String
+	width : String
+	cellspacing : String
+	cellpadding : String
+operations
+end
+
+class TR<TABLEElement
+attributes
+	valign : String
+	align : String
+operations
+end
+
+class TD<TABLEElement
+attributes
+	colspan : String
+	rowspan : String
+	valign : String
+	align : String
+	width : String
+operations
+end
+
+class TH<TD
+attributes
+operations
+end
+
+class FORM
+attributes
+	action : String
+	method : String
+operations
+end
+
+class INPUT
+attributes
+	align : String
+	maxlength : String
+	size : String
+	checked : String
+	src : String
+	inputValue : String
+	name : String
+	type : String
+operations
+end
+
+class TEXTAREA
+attributes
+	name : String
+	rows : String
+	cols : String
+operations
+end
+
+class SELECT
+attributes
+	multiple : String
+	size : String
+	name : String
+operations
+end
+
+class OPTION
+attributes
+	selected : String
+	optionValue : String
+operations
+end
+
+abstract class ListElement
+attributes
+	type : String
+operations
+end
+
+class OL<ListElement
+attributes
+	start : String
+operations
+end
+
+class UL<ListElement
+attributes
+operations
+end
+
+class LI<ListElement
+attributes
+	liValue : String
+operations
+end
+
+class DL
+attributes
+operations
+end
+
+class DT
+attributes
+operations
+end
+
+class DD
+attributes
+operations
+end
+
+class APPLET
+attributes
+	applet : String
+	class_ : String
+	src : String
+	align : String
+	width : String
+	height : String
+operations
+end
+
+class PARAM
+attributes
+	name : String
+	paramValue : String
+operations
+end
+
+class OBJECT
+attributes
+	classid : String
+	id : String
+	data : String
+	type : String
+	standby : String
+operations
+end
+
+class FRAMESET
+attributes
+	rows : String
+	cols : String
+	framespacing : String
+	frameborder : String
+	border : String
+operations
+end
+
+class FRAME
+attributes
+	src : String
+	name : String
+	marginwidth : String
+	marginheight : String
+	scrolling : String
+	noresize : String
+operations
+end
+
+class NOFRAME
+attributes
+operations
+end
+
+class IFRAME<FRAME
+attributes
+operations
+end
+
+composition xxx_HTML_head between
+	HTML[*] role xxx_HTML_head_src
+	HEAD[1] role head
+end
+
+composition xxx_HTML_body between
+	HTML[*] role xxx_HTML_body_src
+	BODY[1] role body
+end
+
+composition xxx_HTMLElement_children between
+	HTMLElement[0..1] role xxx_HTMLElement_children_src
+	HTMLElement[*] role children
+end
+
+association xxx_HTMLElement_parent between
+	HTMLElement[*] role xxx_HTMLElement_parent_src
+	HTMLElement[1] role parent
+end
+
+composition xxx_HEAD_headElements between
+	HEAD[0..1] role xxx_HEAD_headElements_src
+	HEADElement[*] role headElements
+end
+
+association xxx_HEAD_html between
+	HEAD[*] role xxx_HEAD_html_src
+	HTML[1] role html
+end
+
+association xxx_HEADElement_head between
+	HEADElement[*] role xxx_HEADElement_head_src
+	HEAD[1] role head
+end
+
+composition xxx_BODY_bodyElements between
+	BODY[0..1] role xxx_BODY_bodyElements_src
+	BODYElement[*] role bodyElements
+end
+
+association xxx_BODY_html between
+	BODY[*] role xxx_BODY_html_src
+	HTML[1] role html
+end
+
+association xxx_BODYElement_body between
+	BODYElement[*] role xxx_BODYElement_body_src
+	BODY[1] role body
+end
+
+composition xxx_TABLE_trs between
+	TABLE[0..1] role xxx_TABLE_trs_src
+	TR[*] role trs
+end
+
+association xxx_TR_table between
+	TR[*] role xxx_TR_table_src
+	TABLE[1] role table
+end
+
+composition xxx_TR_tds between
+	TR[0..1] role xxx_TR_tds_src
+	TD[*] role tds
+end
+
+association xxx_TD_tr between
+	TD[*] role xxx_TD_tr_src
+	TR[1] role tr
+end
+

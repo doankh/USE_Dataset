@@ -1,0 +1,178 @@
+model Protocol
+enum Type{
+default
+}
+
+class Message<AttributeStructure
+attributes
+	code : Integer
+operations
+end
+
+abstract class Attribute
+attributes
+	name : String
+	fieldNumber : Boolean
+	description : String
+	equality : Boolean
+	type : Type
+	transient : Boolean
+	deleted : Boolean
+operations
+end
+
+class Protocol
+attributes
+	name : String
+	packagePrefix : String
+	description : String
+	licenseHeader : String
+	version : Integer
+operations
+end
+
+class Structure<AttributeStructure
+attributes
+operations
+end
+
+class StringAttribute<Attribute
+attributes
+operations
+end
+
+class BooleanAttribute<Attribute
+attributes
+operations
+end
+
+class StructureAttribute<Attribute
+attributes
+operations
+end
+
+class VariantAttribute<Attribute
+attributes
+operations
+end
+
+class IntegerAttribute<Attribute
+attributes
+operations
+end
+
+class LongAttribute<Attribute
+attributes
+operations
+end
+
+class FloatAttribute<Attribute
+attributes
+operations
+end
+
+class VariantMapAttribute<Attribute
+attributes
+operations
+end
+
+class PropertiesAttribute<Attribute
+attributes
+operations
+end
+
+class Enum
+attributes
+	name : String
+	literals : String
+	description : String
+operations
+end
+
+class EnumAttribute<Attribute
+attributes
+operations
+end
+
+class AttributesGroup
+attributes
+operations
+end
+
+class Interface<AttributeStructure
+attributes
+operations
+end
+
+abstract class AttributeStructure
+attributes
+	name : String
+	description : String
+operations
+end
+
+association xxx_Message_protocol between
+	Message[*] role xxx_Message_protocol_src
+	Protocol[1] role protocol
+end
+
+association xxx_Message_interfaces between
+	Message[0..1] role xxx_Message_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_Protocol_messages between
+	Protocol[0..1] role xxx_Protocol_messages_src
+	Message[*] role messages
+end
+
+composition xxx_Protocol_structures between
+	Protocol[0..1] role xxx_Protocol_structures_src
+	Structure[*] role structures
+end
+
+association xxx_Protocol_includedProtocols between
+	Protocol[0..1] role xxx_Protocol_includedProtocols_src
+	Protocol[*] role includedProtocols
+end
+
+composition xxx_Protocol_enums between
+	Protocol[0..1] role xxx_Protocol_enums_src
+	Enum[*] role enums
+end
+
+composition xxx_Protocol_interfaces between
+	Protocol[0..1] role xxx_Protocol_interfaces_src
+	Interface[*] role interfaces
+end
+
+association xxx_Structure_protocol between
+	Structure[*] role xxx_Structure_protocol_src
+	Protocol[1] role protocol
+end
+
+association xxx_StructureAttribute_structure between
+	StructureAttribute[*] role xxx_StructureAttribute_structure_src
+	Structure[1] role structure
+end
+
+association xxx_Enum_protocol between
+	Enum[*] role xxx_Enum_protocol_src
+	Protocol[0..1] role protocol
+end
+
+association xxx_EnumAttribute_enumType between
+	EnumAttribute[*] role xxx_EnumAttribute_enumType_src
+	Enum[1] role enumType
+end
+
+association xxx_Interface_protocol between
+	Interface[*] role xxx_Interface_protocol_src
+	Protocol[1] role protocol
+end
+
+composition xxx_AttributeStructure_attributes_ between
+	AttributeStructure[0..1] role xxx_AttributeStructure_attributes__src
+	Attribute[*] role attributes_
+end
+

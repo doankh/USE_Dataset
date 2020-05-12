@@ -1,0 +1,481 @@
+model ServicePIM
+enum MediaType{
+default
+}
+
+enum CRUDVerb{
+default
+}
+
+enum RDBMSVerb{
+default
+}
+
+enum LinkType{
+default
+}
+
+class AlgoResourceModel
+attributes
+	parentName : String
+	name : String
+operations
+end
+
+class AlgoResourceController
+attributes
+	name : String
+	parentName : String
+	controllerURI : String
+operations
+end
+
+class ResourceModelManager
+attributes
+	name : String
+	parentName : String
+operations
+end
+
+class ResourceModel
+attributes
+	name : String
+	parentName : String
+operations
+end
+
+class ResourceControllerManager
+attributes
+	name : String
+	controllerURI : String
+	parentName : String
+operations
+end
+
+class ResourceController
+attributes
+	name : String
+	controllerURI : String
+	parentName : String
+operations
+end
+
+class PIMComponentProperty
+attributes
+	name : String
+	type : String
+	isUnique : Boolean
+	isNamingProperty : Boolean
+	isPrimaryIdentifier : Boolean
+operations
+end
+
+class RepresentationParseFunction
+attributes
+operations
+end
+
+class RepresentationMarshallingFunction
+attributes
+operations
+end
+
+class ResourceInputRepresentation
+attributes
+	inputType : MediaType
+operations
+end
+
+class ResourceOutputRepresentation
+attributes
+	outputType : MediaType
+operations
+end
+
+class ResourceControllerCRUDActivity
+attributes
+	name : String
+	activityURI : String
+	crudVerb : CRUDVerb
+operations
+end
+
+class SetterFunction<PIMComponentFunction
+attributes
+operations
+end
+
+class GetterFunction<PIMComponentFunction
+attributes
+operations
+end
+
+class FunctionParameter
+attributes
+	name : String
+	type : String
+	isUnique : Boolean
+	bIsReturnParameter : Boolean
+operations
+end
+
+class CRUDActivityHandler
+attributes
+	name : String
+	crudVerb : CRUDVerb
+operations
+end
+
+class CreateHypermediaPIMFunction
+attributes
+operations
+end
+
+class DatabaseController
+attributes
+	name : String
+operations
+end
+
+class RDBMSActivity
+attributes
+	name : String
+	rdbmsVerb : RDBMSVerb
+operations
+end
+
+class RDBMSTable
+attributes
+	name : String
+operations
+end
+
+class RDBMSTableColumn
+attributes
+	name : String
+	type : String
+	isForeignKey : Boolean
+	isPrimaryKey : Boolean
+operations
+end
+
+class HypermediaLink
+attributes
+	linkCRUDVerb : CRUDVerb
+	linkType : LinkType
+operations
+end
+
+class PIMComponentFunction
+attributes
+	name : String
+operations
+end
+
+class RESTfulServicePIM
+attributes
+	name : String
+	serviceOutputPath : String
+	serviceDatabaseIP : String
+	serviceDatabasePort : String
+	serviceDatabaseUsername : String
+	serviceDatabasePassword : String
+	serviceDatabaseType : String
+operations
+end
+
+composition xxx_AlgoResourceModel_algoModelHasInputRepresentation between
+	AlgoResourceModel[0..1] role xxx_AlgoResourceModel_algoModelHasInputRepresentation_src
+	ResourceInputRepresentation[*] role algoModelHasInputRepresentation
+end
+
+composition xxx_AlgoResourceModel_algoModelHasOutputRepresentation between
+	AlgoResourceModel[0..1] role xxx_AlgoResourceModel_algoModelHasOutputRepresentation_src
+	ResourceOutputRepresentation[1..*] role algoModelHasOutputRepresentation
+end
+
+composition xxx_AlgoResourceModel_algoModelHasProperty between
+	AlgoResourceModel[*] role xxx_AlgoResourceModel_algoModelHasProperty_src
+	PIMComponentProperty[1] role algoModelHasProperty
+end
+
+composition xxx_AlgoResourceModel_algoModelHasSetter between
+	AlgoResourceModel[*] role xxx_AlgoResourceModel_algoModelHasSetter_src
+	SetterFunction[1] role algoModelHasSetter
+end
+
+composition xxx_AlgoResourceModel_algoModelHasGetter between
+	AlgoResourceModel[*] role xxx_AlgoResourceModel_algoModelHasGetter_src
+	GetterFunction[1] role algoModelHasGetter
+end
+
+association xxx_AlgoResourceModel_hasRelatedAlgoModel between
+	AlgoResourceModel[0..1] role xxx_AlgoResourceModel_hasRelatedAlgoModel_src
+	AlgoResourceModel[*] role hasRelatedAlgoModel
+end
+
+association xxx_AlgoResourceModel_isRelatedAlgoModel between
+	AlgoResourceModel[0..1] role xxx_AlgoResourceModel_isRelatedAlgoModel_src
+	AlgoResourceModel[*] role isRelatedAlgoModel
+end
+
+composition xxx_AlgoResourceModel_algoModelHasParseFunction between
+	AlgoResourceModel[0..1] role xxx_AlgoResourceModel_algoModelHasParseFunction_src
+	RepresentationParseFunction[*] role algoModelHasParseFunction
+end
+
+composition xxx_AlgoResourceModel_algoModelHasMarshallingFunction between
+	AlgoResourceModel[0..1] role xxx_AlgoResourceModel_algoModelHasMarshallingFunction_src
+	RepresentationMarshallingFunction[1..*] role algoModelHasMarshallingFunction
+end
+
+association xxx_AlgoResourceController_hasAssociatedAlgoModel between
+	AlgoResourceController[*] role xxx_AlgoResourceController_hasAssociatedAlgoModel_src
+	AlgoResourceModel[1] role hasAssociatedAlgoModel
+end
+
+composition xxx_AlgoResourceController_algoControllerHasCRUDActivity between
+	AlgoResourceController[*] role xxx_AlgoResourceController_algoControllerHasCRUDActivity_src
+	ResourceControllerCRUDActivity[1] role algoControllerHasCRUDActivity
+end
+
+association xxx_ResourceModelManager_hasRelatedModel between
+	ResourceModelManager[*] role xxx_ResourceModelManager_hasRelatedModel_src
+	ResourceModel[1] role hasRelatedModel
+end
+
+composition xxx_ResourceModelManager_rMManagerHasInputRepresentation between
+	ResourceModelManager[0..1] role xxx_ResourceModelManager_rMManagerHasInputRepresentation_src
+	ResourceInputRepresentation[1..*] role rMManagerHasInputRepresentation
+end
+
+composition xxx_ResourceModelManager_rMManagerHasOutputRepresentation between
+	ResourceModelManager[0..1] role xxx_ResourceModelManager_rMManagerHasOutputRepresentation_src
+	ResourceOutputRepresentation[1..*] role rMManagerHasOutputRepresentation
+end
+
+composition xxx_ResourceModelManager_hasRMManagerProperty between
+	ResourceModelManager[*] role xxx_ResourceModelManager_hasRMManagerProperty_src
+	PIMComponentProperty[1] role hasRMManagerProperty
+end
+
+composition xxx_ResourceModelManager_rMManagerHasSetter between
+	ResourceModelManager[*] role xxx_ResourceModelManager_rMManagerHasSetter_src
+	SetterFunction[1] role rMManagerHasSetter
+end
+
+composition xxx_ResourceModelManager_rMManagerHasGetter between
+	ResourceModelManager[*] role xxx_ResourceModelManager_rMManagerHasGetter_src
+	GetterFunction[1] role rMManagerHasGetter
+end
+
+composition xxx_ResourceModelManager_rMManagerHasParseFunction between
+	ResourceModelManager[0..1] role xxx_ResourceModelManager_rMManagerHasParseFunction_src
+	RepresentationParseFunction[1..*] role rMManagerHasParseFunction
+end
+
+composition xxx_ResourceModelManager_rMManagerHasMarshallingFunction between
+	ResourceModelManager[0..1] role xxx_ResourceModelManager_rMManagerHasMarshallingFunction_src
+	RepresentationMarshallingFunction[1..*] role rMManagerHasMarshallingFunction
+end
+
+composition xxx_ResourceModel_rModelHasIRepresentation between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelHasIRepresentation_src
+	ResourceInputRepresentation[1..*] role rModelHasIRepresentation
+end
+
+composition xxx_ResourceModel_rModelHasOutputRepresentation between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelHasOutputRepresentation_src
+	ResourceOutputRepresentation[1..*] role rModelHasOutputRepresentation
+end
+
+composition xxx_ResourceModel_rModelHasProperty between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelHasProperty_src
+	PIMComponentProperty[1..*] role rModelHasProperty
+end
+
+association xxx_ResourceModel_hasRelatedModelManager between
+	ResourceModel[0..1] role xxx_ResourceModel_hasRelatedModelManager_src
+	ResourceModelManager[*] role hasRelatedModelManager
+end
+
+association xxx_ResourceModel_hasRelatedAlgoModel between
+	ResourceModel[0..1] role xxx_ResourceModel_hasRelatedAlgoModel_src
+	AlgoResourceModel[*] role hasRelatedAlgoModel
+end
+
+composition xxx_ResourceModel_rModelHasSetter between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelHasSetter_src
+	SetterFunction[1..*] role rModelHasSetter
+end
+
+composition xxx_ResourceModel_rModelHasGetter between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelHasGetter_src
+	GetterFunction[1..*] role rModelHasGetter
+end
+
+association xxx_ResourceModel_isMappedToRDBMSTable between
+	ResourceModel[*] role xxx_ResourceModel_isMappedToRDBMSTable_src
+	RDBMSTable[1] role isMappedToRDBMSTable
+end
+
+composition xxx_ResourceModel_rModelHasParseFunction between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelHasParseFunction_src
+	RepresentationParseFunction[1..*] role rModelHasParseFunction
+end
+
+composition xxx_ResourceModel_rModelMarshallingFunction between
+	ResourceModel[0..1] role xxx_ResourceModel_rModelMarshallingFunction_src
+	RepresentationMarshallingFunction[1..*] role rModelMarshallingFunction
+end
+
+association xxx_ResourceControllerManager_hasAssociatedRMManager between
+	ResourceControllerManager[*] role xxx_ResourceControllerManager_hasAssociatedRMManager_src
+	ResourceModelManager[1] role hasAssociatedRMManager
+end
+
+composition xxx_ResourceControllerManager_rCManagerHasCRUDActivity between
+	ResourceControllerManager[0..1] role xxx_ResourceControllerManager_rCManagerHasCRUDActivity_src
+	ResourceControllerCRUDActivity[2..*] role rCManagerHasCRUDActivity
+end
+
+association xxx_ResourceController_hasAssociatedRModel between
+	ResourceController[*] role xxx_ResourceController_hasAssociatedRModel_src
+	ResourceModel[1] role hasAssociatedRModel
+end
+
+composition xxx_ResourceController_rControllerHasCRUDActivity between
+	ResourceController[0..1] role xxx_ResourceController_rControllerHasCRUDActivity_src
+	ResourceControllerCRUDActivity[1..*] role rControllerHasCRUDActivity
+end
+
+association xxx_PIMComponentProperty_isMappedToRDBMSColumn between
+	PIMComponentProperty[*] role xxx_PIMComponentProperty_isMappedToRDBMSColumn_src
+	RDBMSTableColumn[0..1] role isMappedToRDBMSColumn
+end
+
+association xxx_RepresentationParseFunction_parsesInputRepresentation between
+	RepresentationParseFunction[*] role xxx_RepresentationParseFunction_parsesInputRepresentation_src
+	ResourceInputRepresentation[1] role parsesInputRepresentation
+end
+
+association xxx_RepresentationMarshallingFunction_marshalsRepresentation between
+	RepresentationMarshallingFunction[*] role xxx_RepresentationMarshallingFunction_marshalsRepresentation_src
+	ResourceOutputRepresentation[1] role marshalsRepresentation
+end
+
+composition xxx_ResourceControllerCRUDActivity_hasCRUDActivityHandler between
+	ResourceControllerCRUDActivity[*] role xxx_ResourceControllerCRUDActivity_hasCRUDActivityHandler_src
+	CRUDActivityHandler[1] role hasCRUDActivityHandler
+end
+
+association xxx_ResourceControllerCRUDActivity_isMappedToRDBMSActivity between
+	ResourceControllerCRUDActivity[*] role xxx_ResourceControllerCRUDActivity_isMappedToRDBMSActivity_src
+	RDBMSActivity[0..1] role isMappedToRDBMSActivity
+end
+
+association xxx_SetterFunction_setsProperty between
+	SetterFunction[*] role xxx_SetterFunction_setsProperty_src
+	PIMComponentProperty[1] role setsProperty
+end
+
+association xxx_GetterFunction_getsProperty between
+	GetterFunction[*] role xxx_GetterFunction_getsProperty_src
+	PIMComponentProperty[1] role getsProperty
+end
+
+composition xxx_CRUDActivityHandler_hasHypermediaFunction between
+	CRUDActivityHandler[*] role xxx_CRUDActivityHandler_hasHypermediaFunction_src
+	CreateHypermediaPIMFunction[1] role hasHypermediaFunction
+end
+
+association xxx_CRUDActivityHandler_usesDBController between
+	CRUDActivityHandler[*] role xxx_CRUDActivityHandler_usesDBController_src
+	DatabaseController[1] role usesDBController
+end
+
+composition xxx_CreateHypermediaPIMFunction_hasHypermediaLink between
+	CreateHypermediaPIMFunction[0..1] role xxx_CreateHypermediaPIMFunction_hasHypermediaLink_src
+	HypermediaLink[1..*] role hasHypermediaLink
+end
+
+composition xxx_DatabaseController_hasRDBMSActivity between
+	DatabaseController[0..1] role xxx_DatabaseController_hasRDBMSActivity_src
+	RDBMSActivity[1..*] role hasRDBMSActivity
+end
+
+association xxx_RDBMSActivity_altersRDBMSTable between
+	RDBMSActivity[*] role xxx_RDBMSActivity_altersRDBMSTable_src
+	RDBMSTable[1] role altersRDBMSTable
+end
+
+composition xxx_RDBMSTable_hasRDBMSColumns between
+	RDBMSTable[0..1] role xxx_RDBMSTable_hasRDBMSColumns_src
+	RDBMSTableColumn[2..*] role hasRDBMSColumns
+end
+
+association xxx_RDBMSTableColumn_referencesRDBMSTable between
+	RDBMSTableColumn[0..1] role xxx_RDBMSTableColumn_referencesRDBMSTable_src
+	RDBMSTable[*] role referencesRDBMSTable
+end
+
+association xxx_HypermediaLink_hasTargetAlgoController between
+	HypermediaLink[*] role xxx_HypermediaLink_hasTargetAlgoController_src
+	AlgoResourceController[0..1] role hasTargetAlgoController
+end
+
+association xxx_HypermediaLink_hasTargetRCManager between
+	HypermediaLink[*] role xxx_HypermediaLink_hasTargetRCManager_src
+	ResourceControllerManager[0..1] role hasTargetRCManager
+end
+
+association xxx_HypermediaLink_hasTargetRController between
+	HypermediaLink[*] role xxx_HypermediaLink_hasTargetRController_src
+	ResourceController[0..1] role hasTargetRController
+end
+
+composition xxx_PIMComponentFunction_hasFunctionParameter between
+	PIMComponentFunction[0..1] role xxx_PIMComponentFunction_hasFunctionParameter_src
+	FunctionParameter[*] role hasFunctionParameter
+end
+
+composition xxx_RESTfulServicePIM_hasResourceModel between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasResourceModel_src
+	ResourceModel[*] role hasResourceModel
+end
+
+composition xxx_RESTfulServicePIM_hasResourceModelManager between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasResourceModelManager_src
+	ResourceModelManager[*] role hasResourceModelManager
+end
+
+composition xxx_RESTfulServicePIM_hasResourceController between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasResourceController_src
+	ResourceController[*] role hasResourceController
+end
+
+composition xxx_RESTfulServicePIM_hasResourceControllerManager between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasResourceControllerManager_src
+	ResourceControllerManager[*] role hasResourceControllerManager
+end
+
+composition xxx_RESTfulServicePIM_hasAlgoResourceModel between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasAlgoResourceModel_src
+	AlgoResourceModel[*] role hasAlgoResourceModel
+end
+
+composition xxx_RESTfulServicePIM_hasAlgoResourceController between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasAlgoResourceController_src
+	AlgoResourceController[*] role hasAlgoResourceController
+end
+
+composition xxx_RESTfulServicePIM_hasRDBMSTable between
+	RESTfulServicePIM[0..1] role xxx_RESTfulServicePIM_hasRDBMSTable_src
+	RDBMSTable[*] role hasRDBMSTable
+end
+
+composition xxx_RESTfulServicePIM_hasDatabaseController between
+	RESTfulServicePIM[*] role xxx_RESTfulServicePIM_hasDatabaseController_src
+	DatabaseController[1] role hasDatabaseController
+end
+

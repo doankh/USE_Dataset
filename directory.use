@@ -1,0 +1,201 @@
+model directory
+enum AddressType{
+default
+}
+
+enum TelephoneType{
+default
+}
+
+enum EMailType{
+default
+}
+
+abstract class Entity
+attributes
+	name : String
+	category : String
+operations
+end
+
+class WorkFunction
+attributes
+	title : String
+	role : String
+operations
+end
+
+class Person
+attributes
+	formattedName : String
+	nickName : String
+	birthday : String
+operations
+end
+
+class Name
+attributes
+	familyName : String
+	givenName : String
+	additionalName : String
+	honorificPrefix : String
+	honorificSuffix : String
+operations
+end
+
+class Organization<Entity
+attributes
+operations
+end
+
+class OrganizationalUnit<Entity
+attributes
+operations
+end
+
+abstract class Image
+attributes
+	label : String
+operations
+end
+
+class BinaryImage<Image
+attributes
+	type : String
+	value : String
+operations
+end
+
+class ImageResource<Image,Resource
+attributes
+operations
+end
+
+class Address
+attributes
+	label : String
+	type : AddressType
+	postOfficeBox : String
+	extendedAddress : String
+	street : String
+	locality : String
+	region : String
+	postalCode : String
+	countryCode : String
+	timeZone : String
+operations
+end
+
+class Telephone
+attributes
+	type : TelephoneType
+	value : String
+operations
+end
+
+class EMail
+attributes
+	value : String
+	type : EMailType
+operations
+end
+
+class Resource
+attributes
+	name : String
+	reference : String
+operations
+end
+
+class GeoPositioning
+attributes
+	latitude : String
+	longitude : String
+operations
+end
+
+composition xxx_Entity_logo between
+	Entity[*] role xxx_Entity_logo_src
+	Image[0..1] role logo
+end
+
+composition xxx_Entity_resource between
+	Entity[0..1] role xxx_Entity_resource_src
+	Resource[*] role resource
+end
+
+composition xxx_Entity_units between
+	Entity[0..1] role xxx_Entity_units_src
+	OrganizationalUnit[*] role units
+end
+
+composition xxx_Entity_address between
+	Entity[0..1] role xxx_Entity_address_src
+	Address[*] role address
+end
+
+composition xxx_Entity_worker between
+	Entity[0..1] role xxx_Entity_worker_src
+	WorkFunction[*] role worker
+end
+
+association xxx_WorkFunction_person between
+	WorkFunction[*] role xxx_WorkFunction_person_src
+	Person[1] role person
+end
+
+association xxx_WorkFunction_entity between
+	WorkFunction[*] role xxx_WorkFunction_entity_src
+	Entity[1] role entity
+end
+
+composition xxx_Person_name between
+	Person[*] role xxx_Person_name_src
+	Name[1] role name
+end
+
+composition xxx_Person_photo between
+	Person[0..1] role xxx_Person_photo_src
+	Image[*] role photo
+end
+
+composition xxx_Person_address between
+	Person[0..1] role xxx_Person_address_src
+	Address[*] role address
+end
+
+composition xxx_Person_phone between
+	Person[0..1] role xxx_Person_phone_src
+	Telephone[*] role phone
+end
+
+composition xxx_Person_email between
+	Person[0..1] role xxx_Person_email_src
+	EMail[*] role email
+end
+
+composition xxx_Person_resource between
+	Person[0..1] role xxx_Person_resource_src
+	Resource[*] role resource
+end
+
+association xxx_Person_function between
+	Person[0..1] role xxx_Person_function_src
+	WorkFunction[*] role function
+end
+
+association xxx_OrganizationalUnit_belongsTo between
+	OrganizationalUnit[*] role xxx_OrganizationalUnit_belongsTo_src
+	Entity[0..1] role belongsTo
+end
+
+association xxx_OrganizationalUnit_organization between
+	OrganizationalUnit[*] role xxx_OrganizationalUnit_organization_src
+	Organization[1] role organization
+end
+
+composition xxx_Address_geo between
+	Address[*] role xxx_Address_geo_src
+	GeoPositioning[0..1] role geo
+end
+

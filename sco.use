@@ -1,0 +1,96 @@
+model sco
+enum ChangeOrderType{
+default
+}
+
+abstract class ChangeOrderCount
+attributes
+	name : String
+	value : Integer
+	type : ChangeOrderType
+	brokenLines : Integer
+	fixedLines : Integer
+	repairEffort : Real
+operations
+end
+
+class TotalChangeOrders<ChangeOrderCount
+attributes
+operations
+end
+
+class CriticalDefectChangeOrders<ChangeOrderCount
+attributes
+operations
+end
+
+class NormalDefectChangeOrders<ChangeOrderCount
+attributes
+operations
+end
+
+class ImprovementChangeOrders<ChangeOrderCount
+attributes
+operations
+end
+
+class NewFeatureChangeOrders<ChangeOrderCount
+attributes
+operations
+end
+
+class ArtifactIdentifier
+attributes
+	resourceName : String
+	baselinedLineCount : Integer
+	currentLineCount : Integer
+operations
+end
+
+class ArtifactCommit
+attributes
+	commitIdentifier : String
+	usageTime : Real
+operations
+end
+
+class CommitHistory
+attributes
+operations
+end
+
+composition xxx_ArtifactIdentifier_criticalDefectChangeOrders between
+	ArtifactIdentifier[*] role xxx_ArtifactIdentifier_criticalDefectChangeOrders_src
+	CriticalDefectChangeOrders[0..1] role criticalDefectChangeOrders
+end
+
+composition xxx_ArtifactIdentifier_normalDefectChangeOrders between
+	ArtifactIdentifier[*] role xxx_ArtifactIdentifier_normalDefectChangeOrders_src
+	NormalDefectChangeOrders[0..1] role normalDefectChangeOrders
+end
+
+composition xxx_ArtifactIdentifier_improvementChangeOrders between
+	ArtifactIdentifier[*] role xxx_ArtifactIdentifier_improvementChangeOrders_src
+	ImprovementChangeOrders[0..1] role improvementChangeOrders
+end
+
+composition xxx_ArtifactIdentifier_newFeatureChangeOrders between
+	ArtifactIdentifier[*] role xxx_ArtifactIdentifier_newFeatureChangeOrders_src
+	NewFeatureChangeOrders[0..1] role newFeatureChangeOrders
+end
+
+composition xxx_ArtifactIdentifier_totalChangeOrders between
+	ArtifactIdentifier[*] role xxx_ArtifactIdentifier_totalChangeOrders_src
+	TotalChangeOrders[1] role totalChangeOrders
+end
+
+composition xxx_ArtifactCommit_artifactIdentifiers between
+	ArtifactCommit[0..1] role xxx_ArtifactCommit_artifactIdentifiers_src
+	ArtifactIdentifier[*] role artifactIdentifiers
+end
+
+composition xxx_CommitHistory_commitRecord between
+	CommitHistory[0..1] role xxx_CommitHistory_commitRecord_src
+	ArtifactCommit[*] role commitRecord
+end
+

@@ -1,0 +1,76 @@
+model source
+class Class
+attributes
+	name : String
+operations
+end
+
+class Association
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	is_primary : Boolean
+operations
+end
+
+class PrimitiveDataType
+attributes
+	name : String
+operations
+end
+
+class ClassDiagram
+attributes
+operations
+end
+
+association xxx_Class_parent between
+	Class[*] role xxx_Class_parent_src
+	Class[0..1] role parent
+end
+
+composition xxx_Class_attrs between
+	Class[0..1] role xxx_Class_attrs_src
+	Attribute[1..*] role attrs
+end
+
+association xxx_Association_src between
+	Association[*] role xxx_Association_src_src
+	Class[1] role src
+end
+
+association xxx_Association_dest between
+	Association[*] role xxx_Association_dest_src
+	Class[1] role dest
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Class[0..1] role type
+end
+
+association xxx_Attribute_ptype between
+	Attribute[*] role xxx_Attribute_ptype_src
+	PrimitiveDataType[0..1] role ptype
+end
+
+composition xxx_ClassDiagram_class_ between
+	ClassDiagram[0..1] role xxx_ClassDiagram_class__src
+	Class[*] role class_
+end
+
+composition xxx_ClassDiagram_ass between
+	ClassDiagram[0..1] role xxx_ClassDiagram_ass_src
+	Association[*] role ass
+end
+
+composition xxx_ClassDiagram_ptypes between
+	ClassDiagram[0..1] role xxx_ClassDiagram_ptypes_src
+	PrimitiveDataType[*] role ptypes
+end
+

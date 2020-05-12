@@ -1,0 +1,320 @@
+model jdtmm
+enum VisibilityKind{
+default
+}
+
+enum TrueFalseDefault{
+default
+}
+
+abstract class JDTMethodBody
+attributes
+operations
+	asText():String
+end
+
+class JDTMethod<JDTMember
+attributes
+	abstract_ : String
+	final : String
+	static : String
+	synchronized : String
+	constructor : String
+operations
+end
+
+abstract class JDTMember<JDTParentJavaElement
+attributes
+	visibility : VisibilityKind
+	explicitPlainTextRequiredImports : String
+operations
+end
+
+abstract class JDTParentJavaElement<JDTJavaElement,JDTParent
+attributes
+operations
+end
+
+abstract class JDTParent
+attributes
+	flags : String
+operations
+	setFlag(flag : String,value : String)
+	isFlagSet(flag : String):String
+end
+
+abstract class JDTJavaElement
+attributes
+	elementName : String
+	elementType : String
+	comment : String
+	generated : String
+operations
+	getQualifiedName():String
+	accept(visitor : String)
+	getJDTSignature():String
+end
+
+class JDTTypeParameter<JDTJavaElement
+attributes
+operations
+end
+
+abstract class JDTType<JDTMember
+attributes
+	class_ : String
+	interface : String
+	enum_ : String
+	abstract_ : String
+	final : String
+	static : String
+	superInterfaceNames : String
+	superClassName : String
+operations
+end
+
+class JDTField<JDTMember
+attributes
+	abstract_ : String
+	final : String
+	static : String
+	isMultiValued : String
+	value : String
+	generateGetter : TrueFalseDefault
+	generateSetter : TrueFalseDefault
+operations
+end
+
+class JDTCompilationUnit<JDTTypeRoot
+attributes
+operations
+end
+
+abstract class JDTTypeRoot<JDTParentJavaElement
+attributes
+operations
+end
+
+class JDTPackageFragment<JDTParentJavaElement
+attributes
+operations
+end
+
+class JDTPackageFragmentRoot<JDTParentJavaElement
+attributes
+operations
+end
+
+class JDTJavaProject<JDTParentJavaElement
+attributes
+operations
+end
+
+class JDTJavaModel<JDTParentJavaElement
+attributes
+operations
+end
+
+class JDTParameter<JDTMember
+attributes
+	final : String
+	isMultiValued : String
+operations
+end
+
+class JDTClass<JDTType
+attributes
+operations
+end
+
+class JDTInterface<JDTType
+attributes
+operations
+end
+
+class JDTEnum<JDTType
+attributes
+operations
+end
+
+class JDTImportDeclaration<JDTJavaElement
+attributes
+operations
+end
+
+class JDTImportContainer<JDTParentJavaElement
+attributes
+operations
+end
+
+class JDTException
+attributes
+operations
+end
+
+class JDTOpaqueBody<JDTMethodBody
+attributes
+	_body : String
+operations
+end
+
+association xxx_JDTMethodBody_owner between
+	JDTMethodBody[*] role xxx_JDTMethodBody_owner_src
+	JDTMethod[1] role owner
+end
+
+association xxx_JDTMethod_owner between
+	JDTMethod[*] role xxx_JDTMethod_owner_src
+	JDTType[1] role owner
+end
+
+composition xxx_JDTMethod_returnType between
+	JDTMethod[*] role xxx_JDTMethod_returnType_src
+	JDTParameter[0..1] role returnType
+end
+
+composition xxx_JDTMethod_parameters between
+	JDTMethod[0..1] role xxx_JDTMethod_parameters_src
+	JDTParameter[*] role parameters
+end
+
+association xxx_JDTMethod_exceptions between
+	JDTMethod[0..1] role xxx_JDTMethod_exceptions_src
+	JDTType[*] role exceptions
+end
+
+composition xxx_JDTMethod_bodies between
+	JDTMethod[0..1] role xxx_JDTMethod_bodies_src
+	JDTMethodBody[*] role bodies
+end
+
+composition xxx_JDTMember_typeParameters between
+	JDTMember[0..1] role xxx_JDTMember_typeParameters_src
+	JDTTypeParameter[*] role typeParameters
+end
+
+association xxx_JDTMember_explicitRequiredImports between
+	JDTMember[0..1] role xxx_JDTMember_explicitRequiredImports_src
+	JDTType[*] role explicitRequiredImports
+end
+
+association xxx_JDTParent_children between
+	JDTParent[0..1] role xxx_JDTParent_children_src
+	JDTJavaElement[*] role children
+end
+
+association xxx_JDTJavaElement_parent between
+	JDTJavaElement[*] role xxx_JDTJavaElement_parent_src
+	JDTParent[0..1] role parent
+end
+
+association xxx_JDTTypeParameter_declaringMember between
+	JDTTypeParameter[*] role xxx_JDTTypeParameter_declaringMember_src
+	JDTMember[0..1] role declaringMember
+end
+
+composition xxx_JDTType_methods between
+	JDTType[0..1] role xxx_JDTType_methods_src
+	JDTMethod[*] role methods
+end
+
+composition xxx_JDTType_fields between
+	JDTType[0..1] role xxx_JDTType_fields_src
+	JDTField[*] role fields
+end
+
+association xxx_JDTType_compilationUnit between
+	JDTType[*] role xxx_JDTType_compilationUnit_src
+	JDTCompilationUnit[0..1] role compilationUnit
+end
+
+composition xxx_JDTType_types between
+	JDTType[0..1] role xxx_JDTType_types_src
+	JDTType[*] role types
+end
+
+association xxx_JDTType_owner between
+	JDTType[*] role xxx_JDTType_owner_src
+	JDTType[0..1] role owner
+end
+
+association xxx_JDTType_superInterfaces between
+	JDTType[0..1] role xxx_JDTType_superInterfaces_src
+	JDTType[*] role superInterfaces
+end
+
+association xxx_JDTType_superClass between
+	JDTType[*] role xxx_JDTType_superClass_src
+	JDTType[0..1] role superClass
+end
+
+association xxx_JDTField_type between
+	JDTField[*] role xxx_JDTField_type_src
+	JDTType[0..1] role type
+end
+
+association xxx_JDTField_owner between
+	JDTField[*] role xxx_JDTField_owner_src
+	JDTType[1] role owner
+end
+
+association xxx_JDTCompilationUnit_packageFragment between
+	JDTCompilationUnit[*] role xxx_JDTCompilationUnit_packageFragment_src
+	JDTPackageFragment[0..1] role packageFragment
+end
+
+composition xxx_JDTCompilationUnit_types between
+	JDTCompilationUnit[0..1] role xxx_JDTCompilationUnit_types_src
+	JDTType[*] role types
+end
+
+association xxx_JDTPackageFragment_packageFragmentRoot between
+	JDTPackageFragment[*] role xxx_JDTPackageFragment_packageFragmentRoot_src
+	JDTPackageFragmentRoot[0..1] role packageFragmentRoot
+end
+
+composition xxx_JDTPackageFragment_compilationUnits between
+	JDTPackageFragment[0..1] role xxx_JDTPackageFragment_compilationUnits_src
+	JDTCompilationUnit[*] role compilationUnits
+end
+
+association xxx_JDTPackageFragmentRoot_javaProject between
+	JDTPackageFragmentRoot[*] role xxx_JDTPackageFragmentRoot_javaProject_src
+	JDTJavaProject[0..1] role javaProject
+end
+
+composition xxx_JDTPackageFragmentRoot_packageFragments between
+	JDTPackageFragmentRoot[0..1] role xxx_JDTPackageFragmentRoot_packageFragments_src
+	JDTPackageFragment[*] role packageFragments
+end
+
+association xxx_JDTJavaProject_javaModel between
+	JDTJavaProject[*] role xxx_JDTJavaProject_javaModel_src
+	JDTJavaModel[0..1] role javaModel
+end
+
+composition xxx_JDTJavaProject_packageFragmentRoots between
+	JDTJavaProject[0..1] role xxx_JDTJavaProject_packageFragmentRoots_src
+	JDTPackageFragmentRoot[*] role packageFragmentRoots
+end
+
+composition xxx_JDTJavaModel_javaProject between
+	JDTJavaModel[0..1] role xxx_JDTJavaModel_javaProject_src
+	JDTJavaProject[*] role javaProject
+end
+
+association xxx_JDTParameter_parameterOwner between
+	JDTParameter[*] role xxx_JDTParameter_parameterOwner_src
+	JDTMethod[0..1] role parameterOwner
+end
+
+association xxx_JDTParameter_type between
+	JDTParameter[*] role xxx_JDTParameter_type_src
+	JDTType[0..1] role type
+end
+
+association xxx_JDTParameter_returnOwner between
+	JDTParameter[*] role xxx_JDTParameter_returnOwner_src
+	JDTMethod[0..1] role returnOwner
+end
+

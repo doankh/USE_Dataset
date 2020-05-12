@@ -1,0 +1,56 @@
+model library
+class CityLibrary
+attributes
+	address : String
+operations
+end
+
+class Customer
+attributes
+	name : String
+operations
+end
+
+abstract class Borrowable
+attributes
+	title : String
+	copiesAvailable : Integer
+operations
+end
+
+class CD<Borrowable
+attributes
+operations
+end
+
+class Magazine<Borrowable
+attributes
+operations
+end
+
+class Book<Borrowable
+attributes
+	authors : String
+operations
+end
+
+composition xxx_CityLibrary_borrowables between
+	CityLibrary[0..1] role xxx_CityLibrary_borrowables_src
+	Borrowable[*] role borrowables
+end
+
+composition xxx_CityLibrary_customers between
+	CityLibrary[0..1] role xxx_CityLibrary_customers_src
+	Customer[*] role customers
+end
+
+association xxx_Customer_borrowed between
+	Customer[0..1] role xxx_Customer_borrowed_src
+	Borrowable[*] role borrowed
+end
+
+association xxx_Borrowable_library between
+	Borrowable[*] role xxx_Borrowable_library_src
+	CityLibrary[0..1] role library
+end
+

@@ -1,0 +1,186 @@
+model wadl
+class WebApplication<NamedElement
+attributes
+operations
+end
+
+class Page<NamedElement
+attributes
+operations
+end
+
+class PageFlow<NamedElement
+attributes
+operations
+end
+
+abstract class Component<NamedElement
+attributes
+operations
+end
+
+class AbstractComponent<Component
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Label<AbstractComponent
+attributes
+	text : String
+operations
+end
+
+abstract class AbstractComponentContainer<Component
+attributes
+operations
+end
+
+class Panel<AbstractComponentContainer
+attributes
+operations
+end
+
+class Window<Panel
+attributes
+	windowName : String
+operations
+end
+
+class TabSheet<AbstractComponentContainer
+attributes
+	tabsCount : Integer
+operations
+end
+
+class GridLayout<AbstractComponentContainer
+attributes
+	rows : Integer
+	columns : Integer
+operations
+end
+
+class OrderedLayout<AbstractComponentContainer
+attributes
+	Orientation : String
+operations
+end
+
+class CustomLayout<AbstractComponentContainer
+attributes
+operations
+end
+
+class Link<AbstractComponent
+attributes
+operations
+end
+
+class Form<AbstractComponent
+attributes
+operations
+end
+
+class Upload<AbstractComponent
+attributes
+operations
+end
+
+class Embedded<AbstractComponent
+attributes
+operations
+end
+
+abstract class AbstractField<AbstractComponent
+attributes
+operations
+end
+
+class Select<AbstractField
+attributes
+operations
+end
+
+class Table<Select
+attributes
+	rows : Integer
+	Columns : Integer
+operations
+end
+
+class Tree<Select
+attributes
+	numberOfNodes : Integer
+operations
+end
+
+class Button<AbstractField
+attributes
+	text : String
+operations
+end
+
+class TextField<AbstractField
+attributes
+	text : String
+operations
+end
+
+class DateField<AbstractField
+attributes
+	Day : Integer
+	Month : Integer
+	year : Integer
+operations
+end
+
+association xxx_WebApplication_initialPage between
+	WebApplication[*] role xxx_WebApplication_initialPage_src
+	Page[1] role initialPage
+end
+
+composition xxx_WebApplication_pages between
+	WebApplication[0..1] role xxx_WebApplication_pages_src
+	Page[1..*] role pages
+end
+
+composition xxx_WebApplication_pageflow between
+	WebApplication[*] role xxx_WebApplication_pageflow_src
+	PageFlow[1] role pageflow
+end
+
+composition xxx_Page_component between
+	Page[0..1] role xxx_Page_component_src
+	Component[1..*] role component
+end
+
+composition xxx_PageFlow_links between
+	PageFlow[0..1] role xxx_PageFlow_links_src
+	Link[1..*] role links
+end
+
+composition xxx_Window_contains between
+	Window[0..1] role xxx_Window_contains_src
+	AbstractComponent[1..*] role contains
+end
+
+association xxx_Link_source between
+	Link[*] role xxx_Link_source_src
+	Page[1] role source
+end
+
+association xxx_Link_target between
+	Link[*] role xxx_Link_target_src
+	Page[1] role target
+end
+
+composition xxx_Form_formElements between
+	Form[0..1] role xxx_Form_formElements_src
+	AbstractField[1..*] role formElements
+end
+

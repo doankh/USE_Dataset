@@ -1,0 +1,65 @@
+model plan
+class ArtifactType
+attributes
+	group : String
+	name : String
+	type : String
+	version : String
+operations
+end
+
+class AttributesType
+attributes
+	group : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class NameValueType
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Plan
+attributes
+	group : String
+	atomic : Boolean
+	name : String
+	provisioning : String
+	scoped : Boolean
+	version : String
+operations
+end
+
+composition xxx_ArtifactType_property between
+	ArtifactType[0..1] role xxx_ArtifactType_property_src
+	NameValueType[*] role property
+end
+
+composition xxx_AttributesType_attribute between
+	AttributesType[0..1] role xxx_AttributesType_attribute_src
+	NameValueType[1..*] role attribute
+end
+
+composition xxx_DocumentRoot_plan between
+	DocumentRoot[*] role xxx_DocumentRoot_plan_src
+	Plan[*] role plan
+end
+
+composition xxx_Plan_attributes_ between
+	Plan[*] role xxx_Plan_attributes__src
+	AttributesType[0..1] role attributes_
+end
+
+composition xxx_Plan_artifact between
+	Plan[0..1] role xxx_Plan_artifact_src
+	ArtifactType[1..*] role artifact
+end
+

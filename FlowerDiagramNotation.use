@@ -1,0 +1,227 @@
+model notation
+abstract class ModelElement
+attributes
+operations
+end
+
+abstract class View<ModelElement
+attributes
+	viewType : String
+	viewDetails : String
+operations
+	getAllChildren():Node
+end
+
+class Node<View
+attributes
+operations
+end
+
+class Diagram<View
+attributes
+	name : String
+operations
+end
+
+abstract class LayoutConstraint
+attributes
+operations
+end
+
+class Location<LayoutConstraint
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Bounds<Location
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class Note<Node
+attributes
+	text : String
+operations
+end
+
+class CodeSyncElement<IDiagrammableElement
+attributes
+	name : String
+	type : String
+operations
+end
+
+abstract class AstCacheElement
+attributes
+	name : String
+operations
+end
+
+class Class<AstCacheElement,ISourceFileMember,IClassMember,IDocumentableElement
+attributes
+operations
+end
+
+class Package<PackageableElement
+attributes
+operations
+end
+
+class SourceFile<PackageableElement
+attributes
+operations
+end
+
+class SourceDirectory<Package
+attributes
+operations
+end
+
+abstract class PackageableElement<AstCacheElement
+attributes
+operations
+end
+
+class Attribute<AstCacheElement,ISourceFileMember,IClassMember,IDocumentableElement,ITypedElement
+attributes
+operations
+end
+
+class Operation<IClassMember,ISourceFileMember,AstCacheElement,ITypedElement,IDocumentableElement
+attributes
+operations
+end
+
+abstract class IClassMember
+attributes
+operations
+end
+
+abstract class ISourceFileMember
+attributes
+operations
+end
+
+class AstCacheRoot
+attributes
+	technology : String
+operations
+end
+
+class CodeSyncRoot
+attributes
+	technology : String
+operations
+end
+
+abstract class IDocumentableElement
+attributes
+	documentation : String
+operations
+end
+
+abstract class ITypedElement
+attributes
+	type : String
+operations
+end
+
+abstract class IDiagrammableElement
+attributes
+operations
+end
+
+composition xxx_View_persistentChildren between
+	View[0..1] role xxx_View_persistentChildren_src
+	Node[*] role persistentChildren
+end
+
+association xxx_View_diagrammableElement between
+	View[*] role xxx_View_diagrammableElement_src
+	IDiagrammableElement[0..1] role diagrammableElement
+end
+
+composition xxx_Node_layoutConstraint between
+	Node[*] role xxx_Node_layoutConstraint_src
+	LayoutConstraint[0..1] role layoutConstraint
+end
+
+association xxx_CodeSyncElement_directCodeSyncRootParent between
+	CodeSyncElement[*] role xxx_CodeSyncElement_directCodeSyncRootParent_src
+	CodeSyncRoot[0..1] role directCodeSyncRootParent
+end
+
+association xxx_CodeSyncElement_astCacheElement between
+	CodeSyncElement[*] role xxx_CodeSyncElement_astCacheElement_src
+	AstCacheElement[0..1] role astCacheElement
+end
+
+composition xxx_CodeSyncElement_children between
+	CodeSyncElement[0..1] role xxx_CodeSyncElement_children_src
+	CodeSyncElement[*] role children
+end
+
+association xxx_CodeSyncElement_parent between
+	CodeSyncElement[*] role xxx_CodeSyncElement_parent_src
+	CodeSyncElement[0..1] role parent
+end
+
+association xxx_AstCacheElement_directAstCacheRootParent between
+	AstCacheElement[*] role xxx_AstCacheElement_directAstCacheRootParent_src
+	AstCacheRoot[0..1] role directAstCacheRootParent
+end
+
+association xxx_AstCacheElement_codeSyncElement between
+	AstCacheElement[*] role xxx_AstCacheElement_codeSyncElement_src
+	CodeSyncElement[0..1] role codeSyncElement
+end
+
+composition xxx_Class_members between
+	Class[0..1] role xxx_Class_members_src
+	IClassMember[*] role members
+end
+
+composition xxx_Package_members between
+	Package[0..1] role xxx_Package_members_src
+	PackageableElement[*] role members
+end
+
+composition xxx_SourceFile_members between
+	SourceFile[0..1] role xxx_SourceFile_members_src
+	ISourceFileMember[*] role members
+end
+
+association xxx_PackageableElement_directPackageParent between
+	PackageableElement[*] role xxx_PackageableElement_directPackageParent_src
+	Package[0..1] role directPackageParent
+end
+
+association xxx_IClassMember_directParentClass between
+	IClassMember[*] role xxx_IClassMember_directParentClass_src
+	Class[0..1] role directParentClass
+end
+
+association xxx_ISourceFileMember_directSourceFileParent between
+	ISourceFileMember[*] role xxx_ISourceFileMember_directSourceFileParent_src
+	SourceFile[0..1] role directSourceFileParent
+end
+
+composition xxx_AstCacheRoot_members between
+	AstCacheRoot[0..1] role xxx_AstCacheRoot_members_src
+	AstCacheElement[*] role members
+end
+
+composition xxx_CodeSyncRoot_members between
+	CodeSyncRoot[0..1] role xxx_CodeSyncRoot_members_src
+	CodeSyncElement[*] role members
+end
+
+association xxx_IDiagrammableElement_views between
+	IDiagrammableElement[0..1] role xxx_IDiagrammableElement_views_src
+	View[*] role views
+end
+

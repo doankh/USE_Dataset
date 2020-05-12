@@ -1,0 +1,260 @@
+model risiko
+enum BorderType{
+default
+}
+
+enum CardSymbol{
+default
+}
+
+enum TurnPhase{
+default
+}
+
+enum GameState{
+default
+}
+
+class Board
+attributes
+	additionalTroops : Integer
+	initialTroops : Integer
+operations
+end
+
+class Country
+attributes
+	name : String
+operations
+end
+
+class Border
+attributes
+	type : BorderType
+operations
+end
+
+class Continent
+attributes
+	additionalTroops : Integer
+	name : String
+operations
+end
+
+class Card
+attributes
+	symbol : CardSymbol
+operations
+end
+
+class Player
+attributes
+	name : String
+	totalTroops : Integer
+operations
+end
+
+class State
+attributes
+	phase : TurnPhase
+	state : GameState
+	troopsToSet : Integer
+	conqueredCountry : Boolean
+operations
+end
+
+class CountryState
+attributes
+	troops : Integer
+operations
+end
+
+class CountryToCountryStateMap
+attributes
+operations
+end
+
+class Atack<InGameAction
+attributes
+	troops : Integer
+	direction : Boolean
+operations
+end
+
+class SetTroops<InGameAction
+attributes
+	troops : Integer
+operations
+end
+
+class CoinCards<InGameAction
+attributes
+operations
+end
+
+abstract class InGameAction<Action
+attributes
+operations
+end
+
+class MoveTroops<InGameAction
+attributes
+	troops : Integer
+operations
+end
+
+class AddPlayer<Action
+attributes
+operations
+end
+
+class StartGame<Action
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class RemovePlayer<Action
+attributes
+operations
+end
+
+class DrawCard<InGameAction
+attributes
+operations
+end
+
+composition xxx_Board_countries between
+	Board[0..1] role xxx_Board_countries_src
+	Country[2..*] role countries
+end
+
+composition xxx_Board_borders between
+	Board[0..1] role xxx_Board_borders_src
+	Border[1..*] role borders
+end
+
+composition xxx_Board_continents between
+	Board[0..1] role xxx_Board_continents_src
+	Continent[1..*] role continents
+end
+
+composition xxx_Board_cards between
+	Board[0..1] role xxx_Board_cards_src
+	Card[1..*] role cards
+end
+
+association xxx_Country_border between
+	Country[0..1] role xxx_Country_border_src
+	Border[1..*] role border
+end
+
+association xxx_Country_continent between
+	Country[*] role xxx_Country_continent_src
+	Continent[1] role continent
+end
+
+association xxx_Border_country between
+	Border[*] role xxx_Border_country_src
+	Country[2] role country
+end
+
+association xxx_Continent_country between
+	Continent[0..1] role xxx_Continent_country_src
+	Country[1..*] role country
+end
+
+association xxx_Card_country between
+	Card[*] role xxx_Card_country_src
+	Country[0..1] role country
+end
+
+association xxx_Player_ownedCountries between
+	Player[0..1] role xxx_Player_ownedCountries_src
+	CountryState[*] role ownedCountries
+end
+
+association xxx_Player_ownedCards between
+	Player[0..1] role xxx_Player_ownedCards_src
+	Card[*] role ownedCards
+end
+
+composition xxx_State_players between
+	State[0..1] role xxx_State_players_src
+	Player[*] role players
+end
+
+composition xxx_State_countryState between
+	State[0..1] role xxx_State_countryState_src
+	CountryToCountryStateMap[*] role countryState
+end
+
+association xxx_State_turn between
+	State[*] role xxx_State_turn_src
+	Player[0..1] role turn
+end
+
+association xxx_CountryState_player between
+	CountryState[*] role xxx_CountryState_player_src
+	Player[1] role player
+end
+
+association xxx_CountryState_country between
+	CountryState[*] role xxx_CountryState_country_src
+	Country[1] role country
+end
+
+association xxx_CountryToCountryStateMap_key between
+	CountryToCountryStateMap[*] role xxx_CountryToCountryStateMap_key_src
+	Country[1] role key
+end
+
+composition xxx_CountryToCountryStateMap_value between
+	CountryToCountryStateMap[*] role xxx_CountryToCountryStateMap_value_src
+	CountryState[1] role value
+end
+
+association xxx_Atack_border between
+	Atack[*] role xxx_Atack_border_src
+	Border[1] role border
+end
+
+association xxx_SetTroops_country between
+	SetTroops[*] role xxx_SetTroops_country_src
+	Country[1] role country
+end
+
+association xxx_CoinCards_cards between
+	CoinCards[*] role xxx_CoinCards_cards_src
+	Card[3] role cards
+end
+
+association xxx_InGameAction_player between
+	InGameAction[*] role xxx_InGameAction_player_src
+	Player[1] role player
+end
+
+association xxx_MoveTroops_from_ between
+	MoveTroops[*] role xxx_MoveTroops_from__src
+	Country[1] role from_
+end
+
+association xxx_MoveTroops_to between
+	MoveTroops[*] role xxx_MoveTroops_to_src
+	Country[1] role to
+end
+
+composition xxx_AddPlayer_players between
+	AddPlayer[0..1] role xxx_AddPlayer_players_src
+	Player[1..*] role players
+end
+
+association xxx_RemovePlayer_players between
+	RemovePlayer[0..1] role xxx_RemovePlayer_players_src
+	Player[1..*] role players
+end
+

@@ -1,0 +1,101 @@
+model koan
+class KoanTransformation<TransformationDefinition
+attributes
+operations
+end
+
+class KoanRule<LocatedElement,NamedElement
+attributes
+operations
+end
+
+abstract class Matcher<LocatedElement
+attributes
+operations
+end
+
+class ForAllMatcher<Matcher,Variable
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TraceInterface
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class TypedWithClass
+attributes
+operations
+end
+
+composition xxx_KoanTransformation_traceInterface between
+	KoanTransformation[*] role xxx_KoanTransformation_traceInterface_src
+	TraceInterface[1] role traceInterface
+end
+
+composition xxx_KoanTransformation_rules between
+	KoanTransformation[0..1] role xxx_KoanTransformation_rules_src
+	KoanRule[*] role rules
+end
+
+composition xxx_KoanRule_matcher between
+	KoanRule[*] role xxx_KoanRule_matcher_src
+	Matcher[1] role matcher
+end
+
+composition xxx_KoanRule_statements between
+	KoanRule[0..1] role xxx_KoanRule_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Matcher_child between
+	Matcher[*] role xxx_Matcher_child_src
+	Matcher[0..1] role child
+end
+
+composition xxx_ForAllMatcher_type between
+	ForAllMatcher[*] role xxx_ForAllMatcher_type_src
+	ClassUse[1] role type
+end
+

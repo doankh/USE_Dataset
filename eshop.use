@@ -1,0 +1,83 @@
+model eShop
+class Customer
+attributes
+	name : Integer
+operations
+	newCustomer(name : Integer,p : Portal):Customer
+end
+
+class GoldCustomer<Customer
+attributes
+operations
+end
+
+class Portal
+attributes
+	name : String
+	url : String
+operations
+	removeGoldCategory(c : Customer)
+end
+
+class Sale
+attributes
+	id : Integer
+	paid : Boolean
+	amount : Integer
+operations
+	addSaleLine(p : Product,quantity : Integer):SaleLine
+end
+
+class SaleLine
+attributes
+	quantity : Integer
+operations
+end
+
+class Product
+attributes
+	price : Integer
+	stock : Integer
+operations
+end
+
+association xxx_Customer_portal between
+	Customer[*] role xxx_Customer_portal_src
+	Portal[1] role portal
+end
+
+association xxx_Customer_sale between
+	Customer[0..1] role xxx_Customer_sale_src
+	Sale[*] role sale
+end
+
+association xxx_Portal_customers between
+	Portal[0..1] role xxx_Portal_customers_src
+	Customer[*] role customers
+end
+
+association xxx_Sale_purchaser between
+	Sale[*] role xxx_Sale_purchaser_src
+	Customer[1] role purchaser
+end
+
+association xxx_Sale_lines between
+	Sale[0..1] role xxx_Sale_lines_src
+	SaleLine[*] role lines
+end
+
+association xxx_SaleLine_sale between
+	SaleLine[*] role xxx_SaleLine_sale_src
+	Sale[0..1] role sale
+end
+
+association xxx_SaleLine_product between
+	SaleLine[*] role xxx_SaleLine_product_src
+	Product[1] role product
+end
+
+association xxx_Product_salesLines between
+	Product[0..1] role xxx_Product_salesLines_src
+	SaleLine[*] role salesLines
+end
+

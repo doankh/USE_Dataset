@@ -1,0 +1,181 @@
+model runway
+class MetaData
+attributes
+	label : String
+	description : String
+	removable : String
+operations
+end
+
+class MDType<MetaData
+attributes
+	name : String
+	exported : Boolean
+operations
+end
+
+class MDClass<MDType
+attributes
+	publish : Boolean
+operations
+end
+
+class MDEntity<MDClass
+attributes
+	table : String
+	generateController : Boolean
+	enforceSiteMaster : Boolean
+operations
+end
+
+class MDElement<MDEntity
+attributes
+	extendable : Boolean
+	isAbstract : Boolean
+operations
+end
+
+class MDBusiness<MDElement
+attributes
+	extends : String
+	cacheAlgorithm : String
+	cacheSize : String
+operations
+end
+
+abstract class MDAttribute<MetaData
+attributes
+	name : String
+	required : Boolean
+	immutable : Boolean
+	displayLabel : String
+operations
+end
+
+class DocumentRoot
+attributes
+operations
+end
+
+class MDAttributeBlob<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeBoolean<MDAttribute
+attributes
+	defaultValue : Boolean
+operations
+end
+
+class MDAttributeCharacter<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeDate<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeDateTime<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeDecimal<MDAttribute
+attributes
+	defaultValue : Real
+operations
+end
+
+class MDAttributeDouble<MDAttribute
+attributes
+	defaultValue : Real
+operations
+end
+
+class MDAttributeEnumeration<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeFloat<MDAttribute
+attributes
+	defaultValue : Real
+operations
+end
+
+class MDAttributeHash<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeInteger<MDAttribute
+attributes
+	defaultValue : Integer
+operations
+end
+
+class MDAttributeNumber<MDAttribute
+attributes
+	defaultValue : Real
+operations
+end
+
+class MDAttributeStruct<MDAttribute
+attributes
+operations
+end
+
+class MDAttributeText<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeTime<MDAttribute
+attributes
+	defaultValue : String
+operations
+end
+
+abstract class MDAttributeLocal<MDAttributeStruct
+attributes
+operations
+end
+
+class MDAttributeLocalCharacter<MDAttributeLocal
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeLocalText<MDAttributeLocal
+attributes
+	defaultValue : String
+operations
+end
+
+class MDAttributeLong<MDAttribute
+attributes
+	defaultValue : Integer
+operations
+end
+
+composition xxx_MDClass_attributes_ between
+	MDClass[0..1] role xxx_MDClass_attributes__src
+	MDAttribute[*] role attributes_
+end
+
+composition xxx_DocumentRoot_MetaData between
+	DocumentRoot[0..1] role xxx_DocumentRoot_MetaData_src
+	MetaData[*] role MetaData
+end
+

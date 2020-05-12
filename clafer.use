@@ -1,0 +1,65 @@
+model clafer
+abstract class Element
+attributes
+operations
+end
+
+abstract class CElement<Element
+attributes
+operations
+end
+
+class Clafer<CElement
+attributes
+	name : String
+	isAbstract : Boolean
+operations
+end
+
+class ClaferModel<Clafer
+attributes
+operations
+end
+
+abstract class CInterval<CElement
+attributes
+	Min : Integer
+	Max : Integer
+operations
+end
+
+class GCardInterval<CInterval
+attributes
+operations
+end
+
+class CardInterval<CInterval
+attributes
+operations
+end
+
+composition xxx_Clafer_cElements between
+	Clafer[0..1] role xxx_Clafer_cElements_src
+	Clafer[*] role cElements
+end
+
+association xxx_Clafer_cSuper between
+	Clafer[*] role xxx_Clafer_cSuper_src
+	Clafer[0..1] role cSuper
+end
+
+association xxx_Clafer_cTarget between
+	Clafer[*] role xxx_Clafer_cTarget_src
+	Clafer[0..1] role cTarget
+end
+
+composition xxx_Clafer_cCardinality between
+	Clafer[*] role xxx_Clafer_cCardinality_src
+	CardInterval[0..1] role cCardinality
+end
+
+composition xxx_Clafer_cGroupCardinality between
+	Clafer[*] role xxx_Clafer_cGroupCardinality_src
+	GCardInterval[0..1] role cGroupCardinality
+end
+

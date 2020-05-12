@@ -1,0 +1,175 @@
+model fML
+enum EditionSchemeType{
+default
+}
+
+enum MSTYPE{
+default
+}
+
+enum VMTYPE{
+default
+}
+
+enum PRTYPE{
+default
+}
+
+class ViewDef
+attributes
+	name : String
+	uri : String
+operations
+end
+
+class VirtualModel
+attributes
+	name : String
+	type : VMTYPE
+	uri : String
+operations
+end
+
+class ModelSlot
+attributes
+	name : String
+	type : MSTYPE
+	uri : String
+	required : String
+	readOnly : String
+operations
+end
+
+class EditionPattern
+attributes
+	name : String
+operations
+end
+
+class PatternRole
+attributes
+	name : String
+	type : PRTYPE
+	modelElement : String
+operations
+end
+
+class EditionScheme
+attributes
+	editionSchemeType : EditionSchemeType
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	widget : PRTYPE
+	name : String
+operations
+end
+
+class EditionAction
+attributes
+operations
+end
+
+class BuiltInAction<EditionAction
+attributes
+operations
+end
+
+class DeclarePatternRole<BuiltInAction
+attributes
+operations
+end
+
+class DeleteAction<BuiltInAction
+attributes
+operations
+end
+
+class AddEMFObjectIndividual<BuiltInAction
+attributes
+operations
+end
+
+composition xxx_ViewDef_elements between
+	ViewDef[0..1] role xxx_ViewDef_elements_src
+	VirtualModel[*] role elements
+end
+
+composition xxx_VirtualModel_ModelSlots between
+	VirtualModel[0..1] role xxx_VirtualModel_ModelSlots_src
+	ModelSlot[*] role ModelSlots
+end
+
+composition xxx_VirtualModel_EditionPatterns between
+	VirtualModel[0..1] role xxx_VirtualModel_EditionPatterns_src
+	EditionPattern[*] role EditionPatterns
+end
+
+association xxx_EditionPattern_superEditionPattern between
+	EditionPattern[*] role xxx_EditionPattern_superEditionPattern_src
+	EditionPattern[0..1] role superEditionPattern
+end
+
+composition xxx_EditionPattern_patternRoles between
+	EditionPattern[0..1] role xxx_EditionPattern_patternRoles_src
+	PatternRole[*] role patternRoles
+end
+
+composition xxx_EditionPattern_editionSchemes between
+	EditionPattern[0..1] role xxx_EditionPattern_editionSchemes_src
+	EditionScheme[*] role editionSchemes
+end
+
+association xxx_PatternRole_modelSlot between
+	PatternRole[*] role xxx_PatternRole_modelSlot_src
+	ModelSlot[0..1] role modelSlot
+end
+
+composition xxx_EditionScheme_parameter between
+	EditionScheme[0..1] role xxx_EditionScheme_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_EditionScheme_editionAction between
+	EditionScheme[0..1] role xxx_EditionScheme_editionAction_src
+	EditionAction[*] role editionAction
+end
+
+association xxx_Parameter_editionPattern between
+	Parameter[*] role xxx_Parameter_editionPattern_src
+	EditionPattern[0..1] role editionPattern
+end
+
+association xxx_DeclarePatternRole_patternRole between
+	DeclarePatternRole[0..1] role xxx_DeclarePatternRole_patternRole_src
+	PatternRole[*] role patternRole
+end
+
+association xxx_DeclarePatternRole_parameter between
+	DeclarePatternRole[*] role xxx_DeclarePatternRole_parameter_src
+	Parameter[0..1] role parameter
+end
+
+composition xxx_DeclarePatternRole_add between
+	DeclarePatternRole[0..1] role xxx_DeclarePatternRole_add_src
+	AddEMFObjectIndividual[*] role add
+end
+
+association xxx_DeleteAction_patternRole between
+	DeleteAction[*] role xxx_DeleteAction_patternRole_src
+	PatternRole[0..1] role patternRole
+end
+
+association xxx_AddEMFObjectIndividual_editionPattern between
+	AddEMFObjectIndividual[*] role xxx_AddEMFObjectIndividual_editionPattern_src
+	EditionPattern[0..1] role editionPattern
+end
+
+association xxx_AddEMFObjectIndividual_modelSlot between
+	AddEMFObjectIndividual[*] role xxx_AddEMFObjectIndividual_modelSlot_src
+	ModelSlot[0..1] role modelSlot
+end
+

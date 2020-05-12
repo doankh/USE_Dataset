@@ -1,0 +1,290 @@
+model ScenarioParticipant
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ScenarioParticipant<NamedElement
+attributes
+operations
+end
+
+class Instance
+attributes
+	type : String
+operations
+end
+
+class ObserverInstance
+attributes
+	type : String
+operations
+end
+
+class Status<NamedElement
+attributes
+operations
+end
+
+class Cut<NamedElement
+attributes
+operations
+end
+
+class State<NamedElement
+attributes
+operations
+end
+
+class Transition
+attributes
+	number : Integer
+operations
+end
+
+class EnabledTransitions
+attributes
+operations
+end
+
+class Action
+attributes
+	kind : String
+	value : String
+operations
+end
+
+class Message<NamedElement
+attributes
+	signalType : String
+operations
+end
+
+class VariableSet
+attributes
+operations
+end
+
+class ParameterSet
+attributes
+operations
+end
+
+class Queue
+attributes
+operations
+end
+
+class Variable<NamedElement
+attributes
+operations
+end
+
+abstract class VariableValue
+attributes
+operations
+end
+
+class Parameter<Variable
+attributes
+operations
+end
+
+class Type<NamedElement
+attributes
+operations
+end
+
+class Clock<VariableValue
+attributes
+	id : Integer
+operations
+end
+
+class DiscreteClock<Clock
+attributes
+	value : Integer
+operations
+end
+
+class ContinuousClock<Clock
+attributes
+	value : Real
+operations
+end
+
+class Pid<VariableValue,NamedElement
+attributes
+	number : Integer
+operations
+end
+
+class IFInteger<VariableValue
+attributes
+	value : Integer
+operations
+end
+
+class IFReal<VariableValue
+attributes
+	value : Real
+operations
+end
+
+class IFBoolean<VariableValue
+attributes
+	value : Boolean
+operations
+end
+
+composition xxx_ScenarioParticipant_instances between
+	ScenarioParticipant[0..1] role xxx_ScenarioParticipant_instances_src
+	Instance[*] role instances
+end
+
+composition xxx_ScenarioParticipant_observers between
+	ScenarioParticipant[0..1] role xxx_ScenarioParticipant_observers_src
+	ObserverInstance[*] role observers
+end
+
+composition xxx_Instance_state between
+	Instance[*] role xxx_Instance_state_src
+	State[0..1] role state
+end
+
+composition xxx_Instance_pid between
+	Instance[*] role xxx_Instance_pid_src
+	Pid[0..1] role pid
+end
+
+composition xxx_Instance_queue between
+	Instance[*] role xxx_Instance_queue_src
+	Queue[0..1] role queue
+end
+
+composition xxx_Instance_variableSet between
+	Instance[*] role xxx_Instance_variableSet_src
+	VariableSet[0..1] role variableSet
+end
+
+composition xxx_Instance_paramaterSet between
+	Instance[*] role xxx_Instance_paramaterSet_src
+	ParameterSet[0..1] role paramaterSet
+end
+
+composition xxx_ObserverInstance_state between
+	ObserverInstance[*] role xxx_ObserverInstance_state_src
+	State[0..1] role state
+end
+
+composition xxx_ObserverInstance_pid between
+	ObserverInstance[*] role xxx_ObserverInstance_pid_src
+	Pid[0..1] role pid
+end
+
+composition xxx_ObserverInstance_queue between
+	ObserverInstance[*] role xxx_ObserverInstance_queue_src
+	Queue[0..1] role queue
+end
+
+composition xxx_ObserverInstance_variableSet between
+	ObserverInstance[*] role xxx_ObserverInstance_variableSet_src
+	VariableSet[0..1] role variableSet
+end
+
+composition xxx_ObserverInstance_paramaterSet between
+	ObserverInstance[*] role xxx_ObserverInstance_paramaterSet_src
+	ParameterSet[0..1] role paramaterSet
+end
+
+composition xxx_ObserverInstance_eventSet between
+	ObserverInstance[*] role xxx_ObserverInstance_eventSet_src
+	EnabledTransitions[0..1] role eventSet
+end
+
+composition xxx_ObserverInstance_status between
+	ObserverInstance[*] role xxx_ObserverInstance_status_src
+	Status[0..1] role status
+end
+
+composition xxx_ObserverInstance_cut between
+	ObserverInstance[*] role xxx_ObserverInstance_cut_src
+	Cut[0..1] role cut
+end
+
+composition xxx_Transition_actions between
+	Transition[0..1] role xxx_Transition_actions_src
+	Action[*] role actions
+end
+
+composition xxx_EnabledTransitions_enabledTransitions between
+	EnabledTransitions[0..1] role xxx_EnabledTransitions_enabledTransitions_src
+	Transition[*] role enabledTransitions
+end
+
+composition xxx_Action_message between
+	Action[*] role xxx_Action_message_src
+	Message[0..1] role message
+end
+
+composition xxx_Action_process between
+	Action[*] role xxx_Action_process_src
+	Pid[0..1] role process
+end
+
+composition xxx_Action_by between
+	Action[*] role xxx_Action_by_src
+	Pid[0..1] role by
+end
+
+composition xxx_Action_from_ between
+	Action[*] role xxx_Action_from__src
+	Pid[0..1] role from_
+end
+
+composition xxx_Action_via between
+	Action[*] role xxx_Action_via_src
+	Pid[0..1] role via
+end
+
+composition xxx_Action_to between
+	Action[*] role xxx_Action_to_src
+	Pid[0..1] role to
+end
+
+composition xxx_Message_from_ between
+	Message[*] role xxx_Message_from__src
+	Pid[0..1] role from_
+end
+
+composition xxx_Message_to between
+	Message[*] role xxx_Message_to_src
+	Pid[0..1] role to
+end
+
+composition xxx_Message_parameterSet between
+	Message[*] role xxx_Message_parameterSet_src
+	ParameterSet[0..1] role parameterSet
+end
+
+composition xxx_VariableSet_variables between
+	VariableSet[0..1] role xxx_VariableSet_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_ParameterSet_paramaters between
+	ParameterSet[0..1] role xxx_ParameterSet_paramaters_src
+	Parameter[*] role paramaters
+end
+
+composition xxx_Queue_messages between
+	Queue[0..1] role xxx_Queue_messages_src
+	Message[*] role messages
+end
+
+composition xxx_Variable_variable between
+	Variable[*] role xxx_Variable_variable_src
+	VariableValue[0..1] role variable
+end
+

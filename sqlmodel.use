@@ -1,0 +1,1217 @@
+model sqlmodel
+enum GenerateType{
+default
+}
+
+enum ReferentialActionType{
+default
+}
+
+enum MatchType{
+default
+}
+
+enum IncrementType{
+default
+}
+
+enum CoercibilityType{
+default
+}
+
+enum IntervalQualifierType{
+default
+}
+
+enum OrderingType{
+default
+}
+
+enum OrderingCategoryType{
+default
+}
+
+enum PrimitiveType{
+default
+}
+
+enum LinkControlOption{
+default
+}
+
+enum IntegrityControlOption{
+default
+}
+
+enum ReadPermissionOption{
+default
+}
+
+enum WritePermissionOption{
+default
+}
+
+enum UnlinkOption{
+default
+}
+
+enum DataAccess{
+default
+}
+
+enum ParameterMode{
+default
+}
+
+enum CheckType{
+default
+}
+
+enum ReferenceType{
+default
+}
+
+enum ActionTimeType{
+default
+}
+
+enum ActionGranularityType{
+default
+}
+
+class IdentitySpecifier<SQLObject
+attributes
+	generationType : GenerateType
+	startValue : Integer
+	increment : Integer
+	minimum : Integer
+	maximum : Integer
+	cycleOption : Boolean
+operations
+end
+
+abstract class TypedElement<SQLObject
+attributes
+operations
+	setDataType(newType : DataType)
+	getDataType():DataType
+end
+
+class Dependency<SQLObject
+attributes
+	dependencyType : String
+operations
+end
+
+class Schema<SQLObject
+attributes
+operations
+end
+
+abstract class SQLObject
+attributes
+	description : String
+	label : String
+operations
+	addEAnnotation(source : String):String
+	addEAnnotationDetail(eAnnotation : String,key : String,value : String)
+	getEAnnotationDetail(eAnnotation : String,key : String):String
+	setAnnotationDetail(eAnnotation : String,key : String,value : String)
+	removeEAnnotationDetail(eAnnotation : String,key : String)
+	getEAnnotation(source : String):String
+end
+
+class Sequence_<TypedElement
+attributes
+operations
+end
+
+class Database<SQLObject
+attributes
+	vendor : String
+	version : String
+operations
+	getUserDefinedTypes():String
+end
+
+class Event<SQLObject
+attributes
+	for_ : String
+	condition : String
+	action : String
+	enabled : Boolean
+operations
+end
+
+class Comment
+attributes
+	description : String
+operations
+end
+
+class Catalog<SQLObject
+attributes
+operations
+end
+
+abstract class ObjectExtension
+attributes
+operations
+end
+
+class Assertion<Constraint
+attributes
+operations
+end
+
+abstract class Constraint<SQLObject
+attributes
+	deferrable : Boolean
+	initiallyDeferred : Boolean
+	enforced : Boolean
+operations
+end
+
+abstract class TableConstraint<Constraint
+attributes
+operations
+end
+
+abstract class ReferenceConstraint<TableConstraint
+attributes
+operations
+end
+
+class CheckConstraint<TableConstraint
+attributes
+operations
+end
+
+class ForeignKey<ReferenceConstraint
+attributes
+	match : MatchType
+	onUpdate : ReferentialActionType
+	onDelete : ReferentialActionType
+operations
+end
+
+class UniqueConstraint<ReferenceConstraint
+attributes
+	clustered : Boolean
+operations
+end
+
+class PrimaryKey<UniqueConstraint
+attributes
+operations
+end
+
+class Index<SQLObject
+attributes
+	clustered : Boolean
+	fillFactor : Integer
+	unique : Boolean
+	systemGenerated : Boolean
+operations
+end
+
+class IndexMember<SQLObject
+attributes
+	incrementType : IncrementType
+operations
+end
+
+class IndexExpression<SQLObject
+attributes
+	sql : String
+operations
+end
+
+abstract class UserDefinedType<DataType
+attributes
+operations
+end
+
+abstract class DataType<SQLObject
+attributes
+operations
+	setContainer(newContainer : TypedElement)
+end
+
+abstract class PredefinedDataType<SQLDataType
+attributes
+	primitiveType : PrimitiveType
+operations
+end
+
+abstract class CollectionDataType<ConstructedDataType
+attributes
+operations
+end
+
+abstract class NumericalDataType<PredefinedDataType
+attributes
+	precision : Integer
+operations
+end
+
+class CharacterStringDataType<PredefinedDataType
+attributes
+	length : Integer
+	coercibility : CoercibilityType
+	fixedLength : Boolean
+	collationName : String
+operations
+end
+
+class RowDataType<ConstructedDataType
+attributes
+operations
+end
+
+abstract class ArrayDataType<CollectionDataType
+attributes
+	maxCardinality : Integer
+operations
+end
+
+abstract class MultisetDataType<CollectionDataType
+attributes
+operations
+end
+
+class BooleanDataType<PredefinedDataType
+attributes
+operations
+end
+
+class IntervalDataType<PredefinedDataType
+attributes
+	leadingQualifier : IntervalQualifierType
+	trailingQualifier : IntervalQualifierType
+	leadingFieldPrecision : Integer
+	trailingFieldPrecision : Integer
+	fractionalSecondsPrecision : Integer
+operations
+end
+
+class BinaryStringDataType<PredefinedDataType
+attributes
+	length : Integer
+operations
+	equals():Boolean
+end
+
+class CharacterSet<SQLObject
+attributes
+	repertoire : String
+	defaultCollation : String
+	encoding : String
+operations
+end
+
+class TimeDataType<PredefinedDataType
+attributes
+	fractionalSecondsPrecision : Integer
+	timeZone : Boolean
+operations
+end
+
+class DistinctUserDefinedType<UserDefinedType
+attributes
+operations
+end
+
+class StructuredUserDefinedType<UserDefinedType
+attributes
+	instantiable : Boolean
+	final : Boolean
+operations
+end
+
+class AttributeDefinition<TypedElement
+attributes
+	scopeCheck : ReferentialActionType
+	scopeChecked : Boolean
+	defaultValue : String
+operations
+end
+
+class FixedPrecisionDataType<ExactNumericDataType
+attributes
+operations
+end
+
+class Domain<DistinctUserDefinedType
+attributes
+	defaultValue : String
+operations
+end
+
+class Field<TypedElement
+attributes
+	scopeCheck : ReferentialActionType
+	scopeChecked : Boolean
+operations
+end
+
+abstract class ReferenceDataType<ConstructedDataType
+attributes
+operations
+end
+
+abstract class ConstructedDataType<DataType
+attributes
+operations
+end
+
+abstract class SQLDataType<DataType
+attributes
+operations
+end
+
+class DataLinkDataType<PredefinedDataType
+attributes
+	length : Integer
+	linkControl : LinkControlOption
+	integrityControl : IntegrityControlOption
+	readPermission : ReadPermissionOption
+	writePermission : WritePermissionOption
+	recovery : Boolean
+	unlink : UnlinkOption
+operations
+end
+
+class UserDefinedTypeOrdering<SQLObject
+attributes
+	orderingForm : OrderingType
+	orderingCategory : OrderingCategoryType
+operations
+end
+
+class DateDataType<PredefinedDataType
+attributes
+operations
+end
+
+abstract class ExactNumericDataType<NumericalDataType
+attributes
+	scale : Integer
+operations
+end
+
+class ApproximateNumericDataType<NumericalDataType
+attributes
+operations
+end
+
+class IntegerDataType<ExactNumericDataType
+attributes
+operations
+end
+
+class XMLDataType<PredefinedDataType
+attributes
+operations
+end
+
+class ElementType<TypedElement
+attributes
+operations
+end
+
+abstract class QueryExpression
+attributes
+operations
+	getSQL():String
+	setSQL(sqlText : String)
+end
+
+abstract class ValueExpression
+attributes
+operations
+	getSQL():String
+	setSQL(sqlText : String)
+end
+
+abstract class SearchCondition
+attributes
+operations
+	getSQL():String
+	setSQL(sqlText : String)
+end
+
+class QueryExpressionDefault<SQLObject,QueryExpression
+attributes
+	SQL : String
+operations
+end
+
+class SearchConditionDefault<SQLObject,SearchCondition
+attributes
+	SQL : String
+operations
+end
+
+class ValueExpressionDefault<SQLObject,ValueExpression
+attributes
+	SQL : String
+operations
+end
+
+abstract class Routine<SQLObject
+attributes
+	specificName : String
+	language : String
+	parameterStyle : String
+	deterministic : Boolean
+	sqlDataAccess : DataAccess
+	creationTS : String
+	lastAlteredTS : String
+	authorizationID : String
+	security : String
+	externalName : String
+operations
+end
+
+class Source<SQLObject
+attributes
+	body : String
+operations
+end
+
+class Parameter<TypedElement
+attributes
+	mode : ParameterMode
+	locator : Boolean
+operations
+end
+
+class Procedure<Routine
+attributes
+	maxResultSets : Integer
+	oldSavePoint : Boolean
+operations
+end
+
+class Function<Routine
+attributes
+	nullCall : Boolean
+	static : Boolean
+	transformGroup : String
+	typePreserving : Boolean
+	mutator : Boolean
+operations
+end
+
+class RoutineResultTable<Table
+attributes
+operations
+end
+
+class Method<Function
+attributes
+	overriding : Boolean
+	constructor : Boolean
+operations
+end
+
+class UserDefinedFunction<Function
+attributes
+operations
+end
+
+class BuiltInFunction<Function
+attributes
+operations
+end
+
+abstract class SQLStatement
+attributes
+operations
+	getSQL():String
+	setSQL(sqlText : String)
+end
+
+abstract class SQLDataStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLSchemaStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLControlStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLDataChangeStatement<SQLDataStatement
+attributes
+operations
+end
+
+class SQLStatementDefault<SQLObject,SQLStatement
+attributes
+	SQL : String
+operations
+end
+
+abstract class SQLConnectionStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLDiagnosticsStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLDynamicStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLSessionStatement<SQLStatement
+attributes
+operations
+end
+
+abstract class SQLTransactionStatement<SQLStatement
+attributes
+operations
+end
+
+class ViewTable<DerivedTable
+attributes
+	checkType : CheckType
+operations
+end
+
+class TemporaryTable<BaseTable
+attributes
+	local : Boolean
+	deleteOnCommit : Boolean
+operations
+end
+
+abstract class Table<SQLObject
+attributes
+	selfRefColumnGeneration : ReferenceType
+	insertable : Boolean
+	updatable : Boolean
+operations
+end
+
+class PersistentTable<BaseTable
+attributes
+operations
+end
+
+abstract class DerivedTable<Table
+attributes
+operations
+end
+
+abstract class BaseTable<Table
+attributes
+operations
+	getUniqueConstraints():String
+	getForeignKeys():String
+	getPrimaryKey():PrimaryKey
+end
+
+class Column<TypedElement
+attributes
+	implementationDependent : Boolean
+	nullable : Boolean
+	defaultValue : String
+	scopeCheck : ReferentialActionType
+	scopeChecked : Boolean
+operations
+	isPartOfForeignKey():Boolean
+	isPartOfUniqueConstraint():Boolean
+	isPartOfPrimaryKey():Boolean
+end
+
+class Trigger<SQLObject
+attributes
+	actionGranularity : ActionGranularityType
+	timeStamp : String
+	actionTime : ActionTimeType
+	updateType : Boolean
+	insertType : Boolean
+	deleteType : Boolean
+	oldRow : String
+	newRow : String
+	oldTable : String
+	newTable : String
+operations
+end
+
+abstract class AuthorizationIdentifier<SQLObject
+attributes
+operations
+end
+
+class Privilege<SQLObject
+attributes
+	grantable : Boolean
+	action : String
+	withHierarchy : Boolean
+operations
+end
+
+class Group<AuthorizationIdentifier
+attributes
+operations
+end
+
+class User<AuthorizationIdentifier
+attributes
+operations
+end
+
+class Role<AuthorizationIdentifier
+attributes
+operations
+end
+
+class RoleAuthorization<SQLObject
+attributes
+	grantable : Boolean
+operations
+end
+
+composition xxx_TypedElement_containedType between
+	TypedElement[*] role xxx_TypedElement_containedType_src
+	SQLDataType[0..1] role containedType
+end
+
+association xxx_TypedElement_referencedType between
+	TypedElement[*] role xxx_TypedElement_referencedType_src
+	UserDefinedType[0..1] role referencedType
+end
+
+association xxx_Schema_triggers between
+	Schema[0..1] role xxx_Schema_triggers_src
+	Trigger[*] role triggers
+end
+
+association xxx_Schema_indices between
+	Schema[0..1] role xxx_Schema_indices_src
+	Index[*] role indices
+end
+
+association xxx_Schema_tables between
+	Schema[0..1] role xxx_Schema_tables_src
+	Table[*] role tables
+end
+
+association xxx_Schema_sequences between
+	Schema[0..1] role xxx_Schema_sequences_src
+	Sequence_[*] role sequences
+end
+
+association xxx_Schema_database between
+	Schema[*] role xxx_Schema_database_src
+	Database[1] role database
+end
+
+association xxx_Schema_Catalog between
+	Schema[*] role xxx_Schema_Catalog_src
+	Catalog[1] role Catalog
+end
+
+association xxx_Schema_assertions between
+	Schema[0..1] role xxx_Schema_assertions_src
+	Assertion[*] role assertions
+end
+
+association xxx_Schema_userDefinedTypes between
+	Schema[0..1] role xxx_Schema_userDefinedTypes_src
+	UserDefinedType[*] role userDefinedTypes
+end
+
+association xxx_Schema_charSets between
+	Schema[0..1] role xxx_Schema_charSets_src
+	CharacterSet[*] role charSets
+end
+
+association xxx_Schema_routines between
+	Schema[0..1] role xxx_Schema_routines_src
+	Routine[*] role routines
+end
+
+association xxx_Schema_owner between
+	Schema[*] role xxx_Schema_owner_src
+	AuthorizationIdentifier[1] role owner
+end
+
+composition xxx_SQLObject_dependencies between
+	SQLObject[0..1] role xxx_SQLObject_dependencies_src
+	Dependency[*] role dependencies
+end
+
+association xxx_SQLObject_comments between
+	SQLObject[0..1] role xxx_SQLObject_comments_src
+	Comment[*] role comments
+end
+
+composition xxx_SQLObject_extensions between
+	SQLObject[0..1] role xxx_SQLObject_extensions_src
+	ObjectExtension[*] role extensions
+end
+
+association xxx_SQLObject_privileges between
+	SQLObject[0..1] role xxx_SQLObject_privileges_src
+	Privilege[*] role privileges
+end
+
+composition xxx_Sequence_identity between
+	Sequence_[*] role xxx_Sequence_identity_src
+	IdentitySpecifier[1] role identity
+end
+
+association xxx_Sequence_schema between
+	Sequence_[*] role xxx_Sequence_schema_src
+	Schema[1] role schema
+end
+
+association xxx_Database_schemas between
+	Database[0..1] role xxx_Database_schemas_src
+	Schema[*] role schemas
+end
+
+association xxx_Database_events between
+	Database[0..1] role xxx_Database_events_src
+	Event[*] role events
+end
+
+association xxx_Database_catalogs between
+	Database[0..1] role xxx_Database_catalogs_src
+	Catalog[*] role catalogs
+end
+
+association xxx_Database_authorizationIds between
+	Database[0..1] role xxx_Database_authorizationIds_src
+	AuthorizationIdentifier[*] role authorizationIds
+end
+
+association xxx_Event_Database between
+	Event[*] role xxx_Event_Database_src
+	Database[1] role Database
+end
+
+association xxx_Comment_SQLObject between
+	Comment[*] role xxx_Comment_SQLObject_src
+	SQLObject[1] role SQLObject
+end
+
+association xxx_Catalog_Database between
+	Catalog[*] role xxx_Catalog_Database_src
+	Database[1] role Database
+end
+
+association xxx_Catalog_schemas between
+	Catalog[0..1] role xxx_Catalog_schemas_src
+	Schema[*] role schemas
+end
+
+association xxx_ObjectExtension_SQLObject between
+	ObjectExtension[*] role xxx_ObjectExtension_SQLObject_src
+	SQLObject[1] role SQLObject
+end
+
+composition xxx_Assertion_searchCondition between
+	Assertion[*] role xxx_Assertion_searchCondition_src
+	SearchCondition[0..1] role searchCondition
+end
+
+association xxx_Assertion_schema between
+	Assertion[*] role xxx_Assertion_schema_src
+	Schema[1] role schema
+end
+
+association xxx_Assertion_constrainedTables between
+	Assertion[0..1] role xxx_Assertion_constrainedTables_src
+	BaseTable[1..*] role constrainedTables
+end
+
+association xxx_TableConstraint_BaseTable between
+	TableConstraint[*] role xxx_TableConstraint_BaseTable_src
+	BaseTable[0..1] role BaseTable
+end
+
+association xxx_ReferenceConstraint_members between
+	ReferenceConstraint[0..1] role xxx_ReferenceConstraint_members_src
+	Column[1..*] role members
+end
+
+composition xxx_CheckConstraint_searchCondition between
+	CheckConstraint[*] role xxx_CheckConstraint_searchCondition_src
+	SearchCondition[0..1] role searchCondition
+end
+
+association xxx_ForeignKey_uniqueConstraint between
+	ForeignKey[*] role xxx_ForeignKey_uniqueConstraint_src
+	UniqueConstraint[0..1] role uniqueConstraint
+end
+
+association xxx_ForeignKey_referencedMembers between
+	ForeignKey[0..1] role xxx_ForeignKey_referencedMembers_src
+	Column[1..*] role referencedMembers
+end
+
+association xxx_ForeignKey_uniqueIndex between
+	ForeignKey[*] role xxx_ForeignKey_uniqueIndex_src
+	Index[0..1] role uniqueIndex
+end
+
+association xxx_ForeignKey_referencedTable between
+	ForeignKey[*] role xxx_ForeignKey_referencedTable_src
+	BaseTable[0..1] role referencedTable
+end
+
+association xxx_UniqueConstraint_ForeignKey between
+	UniqueConstraint[0..1] role xxx_UniqueConstraint_ForeignKey_src
+	ForeignKey[*] role ForeignKey
+end
+
+association xxx_Index_Schema between
+	Index[*] role xxx_Index_Schema_src
+	Schema[1] role Schema
+end
+
+composition xxx_Index_members between
+	Index[0..1] role xxx_Index_members_src
+	IndexMember[1..*] role members
+end
+
+association xxx_Index_table between
+	Index[*] role xxx_Index_table_src
+	Table[1] role table
+end
+
+association xxx_Index_ForeignKey between
+	Index[0..1] role xxx_Index_ForeignKey_src
+	ForeignKey[*] role ForeignKey
+end
+
+composition xxx_Index_includedMembers between
+	Index[0..1] role xxx_Index_includedMembers_src
+	IndexMember[*] role includedMembers
+end
+
+association xxx_IndexMember_column between
+	IndexMember[*] role xxx_IndexMember_column_src
+	Column[0..1] role column
+end
+
+composition xxx_IndexMember_expression between
+	IndexMember[*] role xxx_IndexMember_expression_src
+	IndexExpression[0..1] role expression
+end
+
+association xxx_UserDefinedType_schema between
+	UserDefinedType[*] role xxx_UserDefinedType_schema_src
+	Schema[1] role schema
+end
+
+composition xxx_UserDefinedType_ordering between
+	UserDefinedType[*] role xxx_UserDefinedType_ordering_src
+	UserDefinedTypeOrdering[0..1] role ordering
+end
+
+composition xxx_CollectionDataType_elementType between
+	CollectionDataType[*] role xxx_CollectionDataType_elementType_src
+	ElementType[1] role elementType
+end
+
+association xxx_CharacterStringDataType_characterSet between
+	CharacterStringDataType[*] role xxx_CharacterStringDataType_characterSet_src
+	CharacterSet[1] role characterSet
+end
+
+composition xxx_RowDataType_fields between
+	RowDataType[0..1] role xxx_RowDataType_fields_src
+	Field[1..*] role fields
+end
+
+association xxx_CharacterSet_CharacterStringDataType between
+	CharacterSet[*] role xxx_CharacterSet_CharacterStringDataType_src
+	CharacterStringDataType[1] role CharacterStringDataType
+end
+
+association xxx_CharacterSet_schema between
+	CharacterSet[*] role xxx_CharacterSet_schema_src
+	Schema[1] role schema
+end
+
+composition xxx_DistinctUserDefinedType_predefinedRepresentation between
+	DistinctUserDefinedType[*] role xxx_DistinctUserDefinedType_predefinedRepresentation_src
+	PredefinedDataType[1] role predefinedRepresentation
+end
+
+association xxx_StructuredUserDefinedType_super between
+	StructuredUserDefinedType[*] role xxx_StructuredUserDefinedType_super_src
+	StructuredUserDefinedType[0..1] role super
+end
+
+association xxx_StructuredUserDefinedType_sub between
+	StructuredUserDefinedType[0..1] role xxx_StructuredUserDefinedType_sub_src
+	StructuredUserDefinedType[*] role sub
+end
+
+composition xxx_StructuredUserDefinedType_attributes_ between
+	StructuredUserDefinedType[0..1] role xxx_StructuredUserDefinedType_attributes__src
+	AttributeDefinition[*] role attributes_
+end
+
+composition xxx_StructuredUserDefinedType_methods between
+	StructuredUserDefinedType[0..1] role xxx_StructuredUserDefinedType_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Domain_constraint between
+	Domain[0..1] role xxx_Domain_constraint_src
+	CheckConstraint[*] role constraint
+end
+
+association xxx_ReferenceDataType_scopeTable between
+	ReferenceDataType[*] role xxx_ReferenceDataType_scopeTable_src
+	Table[1] role scopeTable
+end
+
+association xxx_ReferenceDataType_referencedType between
+	ReferenceDataType[*] role xxx_ReferenceDataType_referencedType_src
+	StructuredUserDefinedType[1] role referencedType
+end
+
+association xxx_UserDefinedTypeOrdering_orderingRoutine between
+	UserDefinedTypeOrdering[*] role xxx_UserDefinedTypeOrdering_orderingRoutine_src
+	Routine[1] role orderingRoutine
+end
+
+association xxx_ElementType_CollectionDataType between
+	ElementType[*] role xxx_ElementType_CollectionDataType_src
+	CollectionDataType[0..1] role CollectionDataType
+end
+
+composition xxx_Routine_parameters between
+	Routine[0..1] role xxx_Routine_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Routine_source between
+	Routine[*] role xxx_Routine_source_src
+	Source[0..1] role source
+end
+
+association xxx_Routine_schema between
+	Routine[*] role xxx_Routine_schema_src
+	Schema[1] role schema
+end
+
+association xxx_Parameter_routine between
+	Parameter[*] role xxx_Parameter_routine_src
+	Routine[1] role routine
+end
+
+composition xxx_Parameter_stringTypeOption between
+	Parameter[*] role xxx_Parameter_stringTypeOption_src
+	CharacterStringDataType[0..1] role stringTypeOption
+end
+
+composition xxx_Procedure_resultSet between
+	Procedure[0..1] role xxx_Procedure_resultSet_src
+	RoutineResultTable[*] role resultSet
+end
+
+composition xxx_Function_returnTable between
+	Function[*] role xxx_Function_returnTable_src
+	RoutineResultTable[0..1] role returnTable
+end
+
+composition xxx_Function_returnScalar between
+	Function[*] role xxx_Function_returnScalar_src
+	Parameter[0..1] role returnScalar
+end
+
+composition xxx_Function_returnCast between
+	Function[*] role xxx_Function_returnCast_src
+	Parameter[0..1] role returnCast
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[1..*] role columns
+end
+
+association xxx_Table_supertable between
+	Table[*] role xxx_Table_supertable_src
+	Table[0..1] role supertable
+end
+
+association xxx_Table_subtables between
+	Table[0..1] role xxx_Table_subtables_src
+	Table[*] role subtables
+end
+
+association xxx_Table_schema between
+	Table[*] role xxx_Table_schema_src
+	Schema[1] role schema
+end
+
+association xxx_Table_udt between
+	Table[*] role xxx_Table_udt_src
+	StructuredUserDefinedType[0..1] role udt
+end
+
+association xxx_Table_triggers between
+	Table[0..1] role xxx_Table_triggers_src
+	Trigger[*] role triggers
+end
+
+association xxx_Table_index between
+	Table[0..1] role xxx_Table_index_src
+	Index[*] role index
+end
+
+composition xxx_DerivedTable_queryExpression between
+	DerivedTable[*] role xxx_DerivedTable_queryExpression_src
+	QueryExpression[0..1] role queryExpression
+end
+
+composition xxx_BaseTable_constraints_ between
+	BaseTable[0..1] role xxx_BaseTable_constraints__src
+	TableConstraint[*] role constraints_
+end
+
+association xxx_BaseTable_referencingForeignKeys between
+	BaseTable[0..1] role xxx_BaseTable_referencingForeignKeys_src
+	ForeignKey[*] role referencingForeignKeys
+end
+
+association xxx_Column_table between
+	Column[*] role xxx_Column_table_src
+	Table[1] role table
+end
+
+composition xxx_Column_identitySpecifier between
+	Column[*] role xxx_Column_identitySpecifier_src
+	IdentitySpecifier[0..1] role identitySpecifier
+end
+
+composition xxx_Column_generateExpression between
+	Column[*] role xxx_Column_generateExpression_src
+	ValueExpression[0..1] role generateExpression
+end
+
+association xxx_Trigger_schema between
+	Trigger[*] role xxx_Trigger_schema_src
+	Schema[1] role schema
+end
+
+association xxx_Trigger_subjectTable between
+	Trigger[*] role xxx_Trigger_subjectTable_src
+	Table[1] role subjectTable
+end
+
+composition xxx_Trigger_actionStatement between
+	Trigger[0..1] role xxx_Trigger_actionStatement_src
+	SQLStatement[1..*] role actionStatement
+end
+
+association xxx_Trigger_triggerColumn between
+	Trigger[0..1] role xxx_Trigger_triggerColumn_src
+	Column[*] role triggerColumn
+end
+
+composition xxx_Trigger_when between
+	Trigger[*] role xxx_Trigger_when_src
+	SearchCondition[0..1] role when
+end
+
+association xxx_AuthorizationIdentifier_ownedSchema between
+	AuthorizationIdentifier[0..1] role xxx_AuthorizationIdentifier_ownedSchema_src
+	Schema[*] role ownedSchema
+end
+
+association xxx_AuthorizationIdentifier_Database between
+	AuthorizationIdentifier[*] role xxx_AuthorizationIdentifier_Database_src
+	Database[1] role Database
+end
+
+association xxx_AuthorizationIdentifier_receivedRoleAuthorization between
+	AuthorizationIdentifier[0..1] role xxx_AuthorizationIdentifier_receivedRoleAuthorization_src
+	RoleAuthorization[*] role receivedRoleAuthorization
+end
+
+association xxx_AuthorizationIdentifier_grantedRoleAuthorization between
+	AuthorizationIdentifier[0..1] role xxx_AuthorizationIdentifier_grantedRoleAuthorization_src
+	RoleAuthorization[*] role grantedRoleAuthorization
+end
+
+association xxx_AuthorizationIdentifier_grantedPrivilege between
+	AuthorizationIdentifier[0..1] role xxx_AuthorizationIdentifier_grantedPrivilege_src
+	Privilege[*] role grantedPrivilege
+end
+
+composition xxx_AuthorizationIdentifier_receivedPrivilege between
+	AuthorizationIdentifier[0..1] role xxx_AuthorizationIdentifier_receivedPrivilege_src
+	Privilege[*] role receivedPrivilege
+end
+
+association xxx_Privilege_grantor between
+	Privilege[*] role xxx_Privilege_grantor_src
+	AuthorizationIdentifier[1] role grantor
+end
+
+association xxx_Privilege_grantee between
+	Privilege[*] role xxx_Privilege_grantee_src
+	AuthorizationIdentifier[0..1] role grantee
+end
+
+association xxx_Privilege_actionObjects between
+	Privilege[0..1] role xxx_Privilege_actionObjects_src
+	SQLObject[*] role actionObjects
+end
+
+association xxx_Privilege_object between
+	Privilege[*] role xxx_Privilege_object_src
+	SQLObject[1] role object
+end
+
+association xxx_Group_user between
+	Group[0..1] role xxx_Group_user_src
+	User[*] role user
+end
+
+association xxx_User_group between
+	User[0..1] role xxx_User_group_src
+	Group[*] role group
+end
+
+association xxx_Role_roleAuthorization between
+	Role[0..1] role xxx_Role_roleAuthorization_src
+	RoleAuthorization[1..*] role roleAuthorization
+end
+
+association xxx_RoleAuthorization_role between
+	RoleAuthorization[*] role xxx_RoleAuthorization_role_src
+	Role[1] role role
+end
+
+association xxx_RoleAuthorization_grantee between
+	RoleAuthorization[*] role xxx_RoleAuthorization_grantee_src
+	AuthorizationIdentifier[1] role grantee
+end
+
+association xxx_RoleAuthorization_grantor between
+	RoleAuthorization[*] role xxx_RoleAuthorization_grantor_src
+	AuthorizationIdentifier[1] role grantor
+end
+

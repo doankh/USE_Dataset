@@ -1,0 +1,88 @@
+model simpleGraph
+class Graph<GraphElement
+attributes
+operations
+end
+
+abstract class GraphElement
+attributes
+	id : Integer
+	generated : Boolean
+operations
+end
+
+class Position<GraphElement
+attributes
+	X : Integer
+	Y : Integer
+operations
+end
+
+class Edge<GraphElement
+attributes
+operations
+end
+
+class Node<Position
+attributes
+operations
+end
+
+class Label<Position
+attributes
+	value : String
+operations
+end
+
+class Parameter
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Nail<Position
+attributes
+operations
+end
+
+association xxx_Graph_nodes between
+	Graph[0..1] role xxx_Graph_nodes_src
+	Node[*] role nodes
+end
+
+association xxx_Graph_edges between
+	Graph[0..1] role xxx_Graph_edges_src
+	Edge[*] role edges
+end
+
+association xxx_GraphElement_parameters between
+	GraphElement[0..1] role xxx_GraphElement_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	Node[0..1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	Node[0..1] role target
+end
+
+association xxx_Edge_labels between
+	Edge[0..1] role xxx_Edge_labels_src
+	Label[*] role labels
+end
+
+association xxx_Edge_nails between
+	Edge[0..1] role xxx_Edge_nails_src
+	Nail[*] role nails
+end
+
+association xxx_Node_label between
+	Node[*] role xxx_Node_label_src
+	Label[0..1] role label
+end
+

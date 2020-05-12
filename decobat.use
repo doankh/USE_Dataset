@@ -1,0 +1,178 @@
+model decobat
+class Project
+attributes
+	name : String
+	shortDescription : String
+	description : String
+	created : String
+	closed : String
+operations
+end
+
+class ProjectCategory
+attributes
+	name : String
+	shortDescription : String
+	description : String
+	created : String
+operations
+end
+
+class ProjectRevision
+attributes
+	shortDescription : String
+	description : String
+	update : String
+	comment : String
+operations
+end
+
+class Library
+attributes
+	name : String
+	shortDescription : String
+	description : String
+	created : String
+	update : String
+	height : String
+	width : String
+	depth : String
+operations
+end
+
+class LibraryCategory
+attributes
+	name : String
+	shortDescription : String
+	description : String
+	created : String
+operations
+end
+
+class Product
+attributes
+	name : String
+	shortDescription : String
+	description : String
+	created : String
+	update : String
+	unitCostPrice : String
+	unitBilledPrice : String
+	unitWeight : String
+	height : String
+	width : String
+	depth : String
+operations
+end
+
+class Supplier
+attributes
+	code : String
+	name : String
+	address : String
+	zip : String
+	city : String
+	country : String
+	fax : String
+	phone : String
+	email : String
+operations
+end
+
+class Service
+attributes
+	code : String
+	name : String
+	shortDescription : String
+	description : String
+	hourlyCostPrice : String
+	hourlyBilledPrice : String
+operations
+end
+
+class Plan
+attributes
+	code : String
+	name : String
+	shortDescription : String
+	description : String
+operations
+end
+
+class Level
+attributes
+	code : String
+	name : String
+	shortDescription : String
+	description : String
+operations
+end
+
+class Object
+attributes
+	code : String
+	name : String
+	shortDescription : String
+	description : String
+operations
+end
+
+class Customer
+attributes
+	code : String
+	name : String
+	address : String
+	zip : String
+	city : String
+	country : String
+	fax : String
+	phone : String
+	email : String
+operations
+end
+
+composition xxx_Project_projectRevisions between
+	Project[0..1] role xxx_Project_projectRevisions_src
+	ProjectRevision[*] role projectRevisions
+end
+
+composition xxx_Project_projectCategories between
+	Project[*] role xxx_Project_projectCategories_src
+	ProjectCategory[1] role projectCategories
+end
+
+composition xxx_Project_plans between
+	Project[*] role xxx_Project_plans_src
+	Plan[0..1] role plans
+end
+
+association xxx_Project_customer between
+	Project[*] role xxx_Project_customer_src
+	Customer[1] role customer
+end
+
+composition xxx_Library_categories between
+	Library[0..1] role xxx_Library_categories_src
+	LibraryCategory[*] role categories
+end
+
+association xxx_Product_supplier between
+	Product[*] role xxx_Product_supplier_src
+	Supplier[1] role supplier
+end
+
+composition xxx_Plan_levels between
+	Plan[0..1] role xxx_Plan_levels_src
+	Level[1..*] role levels
+end
+
+association xxx_Level_libraryItems between
+	Level[0..1] role xxx_Level_libraryItems_src
+	Library[*] role libraryItems
+end
+
+association xxx_Object_libraryItems between
+	Object[0..1] role xxx_Object_libraryItems_src
+	Library[*] role libraryItems
+end
+

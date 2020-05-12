@@ -1,0 +1,101 @@
+model extendedtypes
+class ExtendedElementTypeSet<ConfigurationElement
+attributes
+	extensible : Boolean
+operations
+end
+
+abstract class ElementTypeConfiguration<ConfigurationElement
+attributes
+	hint : String
+	kindName : String
+	specializedTypesID : String
+operations
+end
+
+class IconEntry
+attributes
+	iconPath : String
+	bundleId : String
+operations
+end
+
+abstract class ConfigurationElement
+attributes
+	name : String
+	description : String
+	identifier : String
+operations
+end
+
+abstract class MatcherConfiguration
+attributes
+operations
+end
+
+abstract class ActionConfiguration<ConfigurationElement
+attributes
+operations
+end
+
+abstract class ViewActionConfiguration<ActionConfiguration
+attributes
+operations
+end
+
+abstract class SemanticActionConfiguration<ActionConfiguration
+attributes
+operations
+end
+
+abstract class SemanticTypeConfiguration<ElementTypeConfiguration
+attributes
+operations
+end
+
+abstract class ViewTypeConfiguration<ElementTypeConfiguration
+attributes
+	specializedDiagramTypeID : String
+operations
+end
+
+abstract class ElementTypeAdviceConfiguration<ConfigurationElement
+attributes
+operations
+end
+
+class AspectSemanticTypeConfiguration<SemanticTypeConfiguration
+attributes
+operations
+end
+
+class AspectViewTypeConfiguration<ViewTypeConfiguration
+attributes
+operations
+end
+
+composition xxx_ExtendedElementTypeSet_elementType between
+	ExtendedElementTypeSet[0..1] role xxx_ExtendedElementTypeSet_elementType_src
+	ElementTypeConfiguration[1..*] role elementType
+end
+
+composition xxx_ElementTypeConfiguration_matcherConfiguration between
+	ElementTypeConfiguration[*] role xxx_ElementTypeConfiguration_matcherConfiguration_src
+	MatcherConfiguration[0..1] role matcherConfiguration
+end
+
+composition xxx_ConfigurationElement_iconEntry between
+	ConfigurationElement[*] role xxx_ConfigurationElement_iconEntry_src
+	IconEntry[0..1] role iconEntry
+end
+
+composition xxx_AspectSemanticTypeConfiguration_actionConfiguration between
+	AspectSemanticTypeConfiguration[0..1] role xxx_AspectSemanticTypeConfiguration_actionConfiguration_src
+	SemanticActionConfiguration[*] role actionConfiguration
+end
+
+composition xxx_AspectViewTypeConfiguration_actionConfiguration between
+	AspectViewTypeConfiguration[0..1] role xxx_AspectViewTypeConfiguration_actionConfiguration_src
+	ViewActionConfiguration[*] role actionConfiguration
+end
+

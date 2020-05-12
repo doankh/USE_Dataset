@@ -1,0 +1,220 @@
+model specification
+enum TestType{
+default
+}
+
+class Specification<NamedElement
+attributes
+operations
+end
+
+class Feature<NamedElement
+attributes
+operations
+end
+
+class Role<NamedElement
+attributes
+operations
+end
+
+class Capability<NamedElement
+attributes
+operations
+end
+
+class Benefit<NamedElement
+attributes
+operations
+end
+
+class Story<NamedElement
+attributes
+operations
+end
+
+class Scenario<NamedElement
+attributes
+operations
+end
+
+class Context<ScenarioElement
+attributes
+operations
+end
+
+class Action<ScenarioElement
+attributes
+operations
+end
+
+class Behaviour<ScenarioElement
+attributes
+operations
+end
+
+class AutomationLayer
+attributes
+	basePackage : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Note
+attributes
+	description : String
+operations
+end
+
+class ImplementationNote<Note
+attributes
+operations
+end
+
+class TestNote<Note
+attributes
+operations
+end
+
+abstract class ScenarioElement<NamedElement
+attributes
+operations
+end
+
+class TestGenerationNote<Note
+attributes
+	type : TestType
+operations
+end
+
+class Value
+attributes
+	value : String
+operations
+end
+
+class Parameter<NamedElement
+attributes
+operations
+end
+
+composition xxx_Specification_features between
+	Specification[0..1] role xxx_Specification_features_src
+	Feature[1..*] role features
+end
+
+composition xxx_Specification_roles between
+	Specification[0..1] role xxx_Specification_roles_src
+	Role[1..*] role roles
+end
+
+composition xxx_Specification_automationLayer between
+	Specification[*] role xxx_Specification_automationLayer_src
+	AutomationLayer[0..1] role automationLayer
+end
+
+composition xxx_Specification_stories between
+	Specification[0..1] role xxx_Specification_stories_src
+	Story[*] role stories
+end
+
+composition xxx_Specification_benefits between
+	Specification[0..1] role xxx_Specification_benefits_src
+	Benefit[*] role benefits
+end
+
+composition xxx_Specification_capabilities between
+	Specification[0..1] role xxx_Specification_capabilities_src
+	Capability[*] role capabilities
+end
+
+association xxx_Feature_refFeatures between
+	Feature[0..1] role xxx_Feature_refFeatures_src
+	Feature[*] role refFeatures
+end
+
+association xxx_Feature_stories between
+	Feature[0..1] role xxx_Feature_stories_src
+	Story[*] role stories
+end
+
+association xxx_Story_As between
+	Story[*] role xxx_Story_As_src
+	Role[1] role As
+end
+
+association xxx_Story_soThat between
+	Story[*] role xxx_Story_soThat_src
+	Benefit[1] role soThat
+end
+
+composition xxx_Story_scenarios between
+	Story[0..1] role xxx_Story_scenarios_src
+	Scenario[1..*] role scenarios
+end
+
+association xxx_Story_iWant between
+	Story[*] role xxx_Story_iWant_src
+	Capability[1] role iWant
+end
+
+association xxx_Scenario_given between
+	Scenario[0..1] role xxx_Scenario_given_src
+	Context[1..*] role given
+end
+
+association xxx_Scenario_when between
+	Scenario[0..1] role xxx_Scenario_when_src
+	Action[1..*] role when
+end
+
+association xxx_Scenario_then_ between
+	Scenario[0..1] role xxx_Scenario_then__src
+	Behaviour[1..*] role then_
+end
+
+composition xxx_Scenario_values between
+	Scenario[0..1] role xxx_Scenario_values_src
+	Value[*] role values
+end
+
+association xxx_Context_contexts between
+	Context[0..1] role xxx_Context_contexts_src
+	Context[*] role contexts
+end
+
+composition xxx_AutomationLayer_context_ between
+	AutomationLayer[0..1] role xxx_AutomationLayer_context__src
+	Context[*] role context_
+end
+
+composition xxx_AutomationLayer_actions between
+	AutomationLayer[0..1] role xxx_AutomationLayer_actions_src
+	Action[*] role actions
+end
+
+composition xxx_AutomationLayer_behaviours between
+	AutomationLayer[0..1] role xxx_AutomationLayer_behaviours_src
+	Behaviour[*] role behaviours
+end
+
+composition xxx_NamedElement_notes between
+	NamedElement[0..1] role xxx_NamedElement_notes_src
+	Note[*] role notes
+end
+
+composition xxx_ScenarioElement_parameters between
+	ScenarioElement[0..1] role xxx_ScenarioElement_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Value_parameter between
+	Value[*] role xxx_Value_parameter_src
+	Parameter[1] role parameter
+end
+

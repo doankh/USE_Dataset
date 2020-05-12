@@ -1,0 +1,42 @@
+model class_diagramm_simple
+enum ModifierType{
+default
+}
+
+class Class
+attributes
+operations
+end
+
+class Package
+attributes
+operations
+end
+
+class Attribute
+attributes
+operations
+end
+
+class DataType
+attributes
+operations
+end
+
+class Association
+attributes
+	name : String
+operations
+end
+
+class Method
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+

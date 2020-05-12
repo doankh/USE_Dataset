@@ -1,0 +1,199 @@
+model FlatSignalFlow
+class RootFolder
+attributes
+operations
+end
+
+class RootContainer
+attributes
+	name : String
+	position : String
+operations
+end
+
+class Actor
+attributes
+	memory : String
+	script : String
+	file : String
+	WCET : String
+	name : String
+	position : String
+operations
+end
+
+class Transmitter
+attributes
+	name : String
+	position : String
+operations
+end
+
+class Receiver
+attributes
+	name : String
+	position : String
+operations
+end
+
+class InputSignal
+attributes
+	name : String
+	position : String
+operations
+end
+
+class OutputSignal
+attributes
+	name : String
+	position : String
+operations
+end
+
+class Queue
+attributes
+	name : String
+	position : String
+operations
+end
+
+class AssociationReceiverQueue
+attributes
+operations
+end
+
+class AssociationQueueTransmitter
+attributes
+operations
+end
+
+composition xxx_RootFolder_rootContainer between
+	RootFolder[0..1] role xxx_RootFolder_rootContainer_src
+	RootContainer[*] role rootContainer
+end
+
+association xxx_RootContainer_rootFolder between
+	RootContainer[*] role xxx_RootContainer_rootFolder_src
+	RootFolder[1] role rootFolder
+end
+
+composition xxx_RootContainer_actor between
+	RootContainer[0..1] role xxx_RootContainer_actor_src
+	Actor[*] role actor
+end
+
+composition xxx_RootContainer_inputSignal between
+	RootContainer[0..1] role xxx_RootContainer_inputSignal_src
+	InputSignal[*] role inputSignal
+end
+
+composition xxx_RootContainer_outputSignal between
+	RootContainer[0..1] role xxx_RootContainer_outputSignal_src
+	OutputSignal[*] role outputSignal
+end
+
+composition xxx_RootContainer_queue between
+	RootContainer[0..1] role xxx_RootContainer_queue_src
+	Queue[*] role queue
+end
+
+association xxx_Actor_rootContainer between
+	Actor[*] role xxx_Actor_rootContainer_src
+	RootContainer[1] role rootContainer
+end
+
+composition xxx_Actor_transmitter between
+	Actor[0..1] role xxx_Actor_transmitter_src
+	Transmitter[*] role transmitter
+end
+
+composition xxx_Actor_receiver between
+	Actor[0..1] role xxx_Actor_receiver_src
+	Receiver[*] role receiver
+end
+
+association xxx_Transmitter_actor between
+	Transmitter[*] role xxx_Transmitter_actor_src
+	Actor[1] role actor
+end
+
+association xxx_Transmitter_associationQueueTransmitter between
+	Transmitter[*] role xxx_Transmitter_associationQueueTransmitter_src
+	AssociationQueueTransmitter[1] role associationQueueTransmitter
+end
+
+association xxx_Receiver_actor between
+	Receiver[*] role xxx_Receiver_actor_src
+	Actor[1] role actor
+end
+
+association xxx_Receiver_associationReceiverQueue between
+	Receiver[*] role xxx_Receiver_associationReceiverQueue_src
+	AssociationReceiverQueue[1] role associationReceiverQueue
+end
+
+association xxx_InputSignal_rootContainer between
+	InputSignal[*] role xxx_InputSignal_rootContainer_src
+	RootContainer[1] role rootContainer
+end
+
+association xxx_InputSignal_associationReceiverQueue between
+	InputSignal[*] role xxx_InputSignal_associationReceiverQueue_src
+	AssociationReceiverQueue[1] role associationReceiverQueue
+end
+
+association xxx_OutputSignal_rootContainer between
+	OutputSignal[*] role xxx_OutputSignal_rootContainer_src
+	RootContainer[1] role rootContainer
+end
+
+association xxx_OutputSignal_associationQueueTransmitter between
+	OutputSignal[*] role xxx_OutputSignal_associationQueueTransmitter_src
+	AssociationQueueTransmitter[1] role associationQueueTransmitter
+end
+
+association xxx_Queue_rootContainer between
+	Queue[*] role xxx_Queue_rootContainer_src
+	RootContainer[1] role rootContainer
+end
+
+association xxx_Queue_associationReceiverQueue between
+	Queue[*] role xxx_Queue_associationReceiverQueue_src
+	AssociationReceiverQueue[1] role associationReceiverQueue
+end
+
+association xxx_Queue_associationQueueTransmitter between
+	Queue[*] role xxx_Queue_associationQueueTransmitter_src
+	AssociationQueueTransmitter[1] role associationQueueTransmitter
+end
+
+association xxx_AssociationReceiverQueue_srcqueue between
+	AssociationReceiverQueue[0..1] role xxx_AssociationReceiverQueue_srcqueue_src
+	Queue[1..*] role srcqueue
+end
+
+association xxx_AssociationReceiverQueue_dstreceiver between
+	AssociationReceiverQueue[0..1] role xxx_AssociationReceiverQueue_dstreceiver_src
+	Receiver[1..*] role dstreceiver
+end
+
+association xxx_AssociationReceiverQueue_inputSignal between
+	AssociationReceiverQueue[*] role xxx_AssociationReceiverQueue_inputSignal_src
+	InputSignal[1] role inputSignal
+end
+
+association xxx_AssociationQueueTransmitter_dstqueue between
+	AssociationQueueTransmitter[0..1] role xxx_AssociationQueueTransmitter_dstqueue_src
+	Queue[1..*] role dstqueue
+end
+
+association xxx_AssociationQueueTransmitter_srctransmitter between
+	AssociationQueueTransmitter[0..1] role xxx_AssociationQueueTransmitter_srctransmitter_src
+	Transmitter[1..*] role srctransmitter
+end
+
+association xxx_AssociationQueueTransmitter_outputSignal between
+	AssociationQueueTransmitter[*] role xxx_AssociationQueueTransmitter_outputSignal_src
+	OutputSignal[1] role outputSignal
+end
+

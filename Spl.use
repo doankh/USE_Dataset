@@ -1,0 +1,852 @@
+model PrimitiveTypes
+enum Direction{
+	inout,
+	in_,
+	out
+}
+
+enum SIPMethod{
+	ACK,
+	BYE,
+	CANCEL,
+	INVITE,
+	NOTIFY,
+	OPTIONS,
+	REACK,
+	REGISTER,
+	REINVITE,
+	REREGISTER,
+	RESUBSCRIBE,
+	SUBSCRIBE
+}
+
+enum ControlMethod{
+	deploy,
+	undeploy,
+	uninvite,
+	unregister,
+	unsubscribe
+}
+
+enum PrimitiveType{
+	void,
+	bool,
+	int,
+	request,
+	response,
+	string,
+	time,
+	uri
+}
+
+enum Modifier{
+	LIFO,
+	FIFO
+}
+
+enum FunctionLocation{
+	remote,
+	local
+}
+
+enum SIPHeader{
+	CALL_ID,
+	CONTACT,
+	CSEQ,
+	EVENT,
+	FROM,
+	MAX_FORWARDS,
+	SUBSCRIPTION_STATE,
+	TO,
+	VIA
+}
+
+enum SuccessKind{
+	OK,
+	ACCEPTED
+}
+
+enum ClientErrorKind{
+	ADDRESS_INCOMPLETE,
+	AMBIGUOUS,
+	BAD_EXTENSION,
+	BAD_REQUEST,
+	BUSY_HERE,
+	CALL_OR_TRANSACTION_DOES_NOT_EXIST,
+	EXTENSION_REQUIRED,
+	FORBIDDEN,
+	GONE,
+	INTERVAL_TOO_BRIEF,
+	LOOP_DETECTED,
+	METHOD_NOT_ALLOWED,
+	NOT_ACCEPTABLE_HERE,
+	NOT_ACCEPTABLE,
+	NOT_FOUND,
+	PAYMENT_REQUIRED,
+	PROXY_AUTHENTICATION_REQUIRED,
+	REQUESTURI_TOO_LONG,
+	REQUEST_ENTITY_TOO_LARGE,
+	REQUEST_PENDING,
+	REQUEST_TERMINATED,
+	REQUEST_TIMEOUT,
+	TEMPORARILY_UNAVAILABLE,
+	TOO_MANY_HOPS,
+	UNAUTHORIZED,
+	UNDECIPHERABLE,
+	UNSUPPORTED_MEDIA_TYPE,
+	UNSUPPORTED_URI_SCHEME
+}
+
+enum GlobalErrorKind{
+	BUSY_EVERYWHERE,
+	DECLINE,
+	DOES_NOT_EXIST_ANYWHERE,
+	NOT_ACCEPTABLE
+}
+
+enum RedirectionErrorKind{
+	ALTERNATIVE_SERVICE,
+	MOVED_PERMANENTLY,
+	MOVED_TEMPORARILY,
+	MULTIPLE_CHOICES,
+	USE_PROXY
+}
+
+enum ServerErrorKind{
+	BAD_GATEWAY,
+	MESSAGE_TOO_LARGE,
+	NOT_IMPLEMENTED,
+	SERVER_INTERNAL_ERROR,
+	SERVER_TIMEOUT,
+	SERVICE_UNAVAILABLE,
+	VERSION_NOT_SUPPORTED
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Program<LocatedElement
+attributes
+operations
+end
+
+class Service<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Session<LocatedElement
+attributes
+operations
+end
+
+class Registration<Session
+attributes
+operations
+end
+
+class Dialog<Session
+attributes
+operations
+end
+
+class Event<Session
+attributes
+	eventId : String
+operations
+end
+
+class Method<Session
+attributes
+	direction : Direction
+operations
+end
+
+class Argument<VariableDeclaration
+attributes
+operations
+end
+
+abstract class MethodName<LocatedElement
+attributes
+operations
+end
+
+class SIPMethodName<MethodName
+attributes
+	name : SIPMethod
+operations
+end
+
+class ControlMethodName<MethodName
+attributes
+	name : ControlMethod
+operations
+end
+
+class Branch<LocatedElement
+attributes
+operations
+end
+
+class DefaultBranch<Branch
+attributes
+operations
+end
+
+class NamedBranch<Branch
+attributes
+	name : String
+operations
+end
+
+abstract class TypeExpression<LocatedElement
+attributes
+operations
+end
+
+class SimpleType<TypeExpression
+attributes
+	type : PrimitiveType
+operations
+end
+
+class SequenceType<TypeExpression
+attributes
+	modifier : Modifier
+	type : PrimitiveType
+	size : Integer
+operations
+end
+
+class DefinedType<TypeExpression
+attributes
+	typeName : String
+operations
+end
+
+abstract class Declaration<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class VariableDeclaration<Declaration
+attributes
+operations
+end
+
+abstract class FunctionDeclaration<Declaration
+attributes
+operations
+end
+
+class RemoteFunctionDeclaration<FunctionDeclaration
+attributes
+	functionLocation : FunctionLocation
+operations
+end
+
+class LocalFunctionDeclaration<FunctionDeclaration
+attributes
+operations
+end
+
+class StructureDeclaration<Declaration
+attributes
+operations
+end
+
+class StructureProperty<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class FunctionCall<LocatedElement
+attributes
+operations
+end
+
+abstract class Statement<LocatedElement
+attributes
+operations
+end
+
+class CompoundStat<Statement
+attributes
+operations
+end
+
+class SetStat<Statement
+attributes
+operations
+end
+
+class DeclarationStat<Statement
+attributes
+operations
+end
+
+class ReturnStat<Statement
+attributes
+operations
+end
+
+class IfStat<Statement
+attributes
+operations
+end
+
+class WhenStat<Statement
+attributes
+operations
+end
+
+class ForeachStat<Statement
+attributes
+	iteratorName : String
+operations
+end
+
+class SelectStat<Statement
+attributes
+operations
+end
+
+class FunctionCallStat<Statement
+attributes
+operations
+end
+
+class ContinueStat<Statement
+attributes
+operations
+end
+
+class BreakStat<Statement
+attributes
+operations
+end
+
+class PushStat<Statement
+attributes
+operations
+end
+
+class WhenHeader<VariableDeclaration
+attributes
+	headerId : String
+operations
+end
+
+abstract class SelectMember<LocatedElement
+attributes
+operations
+end
+
+class SelectDefault<SelectMember
+attributes
+operations
+end
+
+class SelectCase<SelectMember
+attributes
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class ConstantExp<Expression
+attributes
+operations
+end
+
+class OperatorExp<Expression
+attributes
+	opName : String
+operations
+end
+
+class ForwardExp<Expression
+attributes
+	isParallel : Boolean
+operations
+end
+
+class WithExp<Expression
+attributes
+operations
+end
+
+class BlockExp<Expression
+attributes
+operations
+end
+
+class ReasonExp<Expression
+attributes
+operations
+end
+
+class BODYExp<Expression
+attributes
+operations
+end
+
+class RequestURIExp<Expression
+attributes
+operations
+end
+
+class PopExp<Expression
+attributes
+operations
+end
+
+class FunctionCallExp<Expression
+attributes
+operations
+end
+
+abstract class Place<Expression
+attributes
+operations
+end
+
+class SIPHeaderPlace<Place
+attributes
+	header : SIPHeader
+operations
+end
+
+abstract class VariablePlace<Place
+attributes
+operations
+end
+
+class PropertyCallPlace<VariablePlace
+attributes
+	propName : String
+operations
+end
+
+class Variable<VariablePlace
+attributes
+operations
+end
+
+abstract class MessageField<LocatedElement
+attributes
+operations
+end
+
+class ReasonMessageField<MessageField
+attributes
+operations
+end
+
+class HeadedMessageField<MessageField
+attributes
+	headerId : String
+operations
+end
+
+abstract class Constant<LocatedElement
+attributes
+operations
+end
+
+class BooleanConstant<Constant
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerConstant<Constant
+attributes
+	value : Integer
+operations
+end
+
+class StringConstant<Constant
+attributes
+	value : String
+operations
+end
+
+class URIConstant<Constant
+attributes
+	uri : String
+operations
+end
+
+class SequenceConstant<Constant
+attributes
+operations
+end
+
+class ResponseConstant<Constant
+attributes
+operations
+end
+
+abstract class Response<LocatedElement
+attributes
+operations
+end
+
+class SuccessResponse<Response
+attributes
+	successKind : SuccessKind
+operations
+end
+
+class ErrorResponse<Response
+attributes
+operations
+end
+
+class ClientErrorResponse<ErrorResponse
+attributes
+	errorKind : ClientErrorKind
+operations
+end
+
+class GlobalErrorResponse<ErrorResponse
+attributes
+	errorKind : GlobalErrorKind
+operations
+end
+
+class RedirectionErrorResponse<ErrorResponse
+attributes
+	errorKind : RedirectionErrorKind
+operations
+end
+
+class ServerErrorResponse<ErrorResponse
+attributes
+	errorKind : ServerErrorKind
+operations
+end
+
+composition xxx_Program_service between
+	Program[*] role xxx_Program_service_src
+	Service[1] role service
+end
+
+composition xxx_Service_declarations between
+	Service[0..1] role xxx_Service_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Service_sessions between
+	Service[0..1] role xxx_Service_sessions_src
+	Session[*] role sessions
+end
+
+composition xxx_Registration_declarations between
+	Registration[0..1] role xxx_Registration_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Registration_sessions between
+	Registration[0..1] role xxx_Registration_sessions_src
+	Session[*] role sessions
+end
+
+composition xxx_Dialog_declarations between
+	Dialog[0..1] role xxx_Dialog_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Dialog_methods between
+	Dialog[0..1] role xxx_Dialog_methods_src
+	Method[1..*] role methods
+end
+
+composition xxx_Event_declarations between
+	Event[0..1] role xxx_Event_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Event_methods between
+	Event[0..1] role xxx_Event_methods_src
+	Method[1..*] role methods
+end
+
+composition xxx_Method_type between
+	Method[*] role xxx_Method_type_src
+	TypeExpression[1] role type
+end
+
+composition xxx_Method_methodName between
+	Method[*] role xxx_Method_methodName_src
+	MethodName[1] role methodName
+end
+
+composition xxx_Method_arguments between
+	Method[0..1] role xxx_Method_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_Method_statements between
+	Method[0..1] role xxx_Method_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_Method_branches between
+	Method[0..1] role xxx_Method_branches_src
+	Branch[1..*] role branches
+end
+
+composition xxx_Branch_statements between
+	Branch[0..1] role xxx_Branch_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	TypeExpression[1] role type
+end
+
+composition xxx_VariableDeclaration_initExp between
+	VariableDeclaration[*] role xxx_VariableDeclaration_initExp_src
+	Expression[0..1] role initExp
+end
+
+composition xxx_FunctionDeclaration_returnType between
+	FunctionDeclaration[*] role xxx_FunctionDeclaration_returnType_src
+	TypeExpression[1] role returnType
+end
+
+composition xxx_FunctionDeclaration_arguments between
+	FunctionDeclaration[0..1] role xxx_FunctionDeclaration_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_LocalFunctionDeclaration_statements between
+	LocalFunctionDeclaration[0..1] role xxx_LocalFunctionDeclaration_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_StructureDeclaration_properties between
+	StructureDeclaration[0..1] role xxx_StructureDeclaration_properties_src
+	Argument[1..*] role properties
+end
+
+composition xxx_StructureProperty_type between
+	StructureProperty[*] role xxx_StructureProperty_type_src
+	TypeExpression[1] role type
+end
+
+association xxx_FunctionCall_function between
+	FunctionCall[*] role xxx_FunctionCall_function_src
+	FunctionDeclaration[1] role function
+end
+
+composition xxx_FunctionCall_parameters between
+	FunctionCall[0..1] role xxx_FunctionCall_parameters_src
+	Expression[*] role parameters
+end
+
+composition xxx_CompoundStat_statements between
+	CompoundStat[0..1] role xxx_CompoundStat_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_SetStat_target between
+	SetStat[*] role xxx_SetStat_target_src
+	Place[1] role target
+end
+
+composition xxx_SetStat_setValue between
+	SetStat[*] role xxx_SetStat_setValue_src
+	Expression[1] role setValue
+end
+
+composition xxx_DeclarationStat_declaration between
+	DeclarationStat[*] role xxx_DeclarationStat_declaration_src
+	Declaration[1] role declaration
+end
+
+composition xxx_ReturnStat_returnedValue between
+	ReturnStat[*] role xxx_ReturnStat_returnedValue_src
+	Expression[0..1] role returnedValue
+end
+
+association xxx_ReturnStat_branch between
+	ReturnStat[*] role xxx_ReturnStat_branch_src
+	NamedBranch[0..1] role branch
+end
+
+composition xxx_IfStat_condition between
+	IfStat[*] role xxx_IfStat_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_IfStat_thenStatements between
+	IfStat[0..1] role xxx_IfStat_thenStatements_src
+	Statement[1..*] role thenStatements
+end
+
+composition xxx_IfStat_elseStatements between
+	IfStat[0..1] role xxx_IfStat_elseStatements_src
+	Statement[*] role elseStatements
+end
+
+composition xxx_WhenStat_idExp between
+	WhenStat[*] role xxx_WhenStat_idExp_src
+	Variable[1] role idExp
+end
+
+composition xxx_WhenStat_whenHeaders between
+	WhenStat[0..1] role xxx_WhenStat_whenHeaders_src
+	WhenHeader[1..*] role whenHeaders
+end
+
+composition xxx_WhenStat_statements between
+	WhenStat[0..1] role xxx_WhenStat_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_WhenStat_elseStatements between
+	WhenStat[0..1] role xxx_WhenStat_elseStatements_src
+	Statement[*] role elseStatements
+end
+
+composition xxx_ForeachStat_sequenceExp between
+	ForeachStat[*] role xxx_ForeachStat_sequenceExp_src
+	Expression[1] role sequenceExp
+end
+
+composition xxx_ForeachStat_statements between
+	ForeachStat[0..1] role xxx_ForeachStat_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_SelectStat_matchedExp between
+	SelectStat[*] role xxx_SelectStat_matchedExp_src
+	Expression[1] role matchedExp
+end
+
+composition xxx_SelectStat_selectCases between
+	SelectStat[0..1] role xxx_SelectStat_selectCases_src
+	SelectCase[*] role selectCases
+end
+
+composition xxx_SelectStat_selectDefault between
+	SelectStat[*] role xxx_SelectStat_selectDefault_src
+	SelectDefault[0..1] role selectDefault
+end
+
+composition xxx_FunctionCallStat_functionCall between
+	FunctionCallStat[*] role xxx_FunctionCallStat_functionCall_src
+	FunctionCall[1] role functionCall
+end
+
+composition xxx_PushStat_target between
+	PushStat[*] role xxx_PushStat_target_src
+	Place[1] role target
+end
+
+composition xxx_PushStat_pushedValue between
+	PushStat[*] role xxx_PushStat_pushedValue_src
+	Expression[1] role pushedValue
+end
+
+composition xxx_WhenHeader_value between
+	WhenHeader[*] role xxx_WhenHeader_value_src
+	Constant[0..1] role value
+end
+
+composition xxx_SelectMember_statements between
+	SelectMember[0..1] role xxx_SelectMember_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_SelectCase_values between
+	SelectCase[0..1] role xxx_SelectCase_values_src
+	Constant[1..*] role values
+end
+
+composition xxx_ConstantExp_value between
+	ConstantExp[*] role xxx_ConstantExp_value_src
+	Constant[1] role value
+end
+
+composition xxx_OperatorExp_leftExp between
+	OperatorExp[*] role xxx_OperatorExp_leftExp_src
+	Expression[1] role leftExp
+end
+
+composition xxx_OperatorExp_rightExp between
+	OperatorExp[*] role xxx_OperatorExp_rightExp_src
+	Expression[0..1] role rightExp
+end
+
+composition xxx_ForwardExp_exp between
+	ForwardExp[*] role xxx_ForwardExp_exp_src
+	Expression[0..1] role exp
+end
+
+composition xxx_WithExp_exp between
+	WithExp[*] role xxx_WithExp_exp_src
+	Expression[1] role exp
+end
+
+composition xxx_WithExp_msgFields between
+	WithExp[0..1] role xxx_WithExp_msgFields_src
+	MessageField[1..*] role msgFields
+end
+
+composition xxx_BlockExp_exp between
+	BlockExp[*] role xxx_BlockExp_exp_src
+	Expression[1] role exp
+end
+
+composition xxx_PopExp_source between
+	PopExp[*] role xxx_PopExp_source_src
+	Place[1] role source
+end
+
+composition xxx_FunctionCallExp_functionCall between
+	FunctionCallExp[*] role xxx_FunctionCallExp_functionCall_src
+	FunctionCall[1] role functionCall
+end
+
+composition xxx_PropertyCallPlace_source between
+	PropertyCallPlace[*] role xxx_PropertyCallPlace_source_src
+	VariablePlace[1] role source
+end
+
+association xxx_Variable_source between
+	Variable[*] role xxx_Variable_source_src
+	Declaration[1] role source
+end
+
+composition xxx_MessageField_exp between
+	MessageField[*] role xxx_MessageField_exp_src
+	Expression[1] role exp
+end
+
+composition xxx_SequenceConstant_values between
+	SequenceConstant[0..1] role xxx_SequenceConstant_values_src
+	Constant[*] role values
+end
+
+composition xxx_ResponseConstant_response between
+	ResponseConstant[*] role xxx_ResponseConstant_response_src
+	Response[1] role response
+end
+

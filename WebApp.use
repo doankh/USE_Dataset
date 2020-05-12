@@ -1,0 +1,528 @@
+model webapp
+enum Behavior{
+default
+}
+
+enum Charset{
+default
+}
+
+enum ColumnType{
+default
+}
+
+enum FormMethod{
+default
+}
+
+enum InputType{
+default
+}
+
+class WebApp
+attributes
+	name : String
+	framework : String
+operations
+end
+
+class AppConfig
+attributes
+operations
+end
+
+class View
+attributes
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+class WebConfig
+attributes
+	displayName : String
+operations
+end
+
+class Model
+attributes
+	databaseName : String
+	url : String
+	userName : String
+	password : String
+operations
+end
+
+class Controller
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+class Image
+attributes
+operations
+end
+
+class File
+attributes
+operations
+end
+
+class Properties
+attributes
+	name : String
+	package : String
+operations
+end
+
+class Table
+attributes
+	name : String
+	charset : Charset
+operations
+end
+
+class Column
+attributes
+	name : String
+	isNotNull : Boolean
+	size : Integer
+	useZeroFill : Boolean
+	type : ColumnType
+	defaultValue : String
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class PrimaryKey
+attributes
+operations
+end
+
+class ForeignKey
+attributes
+operations
+end
+
+class Unique
+attributes
+operations
+end
+
+class Check
+attributes
+	expr : String
+operations
+end
+
+class OnDelete
+attributes
+	behavior : Behavior
+operations
+end
+
+class OnUpdate
+attributes
+	behavior : Behavior
+operations
+end
+
+class Detail
+attributes
+	precision : Integer
+	scale : Integer
+operations
+end
+
+class Validator
+attributes
+	name : String
+	package : String
+operations
+end
+
+class Page
+attributes
+	name : String
+	isMain : Boolean
+operations
+end
+
+class Form<Tag
+attributes
+	method : FormMethod
+operations
+end
+
+class Text<Instruction
+attributes
+	content : String
+operations
+end
+
+class Action
+attributes
+	name : String
+	returnType : String
+operations
+end
+
+abstract class Tag<Instruction
+attributes
+	property : String
+operations
+end
+
+class Input<Tag
+attributes
+	type : InputType
+operations
+end
+
+class TableHTML<Tag
+attributes
+operations
+end
+
+class Tr<Tag
+attributes
+operations
+end
+
+class Td<Tag
+attributes
+operations
+end
+
+class Th<Tag
+attributes
+operations
+end
+
+class Mapping
+attributes
+	left : String
+	right : String
+operations
+end
+
+class BusinessObject
+attributes
+	name : String
+	package : String
+operations
+end
+
+class Field
+attributes
+	name : String
+	type : String
+	defaultValue : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Instruction
+attributes
+operations
+end
+
+class Navigation
+attributes
+	message : String
+operations
+end
+
+class Messages<Tag
+attributes
+operations
+end
+
+composition xxx_WebApp_appConfig between
+	WebApp[*] role xxx_WebApp_appConfig_src
+	AppConfig[1] role appConfig
+end
+
+composition xxx_WebApp_webConfig between
+	WebApp[*] role xxx_WebApp_webConfig_src
+	WebConfig[1] role webConfig
+end
+
+composition xxx_WebApp_library between
+	WebApp[0..1] role xxx_WebApp_library_src
+	Library[*] role library
+end
+
+composition xxx_WebApp_view between
+	WebApp[*] role xxx_WebApp_view_src
+	View[1] role view
+end
+
+composition xxx_WebApp_model_ between
+	WebApp[*] role xxx_WebApp_model__src
+	Model[1] role model_
+end
+
+composition xxx_WebApp_controller between
+	WebApp[*] role xxx_WebApp_controller_src
+	Controller[1] role controller
+end
+
+composition xxx_WebApp_resource between
+	WebApp[*] role xxx_WebApp_resource_src
+	Resource[0..1] role resource
+end
+
+composition xxx_View_page between
+	View[0..1] role xxx_View_page_src
+	Page[1..*] role page
+end
+
+composition xxx_View_navigation between
+	View[0..1] role xxx_View_navigation_src
+	Navigation[*] role navigation
+end
+
+composition xxx_Model_table between
+	Model[0..1] role xxx_Model_table_src
+	Table[*] role table
+end
+
+composition xxx_Model_businessObject between
+	Model[0..1] role xxx_Model_businessObject_src
+	BusinessObject[*] role businessObject
+end
+
+composition xxx_Controller_validator between
+	Controller[0..1] role xxx_Controller_validator_src
+	Validator[1..*] role validator
+end
+
+composition xxx_Controller_action between
+	Controller[0..1] role xxx_Controller_action_src
+	Action[1..*] role action
+end
+
+composition xxx_Resource_image between
+	Resource[0..1] role xxx_Resource_image_src
+	Image[*] role image
+end
+
+composition xxx_Resource_file between
+	Resource[0..1] role xxx_Resource_file_src
+	File[*] role file
+end
+
+composition xxx_Resource_propertie between
+	Resource[0..1] role xxx_Resource_propertie_src
+	Properties[*] role propertie
+end
+
+composition xxx_Properties_mapping between
+	Properties[0..1] role xxx_Properties_mapping_src
+	Mapping[*] role mapping
+end
+
+composition xxx_Table_column between
+	Table[0..1] role xxx_Table_column_src
+	Column[1..*] role column
+end
+
+composition xxx_Table_constraint between
+	Table[*] role xxx_Table_constraint_src
+	Constraint[0..1] role constraint
+end
+
+composition xxx_Column_detail between
+	Column[*] role xxx_Column_detail_src
+	Detail[0..1] role detail
+end
+
+composition xxx_Constraint_primaryKey between
+	Constraint[*] role xxx_Constraint_primaryKey_src
+	PrimaryKey[0..1] role primaryKey
+end
+
+composition xxx_Constraint_unique between
+	Constraint[0..1] role xxx_Constraint_unique_src
+	Unique[*] role unique
+end
+
+composition xxx_Constraint_check between
+	Constraint[0..1] role xxx_Constraint_check_src
+	Check[*] role check
+end
+
+composition xxx_Constraint_foreignKey between
+	Constraint[0..1] role xxx_Constraint_foreignKey_src
+	ForeignKey[*] role foreignKey
+end
+
+association xxx_PrimaryKey_column between
+	PrimaryKey[0..1] role xxx_PrimaryKey_column_src
+	Column[1..*] role column
+end
+
+association xxx_ForeignKey_externalColumn between
+	ForeignKey[*] role xxx_ForeignKey_externalColumn_src
+	Column[1] role externalColumn
+end
+
+composition xxx_ForeignKey_onDelete between
+	ForeignKey[*] role xxx_ForeignKey_onDelete_src
+	OnDelete[0..1] role onDelete
+end
+
+composition xxx_ForeignKey_onUpdate between
+	ForeignKey[*] role xxx_ForeignKey_onUpdate_src
+	OnUpdate[0..1] role onUpdate
+end
+
+association xxx_ForeignKey_externalTable between
+	ForeignKey[*] role xxx_ForeignKey_externalTable_src
+	Table[1] role externalTable
+end
+
+association xxx_ForeignKey_internalColumn between
+	ForeignKey[*] role xxx_ForeignKey_internalColumn_src
+	Column[1] role internalColumn
+end
+
+association xxx_Unique_column between
+	Unique[0..1] role xxx_Unique_column_src
+	Column[1..*] role column
+end
+
+association xxx_Validator_page between
+	Validator[*] role xxx_Validator_page_src
+	Page[0..1] role page
+end
+
+association xxx_Page_properties between
+	Page[0..1] role xxx_Page_properties_src
+	Properties[*] role properties
+end
+
+association xxx_Page_title between
+	Page[*] role xxx_Page_title_src
+	Mapping[0..1] role title
+end
+
+composition xxx_Page_instruction between
+	Page[0..1] role xxx_Page_instruction_src
+	Instruction[*] role instruction
+end
+
+composition xxx_Form_tag between
+	Form[0..1] role xxx_Form_tag_src
+	Tag[1..*] role tag
+end
+
+association xxx_Action_businessObject between
+	Action[*] role xxx_Action_businessObject_src
+	BusinessObject[0..1] role businessObject
+end
+
+composition xxx_Tag_attribute between
+	Tag[0..1] role xxx_Tag_attribute_src
+	Attribute[*] role attribute
+end
+
+association xxx_Input_action between
+	Input[*] role xxx_Input_action_src
+	Action[0..1] role action
+end
+
+association xxx_Input_label between
+	Input[*] role xxx_Input_label_src
+	Mapping[0..1] role label
+end
+
+association xxx_Input_buttonValue between
+	Input[*] role xxx_Input_buttonValue_src
+	Mapping[0..1] role buttonValue
+end
+
+association xxx_Input_textValue between
+	Input[*] role xxx_Input_textValue_src
+	Field[0..1] role textValue
+end
+
+association xxx_Input_validator between
+	Input[*] role xxx_Input_validator_src
+	Validator[0..1] role validator
+end
+
+composition xxx_TableHTML_tr between
+	TableHTML[0..1] role xxx_TableHTML_tr_src
+	Tr[*] role tr
+end
+
+composition xxx_Tr_th between
+	Tr[0..1] role xxx_Tr_th_src
+	Th[*] role th
+end
+
+composition xxx_Tr_td between
+	Tr[0..1] role xxx_Tr_td_src
+	Td[*] role td
+end
+
+composition xxx_Td_tag between
+	Td[0..1] role xxx_Td_tag_src
+	Tag[*] role tag
+end
+
+composition xxx_BusinessObject_field between
+	BusinessObject[0..1] role xxx_BusinessObject_field_src
+	Field[*] role field
+end
+
+association xxx_BusinessObject_action between
+	BusinessObject[0..1] role xxx_BusinessObject_action_src
+	Action[*] role action
+end
+
+association xxx_BusinessObject_businessObject between
+	BusinessObject[0..1] role xxx_BusinessObject_businessObject_src
+	BusinessObject[*] role businessObject
+end
+
+association xxx_BusinessObject_model_ between
+	BusinessObject[*] role xxx_BusinessObject_model__src
+	Model[1] role model_
+end
+
+association xxx_Field_businessObject between
+	Field[*] role xxx_Field_businessObject_src
+	BusinessObject[1] role businessObject
+end
+
+association xxx_Navigation_from_ between
+	Navigation[*] role xxx_Navigation_from__src
+	Page[0..1] role from_
+end
+
+association xxx_Navigation_to between
+	Navigation[*] role xxx_Navigation_to_src
+	Page[1] role to
+end
+

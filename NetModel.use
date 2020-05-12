@@ -1,0 +1,328 @@
+model netModel
+enum HttpMethodType{
+default
+}
+
+enum BooleanValue{
+default
+}
+
+class Model
+attributes
+	packageName : String
+operations
+end
+
+class Declaration
+attributes
+	name : String
+operations
+end
+
+class Client<Declaration
+attributes
+	baseUrl : String
+operations
+end
+
+class ClientBlock
+attributes
+operations
+end
+
+class HeaderBlock<ClientBlock,HttpMethodBlock
+attributes
+operations
+end
+
+class Header
+attributes
+	name : String
+	value : String
+operations
+end
+
+class HttpMethod<ClientBlock
+attributes
+	type : HttpMethodType
+	name : String
+operations
+end
+
+class HttpMethodBlock
+attributes
+operations
+end
+
+class Path
+attributes
+operations
+end
+
+class ParamsBlock<ClientBlock,HttpMethodBlock
+attributes
+operations
+end
+
+class SimpleMemberAssignment
+attributes
+operations
+end
+
+class Literal
+attributes
+operations
+end
+
+class BodyBlock<HttpMethodBlock
+attributes
+operations
+end
+
+class ResponseBlock<HttpMethodBlock
+attributes
+operations
+end
+
+class BlockType
+attributes
+operations
+end
+
+class Member
+attributes
+	name : String
+operations
+end
+
+class TypedMember<Member
+attributes
+operations
+end
+
+class SkipMember<Member
+attributes
+operations
+end
+
+class SimpleMember
+attributes
+	name : String
+operations
+end
+
+class Type<BlockType
+attributes
+operations
+end
+
+class GenericListType<Type
+attributes
+	id : String
+operations
+end
+
+class UserType<Type
+attributes
+operations
+end
+
+class UserTypeDeclaration<Declaration
+attributes
+	keyword : String
+	nogen : Boolean
+operations
+end
+
+class ComplexTypeDeclaration<UserTypeDeclaration
+attributes
+operations
+end
+
+class EnumTypeDeclaration<UserTypeDeclaration
+attributes
+operations
+end
+
+class EnumTypeLiteral
+attributes
+operations
+end
+
+class EnumMember
+attributes
+	name : String
+	assignment : Boolean
+	value : Integer
+operations
+end
+
+class ComplexTypeLiteral<BlockType
+attributes
+operations
+end
+
+class IntrinsicType<Type
+attributes
+	id : String
+operations
+end
+
+class StringType<IntrinsicType
+attributes
+operations
+end
+
+class BooleanType<IntrinsicType
+attributes
+operations
+end
+
+class NumericType<IntrinsicType
+attributes
+operations
+end
+
+class IntegerType<NumericType
+attributes
+operations
+end
+
+class LongType<NumericType
+attributes
+operations
+end
+
+class DoubleType<NumericType
+attributes
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	literal : BooleanValue
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	literal : String
+operations
+end
+
+class NumericLiteral<Literal
+attributes
+	literal : String
+operations
+end
+
+composition xxx_Model_declarations between
+	Model[0..1] role xxx_Model_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Client_blocks between
+	Client[0..1] role xxx_Client_blocks_src
+	ClientBlock[*] role blocks
+end
+
+composition xxx_HeaderBlock_headers between
+	HeaderBlock[0..1] role xxx_HeaderBlock_headers_src
+	Header[*] role headers
+end
+
+composition xxx_HttpMethod_path between
+	HttpMethod[*] role xxx_HttpMethod_path_src
+	Path[0..1] role path
+end
+
+composition xxx_HttpMethod_blocks between
+	HttpMethod[0..1] role xxx_HttpMethod_blocks_src
+	HttpMethodBlock[*] role blocks
+end
+
+composition xxx_Path_params between
+	Path[0..1] role xxx_Path_params_src
+	SimpleMemberAssignment[*] role params
+end
+
+composition xxx_ParamsBlock_params between
+	ParamsBlock[0..1] role xxx_ParamsBlock_params_src
+	SimpleMemberAssignment[*] role params
+end
+
+composition xxx_SimpleMemberAssignment_member between
+	SimpleMemberAssignment[*] role xxx_SimpleMemberAssignment_member_src
+	SimpleMember[0..1] role member
+end
+
+composition xxx_SimpleMemberAssignment_defaultValue between
+	SimpleMemberAssignment[*] role xxx_SimpleMemberAssignment_defaultValue_src
+	Literal[0..1] role defaultValue
+end
+
+composition xxx_BodyBlock_type between
+	BodyBlock[*] role xxx_BodyBlock_type_src
+	BlockType[0..1] role type
+end
+
+association xxx_ResponseBlock_superType between
+	ResponseBlock[*] role xxx_ResponseBlock_superType_src
+	ComplexTypeDeclaration[0..1] role superType
+end
+
+composition xxx_ResponseBlock_type between
+	ResponseBlock[*] role xxx_ResponseBlock_type_src
+	BlockType[0..1] role type
+end
+
+composition xxx_TypedMember_type between
+	TypedMember[*] role xxx_TypedMember_type_src
+	Type[0..1] role type
+end
+
+composition xxx_SkipMember_literal between
+	SkipMember[*] role xxx_SkipMember_literal_src
+	ComplexTypeLiteral[0..1] role literal
+end
+
+composition xxx_SimpleMember_type between
+	SimpleMember[*] role xxx_SimpleMember_type_src
+	IntrinsicType[0..1] role type
+end
+
+composition xxx_GenericListType_elementType between
+	GenericListType[*] role xxx_GenericListType_elementType_src
+	Type[0..1] role elementType
+end
+
+association xxx_UserType_declaration between
+	UserType[*] role xxx_UserType_declaration_src
+	UserTypeDeclaration[0..1] role declaration
+end
+
+composition xxx_ComplexTypeDeclaration_literal between
+	ComplexTypeDeclaration[*] role xxx_ComplexTypeDeclaration_literal_src
+	ComplexTypeLiteral[0..1] role literal
+end
+
+composition xxx_EnumTypeDeclaration_superType between
+	EnumTypeDeclaration[*] role xxx_EnumTypeDeclaration_superType_src
+	IntegerType[0..1] role superType
+end
+
+composition xxx_EnumTypeDeclaration_literal between
+	EnumTypeDeclaration[*] role xxx_EnumTypeDeclaration_literal_src
+	EnumTypeLiteral[0..1] role literal
+end
+
+composition xxx_EnumTypeLiteral_members between
+	EnumTypeLiteral[0..1] role xxx_EnumTypeLiteral_members_src
+	EnumMember[*] role members
+end
+
+composition xxx_ComplexTypeLiteral_members between
+	ComplexTypeLiteral[0..1] role xxx_ComplexTypeLiteral_members_src
+	Member[*] role members
+end
+

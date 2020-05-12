@@ -1,0 +1,126 @@
+model PrimitiveTypes
+class Port
+attributes
+operations
+end
+
+class Signal
+attributes
+operations
+end
+
+class Base
+attributes
+operations
+end
+
+class Compound<Base
+attributes
+operations
+end
+
+class InputPort<Port
+attributes
+operations
+end
+
+class OutputPort<Port
+attributes
+operations
+end
+
+class LocalPort<Port
+attributes
+operations
+end
+
+class Primitive<Base
+attributes
+operations
+end
+
+class Asso_Port_Signal
+attributes
+operations
+end
+
+association xxx_Port_asso_Port_Signalsrc between
+	Port[*] role xxx_Port_asso_Port_Signalsrc_src
+	Asso_Port_Signal[1] role asso_Port_Signalsrc
+end
+
+association xxx_Port_asso_Port_Signaldst between
+	Port[*] role xxx_Port_asso_Port_Signaldst_src
+	Asso_Port_Signal[1] role asso_Port_Signaldst
+end
+
+association xxx_Signal_base between
+	Signal[*] role xxx_Signal_base_src
+	Base[1] role base
+end
+
+association xxx_Signal_asso_Port_Signal between
+	Signal[*] role xxx_Signal_asso_Port_Signal_src
+	Asso_Port_Signal[1] role asso_Port_Signal
+end
+
+association xxx_Base_compound between
+	Base[*] role xxx_Base_compound_src
+	Compound[1] role compound
+end
+
+composition xxx_Base_inputPort between
+	Base[0..1] role xxx_Base_inputPort_src
+	InputPort[*] role inputPort
+end
+
+composition xxx_Base_outputPort between
+	Base[0..1] role xxx_Base_outputPort_src
+	OutputPort[*] role outputPort
+end
+
+composition xxx_Base_signal between
+	Base[0..1] role xxx_Base_signal_src
+	Signal[*] role signal
+end
+
+composition xxx_Compound_localPort between
+	Compound[0..1] role xxx_Compound_localPort_src
+	LocalPort[*] role localPort
+end
+
+composition xxx_Compound_base between
+	Compound[0..1] role xxx_Compound_base_src
+	Base[*] role base
+end
+
+association xxx_InputPort_base between
+	InputPort[*] role xxx_InputPort_base_src
+	Base[1] role base
+end
+
+association xxx_OutputPort_base between
+	OutputPort[*] role xxx_OutputPort_base_src
+	Base[1] role base
+end
+
+association xxx_LocalPort_compound between
+	LocalPort[*] role xxx_LocalPort_compound_src
+	Compound[1] role compound
+end
+
+association xxx_Asso_Port_Signal_src between
+	Asso_Port_Signal[0..1] role xxx_Asso_Port_Signal_src_src
+	Port[1..*] role src
+end
+
+association xxx_Asso_Port_Signal_dst between
+	Asso_Port_Signal[0..1] role xxx_Asso_Port_Signal_dst_src
+	Port[1..*] role dst
+end
+
+association xxx_Asso_Port_Signal_signal between
+	Asso_Port_Signal[*] role xxx_Asso_Port_Signal_signal_src
+	Signal[1] role signal
+end
+

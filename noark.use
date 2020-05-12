@@ -1,0 +1,772 @@
+model noark
+class AdministrativeUnit
+attributes
+	administrativeUnitName : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	administrativeUnitStatus : String
+	generalUnit : String
+operations
+end
+
+class Fonds<Base
+attributes
+	title : String
+	description : String
+	fondsStatus : String
+	documentMedium : String
+	storageLocation : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	finalisedBy : String
+operations
+end
+
+class Series<Base
+attributes
+	title : String
+	description : String
+	recordSectionStatus : String
+	documentMedium : String
+	storageLocation : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	finalisedBy : String
+	recordsPeriodStartDate : String
+	recordsPeriodEndDate : String
+	periodStatus : String
+operations
+end
+
+class FondsCreator
+attributes
+	fondsCreatorID : String
+	fondsCreatorName : String
+	description : String
+operations
+end
+
+class Transfer
+attributes
+	responsibleExport : String
+	exportedDate : String
+	numberOfFilesExported : String
+	numberOfRecordsExported : String
+	numberOfDocumentsExported : String
+	checksumMetadata : String
+	checksumTransfer : String
+	checksumAlgorithm : String
+operations
+end
+
+class SignOff
+attributes
+	signOffDate : String
+	signedOffBy : String
+	signOffMethod : String
+operations
+end
+
+class BasicFile<Base
+attributes
+	fileID : String
+	fileType : String
+	title : String
+	officialTitle : String
+	description : String
+	keyword : String
+	documentMedium : String
+	storageLocation : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	finalisedBy : String
+operations
+end
+
+class BasicRecord<SimplifiedRecord
+attributes
+	recordID : String
+	title : String
+	officialTitle : String
+	description : String
+	keyword : String
+	author : String
+	documentMedium : String
+	storageLocation : String
+operations
+end
+
+class PreservationAndDisposal
+attributes
+	disposalDecision : String
+	disposalAuthority : String
+	preservationTime : String
+	disposalDate : String
+operations
+end
+
+class UserAdministration
+attributes
+	userName : String
+	userRole : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	userStatus : String
+operations
+end
+
+class DocumentDescription<Base
+attributes
+	documentType : String
+	documentStatus : String
+	title : String
+	description : String
+	author : String
+	createdDate : String
+	createdBy : String
+	documentMedium : String
+	storageLocation : String
+	disposalDate : String
+	disposedBy : String
+operations
+end
+
+class DocumentFlow
+attributes
+	flowTo : String
+	flowFrom : String
+	flowRecivedDate : String
+	flowSentDate : String
+	flowStatus : String
+	flowRemark : String
+operations
+end
+
+class DocumentLink
+attributes
+	linkedRecordAs : String
+	documentNumber : String
+	linkedDate : String
+	linkedBy : String
+operations
+end
+
+class DocumentObject<Base
+attributes
+	versionNumber : String
+	variantFormat : String
+	format : String
+	formatDetails : String
+	createdDate : String
+	createdBy : String
+	documentFile : String
+	checksum : String
+	checksumAlgorithm : String
+	fileSize : String
+operations
+end
+
+class ChangeLog
+attributes
+	recordUnit : String
+	metadata : String
+	changedDate : String
+	changedBy : String
+	previousValue : String
+	newValue : String
+operations
+end
+
+class Grading
+attributes
+	grading : String
+	gradingDate : String
+	gradingBy : String
+	downGradingDate : String
+	downGradedBy : String
+operations
+end
+
+class RegistryEntry<BasicRecord
+attributes
+	serialNumber : String
+	registryEntryType : String
+	recordStatus : String
+	registryDate : String
+	documentDate : String
+	recivedDate : String
+	sentDate : String
+	dueDate : String
+	confidentialityAssessedDate : String
+	numberOfAppendicies : String
+	loanedDate : String
+	loanedTo : String
+operations
+end
+
+class Klass<Base
+attributes
+	classID : String
+	title : String
+	description : String
+	keyword : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	finalisedBy : String
+operations
+end
+
+class ClassificationSystem<Base
+attributes
+	classificationType : String
+	title : String
+	description : String
+	createdDate : String
+	createdBy : String
+	finalisedDate : String
+	finalisedBy : String
+operations
+end
+
+class ConversionToArchivalFormat
+attributes
+	convertedDate : String
+	convertedBy : String
+	previousFormat : String
+	previousFormatDetails : String
+operations
+end
+
+class Client
+attributes
+	clientType : String
+	clientName : String
+	postalAddress : String
+	postCode : String
+	postalTown : String
+	foreignAddress : String
+	emailAddress : String
+	telephoneNumber : String
+	contactPerson : String
+operations
+end
+
+class CrossReference
+attributes
+operations
+end
+
+class Remark
+attributes
+	remarkText : String
+	remarkDate : String
+	remarkRegisteredBy : String
+operations
+end
+
+class RemarkType
+attributes
+	name : String
+operations
+end
+
+class MeetingParticipant
+attributes
+	meetingParticipantName : String
+	meetingParticipantFunction : String
+operations
+end
+
+class MeetingFile<BasicFile
+attributes
+	meetingNumber : String
+	board : String
+	meetingDate : String
+	meetingPlace : String
+operations
+end
+
+class meetingRecord<BasicRecord
+attributes
+	moeteregistreringstype : String
+	moetesakstype : String
+	moeteregistreringsstatus : String
+	administrativenhet : String
+	saksbehandler : String
+operations
+end
+
+class Precedent
+attributes
+	precedentDate : String
+	createdDate : String
+	createdBy : String
+	title : String
+	description : String
+	precedentAuthority : String
+	leagalSourceFactor : String
+	precedentApprovedDate : String
+	precedentApprovedBy : String
+	finalisedDate : String
+	finalisedBy : String
+	precedentStatus : String
+operations
+end
+
+class CaseResponsibility
+attributes
+	administrativeUnit : String
+	executiveOfficer : String
+	registryManagementUnit : String
+operations
+end
+
+class CaseDistribution
+attributes
+	distributedTo : String
+	distributedBy : String
+	distributedDate : String
+operations
+end
+
+class CaseFile<BasicFile
+attributes
+	caseDate : String
+	administrativeUnit : String
+	caseResponsible : String
+	registryManagementUnit : String
+	caseStatus : String
+	loanedDate : String
+	loanedTo : String
+operations
+end
+
+class CaseParty
+attributes
+	casePartyID : String
+	casePartyName : String
+	casePartyRole : String
+	postalAddress : String
+	postCode : String
+	postalTown : String
+	foreignAddress : String
+	emailAddress : String
+	telephoneNumber : String
+	contactPerson : String
+operations
+end
+
+class Screening
+attributes
+	accessRestriction : String
+	screeningAuthority : String
+	screeningMetadata : String
+	screeningDocument : String
+	screeningDuration : String
+	screeningCeasesDate : String
+operations
+end
+
+class DeletionOfDocuments
+attributes
+	deletionType : String
+	deletedDate : String
+	deletedBy : String
+operations
+end
+
+class CompletedDisposal
+attributes
+	disposedOfDate : String
+	disposedOfBy : String
+operations
+end
+
+class VerificationOfElectronicSignature
+attributes
+	electronicSignatureSecurityLevel : String
+	electronicSignatureVerified : String
+	verifiedDate : String
+	verifiedBy : String
+operations
+end
+
+class Base
+attributes
+	systemID : String
+operations
+end
+
+class SimplifiedRecord<Base
+attributes
+	recordType : String
+	createdDate : String
+	createdBy : String
+	archivedDate : String
+	archivedBy : String
+operations
+end
+
+class Parameter
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_Fonds_parent between
+	Fonds[*] role xxx_Fonds_parent_src
+	Fonds[0..1] role parent
+end
+
+composition xxx_Fonds_referenceChildSeries between
+	Fonds[0..1] role xxx_Fonds_referenceChildSeries_src
+	Series[*] role referenceChildSeries
+end
+
+composition xxx_Fonds_subFonds between
+	Fonds[0..1] role xxx_Fonds_subFonds_src
+	Fonds[*] role subFonds
+end
+
+association xxx_Fonds_fondsCreator between
+	Fonds[0..1] role xxx_Fonds_fondsCreator_src
+	FondsCreator[*] role fondsCreator
+end
+
+composition xxx_Series_parent between
+	Series[*] role xxx_Series_parent_src
+	Fonds[1] role parent
+end
+
+composition xxx_Series_precursor between
+	Series[*] role xxx_Series_precursor_src
+	Series[0..1] role precursor
+end
+
+composition xxx_Series_successor between
+	Series[*] role xxx_Series_successor_src
+	Series[0..1] role successor
+end
+
+composition xxx_Series_classificationSystem between
+	Series[*] role xxx_Series_classificationSystem_src
+	ClassificationSystem[0..1] role classificationSystem
+end
+
+composition xxx_Series_file between
+	Series[0..1] role xxx_Series_file_src
+	BasicFile[*] role file
+end
+
+composition xxx_Series_record between
+	Series[0..1] role xxx_Series_record_src
+	SimplifiedRecord[*] role record
+end
+
+association xxx_Series_preservationAndDisposal between
+	Series[*] role xxx_Series_preservationAndDisposal_src
+	PreservationAndDisposal[0..1] role preservationAndDisposal
+end
+
+association xxx_FondsCreator_fonds between
+	FondsCreator[0..1] role xxx_FondsCreator_fonds_src
+	Fonds[*] role fonds
+end
+
+composition xxx_SignOff_signOffsRegistryEntry between
+	SignOff[*] role xxx_SignOff_signOffsRegistryEntry_src
+	SimplifiedRecord[0..1] role signOffsRegistryEntry
+end
+
+composition xxx_SignOff_signOffedByRegistryEntry between
+	SignOff[*] role xxx_SignOff_signOffedByRegistryEntry_src
+	SimplifiedRecord[0..1] role signOffedByRegistryEntry
+end
+
+composition xxx_BasicFile_parentClass between
+	BasicFile[*] role xxx_BasicFile_parentClass_src
+	Klass[0..1] role parentClass
+end
+
+composition xxx_BasicFile_parentFile between
+	BasicFile[*] role xxx_BasicFile_parentFile_src
+	BasicFile[0..1] role parentFile
+end
+
+composition xxx_BasicFile_childRecord between
+	BasicFile[0..1] role xxx_BasicFile_childRecord_src
+	SimplifiedRecord[*] role childRecord
+end
+
+composition xxx_BasicFile_childFile between
+	BasicFile[0..1] role xxx_BasicFile_childFile_src
+	BasicFile[*] role childFile
+end
+
+composition xxx_BasicFile_recordSection between
+	BasicFile[*] role xxx_BasicFile_recordSection_src
+	Series[1] role recordSection
+end
+
+association xxx_BasicFile_bevaringOgKassasjon between
+	BasicFile[*] role xxx_BasicFile_bevaringOgKassasjon_src
+	PreservationAndDisposal[0..1] role bevaringOgKassasjon
+end
+
+association xxx_BasicFile_merknad between
+	BasicFile[0..1] role xxx_BasicFile_merknad_src
+	Remark[*] role merknad
+end
+
+association xxx_BasicRecord_merknad between
+	BasicRecord[0..1] role xxx_BasicRecord_merknad_src
+	Remark[*] role merknad
+end
+
+association xxx_PreservationAndDisposal_record between
+	PreservationAndDisposal[0..1] role xxx_PreservationAndDisposal_record_src
+	SimplifiedRecord[*] role record
+end
+
+association xxx_PreservationAndDisposal_series between
+	PreservationAndDisposal[0..1] role xxx_PreservationAndDisposal_series_src
+	Series[*] role series
+end
+
+association xxx_PreservationAndDisposal_file between
+	PreservationAndDisposal[0..1] role xxx_PreservationAndDisposal_file_src
+	BasicFile[*] role file
+end
+
+association xxx_PreservationAndDisposal_klass between
+	PreservationAndDisposal[0..1] role xxx_PreservationAndDisposal_klass_src
+	Klass[*] role klass
+end
+
+association xxx_PreservationAndDisposal_documentDescription between
+	PreservationAndDisposal[0..1] role xxx_PreservationAndDisposal_documentDescription_src
+	DocumentDescription[*] role documentDescription
+end
+
+composition xxx_DocumentDescription_documentObject between
+	DocumentDescription[0..1] role xxx_DocumentDescription_documentObject_src
+	DocumentObject[*] role documentObject
+end
+
+association xxx_DocumentDescription_preservationAndDisposal between
+	DocumentDescription[*] role xxx_DocumentDescription_preservationAndDisposal_src
+	PreservationAndDisposal[0..1] role preservationAndDisposal
+end
+
+association xxx_DocumentDescription_remark between
+	DocumentDescription[0..1] role xxx_DocumentDescription_remark_src
+	Remark[*] role remark
+end
+
+composition xxx_DocumentDescription_records between
+	DocumentDescription[0..1] role xxx_DocumentDescription_records_src
+	DocumentLink[*] role records
+end
+
+composition xxx_DocumentLink_referenceRecord between
+	DocumentLink[*] role xxx_DocumentLink_referenceRecord_src
+	SimplifiedRecord[1] role referenceRecord
+end
+
+association xxx_DocumentLink_documentDescription between
+	DocumentLink[*] role xxx_DocumentLink_documentDescription_src
+	DocumentDescription[0..1] role documentDescription
+end
+
+composition xxx_DocumentObject_documentDescription between
+	DocumentObject[*] role xxx_DocumentObject_documentDescription_src
+	DocumentDescription[0..1] role documentDescription
+end
+
+composition xxx_DocumentObject_record between
+	DocumentObject[*] role xxx_DocumentObject_record_src
+	SimplifiedRecord[0..1] role record
+end
+
+association xxx_RegistryEntry_clients between
+	RegistryEntry[0..1] role xxx_RegistryEntry_clients_src
+	Client[1..*] role clients
+end
+
+association xxx_RegistryEntry_caseResponsibility between
+	RegistryEntry[*] role xxx_RegistryEntry_caseResponsibility_src
+	CaseResponsibility[1] role caseResponsibility
+end
+
+composition xxx_Klass_parentClassificationSystem between
+	Klass[*] role xxx_Klass_parentClassificationSystem_src
+	ClassificationSystem[1] role parentClassificationSystem
+end
+
+composition xxx_Klass_parentClass between
+	Klass[*] role xxx_Klass_parentClass_src
+	Klass[0..1] role parentClass
+end
+
+composition xxx_Klass_childClass between
+	Klass[0..1] role xxx_Klass_childClass_src
+	Klass[*] role childClass
+end
+
+composition xxx_Klass_childFile between
+	Klass[0..1] role xxx_Klass_childFile_src
+	BasicFile[*] role childFile
+end
+
+composition xxx_Klass_childRecord between
+	Klass[0..1] role xxx_Klass_childRecord_src
+	SimplifiedRecord[*] role childRecord
+end
+
+association xxx_Klass_preservationAndDisposal between
+	Klass[*] role xxx_Klass_preservationAndDisposal_src
+	PreservationAndDisposal[0..1] role preservationAndDisposal
+end
+
+association xxx_Klass_screening between
+	Klass[*] role xxx_Klass_screening_src
+	Screening[0..1] role screening
+end
+
+composition xxx_ClassificationSystem_child between
+	ClassificationSystem[0..1] role xxx_ClassificationSystem_child_src
+	Klass[*] role child
+end
+
+association xxx_Client_registryEntry between
+	Client[*] role xxx_Client_registryEntry_src
+	RegistryEntry[1] role registryEntry
+end
+
+association xxx_CrossReference_toClass between
+	CrossReference[*] role xxx_CrossReference_toClass_src
+	Klass[0..1] role toClass
+end
+
+association xxx_CrossReference_fromClass between
+	CrossReference[*] role xxx_CrossReference_fromClass_src
+	Klass[0..1] role fromClass
+end
+
+association xxx_CrossReference_fromFile between
+	CrossReference[*] role xxx_CrossReference_fromFile_src
+	BasicFile[0..1] role fromFile
+end
+
+association xxx_CrossReference_toFile between
+	CrossReference[*] role xxx_CrossReference_toFile_src
+	BasicFile[0..1] role toFile
+end
+
+association xxx_CrossReference_toRecord between
+	CrossReference[*] role xxx_CrossReference_toRecord_src
+	SimplifiedRecord[0..1] role toRecord
+end
+
+association xxx_CrossReference_fromRecord between
+	CrossReference[*] role xxx_CrossReference_fromRecord_src
+	SimplifiedRecord[0..1] role fromRecord
+end
+
+association xxx_Remark_basicFile between
+	Remark[*] role xxx_Remark_basicFile_src
+	BasicFile[0..1] role basicFile
+end
+
+association xxx_Remark_basicRecord between
+	Remark[*] role xxx_Remark_basicRecord_src
+	BasicRecord[0..1] role basicRecord
+end
+
+association xxx_Remark_documentDescription between
+	Remark[*] role xxx_Remark_documentDescription_src
+	DocumentDescription[0..1] role documentDescription
+end
+
+association xxx_Remark_remarkType between
+	Remark[*] role xxx_Remark_remarkType_src
+	RemarkType[1] role remarkType
+end
+
+association xxx_RemarkType_remark between
+	RemarkType[0..1] role xxx_RemarkType_remark_src
+	Remark[*] role remark
+end
+
+composition xxx_MeetingFile_previousMeeting between
+	MeetingFile[*] role xxx_MeetingFile_previousMeeting_src
+	BasicFile[0..1] role previousMeeting
+end
+
+composition xxx_MeetingFile_nextMeeting between
+	MeetingFile[*] role xxx_MeetingFile_nextMeeting_src
+	BasicFile[0..1] role nextMeeting
+end
+
+composition xxx_meetingRecord_toMeetingRecord between
+	meetingRecord[0..1] role xxx_meetingRecord_toMeetingRecord_src
+	SimplifiedRecord[*] role toMeetingRecord
+end
+
+composition xxx_meetingRecord_fromMeetingRecord between
+	meetingRecord[0..1] role xxx_meetingRecord_fromMeetingRecord_src
+	SimplifiedRecord[*] role fromMeetingRecord
+end
+
+association xxx_CaseResponsibility_registryEntry between
+	CaseResponsibility[0..1] role xxx_CaseResponsibility_registryEntry_src
+	RegistryEntry[*] role registryEntry
+end
+
+composition xxx_CaseFile_secondaryClassification between
+	CaseFile[0..1] role xxx_CaseFile_secondaryClassification_src
+	Klass[*] role secondaryClassification
+end
+
+association xxx_CaseFile_precedent between
+	CaseFile[*] role xxx_CaseFile_precedent_src
+	Precedent[0..1] role precedent
+end
+
+composition xxx_SimplifiedRecord_parentFile between
+	SimplifiedRecord[*] role xxx_SimplifiedRecord_parentFile_src
+	BasicFile[0..1] role parentFile
+end
+
+composition xxx_SimplifiedRecord_parentClass between
+	SimplifiedRecord[*] role xxx_SimplifiedRecord_parentClass_src
+	Klass[0..1] role parentClass
+end
+
+composition xxx_SimplifiedRecord_recordSection between
+	SimplifiedRecord[*] role xxx_SimplifiedRecord_recordSection_src
+	Series[0..1] role recordSection
+end
+
+composition xxx_SimplifiedRecord_document between
+	SimplifiedRecord[0..1] role xxx_SimplifiedRecord_document_src
+	DocumentLink[*] role document
+end
+
+composition xxx_SimplifiedRecord_documentObject between
+	SimplifiedRecord[0..1] role xxx_SimplifiedRecord_documentObject_src
+	DocumentObject[*] role documentObject
+end
+
+association xxx_SimplifiedRecord_preservationAndDisposal between
+	SimplifiedRecord[*] role xxx_SimplifiedRecord_preservationAndDisposal_src
+	PreservationAndDisposal[0..1] role preservationAndDisposal
+end
+

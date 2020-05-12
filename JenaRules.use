@@ -1,0 +1,161 @@
+model jenaRules
+class JenaRuleDocument
+attributes
+operations
+end
+
+class Rule
+attributes
+	ruleName : String
+operations
+end
+
+class Prefix
+attributes
+	name : String
+	uri : String
+operations
+end
+
+class BareRule
+attributes
+operations
+end
+
+class ForwardRule<BareRule
+attributes
+operations
+end
+
+class Term<BHTerm
+attributes
+operations
+end
+
+class Function<Node
+attributes
+	name : String
+operations
+end
+
+class BHTerm
+attributes
+operations
+end
+
+class Node
+attributes
+operations
+end
+
+class URIRef<Node
+attributes
+	uri : String
+operations
+end
+
+class QName<Node
+attributes
+	name : String
+operations
+end
+
+class Variable<Node
+attributes
+	name : String
+operations
+end
+
+class Literal<Node
+attributes
+operations
+end
+
+class StringValue<Literal
+attributes
+	value : String
+operations
+end
+
+class IntegerValue<Literal
+attributes
+	value : Integer
+operations
+end
+
+class RDFTag
+attributes
+operations
+end
+
+class TypeTag<RDFTag
+attributes
+operations
+end
+
+class LangTag<RDFTag
+attributes
+	lang : String
+operations
+end
+
+composition xxx_JenaRuleDocument_prefixes between
+	JenaRuleDocument[0..1] role xxx_JenaRuleDocument_prefixes_src
+	Prefix[*] role prefixes
+end
+
+composition xxx_JenaRuleDocument_rules between
+	JenaRuleDocument[0..1] role xxx_JenaRuleDocument_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Rule_bareRule between
+	Rule[*] role xxx_Rule_bareRule_src
+	BareRule[0..1] role bareRule
+end
+
+composition xxx_ForwardRule_leftTerms between
+	ForwardRule[0..1] role xxx_ForwardRule_leftTerms_src
+	Term[*] role leftTerms
+end
+
+composition xxx_ForwardRule_rightTerms between
+	ForwardRule[0..1] role xxx_ForwardRule_rightTerms_src
+	Term[*] role rightTerms
+end
+
+composition xxx_Term_subject between
+	Term[*] role xxx_Term_subject_src
+	Node[0..1] role subject
+end
+
+composition xxx_Term_predicate between
+	Term[*] role xxx_Term_predicate_src
+	Node[0..1] role predicate
+end
+
+composition xxx_Term_object between
+	Term[*] role xxx_Term_object_src
+	Node[0..1] role object
+end
+
+composition xxx_Function_nodes between
+	Function[0..1] role xxx_Function_nodes_src
+	Node[*] role nodes
+end
+
+association xxx_QName_prefix between
+	QName[*] role xxx_QName_prefix_src
+	Prefix[0..1] role prefix
+end
+
+composition xxx_Literal_tag between
+	Literal[*] role xxx_Literal_tag_src
+	RDFTag[0..1] role tag
+end
+
+composition xxx_TypeTag_type between
+	TypeTag[*] role xxx_TypeTag_type_src
+	QName[0..1] role type
+end
+

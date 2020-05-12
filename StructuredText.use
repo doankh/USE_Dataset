@@ -1,0 +1,128 @@
+model structuredText
+class Model
+attributes
+operations
+end
+
+class Item
+attributes
+operations
+end
+
+class Function<Item,UserTypes
+attributes
+operations
+end
+
+class FunctionBlockBlock<Function
+attributes
+operations
+end
+
+class FunctionBlock<Function
+attributes
+operations
+end
+
+class VariableBlock<Item
+attributes
+	title : String
+operations
+end
+
+class TypeBlock<Item
+attributes
+	title : String
+operations
+end
+
+class TypeBlockTypes
+attributes
+operations
+end
+
+class UserTypes
+attributes
+	name : String
+operations
+end
+
+class ProgramTypes
+attributes
+operations
+end
+
+class SingleTypeDefinition<TypeBlockTypes,UserTypes
+attributes
+operations
+end
+
+class SingleTypeDefinitionTail
+attributes
+	first : Integer
+	last : Integer
+operations
+end
+
+class StructTypeDefinition<TypeBlockTypes,UserTypes
+attributes
+operations
+end
+
+class StructTypeDefinitionTail
+attributes
+operations
+end
+
+class VariableDefinition
+attributes
+	name : String
+	value : String
+operations
+end
+
+composition xxx_Model_items between
+	Model[0..1] role xxx_Model_items_src
+	Item[*] role items
+end
+
+composition xxx_VariableBlock_variables between
+	VariableBlock[0..1] role xxx_VariableBlock_variables_src
+	VariableDefinition[*] role variables
+end
+
+composition xxx_TypeBlock_types between
+	TypeBlock[0..1] role xxx_TypeBlock_types_src
+	TypeBlockTypes[*] role types
+end
+
+association xxx_ProgramTypes_ref between
+	ProgramTypes[*] role xxx_ProgramTypes_ref_src
+	UserTypes[0..1] role ref
+end
+
+composition xxx_SingleTypeDefinition_item between
+	SingleTypeDefinition[*] role xxx_SingleTypeDefinition_item_src
+	SingleTypeDefinitionTail[0..1] role item
+end
+
+composition xxx_SingleTypeDefinitionTail_types between
+	SingleTypeDefinitionTail[0..1] role xxx_SingleTypeDefinitionTail_types_src
+	ProgramTypes[*] role types
+end
+
+composition xxx_StructTypeDefinition_item between
+	StructTypeDefinition[*] role xxx_StructTypeDefinition_item_src
+	StructTypeDefinitionTail[0..1] role item
+end
+
+composition xxx_StructTypeDefinitionTail_type between
+	StructTypeDefinitionTail[0..1] role xxx_StructTypeDefinitionTail_type_src
+	VariableDefinition[*] role type
+end
+
+composition xxx_VariableDefinition_types between
+	VariableDefinition[*] role xxx_VariableDefinition_types_src
+	ProgramTypes[0..1] role types
+end
+

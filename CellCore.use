@@ -1,0 +1,57 @@
+model CellCore
+abstract class Expression
+attributes
+operations
+end
+
+class IntExpr<Expression
+attributes
+operations
+end
+
+class BoolExpr<Expression
+attributes
+operations
+end
+
+class Literal<IntExpr
+attributes
+operations
+end
+
+class IntBin<IntExpr
+attributes
+operations
+end
+
+class Add<IntBin
+attributes
+operations
+end
+
+class Mul<IntBin
+attributes
+operations
+end
+
+class BoolBin<BoolExpr
+attributes
+operations
+end
+
+class Equal<BoolBin
+attributes
+operations
+end
+
+class Greater<BoolBin
+attributes
+operations
+end
+
+class State
+attributes
+	state : Integer
+operations
+end
+

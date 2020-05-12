@@ -1,0 +1,219 @@
+model DataContractDsl
+enum Multiplicity{
+default
+}
+
+class DataContractModel<ModelElement
+attributes
+operations
+end
+
+class Dto<ModelElement
+attributes
+operations
+end
+
+class BusinessClassDto<Dto
+attributes
+	creatable : Boolean
+operations
+end
+
+class DtoProperty<ModelElement
+attributes
+	dataType : String
+	mandatoryForCreation : Boolean
+	nullable : Boolean
+	writable : Boolean
+operations
+end
+
+class DtoDataProperty<DtoProperty
+attributes
+	hasDefault : Boolean
+operations
+end
+
+class DtoStringProperty<DtoDataProperty
+attributes
+	defaultValue : String
+operations
+end
+
+class DtoBooleanProperty<DtoDataProperty
+attributes
+	defaultValue : String
+operations
+end
+
+class EnumerationDto<ModelElement
+attributes
+operations
+end
+
+class EnumerationDtoLiteral<ModelElement
+attributes
+	value : Integer
+operations
+end
+
+class ModelElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class CustomDto<Dto
+attributes
+operations
+end
+
+class DtoIntegerProperty<DtoDataProperty
+attributes
+	defaultValue : Integer
+operations
+end
+
+class DtoDecimalProperty<DtoDataProperty
+attributes
+	defaultValue : String
+operations
+end
+
+class DtoEnumerationProperty<DtoDataProperty
+attributes
+	defaultValueAsString : String
+operations
+end
+
+class DtoDateTimeProperty<DtoDataProperty
+attributes
+	defaultValue : String
+operations
+end
+
+class BusinessClassPropertyReference<ModelElement
+attributes
+operations
+end
+
+class BusinessClassAssociationRoleReference<ModelElement
+attributes
+operations
+end
+
+class DtoAssociationRoleProperty<DtoProperty
+attributes
+	ordered_ : Boolean
+	multiplicity : Multiplicity
+operations
+end
+
+class ExternalReference<ModelElement
+attributes
+	modelname : String
+	keyword : String
+operations
+end
+
+composition xxx_DataContractModel_dtos between
+	DataContractModel[0..1] role xxx_DataContractModel_dtos_src
+	Dto[*] role dtos
+end
+
+composition xxx_DataContractModel_enumerations between
+	DataContractModel[0..1] role xxx_DataContractModel_enumerations_src
+	EnumerationDto[*] role enumerations
+end
+
+composition xxx_DataContractModel_externalReferences between
+	DataContractModel[0..1] role xxx_DataContractModel_externalReferences_src
+	ExternalReference[*] role externalReferences
+end
+
+association xxx_Dto_datacontractModel between
+	Dto[*] role xxx_Dto_datacontractModel_src
+	DataContractModel[0..1] role datacontractModel
+end
+
+composition xxx_BusinessClassDto_properties between
+	BusinessClassDto[0..1] role xxx_BusinessClassDto_properties_src
+	DtoProperty[*] role properties
+end
+
+association xxx_BusinessClassDto_base between
+	BusinessClassDto[*] role xxx_BusinessClassDto_base_src
+	ExternalReference[0..1] role base
+end
+
+composition xxx_BusinessClassDto_propertyReferences between
+	BusinessClassDto[0..1] role xxx_BusinessClassDto_propertyReferences_src
+	BusinessClassPropertyReference[*] role propertyReferences
+end
+
+composition xxx_BusinessClassDto_associationReferences between
+	BusinessClassDto[0..1] role xxx_BusinessClassDto_associationReferences_src
+	BusinessClassAssociationRoleReference[*] role associationReferences
+end
+
+association xxx_DtoProperty_businessClassDto between
+	DtoProperty[*] role xxx_DtoProperty_businessClassDto_src
+	BusinessClassDto[0..1] role businessClassDto
+end
+
+association xxx_DtoProperty_customDto between
+	DtoProperty[*] role xxx_DtoProperty_customDto_src
+	CustomDto[0..1] role customDto
+end
+
+composition xxx_EnumerationDto_literals between
+	EnumerationDto[0..1] role xxx_EnumerationDto_literals_src
+	EnumerationDtoLiteral[*] role literals
+end
+
+association xxx_EnumerationDto_base between
+	EnumerationDto[*] role xxx_EnumerationDto_base_src
+	ExternalReference[0..1] role base
+end
+
+association xxx_EnumerationDto_datacontractModel between
+	EnumerationDto[*] role xxx_EnumerationDto_datacontractModel_src
+	DataContractModel[0..1] role datacontractModel
+end
+
+composition xxx_CustomDto_properties between
+	CustomDto[0..1] role xxx_CustomDto_properties_src
+	DtoProperty[*] role properties
+end
+
+association xxx_DtoEnumerationProperty_type between
+	DtoEnumerationProperty[*] role xxx_DtoEnumerationProperty_type_src
+	EnumerationDto[0..1] role type
+end
+
+association xxx_BusinessClassPropertyReference_dto between
+	BusinessClassPropertyReference[*] role xxx_BusinessClassPropertyReference_dto_src
+	BusinessClassDto[0..1] role dto
+end
+
+association xxx_BusinessClassAssociationRoleReference_dto between
+	BusinessClassAssociationRoleReference[*] role xxx_BusinessClassAssociationRoleReference_dto_src
+	BusinessClassDto[0..1] role dto
+end
+
+association xxx_BusinessClassAssociationRoleReference_dtoType between
+	BusinessClassAssociationRoleReference[*] role xxx_BusinessClassAssociationRoleReference_dtoType_src
+	Dto[0..1] role dtoType
+end
+
+association xxx_DtoAssociationRoleProperty_dtoType between
+	DtoAssociationRoleProperty[*] role xxx_DtoAssociationRoleProperty_dtoType_src
+	Dto[0..1] role dtoType
+end
+
+association xxx_ExternalReference_datacontractModel between
+	ExternalReference[*] role xxx_ExternalReference_datacontractModel_src
+	DataContractModel[0..1] role datacontractModel
+end
+

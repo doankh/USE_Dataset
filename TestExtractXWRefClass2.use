@@ -1,0 +1,81 @@
+model testextractxwrefclass
+class OrigContainer
+attributes
+operations
+end
+
+class Extract
+attributes
+operations
+end
+
+class NewContainer
+attributes
+operations
+end
+
+class ContainerContainer
+attributes
+operations
+end
+
+class MovedReference
+attributes
+operations
+end
+
+class ExtractBetween
+attributes
+operations
+end
+
+composition xxx_OrigContainer_referer between
+	OrigContainer[*] role xxx_OrigContainer_referer_src
+	MovedReference[0..1] role referer
+end
+
+composition xxx_OrigContainer_extracts between
+	OrigContainer[*] role xxx_OrigContainer_extracts_src
+	Extract[0..1] role extracts
+end
+
+composition xxx_OrigContainer_extractsBetween between
+	OrigContainer[*] role xxx_OrigContainer_extractsBetween_src
+	ExtractBetween[0..1] role extractsBetween
+end
+
+composition xxx_NewContainer_moved between
+	NewContainer[*] role xxx_NewContainer_moved_src
+	Extract[0..1] role moved
+end
+
+composition xxx_NewContainer_containerContainerTarget between
+	NewContainer[*] role xxx_NewContainer_containerContainerTarget_src
+	NewContainer[0..1] role containerContainerTarget
+end
+
+composition xxx_NewContainer_containerContainerSource between
+	NewContainer[*] role xxx_NewContainer_containerContainerSource_src
+	OrigContainer[0..1] role containerContainerSource
+end
+
+composition xxx_ContainerContainer_source between
+	ContainerContainer[*] role xxx_ContainerContainer_source_src
+	OrigContainer[0..1] role source
+end
+
+composition xxx_ContainerContainer_target between
+	ContainerContainer[*] role xxx_ContainerContainer_target_src
+	NewContainer[0..1] role target
+end
+
+association xxx_MovedReference_containerRef between
+	MovedReference[*] role xxx_MovedReference_containerRef_src
+	NewContainer[0..1] role containerRef
+end
+
+composition xxx_ExtractBetween_betweenExtract between
+	ExtractBetween[*] role xxx_ExtractBetween_betweenExtract_src
+	Extract[0..1] role betweenExtract
+end
+

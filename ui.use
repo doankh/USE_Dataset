@@ -1,0 +1,194 @@
+model ui
+abstract class BlockDef
+attributes
+	name : String
+	description : String
+operations
+end
+
+class PlanDef
+attributes
+	name : String
+	abstract_ : Boolean
+	description : String
+operations
+end
+
+class RendererDef
+attributes
+	name : String
+operations
+end
+
+class Region
+attributes
+	name : String
+	description : String
+operations
+end
+
+class LayoutDef
+attributes
+	name : String
+	description : String
+	abstract_ : Boolean
+operations
+end
+
+class Theme
+attributes
+operations
+end
+
+class PresenterDef
+attributes
+	name : String
+operations
+end
+
+class ActivityDef
+attributes
+	name : String
+	description : String
+operations
+end
+
+class UiCatalog
+attributes
+	name : String
+operations
+end
+
+class Platform
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Part
+attributes
+	name : String
+operations
+end
+
+class PlanBlock<BlockDef
+attributes
+operations
+end
+
+class LayoutBlock<BlockDef
+attributes
+operations
+end
+
+association xxx_BlockDef_super between
+	BlockDef[*] role xxx_BlockDef_super_src
+	BlockDef[0..1] role super
+end
+
+association xxx_PlanDef_super between
+	PlanDef[*] role xxx_PlanDef_super_src
+	PlanDef[0..1] role super
+end
+
+composition xxx_PlanDef_parts between
+	PlanDef[0..1] role xxx_PlanDef_parts_src
+	Part[*] role parts
+end
+
+association xxx_RendererDef_block between
+	RendererDef[*] role xxx_RendererDef_block_src
+	BlockDef[1] role block
+end
+
+association xxx_RendererDef_platform between
+	RendererDef[*] role xxx_RendererDef_platform_src
+	Platform[1] role platform
+end
+
+association xxx_Region_type between
+	Region[*] role xxx_Region_type_src
+	BlockDef[1] role type
+end
+
+composition xxx_LayoutDef_regions between
+	LayoutDef[0..1] role xxx_LayoutDef_regions_src
+	Region[*] role regions
+end
+
+association xxx_LayoutDef_super between
+	LayoutDef[*] role xxx_LayoutDef_super_src
+	LayoutDef[0..1] role super
+end
+
+association xxx_PresenterDef_super between
+	PresenterDef[*] role xxx_PresenterDef_super_src
+	PresenterDef[0..1] role super
+end
+
+association xxx_PresenterDef_layout between
+	PresenterDef[*] role xxx_PresenterDef_layout_src
+	PlanDef[1] role layout
+end
+
+association xxx_PresenterDef_platform between
+	PresenterDef[*] role xxx_PresenterDef_platform_src
+	Platform[1] role platform
+end
+
+association xxx_ActivityDef_super between
+	ActivityDef[*] role xxx_ActivityDef_super_src
+	ActivityDef[0..1] role super
+end
+
+association xxx_ActivityDef_block between
+	ActivityDef[*] role xxx_ActivityDef_block_src
+	BlockDef[1] role block
+end
+
+composition xxx_UiCatalog_layouts between
+	UiCatalog[0..1] role xxx_UiCatalog_layouts_src
+	LayoutDef[*] role layouts
+end
+
+composition xxx_UiCatalog_presenters between
+	UiCatalog[0..1] role xxx_UiCatalog_presenters_src
+	PresenterDef[*] role presenters
+end
+
+composition xxx_UiCatalog_renderers between
+	UiCatalog[0..1] role xxx_UiCatalog_renderers_src
+	RendererDef[*] role renderers
+end
+
+composition xxx_UiCatalog_platforms between
+	UiCatalog[0..1] role xxx_UiCatalog_platforms_src
+	Platform[*] role platforms
+end
+
+composition xxx_UiCatalog_plans between
+	UiCatalog[0..1] role xxx_UiCatalog_plans_src
+	PlanDef[*] role plans
+end
+
+composition xxx_UiCatalog_blocks between
+	UiCatalog[0..1] role xxx_UiCatalog_blocks_src
+	BlockDef[*] role blocks
+end
+
+composition xxx_UiCatalog_activities between
+	UiCatalog[0..1] role xxx_UiCatalog_activities_src
+	ActivityDef[*] role activities
+end
+
+association xxx_PlanBlock_plan between
+	PlanBlock[*] role xxx_PlanBlock_plan_src
+	PlanDef[1] role plan
+end
+
+association xxx_LayoutBlock_layout between
+	LayoutBlock[*] role xxx_LayoutBlock_layout_src
+	LayoutDef[1] role layout
+end
+

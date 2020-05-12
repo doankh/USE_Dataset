@@ -1,0 +1,73 @@
+model viewmodel
+class CoreGroup<AbstractGroup
+attributes
+operations
+end
+
+class AbstractGroup<Element
+attributes
+operations
+	checkForRedundantViewPoints(eDiagnosticChain : String,eMap : String):Boolean
+end
+
+class ViewPoint<Element
+attributes
+operations
+end
+
+abstract class Element
+attributes
+	name : String
+operations
+end
+
+class GroupModel
+attributes
+operations
+end
+
+class ViewPointContainer
+attributes
+operations
+end
+
+class Group<AbstractGroup
+attributes
+operations
+end
+
+association xxx_AbstractGroup_viewPointReference between
+	AbstractGroup[0..1] role xxx_AbstractGroup_viewPointReference_src
+	ViewPoint[*] role viewPointReference
+end
+
+composition xxx_AbstractGroup_groups between
+	AbstractGroup[0..1] role xxx_AbstractGroup_groups_src
+	Group[*] role groups
+end
+
+association xxx_ViewPoint_containedInGroup between
+	ViewPoint[0..1] role xxx_ViewPoint_containedInGroup_src
+	AbstractGroup[*] role containedInGroup
+end
+
+composition xxx_GroupModel_coreGroup between
+	GroupModel[*] role xxx_GroupModel_coreGroup_src
+	CoreGroup[1] role coreGroup
+end
+
+composition xxx_GroupModel_viewPointContainer between
+	GroupModel[*] role xxx_GroupModel_viewPointContainer_src
+	ViewPointContainer[1] role viewPointContainer
+end
+
+composition xxx_ViewPointContainer_viewPoints between
+	ViewPointContainer[0..1] role xxx_ViewPointContainer_viewPoints_src
+	ViewPoint[*] role viewPoints
+end
+
+association xxx_Group_parentGroup between
+	Group[*] role xxx_Group_parentGroup_src
+	AbstractGroup[0..1] role parentGroup
+end
+

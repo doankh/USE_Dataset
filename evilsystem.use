@@ -1,0 +1,141 @@
+model evilsystem
+enum Platform{
+default
+}
+
+enum MethodType{
+default
+}
+
+class System
+attributes
+	systemNameSpace : String
+operations
+end
+
+class SimpleType<PackageElement,Type
+attributes
+operations
+end
+
+class Entity<PackageElement,Type
+attributes
+operations
+end
+
+abstract class NamedObject
+attributes
+	name : String
+operations
+end
+
+class Attribute<TypeReference
+attributes
+operations
+end
+
+class Function<TypeReference
+attributes
+	methodType : MethodType
+operations
+end
+
+class Parameter<TypeReference
+attributes
+operations
+end
+
+class Service
+attributes
+	path : String
+operations
+end
+
+abstract class PackageElement<NamedObject
+attributes
+operations
+end
+
+class Type<NamedObject
+attributes
+operations
+end
+
+abstract class TypeReference<NamedObject
+attributes
+	collection : Boolean
+operations
+end
+
+class Component<PackageElement
+attributes
+	platform : Platform
+operations
+end
+
+class NamedQuery<NamedObject
+attributes
+	query : String
+operations
+end
+
+composition xxx_System_elements between
+	System[0..1] role xxx_System_elements_src
+	PackageElement[*] role elements
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Entity_queries between
+	Entity[0..1] role xxx_Entity_queries_src
+	NamedQuery[1..*] role queries
+end
+
+association xxx_Entity_superClass between
+	Entity[*] role xxx_Entity_superClass_src
+	Entity[0..1] role superClass
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Function_queries between
+	Function[0..1] role xxx_Function_queries_src
+	NamedQuery[*] role queries
+end
+
+composition xxx_Service_functions between
+	Service[0..1] role xxx_Service_functions_src
+	Function[*] role functions
+end
+
+association xxx_Service_component between
+	Service[*] role xxx_Service_component_src
+	Component[1] role component
+end
+
+association xxx_PackageElement_system between
+	PackageElement[*] role xxx_PackageElement_system_src
+	System[0..1] role system
+end
+
+association xxx_TypeReference_type between
+	TypeReference[*] role xxx_TypeReference_type_src
+	Type[1] role type
+end
+
+composition xxx_Component_services between
+	Component[0..1] role xxx_Component_services_src
+	Service[*] role services
+end
+
+association xxx_NamedQuery_referred between
+	NamedQuery[*] role xxx_NamedQuery_referred_src
+	Entity[1] role referred
+end
+

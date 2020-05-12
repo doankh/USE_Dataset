@@ -1,0 +1,589 @@
+model epn
+enum ProcessType{
+default
+}
+
+class DocumentRoot
+attributes
+operations
+end
+
+class Activity<FlowNode
+attributes
+operations
+end
+
+class FlowNode<FlowElement
+attributes
+operations
+end
+
+abstract class FlowElement<BaseElement
+attributes
+	name : String
+operations
+end
+
+class BaseElement
+attributes
+	id : String
+operations
+end
+
+class Documentation<BaseElement
+attributes
+	mixed : String
+	text : String
+operations
+end
+
+class SequenceFlow<FlowElement
+attributes
+operations
+end
+
+class Task<Activity,InteractionNode
+attributes
+operations
+end
+
+class InteractionNode
+attributes
+operations
+end
+
+class ConversationLink<BaseElement
+attributes
+	name : String
+operations
+end
+
+class EventProducer<Task
+attributes
+operations
+end
+
+class EventConsumer<Task
+attributes
+operations
+end
+
+class EventProcessingAgent<Task
+attributes
+operations
+end
+
+class DataInput<BaseElement
+attributes
+	name : String
+operations
+end
+
+class DataOutput<BaseElement
+attributes
+	name : String
+operations
+end
+
+class InputSet<BaseElement
+attributes
+	name : String
+operations
+end
+
+class OutputSet<BaseElement
+attributes
+	name : String
+operations
+end
+
+class EventChannel<Task
+attributes
+operations
+end
+
+class EPNDiagram<Diagram
+attributes
+operations
+end
+
+abstract class Diagram
+attributes
+	documentation : String
+	id : String
+	name : String
+operations
+end
+
+abstract class FlowElementsContainer<BaseElement
+attributes
+operations
+end
+
+class DiagramElement
+attributes
+	id : String
+operations
+end
+
+class Process<FlowElementsContainer,RootElement
+attributes
+	isExecutable : Boolean
+	processType : ProcessType
+	name : String
+operations
+end
+
+class Node<DiagramElement
+attributes
+operations
+end
+
+class Bounds
+attributes
+	height : Real
+	width : Real
+	x : Real
+	y : Real
+operations
+end
+
+class Point
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class Edge<DiagramElement
+attributes
+operations
+end
+
+class EPNPlane<Plane
+attributes
+operations
+end
+
+abstract class Plane<Node
+attributes
+operations
+end
+
+abstract class Shape<Node
+attributes
+operations
+end
+
+class LabeledShape<Shape
+attributes
+operations
+end
+
+class Label<Node
+attributes
+operations
+end
+
+class EPNShape<LabeledShape
+attributes
+operations
+end
+
+class EPNLabel<Label
+attributes
+operations
+end
+
+class LabeledEdge<Edge
+attributes
+operations
+end
+
+class EPNEdge<LabeledEdge
+attributes
+operations
+end
+
+class Definitions<BaseElement
+attributes
+	name : String
+	targetNamespace : String
+operations
+end
+
+class RootElement<BaseElement
+attributes
+operations
+end
+
+class Artifact<BaseElement
+attributes
+operations
+end
+
+composition xxx_DocumentRoot_activity between
+	DocumentRoot[*] role xxx_DocumentRoot_activity_src
+	Activity[*] role activity
+end
+
+composition xxx_DocumentRoot_flowNode between
+	DocumentRoot[*] role xxx_DocumentRoot_flowNode_src
+	FlowNode[*] role flowNode
+end
+
+composition xxx_DocumentRoot_baseElement between
+	DocumentRoot[*] role xxx_DocumentRoot_baseElement_src
+	BaseElement[*] role baseElement
+end
+
+composition xxx_DocumentRoot_documentation between
+	DocumentRoot[*] role xxx_DocumentRoot_documentation_src
+	Documentation[*] role documentation
+end
+
+composition xxx_DocumentRoot_sequenceFlow between
+	DocumentRoot[*] role xxx_DocumentRoot_sequenceFlow_src
+	SequenceFlow[*] role sequenceFlow
+end
+
+composition xxx_DocumentRoot_task between
+	DocumentRoot[*] role xxx_DocumentRoot_task_src
+	Task[*] role task
+end
+
+composition xxx_DocumentRoot_conversationLink between
+	DocumentRoot[*] role xxx_DocumentRoot_conversationLink_src
+	ConversationLink[*] role conversationLink
+end
+
+composition xxx_DocumentRoot_dataInput between
+	DocumentRoot[*] role xxx_DocumentRoot_dataInput_src
+	DataInput[*] role dataInput
+end
+
+composition xxx_DocumentRoot_dataOutput between
+	DocumentRoot[*] role xxx_DocumentRoot_dataOutput_src
+	DataOutput[*] role dataOutput
+end
+
+composition xxx_DocumentRoot_inputSet between
+	DocumentRoot[*] role xxx_DocumentRoot_inputSet_src
+	InputSet[*] role inputSet
+end
+
+composition xxx_DocumentRoot_outputSet between
+	DocumentRoot[*] role xxx_DocumentRoot_outputSet_src
+	OutputSet[*] role outputSet
+end
+
+composition xxx_DocumentRoot_eventProducer between
+	DocumentRoot[*] role xxx_DocumentRoot_eventProducer_src
+	EventProducer[*] role eventProducer
+end
+
+composition xxx_DocumentRoot_eventConsumer between
+	DocumentRoot[*] role xxx_DocumentRoot_eventConsumer_src
+	EventConsumer[*] role eventConsumer
+end
+
+composition xxx_DocumentRoot_eventProcessingAgent between
+	DocumentRoot[*] role xxx_DocumentRoot_eventProcessingAgent_src
+	EventProcessingAgent[*] role eventProcessingAgent
+end
+
+composition xxx_DocumentRoot_eventChannel between
+	DocumentRoot[*] role xxx_DocumentRoot_eventChannel_src
+	EventChannel[*] role eventChannel
+end
+
+composition xxx_DocumentRoot_bounds between
+	DocumentRoot[*] role xxx_DocumentRoot_bounds_src
+	Bounds[*] role bounds
+end
+
+composition xxx_DocumentRoot_node between
+	DocumentRoot[*] role xxx_DocumentRoot_node_src
+	Node[*] role node
+end
+
+composition xxx_DocumentRoot_point between
+	DocumentRoot[*] role xxx_DocumentRoot_point_src
+	Point[*] role point
+end
+
+composition xxx_DocumentRoot_edge between
+	DocumentRoot[*] role xxx_DocumentRoot_edge_src
+	Edge[*] role edge
+end
+
+composition xxx_DocumentRoot_epnPlane between
+	DocumentRoot[*] role xxx_DocumentRoot_epnPlane_src
+	EPNPlane[*] role epnPlane
+end
+
+composition xxx_DocumentRoot_epnDiagram between
+	DocumentRoot[*] role xxx_DocumentRoot_epnDiagram_src
+	EPNDiagram[*] role epnDiagram
+end
+
+composition xxx_DocumentRoot_epnLabel between
+	DocumentRoot[*] role xxx_DocumentRoot_epnLabel_src
+	EPNLabel[*] role epnLabel
+end
+
+composition xxx_DocumentRoot_epnShape between
+	DocumentRoot[*] role xxx_DocumentRoot_epnShape_src
+	EPNShape[*] role epnShape
+end
+
+composition xxx_DocumentRoot_epnEdge between
+	DocumentRoot[*] role xxx_DocumentRoot_epnEdge_src
+	EPNEdge[*] role epnEdge
+end
+
+composition xxx_DocumentRoot_definitions between
+	DocumentRoot[*] role xxx_DocumentRoot_definitions_src
+	Definitions[*] role definitions
+end
+
+association xxx_FlowNode_incoming between
+	FlowNode[0..1] role xxx_FlowNode_incoming_src
+	SequenceFlow[*] role incoming
+end
+
+association xxx_FlowNode_outgoing between
+	FlowNode[0..1] role xxx_FlowNode_outgoing_src
+	SequenceFlow[*] role outgoing
+end
+
+association xxx_BaseElement_documentation between
+	BaseElement[0..1] role xxx_BaseElement_documentation_src
+	Documentation[*] role documentation
+end
+
+association xxx_SequenceFlow_sourceRef between
+	SequenceFlow[*] role xxx_SequenceFlow_sourceRef_src
+	FlowNode[1] role sourceRef
+end
+
+association xxx_SequenceFlow_targetRef between
+	SequenceFlow[*] role xxx_SequenceFlow_targetRef_src
+	FlowNode[1] role targetRef
+end
+
+association xxx_InteractionNode_incomingConversationLinks between
+	InteractionNode[0..1] role xxx_InteractionNode_incomingConversationLinks_src
+	ConversationLink[*] role incomingConversationLinks
+end
+
+association xxx_InteractionNode_outgoingConversationLinks between
+	InteractionNode[0..1] role xxx_InteractionNode_outgoingConversationLinks_src
+	ConversationLink[*] role outgoingConversationLinks
+end
+
+association xxx_ConversationLink_sourceRef between
+	ConversationLink[*] role xxx_ConversationLink_sourceRef_src
+	InteractionNode[1] role sourceRef
+end
+
+association xxx_ConversationLink_targetRef between
+	ConversationLink[*] role xxx_ConversationLink_targetRef_src
+	InteractionNode[1] role targetRef
+end
+
+association xxx_EventProducer_dataOutputs between
+	EventProducer[*] role xxx_EventProducer_dataOutputs_src
+	DataOutput[*] role dataOutputs
+end
+
+association xxx_EventProducer_dataInputs between
+	EventProducer[*] role xxx_EventProducer_dataInputs_src
+	DataInput[*] role dataInputs
+end
+
+association xxx_EventConsumer_dataOutputs between
+	EventConsumer[*] role xxx_EventConsumer_dataOutputs_src
+	DataOutput[*] role dataOutputs
+end
+
+association xxx_EventConsumer_dataInputs between
+	EventConsumer[*] role xxx_EventConsumer_dataInputs_src
+	DataInput[*] role dataInputs
+end
+
+association xxx_EventProcessingAgent_dataOutputs between
+	EventProcessingAgent[*] role xxx_EventProcessingAgent_dataOutputs_src
+	DataOutput[*] role dataOutputs
+end
+
+association xxx_EventProcessingAgent_dataInputs between
+	EventProcessingAgent[*] role xxx_EventProcessingAgent_dataInputs_src
+	DataInput[*] role dataInputs
+end
+
+association xxx_DataInput_inputSetRefs between
+	DataInput[0..1] role xxx_DataInput_inputSetRefs_src
+	InputSet[*] role inputSetRefs
+end
+
+association xxx_DataOutput_outputSetRefs between
+	DataOutput[0..1] role xxx_DataOutput_outputSetRefs_src
+	OutputSet[*] role outputSetRefs
+end
+
+association xxx_InputSet_dataInputRefs between
+	InputSet[0..1] role xxx_InputSet_dataInputRefs_src
+	DataInput[*] role dataInputRefs
+end
+
+association xxx_InputSet_outputSetRefs between
+	InputSet[0..1] role xxx_InputSet_outputSetRefs_src
+	OutputSet[*] role outputSetRefs
+end
+
+association xxx_OutputSet_dataOutputRefs between
+	OutputSet[0..1] role xxx_OutputSet_dataOutputRefs_src
+	DataOutput[*] role dataOutputRefs
+end
+
+association xxx_OutputSet_inputSetRefs between
+	OutputSet[0..1] role xxx_OutputSet_inputSetRefs_src
+	InputSet[*] role inputSetRefs
+end
+
+association xxx_EventChannel_dataOutputs between
+	EventChannel[*] role xxx_EventChannel_dataOutputs_src
+	DataOutput[*] role dataOutputs
+end
+
+association xxx_EventChannel_dataInputs between
+	EventChannel[*] role xxx_EventChannel_dataInputs_src
+	DataInput[*] role dataInputs
+end
+
+association xxx_EPNDiagram_plane between
+	EPNDiagram[*] role xxx_EPNDiagram_plane_src
+	EPNPlane[1] role plane
+end
+
+association xxx_Diagram_rootElement between
+	Diagram[*] role xxx_Diagram_rootElement_src
+	DiagramElement[1] role rootElement
+end
+
+composition xxx_FlowElementsContainer_flowElements between
+	FlowElementsContainer[0..1] role xxx_FlowElementsContainer_flowElements_src
+	FlowElement[*] role flowElements
+end
+
+composition xxx_FlowElementsContainer_eventProducer between
+	FlowElementsContainer[0..1] role xxx_FlowElementsContainer_eventProducer_src
+	EventProducer[*] role eventProducer
+end
+
+association xxx_DiagramElement_owningDiagram between
+	DiagramElement[*] role xxx_DiagramElement_owningDiagram_src
+	Diagram[0..1] role owningDiagram
+end
+
+association xxx_DiagramElement_owningElement between
+	DiagramElement[*] role xxx_DiagramElement_owningElement_src
+	DiagramElement[0..1] role owningElement
+end
+
+association xxx_DiagramElement_ownedElement between
+	DiagramElement[0..1] role xxx_DiagramElement_ownedElement_src
+	DiagramElement[*] role ownedElement
+end
+
+association xxx_Process_artifacts between
+	Process[0..1] role xxx_Process_artifacts_src
+	Artifact[*] role artifacts
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	DiagramElement[0..1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	DiagramElement[0..1] role target
+end
+
+association xxx_Edge_waypoint between
+	Edge[0..1] role xxx_Edge_waypoint_src
+	Point[2..*] role waypoint
+end
+
+association xxx_EPNPlane_epnElement between
+	EPNPlane[*] role xxx_EPNPlane_epnElement_src
+	BaseElement[0..1] role epnElement
+end
+
+association xxx_Plane_planeElement between
+	Plane[0..1] role xxx_Plane_planeElement_src
+	DiagramElement[*] role planeElement
+end
+
+association xxx_Shape_bounds between
+	Shape[*] role xxx_Shape_bounds_src
+	Bounds[1] role bounds
+end
+
+association xxx_LabeledShape_ownedLabel between
+	LabeledShape[0..1] role xxx_LabeledShape_ownedLabel_src
+	Label[*] role ownedLabel
+end
+
+association xxx_Label_bounds between
+	Label[*] role xxx_Label_bounds_src
+	Bounds[0..1] role bounds
+end
+
+association xxx_EPNShape_label between
+	EPNShape[*] role xxx_EPNShape_label_src
+	EPNLabel[0..1] role label
+end
+
+association xxx_EPNShape_epnElement between
+	EPNShape[*] role xxx_EPNShape_epnElement_src
+	BaseElement[0..1] role epnElement
+end
+
+association xxx_LabeledEdge_ownedLabel between
+	LabeledEdge[0..1] role xxx_LabeledEdge_ownedLabel_src
+	Label[*] role ownedLabel
+end
+
+association xxx_EPNEdge_label between
+	EPNEdge[*] role xxx_EPNEdge_label_src
+	EPNLabel[0..1] role label
+end
+
+association xxx_EPNEdge_epnElement between
+	EPNEdge[*] role xxx_EPNEdge_epnElement_src
+	BaseElement[0..1] role epnElement
+end
+
+association xxx_EPNEdge_sourceElement between
+	EPNEdge[*] role xxx_EPNEdge_sourceElement_src
+	DiagramElement[0..1] role sourceElement
+end
+
+association xxx_EPNEdge_targetElement between
+	EPNEdge[*] role xxx_EPNEdge_targetElement_src
+	DiagramElement[0..1] role targetElement
+end
+
+composition xxx_Definitions_process between
+	Definitions[0..1] role xxx_Definitions_process_src
+	Process[*] role process
+end
+
+composition xxx_Definitions_digrams between
+	Definitions[0..1] role xxx_Definitions_digrams_src
+	EPNDiagram[*] role digrams
+end
+

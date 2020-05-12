@@ -1,0 +1,95 @@
+model SimpleAirlineDomain
+enum Genre{
+	male,
+	female
+}
+
+class Airport
+attributes
+	name : String
+operations
+end
+
+class Flight
+attributes
+	maxnrPassengers : Integer
+operations
+end
+
+class Airline
+attributes
+	name : String
+	nationality : String
+operations
+end
+
+class Passenger
+attributes
+	name : String
+	age : Integer
+	gender : Genre
+	needsAssistance : Boolean
+operations
+end
+
+class Time
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+operations
+end
+
+association xxx_Airport_departingFlight between
+	Airport[0..1] role xxx_Airport_departingFlight_src
+	Flight[*] role departingFlight
+end
+
+association xxx_Airport_arrivingFlight between
+	Airport[0..1] role xxx_Airport_arrivingFlight_src
+	Flight[*] role arrivingFlight
+end
+
+association xxx_Flight_departTime between
+	Flight[*] role xxx_Flight_departTime_src
+	Time[1] role departTime
+end
+
+association xxx_Flight_duration between
+	Flight[*] role xxx_Flight_duration_src
+	Time[1] role duration
+end
+
+association xxx_Flight_passenger between
+	Flight[0..1] role xxx_Flight_passenger_src
+	Passenger[*] role passenger
+end
+
+association xxx_Flight_airline between
+	Flight[*] role xxx_Flight_airline_src
+	Airline[1] role airline
+end
+
+association xxx_Flight_origin between
+	Flight[*] role xxx_Flight_origin_src
+	Airport[1] role origin
+end
+
+association xxx_Flight_destination between
+	Flight[*] role xxx_Flight_destination_src
+	Airport[1] role destination
+end
+
+association xxx_Airline_flight between
+	Airline[0..1] role xxx_Airline_flight_src
+	Flight[*] role flight
+end
+
+association xxx_Passenger_flight between
+	Passenger[*] role xxx_Passenger_flight_src
+	Flight[1] role flight
+end
+

@@ -1,0 +1,572 @@
+model Jess
+enum Advice{
+	before,
+	after
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Root<LocatedElement
+attributes
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class Integ<Expression
+attributes
+	val : Integer
+operations
+end
+
+class Floa<Expression
+attributes
+	val : Real
+operations
+end
+
+class Str<Expression
+attributes
+	val : String
+operations
+end
+
+abstract class Ident<Expression
+attributes
+operations
+end
+
+class ValidIdentifier<Ident
+attributes
+	val : String
+operations
+end
+
+class SlotName<Ident
+attributes
+	val : String
+operations
+end
+
+class JessVariable<Ident
+attributes
+	val : String
+operations
+end
+
+class TemplateExpression<Expression
+attributes
+operations
+end
+
+class SlotOp<LocatedElement
+attributes
+operations
+end
+
+abstract class DefinitionExp<Expression
+attributes
+operations
+end
+
+class GlobalDefinition<DefinitionExp
+attributes
+operations
+end
+
+class VarDefinition<LocatedElement
+attributes
+operations
+end
+
+class FunctionDefinition<DefinitionExp
+attributes
+operations
+end
+
+class AdviceDefinition<DefinitionExp
+attributes
+	direction : Advice
+operations
+end
+
+class UnDefAdvice<DefinitionExp
+attributes
+operations
+end
+
+class FactDefinition<DefinitionExp
+attributes
+operations
+end
+
+class RuleDefinition<DefinitionExp
+attributes
+operations
+end
+
+class DeclareRule<LocatedElement
+attributes
+operations
+end
+
+class ModuleDefinition<DefinitionExp
+attributes
+operations
+end
+
+class QueryDefinition<DefinitionExp
+attributes
+operations
+end
+
+class DeclareVar<LocatedElement
+attributes
+operations
+end
+
+class TemplateDefinition<DefinitionExp
+attributes
+operations
+end
+
+class DeclareBloc<LocatedElement
+attributes
+operations
+end
+
+class ASlotDef<LocatedElement
+attributes
+operations
+end
+
+class SlotDef<ASlotDef
+attributes
+operations
+end
+
+class MultiSlotDef<ASlotDef
+attributes
+operations
+end
+
+class SlotOptions<LocatedElement
+attributes
+operations
+end
+
+abstract class UseFuncExp<Expression
+attributes
+operations
+end
+
+class WhileExp<UseFuncExp
+attributes
+	hasDo : Boolean
+operations
+end
+
+class ForExp<UseFuncExp
+attributes
+operations
+end
+
+class ForeachExp<UseFuncExp
+attributes
+operations
+end
+
+class FuncCall<UseFuncExp
+attributes
+operations
+end
+
+class EngineExp<UseFuncExp
+attributes
+operations
+end
+
+class ExitExp<UseFuncExp
+attributes
+operations
+end
+
+class IfExpression<UseFuncExp
+attributes
+operations
+end
+
+class ConditionAction<LocatedElement
+attributes
+operations
+end
+
+class ElifConditionAction<LocatedElement
+attributes
+operations
+end
+
+composition xxx_Root_expressions between
+	Root[0..1] role xxx_Root_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_TemplateExpression_templateName between
+	TemplateExpression[*] role xxx_TemplateExpression_templateName_src
+	ValidIdentifier[1] role templateName
+end
+
+composition xxx_TemplateExpression_firstSlot between
+	TemplateExpression[*] role xxx_TemplateExpression_firstSlot_src
+	SlotOp[1] role firstSlot
+end
+
+composition xxx_TemplateExpression_slotOp between
+	TemplateExpression[0..1] role xxx_TemplateExpression_slotOp_src
+	SlotOp[*] role slotOp
+end
+
+composition xxx_SlotOp_slotIdent between
+	SlotOp[*] role xxx_SlotOp_slotIdent_src
+	SlotName[1] role slotIdent
+end
+
+composition xxx_SlotOp_operator between
+	SlotOp[*] role xxx_SlotOp_operator_src
+	ValidIdentifier[1] role operator
+end
+
+composition xxx_SlotOp_exp between
+	SlotOp[*] role xxx_SlotOp_exp_src
+	Expression[1] role exp
+end
+
+composition xxx_GlobalDefinition_varDef between
+	GlobalDefinition[0..1] role xxx_GlobalDefinition_varDef_src
+	VarDefinition[*] role varDef
+end
+
+composition xxx_VarDefinition_jessVar between
+	VarDefinition[*] role xxx_VarDefinition_jessVar_src
+	JessVariable[1] role jessVar
+end
+
+composition xxx_VarDefinition_eq between
+	VarDefinition[*] role xxx_VarDefinition_eq_src
+	ValidIdentifier[1] role eq
+end
+
+composition xxx_VarDefinition_expression between
+	VarDefinition[*] role xxx_VarDefinition_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_FunctionDefinition_funcName between
+	FunctionDefinition[*] role xxx_FunctionDefinition_funcName_src
+	ValidIdentifier[1] role funcName
+end
+
+composition xxx_FunctionDefinition_parameters between
+	FunctionDefinition[0..1] role xxx_FunctionDefinition_parameters_src
+	JessVariable[*] role parameters
+end
+
+composition xxx_FunctionDefinition_expressions between
+	FunctionDefinition[0..1] role xxx_FunctionDefinition_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_AdviceDefinition_op between
+	AdviceDefinition[*] role xxx_AdviceDefinition_op_src
+	Ident[1] role op
+end
+
+composition xxx_AdviceDefinition_advice between
+	AdviceDefinition[0..1] role xxx_AdviceDefinition_advice_src
+	Expression[*] role advice
+end
+
+composition xxx_UnDefAdvice_op between
+	UnDefAdvice[*] role xxx_UnDefAdvice_op_src
+	Expression[1] role op
+end
+
+composition xxx_FactDefinition_factName between
+	FactDefinition[*] role xxx_FactDefinition_factName_src
+	ValidIdentifier[1] role factName
+end
+
+composition xxx_FactDefinition_documentation between
+	FactDefinition[*] role xxx_FactDefinition_documentation_src
+	Str[0..1] role documentation
+end
+
+composition xxx_FactDefinition_fact between
+	FactDefinition[0..1] role xxx_FactDefinition_fact_src
+	Expression[*] role fact
+end
+
+composition xxx_RuleDefinition_ruleName between
+	RuleDefinition[*] role xxx_RuleDefinition_ruleName_src
+	ValidIdentifier[1] role ruleName
+end
+
+composition xxx_RuleDefinition_documentation between
+	RuleDefinition[*] role xxx_RuleDefinition_documentation_src
+	Str[0..1] role documentation
+end
+
+composition xxx_RuleDefinition_declare between
+	RuleDefinition[*] role xxx_RuleDefinition_declare_src
+	DeclareRule[0..1] role declare_
+end
+
+composition xxx_RuleDefinition_conditions between
+	RuleDefinition[0..1] role xxx_RuleDefinition_conditions_src
+	Expression[*] role conditions
+end
+
+composition xxx_RuleDefinition_functionCall between
+	RuleDefinition[0..1] role xxx_RuleDefinition_functionCall_src
+	UseFuncExp[*] role functionCall
+end
+
+composition xxx_DeclareRule_salience between
+	DeclareRule[*] role xxx_DeclareRule_salience_src
+	Expression[0..1] role salience
+end
+
+composition xxx_DeclareRule_nodeIndexHash between
+	DeclareRule[*] role xxx_DeclareRule_nodeIndexHash_src
+	Expression[0..1] role nodeIndexHash
+end
+
+composition xxx_DeclareRule_autoFocus between
+	DeclareRule[*] role xxx_DeclareRule_autoFocus_src
+	ValidIdentifier[0..1] role autoFocus
+end
+
+composition xxx_DeclareRule_noLoop between
+	DeclareRule[*] role xxx_DeclareRule_noLoop_src
+	ValidIdentifier[0..1] role noLoop
+end
+
+composition xxx_ModuleDefinition_moduleName between
+	ModuleDefinition[*] role xxx_ModuleDefinition_moduleName_src
+	ValidIdentifier[1] role moduleName
+end
+
+composition xxx_ModuleDefinition_documentation between
+	ModuleDefinition[*] role xxx_ModuleDefinition_documentation_src
+	Str[0..1] role documentation
+end
+
+composition xxx_QueryDefinition_queryName between
+	QueryDefinition[*] role xxx_QueryDefinition_queryName_src
+	ValidIdentifier[1] role queryName
+end
+
+composition xxx_QueryDefinition_documentation between
+	QueryDefinition[*] role xxx_QueryDefinition_documentation_src
+	Str[0..1] role documentation
+end
+
+composition xxx_QueryDefinition_declare between
+	QueryDefinition[*] role xxx_QueryDefinition_declare_src
+	DeclareVar[0..1] role declare_
+end
+
+composition xxx_QueryDefinition_expressions between
+	QueryDefinition[0..1] role xxx_QueryDefinition_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_DeclareVar_var between
+	DeclareVar[0..1] role xxx_DeclareVar_var_src
+	JessVariable[*] role var
+end
+
+composition xxx_DeclareVar_node between
+	DeclareVar[*] role xxx_DeclareVar_node_src
+	Expression[1] role node
+end
+
+composition xxx_DeclareVar_max between
+	DeclareVar[*] role xxx_DeclareVar_max_src
+	Expression[1] role max
+end
+
+composition xxx_TemplateDefinition_templateName between
+	TemplateDefinition[*] role xxx_TemplateDefinition_templateName_src
+	ValidIdentifier[1] role templateName
+end
+
+composition xxx_TemplateDefinition_inherits between
+	TemplateDefinition[0..1] role xxx_TemplateDefinition_inherits_src
+	ValidIdentifier[*] role inherits
+end
+
+composition xxx_TemplateDefinition_documentation between
+	TemplateDefinition[*] role xxx_TemplateDefinition_documentation_src
+	Str[0..1] role documentation
+end
+
+composition xxx_TemplateDefinition_declareBloc between
+	TemplateDefinition[*] role xxx_TemplateDefinition_declareBloc_src
+	DeclareBloc[0..1] role declareBloc
+end
+
+composition xxx_TemplateDefinition_slotDef between
+	TemplateDefinition[0..1] role xxx_TemplateDefinition_slotDef_src
+	ASlotDef[*] role slotDef
+end
+
+composition xxx_DeclareBloc_slotSpecific between
+	DeclareBloc[*] role xxx_DeclareBloc_slotSpecific_src
+	ValidIdentifier[0..1] role slotSpecific
+end
+
+composition xxx_DeclareBloc_backchainReaction between
+	DeclareBloc[*] role xxx_DeclareBloc_backchainReaction_src
+	ValidIdentifier[0..1] role backchainReaction
+end
+
+composition xxx_DeclareBloc_fromClass between
+	DeclareBloc[*] role xxx_DeclareBloc_fromClass_src
+	ValidIdentifier[0..1] role fromClass
+end
+
+composition xxx_DeclareBloc_includeVariable between
+	DeclareBloc[*] role xxx_DeclareBloc_includeVariable_src
+	ValidIdentifier[0..1] role includeVariable
+end
+
+composition xxx_DeclareBloc_order between
+	DeclareBloc[*] role xxx_DeclareBloc_order_src
+	ValidIdentifier[0..1] role order
+end
+
+composition xxx_ASlotDef_slotName between
+	ASlotDef[*] role xxx_ASlotDef_slotName_src
+	SlotName[1] role slotName
+end
+
+composition xxx_ASlotDef_optionals between
+	ASlotDef[0..1] role xxx_ASlotDef_optionals_src
+	SlotOptions[*] role optionals
+end
+
+composition xxx_SlotOptions_type between
+	SlotOptions[*] role xxx_SlotOptions_type_src
+	ValidIdentifier[1] role type
+end
+
+composition xxx_SlotOptions_def between
+	SlotOptions[*] role xxx_SlotOptions_def_src
+	Expression[1] role def
+end
+
+composition xxx_SlotOptions_defaultDyn between
+	SlotOptions[*] role xxx_SlotOptions_defaultDyn_src
+	Expression[1] role defaultDyn
+end
+
+composition xxx_SlotOptions_allowedValues between
+	SlotOptions[0..1] role xxx_SlotOptions_allowedValues_src
+	Expression[*] role allowedValues
+end
+
+composition xxx_WhileExp_boolExp between
+	WhileExp[*] role xxx_WhileExp_boolExp_src
+	Expression[1] role boolExp
+end
+
+composition xxx_WhileExp_actions between
+	WhileExp[0..1] role xxx_WhileExp_actions_src
+	Expression[*] role actions
+end
+
+composition xxx_ForExp_initializer between
+	ForExp[*] role xxx_ForExp_initializer_src
+	Expression[1] role initializer
+end
+
+composition xxx_ForExp_condition between
+	ForExp[*] role xxx_ForExp_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ForExp_increment between
+	ForExp[*] role xxx_ForExp_increment_src
+	Expression[1] role increment
+end
+
+composition xxx_ForExp_expressions between
+	ForExp[0..1] role xxx_ForExp_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_ForeachExp_var between
+	ForeachExp[*] role xxx_ForeachExp_var_src
+	JessVariable[1] role var
+end
+
+composition xxx_ForeachExp_list between
+	ForeachExp[*] role xxx_ForeachExp_list_src
+	Expression[1] role list
+end
+
+composition xxx_ForeachExp_expressions between
+	ForeachExp[0..1] role xxx_ForeachExp_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_FuncCall_funcName between
+	FuncCall[*] role xxx_FuncCall_funcName_src
+	ValidIdentifier[1] role funcName
+end
+
+composition xxx_FuncCall_funcParam between
+	FuncCall[0..1] role xxx_FuncCall_funcParam_src
+	Expression[*] role funcParam
+end
+
+composition xxx_IfExpression_ifthen between
+	IfExpression[*] role xxx_IfExpression_ifthen_src
+	ConditionAction[1] role ifthen
+end
+
+composition xxx_IfExpression_elifthen between
+	IfExpression[0..1] role xxx_IfExpression_elifthen_src
+	ElifConditionAction[*] role elifthen
+end
+
+composition xxx_IfExpression_else_ between
+	IfExpression[0..1] role xxx_IfExpression_else__src
+	Expression[*] role else_
+end
+
+composition xxx_ConditionAction_condition between
+	ConditionAction[*] role xxx_ConditionAction_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ConditionAction_actions between
+	ConditionAction[0..1] role xxx_ConditionAction_actions_src
+	Expression[*] role actions
+end
+
+composition xxx_ElifConditionAction_condAct between
+	ElifConditionAction[*] role xxx_ElifConditionAction_condAct_src
+	ConditionAction[1] role condAct
+end
+

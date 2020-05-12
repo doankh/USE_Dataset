@@ -1,0 +1,80 @@
+model sdb
+class SDBRuntime
+attributes
+	id : String
+	name : String
+	symptomUrl : String
+	localExternalFileLocation : String
+	description : String
+operations
+end
+
+class SDBSymptom
+attributes
+	description : String
+	id : String
+operations
+end
+
+class SDBMatchPattern
+attributes
+	name : String
+	value : String
+operations
+end
+
+class SDBSolution
+attributes
+	description : String
+	id : String
+operations
+end
+
+class SDBDirective
+attributes
+	id : String
+	description : String
+	directiveString : String
+operations
+end
+
+composition xxx_SDBRuntime_symptoms between
+	SDBRuntime[0..1] role xxx_SDBRuntime_symptoms_src
+	SDBSymptom[*] role symptoms
+end
+
+composition xxx_SDBRuntime_solutions between
+	SDBRuntime[0..1] role xxx_SDBRuntime_solutions_src
+	SDBSolution[*] role solutions
+end
+
+composition xxx_SDBRuntime_directives between
+	SDBRuntime[0..1] role xxx_SDBRuntime_directives_src
+	SDBDirective[*] role directives
+end
+
+association xxx_SDBSymptom_solutions between
+	SDBSymptom[0..1] role xxx_SDBSymptom_solutions_src
+	SDBSolution[*] role solutions
+end
+
+composition xxx_SDBSymptom_patterns between
+	SDBSymptom[0..1] role xxx_SDBSymptom_patterns_src
+	SDBMatchPattern[*] role patterns
+end
+
+association xxx_SDBSolution_directives between
+	SDBSolution[0..1] role xxx_SDBSolution_directives_src
+	SDBDirective[*] role directives
+end
+
+association xxx_SDBSolution_symptoms between
+	SDBSolution[0..1] role xxx_SDBSolution_symptoms_src
+	SDBSymptom[*] role symptoms
+end
+
+association xxx_SDBDirective_solutions between
+	SDBDirective[0..1] role xxx_SDBDirective_solutions_src
+	SDBSolution[*] role solutions
+end
+

@@ -1,0 +1,122 @@
+model Lims
+enum Gender{
+default
+}
+
+class Family
+attributes
+	name : String
+operations
+end
+
+class Laboratory
+attributes
+operations
+end
+
+class Individual
+attributes
+	gender : Gender
+	name : String
+operations
+end
+
+class Sequencer
+attributes
+	name : String
+operations
+end
+
+class Run
+attributes
+	name : String
+	date : String
+operations
+end
+
+class Sample
+attributes
+	id : String
+operations
+end
+
+class Sequenced
+attributes
+operations
+end
+
+composition xxx_Family_individuals between
+	Family[0..1] role xxx_Family_individuals_src
+	Individual[*] role individuals
+end
+
+association xxx_Family_laboratory between
+	Family[*] role xxx_Family_laboratory_src
+	Laboratory[1] role laboratory
+end
+
+composition xxx_Laboratory_families between
+	Laboratory[0..1] role xxx_Laboratory_families_src
+	Family[*] role families
+end
+
+composition xxx_Laboratory_sequencers between
+	Laboratory[0..1] role xxx_Laboratory_sequencers_src
+	Sequencer[*] role sequencers
+end
+
+association xxx_Individual_family between
+	Individual[*] role xxx_Individual_family_src
+	Family[1] role family
+end
+
+association xxx_Individual_Father between
+	Individual[*] role xxx_Individual_Father_src
+	Individual[0..1] role Father
+end
+
+association xxx_Individual_Mother between
+	Individual[*] role xxx_Individual_Mother_src
+	Individual[0..1] role Mother
+end
+
+composition xxx_Individual_samples between
+	Individual[0..1] role xxx_Individual_samples_src
+	Sample[*] role samples
+end
+
+composition xxx_Sequencer_runs between
+	Sequencer[0..1] role xxx_Sequencer_runs_src
+	Run[*] role runs
+end
+
+association xxx_Sequencer_laboratory between
+	Sequencer[*] role xxx_Sequencer_laboratory_src
+	Laboratory[1] role laboratory
+end
+
+composition xxx_Run_sequenced between
+	Run[0..1] role xxx_Run_sequenced_src
+	Sequenced[*] role sequenced
+end
+
+association xxx_Run_sequencer between
+	Run[*] role xxx_Run_sequencer_src
+	Sequencer[1] role sequencer
+end
+
+association xxx_Sample_individual between
+	Sample[*] role xxx_Sample_individual_src
+	Individual[1] role individual
+end
+
+association xxx_Sequenced_run between
+	Sequenced[*] role xxx_Sequenced_run_src
+	Run[1] role run
+end
+
+association xxx_Sequenced_sample between
+	Sequenced[*] role xxx_Sequenced_sample_src
+	Sample[1] role sample
+end
+

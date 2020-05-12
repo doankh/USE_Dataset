@@ -1,0 +1,101 @@
+model epla2
+abstract class Structure
+attributes
+	name : String
+operations
+end
+
+class Workspace<Structure
+attributes
+	location : String
+	exportLocation : String
+operations
+	findProject(id : String):Project
+	findBric(id : String):Bric
+	findTarget(id : String):Target
+	getBrics():Bric
+	getTargets():Target
+end
+
+class Project<Structure
+attributes
+operations
+	getId():String
+end
+
+class Bric<Structure
+attributes
+operations
+	getId():String
+end
+
+class Target<Structure
+attributes
+operations
+	getId():String
+end
+
+abstract class BuildSpec
+attributes
+operations
+end
+
+class CommandBuildSpec<BuildSpec
+attributes
+	exe : String
+	args : String
+operations
+end
+
+class Developer
+attributes
+	name : String
+	email : String
+operations
+end
+
+class AdaBuildSpec<BuildSpec
+attributes
+operations
+end
+
+association xxx_Workspace_projects between
+	Workspace[0..1] role xxx_Workspace_projects_src
+	Project[*] role projects
+end
+
+composition xxx_Workspace_developers between
+	Workspace[0..1] role xxx_Workspace_developers_src
+	Developer[*] role developers
+end
+
+association xxx_Project_brics between
+	Project[0..1] role xxx_Project_brics_src
+	Bric[*] role brics
+end
+
+association xxx_Bric_project between
+	Bric[*] role xxx_Bric_project_src
+	Project[1] role project
+end
+
+association xxx_Bric_maintainer between
+	Bric[*] role xxx_Bric_maintainer_src
+	Developer[0..1] role maintainer
+end
+
+composition xxx_Bric_targets between
+	Bric[0..1] role xxx_Bric_targets_src
+	Target[*] role targets
+end
+
+association xxx_Target_dependencies between
+	Target[0..1] role xxx_Target_dependencies_src
+	Target[*] role dependencies
+end
+
+composition xxx_Target_builder between
+	Target[*] role xxx_Target_builder_src
+	BuildSpec[1] role builder
+end
+

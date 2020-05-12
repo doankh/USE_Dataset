@@ -1,0 +1,131 @@
+model CIM14
+abstract class Element
+attributes
+	UUID : String
+operations
+end
+
+abstract class Terminal<Element
+attributes
+operations
+end
+
+class SvTapStep<Element
+attributes
+	position : Integer
+	continuousPosition : Real
+operations
+end
+
+class SvInjection<Element
+attributes
+	qNetInjection : String
+	pNetInjection : String
+operations
+end
+
+class SvVoltage<Element
+attributes
+	angle : String
+	v : String
+operations
+end
+
+class SvPowerFlow<Element
+attributes
+	p : String
+	q : String
+operations
+end
+
+class SvShortCircuit<Element
+attributes
+	sShortCircuit : String
+	x0PerX : Real
+	r0PerR : Real
+	xPerR : Real
+operations
+end
+
+class SvShuntCompensatorSections<Element
+attributes
+	sections : Integer
+	continuousSections : Real
+operations
+end
+
+abstract class TopologicalNode<Element
+attributes
+operations
+end
+
+abstract class ShuntCompensator<Element
+attributes
+operations
+end
+
+abstract class TapChanger<Element
+attributes
+operations
+end
+
+association xxx_Terminal_SvPowerFlow between
+	Terminal[*] role xxx_Terminal_SvPowerFlow_src
+	SvPowerFlow[0..1] role SvPowerFlow
+end
+
+association xxx_SvTapStep_TapChanger between
+	SvTapStep[*] role xxx_SvTapStep_TapChanger_src
+	TapChanger[1] role TapChanger
+end
+
+association xxx_SvInjection_TopologicalNode between
+	SvInjection[*] role xxx_SvInjection_TopologicalNode_src
+	TopologicalNode[1] role TopologicalNode
+end
+
+association xxx_SvVoltage_TopologicalNode between
+	SvVoltage[*] role xxx_SvVoltage_TopologicalNode_src
+	TopologicalNode[1] role TopologicalNode
+end
+
+association xxx_SvPowerFlow_Terminal between
+	SvPowerFlow[*] role xxx_SvPowerFlow_Terminal_src
+	Terminal[1] role Terminal
+end
+
+association xxx_SvShortCircuit_TopologicalNode between
+	SvShortCircuit[*] role xxx_SvShortCircuit_TopologicalNode_src
+	TopologicalNode[1] role TopologicalNode
+end
+
+association xxx_SvShuntCompensatorSections_ShuntCompensator between
+	SvShuntCompensatorSections[*] role xxx_SvShuntCompensatorSections_ShuntCompensator_src
+	ShuntCompensator[1] role ShuntCompensator
+end
+
+association xxx_TopologicalNode_SvShortCircuit between
+	TopologicalNode[*] role xxx_TopologicalNode_SvShortCircuit_src
+	SvShortCircuit[0..1] role SvShortCircuit
+end
+
+association xxx_TopologicalNode_SvVoltage between
+	TopologicalNode[*] role xxx_TopologicalNode_SvVoltage_src
+	SvVoltage[0..1] role SvVoltage
+end
+
+association xxx_TopologicalNode_SvInjection between
+	TopologicalNode[*] role xxx_TopologicalNode_SvInjection_src
+	SvInjection[0..1] role SvInjection
+end
+
+association xxx_ShuntCompensator_SvShuntCompensatorSections between
+	ShuntCompensator[*] role xxx_ShuntCompensator_SvShuntCompensatorSections_src
+	SvShuntCompensatorSections[0..1] role SvShuntCompensatorSections
+end
+
+association xxx_TapChanger_SvTapStep between
+	TapChanger[*] role xxx_TapChanger_SvTapStep_src
+	SvTapStep[0..1] role SvTapStep
+end
+

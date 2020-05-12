@@ -1,0 +1,107 @@
+model scr
+enum Policy{
+default
+}
+
+enum Cardinality{
+default
+}
+
+enum ConfigurationPolicy{
+default
+}
+
+enum JavaType{
+default
+}
+
+class Component
+attributes
+	mixed : String
+	enabled : Boolean
+	factory : String
+	immediate : Boolean
+	name : String
+	activate : String
+	deactivate : String
+	modified : String
+	configurationPolicy : ConfigurationPolicy
+	allProperties : String
+operations
+end
+
+class Implementation
+attributes
+	class_ : String
+operations
+end
+
+class Property
+attributes
+	value : String
+	name : String
+	type : JavaType
+	value1 : String
+operations
+end
+
+class Properties
+attributes
+	entry : String
+operations
+end
+
+class Service
+attributes
+	servicefactory : Boolean
+operations
+end
+
+class Provide
+attributes
+	interface : String
+operations
+end
+
+class Reference
+attributes
+	bind : String
+	cardinality : Cardinality
+	interface : String
+	name : String
+	policy : Policy
+	target : String
+	unbind : String
+operations
+end
+
+composition xxx_Component_implementation between
+	Component[*] role xxx_Component_implementation_src
+	Implementation[1] role implementation
+end
+
+composition xxx_Component_property between
+	Component[0..1] role xxx_Component_property_src
+	Property[*] role property
+end
+
+composition xxx_Component_properties between
+	Component[0..1] role xxx_Component_properties_src
+	Properties[*] role properties
+end
+
+composition xxx_Component_service between
+	Component[*] role xxx_Component_service_src
+	Service[0..1] role service
+end
+
+composition xxx_Component_reference between
+	Component[0..1] role xxx_Component_reference_src
+	Reference[*] role reference
+end
+
+composition xxx_Service_provide between
+	Service[0..1] role xxx_Service_provide_src
+	Provide[1..*] role provide
+end
+

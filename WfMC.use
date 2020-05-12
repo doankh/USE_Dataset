@@ -1,0 +1,161 @@
+model WfMC
+class WorkflowProcessDefinition
+attributes
+operations
+end
+
+class WorkflowApplicationDeclaration
+attributes
+operations
+end
+
+class WorkflowRelevantData
+attributes
+operations
+end
+
+class WorkflowParticipantSpecification
+attributes
+operations
+end
+
+class WorkflowProcessActivity
+attributes
+operations
+end
+
+class TransitionInformation
+attributes
+operations
+end
+
+composition xxx_WorkflowProcessDefinition_participantSpecificatons between
+	WorkflowProcessDefinition[0..1] role xxx_WorkflowProcessDefinition_participantSpecificatons_src
+	WorkflowParticipantSpecification[*] role participantSpecificatons
+end
+
+composition xxx_WorkflowProcessDefinition_revelantDatas between
+	WorkflowProcessDefinition[0..1] role xxx_WorkflowProcessDefinition_revelantDatas_src
+	WorkflowRelevantData[*] role revelantDatas
+end
+
+composition xxx_WorkflowProcessDefinition_applicationDeclarations between
+	WorkflowProcessDefinition[0..1] role xxx_WorkflowProcessDefinition_applicationDeclarations_src
+	WorkflowApplicationDeclaration[*] role applicationDeclarations
+end
+
+composition xxx_WorkflowProcessDefinition_processActivities between
+	WorkflowProcessDefinition[0..1] role xxx_WorkflowProcessDefinition_processActivities_src
+	WorkflowProcessActivity[*] role processActivities
+end
+
+composition xxx_WorkflowProcessDefinition_transitionInformations between
+	WorkflowProcessDefinition[0..1] role xxx_WorkflowProcessDefinition_transitionInformations_src
+	TransitionInformation[*] role transitionInformations
+end
+
+association xxx_WorkflowApplicationDeclaration_processDefinition between
+	WorkflowApplicationDeclaration[*] role xxx_WorkflowApplicationDeclaration_processDefinition_src
+	WorkflowProcessDefinition[1] role processDefinition
+end
+
+association xxx_WorkflowApplicationDeclaration_processActivities between
+	WorkflowApplicationDeclaration[0..1] role xxx_WorkflowApplicationDeclaration_processActivities_src
+	WorkflowProcessActivity[*] role processActivities
+end
+
+association xxx_WorkflowApplicationDeclaration_revelantDatas between
+	WorkflowApplicationDeclaration[0..1] role xxx_WorkflowApplicationDeclaration_revelantDatas_src
+	WorkflowRelevantData[*] role revelantDatas
+end
+
+association xxx_WorkflowRelevantData_processDefinition between
+	WorkflowRelevantData[*] role xxx_WorkflowRelevantData_processDefinition_src
+	WorkflowProcessDefinition[1] role processDefinition
+end
+
+association xxx_WorkflowRelevantData_applicationDeclarations between
+	WorkflowRelevantData[0..1] role xxx_WorkflowRelevantData_applicationDeclarations_src
+	WorkflowApplicationDeclaration[*] role applicationDeclarations
+end
+
+association xxx_WorkflowRelevantData_processActivities between
+	WorkflowRelevantData[0..1] role xxx_WorkflowRelevantData_processActivities_src
+	WorkflowProcessActivity[*] role processActivities
+end
+
+association xxx_WorkflowRelevantData_participantSpecifications between
+	WorkflowRelevantData[0..1] role xxx_WorkflowRelevantData_participantSpecifications_src
+	WorkflowParticipantSpecification[*] role participantSpecifications
+end
+
+association xxx_WorkflowRelevantData_transitionInformations between
+	WorkflowRelevantData[0..1] role xxx_WorkflowRelevantData_transitionInformations_src
+	TransitionInformation[*] role transitionInformations
+end
+
+association xxx_WorkflowParticipantSpecification_processDefinition between
+	WorkflowParticipantSpecification[*] role xxx_WorkflowParticipantSpecification_processDefinition_src
+	WorkflowProcessDefinition[1] role processDefinition
+end
+
+association xxx_WorkflowParticipantSpecification_revelantDatas between
+	WorkflowParticipantSpecification[0..1] role xxx_WorkflowParticipantSpecification_revelantDatas_src
+	WorkflowRelevantData[*] role revelantDatas
+end
+
+association xxx_WorkflowParticipantSpecification_processActivities between
+	WorkflowParticipantSpecification[0..1] role xxx_WorkflowParticipantSpecification_processActivities_src
+	WorkflowProcessActivity[*] role processActivities
+end
+
+association xxx_WorkflowProcessActivity_processDefinition between
+	WorkflowProcessActivity[*] role xxx_WorkflowProcessActivity_processDefinition_src
+	WorkflowProcessDefinition[1] role processDefinition
+end
+
+association xxx_WorkflowProcessActivity_applicationDeclarations between
+	WorkflowProcessActivity[0..1] role xxx_WorkflowProcessActivity_applicationDeclarations_src
+	WorkflowApplicationDeclaration[*] role applicationDeclarations
+end
+
+association xxx_WorkflowProcessActivity_revelantDatas between
+	WorkflowProcessActivity[0..1] role xxx_WorkflowProcessActivity_revelantDatas_src
+	WorkflowRelevantData[*] role revelantDatas
+end
+
+association xxx_WorkflowProcessActivity_participantSpecifications between
+	WorkflowProcessActivity[0..1] role xxx_WorkflowProcessActivity_participantSpecifications_src
+	WorkflowParticipantSpecification[*] role participantSpecifications
+end
+
+association xxx_WorkflowProcessActivity_to_transitionInformation between
+	WorkflowProcessActivity[*] role xxx_WorkflowProcessActivity_to_transitionInformation_src
+	TransitionInformation[1] role to_transitionInformation
+end
+
+association xxx_WorkflowProcessActivity_from_transitionInformation between
+	WorkflowProcessActivity[*] role xxx_WorkflowProcessActivity_from_transitionInformation_src
+	TransitionInformation[1] role from_transitionInformation
+end
+
+association xxx_TransitionInformation_processDefinition between
+	TransitionInformation[*] role xxx_TransitionInformation_processDefinition_src
+	WorkflowProcessDefinition[1] role processDefinition
+end
+
+association xxx_TransitionInformation_revelantDatas between
+	TransitionInformation[0..1] role xxx_TransitionInformation_revelantDatas_src
+	WorkflowRelevantData[*] role revelantDatas
+end
+
+association xxx_TransitionInformation_to_processActivity between
+	TransitionInformation[*] role xxx_TransitionInformation_to_processActivity_src
+	WorkflowProcessActivity[1] role to_processActivity
+end
+
+association xxx_TransitionInformation_from_processActivity between
+	TransitionInformation[*] role xxx_TransitionInformation_from_processActivity_src
+	WorkflowProcessActivity[1] role from_processActivity
+end
+

@@ -1,0 +1,159 @@
+model MTRANS
+class MetaClass
+attributes
+operations
+end
+
+class MetaModel
+attributes
+operations
+end
+
+class Module
+attributes
+	name : String
+	mode : String
+operations
+end
+
+class Rule
+attributes
+	isAbstract : Boolean
+	isEntryPoint : Boolean
+	name : String
+operations
+end
+
+class Inheritance
+attributes
+operations
+end
+
+class Expression
+attributes
+	operator : String
+operations
+end
+
+class Section
+attributes
+	kind : String
+operations
+end
+
+class Instruction
+attributes
+operations
+end
+
+class Variable
+attributes
+	name : String
+operations
+end
+
+association xxx_Module_metaDest between
+	Module[0..1] role xxx_Module_metaDest_src
+	MetaModel[*] role metaDest
+end
+
+association xxx_Module_metaSource between
+	Module[0..1] role xxx_Module_metaSource_src
+	MetaModel[*] role metaSource
+end
+
+composition xxx_Module_rules between
+	Module[0..1] role xxx_Module_rules_src
+	Rule[1..*] role rules
+end
+
+association xxx_Rule_module between
+	Rule[*] role xxx_Rule_module_src
+	Module[1] role module
+end
+
+association xxx_Rule_target between
+	Rule[*] role xxx_Rule_target_src
+	MetaClass[0..1] role target
+end
+
+association xxx_Rule_source between
+	Rule[*] role xxx_Rule_source_src
+	MetaClass[0..1] role source
+end
+
+composition xxx_Rule_declaration between
+	Rule[*] role xxx_Rule_declaration_src
+	Variable[0..1] role declaration
+end
+
+composition xxx_Rule_sections between
+	Rule[0..1] role xxx_Rule_sections_src
+	Section[1..*] role sections
+end
+
+composition xxx_Rule_guard between
+	Rule[*] role xxx_Rule_guard_src
+	Expression[0..1] role guard
+end
+
+composition xxx_Rule_inheritances between
+	Rule[0..1] role xxx_Rule_inheritances_src
+	Inheritance[*] role inheritances
+end
+
+association xxx_Inheritance_rule between
+	Inheritance[*] role xxx_Inheritance_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_Inheritance_expressions between
+	Inheritance[0..1] role xxx_Inheritance_expressions_src
+	Expression[*] role expressions
+end
+
+association xxx_Inheritance_inheritedRules between
+	Inheritance[0..1] role xxx_Inheritance_inheritedRules_src
+	Rule[*] role inheritedRules
+end
+
+association xxx_Expression_inheritance between
+	Expression[*] role xxx_Expression_inheritance_src
+	Inheritance[1] role inheritance
+end
+
+association xxx_Expression_rule between
+	Expression[*] role xxx_Expression_rule_src
+	Rule[1] role rule
+end
+
+association xxx_Expression_instruction between
+	Expression[*] role xxx_Expression_instruction_src
+	Instruction[1] role instruction
+end
+
+association xxx_Section_rule between
+	Section[*] role xxx_Section_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_Section_instructions between
+	Section[0..1] role xxx_Section_instructions_src
+	Instruction[1..*] role instructions
+end
+
+composition xxx_Instruction_body between
+	Instruction[*] role xxx_Instruction_body_src
+	Expression[1] role body
+end
+
+association xxx_Instruction_section between
+	Instruction[*] role xxx_Instruction_section_src
+	Section[1] role section
+end
+
+association xxx_Variable_rule between
+	Variable[*] role xxx_Variable_rule_src
+	Rule[1] role rule
+end
+

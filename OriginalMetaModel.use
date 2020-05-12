@@ -1,0 +1,212 @@
+model metamodel
+enum Direction{
+default
+}
+
+class TransformationModel
+attributes
+operations
+end
+
+class Layer<AbstractSource
+attributes
+	description : String
+	outputFilePathURI : String
+operations
+end
+
+class MatchClass<Class,Match
+attributes
+operations
+end
+
+class MatchModel
+attributes
+operations
+end
+
+class MatchAssociation<Association,Match
+attributes
+operations
+end
+
+class ApplyClass<Class,Apply
+attributes
+operations
+end
+
+class ApplyModel
+attributes
+operations
+end
+
+class ApplyAssociation<Association,Apply
+attributes
+operations
+end
+
+abstract class Class
+attributes
+	description : String
+	className : String
+	packageName : String
+operations
+end
+
+abstract class Association
+attributes
+	associationName : String
+operations
+end
+
+class MatchAttribute<Match
+attributes
+	description : String
+	attributeName : String
+	attributeType : String
+operations
+end
+
+class ApplyAttribute<Apply
+attributes
+	description : String
+	attributeName : String
+	attributeType : String
+operations
+end
+
+abstract class AbstractSource
+attributes
+operations
+end
+
+class FilePort<AbstractSource
+attributes
+	filePathURI : String
+operations
+end
+
+class Rule
+attributes
+	description : String
+operations
+end
+
+class MetaModelIdentifier
+attributes
+	metaModelURI : String
+	metaModelName : String
+operations
+end
+
+class Map
+attributes
+	mapDirection : Direction
+operations
+end
+
+abstract class Match
+attributes
+operations
+end
+
+abstract class Apply
+attributes
+operations
+end
+
+composition xxx_TransformationModel_source between
+	TransformationModel[0..1] role xxx_TransformationModel_source_src
+	AbstractSource[*] role source
+end
+
+association xxx_Layer_previousSource between
+	Layer[*] role xxx_Layer_previousSource_src
+	AbstractSource[1] role previousSource
+end
+
+composition xxx_Layer_hasRule between
+	Layer[0..1] role xxx_Layer_hasRule_src
+	Rule[*] role hasRule
+end
+
+composition xxx_MatchClass_attribute between
+	MatchClass[0..1] role xxx_MatchClass_attribute_src
+	MatchAttribute[*] role attribute
+end
+
+composition xxx_MatchModel_class_ between
+	MatchModel[0..1] role xxx_MatchModel_class__src
+	MatchClass[*] role class_
+end
+
+composition xxx_MatchModel_association_ between
+	MatchModel[0..1] role xxx_MatchModel_association__src
+	MatchAssociation[*] role association_
+end
+
+association xxx_MatchAssociation_source between
+	MatchAssociation[*] role xxx_MatchAssociation_source_src
+	MatchClass[1] role source
+end
+
+association xxx_MatchAssociation_target between
+	MatchAssociation[*] role xxx_MatchAssociation_target_src
+	MatchClass[1] role target
+end
+
+composition xxx_ApplyClass_attribute between
+	ApplyClass[0..1] role xxx_ApplyClass_attribute_src
+	ApplyAttribute[*] role attribute
+end
+
+composition xxx_ApplyModel_class_ between
+	ApplyModel[0..1] role xxx_ApplyModel_class__src
+	ApplyClass[*] role class_
+end
+
+composition xxx_ApplyModel_association_ between
+	ApplyModel[0..1] role xxx_ApplyModel_association__src
+	ApplyAssociation[*] role association_
+end
+
+association xxx_ApplyAssociation_source between
+	ApplyAssociation[*] role xxx_ApplyAssociation_source_src
+	ApplyClass[1] role source
+end
+
+association xxx_ApplyAssociation_target between
+	ApplyAssociation[*] role xxx_ApplyAssociation_target_src
+	ApplyClass[1] role target
+end
+
+composition xxx_AbstractSource_metaModelId between
+	AbstractSource[*] role xxx_AbstractSource_metaModelId_src
+	MetaModelIdentifier[1] role metaModelId
+end
+
+composition xxx_Rule_match between
+	Rule[*] role xxx_Rule_match_src
+	MatchModel[1] role match
+end
+
+composition xxx_Rule_apply between
+	Rule[*] role xxx_Rule_apply_src
+	ApplyModel[1] role apply
+end
+
+composition xxx_Rule_maps between
+	Rule[0..1] role xxx_Rule_maps_src
+	Map[*] role maps
+end
+
+association xxx_Map_targetMap between
+	Map[*] role xxx_Map_targetMap_src
+	Apply[1] role targetMap
+end
+
+association xxx_Map_sourceMap between
+	Map[*] role xxx_Map_sourceMap_src
+	Match[1] role sourceMap
+end
+

@@ -1,0 +1,72 @@
+model iOI
+class Model
+attributes
+	name : String
+operations
+end
+
+class Employee
+attributes
+	name : String
+	salary : Integer
+operations
+end
+
+class Company
+attributes
+	name : String
+operations
+end
+
+class Department
+attributes
+	name : String
+operations
+end
+
+class Position
+attributes
+	name : String
+operations
+end
+
+class Manager<Employee
+attributes
+operations
+end
+
+composition xxx_Model_companies between
+	Model[0..1] role xxx_Model_companies_src
+	Company[*] role companies
+end
+
+association xxx_Employee_works_on between
+	Employee[*] role xxx_Employee_works_on_src
+	Position[0..1] role works_on
+end
+
+composition xxx_Company_positions between
+	Company[0..1] role xxx_Company_positions_src
+	Position[*] role positions
+end
+
+composition xxx_Company_departments between
+	Company[0..1] role xxx_Company_departments_src
+	Department[*] role departments
+end
+
+composition xxx_Department_manager between
+	Department[*] role xxx_Department_manager_src
+	Manager[0..1] role manager
+end
+
+composition xxx_Department_employees between
+	Department[0..1] role xxx_Department_employees_src
+	Employee[*] role employees
+end
+
+composition xxx_Department_sub_department between
+	Department[*] role xxx_Department_sub_department_src
+	Department[0..1] role sub_department
+end
+

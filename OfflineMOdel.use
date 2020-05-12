@@ -1,0 +1,142 @@
+model offlinemodel
+enum Mode{
+default
+}
+
+enum Scheme{
+default
+}
+
+class OfflineModel
+attributes
+	mode : Mode
+	scheme : Scheme
+operations
+	rootNodes():Node
+	incremental(n : Node):Boolean
+	mandatory(n : Node):Boolean
+	free(n : Node):Boolean
+end
+
+abstract class AbstractNode
+attributes
+	name : String
+operations
+end
+
+class Node<AbstractNode
+attributes
+	composite : Boolean
+	isInitial : Boolean
+	isAvailableOffline : Boolean
+operations
+	existeNodoPreCache():Boolean
+	existeNodoDefault():Boolean
+	existeNodoNoCache():Boolean
+end
+
+class Element<AbstractNode
+attributes
+operations
+end
+
+abstract class Type
+attributes
+operations
+end
+
+class NoCache<Type
+attributes
+operations
+end
+
+class PreCache<Type
+attributes
+operations
+end
+
+class Default<Type
+attributes
+operations
+end
+
+abstract class Facet
+attributes
+	EnabledOnline : Boolean
+	storage : Boolean
+	update : Boolean
+	EnabledOffline : Boolean
+	name : String
+operations
+end
+
+class Input<Facet
+attributes
+operations
+end
+
+class Output<Facet
+attributes
+operations
+end
+
+class Control<Facet
+attributes
+operations
+end
+
+abstract class Navigation<Facet
+attributes
+operations
+end
+
+class Offline<Navigation
+attributes
+operations
+end
+
+class Online<Navigation
+attributes
+operations
+end
+
+class Normal<Navigation
+attributes
+operations
+end
+
+composition xxx_OfflineModel_nodes between
+	OfflineModel[0..1] role xxx_OfflineModel_nodes_src
+	AbstractNode[*] role nodes
+end
+
+association xxx_AbstractNode_parent between
+	AbstractNode[*] role xxx_AbstractNode_parent_src
+	Node[0..1] role parent
+end
+
+association xxx_AbstractNode_root between
+	AbstractNode[*] role xxx_AbstractNode_root_src
+	OfflineModel[0..1] role root
+end
+
+composition xxx_Node_children between
+	Node[0..1] role xxx_Node_children_src
+	AbstractNode[*] role children
+end
+
+composition xxx_Node_type between
+	Node[*] role xxx_Node_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Element_facets between
+	Element[0..1] role xxx_Element_facets_src
+	Facet[1..*] role facets
+end
+
+association xxx_Navigation_dest between
+	Navigation[*] role xxx_Navigation_dest_src
+	Node[1] role dest
+end
+

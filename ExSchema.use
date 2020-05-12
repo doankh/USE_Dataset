@@ -1,0 +1,61 @@
+model exSchema
+class Schema
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class Set_<Entity
+attributes
+operations
+end
+
+class Struct_<Entity
+attributes
+operations
+end
+
+class Relationship_<Entity
+attributes
+	start : String
+	end_ : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	value : String
+operations
+end
+
+composition xxx_Schema_attributes_ between
+	Schema[0..1] role xxx_Schema_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Schema_entities between
+	Schema[0..1] role xxx_Schema_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Set__entities between
+	Set_[0..1] role xxx_Set__entities_src
+	Entity[*] role entities
+end
+
+composition xxx_Struct__entities between
+	Struct_[0..1] role xxx_Struct__entities_src
+	Entity[*] role entities
+end
+

@@ -1,0 +1,202 @@
+model servicedescriptors
+enum StartupKind{
+default
+}
+
+class RegistryDesc
+attributes
+	name : String
+	description : String
+	isUnique : String
+operations
+	getServiceDesc(serviceId : String):AbstractServiceDesc
+	getServiceSetDesc(serviceSetsId : String):ServiceSetDesc
+	serviceSetsContains(serviceSetsId : String):String
+	servicesContains(serviceId : String):String
+end
+
+class ServiceSetDesc
+attributes
+	name : String
+	description : String
+operations
+	getServiceDesc(serviceId : String):AbstractServiceDesc
+	servicesContains(serviceId : String):String
+end
+
+abstract class AbstractServiceDesc
+attributes
+	name : String
+	description : String
+	priority : String
+	bundleID : String
+	dependsOnIds : String
+operations
+end
+
+class ServiceDesc<AbstractServiceDesc
+attributes
+	startKind : StartupKind
+	classname : String
+operations
+end
+
+abstract class FeatureInjection
+attributes
+	description : String
+operations
+end
+
+class AliasDesc<AbstractServiceDesc
+attributes
+	aliasedServiceId : String
+operations
+end
+
+class Descriptors
+attributes
+operations
+	getRegistryDesc(name : String):RegistryDesc
+	getServiceSetDesc(name : String):ServiceSetDesc
+end
+
+class PropertyInjection<FeatureInjection
+attributes
+	propertyName : String
+operations
+end
+
+abstract class InjectedValue
+attributes
+	description : String
+operations
+end
+
+class MethodInjection<AbstractMethodInjection
+attributes
+	methodName : String
+operations
+end
+
+abstract class AbstractMethodInjection<FeatureInjection
+attributes
+operations
+end
+
+class ParameterInjection
+attributes
+	parameterName : String
+operations
+end
+
+class InjectedService<InjectedValue
+attributes
+operations
+end
+
+class OpaqueInjectedValue<InjectedValue
+attributes
+	value : String
+operations
+end
+
+class ConstructorInjection<AbstractMethodInjection
+attributes
+operations
+end
+
+class ServiceFactoryDesc<ServiceDesc
+attributes
+operations
+end
+
+association xxx_RegistryDesc_parents between
+	RegistryDesc[0..1] role xxx_RegistryDesc_parents_src
+	RegistryDesc[*] role parents
+end
+
+association xxx_RegistryDesc_children between
+	RegistryDesc[0..1] role xxx_RegistryDesc_children_src
+	RegistryDesc[*] role children
+end
+
+association xxx_RegistryDesc_extends between
+	RegistryDesc[0..1] role xxx_RegistryDesc_extends_src
+	RegistryDesc[*] role extends
+end
+
+association xxx_RegistryDesc_serviceSets between
+	RegistryDesc[0..1] role xxx_RegistryDesc_serviceSets_src
+	ServiceSetDesc[*] role serviceSets
+end
+
+association xxx_RegistryDesc_services between
+	RegistryDesc[0..1] role xxx_RegistryDesc_services_src
+	AbstractServiceDesc[*] role services
+end
+
+association xxx_ServiceSetDesc_services between
+	ServiceSetDesc[0..1] role xxx_ServiceSetDesc_services_src
+	AbstractServiceDesc[*] role services
+end
+
+composition xxx_ServiceSetDesc_ownedServices between
+	ServiceSetDesc[0..1] role xxx_ServiceSetDesc_ownedServices_src
+	AbstractServiceDesc[*] role ownedServices
+end
+
+association xxx_ServiceSetDesc_extends between
+	ServiceSetDesc[0..1] role xxx_ServiceSetDesc_extends_src
+	ServiceSetDesc[*] role extends
+end
+
+association xxx_AbstractServiceDesc_dependsOn between
+	AbstractServiceDesc[0..1] role xxx_AbstractServiceDesc_dependsOn_src
+	AbstractServiceDesc[*] role dependsOn
+end
+
+association xxx_AbstractServiceDesc_parent between
+	AbstractServiceDesc[*] role xxx_AbstractServiceDesc_parent_src
+	ServiceSetDesc[1] role parent
+end
+
+composition xxx_ServiceDesc_injections between
+	ServiceDesc[0..1] role xxx_ServiceDesc_injections_src
+	FeatureInjection[*] role injections
+end
+
+association xxx_AliasDesc_aliasedService between
+	AliasDesc[*] role xxx_AliasDesc_aliasedService_src
+	ServiceDesc[1] role aliasedService
+end
+
+composition xxx_Descriptors_registries between
+	Descriptors[0..1] role xxx_Descriptors_registries_src
+	RegistryDesc[*] role registries
+end
+
+composition xxx_Descriptors_serviceSets between
+	Descriptors[0..1] role xxx_Descriptors_serviceSets_src
+	ServiceSetDesc[*] role serviceSets
+end
+
+composition xxx_PropertyInjection_values between
+	PropertyInjection[0..1] role xxx_PropertyInjection_values_src
+	InjectedValue[*] role values
+end
+
+composition xxx_AbstractMethodInjection_parameters between
+	AbstractMethodInjection[0..1] role xxx_AbstractMethodInjection_parameters_src
+	ParameterInjection[*] role parameters
+end
+
+composition xxx_ParameterInjection_values between
+	ParameterInjection[0..1] role xxx_ParameterInjection_values_src
+	InjectedValue[*] role values
+end
+
+association xxx_InjectedService_service between
+	InjectedService[*] role xxx_InjectedService_service_src
+	AbstractServiceDesc[1] role service
+end
+

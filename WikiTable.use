@@ -1,0 +1,52 @@
+model WikiTable
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Table<LocatedElement
+attributes
+	border : Integer
+	style : String
+	class_ : String
+operations
+end
+
+class Caption<LocatedElement
+attributes
+	content : String
+operations
+end
+
+class Row<LocatedElement
+attributes
+operations
+end
+
+class Cell<LocatedElement
+attributes
+	isHeading : Boolean
+	align : String
+	style : String
+	content : String
+operations
+end
+
+composition xxx_Table_caption between
+	Table[*] role xxx_Table_caption_src
+	Caption[0..1] role caption
+end
+
+composition xxx_Table_rows between
+	Table[0..1] role xxx_Table_rows_src
+	Row[*] role rows
+end
+
+composition xxx_Row_cells between
+	Row[0..1] role xxx_Row_cells_src
+	Cell[*] role cells
+end
+

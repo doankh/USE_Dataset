@@ -1,0 +1,71 @@
+model storedscript
+class StoredScriptRegistry
+attributes
+operations
+	processNewOrChangedScript(uri : String):IStoredScript
+	removeStoreScript(uri : String)
+	getStoredScript(uri : String):IStoredScript
+	getScriptType(type : String):ScriptType
+end
+
+abstract class IStoredScript
+attributes
+	uri : String
+operations
+	getMetadata(metadataName : String):ScriptMetadata
+end
+
+class StoredScript<IStoredScript
+attributes
+operations
+end
+
+class ScriptMetadata
+attributes
+	key : String
+	value : String
+operations
+end
+
+class ScriptType
+attributes
+	type : String
+	extension : String
+operations
+end
+
+composition xxx_StoredScriptRegistry_scripts between
+	StoredScriptRegistry[0..1] role xxx_StoredScriptRegistry_scripts_src
+	IStoredScript[*] role scripts
+end
+
+composition xxx_StoredScriptRegistry_scriptTypes between
+	StoredScriptRegistry[0..1] role xxx_StoredScriptRegistry_scriptTypes_src
+	ScriptType[*] role scriptTypes
+end
+
+composition xxx_IStoredScript_metadatas between
+	IStoredScript[0..1] role xxx_IStoredScript_metadatas_src
+	ScriptMetadata[*] role metadatas
+end
+
+association xxx_IStoredScript_scriptType between
+	IStoredScript[*] role xxx_IStoredScript_scriptType_src
+	ScriptType[1] role scriptType
+end
+
+association xxx_IStoredScript_registry between
+	IStoredScript[*] role xxx_IStoredScript_registry_src
+	StoredScriptRegistry[1] role registry
+end
+
+association xxx_ScriptMetadata_script between
+	ScriptMetadata[*] role xxx_ScriptMetadata_script_src
+	IStoredScript[1] role script
+end
+
+association xxx_ScriptType_registry between
+	ScriptType[*] role xxx_ScriptType_registry_src
+	StoredScriptRegistry[1] role registry
+end
+

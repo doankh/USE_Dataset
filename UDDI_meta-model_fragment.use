@@ -1,0 +1,61 @@
+model PIF
+class BusinessTemplate
+attributes
+operations
+end
+
+class BusinessContact
+attributes
+operations
+end
+
+class BusinessService
+attributes
+operations
+end
+
+class BusinessEntity
+attributes
+operations
+end
+
+class IdentifierBag
+attributes
+operations
+end
+
+class TModel
+attributes
+operations
+end
+
+class OverviewDocument
+attributes
+operations
+end
+
+association xxx_BusinessEntity_businessContacts between
+	BusinessEntity[0..1] role xxx_BusinessEntity_businessContacts_src
+	BusinessContact[*] role businessContacts
+end
+
+composition xxx_BusinessEntity_businessServices between
+	BusinessEntity[0..1] role xxx_BusinessEntity_businessServices_src
+	BusinessService[*] role businessServices
+end
+
+association xxx_BusinessEntity_identifierBag between
+	BusinessEntity[*] role xxx_BusinessEntity_identifierBag_src
+	IdentifierBag[0..1] role identifierBag
+end
+
+composition xxx_TModel_overviewDocuments between
+	TModel[0..1] role xxx_TModel_overviewDocuments_src
+	OverviewDocument[*] role overviewDocuments
+end
+
+association xxx_TModel_identifierBag between
+	TModel[*] role xxx_TModel_identifierBag_src
+	IdentifierBag[0..1] role identifierBag
+end
+

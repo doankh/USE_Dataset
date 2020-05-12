@@ -1,0 +1,46 @@
+model PrimitiveTypes
+class GeoTransfos
+attributes
+	name : String
+operations
+end
+
+class GeoTransfo
+attributes
+	name : String
+	freeze : Boolean
+operations
+end
+
+class Param
+attributes
+	name : String
+	param : Real
+operations
+end
+
+composition xxx_GeoTransfos_transfos between
+	GeoTransfos[0..1] role xxx_GeoTransfos_transfos_src
+	GeoTransfo[*] role transfos
+end
+
+composition xxx_GeoTransfo_subGeoTransfos between
+	GeoTransfo[0..1] role xxx_GeoTransfo_subGeoTransfos_src
+	GeoTransfo[*] role subGeoTransfos
+end
+
+association xxx_GeoTransfo_superGeoTransfo between
+	GeoTransfo[*] role xxx_GeoTransfo_superGeoTransfo_src
+	GeoTransfo[1] role superGeoTransfo
+end
+
+composition xxx_GeoTransfo_params between
+	GeoTransfo[0..1] role xxx_GeoTransfo_params_src
+	Param[*] role params
+end
+
+association xxx_Param_geoTransfo between
+	Param[*] role xxx_Param_geoTransfo_src
+	GeoTransfo[1] role geoTransfo
+end
+

@@ -1,0 +1,126 @@
+model Reqtify
+class Project
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+	type : String
+operations
+end
+
+abstract class ElementWithIL<TypedElement
+attributes
+	name : String
+	label : String
+operations
+end
+
+class Document<ElementWithIL
+attributes
+operations
+end
+
+abstract class TextElement<ElementWithIL
+attributes
+	description : String
+operations
+end
+
+class Section<TextElement
+attributes
+operations
+end
+
+abstract class AbstractRequirement<TextElement
+attributes
+operations
+end
+
+class Requirement<AbstractRequirement
+attributes
+operations
+end
+
+class MacroRequirement<AbstractRequirement
+attributes
+operations
+end
+
+class CoverLink<TypedElement
+attributes
+operations
+end
+
+class Attribute<TypedElement
+attributes
+	value : String
+operations
+end
+
+composition xxx_Project_documents between
+	Project[0..1] role xxx_Project_documents_src
+	Document[1..*] role documents
+end
+
+association xxx_Document_project between
+	Document[*] role xxx_Document_project_src
+	Project[1] role project
+end
+
+composition xxx_Document_sections between
+	Document[0..1] role xxx_Document_sections_src
+	Section[*] role sections
+end
+
+association xxx_Section_document between
+	Section[*] role xxx_Section_document_src
+	Document[0..1] role document
+end
+
+composition xxx_Section_sectionChildren between
+	Section[0..1] role xxx_Section_sectionChildren_src
+	Section[*] role sectionChildren
+end
+
+association xxx_Section_sectionParent between
+	Section[*] role xxx_Section_sectionParent_src
+	Section[0..1] role sectionParent
+end
+
+composition xxx_Section_requirements between
+	Section[0..1] role xxx_Section_requirements_src
+	AbstractRequirement[*] role requirements
+end
+
+association xxx_AbstractRequirement_section between
+	AbstractRequirement[*] role xxx_AbstractRequirement_section_src
+	Section[0..1] role section
+end
+
+association xxx_AbstractRequirement_isContained between
+	AbstractRequirement[*] role xxx_AbstractRequirement_isContained_src
+	MacroRequirement[0..1] role isContained
+end
+
+composition xxx_AbstractRequirement_coverLinks between
+	AbstractRequirement[0..1] role xxx_AbstractRequirement_coverLinks_src
+	CoverLink[*] role coverLinks
+end
+
+composition xxx_AbstractRequirement_attribute between
+	AbstractRequirement[0..1] role xxx_AbstractRequirement_attribute_src
+	Attribute[*] role attribute
+end
+
+composition xxx_MacroRequirement_contains between
+	MacroRequirement[0..1] role xxx_MacroRequirement_contains_src
+	AbstractRequirement[*] role contains
+end
+
+association xxx_CoverLink_linkWith between
+	CoverLink[*] role xxx_CoverLink_linkWith_src
+	AbstractRequirement[1] role linkWith
+end
+

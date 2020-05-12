@@ -1,0 +1,144 @@
+model UseCases
+class Classifier
+attributes
+operations
+end
+
+class Instance
+attributes
+operations
+end
+
+class Actor<Classifier
+attributes
+operations
+end
+
+class UseCase<Classifier
+attributes
+	extensionPoint : String
+operations
+end
+
+class UseCaseInstance<Instance
+attributes
+operations
+end
+
+abstract class RelationShip
+attributes
+operations
+end
+
+class Include<RelationShip
+attributes
+operations
+end
+
+class Extend<RelationShip
+attributes
+operations
+end
+
+class BooleanExpression
+attributes
+	value : String
+operations
+end
+
+abstract class ModelElement
+attributes
+operations
+end
+
+class ExtensionPoint<ModelElement
+attributes
+operations
+end
+
+class LocationReference
+attributes
+	value : String
+operations
+end
+
+association xxx_Classifier_instance between
+	Classifier[0..1] role xxx_Classifier_instance_src
+	Instance[*] role instance
+end
+
+association xxx_Instance_classifier between
+	Instance[0..1] role xxx_Instance_classifier_src
+	Classifier[1..*] role classifier
+end
+
+association xxx_UseCase_includeAddition between
+	UseCase[*] role xxx_UseCase_includeAddition_src
+	Include[1] role includeAddition
+end
+
+association xxx_UseCase_includeBase between
+	UseCase[*] role xxx_UseCase_includeBase_src
+	Include[1] role includeBase
+end
+
+association xxx_UseCase_extendExtension between
+	UseCase[*] role xxx_UseCase_extendExtension_src
+	Extend[1] role extendExtension
+end
+
+association xxx_UseCase_extendBase between
+	UseCase[*] role xxx_UseCase_extendBase_src
+	Extend[1] role extendBase
+end
+
+association xxx_UseCase_extensionPoints between
+	UseCase[0..1] role xxx_UseCase_extensionPoints_src
+	ExtensionPoint[*] role extensionPoints
+end
+
+association xxx_Include_addition between
+	Include[*] role xxx_Include_addition_src
+	UseCase[1] role addition
+end
+
+association xxx_Include_base between
+	Include[*] role xxx_Include_base_src
+	UseCase[1] role base
+end
+
+association xxx_Extend_condition between
+	Extend[*] role xxx_Extend_condition_src
+	BooleanExpression[1] role condition
+end
+
+association xxx_Extend_extension between
+	Extend[*] role xxx_Extend_extension_src
+	UseCase[1] role extension
+end
+
+association xxx_Extend_base between
+	Extend[*] role xxx_Extend_base_src
+	UseCase[1] role base
+end
+
+association xxx_Extend_extensionPoint between
+	Extend[0..1] role xxx_Extend_extensionPoint_src
+	ExtensionPoint[1..*] role extensionPoint
+end
+
+association xxx_ExtensionPoint_location between
+	ExtensionPoint[*] role xxx_ExtensionPoint_location_src
+	LocationReference[1] role location
+end
+
+association xxx_ExtensionPoint_extend between
+	ExtensionPoint[0..1] role xxx_ExtensionPoint_extend_src
+	Extend[*] role extend
+end
+
+association xxx_ExtensionPoint_useCase between
+	ExtensionPoint[0..1] role xxx_ExtensionPoint_useCase_src
+	UseCase[*] role useCase
+end
+

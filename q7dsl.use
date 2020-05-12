@@ -1,0 +1,209 @@
+model q7dsl
+enum Op{
+default
+}
+
+enum DecompositionType{
+default
+}
+
+enum Enrichment{
+default
+}
+
+enum LabelEnumerator{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class Advice
+attributes
+	who : String
+operations
+end
+
+class Who
+attributes
+operations
+end
+
+class Actor
+attributes
+	name : String
+operations
+end
+
+class When
+attributes
+	expr : String
+operations
+end
+
+class Why
+attributes
+	name : String
+operations
+end
+
+class What
+attributes
+operations
+end
+
+class Topic
+attributes
+	name : String
+operations
+end
+
+class Where
+attributes
+	op : Op
+operations
+end
+
+class How
+attributes
+	op : DecompositionType
+	enrich : Enrichment
+operations
+end
+
+class HowMuchRules
+attributes
+operations
+end
+
+class HowMuch
+attributes
+	op : Op
+operations
+end
+
+class Label
+attributes
+	label : LabelEnumerator
+operations
+end
+
+class FLOAT
+attributes
+	integral : String
+	decimal : String
+operations
+end
+
+composition xxx_Model_advices between
+	Model[0..1] role xxx_Model_advices_src
+	Advice[*] role advices
+end
+
+composition xxx_Advice_how between
+	Advice[*] role xxx_Advice_how_src
+	How[0..1] role how
+end
+
+composition xxx_Advice_when between
+	Advice[*] role xxx_Advice_when_src
+	When[0..1] role when
+end
+
+composition xxx_Advice_why between
+	Advice[*] role xxx_Advice_why_src
+	Why[0..1] role why
+end
+
+composition xxx_Advice_label between
+	Advice[*] role xxx_Advice_label_src
+	Label[0..1] role label
+end
+
+composition xxx_Advice_what between
+	Advice[*] role xxx_Advice_what_src
+	What[0..1] role what
+end
+
+composition xxx_Advice_where between
+	Advice[*] role xxx_Advice_where_src
+	Where[0..1] role where
+end
+
+composition xxx_Advice_whom between
+	Advice[*] role xxx_Advice_whom_src
+	Who[0..1] role whom
+end
+
+composition xxx_Advice_howmuch between
+	Advice[*] role xxx_Advice_howmuch_src
+	HowMuchRules[0..1] role howmuch
+end
+
+composition xxx_Who_actor between
+	Who[*] role xxx_Who_actor_src
+	Actor[0..1] role actor
+end
+
+composition xxx_What_topics between
+	What[0..1] role xxx_What_topics_src
+	Topic[*] role topics
+end
+
+composition xxx_Where_topics between
+	Where[*] role xxx_Where_topics_src
+	What[0..1] role topics
+end
+
+composition xxx_Where_name between
+	Where[*] role xxx_Where_name_src
+	Why[0..1] role name
+end
+
+composition xxx_How_advices between
+	How[0..1] role xxx_How_advices_src
+	Advice[*] role advices
+end
+
+composition xxx_HowMuchRules_howmuch between
+	HowMuchRules[0..1] role xxx_HowMuchRules_howmuch_src
+	HowMuch[*] role howmuch
+end
+
+composition xxx_HowMuch_strength between
+	HowMuch[*] role xxx_HowMuch_strength_src
+	FLOAT[0..1] role strength
+end
+
+composition xxx_HowMuch_why between
+	HowMuch[*] role xxx_HowMuch_why_src
+	Why[0..1] role why
+end
+
+composition xxx_HowMuch_who between
+	HowMuch[*] role xxx_HowMuch_who_src
+	Who[0..1] role who
+end
+
+composition xxx_HowMuch_trust between
+	HowMuch[*] role xxx_HowMuch_trust_src
+	FLOAT[0..1] role trust
+end
+
+composition xxx_HowMuch_what between
+	HowMuch[*] role xxx_HowMuch_what_src
+	What[0..1] role what
+end
+
+composition xxx_Label_den between
+	Label[*] role xxx_Label_den_src
+	FLOAT[0..1] role den
+end
+
+composition xxx_Label_sat between
+	Label[*] role xxx_Label_sat_src
+	FLOAT[0..1] role sat
+end
+

@@ -1,0 +1,311 @@
+model anttasks
+enum PackagingFormat{
+default
+}
+
+enum FileSetType{
+default
+}
+
+enum IconType{
+default
+}
+
+enum SplashMode{
+default
+}
+
+enum ApplicationToolkitType{
+default
+}
+
+class AntTask
+attributes
+	buildDirectory : String
+	cssToBin : Boolean
+operations
+end
+
+class Deploy
+attributes
+	embedjnlp : Boolean
+	extension : Boolean
+	height : String
+	includeDT : Boolean
+	offlineAllowed : Boolean
+	placeholderref : String
+	placeholderid : String
+	updatemode : String
+	width : String
+	splashImage : String
+	packagingFormat : String
+	verbose : Boolean
+operations
+end
+
+class Jar
+attributes
+operations
+end
+
+class SignJar
+attributes
+	alias : String
+	keypass : String
+	keystore : String
+	storepass : String
+	storetype : String
+operations
+end
+
+class FileSet
+attributes
+	arch : String
+	excludes : String
+	includes : String
+	os : String
+	requiredfor : String
+	type : FileSetType
+operations
+end
+
+class Platform
+attributes
+	refid : String
+	javafx : String
+	j2se : String
+operations
+end
+
+class JVmArg
+attributes
+	value : String
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Preferences
+attributes
+	install : Boolean
+	menu : Boolean
+	refid : String
+	shortcut : Boolean
+operations
+end
+
+class Application
+attributes
+	name : String
+	fallbackclass : String
+	id : String
+	mainclass : String
+	preloaderclass : String
+	refid : String
+	version : String
+	toolkit : String
+operations
+end
+
+class Argument
+attributes
+operations
+end
+
+class HtmlParam
+attributes
+	escape : Boolean
+	name : String
+	value : String
+operations
+end
+
+class Param
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Permissions
+attributes
+	cachecertificates : Boolean
+	elevated : Boolean
+operations
+end
+
+class Template
+attributes
+	file : String
+	toFile : String
+operations
+end
+
+class Callback
+attributes
+	refid : String
+operations
+end
+
+class Info
+attributes
+	description : String
+	title : String
+	vendor : String
+operations
+end
+
+class Icon
+attributes
+	depth : String
+	href : String
+	height : String
+	kind : IconType
+	width : String
+operations
+end
+
+class Splash
+attributes
+	href : String
+	mode : SplashMode
+operations
+end
+
+class KeyValuePair
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_AntTask_deploy between
+	AntTask[*] role xxx_AntTask_deploy_src
+	Deploy[0..1] role deploy
+end
+
+composition xxx_AntTask_jar between
+	AntTask[*] role xxx_AntTask_jar_src
+	Jar[0..1] role jar
+end
+
+composition xxx_AntTask_signjar between
+	AntTask[*] role xxx_AntTask_signjar_src
+	SignJar[0..1] role signjar
+end
+
+composition xxx_AntTask_manifestEntries between
+	AntTask[0..1] role xxx_AntTask_manifestEntries_src
+	Param[*] role manifestEntries
+end
+
+composition xxx_AntTask_files between
+	AntTask[0..1] role xxx_AntTask_files_src
+	KeyValuePair[*] role files
+end
+
+composition xxx_AntTask_fonts between
+	AntTask[0..1] role xxx_AntTask_fonts_src
+	KeyValuePair[*] role fonts
+end
+
+composition xxx_Deploy_platform between
+	Deploy[*] role xxx_Deploy_platform_src
+	Platform[0..1] role platform
+end
+
+composition xxx_Deploy_preferences between
+	Deploy[*] role xxx_Deploy_preferences_src
+	Preferences[0..1] role preferences
+end
+
+composition xxx_Deploy_application between
+	Deploy[*] role xxx_Deploy_application_src
+	Application[0..1] role application
+end
+
+composition xxx_Deploy_permissions between
+	Deploy[*] role xxx_Deploy_permissions_src
+	Permissions[0..1] role permissions
+end
+
+composition xxx_Deploy_template between
+	Deploy[*] role xxx_Deploy_template_src
+	Template[0..1] role template
+end
+
+composition xxx_Deploy_callbacks between
+	Deploy[0..1] role xxx_Deploy_callbacks_src
+	Callback[*] role callbacks
+end
+
+composition xxx_Deploy_info between
+	Deploy[*] role xxx_Deploy_info_src
+	Info[0..1] role info
+end
+
+composition xxx_Jar_platform between
+	Jar[*] role xxx_Jar_platform_src
+	Platform[0..1] role platform
+end
+
+composition xxx_Jar_fileset between
+	Jar[*] role xxx_Jar_fileset_src
+	FileSet[0..1] role fileset
+end
+
+composition xxx_Jar_application between
+	Jar[*] role xxx_Jar_application_src
+	Application[0..1] role application
+end
+
+composition xxx_Jar_info between
+	Jar[*] role xxx_Jar_info_src
+	Info[0..1] role info
+end
+
+composition xxx_Platform_jVmArgs between
+	Platform[0..1] role xxx_Platform_jVmArgs_src
+	JVmArg[*] role jVmArgs
+end
+
+composition xxx_Platform_properties between
+	Platform[0..1] role xxx_Platform_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Application_arguments between
+	Application[0..1] role xxx_Application_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_Application_htmlParams between
+	Application[0..1] role xxx_Application_htmlParams_src
+	HtmlParam[*] role htmlParams
+end
+
+composition xxx_Application_params between
+	Application[0..1] role xxx_Application_params_src
+	Param[*] role params
+end
+
+composition xxx_Callback_callbacks between
+	Callback[0..1] role xxx_Callback_callbacks_src
+	Callback[*] role callbacks
+end
+
+composition xxx_Info_icon between
+	Info[0..1] role xxx_Info_icon_src
+	Icon[*] role icon
+end
+
+composition xxx_Info_splash between
+	Info[0..1] role xxx_Info_splash_src
+	Splash[*] role splash
+end
+

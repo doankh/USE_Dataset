@@ -1,0 +1,205 @@
+model StateMachinesProv
+class StateMachine
+attributes
+operations
+end
+
+class Region
+attributes
+operations
+end
+
+abstract class Vertex
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Pseudostate<Vertex
+attributes
+operations
+end
+
+class ConnectionPointReference<Vertex
+attributes
+operations
+end
+
+class State<Vertex
+attributes
+	isComposite : String
+	isOrthogonal : String
+	isSimple : String
+	isSubmachineState : String
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class TimeEvent
+attributes
+operations
+end
+
+class ProtocolStateMachine<StateMachine
+attributes
+operations
+end
+
+class ProtocolConformance
+attributes
+operations
+end
+
+class ProtocolTransition<Transition
+attributes
+operations
+end
+
+composition xxx_StateMachine_region between
+	StateMachine[0..1] role xxx_StateMachine_region_src
+	Region[1..*] role region
+end
+
+composition xxx_StateMachine_connectionPoint between
+	StateMachine[0..1] role xxx_StateMachine_connectionPoint_src
+	Pseudostate[*] role connectionPoint
+end
+
+association xxx_StateMachine_submachineState between
+	StateMachine[0..1] role xxx_StateMachine_submachineState_src
+	State[*] role submachineState
+end
+
+association xxx_StateMachine_extendedStateMachine between
+	StateMachine[0..1] role xxx_StateMachine_extendedStateMachine_src
+	StateMachine[*] role extendedStateMachine
+end
+
+composition xxx_Region_subvertex between
+	Region[0..1] role xxx_Region_subvertex_src
+	Vertex[*] role subvertex
+end
+
+association xxx_Region_stateMachine between
+	Region[*] role xxx_Region_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+composition xxx_Region_transition between
+	Region[0..1] role xxx_Region_transition_src
+	Transition[*] role transition
+end
+
+association xxx_Region_state between
+	Region[*] role xxx_Region_state_src
+	State[0..1] role state
+end
+
+association xxx_Region_extendedRegion between
+	Region[*] role xxx_Region_extendedRegion_src
+	Region[0..1] role extendedRegion
+end
+
+association xxx_Vertex_outgoing between
+	Vertex[0..1] role xxx_Vertex_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_Vertex_incoming between
+	Vertex[0..1] role xxx_Vertex_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_Vertex_container between
+	Vertex[*] role xxx_Vertex_container_src
+	Region[0..1] role container
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	Vertex[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	Vertex[1] role target
+end
+
+association xxx_Transition_container between
+	Transition[*] role xxx_Transition_container_src
+	Region[0..1] role container
+end
+
+association xxx_Transition_redefinedTransition between
+	Transition[*] role xxx_Transition_redefinedTransition_src
+	Transition[0..1] role redefinedTransition
+end
+
+association xxx_Pseudostate_state between
+	Pseudostate[*] role xxx_Pseudostate_state_src
+	State[0..1] role state
+end
+
+association xxx_ConnectionPointReference_exit between
+	ConnectionPointReference[*] role xxx_ConnectionPointReference_exit_src
+	Pseudostate[0..1] role exit
+end
+
+association xxx_ConnectionPointReference_entry between
+	ConnectionPointReference[*] role xxx_ConnectionPointReference_entry_src
+	Pseudostate[0..1] role entry
+end
+
+association xxx_ConnectionPointReference_state between
+	ConnectionPointReference[*] role xxx_ConnectionPointReference_state_src
+	State[0..1] role state
+end
+
+composition xxx_State_connection between
+	State[0..1] role xxx_State_connection_src
+	ConnectionPointReference[*] role connection
+end
+
+composition xxx_State_connectionPoint between
+	State[0..1] role xxx_State_connectionPoint_src
+	Pseudostate[*] role connectionPoint
+end
+
+association xxx_State_submachine between
+	State[*] role xxx_State_submachine_src
+	StateMachine[0..1] role submachine
+end
+
+composition xxx_State_region between
+	State[0..1] role xxx_State_region_src
+	Region[*] role region
+end
+
+association xxx_State_redefinedState between
+	State[*] role xxx_State_redefinedState_src
+	State[0..1] role redefinedState
+end
+
+composition xxx_ProtocolStateMachine_conformance between
+	ProtocolStateMachine[0..1] role xxx_ProtocolStateMachine_conformance_src
+	ProtocolConformance[*] role conformance
+end
+
+association xxx_ProtocolConformance_specificMachine between
+	ProtocolConformance[*] role xxx_ProtocolConformance_specificMachine_src
+	ProtocolStateMachine[1] role specificMachine
+end
+
+association xxx_ProtocolConformance_generalMachine between
+	ProtocolConformance[*] role xxx_ProtocolConformance_generalMachine_src
+	ProtocolStateMachine[1] role generalMachine
+end
+

@@ -1,0 +1,67 @@
+model manager
+enum XplNetworkState{
+default
+}
+
+class XplManager
+attributes
+	networkState : XplNetworkState
+	networkAddress : String
+	discoveredDevices : String
+operations
+	connect()
+	disconnect()
+	addNetworkStateListener(listener : IXplNetworkStateListener)
+	removeNetworkStateListener(listener : IXplNetworkStateListener)
+	addDeviceDiscoveryListener(listener : IXplDeviceDiscoveryListener)
+	removeDeviceDiscoveryListener(listener : IXplDeviceDiscoveryListener)
+	discoverDevices()
+end
+
+abstract class IXplNetworkStateListener
+attributes
+operations
+	onNetworkStateChange(previousState : XplNetworkState,newState : XplNetworkState)
+end
+
+abstract class IXplDeviceDiscoveryListener
+attributes
+operations
+	onDeviceDiscovered()
+	onDeviceShutdown()
+	onDeviceHeartbeat()
+	onDeviceTimeout()
+end
+
+abstract class XplDeviceIdentity
+attributes
+	vendorID : String
+	deviceID : String
+	instanceID : String
+operations
+	getID():String
+end
+
+class XplDiscoveredDevice<XplDeviceIdentity
+attributes
+	discoveryTime : Integer
+	lastHeartbeatTime : Integer
+	timedout : Boolean
+operations
+end
+
+association xxx_XplManager_networkStateListeners between
+	XplManager[0..1] role xxx_XplManager_networkStateListeners_src
+	IXplNetworkStateListener[*] role networkStateListeners
+end
+
+association xxx_XplManager_deviceDiscoveryListeners between
+	XplManager[0..1] role xxx_XplManager_deviceDiscoveryListeners_src
+	IXplDeviceDiscoveryListener[*] role deviceDiscoveryListeners
+end
+
+association xxx_IXplDeviceDiscoveryListener_device between
+	IXplDeviceDiscoveryListener[*] role xxx_IXplDeviceDiscoveryListener_device_src
+	XplDiscoveredDevice[0..1] role device
+end
+

@@ -1,0 +1,477 @@
+model adl
+enum Role{
+default
+}
+
+enum ComponentKind{
+default
+}
+
+class ArchitectureDefinition<MergedObject
+attributes
+	name : String
+	nameFQN : String
+	componentKind : ComponentKind
+	simpleName : String
+operations
+end
+
+class AdlDefinition
+attributes
+operations
+end
+
+class Annotation<ElementValue,MergedObject
+attributes
+	name : String
+operations
+end
+
+class AnnotationElement
+attributes
+	elementName : String
+operations
+end
+
+class AnnotationsList<MergedObject
+attributes
+operations
+end
+
+class ArgumentDefinition
+attributes
+	argumentValue : String
+	argumentName : String
+operations
+end
+
+class AttributeDefinition<PrimitiveDefinitionElement
+attributes
+	attributeName : String
+	type : String
+	value : String
+operations
+end
+
+class BindingDefinition<CompositeDefinitionElement
+attributes
+	interfaceSourceIndex : Integer
+	interfaceTargetIndex : Integer
+	interfaceSourceLabel : String
+	interfaceTargetLabel : String
+	interfaceSourceParentLabel : String
+	interfaceTargetParentLabel : String
+operations
+end
+
+class Body<MergedObject
+attributes
+	anonymous : Boolean
+operations
+end
+
+class ComponentReference<MergedObject
+attributes
+	referenceName : String
+	nameFQN : String
+	resolved : Boolean
+operations
+end
+
+class ComponentTypeDefinition<ArchitectureDefinition
+attributes
+operations
+end
+
+class CompositeBody<Body
+attributes
+operations
+end
+
+class CompositeComponentDefinition<ArchitectureDefinition
+attributes
+operations
+end
+
+abstract class CompositeDefinitionElement<Element
+attributes
+operations
+end
+
+class CompositeReferenceDefinition<ComponentReference
+attributes
+operations
+end
+
+class CompositeReferencesList<ReferencesList
+attributes
+operations
+end
+
+class ConstantValue<ElementValue
+attributes
+	value : String
+operations
+end
+
+class DataDefinition<PrimitiveDefinitionElement
+attributes
+operations
+end
+
+abstract class Element<MergedObject
+attributes
+operations
+end
+
+class ElementValue
+attributes
+operations
+end
+
+class ElementValueArrayInitializer<ElementValue
+attributes
+operations
+end
+
+class FileC<MergedObject
+attributes
+	directory : String
+	fileName : String
+operations
+end
+
+class FormalArgument
+attributes
+	name : String
+operations
+end
+
+class FormalArgumentsList
+attributes
+operations
+end
+
+class ImplementationDefinition<PrimitiveDefinitionElement
+attributes
+operations
+end
+
+class ImportDefinition<MergedObject
+attributes
+	importName : String
+operations
+end
+
+class InlineCodeC<MergedObject
+attributes
+	codeC : String
+operations
+end
+
+class InterfaceDefinition<CompositeDefinitionElement,PrimitiveDefinitionElement,TypeDefinitionElement
+attributes
+	role : Role
+	signature : String
+	collectionsize : Integer
+	optional : Boolean
+	name : String
+	collection : Boolean
+operations
+end
+
+abstract class MergedObject
+attributes
+	merged : Boolean
+	override : Boolean
+	canOverride : Boolean
+operations
+end
+
+class PrimitiveBody<Body
+attributes
+operations
+end
+
+class PrimitiveComponentDefinition<ArchitectureDefinition
+attributes
+	abstract_ : Boolean
+operations
+end
+
+abstract class PrimitiveDefinitionElement<Element
+attributes
+operations
+end
+
+class PrimitiveReferenceDefinition<ComponentReference
+attributes
+operations
+end
+
+class PrimitiveReferencesList<ReferencesList
+attributes
+operations
+end
+
+class ReferencesList
+attributes
+operations
+end
+
+class SubComponentCompositeBody<CompositeBody
+attributes
+operations
+end
+
+class SubComponentDefinition<CompositeDefinitionElement,ArchitectureDefinition
+attributes
+operations
+end
+
+class SubComponentPrimitiveBody<PrimitiveBody
+attributes
+operations
+end
+
+class TemplateDefinition<TemplateSpecifier,MergedObject
+attributes
+operations
+end
+
+class TemplateSpecifier
+attributes
+	name : String
+operations
+end
+
+class TemplateSpecifiersList
+attributes
+operations
+end
+
+class TypeBody<Body
+attributes
+operations
+end
+
+abstract class TypeDefinitionElement<Element
+attributes
+operations
+end
+
+class TypeReferenceDefinition<ComponentReference
+attributes
+operations
+end
+
+class TypeReferencesList<ReferencesList
+attributes
+operations
+end
+
+association xxx_ArchitectureDefinition_parentAdlDefinition between
+	ArchitectureDefinition[*] role xxx_ArchitectureDefinition_parentAdlDefinition_src
+	AdlDefinition[0..1] role parentAdlDefinition
+end
+
+composition xxx_ArchitectureDefinition_body between
+	ArchitectureDefinition[*] role xxx_ArchitectureDefinition_body_src
+	Body[0..1] role body
+end
+
+composition xxx_ArchitectureDefinition_referencesList between
+	ArchitectureDefinition[*] role xxx_ArchitectureDefinition_referencesList_src
+	ReferencesList[0..1] role referencesList
+end
+
+composition xxx_AdlDefinition_imports between
+	AdlDefinition[0..1] role xxx_AdlDefinition_imports_src
+	ImportDefinition[*] role imports
+end
+
+composition xxx_AdlDefinition_architecturedefinition between
+	AdlDefinition[*] role xxx_AdlDefinition_architecturedefinition_src
+	ArchitectureDefinition[0..1] role architecturedefinition
+end
+
+composition xxx_Annotation_annotationElements between
+	Annotation[0..1] role xxx_Annotation_annotationElements_src
+	AnnotationElement[*] role annotationElements
+end
+
+association xxx_Annotation_parentAnnotationList between
+	Annotation[*] role xxx_Annotation_parentAnnotationList_src
+	AnnotationsList[0..1] role parentAnnotationList
+end
+
+composition xxx_AnnotationElement_elementValue between
+	AnnotationElement[*] role xxx_AnnotationElement_elementValue_src
+	ElementValue[0..1] role elementValue
+end
+
+association xxx_AnnotationElement_parentAnnotation between
+	AnnotationElement[*] role xxx_AnnotationElement_parentAnnotation_src
+	Annotation[0..1] role parentAnnotation
+end
+
+composition xxx_AnnotationsList_annotations between
+	AnnotationsList[0..1] role xxx_AnnotationsList_annotations_src
+	Annotation[*] role annotations
+end
+
+association xxx_BindingDefinition_interfaceSource between
+	BindingDefinition[*] role xxx_BindingDefinition_interfaceSource_src
+	InterfaceDefinition[0..1] role interfaceSource
+end
+
+association xxx_BindingDefinition_interfaceTarget between
+	BindingDefinition[*] role xxx_BindingDefinition_interfaceTarget_src
+	InterfaceDefinition[0..1] role interfaceTarget
+end
+
+association xxx_Body_parentComponent between
+	Body[*] role xxx_Body_parentComponent_src
+	ArchitectureDefinition[0..1] role parentComponent
+end
+
+composition xxx_Body_elements between
+	Body[0..1] role xxx_Body_elements_src
+	Element[*] role elements
+end
+
+composition xxx_Body_annotationsList between
+	Body[*] role xxx_Body_annotationsList_src
+	AnnotationsList[0..1] role annotationsList
+end
+
+composition xxx_ComponentReference_templatesList between
+	ComponentReference[0..1] role xxx_ComponentReference_templatesList_src
+	TemplateDefinition[*] role templatesList
+end
+
+composition xxx_ComponentReference_argumentsList between
+	ComponentReference[0..1] role xxx_ComponentReference_argumentsList_src
+	ArgumentDefinition[*] role argumentsList
+end
+
+association xxx_ComponentReference_parentReferencesList between
+	ComponentReference[*] role xxx_ComponentReference_parentReferencesList_src
+	ReferencesList[0..1] role parentReferencesList
+end
+
+association xxx_ComponentReference_parentSubComponent between
+	ComponentReference[*] role xxx_ComponentReference_parentSubComponent_src
+	SubComponentDefinition[0..1] role parentSubComponent
+end
+
+composition xxx_ComponentTypeDefinition_annotationsList between
+	ComponentTypeDefinition[*] role xxx_ComponentTypeDefinition_annotationsList_src
+	AnnotationsList[0..1] role annotationsList
+end
+
+composition xxx_CompositeComponentDefinition_templateSpecifiersList between
+	CompositeComponentDefinition[*] role xxx_CompositeComponentDefinition_templateSpecifiersList_src
+	TemplateSpecifiersList[0..1] role templateSpecifiersList
+end
+
+composition xxx_CompositeComponentDefinition_compositeFormalArgumentsList between
+	CompositeComponentDefinition[*] role xxx_CompositeComponentDefinition_compositeFormalArgumentsList_src
+	FormalArgumentsList[0..1] role compositeFormalArgumentsList
+end
+
+composition xxx_CompositeComponentDefinition_annotationsList between
+	CompositeComponentDefinition[*] role xxx_CompositeComponentDefinition_annotationsList_src
+	AnnotationsList[0..1] role annotationsList
+end
+
+composition xxx_DataDefinition_fileC between
+	DataDefinition[*] role xxx_DataDefinition_fileC_src
+	FileC[0..1] role fileC
+end
+
+composition xxx_DataDefinition_inlineCcode between
+	DataDefinition[*] role xxx_DataDefinition_inlineCcode_src
+	InlineCodeC[0..1] role inlineCcode
+end
+
+association xxx_Element_parentBody between
+	Element[*] role xxx_Element_parentBody_src
+	Body[0..1] role parentBody
+end
+
+composition xxx_Element_annotationsList between
+	Element[*] role xxx_Element_annotationsList_src
+	AnnotationsList[0..1] role annotationsList
+end
+
+association xxx_ElementValue_parentAnnotationElement between
+	ElementValue[*] role xxx_ElementValue_parentAnnotationElement_src
+	AnnotationElement[0..1] role parentAnnotationElement
+end
+
+composition xxx_ElementValueArrayInitializer_values between
+	ElementValueArrayInitializer[0..1] role xxx_ElementValueArrayInitializer_values_src
+	ElementValue[*] role values
+end
+
+association xxx_FormalArgument_parentFormalArgumentsList between
+	FormalArgument[*] role xxx_FormalArgument_parentFormalArgumentsList_src
+	FormalArgumentsList[0..1] role parentFormalArgumentsList
+end
+
+composition xxx_FormalArgumentsList_formalArguments between
+	FormalArgumentsList[0..1] role xxx_FormalArgumentsList_formalArguments_src
+	FormalArgument[*] role formalArguments
+end
+
+composition xxx_ImplementationDefinition_fileC between
+	ImplementationDefinition[*] role xxx_ImplementationDefinition_fileC_src
+	FileC[0..1] role fileC
+end
+
+composition xxx_ImplementationDefinition_inlineCcode between
+	ImplementationDefinition[*] role xxx_ImplementationDefinition_inlineCcode_src
+	InlineCodeC[0..1] role inlineCcode
+end
+
+composition xxx_PrimitiveComponentDefinition_primitiveFormalArgumentsList between
+	PrimitiveComponentDefinition[*] role xxx_PrimitiveComponentDefinition_primitiveFormalArgumentsList_src
+	FormalArgumentsList[0..1] role primitiveFormalArgumentsList
+end
+
+composition xxx_PrimitiveComponentDefinition_annotationsList between
+	PrimitiveComponentDefinition[*] role xxx_PrimitiveComponentDefinition_annotationsList_src
+	AnnotationsList[0..1] role annotationsList
+end
+
+composition xxx_ReferencesList_references between
+	ReferencesList[0..1] role xxx_ReferencesList_references_src
+	ComponentReference[*] role references
+end
+
+association xxx_ReferencesList_parentComponentDefinition between
+	ReferencesList[*] role xxx_ReferencesList_parentComponentDefinition_src
+	ArchitectureDefinition[0..1] role parentComponentDefinition
+end
+
+composition xxx_SubComponentDefinition_referenceDefinition between
+	SubComponentDefinition[*] role xxx_SubComponentDefinition_referenceDefinition_src
+	ComponentReference[0..1] role referenceDefinition
+end
+
+association xxx_TemplateDefinition_parentCompositeReference between
+	TemplateDefinition[*] role xxx_TemplateDefinition_parentCompositeReference_src
+	ComponentReference[0..1] role parentCompositeReference
+end
+
+composition xxx_TemplateSpecifier_reference between
+	TemplateSpecifier[*] role xxx_TemplateSpecifier_reference_src
+	ComponentReference[0..1] role reference
+end
+
+composition xxx_TemplateSpecifiersList_templateSpecifiers between
+	TemplateSpecifiersList[0..1] role xxx_TemplateSpecifiersList_templateSpecifiers_src
+	TemplateSpecifier[*] role templateSpecifiers
+end
+

@@ -1,0 +1,56 @@
+model RelationalDBSchema
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class DataBase<NamedElement
+attributes
+	SGBDname : String
+operations
+end
+
+class Table<NamedElement
+attributes
+operations
+end
+
+class Column<NamedElement
+attributes
+	dataType : String
+	isNull : Boolean
+	defaultValue : String
+operations
+end
+
+composition xxx_DataBase_tables between
+	DataBase[0..1] role xxx_DataBase_tables_src
+	Table[*] role tables
+end
+
+association xxx_Table_database between
+	Table[*] role xxx_Table_database_src
+	DataBase[1] role database
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[*] role columns
+end
+
+association xxx_Table_key between
+	Table[0..1] role xxx_Table_key_src
+	Column[*] role key
+end
+
+association xxx_Column_owner between
+	Column[*] role xxx_Column_owner_src
+	Table[1] role owner
+end
+
+association xxx_Column_keyOf between
+	Column[*] role xxx_Column_keyOf_src
+	Table[0..1] role keyOf
+end
+

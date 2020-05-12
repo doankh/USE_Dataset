@@ -1,0 +1,92 @@
+model imperative
+class ImperativeTransformation<TransformationDefinition
+attributes
+operations
+end
+
+class MethodDefinition<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class MethodSelf<Variable
+attributes
+operations
+end
+
+class MethodParameter<Variable
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class TypedWithClass
+attributes
+operations
+end
+
+composition xxx_ImperativeTransformation_methods between
+	ImperativeTransformation[0..1] role xxx_ImperativeTransformation_methods_src
+	MethodDefinition[*] role methods
+end
+
+composition xxx_MethodDefinition_formalParameters between
+	MethodDefinition[0..1] role xxx_MethodDefinition_formalParameters_src
+	MethodParameter[*] role formalParameters
+end
+
+composition xxx_MethodDefinition_self between
+	MethodDefinition[*] role xxx_MethodDefinition_self_src
+	MethodSelf[0..1] role self
+end
+
+composition xxx_MethodDefinition_type between
+	MethodDefinition[*] role xxx_MethodDefinition_type_src
+	ClassUse[1] role type
+end
+
+composition xxx_MethodDefinition_statements between
+	MethodDefinition[0..1] role xxx_MethodDefinition_statements_src
+	Statement[*] role statements
+end
+

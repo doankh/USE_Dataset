@@ -1,0 +1,591 @@
+model ocl
+enum SimpleTypeEnum{
+default
+}
+
+enum PrePostOrBodyEnum{
+default
+}
+
+enum CollectionTypeIdentifierEnum{
+default
+}
+
+enum MessageExpKind{
+default
+}
+
+enum DotOrArrowEnum{
+default
+}
+
+abstract class CSTNode
+attributes
+	startOffset : Integer
+	endOffset : Integer
+	startToken : String
+	endToken : String
+	ast : String
+operations
+end
+
+class PackageDeclarationCS<CSTNode
+attributes
+operations
+end
+
+class PathNameCS<TypeCS
+attributes
+	sequenceOfNames : String
+operations
+end
+
+abstract class TypeCS<OCLExpressionCS
+attributes
+operations
+end
+
+abstract class OCLExpressionCS<CSTNode
+attributes
+operations
+end
+
+abstract class ContextDeclCS<CSTNode
+attributes
+operations
+end
+
+class PropertyContextCS<ContextDeclCS
+attributes
+operations
+end
+
+class SimpleNameCS<OCLExpressionCS
+attributes
+	value : String
+	type : SimpleTypeEnum
+operations
+end
+
+abstract class InitOrDerValueCS<CSTNode
+attributes
+operations
+end
+
+class ClassifierContextDeclCS<ContextDeclCS
+attributes
+operations
+end
+
+abstract class InvOrDefCS<CSTNode
+attributes
+operations
+end
+
+class OperationContextDeclCS<ContextDeclCS
+attributes
+operations
+end
+
+class OperationCS<CSTNode
+attributes
+operations
+end
+
+class VariableCS<CSTNode
+attributes
+	name : String
+operations
+end
+
+class PrePostOrBodyDeclCS<CSTNode
+attributes
+	kind : PrePostOrBodyEnum
+operations
+end
+
+class DerValueCS<InitOrDerValueCS
+attributes
+operations
+end
+
+class InitValueCS<InitOrDerValueCS
+attributes
+operations
+end
+
+class InvCS<InvOrDefCS
+attributes
+operations
+end
+
+class DefCS<InvOrDefCS
+attributes
+operations
+end
+
+class DefExpressionCS<CSTNode
+attributes
+operations
+end
+
+class VariableExpCS<OCLExpressionCS
+attributes
+operations
+end
+
+class IsMarkedPreCS<CSTNode
+attributes
+	pre_ : Boolean
+operations
+end
+
+class PrimitiveTypeCS<SimpleNameCS,TypeCS
+attributes
+operations
+end
+
+class TupleTypeCS<TypeCS
+attributes
+operations
+end
+
+class CollectionTypeCS<TypeCS
+attributes
+	collectionTypeIdentifier : CollectionTypeIdentifierEnum
+operations
+end
+
+class LetExpCS<OCLExpressionCS
+attributes
+operations
+end
+
+class IfExpCS<OCLExpressionCS
+attributes
+operations
+end
+
+class MessageExpCS<OCLExpressionCS
+attributes
+	kind : MessageExpKind
+operations
+end
+
+class OCLMessageArgCS<CSTNode
+attributes
+operations
+end
+
+abstract class LiteralExpCS<OCLExpressionCS
+attributes
+operations
+end
+
+class EnumLiteralExpCS<LiteralExpCS
+attributes
+operations
+end
+
+class CollectionLiteralExpCS<LiteralExpCS
+attributes
+	collectionType : CollectionTypeIdentifierEnum
+operations
+end
+
+class CollectionLiteralPartCS<CSTNode
+attributes
+operations
+end
+
+class TupleLiteralExpCS<LiteralExpCS
+attributes
+operations
+end
+
+class PrimitiveLiteralExpCS<LiteralExpCS
+attributes
+	symbol : String
+operations
+end
+
+class IntegerLiteralExpCS<PrimitiveLiteralExpCS
+attributes
+	integerSymbol : Integer
+operations
+end
+
+class UnlimitedNaturalLiteralExpCS<PrimitiveLiteralExpCS
+attributes
+	integerSymbol : Integer
+operations
+end
+
+class RealLiteralExpCS<PrimitiveLiteralExpCS
+attributes
+	realSymbol : String
+operations
+end
+
+class StringLiteralExpCS<PrimitiveLiteralExpCS
+attributes
+	stringSymbol : String
+	unescapedStringSymbol : String
+operations
+end
+
+class BooleanLiteralExpCS<PrimitiveLiteralExpCS
+attributes
+	booleanSymbol : String
+operations
+end
+
+class NullLiteralExpCS<LiteralExpCS
+attributes
+	symbol : String
+operations
+end
+
+class InvalidLiteralExpCS<LiteralExpCS
+attributes
+	symbol : String
+operations
+end
+
+class CollectionRangeCS<CollectionLiteralPartCS
+attributes
+operations
+end
+
+class CallExpCS<OCLExpressionCS
+attributes
+	accessor : DotOrArrowEnum
+operations
+end
+
+class LoopExpCS<CallExpCS
+attributes
+operations
+end
+
+class IteratorExpCS<LoopExpCS
+attributes
+operations
+end
+
+class IterateExpCS<LoopExpCS
+attributes
+operations
+end
+
+class FeatureCallExpCS<CallExpCS
+attributes
+operations
+end
+
+class OperationCallExpCS<FeatureCallExpCS
+attributes
+operations
+end
+
+class StateExpCS<TypeCS
+attributes
+	sequenceOfNames : String
+operations
+end
+
+class OCLDocumentCS<CSTNode
+attributes
+operations
+end
+
+composition xxx_PackageDeclarationCS_pathNameCS between
+	PackageDeclarationCS[*] role xxx_PackageDeclarationCS_pathNameCS_src
+	PathNameCS[0..1] role pathNameCS
+end
+
+composition xxx_PackageDeclarationCS_contextDecls between
+	PackageDeclarationCS[0..1] role xxx_PackageDeclarationCS_contextDecls_src
+	ContextDeclCS[*] role contextDecls
+end
+
+association xxx_PackageDeclarationCS_packageDeclarationCS between
+	PackageDeclarationCS[*] role xxx_PackageDeclarationCS_packageDeclarationCS_src
+	PackageDeclarationCS[0..1] role packageDeclarationCS
+end
+
+composition xxx_PropertyContextCS_pathNameCS between
+	PropertyContextCS[*] role xxx_PropertyContextCS_pathNameCS_src
+	PathNameCS[0..1] role pathNameCS
+end
+
+composition xxx_PropertyContextCS_simpleNameCS between
+	PropertyContextCS[*] role xxx_PropertyContextCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_PropertyContextCS_typeCS between
+	PropertyContextCS[*] role xxx_PropertyContextCS_typeCS_src
+	TypeCS[0..1] role typeCS
+end
+
+composition xxx_PropertyContextCS_initOrDerValueCS between
+	PropertyContextCS[*] role xxx_PropertyContextCS_initOrDerValueCS_src
+	InitOrDerValueCS[0..1] role initOrDerValueCS
+end
+
+composition xxx_InitOrDerValueCS_initOrDerValueCS between
+	InitOrDerValueCS[*] role xxx_InitOrDerValueCS_initOrDerValueCS_src
+	InitOrDerValueCS[0..1] role initOrDerValueCS
+end
+
+composition xxx_InitOrDerValueCS_expressionCS between
+	InitOrDerValueCS[*] role xxx_InitOrDerValueCS_expressionCS_src
+	OCLExpressionCS[0..1] role expressionCS
+end
+
+composition xxx_ClassifierContextDeclCS_pathNameCS between
+	ClassifierContextDeclCS[*] role xxx_ClassifierContextDeclCS_pathNameCS_src
+	PathNameCS[0..1] role pathNameCS
+end
+
+association xxx_ClassifierContextDeclCS_invOrDefCS between
+	ClassifierContextDeclCS[*] role xxx_ClassifierContextDeclCS_invOrDefCS_src
+	InvOrDefCS[0..1] role invOrDefCS
+end
+
+composition xxx_ClassifierContextDeclCS_constraints_ between
+	ClassifierContextDeclCS[0..1] role xxx_ClassifierContextDeclCS_constraints__src
+	InvOrDefCS[*] role constraints_
+end
+
+composition xxx_InvOrDefCS_simpleNameCS between
+	InvOrDefCS[*] role xxx_InvOrDefCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+association xxx_InvOrDefCS_invOrDefCS between
+	InvOrDefCS[*] role xxx_InvOrDefCS_invOrDefCS_src
+	InvOrDefCS[0..1] role invOrDefCS
+end
+
+composition xxx_OperationContextDeclCS_operationCS between
+	OperationContextDeclCS[*] role xxx_OperationContextDeclCS_operationCS_src
+	OperationCS[0..1] role operationCS
+end
+
+composition xxx_OperationContextDeclCS_prePostOrBodyDecls between
+	OperationContextDeclCS[0..1] role xxx_OperationContextDeclCS_prePostOrBodyDecls_src
+	PrePostOrBodyDeclCS[1..*] role prePostOrBodyDecls
+end
+
+composition xxx_OperationCS_pathNameCS between
+	OperationCS[*] role xxx_OperationCS_pathNameCS_src
+	PathNameCS[0..1] role pathNameCS
+end
+
+composition xxx_OperationCS_simpleNameCS between
+	OperationCS[*] role xxx_OperationCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_OperationCS_parameters between
+	OperationCS[0..1] role xxx_OperationCS_parameters_src
+	VariableCS[*] role parameters
+end
+
+composition xxx_OperationCS_typeCS between
+	OperationCS[*] role xxx_OperationCS_typeCS_src
+	TypeCS[0..1] role typeCS
+end
+
+composition xxx_VariableCS_typeCS between
+	VariableCS[*] role xxx_VariableCS_typeCS_src
+	TypeCS[0..1] role typeCS
+end
+
+composition xxx_VariableCS_initExpression between
+	VariableCS[*] role xxx_VariableCS_initExpression_src
+	OCLExpressionCS[0..1] role initExpression
+end
+
+composition xxx_PrePostOrBodyDeclCS_simpleNameCS between
+	PrePostOrBodyDeclCS[*] role xxx_PrePostOrBodyDeclCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_PrePostOrBodyDeclCS_expressionCS between
+	PrePostOrBodyDeclCS[*] role xxx_PrePostOrBodyDeclCS_expressionCS_src
+	OCLExpressionCS[0..1] role expressionCS
+end
+
+composition xxx_InvCS_expressionCS between
+	InvCS[*] role xxx_InvCS_expressionCS_src
+	OCLExpressionCS[0..1] role expressionCS
+end
+
+composition xxx_DefCS_defExpressionCS between
+	DefCS[*] role xxx_DefCS_defExpressionCS_src
+	DefExpressionCS[0..1] role defExpressionCS
+end
+
+composition xxx_DefExpressionCS_operationCS between
+	DefExpressionCS[*] role xxx_DefExpressionCS_operationCS_src
+	OperationCS[0..1] role operationCS
+end
+
+composition xxx_DefExpressionCS_variableCS between
+	DefExpressionCS[*] role xxx_DefExpressionCS_variableCS_src
+	VariableCS[0..1] role variableCS
+end
+
+composition xxx_DefExpressionCS_expressionCS between
+	DefExpressionCS[*] role xxx_DefExpressionCS_expressionCS_src
+	OCLExpressionCS[0..1] role expressionCS
+end
+
+composition xxx_VariableExpCS_arguments between
+	VariableExpCS[0..1] role xxx_VariableExpCS_arguments_src
+	OCLExpressionCS[*] role arguments
+end
+
+composition xxx_VariableExpCS_simpleNameCS between
+	VariableExpCS[*] role xxx_VariableExpCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_VariableExpCS_isMarkedPreCS between
+	VariableExpCS[*] role xxx_VariableExpCS_isMarkedPreCS_src
+	IsMarkedPreCS[0..1] role isMarkedPreCS
+end
+
+composition xxx_TupleTypeCS_variables between
+	TupleTypeCS[0..1] role xxx_TupleTypeCS_variables_src
+	VariableCS[1..*] role variables
+end
+
+composition xxx_CollectionTypeCS_typeCS between
+	CollectionTypeCS[*] role xxx_CollectionTypeCS_typeCS_src
+	TypeCS[0..1] role typeCS
+end
+
+composition xxx_LetExpCS_variables between
+	LetExpCS[0..1] role xxx_LetExpCS_variables_src
+	VariableCS[1..*] role variables
+end
+
+composition xxx_LetExpCS_inExpression between
+	LetExpCS[*] role xxx_LetExpCS_inExpression_src
+	OCLExpressionCS[0..1] role inExpression
+end
+
+composition xxx_IfExpCS_thenExpression between
+	IfExpCS[*] role xxx_IfExpCS_thenExpression_src
+	OCLExpressionCS[1] role thenExpression
+end
+
+composition xxx_IfExpCS_elseExpression between
+	IfExpCS[*] role xxx_IfExpCS_elseExpression_src
+	OCLExpressionCS[1] role elseExpression
+end
+
+composition xxx_IfExpCS_condition between
+	IfExpCS[*] role xxx_IfExpCS_condition_src
+	OCLExpressionCS[1] role condition
+end
+
+composition xxx_MessageExpCS_target between
+	MessageExpCS[*] role xxx_MessageExpCS_target_src
+	OCLExpressionCS[0..1] role target
+end
+
+composition xxx_MessageExpCS_simpleNameCS between
+	MessageExpCS[*] role xxx_MessageExpCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_MessageExpCS_arguments between
+	MessageExpCS[0..1] role xxx_MessageExpCS_arguments_src
+	OCLMessageArgCS[*] role arguments
+end
+
+composition xxx_OCLMessageArgCS_typeCS between
+	OCLMessageArgCS[*] role xxx_OCLMessageArgCS_typeCS_src
+	TypeCS[0..1] role typeCS
+end
+
+composition xxx_OCLMessageArgCS_expression between
+	OCLMessageArgCS[*] role xxx_OCLMessageArgCS_expression_src
+	OCLExpressionCS[0..1] role expression
+end
+
+composition xxx_EnumLiteralExpCS_pathNameCS between
+	EnumLiteralExpCS[*] role xxx_EnumLiteralExpCS_pathNameCS_src
+	PathNameCS[0..1] role pathNameCS
+end
+
+composition xxx_EnumLiteralExpCS_simpleNameCS between
+	EnumLiteralExpCS[*] role xxx_EnumLiteralExpCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_CollectionLiteralExpCS_collectionLiteralParts between
+	CollectionLiteralExpCS[0..1] role xxx_CollectionLiteralExpCS_collectionLiteralParts_src
+	CollectionLiteralPartCS[*] role collectionLiteralParts
+end
+
+composition xxx_CollectionLiteralPartCS_expressionCS between
+	CollectionLiteralPartCS[*] role xxx_CollectionLiteralPartCS_expressionCS_src
+	OCLExpressionCS[0..1] role expressionCS
+end
+
+composition xxx_TupleLiteralExpCS_variables between
+	TupleLiteralExpCS[0..1] role xxx_TupleLiteralExpCS_variables_src
+	VariableCS[*] role variables
+end
+
+composition xxx_CollectionRangeCS_lastExpressionCS between
+	CollectionRangeCS[*] role xxx_CollectionRangeCS_lastExpressionCS_src
+	OCLExpressionCS[0..1] role lastExpressionCS
+end
+
+composition xxx_CallExpCS_source between
+	CallExpCS[*] role xxx_CallExpCS_source_src
+	OCLExpressionCS[0..1] role source
+end
+
+composition xxx_CallExpCS_simpleNameCS between
+	CallExpCS[*] role xxx_CallExpCS_simpleNameCS_src
+	SimpleNameCS[0..1] role simpleNameCS
+end
+
+composition xxx_LoopExpCS_variable1 between
+	LoopExpCS[*] role xxx_LoopExpCS_variable1_src
+	VariableCS[0..1] role variable1
+end
+
+composition xxx_LoopExpCS_variable2 between
+	LoopExpCS[*] role xxx_LoopExpCS_variable2_src
+	VariableCS[0..1] role variable2
+end
+
+composition xxx_LoopExpCS_body between
+	LoopExpCS[*] role xxx_LoopExpCS_body_src
+	OCLExpressionCS[0..1] role body
+end
+
+composition xxx_FeatureCallExpCS_arguments between
+	FeatureCallExpCS[0..1] role xxx_FeatureCallExpCS_arguments_src
+	OCLExpressionCS[*] role arguments
+end
+
+composition xxx_FeatureCallExpCS_isMarkedPreCS between
+	FeatureCallExpCS[*] role xxx_FeatureCallExpCS_isMarkedPreCS_src
+	IsMarkedPreCS[0..1] role isMarkedPreCS
+end
+
+composition xxx_OCLDocumentCS_packageDeclarations between
+	OCLDocumentCS[0..1] role xxx_OCLDocumentCS_packageDeclarations_src
+	PackageDeclarationCS[*] role packageDeclarations
+end
+

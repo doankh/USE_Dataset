@@ -1,0 +1,236 @@
+model dgs
+class Dgs
+attributes
+	comment : String
+operations
+end
+
+class Header
+attributes
+	magic : String
+	name : String
+	numberOfSteps : Integer
+	numberOfEvents : Integer
+operations
+end
+
+class Event
+attributes
+	cl : String
+	comment : String
+operations
+end
+
+class An
+attributes
+	idNode : String
+operations
+end
+
+class Cn
+attributes
+	idNode : String
+operations
+end
+
+class Dn
+attributes
+	idNode : String
+operations
+end
+
+class Ae
+attributes
+	idEdge : String
+	idNode1 : String
+	direction : String
+	idNode2 : String
+operations
+end
+
+class Ce
+attributes
+	idEdge : String
+operations
+end
+
+class De
+attributes
+	idEdge : String
+operations
+end
+
+class Cg
+attributes
+operations
+end
+
+class St
+attributes
+	real : Real
+operations
+end
+
+class Attributes
+attributes
+operations
+end
+
+class Attribute
+attributes
+	operator : String
+	idAttribute : String
+	assign : String
+operations
+end
+
+class Value
+attributes
+	string : String
+	real : Real
+	int : Integer
+operations
+end
+
+class Array
+attributes
+operations
+end
+
+class Map
+attributes
+operations
+end
+
+class Mapping
+attributes
+	id : String
+	assign : String
+operations
+end
+
+composition xxx_Dgs_header between
+	Dgs[*] role xxx_Dgs_header_src
+	Header[0..1] role header
+end
+
+composition xxx_Dgs_event between
+	Dgs[0..1] role xxx_Dgs_event_src
+	Event[*] role event
+end
+
+composition xxx_Event_an between
+	Event[*] role xxx_Event_an_src
+	An[0..1] role an
+end
+
+composition xxx_Event_cn between
+	Event[*] role xxx_Event_cn_src
+	Cn[0..1] role cn
+end
+
+composition xxx_Event_dn between
+	Event[*] role xxx_Event_dn_src
+	Dn[0..1] role dn
+end
+
+composition xxx_Event_ae between
+	Event[*] role xxx_Event_ae_src
+	Ae[0..1] role ae
+end
+
+composition xxx_Event_ce between
+	Event[*] role xxx_Event_ce_src
+	Ce[0..1] role ce
+end
+
+composition xxx_Event_de between
+	Event[*] role xxx_Event_de_src
+	De[0..1] role de
+end
+
+composition xxx_Event_cg between
+	Event[*] role xxx_Event_cg_src
+	Cg[0..1] role cg
+end
+
+composition xxx_Event_st between
+	Event[*] role xxx_Event_st_src
+	St[0..1] role st
+end
+
+composition xxx_An_attributes_ between
+	An[*] role xxx_An_attributes__src
+	Attributes[0..1] role attributes_
+end
+
+composition xxx_Cn_attributes_ between
+	Cn[*] role xxx_Cn_attributes__src
+	Attributes[0..1] role attributes_
+end
+
+composition xxx_Ae_attributes_ between
+	Ae[*] role xxx_Ae_attributes__src
+	Attributes[0..1] role attributes_
+end
+
+composition xxx_Ce_attributes_ between
+	Ce[*] role xxx_Ce_attributes__src
+	Attributes[0..1] role attributes_
+end
+
+composition xxx_Cg_attributes_ between
+	Cg[*] role xxx_Cg_attributes__src
+	Attributes[0..1] role attributes_
+end
+
+composition xxx_Attributes_attribute between
+	Attributes[0..1] role xxx_Attributes_attribute_src
+	Attribute[*] role attribute
+end
+
+composition xxx_Attribute_value between
+	Attribute[*] role xxx_Attribute_value_src
+	Value[0..1] role value
+end
+
+composition xxx_Attribute_otherValues between
+	Attribute[0..1] role xxx_Attribute_otherValues_src
+	Value[*] role otherValues
+end
+
+composition xxx_Value_array between
+	Value[*] role xxx_Value_array_src
+	Array[0..1] role array
+end
+
+composition xxx_Value_map between
+	Value[*] role xxx_Value_map_src
+	Map[0..1] role map
+end
+
+composition xxx_Array_value between
+	Array[*] role xxx_Array_value_src
+	Value[0..1] role value
+end
+
+composition xxx_Array_otherValues between
+	Array[0..1] role xxx_Array_otherValues_src
+	Value[*] role otherValues
+end
+
+composition xxx_Map_mapping between
+	Map[*] role xxx_Map_mapping_src
+	Mapping[0..1] role mapping
+end
+
+composition xxx_Map_otherMapping between
+	Map[0..1] role xxx_Map_otherMapping_src
+	Mapping[*] role otherMapping
+end
+
+composition xxx_Mapping_value between
+	Mapping[*] role xxx_Mapping_value_src
+	Value[0..1] role value
+end
+

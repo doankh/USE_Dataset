@@ -1,0 +1,217 @@
+model ClassicModels
+abstract class AddressInfo
+attributes
+	phone : String
+	addressLine1 : String
+	addressLine2 : String
+	city : String
+	state : String
+	postalCode : String
+	country : String
+operations
+end
+
+class Date
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+operations
+end
+
+class ClassicModels
+attributes
+operations
+end
+
+class ProductLine
+attributes
+	name : String
+	textDescription : String
+	htmlDescription : String
+operations
+end
+
+class Product
+attributes
+	code : String
+	name : String
+	scale : String
+	vendor : String
+	description : String
+	quantityInStock : Integer
+	buyPrice : Real
+	MSRP : Real
+operations
+end
+
+class Office<AddressInfo
+attributes
+	code : String
+	territory : String
+operations
+end
+
+class Employee
+attributes
+	number : Integer
+	lastName : String
+	firstName : String
+	extension : String
+	email : String
+	jobTitle : String
+operations
+end
+
+class Customer<AddressInfo
+attributes
+	number : Integer
+	name : String
+	contactLastName : String
+	contactFirstName : String
+	creditLimit : Real
+operations
+end
+
+class Payment
+attributes
+	checkNumber : String
+	amount : Real
+operations
+end
+
+class Order
+attributes
+	number : Integer
+	status : String
+	comments : String
+operations
+end
+
+class OrderDetail
+attributes
+	quantityOrdered : Integer
+	priceEach : Real
+operations
+end
+
+composition xxx_ClassicModels_offices between
+	ClassicModels[0..1] role xxx_ClassicModels_offices_src
+	Office[*] role offices
+end
+
+composition xxx_ClassicModels_productLines between
+	ClassicModels[0..1] role xxx_ClassicModels_productLines_src
+	ProductLine[*] role productLines
+end
+
+composition xxx_ClassicModels_customers between
+	ClassicModels[0..1] role xxx_ClassicModels_customers_src
+	Customer[*] role customers
+end
+
+association xxx_ProductLine_productLineOwner between
+	ProductLine[*] role xxx_ProductLine_productLineOwner_src
+	ClassicModels[1] role productLineOwner
+end
+
+composition xxx_ProductLine_products between
+	ProductLine[0..1] role xxx_ProductLine_products_src
+	Product[*] role products
+end
+
+association xxx_Product_productLine between
+	Product[*] role xxx_Product_productLine_src
+	ProductLine[1] role productLine
+end
+
+association xxx_Office_officeOwner between
+	Office[*] role xxx_Office_officeOwner_src
+	ClassicModels[1] role officeOwner
+end
+
+composition xxx_Office_employees between
+	Office[0..1] role xxx_Office_employees_src
+	Employee[*] role employees
+end
+
+association xxx_Employee_office between
+	Employee[*] role xxx_Employee_office_src
+	Office[1] role office
+end
+
+association xxx_Employee_employeeCustomers between
+	Employee[0..1] role xxx_Employee_employeeCustomers_src
+	Customer[*] role employeeCustomers
+end
+
+association xxx_Employee_reportsTo between
+	Employee[*] role xxx_Employee_reportsTo_src
+	Employee[1] role reportsTo
+end
+
+association xxx_Customer_customerOwner between
+	Customer[*] role xxx_Customer_customerOwner_src
+	ClassicModels[1] role customerOwner
+end
+
+composition xxx_Customer_orders between
+	Customer[0..1] role xxx_Customer_orders_src
+	Order[*] role orders
+end
+
+composition xxx_Customer_payments between
+	Customer[0..1] role xxx_Customer_payments_src
+	Payment[*] role payments
+end
+
+association xxx_Customer_salesRepEmployee between
+	Customer[*] role xxx_Customer_salesRepEmployee_src
+	Employee[1] role salesRepEmployee
+end
+
+association xxx_Payment_customer between
+	Payment[*] role xxx_Payment_customer_src
+	Customer[1] role customer
+end
+
+composition xxx_Payment_date between
+	Payment[*] role xxx_Payment_date_src
+	Date[1] role date
+end
+
+association xxx_Order_customer between
+	Order[*] role xxx_Order_customer_src
+	Customer[1] role customer
+end
+
+composition xxx_Order_orderDetails between
+	Order[0..1] role xxx_Order_orderDetails_src
+	OrderDetail[*] role orderDetails
+end
+
+composition xxx_Order_date between
+	Order[*] role xxx_Order_date_src
+	Date[1] role date
+end
+
+composition xxx_Order_requiredDate between
+	Order[*] role xxx_Order_requiredDate_src
+	Date[1] role requiredDate
+end
+
+composition xxx_Order_shippedDate between
+	Order[*] role xxx_Order_shippedDate_src
+	Date[0..1] role shippedDate
+end
+
+association xxx_OrderDetail_order between
+	OrderDetail[*] role xxx_OrderDetail_order_src
+	Order[1] role order
+end
+
+association xxx_OrderDetail_product between
+	OrderDetail[*] role xxx_OrderDetail_product_src
+	Product[1] role product
+end
+

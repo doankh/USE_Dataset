@@ -1,0 +1,60 @@
+model expression
+class IncludingExpression<SubExpression
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class ExpressionList
+attributes
+operations
+end
+
+class StringExpression<SubExpression2
+attributes
+	value : String
+operations
+end
+
+class BooleanExpression<SubExpression
+attributes
+	value : Boolean
+operations
+end
+
+class NegativeIntExpression<SubExpression2
+attributes
+	value : Integer
+	isNegative : Boolean
+operations
+end
+
+abstract class SubExpression<Expression
+attributes
+operations
+end
+
+class SubExpression2<Expression
+attributes
+operations
+end
+
+association xxx_IncludingExpression_argument between
+	IncludingExpression[*] role xxx_IncludingExpression_argument_src
+	Expression[1] role argument
+end
+
+association xxx_IncludingExpression_source between
+	IncludingExpression[*] role xxx_IncludingExpression_source_src
+	Expression[1] role source
+end
+
+association xxx_ExpressionList_elements between
+	ExpressionList[0..1] role xxx_ExpressionList_elements_src
+	Expression[*] role elements
+end
+

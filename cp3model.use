@@ -1,0 +1,89 @@
+model cp3model
+class CP3Dep
+attributes
+	type : Integer
+operations
+end
+
+class CP3Repo
+attributes
+operations
+end
+
+class CP3Project<CP3AbstractItem
+attributes
+operations
+end
+
+class CP3Class<CP3AbstractItem
+attributes
+operations
+end
+
+abstract class CP3AbstractItem
+attributes
+	id : Integer
+	name : String
+operations
+end
+
+class CP3Method<CP3AbstractItem
+attributes
+operations
+end
+
+class CP3Field<CP3AbstractItem
+attributes
+operations
+end
+
+association xxx_CP3Dep_from_ between
+	CP3Dep[*] role xxx_CP3Dep_from__src
+	CP3AbstractItem[1] role from_
+end
+
+association xxx_CP3Dep_to between
+	CP3Dep[*] role xxx_CP3Dep_to_src
+	CP3AbstractItem[1] role to
+end
+
+composition xxx_CP3Repo_deps between
+	CP3Repo[0..1] role xxx_CP3Repo_deps_src
+	CP3Dep[*] role deps
+end
+
+composition xxx_CP3Repo_items between
+	CP3Repo[0..1] role xxx_CP3Repo_items_src
+	CP3AbstractItem[*] role items
+end
+
+association xxx_CP3Project_classes between
+	CP3Project[0..1] role xxx_CP3Project_classes_src
+	CP3Class[*] role classes
+end
+
+association xxx_CP3Class_projects between
+	CP3Class[0..1] role xxx_CP3Class_projects_src
+	CP3Project[*] role projects
+end
+
+association xxx_CP3Class_methods between
+	CP3Class[0..1] role xxx_CP3Class_methods_src
+	CP3Method[*] role methods
+end
+
+association xxx_CP3Class_fields between
+	CP3Class[0..1] role xxx_CP3Class_fields_src
+	CP3Field[*] role fields
+end
+
+association xxx_CP3Method_classes between
+	CP3Method[0..1] role xxx_CP3Method_classes_src
+	CP3Class[*] role classes
+end
+
+association xxx_CP3Field_classes between
+	CP3Field[0..1] role xxx_CP3Field_classes_src
+	CP3Class[*] role classes
+end
+

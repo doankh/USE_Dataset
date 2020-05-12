@@ -1,0 +1,479 @@
+model Maude
+enum ImportationMode{
+	protecting,
+	including,
+	extending
+}
+
+class MaudeSpec
+attributes
+operations
+end
+
+abstract class MaudeTopEl
+attributes
+	name : String
+operations
+end
+
+abstract class ModExpression
+attributes
+operations
+end
+
+class InstModExp<ModExpression
+attributes
+operations
+end
+
+class RenModExp<ModExpression
+attributes
+operations
+end
+
+class CompModExp<ModExpression
+attributes
+operations
+end
+
+class ModuleIdModExp<ModExpression
+attributes
+operations
+end
+
+class TheoryIdModExp<ModExpression
+attributes
+operations
+end
+
+class Parameter<ModExpression
+attributes
+	label : String
+operations
+end
+
+abstract class Theory<MaudeTopEl
+attributes
+operations
+end
+
+class FTheory<Theory
+attributes
+operations
+end
+
+class STheory<Theory
+attributes
+operations
+end
+
+abstract class Module<MaudeTopEl
+attributes
+operations
+end
+
+class FModule<Module
+attributes
+operations
+end
+
+class SModule<Module
+attributes
+operations
+end
+
+abstract class ModElement
+attributes
+operations
+end
+
+class ModImportation<ModElement
+attributes
+	mode : ImportationMode
+operations
+end
+
+abstract class Type
+attributes
+	name : String
+operations
+end
+
+class Sort<ModElement
+attributes
+operations
+end
+
+class Kind<Type
+attributes
+operations
+end
+
+class SubsortRel<ModElement
+attributes
+operations
+end
+
+class Operation<ModElement
+attributes
+	name : String
+	atts : String
+operations
+end
+
+abstract class Statement<ModElement
+attributes
+	label : String
+	atts : String
+operations
+end
+
+class Membership<Statement
+attributes
+operations
+end
+
+class Equation<Statement
+attributes
+operations
+end
+
+class Rule<Statement
+attributes
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+abstract class EquationalCond<Condition
+attributes
+operations
+end
+
+class RewriteCond<Condition
+attributes
+operations
+end
+
+class MembershipCond<EquationalCond
+attributes
+operations
+end
+
+class BooleanCond<EquationalCond
+attributes
+operations
+end
+
+class MatchingCond<EquationalCond
+attributes
+operations
+end
+
+class EqualCond<EquationalCond
+attributes
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+class Constant<Term
+attributes
+	op : String
+operations
+end
+
+class RecTerm<Term
+attributes
+	op : String
+operations
+end
+
+class Variable<Term
+attributes
+	name : String
+operations
+end
+
+class View<MaudeTopEl
+attributes
+operations
+end
+
+abstract class ViewMapping
+attributes
+operations
+end
+
+abstract class RenMapping<ViewMapping
+attributes
+operations
+end
+
+class TermMapping<ViewMapping
+attributes
+operations
+end
+
+class SortMapping<RenMapping
+attributes
+	to : String
+operations
+end
+
+class OpTypedMapping<RenMapping
+attributes
+	to : String
+	atts : String
+operations
+end
+
+class OpMapping<RenMapping
+attributes
+	to : String
+operations
+end
+
+class LabelMapping<RenMapping
+attributes
+	from_ : String
+	to : String
+operations
+end
+
+composition xxx_MaudeSpec_els between
+	MaudeSpec[0..1] role xxx_MaudeSpec_els_src
+	MaudeTopEl[*] role els
+end
+
+association xxx_MaudeSpec_printableEls between
+	MaudeSpec[0..1] role xxx_MaudeSpec_printableEls_src
+	MaudeTopEl[*] role printableEls
+end
+
+composition xxx_InstModExp_modExp between
+	InstModExp[*] role xxx_InstModExp_modExp_src
+	ModExpression[1] role modExp
+end
+
+association xxx_InstModExp_views between
+	InstModExp[0..1] role xxx_InstModExp_views_src
+	View[1..*] role views
+end
+
+composition xxx_RenModExp_modExp between
+	RenModExp[*] role xxx_RenModExp_modExp_src
+	ModExpression[1] role modExp
+end
+
+composition xxx_RenModExp_renamings between
+	RenModExp[0..1] role xxx_RenModExp_renamings_src
+	RenMapping[1..*] role renamings
+end
+
+composition xxx_CompModExp_modExps between
+	CompModExp[0..1] role xxx_CompModExp_modExps_src
+	ModExpression[2..*] role modExps
+end
+
+association xxx_ModuleIdModExp_module between
+	ModuleIdModExp[*] role xxx_ModuleIdModExp_module_src
+	Module[1] role module
+end
+
+association xxx_TheoryIdModExp_theory between
+	TheoryIdModExp[*] role xxx_TheoryIdModExp_theory_src
+	Theory[1] role theory
+end
+
+composition xxx_Parameter_modExp between
+	Parameter[*] role xxx_Parameter_modExp_src
+	ModExpression[1] role modExp
+end
+
+composition xxx_Theory_els between
+	Theory[0..1] role xxx_Theory_els_src
+	ModElement[*] role els
+end
+
+composition xxx_Module_els between
+	Module[0..1] role xxx_Module_els_src
+	ModElement[*] role els
+end
+
+composition xxx_Module_params between
+	Module[0..1] role xxx_Module_params_src
+	Parameter[*] role params
+end
+
+association xxx_ModElement_module between
+	ModElement[*] role xxx_ModElement_module_src
+	Module[0..1] role module
+end
+
+association xxx_ModElement_theory between
+	ModElement[*] role xxx_ModElement_theory_src
+	Theory[0..1] role theory
+end
+
+composition xxx_ModImportation_imports between
+	ModImportation[*] role xxx_ModImportation_imports_src
+	ModExpression[1] role imports
+end
+
+association xxx_Sort_subsortRels between
+	Sort[0..1] role xxx_Sort_subsortRels_src
+	SubsortRel[*] role subsortRels
+end
+
+association xxx_Sort_supersortRels between
+	Sort[0..1] role xxx_Sort_supersortRels_src
+	SubsortRel[*] role supersortRels
+end
+
+association xxx_Sort_kind between
+	Sort[*] role xxx_Sort_kind_src
+	Kind[1] role kind
+end
+
+association xxx_Kind_sorts between
+	Kind[0..1] role xxx_Kind_sorts_src
+	Sort[1..*] role sorts
+end
+
+association xxx_SubsortRel_subsorts between
+	SubsortRel[0..1] role xxx_SubsortRel_subsorts_src
+	Sort[1..*] role subsorts
+end
+
+association xxx_SubsortRel_supersorts between
+	SubsortRel[0..1] role xxx_SubsortRel_supersorts_src
+	Sort[1..*] role supersorts
+end
+
+association xxx_Operation_coarity between
+	Operation[*] role xxx_Operation_coarity_src
+	Type[1] role coarity
+end
+
+association xxx_Operation_arity between
+	Operation[0..1] role xxx_Operation_arity_src
+	Type[*] role arity
+end
+
+composition xxx_Statement_conds between
+	Statement[0..1] role xxx_Statement_conds_src
+	Condition[*] role conds
+end
+
+composition xxx_Membership_term between
+	Membership[*] role xxx_Membership_term_src
+	Term[1] role term
+end
+
+association xxx_Membership_sort between
+	Membership[*] role xxx_Membership_sort_src
+	Sort[1] role sort
+end
+
+composition xxx_Equation_lhs between
+	Equation[*] role xxx_Equation_lhs_src
+	Term[1] role lhs
+end
+
+composition xxx_Equation_rhs between
+	Equation[*] role xxx_Equation_rhs_src
+	Term[1] role rhs
+end
+
+composition xxx_Rule_lhs between
+	Rule[*] role xxx_Rule_lhs_src
+	Term[0..1] role lhs
+end
+
+composition xxx_Rule_rhs between
+	Rule[*] role xxx_Rule_rhs_src
+	Term[0..1] role rhs
+end
+
+composition xxx_Condition_lhs between
+	Condition[*] role xxx_Condition_lhs_src
+	Term[1] role lhs
+end
+
+composition xxx_RewriteCond_rhs between
+	RewriteCond[*] role xxx_RewriteCond_rhs_src
+	Term[1] role rhs
+end
+
+association xxx_MembershipCond_rhs between
+	MembershipCond[*] role xxx_MembershipCond_rhs_src
+	Sort[1] role rhs
+end
+
+composition xxx_MatchingCond_rhs between
+	MatchingCond[*] role xxx_MatchingCond_rhs_src
+	Term[1] role rhs
+end
+
+composition xxx_EqualCond_rhs between
+	EqualCond[*] role xxx_EqualCond_rhs_src
+	Term[1] role rhs
+end
+
+association xxx_Term_type between
+	Term[*] role xxx_Term_type_src
+	Type[1] role type
+end
+
+composition xxx_RecTerm_args between
+	RecTerm[0..1] role xxx_RecTerm_args_src
+	Term[1..*] role args
+end
+
+composition xxx_View_from_ between
+	View[*] role xxx_View_from__src
+	ModExpression[1] role from_
+end
+
+composition xxx_View_to between
+	View[*] role xxx_View_to_src
+	ModExpression[1] role to
+end
+
+composition xxx_View_els between
+	View[0..1] role xxx_View_els_src
+	ViewMapping[*] role els
+end
+
+composition xxx_TermMapping_from_ between
+	TermMapping[*] role xxx_TermMapping_from__src
+	Term[1] role from_
+end
+
+composition xxx_TermMapping_to between
+	TermMapping[*] role xxx_TermMapping_to_src
+	Term[1] role to
+end
+
+association xxx_SortMapping_from_ between
+	SortMapping[*] role xxx_SortMapping_from__src
+	Sort[1] role from_
+end
+
+association xxx_OpTypedMapping_from_ between
+	OpTypedMapping[*] role xxx_OpTypedMapping_from__src
+	Operation[1] role from_
+end
+
+association xxx_OpMapping_from_ between
+	OpMapping[*] role xxx_OpMapping_from__src
+	Operation[1] role from_
+end
+

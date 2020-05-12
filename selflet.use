@@ -1,0 +1,378 @@
+model selflet
+enum Mode{
+default
+}
+
+enum Type{
+default
+}
+
+class Abilities
+attributes
+operations
+end
+
+class Ability
+attributes
+	service : String
+	file : String
+operations
+end
+
+class Actions
+attributes
+operations
+end
+
+class Action
+attributes
+	file : String
+operations
+end
+
+class Active
+attributes
+	mainService : String
+operations
+end
+
+class Behavior
+attributes
+	elementaryBehaviorCost : Real
+	elementaryBehaviorCPUTime : Real
+	fileName : String
+	isDefaultBehavior : Boolean
+	name : String
+operations
+end
+
+class Conditions
+attributes
+operations
+end
+
+class Condition
+attributes
+	file : String
+operations
+end
+
+class CPUUtilization
+attributes
+	lowerBound : Real
+	upperBound : Real
+operations
+end
+
+class Empty
+attributes
+operations
+end
+
+class GeneralKnowledge
+attributes
+operations
+end
+
+class Input
+attributes
+operations
+end
+
+class Method
+attributes
+	paramType : String
+	name : String
+operations
+end
+
+class Methods
+attributes
+operations
+end
+
+class OfferMode
+attributes
+	mode : Mode
+operations
+end
+
+class Output
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	type : String
+operations
+end
+
+class Reds
+attributes
+	ipAddress : String
+	port : String
+operations
+end
+
+class Rules
+attributes
+operations
+end
+
+class Rule
+attributes
+	file : String
+operations
+end
+
+class Selflet
+attributes
+	name : String
+operations
+end
+
+class SelfletProperties
+attributes
+	author : String
+	description : String
+	limePort : String
+	enableOptimizationPolicy : Boolean
+	enableCloudOptimizationPolicy : Boolean
+operations
+end
+
+class SelfLetProperty
+attributes
+	name : String
+	type : Type
+	value : String
+operations
+end
+
+class SelfletResources
+attributes
+operations
+end
+
+class Services
+attributes
+operations
+end
+
+class Service
+attributes
+	active : Boolean
+	revenue : String
+	maxResponseTime : Real
+	name : String
+operations
+end
+
+class TypeKnowledge
+attributes
+operations
+end
+
+class ElementaryBehavior<Behavior
+attributes
+operations
+end
+
+class ComplexBehavior<Behavior
+attributes
+operations
+end
+
+class State
+attributes
+	name : String
+operations
+end
+
+class InitialState<State
+attributes
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class AbilityState<State
+attributes
+operations
+end
+
+class IntermediateState<State
+attributes
+operations
+end
+
+composition xxx_Abilities_ability between
+	Abilities[0..1] role xxx_Abilities_ability_src
+	Ability[*] role ability
+end
+
+composition xxx_Ability_methods between
+	Ability[*] role xxx_Ability_methods_src
+	Methods[1] role methods
+end
+
+composition xxx_Actions_action between
+	Actions[0..1] role xxx_Actions_action_src
+	Action[*] role action
+end
+
+composition xxx_Behavior_implements between
+	Behavior[*] role xxx_Behavior_implements_src
+	Service[1] role implements
+end
+
+composition xxx_Conditions_condition between
+	Conditions[0..1] role xxx_Conditions_condition_src
+	Condition[*] role condition
+end
+
+composition xxx_GeneralKnowledge_selfLetProperty between
+	GeneralKnowledge[0..1] role xxx_GeneralKnowledge_selfLetProperty_src
+	SelfLetProperty[1..*] role selfLetProperty
+end
+
+composition xxx_Input_parameter between
+	Input[0..1] role xxx_Input_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_Methods_method between
+	Methods[0..1] role xxx_Methods_method_src
+	Method[*] role method
+end
+
+composition xxx_Output_parameter between
+	Output[*] role xxx_Output_parameter_src
+	Parameter[1] role parameter
+end
+
+composition xxx_Rules_rule between
+	Rules[0..1] role xxx_Rules_rule_src
+	Rule[*] role rule
+end
+
+composition xxx_Selflet_selfletProperties between
+	Selflet[*] role xxx_Selflet_selfletProperties_src
+	SelfletProperties[1] role selfletProperties
+end
+
+composition xxx_Selflet_selfletResources between
+	Selflet[*] role xxx_Selflet_selfletResources_src
+	SelfletResources[1] role selfletResources
+end
+
+composition xxx_SelfletProperties_passive between
+	SelfletProperties[*] role xxx_SelfletProperties_passive_src
+	Empty[0..1] role passive
+end
+
+composition xxx_SelfletProperties_active between
+	SelfletProperties[*] role xxx_SelfletProperties_active_src
+	Active[0..1] role active
+end
+
+composition xxx_SelfletProperties_reds between
+	SelfletProperties[*] role xxx_SelfletProperties_reds_src
+	Reds[1] role reds
+end
+
+composition xxx_SelfletProperties_generalknowledge between
+	SelfletProperties[*] role xxx_SelfletProperties_generalknowledge_src
+	GeneralKnowledge[0..1] role generalknowledge
+end
+
+composition xxx_SelfletProperties_typeKnowledge between
+	SelfletProperties[*] role xxx_SelfletProperties_typeKnowledge_src
+	TypeKnowledge[0..1] role typeKnowledge
+end
+
+composition xxx_SelfletResources_abilities between
+	SelfletResources[*] role xxx_SelfletResources_abilities_src
+	Abilities[1] role abilities
+end
+
+composition xxx_SelfletResources_actions between
+	SelfletResources[*] role xxx_SelfletResources_actions_src
+	Actions[1] role actions
+end
+
+composition xxx_SelfletResources_conditions between
+	SelfletResources[*] role xxx_SelfletResources_conditions_src
+	Conditions[1] role conditions
+end
+
+composition xxx_SelfletResources_services between
+	SelfletResources[*] role xxx_SelfletResources_services_src
+	Services[1] role services
+end
+
+composition xxx_SelfletResources_rules between
+	SelfletResources[*] role xxx_SelfletResources_rules_src
+	Rules[1] role rules
+end
+
+composition xxx_Services_service between
+	Services[0..1] role xxx_Services_service_src
+	Service[*] role service
+end
+
+composition xxx_Service_input between
+	Service[*] role xxx_Service_input_src
+	Input[1] role input
+end
+
+composition xxx_Service_output between
+	Service[*] role xxx_Service_output_src
+	Output[1] role output
+end
+
+composition xxx_Service_offermode between
+	Service[*] role xxx_Service_offermode_src
+	OfferMode[1] role offermode
+end
+
+composition xxx_Service_implementations between
+	Service[0..1] role xxx_Service_implementations_src
+	Behavior[*] role implementations
+end
+
+composition xxx_TypeKnowledge_selfLetProperty between
+	TypeKnowledge[0..1] role xxx_TypeKnowledge_selfLetProperty_src
+	SelfLetProperty[1..*] role selfLetProperty
+end
+
+composition xxx_ElementaryBehavior_states_ between
+	ElementaryBehavior[*] role xxx_ElementaryBehavior_states__src
+	State[3] role states_
+end
+
+composition xxx_ComplexBehavior_states_ between
+	ComplexBehavior[0..1] role xxx_ComplexBehavior_states__src
+	State[3..*] role states_
+end
+
+association xxx_State_next between
+	State[0..1] role xxx_State_next_src
+	State[*] role next
+end
+
+association xxx_AbilityState_do between
+	AbilityState[*] role xxx_AbilityState_do_src
+	Action[1] role do_
+end
+
+association xxx_IntermediateState_invoke between
+	IntermediateState[*] role xxx_IntermediateState_invoke_src
+	Service[0..1] role invoke
+end
+

@@ -1,0 +1,130 @@
+model XAML
+abstract class Transformation
+attributes
+operations
+end
+
+abstract class WinFXElement
+attributes
+operations
+end
+
+class NameSpace
+attributes
+	namespace : String
+	identifier : String
+operations
+end
+
+class ResourceGroup
+attributes
+operations
+end
+
+abstract class Material
+attributes
+operations
+end
+
+class Key<WinFXElement
+attributes
+	name : String
+operations
+end
+
+class ResourceDictionary
+attributes
+operations
+end
+
+class Transform3DGroup<ResourceGroup
+attributes
+operations
+end
+
+class MaterialGroup<ResourceGroup
+attributes
+operations
+end
+
+class DiffuseMaterial<Material
+attributes
+	Brush : String
+operations
+end
+
+class TranslateTransform3D<Transformation
+attributes
+	OffsetX : Real
+	OffsetY : Real
+	OffsetZ : Real
+operations
+end
+
+class ScaleTransform3D<Transformation
+attributes
+	ScaleX : Real
+	ScaleY : Real
+	ScaleZ : Real
+operations
+end
+
+class RotateTransform3D<Transformation
+attributes
+	CenterX : Real
+	CenterY : Real
+operations
+end
+
+class RotateTransformat3DRotation
+attributes
+operations
+end
+
+class AxisAngleRotation3D
+attributes
+	angle : Integer
+	axis : String
+operations
+end
+
+association xxx_WinFXElement_namespace between
+	WinFXElement[*] role xxx_WinFXElement_namespace_src
+	NameSpace[1] role namespace
+end
+
+composition xxx_ResourceGroup_key between
+	ResourceGroup[*] role xxx_ResourceGroup_key_src
+	Key[1] role key
+end
+
+composition xxx_ResourceDictionary_resourcegroups between
+	ResourceDictionary[0..1] role xxx_ResourceDictionary_resourcegroups_src
+	ResourceGroup[*] role resourcegroups
+end
+
+composition xxx_ResourceDictionary_xmlns between
+	ResourceDictionary[0..1] role xxx_ResourceDictionary_xmlns_src
+	NameSpace[*] role xmlns
+end
+
+composition xxx_Transform3DGroup_transformations between
+	Transform3DGroup[0..1] role xxx_Transform3DGroup_transformations_src
+	Transformation[*] role transformations
+end
+
+composition xxx_MaterialGroup_materials between
+	MaterialGroup[0..1] role xxx_MaterialGroup_materials_src
+	Material[*] role materials
+end
+
+composition xxx_RotateTransform3D_rotation between
+	RotateTransform3D[*] role xxx_RotateTransform3D_rotation_src
+	RotateTransformat3DRotation[1] role rotation
+end
+
+composition xxx_RotateTransformat3DRotation_axisAngleRotation3D between
+	RotateTransformat3DRotation[*] role xxx_RotateTransformat3DRotation_axisAngleRotation3D_src
+	AxisAngleRotation3D[1] role axisAngleRotation3D
+end
+

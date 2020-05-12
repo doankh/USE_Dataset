@@ -1,0 +1,83 @@
+model PrimitiveTypes
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class DataBase<NamedElement
+attributes
+operations
+end
+
+class Table<NamedElement
+attributes
+operations
+end
+
+class Column<NamedElement
+attributes
+	type : String
+	isPrimaryKey : Boolean
+	isNull : Boolean
+	defaultValue : String
+	comment : String
+operations
+end
+
+class IntegerColumn<Column
+attributes
+	isAutoIncrement : Boolean
+operations
+end
+
+class EnumColumn<Column
+attributes
+operations
+end
+
+class EnumSet
+attributes
+operations
+end
+
+class EnumItem<NamedElement
+attributes
+operations
+end
+
+composition xxx_DataBase_tables between
+	DataBase[0..1] role xxx_DataBase_tables_src
+	Table[*] role tables
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[*] role columns
+end
+
+association xxx_Table_database between
+	Table[*] role xxx_Table_database_src
+	DataBase[1] role database
+end
+
+association xxx_Column_table between
+	Column[*] role xxx_Column_table_src
+	Table[1] role table
+end
+
+composition xxx_EnumColumn_enumSet between
+	EnumColumn[*] role xxx_EnumColumn_enumSet_src
+	EnumSet[1] role enumSet
+end
+
+composition xxx_EnumSet_enumItems between
+	EnumSet[0..1] role xxx_EnumSet_enumItems_src
+	EnumItem[*] role enumItems
+end
+
+association xxx_EnumItem_enumSet between
+	EnumItem[*] role xxx_EnumItem_enumSet_src
+	EnumSet[1] role enumSet
+end
+

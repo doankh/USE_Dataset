@@ -1,0 +1,124 @@
+model rss
+class RSSModel
+attributes
+operations
+end
+
+class Pipe
+attributes
+	id : Integer
+operations
+end
+
+abstract class Block
+attributes
+operations
+end
+
+class Layout
+attributes
+	rows : Integer
+	columns : Integer
+	theme : String
+operations
+end
+
+class Sort<Block
+attributes
+	orderType : String
+	orderDirection : String
+operations
+end
+
+class Filter<Block
+attributes
+	fromDate : String
+	toDate : String
+	text : String
+operations
+	formattedFromDateString():String
+	formattedToDateString():String
+end
+
+class Source
+attributes
+	name : String
+	url : String
+operations
+end
+
+class PresentationCell
+attributes
+	row : Integer
+	column : Integer
+	theme : String
+operations
+end
+
+class InTerminal
+attributes
+	id : Integer
+operations
+end
+
+class OutTerminal
+attributes
+	id : Integer
+operations
+end
+
+composition xxx_RSSModel_pipes between
+	RSSModel[0..1] role xxx_RSSModel_pipes_src
+	Pipe[1..*] role pipes
+end
+
+composition xxx_RSSModel_sources between
+	RSSModel[0..1] role xxx_RSSModel_sources_src
+	Source[1..*] role sources
+end
+
+composition xxx_RSSModel_presentation between
+	RSSModel[*] role xxx_RSSModel_presentation_src
+	Layout[1] role presentation
+end
+
+composition xxx_RSSModel_blocks between
+	RSSModel[0..1] role xxx_RSSModel_blocks_src
+	Block[*] role blocks
+end
+
+association xxx_Pipe_target between
+	Pipe[*] role xxx_Pipe_target_src
+	InTerminal[1] role target
+end
+
+association xxx_Pipe_src between
+	Pipe[*] role xxx_Pipe_src_src
+	OutTerminal[1] role src
+end
+
+composition xxx_Block_inputs between
+	Block[0..1] role xxx_Block_inputs_src
+	InTerminal[1..*] role inputs
+end
+
+composition xxx_Block_output between
+	Block[*] role xxx_Block_output_src
+	OutTerminal[1] role output
+end
+
+composition xxx_Layout_cells between
+	Layout[0..1] role xxx_Layout_cells_src
+	PresentationCell[1..*] role cells
+end
+
+composition xxx_Source_output between
+	Source[*] role xxx_Source_output_src
+	OutTerminal[1] role output
+end
+
+composition xxx_PresentationCell_inputs between
+	PresentationCell[0..1] role xxx_PresentationCell_inputs_src
+	InTerminal[1..*] role inputs
+end
+

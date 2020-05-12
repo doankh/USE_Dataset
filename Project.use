@@ -1,0 +1,86 @@
+model project
+class Integer
+attributes
+operations
+end
+
+class Person
+attributes
+operations
+end
+
+class Organization
+attributes
+operations
+end
+
+class Child<Person
+attributes
+operations
+end
+
+class Teenager<Person
+attributes
+operations
+end
+
+class Adult<Person
+attributes
+operations
+end
+
+class Student<Person
+attributes
+operations
+end
+
+class University<Organization
+attributes
+operations
+end
+
+class Enrollment
+attributes
+operations
+end
+
+association xxx_Integer_enrollments between
+	Integer[0..1] role xxx_Integer_enrollments_src
+	Enrollment[*] role enrollments
+end
+
+association xxx_Student_universities between
+	Student[0..1] role xxx_Student_universities_src
+	University[1..*] role universities
+end
+
+association xxx_Student_enrollments between
+	Student[0..1] role xxx_Student_enrollments_src
+	Enrollment[1..*] role enrollments
+end
+
+association xxx_University_students between
+	University[0..1] role xxx_University_students_src
+	Student[1..*] role students
+end
+
+association xxx_University_enrollments between
+	University[0..1] role xxx_University_enrollments_src
+	Enrollment[1..*] role enrollments
+end
+
+association xxx_Enrollment_university between
+	Enrollment[*] role xxx_Enrollment_university_src
+	University[1] role university
+end
+
+association xxx_Enrollment_student between
+	Enrollment[*] role xxx_Enrollment_student_src
+	Student[1] role student
+end
+
+association xxx_Enrollment_id between
+	Enrollment[*] role xxx_Enrollment_id_src
+	Integer[1] role id
+end
+

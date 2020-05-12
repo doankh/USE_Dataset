@@ -1,0 +1,75 @@
+model music
+enum Rating{
+default
+}
+
+class Artist
+attributes
+	id : Integer
+	version : Integer
+	firstName : String
+	lastName : String
+	birthDate : String
+operations
+end
+
+class Album
+attributes
+	id : Integer
+	version : Integer
+	name : String
+	releaseDate : String
+	ratings : Rating
+operations
+end
+
+class Country
+attributes
+	code : String
+	version : Integer
+	name : String
+operations
+end
+
+class Genre
+attributes
+	id : Integer
+	version : Integer
+	name : String
+operations
+end
+
+class Song
+attributes
+	id : Integer
+	version : Integer
+	track : Integer
+	name : String
+operations
+end
+
+association xxx_Artist_country between
+	Artist[*] role xxx_Artist_country_src
+	Country[0..1] role country
+end
+
+association xxx_Artist_genre between
+	Artist[*] role xxx_Artist_genre_src
+	Genre[0..1] role genre
+end
+
+association xxx_Album_artist between
+	Album[*] role xxx_Album_artist_src
+	Artist[0..1] role artist
+end
+
+association xxx_Album_genres between
+	Album[0..1] role xxx_Album_genres_src
+	Genre[*] role genres
+end
+
+association xxx_Album_songs between
+	Album[0..1] role xxx_Album_songs_src
+	Song[*] role songs
+end
+

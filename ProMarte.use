@@ -1,0 +1,1352 @@
+model MARTE
+enum SourceKinds{
+	est,
+	meas,
+	req,
+	implicit,
+	calc
+}
+
+enum DirectionKinds{
+	increasing,
+	decreasing,
+	undefined
+}
+
+enum StatisticalQualifierKinds{
+	max,
+	min,
+	range,
+	mean,
+	variance,
+	standardDeviation,
+	percentil,
+	frequency,
+	moment,
+	distribution,
+	instantaneous
+}
+
+enum InstantUnitKinds{
+	TAI,
+	UT0,
+	UT1,
+	UTC,
+	TT,
+	TDB,
+	TCG,
+	TCB,
+	Sideral,
+	Local
+}
+
+enum DurationUnitKinds{
+	ns,
+	us,
+	ms,
+	s,
+	min,
+	hrs,
+	dys,
+	wks,
+	mos,
+	yrs
+}
+
+enum RateUnitKinds{
+	kbs,
+	MIPS
+}
+
+enum ProbabilityUnitKinds{
+	us,
+	s
+}
+
+enum SizeUnitKinds{
+	bits,
+	bytes,
+	Mb,
+	MB
+}
+
+abstract class TimeBase
+attributes
+	name : String
+operations
+end
+
+abstract class Instant
+attributes
+	isBefore : Boolean
+operations
+end
+
+abstract class TimeValue
+attributes
+operations
+end
+
+abstract class TimeInterval
+attributes
+operations
+end
+
+abstract class Interval
+attributes
+	includingMin : Boolean
+	includingMax : Boolean
+operations
+end
+
+class SingleTimeBase<TimeBase
+attributes
+operations
+end
+
+class SingleInstant<Instant
+attributes
+operations
+end
+
+class SingleInterval<Interval
+attributes
+operations
+end
+
+class SingleTimeValue<TimeValue
+attributes
+operations
+end
+
+class SingleTimeInterval<TimeInterval
+attributes
+operations
+end
+
+class DiscreteTimeBase<TimeBase
+attributes
+operations
+end
+
+class DiscreteInstant<Instant
+attributes
+operations
+end
+
+abstract class Event
+attributes
+operations
+end
+
+abstract class EventOccurence
+attributes
+operations
+end
+
+abstract class PhysicalTime
+attributes
+operations
+end
+
+abstract class PhysicalInstant
+attributes
+operations
+end
+
+abstract class Duration
+attributes
+operations
+end
+
+class MultipleTimeBase<TimeBase
+attributes
+operations
+end
+
+class CoincidencePoint<Instant
+attributes
+operations
+end
+
+class MultipleInterval<Interval
+attributes
+operations
+end
+
+class MultipleTimeValue<TimeValue
+attributes
+operations
+end
+
+class MetricTimeValue<DiscreteTimeValue
+attributes
+operations
+end
+
+class DiscreteTimeValue<TimeValue
+attributes
+operations
+end
+
+class MetricTimeInterval<DiscreteTimeInterval
+attributes
+operations
+end
+
+class DiscreteTimeInterval<TimeInterval
+attributes
+operations
+end
+
+class SimultaneousEventOccurrence
+attributes
+operations
+end
+
+class TimedEvent
+attributes
+operations
+end
+
+class TimedEventOccurence<EventOccurence
+attributes
+operations
+end
+
+class TimedAction<Scenario
+attributes
+operations
+end
+
+class Delay<TimedAction
+attributes
+operations
+end
+
+class TimingMechanism
+attributes
+	stability : String
+	drift : String
+	skew : String
+	state : String
+operations
+end
+
+class Clock<TimingMechanism
+attributes
+operations
+end
+
+class Timer<TimingMechanism
+attributes
+	isPeriodic : Boolean
+operations
+end
+
+class TimeOut
+attributes
+operations
+end
+
+class ClockInterrupt
+attributes
+operations
+end
+
+class System
+attributes
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class AnnotatedModel<Model
+attributes
+operations
+end
+
+class ModelElement
+attributes
+operations
+end
+
+class AnnotatedModelElement<ModelElement
+attributes
+operations
+end
+
+class NFP
+attributes
+operations
+end
+
+class NFPLibrary
+attributes
+operations
+end
+
+class NFPCategory
+attributes
+operations
+end
+
+class ModelingConcern
+attributes
+operations
+end
+
+class AnalysisConcern<ModelingConcern
+attributes
+operations
+end
+
+class DesignConcern<ModelingConcern
+attributes
+operations
+end
+
+class Quantity
+attributes
+operations
+end
+
+class BasicQuantity
+attributes
+operations
+end
+
+class DerivedQuantity
+attributes
+operations
+end
+
+class QualitativeNFP<NFP
+attributes
+operations
+end
+
+class QuantitativeNFP<NFP
+attributes
+operations
+end
+
+class Realization
+attributes
+operations
+end
+
+class Measure
+attributes
+operations
+end
+
+class ComplexNFP<NFP
+attributes
+operations
+end
+
+class BasicNFP
+attributes
+	statisticalQualifier : StatisticalQualifierKinds
+	directon : DirectionKinds
+operations
+end
+
+class NFPType
+attributes
+	valueSpecificationLanguage : String
+	source : SourceKinds
+operations
+end
+
+class NFPInstantType<NFPType
+attributes
+	value : String
+	unit : InstantUnitKinds
+operations
+end
+
+class NFPurationType<NFPType
+attributes
+	value : String
+	unit : DurationUnitKinds
+operations
+end
+
+class NFPRateType<NFPType
+attributes
+	value : String
+	unit : RateUnitKinds
+operations
+end
+
+class NFPProbabilityType<NFPType
+attributes
+	value : String
+	unit : ProbabilityUnitKinds
+operations
+end
+
+class NFPSizeType<NFPType
+attributes
+	value : String
+	unit : SizeUnitKinds
+operations
+end
+
+class NFPValueSpecification
+attributes
+operations
+end
+
+class NFPConstant<NFPValueSpecification
+attributes
+operations
+end
+
+class NFPListConstant<NFPConstant
+attributes
+operations
+end
+
+class NFPStringConstant<NFPConstant
+attributes
+	body : String
+operations
+end
+
+class NFPIntegerConstant<NFPConstant
+attributes
+	body : Integer
+operations
+end
+
+class NFPRealConstant<NFPConstant
+attributes
+	bodyBeforeComa : Integer
+	bodyAfterComa : Integer
+operations
+end
+
+class NFPBooleanConstant<NFPConstant
+attributes
+	body : Boolean
+operations
+end
+
+class NFPVariable<NFPValueSpecification
+attributes
+	varName : String
+operations
+end
+
+class NFPExpression<NFPValueSpecification
+attributes
+	body : String
+operations
+end
+
+abstract class Classifier<AnnotatedModelElement
+attributes
+operations
+end
+
+abstract class ResourceClassifier<Classifier
+attributes
+operations
+end
+
+abstract class ResourceServiceClassifier<Classifier
+attributes
+operations
+end
+
+abstract class InstanceSpecification<AnnotatedModelElement
+attributes
+operations
+end
+
+abstract class ResourceInstanceSpecification<InstanceSpecification
+attributes
+operations
+end
+
+abstract class ResourceServiceInstanceSpecification<InstanceSpecification
+attributes
+operations
+end
+
+class Hardware
+attributes
+operations
+end
+
+class HardwareLibrary
+attributes
+operations
+end
+
+class HardwareEntity
+attributes
+operations
+end
+
+class HardwareDeployment
+attributes
+operations
+end
+
+class HardwareEntityInstance
+attributes
+operations
+end
+
+class ECUInstance<HardwareEntityInstance
+attributes
+operations
+end
+
+class ChannelInstance<HardwareEntityInstance
+attributes
+operations
+end
+
+class ECUGateInstance
+attributes
+operations
+end
+
+class ECU<HardwareEntity
+attributes
+operations
+end
+
+class ECUGate
+attributes
+operations
+end
+
+class Channel
+attributes
+operations
+end
+
+class AnalysisContext
+attributes
+operations
+end
+
+class Workload
+attributes
+operations
+end
+
+class Transaction
+attributes
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+class Response
+attributes
+operations
+end
+
+class Behavior
+attributes
+operations
+end
+
+class Scenario
+attributes
+operations
+end
+
+class Step<Scenario
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+class BasicResource<Resource
+attributes
+operations
+end
+
+class StructuredResource<Resource
+attributes
+operations
+end
+
+class ProcessingResource<StructuredResource
+attributes
+operations
+end
+
+class Link
+attributes
+operations
+end
+
+class ProcessResource<StructuredResource
+attributes
+operations
+end
+
+class Component
+attributes
+operations
+end
+
+class StructuredComponent<Component
+attributes
+operations
+end
+
+class BasicComponent<Component
+attributes
+operations
+end
+
+class LogicalResource<StructuredResource
+attributes
+operations
+end
+
+class ServerResource<StructuredResource
+attributes
+operations
+end
+
+class Service
+attributes
+operations
+end
+
+class Interface
+attributes
+operations
+end
+
+composition xxx_TimeBase_instants between
+	TimeBase[0..1] role xxx_TimeBase_instants_src
+	Instant[*] role instants
+end
+
+association xxx_Instant_owner between
+	Instant[*] role xxx_Instant_owner_src
+	TimeBase[1] role owner
+end
+
+association xxx_Instant_timeValue between
+	Instant[*] role xxx_Instant_timeValue_src
+	TimeValue[1] role timeValue
+end
+
+association xxx_TimeValue_denotedInstant between
+	TimeValue[0..1] role xxx_TimeValue_denotedInstant_src
+	Instant[*] role denotedInstant
+end
+
+association xxx_TimeValue_ref between
+	TimeValue[*] role xxx_TimeValue_ref_src
+	TimeBase[1] role ref
+end
+
+association xxx_TimeInterval_endValues between
+	TimeInterval[0..1] role xxx_TimeInterval_endValues_src
+	TimeValue[2..*] role endValues
+end
+
+association xxx_TimeInterval_denotedInterval between
+	TimeInterval[0..1] role xxx_TimeInterval_denotedInterval_src
+	Interval[*] role denotedInterval
+end
+
+association xxx_Interval_base between
+	Interval[*] role xxx_Interval_base_src
+	TimeBase[1] role base
+end
+
+association xxx_Interval_timeInterval between
+	Interval[*] role xxx_Interval_timeInterval_src
+	TimeInterval[1] role timeInterval
+end
+
+association xxx_Interval_instants between
+	Interval[0..1] role xxx_Interval_instants_src
+	Instant[*] role instants
+end
+
+association xxx_SingleTimeBase_currentValue between
+	SingleTimeBase[*] role xxx_SingleTimeBase_currentValue_src
+	SingleTimeValue[1] role currentValue
+end
+
+association xxx_SingleTimeBase_maximumValue between
+	SingleTimeBase[*] role xxx_SingleTimeBase_maximumValue_src
+	SingleTimeValue[0..1] role maximumValue
+end
+
+association xxx_SingleTimeBase_currentInstant between
+	SingleTimeBase[*] role xxx_SingleTimeBase_currentInstant_src
+	SingleInstant[1] role currentInstant
+end
+
+association xxx_SingleInstant_coPoint between
+	SingleInstant[*] role xxx_SingleInstant_coPoint_src
+	CoincidencePoint[1] role coPoint
+end
+
+association xxx_SingleInterval_first between
+	SingleInterval[*] role xxx_SingleInterval_first_src
+	SingleInstant[1] role first
+end
+
+association xxx_SingleInterval_last between
+	SingleInterval[*] role xxx_SingleInterval_last_src
+	SingleInstant[1] role last
+end
+
+association xxx_SingleInterval_members between
+	SingleInterval[0..1] role xxx_SingleInterval_members_src
+	SingleInstant[*] role members
+end
+
+association xxx_SingleTimeInterval_start between
+	SingleTimeInterval[*] role xxx_SingleTimeInterval_start_src
+	SingleTimeValue[1] role start
+end
+
+association xxx_SingleTimeInterval_end_ between
+	SingleTimeInterval[*] role xxx_SingleTimeInterval_end__src
+	SingleTimeValue[1] role end_
+end
+
+association xxx_DiscreteTimeBase_refEvent between
+	DiscreteTimeBase[*] role xxx_DiscreteTimeBase_refEvent_src
+	Event[1] role refEvent
+end
+
+association xxx_DiscreteInstant_next between
+	DiscreteInstant[*] role xxx_DiscreteInstant_next_src
+	DiscreteInstant[0..1] role next
+end
+
+association xxx_DiscreteInstant_previous between
+	DiscreteInstant[*] role xxx_DiscreteInstant_previous_src
+	DiscreteInstant[0..1] role previous
+end
+
+association xxx_DiscreteInstant_refOcc between
+	DiscreteInstant[*] role xxx_DiscreteInstant_refOcc_src
+	EventOccurence[1] role refOcc
+end
+
+composition xxx_Event_occ between
+	Event[0..1] role xxx_Event_occ_src
+	EventOccurence[*] role occ
+end
+
+composition xxx_PhysicalTime_physicalInstants between
+	PhysicalTime[0..1] role xxx_PhysicalTime_physicalInstants_src
+	PhysicalInstant[*] role physicalInstants
+end
+
+association xxx_PhysicalInstant_measurement between
+	PhysicalInstant[0..1] role xxx_PhysicalInstant_measurement_src
+	MetricTimeValue[*] role measurement
+end
+
+association xxx_Duration_start between
+	Duration[*] role xxx_Duration_start_src
+	PhysicalInstant[1] role start
+end
+
+association xxx_Duration_end_ between
+	Duration[*] role xxx_Duration_end__src
+	PhysicalInstant[1] role end_
+end
+
+association xxx_Duration_measurement between
+	Duration[0..1] role xxx_Duration_measurement_src
+	MetricTimeInterval[*] role measurement
+end
+
+composition xxx_MultipleTimeBase_bases between
+	MultipleTimeBase[0..1] role xxx_MultipleTimeBase_bases_src
+	SingleTimeBase[1..*] role bases
+end
+
+association xxx_CoincidencePoint_coincidenceInstants between
+	CoincidencePoint[0..1] role xxx_CoincidencePoint_coincidenceInstants_src
+	SingleInstant[1..*] role coincidenceInstants
+end
+
+association xxx_MultipleInterval_first between
+	MultipleInterval[0..1] role xxx_MultipleInterval_first_src
+	CoincidencePoint[1..*] role first
+end
+
+association xxx_MultipleInterval_last between
+	MultipleInterval[0..1] role xxx_MultipleInterval_last_src
+	CoincidencePoint[1..*] role last
+end
+
+association xxx_MultipleTimeValue_values between
+	MultipleTimeValue[0..1] role xxx_MultipleTimeValue_values_src
+	SingleTimeValue[1..*] role values
+end
+
+association xxx_SimultaneousEventOccurrence_at between
+	SimultaneousEventOccurrence[*] role xxx_SimultaneousEventOccurrence_at_src
+	Instant[1] role at
+end
+
+association xxx_SimultaneousEventOccurrence_occurence between
+	SimultaneousEventOccurrence[0..1] role xxx_SimultaneousEventOccurrence_occurence_src
+	TimedEventOccurence[2..*] role occurence
+end
+
+association xxx_TimedEvent_timestamp between
+	TimedEvent[0..1] role xxx_TimedEvent_timestamp_src
+	MetricTimeValue[1..*] role timestamp
+end
+
+association xxx_TimedEventOccurence_at between
+	TimedEventOccurence[*] role xxx_TimedEventOccurence_at_src
+	Instant[1] role at
+end
+
+association xxx_TimedEventOccurence_timestamp between
+	TimedEventOccurence[*] role xxx_TimedEventOccurence_timestamp_src
+	TimeValue[1] role timestamp
+end
+
+association xxx_TimedAction_duration between
+	TimedAction[0..1] role xxx_TimedAction_duration_src
+	TimeInterval[*] role duration
+end
+
+association xxx_TimedAction_start between
+	TimedAction[0..1] role xxx_TimedAction_start_src
+	TimeValue[*] role start
+end
+
+association xxx_TimedAction_end_ between
+	TimedAction[0..1] role xxx_TimedAction_end__src
+	TimeValue[*] role end_
+end
+
+association xxx_TimingMechanism_origin between
+	TimingMechanism[*] role xxx_TimingMechanism_origin_src
+	TimedEvent[1] role origin
+end
+
+association xxx_TimingMechanism_resolution between
+	TimingMechanism[*] role xxx_TimingMechanism_resolution_src
+	MetricTimeInterval[1] role resolution
+end
+
+association xxx_TimingMechanism_refClock between
+	TimingMechanism[*] role xxx_TimingMechanism_refClock_src
+	Clock[1] role refClock
+end
+
+association xxx_Clock_accuracy between
+	Clock[*] role xxx_Clock_accuracy_src
+	MetricTimeInterval[1] role accuracy
+end
+
+association xxx_Clock_offset between
+	Clock[*] role xxx_Clock_offset_src
+	MetricTimeInterval[1] role offset
+end
+
+association xxx_Clock_generatedInterrupt between
+	Clock[0..1] role xxx_Clock_generatedInterrupt_src
+	ClockInterrupt[*] role generatedInterrupt
+end
+
+association xxx_Timer_duration between
+	Timer[*] role xxx_Timer_duration_src
+	MetricTimeValue[1] role duration
+end
+
+association xxx_Timer_genratedTimeOuts between
+	Timer[0..1] role xxx_Timer_genratedTimeOuts_src
+	TimeOut[*] role genratedTimeOuts
+end
+
+association xxx_System_dimension between
+	System[0..1] role xxx_System_dimension_src
+	Quantity[*] role dimension
+end
+
+association xxx_Model_ownes between
+	Model[0..1] role xxx_Model_ownes_src
+	ModelElement[*] role ownes
+end
+
+association xxx_AnnotatedModel_conformsTo between
+	AnnotatedModel[0..1] role xxx_AnnotatedModel_conformsTo_src
+	ModelingConcern[1..*] role conformsTo
+end
+
+association xxx_AnnotatedModel_import between
+	AnnotatedModel[0..1] role xxx_AnnotatedModel_import_src
+	NFPLibrary[*] role import
+end
+
+association xxx_ModelElement_owner between
+	ModelElement[*] role xxx_ModelElement_owner_src
+	Model[1] role owner
+end
+
+association xxx_AnnotatedModelElement_annotation between
+	AnnotatedModelElement[0..1] role xxx_AnnotatedModelElement_annotation_src
+	NFP[*] role annotation
+end
+
+association xxx_NFP_measurementQuantity between
+	NFP[*] role xxx_NFP_measurementQuantity_src
+	Quantity[1] role measurementQuantity
+end
+
+association xxx_NFP_storedBy between
+	NFP[0..1] role xxx_NFP_storedBy_src
+	NFPLibrary[*] role storedBy
+end
+
+association xxx_NFP_groupedBy between
+	NFP[*] role xxx_NFP_groupedBy_src
+	NFPCategory[1] role groupedBy
+end
+
+association xxx_NFPLibrary_refersTo between
+	NFPLibrary[0..1] role xxx_NFPLibrary_refersTo_src
+	NFPLibrary[*] role refersTo
+end
+
+association xxx_NFPLibrary_usedNFP between
+	NFPLibrary[0..1] role xxx_NFPLibrary_usedNFP_src
+	NFP[*] role usedNFP
+end
+
+composition xxx_NFPCategory_setOf between
+	NFPCategory[0..1] role xxx_NFPCategory_setOf_src
+	NFP[1..*] role setOf
+end
+
+association xxx_NFPCategory_ownes between
+	NFPCategory[0..1] role xxx_NFPCategory_ownes_src
+	NFPCategory[*] role ownes
+end
+
+association xxx_NFPCategory_owner between
+	NFPCategory[*] role xxx_NFPCategory_owner_src
+	NFPCategory[0..1] role owner
+end
+
+association xxx_ModelingConcern_relevantQuantity between
+	ModelingConcern[0..1] role xxx_ModelingConcern_relevantQuantity_src
+	Quantity[*] role relevantQuantity
+end
+
+association xxx_ModelingConcern_annotedModel between
+	ModelingConcern[*] role xxx_ModelingConcern_annotedModel_src
+	AnnotatedModel[1] role annotedModel
+end
+
+association xxx_QualitativeNFP_parameter between
+	QualitativeNFP[0..1] role xxx_QualitativeNFP_parameter_src
+	NFP[*] role parameter
+end
+
+composition xxx_QuantitativeNFP_sampleSet between
+	QuantitativeNFP[0..1] role xxx_QuantitativeNFP_sampleSet_src
+	Realization[*] role sampleSet
+end
+
+composition xxx_QuantitativeNFP_measure between
+	QuantitativeNFP[0..1] role xxx_QuantitativeNFP_measure_src
+	Measure[*] role measure
+end
+
+association xxx_Realization_function between
+	Realization[0..1] role xxx_Realization_function_src
+	Measure[*] role function
+end
+
+association xxx_Realization_owner between
+	Realization[*] role xxx_Realization_owner_src
+	QuantitativeNFP[1] role owner
+end
+
+association xxx_Measure_appliesTo between
+	Measure[0..1] role xxx_Measure_appliesTo_src
+	Realization[1..*] role appliesTo
+end
+
+association xxx_Measure_owner between
+	Measure[*] role xxx_Measure_owner_src
+	QuantitativeNFP[1] role owner
+end
+
+association xxx_ComplexNFP_parent between
+	ComplexNFP[0..1] role xxx_ComplexNFP_parent_src
+	ComplexNFP[*] role parent
+end
+
+association xxx_ComplexNFP_child between
+	ComplexNFP[0..1] role xxx_ComplexNFP_child_src
+	ComplexNFP[*] role child
+end
+
+composition xxx_ComplexNFP_ownes between
+	ComplexNFP[0..1] role xxx_ComplexNFP_ownes_src
+	BasicNFP[1..*] role ownes
+end
+
+association xxx_BasicNFP_typedBy between
+	BasicNFP[*] role xxx_BasicNFP_typedBy_src
+	NFPType[1] role typedBy
+end
+
+association xxx_BasicNFP_valuedBy between
+	BasicNFP[0..1] role xxx_BasicNFP_valuedBy_src
+	NFPValueSpecification[*] role valuedBy
+end
+
+composition xxx_BasicNFP_dimensionOf between
+	BasicNFP[0..1] role xxx_BasicNFP_dimensionOf_src
+	ComplexNFP[*] role dimensionOf
+end
+
+association xxx_NFPType_constrainedSpec between
+	NFPType[0..1] role xxx_NFPType_constrainedSpec_src
+	NFPValueSpecification[*] role constrainedSpec
+end
+
+association xxx_NFPValueSpecification_constrainedBy between
+	NFPValueSpecification[0..1] role xxx_NFPValueSpecification_constrainedBy_src
+	NFPType[*] role constrainedBy
+end
+
+association xxx_NFPValueSpecification_expression between
+	NFPValueSpecification[*] role xxx_NFPValueSpecification_expression_src
+	NFPExpression[0..1] role expression
+end
+
+association xxx_NFPConstant_ownerList between
+	NFPConstant[*] role xxx_NFPConstant_ownerList_src
+	NFPListConstant[0..1] role ownerList
+end
+
+association xxx_NFPListConstant_listElements between
+	NFPListConstant[0..1] role xxx_NFPListConstant_listElements_src
+	NFPConstant[*] role listElements
+end
+
+composition xxx_NFPExpression_operand between
+	NFPExpression[0..1] role xxx_NFPExpression_operand_src
+	NFPValueSpecification[*] role operand
+end
+
+association xxx_Classifier_instances between
+	Classifier[0..1] role xxx_Classifier_instances_src
+	InstanceSpecification[*] role instances
+end
+
+association xxx_ResourceClassifier_offeredService between
+	ResourceClassifier[0..1] role xxx_ResourceClassifier_offeredService_src
+	ResourceServiceClassifier[1..*] role offeredService
+end
+
+association xxx_ResourceServiceClassifier_resType between
+	ResourceServiceClassifier[*] role xxx_ResourceServiceClassifier_resType_src
+	ResourceClassifier[1] role resType
+end
+
+association xxx_InstanceSpecification_type between
+	InstanceSpecification[0..1] role xxx_InstanceSpecification_type_src
+	Classifier[1..*] role type
+end
+
+association xxx_ResourceInstanceSpecification_offeredServiceInstance between
+	ResourceInstanceSpecification[0..1] role xxx_ResourceInstanceSpecification_offeredServiceInstance_src
+	ResourceServiceInstanceSpecification[1..*] role offeredServiceInstance
+end
+
+association xxx_ResourceServiceInstanceSpecification_resintSpec between
+	ResourceServiceInstanceSpecification[*] role xxx_ResourceServiceInstanceSpecification_resintSpec_src
+	ResourceInstanceSpecification[1] role resintSpec
+end
+
+association xxx_Hardware_owner between
+	Hardware[*] role xxx_Hardware_owner_src
+	Hardware[1] role owner
+end
+
+association xxx_Hardware_containH between
+	Hardware[0..1] role xxx_Hardware_containH_src
+	Hardware[*] role containH
+end
+
+association xxx_Hardware_containHL between
+	Hardware[0..1] role xxx_Hardware_containHL_src
+	HardwareLibrary[*] role containHL
+end
+
+association xxx_Hardware_containHE between
+	Hardware[0..1] role xxx_Hardware_containHE_src
+	HardwareEntity[*] role containHE
+end
+
+association xxx_Hardware_deploymentConfiguration between
+	Hardware[0..1] role xxx_Hardware_deploymentConfiguration_src
+	HardwareDeployment[*] role deploymentConfiguration
+end
+
+association xxx_HardwareLibrary_owner between
+	HardwareLibrary[*] role xxx_HardwareLibrary_owner_src
+	Hardware[1] role owner
+end
+
+association xxx_HardwareEntity_owner between
+	HardwareEntity[*] role xxx_HardwareEntity_owner_src
+	Hardware[1] role owner
+end
+
+association xxx_HardwareDeployment_owner between
+	HardwareDeployment[*] role xxx_HardwareDeployment_owner_src
+	Hardware[1] role owner
+end
+
+association xxx_HardwareDeployment_contain between
+	HardwareDeployment[0..1] role xxx_HardwareDeployment_contain_src
+	HardwareEntityInstance[1..*] role contain
+end
+
+association xxx_HardwareEntityInstance_owner between
+	HardwareEntityInstance[*] role xxx_HardwareEntityInstance_owner_src
+	HardwareDeployment[1] role owner
+end
+
+composition xxx_ECUInstance_composedOf between
+	ECUInstance[0..1] role xxx_ECUInstance_composedOf_src
+	ECUGateInstance[*] role composedOf
+end
+
+association xxx_ChannelInstance_gateInstances between
+	ChannelInstance[0..1] role xxx_ChannelInstance_gateInstances_src
+	ECUGateInstance[2..*] role gateInstances
+end
+
+association xxx_ECUGateInstance_channel between
+	ECUGateInstance[*] role xxx_ECUGateInstance_channel_src
+	ChannelInstance[1] role channel
+end
+
+composition xxx_ECU_contain between
+	ECU[0..1] role xxx_ECU_contain_src
+	ECUGate[1..*] role contain
+end
+
+association xxx_ECUGate_owner between
+	ECUGate[*] role xxx_ECUGate_owner_src
+	ECU[1] role owner
+end
+
+association xxx_ECUGate_kindOf between
+	ECUGate[*] role xxx_ECUGate_kindOf_src
+	Channel[1] role kindOf
+end
+
+association xxx_Channel_specify between
+	Channel[*] role xxx_Channel_specify_src
+	ECUGate[0..1] role specify
+end
+
+association xxx_AnalysisContext_global between
+	AnalysisContext[0..1] role xxx_AnalysisContext_global_src
+	ComplexNFP[*] role global
+end
+
+composition xxx_AnalysisContext_workload between
+	AnalysisContext[*] role xxx_AnalysisContext_workload_src
+	Workload[0..1] role workload
+end
+
+composition xxx_AnalysisContext_behavior between
+	AnalysisContext[*] role xxx_AnalysisContext_behavior_src
+	Behavior[0..1] role behavior
+end
+
+composition xxx_AnalysisContext_usedResources between
+	AnalysisContext[0..1] role xxx_AnalysisContext_usedResources_src
+	Resource[1..*] role usedResources
+end
+
+association xxx_Workload_transaction between
+	Workload[0..1] role xxx_Workload_transaction_src
+	Transaction[1..*] role transaction
+end
+
+association xxx_Transaction_workload between
+	Transaction[0..1] role xxx_Transaction_workload_src
+	Workload[1..*] role workload
+end
+
+composition xxx_Transaction_trigger between
+	Transaction[0..1] role xxx_Transaction_trigger_src
+	Trigger[1..*] role trigger
+end
+
+composition xxx_Transaction_response between
+	Transaction[*] role xxx_Transaction_response_src
+	Response[1] role response
+end
+
+association xxx_Trigger_arrivalPattern between
+	Trigger[*] role xxx_Trigger_arrivalPattern_src
+	ComplexNFP[1] role arrivalPattern
+end
+
+association xxx_Trigger_effect between
+	Trigger[0..1] role xxx_Trigger_effect_src
+	Response[1..*] role effect
+end
+
+association xxx_Response_efficiency between
+	Response[*] role xxx_Response_efficiency_src
+	ComplexNFP[1] role efficiency
+end
+
+association xxx_Response_endToEndLatency between
+	Response[*] role xxx_Response_endToEndLatency_src
+	ComplexNFP[1] role endToEndLatency
+end
+
+association xxx_Response_cause between
+	Response[0..1] role xxx_Response_cause_src
+	Trigger[1..*] role cause
+end
+
+association xxx_Response_behavior between
+	Response[0..1] role xxx_Response_behavior_src
+	Scenario[1..*] role behavior
+end
+
+composition xxx_Behavior_scenario between
+	Behavior[0..1] role xxx_Behavior_scenario_src
+	Scenario[1..*] role scenario
+end
+
+association xxx_Scenario_behavior between
+	Scenario[0..1] role xxx_Scenario_behavior_src
+	Behavior[1..*] role behavior
+end
+
+association xxx_Scenario_scenarionLatency between
+	Scenario[0..1] role xxx_Scenario_scenarionLatency_src
+	ComplexNFP[*] role scenarionLatency
+end
+
+composition xxx_Scenario_steps between
+	Scenario[0..1] role xxx_Scenario_steps_src
+	Step[1..*] role steps
+end
+
+association xxx_Scenario_root between
+	Scenario[*] role xxx_Scenario_root_src
+	Step[1] role root
+end
+
+association xxx_Scenario_endToEndResponse between
+	Scenario[*] role xxx_Scenario_endToEndResponse_src
+	Response[1] role endToEndResponse
+end
+
+association xxx_Step_predecessor between
+	Step[0..1] role xxx_Step_predecessor_src
+	Step[*] role predecessor
+end
+
+association xxx_Step_successor between
+	Step[0..1] role xxx_Step_successor_src
+	Step[*] role successor
+end
+
+association xxx_Step_stepLatency between
+	Step[0..1] role xxx_Step_stepLatency_src
+	ComplexNFP[*] role stepLatency
+end
+
+association xxx_Step_usedResourceService between
+	Step[0..1] role xxx_Step_usedResourceService_src
+	Service[*] role usedResourceService
+end
+
+composition xxx_StructuredResource_basicResource between
+	StructuredResource[*] role xxx_StructuredResource_basicResource_src
+	BasicResource[1] role basicResource
+end
+
+association xxx_ProcessingResource_links between
+	ProcessingResource[0..1] role xxx_ProcessingResource_links_src
+	Link[*] role links
+end
+
+association xxx_ProcessingResource_components between
+	ProcessingResource[0..1] role xxx_ProcessingResource_components_src
+	Component[1..*] role components
+end
+
+association xxx_ProcessResource_components between
+	ProcessResource[0..1] role xxx_ProcessResource_components_src
+	Component[1..*] role components
+end
+
+association xxx_Component_process between
+	Component[0..1] role xxx_Component_process_src
+	ProcessResource[1..*] role process
+end
+
+association xxx_Component_interfaces between
+	Component[0..1] role xxx_Component_interfaces_src
+	Interface[1..*] role interfaces
+end
+
+association xxx_ServerResource_services between
+	ServerResource[0..1] role xxx_ServerResource_services_src
+	Service[1..*] role services
+end
+
+association xxx_Service_resource between
+	Service[*] role xxx_Service_resource_src
+	ServerResource[1] role resource
+end
+
+association xxx_Service_interface between
+	Service[*] role xxx_Service_interface_src
+	Interface[1] role interface
+end
+
+association xxx_Interface_service between
+	Interface[*] role xxx_Interface_service_src
+	Service[1] role service
+end
+

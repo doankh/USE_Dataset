@@ -1,0 +1,106 @@
+model tp5
+class Researcher
+attributes
+	name : String
+	forName : String
+operations
+end
+
+class Paper
+attributes
+	name : String
+operations
+end
+
+class Paragraph
+attributes
+	name : String
+	id : Integer
+	content : String
+operations
+end
+
+class PublicationStructure
+attributes
+operations
+end
+
+class Skill
+attributes
+	description : String
+operations
+end
+
+class Position
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Collaboration
+attributes
+	ratio : Integer
+operations
+end
+
+association xxx_Researcher_res_papers between
+	Researcher[0..1] role xxx_Researcher_res_papers_src
+	Paper[*] role res_papers
+end
+
+composition xxx_Researcher_skills between
+	Researcher[0..1] role xxx_Researcher_skills_src
+	Skill[*] role skills
+end
+
+association xxx_Researcher_res_position between
+	Researcher[*] role xxx_Researcher_res_position_src
+	Position[0..1] role res_position
+end
+
+composition xxx_Researcher_collaborations between
+	Researcher[0..1] role xxx_Researcher_collaborations_src
+	Collaboration[*] role collaborations
+end
+
+composition xxx_Paper_paragraphs between
+	Paper[0..1] role xxx_Paper_paragraphs_src
+	Paragraph[*] role paragraphs
+end
+
+association xxx_Paper_authors between
+	Paper[0..1] role xxx_Paper_authors_src
+	Researcher[*] role authors
+end
+
+association xxx_Paper_citedBy between
+	Paper[*] role xxx_Paper_citedBy_src
+	Paper[0..1] role citedBy
+end
+
+composition xxx_PublicationStructure_researchers between
+	PublicationStructure[0..1] role xxx_PublicationStructure_researchers_src
+	Researcher[*] role researchers
+end
+
+composition xxx_PublicationStructure_papers between
+	PublicationStructure[0..1] role xxx_PublicationStructure_papers_src
+	Paper[*] role papers
+end
+
+composition xxx_PublicationStructure_positions between
+	PublicationStructure[0..1] role xxx_PublicationStructure_positions_src
+	Position[*] role positions
+end
+
+association xxx_Position_parent between
+	Position[*] role xxx_Position_parent_src
+	Position[0..1] role parent
+end
+
+association xxx_Collaboration_col_paper between
+	Collaboration[*] role xxx_Collaboration_col_paper_src
+	Paper[0..1] role col_paper
+end
+

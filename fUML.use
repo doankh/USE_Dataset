@@ -1,0 +1,1552 @@
+model fuml
+enum CallConcurrencyKind{
+default
+}
+
+enum VisibilityKind{
+default
+}
+
+enum AggregationKind{
+default
+}
+
+enum ParameterDirectionKind{
+default
+}
+
+enum ExpansionKind{
+default
+}
+
+class OpaqueBehavior<Behavior
+attributes
+	body : String
+	language : String
+operations
+end
+
+abstract class Behavior<Class
+attributes
+	reentrant : Boolean
+operations
+end
+
+abstract class BehavioredClassifier<Classifier
+attributes
+operations
+end
+
+class FunctionBehavior<OpaqueBehavior
+attributes
+operations
+end
+
+class Trigger<NamedElement
+attributes
+operations
+end
+
+abstract class Event<PackageableElement
+attributes
+operations
+end
+
+class Signal<Classifier
+attributes
+operations
+end
+
+class SignalEvent<MessageEvent
+attributes
+operations
+end
+
+abstract class MessageEvent<Event
+attributes
+operations
+end
+
+class Reception<BehavioralFeature
+attributes
+operations
+end
+
+abstract class ValueSpecification<TypedElement
+attributes
+operations
+end
+
+class TypedElement<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+	visibility : VisibilityKind
+	qualifiedName : String
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+class Comment
+attributes
+	body : String
+operations
+end
+
+abstract class Namespace<NamedElement
+attributes
+operations
+end
+
+class ElementImport<Element
+attributes
+	visibility : VisibilityKind
+	alias : String
+operations
+end
+
+abstract class PackageableElement<NamedElement
+attributes
+operations
+end
+
+class PackageImport<Element
+attributes
+	visibility : VisibilityKind
+operations
+end
+
+class Package<Namespace,PackageableElement
+attributes
+operations
+end
+
+abstract class Type<PackageableElement
+attributes
+operations
+end
+
+abstract class StructuralFeature<Feature,MultiplicityElement,TypedElement
+attributes
+	readOnly : Boolean
+operations
+end
+
+abstract class Feature<RedefinableElement
+attributes
+	static : Boolean
+operations
+end
+
+abstract class RedefinableElement<NamedElement
+attributes
+	leaf : Boolean
+operations
+end
+
+abstract class Classifier<Namespace,Type
+attributes
+	abstract_ : Boolean
+	finalSpecialization : Boolean
+operations
+end
+
+class Generalization<Element
+attributes
+	substitutable : Boolean
+operations
+end
+
+class Property<StructuralFeature
+attributes
+	derived : Boolean
+	derivedUnion : Boolean
+	aggregation : AggregationKind
+	composite : Boolean
+operations
+end
+
+class Association<Classifier
+attributes
+	derived : Boolean
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class MultiplicityElement<Element
+attributes
+	ordered_ : Boolean
+	unique : Boolean
+	upper : Integer
+	lower : Integer
+operations
+end
+
+abstract class BehavioralFeature<Feature
+attributes
+	abstract_ : Boolean
+	concurrency : CallConcurrencyKind
+operations
+end
+
+class Parameter<MultiplicityElement,TypedElement
+attributes
+	direction : ParameterDirectionKind
+operations
+end
+
+class Operation<BehavioralFeature
+attributes
+	query : Boolean
+	ordered_ : Boolean
+	unique : Boolean
+	lower : Integer
+	upper : Integer
+operations
+end
+
+class InstanceSpecification<NamedElement
+attributes
+operations
+end
+
+class Slot<Element
+attributes
+operations
+end
+
+class InstanceValue<ValueSpecification
+attributes
+operations
+end
+
+class LiteralBoolean<LiteralSpecification
+attributes
+	value : Boolean
+operations
+end
+
+abstract class LiteralSpecification<ValueSpecification
+attributes
+operations
+end
+
+class LiteralInteger<LiteralSpecification
+attributes
+	value : Integer
+operations
+end
+
+class LiteralNull<LiteralSpecification
+attributes
+operations
+end
+
+class LiteralString<LiteralSpecification
+attributes
+	value : String
+operations
+end
+
+class LiteralUnlimitedNatural<LiteralSpecification
+attributes
+	value : Integer
+operations
+end
+
+class PrimitiveType<DataType
+attributes
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+class EnumerationLiteral<InstanceSpecification
+attributes
+operations
+end
+
+class Class<BehavioredClassifier
+attributes
+	active : Boolean
+operations
+end
+
+class ObjectFlow<ActivityEdge
+attributes
+operations
+end
+
+abstract class ActivityEdge<RedefinableElement
+attributes
+operations
+end
+
+class Activity<Behavior
+attributes
+	readOnly : Boolean
+operations
+end
+
+abstract class ActivityNode<RedefinableElement
+attributes
+operations
+end
+
+abstract class ObjectNode<ActivityNode,TypedElement
+attributes
+operations
+end
+
+class MergeNode<ControlNode
+attributes
+operations
+end
+
+abstract class ControlNode<ActivityNode
+attributes
+operations
+end
+
+class JoinNode<ControlNode
+attributes
+operations
+end
+
+class InitialNode<ControlNode
+attributes
+operations
+end
+
+abstract class FinalNode<ControlNode
+attributes
+operations
+end
+
+class ForkNode<ControlNode
+attributes
+operations
+end
+
+class ControlFlow<ActivityEdge
+attributes
+operations
+end
+
+class DecisionNode<ControlNode
+attributes
+operations
+end
+
+class ActivityFinalNode<FinalNode
+attributes
+operations
+end
+
+class ActivityParameterNode<ObjectNode
+attributes
+operations
+end
+
+class LoopNode<StructuredActivityNode
+attributes
+	testedFirst : Boolean
+operations
+end
+
+abstract class ExecutableNode<ActivityNode
+attributes
+operations
+end
+
+class Clause<Element
+attributes
+operations
+end
+
+class ConditionalNode<StructuredActivityNode
+attributes
+	determinate : Boolean
+	assured : Boolean
+operations
+end
+
+class StructuredActivityNode<Action
+attributes
+	mustIsolate : Boolean
+operations
+end
+
+class ExpansionNode<ObjectNode
+attributes
+operations
+end
+
+class ExpansionRegion<StructuredActivityNode
+attributes
+	mode : ExpansionKind
+operations
+end
+
+abstract class StructuralFeatureAction<Action
+attributes
+operations
+end
+
+class TestIdentityAction<Action
+attributes
+operations
+end
+
+class ValueSpecificationAction<Action
+attributes
+operations
+end
+
+abstract class WriteLinkAction<LinkAction
+attributes
+operations
+end
+
+abstract class LinkAction<Action
+attributes
+operations
+end
+
+class LinkEndData<Element
+attributes
+operations
+end
+
+abstract class WriteStructuralFeatureAction<StructuralFeatureAction
+attributes
+operations
+end
+
+class RemoveStructuralFeatureValueAction<WriteStructuralFeatureAction
+attributes
+	removeDuplicates : Boolean
+operations
+end
+
+class ReadLinkAction<LinkAction
+attributes
+operations
+end
+
+class ReadSelfAction<Action
+attributes
+operations
+end
+
+class ReadStructuralFeatureAction<StructuralFeatureAction
+attributes
+operations
+end
+
+class LinkEndCreationData<LinkEndData
+attributes
+	replaceAll : Boolean
+operations
+end
+
+class LinkEndDestructionData<LinkEndData
+attributes
+	destroyDuplicates : Boolean
+operations
+end
+
+class ClearAssociationAction<Action
+attributes
+operations
+end
+
+class ClearStructuralFeatureAction<StructuralFeatureAction
+attributes
+operations
+end
+
+class CreateLinkAction<WriteLinkAction
+attributes
+operations
+end
+
+class CreateObjectAction<Action
+attributes
+operations
+end
+
+class DestroyLinkAction<WriteLinkAction
+attributes
+operations
+end
+
+class DestroyObjectAction<Action
+attributes
+	destroyLinks : Boolean
+	destroyOwnedObjects : Boolean
+operations
+end
+
+class AddStructuralFeatureValueAction<WriteStructuralFeatureAction
+attributes
+	replaceAll : Boolean
+operations
+end
+
+class StartClassifierBehaviorAction<Action
+attributes
+operations
+end
+
+class StartObjectBehaviorAction<CallAction
+attributes
+operations
+end
+
+class ReduceAction<Action
+attributes
+	ordered_ : Boolean
+operations
+end
+
+class ReadExtentAction<Action
+attributes
+operations
+end
+
+class ReadIsClassifiedObjectAction<Action
+attributes
+	direct : Boolean
+operations
+end
+
+class ReclassifyObjectAction<Action
+attributes
+	replaceAll : Boolean
+operations
+end
+
+class AcceptEventAction<Action
+attributes
+	unmarshall : Boolean
+operations
+end
+
+abstract class Action<ExecutableNode
+attributes
+	locallyReentrant : Boolean
+operations
+end
+
+class InputPin<Pin
+attributes
+operations
+end
+
+abstract class Pin<ObjectNode,MultiplicityElement
+attributes
+operations
+end
+
+abstract class CallAction<InvocationAction
+attributes
+	synchronous : Boolean
+operations
+end
+
+abstract class InvocationAction<Action
+attributes
+operations
+end
+
+class SendSignalAction<InvocationAction
+attributes
+operations
+end
+
+class CallBehaviorAction<CallAction
+attributes
+operations
+end
+
+class CallOperationAction<CallAction
+attributes
+operations
+end
+
+class OutputPin<Pin
+attributes
+operations
+end
+
+abstract class StructuredValue<Value
+attributes
+operations
+end
+
+class FeatureValue
+attributes
+	position : Integer
+operations
+end
+
+class UnlimitedNaturalValue<PrimitiveValue
+attributes
+	value : Integer
+operations
+end
+
+abstract class PrimitiveValue<Value
+attributes
+operations
+end
+
+class StringValue<PrimitiveValue
+attributes
+	value : String
+operations
+end
+
+class Reference<StructuredValue
+attributes
+operations
+end
+
+class Object<ExtensionalValue
+attributes
+operations
+end
+
+abstract class ExtensionalValue<CompoundValue
+attributes
+operations
+end
+
+abstract class CompoundValue<StructuredValue
+attributes
+operations
+end
+
+class Link<ExtensionalValue
+attributes
+operations
+end
+
+class IntegerValue<PrimitiveValue
+attributes
+	value : Integer
+operations
+end
+
+class EnumerationValue<Value
+attributes
+operations
+end
+
+class DataValue<CompoundValue
+attributes
+operations
+end
+
+class BooleanValue<PrimitiveValue
+attributes
+	value : Boolean
+operations
+end
+
+abstract class Value<SemanticVisitor
+attributes
+operations
+end
+
+abstract class SemanticVisitor
+attributes
+operations
+end
+
+class Locus
+attributes
+operations
+end
+
+class ParameterValue
+attributes
+operations
+end
+
+association xxx_Behavior_specification between
+	Behavior[*] role xxx_Behavior_specification_src
+	BehavioralFeature[0..1] role specification
+end
+
+composition xxx_Behavior_ownedParameter between
+	Behavior[0..1] role xxx_Behavior_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+association xxx_Behavior_context_ between
+	Behavior[*] role xxx_Behavior_context__src
+	BehavioredClassifier[0..1] role context_
+end
+
+composition xxx_BehavioredClassifier_ownedBehavior between
+	BehavioredClassifier[0..1] role xxx_BehavioredClassifier_ownedBehavior_src
+	Behavior[*] role ownedBehavior
+end
+
+association xxx_BehavioredClassifier_classifierBehavior between
+	BehavioredClassifier[*] role xxx_BehavioredClassifier_classifierBehavior_src
+	Behavior[0..1] role classifierBehavior
+end
+
+association xxx_Trigger_event between
+	Trigger[*] role xxx_Trigger_event_src
+	Event[1] role event
+end
+
+composition xxx_Signal_ownedAttribute between
+	Signal[0..1] role xxx_Signal_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+association xxx_SignalEvent_signal between
+	SignalEvent[*] role xxx_SignalEvent_signal_src
+	Signal[1] role signal
+end
+
+association xxx_Reception_signal between
+	Reception[*] role xxx_Reception_signal_src
+	Signal[1] role signal
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_NamedElement_namespace between
+	NamedElement[*] role xxx_NamedElement_namespace_src
+	Namespace[0..1] role namespace
+end
+
+association xxx_Element_ownedElement between
+	Element[0..1] role xxx_Element_ownedElement_src
+	Element[*] role ownedElement
+end
+
+association xxx_Element_owner between
+	Element[*] role xxx_Element_owner_src
+	Element[0..1] role owner
+end
+
+composition xxx_Element_ownedComment between
+	Element[0..1] role xxx_Element_ownedComment_src
+	Comment[*] role ownedComment
+end
+
+association xxx_Comment_annotatedElement between
+	Comment[0..1] role xxx_Comment_annotatedElement_src
+	Element[*] role annotatedElement
+end
+
+association xxx_Namespace_member between
+	Namespace[0..1] role xxx_Namespace_member_src
+	NamedElement[*] role member
+end
+
+composition xxx_Namespace_elementImport between
+	Namespace[0..1] role xxx_Namespace_elementImport_src
+	ElementImport[*] role elementImport
+end
+
+composition xxx_Namespace_packageImport between
+	Namespace[0..1] role xxx_Namespace_packageImport_src
+	PackageImport[*] role packageImport
+end
+
+association xxx_Namespace_importedMember between
+	Namespace[0..1] role xxx_Namespace_importedMember_src
+	PackageableElement[*] role importedMember
+end
+
+association xxx_Namespace_ownedMember between
+	Namespace[0..1] role xxx_Namespace_ownedMember_src
+	NamedElement[*] role ownedMember
+end
+
+association xxx_ElementImport_importedElement between
+	ElementImport[*] role xxx_ElementImport_importedElement_src
+	PackageableElement[1] role importedElement
+end
+
+association xxx_ElementImport_importingNamespace between
+	ElementImport[*] role xxx_ElementImport_importingNamespace_src
+	Namespace[1] role importingNamespace
+end
+
+association xxx_PackageImport_importedPackage between
+	PackageImport[*] role xxx_PackageImport_importedPackage_src
+	Package[1] role importedPackage
+end
+
+association xxx_PackageImport_importingNamespace between
+	PackageImport[*] role xxx_PackageImport_importingNamespace_src
+	Namespace[1] role importingNamespace
+end
+
+composition xxx_Package_packagedElement between
+	Package[0..1] role xxx_Package_packagedElement_src
+	PackageableElement[*] role packagedElement
+end
+
+association xxx_Package_ownedType between
+	Package[0..1] role xxx_Package_ownedType_src
+	Type[*] role ownedType
+end
+
+association xxx_Package_nestedPackage between
+	Package[0..1] role xxx_Package_nestedPackage_src
+	Package[*] role nestedPackage
+end
+
+association xxx_Package_nestingPackage between
+	Package[*] role xxx_Package_nestingPackage_src
+	Package[0..1] role nestingPackage
+end
+
+association xxx_Type_package between
+	Type[*] role xxx_Type_package_src
+	Package[0..1] role package
+end
+
+association xxx_Feature_featuringClassifier between
+	Feature[0..1] role xxx_Feature_featuringClassifier_src
+	Classifier[*] role featuringClassifier
+end
+
+association xxx_RedefinableElement_redefinedElement between
+	RedefinableElement[0..1] role xxx_RedefinableElement_redefinedElement_src
+	RedefinableElement[*] role redefinedElement
+end
+
+association xxx_RedefinableElement_redefinitionContext between
+	RedefinableElement[0..1] role xxx_RedefinableElement_redefinitionContext_src
+	Classifier[*] role redefinitionContext
+end
+
+composition xxx_Classifier_generalization between
+	Classifier[0..1] role xxx_Classifier_generalization_src
+	Generalization[*] role generalization
+end
+
+association xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+association xxx_Classifier_inheritedMember between
+	Classifier[0..1] role xxx_Classifier_inheritedMember_src
+	NamedElement[*] role inheritedMember
+end
+
+association xxx_Classifier_attribute between
+	Classifier[0..1] role xxx_Classifier_attribute_src
+	Property[*] role attribute
+end
+
+association xxx_Classifier_general between
+	Classifier[0..1] role xxx_Classifier_general_src
+	Classifier[*] role general
+end
+
+association xxx_Generalization_general between
+	Generalization[*] role xxx_Generalization_general_src
+	Classifier[1] role general
+end
+
+association xxx_Generalization_specific between
+	Generalization[*] role xxx_Generalization_specific_src
+	Classifier[1] role specific
+end
+
+association xxx_Property_owningAssociation between
+	Property[*] role xxx_Property_owningAssociation_src
+	Association[0..1] role owningAssociation
+end
+
+association xxx_Property_association_ between
+	Property[*] role xxx_Property_association__src
+	Association[0..1] role association_
+end
+
+association xxx_Property_datatype between
+	Property[*] role xxx_Property_datatype_src
+	DataType[0..1] role datatype
+end
+
+association xxx_Property_class_ between
+	Property[*] role xxx_Property_class__src
+	Class[0..1] role class_
+end
+
+association xxx_Property_opposite between
+	Property[*] role xxx_Property_opposite_src
+	Property[0..1] role opposite
+end
+
+association xxx_Association_endType between
+	Association[0..1] role xxx_Association_endType_src
+	Type[1..*] role endType
+end
+
+association xxx_Association_memberEnd between
+	Association[0..1] role xxx_Association_memberEnd_src
+	Property[2..*] role memberEnd
+end
+
+association xxx_Association_navigableOwnedEnd between
+	Association[0..1] role xxx_Association_navigableOwnedEnd_src
+	Property[*] role navigableOwnedEnd
+end
+
+composition xxx_Association_ownedEnd between
+	Association[0..1] role xxx_Association_ownedEnd_src
+	Property[*] role ownedEnd
+end
+
+composition xxx_DataType_ownedAttribute between
+	DataType[0..1] role xxx_DataType_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_MultiplicityElement_upperValue between
+	MultiplicityElement[*] role xxx_MultiplicityElement_upperValue_src
+	ValueSpecification[0..1] role upperValue
+end
+
+composition xxx_MultiplicityElement_lowerValue between
+	MultiplicityElement[*] role xxx_MultiplicityElement_lowerValue_src
+	ValueSpecification[0..1] role lowerValue
+end
+
+composition xxx_BehavioralFeature_ownedParameter between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+association xxx_BehavioralFeature_method between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_method_src
+	Behavior[*] role method
+end
+
+association xxx_Operation_class_ between
+	Operation[*] role xxx_Operation_class__src
+	Class[0..1] role class_
+end
+
+association xxx_Operation_redefinedOperation between
+	Operation[0..1] role xxx_Operation_redefinedOperation_src
+	Operation[*] role redefinedOperation
+end
+
+association xxx_Operation_type between
+	Operation[*] role xxx_Operation_type_src
+	Type[0..1] role type
+end
+
+association xxx_InstanceSpecification_classifier between
+	InstanceSpecification[0..1] role xxx_InstanceSpecification_classifier_src
+	Classifier[*] role classifier
+end
+
+composition xxx_InstanceSpecification_slot between
+	InstanceSpecification[0..1] role xxx_InstanceSpecification_slot_src
+	Slot[*] role slot
+end
+
+association xxx_Slot_definingFeature between
+	Slot[*] role xxx_Slot_definingFeature_src
+	StructuralFeature[1] role definingFeature
+end
+
+composition xxx_Slot_value between
+	Slot[0..1] role xxx_Slot_value_src
+	ValueSpecification[*] role value
+end
+
+association xxx_Slot_owningInstance between
+	Slot[*] role xxx_Slot_owningInstance_src
+	InstanceSpecification[1] role owningInstance
+end
+
+association xxx_InstanceValue_instance between
+	InstanceValue[*] role xxx_InstanceValue_instance_src
+	InstanceSpecification[1] role instance
+end
+
+composition xxx_Enumeration_ownedLiteral between
+	Enumeration[0..1] role xxx_Enumeration_ownedLiteral_src
+	EnumerationLiteral[*] role ownedLiteral
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+composition xxx_Class_ownedAttribute between
+	Class[0..1] role xxx_Class_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_Class_ownedOperation between
+	Class[0..1] role xxx_Class_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+association xxx_Class_superClass between
+	Class[0..1] role xxx_Class_superClass_src
+	Class[*] role superClass
+end
+
+composition xxx_Class_ownedReception between
+	Class[0..1] role xxx_Class_ownedReception_src
+	Reception[*] role ownedReception
+end
+
+composition xxx_Class_nestedClassifier between
+	Class[0..1] role xxx_Class_nestedClassifier_src
+	Classifier[*] role nestedClassifier
+end
+
+association xxx_ActivityEdge_activity between
+	ActivityEdge[*] role xxx_ActivityEdge_activity_src
+	Activity[0..1] role activity
+end
+
+association xxx_ActivityEdge_source between
+	ActivityEdge[*] role xxx_ActivityEdge_source_src
+	ActivityNode[1] role source
+end
+
+association xxx_ActivityEdge_target between
+	ActivityEdge[*] role xxx_ActivityEdge_target_src
+	ActivityNode[1] role target
+end
+
+association xxx_ActivityEdge_inStructuredNode between
+	ActivityEdge[*] role xxx_ActivityEdge_inStructuredNode_src
+	StructuredActivityNode[0..1] role inStructuredNode
+end
+
+composition xxx_ActivityEdge_guard between
+	ActivityEdge[*] role xxx_ActivityEdge_guard_src
+	ValueSpecification[0..1] role guard
+end
+
+composition xxx_Activity_node between
+	Activity[0..1] role xxx_Activity_node_src
+	ActivityNode[*] role node
+end
+
+composition xxx_Activity_edge between
+	Activity[0..1] role xxx_Activity_edge_src
+	ActivityEdge[*] role edge
+end
+
+association xxx_ActivityNode_inStructuredNode between
+	ActivityNode[*] role xxx_ActivityNode_inStructuredNode_src
+	StructuredActivityNode[0..1] role inStructuredNode
+end
+
+association xxx_ActivityNode_activity between
+	ActivityNode[*] role xxx_ActivityNode_activity_src
+	Activity[0..1] role activity
+end
+
+association xxx_ActivityNode_outgoing between
+	ActivityNode[0..1] role xxx_ActivityNode_outgoing_src
+	ActivityEdge[*] role outgoing
+end
+
+association xxx_ActivityNode_incoming between
+	ActivityNode[0..1] role xxx_ActivityNode_incoming_src
+	ActivityEdge[*] role incoming
+end
+
+association xxx_DecisionNode_decisionInput between
+	DecisionNode[*] role xxx_DecisionNode_decisionInput_src
+	Behavior[0..1] role decisionInput
+end
+
+association xxx_DecisionNode_decisionInputFlow between
+	DecisionNode[*] role xxx_DecisionNode_decisionInputFlow_src
+	ObjectFlow[0..1] role decisionInputFlow
+end
+
+association xxx_ActivityParameterNode_parameter between
+	ActivityParameterNode[*] role xxx_ActivityParameterNode_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_LoopNode_decider between
+	LoopNode[*] role xxx_LoopNode_decider_src
+	OutputPin[1] role decider
+end
+
+association xxx_LoopNode_test between
+	LoopNode[0..1] role xxx_LoopNode_test_src
+	ExecutableNode[1..*] role test
+end
+
+association xxx_LoopNode_bodyOutput between
+	LoopNode[0..1] role xxx_LoopNode_bodyOutput_src
+	OutputPin[*] role bodyOutput
+end
+
+composition xxx_LoopNode_loopVariableInput between
+	LoopNode[0..1] role xxx_LoopNode_loopVariableInput_src
+	InputPin[*] role loopVariableInput
+end
+
+association xxx_LoopNode_bodyPart between
+	LoopNode[0..1] role xxx_LoopNode_bodyPart_src
+	ExecutableNode[*] role bodyPart
+end
+
+composition xxx_LoopNode_result between
+	LoopNode[0..1] role xxx_LoopNode_result_src
+	OutputPin[*] role result
+end
+
+association xxx_LoopNode_loopVariable between
+	LoopNode[0..1] role xxx_LoopNode_loopVariable_src
+	OutputPin[*] role loopVariable
+end
+
+association xxx_LoopNode_setupPart between
+	LoopNode[0..1] role xxx_LoopNode_setupPart_src
+	ExecutableNode[*] role setupPart
+end
+
+association xxx_Clause_test between
+	Clause[0..1] role xxx_Clause_test_src
+	ExecutableNode[1..*] role test
+end
+
+association xxx_Clause_body between
+	Clause[0..1] role xxx_Clause_body_src
+	ExecutableNode[*] role body
+end
+
+association xxx_Clause_predecessorClause between
+	Clause[0..1] role xxx_Clause_predecessorClause_src
+	Clause[*] role predecessorClause
+end
+
+association xxx_Clause_successorClause between
+	Clause[0..1] role xxx_Clause_successorClause_src
+	Clause[*] role successorClause
+end
+
+association xxx_Clause_decider between
+	Clause[*] role xxx_Clause_decider_src
+	OutputPin[1] role decider
+end
+
+association xxx_Clause_bodyOutput between
+	Clause[0..1] role xxx_Clause_bodyOutput_src
+	OutputPin[*] role bodyOutput
+end
+
+composition xxx_ConditionalNode_clause between
+	ConditionalNode[0..1] role xxx_ConditionalNode_clause_src
+	Clause[1..*] role clause
+end
+
+composition xxx_ConditionalNode_result between
+	ConditionalNode[0..1] role xxx_ConditionalNode_result_src
+	OutputPin[*] role result
+end
+
+composition xxx_StructuredActivityNode_node between
+	StructuredActivityNode[0..1] role xxx_StructuredActivityNode_node_src
+	ActivityNode[*] role node
+end
+
+composition xxx_StructuredActivityNode_edge between
+	StructuredActivityNode[0..1] role xxx_StructuredActivityNode_edge_src
+	ActivityEdge[*] role edge
+end
+
+composition xxx_StructuredActivityNode_structuredNodeOutput between
+	StructuredActivityNode[0..1] role xxx_StructuredActivityNode_structuredNodeOutput_src
+	OutputPin[*] role structuredNodeOutput
+end
+
+composition xxx_StructuredActivityNode_structuredNodeInput between
+	StructuredActivityNode[0..1] role xxx_StructuredActivityNode_structuredNodeInput_src
+	InputPin[*] role structuredNodeInput
+end
+
+association xxx_ExpansionNode_regionAsOutput between
+	ExpansionNode[*] role xxx_ExpansionNode_regionAsOutput_src
+	ExpansionRegion[0..1] role regionAsOutput
+end
+
+association xxx_ExpansionNode_regionAsInput between
+	ExpansionNode[*] role xxx_ExpansionNode_regionAsInput_src
+	ExpansionRegion[0..1] role regionAsInput
+end
+
+association xxx_ExpansionRegion_inputElement between
+	ExpansionRegion[0..1] role xxx_ExpansionRegion_inputElement_src
+	ExpansionNode[1..*] role inputElement
+end
+
+association xxx_ExpansionRegion_outputElement between
+	ExpansionRegion[0..1] role xxx_ExpansionRegion_outputElement_src
+	ExpansionNode[*] role outputElement
+end
+
+association xxx_StructuralFeatureAction_structuralFeature between
+	StructuralFeatureAction[*] role xxx_StructuralFeatureAction_structuralFeature_src
+	StructuralFeature[1] role structuralFeature
+end
+
+composition xxx_StructuralFeatureAction_object between
+	StructuralFeatureAction[*] role xxx_StructuralFeatureAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_TestIdentityAction_second between
+	TestIdentityAction[*] role xxx_TestIdentityAction_second_src
+	InputPin[1] role second
+end
+
+composition xxx_TestIdentityAction_result between
+	TestIdentityAction[*] role xxx_TestIdentityAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_TestIdentityAction_first between
+	TestIdentityAction[*] role xxx_TestIdentityAction_first_src
+	InputPin[1] role first
+end
+
+composition xxx_ValueSpecificationAction_value between
+	ValueSpecificationAction[*] role xxx_ValueSpecificationAction_value_src
+	ValueSpecification[1] role value
+end
+
+composition xxx_ValueSpecificationAction_result between
+	ValueSpecificationAction[*] role xxx_ValueSpecificationAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_LinkAction_endData between
+	LinkAction[0..1] role xxx_LinkAction_endData_src
+	LinkEndData[2..*] role endData
+end
+
+composition xxx_LinkAction_inputValue between
+	LinkAction[0..1] role xxx_LinkAction_inputValue_src
+	InputPin[1..*] role inputValue
+end
+
+association xxx_LinkEndData_value between
+	LinkEndData[*] role xxx_LinkEndData_value_src
+	InputPin[0..1] role value
+end
+
+association xxx_LinkEndData_end_ between
+	LinkEndData[*] role xxx_LinkEndData_end__src
+	Property[1] role end_
+end
+
+composition xxx_WriteStructuralFeatureAction_value between
+	WriteStructuralFeatureAction[*] role xxx_WriteStructuralFeatureAction_value_src
+	InputPin[0..1] role value
+end
+
+composition xxx_WriteStructuralFeatureAction_result between
+	WriteStructuralFeatureAction[*] role xxx_WriteStructuralFeatureAction_result_src
+	OutputPin[0..1] role result
+end
+
+composition xxx_RemoveStructuralFeatureValueAction_removeAt between
+	RemoveStructuralFeatureValueAction[*] role xxx_RemoveStructuralFeatureValueAction_removeAt_src
+	InputPin[0..1] role removeAt
+end
+
+composition xxx_ReadLinkAction_result between
+	ReadLinkAction[*] role xxx_ReadLinkAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReadSelfAction_result between
+	ReadSelfAction[*] role xxx_ReadSelfAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReadStructuralFeatureAction_result between
+	ReadStructuralFeatureAction[*] role xxx_ReadStructuralFeatureAction_result_src
+	OutputPin[0..1] role result
+end
+
+association xxx_LinkEndCreationData_insertAt between
+	LinkEndCreationData[*] role xxx_LinkEndCreationData_insertAt_src
+	InputPin[0..1] role insertAt
+end
+
+association xxx_LinkEndDestructionData_destroyAt between
+	LinkEndDestructionData[*] role xxx_LinkEndDestructionData_destroyAt_src
+	InputPin[0..1] role destroyAt
+end
+
+association xxx_ClearAssociationAction_association_ between
+	ClearAssociationAction[*] role xxx_ClearAssociationAction_association__src
+	Association[1] role association_
+end
+
+composition xxx_ClearAssociationAction_object between
+	ClearAssociationAction[*] role xxx_ClearAssociationAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_ClearStructuralFeatureAction_result between
+	ClearStructuralFeatureAction[*] role xxx_ClearStructuralFeatureAction_result_src
+	OutputPin[0..1] role result
+end
+
+composition xxx_CreateObjectAction_result between
+	CreateObjectAction[*] role xxx_CreateObjectAction_result_src
+	OutputPin[1] role result
+end
+
+association xxx_CreateObjectAction_classifier between
+	CreateObjectAction[*] role xxx_CreateObjectAction_classifier_src
+	Classifier[1] role classifier
+end
+
+composition xxx_DestroyObjectAction_target between
+	DestroyObjectAction[*] role xxx_DestroyObjectAction_target_src
+	InputPin[1] role target
+end
+
+composition xxx_AddStructuralFeatureValueAction_insertAt between
+	AddStructuralFeatureValueAction[*] role xxx_AddStructuralFeatureValueAction_insertAt_src
+	InputPin[0..1] role insertAt
+end
+
+composition xxx_StartClassifierBehaviorAction_object between
+	StartClassifierBehaviorAction[*] role xxx_StartClassifierBehaviorAction_object_src
+	InputPin[1] role object
+end
+
+composition xxx_StartObjectBehaviorAction_object between
+	StartObjectBehaviorAction[*] role xxx_StartObjectBehaviorAction_object_src
+	InputPin[1] role object
+end
+
+association xxx_ReduceAction_reducer between
+	ReduceAction[*] role xxx_ReduceAction_reducer_src
+	Behavior[1] role reducer
+end
+
+composition xxx_ReduceAction_result between
+	ReduceAction[*] role xxx_ReduceAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReduceAction_collection between
+	ReduceAction[*] role xxx_ReduceAction_collection_src
+	InputPin[1] role collection
+end
+
+composition xxx_ReadExtentAction_result between
+	ReadExtentAction[*] role xxx_ReadExtentAction_result_src
+	OutputPin[1] role result
+end
+
+association xxx_ReadExtentAction_classifier between
+	ReadExtentAction[*] role xxx_ReadExtentAction_classifier_src
+	Classifier[1] role classifier
+end
+
+association xxx_ReadIsClassifiedObjectAction_classifier between
+	ReadIsClassifiedObjectAction[*] role xxx_ReadIsClassifiedObjectAction_classifier_src
+	Classifier[1] role classifier
+end
+
+composition xxx_ReadIsClassifiedObjectAction_result between
+	ReadIsClassifiedObjectAction[*] role xxx_ReadIsClassifiedObjectAction_result_src
+	OutputPin[1] role result
+end
+
+composition xxx_ReadIsClassifiedObjectAction_object between
+	ReadIsClassifiedObjectAction[*] role xxx_ReadIsClassifiedObjectAction_object_src
+	InputPin[1] role object
+end
+
+association xxx_ReclassifyObjectAction_oldClassifier between
+	ReclassifyObjectAction[0..1] role xxx_ReclassifyObjectAction_oldClassifier_src
+	Classifier[*] role oldClassifier
+end
+
+composition xxx_ReclassifyObjectAction_object between
+	ReclassifyObjectAction[*] role xxx_ReclassifyObjectAction_object_src
+	InputPin[1] role object
+end
+
+association xxx_ReclassifyObjectAction_newClassifier between
+	ReclassifyObjectAction[0..1] role xxx_ReclassifyObjectAction_newClassifier_src
+	Classifier[*] role newClassifier
+end
+
+association xxx_AcceptEventAction_result between
+	AcceptEventAction[0..1] role xxx_AcceptEventAction_result_src
+	OutputPin[*] role result
+end
+
+composition xxx_AcceptEventAction_trigger between
+	AcceptEventAction[0..1] role xxx_AcceptEventAction_trigger_src
+	Trigger[1..*] role trigger
+end
+
+association xxx_Action_output between
+	Action[0..1] role xxx_Action_output_src
+	OutputPin[*] role output
+end
+
+association xxx_Action_context_ between
+	Action[*] role xxx_Action_context__src
+	Classifier[0..1] role context_
+end
+
+association xxx_Action_input between
+	Action[0..1] role xxx_Action_input_src
+	InputPin[*] role input
+end
+
+composition xxx_CallAction_result between
+	CallAction[0..1] role xxx_CallAction_result_src
+	OutputPin[*] role result
+end
+
+composition xxx_InvocationAction_argument between
+	InvocationAction[0..1] role xxx_InvocationAction_argument_src
+	InputPin[*] role argument
+end
+
+composition xxx_SendSignalAction_target between
+	SendSignalAction[*] role xxx_SendSignalAction_target_src
+	InputPin[1] role target
+end
+
+association xxx_SendSignalAction_signal between
+	SendSignalAction[*] role xxx_SendSignalAction_signal_src
+	Signal[1] role signal
+end
+
+association xxx_CallBehaviorAction_behavior between
+	CallBehaviorAction[*] role xxx_CallBehaviorAction_behavior_src
+	Behavior[1] role behavior
+end
+
+association xxx_CallOperationAction_operation between
+	CallOperationAction[*] role xxx_CallOperationAction_operation_src
+	Operation[1] role operation
+end
+
+composition xxx_CallOperationAction_target between
+	CallOperationAction[*] role xxx_CallOperationAction_target_src
+	InputPin[1] role target
+end
+
+association xxx_FeatureValue_feature between
+	FeatureValue[*] role xxx_FeatureValue_feature_src
+	StructuralFeature[1] role feature
+end
+
+composition xxx_FeatureValue_values between
+	FeatureValue[0..1] role xxx_FeatureValue_values_src
+	Value[*] role values
+end
+
+association xxx_PrimitiveValue_type between
+	PrimitiveValue[*] role xxx_PrimitiveValue_type_src
+	PrimitiveType[1] role type
+end
+
+association xxx_Reference_referent between
+	Reference[*] role xxx_Reference_referent_src
+	Object[1] role referent
+end
+
+association xxx_Object_types between
+	Object[0..1] role xxx_Object_types_src
+	Class[*] role types
+end
+
+association xxx_ExtensionalValue_locus between
+	ExtensionalValue[*] role xxx_ExtensionalValue_locus_src
+	Locus[0..1] role locus
+end
+
+composition xxx_CompoundValue_featureValues between
+	CompoundValue[0..1] role xxx_CompoundValue_featureValues_src
+	FeatureValue[*] role featureValues
+end
+
+association xxx_Link_type between
+	Link[*] role xxx_Link_type_src
+	Association[0..1] role type
+end
+
+association xxx_EnumerationValue_literal between
+	EnumerationValue[*] role xxx_EnumerationValue_literal_src
+	EnumerationLiteral[1] role literal
+end
+
+association xxx_EnumerationValue_type between
+	EnumerationValue[*] role xxx_EnumerationValue_type_src
+	Enumeration[1] role type
+end
+
+association xxx_DataValue_type between
+	DataValue[*] role xxx_DataValue_type_src
+	DataType[1] role type
+end
+
+composition xxx_Locus_extensionalValues between
+	Locus[0..1] role xxx_Locus_extensionalValues_src
+	ExtensionalValue[*] role extensionalValues
+end
+
+association xxx_ParameterValue_parameter between
+	ParameterValue[*] role xxx_ParameterValue_parameter_src
+	Parameter[1] role parameter
+end
+
+composition xxx_ParameterValue_values between
+	ParameterValue[0..1] role xxx_ParameterValue_values_src
+	Value[*] role values
+end
+

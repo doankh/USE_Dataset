@@ -1,0 +1,156 @@
+model ExtendedUMLCorePackage
+class ModelElement
+attributes
+operations
+end
+
+class Name
+attributes
+operations
+end
+
+class AssociationEnd<ModelElement
+attributes
+	isNavigable : Boolean
+	isOrdered : Boolean
+operations
+end
+
+class AggregationKind
+attributes
+operations
+end
+
+class Multiplicity
+attributes
+operations
+end
+
+class ChangeableKind
+attributes
+operations
+end
+
+class ScopeKind
+attributes
+operations
+end
+
+class RfIntegretyKind
+attributes
+operations
+end
+
+class RlIntegretyKind
+attributes
+operations
+end
+
+class Namespace<ModelElement
+attributes
+operations
+end
+
+class GeneralizableElement<Namespace
+attributes
+operations
+end
+
+class Classifier<GeneralizableElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	isActive : Boolean
+operations
+end
+
+abstract class Key<ModelElement
+attributes
+operations
+end
+
+class Feature<ModelElement
+attributes
+operations
+end
+
+class StructureFeature<Feature
+attributes
+operations
+end
+
+abstract class Constraint<Feature
+attributes
+operations
+end
+
+class Attribute<StructureFeature
+attributes
+	isKey : Boolean
+	isUnique : Boolean
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+association xxx_ModelElement_name between
+	ModelElement[*] role xxx_ModelElement_name_src
+	Name[1] role name
+end
+
+association xxx_AssociationEnd_aggregation between
+	AssociationEnd[*] role xxx_AssociationEnd_aggregation_src
+	AggregationKind[1] role aggregation
+end
+
+association xxx_AssociationEnd_multiplicity between
+	AssociationEnd[*] role xxx_AssociationEnd_multiplicity_src
+	Multiplicity[1] role multiplicity
+end
+
+association xxx_AssociationEnd_changeable between
+	AssociationEnd[*] role xxx_AssociationEnd_changeable_src
+	ChangeableKind[1] role changeable
+end
+
+association xxx_AssociationEnd_TargetScope between
+	AssociationEnd[*] role xxx_AssociationEnd_TargetScope_src
+	ScopeKind[1] role TargetScope
+end
+
+association xxx_AssociationEnd_rfIntegrety between
+	AssociationEnd[*] role xxx_AssociationEnd_rfIntegrety_src
+	RlIntegretyKind[1] role rfIntegrety
+end
+
+association xxx_AssociationEnd_rlIntegrety between
+	AssociationEnd[*] role xxx_AssociationEnd_rlIntegrety_src
+	RlIntegretyKind[1] role rlIntegrety
+end
+
+association xxx_Class_mutliplicity between
+	Class[*] role xxx_Class_mutliplicity_src
+	Multiplicity[1] role mutliplicity
+end
+
+composition xxx_Class_key between
+	Class[0..1] role xxx_Class_key_src
+	Key[*] role key
+end
+
+association xxx_Key_classOwner between
+	Key[*] role xxx_Key_classOwner_src
+	Class[1] role classOwner
+end
+
+association xxx_Attribute_initialValue between
+	Attribute[*] role xxx_Attribute_initialValue_src
+	Expression[1] role initialValue
+end
+

@@ -1,0 +1,676 @@
+model qm
+enum Effect{
+default
+}
+
+enum Type{
+default
+}
+
+class QualityModel<NamedElement
+attributes
+	schoolGradeBoundary2 : Real
+	schoolGradeBoundary3 : Real
+	schoolGradeBoundary4 : Real
+	schoolGradeBoundary5 : Real
+	schoolGradeBoundary6 : Real
+operations
+end
+
+abstract class QualityModelElement
+attributes
+	qualifiedName : String
+operations
+end
+
+class Source<NamedElement
+attributes
+operations
+end
+
+abstract class DescribedElement<AnnotatedElement
+attributes
+	description : String
+operations
+end
+
+abstract class NamedElement<DescribedElement
+attributes
+	name : String
+	title : String
+operations
+end
+
+abstract class AnnotatedElement<TaggedElement
+attributes
+operations
+end
+
+class Annotation
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Tag<NamedElement
+attributes
+operations
+end
+
+abstract class TaggedElement<QualityModelElement
+attributes
+operations
+end
+
+class Entity<NamedElement
+attributes
+	stakeholder : Boolean
+	useCase : Boolean
+operations
+end
+
+class Specialization<AnnotatedElement
+attributes
+operations
+end
+
+class Decomposition<AnnotatedElement
+attributes
+operations
+end
+
+abstract class CharacterizingElement<NamedElement
+attributes
+operations
+end
+
+class Factor<CharacterizingElement
+attributes
+operations
+end
+
+class Impact<AnnotatedElement
+attributes
+	justification : String
+	effect : Effect
+operations
+end
+
+abstract class Evaluation<NamedElement
+attributes
+	maximumPoints : Integer
+	completeness : Integer
+operations
+end
+
+class FactorRefinement<AnnotatedElement
+attributes
+operations
+end
+
+class Measurement<AnnotatedElement
+attributes
+operations
+end
+
+class MeasureRefinement<AnnotatedElement
+attributes
+operations
+end
+
+class Measure<CharacterizingElement
+attributes
+	type : Type
+operations
+end
+
+abstract class MeasurementMethod<AnnotatedElement
+attributes
+operations
+end
+
+abstract class MeasureAggregation<MeasurementMethod,NamedElement
+attributes
+operations
+end
+
+abstract class Instrument<MeasurementMethod
+attributes
+operations
+end
+
+class ManualInstrument<Instrument,NamedElement
+attributes
+operations
+end
+
+class ToolBasedInstrument<Instrument
+attributes
+	metric : String
+operations
+end
+
+class Tool<NamedElement
+attributes
+operations
+end
+
+abstract class AnnotationBase
+attributes
+operations
+end
+
+class QIESLEvaluation<TextEvaluation
+attributes
+operations
+end
+
+class TextEvaluation<Evaluation
+attributes
+	specification : String
+operations
+end
+
+abstract class FormBasedEvaluation<Evaluation
+attributes
+operations
+end
+
+class SingleMeasureEvaluation<FormBasedEvaluation,MeasureEvaluation
+attributes
+operations
+end
+
+abstract class FactorAggregation<FormBasedEvaluation
+attributes
+operations
+end
+
+class NormalizationMeasure<Measure
+attributes
+operations
+end
+
+class QIESLAggregation<TextAggregation
+attributes
+operations
+end
+
+class TextAggregation<MeasureAggregation
+attributes
+	specification : String
+operations
+end
+
+abstract class FormBasedMeasureAggregation<MeasureAggregation
+attributes
+operations
+end
+
+class FactorRanking<Ranking
+attributes
+operations
+end
+
+abstract class LinearFunction<Function
+attributes
+	lowerBound : Real
+	upperBound : Real
+operations
+end
+
+abstract class Function
+attributes
+operations
+end
+
+class LinearIncreasingFunction<LinearFunction
+attributes
+operations
+end
+
+class LinearDecreasingFunction<LinearFunction
+attributes
+operations
+end
+
+class WeightedSumFactorAggregation<FactorAggregation
+attributes
+operations
+end
+
+class FindingsUnionMeasureAggregation<FormBasedMeasureAggregation
+attributes
+operations
+end
+
+class NumberMeanMeasureAggregation<FormBasedMeasureAggregation
+attributes
+operations
+end
+
+class ManualEvaluation<Evaluation
+attributes
+operations
+end
+
+abstract class MeasureEvaluation
+attributes
+	range : String
+operations
+end
+
+abstract class Ranking
+attributes
+	rank : Integer
+	weight : Real
+operations
+end
+
+abstract class MultiMeasureEvaluation<FormBasedEvaluation
+attributes
+operations
+end
+
+class WeightedSumMultiMeasureEvaluation<MultiMeasureEvaluation
+attributes
+operations
+end
+
+class MeasureRanking<MeasureEvaluation,Ranking
+attributes
+operations
+end
+
+class QualityModelResult
+attributes
+	system : String
+	date : String
+operations
+end
+
+abstract class MeasurementResult<Result
+attributes
+operations
+end
+
+class NumberMeasurementResult<MeasurementResult
+attributes
+operations
+end
+
+class FindingsMeasurementResult<MeasurementResult
+attributes
+	count : Integer
+	findings : String
+operations
+end
+
+class DoubleInterval
+attributes
+	lower : Real
+	upper : Real
+operations
+end
+
+class EvaluationResult<Result
+attributes
+operations
+end
+
+class SingleMeasureEvaluationResult<EvaluationResult
+attributes
+	ratioAffected : Real
+operations
+end
+
+class MultiMeasureEvaluationResult<EvaluationResult
+attributes
+operations
+end
+
+class MeasureRankingEvaluationResult
+attributes
+	ratioAffected : Real
+operations
+end
+
+abstract class Result
+attributes
+	message : String
+operations
+end
+
+class FindingMessage
+attributes
+	message : String
+	location : String
+operations
+end
+
+composition xxx_QualityModel_entities between
+	QualityModel[0..1] role xxx_QualityModel_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_QualityModel_factors between
+	QualityModel[0..1] role xxx_QualityModel_factors_src
+	Factor[*] role factors
+end
+
+composition xxx_QualityModel_evaluations between
+	QualityModel[0..1] role xxx_QualityModel_evaluations_src
+	Evaluation[*] role evaluations
+end
+
+composition xxx_QualityModel_measures between
+	QualityModel[0..1] role xxx_QualityModel_measures_src
+	Measure[*] role measures
+end
+
+composition xxx_QualityModel_measurementMethods between
+	QualityModel[0..1] role xxx_QualityModel_measurementMethods_src
+	MeasurementMethod[*] role measurementMethods
+end
+
+composition xxx_QualityModel_tools between
+	QualityModel[0..1] role xxx_QualityModel_tools_src
+	Tool[*] role tools
+end
+
+composition xxx_QualityModel_tags between
+	QualityModel[0..1] role xxx_QualityModel_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_QualityModel_sources between
+	QualityModel[0..1] role xxx_QualityModel_sources_src
+	Source[*] role sources
+end
+
+association xxx_QualityModel_requires between
+	QualityModel[0..1] role xxx_QualityModel_requires_src
+	QualityModel[*] role requires
+end
+
+association xxx_QualityModelElement_originatesFrom between
+	QualityModelElement[0..1] role xxx_QualityModelElement_originatesFrom_src
+	Source[*] role originatesFrom
+end
+
+association xxx_Source_qualityModel between
+	Source[*] role xxx_Source_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+composition xxx_AnnotatedElement_annotations between
+	AnnotatedElement[0..1] role xxx_AnnotatedElement_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_AnnotatedElement_advancedAnnotations between
+	AnnotatedElement[0..1] role xxx_AnnotatedElement_advancedAnnotations_src
+	AnnotationBase[*] role advancedAnnotations
+end
+
+association xxx_Tag_qualityModel between
+	Tag[*] role xxx_Tag_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+association xxx_TaggedElement_taggedBy between
+	TaggedElement[0..1] role xxx_TaggedElement_taggedBy_src
+	Tag[*] role taggedBy
+end
+
+composition xxx_Entity_isA between
+	Entity[0..1] role xxx_Entity_isA_src
+	Specialization[*] role isA
+end
+
+association xxx_Entity_isADirect between
+	Entity[0..1] role xxx_Entity_isADirect_src
+	Entity[*] role isADirect
+end
+
+composition xxx_Entity_partOf between
+	Entity[*] role xxx_Entity_partOf_src
+	Decomposition[0..1] role partOf
+end
+
+association xxx_Entity_partOfDirect between
+	Entity[*] role xxx_Entity_partOfDirect_src
+	Entity[0..1] role partOfDirect
+end
+
+association xxx_Entity_qualityModel between
+	Entity[*] role xxx_Entity_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+association xxx_Specialization_parent between
+	Specialization[*] role xxx_Specialization_parent_src
+	Entity[1] role parent
+end
+
+association xxx_Specialization_child between
+	Specialization[*] role xxx_Specialization_child_src
+	Entity[1] role child
+end
+
+association xxx_Decomposition_parent between
+	Decomposition[*] role xxx_Decomposition_parent_src
+	Entity[1] role parent
+end
+
+association xxx_Decomposition_child between
+	Decomposition[*] role xxx_Decomposition_child_src
+	Entity[1] role child
+end
+
+association xxx_CharacterizingElement_characterizes between
+	CharacterizingElement[*] role xxx_CharacterizingElement_characterizes_src
+	Entity[0..1] role characterizes
+end
+
+composition xxx_Factor_influences between
+	Factor[0..1] role xxx_Factor_influences_src
+	Impact[*] role influences
+end
+
+association xxx_Factor_influencesDirect between
+	Factor[0..1] role xxx_Factor_influencesDirect_src
+	Factor[*] role influencesDirect
+end
+
+composition xxx_Factor_refines between
+	Factor[0..1] role xxx_Factor_refines_src
+	FactorRefinement[*] role refines
+end
+
+association xxx_Factor_refinesDirect between
+	Factor[0..1] role xxx_Factor_refinesDirect_src
+	Factor[*] role refinesDirect
+end
+
+association xxx_Factor_qualityModel between
+	Factor[*] role xxx_Factor_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+association xxx_Impact_source between
+	Impact[*] role xxx_Impact_source_src
+	Factor[1] role source
+end
+
+association xxx_Impact_target between
+	Impact[*] role xxx_Impact_target_src
+	Factor[1] role target
+end
+
+association xxx_Evaluation_evaluates between
+	Evaluation[*] role xxx_Evaluation_evaluates_src
+	Factor[1] role evaluates
+end
+
+association xxx_Evaluation_qualityModel between
+	Evaluation[*] role xxx_Evaluation_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+association xxx_FactorRefinement_child between
+	FactorRefinement[*] role xxx_FactorRefinement_child_src
+	Factor[1] role child
+end
+
+association xxx_FactorRefinement_parent between
+	FactorRefinement[*] role xxx_FactorRefinement_parent_src
+	Factor[1] role parent
+end
+
+association xxx_Measurement_parent between
+	Measurement[*] role xxx_Measurement_parent_src
+	Factor[1] role parent
+end
+
+association xxx_Measurement_child between
+	Measurement[*] role xxx_Measurement_child_src
+	Measure[1] role child
+end
+
+association xxx_MeasureRefinement_parent between
+	MeasureRefinement[*] role xxx_MeasureRefinement_parent_src
+	Measure[1] role parent
+end
+
+association xxx_MeasureRefinement_child between
+	MeasureRefinement[*] role xxx_MeasureRefinement_child_src
+	Measure[1] role child
+end
+
+composition xxx_Measure_measures between
+	Measure[0..1] role xxx_Measure_measures_src
+	Measurement[*] role measures
+end
+
+association xxx_Measure_measuresDirect between
+	Measure[0..1] role xxx_Measure_measuresDirect_src
+	Factor[*] role measuresDirect
+end
+
+association xxx_Measure_qualityModel between
+	Measure[*] role xxx_Measure_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+composition xxx_Measure_refines between
+	Measure[0..1] role xxx_Measure_refines_src
+	MeasureRefinement[*] role refines
+end
+
+association xxx_Measure_refinesDirect between
+	Measure[0..1] role xxx_Measure_refinesDirect_src
+	Measure[*] role refinesDirect
+end
+
+association xxx_MeasurementMethod_determines between
+	MeasurementMethod[*] role xxx_MeasurementMethod_determines_src
+	Measure[1] role determines
+end
+
+association xxx_MeasurementMethod_qualityModel between
+	MeasurementMethod[*] role xxx_MeasurementMethod_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+association xxx_ToolBasedInstrument_tool between
+	ToolBasedInstrument[*] role xxx_ToolBasedInstrument_tool_src
+	Tool[1] role tool
+end
+
+association xxx_Tool_qualityModel between
+	Tool[*] role xxx_Tool_qualityModel_src
+	QualityModel[1] role qualityModel
+end
+
+association xxx_FactorRanking_factor between
+	FactorRanking[*] role xxx_FactorRanking_factor_src
+	Factor[1] role factor
+end
+
+composition xxx_WeightedSumFactorAggregation_rankings between
+	WeightedSumFactorAggregation[0..1] role xxx_WeightedSumFactorAggregation_rankings_src
+	FactorRanking[1..*] role rankings
+end
+
+association xxx_MeasureEvaluation_measure between
+	MeasureEvaluation[*] role xxx_MeasureEvaluation_measure_src
+	Measure[1] role measure
+end
+
+association xxx_MeasureEvaluation_normlizationMeasure between
+	MeasureEvaluation[*] role xxx_MeasureEvaluation_normlizationMeasure_src
+	NormalizationMeasure[0..1] role normlizationMeasure
+end
+
+composition xxx_MeasureEvaluation_function between
+	MeasureEvaluation[*] role xxx_MeasureEvaluation_function_src
+	Function[1] role function
+end
+
+composition xxx_WeightedSumMultiMeasureEvaluation_rankings between
+	WeightedSumMultiMeasureEvaluation[0..1] role xxx_WeightedSumMultiMeasureEvaluation_rankings_src
+	MeasureRanking[1..*] role rankings
+end
+
+composition xxx_QualityModelResult_measurementResults between
+	QualityModelResult[0..1] role xxx_QualityModelResult_measurementResults_src
+	MeasurementResult[*] role measurementResults
+end
+
+composition xxx_QualityModelResult_evaluationResults between
+	QualityModelResult[0..1] role xxx_QualityModelResult_evaluationResults_src
+	EvaluationResult[*] role evaluationResults
+end
+
+association xxx_MeasurementResult_resultsFrom between
+	MeasurementResult[*] role xxx_MeasurementResult_resultsFrom_src
+	MeasurementMethod[1] role resultsFrom
+end
+
+composition xxx_NumberMeasurementResult_value between
+	NumberMeasurementResult[*] role xxx_NumberMeasurementResult_value_src
+	DoubleInterval[1] role value
+end
+
+composition xxx_FindingsMeasurementResult_findingMessages between
+	FindingsMeasurementResult[0..1] role xxx_FindingsMeasurementResult_findingMessages_src
+	FindingMessage[*] role findingMessages
+end
+
+composition xxx_EvaluationResult_value between
+	EvaluationResult[*] role xxx_EvaluationResult_value_src
+	DoubleInterval[1] role value
+end
+
+association xxx_EvaluationResult_resultsFrom between
+	EvaluationResult[*] role xxx_EvaluationResult_resultsFrom_src
+	Evaluation[1] role resultsFrom
+end
+
+composition xxx_MultiMeasureEvaluationResult_evaluationResults between
+	MultiMeasureEvaluationResult[0..1] role xxx_MultiMeasureEvaluationResult_evaluationResults_src
+	MeasureRankingEvaluationResult[*] role evaluationResults
+end
+
+composition xxx_MeasureRankingEvaluationResult_value between
+	MeasureRankingEvaluationResult[*] role xxx_MeasureRankingEvaluationResult_value_src
+	DoubleInterval[1] role value
+end
+
+association xxx_MeasureRankingEvaluationResult_resultsFrom between
+	MeasureRankingEvaluationResult[*] role xxx_MeasureRankingEvaluationResult_resultsFrom_src
+	MeasureRanking[1] role resultsFrom
+end
+

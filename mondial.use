@@ -1,0 +1,64 @@
+model mondial
+class Mondial
+attributes
+operations
+end
+
+class Continent
+attributes
+	id : String
+	name : String
+operations
+end
+
+class Country
+attributes
+	id : String
+	name : String
+	population : Integer
+	total_area : Real
+	gdp_total : Real
+operations
+end
+
+class Encompassed
+attributes
+	percentage : Real
+operations
+end
+
+class Border
+attributes
+operations
+end
+
+composition xxx_Mondial_continents between
+	Mondial[0..1] role xxx_Mondial_continents_src
+	Continent[*] role continents
+end
+
+composition xxx_Mondial_countries between
+	Mondial[0..1] role xxx_Mondial_countries_src
+	Country[*] role countries
+end
+
+composition xxx_Country_borders between
+	Country[0..1] role xxx_Country_borders_src
+	Border[*] role borders
+end
+
+composition xxx_Country_encompassed between
+	Country[0..1] role xxx_Country_encompassed_src
+	Encompassed[*] role encompassed
+end
+
+association xxx_Encompassed_continent between
+	Encompassed[*] role xxx_Encompassed_continent_src
+	Continent[0..1] role continent
+end
+
+association xxx_Border_country between
+	Border[*] role xxx_Border_country_src
+	Country[0..1] role country
+end
+

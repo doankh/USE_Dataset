@@ -1,0 +1,101 @@
+model customerBehaviour
+enum AppCategory{
+default
+}
+
+class CustomerBehaviour
+attributes
+operations
+end
+
+class Developer
+attributes
+	name : String
+operations
+end
+
+class App
+attributes
+	title : String
+	ageRestriction : Integer
+	category : AppCategory
+	currentPrice : Real
+operations
+end
+
+class Customer
+attributes
+	firstName : String
+	lastName : String
+	dateOfBirth : String
+operations
+end
+
+class Purchase
+attributes
+	date : String
+	atPrice : Real
+operations
+end
+
+class CustomerSimilarityScore
+attributes
+	score : Real
+operations
+end
+
+composition xxx_CustomerBehaviour_customers between
+	CustomerBehaviour[0..1] role xxx_CustomerBehaviour_customers_src
+	Customer[*] role customers
+end
+
+composition xxx_CustomerBehaviour_developers between
+	CustomerBehaviour[0..1] role xxx_CustomerBehaviour_developers_src
+	Developer[*] role developers
+end
+
+composition xxx_CustomerBehaviour_similarityScores between
+	CustomerBehaviour[0..1] role xxx_CustomerBehaviour_similarityScores_src
+	CustomerSimilarityScore[*] role similarityScores
+end
+
+composition xxx_Developer_authoredApps between
+	Developer[0..1] role xxx_Developer_authoredApps_src
+	App[*] role authoredApps
+end
+
+association xxx_App_developer between
+	App[*] role xxx_App_developer_src
+	Developer[0..1] role developer
+end
+
+association xxx_App_purchases between
+	App[0..1] role xxx_App_purchases_src
+	Purchase[*] role purchases
+end
+
+composition xxx_Customer_purchases between
+	Customer[0..1] role xxx_Customer_purchases_src
+	Purchase[*] role purchases
+end
+
+association xxx_Purchase_customer between
+	Purchase[*] role xxx_Purchase_customer_src
+	Customer[0..1] role customer
+end
+
+association xxx_Purchase_app between
+	Purchase[*] role xxx_Purchase_app_src
+	App[0..1] role app
+end
+
+association xxx_CustomerSimilarityScore_customer1 between
+	CustomerSimilarityScore[*] role xxx_CustomerSimilarityScore_customer1_src
+	Customer[0..1] role customer1
+end
+
+association xxx_CustomerSimilarityScore_customer2 between
+	CustomerSimilarityScore[*] role xxx_CustomerSimilarityScore_customer2_src
+	Customer[0..1] role customer2
+end
+

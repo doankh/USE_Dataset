@@ -1,0 +1,53 @@
+model DocBook
+class DocBook
+attributes
+operations
+end
+
+class Book
+attributes
+operations
+end
+
+abstract class TitledElement
+attributes
+	title : String
+operations
+end
+
+class Article<TitledElement
+attributes
+operations
+end
+
+class Sect1<TitledElement
+attributes
+operations
+end
+
+class Para
+attributes
+	content : String
+operations
+end
+
+composition xxx_DocBook_books between
+	DocBook[0..1] role xxx_DocBook_books_src
+	Book[1..*] role books
+end
+
+composition xxx_Book_articles between
+	Book[0..1] role xxx_Book_articles_src
+	Article[1..*] role articles
+end
+
+composition xxx_Article_sections_1 between
+	Article[0..1] role xxx_Article_sections_1_src
+	Sect1[1..*] role sections_1
+end
+
+composition xxx_Sect1_paras between
+	Sect1[0..1] role xxx_Sect1_paras_src
+	Para[1..*] role paras
+end
+

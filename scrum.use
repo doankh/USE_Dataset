@@ -1,0 +1,74 @@
+model Scrum
+enum Status{
+default
+}
+
+abstract class BacklogItem
+attributes
+	name : String
+	description : String
+	ID : Integer
+	status : Status
+	storyPoints : Integer
+	priority : Integer
+operations
+end
+
+class Task<BacklogItem
+attributes
+operations
+end
+
+class Bugreport<BacklogItem
+attributes
+operations
+end
+
+class UserStory<BacklogItem
+attributes
+operations
+end
+
+abstract class Composite
+attributes
+	totalStoryPoints : Integer
+operations
+end
+
+class Backlog<Composite
+attributes
+operations
+end
+
+class Sprint<Composite
+attributes
+	name : String
+	startDate : String
+	endDate : String
+	plannedStoryPoints : Integer
+operations
+	validate(diagnostic : String,context_ : String):Boolean
+end
+
+class User
+attributes
+	firstName : String
+	lastName : String
+operations
+end
+
+association xxx_UserStory_tasks between
+	UserStory[0..1] role xxx_UserStory_tasks_src
+	Task[*] role tasks
+end
+
+composition xxx_Composite_backlogItems between
+	Composite[0..1] role xxx_Composite_backlogItems_src
+	BacklogItem[*] role backlogItems
+end
+
+association xxx_User_backlogItems between
+	User[0..1] role xxx_User_backlogItems_src
+	BacklogItem[*] role backlogItems
+end
+

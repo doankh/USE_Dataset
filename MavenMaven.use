@@ -1,0 +1,555 @@
+model MavenMaven
+class Project
+attributes
+operations
+end
+
+class Xmlns
+attributes
+	name : String
+	value : String
+operations
+end
+
+abstract class AntProperty<ContentsGoal
+attributes
+operations
+end
+
+abstract class AntPropertyName<AntProperty
+attributes
+	name : String
+operations
+end
+
+class AntPropertyValue<AntPropertyName
+attributes
+	value : String
+operations
+end
+
+class AntPropertyLocation<AntPropertyName
+attributes
+	location : String
+operations
+end
+
+class AntPropertyFile<AntProperty
+attributes
+	file : String
+operations
+end
+
+class AntPropertyEnv<AntProperty
+attributes
+	environment : String
+operations
+end
+
+abstract class JellyCommand<ContentsGoal
+attributes
+operations
+end
+
+class JellySet<JellyCommand
+attributes
+	var : String
+	value : String
+operations
+end
+
+class JellyForEach<JellyCommand
+attributes
+	items : String
+	var : String
+	indexVar : String
+operations
+end
+
+abstract class AbstractGoal
+attributes
+operations
+end
+
+abstract class ContentsGoal
+attributes
+operations
+end
+
+class AttainGoal<ContentsGoal
+attributes
+operations
+end
+
+abstract class PrePostGoal<AbstractGoal
+attributes
+operations
+end
+
+class PreGoal<PrePostGoal
+attributes
+operations
+end
+
+class PostGoal<PrePostGoal
+attributes
+operations
+end
+
+class Goal<AbstractGoal
+attributes
+	name : String
+operations
+end
+
+abstract class Pattern
+attributes
+operations
+end
+
+abstract class Basic<Pattern
+attributes
+operations
+end
+
+class Mapper<Basic
+attributes
+	type : String
+	classname : String
+	classpath : String
+	classpathref : String
+	from_ : String
+	to : String
+operations
+end
+
+abstract class InExcludes<Basic
+attributes
+	name : String
+	ifCondition : String
+	unless : String
+operations
+end
+
+class Includes<InExcludes
+attributes
+operations
+end
+
+class Excludes<InExcludes
+attributes
+operations
+end
+
+class IncludesFile<InExcludes
+attributes
+operations
+end
+
+class ExcludesFile<InExcludes
+attributes
+operations
+end
+
+class FileList<Basic
+attributes
+	dir : String
+	files : String
+operations
+end
+
+class Filter<Basic
+attributes
+	token : String
+	value : String
+operations
+end
+
+class FiltersFile<Basic
+attributes
+	file : String
+operations
+end
+
+class PathElement<Basic
+attributes
+	path : String
+	location : String
+operations
+end
+
+abstract class Set_<Pattern
+attributes
+operations
+end
+
+class PatternSet<Set_
+attributes
+operations
+end
+
+class FileSet<Set_
+attributes
+	dir : String
+operations
+end
+
+class FilterSet<Set_
+attributes
+	starttoken : String
+	endtoken : String
+operations
+end
+
+class Path<Set_
+attributes
+	id : String
+	refid : String
+operations
+end
+
+class ClassPath<Set_
+attributes
+	refid : String
+operations
+end
+
+abstract class Task<ContentsGoal
+attributes
+operations
+end
+
+class AntTaskDef<ContentsGoal
+attributes
+	name : String
+	classname : String
+operations
+end
+
+class NewTask<Task
+attributes
+operations
+end
+
+class Attribut
+attributes
+	name : String
+	value : String
+operations
+end
+
+abstract class PreDefinedTask<Task
+attributes
+	id : String
+	taskname : String
+	description : String
+operations
+end
+
+abstract class ExecutionTask<PreDefinedTask
+attributes
+operations
+end
+
+class Exec<ExecutionTask
+attributes
+	executable : String
+	dir : String
+operations
+end
+
+class Java<ExecutionTask
+attributes
+	classname : String
+	jar : String
+	fork : String
+operations
+end
+
+abstract class MiscellaneousTask<PreDefinedTask
+attributes
+operations
+end
+
+class Echo<MiscellaneousTask
+attributes
+	message : String
+	file : String
+	append : String
+operations
+end
+
+class Tstamp<MiscellaneousTask
+attributes
+operations
+end
+
+class FormatTstamp
+attributes
+	property : String
+	pattern : String
+	offset : String
+	unit : String
+	locale : String
+operations
+end
+
+abstract class CompileTask<PreDefinedTask
+attributes
+operations
+end
+
+class Javac<CompileTask
+attributes
+	srcdir : String
+	destdir : String
+	debug : String
+	fork : String
+	optimize : String
+	deprecation : String
+operations
+end
+
+abstract class DocumentationTask<PreDefinedTask
+attributes
+operations
+end
+
+class Javadoc<DocumentationTask
+attributes
+	sourcepath : String
+	destdir : String
+	packagenames : String
+	defaultexcludes : String
+	author : String
+	version : String
+	use : String
+	windowtitle : String
+operations
+end
+
+abstract class ArchiveTask<PreDefinedTask
+attributes
+operations
+end
+
+class Jar<ArchiveTask
+attributes
+	jarfile : String
+	basedir : String
+	compress : String
+	encoding : String
+	manifest : String
+operations
+end
+
+abstract class FileTask<PreDefinedTask
+attributes
+operations
+end
+
+class Mkdir<FileTask
+attributes
+	dir : String
+operations
+end
+
+class Copy<FileTask
+attributes
+	file : String
+	presservelastmodified : String
+	tofile : String
+	todir : String
+	overwrite : String
+	filtering : String
+	flatten : String
+	includeEmptyDirs : String
+operations
+end
+
+class Delete<FileTask
+attributes
+	file : String
+	dir : String
+	verbose : String
+	quiet : String
+	failonerror : String
+	includeEmptyDirs : String
+	includes : String
+	includesfile : String
+	excludes : String
+	excludesfile : String
+	defaultexcludes : String
+operations
+end
+
+composition xxx_Project_xmlns between
+	Project[0..1] role xxx_Project_xmlns_src
+	Xmlns[*] role xmlns
+end
+
+association xxx_Project_default between
+	Project[*] role xxx_Project_default_src
+	Goal[0..1] role default
+end
+
+composition xxx_Project_path between
+	Project[*] role xxx_Project_path_src
+	Path[0..1] role path
+end
+
+composition xxx_Project_properties between
+	Project[0..1] role xxx_Project_properties_src
+	AntProperty[*] role properties
+end
+
+composition xxx_Project_taskdefs between
+	Project[0..1] role xxx_Project_taskdefs_src
+	AntTaskDef[*] role taskdefs
+end
+
+composition xxx_Project_prePostGoals between
+	Project[0..1] role xxx_Project_prePostGoals_src
+	PrePostGoal[*] role prePostGoals
+end
+
+composition xxx_Project_goals between
+	Project[0..1] role xxx_Project_goals_src
+	Goal[1..*] role goals
+end
+
+composition xxx_JellyForEach_contents between
+	JellyForEach[*] role xxx_JellyForEach_contents_src
+	ContentsGoal[1] role contents
+end
+
+composition xxx_AbstractGoal_contentsGoal between
+	AbstractGoal[0..1] role xxx_AbstractGoal_contentsGoal_src
+	ContentsGoal[1..*] role contentsGoal
+end
+
+association xxx_AttainGoal_attainGoal between
+	AttainGoal[*] role xxx_AttainGoal_attainGoal_src
+	Goal[1] role attainGoal
+end
+
+association xxx_PreGoal_centralGoal between
+	PreGoal[*] role xxx_PreGoal_centralGoal_src
+	Goal[1] role centralGoal
+end
+
+association xxx_PostGoal_centralGoal between
+	PostGoal[*] role xxx_PostGoal_centralGoal_src
+	Goal[1] role centralGoal
+end
+
+association xxx_Goal_preGoal between
+	Goal[*] role xxx_Goal_preGoal_src
+	PreGoal[0..1] role preGoal
+end
+
+association xxx_Goal_postGoal between
+	Goal[*] role xxx_Goal_postGoal_src
+	PostGoal[0..1] role postGoal
+end
+
+composition xxx_PatternSet_inexcludes between
+	PatternSet[0..1] role xxx_PatternSet_inexcludes_src
+	InExcludes[1..*] role inexcludes
+end
+
+composition xxx_FileSet_patternset between
+	FileSet[0..1] role xxx_FileSet_patternset_src
+	PatternSet[*] role patternset
+end
+
+composition xxx_FileSet_include between
+	FileSet[0..1] role xxx_FileSet_include_src
+	Includes[*] role include
+end
+
+composition xxx_FileSet_exclude between
+	FileSet[0..1] role xxx_FileSet_exclude_src
+	Excludes[*] role exclude
+end
+
+composition xxx_FilterSet_filter between
+	FilterSet[0..1] role xxx_FilterSet_filter_src
+	Filter[*] role filter
+end
+
+composition xxx_FilterSet_filtersfile between
+	FilterSet[0..1] role xxx_FilterSet_filtersfile_src
+	FiltersFile[*] role filtersfile
+end
+
+composition xxx_Path_path between
+	Path[*] role xxx_Path_path_src
+	Path[0..1] role path
+end
+
+composition xxx_Path_pathElement between
+	Path[0..1] role xxx_Path_pathElement_src
+	PathElement[*] role pathElement
+end
+
+composition xxx_Path_fileset between
+	Path[0..1] role xxx_Path_fileset_src
+	FileSet[*] role fileset
+end
+
+composition xxx_ClassPath_pathElement between
+	ClassPath[0..1] role xxx_ClassPath_pathElement_src
+	PathElement[*] role pathElement
+end
+
+composition xxx_ClassPath_fileset between
+	ClassPath[0..1] role xxx_ClassPath_fileset_src
+	FileSet[*] role fileset
+end
+
+association xxx_NewTask_taskName between
+	NewTask[*] role xxx_NewTask_taskName_src
+	AntTaskDef[1] role taskName
+end
+
+composition xxx_NewTask_attributes_ between
+	NewTask[0..1] role xxx_NewTask_attributes__src
+	Attribut[*] role attributes_
+end
+
+composition xxx_Java_classPath between
+	Java[*] role xxx_Java_classPath_src
+	ClassPath[0..1] role classPath
+end
+
+composition xxx_Tstamp_format between
+	Tstamp[0..1] role xxx_Tstamp_format_src
+	FormatTstamp[*] role format
+end
+
+composition xxx_Javac_inExcludes between
+	Javac[0..1] role xxx_Javac_inExcludes_src
+	InExcludes[*] role inExcludes
+end
+
+composition xxx_Javac_classPath between
+	Javac[*] role xxx_Javac_classPath_src
+	ClassPath[0..1] role classPath
+end
+
+composition xxx_Copy_fileset between
+	Copy[*] role xxx_Copy_fileset_src
+	FileSet[0..1] role fileset
+end
+
+composition xxx_Copy_filterset between
+	Copy[*] role xxx_Copy_filterset_src
+	FilterSet[0..1] role filterset
+end
+
+composition xxx_Copy_mapper between
+	Copy[*] role xxx_Copy_mapper_src
+	Mapper[0..1] role mapper
+end
+

@@ -1,0 +1,111 @@
+model CompositeStructuresReq
+class Connector<Feature
+attributes
+operations
+end
+
+abstract class Feature<RedefinableElement
+attributes
+operations
+end
+
+abstract class RedefinableElement
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+abstract class Namespace
+attributes
+operations
+end
+
+abstract class StructuralFeature
+attributes
+operations
+end
+
+class Class
+attributes
+operations
+end
+
+abstract class ConnectableElement<TypedElement
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+class Property<StructuralFeature,ConnectableElement
+attributes
+operations
+end
+
+class ConnectorEnd
+attributes
+operations
+end
+
+class Association
+attributes
+operations
+end
+
+class Interface
+attributes
+operations
+end
+
+class Parameter<ConnectableElement
+attributes
+operations
+end
+
+class BehavioredClassifier
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+composition xxx_Connector_end_ between
+	Connector[0..1] role xxx_Connector_end__src
+	ConnectorEnd[2..*] role end_
+end
+
+association xxx_Feature_featuringClassifier between
+	Feature[0..1] role xxx_Feature_featuringClassifier_src
+	Classifier[*] role featuringClassifier
+end
+
+association xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+association xxx_ConnectorEnd_role between
+	ConnectorEnd[*] role xxx_ConnectorEnd_role_src
+	ConnectableElement[1] role role
+end
+
+association xxx_ConnectorEnd_partWithPort between
+	ConnectorEnd[*] role xxx_ConnectorEnd_partWithPort_src
+	Property[0..1] role partWithPort
+end
+

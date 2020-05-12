@@ -1,0 +1,481 @@
+model mwcore
+abstract class WElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class WModel<WElement
+attributes
+operations
+end
+
+abstract class WRef<WElement
+attributes
+	ref : String
+operations
+end
+
+abstract class WModelRef<WRef
+attributes
+operations
+end
+
+abstract class WElementRef<WRef
+attributes
+operations
+end
+
+abstract class WAssociation<WElement
+attributes
+operations
+end
+
+abstract class WAssociationEnd<WElement
+attributes
+operations
+end
+
+abstract class WLink<WElement
+attributes
+operations
+end
+
+abstract class WLinkEnd<WElement
+attributes
+operations
+end
+
+class MatchModel<WModel
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+operations
+end
+
+class Element<ReferredElement
+attributes
+operations
+end
+
+abstract class ReferredElement<WLinkEnd
+attributes
+operations
+end
+
+class LeftElement<Element
+attributes
+operations
+end
+
+class RightElement<Element
+attributes
+operations
+end
+
+class Equal<WLink
+attributes
+	similarity : Real
+	userAssistance : String
+operations
+end
+
+class EqualClass<Equal
+attributes
+operations
+end
+
+abstract class EqualStructuralFeature<Equal
+attributes
+operations
+end
+
+class EqualEnumeration<Equal
+attributes
+operations
+end
+
+class EqualEnumLiteral<Equal
+attributes
+operations
+end
+
+class EqualDataType<Equal
+attributes
+operations
+end
+
+class EqualAttribute<EqualStructuralFeature
+attributes
+operations
+end
+
+class EqualReference<EqualStructuralFeature
+attributes
+operations
+end
+
+class ModelRef<WModelRef
+attributes
+operations
+end
+
+class ElementRef<WElementRef
+attributes
+operations
+end
+
+class Association<WAssociation
+attributes
+operations
+end
+
+class AssociationEnd<WAssociationEnd
+attributes
+operations
+end
+
+class Added<WLink
+attributes
+	userAssistance : String
+operations
+end
+
+class AddedStructuralFeature<Added
+attributes
+operations
+end
+
+class AddedAttribute<AddedStructuralFeature
+attributes
+operations
+end
+
+class AddedReference<AddedStructuralFeature
+attributes
+operations
+end
+
+class AddedClass<Added
+attributes
+operations
+end
+
+class AddedDataType<Added
+attributes
+operations
+end
+
+class AddedEnumeration<Added
+attributes
+operations
+end
+
+class AddedEnumLiteral<Added
+attributes
+operations
+end
+
+class Deleted<WLink
+attributes
+	userAssistance : String
+operations
+end
+
+class DeletedStructuralFeature<Deleted
+attributes
+operations
+end
+
+class DeletedAttribute<DeletedStructuralFeature
+attributes
+operations
+end
+
+class DeletedReference<DeletedStructuralFeature
+attributes
+operations
+end
+
+class DeletedClass<Deleted
+attributes
+operations
+end
+
+class DeletedDataType<Deleted
+attributes
+operations
+end
+
+class DeletedEnumLiteral<Deleted
+attributes
+operations
+end
+
+class DeletedEnumeration<Deleted
+attributes
+operations
+end
+
+class Renaming<Equal
+attributes
+operations
+end
+
+class MovePropertyToOwned<EqualStructuralFeature
+attributes
+operations
+end
+
+class MovePropertyToOwner<EqualStructuralFeature
+attributes
+operations
+end
+
+class InlineClass<EqualStructuralFeature
+attributes
+operations
+end
+
+class ExtractClass<EqualStructuralFeature
+attributes
+operations
+end
+
+class ExtractSuperClass<EqualStructuralFeature
+attributes
+operations
+end
+
+class FlattenProperty<EqualStructuralFeature
+attributes
+operations
+end
+
+class PushProperty<EqualStructuralFeature
+attributes
+operations
+end
+
+class PullProperty<EqualStructuralFeature
+attributes
+operations
+end
+
+class IntroduceRestrictedProperty<AddedStructuralFeature
+attributes
+operations
+end
+
+class RestrictTypeAttribute<EqualAttribute
+attributes
+operations
+end
+
+class RestrictTypeReference<EqualReference
+attributes
+operations
+end
+
+class RestrictMultiplicityReference<EqualReference
+attributes
+operations
+end
+
+class IntroduceSuperClassWithRestrictedProperty<EqualClass
+attributes
+operations
+end
+
+class AddedReferenceAssociation<Association
+attributes
+operations
+end
+
+class DeletedReferenceAssociation<Association
+attributes
+operations
+end
+
+class PropagationEdge<WAssociation
+attributes
+	incomingLink : String
+	outgoingLink : String
+	propagation : Real
+operations
+end
+
+abstract class Parameter
+attributes
+	name : String
+operations
+end
+
+abstract class NumericParameter<Parameter
+attributes
+operations
+end
+
+class RealParameter<NumericParameter
+attributes
+	value : Real
+operations
+end
+
+class IntegerParameter<NumericParameter
+attributes
+	value : Integer
+operations
+end
+
+class StringParameter<Parameter
+attributes
+	value : String
+operations
+end
+
+association xxx_WElement_model_ between
+	WElement[*] role xxx_WElement_model__src
+	WModel[1] role model_
+end
+
+composition xxx_WModel_ownedElement between
+	WModel[0..1] role xxx_WModel_ownedElement_src
+	WElement[*] role ownedElement
+end
+
+composition xxx_WModel_wovenModel between
+	WModel[0..1] role xxx_WModel_wovenModel_src
+	WModelRef[1..*] role wovenModel
+end
+
+composition xxx_WModelRef_ownedElementRef between
+	WModelRef[0..1] role xxx_WModelRef_ownedElementRef_src
+	WElementRef[*] role ownedElementRef
+end
+
+association xxx_WElementRef_modelRef between
+	WElementRef[*] role xxx_WElementRef_modelRef_src
+	WModelRef[1] role modelRef
+end
+
+composition xxx_WAssociation_associationEnd between
+	WAssociation[0..1] role xxx_WAssociation_associationEnd_src
+	WAssociationEnd[1..*] role associationEnd
+end
+
+association xxx_WAssociationEnd_association_ between
+	WAssociationEnd[*] role xxx_WAssociationEnd_association__src
+	WAssociation[1] role association_
+end
+
+association xxx_WAssociationEnd_relatedLink between
+	WAssociationEnd[*] role xxx_WAssociationEnd_relatedLink_src
+	WLink[1] role relatedLink
+end
+
+composition xxx_WLink_child between
+	WLink[0..1] role xxx_WLink_child_src
+	WLink[*] role child
+end
+
+association xxx_WLink_parent between
+	WLink[*] role xxx_WLink_parent_src
+	WLink[1] role parent
+end
+
+composition xxx_WLink_end_ between
+	WLink[0..1] role xxx_WLink_end__src
+	WLinkEnd[1..*] role end_
+end
+
+association xxx_WLinkEnd_link between
+	WLinkEnd[*] role xxx_WLinkEnd_link_src
+	WLink[1] role link
+end
+
+association xxx_WLinkEnd_element between
+	WLinkEnd[*] role xxx_WLinkEnd_element_src
+	WElementRef[1] role element
+end
+
+composition xxx_MatchModel_leftM between
+	MatchModel[*] role xxx_MatchModel_leftM_src
+	WModelRef[1] role leftM
+end
+
+composition xxx_MatchModel_rightM between
+	MatchModel[*] role xxx_MatchModel_rightM_src
+	WModelRef[1] role rightM
+end
+
+composition xxx_MatchModel_methods between
+	MatchModel[0..1] role xxx_MatchModel_methods_src
+	Method[*] role methods
+end
+
+composition xxx_MatchModel_parameters between
+	MatchModel[0..1] role xxx_MatchModel_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Element_child between
+	Element[0..1] role xxx_Element_child_src
+	WLink[*] role child
+end
+
+composition xxx_Element_referredClass between
+	Element[*] role xxx_Element_referredClass_src
+	ReferredElement[1] role referredClass
+end
+
+composition xxx_Equal_left between
+	Equal[*] role xxx_Equal_left_src
+	ReferredElement[1] role left
+end
+
+composition xxx_Equal_right between
+	Equal[*] role xxx_Equal_right_src
+	ReferredElement[1] role right
+end
+
+composition xxx_Added_right between
+	Added[*] role xxx_Added_right_src
+	ReferredElement[1] role right
+end
+
+composition xxx_Deleted_left between
+	Deleted[*] role xxx_Deleted_left_src
+	ReferredElement[1] role left
+end
+
+composition xxx_MovePropertyToOwned_associatedReference between
+	MovePropertyToOwned[*] role xxx_MovePropertyToOwned_associatedReference_src
+	LeftElement[1] role associatedReference
+end
+
+composition xxx_MovePropertyToOwner_associatedReference between
+	MovePropertyToOwner[*] role xxx_MovePropertyToOwner_associatedReference_src
+	RightElement[1] role associatedReference
+end
+
+composition xxx_InlineClass_associatedReference between
+	InlineClass[*] role xxx_InlineClass_associatedReference_src
+	LeftElement[1] role associatedReference
+end
+
+composition xxx_ExtractClass_associatedReference between
+	ExtractClass[*] role xxx_ExtractClass_associatedReference_src
+	RightElement[1] role associatedReference
+end
+
+association xxx_Parameter_model_ between
+	Parameter[*] role xxx_Parameter_model__src
+	MatchModel[1] role model_
+end
+

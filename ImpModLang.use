@@ -1,0 +1,111 @@
+model impModLang
+class Model
+attributes
+operations
+end
+
+class Assignment<Statement
+attributes
+operations
+end
+
+class Mark
+attributes
+	name : String
+operations
+end
+
+class Goto<Statement
+attributes
+operations
+end
+
+class Condition
+attributes
+	comp : String
+operations
+end
+
+class Variable
+attributes
+	name : String
+	value : Integer
+operations
+end
+
+class Expression
+attributes
+	calc : String
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+composition xxx_Model_variables between
+	Model[0..1] role xxx_Model_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Model_statements between
+	Model[0..1] role xxx_Model_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Assignment_mark between
+	Assignment[*] role xxx_Assignment_mark_src
+	Mark[0..1] role mark
+end
+
+association xxx_Assignment_writeTo between
+	Assignment[*] role xxx_Assignment_writeTo_src
+	Variable[1] role writeTo
+end
+
+composition xxx_Assignment_exp between
+	Assignment[*] role xxx_Assignment_exp_src
+	Expression[1] role exp
+end
+
+association xxx_Mark_assignment between
+	Mark[*] role xxx_Mark_assignment_src
+	Assignment[1] role assignment
+end
+
+association xxx_Goto_gotoMark between
+	Goto[*] role xxx_Goto_gotoMark_src
+	Mark[1] role gotoMark
+end
+
+composition xxx_Goto_cond between
+	Goto[*] role xxx_Goto_cond_src
+	Condition[1] role cond
+end
+
+association xxx_Condition_par1 between
+	Condition[*] role xxx_Condition_par1_src
+	Variable[1] role par1
+end
+
+association xxx_Condition_par2 between
+	Condition[*] role xxx_Condition_par2_src
+	Variable[1] role par2
+end
+
+association xxx_Expression_x between
+	Expression[*] role xxx_Expression_x_src
+	Variable[1] role x
+end
+
+association xxx_Expression_y between
+	Expression[*] role xxx_Expression_y_src
+	Variable[1] role y
+end
+
+association xxx_Statement_model_ between
+	Statement[*] role xxx_Statement_model__src
+	Model[1] role model_
+end
+

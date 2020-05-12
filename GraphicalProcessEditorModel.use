@@ -1,0 +1,80 @@
+model graphicalprocesseditormodel
+class Graph
+attributes
+operations
+end
+
+abstract class Node
+attributes
+operations
+end
+
+class Transaction
+attributes
+	Value : String
+operations
+end
+
+class Join<Node
+attributes
+operations
+end
+
+class Process<Node
+attributes
+	Name : String
+	ImagePath : String
+operations
+end
+
+class OutputPort<Node
+attributes
+	Value : String
+operations
+end
+
+class InputPort<Node
+attributes
+operations
+end
+
+composition xxx_Graph_Processes between
+	Graph[0..1] role xxx_Graph_Processes_src
+	Node[1..*] role Processes
+end
+
+association xxx_Graph_Start between
+	Graph[*] role xxx_Graph_Start_src
+	Node[1] role Start
+end
+
+association xxx_Graph_End between
+	Graph[0..1] role xxx_Graph_End_src
+	Node[1..*] role End
+end
+
+composition xxx_Node_Transactions between
+	Node[0..1] role xxx_Node_Transactions_src
+	Transaction[*] role Transactions
+end
+
+association xxx_Transaction_Source between
+	Transaction[*] role xxx_Transaction_Source_src
+	Node[1] role Source
+end
+
+association xxx_Transaction_Target between
+	Transaction[*] role xxx_Transaction_Target_src
+	Node[1] role Target
+end
+
+composition xxx_Process_OutputPorts between
+	Process[0..1] role xxx_Process_OutputPorts_src
+	OutputPort[*] role OutputPorts
+end
+
+composition xxx_Process_InputPort between
+	Process[*] role xxx_Process_InputPort_src
+	InputPort[1] role InputPort
+end
+

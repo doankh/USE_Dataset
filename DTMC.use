@@ -1,0 +1,111 @@
+model dtmc
+class Dtmc
+attributes
+operations
+end
+
+class Node
+attributes
+	isStart : Boolean
+	isEnd : Boolean
+	isFail : Boolean
+operations
+end
+
+abstract class Transition
+attributes
+	probability : String
+operations
+end
+
+class SynchronizedTransition<Transition
+attributes
+operations
+end
+
+class Module
+attributes
+	isAutonomous : Boolean
+operations
+end
+
+class CallTransition<Transition
+attributes
+operations
+end
+
+class InvokedTransition<Transition
+attributes
+operations
+end
+
+class StandardTransition<Transition
+attributes
+operations
+end
+
+composition xxx_Dtmc_modules between
+	Dtmc[0..1] role xxx_Dtmc_modules_src
+	Module[1..*] role modules
+end
+
+association xxx_Node_module between
+	Node[*] role xxx_Node_module_src
+	Module[1] role module
+end
+
+association xxx_Node_outTransitions between
+	Node[0..1] role xxx_Node_outTransitions_src
+	Transition[*] role outTransitions
+end
+
+association xxx_Node_inTransitions between
+	Node[0..1] role xxx_Node_inTransitions_src
+	Transition[*] role inTransitions
+end
+
+association xxx_Transition__from between
+	Transition[*] role xxx_Transition__from_src
+	Node[0..1] role _from
+end
+
+association xxx_Transition__to between
+	Transition[*] role xxx_Transition__to_src
+	Node[0..1] role _to
+end
+
+association xxx_Transition_module between
+	Transition[*] role xxx_Transition_module_src
+	Module[1] role module
+end
+
+association xxx_SynchronizedTransition_syncWith between
+	SynchronizedTransition[0..1] role xxx_SynchronizedTransition_syncWith_src
+	SynchronizedTransition[1..*] role syncWith
+end
+
+association xxx_SynchronizedTransition_synchedWith between
+	SynchronizedTransition[0..1] role xxx_SynchronizedTransition_synchedWith_src
+	SynchronizedTransition[1..*] role synchedWith
+end
+
+composition xxx_Module_nodes between
+	Module[0..1] role xxx_Module_nodes_src
+	Node[1..*] role nodes
+end
+
+composition xxx_Module_transitions_ between
+	Module[0..1] role xxx_Module_transitions__src
+	Transition[*] role transitions_
+end
+
+association xxx_CallTransition_invokedTransition between
+	CallTransition[*] role xxx_CallTransition_invokedTransition_src
+	InvokedTransition[1] role invokedTransition
+end
+
+association xxx_InvokedTransition_callTransition between
+	InvokedTransition[*] role xxx_InvokedTransition_callTransition_src
+	CallTransition[1] role callTransition
+end
+

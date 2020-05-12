@@ -1,0 +1,81 @@
+model News
+enum DayKind{
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+	Sunday
+}
+
+abstract class Element
+attributes
+	title : String
+	description : String
+	link : String
+operations
+end
+
+class Newspaper<Element
+attributes
+	language : String
+	copyright : String
+operations
+end
+
+class News<Element
+attributes
+	author : String
+	comments : String
+operations
+end
+
+class Category
+attributes
+	value : String
+operations
+end
+
+class Date
+attributes
+	eDay : DayKind
+	day : Integer
+	month : Integer
+	year : Integer
+	hours : Integer
+	minutes : Integer
+	seconds : Integer
+operations
+end
+
+composition xxx_Newspaper_pubDate between
+	Newspaper[*] role xxx_Newspaper_pubDate_src
+	Date[0..1] role pubDate
+end
+
+composition xxx_Newspaper_category between
+	Newspaper[*] role xxx_Newspaper_category_src
+	Category[0..1] role category
+end
+
+composition xxx_Newspaper_news between
+	Newspaper[0..1] role xxx_Newspaper_news_src
+	News[*] role news
+end
+
+composition xxx_News_pubDate between
+	News[*] role xxx_News_pubDate_src
+	Date[0..1] role pubDate
+end
+
+composition xxx_News_category between
+	News[*] role xxx_News_category_src
+	Category[0..1] role category
+end
+
+association xxx_News_newspaper between
+	News[*] role xxx_News_newspaper_src
+	Newspaper[1] role newspaper
+end
+

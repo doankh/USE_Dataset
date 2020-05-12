@@ -1,0 +1,836 @@
+model fxg
+enum BlendMode{
+default
+}
+
+enum Winding{
+default
+}
+
+enum MaskType{
+default
+}
+
+enum FontStyle{
+default
+}
+
+enum FontWeight{
+default
+}
+
+enum TextDecoration{
+default
+}
+
+enum WhitespaceCollapse{
+default
+}
+
+enum Kerning{
+default
+}
+
+enum SpreadMethod{
+default
+}
+
+enum InterpolationMethod{
+default
+}
+
+enum Cap{
+default
+}
+
+enum Joint{
+default
+}
+
+enum ScaleMode{
+default
+}
+
+enum BevelFilterType{
+default
+}
+
+enum FillMode{
+default
+}
+
+enum TextAlign{
+default
+}
+
+enum JustificationRule{
+default
+}
+
+enum JustificationStyle{
+default
+}
+
+enum TextJustify{
+default
+}
+
+enum LeadingModel{
+default
+}
+
+enum BlockProgression{
+default
+}
+
+enum VerticalAlign{
+default
+}
+
+enum LineBreak{
+default
+}
+
+enum BreakOpportunity{
+default
+}
+
+enum DigitCase{
+default
+}
+
+enum DigitWidth{
+default
+}
+
+enum DominantBaseline{
+default
+}
+
+enum AlignmentBaseline{
+default
+}
+
+enum LigatureLevel{
+default
+}
+
+enum TypographicCase{
+default
+}
+
+enum TextRotation{
+default
+}
+
+class Graphic
+attributes
+	scaleGridLeft : String
+	scaleGridRight : String
+	scaleGridTop : String
+	scaleGridBottom : String
+	viewWidth : Integer
+	viewHeight : Integer
+	version : String
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+class Private<FXGElement
+attributes
+operations
+end
+
+class Definition
+attributes
+	name : String
+operations
+end
+
+class Group
+attributes
+	rotation : String
+	scaleX : String
+	scaleY : String
+	x : String
+	y : String
+	blendMode : BlendMode
+	alpha : String
+	id : String
+	transformX : String
+	transformY : String
+	maskType : String
+	visible : String
+	scaleGridLeft : String
+	scaleGridRight : String
+	scaleGridTop : String
+	scaleGridBottom : String
+operations
+end
+
+class Transform<FXGElement
+attributes
+operations
+end
+
+class PlaceObject<FXGElement
+attributes
+	id : String
+operations
+end
+
+class Matrix<FXGElement
+attributes
+	a : String
+	b : String
+	c : String
+	d : String
+	tx : String
+	ty : String
+operations
+end
+
+class Path<FXGElement
+attributes
+	data : String
+	x : String
+	y : String
+	rotation : String
+	scaleX : String
+	scaleY : String
+	blendMode : BlendMode
+	visible : String
+	alpha : String
+	winding : Winding
+operations
+end
+
+abstract class Shape<FXGElement
+attributes
+operations
+end
+
+class Rect<Shape
+attributes
+	width : String
+	height : String
+	radiusX : String
+	radiusY : String
+	topLeftRadiusX : String
+	topLeftRadiusY : String
+	topRightRadiusX : String
+	topRightRadiusY : String
+	bottomLeftRadiusX : String
+	bottomLeftRadiusY : String
+	bottomRightRadiusX : String
+	bottomRightRadiusY : String
+	x : String
+	y : String
+	rotation : String
+	scaleX : String
+	scaleY : String
+	blendMode : BlendMode
+	visible : String
+	alpha : String
+operations
+end
+
+class Ellipse<Shape
+attributes
+	alpha : String
+	width : String
+	height : String
+	x : String
+	y : String
+	rotation : String
+	scaleX : String
+	scaleY : String
+	blendMode : BlendMode
+	visible : String
+operations
+end
+
+class Line<Shape
+attributes
+	xFrom : String
+	yFrom : String
+	xTo : String
+	yTo : String
+	x : String
+	y : String
+	rotation : String
+	scaleX : String
+	scaleY : String
+	blendMode : BlendMode
+	alpha : String
+	id : String
+	maskType : MaskType
+	visible : String
+operations
+end
+
+class RichText<FXGElement,ParagraphAttributes,ContainerAttributes,CharacterAttributes
+attributes
+	rotation : String
+	scaleX : String
+	scaleY : String
+	x : String
+	y : String
+	blendMode : BlendMode
+	alpha : String
+	id : String
+	maskType : MaskType
+	visible : String
+	width : String
+	height : String
+	_tempcontent : String
+operations
+end
+
+abstract class RichTextContent
+attributes
+operations
+end
+
+class RichTextContentContainer<RichTextContent
+attributes
+operations
+end
+
+abstract class ParagraphAttributes
+attributes
+	textAlign : TextAlign
+	textAlignLast : TextAlign
+	textIndent : String
+	paragraphStartIndent : String
+	paragraphEndIndent : String
+	paragraphSpaceBefore : String
+	paragraphSpaceAfter : String
+	justificationRule : JustificationRule
+	justificationStyle : JustificationStyle
+	textJustify : TextJustify
+	leadingModel : LeadingModel
+	tabStops : String
+operations
+end
+
+abstract class ContainerAttributes
+attributes
+	blockProgression : BlockProgression
+	paddingLeft : String
+	paddingRight : String
+	paddingTop : String
+	paddingBottom : String
+	columnGap : String
+	columnCount : String
+	columnWidth : String
+	firstBaselineOffset : String
+	verticalAlign : VerticalAlign
+	lineBreak : LineBreak
+operations
+end
+
+abstract class CharacterAttributes
+attributes
+	fontFamily : String
+	fontSize : String
+	fontStyle : FontStyle
+	fontWeight : FontWeight
+	lineHeight : String
+	textDecoration : TextDecoration
+	lineThrough : String
+	color : String
+	textAlpha : String
+	whiteSpaceCollapse : WhitespaceCollapse
+	kerning : Kerning
+	backgroundAlpha : String
+	backgroundColor : String
+	baselineShift : String
+	breakOpportunity : BreakOpportunity
+	digitCase : DigitCase
+	digitWidth : DigitWidth
+	dominantBaseline : DominantBaseline
+	alignmentBaseline : AlignmentBaseline
+	ligatureLevel : LigatureLevel
+	locale : String
+	typographicCase : TypographicCase
+	textRotation : TextRotation
+	trackingLeft : String
+	trackingRight : String
+operations
+end
+
+class rawtext<RichTextContent
+attributes
+	_text : String
+operations
+end
+
+class div_<RichTextContent,RichTextContentContainer
+attributes
+operations
+end
+
+class p<RichTextContent,RichTextContentContainer,ParagraphAttributes
+attributes
+operations
+end
+
+class tcy<RichTextContent,RichTextContentContainer
+attributes
+operations
+end
+
+class a<RichTextContent,RichTextContentContainer
+attributes
+operations
+end
+
+class img<RichTextContent
+attributes
+operations
+end
+
+class span<RichTextContent,RichTextContentContainer
+attributes
+operations
+end
+
+class br<RichTextContent
+attributes
+operations
+end
+
+class tab<RichTextContent
+attributes
+operations
+end
+
+class linkNormalFormat<RichTextContent
+attributes
+operations
+end
+
+class linkHoverFormat<RichTextContent
+attributes
+operations
+end
+
+class linkActiveFormat
+attributes
+operations
+end
+
+class BitmapImage<FXGElement
+attributes
+	x : String
+	y : String
+	width : String
+	height : String
+	rotation : String
+	scaleX : String
+	scaleY : String
+	fillMode : FillMode
+	source : String
+	visible : String
+	alpha : String
+	blendMode : BlendMode
+operations
+end
+
+abstract class Fill<FXGElement
+attributes
+operations
+end
+
+class SolidColor<Fill
+attributes
+	alpha : String
+	color : String
+operations
+end
+
+class LinearGradient
+attributes
+	x : String
+	y : String
+	scaleX : String
+	rotation : String
+	spreadMethod : SpreadMethod
+	interpolationMethod : InterpolationMethod
+operations
+end
+
+class RadialGradient
+attributes
+	x : String
+	y : String
+	scaleX : String
+	scaleY : String
+	rotation : String
+	spreadMethod : SpreadMethod
+	interpolationMethod : InterpolationMethod
+	focalPointRatio : String
+operations
+end
+
+class BitmapFill<Fill
+attributes
+	x : String
+	y : String
+	scaleX : String
+	scaleY : String
+	rotation : String
+	source : String
+	fillMode : FillMode
+operations
+end
+
+abstract class Stroke<FXGElement
+attributes
+operations
+end
+
+class SolidColorStroke<Stroke
+attributes
+	alpha : String
+	caps : Cap
+	color : String
+	joints : Joint
+	miterLimit : String
+	pixelHinting : String
+	scaleMode : ScaleMode
+	weight : String
+operations
+end
+
+class LinearGradientStroke
+attributes
+	x : String
+	y : String
+	scaleX : String
+	rotation : String
+	spreadMethod : SpreadMethod
+	interpolationMethod : InterpolationMethod
+	scaleMode : ScaleMode
+	caps : Cap
+	joints : Joint
+	miterLimit : String
+	weight : String
+	pixelHinting : String
+operations
+end
+
+class RadialGradientStroke
+attributes
+	x : String
+	y : String
+	scaleX : String
+	scaleY : String
+	rotation : String
+	spreadMethod : SpreadMethod
+	interpolationMethod : InterpolationMethod
+	focalPointRatio : String
+	scaleMode : ScaleMode
+	caps : Cap
+	joints : Joint
+	miterLimit : String
+	weight : String
+	pixelHinting : String
+operations
+end
+
+class GradientEntry<FXGElement
+attributes
+	color : String
+	alpha : String
+	ratio : String
+operations
+end
+
+class ColorTransform<FXGElement
+attributes
+	alphaMultiplier : String
+	alphaOffset : String
+	blueMultiplier : String
+	blueOffset : String
+	greenMultiplier : String
+	greenOffset : String
+	redMultiplier : String
+	redOffset : String
+operations
+end
+
+abstract class Filter<FXGElement
+attributes
+operations
+end
+
+class BlurFilter<Filter
+attributes
+	blurX : String
+	blurY : String
+	quality : String
+operations
+end
+
+class DropShadowFilter<Filter
+attributes
+	alpha : String
+	angle : String
+	blurX : String
+	blurY : String
+	color : String
+	distance : String
+	inner : String
+	hideObject : String
+	knockout : String
+	quality : String
+	strength : String
+operations
+end
+
+class BevelFilter<Filter
+attributes
+	angle : String
+	blurX : String
+	blurY : String
+	highlightAlpha : String
+	highlightColor : String
+	distance : String
+	knockout : String
+	quality : String
+	shadowAlpha : String
+	shadowColor : String
+	strength : String
+	type : BevelFilterType
+operations
+end
+
+class GradientGlowFilter
+attributes
+	angle : String
+	blurX : String
+	blurY : String
+	distance : String
+	inner : String
+	knockout : String
+	quality : String
+	strength : String
+operations
+end
+
+class GradientBevelFilter
+attributes
+	angle : String
+	blurX : String
+	blurY : String
+	distance : String
+	knockout : String
+	quality : String
+	strength : String
+	type : BevelFilterType
+operations
+end
+
+class ColorMatrixFilter<Filter
+attributes
+	matrix : String
+operations
+end
+
+abstract class FXGElement
+attributes
+operations
+end
+
+class ContainerElement<FXGElement
+attributes
+operations
+end
+
+composition xxx_Graphic_mask between
+	Graphic[*] role xxx_Graphic_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_Group_transform between
+	Group[*] role xxx_Group_transform_src
+	Transform[0..1] role transform
+end
+
+composition xxx_Group_filters between
+	Group[0..1] role xxx_Group_filters_src
+	Filter[*] role filters
+end
+
+composition xxx_Group_mask between
+	Group[*] role xxx_Group_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_Transform_matrix between
+	Transform[*] role xxx_Transform_matrix_src
+	Matrix[0..1] role matrix
+end
+
+association xxx_Transform_colorTransform between
+	Transform[*] role xxx_Transform_colorTransform_src
+	ColorTransform[0..1] role colorTransform
+end
+
+composition xxx_PlaceObject_transform between
+	PlaceObject[*] role xxx_PlaceObject_transform_src
+	Transform[0..1] role transform
+end
+
+composition xxx_PlaceObject_filters between
+	PlaceObject[0..1] role xxx_PlaceObject_filters_src
+	Filter[*] role filters
+end
+
+composition xxx_PlaceObject_mask between
+	PlaceObject[*] role xxx_PlaceObject_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_Path_fill between
+	Path[*] role xxx_Path_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_Path_stroke between
+	Path[*] role xxx_Path_stroke_src
+	Stroke[0..1] role stroke
+end
+
+composition xxx_Path_filters between
+	Path[0..1] role xxx_Path_filters_src
+	Filter[*] role filters
+end
+
+composition xxx_Path_transform between
+	Path[*] role xxx_Path_transform_src
+	Transform[0..1] role transform
+end
+
+composition xxx_Path_mask between
+	Path[*] role xxx_Path_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_Rect_transform between
+	Rect[*] role xxx_Rect_transform_src
+	Transform[0..1] role transform
+end
+
+composition xxx_Rect_filters between
+	Rect[0..1] role xxx_Rect_filters_src
+	Filter[*] role filters
+end
+
+composition xxx_Rect_fill between
+	Rect[*] role xxx_Rect_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_Rect_stroke between
+	Rect[*] role xxx_Rect_stroke_src
+	Stroke[0..1] role stroke
+end
+
+composition xxx_Rect_mask between
+	Rect[*] role xxx_Rect_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_Ellipse_transform between
+	Ellipse[*] role xxx_Ellipse_transform_src
+	Transform[0..1] role transform
+end
+
+composition xxx_Ellipse_filters between
+	Ellipse[0..1] role xxx_Ellipse_filters_src
+	Filter[*] role filters
+end
+
+composition xxx_Ellipse_fill between
+	Ellipse[*] role xxx_Ellipse_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_Ellipse_stroke between
+	Ellipse[*] role xxx_Ellipse_stroke_src
+	Stroke[0..1] role stroke
+end
+
+composition xxx_Ellipse_mask between
+	Ellipse[*] role xxx_Ellipse_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_Line_transform between
+	Line[*] role xxx_Line_transform_src
+	Transform[0..1] role transform
+end
+
+composition xxx_Line_filters between
+	Line[0..1] role xxx_Line_filters_src
+	Filter[*] role filters
+end
+
+composition xxx_Line_fill between
+	Line[*] role xxx_Line_fill_src
+	Fill[0..1] role fill
+end
+
+composition xxx_Line_stroke between
+	Line[*] role xxx_Line_stroke_src
+	Stroke[0..1] role stroke
+end
+
+composition xxx_Line_mask between
+	Line[*] role xxx_Line_mask_src
+	Group[0..1] role mask
+end
+
+composition xxx_RichText_content between
+	RichText[0..1] role xxx_RichText_content_src
+	RichTextContent[*] role content
+end
+
+composition xxx_RichTextContentContainer__children between
+	RichTextContentContainer[0..1] role xxx_RichTextContentContainer__children_src
+	RichTextContent[*] role _children
+end
+
+composition xxx_LinearGradient_matrix between
+	LinearGradient[*] role xxx_LinearGradient_matrix_src
+	Matrix[0..1] role matrix
+end
+
+composition xxx_RadialGradient_matrix between
+	RadialGradient[*] role xxx_RadialGradient_matrix_src
+	Matrix[0..1] role matrix
+end
+
+composition xxx_BitmapFill_matrix between
+	BitmapFill[*] role xxx_BitmapFill_matrix_src
+	Matrix[0..1] role matrix
+end
+
+composition xxx_LinearGradientStroke_matrix between
+	LinearGradientStroke[*] role xxx_LinearGradientStroke_matrix_src
+	Matrix[0..1] role matrix
+end
+
+composition xxx_RadialGradientStroke_matrix between
+	RadialGradientStroke[*] role xxx_RadialGradientStroke_matrix_src
+	Matrix[0..1] role matrix
+end
+
+

@@ -1,0 +1,91 @@
+model Example
+class Family
+attributes
+	address : String
+operations
+end
+
+abstract class Member
+attributes
+	firstName : String
+	lastName : String
+operations
+end
+
+class Parent<Member
+attributes
+operations
+end
+
+class Son<Member
+attributes
+operations
+end
+
+class Daughter<Member
+attributes
+operations
+end
+
+abstract class Pet
+attributes
+	name : String
+	breed : String
+operations
+end
+
+class Dog<Pet
+attributes
+operations
+end
+
+class Cat<Pet
+attributes
+operations
+end
+
+class RaceDog<Dog
+attributes
+operations
+end
+
+class HuntingDog<Dog
+attributes
+operations
+end
+
+composition xxx_Family_parents between
+	Family[*] role xxx_Family_parents_src
+	Parent[0..2] role parents
+end
+
+composition xxx_Family_sons between
+	Family[0..1] role xxx_Family_sons_src
+	Son[*] role sons
+end
+
+composition xxx_Family_daughters between
+	Family[0..1] role xxx_Family_daughters_src
+	Daughter[*] role daughters
+end
+
+composition xxx_Family_pets between
+	Family[0..1] role xxx_Family_pets_src
+	Pet[*] role pets
+end
+
+association xxx_Parent_family between
+	Parent[*] role xxx_Parent_family_src
+	Family[1] role family
+end
+
+association xxx_Son_family between
+	Son[*] role xxx_Son_family_src
+	Family[1] role family
+end
+
+association xxx_Daughter_family between
+	Daughter[*] role xxx_Daughter_family_src
+	Family[1] role family
+end
+

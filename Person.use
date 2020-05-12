@@ -1,0 +1,9 @@
+model Person
+class Person
+attributes
+	name : String
+	firstName : String
+	phone : String
+operations
+end
+

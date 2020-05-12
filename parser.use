@@ -1,0 +1,79 @@
+model parser
+class ParserConfigType
+attributes
+	description : String
+	designationToken : String
+	disabled : Boolean
+	separatorToken : String
+	uniqueID : String
+operations
+end
+
+class RuleAttributeType
+attributes
+	defaultValue : String
+	id : Integer
+	index : String
+	isRequiredByParent : Boolean
+	name : String
+	usePreviousMatchSubstitutionAsDefault : Boolean
+operations
+end
+
+class RuleElementType
+attributes
+	id : Integer
+	index : String
+	isChildChoice : Boolean
+	isRequiredByParent : Boolean
+	name : String
+operations
+end
+
+class SubstitutionRuleType
+attributes
+	match : String
+	positions : String
+	substitute : String
+	substitutionExtensionClass : String
+	timeFormat : String
+	useBuiltInFunction : Boolean
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+composition xxx_ParserConfigType_ruleElement between
+	ParserConfigType[0..1] role xxx_ParserConfigType_ruleElement_src
+	RuleElementType[*] role ruleElement
+end
+
+composition xxx_RuleAttributeType_substitutionRule between
+	RuleAttributeType[0..1] role xxx_RuleAttributeType_substitutionRule_src
+	SubstitutionRuleType[*] role substitutionRule
+end
+
+composition xxx_RuleElementType_ruleElement between
+	RuleElementType[0..1] role xxx_RuleElementType_ruleElement_src
+	RuleElementType[*] role ruleElement
+end
+
+composition xxx_RuleElementType_ruleAttribute between
+	RuleElementType[0..1] role xxx_RuleElementType_ruleAttribute_src
+	RuleAttributeType[*] role ruleAttribute
+end
+
+composition xxx_DocumentRoot_ruleAttribute between
+	DocumentRoot[*] role xxx_DocumentRoot_ruleAttribute_src
+	RuleAttributeType[*] role ruleAttribute
+end
+
+composition xxx_DocumentRoot_ruleElement between
+	DocumentRoot[*] role xxx_DocumentRoot_ruleElement_src
+	RuleElementType[*] role ruleElement
+end
+

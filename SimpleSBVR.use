@@ -1,0 +1,280 @@
+model SimpleSBVR
+class Root
+attributes
+operations
+end
+
+class Element
+attributes
+	objectName : String
+operations
+end
+
+class Representation<Element
+attributes
+operations
+end
+
+class Designation<Representation
+attributes
+operations
+end
+
+class Text<Element
+attributes
+	value : String
+operations
+end
+
+class Meaning<Element
+attributes
+operations
+end
+
+class Concept<Meaning
+attributes
+operations
+end
+
+class NounConcept<Concept
+attributes
+operations
+end
+
+class ObjectType<NounConcept
+attributes
+operations
+end
+
+class IndividualConcept<NounConcept
+attributes
+operations
+end
+
+class DataType<NounConcept
+attributes
+operations
+end
+
+class NonEmptyString<DataType
+attributes
+	value : String
+operations
+end
+
+class NonNegativeInteger<DataType
+attributes
+	value : Integer
+operations
+end
+
+class FactType<Concept
+attributes
+operations
+end
+
+class BinaryFactType<FactType
+attributes
+operations
+end
+
+class IsPropertyOfFactType<BinaryFactType
+attributes
+operations
+end
+
+class AssociativeFactType<BinaryFactType
+attributes
+operations
+end
+
+class CategorizationFactType<BinaryFactType
+attributes
+operations
+end
+
+class ObjectificationFactType<BinaryFactType
+attributes
+operations
+end
+
+class Role<Element
+attributes
+operations
+end
+
+class FactTypeRole<Role
+attributes
+operations
+end
+
+class LogicalFormulation<Meaning
+attributes
+operations
+end
+
+class AtomicFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class BinaryAtomicFormulation<AtomicFormulation
+attributes
+operations
+end
+
+class NecessityFormulation<LogicalFormulation
+attributes
+operations
+end
+
+class Quantification<LogicalFormulation
+attributes
+operations
+end
+
+class UniversalQuantification<Quantification
+attributes
+operations
+end
+
+class AtLeastNQuantification<Quantification
+attributes
+operations
+end
+
+class ExactlyNQuantification<Quantification
+attributes
+operations
+end
+
+class AtMostNQuantification<Quantification
+attributes
+operations
+end
+
+class BindableTarget<Element
+attributes
+operations
+end
+
+class Variable<BindableTarget
+attributes
+operations
+end
+
+class RoleBinding<Element
+attributes
+operations
+end
+
+composition xxx_Root_elements between
+	Root[0..1] role xxx_Root_elements_src
+	Element[*] role elements
+end
+
+association xxx_Representation_meaning between
+	Representation[*] role xxx_Representation_meaning_src
+	Meaning[1] role meaning
+end
+
+association xxx_Designation_text between
+	Designation[*] role xxx_Designation_text_src
+	Text[1] role text
+end
+
+association xxx_Meaning_representations between
+	Meaning[0..1] role xxx_Meaning_representations_src
+	Representation[*] role representations
+end
+
+association xxx_ObjectType_specializes between
+	ObjectType[*] role xxx_ObjectType_specializes_src
+	ObjectType[0..1] role specializes
+end
+
+association xxx_ObjectType_generalizes between
+	ObjectType[0..1] role xxx_ObjectType_generalizes_src
+	ObjectType[*] role generalizes
+end
+
+association xxx_IndividualConcept_instanceOf between
+	IndividualConcept[*] role xxx_IndividualConcept_instanceOf_src
+	ObjectType[0..1] role instanceOf
+end
+
+association xxx_BinaryFactType_role1 between
+	BinaryFactType[*] role xxx_BinaryFactType_role1_src
+	FactTypeRole[1] role role1
+end
+
+association xxx_BinaryFactType_role2 between
+	BinaryFactType[*] role xxx_BinaryFactType_role2_src
+	FactTypeRole[1] role role2
+end
+
+association xxx_Role_nounConcept between
+	Role[*] role xxx_Role_nounConcept_src
+	NounConcept[1] role nounConcept
+end
+
+association xxx_AtomicFormulation_isBasedOn between
+	AtomicFormulation[*] role xxx_AtomicFormulation_isBasedOn_src
+	FactType[1] role isBasedOn
+end
+
+association xxx_BinaryAtomicFormulation_roleBinding1 between
+	BinaryAtomicFormulation[*] role xxx_BinaryAtomicFormulation_roleBinding1_src
+	RoleBinding[1] role roleBinding1
+end
+
+association xxx_BinaryAtomicFormulation_roleBinding2 between
+	BinaryAtomicFormulation[*] role xxx_BinaryAtomicFormulation_roleBinding2_src
+	RoleBinding[1] role roleBinding2
+end
+
+association xxx_Quantification_introducedVariable between
+	Quantification[*] role xxx_Quantification_introducedVariable_src
+	Variable[1] role introducedVariable
+end
+
+association xxx_Quantification_scopesOver between
+	Quantification[*] role xxx_Quantification_scopesOver_src
+	LogicalFormulation[1] role scopesOver
+end
+
+association xxx_AtLeastNQuantification_minCardinality between
+	AtLeastNQuantification[*] role xxx_AtLeastNQuantification_minCardinality_src
+	NonNegativeInteger[1] role minCardinality
+end
+
+association xxx_ExactlyNQuantification_cardinality between
+	ExactlyNQuantification[*] role xxx_ExactlyNQuantification_cardinality_src
+	NonNegativeInteger[1] role cardinality
+end
+
+association xxx_AtMostNQuantification_maxCardinality between
+	AtMostNQuantification[*] role xxx_AtMostNQuantification_maxCardinality_src
+	NonNegativeInteger[1] role maxCardinality
+end
+
+association xxx_Variable_rangesOver between
+	Variable[*] role xxx_Variable_rangesOver_src
+	ObjectType[1] role rangesOver
+end
+
+association xxx_RoleBinding_occursIn between
+	RoleBinding[*] role xxx_RoleBinding_occursIn_src
+	AtomicFormulation[1] role occursIn
+end
+
+association xxx_RoleBinding_isOf between
+	RoleBinding[*] role xxx_RoleBinding_isOf_src
+	FactType[1] role isOf
+end
+
+association xxx_RoleBinding_bindsTo between
+	RoleBinding[*] role xxx_RoleBinding_bindsTo_src
+	BindableTarget[1] role bindsTo
+end
+

@@ -1,0 +1,71 @@
+model xTuring
+class Machine
+attributes
+operations
+end
+
+class Symbol
+attributes
+	name : String
+operations
+end
+
+class State
+attributes
+	beginState : Boolean
+	name : String
+operations
+end
+
+class Transaction
+attributes
+	reading : Boolean
+	writing : Boolean
+	moving : Boolean
+	move : String
+	next : Boolean
+	final : Boolean
+operations
+end
+
+class ReadWriteSymbol
+attributes
+	empty : Boolean
+operations
+end
+
+composition xxx_Machine_symbols between
+	Machine[0..1] role xxx_Machine_symbols_src
+	Symbol[*] role symbols
+end
+
+composition xxx_Machine_states_ between
+	Machine[0..1] role xxx_Machine_states__src
+	State[*] role states_
+end
+
+composition xxx_State_transactions between
+	State[0..1] role xxx_State_transactions_src
+	Transaction[*] role transactions
+end
+
+composition xxx_Transaction_read between
+	Transaction[0..1] role xxx_Transaction_read_src
+	ReadWriteSymbol[*] role read
+end
+
+composition xxx_Transaction_write between
+	Transaction[0..1] role xxx_Transaction_write_src
+	ReadWriteSymbol[*] role write
+end
+
+association xxx_Transaction_toState between
+	Transaction[*] role xxx_Transaction_toState_src
+	State[0..1] role toState
+end
+
+association xxx_ReadWriteSymbol_symbol between
+	ReadWriteSymbol[*] role xxx_ReadWriteSymbol_symbol_src
+	Symbol[0..1] role symbol
+end
+

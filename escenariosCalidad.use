@@ -1,0 +1,91 @@
+model escenariosCalidad
+enum Metrica{
+default
+}
+
+enum Operador{
+default
+}
+
+enum Unidad{
+default
+}
+
+class Arquitectura
+attributes
+	nombre : String
+operations
+end
+
+class Escenario
+attributes
+	id : String
+operations
+end
+
+class Fuente
+attributes
+	name : String
+operations
+end
+
+class Estimulo
+attributes
+operations
+end
+
+class MedidaRespuesta
+attributes
+	metrica : Metrica
+	valorEsperado : Real
+	unidad : Unidad
+	operador : Operador
+operations
+end
+
+class Artefacto
+attributes
+	url : String
+operations
+end
+
+class Test
+attributes
+operations
+end
+
+composition xxx_Arquitectura_escenarios between
+	Arquitectura[0..1] role xxx_Arquitectura_escenarios_src
+	Escenario[*] role escenarios
+end
+
+composition xxx_Arquitectura_artefactos between
+	Arquitectura[0..1] role xxx_Arquitectura_artefactos_src
+	Artefacto[*] role artefactos
+end
+
+composition xxx_Escenario_fuente between
+	Escenario[*] role xxx_Escenario_fuente_src
+	Fuente[1] role fuente
+end
+
+composition xxx_Escenario_estimulo between
+	Escenario[*] role xxx_Escenario_estimulo_src
+	Estimulo[1] role estimulo
+end
+
+composition xxx_Escenario_medida between
+	Escenario[*] role xxx_Escenario_medida_src
+	MedidaRespuesta[1] role medida
+end
+
+association xxx_Estimulo_artefacto between
+	Estimulo[*] role xxx_Estimulo_artefacto_src
+	Artefacto[1] role artefacto
+end
+
+composition xxx_Test_arquitecturas between
+	Test[0..1] role xxx_Test_arquitecturas_src
+	Arquitectura[*] role arquitecturas
+end
+

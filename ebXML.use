@@ -1,0 +1,318 @@
+model ebXML
+class MultyPartyCollaboration
+attributes
+operations
+end
+
+class BusinessPartnerRole
+attributes
+operations
+end
+
+class Performs
+attributes
+operations
+end
+
+class AuthorizedRole
+attributes
+	isInitiator : Boolean
+operations
+end
+
+class Transaction
+attributes
+	onInitiation : String
+	conditionGuard : String
+	conditionExpression : String
+operations
+end
+
+class BinaryCollaboration
+attributes
+	pattern : String
+	timeToPerform : String
+	preCondition : String
+	postCondition : String
+	beginsWhen : String
+	endsWhen : String
+operations
+end
+
+abstract class BusinessState
+attributes
+operations
+end
+
+class Start<BusinessState
+attributes
+operations
+end
+
+class Fork<BusinessState
+attributes
+	waitForAll : String
+operations
+end
+
+class Join<BusinessState
+attributes
+operations
+end
+
+class CompletionState<BusinessState
+attributes
+	guardCondition : String
+operations
+end
+
+class Failure<CompletionState
+attributes
+operations
+end
+
+class Success<CompletionState
+attributes
+operations
+end
+
+abstract class BusinessActivity<BusinessState
+attributes
+operations
+end
+
+class BusinessTransactionActivity<BusinessActivity
+attributes
+	timeToPerform : String
+	isConcurrent : Boolean
+	isLegallyBinding : Boolean
+operations
+end
+
+class CollaborationActivity<BusinessActivity
+attributes
+operations
+end
+
+class BusinessTransaction
+attributes
+	pattern : String
+	isGuaranteedDeliveryRequired : Boolean
+	preCondition : String
+	postCondition : String
+	beginsWhen : String
+	endsWhen : String
+operations
+end
+
+abstract class BusinessAction
+attributes
+	isIntelligiblecheckRequired : Boolean
+	isAuthorizationRequired : Boolean
+	timeToAcknowledgeReceipt : String
+	isNonRepudiationRequired : Boolean
+	isNonRepudiationOfRecipientRequired : Boolean
+operations
+end
+
+class RequestingBusinessActivity<BusinessAction
+attributes
+	timeToAcknowledgeAcceptance : String
+operations
+end
+
+class RespondingBusinessActivity<BusinessAction
+attributes
+operations
+end
+
+abstract class DocumentSecurity
+attributes
+	isConfidential : Boolean
+	isTamperProof : Boolean
+	isAuthenticated : Boolean
+operations
+end
+
+class DocumentEnvelope<DocumentSecurity
+attributes
+	isPositiveResponse : Boolean
+operations
+end
+
+class Attachment<DocumentSecurity
+attributes
+	mimeType : String
+	specification : String
+	version : String
+operations
+end
+
+class BusinessDocument
+attributes
+	specificationLocation : String
+	specificationElement : String
+	conditionExpression : String
+operations
+end
+
+composition xxx_MultyPartyCollaboration_partners between
+	MultyPartyCollaboration[0..1] role xxx_MultyPartyCollaboration_partners_src
+	BusinessPartnerRole[*] role partners
+end
+
+association xxx_BusinessPartnerRole_collaboration between
+	BusinessPartnerRole[*] role xxx_BusinessPartnerRole_collaboration_src
+	MultyPartyCollaboration[1] role collaboration
+end
+
+composition xxx_BusinessPartnerRole_transition between
+	BusinessPartnerRole[*] role xxx_BusinessPartnerRole_transition_src
+	Transaction[0..1] role transition
+end
+
+composition xxx_BusinessPartnerRole_performers between
+	BusinessPartnerRole[0..1] role xxx_BusinessPartnerRole_performers_src
+	Performs[*] role performers
+end
+
+association xxx_Performs_performedBy between
+	Performs[*] role xxx_Performs_performedBy_src
+	BusinessPartnerRole[1] role performedBy
+end
+
+association xxx_Performs_collaboration between
+	Performs[*] role xxx_Performs_collaboration_src
+	BinaryCollaboration[1] role collaboration
+end
+
+association xxx_Performs_role between
+	Performs[*] role xxx_Performs_role_src
+	AuthorizedRole[1] role role
+end
+
+association xxx_AuthorizedRole_performers between
+	AuthorizedRole[0..1] role xxx_AuthorizedRole_performers_src
+	Performs[*] role performers
+end
+
+association xxx_Transaction_from_ between
+	Transaction[*] role xxx_Transaction_from__src
+	BusinessState[1] role from_
+end
+
+association xxx_Transaction_to between
+	Transaction[*] role xxx_Transaction_to_src
+	BusinessState[1] role to
+end
+
+composition xxx_BinaryCollaboration_roles between
+	BinaryCollaboration[0..1] role xxx_BinaryCollaboration_roles_src
+	Performs[*] role roles
+end
+
+composition xxx_BinaryCollaboration_transitions_ between
+	BinaryCollaboration[0..1] role xxx_BinaryCollaboration_transitions__src
+	Transaction[*] role transitions_
+end
+
+composition xxx_BinaryCollaboration_states_ between
+	BinaryCollaboration[0..1] role xxx_BinaryCollaboration_states__src
+	BusinessState[*] role states_
+end
+
+association xxx_BusinessState_collaboration between
+	BusinessState[*] role xxx_BusinessState_collaboration_src
+	BinaryCollaboration[1] role collaboration
+end
+
+association xxx_BusinessState_from_ between
+	BusinessState[*] role xxx_BusinessState_from__src
+	AuthorizedRole[1] role from_
+end
+
+association xxx_BusinessState_to between
+	BusinessState[*] role xxx_BusinessState_to_src
+	AuthorizedRole[1] role to
+end
+
+association xxx_BusinessTransactionActivity_use between
+	BusinessTransactionActivity[*] role xxx_BusinessTransactionActivity_use_src
+	BusinessTransaction[1] role use
+end
+
+association xxx_CollaborationActivity_use between
+	CollaborationActivity[*] role xxx_CollaborationActivity_use_src
+	BinaryCollaboration[1] role use
+end
+
+composition xxx_BusinessTransaction_requester between
+	BusinessTransaction[*] role xxx_BusinessTransaction_requester_src
+	RequestingBusinessActivity[1] role requester
+end
+
+composition xxx_BusinessTransaction_responder between
+	BusinessTransaction[*] role xxx_BusinessTransaction_responder_src
+	RespondingBusinessActivity[1] role responder
+end
+
+composition xxx_RequestingBusinessActivity_transaction between
+	RequestingBusinessActivity[*] role xxx_RequestingBusinessActivity_transaction_src
+	BusinessTransaction[1] role transaction
+end
+
+association xxx_RequestingBusinessActivity_documentEnvelope between
+	RequestingBusinessActivity[*] role xxx_RequestingBusinessActivity_documentEnvelope_src
+	DocumentEnvelope[1] role documentEnvelope
+end
+
+composition xxx_RespondingBusinessActivity_transaction between
+	RespondingBusinessActivity[*] role xxx_RespondingBusinessActivity_transaction_src
+	BusinessTransaction[1] role transaction
+end
+
+association xxx_RespondingBusinessActivity_documentEnvelope between
+	RespondingBusinessActivity[*] role xxx_RespondingBusinessActivity_documentEnvelope_src
+	DocumentEnvelope[1] role documentEnvelope
+end
+
+association xxx_DocumentEnvelope_requesting between
+	DocumentEnvelope[*] role xxx_DocumentEnvelope_requesting_src
+	RequestingBusinessActivity[0..1] role requesting
+end
+
+association xxx_DocumentEnvelope_responding between
+	DocumentEnvelope[*] role xxx_DocumentEnvelope_responding_src
+	RespondingBusinessActivity[0..1] role responding
+end
+
+composition xxx_DocumentEnvelope_attachements between
+	DocumentEnvelope[0..1] role xxx_DocumentEnvelope_attachements_src
+	Attachment[*] role attachements
+end
+
+association xxx_DocumentEnvelope_document between
+	DocumentEnvelope[*] role xxx_DocumentEnvelope_document_src
+	BusinessDocument[1] role document
+end
+
+association xxx_Attachment_envelope between
+	Attachment[*] role xxx_Attachment_envelope_src
+	DocumentEnvelope[1] role envelope
+end
+
+association xxx_Attachment_document between
+	Attachment[*] role xxx_Attachment_document_src
+	BusinessDocument[1] role document
+end
+
+association xxx_BusinessDocument_envelopes between
+	BusinessDocument[0..1] role xxx_BusinessDocument_envelopes_src
+	DocumentEnvelope[*] role envelopes
+end
+
+association xxx_BusinessDocument_attachments between
+	BusinessDocument[0..1] role xxx_BusinessDocument_attachments_src
+	Attachment[*] role attachments
+end
+

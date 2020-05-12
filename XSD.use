@@ -1,0 +1,1089 @@
+model xsd
+enum XSDAttributeUseCategory{
+default
+}
+
+enum XSDCardinality{
+default
+}
+
+enum XSDComplexFinal{
+default
+}
+
+enum XSDCompositor{
+default
+}
+
+enum XSDConstraint{
+default
+}
+
+enum XSDContentTypeCategory{
+default
+}
+
+enum XSDDerivationMethod{
+default
+}
+
+enum XSDDiagnosticSeverity{
+default
+}
+
+enum XSDDisallowedSubstitutions{
+default
+}
+
+enum XSDForm{
+default
+}
+
+enum XSDIdentityConstraintCategory{
+default
+}
+
+enum XSDNamespaceConstraintCategory{
+default
+}
+
+enum XSDOrdered{
+default
+}
+
+enum XSDProcessContents{
+default
+}
+
+enum XSDProhibitedSubstitutions{
+default
+}
+
+enum XSDSimpleFinal{
+default
+}
+
+enum XSDSubstitutionGroupExclusions{
+default
+}
+
+enum XSDVariety{
+default
+}
+
+enum XSDWhiteSpace{
+default
+}
+
+enum XSDXPathVariety{
+default
+}
+
+class XSDAnnotation<XSDComponent,XSDRedefineContent
+attributes
+	applicationInformation : String
+	userInformation : String
+	attributes_ : String
+operations
+end
+
+class XSDAttributeDeclaration<XSDFeature,XSDSchemaContent
+attributes
+	attributeDeclarationReference : Boolean
+operations
+end
+
+abstract class XSDAttributeGroupContent<XSDConcreteComponent
+attributes
+operations
+end
+
+class XSDAttributeGroupDefinition<XSDRedefinableComponent,XSDAttributeGroupContent,XSDRedefineContent
+attributes
+	attributeGroupDefinitionReference : Boolean
+operations
+end
+
+class XSDAttributeUse<XSDComponent,XSDAttributeGroupContent
+attributes
+	required : Boolean
+	value : String
+	constraint : XSDConstraint
+	use : XSDAttributeUseCategory
+	lexicalValue : String
+operations
+end
+
+class XSDBoundedFacet<XSDFundamentalFacet
+attributes
+	value : Boolean
+operations
+end
+
+class XSDCardinalityFacet<XSDFundamentalFacet
+attributes
+	value : XSDCardinality
+operations
+end
+
+abstract class XSDComplexTypeContent<XSDComponent
+attributes
+operations
+end
+
+class XSDComplexTypeDefinition<XSDTypeDefinition,XSDScope
+attributes
+	derivationMethod : XSDDerivationMethod
+	final : XSDComplexFinal
+	abstract_ : Boolean
+	contentTypeCategory : XSDContentTypeCategory
+	prohibitedSubstitutions : XSDProhibitedSubstitutions
+	lexicalFinal : XSDComplexFinal
+	block : XSDProhibitedSubstitutions
+	mixed : Boolean
+operations
+end
+
+abstract class XSDComponent<XSDConcreteComponent
+attributes
+operations
+end
+
+abstract class XSDConcreteComponent
+attributes
+	element : String
+operations
+end
+
+abstract class XSDConstrainingFacet<XSDFacet
+attributes
+operations
+end
+
+class XSDDiagnostic<XSDConcreteComponent
+attributes
+	severity : XSDDiagnosticSeverity
+	message : String
+	locationURI : String
+	line : Integer
+	column : Integer
+	node : String
+	annotationURI : String
+	key : String
+	substitutions : String
+operations
+end
+
+class XSDElementDeclaration<XSDFeature,XSDSchemaContent,XSDTerm
+attributes
+	nillable : Boolean
+	disallowedSubstitutions : XSDDisallowedSubstitutions
+	substitutionGroupExclusions : XSDSubstitutionGroupExclusions
+	abstract_ : Boolean
+	lexicalFinal : XSDProhibitedSubstitutions
+	block : XSDDisallowedSubstitutions
+	elementDeclarationReference : Boolean
+	circular : Boolean
+operations
+end
+
+class XSDEnumerationFacet<XSDRepeatableFacet
+attributes
+	value : String
+operations
+end
+
+abstract class XSDFacet<XSDComponent
+attributes
+	lexicalValue : String
+	facetName : String
+	effectiveValue : String
+operations
+end
+
+abstract class XSDFeature<XSDNamedComponent
+attributes
+	value : String
+	constraint : XSDConstraint
+	form : XSDForm
+	lexicalValue : String
+	global : Boolean
+	featureReference : Boolean
+operations
+end
+
+abstract class XSDFixedFacet<XSDConstrainingFacet
+attributes
+	fixed : Boolean
+operations
+end
+
+class XSDFractionDigitsFacet<XSDFixedFacet
+attributes
+	value : Integer
+operations
+end
+
+abstract class XSDFundamentalFacet<XSDFacet
+attributes
+operations
+end
+
+class XSDIdentityConstraintDefinition<XSDNamedComponent
+attributes
+	identityConstraintCategory : XSDIdentityConstraintCategory
+operations
+end
+
+class XSDImport<XSDSchemaDirective
+attributes
+	namespace : String
+operations
+end
+
+class XSDInclude<XSDSchemaCompositor
+attributes
+operations
+end
+
+class XSDLengthFacet<XSDFixedFacet
+attributes
+	value : Integer
+operations
+end
+
+class XSDMaxExclusiveFacet<XSDMaxFacet
+attributes
+operations
+end
+
+abstract class XSDMaxFacet<XSDFixedFacet
+attributes
+	value : String
+	inclusive : Boolean
+	exclusive : Boolean
+operations
+end
+
+class XSDMaxInclusiveFacet<XSDMaxFacet
+attributes
+operations
+end
+
+class XSDMaxLengthFacet<XSDFixedFacet
+attributes
+	value : Integer
+operations
+end
+
+class XSDMinExclusiveFacet<XSDMinFacet
+attributes
+operations
+end
+
+abstract class XSDMinFacet<XSDFixedFacet
+attributes
+	value : String
+	inclusive : Boolean
+	exclusive : Boolean
+operations
+end
+
+class XSDMinInclusiveFacet<XSDMinFacet
+attributes
+operations
+end
+
+class XSDMinLengthFacet<XSDFixedFacet
+attributes
+	value : Integer
+operations
+end
+
+class XSDModelGroup<XSDTerm
+attributes
+	compositor : XSDCompositor
+operations
+end
+
+class XSDModelGroupDefinition<XSDRedefinableComponent,XSDParticleContent,XSDRedefineContent
+attributes
+	modelGroupDefinitionReference : Boolean
+operations
+end
+
+abstract class XSDNamedComponent<XSDComponent
+attributes
+	name : String
+	targetNamespace : String
+	aliasName : String
+	uRI : String
+	aliasURI : String
+	qName : String
+operations
+end
+
+class XSDNotationDeclaration<XSDNamedComponent,XSDSchemaContent
+attributes
+	systemIdentifier : String
+	publicIdentifier : String
+operations
+end
+
+class XSDNumericFacet<XSDFundamentalFacet
+attributes
+	value : Boolean
+operations
+end
+
+class XSDOrderedFacet<XSDFundamentalFacet
+attributes
+	value : XSDOrdered
+operations
+end
+
+class XSDParticle<XSDComplexTypeContent
+attributes
+	minOccurs : Integer
+	maxOccurs : Integer
+operations
+end
+
+abstract class XSDParticleContent<XSDConcreteComponent
+attributes
+operations
+end
+
+class XSDPatternFacet<XSDRepeatableFacet
+attributes
+	value : String
+operations
+end
+
+abstract class XSDRedefinableComponent<XSDNamedComponent,XSDRedefineContent
+attributes
+	circular : Boolean
+operations
+end
+
+abstract class XSDRedefineContent<XSDSchemaContent
+attributes
+operations
+end
+
+class XSDRedefine<XSDSchemaCompositor
+attributes
+operations
+end
+
+abstract class XSDRepeatableFacet<XSDConstrainingFacet
+attributes
+operations
+end
+
+class XSDSchema<XSDScope
+attributes
+	document : String
+	schemaLocation : String
+	targetNamespace : String
+	attributeFormDefault : XSDForm
+	elementFormDefault : XSDForm
+	finalDefault : XSDProhibitedSubstitutions
+	blockDefault : XSDDisallowedSubstitutions
+	version : String
+operations
+end
+
+abstract class XSDSchemaCompositor<XSDSchemaDirective
+attributes
+operations
+end
+
+abstract class XSDSchemaContent<XSDConcreteComponent
+attributes
+operations
+end
+
+abstract class XSDSchemaDirective<XSDSchemaContent
+attributes
+	schemaLocation : String
+operations
+end
+
+abstract class XSDScope<XSDComponent
+attributes
+operations
+end
+
+class XSDSimpleTypeDefinition<XSDTypeDefinition,XSDComplexTypeContent
+attributes
+	variety : XSDVariety
+	final : XSDSimpleFinal
+	lexicalFinal : XSDSimpleFinal
+	validFacets : String
+operations
+end
+
+abstract class XSDTerm<XSDComponent,XSDParticleContent
+attributes
+operations
+end
+
+class XSDTotalDigitsFacet<XSDFixedFacet
+attributes
+	value : Integer
+operations
+end
+
+abstract class XSDTypeDefinition<XSDRedefinableComponent,XSDRedefineContent
+attributes
+operations
+end
+
+class XSDWhiteSpaceFacet<XSDFixedFacet
+attributes
+	value : XSDWhiteSpace
+operations
+end
+
+class XSDWildcard<XSDTerm
+attributes
+	namespaceConstraintCategory : XSDNamespaceConstraintCategory
+	namespaceConstraint : String
+	processContents : XSDProcessContents
+	lexicalNamespaceConstraint : String
+operations
+end
+
+class XSDXPathDefinition<XSDComponent
+attributes
+	variety : XSDXPathVariety
+	value : String
+operations
+end
+
+composition xxx_XSDAttributeDeclaration_annotation between
+	XSDAttributeDeclaration[*] role xxx_XSDAttributeDeclaration_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDAttributeDeclaration_anonymousTypeDefinition between
+	XSDAttributeDeclaration[*] role xxx_XSDAttributeDeclaration_anonymousTypeDefinition_src
+	XSDSimpleTypeDefinition[0..1] role anonymousTypeDefinition
+end
+
+association xxx_XSDAttributeDeclaration_typeDefinition between
+	XSDAttributeDeclaration[*] role xxx_XSDAttributeDeclaration_typeDefinition_src
+	XSDSimpleTypeDefinition[1] role typeDefinition
+end
+
+association xxx_XSDAttributeDeclaration_resolvedAttributeDeclaration between
+	XSDAttributeDeclaration[*] role xxx_XSDAttributeDeclaration_resolvedAttributeDeclaration_src
+	XSDAttributeDeclaration[1] role resolvedAttributeDeclaration
+end
+
+composition xxx_XSDAttributeGroupDefinition_annotation between
+	XSDAttributeGroupDefinition[*] role xxx_XSDAttributeGroupDefinition_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDAttributeGroupDefinition_contents between
+	XSDAttributeGroupDefinition[0..1] role xxx_XSDAttributeGroupDefinition_contents_src
+	XSDAttributeGroupContent[*] role contents
+end
+
+association xxx_XSDAttributeGroupDefinition_attributeUses between
+	XSDAttributeGroupDefinition[0..1] role xxx_XSDAttributeGroupDefinition_attributeUses_src
+	XSDAttributeUse[*] role attributeUses
+end
+
+composition xxx_XSDAttributeGroupDefinition_attributeWildcardContent between
+	XSDAttributeGroupDefinition[*] role xxx_XSDAttributeGroupDefinition_attributeWildcardContent_src
+	XSDWildcard[0..1] role attributeWildcardContent
+end
+
+association xxx_XSDAttributeGroupDefinition_attributeWildcard between
+	XSDAttributeGroupDefinition[*] role xxx_XSDAttributeGroupDefinition_attributeWildcard_src
+	XSDWildcard[0..1] role attributeWildcard
+end
+
+association xxx_XSDAttributeGroupDefinition_resolvedAttributeGroupDefinition between
+	XSDAttributeGroupDefinition[*] role xxx_XSDAttributeGroupDefinition_resolvedAttributeGroupDefinition_src
+	XSDAttributeGroupDefinition[1] role resolvedAttributeGroupDefinition
+end
+
+composition xxx_XSDAttributeGroupDefinition_syntheticWildcard between
+	XSDAttributeGroupDefinition[*] role xxx_XSDAttributeGroupDefinition_syntheticWildcard_src
+	XSDWildcard[0..1] role syntheticWildcard
+end
+
+association xxx_XSDAttributeUse_attributeDeclaration between
+	XSDAttributeUse[*] role xxx_XSDAttributeUse_attributeDeclaration_src
+	XSDAttributeDeclaration[1] role attributeDeclaration
+end
+
+composition xxx_XSDAttributeUse_content between
+	XSDAttributeUse[*] role xxx_XSDAttributeUse_content_src
+	XSDAttributeDeclaration[1] role content
+end
+
+composition xxx_XSDComplexTypeDefinition_contentAnnotation between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_contentAnnotation_src
+	XSDAnnotation[0..1] role contentAnnotation
+end
+
+association xxx_XSDComplexTypeDefinition_baseTypeDefinition between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_baseTypeDefinition_src
+	XSDTypeDefinition[1] role baseTypeDefinition
+end
+
+composition xxx_XSDComplexTypeDefinition_content between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_content_src
+	XSDComplexTypeContent[0..1] role content
+end
+
+association xxx_XSDComplexTypeDefinition_contentType between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_contentType_src
+	XSDComplexTypeContent[0..1] role contentType
+end
+
+association xxx_XSDComplexTypeDefinition_attributeUses between
+	XSDComplexTypeDefinition[0..1] role xxx_XSDComplexTypeDefinition_attributeUses_src
+	XSDAttributeUse[*] role attributeUses
+end
+
+composition xxx_XSDComplexTypeDefinition_attributeContents between
+	XSDComplexTypeDefinition[0..1] role xxx_XSDComplexTypeDefinition_attributeContents_src
+	XSDAttributeGroupContent[*] role attributeContents
+end
+
+association xxx_XSDComplexTypeDefinition_attributeWildcard between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_attributeWildcard_src
+	XSDWildcard[0..1] role attributeWildcard
+end
+
+composition xxx_XSDComplexTypeDefinition_attributeWildcardContent between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_attributeWildcardContent_src
+	XSDWildcard[0..1] role attributeWildcardContent
+end
+
+association xxx_XSDComplexTypeDefinition_rootTypeDefinition between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_rootTypeDefinition_src
+	XSDTypeDefinition[1] role rootTypeDefinition
+end
+
+composition xxx_XSDComplexTypeDefinition_syntheticParticle between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_syntheticParticle_src
+	XSDParticle[0..1] role syntheticParticle
+end
+
+composition xxx_XSDComplexTypeDefinition_syntheticWildcard between
+	XSDComplexTypeDefinition[*] role xxx_XSDComplexTypeDefinition_syntheticWildcard_src
+	XSDWildcard[0..1] role syntheticWildcard
+end
+
+association xxx_XSDConcreteComponent_container between
+	XSDConcreteComponent[*] role xxx_XSDConcreteComponent_container_src
+	XSDConcreteComponent[0..1] role container
+end
+
+association xxx_XSDConcreteComponent_rootContainer between
+	XSDConcreteComponent[*] role xxx_XSDConcreteComponent_rootContainer_src
+	XSDConcreteComponent[1] role rootContainer
+end
+
+association xxx_XSDConcreteComponent_schema between
+	XSDConcreteComponent[*] role xxx_XSDConcreteComponent_schema_src
+	XSDSchema[0..1] role schema
+end
+
+composition xxx_XSDConcreteComponent_diagnostics between
+	XSDConcreteComponent[0..1] role xxx_XSDConcreteComponent_diagnostics_src
+	XSDDiagnostic[*] role diagnostics
+end
+
+association xxx_XSDDiagnostic_components between
+	XSDDiagnostic[0..1] role xxx_XSDDiagnostic_components_src
+	XSDConcreteComponent[1..*] role components
+end
+
+association xxx_XSDDiagnostic_primaryComponent between
+	XSDDiagnostic[*] role xxx_XSDDiagnostic_primaryComponent_src
+	XSDConcreteComponent[1] role primaryComponent
+end
+
+composition xxx_XSDElementDeclaration_annotation between
+	XSDElementDeclaration[*] role xxx_XSDElementDeclaration_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDElementDeclaration_anonymousTypeDefinition between
+	XSDElementDeclaration[*] role xxx_XSDElementDeclaration_anonymousTypeDefinition_src
+	XSDTypeDefinition[0..1] role anonymousTypeDefinition
+end
+
+association xxx_XSDElementDeclaration_typeDefinition between
+	XSDElementDeclaration[*] role xxx_XSDElementDeclaration_typeDefinition_src
+	XSDTypeDefinition[1] role typeDefinition
+end
+
+composition xxx_XSDElementDeclaration_identityConstraintDefinitions between
+	XSDElementDeclaration[0..1] role xxx_XSDElementDeclaration_identityConstraintDefinitions_src
+	XSDIdentityConstraintDefinition[*] role identityConstraintDefinitions
+end
+
+association xxx_XSDElementDeclaration_resolvedElementDeclaration between
+	XSDElementDeclaration[*] role xxx_XSDElementDeclaration_resolvedElementDeclaration_src
+	XSDElementDeclaration[1] role resolvedElementDeclaration
+end
+
+association xxx_XSDElementDeclaration_substitutionGroupAffiliation between
+	XSDElementDeclaration[*] role xxx_XSDElementDeclaration_substitutionGroupAffiliation_src
+	XSDElementDeclaration[0..1] role substitutionGroupAffiliation
+end
+
+association xxx_XSDElementDeclaration_substitutionGroup between
+	XSDElementDeclaration[0..1] role xxx_XSDElementDeclaration_substitutionGroup_src
+	XSDElementDeclaration[*] role substitutionGroup
+end
+
+composition xxx_XSDFacet_annotation between
+	XSDFacet[*] role xxx_XSDFacet_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+association xxx_XSDFacet_simpleTypeDefinition between
+	XSDFacet[*] role xxx_XSDFacet_simpleTypeDefinition_src
+	XSDSimpleTypeDefinition[0..1] role simpleTypeDefinition
+end
+
+association xxx_XSDFeature_scope between
+	XSDFeature[*] role xxx_XSDFeature_scope_src
+	XSDScope[0..1] role scope
+end
+
+association xxx_XSDFeature_resolvedFeature between
+	XSDFeature[*] role xxx_XSDFeature_resolvedFeature_src
+	XSDFeature[1] role resolvedFeature
+end
+
+association xxx_XSDFeature_type between
+	XSDFeature[*] role xxx_XSDFeature_type_src
+	XSDTypeDefinition[1] role type
+end
+
+composition xxx_XSDIdentityConstraintDefinition_annotation between
+	XSDIdentityConstraintDefinition[*] role xxx_XSDIdentityConstraintDefinition_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+association xxx_XSDIdentityConstraintDefinition_referencedKey between
+	XSDIdentityConstraintDefinition[*] role xxx_XSDIdentityConstraintDefinition_referencedKey_src
+	XSDIdentityConstraintDefinition[0..1] role referencedKey
+end
+
+composition xxx_XSDIdentityConstraintDefinition_selector between
+	XSDIdentityConstraintDefinition[*] role xxx_XSDIdentityConstraintDefinition_selector_src
+	XSDXPathDefinition[1] role selector
+end
+
+composition xxx_XSDIdentityConstraintDefinition_fields between
+	XSDIdentityConstraintDefinition[0..1] role xxx_XSDIdentityConstraintDefinition_fields_src
+	XSDXPathDefinition[1..*] role fields
+end
+
+composition xxx_XSDImport_annotation between
+	XSDImport[*] role xxx_XSDImport_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDInclude_annotation between
+	XSDInclude[*] role xxx_XSDInclude_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDModelGroup_annotation between
+	XSDModelGroup[*] role xxx_XSDModelGroup_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDModelGroup_contents between
+	XSDModelGroup[0..1] role xxx_XSDModelGroup_contents_src
+	XSDParticle[*] role contents
+end
+
+association xxx_XSDModelGroup_particles between
+	XSDModelGroup[0..1] role xxx_XSDModelGroup_particles_src
+	XSDParticle[1..*] role particles
+end
+
+composition xxx_XSDModelGroupDefinition_annotation between
+	XSDModelGroupDefinition[*] role xxx_XSDModelGroupDefinition_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDModelGroupDefinition_modelGroup between
+	XSDModelGroupDefinition[*] role xxx_XSDModelGroupDefinition_modelGroup_src
+	XSDModelGroup[1] role modelGroup
+end
+
+association xxx_XSDModelGroupDefinition_resolvedModelGroupDefinition between
+	XSDModelGroupDefinition[*] role xxx_XSDModelGroupDefinition_resolvedModelGroupDefinition_src
+	XSDModelGroupDefinition[1] role resolvedModelGroupDefinition
+end
+
+composition xxx_XSDNotationDeclaration_annotation between
+	XSDNotationDeclaration[*] role xxx_XSDNotationDeclaration_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDParticle_content between
+	XSDParticle[*] role xxx_XSDParticle_content_src
+	XSDParticleContent[1] role content
+end
+
+association xxx_XSDParticle_term between
+	XSDParticle[*] role xxx_XSDParticle_term_src
+	XSDTerm[1] role term
+end
+
+association xxx_XSDRedefine_annotations between
+	XSDRedefine[0..1] role xxx_XSDRedefine_annotations_src
+	XSDAnnotation[*] role annotations
+end
+
+composition xxx_XSDRedefine_contents between
+	XSDRedefine[0..1] role xxx_XSDRedefine_contents_src
+	XSDRedefineContent[*] role contents
+end
+
+association xxx_XSDRepeatableFacet_annotations between
+	XSDRepeatableFacet[0..1] role xxx_XSDRepeatableFacet_annotations_src
+	XSDAnnotation[*] role annotations
+end
+
+composition xxx_XSDSchema_contents between
+	XSDSchema[0..1] role xxx_XSDSchema_contents_src
+	XSDSchemaContent[*] role contents
+end
+
+association xxx_XSDSchema_elementDeclarations between
+	XSDSchema[0..1] role xxx_XSDSchema_elementDeclarations_src
+	XSDElementDeclaration[*] role elementDeclarations
+end
+
+association xxx_XSDSchema_attributeDeclarations between
+	XSDSchema[0..1] role xxx_XSDSchema_attributeDeclarations_src
+	XSDAttributeDeclaration[*] role attributeDeclarations
+end
+
+association xxx_XSDSchema_attributeGroupDefinitions between
+	XSDSchema[0..1] role xxx_XSDSchema_attributeGroupDefinitions_src
+	XSDAttributeGroupDefinition[*] role attributeGroupDefinitions
+end
+
+association xxx_XSDSchema_typeDefinitions between
+	XSDSchema[0..1] role xxx_XSDSchema_typeDefinitions_src
+	XSDTypeDefinition[*] role typeDefinitions
+end
+
+association xxx_XSDSchema_modelGroupDefinitions between
+	XSDSchema[0..1] role xxx_XSDSchema_modelGroupDefinitions_src
+	XSDModelGroupDefinition[*] role modelGroupDefinitions
+end
+
+association xxx_XSDSchema_identityConstraintDefinitions between
+	XSDSchema[0..1] role xxx_XSDSchema_identityConstraintDefinitions_src
+	XSDIdentityConstraintDefinition[*] role identityConstraintDefinitions
+end
+
+association xxx_XSDSchema_notationDeclarations between
+	XSDSchema[0..1] role xxx_XSDSchema_notationDeclarations_src
+	XSDNotationDeclaration[*] role notationDeclarations
+end
+
+association xxx_XSDSchema_annotations between
+	XSDSchema[0..1] role xxx_XSDSchema_annotations_src
+	XSDAnnotation[*] role annotations
+end
+
+association xxx_XSDSchema_allDiagnostics between
+	XSDSchema[0..1] role xxx_XSDSchema_allDiagnostics_src
+	XSDDiagnostic[*] role allDiagnostics
+end
+
+association xxx_XSDSchema_referencingDirectives between
+	XSDSchema[0..1] role xxx_XSDSchema_referencingDirectives_src
+	XSDSchemaDirective[*] role referencingDirectives
+end
+
+association xxx_XSDSchema_rootVersion between
+	XSDSchema[*] role xxx_XSDSchema_rootVersion_src
+	XSDSchema[1] role rootVersion
+end
+
+association xxx_XSDSchema_originalVersion between
+	XSDSchema[*] role xxx_XSDSchema_originalVersion_src
+	XSDSchema[0..1] role originalVersion
+end
+
+composition xxx_XSDSchema_incorporatedVersions between
+	XSDSchema[0..1] role xxx_XSDSchema_incorporatedVersions_src
+	XSDSchema[*] role incorporatedVersions
+end
+
+association xxx_XSDSchema_schemaForSchema between
+	XSDSchema[*] role xxx_XSDSchema_schemaForSchema_src
+	XSDSchema[1] role schemaForSchema
+end
+
+association xxx_XSDSchemaCompositor_incorporatedSchema between
+	XSDSchemaCompositor[*] role xxx_XSDSchemaCompositor_incorporatedSchema_src
+	XSDSchema[0..1] role incorporatedSchema
+end
+
+association xxx_XSDSchemaDirective_resolvedSchema between
+	XSDSchemaDirective[*] role xxx_XSDSchemaDirective_resolvedSchema_src
+	XSDSchema[0..1] role resolvedSchema
+end
+
+composition xxx_XSDSimpleTypeDefinition_contents between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_contents_src
+	XSDSimpleTypeDefinition[*] role contents
+end
+
+composition xxx_XSDSimpleTypeDefinition_facetContents between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_facetContents_src
+	XSDConstrainingFacet[*] role facetContents
+end
+
+association xxx_XSDSimpleTypeDefinition_facets between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_facets_src
+	XSDConstrainingFacet[*] role facets
+end
+
+association xxx_XSDSimpleTypeDefinition_memberTypeDefinitions between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_memberTypeDefinitions_src
+	XSDSimpleTypeDefinition[*] role memberTypeDefinitions
+end
+
+composition xxx_XSDSimpleTypeDefinition_fundamentalFacets between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_fundamentalFacets_src
+	XSDFundamentalFacet[1..*] role fundamentalFacets
+end
+
+association xxx_XSDSimpleTypeDefinition_baseTypeDefinition between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_baseTypeDefinition_src
+	XSDSimpleTypeDefinition[1] role baseTypeDefinition
+end
+
+association xxx_XSDSimpleTypeDefinition_primitiveTypeDefinition between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_primitiveTypeDefinition_src
+	XSDSimpleTypeDefinition[0..1] role primitiveTypeDefinition
+end
+
+association xxx_XSDSimpleTypeDefinition_itemTypeDefinition between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_itemTypeDefinition_src
+	XSDSimpleTypeDefinition[0..1] role itemTypeDefinition
+end
+
+association xxx_XSDSimpleTypeDefinition_rootTypeDefinition between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_rootTypeDefinition_src
+	XSDSimpleTypeDefinition[1] role rootTypeDefinition
+end
+
+association xxx_XSDSimpleTypeDefinition_minFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_minFacet_src
+	XSDMinFacet[0..1] role minFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_maxFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_maxFacet_src
+	XSDMaxFacet[0..1] role maxFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_maxInclusiveFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_maxInclusiveFacet_src
+	XSDMaxInclusiveFacet[0..1] role maxInclusiveFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_minInclusiveFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_minInclusiveFacet_src
+	XSDMinInclusiveFacet[0..1] role minInclusiveFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_minExclusiveFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_minExclusiveFacet_src
+	XSDMinExclusiveFacet[0..1] role minExclusiveFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_maxExclusiveFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_maxExclusiveFacet_src
+	XSDMaxExclusiveFacet[0..1] role maxExclusiveFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_lengthFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_lengthFacet_src
+	XSDLengthFacet[0..1] role lengthFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_whiteSpaceFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_whiteSpaceFacet_src
+	XSDWhiteSpaceFacet[0..1] role whiteSpaceFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_enumerationFacets between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_enumerationFacets_src
+	XSDEnumerationFacet[*] role enumerationFacets
+end
+
+association xxx_XSDSimpleTypeDefinition_patternFacets between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_patternFacets_src
+	XSDPatternFacet[*] role patternFacets
+end
+
+association xxx_XSDSimpleTypeDefinition_cardinalityFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_cardinalityFacet_src
+	XSDCardinalityFacet[1] role cardinalityFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_numericFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_numericFacet_src
+	XSDNumericFacet[1] role numericFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_maxLengthFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_maxLengthFacet_src
+	XSDMaxLengthFacet[0..1] role maxLengthFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_minLengthFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_minLengthFacet_src
+	XSDMinLengthFacet[0..1] role minLengthFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_totalDigitsFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_totalDigitsFacet_src
+	XSDTotalDigitsFacet[0..1] role totalDigitsFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_fractionDigitsFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_fractionDigitsFacet_src
+	XSDFractionDigitsFacet[0..1] role fractionDigitsFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_orderedFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_orderedFacet_src
+	XSDOrderedFacet[1] role orderedFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_boundedFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_boundedFacet_src
+	XSDBoundedFacet[1] role boundedFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveMaxFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveMaxFacet_src
+	XSDMaxFacet[0..1] role effectiveMaxFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveWhiteSpaceFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveWhiteSpaceFacet_src
+	XSDWhiteSpaceFacet[0..1] role effectiveWhiteSpaceFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveMaxLengthFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveMaxLengthFacet_src
+	XSDMaxLengthFacet[0..1] role effectiveMaxLengthFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveFractionDigitsFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveFractionDigitsFacet_src
+	XSDFractionDigitsFacet[0..1] role effectiveFractionDigitsFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectivePatternFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectivePatternFacet_src
+	XSDPatternFacet[0..1] role effectivePatternFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveEnumerationFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveEnumerationFacet_src
+	XSDEnumerationFacet[0..1] role effectiveEnumerationFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveTotalDigitsFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveTotalDigitsFacet_src
+	XSDTotalDigitsFacet[0..1] role effectiveTotalDigitsFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveMinLengthFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveMinLengthFacet_src
+	XSDMinLengthFacet[0..1] role effectiveMinLengthFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveLengthFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveLengthFacet_src
+	XSDLengthFacet[0..1] role effectiveLengthFacet
+end
+
+association xxx_XSDSimpleTypeDefinition_effectiveMinFacet between
+	XSDSimpleTypeDefinition[*] role xxx_XSDSimpleTypeDefinition_effectiveMinFacet_src
+	XSDMinFacet[0..1] role effectiveMinFacet
+end
+
+composition xxx_XSDSimpleTypeDefinition_syntheticFacets between
+	XSDSimpleTypeDefinition[0..1] role xxx_XSDSimpleTypeDefinition_syntheticFacets_src
+	XSDFacet[*] role syntheticFacets
+end
+
+composition xxx_XSDTypeDefinition_annotation between
+	XSDTypeDefinition[*] role xxx_XSDTypeDefinition_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+composition xxx_XSDTypeDefinition_derivationAnnotation between
+	XSDTypeDefinition[*] role xxx_XSDTypeDefinition_derivationAnnotation_src
+	XSDAnnotation[0..1] role derivationAnnotation
+end
+
+association xxx_XSDTypeDefinition_annotations between
+	XSDTypeDefinition[0..1] role xxx_XSDTypeDefinition_annotations_src
+	XSDAnnotation[*] role annotations
+end
+
+association xxx_XSDTypeDefinition_rootType between
+	XSDTypeDefinition[*] role xxx_XSDTypeDefinition_rootType_src
+	XSDTypeDefinition[1] role rootType
+end
+
+association xxx_XSDTypeDefinition_baseType between
+	XSDTypeDefinition[*] role xxx_XSDTypeDefinition_baseType_src
+	XSDTypeDefinition[1] role baseType
+end
+
+association xxx_XSDTypeDefinition_simpleType between
+	XSDTypeDefinition[*] role xxx_XSDTypeDefinition_simpleType_src
+	XSDSimpleTypeDefinition[0..1] role simpleType
+end
+
+association xxx_XSDTypeDefinition_complexType between
+	XSDTypeDefinition[*] role xxx_XSDTypeDefinition_complexType_src
+	XSDParticle[0..1] role complexType
+end
+
+composition xxx_XSDWildcard_annotation between
+	XSDWildcard[*] role xxx_XSDWildcard_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+
+association xxx_XSDWildcard_annotations between
+	XSDWildcard[0..1] role xxx_XSDWildcard_annotations_src
+	XSDAnnotation[*] role annotations
+end
+
+composition xxx_XSDXPathDefinition_annotation between
+	XSDXPathDefinition[*] role xxx_XSDXPathDefinition_annotation_src
+	XSDAnnotation[0..1] role annotation
+end
+

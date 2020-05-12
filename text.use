@@ -1,0 +1,106 @@
+model Text
+class Model
+attributes
+operations
+end
+
+class Directory<NamedElement
+attributes
+	path : String
+operations
+end
+
+class File<NamedElement
+attributes
+	path : String
+operations
+end
+
+class Block<NamedElement
+attributes
+	tabbed : Boolean
+operations
+end
+
+abstract class Line<NamedElement
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Content<Line
+attributes
+	text : String
+operations
+end
+
+class EmptyLine<Line
+attributes
+operations
+end
+
+composition xxx_Model_directory between
+	Model[0..1] role xxx_Model_directory_src
+	Directory[1..*] role directory
+end
+
+composition xxx_Directory_directory between
+	Directory[0..1] role xxx_Directory_directory_src
+	Directory[*] role directory
+end
+
+composition xxx_Directory_file between
+	Directory[0..1] role xxx_Directory_file_src
+	File[*] role file
+end
+
+composition xxx_File_innerBlock between
+	File[0..1] role xxx_File_innerBlock_src
+	Block[*] role innerBlock
+end
+
+composition xxx_Block_innerBlock between
+	Block[0..1] role xxx_Block_innerBlock_src
+	Block[*] role innerBlock
+end
+
+composition xxx_Block_innerLine between
+	Block[0..1] role xxx_Block_innerLine_src
+	Line[*] role innerLine
+end
+
+composition xxx_Block_preLine between
+	Block[*] role xxx_Block_preLine_src
+	Line[0..1] role preLine
+end
+
+composition xxx_Block_postLine between
+	Block[*] role xxx_Block_postLine_src
+	Line[0..1] role postLine
+end
+
+composition xxx_Block_content between
+	Block[0..1] role xxx_Block_content_src
+	Content[*] role content
+end
+
+composition xxx_Line_content between
+	Line[0..1] role xxx_Line_content_src
+	Content[*] role content
+end
+
+composition xxx_Content_next between
+	Content[*] role xxx_Content_next_src
+	Content[0..1] role next
+end
+
+composition xxx_Content_innerBlock between
+	Content[*] role xxx_Content_innerBlock_src
+	Block[0..1] role innerBlock
+end
+

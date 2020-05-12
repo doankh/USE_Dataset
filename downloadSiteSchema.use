@@ -1,0 +1,75 @@
+model schema
+enum BuildType{
+default
+}
+
+class Build<DownloadSiteElement
+attributes
+	stream : String
+	tstamp : String
+	type : BuildType
+operations
+end
+
+class Bundle<DownloadSiteElement
+attributes
+	link : String
+	size : String
+operations
+end
+
+class Component<DownloadSiteElement
+attributes
+	junitResultsURL : String
+operations
+end
+
+class Dependency<Bundle
+attributes
+operations
+end
+
+class Detail<Bundle
+attributes
+operations
+end
+
+class DownloadSite<DownloadSiteElement
+attributes
+	group : String
+operations
+end
+
+class DownloadSiteElement
+attributes
+	description : String
+	name : String
+	summary : String
+operations
+end
+
+composition xxx_Build_component between
+	Build[0..1] role xxx_Build_component_src
+	Component[*] role component
+end
+
+composition xxx_Build_dependency between
+	Build[0..1] role xxx_Build_dependency_src
+	Dependency[*] role dependency
+end
+
+composition xxx_Build_detail between
+	Build[0..1] role xxx_Build_detail_src
+	Detail[*] role detail
+end
+
+composition xxx_Component_bundle between
+	Component[0..1] role xxx_Component_bundle_src
+	Bundle[*] role bundle
+end
+
+composition xxx_DownloadSite_build between
+	DownloadSite[0..1] role xxx_DownloadSite_build_src
+	Build[*] role build
+end
+

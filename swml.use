@@ -1,0 +1,116 @@
+model swml
+enum DataType{
+default
+}
+
+class WebApplication
+attributes
+	name : String
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	dataType : DataType
+operations
+end
+
+class Relationship
+attributes
+	role : String
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class WebPage
+attributes
+	title : String
+	relativeUrl : String
+operations
+end
+
+class StaticPage<WebPage
+attributes
+operations
+end
+
+class DynamicPage<WebPage
+attributes
+operations
+end
+
+class Link
+attributes
+	href : String
+operations
+end
+
+class Icon
+attributes
+	image : String
+operations
+end
+
+class EntityPage<DynamicPage
+attributes
+operations
+end
+
+class IndexPage<DynamicPage
+attributes
+operations
+end
+
+composition xxx_WebApplication_entities between
+	WebApplication[0..1] role xxx_WebApplication_entities_src
+	Entity[*] role entities
+end
+
+association xxx_WebApplication_homePage between
+	WebApplication[*] role xxx_WebApplication_homePage_src
+	StaticPage[1] role homePage
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Entity_id between
+	Entity[*] role xxx_Entity_id_src
+	Attribute[1] role id
+end
+
+composition xxx_Entity_relationships between
+	Entity[0..1] role xxx_Entity_relationships_src
+	Relationship[*] role relationships
+end
+
+association xxx_Relationship_referencedEntity between
+	Relationship[*] role xxx_Relationship_referencedEntity_src
+	Entity[1] role referencedEntity
+end
+
+composition xxx_StaticPage_links between
+	StaticPage[0..1] role xxx_StaticPage_links_src
+	Link[*] role links
+end
+
+composition xxx_DynamicPage_icon between
+	DynamicPage[*] role xxx_DynamicPage_icon_src
+	Icon[1] role icon
+end
+
+association xxx_DynamicPage_type between
+	DynamicPage[*] role xxx_DynamicPage_type_src
+	Entity[1] role type
+end
+

@@ -1,0 +1,110 @@
+model SEEDesign
+class LogFile
+attributes
+	file : String
+operations
+end
+
+class Logger
+attributes
+operations
+end
+
+class Expression
+attributes
+	loggingOn : Boolean
+operations
+end
+
+class Literal<Expression
+attributes
+	value : Integer
+operations
+end
+
+class VariableExpression<Literal
+attributes
+	name : String
+operations
+end
+
+class NumberExpression<Literal
+attributes
+operations
+end
+
+class UnaryOperator<Expression
+attributes
+operations
+end
+
+class UnaryPlusOp<UnaryOperator
+attributes
+operations
+end
+
+class UnaryMinusOp<UnaryOperator
+attributes
+operations
+end
+
+class BinaryOperator<Expression
+attributes
+operations
+end
+
+class PlusOperator<BinaryOperator
+attributes
+operations
+end
+
+class MinusOperator<BinaryOperator
+attributes
+operations
+end
+
+association xxx_LogFile_instance between
+	LogFile[*] role xxx_LogFile_instance_src
+	LogFile[1] role instance
+end
+
+association xxx_LogFile_logger between
+	LogFile[*] role xxx_LogFile_logger_src
+	Logger[1] role logger
+end
+
+association xxx_Logger_instance between
+	Logger[*] role xxx_Logger_instance_src
+	Logger[1] role instance
+end
+
+association xxx_Logger_expression between
+	Logger[*] role xxx_Logger_expression_src
+	Expression[1] role expression
+end
+
+association xxx_Logger_logFile between
+	Logger[*] role xxx_Logger_logFile_src
+	LogFile[1] role logFile
+end
+
+association xxx_Expression_logger between
+	Expression[*] role xxx_Expression_logger_src
+	Logger[1] role logger
+end
+
+composition xxx_UnaryOperator_operand between
+	UnaryOperator[*] role xxx_UnaryOperator_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_BinaryOperator_operand1 between
+	BinaryOperator[*] role xxx_BinaryOperator_operand1_src
+	Expression[1] role operand1
+end
+
+composition xxx_BinaryOperator_operand2 between
+	BinaryOperator[*] role xxx_BinaryOperator_operand2_src
+	Expression[1] role operand2
+end
+

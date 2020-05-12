@@ -1,0 +1,167 @@
+model OCLExpression
+abstract class ModelElement
+attributes
+operations
+end
+
+class SyncChart
+attributes
+operations
+end
+
+class ReferenceState
+attributes
+operations
+end
+
+abstract class Arc<ModelElement
+attributes
+	isImmediate : Boolean
+	priority : Integer
+operations
+end
+
+abstract class Vertex<ModelElement
+attributes
+operations
+end
+
+class PseudoState<Vertex
+attributes
+operations
+end
+
+class PseudoStateKind
+attributes
+operations
+end
+
+class State<Vertex
+attributes
+	isFinal : Boolean
+operations
+end
+
+class SimpleState<State
+attributes
+operations
+end
+
+class CompositeState<ReferenceState
+attributes
+	canTerminate : Boolean
+	isSuspendable : Boolean
+operations
+end
+
+class Stg
+attributes
+	withFinal : Boolean
+operations
+end
+
+class Transition<Arc
+attributes
+operations
+end
+
+class TransitionKind
+attributes
+operations
+end
+
+class PseudoTransition<Arc
+attributes
+operations
+end
+
+class PseudoTransitionKind
+attributes
+operations
+end
+
+association xxx_ModelElement_behavior between
+	ModelElement[0..1] role xxx_ModelElement_behavior_src
+	SyncChart[*] role behavior
+end
+
+association xxx_SyncChart_context_ between
+	SyncChart[*] role xxx_SyncChart_context__src
+	ModelElement[0..1] role context_
+end
+
+association xxx_SyncChart_referenceState between
+	SyncChart[0..1] role xxx_SyncChart_referenceState_src
+	ReferenceState[*] role referenceState
+end
+
+association xxx_ReferenceState_subSyncChart between
+	ReferenceState[*] role xxx_ReferenceState_subSyncChart_src
+	SyncChart[1] role subSyncChart
+end
+
+association xxx_ReferenceState_containers between
+	ReferenceState[*] role xxx_ReferenceState_containers_src
+	Stg[0..1] role containers
+end
+
+association xxx_Arc_target between
+	Arc[*] role xxx_Arc_target_src
+	Vertex[1] role target
+end
+
+association xxx_Arc_source between
+	Arc[*] role xxx_Arc_source_src
+	Vertex[1] role source
+end
+
+association xxx_Arc_stg between
+	Arc[*] role xxx_Arc_stg_src
+	Stg[0..1] role stg
+end
+
+association xxx_Vertex_incoming between
+	Vertex[0..1] role xxx_Vertex_incoming_src
+	Arc[*] role incoming
+end
+
+association xxx_Vertex_outcoming between
+	Vertex[0..1] role xxx_Vertex_outcoming_src
+	Arc[*] role outcoming
+end
+
+association xxx_PseudoState_kind between
+	PseudoState[*] role xxx_PseudoState_kind_src
+	PseudoStateKind[1] role kind
+end
+
+association xxx_CompositeState_stg between
+	CompositeState[0..1] role xxx_CompositeState_stg_src
+	Stg[1..*] role stg
+end
+
+association xxx_Stg_compositeState between
+	Stg[*] role xxx_Stg_compositeState_src
+	CompositeState[1] role compositeState
+end
+
+composition xxx_Stg_arc between
+	Stg[0..1] role xxx_Stg_arc_src
+	Arc[*] role arc
+end
+
+composition xxx_Stg_referenceState between
+	Stg[0..1] role xxx_Stg_referenceState_src
+	ReferenceState[*] role referenceState
+end
+
+association xxx_Transition_kind between
+	Transition[*] role xxx_Transition_kind_src
+	TransitionKind[1] role kind
+end
+
+association xxx_PseudoTransition_kind between
+	PseudoTransition[*] role xxx_PseudoTransition_kind_src
+	PseudoTransitionKind[1] role kind
+end
+

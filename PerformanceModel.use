@@ -1,0 +1,129 @@
+model model_
+abstract class Task
+attributes
+	taskId : Integer
+	name : String
+	deadline : Real
+operations
+	getComputedExecutionMean():Real
+	getEffectiveDeadline():String
+end
+
+class PeriodicTask<Task
+attributes
+	period : Real
+	offset : Real
+operations
+end
+
+class AperiodicTask<Task
+attributes
+operations
+end
+
+class Subtask
+attributes
+	name : String
+	priority : Integer
+	retAnchorUsed : Boolean
+	activationSynchronous : Boolean
+	bypass : Integer
+	downsamplingFactor : Integer
+	callingThreadPriority : Integer
+	pinId : Integer
+operations
+end
+
+abstract class Distribution
+attributes
+operations
+	add(value : Real)
+	getComputedMean():Real
+	toString():String
+end
+
+class Constant<Distribution
+attributes
+	value : Real
+operations
+end
+
+class Exponential<Distribution
+attributes
+	mean : Real
+operations
+end
+
+class Uniform<Distribution
+attributes
+	max : Real
+	min : Real
+operations
+end
+
+class Unknown<Distribution
+attributes
+	mean : Real
+	min : Real
+	max : Real
+operations
+end
+
+class Normal<Distribution
+attributes
+	mean : Real
+	stdDev : Real
+operations
+end
+
+class PerformanceModel
+attributes
+	name : String
+	sourceFile : String
+operations
+end
+
+class SSTask<AperiodicTask
+attributes
+	budget : Real
+	replenishmentPeriod : Integer
+	backgroundPriority : Integer
+operations
+end
+
+class Mutex
+attributes
+	name : String
+operations
+end
+
+composition xxx_Task_subtasks between
+	Task[0..1] role xxx_Task_subtasks_src
+	Subtask[*] role subtasks
+end
+
+composition xxx_AperiodicTask_interarrivalDistribution between
+	AperiodicTask[*] role xxx_AperiodicTask_interarrivalDistribution_src
+	Distribution[1] role interarrivalDistribution
+end
+
+composition xxx_Subtask_execTimeDistribution between
+	Subtask[*] role xxx_Subtask_execTimeDistribution_src
+	Distribution[1] role execTimeDistribution
+end
+
+association xxx_Subtask_mutexes between
+	Subtask[0..1] role xxx_Subtask_mutexes_src
+	Mutex[*] role mutexes
+end
+
+composition xxx_PerformanceModel_tasks between
+	PerformanceModel[0..1] role xxx_PerformanceModel_tasks_src
+	Task[*] role tasks
+end
+
+composition xxx_PerformanceModel_mutexes between
+	PerformanceModel[0..1] role xxx_PerformanceModel_mutexes_src
+	Mutex[*] role mutexes
+end
+

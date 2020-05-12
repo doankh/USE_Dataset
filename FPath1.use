@@ -1,0 +1,130 @@
+model FPath
+enum Axis{
+default
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class ContextExp<Expression
+attributes
+operations
+end
+
+class VariableExp<Expression
+attributes
+	name : String
+operations
+end
+
+class FunctionCallExp<Expression
+attributes
+	name : String
+operations
+end
+
+class NumberExp<Expression
+attributes
+	value : Real
+operations
+end
+
+class StringExp<Expression
+attributes
+	value : String
+operations
+end
+
+class PathExp<Expression
+attributes
+operations
+end
+
+abstract class OperatorExp<Expression
+attributes
+	operator : String
+operations
+end
+
+class BinaryOperatorExp<OperatorExp
+attributes
+operations
+end
+
+class UnaryOperatorExp<OperatorExp
+attributes
+operations
+end
+
+class Step<LocatedElement
+attributes
+	axis : Axis
+operations
+end
+
+abstract class Test<LocatedElement
+attributes
+operations
+end
+
+class WildcardTest<Test
+attributes
+operations
+end
+
+class NameTest<Test
+attributes
+	name : String
+operations
+end
+
+composition xxx_FunctionCallExp_arguments between
+	FunctionCallExp[0..1] role xxx_FunctionCallExp_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_PathExp_initialNodeSet between
+	PathExp[*] role xxx_PathExp_initialNodeSet_src
+	Expression[1] role initialNodeSet
+end
+
+composition xxx_PathExp_steps between
+	PathExp[0..1] role xxx_PathExp_steps_src
+	Step[1..*] role steps
+end
+
+composition xxx_BinaryOperatorExp_left between
+	BinaryOperatorExp[*] role xxx_BinaryOperatorExp_left_src
+	Expression[1] role left
+end
+
+composition xxx_BinaryOperatorExp_right between
+	BinaryOperatorExp[*] role xxx_BinaryOperatorExp_right_src
+	Expression[1] role right
+end
+
+composition xxx_UnaryOperatorExp_operand between
+	UnaryOperatorExp[*] role xxx_UnaryOperatorExp_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_Step_test between
+	Step[*] role xxx_Step_test_src
+	Test[1] role test
+end
+
+composition xxx_Step_predicates between
+	Step[0..1] role xxx_Step_predicates_src
+	Expression[*] role predicates
+end
+

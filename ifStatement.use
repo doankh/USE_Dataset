@@ -1,0 +1,73 @@
+model ifStatement
+enum LogicalOperator{
+default
+}
+
+enum Operator{
+default
+}
+
+class Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class Expression
+attributes
+	prefixOperator : LogicalOperator
+	operator : Operator
+	sensorId : String
+operations
+end
+
+class SetStatement<Statement
+attributes
+	sensorId : String
+operations
+end
+
+class Value
+attributes
+operations
+end
+
+class IntValue<Value
+attributes
+operations
+end
+
+class FloatValue<Value
+attributes
+operations
+end
+
+composition xxx_IfStatement_conditionalExpressions between
+	IfStatement[0..1] role xxx_IfStatement_conditionalExpressions_src
+	Expression[1..*] role conditionalExpressions
+end
+
+association xxx_IfStatement_thenStatements between
+	IfStatement[0..1] role xxx_IfStatement_thenStatements_src
+	Statement[1..*] role thenStatements
+end
+
+association xxx_IfStatement_elseStatements between
+	IfStatement[0..1] role xxx_IfStatement_elseStatements_src
+	Statement[1..*] role elseStatements
+end
+
+composition xxx_Expression_value between
+	Expression[*] role xxx_Expression_value_src
+	Value[1] role value
+end
+
+composition xxx_SetStatement_value between
+	SetStatement[*] role xxx_SetStatement_value_src
+	Value[1] role value
+end
+

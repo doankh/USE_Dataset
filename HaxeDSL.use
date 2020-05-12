@@ -1,0 +1,104 @@
+model haxeDSL
+enum HxVisibility{
+default
+}
+
+enum HxTypeRef{
+default
+}
+
+enum HxBoolean{
+default
+}
+
+class DomainModel
+attributes
+operations
+end
+
+class HxAbstractElement
+attributes
+operations
+end
+
+class HxImportDecl<HxAbstractElement
+attributes
+	importedNamespace : String
+operations
+end
+
+class DeclPackageNamespace
+attributes
+	packageName : String
+operations
+end
+
+class HxPackageDecl<HxAbstractElement
+attributes
+operations
+end
+
+class HxModifier<HxMemberVariable,HxMethod
+attributes
+	static : Boolean
+	dynamic : Boolean
+	override : Boolean
+	visibility : HxVisibility
+	memberVar : String
+	varType : HxTypeRef
+operations
+end
+
+class HxClassDecl<HxAbstractElement,HxMember
+attributes
+	className : String
+	inheritanceName : String
+operations
+end
+
+class HxMember
+attributes
+operations
+end
+
+class HxVariable
+attributes
+	varName : String
+	varType : HxTypeRef
+operations
+end
+
+class HxMemberVariable<HxMember
+attributes
+operations
+end
+
+class HxMethod<HxMember
+attributes
+	funcName : String
+	paramName : String
+	paramtype : HxTypeRef
+	returntype : HxTypeRef
+operations
+end
+
+composition xxx_DomainModel_elements between
+	DomainModel[0..1] role xxx_DomainModel_elements_src
+	HxAbstractElement[*] role elements
+end
+
+composition xxx_HxPackageDecl_declPackageNamespace between
+	HxPackageDecl[*] role xxx_HxPackageDecl_declPackageNamespace_src
+	DeclPackageNamespace[0..1] role declPackageNamespace
+end
+
+composition xxx_HxClassDecl_scope between
+	HxClassDecl[*] role xxx_HxClassDecl_scope_src
+	HxModifier[0..1] role scope
+end
+
+composition xxx_HxClassDecl_members between
+	HxClassDecl[0..1] role xxx_HxClassDecl_members_src
+	HxMember[*] role members
+end
+

@@ -1,0 +1,101 @@
+model ComponentLanguageDeep
+class Component
+attributes
+operations
+end
+
+abstract class Port
+attributes
+operations
+end
+
+class Connector
+attributes
+operations
+end
+
+class InPort<Port
+attributes
+operations
+end
+
+class OutPort<Port
+attributes
+operations
+end
+
+class InPortInstance<PortInstance
+attributes
+operations
+end
+
+class OutPortInstance<PortInstance
+attributes
+operations
+end
+
+class ComponentInstance
+attributes
+operations
+end
+
+class PortInstance
+attributes
+operations
+end
+
+class ConnectorInstance
+attributes
+operations
+end
+
+association xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[*] role ports
+end
+
+association xxx_Connector_in_ between
+	Connector[0..1] role xxx_Connector_in__src
+	Port[*] role in_
+end
+
+association xxx_Connector_out between
+	Connector[0..1] role xxx_Connector_out_src
+	Port[*] role out
+end
+
+association xxx_InPortInstance_type between
+	InPortInstance[*] role xxx_InPortInstance_type_src
+	InPort[0..1] role type
+end
+
+association xxx_OutPortInstance_type between
+	OutPortInstance[*] role xxx_OutPortInstance_type_src
+	OutPort[0..1] role type
+end
+
+association xxx_ComponentInstance_ports between
+	ComponentInstance[0..1] role xxx_ComponentInstance_ports_src
+	PortInstance[*] role ports
+end
+
+association xxx_ComponentInstance_type between
+	ComponentInstance[*] role xxx_ComponentInstance_type_src
+	Component[0..1] role type
+end
+
+association xxx_ConnectorInstance_in_ between
+	ConnectorInstance[0..1] role xxx_ConnectorInstance_in__src
+	PortInstance[*] role in_
+end
+
+association xxx_ConnectorInstance_out between
+	ConnectorInstance[0..1] role xxx_ConnectorInstance_out_src
+	PortInstance[*] role out
+end
+
+association xxx_ConnectorInstance_type between
+	ConnectorInstance[*] role xxx_ConnectorInstance_type_src
+	Connector[0..1] role type
+end
+

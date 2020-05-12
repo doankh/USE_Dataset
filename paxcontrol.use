@@ -1,0 +1,184 @@
+model paxcontrol
+class Diagram
+attributes
+operations
+end
+
+abstract class Transition
+attributes
+operations
+end
+
+class FlowTransition<Transition
+attributes
+operations
+end
+
+class DataTransition<Transition
+attributes
+operations
+end
+
+abstract class Node
+attributes
+	name : String
+operations
+end
+
+abstract class FlowNode<Node
+attributes
+operations
+end
+
+abstract class DataNode<Node
+attributes
+operations
+end
+
+class BehaviorNode<FlowNode,DataNode
+attributes
+operations
+end
+
+class BranchingNode<FlowNode,DataNode
+attributes
+operations
+end
+
+class EventNode<FlowNode,DataNode
+attributes
+operations
+end
+
+class FunctionNode<DataNode
+attributes
+operations
+end
+
+abstract class Port
+attributes
+	name : String
+operations
+end
+
+abstract class FlowPort<Port
+attributes
+operations
+end
+
+abstract class DataPort<Port
+attributes
+operations
+end
+
+class FlowInPort<FlowPort
+attributes
+operations
+end
+
+class FlowOutPort<FlowPort
+attributes
+operations
+end
+
+class DataInPort<DataPort
+attributes
+operations
+end
+
+class DataOutPort<DataPort
+attributes
+operations
+end
+
+class Binding
+attributes
+	id : String
+operations
+end
+
+composition xxx_Diagram_transitions_ between
+	Diagram[0..1] role xxx_Diagram_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Diagram_nodes between
+	Diagram[0..1] role xxx_Diagram_nodes_src
+	Node[*] role nodes
+end
+
+association xxx_Transition_diagram between
+	Transition[*] role xxx_Transition_diagram_src
+	Diagram[1] role diagram
+end
+
+association xxx_FlowTransition_outPort between
+	FlowTransition[*] role xxx_FlowTransition_outPort_src
+	FlowOutPort[1] role outPort
+end
+
+association xxx_FlowTransition_inPort between
+	FlowTransition[*] role xxx_FlowTransition_inPort_src
+	FlowInPort[1] role inPort
+end
+
+association xxx_DataTransition_inPort between
+	DataTransition[*] role xxx_DataTransition_inPort_src
+	DataInPort[1] role inPort
+end
+
+association xxx_DataTransition_outPort between
+	DataTransition[*] role xxx_DataTransition_outPort_src
+	DataOutPort[1] role outPort
+end
+
+association xxx_Node_diagram between
+	Node[*] role xxx_Node_diagram_src
+	Diagram[1] role diagram
+end
+
+composition xxx_Node_binding between
+	Node[*] role xxx_Node_binding_src
+	Binding[0..1] role binding
+end
+
+composition xxx_FlowNode_flowInPort between
+	FlowNode[*] role xxx_FlowNode_flowInPort_src
+	FlowInPort[0..1] role flowInPort
+end
+
+composition xxx_FlowNode_flowOutPorts between
+	FlowNode[0..1] role xxx_FlowNode_flowOutPorts_src
+	FlowOutPort[*] role flowOutPorts
+end
+
+composition xxx_DataNode_dataInPorts between
+	DataNode[0..1] role xxx_DataNode_dataInPorts_src
+	DataInPort[*] role dataInPorts
+end
+
+composition xxx_DataNode_dataOutPorts between
+	DataNode[0..1] role xxx_DataNode_dataOutPorts_src
+	DataOutPort[*] role dataOutPorts
+end
+
+association xxx_FlowInPort_inTransitions between
+	FlowInPort[0..1] role xxx_FlowInPort_inTransitions_src
+	FlowTransition[*] role inTransitions
+end
+
+association xxx_FlowOutPort_outTransition between
+	FlowOutPort[*] role xxx_FlowOutPort_outTransition_src
+	FlowTransition[0..1] role outTransition
+end
+
+association xxx_DataInPort_inTransitions between
+	DataInPort[0..1] role xxx_DataInPort_inTransitions_src
+	DataTransition[*] role inTransitions
+end
+
+association xxx_DataOutPort_outTransitions between
+	DataOutPort[0..1] role xxx_DataOutPort_outTransitions_src
+	DataTransition[*] role outTransitions
+end
+

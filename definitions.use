@@ -1,0 +1,91 @@
+model definitions
+enum ArgumentType{
+default
+}
+
+abstract class Argument
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+	name : String
+operations
+end
+
+class Command<Scope
+attributes
+	name : String
+	version : String
+	deprecated : String
+operations
+end
+
+class Scope
+attributes
+operations
+end
+
+class Constant<Argument
+attributes
+	strictMatch : Boolean
+operations
+end
+
+class Group<Argument
+attributes
+	constant : String
+operations
+end
+
+class Switch<Argument
+attributes
+	checkPrefix : Boolean
+operations
+end
+
+class TypedArgument<Argument
+attributes
+	type : ArgumentType
+operations
+end
+
+class Namespace<Scope
+attributes
+	name : String
+operations
+end
+
+class ComplexArgument<Argument
+attributes
+operations
+end
+
+composition xxx_Command_arguments between
+	Command[0..1] role xxx_Command_arguments_src
+	Argument[*] role arguments
+end
+
+association xxx_Command_scope between
+	Command[0..1] role xxx_Command_scope_src
+	Command[*] role scope
+end
+
+composition xxx_Scope_children between
+	Scope[0..1] role xxx_Scope_children_src
+	Scope[*] role children
+end
+
+composition xxx_Group_arguments between
+	Group[0..1] role xxx_Group_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_Switch_groups between
+	Switch[0..1] role xxx_Switch_groups_src
+	Group[*] role groups
+end
+
+composition xxx_ComplexArgument_arguments between
+	ComplexArgument[0..1] role xxx_ComplexArgument_arguments_src
+	Argument[*] role arguments
+end
+

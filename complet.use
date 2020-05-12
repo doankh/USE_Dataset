@@ -1,0 +1,177 @@
+model editor
+enum ProviderType{
+default
+}
+
+enum Status{
+default
+}
+
+enum Color{
+default
+}
+
+class InformationSystem
+attributes
+	company : String
+	status : Status
+	creationDate : String
+operations
+end
+
+class FunctionalDomain
+attributes
+	name : String
+operations
+end
+
+class BusinessDomain
+attributes
+	name : String
+	color : Color
+operations
+end
+
+class Area
+attributes
+	name : String
+	purpose : String
+operations
+end
+
+class MacroProcess
+attributes
+	name : String
+operations
+end
+
+class BusinessInformation
+attributes
+	name : String
+	description : String
+	tags : String
+operations
+end
+
+abstract class BusinessService
+attributes
+	name : String
+operations
+end
+
+class Provider<BusinessService
+attributes
+	providerType : ProviderType
+operations
+end
+
+class Feature<BusinessService
+attributes
+operations
+end
+
+class Stub<BusinessService
+attributes
+operations
+end
+
+class BusinessSoftwareService
+attributes
+	active : Boolean
+operations
+end
+
+class Application
+attributes
+	name : String
+operations
+end
+
+class Project
+attributes
+	acceptanceDate : String
+	productionDate : String
+	outsourced : Boolean
+operations
+end
+
+composition xxx_InformationSystem_businessDomains between
+	InformationSystem[0..1] role xxx_InformationSystem_businessDomains_src
+	BusinessDomain[*] role businessDomains
+end
+
+composition xxx_FunctionalDomain_areas between
+	FunctionalDomain[0..1] role xxx_FunctionalDomain_areas_src
+	Area[*] role areas
+end
+
+association xxx_BusinessDomain_functionalDomains between
+	BusinessDomain[0..1] role xxx_BusinessDomain_functionalDomains_src
+	FunctionalDomain[*] role functionalDomains
+end
+
+composition xxx_Area_macroProcesses between
+	Area[0..1] role xxx_Area_macroProcesses_src
+	MacroProcess[*] role macroProcesses
+end
+
+composition xxx_Area_businessInformationsNotUsed between
+	Area[0..1] role xxx_Area_businessInformationsNotUsed_src
+	BusinessInformation[*] role businessInformationsNotUsed
+end
+
+composition xxx_MacroProcess_businessServices between
+	MacroProcess[0..1] role xxx_MacroProcess_businessServices_src
+	BusinessService[*] role businessServices
+end
+
+association xxx_MacroProcess_subscriptions between
+	MacroProcess[0..1] role xxx_MacroProcess_subscriptions_src
+	BusinessService[*] role subscriptions
+end
+
+association xxx_MacroProcess_ownerArea between
+	MacroProcess[*] role xxx_MacroProcess_ownerArea_src
+	Area[0..1] role ownerArea
+end
+
+association xxx_BusinessService_ownerMacroProcess between
+	BusinessService[*] role xxx_BusinessService_ownerMacroProcess_src
+	MacroProcess[0..1] role ownerMacroProcess
+end
+
+association xxx_BusinessService_subscribers between
+	BusinessService[0..1] role xxx_BusinessService_subscribers_src
+	MacroProcess[*] role subscribers
+end
+
+association xxx_Provider_businessSoftwareService between
+	Provider[*] role xxx_Provider_businessSoftwareService_src
+	BusinessSoftwareService[0..1] role businessSoftwareService
+end
+
+composition xxx_Provider_businessInformations between
+	Provider[0..1] role xxx_Provider_businessInformations_src
+	BusinessInformation[*] role businessInformations
+end
+
+association xxx_Feature_businessSoftwareService between
+	Feature[*] role xxx_Feature_businessSoftwareService_src
+	BusinessSoftwareService[0..1] role businessSoftwareService
+end
+
+association xxx_BusinessSoftwareService_project between
+	BusinessSoftwareService[*] role xxx_BusinessSoftwareService_project_src
+	Project[0..1] role project
+end
+
+association xxx_BusinessSoftwareService_applications between
+	BusinessSoftwareService[0..1] role xxx_BusinessSoftwareService_applications_src
+	Application[*] role applications
+end
+
+association xxx_Application_businessSoftwareServices between
+	Application[0..1] role xxx_Application_businessSoftwareServices_src
+	BusinessSoftwareService[*] role businessSoftwareServices
+end
+

@@ -1,0 +1,60 @@
+model filesystem
+enum Access{
+default
+}
+
+class Name
+attributes
+operations
+end
+
+abstract class FSObject
+attributes
+operations
+end
+
+abstract class Executable
+attributes
+operations
+end
+
+class File<FSObject,Executable
+attributes
+operations
+end
+
+class Dir<FSObject
+attributes
+operations
+end
+
+class Link<FSObject
+attributes
+operations
+end
+
+class Root<Dir
+attributes
+operations
+end
+
+association xxx_FSObject_name between
+	FSObject[*] role xxx_FSObject_name_src
+	Name[1] role name
+end
+
+association xxx_Executable_depend between
+	Executable[0..1] role xxx_Executable_depend_src
+	File[*] role depend
+end
+
+composition xxx_Dir_content between
+	Dir[0..1] role xxx_Dir_content_src
+	FSObject[*] role content
+end
+
+association xxx_Link_link between
+	Link[*] role xxx_Link_link_src
+	FSObject[1] role link
+end
+

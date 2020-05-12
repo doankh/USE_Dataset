@@ -1,0 +1,493 @@
+model IRL
+class Element
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class ExtendedIdentifier<NamedElement
+attributes
+operations
+end
+
+abstract class Extended<Element
+attributes
+operations
+end
+
+abstract class Definition<Extended
+attributes
+operations
+end
+
+class RuleSet<NamedElement
+attributes
+operations
+end
+
+class ImportDefinition<Definition
+attributes
+	dotStar : Boolean
+operations
+end
+
+abstract class Expression<Typed
+attributes
+operations
+end
+
+abstract class PropertyCallExpression<Expression
+attributes
+operations
+end
+
+class IteratorExp<LoopExpression
+attributes
+	name : String
+operations
+end
+
+class LoopExpression<PropertyCallExpression
+attributes
+operations
+end
+
+class OperatorCallExpression<OperationCallExpression
+attributes
+operations
+end
+
+class OperationCallExpression<PropertyCallExpression
+attributes
+	operationName : String
+	signature : String
+operations
+end
+
+abstract class PrimitiveExpression<Expression
+attributes
+operations
+end
+
+class Iterator<VariableDeclaration
+attributes
+operations
+end
+
+abstract class NumericExpression<PrimitiveExpression
+attributes
+operations
+end
+
+class IntegerExpression<NumericExpression
+attributes
+	integerSymbol : Integer
+operations
+end
+
+class RealExpression<NumericExpression
+attributes
+	realSymbol : Real
+operations
+end
+
+class BooleanExpression<PrimitiveExpression
+attributes
+	booleanSymbol : Boolean
+operations
+end
+
+class NavigationOrAttributeCallExpression<PropertyCallExpression
+attributes
+	name : String
+operations
+end
+
+class VariableExpression<Expression
+attributes
+	name : String
+operations
+end
+
+class StringExpression<PrimitiveExpression
+attributes
+	stringSymbol : String
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+abstract class Typed<Element
+attributes
+operations
+end
+
+abstract class Primitive<Type
+attributes
+operations
+end
+
+class StringType<Primitive
+attributes
+operations
+end
+
+abstract class NumericType<Primitive
+attributes
+operations
+end
+
+class IntegerType<NumericType
+attributes
+operations
+end
+
+class RealType<NumericType
+attributes
+operations
+end
+
+class BooleanType<Primitive
+attributes
+operations
+end
+
+class ClassType<Type
+attributes
+operations
+end
+
+class PropertyDefinition<Definition
+attributes
+	semicoloneOpt : Boolean
+operations
+end
+
+abstract class RuleSetDeclaration<Element
+attributes
+operations
+end
+
+class ClassInstancesDeclaration<Extended
+attributes
+operations
+end
+
+class PropertyDeclaration<RuleSetDeclaration
+attributes
+operations
+end
+
+class VariableDeclaration<Typed
+attributes
+	varName : String
+operations
+end
+
+abstract class RulesetElementDefinition<NamedElement
+attributes
+operations
+end
+
+class RuleDefinition<RulesetElementDefinition
+attributes
+operations
+end
+
+class Binding<Element
+attributes
+operations
+end
+
+abstract class RuleVariable<VariableDeclaration
+attributes
+operations
+end
+
+class CollectionOperationRuleVariable<RuleVariable
+attributes
+	operationName : String
+operations
+end
+
+class SimpleRuleVariable<RuleVariable
+attributes
+operations
+end
+
+class RuleCondition<Element
+attributes
+operations
+end
+
+class RuleAction<Element
+attributes
+operations
+end
+
+class DeleteAction<RuleAction
+attributes
+operations
+end
+
+class CreateAction<VariableDeclaration
+attributes
+operations
+end
+
+class ModifyAction<RuleAction
+attributes
+operations
+end
+
+class UpdateAction<RuleAction
+attributes
+operations
+end
+
+class InvokeAction<RuleAction
+attributes
+operations
+end
+
+association xxx_ExtendedIdentifier_parentIdentifier between
+	ExtendedIdentifier[*] role xxx_ExtendedIdentifier_parentIdentifier_src
+	ExtendedIdentifier[0..1] role parentIdentifier
+end
+
+association xxx_ExtendedIdentifier_extendedIdentifierOwner between
+	ExtendedIdentifier[*] role xxx_ExtendedIdentifier_extendedIdentifierOwner_src
+	Extended[1] role extendedIdentifierOwner
+end
+
+composition xxx_Extended_extendedIdentifier between
+	Extended[*] role xxx_Extended_extendedIdentifier_src
+	ExtendedIdentifier[1] role extendedIdentifier
+end
+
+composition xxx_RuleSet_importDefinitions between
+	RuleSet[0..1] role xxx_RuleSet_importDefinitions_src
+	ImportDefinition[*] role importDefinitions
+end
+
+composition xxx_RuleSet_propertyDefinitions between
+	RuleSet[*] role xxx_RuleSet_propertyDefinitions_src
+	PropertyDefinition[0..1] role propertyDefinitions
+end
+
+composition xxx_RuleSet_rulesetElementDefinitions between
+	RuleSet[0..1] role xxx_RuleSet_rulesetElementDefinitions_src
+	RulesetElementDefinition[*] role rulesetElementDefinitions
+end
+
+association xxx_ImportDefinition_importDefinitionOwners between
+	ImportDefinition[*] role xxx_ImportDefinition_importDefinitionOwners_src
+	RuleSet[1] role importDefinitionOwners
+end
+
+association xxx_Expression_appliedProperty between
+	Expression[*] role xxx_Expression_appliedProperty_src
+	PropertyCallExpression[0..1] role appliedProperty
+end
+
+association xxx_Expression_expressionOwner between
+	Expression[*] role xxx_Expression_expressionOwner_src
+	RuleSetDeclaration[1] role expressionOwner
+end
+
+association xxx_Expression_loopExpression between
+	Expression[*] role xxx_Expression_loopExpression_src
+	LoopExpression[0..1] role loopExpression
+end
+
+association xxx_Expression_parentOperation between
+	Expression[*] role xxx_Expression_parentOperation_src
+	OperationCallExpression[0..1] role parentOperation
+end
+
+association xxx_Expression_ruleConditionExpression between
+	Expression[*] role xxx_Expression_ruleConditionExpression_src
+	RuleCondition[1] role ruleConditionExpression
+end
+
+association xxx_Expression_parentInsert between
+	Expression[*] role xxx_Expression_parentInsert_src
+	CreateAction[0..1] role parentInsert
+end
+
+association xxx_Expression_parentModifying between
+	Expression[*] role xxx_Expression_parentModifying_src
+	ModifyAction[0..1] role parentModifying
+end
+
+composition xxx_PropertyCallExpression_source between
+	PropertyCallExpression[*] role xxx_PropertyCallExpression_source_src
+	Expression[0..1] role source
+end
+
+composition xxx_LoopExpression_body between
+	LoopExpression[*] role xxx_LoopExpression_body_src
+	Expression[1] role body
+end
+
+composition xxx_LoopExpression_iterators between
+	LoopExpression[0..1] role xxx_LoopExpression_iterators_src
+	Iterator[1..*] role iterators
+end
+
+composition xxx_OperationCallExpression_arguments between
+	OperationCallExpression[0..1] role xxx_OperationCallExpression_arguments_src
+	Expression[*] role arguments
+end
+
+association xxx_Iterator_loopExpression between
+	Iterator[*] role xxx_Iterator_loopExpression_src
+	LoopExpression[0..1] role loopExpression
+end
+
+association xxx_VariableExpression_referredVariable between
+	VariableExpression[*] role xxx_VariableExpression_referredVariable_src
+	VariableDeclaration[1] role referredVariable
+end
+
+association xxx_Type_typeOwner between
+	Type[*] role xxx_Type_typeOwner_src
+	Typed[1] role typeOwner
+end
+
+composition xxx_Typed_type between
+	Typed[*] role xxx_Typed_type_src
+	Type[1] role type
+end
+
+association xxx_PropertyDefinition_propertyDefinitionOwner between
+	PropertyDefinition[*] role xxx_PropertyDefinition_propertyDefinitionOwner_src
+	RuleSet[1] role propertyDefinitionOwner
+end
+
+composition xxx_PropertyDefinition_ruleSetDeclarations between
+	PropertyDefinition[0..1] role xxx_PropertyDefinition_ruleSetDeclarations_src
+	RuleSetDeclaration[*] role ruleSetDeclarations
+end
+
+association xxx_RuleSetDeclaration_ruleSetDeclarationOwner between
+	RuleSetDeclaration[*] role xxx_RuleSetDeclaration_ruleSetDeclarationOwner_src
+	PropertyDefinition[1] role ruleSetDeclarationOwner
+end
+
+composition xxx_RuleSetDeclaration_expression between
+	RuleSetDeclaration[*] role xxx_RuleSetDeclaration_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_VariableDeclaration_variableExp between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_variableExp_src
+	VariableExpression[*] role variableExp
+end
+
+association xxx_RulesetElementDefinition_rulesetElementDefinitionOwner between
+	RulesetElementDefinition[*] role xxx_RulesetElementDefinition_rulesetElementDefinitionOwner_src
+	RuleSet[1] role rulesetElementDefinitionOwner
+end
+
+composition xxx_RuleDefinition_binding between
+	RuleDefinition[*] role xxx_RuleDefinition_binding_src
+	Binding[0..1] role binding
+end
+
+composition xxx_RuleDefinition_condition between
+	RuleDefinition[*] role xxx_RuleDefinition_condition_src
+	RuleCondition[0..1] role condition
+end
+
+composition xxx_RuleDefinition_actions between
+	RuleDefinition[0..1] role xxx_RuleDefinition_actions_src
+	RuleAction[*] role actions
+end
+
+association xxx_Binding_bindingOwner between
+	Binding[*] role xxx_Binding_bindingOwner_src
+	RuleDefinition[1] role bindingOwner
+end
+
+composition xxx_Binding_ruleVariable between
+	Binding[0..1] role xxx_Binding_ruleVariable_src
+	RuleVariable[*] role ruleVariable
+end
+
+association xxx_RuleVariable_ruleVariableOwner between
+	RuleVariable[*] role xxx_RuleVariable_ruleVariableOwner_src
+	Binding[1] role ruleVariableOwner
+end
+
+composition xxx_RuleVariable_filter between
+	RuleVariable[0..1] role xxx_RuleVariable_filter_src
+	Expression[*] role filter
+end
+
+composition xxx_RuleVariable_collectIn between
+	RuleVariable[*] role xxx_RuleVariable_collectIn_src
+	Expression[0..1] role collectIn
+end
+
+composition xxx_CollectionOperationRuleVariable_collectWhere between
+	CollectionOperationRuleVariable[*] role xxx_CollectionOperationRuleVariable_collectWhere_src
+	Expression[0..1] role collectWhere
+end
+
+composition xxx_RuleCondition_conditionExpression between
+	RuleCondition[*] role xxx_RuleCondition_conditionExpression_src
+	Expression[0..1] role conditionExpression
+end
+
+association xxx_RuleCondition_ruleDefinitionCondition between
+	RuleCondition[*] role xxx_RuleCondition_ruleDefinitionCondition_src
+	RuleDefinition[1] role ruleDefinitionCondition
+end
+
+association xxx_RuleAction_actionOwner between
+	RuleAction[*] role xxx_RuleAction_actionOwner_src
+	RuleDefinition[0..1] role actionOwner
+end
+
+composition xxx_DeleteAction_objValue between
+	DeleteAction[*] role xxx_DeleteAction_objValue_src
+	Expression[1] role objValue
+end
+
+composition xxx_CreateAction_insertArguments between
+	CreateAction[0..1] role xxx_CreateAction_insertArguments_src
+	Expression[*] role insertArguments
+end
+
+composition xxx_ModifyAction_objValue between
+	ModifyAction[*] role xxx_ModifyAction_objValue_src
+	Expression[1] role objValue
+end
+
+composition xxx_ModifyAction_modifiedArguments between
+	ModifyAction[0..1] role xxx_ModifyAction_modifiedArguments_src
+	Expression[*] role modifiedArguments
+end
+
+composition xxx_UpdateAction_objValue between
+	UpdateAction[*] role xxx_UpdateAction_objValue_src
+	Expression[1] role objValue
+end
+
+composition xxx_InvokeAction_invocation between
+	InvokeAction[*] role xxx_InvokeAction_invocation_src
+	Expression[1] role invocation
+end
+

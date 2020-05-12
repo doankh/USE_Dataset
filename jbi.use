@@ -1,0 +1,257 @@
+model jbi
+enum ClassLoaderDelegationType{
+default
+}
+
+enum ComponentType{
+default
+}
+
+enum LinkType{
+default
+}
+
+abstract class AbstractExtensibleElement
+attributes
+	group : String
+	other : String
+	local : String
+operations
+end
+
+class ClassPath
+attributes
+	pathElement : String
+operations
+end
+
+class Component
+attributes
+	bootstrapClassName : String
+	sharedLibraryList : String
+	group : String
+	any : String
+	any1 : String
+	bootstrapClassLoaderDelegation : ClassLoaderDelegationType
+	componentClassLoaderDelegation : ClassLoaderDelegationType
+	type : ComponentType
+operations
+end
+
+class ComponentClassName
+attributes
+	mixed : String
+	description : String
+operations
+end
+
+class Connection
+attributes
+operations
+end
+
+class Connections<AbstractExtensibleElement
+attributes
+operations
+end
+
+class Consumer
+attributes
+	endpointName : String
+	interfaceName : String
+	serviceName : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Identification<AbstractExtensibleElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Jbi
+attributes
+	version : String
+operations
+end
+
+class Services<AbstractExtensibleElement
+attributes
+	bindingComponent : Boolean
+operations
+end
+
+abstract class AbstractEndpoint<AbstractExtensibleElement
+attributes
+	endpointName : String
+	interfaceName : String
+	serviceName : String
+operations
+end
+
+class Consumes<AbstractEndpoint
+attributes
+operations
+end
+
+class Provides<AbstractEndpoint
+attributes
+operations
+end
+
+class Provider
+attributes
+	endpointName : String
+	serviceName : String
+operations
+end
+
+class ServiceAssembly<AbstractExtensibleElement
+attributes
+operations
+end
+
+class ServiceUnit<AbstractExtensibleElement
+attributes
+operations
+end
+
+class SharedLibraryType
+attributes
+	classLoaderDelegation : ClassLoaderDelegationType
+	version : String
+operations
+end
+
+class SharedLibraryType1
+attributes
+	mixed : String
+	version : String
+operations
+end
+
+class Target
+attributes
+	artifactsZip : String
+	componentName : String
+operations
+end
+
+composition xxx_Component_identification between
+	Component[*] role xxx_Component_identification_src
+	Identification[1] role identification
+end
+
+composition xxx_Component_componentClassName between
+	Component[*] role xxx_Component_componentClassName_src
+	ComponentClassName[1] role componentClassName
+end
+
+composition xxx_Component_componentClassPath between
+	Component[*] role xxx_Component_componentClassPath_src
+	ClassPath[1] role componentClassPath
+end
+
+composition xxx_Component_bootstrapClassPath between
+	Component[*] role xxx_Component_bootstrapClassPath_src
+	ClassPath[1] role bootstrapClassPath
+end
+
+composition xxx_Component_sharedLibrary between
+	Component[0..1] role xxx_Component_sharedLibrary_src
+	SharedLibraryType1[*] role sharedLibrary
+end
+
+composition xxx_Connection_consumer between
+	Connection[*] role xxx_Connection_consumer_src
+	Consumer[1] role consumer
+end
+
+composition xxx_Connection_provider between
+	Connection[*] role xxx_Connection_provider_src
+	Provider[1] role provider
+end
+
+composition xxx_Connections_connection between
+	Connections[0..1] role xxx_Connections_connection_src
+	Connection[*] role connection
+end
+
+
+composition xxx_DocumentRoot_jbi between
+	DocumentRoot[*] role xxx_DocumentRoot_jbi_src
+	Jbi[*] role jbi
+end
+
+composition xxx_Jbi_component between
+	Jbi[*] role xxx_Jbi_component_src
+	Component[0..1] role component
+end
+
+composition xxx_Jbi_sharedLibrary between
+	Jbi[*] role xxx_Jbi_sharedLibrary_src
+	SharedLibraryType[0..1] role sharedLibrary
+end
+
+composition xxx_Jbi_serviceAssembly between
+	Jbi[*] role xxx_Jbi_serviceAssembly_src
+	ServiceAssembly[0..1] role serviceAssembly
+end
+
+composition xxx_Jbi_services between
+	Jbi[*] role xxx_Jbi_services_src
+	Services[0..1] role services
+end
+
+composition xxx_Services_provides between
+	Services[0..1] role xxx_Services_provides_src
+	Provides[*] role provides
+end
+
+composition xxx_Services_consumes between
+	Services[0..1] role xxx_Services_consumes_src
+	Consumes[*] role consumes
+end
+
+composition xxx_ServiceAssembly_identification between
+	ServiceAssembly[*] role xxx_ServiceAssembly_identification_src
+	Identification[1] role identification
+end
+
+composition xxx_ServiceAssembly_serviceUnit between
+	ServiceAssembly[0..1] role xxx_ServiceAssembly_serviceUnit_src
+	ServiceUnit[*] role serviceUnit
+end
+
+composition xxx_ServiceAssembly_connections between
+	ServiceAssembly[*] role xxx_ServiceAssembly_connections_src
+	Connections[0..1] role connections
+end
+
+composition xxx_ServiceUnit_identification between
+	ServiceUnit[*] role xxx_ServiceUnit_identification_src
+	Identification[1] role identification
+end
+
+composition xxx_ServiceUnit_target between
+	ServiceUnit[*] role xxx_ServiceUnit_target_src
+	Target[1] role target
+end
+
+composition xxx_SharedLibraryType_identification between
+	SharedLibraryType[*] role xxx_SharedLibraryType_identification_src
+	Identification[1] role identification
+end
+
+composition xxx_SharedLibraryType_sharedLibraryClassPath between
+	SharedLibraryType[*] role xxx_SharedLibraryType_sharedLibraryClassPath_src
+	ClassPath[1] role sharedLibraryClassPath
+end
+

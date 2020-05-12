@@ -1,0 +1,296 @@
+model predefinedobjects
+class BitstringPre
+attributes
+	PredefinedType : String
+	length : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class CharPre
+attributes
+	PredefinedType : String
+	nonobject : String
+	name : String
+operations
+end
+
+class FramePre
+attributes
+	PredefinedType : String
+	nonobject : String
+	name : String
+operations
+end
+
+class FloatPre
+attributes
+	PredefinedType : String
+	precision : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class Int8Pre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class BooleanPre
+attributes
+	PredefinedType : String
+	nonobject : String
+	name : String
+operations
+end
+
+class Int16Pre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class Int32Pre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class IntegerPre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class NonePre
+attributes
+	PredefinedType : String
+	nonobject : String
+	name : String
+operations
+end
+
+class DoublePre
+attributes
+	PredefinedType : String
+	precision : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class OctetPre
+attributes
+	PredefinedType : String
+	nonobject : String
+	name : String
+operations
+end
+
+class RealPre
+attributes
+	PredefinedType : String
+	precision : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class StringPre
+attributes
+	PredefinedType : String
+	nonobject : String
+	length : Integer
+	name : String
+operations
+end
+
+class Unsigned8Pre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class Unsigned16Pre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class Unsigned32Pre
+attributes
+	PredefinedType : String
+	base : Integer
+	precision : Integer
+	unsigned : String
+	scale : Integer
+	nonobject : String
+	name : String
+operations
+end
+
+class ClassifierPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class ComponentPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class OntologyPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class RegistrationCardPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class StructurePre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class ThesaurusPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class ThesaurusExtensionPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class EnglishPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class RussianPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class ObligatoryPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class UniquePre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class ConstantPre
+attributes
+	PredefinedType : String
+	name : String
+operations
+end
+
+class CurrentPre
+attributes
+	PredefinedType : String
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+	fraction : Integer
+	name : String
+operations
+end
+
+class InfPre
+attributes
+	PredefinedType : String
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+	fraction : Integer
+	name : String
+operations
+end
+
+class MinusinfPre
+attributes
+	PredefinedType : String
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+	fraction : Integer
+	name : String
+operations
+end
+

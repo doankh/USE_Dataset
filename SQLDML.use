@@ -1,0 +1,252 @@
+model PrimitiveTypes
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class SQLRoot<LocatedElement
+attributes
+operations
+end
+
+abstract class Statement<LocatedElement
+attributes
+operations
+end
+
+class ViewStatement<Statement
+attributes
+	name : String
+operations
+end
+
+class InsertStmt<Statement
+attributes
+	tableName : String
+operations
+end
+
+abstract class QueryStmt<Statement
+attributes
+operations
+end
+
+class QueryStmtCol<QueryStmt
+attributes
+operations
+end
+
+class QueryStmtAllCol<QueryStmt
+attributes
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Table<NamedElement
+attributes
+	alias : String
+operations
+end
+
+class WhereClause<LocatedElement
+attributes
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+abstract class BinaryExp<Expression
+attributes
+	opName : String
+operations
+end
+
+class OrExp<BinaryExp
+attributes
+operations
+end
+
+class AndExp<BinaryExp
+attributes
+operations
+end
+
+class NotExp<Expression
+attributes
+	opName : String
+operations
+end
+
+class LikeExp<Expression
+attributes
+	columnName : String
+operations
+end
+
+class InExp<Expression
+attributes
+	columnName : String
+operations
+end
+
+class OperationExp<BinaryExp
+attributes
+	optName : String
+operations
+end
+
+abstract class Predicate<Expression
+attributes
+operations
+end
+
+class QueryPredicate<Expression
+attributes
+operations
+end
+
+class ColumnExp<NamedElement
+attributes
+	alias : String
+operations
+end
+
+abstract class ValueExp<Predicate
+attributes
+operations
+end
+
+class StringValueExp<ValueExp
+attributes
+	aValue : String
+operations
+end
+
+class IntegerValueExp<ValueExp
+attributes
+	aValue : Integer
+operations
+end
+
+class ListExp<Predicate
+attributes
+operations
+end
+
+class FunctionExp<Predicate
+attributes
+	name : String
+operations
+end
+
+class DataType<NamedElement
+attributes
+operations
+end
+
+composition xxx_SQLRoot_statements between
+	SQLRoot[0..1] role xxx_SQLRoot_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ViewStatement_columns between
+	ViewStatement[0..1] role xxx_ViewStatement_columns_src
+	ColumnExp[1..*] role columns
+end
+
+composition xxx_ViewStatement_query between
+	ViewStatement[*] role xxx_ViewStatement_query_src
+	QueryStmt[1] role query
+end
+
+composition xxx_InsertStmt_values between
+	InsertStmt[0..1] role xxx_InsertStmt_values_src
+	Expression[*] role values
+end
+
+composition xxx_QueryStmt_tables between
+	QueryStmt[0..1] role xxx_QueryStmt_tables_src
+	Table[1..*] role tables
+end
+
+composition xxx_QueryStmt_condition between
+	QueryStmt[*] role xxx_QueryStmt_condition_src
+	WhereClause[0..1] role condition
+end
+
+composition xxx_QueryStmtCol_columns between
+	QueryStmtCol[0..1] role xxx_QueryStmtCol_columns_src
+	Expression[1..*] role columns
+end
+
+composition xxx_WhereClause_expression between
+	WhereClause[*] role xxx_WhereClause_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_BinaryExp_leftExp between
+	BinaryExp[*] role xxx_BinaryExp_leftExp_src
+	Expression[1] role leftExp
+end
+
+composition xxx_BinaryExp_rightExp between
+	BinaryExp[*] role xxx_BinaryExp_rightExp_src
+	Expression[1] role rightExp
+end
+
+composition xxx_NotExp_valueExp between
+	NotExp[*] role xxx_NotExp_valueExp_src
+	Expression[1] role valueExp
+end
+
+composition xxx_NotExp_unused between
+	NotExp[*] role xxx_NotExp_unused_src
+	Expression[0..1] role unused
+end
+
+composition xxx_LikeExp_expression between
+	LikeExp[*] role xxx_LikeExp_expression_src
+	StringValueExp[1] role expression
+end
+
+composition xxx_InExp_elements between
+	InExp[0..1] role xxx_InExp_elements_src
+	Predicate[1..*] role elements
+end
+
+composition xxx_QueryPredicate_query between
+	QueryPredicate[*] role xxx_QueryPredicate_query_src
+	QueryStmt[1] role query
+end
+
+composition xxx_ColumnExp_type between
+	ColumnExp[*] role xxx_ColumnExp_type_src
+	DataType[1] role type
+end
+
+composition xxx_ValueExp_type between
+	ValueExp[*] role xxx_ValueExp_type_src
+	DataType[0..1] role type
+end
+
+composition xxx_ListExp_elements between
+	ListExp[0..1] role xxx_ListExp_elements_src
+	Expression[*] role elements
+end
+
+composition xxx_FunctionExp_arguments between
+	FunctionExp[0..1] role xxx_FunctionExp_arguments_src
+	Expression[*] role arguments
+end
+

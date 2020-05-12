@@ -1,0 +1,331 @@
+model simplejava
+class SimpleJava
+attributes
+operations
+end
+
+class PackageDeclaration
+attributes
+	name : String
+operations
+end
+
+class Import
+attributes
+	imported : String
+operations
+end
+
+class ClassDeclaration
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	typeName : String
+operations
+end
+
+class Method
+attributes
+	static : Boolean
+	name : String
+operations
+end
+
+class MethodBlock<Statement
+attributes
+	generated : Boolean
+operations
+end
+
+class SimpleStatement
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class SimpleVariableDeclaration<SimpleStatement
+attributes
+operations
+end
+
+class VariableDeclaration<Statement,SimpleVariableDeclaration
+attributes
+operations
+end
+
+class Assignment<SimpleStatement,Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class ForStatement<Statement
+attributes
+operations
+end
+
+class ForInStatement<Statement
+attributes
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+operations
+end
+
+class MethodCall<Statement,GenericExpression
+attributes
+	thisObject : Boolean
+	methodName : String
+operations
+end
+
+class GenericExpression
+attributes
+operations
+end
+
+class ConstantExpression<GenericExpression
+attributes
+operations
+end
+
+class NullExpression<ConstantExpression
+attributes
+operations
+end
+
+class IntegerExpression<ConstantExpression
+attributes
+	value : Integer
+operations
+end
+
+class BooleanExpression<ConstantExpression
+attributes
+	value : Boolean
+operations
+end
+
+class StringExpression<ConstantExpression
+attributes
+	value : String
+operations
+end
+
+class UnaryExpression<GenericExpression
+attributes
+	type : String
+operations
+end
+
+class VariableExpression<GenericExpression
+attributes
+operations
+end
+
+class ParanthesisOrBinaryExpression<GenericExpression
+attributes
+	type : String
+operations
+end
+
+composition xxx_SimpleJava_package between
+	SimpleJava[*] role xxx_SimpleJava_package_src
+	PackageDeclaration[0..1] role package
+end
+
+composition xxx_SimpleJava_imports between
+	SimpleJava[0..1] role xxx_SimpleJava_imports_src
+	Import[*] role imports
+end
+
+composition xxx_SimpleJava_clazz between
+	SimpleJava[*] role xxx_SimpleJava_clazz_src
+	ClassDeclaration[0..1] role clazz
+end
+
+composition xxx_ClassDeclaration_attribute between
+	ClassDeclaration[0..1] role xxx_ClassDeclaration_attribute_src
+	Parameter[*] role attribute
+end
+
+composition xxx_ClassDeclaration_method between
+	ClassDeclaration[0..1] role xxx_ClassDeclaration_method_src
+	Method[*] role method
+end
+
+composition xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[0..1] role type
+end
+
+association xxx_Type_typeRef between
+	Type[*] role xxx_Type_typeRef_src
+	ClassDeclaration[0..1] role typeRef
+end
+
+composition xxx_Method_returnType between
+	Method[*] role xxx_Method_returnType_src
+	Type[0..1] role returnType
+end
+
+composition xxx_Method_parameter between
+	Method[0..1] role xxx_Method_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_Method_content between
+	Method[*] role xxx_Method_content_src
+	MethodBlock[0..1] role content
+end
+
+composition xxx_MethodBlock_statements between
+	MethodBlock[0..1] role xxx_MethodBlock_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_VariableDeclaration_parameter between
+	VariableDeclaration[*] role xxx_VariableDeclaration_parameter_src
+	Parameter[0..1] role parameter
+end
+
+composition xxx_VariableDeclaration_expression between
+	VariableDeclaration[*] role xxx_VariableDeclaration_expression_src
+	GenericExpression[0..1] role expression
+end
+
+association xxx_Assignment_parameter between
+	Assignment[*] role xxx_Assignment_parameter_src
+	Parameter[0..1] role parameter
+end
+
+composition xxx_Assignment_expression between
+	Assignment[*] role xxx_Assignment_expression_src
+	GenericExpression[0..1] role expression
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	ParanthesisOrBinaryExpression[0..1] role condition
+end
+
+composition xxx_IfStatement_then_ between
+	IfStatement[*] role xxx_IfStatement_then__src
+	MethodBlock[0..1] role then_
+end
+
+composition xxx_IfStatement_else_ between
+	IfStatement[*] role xxx_IfStatement_else__src
+	MethodBlock[0..1] role else_
+end
+
+composition xxx_ForStatement_init between
+	ForStatement[*] role xxx_ForStatement_init_src
+	SimpleStatement[0..1] role init
+end
+
+composition xxx_ForStatement_condition between
+	ForStatement[*] role xxx_ForStatement_condition_src
+	GenericExpression[0..1] role condition
+end
+
+composition xxx_ForStatement_continuation between
+	ForStatement[*] role xxx_ForStatement_continuation_src
+	SimpleStatement[0..1] role continuation
+end
+
+composition xxx_ForStatement_body between
+	ForStatement[*] role xxx_ForStatement_body_src
+	Statement[0..1] role body
+end
+
+composition xxx_ForInStatement_subparameter between
+	ForInStatement[*] role xxx_ForInStatement_subparameter_src
+	Parameter[0..1] role subparameter
+end
+
+composition xxx_ForInStatement_expression between
+	ForInStatement[*] role xxx_ForInStatement_expression_src
+	GenericExpression[0..1] role expression
+end
+
+composition xxx_ForInStatement_body between
+	ForInStatement[*] role xxx_ForInStatement_body_src
+	Statement[0..1] role body
+end
+
+composition xxx_WhileStatement_condition between
+	WhileStatement[*] role xxx_WhileStatement_condition_src
+	ParanthesisOrBinaryExpression[0..1] role condition
+end
+
+composition xxx_WhileStatement_body between
+	WhileStatement[*] role xxx_WhileStatement_body_src
+	Statement[0..1] role body
+end
+
+composition xxx_ReturnStatement_expression between
+	ReturnStatement[*] role xxx_ReturnStatement_expression_src
+	GenericExpression[0..1] role expression
+end
+
+association xxx_MethodCall_object between
+	MethodCall[*] role xxx_MethodCall_object_src
+	Parameter[0..1] role object
+end
+
+association xxx_MethodCall_method between
+	MethodCall[*] role xxx_MethodCall_method_src
+	Method[0..1] role method
+end
+
+composition xxx_MethodCall_parameter between
+	MethodCall[0..1] role xxx_MethodCall_parameter_src
+	GenericExpression[*] role parameter
+end
+
+composition xxx_UnaryExpression_source between
+	UnaryExpression[*] role xxx_UnaryExpression_source_src
+	GenericExpression[0..1] role source
+end
+
+association xxx_VariableExpression_variable between
+	VariableExpression[*] role xxx_VariableExpression_variable_src
+	Parameter[0..1] role variable
+end
+
+composition xxx_ParanthesisOrBinaryExpression_source between
+	ParanthesisOrBinaryExpression[*] role xxx_ParanthesisOrBinaryExpression_source_src
+	GenericExpression[0..1] role source
+end
+
+composition xxx_ParanthesisOrBinaryExpression_argument between
+	ParanthesisOrBinaryExpression[*] role xxx_ParanthesisOrBinaryExpression_argument_src
+	GenericExpression[0..1] role argument
+end
+

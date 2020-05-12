@@ -1,0 +1,112 @@
+model PrimitiveTypes
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Grafcet<NamedElement
+attributes
+operations
+end
+
+abstract class Element<NamedElement
+attributes
+operations
+end
+
+class Step<Element
+attributes
+	isInitial : Boolean
+	isActive : Boolean
+	action : String
+operations
+end
+
+class Transition<Element
+attributes
+	condition : String
+operations
+end
+
+abstract class Connection<NamedElement
+attributes
+operations
+end
+
+class StepToTransition<Connection
+attributes
+operations
+end
+
+class TransitionToStep<Connection
+attributes
+operations
+end
+
+composition xxx_Grafcet_elements between
+	Grafcet[0..1] role xxx_Grafcet_elements_src
+	Element[*] role elements
+end
+
+composition xxx_Grafcet_connections between
+	Grafcet[0..1] role xxx_Grafcet_connections_src
+	Connection[*] role connections
+end
+
+association xxx_Element_grafcet between
+	Element[*] role xxx_Element_grafcet_src
+	Grafcet[1] role grafcet
+end
+
+association xxx_Step_incomingConnections between
+	Step[0..1] role xxx_Step_incomingConnections_src
+	TransitionToStep[*] role incomingConnections
+end
+
+association xxx_Step_outgoingConnections between
+	Step[0..1] role xxx_Step_outgoingConnections_src
+	StepToTransition[*] role outgoingConnections
+end
+
+association xxx_Transition_incomingConnections between
+	Transition[0..1] role xxx_Transition_incomingConnections_src
+	StepToTransition[*] role incomingConnections
+end
+
+association xxx_Transition_outgoingConnections between
+	Transition[0..1] role xxx_Transition_outgoingConnections_src
+	TransitionToStep[*] role outgoingConnections
+end
+
+association xxx_Connection_grafcet between
+	Connection[*] role xxx_Connection_grafcet_src
+	Grafcet[1] role grafcet
+end
+
+association xxx_StepToTransition_from_ between
+	StepToTransition[*] role xxx_StepToTransition_from__src
+	Step[1] role from_
+end
+
+association xxx_StepToTransition_to between
+	StepToTransition[*] role xxx_StepToTransition_to_src
+	Transition[1] role to
+end
+
+association xxx_TransitionToStep_from_ between
+	TransitionToStep[*] role xxx_TransitionToStep_from__src
+	Transition[1] role from_
+end
+
+association xxx_TransitionToStep_to between
+	TransitionToStep[*] role xxx_TransitionToStep_to_src
+	Step[1] role to
+end
+

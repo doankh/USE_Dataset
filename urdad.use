@@ -1,0 +1,704 @@
+model urdad
+abstract class Element
+attributes
+operations
+end
+
+abstract class ElementWithOptionalName<Element
+attributes
+	name : String
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+abstract class Stakeholder<NamedElement
+attributes
+operations
+end
+
+class Annotation<ElementWithOptionalName
+attributes
+	language : String
+	content : String
+operations
+end
+
+class Model<NamedElement
+attributes
+operations
+end
+
+class ResponsibilityDomain<Stakeholder
+attributes
+operations
+end
+
+class Expression<ElementWithOptionalName
+attributes
+	language : String
+	expressionString : String
+operations
+end
+
+abstract class Constraint<NamedElement
+attributes
+operations
+end
+
+class ExpressionBasedConstraint<Constraint
+attributes
+operations
+end
+
+abstract class StructuredConstraint<Constraint
+attributes
+operations
+end
+
+abstract class BinaryOperandConstraint<StructuredConstraint
+attributes
+operations
+end
+
+class InverseConstraint<StructuredConstraint
+attributes
+operations
+end
+
+class AndConstraint<BinaryOperandConstraint
+attributes
+operations
+end
+
+class OrConstraint<BinaryOperandConstraint
+attributes
+operations
+end
+
+class XorConstraint<BinaryOperandConstraint
+attributes
+operations
+end
+
+class QualityConstraint<ExpressionBasedConstraint
+attributes
+operations
+end
+
+class StateConstraint<Constraint
+attributes
+operations
+end
+
+class StateConstraintReference<Constraint
+attributes
+operations
+end
+
+abstract class MultiplicityConstraint
+attributes
+operations
+end
+
+class RangeMultiplicity<MultiplicityConstraint
+attributes
+	minOccurs : Integer
+	maxOccurs : Integer
+operations
+end
+
+class Many<MultiplicityConstraint
+attributes
+operations
+end
+
+abstract class DataType<NamedElement
+attributes
+operations
+end
+
+class BasicDataType<DataType
+attributes
+operations
+end
+
+class DataStructure<DataType
+attributes
+	abstract_ : Boolean
+operations
+end
+
+abstract class Feature<NamedElement
+attributes
+operations
+end
+
+class Attribute<Feature
+attributes
+operations
+end
+
+class Identification<Feature
+attributes
+operations
+end
+
+class Association<Identification
+attributes
+operations
+end
+
+class Aggregation<Association
+attributes
+operations
+end
+
+class Composition<Aggregation
+attributes
+operations
+end
+
+class Exception<DataStructure
+attributes
+operations
+end
+
+abstract class Requirement<NamedElement
+attributes
+operations
+end
+
+class QualityRequirement<Requirement
+attributes
+operations
+end
+
+abstract class FunctionalRequirement<Requirement
+attributes
+operations
+end
+
+class ResultRequirement<FunctionalRequirement
+attributes
+operations
+end
+
+class PreCondition<FunctionalRequirement
+attributes
+operations
+end
+
+class PostCondition<FunctionalRequirement
+attributes
+operations
+end
+
+class FunctionalRequirements<Element
+attributes
+operations
+end
+
+class ServiceContract<NamedElement
+attributes
+operations
+end
+
+class Service<Stakeholder
+attributes
+operations
+end
+
+class ServiceRequirement<ElementWithOptionalName
+attributes
+operations
+end
+
+abstract class Assignable<ElementWithOptionalName
+attributes
+operations
+end
+
+class Query<Assignable
+attributes
+operations
+end
+
+class Constant<Assignable
+attributes
+	value : String
+operations
+end
+
+class VariableReference<Assignable
+attributes
+operations
+end
+
+abstract class Activity<ElementWithOptionalName
+attributes
+operations
+end
+
+class ActivitySequence<Activity
+attributes
+operations
+end
+
+abstract class ContainerActivity<Activity
+attributes
+operations
+end
+
+class ConcurrentActivity<ContainerActivity
+attributes
+	blocking : Boolean
+operations
+end
+
+class Concurrency<Activity
+attributes
+operations
+end
+
+abstract class ConditionalActivity<ContainerActivity
+attributes
+	blocking : Boolean
+operations
+end
+
+class If<ConditionalActivity
+attributes
+operations
+end
+
+class Choice<Activity
+attributes
+operations
+end
+
+class Wait<Activity
+attributes
+operations
+end
+
+class Variable<NamedElement
+attributes
+operations
+end
+
+abstract class VariableProduction<Activity
+attributes
+operations
+end
+
+class Create<VariableProduction
+attributes
+operations
+end
+
+abstract class ManipulateVariable<Activity
+attributes
+operations
+end
+
+class Assign<ManipulateVariable
+attributes
+operations
+end
+
+class Add<ManipulateVariable
+attributes
+operations
+end
+
+class Remove<Activity
+attributes
+operations
+end
+
+class While<ContainerActivity
+attributes
+operations
+end
+
+class ForAll<ContainerActivity
+attributes
+	concurrent : Boolean
+operations
+end
+
+class ExceptionHandler<ContainerActivity
+attributes
+operations
+end
+
+class RequestService<VariableProduction
+attributes
+operations
+end
+
+abstract class TerminalActivity<Activity
+attributes
+operations
+end
+
+class RaiseException<TerminalActivity
+attributes
+operations
+end
+
+class ReturnResult<TerminalActivity
+attributes
+operations
+end
+
+composition xxx_Element_annotations between
+	Element[0..1] role xxx_Element_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_Model_responsibilityDomains between
+	Model[0..1] role xxx_Model_responsibilityDomains_src
+	ResponsibilityDomain[*] role responsibilityDomains
+end
+
+composition xxx_ResponsibilityDomain_responsibilityDomains between
+	ResponsibilityDomain[0..1] role xxx_ResponsibilityDomain_responsibilityDomains_src
+	ResponsibilityDomain[*] role responsibilityDomains
+end
+
+composition xxx_ResponsibilityDomain_dataTypes between
+	ResponsibilityDomain[0..1] role xxx_ResponsibilityDomain_dataTypes_src
+	DataType[*] role dataTypes
+end
+
+composition xxx_ResponsibilityDomain_constants between
+	ResponsibilityDomain[0..1] role xxx_ResponsibilityDomain_constants_src
+	Constant[*] role constants
+end
+
+composition xxx_ResponsibilityDomain_constraints_ between
+	ResponsibilityDomain[0..1] role xxx_ResponsibilityDomain_constraints__src
+	Constraint[*] role constraints_
+end
+
+composition xxx_ResponsibilityDomain_servicesContracts between
+	ResponsibilityDomain[0..1] role xxx_ResponsibilityDomain_servicesContracts_src
+	ServiceContract[*] role servicesContracts
+end
+
+composition xxx_ResponsibilityDomain_services between
+	ResponsibilityDomain[0..1] role xxx_ResponsibilityDomain_services_src
+	Service[*] role services
+end
+
+composition xxx_ExpressionBasedConstraint_constraintExpression between
+	ExpressionBasedConstraint[*] role xxx_ExpressionBasedConstraint_constraintExpression_src
+	Expression[0..1] role constraintExpression
+end
+
+association xxx_BinaryOperandConstraint_leftOperand between
+	BinaryOperandConstraint[*] role xxx_BinaryOperandConstraint_leftOperand_src
+	Constraint[1] role leftOperand
+end
+
+association xxx_BinaryOperandConstraint_rightOperand between
+	BinaryOperandConstraint[*] role xxx_BinaryOperandConstraint_rightOperand_src
+	Constraint[1] role rightOperand
+end
+
+association xxx_InverseConstraint_operand between
+	InverseConstraint[*] role xxx_InverseConstraint_operand_src
+	Constraint[1] role operand
+end
+
+composition xxx_StateConstraint_parameter between
+	StateConstraint[*] role xxx_StateConstraint_parameter_src
+	Variable[0..1] role parameter
+end
+
+composition xxx_StateConstraint_parameterDataStructure between
+	StateConstraint[*] role xxx_StateConstraint_parameterDataStructure_src
+	DataStructure[0..1] role parameterDataStructure
+end
+
+composition xxx_StateConstraint_stateAssessmentProcess between
+	StateConstraint[*] role xxx_StateConstraint_stateAssessmentProcess_src
+	Activity[0..1] role stateAssessmentProcess
+end
+
+composition xxx_StateConstraint_constraints_ between
+	StateConstraint[0..1] role xxx_StateConstraint_constraints__src
+	ExpressionBasedConstraint[*] role constraints_
+end
+
+composition xxx_StateConstraintReference_parameterConstructionProcess between
+	StateConstraintReference[*] role xxx_StateConstraintReference_parameterConstructionProcess_src
+	Activity[0..1] role parameterConstructionProcess
+end
+
+composition xxx_StateConstraintReference_parameter between
+	StateConstraintReference[*] role xxx_StateConstraintReference_parameter_src
+	Assignable[0..1] role parameter
+end
+
+association xxx_StateConstraintReference_constraint between
+	StateConstraintReference[*] role xxx_StateConstraintReference_constraint_src
+	Constraint[0..1] role constraint
+end
+
+composition xxx_DataType_constraints_ between
+	DataType[0..1] role xxx_DataType_constraints__src
+	ExpressionBasedConstraint[*] role constraints_
+end
+
+association xxx_DataStructure_superTypes between
+	DataStructure[0..1] role xxx_DataStructure_superTypes_src
+	DataStructure[*] role superTypes
+end
+
+composition xxx_DataStructure_features between
+	DataStructure[0..1] role xxx_DataStructure_features_src
+	Feature[*] role features
+end
+
+composition xxx_Feature_multiplicityConstraint between
+	Feature[*] role xxx_Feature_multiplicityConstraint_src
+	MultiplicityConstraint[0..1] role multiplicityConstraint
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	BasicDataType[1] role type
+end
+
+association xxx_Identification_relatedElement between
+	Identification[*] role xxx_Identification_relatedElement_src
+	NamedElement[1] role relatedElement
+end
+
+association xxx_Requirement_requiredBy between
+	Requirement[0..1] role xxx_Requirement_requiredBy_src
+	Stakeholder[1..*] role requiredBy
+end
+
+association xxx_QualityRequirement_qualityConstraint between
+	QualityRequirement[*] role xxx_QualityRequirement_qualityConstraint_src
+	QualityConstraint[0..1] role qualityConstraint
+end
+
+composition xxx_FunctionalRequirement_stateConstraintReference between
+	FunctionalRequirement[*] role xxx_FunctionalRequirement_stateConstraintReference_src
+	StateConstraintReference[0..1] role stateConstraintReference
+end
+
+composition xxx_ResultRequirement_constraintExpression between
+	ResultRequirement[*] role xxx_ResultRequirement_constraintExpression_src
+	Expression[0..1] role constraintExpression
+end
+
+association xxx_PreCondition_exception between
+	PreCondition[*] role xxx_PreCondition_exception_src
+	Exception[1] role exception
+end
+
+composition xxx_FunctionalRequirements_requestVariable between
+	FunctionalRequirements[*] role xxx_FunctionalRequirements_requestVariable_src
+	Variable[0..1] role requestVariable
+end
+
+composition xxx_FunctionalRequirements_resultVariable between
+	FunctionalRequirements[*] role xxx_FunctionalRequirements_resultVariable_src
+	Variable[0..1] role resultVariable
+end
+
+composition xxx_FunctionalRequirements_preConditions between
+	FunctionalRequirements[0..1] role xxx_FunctionalRequirements_preConditions_src
+	PreCondition[*] role preConditions
+end
+
+composition xxx_FunctionalRequirements_postConditions between
+	FunctionalRequirements[0..1] role xxx_FunctionalRequirements_postConditions_src
+	PostCondition[*] role postConditions
+end
+
+composition xxx_ServiceContract_request between
+	ServiceContract[*] role xxx_ServiceContract_request_src
+	DataStructure[1] role request
+end
+
+composition xxx_ServiceContract_result between
+	ServiceContract[*] role xxx_ServiceContract_result_src
+	DataStructure[1] role result
+end
+
+composition xxx_ServiceContract_qualityRequirements between
+	ServiceContract[0..1] role xxx_ServiceContract_qualityRequirements_src
+	QualityRequirement[*] role qualityRequirements
+end
+
+composition xxx_ServiceContract_functionalRequirements between
+	ServiceContract[*] role xxx_ServiceContract_functionalRequirements_src
+	FunctionalRequirements[0..1] role functionalRequirements
+end
+
+association xxx_ServiceContract_inverseService between
+	ServiceContract[*] role xxx_ServiceContract_inverseService_src
+	ServiceContract[0..1] role inverseService
+end
+
+composition xxx_Service_requestVariable between
+	Service[*] role xxx_Service_requestVariable_src
+	Variable[15] role requestVariable
+end
+
+association xxx_Service_realizedContract between
+	Service[*] role xxx_Service_realizedContract_src
+	ServiceContract[0..1] role realizedContract
+end
+
+composition xxx_Service_serviceRequirements between
+	Service[0..1] role xxx_Service_serviceRequirements_src
+	ServiceRequirement[*] role serviceRequirements
+end
+
+composition xxx_Service_process between
+	Service[*] role xxx_Service_process_src
+	Activity[0..1] role process
+end
+
+association xxx_ServiceRequirement_requiredService between
+	ServiceRequirement[*] role xxx_ServiceRequirement_requiredService_src
+	ServiceContract[0..1] role requiredService
+end
+
+composition xxx_ServiceRequirement_condition between
+	ServiceRequirement[*] role xxx_ServiceRequirement_condition_src
+	Constraint[0..1] role condition
+end
+
+association xxx_ServiceRequirement_usedToAddress between
+	ServiceRequirement[0..1] role xxx_ServiceRequirement_usedToAddress_src
+	FunctionalRequirement[*] role usedToAddress
+end
+
+composition xxx_Query_queryExpression between
+	Query[*] role xxx_Query_queryExpression_src
+	Expression[0..1] role queryExpression
+end
+
+association xxx_VariableReference_variable between
+	VariableReference[*] role xxx_VariableReference_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_ActivitySequence_activities between
+	ActivitySequence[0..1] role xxx_ActivitySequence_activities_src
+	Activity[2..*] role activities
+end
+
+composition xxx_ContainerActivity_activity between
+	ContainerActivity[*] role xxx_ContainerActivity_activity_src
+	Activity[0..1] role activity
+end
+
+composition xxx_Concurrency_concurrentActivities between
+	Concurrency[0..1] role xxx_Concurrency_concurrentActivities_src
+	Activity[2..*] role concurrentActivities
+end
+
+composition xxx_ConditionalActivity_condition between
+	ConditionalActivity[*] role xxx_ConditionalActivity_condition_src
+	Constraint[1] role condition
+end
+
+composition xxx_Choice_conditionalActivities between
+	Choice[0..1] role xxx_Choice_conditionalActivities_src
+	ConditionalActivity[1..*] role conditionalActivities
+end
+
+composition xxx_Choice_elseActivity between
+	Choice[*] role xxx_Choice_elseActivity_src
+	Activity[0..1] role elseActivity
+end
+
+composition xxx_Wait_until between
+	Wait[*] role xxx_Wait_until_src
+	Constraint[1] role until
+end
+
+association xxx_Variable_type between
+	Variable[*] role xxx_Variable_type_src
+	DataType[1] role type
+end
+
+composition xxx_VariableProduction_producedVariable between
+	VariableProduction[*] role xxx_VariableProduction_producedVariable_src
+	Variable[1] role producedVariable
+end
+
+composition xxx_ManipulateVariable_source between
+	ManipulateVariable[*] role xxx_ManipulateVariable_source_src
+	Assignable[1] role source
+end
+
+composition xxx_ManipulateVariable_target between
+	ManipulateVariable[*] role xxx_ManipulateVariable_target_src
+	Query[1] role target
+end
+
+composition xxx_Remove_target between
+	Remove[*] role xxx_Remove_target_src
+	Query[1] role target
+end
+
+composition xxx_While_condition between
+	While[*] role xxx_While_condition_src
+	Constraint[1] role condition
+end
+
+composition xxx_ForAll_query between
+	ForAll[*] role xxx_ForAll_query_src
+	Query[0..1] role query
+end
+
+association xxx_ExceptionHandler_exception between
+	ExceptionHandler[*] role xxx_ExceptionHandler_exception_src
+	Exception[1] role exception
+end
+
+association xxx_RequestService_requestedService between
+	RequestService[*] role xxx_RequestService_requestedService_src
+	ServiceContract[1] role requestedService
+end
+
+association xxx_RequestService_requestVariable between
+	RequestService[*] role xxx_RequestService_requestVariable_src
+	Variable[1] role requestVariable
+end
+
+composition xxx_RequestService_exceptionHandlers between
+	RequestService[0..1] role xxx_RequestService_exceptionHandlers_src
+	ExceptionHandler[*] role exceptionHandlers
+end
+
+association xxx_RaiseException_exception between
+	RaiseException[*] role xxx_RaiseException_exception_src
+	Exception[1] role exception
+end
+
+association xxx_RaiseException_exceptionVariable between
+	RaiseException[*] role xxx_RaiseException_exceptionVariable_src
+	Variable[0..1] role exceptionVariable
+end
+
+association xxx_ReturnResult_resultVariable between
+	ReturnResult[*] role xxx_ReturnResult_resultVariable_src
+	Variable[0..1] role resultVariable
+end
+

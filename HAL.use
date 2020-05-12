@@ -1,0 +1,383 @@
+model PrimitiveTypes
+enum DateVisibleEnum{
+	JAMAIS
+}
+
+enum FormatEnum{
+	PDF,
+	TEX,
+	DOC,
+	RTF,
+	TXT,
+	PS,
+	ANNEX
+}
+
+enum FormatWebEnum{
+	XML,
+	HTML,
+	HTM
+}
+
+class HAL
+attributes
+operations
+end
+
+class Connexion
+attributes
+	login : String
+	password : String
+operations
+end
+
+abstract class Entry
+attributes
+operations
+end
+
+abstract class Article<Entry
+attributes
+operations
+end
+
+class ArticleRecent<Article
+attributes
+operations
+end
+
+class ArticleRetro<Article
+attributes
+	dateRedaction : String
+operations
+end
+
+class Notice<Entry
+attributes
+operations
+end
+
+abstract class ReferenceBiblioType
+attributes
+operations
+end
+
+abstract class ArtRevueType<ReferenceBiblioType
+attributes
+	urldoi : String
+	journal : String
+	volume : String
+	page : String
+	annee : String
+operations
+end
+
+abstract class WorkshopType<ReferenceBiblioType
+attributes
+	urldoi : String
+	titconf : String
+	ville : String
+	pays : String
+	edcom : String
+	annee : String
+	page : String
+	edsci : String
+	serie : String
+operations
+end
+
+abstract class ArtOuvrageType<ReferenceBiblioType
+attributes
+	urldoi : String
+	titouv : String
+	edcom : String
+	annee : String
+	edsci : String
+	serie : String
+operations
+end
+
+abstract class OuvrageType<ReferenceBiblioType
+attributes
+	urldoi : String
+	edcom : String
+	annee : String
+	page : String
+operations
+end
+
+abstract class TheseType<ReferenceBiblioType
+attributes
+	orgthe : String
+	niveau : String
+	defencedate : String
+	directeur : String
+	codirecteur : String
+operations
+end
+
+abstract class BrevetType<ReferenceBiblioType
+attributes
+	datebrevet : String
+	numbrevet : String
+	page : String
+	pays : String
+operations
+end
+
+abstract class AutreType<ReferenceBiblioType
+attributes
+	urldoi : String
+	annee : String
+	description : String
+operations
+end
+
+class ArtRevue<ArtRevueType
+attributes
+operations
+end
+
+class ArtJournal<ArtRevueType
+attributes
+operations
+end
+
+class Workshop<WorkshopType
+attributes
+operations
+end
+
+class Communication<WorkshopType
+attributes
+operations
+end
+
+class Conference<WorkshopType
+attributes
+operations
+end
+
+class ArtOuvrage<ArtOuvrageType
+attributes
+operations
+end
+
+class Ouvrage<OuvrageType
+attributes
+operations
+end
+
+class Brevet<BrevetType
+attributes
+operations
+end
+
+class Autre<AutreType
+attributes
+operations
+end
+
+class These<TheseType
+attributes
+operations
+end
+
+abstract class MetaType
+attributes
+	langue : String
+	title : String
+	comment : String
+	refInterne : String
+	idext : String
+	isEpj : Integer
+	isEpl : String
+	classification : String
+	collaboration : String
+	keyword : String
+	datevisible : DateVisibleEnum
+	financement : String
+	researchteam : String
+operations
+end
+
+class MetaArtType<MetaType
+attributes
+	domain : String
+	abstract_ : String
+operations
+end
+
+class MetaArtNoticeType<MetaType
+attributes
+	domain : String
+	abstract_ : String
+operations
+end
+
+class AutLabType
+attributes
+operations
+end
+
+class Auteur
+attributes
+	nom : String
+	prenom : String
+	autrePrenom : String
+	email : String
+	urlPerso : String
+operations
+end
+
+class Laboratoire
+attributes
+	id : Integer
+operations
+end
+
+abstract class AbstractMetaLab
+attributes
+operations
+end
+
+class MetaLab<AbstractMetaLab
+attributes
+	id : String
+operations
+end
+
+class AffiliationType
+attributes
+	institution : String
+	prive : String
+	ecole : String
+	universite : String
+operations
+end
+
+class TamponType
+attributes
+	id : String
+operations
+end
+
+abstract class AbstractDepot
+attributes
+	nom : String
+operations
+end
+
+class Depot<AbstractDepot
+attributes
+	format : FormatEnum
+operations
+end
+
+class DepotWeb<AbstractDepot
+attributes
+	format : FormatWebEnum
+operations
+end
+
+abstract class AbstractDepotType
+attributes
+operations
+end
+
+class DepotsType<AbstractDepotType
+attributes
+operations
+end
+
+class WebLink<AbstractDepotType
+attributes
+	identifiant : String
+operations
+end
+
+class Server
+attributes
+operations
+end
+
+composition xxx_HAL_connexion between
+	HAL[*] role xxx_HAL_connexion_src
+	Connexion[1] role connexion
+end
+
+composition xxx_HAL_contents between
+	HAL[0..1] role xxx_HAL_contents_src
+	Entry[*] role contents
+end
+
+composition xxx_Entry_autLab between
+	Entry[*] role xxx_Entry_autLab_src
+	AutLabType[1] role autLab
+end
+
+composition xxx_Entry_tampons between
+	Entry[0..1] role xxx_Entry_tampons_src
+	TamponType[*] role tampons
+end
+
+composition xxx_Article_metaArt between
+	Article[*] role xxx_Article_metaArt_src
+	MetaArtType[1] role metaArt
+end
+
+composition xxx_ArticleRecent_fichiers between
+	ArticleRecent[*] role xxx_ArticleRecent_fichiers_src
+	DepotsType[1] role fichiers
+end
+
+composition xxx_ArticleRetro_fichiers between
+	ArticleRetro[*] role xxx_ArticleRetro_fichiers_src
+	AbstractDepot[1] role fichiers
+end
+
+composition xxx_Notice_metaArtNotice between
+	Notice[*] role xxx_Notice_metaArtNotice_src
+	MetaArtNoticeType[1] role metaArtNotice
+end
+
+composition xxx_MetaArtType_referenceBiblio between
+	MetaArtType[*] role xxx_MetaArtType_referenceBiblio_src
+	ReferenceBiblioType[0..1] role referenceBiblio
+end
+
+composition xxx_MetaArtNoticeType_referenceBiblio between
+	MetaArtNoticeType[*] role xxx_MetaArtNoticeType_referenceBiblio_src
+	ReferenceBiblioType[1] role referenceBiblio
+end
+
+association xxx_AutLabType_auteurs between
+	AutLabType[0..1] role xxx_AutLabType_auteurs_src
+	Auteur[1..*] role auteurs
+end
+
+association xxx_AutLabType_laboratoires between
+	AutLabType[0..1] role xxx_AutLabType_laboratoires_src
+	Laboratoire[1..*] role laboratoires
+end
+
+association xxx_Auteur_lab between
+	Auteur[*] role xxx_Auteur_lab_src
+	Laboratoire[0..1] role lab
+end
+
+composition xxx_Laboratoire_metas between
+	Laboratoire[*] role xxx_Laboratoire_metas_src
+	AbstractMetaLab[1] role metas
+end
+
+composition xxx_DepotsType_depots between
+	DepotsType[0..1] role xxx_DepotsType_depots_src
+	AbstractDepot[1..*] role depots
+end
+
+composition xxx_WebLink_server between
+	WebLink[*] role xxx_WebLink_server_src
+	Server[1] role server
+end
+

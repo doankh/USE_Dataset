@@ -1,0 +1,107 @@
+model spielfeld
+enum Farbe{
+default
+}
+
+class Figur<ColoredSelectable
+attributes
+	name : String
+	id : String
+	active : Boolean
+operations
+	bewegen(zug : Koordinate)
+end
+
+class Koordinate
+attributes
+	ebene : Integer
+	buchstabe : Integer
+	zahl : Integer
+operations
+end
+
+class Zugset
+attributes
+operations
+end
+
+class StraightLine<EntityWithPosition
+attributes
+	maxDist : Integer
+operations
+end
+
+class Zug
+attributes
+operations
+end
+
+class Field<ColoredSelectable
+attributes
+	attackable : Boolean
+	possible : Boolean
+operations
+end
+
+abstract class EntityWithPosition
+attributes
+operations
+end
+
+class Jump<EntityWithPosition
+attributes
+operations
+end
+
+class SelectablePosition<EntityWithPosition
+attributes
+	selected : Boolean
+operations
+end
+
+class ColoredSelectable<SelectablePosition
+attributes
+	farbe : Farbe
+operations
+end
+
+association xxx_Figur_zugsetNormal between
+	Figur[*] role xxx_Figur_zugsetNormal_src
+	Zugset[1] role zugsetNormal
+end
+
+association xxx_Figur_zugsetAngriff between
+	Figur[*] role xxx_Figur_zugsetAngriff_src
+	Zugset[1] role zugsetAngriff
+end
+
+composition xxx_Zugset_straightLine between
+	Zugset[0..1] role xxx_Zugset_straightLine_src
+	StraightLine[*] role straightLine
+end
+
+composition xxx_Zugset_jumps between
+	Zugset[0..1] role xxx_Zugset_jumps_src
+	Jump[*] role jumps
+end
+
+association xxx_Zug_figur between
+	Zug[*] role xxx_Zug_figur_src
+	Figur[1] role figur
+end
+
+association xxx_Zug_startPosition between
+	Zug[*] role xxx_Zug_startPosition_src
+	Koordinate[1] role startPosition
+end
+
+association xxx_Zug_endPosition between
+	Zug[*] role xxx_Zug_endPosition_src
+	Koordinate[1] role endPosition
+end
+
+association xxx_EntityWithPosition_position between
+	EntityWithPosition[*] role xxx_EntityWithPosition_position_src
+	Koordinate[1] role position
+end
+

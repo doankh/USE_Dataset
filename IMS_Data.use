@@ -1,0 +1,139 @@
+model IMS_Data
+enum MetricType{
+default
+}
+
+enum LoadShedType{
+default
+}
+
+enum ExportType{
+default
+}
+
+enum ProcessState{
+default
+}
+
+class Metric
+attributes
+	type : MetricType
+	value : Integer
+	time : Integer
+operations
+end
+
+class ListMetric
+attributes
+operations
+end
+
+class ListProcesses
+attributes
+operations
+end
+
+class SystemInfo
+attributes
+	memory : Integer
+	diskSpace : Integer
+	machineId : String
+operations
+end
+
+class Process
+attributes
+	processName : String
+	machineId : String
+	dietId : String
+	state : ProcessState
+	timestamp : Integer
+	script : String
+operations
+end
+
+class ExportOp
+attributes
+	exportType : ExportType
+operations
+end
+
+class MetricHistOp
+attributes
+	startTime : Integer
+	endTime : Integer
+	type : MetricType
+operations
+end
+
+class CurMetricOp
+attributes
+	metricType : MetricType
+operations
+end
+
+class ProcessOp
+attributes
+	machineId : String
+operations
+end
+
+class ThresholdOp
+attributes
+	machineId : String
+	metricType : MetricType
+operations
+end
+
+class ListThreshold
+attributes
+operations
+end
+
+class Threshold
+attributes
+	value : Integer
+	machineId : String
+	type : MetricType
+	handler : String
+operations
+end
+
+class SysInfoOp
+attributes
+	machineId : String
+operations
+end
+
+class ListSysInfo
+attributes
+operations
+end
+
+class SupervisorOp
+attributes
+	URI : String
+	name : String
+operations
+end
+
+composition xxx_ListMetric_metric between
+	ListMetric[0..1] role xxx_ListMetric_metric_src
+	Metric[*] role metric
+end
+
+composition xxx_ListProcesses_process between
+	ListProcesses[0..1] role xxx_ListProcesses_process_src
+	Process[*] role process
+end
+
+composition xxx_ListThreshold_Threshold between
+	ListThreshold[0..1] role xxx_ListThreshold_Threshold_src
+	Threshold[*] role Threshold
+end
+
+composition xxx_ListSysInfo_sysInfo between
+	ListSysInfo[0..1] role xxx_ListSysInfo_sysInfo_src
+	SystemInfo[*] role sysInfo
+end
+

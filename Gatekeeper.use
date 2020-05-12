@@ -1,0 +1,526 @@
+model gatekeeper
+enum Applikation{
+default
+}
+
+enum AccessGroup{
+default
+}
+
+enum AsyncCommType{
+default
+}
+
+enum Mandant{
+default
+}
+
+class GtkModel
+attributes
+operations
+end
+
+class GtkBasisConfig<GtkModel
+attributes
+	name : String
+	release : String
+	version : String
+	datum : String
+operations
+end
+
+class FachlicherFehlerGruppe
+attributes
+	name : String
+operations
+end
+
+class FachlicherFehler
+attributes
+	name : String
+	code : Integer
+operations
+end
+
+class FachlicheFehlerMapping
+attributes
+	name : String
+	code : Integer
+	wertFehlerText : String
+operations
+end
+
+class ServiceNutzer
+attributes
+	name : String
+	ortsCode : String
+operations
+end
+
+class SecurityRolle
+attributes
+	name : String
+operations
+end
+
+class KukobezaPrimitives2XsdMappings
+attributes
+	name : String
+operations
+end
+
+class KukobezaPrimitives2XsdMapping
+attributes
+	hasManuAdaXmlUtils : Boolean
+operations
+end
+
+class GtkDataTypes<GtkModel
+attributes
+operations
+end
+
+class AdaType
+attributes
+	name : String
+operations
+end
+
+class XsdType
+attributes
+	name : String
+	nullable : Boolean
+	nullableJavaType : String
+operations
+end
+
+class DataType<Type
+attributes
+	isNullable : Boolean
+operations
+end
+
+class RestrictionBlock
+attributes
+operations
+end
+
+class Restriction
+attributes
+operations
+end
+
+class EnumRestriction<Restriction
+attributes
+	isInclude : Boolean
+	isExclude : Boolean
+operations
+end
+
+class IntRestriction<Restriction
+attributes
+	min : Integer
+	max : Integer
+operations
+end
+
+class StringRestriction<Restriction
+attributes
+	min : Integer
+	max : Integer
+	pattern : String
+operations
+end
+
+class PackageDeclaration<GtkModel
+attributes
+	name : String
+	appl : Applikation
+	hasExternalXsdDefinition : Boolean
+	targetDir : String
+	xsdNamespace : String
+	xsdNamespaceShort : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class SimpleEnum<Type
+attributes
+operations
+end
+
+class SimpleEnumItem
+attributes
+	name : String
+	literalName : String
+	annotationText : String
+operations
+end
+
+class ChoiceType<Type
+attributes
+operations
+end
+
+class ChoiceCase
+attributes
+	name : String
+operations
+end
+
+class ListType<Type
+attributes
+operations
+end
+
+class Entity<Type
+attributes
+	isAbstract : Boolean
+	overrideName : String
+	needsEnumFeatureRestriction : Boolean
+	hasManuAdaXmlUtils : Boolean
+operations
+end
+
+class Feature
+attributes
+	name : String
+	isOptional : Boolean
+	aliasAdaType : String
+	isInterfaceRestriction : Boolean
+operations
+end
+
+class MaxListeElements
+attributes
+	infinit : Boolean
+	number : Integer
+operations
+end
+
+class Service<GtkModel
+attributes
+	name : String
+	appl : Applikation
+operations
+end
+
+class Operation
+attributes
+	isSync : Boolean
+	isAsync : Boolean
+	isManuImpl : Boolean
+	name : String
+	accessGroup : AccessGroup
+	asyncCommType : AsyncCommType
+operations
+end
+
+class ServiceNutzung
+attributes
+	mandant : Mandant
+operations
+end
+
+class SGtkService<GtkModel
+attributes
+	name : String
+	appl : Applikation
+	endpoint : String
+	namespace : String
+	namespaceShort : String
+	maxBeanInstances : Integer
+operations
+end
+
+class ImportedService
+attributes
+operations
+end
+
+class GtkServices<GtkModel
+attributes
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+operations
+end
+
+composition xxx_GtkBasisConfig_imports between
+	GtkBasisConfig[0..1] role xxx_GtkBasisConfig_imports_src
+	Import[*] role imports
+end
+
+composition xxx_GtkBasisConfig_typeMappings between
+	GtkBasisConfig[*] role xxx_GtkBasisConfig_typeMappings_src
+	KukobezaPrimitives2XsdMappings[0..1] role typeMappings
+end
+
+composition xxx_GtkBasisConfig_serviceNutzer between
+	GtkBasisConfig[0..1] role xxx_GtkBasisConfig_serviceNutzer_src
+	ServiceNutzer[*] role serviceNutzer
+end
+
+composition xxx_GtkBasisConfig_securityRollen between
+	GtkBasisConfig[0..1] role xxx_GtkBasisConfig_securityRollen_src
+	SecurityRolle[*] role securityRollen
+end
+
+composition xxx_GtkBasisConfig_fachlicheFehlerGruppe between
+	GtkBasisConfig[0..1] role xxx_GtkBasisConfig_fachlicheFehlerGruppe_src
+	FachlicherFehlerGruppe[*] role fachlicheFehlerGruppe
+end
+
+composition xxx_GtkBasisConfig_fachlicheFehlerMapping between
+	GtkBasisConfig[0..1] role xxx_GtkBasisConfig_fachlicheFehlerMapping_src
+	FachlicheFehlerMapping[*] role fachlicheFehlerMapping
+end
+
+composition xxx_FachlicherFehlerGruppe_fachlicheFehler between
+	FachlicherFehlerGruppe[0..1] role xxx_FachlicherFehlerGruppe_fachlicheFehler_src
+	FachlicherFehler[*] role fachlicheFehler
+end
+
+association xxx_FachlicheFehlerMapping_maps2FachlicherFehler between
+	FachlicheFehlerMapping[*] role xxx_FachlicheFehlerMapping_maps2FachlicherFehler_src
+	FachlicherFehler[0..1] role maps2FachlicherFehler
+end
+
+composition xxx_KukobezaPrimitives2XsdMappings_mappings between
+	KukobezaPrimitives2XsdMappings[0..1] role xxx_KukobezaPrimitives2XsdMappings_mappings_src
+	KukobezaPrimitives2XsdMapping[*] role mappings
+end
+
+association xxx_KukobezaPrimitives2XsdMapping_primType between
+	KukobezaPrimitives2XsdMapping[*] role xxx_KukobezaPrimitives2XsdMapping_primType_src
+	Type[0..1] role primType
+end
+
+association xxx_KukobezaPrimitives2XsdMapping_gtkType between
+	KukobezaPrimitives2XsdMapping[*] role xxx_KukobezaPrimitives2XsdMapping_gtkType_src
+	Type[0..1] role gtkType
+end
+
+composition xxx_GtkDataTypes_adaTypes between
+	GtkDataTypes[0..1] role xxx_GtkDataTypes_adaTypes_src
+	AdaType[*] role adaTypes
+end
+
+composition xxx_GtkDataTypes_xsdTypes between
+	GtkDataTypes[0..1] role xxx_GtkDataTypes_xsdTypes_src
+	XsdType[*] role xsdTypes
+end
+
+composition xxx_GtkDataTypes_dataTypes between
+	GtkDataTypes[0..1] role xxx_GtkDataTypes_dataTypes_src
+	DataType[*] role dataTypes
+end
+
+association xxx_XsdType_adaType between
+	XsdType[*] role xxx_XsdType_adaType_src
+	AdaType[0..1] role adaType
+end
+
+association xxx_DataType_xsdType between
+	DataType[*] role xxx_DataType_xsdType_src
+	XsdType[0..1] role xsdType
+end
+
+composition xxx_DataType_restrictionBlock between
+	DataType[*] role xxx_DataType_restrictionBlock_src
+	RestrictionBlock[0..1] role restrictionBlock
+end
+
+composition xxx_RestrictionBlock_restriction between
+	RestrictionBlock[*] role xxx_RestrictionBlock_restriction_src
+	Restriction[0..1] role restriction
+end
+
+association xxx_EnumRestriction_enumRef between
+	EnumRestriction[*] role xxx_EnumRestriction_enumRef_src
+	SimpleEnum[0..1] role enumRef
+end
+
+association xxx_EnumRestriction_enumItems between
+	EnumRestriction[0..1] role xxx_EnumRestriction_enumItems_src
+	SimpleEnumItem[*] role enumItems
+end
+
+composition xxx_PackageDeclaration_imports between
+	PackageDeclaration[0..1] role xxx_PackageDeclaration_imports_src
+	Import[*] role imports
+end
+
+association xxx_PackageDeclaration_basisKonfig between
+	PackageDeclaration[*] role xxx_PackageDeclaration_basisKonfig_src
+	GtkBasisConfig[0..1] role basisKonfig
+end
+
+composition xxx_PackageDeclaration_elements between
+	PackageDeclaration[0..1] role xxx_PackageDeclaration_elements_src
+	Type[*] role elements
+end
+
+composition xxx_SimpleEnum_items between
+	SimpleEnum[0..1] role xxx_SimpleEnum_items_src
+	SimpleEnumItem[*] role items
+end
+
+composition xxx_ChoiceType_cases between
+	ChoiceType[0..1] role xxx_ChoiceType_cases_src
+	ChoiceCase[*] role cases
+end
+
+composition xxx_ChoiceCase_features between
+	ChoiceCase[0..1] role xxx_ChoiceCase_features_src
+	Feature[*] role features
+end
+
+association xxx_ListType_type between
+	ListType[*] role xxx_ListType_type_src
+	Type[0..1] role type
+end
+
+association xxx_ListType_primType between
+	ListType[*] role xxx_ListType_primType_src
+	Type[0..1] role primType
+end
+
+association xxx_Entity_enumRef between
+	Entity[*] role xxx_Entity_enumRef_src
+	SimpleEnum[0..1] role enumRef
+end
+
+association xxx_Entity_superType between
+	Entity[*] role xxx_Entity_superType_src
+	Entity[0..1] role superType
+end
+
+association xxx_Entity_primType between
+	Entity[*] role xxx_Entity_primType_src
+	Type[0..1] role primType
+end
+
+composition xxx_Entity_features between
+	Entity[0..1] role xxx_Entity_features_src
+	Feature[*] role features
+end
+
+association xxx_Feature_type between
+	Feature[*] role xxx_Feature_type_src
+	Type[0..1] role type
+end
+
+association xxx_Feature_primType between
+	Feature[*] role xxx_Feature_primType_src
+	Type[0..1] role primType
+end
+
+composition xxx_Feature_maxListElements between
+	Feature[*] role xxx_Feature_maxListElements_src
+	MaxListeElements[0..1] role maxListElements
+end
+
+composition xxx_Feature_restrictionBlock between
+	Feature[*] role xxx_Feature_restrictionBlock_src
+	RestrictionBlock[0..1] role restrictionBlock
+end
+
+composition xxx_Service_imports between
+	Service[0..1] role xxx_Service_imports_src
+	Import[*] role imports
+end
+
+association xxx_Service_basisKonfig between
+	Service[*] role xxx_Service_basisKonfig_src
+	GtkBasisConfig[0..1] role basisKonfig
+end
+
+composition xxx_Service_operationen between
+	Service[0..1] role xxx_Service_operationen_src
+	Operation[*] role operationen
+end
+
+composition xxx_Operation_input between
+	Operation[*] role xxx_Operation_input_src
+	Entity[0..1] role input
+end
+
+composition xxx_Operation_output between
+	Operation[*] role xxx_Operation_output_src
+	Entity[0..1] role output
+end
+
+association xxx_Operation_fachlicheFehler between
+	Operation[0..1] role xxx_Operation_fachlicheFehler_src
+	FachlicherFehler[*] role fachlicheFehler
+end
+
+composition xxx_Operation_serviceNutzung between
+	Operation[0..1] role xxx_Operation_serviceNutzung_src
+	ServiceNutzung[*] role serviceNutzung
+end
+
+association xxx_Operation_securityRollen between
+	Operation[0..1] role xxx_Operation_securityRollen_src
+	SecurityRolle[*] role securityRollen
+end
+
+association xxx_ServiceNutzung_serviceNutzer between
+	ServiceNutzung[*] role xxx_ServiceNutzung_serviceNutzer_src
+	ServiceNutzer[0..1] role serviceNutzer
+end
+
+composition xxx_SGtkService_imports between
+	SGtkService[0..1] role xxx_SGtkService_imports_src
+	Import[*] role imports
+end
+
+association xxx_SGtkService_basisKonfig between
+	SGtkService[*] role xxx_SGtkService_basisKonfig_src
+	GtkBasisConfig[0..1] role basisKonfig
+end
+
+composition xxx_SGtkService_operationen between
+	SGtkService[0..1] role xxx_SGtkService_operationen_src
+	Operation[*] role operationen
+end
+
+composition xxx_SGtkService_importedServices between
+	SGtkService[0..1] role xxx_SGtkService_importedServices_src
+	ImportedService[*] role importedServices
+end
+
+association xxx_ImportedService_service between
+	ImportedService[*] role xxx_ImportedService_service_src
+	Service[0..1] role service
+end
+
+association xxx_ImportedService_importedOperations between
+	ImportedService[0..1] role xxx_ImportedService_importedOperations_src
+	Operation[*] role importedOperations
+end
+
+composition xxx_GtkServices_imports between
+	GtkServices[0..1] role xxx_GtkServices_imports_src
+	Import[*] role imports
+end
+
+association xxx_GtkServices_kobeServices between
+	GtkServices[0..1] role xxx_GtkServices_kobeServices_src
+	Service[*] role kobeServices
+end
+
+association xxx_GtkServices_sgtkServices between
+	GtkServices[0..1] role xxx_GtkServices_sgtkServices_src
+	SGtkService[*] role sgtkServices
+end
+

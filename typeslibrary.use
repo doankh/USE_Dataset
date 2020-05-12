@@ -1,0 +1,114 @@
+model typeslibrary
+enum NativeTypeKind{
+default
+}
+
+enum TypesLibraryKind{
+default
+}
+
+class NativeTypesLibrary<TypesLibrary
+attributes
+	name : String
+operations
+	findTypeByName(name : String):NativeType
+end
+
+class TypeInstance<Type
+attributes
+	length : Integer
+	precision : Integer
+	literals : String
+operations
+end
+
+class NativeType
+attributes
+	name : String
+	spec : NativeTypeKind
+operations
+end
+
+class ComplexNamedType<UserDefinedType
+attributes
+operations
+end
+
+class SimpleNamedType<UserDefinedType
+attributes
+operations
+end
+
+abstract class Type
+attributes
+operations
+end
+
+abstract class UserDefinedType
+attributes
+	name : String
+operations
+end
+
+class UserDefinedTypeRef<Type
+attributes
+operations
+end
+
+class UserDefinedTypesLibrary<TypesLibrary
+attributes
+	name : String
+operations
+end
+
+abstract class TypesLibraryUser
+attributes
+operations
+end
+
+abstract class TypesLibrary
+attributes
+	kind : TypesLibraryKind
+operations
+end
+
+composition xxx_NativeTypesLibrary_nativeTypes between
+	NativeTypesLibrary[0..1] role xxx_NativeTypesLibrary_nativeTypes_src
+	NativeType[*] role nativeTypes
+end
+
+association xxx_TypeInstance_nativeType between
+	TypeInstance[*] role xxx_TypeInstance_nativeType_src
+	NativeType[1] role nativeType
+end
+
+association xxx_NativeType_mapsTo between
+	NativeType[*] role xxx_NativeType_mapsTo_src
+	NativeType[0..1] role mapsTo
+end
+
+composition xxx_ComplexNamedType_types between
+	ComplexNamedType[0..1] role xxx_ComplexNamedType_types_src
+	UserDefinedType[*] role types
+end
+
+association xxx_SimpleNamedType_type between
+	SimpleNamedType[*] role xxx_SimpleNamedType_type_src
+	TypeInstance[1] role type
+end
+
+association xxx_UserDefinedTypeRef_type between
+	UserDefinedTypeRef[*] role xxx_UserDefinedTypeRef_type_src
+	UserDefinedType[1] role type
+end
+
+composition xxx_UserDefinedTypesLibrary_userDefinedTypes between
+	UserDefinedTypesLibrary[0..1] role xxx_UserDefinedTypesLibrary_userDefinedTypes_src
+	UserDefinedType[*] role userDefinedTypes
+end
+
+association xxx_TypesLibraryUser_usedLibraries between
+	TypesLibraryUser[0..1] role xxx_TypesLibraryUser_usedLibraries_src
+	TypesLibrary[*] role usedLibraries
+end
+

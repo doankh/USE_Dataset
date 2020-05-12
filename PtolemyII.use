@@ -1,0 +1,154 @@
+model PrimitiveTypes
+class EDataType
+attributes
+	value : String
+operations
+end
+
+class NamedObject
+attributes
+	name : String
+operations
+end
+
+class Attribute<NamedObject
+attributes
+	value : String
+operations
+end
+
+class Entity<NamedObject
+attributes
+operations
+end
+
+class Port<NamedObject
+attributes
+operations
+end
+
+class Relation<NamedObject
+attributes
+operations
+end
+
+class Director<NamedObject
+attributes
+operations
+end
+
+class Parameter<Attribute
+attributes
+operations
+end
+
+class ComponentPort<Port
+attributes
+operations
+end
+
+class ComponentRelation<Relation
+attributes
+operations
+end
+
+class ComponentEntity<Attribute
+attributes
+operations
+end
+
+class AtomicActor<ComponentEntity
+attributes
+operations
+end
+
+class CompositeEntity<ComponentEntity
+attributes
+operations
+end
+
+class WorkSpace<CompositeEntity
+attributes
+operations
+end
+
+class CompositeActor<CompositeEntity
+attributes
+operations
+end
+
+association xxx_Attribute_att_container between
+	Attribute[*] role xxx_Attribute_att_container_src
+	Entity[1] role att_container
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Entity_parameters between
+	Entity[0..1] role xxx_Entity_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Entity_ports between
+	Entity[0..1] role xxx_Entity_ports_src
+	Port[*] role ports
+end
+
+association xxx_Port_po_container between
+	Port[*] role xxx_Port_po_container_src
+	Entity[1] role po_container
+end
+
+association xxx_Port_links between
+	Port[0..1] role xxx_Port_links_src
+	Relation[*] role links
+end
+
+association xxx_Relation_ports between
+	Relation[0..1] role xxx_Relation_ports_src
+	Port[*] role ports
+end
+
+association xxx_Director_ca_container between
+	Director[*] role xxx_Director_ca_container_src
+	CompositeActor[1] role ca_container
+end
+
+association xxx_Parameter_pa_container between
+	Parameter[*] role xxx_Parameter_pa_container_src
+	Entity[1] role pa_container
+end
+
+association xxx_Parameter_dataType between
+	Parameter[*] role xxx_Parameter_dataType_src
+	EDataType[1] role dataType
+end
+
+association xxx_ComponentRelation_re_container between
+	ComponentRelation[*] role xxx_ComponentRelation_re_container_src
+	CompositeEntity[1] role re_container
+end
+
+association xxx_ComponentEntity_ce_container between
+	ComponentEntity[*] role xxx_ComponentEntity_ce_container_src
+	CompositeEntity[1] role ce_container
+end
+
+composition xxx_CompositeEntity_containees between
+	CompositeEntity[0..1] role xxx_CompositeEntity_containees_src
+	ComponentEntity[*] role containees
+end
+
+composition xxx_CompositeEntity_relations between
+	CompositeEntity[0..1] role xxx_CompositeEntity_relations_src
+	ComponentRelation[*] role relations
+end
+
+association xxx_CompositeActor_directors between
+	CompositeActor[*] role xxx_CompositeActor_directors_src
+	Director[0..2] role directors
+end
+

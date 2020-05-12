@@ -1,0 +1,53 @@
+model iMacros
+class Script<Visitable
+attributes
+operations
+end
+
+class Version<Visitable
+attributes
+	build : String
+operations
+end
+
+class Instruction<Visitable
+attributes
+operations
+end
+
+class Tag<Instruction
+attributes
+	type : String
+	attr : String
+	pos : Integer
+	content : String
+operations
+end
+
+class Url<Instruction
+attributes
+	goto : String
+operations
+end
+
+class Tab<Instruction
+attributes
+	t : Integer
+operations
+end
+
+abstract class Visitable
+attributes
+operations
+end
+
+association xxx_Script_version between
+	Script[*] role xxx_Script_version_src
+	Version[0..1] role version
+end
+
+association xxx_Script_instructions between
+	Script[0..1] role xxx_Script_instructions_src
+	Instruction[*] role instructions
+end
+

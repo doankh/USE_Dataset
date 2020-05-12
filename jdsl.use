@@ -1,0 +1,95 @@
+model jdsl
+enum CMSEnum{
+default
+}
+
+enum TypeEnum{
+default
+}
+
+enum AccessLevelEnum{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ContentModel<NamedElement
+attributes
+operations
+end
+
+class ContentType<NamedElement
+attributes
+	guid : Integer
+	visible : Boolean
+operations
+end
+
+class Property<NamedElement
+attributes
+	accessModifer : AccessLevelEnum
+	type : TypeEnum
+operations
+end
+
+class Role<NamedElement
+attributes
+	types : String
+	isAdmin : Boolean
+operations
+end
+
+class User<NamedElement
+attributes
+	firstname : String
+	lastname : String
+	login : String
+	password : String
+	email : String
+	disabled : Boolean
+operations
+end
+
+class Version<NamedElement
+attributes
+operations
+end
+
+class CMS<NamedElement
+attributes
+	address_url : String
+	type : CMSEnum
+	username : String
+	password : String
+operations
+end
+
+composition xxx_ContentModel_hasElements between
+	ContentModel[0..1] role xxx_ContentModel_hasElements_src
+	NamedElement[*] role hasElements
+end
+
+composition xxx_ContentType_hasProperties between
+	ContentType[0..1] role xxx_ContentType_hasProperties_src
+	Property[1..*] role hasProperties
+end
+
+composition xxx_ContentType_hasVersions between
+	ContentType[0..1] role xxx_ContentType_hasVersions_src
+	Version[*] role hasVersions
+end
+
+composition xxx_ContentType_modifiedBy between
+	ContentType[*] role xxx_ContentType_modifiedBy_src
+	User[0..1] role modifiedBy
+end
+
+composition xxx_User_hasRole between
+	User[*] role xxx_User_hasRole_src
+	Role[0..1] role hasRole
+end
+

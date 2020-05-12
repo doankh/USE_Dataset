@@ -1,0 +1,404 @@
+model majordomo
+enum Comparator{
+default
+}
+
+class Majordomo
+attributes
+	name : String
+operations
+end
+
+class House<Extendable
+attributes
+operations
+end
+
+abstract class Extendable
+attributes
+operations
+end
+
+class Room<Extendable
+attributes
+	name : String
+operations
+end
+
+abstract class Sensor<Extension
+attributes
+operations
+end
+
+abstract class Actor<Extension
+attributes
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+abstract class Extension
+attributes
+	name : String
+operations
+end
+
+class LightSensor<HouseMountable,RoomMountable,FloatSensor
+attributes
+operations
+end
+
+class TemperatureSensor<HouseMountable,RoomMountable,FloatSensor
+attributes
+operations
+end
+
+class RainSensor<HouseMountable,BooleanSensor
+attributes
+operations
+end
+
+class SwitchSensor<RoomMountable,BooleanSensor
+attributes
+operations
+end
+
+class NumberSensor<RoomMountable,FloatSensor
+attributes
+operations
+end
+
+class ClockSensor<HouseMountable,FloatSensor
+attributes
+operations
+end
+
+class LampActor<HouseMountable,RoomMountable,FloatActor
+attributes
+operations
+end
+
+class RollerActor<RoomMountable,BooleanActor
+attributes
+operations
+end
+
+class RoofWindowActor<RoomMountable,BooleanActor
+attributes
+operations
+end
+
+class BoilerActor<HouseMountable,BooleanActor
+attributes
+operations
+end
+
+class RadiatorActor<RoomMountable,BooleanActor
+attributes
+operations
+end
+
+abstract class RoomMountable
+attributes
+operations
+end
+
+abstract class HouseMountable
+attributes
+operations
+end
+
+abstract class BooleanSensor<Sensor
+attributes
+operations
+	getValue():Boolean
+end
+
+abstract class FloatSensor<Sensor
+attributes
+operations
+	getValue():Real
+end
+
+abstract class BooleanActor<Actor
+attributes
+operations
+	setValue(value : Boolean)
+end
+
+abstract class FloatActor<Actor
+attributes
+operations
+	setValue(value : Real)
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class FloatAction<Action
+attributes
+	value : Real
+operations
+end
+
+class BooleanAction<Action
+attributes
+	value : Boolean
+operations
+end
+
+class CoffeeActor<RoomMountable,BooleanActor
+attributes
+operations
+end
+
+abstract class BinaryOperation<Statement
+attributes
+operations
+end
+
+class NotOperation<Statement
+attributes
+operations
+end
+
+class CompareOperation<Statement
+attributes
+	comparator : Comparator
+operations
+end
+
+class BooleanSensorStatement<Statement
+attributes
+operations
+end
+
+abstract class ValueExpression
+attributes
+operations
+end
+
+class ConstantValue<ValueExpression
+attributes
+	value : Real
+operations
+end
+
+class SensorValue<ValueExpression
+attributes
+operations
+end
+
+class StatementReference<Statement
+attributes
+operations
+end
+
+class Program
+attributes
+operations
+end
+
+class PreparedStatement
+attributes
+	name : String
+operations
+end
+
+class PreparedActionSet
+attributes
+	name : String
+operations
+end
+
+class ActionSetReference<Action
+attributes
+operations
+end
+
+class BinaryAndOperation<BinaryOperation
+attributes
+operations
+end
+
+class BinaryOrOperation<BinaryOperation
+attributes
+operations
+end
+
+class PreparedValue
+attributes
+	name : String
+operations
+end
+
+class ValueReference<ValueExpression
+attributes
+operations
+end
+
+composition xxx_Majordomo_house between
+	Majordomo[*] role xxx_Majordomo_house_src
+	House[0..1] role house
+end
+
+composition xxx_Majordomo_rooms between
+	Majordomo[0..1] role xxx_Majordomo_rooms_src
+	Room[*] role rooms
+end
+
+composition xxx_Majordomo_program between
+	Majordomo[*] role xxx_Majordomo_program_src
+	Program[1] role program
+end
+
+composition xxx_Extendable_sensors between
+	Extendable[0..1] role xxx_Extendable_sensors_src
+	Sensor[*] role sensors
+end
+
+composition xxx_Extendable_actors between
+	Extendable[0..1] role xxx_Extendable_actors_src
+	Actor[*] role actors
+end
+
+association xxx_Sensor_ctx between
+	Sensor[*] role xxx_Sensor_ctx_src
+	Extendable[1] role ctx
+end
+
+association xxx_Actor_ctx between
+	Actor[*] role xxx_Actor_ctx_src
+	Extendable[1] role ctx
+end
+
+composition xxx_Rule_statement between
+	Rule[*] role xxx_Rule_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_Rule_actions between
+	Rule[0..1] role xxx_Rule_actions_src
+	Action[1..*] role actions
+end
+
+association xxx_FloatAction_actor between
+	FloatAction[*] role xxx_FloatAction_actor_src
+	FloatActor[1] role actor
+end
+
+association xxx_BooleanAction_actor between
+	BooleanAction[*] role xxx_BooleanAction_actor_src
+	BooleanActor[1] role actor
+end
+
+composition xxx_BinaryOperation_left between
+	BinaryOperation[*] role xxx_BinaryOperation_left_src
+	Statement[1] role left
+end
+
+composition xxx_BinaryOperation_right between
+	BinaryOperation[*] role xxx_BinaryOperation_right_src
+	Statement[1] role right
+end
+
+composition xxx_NotOperation_statement between
+	NotOperation[*] role xxx_NotOperation_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_CompareOperation_left between
+	CompareOperation[*] role xxx_CompareOperation_left_src
+	ValueExpression[1] role left
+end
+
+composition xxx_CompareOperation_right between
+	CompareOperation[*] role xxx_CompareOperation_right_src
+	ValueExpression[1] role right
+end
+
+association xxx_BooleanSensorStatement_sensor between
+	BooleanSensorStatement[*] role xxx_BooleanSensorStatement_sensor_src
+	BooleanSensor[1] role sensor
+end
+
+association xxx_SensorValue_sensor between
+	SensorValue[*] role xxx_SensorValue_sensor_src
+	FloatSensor[1] role sensor
+end
+
+association xxx_StatementReference_ref between
+	StatementReference[*] role xxx_StatementReference_ref_src
+	PreparedStatement[1] role ref
+end
+
+composition xxx_Program_constants between
+	Program[0..1] role xxx_Program_constants_src
+	PreparedValue[*] role constants
+end
+
+composition xxx_Program_preparedStatements between
+	Program[0..1] role xxx_Program_preparedStatements_src
+	PreparedStatement[*] role preparedStatements
+end
+
+composition xxx_Program_preparedActionSets between
+	Program[0..1] role xxx_Program_preparedActionSets_src
+	PreparedActionSet[*] role preparedActionSets
+end
+
+composition xxx_Program_rules between
+	Program[0..1] role xxx_Program_rules_src
+	Rule[*] role rules
+end
+
+association xxx_PreparedStatement_ctx between
+	PreparedStatement[*] role xxx_PreparedStatement_ctx_src
+	Program[1] role ctx
+end
+
+composition xxx_PreparedStatement_statement between
+	PreparedStatement[*] role xxx_PreparedStatement_statement_src
+	Statement[1] role statement
+end
+
+association xxx_PreparedActionSet_ctx between
+	PreparedActionSet[*] role xxx_PreparedActionSet_ctx_src
+	Program[1] role ctx
+end
+
+composition xxx_PreparedActionSet_actions between
+	PreparedActionSet[0..1] role xxx_PreparedActionSet_actions_src
+	Action[1..*] role actions
+end
+
+association xxx_ActionSetReference_ref between
+	ActionSetReference[*] role xxx_ActionSetReference_ref_src
+	PreparedActionSet[1] role ref
+end
+
+association xxx_PreparedValue_ctx between
+	PreparedValue[*] role xxx_PreparedValue_ctx_src
+	Program[1] role ctx
+end
+
+composition xxx_PreparedValue_value between
+	PreparedValue[*] role xxx_PreparedValue_value_src
+	ValueExpression[1] role value
+end
+
+association xxx_ValueReference_ref between
+	ValueReference[*] role xxx_ValueReference_ref_src
+	PreparedValue[1] role ref
+end
+

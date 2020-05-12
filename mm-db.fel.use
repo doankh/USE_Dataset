@@ -1,0 +1,351 @@
+model mm
+class ModelRoot
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Database<NamedElement
+attributes
+operations
+end
+
+abstract class DbObject<NamedElement
+attributes
+operations
+end
+
+class Schema<DbObject
+attributes
+operations
+end
+
+abstract class Relation
+attributes
+operations
+	getColumns():Column
+end
+
+class Table<DbObject,Relation
+attributes
+operations
+	getPrimaryColumn():Column
+	getColumns():Column
+end
+
+class Sequence_<DbObject
+attributes
+	cacheSize : Integer
+operations
+end
+
+abstract class Constraint<DbObject
+attributes
+operations
+end
+
+abstract class TableConstraint<Constraint,NamedElement
+attributes
+operations
+end
+
+abstract class ColumnConstraint<Constraint
+attributes
+operations
+end
+
+class ForeignKey<TableConstraint
+attributes
+operations
+end
+
+abstract class Column<NamedElement
+attributes
+operations
+	getOwningTable():Table
+end
+
+class TableColumn<Column
+attributes
+	type : String
+operations
+	getOwningTable():Table
+end
+
+class Index<DbObject
+attributes
+operations
+end
+
+class UniqueIndex<TableConstraint
+attributes
+operations
+end
+
+class PrimaryKey<UniqueIndex
+attributes
+operations
+end
+
+abstract class Operation
+attributes
+operations
+end
+
+class CreateTable<Operation
+attributes
+	tableName : String
+operations
+	createTable(tableName : String,tableColumns : TableColumn,tableConstraints : TableConstraint,primaryKey : PrimaryKey,generateID : Sequence_):Boolean
+end
+
+class RenameTable<Operation
+attributes
+	newName : String
+operations
+	renameTable(newName : String,renamedTable : Table):Boolean
+end
+
+class DeleteTable<Operation
+attributes
+operations
+	deleteTable(deletedTable : Table):Boolean
+end
+
+class AddColumn<Operation
+attributes
+	newColumnName : String
+operations
+	addColumn(changedTable : Table,newColumnName : String,columnConstrains : ColumnConstraint):Boolean
+end
+
+class RenameColumn<Operation
+attributes
+	newColumnName : String
+operations
+	renameColumn(newColumnName : String,changedTable : Table,renamedColumn : TableColumn):Boolean
+end
+
+class TypeChangeToColumn<Operation
+attributes
+	newType : String
+operations
+	typeChangeToColumn(newType : String,changedTable : Table,changedTypeColumn : TableColumn):Boolean
+end
+
+class DeleteColumn<Operation
+attributes
+operations
+	deleteColumn(changedTable : Table,deleteColumn : TableColumn):Boolean
+end
+
+class Query<Relation
+attributes
+operations
+end
+
+class ColumnReference<Column
+attributes
+operations
+end
+
+composition xxx_ModelRoot_sourceDB between
+	ModelRoot[*] role xxx_ModelRoot_sourceDB_src
+	Database[1] role sourceDB
+end
+
+composition xxx_ModelRoot_targetDB between
+	ModelRoot[*] role xxx_ModelRoot_targetDB_src
+	Database[1] role targetDB
+end
+
+composition xxx_ModelRoot_operations_ between
+	ModelRoot[0..1] role xxx_ModelRoot_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_Database_schemas between
+	Database[0..1] role xxx_Database_schemas_src
+	Schema[*] role schemas
+end
+
+composition xxx_Schema_tables between
+	Schema[0..1] role xxx_Schema_tables_src
+	Table[*] role tables
+end
+
+composition xxx_Schema_sequences between
+	Schema[0..1] role xxx_Schema_sequences_src
+	Sequence_[*] role sequences
+end
+
+composition xxx_Schema_indexes between
+	Schema[0..1] role xxx_Schema_indexes_src
+	Index[*] role indexes
+end
+
+association xxx_Table_owningSchema between
+	Table[*] role xxx_Table_owningSchema_src
+	Schema[1] role owningSchema
+end
+
+association xxx_Table_primaryKey between
+	Table[*] role xxx_Table_primaryKey_src
+	PrimaryKey[0..1] role primaryKey
+end
+
+composition xxx_Table_ownedColumns between
+	Table[0..1] role xxx_Table_ownedColumns_src
+	TableColumn[*] role ownedColumns
+end
+
+composition xxx_Table_constraints_ between
+	Table[0..1] role xxx_Table_constraints__src
+	TableConstraint[*] role constraints_
+end
+
+association xxx_Sequence_owningSchema between
+	Sequence_[*] role xxx_Sequence_owningSchema_src
+	Schema[1] role owningSchema
+end
+
+association xxx_TableConstraint_owningTable between
+	TableConstraint[*] role xxx_TableConstraint_owningTable_src
+	Table[1] role owningTable
+end
+
+association xxx_ColumnConstraint_owningColumn between
+	ColumnConstraint[*] role xxx_ColumnConstraint_owningColumn_src
+	TableColumn[1] role owningColumn
+end
+
+association xxx_ForeignKey_targetTable between
+	ForeignKey[*] role xxx_ForeignKey_targetTable_src
+	Table[1] role targetTable
+end
+
+association xxx_ForeignKey_constrainedColumn between
+	ForeignKey[*] role xxx_ForeignKey_constrainedColumn_src
+	TableColumn[1] role constrainedColumn
+end
+
+association xxx_TableColumn__owningTable between
+	TableColumn[*] role xxx_TableColumn__owningTable_src
+	Table[1] role _owningTable
+end
+
+composition xxx_TableColumn_constraints_ between
+	TableColumn[0..1] role xxx_TableColumn_constraints__src
+	ColumnConstraint[*] role constraints_
+end
+
+association xxx_Index_columns between
+	Index[0..1] role xxx_Index_columns_src
+	TableColumn[1..*] role columns
+end
+
+association xxx_Index_indexedTable between
+	Index[*] role xxx_Index_indexedTable_src
+	Table[1] role indexedTable
+end
+
+association xxx_Index_owningSchema between
+	Index[*] role xxx_Index_owningSchema_src
+	Schema[1] role owningSchema
+end
+
+association xxx_UniqueIndex_underlyingIndex between
+	UniqueIndex[*] role xxx_UniqueIndex_underlyingIndex_src
+	Index[1] role underlyingIndex
+end
+
+association xxx_Operation_modelRoot between
+	Operation[*] role xxx_Operation_modelRoot_src
+	ModelRoot[1] role modelRoot
+end
+
+association xxx_CreateTable_tableColumns between
+	CreateTable[0..1] role xxx_CreateTable_tableColumns_src
+	TableColumn[*] role tableColumns
+end
+
+association xxx_CreateTable_tableConstraints between
+	CreateTable[0..1] role xxx_CreateTable_tableConstraints_src
+	TableConstraint[*] role tableConstraints
+end
+
+association xxx_CreateTable_primaryKey between
+	CreateTable[*] role xxx_CreateTable_primaryKey_src
+	PrimaryKey[0..1] role primaryKey
+end
+
+association xxx_CreateTable_generateID between
+	CreateTable[*] role xxx_CreateTable_generateID_src
+	Sequence_[1] role generateID
+end
+
+association xxx_RenameTable_renamedTable between
+	RenameTable[*] role xxx_RenameTable_renamedTable_src
+	Table[1] role renamedTable
+end
+
+association xxx_DeleteTable_deletedTable between
+	DeleteTable[*] role xxx_DeleteTable_deletedTable_src
+	Table[1] role deletedTable
+end
+
+association xxx_AddColumn_changedTable between
+	AddColumn[*] role xxx_AddColumn_changedTable_src
+	Table[1] role changedTable
+end
+
+association xxx_AddColumn_columnConstrains between
+	AddColumn[0..1] role xxx_AddColumn_columnConstrains_src
+	ColumnConstraint[*] role columnConstrains
+end
+
+association xxx_RenameColumn_changedTable between
+	RenameColumn[*] role xxx_RenameColumn_changedTable_src
+	Table[1] role changedTable
+end
+
+association xxx_RenameColumn_renamedColumn between
+	RenameColumn[*] role xxx_RenameColumn_renamedColumn_src
+	TableColumn[1] role renamedColumn
+end
+
+association xxx_TypeChangeToColumn_changedTable between
+	TypeChangeToColumn[*] role xxx_TypeChangeToColumn_changedTable_src
+	Table[1] role changedTable
+end
+
+association xxx_TypeChangeToColumn_changedTypeColumn between
+	TypeChangeToColumn[*] role xxx_TypeChangeToColumn_changedTypeColumn_src
+	TableColumn[1] role changedTypeColumn
+end
+
+association xxx_DeleteColumn_changedTable between
+	DeleteColumn[*] role xxx_DeleteColumn_changedTable_src
+	Table[1] role changedTable
+end
+
+association xxx_DeleteColumn_deleteColumn between
+	DeleteColumn[*] role xxx_DeleteColumn_deleteColumn_src
+	TableColumn[1] role deleteColumn
+end
+
+composition xxx_Query_columnReferences between
+	Query[0..1] role xxx_Query_columnReferences_src
+	ColumnReference[1..*] role columnReferences
+end
+
+association xxx_ColumnReference_reference between
+	ColumnReference[*] role xxx_ColumnReference_reference_src
+	Column[1] role reference
+end
+

@@ -1,0 +1,157 @@
+model connections
+enum TAG_TYPES{
+default
+}
+
+class ConnectionDirectives
+attributes
+	model_ : String
+operations
+end
+
+abstract class ConnectionDirective
+attributes
+operations
+end
+
+class ConnectPointToPoint<ConnectionDirective
+attributes
+	srcPort : String
+	srcInst : String
+	dstInst : String
+	dstPort : String
+	srcRegex : String
+	dstRegex : String
+	createPort : Boolean
+	name : String
+operations
+end
+
+class ConnectPointToPointDefault<ConnectPointToPoint
+attributes
+operations
+end
+
+class ConnectPointToPointDefaultDevice<ConnectPointToPointDefault
+attributes
+operations
+end
+
+class ConnectionNetworkPin<ConnectionNetworkData
+attributes
+	pin : String
+operations
+end
+
+class ConnectionNetworkDirective<ConnectionDirective
+attributes
+	src : String
+	group : String
+operations
+end
+
+abstract class ConnectionNetworkData
+attributes
+operations
+end
+
+class ConnectionNetworkSubNet<ConnectionNetworkData
+attributes
+	instance : String
+	network : String
+operations
+end
+
+class ConnectionNetworkPinExpr<ConnectionNetworkData
+attributes
+	pin : String
+	hier : Boolean
+operations
+end
+
+class ConnectNetworkPinTag<ConnectionNetworkPinExpr
+attributes
+operations
+end
+
+abstract class TagClassAbstract<ConnectionDirective
+attributes
+operations
+	getName():String
+end
+
+class TagUser<TagClassAbstract
+attributes
+	name : String
+operations
+end
+
+abstract class TagItemAbstract
+attributes
+operations
+	getElement():String
+end
+
+class TagItemModule<TagItemAbstract
+attributes
+	module : String
+operations
+end
+
+class TagItemPin<TagItemAbstract
+attributes
+	pin : String
+operations
+end
+
+class TagClock<TagClassAbstract
+attributes
+operations
+end
+
+class Tag
+attributes
+	name : String
+operations
+end
+
+composition xxx_ConnectionDirectives_connections between
+	ConnectionDirectives[0..1] role xxx_ConnectionDirectives_connections_src
+	ConnectionDirective[*] role connections
+end
+
+association xxx_ConnectionDirective_parent between
+	ConnectionDirective[*] role xxx_ConnectionDirective_parent_src
+	ConnectionDirectives[0..1] role parent
+end
+
+composition xxx_ConnectionNetworkDirective_dsts between
+	ConnectionNetworkDirective[0..1] role xxx_ConnectionNetworkDirective_dsts_src
+	ConnectionNetworkData[*] role dsts
+end
+
+association xxx_ConnectionNetworkData_src between
+	ConnectionNetworkData[*] role xxx_ConnectionNetworkData_src_src
+	ConnectionNetworkDirective[0..1] role src
+end
+
+composition xxx_TagClassAbstract_tags between
+	TagClassAbstract[0..1] role xxx_TagClassAbstract_tags_src
+	Tag[*] role tags
+end
+
+association xxx_TagItemAbstract_tag between
+	TagItemAbstract[*] role xxx_TagItemAbstract_tag_src
+	Tag[0..1] role tag
+end
+
+composition xxx_Tag_items between
+	Tag[0..1] role xxx_Tag_items_src
+	TagItemAbstract[*] role items
+end
+
+association xxx_Tag_tagClass between
+	Tag[*] role xxx_Tag_tagClass_src
+	TagClassAbstract[0..1] role tagClass
+end
+

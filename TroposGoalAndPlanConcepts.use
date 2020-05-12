@@ -1,0 +1,198 @@
+model PrimitiveTypes
+class Actor
+attributes
+operations
+end
+
+class Decomposition
+attributes
+operations
+end
+
+class Contribution
+attributes
+	metric : String
+operations
+end
+
+class Goal
+attributes
+operations
+end
+
+class MeansEnd
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+class Plan
+attributes
+operations
+end
+
+class BooleanDecomposition<Decomposition
+attributes
+	type : String
+operations
+end
+
+class BooleanDecLink
+attributes
+operations
+end
+
+class AndDecLink<BooleanDecLink
+attributes
+operations
+end
+
+class OrDecLink<BooleanDecLink
+attributes
+operations
+end
+
+association xxx_Actor_decomposition between
+	Actor[0..1] role xxx_Actor_decomposition_src
+	Decomposition[*] role decomposition
+end
+
+association xxx_Actor_contribution between
+	Actor[0..1] role xxx_Actor_contribution_src
+	Contribution[*] role contribution
+end
+
+association xxx_Actor_meansEnd between
+	Actor[0..1] role xxx_Actor_meansEnd_src
+	MeansEnd[*] role meansEnd
+end
+
+association xxx_Decomposition_PointOfView between
+	Decomposition[*] role xxx_Decomposition_PointOfView_src
+	Actor[1] role PointOfView
+end
+
+association xxx_Contribution_contributer between
+	Contribution[*] role xxx_Contribution_contributer_src
+	Goal[1] role contributer
+end
+
+association xxx_Contribution_contributed between
+	Contribution[*] role xxx_Contribution_contributed_src
+	Goal[1] role contributed
+end
+
+association xxx_Contribution_PointOfView between
+	Contribution[*] role xxx_Contribution_PointOfView_src
+	Actor[1] role PointOfView
+end
+
+association xxx_Goal_contributionR between
+	Goal[0..1] role xxx_Goal_contributionR_src
+	Contribution[*] role contributionR
+end
+
+association xxx_Goal_contributionD between
+	Goal[0..1] role xxx_Goal_contributionD_src
+	Contribution[*] role contributionD
+end
+
+association xxx_Goal_meansEndS between
+	Goal[0..1] role xxx_Goal_meansEndS_src
+	MeansEnd[*] role meansEndS
+end
+
+association xxx_Goal_meansEndD between
+	Goal[0..1] role xxx_Goal_meansEndD_src
+	MeansEnd[*] role meansEndD
+end
+
+association xxx_Goal_booleanDecomposition between
+	Goal[*] role xxx_Goal_booleanDecomposition_src
+	BooleanDecomposition[0..1] role booleanDecomposition
+end
+
+association xxx_Goal_booleanDecLink between
+	Goal[0..1] role xxx_Goal_booleanDecLink_src
+	BooleanDecLink[*] role booleanDecLink
+end
+
+association xxx_MeansEnd_meansR between
+	MeansEnd[*] role xxx_MeansEnd_meansR_src
+	Resource[0..1] role meansR
+end
+
+association xxx_MeansEnd_means between
+	MeansEnd[*] role xxx_MeansEnd_means_src
+	Goal[0..1] role means
+end
+
+association xxx_MeansEnd_end_ between
+	MeansEnd[*] role xxx_MeansEnd_end__src
+	Goal[1] role end_
+end
+
+association xxx_MeansEnd_PointOfView between
+	MeansEnd[*] role xxx_MeansEnd_PointOfView_src
+	Actor[1] role PointOfView
+end
+
+association xxx_MeansEnd_meansP between
+	MeansEnd[*] role xxx_MeansEnd_meansP_src
+	Plan[0..1] role meansP
+end
+
+association xxx_Resource_meansEndR between
+	Resource[0..1] role xxx_Resource_meansEndR_src
+	MeansEnd[*] role meansEndR
+end
+
+association xxx_Plan_meansEndP between
+	Plan[0..1] role xxx_Plan_meansEndP_src
+	MeansEnd[*] role meansEndP
+end
+
+association xxx_Plan_booleanDecompositionP between
+	Plan[*] role xxx_Plan_booleanDecompositionP_src
+	BooleanDecomposition[0..1] role booleanDecompositionP
+end
+
+association xxx_Plan_booleanDecLinkP between
+	Plan[0..1] role xxx_Plan_booleanDecLinkP_src
+	BooleanDecLink[*] role booleanDecLinkP
+end
+
+association xxx_BooleanDecomposition_root between
+	BooleanDecomposition[*] role xxx_BooleanDecomposition_root_src
+	Goal[0..1] role root
+end
+
+association xxx_BooleanDecomposition_rootP between
+	BooleanDecomposition[*] role xxx_BooleanDecomposition_rootP_src
+	Plan[0..1] role rootP
+end
+
+composition xxx_BooleanDecomposition_booleanDecLinkD between
+	BooleanDecomposition[0..1] role xxx_BooleanDecomposition_booleanDecLinkD_src
+	BooleanDecLink[1..*] role booleanDecLinkD
+end
+
+association xxx_BooleanDecLink_booleanDecompositionB between
+	BooleanDecLink[*] role xxx_BooleanDecLink_booleanDecompositionB_src
+	BooleanDecomposition[1] role booleanDecompositionB
+end
+
+association xxx_BooleanDecLink_target between
+	BooleanDecLink[*] role xxx_BooleanDecLink_target_src
+	Goal[0..1] role target
+end
+
+association xxx_BooleanDecLink_targetP between
+	BooleanDecLink[*] role xxx_BooleanDecLink_targetP_src
+	Plan[0..1] role targetP
+end
+

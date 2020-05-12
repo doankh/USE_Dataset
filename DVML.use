@@ -1,0 +1,321 @@
+model DVML
+enum ConditionType{
+default
+}
+
+enum CompositeConditionsType{
+default
+}
+
+enum Layout{
+default
+}
+
+class DomainModel
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Class<ModelDomainElementType,NamedElement
+attributes
+operations
+end
+
+abstract class ModelDomainElementType
+attributes
+operations
+end
+
+class Enumeration<NamedElement,ModelDomainElementType
+attributes
+operations
+end
+
+class Property<NamedElement
+attributes
+	multiplicityLowerBound : Integer
+	multiplicityUpperBound : Integer
+operations
+end
+
+class Association<NamedElement
+attributes
+operations
+end
+
+class AssociationEnd<NamedElement,Property
+attributes
+	isNavigable : Boolean
+	IsComposite : Boolean
+operations
+end
+
+class Literal<NamedElement
+attributes
+	ConstantValue : String
+operations
+end
+
+class ViewModels
+attributes
+operations
+end
+
+abstract class View<NamedElement
+attributes
+	header : String
+	description : String
+	startView : Boolean
+operations
+end
+
+class ViewGroup<NamedElement
+attributes
+	welcomeViewGroup : Boolean
+	layout : Layout
+operations
+end
+
+class ClassIndexView<View,LinkingElement
+attributes
+operations
+end
+
+class ClassOperationView<View
+attributes
+operations
+end
+
+abstract class ViewElement
+attributes
+	lable : String
+	elementID : Integer
+operations
+end
+
+class ElementGroup
+attributes
+	header : String
+	layout : Layout
+operations
+end
+
+abstract class PropertyElements<ViewElement
+attributes
+operations
+end
+
+abstract class AssociationElements<ViewElement,LinkingElement
+attributes
+operations
+end
+
+abstract class TEXT<PropertyElements
+attributes
+	format : String
+operations
+end
+
+class DateTimePicker<PropertyElements
+attributes
+	format : String
+operations
+end
+
+class Selection<PropertyElements
+attributes
+operations
+end
+
+class longText<TEXT
+attributes
+operations
+end
+
+class ShortText<TEXT
+attributes
+operations
+end
+
+class List<AssociationElements
+attributes
+operations
+end
+
+class Table<AssociationElements
+attributes
+operations
+end
+
+class Column<PropertyElements
+attributes
+operations
+end
+
+abstract class ConditionalElement
+attributes
+	conditionID : String
+	type : ConditionType
+operations
+end
+
+class ComparisonCondition<ConditionalElement
+attributes
+	comparisonValue : String
+operations
+end
+
+class CompositeCondition<ConditionalElement
+attributes
+	compositionType : CompositeConditionsType
+operations
+end
+
+abstract class LinkingElement
+attributes
+operations
+end
+
+class Link
+attributes
+	label : String
+operations
+end
+
+class DataType<ModelDomainElementType,NamedElement
+attributes
+operations
+end
+
+class SelectionItem
+attributes
+	value : String
+operations
+end
+
+composition xxx_DomainModel_modelDomainElements between
+	DomainModel[0..1] role xxx_DomainModel_modelDomainElements_src
+	ModelDomainElementType[*] role modelDomainElements
+end
+
+composition xxx_Class_properties between
+	Class[0..1] role xxx_Class_properties_src
+	Property[*] role properties
+end
+
+association xxx_Class_id between
+	Class[*] role xxx_Class_id_src
+	Property[1] role id
+end
+
+composition xxx_Class_associations between
+	Class[0..1] role xxx_Class_associations_src
+	Association[*] role associations
+end
+
+association xxx_Class_superType between
+	Class[*] role xxx_Class_superType_src
+	Class[0..1] role superType
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	Literal[1..*] role literals
+end
+
+association xxx_Property_type between
+	Property[*] role xxx_Property_type_src
+	ModelDomainElementType[0..1] role type
+end
+
+composition xxx_Association_associationEnds between
+	Association[*] role xxx_Association_associationEnds_src
+	AssociationEnd[2] role associationEnds
+end
+
+composition xxx_ViewModels_viewGroups between
+	ViewModels[0..1] role xxx_ViewModels_viewGroups_src
+	ViewGroup[*] role viewGroups
+end
+
+association xxx_View_class_ between
+	View[*] role xxx_View_class__src
+	Class[1] role class_
+end
+
+composition xxx_ViewGroup_views between
+	ViewGroup[0..1] role xxx_ViewGroup_views_src
+	View[*] role views
+end
+
+composition xxx_ClassOperationView_elementGroups between
+	ClassOperationView[0..1] role xxx_ClassOperationView_elementGroups_src
+	ElementGroup[*] role elementGroups
+end
+
+composition xxx_ViewElement_conditionalElements between
+	ViewElement[0..1] role xxx_ViewElement_conditionalElements_src
+	ConditionalElement[*] role conditionalElements
+end
+
+composition xxx_ElementGroup_viewelements between
+	ElementGroup[0..1] role xxx_ElementGroup_viewelements_src
+	ViewElement[*] role viewelements
+end
+
+composition xxx_ElementGroup_conditionalElements between
+	ElementGroup[0..1] role xxx_ElementGroup_conditionalElements_src
+	ConditionalElement[*] role conditionalElements
+end
+
+association xxx_PropertyElements_propertyView between
+	PropertyElements[*] role xxx_PropertyElements_propertyView_src
+	Property[0..1] role propertyView
+end
+
+association xxx_AssociationElements_associationView between
+	AssociationElements[*] role xxx_AssociationElements_associationView_src
+	Association[0..1] role associationView
+end
+
+composition xxx_Selection_selectionItems between
+	Selection[0..1] role xxx_Selection_selectionItems_src
+	SelectionItem[*] role selectionItems
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[*] role columns
+end
+
+association xxx_ComparisonCondition_property between
+	ComparisonCondition[*] role xxx_ComparisonCondition_property_src
+	PropertyElements[0..1] role property
+end
+
+composition xxx_CompositeCondition_compositeConditions between
+	CompositeCondition[0..1] role xxx_CompositeCondition_compositeConditions_src
+	ConditionalElement[*] role compositeConditions
+end
+
+composition xxx_LinkingElement_links between
+	LinkingElement[0..1] role xxx_LinkingElement_links_src
+	Link[*] role links
+end
+
+association xxx_Link_linkToViewGroup between
+	Link[*] role xxx_Link_linkToViewGroup_src
+	ClassOperationView[0..1] role linkToViewGroup
+end
+
+association xxx_SelectionItem_selectableValue between
+	SelectionItem[*] role xxx_SelectionItem_selectableValue_src
+	Literal[0..1] role selectableValue
+end
+

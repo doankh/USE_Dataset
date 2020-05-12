@@ -1,0 +1,162 @@
+model istar
+enum ContributionType{
+default
+}
+
+class IStar
+attributes
+operations
+end
+
+class Actor<DependencyEndpoint
+attributes
+operations
+end
+
+abstract class Intention<DependencyEndpoint
+attributes
+	fullySatisfied : Boolean
+	partiallySatisfied : Boolean
+	unknown : Boolean
+	conflict : Boolean
+	partiallyDenied : Boolean
+	fullyDenied : Boolean
+	noLabel : Boolean
+operations
+end
+
+class Task<Intention
+attributes
+operations
+end
+
+class Resource<Intention
+attributes
+operations
+end
+
+class Goal<Intention
+attributes
+operations
+end
+
+class SoftGoal<Goal
+attributes
+operations
+end
+
+abstract class DependencyEndpoint
+attributes
+	name : String
+operations
+end
+
+abstract class IntentionLink
+attributes
+	name : String
+operations
+end
+
+class MeansEnd<IntentionLink
+attributes
+operations
+end
+
+class Decomposition<IntentionLink
+attributes
+operations
+end
+
+class Contribution<IntentionLink
+attributes
+	type : ContributionType
+operations
+end
+
+class DependerLink
+attributes
+	name : String
+operations
+end
+
+class DependeeLink
+attributes
+	name : String
+operations
+end
+
+composition xxx_IStar_actors between
+	IStar[0..1] role xxx_IStar_actors_src
+	Actor[*] role actors
+end
+
+composition xxx_IStar_dependums between
+	IStar[0..1] role xxx_IStar_dependums_src
+	Intention[*] role dependums
+end
+
+composition xxx_Actor_intentions between
+	Actor[0..1] role xxx_Actor_intentions_src
+	Intention[*] role intentions
+end
+
+composition xxx_Intention_linksAsSrc between
+	Intention[0..1] role xxx_Intention_linksAsSrc_src
+	IntentionLink[*] role linksAsSrc
+end
+
+association xxx_Intention_linksAsTgt between
+	Intention[0..1] role xxx_Intention_linksAsTgt_src
+	IntentionLink[*] role linksAsTgt
+end
+
+composition xxx_Intention_dependerLinks between
+	Intention[0..1] role xxx_Intention_dependerLinks_src
+	DependerLink[*] role dependerLinks
+end
+
+composition xxx_Intention_dependeeLinks between
+	Intention[0..1] role xxx_Intention_dependeeLinks_src
+	DependeeLink[*] role dependeeLinks
+end
+
+association xxx_DependencyEndpoint_dependenciesAsDepender between
+	DependencyEndpoint[0..1] role xxx_DependencyEndpoint_dependenciesAsDepender_src
+	DependerLink[*] role dependenciesAsDepender
+end
+
+association xxx_DependencyEndpoint_dependenciesAsDependee between
+	DependencyEndpoint[0..1] role xxx_DependencyEndpoint_dependenciesAsDependee_src
+	DependeeLink[*] role dependenciesAsDependee
+end
+
+association xxx_IntentionLink_src between
+	IntentionLink[*] role xxx_IntentionLink_src_src
+	Intention[1] role src
+end
+
+association xxx_IntentionLink_tgt between
+	IntentionLink[*] role xxx_IntentionLink_tgt_src
+	Intention[1] role tgt
+end
+
+association xxx_DependerLink_depender between
+	DependerLink[*] role xxx_DependerLink_depender_src
+	DependencyEndpoint[1] role depender
+end
+
+association xxx_DependerLink_dependum between
+	DependerLink[*] role xxx_DependerLink_dependum_src
+	Intention[1] role dependum
+end
+
+association xxx_DependeeLink_dependum between
+	DependeeLink[*] role xxx_DependeeLink_dependum_src
+	Intention[1] role dependum
+end
+
+association xxx_DependeeLink_dependee between
+	DependeeLink[*] role xxx_DependeeLink_dependee_src
+	DependencyEndpoint[1] role dependee
+end
+

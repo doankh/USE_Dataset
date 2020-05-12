@@ -1,0 +1,71 @@
+model PIF
+class Entity
+attributes
+operations
+end
+
+class Activity<Entity
+attributes
+operations
+end
+
+class Object<Entity
+attributes
+operations
+end
+
+class Timepoint<Entity
+attributes
+operations
+end
+
+class Relation<Entity
+attributes
+operations
+end
+
+class Decision<Activity
+attributes
+operations
+end
+
+class Agent<Object
+attributes
+operations
+end
+
+class Creates<Relation
+attributes
+operations
+end
+
+class Modifies<Relation
+attributes
+operations
+end
+
+class Before<Relation
+attributes
+operations
+end
+
+class Uses<Relation
+attributes
+operations
+end
+
+class Performs<Relation
+attributes
+operations
+end
+
+class ActivityStatus<Relation
+attributes
+operations
+end
+
+class Succesor<Relation
+attributes
+operations
+end
+

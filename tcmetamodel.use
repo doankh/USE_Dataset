@@ -1,0 +1,139 @@
+model tcmetamodel
+enum testType{
+default
+}
+
+enum dataType{
+default
+}
+
+enum verdictType{
+default
+}
+
+class TestItem<Element
+attributes
+	owner : String
+operations
+end
+
+class Call<TestItem
+attributes
+	type : String
+operations
+end
+
+class Service<Call
+attributes
+	visibility : String
+operations
+end
+
+class Trigger<Call
+attributes
+operations
+end
+
+class Parameter<Element
+attributes
+	type : String
+	lowerBound : String
+	upperBound : String
+	derivationFormula : String
+	operation : String
+	isIdentifier : String
+operations
+end
+
+class Input<Parameter
+attributes
+operations
+end
+
+class Output<Parameter
+attributes
+operations
+end
+
+class Data
+attributes
+	value : String
+operations
+end
+
+class Assertion<TestItem
+attributes
+	constraint : String
+operations
+end
+
+class Link<Call
+attributes
+operations
+end
+
+class TestModel<Element
+attributes
+	targetCode : String
+operations
+end
+
+class Precedence<Element
+attributes
+operations
+end
+
+class Element
+attributes
+	name : String
+	location : String
+	trule : String
+operations
+end
+
+class TestCase<Element
+attributes
+	eventReference : String
+operations
+end
+
+composition xxx_TestItem_expectedValue between
+	TestItem[0..1] role xxx_TestItem_expectedValue_src
+	Data[1..*] role expectedValue
+end
+
+composition xxx_Call_parameters between
+	Call[0..1] role xxx_Call_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Parameter_data between
+	Parameter[0..1] role xxx_Parameter_data_src
+	Data[*] role data
+end
+
+composition xxx_TestModel_sequences between
+	TestModel[0..1] role xxx_TestModel_sequences_src
+	Precedence[*] role sequences
+end
+
+composition xxx_TestModel_testCases between
+	TestModel[0..1] role xxx_TestModel_testCases_src
+	TestCase[1..*] role testCases
+end
+
+association xxx_Precedence_source between
+	Precedence[0..1] role xxx_Precedence_source_src
+	TestCase[*] role source
+end
+
+association xxx_Precedence_target between
+	Precedence[0..1] role xxx_Precedence_target_src
+	TestCase[*] role target
+end
+
+composition xxx_TestCase_testItems between
+	TestCase[0..1] role xxx_TestCase_testItems_src
+	TestItem[1..*] role testItems
+end
+

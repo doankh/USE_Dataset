@@ -1,0 +1,311 @@
+model PrimitiveTypes
+enum AttributeUseType{
+	optional,
+	prohibited,
+	required
+}
+
+abstract class AnnotedElement
+attributes
+operations
+end
+
+class Annotation
+attributes
+operations
+end
+
+class Documentation
+attributes
+	text : String
+operations
+end
+
+class ApplicationInfo
+attributes
+	text : String
+operations
+end
+
+abstract class NamedElement<AnnotedElement
+attributes
+	name : String
+operations
+end
+
+class XSchema<AnnotedElement
+attributes
+	namespace : String
+operations
+end
+
+abstract class XSchemaContentElement<NamedElement
+attributes
+operations
+end
+
+abstract class Parameters<XSchemaContentElement
+attributes
+	fixed : String
+	default : String
+operations
+end
+
+class Element<AtomicContent
+attributes
+operations
+end
+
+abstract class Occurable
+attributes
+	minOccurs : String
+	maxOccurs : String
+operations
+end
+
+abstract class AbstractContent<Occurable
+attributes
+operations
+end
+
+abstract class Container<AbstractContent
+attributes
+operations
+end
+
+abstract class AtomicContent<AbstractContent
+attributes
+operations
+end
+
+class ElementRef<AtomicContent
+attributes
+operations
+end
+
+class GroupRef<AtomicContent
+attributes
+operations
+end
+
+class All<Container
+attributes
+operations
+end
+
+class Group<Container
+attributes
+operations
+end
+
+class Choice<Container
+attributes
+operations
+end
+
+class Sequence_<Container
+attributes
+operations
+end
+
+abstract class AbstractAttributeGroupContent<Occurable
+attributes
+operations
+end
+
+class AttributeGroup<XSchemaContentElement
+attributes
+operations
+end
+
+class AttributeGroupRef<AtomicAttributeGroupContent
+attributes
+operations
+end
+
+abstract class AtomicAttributeGroupContent<AbstractAttributeGroupContent
+attributes
+operations
+end
+
+class Attribute<AtomicAttributeGroupContent
+attributes
+	use : AttributeUseType
+operations
+end
+
+class AttributeRef<AtomicAttributeGroupContent
+attributes
+operations
+end
+
+abstract class AbstractType<XSchemaContentElement
+attributes
+operations
+end
+
+class SimpleType<AbstractType
+attributes
+operations
+end
+
+class ComplexType<AbstractType
+attributes
+operations
+end
+
+class ComplexTypeSimpleContent<ComplexType
+attributes
+operations
+end
+
+class ComplexTypeComplexContent<ComplexType
+attributes
+operations
+end
+
+composition xxx_AnnotedElement_annotations between
+	AnnotedElement[0..1] role xxx_AnnotedElement_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_Annotation_documentations between
+	Annotation[0..1] role xxx_Annotation_documentations_src
+	Documentation[*] role documentations
+end
+
+composition xxx_Annotation_applicationInfos between
+	Annotation[0..1] role xxx_Annotation_applicationInfos_src
+	ApplicationInfo[*] role applicationInfos
+end
+
+association xxx_Annotation_annotedElement between
+	Annotation[*] role xxx_Annotation_annotedElement_src
+	AnnotedElement[1] role annotedElement
+end
+
+composition xxx_XSchema_contents between
+	XSchema[0..1] role xxx_XSchema_contents_src
+	XSchemaContentElement[*] role contents
+end
+
+association xxx_XSchemaContentElement_schema between
+	XSchemaContentElement[*] role xxx_XSchemaContentElement_schema_src
+	XSchema[0..1] role schema
+end
+
+association xxx_Parameters_typeRef between
+	Parameters[*] role xxx_Parameters_typeRef_src
+	AbstractType[0..1] role typeRef
+end
+
+composition xxx_Parameters_typeContain between
+	Parameters[*] role xxx_Parameters_typeContain_src
+	AbstractType[0..1] role typeContain
+end
+
+association xxx_Element_references between
+	Element[0..1] role xxx_Element_references_src
+	ElementRef[*] role references
+end
+
+association xxx_AbstractContent_container between
+	AbstractContent[*] role xxx_AbstractContent_container_src
+	Container[1] role container
+end
+
+association xxx_AbstractContent_complexType between
+	AbstractContent[*] role xxx_AbstractContent_complexType_src
+	ComplexType[1] role complexType
+end
+
+composition xxx_Container_contents between
+	Container[0..1] role xxx_Container_contents_src
+	AbstractContent[*] role contents
+end
+
+association xxx_ElementRef_referencedElement between
+	ElementRef[*] role xxx_ElementRef_referencedElement_src
+	Element[1] role referencedElement
+end
+
+association xxx_GroupRef_referencedGroup between
+	GroupRef[*] role xxx_GroupRef_referencedGroup_src
+	Group[1] role referencedGroup
+end
+
+association xxx_Group_references between
+	Group[0..1] role xxx_Group_references_src
+	GroupRef[*] role references
+end
+
+association xxx_AbstractAttributeGroupContent_container between
+	AbstractAttributeGroupContent[*] role xxx_AbstractAttributeGroupContent_container_src
+	AttributeGroup[1] role container
+end
+
+association xxx_AbstractAttributeGroupContent_complexType between
+	AbstractAttributeGroupContent[*] role xxx_AbstractAttributeGroupContent_complexType_src
+	ComplexType[1] role complexType
+end
+
+composition xxx_AttributeGroup_contents between
+	AttributeGroup[0..1] role xxx_AttributeGroup_contents_src
+	AbstractAttributeGroupContent[*] role contents
+end
+
+association xxx_AttributeGroup_references between
+	AttributeGroup[0..1] role xxx_AttributeGroup_references_src
+	AttributeGroupRef[*] role references
+end
+
+association xxx_AttributeGroupRef_referencedAttributeGroup between
+	AttributeGroupRef[*] role xxx_AttributeGroupRef_referencedAttributeGroup_src
+	AttributeGroup[1] role referencedAttributeGroup
+end
+
+association xxx_Attribute_references between
+	Attribute[0..1] role xxx_Attribute_references_src
+	AttributeRef[*] role references
+end
+
+association xxx_AttributeRef_referencedAttribute between
+	AttributeRef[*] role xxx_AttributeRef_referencedAttribute_src
+	Attribute[1] role referencedAttribute
+end
+
+association xxx_AbstractType_container between
+	AbstractType[*] role xxx_AbstractType_container_src
+	Parameters[1] role container
+end
+
+association xxx_SimpleType_extensions between
+	SimpleType[0..1] role xxx_SimpleType_extensions_src
+	ComplexTypeSimpleContent[*] role extensions
+end
+
+association xxx_ComplexType_extensions between
+	ComplexType[0..1] role xxx_ComplexType_extensions_src
+	ComplexTypeComplexContent[*] role extensions
+end
+
+composition xxx_ComplexType_content between
+	ComplexType[*] role xxx_ComplexType_content_src
+	AbstractContent[0..1] role content
+end
+
+composition xxx_ComplexType_attributes_ between
+	ComplexType[0..1] role xxx_ComplexType_attributes__src
+	AbstractAttributeGroupContent[*] role attributes_
+end
+
+association xxx_ComplexTypeSimpleContent_base between
+	ComplexTypeSimpleContent[*] role xxx_ComplexTypeSimpleContent_base_src
+	SimpleType[1] role base
+end
+
+association xxx_ComplexTypeComplexContent_base between
+	ComplexTypeComplexContent[*] role xxx_ComplexTypeComplexContent_base_src
+	ComplexType[1] role base
+end
+

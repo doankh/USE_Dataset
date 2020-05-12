@@ -1,0 +1,70 @@
+model petclinic
+enum Specialty{
+default
+}
+
+enum PetType{
+default
+}
+
+abstract class AbstractPerson
+attributes
+	firstName : String
+	lastName : String
+	address : String
+	city : String
+	telephone : String
+	homepage : String
+	email : String
+	birthday : String
+operations
+end
+
+class Owner<AbstractPerson
+attributes
+operations
+end
+
+class Vet<AbstractPerson
+attributes
+	employedSince : String
+	specialty : Specialty
+operations
+end
+
+class Pet
+attributes
+	sendReminders : Boolean
+	name : String
+	weight : String
+	type : PetType
+operations
+end
+
+class Visit
+attributes
+	description : String
+	visitDate : String
+operations
+end
+
+composition xxx_Owner_pets between
+	Owner[0..1] role xxx_Owner_pets_src
+	Pet[*] role pets
+end
+
+association xxx_Pet_owner between
+	Pet[*] role xxx_Pet_owner_src
+	Owner[1] role owner
+end
+
+association xxx_Visit_pet between
+	Visit[*] role xxx_Visit_pet_src
+	Pet[1] role pet
+end
+
+association xxx_Visit_vet between
+	Visit[*] role xxx_Visit_vet_src
+	Vet[1] role vet
+end
+

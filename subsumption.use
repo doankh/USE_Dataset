@@ -1,0 +1,98 @@
+model subsumption
+class System
+attributes
+	name : String
+operations
+end
+
+class Module
+attributes
+	name : String
+	period : Real
+operations
+end
+
+class Output
+attributes
+	name : String
+operations
+end
+
+class Input
+attributes
+	name : String
+operations
+end
+
+class Suppressor<Modifier
+attributes
+	time : Real
+operations
+end
+
+class Inhibitor<Modifier
+attributes
+	time : Real
+operations
+end
+
+abstract class Modifier
+attributes
+operations
+end
+
+composition xxx_System_modules between
+	System[0..1] role xxx_System_modules_src
+	Module[*] role modules
+end
+
+composition xxx_Module_inputs between
+	Module[0..1] role xxx_Module_inputs_src
+	Input[*] role inputs
+end
+
+composition xxx_Module_outputs between
+	Module[0..1] role xxx_Module_outputs_src
+	Output[*] role outputs
+end
+
+association xxx_Output_sink between
+	Output[0..1] role xxx_Output_sink_src
+	Input[*] role sink
+end
+
+association xxx_Output_activates between
+	Output[0..1] role xxx_Output_activates_src
+	Modifier[*] role activates
+end
+
+composition xxx_Output_inhibitedBy between
+	Output[0..1] role xxx_Output_inhibitedBy_src
+	Inhibitor[*] role inhibitedBy
+end
+
+association xxx_Input_source between
+	Input[*] role xxx_Input_source_src
+	Output[0..1] role source
+end
+
+composition xxx_Input_suppressedBy between
+	Input[0..1] role xxx_Input_suppressedBy_src
+	Suppressor[*] role suppressedBy
+end
+
+association xxx_Suppressor_suppress between
+	Suppressor[*] role xxx_Suppressor_suppress_src
+	Input[1] role suppress
+end
+
+association xxx_Inhibitor_inhibits between
+	Inhibitor[*] role xxx_Inhibitor_inhibits_src
+	Output[1] role inhibits
+end
+
+association xxx_Modifier_controlledBy between
+	Modifier[*] role xxx_Modifier_controlledBy_src
+	Output[1] role controlledBy
+end
+

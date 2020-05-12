@@ -1,0 +1,73 @@
+model Domain
+class Inheritance
+attributes
+	depth : Integer
+	indexes : Integer
+operations
+end
+
+class Type<Inheritance
+attributes
+	name : String
+operations
+end
+
+class Fragment
+attributes
+operations
+end
+
+class Operation
+attributes
+	name : String
+	index : Integer
+operations
+end
+
+class Property
+attributes
+	name : String
+	index : Integer
+operations
+end
+
+class Implementation
+attributes
+operations
+end
+
+association xxx_Inheritance_fragments between
+	Inheritance[0..1] role xxx_Inheritance_fragments_src
+	Fragment[*] role fragments
+end
+
+association xxx_Fragment_baseInheritance between
+	Fragment[*] role xxx_Fragment_baseInheritance_src
+	Inheritance[1] role baseInheritance
+end
+
+association xxx_Fragment_derivedInheritance between
+	Fragment[*] role xxx_Fragment_derivedInheritance_src
+	Inheritance[1] role derivedInheritance
+end
+
+association xxx_Fragment_operations_ between
+	Fragment[0..1] role xxx_Fragment_operations__src
+	Operation[*] role operations_
+end
+
+association xxx_Fragment_properties between
+	Fragment[0..1] role xxx_Fragment_properties_src
+	Property[*] role properties
+end
+
+association xxx_Operation_implementation between
+	Operation[*] role xxx_Operation_implementation_src
+	Implementation[1] role implementation
+end
+
+association xxx_Property_implementation between
+	Property[*] role xxx_Property_implementation_src
+	Implementation[1] role implementation
+end
+

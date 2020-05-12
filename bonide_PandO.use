@@ -1,0 +1,326 @@
+model BONModel
+enum RelationshipType{
+default
+}
+
+class Model
+attributes
+operations
+	covariant(featureOne : Feature,featureTwo : Feature):String
+end
+
+abstract class Relationship
+attributes
+operations
+end
+
+abstract class Abstraction
+attributes
+operations
+end
+
+abstract class StaticRelationship<Relationship
+attributes
+operations
+end
+
+abstract class StaticAbstraction<Abstraction
+attributes
+	name : String
+operations
+end
+
+class Inheritance<StaticRelationship
+attributes
+operations
+end
+
+abstract class ClientSupplier<StaticRelationship
+attributes
+	label : String
+operations
+end
+
+class Aggregation<ClientSupplier
+attributes
+operations
+end
+
+class Association<ClientSupplier
+attributes
+operations
+end
+
+class Message<Relationship
+attributes
+operations
+end
+
+class Cluster<StaticAbstraction
+attributes
+operations
+end
+
+class BONClass<StaticAbstraction
+attributes
+	isDeferred : Boolean
+	isEffective : Boolean
+	isPersistent : Boolean
+	isExternal : Boolean
+	isRoot : Boolean
+	allNames : String
+operations
+end
+
+abstract class Call
+attributes
+operations
+	isValid(aClass : BONClass):String
+end
+
+abstract class Feature
+attributes
+	isDeferred : Boolean
+	isEffective : Boolean
+	isRedefined : Boolean
+	name : String
+	comment : String
+	preConditionString : String
+	postConditionString : String
+operations
+	rename(newName : String)
+end
+
+class Renaming
+attributes
+operations
+end
+
+class DynamicAbstraction<Abstraction
+attributes
+operations
+end
+
+class Object<DynamicAbstraction
+attributes
+operations
+end
+
+class ObjectCluster<DynamicAbstraction
+attributes
+operations
+end
+
+class Command<Feature
+attributes
+operations
+end
+
+class Query<Feature
+attributes
+	noContract : Boolean
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class DirectCall<Call
+attributes
+operations
+end
+
+class ChainedCall<Call
+attributes
+operations
+end
+
+class Expression
+attributes
+	contents : String
+operations
+end
+
+class BooleanExpression<Expression
+attributes
+operations
+end
+
+class Assertion<BooleanExpression
+attributes
+operations
+end
+
+class SingleStateAssertion<Assertion
+attributes
+operations
+end
+
+class DoubleStateAssertion<Assertion
+attributes
+operations
+end
+
+class Entity
+attributes
+operations
+end
+
+association xxx_Model_closure between
+	Model[0..1] role xxx_Model_closure_src
+	Inheritance[*] role closure
+end
+
+composition xxx_Model_abstractions between
+	Model[0..1] role xxx_Model_abstractions_src
+	Abstraction[*] role abstractions
+end
+
+composition xxx_Model_relationships between
+	Model[0..1] role xxx_Model_relationships_src
+	Relationship[*] role relationships
+end
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	Abstraction[0..1] role source
+end
+
+association xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	Abstraction[0..1] role target
+end
+
+association xxx_Abstraction_relationships between
+	Abstraction[0..1] role xxx_Abstraction_relationships_src
+	Relationship[*] role relationships
+end
+
+association xxx_Abstraction_contains between
+	Abstraction[0..1] role xxx_Abstraction_contains_src
+	Abstraction[*] role contains
+end
+
+association xxx_Cluster_contents between
+	Cluster[0..1] role xxx_Cluster_contents_src
+	StaticAbstraction[*] role contents
+end
+
+association xxx_BONClass_callsInInvariants between
+	BONClass[0..1] role xxx_BONClass_callsInInvariants_src
+	Call[*] role callsInInvariants
+end
+
+association xxx_BONClass_clientFeatures between
+	BONClass[0..1] role xxx_BONClass_clientFeatures_src
+	Feature[*] role clientFeatures
+end
+
+association xxx_BONClass_renamings between
+	BONClass[0..1] role xxx_BONClass_renamings_src
+	Renaming[*] role renamings
+end
+
+association xxx_BONClass_renameClassParents between
+	BONClass[0..1] role xxx_BONClass_renameClassParents_src
+	BONClass[*] role renameClassParents
+end
+
+association xxx_BONClass_redefined between
+	BONClass[0..1] role xxx_BONClass_redefined_src
+	Feature[*] role redefined
+end
+
+association xxx_BONClass_invariant between
+	BONClass[*] role xxx_BONClass_invariant_src
+	DoubleStateAssertion[0..1] role invariant
+end
+
+composition xxx_BONClass_features between
+	BONClass[0..1] role xxx_BONClass_features_src
+	Feature[*] role features
+end
+
+association xxx_Call_arguments between
+	Call[0..1] role xxx_Call_arguments_src
+	Parameter[*] role arguments
+end
+
+association xxx_Call_feature between
+	Call[*] role xxx_Call_feature_src
+	Feature[0..1] role feature
+end
+
+association xxx_Call_entity between
+	Call[*] role xxx_Call_entity_src
+	Entity[0..1] role entity
+end
+
+association xxx_Feature_accessors between
+	Feature[0..1] role xxx_Feature_accessors_src
+	BONClass[*] role accessors
+end
+
+association xxx_Feature_callsInPrecondition between
+	Feature[0..1] role xxx_Feature_callsInPrecondition_src
+	Call[*] role callsInPrecondition
+end
+
+association xxx_Feature_callsInPostcondition between
+	Feature[0..1] role xxx_Feature_callsInPostcondition_src
+	Call[*] role callsInPostcondition
+end
+
+association xxx_Feature_frame between
+	Feature[0..1] role xxx_Feature_frame_src
+	Query[*] role frame
+end
+
+association xxx_Feature_postCondition between
+	Feature[*] role xxx_Feature_postCondition_src
+	DoubleStateAssertion[0..1] role postCondition
+end
+
+association xxx_Feature_preCondition between
+	Feature[*] role xxx_Feature_preCondition_src
+	SingleStateAssertion[0..1] role preCondition
+end
+
+composition xxx_Feature_parameters between
+	Feature[0..1] role xxx_Feature_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Object_class_ between
+	Object[*] role xxx_Object_class__src
+	BONClass[0..1] role class_
+end
+
+association xxx_ObjectCluster_contents between
+	ObjectCluster[0..1] role xxx_ObjectCluster_contents_src
+	DynamicAbstraction[*] role contents
+end
+
+association xxx_Query_result between
+	Query[*] role xxx_Query_result_src
+	BONClass[0..1] role result
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	BONClass[0..1] role type
+end
+
+association xxx_ChainedCall_chain between
+	ChainedCall[*] role xxx_ChainedCall_chain_src
+	Call[0..1] role chain
+end
+
+association xxx_Expression_resultType between
+	Expression[*] role xxx_Expression_resultType_src
+	BONClass[0..1] role resultType
+end
+

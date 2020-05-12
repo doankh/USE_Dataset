@@ -1,0 +1,165 @@
+model site
+enum JavaScriptMode{
+default
+}
+
+class Section
+attributes
+	id : String
+	name : String
+operations
+end
+
+class SiteCatalog<SectionCollection
+attributes
+operations
+end
+
+class SectionCollection
+attributes
+operations
+end
+
+abstract class Page
+attributes
+	name : String
+	mountPoint : String
+operations
+	getClassSimpleName():String
+end
+
+class GenericPage<Page
+attributes
+operations
+end
+
+class RawEntityTablePage<Page,EntityPage
+attributes
+operations
+end
+
+class EntityTablePage<Page,EntityPage
+attributes
+operations
+end
+
+class EntityEditPage<Page,EntityPage
+attributes
+operations
+end
+
+class RawEntityEditPage<Page,EntityPage
+attributes
+operations
+end
+
+class RawEntityNewPage<Page,EntityPage
+attributes
+operations
+end
+
+class EntityNewPage<Page,EntityPage
+attributes
+operations
+end
+
+class ContentPage<Page
+attributes
+operations
+end
+
+class DashboardPage<Page
+attributes
+operations
+end
+
+class PageParam
+attributes
+	name : String
+operations
+end
+
+class LoginPage<Page
+attributes
+operations
+end
+
+class RegisterPage<Page
+attributes
+operations
+end
+
+class ResetPasswordPage<Page
+attributes
+operations
+end
+
+abstract class EntityPage
+attributes
+	entityClass : String
+operations
+end
+
+class PermalinkCatalog
+attributes
+operations
+end
+
+class Permalink
+attributes
+	namespace : String
+	template : String
+operations
+end
+
+class PermalinkManager
+attributes
+operations
+	relative(namespace : String,slugPath : String):String
+	absolute(namespace : String,slugPath : String):String
+	unsecureAbsolute(namespace : String,slugPath : String):String
+	secureAbsolute(namespace : String,slugPath : String):String
+end
+
+class RequireManager
+attributes
+	javaScriptMode : JavaScriptMode
+	cacheBust : String
+operations
+end
+
+composition xxx_Section_pages between
+	Section[0..1] role xxx_Section_pages_src
+	Page[*] role pages
+end
+
+composition xxx_SectionCollection_sections between
+	SectionCollection[0..1] role xxx_SectionCollection_sections_src
+	Section[*] role sections
+end
+
+composition xxx_Page_params between
+	Page[0..1] role xxx_Page_params_src
+	PageParam[*] role params
+end
+
+association xxx_Page_section between
+	Page[*] role xxx_Page_section_src
+	Section[0..1] role section
+end
+
+association xxx_LoginPage_registerPage between
+	LoginPage[*] role xxx_LoginPage_registerPage_src
+	RegisterPage[0..1] role registerPage
+end
+
+association xxx_LoginPage_resetPasswordPage between
+	LoginPage[*] role xxx_LoginPage_resetPasswordPage_src
+	ResetPasswordPage[0..1] role resetPasswordPage
+end
+
+composition xxx_PermalinkCatalog_permalinks between
+	PermalinkCatalog[0..1] role xxx_PermalinkCatalog_permalinks_src
+	Permalink[*] role permalinks
+end
+

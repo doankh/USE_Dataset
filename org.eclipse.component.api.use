@@ -1,0 +1,102 @@
+model api
+enum Visibility{
+default
+}
+
+class ApiTypes
+attributes
+operations
+end
+
+class ClassApi
+attributes
+	implement : Boolean
+	instantiate : Boolean
+	name : String
+	reference : Boolean
+	subclass : Boolean
+operations
+end
+
+class ComponentApiType
+attributes
+	name : String
+	version : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class FieldApi
+attributes
+	final : Boolean
+	name : String
+	static : Boolean
+	transient : Boolean
+	type : String
+	visibility : Visibility
+	volatile : Boolean
+operations
+end
+
+class MethodApi
+attributes
+	abstract_ : Boolean
+	exceptionType : String
+	final : Boolean
+	inputType : String
+	name : String
+	native : Boolean
+	returnType : String
+	static : Boolean
+	strict : Boolean
+	synchronized : Boolean
+	visibility : Visibility
+operations
+end
+
+class Package
+attributes
+	name : String
+operations
+end
+
+composition xxx_ApiTypes_package between
+	ApiTypes[0..1] role xxx_ApiTypes_package_src
+	Package[1..*] role package
+end
+
+composition xxx_ClassApi_methodApi between
+	ClassApi[0..1] role xxx_ClassApi_methodApi_src
+	MethodApi[1..*] role methodApi
+end
+
+composition xxx_ClassApi_fieldApi between
+	ClassApi[0..1] role xxx_ClassApi_fieldApi_src
+	FieldApi[1..*] role fieldApi
+end
+
+composition xxx_ComponentApiType_internalApis between
+	ComponentApiType[*] role xxx_ComponentApiType_internalApis_src
+	ApiTypes[1] role internalApis
+end
+
+composition xxx_ComponentApiType_externalApis between
+	ComponentApiType[*] role xxx_ComponentApiType_externalApis_src
+	ApiTypes[1] role externalApis
+end
+
+composition xxx_DocumentRoot_componentApi between
+	DocumentRoot[*] role xxx_DocumentRoot_componentApi_src
+	ComponentApiType[*] role componentApi
+end
+
+composition xxx_Package_classApi between
+	Package[0..1] role xxx_Package_classApi_src
+	ClassApi[1..*] role classApi
+end
+

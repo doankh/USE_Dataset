@@ -1,0 +1,511 @@
+model MG
+class Model
+attributes
+	name : String
+	type : String
+	uri : String
+operations
+end
+
+class People
+attributes
+	name : String
+	email : String
+operations
+end
+
+class Revision
+attributes
+	commit_id : Integer
+	rev : String
+	message : String
+	author_date : String
+	commit_date : String
+	composed_rev : Integer
+	file_count : Integer
+	is_bug_fix : Integer
+operations
+end
+
+class Action
+attributes
+	type : String
+	current_file_path : String
+operations
+end
+
+class Branch
+attributes
+	name : String
+operations
+end
+
+class File
+attributes
+	file_name : String
+	file_type : String
+operations
+end
+
+class FileCopy
+attributes
+	new_file_name : String
+operations
+end
+
+class FileLink
+attributes
+operations
+end
+
+class FileType
+attributes
+	type : String
+operations
+end
+
+class Tag
+attributes
+	name : String
+operations
+end
+
+class Patch
+attributes
+	patch : String
+operations
+end
+
+class PatchLines
+attributes
+	added : Integer
+	removed : Integer
+operations
+end
+
+class LineBlames
+attributes
+	end_ : Integer
+	start : Integer
+operations
+end
+
+class Hunk
+attributes
+	bug_introducing : Integer
+	new_end_line : Integer
+	new_start_line : Integer
+	old_end_line : Integer
+	old_start_line : Integer
+	difference : Integer
+	old_start_line_normalized : Integer
+	old_end_line_normalized : Integer
+	new_start_line_normalized : Integer
+	new_end_line_normalized : Integer
+operations
+end
+
+class HunkBlames
+attributes
+operations
+end
+
+class Content
+attributes
+	content : String
+	loc : Integer
+	size : Integer
+operations
+end
+
+class Blame
+attributes
+	lineCount : Integer
+operations
+end
+
+composition xxx_Model_people between
+	Model[0..1] role xxx_Model_people_src
+	People[*] role people
+end
+
+composition xxx_Model_revisions between
+	Model[0..1] role xxx_Model_revisions_src
+	Revision[*] role revisions
+end
+
+composition xxx_Model_actions between
+	Model[0..1] role xxx_Model_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Model_files between
+	Model[0..1] role xxx_Model_files_src
+	File[*] role files
+end
+
+composition xxx_Model_branches between
+	Model[0..1] role xxx_Model_branches_src
+	Branch[*] role branches
+end
+
+composition xxx_Model_fileTypes between
+	Model[0..1] role xxx_Model_fileTypes_src
+	FileType[*] role fileTypes
+end
+
+composition xxx_Model_fileLinks between
+	Model[0..1] role xxx_Model_fileLinks_src
+	FileLink[*] role fileLinks
+end
+
+composition xxx_Model_fileCopies between
+	Model[0..1] role xxx_Model_fileCopies_src
+	FileCopy[*] role fileCopies
+end
+
+composition xxx_Model_tags between
+	Model[0..1] role xxx_Model_tags_src
+	Tag[*] role tags
+end
+
+association xxx_People_revisionsCommitted between
+	People[0..1] role xxx_People_revisionsCommitted_src
+	Revision[*] role revisionsCommitted
+end
+
+association xxx_People_revisionsAuthored between
+	People[0..1] role xxx_People_revisionsAuthored_src
+	Revision[*] role revisionsAuthored
+end
+
+association xxx_People_blames between
+	People[0..1] role xxx_People_blames_src
+	Blame[*] role blames
+end
+
+association xxx_People_repository between
+	People[*] role xxx_People_repository_src
+	Model[1] role repository
+end
+
+association xxx_Revision_author between
+	Revision[*] role xxx_Revision_author_src
+	People[0..1] role author
+end
+
+association xxx_Revision_committer between
+	Revision[*] role xxx_Revision_committer_src
+	People[0..1] role committer
+end
+
+association xxx_Revision_actions between
+	Revision[0..1] role xxx_Revision_actions_src
+	Action[*] role actions
+end
+
+association xxx_Revision_fileLinks between
+	Revision[0..1] role xxx_Revision_fileLinks_src
+	FileLink[*] role fileLinks
+end
+
+association xxx_Revision_tags between
+	Revision[0..1] role xxx_Revision_tags_src
+	Tag[*] role tags
+end
+
+association xxx_Revision_patches between
+	Revision[0..1] role xxx_Revision_patches_src
+	Patch[*] role patches
+end
+
+association xxx_Revision_patchLines between
+	Revision[0..1] role xxx_Revision_patchLines_src
+	PatchLines[*] role patchLines
+end
+
+association xxx_Revision_lineBlames between
+	Revision[0..1] role xxx_Revision_lineBlames_src
+	LineBlames[*] role lineBlames
+end
+
+association xxx_Revision_linesToBeBlamed between
+	Revision[0..1] role xxx_Revision_linesToBeBlamed_src
+	LineBlames[*] role linesToBeBlamed
+end
+
+association xxx_Revision_hunks between
+	Revision[0..1] role xxx_Revision_hunks_src
+	Hunk[*] role hunks
+end
+
+association xxx_Revision_hunkBlames between
+	Revision[0..1] role xxx_Revision_hunkBlames_src
+	HunkBlames[*] role hunkBlames
+end
+
+association xxx_Revision_content between
+	Revision[0..1] role xxx_Revision_content_src
+	Content[*] role content
+end
+
+association xxx_Revision_blames between
+	Revision[0..1] role xxx_Revision_blames_src
+	Blame[*] role blames
+end
+
+association xxx_Revision_repository between
+	Revision[*] role xxx_Revision_repository_src
+	Model[1] role repository
+end
+
+association xxx_Action_file between
+	Action[*] role xxx_Action_file_src
+	File[1] role file
+end
+
+association xxx_Action_revision between
+	Action[*] role xxx_Action_revision_src
+	Revision[1] role revision
+end
+
+association xxx_Action_branch between
+	Action[*] role xxx_Action_branch_src
+	Branch[1] role branch
+end
+
+association xxx_Action_repository between
+	Action[*] role xxx_Action_repository_src
+	Model[1] role repository
+end
+
+association xxx_Action_copy between
+	Action[*] role xxx_Action_copy_src
+	FileCopy[0..1] role copy
+end
+
+association xxx_Branch_actions between
+	Branch[0..1] role xxx_Branch_actions_src
+	Action[*] role actions
+end
+
+association xxx_Branch_repository between
+	Branch[*] role xxx_Branch_repository_src
+	Model[1] role repository
+end
+
+association xxx_File_type between
+	File[*] role xxx_File_type_src
+	FileType[0..1] role type
+end
+
+association xxx_File_actions between
+	File[0..1] role xxx_File_actions_src
+	Action[*] role actions
+end
+
+association xxx_File_childrenLinks between
+	File[0..1] role xxx_File_childrenLinks_src
+	FileLink[*] role childrenLinks
+end
+
+association xxx_File_parentLinks between
+	File[0..1] role xxx_File_parentLinks_src
+	FileLink[*] role parentLinks
+end
+
+association xxx_File_copiesTo between
+	File[0..1] role xxx_File_copiesTo_src
+	FileCopy[*] role copiesTo
+end
+
+association xxx_File_copiesFrom between
+	File[0..1] role xxx_File_copiesFrom_src
+	FileCopy[*] role copiesFrom
+end
+
+association xxx_File_patches between
+	File[0..1] role xxx_File_patches_src
+	Patch[*] role patches
+end
+
+association xxx_File_patcheLines between
+	File[0..1] role xxx_File_patcheLines_src
+	PatchLines[*] role patcheLines
+end
+
+association xxx_File_lineBlames between
+	File[0..1] role xxx_File_lineBlames_src
+	LineBlames[*] role lineBlames
+end
+
+association xxx_File_hunks between
+	File[0..1] role xxx_File_hunks_src
+	Hunk[*] role hunks
+end
+
+association xxx_File_content between
+	File[0..1] role xxx_File_content_src
+	Content[*] role content
+end
+
+association xxx_File_blames between
+	File[0..1] role xxx_File_blames_src
+	Blame[*] role blames
+end
+
+association xxx_File_repository between
+	File[*] role xxx_File_repository_src
+	Model[1] role repository
+end
+
+association xxx_FileCopy_action between
+	FileCopy[*] role xxx_FileCopy_action_src
+	Action[0..1] role action
+end
+
+association xxx_FileCopy_toFile between
+	FileCopy[*] role xxx_FileCopy_toFile_src
+	File[0..1] role toFile
+end
+
+association xxx_FileCopy_fromFile between
+	FileCopy[*] role xxx_FileCopy_fromFile_src
+	File[0..1] role fromFile
+end
+
+association xxx_FileCopy_fromRevision between
+	FileCopy[*] role xxx_FileCopy_fromRevision_src
+	Revision[0..1] role fromRevision
+end
+
+association xxx_FileCopy_repository between
+	FileCopy[*] role xxx_FileCopy_repository_src
+	Model[1] role repository
+end
+
+association xxx_FileLink_parent between
+	FileLink[*] role xxx_FileLink_parent_src
+	File[0..1] role parent
+end
+
+association xxx_FileLink_child between
+	FileLink[*] role xxx_FileLink_child_src
+	File[0..1] role child
+end
+
+association xxx_FileLink_revision between
+	FileLink[*] role xxx_FileLink_revision_src
+	Revision[1] role revision
+end
+
+association xxx_FileLink_repository between
+	FileLink[*] role xxx_FileLink_repository_src
+	Model[1] role repository
+end
+
+association xxx_FileType_files between
+	FileType[0..1] role xxx_FileType_files_src
+	File[*] role files
+end
+
+association xxx_FileType_repository between
+	FileType[*] role xxx_FileType_repository_src
+	Model[1] role repository
+end
+
+association xxx_Tag_revision between
+	Tag[0..1] role xxx_Tag_revision_src
+	Revision[*] role revision
+end
+
+association xxx_Tag_repository between
+	Tag[*] role xxx_Tag_repository_src
+	Model[1] role repository
+end
+
+association xxx_Patch_file between
+	Patch[*] role xxx_Patch_file_src
+	File[1] role file
+end
+
+association xxx_Patch_revision between
+	Patch[*] role xxx_Patch_revision_src
+	Revision[1] role revision
+end
+
+association xxx_PatchLines_file between
+	PatchLines[*] role xxx_PatchLines_file_src
+	File[1] role file
+end
+
+association xxx_PatchLines_revision between
+	PatchLines[*] role xxx_PatchLines_revision_src
+	Revision[1] role revision
+end
+
+association xxx_LineBlames_file between
+	LineBlames[*] role xxx_LineBlames_file_src
+	File[1] role file
+end
+
+association xxx_LineBlames_lastChangeRevision between
+	LineBlames[*] role xxx_LineBlames_lastChangeRevision_src
+	Revision[1] role lastChangeRevision
+end
+
+association xxx_LineBlames_revision between
+	LineBlames[*] role xxx_LineBlames_revision_src
+	Revision[1] role revision
+end
+
+association xxx_Hunk_file between
+	Hunk[*] role xxx_Hunk_file_src
+	File[1] role file
+end
+
+association xxx_Hunk_revision between
+	Hunk[*] role xxx_Hunk_revision_src
+	Revision[1] role revision
+end
+
+association xxx_Hunk_hunkBlame between
+	Hunk[0..1] role xxx_Hunk_hunkBlame_src
+	HunkBlames[*] role hunkBlame
+end
+
+association xxx_HunkBlames_hunk between
+	HunkBlames[*] role xxx_HunkBlames_hunk_src
+	Hunk[1] role hunk
+end
+
+association xxx_HunkBlames_lastRevision between
+	HunkBlames[*] role xxx_HunkBlames_lastRevision_src
+	Revision[1] role lastRevision
+end
+
+association xxx_Content_file between
+	Content[*] role xxx_Content_file_src
+	File[1] role file
+end
+
+association xxx_Content_revision between
+	Content[*] role xxx_Content_revision_src
+	Revision[1] role revision
+end
+
+association xxx_Blame_file between
+	Blame[*] role xxx_Blame_file_src
+	File[1] role file
+end
+
+association xxx_Blame_author between
+	Blame[*] role xxx_Blame_author_src
+	People[1] role author
+end
+
+association xxx_Blame_revision between
+	Blame[*] role xxx_Blame_revision_src
+	Revision[1] role revision
+end
+

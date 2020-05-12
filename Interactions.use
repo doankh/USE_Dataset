@@ -1,0 +1,372 @@
+model Interactions
+enum MessageKind{
+default
+}
+
+enum MessageSort{
+default
+}
+
+enum InteractionOperandKind{
+default
+}
+
+abstract class Behavior
+attributes
+operations
+end
+
+abstract class InteractionFragment<NamedElement
+attributes
+operations
+end
+
+abstract class ExecutionSpecification<InteractionFragment
+attributes
+operations
+end
+
+class OccurenceSpecification<InteractionFragment
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class StateInvariant<InteractionFragment
+attributes
+operations
+end
+
+class Interaction<Behavior,InteractionFragment
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Lifeline<NamedElement
+attributes
+operations
+end
+
+abstract class ConnectableElement
+attributes
+operations
+end
+
+abstract class ValueSpecification
+attributes
+operations
+end
+
+class Message<NamedElement
+attributes
+	messageKind : MessageKind
+	messageSort : MessageSort
+operations
+end
+
+abstract class Connector
+attributes
+operations
+end
+
+abstract class MessageEnd<NamedElement
+attributes
+operations
+end
+
+class ExecutionOccurrenceSpecification<OccurenceSpecification
+attributes
+operations
+end
+
+class MessageOccurrenceSpecification<OccurenceSpecification
+attributes
+operations
+end
+
+class DestructionOccurrenceSpecification<MessageOccurrenceSpecification
+attributes
+operations
+end
+
+class BehaviorExecutionSpecification<ExecutionSpecification
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class ActionExecutionSpecification<ExecutionSpecification
+attributes
+operations
+end
+
+class GeneralOrdering<NamedElement
+attributes
+operations
+end
+
+class InteractionOperand<Namespace
+attributes
+operations
+end
+
+abstract class Namespace
+attributes
+operations
+end
+
+class CombinedFragment
+attributes
+	interactionOperator : InteractionOperandKind
+operations
+end
+
+class ConsiderIgnoreFragment<CombinedFragment
+attributes
+operations
+end
+
+class Continuation<InteractionFragment
+attributes
+	setting : String
+operations
+end
+
+class InteractionConstraint<Constraint
+attributes
+operations
+end
+
+class Gate<MessageEnd
+attributes
+operations
+end
+
+class InteractionUse<InteractionFragment
+attributes
+operations
+end
+
+abstract class Property
+attributes
+operations
+end
+
+class PartDecomposition<InteractionUse
+attributes
+operations
+end
+
+association xxx_InteractionFragment_covered between
+	InteractionFragment[0..1] role xxx_InteractionFragment_covered_src
+	Lifeline[*] role covered
+end
+
+composition xxx_InteractionFragment_generalOrdering between
+	InteractionFragment[0..1] role xxx_InteractionFragment_generalOrdering_src
+	GeneralOrdering[*] role generalOrdering
+end
+
+association xxx_InteractionFragment_enclosingOperand between
+	InteractionFragment[*] role xxx_InteractionFragment_enclosingOperand_src
+	InteractionOperand[0..1] role enclosingOperand
+end
+
+association xxx_ExecutionSpecification_start between
+	ExecutionSpecification[*] role xxx_ExecutionSpecification_start_src
+	OccurenceSpecification[1] role start
+end
+
+association xxx_ExecutionSpecification_finish between
+	ExecutionSpecification[*] role xxx_ExecutionSpecification_finish_src
+	OccurenceSpecification[1] role finish
+end
+
+association xxx_OccurenceSpecification_toBefore between
+	OccurenceSpecification[0..1] role xxx_OccurenceSpecification_toBefore_src
+	GeneralOrdering[*] role toBefore
+end
+
+association xxx_OccurenceSpecification_toAfter between
+	OccurenceSpecification[0..1] role xxx_OccurenceSpecification_toAfter_src
+	GeneralOrdering[*] role toAfter
+end
+
+composition xxx_StateInvariant_invariant between
+	StateInvariant[*] role xxx_StateInvariant_invariant_src
+	Constraint[1] role invariant
+end
+
+composition xxx_Interaction_fragment between
+	Interaction[0..1] role xxx_Interaction_fragment_src
+	InteractionFragment[*] role fragment
+end
+
+composition xxx_Interaction_lifeline between
+	Interaction[0..1] role xxx_Interaction_lifeline_src
+	Lifeline[*] role lifeline
+end
+
+composition xxx_Interaction_action between
+	Interaction[0..1] role xxx_Interaction_action_src
+	Action[*] role action
+end
+
+composition xxx_Interaction_formalGate between
+	Interaction[0..1] role xxx_Interaction_formalGate_src
+	Gate[*] role formalGate
+end
+
+association xxx_Lifeline_coveredBy between
+	Lifeline[0..1] role xxx_Lifeline_coveredBy_src
+	InteractionFragment[*] role coveredBy
+end
+
+association xxx_Lifeline_interaction between
+	Lifeline[*] role xxx_Lifeline_interaction_src
+	Interaction[1] role interaction
+end
+
+association xxx_Lifeline_represents between
+	Lifeline[*] role xxx_Lifeline_represents_src
+	ConnectableElement[0..1] role represents
+end
+
+composition xxx_Lifeline_selector between
+	Lifeline[*] role xxx_Lifeline_selector_src
+	ValueSpecification[0..1] role selector
+end
+
+association xxx_Lifeline_decomposedAs between
+	Lifeline[*] role xxx_Lifeline_decomposedAs_src
+	PartDecomposition[0..1] role decomposedAs
+end
+
+composition xxx_Message_argument between
+	Message[0..1] role xxx_Message_argument_src
+	ValueSpecification[*] role argument
+end
+
+association xxx_Message_connector between
+	Message[*] role xxx_Message_connector_src
+	Connector[0..1] role connector
+end
+
+association xxx_Message_signature between
+	Message[*] role xxx_Message_signature_src
+	NamedElement[0..1] role signature
+end
+
+association xxx_Message_sendEvent between
+	Message[*] role xxx_Message_sendEvent_src
+	MessageEnd[0..1] role sendEvent
+end
+
+association xxx_Message_receiveEvent between
+	Message[*] role xxx_Message_receiveEvent_src
+	MessageEnd[0..1] role receiveEvent
+end
+
+association xxx_MessageEnd_message between
+	MessageEnd[*] role xxx_MessageEnd_message_src
+	Message[0..1] role message
+end
+
+association xxx_ExecutionOccurrenceSpecification_execution between
+	ExecutionOccurrenceSpecification[*] role xxx_ExecutionOccurrenceSpecification_execution_src
+	ExecutionSpecification[1] role execution
+end
+
+association xxx_BehaviorExecutionSpecification_behavior between
+	BehaviorExecutionSpecification[*] role xxx_BehaviorExecutionSpecification_behavior_src
+	Behavior[0..1] role behavior
+end
+
+association xxx_ActionExecutionSpecification_action between
+	ActionExecutionSpecification[*] role xxx_ActionExecutionSpecification_action_src
+	Action[1] role action
+end
+
+association xxx_GeneralOrdering_after between
+	GeneralOrdering[*] role xxx_GeneralOrdering_after_src
+	OccurenceSpecification[1] role after
+end
+
+association xxx_GeneralOrdering_before between
+	GeneralOrdering[*] role xxx_GeneralOrdering_before_src
+	OccurenceSpecification[1] role before
+end
+
+composition xxx_InteractionOperand_fragment between
+	InteractionOperand[0..1] role xxx_InteractionOperand_fragment_src
+	InteractionFragment[*] role fragment
+end
+
+composition xxx_InteractionOperand_guard between
+	InteractionOperand[*] role xxx_InteractionOperand_guard_src
+	InteractionConstraint[0..1] role guard
+end
+
+composition xxx_CombinedFragment_operand between
+	CombinedFragment[*] role xxx_CombinedFragment_operand_src
+	InteractionOperand[1] role operand
+end
+
+composition xxx_CombinedFragment_cfragmentGate between
+	CombinedFragment[0..1] role xxx_CombinedFragment_cfragmentGate_src
+	Gate[*] role cfragmentGate
+end
+
+association xxx_ConsiderIgnoreFragment_message between
+	ConsiderIgnoreFragment[0..1] role xxx_ConsiderIgnoreFragment_message_src
+	NamedElement[*] role message
+end
+
+composition xxx_InteractionConstraint_maxint between
+	InteractionConstraint[*] role xxx_InteractionConstraint_maxint_src
+	ValueSpecification[0..1] role maxint
+end
+
+composition xxx_InteractionConstraint_minint between
+	InteractionConstraint[*] role xxx_InteractionConstraint_minint_src
+	ValueSpecification[0..1] role minint
+end
+
+composition xxx_InteractionUse_actualGate between
+	InteractionUse[0..1] role xxx_InteractionUse_actualGate_src
+	Gate[*] role actualGate
+end
+
+composition xxx_InteractionUse_argument between
+	InteractionUse[0..1] role xxx_InteractionUse_argument_src
+	ValueSpecification[*] role argument
+end
+
+composition xxx_InteractionUse_returnValue between
+	InteractionUse[*] role xxx_InteractionUse_returnValue_src
+	ValueSpecification[0..1] role returnValue
+end
+
+association xxx_InteractionUse_returnValueRecipient between
+	InteractionUse[*] role xxx_InteractionUse_returnValueRecipient_src
+	Property[0..1] role returnValueRecipient
+end
+
+association xxx_InteractionUse_refersTo between
+	InteractionUse[*] role xxx_InteractionUse_refersTo_src
+	Interaction[1] role refersTo
+end
+

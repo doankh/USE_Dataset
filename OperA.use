@@ -1,0 +1,887 @@
+model OM
+enum DeonticModality{
+default
+}
+
+enum RoleType{
+default
+}
+
+enum SceneType{
+default
+}
+
+enum TransitionType{
+default
+}
+
+enum TTSType{
+default
+}
+
+enum ConceptType{
+default
+}
+
+class OperAModel
+attributes
+	Name : String
+operations
+end
+
+class OM
+attributes
+operations
+end
+
+class SS
+attributes
+operations
+end
+
+class IS
+attributes
+operations
+end
+
+class NS
+attributes
+operations
+end
+
+class CS
+attributes
+operations
+end
+
+class Role
+attributes
+	Name : String
+	RoleType : RoleType
+operations
+end
+
+class Objective
+attributes
+	Name : String
+operations
+end
+
+abstract class Dependency
+attributes
+	ID : String
+	Name : String
+operations
+end
+
+class Norm
+attributes
+	normID : String
+operations
+end
+
+abstract class DeonticStatement
+attributes
+	modality : DeonticModality
+operations
+end
+
+class IndividualDeonticStatement<DeonticStatement
+attributes
+operations
+end
+
+class RoleDeonticStatement<DeonticStatement
+attributes
+operations
+end
+
+class Right
+attributes
+	Name : String
+operations
+end
+
+class HierarchyDependency<Dependency
+attributes
+operations
+end
+
+class MarketDependency<Dependency
+attributes
+operations
+end
+
+class NetworkDependency<Dependency
+attributes
+operations
+end
+
+class Scene
+attributes
+	sceneID : String
+	description : String
+	type : SceneType
+operations
+end
+
+class Transition
+attributes
+	transitionID : String
+	transitionType : TransitionType
+operations
+end
+
+abstract class Arc
+attributes
+	arcID : String
+operations
+end
+
+class SceneToTransitionArc<Arc
+attributes
+operations
+end
+
+class TransitionToSceneArc<Arc
+attributes
+	type : TTSType
+operations
+end
+
+class Player
+attributes
+	playerID : String
+operations
+end
+
+class LandmarkPattern
+attributes
+operations
+end
+
+class Landmark
+attributes
+	name : String
+	isResult : Boolean
+operations
+end
+
+class TransitionNorm
+attributes
+	ID : String
+operations
+end
+
+class PartialOrder
+attributes
+	name : String
+operations
+end
+
+abstract class PartialStateDescription
+attributes
+	ID : String
+operations
+end
+
+abstract class PathFormula<PartialStateDescription
+attributes
+operations
+end
+
+abstract class StateFormula<PathFormula,CountsAsConcreteFact
+attributes
+operations
+end
+
+class Atom<StateFormula
+attributes
+	predicate : String
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+class Constant<Term
+attributes
+	name : String
+operations
+end
+
+class Variable<Term
+attributes
+	name : String
+operations
+end
+
+class Function<Term
+attributes
+	name : String
+operations
+end
+
+class Negation<StateFormula
+attributes
+operations
+end
+
+class Conjunction<StateFormula
+attributes
+operations
+end
+
+class Disjunction<StateFormula
+attributes
+operations
+end
+
+class Implication<StateFormula
+attributes
+operations
+end
+
+class ForAllPaths<StateFormula
+attributes
+operations
+end
+
+class ExistsPath<StateFormula
+attributes
+operations
+end
+
+class PathNegation<PathFormula
+attributes
+operations
+end
+
+class PathConjunction<PathFormula
+attributes
+operations
+end
+
+class PathDisjunction<PathFormula
+attributes
+operations
+end
+
+class PathImplication<PathFormula
+attributes
+operations
+end
+
+class Next<PathFormula
+attributes
+operations
+end
+
+class Sometime<PathFormula
+attributes
+operations
+end
+
+class Always<PathFormula
+attributes
+operations
+end
+
+class Until<PathFormula
+attributes
+operations
+end
+
+class Ontology
+attributes
+	ontologyID : String
+operations
+end
+
+class Concept
+attributes
+	concept : String
+	URI : String
+	type : ConceptType
+operations
+end
+
+class CountsAs
+attributes
+operations
+end
+
+abstract class CountsAsConcreteFact
+attributes
+operations
+end
+
+class Actions
+attributes
+operations
+end
+
+abstract class ActionDescription<CountsAsConcreteFact
+attributes
+operations
+end
+
+class AtomicAction<ActionDescription
+attributes
+	statement : String
+operations
+end
+
+class Sequence_<ActionDescription
+attributes
+operations
+end
+
+class Conditional<ActionDescription
+attributes
+operations
+end
+
+class Context
+attributes
+	Name : String
+operations
+end
+
+class Exists<FirstOrderQuantifier
+attributes
+operations
+end
+
+class FirstOrderQuantifier<PartialStateDescription
+attributes
+operations
+end
+
+class ForAll<FirstOrderQuantifier
+attributes
+operations
+end
+
+composition xxx_OperAModel_om between
+	OperAModel[*] role xxx_OperAModel_om_src
+	OM[1] role om
+end
+
+composition xxx_OM_ss between
+	OM[*] role xxx_OM_ss_src
+	SS[1] role ss
+end
+
+composition xxx_OM_is between
+	OM[*] role xxx_OM_is_src
+	IS[1] role is
+end
+
+composition xxx_OM_ns between
+	OM[*] role xxx_OM_ns_src
+	NS[1] role ns
+end
+
+composition xxx_OM_cs between
+	OM[*] role xxx_OM_cs_src
+	CS[1] role cs
+end
+
+composition xxx_SS_roles between
+	SS[0..1] role xxx_SS_roles_src
+	Role[1..*] role roles
+end
+
+composition xxx_SS_objectives between
+	SS[0..1] role xxx_SS_objectives_src
+	Objective[1..*] role objectives
+end
+
+composition xxx_SS_dependencies between
+	SS[0..1] role xxx_SS_dependencies_src
+	Dependency[1..*] role dependencies
+end
+
+composition xxx_IS_scenes between
+	IS[0..1] role xxx_IS_scenes_src
+	Scene[2..*] role scenes
+end
+
+composition xxx_IS_transitions_ between
+	IS[0..1] role xxx_IS_transitions__src
+	Transition[1..*] role transitions_
+end
+
+composition xxx_IS_arcs between
+	IS[0..1] role xxx_IS_arcs_src
+	Arc[2..*] role arcs
+end
+
+composition xxx_NS_norms between
+	NS[0..1] role xxx_NS_norms_src
+	Norm[*] role norms
+end
+
+composition xxx_NS_transitionNorms between
+	NS[0..1] role xxx_NS_transitionNorms_src
+	TransitionNorm[*] role transitionNorms
+end
+
+composition xxx_CS_formulas between
+	CS[0..1] role xxx_CS_formulas_src
+	PartialStateDescription[*] role formulas
+end
+
+composition xxx_CS_ontology between
+	CS[0..1] role xxx_CS_ontology_src
+	Ontology[1..*] role ontology
+end
+
+composition xxx_CS_terms between
+	CS[0..1] role xxx_CS_terms_src
+	Term[*] role terms
+end
+
+composition xxx_CS_countsAsRules between
+	CS[0..1] role xxx_CS_countsAsRules_src
+	CountsAs[*] role countsAsRules
+end
+
+composition xxx_CS_contexts between
+	CS[0..1] role xxx_CS_contexts_src
+	Context[*] role contexts
+end
+
+composition xxx_CS_actionLibrary between
+	CS[*] role xxx_CS_actionLibrary_src
+	Actions[1] role actionLibrary
+end
+
+association xxx_Role_conceptName between
+	Role[*] role xxx_Role_conceptName_src
+	Concept[1] role conceptName
+end
+
+association xxx_Role_objectives between
+	Role[0..1] role xxx_Role_objectives_src
+	Objective[1..*] role objectives
+end
+
+association xxx_Role_norms between
+	Role[0..1] role xxx_Role_norms_src
+	Norm[*] role norms
+end
+
+composition xxx_Role_rights between
+	Role[0..1] role xxx_Role_rights_src
+	Right[*] role rights
+end
+
+association xxx_Role_DependantOn between
+	Role[0..1] role xxx_Role_DependantOn_src
+	Dependency[*] role DependantOn
+end
+
+association xxx_Role_DependeeIn between
+	Role[0..1] role xxx_Role_DependeeIn_src
+	Dependency[*] role DependeeIn
+end
+
+association xxx_Objective_conceptName between
+	Objective[*] role xxx_Objective_conceptName_src
+	Concept[1] role conceptName
+end
+
+association xxx_Objective_stateDescription between
+	Objective[*] role xxx_Objective_stateDescription_src
+	PartialStateDescription[1] role stateDescription
+end
+
+association xxx_Objective_subObjectives between
+	Objective[0..1] role xxx_Objective_subObjectives_src
+	Objective[*] role subObjectives
+end
+
+association xxx_Objective_parentObjective between
+	Objective[0..1] role xxx_Objective_parentObjective_src
+	Objective[*] role parentObjective
+end
+
+association xxx_Objective_usedByRole between
+	Objective[0..1] role xxx_Objective_usedByRole_src
+	Role[*] role usedByRole
+end
+
+association xxx_Dependency_ObjectOfDependency between
+	Dependency[0..1] role xxx_Dependency_ObjectOfDependency_src
+	Objective[1..*] role ObjectOfDependency
+end
+
+association xxx_Norm_activatingCondition between
+	Norm[*] role xxx_Norm_activatingCondition_src
+	PartialStateDescription[1] role activatingCondition
+end
+
+association xxx_Norm_deactivatingCondition between
+	Norm[*] role xxx_Norm_deactivatingCondition_src
+	PartialStateDescription[1] role deactivatingCondition
+end
+
+association xxx_Norm_maintenanceCondition between
+	Norm[*] role xxx_Norm_maintenanceCondition_src
+	PartialStateDescription[1] role maintenanceCondition
+end
+
+association xxx_Norm_timeout between
+	Norm[*] role xxx_Norm_timeout_src
+	PartialStateDescription[0..1] role timeout
+end
+
+composition xxx_Norm_deontics between
+	Norm[*] role xxx_Norm_deontics_src
+	DeonticStatement[1] role deontics
+end
+
+association xxx_Norm_repairCondition between
+	Norm[*] role xxx_Norm_repairCondition_src
+	PartialStateDescription[0..1] role repairCondition
+end
+
+association xxx_DeonticStatement_what between
+	DeonticStatement[*] role xxx_DeonticStatement_what_src
+	PartialStateDescription[1] role what
+end
+
+association xxx_IndividualDeonticStatement_actor between
+	IndividualDeonticStatement[*] role xxx_IndividualDeonticStatement_actor_src
+	Player[1] role actor
+end
+
+association xxx_RoleDeonticStatement_role between
+	RoleDeonticStatement[*] role xxx_RoleDeonticStatement_role_src
+	Role[1] role role
+end
+
+association xxx_Right_Expr between
+	Right[*] role xxx_Right_Expr_src
+	PartialStateDescription[1] role Expr
+end
+
+association xxx_HierarchyDependency_Dependant between
+	HierarchyDependency[*] role xxx_HierarchyDependency_Dependant_src
+	Role[1] role Dependant
+end
+
+association xxx_HierarchyDependency_Dependee between
+	HierarchyDependency[*] role xxx_HierarchyDependency_Dependee_src
+	Role[1] role Dependee
+end
+
+association xxx_MarketDependency_Dependant between
+	MarketDependency[*] role xxx_MarketDependency_Dependant_src
+	Role[1] role Dependant
+end
+
+association xxx_MarketDependency_Dependee between
+	MarketDependency[*] role xxx_MarketDependency_Dependee_src
+	Role[1] role Dependee
+end
+
+association xxx_NetworkDependency_Dependant1 between
+	NetworkDependency[*] role xxx_NetworkDependency_Dependant1_src
+	Role[1] role Dependant1
+end
+
+association xxx_NetworkDependency_Dependant2 between
+	NetworkDependency[*] role xxx_NetworkDependency_Dependant2_src
+	Role[1] role Dependant2
+end
+
+composition xxx_Scene_players between
+	Scene[0..1] role xxx_Scene_players_src
+	Player[1..*] role players
+end
+
+association xxx_Scene_results between
+	Scene[0..1] role xxx_Scene_results_src
+	Landmark[1..*] role results
+end
+
+composition xxx_Scene_interactionPattern between
+	Scene[*] role xxx_Scene_interactionPattern_src
+	LandmarkPattern[1] role interactionPattern
+end
+
+association xxx_Transition_norms between
+	Transition[0..1] role xxx_Transition_norms_src
+	TransitionNorm[1..*] role norms
+end
+
+association xxx_Arc_accessible between
+	Arc[0..1] role xxx_Arc_accessible_src
+	Role[1..*] role accessible
+end
+
+association xxx_SceneToTransitionArc_from_ between
+	SceneToTransitionArc[*] role xxx_SceneToTransitionArc_from__src
+	Scene[1] role from_
+end
+
+association xxx_SceneToTransitionArc_to between
+	SceneToTransitionArc[*] role xxx_SceneToTransitionArc_to_src
+	Transition[1] role to
+end
+
+association xxx_TransitionToSceneArc_from_ between
+	TransitionToSceneArc[*] role xxx_TransitionToSceneArc_from__src
+	Transition[1] role from_
+end
+
+association xxx_TransitionToSceneArc_to between
+	TransitionToSceneArc[*] role xxx_TransitionToSceneArc_to_src
+	Scene[1] role to
+end
+
+association xxx_Player_role between
+	Player[*] role xxx_Player_role_src
+	Role[1] role role
+end
+
+composition xxx_LandmarkPattern_landmarks between
+	LandmarkPattern[0..1] role xxx_LandmarkPattern_landmarks_src
+	Landmark[2..*] role landmarks
+end
+
+composition xxx_LandmarkPattern_landmarkOrder between
+	LandmarkPattern[0..1] role xxx_LandmarkPattern_landmarkOrder_src
+	PartialOrder[1..*] role landmarkOrder
+end
+
+association xxx_Landmark_stateDescription between
+	Landmark[*] role xxx_Landmark_stateDescription_src
+	PartialStateDescription[1] role stateDescription
+end
+
+association xxx_Landmark_entails between
+	Landmark[0..1] role xxx_Landmark_entails_src
+	Objective[*] role entails
+end
+
+association xxx_TransitionNorm_fromScene between
+	TransitionNorm[*] role xxx_TransitionNorm_fromScene_src
+	Scene[1] role fromScene
+end
+
+association xxx_TransitionNorm_fromPlayers between
+	TransitionNorm[0..1] role xxx_TransitionNorm_fromPlayers_src
+	Player[1..*] role fromPlayers
+end
+
+association xxx_TransitionNorm_fromResults between
+	TransitionNorm[0..1] role xxx_TransitionNorm_fromResults_src
+	Landmark[1..*] role fromResults
+end
+
+association xxx_TransitionNorm_toScene between
+	TransitionNorm[*] role xxx_TransitionNorm_toScene_src
+	Scene[1] role toScene
+end
+
+association xxx_TransitionNorm_toPlayer between
+	TransitionNorm[*] role xxx_TransitionNorm_toPlayer_src
+	Player[1] role toPlayer
+end
+
+association xxx_TransitionNorm_attachedTo between
+	TransitionNorm[*] role xxx_TransitionNorm_attachedTo_src
+	Transition[1] role attachedTo
+end
+
+association xxx_PartialOrder_from_ between
+	PartialOrder[*] role xxx_PartialOrder_from__src
+	Landmark[1] role from_
+end
+
+association xxx_PartialOrder_to between
+	PartialOrder[*] role xxx_PartialOrder_to_src
+	Landmark[1] role to
+end
+
+association xxx_Atom_concept between
+	Atom[*] role xxx_Atom_concept_src
+	Concept[1] role concept
+end
+
+association xxx_Atom_arguments between
+	Atom[0..1] role xxx_Atom_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_Constant_concept between
+	Constant[*] role xxx_Constant_concept_src
+	Concept[1] role concept
+end
+
+association xxx_Function_arguments between
+	Function[0..1] role xxx_Function_arguments_src
+	Term[1..*] role arguments
+end
+
+association xxx_Negation_stateFormula between
+	Negation[*] role xxx_Negation_stateFormula_src
+	StateFormula[1] role stateFormula
+end
+
+association xxx_Conjunction_leftStateFormula between
+	Conjunction[*] role xxx_Conjunction_leftStateFormula_src
+	StateFormula[1] role leftStateFormula
+end
+
+association xxx_Conjunction_rightStateFormula between
+	Conjunction[*] role xxx_Conjunction_rightStateFormula_src
+	StateFormula[1] role rightStateFormula
+end
+
+association xxx_Disjunction_leftStateFormula between
+	Disjunction[*] role xxx_Disjunction_leftStateFormula_src
+	StateFormula[1] role leftStateFormula
+end
+
+association xxx_Disjunction_rightStateFormula between
+	Disjunction[*] role xxx_Disjunction_rightStateFormula_src
+	StateFormula[1] role rightStateFormula
+end
+
+association xxx_Implication_antecedentStateFormula between
+	Implication[*] role xxx_Implication_antecedentStateFormula_src
+	StateFormula[1] role antecedentStateFormula
+end
+
+association xxx_Implication_consequentStateFormula between
+	Implication[*] role xxx_Implication_consequentStateFormula_src
+	StateFormula[1] role consequentStateFormula
+end
+
+association xxx_ForAllPaths_pathFormula between
+	ForAllPaths[*] role xxx_ForAllPaths_pathFormula_src
+	PathFormula[1] role pathFormula
+end
+
+association xxx_ExistsPath_pathFormula between
+	ExistsPath[*] role xxx_ExistsPath_pathFormula_src
+	PathFormula[1] role pathFormula
+end
+
+association xxx_PathNegation_pathFormula between
+	PathNegation[*] role xxx_PathNegation_pathFormula_src
+	PathFormula[1] role pathFormula
+end
+
+association xxx_PathConjunction_leftPathFormula between
+	PathConjunction[*] role xxx_PathConjunction_leftPathFormula_src
+	PathFormula[1] role leftPathFormula
+end
+
+association xxx_PathConjunction_rightPathFormula between
+	PathConjunction[*] role xxx_PathConjunction_rightPathFormula_src
+	PathFormula[1] role rightPathFormula
+end
+
+association xxx_PathDisjunction_leftPathFormula between
+	PathDisjunction[*] role xxx_PathDisjunction_leftPathFormula_src
+	PathFormula[1] role leftPathFormula
+end
+
+association xxx_PathDisjunction_rightPathFormula between
+	PathDisjunction[*] role xxx_PathDisjunction_rightPathFormula_src
+	PathFormula[1] role rightPathFormula
+end
+
+association xxx_PathImplication_antecedentPathFormula between
+	PathImplication[*] role xxx_PathImplication_antecedentPathFormula_src
+	PathFormula[1] role antecedentPathFormula
+end
+
+association xxx_PathImplication_consequentPathFormula between
+	PathImplication[*] role xxx_PathImplication_consequentPathFormula_src
+	PathFormula[1] role consequentPathFormula
+end
+
+association xxx_Next_pathFormula between
+	Next[*] role xxx_Next_pathFormula_src
+	PathFormula[1] role pathFormula
+end
+
+association xxx_Sometime_pathFormula between
+	Sometime[*] role xxx_Sometime_pathFormula_src
+	PathFormula[1] role pathFormula
+end
+
+association xxx_Always_pathFormula between
+	Always[*] role xxx_Always_pathFormula_src
+	PathFormula[1] role pathFormula
+end
+
+association xxx_Until_fromPathFormula between
+	Until[*] role xxx_Until_fromPathFormula_src
+	PathFormula[1] role fromPathFormula
+end
+
+association xxx_Until_untilPathFormula between
+	Until[*] role xxx_Until_untilPathFormula_src
+	PathFormula[1] role untilPathFormula
+end
+
+composition xxx_Ontology_classes between
+	Ontology[0..1] role xxx_Ontology_classes_src
+	Concept[1..*] role classes
+end
+
+association xxx_CountsAs_concreteFact between
+	CountsAs[*] role xxx_CountsAs_concreteFact_src
+	CountsAsConcreteFact[1] role concreteFact
+end
+
+association xxx_CountsAs_abstractFact between
+	CountsAs[*] role xxx_CountsAs_abstractFact_src
+	PartialStateDescription[1] role abstractFact
+end
+
+association xxx_CountsAs_context_ between
+	CountsAs[*] role xxx_CountsAs_context__src
+	Context[0..1] role context_
+end
+
+composition xxx_Actions_actions between
+	Actions[0..1] role xxx_Actions_actions_src
+	ActionDescription[*] role actions
+end
+
+association xxx_Sequence_actions between
+	Sequence_[*] role xxx_Sequence_actions_src
+	ActionDescription[2] role actions
+end
+
+association xxx_Conditional_condition between
+	Conditional[*] role xxx_Conditional_condition_src
+	StateFormula[1] role condition
+end
+
+association xxx_Conditional_action between
+	Conditional[*] role xxx_Conditional_action_src
+	ActionDescription[1] role action
+end
+
+association xxx_FirstOrderQuantifier_variable between
+	FirstOrderQuantifier[*] role xxx_FirstOrderQuantifier_variable_src
+	Variable[1] role variable
+end
+
+association xxx_FirstOrderQuantifier_formula between
+	FirstOrderQuantifier[*] role xxx_FirstOrderQuantifier_formula_src
+	PartialStateDescription[1] role formula
+end
+

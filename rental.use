@@ -1,0 +1,120 @@
+model rental
+enum StreetType{
+default
+}
+
+class Customer
+attributes
+	firstName : String
+	lastName : String
+operations
+	getDisplayName():String
+end
+
+class RentalAgency
+attributes
+	name : String
+operations
+	book(customer : Customer,rentedObject : RentalObject,from_ : String,to : String):Rental
+	addCustomer(customer : Customer)
+	addObject(object : RentalObject)
+end
+
+class Address
+attributes
+	streetType : StreetType
+	number : Integer
+	zipCode : String
+	city : String
+	streetName : String
+operations
+end
+
+class RentalObject
+attributes
+	ID : Integer
+	name : String
+	picture : String
+operations
+	rent(customer : Customer):Rental
+	isAvailable():Boolean
+end
+
+class License
+attributes
+	number : Integer
+	validityDate : String
+operations
+end
+
+class Rental
+attributes
+	startDate : String
+	endDate : String
+operations
+	nbDaysBooked():Integer
+	end_():Integer
+	start():Integer
+	nbDaysRented():Integer
+end
+
+composition xxx_Customer_address between
+	Customer[*] role xxx_Customer_address_src
+	Address[1] role address
+end
+
+composition xxx_Customer_licenses between
+	Customer[0..1] role xxx_Customer_licenses_src
+	License[*] role licenses
+end
+
+association xxx_Customer_parentAgency between
+	Customer[*] role xxx_Customer_parentAgency_src
+	RentalAgency[1] role parentAgency
+end
+
+composition xxx_RentalAgency_address between
+	RentalAgency[*] role xxx_RentalAgency_address_src
+	Address[1] role address
+end
+
+composition xxx_RentalAgency_objectsToRent between
+	RentalAgency[0..1] role xxx_RentalAgency_objectsToRent_src
+	RentalObject[*] role objectsToRent
+end
+
+composition xxx_RentalAgency_customers between
+	RentalAgency[0..1] role xxx_RentalAgency_customers_src
+	Customer[*] role customers
+end
+
+composition xxx_RentalAgency_rentals between
+	RentalAgency[0..1] role xxx_RentalAgency_rentals_src
+	Rental[*] role rentals
+end
+
+association xxx_RentalObject_parentAgency between
+	RentalObject[*] role xxx_RentalObject_parentAgency_src
+	RentalAgency[1] role parentAgency
+end
+
+association xxx_License_owner between
+	License[*] role xxx_License_owner_src
+	Customer[0..1] role owner
+end
+
+association xxx_Rental_customer between
+	Rental[*] role xxx_Rental_customer_src
+	Customer[1] role customer
+end
+
+association xxx_Rental_rentedObject between
+	Rental[*] role xxx_Rental_rentedObject_src
+	RentalObject[0..1] role rentedObject
+end
+
+association xxx_Rental_parentAgency between
+	Rental[*] role xxx_Rental_parentAgency_src
+	RentalAgency[1] role parentAgency
+end
+

@@ -1,0 +1,120 @@
+model PrimitiveTypes
+abstract class Node
+attributes
+	name : String
+operations
+end
+
+class ElementNode<Node
+attributes
+operations
+end
+
+class AttributeNode<Node
+attributes
+operations
+end
+
+class RootNode<ElementNode
+attributes
+operations
+end
+
+class TextNode<ElementNode
+attributes
+	value : String
+operations
+end
+
+abstract class XSLTNode<ElementNode
+attributes
+operations
+end
+
+class XSLTRootNode<RootNode
+attributes
+operations
+end
+
+class Document
+attributes
+	documentName : String
+operations
+end
+
+class ApplyTemplates<XSLTNode
+attributes
+	select : String
+operations
+end
+
+class If<XSLTNode
+attributes
+	test : String
+operations
+end
+
+class Template<XSLTNode
+attributes
+	match : String
+operations
+end
+
+class ValueOf<XSLTNode
+attributes
+	select : String
+operations
+end
+
+class When<XSLTNode
+attributes
+	test : String
+operations
+end
+
+class Choose<XSLTNode
+attributes
+operations
+end
+
+class Otherwise<XSLTNode
+attributes
+operations
+end
+
+class Sort<XSLTNode
+attributes
+	select : String
+operations
+end
+
+association xxx_Node_parentNode between
+	Node[*] role xxx_Node_parentNode_src
+	ElementNode[0..1] role parentNode
+end
+
+composition xxx_ElementNode_nodes between
+	ElementNode[0..1] role xxx_ElementNode_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_RootNode_document between
+	RootNode[*] role xxx_RootNode_document_src
+	Document[1] role document
+end
+
+composition xxx_Document_document between
+	Document[*] role xxx_Document_document_src
+	RootNode[1] role document
+end
+
+composition xxx_Choose_when between
+	Choose[*] role xxx_Choose_when_src
+	When[1] role when
+end
+
+composition xxx_Choose_otherwise between
+	Choose[*] role xxx_Choose_otherwise_src
+	Otherwise[1] role otherwise
+end
+

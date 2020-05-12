@@ -1,0 +1,306 @@
+model VisualInterface
+enum Alignment{
+default
+}
+
+enum Orientation{
+default
+}
+
+enum SystemCursorType{
+default
+}
+
+enum GridAlignment{
+default
+}
+
+class Symbol
+attributes
+	onInit : String
+	onDispose : String
+	onUpdate : String
+	scriptModules : String
+	backgroundColor : String
+operations
+end
+
+abstract class Primitive
+attributes
+	name : String
+operations
+end
+
+abstract class Container<Primitive
+attributes
+operations
+end
+
+abstract class Shape<Figure
+attributes
+	lineWidth : Real
+	antialias : String
+	alpha : String
+	fill : Boolean
+	outline : Boolean
+operations
+end
+
+class Rectangle<Shape
+attributes
+operations
+end
+
+class Text<Figure
+attributes
+	text : String
+	labelAlignment : Alignment
+	iconAlignment : Alignment
+	textAlignment : Alignment
+	textPlacement : Orientation
+	fontName : String
+	fontSize : Integer
+	fontBold : Boolean
+	fontItalic : Boolean
+operations
+end
+
+class Child
+attributes
+	name : String
+operations
+end
+
+class XYChild<Child
+attributes
+operations
+end
+
+class XYContainer<Container
+attributes
+operations
+end
+
+class Position
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class Line<Shape
+attributes
+operations
+end
+
+abstract class Figure<Primitive
+attributes
+	foregroundColor : String
+	backgroundColor : String
+	onClick : String
+	onDoubleClick : String
+	visible : Boolean
+	border : String
+	opaque : String
+	toolTip : String
+operations
+end
+
+class SymbolReference<Primitive
+attributes
+	uri : String
+	zoom : String
+	onCreateProperties : String
+operations
+end
+
+class StringToStringMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Dimension
+attributes
+	width : Real
+	height : Real
+operations
+end
+
+abstract class Cursor
+attributes
+operations
+end
+
+class SystemCursor<Cursor
+attributes
+	type : SystemCursorType
+operations
+end
+
+class GridContainer<Container
+attributes
+	columns : Integer
+	equalWidth : Boolean
+	horizontalSpacing : Integer
+	verticalSpacing : Integer
+	marginWidth : Integer
+	marginHeight : Integer
+operations
+end
+
+class BorderContainer<Container
+attributes
+	verticalSpacing : Integer
+	horizontalSpacing : Integer
+operations
+end
+
+class BorderChild<Child
+attributes
+	alignment : Alignment
+operations
+end
+
+class GridChild<Child
+attributes
+	horizontalAlignment : GridAlignment
+	verticalAlignment : GridAlignment
+	grabHorizontalSpace : Boolean
+	grabVerticalSpace : Boolean
+	spanCols : Integer
+	spanRows : Integer
+	widthHint : Integer
+	heightHint : Integer
+operations
+end
+
+class FigureContainer<Figure
+attributes
+operations
+end
+
+class Image<Figure
+attributes
+	uri : String
+operations
+end
+
+class Ellipse<Shape
+attributes
+operations
+end
+
+class Arc<Shape
+attributes
+	start : Integer
+	length : Integer
+operations
+end
+
+class Connection
+attributes
+operations
+end
+
+class StackContainer<Container
+attributes
+operations
+end
+
+composition xxx_Symbol_root between
+	Symbol[*] role xxx_Symbol_root_src
+	Primitive[0..1] role root
+end
+
+composition xxx_Symbol_properties between
+	Symbol[0..1] role xxx_Symbol_properties_src
+	StringToStringMap[*] role properties
+end
+
+composition xxx_Symbol_cursors between
+	Symbol[*] role xxx_Symbol_cursors_src
+	Cursor[0..1] role cursors
+end
+
+composition xxx_Symbol_designSize between
+	Symbol[*] role xxx_Symbol_designSize_src
+	Dimension[0..1] role designSize
+end
+
+composition xxx_Symbol_connections between
+	Symbol[0..1] role xxx_Symbol_connections_src
+	Connection[*] role connections
+end
+
+composition xxx_Child_element between
+	Child[*] role xxx_Child_element_src
+	Primitive[0..1] role element
+end
+
+composition xxx_XYChild_position between
+	XYChild[*] role xxx_XYChild_position_src
+	Position[1] role position
+end
+
+composition xxx_XYChild_dimension between
+	XYChild[*] role xxx_XYChild_dimension_src
+	Dimension[0..1] role dimension
+end
+
+composition xxx_XYContainer_children between
+	XYContainer[0..1] role xxx_XYContainer_children_src
+	XYChild[*] role children
+end
+
+composition xxx_Line_points between
+	Line[0..1] role xxx_Line_points_src
+	Position[*] role points
+end
+
+composition xxx_Figure_size between
+	Figure[*] role xxx_Figure_size_src
+	Dimension[0..1] role size
+end
+
+association xxx_Figure_cursor between
+	Figure[*] role xxx_Figure_cursor_src
+	Cursor[0..1] role cursor
+end
+
+composition xxx_SymbolReference_properties between
+	SymbolReference[0..1] role xxx_SymbolReference_properties_src
+	StringToStringMap[*] role properties
+end
+
+composition xxx_GridContainer_children between
+	GridContainer[0..1] role xxx_GridContainer_children_src
+	GridChild[*] role children
+end
+
+composition xxx_BorderContainer_children between
+	BorderContainer[0..1] role xxx_BorderContainer_children_src
+	BorderChild[*] role children
+end
+
+composition xxx_FigureContainer_content between
+	FigureContainer[*] role xxx_FigureContainer_content_src
+	Primitive[0..1] role content
+end
+
+association xxx_Connection_start between
+	Connection[*] role xxx_Connection_start_src
+	Primitive[1] role start
+end
+
+association xxx_Connection_end_ between
+	Connection[*] role xxx_Connection_end__src
+	Primitive[1] role end_
+end
+
+composition xxx_StackContainer_children between
+	StackContainer[0..1] role xxx_StackContainer_children_src
+	Primitive[*] role children
+end
+

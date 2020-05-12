@@ -1,0 +1,788 @@
+model kermeta
+enum ConstraintLanguage{
+default
+}
+
+enum ConstraintType{
+default
+}
+
+abstract class DummyClass
+attributes
+operations
+end
+
+class Assignment<Expression
+attributes
+	isCast : Boolean
+operations
+end
+
+abstract class Expression<Object,TypeContainer
+attributes
+operations
+end
+
+abstract class CallExpression<Expression
+attributes
+	name : String
+operations
+end
+
+class Block<Expression
+attributes
+operations
+end
+
+class CallVariable<CallExpression
+attributes
+	isAtpre : Boolean
+operations
+end
+
+class CallFeature<CallExpression
+attributes
+	isAtpre : Boolean
+operations
+end
+
+class CallSuperOperation<CallExpression
+attributes
+operations
+end
+
+class CallResult<CallVariable
+attributes
+operations
+end
+
+class CallValue<CallExpression
+attributes
+operations
+end
+
+class Conditional<Expression
+attributes
+operations
+end
+
+class Raise<Expression
+attributes
+operations
+end
+
+class Rescue<Object
+attributes
+	exceptionName : String
+operations
+end
+
+class TypeReference<MultiplicityElement
+attributes
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class EmptyExpression<Expression
+attributes
+operations
+end
+
+class JavaStaticCall<Expression
+attributes
+	jclass : String
+	jmethod : String
+operations
+end
+
+class LambdaExpression<Expression
+attributes
+operations
+end
+
+class LambdaParameter<Object
+attributes
+	name : String
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	value : Integer
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	value : Boolean
+operations
+end
+
+class TypeLiteral<Literal
+attributes
+operations
+end
+
+class VoidLiteral<Literal
+attributes
+operations
+end
+
+class Loop<Expression
+attributes
+operations
+end
+
+class SelfExpression<Expression
+attributes
+operations
+end
+
+class VariableDecl<Expression
+attributes
+	identifier : String
+operations
+end
+
+class Class<ParameterizedType
+attributes
+	isAbstract : Boolean
+	name : String
+operations
+	_new():Object
+end
+
+class Object
+attributes
+operations
+end
+
+class Model<Object
+attributes
+operations
+end
+
+class ModelType<Type,TypeDefinition
+attributes
+operations
+	_new():Model
+end
+
+class Operation<MultiplicityElement
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class Property<MultiplicityElement
+attributes
+	isReadOnly : Boolean
+	default : String
+	isComposite : Boolean
+	isDerived : Boolean
+	isID : Boolean
+	isGetterAbstract : Boolean
+	isSetterAbstract : Boolean
+operations
+end
+
+class Type<Object
+attributes
+operations
+end
+
+abstract class TypeContainer<Object
+attributes
+operations
+end
+
+class EnumerationLiteral<NamedElement
+attributes
+operations
+end
+
+class TypeVariableBinding<TypeContainer,Object
+attributes
+operations
+end
+
+class MultiplicityElement<TypedElement
+attributes
+	isOrdered : Boolean
+	isUnique : Boolean
+	lower : Integer
+	upper : String
+operations
+end
+
+class TypeDefinition<NamedElement
+attributes
+	isAspect : Boolean
+operations
+end
+
+abstract class DataType<Type,TypeDefinition
+attributes
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+abstract class NamedElement<Object
+attributes
+	name : String
+operations
+end
+
+class Package<NamedElement,TypeDefinitionContainer
+attributes
+	uri : String
+operations
+end
+
+class Parameter<MultiplicityElement
+attributes
+operations
+end
+
+class PrimitiveType<DataType,TypeContainer
+attributes
+operations
+end
+
+abstract class TypedElement<TypeContainer,NamedElement
+attributes
+operations
+end
+
+class Tag<Object
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Constraint<NamedElement
+attributes
+	stereotype : ConstraintType
+	language : ConstraintLanguage
+operations
+end
+
+class ClassDefinition<GenericTypeDefinition,TypeContainer
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class ModelingUnit<Object
+attributes
+operations
+end
+
+class Require<Object
+attributes
+	uri : String
+operations
+end
+
+class Using<Object
+attributes
+	qualifiedName : String
+operations
+end
+
+class Filter<Object
+attributes
+	qualifiedName : String
+operations
+end
+
+abstract class GenericTypeDefinition<TypeDefinition
+attributes
+operations
+end
+
+abstract class ParameterizedType<Type
+attributes
+operations
+end
+
+abstract class TypeVariable<TypeContainer,Type,NamedElement
+attributes
+operations
+end
+
+class ObjectTypeVariable<TypeVariable
+attributes
+operations
+end
+
+class ModelTypeVariable<TypeVariable
+attributes
+operations
+end
+
+class VirtualType<ObjectTypeVariable
+attributes
+operations
+end
+
+class ProductType<TypeContainer,Type
+attributes
+operations
+end
+
+class FunctionType<TypeContainer,Type
+attributes
+operations
+end
+
+class VoidType<Type
+attributes
+operations
+end
+
+abstract class TypeDefinitionContainer<NamedElement
+attributes
+operations
+end
+
+composition xxx_Assignment_target between
+	Assignment[*] role xxx_Assignment_target_src
+	CallExpression[1] role target
+end
+
+composition xxx_Assignment_value between
+	Assignment[*] role xxx_Assignment_value_src
+	Expression[1] role value
+end
+
+association xxx_Expression_staticType between
+	Expression[*] role xxx_Expression_staticType_src
+	Type[0..1] role staticType
+end
+
+composition xxx_CallExpression_parameters between
+	CallExpression[0..1] role xxx_CallExpression_parameters_src
+	Expression[*] role parameters
+end
+
+association xxx_CallExpression_staticTypeVariableBindings between
+	CallExpression[0..1] role xxx_CallExpression_staticTypeVariableBindings_src
+	Type[*] role staticTypeVariableBindings
+end
+
+composition xxx_Block_statement between
+	Block[0..1] role xxx_Block_statement_src
+	Expression[*] role statement
+end
+
+composition xxx_Block_rescueBlock between
+	Block[0..1] role xxx_Block_rescueBlock_src
+	Rescue[*] role rescueBlock
+end
+
+composition xxx_CallFeature_target between
+	CallFeature[*] role xxx_CallFeature_target_src
+	Expression[0..1] role target
+end
+
+association xxx_CallFeature_staticProperty between
+	CallFeature[*] role xxx_CallFeature_staticProperty_src
+	Property[0..1] role staticProperty
+end
+
+association xxx_CallFeature_staticOperation between
+	CallFeature[*] role xxx_CallFeature_staticOperation_src
+	Operation[0..1] role staticOperation
+end
+
+association xxx_CallFeature_staticEnumLiteral between
+	CallFeature[*] role xxx_CallFeature_staticEnumLiteral_src
+	EnumerationLiteral[0..1] role staticEnumLiteral
+end
+
+composition xxx_Conditional_thenBody between
+	Conditional[*] role xxx_Conditional_thenBody_src
+	Expression[1] role thenBody
+end
+
+composition xxx_Conditional_elseBody between
+	Conditional[*] role xxx_Conditional_elseBody_src
+	Expression[0..1] role elseBody
+end
+
+composition xxx_Conditional_condition between
+	Conditional[*] role xxx_Conditional_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_Raise_expression between
+	Raise[*] role xxx_Raise_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Rescue_body between
+	Rescue[0..1] role xxx_Rescue_body_src
+	Expression[1..*] role body
+end
+
+composition xxx_Rescue_exceptionType between
+	Rescue[*] role xxx_Rescue_exceptionType_src
+	TypeReference[1] role exceptionType
+end
+
+composition xxx_JavaStaticCall_parameters between
+	JavaStaticCall[0..1] role xxx_JavaStaticCall_parameters_src
+	Expression[*] role parameters
+end
+
+composition xxx_LambdaExpression_parameters between
+	LambdaExpression[0..1] role xxx_LambdaExpression_parameters_src
+	LambdaParameter[*] role parameters
+end
+
+composition xxx_LambdaExpression_body between
+	LambdaExpression[*] role xxx_LambdaExpression_body_src
+	Expression[1] role body
+end
+
+composition xxx_LambdaParameter_type between
+	LambdaParameter[*] role xxx_LambdaParameter_type_src
+	TypeReference[1] role type
+end
+
+composition xxx_TypeLiteral_typeref between
+	TypeLiteral[*] role xxx_TypeLiteral_typeref_src
+	TypeReference[1] role typeref
+end
+
+composition xxx_Loop_initialization between
+	Loop[*] role xxx_Loop_initialization_src
+	Expression[0..1] role initialization
+end
+
+composition xxx_Loop_body between
+	Loop[*] role xxx_Loop_body_src
+	Expression[0..1] role body
+end
+
+composition xxx_Loop_stopCondition between
+	Loop[*] role xxx_Loop_stopCondition_src
+	Expression[1] role stopCondition
+end
+
+composition xxx_VariableDecl_initialization between
+	VariableDecl[*] role xxx_VariableDecl_initialization_src
+	Expression[1] role initialization
+end
+
+composition xxx_VariableDecl_type between
+	VariableDecl[*] role xxx_VariableDecl_type_src
+	TypeReference[1] role type
+end
+
+association xxx_Class_ownedAttribute between
+	Class[0..1] role xxx_Class_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+association xxx_Class_ownedOperation between
+	Class[0..1] role xxx_Class_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+association xxx_Class_superClass between
+	Class[0..1] role xxx_Class_superClass_src
+	Class[*] role superClass
+end
+
+association xxx_Object_tag between
+	Object[0..1] role xxx_Object_tag_src
+	Tag[*] role tag
+end
+
+composition xxx_Object_ownedTags between
+	Object[0..1] role xxx_Object_ownedTags_src
+	Tag[*] role ownedTags
+end
+
+association xxx_Model_contents between
+	Model[0..1] role xxx_Model_contents_src
+	Object[*] role contents
+end
+
+association xxx_ModelType_includedTypeDefinition between
+	ModelType[0..1] role xxx_ModelType_includedTypeDefinition_src
+	TypeDefinition[*] role includedTypeDefinition
+end
+
+association xxx_Operation_raisedException between
+	Operation[0..1] role xxx_Operation_raisedException_src
+	Type[*] role raisedException
+end
+
+composition xxx_Operation_ownedParameter between
+	Operation[0..1] role xxx_Operation_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+composition xxx_Operation_pre_ between
+	Operation[0..1] role xxx_Operation_pre__src
+	Constraint[*] role pre_
+end
+
+composition xxx_Operation_post_ between
+	Operation[0..1] role xxx_Operation_post__src
+	Constraint[*] role post_
+end
+
+composition xxx_Operation_body between
+	Operation[*] role xxx_Operation_body_src
+	Expression[0..1] role body
+end
+
+association xxx_Operation_superOperation between
+	Operation[*] role xxx_Operation_superOperation_src
+	Operation[0..1] role superOperation
+end
+
+association xxx_Operation_owningClass between
+	Operation[*] role xxx_Operation_owningClass_src
+	ClassDefinition[0..1] role owningClass
+end
+
+association xxx_Operation_typeParameter between
+	Operation[0..1] role xxx_Operation_typeParameter_src
+	TypeVariable[*] role typeParameter
+end
+
+association xxx_Property_opposite between
+	Property[*] role xxx_Property_opposite_src
+	Property[0..1] role opposite
+end
+
+composition xxx_Property_getterBody between
+	Property[*] role xxx_Property_getterBody_src
+	Expression[0..1] role getterBody
+end
+
+composition xxx_Property_setterBody between
+	Property[*] role xxx_Property_setterBody_src
+	Expression[0..1] role setterBody
+end
+
+association xxx_Property_owningClass between
+	Property[*] role xxx_Property_owningClass_src
+	ClassDefinition[0..1] role owningClass
+end
+
+association xxx_Type_typeContainer between
+	Type[*] role xxx_Type_typeContainer_src
+	TypeContainer[0..1] role typeContainer
+end
+
+composition xxx_TypeContainer_containedType between
+	TypeContainer[0..1] role xxx_TypeContainer_containedType_src
+	Type[*] role containedType
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+association xxx_TypeVariableBinding_variable between
+	TypeVariableBinding[*] role xxx_TypeVariableBinding_variable_src
+	TypeVariable[1] role variable
+end
+
+association xxx_TypeVariableBinding_type between
+	TypeVariableBinding[*] role xxx_TypeVariableBinding_type_src
+	Type[1] role type
+end
+
+composition xxx_Enumeration_ownedLiteral between
+	Enumeration[0..1] role xxx_Enumeration_ownedLiteral_src
+	EnumerationLiteral[*] role ownedLiteral
+end
+
+composition xxx_Package_nestedPackage between
+	Package[0..1] role xxx_Package_nestedPackage_src
+	Package[*] role nestedPackage
+end
+
+association xxx_Package_nestingPackage between
+	Package[*] role xxx_Package_nestingPackage_src
+	Package[0..1] role nestingPackage
+end
+
+association xxx_Parameter_operation between
+	Parameter[*] role xxx_Parameter_operation_src
+	Operation[0..1] role operation
+end
+
+association xxx_PrimitiveType_instanceType between
+	PrimitiveType[*] role xxx_PrimitiveType_instanceType_src
+	Type[0..1] role instanceType
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_Tag_object between
+	Tag[0..1] role xxx_Tag_object_src
+	Object[1..*] role object
+end
+
+composition xxx_Constraint_body between
+	Constraint[*] role xxx_Constraint_body_src
+	Expression[1] role body
+end
+
+association xxx_Constraint_invOwner between
+	Constraint[*] role xxx_Constraint_invOwner_src
+	ClassDefinition[0..1] role invOwner
+end
+
+association xxx_Constraint_preOwner between
+	Constraint[*] role xxx_Constraint_preOwner_src
+	Operation[0..1] role preOwner
+end
+
+association xxx_Constraint_postOwner between
+	Constraint[*] role xxx_Constraint_postOwner_src
+	Operation[0..1] role postOwner
+end
+
+composition xxx_ClassDefinition_inv between
+	ClassDefinition[0..1] role xxx_ClassDefinition_inv_src
+	Constraint[*] role inv_
+end
+
+composition xxx_ClassDefinition_ownedAttribute between
+	ClassDefinition[0..1] role xxx_ClassDefinition_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_ClassDefinition_ownedOperation between
+	ClassDefinition[0..1] role xxx_ClassDefinition_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+association xxx_ClassDefinition_superType between
+	ClassDefinition[0..1] role xxx_ClassDefinition_superType_src
+	Type[*] role superType
+end
+
+composition xxx_ModelingUnit_packages between
+	ModelingUnit[0..1] role xxx_ModelingUnit_packages_src
+	Package[*] role packages
+end
+
+composition xxx_ModelingUnit_requires between
+	ModelingUnit[0..1] role xxx_ModelingUnit_requires_src
+	Require[*] role requires
+end
+
+composition xxx_ModelingUnit_usings between
+	ModelingUnit[0..1] role xxx_ModelingUnit_usings_src
+	Using[*] role usings
+end
+
+association xxx_ModelingUnit_referencedModelingUnits between
+	ModelingUnit[0..1] role xxx_ModelingUnit_referencedModelingUnits_src
+	ModelingUnit[*] role referencedModelingUnits
+end
+
+composition xxx_ModelingUnit_includeFilters between
+	ModelingUnit[0..1] role xxx_ModelingUnit_includeFilters_src
+	Filter[*] role includeFilters
+end
+
+composition xxx_ModelingUnit_excludeFilters between
+	ModelingUnit[0..1] role xxx_ModelingUnit_excludeFilters_src
+	Filter[*] role excludeFilters
+end
+
+composition xxx_GenericTypeDefinition_typeParameter between
+	GenericTypeDefinition[0..1] role xxx_GenericTypeDefinition_typeParameter_src
+	TypeVariable[*] role typeParameter
+end
+
+composition xxx_ParameterizedType_virtualTypeBinding between
+	ParameterizedType[0..1] role xxx_ParameterizedType_virtualTypeBinding_src
+	TypeVariableBinding[*] role virtualTypeBinding
+end
+
+composition xxx_ParameterizedType_typeParamBinding between
+	ParameterizedType[0..1] role xxx_ParameterizedType_typeParamBinding_src
+	TypeVariableBinding[*] role typeParamBinding
+end
+
+association xxx_ParameterizedType_typeDefinition between
+	ParameterizedType[*] role xxx_ParameterizedType_typeDefinition_src
+	GenericTypeDefinition[1] role typeDefinition
+end
+
+association xxx_TypeVariable_supertype between
+	TypeVariable[*] role xxx_TypeVariable_supertype_src
+	Type[0..1] role supertype
+end
+
+composition xxx_ModelTypeVariable_virtualType between
+	ModelTypeVariable[0..1] role xxx_ModelTypeVariable_virtualType_src
+	VirtualType[*] role virtualType
+end
+
+association xxx_VirtualType_classDefinition between
+	VirtualType[*] role xxx_VirtualType_classDefinition_src
+	ClassDefinition[1] role classDefinition
+end
+
+association xxx_VirtualType_modelType between
+	VirtualType[*] role xxx_VirtualType_modelType_src
+	ModelTypeVariable[1] role modelType
+end
+
+composition xxx_VirtualType_typeParamBinding between
+	VirtualType[0..1] role xxx_VirtualType_typeParamBinding_src
+	TypeVariableBinding[*] role typeParamBinding
+end
+
+association xxx_ProductType_type between
+	ProductType[0..1] role xxx_ProductType_type_src
+	Type[*] role type
+end
+
+association xxx_FunctionType_left between
+	FunctionType[*] role xxx_FunctionType_left_src
+	Type[0..1] role left
+end
+
+association xxx_FunctionType_right between
+	FunctionType[*] role xxx_FunctionType_right_src
+	Type[0..1] role right
+end
+
+composition xxx_TypeDefinitionContainer_ownedTypeDefinition between
+	TypeDefinitionContainer[0..1] role xxx_TypeDefinitionContainer_ownedTypeDefinition_src
+	TypeDefinition[*] role ownedTypeDefinition
+end
+

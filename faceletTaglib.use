@@ -1,0 +1,73 @@
+model faceletTaglib_1_0
+class FaceletLibraryClassTagLib<FaceletTaglibDefn
+attributes
+	libraryClass : String
+operations
+end
+
+class FaceletXMLDefnTaglib<FaceletTaglibDefn
+attributes
+	namespace : String
+operations
+end
+
+class FaceletTaglibDefn
+attributes
+operations
+end
+
+class ComponentTagDefn<HandlerTagDefn
+attributes
+	componentType : String
+	rendererType : String
+operations
+end
+
+class ValidatorTagDefn<HandlerTagDefn
+attributes
+	validatorId : String
+operations
+end
+
+class ConverterTagDefn<HandlerTagDefn
+attributes
+	converterId : String
+operations
+end
+
+class HandlerTagDefn<TagDefn
+attributes
+	handlerClass : String
+operations
+end
+
+class SourceTagDefn<TagDefn
+attributes
+	source : String
+operations
+end
+
+class TagDefn
+attributes
+	name : String
+operations
+end
+
+class FunctionDefn
+attributes
+	functionName : String
+	functionClass : String
+	functionSignature : String
+operations
+end
+
+association xxx_FaceletXMLDefnTaglib_tags between
+	FaceletXMLDefnTaglib[0..1] role xxx_FaceletXMLDefnTaglib_tags_src
+	TagDefn[*] role tags
+end
+
+association xxx_FaceletXMLDefnTaglib_functions between
+	FaceletXMLDefnTaglib[0..1] role xxx_FaceletXMLDefnTaglib_functions_src
+	FunctionDefn[*] role functions
+end
+

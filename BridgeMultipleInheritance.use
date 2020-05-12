@@ -1,0 +1,31 @@
+model bridgemultipleinheritance
+class Super1
+attributes
+operations
+end
+
+class Super2
+attributes
+operations
+end
+
+class Sub1<Super1,Super2
+attributes
+operations
+end
+
+class Sub3<Super2
+attributes
+operations
+end
+
+class Sub2<Sub1
+attributes
+operations
+end
+
+association xxx_Super1_reference between
+	Super1[*] role xxx_Super1_reference_src
+	Super2[0..1] role reference
+end
+

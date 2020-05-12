@@ -1,0 +1,441 @@
+model core
+enum SchemeType{
+default
+}
+
+enum ParameterLocation{
+default
+}
+
+enum CollectionFormat{
+default
+}
+
+enum OAuth2FlowType{
+default
+}
+
+enum APIKeyLocation{
+default
+}
+
+enum SecuritySchemeType{
+default
+}
+
+enum JSONDataType{
+default
+}
+
+abstract class JSONSchemaSubset
+attributes
+	type : JSONDataType
+	format : String
+	description : String
+	maximum : String
+	exclusiveMaximum : String
+	minimum : String
+	exclusiveMinimum : String
+	maxLength : Integer
+	minLength : Integer
+	pattern : String
+	maxItems : Integer
+	minItems : Integer
+	uniqueItems : String
+	enum_ : String
+	default : String
+	multipleOf : Real
+operations
+end
+
+class Root
+attributes
+operations
+end
+
+class API<ParamterDeclaringContext,ResponseContext,SchemaDeclaringContext,JSONPointer,SecurityContext,ParameterContext,ExternalDocsContext,ResponseDeclaringContext
+attributes
+	swagger : String
+	host : String
+	basePath : String
+	schemes : SchemeType
+	consumes : String
+	produces : String
+operations
+	getRef():String
+	pathsIsSet():Boolean
+end
+
+class Info
+attributes
+	title : String
+	description : String
+	termsOfServices : String
+	version : String
+operations
+end
+
+class Contact
+attributes
+	name : String
+	url : String
+	email : String
+operations
+end
+
+class License
+attributes
+	name : String
+	url : String
+operations
+end
+
+class Path<ParamterDeclaringContext,ParameterContext
+attributes
+	pattern : String
+operations
+end
+
+class Operation<ParamterDeclaringContext,ResponseContext,SecurityContext,ParameterContext,ExternalDocsContext,ResponseDeclaringContext
+attributes
+	tagReferences : String
+	summary : String
+	description : String
+	operationId : String
+	consumes : String
+	produces : String
+	schemes : SchemeType
+	deprecated : String
+operations
+end
+
+class ExternalDocs
+attributes
+	description : String
+	url : String
+operations
+end
+
+class Parameter<SchemaDeclaringContext,SchemaContext,JSONSchemaSubset,JSONPointer,ArrayContext
+attributes
+	name : String
+	location : ParameterLocation
+	required : String
+	allowEmplyValue : String
+	referenceName : String
+operations
+end
+
+class ItemsDefinition<JSONSchemaSubset,ArrayContext
+attributes
+operations
+end
+
+class Schema<JSONSchemaSubset,SchemaDeclaringContext,JSONPointer,ExternalDocsContext
+attributes
+	name : String
+	title : String
+	maxProperties : Integer
+	minProperties : Integer
+	required : String
+	example : String
+	discriminator : String
+	readOnly : String
+operations
+	getRef():String
+end
+
+class Response<SchemaDeclaringContext,SchemaContext
+attributes
+	description : String
+	code : String
+operations
+end
+
+class Header<JSONSchemaSubset,ArrayContext
+attributes
+	name : String
+operations
+end
+
+class Tag<ExternalDocsContext
+attributes
+	name : String
+	description : String
+operations
+end
+
+class SecuritySchema
+attributes
+	type : SecuritySchemeType
+	description : String
+	name : String
+	location : APIKeyLocation
+	flow : OAuth2FlowType
+	authorizationUrl : String
+	tokenUrl : String
+	globalName : String
+operations
+end
+
+class Example
+attributes
+	mimeType : String
+	value : String
+operations
+end
+
+class XMLElement
+attributes
+	name : String
+	namespace : String
+	prefix : String
+	attribute : Boolean
+	wrapped : Boolean
+operations
+end
+
+class SecurityScope
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class ParamterDeclaringContext
+attributes
+operations
+end
+
+abstract class ResponseContext
+attributes
+operations
+end
+
+abstract class SchemaDeclaringContext
+attributes
+operations
+end
+
+abstract class JSONPointer
+attributes
+	ref : String
+operations
+end
+
+abstract class SecurityContext
+attributes
+operations
+end
+
+abstract class ParameterContext
+attributes
+operations
+end
+
+abstract class SchemaContext
+attributes
+operations
+end
+
+abstract class ExternalDocsContext
+attributes
+operations
+end
+
+abstract class ArrayContext
+attributes
+	collectionFormat : CollectionFormat
+operations
+end
+
+abstract class ResponseDeclaringContext
+attributes
+operations
+end
+
+composition xxx_Root_api between
+	Root[*] role xxx_Root_api_src
+	API[0..1] role api
+end
+
+composition xxx_Root_paramters between
+	Root[0..1] role xxx_Root_paramters_src
+	Parameter[*] role paramters
+end
+
+composition xxx_Root_schemas between
+	Root[0..1] role xxx_Root_schemas_src
+	Schema[*] role schemas
+end
+
+composition xxx_Root_responses between
+	Root[0..1] role xxx_Root_responses_src
+	Response[*] role responses
+end
+
+composition xxx_API_info between
+	API[*] role xxx_API_info_src
+	Info[0..1] role info
+end
+
+composition xxx_API_paths between
+	API[0..1] role xxx_API_paths_src
+	Path[*] role paths
+end
+
+association xxx_API_definitions between
+	API[0..1] role xxx_API_definitions_src
+	Schema[*] role definitions
+end
+
+composition xxx_API_responses between
+	API[0..1] role xxx_API_responses_src
+	Response[*] role responses
+end
+
+composition xxx_API_securityDefinitions between
+	API[0..1] role xxx_API_securityDefinitions_src
+	SecuritySchema[*] role securityDefinitions
+end
+
+composition xxx_API_tags between
+	API[0..1] role xxx_API_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_Info_contact between
+	Info[*] role xxx_Info_contact_src
+	Contact[0..1] role contact
+end
+
+composition xxx_Info_license between
+	Info[*] role xxx_Info_license_src
+	License[0..1] role license
+end
+
+composition xxx_Path_get between
+	Path[*] role xxx_Path_get_src
+	Operation[0..1] role get
+end
+
+composition xxx_Path_put between
+	Path[*] role xxx_Path_put_src
+	Operation[0..1] role put
+end
+
+composition xxx_Path_post_ between
+	Path[*] role xxx_Path_post__src
+	Operation[0..1] role post_
+end
+
+composition xxx_Path_delete between
+	Path[*] role xxx_Path_delete_src
+	Operation[0..1] role delete_
+end
+
+composition xxx_Path_options between
+	Path[*] role xxx_Path_options_src
+	Operation[0..1] role options
+end
+
+composition xxx_Path_head between
+	Path[*] role xxx_Path_head_src
+	Operation[0..1] role head
+end
+
+composition xxx_Path_patch between
+	Path[*] role xxx_Path_patch_src
+	Operation[0..1] role patch
+end
+
+association xxx_Operation_responses between
+	Operation[0..1] role xxx_Operation_responses_src
+	Response[1..*] role responses
+end
+
+association xxx_Operation_path between
+	Operation[*] role xxx_Operation_path_src
+	Path[0..1] role path
+end
+
+association xxx_Parameter_declaringContext between
+	Parameter[*] role xxx_Parameter_declaringContext_src
+	ParamterDeclaringContext[0..1] role declaringContext
+end
+
+association xxx_Schema_properties between
+	Schema[0..1] role xxx_Schema_properties_src
+	Schema[*] role properties
+end
+
+association xxx_Schema_allOf between
+	Schema[0..1] role xxx_Schema_allOf_src
+	Schema[*] role allOf
+end
+
+association xxx_Schema_items between
+	Schema[*] role xxx_Schema_items_src
+	Schema[0..1] role items
+end
+
+composition xxx_Schema_xml between
+	Schema[*] role xxx_Schema_xml_src
+	XMLElement[0..1] role xml
+end
+
+association xxx_Schema_additonalProperties between
+	Schema[*] role xxx_Schema_additonalProperties_src
+	Schema[0..1] role additonalProperties
+end
+
+association xxx_Schema_declaringContext between
+	Schema[*] role xxx_Schema_declaringContext_src
+	SchemaDeclaringContext[0..1] role declaringContext
+end
+
+composition xxx_Response_headers between
+	Response[0..1] role xxx_Response_headers_src
+	Header[*] role headers
+end
+
+composition xxx_Response_examples between
+	Response[0..1] role xxx_Response_examples_src
+	Example[*] role examples
+end
+
+association xxx_Response_declaringContext between
+	Response[*] role xxx_Response_declaringContext_src
+	ResponseDeclaringContext[0..1] role declaringContext
+end
+
+composition xxx_SecuritySchema_scopes between
+	SecuritySchema[0..1] role xxx_SecuritySchema_scopes_src
+	SecurityScope[*] role scopes
+end
+
+association xxx_SecurityContext_securityRequirement between
+	SecurityContext[0..1] role xxx_SecurityContext_securityRequirement_src
+	SecurityScope[*] role securityRequirement
+end
+
+association xxx_ParameterContext_parameters between
+	ParameterContext[0..1] role xxx_ParameterContext_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_SchemaContext_schema between
+	SchemaContext[*] role xxx_SchemaContext_schema_src
+	Schema[0..1] role schema
+end
+
+composition xxx_ExternalDocsContext_externalDocs between
+	ExternalDocsContext[*] role xxx_ExternalDocsContext_externalDocs_src
+	ExternalDocs[0..1] role externalDocs
+end
+
+composition xxx_ArrayContext_items between
+	ArrayContext[*] role xxx_ArrayContext_items_src
+	ItemsDefinition[0..1] role items
+end
+

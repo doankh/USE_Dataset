@@ -1,0 +1,441 @@
+model Common_Behavior
+enum AggregationKind{
+	ak_none,
+	ak_aggregate,
+	ak_composite
+}
+
+enum ChangeableKind{
+	ck_changeable,
+	ck_frozen,
+	ck_addOnly
+}
+
+enum OrderingKind{
+	ok_unordered,
+	ok_ordered
+}
+
+enum ScopeKind{
+	sk_instance,
+	sk_classifier
+}
+
+enum VisibilityKind{
+	vk_public,
+	vk_protected,
+	vk_private,
+	vk_package
+}
+
+abstract class Instance<ModelElement
+attributes
+operations
+end
+
+class AttributeLink<ModelElement
+attributes
+operations
+end
+
+class Link<ModelElement
+attributes
+operations
+end
+
+class LinkEnd<ModelElement
+attributes
+operations
+end
+
+class ComponentInstance<Instance
+attributes
+operations
+end
+
+class NodeInstance<Instance
+attributes
+operations
+end
+
+class UseCase<Classifier
+attributes
+operations
+end
+
+class Actor<Classifier
+attributes
+operations
+end
+
+class UseCaseInstance<Instance
+attributes
+operations
+end
+
+class Extend<Relationship
+attributes
+operations
+end
+
+class Include<Relationship
+attributes
+operations
+end
+
+class ExtensionPoint<ModelElement
+attributes
+	location : String
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+abstract class ModelElement<Element
+attributes
+	name : String
+	visibility : VisibilityKind
+	isSpecification : Boolean
+operations
+end
+
+abstract class GeneralizableElement<ModelElement
+attributes
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+operations
+end
+
+abstract class Namespace<ModelElement
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+abstract class Feature<ModelElement
+attributes
+	ownerScope : ScopeKind
+operations
+end
+
+abstract class StructuralFeature<Feature
+attributes
+	changeability : ChangeableKind
+	targetScope : ScopeKind
+	ordering : OrderingKind
+operations
+end
+
+class AssociationEnd<ModelElement
+attributes
+	isNavigable : Boolean
+	ordering : OrderingKind
+	aggregation : AggregationKind
+	targetScope : ScopeKind
+	changeability : ChangeableKind
+operations
+end
+
+abstract class Relationship<ModelElement
+attributes
+operations
+end
+
+class Association<Relationship
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+class Generalization<Relationship
+attributes
+	discriminator : String
+operations
+end
+
+class Multiplicity
+attributes
+operations
+end
+
+class MultiplicityRange
+attributes
+	lower : Integer
+	upper : Integer
+operations
+end
+
+class Expression
+attributes
+	language : String
+	body : String
+operations
+end
+
+class BooleanExpression<Expression
+attributes
+operations
+end
+
+composition xxx_Instance_ownedInstance between
+	Instance[0..1] role xxx_Instance_ownedInstance_src
+	Instance[*] role ownedInstance
+end
+
+association xxx_Instance_linkEnd between
+	Instance[0..1] role xxx_Instance_linkEnd_src
+	LinkEnd[*] role linkEnd
+end
+
+association xxx_Instance_classifier between
+	Instance[0..1] role xxx_Instance_classifier_src
+	Classifier[1..*] role classifier
+end
+
+association xxx_Instance_componentInstance between
+	Instance[*] role xxx_Instance_componentInstance_src
+	ComponentInstance[0..1] role componentInstance
+end
+
+composition xxx_Instance_slot between
+	Instance[0..1] role xxx_Instance_slot_src
+	AttributeLink[*] role slot
+end
+
+composition xxx_Instance_ownedLink between
+	Instance[0..1] role xxx_Instance_ownedLink_src
+	Link[*] role ownedLink
+end
+
+association xxx_AttributeLink_instance between
+	AttributeLink[*] role xxx_AttributeLink_instance_src
+	Instance[0..1] role instance
+end
+
+association xxx_AttributeLink_value between
+	AttributeLink[*] role xxx_AttributeLink_value_src
+	Instance[1] role value
+end
+
+association xxx_AttributeLink_linkEnd between
+	AttributeLink[*] role xxx_AttributeLink_linkEnd_src
+	LinkEnd[0..1] role linkEnd
+end
+
+association xxx_AttributeLink_attribute between
+	AttributeLink[*] role xxx_AttributeLink_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Link_association_ between
+	Link[*] role xxx_Link_association__src
+	Association[1] role association_
+end
+
+composition xxx_Link_connection between
+	Link[0..1] role xxx_Link_connection_src
+	LinkEnd[2..*] role connection
+end
+
+association xxx_LinkEnd_link between
+	LinkEnd[*] role xxx_LinkEnd_link_src
+	Link[1] role link
+end
+
+composition xxx_LinkEnd_qualifiedValue between
+	LinkEnd[0..1] role xxx_LinkEnd_qualifiedValue_src
+	AttributeLink[*] role qualifiedValue
+end
+
+association xxx_LinkEnd_instance between
+	LinkEnd[*] role xxx_LinkEnd_instance_src
+	Instance[1] role instance
+end
+
+association xxx_LinkEnd_associationEnd between
+	LinkEnd[*] role xxx_LinkEnd_associationEnd_src
+	AssociationEnd[1] role associationEnd
+end
+
+association xxx_ComponentInstance_resident between
+	ComponentInstance[0..1] role xxx_ComponentInstance_resident_src
+	Instance[*] role resident
+end
+
+association xxx_ComponentInstance_nodeInstance between
+	ComponentInstance[*] role xxx_ComponentInstance_nodeInstance_src
+	NodeInstance[0..1] role nodeInstance
+end
+
+association xxx_NodeInstance_resident between
+	NodeInstance[0..1] role xxx_NodeInstance_resident_src
+	ComponentInstance[*] role resident
+end
+
+association xxx_UseCase_include between
+	UseCase[0..1] role xxx_UseCase_include_src
+	Include[*] role include
+end
+
+association xxx_UseCase_extend between
+	UseCase[0..1] role xxx_UseCase_extend_src
+	Extend[*] role extend
+end
+
+composition xxx_UseCase_extensionPoint between
+	UseCase[0..1] role xxx_UseCase_extensionPoint_src
+	ExtensionPoint[*] role extensionPoint
+end
+
+association xxx_Extend_extensionPoint between
+	Extend[0..1] role xxx_Extend_extensionPoint_src
+	ExtensionPoint[1..*] role extensionPoint
+end
+
+association xxx_Extend_extension between
+	Extend[*] role xxx_Extend_extension_src
+	UseCase[1] role extension
+end
+
+association xxx_Extend_base between
+	Extend[*] role xxx_Extend_base_src
+	UseCase[1] role base
+end
+
+composition xxx_Extend_condition between
+	Extend[*] role xxx_Extend_condition_src
+	BooleanExpression[1] role condition
+end
+
+association xxx_Include_addition between
+	Include[*] role xxx_Include_addition_src
+	UseCase[1] role addition
+end
+
+association xxx_Include_base between
+	Include[*] role xxx_Include_base_src
+	UseCase[1] role base
+end
+
+association xxx_ExtensionPoint_useCase between
+	ExtensionPoint[*] role xxx_ExtensionPoint_useCase_src
+	UseCase[1] role useCase
+end
+
+association xxx_ModelElement_namespace between
+	ModelElement[*] role xxx_ModelElement_namespace_src
+	Namespace[0..1] role namespace
+end
+
+association xxx_GeneralizableElement_generalization between
+	GeneralizableElement[0..1] role xxx_GeneralizableElement_generalization_src
+	Generalization[*] role generalization
+end
+
+composition xxx_Namespace_ownedElement between
+	Namespace[0..1] role xxx_Namespace_ownedElement_src
+	ModelElement[*] role ownedElement
+end
+
+association xxx_Classifier_powertypeRange between
+	Classifier[0..1] role xxx_Classifier_powertypeRange_src
+	Generalization[*] role powertypeRange
+end
+
+composition xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+association xxx_Feature_owner between
+	Feature[*] role xxx_Feature_owner_src
+	Classifier[0..1] role owner
+end
+
+association xxx_StructuralFeature_type between
+	StructuralFeature[*] role xxx_StructuralFeature_type_src
+	Classifier[1] role type
+end
+
+composition xxx_StructuralFeature_multiplicity between
+	StructuralFeature[*] role xxx_StructuralFeature_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+association xxx_AssociationEnd_association_ between
+	AssociationEnd[*] role xxx_AssociationEnd_association__src
+	Association[1] role association_
+end
+
+association xxx_AssociationEnd_specification between
+	AssociationEnd[0..1] role xxx_AssociationEnd_specification_src
+	Classifier[*] role specification
+end
+
+association xxx_AssociationEnd_participant between
+	AssociationEnd[*] role xxx_AssociationEnd_participant_src
+	Classifier[1] role participant
+end
+
+composition xxx_AssociationEnd_qualifier between
+	AssociationEnd[0..1] role xxx_AssociationEnd_qualifier_src
+	Attribute[*] role qualifier
+end
+
+composition xxx_AssociationEnd_multiplicity between
+	AssociationEnd[*] role xxx_AssociationEnd_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+composition xxx_Association_connection between
+	Association[0..1] role xxx_Association_connection_src
+	AssociationEnd[2..*] role connection
+end
+
+association xxx_Attribute_associationEnd between
+	Attribute[*] role xxx_Attribute_associationEnd_src
+	AssociationEnd[0..1] role associationEnd
+end
+
+composition xxx_Attribute_initialValue between
+	Attribute[*] role xxx_Attribute_initialValue_src
+	Expression[0..1] role initialValue
+end
+
+association xxx_Generalization_parent between
+	Generalization[*] role xxx_Generalization_parent_src
+	GeneralizableElement[1] role parent
+end
+
+association xxx_Generalization_powertype between
+	Generalization[*] role xxx_Generalization_powertype_src
+	Classifier[0..1] role powertype
+end
+
+association xxx_Generalization_child between
+	Generalization[*] role xxx_Generalization_child_src
+	GeneralizableElement[1] role child
+end
+
+composition xxx_Multiplicity_range between
+	Multiplicity[0..1] role xxx_Multiplicity_range_src
+	MultiplicityRange[1..*] role range
+end
+
+association xxx_MultiplicityRange_multiplicity between
+	MultiplicityRange[*] role xxx_MultiplicityRange_multiplicity_src
+	Multiplicity[1] role multiplicity
+end
+

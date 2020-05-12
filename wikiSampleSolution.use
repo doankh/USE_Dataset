@@ -1,0 +1,229 @@
+model wikiSampleSolution
+enum RoleType{
+default
+}
+
+class Wiki
+attributes
+operations
+end
+
+abstract class Content
+attributes
+	Ttile : String
+	contentMarkup : String
+operations
+end
+
+class Article<Content
+attributes
+operations
+end
+
+class Media<Content
+attributes
+operations
+end
+
+class ProjectPage<Content,Subscribable
+attributes
+operations
+end
+
+class DiscussionPage<Content
+attributes
+operations
+end
+
+class Version
+attributes
+	timestamp : String
+	diff : String
+	commitMsg : String
+operations
+end
+
+class History
+attributes
+operations
+end
+
+abstract class User
+attributes
+	registrationTimestamp : Integer
+operations
+end
+
+class Group<Subscribable
+attributes
+	namespace : String
+operations
+end
+
+class Mode
+attributes
+	name : String
+operations
+end
+
+class Action
+attributes
+	name : String
+operations
+	execute(content : Content):Content
+end
+
+class Privileg
+attributes
+	name : String
+operations
+end
+
+class RegisteredUser<User
+attributes
+	username : String
+operations
+end
+
+class UnregisteredUser<User
+attributes
+	IPAddress : String
+operations
+end
+
+class Profile<Content
+attributes
+operations
+end
+
+abstract class Subscribable
+attributes
+operations
+end
+
+class Role
+attributes
+	type : RoleType
+operations
+end
+
+composition xxx_Wiki_content between
+	Wiki[0..1] role xxx_Wiki_content_src
+	Content[*] role content
+end
+
+composition xxx_Wiki_privilegs between
+	Wiki[0..1] role xxx_Wiki_privilegs_src
+	Privileg[*] role privilegs
+end
+
+composition xxx_Wiki_groups between
+	Wiki[0..1] role xxx_Wiki_groups_src
+	Group[*] role groups
+end
+
+composition xxx_Wiki_users between
+	Wiki[0..1] role xxx_Wiki_users_src
+	User[*] role users
+end
+
+composition xxx_Wiki_mode between
+	Wiki[0..1] role xxx_Wiki_mode_src
+	Mode[*] role mode
+end
+
+composition xxx_Wiki_role between
+	Wiki[0..1] role xxx_Wiki_role_src
+	Role[*] role role
+end
+
+association xxx_Wiki_history between
+	Wiki[0..1] role xxx_Wiki_history_src
+	History[*] role history
+end
+
+association xxx_Wiki_versions between
+	Wiki[0..1] role xxx_Wiki_versions_src
+	Version[*] role versions
+end
+
+composition xxx_Content_history between
+	Content[*] role xxx_Content_history_src
+	History[1] role history
+end
+
+composition xxx_Content_discussionpage between
+	Content[*] role xxx_Content_discussionpage_src
+	DiscussionPage[1] role discussionpage
+end
+
+association xxx_Content_group between
+	Content[0..1] role xxx_Content_group_src
+	Group[*] role group
+end
+
+association xxx_Content_editor between
+	Content[*] role xxx_Content_editor_src
+	User[1] role editor
+end
+
+association xxx_Version_previous between
+	Version[*] role xxx_Version_previous_src
+	Version[0..1] role previous
+end
+
+association xxx_Version_editedBy between
+	Version[*] role xxx_Version_editedBy_src
+	User[0..1] role editedBy
+end
+
+composition xxx_History_versions between
+	History[0..1] role xxx_History_versions_src
+	Version[*] role versions
+end
+
+association xxx_User_role between
+	User[*] role xxx_User_role_src
+	Role[1] role role
+end
+
+association xxx_User_mode between
+	User[*] role xxx_User_mode_src
+	Mode[1] role mode
+end
+
+association xxx_Mode_availableActions between
+	Mode[0..1] role xxx_Mode_availableActions_src
+	Action[*] role availableActions
+end
+
+association xxx_Mode_parent between
+	Mode[*] role xxx_Mode_parent_src
+	Mode[0..1] role parent
+end
+
+association xxx_Privileg_parent between
+	Privileg[*] role xxx_Privileg_parent_src
+	Privileg[0..1] role parent
+end
+
+composition xxx_Privileg_action between
+	Privileg[0..1] role xxx_Privileg_action_src
+	Action[*] role action
+end
+
+composition xxx_RegisteredUser_profile between
+	RegisteredUser[*] role xxx_RegisteredUser_profile_src
+	Profile[1] role profile
+end
+
+association xxx_RegisteredUser_subscriptions between
+	RegisteredUser[0..1] role xxx_RegisteredUser_subscriptions_src
+	Subscribable[*] role subscriptions
+end
+
+association xxx_Role_privileg between
+	Role[0..1] role xxx_Role_privileg_src
+	Privileg[1..*] role privileg
+end
+

@@ -1,0 +1,59 @@
+model pub_tgt
+class Model
+attributes
+operations
+end
+
+class Publication
+attributes
+	Title : String
+	Year : Integer
+	PublishedIn : String
+	AuthorName : String
+operations
+end
+
+class Model1
+attributes
+operations
+end
+
+class Period1
+attributes
+	Year : Integer
+operations
+end
+
+class Author1
+attributes
+	Name : String
+operations
+end
+
+class Publication1
+attributes
+	Title : String
+	PublishedIn : String
+operations
+end
+
+composition xxx_Model_publications between
+	Model[0..1] role xxx_Model_publications_src
+	Publication[*] role publications
+end
+
+composition xxx_Model1_periods between
+	Model1[0..1] role xxx_Model1_periods_src
+	Period1[*] role periods
+end
+
+composition xxx_Period1_Authors between
+	Period1[0..1] role xxx_Period1_Authors_src
+	Author1[*] role Authors
+end
+
+composition xxx_Author1_Publications between
+	Author1[0..1] role xxx_Author1_Publications_src
+	Publication1[*] role Publications
+end
+

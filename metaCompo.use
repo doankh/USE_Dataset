@@ -1,0 +1,148 @@
+model metaCompo
+enum mIO{
+default
+}
+
+class mComp
+attributes
+	type : String
+	name : String
+operations
+end
+
+class mPort
+attributes
+	name : String
+	io : mIO
+	type : String
+operations
+end
+
+class mFSM
+attributes
+	name : String
+operations
+end
+
+class mVariable
+attributes
+	name : String
+	type : String
+operations
+end
+
+class mState
+attributes
+	name : String
+operations
+end
+
+class mTransition
+attributes
+	name : String
+	triggerExp : String
+	guard : String
+	action : String
+operations
+end
+
+composition xxx_mComp_subComps between
+	mComp[0..1] role xxx_mComp_subComps_src
+	mComp[*] role subComps
+end
+
+composition xxx_mComp_ports between
+	mComp[0..1] role xxx_mComp_ports_src
+	mPort[*] role ports
+end
+
+composition xxx_mComp_FSMs between
+	mComp[0..1] role xxx_mComp_FSMs_src
+	mFSM[1..*] role FSMs
+end
+
+composition xxx_mComp_compVar between
+	mComp[0..1] role xxx_mComp_compVar_src
+	mVariable[*] role compVar
+end
+
+association xxx_mPort_connectedTo between
+	mPort[*] role xxx_mPort_connectedTo_src
+	mPort[0..1] role connectedTo
+end
+
+association xxx_mPort_connToVar between
+	mPort[*] role xxx_mPort_connToVar_src
+	mVariable[0..1] role connToVar
+end
+
+association xxx_mFSM_component between
+	mFSM[*] role xxx_mFSM_component_src
+	mComp[1] role component
+end
+
+composition xxx_mFSM_fsmVar between
+	mFSM[0..1] role xxx_mFSM_fsmVar_src
+	mVariable[*] role fsmVar
+end
+
+composition xxx_mFSM_states_ between
+	mFSM[0..1] role xxx_mFSM_states__src
+	mState[*] role states_
+end
+
+association xxx_mFSM_initialState between
+	mFSM[*] role xxx_mFSM_initialState_src
+	mState[1] role initialState
+end
+
+association xxx_mFSM_finalState between
+	mFSM[*] role xxx_mFSM_finalState_src
+	mState[0..1] role finalState
+end
+
+association xxx_mState_owningFSM between
+	mState[*] role xxx_mState_owningFSM_src
+	mFSM[1] role owningFSM
+end
+
+composition xxx_mState_stateVar between
+	mState[0..1] role xxx_mState_stateVar_src
+	mVariable[*] role stateVar
+end
+
+composition xxx_mState_outgoingTransitions between
+	mState[0..1] role xxx_mState_outgoingTransitions_src
+	mTransition[*] role outgoingTransitions
+end
+
+association xxx_mState_incomingTransitions between
+	mState[0..1] role xxx_mState_incomingTransitions_src
+	mTransition[*] role incomingTransitions
+end
+
+composition xxx_mState_subStates between
+	mState[0..1] role xxx_mState_subStates_src
+	mState[*] role subStates
+end
+
+association xxx_mTransition_source between
+	mTransition[*] role xxx_mTransition_source_src
+	mState[1] role source
+end
+
+association xxx_mTransition_destination between
+	mTransition[*] role xxx_mTransition_destination_src
+	mState[1] role destination
+end
+
+association xxx_mTransition_trigerringVar between
+	mTransition[0..1] role xxx_mTransition_trigerringVar_src
+	mVariable[*] role trigerringVar
+end
+
+association xxx_mTransition_triggeringPort between
+	mTransition[0..1] role xxx_mTransition_triggeringPort_src
+	mPort[*] role triggeringPort
+end
+

@@ -1,0 +1,211 @@
+model USECASE1
+class Task
+attributes
+operations
+end
+
+class User
+attributes
+operations
+end
+
+class Actor
+attributes
+operations
+end
+
+class Goal
+attributes
+operations
+end
+
+class UseCase
+attributes
+operations
+end
+
+class Service
+attributes
+operations
+end
+
+class Scenario
+attributes
+operations
+end
+
+class Context
+attributes
+operations
+end
+
+class PreCondition
+attributes
+operations
+end
+
+class PostCondition
+attributes
+operations
+end
+
+class Episode
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+class Action<Event
+attributes
+operations
+end
+
+class Responce<Event
+attributes
+operations
+end
+
+class Stimilus<Event
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+association xxx_Task_service between
+	Task[0..1] role xxx_Task_service_src
+	Service[1..*] role service
+end
+
+association xxx_User_useCase between
+	User[0..1] role xxx_User_useCase_src
+	UseCase[1..*] role useCase
+end
+
+association xxx_User_actor between
+	User[0..1] role xxx_User_actor_src
+	Actor[*] role actor
+end
+
+association xxx_Actor_useCase between
+	Actor[0..1] role xxx_Actor_useCase_src
+	UseCase[1..*] role useCase
+end
+
+association xxx_Actor_goal between
+	Actor[0..1] role xxx_Actor_goal_src
+	Goal[*] role goal
+end
+
+association xxx_Actor_user between
+	Actor[0..1] role xxx_Actor_user_src
+	User[*] role user
+end
+
+association xxx_Goal_service between
+	Goal[0..1] role xxx_Goal_service_src
+	Service[1..*] role service
+end
+
+association xxx_Goal_actor between
+	Goal[0..1] role xxx_Goal_actor_src
+	Actor[1..*] role actor
+end
+
+composition xxx_UseCase_context_ between
+	UseCase[*] role xxx_UseCase_context__src
+	Context[0..1] role context_
+end
+
+association xxx_UseCase_service between
+	UseCase[0..1] role xxx_UseCase_service_src
+	Service[*] role service
+end
+
+association xxx_UseCase_user between
+	UseCase[0..1] role xxx_UseCase_user_src
+	User[*] role user
+end
+
+association xxx_UseCase_actor between
+	UseCase[0..1] role xxx_UseCase_actor_src
+	Actor[*] role actor
+end
+
+association xxx_Service_useCase between
+	Service[0..1] role xxx_Service_useCase_src
+	UseCase[1..*] role useCase
+end
+
+association xxx_Service_goal between
+	Service[0..1] role xxx_Service_goal_src
+	Goal[1..*] role goal
+end
+
+association xxx_Service_task between
+	Service[0..1] role xxx_Service_task_src
+	Task[1..*] role task
+end
+
+association xxx_Context_preCondition between
+	Context[0..1] role xxx_Context_preCondition_src
+	PreCondition[1..*] role preCondition
+end
+
+association xxx_Context_postCondition between
+	Context[0..1] role xxx_Context_postCondition_src
+	PostCondition[1..*] role postCondition
+end
+
+association xxx_Context_useCase between
+	Context[0..1] role xxx_Context_useCase_src
+	UseCase[1..*] role useCase
+end
+
+association xxx_PreCondition_context_ between
+	PreCondition[0..1] role xxx_PreCondition_context__src
+	Context[*] role context_
+end
+
+association xxx_PostCondition_context_ between
+	PostCondition[0..1] role xxx_PostCondition_context__src
+	Context[*] role context_
+end
+
+association xxx_Episode_event between
+	Episode[0..1] role xxx_Episode_event_src
+	Event[*] role event
+end
+
+association xxx_Event_episode between
+	Event[0..1] role xxx_Event_episode_src
+	Episode[1..*] role episode
+end
+
+composition xxx_Responce_parameter between
+	Responce[0..1] role xxx_Responce_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_Stimilus_parameter between
+	Stimilus[0..1] role xxx_Stimilus_parameter_src
+	Parameter[*] role parameter
+end
+
+association xxx_Parameter_stimilus between
+	Parameter[0..1] role xxx_Parameter_stimilus_src
+	Stimilus[1..*] role stimilus
+end
+
+association xxx_Parameter_responce between
+	Parameter[0..1] role xxx_Parameter_responce_src
+	Responce[1..*] role responce
+end
+

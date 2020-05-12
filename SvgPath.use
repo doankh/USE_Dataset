@@ -1,0 +1,371 @@
+model svgPath
+class svg_path
+attributes
+operations
+end
+
+class moveto_drawto_command_groups
+attributes
+operations
+end
+
+class moveto_drawto_command_group
+attributes
+operations
+end
+
+class moveto
+attributes
+operations
+end
+
+class lineto_argument_sequence
+attributes
+operations
+end
+
+class drawto_commands
+attributes
+operations
+end
+
+class drawto_command
+attributes
+operations
+end
+
+class closepath<drawto_command
+attributes
+operations
+end
+
+class lineto<drawto_command
+attributes
+operations
+end
+
+class horizontal_lineto<drawto_command
+attributes
+operations
+end
+
+class horizontal_lineto_argument_sequence
+attributes
+operations
+end
+
+class vertical_lineto<drawto_command
+attributes
+operations
+end
+
+class vertical_lineto_argument_sequence
+attributes
+operations
+end
+
+class curveto<drawto_command
+attributes
+operations
+end
+
+class curveto_argument_sequence
+attributes
+operations
+end
+
+class curveto_argument
+attributes
+operations
+end
+
+class smooth_curveto<drawto_command
+attributes
+operations
+end
+
+class smooth_curveto_argument_sequence
+attributes
+operations
+end
+
+class smooth_curveto_argument
+attributes
+operations
+end
+
+class quadratic_bezier_curveto<drawto_command
+attributes
+operations
+end
+
+class quadratic_bezier_curveto_argument_sequence<quadratic_bezier_curveto
+attributes
+operations
+end
+
+class quadratic_bezier_curveto_argument
+attributes
+operations
+end
+
+class smooth_quadratic_bezier_curveto<drawto_command
+attributes
+operations
+end
+
+class smooth_quadratic_bezier_curveto_argument_sequence
+attributes
+operations
+end
+
+class elliptical_arc<drawto_command
+attributes
+operations
+end
+
+class elliptical_arc_argument_sequence
+attributes
+operations
+end
+
+class elliptical_arc_argument
+attributes
+	largearcflag : String
+	sweepflag : String
+operations
+end
+
+class coordinate_pair
+attributes
+operations
+end
+
+class coordinate
+attributes
+operations
+end
+
+class number<coordinate
+attributes
+	sign : String
+operations
+end
+
+class nonnegative_number
+attributes
+operations
+end
+
+class exponent
+attributes
+	sign : String
+operations
+end
+
+class digit_sequence
+attributes
+	digits : String
+operations
+end
+
+composition xxx_svg_path_moveto_drawto_command_groups between
+	svg_path[*] role xxx_svg_path_moveto_drawto_command_groups_src
+	moveto_drawto_command_groups[0..1] role moveto_drawto_command_groups
+end
+
+composition xxx_moveto_drawto_command_groups_commands between
+	moveto_drawto_command_groups[0..1] role xxx_moveto_drawto_command_groups_commands_src
+	moveto_drawto_command_group[*] role commands
+end
+
+composition xxx_moveto_drawto_command_group_moveto between
+	moveto_drawto_command_group[*] role xxx_moveto_drawto_command_group_moveto_src
+	moveto[0..1] role moveto
+end
+
+composition xxx_moveto_drawto_command_group_drawto_commands between
+	moveto_drawto_command_group[*] role xxx_moveto_drawto_command_group_drawto_commands_src
+	drawto_commands[0..1] role drawto_commands
+end
+
+composition xxx_moveto_point between
+	moveto[*] role xxx_moveto_point_src
+	coordinate_pair[0..1] role point
+end
+
+composition xxx_moveto_lineto_argument_sequence between
+	moveto[*] role xxx_moveto_lineto_argument_sequence_src
+	lineto_argument_sequence[0..1] role lineto_argument_sequence
+end
+
+composition xxx_lineto_argument_sequence_pairs between
+	lineto_argument_sequence[0..1] role xxx_lineto_argument_sequence_pairs_src
+	coordinate_pair[*] role pairs
+end
+
+composition xxx_drawto_commands_drawto_commands between
+	drawto_commands[0..1] role xxx_drawto_commands_drawto_commands_src
+	drawto_command[*] role drawto_commands
+end
+
+composition xxx_lineto_lineto_argument_sequence between
+	lineto[*] role xxx_lineto_lineto_argument_sequence_src
+	lineto_argument_sequence[0..1] role lineto_argument_sequence
+end
+
+composition xxx_horizontal_lineto_horizontal_lineto_argument_sequence between
+	horizontal_lineto[*] role xxx_horizontal_lineto_horizontal_lineto_argument_sequence_src
+	horizontal_lineto_argument_sequence[0..1] role horizontal_lineto_argument_sequence
+end
+
+composition xxx_horizontal_lineto_argument_sequence_coordinates between
+	horizontal_lineto_argument_sequence[0..1] role xxx_horizontal_lineto_argument_sequence_coordinates_src
+	coordinate[*] role coordinates
+end
+
+composition xxx_vertical_lineto_vertical_lineto_argument_sequence between
+	vertical_lineto[*] role xxx_vertical_lineto_vertical_lineto_argument_sequence_src
+	vertical_lineto_argument_sequence[0..1] role vertical_lineto_argument_sequence
+end
+
+composition xxx_vertical_lineto_argument_sequence_coordinates between
+	vertical_lineto_argument_sequence[0..1] role xxx_vertical_lineto_argument_sequence_coordinates_src
+	coordinate[*] role coordinates
+end
+
+composition xxx_curveto_curveto_argument_sequence between
+	curveto[*] role xxx_curveto_curveto_argument_sequence_src
+	curveto_argument_sequence[0..1] role curveto_argument_sequence
+end
+
+composition xxx_curveto_argument_sequence_curveto_arguments between
+	curveto_argument_sequence[0..1] role xxx_curveto_argument_sequence_curveto_arguments_src
+	curveto_argument[*] role curveto_arguments
+end
+
+composition xxx_curveto_argument_c1 between
+	curveto_argument[*] role xxx_curveto_argument_c1_src
+	coordinate_pair[0..1] role c1
+end
+
+composition xxx_curveto_argument_c2 between
+	curveto_argument[*] role xxx_curveto_argument_c2_src
+	coordinate_pair[0..1] role c2
+end
+
+composition xxx_curveto_argument_c3 between
+	curveto_argument[*] role xxx_curveto_argument_c3_src
+	coordinate_pair[0..1] role c3
+end
+
+composition xxx_smooth_curveto_smooth_curveto_argument_sequence between
+	smooth_curveto[*] role xxx_smooth_curveto_smooth_curveto_argument_sequence_src
+	smooth_curveto_argument_sequence[0..1] role smooth_curveto_argument_sequence
+end
+
+composition xxx_smooth_curveto_argument_sequence_smooth_curveto_arguments between
+	smooth_curveto_argument_sequence[0..1] role xxx_smooth_curveto_argument_sequence_smooth_curveto_arguments_src
+	smooth_curveto_argument[*] role smooth_curveto_arguments
+end
+
+composition xxx_smooth_curveto_argument_c1 between
+	smooth_curveto_argument[*] role xxx_smooth_curveto_argument_c1_src
+	coordinate_pair[0..1] role c1
+end
+
+composition xxx_smooth_curveto_argument_c2 between
+	smooth_curveto_argument[*] role xxx_smooth_curveto_argument_c2_src
+	coordinate_pair[0..1] role c2
+end
+
+composition xxx_quadratic_bezier_curveto_argument_sequence_quadratic_bezier_curveto_arguments between
+	quadratic_bezier_curveto_argument_sequence[0..1] role xxx_quadratic_bezier_curveto_argument_sequence_quadratic_bezier_curveto_arguments_src
+	quadratic_bezier_curveto_argument[*] role quadratic_bezier_curveto_arguments
+end
+
+composition xxx_quadratic_bezier_curveto_argument_c1 between
+	quadratic_bezier_curveto_argument[*] role xxx_quadratic_bezier_curveto_argument_c1_src
+	coordinate_pair[0..1] role c1
+end
+
+composition xxx_quadratic_bezier_curveto_argument_c2 between
+	quadratic_bezier_curveto_argument[*] role xxx_quadratic_bezier_curveto_argument_c2_src
+	coordinate_pair[0..1] role c2
+end
+
+composition xxx_smooth_quadratic_bezier_curveto_smooth_quadratic_bezier_curveto_argument_sequence between
+	smooth_quadratic_bezier_curveto[*] role xxx_smooth_quadratic_bezier_curveto_smooth_quadratic_bezier_curveto_argument_sequence_src
+	smooth_quadratic_bezier_curveto_argument_sequence[0..1] role smooth_quadratic_bezier_curveto_argument_sequence
+end
+
+composition xxx_smooth_quadratic_bezier_curveto_argument_sequence_coordinate_pairs between
+	smooth_quadratic_bezier_curveto_argument_sequence[0..1] role xxx_smooth_quadratic_bezier_curveto_argument_sequence_coordinate_pairs_src
+	coordinate_pair[*] role coordinate_pairs
+end
+
+composition xxx_elliptical_arc_elliptical_arc_argument_sequence between
+	elliptical_arc[*] role xxx_elliptical_arc_elliptical_arc_argument_sequence_src
+	elliptical_arc_argument_sequence[0..1] role elliptical_arc_argument_sequence
+end
+
+composition xxx_elliptical_arc_argument_sequence_elliptical_arc_arguments between
+	elliptical_arc_argument_sequence[0..1] role xxx_elliptical_arc_argument_sequence_elliptical_arc_arguments_src
+	elliptical_arc_argument[*] role elliptical_arc_arguments
+end
+
+composition xxx_elliptical_arc_argument_rx between
+	elliptical_arc_argument[*] role xxx_elliptical_arc_argument_rx_src
+	nonnegative_number[0..1] role rx
+end
+
+composition xxx_elliptical_arc_argument_ry between
+	elliptical_arc_argument[*] role xxx_elliptical_arc_argument_ry_src
+	nonnegative_number[0..1] role ry
+end
+
+composition xxx_elliptical_arc_argument_rotation between
+	elliptical_arc_argument[*] role xxx_elliptical_arc_argument_rotation_src
+	number[0..1] role rotation
+end
+
+composition xxx_elliptical_arc_argument_coordinate_pair between
+	elliptical_arc_argument[*] role xxx_elliptical_arc_argument_coordinate_pair_src
+	coordinate_pair[0..1] role coordinate_pair
+end
+
+composition xxx_coordinate_pair_c1 between
+	coordinate_pair[*] role xxx_coordinate_pair_c1_src
+	coordinate[0..1] role c1
+end
+
+composition xxx_coordinate_pair_c2 between
+	coordinate_pair[*] role xxx_coordinate_pair_c2_src
+	coordinate[0..1] role c2
+end
+
+composition xxx_number_nonnegative_number between
+	number[*] role xxx_number_nonnegative_number_src
+	nonnegative_number[0..1] role nonnegative_number
+end
+
+composition xxx_nonnegative_number_intseq between
+	nonnegative_number[*] role xxx_nonnegative_number_intseq_src
+	digit_sequence[0..1] role intseq
+end
+
+composition xxx_nonnegative_number_floatseq between
+	nonnegative_number[*] role xxx_nonnegative_number_floatseq_src
+	digit_sequence[0..1] role floatseq
+end
+
+composition xxx_nonnegative_number_exponent between
+	nonnegative_number[*] role xxx_nonnegative_number_exponent_src
+	exponent[0..1] role exponent
+end
+
+composition xxx_exponent_digit_sequence between
+	exponent[*] role xxx_exponent_digit_sequence_src
+	digit_sequence[0..1] role digit_sequence
+end
+

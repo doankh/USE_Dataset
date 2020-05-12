@@ -1,0 +1,66 @@
+model clientes
+class Ente
+attributes
+	idEnte : Integer
+	documento : Integer
+	nombre : String
+operations
+end
+
+class TipoDoc
+attributes
+	idTipoDoc : Integer
+	codigo : String
+	nombre : String
+operations
+end
+
+class Pais
+attributes
+	idPais : Integer
+	codigo : String
+	nombre : String
+operations
+end
+
+class Cuenta
+attributes
+	idCuenta : Integer
+	numero : Integer
+operations
+end
+
+class Banco
+attributes
+	idBanco : Integer
+	codigo : String
+	nombre : String
+operations
+end
+
+class Cliente<Ente
+attributes
+	codigo : String
+operations
+end
+
+composition xxx_Ente_tipoDoc between
+	Ente[*] role xxx_Ente_tipoDoc_src
+	TipoDoc[1] role tipoDoc
+end
+
+composition xxx_Ente_paisNac between
+	Ente[*] role xxx_Ente_paisNac_src
+	Pais[1] role paisNac
+end
+
+composition xxx_Ente_cuenta between
+	Ente[*] role xxx_Ente_cuenta_src
+	Cuenta[1] role cuenta
+end
+
+composition xxx_Cuenta_banco between
+	Cuenta[*] role xxx_Cuenta_banco_src
+	Banco[1] role banco
+end
+

@@ -1,0 +1,90 @@
+model pipes
+class Wall<Product
+attributes
+operations
+end
+
+class Opening<Product
+attributes
+operations
+end
+
+class FlowSegment<Product
+attributes
+operations
+end
+
+class LocalPlacement
+attributes
+operations
+end
+
+class Axis2Placement3D
+attributes
+	cartesianX : Real
+	cartesianY : Real
+	cartesianZ : Real
+operations
+end
+
+class GUIDElement
+attributes
+	name : String
+	elementName : String
+	description : String
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class Direction
+attributes
+	x : Real
+	y : Real
+	z : Real
+operations
+end
+
+abstract class Product<GUIDElement
+attributes
+operations
+end
+
+association xxx_Opening_walls between
+	Opening[0..1] role xxx_Opening_walls_src
+	Wall[*] role walls
+end
+
+composition xxx_LocalPlacement_axis2placement3d between
+	LocalPlacement[*] role xxx_LocalPlacement_axis2placement3d_src
+	Axis2Placement3D[0..1] role axis2placement3d
+end
+
+composition xxx_LocalPlacement_relativeTo between
+	LocalPlacement[*] role xxx_LocalPlacement_relativeTo_src
+	LocalPlacement[0..1] role relativeTo
+end
+
+composition xxx_Axis2Placement3D_axis between
+	Axis2Placement3D[*] role xxx_Axis2Placement3D_axis_src
+	Direction[1] role axis
+end
+
+composition xxx_Axis2Placement3D_refDirection between
+	Axis2Placement3D[*] role xxx_Axis2Placement3D_refDirection_src
+	Direction[1] role refDirection
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	GUIDElement[*] role elements
+end
+
+composition xxx_Product_placement between
+	Product[*] role xxx_Product_placement_src
+	LocalPlacement[1] role placement
+end
+

@@ -1,0 +1,439 @@
+model map
+enum GMapType{
+default
+}
+
+class GeoMap
+attributes
+	name : String
+	description : String
+	zoomToMaxExtent : Boolean
+operations
+end
+
+class MapOptions
+attributes
+	projection : String
+	displayProjection : String
+	maxResolution : Real
+	numZoomLevels : Integer
+	zoom : Integer
+operations
+end
+
+class Icon
+attributes
+	url : String
+operations
+end
+
+class StyleMap
+attributes
+operations
+end
+
+class Style
+attributes
+operations
+end
+
+class StyleMapOptions
+attributes
+	externalGraphic : String
+	graphicWidth : Integer
+	graphicHeight : Integer
+	graphicXOffset : Integer
+	graphicYOffset : Integer
+	title : String
+operations
+end
+
+class ObjectAttributes
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Script
+attributes
+	src : String
+	type : String
+operations
+end
+
+class Layer
+attributes
+	name : String
+operations
+end
+
+class OSM<XYZ
+attributes
+operations
+end
+
+class Markers<Layer
+attributes
+operations
+end
+
+class WMS<Grid
+attributes
+operations
+end
+
+class HTTPGetParams
+attributes
+	layers : String
+	transparent : Boolean
+operations
+end
+
+class Vector<Layer,Feature
+attributes
+	isFixed : Boolean
+operations
+end
+
+class LayerOptions
+attributes
+	isBaseLayer : Boolean
+	opacity : Real
+	wrapDateLine : Boolean
+	displayInLayerSwitcher : Boolean
+	visibility : Boolean
+	attribution : String
+	gutter : Integer
+	projection : String
+	maxResolution : Real
+	minResolution : Real
+	numZoomLevels : Integer
+	minScale : Real
+	maxScale : Real
+	displayOutsideMaxExtent : Boolean
+operations
+end
+
+class XYZ<Grid
+attributes
+operations
+end
+
+class Grid<HTTPRequest
+attributes
+	singleTile : Boolean
+operations
+end
+
+class HTTPRequest<Layer
+attributes
+	url : String
+operations
+end
+
+abstract class SphericalMercator
+attributes
+operations
+end
+
+abstract class FixedZoomLevels
+attributes
+operations
+end
+
+abstract class EventPane<Layer
+attributes
+	smoothDragPan : Boolean
+	isFixed : Boolean
+operations
+end
+
+class Google<SphericalMercator,EventPane,FixedZoomLevels
+attributes
+	sphericalMercator : Boolean
+	type : GMapType
+	mapsUrl : String
+operations
+end
+
+class LonLat
+attributes
+	lon : Real
+	lat : Real
+	projectionCode : String
+operations
+end
+
+class Size
+attributes
+	w : Real
+	h : Real
+operations
+end
+
+class Pixel
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class Bounds
+attributes
+	left : Real
+	bottom : Real
+	right : Real
+	top : Real
+operations
+end
+
+class Marker
+attributes
+	name : String
+operations
+end
+
+class Strategy
+attributes
+operations
+end
+
+class Fixed<Strategy
+attributes
+operations
+end
+
+class StrategyOptions
+attributes
+operations
+end
+
+class Protocol
+attributes
+operations
+end
+
+class HTTP<Protocol
+attributes
+operations
+end
+
+class HTTPOptions
+attributes
+	url : String
+operations
+end
+
+class Format
+attributes
+operations
+end
+
+class GML<XML
+attributes
+operations
+end
+
+class XML<Format
+attributes
+operations
+end
+
+class KML<XML
+attributes
+	extractStyles : Boolean
+	extractAttributes : Boolean
+operations
+end
+
+class Feature
+attributes
+operations
+end
+
+class Geometry
+attributes
+operations
+end
+
+class Point<Geometry
+attributes
+	x : Real
+	y : Real
+	projection : String
+operations
+end
+
+class Popup
+attributes
+	id : String
+	contentHTML : String
+	closeBox : Boolean
+	autoSize : Boolean
+	panMapIfOutOfView : Boolean
+	keepInMap : Boolean
+	closeOnMove : Boolean
+operations
+end
+
+class Anchored<Popup
+attributes
+operations
+end
+
+class Framed<Anchored
+attributes
+operations
+end
+
+class FramedCloud<Framed
+attributes
+operations
+end
+
+composition xxx_GeoMap_center between
+	GeoMap[*] role xxx_GeoMap_center_src
+	LonLat[0..1] role center
+end
+
+composition xxx_GeoMap_options between
+	GeoMap[*] role xxx_GeoMap_options_src
+	MapOptions[0..1] role options
+end
+
+composition xxx_GeoMap_zoomToExtent between
+	GeoMap[*] role xxx_GeoMap_zoomToExtent_src
+	Bounds[0..1] role zoomToExtent
+end
+
+composition xxx_GeoMap_layers between
+	GeoMap[0..1] role xxx_GeoMap_layers_src
+	Layer[*] role layers
+end
+
+composition xxx_GeoMap_popups between
+	GeoMap[0..1] role xxx_GeoMap_popups_src
+	Popup[*] role popups
+end
+
+composition xxx_GeoMap_scripts between
+	GeoMap[0..1] role xxx_GeoMap_scripts_src
+	Script[*] role scripts
+end
+
+composition xxx_Icon_offset between
+	Icon[*] role xxx_Icon_offset_src
+	Pixel[1] role offset
+end
+
+composition xxx_Icon_size between
+	Icon[*] role xxx_Icon_size_src
+	Size[1] role size
+end
+
+composition xxx_StyleMap_styles between
+	StyleMap[0..1] role xxx_StyleMap_styles_src
+	Style[*] role styles
+end
+
+composition xxx_StyleMap_options between
+	StyleMap[*] role xxx_StyleMap_options_src
+	StyleMapOptions[0..1] role options
+end
+
+composition xxx_Layer_options between
+	Layer[*] role xxx_Layer_options_src
+	LayerOptions[0..1] role options
+end
+
+composition xxx_Markers_markers between
+	Markers[0..1] role xxx_Markers_markers_src
+	Marker[*] role markers
+end
+
+composition xxx_Vector_strategies between
+	Vector[0..1] role xxx_Vector_strategies_src
+	Strategy[*] role strategies
+end
+
+composition xxx_Vector_protocol between
+	Vector[*] role xxx_Vector_protocol_src
+	Protocol[0..1] role protocol
+end
+
+composition xxx_Vector_styleMap between
+	Vector[*] role xxx_Vector_styleMap_src
+	StyleMap[0..1] role styleMap
+end
+
+composition xxx_Vector_features between
+	Vector[0..1] role xxx_Vector_features_src
+	Feature[*] role features
+end
+
+composition xxx_HTTPRequest_params between
+	HTTPRequest[*] role xxx_HTTPRequest_params_src
+	HTTPGetParams[0..1] role params
+end
+
+composition xxx_Marker_lonLat between
+	Marker[*] role xxx_Marker_lonLat_src
+	LonLat[1] role lonLat
+end
+
+composition xxx_Marker_icon between
+	Marker[*] role xxx_Marker_icon_src
+	Icon[0..1] role icon
+end
+
+composition xxx_Strategy_options between
+	Strategy[*] role xxx_Strategy_options_src
+	StrategyOptions[0..1] role options
+end
+
+composition xxx_HTTP_options between
+	HTTP[*] role xxx_HTTP_options_src
+	HTTPOptions[0..1] role options
+end
+
+composition xxx_HTTPOptions_format between
+	HTTPOptions[*] role xxx_HTTPOptions_format_src
+	Format[0..1] role format
+end
+
+composition xxx_Vector_geometry between
+	Vector[*] role xxx_Vector_geometry_src
+	Geometry[0..1] role geometry
+end
+
+composition xxx_Vector_attributes_ between
+	Vector[0..1] role xxx_Vector_attributes__src
+	ObjectAttributes[*] role attributes_
+end
+
+composition xxx_Vector_style between
+	Vector[*] role xxx_Vector_style_src
+	Style[0..1] role style
+end
+
+composition xxx_Popup_lonlat between
+	Popup[*] role xxx_Popup_lonlat_src
+	LonLat[0..1] role lonlat
+end
+
+association xxx_Popup_contentSize between
+	Popup[*] role xxx_Popup_contentSize_src
+	Size[0..1] role contentSize
+end
+
+association xxx_Popup_minSize between
+	Popup[*] role xxx_Popup_minSize_src
+	Size[0..1] role minSize
+end
+
+association xxx_Popup_maxSize between
+	Popup[*] role xxx_Popup_maxSize_src
+	Size[0..1] role maxSize
+end
+

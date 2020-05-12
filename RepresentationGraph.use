@@ -1,0 +1,81 @@
+model RepresentationGraph
+class Diagram
+attributes
+operations
+end
+
+class EdgeElement<GraphicElement
+attributes
+operations
+end
+
+abstract class NodeElement<GraphicElement
+attributes
+	label : String
+operations
+end
+
+class IconElement<NodeElement
+attributes
+	filepath : String
+operations
+end
+
+class Circle<ContainerElement
+attributes
+	radius : String
+operations
+end
+
+class Rectangle<ContainerElement
+attributes
+	width : String
+	height : String
+operations
+end
+
+abstract class GraphicElement
+attributes
+	color : String
+	paletteName : String
+	paletteIconPath : String
+operations
+end
+
+abstract class ContainerElement<NodeElement
+attributes
+operations
+end
+
+class Rhombus<ContainerElement
+attributes
+	width : String
+	height : String
+operations
+end
+
+composition xxx_Diagram_elements between
+	Diagram[0..1] role xxx_Diagram_elements_src
+	GraphicElement[*] role elements
+end
+
+association xxx_EdgeElement_source between
+	EdgeElement[*] role xxx_EdgeElement_source_src
+	NodeElement[1] role source
+end
+
+association xxx_EdgeElement_target between
+	EdgeElement[*] role xxx_EdgeElement_target_src
+	NodeElement[1] role target
+end
+
+association xxx_NodeElement_link between
+	NodeElement[0..1] role xxx_NodeElement_link_src
+	NodeElement[*] role link
+end
+
+composition xxx_ContainerElement_contains between
+	ContainerElement[0..1] role xxx_ContainerElement_contains_src
+	NodeElement[*] role contains
+end
+

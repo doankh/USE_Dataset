@@ -1,0 +1,140 @@
+model requirementseditor
+enum RequirementType{
+default
+}
+
+enum RequirementPriority{
+default
+}
+
+class RequirementsModel
+attributes
+	name : String
+	creator : String
+	version : String
+operations
+end
+
+class RequirementsGroup<RequirementModelElement
+attributes
+operations
+end
+
+class Requirement<RequirementModelElement
+attributes
+	type : RequirementType
+	priority : RequirementPriority
+operations
+end
+
+class Constraint
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+operations
+end
+
+abstract class RequirementModelElement
+attributes
+	name : String
+	id : String
+	description : String
+operations
+end
+
+class AttributeValue
+attributes
+	value : String
+operations
+end
+
+abstract class NestableExpression<Expression
+attributes
+operations
+end
+
+class OR<TwoOperandsExpression
+attributes
+operations
+end
+
+class AND<TwoOperandsExpression
+attributes
+operations
+end
+
+class NOT<NestableExpression
+attributes
+operations
+end
+
+class Literal<Expression
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class TwoOperandsExpression<NestableExpression
+attributes
+operations
+end
+
+composition xxx_RequirementsModel_elements between
+	RequirementsModel[0..1] role xxx_RequirementsModel_elements_src
+	RequirementModelElement[*] role elements
+end
+
+composition xxx_RequirementsModel_attributes_ between
+	RequirementsModel[0..1] role xxx_RequirementsModel_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_RequirementsGroup_elements between
+	RequirementsGroup[0..1] role xxx_RequirementsGroup_elements_src
+	RequirementModelElement[*] role elements
+end
+
+composition xxx_Requirement_attributes_ between
+	Requirement[0..1] role xxx_Requirement_attributes__src
+	AttributeValue[*] role attributes_
+end
+
+composition xxx_Constraint_expression between
+	Constraint[0..1] role xxx_Constraint_expression_src
+	Expression[*] role expression
+end
+
+composition xxx_RequirementModelElement_constraints_ between
+	RequirementModelElement[0..1] role xxx_RequirementModelElement_constraints__src
+	Constraint[*] role constraints_
+end
+
+association xxx_AttributeValue_valueOf between
+	AttributeValue[*] role xxx_AttributeValue_valueOf_src
+	Attribute[0..1] role valueOf
+end
+
+composition xxx_NestableExpression_operand1 between
+	NestableExpression[*] role xxx_NestableExpression_operand1_src
+	Expression[1] role operand1
+end
+
+association xxx_Literal_element between
+	Literal[*] role xxx_Literal_element_src
+	RequirementModelElement[1] role element
+end
+
+composition xxx_TwoOperandsExpression_operand2 between
+	TwoOperandsExpression[*] role xxx_TwoOperandsExpression_operand2_src
+	Expression[1] role operand2
+end
+

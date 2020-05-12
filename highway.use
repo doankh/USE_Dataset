@@ -1,0 +1,135 @@
+model highway
+class highway
+attributes
+operations
+end
+
+class Node
+attributes
+	name : String
+operations
+end
+
+class Segment
+attributes
+	numLanes : Integer
+	length : Integer
+	name : String
+operations
+end
+
+class Semaphore
+attributes
+	secondsRed : Integer
+	secondsGreen : Integer
+	canGo : Boolean
+	name : String
+operations
+end
+
+class Signal
+attributes
+	name : String
+operations
+end
+
+class Car
+attributes
+	timeIn : String
+	timeOut : String
+	name : String
+operations
+end
+
+class Extractor<Node
+attributes
+operations
+end
+
+class Injector<Node
+attributes
+	carsPerHour : Integer
+operations
+end
+
+class Speedlimit<Signal
+attributes
+	Speed : Integer
+operations
+end
+
+class Stop<Signal
+attributes
+operations
+end
+
+class Yield<Signal
+attributes
+operations
+end
+
+composition xxx_highway_initNodes between
+	highway[0..1] role xxx_highway_initNodes_src
+	Node[*] role initNodes
+end
+
+composition xxx_highway_initCars between
+	highway[0..1] role xxx_highway_initCars_src
+	Car[*] role initCars
+end
+
+composition xxx_highway_initSegments between
+	highway[0..1] role xxx_highway_initSegments_src
+	Segment[*] role initSegments
+end
+
+composition xxx_highway_initSemaphore between
+	highway[0..1] role xxx_highway_initSemaphore_src
+	Semaphore[*] role initSemaphore
+end
+
+composition xxx_highway_initSignal between
+	highway[0..1] role xxx_highway_initSignal_src
+	Signal[*] role initSignal
+end
+
+association xxx_Node_hasStarts between
+	Node[0..1] role xxx_Node_hasStarts_src
+	Segment[*] role hasStarts
+end
+
+association xxx_Node_hasEnds between
+	Node[0..1] role xxx_Node_hasEnds_src
+	Segment[*] role hasEnds
+end
+
+association xxx_Node_semaphore between
+	Node[*] role xxx_Node_semaphore_src
+	Semaphore[0..1] role semaphore
+end
+
+association xxx_Node_signals between
+	Node[0..1] role xxx_Node_signals_src
+	Signal[*] role signals
+end
+
+association xxx_Segment_hasCars between
+	Segment[0..1] role xxx_Segment_hasCars_src
+	Car[*] role hasCars
+end
+
+association xxx_Semaphore_belongsTo between
+	Semaphore[*] role xxx_Semaphore_belongsTo_src
+	Node[1] role belongsTo
+end
+
+association xxx_Signal_belongsTo between
+	Signal[*] role xxx_Signal_belongsTo_src
+	Node[1] role belongsTo
+end
+
+association xxx_Car_isInSegment between
+	Car[*] role xxx_Car_isInSegment_src
+	Segment[0..1] role isInSegment
+end
+

@@ -1,0 +1,129 @@
+model task
+class TaskModel<Container
+attributes
+operations
+end
+
+abstract class Content<Container
+attributes
+	intend : String
+	text : String
+operations
+	getLevel():Integer
+	getValue():String
+	isDone():Boolean
+end
+
+class Task<Content
+attributes
+operations
+end
+
+class Note<Content
+attributes
+operations
+end
+
+class Project<Content
+attributes
+operations
+end
+
+class GlobalTaskModel<Container
+attributes
+operations
+end
+
+abstract class Container
+attributes
+operations
+end
+
+class EmptyLine<Content
+attributes
+operations
+end
+
+class Code<Content
+attributes
+	lang : String
+operations
+end
+
+abstract class TextSegment
+attributes
+	offset : Integer
+	length : Integer
+operations
+end
+
+class Tag<TextSegment
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Link<TextSegment
+attributes
+	url : String
+	description : String
+operations
+end
+
+class Text<TextSegment
+attributes
+	value : String
+operations
+end
+
+class Image<Link
+attributes
+operations
+end
+
+composition xxx_TaskModel_contents between
+	TaskModel[0..1] role xxx_TaskModel_contents_src
+	Content[*] role contents
+end
+
+association xxx_Content_parent between
+	Content[*] role xxx_Content_parent_src
+	Container[0..1] role parent
+end
+
+association xxx_Content_taskModel between
+	Content[*] role xxx_Content_taskModel_src
+	TaskModel[0..1] role taskModel
+end
+
+composition xxx_Content_tags between
+	Content[0..1] role xxx_Content_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_Content_links between
+	Content[0..1] role xxx_Content_links_src
+	Link[*] role links
+end
+
+composition xxx_Content_segments between
+	Content[0..1] role xxx_Content_segments_src
+	TextSegment[*] role segments
+end
+
+composition xxx_Content_images between
+	Content[0..1] role xxx_Content_images_src
+	Image[*] role images
+end
+
+association xxx_Container_children between
+	Container[0..1] role xxx_Container_children_src
+	Content[*] role children
+end
+
+association xxx_TextSegment_content between
+	TextSegment[*] role xxx_TextSegment_content_src
+	Content[0..1] role content
+end
+

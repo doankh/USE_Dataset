@@ -1,0 +1,291 @@
+model mrdata
+enum ProviderType{
+default
+}
+
+enum FilterType{
+default
+}
+
+enum DateConverterTypes{
+default
+}
+
+enum NumericOperator{
+default
+}
+
+enum ShiftOperator{
+default
+}
+
+class Element<HierarchicalElement
+attributes
+	name : String
+	value : String
+	description : String
+operations
+end
+
+class Filter
+attributes
+	type : FilterType
+	combine : String
+operations
+	keep(value : String):Boolean
+end
+
+class NumericFilter<Filter
+attributes
+	compareTo : Real
+operations
+end
+
+class DateFilter<Filter
+attributes
+	compareTo : String
+operations
+end
+
+class StringFilter<Filter
+attributes
+	compareTo : String
+operations
+end
+
+class Provider<Statement
+attributes
+	type : ProviderType
+	source : String
+	context_ : String
+operations
+	fillData():Element
+end
+
+class UnextractedElement<HierarchicalElement
+attributes
+	names : String
+	description : String
+operations
+end
+
+class Function<Statement
+attributes
+	function : String
+	name : String
+operations
+end
+
+class Fit<Action
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	value : Real
+operations
+end
+
+abstract class Action
+attributes
+	value : String
+operations
+end
+
+class DateConvert<Action
+attributes
+	to : DateConverterTypes
+operations
+end
+
+class Zero<Action
+attributes
+operations
+end
+
+class ForEach<Action
+attributes
+operations
+end
+
+class MrDataFile
+attributes
+operations
+end
+
+class Load<Statement
+attributes
+	file : String
+operations
+end
+
+class Cluster<Action
+attributes
+	t1 : Real
+	t2 : Real
+operations
+end
+
+class Addition<Action
+attributes
+	operation : NumericOperator
+operations
+end
+
+class Shift<Action
+attributes
+	to : Real
+	operation : ShiftOperator
+operations
+end
+
+class HierarchicalElement
+attributes
+operations
+end
+
+class ElementReference<Action
+attributes
+	name : String
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class Method<Statement
+attributes
+	name : String
+operations
+end
+
+class Min<Action
+attributes
+operations
+end
+
+class ElementAssignment<Action
+attributes
+	name : String
+operations
+end
+
+composition xxx_Provider_element between
+	Provider[*] role xxx_Provider_element_src
+	UnextractedElement[1] role element
+end
+
+composition xxx_UnextractedElement_filter between
+	UnextractedElement[0..1] role xxx_UnextractedElement_filter_src
+	Filter[*] role filter
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Fit_function between
+	Fit[*] role xxx_Fit_function_src
+	Function[1] role function
+end
+
+composition xxx_Fit_x between
+	Fit[*] role xxx_Fit_x_src
+	Action[1] role x
+end
+
+composition xxx_Fit_y between
+	Fit[*] role xxx_Fit_y_src
+	Action[1] role y
+end
+
+composition xxx_Fit_z between
+	Fit[*] role xxx_Fit_z_src
+	Action[0..1] role z
+end
+
+composition xxx_DateConvert_convertWhat between
+	DateConvert[*] role xxx_DateConvert_convertWhat_src
+	Action[1] role convertWhat
+end
+
+composition xxx_Zero_zeroWhat between
+	Zero[*] role xxx_Zero_zeroWhat_src
+	Action[1] role zeroWhat
+end
+
+composition xxx_ForEach_children between
+	ForEach[0..1] role xxx_ForEach_children_src
+	Action[1..*] role children
+end
+
+composition xxx_ForEach_toplevel between
+	ForEach[*] role xxx_ForEach_toplevel_src
+	Action[1] role toplevel
+end
+
+composition xxx_MrDataFile_statement between
+	MrDataFile[0..1] role xxx_MrDataFile_statement_src
+	Statement[*] role statement
+end
+
+composition xxx_MrDataFile_action between
+	MrDataFile[0..1] role xxx_MrDataFile_action_src
+	Action[*] role action
+end
+
+composition xxx_Cluster_clusterMe between
+	Cluster[*] role xxx_Cluster_clusterMe_src
+	Action[1] role clusterMe
+end
+
+composition xxx_Addition_addTo between
+	Addition[*] role xxx_Addition_addTo_src
+	Action[1] role addTo
+end
+
+composition xxx_Addition_addWhat between
+	Addition[*] role xxx_Addition_addWhat_src
+	Action[1] role addWhat
+end
+
+composition xxx_Shift_shiftWhat between
+	Shift[*] role xxx_Shift_shiftWhat_src
+	Action[1] role shiftWhat
+end
+
+composition xxx_HierarchicalElement_children between
+	HierarchicalElement[0..1] role xxx_HierarchicalElement_children_src
+	HierarchicalElement[*] role children
+end
+
+association xxx_HierarchicalElement_parent between
+	HierarchicalElement[*] role xxx_HierarchicalElement_parent_src
+	HierarchicalElement[0..1] role parent
+end
+
+composition xxx_Method_parameter between
+	Method[0..1] role xxx_Method_parameter_src
+	Element[*] role parameter
+end
+
+composition xxx_Method_action between
+	Method[0..1] role xxx_Method_action_src
+	Action[*] role action
+end
+
+composition xxx_Min_minOver between
+	Min[*] role xxx_Min_minOver_src
+	Action[1] role minOver
+end
+
+composition xxx_ElementAssignment_assignment between
+	ElementAssignment[*] role xxx_ElementAssignment_assignment_src
+	Action[1] role assignment
+end
+

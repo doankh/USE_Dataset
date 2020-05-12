@@ -1,0 +1,76 @@
+model PrimitiveTypes
+class HyperLink
+attributes
+operations
+end
+
+class ClientPage
+attributes
+operations
+end
+
+class ClientPageModule
+attributes
+operations
+end
+
+class LogicInterface<ClientPageModule
+attributes
+operations
+end
+
+class DesignElement<ClientPageModule
+attributes
+operations
+end
+
+class ServerPage
+attributes
+operations
+end
+
+class BusinessLogic
+attributes
+operations
+end
+
+class DesignTemplate
+attributes
+operations
+end
+
+association xxx_HyperLink_server between
+	HyperLink[0..1] role xxx_HyperLink_server_src
+	ServerPage[*] role server
+end
+
+association xxx_ClientPage_hyperlink between
+	ClientPage[*] role xxx_ClientPage_hyperlink_src
+	HyperLink[1] role hyperlink
+end
+
+composition xxx_ClientPageModule_consistsOf between
+	ClientPageModule[*] role xxx_ClientPageModule_consistsOf_src
+	ClientPage[1] role consistsOf
+end
+
+association xxx_ServerPage_useBusinessLogic between
+	ServerPage[*] role xxx_ServerPage_useBusinessLogic_src
+	BusinessLogic[1] role useBusinessLogic
+end
+
+association xxx_ServerPage_useDesignTemplate between
+	ServerPage[*] role xxx_ServerPage_useDesignTemplate_src
+	DesignTemplate[1] role useDesignTemplate
+end
+
+association xxx_ServerPage_generates between
+	ServerPage[0..1] role xxx_ServerPage_generates_src
+	ClientPage[*] role generates
+end
+
+association xxx_ServerPage_link between
+	ServerPage[0..1] role xxx_ServerPage_link_src
+	HyperLink[*] role link
+end
+

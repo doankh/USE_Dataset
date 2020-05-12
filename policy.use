@@ -1,0 +1,126 @@
+model policy
+class AppliesToType
+attributes
+	any : String
+	anyAttribute : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	ignorable : Boolean
+	optional : Boolean
+	policyURIs : String
+operations
+end
+
+class OperatorContentType
+attributes
+	group : String
+	any : String
+operations
+end
+
+class PolicyAttachmentType
+attributes
+	group : String
+	any : String
+	anyAttribute : String
+operations
+end
+
+class PolicyReferenceType
+attributes
+	any : String
+	digest : String
+	digestAlgorithm : String
+	uRI : String
+	anyAttribute : String
+operations
+end
+
+class PolicyType<OperatorContentType
+attributes
+	name : String
+	anyAttribute : String
+operations
+end
+
+class URIType
+attributes
+	value : String
+	anyAttribute : String
+operations
+end
+
+composition xxx_DocumentRoot_all between
+	DocumentRoot[*] role xxx_DocumentRoot_all_src
+	OperatorContentType[*] role all
+end
+
+composition xxx_DocumentRoot_appliesTo between
+	DocumentRoot[*] role xxx_DocumentRoot_appliesTo_src
+	AppliesToType[*] role appliesTo
+end
+
+composition xxx_DocumentRoot_exactlyOne between
+	DocumentRoot[*] role xxx_DocumentRoot_exactlyOne_src
+	OperatorContentType[*] role exactlyOne
+end
+
+composition xxx_DocumentRoot_policy between
+	DocumentRoot[*] role xxx_DocumentRoot_policy_src
+	PolicyType[*] role policy
+end
+
+composition xxx_DocumentRoot_policyAttachment between
+	DocumentRoot[*] role xxx_DocumentRoot_policyAttachment_src
+	PolicyAttachmentType[*] role policyAttachment
+end
+
+composition xxx_DocumentRoot_policyReference between
+	DocumentRoot[*] role xxx_DocumentRoot_policyReference_src
+	PolicyReferenceType[*] role policyReference
+end
+
+composition xxx_DocumentRoot_uRI between
+	DocumentRoot[*] role xxx_DocumentRoot_uRI_src
+	URIType[*] role uRI
+end
+
+composition xxx_OperatorContentType_policy between
+	OperatorContentType[0..1] role xxx_OperatorContentType_policy_src
+	PolicyType[*] role policy
+end
+
+composition xxx_OperatorContentType_all between
+	OperatorContentType[0..1] role xxx_OperatorContentType_all_src
+	OperatorContentType[*] role all
+end
+
+composition xxx_OperatorContentType_exactlyOne between
+	OperatorContentType[0..1] role xxx_OperatorContentType_exactlyOne_src
+	OperatorContentType[*] role exactlyOne
+end
+
+composition xxx_OperatorContentType_policyReference between
+	OperatorContentType[0..1] role xxx_OperatorContentType_policyReference_src
+	PolicyReferenceType[*] role policyReference
+end
+
+composition xxx_PolicyAttachmentType_appliesTo between
+	PolicyAttachmentType[*] role xxx_PolicyAttachmentType_appliesTo_src
+	AppliesToType[1] role appliesTo
+end
+
+composition xxx_PolicyAttachmentType_policy between
+	PolicyAttachmentType[0..1] role xxx_PolicyAttachmentType_policy_src
+	PolicyType[*] role policy
+end
+
+composition xxx_PolicyAttachmentType_policyReference between
+	PolicyAttachmentType[0..1] role xxx_PolicyAttachmentType_policyReference_src
+	PolicyReferenceType[*] role policyReference
+end
+

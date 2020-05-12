@@ -1,0 +1,98 @@
+model othermetro
+enum Shape{
+default
+}
+
+enum Color{
+default
+}
+
+class Region
+attributes
+operations
+end
+
+class Line
+attributes
+	color : Color
+operations
+end
+
+class MetroSystem
+attributes
+	name : String
+operations
+end
+
+class Station
+attributes
+	shape : Shape
+operations
+end
+
+class Passenger
+attributes
+	shape : Shape
+operations
+end
+
+abstract class Rideable
+attributes
+operations
+end
+
+class Train<Rideable
+attributes
+operations
+end
+
+class Carriage<Rideable
+attributes
+operations
+end
+
+composition xxx_Region_stations between
+	Region[0..1] role xxx_Region_stations_src
+	Station[*] role stations
+end
+
+association xxx_Line_stations between
+	Line[0..1] role xxx_Line_stations_src
+	Station[1..*] role stations
+end
+
+composition xxx_Line_trains between
+	Line[0..1] role xxx_Line_trains_src
+	Train[*] role trains
+end
+
+composition xxx_MetroSystem_regions between
+	MetroSystem[0..1] role xxx_MetroSystem_regions_src
+	Region[1..*] role regions
+end
+
+composition xxx_MetroSystem_lines between
+	MetroSystem[0..1] role xxx_MetroSystem_lines_src
+	Line[*] role lines
+end
+
+association xxx_Station_lines between
+	Station[0..1] role xxx_Station_lines_src
+	Line[*] role lines
+end
+
+composition xxx_Station_passengers between
+	Station[0..1] role xxx_Station_passengers_src
+	Passenger[*] role passengers
+end
+
+composition xxx_Rideable_passengers between
+	Rideable[*] role xxx_Rideable_passengers_src
+	Passenger[0..6] role passengers
+end
+
+composition xxx_Train_carriages between
+	Train[*] role xxx_Train_carriages_src
+	Carriage[0..2] role carriages
+end
+

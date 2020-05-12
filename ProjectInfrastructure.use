@@ -1,0 +1,477 @@
+model projectinfrastructure
+enum VoteType{
+default
+}
+
+class Project
+attributes
+	id : String
+	name : String
+	projectId : String
+	description : String
+	scope : String
+	websiteUrl : String
+	wikiUrl : String
+	gettingStartedUrl : String
+	documentationUrl : String
+	downloadUrl : String
+	bugzillaProduct : String
+	bugzillaComponent : String
+	isIncubating : Boolean
+	isActive : Boolean
+	retentionPolicy : String
+operations
+	getCommitters():ProjectRole
+	getProjectLeads():ProjectRole
+	getMentors():ProjectRole
+	getPMCLeads():ProjectRole
+	getPMCMembers():ProjectRole
+	getCommittersEmeritus():ProjectRole
+	getPeopleInRole(type : ProjectRoleType):ProjectRole
+end
+
+class ProjectRoleType
+attributes
+	title : String
+	description : String
+operations
+end
+
+class ProjectRole<Role
+attributes
+operations
+end
+
+class TopLevelProject<Project
+attributes
+	charter : String
+operations
+end
+
+class CommunicationChannel
+attributes
+	id : String
+	title : String
+	audience : String
+	description : String
+	url : String
+operations
+end
+
+class Release
+attributes
+	versionName : String
+	date : String
+	description : String
+	targetEnvironments : String
+	compatibility : String
+	deliverables : String
+	community : String
+operations
+	getReleaseDate():String
+end
+
+class Theme
+attributes
+	description : String
+	title : String
+	bugzillaUrl : String
+operations
+end
+
+class IncludedSubproject
+attributes
+	versionName : String
+operations
+end
+
+class CoordinatedRelease
+attributes
+	name : String
+	date : String
+	description : String
+	wikiUrl : String
+operations
+end
+
+class Milestone
+attributes
+	name : String
+	noteworthyUrl : String
+operations
+end
+
+class DownloadArtefact
+attributes
+	name : String
+	description : String
+	url : String
+operations
+end
+
+class Person
+attributes
+	id : String
+	firstName : String
+	lastName : String
+	member : Boolean
+operations
+end
+
+class Election
+attributes
+operations
+end
+
+class Ballot
+attributes
+	date : String
+	vote : VoteType
+	comments : String
+operations
+end
+
+abstract class Role
+attributes
+	id : Integer
+	startDate : String
+	endDate : String
+operations
+end
+
+class OrganizationRole<Role
+attributes
+operations
+end
+
+class Organization
+attributes
+	id : Integer
+	name : String
+	comments : String
+operations
+end
+
+class MemberType
+attributes
+	id : Integer
+	title : String
+	description : String
+operations
+end
+
+class OrganizationRoleType
+attributes
+	title : String
+	description : String
+operations
+end
+
+class Address
+attributes
+	id : Integer
+	street : String
+	city : String
+	region : String
+	code : String
+	country : String
+operations
+end
+
+class PhoneNumber
+attributes
+	id : Integer
+	title : String
+	number : String
+operations
+end
+
+class EmailAddress
+attributes
+	id : Integer
+	email : String
+	verifiedDate : String
+operations
+end
+
+class Comment
+attributes
+	id : String
+	content : String
+operations
+end
+
+class Document
+attributes
+	id : String
+	receivedDate : String
+	effectiveDate : String
+	expiredDate : String
+	comments : String
+operations
+end
+
+class DocumentType
+attributes
+	id : String
+	title : String
+	description : String
+	instructions : String
+	url : String
+operations
+end
+
+class DocumentContent
+attributes
+	id : String
+	contents : Boolean
+	mimeType : String
+	sizeInBytes : Integer
+	fileName : String
+operations
+end
+
+class Proposal
+attributes
+	id : String
+	name : String
+	projectId : String
+	description : String
+	background : String
+	scope : String
+	whyEclipse : String
+	legalIssues : String
+	schedule : String
+operations
+end
+
+association xxx_Project_parent between
+	Project[*] role xxx_Project_parent_src
+	Project[0..1] role parent
+end
+
+association xxx_Project_subprojects between
+	Project[0..1] role xxx_Project_subprojects_src
+	Project[*] role subprojects
+end
+
+composition xxx_Project_releases between
+	Project[0..1] role xxx_Project_releases_src
+	Release[*] role releases
+end
+
+association xxx_Project_people between
+	Project[*] role xxx_Project_people_src
+	ProjectRole[0..1] role people
+end
+
+composition xxx_Project_communicationChannels between
+	Project[0..1] role xxx_Project_communicationChannels_src
+	CommunicationChannel[*] role communicationChannels
+end
+
+association xxx_Project_proposal between
+	Project[*] role xxx_Project_proposal_src
+	Proposal[0..1] role proposal
+end
+
+association xxx_ProjectRole_project between
+	ProjectRole[*] role xxx_ProjectRole_project_src
+	Project[1] role project
+end
+
+composition xxx_ProjectRole_election between
+	ProjectRole[*] role xxx_ProjectRole_election_src
+	Election[0..1] role election
+end
+
+association xxx_ProjectRole_role between
+	ProjectRole[*] role xxx_ProjectRole_role_src
+	ProjectRoleType[1] role role
+end
+
+association xxx_Release_previous between
+	Release[*] role xxx_Release_previous_src
+	Release[0..1] role previous
+end
+
+composition xxx_Release_themes between
+	Release[0..1] role xxx_Release_themes_src
+	Theme[*] role themes
+end
+
+association xxx_Release_project between
+	Release[0..1] role xxx_Release_project_src
+	Project[*] role project
+end
+
+association xxx_Release_coordinatedRelease between
+	Release[0..1] role xxx_Release_coordinatedRelease_src
+	CoordinatedRelease[*] role coordinatedRelease
+end
+
+composition xxx_Release_includedSubprojects between
+	Release[0..1] role xxx_Release_includedSubprojects_src
+	IncludedSubproject[*] role includedSubprojects
+end
+
+composition xxx_Release_milestones between
+	Release[0..1] role xxx_Release_milestones_src
+	Milestone[*] role milestones
+end
+
+association xxx_IncludedSubproject_project between
+	IncludedSubproject[*] role xxx_IncludedSubproject_project_src
+	Project[0..1] role project
+end
+
+composition xxx_CoordinatedRelease_milestones between
+	CoordinatedRelease[0..1] role xxx_CoordinatedRelease_milestones_src
+	Milestone[*] role milestones
+end
+
+composition xxx_Milestone_artefacts between
+	Milestone[0..1] role xxx_Milestone_artefacts_src
+	DownloadArtefact[*] role artefacts
+end
+
+composition xxx_Person_addresses between
+	Person[0..1] role xxx_Person_addresses_src
+	Address[*] role addresses
+end
+
+composition xxx_Person_phoneNumbers between
+	Person[0..1] role xxx_Person_phoneNumbers_src
+	PhoneNumber[*] role phoneNumbers
+end
+
+composition xxx_Person_emailAddresses between
+	Person[0..1] role xxx_Person_emailAddresses_src
+	EmailAddress[1..*] role emailAddresses
+end
+
+composition xxx_Person_documents between
+	Person[*] role xxx_Person_documents_src
+	Document[0..1] role documents
+end
+
+association xxx_Person_primaryEmployer between
+	Person[*] role xxx_Person_primaryEmployer_src
+	Organization[0..1] role primaryEmployer
+end
+
+association xxx_Election_role between
+	Election[*] role xxx_Election_role_src
+	ProjectRole[0..1] role role
+end
+
+composition xxx_Election_nomination between
+	Election[*] role xxx_Election_nomination_src
+	Ballot[1] role nomination
+end
+
+composition xxx_Election_votes between
+	Election[0..1] role xxx_Election_votes_src
+	Ballot[*] role votes
+end
+
+association xxx_Ballot_voter between
+	Ballot[*] role xxx_Ballot_voter_src
+	Person[0..1] role voter
+end
+
+association xxx_Ballot_election between
+	Ballot[*] role xxx_Ballot_election_src
+	Election[0..1] role election
+end
+
+association xxx_Role_person between
+	Role[*] role xxx_Role_person_src
+	Person[1] role person
+end
+
+association xxx_OrganizationRole_organization between
+	OrganizationRole[*] role xxx_OrganizationRole_organization_src
+	Organization[0..1] role organization
+end
+
+association xxx_OrganizationRole_role between
+	OrganizationRole[*] role xxx_OrganizationRole_role_src
+	OrganizationRoleType[1] role role
+end
+
+association xxx_Organization_memberType between
+	Organization[*] role xxx_Organization_memberType_src
+	MemberType[1] role memberType
+end
+
+association xxx_Organization_people between
+	Organization[0..1] role xxx_Organization_people_src
+	OrganizationRole[*] role people
+end
+
+composition xxx_Organization_addresses between
+	Organization[0..1] role xxx_Organization_addresses_src
+	Address[*] role addresses
+end
+
+composition xxx_Organization_phoneNumbers between
+	Organization[*] role xxx_Organization_phoneNumbers_src
+	PhoneNumber[0..1] role phoneNumbers
+end
+
+composition xxx_Organization_documents between
+	Organization[*] role xxx_Organization_documents_src
+	Document[0..1] role documents
+end
+
+association xxx_Comment_author between
+	Comment[*] role xxx_Comment_author_src
+	Person[1] role author
+end
+
+association xxx_Comment_replies between
+	Comment[0..1] role xxx_Comment_replies_src
+	Comment[*] role replies
+end
+
+association xxx_Document_documentType between
+	Document[*] role xxx_Document_documentType_src
+	DocumentType[1] role documentType
+end
+
+composition xxx_Document_content between
+	Document[*] role xxx_Document_content_src
+	DocumentContent[0..1] role content
+end
+
+association xxx_Proposal_projectLeads between
+	Proposal[0..1] role xxx_Proposal_projectLeads_src
+	Person[*] role projectLeads
+end
+
+association xxx_Proposal_committers between
+	Proposal[0..1] role xxx_Proposal_committers_src
+	Person[*] role committers
+end
+
+association xxx_Proposal_mentors between
+	Proposal[0..1] role xxx_Proposal_mentors_src
+	Person[*] role mentors
+end
+
+association xxx_Proposal_interestedParties between
+	Proposal[0..1] role xxx_Proposal_interestedParties_src
+	Person[*] role interestedParties
+end
+
+association xxx_Proposal_project between
+	Proposal[*] role xxx_Proposal_project_src
+	Project[0..1] role project
+end
+
+association xxx_Proposal_comments between
+	Proposal[*] role xxx_Proposal_comments_src
+	Comment[0..1] role comments
+end
+

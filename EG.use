@@ -1,0 +1,96 @@
+model EG_MOF
+class ExecutionGraph
+attributes
+operations
+end
+
+class Node
+attributes
+operations
+end
+
+class Start<Node
+attributes
+operations
+end
+
+class End<Node
+attributes
+operations
+end
+
+class Control<Node
+attributes
+operations
+end
+
+class Basic<Node
+attributes
+operations
+end
+
+class Branch<Control
+attributes
+operations
+end
+
+class Loop<Control
+attributes
+operations
+end
+
+class Fork<Control
+attributes
+operations
+end
+
+class Join<Control
+attributes
+operations
+end
+
+class Acquire<Control
+attributes
+operations
+end
+
+class Release<Control
+attributes
+operations
+end
+
+class Split<Control
+attributes
+operations
+end
+
+composition xxx_ExecutionGraph_node between
+	ExecutionGraph[0..1] role xxx_ExecutionGraph_node_src
+	Node[1..*] role node
+end
+
+association xxx_ExecutionGraph_nodeNested between
+	ExecutionGraph[*] role xxx_ExecutionGraph_nodeNested_src
+	Node[1] role nodeNested
+end
+
+association xxx_Node_predecessor between
+	Node[0..1] role xxx_Node_predecessor_src
+	Node[*] role predecessor
+end
+
+association xxx_Node_successor between
+	Node[0..1] role xxx_Node_successor_src
+	Node[*] role successor
+end
+
+association xxx_Node_executionGraph between
+	Node[*] role xxx_Node_executionGraph_src
+	ExecutionGraph[1] role executionGraph
+end
+
+association xxx_Node_nested between
+	Node[0..1] role xxx_Node_nested_src
+	ExecutionGraph[*] role nested
+end
+

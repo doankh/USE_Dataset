@@ -1,0 +1,225 @@
+model miniScript
+enum AdditionOperator{
+default
+}
+
+enum FactorOperator{
+default
+}
+
+enum ComparisonOperator{
+default
+}
+
+enum UnaryLogicalOperator{
+default
+}
+
+enum BinaryLogicalOperator{
+default
+}
+
+enum TernaryOperator{
+default
+}
+
+enum BooleanValue{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class Program<Model
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class BlockExpression<Expression
+attributes
+operations
+end
+
+class LetExpression<Expression
+attributes
+operations
+end
+
+class TernaryExpression<Expression
+attributes
+	operator : TernaryOperator
+operations
+end
+
+class LogicalBinaryExpression<Expression
+attributes
+	operator : BinaryLogicalOperator
+operations
+end
+
+class LogicalUnaryExpression<Expression
+attributes
+	operator : UnaryLogicalOperator
+operations
+end
+
+class FunctionDeclaration<Expression
+attributes
+	parameters : String
+operations
+end
+
+class SymbolReference<Expression
+attributes
+	id : String
+operations
+end
+
+class LiteralBoolean<Expression
+attributes
+	value : BooleanValue
+operations
+end
+
+class LiteralNumber<Expression
+attributes
+	value : Integer
+operations
+end
+
+class VariableAssignment<Expression
+attributes
+	id : String
+operations
+end
+
+class ComparisonExpression<Expression
+attributes
+	operator : ComparisonOperator
+operations
+end
+
+class NumericExpression<Expression
+attributes
+	operator : AdditionOperator
+operations
+end
+
+class Factor<Expression
+attributes
+	operator : FactorOperator
+operations
+end
+
+class Apply<Expression
+attributes
+operations
+end
+
+composition xxx_Program_expressions between
+	Program[0..1] role xxx_Program_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_BlockExpression_expressions between
+	BlockExpression[0..1] role xxx_BlockExpression_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_LetExpression_assigment between
+	LetExpression[*] role xxx_LetExpression_assigment_src
+	VariableAssignment[0..1] role assigment
+end
+
+composition xxx_LetExpression_expression between
+	LetExpression[*] role xxx_LetExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_TernaryExpression_firstExpression between
+	TernaryExpression[*] role xxx_TernaryExpression_firstExpression_src
+	Expression[0..1] role firstExpression
+end
+
+composition xxx_TernaryExpression_secondExpression between
+	TernaryExpression[*] role xxx_TernaryExpression_secondExpression_src
+	Expression[0..1] role secondExpression
+end
+
+composition xxx_TernaryExpression_thirdExpression between
+	TernaryExpression[*] role xxx_TernaryExpression_thirdExpression_src
+	Expression[0..1] role thirdExpression
+end
+
+composition xxx_LogicalBinaryExpression_leftExpr between
+	LogicalBinaryExpression[*] role xxx_LogicalBinaryExpression_leftExpr_src
+	Expression[0..1] role leftExpr
+end
+
+composition xxx_LogicalBinaryExpression_rightExpr between
+	LogicalBinaryExpression[*] role xxx_LogicalBinaryExpression_rightExpr_src
+	Expression[0..1] role rightExpr
+end
+
+composition xxx_LogicalUnaryExpression_expression between
+	LogicalUnaryExpression[*] role xxx_LogicalUnaryExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_FunctionDeclaration_body between
+	FunctionDeclaration[*] role xxx_FunctionDeclaration_body_src
+	Expression[0..1] role body
+end
+
+composition xxx_VariableAssignment_expression between
+	VariableAssignment[*] role xxx_VariableAssignment_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_ComparisonExpression_leftExpr between
+	ComparisonExpression[*] role xxx_ComparisonExpression_leftExpr_src
+	Expression[0..1] role leftExpr
+end
+
+composition xxx_ComparisonExpression_rightExpr between
+	ComparisonExpression[*] role xxx_ComparisonExpression_rightExpr_src
+	Expression[0..1] role rightExpr
+end
+
+composition xxx_NumericExpression_leftFactor between
+	NumericExpression[*] role xxx_NumericExpression_leftFactor_src
+	Expression[0..1] role leftFactor
+end
+
+composition xxx_NumericExpression_rightFactor between
+	NumericExpression[*] role xxx_NumericExpression_rightFactor_src
+	Expression[0..1] role rightFactor
+end
+
+composition xxx_Factor_leftTerm between
+	Factor[*] role xxx_Factor_leftTerm_src
+	Expression[0..1] role leftTerm
+end
+
+composition xxx_Factor_rightTerm between
+	Factor[*] role xxx_Factor_rightTerm_src
+	Expression[0..1] role rightTerm
+end
+
+composition xxx_Apply_functor between
+	Apply[*] role xxx_Apply_functor_src
+	Expression[0..1] role functor
+end
+
+composition xxx_Apply_arguments between
+	Apply[0..1] role xxx_Apply_arguments_src
+	Expression[*] role arguments
+end
+

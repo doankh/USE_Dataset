@@ -1,0 +1,106 @@
+model uitf
+enum UserInstructionEnum{
+default
+}
+
+class TestCase
+attributes
+	id : String
+operations
+	start()
+	stop()
+end
+
+class TestSuite
+attributes
+	id : String
+operations
+	start()
+	stop()
+end
+
+class Variable
+attributes
+	id : String
+operations
+	setValue(val : String)
+	getValue():String
+	assertValue()
+end
+
+class UISUT<Variable
+attributes
+	objectURI : String
+operations
+	onUITrigger(trigger : String)
+	onManipulateUIControl(controlPath : String,manipulationKind : String)
+	onManipulateUIControlData(controlPath : String,controlPropertyKey : String,controlPropertyVal : String)
+	assertInState()
+end
+
+class UIControlVariable<Variable
+attributes
+operations
+end
+
+class Statement
+attributes
+	description : String
+	kind : UserInstructionEnum
+operations
+end
+
+class UIControl
+attributes
+	id : String
+operations
+end
+
+class AssertInState<Statement
+attributes
+	stateId : String
+operations
+end
+
+class TriggeredTransition<Statement
+attributes
+	scriptStr : String
+	transitionId : String
+operations
+end
+
+composition xxx_TestCase_itsUISUT between
+	TestCase[*] role xxx_TestCase_itsUISUT_src
+	UISUT[1] role itsUISUT
+end
+
+composition xxx_TestCase_itsStatement between
+	TestCase[0..1] role xxx_TestCase_itsStatement_src
+	Statement[*] role itsStatement
+end
+
+composition xxx_TestSuite_itsTestCase between
+	TestSuite[0..1] role xxx_TestSuite_itsTestCase_src
+	TestCase[*] role itsTestCase
+end
+
+composition xxx_UISUT_itsVariable between
+	UISUT[0..1] role xxx_UISUT_itsVariable_src
+	Variable[*] role itsVariable
+end
+
+composition xxx_UISUT_itsUICtrl between
+	UISUT[0..1] role xxx_UISUT_itsUICtrl_src
+	UIControl[*] role itsUICtrl
+end
+
+association xxx_Statement_itsVariable between
+	Statement[*] role xxx_Statement_itsVariable_src
+	Variable[0..1] role itsVariable
+end
+
+association xxx_UIControl_itsVariable between
+	UIControl[*] role xxx_UIControl_itsVariable_src
+	Variable[0..1] role itsVariable
+end
+

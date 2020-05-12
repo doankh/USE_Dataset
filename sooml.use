@@ -1,0 +1,285 @@
+model sooml
+enum DataType{
+default
+}
+
+class Package<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Class<NamedElement
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+	dataType : DataType
+operations
+end
+
+class Reference<StructuralFeature
+attributes
+operations
+end
+
+class Operation<NamedElement
+attributes
+operations
+end
+
+abstract class StructuralFeature<NamedElement
+attributes
+	upperBound : Integer
+	lowerBound : Integer
+operations
+end
+
+class StateMachine
+attributes
+operations
+end
+
+class State<NamedElement
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+abstract class Guard
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+class Parameter<NamedElement
+attributes
+	dataType : DataType
+operations
+end
+
+abstract class CallOperationAction<Action
+attributes
+operations
+end
+
+class ParameterBinding
+attributes
+operations
+end
+
+abstract class IsInStateCondition<Guard
+attributes
+operations
+end
+
+class EntryOperation
+attributes
+operations
+end
+
+class ReferenceIsInStateCondition<IsInStateCondition
+attributes
+operations
+end
+
+class ParameterIsInStateCondition<IsInStateCondition
+attributes
+operations
+end
+
+class CallReferenceOperationAction<CallOperationAction
+attributes
+operations
+end
+
+class CallParameterOperationAction<CallOperationAction
+attributes
+operations
+end
+
+class ReferenceAssignmentAction<Action
+attributes
+operations
+end
+
+composition xxx_Package_classes between
+	Package[0..1] role xxx_Package_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Package_packages between
+	Package[0..1] role xxx_Package_packages_src
+	Package[*] role packages
+end
+
+association xxx_Package_parentPackage between
+	Package[*] role xxx_Package_parentPackage_src
+	Package[0..1] role parentPackage
+end
+
+composition xxx_Class_stateMachine between
+	Class[*] role xxx_Class_stateMachine_src
+	StateMachine[1] role stateMachine
+end
+
+composition xxx_Class_operations_ between
+	Class[0..1] role xxx_Class_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_Class_features between
+	Class[0..1] role xxx_Class_features_src
+	StructuralFeature[*] role features
+end
+
+association xxx_Reference_type between
+	Reference[*] role xxx_Reference_type_src
+	Class[1] role type
+end
+
+association xxx_Reference_opposite between
+	Reference[*] role xxx_Reference_opposite_src
+	Reference[0..1] role opposite
+end
+
+composition xxx_Operation_parameter between
+	Operation[0..1] role xxx_Operation_parameter_src
+	Parameter[*] role parameter
+end
+
+association xxx_StateMachine_class_ between
+	StateMachine[*] role xxx_StateMachine_class__src
+	Class[1] role class_
+end
+
+composition xxx_StateMachine_states_ between
+	StateMachine[0..1] role xxx_StateMachine_states__src
+	State[*] role states_
+end
+
+association xxx_StateMachine_initialState between
+	StateMachine[*] role xxx_StateMachine_initialState_src
+	State[1] role initialState
+end
+
+composition xxx_State_transitions_ between
+	State[0..1] role xxx_State_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_State_entryOperation between
+	State[*] role xxx_State_entryOperation_src
+	EntryOperation[0..1] role entryOperation
+end
+
+composition xxx_Transition_actions between
+	Transition[0..1] role xxx_Transition_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[0..1] role guard
+end
+
+composition xxx_Transition_event between
+	Transition[*] role xxx_Transition_event_src
+	Event[1] role event
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+association xxx_Event_operation between
+	Event[*] role xxx_Event_operation_src
+	Operation[1] role operation
+end
+
+association xxx_Parameter_classType between
+	Parameter[*] role xxx_Parameter_classType_src
+	Class[0..1] role classType
+end
+
+association xxx_CallOperationAction_calledOperation between
+	CallOperationAction[*] role xxx_CallOperationAction_calledOperation_src
+	Operation[1] role calledOperation
+end
+
+composition xxx_CallOperationAction_parameter between
+	CallOperationAction[0..1] role xxx_CallOperationAction_parameter_src
+	ParameterBinding[*] role parameter
+end
+
+association xxx_ParameterBinding_structuralFeatureBinding between
+	ParameterBinding[*] role xxx_ParameterBinding_structuralFeatureBinding_src
+	StructuralFeature[0..1] role structuralFeatureBinding
+end
+
+association xxx_ParameterBinding_parameterBinding between
+	ParameterBinding[*] role xxx_ParameterBinding_parameterBinding_src
+	Parameter[1] role parameterBinding
+end
+
+association xxx_IsInStateCondition_inState between
+	IsInStateCondition[*] role xxx_IsInStateCondition_inState_src
+	State[1] role inState
+end
+
+association xxx_EntryOperation_calledOperation between
+	EntryOperation[*] role xxx_EntryOperation_calledOperation_src
+	Operation[1] role calledOperation
+end
+
+association xxx_ReferenceIsInStateCondition_reference between
+	ReferenceIsInStateCondition[*] role xxx_ReferenceIsInStateCondition_reference_src
+	Reference[1] role reference
+end
+
+association xxx_ParameterIsInStateCondition_parameter between
+	ParameterIsInStateCondition[*] role xxx_ParameterIsInStateCondition_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_CallReferenceOperationAction_callObjectViaReference between
+	CallReferenceOperationAction[*] role xxx_CallReferenceOperationAction_callObjectViaReference_src
+	Reference[0..1] role callObjectViaReference
+end
+
+association xxx_CallParameterOperationAction_callObjectViaParameter between
+	CallParameterOperationAction[*] role xxx_CallParameterOperationAction_callObjectViaParameter_src
+	Parameter[1] role callObjectViaParameter
+end
+
+association xxx_ReferenceAssignmentAction_parameter between
+	ReferenceAssignmentAction[*] role xxx_ReferenceAssignmentAction_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_ReferenceAssignmentAction_reference between
+	ReferenceAssignmentAction[*] role xxx_ReferenceAssignmentAction_reference_src
+	Reference[1] role reference
+end
+

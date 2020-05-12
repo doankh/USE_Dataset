@@ -1,0 +1,465 @@
+model PrimitiveTypes
+abstract class VarScope
+attributes
+operations
+end
+
+abstract class AbstractVar
+attributes
+operations
+end
+
+class VarUse<Expression
+attributes
+operations
+end
+
+class MOF_Property
+attributes
+operations
+end
+
+class Key
+attributes
+operations
+end
+
+abstract class PatternScope<VarScope
+attributes
+operations
+end
+
+class PatternDefn<VarScope
+attributes
+operations
+end
+
+class TRule<VarScope
+attributes
+operations
+end
+
+class Transformation<PatternScope
+attributes
+operations
+end
+
+class Query<PatternScope
+attributes
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+class TRuleVar<AbstractVar
+attributes
+operations
+end
+
+class PatternVar<AbstractVar
+attributes
+operations
+end
+
+class ExtentVar<AbstractVar
+attributes
+operations
+end
+
+abstract class CompoundTerm<Term
+attributes
+operations
+end
+
+class AndTerm<CompoundTerm
+attributes
+operations
+end
+
+class OrTerm<CompoundTerm
+attributes
+operations
+end
+
+class NotTerm<CompoundTerm
+attributes
+operations
+end
+
+class IfTerm<CompoundTerm
+attributes
+operations
+end
+
+abstract class SimpleTerm<Term
+attributes
+operations
+end
+
+class TrackingUse<SimpleTerm
+attributes
+	featureNames : String
+operations
+end
+
+class MOF_Class
+attributes
+operations
+end
+
+class PatternUse<SimpleTerm
+attributes
+operations
+end
+
+abstract class MofTerm<SimpleTerm
+attributes
+operations
+end
+
+class Condition<SimpleTerm
+attributes
+	reason : String
+operations
+end
+
+class MofInstance<MofTerm
+attributes
+	isExactly : Boolean
+operations
+end
+
+class MofOrder<MofTerm
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class CoumpoundExpr<Expression
+attributes
+operations
+end
+
+class CollectionExpr<CoumpoundExpr
+attributes
+	unique : Boolean
+	ordered_ : Boolean
+operations
+end
+
+class FunctionExpr<CoumpoundExpr
+attributes
+	function : String
+operations
+end
+
+class FeatureExpr<CoumpoundExpr
+attributes
+	collect : String
+	featureName : String
+operations
+end
+
+class InstanceRef<Expression
+attributes
+operations
+end
+
+class MOF_Object<Expression
+attributes
+operations
+end
+
+abstract class SimpleExpr<Expression
+attributes
+	representation : String
+operations
+end
+
+class StringConstant<SimpleExpr
+attributes
+operations
+end
+
+class IntConstant<SimpleExpr
+attributes
+operations
+end
+
+class BooleanConstant<SimpleExpr
+attributes
+operations
+end
+
+class EnumConstant<SimpleExpr
+attributes
+operations
+end
+
+composition xxx_VarScope_var between
+	VarScope[0..1] role xxx_VarScope_var_src
+	AbstractVar[*] role var
+end
+
+association xxx_AbstractVar_scope between
+	AbstractVar[*] role xxx_AbstractVar_scope_src
+	VarScope[1] role scope
+end
+
+association xxx_AbstractVar_varUse between
+	AbstractVar[*] role xxx_AbstractVar_varUse_src
+	VarUse[1] role varUse
+end
+
+association xxx_VarUse_var between
+	VarUse[*] role xxx_VarUse_var_src
+	AbstractVar[1] role var
+end
+
+association xxx_MOF_Property_part between
+	MOF_Property[*] role xxx_MOF_Property_part_src
+	Key[1] role part
+end
+
+association xxx_Key_property between
+	Key[0..1] role xxx_Key_property_src
+	MOF_Property[*] role property
+end
+
+association xxx_Key_transformation between
+	Key[*] role xxx_Key_transformation_src
+	Transformation[1] role transformation
+end
+
+composition xxx_PatternScope_patternDefn between
+	PatternScope[0..1] role xxx_PatternScope_patternDefn_src
+	PatternDefn[*] role patternDefn
+end
+
+association xxx_PatternDefn_scope between
+	PatternDefn[*] role xxx_PatternDefn_scope_src
+	PatternScope[1] role scope
+end
+
+association xxx_PatternDefn_parameter between
+	PatternDefn[0..1] role xxx_PatternDefn_parameter_src
+	PatternVar[*] role parameter
+end
+
+composition xxx_PatternDefn_body between
+	PatternDefn[*] role xxx_PatternDefn_body_src
+	Term[1] role body
+end
+
+association xxx_TRule_superseded between
+	TRule[0..1] role xxx_TRule_superseded_src
+	TRule[*] role superseded
+end
+
+association xxx_TRule_superseder between
+	TRule[0..1] role xxx_TRule_superseder_src
+	TRule[*] role superseder
+end
+
+association xxx_TRule_transformation between
+	TRule[*] role xxx_TRule_transformation_src
+	Transformation[1] role transformation
+end
+
+association xxx_TRule_extended between
+	TRule[0..1] role xxx_TRule_extended_src
+	TRule[*] role extended
+end
+
+association xxx_TRule_extender between
+	TRule[0..1] role xxx_TRule_extender_src
+	TRule[*] role extender
+end
+
+composition xxx_TRule_term between
+	TRule[*] role xxx_TRule_term_src
+	Term[0..1] role term
+end
+
+composition xxx_TRule_tgt between
+	TRule[0..1] role xxx_TRule_tgt_src
+	SimpleTerm[*] role tgt
+end
+
+composition xxx_Transformation_keys between
+	Transformation[0..1] role xxx_Transformation_keys_src
+	Key[*] role keys
+end
+
+composition xxx_Transformation_tRule between
+	Transformation[0..1] role xxx_Transformation_tRule_src
+	TRule[*] role tRule
+end
+
+composition xxx_Query_term between
+	Query[*] role xxx_Query_term_src
+	Term[1] role term
+end
+
+association xxx_Query_parameter between
+	Query[0..1] role xxx_Query_parameter_src
+	PatternVar[*] role parameter
+end
+
+association xxx_Term_patternDefn between
+	Term[*] role xxx_Term_patternDefn_src
+	PatternDefn[0..1] role patternDefn
+end
+
+association xxx_Term_query between
+	Term[*] role xxx_Term_query_src
+	Query[0..1] role query
+end
+
+association xxx_Term_tRule between
+	Term[*] role xxx_Term_tRule_src
+	TRule[0..1] role tRule
+end
+
+association xxx_Term_context_ between
+	Term[*] role xxx_Term_context__src
+	ExtentVar[0..1] role context_
+end
+
+association xxx_Term_compoundTerm between
+	Term[*] role xxx_Term_compoundTerm_src
+	CompoundTerm[0..1] role compoundTerm
+end
+
+association xxx_TRuleVar_superseder between
+	TRuleVar[0..1] role xxx_TRuleVar_superseder_src
+	TRuleVar[*] role superseder
+end
+
+association xxx_TRuleVar_superseded between
+	TRuleVar[0..1] role xxx_TRuleVar_superseded_src
+	TRuleVar[*] role superseded
+end
+
+association xxx_TRuleVar_extended between
+	TRuleVar[0..1] role xxx_TRuleVar_extended_src
+	TRuleVar[*] role extended
+end
+
+association xxx_TRuleVar_extender between
+	TRuleVar[0..1] role xxx_TRuleVar_extender_src
+	TRuleVar[*] role extender
+end
+
+association xxx_PatternVar_query between
+	PatternVar[*] role xxx_PatternVar_query_src
+	Query[1] role query
+end
+
+association xxx_PatternVar_patternDefn between
+	PatternVar[*] role xxx_PatternVar_patternDefn_src
+	PatternDefn[1] role patternDefn
+end
+
+association xxx_ExtentVar_src between
+	ExtentVar[*] role xxx_ExtentVar_src_src
+	Term[1] role src
+end
+
+composition xxx_CompoundTerm_term between
+	CompoundTerm[0..1] role xxx_CompoundTerm_term_src
+	Term[1..*] role term
+end
+
+association xxx_SimpleTerm_tRuleST between
+	SimpleTerm[*] role xxx_SimpleTerm_tRuleST_src
+	TRule[0..1] role tRuleST
+end
+
+composition xxx_SimpleTerm_arg between
+	SimpleTerm[0..1] role xxx_SimpleTerm_arg_src
+	Expression[*] role arg
+end
+
+association xxx_TrackingUse_tracking between
+	TrackingUse[*] role xxx_TrackingUse_tracking_src
+	MOF_Class[1] role tracking
+end
+
+association xxx_MOF_Class_tracking between
+	MOF_Class[0..1] role xxx_MOF_Class_tracking_src
+	TrackingUse[*] role tracking
+end
+
+association xxx_MofInstance_typeName between
+	MofInstance[*] role xxx_MofInstance_typeName_src
+	Expression[1] role typeName
+end
+
+association xxx_MofInstance_instance between
+	MofInstance[*] role xxx_MofInstance_instance_src
+	Expression[1] role instance
+end
+
+association xxx_MofOrder_lesser between
+	MofOrder[*] role xxx_MofOrder_lesser_src
+	Expression[1] role lesser
+end
+
+association xxx_MofOrder_instance between
+	MofOrder[*] role xxx_MofOrder_instance_src
+	Expression[1] role instance
+end
+
+association xxx_MofOrder_greater between
+	MofOrder[*] role xxx_MofOrder_greater_src
+	Expression[1] role greater
+end
+
+association xxx_Expression_lesser between
+	Expression[*] role xxx_Expression_lesser_src
+	MofOrder[1] role lesser
+end
+
+association xxx_Expression_instance between
+	Expression[*] role xxx_Expression_instance_src
+	MofOrder[1] role instance
+end
+
+association xxx_Expression_greater between
+	Expression[*] role xxx_Expression_greater_src
+	MofOrder[1] role greater
+end
+
+association xxx_Expression_term between
+	Expression[*] role xxx_Expression_term_src
+	SimpleTerm[1] role term
+end
+
+association xxx_Expression_expr between
+	Expression[*] role xxx_Expression_expr_src
+	CoumpoundExpr[0..1] role expr
+end
+
+composition xxx_CoumpoundExpr_arg between
+	CoumpoundExpr[0..1] role xxx_CoumpoundExpr_arg_src
+	Expression[*] role arg
+end
+
+association xxx_InstanceRef_obj between
+	InstanceRef[*] role xxx_InstanceRef_obj_src
+	MOF_Object[1] role obj
+end
+
+association xxx_MOF_Object_obj between
+	MOF_Object[*] role xxx_MOF_Object_obj_src
+	InstanceRef[1] role obj
+end
+

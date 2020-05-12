@@ -1,0 +1,401 @@
+model PrimitiveTypes
+class RelationSchip
+attributes
+operations
+end
+
+class ConstrainedRelationSchip
+attributes
+operations
+end
+
+class Aggregation<Association
+attributes
+operations
+end
+
+class Composition<Association
+attributes
+operations
+end
+
+class Association<RelationSchip
+attributes
+operations
+end
+
+class Generalisation<RelationSchip
+attributes
+operations
+end
+
+class Dependency<RelationSchip
+attributes
+operations
+end
+
+class AssociationEnd
+attributes
+operations
+end
+
+class Package
+attributes
+operations
+end
+
+class Steriotype
+attributes
+operations
+end
+
+class Class
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+class Characteristic
+attributes
+operations
+end
+
+class BusnissRule
+attributes
+operations
+end
+
+class MetaData
+attributes
+operations
+end
+
+class Source
+attributes
+operations
+end
+
+class Domain
+attributes
+operations
+end
+
+class DescriptiveAttribute<Characteristic
+attributes
+operations
+end
+
+class Geometry<Characteristic
+attributes
+operations
+end
+
+class Temporality<Characteristic
+attributes
+operations
+end
+
+class VisualInfo<Characteristic
+attributes
+operations
+end
+
+class Value
+attributes
+operations
+end
+
+class RangeDomain<Domain
+attributes
+operations
+end
+
+class EnumeratedDomain<Domain
+attributes
+operations
+end
+
+class PerceptorySteriotype<Steriotype
+attributes
+operations
+end
+
+composition xxx_RelationSchip_affectCharacteristic between
+	RelationSchip[0..1] role xxx_RelationSchip_affectCharacteristic_src
+	Characteristic[*] role affectCharacteristic
+end
+
+association xxx_RelationSchip_constraint between
+	RelationSchip[*] role xxx_RelationSchip_constraint_src
+	Constraint[0..1] role constraint
+end
+
+association xxx_RelationSchip_steriotype between
+	RelationSchip[0..1] role xxx_RelationSchip_steriotype_src
+	Steriotype[*] role steriotype
+end
+
+association xxx_RelationSchip_packages between
+	RelationSchip[0..1] role xxx_RelationSchip_packages_src
+	Package[*] role packages
+end
+
+association xxx_RelationSchip_associatePackages between
+	RelationSchip[*] role xxx_RelationSchip_associatePackages_src
+	Package[2] role associatePackages
+end
+
+association xxx_Package_steriotype between
+	Package[*] role xxx_Package_steriotype_src
+	Steriotype[0..1] role steriotype
+end
+
+composition xxx_Package_children between
+	Package[0..1] role xxx_Package_children_src
+	Package[*] role children
+end
+
+association xxx_Package_parent between
+	Package[*] role xxx_Package_parent_src
+	Package[1] role parent
+end
+
+composition xxx_Package_classes between
+	Package[0..1] role xxx_Package_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Package_relationSchip between
+	Package[0..1] role xxx_Package_relationSchip_src
+	RelationSchip[*] role relationSchip
+end
+
+association xxx_Package_connectedRelationSchip between
+	Package[0..1] role xxx_Package_connectedRelationSchip_src
+	RelationSchip[*] role connectedRelationSchip
+end
+
+association xxx_Steriotype_descriptiveAttribute between
+	Steriotype[0..1] role xxx_Steriotype_descriptiveAttribute_src
+	DescriptiveAttribute[*] role descriptiveAttribute
+end
+
+association xxx_Steriotype_operations_ between
+	Steriotype[0..1] role xxx_Steriotype_operations__src
+	Operation[*] role operations_
+end
+
+association xxx_Steriotype_relationSchip between
+	Steriotype[0..1] role xxx_Steriotype_relationSchip_src
+	RelationSchip[*] role relationSchip
+end
+
+association xxx_Steriotype_theClass between
+	Steriotype[0..1] role xxx_Steriotype_theClass_src
+	Class[*] role theClass
+end
+
+association xxx_Steriotype_thePackage between
+	Steriotype[0..1] role xxx_Steriotype_thePackage_src
+	Package[*] role thePackage
+end
+
+composition xxx_Class_characteristic between
+	Class[0..1] role xxx_Class_characteristic_src
+	Characteristic[*] role characteristic
+end
+
+composition xxx_Class_details between
+	Class[*] role xxx_Class_details_src
+	MetaData[0..1] role details
+end
+
+association xxx_Class_operations_ between
+	Class[*] role xxx_Class_operations__src
+	Operation[1] role operations_
+end
+
+composition xxx_Class_myOperations between
+	Class[0..1] role xxx_Class_myOperations_src
+	Operation[*] role myOperations
+end
+
+association xxx_Class_constraint between
+	Class[0..1] role xxx_Class_constraint_src
+	Constraint[*] role constraint
+end
+
+association xxx_Class_steriotype between
+	Class[*] role xxx_Class_steriotype_src
+	Steriotype[0..1] role steriotype
+end
+
+association xxx_Class_packages between
+	Class[0..1] role xxx_Class_packages_src
+	Package[*] role packages
+end
+
+association xxx_Constraint_caracteristic between
+	Constraint[*] role xxx_Constraint_caracteristic_src
+	Characteristic[1] role caracteristic
+end
+
+association xxx_Constraint_theClass between
+	Constraint[*] role xxx_Constraint_theClass_src
+	Class[1] role theClass
+end
+
+association xxx_Constraint_relationSchip between
+	Constraint[0..1] role xxx_Constraint_relationSchip_src
+	RelationSchip[*] role relationSchip
+end
+
+composition xxx_Operation_detail between
+	Operation[*] role xxx_Operation_detail_src
+	MetaData[0..1] role detail
+end
+
+composition xxx_Operation_inCharacteristic between
+	Operation[0..1] role xxx_Operation_inCharacteristic_src
+	Characteristic[1..*] role inCharacteristic
+end
+
+composition xxx_Operation_affectFeature between
+	Operation[0..1] role xxx_Operation_affectFeature_src
+	Class[*] role affectFeature
+end
+
+association xxx_Operation_steriotype between
+	Operation[*] role xxx_Operation_steriotype_src
+	Steriotype[0..1] role steriotype
+end
+
+association xxx_Operation_behaviour between
+	Operation[*] role xxx_Operation_behaviour_src
+	Class[1] role behaviour
+end
+
+composition xxx_Characteristic_details between
+	Characteristic[*] role xxx_Characteristic_details_src
+	MetaData[0..1] role details
+end
+
+composition xxx_Characteristic_rule between
+	Characteristic[*] role xxx_Characteristic_rule_src
+	BusnissRule[0..1] role rule
+end
+
+association xxx_Characteristic_operations_ between
+	Characteristic[*] role xxx_Characteristic_operations__src
+	Operation[1] role operations_
+end
+
+association xxx_Characteristic_theClass between
+	Characteristic[*] role xxx_Characteristic_theClass_src
+	Class[1] role theClass
+end
+
+association xxx_Characteristic_relationSchip between
+	Characteristic[*] role xxx_Characteristic_relationSchip_src
+	RelationSchip[1] role relationSchip
+end
+
+association xxx_Characteristic_constraint between
+	Characteristic[*] role xxx_Characteristic_constraint_src
+	Constraint[0..1] role constraint
+end
+
+association xxx_BusnissRule_characteristic between
+	BusnissRule[*] role xxx_BusnissRule_characteristic_src
+	Characteristic[1] role characteristic
+end
+
+composition xxx_MetaData_source between
+	MetaData[*] role xxx_MetaData_source_src
+	Source[0..1] role source
+end
+
+association xxx_MetaData_characteristic between
+	MetaData[*] role xxx_MetaData_characteristic_src
+	Characteristic[1] role characteristic
+end
+
+association xxx_MetaData_operations_ between
+	MetaData[*] role xxx_MetaData_operations__src
+	Operation[1] role operations_
+end
+
+association xxx_MetaData_theClass between
+	MetaData[*] role xxx_MetaData_theClass_src
+	Class[1] role theClass
+end
+
+association xxx_Source_metaData between
+	Source[*] role xxx_Source_metaData_src
+	MetaData[1] role metaData
+end
+
+association xxx_Domain_descriptiveAttribute between
+	Domain[0..1] role xxx_Domain_descriptiveAttribute_src
+	DescriptiveAttribute[1..*] role descriptiveAttribute
+end
+
+composition xxx_DescriptiveAttribute_tempsDef between
+	DescriptiveAttribute[*] role xxx_DescriptiveAttribute_tempsDef_src
+	Temporality[0..1] role tempsDef
+end
+
+composition xxx_DescriptiveAttribute_specialDef between
+	DescriptiveAttribute[*] role xxx_DescriptiveAttribute_specialDef_src
+	Geometry[0..1] role specialDef
+end
+
+association xxx_DescriptiveAttribute_steriotype between
+	DescriptiveAttribute[*] role xxx_DescriptiveAttribute_steriotype_src
+	Steriotype[0..1] role steriotype
+end
+
+association xxx_DescriptiveAttribute_domain between
+	DescriptiveAttribute[*] role xxx_DescriptiveAttribute_domain_src
+	Domain[0..1] role domain
+end
+
+association xxx_Geometry_tempsDef between
+	Geometry[*] role xxx_Geometry_tempsDef_src
+	Temporality[0..1] role tempsDef
+end
+
+association xxx_Geometry_descriptiveAttributeg between
+	Geometry[*] role xxx_Geometry_descriptiveAttributeg_src
+	DescriptiveAttribute[1] role descriptiveAttributeg
+end
+
+association xxx_Temporality_geometry between
+	Temporality[*] role xxx_Temporality_geometry_src
+	Geometry[0..1] role geometry
+end
+
+association xxx_Temporality_descriptiveAttributet between
+	Temporality[*] role xxx_Temporality_descriptiveAttributet_src
+	DescriptiveAttribute[1] role descriptiveAttributet
+end
+
+association xxx_Value_enumeratedDomain between
+	Value[*] role xxx_Value_enumeratedDomain_src
+	EnumeratedDomain[1] role enumeratedDomain
+end
+
+composition xxx_EnumeratedDomain_value between
+	EnumeratedDomain[0..1] role xxx_EnumeratedDomain_value_src
+	Value[1..*] role value
+end
+

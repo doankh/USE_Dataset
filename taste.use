@@ -1,0 +1,199 @@
+model taste
+class Function<TasteComponent
+attributes
+	language : String
+operations
+end
+
+class Board<TasteComponent
+attributes
+	type : String
+operations
+end
+
+class Processor<TasteComponent
+attributes
+	type : String
+operations
+end
+
+class Driver<TasteComponent
+attributes
+	type : String
+	config : String
+operations
+end
+
+class Bus<TasteComponent
+attributes
+	type : String
+operations
+end
+
+class fctconn
+attributes
+	name : String
+operations
+end
+
+class Interface
+attributes
+	direction : String
+	name : String
+	isProvidedInterface : Boolean
+	interfaceType : Integer
+	period : Integer
+	deadline : Integer
+operations
+end
+
+class BusConnection
+attributes
+operations
+end
+
+class InterfaceConnection
+attributes
+operations
+end
+
+class InterfaceParameter
+attributes
+	name : String
+	type : String
+	direction : Integer
+operations
+end
+
+class TasteComponent
+attributes
+	componentType : Integer
+	name : String
+operations
+end
+
+association xxx_Function_interfaces between
+	Function[0..1] role xxx_Function_interfaces_src
+	Interface[*] role interfaces
+end
+
+association xxx_Function_associatedBoard between
+	Function[*] role xxx_Function_associatedBoard_src
+	Board[0..1] role associatedBoard
+end
+
+composition xxx_Board_boardcpu between
+	Board[*] role xxx_Board_boardcpu_src
+	Processor[0..1] role boardcpu
+end
+
+association xxx_Board_functions between
+	Board[0..1] role xxx_Board_functions_src
+	Function[*] role functions
+end
+
+association xxx_Board_drivers between
+	Board[0..1] role xxx_Board_drivers_src
+	Driver[*] role drivers
+end
+
+composition xxx_Processor_cpuboard between
+	Processor[*] role xxx_Processor_cpuboard_src
+	Board[0..1] role cpuboard
+end
+
+association xxx_Driver_EReference0 between
+	Driver[*] role xxx_Driver_EReference0_src
+	Driver[0..1] role EReference0
+end
+
+association xxx_Driver_associatedBoard between
+	Driver[*] role xxx_Driver_associatedBoard_src
+	Board[0..1] role associatedBoard
+end
+
+association xxx_Driver_drvbus between
+	Driver[*] role xxx_Driver_drvbus_src
+	Bus[0..1] role drvbus
+end
+
+association xxx_Driver_connections between
+	Driver[0..1] role xxx_Driver_connections_src
+	BusConnection[*] role connections
+end
+
+association xxx_Bus_connections between
+	Bus[0..1] role xxx_Bus_connections_src
+	BusConnection[*] role connections
+end
+
+association xxx_fctconn_connbus between
+	fctconn[*] role xxx_fctconn_connbus_src
+	Bus[0..1] role connbus
+end
+
+association xxx_fctconn_connfct between
+	fctconn[0..1] role xxx_fctconn_connfct_src
+	Interface[*] role connfct
+end
+
+association xxx_Interface_intfct between
+	Interface[*] role xxx_Interface_intfct_src
+	Function[0..1] role intfct
+end
+
+composition xxx_Interface_connectedto between
+	Interface[0..1] role xxx_Interface_connectedto_src
+	Interface[*] role connectedto
+end
+
+association xxx_Interface_connections between
+	Interface[0..1] role xxx_Interface_connections_src
+	InterfaceConnection[*] role connections
+end
+
+composition xxx_Interface_parameters between
+	Interface[0..1] role xxx_Interface_parameters_src
+	InterfaceParameter[*] role parameters
+end
+
+association xxx_Interface_associatedFunction between
+	Interface[*] role xxx_Interface_associatedFunction_src
+	Function[0..1] role associatedFunction
+end
+
+association xxx_BusConnection_busconn between
+	BusConnection[*] role xxx_BusConnection_busconn_src
+	Interface[0..1] role busconn
+end
+
+association xxx_BusConnection_associatedBus between
+	BusConnection[*] role xxx_BusConnection_associatedBus_src
+	Bus[0..1] role associatedBus
+end
+
+association xxx_BusConnection_associatedDriver between
+	BusConnection[*] role xxx_BusConnection_associatedDriver_src
+	Driver[0..1] role associatedDriver
+end
+
+association xxx_InterfaceConnection_ProvidedInterface between
+	InterfaceConnection[*] role xxx_InterfaceConnection_ProvidedInterface_src
+	Interface[0..1] role ProvidedInterface
+end
+
+association xxx_InterfaceConnection_RequiredInterface between
+	InterfaceConnection[*] role xxx_InterfaceConnection_RequiredInterface_src
+	Interface[0..1] role RequiredInterface
+end
+
+association xxx_InterfaceConnection_associatedBus between
+	InterfaceConnection[*] role xxx_InterfaceConnection_associatedBus_src
+	Bus[0..1] role associatedBus
+end
+
+association xxx_InterfaceParameter_associatedInterface between
+	InterfaceParameter[*] role xxx_InterfaceParameter_associatedInterface_src
+	Interface[0..1] role associatedInterface
+end
+

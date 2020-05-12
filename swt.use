@@ -1,0 +1,111 @@
+model swt
+class PropertyDefinition
+attributes
+	name : String
+	propertyType : String
+operations
+end
+
+class PropertyDefinitionEntry
+attributes
+	key : String
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class PropertyFeature
+attributes
+	getter : String
+	setter : String
+operations
+end
+
+class WidgetDefinition
+attributes
+	name : String
+	runtimeType : String
+operations
+end
+
+class PropertyFeatureEntry
+attributes
+operations
+end
+
+class BehaviorDefinition
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	type : String
+	name : String
+operations
+end
+
+association xxx_PropertyDefinition_owners between
+	PropertyDefinition[0..1] role xxx_PropertyDefinition_owners_src
+	WidgetDefinition[*] role owners
+end
+
+composition xxx_PropertyDefinitionEntry_value between
+	PropertyDefinitionEntry[0..1] role xxx_PropertyDefinitionEntry_value_src
+	PropertyDefinition[*] role value
+end
+
+composition xxx_Model_propertyDefinitions between
+	Model[0..1] role xxx_Model_propertyDefinitions_src
+	PropertyDefinitionEntry[*] role propertyDefinitions
+end
+
+composition xxx_Model_behaviorDefinitions between
+	Model[0..1] role xxx_Model_behaviorDefinitions_src
+	BehaviorDefinition[*] role behaviorDefinitions
+end
+
+composition xxx_Model_widgets between
+	Model[0..1] role xxx_Model_widgets_src
+	WidgetDefinition[*] role widgets
+end
+
+association xxx_PropertyFeature_definition between
+	PropertyFeature[*] role xxx_PropertyFeature_definition_src
+	PropertyDefinition[0..1] role definition
+end
+
+composition xxx_WidgetDefinition_propertyFeatures between
+	WidgetDefinition[0..1] role xxx_WidgetDefinition_propertyFeatures_src
+	PropertyFeatureEntry[*] role propertyFeatures
+end
+
+association xxx_WidgetDefinition_behaviors between
+	WidgetDefinition[0..1] role xxx_WidgetDefinition_behaviors_src
+	BehaviorDefinition[*] role behaviors
+end
+
+association xxx_WidgetDefinition_superType between
+	WidgetDefinition[*] role xxx_WidgetDefinition_superType_src
+	WidgetDefinition[0..1] role superType
+end
+
+association xxx_PropertyFeatureEntry_key between
+	PropertyFeatureEntry[*] role xxx_PropertyFeatureEntry_key_src
+	PropertyDefinition[0..1] role key
+end
+
+composition xxx_PropertyFeatureEntry_value between
+	PropertyFeatureEntry[*] role xxx_PropertyFeatureEntry_value_src
+	PropertyFeature[0..1] role value
+end
+
+association xxx_BehaviorDefinition_owners between
+	BehaviorDefinition[0..1] role xxx_BehaviorDefinition_owners_src
+	WidgetDefinition[*] role owners
+end
+

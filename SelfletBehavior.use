@@ -1,0 +1,115 @@
+model selfletbehavior
+class Behavior
+attributes
+	name : String
+operations
+end
+
+class State
+attributes
+	name : String
+operations
+end
+
+class Init<State
+attributes
+operations
+end
+
+class Final<State
+attributes
+operations
+end
+
+class Intermediate<State
+attributes
+operations
+end
+
+class Invocation<State
+attributes
+operations
+end
+
+class Elementary<Behavior
+attributes
+operations
+end
+
+class Complex<Behavior
+attributes
+operations
+end
+
+class Selflet
+attributes
+operations
+end
+
+class Service
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Condition
+attributes
+	body : String
+	conditionFile : String
+operations
+end
+
+class Action
+attributes
+	body : String
+	actionFile : String
+	abilityFile : String
+operations
+end
+
+composition xxx_Behavior_state between
+	Behavior[0..1] role xxx_Behavior_state_src
+	State[*] role state
+end
+
+association xxx_Behavior_targetService between
+	Behavior[*] role xxx_Behavior_targetService_src
+	Service[0..1] role targetService
+end
+
+composition xxx_State_action between
+	State[*] role xxx_State_action_src
+	Action[0..1] role action
+end
+
+composition xxx_State_next between
+	State[0..1] role xxx_State_next_src
+	Condition[*] role next
+end
+
+association xxx_State_targetBehavior between
+	State[*] role xxx_State_targetBehavior_src
+	Behavior[0..1] role targetBehavior
+end
+
+composition xxx_Selflet_service between
+	Selflet[0..1] role xxx_Selflet_service_src
+	Service[*] role service
+end
+
+composition xxx_Service_behavior between
+	Service[0..1] role xxx_Service_behavior_src
+	Behavior[*] role behavior
+end
+
+association xxx_Condition_targetState between
+	Condition[*] role xxx_Condition_targetState_src
+	State[0..1] role targetState
+end
+
+association xxx_Action_targetState between
+	Action[*] role xxx_Action_targetState_src
+	State[0..1] role targetState
+end
+

@@ -1,0 +1,628 @@
+model pom
+class Activation
+attributes
+	activeByDefault : String
+	jdk : String
+operations
+end
+
+class ActivationFile
+attributes
+	missing : String
+	exists : String
+operations
+end
+
+class ActivationOS
+attributes
+	name : String
+	family : String
+	arch : String
+	version : String
+operations
+end
+
+class ActivationProperty
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Build<BuildBase
+attributes
+	sourceDirectory : String
+	scriptSourceDirectory : String
+	testSourceDirectory : String
+	outputDirectory : String
+	testOutputDirectory : String
+operations
+end
+
+class BuildBase
+attributes
+	defaultGoal : String
+	directory : String
+	finalName : String
+	filters : String
+operations
+end
+
+class CiManagement
+attributes
+	system : String
+	url : String
+operations
+end
+
+class Contributor
+attributes
+	name : String
+	email : String
+	url : String
+	organization : String
+	organizationUrl : String
+	timezone : String
+	roles : String
+operations
+end
+
+class Dependency
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+	type : String
+	classifier : String
+	scope : String
+	systemPath : String
+	optional : String
+operations
+end
+
+class DependencyManagement
+attributes
+operations
+end
+
+class DeploymentRepository
+attributes
+	uniqueVersion : String
+	id : String
+	name : String
+	url : String
+	layout : String
+operations
+end
+
+class Developer
+attributes
+	id : String
+	name : String
+	email : String
+	url : String
+	organization : String
+	organizationUrl : String
+	timezone : String
+	roles : String
+operations
+end
+
+class DistributionManagement
+attributes
+	downloadUrl : String
+	status : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Exclusion
+attributes
+	artifactId : String
+	groupId : String
+operations
+end
+
+class Extension
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+operations
+end
+
+class IssueManagement
+attributes
+	system : String
+	url : String
+operations
+end
+
+class License
+attributes
+	name : String
+	url : String
+	distribution : String
+	comments : String
+operations
+end
+
+class MailingList
+attributes
+	name : String
+	subscribe : String
+	unsubscribe : String
+	post_ : String
+	archive : String
+	otherArchives : String
+operations
+end
+
+class Model
+attributes
+	modelVersion : String
+	groupId : String
+	artifactId : String
+	packaging : String
+	name : String
+	version : String
+	description : String
+	url : String
+	inceptionYear : String
+	modules : String
+operations
+end
+
+class Notifier
+attributes
+	type : String
+	sendOnError : String
+	sendOnFailure : String
+	sendOnSuccess : String
+	sendOnWarning : String
+	address : String
+operations
+end
+
+class Organization
+attributes
+	name : String
+	url : String
+operations
+end
+
+class Parent
+attributes
+	artifactId : String
+	groupId : String
+	version : String
+	relativePath : String
+operations
+end
+
+class Plugin
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+	extensions : String
+	inherited : String
+operations
+end
+
+class PluginExecution
+attributes
+	id : String
+	phase : String
+	inherited : String
+	goals : String
+operations
+end
+
+class PluginManagement
+attributes
+operations
+end
+
+class Prerequisites
+attributes
+	maven : String
+operations
+end
+
+class Profile
+attributes
+	id : String
+	modules : String
+operations
+end
+
+class Relocation
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+	message : String
+operations
+end
+
+class Reporting
+attributes
+	excludeDefaults : String
+	outputDirectory : String
+operations
+end
+
+class ReportPlugin
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+	inherited : String
+operations
+end
+
+class ReportSet
+attributes
+	id : String
+	inherited : String
+	reports : String
+operations
+end
+
+class Repository
+attributes
+	id : String
+	name : String
+	url : String
+	layout : String
+operations
+end
+
+class RepositoryPolicy
+attributes
+	enabled : String
+	updatePolicy : String
+	checksumPolicy : String
+operations
+end
+
+class Resource
+attributes
+	targetPath : String
+	filtering : String
+	directory : String
+	includes : String
+	excludes : String
+operations
+end
+
+class Scm
+attributes
+	connection : String
+	developerConnection : String
+	tag : String
+	url : String
+operations
+end
+
+class Site
+attributes
+	id : String
+	name : String
+	url : String
+operations
+end
+
+class PropertyElement
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Configuration
+attributes
+operations
+end
+
+composition xxx_Activation_os between
+	Activation[*] role xxx_Activation_os_src
+	ActivationOS[0..1] role os
+end
+
+composition xxx_Activation_property between
+	Activation[*] role xxx_Activation_property_src
+	ActivationProperty[0..1] role property
+end
+
+composition xxx_Activation_file between
+	Activation[*] role xxx_Activation_file_src
+	ActivationFile[0..1] role file
+end
+
+composition xxx_Build_extensions between
+	Build[0..1] role xxx_Build_extensions_src
+	Extension[*] role extensions
+end
+
+composition xxx_BuildBase_resources between
+	BuildBase[0..1] role xxx_BuildBase_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_BuildBase_testResources between
+	BuildBase[0..1] role xxx_BuildBase_testResources_src
+	Resource[*] role testResources
+end
+
+composition xxx_BuildBase_pluginManagement between
+	BuildBase[*] role xxx_BuildBase_pluginManagement_src
+	PluginManagement[0..1] role pluginManagement
+end
+
+composition xxx_BuildBase_plugins between
+	BuildBase[0..1] role xxx_BuildBase_plugins_src
+	Plugin[*] role plugins
+end
+
+composition xxx_CiManagement_notifiers between
+	CiManagement[0..1] role xxx_CiManagement_notifiers_src
+	Notifier[*] role notifiers
+end
+
+composition xxx_Contributor_properties between
+	Contributor[0..1] role xxx_Contributor_properties_src
+	PropertyElement[*] role properties
+end
+
+composition xxx_Dependency_exclusions between
+	Dependency[0..1] role xxx_Dependency_exclusions_src
+	Exclusion[*] role exclusions
+end
+
+composition xxx_DependencyManagement_dependencies between
+	DependencyManagement[0..1] role xxx_DependencyManagement_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_Developer_properties between
+	Developer[0..1] role xxx_Developer_properties_src
+	PropertyElement[*] role properties
+end
+
+composition xxx_DistributionManagement_repository between
+	DistributionManagement[*] role xxx_DistributionManagement_repository_src
+	DeploymentRepository[0..1] role repository
+end
+
+composition xxx_DistributionManagement_snapshotRepository between
+	DistributionManagement[*] role xxx_DistributionManagement_snapshotRepository_src
+	DeploymentRepository[0..1] role snapshotRepository
+end
+
+composition xxx_DistributionManagement_site between
+	DistributionManagement[*] role xxx_DistributionManagement_site_src
+	Site[0..1] role site
+end
+
+composition xxx_DistributionManagement_relocation between
+	DistributionManagement[*] role xxx_DistributionManagement_relocation_src
+	Relocation[0..1] role relocation
+end
+
+composition xxx_DocumentRoot_project between
+	DocumentRoot[*] role xxx_DocumentRoot_project_src
+	Model[*] role project
+end
+
+composition xxx_Model_parent between
+	Model[*] role xxx_Model_parent_src
+	Parent[0..1] role parent
+end
+
+composition xxx_Model_prerequisites between
+	Model[*] role xxx_Model_prerequisites_src
+	Prerequisites[0..1] role prerequisites
+end
+
+composition xxx_Model_issueManagement between
+	Model[*] role xxx_Model_issueManagement_src
+	IssueManagement[0..1] role issueManagement
+end
+
+composition xxx_Model_ciManagement between
+	Model[*] role xxx_Model_ciManagement_src
+	CiManagement[0..1] role ciManagement
+end
+
+composition xxx_Model_mailingLists between
+	Model[0..1] role xxx_Model_mailingLists_src
+	MailingList[*] role mailingLists
+end
+
+composition xxx_Model_developers between
+	Model[0..1] role xxx_Model_developers_src
+	Developer[*] role developers
+end
+
+composition xxx_Model_contributors between
+	Model[0..1] role xxx_Model_contributors_src
+	Contributor[*] role contributors
+end
+
+composition xxx_Model_licenses between
+	Model[0..1] role xxx_Model_licenses_src
+	License[*] role licenses
+end
+
+composition xxx_Model_scm between
+	Model[*] role xxx_Model_scm_src
+	Scm[0..1] role scm
+end
+
+composition xxx_Model_organization between
+	Model[*] role xxx_Model_organization_src
+	Organization[0..1] role organization
+end
+
+composition xxx_Model_build between
+	Model[*] role xxx_Model_build_src
+	Build[0..1] role build
+end
+
+composition xxx_Model_profiles between
+	Model[0..1] role xxx_Model_profiles_src
+	Profile[*] role profiles
+end
+
+composition xxx_Model_repositories between
+	Model[0..1] role xxx_Model_repositories_src
+	Repository[*] role repositories
+end
+
+composition xxx_Model_pluginRepositories between
+	Model[0..1] role xxx_Model_pluginRepositories_src
+	Repository[*] role pluginRepositories
+end
+
+composition xxx_Model_dependencies between
+	Model[0..1] role xxx_Model_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_Model_reporting between
+	Model[*] role xxx_Model_reporting_src
+	Reporting[0..1] role reporting
+end
+
+composition xxx_Model_dependencyManagement between
+	Model[*] role xxx_Model_dependencyManagement_src
+	DependencyManagement[0..1] role dependencyManagement
+end
+
+composition xxx_Model_distributionManagement between
+	Model[*] role xxx_Model_distributionManagement_src
+	DistributionManagement[0..1] role distributionManagement
+end
+
+composition xxx_Model_properties between
+	Model[0..1] role xxx_Model_properties_src
+	PropertyElement[*] role properties
+end
+
+composition xxx_Notifier_configuration between
+	Notifier[0..1] role xxx_Notifier_configuration_src
+	PropertyElement[*] role configuration
+end
+
+composition xxx_Plugin_executions between
+	Plugin[0..1] role xxx_Plugin_executions_src
+	PluginExecution[*] role executions
+end
+
+composition xxx_Plugin_dependencies between
+	Plugin[0..1] role xxx_Plugin_dependencies_src
+	Dependency[*] role dependencies
+end
+
+association xxx_Plugin_configuration between
+	Plugin[*] role xxx_Plugin_configuration_src
+	Configuration[0..1] role configuration
+end
+
+association xxx_PluginExecution_configuration between
+	PluginExecution[*] role xxx_PluginExecution_configuration_src
+	Configuration[0..1] role configuration
+end
+
+composition xxx_PluginManagement_plugins between
+	PluginManagement[0..1] role xxx_PluginManagement_plugins_src
+	Plugin[*] role plugins
+end
+
+composition xxx_Profile_activation between
+	Profile[*] role xxx_Profile_activation_src
+	Activation[0..1] role activation
+end
+
+composition xxx_Profile_build between
+	Profile[*] role xxx_Profile_build_src
+	BuildBase[0..1] role build
+end
+
+composition xxx_Profile_repositories between
+	Profile[0..1] role xxx_Profile_repositories_src
+	Repository[*] role repositories
+end
+
+composition xxx_Profile_pluginRepositories between
+	Profile[0..1] role xxx_Profile_pluginRepositories_src
+	Repository[*] role pluginRepositories
+end
+
+composition xxx_Profile_dependencies between
+	Profile[0..1] role xxx_Profile_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_Profile_reports between
+	Profile[0..1] role xxx_Profile_reports_src
+	ReportPlugin[*] role reports
+end
+
+composition xxx_Profile_dependencyManagement between
+	Profile[*] role xxx_Profile_dependencyManagement_src
+	DependencyManagement[0..1] role dependencyManagement
+end
+
+composition xxx_Profile_distributionManagement between
+	Profile[*] role xxx_Profile_distributionManagement_src
+	DistributionManagement[0..1] role distributionManagement
+end
+
+composition xxx_Profile_properties between
+	Profile[0..1] role xxx_Profile_properties_src
+	PropertyElement[*] role properties
+end
+
+association xxx_Profile_reporting between
+	Profile[*] role xxx_Profile_reporting_src
+	Reporting[0..1] role reporting
+end
+
+composition xxx_Reporting_plugins between
+	Reporting[0..1] role xxx_Reporting_plugins_src
+	ReportPlugin[*] role plugins
+end
+
+composition xxx_ReportPlugin_reportSets between
+	ReportPlugin[0..1] role xxx_ReportPlugin_reportSets_src
+	ReportSet[*] role reportSets
+end
+
+association xxx_ReportPlugin_configuration between
+	ReportPlugin[*] role xxx_ReportPlugin_configuration_src
+	Configuration[0..1] role configuration
+end
+
+association xxx_ReportSet_configuration between
+	ReportSet[*] role xxx_ReportSet_configuration_src
+	Configuration[0..1] role configuration
+end
+
+composition xxx_Repository_releases between
+	Repository[*] role xxx_Repository_releases_src
+	RepositoryPolicy[0..1] role releases
+end
+
+composition xxx_Repository_snapshots between
+	Repository[*] role xxx_Repository_snapshots_src
+	RepositoryPolicy[0..1] role snapshots
+end
+

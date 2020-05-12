@@ -1,0 +1,223 @@
+model dataset
+class Dataset
+attributes
+	name : String
+	baseUri : String
+	description : String
+operations
+end
+
+class CsvToRdfImportation
+attributes
+operations
+end
+
+class CsvFile
+attributes
+	csvFileURL : String
+	name : String
+operations
+end
+
+class RdfConstruction
+attributes
+	name : String
+	sourceCsvCol : String
+	baseUri : String
+	transformation : String
+	customUri : String
+	linesOffset : Integer
+	classType : String
+operations
+end
+
+class Property
+attributes
+	name : String
+	sourceCSVCol : String
+	transformation : String
+	customPattern : String
+	dataType : String
+operations
+end
+
+class ReferenceProperty<Property
+attributes
+	uri : String
+operations
+end
+
+class NamespacesDefinitions
+attributes
+operations
+end
+
+class NamespaceDefinition
+attributes
+	namespace : String
+	prefix : String
+operations
+end
+
+class DatasetIntegration<Dataset
+attributes
+operations
+end
+
+class Schema
+attributes
+	Uri : String
+operations
+end
+
+class SClass
+attributes
+	name : String
+	uri : String
+operations
+end
+
+class SProperty
+attributes
+	name : String
+	dataType : String
+operations
+end
+
+class Integration
+attributes
+	Uri : String
+operations
+	getExternalDataset(name : String):ExternalDataset
+end
+
+class ExternalDataset
+attributes
+operations
+end
+
+class ClassIntegration
+attributes
+	expression : String
+operations
+end
+
+class PropertyIntegration
+attributes
+	expression : String
+operations
+end
+
+class FunctionSet
+attributes
+	name : String
+operations
+end
+
+class FunctionCategorty
+attributes
+operations
+end
+
+class FunctionCategory
+attributes
+	name : String
+operations
+end
+
+class Function
+attributes
+	name : String
+operations
+end
+
+composition xxx_CsvToRdfImportation_fromFiles between
+	CsvToRdfImportation[0..1] role xxx_CsvToRdfImportation_fromFiles_src
+	CsvFile[*] role fromFiles
+end
+
+composition xxx_CsvFile_RdfConstructions between
+	CsvFile[0..1] role xxx_CsvFile_RdfConstructions_src
+	RdfConstruction[*] role RdfConstructions
+end
+
+composition xxx_RdfConstruction_properties between
+	RdfConstruction[0..1] role xxx_RdfConstruction_properties_src
+	Property[*] role properties
+end
+
+composition xxx_NamespacesDefinitions_definitions between
+	NamespacesDefinitions[0..1] role xxx_NamespacesDefinitions_definitions_src
+	NamespaceDefinition[*] role definitions
+end
+
+association xxx_Schema_EReference0 between
+	Schema[*] role xxx_Schema_EReference0_src
+	Schema[0..1] role EReference0
+end
+
+association xxx_Schema_EReference1 between
+	Schema[*] role xxx_Schema_EReference1_src
+	Schema[0..1] role EReference1
+end
+
+composition xxx_Schema_classes between
+	Schema[0..1] role xxx_Schema_classes_src
+	SClass[*] role classes
+end
+
+composition xxx_SClass_properties between
+	SClass[0..1] role xxx_SClass_properties_src
+	SProperty[*] role properties
+end
+
+composition xxx_Integration_datasets between
+	Integration[0..1] role xxx_Integration_datasets_src
+	ExternalDataset[*] role datasets
+end
+
+composition xxx_ExternalDataset_classes between
+	ExternalDataset[0..1] role xxx_ExternalDataset_classes_src
+	ClassIntegration[*] role classes
+end
+
+association xxx_ExternalDataset_dataset between
+	ExternalDataset[*] role xxx_ExternalDataset_dataset_src
+	Dataset[0..1] role dataset
+end
+
+composition xxx_ClassIntegration_properties between
+	ClassIntegration[0..1] role xxx_ClassIntegration_properties_src
+	PropertyIntegration[*] role properties
+end
+
+association xxx_ClassIntegration_sclass between
+	ClassIntegration[*] role xxx_ClassIntegration_sclass_src
+	SClass[0..1] role sclass
+end
+
+association xxx_ClassIntegration_externalClass between
+	ClassIntegration[*] role xxx_ClassIntegration_externalClass_src
+	RdfConstruction[0..1] role externalClass
+end
+
+association xxx_PropertyIntegration_sproperty between
+	PropertyIntegration[*] role xxx_PropertyIntegration_sproperty_src
+	SProperty[0..1] role sproperty
+end
+
+association xxx_PropertyIntegration_externalProperty between
+	PropertyIntegration[*] role xxx_PropertyIntegration_externalProperty_src
+	Property[0..1] role externalProperty
+end
+
+composition xxx_FunctionSet_categories between
+	FunctionSet[0..1] role xxx_FunctionSet_categories_src
+	FunctionCategory[*] role categories
+end
+
+composition xxx_FunctionCategory_functions between
+	FunctionCategory[0..1] role xxx_FunctionCategory_functions_src
+	Function[*] role functions
+end
+

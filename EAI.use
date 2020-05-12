@@ -1,0 +1,43 @@
+model EAI
+class FCMSource
+attributes
+operations
+end
+
+class EAISource<FCMSource
+attributes
+operations
+end
+
+class FCMSink
+attributes
+operations
+end
+
+class EAISink<FCMSink
+attributes
+operations
+end
+
+class EAIResource
+attributes
+operations
+end
+
+class EAIQueue<EAIResource
+attributes
+	maxLength : Integer
+	name : String
+operations
+end
+
+association xxx_EAISource_resources between
+	EAISource[0..1] role xxx_EAISource_resources_src
+	EAIResource[*] role resources
+end
+
+association xxx_EAISink_resources between
+	EAISink[0..1] role xxx_EAISink_resources_src
+	EAIResource[*] role resources
+end
+

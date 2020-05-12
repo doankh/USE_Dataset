@@ -1,0 +1,149 @@
+model iptables
+class Model
+attributes
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+class FilterDeclaration
+attributes
+operations
+end
+
+class FilteringSpec
+attributes
+operations
+end
+
+class FilterSpec<FilteringSpec
+attributes
+	option : String
+	ip : String
+	ipDst : String
+	protocol : String
+	sourcePort : Integer
+	destinationPort : Integer
+	neg : Boolean
+	syn : Boolean
+	dir : String
+	status : String
+	target : String
+operations
+end
+
+class Interface
+attributes
+	name : String
+operations
+end
+
+class LP
+attributes
+	name : String
+operations
+end
+
+class Match
+attributes
+	name : String
+operations
+end
+
+class State
+attributes
+	name : String
+operations
+end
+
+class TCPFlag
+attributes
+	name : String
+operations
+end
+
+class Chain
+attributes
+	chainName : String
+operations
+end
+
+class CustomChain
+attributes
+operations
+end
+
+class ChainDeclaration
+attributes
+operations
+end
+
+class ChainName<ChainDeclaration
+attributes
+	name : String
+operations
+end
+
+composition xxx_Model_rules between
+	Model[0..1] role xxx_Model_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Rule_declaration between
+	Rule[*] role xxx_Rule_declaration_src
+	ChainDeclaration[0..1] role declaration
+end
+
+composition xxx_Rule_filter between
+	Rule[*] role xxx_Rule_filter_src
+	FilterDeclaration[0..1] role filter
+end
+
+composition xxx_FilterDeclaration_filter between
+	FilterDeclaration[*] role xxx_FilterDeclaration_filter_src
+	FilteringSpec[0..1] role filter
+end
+
+composition xxx_FilterSpec_chain between
+	FilterSpec[*] role xxx_FilterSpec_chain_src
+	Chain[0..1] role chain
+end
+
+composition xxx_FilterSpec_interface between
+	FilterSpec[*] role xxx_FilterSpec_interface_src
+	Interface[0..1] role interface
+end
+
+composition xxx_FilterSpec_matches between
+	FilterSpec[*] role xxx_FilterSpec_matches_src
+	Match[0..1] role matches
+end
+
+composition xxx_FilterSpec_states_ between
+	FilterSpec[0..1] role xxx_FilterSpec_states__src
+	State[*] role states_
+end
+
+composition xxx_FilterSpec_examFlags between
+	FilterSpec[0..1] role xxx_FilterSpec_examFlags_src
+	TCPFlag[*] role examFlags
+end
+
+composition xxx_FilterSpec_flags between
+	FilterSpec[0..1] role xxx_FilterSpec_flags_src
+	TCPFlag[*] role flags
+end
+
+composition xxx_FilterSpec_lp between
+	FilterSpec[*] role xxx_FilterSpec_lp_src
+	LP[0..1] role lp
+end
+
+association xxx_CustomChain_name between
+	CustomChain[*] role xxx_CustomChain_name_src
+	ChainName[0..1] role name
+end
+

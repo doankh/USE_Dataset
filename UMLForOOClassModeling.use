@@ -1,0 +1,101 @@
+model UMLForOOClassModeling
+enum VisibilityKind{
+	vk_public_vis,
+	vk_private_vis,
+	vk_protected_vis
+}
+
+enum ScopeKind{
+	sk_instance_level,
+	sk_classifier_level
+}
+
+class MultiplicityType
+attributes
+	lower : Integer
+	upper : Integer
+	isOrdered : Boolean
+	isUnique : Boolean
+operations
+end
+
+class ModelElement
+attributes
+	name : String
+operations
+end
+
+class Feature<ModelElement
+attributes
+	ownerScope : ScopeKind
+	visibility : VisibilityKind
+operations
+end
+
+class NameSpace<ModelElement
+attributes
+operations
+end
+
+class GeneralizableElement<ModelElement
+attributes
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+operations
+end
+
+class Classifier<GeneralizableElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	isActive : Boolean
+operations
+end
+
+class StructuralFeature<Feature
+attributes
+	isChangeable : Boolean
+	targetScope : ScopeKind
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+	initialValue : String
+operations
+end
+
+class BehavioralFeature<Feature
+attributes
+	isQuery : Boolean
+operations
+end
+
+class Operation<BehavioralFeature
+attributes
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+	specification : String
+operations
+end
+
+association xxx_Feature_owner between
+	Feature[*] role xxx_Feature_owner_src
+	Classifier[0..1] role owner
+end
+
+composition xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+association xxx_StructuralFeature_multiplicity between
+	StructuralFeature[*] role xxx_StructuralFeature_multiplicity_src
+	MultiplicityType[1] role multiplicity
+end
+

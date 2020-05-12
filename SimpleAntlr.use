@@ -1,0 +1,159 @@
+model simpleAntlr
+class AntlrGrammar
+attributes
+	name : String
+operations
+end
+
+class Options
+attributes
+operations
+end
+
+class OptionValue
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Rule
+attributes
+	fragment : Boolean
+	name : String
+operations
+end
+
+class RuleElement
+attributes
+operations
+end
+
+class Predicated<RuleElement
+attributes
+operations
+end
+
+class RuleOptions<RuleElement
+attributes
+operations
+end
+
+class RuleCall<RuleElement
+attributes
+	rule : String
+operations
+end
+
+class Keyword<RuleElement
+attributes
+	value : String
+operations
+end
+
+class Wildcard<RuleElement
+attributes
+operations
+end
+
+class Alternatives<RuleElement
+attributes
+operations
+end
+
+class Group<RuleElement
+attributes
+operations
+end
+
+class ElementWithCardinality<RuleElement
+attributes
+	cardinality : String
+operations
+end
+
+class NegatedElement<RuleElement
+attributes
+operations
+end
+
+class UntilElement<RuleElement
+attributes
+operations
+end
+
+class Skip<RuleOptions
+attributes
+operations
+end
+
+composition xxx_AntlrGrammar_options between
+	AntlrGrammar[*] role xxx_AntlrGrammar_options_src
+	Options[0..1] role options
+end
+
+composition xxx_AntlrGrammar_rules between
+	AntlrGrammar[0..1] role xxx_AntlrGrammar_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Options_optionValues between
+	Options[0..1] role xxx_Options_optionValues_src
+	OptionValue[*] role optionValues
+end
+
+composition xxx_Rule_body between
+	Rule[*] role xxx_Rule_body_src
+	RuleElement[0..1] role body
+end
+
+composition xxx_Predicated_predicate between
+	Predicated[*] role xxx_Predicated_predicate_src
+	RuleElement[0..1] role predicate
+end
+
+composition xxx_Predicated_element between
+	Predicated[*] role xxx_Predicated_element_src
+	RuleElement[0..1] role element
+end
+
+composition xxx_RuleOptions_options between
+	RuleOptions[*] role xxx_RuleOptions_options_src
+	Options[0..1] role options
+end
+
+composition xxx_RuleOptions_element between
+	RuleOptions[*] role xxx_RuleOptions_element_src
+	RuleElement[0..1] role element
+end
+
+composition xxx_Alternatives_groups between
+	Alternatives[0..1] role xxx_Alternatives_groups_src
+	RuleElement[*] role groups
+end
+
+composition xxx_Group_elements between
+	Group[0..1] role xxx_Group_elements_src
+	RuleElement[*] role elements
+end
+
+composition xxx_ElementWithCardinality_element between
+	ElementWithCardinality[*] role xxx_ElementWithCardinality_element_src
+	RuleElement[0..1] role element
+end
+
+composition xxx_NegatedElement_element between
+	NegatedElement[*] role xxx_NegatedElement_element_src
+	RuleElement[0..1] role element
+end
+
+composition xxx_UntilElement_left between
+	UntilElement[*] role xxx_UntilElement_left_src
+	RuleElement[0..1] role left
+end
+
+composition xxx_UntilElement_right between
+	UntilElement[*] role xxx_UntilElement_right_src
+	RuleElement[0..1] role right
+end
+

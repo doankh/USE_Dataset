@@ -1,0 +1,148 @@
+model threeJsWrapperDescriptionLanguage
+enum Datatype{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class ObjectWrapper
+attributes
+	abstract_ : Boolean
+	name : String
+	pck : String
+operations
+end
+
+class ConstructorSection
+attributes
+	builderConstructor : String
+	defaultConstructor : String
+operations
+end
+
+class Constructor
+attributes
+	name : String
+	json : Boolean
+operations
+end
+
+class PropertySection
+attributes
+operations
+end
+
+class Property
+attributes
+	readOnly : Boolean
+	name : String
+operations
+end
+
+class MethodSection
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	datatype : Datatype
+operations
+end
+
+class ArrayType
+attributes
+	dimensions : Integer
+operations
+end
+
+composition xxx_Model_wrappers between
+	Model[0..1] role xxx_Model_wrappers_src
+	ObjectWrapper[*] role wrappers
+end
+
+association xxx_ObjectWrapper_supertype between
+	ObjectWrapper[*] role xxx_ObjectWrapper_supertype_src
+	ObjectWrapper[0..1] role supertype
+end
+
+composition xxx_ObjectWrapper_constructorSection between
+	ObjectWrapper[*] role xxx_ObjectWrapper_constructorSection_src
+	ConstructorSection[0..1] role constructorSection
+end
+
+composition xxx_ObjectWrapper_propertySection between
+	ObjectWrapper[*] role xxx_ObjectWrapper_propertySection_src
+	PropertySection[0..1] role propertySection
+end
+
+composition xxx_ObjectWrapper_methodSection between
+	ObjectWrapper[*] role xxx_ObjectWrapper_methodSection_src
+	MethodSection[0..1] role methodSection
+end
+
+composition xxx_ConstructorSection_constructors between
+	ConstructorSection[0..1] role xxx_ConstructorSection_constructors_src
+	Constructor[*] role constructors
+end
+
+composition xxx_Constructor_parameters between
+	Constructor[0..1] role xxx_Constructor_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_PropertySection_properties between
+	PropertySection[0..1] role xxx_PropertySection_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Property_type between
+	Property[*] role xxx_Property_type_src
+	Type[0..1] role type
+end
+
+composition xxx_MethodSection_methods between
+	MethodSection[0..1] role xxx_MethodSection_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Method_returnType between
+	Method[*] role xxx_Method_returnType_src
+	Type[0..1] role returnType
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[0..1] role type
+end
+
+association xxx_Type_wrapper between
+	Type[*] role xxx_Type_wrapper_src
+	ObjectWrapper[0..1] role wrapper
+end
+
+composition xxx_Type_arrayType between
+	Type[*] role xxx_Type_arrayType_src
+	ArrayType[0..1] role arrayType
+end
+

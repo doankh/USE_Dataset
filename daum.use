@@ -1,0 +1,332 @@
+model sitac
+class Intervention
+attributes
+	numeroIntervention : String
+	precision : String
+operations
+end
+
+class Detachement
+attributes
+operations
+end
+
+class Moyen<Detachement
+attributes
+	precision : String
+	numero : String
+operations
+end
+
+class InterventionType
+attributes
+	code : String
+operations
+end
+
+class Historique
+attributes
+operations
+end
+
+class Entree
+attributes
+	horodatage : String
+operations
+end
+
+class TypeEntree
+attributes
+operations
+end
+
+class Position
+attributes
+operations
+end
+
+class GpsPoint<Position
+attributes
+	lat : Integer
+	long : Integer
+	satellites_used : Integer
+	mode : Integer
+	altitude : Integer
+operations
+end
+
+class PositionCivil<Position
+attributes
+	nomRue : String
+	cp : String
+	numeroRue : String
+	pays : String
+operations
+end
+
+class Personne
+attributes
+	nom : String
+	prenom : String
+operations
+end
+
+class Agent<Personne
+attributes
+	matricule : String
+operations
+end
+
+class MoyenType
+attributes
+	code : Integer
+operations
+end
+
+class Affectation
+attributes
+	horodatageDemande : String
+	horodatageEngagement : String
+	horodatageDesengagement : String
+operations
+end
+
+class SitacModel
+attributes
+operations
+end
+
+abstract class InfoTactic
+attributes
+operations
+end
+
+abstract class InfoPos<InfoTactic
+attributes
+operations
+end
+
+class PriseEau<InfoPos
+attributes
+	perenne : Boolean
+operations
+end
+
+class SourceDanger<InfoPos
+attributes
+operations
+end
+
+class Categorie
+attributes
+operations
+end
+
+class Cible<InfoPos
+attributes
+operations
+end
+
+class Sinistre<InfoZone
+attributes
+operations
+end
+
+abstract class InfoLignePos<InfoTactic
+attributes
+operations
+end
+
+abstract class InfoZone<InfoLignePos
+attributes
+	nom : String
+operations
+end
+
+class Action<InfoLignePos,InfoHorodate,InfoNiveau
+attributes
+	noria : Boolean
+	enLigne : Boolean
+operations
+end
+
+abstract class InfoHorodate
+attributes
+	horodatageDebut : String
+	horodatageFin : String
+operations
+end
+
+class ActionType
+attributes
+	code : String
+operations
+end
+
+abstract class InfoNiveau
+attributes
+	positionZ : String
+operations
+end
+
+class SecteurGeo<InfoZone,InfoResponsable
+attributes
+operations
+end
+
+class SecteurFontionel<InfoPos,InfoResponsable
+attributes
+operations
+end
+
+abstract class InfoResponsable
+attributes
+	niveau : String
+operations
+end
+
+class DonneeContextuel<InfoPos
+attributes
+	orientation : Integer
+	precision : String
+operations
+end
+
+class MessageAmbiance
+attributes
+	jeSuis : String
+	jeVois : String
+	id : String
+operations
+end
+
+association xxx_Intervention_type between
+	Intervention[*] role xxx_Intervention_type_src
+	InterventionType[1] role type
+end
+
+composition xxx_Intervention_historique between
+	Intervention[*] role xxx_Intervention_historique_src
+	Historique[0..1] role historique
+end
+
+composition xxx_Intervention_position between
+	Intervention[*] role xxx_Intervention_position_src
+	Position[0..1] role position
+end
+
+association xxx_Intervention_requerant between
+	Intervention[*] role xxx_Intervention_requerant_src
+	Personne[0..1] role requerant
+end
+
+composition xxx_Intervention_detachements between
+	Intervention[0..1] role xxx_Intervention_detachements_src
+	Detachement[*] role detachements
+end
+
+association xxx_Intervention_victimes between
+	Intervention[0..1] role xxx_Intervention_victimes_src
+	Personne[*] role victimes
+end
+
+composition xxx_Intervention_infoTactics between
+	Intervention[0..1] role xxx_Intervention_infoTactics_src
+	InfoTactic[*] role infoTactics
+end
+
+composition xxx_Detachement_affectation between
+	Detachement[0..1] role xxx_Detachement_affectation_src
+	Affectation[*] role affectation
+end
+
+association xxx_Detachement_chef between
+	Detachement[*] role xxx_Detachement_chef_src
+	Agent[0..1] role chef
+end
+
+association xxx_Moyen_type between
+	Moyen[*] role xxx_Moyen_type_src
+	MoyenType[0..1] role type
+end
+
+association xxx_Moyen_personnels between
+	Moyen[0..1] role xxx_Moyen_personnels_src
+	Agent[*] role personnels
+end
+
+composition xxx_Moyen_posRef between
+	Moyen[*] role xxx_Moyen_posRef_src
+	Position[0..1] role posRef
+end
+
+composition xxx_Moyen_posTarget between
+	Moyen[*] role xxx_Moyen_posTarget_src
+	Position[0..1] role posTarget
+end
+
+composition xxx_Historique_entrees between
+	Historique[0..1] role xxx_Historique_entrees_src
+	Entree[*] role entrees
+end
+
+association xxx_Entree_type between
+	Entree[*] role xxx_Entree_type_src
+	TypeEntree[1] role type
+end
+
+association xxx_Affectation_moyen between
+	Affectation[*] role xxx_Affectation_moyen_src
+	Moyen[0..1] role moyen
+end
+
+composition xxx_SitacModel_interventionTypes between
+	SitacModel[0..1] role xxx_SitacModel_interventionTypes_src
+	InterventionType[*] role interventionTypes
+end
+
+composition xxx_SitacModel_typeEntrees between
+	SitacModel[0..1] role xxx_SitacModel_typeEntrees_src
+	TypeEntree[*] role typeEntrees
+end
+
+composition xxx_SitacModel_interventions between
+	SitacModel[0..1] role xxx_SitacModel_interventions_src
+	Intervention[*] role interventions
+end
+
+composition xxx_SitacModel_personnes between
+	SitacModel[0..1] role xxx_SitacModel_personnes_src
+	Personne[*] role personnes
+end
+
+composition xxx_SitacModel_typeActions between
+	SitacModel[0..1] role xxx_SitacModel_typeActions_src
+	ActionType[*] role typeActions
+end
+
+association xxx_InfoTactic_categorie between
+	InfoTactic[*] role xxx_InfoTactic_categorie_src
+	Categorie[0..1] role categorie
+end
+
+composition xxx_InfoPos_positions between
+	InfoPos[*] role xxx_InfoPos_positions_src
+	Position[1] role positions
+end
+
+composition xxx_InfoLignePos_positions between
+	InfoLignePos[0..1] role xxx_InfoLignePos_positions_src
+	Position[*] role positions
+end
+
+association xxx_Action_type between
+	Action[*] role xxx_Action_type_src
+	ActionType[0..1] role type
+end
+
+association xxx_InfoResponsable_chef between
+	InfoResponsable[*] role xxx_InfoResponsable_chef_src
+	Moyen[1] role chef
+end
+

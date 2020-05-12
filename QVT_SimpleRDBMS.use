@@ -1,0 +1,104 @@
+model SimpleRDBMS
+abstract class RModelElement
+attributes
+	kind : String
+	name : String
+operations
+end
+
+class Schema<RModelElement
+attributes
+operations
+end
+
+class Table<RModelElement
+attributes
+operations
+end
+
+class Column<RModelElement
+attributes
+	type : String
+operations
+end
+
+class Key<RModelElement
+attributes
+operations
+end
+
+class ForeignKey<RModelElement
+attributes
+operations
+end
+
+composition xxx_Schema_tables between
+	Schema[0..1] role xxx_Schema_tables_src
+	Table[*] role tables
+end
+
+association xxx_Table_schema between
+	Table[*] role xxx_Table_schema_src
+	Schema[1] role schema
+end
+
+composition xxx_Table_column between
+	Table[0..1] role xxx_Table_column_src
+	Column[*] role column
+end
+
+composition xxx_Table_key between
+	Table[0..1] role xxx_Table_key_src
+	Key[*] role key
+end
+
+composition xxx_Table_foreignKey between
+	Table[0..1] role xxx_Table_foreignKey_src
+	ForeignKey[*] role foreignKey
+end
+
+association xxx_Column_owner between
+	Column[*] role xxx_Column_owner_src
+	Table[1] role owner
+end
+
+association xxx_Column_key between
+	Column[0..1] role xxx_Column_key_src
+	Key[*] role key
+end
+
+association xxx_Column_foreignKey between
+	Column[0..1] role xxx_Column_foreignKey_src
+	ForeignKey[*] role foreignKey
+end
+
+association xxx_Key_owner between
+	Key[*] role xxx_Key_owner_src
+	Table[1] role owner
+end
+
+association xxx_Key_column between
+	Key[0..1] role xxx_Key_column_src
+	Column[*] role column
+end
+
+association xxx_Key_refersToOpposite between
+	Key[0..1] role xxx_Key_refersToOpposite_src
+	ForeignKey[*] role refersToOpposite
+end
+
+association xxx_ForeignKey_column between
+	ForeignKey[0..1] role xxx_ForeignKey_column_src
+	Column[*] role column
+end
+
+association xxx_ForeignKey_owner between
+	ForeignKey[*] role xxx_ForeignKey_owner_src
+	Table[1] role owner
+end
+
+association xxx_ForeignKey_refersTo between
+	ForeignKey[*] role xxx_ForeignKey_refersTo_src
+	Key[1] role refersTo
+end
+

@@ -1,0 +1,114 @@
+model regexp
+enum Multiplicity{
+default
+}
+
+enum EEnum0{
+default
+}
+
+class RegularExpression<Choice
+attributes
+operations
+end
+
+class Alternative
+attributes
+operations
+end
+
+class Element
+attributes
+	suffix : Multiplicity
+operations
+end
+
+abstract class Atom
+attributes
+operations
+end
+
+class ComplexRange<Atom,Compound
+attributes
+operations
+end
+
+abstract class AtomicRange
+attributes
+operations
+end
+
+class IntervalRange<AtomicRange
+attributes
+	from_ : String
+	to : String
+operations
+end
+
+abstract class Terminal<Atom
+attributes
+operations
+end
+
+class Not<Atom
+attributes
+operations
+end
+
+class Block<Choice,Atom,Compound
+attributes
+operations
+end
+
+abstract class Choice
+attributes
+operations
+end
+
+class CharTerminal<Terminal,AtomicRange
+attributes
+	value : String
+operations
+end
+
+class StringTerminal<Terminal
+attributes
+	value : String
+operations
+end
+
+class Dot<Terminal
+attributes
+operations
+end
+
+abstract class Compound
+attributes
+operations
+end
+
+composition xxx_Alternative_elements between
+	Alternative[0..1] role xxx_Alternative_elements_src
+	Element[*] role elements
+end
+
+composition xxx_Element_atom between
+	Element[*] role xxx_Element_atom_src
+	Atom[0..1] role atom
+end
+
+composition xxx_ComplexRange_ranges between
+	ComplexRange[0..1] role xxx_ComplexRange_ranges_src
+	AtomicRange[1..*] role ranges
+end
+
+composition xxx_Not_body between
+	Not[*] role xxx_Not_body_src
+	Compound[0..1] role body
+end
+
+composition xxx_Choice_alternatives between
+	Choice[0..1] role xxx_Choice_alternatives_src
+	Alternative[*] role alternatives
+end
+

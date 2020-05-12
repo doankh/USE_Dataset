@@ -1,0 +1,694 @@
+model PrimitiveTypes
+enum TrueFalse{
+	True,
+	False
+}
+
+class Matlab
+attributes
+operations
+end
+
+class BlockDefaults
+attributes
+	blockDefaults : String
+operations
+end
+
+class Model
+attributes
+	name : String
+operations
+end
+
+class AnnotationDefaults
+attributes
+	annotationDefaults : String
+operations
+end
+
+class LineDefaults
+attributes
+	lineDefaults : String
+operations
+end
+
+class System
+attributes
+	name : String
+operations
+end
+
+class Subsystem<Block
+attributes
+operations
+end
+
+class Block<BlockDefaults
+attributes
+	name : String
+	blockType : String
+	description : String
+	priority : String
+	tag : String
+	position : String
+operations
+end
+
+class Annotation<AnnotationDefaults
+attributes
+	position : String
+	text : String
+operations
+end
+
+class Line<LineDefaults
+attributes
+	points : String
+	id : String
+operations
+end
+
+class DirectLine<Line
+attributes
+operations
+end
+
+class InputPort<Port
+attributes
+operations
+end
+
+class Branch
+attributes
+	points : String
+operations
+end
+
+class BranchedLine<Line
+attributes
+operations
+end
+
+class Primitive<Block
+attributes
+	id : String
+operations
+end
+
+class Port
+attributes
+	id : String
+	number : String
+operations
+end
+
+class Reference<Block
+attributes
+	sourceType : String
+	sourceBlock : String
+operations
+end
+
+class Masked<Subsystem
+attributes
+operations
+end
+
+class Normal<Subsystem
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class OutputPort<Port
+attributes
+operations
+end
+
+class Type<Parameter
+attributes
+	value : String
+operations
+end
+
+class Double<Parameter
+attributes
+	value : String
+operations
+end
+
+class INteger<Parameter
+attributes
+	value : String
+operations
+end
+
+class Enumeration<Parameter
+attributes
+	value : String
+operations
+end
+
+class BOolean<Parameter
+attributes
+	value : TrueFalse
+operations
+end
+
+class Text<Parameter
+attributes
+	value : String
+operations
+end
+
+class Vector<Parameter
+attributes
+	value : String
+operations
+end
+
+class DirectBranch<Branch
+attributes
+	id : String
+operations
+end
+
+class NestedBranch<Branch
+attributes
+operations
+end
+
+class Machine
+attributes
+	name : String
+	id : String
+operations
+end
+
+class Junction
+attributes
+	_id : String
+	id : String
+	type : String
+	position : String
+operations
+end
+
+class Transition
+attributes
+	_id : String
+	dataLimites : String
+	id : String
+	trigger : String
+	condition : String
+	conditionAction : String
+	action : String
+operations
+end
+
+class Event
+attributes
+	name : String
+	id : String
+	scope : String
+	description : String
+	trigger : String
+operations
+end
+
+class Data
+attributes
+	name : String
+	id : String
+	scope : String
+	description : String
+	units : String
+	dataType : String
+operations
+end
+
+class Instance
+attributes
+	_id : String
+	id : String
+	name : String
+operations
+end
+
+class Target
+attributes
+	name : String
+	id : String
+	codeCommand : String
+	description : String
+	makeCommand : String
+	codeFlags : String
+	checksumOld : String
+operations
+end
+
+class Chart
+attributes
+	name : String
+	id : String
+	_id : String
+	decomposotion : String
+	updateMethode : String
+	sampleTime : String
+operations
+end
+
+class State
+attributes
+	name : String
+	id : String
+	_id : String
+	type : String
+	entryAction : String
+	exitAction : String
+	duringAction : String
+	eventActions : String
+	decomposition : String
+	position : String
+operations
+end
+
+class Props
+attributes
+	initialValue : String
+operations
+end
+
+class Range
+attributes
+	maximum : String
+	minimum : String
+operations
+end
+
+class Array
+attributes
+	firstIndex : String
+	size : String
+operations
+end
+
+class StateFlow
+attributes
+	stateFlow : String
+operations
+end
+
+class TransitionTerminal
+attributes
+	_id : String
+operations
+end
+
+class Simulink
+attributes
+	simulink : String
+operations
+end
+
+composition xxx_Matlab_model_ between
+	Matlab[0..1] role xxx_Matlab_model__src
+	Model[*] role model_
+end
+
+association xxx_BlockDefaults_model_ between
+	BlockDefaults[*] role xxx_BlockDefaults_model__src
+	Model[1] role model_
+end
+
+association xxx_Model_matlab between
+	Model[*] role xxx_Model_matlab_src
+	Matlab[1] role matlab
+end
+
+composition xxx_Model_annotationDefaults between
+	Model[0..1] role xxx_Model_annotationDefaults_src
+	AnnotationDefaults[*] role annotationDefaults
+end
+
+composition xxx_Model_system between
+	Model[0..1] role xxx_Model_system_src
+	System[*] role system
+end
+
+composition xxx_Model_blockDefaults between
+	Model[0..1] role xxx_Model_blockDefaults_src
+	BlockDefaults[*] role blockDefaults
+end
+
+composition xxx_Model_lineDefaults between
+	Model[0..1] role xxx_Model_lineDefaults_src
+	LineDefaults[*] role lineDefaults
+end
+
+association xxx_Model_simulink between
+	Model[*] role xxx_Model_simulink_src
+	Simulink[1] role simulink
+end
+
+association xxx_AnnotationDefaults_model_ between
+	AnnotationDefaults[*] role xxx_AnnotationDefaults_model__src
+	Model[1] role model_
+end
+
+association xxx_LineDefaults_model_ between
+	LineDefaults[*] role xxx_LineDefaults_model__src
+	Model[1] role model_
+end
+
+composition xxx_System_blocks between
+	System[0..1] role xxx_System_blocks_src
+	Block[*] role blocks
+end
+
+composition xxx_System_lines between
+	System[0..1] role xxx_System_lines_src
+	Line[*] role lines
+end
+
+composition xxx_System_annotations between
+	System[0..1] role xxx_System_annotations_src
+	Annotation[*] role annotations
+end
+
+association xxx_System_model_ between
+	System[*] role xxx_System_model__src
+	Model[1] role model_
+end
+
+association xxx_System_parentSubsystem between
+	System[*] role xxx_System_parentSubsystem_src
+	Subsystem[1] role parentSubsystem
+end
+
+composition xxx_Subsystem_system between
+	Subsystem[*] role xxx_Subsystem_system_src
+	System[1] role system
+end
+
+association xxx_Block_mySystem between
+	Block[*] role xxx_Block_mySystem_src
+	System[1] role mySystem
+end
+
+composition xxx_Block_ports between
+	Block[0..1] role xxx_Block_ports_src
+	Port[*] role ports
+end
+
+association xxx_Annotation_system between
+	Annotation[*] role xxx_Annotation_system_src
+	System[1] role system
+end
+
+association xxx_Line_srcPort between
+	Line[*] role xxx_Line_srcPort_src
+	OutputPort[0..1] role srcPort
+end
+
+association xxx_Line_system between
+	Line[*] role xxx_Line_system_src
+	System[1] role system
+end
+
+association xxx_DirectLine_destPort1 between
+	DirectLine[*] role xxx_DirectLine_destPort1_src
+	InputPort[0..1] role destPort1
+end
+
+association xxx_InputPort_owningDirectLine between
+	InputPort[*] role xxx_InputPort_owningDirectLine_src
+	DirectLine[0..1] role owningDirectLine
+end
+
+association xxx_InputPort_owningDirectBranch between
+	InputPort[*] role xxx_InputPort_owningDirectBranch_src
+	DirectBranch[0..1] role owningDirectBranch
+end
+
+association xxx_Branch_branchedLine between
+	Branch[*] role xxx_Branch_branchedLine_src
+	BranchedLine[1] role branchedLine
+end
+
+association xxx_Branch_nestedBranch between
+	Branch[*] role xxx_Branch_nestedBranch_src
+	NestedBranch[1] role nestedBranch
+end
+
+composition xxx_BranchedLine_branchs between
+	BranchedLine[0..1] role xxx_BranchedLine_branchs_src
+	Branch[*] role branchs
+end
+
+composition xxx_Primitive_parameters between
+	Primitive[0..1] role xxx_Primitive_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Primitive_refPort between
+	Primitive[*] role xxx_Primitive_refPort_src
+	Port[0..1] role refPort
+end
+
+association xxx_Port_portBlock between
+	Port[*] role xxx_Port_portBlock_src
+	Block[1] role portBlock
+end
+
+association xxx_Port_primitive between
+	Port[*] role xxx_Port_primitive_src
+	Primitive[0..1] role primitive
+end
+
+composition xxx_Reference_parameters between
+	Reference[0..1] role xxx_Reference_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Parameter_le_reference between
+	Parameter[*] role xxx_Parameter_le_reference_src
+	Reference[1] role le_reference
+end
+
+association xxx_Parameter_primitive between
+	Parameter[*] role xxx_Parameter_primitive_src
+	Primitive[1] role primitive
+end
+
+association xxx_OutputPort_owningLine between
+	OutputPort[*] role xxx_OutputPort_owningLine_src
+	Line[0..1] role owningLine
+end
+
+association xxx_DirectBranch_destPort between
+	DirectBranch[*] role xxx_DirectBranch_destPort_src
+	InputPort[0..1] role destPort
+end
+
+composition xxx_NestedBranch_branchs between
+	NestedBranch[0..1] role xxx_NestedBranch_branchs_src
+	Branch[*] role branchs
+end
+
+composition xxx_Machine_events between
+	Machine[0..1] role xxx_Machine_events_src
+	Event[*] role events
+end
+
+composition xxx_Machine_data between
+	Machine[0..1] role xxx_Machine_data_src
+	Data[*] role data
+end
+
+composition xxx_Machine_instances between
+	Machine[0..1] role xxx_Machine_instances_src
+	Instance[*] role instances
+end
+
+composition xxx_Machine_targets between
+	Machine[0..1] role xxx_Machine_targets_src
+	Target[*] role targets
+end
+
+association xxx_Machine_stateFlow between
+	Machine[*] role xxx_Machine_stateFlow_src
+	StateFlow[1] role stateFlow
+end
+
+association xxx_Junction_state between
+	Junction[*] role xxx_Junction_state_src
+	State[1] role state
+end
+
+association xxx_Junction_chart between
+	Junction[*] role xxx_Junction_chart_src
+	Chart[1] role chart
+end
+
+association xxx_Transition_chart between
+	Transition[*] role xxx_Transition_chart_src
+	Chart[1] role chart
+end
+
+association xxx_Transition_state between
+	Transition[*] role xxx_Transition_state_src
+	State[1] role state
+end
+
+association xxx_Event_machine between
+	Event[*] role xxx_Event_machine_src
+	Machine[1] role machine
+end
+
+association xxx_Event_chart between
+	Event[*] role xxx_Event_chart_src
+	Chart[1] role chart
+end
+
+association xxx_Event_state between
+	Event[*] role xxx_Event_state_src
+	State[1] role state
+end
+
+composition xxx_Data_props between
+	Data[0..1] role xxx_Data_props_src
+	Props[*] role props
+end
+
+association xxx_Data_state between
+	Data[*] role xxx_Data_state_src
+	State[1] role state
+end
+
+association xxx_Data_chart between
+	Data[*] role xxx_Data_chart_src
+	Chart[1] role chart
+end
+
+association xxx_Data_machine between
+	Data[*] role xxx_Data_machine_src
+	Machine[1] role machine
+end
+
+association xxx_Instance_machine between
+	Instance[*] role xxx_Instance_machine_src
+	Machine[1] role machine
+end
+
+association xxx_Target_machine between
+	Target[*] role xxx_Target_machine_src
+	Machine[1] role machine
+end
+
+composition xxx_Chart_junctions between
+	Chart[0..1] role xxx_Chart_junctions_src
+	Junction[*] role junctions
+end
+
+composition xxx_Chart_events between
+	Chart[0..1] role xxx_Chart_events_src
+	Event[*] role events
+end
+
+composition xxx_Chart_transitions_ between
+	Chart[0..1] role xxx_Chart_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Chart_data between
+	Chart[0..1] role xxx_Chart_data_src
+	Data[*] role data
+end
+
+composition xxx_Chart_states_ between
+	Chart[0..1] role xxx_Chart_states__src
+	State[*] role states_
+end
+
+composition xxx_State_junctions between
+	State[0..1] role xxx_State_junctions_src
+	Junction[*] role junctions
+end
+
+composition xxx_State_events between
+	State[0..1] role xxx_State_events_src
+	Event[*] role events
+end
+
+composition xxx_State_transitions_ between
+	State[0..1] role xxx_State_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_State_data between
+	State[0..1] role xxx_State_data_src
+	Data[*] role data
+end
+
+association xxx_State_chart between
+	State[*] role xxx_State_chart_src
+	Chart[1] role chart
+end
+
+composition xxx_State_states_ between
+	State[0..1] role xxx_State_states__src
+	State[*] role states_
+end
+
+composition xxx_Props_arrays between
+	Props[0..1] role xxx_Props_arrays_src
+	Array[*] role arrays
+end
+
+composition xxx_Props_ranges between
+	Props[0..1] role xxx_Props_ranges_src
+	Range[*] role ranges
+end
+
+association xxx_Props_data between
+	Props[*] role xxx_Props_data_src
+	Data[1] role data
+end
+
+association xxx_Range_props between
+	Range[*] role xxx_Range_props_src
+	Props[1] role props
+end
+
+association xxx_Array_props between
+	Array[*] role xxx_Array_props_src
+	Props[1] role props
+end
+
+composition xxx_StateFlow_machines between
+	StateFlow[0..1] role xxx_StateFlow_machines_src
+	Machine[*] role machines
+end
+
+association xxx_StateFlow_simulink between
+	StateFlow[*] role xxx_StateFlow_simulink_src
+	Simulink[1] role simulink
+end
+
+composition xxx_Simulink_stateFlows between
+	Simulink[0..1] role xxx_Simulink_stateFlows_src
+	StateFlow[*] role stateFlows
+end
+
+composition xxx_Simulink_models between
+	Simulink[0..1] role xxx_Simulink_models_src
+	Model[*] role models
+end
+

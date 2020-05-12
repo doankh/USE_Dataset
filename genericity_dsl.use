@@ -1,0 +1,761 @@
+model genericity_dsl
+class BindingModel<LocatedElement
+attributes
+	metamodel : String
+	name : String
+operations
+end
+
+abstract class Metaclass<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class ConceptMetaclass<Metaclass
+attributes
+operations
+end
+
+class ConcreteMetaclass<Metaclass
+attributes
+operations
+end
+
+abstract class ConceptBinding<LocatedElement
+attributes
+	debugName : String
+operations
+end
+
+class ClassBinding<ConceptBinding
+attributes
+operations
+end
+
+class BaseFeatureBinding<ConceptBinding
+attributes
+	conceptFeature : String
+operations
+end
+
+class RenamingFeatureBinding<BaseFeatureBinding
+attributes
+	concreteFeature : String
+operations
+end
+
+class OclFeatureBinding<BaseFeatureBinding
+attributes
+operations
+end
+
+class BHelper<LocatedElement
+attributes
+	feature : String
+operations
+end
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class OclExpression<LocatedElement
+attributes
+operations
+end
+
+class VariableExp<OclExpression
+attributes
+operations
+end
+
+class SuperExp<OclExpression
+attributes
+operations
+end
+
+abstract class PrimitiveExp<OclExpression
+attributes
+operations
+end
+
+class StringExp<PrimitiveExp
+attributes
+	stringSymbol : String
+operations
+end
+
+class BooleanExp<PrimitiveExp
+attributes
+	booleanSymbol : Boolean
+operations
+end
+
+abstract class NumericExp<PrimitiveExp
+attributes
+operations
+end
+
+class RealExp<NumericExp
+attributes
+	realSymbol : Real
+operations
+end
+
+class IntegerExp<NumericExp
+attributes
+	integerSymbol : Integer
+operations
+end
+
+abstract class CollectionExp<OclExpression
+attributes
+operations
+end
+
+class BagExp<CollectionExp
+attributes
+operations
+end
+
+class OrderedSetExp<CollectionExp
+attributes
+operations
+end
+
+class SequenceExp<CollectionExp
+attributes
+operations
+end
+
+class SetExp<CollectionExp
+attributes
+operations
+end
+
+class TupleExp<OclExpression
+attributes
+operations
+end
+
+class TuplePart<VariableDeclaration
+attributes
+operations
+end
+
+class MapExp<OclExpression
+attributes
+operations
+end
+
+class MapElement<LocatedElement
+attributes
+operations
+end
+
+class EnumLiteralExp<OclExpression
+attributes
+	name : String
+operations
+end
+
+class OclUndefinedExp<OclExpression
+attributes
+operations
+end
+
+abstract class PropertyCallExp<OclExpression
+attributes
+operations
+end
+
+class NavigationOrAttributeCallExp<PropertyCallExp
+attributes
+	name : String
+operations
+end
+
+class OperationCallExp<PropertyCallExp
+attributes
+	operationName : String
+operations
+end
+
+class OperatorCallExp<OperationCallExp
+attributes
+operations
+end
+
+class CollectionOperationCallExp<OperationCallExp
+attributes
+operations
+end
+
+abstract class LoopExp<PropertyCallExp
+attributes
+operations
+end
+
+class IterateExp<LoopExp
+attributes
+operations
+end
+
+class IteratorExp<LoopExp
+attributes
+	name : String
+operations
+end
+
+class LetExp<OclExpression
+attributes
+operations
+end
+
+class IfExp<OclExpression
+attributes
+operations
+end
+
+class VariableDeclaration<LocatedElement
+attributes
+	id : String
+	varName : String
+operations
+end
+
+class Iterator<VariableDeclaration
+attributes
+operations
+end
+
+class Parameter<VariableDeclaration
+attributes
+operations
+end
+
+class CollectionType<OclType
+attributes
+operations
+end
+
+class OclType<OclExpression
+attributes
+	name : String
+operations
+end
+
+abstract class Primitive<OclType
+attributes
+operations
+end
+
+class StringType<Primitive
+attributes
+operations
+end
+
+class BooleanType<Primitive
+attributes
+operations
+end
+
+abstract class NumericType<Primitive
+attributes
+operations
+end
+
+class IntegerType<NumericType
+attributes
+operations
+end
+
+class RealType<NumericType
+attributes
+operations
+end
+
+class BagType<CollectionType
+attributes
+operations
+end
+
+class OrderedSetType<CollectionType
+attributes
+operations
+end
+
+class SequenceType<CollectionType
+attributes
+operations
+end
+
+class SetType<CollectionType
+attributes
+operations
+end
+
+class OclAnyType<OclType
+attributes
+operations
+end
+
+class TupleType<OclType
+attributes
+operations
+end
+
+class TupleTypeAttribute<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class OclModelElement<OclType
+attributes
+operations
+end
+
+class MapType<OclType
+attributes
+operations
+end
+
+class OclFeatureDefinition<LocatedElement
+attributes
+operations
+end
+
+class OclContextDefinition<LocatedElement
+attributes
+operations
+end
+
+abstract class OclFeature<LocatedElement
+attributes
+operations
+end
+
+class Attribute<OclFeature
+attributes
+	name : String
+operations
+end
+
+class Operation<OclFeature
+attributes
+	name : String
+operations
+end
+
+class OclModel<LocatedElement
+attributes
+	name : String
+operations
+end
+
+composition xxx_BindingModel_bindings between
+	BindingModel[0..1] role xxx_BindingModel_bindings_src
+	ConceptBinding[*] role bindings
+end
+
+composition xxx_BindingModel_helpers between
+	BindingModel[0..1] role xxx_BindingModel_helpers_src
+	BHelper[*] role helpers
+end
+
+composition xxx_BindingModel_variables between
+	BindingModel[0..1] role xxx_BindingModel_variables_src
+	VariableDeclaration[*] role variables
+end
+
+association xxx_ConceptBinding_model_ between
+	ConceptBinding[*] role xxx_ConceptBinding_model__src
+	BindingModel[0..1] role model_
+end
+
+association xxx_ClassBinding_concept between
+	ClassBinding[*] role xxx_ClassBinding_concept_src
+	ConceptMetaclass[1] role concept
+end
+
+association xxx_ClassBinding_concrete between
+	ClassBinding[0..1] role xxx_ClassBinding_concrete_src
+	ConcreteMetaclass[1..*] role concrete
+end
+
+composition xxx_ClassBinding_whenClause between
+	ClassBinding[*] role xxx_ClassBinding_whenClause_src
+	OclExpression[1] role whenClause
+end
+
+association xxx_BaseFeatureBinding_conceptClass between
+	BaseFeatureBinding[*] role xxx_BaseFeatureBinding_conceptClass_src
+	ConceptMetaclass[1] role conceptClass
+end
+
+association xxx_BaseFeatureBinding_qualifier between
+	BaseFeatureBinding[*] role xxx_BaseFeatureBinding_qualifier_src
+	ConcreteMetaclass[0..1] role qualifier
+end
+
+composition xxx_OclFeatureBinding_concrete between
+	OclFeatureBinding[*] role xxx_OclFeatureBinding_concrete_src
+	OclExpression[1] role concrete
+end
+
+association xxx_BHelper_contextClass between
+	BHelper[*] role xxx_BHelper_contextClass_src
+	ConceptMetaclass[1] role contextClass
+end
+
+composition xxx_BHelper_body between
+	BHelper[*] role xxx_BHelper_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_BHelper_type between
+	BHelper[*] role xxx_BHelper_type_src
+	OclType[0..1] role type
+end
+
+association xxx_BHelper_model_ between
+	BHelper[*] role xxx_BHelper_model__src
+	BindingModel[0..1] role model_
+end
+
+composition xxx_OclExpression_type between
+	OclExpression[*] role xxx_OclExpression_type_src
+	OclType[0..1] role type
+end
+
+association xxx_OclExpression_ifExp3 between
+	OclExpression[*] role xxx_OclExpression_ifExp3_src
+	IfExp[0..1] role ifExp3
+end
+
+association xxx_OclExpression_appliedProperty between
+	OclExpression[*] role xxx_OclExpression_appliedProperty_src
+	PropertyCallExp[0..1] role appliedProperty
+end
+
+association xxx_OclExpression_collection between
+	OclExpression[*] role xxx_OclExpression_collection_src
+	CollectionExp[0..1] role collection
+end
+
+association xxx_OclExpression_letExp between
+	OclExpression[*] role xxx_OclExpression_letExp_src
+	LetExp[0..1] role letExp
+end
+
+association xxx_OclExpression_loopExp between
+	OclExpression[*] role xxx_OclExpression_loopExp_src
+	LoopExp[0..1] role loopExp
+end
+
+association xxx_OclExpression_parentOperation between
+	OclExpression[*] role xxx_OclExpression_parentOperation_src
+	OperationCallExp[0..1] role parentOperation
+end
+
+association xxx_OclExpression_initializedVariable between
+	OclExpression[*] role xxx_OclExpression_initializedVariable_src
+	VariableDeclaration[0..1] role initializedVariable
+end
+
+association xxx_OclExpression_ifExp2 between
+	OclExpression[*] role xxx_OclExpression_ifExp2_src
+	IfExp[0..1] role ifExp2
+end
+
+association xxx_OclExpression_owningOperation between
+	OclExpression[*] role xxx_OclExpression_owningOperation_src
+	Operation[0..1] role owningOperation
+end
+
+association xxx_OclExpression_ifExp1 between
+	OclExpression[*] role xxx_OclExpression_ifExp1_src
+	IfExp[0..1] role ifExp1
+end
+
+association xxx_OclExpression_owningAttribute between
+	OclExpression[*] role xxx_OclExpression_owningAttribute_src
+	Attribute[0..1] role owningAttribute
+end
+
+association xxx_VariableExp_referredVariable between
+	VariableExp[*] role xxx_VariableExp_referredVariable_src
+	VariableDeclaration[1] role referredVariable
+end
+
+composition xxx_CollectionExp_elements between
+	CollectionExp[0..1] role xxx_CollectionExp_elements_src
+	OclExpression[*] role elements
+end
+
+composition xxx_TupleExp_tuplePart between
+	TupleExp[0..1] role xxx_TupleExp_tuplePart_src
+	TuplePart[*] role tuplePart
+end
+
+association xxx_TuplePart_tuple between
+	TuplePart[*] role xxx_TuplePart_tuple_src
+	TupleExp[1] role tuple
+end
+
+composition xxx_MapExp_elements between
+	MapExp[0..1] role xxx_MapExp_elements_src
+	MapElement[*] role elements
+end
+
+association xxx_MapElement_map between
+	MapElement[*] role xxx_MapElement_map_src
+	MapExp[1] role map
+end
+
+composition xxx_MapElement_key between
+	MapElement[*] role xxx_MapElement_key_src
+	OclExpression[1] role key
+end
+
+composition xxx_MapElement_value between
+	MapElement[*] role xxx_MapElement_value_src
+	OclExpression[1] role value
+end
+
+composition xxx_PropertyCallExp_source between
+	PropertyCallExp[*] role xxx_PropertyCallExp_source_src
+	OclExpression[1] role source
+end
+
+composition xxx_OperationCallExp_arguments between
+	OperationCallExp[0..1] role xxx_OperationCallExp_arguments_src
+	OclExpression[*] role arguments
+end
+
+composition xxx_LoopExp_body between
+	LoopExp[*] role xxx_LoopExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_LoopExp_iterators between
+	LoopExp[0..1] role xxx_LoopExp_iterators_src
+	Iterator[1..*] role iterators
+end
+
+composition xxx_IterateExp_result between
+	IterateExp[*] role xxx_IterateExp_result_src
+	VariableDeclaration[1] role result
+end
+
+composition xxx_LetExp_variable between
+	LetExp[*] role xxx_LetExp_variable_src
+	VariableDeclaration[1] role variable
+end
+
+composition xxx_LetExp_in_ between
+	LetExp[*] role xxx_LetExp_in__src
+	OclExpression[1] role in_
+end
+
+composition xxx_IfExp_thenExpression between
+	IfExp[*] role xxx_IfExp_thenExpression_src
+	OclExpression[1] role thenExpression
+end
+
+composition xxx_IfExp_condition between
+	IfExp[*] role xxx_IfExp_condition_src
+	OclExpression[1] role condition
+end
+
+composition xxx_IfExp_elseExpression between
+	IfExp[*] role xxx_IfExp_elseExpression_src
+	OclExpression[1] role elseExpression
+end
+
+composition xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	OclType[0..1] role type
+end
+
+composition xxx_VariableDeclaration_initExpression between
+	VariableDeclaration[*] role xxx_VariableDeclaration_initExpression_src
+	OclExpression[0..1] role initExpression
+end
+
+association xxx_VariableDeclaration_letExp between
+	VariableDeclaration[*] role xxx_VariableDeclaration_letExp_src
+	LetExp[0..1] role letExp
+end
+
+association xxx_VariableDeclaration_baseExp between
+	VariableDeclaration[*] role xxx_VariableDeclaration_baseExp_src
+	IterateExp[0..1] role baseExp
+end
+
+association xxx_VariableDeclaration_variableExp between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_variableExp_src
+	VariableExp[*] role variableExp
+end
+
+association xxx_Iterator_loopExpr between
+	Iterator[*] role xxx_Iterator_loopExpr_src
+	LoopExp[0..1] role loopExpr
+end
+
+association xxx_Parameter_operation between
+	Parameter[*] role xxx_Parameter_operation_src
+	Operation[1] role operation
+end
+
+composition xxx_CollectionType_elementType between
+	CollectionType[*] role xxx_CollectionType_elementType_src
+	OclType[1] role elementType
+end
+
+association xxx_OclType_definitions between
+	OclType[*] role xxx_OclType_definitions_src
+	OclContextDefinition[0..1] role definitions
+end
+
+association xxx_OclType_oclExpression between
+	OclType[*] role xxx_OclType_oclExpression_src
+	OclExpression[0..1] role oclExpression
+end
+
+association xxx_OclType_operation between
+	OclType[*] role xxx_OclType_operation_src
+	Operation[0..1] role operation
+end
+
+association xxx_OclType_mapType2 between
+	OclType[*] role xxx_OclType_mapType2_src
+	MapType[0..1] role mapType2
+end
+
+association xxx_OclType_attribute between
+	OclType[*] role xxx_OclType_attribute_src
+	Attribute[0..1] role attribute
+end
+
+association xxx_OclType_mapType between
+	OclType[*] role xxx_OclType_mapType_src
+	MapType[0..1] role mapType
+end
+
+association xxx_OclType_collectionTypes between
+	OclType[*] role xxx_OclType_collectionTypes_src
+	CollectionType[0..1] role collectionTypes
+end
+
+association xxx_OclType_tupleTypeAttribute between
+	OclType[*] role xxx_OclType_tupleTypeAttribute_src
+	TupleTypeAttribute[0..1] role tupleTypeAttribute
+end
+
+association xxx_OclType_variableDeclaration between
+	OclType[*] role xxx_OclType_variableDeclaration_src
+	VariableDeclaration[0..1] role variableDeclaration
+end
+
+composition xxx_TupleType_attributes_ between
+	TupleType[0..1] role xxx_TupleType_attributes__src
+	TupleTypeAttribute[*] role attributes_
+end
+
+composition xxx_TupleTypeAttribute_type between
+	TupleTypeAttribute[*] role xxx_TupleTypeAttribute_type_src
+	OclType[1] role type
+end
+
+association xxx_TupleTypeAttribute_tupleType between
+	TupleTypeAttribute[*] role xxx_TupleTypeAttribute_tupleType_src
+	TupleType[1] role tupleType
+end
+
+association xxx_OclModelElement_model_ between
+	OclModelElement[*] role xxx_OclModelElement_model__src
+	OclModel[1] role model_
+end
+
+composition xxx_MapType_valueType between
+	MapType[*] role xxx_MapType_valueType_src
+	OclType[1] role valueType
+end
+
+composition xxx_MapType_keyType between
+	MapType[*] role xxx_MapType_keyType_src
+	OclType[1] role keyType
+end
+
+composition xxx_OclFeatureDefinition_feature between
+	OclFeatureDefinition[*] role xxx_OclFeatureDefinition_feature_src
+	OclFeature[1] role feature
+end
+
+composition xxx_OclFeatureDefinition_context_ between
+	OclFeatureDefinition[*] role xxx_OclFeatureDefinition_context__src
+	OclContextDefinition[0..1] role context_
+end
+
+association xxx_OclContextDefinition_definition between
+	OclContextDefinition[*] role xxx_OclContextDefinition_definition_src
+	OclFeatureDefinition[1] role definition
+end
+
+composition xxx_OclContextDefinition_context_ between
+	OclContextDefinition[*] role xxx_OclContextDefinition_context__src
+	OclType[1] role context_
+end
+
+association xxx_OclFeature_definition between
+	OclFeature[*] role xxx_OclFeature_definition_src
+	OclFeatureDefinition[0..1] role definition
+end
+
+composition xxx_Attribute_initExpression between
+	Attribute[*] role xxx_Attribute_initExpression_src
+	OclExpression[1] role initExpression
+end
+
+composition xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	OclType[1] role type
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Operation_returnType between
+	Operation[*] role xxx_Operation_returnType_src
+	OclType[1] role returnType
+end
+
+composition xxx_Operation_body between
+	Operation[*] role xxx_Operation_body_src
+	OclExpression[1] role body
+end
+
+association xxx_OclModel_metamodel between
+	OclModel[*] role xxx_OclModel_metamodel_src
+	OclModel[1] role metamodel
+end
+
+association xxx_OclModel_elements between
+	OclModel[0..1] role xxx_OclModel_elements_src
+	OclModelElement[*] role elements
+end
+
+association xxx_OclModel_model_ between
+	OclModel[0..1] role xxx_OclModel_model__src
+	OclModel[*] role model_
+end
+

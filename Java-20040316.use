@@ -1,0 +1,103 @@
+model JAVA
+abstract class JavaElement
+attributes
+	name : String
+operations
+end
+
+abstract class ClassFeature<JavaElement
+attributes
+	isFinal : Boolean
+operations
+end
+
+abstract class ClassMember<ClassFeature
+attributes
+	isStatic : Boolean
+	isPublic : Boolean
+operations
+end
+
+class Field<ClassMember
+attributes
+operations
+end
+
+class JavaClass<ClassFeature
+attributes
+	isAbstract : Boolean
+	isStatic : Boolean
+	isPublic : Boolean
+operations
+end
+
+class Method<ClassMember
+attributes
+operations
+end
+
+class Package<JavaElement
+attributes
+operations
+end
+
+class PrimitiveType<JavaClass
+attributes
+operations
+end
+
+class FeatureParameter<ClassFeature
+attributes
+operations
+end
+
+association xxx_ClassMember_owner between
+	ClassMember[*] role xxx_ClassMember_owner_src
+	JavaClass[1] role owner
+end
+
+association xxx_ClassMember_type between
+	ClassMember[*] role xxx_ClassMember_type_src
+	JavaClass[1] role type
+end
+
+composition xxx_JavaClass_members between
+	JavaClass[0..1] role xxx_JavaClass_members_src
+	ClassMember[*] role members
+end
+
+association xxx_JavaClass_package between
+	JavaClass[*] role xxx_JavaClass_package_src
+	Package[1] role package
+end
+
+association xxx_JavaClass_typedElements between
+	JavaClass[0..1] role xxx_JavaClass_typedElements_src
+	ClassMember[*] role typedElements
+end
+
+association xxx_JavaClass_parameters between
+	JavaClass[0..1] role xxx_JavaClass_parameters_src
+	FeatureParameter[*] role parameters
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	FeatureParameter[*] role parameters
+end
+
+composition xxx_Package_classes between
+	Package[0..1] role xxx_Package_classes_src
+	JavaClass[*] role classes
+end
+
+association xxx_FeatureParameter_type between
+	FeatureParameter[*] role xxx_FeatureParameter_type_src
+	JavaClass[1] role type
+end
+
+association xxx_FeatureParameter_method between
+	FeatureParameter[*] role xxx_FeatureParameter_method_src
+	Method[1] role method
+end
+

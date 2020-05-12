@@ -1,0 +1,183 @@
+model textst
+enum Qualifier{
+default
+}
+
+enum Validity{
+default
+}
+
+class TextST
+attributes
+operations
+end
+
+class RequirementList
+attributes
+operations
+end
+
+class Requirement
+attributes
+	ref : String
+	val : String
+operations
+end
+
+class ComponentList
+attributes
+operations
+end
+
+class OptionList
+attributes
+operations
+end
+
+class Option
+attributes
+	name : String
+	value : String
+operations
+end
+
+class StructureTree
+attributes
+operations
+end
+
+class Component
+attributes
+	ref : String
+	val : String
+operations
+end
+
+class SystemComponent<Component
+attributes
+operations
+end
+
+abstract class AbstractBehavior
+attributes
+operations
+end
+
+class SecondaryRelation<AbstractBehavior
+attributes
+	behaviorRef : String
+	attribute : String
+	primaryLowerBound : String
+	primaryUpperBound : String
+	secondaryLowerBound : String
+	secondaryUpperBound : String
+	componentRef : String
+	componentAttribute : String
+	relationName : String
+operations
+end
+
+abstract class AbstractBlockOrNode
+attributes
+operations
+end
+
+abstract class AbstractBlock<AbstractBlockOrNode
+attributes
+operations
+end
+
+abstract class AbstractNode<AbstractBlockOrNode
+attributes
+	componentRef : String
+	componentSet : String
+	mci : String
+	qualifier : Qualifier
+	secondQualifier : Qualifier
+	behaviorRef : String
+	requirementRef : String
+	traceabilityStatus : Validity
+	operator : String
+operations
+end
+
+class Node<AbstractNode
+attributes
+operations
+end
+
+class RelatedToNode<AbstractBlockOrNode,AbstractNode
+attributes
+operations
+end
+
+class DefinedByNode<AbstractBlockOrNode,AbstractNode
+attributes
+operations
+end
+
+class ParallelBlock<AbstractBlock
+attributes
+operations
+end
+
+class AlternativeBlock<AbstractBlock
+attributes
+operations
+end
+
+composition xxx_TextST_options between
+	TextST[*] role xxx_TextST_options_src
+	OptionList[0..1] role options
+end
+
+composition xxx_TextST_requirements between
+	TextST[*] role xxx_TextST_requirements_src
+	RequirementList[0..1] role requirements
+end
+
+composition xxx_TextST_components between
+	TextST[*] role xxx_TextST_components_src
+	ComponentList[0..1] role components
+end
+
+composition xxx_TextST_structureTree between
+	TextST[*] role xxx_TextST_structureTree_src
+	StructureTree[1] role structureTree
+end
+
+composition xxx_RequirementList_requirements between
+	RequirementList[0..1] role xxx_RequirementList_requirements_src
+	Requirement[1..*] role requirements
+end
+
+composition xxx_ComponentList_components between
+	ComponentList[0..1] role xxx_ComponentList_components_src
+	Component[*] role components
+end
+
+composition xxx_OptionList_options between
+	OptionList[0..1] role xxx_OptionList_options_src
+	Option[1..*] role options
+end
+
+composition xxx_StructureTree_rootNode between
+	StructureTree[*] role xxx_StructureTree_rootNode_src
+	Node[1] role rootNode
+end
+
+composition xxx_Component_behaviors between
+	Component[0..1] role xxx_Component_behaviors_src
+	AbstractBehavior[*] role behaviors
+end
+
+composition xxx_AbstractBlock_childNode between
+	AbstractBlock[0..1] role xxx_AbstractBlock_childNode_src
+	AbstractNode[2..*] role childNode
+end
+
+composition xxx_AbstractNode_childNode between
+	AbstractNode[*] role xxx_AbstractNode_childNode_src
+	AbstractBlockOrNode[0..1] role childNode
+end
+

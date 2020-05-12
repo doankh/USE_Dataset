@@ -1,0 +1,108 @@
+model semantic
+class LED<Element
+attributes
+	value : Integer
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+class Wire<Element
+attributes
+operations
+end
+
+class Circuit<ContainerElement
+attributes
+operations
+end
+
+abstract class Gate<Element
+attributes
+operations
+end
+
+class FlowContainer<ContainerElement
+attributes
+operations
+end
+
+class AndGate<Gate
+attributes
+operations
+end
+
+class OrGate<Gate
+attributes
+operations
+end
+
+class XORGate<Gate
+attributes
+operations
+end
+
+class Model<ContainerElement
+attributes
+operations
+end
+
+abstract class ContainerElement<Element
+attributes
+operations
+end
+
+abstract class Terminal<Element
+attributes
+	id : String
+operations
+end
+
+class OutputTerminal<Terminal
+attributes
+operations
+end
+
+class InputTerminal<Terminal
+attributes
+operations
+end
+
+class InputOutputTerminal<OutputTerminal,InputTerminal
+attributes
+operations
+end
+
+composition xxx_Element_terminals between
+	Element[0..1] role xxx_Element_terminals_src
+	Terminal[*] role terminals
+end
+
+association xxx_Element_outputTerminals between
+	Element[0..1] role xxx_Element_outputTerminals_src
+	Terminal[*] role outputTerminals
+end
+
+association xxx_Element_inputTerminals between
+	Element[0..1] role xxx_Element_inputTerminals_src
+	Terminal[*] role inputTerminals
+end
+
+association xxx_Wire_source between
+	Wire[*] role xxx_Wire_source_src
+	OutputTerminal[1] role source
+end
+
+association xxx_Wire_target between
+	Wire[*] role xxx_Wire_target_src
+	InputTerminal[1] role target
+end
+
+composition xxx_ContainerElement_children between
+	ContainerElement[0..1] role xxx_ContainerElement_children_src
+	Element[*] role children
+end
+

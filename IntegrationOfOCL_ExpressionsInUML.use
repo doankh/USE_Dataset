@@ -1,0 +1,76 @@
+model OCLExpression
+class PreCondition<Constraint
+attributes
+operations
+end
+
+class PortCondition<Constraint
+attributes
+operations
+end
+
+class Invariant<Constraint
+attributes
+operations
+end
+
+class Guard<Constraint
+attributes
+operations
+end
+
+abstract class ModelElement
+attributes
+operations
+end
+
+class Constraint<ModelElement
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class BooleanExpression<Expression
+attributes
+operations
+end
+
+abstract class OCLExpression
+attributes
+operations
+end
+
+association xxx_ModelElement_constraint between
+	ModelElement[0..1] role xxx_ModelElement_constraint_src
+	Constraint[1..*] role constraint
+end
+
+association xxx_Constraint_constrainedElement between
+	Constraint[0..1] role xxx_Constraint_constrainedElement_src
+	ModelElement[1..*] role constrainedElement
+end
+
+association xxx_Constraint_body between
+	Constraint[*] role xxx_Constraint_body_src
+	BooleanExpression[1] role body
+end
+
+association xxx_Expression_body between
+	Expression[*] role xxx_Expression_body_src
+	OCLExpression[0..1] role body
+end
+
+composition xxx_BooleanExpression_constraint between
+	BooleanExpression[*] role xxx_BooleanExpression_constraint_src
+	Constraint[0..1] role constraint
+end
+
+association xxx_OCLExpression_owner between
+	OCLExpression[*] role xxx_OCLExpression_owner_src
+	Expression[0..1] role owner
+end
+

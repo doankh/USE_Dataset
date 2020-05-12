@@ -1,0 +1,92 @@
+model functions
+class FunctionSet<NamedElement
+attributes
+operations
+	getFunctions():Function
+	getDatatypes():Datatype
+	getTotalCosts():Integer
+end
+
+abstract class NamedElement
+attributes
+	name : String
+	description : String
+operations
+	getReadableName():String
+	getReadableDescription():String
+	getReadableString(text : String):String
+	replaceQuotes(text : String,prefix : String,suffix : String):String
+end
+
+abstract class Element<NamedElement
+attributes
+operations
+end
+
+class Function<Element
+attributes
+	ignored : Boolean
+	costs : Integer
+operations
+	getTotalCosts():Integer
+	getRelatedFunctions():Function
+end
+
+class Datatype<Element
+attributes
+	ignored : Boolean
+operations
+end
+
+class Property<NamedElement
+attributes
+	multiple : Boolean
+operations
+end
+
+class TargetVersion<Element
+attributes
+	ignored : Boolean
+operations
+end
+
+composition xxx_FunctionSet_elements between
+	FunctionSet[0..1] role xxx_FunctionSet_elements_src
+	Element[*] role elements
+end
+
+composition xxx_FunctionSet_subsets between
+	FunctionSet[0..1] role xxx_FunctionSet_subsets_src
+	FunctionSet[*] role subsets_
+end
+
+association xxx_Function_parent between
+	Function[*] role xxx_Function_parent_src
+	Function[0..1] role parent
+end
+
+association xxx_Function_children between
+	Function[0..1] role xxx_Function_children_src
+	Function[*] role children
+end
+
+association xxx_Function_relatedTo between
+	Function[0..1] role xxx_Function_relatedTo_src
+	Element[*] role relatedTo
+end
+
+association xxx_Function_targetVersion between
+	Function[*] role xxx_Function_targetVersion_src
+	TargetVersion[0..1] role targetVersion
+end
+
+composition xxx_Datatype_properties between
+	Datatype[0..1] role xxx_Datatype_properties_src
+	Property[*] role properties
+end
+
+association xxx_Property_datatype between
+	Property[*] role xxx_Property_datatype_src
+	Datatype[0..1] role datatype
+end
+

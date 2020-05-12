@@ -1,0 +1,62 @@
+model database
+enum RailsData{
+default
+}
+
+abstract class DataBaseElement
+attributes
+	name : String
+operations
+end
+
+class Schema<DataBaseElement
+attributes
+operations
+end
+
+class Table<DataBaseElement
+attributes
+operations
+end
+
+class Column<DataBaseElement
+attributes
+	type : RailsData
+operations
+end
+
+class ForeignKey
+attributes
+operations
+end
+
+composition xxx_Schema_tables between
+	Schema[0..1] role xxx_Schema_tables_src
+	Table[*] role tables
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[1..*] role columns
+end
+
+association xxx_Table_primaryKey between
+	Table[*] role xxx_Table_primaryKey_src
+	Column[1] role primaryKey
+end
+
+composition xxx_Table_foreignKeys between
+	Table[0..1] role xxx_Table_foreignKeys_src
+	ForeignKey[*] role foreignKeys
+end
+
+association xxx_ForeignKey_column between
+	ForeignKey[*] role xxx_ForeignKey_column_src
+	Column[1] role column
+end
+
+association xxx_ForeignKey_reference between
+	ForeignKey[*] role xxx_ForeignKey_reference_src
+	Table[1] role reference
+end
+

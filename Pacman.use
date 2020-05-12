@@ -1,0 +1,113 @@
+model pacman
+class GameState
+attributes
+	MAXFRAME : Integer
+	STATE : Integer
+operations
+end
+
+class Pacman
+attributes
+operations
+end
+
+class Grid
+attributes
+operations
+end
+
+class Ghost
+attributes
+operations
+end
+
+class Action
+attributes
+	FRAME : Integer
+	DONEBY : Integer
+	DIRECTION : Integer
+operations
+end
+
+class Gem
+attributes
+operations
+end
+
+class Record
+attributes
+	FRAME : Integer
+	SCORE : Integer
+operations
+end
+
+composition xxx_GameState_grids between
+	GameState[0..1] role xxx_GameState_grids_src
+	Grid[*] role grids
+end
+
+composition xxx_GameState_actions between
+	GameState[0..1] role xxx_GameState_actions_src
+	Action[*] role actions
+end
+
+composition xxx_GameState_player between
+	GameState[*] role xxx_GameState_player_src
+	Pacman[1] role player
+end
+
+composition xxx_GameState_ghost between
+	GameState[*] role xxx_GameState_ghost_src
+	Ghost[1] role ghost
+end
+
+composition xxx_GameState_gems between
+	GameState[0..1] role xxx_GameState_gems_src
+	Gem[*] role gems
+end
+
+composition xxx_GameState_record between
+	GameState[*] role xxx_GameState_record_src
+	Record[0..1] role record
+end
+
+association xxx_Grid_left between
+	Grid[*] role xxx_Grid_left_src
+	Grid[0..1] role left
+end
+
+association xxx_Grid_right between
+	Grid[*] role xxx_Grid_right_src
+	Grid[0..1] role right
+end
+
+association xxx_Grid_top between
+	Grid[*] role xxx_Grid_top_src
+	Grid[0..1] role top
+end
+
+association xxx_Grid_bottom between
+	Grid[*] role xxx_Grid_bottom_src
+	Grid[0..1] role bottom
+end
+
+association xxx_Grid_hasPlayer between
+	Grid[*] role xxx_Grid_hasPlayer_src
+	Pacman[0..1] role hasPlayer
+end
+
+association xxx_Grid_hasEnemy between
+	Grid[*] role xxx_Grid_hasEnemy_src
+	Ghost[0..1] role hasEnemy
+end
+
+association xxx_Grid_hasGem between
+	Grid[*] role xxx_Grid_hasGem_src
+	Gem[0..1] role hasGem
+end
+
+association xxx_Action_forPlayer between
+	Action[*] role xxx_Action_forPlayer_src
+	Pacman[0..1] role forPlayer
+end
+

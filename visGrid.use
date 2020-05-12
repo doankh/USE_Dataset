@@ -1,0 +1,2159 @@
+model visGrid
+class Climate<Connection
+attributes
+	city : String
+	tmyfile : String
+	temperature : String
+	humidity : String
+	solar_flux : String
+	solar_direct : String
+	wind_speed : String
+	wind_dir : String
+	wind_gust : String
+	record__low : String
+	record__low_day : String
+	record__high : String
+	record__high_day : String
+	record__solar : String
+	rainfall : String
+	snowdepth : String
+	interpolate : String
+	solar_horiz : String
+	solar_north : String
+	solar_northeast : String
+	solar_east : String
+	solar_southeast : String
+	solar_south : String
+	solar_southwest : String
+	solar_west : String
+	solar_northwest : String
+	solar_raw : String
+	reader : String
+operations
+end
+
+class Csv_reader<Connection
+attributes
+	index : String
+	city_name : String
+	state_name : String
+	lat_deg : String
+	lat_min : String
+	long_deg : String
+	long_min : String
+	low_temp : String
+	high_temp : String
+	peak_solar : String
+	status : String
+	timefmt : String
+	timezone : String
+	columns : String
+	filename : String
+operations
+end
+
+class Diesel_dg<Connection
+attributes
+	Gen_mode : String
+	Gen_status : String
+	Rated_kVA : String
+	Rated_kV : String
+	Rs : String
+	Xs : String
+	Rg : String
+	Xg : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	current_A : String
+	current_B : String
+	current_C : String
+	EfA : String
+	EfB : String
+	EfC : String
+	power_A : String
+	power_B : String
+	power_C : String
+	power_A_sch : String
+	power_B_sch : String
+	power_C_sch : String
+	EfA_sch : String
+	EfB_sch : String
+	EfC_sch : String
+	SlackBus : String
+	phases : String
+operations
+end
+
+class Energy_storage<Connection
+attributes
+	generator_mode : String
+	generator_status : String
+	power_type : String
+	Rinternal : String
+	V_Max : String
+	I_Max : String
+	E_Max : String
+	Energy : String
+	efficiency : String
+	Rated_kVA : String
+	V_Out : String
+	I_Out : String
+	VA_Out : String
+	V_In : String
+	I_In : String
+	V_Internal : String
+	I_Internal : String
+	I_Prev : String
+	phases : String
+operations
+end
+
+class Inverter<Connection
+attributes
+	inverter_type : String
+	generator_status : String
+	generator_mode : String
+	V_In : String
+	I_In : String
+	VA_In : String
+	Vdc : String
+	phaseA_V_Out : String
+	phaseB_V_Out : String
+	phaseC_V_Out : String
+	phaseA_I_Out : String
+	phaseB_I_Out : String
+	phaseC_I_Out : String
+	power_A : String
+	power_B : String
+	power_C : String
+	P_Out : String
+	Q_Out : String
+	power_factor : String
+	phases : String
+operations
+end
+
+class Dc_dc_converter<Connection
+attributes
+	dc_dc_converter_type : String
+	generator_mode : String
+	V_Out : String
+	I_Out : String
+	Vdc : String
+	VA_Out : String
+	P_Out : String
+	Q_Out : String
+	service_ratio : String
+	V_In : String
+	I_In : String
+	VA_In : String
+	phases : String
+operations
+end
+
+class Auction<Connection
+attributes
+	type : String
+	unit : String
+	period : String
+	latency : String
+	market_id : String
+	last__Q : String
+	last__P : String
+	next__Q : String
+	next__P : String
+	avg24 : String
+	std24 : String
+	avg72 : String
+	std72 : String
+	avg168 : String
+	std168 : String
+	network : String
+	verbose : String
+operations
+end
+
+class Controller<Connection
+attributes
+	simple_mode : String
+	bid_mode : String
+	ramp_low : String
+	ramp_high : String
+	Tmin : String
+	Tmax : String
+	target : String
+	setpoint : String
+	demand : String
+	load : String
+	total : String
+	market : String
+	bid_price : String
+	bid_quant : String
+	set_temp : String
+	base_setpoint : String
+operations
+end
+
+class Controller2<Connection
+attributes
+	input_state : String
+	input_setpoint : String
+	input_chained : String
+	observation : String
+	mean_observation : String
+	stdev_observation : String
+	expectation : String
+	setpoint : String
+	sensitivity : String
+	period : String
+	expectation_prop : String
+	expectation_obj : String
+	setpoint_prop : String
+	state_prop : String
+	observation_obj : String
+	observation_prop : String
+	mean_observation_prop : String
+	stdev_observation_prop : String
+	cycle_length : String
+	base_setpoint : String
+	ramp_high : String
+	ramp_low : String
+	range_high : String
+	range_low : String
+	prob_off : String
+	output_state : String
+	output_setpoint : String
+	control_mode : String
+operations
+end
+
+class Capbank<Connection
+attributes
+	KVARrated : String
+	Vrated : String
+	state : String
+	CTlink : String
+	PTnode : String
+	VARopen : String
+	VARclose : String
+	Vopen : String
+	Vclose : String
+operations
+end
+
+class Comm<Connection
+attributes
+	latency : String
+	reliability : String
+	bitrate : String
+	timeout : String
+operations
+end
+
+class Capacitor<Connection
+attributes
+	pt_phase : String
+	phases_connected : String
+	switchA : String
+	switchB : String
+	switchC : String
+	control : String
+	voltage_set_high : String
+	voltage_set_low : String
+	VAr_set_high : String
+	VAr_set_low : String
+	current_set_low : String
+	current_set_high : String
+	capacitor_A : String
+	capacitor_B : String
+	capacitor_C : String
+	cap_nominal_voltage : String
+	time_delay : String
+	dwell_time : String
+	lockout_time : String
+	remote_sense : String
+	remote_sense_B : String
+	control_level : String
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	voltage_AB : String
+	voltage_BC : String
+	voltage_CA : String
+	current_A : String
+	current_B : String
+	current_C : String
+	power_A : String
+	power_B : String
+	power_C : String
+	shunt_A : String
+	shunt_B : String
+	shunt_C : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Line<Connection
+attributes
+	configuration : String
+	length : String
+	status : String
+	from_ : String
+	to : String
+	power_in : String
+	power_out : String
+	power_losses : String
+	power_in_A : String
+	power_in_B : String
+	power_in_C : String
+	power_out_A : String
+	power_out_B : String
+	power_out_C : String
+	power_losses_A : String
+	power_losses_B : String
+	power_losses_C : String
+	flow_direction : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Line_spacing<Connection
+attributes
+	distance_AB : String
+	distance_BC : String
+	distance_AC : String
+	distance_AN : String
+	distance_BN : String
+	distance_CN : String
+operations
+end
+
+class Overhead_line<Connection
+attributes
+	configuration : String
+	length : String
+	status : String
+	from_ : String
+	to : String
+	power_in : String
+	power_out : String
+	power_losses : String
+	power_in_A : String
+	power_in_B : String
+	power_in_C : String
+	power_out_A : String
+	power_out_B : String
+	power_out_C : String
+	power_losses_A : String
+	power_losses_B : String
+	power_losses_C : String
+	flow_direction : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Underground_line<Connection
+attributes
+	configuration : String
+	length : String
+	status : String
+	from_ : String
+	to : String
+	power_in : String
+	power_out : String
+	power_losses : String
+	power_in_A : String
+	power_in_B : String
+	power_in_C : String
+	power_out_A : String
+	power_out_B : String
+	power_out_C : String
+	power_losses_A : String
+	power_losses_B : String
+	power_losses_C : String
+	flow_direction : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Overhead_line_conductor<Connection
+attributes
+	geometric_mean_radius : String
+	resistance : String
+	rating__summer__continuous : String
+	rating__summer__emergency : String
+	rating__winter__continuous : String
+	rating__winter__emergency : String
+operations
+end
+
+class Underground_line_conductor<Connection
+attributes
+	outer_diameter : String
+	conductor_gmr : String
+	conductor_diameter : String
+	conductor_resistance : String
+	neutral_gmr : String
+	neutral_diameter : String
+	neutral_resistance : String
+	neutral_strands : String
+	shield_gmr : String
+	shield_resistance : String
+	rating__summer__continuous : String
+	rating__summer__emergency : String
+	rating__winter__continuous : String
+	rating__winter__emergency : String
+operations
+end
+
+class Line_configuration<Connection
+attributes
+	conductor_A : String
+	conductor_B : String
+	conductor_C : String
+	conductor_N : String
+	spacing : String
+operations
+end
+
+class Transformer_configuration<Connection
+attributes
+	connect_type : String
+	install_type : String
+	primary_voltage : String
+	secondary_voltage : String
+	power_rating : String
+	powerA_rating : String
+	powerB_rating : String
+	powerC_rating : String
+	resistance : String
+	reactance : String
+	impedance : String
+	resistance1 : String
+	reactance1 : String
+	impedance1 : String
+	resistance2 : String
+	reactance2 : String
+	impedance2 : String
+	shunt_resistance : String
+	shunt_reactance : String
+	shunt_impedance : String
+operations
+end
+
+class Load<Connection
+attributes
+	load_class : String
+	constant_power_A : String
+	constant_power_B : String
+	constant_power_C : String
+	constant_power_A_real : String
+	constant_power_B_real : String
+	constant_power_C_real : String
+	constant_power_A_reac : String
+	constant_power_B_reac : String
+	constant_power_C_reac : String
+	constant_current_A : String
+	constant_current_B : String
+	constant_current_C : String
+	constant_current_A_real : String
+	constant_current_B_real : String
+	constant_current_C_real : String
+	constant_current_A_reac : String
+	constant_current_B_reac : String
+	constant_current_C_reac : String
+	constant_impedance_A : String
+	constant_impedance_B : String
+	constant_impedance_C : String
+	constant_impedance_A_real : String
+	constant_impedance_B_real : String
+	constant_impedance_C_real : String
+	constant_impedance_A_reac : String
+	constant_impedance_B_reac : String
+	constant_impedance_C_reac : String
+	measured_voltage_A : String
+	measured_voltage_B : String
+	measured_voltage_C : String
+	measured_voltage_AB : String
+	measured_voltage_BC : String
+	measured_voltage_CA : String
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	voltage_AB : String
+	voltage_BC : String
+	voltage_CA : String
+	current_A : String
+	current_B : String
+	current_C : String
+	power_A : String
+	power_B : String
+	power_C : String
+	shunt_A : String
+	shunt_B : String
+	shunt_C : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Regulator_configuration<Connection
+attributes
+	connect_type : String
+	band_center : String
+	band_width : String
+	time_delay : String
+	dwell_time : String
+	raise_taps : String
+	lower_taps : String
+	current_transducer_ratio : String
+	power_transducer_ratio : String
+	compensator_r_setting_A : String
+	compensator_r_setting_B : String
+	compensator_r_setting_C : String
+	compensator_x_setting_A : String
+	compensator_x_setting_B : String
+	compensator_x_setting_C : String
+	CT_phase : String
+	PT_phase : String
+	regulation : String
+	control_level : String
+	Control : String
+	Type : String
+	tap_pos_A : String
+	tap_pos_B : String
+	tap_pos_C : String
+operations
+end
+
+class Triplex_node<Connection
+attributes
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_1 : String
+	voltage_2 : String
+	voltage_N : String
+	voltage_12 : String
+	voltage_1N : String
+	voltage_2N : String
+	current_1 : String
+	current_2 : String
+	current_N : String
+	current_1_real : String
+	current_2_real : String
+	current_N_real : String
+	current_1_reac : String
+	current_2_reac : String
+	current_N_reac : String
+	current_12 : String
+	current_12_real : String
+	current_12_reac : String
+	residential_nominal_current_1 : String
+	residential_nominal_current_2 : String
+	residential_nominal_current_12 : String
+	residential_nominal_current_1_real : String
+	residential_nominal_current_1_imag : String
+	residential_nominal_current_2_real : String
+	residential_nominal_current_2_imag : String
+	residential_nominal_current_12_real : String
+	residential_nominal_current_12_imag : String
+	power_1 : String
+	power_2 : String
+	power_12 : String
+	power_1_real : String
+	power_2_real : String
+	power_12_real : String
+	power_1_reac : String
+	power_2_reac : String
+	power_12_reac : String
+	shunt_1 : String
+	shunt_2 : String
+	shunt_12 : String
+	impedance_1 : String
+	impedance_2 : String
+	impedance_12 : String
+	impedance_1_real : String
+	impedance_2_real : String
+	impedance_12_real : String
+	impedance_1_reac : String
+	impedance_2_reac : String
+	impedance_12_reac : String
+	house_present : String
+	NR_mode : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Triplex_meter<Connection
+attributes
+	measured_real_energy : String
+	measured_reactive_energy : String
+	measured_power : String
+	indiv_measured_power_1 : String
+	indiv_measured_power_2 : String
+	indiv_measured_power_N : String
+	measured_demand : String
+	measured_real_power : String
+	measured_reactive_power : String
+	measured_voltage_1 : String
+	measured_voltage_2 : String
+	measured_voltage_N : String
+	measured_current_1 : String
+	measured_current_2 : String
+	measured_current_N : String
+	monthly_bill : String
+	previous_monthly_bill : String
+	previous_monthly_energy : String
+	monthly_fee : String
+	monthly_energy : String
+	bill_mode : String
+	power_market : String
+	bill_day : String
+	price : String
+	first_tier_price : String
+	first_tier_energy : String
+	second_tier_price : String
+	second_tier_energy : String
+	third_tier_price : String
+	third_tier_energy : String
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_1 : String
+	voltage_2 : String
+	voltage_N : String
+	voltage_12 : String
+	voltage_1N : String
+	voltage_2N : String
+	current_1 : String
+	current_2 : String
+	current_N : String
+	current_1_real : String
+	current_2_real : String
+	current_N_real : String
+	current_1_reac : String
+	current_2_reac : String
+	current_N_reac : String
+	current_12 : String
+	current_12_real : String
+	current_12_reac : String
+	residential_nominal_current_1 : String
+	residential_nominal_current_2 : String
+	residential_nominal_current_12 : String
+	residential_nominal_current_1_real : String
+	residential_nominal_current_1_imag : String
+	residential_nominal_current_2_real : String
+	residential_nominal_current_2_imag : String
+	residential_nominal_current_12_real : String
+	residential_nominal_current_12_imag : String
+	power_1 : String
+	power_2 : String
+	power_12 : String
+	power_1_real : String
+	power_2_real : String
+	power_12_real : String
+	power_1_reac : String
+	power_2_reac : String
+	power_12_reac : String
+	shunt_1 : String
+	shunt_2 : String
+	shunt_12 : String
+	impedance_1 : String
+	impedance_2 : String
+	impedance_12 : String
+	impedance_1_real : String
+	impedance_2_real : String
+	impedance_12_real : String
+	impedance_1_reac : String
+	impedance_2_reac : String
+	impedance_12_reac : String
+	house_present : String
+	NR_mode : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Triplex_line<Connection
+attributes
+	configuration : String
+	length : String
+	status : String
+	from_ : String
+	to : String
+	power_in : String
+	power_out : String
+	power_losses : String
+	power_in_A : String
+	power_in_B : String
+	power_in_C : String
+	power_out_A : String
+	power_out_B : String
+	power_out_C : String
+	power_losses_A : String
+	power_losses_B : String
+	power_losses_C : String
+	flow_direction : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Triplex_line_configuration<Connection
+attributes
+	conductor_1 : String
+	conductor_2 : String
+	conductor_N : String
+	insulation_thickness : String
+	diameter : String
+	spacing : String
+operations
+end
+
+class Triplex_line_conductor<Connection
+attributes
+	resistance : String
+	geometric_mean_radius : String
+	rating__summer__continuous : String
+	rating__summer__emergency : String
+	rating__winter__continuous : String
+	rating__winter__emergency : String
+operations
+end
+
+class Switch<Connection
+attributes
+	status : String
+	from_ : String
+	to : String
+	power_in : String
+	power_out : String
+	power_losses : String
+	power_in_A : String
+	power_in_B : String
+	power_in_C : String
+	power_out_A : String
+	power_out_B : String
+	power_out_C : String
+	power_losses_A : String
+	power_losses_B : String
+	power_losses_C : String
+	flow_direction : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Substation<Connection
+attributes
+	distribution_energy : String
+	distribution_power : String
+	distribution_demand : String
+	distribution_voltage_A : String
+	distribution_voltage_B : String
+	distribution_voltage_C : String
+	distribution_current_A : String
+	distribution_current_B : String
+	distribution_current_C : String
+	Network_Node_Base_Power : String
+	Network_Node_Base_Voltage : String
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	voltage_AB : String
+	voltage_BC : String
+	voltage_CA : String
+	current_A : String
+	current_B : String
+	current_C : String
+	power_A : String
+	power_B : String
+	power_C : String
+	shunt_A : String
+	shunt_B : String
+	shunt_C : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Pqload<Connection
+attributes
+	weather : String
+	T_nominal : String
+	Zp_T : String
+	Zp_H : String
+	Zp_S : String
+	Zp_W : String
+	Zp_R : String
+	Zp : String
+	Zq_T : String
+	Zq_H : String
+	Zq_S : String
+	Zq_W : String
+	Zq_R : String
+	Zq : String
+	Im_T : String
+	Im_H : String
+	Im_S : String
+	Im_W : String
+	Im_R : String
+	Im : String
+	Ia_T : String
+	Ia_H : String
+	Ia_S : String
+	Ia_W : String
+	Ia_R : String
+	Ia : String
+	Pp_T : String
+	Pp_H : String
+	Pp_S : String
+	Pp_W : String
+	Pp_R : String
+	Pp : String
+	Pq_T : String
+	Pq_H : String
+	Pq_S : String
+	Pq_W : String
+	Pq_R : String
+	Pq : String
+	input_temp : String
+	input_humid : String
+	input_solar : String
+	input_wind : String
+	input_rain : String
+	output_imped_p : String
+	output_imped_q : String
+	output_current_m : String
+	output_current_a : String
+	output_power_p : String
+	output_power_q : String
+	output_impedance : String
+	output_current : String
+	output_power : String
+	load_class : String
+	constant_power_A : String
+	constant_power_B : String
+	constant_power_C : String
+	constant_power_A_real : String
+	constant_power_B_real : String
+	constant_power_C_real : String
+	constant_power_A_reac : String
+	constant_power_B_reac : String
+	constant_power_C_reac : String
+	constant_current_A : String
+	constant_current_B : String
+	constant_current_C : String
+	constant_current_A_real : String
+	constant_current_B_real : String
+	constant_current_C_real : String
+	constant_current_A_reac : String
+	constant_current_B_reac : String
+	constant_current_C_reac : String
+	constant_impedance_A : String
+	constant_impedance_B : String
+	constant_impedance_C : String
+	constant_impedance_A_real : String
+	constant_impedance_B_real : String
+	constant_impedance_C_real : String
+	constant_impedance_A_reac : String
+	constant_impedance_B_reac : String
+	constant_impedance_C_reac : String
+	measured_voltage_A : String
+	measured_voltage_B : String
+	measured_voltage_C : String
+	measured_voltage_AB : String
+	measured_voltage_BC : String
+	measured_voltage_CA : String
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	voltage_AB : String
+	voltage_BC : String
+	voltage_CA : String
+	current_A : String
+	current_B : String
+	current_C : String
+	power_A : String
+	power_B : String
+	power_C : String
+	shunt_A : String
+	shunt_B : String
+	shunt_C : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Voltdump<Connection
+attributes
+	group : String
+	runtime : String
+	filename : String
+	runcount : String
+operations
+end
+
+class Series_reactor<Connection
+attributes
+	phase_A_impedance : String
+	phase_A_resistance : String
+	phase_A_reactance : String
+	phase_B_impedance : String
+	phase_B_resistance : String
+	phase_B_reactance : String
+	phase_C_impedance : String
+	phase_C_resistance : String
+	phase_C_reactance : String
+	rated_current_limit : String
+	status : String
+	from_ : String
+	to : String
+	power_in : String
+	power_out : String
+	power_losses : String
+	power_in_A : String
+	power_in_B : String
+	power_in_C : String
+	power_out_A : String
+	power_out_B : String
+	power_out_C : String
+	power_losses_A : String
+	power_losses_B : String
+	power_losses_C : String
+	flow_direction : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Restoration<Connection
+attributes
+	configuration_file : String
+	reconfig_attempts : String
+	reconfig_iteration_limit : String
+operations
+end
+
+class Frequency_gen<Connection
+attributes
+	Frequency_Mode : String
+	Frequency : String
+	FreqChange : String
+	Deadband : String
+	Tolerance : String
+	M : String
+	D : String
+	Rated_power : String
+	Gen_power : String
+	Load_power : String
+	Gov_delay : String
+	Ramp_rate : String
+	Low_Freq_OI : String
+	High_Freq_OI : String
+	avg24 : String
+	std24 : String
+	avg168 : String
+	std168 : String
+	Num_Resp_Eqs : String
+operations
+end
+
+class Volt_var_control<Connection
+attributes
+	qualification_time : String
+operations
+end
+
+class Fault_check<Connection
+attributes
+operations
+end
+
+class Motor<Connection
+attributes
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	voltage_AB : String
+	voltage_BC : String
+	voltage_CA : String
+	current_A : String
+	current_B : String
+	current_C : String
+	power_A : String
+	power_B : String
+	power_C : String
+	shunt_A : String
+	shunt_B : String
+	shunt_C : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Billdump<Connection
+attributes
+	group : String
+	runtime : String
+	filename : String
+	runcount : String
+operations
+end
+
+class Residential_enduse<Connection
+attributes
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class House_a<Connection
+attributes
+	floor_area : String
+	gross_wall_area : String
+	ceiling_height : String
+	aspect_ratio : String
+	envelope_UA : String
+	window_wall_ratio : String
+	glazing_shgc : String
+	airchange_per_hour : String
+	solar_gain : String
+	heat_cool_gain : String
+	thermostat_deadband : String
+	heating_setpoint : String
+	cooling_setpoint : String
+	design_heating_capacity : String
+	design_cooling_capacity : String
+	heating_COP : String
+	cooling_COP : String
+	COP_coeff : String
+	air_temperature : String
+	outside_temp : String
+	mass_temperature : String
+	mass_heat_coeff : String
+	outdoor_temperature : String
+	house_thermal_mass : String
+	heat_mode : String
+	hc_mode : String
+	houseload : String
+	houseload__energy : String
+	houseload__power : String
+	houseload__peak_demand : String
+	houseload__heatgain : String
+	houseload__heatgain_fraction : String
+	houseload__current_fraction : String
+	houseload__impedance_fraction : String
+	houseload__power_fraction : String
+	houseload__power_factor : String
+	houseload__constant_power : String
+	houseload__constant_current : String
+	houseload__constant_admittance : String
+	houseload__voltage_factor : String
+	houseload__configuration : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class House<Connection
+attributes
+	weather : String
+	floor_area : String
+	gross_wall_area : String
+	ceiling_height : String
+	aspect_ratio : String
+	envelope_UA : String
+	window_wall_ratio : String
+	number_of_doors : String
+	exterior_wall_fraction : String
+	interior_exterior_wall_ratio : String
+	exterior_ceiling_fraction : String
+	exterior_floor_fraction : String
+	window_shading : String
+	window_exterior_transmission_coefficient : String
+	solar_heatgain_factor : String
+	airchange_per_hour : String
+	airchange_UA : String
+	internal_gain : String
+	solar_gain : String
+	heat_cool_gain : String
+	thermostat_deadband : String
+	thermostat_cycle_time : String
+	thermostat_last_cycle_time : String
+	heating_setpoint : String
+	cooling_setpoint : String
+	design_heating_setpoint : String
+	design_cooling_setpoint : String
+	design_heating_capacity : String
+	design_cooling_capacity : String
+	adj_heating_cap : String
+	sys_rated_cap : String
+	cooling_design_temperature : String
+	heating_design_temperature : String
+	design_peak_solar : String
+	design_internal_gains : String
+	air_heat_fraction : String
+	auxiliary_heat_capacity : String
+	aux_heat_deadband : String
+	aux_heat_temperature_lockout : String
+	aux_heat_time_delay : String
+	cooling_supply_air_temp : String
+	heating_supply_air_temp : String
+	duct_pressure_drop : String
+	fan_design_power : String
+	fan_low_power_fraction : String
+	fan_power : String
+	fan_design_airflow : String
+	fan_impedance_fraction : String
+	fan_power_fraction : String
+	fan_current_fraction : String
+	fan_power_factor : String
+	heating_demand : String
+	cooling_demand : String
+	heating_COP : String
+	cooling_COP : String
+	adj_heating_cop : String
+	air_temperature : String
+	outdoor_temperature : String
+	mass_heat_capacity : String
+	mass_heat_coeff : String
+	mass_temperature : String
+	air_volume : String
+	air_mass : String
+	air_heat_capacity : String
+	latent_load_fraction : String
+	total_thermal_mass_per_floor_area : String
+	interior_surface_heat_transfer_coeff : String
+	number_of_stories : String
+	system_type : String
+	auxiliary_strategy : String
+	system_mode : String
+	heating_system_type : String
+	cooling_system_type : String
+	auxiliary_system_type : String
+	fan_type : String
+	thermal_integrity_level : String
+	glass_type : String
+	window_frame : String
+	glazing_treatment : String
+	glazing_layers : String
+	motor_model : String
+	motor_efficiency : String
+	hvac_motor_efficiency : String
+	hvac_motor_loss_power_factor : String
+	Rroof : String
+	Rwall : String
+	Rfloor : String
+	Rwindows : String
+	Rdoors : String
+	hvac_breaker_rating : String
+	hvac_power_factor : String
+	hvac_load : String
+	panel : String
+	panel__energy : String
+	panel__power : String
+	panel__peak_demand : String
+	panel__heatgain : String
+	panel__heatgain_fraction : String
+	panel__current_fraction : String
+	panel__impedance_fraction : String
+	panel__power_fraction : String
+	panel__power_factor : String
+	panel__constant_power : String
+	panel__constant_current : String
+	panel__constant_admittance : String
+	panel__voltage_factor : String
+	panel__configuration : String
+	design_internal_gain_density : String
+	a : String
+	b : String
+	c : String
+	d : String
+	c1 : String
+	c2 : String
+	A3 : String
+	A4 : String
+	k1 : String
+	k2 : String
+	r1 : String
+	r2 : String
+	Teq : String
+	Tevent : String
+	Qi : String
+	Qa : String
+	Qm : String
+	Qh : String
+	dTair : String
+	sol_inc : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Waterheater<Connection
+attributes
+	tank_volume : String
+	tank_UA : String
+	tank_diameter : String
+	water_demand : String
+	heating_element_capacity : String
+	inlet_water_temperature : String
+	heat_mode : String
+	location : String
+	tank_setpoint : String
+	thermostat_deadband : String
+	temperature : String
+	height : String
+	demand : String
+	actual_load : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Lights<Connection
+attributes
+	type : String
+	placement : String
+	installed_power : String
+	power_density : String
+	curtailment : String
+	demand : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Refrigerator<Connection
+attributes
+	size : String
+	rated_capacity : String
+	temperature : String
+	setpoint : String
+	deadband : String
+	next_time : String
+	output : String
+	event_temp : String
+	UA : String
+	state : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Clotheswasher<Connection
+attributes
+	motor_power : String
+	circuit_split : String
+	queue : String
+	demand : String
+	energy_meter : String
+	stall_voltage : String
+	start_voltage : String
+	stall_impedance : String
+	trip_delay : String
+	reset_delay : String
+	state : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Dishwasher<Connection
+attributes
+	installed_power : String
+	demand : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Occupantload<Connection
+attributes
+	number_of_occupants : String
+	occupancy_fraction : String
+	heatgain_per_person : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Plugload<Connection
+attributes
+	circuit_split : String
+	demand : String
+	installed_power : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Microwave<Connection
+attributes
+	installed_power : String
+	standby_power : String
+	circuit_split : String
+	state : String
+	cycle_length : String
+	runtime : String
+	state_time : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Range<Connection
+attributes
+	installed_power : String
+	circuit_split : String
+	demand : String
+	energy_meter : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Freezer<Connection
+attributes
+	size : String
+	rated_capacity : String
+	temperature : String
+	setpoint : String
+	deadband : String
+	next_time : String
+	output : String
+	event_temp : String
+	UA : String
+	state : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Dryer<Connection
+attributes
+	motor_power : String
+	coil_power : String
+	circuit_split : String
+	demand : String
+	queue : String
+	stall_voltage : String
+	start_voltage : String
+	stall_impedance : String
+	trip_delay : String
+	reset_delay : String
+	state : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Evcharger<Connection
+attributes
+	charger_type : String
+	vehicle_type : String
+	state : String
+	p_go_home : String
+	p_go_work : String
+	work_dist : String
+	capacity : String
+	charge : String
+	charge_at_work : String
+	charge_throttle : String
+	demand_profile : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class ZIPload<Connection
+attributes
+	heat_fraction : String
+	base_power : String
+	power_pf : String
+	current_pf : String
+	impedance_pf : String
+	is_240 : String
+	breaker_val : String
+	shape : String
+	load : String
+	energy : String
+	power : String
+	peak_demand : String
+	heatgain : String
+	heatgain_fraction : String
+	current_fraction : String
+	impedance_fraction : String
+	power_fraction : String
+	power_factor : String
+	constant_power : String
+	constant_current : String
+	constant_admittance : String
+	voltage_factor : String
+	configuration : String
+	override : String
+operations
+end
+
+class Player<Connection
+attributes
+	property : String
+	file : String
+	filetype : String
+	loop : String
+operations
+end
+
+class Shaper<Connection
+attributes
+	file : String
+	filetype : String
+	group : String
+	property : String
+	magnitude : String
+	events : String
+operations
+end
+
+class Recorder<Connection
+attributes
+	property : String
+	trigger : String
+	file : String
+	limit : String
+	plotcommands : String
+	xdata : String
+	columns : String
+	interval : String
+	output : String
+operations
+end
+
+class Collector<Connection
+attributes
+	property : String
+	trigger : String
+	file : String
+	limit : String
+	group : String
+	interval : String
+operations
+end
+
+class Histogram<Connection
+attributes
+	filename : String
+	group : String
+	bins : String
+	property : String
+	min : String
+	max : String
+	samplerate : String
+	countrate : String
+	bin_count : String
+	limit : String
+operations
+end
+
+class Weather<Connection
+attributes
+	temperature : String
+	humidity : String
+	solar_dir : String
+	solar_diff : String
+	wind_speed : String
+	rainfall : String
+	snowdepth : String
+	month : String
+	day : String
+	hour : String
+	minute : String
+	second : String
+operations
+end
+
+class Office<Connection
+attributes
+	floor_area : String
+	floor_height : String
+	exterior_ua : String
+	interior_ua : String
+	interior_mass : String
+	glazing : String
+	glazing__north : String
+	glazing__northeast : String
+	glazing__east : String
+	glazing__southeast : String
+	glazing__south : String
+	glazing__southwest : String
+	glazing__west : String
+	glazing__northwest : String
+	glazing__horizontal : String
+	glazing__coefficient : String
+	occupancy : String
+	occupants : String
+	schedule : String
+	air_temperature : String
+	mass_temperature : String
+	temperature_change : String
+	outdoor_temperature : String
+	Qh : String
+	Qs : String
+	Qi : String
+	Qz : String
+	hvac_mode : String
+	hvac__cooling__balance_temperature : String
+	hvac__cooling__capacity : String
+	hvac__cooling__capacity_perF : String
+	hvac__cooling__design_temperature : String
+	hvac__cooling__efficiency : String
+	hvac__cooling__cop : String
+	hvac__heating__balance_temperature : String
+	hvac__heating__capacity : String
+	hvac__heating__capacity_perF : String
+	hvac__heating__design_temperature : String
+	hvac__heating__efficiency : String
+	hvac__heating__cop : String
+	lights__capacity : String
+	lights__fraction : String
+	plugs__capacity : String
+	plugs__fraction : String
+	demand : String
+	total_load : String
+	energy : String
+	power_factor : String
+	power : String
+	current : String
+	admittance : String
+	hvac__demand : String
+	hvac__load : String
+	hvac__energy : String
+	hvac__power_factor : String
+	lights__demand : String
+	lights__load : String
+	lights__energy : String
+	lights__power_factor : String
+	lights__heatgain_fraction : String
+	lights__heatgain : String
+	plugs__demand : String
+	plugs__load : String
+	plugs__energy : String
+	plugs__power_factor : String
+	plugs__heatgain_fraction : String
+	plugs__heatgain : String
+	cooling_setpoint : String
+	heating_setpoint : String
+	thermostat_deadband : String
+	control__ventilation_fraction : String
+	control__lighting_fraction : String
+	ACH : String
+operations
+end
+
+class Multizone<Connection
+attributes
+	from_ : String
+	to : String
+	ua : String
+operations
+end
+
+class Windturb_dg<Connection
+attributes
+	Gen_status : String
+	Gen_type : String
+	Gen_mode : String
+	Turbine_Model : String
+	Rated_VA : String
+	Rated_V : String
+	Pconv : String
+	WSadj : String
+	Wind_Speed : String
+	pf : String
+	GenElecEff : String
+	TotalRealPow : String
+	TotalReacPow : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	current_A : String
+	current_B : String
+	current_C : String
+	EfA : String
+	EfB : String
+	EfC : String
+	Vrotor_A : String
+	Vrotor_B : String
+	Vrotor_C : String
+	Irotor_A : String
+	Irotor_B : String
+	Irotor_C : String
+	phases : String
+operations
+end
+
+class Power_electronics<Connection
+attributes
+	generator_mode : String
+	generator_status : String
+	converter_type : String
+	switch_type : String
+	filter_type : String
+	filter_implementation : String
+	filter_frequency : String
+	power_type : String
+	Rated_kW : String
+	Max_P : String
+	Min_P : String
+	Rated_kVA : String
+	Rated_kV : String
+	phases : String
+operations
+end
+
+class Rectifier<Connection
+attributes
+	rectifier_type : String
+	generator_mode : String
+	V_Out : String
+	I_Out : String
+	VA_Out : String
+	P_Out : String
+	Q_Out : String
+	Vdc : String
+	phaseA_V_In : String
+	phaseB_V_In : String
+	phaseC_V_In : String
+	phaseA_I_In : String
+	phaseB_I_In : String
+	phaseC_I_In : String
+	power_A_In : String
+	power_B_In : String
+	power_C_In : String
+	phases : String
+operations
+end
+
+class Microturbine<Connection
+attributes
+	generator_mode : String
+	generator_status : String
+	power_type : String
+	Rinternal : String
+	Rload : String
+	V_Max : String
+	I_Max : String
+	frequency : String
+	Max_Frequency : String
+	Min_Frequency : String
+	Fuel_Used : String
+	Heat_Out : String
+	KV : String
+	Power_Angle : String
+	Max_P : String
+	Min_P : String
+	phaseA_V_Out : String
+	phaseB_V_Out : String
+	phaseC_V_Out : String
+	phaseA_I_Out : String
+	phaseB_I_Out : String
+	phaseC_I_Out : String
+	power_A_Out : String
+	power_B_Out : String
+	power_C_Out : String
+	VA_Out : String
+	pf_Out : String
+	E_A_Internal : String
+	E_B_Internal : String
+	E_C_Internal : String
+	efficiency : String
+	Rated_kVA : String
+	phases : String
+operations
+end
+
+class Battery<Connection
+attributes
+	generator_mode : String
+	generator_status : String
+	rfb_size : String
+	power_type : String
+	power_set_high : String
+	power_set_low : String
+	Rinternal : String
+	V_Max : String
+	I_Max : String
+	E_Max : String
+	Energy : String
+	efficiency : String
+	base_efficiency : String
+	Rated_kVA : String
+	V_Out : String
+	I_Out : String
+	VA_Out : String
+	V_In : String
+	I_In : String
+	V_Internal : String
+	I_Internal : String
+	I_Prev : String
+	phases : String
+operations
+end
+
+class Solar<Connection
+attributes
+	generator_mode : String
+	generator_status : String
+	panel_type : String
+	power_type : String
+	noct : String
+	Tcell : String
+	Tambient : String
+	Insolation : String
+	Rinternal : String
+	Rated_Insolation : String
+	V_Max : String
+	Voc_Max : String
+	Voc : String
+	efficiency : String
+	area : String
+	Rated_kVA : String
+	V_Out : String
+	I_Out : String
+	VA_Out : String
+	phases : String
+operations
+end
+
+class Stubauction<Connection
+attributes
+	unit : String
+	period : String
+	last__P : String
+	next__P : String
+	avg24 : String
+	std24 : String
+	avg72 : String
+	std72 : String
+	avg168 : String
+	std168 : String
+	verbose : String
+operations
+end
+
+class Link<Connection
+attributes
+	Y : String
+	I : String
+	B : String
+	from_ : String
+	to : String
+operations
+end
+
+class Fuse<Connection
+attributes
+	TimeConstant : String
+	SetCurrent : String
+	SetBase : String
+	SetScale : String
+	SetCurve : String
+	TresetAvg : String
+	TresetStd : String
+	State : String
+operations
+end
+
+class Relay<Connection
+attributes
+	Curve : String
+	TimeDial : String
+	SetCurrent : String
+	State : String
+operations
+end
+
+class Regulator<Connection
+attributes
+	Type : String
+	Vmax : String
+	Vmin : String
+	Vstep : String
+	CTlink : String
+	PTbus : String
+	TimeDelay : String
+operations
+end
+
+class Transformer<Connection
+attributes
+	Type : String
+	Sbase : String
+	Vbase : String
+	Zpu : String
+	Vprimary : String
+	Vsecondary : String
+operations
+end
+
+class Meter<Connection
+attributes
+	type : String
+	demand : String
+	meter : String
+	line1_current : String
+	line2_current : String
+	line3_current : String
+	line1_admittance : String
+	line2_admittance : String
+	line3_admittance : String
+	line1_power : String
+	line2_power : String
+	line3_power : String
+	line1_volts : String
+	line2_volts : String
+	line3_volts : String
+operations
+end
+
+class Generator<Connection
+attributes
+	Pdesired_MW : String
+	Qdesired_MVAR : String
+	Qcontrolled : String
+	Pmax_MW : String
+	Qmin_MVAR : String
+	Qmax_MVAR : String
+	QVa : String
+	QVb : String
+	QVc : String
+	state : String
+operations
+end
+
+class Plc<Connection
+attributes
+	source : String
+	network : String
+operations
+end
+
+class Node<Connection
+attributes
+	bustype : String
+	busflags : String
+	reference_bus : String
+	maximum_voltage_error : String
+	voltage_A : String
+	voltage_B : String
+	voltage_C : String
+	voltage_AB : String
+	voltage_BC : String
+	voltage_CA : String
+	current_A : String
+	current_B : String
+	current_C : String
+	power_A : String
+	power_B : String
+	power_C : String
+	shunt_A : String
+	shunt_B : String
+	shunt_C : String
+	phases : String
+	nominal_voltage : String
+operations
+end
+
+class Connection
+attributes
+	name : String
+operations
+end
+
+class Grid
+attributes
+operations
+end
+
+class Time
+attributes
+	SimulatorTime : String
+	Realtime : String
+operations
+end
+
+association xxx_Connection_connections between
+	Connection[0..1] role xxx_Connection_connections_src
+	Connection[*] role connections
+end
+
+association xxx_Connection_parent between
+	Connection[0..1] role xxx_Connection_parent_src
+	Connection[*] role parent
+end
+
+composition xxx_Grid_connections between
+	Grid[0..1] role xxx_Grid_connections_src
+	Connection[*] role connections
+end
+
+composition xxx_Grid_time between
+	Grid[0..1] role xxx_Grid_time_src
+	Time[*] role time
+end
+

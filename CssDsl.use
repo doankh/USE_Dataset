@@ -1,0 +1,300 @@
+model cssDsl
+class stylesheet
+attributes
+operations
+end
+
+class charset
+attributes
+	charset : String
+operations
+end
+
+class importExpression
+attributes
+	value : String
+operations
+end
+
+class page
+attributes
+	pseudoPage : String
+operations
+end
+
+class media
+attributes
+	medialist : String
+operations
+end
+
+class ruleset
+attributes
+operations
+end
+
+class selector
+attributes
+	combinator : String
+operations
+end
+
+class SimpleSelectorForNegation
+attributes
+operations
+end
+
+class CssSelector
+attributes
+operations
+end
+
+class simple_selector
+attributes
+operations
+end
+
+class ClassSelector<CssSelector
+attributes
+	name : String
+operations
+end
+
+class ElementSelector
+attributes
+	name : String
+operations
+end
+
+class UniversalSelector
+attributes
+	namespace : String
+operations
+end
+
+class IdSelector<CssSelector
+attributes
+	name : String
+operations
+end
+
+class css_declaration
+attributes
+	important : Boolean
+operations
+end
+
+class css_property
+attributes
+	name : String
+operations
+end
+
+class PseudoClassOrFunc<CssSelector
+attributes
+operations
+end
+
+class PseudoClass<CssSelector,PseudoClassOrFunc
+attributes
+operations
+end
+
+class PseudoClassName<PseudoClass
+attributes
+	name : String
+operations
+end
+
+class PseudoClassFunction<PseudoClassOrFunc
+attributes
+	not_ : Boolean
+	name : String
+operations
+end
+
+class CssTok
+attributes
+operations
+end
+
+class URLType<importExpression
+attributes
+	mediaList : String
+	url : String
+operations
+end
+
+class AttributeSelector<CssSelector
+attributes
+	name : String
+	op : String
+	value : String
+operations
+end
+
+class SymbolTok<CssTok
+attributes
+	symbol : String
+operations
+end
+
+class WSTok<CssTok
+attributes
+operations
+end
+
+class StringTok<CssTok
+attributes
+	value : String
+operations
+end
+
+class NumberTok<CssTok
+attributes
+	val : Real
+operations
+end
+
+class UrlTok<CssTok
+attributes
+operations
+end
+
+class ColorTok<CssTok
+attributes
+	value : String
+operations
+end
+
+class IdentifierTok<CssTok
+attributes
+	name : String
+operations
+end
+
+class FuncTok<CssTok
+attributes
+operations
+end
+
+composition xxx_stylesheet_charset between
+	stylesheet[*] role xxx_stylesheet_charset_src
+	charset[0..1] role charset
+end
+
+composition xxx_stylesheet_imports between
+	stylesheet[0..1] role xxx_stylesheet_imports_src
+	importExpression[*] role imports
+end
+
+composition xxx_stylesheet_ruleset between
+	stylesheet[0..1] role xxx_stylesheet_ruleset_src
+	ruleset[*] role ruleset
+end
+
+composition xxx_stylesheet_media between
+	stylesheet[0..1] role xxx_stylesheet_media_src
+	media[*] role media
+end
+
+composition xxx_stylesheet_page between
+	stylesheet[0..1] role xxx_stylesheet_page_src
+	page[*] role page
+end
+
+composition xxx_page_declarations between
+	page[0..1] role xxx_page_declarations_src
+	css_declaration[*] role declarations
+end
+
+composition xxx_media_rulesets between
+	media[0..1] role xxx_media_rulesets_src
+	ruleset[*] role rulesets
+end
+
+composition xxx_ruleset_selectors between
+	ruleset[0..1] role xxx_ruleset_selectors_src
+	selector[*] role selectors
+end
+
+composition xxx_ruleset_declarations between
+	ruleset[0..1] role xxx_ruleset_declarations_src
+	css_declaration[*] role declarations
+end
+
+composition xxx_selector_simpleselectors between
+	selector[0..1] role xxx_selector_simpleselectors_src
+	simple_selector[*] role simpleselectors
+end
+
+composition xxx_selector_selector between
+	selector[*] role xxx_selector_selector_src
+	selector[0..1] role selector
+end
+
+composition xxx_SimpleSelectorForNegation_element between
+	SimpleSelectorForNegation[*] role xxx_SimpleSelectorForNegation_element_src
+	ElementSelector[0..1] role element
+end
+
+composition xxx_SimpleSelectorForNegation_universal between
+	SimpleSelectorForNegation[*] role xxx_SimpleSelectorForNegation_universal_src
+	UniversalSelector[0..1] role universal
+end
+
+composition xxx_SimpleSelectorForNegation_subSelectors between
+	SimpleSelectorForNegation[0..1] role xxx_SimpleSelectorForNegation_subSelectors_src
+	CssSelector[*] role subSelectors
+end
+
+composition xxx_simple_selector_element between
+	simple_selector[*] role xxx_simple_selector_element_src
+	ElementSelector[0..1] role element
+end
+
+composition xxx_simple_selector_universal between
+	simple_selector[*] role xxx_simple_selector_universal_src
+	UniversalSelector[0..1] role universal
+end
+
+composition xxx_simple_selector_subSelectors between
+	simple_selector[0..1] role xxx_simple_selector_subSelectors_src
+	CssSelector[*] role subSelectors
+end
+
+composition xxx_css_declaration_property between
+	css_declaration[*] role xxx_css_declaration_property_src
+	css_property[0..1] role property
+end
+
+composition xxx_css_declaration_valueTokens between
+	css_declaration[0..1] role xxx_css_declaration_valueTokens_src
+	CssTok[*] role valueTokens
+end
+
+composition xxx_PseudoClassFunction_paramSelector between
+	PseudoClassFunction[*] role xxx_PseudoClassFunction_paramSelector_src
+	SimpleSelectorForNegation[0..1] role paramSelector
+end
+
+composition xxx_PseudoClassFunction_params between
+	PseudoClassFunction[0..1] role xxx_PseudoClassFunction_params_src
+	CssTok[*] role params
+end
+
+composition xxx_UrlTok_url between
+	UrlTok[*] role xxx_UrlTok_url_src
+	URLType[0..1] role url
+end
+
+composition xxx_FuncTok_name between
+	FuncTok[*] role xxx_FuncTok_name_src
+	IdentifierTok[0..1] role name
+end
+
+composition xxx_FuncTok_params between
+	FuncTok[0..1] role xxx_FuncTok_params_src
+	CssTok[*] role params
+end
+

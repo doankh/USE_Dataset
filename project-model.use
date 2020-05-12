@@ -1,0 +1,74 @@
+model model_
+enum ManifestVersion{
+default
+}
+
+enum ExtensionType{
+default
+}
+
+enum ResourceType{
+default
+}
+
+class JoomlaExtensionProject
+attributes
+	project : String
+operations
+end
+
+class BasicExtensionModel
+attributes
+	name : String
+	symbolicName : String
+	type : ExtensionType
+	manifestVersion : ManifestVersion
+	manifestPath : String
+	group : String
+operations
+end
+
+class ExtensionResource
+attributes
+	fullPath : String
+	manifestRelativePath : String
+	installPackagePathSegments : Integer
+	resourceType : ResourceType
+	folder : Boolean
+	inAdministration : Boolean
+	specialResource : Boolean
+operations
+end
+
+class MediaResource<ExtensionResource
+attributes
+	destination : String
+operations
+end
+
+class LanguageResource<ExtensionResource
+attributes
+	languageTag : String
+operations
+end
+
+composition xxx_JoomlaExtensionProject_extensions between
+	JoomlaExtensionProject[0..1] role xxx_JoomlaExtensionProject_extensions_src
+	BasicExtensionModel[*] role extensions
+end
+
+association xxx_BasicExtensionModel_project between
+	BasicExtensionModel[*] role xxx_BasicExtensionModel_project_src
+	JoomlaExtensionProject[0..1] role project
+end
+
+composition xxx_BasicExtensionModel_resources between
+	BasicExtensionModel[0..1] role xxx_BasicExtensionModel_resources_src
+	ExtensionResource[*] role resources
+end
+
+association xxx_ExtensionResource_extensionModel between
+	ExtensionResource[*] role xxx_ExtensionResource_extensionModel_src
+	BasicExtensionModel[0..1] role extensionModel
+end
+

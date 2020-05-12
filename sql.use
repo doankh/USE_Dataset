@@ -1,0 +1,512 @@
+model sql
+enum CharacterStringTypeKind{
+default
+}
+
+enum NationalCharacterStringTypeKind{
+default
+}
+
+enum BinaryLargeObjectStringTypeKind{
+default
+}
+
+enum ExactNumericTypeKind{
+default
+}
+
+enum ApproximateNumericTypeKind{
+default
+}
+
+enum Multiplier{
+default
+}
+
+enum CharLengthUnits{
+default
+}
+
+enum DatetimeValueFunctionKind{
+default
+}
+
+enum TableScope{
+default
+}
+
+enum UniqueSpecificationKind{
+default
+}
+
+class Dummy
+attributes
+operations
+end
+
+class SQLScript
+attributes
+operations
+end
+
+abstract class DirectSQLStatement<Statement
+attributes
+operations
+end
+
+abstract class Separator<Statement
+attributes
+operations
+end
+
+abstract class Comment<Separator
+attributes
+	value : String
+operations
+end
+
+class SimpleComment<Comment
+attributes
+operations
+end
+
+class BracketedComment<Comment
+attributes
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class SchemaQualifiedName
+attributes
+	catalogName : String
+	schemaName : String
+	name : String
+operations
+end
+
+abstract class Literal
+attributes
+operations
+end
+
+abstract class GeneralLiteral<Literal
+attributes
+operations
+end
+
+class CharacterStringLiteral<NationalCharacterStringLiteral
+attributes
+operations
+end
+
+class NationalCharacterStringLiteral<GeneralLiteral
+attributes
+	values : String
+operations
+end
+
+abstract class DatetimeLiteral<GeneralLiteral
+attributes
+operations
+end
+
+class BooleanLiteral<GeneralLiteral
+attributes
+	value : String
+operations
+end
+
+class DateLiteral<DatetimeLiteral
+attributes
+	value : DateType
+operations
+end
+
+class TimeLiteral<DatetimeLiteral
+attributes
+	value : TimeType
+operations
+end
+
+class TimestampLiteral<DatetimeLiteral
+attributes
+	value : TimestampType
+operations
+end
+
+class ExactNumericLiteral<NumericLiteral
+attributes
+	value : String
+operations
+end
+
+class ApproximateNumericLiteral<NumericLiteral
+attributes
+	value : Real
+operations
+end
+
+abstract class NumericLiteral<Literal
+attributes
+operations
+end
+
+abstract class DataType
+attributes
+operations
+end
+
+abstract class PredefinedType<DataType
+attributes
+operations
+end
+
+class CharacterStringType<PredefinedType
+attributes
+	kind : CharacterStringTypeKind
+	length : String
+operations
+end
+
+class NationalCharacterStringType<PredefinedType
+attributes
+	kind : NationalCharacterStringTypeKind
+	length : String
+operations
+end
+
+class BinaryLargeObjectStringType<PredefinedType
+attributes
+	kind : BinaryLargeObjectStringTypeKind
+operations
+end
+
+abstract class NumericType<PredefinedType
+attributes
+operations
+end
+
+class BooleanType<PredefinedType
+attributes
+operations
+end
+
+abstract class DatetimeType<PredefinedType
+attributes
+operations
+end
+
+class ExactNumericType<NumericType
+attributes
+	kind : ExactNumericTypeKind
+	precision : String
+	scale : String
+operations
+end
+
+class ApproximateNumericType<NumericType
+attributes
+	kind : ApproximateNumericTypeKind
+	precision : String
+operations
+end
+
+class LargeObjectLength
+attributes
+	value : String
+	multiplier : Multiplier
+	units : CharLengthUnits
+operations
+end
+
+class DateType<DatetimeType
+attributes
+operations
+end
+
+class TimeType<DatetimeType
+attributes
+	precision : String
+	withTimeZone : String
+operations
+end
+
+class TimestampType<DatetimeType
+attributes
+	precision : String
+	withTimeZone : String
+operations
+end
+
+class DatetimeValueFunction
+attributes
+	kind : DatetimeValueFunctionKind
+	precision : String
+operations
+end
+
+abstract class ImplicitlyTypedValueSpecification
+attributes
+operations
+end
+
+class NullSpecification<ImplicitlyTypedValueSpecification
+attributes
+operations
+end
+
+class TableDefinition<SQLSchemaDefinitionStatement
+attributes
+	label : String
+	scope : TableScope
+operations
+end
+
+class TableElementList<TableContentsSource
+attributes
+operations
+end
+
+abstract class TableElement
+attributes
+operations
+end
+
+class Column<TableElement
+attributes
+	name : String
+operations
+end
+
+abstract class TableConstraint<TableElement
+attributes
+operations
+end
+
+abstract class TableContentsSource
+attributes
+operations
+end
+
+abstract class DefaultOption
+attributes
+operations
+end
+
+abstract class ColumnConstraint
+attributes
+operations
+end
+
+class NotNullColumnConstraint<ColumnConstraint
+attributes
+operations
+end
+
+class UniqueColumnConstraint<UniqueConstraint,ColumnConstraint
+attributes
+operations
+end
+
+class ReferentialColumnConstraint<ReferentialConstraint,ColumnConstraint
+attributes
+operations
+end
+
+abstract class SQLSchemaStatement<DirectSQLStatement
+attributes
+operations
+end
+
+abstract class SQLSchemaDefinitionStatement<SQLSchemaStatement
+attributes
+operations
+end
+
+class LiteralDefaultOption<DefaultOption
+attributes
+operations
+end
+
+class DatetimeValueFunctionDefaultOption<DefaultOption
+attributes
+operations
+end
+
+class ImplicitlyTypedValueSpecificationDefaultOption<DefaultOption
+attributes
+operations
+end
+
+class UniqueTableConstraint<UniqueConstraint,TableColumnsConstraint
+attributes
+operations
+end
+
+class ReferentialTableConstraint<ReferentialConstraint,TableColumnsConstraint
+attributes
+operations
+end
+
+abstract class UniqueConstraint
+attributes
+	kind : UniqueSpecificationKind
+operations
+end
+
+abstract class ReferentialConstraint
+attributes
+operations
+end
+
+class TableReference
+attributes
+	catalogName : String
+	schemaName : String
+operations
+end
+
+abstract class TableColumnsConstraint<TableConstraint
+attributes
+operations
+end
+
+composition xxx_SQLScript_statements between
+	SQLScript[0..1] role xxx_SQLScript_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_CharacterStringLiteral_characterSetName between
+	CharacterStringLiteral[*] role xxx_CharacterStringLiteral_characterSetName_src
+	SchemaQualifiedName[0..1] role characterSetName
+end
+
+composition xxx_NationalCharacterStringLiteral_separators between
+	NationalCharacterStringLiteral[0..1] role xxx_NationalCharacterStringLiteral_separators_src
+	Separator[*] role separators
+end
+
+composition xxx_CharacterStringType_characterSetName between
+	CharacterStringType[*] role xxx_CharacterStringType_characterSetName_src
+	SchemaQualifiedName[0..1] role characterSetName
+end
+
+composition xxx_CharacterStringType_collationName between
+	CharacterStringType[*] role xxx_CharacterStringType_collationName_src
+	SchemaQualifiedName[0..1] role collationName
+end
+
+composition xxx_NationalCharacterStringType_collationName between
+	NationalCharacterStringType[*] role xxx_NationalCharacterStringType_collationName_src
+	SchemaQualifiedName[0..1] role collationName
+end
+
+composition xxx_BinaryLargeObjectStringType_length between
+	BinaryLargeObjectStringType[*] role xxx_BinaryLargeObjectStringType_length_src
+	LargeObjectLength[0..1] role length
+end
+
+composition xxx_TableDefinition_schemaQualifiedName between
+	TableDefinition[*] role xxx_TableDefinition_schemaQualifiedName_src
+	SchemaQualifiedName[1] role schemaQualifiedName
+end
+
+composition xxx_TableDefinition_contentsSource between
+	TableDefinition[*] role xxx_TableDefinition_contentsSource_src
+	TableContentsSource[1] role contentsSource
+end
+
+composition xxx_TableElementList_elements between
+	TableElementList[0..1] role xxx_TableElementList_elements_src
+	TableElement[1..*] role elements
+end
+
+association xxx_TableElement_owner between
+	TableElement[*] role xxx_TableElement_owner_src
+	TableElementList[1] role owner
+end
+
+composition xxx_Column_dataType between
+	Column[*] role xxx_Column_dataType_src
+	DataType[1] role dataType
+end
+
+composition xxx_Column_defaultOption between
+	Column[*] role xxx_Column_defaultOption_src
+	DefaultOption[0..1] role defaultOption
+end
+
+composition xxx_Column_constraint between
+	Column[*] role xxx_Column_constraint_src
+	ColumnConstraint[0..1] role constraint
+end
+
+composition xxx_Column_collationName between
+	Column[*] role xxx_Column_collationName_src
+	SchemaQualifiedName[0..1] role collationName
+end
+
+composition xxx_TableConstraint_schemaQualifiedName between
+	TableConstraint[*] role xxx_TableConstraint_schemaQualifiedName_src
+	SchemaQualifiedName[0..1] role schemaQualifiedName
+end
+
+association xxx_TableContentsSource_owner between
+	TableContentsSource[*] role xxx_TableContentsSource_owner_src
+	TableDefinition[1] role owner
+end
+
+association xxx_DefaultOption_owner between
+	DefaultOption[*] role xxx_DefaultOption_owner_src
+	Column[1] role owner
+end
+
+association xxx_ColumnConstraint_owner between
+	ColumnConstraint[*] role xxx_ColumnConstraint_owner_src
+	Column[1] role owner
+end
+
+composition xxx_ColumnConstraint_schemaQualifiedName between
+	ColumnConstraint[*] role xxx_ColumnConstraint_schemaQualifiedName_src
+	SchemaQualifiedName[0..1] role schemaQualifiedName
+end
+
+composition xxx_LiteralDefaultOption_literal between
+	LiteralDefaultOption[*] role xxx_LiteralDefaultOption_literal_src
+	Literal[1] role literal
+end
+
+composition xxx_DatetimeValueFunctionDefaultOption_function between
+	DatetimeValueFunctionDefaultOption[*] role xxx_DatetimeValueFunctionDefaultOption_function_src
+	DatetimeValueFunction[1] role function
+end
+
+composition xxx_ImplicitlyTypedValueSpecificationDefaultOption_specification between
+	ImplicitlyTypedValueSpecificationDefaultOption[*] role xxx_ImplicitlyTypedValueSpecificationDefaultOption_specification_src
+	ImplicitlyTypedValueSpecification[1] role specification
+end
+
+association xxx_ReferentialConstraint_referencedColumns between
+	ReferentialConstraint[0..1] role xxx_ReferentialConstraint_referencedColumns_src
+	Column[*] role referencedColumns
+end
+
+composition xxx_ReferentialConstraint_referencedTable between
+	ReferentialConstraint[*] role xxx_ReferentialConstraint_referencedTable_src
+	TableReference[1] role referencedTable
+end
+
+association xxx_TableReference_target between
+	TableReference[*] role xxx_TableReference_target_src
+	TableDefinition[1] role target
+end
+
+association xxx_TableColumnsConstraint_columns between
+	TableColumnsConstraint[0..1] role xxx_TableColumnsConstraint_columns_src
+	Column[1..*] role columns
+end
+

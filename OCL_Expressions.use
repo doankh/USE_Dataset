@@ -1,0 +1,168 @@
+model OCLExpressions
+abstract class OclExpression
+attributes
+operations
+end
+
+class SelfExp<OclExpression
+attributes
+operations
+end
+
+class ResultExp<OclExpression
+attributes
+operations
+end
+
+class VariableExp<OclExpression
+attributes
+	var : String
+operations
+end
+
+abstract class OperationExp<OclExpression
+attributes
+operations
+end
+
+abstract class QueryExp<OclExpression
+attributes
+operations
+end
+
+abstract class Type
+attributes
+operations
+end
+
+class VariableDeclaration
+attributes
+	var : String
+operations
+end
+
+class VariableInitialisation
+attributes
+operations
+end
+
+class ForAllExp
+attributes
+operations
+end
+
+class ExistsExp
+attributes
+operations
+end
+
+class SelectExp
+attributes
+operations
+end
+
+class RejectExp
+attributes
+operations
+end
+
+class CollectExp
+attributes
+operations
+end
+
+class IterateExp
+attributes
+operations
+end
+
+association xxx_OclExpression_queryArg between
+	OclExpression[0..1] role xxx_OclExpression_queryArg_src
+	QueryExp[*] role queryArg
+end
+
+association xxx_OclExpression_querySrc between
+	OclExpression[0..1] role xxx_OclExpression_querySrc_src
+	QueryExp[*] role querySrc
+end
+
+composition xxx_OclExpression_resultType between
+	OclExpression[*] role xxx_OclExpression_resultType_src
+	Type[1] role resultType
+end
+
+association xxx_OclExpression_varDec between
+	OclExpression[0..1] role xxx_OclExpression_varDec_src
+	VariableDeclaration[1..*] role varDec
+end
+
+association xxx_OclExpression_varInit between
+	OclExpression[0..1] role xxx_OclExpression_varInit_src
+	VariableInitialisation[*] role varInit
+end
+
+composition xxx_QueryExp_argument between
+	QueryExp[*] role xxx_QueryExp_argument_src
+	OclExpression[1] role argument
+end
+
+composition xxx_QueryExp_source between
+	QueryExp[*] role xxx_QueryExp_source_src
+	OclExpression[1] role source
+end
+
+composition xxx_QueryExp_varDeclaration between
+	QueryExp[*] role xxx_QueryExp_varDeclaration_src
+	VariableDeclaration[0..1] role varDeclaration
+end
+
+association xxx_Type_oclExpression between
+	Type[0..1] role xxx_Type_oclExpression_src
+	OclExpression[*] role oclExpression
+end
+
+composition xxx_Type_varDec between
+	Type[0..1] role xxx_Type_varDec_src
+	VariableDeclaration[*] role varDec
+end
+
+association xxx_VariableDeclaration_varType between
+	VariableDeclaration[*] role xxx_VariableDeclaration_varType_src
+	Type[1] role varType
+end
+
+association xxx_VariableDeclaration_oclExpression between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_oclExpression_src
+	OclExpression[*] role oclExpression
+end
+
+association xxx_VariableDeclaration_queryExp between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_queryExp_src
+	QueryExp[*] role queryExp
+end
+
+association xxx_VariableDeclaration_varInit between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_varInit_src
+	VariableInitialisation[*] role varInit
+end
+
+composition xxx_VariableInitialisation_initExpression between
+	VariableInitialisation[*] role xxx_VariableInitialisation_initExpression_src
+	OclExpression[1] role initExpression
+end
+
+composition xxx_VariableInitialisation_varDec between
+	VariableInitialisation[*] role xxx_VariableInitialisation_varDec_src
+	VariableDeclaration[1] role varDec
+end
+
+composition xxx_VariableInitialisation_iterateExp between
+	VariableInitialisation[*] role xxx_VariableInitialisation_iterateExp_src
+	IterateExp[1] role iterateExp
+end
+
+composition xxx_IterateExp_varInit between
+	IterateExp[*] role xxx_IterateExp_varInit_src
+	VariableInitialisation[1] role varInit
+end
+

@@ -1,0 +1,66 @@
+model sharedPreferencesModel
+enum PreferenceType{
+default
+}
+
+enum BooleanValue{
+default
+}
+
+class Model
+attributes
+	packageName : String
+operations
+end
+
+class PreferencesBlock
+attributes
+	name : String
+operations
+end
+
+class Preference
+attributes
+	name : String
+	type : PreferenceType
+operations
+end
+
+class Literal
+attributes
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	literal : BooleanValue
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	literal : String
+operations
+end
+
+class NumericLiteral<Literal
+attributes
+	literal : String
+operations
+end
+
+composition xxx_Model_preferencesBlock between
+	Model[*] role xxx_Model_preferencesBlock_src
+	PreferencesBlock[0..1] role preferencesBlock
+end
+
+composition xxx_PreferencesBlock_prefs between
+	PreferencesBlock[0..1] role xxx_PreferencesBlock_prefs_src
+	Preference[*] role prefs
+end
+
+composition xxx_Preference_defaultValue between
+	Preference[*] role xxx_Preference_defaultValue_src
+	Literal[0..1] role defaultValue
+end
+

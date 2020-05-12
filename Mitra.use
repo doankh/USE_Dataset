@@ -1,0 +1,1002 @@
+model mitra
+enum VisibilityModifier{
+default
+}
+
+enum ExecutionModifier{
+default
+}
+
+enum ParameterModifier{
+default
+}
+
+enum PrimitiveTypeSpec{
+default
+}
+
+enum CollectionTypeSpec{
+default
+}
+
+enum BooleanOperator{
+default
+}
+
+enum EqualityOperator{
+default
+}
+
+enum RelationalOperator{
+default
+}
+
+enum MathOperator{
+default
+}
+
+enum UnaryMathOperator{
+default
+}
+
+enum AssignmentOperator{
+default
+}
+
+enum PPOperator{
+default
+}
+
+enum AnnotationTargetSpec{
+default
+}
+
+class Module
+attributes
+	packageName : String
+	name : String
+operations
+	toString():String
+end
+
+class ModuleReference
+attributes
+operations
+end
+
+class MetamodelDeclaration
+attributes
+	type : String
+	name : String
+	replaces : String
+operations
+	toString():String
+end
+
+class Property
+attributes
+	name : String
+	value : String
+operations
+	toString():String
+end
+
+class RuleDeclaration
+attributes
+	visibility : VisibilityModifier
+	exec : ExecutionModifier
+	traced : Boolean
+	stealth : Boolean
+	virtual : Boolean
+	multi : Boolean
+	name : String
+operations
+	toString():String
+end
+
+class RuleReference
+attributes
+operations
+end
+
+class SimpleRuleReference<RuleReference
+attributes
+operations
+	toString():String
+end
+
+class QualifiedRuleReference<RuleReference
+attributes
+operations
+	toString():String
+end
+
+class ParameterReference
+attributes
+operations
+end
+
+class SimpleParameterReference<ParameterReference
+attributes
+	name : String
+operations
+	toString():String
+end
+
+class QualifiedParameterReference<ParameterReference
+attributes
+operations
+	toString():String
+end
+
+class Trigger
+attributes
+operations
+end
+
+class JavaSpec
+attributes
+operations
+end
+
+class Parameter
+attributes
+	modifier : ParameterModifier
+operations
+end
+
+class FormalParameter<Parameter
+attributes
+operations
+	toString():String
+end
+
+class ReturnParameter<Parameter
+attributes
+operations
+	toString():String
+end
+
+class Type
+attributes
+operations
+end
+
+class ReferenceType<Type
+attributes
+operations
+	toString():String
+end
+
+class PrimitiveType<Type
+attributes
+	primitiveType : PrimitiveTypeSpec
+operations
+	toString():String
+end
+
+class CollectionType<Type
+attributes
+	collectionType : CollectionTypeSpec
+operations
+	toString():String
+end
+
+class Block<Statement
+attributes
+operations
+end
+
+class BlockStatement
+attributes
+operations
+end
+
+class Statement<BlockStatement
+attributes
+operations
+end
+
+class LocalVariableDeclarationStatement<BlockStatement
+attributes
+operations
+end
+
+class LocalVariableDeclaration
+attributes
+operations
+end
+
+class VarDeclaration
+attributes
+	name : String
+operations
+end
+
+class TypedVarDeclaration<VarDeclaration
+attributes
+operations
+end
+
+class InferredVarDeclaration<VarDeclaration
+attributes
+operations
+end
+
+class ExpressionStatement<Statement
+attributes
+operations
+end
+
+class StatementExpression
+attributes
+operations
+end
+
+class EmptyStatement<Statement
+attributes
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class DoStatement<Statement
+attributes
+operations
+end
+
+class ForInit
+attributes
+operations
+end
+
+class ForUpdate
+attributes
+operations
+end
+
+class ForStatement<Statement
+attributes
+operations
+end
+
+class LoopVariable
+attributes
+operations
+end
+
+class BreakStatement<Statement
+attributes
+operations
+end
+
+class ThrowStatement<Statement
+attributes
+operations
+end
+
+class TryStatement<Statement
+attributes
+operations
+end
+
+class Catch
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class TerminalExpression<Expression
+attributes
+operations
+end
+
+class Literal<TerminalExpression
+attributes
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	stringValue : String
+operations
+	toString():String
+end
+
+class IntLiteral<Literal
+attributes
+	intValue : Integer
+operations
+	toString():String
+end
+
+class RealLiteral<Literal
+attributes
+	floatValue : String
+operations
+	toString():String
+end
+
+class BooleanLiteral<Literal
+attributes
+	booleanValue : Boolean
+operations
+	toString():String
+end
+
+class NullLiteral<Literal
+attributes
+operations
+end
+
+class ClassInstanceCreationExpression<StatementExpression,TerminalExpression
+attributes
+operations
+end
+
+class RuleInvocation<StatementExpression,TerminalExpression
+attributes
+operations
+	toString():String
+end
+
+class RuleInvocationSuper<StatementExpression,TerminalExpression
+attributes
+operations
+	toString():String
+end
+
+class Feature
+attributes
+	name : String
+operations
+	toString():String
+end
+
+class MethodInvocation<Feature
+attributes
+operations
+end
+
+class FeatureMethodInvocation<MethodInvocation,MetamodelFeature
+attributes
+operations
+end
+
+class NativeOperationInvocation<MethodInvocation
+attributes
+operations
+end
+
+class MetamodelFeature
+attributes
+operations
+end
+
+class FeatureField<Feature,MetamodelFeature
+attributes
+operations
+end
+
+class VariableAccess<StatementExpression,TerminalExpression
+attributes
+	prefixOperator : PPOperator
+	postfixOperator : PPOperator
+operations
+	toString():String
+end
+
+class StaticAccess<StatementExpression,TerminalExpression
+attributes
+operations
+end
+
+class AnnotationsDefinition
+attributes
+operations
+end
+
+class AnnotationDecl
+attributes
+	name : String
+	targets : AnnotationTargetSpec
+	many : Boolean
+	required : Boolean
+operations
+end
+
+class AnnotationPropertyDecl
+attributes
+	name : String
+	required : Boolean
+operations
+end
+
+class Annotation
+attributes
+operations
+end
+
+class AnnotationProperty
+attributes
+operations
+end
+
+class Assignment<StatementExpression
+attributes
+	operator : AssignmentOperator
+operations
+end
+
+class IteratorExpression<Expression
+attributes
+operations
+end
+
+class BooleanExpression<Expression
+attributes
+	op : BooleanOperator
+operations
+end
+
+class EqualityExpression<Expression
+attributes
+	op : EqualityOperator
+operations
+end
+
+class RelationalExpression<Expression
+attributes
+	op : RelationalOperator
+operations
+end
+
+class MathExpression<Expression
+attributes
+	op : MathOperator
+operations
+end
+
+class UnaryCastExpression<Expression
+attributes
+operations
+end
+
+class UnaryBooleanExpression<Expression
+attributes
+operations
+end
+
+class UnaryMathExpression<Expression
+attributes
+	op : UnaryMathOperator
+operations
+end
+
+class InstanceOfExpression<Expression
+attributes
+operations
+end
+
+composition xxx_Module_imports between
+	Module[0..1] role xxx_Module_imports_src
+	ModuleReference[*] role imports
+end
+
+composition xxx_Module_metamodelDeclarations between
+	Module[0..1] role xxx_Module_metamodelDeclarations_src
+	MetamodelDeclaration[*] role metamodelDeclarations
+end
+
+composition xxx_Module_annotationDefinitions between
+	Module[0..1] role xxx_Module_annotationDefinitions_src
+	AnnotationsDefinition[*] role annotationDefinitions
+end
+
+composition xxx_Module_ruleDeclarations between
+	Module[0..1] role xxx_Module_ruleDeclarations_src
+	RuleDeclaration[*] role ruleDeclarations
+end
+
+association xxx_ModuleReference_module between
+	ModuleReference[*] role xxx_ModuleReference_module_src
+	Module[0..1] role module
+end
+
+composition xxx_MetamodelDeclaration_properties between
+	MetamodelDeclaration[0..1] role xxx_MetamodelDeclaration_properties_src
+	Property[*] role properties
+end
+
+composition xxx_RuleDeclaration_annotations between
+	RuleDeclaration[0..1] role xxx_RuleDeclaration_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_RuleDeclaration_formalParameters between
+	RuleDeclaration[0..1] role xxx_RuleDeclaration_formalParameters_src
+	FormalParameter[*] role formalParameters
+end
+
+composition xxx_RuleDeclaration_returnParameters between
+	RuleDeclaration[0..1] role xxx_RuleDeclaration_returnParameters_src
+	ReturnParameter[*] role returnParameters
+end
+
+composition xxx_RuleDeclaration_implementedRules between
+	RuleDeclaration[0..1] role xxx_RuleDeclaration_implementedRules_src
+	SimpleRuleReference[*] role implementedRules
+end
+
+composition xxx_RuleDeclaration_overriddenRule between
+	RuleDeclaration[*] role xxx_RuleDeclaration_overriddenRule_src
+	SimpleRuleReference[0..1] role overriddenRule
+end
+
+composition xxx_RuleDeclaration_excludingRules between
+	RuleDeclaration[0..1] role xxx_RuleDeclaration_excludingRules_src
+	SimpleRuleReference[*] role excludingRules
+end
+
+composition xxx_RuleDeclaration_trigger between
+	RuleDeclaration[*] role xxx_RuleDeclaration_trigger_src
+	Trigger[0..1] role trigger
+end
+
+composition xxx_RuleDeclaration_javaSpec between
+	RuleDeclaration[*] role xxx_RuleDeclaration_javaSpec_src
+	JavaSpec[0..1] role javaSpec
+end
+
+composition xxx_RuleDeclaration_body between
+	RuleDeclaration[*] role xxx_RuleDeclaration_body_src
+	Block[0..1] role body
+end
+
+association xxx_RuleReference_ruleDeclaration between
+	RuleReference[*] role xxx_RuleReference_ruleDeclaration_src
+	RuleDeclaration[0..1] role ruleDeclaration
+end
+
+composition xxx_SimpleRuleReference_parameterReferences between
+	SimpleRuleReference[0..1] role xxx_SimpleRuleReference_parameterReferences_src
+	SimpleParameterReference[*] role parameterReferences
+end
+
+composition xxx_SimpleRuleReference_returnReferences between
+	SimpleRuleReference[0..1] role xxx_SimpleRuleReference_returnReferences_src
+	SimpleParameterReference[*] role returnReferences
+end
+
+composition xxx_QualifiedRuleReference_parameterReferences between
+	QualifiedRuleReference[0..1] role xxx_QualifiedRuleReference_parameterReferences_src
+	QualifiedParameterReference[*] role parameterReferences
+end
+
+composition xxx_QualifiedRuleReference_returnReferences between
+	QualifiedRuleReference[0..1] role xxx_QualifiedRuleReference_returnReferences_src
+	QualifiedParameterReference[*] role returnReferences
+end
+
+composition xxx_SimpleParameterReference_type between
+	SimpleParameterReference[*] role xxx_SimpleParameterReference_type_src
+	Type[0..1] role type
+end
+
+composition xxx_QualifiedParameterReference_vardecl between
+	QualifiedParameterReference[*] role xxx_QualifiedParameterReference_vardecl_src
+	TypedVarDeclaration[0..1] role vardecl
+end
+
+composition xxx_Trigger_triggerRules between
+	Trigger[0..1] role xxx_Trigger_triggerRules_src
+	QualifiedRuleReference[*] role triggerRules
+end
+
+composition xxx_Trigger_with between
+	Trigger[*] role xxx_Trigger_with_src
+	Block[0..1] role with
+end
+
+composition xxx_Trigger_when between
+	Trigger[*] role xxx_Trigger_when_src
+	Expression[0..1] role when
+end
+
+composition xxx_JavaSpec_properties between
+	JavaSpec[0..1] role xxx_JavaSpec_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Parameter_annotations between
+	Parameter[0..1] role xxx_Parameter_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_Parameter_vardecl between
+	Parameter[*] role xxx_Parameter_vardecl_src
+	TypedVarDeclaration[0..1] role vardecl
+end
+
+association xxx_ReferenceType_metamodelDeclaration between
+	ReferenceType[*] role xxx_ReferenceType_metamodelDeclaration_src
+	MetamodelDeclaration[0..1] role metamodelDeclaration
+end
+
+composition xxx_CollectionType_typePar between
+	CollectionType[*] role xxx_CollectionType_typePar_src
+	Type[0..1] role typePar
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	BlockStatement[*] role statements
+end
+
+composition xxx_LocalVariableDeclarationStatement_localVariableDeclaration between
+	LocalVariableDeclarationStatement[*] role xxx_LocalVariableDeclarationStatement_localVariableDeclaration_src
+	LocalVariableDeclaration[0..1] role localVariableDeclaration
+end
+
+composition xxx_LocalVariableDeclaration_vardecl between
+	LocalVariableDeclaration[*] role xxx_LocalVariableDeclaration_vardecl_src
+	TypedVarDeclaration[0..1] role vardecl
+end
+
+composition xxx_LocalVariableDeclaration_expression between
+	LocalVariableDeclaration[*] role xxx_LocalVariableDeclaration_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_VarDeclaration_type between
+	VarDeclaration[*] role xxx_VarDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_ExpressionStatement_statementExpression between
+	ExpressionStatement[*] role xxx_ExpressionStatement_statementExpression_src
+	StatementExpression[0..1] role statementExpression
+end
+
+composition xxx_ReturnStatement_expression between
+	ReturnStatement[*] role xxx_ReturnStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_IfStatement_expression between
+	IfStatement[*] role xxx_IfStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_IfStatement_trueStatement between
+	IfStatement[*] role xxx_IfStatement_trueStatement_src
+	Statement[0..1] role trueStatement
+end
+
+composition xxx_IfStatement_elseStatement between
+	IfStatement[*] role xxx_IfStatement_elseStatement_src
+	Statement[0..1] role elseStatement
+end
+
+composition xxx_WhileStatement_expression between
+	WhileStatement[*] role xxx_WhileStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_WhileStatement_statement between
+	WhileStatement[*] role xxx_WhileStatement_statement_src
+	Statement[0..1] role statement
+end
+
+composition xxx_DoStatement_statement between
+	DoStatement[*] role xxx_DoStatement_statement_src
+	Statement[0..1] role statement
+end
+
+composition xxx_DoStatement_expression between
+	DoStatement[*] role xxx_DoStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_ForInit_statementExpressions between
+	ForInit[0..1] role xxx_ForInit_statementExpressions_src
+	StatementExpression[*] role statementExpressions
+end
+
+composition xxx_ForInit_varDeclarations between
+	ForInit[0..1] role xxx_ForInit_varDeclarations_src
+	LocalVariableDeclaration[*] role varDeclarations
+end
+
+composition xxx_ForUpdate_statementExpression between
+	ForUpdate[0..1] role xxx_ForUpdate_statementExpression_src
+	StatementExpression[*] role statementExpression
+end
+
+composition xxx_ForStatement_loopVariable between
+	ForStatement[*] role xxx_ForStatement_loopVariable_src
+	LoopVariable[0..1] role loopVariable
+end
+
+composition xxx_ForStatement_expression between
+	ForStatement[*] role xxx_ForStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_ForStatement_forInit between
+	ForStatement[*] role xxx_ForStatement_forInit_src
+	ForInit[0..1] role forInit
+end
+
+composition xxx_ForStatement_forUpdate between
+	ForStatement[*] role xxx_ForStatement_forUpdate_src
+	ForUpdate[0..1] role forUpdate
+end
+
+composition xxx_ForStatement_statement between
+	ForStatement[*] role xxx_ForStatement_statement_src
+	Statement[0..1] role statement
+end
+
+composition xxx_LoopVariable_vardecl between
+	LoopVariable[*] role xxx_LoopVariable_vardecl_src
+	VarDeclaration[0..1] role vardecl
+end
+
+composition xxx_ThrowStatement_expression between
+	ThrowStatement[*] role xxx_ThrowStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_TryStatement_tryBlock between
+	TryStatement[*] role xxx_TryStatement_tryBlock_src
+	Block[0..1] role tryBlock
+end
+
+composition xxx_TryStatement_catches between
+	TryStatement[0..1] role xxx_TryStatement_catches_src
+	Catch[*] role catches
+end
+
+composition xxx_TryStatement_finallyBlock between
+	TryStatement[*] role xxx_TryStatement_finallyBlock_src
+	Block[0..1] role finallyBlock
+end
+
+composition xxx_Catch_formalParameter between
+	Catch[*] role xxx_Catch_formalParameter_src
+	FormalParameter[0..1] role formalParameter
+end
+
+composition xxx_Catch_block between
+	Catch[*] role xxx_Catch_block_src
+	Block[0..1] role block
+end
+
+composition xxx_ClassInstanceCreationExpression_type between
+	ClassInstanceCreationExpression[*] role xxx_ClassInstanceCreationExpression_type_src
+	Type[0..1] role type
+end
+
+composition xxx_ClassInstanceCreationExpression_arguments between
+	ClassInstanceCreationExpression[0..1] role xxx_ClassInstanceCreationExpression_arguments_src
+	Expression[*] role arguments
+end
+
+association xxx_RuleInvocation_ruleDeclaration between
+	RuleInvocation[*] role xxx_RuleInvocation_ruleDeclaration_src
+	RuleDeclaration[0..1] role ruleDeclaration
+end
+
+composition xxx_RuleInvocation_arguments between
+	RuleInvocation[0..1] role xxx_RuleInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_MethodInvocation_arguments between
+	MethodInvocation[0..1] role xxx_MethodInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_FeatureMethodInvocation_expression between
+	FeatureMethodInvocation[*] role xxx_FeatureMethodInvocation_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_FeatureField_expression between
+	FeatureField[*] role xxx_FeatureField_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_VariableAccess_variable between
+	VariableAccess[*] role xxx_VariableAccess_variable_src
+	VarDeclaration[0..1] role variable
+end
+
+composition xxx_VariableAccess_features between
+	VariableAccess[0..1] role xxx_VariableAccess_features_src
+	Feature[*] role features
+end
+
+composition xxx_VariableAccess_default between
+	VariableAccess[*] role xxx_VariableAccess_default_src
+	Expression[0..1] role default
+end
+
+composition xxx_StaticAccess_expression between
+	StaticAccess[*] role xxx_StaticAccess_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_StaticAccess_type between
+	StaticAccess[*] role xxx_StaticAccess_type_src
+	Type[0..1] role type
+end
+
+composition xxx_StaticAccess_features between
+	StaticAccess[0..1] role xxx_StaticAccess_features_src
+	Feature[*] role features
+end
+
+composition xxx_AnnotationsDefinition_annotationDecls between
+	AnnotationsDefinition[0..1] role xxx_AnnotationsDefinition_annotationDecls_src
+	AnnotationDecl[*] role annotationDecls
+end
+
+composition xxx_AnnotationDecl_valuetype between
+	AnnotationDecl[*] role xxx_AnnotationDecl_valuetype_src
+	PrimitiveType[0..1] role valuetype
+end
+
+composition xxx_AnnotationDecl_default between
+	AnnotationDecl[*] role xxx_AnnotationDecl_default_src
+	Literal[0..1] role default
+end
+
+composition xxx_AnnotationDecl_propertyDecls between
+	AnnotationDecl[0..1] role xxx_AnnotationDecl_propertyDecls_src
+	AnnotationPropertyDecl[*] role propertyDecls
+end
+
+composition xxx_AnnotationPropertyDecl_type between
+	AnnotationPropertyDecl[*] role xxx_AnnotationPropertyDecl_type_src
+	PrimitiveType[0..1] role type
+end
+
+composition xxx_AnnotationPropertyDecl_default between
+	AnnotationPropertyDecl[*] role xxx_AnnotationPropertyDecl_default_src
+	Literal[0..1] role default
+end
+
+association xxx_Annotation_decl between
+	Annotation[*] role xxx_Annotation_decl_src
+	AnnotationDecl[0..1] role decl
+end
+
+composition xxx_Annotation_values between
+	Annotation[0..1] role xxx_Annotation_values_src
+	Literal[*] role values
+end
+
+composition xxx_Annotation_properties between
+	Annotation[0..1] role xxx_Annotation_properties_src
+	AnnotationProperty[*] role properties
+end
+
+association xxx_AnnotationProperty_decl between
+	AnnotationProperty[*] role xxx_AnnotationProperty_decl_src
+	AnnotationPropertyDecl[0..1] role decl
+end
+
+composition xxx_AnnotationProperty_value between
+	AnnotationProperty[*] role xxx_AnnotationProperty_value_src
+	Literal[0..1] role value
+end
+
+composition xxx_Assignment_lhs between
+	Assignment[0..1] role xxx_Assignment_lhs_src
+	VariableAccess[*] role lhs
+end
+
+composition xxx_Assignment_expression between
+	Assignment[*] role xxx_Assignment_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_IteratorExpression_variable between
+	IteratorExpression[*] role xxx_IteratorExpression_variable_src
+	LoopVariable[0..1] role variable
+end
+
+composition xxx_IteratorExpression_expression between
+	IteratorExpression[*] role xxx_IteratorExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_BooleanExpression_lhs between
+	BooleanExpression[*] role xxx_BooleanExpression_lhs_src
+	Expression[0..1] role lhs
+end
+
+composition xxx_BooleanExpression_rhs between
+	BooleanExpression[*] role xxx_BooleanExpression_rhs_src
+	Expression[0..1] role rhs
+end
+
+composition xxx_EqualityExpression_lhs between
+	EqualityExpression[*] role xxx_EqualityExpression_lhs_src
+	Expression[0..1] role lhs
+end
+
+composition xxx_EqualityExpression_rhs between
+	EqualityExpression[*] role xxx_EqualityExpression_rhs_src
+	Expression[0..1] role rhs
+end
+
+composition xxx_RelationalExpression_lhs between
+	RelationalExpression[*] role xxx_RelationalExpression_lhs_src
+	Expression[0..1] role lhs
+end
+
+composition xxx_RelationalExpression_rhs between
+	RelationalExpression[*] role xxx_RelationalExpression_rhs_src
+	Expression[0..1] role rhs
+end
+
+composition xxx_MathExpression_lhs between
+	MathExpression[*] role xxx_MathExpression_lhs_src
+	Expression[0..1] role lhs
+end
+
+composition xxx_MathExpression_rhs between
+	MathExpression[*] role xxx_MathExpression_rhs_src
+	Expression[0..1] role rhs
+end
+
+composition xxx_UnaryCastExpression_type between
+	UnaryCastExpression[*] role xxx_UnaryCastExpression_type_src
+	Type[0..1] role type
+end
+
+composition xxx_UnaryCastExpression_expression between
+	UnaryCastExpression[*] role xxx_UnaryCastExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_UnaryBooleanExpression_expression between
+	UnaryBooleanExpression[*] role xxx_UnaryBooleanExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_UnaryMathExpression_expression between
+	UnaryMathExpression[*] role xxx_UnaryMathExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_InstanceOfExpression_expression between
+	InstanceOfExpression[*] role xxx_InstanceOfExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_InstanceOfExpression_type between
+	InstanceOfExpression[*] role xxx_InstanceOfExpression_type_src
+	Type[0..1] role type
+end
+

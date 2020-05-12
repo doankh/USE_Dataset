@@ -1,0 +1,119 @@
+model nexus
+enum ebenenfarbe{
+default
+}
+
+enum ebenenstatus{
+default
+}
+
+enum spielerStates{
+default
+}
+
+class ebene<positioniert
+attributes
+	status : ebenenstatus
+	farbe : ebenenfarbe
+operations
+end
+
+class gestalt<positioniert
+attributes
+	weite : Integer
+operations
+end
+
+class eins<gestalt
+attributes
+operations
+end
+
+class zwei<gestalt
+attributes
+operations
+end
+
+class drei<gestalt
+attributes
+operations
+end
+
+class schatten<eins
+attributes
+operations
+end
+
+class positioniert
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class spiel
+attributes
+	turnPlayedByAllPlayers : Integer
+	id : String
+operations
+end
+
+class Spieler
+attributes
+	turnPlayedByThisPlayer : Integer
+	name : String
+	state : spielerStates
+operations
+end
+
+class Nexus<gestalt
+attributes
+operations
+end
+
+class Zug
+attributes
+	turn : Integer
+operations
+end
+
+class Zugliste
+attributes
+operations
+end
+
+association xxx_gestalt_spieler between
+	gestalt[*] role xxx_gestalt_spieler_src
+	Spieler[0..1] role spieler
+end
+
+composition xxx_spiel_ebenen between
+	spiel[0..1] role xxx_spiel_ebenen_src
+	ebene[*] role ebenen
+end
+
+composition xxx_spiel_beteiligteSpieler between
+	spiel[0..1] role xxx_spiel_beteiligteSpieler_src
+	Spieler[*] role beteiligteSpieler
+end
+
+composition xxx_spiel_zuege between
+	spiel[0..1] role xxx_spiel_zuege_src
+	Zug[*] role zuege
+end
+
+association xxx_Zug_gestalt between
+	Zug[*] role xxx_Zug_gestalt_src
+	gestalt[1] role gestalt
+end
+
+association xxx_Zug_ziel between
+	Zug[*] role xxx_Zug_ziel_src
+	ebene[1] role ziel
+end
+
+association xxx_Zugliste_zuege between
+	Zugliste[0..1] role xxx_Zugliste_zuege_src
+	Zug[*] role zuege
+end
+

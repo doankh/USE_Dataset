@@ -1,0 +1,196 @@
+model ssl
+enum LabelType{
+default
+}
+
+enum UnitOfTime{
+default
+}
+
+class Specification
+attributes
+operations
+end
+
+class Testcase
+attributes
+operations
+end
+
+class Given
+attributes
+operations
+end
+
+class When
+attributes
+operations
+end
+
+class Then
+attributes
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+class CheckVariableEqualsVariable<Condition
+attributes
+	firstVariableName : String
+	secondVariableName : String
+operations
+end
+
+class CheckVariableEqualsTime<Condition
+attributes
+	firstVariableName : String
+	time : String
+operations
+end
+
+class CheckMode<Condition
+attributes
+	mode : String
+operations
+end
+
+class CheckLabel<Condition
+attributes
+	labelType : LabelType
+	value : String
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class EntersMode<Action
+attributes
+	mode : String
+operations
+end
+
+class PressButton<Action
+attributes
+	button : String
+operations
+end
+
+abstract class Observation
+attributes
+operations
+end
+
+class ObserveMode<Observation
+attributes
+	mode : String
+operations
+end
+
+class ObserveButton<Observation
+attributes
+	button : String
+	name : String
+operations
+end
+
+abstract class ObserveOutput<Observation
+attributes
+	labelType : LabelType
+operations
+end
+
+class ObserveLabelValue<ObserveOutput
+attributes
+	value : String
+operations
+end
+
+class ObserveLabelVariable<ObserveOutput
+attributes
+	variableName : String
+operations
+end
+
+class ObserveVariableChange<Observation
+attributes
+	variableName : String
+	unit : UnitOfTime
+operations
+end
+
+class ObserveRing<Observation
+attributes
+operations
+end
+
+composition xxx_Specification_testcases between
+	Specification[0..1] role xxx_Specification_testcases_src
+	Testcase[*] role testcases
+end
+
+composition xxx_Testcase_given between
+	Testcase[*] role xxx_Testcase_given_src
+	Given[0..1] role given
+end
+
+composition xxx_Testcase_when between
+	Testcase[*] role xxx_Testcase_when_src
+	When[0..1] role when
+end
+
+composition xxx_Testcase_then_ between
+	Testcase[*] role xxx_Testcase_then__src
+	Then[1] role then_
+end
+
+association xxx_Given_testcase between
+	Given[*] role xxx_Given_testcase_src
+	Testcase[1] role testcase
+end
+
+composition xxx_Given_conditions between
+	Given[0..1] role xxx_Given_conditions_src
+	Condition[1..*] role conditions
+end
+
+association xxx_When_testcase between
+	When[*] role xxx_When_testcase_src
+	Testcase[1] role testcase
+end
+
+composition xxx_When_actions between
+	When[0..1] role xxx_When_actions_src
+	Action[1..*] role actions
+end
+
+association xxx_Then_testcase between
+	Then[*] role xxx_Then_testcase_src
+	Testcase[1] role testcase
+end
+
+composition xxx_Then_observations between
+	Then[0..1] role xxx_Then_observations_src
+	Observation[1..*] role observations
+end
+
+association xxx_Condition_given between
+	Condition[*] role xxx_Condition_given_src
+	Given[1] role given
+end
+
+association xxx_Action_when between
+	Action[*] role xxx_Action_when_src
+	When[1] role when
+end
+
+association xxx_Observation_then_ between
+	Observation[*] role xxx_Observation_then__src
+	Then[1] role then_
+end
+

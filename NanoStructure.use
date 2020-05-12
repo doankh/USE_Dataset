@@ -1,0 +1,90 @@
+model NanoStructure
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Group<NamedElement
+attributes
+operations
+end
+
+class Material<NamedElement
+attributes
+	refractionIndex : String
+operations
+end
+
+class DispersionMaterial<Material
+attributes
+operations
+	refractionIndexOf(wavelength : String):String
+end
+
+class StructuralElement<NamedElement
+attributes
+	xPos : String
+	yPos : String
+	zPos : String
+operations
+end
+
+class Sphere<StructuralElement
+attributes
+	radius : String
+operations
+end
+
+class Pyramid<StructuralElement
+attributes
+	height : String
+	xSpanBottom : String
+	ySpanBottom : String
+	xSpanTop : String
+	ySpanTop : String
+operations
+end
+
+class Cuboid<StructuralElement
+attributes
+	width : String
+	height : String
+	depth : String
+operations
+end
+
+class Ring<StructuralElement
+attributes
+	innerRadius : String
+	outerRadius : String
+	thetaStart : String
+	thetaStop : String
+operations
+end
+
+class Cylinder<StructuralElement
+attributes
+	radius : String
+	height : String
+operations
+end
+
+class Cone<StructuralElement
+attributes
+	topRadius : String
+	bottomRadius : String
+	height : String
+operations
+end
+
+association xxx_Group_elements between
+	Group[0..1] role xxx_Group_elements_src
+	StructuralElement[*] role elements
+end
+
+association xxx_StructuralElement_material between
+	StructuralElement[*] role xxx_StructuralElement_material_src
+	Material[1] role material
+end
+

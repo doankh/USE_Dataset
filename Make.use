@@ -1,0 +1,83 @@
+model Make
+class Makefile
+attributes
+	name : String
+operations
+end
+
+abstract class Element
+attributes
+	name : String
+operations
+end
+
+class Rule<Element
+attributes
+operations
+end
+
+class Macro<Element
+attributes
+	value : String
+operations
+end
+
+class ShellLine
+attributes
+	command : String
+	display : Boolean
+operations
+end
+
+class Comment
+attributes
+	text : String
+operations
+end
+
+abstract class Dependency
+attributes
+operations
+end
+
+class RuleDep<Dependency
+attributes
+operations
+end
+
+class FileDep<Dependency
+attributes
+	name : String
+operations
+end
+
+composition xxx_Makefile_comment between
+	Makefile[*] role xxx_Makefile_comment_src
+	Comment[0..1] role comment
+end
+
+composition xxx_Makefile_elements between
+	Makefile[0..1] role xxx_Makefile_elements_src
+	Element[1..*] role elements
+end
+
+composition xxx_Rule_dependencies between
+	Rule[0..1] role xxx_Rule_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_Rule_shellLines between
+	Rule[0..1] role xxx_Rule_shellLines_src
+	ShellLine[1..*] role shellLines
+end
+
+association xxx_ShellLine_ruleShellLine between
+	ShellLine[*] role xxx_ShellLine_ruleShellLine_src
+	Rule[1] role ruleShellLine
+end
+
+association xxx_RuleDep_ruledep between
+	RuleDep[*] role xxx_RuleDep_ruledep_src
+	Rule[1] role ruledep
+end
+

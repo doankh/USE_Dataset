@@ -1,0 +1,73 @@
+model visualizationDsl
+class Expression
+attributes
+operations
+end
+
+class IsaRelationships
+attributes
+operations
+end
+
+class RelationshipGroup
+attributes
+operations
+end
+
+class Relationships
+attributes
+operations
+end
+
+class Relationship
+attributes
+operations
+end
+
+class Concept
+attributes
+	id : String
+	term : String
+operations
+end
+
+composition xxx_Expression_isaRelationships between
+	Expression[*] role xxx_Expression_isaRelationships_src
+	IsaRelationships[0..1] role isaRelationships
+end
+
+composition xxx_Expression_ungroupedRelationships between
+	Expression[*] role xxx_Expression_ungroupedRelationships_src
+	Relationships[0..1] role ungroupedRelationships
+end
+
+composition xxx_Expression_groupedRelationships between
+	Expression[0..1] role xxx_Expression_groupedRelationships_src
+	RelationshipGroup[*] role groupedRelationships
+end
+
+composition xxx_IsaRelationships_relationships between
+	IsaRelationships[0..1] role xxx_IsaRelationships_relationships_src
+	Concept[*] role relationships
+end
+
+composition xxx_RelationshipGroup_relationships between
+	RelationshipGroup[0..1] role xxx_RelationshipGroup_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_Relationships_relationships between
+	Relationships[0..1] role xxx_Relationships_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_Relationship_type between
+	Relationship[*] role xxx_Relationship_type_src
+	Concept[0..1] role type
+end
+
+composition xxx_Relationship_destination between
+	Relationship[*] role xxx_Relationship_destination_src
+	Concept[0..1] role destination
+end
+

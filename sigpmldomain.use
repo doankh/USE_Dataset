@@ -1,0 +1,85 @@
+model sigpml
+class Application<NamedElement
+attributes
+operations
+end
+
+class Block<NamedElement
+attributes
+	cycles : Integer
+	currentExecCycle : Integer
+operations
+	execute()
+end
+
+abstract class Port<NamedElement
+attributes
+	rate : Integer
+operations
+end
+
+class InputPort<Port
+attributes
+operations
+end
+
+class OutputPort<Port
+attributes
+operations
+end
+
+class Connector<NamedElement
+attributes
+	currentSize : Integer
+	capacity : Integer
+operations
+	pop()
+	push()
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+composition xxx_Application_ownedBlocks between
+	Application[0..1] role xxx_Application_ownedBlocks_src
+	Block[*] role ownedBlocks
+end
+
+composition xxx_Application_ownedConnectors between
+	Application[0..1] role xxx_Application_ownedConnectors_src
+	Connector[*] role ownedConnectors
+end
+
+composition xxx_Block_ownedPorts between
+	Block[0..1] role xxx_Block_ownedPorts_src
+	Port[*] role ownedPorts
+end
+
+association xxx_Block_owner between
+	Block[*] role xxx_Block_owner_src
+	Application[1] role owner
+end
+
+association xxx_Port_owner between
+	Port[*] role xxx_Port_owner_src
+	Block[1] role owner
+end
+
+association xxx_Connector_itsOutputPort between
+	Connector[*] role xxx_Connector_itsOutputPort_src
+	OutputPort[1] role itsOutputPort
+end
+
+association xxx_Connector_itsInputPort between
+	Connector[*] role xxx_Connector_itsInputPort_src
+	InputPort[1] role itsInputPort
+end
+
+association xxx_Connector_owner between
+	Connector[*] role xxx_Connector_owner_src
+	Application[1] role owner
+end
+

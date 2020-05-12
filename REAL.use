@@ -1,0 +1,299 @@
+model real
+class Model
+attributes
+operations
+end
+
+class Theorem
+attributes
+	name : String
+	endName : String
+operations
+end
+
+class RangeDefinition
+attributes
+	element : String
+operations
+end
+
+class VarDeclaration
+attributes
+	identifier : String
+operations
+end
+
+class SetDeclaration
+attributes
+	set : String
+	paramIdentifier : String
+operations
+end
+
+class ElementBinding
+attributes
+	element : String
+operations
+end
+
+class SelectionExpression
+attributes
+	op : String
+operations
+end
+
+class ComputeExpression
+attributes
+	identifier : String
+	name : String
+operations
+end
+
+class TerminalSelectionExpression
+attributes
+operations
+end
+
+class SelectionRelation
+attributes
+	identifier : String
+operations
+end
+
+class SelectionRelationParameter
+attributes
+	identifier : String
+operations
+end
+
+class RequiredDefinition
+attributes
+	theorems : String
+operations
+end
+
+class VerificationExpression
+attributes
+operations
+end
+
+class EvaluationExpression
+attributes
+	f : String
+operations
+end
+
+class GenericExpression<TerminalGenericExpression
+attributes
+	op : String
+operations
+end
+
+class TerminalGenericExpression
+attributes
+operations
+end
+
+class SetExpression
+attributes
+	e1 : String
+	op : String
+	e2 : String
+operations
+end
+
+class TernaryExpression
+attributes
+operations
+end
+
+class VerificationFunctionCall
+attributes
+	f : String
+operations
+end
+
+class VerificationFunctionParameter
+attributes
+	identifier : String
+operations
+end
+
+class Literal
+attributes
+	s : String
+	n : String
+operations
+end
+
+class BOOLEAN
+attributes
+	value : String
+operations
+end
+
+composition xxx_Model_theorems between
+	Model[0..1] role xxx_Model_theorems_src
+	Theorem[*] role theorems
+end
+
+composition xxx_Theorem_rangeDefinition between
+	Theorem[*] role xxx_Theorem_rangeDefinition_src
+	RangeDefinition[0..1] role rangeDefinition
+end
+
+composition xxx_Theorem_requiredDefinition between
+	Theorem[*] role xxx_Theorem_requiredDefinition_src
+	RequiredDefinition[0..1] role requiredDefinition
+end
+
+composition xxx_Theorem_varDeclarations between
+	Theorem[0..1] role xxx_Theorem_varDeclarations_src
+	VarDeclaration[*] role varDeclarations
+end
+
+composition xxx_Theorem_setDeclarations between
+	Theorem[0..1] role xxx_Theorem_setDeclarations_src
+	SetDeclaration[*] role setDeclarations
+end
+
+composition xxx_Theorem_verificationExpression between
+	Theorem[*] role xxx_Theorem_verificationExpression_src
+	VerificationExpression[0..1] role verificationExpression
+end
+
+composition xxx_Theorem_evaluationExpression between
+	Theorem[*] role xxx_Theorem_evaluationExpression_src
+	EvaluationExpression[0..1] role evaluationExpression
+end
+
+composition xxx_RangeDefinition_set between
+	RangeDefinition[*] role xxx_RangeDefinition_set_src
+	SetExpression[0..1] role set
+end
+
+composition xxx_VarDeclaration_expr between
+	VarDeclaration[*] role xxx_VarDeclaration_expr_src
+	TerminalSelectionExpression[0..1] role expr
+end
+
+composition xxx_SetDeclaration_elementBinding between
+	SetDeclaration[*] role xxx_SetDeclaration_elementBinding_src
+	ElementBinding[0..1] role elementBinding
+end
+
+composition xxx_SetDeclaration_expr between
+	SetDeclaration[*] role xxx_SetDeclaration_expr_src
+	SelectionExpression[0..1] role expr
+end
+
+composition xxx_ElementBinding_set between
+	ElementBinding[*] role xxx_ElementBinding_set_src
+	SetExpression[0..1] role set
+end
+
+composition xxx_SelectionExpression_e1 between
+	SelectionExpression[*] role xxx_SelectionExpression_e1_src
+	TerminalSelectionExpression[0..1] role e1
+end
+
+composition xxx_SelectionExpression_e2 between
+	SelectionExpression[0..1] role xxx_SelectionExpression_e2_src
+	TerminalSelectionExpression[*] role e2
+end
+
+composition xxx_TerminalSelectionExpression_c between
+	TerminalSelectionExpression[*] role xxx_TerminalSelectionExpression_c_src
+	ComputeExpression[0..1] role c
+end
+
+composition xxx_TerminalSelectionExpression_e between
+	TerminalSelectionExpression[*] role xxx_TerminalSelectionExpression_e_src
+	TerminalGenericExpression[0..1] role e
+end
+
+composition xxx_TerminalSelectionExpression_r between
+	TerminalSelectionExpression[*] role xxx_TerminalSelectionExpression_r_src
+	SelectionRelation[0..1] role r
+end
+
+composition xxx_SelectionRelation_arguments between
+	SelectionRelation[0..1] role xxx_SelectionRelation_arguments_src
+	SelectionRelationParameter[*] role arguments
+end
+
+composition xxx_SelectionRelationParameter_l between
+	SelectionRelationParameter[*] role xxx_SelectionRelationParameter_l_src
+	Literal[0..1] role l
+end
+
+composition xxx_VerificationExpression_e1 between
+	VerificationExpression[*] role xxx_VerificationExpression_e1_src
+	GenericExpression[0..1] role e1
+end
+
+composition xxx_EvaluationExpression_e between
+	EvaluationExpression[*] role xxx_EvaluationExpression_e_src
+	GenericExpression[0..1] role e
+end
+
+composition xxx_GenericExpression_e1 between
+	GenericExpression[*] role xxx_GenericExpression_e1_src
+	TerminalGenericExpression[0..1] role e1
+end
+
+composition xxx_GenericExpression_e2 between
+	GenericExpression[0..1] role xxx_GenericExpression_e2_src
+	TerminalGenericExpression[*] role e2
+end
+
+composition xxx_TerminalGenericExpression_literal between
+	TerminalGenericExpression[*] role xxx_TerminalGenericExpression_literal_src
+	Literal[0..1] role literal
+end
+
+composition xxx_TerminalGenericExpression_fc between
+	TerminalGenericExpression[*] role xxx_TerminalGenericExpression_fc_src
+	VerificationFunctionCall[0..1] role fc
+end
+
+composition xxx_TerminalGenericExpression_te between
+	TerminalGenericExpression[*] role xxx_TerminalGenericExpression_te_src
+	TernaryExpression[0..1] role te
+end
+
+composition xxx_TernaryExpression_conditional between
+	TernaryExpression[*] role xxx_TernaryExpression_conditional_src
+	GenericExpression[0..1] role conditional
+end
+
+composition xxx_TernaryExpression_trueValue between
+	TernaryExpression[*] role xxx_TernaryExpression_trueValue_src
+	GenericExpression[0..1] role trueValue
+end
+
+composition xxx_TernaryExpression_falseValue between
+	TernaryExpression[*] role xxx_TernaryExpression_falseValue_src
+	GenericExpression[0..1] role falseValue
+end
+
+composition xxx_VerificationFunctionCall_arguments between
+	VerificationFunctionCall[0..1] role xxx_VerificationFunctionCall_arguments_src
+	VerificationFunctionParameter[*] role arguments
+end
+
+composition xxx_VerificationFunctionParameter_l between
+	VerificationFunctionParameter[*] role xxx_VerificationFunctionParameter_l_src
+	Literal[0..1] role l
+end
+
+composition xxx_VerificationFunctionParameter_vfi between
+	VerificationFunctionParameter[*] role xxx_VerificationFunctionParameter_vfi_src
+	VerificationFunctionCall[0..1] role vfi
+end
+
+composition xxx_Literal_b between
+	Literal[*] role xxx_Literal_b_src
+	BOOLEAN[0..1] role b
+end
+

@@ -1,0 +1,443 @@
+model taskmodel
+enum LineStyle{
+default
+}
+
+enum LineEndPoint{
+default
+}
+
+enum RelationShip{
+default
+}
+
+enum StateAttribute{
+default
+}
+
+enum StateActionType{
+default
+}
+
+enum Direction{
+default
+}
+
+enum FloatingLiteral{
+default
+}
+
+enum BooleanLiteral{
+default
+}
+
+enum ReferAttribute{
+default
+}
+
+enum StructType{
+default
+}
+
+enum JoinType{
+default
+}
+
+enum ConnectorType{
+default
+}
+
+class ItemElement
+attributes
+	name : String
+	description : String
+	visible : Boolean
+	itemState : Integer
+operations
+	isIncluded():Boolean
+end
+
+class ShapeElement<ItemElement
+attributes
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+	collapsed : Boolean
+	x2 : Integer
+	y2 : Integer
+	width2 : Integer
+	height2 : Integer
+operations
+end
+
+class LinkedElement<ShapeElement
+attributes
+operations
+end
+
+class LineElement<ItemElement
+attributes
+	lineStyle : LineStyle
+	sourceEndPoint : LineEndPoint
+	targetEndPoint : LineEndPoint
+operations
+end
+
+class ConnectionElement<LineElement
+attributes
+	relationship : RelationShip
+	condition : String
+operations
+end
+
+class WorkerElement<ItemElement,BlockElement
+attributes
+operations
+end
+
+class BlockElement
+attributes
+	statements : String
+operations
+end
+
+class TaskElement<ItemElement,BlockElement
+attributes
+operations
+end
+
+class StateElement<ItemElement,BlockElement
+attributes
+	attribute : StateAttribute
+operations
+end
+
+class ActionElement<ItemElement
+attributes
+operations
+end
+
+class StateAction<ItemElement,BlockElement
+attributes
+	stateActionType : StateActionType
+operations
+end
+
+class Symbol<ItemElement
+attributes
+	direction : Direction
+	type : String
+	value : String
+operations
+end
+
+class Constant<ItemElement
+attributes
+	type : String
+	initValue : String
+operations
+end
+
+class Function<ItemElement
+attributes
+	type : String
+operations
+end
+
+class ModelElement<ItemElement
+attributes
+operations
+end
+
+class ModelDiagram<ItemElement
+attributes
+	script : String
+operations
+end
+
+class IncludedElement<ItemElement
+attributes
+	includePath : String
+operations
+end
+
+class Parameter<ItemElement
+attributes
+	type : String
+	value : String
+operations
+end
+
+class EnumElement<ItemElement
+attributes
+operations
+end
+
+class EnumItemElement<ItemElement
+attributes
+	value : Integer
+operations
+end
+
+class ReferElement<LinkedElement
+attributes
+	attribute : ReferAttribute
+	path : String
+operations
+end
+
+class SubDiagram<ItemElement
+attributes
+operations
+end
+
+class ConnectorElement<ItemElement,BlockElement
+attributes
+	joinType : JoinType
+	conType : ConnectorType
+operations
+end
+
+class WithElement<ItemElement,BlockElement
+attributes
+	cycle : Integer
+operations
+end
+
+class StructBlockElement<ItemElement,BlockElement
+attributes
+	structType : StructType
+operations
+end
+
+class ExpandTransElement<ItemElement
+attributes
+operations
+end
+
+association xxx_ItemElement_parent between
+	ItemElement[*] role xxx_ItemElement_parent_src
+	ItemElement[0..1] role parent
+end
+
+composition xxx_ItemElement_subDiagram between
+	ItemElement[*] role xxx_ItemElement_subDiagram_src
+	SubDiagram[0..1] role subDiagram
+end
+
+association xxx_ItemElement_references between
+	ItemElement[0..1] role xxx_ItemElement_references_src
+	ReferElement[*] role references
+end
+
+composition xxx_LinkedElement_sourceConnections between
+	LinkedElement[0..1] role xxx_LinkedElement_sourceConnections_src
+	ConnectionElement[*] role sourceConnections
+end
+
+association xxx_LinkedElement_targetConnections between
+	LinkedElement[0..1] role xxx_LinkedElement_targetConnections_src
+	ConnectionElement[*] role targetConnections
+end
+
+association xxx_ConnectionElement_source between
+	ConnectionElement[*] role xxx_ConnectionElement_source_src
+	LinkedElement[0..1] role source
+end
+
+association xxx_ConnectionElement_target between
+	ConnectionElement[*] role xxx_ConnectionElement_target_src
+	LinkedElement[0..1] role target
+end
+
+association xxx_ConnectionElement_source2 between
+	ConnectionElement[*] role xxx_ConnectionElement_source2_src
+	LinkedElement[0..1] role source2
+end
+
+association xxx_ConnectionElement_target2 between
+	ConnectionElement[*] role xxx_ConnectionElement_target2_src
+	LinkedElement[0..1] role target2
+end
+
+association xxx_WorkerElement_initialTask between
+	WorkerElement[*] role xxx_WorkerElement_initialTask_src
+	ItemElement[0..1] role initialTask
+end
+
+composition xxx_WorkerElement_items between
+	WorkerElement[0..1] role xxx_WorkerElement_items_src
+	ItemElement[*] role items
+end
+
+composition xxx_WorkerElement_initialize between
+	WorkerElement[*] role xxx_WorkerElement_initialize_src
+	StructBlockElement[0..1] role initialize
+end
+
+composition xxx_WorkerElement_finalize between
+	WorkerElement[*] role xxx_WorkerElement_finalize_src
+	StructBlockElement[0..1] role finalize
+end
+
+composition xxx_WorkerElement_run between
+	WorkerElement[*] role xxx_WorkerElement_run_src
+	StructBlockElement[0..1] role run
+end
+
+composition xxx_TaskElement_params between
+	TaskElement[0..1] role xxx_TaskElement_params_src
+	Parameter[*] role params
+end
+
+composition xxx_TaskElement_states_ between
+	TaskElement[0..1] role xxx_TaskElement_states__src
+	StateElement[*] role states_
+end
+
+association xxx_TaskElement_initialState between
+	TaskElement[*] role xxx_TaskElement_initialState_src
+	StateElement[0..1] role initialState
+end
+
+composition xxx_TaskElement_construct between
+	TaskElement[*] role xxx_TaskElement_construct_src
+	StructBlockElement[0..1] role construct
+end
+
+composition xxx_TaskElement_destruct between
+	TaskElement[*] role xxx_TaskElement_destruct_src
+	StructBlockElement[0..1] role destruct
+end
+
+composition xxx_TaskElement_bifurcates between
+	TaskElement[0..1] role xxx_TaskElement_bifurcates_src
+	ExpandTransElement[*] role bifurcates
+end
+
+composition xxx_StateElement_entry between
+	StateElement[*] role xxx_StateElement_entry_src
+	StateAction[0..1] role entry
+end
+
+composition xxx_StateElement_stay between
+	StateElement[*] role xxx_StateElement_stay_src
+	StateAction[1] role stay
+end
+
+composition xxx_StateElement_exit between
+	StateElement[*] role xxx_StateElement_exit_src
+	StateAction[0..1] role exit
+end
+
+composition xxx_StateElement_bifurcates between
+	StateElement[0..1] role xxx_StateElement_bifurcates_src
+	ExpandTransElement[*] role bifurcates
+end
+
+composition xxx_ActionElement_params between
+	ActionElement[0..1] role xxx_ActionElement_params_src
+	Parameter[*] role params
+end
+
+composition xxx_Function_params between
+	Function[0..1] role xxx_Function_params_src
+	Parameter[*] role params
+end
+
+composition xxx_ModelElement_symbols between
+	ModelElement[0..1] role xxx_ModelElement_symbols_src
+	Symbol[*] role symbols
+end
+
+composition xxx_ModelElement_constants between
+	ModelElement[0..1] role xxx_ModelElement_constants_src
+	Constant[*] role constants
+end
+
+composition xxx_ModelElement_functions between
+	ModelElement[0..1] role xxx_ModelElement_functions_src
+	Function[*] role functions
+end
+
+composition xxx_ModelElement_models between
+	ModelElement[0..1] role xxx_ModelElement_models_src
+	ModelElement[*] role models
+end
+
+composition xxx_ModelDiagram_items between
+	ModelDiagram[0..1] role xxx_ModelDiagram_items_src
+	ItemElement[*] role items
+end
+
+composition xxx_ModelDiagram_includeItems between
+	ModelDiagram[0..1] role xxx_ModelDiagram_includeItems_src
+	IncludedElement[*] role includeItems
+end
+
+composition xxx_IncludedElement_items between
+	IncludedElement[0..1] role xxx_IncludedElement_items_src
+	ItemElement[*] role items
+end
+
+composition xxx_EnumElement_enumItem between
+	EnumElement[0..1] role xxx_EnumElement_enumItem_src
+	EnumItemElement[*] role enumItem
+end
+
+association xxx_ReferElement_realModel between
+	ReferElement[*] role xxx_ReferElement_realModel_src
+	ItemElement[0..1] role realModel
+end
+
+composition xxx_ReferElement_items between
+	ReferElement[0..1] role xxx_ReferElement_items_src
+	ItemElement[*] role items
+end
+
+composition xxx_SubDiagram_items between
+	SubDiagram[0..1] role xxx_SubDiagram_items_src
+	ReferElement[*] role items
+end
+
+composition xxx_ConnectorElement_params between
+	ConnectorElement[0..1] role xxx_ConnectorElement_params_src
+	Parameter[*] role params
+end
+
+composition xxx_ConnectorElement_withs between
+	ConnectorElement[0..1] role xxx_ConnectorElement_withs_src
+	WithElement[*] role withs
+end
+
+composition xxx_ConnectorElement_construct between
+	ConnectorElement[*] role xxx_ConnectorElement_construct_src
+	StructBlockElement[0..1] role construct
+end
+
+composition xxx_ConnectorElement_destruct between
+	ConnectorElement[*] role xxx_ConnectorElement_destruct_src
+	StructBlockElement[0..1] role destruct
+end
+
+association xxx_ConnectorElement_exercise between
+	ConnectorElement[*] role xxx_ConnectorElement_exercise_src
+	StructBlockElement[0..1] role exercise
+end
+
+association xxx_ExpandTransElement_source between
+	ExpandTransElement[*] role xxx_ExpandTransElement_source_src
+	LinkedElement[0..1] role source
+end
+
+association xxx_ExpandTransElement_expand between
+	ExpandTransElement[*] role xxx_ExpandTransElement_expand_src
+	LinkedElement[0..1] role expand
+end
+
+association xxx_ExpandTransElement_trans between
+	ExpandTransElement[*] role xxx_ExpandTransElement_trans_src
+	LinkedElement[0..1] role trans
+end
+

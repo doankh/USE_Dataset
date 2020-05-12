@@ -1,0 +1,163 @@
+model Mantis
+enum RelationshipType{
+	rt_related_to,
+	rt_parent_of,
+	rt_child_of,
+	rt_duplicate_of,
+	rt_has_duplicate
+}
+
+class MantisRoot
+attributes
+operations
+end
+
+abstract class IdentifiedElt
+attributes
+	id : Integer
+operations
+end
+
+abstract class PrivateElt
+attributes
+	private : Boolean
+operations
+end
+
+class Issue<PrivateElt
+attributes
+	category : String
+	summary : String
+	description : String
+	version : String
+	build : String
+	platform : String
+	os : String
+	osVersion : String
+	stepsToReproduce : String
+	additionalInfo : String
+	dateSubmitted : Integer
+	fixedInVersion : String
+	lastUpdate : Integer
+operations
+end
+
+class ValueWithId<IdentifiedElt
+attributes
+	value : String
+operations
+end
+
+class Person<ValueWithId
+attributes
+	login : String
+operations
+end
+
+class Relationship<IdentifiedElt
+attributes
+	type : RelationshipType
+operations
+end
+
+abstract class TimeStampedElt
+attributes
+	timestamp : Integer
+operations
+end
+
+class Note<PrivateElt
+attributes
+	text : String
+operations
+end
+
+class Attachment<TimeStampedElt
+attributes
+	filename : String
+	size : Integer
+	contentType : String
+	downloadUrl : String
+operations
+end
+
+composition xxx_MantisRoot_issues between
+	MantisRoot[0..1] role xxx_MantisRoot_issues_src
+	Issue[*] role issues
+end
+
+association xxx_Issue_i_mantisRoot between
+	Issue[*] role xxx_Issue_i_mantisRoot_src
+	MantisRoot[1] role i_mantisRoot
+end
+
+composition xxx_Issue_project between
+	Issue[*] role xxx_Issue_project_src
+	ValueWithId[1] role project
+end
+
+composition xxx_Issue_priority between
+	Issue[*] role xxx_Issue_priority_src
+	ValueWithId[1] role priority
+end
+
+composition xxx_Issue_severity between
+	Issue[*] role xxx_Issue_severity_src
+	ValueWithId[1] role severity
+end
+
+composition xxx_Issue_status between
+	Issue[*] role xxx_Issue_status_src
+	ValueWithId[1] role status
+end
+
+composition xxx_Issue_reporter between
+	Issue[*] role xxx_Issue_reporter_src
+	Person[1] role reporter
+end
+
+composition xxx_Issue_reproducibility between
+	Issue[*] role xxx_Issue_reproducibility_src
+	ValueWithId[1] role reproducibility
+end
+
+composition xxx_Issue_assignedTo between
+	Issue[*] role xxx_Issue_assignedTo_src
+	Person[0..1] role assignedTo
+end
+
+composition xxx_Issue_projection between
+	Issue[*] role xxx_Issue_projection_src
+	ValueWithId[0..1] role projection
+end
+
+composition xxx_Issue_eta between
+	Issue[*] role xxx_Issue_eta_src
+	ValueWithId[0..1] role eta
+end
+
+composition xxx_Issue_resolution between
+	Issue[*] role xxx_Issue_resolution_src
+	ValueWithId[0..1] role resolution
+end
+
+composition xxx_Issue_attachments between
+	Issue[0..1] role xxx_Issue_attachments_src
+	Attachment[*] role attachments
+end
+
+composition xxx_Issue_relationships between
+	Issue[0..1] role xxx_Issue_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_Issue_notes between
+	Issue[0..1] role xxx_Issue_notes_src
+	Note[*] role notes
+end
+
+composition xxx_Note_author between
+	Note[*] role xxx_Note_author_src
+	Person[1] role author
+end
+

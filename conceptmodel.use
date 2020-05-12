@@ -1,0 +1,55 @@
+model conceptmodel
+enum AppointmentStatus{
+default
+}
+
+class User
+attributes
+operations
+end
+
+class Calendar
+attributes
+operations
+end
+
+class Appointment
+attributes
+operations
+end
+
+class AppointmentType
+attributes
+operations
+end
+
+class System
+attributes
+operations
+end
+
+association xxx_User_calendar between
+	User[*] role xxx_User_calendar_src
+	Calendar[1] role calendar
+end
+
+association xxx_Calendar_appointment between
+	Calendar[0..1] role xxx_Calendar_appointment_src
+	Appointment[*] role appointment
+end
+
+association xxx_Appointment_type between
+	Appointment[*] role xxx_Appointment_type_src
+	AppointmentType[1] role type
+end
+
+association xxx_System_users between
+	System[0..1] role xxx_System_users_src
+	User[*] role users
+end
+
+association xxx_System_calendars between
+	System[0..1] role xxx_System_calendars_src
+	Calendar[*] role calendars
+end
+

@@ -1,0 +1,64 @@
+model vogella
+class CodeExample
+attributes
+	name : String
+	sort : Integer
+operations
+end
+
+class Article
+attributes
+	name : String
+	sort : Integer
+	rssRelevant : Boolean
+operations
+end
+
+class Webpage
+attributes
+	header : String
+	name : String
+	title : String
+	description : String
+	keywords : String
+	rssRelevant : Boolean
+operations
+end
+
+class MyWeb
+attributes
+	name : String
+	title : String
+	description : String
+	keywords : String
+operations
+end
+
+class Category
+attributes
+	name : String
+	description : String
+	sort : Integer
+operations
+end
+
+composition xxx_Article_codeExamples between
+	Article[0..1] role xxx_Article_codeExamples_src
+	CodeExample[*] role codeExamples
+end
+
+composition xxx_Webpage_categories between
+	Webpage[0..1] role xxx_Webpage_categories_src
+	Category[*] role categories
+end
+
+composition xxx_MyWeb_pages between
+	MyWeb[0..1] role xxx_MyWeb_pages_src
+	Webpage[*] role pages
+end
+
+composition xxx_Category_articles between
+	Category[0..1] role xxx_Category_articles_src
+	Article[*] role articles
+end
+

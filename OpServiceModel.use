@@ -1,0 +1,70 @@
+model opServiceModel
+enum OpArgType{
+default
+}
+
+class Model
+attributes
+	packageName : String
+operations
+end
+
+class ServiceBlock
+attributes
+	name : String
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class OperationArg
+attributes
+	type : OpArgType
+	name : String
+operations
+end
+
+class UniqueClause
+attributes
+operations
+end
+
+class NotUnique<UniqueClause
+attributes
+operations
+end
+
+class UniqueDeclaration<UniqueClause
+attributes
+operations
+end
+
+composition xxx_Model_service between
+	Model[*] role xxx_Model_service_src
+	ServiceBlock[0..1] role service
+end
+
+composition xxx_ServiceBlock_ops between
+	ServiceBlock[0..1] role xxx_ServiceBlock_ops_src
+	Operation[*] role ops
+end
+
+composition xxx_Operation_args between
+	Operation[0..1] role xxx_Operation_args_src
+	OperationArg[*] role args
+end
+
+composition xxx_Operation_uniqueClause between
+	Operation[*] role xxx_Operation_uniqueClause_src
+	UniqueClause[0..1] role uniqueClause
+end
+
+association xxx_UniqueDeclaration_args between
+	UniqueDeclaration[0..1] role xxx_UniqueDeclaration_args_src
+	OperationArg[*] role args
+end
+

@@ -1,0 +1,856 @@
+model store
+enum UserType{
+default
+}
+
+enum SIPrefix{
+default
+}
+
+enum ObjectState{
+default
+}
+
+enum MergeIdentifier{
+default
+}
+
+enum CompareIdentifier{
+default
+}
+
+enum CompareType{
+default
+}
+
+enum ActionState{
+default
+}
+
+enum ServerState{
+default
+}
+
+enum CheckinStatus{
+default
+}
+
+enum ExtendedDataSchemaType{
+default
+}
+
+class Project
+attributes
+	id : Integer
+	name : String
+	state : ObjectState
+	createdDate : String
+	description : String
+	exportLengthMeasurePrefix : SIPrefix
+operations
+end
+
+class User
+attributes
+	name : String
+	password : String
+	state : ObjectState
+	createdOn : String
+	userType : UserType
+	username : String
+	lastSeen : String
+	validationToken : String
+	validationTokenCreated : String
+	notificationUrl : String
+operations
+end
+
+class Clash
+attributes
+	name1 : String
+	name2 : String
+	type1 : String
+	type2 : String
+operations
+end
+
+class EidClash<Clash
+attributes
+	eid1 : Integer
+	eid2 : Integer
+operations
+end
+
+class GuidClash<Clash
+attributes
+	guid1 : String
+	guid2 : String
+operations
+end
+
+class ClashDetectionSettings
+attributes
+	enabled : String
+	margin : String
+	ignoredClasses : String
+operations
+end
+
+class Revision
+attributes
+	id : Integer
+	date : String
+	comment : String
+	size : Integer
+	tag : String
+	lastError : String
+	bmi : Integer
+	nrClashes : Integer
+	laid : Integer
+operations
+end
+
+class ConcreteRevision
+attributes
+	id : Integer
+	checksum : String
+	size : Integer
+	date : String
+	lastError : String
+operations
+end
+
+class GeoTag
+attributes
+	enabled : String
+	x : String
+	y : String
+	z : String
+	epsg : Integer
+	directionAngle : String
+operations
+end
+
+class Checkout
+attributes
+	date : String
+	active : String
+operations
+end
+
+class Settings
+attributes
+	showVersionUpgradeAvailable : String
+	sendConfirmationEmailAfterRegistration : Boolean
+	useCaching : String
+	allowSelfRegistration : String
+	autoTestClashes : String
+	intelligentMerging : String
+	allowUsersToCreateTopLevelProjects : Boolean
+	checkinMergingEnabled : String
+	registrationAddition : String
+	smtpServer : String
+	emailSenderAddress : String
+	customLogoAddress : String
+	siteAddress : String
+	hideUserListForNonAdmin : String
+	protocolBuffersPort : Integer
+	headerAddition : String
+	footerAddition : String
+	mergeIdentifier : MergeIdentifier
+	cacheOutputFiles : String
+operations
+end
+
+class Serializer
+attributes
+	name : String
+	description : String
+	extension : String
+	contentType : String
+	className : String
+	enabled : String
+	defaultSerializer : String
+operations
+end
+
+class ObjectIDM
+attributes
+	name : String
+	className : String
+	enabled : String
+operations
+end
+
+class IfcEngine
+attributes
+	name : String
+	active : String
+	className : String
+	enabled : String
+operations
+end
+
+class Plugin
+attributes
+	name : String
+	enabled : String
+operations
+end
+
+class Deserializer
+attributes
+	name : String
+	description : String
+	className : String
+	enabled : String
+	defaultDeserializer : String
+operations
+end
+
+class CheckinResult
+attributes
+	progress : Integer
+	lastError : String
+	status : CheckinStatus
+operations
+end
+
+class DownloadResult
+attributes
+	projectName : String
+	revisionNr : Integer
+	file : String
+operations
+end
+
+class CheckoutResult<DownloadResult
+attributes
+operations
+end
+
+class DataValue
+attributes
+	fieldName : String
+operations
+end
+
+class DataObject
+attributes
+	type : String
+	guid : String
+	name : String
+operations
+end
+
+class UserSession
+attributes
+	username : String
+	name : String
+	type : UserType
+	remoteAddress : String
+	activeSince : String
+	lastActive : String
+	accessMethod : String
+operations
+end
+
+class Migration
+attributes
+	number : Integer
+	description : String
+	executed : String
+operations
+end
+
+class ReferenceDataValue<DataValue
+attributes
+	typeName : String
+	guid : String
+operations
+end
+
+class ListDataValue<DataValue
+attributes
+operations
+end
+
+class SimpleDataValue<DataValue
+attributes
+	stringValue : String
+operations
+end
+
+class DatabaseInformationItem
+attributes
+	key : String
+	value : String
+operations
+end
+
+class DatabaseInformationCategory
+attributes
+	title : String
+operations
+end
+
+class DatabaseInformation
+attributes
+	numberOfProjects : Integer
+	numberOfUsers : Integer
+	numberOfRevisions : Integer
+	numberOfCheckouts : Integer
+	databaseSizeInBytes : Integer
+	type : String
+	created : String
+	location : String
+	schemaVersion : Integer
+operations
+end
+
+class SerializerPluginDescriptor
+attributes
+	pluginClassName : String
+	defaultName : String
+	defaultExtension : String
+	defaultContentType : String
+operations
+end
+
+class DeserializerPluginDescriptor
+attributes
+	pluginClassName : String
+	defaultName : String
+operations
+end
+
+class RevisionSummaryType
+attributes
+	name : String
+	count : Integer
+operations
+end
+
+class RevisionSummaryContainer
+attributes
+	name : String
+operations
+end
+
+class RevisionSummary
+attributes
+operations
+end
+
+class PluginDescriptor
+attributes
+	name : String
+	description : String
+	location : String
+	enabled : String
+operations
+end
+
+class LongAction
+attributes
+	identification : String
+	start : String
+	username : String
+	name : String
+operations
+end
+
+class LongCheckinAction<LongAction
+attributes
+operations
+end
+
+class ObjectIDMPluginDescriptor
+attributes
+	className : String
+operations
+end
+
+class CompareItem
+attributes
+operations
+end
+
+class ObjectAdded<CompareItem
+attributes
+operations
+end
+
+class ObjectRemoved<CompareItem
+attributes
+operations
+end
+
+class ObjectModified<CompareItem
+attributes
+	fieldName : String
+	oldValue : String
+	newValue : String
+operations
+end
+
+class CompareContainer
+attributes
+	type : String
+operations
+end
+
+class CompareResult
+attributes
+operations
+end
+
+class LongActionState
+attributes
+	progress : Integer
+	state : ActionState
+operations
+end
+
+class Notification
+attributes
+operations
+end
+
+class NewProjectNotification<Notification
+attributes
+operations
+end
+
+class NewRevisionNotification<Notification
+attributes
+operations
+end
+
+class CompileResult
+attributes
+	compileOke : String
+	warnings : String
+	errors : String
+operations
+end
+
+class RunResult
+attributes
+	runOke : String
+	warnings : String
+	errors : String
+	output : String
+operations
+end
+
+class ServerInfo
+attributes
+	serverState : ServerState
+	errorMessage : String
+operations
+end
+
+class Version
+attributes
+	major : Integer
+	minor : Integer
+	revision : Integer
+	date : String
+	downloadUrl : String
+	supportUrl : String
+	supportEmail : String
+operations
+end
+
+class IfcEnginePluginDescriptor
+attributes
+	pluginClassName : String
+	defaultName : String
+operations
+end
+
+class ExtendedDataSchema
+attributes
+	name : String
+	url : String
+	data : String
+	validate : Boolean
+	type : ExtendedDataSchemaType
+operations
+end
+
+class ExtendedData
+attributes
+	url : String
+	data : String
+	title : String
+	added : String
+operations
+end
+
+association xxx_Project_hasAuthorizedUsers between
+	Project[0..1] role xxx_Project_hasAuthorizedUsers_src
+	User[*] role hasAuthorizedUsers
+end
+
+association xxx_Project_concreteRevisions between
+	Project[0..1] role xxx_Project_concreteRevisions_src
+	ConcreteRevision[*] role concreteRevisions
+end
+
+association xxx_Project_revisions between
+	Project[0..1] role xxx_Project_revisions_src
+	Revision[*] role revisions
+end
+
+association xxx_Project_lastConcreteRevision between
+	Project[*] role xxx_Project_lastConcreteRevision_src
+	ConcreteRevision[0..1] role lastConcreteRevision
+end
+
+association xxx_Project_lastRevision between
+	Project[*] role xxx_Project_lastRevision_src
+	Revision[0..1] role lastRevision
+end
+
+association xxx_Project_checkouts between
+	Project[0..1] role xxx_Project_checkouts_src
+	Checkout[*] role checkouts
+end
+
+association xxx_Project_createdBy between
+	Project[*] role xxx_Project_createdBy_src
+	User[0..1] role createdBy
+end
+
+association xxx_Project_geoTag between
+	Project[*] role xxx_Project_geoTag_src
+	GeoTag[0..1] role geoTag
+end
+
+association xxx_Project_subProjects between
+	Project[0..1] role xxx_Project_subProjects_src
+	Project[*] role subProjects
+end
+
+association xxx_Project_parent between
+	Project[*] role xxx_Project_parent_src
+	Project[0..1] role parent
+end
+
+association xxx_Project_clashDetectionSettings between
+	Project[*] role xxx_Project_clashDetectionSettings_src
+	ClashDetectionSettings[0..1] role clashDetectionSettings
+end
+
+association xxx_Project_extendedData between
+	Project[0..1] role xxx_Project_extendedData_src
+	ExtendedData[*] role extendedData
+end
+
+association xxx_User_hasRightsOn between
+	User[0..1] role xxx_User_hasRightsOn_src
+	Project[*] role hasRightsOn
+end
+
+association xxx_User_revisions between
+	User[0..1] role xxx_User_revisions_src
+	Revision[*] role revisions
+end
+
+association xxx_User_createdBy between
+	User[*] role xxx_User_createdBy_src
+	User[0..1] role createdBy
+end
+
+association xxx_User_schemas between
+	User[0..1] role xxx_User_schemas_src
+	ExtendedDataSchema[*] role schemas
+end
+
+association xxx_User_extendedData between
+	User[0..1] role xxx_User_extendedData_src
+	ExtendedData[*] role extendedData
+end
+
+association xxx_Clash_revision1 between
+	Clash[*] role xxx_Clash_revision1_src
+	Revision[0..1] role revision1
+end
+
+association xxx_Clash_revision2 between
+	Clash[*] role xxx_Clash_revision2_src
+	Revision[0..1] role revision2
+end
+
+association xxx_ClashDetectionSettings_projects between
+	ClashDetectionSettings[0..1] role xxx_ClashDetectionSettings_projects_src
+	Project[*] role projects
+end
+
+association xxx_ClashDetectionSettings_revisions between
+	ClashDetectionSettings[0..1] role xxx_ClashDetectionSettings_revisions_src
+	Revision[*] role revisions
+end
+
+association xxx_Revision_user between
+	Revision[*] role xxx_Revision_user_src
+	User[0..1] role user
+end
+
+association xxx_Revision_concreteRevisions between
+	Revision[0..1] role xxx_Revision_concreteRevisions_src
+	ConcreteRevision[*] role concreteRevisions
+end
+
+association xxx_Revision_lastConcreteRevision between
+	Revision[*] role xxx_Revision_lastConcreteRevision_src
+	ConcreteRevision[0..1] role lastConcreteRevision
+end
+
+association xxx_Revision_checkouts between
+	Revision[0..1] role xxx_Revision_checkouts_src
+	Checkout[*] role checkouts
+end
+
+association xxx_Revision_project between
+	Revision[*] role xxx_Revision_project_src
+	Project[0..1] role project
+end
+
+association xxx_Revision_lastClashes between
+	Revision[0..1] role xxx_Revision_lastClashes_src
+	Clash[*] role lastClashes
+end
+
+association xxx_Revision_extendedData between
+	Revision[0..1] role xxx_Revision_extendedData_src
+	ExtendedData[*] role extendedData
+end
+
+association xxx_ConcreteRevision_project between
+	ConcreteRevision[*] role xxx_ConcreteRevision_project_src
+	Project[0..1] role project
+end
+
+association xxx_ConcreteRevision_revisions between
+	ConcreteRevision[0..1] role xxx_ConcreteRevision_revisions_src
+	Revision[*] role revisions
+end
+
+association xxx_ConcreteRevision_user between
+	ConcreteRevision[*] role xxx_ConcreteRevision_user_src
+	User[0..1] role user
+end
+
+association xxx_GeoTag_projects between
+	GeoTag[0..1] role xxx_GeoTag_projects_src
+	Project[*] role projects
+end
+
+association xxx_Checkout_user between
+	Checkout[*] role xxx_Checkout_user_src
+	User[0..1] role user
+end
+
+association xxx_Checkout_revision between
+	Checkout[*] role xxx_Checkout_revision_src
+	Revision[0..1] role revision
+end
+
+association xxx_Checkout_project between
+	Checkout[*] role xxx_Checkout_project_src
+	Project[0..1] role project
+end
+
+association xxx_Checkout_checkin between
+	Checkout[*] role xxx_Checkout_checkin_src
+	Revision[0..1] role checkin
+end
+
+association xxx_Settings_serializers between
+	Settings[0..1] role xxx_Settings_serializers_src
+	Serializer[*] role serializers
+end
+
+association xxx_Settings_objectIDMs between
+	Settings[0..1] role xxx_Settings_objectIDMs_src
+	ObjectIDM[*] role objectIDMs
+end
+
+association xxx_Settings_ifcEngines between
+	Settings[0..1] role xxx_Settings_ifcEngines_src
+	IfcEngine[*] role ifcEngines
+end
+
+association xxx_Settings_plugins between
+	Settings[0..1] role xxx_Settings_plugins_src
+	Plugin[*] role plugins
+end
+
+association xxx_Settings_deserializers between
+	Settings[0..1] role xxx_Settings_deserializers_src
+	Deserializer[*] role deserializers
+end
+
+association xxx_Settings_schemas between
+	Settings[0..1] role xxx_Settings_schemas_src
+	ExtendedDataSchema[*] role schemas
+end
+
+association xxx_Serializer_objectIDM between
+	Serializer[*] role xxx_Serializer_objectIDM_src
+	ObjectIDM[0..1] role objectIDM
+end
+
+association xxx_Serializer_settings between
+	Serializer[*] role xxx_Serializer_settings_src
+	Settings[0..1] role settings
+end
+
+association xxx_Serializer_ifcEngine between
+	Serializer[*] role xxx_Serializer_ifcEngine_src
+	IfcEngine[0..1] role ifcEngine
+end
+
+association xxx_ObjectIDM_serializers between
+	ObjectIDM[0..1] role xxx_ObjectIDM_serializers_src
+	Serializer[*] role serializers
+end
+
+association xxx_ObjectIDM_settings between
+	ObjectIDM[*] role xxx_ObjectIDM_settings_src
+	Settings[0..1] role settings
+end
+
+association xxx_IfcEngine_serializers between
+	IfcEngine[0..1] role xxx_IfcEngine_serializers_src
+	Serializer[*] role serializers
+end
+
+association xxx_IfcEngine_settings between
+	IfcEngine[*] role xxx_IfcEngine_settings_src
+	Settings[0..1] role settings
+end
+
+association xxx_Plugin_settings between
+	Plugin[*] role xxx_Plugin_settings_src
+	Settings[0..1] role settings
+end
+
+association xxx_Deserializer_settings between
+	Deserializer[*] role xxx_Deserializer_settings_src
+	Settings[0..1] role settings
+end
+
+association xxx_CheckinResult_revision between
+	CheckinResult[*] role xxx_CheckinResult_revision_src
+	Revision[0..1] role revision
+end
+
+association xxx_CheckinResult_project between
+	CheckinResult[*] role xxx_CheckinResult_project_src
+	Project[0..1] role project
+end
+
+association xxx_DataObject_values between
+	DataObject[0..1] role xxx_DataObject_values_src
+	DataValue[*] role values
+end
+
+association xxx_UserSession_user between
+	UserSession[*] role xxx_UserSession_user_src
+	User[0..1] role user
+end
+
+association xxx_ListDataValue_values between
+	ListDataValue[0..1] role xxx_ListDataValue_values_src
+	DataValue[*] role values
+end
+
+association xxx_DatabaseInformationCategory_items between
+	DatabaseInformationCategory[0..1] role xxx_DatabaseInformationCategory_items_src
+	DatabaseInformationItem[*] role items
+end
+
+association xxx_DatabaseInformation_categories between
+	DatabaseInformation[0..1] role xxx_DatabaseInformation_categories_src
+	DatabaseInformationCategory[*] role categories
+end
+
+association xxx_RevisionSummaryContainer_types between
+	RevisionSummaryContainer[0..1] role xxx_RevisionSummaryContainer_types_src
+	RevisionSummaryType[*] role types
+end
+
+association xxx_RevisionSummary_list between
+	RevisionSummary[0..1] role xxx_RevisionSummary_list_src
+	RevisionSummaryContainer[*] role list
+end
+
+association xxx_LongAction_user between
+	LongAction[*] role xxx_LongAction_user_src
+	User[0..1] role user
+end
+
+association xxx_LongCheckinAction_revisions between
+	LongCheckinAction[0..1] role xxx_LongCheckinAction_revisions_src
+	Revision[*] role revisions
+end
+
+association xxx_CompareItem_dataObject between
+	CompareItem[*] role xxx_CompareItem_dataObject_src
+	DataObject[0..1] role dataObject
+end
+
+association xxx_CompareContainer_items between
+	CompareContainer[0..1] role xxx_CompareContainer_items_src
+	CompareItem[*] role items
+end
+
+association xxx_CompareResult_items between
+	CompareResult[0..1] role xxx_CompareResult_items_src
+	CompareContainer[*] role items
+end
+
+association xxx_NewProjectNotification_project between
+	NewProjectNotification[*] role xxx_NewProjectNotification_project_src
+	Project[0..1] role project
+end
+
+association xxx_NewRevisionNotification_revision between
+	NewRevisionNotification[*] role xxx_NewRevisionNotification_revision_src
+	Revision[0..1] role revision
+end
+
+association xxx_NewRevisionNotification_project between
+	NewRevisionNotification[*] role xxx_NewRevisionNotification_project_src
+	Project[0..1] role project
+end
+
+association xxx_ExtendedDataSchema_settings between
+	ExtendedDataSchema[*] role xxx_ExtendedDataSchema_settings_src
+	Settings[0..1] role settings
+end
+
+association xxx_ExtendedDataSchema_users between
+	ExtendedDataSchema[0..1] role xxx_ExtendedDataSchema_users_src
+	User[*] role users
+end
+
+association xxx_ExtendedDataSchema_extendedData between
+	ExtendedDataSchema[0..1] role xxx_ExtendedDataSchema_extendedData_src
+	ExtendedData[*] role extendedData
+end
+
+association xxx_ExtendedData_user between
+	ExtendedData[*] role xxx_ExtendedData_user_src
+	User[0..1] role user
+end
+
+association xxx_ExtendedData_schema between
+	ExtendedData[*] role xxx_ExtendedData_schema_src
+	ExtendedDataSchema[0..1] role schema
+end
+

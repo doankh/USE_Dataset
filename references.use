@@ -1,0 +1,339 @@
+model model_
+enum TypeKind{
+default
+}
+
+enum ParameterKind{
+default
+}
+
+enum Visibility{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+abstract class Element<NamedElement
+attributes
+	deprecated : Boolean
+	description : String
+	visible : Boolean
+	hideAllowed : Boolean
+operations
+	getAttribute(name : String):String
+	setAttribute(name : String,value : String)
+end
+
+class Type<Element
+attributes
+	kind : TypeKind
+	instantiable : Boolean
+	inheritConstructors : Boolean
+	inheritStaticMembers : Boolean
+	metaType : String
+operations
+	isProxy():Boolean
+end
+
+class TypeAlias
+attributes
+	source : String
+operations
+end
+
+abstract class Member<Element,TypedElement
+attributes
+	static : Boolean
+	visibility : Visibility
+operations
+end
+
+class Method<Member
+attributes
+	abstract_ : Boolean
+operations
+	getParameter(name : String):Parameter
+	getParameterFor(position : Integer):Parameter
+end
+
+class Parameter<NamedElement,TypedElement
+attributes
+	kind : ParameterKind
+operations
+end
+
+class Constructor<Method
+attributes
+operations
+end
+
+class Property<Member
+attributes
+	readOnly : Boolean
+operations
+end
+
+class AttributeEntry
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class JSType
+attributes
+operations
+	getName():String
+	toRType(typeSystem : String):String
+end
+
+class FunctionType<JSType
+attributes
+operations
+end
+
+class SimpleType<JSType
+attributes
+operations
+end
+
+class ArrayType<JSType
+attributes
+operations
+end
+
+class AnyType<JSType
+attributes
+operations
+end
+
+class UnionType<JSType
+attributes
+operations
+end
+
+class ParameterizedType<SimpleType
+attributes
+operations
+	getRawName():String
+end
+
+class MapType<JSType
+attributes
+operations
+end
+
+class RecordType<JSType
+attributes
+	typeName : String
+operations
+end
+
+abstract class RecordMember<Member
+attributes
+	optional : Boolean
+operations
+end
+
+class RecordProperty<Property,RecordMember
+attributes
+operations
+end
+
+class ClassType<JSType
+attributes
+operations
+	getRawName():String
+end
+
+class UndefinedType<JSType
+attributes
+operations
+end
+
+class TypeVariable<NamedElement
+attributes
+operations
+end
+
+class GenericType<Type
+attributes
+operations
+end
+
+class TypeVariableReference<JSType
+attributes
+operations
+end
+
+class RType<JSType
+attributes
+	runtimeType : String
+operations
+end
+
+class GenericMethod<Method
+attributes
+operations
+end
+
+class TypeLiteral
+attributes
+	name : String
+operations
+end
+
+class TypeVariableClassType<JSType
+attributes
+operations
+end
+
+composition xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	JSType[0..1] role type
+end
+
+association xxx_TypedElement_directType between
+	TypedElement[*] role xxx_TypedElement_directType_src
+	Type[0..1] role directType
+end
+
+composition xxx_Element_attributes_ between
+	Element[0..1] role xxx_Element_attributes__src
+	AttributeEntry[*] role attributes_
+end
+
+composition xxx_Type_members between
+	Type[0..1] role xxx_Type_members_src
+	Member[*] role members
+end
+
+association xxx_Type_superType between
+	Type[*] role xxx_Type_superType_src
+	Type[0..1] role superType
+end
+
+composition xxx_Type_superTypeExpr between
+	Type[*] role xxx_Type_superTypeExpr_src
+	SimpleType[0..1] role superTypeExpr
+end
+
+composition xxx_Type_staticConstructor between
+	Type[*] role xxx_Type_staticConstructor_src
+	Constructor[0..1] role staticConstructor
+end
+
+association xxx_Type_traits between
+	Type[0..1] role xxx_Type_traits_src
+	Type[*] role traits
+end
+
+composition xxx_Type_constructors between
+	Type[0..1] role xxx_Type_constructors_src
+	Constructor[*] role constructors
+end
+
+association xxx_TypeAlias_target between
+	TypeAlias[*] role xxx_TypeAlias_target_src
+	Type[0..1] role target
+end
+
+association xxx_Member_declaringType between
+	Member[*] role xxx_Member_declaringType_src
+	Type[0..1] role declaringType
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_FunctionType_returnType between
+	FunctionType[*] role xxx_FunctionType_returnType_src
+	JSType[0..1] role returnType
+end
+
+composition xxx_FunctionType_parameters between
+	FunctionType[0..1] role xxx_FunctionType_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_SimpleType_target between
+	SimpleType[*] role xxx_SimpleType_target_src
+	Type[0..1] role target
+end
+
+composition xxx_ArrayType_itemType between
+	ArrayType[*] role xxx_ArrayType_itemType_src
+	JSType[0..1] role itemType
+end
+
+composition xxx_UnionType_targets between
+	UnionType[0..1] role xxx_UnionType_targets_src
+	JSType[*] role targets
+end
+
+composition xxx_ParameterizedType_actualTypeArguments between
+	ParameterizedType[0..1] role xxx_ParameterizedType_actualTypeArguments_src
+	JSType[*] role actualTypeArguments
+end
+
+composition xxx_MapType_keyType between
+	MapType[*] role xxx_MapType_keyType_src
+	JSType[0..1] role keyType
+end
+
+composition xxx_MapType_valueType between
+	MapType[*] role xxx_MapType_valueType_src
+	JSType[0..1] role valueType
+end
+
+composition xxx_RecordType_members between
+	RecordType[0..1] role xxx_RecordType_members_src
+	Member[*] role members
+end
+
+association xxx_ClassType_target between
+	ClassType[*] role xxx_ClassType_target_src
+	Type[0..1] role target
+end
+
+composition xxx_TypeVariable_bound between
+	TypeVariable[*] role xxx_TypeVariable_bound_src
+	JSType[0..1] role bound
+end
+
+composition xxx_GenericType_typeParameters between
+	GenericType[0..1] role xxx_GenericType_typeParameters_src
+	TypeVariable[*] role typeParameters
+end
+
+association xxx_TypeVariableReference_variable between
+	TypeVariableReference[*] role xxx_TypeVariableReference_variable_src
+	TypeVariable[0..1] role variable
+end
+
+composition xxx_GenericMethod_typeParameters between
+	GenericMethod[0..1] role xxx_GenericMethod_typeParameters_src
+	TypeVariable[*] role typeParameters
+end
+
+association xxx_TypeLiteral_target between
+	TypeLiteral[*] role xxx_TypeLiteral_target_src
+	Type[0..1] role target
+end
+
+association xxx_TypeVariableClassType_variable between
+	TypeVariableClassType[*] role xxx_TypeVariableClassType_variable_src
+	TypeVariable[0..1] role variable
+end
+

@@ -1,0 +1,76 @@
+model practica3
+class Aplicacion
+attributes
+	Nombre : String
+operations
+end
+
+class Ventana
+attributes
+	Nombre : String
+operations
+end
+
+class Marco
+attributes
+	Nombre : String
+	Contenido : String
+	Posicion : String
+operations
+end
+
+class Menu
+attributes
+	Nombre : String
+	Posicion : String
+	NumeroElementos : Integer
+operations
+end
+
+class Elemento_Menu
+attributes
+	Nombre : String
+	Enlace : String
+operations
+end
+
+composition xxx_Aplicacion_Ventanas between
+	Aplicacion[0..1] role xxx_Aplicacion_Ventanas_src
+	Ventana[*] role Ventanas
+end
+
+association xxx_Ventana_Aplicacion between
+	Ventana[*] role xxx_Ventana_Aplicacion_src
+	Aplicacion[1] role Aplicacion
+end
+
+composition xxx_Ventana_Marcos between
+	Ventana[0..1] role xxx_Ventana_Marcos_src
+	Marco[*] role Marcos
+end
+
+composition xxx_Ventana_Menus between
+	Ventana[*] role xxx_Ventana_Menus_src
+	Menu[0..3] role Menus
+end
+
+association xxx_Marco_Ventana between
+	Marco[*] role xxx_Marco_Ventana_src
+	Ventana[1] role Ventana
+end
+
+association xxx_Menu_Ventana between
+	Menu[*] role xxx_Menu_Ventana_src
+	Ventana[1] role Ventana
+end
+
+composition xxx_Menu_Elementos_Menu between
+	Menu[*] role xxx_Menu_Elementos_Menu_src
+	Elemento_Menu[0..7] role Elementos_Menu
+end
+
+association xxx_Elemento_Menu_Menu between
+	Elemento_Menu[*] role xxx_Elemento_Menu_Menu_src
+	Menu[1] role Menu
+end
+

@@ -1,0 +1,65 @@
+model serviceexample
+enum ServiceType{
+default
+}
+
+class Cluster<NamedThing
+attributes
+	designSpeed : Integer
+operations
+end
+
+class Service<NamedThing
+attributes
+	designSpeed : Integer
+	type : ServiceType
+operations
+end
+
+class Server<NamedThing
+attributes
+	speed : Integer
+operations
+end
+
+class Container
+attributes
+operations
+end
+
+class NamedThing
+attributes
+	name : String
+operations
+end
+
+association xxx_Cluster_services between
+	Cluster[0..1] role xxx_Cluster_services_src
+	Service[1..*] role services
+end
+
+association xxx_Cluster_backup between
+	Cluster[*] role xxx_Cluster_backup_src
+	Cluster[0..1] role backup
+end
+
+composition xxx_Cluster_server between
+	Cluster[0..1] role xxx_Cluster_server_src
+	Server[*] role server
+end
+
+association xxx_Service_providedBy between
+	Service[*] role xxx_Service_providedBy_src
+	Cluster[1] role providedBy
+end
+
+composition xxx_Container_service between
+	Container[0..1] role xxx_Container_service_src
+	Service[*] role service
+end
+
+composition xxx_Container_cluster between
+	Container[0..1] role xxx_Container_cluster_src
+	Cluster[*] role cluster
+end
+

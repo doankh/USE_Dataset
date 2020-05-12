@@ -1,0 +1,103 @@
+model FeatureDiagrams
+class Node
+attributes
+	description : String
+	preliminary : Boolean
+	object : String
+operations
+end
+
+class Attribute
+attributes
+	description : String
+	editable : Boolean
+	key : Boolean
+	value : String
+	name : String
+operations
+end
+
+class Root<Node
+attributes
+operations
+end
+
+class Child<Node
+attributes
+operations
+end
+
+class XORGroup
+attributes
+	preliminary : Boolean
+	name : String
+operations
+end
+
+class ORGroup
+attributes
+	preliminary : Boolean
+	name : String
+operations
+end
+
+composition xxx_Node_attributes_ between
+	Node[0..1] role xxx_Node_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Node_no_dst between
+	Node[0..1] role xxx_Node_no_dst_src
+	ORGroup[*] role no_dst
+end
+
+association xxx_Node_nx_dst between
+	Node[0..1] role xxx_Node_nx_dst_src
+	XORGroup[*] role nx_dst
+end
+
+association xxx_Node_cn_dst between
+	Node[0..1] role xxx_Node_cn_dst_src
+	Child[*] role cn_dst
+end
+
+association xxx_Attribute_node between
+	Attribute[*] role xxx_Attribute_node_src
+	Node[1] role node
+end
+
+association xxx_Child_cn_src between
+	Child[0..1] role xxx_Child_cn_src_src
+	Node[*] role cn_src
+end
+
+association xxx_Child_cx_src between
+	Child[0..1] role xxx_Child_cx_src_src
+	XORGroup[*] role cx_src
+end
+
+association xxx_Child_co_src between
+	Child[0..1] role xxx_Child_co_src_src
+	ORGroup[*] role co_src
+end
+
+association xxx_XORGroup_nx_src between
+	XORGroup[0..1] role xxx_XORGroup_nx_src_src
+	Node[*] role nx_src
+end
+
+association xxx_XORGroup_cx_dst between
+	XORGroup[0..1] role xxx_XORGroup_cx_dst_src
+	Child[*] role cx_dst
+end
+
+association xxx_ORGroup_no_src between
+	ORGroup[0..1] role xxx_ORGroup_no_src_src
+	Node[*] role no_src
+end
+
+association xxx_ORGroup_co_dst between
+	ORGroup[0..1] role xxx_ORGroup_co_dst_src
+	Child[*] role co_dst
+end
+

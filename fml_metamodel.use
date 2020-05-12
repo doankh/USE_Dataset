@@ -1,0 +1,193 @@
+model ag47
+class Form
+attributes
+operations
+end
+
+abstract class AbstractPage
+attributes
+	title : String
+	ID : Integer
+operations
+end
+
+abstract class PageElement
+attributes
+	ID : Integer
+	isVisible : Boolean
+operations
+end
+
+abstract class DisplayElement<PageElement
+attributes
+operations
+end
+
+abstract class InputElement<PageElement
+attributes
+	isMandatory : Boolean
+	label : String
+operations
+end
+
+class Heading<DisplayElement
+attributes
+	level : Integer
+	text : String
+operations
+end
+
+class TextParagraph<DisplayElement
+attributes
+	text : String
+operations
+end
+
+class UnorderedList<DisplayElement
+attributes
+operations
+end
+
+class OrderedList<DisplayElement
+attributes
+operations
+end
+
+class TextField<InputElement
+attributes
+	text : String
+operations
+end
+
+class TextArea<InputElement
+attributes
+	text : String
+operations
+end
+
+abstract class SelectionField<InputElement
+attributes
+operations
+end
+
+abstract class SingleSelection<SelectionField
+attributes
+	preselected : Integer
+operations
+end
+
+abstract class MultipleSelection<SelectionField
+attributes
+	preselected : Integer
+operations
+end
+
+class RadioButtonSelection<SingleSelection
+attributes
+operations
+end
+
+class CheckboxSelection<MultipleSelection
+attributes
+operations
+end
+
+class ComboboxSelection<MultipleSelection
+attributes
+operations
+end
+
+class EndPage<AbstractPage
+attributes
+	predecessor : Integer
+operations
+end
+
+class FormPage<AbstractPage
+attributes
+	successor : Integer
+	predecessor : Integer
+operations
+end
+
+class StartPage<AbstractPage
+attributes
+	successor : Integer
+operations
+end
+
+class ComboboxItem
+attributes
+	label : String
+operations
+end
+
+class RadioButtonItem
+attributes
+	label : String
+operations
+end
+
+class CheckboxItem
+attributes
+	label : String
+operations
+end
+
+class OrderedListItem
+attributes
+	text : String
+operations
+end
+
+class UnorderedListItem
+attributes
+	text : String
+operations
+end
+
+composition xxx_Form_has_1 between
+	Form[*] role xxx_Form_has_1_src
+	StartPage[1] role has_1
+end
+
+composition xxx_Form_has_2 between
+	Form[0..1] role xxx_Form_has_2_src
+	FormPage[*] role has_2
+end
+
+composition xxx_Form_has_3 between
+	Form[*] role xxx_Form_has_3_src
+	EndPage[0..1] role has_3
+end
+
+composition xxx_AbstractPage_consists_of_2 between
+	AbstractPage[0..1] role xxx_AbstractPage_consists_of_2_src
+	PageElement[*] role consists_of_2
+end
+
+composition xxx_UnorderedList_consists_of_3 between
+	UnorderedList[0..1] role xxx_UnorderedList_consists_of_3_src
+	UnorderedListItem[1..*] role consists_of_3
+end
+
+composition xxx_OrderedList_consists_of_4 between
+	OrderedList[0..1] role xxx_OrderedList_consists_of_4_src
+	OrderedListItem[1..*] role consists_of_4
+end
+
+composition xxx_RadioButtonSelection_consists_of_5 between
+	RadioButtonSelection[0..1] role xxx_RadioButtonSelection_consists_of_5_src
+	RadioButtonItem[1..*] role consists_of_5
+end
+
+composition xxx_CheckboxSelection_consists_of_7 between
+	CheckboxSelection[0..1] role xxx_CheckboxSelection_consists_of_7_src
+	CheckboxItem[1..*] role consists_of_7
+end
+
+composition xxx_ComboboxSelection_consists_of_6 between
+	ComboboxSelection[*] role xxx_ComboboxSelection_consists_of_6_src
+	ComboboxItem[0..1] role consists_of_6
+end
+

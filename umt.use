@@ -1,0 +1,394 @@
+model umt
+enum IntentionEnum{
+default
+}
+
+enum UniverseType{
+default
+}
+
+class InstructionBlock
+attributes
+operations
+end
+
+abstract class Instruction
+attributes
+operations
+end
+
+class Selection<NumerousKindsOfBranches
+attributes
+operations
+end
+
+class VariableDeclarationInstruction<VariableProcessingInstruction
+attributes
+operations
+end
+
+class VariableAssignment<VariableProcessingInstruction
+attributes
+operations
+end
+
+abstract class WriteDestinationModel<ModelModification
+attributes
+operations
+end
+
+abstract class CfsInstruction<VapodiInstruction
+attributes
+operations
+end
+
+class Function<VariableDeclaration
+attributes
+	main : Boolean
+	name : String
+operations
+end
+
+abstract class Variable
+attributes
+	name : String
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+class Debug<Instruction
+attributes
+	text : String
+operations
+end
+
+class Program<VariableDeclaration
+attributes
+	name : String
+operations
+end
+
+class Loop<NumerousKindsOfBranches
+attributes
+operations
+end
+
+abstract class ModelModification<VapodiInstruction
+attributes
+operations
+end
+
+class Branch
+attributes
+operations
+end
+
+class CallExpression<Expression
+attributes
+operations
+end
+
+abstract class Model
+attributes
+	name : String
+	urn : String
+operations
+end
+
+class AddTraceLink<VapodiInstruction
+attributes
+	semantics : String
+operations
+end
+
+abstract class VapodiInstruction<Instruction
+attributes
+operations
+end
+
+class Write<WriteDestinationModel
+attributes
+operations
+end
+
+class Delete<WriteDestinationModel
+attributes
+operations
+end
+
+class TypeFilter<Condition
+attributes
+operations
+end
+
+class LogicalCondition<Condition
+attributes
+operations
+end
+
+class VariableDeclaration
+attributes
+operations
+end
+
+abstract class NumerousKindsOfBranches<Instruction
+attributes
+operations
+end
+
+class BlackBoxExpression<Expression
+attributes
+operations
+end
+
+class InstanceModel<Model
+attributes
+	intention : IntentionEnum
+	universe : UniverseType
+operations
+end
+
+class MetaModel<Model
+attributes
+	nsURI : String
+	nsPrefix : String
+operations
+end
+
+class Comment<Instruction
+attributes
+	text : String
+operations
+end
+
+class CfsPush<CfsInstruction
+attributes
+operations
+end
+
+class CfsPop<CfsInstruction
+attributes
+operations
+end
+
+class PrimitiveVariable<Variable
+attributes
+operations
+end
+
+class CollectionVariable<Variable
+attributes
+operations
+end
+
+class ModelVariable<Variable
+attributes
+operations
+end
+
+class ModelType
+attributes
+	name : String
+operations
+end
+
+class VariableReset<VariableProcessingInstruction
+attributes
+operations
+end
+
+class ModelTypeAttribute
+attributes
+	name : String
+operations
+end
+
+class ModelAttributeVariable<Variable
+attributes
+operations
+end
+
+class StPut<StInstruction
+attributes
+operations
+end
+
+class StDrop<StInstruction
+attributes
+operations
+end
+
+abstract class StInstruction<VapodiInstruction
+attributes
+operations
+end
+
+abstract class Expression<VariableProcessingInstruction
+attributes
+operations
+end
+
+class CalculatedExpression<Expression
+attributes
+operations
+end
+
+abstract class VariableProcessingInstruction<Instruction
+attributes
+operations
+end
+
+composition xxx_InstructionBlock_instructions between
+	InstructionBlock[0..1] role xxx_InstructionBlock_instructions_src
+	Instruction[*] role instructions
+end
+
+composition xxx_Selection_branches between
+	Selection[0..1] role xxx_Selection_branches_src
+	Branch[*] role branches
+end
+
+composition xxx_VariableAssignment_assignedExpression between
+	VariableAssignment[*] role xxx_VariableAssignment_assignedExpression_src
+	Expression[1] role assignedExpression
+end
+
+association xxx_CfsInstruction_variables between
+	CfsInstruction[0..1] role xxx_CfsInstruction_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	InstructionBlock[1] role body
+end
+
+association xxx_Condition_dependencies between
+	Condition[0..1] role xxx_Condition_dependencies_src
+	Variable[*] role dependencies
+end
+
+composition xxx_Program_functions between
+	Program[0..1] role xxx_Program_functions_src
+	Function[*] role functions
+end
+
+composition xxx_Program_models between
+	Program[0..1] role xxx_Program_models_src
+	Model[*] role models
+end
+
+composition xxx_Loop_body between
+	Loop[*] role xxx_Loop_body_src
+	InstructionBlock[1] role body
+end
+
+association xxx_Loop_invariant between
+	Loop[*] role xxx_Loop_invariant_src
+	Condition[0..1] role invariant
+end
+
+composition xxx_Branch_condition between
+	Branch[*] role xxx_Branch_condition_src
+	Condition[1] role condition
+end
+
+composition xxx_Branch_body between
+	Branch[*] role xxx_Branch_body_src
+	InstructionBlock[1] role body
+end
+
+association xxx_CallExpression_function between
+	CallExpression[*] role xxx_CallExpression_function_src
+	Function[1] role function
+end
+
+association xxx_Model_metamodel between
+	Model[*] role xxx_Model_metamodel_src
+	MetaModel[0..1] role metamodel
+end
+
+association xxx_AddTraceLink_destination between
+	AddTraceLink[*] role xxx_AddTraceLink_destination_src
+	Variable[1] role destination
+end
+
+composition xxx_VariableDeclaration_variables between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_variables_src
+	Variable[*] role variables
+end
+
+association xxx_NumerousKindsOfBranches_oppositeBranch between
+	NumerousKindsOfBranches[*] role xxx_NumerousKindsOfBranches_oppositeBranch_src
+	NumerousKindsOfBranches[0..1] role oppositeBranch
+end
+
+association xxx_InstanceModel_variables between
+	InstanceModel[0..1] role xxx_InstanceModel_variables_src
+	ModelVariable[*] role variables
+end
+
+composition xxx_MetaModel_types between
+	MetaModel[0..1] role xxx_MetaModel_types_src
+	ModelType[*] role types
+end
+
+association xxx_ModelVariable_type between
+	ModelVariable[*] role xxx_ModelVariable_type_src
+	ModelType[1] role type
+end
+
+association xxx_ModelVariable_model_ between
+	ModelVariable[*] role xxx_ModelVariable_model__src
+	InstanceModel[0..1] role model_
+end
+
+composition xxx_ModelVariable_attributes_ between
+	ModelVariable[0..1] role xxx_ModelVariable_attributes__src
+	ModelAttributeVariable[*] role attributes_
+end
+
+association xxx_ModelType_model_ between
+	ModelType[*] role xxx_ModelType_model__src
+	MetaModel[0..1] role model_
+end
+
+composition xxx_ModelType_attributes_ between
+	ModelType[0..1] role xxx_ModelType_attributes__src
+	ModelTypeAttribute[*] role attributes_
+end
+
+association xxx_ModelTypeAttribute_partOf between
+	ModelTypeAttribute[*] role xxx_ModelTypeAttribute_partOf_src
+	ModelType[1] role partOf
+end
+
+association xxx_ModelAttributeVariable_instanceOf between
+	ModelAttributeVariable[*] role xxx_ModelAttributeVariable_instanceOf_src
+	ModelTypeAttribute[1] role instanceOf
+end
+
+association xxx_ModelAttributeVariable_partOf between
+	ModelAttributeVariable[*] role xxx_ModelAttributeVariable_partOf_src
+	ModelVariable[1] role partOf
+end
+
+association xxx_StInstruction_symbols between
+	StInstruction[0..1] role xxx_StInstruction_symbols_src
+	Variable[1..*] role symbols
+end
+
+association xxx_Expression_parameters between
+	Expression[0..1] role xxx_Expression_parameters_src
+	Variable[*] role parameters
+end
+
+association xxx_VariableProcessingInstruction_destination between
+	VariableProcessingInstruction[*] role xxx_VariableProcessingInstruction_destination_src
+	Variable[1] role destination
+end
+

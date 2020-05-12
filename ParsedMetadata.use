@@ -1,0 +1,76 @@
+model parsedmetadata
+class AnnotatedClass<NamedEntity,AnnotatedEntity
+attributes
+	class_ : String
+operations
+end
+
+class AnnotatedMethod<NamedEntity,AnnotatedEntity
+attributes
+	method : String
+operations
+end
+
+abstract class NamedEntity
+attributes
+	name : String
+operations
+end
+
+class ParsedModel
+attributes
+operations
+	findByJavaClass(clazz : String):AnnotatedClass
+end
+
+class Annotation<NamedEntity
+attributes
+	class_ : String
+	instance : String
+operations
+end
+
+abstract class AnnotatedEntity
+attributes
+operations
+	findAnnotationByJavaClass(class_ : String):Annotation
+end
+
+abstract class AnnotatedField<AnnotatedEntity,NamedEntity
+attributes
+	type : String
+operations
+end
+
+class AnnotatedParameter<NamedEntity,AnnotatedEntity
+attributes
+	index : Integer
+	type : String
+operations
+end
+
+composition xxx_AnnotatedClass_methods between
+	AnnotatedClass[0..1] role xxx_AnnotatedClass_methods_src
+	AnnotatedMethod[*] role methods
+end
+
+composition xxx_AnnotatedClass_fields between
+	AnnotatedClass[0..1] role xxx_AnnotatedClass_fields_src
+	AnnotatedField[*] role fields
+end
+
+composition xxx_AnnotatedMethod_parameters between
+	AnnotatedMethod[0..1] role xxx_AnnotatedMethod_parameters_src
+	AnnotatedParameter[*] role parameters
+end
+
+composition xxx_ParsedModel_classes between
+	ParsedModel[0..1] role xxx_ParsedModel_classes_src
+	AnnotatedClass[*] role classes
+end
+
+composition xxx_AnnotatedEntity_annotations between
+	AnnotatedEntity[0..1] role xxx_AnnotatedEntity_annotations_src
+	Annotation[*] role annotations
+end
+

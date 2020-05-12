@@ -1,0 +1,63 @@
+model scenario
+enum DivergenceType{
+default
+}
+
+class Scenario
+attributes
+	name : String
+operations
+end
+
+class Schedule
+attributes
+operations
+end
+
+abstract class Component
+attributes
+operations
+end
+
+class Activity<Component
+attributes
+	name : String
+operations
+end
+
+class Divergence<Component
+attributes
+	type : DivergenceType
+operations
+end
+
+composition xxx_Scenario_schedule between
+	Scenario[*] role xxx_Scenario_schedule_src
+	Schedule[1] role schedule
+end
+
+composition xxx_Schedule_components between
+	Schedule[0..1] role xxx_Schedule_components_src
+	Component[1..*] role components
+end
+
+association xxx_Schedule_parent between
+	Schedule[*] role xxx_Schedule_parent_src
+	Divergence[0..1] role parent
+end
+
+association xxx_Component_parent between
+	Component[*] role xxx_Component_parent_src
+	Schedule[1] role parent
+end
+
+composition xxx_Activity_schedule between
+	Activity[*] role xxx_Activity_schedule_src
+	Schedule[0..1] role schedule
+end
+
+composition xxx_Divergence_schedules between
+	Divergence[0..1] role xxx_Divergence_schedules_src
+	Schedule[2..*] role schedules
+end
+

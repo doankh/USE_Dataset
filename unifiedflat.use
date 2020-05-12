@@ -1,0 +1,601 @@
+model vortex
+enum Status{
+default
+}
+
+enum MobileRadioType{
+default
+}
+
+enum OsName{
+default
+}
+
+enum WlanType{
+default
+}
+
+enum NetAddressType{
+default
+}
+
+enum DevType{
+default
+}
+
+enum EntityType{
+default
+}
+
+enum PhoneNumType{
+default
+}
+
+enum AssetType{
+default
+}
+
+enum PasswordComplexity{
+default
+}
+
+enum Level{
+default
+}
+
+enum UserStatus{
+default
+}
+
+enum PermType{
+default
+}
+
+enum Origin{
+default
+}
+
+enum JobType{
+default
+}
+
+enum JobState{
+default
+}
+
+enum JobStatus{
+default
+}
+
+enum JobSource{
+default
+}
+
+enum RegCodeStatus{
+default
+}
+
+enum EventCategory{
+default
+}
+
+enum AddressType{
+default
+}
+
+class StateInfo<Identifiable
+attributes
+	IdleTime : Integer
+	LockTimeout : Integer
+	RadioSigStrength : Integer
+	StorageAvail : Integer
+	BatChargeRemain : Integer
+	BatCurrentVoltage : Integer
+	Updated : String
+operations
+end
+
+class MobileProvider<Identifiable
+attributes
+	Name : String
+	Updated : String
+operations
+end
+
+class PhoneNumber<Identifiable
+attributes
+	Number : String
+	CountryCode : String
+	AreaCode : String
+	LocalNumber : String
+	Type : PhoneNumType
+	Updated : String
+operations
+end
+
+class SystemInfo<Identifiable
+attributes
+	OsName : OsName
+	OsVersion : String
+	DevIdent : String
+	Config : String
+	SIM : String
+	IMEI : String
+	IMSI : String
+	DefaultEmailAddr : String
+	Updated : String
+operations
+end
+
+class Asset<Identifiable
+attributes
+	ID : String
+	Type : AssetType
+	Status : Status
+	AssetTag : String
+	PurchaseDate : String
+	OwnerNameFromUser : String
+	OwnerInfoFromUser : String
+	Notes : String
+	Created : String
+	Updated : String
+operations
+end
+
+class Hardware<Identifiable
+attributes
+	Serial : String
+	DevType : DevType
+	DevVendorName : String
+	DevModelName : String
+	DevProductId : String
+	DevFwVersion : String
+	HasCamera : String
+	HasRmBat : String
+	MobileRadioTypes : MobileRadioType
+	CpuSpeed : String
+	BusSpeed : String
+	PrimaryStorageCapacity : Integer
+	Updated : String
+operations
+end
+
+class NetAddress<Identifiable
+attributes
+	Type : NetAddressType
+	HostAddr : String
+	HostName : String
+	NetAddr : String
+	NetName : String
+	NetMask : String
+	BroadAddr : String
+	GatewayAddr : String
+	GatewayName : String
+	Created : String
+	Updated : String
+operations
+end
+
+class NetIf<Identifiable
+attributes
+	Type : WlanType
+	Name : String
+	MacAddr : String
+	Updated : String
+operations
+end
+
+class Person<Identifiable
+attributes
+	Type : EntityType
+	DisplayName : String
+	FirstName : String
+	LastName : String
+	Department : String
+	CompanyName : String
+	Email : String
+	EmployeeID : String
+	Updated : String
+operations
+end
+
+class App<Identifiable
+attributes
+	ID : String
+	Name : String
+	Version : String
+	VendorName : String
+	InstalledSize : Integer
+	InstallDate : String
+	Updated : String
+operations
+end
+
+class Location<Identifiable
+attributes
+	LatDeg : String
+	LatMin : String
+	LatSec : String
+	LonDeg : String
+	LonMin : String
+	LonSec : String
+	Updated : String
+operations
+end
+
+class Registration<Identifiable
+attributes
+	AuthCode : String
+	AssetID : String
+	Updated : String
+	Created : String
+operations
+end
+
+class Policy<Identifiable
+attributes
+	Name : String
+	Status : Status
+	Priority : Integer
+	PwdMinLength : Integer
+	PwdHistory : String
+	PwdComplexity : PasswordComplexity
+	AutoLockEnforced : String
+	AutoLockPeriod : Integer
+	WipeAfterFailureCount : Integer
+	AllowAppStorePurchase : String
+	AllowCamera : String
+	AllowBluetooth : String
+	AllowWLAN : String
+	EncryptSD : String
+	EncryptMainStorage : String
+	AppBlackList : String
+operations
+end
+
+class Event<Identifiable
+attributes
+	Level : Level
+	Time : String
+	Host : String
+	Service : String
+	ServiceClass : String
+	Message : String
+	Category : EventCategory
+	UserName : String
+operations
+end
+
+class User<Identifiable
+attributes
+	Origin : Origin
+	Name : String
+	Status : UserStatus
+	Description : String
+	Comment : String
+	LastHostName : String
+	LastPwdChange : String
+	LastLoginSuccess : String
+	LastLoginFailure : String
+	Expires : String
+	LoginFailures : Integer
+	Email : String
+	Created : String
+	Updated : String
+	ForcePasswordChange : String
+operations
+end
+
+class AuthChallenge<Identifiable
+attributes
+	Question : String
+	Answer : String
+operations
+end
+
+class Role<Identifiable
+attributes
+	Name : String
+	Description : String
+	Origin : Origin
+operations
+end
+
+class Permission<Identifiable
+attributes
+	Name : String
+	Description : String
+	Type : PermType
+	Origin : Origin
+operations
+end
+
+class Group<Identifiable
+attributes
+	Name : String
+	Description : String
+	Origin : Origin
+operations
+end
+
+class Password<Identifiable
+attributes
+	Hash : String
+	Salt : String
+	Created : String
+operations
+end
+
+class Job<Identifiable
+attributes
+	Type : JobType
+	Name : String
+	Description : String
+	AssetID : String
+	State : JobState
+	Status : JobState
+	Source : JobSource
+	Created : String
+	RunInterval : Integer
+	StartTime : String
+	LastAttempt : String
+	Completed : String
+operations
+end
+
+class RegistrationCode<Identifiable
+attributes
+	Name : String
+	Description : String
+	Code : String
+	DevType : DevType
+	OsName : OsName
+	DevVendorName : String
+	DevVendorModel : String
+	MobileRadioType : MobileRadioType
+	Status : RegCodeStatus
+	ValidStart : String
+	ValidUntil : String
+	UseCountMax : Integer
+	Updated : String
+	Created : String
+operations
+end
+
+class Agent<Identifiable
+attributes
+	Name : String
+	Version : String
+	Port : Integer
+	Installed : String
+	Created : String
+	Updated : String
+operations
+end
+
+class Session<Identifiable
+attributes
+	SessionKey : String
+	UserName : String
+	Expires : String
+	Created : String
+operations
+end
+
+class Identifiable
+attributes
+	DbID : Integer
+	DbVersion : Integer
+operations
+end
+
+class Address<Identifiable
+attributes
+	Type : AddressType
+	Address1 : String
+	Address2 : String
+	Address3 : String
+	City : String
+	State : String
+	PostalCode : String
+operations
+end
+
+class Country<Identifiable
+attributes
+	Name : String
+	Name2 : String
+	Name3 : String
+	DialCode : String
+operations
+end
+
+class AppCategory<Identifiable
+attributes
+	Name : String
+	Origin : Origin
+	Updated : String
+	Created : String
+operations
+end
+
+association xxx_StateInfo_MobileProvider between
+	StateInfo[*] role xxx_StateInfo_MobileProvider_src
+	MobileProvider[0..1] role MobileProvider
+end
+
+association xxx_StateInfo_PhoneNumber between
+	StateInfo[*] role xxx_StateInfo_PhoneNumber_src
+	PhoneNumber[0..1] role PhoneNumber
+end
+
+association xxx_Asset_SystemInfo between
+	Asset[*] role xxx_Asset_SystemInfo_src
+	SystemInfo[0..1] role SystemInfo
+end
+
+association xxx_Asset_Hardware between
+	Asset[*] role xxx_Asset_Hardware_src
+	Hardware[0..1] role Hardware
+end
+
+association xxx_Asset_StateInfo between
+	Asset[0..1] role xxx_Asset_StateInfo_src
+	StateInfo[*] role StateInfo
+end
+
+association xxx_Asset_People between
+	Asset[0..1] role xxx_Asset_People_src
+	Person[*] role People
+end
+
+association xxx_Asset_Apps between
+	Asset[0..1] role xxx_Asset_Apps_src
+	App[*] role Apps
+end
+
+association xxx_Asset_Locations between
+	Asset[0..1] role xxx_Asset_Locations_src
+	Location[*] role Locations
+end
+
+association xxx_Asset_Policies between
+	Asset[0..1] role xxx_Asset_Policies_src
+	Policy[*] role Policies
+end
+
+association xxx_Asset_Registration between
+	Asset[*] role xxx_Asset_Registration_src
+	Registration[0..1] role Registration
+end
+
+association xxx_Asset_Agent between
+	Asset[*] role xxx_Asset_Agent_src
+	Agent[0..1] role Agent
+end
+
+association xxx_Asset_PrimaryAddress between
+	Asset[*] role xxx_Asset_PrimaryAddress_src
+	Address[0..1] role PrimaryAddress
+end
+
+association xxx_Hardware_NetInterfaces between
+	Hardware[0..1] role xxx_Hardware_NetInterfaces_src
+	NetIf[*] role NetInterfaces
+end
+
+association xxx_NetIf_NetAddress between
+	NetIf[*] role xxx_NetIf_NetAddress_src
+	NetAddress[0..1] role NetAddress
+end
+
+association xxx_Person_PhoneNumbers between
+	Person[0..1] role xxx_Person_PhoneNumbers_src
+	PhoneNumber[*] role PhoneNumbers
+end
+
+association xxx_Person_Addresses between
+	Person[0..1] role xxx_Person_Addresses_src
+	Address[*] role Addresses
+end
+
+association xxx_App_Category between
+	App[*] role xxx_App_Category_src
+	AppCategory[0..1] role Category
+end
+
+association xxx_Registration_Asset between
+	Registration[*] role xxx_Registration_Asset_src
+	Asset[0..1] role Asset
+end
+
+association xxx_Registration_RegistrationCode between
+	Registration[*] role xxx_Registration_RegistrationCode_src
+	RegistrationCode[0..1] role RegistrationCode
+end
+
+association xxx_Registration_Creator between
+	Registration[*] role xxx_Registration_Creator_src
+	User[0..1] role Creator
+end
+
+composition xxx_User_AuthChallenges between
+	User[*] role xxx_User_AuthChallenges_src
+	AuthChallenge[0..3] role AuthChallenges
+end
+
+association xxx_User_Roles between
+	User[0..1] role xxx_User_Roles_src
+	Role[*] role Roles
+end
+
+association xxx_User_Groups between
+	User[0..1] role xxx_User_Groups_src
+	Group[*] role Groups
+end
+
+composition xxx_User_Passwords between
+	User[0..1] role xxx_User_Passwords_src
+	Password[*] role Passwords
+end
+
+association xxx_User_Permissions between
+	User[0..1] role xxx_User_Permissions_src
+	Permission[*] role Permissions
+end
+
+association xxx_User_Person between
+	User[*] role xxx_User_Person_src
+	Person[0..1] role Person
+end
+
+association xxx_Role_Permissions between
+	Role[0..1] role xxx_Role_Permissions_src
+	Permission[*] role Permissions
+end
+
+association xxx_Role_SubRoles between
+	Role[0..1] role xxx_Role_SubRoles_src
+	Role[*] role SubRoles
+end
+
+association xxx_Group_Owner between
+	Group[*] role xxx_Group_Owner_src
+	User[0..1] role Owner
+end
+
+association xxx_Group_Roles between
+	Group[0..1] role xxx_Group_Roles_src
+	Role[*] role Roles
+end
+
+association xxx_Group_SubGroups between
+	Group[0..1] role xxx_Group_SubGroups_src
+	Group[*] role SubGroups
+end
+
+composition xxx_RegistrationCode_PhoneNumber between
+	RegistrationCode[*] role xxx_RegistrationCode_PhoneNumber_src
+	PhoneNumber[0..1] role PhoneNumber
+end
+
+association xxx_RegistrationCode_Registrations between
+	RegistrationCode[0..1] role xxx_RegistrationCode_Registrations_src
+	Registration[*] role Registrations
+end
+
+association xxx_RegistrationCode_Creator between
+	RegistrationCode[*] role xxx_RegistrationCode_Creator_src
+	User[0..1] role Creator
+end
+
+association xxx_Agent_NetAddress between
+	Agent[*] role xxx_Agent_NetAddress_src
+	NetAddress[0..1] role NetAddress
+end
+
+association xxx_Address_Country between
+	Address[*] role xxx_Address_Country_src
+	Country[0..1] role Country
+end
+

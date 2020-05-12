@@ -1,0 +1,645 @@
+model techno
+enum BITCELL_TYPE{
+default
+}
+
+enum VOLTAGE_RANGE_TYPE{
+default
+}
+
+enum PROCESS{
+default
+}
+
+enum POWER_MODE_V1{
+default
+}
+
+enum LEAKAGE_KIND{
+default
+}
+
+class TechnoDescriptor
+attributes
+	name : String
+operations
+end
+
+class StdCell
+attributes
+operations
+end
+
+class Netlist
+attributes
+operations
+end
+
+class GateLength
+attributes
+	name : String
+operations
+end
+
+class StdFamily
+attributes
+	name : String
+	isPm : Boolean
+	leakageKind : LEAKAGE_KIND
+operations
+end
+
+class RamType
+attributes
+operations
+end
+
+class MemoryModel
+attributes
+	name : String
+operations
+end
+
+class Estimated
+attributes
+operations
+end
+
+class DesignClass
+attributes
+	name : String
+operations
+end
+
+class DefaultGateLength
+attributes
+	defaultPercentage : Real
+operations
+end
+
+class GateOverHead
+attributes
+	name : String
+	value : Real
+operations
+end
+
+class MacroModel
+attributes
+operations
+end
+
+class Spline
+attributes
+	interval : Real
+	temp : Real
+operations
+end
+
+class BitCell
+attributes
+	name : String
+operations
+end
+
+class memS2NRatio<Strong2NominalRatio
+attributes
+operations
+end
+
+class StdS2NRatio<Strong2NominalRatio
+attributes
+operations
+end
+
+class Size
+attributes
+operations
+end
+
+class BlockCount
+attributes
+	count : Integer
+operations
+end
+
+class MuxFactor
+attributes
+	factor : Integer
+operations
+end
+
+class Array
+attributes
+	wordCountMin : Integer
+	wordCountMax : Integer
+	wordLengthMin : Integer
+	wordLengthMax : Integer
+operations
+end
+
+class Compaction
+attributes
+operations
+end
+
+class CompactionParams
+attributes
+	temp : Real
+	v : Real
+	src : String
+operations
+end
+
+class Memory
+attributes
+	deletegateTechno : String
+operations
+end
+
+class Strong2NominalRatio
+attributes
+	temp : Real
+	ratio : Real
+operations
+end
+
+class FamilyGateLength
+attributes
+	refCell : String
+operations
+end
+
+class Voltages
+attributes
+	nominal : Real
+operations
+end
+
+class VoltageRange
+attributes
+	type : VOLTAGE_RANGE_TYPE
+operations
+end
+
+class VoltageRangeParam
+attributes
+	powerMode : POWER_MODE_V1
+	min : Real
+	max : Real
+operations
+end
+
+class VoltageRangesProcess
+attributes
+	process : PROCESS
+operations
+end
+
+class Pad
+attributes
+operations
+end
+
+class PadFamily
+attributes
+	name : String
+	width : Real
+	height : Real
+operations
+end
+
+class PowerManagement
+attributes
+	supportHgMode : Boolean
+	SupportRBB : Boolean
+operations
+end
+
+class PowerModeDefinition
+attributes
+operations
+end
+
+class PowerMode
+attributes
+	name : String
+operations
+end
+
+class BitCellDefinition
+attributes
+operations
+end
+
+class PowerModeStd<PowerMode
+attributes
+	mode : POWER_MODE_V1
+operations
+end
+
+class VoltageParameters
+attributes
+	nominal : Real
+operations
+end
+
+class GateLengthDefinition
+attributes
+operations
+end
+
+class EstimatedContent
+attributes
+	ffRatio : Real
+operations
+end
+
+class CellsInfo
+attributes
+operations
+end
+
+class CellInfo
+attributes
+	hasSpiceModel : Boolean
+	name : String
+operations
+end
+
+class EstimatedContentCombo<EstimatedContentCategory
+attributes
+operations
+end
+
+class EstimatedContentCell
+attributes
+	name : String
+	ratio_id : String
+	ratio : Real
+	data1 : String
+operations
+end
+
+abstract class EstimatedContentCategory
+attributes
+operations
+end
+
+class EstimatedContentCellDrive
+attributes
+	name : String
+	ratio : Real
+operations
+end
+
+class EstimatedContentSeq<EstimatedContentCategory
+attributes
+operations
+end
+
+class Parameters
+attributes
+	refGateName : String
+	compatibility : String
+operations
+end
+
+class EstimatedContentLayout<EstimatedContentCategory
+attributes
+operations
+end
+
+class TechnoExtensionDescriptor<TechnoDescriptor
+attributes
+	parentTechno : String
+operations
+end
+
+class EstimatedContentPM<EstimatedContentCategory
+attributes
+operations
+end
+
+class PMTools
+attributes
+operations
+end
+
+class PMIp
+attributes
+	name : String
+operations
+end
+
+class SramLDO<PMIp
+attributes
+operations
+end
+
+class VbbLDO<PMIp
+attributes
+operations
+end
+
+class Mercury
+attributes
+	leakageFactor : Real
+operations
+end
+
+class Layout
+attributes
+operations
+end
+
+class LayoutArea
+attributes
+	tap_cell_overhead : Real
+	core_esd_cell_overhead : Real
+	large_macro_threshold : Real
+operations
+end
+
+class TemperatureRange
+attributes
+	min : Real
+	max : Real
+operations
+end
+
+composition xxx_TechnoDescriptor_stdCell between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_stdCell_src
+	StdCell[0..1] role stdCell
+end
+
+composition xxx_TechnoDescriptor_netlist between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_netlist_src
+	Netlist[0..1] role netlist
+end
+
+composition xxx_TechnoDescriptor_memory between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_memory_src
+	Memory[0..1] role memory
+end
+
+composition xxx_TechnoDescriptor_voltage between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_voltage_src
+	Voltages[0..1] role voltage
+end
+
+composition xxx_TechnoDescriptor_pad between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_pad_src
+	Pad[0..1] role pad
+end
+
+composition xxx_TechnoDescriptor_powerManagement between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_powerManagement_src
+	PowerManagement[0..1] role powerManagement
+end
+
+composition xxx_TechnoDescriptor_parameters between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_parameters_src
+	Parameters[0..1] role parameters
+end
+
+composition xxx_TechnoDescriptor_layout between
+	TechnoDescriptor[*] role xxx_TechnoDescriptor_layout_src
+	Layout[0..1] role layout
+end
+
+composition xxx_StdCell_stdFamilyList between
+	StdCell[0..1] role xxx_StdCell_stdFamilyList_src
+	StdFamily[*] role stdFamilyList
+end
+
+composition xxx_StdCell_gateLengthDefinition between
+	StdCell[*] role xxx_StdCell_gateLengthDefinition_src
+	GateLengthDefinition[0..1] role gateLengthDefinition
+end
+
+composition xxx_Netlist_estimated between
+	Netlist[*] role xxx_Netlist_estimated_src
+	Estimated[0..1] role estimated
+end
+
+composition xxx_Netlist_macroModel between
+	Netlist[*] role xxx_Netlist_macroModel_src
+	MacroModel[0..1] role macroModel
+end
+
+composition xxx_GateLength_n2sRatioList between
+	GateLength[0..1] role xxx_GateLength_n2sRatioList_src
+	StdS2NRatio[*] role n2sRatioList
+end
+
+composition xxx_StdFamily_familyGateLengths between
+	StdFamily[0..1] role xxx_StdFamily_familyGateLengths_src
+	FamilyGateLength[*] role familyGateLengths
+end
+
+composition xxx_StdFamily_cellsInfo between
+	StdFamily[*] role xxx_StdFamily_cellsInfo_src
+	CellsInfo[0..1] role cellsInfo
+end
+
+composition xxx_RamType_n2sRatioList between
+	RamType[0..1] role xxx_RamType_n2sRatioList_src
+	memS2NRatio[*] role n2sRatioList
+end
+
+association xxx_RamType_bitCellType between
+	RamType[*] role xxx_RamType_bitCellType_src
+	BitCell[0..1] role bitCellType
+end
+
+composition xxx_MemoryModel_size between
+	MemoryModel[*] role xxx_MemoryModel_size_src
+	Size[0..1] role size
+end
+
+composition xxx_MemoryModel_ramType between
+	MemoryModel[*] role xxx_MemoryModel_ramType_src
+	RamType[0..1] role ramType
+end
+
+composition xxx_Estimated_designClass between
+	Estimated[0..1] role xxx_Estimated_designClass_src
+	DesignClass[*] role designClass
+end
+
+composition xxx_Estimated_gateOverHead between
+	Estimated[0..1] role xxx_Estimated_gateOverHead_src
+	GateOverHead[*] role gateOverHead
+end
+
+composition xxx_Estimated_content between
+	Estimated[*] role xxx_Estimated_content_src
+	EstimatedContent[0..1] role content
+end
+
+composition xxx_DesignClass_defaultGateLengths between
+	DesignClass[0..1] role xxx_DesignClass_defaultGateLengths_src
+	DefaultGateLength[*] role defaultGateLengths
+end
+
+association xxx_DefaultGateLength_gateLength between
+	DefaultGateLength[*] role xxx_DefaultGateLength_gateLength_src
+	GateLength[0..1] role gateLength
+end
+
+composition xxx_MacroModel_compaction between
+	MacroModel[*] role xxx_MacroModel_compaction_src
+	Compaction[0..1] role compaction
+end
+
+composition xxx_MacroModel_spline between
+	MacroModel[*] role xxx_MacroModel_spline_src
+	Spline[0..1] role spline
+end
+
+composition xxx_Size_blockCountList between
+	Size[0..1] role xxx_Size_blockCountList_src
+	BlockCount[*] role blockCountList
+end
+
+composition xxx_BlockCount_muxCountList between
+	BlockCount[0..1] role xxx_BlockCount_muxCountList_src
+	MuxFactor[*] role muxCountList
+end
+
+composition xxx_MuxFactor_array between
+	MuxFactor[*] role xxx_MuxFactor_array_src
+	Array[0..1] role array
+end
+
+composition xxx_Compaction_paramsList between
+	Compaction[0..1] role xxx_Compaction_paramsList_src
+	CompactionParams[*] role paramsList
+end
+
+association xxx_CompactionParams_mode between
+	CompactionParams[*] role xxx_CompactionParams_mode_src
+	PowerMode[0..1] role mode
+end
+
+composition xxx_Memory_memoryModelList between
+	Memory[0..1] role xxx_Memory_memoryModelList_src
+	MemoryModel[*] role memoryModelList
+end
+
+composition xxx_Memory_bitcellDefinition between
+	Memory[*] role xxx_Memory_bitcellDefinition_src
+	BitCellDefinition[0..1] role bitcellDefinition
+end
+
+association xxx_FamilyGateLength_gateLength between
+	FamilyGateLength[*] role xxx_FamilyGateLength_gateLength_src
+	GateLength[0..1] role gateLength
+end
+
+association xxx_FamilyGateLength_stdcellFamily between
+	FamilyGateLength[*] role xxx_FamilyGateLength_stdcellFamily_src
+	StdFamily[0..1] role stdcellFamily
+end
+
+composition xxx_FamilyGateLength_hg between
+	FamilyGateLength[*] role xxx_FamilyGateLength_hg_src
+	Mercury[0..1] role hg
+end
+
+composition xxx_Voltages_processes between
+	Voltages[0..1] role xxx_Voltages_processes_src
+	VoltageRangesProcess[*] role processes
+end
+
+composition xxx_Voltages_data between
+	Voltages[*] role xxx_Voltages_data_src
+	VoltageParameters[0..1] role data
+end
+
+composition xxx_VoltageRange_params between
+	VoltageRange[0..1] role xxx_VoltageRange_params_src
+	VoltageRangeParam[*] role params
+end
+
+composition xxx_VoltageRangesProcess_ranges between
+	VoltageRangesProcess[0..1] role xxx_VoltageRangesProcess_ranges_src
+	VoltageRange[*] role ranges
+end
+
+composition xxx_Pad_families between
+	Pad[0..1] role xxx_Pad_families_src
+	PadFamily[*] role families
+end
+
+composition xxx_PowerManagement_powerModelDefinition between
+	PowerManagement[*] role xxx_PowerManagement_powerModelDefinition_src
+	PowerModeDefinition[0..1] role powerModelDefinition
+end
+
+composition xxx_PowerManagement_tooling between
+	PowerManagement[*] role xxx_PowerManagement_tooling_src
+	PMTools[0..1] role tooling
+end
+
+composition xxx_PowerModeDefinition_powerModes between
+	PowerModeDefinition[0..1] role xxx_PowerModeDefinition_powerModes_src
+	PowerMode[*] role powerModes
+end
+
+composition xxx_BitCellDefinition_bitcells between
+	BitCellDefinition[0..1] role xxx_BitCellDefinition_bitcells_src
+	BitCell[*] role bitcells
+end
+
+composition xxx_GateLengthDefinition_gateLengths between
+	GateLengthDefinition[0..1] role xxx_GateLengthDefinition_gateLengths_src
+	GateLength[*] role gateLengths
+end
+
+association xxx_EstimatedContent_cellFamilies between
+	EstimatedContent[0..1] role xxx_EstimatedContent_cellFamilies_src
+	FamilyGateLength[*] role cellFamilies
+end
+
+composition xxx_EstimatedContent_categories between
+	EstimatedContent[0..1] role xxx_EstimatedContent_categories_src
+	EstimatedContentCategory[*] role categories
+end
+
+composition xxx_CellsInfo_cells between
+	CellsInfo[0..1] role xxx_CellsInfo_cells_src
+	CellInfo[*] role cells
+end
+
+composition xxx_EstimatedContentCell_drives between
+	EstimatedContentCell[*] role xxx_EstimatedContentCell_drives_src
+	EstimatedContentCellDrive[0..1] role drives
+end
+
+association xxx_EstimatedContentCell_overideGatelength between
+	EstimatedContentCell[*] role xxx_EstimatedContentCell_overideGatelength_src
+	GateLength[0..1] role overideGatelength
+end
+
+composition xxx_EstimatedContentCategory_cells between
+	EstimatedContentCategory[0..1] role xxx_EstimatedContentCategory_cells_src
+	EstimatedContentCell[*] role cells
+end
+
+composition xxx_Parameters_temperatureRange between
+	Parameters[*] role xxx_Parameters_temperatureRange_src
+	TemperatureRange[0..1] role temperatureRange
+end
+
+composition xxx_PMTools_ips between
+	PMTools[0..1] role xxx_PMTools_ips_src
+	PMIp[*] role ips
+end
+
+composition xxx_Layout_area between
+	Layout[*] role xxx_Layout_area_src
+	LayoutArea[0..1] role area
+end
+

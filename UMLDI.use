@@ -1,0 +1,1925 @@
+model UML
+enum AggregationKind{
+	ak_none,
+	ak_aggregate,
+	ak_composite
+}
+
+enum CallConcurrencyKind{
+	cck_sequential,
+	cck_guarded,
+	cck_concurrent
+}
+
+enum ChangeableKind{
+	ck_changeable,
+	ck_frozen,
+	ck_addOnly
+}
+
+enum OrderingKind{
+	ok_unordered,
+	ok_ordered
+}
+
+enum ParameterDirectionKind{
+	pdk_in,
+	pdk_inout,
+	pdk_out,
+	pdk_return
+}
+
+enum ScopeKind{
+	sk_instance,
+	sk_classifier
+}
+
+enum VisibilityKind{
+	vk_public,
+	vk_protected,
+	vk_private,
+	vk_package
+}
+
+enum PseudostateKind{
+	pk_choice,
+	pk_deepHistory,
+	pk_fork,
+	pk_initial,
+	pk_join,
+	pk_junction,
+	pk_shallowHistory
+}
+
+class Collaboration<Namespace
+attributes
+operations
+end
+
+class ClassifierRole<Classifier
+attributes
+operations
+end
+
+class AssociationRole<Association
+attributes
+operations
+end
+
+class AssociationEndRole<AssociationEnd
+attributes
+operations
+end
+
+class Message<ModelElement
+attributes
+operations
+end
+
+class Interaction<ModelElement
+attributes
+operations
+end
+
+class InteractionInstanceSet<ModelElement
+attributes
+operations
+end
+
+class CollaborationInstanceSet<ModelElement
+attributes
+operations
+end
+
+class UseCase<Classifier
+attributes
+operations
+end
+
+class Actor<Classifier
+attributes
+operations
+end
+
+class UseCaseInstance<Instance
+attributes
+operations
+end
+
+class Extend<Relationship
+attributes
+operations
+end
+
+class Include<Relationship
+attributes
+operations
+end
+
+class ExtensionPoint<ModelElement
+attributes
+	location : String
+operations
+end
+
+class Multiplicity
+attributes
+operations
+end
+
+class MultiplicityRange
+attributes
+	lower : Integer
+	upper : Integer
+operations
+end
+
+class Expression
+attributes
+	language : String
+	body : String
+operations
+end
+
+class BooleanExpression<Expression
+attributes
+operations
+end
+
+class TypeExpression<Expression
+attributes
+operations
+end
+
+class MappingExpression<Expression
+attributes
+operations
+end
+
+class ProcedureExpression<Expression
+attributes
+operations
+end
+
+class ObjectSetExpression<Expression
+attributes
+operations
+end
+
+class ActionExpression<Expression
+attributes
+operations
+end
+
+class IterationExpression<Expression
+attributes
+operations
+end
+
+class TimeExpression<Expression
+attributes
+operations
+end
+
+class ArgListsExpression<Expression
+attributes
+operations
+end
+
+abstract class Instance<ModelElement
+attributes
+operations
+end
+
+class Signal<Classifier
+attributes
+operations
+end
+
+abstract class Action<ModelElement
+attributes
+	isAsynchronous : Boolean
+operations
+end
+
+class CreateAction<Action
+attributes
+operations
+end
+
+class DestroyAction<Action
+attributes
+operations
+end
+
+class UninterpretedAction<Action
+attributes
+operations
+end
+
+class AttributeLink<ModelElement
+attributes
+operations
+end
+
+class Object<Instance
+attributes
+operations
+end
+
+class Link<ModelElement
+attributes
+operations
+end
+
+class LinkObject<Link
+attributes
+operations
+end
+
+class DataValue<Instance
+attributes
+operations
+end
+
+class CallAction<Action
+attributes
+operations
+end
+
+class SendAction<Action
+attributes
+operations
+end
+
+class ActionSequence<Action
+attributes
+operations
+end
+
+class Argument<ModelElement
+attributes
+operations
+end
+
+class Reception<BehavioralFeature
+attributes
+	specification : String
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+operations
+end
+
+class LinkEnd<ModelElement
+attributes
+operations
+end
+
+class ReturnAction<Action
+attributes
+operations
+end
+
+class TerminateAction<Action
+attributes
+operations
+end
+
+class Stimulus<ModelElement
+attributes
+operations
+end
+
+class Exception<Signal
+attributes
+operations
+end
+
+class ComponentInstance<Instance
+attributes
+operations
+end
+
+class NodeInstance<Instance
+attributes
+operations
+end
+
+class SubsystemInstance<Instance
+attributes
+operations
+end
+
+class ActivityGraph<StateMachine
+attributes
+operations
+end
+
+class Partition<ModelElement
+attributes
+operations
+end
+
+class SubactivityState<SubmachineState
+attributes
+	isDynamic : Boolean
+operations
+end
+
+class ActionState<SimpleState
+attributes
+	isDynamic : Boolean
+operations
+end
+
+class CallState<ActionState
+attributes
+operations
+end
+
+class ObjectFlowState<SimpleState
+attributes
+	isSynch : Boolean
+operations
+end
+
+class ClassifierInState<Classifier
+attributes
+operations
+end
+
+class StateMachine<ModelElement
+attributes
+operations
+end
+
+abstract class Event<ModelElement
+attributes
+operations
+end
+
+abstract class StateVertex<ModelElement
+attributes
+operations
+end
+
+abstract class State<StateVertex
+attributes
+operations
+end
+
+class TimeEvent<Event
+attributes
+operations
+end
+
+class CallEvent<Event
+attributes
+operations
+end
+
+class SignalEvent<Event
+attributes
+operations
+end
+
+class Transition<ModelElement
+attributes
+operations
+end
+
+class CompositeState<State
+attributes
+	isConcurrent : Boolean
+operations
+end
+
+class ChangeEvent<Event
+attributes
+operations
+end
+
+class Guard<ModelElement
+attributes
+operations
+end
+
+class Pseudostate<StateVertex
+attributes
+	kind : PseudostateKind
+operations
+end
+
+class SimpleState<State
+attributes
+operations
+end
+
+class SubmachineState<CompositeState
+attributes
+operations
+end
+
+class SynchState<StateVertex
+attributes
+	bound : Integer
+operations
+end
+
+class StubState<StateVertex
+attributes
+	referenceState : String
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class Point
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class Dimension
+attributes
+	width : Real
+	height : Real
+operations
+end
+
+class BezierPoint
+attributes
+operations
+end
+
+abstract class DiagramElement
+attributes
+	isVisible : Boolean
+operations
+end
+
+abstract class GraphElement<DiagramElement
+attributes
+operations
+end
+
+abstract class SemanticModelBridge
+attributes
+	presentation : String
+operations
+end
+
+class GraphEdge<GraphElement
+attributes
+operations
+end
+
+class GraphNode<GraphElement
+attributes
+operations
+end
+
+class GraphConnector
+attributes
+operations
+end
+
+abstract class LeafElement<DiagramElement
+attributes
+operations
+end
+
+class Reference<DiagramElement
+attributes
+operations
+end
+
+class TextElement<LeafElement
+attributes
+	text : String
+operations
+end
+
+abstract class GraphicPrimitive<LeafElement
+attributes
+operations
+end
+
+class Polyline<GraphicPrimitive
+attributes
+	closed : Boolean
+operations
+end
+
+class Ellipse<GraphicPrimitive
+attributes
+	radiusX : Real
+	radiusY : Real
+	rotation : Real
+	startAngle : Real
+	endAngle : Real
+operations
+end
+
+class Image<LeafElement
+attributes
+	uri : String
+	mimeType : String
+operations
+end
+
+class Property
+attributes
+	key : String
+	value : String
+operations
+end
+
+class SimpleSemanticModelElement<SemanticModelBridge
+attributes
+	typeInfo : String
+operations
+end
+
+class Uml1SemanticModelBridge<SemanticModelBridge
+attributes
+operations
+end
+
+class CoreSemanticModelBridge<SemanticModelBridge
+attributes
+operations
+end
+
+class DiagramLink
+attributes
+	zoom : Real
+operations
+end
+
+class Diagram<GraphNode
+attributes
+	name : String
+	zoom : Real
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+abstract class ModelElement<Element
+attributes
+	name : String
+	visibility : VisibilityKind
+	isSpecification : Boolean
+operations
+end
+
+abstract class GeneralizableElement<ModelElement
+attributes
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+operations
+end
+
+abstract class Namespace<ModelElement
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	isActive : Boolean
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+abstract class Feature<ModelElement
+attributes
+	ownerScope : ScopeKind
+operations
+end
+
+abstract class StructuralFeature<Feature
+attributes
+	changeability : ChangeableKind
+	targetScope : ScopeKind
+	ordering : OrderingKind
+operations
+end
+
+class AssociationEnd<ModelElement
+attributes
+	isNavigable : Boolean
+	ordering : OrderingKind
+	aggregation : AggregationKind
+	targetScope : ScopeKind
+	changeability : ChangeableKind
+operations
+end
+
+class Interface<Classifier
+attributes
+operations
+end
+
+class Constraint<ModelElement
+attributes
+operations
+end
+
+abstract class Relationship<ModelElement
+attributes
+operations
+end
+
+class Association<Relationship
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+abstract class BehavioralFeature<Feature
+attributes
+	isQuery : Boolean
+operations
+end
+
+class Operation<BehavioralFeature
+attributes
+	concurrency : CallConcurrencyKind
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+	specification : String
+operations
+end
+
+class Parameter<ModelElement
+attributes
+	kind : ParameterDirectionKind
+operations
+end
+
+class Method<BehavioralFeature
+attributes
+operations
+end
+
+class Generalization<Relationship
+attributes
+	discriminator : String
+operations
+end
+
+class AssociationClass<Class
+attributes
+operations
+end
+
+class Dependency<Relationship
+attributes
+operations
+end
+
+class Abstraction<Dependency
+attributes
+operations
+end
+
+abstract class PresentationElement<Element
+attributes
+operations
+end
+
+class Usage<Dependency
+attributes
+operations
+end
+
+class Binding<Dependency
+attributes
+operations
+end
+
+class Component<Classifier
+attributes
+operations
+end
+
+class Node<Classifier
+attributes
+operations
+end
+
+class Permission<Dependency
+attributes
+operations
+end
+
+class Comment<ModelElement
+attributes
+	body : String
+operations
+end
+
+class Flow<Relationship
+attributes
+operations
+end
+
+class ElementResidence
+attributes
+	visibility : VisibilityKind
+operations
+end
+
+class TemplateParameter
+attributes
+operations
+end
+
+class Primitive<DataType
+attributes
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+class EnumerationLiteral<ModelElement
+attributes
+operations
+end
+
+class Stereotype<GeneralizableElement
+attributes
+	icon : String
+	baseClass : String
+operations
+end
+
+class TagDefinition<ModelElement
+attributes
+	tagType : String
+operations
+end
+
+class TaggedValue<ModelElement
+attributes
+	dataValue : String
+operations
+end
+
+class ProgrammingLanguageDataType<DataType
+attributes
+operations
+end
+
+class Artifact<Classifier
+attributes
+operations
+end
+
+class TemplateArgument
+attributes
+operations
+end
+
+class Package<Namespace
+attributes
+operations
+end
+
+class Model<Package
+attributes
+operations
+end
+
+class Subsystem<Classifier
+attributes
+	isInstantiable : Boolean
+operations
+end
+
+class ElementImport
+attributes
+	visibility : VisibilityKind
+	alias : String
+	isSpecification : Boolean
+operations
+end
+
+association xxx_Collaboration_usedCollaboration between
+	Collaboration[0..1] role xxx_Collaboration_usedCollaboration_src
+	Collaboration[*] role usedCollaboration
+end
+
+association xxx_Collaboration_representedOperation between
+	Collaboration[*] role xxx_Collaboration_representedOperation_src
+	Operation[0..1] role representedOperation
+end
+
+association xxx_Collaboration_representedClassifier between
+	Collaboration[*] role xxx_Collaboration_representedClassifier_src
+	Classifier[0..1] role representedClassifier
+end
+
+composition xxx_Collaboration_interaction between
+	Collaboration[0..1] role xxx_Collaboration_interaction_src
+	Interaction[*] role interaction
+end
+
+association xxx_Collaboration_constrainingElement between
+	Collaboration[0..1] role xxx_Collaboration_constrainingElement_src
+	ModelElement[*] role constrainingElement
+end
+
+association xxx_ClassifierRole_availableContents between
+	ClassifierRole[0..1] role xxx_ClassifierRole_availableContents_src
+	ModelElement[*] role availableContents
+end
+
+association xxx_ClassifierRole_base between
+	ClassifierRole[0..1] role xxx_ClassifierRole_base_src
+	Classifier[1..*] role base
+end
+
+association xxx_ClassifierRole_conformingInstance between
+	ClassifierRole[0..1] role xxx_ClassifierRole_conformingInstance_src
+	Instance[*] role conformingInstance
+end
+
+association xxx_ClassifierRole_availableFeature between
+	ClassifierRole[0..1] role xxx_ClassifierRole_availableFeature_src
+	Feature[*] role availableFeature
+end
+
+association xxx_ClassifierRole_multiplicity between
+	ClassifierRole[*] role xxx_ClassifierRole_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+association xxx_AssociationRole_base between
+	AssociationRole[*] role xxx_AssociationRole_base_src
+	Association[0..1] role base
+end
+
+association xxx_AssociationRole_conformingLink between
+	AssociationRole[0..1] role xxx_AssociationRole_conformingLink_src
+	Link[*] role conformingLink
+end
+
+association xxx_AssociationRole_message between
+	AssociationRole[0..1] role xxx_AssociationRole_message_src
+	Message[*] role message
+end
+
+association xxx_AssociationRole_multiplicity between
+	AssociationRole[*] role xxx_AssociationRole_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+association xxx_AssociationEndRole_base between
+	AssociationEndRole[*] role xxx_AssociationEndRole_base_src
+	AssociationEnd[0..1] role base
+end
+
+association xxx_AssociationEndRole_availableQualifier between
+	AssociationEndRole[0..1] role xxx_AssociationEndRole_availableQualifier_src
+	Attribute[*] role availableQualifier
+end
+
+association xxx_AssociationEndRole_collaborationMultiplicity between
+	AssociationEndRole[*] role xxx_AssociationEndRole_collaborationMultiplicity_src
+	Multiplicity[0..1] role collaborationMultiplicity
+end
+
+association xxx_Message_interaction between
+	Message[*] role xxx_Message_interaction_src
+	Interaction[1] role interaction
+end
+
+association xxx_Message_conformingStimulus between
+	Message[0..1] role xxx_Message_conformingStimulus_src
+	Stimulus[*] role conformingStimulus
+end
+
+association xxx_Message_action between
+	Message[*] role xxx_Message_action_src
+	Action[1] role action
+end
+
+association xxx_Message_communicationConnection between
+	Message[*] role xxx_Message_communicationConnection_src
+	AssociationRole[0..1] role communicationConnection
+end
+
+association xxx_Message_activator between
+	Message[*] role xxx_Message_activator_src
+	Message[0..1] role activator
+end
+
+association xxx_Message_receiver between
+	Message[*] role xxx_Message_receiver_src
+	ClassifierRole[1] role receiver
+end
+
+association xxx_Message_sender between
+	Message[*] role xxx_Message_sender_src
+	ClassifierRole[1] role sender
+end
+
+association xxx_Message_predecessor between
+	Message[0..1] role xxx_Message_predecessor_src
+	Message[*] role predecessor
+end
+
+composition xxx_Interaction_message between
+	Interaction[0..1] role xxx_Interaction_message_src
+	Message[1..*] role message
+end
+
+association xxx_Interaction_context_ between
+	Interaction[*] role xxx_Interaction_context__src
+	Collaboration[1] role context_
+end
+
+association xxx_InteractionInstanceSet_interaction between
+	InteractionInstanceSet[*] role xxx_InteractionInstanceSet_interaction_src
+	Interaction[0..1] role interaction
+end
+
+association xxx_InteractionInstanceSet_context_ between
+	InteractionInstanceSet[*] role xxx_InteractionInstanceSet_context__src
+	CollaborationInstanceSet[1] role context_
+end
+
+association xxx_InteractionInstanceSet_participatingStimulus between
+	InteractionInstanceSet[0..1] role xxx_InteractionInstanceSet_participatingStimulus_src
+	Stimulus[1..*] role participatingStimulus
+end
+
+association xxx_CollaborationInstanceSet_collaboration between
+	CollaborationInstanceSet[*] role xxx_CollaborationInstanceSet_collaboration_src
+	Collaboration[0..1] role collaboration
+end
+
+association xxx_CollaborationInstanceSet_constrainingElement between
+	CollaborationInstanceSet[0..1] role xxx_CollaborationInstanceSet_constrainingElement_src
+	ModelElement[*] role constrainingElement
+end
+
+association xxx_CollaborationInstanceSet_participatingInstance between
+	CollaborationInstanceSet[0..1] role xxx_CollaborationInstanceSet_participatingInstance_src
+	Instance[1..*] role participatingInstance
+end
+
+composition xxx_CollaborationInstanceSet_interactionInstanceSet between
+	CollaborationInstanceSet[0..1] role xxx_CollaborationInstanceSet_interactionInstanceSet_src
+	InteractionInstanceSet[*] role interactionInstanceSet
+end
+
+association xxx_CollaborationInstanceSet_participatingLink between
+	CollaborationInstanceSet[0..1] role xxx_CollaborationInstanceSet_participatingLink_src
+	Link[*] role participatingLink
+end
+
+association xxx_UseCase_include between
+	UseCase[0..1] role xxx_UseCase_include_src
+	Include[*] role include
+end
+
+association xxx_UseCase_extend between
+	UseCase[0..1] role xxx_UseCase_extend_src
+	Extend[*] role extend
+end
+
+composition xxx_UseCase_extensionPoint between
+	UseCase[0..1] role xxx_UseCase_extensionPoint_src
+	ExtensionPoint[*] role extensionPoint
+end
+
+association xxx_Extend_extensionPoint between
+	Extend[0..1] role xxx_Extend_extensionPoint_src
+	ExtensionPoint[1..*] role extensionPoint
+end
+
+association xxx_Extend_extension between
+	Extend[*] role xxx_Extend_extension_src
+	UseCase[1] role extension
+end
+
+association xxx_Extend_base between
+	Extend[*] role xxx_Extend_base_src
+	UseCase[1] role base
+end
+
+association xxx_Extend_condition between
+	Extend[*] role xxx_Extend_condition_src
+	BooleanExpression[1] role condition
+end
+
+association xxx_Include_addition between
+	Include[*] role xxx_Include_addition_src
+	UseCase[1] role addition
+end
+
+association xxx_Include_base between
+	Include[*] role xxx_Include_base_src
+	UseCase[1] role base
+end
+
+association xxx_ExtensionPoint_useCase between
+	ExtensionPoint[*] role xxx_ExtensionPoint_useCase_src
+	UseCase[1] role useCase
+end
+
+composition xxx_Multiplicity_range between
+	Multiplicity[0..1] role xxx_Multiplicity_range_src
+	MultiplicityRange[1..*] role range
+end
+
+association xxx_MultiplicityRange_multiplicity between
+	MultiplicityRange[*] role xxx_MultiplicityRange_multiplicity_src
+	Multiplicity[1] role multiplicity
+end
+
+composition xxx_Instance_ownedInstance between
+	Instance[0..1] role xxx_Instance_ownedInstance_src
+	Instance[*] role ownedInstance
+end
+
+association xxx_Instance_linkEnd between
+	Instance[0..1] role xxx_Instance_linkEnd_src
+	LinkEnd[*] role linkEnd
+end
+
+association xxx_Instance_classifier between
+	Instance[0..1] role xxx_Instance_classifier_src
+	Classifier[1..*] role classifier
+end
+
+association xxx_Instance_componentInstance between
+	Instance[*] role xxx_Instance_componentInstance_src
+	ComponentInstance[0..1] role componentInstance
+end
+
+composition xxx_Instance_slot between
+	Instance[0..1] role xxx_Instance_slot_src
+	AttributeLink[*] role slot
+end
+
+composition xxx_Instance_ownedLink between
+	Instance[0..1] role xxx_Instance_ownedLink_src
+	Link[*] role ownedLink
+end
+
+composition xxx_Action_actualArgument between
+	Action[0..1] role xxx_Action_actualArgument_src
+	Argument[*] role actualArgument
+end
+
+association xxx_Action_actionSequence between
+	Action[*] role xxx_Action_actionSequence_src
+	ActionSequence[0..1] role actionSequence
+end
+
+association xxx_Action_recurrence between
+	Action[*] role xxx_Action_recurrence_src
+	IterationExpression[0..1] role recurrence
+end
+
+association xxx_Action_target between
+	Action[*] role xxx_Action_target_src
+	ObjectSetExpression[0..1] role target
+end
+
+association xxx_Action_script between
+	Action[*] role xxx_Action_script_src
+	ActionExpression[0..1] role script
+end
+
+association xxx_CreateAction_instantiation between
+	CreateAction[*] role xxx_CreateAction_instantiation_src
+	Classifier[1] role instantiation
+end
+
+association xxx_AttributeLink_instance between
+	AttributeLink[*] role xxx_AttributeLink_instance_src
+	Instance[0..1] role instance
+end
+
+association xxx_AttributeLink_value between
+	AttributeLink[*] role xxx_AttributeLink_value_src
+	Instance[1] role value
+end
+
+association xxx_AttributeLink_linkEnd between
+	AttributeLink[*] role xxx_AttributeLink_linkEnd_src
+	LinkEnd[0..1] role linkEnd
+end
+
+association xxx_AttributeLink_attribute between
+	AttributeLink[*] role xxx_AttributeLink_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Link_association_ between
+	Link[*] role xxx_Link_association__src
+	Association[1] role association_
+end
+
+composition xxx_Link_connection between
+	Link[0..1] role xxx_Link_connection_src
+	LinkEnd[2..*] role connection
+end
+
+association xxx_CallAction_operation between
+	CallAction[*] role xxx_CallAction_operation_src
+	Operation[1] role operation
+end
+
+association xxx_SendAction_signal between
+	SendAction[*] role xxx_SendAction_signal_src
+	Signal[1] role signal
+end
+
+composition xxx_ActionSequence_action between
+	ActionSequence[0..1] role xxx_ActionSequence_action_src
+	Action[*] role action
+end
+
+association xxx_Argument_action between
+	Argument[*] role xxx_Argument_action_src
+	Action[0..1] role action
+end
+
+association xxx_Argument_value between
+	Argument[*] role xxx_Argument_value_src
+	Expression[1] role value
+end
+
+association xxx_Reception_signal between
+	Reception[*] role xxx_Reception_signal_src
+	Signal[1] role signal
+end
+
+association xxx_LinkEnd_link between
+	LinkEnd[*] role xxx_LinkEnd_link_src
+	Link[1] role link
+end
+
+composition xxx_LinkEnd_qualifiedValue between
+	LinkEnd[0..1] role xxx_LinkEnd_qualifiedValue_src
+	AttributeLink[*] role qualifiedValue
+end
+
+association xxx_LinkEnd_instance between
+	LinkEnd[*] role xxx_LinkEnd_instance_src
+	Instance[1] role instance
+end
+
+association xxx_LinkEnd_associationEnd between
+	LinkEnd[*] role xxx_LinkEnd_associationEnd_src
+	AssociationEnd[1] role associationEnd
+end
+
+association xxx_Stimulus_argument between
+	Stimulus[0..1] role xxx_Stimulus_argument_src
+	Instance[*] role argument
+end
+
+association xxx_Stimulus_communicationLink between
+	Stimulus[*] role xxx_Stimulus_communicationLink_src
+	Link[0..1] role communicationLink
+end
+
+association xxx_Stimulus_receiver between
+	Stimulus[*] role xxx_Stimulus_receiver_src
+	Instance[1] role receiver
+end
+
+association xxx_Stimulus_dispatchAction between
+	Stimulus[*] role xxx_Stimulus_dispatchAction_src
+	Action[1] role dispatchAction
+end
+
+association xxx_Stimulus_sender between
+	Stimulus[*] role xxx_Stimulus_sender_src
+	Instance[1] role sender
+end
+
+association xxx_ComponentInstance_resident between
+	ComponentInstance[0..1] role xxx_ComponentInstance_resident_src
+	Instance[*] role resident
+end
+
+association xxx_ComponentInstance_nodeInstance between
+	ComponentInstance[*] role xxx_ComponentInstance_nodeInstance_src
+	NodeInstance[0..1] role nodeInstance
+end
+
+association xxx_NodeInstance_resident between
+	NodeInstance[0..1] role xxx_NodeInstance_resident_src
+	ComponentInstance[*] role resident
+end
+
+composition xxx_ActivityGraph_partition between
+	ActivityGraph[0..1] role xxx_ActivityGraph_partition_src
+	Partition[*] role partition
+end
+
+association xxx_Partition_contents between
+	Partition[0..1] role xxx_Partition_contents_src
+	ModelElement[*] role contents
+end
+
+association xxx_Partition_activityGraph between
+	Partition[*] role xxx_Partition_activityGraph_src
+	ActivityGraph[1] role activityGraph
+end
+
+association xxx_SubactivityState_dynamicArguments between
+	SubactivityState[*] role xxx_SubactivityState_dynamicArguments_src
+	ArgListsExpression[0..1] role dynamicArguments
+end
+
+association xxx_SubactivityState_dynamicMultiplicity between
+	SubactivityState[*] role xxx_SubactivityState_dynamicMultiplicity_src
+	Multiplicity[0..1] role dynamicMultiplicity
+end
+
+association xxx_ActionState_dynamicArguments between
+	ActionState[*] role xxx_ActionState_dynamicArguments_src
+	ArgListsExpression[0..1] role dynamicArguments
+end
+
+association xxx_ActionState_dynamicMultiplicity between
+	ActionState[*] role xxx_ActionState_dynamicMultiplicity_src
+	Multiplicity[0..1] role dynamicMultiplicity
+end
+
+association xxx_ObjectFlowState_type between
+	ObjectFlowState[*] role xxx_ObjectFlowState_type_src
+	Classifier[1] role type
+end
+
+association xxx_ObjectFlowState_parameter between
+	ObjectFlowState[0..1] role xxx_ObjectFlowState_parameter_src
+	Parameter[*] role parameter
+end
+
+association xxx_ClassifierInState_inState between
+	ClassifierInState[0..1] role xxx_ClassifierInState_inState_src
+	State[1..*] role inState
+end
+
+association xxx_ClassifierInState_type between
+	ClassifierInState[*] role xxx_ClassifierInState_type_src
+	Classifier[1] role type
+end
+
+association xxx_StateMachine_context_ between
+	StateMachine[*] role xxx_StateMachine_context__src
+	ModelElement[0..1] role context_
+end
+
+association xxx_StateMachine_submachineState between
+	StateMachine[0..1] role xxx_StateMachine_submachineState_src
+	SubmachineState[*] role submachineState
+end
+
+composition xxx_StateMachine_top between
+	StateMachine[*] role xxx_StateMachine_top_src
+	State[1] role top
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Event_parameter between
+	Event[0..1] role xxx_Event_parameter_src
+	Parameter[*] role parameter
+end
+
+association xxx_StateVertex_container between
+	StateVertex[*] role xxx_StateVertex_container_src
+	CompositeState[0..1] role container
+end
+
+association xxx_StateVertex_incoming between
+	StateVertex[0..1] role xxx_StateVertex_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_StateVertex_outgoing between
+	StateVertex[0..1] role xxx_StateVertex_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_State_deferrableEvent between
+	State[0..1] role xxx_State_deferrableEvent_src
+	Event[*] role deferrableEvent
+end
+
+composition xxx_State_internalTransition between
+	State[0..1] role xxx_State_internalTransition_src
+	Transition[*] role internalTransition
+end
+
+composition xxx_State_exit between
+	State[*] role xxx_State_exit_src
+	Action[0..1] role exit
+end
+
+composition xxx_State_doActivity between
+	State[*] role xxx_State_doActivity_src
+	Action[0..1] role doActivity
+end
+
+composition xxx_State_entry between
+	State[*] role xxx_State_entry_src
+	Action[0..1] role entry
+end
+
+association xxx_State_stateMachine between
+	State[*] role xxx_State_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+association xxx_TimeEvent_when between
+	TimeEvent[*] role xxx_TimeEvent_when_src
+	TimeExpression[1] role when
+end
+
+association xxx_CallEvent_operation between
+	CallEvent[*] role xxx_CallEvent_operation_src
+	Operation[1] role operation
+end
+
+association xxx_SignalEvent_signal between
+	SignalEvent[*] role xxx_SignalEvent_signal_src
+	Signal[1] role signal
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	StateVertex[1] role target
+end
+
+association xxx_Transition_trigger between
+	Transition[*] role xxx_Transition_trigger_src
+	Event[0..1] role trigger
+end
+
+association xxx_Transition_stateMachine between
+	Transition[*] role xxx_Transition_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	StateVertex[1] role source
+end
+
+composition xxx_Transition_effect between
+	Transition[*] role xxx_Transition_effect_src
+	Action[0..1] role effect
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[0..1] role guard
+end
+
+composition xxx_CompositeState_subvertex between
+	CompositeState[0..1] role xxx_CompositeState_subvertex_src
+	StateVertex[*] role subvertex
+end
+
+association xxx_ChangeEvent_changeExpression between
+	ChangeEvent[*] role xxx_ChangeEvent_changeExpression_src
+	BooleanExpression[1] role changeExpression
+end
+
+association xxx_Guard_transition between
+	Guard[*] role xxx_Guard_transition_src
+	Transition[1] role transition
+end
+
+association xxx_Guard_expression between
+	Guard[*] role xxx_Guard_expression_src
+	BooleanExpression[1] role expression
+end
+
+association xxx_SubmachineState_submachine between
+	SubmachineState[*] role xxx_SubmachineState_submachine_src
+	StateMachine[1] role submachine
+end
+
+association xxx_BezierPoint_base between
+	BezierPoint[*] role xxx_BezierPoint_base_src
+	Point[1] role base
+end
+
+association xxx_BezierPoint_control1 between
+	BezierPoint[*] role xxx_BezierPoint_control1_src
+	Point[1] role control1
+end
+
+association xxx_BezierPoint_control2 between
+	BezierPoint[*] role xxx_BezierPoint_control2_src
+	Point[1] role control2
+end
+
+association xxx_DiagramElement_container between
+	DiagramElement[*] role xxx_DiagramElement_container_src
+	GraphElement[0..1] role container
+end
+
+composition xxx_DiagramElement_property between
+	DiagramElement[0..1] role xxx_DiagramElement_property_src
+	Property[*] role property
+end
+
+association xxx_DiagramElement_reference between
+	DiagramElement[0..1] role xxx_DiagramElement_reference_src
+	Reference[*] role reference
+end
+
+composition xxx_GraphElement_semanticModel between
+	GraphElement[*] role xxx_GraphElement_semanticModel_src
+	SemanticModelBridge[1] role semanticModel
+end
+
+composition xxx_GraphElement_contained between
+	GraphElement[0..1] role xxx_GraphElement_contained_src
+	DiagramElement[*] role contained
+end
+
+composition xxx_GraphElement_anchorage between
+	GraphElement[0..1] role xxx_GraphElement_anchorage_src
+	GraphConnector[*] role anchorage
+end
+
+composition xxx_GraphElement_link between
+	GraphElement[0..1] role xxx_GraphElement_link_src
+	DiagramLink[*] role link
+end
+
+association xxx_GraphElement_position between
+	GraphElement[*] role xxx_GraphElement_position_src
+	Point[1] role position
+end
+
+association xxx_SemanticModelBridge_diagram between
+	SemanticModelBridge[*] role xxx_SemanticModelBridge_diagram_src
+	Diagram[0..1] role diagram
+end
+
+association xxx_SemanticModelBridge_graphElement between
+	SemanticModelBridge[*] role xxx_SemanticModelBridge_graphElement_src
+	GraphElement[1] role graphElement
+end
+
+association xxx_GraphEdge_anchor between
+	GraphEdge[*] role xxx_GraphEdge_anchor_src
+	GraphConnector[2] role anchor
+end
+
+association xxx_GraphEdge_waypoints between
+	GraphEdge[0..1] role xxx_GraphEdge_waypoints_src
+	BezierPoint[2..*] role waypoints
+end
+
+association xxx_GraphNode_size between
+	GraphNode[*] role xxx_GraphNode_size_src
+	Dimension[0..1] role size
+end
+
+association xxx_GraphConnector_graphElement between
+	GraphConnector[*] role xxx_GraphConnector_graphElement_src
+	GraphElement[1] role graphElement
+end
+
+association xxx_GraphConnector_graphEdge between
+	GraphConnector[0..1] role xxx_GraphConnector_graphEdge_src
+	GraphEdge[*] role graphEdge
+end
+
+association xxx_GraphConnector_position between
+	GraphConnector[*] role xxx_GraphConnector_position_src
+	Point[1] role position
+end
+
+association xxx_Reference_referenced between
+	Reference[*] role xxx_Reference_referenced_src
+	DiagramElement[1] role referenced
+end
+
+association xxx_Polyline_waypoints between
+	Polyline[0..1] role xxx_Polyline_waypoints_src
+	BezierPoint[2..*] role waypoints
+end
+
+association xxx_Ellipse_center between
+	Ellipse[*] role xxx_Ellipse_center_src
+	Point[1] role center
+end
+
+association xxx_Uml1SemanticModelBridge_element between
+	Uml1SemanticModelBridge[*] role xxx_Uml1SemanticModelBridge_element_src
+	Element[1] role element
+end
+
+association xxx_DiagramLink_graphElement between
+	DiagramLink[*] role xxx_DiagramLink_graphElement_src
+	GraphElement[1] role graphElement
+end
+
+association xxx_DiagramLink_diagram between
+	DiagramLink[*] role xxx_DiagramLink_diagram_src
+	Diagram[1] role diagram
+end
+
+association xxx_DiagramLink_viewport between
+	DiagramLink[*] role xxx_DiagramLink_viewport_src
+	Point[1] role viewport
+end
+
+composition xxx_Diagram_owner between
+	Diagram[*] role xxx_Diagram_owner_src
+	SemanticModelBridge[1] role owner
+end
+
+association xxx_Diagram_diagramLink between
+	Diagram[0..1] role xxx_Diagram_diagramLink_src
+	DiagramLink[*] role diagramLink
+end
+
+association xxx_Diagram_viewport between
+	Diagram[*] role xxx_Diagram_viewport_src
+	Point[1] role viewport
+end
+
+composition xxx_ModelElement_taggedValue between
+	ModelElement[0..1] role xxx_ModelElement_taggedValue_src
+	TaggedValue[*] role taggedValue
+end
+
+association xxx_ModelElement_clientDependency between
+	ModelElement[0..1] role xxx_ModelElement_clientDependency_src
+	Dependency[*] role clientDependency
+end
+
+association xxx_ModelElement_constraint between
+	ModelElement[0..1] role xxx_ModelElement_constraint_src
+	Constraint[*] role constraint
+end
+
+association xxx_ModelElement_stereotype between
+	ModelElement[0..1] role xxx_ModelElement_stereotype_src
+	Stereotype[*] role stereotype
+end
+
+association xxx_ModelElement_comment between
+	ModelElement[0..1] role xxx_ModelElement_comment_src
+	Comment[*] role comment
+end
+
+association xxx_ModelElement_sourceFlow between
+	ModelElement[0..1] role xxx_ModelElement_sourceFlow_src
+	Flow[*] role sourceFlow
+end
+
+association xxx_ModelElement_targetFlow between
+	ModelElement[0..1] role xxx_ModelElement_targetFlow_src
+	Flow[*] role targetFlow
+end
+
+composition xxx_ModelElement_templateParameter between
+	ModelElement[0..1] role xxx_ModelElement_templateParameter_src
+	TemplateParameter[*] role templateParameter
+end
+
+association xxx_ModelElement_namespace between
+	ModelElement[*] role xxx_ModelElement_namespace_src
+	Namespace[0..1] role namespace
+end
+
+association xxx_GeneralizableElement_generalization between
+	GeneralizableElement[0..1] role xxx_GeneralizableElement_generalization_src
+	Generalization[*] role generalization
+end
+
+composition xxx_Namespace_ownedElement between
+	Namespace[0..1] role xxx_Namespace_ownedElement_src
+	ModelElement[*] role ownedElement
+end
+
+association xxx_Classifier_powertypeRange between
+	Classifier[0..1] role xxx_Classifier_powertypeRange_src
+	Generalization[*] role powertypeRange
+end
+
+composition xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+association xxx_Feature_owner between
+	Feature[*] role xxx_Feature_owner_src
+	Classifier[0..1] role owner
+end
+
+association xxx_StructuralFeature_type between
+	StructuralFeature[*] role xxx_StructuralFeature_type_src
+	Classifier[1] role type
+end
+
+association xxx_StructuralFeature_multiplicity between
+	StructuralFeature[*] role xxx_StructuralFeature_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+association xxx_AssociationEnd_association_ between
+	AssociationEnd[*] role xxx_AssociationEnd_association__src
+	Association[1] role association_
+end
+
+association xxx_AssociationEnd_specification between
+	AssociationEnd[0..1] role xxx_AssociationEnd_specification_src
+	Classifier[*] role specification
+end
+
+association xxx_AssociationEnd_participant between
+	AssociationEnd[*] role xxx_AssociationEnd_participant_src
+	Classifier[1] role participant
+end
+
+composition xxx_AssociationEnd_qualifier between
+	AssociationEnd[0..1] role xxx_AssociationEnd_qualifier_src
+	Attribute[*] role qualifier
+end
+
+association xxx_AssociationEnd_multiplicity between
+	AssociationEnd[*] role xxx_AssociationEnd_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+association xxx_Constraint_constrainedElement between
+	Constraint[0..1] role xxx_Constraint_constrainedElement_src
+	ModelElement[*] role constrainedElement
+end
+
+association xxx_Constraint_body between
+	Constraint[*] role xxx_Constraint_body_src
+	BooleanExpression[0..1] role body
+end
+
+composition xxx_Association_connection between
+	Association[0..1] role xxx_Association_connection_src
+	AssociationEnd[2..*] role connection
+end
+
+association xxx_Attribute_associationEnd between
+	Attribute[*] role xxx_Attribute_associationEnd_src
+	AssociationEnd[0..1] role associationEnd
+end
+
+association xxx_Attribute_initialValue between
+	Attribute[*] role xxx_Attribute_initialValue_src
+	Expression[0..1] role initialValue
+end
+
+composition xxx_BehavioralFeature_parameter between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_parameter_src
+	Parameter[*] role parameter
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Classifier[1] role type
+end
+
+association xxx_Parameter_behavioralFeature between
+	Parameter[*] role xxx_Parameter_behavioralFeature_src
+	BehavioralFeature[0..1] role behavioralFeature
+end
+
+association xxx_Parameter_defaultValue between
+	Parameter[*] role xxx_Parameter_defaultValue_src
+	Expression[0..1] role defaultValue
+end
+
+association xxx_Method_specification between
+	Method[*] role xxx_Method_specification_src
+	Operation[1] role specification
+end
+
+association xxx_Method_body between
+	Method[*] role xxx_Method_body_src
+	ProcedureExpression[1] role body
+end
+
+association xxx_Generalization_parent between
+	Generalization[*] role xxx_Generalization_parent_src
+	GeneralizableElement[1] role parent
+end
+
+association xxx_Generalization_powertype between
+	Generalization[*] role xxx_Generalization_powertype_src
+	Classifier[0..1] role powertype
+end
+
+association xxx_Generalization_child between
+	Generalization[*] role xxx_Generalization_child_src
+	GeneralizableElement[1] role child
+end
+
+association xxx_Dependency_client between
+	Dependency[0..1] role xxx_Dependency_client_src
+	ModelElement[1..*] role client
+end
+
+association xxx_Dependency_supplier between
+	Dependency[0..1] role xxx_Dependency_supplier_src
+	ModelElement[1..*] role supplier
+end
+
+association xxx_Abstraction_mapping between
+	Abstraction[*] role xxx_Abstraction_mapping_src
+	MappingExpression[0..1] role mapping
+end
+
+association xxx_PresentationElement_subject between
+	PresentationElement[0..1] role xxx_PresentationElement_subject_src
+	ModelElement[*] role subject
+end
+
+composition xxx_Binding_argument between
+	Binding[0..1] role xxx_Binding_argument_src
+	TemplateArgument[1..*] role argument
+end
+
+association xxx_Component_deploymentLocation between
+	Component[0..1] role xxx_Component_deploymentLocation_src
+	Node[*] role deploymentLocation
+end
+
+composition xxx_Component_residentElement between
+	Component[0..1] role xxx_Component_residentElement_src
+	ElementResidence[*] role residentElement
+end
+
+association xxx_Component_implementation between
+	Component[0..1] role xxx_Component_implementation_src
+	Artifact[*] role implementation
+end
+
+association xxx_Node_deployedComponent between
+	Node[0..1] role xxx_Node_deployedComponent_src
+	Component[*] role deployedComponent
+end
+
+association xxx_Comment_annotatedElement between
+	Comment[0..1] role xxx_Comment_annotatedElement_src
+	ModelElement[*] role annotatedElement
+end
+
+association xxx_Flow_source between
+	Flow[0..1] role xxx_Flow_source_src
+	ModelElement[*] role source
+end
+
+association xxx_Flow_target between
+	Flow[0..1] role xxx_Flow_target_src
+	ModelElement[*] role target
+end
+
+association xxx_ElementResidence_container between
+	ElementResidence[*] role xxx_ElementResidence_container_src
+	Component[1] role container
+end
+
+association xxx_ElementResidence_resident between
+	ElementResidence[*] role xxx_ElementResidence_resident_src
+	ModelElement[1] role resident
+end
+
+association xxx_TemplateParameter_template between
+	TemplateParameter[*] role xxx_TemplateParameter_template_src
+	ModelElement[1] role template
+end
+
+composition xxx_TemplateParameter_parameter between
+	TemplateParameter[*] role xxx_TemplateParameter_parameter_src
+	ModelElement[1] role parameter
+end
+
+association xxx_TemplateParameter_defaultElement between
+	TemplateParameter[*] role xxx_TemplateParameter_defaultElement_src
+	ModelElement[0..1] role defaultElement
+end
+
+composition xxx_Enumeration_literal between
+	Enumeration[0..1] role xxx_Enumeration_literal_src
+	EnumerationLiteral[1..*] role literal
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[1] role enumeration
+end
+
+composition xxx_Stereotype_stereotypeConstraint between
+	Stereotype[0..1] role xxx_Stereotype_stereotypeConstraint_src
+	Constraint[*] role stereotypeConstraint
+end
+
+composition xxx_Stereotype_definedTag between
+	Stereotype[0..1] role xxx_Stereotype_definedTag_src
+	TagDefinition[*] role definedTag
+end
+
+association xxx_TagDefinition_owner between
+	TagDefinition[*] role xxx_TagDefinition_owner_src
+	Stereotype[0..1] role owner
+end
+
+association xxx_TagDefinition_multiplicity between
+	TagDefinition[*] role xxx_TagDefinition_multiplicity_src
+	Multiplicity[0..1] role multiplicity
+end
+
+association xxx_TaggedValue_type between
+	TaggedValue[*] role xxx_TaggedValue_type_src
+	TagDefinition[1] role type
+end
+
+association xxx_TaggedValue_referenceValue between
+	TaggedValue[0..1] role xxx_TaggedValue_referenceValue_src
+	ModelElement[*] role referenceValue
+end
+
+association xxx_TaggedValue_modelElement between
+	TaggedValue[*] role xxx_TaggedValue_modelElement_src
+	ModelElement[1] role modelElement
+end
+
+association xxx_ProgrammingLanguageDataType_expression between
+	ProgrammingLanguageDataType[*] role xxx_ProgrammingLanguageDataType_expression_src
+	TypeExpression[1] role expression
+end
+
+association xxx_TemplateArgument_binding between
+	TemplateArgument[*] role xxx_TemplateArgument_binding_src
+	Binding[1] role binding
+end
+
+association xxx_TemplateArgument_modelElement between
+	TemplateArgument[*] role xxx_TemplateArgument_modelElement_src
+	ModelElement[1] role modelElement
+end
+
+composition xxx_Package_elementImport between
+	Package[0..1] role xxx_Package_elementImport_src
+	ElementImport[*] role elementImport
+end
+
+association xxx_ElementImport_package between
+	ElementImport[*] role xxx_ElementImport_package_src
+	Package[1] role package
+end
+
+association xxx_ElementImport_importedElement between
+	ElementImport[*] role xxx_ElementImport_importedElement_src
+	ModelElement[1] role importedElement
+end
+

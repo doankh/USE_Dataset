@@ -1,0 +1,111 @@
+model WorkDefinitions
+class WorkDefinition
+attributes
+operations
+end
+
+class ProcessPerformer
+attributes
+operations
+end
+
+class Role<ProcessPerformer
+attributes
+operations
+end
+
+class WorkProduct
+attributes
+operations
+end
+
+class Lifecycle<WorkDefinition
+attributes
+operations
+end
+
+class Phase<WorkDefinition
+attributes
+operations
+end
+
+class Iteration<WorkDefinition
+attributes
+operations
+end
+
+class Activity<WorkDefinition
+attributes
+operations
+end
+
+class Step
+attributes
+operations
+end
+
+association xxx_WorkDefinition_parentWorks between
+	WorkDefinition[0..1] role xxx_WorkDefinition_parentWorks_src
+	WorkDefinition[*] role parentWorks
+end
+
+association xxx_WorkDefinition_subWorks between
+	WorkDefinition[0..1] role xxx_WorkDefinition_subWorks_src
+	WorkDefinition[*] role subWorks
+end
+
+association xxx_WorkDefinition_owner between
+	WorkDefinition[*] role xxx_WorkDefinition_owner_src
+	ProcessPerformer[1] role owner
+end
+
+composition xxx_ProcessPerformer_features between
+	ProcessPerformer[0..1] role xxx_ProcessPerformer_features_src
+	WorkDefinition[*] role features
+end
+
+association xxx_Role_products between
+	Role[0..1] role xxx_Role_products_src
+	WorkProduct[*] role products
+end
+
+association xxx_WorkProduct_responsible between
+	WorkProduct[*] role xxx_WorkProduct_responsible_src
+	Role[1] role responsible
+end
+
+composition xxx_Lifecycle_phases between
+	Lifecycle[0..1] role xxx_Lifecycle_phases_src
+	Phase[1..*] role phases
+end
+
+association xxx_Phase_lifeCycle between
+	Phase[*] role xxx_Phase_lifeCycle_src
+	Lifecycle[1] role lifeCycle
+end
+
+composition xxx_Phase_iterations between
+	Phase[0..1] role xxx_Phase_iterations_src
+	Iteration[1..*] role iterations
+end
+
+association xxx_Iteration_phase between
+	Iteration[*] role xxx_Iteration_phase_src
+	Phase[1] role phase
+end
+
+composition xxx_Iteration_activities between
+	Iteration[0..1] role xxx_Iteration_activities_src
+	Activity[1..*] role activities
+end
+
+association xxx_Activity_iteration between
+	Activity[*] role xxx_Activity_iteration_src
+	Iteration[1] role iteration
+end
+
+composition xxx_Activity_steps between
+	Activity[0..1] role xxx_Activity_steps_src
+	Step[*] role steps
+end
+

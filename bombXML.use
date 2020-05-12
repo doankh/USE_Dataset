@@ -1,0 +1,53 @@
+model bombXML
+enum FeatureKind{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+class DataType<Type
+attributes
+operations
+end
+
+class Entity<Type
+attributes
+	abstract_ : Boolean
+operations
+end
+
+class EntityModel
+attributes
+operations
+end
+
+class Feature<NamedElement
+attributes
+	kind : FeatureKind
+operations
+end
+
+composition xxx_Entity_features between
+	Entity[0..1] role xxx_Entity_features_src
+	Feature[*] role features
+end
+
+composition xxx_EntityModel_types between
+	EntityModel[0..1] role xxx_EntityModel_types_src
+	Type[*] role types
+end
+
+association xxx_Feature_type between
+	Feature[*] role xxx_Feature_type_src
+	Type[1] role type
+end
+

@@ -1,0 +1,61 @@
+model simpleanySimplified
+class Book
+attributes
+	name : String
+	title : String
+	author : String
+operations
+end
+
+class Description<MixedBaseClass
+attributes
+	keywords : String
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+abstract class MixedData
+attributes
+	value : String
+operations
+end
+
+class MixedText<MixedData
+attributes
+operations
+end
+
+class MixedFeature<MixedData
+attributes
+operations
+end
+
+abstract class MixedBaseClass
+attributes
+operations
+end
+
+composition xxx_Book_description between
+	Book[*] role xxx_Book_description_src
+	Description[0..1] role description
+end
+
+composition xxx_Description_descriptions between
+	Description[0..1] role xxx_Description_descriptions_src
+	Description[*] role descriptions
+end
+
+composition xxx_Library_books between
+	Library[0..1] role xxx_Library_books_src
+	Book[*] role books
+end
+
+composition xxx_MixedBaseClass_mixed between
+	MixedBaseClass[0..1] role xxx_MixedBaseClass_mixed_src
+	MixedData[*] role mixed
+end
+

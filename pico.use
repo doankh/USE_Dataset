@@ -1,0 +1,176 @@
+model pico
+enum Types{
+default
+}
+
+enum ComparatorType{
+default
+}
+
+class Program
+attributes
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class Declarations
+attributes
+operations
+end
+
+class IDType
+attributes
+	picoID : String
+	type : Types
+operations
+end
+
+class Natural<Expression
+attributes
+	value : Integer
+operations
+end
+
+class String<Expression
+attributes
+	value : String
+operations
+end
+
+class Assignment<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class VariableReference<Expression
+attributes
+operations
+end
+
+class NilLiteral<Expression
+attributes
+operations
+end
+
+class AdditiveExpression<Expression
+attributes
+	plus : Boolean
+operations
+end
+
+class MultiplicativeExpression<Expression
+attributes
+	times : Boolean
+operations
+end
+
+class ComparatorExpression<Expression
+attributes
+	comparator : ComparatorType
+operations
+end
+
+composition xxx_Program_declarations between
+	Program[*] role xxx_Program_declarations_src
+	Declarations[1] role declarations
+end
+
+composition xxx_Program_statements between
+	Program[0..1] role xxx_Program_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_Declarations_idTypes between
+	Declarations[0..1] role xxx_Declarations_idTypes_src
+	IDType[1..*] role idTypes
+end
+
+composition xxx_Assignment_right between
+	Assignment[*] role xxx_Assignment_right_src
+	Expression[1] role right
+end
+
+association xxx_Assignment_left between
+	Assignment[*] role xxx_Assignment_left_src
+	IDType[1] role left
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_IfStatement_then_ between
+	IfStatement[0..1] role xxx_IfStatement_then__src
+	Statement[*] role then_
+end
+
+composition xxx_IfStatement_else_ between
+	IfStatement[0..1] role xxx_IfStatement_else__src
+	Statement[*] role else_
+end
+
+composition xxx_WhileStatement_body between
+	WhileStatement[0..1] role xxx_WhileStatement_body_src
+	Statement[*] role body
+end
+
+composition xxx_WhileStatement_condition between
+	WhileStatement[*] role xxx_WhileStatement_condition_src
+	Expression[1] role condition
+end
+
+association xxx_VariableReference_variable between
+	VariableReference[*] role xxx_VariableReference_variable_src
+	IDType[1] role variable
+end
+
+composition xxx_AdditiveExpression_left between
+	AdditiveExpression[*] role xxx_AdditiveExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_AdditiveExpression_right between
+	AdditiveExpression[*] role xxx_AdditiveExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_MultiplicativeExpression_left between
+	MultiplicativeExpression[*] role xxx_MultiplicativeExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_MultiplicativeExpression_right between
+	MultiplicativeExpression[*] role xxx_MultiplicativeExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_ComparatorExpression_left between
+	ComparatorExpression[*] role xxx_ComparatorExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_ComparatorExpression_right between
+	ComparatorExpression[*] role xxx_ComparatorExpression_right_src
+	Expression[1] role right
+end
+

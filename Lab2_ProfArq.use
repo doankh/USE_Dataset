@@ -1,0 +1,206 @@
+model Lab2_ProfArq
+class Cinema
+attributes
+	name : String
+operations
+end
+
+class City
+attributes
+	code : String
+	city : String
+operations
+end
+
+class Classification
+attributes
+	age : String
+operations
+end
+
+class Country
+attributes
+	isoCode : String
+	country : String
+operations
+end
+
+class Status
+attributes
+	status : String
+	description : String
+operations
+end
+
+class Theater
+attributes
+	theater : String
+	address : String
+operations
+end
+
+class Director
+attributes
+	fullName : String
+operations
+end
+
+class Film
+attributes
+	title : String
+	synopsis : String
+	pseudonym : String
+	image : String
+	duration : Integer
+	releaseDate : String
+operations
+end
+
+class Billboard
+attributes
+	outDate : String
+operations
+end
+
+class AudioFormat
+attributes
+	description : String
+operations
+end
+
+class Language
+attributes
+	isoCode : String
+	languageName : String
+operations
+end
+
+class VideoFormat
+attributes
+	videoFormat : String
+	description : String
+operations
+end
+
+class Genre
+attributes
+	genre : String
+	description : String
+operations
+end
+
+composition xxx_Cinema_flicks between
+	Cinema[0..1] role xxx_Cinema_flicks_src
+	Film[*] role flicks
+end
+
+composition xxx_Cinema_managers between
+	Cinema[0..1] role xxx_Cinema_managers_src
+	Director[*] role managers
+end
+
+composition xxx_Cinema_sorts between
+	Cinema[0..1] role xxx_Cinema_sorts_src
+	Genre[*] role sorts
+end
+
+composition xxx_Cinema_countries between
+	Cinema[0..1] role xxx_Cinema_countries_src
+	Country[*] role countries
+end
+
+composition xxx_Cinema_classifications between
+	Cinema[0..1] role xxx_Cinema_classifications_src
+	Classification[*] role classifications
+end
+
+composition xxx_Cinema_cities between
+	Cinema[0..1] role xxx_Cinema_cities_src
+	City[*] role cities
+end
+
+composition xxx_Cinema_statuses between
+	Cinema[0..1] role xxx_Cinema_statuses_src
+	Status[*] role statuses
+end
+
+composition xxx_Cinema_videoFormats between
+	Cinema[0..1] role xxx_Cinema_videoFormats_src
+	VideoFormat[*] role videoFormats
+end
+
+composition xxx_Cinema_audioFormats between
+	Cinema[0..1] role xxx_Cinema_audioFormats_src
+	AudioFormat[*] role audioFormats
+end
+
+composition xxx_Cinema_speeches between
+	Cinema[0..1] role xxx_Cinema_speeches_src
+	Language[*] role speeches
+end
+
+composition xxx_City_theaters between
+	City[0..1] role xxx_City_theaters_src
+	Theater[*] role theaters
+end
+
+composition xxx_Theater_billboards between
+	Theater[0..1] role xxx_Theater_billboards_src
+	Billboard[*] role billboards
+end
+
+association xxx_Director_movies between
+	Director[0..1] role xxx_Director_movies_src
+	Film[*] role movies
+end
+
+association xxx_Film_directors between
+	Film[0..1] role xxx_Film_directors_src
+	Director[1..*] role directors
+end
+
+association xxx_Film_genres between
+	Film[0..1] role xxx_Film_genres_src
+	Genre[1..*] role genres
+end
+
+association xxx_Film_country between
+	Film[*] role xxx_Film_country_src
+	Country[1] role country
+end
+
+association xxx_Film_classification between
+	Film[*] role xxx_Film_classification_src
+	Classification[1] role classification
+end
+
+association xxx_Billboard_status between
+	Billboard[*] role xxx_Billboard_status_src
+	Status[1] role status
+end
+
+association xxx_Billboard_audioFormat between
+	Billboard[*] role xxx_Billboard_audioFormat_src
+	AudioFormat[1] role audioFormat
+end
+
+association xxx_Billboard_videoFormat between
+	Billboard[*] role xxx_Billboard_videoFormat_src
+	VideoFormat[1] role videoFormat
+end
+
+association xxx_Billboard_motionPictures between
+	Billboard[*] role xxx_Billboard_motionPictures_src
+	Film[1] role motionPictures
+end
+
+association xxx_AudioFormat_languages between
+	AudioFormat[*] role xxx_AudioFormat_languages_src
+	Language[2] role languages
+end
+
+association xxx_Genre_films between
+	Genre[0..1] role xxx_Genre_films_src
+	Film[*] role films
+end
+

@@ -1,0 +1,395 @@
+model PLM
+enum ClassificationKind{
+default
+}
+
+class Domain
+attributes
+	name : String
+operations
+end
+
+abstract class Element
+attributes
+	name : String
+	expressed : Boolean
+	relevant : Boolean
+	fix : Boolean
+operations
+end
+
+abstract class DomainElement<OwnedElement
+attributes
+	elided : Boolean
+operations
+end
+
+class Model<Element,Context
+attributes
+operations
+	getAllGeneralizations():Generalization
+	getSetRelationships():SetRelationship
+	getClabjects():Clabject
+	getEntities():Entity
+	getConnections():Connection
+	getClassifications():Classification
+	getOntology():Ontology
+	getClassifiedModel():Model
+	getClassifyingModel():Model
+	getLevel():Integer
+	isRootModel():Boolean
+	isLeafModel():Boolean
+end
+
+class Ontology<Element,Context
+attributes
+operations
+	getModelAtLevel(level : Integer):Model
+	getPrimitiveDatatypes():String
+	getRegexForPrimitiveDatatype(type : String):String
+end
+
+abstract class OwnedElement<Element
+attributes
+operations
+end
+
+abstract class Correlation<OwnedElement
+attributes
+operations
+	getModel():Model
+end
+
+abstract class SetRelationship<Correlation
+attributes
+operations
+	getTarget():Clabject
+end
+
+class Equality<SetRelationship
+attributes
+	true_ : String
+operations
+	getTarget():Clabject
+end
+
+class Inversion<SetRelationship
+attributes
+operations
+	getTarget():Clabject
+end
+
+class Complement<SetRelationship
+attributes
+operations
+	getTarget():Clabject
+end
+
+class Generalization<Correlation
+attributes
+	disjoint : String
+	complete : String
+	intersection : String
+operations
+	isDisjoint():Boolean
+	isComplete():Boolean
+	isIntersection():Boolean
+	represent():String
+end
+
+class Classification<Correlation
+attributes
+	kind : ClassificationKind
+operations
+	represent():String
+end
+
+abstract class Clabject<DomainElement,Context
+attributes
+	instantiable : Boolean
+	potency : Integer
+	level : Integer
+operations
+	allInstancesFrom(model_ : String):Clabject
+	getModel():Model
+	getOntology():Ontology
+	getSupertypes():Clabject
+	getSupertypes1(immediateResult : Clabject):Clabject
+	getDirectSupertypes():Clabject
+	getSubtypes():Clabject
+	getHollowSubtypes():Clabject
+	getHollowSupertypes():Clabject
+	getClassificationsAsInstance():Classification
+	getClassificationsAsType():Classification
+	getInstances():Clabject
+	getTypes():Clabject
+	getDirectTypes():Clabject
+	getModelTypes():Clabject
+	getEigenClassificationTreeAsInstance():Clabject
+	getClassificationTreeAsInstance():Clabject
+	getDirectInstances():Clabject
+	getEigenInstances():Clabject
+	getEigenClassificationTreeAsType():Clabject
+	getClassificationTreeAsType():Clabject
+	getAllFeatures():Feature
+	getAllAttributes():Attribute
+	getEigenAttributes():Attribute
+	getEigenAttributeByName(name : String):Attribute
+	getAllMethods():Method
+	getEigenMethods():Feature
+	isInstanceOf(type : Clabject):Boolean
+	isTypeOf(instance : Clabject):Boolean
+	getEigenConnections():Connection
+	getConnections():Connection
+	getInheritedConnections():Connection
+	getModelCompleteTypes():Clabject
+	getModelIncompleteTypes():Clabject
+	getBlueprint():Clabject
+	getOffspring():Clabject
+	getIsonyms():Clabject
+	getHyponyms():Clabject
+	getDomainForConnection(connection : Connection):Clabject
+	getPossibleDomainSpecificVisualizers():AbstractDSLVisualizer
+	getGeneralizationsAsSubtype():Generalization
+	getGeneralizationsAsSupertype():Generalization
+	getEigenNavigations():Participation
+	getInheritedNavigations():Participation
+	getAllNavigations():Participation
+	getDomainParticipationNames():String
+	getDomainForParticipationName(participationName : String):Clabject
+	getAllNavigationsForParticipationName(participationName : String):Participation
+	getAllNavigationsAsDestination():Participation
+	getEigenNavigationsAsDestination():Participation
+	getInheritedNavigationsAsDestination():Participation
+	represent():String
+	getFeatureForName(name : String):Feature
+	getPotencyAsString():String
+	getDisjointSiblings():Clabject
+	getContainer():Element
+	getAttributeByName(name : String):Attribute
+	violatesMultiplicityConstraints():Boolean
+end
+
+abstract class Feature<DomainElement
+attributes
+	durability : Integer
+operations
+	getClabject():Clabject
+	getDurabilityAsString():String
+	represent():String
+end
+
+class Entity<Clabject
+attributes
+operations
+	represent():String
+end
+
+class Connection<Clabject
+attributes
+	transitive : Boolean
+operations
+	getDomain():Clabject
+	getNotDomain():Clabject
+	getHumanReadableName():String
+	getParticipants():Clabject
+	getParticipationNames():String
+	getDomain1(source : Clabject):Clabject
+	getParticipationNamesForParticipant(source : Clabject):String
+	getLowerForParticipationName(rN : String):Integer
+	getUpperForParticipationName(rN : String):Integer
+	isNavigableForParticipationName(rN : String):Boolean
+	getOrder():Integer
+	getInheritedParticipations():Participation
+	getAllParticipations():Participation
+	getParticipantForParticipationName(rN : String):Clabject
+	represent():String
+end
+
+class Participation
+attributes
+	lower : Integer
+	upper : Integer
+	navigable : Boolean
+	expressedParticipationName : String
+	containment : Boolean
+operations
+	getHumanReadableParticipationName():String
+	hasDefaultParticipationName():Boolean
+	represent():String
+	participationName():String
+	representMultiplicity():String
+	getName():String
+	conforms(participation : Participation):Boolean
+end
+
+class LMLVisualizer
+attributes
+	attributes_ : String
+	durability : Integer
+operations
+	getDefaultVisualizationValues():String
+	getValueForKey(key : String):String
+	getContainingElement():Element
+	EOperation0()
+end
+
+class Attribute<Feature
+attributes
+	value : String
+	mutability : Integer
+	datatype : String
+operations
+	getMutabilityAsString():String
+	represent():String
+	isPrimitiveDatatypeAttribute():Boolean
+end
+
+class Method<Feature
+attributes
+	body : String
+operations
+	represent():String
+end
+
+class Enumeration<Element
+attributes
+	literals : String
+operations
+end
+
+abstract class Context
+attributes
+	origin : String
+	visualizersShown : String
+	completness : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	expression : String
+operations
+end
+
+abstract class AbstractDSLVisualizer
+attributes
+operations
+end
+
+composition xxx_Domain_ontologies between
+	Domain[0..1] role xxx_Domain_ontologies_src
+	Element[*] role ontologies
+end
+
+composition xxx_Domain_domains between
+	Domain[*] role xxx_Domain_domains_src
+	Domain[0..1] role domains
+end
+
+composition xxx_Element_visualizer between
+	Element[0..1] role xxx_Element_visualizer_src
+	LMLVisualizer[*] role visualizer
+end
+
+composition xxx_Model_content between
+	Model[0..1] role xxx_Model_content_src
+	OwnedElement[*] role content
+end
+
+composition xxx_Ontology_content between
+	Ontology[0..1] role xxx_Ontology_content_src
+	Model[*] role content
+end
+
+composition xxx_Ontology_enumerations between
+	Ontology[0..1] role xxx_Ontology_enumerations_src
+	Enumeration[*] role enumerations
+end
+
+association xxx_SetRelationship_base between
+	SetRelationship[*] role xxx_SetRelationship_base_src
+	Clabject[1] role base
+end
+
+association xxx_Equality_equal between
+	Equality[*] role xxx_Equality_equal_src
+	Clabject[1] role equal
+end
+
+association xxx_Inversion_inverse between
+	Inversion[*] role xxx_Inversion_inverse_src
+	Clabject[1] role inverse
+end
+
+association xxx_Complement_complement between
+	Complement[*] role xxx_Complement_complement_src
+	Clabject[1] role complement
+end
+
+association xxx_Generalization_supertype between
+	Generalization[0..1] role xxx_Generalization_supertype_src
+	Clabject[1..*] role supertype
+end
+
+association xxx_Generalization_subtype between
+	Generalization[0..1] role xxx_Generalization_subtype_src
+	Clabject[1..*] role subtype
+end
+
+association xxx_Classification_instance between
+	Classification[*] role xxx_Classification_instance_src
+	Clabject[1] role instance
+end
+
+association xxx_Classification_type between
+	Classification[*] role xxx_Classification_type_src
+	Clabject[1] role type
+end
+
+composition xxx_Clabject_content between
+	Clabject[0..1] role xxx_Clabject_content_src
+	Clabject[*] role content
+end
+
+composition xxx_Clabject_feature between
+	Clabject[0..1] role xxx_Clabject_feature_src
+	Feature[*] role feature
+end
+
+composition xxx_Connection_participation between
+	Connection[0..1] role xxx_Connection_participation_src
+	Participation[*] role participation
+end
+
+association xxx_Participation_destination between
+	Participation[*] role xxx_Participation_destination_src
+	Clabject[1] role destination
+end
+
+association xxx_Participation_connection between
+	Participation[*] role xxx_Participation_connection_src
+	Connection[0..1] role connection
+end
+
+association xxx_LMLVisualizer_template between
+	LMLVisualizer[*] role xxx_LMLVisualizer_template_src
+	LMLVisualizer[0..1] role template
+end
+
+composition xxx_LMLVisualizer_dslVisualizer between
+	LMLVisualizer[0..1] role xxx_LMLVisualizer_dslVisualizer_src
+	AbstractDSLVisualizer[*] role dslVisualizer
+end
+
+composition xxx_Method_input between
+	Method[0..1] role xxx_Method_input_src
+	Parameter[*] role input
+end
+
+composition xxx_Method_output between
+	Method[0..1] role xxx_Method_output_src
+	Parameter[*] role output
+end
+

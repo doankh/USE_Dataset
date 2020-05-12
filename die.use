@@ -1,0 +1,57 @@
+model die
+enum PAD_SIDE{
+default
+}
+
+class Die
+attributes
+operations
+end
+
+class DiePadBand
+attributes
+	side : PAD_SIDE
+operations
+end
+
+class PadBundle
+attributes
+	count : Integer
+	width : Real
+	height : Real
+	name : String
+operations
+end
+
+class DieCore
+attributes
+	aspectRatio : Real
+	area : Real
+operations
+end
+
+abstract class PadFamily
+attributes
+operations
+end
+
+composition xxx_Die_core between
+	Die[*] role xxx_Die_core_src
+	DieCore[1] role core
+end
+
+composition xxx_Die_padbands between
+	Die[*] role xxx_Die_padbands_src
+	DiePadBand[4] role padbands
+end
+
+composition xxx_DiePadBand_padBundles between
+	DiePadBand[0..1] role xxx_DiePadBand_padBundles_src
+	PadBundle[1..*] role padBundles
+end
+
+composition xxx_PadBundle_padFamily between
+	PadBundle[*] role xxx_PadBundle_padFamily_src
+	PadFamily[0..1] role padFamily
+end
+

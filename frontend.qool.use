@@ -1,0 +1,326 @@
+model qool
+class QoolTransformation<TransformationDefinition
+attributes
+operations
+end
+
+abstract class QoolQueue<LocatedElement,NamedElement
+attributes
+operations
+end
+
+abstract class QueueOptimization
+attributes
+operations
+end
+
+class AccessByFeatureOptimization<QueueOptimization
+attributes
+	featureName : String
+	force : Boolean
+operations
+end
+
+class LocalQueue<QoolQueue
+attributes
+operations
+end
+
+class ModelElementQueue<QoolQueue
+attributes
+operations
+end
+
+class Segment<NamedElement
+attributes
+operations
+end
+
+class IteratorStatement<Statement,Variable
+attributes
+operations
+end
+
+class ForAllStatement<IteratorStatement
+attributes
+operations
+end
+
+class ForEachStatement<IteratorStatement
+attributes
+operations
+end
+
+class EmitStatement<Statement
+attributes
+operations
+end
+
+class MatchExpression<Expression
+attributes
+operations
+end
+
+abstract class MatchPredicate
+attributes
+operations
+end
+
+class KindOfPredicate<MatchPredicate
+attributes
+operations
+end
+
+class PropertyEqualsPredicate<MatchPredicate
+attributes
+	propertyName : String
+operations
+end
+
+abstract class InvokeTransformation<Expression
+attributes
+	transformationName : String
+	entryPointName : String
+operations
+end
+
+class InvokeExternal<InvokeTransformation
+attributes
+	queueName : String
+	traceAttributeName : String
+operations
+end
+
+class InvokeInternal<InvokeTransformation
+attributes
+operations
+end
+
+class InvocationParameter
+attributes
+	calleeModelName : String
+operations
+end
+
+class NamedInvocationParameter
+attributes
+	formalName : String
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TraceInterface
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class TypeExpression
+attributes
+operations
+end
+
+class InlineModel
+attributes
+operations
+end
+
+class Copier<Expression
+attributes
+operations
+end
+
+class CopierCallbackDefinition
+attributes
+	stop : Boolean
+operations
+end
+
+composition xxx_QoolTransformation_queues between
+	QoolTransformation[0..1] role xxx_QoolTransformation_queues_src
+	QoolQueue[*] role queues
+end
+
+composition xxx_QoolTransformation_segments between
+	QoolTransformation[0..1] role xxx_QoolTransformation_segments_src
+	Segment[*] role segments
+end
+
+composition xxx_QoolQueue_optimizations between
+	QoolQueue[0..1] role xxx_QoolQueue_optimizations_src
+	QueueOptimization[*] role optimizations
+end
+
+composition xxx_LocalQueue_type_ between
+	LocalQueue[*] role xxx_LocalQueue_type__src
+	TypeExpression[1] role type_
+end
+
+composition xxx_ModelElementQueue_class_ between
+	ModelElementQueue[*] role xxx_ModelElementQueue_class__src
+	ClassUse[1] role class_
+end
+
+composition xxx_ModelElementQueue_additionals between
+	ModelElementQueue[0..1] role xxx_ModelElementQueue_additionals_src
+	ClassUse[*] role additionals
+end
+
+composition xxx_Segment_statements between
+	Segment[0..1] role xxx_Segment_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_IteratorStatement_condition between
+	IteratorStatement[*] role xxx_IteratorStatement_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_IteratorStatement_statements between
+	IteratorStatement[0..1] role xxx_IteratorStatement_statements_src
+	Statement[*] role statements
+end
+
+association xxx_ForAllStatement_queue between
+	ForAllStatement[*] role xxx_ForAllStatement_queue_src
+	QoolQueue[1] role queue
+end
+
+composition xxx_ForEachStatement_collection between
+	ForEachStatement[*] role xxx_ForEachStatement_collection_src
+	Expression[1] role collection
+end
+
+association xxx_EmitStatement_queue between
+	EmitStatement[*] role xxx_EmitStatement_queue_src
+	QoolQueue[1] role queue
+end
+
+composition xxx_EmitStatement_value between
+	EmitStatement[*] role xxx_EmitStatement_value_src
+	Expression[1] role value
+end
+
+association xxx_MatchExpression_queue between
+	MatchExpression[*] role xxx_MatchExpression_queue_src
+	QoolQueue[1] role queue
+end
+
+composition xxx_MatchExpression_predicates between
+	MatchExpression[0..1] role xxx_MatchExpression_predicates_src
+	MatchPredicate[1..*] role predicates
+end
+
+composition xxx_KindOfPredicate_class_ between
+	KindOfPredicate[*] role xxx_KindOfPredicate_class__src
+	ClassUse[1] role class_
+end
+
+composition xxx_PropertyEqualsPredicate_value between
+	PropertyEqualsPredicate[*] role xxx_PropertyEqualsPredicate_value_src
+	Expression[1] role value
+end
+
+composition xxx_InvokeTransformation_sourceModels between
+	InvokeTransformation[0..1] role xxx_InvokeTransformation_sourceModels_src
+	InvocationParameter[*] role sourceModels
+end
+
+composition xxx_InvokeTransformation_targetModels between
+	InvokeTransformation[0..1] role xxx_InvokeTransformation_targetModels_src
+	InvocationParameter[*] role targetModels
+end
+
+composition xxx_InvokeTransformation_parameters between
+	InvokeTransformation[0..1] role xxx_InvokeTransformation_parameters_src
+	NamedInvocationParameter[*] role parameters
+end
+
+association xxx_InvokeTransformation_inputViewFilter between
+	InvokeTransformation[*] role xxx_InvokeTransformation_inputViewFilter_src
+	Variable[0..1] role inputViewFilter
+end
+
+composition xxx_InvokeTransformation_entryPointParameters between
+	InvokeTransformation[0..1] role xxx_InvokeTransformation_entryPointParameters_src
+	Expression[*] role entryPointParameters
+end
+
+composition xxx_InvokeExternal_outputResolutionSourceElement between
+	InvokeExternal[*] role xxx_InvokeExternal_outputResolutionSourceElement_src
+	Expression[0..1] role outputResolutionSourceElement
+end
+
+association xxx_InvocationParameter_model_ between
+	InvocationParameter[*] role xxx_InvocationParameter_model__src
+	TransformationDefinitionParameter[1] role model_
+end
+
+composition xxx_NamedInvocationParameter_actualParameter between
+	NamedInvocationParameter[*] role xxx_NamedInvocationParameter_actualParameter_src
+	Expression[1] role actualParameter
+end
+
+composition xxx_Copier_objects between
+	Copier[0..1] role xxx_Copier_objects_src
+	Expression[*] role objects
+end
+
+composition xxx_Copier_callbacks between
+	Copier[0..1] role xxx_Copier_callbacks_src
+	CopierCallbackDefinition[*] role callbacks
+end
+
+association xxx_Copier_copyInModel between
+	Copier[*] role xxx_Copier_copyInModel_src
+	TransformationDefinitionParameter[1] role copyInModel
+end
+
+composition xxx_CopierCallbackDefinition_trigger between
+	CopierCallbackDefinition[*] role xxx_CopierCallbackDefinition_trigger_src
+	Expression[1] role trigger
+end
+
+composition xxx_CopierCallbackDefinition_action between
+	CopierCallbackDefinition[*] role xxx_CopierCallbackDefinition_action_src
+	Expression[1] role action
+end
+

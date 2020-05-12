@@ -1,0 +1,164 @@
+model sequenceDiagram
+enum SendConnectionType{
+default
+}
+
+abstract class AbstractElement
+attributes
+operations
+end
+
+class Diagram<AbstractElement
+attributes
+operations
+end
+
+abstract class AbstractDiagramElement<AbstractElement
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Lifeline<AbstractDiagramElement
+attributes
+	name : String
+operations
+end
+
+class ActivationBar<AbstractElement
+attributes
+	height : Integer
+operations
+end
+
+abstract class Connection<AbstractElement
+attributes
+	message : String
+operations
+end
+
+class ReturnConnection<Connection
+attributes
+operations
+end
+
+class SendConnection<Connection
+attributes
+	type : SendConnectionType
+operations
+end
+
+abstract class ResizableDiagramElement<AbstractDiagramElement
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+abstract class CombinedFragment<ResizableDiagramElement
+attributes
+operations
+end
+
+abstract class MidlineCombinedFragment
+attributes
+	midlineY : Integer
+operations
+end
+
+class ParallelCombinedFragment<CombinedFragment,MidlineCombinedFragment
+attributes
+operations
+end
+
+abstract class OptionalCombinedFragment<CombinedFragment
+attributes
+	condition : String
+operations
+end
+
+class AlternativeCombinedFragment<OptionalCombinedFragment,MidlineCombinedFragment
+attributes
+operations
+end
+
+class BreakCombinedFragment<OptionalCombinedFragment
+attributes
+operations
+end
+
+class LoopCombinedFragment<OptionalCombinedFragment
+attributes
+operations
+end
+
+class OptionCombinedFragment<OptionalCombinedFragment
+attributes
+operations
+end
+
+class Note<ResizableDiagramElement
+attributes
+	name : String
+	text : String
+operations
+end
+
+class BendPoint<AbstractElement
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+composition xxx_Diagram_lifelines between
+	Diagram[0..1] role xxx_Diagram_lifelines_src
+	Lifeline[*] role lifelines
+end
+
+composition xxx_Diagram_notes between
+	Diagram[0..1] role xxx_Diagram_notes_src
+	Note[*] role notes
+end
+
+composition xxx_Diagram_combinedFragments between
+	Diagram[0..1] role xxx_Diagram_combinedFragments_src
+	CombinedFragment[*] role combinedFragments
+end
+
+composition xxx_Lifeline_activationBars between
+	Lifeline[0..1] role xxx_Lifeline_activationBars_src
+	ActivationBar[*] role activationBars
+end
+
+association xxx_ActivationBar_lifeline between
+	ActivationBar[*] role xxx_ActivationBar_lifeline_src
+	Lifeline[0..1] role lifeline
+end
+
+composition xxx_ActivationBar_sentConnections between
+	ActivationBar[0..1] role xxx_ActivationBar_sentConnections_src
+	Connection[*] role sentConnections
+end
+
+association xxx_ActivationBar_receivedConnections between
+	ActivationBar[0..1] role xxx_ActivationBar_receivedConnections_src
+	Connection[*] role receivedConnections
+end
+
+association xxx_Connection_sender between
+	Connection[*] role xxx_Connection_sender_src
+	ActivationBar[0..1] role sender
+end
+
+association xxx_Connection_receiver between
+	Connection[*] role xxx_Connection_receiver_src
+	ActivationBar[0..1] role receiver
+end
+
+composition xxx_Connection_bendPoints between
+	Connection[0..1] role xxx_Connection_bendPoints_src
+	BendPoint[*] role bendPoints
+end
+

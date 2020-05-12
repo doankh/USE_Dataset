@@ -1,0 +1,141 @@
+model PrimitiveTypes
+class Requirement
+attributes
+operations
+end
+
+class NonFunctionnelRequirement<Requirement
+attributes
+operations
+end
+
+class FunctionnelRequirement<Requirement
+attributes
+operations
+end
+
+class UseCase
+attributes
+operations
+end
+
+class Goal
+attributes
+operations
+end
+
+class Role
+attributes
+operations
+end
+
+class HumanRole<Role
+attributes
+operations
+end
+
+class SystemRole<Role
+attributes
+operations
+end
+
+class EventRole<Role
+attributes
+operations
+end
+
+class Manage<UseCase
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+class ScenarioDescription
+attributes
+operations
+end
+
+class Condition
+attributes
+operations
+end
+
+class Pre<Condition
+attributes
+operations
+end
+
+class Post<Condition
+attributes
+operations
+end
+
+association xxx_NonFunctionnelRequirement_scopes between
+	NonFunctionnelRequirement[0..1] role xxx_NonFunctionnelRequirement_scopes_src
+	UseCase[*] role scopes
+end
+
+association xxx_FunctionnelRequirement_specifies between
+	FunctionnelRequirement[0..1] role xxx_FunctionnelRequirement_specifies_src
+	UseCase[*] role specifies
+end
+
+association xxx_UseCase_scenario between
+	UseCase[0..1] role xxx_UseCase_scenario_src
+	ScenarioDescription[*] role scenario
+end
+
+association xxx_UseCase_condition between
+	UseCase[0..1] role xxx_UseCase_condition_src
+	Condition[*] role condition
+end
+
+association xxx_UseCase_interacter between
+	UseCase[0..1] role xxx_UseCase_interacter_src
+	Role[*] role interacter
+end
+
+association xxx_UseCase_specified_by between
+	UseCase[0..1] role xxx_UseCase_specified_by_src
+	FunctionnelRequirement[*] role specified_by
+end
+
+association xxx_UseCase_scoped_by between
+	UseCase[0..1] role xxx_UseCase_scoped_by_src
+	NonFunctionnelRequirement[*] role scoped_by
+end
+
+association xxx_UseCase_meet_by between
+	UseCase[0..1] role xxx_UseCase_meet_by_src
+	Goal[1..*] role meet_by
+end
+
+association xxx_Goal_to_meet between
+	Goal[0..1] role xxx_Goal_to_meet_src
+	UseCase[1..*] role to_meet
+end
+
+association xxx_Role_interacted_with between
+	Role[0..1] role xxx_Role_interacted_with_src
+	UseCase[*] role interacted_with
+end
+
+association xxx_Manage_managed_Resource between
+	Manage[0..1] role xxx_Manage_managed_Resource_src
+	Resource[*] role managed_Resource
+end
+
+association xxx_ScenarioDescription_useCase between
+	ScenarioDescription[*] role xxx_ScenarioDescription_useCase_src
+	UseCase[1] role useCase
+end
+
+association xxx_Condition_constrained_with between
+	Condition[0..1] role xxx_Condition_constrained_with_src
+	UseCase[*] role constrained_with
+end
+

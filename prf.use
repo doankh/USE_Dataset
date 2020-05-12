@@ -1,0 +1,375 @@
+model prf
+enum AccessType{
+default
+}
+
+enum ActionType{
+default
+}
+
+enum PropertyConfigurationType{
+default
+}
+
+enum PropertyValueType{
+default
+}
+
+enum StructPropertyConfigurationType{
+default
+}
+
+abstract class AbstractProperty
+attributes
+	description : String
+	id : String
+	localMode : AccessType
+	name : String
+	mode : AccessType
+operations
+	toAny():String
+end
+
+class Action
+attributes
+	type : ActionType
+operations
+end
+
+class ConfigurationKind
+attributes
+	type : StructPropertyConfigurationType
+operations
+end
+
+class Enumeration
+attributes
+	label : String
+	value : String
+operations
+end
+
+class Enumerations
+attributes
+operations
+end
+
+class InputValue
+attributes
+operations
+end
+
+class Kind
+attributes
+	type : PropertyConfigurationType
+operations
+end
+
+class PrfDocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Properties<PropertyContainer
+attributes
+	description : String
+	properties : String
+operations
+end
+
+class Range
+attributes
+	max : String
+	min : String
+operations
+end
+
+class ResultValue
+attributes
+operations
+end
+
+class Simple<AbstractProperty
+attributes
+	value : String
+	units : String
+	type : PropertyValueType
+operations
+end
+
+class SimpleSequence<AbstractProperty
+attributes
+	units : String
+	type : PropertyValueType
+operations
+end
+
+class Struct<AbstractProperty,PropertyContainer
+attributes
+operations
+end
+
+class StructSequence<AbstractProperty,PropertyContainer
+attributes
+operations
+end
+
+class StructValue<PropertyRefContainer
+attributes
+	index : Integer
+operations
+	toAny():String
+	getRef(id : String):SimpleRef
+end
+
+class Test
+attributes
+	description : String
+	id : String
+operations
+end
+
+class Values
+attributes
+	value : String
+operations
+end
+
+abstract class PropertyContainer
+attributes
+operations
+	getProperty(repID : String):AbstractProperty
+end
+
+abstract class AbstractPropertyRef
+attributes
+	refID : String
+operations
+	toAny():String
+end
+
+abstract class PropertyRefContainer
+attributes
+operations
+	getPropertyContainer():PropertyContainer
+end
+
+abstract class PropertyRefGroup<PropertyRefContainer
+attributes
+	properties : String
+operations
+end
+
+abstract class PropertyRefSet<PropertyRefContainer
+attributes
+	properties : String
+operations
+end
+
+class SimpleRef
+attributes
+	value : String
+operations
+end
+
+class SimpleSequenceRef
+attributes
+operations
+end
+
+class StructRef
+attributes
+operations
+end
+
+class StructSequenceRef
+attributes
+operations
+end
+
+composition xxx_Enumerations_enumeration between
+	Enumerations[0..1] role xxx_Enumerations_enumeration_src
+	Enumeration[1..*] role enumeration
+end
+
+composition xxx_InputValue_simple between
+	InputValue[0..1] role xxx_InputValue_simple_src
+	Simple[1..*] role simple
+end
+
+composition xxx_PrfDocumentRoot_properties between
+	PrfDocumentRoot[*] role xxx_PrfDocumentRoot_properties_src
+	Properties[*] role properties
+end
+
+composition xxx_Properties_simple between
+	Properties[0..1] role xxx_Properties_simple_src
+	Simple[*] role simple
+end
+
+composition xxx_Properties_simpleSequence between
+	Properties[0..1] role xxx_Properties_simpleSequence_src
+	SimpleSequence[*] role simpleSequence
+end
+
+composition xxx_Properties_test between
+	Properties[0..1] role xxx_Properties_test_src
+	Test[*] role test
+end
+
+composition xxx_Properties_struct between
+	Properties[0..1] role xxx_Properties_struct_src
+	Struct[*] role struct
+end
+
+composition xxx_Properties_structSequence between
+	Properties[0..1] role xxx_Properties_structSequence_src
+	StructSequence[*] role structSequence
+end
+
+composition xxx_ResultValue_simple between
+	ResultValue[0..1] role xxx_ResultValue_simple_src
+	Simple[1..*] role simple
+end
+
+composition xxx_Simple_range between
+	Simple[*] role xxx_Simple_range_src
+	Range[0..1] role range
+end
+
+composition xxx_Simple_enumerations between
+	Simple[*] role xxx_Simple_enumerations_src
+	Enumerations[0..1] role enumerations
+end
+
+composition xxx_Simple_kind between
+	Simple[0..1] role xxx_Simple_kind_src
+	Kind[*] role kind
+end
+
+composition xxx_Simple_action between
+	Simple[*] role xxx_Simple_action_src
+	Action[0..1] role action
+end
+
+composition xxx_SimpleSequence_values between
+	SimpleSequence[*] role xxx_SimpleSequence_values_src
+	Values[0..1] role values
+end
+
+composition xxx_SimpleSequence_range between
+	SimpleSequence[*] role xxx_SimpleSequence_range_src
+	Range[0..1] role range
+end
+
+composition xxx_SimpleSequence_kind between
+	SimpleSequence[0..1] role xxx_SimpleSequence_kind_src
+	Kind[*] role kind
+end
+
+composition xxx_SimpleSequence_action between
+	SimpleSequence[*] role xxx_SimpleSequence_action_src
+	Action[0..1] role action
+end
+
+composition xxx_Struct_simple between
+	Struct[0..1] role xxx_Struct_simple_src
+	Simple[1..*] role simple
+end
+
+composition xxx_Struct_configurationKind between
+	Struct[0..1] role xxx_Struct_configurationKind_src
+	ConfigurationKind[*] role configurationKind
+end
+
+composition xxx_StructSequence_struct between
+	StructSequence[*] role xxx_StructSequence_struct_src
+	Struct[1] role struct
+end
+
+composition xxx_StructSequence_structValue between
+	StructSequence[0..1] role xxx_StructSequence_structValue_src
+	StructValue[*] role structValue
+end
+
+composition xxx_StructSequence_configurationKind between
+	StructSequence[0..1] role xxx_StructSequence_configurationKind_src
+	ConfigurationKind[*] role configurationKind
+end
+
+composition xxx_StructValue_simpleRef between
+	StructValue[0..1] role xxx_StructValue_simpleRef_src
+	SimpleRef[1..*] role simpleRef
+end
+
+association xxx_StructValue_struct between
+	StructValue[*] role xxx_StructValue_struct_src
+	Struct[0..1] role struct
+end
+
+composition xxx_Test_inputValue between
+	Test[*] role xxx_Test_inputValue_src
+	InputValue[0..1] role inputValue
+end
+
+composition xxx_Test_resultValue between
+	Test[*] role xxx_Test_resultValue_src
+	ResultValue[1] role resultValue
+end
+
+composition xxx_PropertyRefGroup_simpleRef between
+	PropertyRefGroup[0..1] role xxx_PropertyRefGroup_simpleRef_src
+	SimpleRef[*] role simpleRef
+end
+
+composition xxx_PropertyRefGroup_simpleSequenceRef between
+	PropertyRefGroup[0..1] role xxx_PropertyRefGroup_simpleSequenceRef_src
+	SimpleSequenceRef[*] role simpleSequenceRef
+end
+
+composition xxx_PropertyRefGroup_structRef between
+	PropertyRefGroup[0..1] role xxx_PropertyRefGroup_structRef_src
+	StructRef[*] role structRef
+end
+
+composition xxx_PropertyRefGroup_structSequenceRef between
+	PropertyRefGroup[0..1] role xxx_PropertyRefGroup_structSequenceRef_src
+	StructSequenceRef[*] role structSequenceRef
+end
+
+composition xxx_PropertyRefSet_simpleRef between
+	PropertyRefSet[*] role xxx_PropertyRefSet_simpleRef_src
+	SimpleRef[0..1] role simpleRef
+end
+
+composition xxx_PropertyRefSet_simpleSequenceRef between
+	PropertyRefSet[*] role xxx_PropertyRefSet_simpleSequenceRef_src
+	SimpleSequenceRef[0..1] role simpleSequenceRef
+end
+
+composition xxx_PropertyRefSet_structRef between
+	PropertyRefSet[*] role xxx_PropertyRefSet_structRef_src
+	StructRef[0..1] role structRef
+end
+
+composition xxx_PropertyRefSet_structSequenceRef between
+	PropertyRefSet[*] role xxx_PropertyRefSet_structSequenceRef_src
+	StructSequenceRef[0..1] role structSequenceRef
+end
+
+composition xxx_SimpleSequenceRef_values between
+	SimpleSequenceRef[*] role xxx_SimpleSequenceRef_values_src
+	Values[1] role values
+end
+
+composition xxx_StructRef_simpleRef between
+	StructRef[0..1] role xxx_StructRef_simpleRef_src
+	SimpleRef[1..*] role simpleRef
+end
+
+composition xxx_StructSequenceRef_structValue between
+	StructSequenceRef[0..1] role xxx_StructSequenceRef_structValue_src
+	StructValue[1..*] role structValue
+end
+

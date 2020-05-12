@@ -1,0 +1,649 @@
+model DoDAF
+abstract class Element
+attributes
+	name : String
+	content : String
+operations
+end
+
+class System<Element
+attributes
+operations
+end
+
+class SystemRole<Element
+attributes
+operations
+end
+
+class SystemFunction<Element
+attributes
+operations
+end
+
+class Service<SystemFunction
+attributes
+operations
+end
+
+class SystemRoleInterface<Element
+attributes
+operations
+end
+
+class ServiceDependency<SystemRoleInterface
+attributes
+operations
+end
+
+class ServiceProvider<SystemRole
+attributes
+operations
+end
+
+class ServiceMediator<ServiceProvider
+attributes
+operations
+end
+
+class ServiceRegistry<ServiceMediator
+attributes
+operations
+end
+
+class ServiceLocator<ServiceMediator
+attributes
+operations
+end
+
+class ServiceBroker<ServiceMediator
+attributes
+operations
+end
+
+class SystemAtNode<Element
+attributes
+operations
+end
+
+class SystemAtNodeInterface<Element
+attributes
+operations
+end
+
+class SystemsNode<Element
+attributes
+operations
+end
+
+class COI<Element
+attributes
+operations
+end
+
+class Vocabulary<Element
+attributes
+operations
+end
+
+class DataReference<Element
+attributes
+operations
+end
+
+class Performer<Element
+attributes
+operations
+end
+
+class OperationalRole<Element
+attributes
+operations
+end
+
+class OperationalActivity<Element
+attributes
+operations
+end
+
+class Product<Element
+attributes
+operations
+end
+
+class Material<Product
+attributes
+operations
+end
+
+class Data<Product
+attributes
+operations
+end
+
+class SystemProductFlow<Element
+attributes
+operations
+end
+
+abstract class ConstraintOrRequirement<Element
+attributes
+operations
+end
+
+class Constraint<ConstraintOrRequirement
+attributes
+operations
+end
+
+class QualityRequirement<ConstraintOrRequirement
+attributes
+operations
+end
+
+class DIA<Element
+attributes
+operations
+end
+
+class NMJIC<Element
+attributes
+operations
+end
+
+class HigherEchelon<Element
+attributes
+operations
+end
+
+class JFC<Element
+attributes
+operations
+end
+
+class F2C2<Element
+attributes
+operations
+end
+
+class ComponentCommand<Element
+attributes
+operations
+end
+
+class DJFLCC<ComponentCommand
+attributes
+operations
+end
+
+class JFACC<ComponentCommand
+attributes
+operations
+end
+
+class JFMCC<ComponentCommand
+attributes
+operations
+end
+
+class JFSOCC<ComponentCommand
+attributes
+operations
+end
+
+class SubordinateAirCommand<Element
+attributes
+operations
+end
+
+class MAW<SubordinateAirCommand
+attributes
+operations
+end
+
+class WOC<SubordinateAirCommand
+attributes
+operations
+end
+
+class AOCCID<Element
+attributes
+operations
+end
+
+class AOCCombatPlanStrategyCells<Element
+attributes
+operations
+end
+
+class ResultData
+attributes
+	sourceID : String
+	timeStamp : String
+operations
+end
+
+class CombatReport<ResultData
+attributes
+	friendlyUnitsInvolved : String
+	combatLocation : String
+	resultsAssessment : String
+	duration : String
+operations
+end
+
+class WSV<ResultData
+attributes
+	missionID : String
+	weaponfSystemID : String
+	videoType : String
+operations
+end
+
+class MISREP<ResultData
+attributes
+	missionID : String
+	missionObjectives : String
+	missionAssesments : String
+operations
+end
+
+class Imagery<ResultData
+attributes
+	imageType : String
+	spectralData : String
+	geospacialLocation : String
+	imageSize : Integer
+operations
+end
+
+class CollectionRequirement
+attributes
+	sourceID : String
+	collectionTargetID : String
+	toBeDoneByTime : String
+	specialNeeds : String
+operations
+end
+
+class BDAReport
+attributes
+	targetID : String
+	reportSourceID : String
+	assesmentSumart : String
+	validityDuration : String
+operations
+end
+
+class MunitionsEffectsAssesment
+attributes
+operations
+end
+
+class ATO
+attributes
+	timePeriod : String
+operations
+end
+
+class RestrikeRecommendation
+attributes
+operations
+end
+
+class TargetNomination
+attributes
+operations
+end
+
+class TargetMaterialsAnalysis
+attributes
+	targetID : String
+operations
+end
+
+class Target
+attributes
+operations
+end
+
+class MIDB
+attributes
+operations
+end
+
+composition xxx_System_decomposes between
+	System[0..1] role xxx_System_decomposes_src
+	System[*] role decomposes
+end
+
+association xxx_System_fulfills between
+	System[0..1] role xxx_System_fulfills_src
+	SystemRole[*] role fulfills
+end
+
+composition xxx_SystemRole_decomposes between
+	SystemRole[0..1] role xxx_SystemRole_decomposes_src
+	SystemRole[*] role decomposes
+end
+
+association xxx_SystemRole_performs between
+	SystemRole[0..1] role xxx_SystemRole_performs_src
+	SystemFunction[*] role performs
+end
+
+association xxx_SystemRole_terminatesAt between
+	SystemRole[*] role xxx_SystemRole_terminatesAt_src
+	SystemRoleInterface[1] role terminatesAt
+end
+
+composition xxx_SystemFunction_decomposes between
+	SystemFunction[0..1] role xxx_SystemFunction_decomposes_src
+	SystemFunction[*] role decomposes
+end
+
+association xxx_SystemFunction_consumes between
+	SystemFunction[0..1] role xxx_SystemFunction_consumes_src
+	Product[*] role consumes
+end
+
+association xxx_SystemFunction_produces between
+	SystemFunction[0..1] role xxx_SystemFunction_produces_src
+	Product[*] role produces
+end
+
+association xxx_SystemFunction_terminatesAt between
+	SystemFunction[*] role xxx_SystemFunction_terminatesAt_src
+	SystemProductFlow[1] role terminatesAt
+end
+
+association xxx_SystemFunction_mesuredBy between
+	SystemFunction[0..1] role xxx_SystemFunction_mesuredBy_src
+	ConstraintOrRequirement[*] role mesuredBy
+end
+
+association xxx_SystemRoleInterface_originatesFrom between
+	SystemRoleInterface[*] role xxx_SystemRoleInterface_originatesFrom_src
+	SystemRole[1] role originatesFrom
+end
+
+association xxx_SystemAtNode_references between
+	SystemAtNode[*] role xxx_SystemAtNode_references_src
+	System[1] role references
+end
+
+association xxx_SystemAtNode_terminatesAt between
+	SystemAtNode[*] role xxx_SystemAtNode_terminatesAt_src
+	SystemAtNodeInterface[1] role terminatesAt
+end
+
+association xxx_SystemAtNodeInterface_originatesFrom between
+	SystemAtNodeInterface[*] role xxx_SystemAtNodeInterface_originatesFrom_src
+	SystemAtNode[1] role originatesFrom
+end
+
+association xxx_SystemsNode_groups between
+	SystemsNode[0..1] role xxx_SystemsNode_groups_src
+	SystemAtNode[*] role groups
+end
+
+composition xxx_COI_comprises between
+	COI[0..1] role xxx_COI_comprises_src
+	Performer[*] role comprises
+end
+
+association xxx_COI_defines between
+	COI[*] role xxx_COI_defines_src
+	Vocabulary[1] role defines
+end
+
+composition xxx_Vocabulary_comprises between
+	Vocabulary[0..1] role xxx_Vocabulary_comprises_src
+	DataReference[*] role comprises
+end
+
+association xxx_DataReference_defineBy between
+	DataReference[*] role xxx_DataReference_defineBy_src
+	Data[1] role defineBy
+end
+
+composition xxx_Performer_decomposes between
+	Performer[0..1] role xxx_Performer_decomposes_src
+	Performer[*] role decomposes
+end
+
+association xxx_Performer_fulfills between
+	Performer[0..1] role xxx_Performer_fulfills_src
+	OperationalRole[*] role fulfills
+end
+
+composition xxx_OperationalRole_decomposes between
+	OperationalRole[0..1] role xxx_OperationalRole_decomposes_src
+	OperationalRole[*] role decomposes
+end
+
+association xxx_OperationalRole_accomplishes between
+	OperationalRole[0..1] role xxx_OperationalRole_accomplishes_src
+	OperationalActivity[*] role accomplishes
+end
+
+composition xxx_OperationalActivity_decomposes between
+	OperationalActivity[0..1] role xxx_OperationalActivity_decomposes_src
+	OperationalRole[*] role decomposes
+end
+
+association xxx_OperationalActivity_supports between
+	OperationalActivity[0..1] role xxx_OperationalActivity_supports_src
+	SystemFunction[*] role supports
+end
+
+association xxx_SystemProductFlow_transports between
+	SystemProductFlow[0..1] role xxx_SystemProductFlow_transports_src
+	Product[*] role transports
+end
+
+association xxx_SystemProductFlow_originatesFrom between
+	SystemProductFlow[*] role xxx_SystemProductFlow_originatesFrom_src
+	SystemFunction[1] role originatesFrom
+end
+
+association xxx_DIA_nmjic between
+	DIA[*] role xxx_DIA_nmjic_src
+	NMJIC[1] role nmjic
+end
+
+association xxx_DIA_higherEchelon between
+	DIA[*] role xxx_DIA_higherEchelon_src
+	HigherEchelon[1] role higherEchelon
+end
+
+association xxx_NMJIC_dia between
+	NMJIC[*] role xxx_NMJIC_dia_src
+	DIA[1] role dia
+end
+
+association xxx_HigherEchelon_dia between
+	HigherEchelon[*] role xxx_HigherEchelon_dia_src
+	DIA[1] role dia
+end
+
+association xxx_HigherEchelon_jfc between
+	HigherEchelon[*] role xxx_HigherEchelon_jfc_src
+	JFC[1] role jfc
+end
+
+association xxx_JFC_higherEchelon between
+	JFC[*] role xxx_JFC_higherEchelon_src
+	HigherEchelon[1] role higherEchelon
+end
+
+association xxx_JFC_f2c2 between
+	JFC[*] role xxx_JFC_f2c2_src
+	F2C2[1] role f2c2
+end
+
+association xxx_JFC_componentComand between
+	JFC[*] role xxx_JFC_componentComand_src
+	ComponentCommand[1] role componentComand
+end
+
+association xxx_F2C2_jfc between
+	F2C2[*] role xxx_F2C2_jfc_src
+	JFC[1] role jfc
+end
+
+association xxx_ComponentCommand_jfc between
+	ComponentCommand[*] role xxx_ComponentCommand_jfc_src
+	JFC[1] role jfc
+end
+
+association xxx_JFACC_subordinateAirCommand between
+	JFACC[*] role xxx_JFACC_subordinateAirCommand_src
+	SubordinateAirCommand[1] role subordinateAirCommand
+end
+
+composition xxx_JFACC_aoccid between
+	JFACC[0..1] role xxx_JFACC_aoccid_src
+	AOCCID[*] role aoccid
+end
+
+composition xxx_JFACC_aoccpsc between
+	JFACC[0..1] role xxx_JFACC_aoccpsc_src
+	AOCCombatPlanStrategyCells[*] role aoccpsc
+end
+
+association xxx_SubordinateAirCommand_jfacc between
+	SubordinateAirCommand[*] role xxx_SubordinateAirCommand_jfacc_src
+	JFACC[1] role jfacc
+end
+
+association xxx_ResultData_cr between
+	ResultData[0..1] role xxx_ResultData_cr_src
+	CollectionRequirement[*] role cr
+end
+
+association xxx_ResultData_bdaReport between
+	ResultData[0..1] role xxx_ResultData_bdaReport_src
+	BDAReport[*] role bdaReport
+end
+
+association xxx_CollectionRequirement_rd between
+	CollectionRequirement[0..1] role xxx_CollectionRequirement_rd_src
+	ResultData[*] role rd
+end
+
+association xxx_CollectionRequirement_ato between
+	CollectionRequirement[0..1] role xxx_CollectionRequirement_ato_src
+	ATO[*] role ato
+end
+
+association xxx_CollectionRequirement_isContainedIn between
+	CollectionRequirement[0..1] role xxx_CollectionRequirement_isContainedIn_src
+	Target[*] role isContainedIn
+end
+
+association xxx_BDAReport_rd between
+	BDAReport[0..1] role xxx_BDAReport_rd_src
+	ResultData[1..*] role rd
+end
+
+association xxx_BDAReport_mea between
+	BDAReport[*] role xxx_BDAReport_mea_src
+	MunitionsEffectsAssesment[0..1] role mea
+end
+
+association xxx_MunitionsEffectsAssesment_bdaReport between
+	MunitionsEffectsAssesment[*] role xxx_MunitionsEffectsAssesment_bdaReport_src
+	BDAReport[0..1] role bdaReport
+end
+
+association xxx_MunitionsEffectsAssesment_ato between
+	MunitionsEffectsAssesment[*] role xxx_MunitionsEffectsAssesment_ato_src
+	ATO[1] role ato
+end
+
+association xxx_MunitionsEffectsAssesment_tn between
+	MunitionsEffectsAssesment[*] role xxx_MunitionsEffectsAssesment_tn_src
+	TargetNomination[1] role tn
+end
+
+association xxx_ATO_cr between
+	ATO[0..1] role xxx_ATO_cr_src
+	CollectionRequirement[*] role cr
+end
+
+association xxx_ATO_mea between
+	ATO[*] role xxx_ATO_mea_src
+	MunitionsEffectsAssesment[1] role mea
+end
+
+association xxx_ATO_tn between
+	ATO[0..1] role xxx_ATO_tn_src
+	TargetNomination[*] role tn
+end
+
+association xxx_ATO_rr between
+	ATO[*] role xxx_ATO_rr_src
+	RestrikeRecommendation[0..1] role rr
+end
+
+association xxx_RestrikeRecommendation_ato between
+	RestrikeRecommendation[*] role xxx_RestrikeRecommendation_ato_src
+	ATO[0..1] role ato
+end
+
+association xxx_RestrikeRecommendation_tn between
+	RestrikeRecommendation[*] role xxx_RestrikeRecommendation_tn_src
+	TargetNomination[1] role tn
+end
+
+association xxx_TargetNomination_ato between
+	TargetNomination[0..1] role xxx_TargetNomination_ato_src
+	ATO[*] role ato
+end
+
+association xxx_TargetNomination_mea between
+	TargetNomination[0..1] role xxx_TargetNomination_mea_src
+	MunitionsEffectsAssesment[*] role mea
+end
+
+association xxx_TargetNomination_rr between
+	TargetNomination[*] role xxx_TargetNomination_rr_src
+	RestrikeRecommendation[0..1] role rr
+end
+
+association xxx_TargetNomination_target between
+	TargetNomination[*] role xxx_TargetNomination_target_src
+	Target[1] role target
+end
+
+association xxx_TargetMaterialsAnalysis_target between
+	TargetMaterialsAnalysis[*] role xxx_TargetMaterialsAnalysis_target_src
+	Target[1] role target
+end
+
+association xxx_Target_cr between
+	Target[0..1] role xxx_Target_cr_src
+	CollectionRequirement[*] role cr
+end
+
+association xxx_Target_tn between
+	Target[*] role xxx_Target_tn_src
+	TargetNomination[0..1] role tn
+end
+
+association xxx_Target_holds between
+	Target[*] role xxx_Target_holds_src
+	MIDB[0..1] role holds
+end
+
+association xxx_Target_describes between
+	Target[0..1] role xxx_Target_describes_src
+	TargetMaterialsAnalysis[*] role describes
+end
+
+association xxx_MIDB_target between
+	MIDB[0..1] role xxx_MIDB_target_src
+	Target[*] role target
+end
+

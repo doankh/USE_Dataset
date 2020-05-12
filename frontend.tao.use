@@ -1,0 +1,169 @@
+model tao
+class TaoTransformation<TransformationDefinition
+attributes
+operations
+end
+
+class TemplateParameter<Variable
+attributes
+operations
+end
+
+class ObjectInstantiation<Variable,Statement
+attributes
+operations
+end
+
+class TemplateRootObject<ObjectInstantiation
+attributes
+operations
+end
+
+class Template<NamedElement,LocatedElement
+attributes
+operations
+end
+
+abstract class Assignment<Statement
+attributes
+operations
+end
+
+class AttributeAssigment<Assignment
+attributes
+	targetFeature : String
+operations
+end
+
+abstract class SourceExpression<LocatedElement
+attributes
+operations
+end
+
+class WithOptionalVariableExpression<SourceExpression
+attributes
+operations
+end
+
+class ObjectSourceVariable<Variable
+attributes
+operations
+end
+
+abstract class ReferenceAssignment<Assignment,Variable
+attributes
+	targetFeature : String
+	multivalued : Boolean
+operations
+end
+
+class ObjectSyntax<ReferenceAssignment
+attributes
+operations
+end
+
+class Invocation<ReferenceAssignment
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+composition xxx_TaoTransformation_templates between
+	TaoTransformation[0..1] role xxx_TaoTransformation_templates_src
+	Template[*] role templates
+end
+
+composition xxx_TemplateParameter_type between
+	TemplateParameter[*] role xxx_TemplateParameter_type_src
+	ClassUse[1] role type
+end
+
+composition xxx_ObjectInstantiation_type between
+	ObjectInstantiation[*] role xxx_ObjectInstantiation_type_src
+	ClassUse[1] role type
+end
+
+composition xxx_ObjectInstantiation_assigments between
+	ObjectInstantiation[0..1] role xxx_ObjectInstantiation_assigments_src
+	Assignment[*] role assigments
+end
+
+composition xxx_Template_parameters between
+	Template[0..1] role xxx_Template_parameters_src
+	TemplateParameter[*] role parameters
+end
+
+composition xxx_Template_roots between
+	Template[0..1] role xxx_Template_roots_src
+	TemplateRootObject[*] role roots
+end
+
+composition xxx_AttributeAssigment_expr between
+	AttributeAssigment[*] role xxx_AttributeAssigment_expr_src
+	SourceExpression[1] role expr
+end
+
+composition xxx_WithOptionalVariableExpression_variable between
+	WithOptionalVariableExpression[*] role xxx_WithOptionalVariableExpression_variable_src
+	ObjectSourceVariable[0..1] role variable
+end
+
+composition xxx_WithOptionalVariableExpression_expr between
+	WithOptionalVariableExpression[*] role xxx_WithOptionalVariableExpression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_ReferenceAssignment_expr between
+	ReferenceAssignment[*] role xxx_ReferenceAssignment_expr_src
+	SourceExpression[0..1] role expr
+end
+
+composition xxx_ObjectSyntax_object between
+	ObjectSyntax[*] role xxx_ObjectSyntax_object_src
+	ObjectInstantiation[1] role object
+end
+
+association xxx_Invocation_template between
+	Invocation[*] role xxx_Invocation_template_src
+	Template[1] role template
+end
+

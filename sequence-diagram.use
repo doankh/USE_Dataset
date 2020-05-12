@@ -1,0 +1,360 @@
+model sequenced
+abstract class SDEntity
+attributes
+operations
+end
+
+class SDModel<SDFrameContainer,SDEntity
+attributes
+operations
+	getUMLTracing():SDTrace
+end
+
+class SDGate<SDEntity
+attributes
+operations
+end
+
+abstract class SDBackedByFragment<SDEntity
+attributes
+operations
+	getUmlFragment():UMLInteractionFragment
+end
+
+abstract class SDLifeLineElement<SDEntity
+attributes
+operations
+	getCoveredLifeLine():SDLifeLine
+end
+
+abstract class SDBracketContainer<SDLifeLineElement
+attributes
+operations
+end
+
+abstract class SDBracket<SDLifeLineElement,SDBackedByFragment
+attributes
+operations
+end
+
+class SDLifeLine<SDBracketContainer
+attributes
+operations
+end
+
+abstract class SDBehaviorSpec<SDBracket,SDBracketContainer
+attributes
+operations
+end
+
+class SDMountingRegion<SDBracket,SDBracketContainer
+attributes
+operations
+	findMountingRegionForSubFrame(subFrame : SDFrame):SDMountingRegion
+end
+
+abstract class SDFrame<SDFrameContainer,SDBackedByFragment,SDEntity
+attributes
+operations
+	findRegionForUmlLifeLine(umlLifeline : UMLLifeline):SDMountingRegion
+	findRegionForSDLifeLine(sdLifeline : SDLifeLine):SDMountingRegion
+end
+
+class SDInteractionUse<SDFrame
+attributes
+operations
+end
+
+class SDCombinedFragment<SDFrame
+attributes
+operations
+end
+
+class SDInteractionOperand<SDFrame
+attributes
+operations
+end
+
+abstract class SDFrameContainer
+attributes
+operations
+end
+
+class SDExecution<SDBehaviorSpec
+attributes
+operations
+end
+
+class SDInvocation<SDBehaviorSpec
+attributes
+operations
+end
+
+abstract class SDAbstractMessage<SDEntity
+attributes
+	messageNumber : String
+operations
+end
+
+class SDMessage<SDAbstractMessage
+attributes
+operations
+end
+
+class SDGateMessage<SDAbstractMessage
+attributes
+	fromNotToGate : Boolean
+operations
+end
+
+class SDGateMessageEnd<SDBracket
+attributes
+	isStartNotFinish : Boolean
+operations
+end
+
+class SDSimpleNode<SDBracket
+attributes
+operations
+end
+
+abstract class UMLConstraint
+attributes
+operations
+end
+
+abstract class UMLStateInvariant
+attributes
+operations
+end
+
+abstract class UMLInteraction
+attributes
+operations
+end
+
+abstract class UMLPackage
+attributes
+operations
+end
+
+abstract class UMLLifeline
+attributes
+operations
+end
+
+abstract class UMLOccurrenceSpecification
+attributes
+operations
+end
+
+abstract class UMLMessage
+attributes
+operations
+end
+
+abstract class UMLDurationConstraint
+attributes
+operations
+end
+
+abstract class UMLInteractionFragment
+attributes
+operations
+end
+
+abstract class UMLExecutionSpecification
+attributes
+operations
+end
+
+abstract class UMLGate
+attributes
+operations
+end
+
+abstract class UMLInteractionUse
+attributes
+operations
+end
+
+abstract class UMLInteractionOperand
+attributes
+operations
+end
+
+abstract class UMLCombinedFragment
+attributes
+operations
+end
+
+abstract class SDTrace
+attributes
+operations
+end
+
+association xxx_SDModel_umlInteraction between
+	SDModel[*] role xxx_SDModel_umlInteraction_src
+	UMLInteraction[1] role umlInteraction
+end
+
+composition xxx_SDModel_lifelines between
+	SDModel[0..1] role xxx_SDModel_lifelines_src
+	SDLifeLine[*] role lifelines
+end
+
+composition xxx_SDModel_messages between
+	SDModel[0..1] role xxx_SDModel_messages_src
+	SDAbstractMessage[*] role messages
+end
+
+composition xxx_SDModel_gates between
+	SDModel[0..1] role xxx_SDModel_gates_src
+	SDGate[*] role gates
+end
+
+association xxx_SDGate_umlGate between
+	SDGate[*] role xxx_SDGate_umlGate_src
+	UMLGate[0..1] role umlGate
+end
+
+composition xxx_SDBracketContainer_brackets between
+	SDBracketContainer[0..1] role xxx_SDBracketContainer_brackets_src
+	SDBracket[*] role brackets
+end
+
+association xxx_SDBracket_bracketContainer between
+	SDBracket[*] role xxx_SDBracket_bracketContainer_src
+	SDBracketContainer[1] role bracketContainer
+end
+
+association xxx_SDLifeLine_umlLifeline between
+	SDLifeLine[*] role xxx_SDLifeLine_umlLifeline_src
+	UMLLifeline[1] role umlLifeline
+end
+
+association xxx_SDLifeLine_model_ between
+	SDLifeLine[*] role xxx_SDLifeLine_model__src
+	SDModel[1] role model_
+end
+
+association xxx_SDBehaviorSpec_umlExecutionSpec between
+	SDBehaviorSpec[*] role xxx_SDBehaviorSpec_umlExecutionSpec_src
+	UMLExecutionSpecification[0..1] role umlExecutionSpec
+end
+
+association xxx_SDBehaviorSpec_umlStart between
+	SDBehaviorSpec[*] role xxx_SDBehaviorSpec_umlStart_src
+	UMLOccurrenceSpecification[0..1] role umlStart
+end
+
+association xxx_SDBehaviorSpec_umlFinish between
+	SDBehaviorSpec[*] role xxx_SDBehaviorSpec_umlFinish_src
+	UMLOccurrenceSpecification[0..1] role umlFinish
+end
+
+association xxx_SDMountingRegion_frame between
+	SDMountingRegion[*] role xxx_SDMountingRegion_frame_src
+	SDFrame[1] role frame
+end
+
+association xxx_SDFrame_frameContainer between
+	SDFrame[*] role xxx_SDFrame_frameContainer_src
+	SDFrameContainer[1] role frameContainer
+end
+
+association xxx_SDFrame_regions between
+	SDFrame[0..1] role xxx_SDFrame_regions_src
+	SDMountingRegion[*] role regions
+end
+
+association xxx_SDFrame_coveredLifeLines between
+	SDFrame[0..1] role xxx_SDFrame_coveredLifeLines_src
+	SDLifeLine[*] role coveredLifeLines
+end
+
+association xxx_SDInteractionUse_umlInteractionUse between
+	SDInteractionUse[*] role xxx_SDInteractionUse_umlInteractionUse_src
+	UMLInteractionUse[0..1] role umlInteractionUse
+end
+
+association xxx_SDCombinedFragment_umlCombinedFragment between
+	SDCombinedFragment[*] role xxx_SDCombinedFragment_umlCombinedFragment_src
+	UMLCombinedFragment[0..1] role umlCombinedFragment
+end
+
+association xxx_SDInteractionOperand_umlInteractionOperand between
+	SDInteractionOperand[*] role xxx_SDInteractionOperand_umlInteractionOperand_src
+	UMLInteractionOperand[0..1] role umlInteractionOperand
+end
+
+composition xxx_SDFrameContainer_frames between
+	SDFrameContainer[0..1] role xxx_SDFrameContainer_frames_src
+	SDFrame[*] role frames
+end
+
+association xxx_SDFrameContainer_fragmentsList between
+	SDFrameContainer[0..1] role xxx_SDFrameContainer_fragmentsList_src
+	UMLInteractionFragment[*] role fragmentsList
+end
+
+association xxx_SDExecution_invocation between
+	SDExecution[*] role xxx_SDExecution_invocation_src
+	SDInvocation[1] role invocation
+end
+
+association xxx_SDExecution_incomingMessage between
+	SDExecution[*] role xxx_SDExecution_incomingMessage_src
+	SDMessage[1] role incomingMessage
+end
+
+association xxx_SDInvocation_receiveExecution between
+	SDInvocation[*] role xxx_SDInvocation_receiveExecution_src
+	SDExecution[1] role receiveExecution
+end
+
+association xxx_SDInvocation_outgoingMessage between
+	SDInvocation[*] role xxx_SDInvocation_outgoingMessage_src
+	SDMessage[1] role outgoingMessage
+end
+
+association xxx_SDAbstractMessage_umlMessage between
+	SDAbstractMessage[*] role xxx_SDAbstractMessage_umlMessage_src
+	UMLMessage[0..1] role umlMessage
+end
+
+association xxx_SDAbstractMessage_model_ between
+	SDAbstractMessage[*] role xxx_SDAbstractMessage_model__src
+	SDModel[1] role model_
+end
+
+association xxx_SDMessage_source between
+	SDMessage[*] role xxx_SDMessage_source_src
+	SDInvocation[0..1] role source
+end
+
+association xxx_SDMessage_target between
+	SDMessage[*] role xxx_SDMessage_target_src
+	SDExecution[0..1] role target
+end
+
+association xxx_SDGateMessage_gate between
+	SDGateMessage[*] role xxx_SDGateMessage_gate_src
+	SDGate[0..1] role gate
+end
+
+association xxx_SDGateMessage_normalEnd between
+	SDGateMessage[*] role xxx_SDGateMessage_normalEnd_src
+	SDGateMessageEnd[0..1] role normalEnd
+end
+
+association xxx_SDGateMessageEnd_umlMessageEnd between
+	SDGateMessageEnd[*] role xxx_SDGateMessageEnd_umlMessageEnd_src
+	UMLOccurrenceSpecification[0..1] role umlMessageEnd
+end
+
+association xxx_SDSimpleNode_umlSimpleFragment between
+	SDSimpleNode[*] role xxx_SDSimpleNode_umlSimpleFragment_src
+	UMLInteractionFragment[0..1] role umlSimpleFragment
+end
+

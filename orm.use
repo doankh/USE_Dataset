@@ -1,0 +1,1541 @@
+model orm
+enum DiscriminatorType{
+default
+}
+
+enum EnumType{
+default
+}
+
+enum FetchType{
+default
+}
+
+enum GenerationType{
+default
+}
+
+enum InheritanceType{
+default
+}
+
+enum TemporalType{
+default
+}
+
+enum LockModeType_2_0{
+default
+}
+
+enum ParameterMode_2_1{
+default
+}
+
+enum ConstraintMode_2_1{
+default
+}
+
+abstract class AbstractXmlAttributeMapping<XmlAttributeMapping
+attributes
+operations
+end
+
+abstract class XmlBaseColumn<XmlNamedColumn
+attributes
+	insertable : String
+	nullable : String
+	table : String
+	unique : String
+	updatable : String
+operations
+end
+
+abstract class AbstractXmlBaseColumn<AbstractXmlNamedColumn,XmlBaseColumn
+attributes
+operations
+end
+
+abstract class AbstractXmlBaseDiscriminatorColumn<AbstractXmlNamedColumn,XmlBaseDiscriminatorColumn
+attributes
+operations
+end
+
+abstract class AbstractXmlEmbedded<AbstractXmlAttributeMapping,XmlAttributeOverrideContainer
+attributes
+operations
+end
+
+abstract class AbstractXmlMultiRelationshipMapping<AbstractXmlRelationshipMapping,XmlMappedByMapping,XmlJoinTableContainer,XmlOrderable,XmlMultiRelationshipMapping_2_0
+attributes
+operations
+end
+
+abstract class XmlNamedColumn
+attributes
+	columnDefinition : String
+	name : String
+operations
+end
+
+abstract class XmlBaseDiscriminatorColumn<XmlNamedColumn
+attributes
+	discriminatorType : DiscriminatorType
+	length : String
+operations
+end
+
+abstract class XmlBaseJoinColumn<XmlNamedColumn
+attributes
+	referencedColumnName : String
+operations
+end
+
+abstract class AbstractXmlManagedType<XmlManagedType
+attributes
+operations
+end
+
+abstract class AbstractXmlNamedColumn<XmlNamedColumn
+attributes
+operations
+end
+
+abstract class AbstractXmlRelationshipMapping<AbstractXmlAttributeMapping
+attributes
+	targetEntity : String
+	fetch : FetchType
+operations
+end
+
+abstract class AbstractXmlSingleRelationshipMapping<AbstractXmlRelationshipMapping,XmlJoinTableContainer,XmlJoinColumnContainer,XmlSingleRelationshipMapping_2_0
+attributes
+	optional : String
+operations
+end
+
+abstract class AbstractXmlReferenceTable<AbstractXmlTable,XmlReferenceTable
+attributes
+operations
+end
+
+abstract class AbstractXmlTable
+attributes
+	name : String
+	catalog : String
+	schema : String
+operations
+end
+
+abstract class AbstractXmlTypeMapping<AbstractXmlManagedType,XmlTypeMapping
+attributes
+operations
+end
+
+abstract class XmlAccessHolder
+attributes
+	access : String
+operations
+end
+
+abstract class XmlAttributeMapping<XmlAttributeMapping_2_0
+attributes
+	name : String
+operations
+end
+
+class XmlAssociationOverride<XmlOverride,XmlJoinColumnContainer,XmlAssociationOverride_2_0,XmlAssociationOverride_2_1
+attributes
+operations
+end
+
+abstract class XmlAssociationOverrideContainer
+attributes
+operations
+end
+
+class XmlAttributeOverride<XmlOverride,XmlAttributeOverride_2_0
+attributes
+operations
+end
+
+abstract class XmlAttributeOverrideContainer
+attributes
+operations
+end
+
+class Attributes<XmlAttributes_2_0
+attributes
+operations
+end
+
+class XmlBasic<AbstractXmlAttributeMapping,ColumnMapping,XmlConvertibleMapping
+attributes
+	fetch : FetchType
+	optional : String
+operations
+end
+
+class CascadeType<XmlCascadeType_2_0
+attributes
+	cascadeAll : Boolean
+	cascadePersist : Boolean
+	cascadeMerge : Boolean
+	cascadeRemove : Boolean
+	cascadeRefresh : Boolean
+operations
+end
+
+class XmlClassReference
+attributes
+	className : String
+operations
+end
+
+class XmlCollectionTable<AbstractXmlReferenceTable,XmlCollectionTable_2_0,XmlCollectionTable_2_1
+attributes
+operations
+end
+
+class XmlColumn<AbstractXmlBaseColumn
+attributes
+	length : String
+	precision : String
+	scale : String
+operations
+end
+
+abstract class ColumnMapping
+attributes
+operations
+end
+
+class ColumnResult<ColumnResult_2_1
+attributes
+	name : String
+operations
+end
+
+class ConstructorResult<ConstructorResult_2_1
+attributes
+operations
+end
+
+class XmlConvert<XmlConvert_2_1
+attributes
+operations
+end
+
+class XmlConverter<AbstractXmlManagedType,XmlConverter_2_1
+attributes
+operations
+end
+
+abstract class XmlConvertibleMapping<XmlConvertibleMapping_2_1
+attributes
+	lob : Boolean
+	temporal : TemporalType
+	enumerated : EnumType
+operations
+end
+
+class XmlDiscriminatorColumn<AbstractXmlBaseDiscriminatorColumn
+attributes
+operations
+end
+
+class XmlElementCollection<AbstractXmlAttributeMapping,XmlElementCollection_2_0,XmlElementCollection_2_1
+attributes
+operations
+end
+
+class XmlEmbeddable<AbstractXmlTypeMapping
+attributes
+operations
+end
+
+class XmlEmbedded<AbstractXmlEmbedded,XmlEmbedded_2_0,XmlEmbedded_2_1
+attributes
+operations
+end
+
+class XmlEmbeddedId<AbstractXmlEmbedded
+attributes
+operations
+end
+
+class XmlEntity<AbstractXmlTypeMapping,XmlQueryContainer,XmlGeneratorContainer,XmlEventMethodContainer,XmlAttributeOverrideContainer,XmlAssociationOverrideContainer,XmlEntity_2_0,XmlIdClassContainer,XmlEntity_2_1
+attributes
+	name : String
+	discriminatorValue : String
+	excludeDefaultListeners : Boolean
+	excludeSuperclassListeners : Boolean
+operations
+end
+
+class EntityListener<XmlEventMethodContainer,XmlEntityListener_2_0
+attributes
+	className : String
+operations
+end
+
+class EntityListeners
+attributes
+operations
+end
+
+class XmlEntityMappings<XmlQueryContainer,XmlAccessHolder,XmlEntityMappings_2_1
+attributes
+	description : String
+	package : String
+	schema : String
+	catalog : String
+operations
+end
+
+class EntityResult
+attributes
+	discriminatorColumn : String
+	entityClass : String
+operations
+end
+
+abstract class EventMethod<XmlEventMethod_2_0
+attributes
+	methodName : String
+operations
+end
+
+abstract class XmlEventMethodContainer
+attributes
+operations
+end
+
+class FieldResult
+attributes
+	name : String
+	column : String
+operations
+end
+
+class XmlForeignKey<XmlForeignKey_2_1
+attributes
+operations
+end
+
+class XmlGeneratedValue
+attributes
+	generator : String
+	strategy : GenerationType
+operations
+end
+
+abstract class XmlGenerator<XmlGenerator_2_0
+attributes
+	name : String
+	initialValue : String
+	allocationSize : String
+operations
+end
+
+abstract class XmlGeneratorContainer
+attributes
+operations
+end
+
+class XmlId<AbstractXmlAttributeMapping,ColumnMapping,XmlConvertibleMapping,XmlGeneratorContainer
+attributes
+operations
+end
+
+abstract class XmlIdClassContainer
+attributes
+operations
+end
+
+class XmlIndex<XmlIndex_2_1
+attributes
+operations
+end
+
+class Inheritance
+attributes
+	strategy : InheritanceType
+operations
+end
+
+class XmlJoinColumn<AbstractXmlBaseColumn,XmlBaseJoinColumn
+attributes
+operations
+end
+
+abstract class XmlJoinColumnContainer
+attributes
+operations
+end
+
+class XmlJoinTable<AbstractXmlReferenceTable,XmlJoinTable_2_1
+attributes
+operations
+end
+
+abstract class XmlJoinTableContainer
+attributes
+operations
+end
+
+class Lob
+attributes
+operations
+end
+
+abstract class XmlManagedType
+attributes
+	className : String
+	description : String
+operations
+end
+
+class XmlManyToMany<AbstractXmlMultiRelationshipMapping,XmlManyToMany_2_0,XmlManyToMany_2_1
+attributes
+operations
+end
+
+class XmlManyToOne<AbstractXmlSingleRelationshipMapping,XmlManyToOne_2_1
+attributes
+operations
+end
+
+class MapKey
+attributes
+	name : String
+operations
+end
+
+abstract class XmlMappedByMapping
+attributes
+	mappedBy : String
+operations
+end
+
+class XmlMappedSuperclass<AbstractXmlTypeMapping,XmlIdClassContainer
+attributes
+	excludeDefaultListeners : Boolean
+	excludeSuperclassListeners : Boolean
+operations
+end
+
+class XmlNamedAttributeNode<XmlNamedAttributeNode_2_1
+attributes
+operations
+end
+
+class XmlNamedEntityGraph<XmlNamedEntityGraph_2_1
+attributes
+operations
+end
+
+class XmlNamedSubgraph<XmlNamedSubgraph_2_1
+attributes
+operations
+end
+
+class XmlNamedNativeQuery<XmlQuery
+attributes
+	query : String
+	resultClass : String
+	resultSetMapping : String
+operations
+end
+
+class XmlNamedQuery<XmlQuery,XmlNamedQuery_2_0
+attributes
+	query : String
+operations
+end
+
+class XmlNamedStoredProcedureQuery<XmlQuery,XmlNamedStoredProcedureQuery_2_1
+attributes
+operations
+end
+
+abstract class XmlNullAttributeMapping<AbstractXmlAttributeMapping
+attributes
+operations
+end
+
+class XmlOneToMany<AbstractXmlMultiRelationshipMapping,XmlJoinColumnContainer,XmlOneToMany_2_0,XmlOneToMany_2_1
+attributes
+operations
+end
+
+class XmlOneToOne<AbstractXmlSingleRelationshipMapping,XmlMappedByMapping,XmlPrimaryKeyJoinColumnContainer,XmlOneToOne_2_0,XmlOneToOne_2_1
+attributes
+operations
+end
+
+abstract class XmlOrderable<XmlOrderable_2_0
+attributes
+	orderBy : String
+operations
+end
+
+class XmlOrderColumn<AbstractXmlNamedColumn,XmlOrderColumn_2_0
+attributes
+operations
+end
+
+abstract class XmlOverride
+attributes
+	name : String
+operations
+end
+
+class XmlPersistenceUnitDefaults<XmlAccessHolder,XmlPersistenceUnitDefaults_2_0
+attributes
+	schema : String
+	catalog : String
+	cascadePersist : Boolean
+operations
+end
+
+class XmlPersistenceUnitMetadata<XmlPersistenceUnitMetadata_2_0
+attributes
+	xmlMappingMetadataComplete : Boolean
+operations
+end
+
+abstract class XmlReferenceTable
+attributes
+operations
+end
+
+class PostLoad<EventMethod
+attributes
+operations
+end
+
+class PostPersist<EventMethod
+attributes
+operations
+end
+
+class PostRemove<EventMethod
+attributes
+operations
+end
+
+class PostUpdate<EventMethod
+attributes
+operations
+end
+
+class PrePersist<EventMethod
+attributes
+operations
+end
+
+class PreRemove<EventMethod
+attributes
+operations
+end
+
+class PreUpdate<EventMethod
+attributes
+operations
+end
+
+class XmlPrimaryKeyJoinColumn<AbstractXmlNamedColumn,XmlBaseJoinColumn
+attributes
+operations
+end
+
+abstract class XmlPrimaryKeyJoinColumnContainer
+attributes
+operations
+end
+
+abstract class XmlQuery<XmlQuery_2_0
+attributes
+	name : String
+operations
+end
+
+abstract class XmlQueryContainer<XmlQueryContainer_2_1
+attributes
+operations
+end
+
+class XmlQueryHint<XmlQueryHint_2_0
+attributes
+	name : String
+	value : String
+operations
+end
+
+class XmlSecondaryTable<AbstractXmlTable,XmlSecondaryTable_2_1
+attributes
+operations
+end
+
+class XmlSequenceGenerator<XmlGenerator,XmlSequenceGenerator_2_0
+attributes
+	sequenceName : String
+operations
+end
+
+class XmlSqlResultSetMapping<XmlSqlResultSetMapping_2_0,XmlSqlResultSetMapping_2_1
+attributes
+	name : String
+operations
+end
+
+class XmlStoredProcedureParameter<XmlStoredProcedureParameter_2_1
+attributes
+operations
+end
+
+class XmlTable<AbstractXmlTable,XmlTable_2_1
+attributes
+operations
+end
+
+class XmlTableGenerator<XmlGenerator,XmlTableGenerator_2_1
+attributes
+	table : String
+	catalog : String
+	schema : String
+	pkColumnName : String
+	valueColumnName : String
+	pkColumnValue : String
+operations
+end
+
+class XmlTransient<AbstractXmlAttributeMapping
+attributes
+operations
+end
+
+abstract class XmlTypeMapping<XmlManagedType,XmlAccessHolder
+attributes
+	metadataComplete : String
+operations
+end
+
+class XmlUniqueConstraint<XmlUniqueConstraint_2_0
+attributes
+	columnNames : String
+operations
+end
+
+class XmlVersion<AbstractXmlAttributeMapping,ColumnMapping,XmlConvertibleMapping
+attributes
+operations
+end
+
+abstract class XmlAssociationOverride_2_0<XmlJoinTableContainer
+attributes
+	description : String
+operations
+end
+
+abstract class XmlAttributeMapping_2_0<XmlAccessHolder
+attributes
+operations
+end
+
+abstract class XmlAttributeOverride_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlAttributes_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlCacheable_2_0
+attributes
+	cacheable : String
+operations
+end
+
+abstract class XmlCascadeType_2_0
+attributes
+	cascadeDetach : Boolean
+operations
+end
+
+abstract class XmlCollectionTable_2_0<XmlReferenceTable
+attributes
+operations
+end
+
+abstract class XmlDerivedId_2_0
+attributes
+	id : String
+operations
+end
+
+abstract class XmlElementCollection_2_0<XmlConvertibleMapping,XmlOrderable,XmlAttributeOverrideContainer,XmlAssociationOverrideContainer,XmlMapKeyAttributeOverrideContainer_2_0,XmlMapKeyConvertibleMapping_2_0
+attributes
+	targetClass : String
+	fetch : FetchType
+operations
+end
+
+abstract class XmlEmbedded_2_0<XmlAssociationOverrideContainer
+attributes
+operations
+end
+
+abstract class XmlEntity_2_0<XmlCacheable_2_0
+attributes
+operations
+end
+
+abstract class XmlEntityListener_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlEventMethod_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlGenerator_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlManyToMany_2_0<XmlMultiRelationshipMapping_2_0
+attributes
+operations
+end
+
+abstract class XmlMapKeyAttributeOverrideContainer_2_0
+attributes
+operations
+end
+
+abstract class XmlMapKeyConvertibleMapping_2_0
+attributes
+	mapKeyTemporal : TemporalType
+	mapKeyEnumerated : EnumType
+operations
+end
+
+abstract class XmlMapsId_2_0
+attributes
+	mapsId : String
+operations
+end
+
+abstract class XmlMultiRelationshipMapping_2_0<XmlOrderable_2_0,XmlMapKeyAttributeOverrideContainer_2_0,XmlMapKeyConvertibleMapping_2_0
+attributes
+operations
+end
+
+abstract class XmlNamedQuery_2_0
+attributes
+	lockMode : LockModeType_2_0
+operations
+end
+
+abstract class XmlOneToMany_2_0<XmlMultiRelationshipMapping_2_0,XmlOrphanRemovable_2_0
+attributes
+operations
+end
+
+abstract class XmlOneToOne_2_0<XmlSingleRelationshipMapping_2_0,XmlOrphanRemovable_2_0
+attributes
+operations
+end
+
+abstract class XmlOrderable_2_0
+attributes
+operations
+end
+
+abstract class XmlOrderColumn_2_0
+attributes
+	nullable : String
+	insertable : String
+	updatable : String
+operations
+end
+
+abstract class XmlOrphanRemovable_2_0
+attributes
+	orphanRemoval : String
+operations
+end
+
+abstract class XmlPersistenceUnitDefaults_2_0
+attributes
+	description : String
+	delimitedIdentifiers : Boolean
+operations
+end
+
+abstract class XmlPersistenceUnitMetadata_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlQuery_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlQueryHint_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlSequenceGenerator_2_0
+attributes
+	catalog : String
+	schema : String
+operations
+end
+
+abstract class XmlSingleRelationshipMapping_2_0<XmlDerivedId_2_0,XmlMapsId_2_0
+attributes
+operations
+end
+
+abstract class XmlSqlResultSetMapping_2_0
+attributes
+	description : String
+operations
+end
+
+abstract class XmlUniqueConstraint_2_0
+attributes
+	name : String
+operations
+end
+
+abstract class ColumnResult_2_1
+attributes
+	className : String
+operations
+end
+
+abstract class ConstructorResult_2_1
+attributes
+	targetClass : String
+operations
+end
+
+abstract class XmlAssociationOverride_2_1
+attributes
+operations
+end
+
+abstract class XmlCollectionTable_2_1
+attributes
+operations
+end
+
+abstract class XmlConvert_2_1
+attributes
+	description : String
+	converter : String
+	attributeName : String
+	disableConversion : String
+operations
+end
+
+abstract class XmlConverter_2_1
+attributes
+	autoApply : String
+operations
+end
+
+abstract class XmlConverterContainer_2_1
+attributes
+operations
+end
+
+abstract class XmlConvertibleMapping_2_1
+attributes
+operations
+end
+
+abstract class XmlElementCollection_2_1
+attributes
+operations
+end
+
+abstract class XmlEmbedded_2_1
+attributes
+operations
+end
+
+abstract class XmlEntity_2_1<XmlQueryContainer_2_1
+attributes
+operations
+end
+
+abstract class XmlEntityMappings_2_1<XmlConverterContainer_2_1,XmlQueryContainer_2_1
+attributes
+operations
+end
+
+abstract class XmlForeignKey_2_1
+attributes
+	description : String
+	name : String
+	constraintMode : ConstraintMode_2_1
+	foreignKeyDefinition : String
+operations
+end
+
+abstract class XmlIndex_2_1
+attributes
+	description : String
+	name : String
+	columnList : String
+	unique : String
+operations
+end
+
+abstract class XmlJoinTable_2_1
+attributes
+operations
+end
+
+abstract class XmlManyToMany_2_1
+attributes
+operations
+end
+
+abstract class XmlManyToOne_2_1
+attributes
+operations
+end
+
+abstract class XmlNamedAttributeNode_2_1
+attributes
+	name : String
+	subgraph : String
+	keySubgraph : String
+operations
+end
+
+abstract class XmlNamedEntityGraph_2_1
+attributes
+	name : String
+	includeAllAttributes : String
+operations
+end
+
+abstract class XmlNamedStoredProcedureQuery_2_1
+attributes
+	resultClasses : String
+	resultSetMappings : String
+	procedureName : String
+operations
+end
+
+abstract class XmlNamedSubgraph_2_1
+attributes
+	name : String
+	className : String
+operations
+end
+
+abstract class XmlOneToMany_2_1
+attributes
+operations
+end
+
+abstract class XmlOneToOne_2_1
+attributes
+operations
+end
+
+abstract class XmlQueryContainer_2_1
+attributes
+operations
+end
+
+abstract class XmlSecondaryTable_2_1
+attributes
+operations
+end
+
+abstract class XmlStoredProcedureParameter_2_1
+attributes
+	description : String
+	mode : ParameterMode_2_1
+	name : String
+	className : String
+operations
+end
+
+abstract class XmlSqlResultSetMapping_2_1
+attributes
+operations
+end
+
+abstract class XmlTable_2_1
+attributes
+operations
+end
+
+abstract class XmlTableGenerator_2_1
+attributes
+operations
+end
+
+composition xxx_AbstractXmlMultiRelationshipMapping_mapKey between
+	AbstractXmlMultiRelationshipMapping[*] role xxx_AbstractXmlMultiRelationshipMapping_mapKey_src
+	MapKey[0..1] role mapKey
+end
+
+composition xxx_AbstractXmlRelationshipMapping_cascade between
+	AbstractXmlRelationshipMapping[*] role xxx_AbstractXmlRelationshipMapping_cascade_src
+	CascadeType[0..1] role cascade
+end
+
+composition xxx_AbstractXmlTable_uniqueConstraints between
+	AbstractXmlTable[0..1] role xxx_AbstractXmlTable_uniqueConstraints_src
+	XmlUniqueConstraint[*] role uniqueConstraints
+end
+
+composition xxx_XmlAssociationOverrideContainer_associationOverrides between
+	XmlAssociationOverrideContainer[0..1] role xxx_XmlAssociationOverrideContainer_associationOverrides_src
+	XmlAssociationOverride[*] role associationOverrides
+end
+
+composition xxx_XmlAttributeOverride_column between
+	XmlAttributeOverride[*] role xxx_XmlAttributeOverride_column_src
+	XmlColumn[1] role column
+end
+
+composition xxx_XmlAttributeOverrideContainer_attributeOverrides between
+	XmlAttributeOverrideContainer[0..1] role xxx_XmlAttributeOverrideContainer_attributeOverrides_src
+	XmlAttributeOverride[*] role attributeOverrides
+end
+
+composition xxx_Attributes_ids between
+	Attributes[0..1] role xxx_Attributes_ids_src
+	XmlId[*] role ids
+end
+
+composition xxx_Attributes_embeddedIds between
+	Attributes[0..1] role xxx_Attributes_embeddedIds_src
+	XmlEmbeddedId[*] role embeddedIds
+end
+
+composition xxx_Attributes_basics between
+	Attributes[0..1] role xxx_Attributes_basics_src
+	XmlBasic[*] role basics
+end
+
+composition xxx_Attributes_versions between
+	Attributes[0..1] role xxx_Attributes_versions_src
+	XmlVersion[*] role versions
+end
+
+composition xxx_Attributes_manyToOnes between
+	Attributes[0..1] role xxx_Attributes_manyToOnes_src
+	XmlManyToOne[*] role manyToOnes
+end
+
+composition xxx_Attributes_oneToManys between
+	Attributes[0..1] role xxx_Attributes_oneToManys_src
+	XmlOneToMany[*] role oneToManys
+end
+
+composition xxx_Attributes_oneToOnes between
+	Attributes[0..1] role xxx_Attributes_oneToOnes_src
+	XmlOneToOne[*] role oneToOnes
+end
+
+composition xxx_Attributes_manyToManys between
+	Attributes[0..1] role xxx_Attributes_manyToManys_src
+	XmlManyToMany[*] role manyToManys
+end
+
+composition xxx_Attributes_embeddeds between
+	Attributes[0..1] role xxx_Attributes_embeddeds_src
+	XmlEmbedded[*] role embeddeds
+end
+
+composition xxx_Attributes_transients between
+	Attributes[0..1] role xxx_Attributes_transients_src
+	XmlTransient[*] role transients
+end
+
+composition xxx_ColumnMapping_column between
+	ColumnMapping[*] role xxx_ColumnMapping_column_src
+	XmlColumn[0..1] role column
+end
+
+composition xxx_XmlEntity_table between
+	XmlEntity[*] role xxx_XmlEntity_table_src
+	XmlTable[0..1] role table
+end
+
+composition xxx_XmlEntity_secondaryTables between
+	XmlEntity[0..1] role xxx_XmlEntity_secondaryTables_src
+	XmlSecondaryTable[*] role secondaryTables
+end
+
+composition xxx_XmlEntity_primaryKeyJoinColumns between
+	XmlEntity[0..1] role xxx_XmlEntity_primaryKeyJoinColumns_src
+	XmlPrimaryKeyJoinColumn[*] role primaryKeyJoinColumns
+end
+
+composition xxx_XmlEntity_inheritance between
+	XmlEntity[*] role xxx_XmlEntity_inheritance_src
+	Inheritance[0..1] role inheritance
+end
+
+composition xxx_XmlEntity_discriminatorColumn between
+	XmlEntity[*] role xxx_XmlEntity_discriminatorColumn_src
+	XmlDiscriminatorColumn[0..1] role discriminatorColumn
+end
+
+composition xxx_XmlEntity_sqlResultSetMappings between
+	XmlEntity[0..1] role xxx_XmlEntity_sqlResultSetMappings_src
+	XmlSqlResultSetMapping[*] role sqlResultSetMappings
+end
+
+composition xxx_XmlEntity_entityListeners between
+	XmlEntity[*] role xxx_XmlEntity_entityListeners_src
+	EntityListeners[0..1] role entityListeners
+end
+
+composition xxx_EntityListeners_entityListeners between
+	EntityListeners[0..1] role xxx_EntityListeners_entityListeners_src
+	EntityListener[*] role entityListeners
+end
+
+composition xxx_XmlEntityMappings_persistenceUnitMetadata between
+	XmlEntityMappings[*] role xxx_XmlEntityMappings_persistenceUnitMetadata_src
+	XmlPersistenceUnitMetadata[0..1] role persistenceUnitMetadata
+end
+
+composition xxx_XmlEntityMappings_sequenceGenerators between
+	XmlEntityMappings[0..1] role xxx_XmlEntityMappings_sequenceGenerators_src
+	XmlSequenceGenerator[*] role sequenceGenerators
+end
+
+composition xxx_XmlEntityMappings_tableGenerators between
+	XmlEntityMappings[0..1] role xxx_XmlEntityMappings_tableGenerators_src
+	XmlTableGenerator[*] role tableGenerators
+end
+
+composition xxx_XmlEntityMappings_sqlResultSetMappings between
+	XmlEntityMappings[0..1] role xxx_XmlEntityMappings_sqlResultSetMappings_src
+	XmlSqlResultSetMapping[*] role sqlResultSetMappings
+end
+
+composition xxx_XmlEntityMappings_mappedSuperclasses between
+	XmlEntityMappings[0..1] role xxx_XmlEntityMappings_mappedSuperclasses_src
+	XmlMappedSuperclass[*] role mappedSuperclasses
+end
+
+composition xxx_XmlEntityMappings_entities between
+	XmlEntityMappings[0..1] role xxx_XmlEntityMappings_entities_src
+	XmlEntity[*] role entities
+end
+
+composition xxx_XmlEntityMappings_embeddables between
+	XmlEntityMappings[0..1] role xxx_XmlEntityMappings_embeddables_src
+	XmlEmbeddable[*] role embeddables
+end
+
+composition xxx_EntityResult_fieldResults between
+	EntityResult[0..1] role xxx_EntityResult_fieldResults_src
+	FieldResult[*] role fieldResults
+end
+
+composition xxx_XmlEventMethodContainer_prePersist between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_prePersist_src
+	PrePersist[0..1] role prePersist
+end
+
+composition xxx_XmlEventMethodContainer_postPersist between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_postPersist_src
+	PostPersist[0..1] role postPersist
+end
+
+composition xxx_XmlEventMethodContainer_preRemove between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_preRemove_src
+	PreRemove[0..1] role preRemove
+end
+
+composition xxx_XmlEventMethodContainer_postRemove between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_postRemove_src
+	PostRemove[0..1] role postRemove
+end
+
+composition xxx_XmlEventMethodContainer_preUpdate between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_preUpdate_src
+	PreUpdate[0..1] role preUpdate
+end
+
+composition xxx_XmlEventMethodContainer_postUpdate between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_postUpdate_src
+	PostUpdate[0..1] role postUpdate
+end
+
+composition xxx_XmlEventMethodContainer_postLoad between
+	XmlEventMethodContainer[*] role xxx_XmlEventMethodContainer_postLoad_src
+	PostLoad[0..1] role postLoad
+end
+
+composition xxx_XmlGeneratorContainer_sequenceGenerator between
+	XmlGeneratorContainer[*] role xxx_XmlGeneratorContainer_sequenceGenerator_src
+	XmlSequenceGenerator[0..1] role sequenceGenerator
+end
+
+composition xxx_XmlGeneratorContainer_tableGenerator between
+	XmlGeneratorContainer[*] role xxx_XmlGeneratorContainer_tableGenerator_src
+	XmlTableGenerator[0..1] role tableGenerator
+end
+
+composition xxx_XmlId_generatedValue between
+	XmlId[*] role xxx_XmlId_generatedValue_src
+	XmlGeneratedValue[0..1] role generatedValue
+end
+
+composition xxx_XmlIdClassContainer_idClass between
+	XmlIdClassContainer[*] role xxx_XmlIdClassContainer_idClass_src
+	XmlClassReference[0..1] role idClass
+end
+
+composition xxx_XmlJoinColumnContainer_joinColumns between
+	XmlJoinColumnContainer[0..1] role xxx_XmlJoinColumnContainer_joinColumns_src
+	XmlJoinColumn[*] role joinColumns
+end
+
+composition xxx_XmlJoinTable_inverseJoinColumns between
+	XmlJoinTable[0..1] role xxx_XmlJoinTable_inverseJoinColumns_src
+	XmlJoinColumn[*] role inverseJoinColumns
+end
+
+composition xxx_XmlJoinTableContainer_joinTable between
+	XmlJoinTableContainer[*] role xxx_XmlJoinTableContainer_joinTable_src
+	XmlJoinTable[0..1] role joinTable
+end
+
+composition xxx_XmlMappedSuperclass_entityListeners between
+	XmlMappedSuperclass[*] role xxx_XmlMappedSuperclass_entityListeners_src
+	EntityListeners[0..1] role entityListeners
+end
+
+composition xxx_XmlPersistenceUnitDefaults_entityListeners between
+	XmlPersistenceUnitDefaults[*] role xxx_XmlPersistenceUnitDefaults_entityListeners_src
+	EntityListeners[0..1] role entityListeners
+end
+
+composition xxx_XmlPersistenceUnitMetadata_persistenceUnitDefaults between
+	XmlPersistenceUnitMetadata[*] role xxx_XmlPersistenceUnitMetadata_persistenceUnitDefaults_src
+	XmlPersistenceUnitDefaults[0..1] role persistenceUnitDefaults
+end
+
+composition xxx_XmlReferenceTable_joinColumns between
+	XmlReferenceTable[0..1] role xxx_XmlReferenceTable_joinColumns_src
+	XmlJoinColumn[*] role joinColumns
+end
+
+composition xxx_XmlPrimaryKeyJoinColumnContainer_primaryKeyJoinColumns between
+	XmlPrimaryKeyJoinColumnContainer[0..1] role xxx_XmlPrimaryKeyJoinColumnContainer_primaryKeyJoinColumns_src
+	XmlPrimaryKeyJoinColumn[*] role primaryKeyJoinColumns
+end
+
+composition xxx_XmlQuery_hints between
+	XmlQuery[0..1] role xxx_XmlQuery_hints_src
+	XmlQueryHint[*] role hints
+end
+
+composition xxx_XmlQueryContainer_namedQueries between
+	XmlQueryContainer[0..1] role xxx_XmlQueryContainer_namedQueries_src
+	XmlNamedQuery[*] role namedQueries
+end
+
+composition xxx_XmlQueryContainer_namedNativeQueries between
+	XmlQueryContainer[0..1] role xxx_XmlQueryContainer_namedNativeQueries_src
+	XmlNamedNativeQuery[*] role namedNativeQueries
+end
+
+composition xxx_XmlSecondaryTable_primaryKeyJoinColumns between
+	XmlSecondaryTable[0..1] role xxx_XmlSecondaryTable_primaryKeyJoinColumns_src
+	XmlPrimaryKeyJoinColumn[*] role primaryKeyJoinColumns
+end
+
+composition xxx_XmlSqlResultSetMapping_entityResults between
+	XmlSqlResultSetMapping[0..1] role xxx_XmlSqlResultSetMapping_entityResults_src
+	EntityResult[*] role entityResults
+end
+
+composition xxx_XmlSqlResultSetMapping_columnResults between
+	XmlSqlResultSetMapping[0..1] role xxx_XmlSqlResultSetMapping_columnResults_src
+	ColumnResult[*] role columnResults
+end
+
+composition xxx_XmlTableGenerator_uniqueConstraints between
+	XmlTableGenerator[0..1] role xxx_XmlTableGenerator_uniqueConstraints_src
+	XmlUniqueConstraint[*] role uniqueConstraints
+end
+
+composition xxx_XmlTypeMapping_attributes_ between
+	XmlTypeMapping[*] role xxx_XmlTypeMapping_attributes__src
+	Attributes[0..1] role attributes_
+end
+
+composition xxx_XmlAttributes_2_0_elementCollections between
+	XmlAttributes_2_0[0..1] role xxx_XmlAttributes_2_0_elementCollections_src
+	XmlElementCollection[*] role elementCollections
+end
+
+composition xxx_XmlElementCollection_2_0_mapKey between
+	XmlElementCollection_2_0[*] role xxx_XmlElementCollection_2_0_mapKey_src
+	MapKey[0..1] role mapKey
+end
+
+composition xxx_XmlElementCollection_2_0_mapKeyClass between
+	XmlElementCollection_2_0[*] role xxx_XmlElementCollection_2_0_mapKeyClass_src
+	XmlClassReference[0..1] role mapKeyClass
+end
+
+composition xxx_XmlElementCollection_2_0_mapKeyColumn between
+	XmlElementCollection_2_0[*] role xxx_XmlElementCollection_2_0_mapKeyColumn_src
+	XmlColumn[0..1] role mapKeyColumn
+end
+
+composition xxx_XmlElementCollection_2_0_mapKeyJoinColumns between
+	XmlElementCollection_2_0[0..1] role xxx_XmlElementCollection_2_0_mapKeyJoinColumns_src
+	XmlJoinColumn[*] role mapKeyJoinColumns
+end
+
+composition xxx_XmlElementCollection_2_0_column between
+	XmlElementCollection_2_0[*] role xxx_XmlElementCollection_2_0_column_src
+	XmlColumn[0..1] role column
+end
+
+composition xxx_XmlElementCollection_2_0_collectionTable between
+	XmlElementCollection_2_0[*] role xxx_XmlElementCollection_2_0_collectionTable_src
+	XmlCollectionTable[0..1] role collectionTable
+end
+
+composition xxx_XmlMapKeyAttributeOverrideContainer_2_0_mapKeyAttributeOverrides between
+	XmlMapKeyAttributeOverrideContainer_2_0[0..1] role xxx_XmlMapKeyAttributeOverrideContainer_2_0_mapKeyAttributeOverrides_src
+	XmlAttributeOverride[*] role mapKeyAttributeOverrides
+end
+
+composition xxx_XmlMultiRelationshipMapping_2_0_mapKeyClass between
+	XmlMultiRelationshipMapping_2_0[*] role xxx_XmlMultiRelationshipMapping_2_0_mapKeyClass_src
+	XmlClassReference[0..1] role mapKeyClass
+end
+
+composition xxx_XmlMultiRelationshipMapping_2_0_mapKeyColumn between
+	XmlMultiRelationshipMapping_2_0[*] role xxx_XmlMultiRelationshipMapping_2_0_mapKeyColumn_src
+	XmlColumn[0..1] role mapKeyColumn
+end
+
+composition xxx_XmlMultiRelationshipMapping_2_0_mapKeyJoinColumns between
+	XmlMultiRelationshipMapping_2_0[0..1] role xxx_XmlMultiRelationshipMapping_2_0_mapKeyJoinColumns_src
+	XmlJoinColumn[*] role mapKeyJoinColumns
+end
+
+composition xxx_XmlOrderable_2_0_orderColumn between
+	XmlOrderable_2_0[*] role xxx_XmlOrderable_2_0_orderColumn_src
+	XmlOrderColumn[0..1] role orderColumn
+end
+
+composition xxx_ConstructorResult_2_1_columns between
+	ConstructorResult_2_1[0..1] role xxx_ConstructorResult_2_1_columns_src
+	ColumnResult[*] role columns
+end
+
+composition xxx_XmlAssociationOverride_2_1_foreignKey between
+	XmlAssociationOverride_2_1[*] role xxx_XmlAssociationOverride_2_1_foreignKey_src
+	XmlForeignKey[0..1] role foreignKey
+end
+
+composition xxx_XmlCollectionTable_2_1_foreignKey between
+	XmlCollectionTable_2_1[*] role xxx_XmlCollectionTable_2_1_foreignKey_src
+	XmlForeignKey[0..1] role foreignKey
+end
+
+composition xxx_XmlCollectionTable_2_1_indexes between
+	XmlCollectionTable_2_1[0..1] role xxx_XmlCollectionTable_2_1_indexes_src
+	XmlIndex[*] role indexes
+end
+
+composition xxx_XmlConverterContainer_2_1_converters between
+	XmlConverterContainer_2_1[0..1] role xxx_XmlConverterContainer_2_1_converters_src
+	XmlConverter[*] role converters
+end
+
+composition xxx_XmlConvertibleMapping_2_1_convert between
+	XmlConvertibleMapping_2_1[*] role xxx_XmlConvertibleMapping_2_1_convert_src
+	XmlConvert[0..1] role convert
+end
+
+composition xxx_XmlElementCollection_2_1_mapKeyConverts between
+	XmlElementCollection_2_1[0..1] role xxx_XmlElementCollection_2_1_mapKeyConverts_src
+	XmlConvert[*] role mapKeyConverts
+end
+
+composition xxx_XmlElementCollection_2_1_mapKeyForeignKey between
+	XmlElementCollection_2_1[*] role xxx_XmlElementCollection_2_1_mapKeyForeignKey_src
+	XmlForeignKey[0..1] role mapKeyForeignKey
+end
+
+composition xxx_XmlElementCollection_2_1_converts between
+	XmlElementCollection_2_1[0..1] role xxx_XmlElementCollection_2_1_converts_src
+	XmlConvert[*] role converts
+end
+
+composition xxx_XmlEmbedded_2_1_converts between
+	XmlEmbedded_2_1[0..1] role xxx_XmlEmbedded_2_1_converts_src
+	XmlConvert[*] role converts
+end
+
+composition xxx_XmlEntity_2_1_primaryKeyForeignKey between
+	XmlEntity_2_1[*] role xxx_XmlEntity_2_1_primaryKeyForeignKey_src
+	XmlForeignKey[0..1] role primaryKeyForeignKey
+end
+
+composition xxx_XmlEntity_2_1_converts between
+	XmlEntity_2_1[0..1] role xxx_XmlEntity_2_1_converts_src
+	XmlConvert[*] role converts
+end
+
+composition xxx_XmlEntity_2_1_namedEntityGraphs between
+	XmlEntity_2_1[0..1] role xxx_XmlEntity_2_1_namedEntityGraphs_src
+	XmlNamedEntityGraph[*] role namedEntityGraphs
+end
+
+composition xxx_XmlJoinTable_2_1_foreignKey between
+	XmlJoinTable_2_1[*] role xxx_XmlJoinTable_2_1_foreignKey_src
+	XmlForeignKey[0..1] role foreignKey
+end
+
+composition xxx_XmlJoinTable_2_1_inverseForeignKey between
+	XmlJoinTable_2_1[*] role xxx_XmlJoinTable_2_1_inverseForeignKey_src
+	XmlForeignKey[0..1] role inverseForeignKey
+end
+
+composition xxx_XmlJoinTable_2_1_indexes between
+	XmlJoinTable_2_1[0..1] role xxx_XmlJoinTable_2_1_indexes_src
+	XmlIndex_2_1[*] role indexes
+end
+
+composition xxx_XmlManyToMany_2_1_mapKeyConverts between
+	XmlManyToMany_2_1[0..1] role xxx_XmlManyToMany_2_1_mapKeyConverts_src
+	XmlConvert[*] role mapKeyConverts
+end
+
+composition xxx_XmlManyToMany_2_1_mapKeyForeignKey between
+	XmlManyToMany_2_1[*] role xxx_XmlManyToMany_2_1_mapKeyForeignKey_src
+	XmlForeignKey[0..1] role mapKeyForeignKey
+end
+
+composition xxx_XmlManyToOne_2_1_foreignKey between
+	XmlManyToOne_2_1[*] role xxx_XmlManyToOne_2_1_foreignKey_src
+	XmlForeignKey[0..1] role foreignKey
+end
+
+composition xxx_XmlNamedEntityGraph_2_1_namedAttributeNodes between
+	XmlNamedEntityGraph_2_1[0..1] role xxx_XmlNamedEntityGraph_2_1_namedAttributeNodes_src
+	XmlNamedAttributeNode[*] role namedAttributeNodes
+end
+
+composition xxx_XmlNamedEntityGraph_2_1_subgraphs between
+	XmlNamedEntityGraph_2_1[0..1] role xxx_XmlNamedEntityGraph_2_1_subgraphs_src
+	XmlNamedSubgraph[*] role subgraphs
+end
+
+composition xxx_XmlNamedEntityGraph_2_1_subclassSubgraphs between
+	XmlNamedEntityGraph_2_1[0..1] role xxx_XmlNamedEntityGraph_2_1_subclassSubgraphs_src
+	XmlNamedSubgraph[*] role subclassSubgraphs
+end
+
+composition xxx_XmlNamedStoredProcedureQuery_2_1_parameters between
+	XmlNamedStoredProcedureQuery_2_1[0..1] role xxx_XmlNamedStoredProcedureQuery_2_1_parameters_src
+	XmlStoredProcedureParameter[*] role parameters
+end
+
+composition xxx_XmlNamedSubgraph_2_1_namedAttributeNodes between
+	XmlNamedSubgraph_2_1[0..1] role xxx_XmlNamedSubgraph_2_1_namedAttributeNodes_src
+	XmlNamedAttributeNode[*] role namedAttributeNodes
+end
+
+composition xxx_XmlOneToMany_2_1_mapKeyConverts between
+	XmlOneToMany_2_1[0..1] role xxx_XmlOneToMany_2_1_mapKeyConverts_src
+	XmlConvert[*] role mapKeyConverts
+end
+
+composition xxx_XmlOneToMany_2_1_mapKeyForeignKey between
+	XmlOneToMany_2_1[*] role xxx_XmlOneToMany_2_1_mapKeyForeignKey_src
+	XmlForeignKey[0..1] role mapKeyForeignKey
+end
+
+composition xxx_XmlOneToMany_2_1_foreignKey between
+	XmlOneToMany_2_1[*] role xxx_XmlOneToMany_2_1_foreignKey_src
+	XmlForeignKey[0..1] role foreignKey
+end
+
+composition xxx_XmlOneToOne_2_1_mapKeyConverts between
+	XmlOneToOne_2_1[0..1] role xxx_XmlOneToOne_2_1_mapKeyConverts_src
+	XmlConvert[*] role mapKeyConverts
+end
+
+composition xxx_XmlOneToOne_2_1_primaryKeyForeignKey between
+	XmlOneToOne_2_1[*] role xxx_XmlOneToOne_2_1_primaryKeyForeignKey_src
+	XmlForeignKey[0..1] role primaryKeyForeignKey
+end
+
+composition xxx_XmlOneToOne_2_1_foreignKey between
+	XmlOneToOne_2_1[*] role xxx_XmlOneToOne_2_1_foreignKey_src
+	XmlForeignKey[0..1] role foreignKey
+end
+
+composition xxx_XmlQueryContainer_2_1_namedStoredProcedureQueries between
+	XmlQueryContainer_2_1[0..1] role xxx_XmlQueryContainer_2_1_namedStoredProcedureQueries_src
+	XmlNamedStoredProcedureQuery[*] role namedStoredProcedureQueries
+end
+
+composition xxx_XmlSecondaryTable_2_1_primaryKeyForeignKey between
+	XmlSecondaryTable_2_1[*] role xxx_XmlSecondaryTable_2_1_primaryKeyForeignKey_src
+	XmlForeignKey[0..1] role primaryKeyForeignKey
+end
+
+composition xxx_XmlSecondaryTable_2_1_indexes between
+	XmlSecondaryTable_2_1[0..1] role xxx_XmlSecondaryTable_2_1_indexes_src
+	XmlIndex[*] role indexes
+end
+
+composition xxx_XmlSqlResultSetMapping_2_1_constructorResults between
+	XmlSqlResultSetMapping_2_1[0..1] role xxx_XmlSqlResultSetMapping_2_1_constructorResults_src
+	ConstructorResult[*] role constructorResults
+end
+
+composition xxx_XmlTable_2_1_indexes between
+	XmlTable_2_1[0..1] role xxx_XmlTable_2_1_indexes_src
+	XmlIndex[*] role indexes
+end
+
+composition xxx_XmlTableGenerator_2_1_indexes between
+	XmlTableGenerator_2_1[0..1] role xxx_XmlTableGenerator_2_1_indexes_src
+	XmlIndex[*] role indexes
+end
+

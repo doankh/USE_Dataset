@@ -1,0 +1,167 @@
+model widget
+enum Alignment{
+default
+}
+
+abstract class Widget
+attributes
+	name : String
+operations
+end
+
+class TextEntry<Widget
+attributes
+	label : String
+operations
+end
+
+class RadioButton<Widget
+attributes
+	group : Integer
+	label : String
+operations
+end
+
+class Composite<Widget
+attributes
+operations
+end
+
+class Spin<Widget
+attributes
+	label : String
+	maximum : Integer
+	minimum : Integer
+operations
+end
+
+class CheckBox<Widget
+attributes
+	label : String
+	initialState : Boolean
+operations
+end
+
+abstract class Layout
+attributes
+operations
+end
+
+abstract class LayoutData
+attributes
+operations
+end
+
+class GridLayout<Layout
+attributes
+	columns : Integer
+	equalColumns : Boolean
+operations
+end
+
+class GridData<LayoutData
+attributes
+	hSpan : Integer
+	vSpan : Integer
+	hGrab : Boolean
+	vGrab : Boolean
+	hAlign : Alignment
+	vAlign : Alignment
+operations
+end
+
+class FormLayout<Layout
+attributes
+operations
+end
+
+class FormData<LayoutData
+attributes
+operations
+end
+
+class Attachment
+attributes
+	offset : Integer
+	align : Alignment
+operations
+end
+
+class Group<Composite
+attributes
+	label : String
+operations
+end
+
+class Combo<Widget
+attributes
+	label : String
+operations
+end
+
+class FillLayout<Layout
+attributes
+	vertical : Boolean
+operations
+end
+
+association xxx_Widget_parent between
+	Widget[*] role xxx_Widget_parent_src
+	Composite[0..1] role parent
+end
+
+association xxx_Widget_layoutData between
+	Widget[*] role xxx_Widget_layoutData_src
+	LayoutData[0..1] role layoutData
+end
+
+composition xxx_Composite_children between
+	Composite[0..1] role xxx_Composite_children_src
+	Widget[*] role children
+end
+
+composition xxx_Composite_layout between
+	Composite[*] role xxx_Composite_layout_src
+	Layout[0..1] role layout
+end
+
+association xxx_LayoutData_widget between
+	LayoutData[*] role xxx_LayoutData_widget_src
+	Widget[1] role widget
+end
+
+composition xxx_GridLayout_data between
+	GridLayout[0..1] role xxx_GridLayout_data_src
+	GridData[*] role data
+end
+
+composition xxx_FormLayout_data between
+	FormLayout[0..1] role xxx_FormLayout_data_src
+	FormData[*] role data
+end
+
+composition xxx_FormData_left between
+	FormData[*] role xxx_FormData_left_src
+	Attachment[0..1] role left
+end
+
+composition xxx_FormData_right between
+	FormData[*] role xxx_FormData_right_src
+	Attachment[0..1] role right
+end
+
+composition xxx_FormData_top between
+	FormData[*] role xxx_FormData_top_src
+	Attachment[0..1] role top
+end
+
+composition xxx_FormData_bottom between
+	FormData[*] role xxx_FormData_bottom_src
+	Attachment[0..1] role bottom
+end
+
+association xxx_Attachment_control between
+	Attachment[*] role xxx_Attachment_control_src
+	Widget[0..1] role control
+end
+

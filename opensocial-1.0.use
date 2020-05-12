@@ -1,0 +1,266 @@
+model model_
+enum Authz{
+default
+}
+
+enum Datatype{
+default
+}
+
+enum LanguageDirection{
+default
+}
+
+enum Method{
+default
+}
+
+enum Mode{
+default
+}
+
+enum ParamLocation{
+default
+}
+
+enum Rel{
+default
+}
+
+enum Type{
+default
+}
+
+class Authorization
+attributes
+	url : String
+operations
+end
+
+class Content
+attributes
+	value : String
+	href : String
+	preferredHeight : Integer
+	preferredWidth : Integer
+	scrolling : Boolean
+	type : Type
+	view : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class EnumValue
+attributes
+	displayValue : String
+	value : String
+operations
+end
+
+class GadgetFeature
+attributes
+	feature : String
+	version : String
+operations
+end
+
+class Icon
+attributes
+	value : String
+	mode : Mode
+	type : String
+operations
+end
+
+class Link
+attributes
+	href : String
+	rel : Rel
+operations
+end
+
+class Locale
+attributes
+	country : String
+	lang : String
+	languageDirection : LanguageDirection
+	messages : String
+operations
+end
+
+class ModulePrefs
+attributes
+	group : String
+	author : String
+	authorEmail : String
+	category : String
+	category2 : String
+	description : String
+	directoryTitle : String
+	screenshot : String
+	thumbnail : String
+	title : String
+	width : Integer
+	height : Integer
+	titleUrl : String
+operations
+end
+
+class Module
+attributes
+operations
+end
+
+class Msg
+attributes
+	value : String
+	desc : String
+	name : String
+operations
+end
+
+class OAuthResource
+attributes
+	method : Method
+	paramLocation : ParamLocation
+	url : String
+operations
+end
+
+class OAuth
+attributes
+	name : String
+operations
+end
+
+class Param
+attributes
+	value : String
+	name : String
+operations
+end
+
+class Preload
+attributes
+	authz : Authz
+	href : String
+	oauthRequestToken : String
+	oauthRequestTokenSecret : String
+	oauthServiceName : String
+	oauthTokenName : String
+	signOwner : Boolean
+	signViewer : Boolean
+	views : String
+operations
+end
+
+class Service
+attributes
+operations
+end
+
+class UserPref
+attributes
+	datatype : Datatype
+	defaultValue : String
+	displayName : String
+	name : String
+	required : String
+operations
+end
+
+composition xxx_DocumentRoot_module between
+	DocumentRoot[*] role xxx_DocumentRoot_module_src
+	Module[*] role module
+end
+
+composition xxx_GadgetFeature_param between
+	GadgetFeature[0..1] role xxx_GadgetFeature_param_src
+	Param[*] role param
+end
+
+composition xxx_Locale_msg between
+	Locale[0..1] role xxx_Locale_msg_src
+	Msg[*] role msg
+end
+
+composition xxx_ModulePrefs_require between
+	ModulePrefs[0..1] role xxx_ModulePrefs_require_src
+	GadgetFeature[*] role require
+end
+
+composition xxx_ModulePrefs_optional between
+	ModulePrefs[0..1] role xxx_ModulePrefs_optional_src
+	GadgetFeature[*] role optional
+end
+
+composition xxx_ModulePrefs_preload between
+	ModulePrefs[0..1] role xxx_ModulePrefs_preload_src
+	Preload[*] role preload
+end
+
+composition xxx_ModulePrefs_icon between
+	ModulePrefs[0..1] role xxx_ModulePrefs_icon_src
+	Icon[*] role icon
+end
+
+composition xxx_ModulePrefs_locale between
+	ModulePrefs[0..1] role xxx_ModulePrefs_locale_src
+	Locale[*] role locale
+end
+
+composition xxx_ModulePrefs_link between
+	ModulePrefs[0..1] role xxx_ModulePrefs_link_src
+	Link[*] role link
+end
+
+composition xxx_ModulePrefs_oAuth between
+	ModulePrefs[0..1] role xxx_ModulePrefs_oAuth_src
+	OAuth[*] role oAuth
+end
+
+composition xxx_Module_modulePrefs between
+	Module[*] role xxx_Module_modulePrefs_src
+	ModulePrefs[0..1] role modulePrefs
+end
+
+composition xxx_Module_userPref between
+	Module[0..1] role xxx_Module_userPref_src
+	UserPref[*] role userPref
+end
+
+composition xxx_Module_content between
+	Module[0..1] role xxx_Module_content_src
+	Content[1..*] role content
+end
+
+composition xxx_OAuth_service between
+	OAuth[0..1] role xxx_OAuth_service_src
+	Service[1..*] role service
+end
+
+composition xxx_Service_request between
+	Service[*] role xxx_Service_request_src
+	OAuthResource[0..1] role request
+end
+
+composition xxx_Service_access between
+	Service[*] role xxx_Service_access_src
+	OAuthResource[0..1] role access
+end
+
+composition xxx_Service_authorization between
+	Service[*] role xxx_Service_authorization_src
+	Authorization[0..1] role authorization
+end
+
+composition xxx_UserPref_enumValue between
+	UserPref[0..1] role xxx_UserPref_enumValue_src
+	EnumValue[*] role enumValue
+end
+

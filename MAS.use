@@ -1,0 +1,394 @@
+model PrimitiveTypes
+class Agent
+attributes
+operations
+end
+
+class Service
+attributes
+	inputs : String
+	outputs : String
+	pre_conditions : String
+	post_conditions : String
+operations
+end
+
+class Non_Functionnal_Requirement
+attributes
+operations
+end
+
+class Requirement
+attributes
+operations
+end
+
+class Organization
+attributes
+operations
+end
+
+class Organizational_Structure
+attributes
+operations
+end
+
+class SafetyRule<Organizational_Structure
+attributes
+operations
+end
+
+class LivenessRule<Organizational_Structure
+attributes
+operations
+end
+
+class CooperationRules
+attributes
+operations
+end
+
+class NCS
+attributes
+operations
+end
+
+class FIPA_Platform_Agent
+attributes
+operations
+end
+
+class FIPA_Platform_Task
+attributes
+operations
+end
+
+class Task
+attributes
+	name : String
+operations
+end
+
+class Role
+attributes
+operations
+end
+
+class Representation
+attributes
+operations
+end
+
+class Characteristic
+attributes
+operations
+end
+
+class Skill
+attributes
+operations
+end
+
+class Aptitude
+attributes
+operations
+end
+
+class Ontology
+attributes
+operations
+end
+
+class Concept<Ontology
+attributes
+operations
+end
+
+class Predicat<Ontology
+attributes
+operations
+end
+
+class Action<Ontology
+attributes
+operations
+end
+
+class Environnement
+attributes
+operations
+end
+
+class Responsibility
+attributes
+operations
+end
+
+class LivenessProperty<Responsibility
+attributes
+operations
+end
+
+class SafetyProperty<Responsibility
+attributes
+operations
+end
+
+class Resource
+attributes
+	name : String
+operations
+end
+
+class Communication
+attributes
+	name : String
+operations
+end
+
+class AIP
+attributes
+	name : String
+operations
+end
+
+class Performative
+attributes
+operations
+end
+
+class Message
+attributes
+operations
+end
+
+class Scenario
+attributes
+operations
+end
+
+association xxx_Agent_service between
+	Agent[0..1] role xxx_Agent_service_src
+	Service[*] role service
+end
+
+association xxx_Agent_non_Functionnal_Requirement between
+	Agent[0..1] role xxx_Agent_non_Functionnal_Requirement_src
+	Non_Functionnal_Requirement[*] role non_Functionnal_Requirement
+end
+
+association xxx_Agent_requirement between
+	Agent[0..1] role xxx_Agent_requirement_src
+	Requirement[1..*] role requirement
+end
+
+association xxx_Agent_belongs between
+	Agent[*] role xxx_Agent_belongs_src
+	Organization[0..1] role belongs
+end
+
+association xxx_Agent_cooperationRules between
+	Agent[0..1] role xxx_Agent_cooperationRules_src
+	CooperationRules[*] role cooperationRules
+end
+
+association xxx_Agent_fipa_Platform_Agent between
+	Agent[*] role xxx_Agent_fipa_Platform_Agent_src
+	FIPA_Platform_Agent[1] role fipa_Platform_Agent
+end
+
+composition xxx_Agent_role between
+	Agent[*] role xxx_Agent_role_src
+	Role[1] role role
+end
+
+composition xxx_Agent_representation between
+	Agent[*] role xxx_Agent_representation_src
+	Representation[0..1] role representation
+end
+
+composition xxx_Agent_characteristic between
+	Agent[*] role xxx_Agent_characteristic_src
+	Characteristic[0..1] role characteristic
+end
+
+composition xxx_Agent_skill between
+	Agent[*] role xxx_Agent_skill_src
+	Skill[0..1] role skill
+end
+
+composition xxx_Agent_aptitude between
+	Agent[*] role xxx_Agent_aptitude_src
+	Aptitude[0..1] role aptitude
+end
+
+association xxx_Organization_observes between
+	Organization[0..1] role xxx_Organization_observes_src
+	Organizational_Structure[*] role observes
+end
+
+association xxx_Organization_organizational_Structure between
+	Organization[*] role xxx_Organization_organizational_Structure_src
+	Organizational_Structure[1] role organizational_Structure
+end
+
+composition xxx_Organizational_Structure_organization between
+	Organizational_Structure[0..1] role xxx_Organizational_Structure_organization_src
+	Organization[*] role organization
+end
+
+composition xxx_CooperationRules_ncs between
+	CooperationRules[*] role xxx_CooperationRules_ncs_src
+	NCS[1] role ncs
+end
+
+association xxx_NCS_cooperationRules between
+	NCS[*] role xxx_NCS_cooperationRules_src
+	CooperationRules[1] role cooperationRules
+end
+
+association xxx_FIPA_Platform_Agent_agentF between
+	FIPA_Platform_Agent[*] role xxx_FIPA_Platform_Agent_agentF_src
+	Agent[1] role agentF
+end
+
+composition xxx_FIPA_Platform_Agent_fipa_Platform_Task between
+	FIPA_Platform_Agent[0..1] role xxx_FIPA_Platform_Agent_fipa_Platform_Task_src
+	FIPA_Platform_Task[*] role fipa_Platform_Task
+end
+
+association xxx_FIPA_Platform_Agent_fipa_Platform_AgentF between
+	FIPA_Platform_Task[*] role xxx_FIPA_Platform_Agent_fipa_Platform_AgentF_src
+	FIPA_Platform_Agent[1] role fipa_Platform_AgentF
+end
+
+association xxx_FIPA_Platform_Agent_task between
+	FIPA_Platform_Task[*] role xxx_FIPA_Platform_Agent_task_src
+	Task[1] role task
+end
+
+association xxx_Task_fipa_Platform_TaskT between
+	Task[*] role xxx_Task_fipa_Platform_TaskT_src
+	FIPA_Platform_Task[1] role fipa_Platform_TaskT
+end
+
+association xxx_Role_agentR between
+	Role[*] role xxx_Role_agentR_src
+	Agent[1] role agentR
+end
+
+association xxx_Role_activity between
+	Role[0..1] role xxx_Role_activity_src
+	Task[1..*] role activity
+end
+
+association xxx_Role_actsOn between
+	Role[0..1] role xxx_Role_actsOn_src
+	Resource[*] role actsOn
+end
+
+association xxx_Role_scenario between
+	Role[0..1] role xxx_Role_scenario_src
+	Scenario[1..*] role scenario
+end
+
+association xxx_Role_participant between
+	Role[0..1] role xxx_Role_participant_src
+	Communication[*] role participant
+end
+
+association xxx_Role_has between
+	Role[0..1] role xxx_Role_has_src
+	Responsibility[1..*] role has
+end
+
+association xxx_Representation_agentRep between
+	Representation[*] role xxx_Representation_agentRep_src
+	Agent[1] role agentRep
+end
+
+association xxx_Representation_ontology between
+	Representation[*] role xxx_Representation_ontology_src
+	Ontology[0..1] role ontology
+end
+
+association xxx_Representation_environnement between
+	Representation[*] role xxx_Representation_environnement_src
+	Environnement[1] role environnement
+end
+
+association xxx_Characteristic_agentC between
+	Characteristic[*] role xxx_Characteristic_agentC_src
+	Agent[1] role agentC
+end
+
+association xxx_Skill_agentS between
+	Skill[*] role xxx_Skill_agentS_src
+	Agent[1] role agentS
+end
+
+association xxx_Aptitude_agentA between
+	Aptitude[*] role xxx_Aptitude_agentA_src
+	Agent[1] role agentA
+end
+
+association xxx_Ontology_environnement between
+	Ontology[*] role xxx_Ontology_environnement_src
+	Environnement[1] role environnement
+end
+
+composition xxx_Environnement_resource between
+	Environnement[*] role xxx_Environnement_resource_src
+	Resource[1] role resource
+end
+
+association xxx_Resource_environnement between
+	Resource[*] role xxx_Resource_environnement_src
+	Environnement[1] role environnement
+end
+
+association xxx_Resource_action between
+	Resource[*] role xxx_Resource_action_src
+	Action[1] role action
+end
+
+association xxx_Communication_Exchanged_Knoledge between
+	Communication[*] role xxx_Communication_Exchanged_Knoledge_src
+	Ontology[1] role Exchanged_Knoledge
+end
+
+association xxx_Communication_scenario between
+	Communication[0..1] role xxx_Communication_scenario_src
+	Scenario[1..*] role scenario
+end
+
+association xxx_Communication_aip between
+	Communication[*] role xxx_Communication_aip_src
+	AIP[1] role aip
+end
+
+composition xxx_Communication_message between
+	Communication[0..1] role xxx_Communication_message_src
+	Message[*] role message
+end
+
+composition xxx_AIP_performative between
+	AIP[*] role xxx_AIP_performative_src
+	Performative[1] role performative
+end
+
+association xxx_Performative_aip between
+	Performative[*] role xxx_Performative_aip_src
+	AIP[1] role aip
+end
+
+association xxx_Message_communication between
+	Message[*] role xxx_Message_communication_src
+	Communication[1] role communication
+end
+
+association xxx_Message_Comm_Act between
+	Message[*] role xxx_Message_Comm_Act_src
+	Performative[1] role Comm_Act
+end
+

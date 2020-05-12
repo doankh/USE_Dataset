@@ -1,0 +1,17 @@
+model PrimitiveTypes
+class FiniteTransition
+attributes
+	trigger : String
+	guard : String
+	action : String
+operations
+end
+
+class FiniteState
+attributes
+	name : String
+	position : String
+	isInit : Boolean
+operations
+end
+

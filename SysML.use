@@ -1,0 +1,492 @@
+model SysML
+enum FlowDirection{
+	in_,
+	out,
+	inout
+}
+
+abstract class Entity
+attributes
+operations
+end
+
+abstract class NamedElement<Entity
+attributes
+	name : String
+operations
+end
+
+class Dependency<NamedElement
+attributes
+operations
+end
+
+class Conform<Dependency
+attributes
+operations
+end
+
+class Package<NamedElement
+attributes
+operations
+end
+
+class View<Package
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	name : String
+operations
+end
+
+class Viewpoint<Class
+attributes
+	stakeholders : String
+	purpose : String
+	concerns : String
+	languages : String
+	methods : String
+operations
+end
+
+class Comment<Entity
+attributes
+	content : String
+operations
+end
+
+class Rationale<Comment
+attributes
+operations
+end
+
+class Problem<Comment
+attributes
+operations
+end
+
+class Block<Class
+attributes
+	isEncapsulated : Boolean
+operations
+end
+
+class ConstraintBlock<Block
+attributes
+operations
+end
+
+class Property<Entity
+attributes
+operations
+end
+
+class BlockProperty<Property
+attributes
+operations
+end
+
+class ConstraintProperty<BlockProperty
+attributes
+operations
+end
+
+class DistributedProperty<BlockProperty
+attributes
+operations
+end
+
+class DataType<Entity
+attributes
+operations
+end
+
+class ValueType<DataType
+attributes
+operations
+end
+
+class Unit<ValueType
+attributes
+operations
+end
+
+class Dimension<ValueType
+attributes
+operations
+end
+
+class ConnectorEnd<Entity
+attributes
+operations
+end
+
+class NestedConnectorEnd<ConnectorEnd
+attributes
+operations
+end
+
+class Port<Property
+attributes
+	isBehavior : Boolean
+operations
+end
+
+class FlowPort<Port
+attributes
+	isAtomic : Boolean
+	direction : FlowDirection
+	isConjugated : Boolean
+operations
+end
+
+class FlowProperty<Property
+attributes
+	direction : FlowDirection
+operations
+end
+
+class Interface<Entity
+attributes
+operations
+end
+
+class FlowSpecification<Interface
+attributes
+operations
+end
+
+class Classifier<Entity
+attributes
+operations
+end
+
+class InformationItem<Classifier
+attributes
+operations
+end
+
+class InformationFlow<Entity
+attributes
+operations
+end
+
+class ItemFlow<InformationFlow
+attributes
+operations
+end
+
+class Parameter<Entity
+attributes
+operations
+end
+
+class ActivityEdge<Entity
+attributes
+operations
+end
+
+class ParameterSet<Entity
+attributes
+operations
+end
+
+class Optional<Parameter
+attributes
+operations
+end
+
+class Rate<ActivityEdge
+attributes
+operations
+end
+
+class InstanceSpecification<Entity
+attributes
+operations
+end
+
+class Continous<Rate
+attributes
+operations
+end
+
+class Discrete<Rate
+attributes
+operations
+end
+
+class Probability<ParameterSet
+attributes
+operations
+end
+
+class ValueSpecification<Entity
+attributes
+operations
+end
+
+class Behavior<Entity
+attributes
+operations
+end
+
+class Operation<Entity
+attributes
+operations
+end
+
+class ControlOperation<Operation
+attributes
+operations
+end
+
+class ObjectNode<Entity
+attributes
+operations
+end
+
+class NoBuffer<ObjectNode
+attributes
+operations
+end
+
+class Overwrite<ObjectNode
+attributes
+operations
+end
+
+class Abstraction<Entity
+attributes
+operations
+end
+
+class Allocate<Abstraction
+attributes
+operations
+end
+
+class Allocated<NamedElement
+attributes
+operations
+end
+
+class ActivityPartition<Entity
+attributes
+operations
+end
+
+class AllocateActivityPartition<ActivityPartition
+attributes
+operations
+end
+
+class Trace<Entity
+attributes
+operations
+end
+
+class DeriveReqt<Trace
+attributes
+operations
+end
+
+class Verify<Trace
+attributes
+operations
+end
+
+class Copy<Trace
+attributes
+operations
+end
+
+class Realization<Entity
+attributes
+operations
+end
+
+class Satisfy<Realization
+attributes
+operations
+end
+
+class Requirement<Class
+attributes
+	text : String
+	id : String
+operations
+end
+
+class TestCase<Operation
+attributes
+operations
+end
+
+class RequirementRelated<NamedElement
+attributes
+operations
+end
+
+class BasicInterval<DistributedProperty
+attributes
+	min : Integer
+	max : Integer
+operations
+end
+
+class Interval<BasicInterval
+attributes
+operations
+end
+
+class Uniform<BasicInterval
+attributes
+operations
+end
+
+class Normal<DistributedProperty
+attributes
+	mean : Integer
+	standardDeviation : Integer
+operations
+end
+
+association xxx_Conform_target between
+	Conform[*] role xxx_Conform_target_src
+	Viewpoint[1] role target
+end
+
+association xxx_Conform_source between
+	Conform[*] role xxx_Conform_source_src
+	View[1] role source
+end
+
+association xxx_View_conformsTo between
+	View[*] role xxx_View_conformsTo_src
+	Viewpoint[1] role conformsTo
+end
+
+association xxx_ValueType_unit between
+	ValueType[*] role xxx_ValueType_unit_src
+	Unit[0..1] role unit
+end
+
+association xxx_ValueType_dimension between
+	ValueType[*] role xxx_ValueType_dimension_src
+	Dimension[0..1] role dimension
+end
+
+composition xxx_NestedConnectorEnd_propertyPath between
+	NestedConnectorEnd[0..1] role xxx_NestedConnectorEnd_propertyPath_src
+	Property[2..*] role propertyPath
+end
+
+composition xxx_FlowSpecification_ownedFlowProperty between
+	FlowSpecification[0..1] role xxx_FlowSpecification_ownedFlowProperty_src
+	FlowProperty[*] role ownedFlowProperty
+end
+
+association xxx_InformationItem_represented between
+	InformationItem[0..1] role xxx_InformationItem_represented_src
+	Classifier[*] role represented
+end
+
+association xxx_InformationFlow_conveyed between
+	InformationFlow[0..1] role xxx_InformationFlow_conveyed_src
+	Classifier[1..*] role conveyed
+end
+
+association xxx_InformationFlow_source between
+	InformationFlow[0..1] role xxx_InformationFlow_source_src
+	NamedElement[1..*] role source
+end
+
+association xxx_InformationFlow_target between
+	InformationFlow[0..1] role xxx_InformationFlow_target_src
+	NamedElement[1..*] role target
+end
+
+association xxx_ItemFlow_itemProperty between
+	ItemFlow[*] role xxx_ItemFlow_itemProperty_src
+	BlockProperty[0..1] role itemProperty
+end
+
+association xxx_Rate_instance between
+	Rate[*] role xxx_Rate_instance_src
+	InstanceSpecification[1] role instance
+end
+
+association xxx_Probability_probability between
+	Probability[*] role xxx_Probability_probability_src
+	ValueSpecification[1] role probability
+end
+
+association xxx_Allocated_allocatedFrom between
+	Allocated[0..1] role xxx_Allocated_allocatedFrom_src
+	NamedElement[*] role allocatedFrom
+end
+
+association xxx_Allocated_allocatedTo between
+	Allocated[0..1] role xxx_Allocated_allocatedTo_src
+	NamedElement[*] role allocatedTo
+end
+
+association xxx_Requirement_derived between
+	Requirement[0..1] role xxx_Requirement_derived_src
+	Requirement[*] role derived
+end
+
+association xxx_Requirement_derivedFrom between
+	Requirement[0..1] role xxx_Requirement_derivedFrom_src
+	Requirement[*] role derivedFrom
+end
+
+association xxx_Requirement_satisfiedBy between
+	Requirement[0..1] role xxx_Requirement_satisfiedBy_src
+	NamedElement[*] role satisfiedBy
+end
+
+association xxx_Requirement_refinedBy between
+	Requirement[0..1] role xxx_Requirement_refinedBy_src
+	NamedElement[*] role refinedBy
+end
+
+association xxx_Requirement_tracedTo between
+	Requirement[0..1] role xxx_Requirement_tracedTo_src
+	NamedElement[*] role tracedTo
+end
+
+association xxx_Requirement_verifiedBy between
+	Requirement[0..1] role xxx_Requirement_verifiedBy_src
+	TestCase[*] role verifiedBy
+end
+
+association xxx_Requirement_master between
+	Requirement[*] role xxx_Requirement_master_src
+	Requirement[1] role master
+end
+
+association xxx_RequirementRelated_verifies between
+	RequirementRelated[0..1] role xxx_RequirementRelated_verifies_src
+	Requirement[*] role verifies
+end
+
+association xxx_RequirementRelated_tracedFrom between
+	RequirementRelated[0..1] role xxx_RequirementRelated_tracedFrom_src
+	Requirement[*] role tracedFrom
+end
+
+association xxx_RequirementRelated_satisfies between
+	RequirementRelated[0..1] role xxx_RequirementRelated_satisfies_src
+	Requirement[*] role satisfies
+end
+
+association xxx_RequirementRelated_refines between
+	RequirementRelated[0..1] role xxx_RequirementRelated_refines_src
+	Requirement[*] role refines
+end
+

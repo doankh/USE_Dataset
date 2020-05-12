@@ -1,0 +1,63 @@
+model viewmapping
+class TagMapping
+attributes
+	customConversionFactoryId : String
+	beanMappedProperties : String
+operations
+	findBestMapping(jsfVersion : String,libVersion : String)
+end
+
+class TagToViewObjectMapping
+attributes
+	minJSFVersion : String
+	minLibraryVersion : String
+operations
+end
+
+class ClassTypeInfo_
+attributes
+	className : String
+	superClasses : String
+	interfaces : String
+operations
+end
+
+class ComponentTypeInfo_<ClassTypeInfo_
+attributes
+	componentType : String
+	componentFamily : String
+	renderType : String
+operations
+end
+
+class ConverterTypeInfo_<ClassTypeInfo_
+attributes
+	converterId : String
+	forClasses : String
+operations
+end
+
+class ValidatorTypeInfo_<ClassTypeInfo_
+attributes
+	validatorId : String
+operations
+end
+
+class AttributeToPropertyMapping
+attributes
+	propertyName : String
+	elAllowed : Boolean
+	customConversionFactoryId : String
+operations
+end
+
+composition xxx_TagMapping_versionedTagToViewMappings between
+	TagMapping[0..1] role xxx_TagMapping_versionedTagToViewMappings_src
+	TagToViewObjectMapping[*] role versionedTagToViewMappings
+end
+
+composition xxx_TagToViewObjectMapping_typeInfo between
+	TagToViewObjectMapping[*] role xxx_TagToViewObjectMapping_typeInfo_src
+	ClassTypeInfo_[0..1] role typeInfo
+end
+

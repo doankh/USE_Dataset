@@ -1,0 +1,150 @@
+model WT
+class WTComponents
+attributes
+	name : String
+operations
+end
+
+class Subsystem
+attributes
+	name : String
+operations
+end
+
+class Architecture
+attributes
+	name : String
+operations
+end
+
+class ControlSubsystem
+attributes
+	name : String
+operations
+end
+
+class StateMachine
+attributes
+	name : String
+operations
+end
+
+abstract class Vertex<DocumentElt
+attributes
+operations
+end
+
+class Edge<DocumentElt
+attributes
+operations
+end
+
+class InitialState<Vertex
+attributes
+operations
+end
+
+class SimpleState<Vertex
+attributes
+operations
+end
+
+class Component
+attributes
+	label : String
+operations
+end
+
+abstract class Port
+attributes
+	label : String
+operations
+end
+
+class InPort<Port
+attributes
+operations
+end
+
+class OutPort<Port
+attributes
+operations
+end
+
+abstract class DocumentElt
+attributes
+	name : String
+	description : String
+operations
+end
+
+composition xxx_WTComponents_subsystems between
+	WTComponents[0..1] role xxx_WTComponents_subsystems_src
+	Subsystem[*] role subsystems
+end
+
+composition xxx_Subsystem_subsystems between
+	Subsystem[0..1] role xxx_Subsystem_subsystems_src
+	Subsystem[*] role subsystems
+end
+
+composition xxx_Subsystem_ensembles between
+	Subsystem[0..1] role xxx_Subsystem_ensembles_src
+	Architecture[*] role ensembles
+end
+
+composition xxx_Subsystem_beh between
+	Subsystem[0..1] role xxx_Subsystem_beh_src
+	ControlSubsystem[*] role beh
+end
+
+composition xxx_Architecture_elements between
+	Architecture[0..1] role xxx_Architecture_elements_src
+	Component[*] role elements
+end
+
+composition xxx_ControlSubsystem_states_ between
+	ControlSubsystem[0..1] role xxx_ControlSubsystem_states__src
+	StateMachine[*] role states_
+end
+
+composition xxx_StateMachine_states_ between
+	StateMachine[0..1] role xxx_StateMachine_states__src
+	Vertex[*] role states_
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Edge[*] role transitions_
+end
+
+association xxx_Vertex_outgoing between
+	Vertex[0..1] role xxx_Vertex_outgoing_src
+	Edge[*] role outgoing
+end
+
+association xxx_Vertex_incoming between
+	Vertex[0..1] role xxx_Vertex_incoming_src
+	Edge[*] role incoming
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	Vertex[1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	Vertex[1] role target
+end
+
+composition xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[*] role ports
+end
+
+association xxx_Component_states_ between
+	Component[0..1] role xxx_Component_states__src
+	StateMachine[*] role states_
+end
+

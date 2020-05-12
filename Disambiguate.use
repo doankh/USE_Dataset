@@ -1,0 +1,48 @@
+model Disambiguate
+class MethodCallExpression<ObjectBasedExpression
+attributes
+	methodName : String
+operations
+end
+
+abstract class ObjectBasedExpression
+attributes
+operations
+end
+
+class AssociationEndNavigationExpression<ObjectBasedExpression
+attributes
+	associationEndName : String
+operations
+end
+
+class Statements
+attributes
+operations
+end
+
+class This<ObjectBasedExpression
+attributes
+operations
+end
+
+association xxx_MethodCallExpression_source between
+	MethodCallExpression[*] role xxx_MethodCallExpression_source_src
+	ObjectBasedExpression[1] role source
+end
+
+association xxx_MethodCallExpression_parameter between
+	MethodCallExpression[*] role xxx_MethodCallExpression_parameter_src
+	ObjectBasedExpression[0..1] role parameter
+end
+
+association xxx_AssociationEndNavigationExpression_source between
+	AssociationEndNavigationExpression[*] role xxx_AssociationEndNavigationExpression_source_src
+	ObjectBasedExpression[1] role source
+end
+
+association xxx_Statements_statements between
+	Statements[0..1] role xxx_Statements_statements_src
+	ObjectBasedExpression[*] role statements
+end
+

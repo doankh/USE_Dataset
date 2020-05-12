@@ -1,0 +1,446 @@
+model ODPCV
+class EnvironmentContract
+attributes
+operations
+end
+
+abstract class ComputationalTemplate
+attributes
+operations
+end
+
+class ComputationalObject
+attributes
+operations
+end
+
+class BindingObject<ComputationalObject
+attributes
+operations
+end
+
+class ComputationalObjectTemplate<ComputationalTemplate
+attributes
+operations
+end
+
+class ComputationalInterfaceTemplate<ComputationalTemplate
+attributes
+operations
+end
+
+abstract class Interface
+attributes
+operations
+end
+
+class Binding
+attributes
+operations
+end
+
+class SignalInterface<Interface
+attributes
+operations
+end
+
+class OperationInterface<Interface
+attributes
+operations
+end
+
+class StreamInterface<Interface
+attributes
+operations
+end
+
+abstract class InterfaceSignature
+attributes
+operations
+end
+
+class SignalInterfaceSignature<InterfaceSignature
+attributes
+operations
+end
+
+class OperationInterfaceSignature<InterfaceSignature
+attributes
+operations
+end
+
+class StreamInterfaceSignature<InterfaceSignature
+attributes
+operations
+end
+
+abstract class InteractionSignature
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+class AnnouncementSignature<InteractionSignature
+attributes
+operations
+end
+
+class InterrogationSignature<InteractionSignature
+attributes
+operations
+end
+
+class TerminationSignature<InteractionSignature
+attributes
+operations
+end
+
+class SignalSignature<InteractionSignature
+attributes
+operations
+end
+
+class FlowSignature<InteractionSignature
+attributes
+operations
+end
+
+class ActionTemplate
+attributes
+operations
+end
+
+class Behaviour
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class State
+attributes
+operations
+end
+
+class InternalAction<Action
+attributes
+operations
+end
+
+abstract class Interaction<Action
+attributes
+operations
+end
+
+class Flow<Interaction
+attributes
+operations
+end
+
+class Signal<Interaction
+attributes
+operations
+end
+
+abstract class Operation<Interaction
+attributes
+operations
+end
+
+class Announcement<Operation
+attributes
+operations
+end
+
+class Interrogation<Operation
+attributes
+operations
+end
+
+class Invocation<Interaction
+attributes
+operations
+end
+
+class Termination<Interaction
+attributes
+operations
+end
+
+association xxx_EnvironmentContract_ec_to_a between
+	EnvironmentContract[0..1] role xxx_EnvironmentContract_ec_to_a_src
+	Action[1..*] role ec_to_a
+end
+
+association xxx_EnvironmentContract_specifier_ec between
+	EnvironmentContract[*] role xxx_EnvironmentContract_specifier_ec_src
+	ComputationalTemplate[1] role specifier_ec
+end
+
+association xxx_ComputationalTemplate_ct_to_ec between
+	ComputationalTemplate[*] role xxx_ComputationalTemplate_ct_to_ec_src
+	EnvironmentContract[1] role ct_to_ec
+end
+
+association xxx_ComputationalTemplate_ct_to_bh between
+	ComputationalTemplate[0..1] role xxx_ComputationalTemplate_ct_to_bh_src
+	Behaviour[*] role ct_to_bh
+end
+
+association xxx_ComputationalObject_co_to_i between
+	ComputationalObject[0..1] role xxx_ComputationalObject_co_to_i_src
+	Interface[1..*] role co_to_i
+end
+
+association xxx_ComputationalObject_co_to_bh between
+	ComputationalObject[*] role xxx_ComputationalObject_co_to_bh_src
+	Behaviour[1] role co_to_bh
+end
+
+association xxx_ComputationalObject_specifier_co between
+	ComputationalObject[*] role xxx_ComputationalObject_specifier_co_src
+	ComputationalObjectTemplate[1] role specifier_co
+end
+
+composition xxx_ComputationalObject_co_to_st between
+	ComputationalObject[*] role xxx_ComputationalObject_co_to_st_src
+	State[1] role co_to_st
+end
+
+association xxx_ComputationalObjectTemplate_cot_to_co between
+	ComputationalObjectTemplate[0..1] role xxx_ComputationalObjectTemplate_cot_to_co_src
+	ComputationalObject[*] role cot_to_co
+end
+
+association xxx_ComputationalObjectTemplate_part_provide between
+	ComputationalObjectTemplate[0..1] role xxx_ComputationalObjectTemplate_part_provide_src
+	ComputationalInterfaceTemplate[*] role part_provide
+end
+
+association xxx_ComputationalObjectTemplate_part_request between
+	ComputationalObjectTemplate[0..1] role xxx_ComputationalObjectTemplate_part_request_src
+	ComputationalInterfaceTemplate[*] role part_request
+end
+
+association xxx_ComputationalInterfaceTemplate_cit_to_i between
+	ComputationalInterfaceTemplate[0..1] role xxx_ComputationalInterfaceTemplate_cit_to_i_src
+	Interface[*] role cit_to_i
+end
+
+association xxx_ComputationalInterfaceTemplate_aggregate_provide between
+	ComputationalInterfaceTemplate[0..1] role xxx_ComputationalInterfaceTemplate_aggregate_provide_src
+	ComputationalObjectTemplate[*] role aggregate_provide
+end
+
+association xxx_ComputationalInterfaceTemplate_aggregate_request between
+	ComputationalInterfaceTemplate[0..1] role xxx_ComputationalInterfaceTemplate_aggregate_request_src
+	ComputationalObjectTemplate[*] role aggregate_request
+end
+
+composition xxx_ComputationalInterfaceTemplate_cit_to_intsig between
+	ComputationalInterfaceTemplate[*] role xxx_ComputationalInterfaceTemplate_cit_to_intsig_src
+	InterfaceSignature[1] role cit_to_intsig
+end
+
+association xxx_Interface_owner_i between
+	Interface[*] role xxx_Interface_owner_i_src
+	ComputationalObject[1] role owner_i
+end
+
+association xxx_Interface_i_to_bd between
+	Interface[*] role xxx_Interface_i_to_bd_src
+	Binding[0..1] role i_to_bd
+end
+
+association xxx_Interface_specifier_i between
+	Interface[*] role xxx_Interface_specifier_i_src
+	ComputationalInterfaceTemplate[1] role specifier_i
+end
+
+composition xxx_Interface_i_to_ina between
+	Interface[0..1] role xxx_Interface_i_to_ina_src
+	Interaction[1..*] role i_to_ina
+end
+
+association xxx_Binding_bd_to_i between
+	Binding[0..1] role xxx_Binding_bd_to_i_src
+	Interface[2..*] role bd_to_i
+end
+
+association xxx_InterfaceSignature_intsig_to_cit between
+	InterfaceSignature[*] role xxx_InterfaceSignature_intsig_to_cit_src
+	ComputationalInterfaceTemplate[1] role intsig_to_cit
+end
+
+composition xxx_SignalInterfaceSignature_sgisig_to_ssig between
+	SignalInterfaceSignature[0..1] role xxx_SignalInterfaceSignature_sgisig_to_ssig_src
+	SignalSignature[*] role sgisig_to_ssig
+end
+
+composition xxx_OperationInterfaceSignature_optisig_to_ansig between
+	OperationInterfaceSignature[0..1] role xxx_OperationInterfaceSignature_optisig_to_ansig_src
+	AnnouncementSignature[*] role optisig_to_ansig
+end
+
+composition xxx_OperationInterfaceSignature_optisig_to_intsig between
+	OperationInterfaceSignature[0..1] role xxx_OperationInterfaceSignature_optisig_to_intsig_src
+	InterrogationSignature[*] role optisig_to_intsig
+end
+
+composition xxx_StreamInterfaceSignature_strisig_to_fsig between
+	StreamInterfaceSignature[0..1] role xxx_StreamInterfaceSignature_strisig_to_fsig_src
+	FlowSignature[*] role strisig_to_fsig
+end
+
+association xxx_InteractionSignature_isig_to_at between
+	InteractionSignature[*] role xxx_InteractionSignature_isig_to_at_src
+	ActionTemplate[1] role isig_to_at
+end
+
+composition xxx_InteractionSignature_isig_to_param between
+	InteractionSignature[0..1] role xxx_InteractionSignature_isig_to_param_src
+	Parameter[*] role isig_to_param
+end
+
+association xxx_Parameter_param_to_isig between
+	Parameter[*] role xxx_Parameter_param_to_isig_src
+	InteractionSignature[1] role param_to_isig
+end
+
+association xxx_AnnouncementSignature_ansig_to_optisig between
+	AnnouncementSignature[*] role xxx_AnnouncementSignature_ansig_to_optisig_src
+	OperationInterfaceSignature[1] role ansig_to_optisig
+end
+
+association xxx_InterrogationSignature_intsig_to_optisig between
+	InterrogationSignature[*] role xxx_InterrogationSignature_intsig_to_optisig_src
+	OperationInterfaceSignature[1] role intsig_to_optisig
+end
+
+composition xxx_InterrogationSignature_intsig_to_tersig between
+	InterrogationSignature[0..1] role xxx_InterrogationSignature_intsig_to_tersig_src
+	TerminationSignature[1..*] role intsig_to_tersig
+end
+
+association xxx_TerminationSignature_tersig_to_intsig between
+	TerminationSignature[*] role xxx_TerminationSignature_tersig_to_intsig_src
+	InterrogationSignature[1] role tersig_to_intsig
+end
+
+association xxx_SignalSignature_ssig_to_sgisig between
+	SignalSignature[*] role xxx_SignalSignature_ssig_to_sgisig_src
+	SignalInterfaceSignature[1] role ssig_to_sgisig
+end
+
+association xxx_FlowSignature_fsig_to_strisig between
+	FlowSignature[*] role xxx_FlowSignature_fsig_to_strisig_src
+	StreamInterfaceSignature[1] role fsig_to_strisig
+end
+
+association xxx_ActionTemplate_at_to_a between
+	ActionTemplate[0..1] role xxx_ActionTemplate_at_to_a_src
+	Action[1..*] role at_to_a
+end
+
+composition xxx_ActionTemplate_at_to_isig between
+	ActionTemplate[*] role xxx_ActionTemplate_at_to_isig_src
+	InteractionSignature[1] role at_to_isig
+end
+
+association xxx_Behaviour_specifier_bh between
+	Behaviour[*] role xxx_Behaviour_specifier_bh_src
+	ComputationalTemplate[1] role specifier_bh
+end
+
+association xxx_Behaviour_owner_bh between
+	Behaviour[*] role xxx_Behaviour_owner_bh_src
+	ComputationalObject[1] role owner_bh
+end
+
+composition xxx_Behaviour_bh_to_a between
+	Behaviour[0..1] role xxx_Behaviour_bh_to_a_src
+	Action[1..*] role bh_to_a
+end
+
+association xxx_Action_constrainer_ec between
+	Action[0..1] role xxx_Action_constrainer_ec_src
+	EnvironmentContract[*] role constrainer_ec
+end
+
+association xxx_Action_changedState between
+	Action[0..1] role xxx_Action_changedState_src
+	State[*] role changedState
+end
+
+association xxx_Action_specifier_a between
+	Action[*] role xxx_Action_specifier_a_src
+	ActionTemplate[1] role specifier_a
+end
+
+association xxx_Action_a_to_bh between
+	Action[*] role xxx_Action_a_to_bh_src
+	Behaviour[1] role a_to_bh
+end
+
+association xxx_State_startState between
+	State[*] role xxx_State_startState_src
+	State[1] role startState
+end
+
+association xxx_State_endState between
+	State[*] role xxx_State_endState_src
+	State[1] role endState
+end
+
+association xxx_State_changer between
+	State[0..1] role xxx_State_changer_src
+	Action[*] role changer
+end
+
+association xxx_State_st_to_co between
+	State[*] role xxx_State_st_to_co_src
+	ComputationalObject[1] role st_to_co
+end
+
+association xxx_Interaction_ina_to_i between
+	Interaction[*] role xxx_Interaction_ina_to_i_src
+	Interface[1] role ina_to_i
+end
+
+composition xxx_Operation_opt_to_inv between
+	Operation[*] role xxx_Operation_opt_to_inv_src
+	Invocation[1] role opt_to_inv
+end
+
+association xxx_Interrogation_int_to_ter between
+	Interrogation[*] role xxx_Interrogation_int_to_ter_src
+	Termination[0..1] role int_to_ter
+end
+
+association xxx_Invocation_inv_to_ter between
+	Invocation[*] role xxx_Invocation_inv_to_ter_src
+	Termination[1] role inv_to_ter
+end
+
+association xxx_Invocation_inv_to_opt between
+	Invocation[*] role xxx_Invocation_inv_to_opt_src
+	Operation[1] role inv_to_opt
+end
+
+association xxx_Termination_owner_ter between
+	Termination[*] role xxx_Termination_owner_ter_src
+	Interrogation[1] role owner_ter
+end
+
+association xxx_Termination_ter_to_inv between
+	Termination[*] role xxx_Termination_ter_to_inv_src
+	Invocation[1] role ter_to_inv
+end
+

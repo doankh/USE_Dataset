@@ -1,0 +1,83 @@
+model visualizationModel
+class ExpressionModel
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class IsaRelationships
+attributes
+operations
+end
+
+class RelationshipGroup
+attributes
+operations
+end
+
+class Relationships
+attributes
+operations
+end
+
+class Concept
+attributes
+	conceptId : String
+	conceptTerm : String
+operations
+end
+
+class Relationship
+attributes
+operations
+end
+
+composition xxx_ExpressionModel_expression between
+	ExpressionModel[*] role xxx_ExpressionModel_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Expression_isaRelationships between
+	Expression[*] role xxx_Expression_isaRelationships_src
+	IsaRelationships[0..1] role isaRelationships
+end
+
+composition xxx_Expression_relationships between
+	Expression[*] role xxx_Expression_relationships_src
+	Relationships[0..1] role relationships
+end
+
+composition xxx_Expression_relationshipGroups between
+	Expression[0..1] role xxx_Expression_relationshipGroups_src
+	RelationshipGroup[*] role relationshipGroups
+end
+
+composition xxx_IsaRelationships_isaRelationships between
+	IsaRelationships[0..1] role xxx_IsaRelationships_isaRelationships_src
+	Concept[*] role isaRelationships
+end
+
+composition xxx_RelationshipGroup_relationships between
+	RelationshipGroup[0..1] role xxx_RelationshipGroup_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_Relationships_relationships between
+	Relationships[0..1] role xxx_Relationships_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_Relationship_type between
+	Relationship[*] role xxx_Relationship_type_src
+	Concept[0..1] role type
+end
+
+composition xxx_Relationship_destination between
+	Relationship[*] role xxx_Relationship_destination_src
+	Concept[0..1] role destination
+end
+

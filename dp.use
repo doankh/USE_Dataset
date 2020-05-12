@@ -1,0 +1,83 @@
+model dp
+class StockItem
+attributes
+	aantal : Integer
+	datum : String
+	info : String
+operations
+end
+
+class Categorie
+attributes
+	naam : String
+operations
+end
+
+class Diepvries
+attributes
+	naam : String
+operations
+end
+
+class Schuif
+attributes
+	nummer : Integer
+operations
+end
+
+class Produkt
+attributes
+	naam : String
+operations
+end
+
+association xxx_StockItem_categorie between
+	StockItem[*] role xxx_StockItem_categorie_src
+	Categorie[0..1] role categorie
+end
+
+association xxx_StockItem_produkt between
+	StockItem[*] role xxx_StockItem_produkt_src
+	Produkt[0..1] role produkt
+end
+
+association xxx_StockItem_schuif between
+	StockItem[*] role xxx_StockItem_schuif_src
+	Schuif[0..1] role schuif
+end
+
+composition xxx_Categorie_stockitems between
+	Categorie[0..1] role xxx_Categorie_stockitems_src
+	StockItem[*] role stockitems
+end
+
+composition xxx_Categorie_produkten between
+	Categorie[0..1] role xxx_Categorie_produkten_src
+	Produkt[*] role produkten
+end
+
+composition xxx_Diepvries_schuiven between
+	Diepvries[0..1] role xxx_Diepvries_schuiven_src
+	Schuif[*] role schuiven
+end
+
+association xxx_Schuif_diepvries between
+	Schuif[*] role xxx_Schuif_diepvries_src
+	Diepvries[0..1] role diepvries
+end
+
+composition xxx_Schuif_stockitem between
+	Schuif[*] role xxx_Schuif_stockitem_src
+	StockItem[0..1] role stockitem
+end
+
+association xxx_Produkt_categories between
+	Produkt[*] role xxx_Produkt_categories_src
+	Categorie[1] role categories
+end
+
+association xxx_Produkt_stockitems between
+	Produkt[0..1] role xxx_Produkt_stockitems_src
+	StockItem[*] role stockitems
+end
+

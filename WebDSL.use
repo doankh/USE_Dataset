@@ -1,0 +1,70 @@
+model WebDSL
+class TemplateModel<NamedElement
+attributes
+operations
+end
+
+abstract class Element<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Literal<Element
+attributes
+	value : String
+operations
+end
+
+abstract class IdentifiedElement<Element
+attributes
+operations
+end
+
+abstract class RepeatableElement<IdentifiedElement
+attributes
+	itemName : String
+operations
+end
+
+class Identifier<NamedElement
+attributes
+	prefix : String
+operations
+end
+
+class Variable<IdentifiedElement
+attributes
+operations
+end
+
+class Section<RepeatableElement
+attributes
+operations
+end
+
+class InvertedSection<RepeatableElement
+attributes
+operations
+end
+
+composition xxx_TemplateModel_elements between
+	TemplateModel[0..1] role xxx_TemplateModel_elements_src
+	Element[*] role elements
+end
+
+composition xxx_IdentifiedElement_identifier between
+	IdentifiedElement[*] role xxx_IdentifiedElement_identifier_src
+	Identifier[1] role identifier
+end
+
+composition xxx_RepeatableElement_children between
+	RepeatableElement[0..1] role xxx_RepeatableElement_children_src
+	Element[*] role children
+end
+

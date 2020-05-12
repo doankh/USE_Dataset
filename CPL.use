@@ -1,0 +1,283 @@
+model CPL
+abstract class Element
+attributes
+operations
+end
+
+class CPL<Element
+attributes
+operations
+end
+
+abstract class NodeContainer<Element
+attributes
+operations
+end
+
+class SubAction<NodeContainer
+attributes
+	id : String
+operations
+end
+
+class Outgoing<NodeContainer
+attributes
+operations
+end
+
+class Incoming<NodeContainer
+attributes
+operations
+end
+
+class NotPresent<NodeContainer
+attributes
+operations
+end
+
+class Otherwise<NodeContainer
+attributes
+operations
+end
+
+class SwitchedAddress<NodeContainer
+attributes
+	is : String
+	contains : String
+	subDomainOf : String
+operations
+end
+
+class SwitchedString<NodeContainer
+attributes
+	is : String
+	contains : String
+operations
+end
+
+class SwitchedLanguage<NodeContainer
+attributes
+	matches : String
+operations
+end
+
+class SwitchedTime<NodeContainer
+attributes
+	dtstart : String
+	dtend : String
+	duration : String
+	freq : String
+	until : String
+	count : String
+	interval : String
+	bySecond : String
+	byMinute : String
+	byHour : String
+	byDay : String
+	byMonthDay : String
+	byYearDay : String
+	byWeekNo : String
+	byMonth : String
+	wkst : String
+	bySetPos : String
+operations
+end
+
+class SwitchedPriority<NodeContainer
+attributes
+	less : String
+	greater : String
+	equal : String
+operations
+end
+
+class Busy<NodeContainer
+attributes
+operations
+end
+
+class NoAnswer<NodeContainer
+attributes
+operations
+end
+
+class Redirection<NodeContainer
+attributes
+operations
+end
+
+class Failure<NodeContainer
+attributes
+operations
+end
+
+class Default<NodeContainer
+attributes
+operations
+end
+
+abstract class Node<Element
+attributes
+operations
+end
+
+abstract class Switch<Node
+attributes
+operations
+end
+
+class AddressSwitch<Switch
+attributes
+	field : String
+	subField : String
+operations
+end
+
+class StringSwitch<Switch
+attributes
+	field : String
+operations
+end
+
+class LanguageSwitch<Switch
+attributes
+operations
+end
+
+class TimeSwitch<Switch
+attributes
+	tzid : String
+	tzurl : String
+operations
+end
+
+class PrioritySwitch<Switch
+attributes
+operations
+end
+
+class Location<NodeContainer
+attributes
+	url : String
+	priority : String
+	clear : String
+operations
+end
+
+class SubCall<Node
+attributes
+	ref : String
+operations
+end
+
+abstract class Action<Node
+attributes
+operations
+end
+
+abstract class SignallingAction<Action
+attributes
+operations
+end
+
+class Proxy<SignallingAction
+attributes
+	timeout : String
+	recurse : String
+	ordering : String
+operations
+end
+
+class Redirect<SignallingAction
+attributes
+	permanent : String
+operations
+end
+
+class Reject<SignallingAction
+attributes
+	status : String
+	reason : String
+operations
+end
+
+composition xxx_CPL_subActions between
+	CPL[0..1] role xxx_CPL_subActions_src
+	SubAction[*] role subActions
+end
+
+composition xxx_CPL_outgoing between
+	CPL[*] role xxx_CPL_outgoing_src
+	Outgoing[0..1] role outgoing
+end
+
+composition xxx_CPL_incoming between
+	CPL[*] role xxx_CPL_incoming_src
+	Incoming[0..1] role incoming
+end
+
+composition xxx_NodeContainer_contents between
+	NodeContainer[*] role xxx_NodeContainer_contents_src
+	Node[0..1] role contents
+end
+
+composition xxx_Switch_notPresent between
+	Switch[*] role xxx_Switch_notPresent_src
+	NotPresent[0..1] role notPresent
+end
+
+composition xxx_Switch_otherwise between
+	Switch[*] role xxx_Switch_otherwise_src
+	Otherwise[0..1] role otherwise
+end
+
+composition xxx_AddressSwitch_addresses between
+	AddressSwitch[0..1] role xxx_AddressSwitch_addresses_src
+	SwitchedAddress[*] role addresses
+end
+
+composition xxx_StringSwitch_strings between
+	StringSwitch[0..1] role xxx_StringSwitch_strings_src
+	SwitchedString[*] role strings
+end
+
+composition xxx_LanguageSwitch_languages between
+	LanguageSwitch[0..1] role xxx_LanguageSwitch_languages_src
+	SwitchedLanguage[*] role languages
+end
+
+composition xxx_TimeSwitch_times between
+	TimeSwitch[0..1] role xxx_TimeSwitch_times_src
+	SwitchedTime[*] role times
+end
+
+composition xxx_PrioritySwitch_priorities between
+	PrioritySwitch[0..1] role xxx_PrioritySwitch_priorities_src
+	SwitchedPriority[*] role priorities
+end
+
+composition xxx_Proxy_busy between
+	Proxy[*] role xxx_Proxy_busy_src
+	Busy[0..1] role busy
+end
+
+composition xxx_Proxy_noAnswer between
+	Proxy[*] role xxx_Proxy_noAnswer_src
+	NoAnswer[0..1] role noAnswer
+end
+
+composition xxx_Proxy_redirection between
+	Proxy[*] role xxx_Proxy_redirection_src
+	Redirection[0..1] role redirection
+end
+
+composition xxx_Proxy_failure between
+	Proxy[*] role xxx_Proxy_failure_src
+	Failure[0..1] role failure
+end
+
+composition xxx_Proxy_default between
+	Proxy[*] role xxx_Proxy_default_src
+	Default[0..1] role default
+end
+

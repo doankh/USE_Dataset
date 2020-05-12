@@ -1,0 +1,9 @@
+model Publication
+class Publication
+attributes
+	title : String
+	authors : String
+	nbPages : Integer
+operations
+end
+

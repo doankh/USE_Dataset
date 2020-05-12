@@ -1,0 +1,105 @@
+model component
+class ComponentDependsType
+attributes
+	unrestricted : Boolean
+operations
+end
+
+class ComponentRefType
+attributes
+	name : String
+operations
+end
+
+class ComponentType
+attributes
+	name : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class PackageType
+attributes
+	api : Boolean
+	exclusive : Boolean
+	name : String
+operations
+end
+
+class PluginType
+attributes
+	fragment : Boolean
+	id : String
+operations
+end
+
+class TypeType
+attributes
+	implement : Boolean
+	instantiate : Boolean
+	name : String
+	reference : Boolean
+	subclass : Boolean
+operations
+end
+
+composition xxx_ComponentDependsType_componentRef between
+	ComponentDependsType[0..1] role xxx_ComponentDependsType_componentRef_src
+	ComponentRefType[*] role componentRef
+end
+
+composition xxx_ComponentType_plugin between
+	ComponentType[0..1] role xxx_ComponentType_plugin_src
+	PluginType[*] role plugin
+end
+
+composition xxx_ComponentType_package between
+	ComponentType[0..1] role xxx_ComponentType_package_src
+	PackageType[*] role package
+end
+
+composition xxx_ComponentType_componentDepends between
+	ComponentType[*] role xxx_ComponentType_componentDepends_src
+	ComponentDependsType[1] role componentDepends
+end
+
+composition xxx_DocumentRoot_component between
+	DocumentRoot[*] role xxx_DocumentRoot_component_src
+	ComponentType[*] role component
+end
+
+composition xxx_DocumentRoot_componentDepends between
+	DocumentRoot[*] role xxx_DocumentRoot_componentDepends_src
+	ComponentDependsType[*] role componentDepends
+end
+
+composition xxx_DocumentRoot_componentRef between
+	DocumentRoot[*] role xxx_DocumentRoot_componentRef_src
+	ComponentRefType[*] role componentRef
+end
+
+composition xxx_DocumentRoot_package between
+	DocumentRoot[*] role xxx_DocumentRoot_package_src
+	PackageType[*] role package
+end
+
+composition xxx_DocumentRoot_plugin between
+	DocumentRoot[*] role xxx_DocumentRoot_plugin_src
+	PluginType[*] role plugin
+end
+
+composition xxx_DocumentRoot_type between
+	DocumentRoot[*] role xxx_DocumentRoot_type_src
+	TypeType[*] role type
+end
+
+composition xxx_PackageType_type between
+	PackageType[0..1] role xxx_PackageType_type_src
+	TypeType[*] role type
+end
+

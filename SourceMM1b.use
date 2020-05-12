@@ -1,0 +1,89 @@
+model source
+abstract class X
+attributes
+operations
+end
+
+abstract class Y
+attributes
+	name : String
+operations
+end
+
+class Y1<Y
+attributes
+operations
+end
+
+class Y2<Y
+attributes
+operations
+end
+
+abstract class Z
+attributes
+	name : String
+operations
+end
+
+class SRoot
+attributes
+operations
+end
+
+class AmbX<X
+attributes
+	isA1 : Boolean
+operations
+end
+
+class X1<X
+attributes
+operations
+end
+
+class X2<X
+attributes
+operations
+end
+
+class AmbZ<Z
+attributes
+operations
+end
+
+class Z1<Z
+attributes
+operations
+end
+
+class Z2<Z
+attributes
+operations
+end
+
+composition xxx_X_ownsY between
+	X[0..1] role xxx_X_ownsY_src
+	Y[*] role ownsY
+end
+
+composition xxx_Y_ownsZ between
+	Y[*] role xxx_Y_ownsZ_src
+	Z[0..1] role ownsZ
+end
+
+association xxx_Y_toX between
+	Y[*] role xxx_Y_toX_src
+	X[0..1] role toX
+end
+
+association xxx_Z_toY between
+	Z[*] role xxx_Z_toY_src
+	Y[0..1] role toY
+end
+
+composition xxx_SRoot_ownedX between
+	SRoot[0..1] role xxx_SRoot_ownedX_src
+	X[*] role ownedX
+end
+

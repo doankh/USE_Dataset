@@ -1,0 +1,89 @@
+model tengi
+class Tengi
+attributes
+	name : String
+	entityName : String
+operations
+end
+
+class ProloExpr
+attributes
+operations
+end
+
+class PortSpec
+attributes
+	emptySet : String
+	ports : String
+operations
+end
+
+class Locator
+attributes
+	locatorAlias : String
+	artifactPath : String
+	offset : Integer
+	length : Integer
+operations
+end
+
+class BIIMPTerm<ProloExpr
+attributes
+operations
+end
+
+class IMPTerm<ProloExpr
+attributes
+operations
+end
+
+class ORTerm<ProloExpr
+attributes
+operations
+end
+
+class ANDTerm<ProloExpr
+attributes
+operations
+end
+
+composition xxx_Tengi_inputPorts between
+	Tengi[*] role xxx_Tengi_inputPorts_src
+	PortSpec[0..1] role inputPorts
+end
+
+composition xxx_Tengi_in_constraint between
+	Tengi[*] role xxx_Tengi_in_constraint_src
+	ProloExpr[0..1] role in_constraint
+end
+
+composition xxx_Tengi_outputPorts between
+	Tengi[*] role xxx_Tengi_outputPorts_src
+	PortSpec[0..1] role outputPorts
+end
+
+composition xxx_Tengi_out_constraint between
+	Tengi[*] role xxx_Tengi_out_constraint_src
+	ProloExpr[0..1] role out_constraint
+end
+
+composition xxx_Tengi_locators between
+	Tengi[0..1] role xxx_Tengi_locators_src
+	Locator[*] role locators
+end
+
+composition xxx_ProloExpr_expr between
+	ProloExpr[*] role xxx_ProloExpr_expr_src
+	ProloExpr[0..1] role expr
+end
+
+composition xxx_ProloExpr_leftHand between
+	ProloExpr[*] role xxx_ProloExpr_leftHand_src
+	ProloExpr[0..1] role leftHand
+end
+
+composition xxx_ProloExpr_rightHand between
+	ProloExpr[*] role xxx_ProloExpr_rightHand_src
+	ProloExpr[0..1] role rightHand
+end
+

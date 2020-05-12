@@ -1,0 +1,76 @@
+model UMLWithReuseContrats
+class ReuseContract<Dependency
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+class ProviderClause<Package
+attributes
+operations
+end
+
+class Package
+attributes
+operations
+end
+
+class ReuserClause<Package
+attributes
+operations
+end
+
+class CompositeProvider<ProviderClause
+attributes
+operations
+end
+
+class BasicProvider<ProviderClause
+attributes
+operations
+end
+
+class CompositeReuser<ReuserClause
+attributes
+operations
+end
+
+class BasicReuser<ReuserClause
+attributes
+operations
+end
+
+association xxx_ReuseContract_supplier between
+	ReuseContract[*] role xxx_ReuseContract_supplier_src
+	ProviderClause[1] role supplier
+end
+
+association xxx_ReuseContract_client between
+	ReuseContract[*] role xxx_ReuseContract_client_src
+	ReuserClause[1] role client
+end
+
+association xxx_Dependency_owningDependency between
+	Dependency[*] role xxx_Dependency_owningDependency_src
+	Dependency[0..1] role owningDependency
+end
+
+composition xxx_Dependency_subDependency between
+	Dependency[0..1] role xxx_Dependency_subDependency_src
+	Dependency[*] role subDependency
+end
+
+composition xxx_CompositeProvider_subcontract between
+	CompositeProvider[*] role xxx_CompositeProvider_subcontract_src
+	ReuseContract[1] role subcontract
+end
+
+composition xxx_CompositeReuser_subreuser between
+	CompositeReuser[0..1] role xxx_CompositeReuser_subreuser_src
+	ReuserClause[*] role subreuser
+end
+

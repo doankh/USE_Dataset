@@ -1,0 +1,91 @@
+model VmPlacement
+class System
+attributes
+	name : String
+operations
+end
+
+class VM
+attributes
+	name : String
+operations
+end
+
+class PM
+attributes
+	name : String
+	res : Integer
+operations
+end
+
+class App
+attributes
+	name : String
+operations
+end
+
+class Test
+attributes
+operations
+end
+
+composition xxx_System_vm between
+	System[0..1] role xxx_System_vm_src
+	VM[*] role vm
+end
+
+composition xxx_System_pm between
+	System[0..1] role xxx_System_pm_src
+	PM[*] role pm
+end
+
+composition xxx_System_app between
+	System[0..1] role xxx_System_app_src
+	App[*] role app
+end
+
+association xxx_VM_backup1 between
+	VM[0..1] role xxx_VM_backup1_src
+	VM[*] role backup1
+end
+
+association xxx_VM_host between
+	VM[*] role xxx_VM_host_src
+	App[1] role host
+end
+
+association xxx_VM_test between
+	VM[*] role xxx_VM_test_src
+	PM[1] role test
+end
+
+association xxx_PM_near between
+	PM[0..1] role xxx_PM_near_src
+	PM[*] role near
+end
+
+association xxx_PM_host between
+	PM[0..1] role xxx_PM_host_src
+	VM[*] role host
+end
+
+association xxx_App_destination between
+	App[*] role xxx_App_destination_src
+	VM[1] role destination
+end
+
+association xxx_App_bind between
+	App[*] role xxx_App_bind_src
+	App[1] role bind
+end
+
+association xxx_Test_test between
+	Test[*] role xxx_Test_test_src
+	Test[0..1] role test
+end
+
+association xxx_Test_n2 between
+	Test[*] role xxx_Test_n2_src
+	VM[0..1] role n2
+end
+

@@ -1,0 +1,1472 @@
+model odemcustom
+enum BindingExprOpKind{
+default
+}
+
+class Construct<NamedExtension
+attributes
+	concreteSyntax : String
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class Import
+attributes
+	file : String
+operations
+end
+
+class Module<NamedElement,EmbeddableExtensionsContainer
+attributes
+operations
+end
+
+abstract class EmbeddableExtensionsContainer
+attributes
+operations
+end
+
+abstract class ModifierExtensionsContainer
+attributes
+operations
+end
+
+abstract class Type
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+	isList : Boolean
+operations
+end
+
+abstract class PrimitiveType<Type
+attributes
+operations
+end
+
+class VoidType<PrimitiveType
+attributes
+operations
+end
+
+class IntType<PrimitiveType
+attributes
+operations
+end
+
+class BoolType<PrimitiveType
+attributes
+operations
+end
+
+class DoubleType<PrimitiveType
+attributes
+operations
+end
+
+class StringType<PrimitiveType
+attributes
+operations
+end
+
+class Procedure<NamedElement,TypedElement,CodeBlock,AnnotatableElement
+attributes
+	clazz : Boolean
+operations
+end
+
+class SimpleAnnotation<NamedElement
+attributes
+	value : String
+operations
+end
+
+class Annotation<NamedElement
+attributes
+operations
+end
+
+class AnnotationApplication
+attributes
+operations
+end
+
+class KeyValuePair
+attributes
+operations
+end
+
+abstract class AnnotatableElement
+attributes
+operations
+end
+
+abstract class Classifier<Type,NamedElement,ReferableRhsType
+attributes
+operations
+end
+
+class NativeBinding
+attributes
+	targetLanguage : String
+	targetType : String
+operations
+end
+
+abstract class ClassSimilar<EmbeddableExtensionsContainer,ModifierExtensionsContainer
+attributes
+operations
+end
+
+class StartCodeBlock<CodeBlock
+attributes
+operations
+end
+
+class Clazz<Classifier,ClassSimilar
+attributes
+	active : Boolean
+operations
+end
+
+class Constructor
+attributes
+operations
+end
+
+class ClassAugment<ClassSimilar
+attributes
+operations
+end
+
+class Interface<Classifier
+attributes
+operations
+end
+
+abstract class AbstractVariable<NamedElement,TypedElement
+attributes
+operations
+end
+
+class Variable<AbstractVariable,Statement,ModifierExtensionsContainer
+attributes
+	control : Boolean
+	clazz : Boolean
+operations
+end
+
+class Parameter<AbstractVariable
+attributes
+operations
+end
+
+class NamedElement<ExpandableElement
+attributes
+	name : String
+operations
+end
+
+class CodeBlock<Construct
+attributes
+operations
+end
+
+class Statement<Construct
+attributes
+operations
+end
+
+class CompositeStatement<Statement
+attributes
+operations
+end
+
+class SimpleStatement<Statement
+attributes
+operations
+end
+
+class ExpressionStatement<SimpleStatement
+attributes
+operations
+end
+
+class StatementExpression
+attributes
+operations
+end
+
+class Assignment<SimpleStatement
+attributes
+operations
+end
+
+class DeprecatedProcedureCallStatement<ExpressionStatement
+attributes
+operations
+end
+
+class ProcedureCall<StatementExpression
+attributes
+operations
+end
+
+class Return<SimpleStatement
+attributes
+operations
+end
+
+class WaitUntil<SimpleStatement
+attributes
+operations
+end
+
+class Terminate<SimpleStatement
+attributes
+operations
+end
+
+class Wait<SimpleStatement
+attributes
+operations
+end
+
+class Reactivate<SimpleStatement
+attributes
+operations
+end
+
+class ActivateObject<SimpleStatement
+attributes
+	priority : Integer
+operations
+end
+
+class Advance<SimpleStatement
+attributes
+operations
+end
+
+class Print<SimpleStatement
+attributes
+operations
+end
+
+abstract class SetStatement<SimpleStatement
+attributes
+operations
+end
+
+class RemoveFromSet<SetStatement
+attributes
+operations
+end
+
+class AddToSet<SetStatement
+attributes
+operations
+end
+
+class EmptySet<SetStatement
+attributes
+operations
+end
+
+class IfStatement<CompositeStatement
+attributes
+operations
+end
+
+class WhileStatement<CompositeStatement
+attributes
+operations
+end
+
+class BreakStatement<SimpleStatement
+attributes
+operations
+end
+
+class ContinueStatement<SimpleStatement
+attributes
+operations
+end
+
+class ForEachStatement<CompositeStatement
+attributes
+operations
+end
+
+class Expression<Construct
+attributes
+operations
+end
+
+class L1Expr<Expression
+attributes
+operations
+end
+
+abstract class BinaryOperator<Expression
+attributes
+operations
+end
+
+abstract class UnaryOperator<Expression
+attributes
+operations
+end
+
+class Plus<BinaryOperator
+attributes
+operations
+end
+
+class Minus<BinaryOperator
+attributes
+operations
+end
+
+class Mul<BinaryOperator
+attributes
+operations
+end
+
+class Mod<BinaryOperator
+attributes
+operations
+end
+
+class Div<BinaryOperator
+attributes
+operations
+end
+
+class Neg<UnaryOperator
+attributes
+operations
+end
+
+class And<BinaryOperator
+attributes
+operations
+end
+
+class Or<BinaryOperator
+attributes
+operations
+end
+
+class Greater<BinaryOperator
+attributes
+operations
+end
+
+class GreaterEqual<BinaryOperator
+attributes
+operations
+end
+
+class Less<BinaryOperator
+attributes
+operations
+end
+
+class LessEqual<BinaryOperator
+attributes
+operations
+end
+
+class NotEqual<BinaryOperator
+attributes
+operations
+end
+
+class Equal<BinaryOperator
+attributes
+operations
+end
+
+class InstanceOf<BinaryOperator
+attributes
+operations
+end
+
+class Not<UnaryOperator
+attributes
+operations
+end
+
+class CreateObject<Expression,TypedElement
+attributes
+operations
+end
+
+class Cast<UnaryOperator,TypedElement
+attributes
+operations
+end
+
+class NullLiteral<Expression
+attributes
+operations
+end
+
+class TimeLiteral<Expression
+attributes
+operations
+end
+
+class ActiveLiteral<Expression
+attributes
+operations
+end
+
+class EvalExpr<Expression
+attributes
+operations
+end
+
+class MeLiteral<PredefinedId
+attributes
+operations
+end
+
+class SuperLiteral<PredefinedId
+attributes
+operations
+end
+
+class MetaLiteral<PredefinedId
+attributes
+operations
+end
+
+class TypeLiteral<PredefinedId
+attributes
+operations
+end
+
+abstract class SetOp<PredefinedId
+attributes
+operations
+end
+
+class SizeOfSet<SetOp
+attributes
+operations
+end
+
+class FirstInSet<SetOp
+attributes
+operations
+end
+
+class LastInSet<SetOp
+attributes
+operations
+end
+
+class Contains<SetOp
+attributes
+operations
+end
+
+class IndexOf<SetOp
+attributes
+operations
+end
+
+class ObjectAt<SetOp
+attributes
+operations
+end
+
+class BeforeInSet<SetOp
+attributes
+operations
+end
+
+class AfterInSet<SetOp
+attributes
+operations
+end
+
+class StringLiteral<Expression
+attributes
+	value : String
+operations
+end
+
+class IntLiteral<Expression
+attributes
+	value : Integer
+operations
+end
+
+class TrueLiteral<Expression
+attributes
+operations
+end
+
+class FalseLiteral<Expression
+attributes
+operations
+end
+
+class DoubleLiteral<Expression
+attributes
+	value : Real
+operations
+end
+
+abstract class DepIdentifiableElement
+attributes
+operations
+end
+
+class PredefinedId
+attributes
+operations
+end
+
+class IdExpr<Expression
+attributes
+operations
+end
+
+class ArgumentExpression
+attributes
+operations
+end
+
+abstract class ElementAccess<Expression
+attributes
+operations
+end
+
+class VariableAccess<ElementAccess,ExpandableElement
+attributes
+operations
+end
+
+class MetaAccess<VariableAccess
+attributes
+operations
+end
+
+class TypeAccess<ElementAccess,ExpandableElement
+attributes
+operations
+end
+
+class Extension
+attributes
+operations
+end
+
+class NamedExtension<Extension,NamedElement
+attributes
+operations
+end
+
+class ClassContentExtension<NamedExtension
+attributes
+operations
+end
+
+class ModuleContentExtension<NamedExtension
+attributes
+operations
+end
+
+class ExtensionDefinition<NamedElement
+attributes
+operations
+end
+
+class TextualSyntaxDef
+attributes
+operations
+end
+
+abstract class ReferableRhsType<NamedElement
+attributes
+operations
+end
+
+class TsRule<NamedElement,ReferableRhsType
+attributes
+	metaClassName : String
+operations
+end
+
+class ExtensionRule<NamedElement
+attributes
+operations
+end
+
+abstract class RhsExpression
+attributes
+operations
+	getSubExpressions():RhsExpression
+end
+
+class SequenceExpr<RhsExpression
+attributes
+operations
+end
+
+class OptionalExpr<RhsExpression
+attributes
+operations
+end
+
+class RuntimeExpr<RhsExpression
+attributes
+operations
+end
+
+class AtLeastOneExpr<RhsExpression
+attributes
+operations
+end
+
+class ArbitraryExpr<RhsExpression
+attributes
+operations
+end
+
+class AlternativeExpr<RhsExpression
+attributes
+operations
+end
+
+class TerminalExpr<RhsExpression
+attributes
+	terminal : String
+operations
+end
+
+class PropertyBindingExpr<NamedElement,RhsExpression
+attributes
+	operator : BindingExprOpKind
+operations
+end
+
+class RuleExpr<RhsExpression
+attributes
+operations
+end
+
+abstract class PropertyType
+attributes
+operations
+end
+
+class IdPropertyType<PropertyType
+attributes
+operations
+end
+
+class IntPropertyType<PropertyType
+attributes
+operations
+end
+
+class StringPropertyType<PropertyType
+attributes
+operations
+end
+
+class BooleanPropertyType<PropertyType
+attributes
+	terminal : String
+operations
+end
+
+class StructuredPropertyType<PropertyType
+attributes
+operations
+end
+
+class CompositePropertyType<StructuredPropertyType
+attributes
+	list : Boolean
+operations
+end
+
+class ReferencePropertyType<StructuredPropertyType
+attributes
+	rawReference : Boolean
+operations
+end
+
+class Mapping<CodeBlock
+attributes
+operations
+end
+
+abstract class MappingPart
+attributes
+operations
+end
+
+class MetaExpr<Expression
+attributes
+operations
+end
+
+class TargetStatement<Statement
+attributes
+operations
+end
+
+class MappingStatement<Statement
+attributes
+operations
+end
+
+class SetGenContextStatement<SimpleStatement
+attributes
+	addAfterContext : Boolean
+operations
+end
+
+class ResetGenContextStatement<SimpleStatement
+attributes
+operations
+end
+
+class SaveGenStatement<SimpleStatement
+attributes
+operations
+end
+
+class ResumeGenStatement<SimpleStatement
+attributes
+operations
+end
+
+class FixedMappingPart<MappingPart
+attributes
+	code : String
+operations
+end
+
+class DynamicMappingPart<MappingPart
+attributes
+operations
+end
+
+class ExpandExpression<StatementExpression,Expression
+attributes
+operations
+end
+
+class ExpandStatement<Statement
+attributes
+operations
+end
+
+class ExpandSection<CompositeStatement
+attributes
+operations
+end
+
+class CodeQuoteExpression<Expression
+attributes
+operations
+end
+
+class QuotedCode
+attributes
+operations
+end
+
+class QuotedExpression<QuotedCode
+attributes
+operations
+end
+
+class QuotedStatements<QuotedCode
+attributes
+operations
+end
+
+class QuotedClassContent<QuotedCode,ClassSimilar
+attributes
+operations
+end
+
+class QuotedModuleContent<QuotedCode,Module
+attributes
+operations
+end
+
+class ExpandableElement
+attributes
+operations
+end
+
+class TestStatement<Statement
+attributes
+	value : Integer
+operations
+end
+
+class IdResolution
+attributes
+	metaModelPlatformURI : String
+operations
+end
+
+class Pattern<NamedElement
+attributes
+	top : Boolean
+operations
+end
+
+class PotentiallyHiddenIdElements<Statement
+attributes
+operations
+end
+
+class FindContainer<Statement
+attributes
+operations
+end
+
+class ConsiderIdElements<Statement
+attributes
+operations
+end
+
+class IncludePattern<Statement
+attributes
+operations
+end
+
+composition xxx_Model_imports between
+	Model[0..1] role xxx_Model_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Model_modules between
+	Model[0..1] role xxx_Model_modules_src
+	Module[*] role modules
+end
+
+association xxx_Import_model_ between
+	Import[*] role xxx_Import_model__src
+	Model[0..1] role model_
+end
+
+composition xxx_Module_classifiers between
+	Module[0..1] role xxx_Module_classifiers_src
+	Classifier[*] role classifiers
+end
+
+composition xxx_Module_classAugments between
+	Module[0..1] role xxx_Module_classAugments_src
+	ClassAugment[*] role classAugments
+end
+
+composition xxx_Module_extensionDefs between
+	Module[0..1] role xxx_Module_extensionDefs_src
+	ExtensionDefinition[*] role extensionDefs
+end
+
+composition xxx_Module_annotationDefs between
+	Module[0..1] role xxx_Module_annotationDefs_src
+	Annotation[*] role annotationDefs
+end
+
+composition xxx_Module_procedures between
+	Module[0..1] role xxx_Module_procedures_src
+	Procedure[*] role procedures
+end
+
+composition xxx_Module_variables between
+	Module[0..1] role xxx_Module_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Module_idRes between
+	Module[*] role xxx_Module_idRes_src
+	IdResolution[0..1] role idRes
+end
+
+composition xxx_EmbeddableExtensionsContainer_extensions between
+	EmbeddableExtensionsContainer[0..1] role xxx_EmbeddableExtensionsContainer_extensions_src
+	Extension[*] role extensions
+end
+
+composition xxx_ModifierExtensionsContainer_modifierExtensions between
+	ModifierExtensionsContainer[0..1] role xxx_ModifierExtensionsContainer_modifierExtensions_src
+	Extension[*] role modifierExtensions
+end
+
+composition xxx_TypedElement_primitiveType between
+	TypedElement[*] role xxx_TypedElement_primitiveType_src
+	PrimitiveType[0..1] role primitiveType
+end
+
+composition xxx_TypedElement_classifierTypeExpr between
+	TypedElement[*] role xxx_TypedElement_classifierTypeExpr_src
+	IdExpr[0..1] role classifierTypeExpr
+end
+
+composition xxx_Procedure_parameters between
+	Procedure[0..1] role xxx_Procedure_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Annotation_keys between
+	Annotation[0..1] role xxx_Annotation_keys_src
+	Variable[*] role keys
+end
+
+association xxx_AnnotationApplication_annotationDef between
+	AnnotationApplication[*] role xxx_AnnotationApplication_annotationDef_src
+	Annotation[1] role annotationDef
+end
+
+composition xxx_AnnotationApplication_keyValuePairs between
+	AnnotationApplication[0..1] role xxx_AnnotationApplication_keyValuePairs_src
+	KeyValuePair[*] role keyValuePairs
+end
+
+composition xxx_KeyValuePair_key between
+	KeyValuePair[*] role xxx_KeyValuePair_key_src
+	VariableAccess[1] role key
+end
+
+composition xxx_KeyValuePair_value between
+	KeyValuePair[*] role xxx_KeyValuePair_value_src
+	Expression[1] role value
+end
+
+composition xxx_AnnotatableElement_annotationApplications between
+	AnnotatableElement[0..1] role xxx_AnnotatableElement_annotationApplications_src
+	AnnotationApplication[*] role annotationApplications
+end
+
+composition xxx_AnnotatableElement_simpleAnnotations between
+	AnnotatableElement[0..1] role xxx_AnnotatableElement_simpleAnnotations_src
+	SimpleAnnotation[*] role simpleAnnotations
+end
+
+composition xxx_Classifier_bindings between
+	Classifier[0..1] role xxx_Classifier_bindings_src
+	NativeBinding[*] role bindings
+end
+
+composition xxx_ClassSimilar_attributes_ between
+	ClassSimilar[0..1] role xxx_ClassSimilar_attributes__src
+	Variable[*] role attributes_
+end
+
+composition xxx_ClassSimilar_methods between
+	ClassSimilar[0..1] role xxx_ClassSimilar_methods_src
+	Procedure[*] role methods
+end
+
+association xxx_ClassSimilar_superClass between
+	ClassSimilar[*] role xxx_ClassSimilar_superClass_src
+	Clazz[0..1] role superClass
+end
+
+association xxx_ClassSimilar_implementedInterfaces between
+	ClassSimilar[0..1] role xxx_ClassSimilar_implementedInterfaces_src
+	Interface[*] role implementedInterfaces
+end
+
+composition xxx_ClassSimilar_initialBlock between
+	ClassSimilar[*] role xxx_ClassSimilar_initialBlock_src
+	StartCodeBlock[0..1] role initialBlock
+end
+
+composition xxx_ClassSimilar_finalBlock between
+	ClassSimilar[*] role xxx_ClassSimilar_finalBlock_src
+	StartCodeBlock[0..1] role finalBlock
+end
+
+composition xxx_ClassSimilar_actionsBlock between
+	ClassSimilar[*] role xxx_ClassSimilar_actionsBlock_src
+	StartCodeBlock[0..1] role actionsBlock
+end
+
+composition xxx_ClassSimilar_reportBlock between
+	ClassSimilar[*] role xxx_ClassSimilar_reportBlock_src
+	StartCodeBlock[0..1] role reportBlock
+end
+
+composition xxx_ClassSimilar_clearBlock between
+	ClassSimilar[*] role xxx_ClassSimilar_clearBlock_src
+	StartCodeBlock[0..1] role clearBlock
+end
+
+composition xxx_Clazz_constructor between
+	Clazz[*] role xxx_Clazz_constructor_src
+	Constructor[0..1] role constructor
+end
+
+composition xxx_Clazz_baseConstructorArguments between
+	Clazz[0..1] role xxx_Clazz_baseConstructorArguments_src
+	Expression[*] role baseConstructorArguments
+end
+
+composition xxx_Constructor_parameters between
+	Constructor[0..1] role xxx_Constructor_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_ClassAugment_augmentedClass between
+	ClassAugment[*] role xxx_ClassAugment_augmentedClass_src
+	Clazz[1] role augmentedClass
+end
+
+composition xxx_Interface_methods between
+	Interface[0..1] role xxx_Interface_methods_src
+	Procedure[*] role methods
+end
+
+association xxx_Interface_superInterfaces between
+	Interface[0..1] role xxx_Interface_superInterfaces_src
+	Interface[*] role superInterfaces
+end
+
+composition xxx_Variable_initialValue between
+	Variable[*] role xxx_Variable_initialValue_src
+	Expression[0..1] role initialValue
+end
+
+composition xxx_CodeBlock_statements between
+	CodeBlock[0..1] role xxx_CodeBlock_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ExpressionStatement_expression between
+	ExpressionStatement[*] role xxx_ExpressionStatement_expression_src
+	StatementExpression[1] role expression
+end
+
+composition xxx_Assignment_variable between
+	Assignment[*] role xxx_Assignment_variable_src
+	VariableAccess[1] role variable
+end
+
+composition xxx_Assignment_value between
+	Assignment[*] role xxx_Assignment_value_src
+	Expression[1] role value
+end
+
+composition xxx_DeprecatedProcedureCallStatement_procedureCall between
+	DeprecatedProcedureCallStatement[*] role xxx_DeprecatedProcedureCallStatement_procedureCall_src
+	Expression[1] role procedureCall
+end
+
+composition xxx_ProcedureCall_procedureAccess between
+	ProcedureCall[*] role xxx_ProcedureCall_procedureAccess_src
+	Expression[1] role procedureAccess
+end
+
+composition xxx_Return_value between
+	Return[*] role xxx_Return_value_src
+	Expression[1] role value
+end
+
+composition xxx_WaitUntil_condition between
+	WaitUntil[*] role xxx_WaitUntil_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_Reactivate_objectAccess between
+	Reactivate[*] role xxx_Reactivate_objectAccess_src
+	Expression[1] role objectAccess
+end
+
+composition xxx_ActivateObject_objectAccess between
+	ActivateObject[*] role xxx_ActivateObject_objectAccess_src
+	Expression[1] role objectAccess
+end
+
+composition xxx_Advance_time between
+	Advance[*] role xxx_Advance_time_src
+	Expression[1] role time
+end
+
+composition xxx_Print_outputs between
+	Print[0..1] role xxx_Print_outputs_src
+	Expression[*] role outputs
+end
+
+composition xxx_SetStatement_object between
+	SetStatement[*] role xxx_SetStatement_object_src
+	Expression[1] role object
+end
+
+composition xxx_SetStatement_set between
+	SetStatement[*] role xxx_SetStatement_set_src
+	Expression[1] role set
+end
+
+composition xxx_AddToSet_atIndex between
+	AddToSet[*] role xxx_AddToSet_atIndex_src
+	Expression[0..1] role atIndex
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_IfStatement_ifCaseBlock between
+	IfStatement[*] role xxx_IfStatement_ifCaseBlock_src
+	CodeBlock[1] role ifCaseBlock
+end
+
+composition xxx_IfStatement_elifCondition between
+	IfStatement[0..1] role xxx_IfStatement_elifCondition_src
+	Expression[*] role elifCondition
+end
+
+composition xxx_IfStatement_elifCaseBlock between
+	IfStatement[0..1] role xxx_IfStatement_elifCaseBlock_src
+	CodeBlock[*] role elifCaseBlock
+end
+
+composition xxx_IfStatement_elseCaseBlock between
+	IfStatement[*] role xxx_IfStatement_elseCaseBlock_src
+	CodeBlock[0..1] role elseCaseBlock
+end
+
+composition xxx_WhileStatement_condition between
+	WhileStatement[*] role xxx_WhileStatement_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_WhileStatement_whileBlock between
+	WhileStatement[*] role xxx_WhileStatement_whileBlock_src
+	CodeBlock[1] role whileBlock
+end
+
+composition xxx_ForEachStatement_iteratorVariableDefinition between
+	ForEachStatement[*] role xxx_ForEachStatement_iteratorVariableDefinition_src
+	Variable[0..1] role iteratorVariableDefinition
+end
+
+composition xxx_ForEachStatement_iteratorVariableReference between
+	ForEachStatement[*] role xxx_ForEachStatement_iteratorVariableReference_src
+	VariableAccess[0..1] role iteratorVariableReference
+end
+
+composition xxx_ForEachStatement_iterableExpression between
+	ForEachStatement[*] role xxx_ForEachStatement_iterableExpression_src
+	Expression[1] role iterableExpression
+end
+
+composition xxx_ForEachStatement_forBlock between
+	ForEachStatement[*] role xxx_ForEachStatement_forBlock_src
+	CodeBlock[1] role forBlock
+end
+
+composition xxx_BinaryOperator_op1 between
+	BinaryOperator[*] role xxx_BinaryOperator_op1_src
+	Expression[1] role op1
+end
+
+composition xxx_BinaryOperator_op2 between
+	BinaryOperator[*] role xxx_BinaryOperator_op2_src
+	Expression[1] role op2
+end
+
+composition xxx_UnaryOperator_op between
+	UnaryOperator[*] role xxx_UnaryOperator_op_src
+	Expression[1] role op
+end
+
+composition xxx_EvalExpr_expr between
+	EvalExpr[*] role xxx_EvalExpr_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_SetOp_set between
+	SetOp[*] role xxx_SetOp_set_src
+	Expression[0..1] role set
+end
+
+composition xxx_IdExpr_parentIdExpr between
+	IdExpr[*] role xxx_IdExpr_parentIdExpr_src
+	IdExpr[0..1] role parentIdExpr
+end
+
+association xxx_IdExpr_referencedElement between
+	IdExpr[*] role xxx_IdExpr_referencedElement_src
+	NamedElement[0..1] role referencedElement
+end
+
+composition xxx_IdExpr_predefinedId between
+	IdExpr[*] role xxx_IdExpr_predefinedId_src
+	PredefinedId[0..1] role predefinedId
+end
+
+composition xxx_IdExpr_arguments between
+	IdExpr[*] role xxx_IdExpr_arguments_src
+	ArgumentExpression[0..1] role arguments
+end
+
+composition xxx_ArgumentExpression_arguments between
+	ArgumentExpression[0..1] role xxx_ArgumentExpression_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_ElementAccess_idExpr between
+	ElementAccess[*] role xxx_ElementAccess_idExpr_src
+	IdExpr[0..1] role idExpr
+end
+
+composition xxx_ExtensionDefinition_abstractSyntaxDef between
+	ExtensionDefinition[0..1] role xxx_ExtensionDefinition_abstractSyntaxDef_src
+	Classifier[*] role abstractSyntaxDef
+end
+
+composition xxx_ExtensionDefinition_textualSyntaxDef between
+	ExtensionDefinition[*] role xxx_ExtensionDefinition_textualSyntaxDef_src
+	TextualSyntaxDef[1] role textualSyntaxDef
+end
+
+composition xxx_ExtensionDefinition_mappingDef between
+	ExtensionDefinition[*] role xxx_ExtensionDefinition_mappingDef_src
+	Mapping[0..1] role mappingDef
+end
+
+composition xxx_TextualSyntaxDef_extensionRule between
+	TextualSyntaxDef[*] role xxx_TextualSyntaxDef_extensionRule_src
+	ExtensionRule[1] role extensionRule
+end
+
+composition xxx_TextualSyntaxDef_newRules between
+	TextualSyntaxDef[0..1] role xxx_TextualSyntaxDef_newRules_src
+	TsRule[*] role newRules
+end
+
+composition xxx_TsRule_rhs between
+	TsRule[*] role xxx_TsRule_rhs_src
+	RhsExpression[1] role rhs
+end
+
+association xxx_ExtensionRule_instantiableMetaClass between
+	ExtensionRule[*] role xxx_ExtensionRule_instantiableMetaClass_src
+	Classifier[0..1] role instantiableMetaClass
+end
+
+composition xxx_ExtensionRule_firstNewRule between
+	ExtensionRule[*] role xxx_ExtensionRule_firstNewRule_src
+	RuleExpr[1] role firstNewRule
+end
+
+composition xxx_SequenceExpr_sequence between
+	SequenceExpr[0..1] role xxx_SequenceExpr_sequence_src
+	RhsExpression[*] role sequence
+end
+
+composition xxx_OptionalExpr_expression between
+	OptionalExpr[*] role xxx_OptionalExpr_expression_src
+	RhsExpression[1] role expression
+end
+
+composition xxx_RuntimeExpr_expression between
+	RuntimeExpr[*] role xxx_RuntimeExpr_expression_src
+	RhsExpression[1] role expression
+end
+
+composition xxx_AtLeastOneExpr_expression between
+	AtLeastOneExpr[*] role xxx_AtLeastOneExpr_expression_src
+	RhsExpression[1] role expression
+end
+
+composition xxx_ArbitraryExpr_expression between
+	ArbitraryExpr[*] role xxx_ArbitraryExpr_expression_src
+	RhsExpression[1] role expression
+end
+
+composition xxx_AlternativeExpr_left between
+	AlternativeExpr[*] role xxx_AlternativeExpr_left_src
+	RhsExpression[1] role left
+end
+
+composition xxx_AlternativeExpr_right between
+	AlternativeExpr[*] role xxx_AlternativeExpr_right_src
+	RhsExpression[1] role right
+end
+
+composition xxx_PropertyBindingExpr_propertyType between
+	PropertyBindingExpr[*] role xxx_PropertyBindingExpr_propertyType_src
+	PropertyType[1] role propertyType
+end
+
+association xxx_RuleExpr_rule between
+	RuleExpr[*] role xxx_RuleExpr_rule_src
+	TsRule[1] role rule
+end
+
+association xxx_StructuredPropertyType_type between
+	StructuredPropertyType[*] role xxx_StructuredPropertyType_type_src
+	ReferableRhsType[1] role type
+end
+
+association xxx_ReferencePropertyType_idResolutionPattern between
+	ReferencePropertyType[*] role xxx_ReferencePropertyType_idResolutionPattern_src
+	Pattern[0..1] role idResolutionPattern
+end
+
+composition xxx_Mapping_parts between
+	Mapping[0..1] role xxx_Mapping_parts_src
+	MappingPart[*] role parts
+end
+
+composition xxx_Mapping_metaObject between
+	Mapping[*] role xxx_Mapping_metaObject_src
+	Expression[1] role metaObject
+end
+
+composition xxx_MetaExpr_expr between
+	MetaExpr[*] role xxx_MetaExpr_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_TargetStatement_codeBlock between
+	TargetStatement[*] role xxx_TargetStatement_codeBlock_src
+	CodeBlock[1] role codeBlock
+end
+
+composition xxx_MappingStatement_parts between
+	MappingStatement[0..1] role xxx_MappingStatement_parts_src
+	MappingPart[*] role parts
+end
+
+composition xxx_MappingStatement_exprs between
+	MappingStatement[0..1] role xxx_MappingStatement_exprs_src
+	Expression[*] role exprs
+end
+
+composition xxx_SetGenContextStatement_context_ between
+	SetGenContextStatement[*] role xxx_SetGenContextStatement_context__src
+	Expression[1] role context_
+end
+
+composition xxx_SaveGenStatement_variable between
+	SaveGenStatement[*] role xxx_SaveGenStatement_variable_src
+	Expression[1] role variable
+end
+
+composition xxx_ResumeGenStatement_variable between
+	ResumeGenStatement[*] role xxx_ResumeGenStatement_variable_src
+	Expression[1] role variable
+end
+
+composition xxx_DynamicMappingPart_expr between
+	DynamicMappingPart[*] role xxx_DynamicMappingPart_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_ExpandExpression_metaObject between
+	ExpandExpression[*] role xxx_ExpandExpression_metaObject_src
+	Expression[1] role metaObject
+end
+
+composition xxx_ExpandStatement_metaObject between
+	ExpandStatement[*] role xxx_ExpandStatement_metaObject_src
+	Expression[1] role metaObject
+end
+
+composition xxx_ExpandStatement_location between
+	ExpandStatement[*] role xxx_ExpandStatement_location_src
+	Expression[0..1] role location
+end
+
+composition xxx_ExpandSection_codeBlock between
+	ExpandSection[*] role xxx_ExpandSection_codeBlock_src
+	CodeBlock[0..1] role codeBlock
+end
+
+composition xxx_CodeQuoteExpression_quotedCode between
+	CodeQuoteExpression[*] role xxx_CodeQuoteExpression_quotedCode_src
+	QuotedCode[1] role quotedCode
+end
+
+composition xxx_QuotedExpression_expression between
+	QuotedExpression[*] role xxx_QuotedExpression_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_QuotedStatements_statements between
+	QuotedStatements[0..1] role xxx_QuotedStatements_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ExpandableElement_expandExpression between
+	ExpandableElement[*] role xxx_ExpandableElement_expandExpression_src
+	ExpandExpression[0..1] role expandExpression
+end
+
+composition xxx_IdResolution_patterns between
+	IdResolution[0..1] role xxx_IdResolution_patterns_src
+	Pattern[*] role patterns
+end
+
+composition xxx_Pattern_context_ between
+	Pattern[*] role xxx_Pattern_context__src
+	Parameter[1] role context_
+end
+
+composition xxx_Pattern_codeBlock between
+	Pattern[*] role xxx_Pattern_codeBlock_src
+	CodeBlock[1] role codeBlock
+end
+
+composition xxx_PotentiallyHiddenIdElements_codeBlock between
+	PotentiallyHiddenIdElements[*] role xxx_PotentiallyHiddenIdElements_codeBlock_src
+	CodeBlock[1] role codeBlock
+end
+
+composition xxx_FindContainer_variableBinding between
+	FindContainer[*] role xxx_FindContainer_variableBinding_src
+	Parameter[1] role variableBinding
+end
+
+composition xxx_FindContainer_containerBlock between
+	FindContainer[*] role xxx_FindContainer_containerBlock_src
+	CodeBlock[1] role containerBlock
+end
+
+composition xxx_FindContainer_elseBlock between
+	FindContainer[*] role xxx_FindContainer_elseBlock_src
+	CodeBlock[0..1] role elseBlock
+end
+
+composition xxx_ConsiderIdElements_elementsQuery between
+	ConsiderIdElements[*] role xxx_ConsiderIdElements_elementsQuery_src
+	Expression[1] role elementsQuery
+end
+
+association xxx_IncludePattern_pattern between
+	IncludePattern[*] role xxx_IncludePattern_pattern_src
+	Pattern[1] role pattern
+end
+
+composition xxx_IncludePattern_context_ between
+	IncludePattern[*] role xxx_IncludePattern_context__src
+	Expression[1] role context_
+end
+

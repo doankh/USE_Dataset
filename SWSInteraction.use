@@ -1,0 +1,335 @@
+model SWSInteraction
+class Plan
+attributes
+	name : String
+	type : String
+	description : String
+	priority : Integer
+operations
+end
+
+class SemanticWebAgent
+attributes
+	name : String
+	description : String
+	properties : String
+operations
+end
+
+class Role
+attributes
+	name : String
+operations
+end
+
+class SSMatchmakerAgent
+attributes
+	name : String
+operations
+end
+
+class SS_RegisterPlan<Plan
+attributes
+operations
+end
+
+class SS_FinderPlan<Plan
+attributes
+operations
+end
+
+class SS_AgreementPlan<Plan
+attributes
+operations
+end
+
+class SS_ExecutorPlan<Plan
+attributes
+operations
+end
+
+class SWS
+attributes
+	name : String
+operations
+end
+
+class Interface
+attributes
+	name : String
+operations
+end
+
+class Process
+attributes
+	name : String
+operations
+end
+
+class Grounding
+attributes
+	name : String
+operations
+end
+
+class Input<ODM_OWLClass
+attributes
+	iname : String
+operations
+end
+
+class Output<ODM_OWLClass
+attributes
+	oname : String
+operations
+end
+
+class Precondition<ODM_OWLClass
+attributes
+	pname : String
+operations
+end
+
+class Effect<ODM_OWLClass
+attributes
+	ename : String
+operations
+end
+
+class WebService<Service
+attributes
+operations
+end
+
+class Service
+attributes
+	name : String
+operations
+end
+
+class ODM_OWLClass
+attributes
+	name : String
+operations
+end
+
+class RegistrationRole<Role
+attributes
+operations
+end
+
+class SWSInteractionViewpoint
+attributes
+operations
+end
+
+association xxx_SemanticWebAgent_applies between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_applies_src
+	Plan[*] role applies
+end
+
+association xxx_SemanticWebAgent_plays between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_plays_src
+	Role[*] role plays
+end
+
+association xxx_Role_interacts_with between
+	Role[*] role xxx_Role_interacts_with_src
+	SWS[1] role interacts_with
+end
+
+association xxx_SSMatchmakerAgent_appliesSS_RegPlan between
+	SSMatchmakerAgent[0..1] role xxx_SSMatchmakerAgent_appliesSS_RegPlan_src
+	SS_RegisterPlan[1..*] role appliesSS_RegPlan
+end
+
+association xxx_SSMatchmakerAgent_playsRegRole between
+	SSMatchmakerAgent[0..1] role xxx_SSMatchmakerAgent_playsRegRole_src
+	Role[1..*] role playsRegRole
+end
+
+association xxx_SS_RegisterPlan_advertises between
+	SS_RegisterPlan[0..1] role xxx_SS_RegisterPlan_advertises_src
+	Interface[*] role advertises
+end
+
+association xxx_SS_FinderPlan_interacts_with between
+	SS_FinderPlan[*] role xxx_SS_FinderPlan_interacts_with_src
+	SSMatchmakerAgent[1] role interacts_with
+end
+
+association xxx_SS_FinderPlan_discovers between
+	SS_FinderPlan[0..1] role xxx_SS_FinderPlan_discovers_src
+	Interface[*] role discovers
+end
+
+association xxx_SS_AgreementPlan_negotiates between
+	SS_AgreementPlan[0..1] role xxx_SS_AgreementPlan_negotiates_src
+	Interface[*] role negotiates
+end
+
+association xxx_SS_ExecutorPlan_executes between
+	SS_ExecutorPlan[*] role xxx_SS_ExecutorPlan_executes_src
+	Process[0..1] role executes
+end
+
+association xxx_SS_ExecutorPlan_uses between
+	SS_ExecutorPlan[*] role xxx_SS_ExecutorPlan_uses_src
+	Grounding[1] role uses
+end
+
+composition xxx_SWS_is_composed_of between
+	SWS[0..1] role xxx_SWS_is_composed_of_src
+	WebService[1..*] role is_composed_of
+end
+
+composition xxx_Interface_contains between
+	Interface[0..1] role xxx_Interface_contains_src
+	Input[*] role contains
+end
+
+composition xxx_Interface_includes between
+	Interface[0..1] role xxx_Interface_includes_src
+	Output[*] role includes
+end
+
+composition xxx_Interface_embodies between
+	Interface[0..1] role xxx_Interface_embodies_src
+	Precondition[*] role embodies
+end
+
+composition xxx_Interface_involves between
+	Interface[0..1] role xxx_Interface_involves_src
+	Effect[*] role involves
+end
+
+association xxx_Interface_presents between
+	Interface[*] role xxx_Interface_presents_src
+	SWS[0..1] role presents
+end
+
+composition xxx_Process_includes between
+	Process[0..1] role xxx_Process_includes_src
+	Input[*] role includes
+end
+
+composition xxx_Process_involves between
+	Process[0..1] role xxx_Process_involves_src
+	Output[*] role involves
+end
+
+composition xxx_Process_embodies between
+	Process[0..1] role xxx_Process_embodies_src
+	Precondition[*] role embodies
+end
+
+composition xxx_Process_embraces between
+	Process[0..1] role xxx_Process_embraces_src
+	Effect[*] role embraces
+end
+
+association xxx_Process_described_by between
+	Process[*] role xxx_Process_described_by_src
+	SWS[0..1] role described_by
+end
+
+association xxx_Grounding_calls between
+	Grounding[*] role xxx_Grounding_calls_src
+	WebService[1] role calls
+end
+
+association xxx_Grounding_supports between
+	Grounding[*] role xxx_Grounding_supports_src
+	SWS[0..1] role supports
+end
+
+composition xxx_SWSInteractionViewpoint_containsPlan between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsPlan_src
+	Plan[*] role containsPlan
+end
+
+composition xxx_SWSInteractionViewpoint_containsSSRegisterPlan between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsSSRegisterPlan_src
+	SS_RegisterPlan[*] role containsSSRegisterPlan
+end
+
+composition xxx_SWSInteractionViewpoint_containsSSFinderPlan between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsSSFinderPlan_src
+	SS_FinderPlan[*] role containsSSFinderPlan
+end
+
+composition xxx_SWSInteractionViewpoint_containsSSAgreementPlan between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsSSAgreementPlan_src
+	SS_AgreementPlan[*] role containsSSAgreementPlan
+end
+
+composition xxx_SWSInteractionViewpoint_containsExecutorPlan between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsExecutorPlan_src
+	SS_ExecutorPlan[*] role containsExecutorPlan
+end
+
+composition xxx_SWSInteractionViewpoint_containsSWAgent between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsSWAgent_src
+	SemanticWebAgent[*] role containsSWAgent
+end
+
+composition xxx_SWSInteractionViewpoint_containsSSMatchmakerAgent between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsSSMatchmakerAgent_src
+	SSMatchmakerAgent[*] role containsSSMatchmakerAgent
+end
+
+composition xxx_SWSInteractionViewpoint_containsRole between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsRole_src
+	Role[*] role containsRole
+end
+
+composition xxx_SWSInteractionViewpoint_containsInterface between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsInterface_src
+	Interface[*] role containsInterface
+end
+
+composition xxx_SWSInteractionViewpoint_containsProcess between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsProcess_src
+	Process[*] role containsProcess
+end
+
+composition xxx_SWSInteractionViewpoint_containsGrounding between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsGrounding_src
+	Grounding[*] role containsGrounding
+end
+
+composition xxx_SWSInteractionViewpoint_containsInput between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsInput_src
+	Input[*] role containsInput
+end
+
+composition xxx_SWSInteractionViewpoint_containsOutput between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsOutput_src
+	Output[*] role containsOutput
+end
+
+composition xxx_SWSInteractionViewpoint_containsPrecondition between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsPrecondition_src
+	Precondition[*] role containsPrecondition
+end
+
+composition xxx_SWSInteractionViewpoint_containsEffect between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsEffect_src
+	Effect[*] role containsEffect
+end
+
+composition xxx_SWSInteractionViewpoint_containsWebService between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsWebService_src
+	WebService[*] role containsWebService
+end
+
+composition xxx_SWSInteractionViewpoint_containsSWS between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsSWS_src
+	SWS[1..*] role containsSWS
+end
+
+composition xxx_SWSInteractionViewpoint_containsRegistrationRole between
+	SWSInteractionViewpoint[0..1] role xxx_SWSInteractionViewpoint_containsRegistrationRole_src
+	RegistrationRole[1..*] role containsRegistrationRole
+end
+

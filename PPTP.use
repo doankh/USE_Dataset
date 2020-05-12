@@ -1,0 +1,144 @@
+model pptp
+abstract class TargetEntry<ITargetElementContainer
+attributes
+	description : String
+	version : String
+	label : String
+operations
+end
+
+class PuppetDistribution<TargetEntry
+attributes
+operations
+end
+
+class Function<IDocumented,TargetElement
+attributes
+	rValue : Boolean
+operations
+end
+
+abstract class AbstractType<TargetElement
+attributes
+operations
+end
+
+abstract class IDocumented
+attributes
+	documentation : String
+operations
+end
+
+abstract class INamed
+attributes
+	name : String
+operations
+end
+
+abstract class TargetElement<INamed,IDocumented
+attributes
+	deprecated : Boolean
+operations
+end
+
+class Property<TypeArgument
+attributes
+operations
+end
+
+class Parameter<TypeArgument
+attributes
+operations
+end
+
+class TypeFragment<AbstractType
+attributes
+operations
+end
+
+class Type<AbstractType
+attributes
+	superType : String
+operations
+end
+
+class MetaType<AbstractType
+attributes
+operations
+end
+
+abstract class TypeArgument<TargetElement
+attributes
+	required : Boolean
+	namevar : Boolean
+operations
+end
+
+class NameSpace<TargetElement,ITargetElementContainer
+attributes
+	reserved : Boolean
+operations
+end
+
+class TPVariable<TargetElement
+attributes
+	assignable : Boolean
+	pattern : String
+operations
+end
+
+abstract class ITargetElementContainer
+attributes
+operations
+end
+
+class MetaVariable<TargetElement
+attributes
+operations
+end
+
+composition xxx_TargetEntry_functions between
+	TargetEntry[0..1] role xxx_TargetEntry_functions_src
+	Function[*] role functions
+end
+
+composition xxx_TargetEntry_types between
+	TargetEntry[0..1] role xxx_TargetEntry_types_src
+	Type[*] role types
+end
+
+composition xxx_TargetEntry_typeFragments between
+	TargetEntry[0..1] role xxx_TargetEntry_typeFragments_src
+	TypeFragment[*] role typeFragments
+end
+
+composition xxx_TargetEntry_metaType between
+	TargetEntry[*] role xxx_TargetEntry_metaType_src
+	MetaType[0..1] role metaType
+end
+
+composition xxx_TargetEntry_metaVariables between
+	TargetEntry[0..1] role xxx_TargetEntry_metaVariables_src
+	MetaVariable[*] role metaVariables
+end
+
+association xxx_AbstractType_EReference0 between
+	AbstractType[*] role xxx_AbstractType_EReference0_src
+	IDocumented[0..1] role EReference0
+end
+
+composition xxx_AbstractType_properties between
+	AbstractType[0..1] role xxx_AbstractType_properties_src
+	Property[*] role properties
+end
+
+composition xxx_AbstractType_parameters between
+	AbstractType[0..1] role xxx_AbstractType_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_ITargetElementContainer_contents between
+	ITargetElementContainer[0..1] role xxx_ITargetElementContainer_contents_src
+	TargetElement[*] role contents
+end
+

@@ -1,0 +1,299 @@
+model graphml
+enum EndpointTypeType{
+default
+}
+
+enum GraphEdgedefaultType{
+default
+}
+
+enum GraphEdgeidsType{
+default
+}
+
+enum GraphNodeidsType{
+default
+}
+
+enum GraphOrderType{
+default
+}
+
+enum KeyForType{
+default
+}
+
+enum KeyTypeType{
+default
+}
+
+class DataExtensionType
+attributes
+	mixed : String
+operations
+end
+
+class DataType<DataExtensionType
+attributes
+	id : String
+	key : String
+	time : Integer
+operations
+end
+
+class DefaultType<DataExtensionType
+attributes
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	desc : String
+operations
+end
+
+class EdgeType
+attributes
+	desc : String
+	directed : Boolean
+	id : String
+	source : String
+	sourceport : String
+	target : String
+	targetport : String
+operations
+end
+
+class EndpointType
+attributes
+	desc : String
+	id : String
+	node : String
+	port : String
+	type : EndpointTypeType
+operations
+end
+
+class GraphmlType
+attributes
+	desc : String
+	group : String
+operations
+end
+
+class GraphType
+attributes
+	desc : String
+	group : String
+	edgedefault : GraphEdgedefaultType
+	id : String
+	parseEdgeids : GraphEdgeidsType
+	parseEdges : String
+	parseMaxindegree : String
+	parseMaxoutdegree : String
+	parseNodeids : GraphNodeidsType
+	parseNodes : String
+	parseOrder : GraphOrderType
+operations
+end
+
+class HyperedgeType
+attributes
+	desc : String
+	group : String
+	id : String
+operations
+end
+
+class KeyType
+attributes
+	desc : String
+	attrName : String
+	attrType : KeyTypeType
+	dynamic : Boolean
+	for_ : KeyForType
+	id : String
+operations
+end
+
+class LocatorType
+attributes
+	href : String
+	type : String
+operations
+end
+
+class NodeType
+attributes
+	desc : String
+	group : String
+	id : String
+	parseIndegree : String
+	parseOutdegree : String
+operations
+end
+
+class PortType
+attributes
+	desc : String
+	group : String
+	name : String
+operations
+end
+
+composition xxx_DocumentRoot_data between
+	DocumentRoot[*] role xxx_DocumentRoot_data_src
+	DataType[*] role data
+end
+
+composition xxx_DocumentRoot_default between
+	DocumentRoot[*] role xxx_DocumentRoot_default_src
+	DefaultType[*] role default
+end
+
+composition xxx_DocumentRoot_edge between
+	DocumentRoot[*] role xxx_DocumentRoot_edge_src
+	EdgeType[*] role edge
+end
+
+composition xxx_DocumentRoot_endpoint between
+	DocumentRoot[*] role xxx_DocumentRoot_endpoint_src
+	EndpointType[*] role endpoint
+end
+
+composition xxx_DocumentRoot_graph between
+	DocumentRoot[*] role xxx_DocumentRoot_graph_src
+	GraphType[*] role graph
+end
+
+composition xxx_DocumentRoot_graphml between
+	DocumentRoot[*] role xxx_DocumentRoot_graphml_src
+	GraphmlType[*] role graphml
+end
+
+composition xxx_DocumentRoot_hyperedge between
+	DocumentRoot[*] role xxx_DocumentRoot_hyperedge_src
+	HyperedgeType[*] role hyperedge
+end
+
+composition xxx_DocumentRoot_key between
+	DocumentRoot[*] role xxx_DocumentRoot_key_src
+	KeyType[*] role key
+end
+
+composition xxx_DocumentRoot_locator between
+	DocumentRoot[*] role xxx_DocumentRoot_locator_src
+	LocatorType[*] role locator
+end
+
+composition xxx_DocumentRoot_node between
+	DocumentRoot[*] role xxx_DocumentRoot_node_src
+	NodeType[*] role node
+end
+
+composition xxx_DocumentRoot_port between
+	DocumentRoot[*] role xxx_DocumentRoot_port_src
+	PortType[*] role port
+end
+
+composition xxx_EdgeType_data between
+	EdgeType[0..1] role xxx_EdgeType_data_src
+	DataType[*] role data
+end
+
+composition xxx_EdgeType_graph between
+	EdgeType[*] role xxx_EdgeType_graph_src
+	GraphType[0..1] role graph
+end
+
+composition xxx_GraphmlType_key between
+	GraphmlType[0..1] role xxx_GraphmlType_key_src
+	KeyType[*] role key
+end
+
+composition xxx_GraphmlType_graph between
+	GraphmlType[0..1] role xxx_GraphmlType_graph_src
+	GraphType[*] role graph
+end
+
+composition xxx_GraphmlType_data between
+	GraphmlType[0..1] role xxx_GraphmlType_data_src
+	DataType[*] role data
+end
+
+composition xxx_GraphType_data between
+	GraphType[0..1] role xxx_GraphType_data_src
+	DataType[*] role data
+end
+
+composition xxx_GraphType_node between
+	GraphType[0..1] role xxx_GraphType_node_src
+	NodeType[*] role node
+end
+
+composition xxx_GraphType_edge between
+	GraphType[0..1] role xxx_GraphType_edge_src
+	EdgeType[*] role edge
+end
+
+composition xxx_GraphType_hyperedge between
+	GraphType[0..1] role xxx_GraphType_hyperedge_src
+	HyperedgeType[*] role hyperedge
+end
+
+composition xxx_GraphType_locator between
+	GraphType[*] role xxx_GraphType_locator_src
+	LocatorType[0..1] role locator
+end
+
+composition xxx_HyperedgeType_data between
+	HyperedgeType[0..1] role xxx_HyperedgeType_data_src
+	DataType[*] role data
+end
+
+composition xxx_HyperedgeType_endpoint between
+	HyperedgeType[0..1] role xxx_HyperedgeType_endpoint_src
+	EndpointType[*] role endpoint
+end
+
+composition xxx_HyperedgeType_graph between
+	HyperedgeType[*] role xxx_HyperedgeType_graph_src
+	GraphType[0..1] role graph
+end
+
+composition xxx_KeyType_default between
+	KeyType[*] role xxx_KeyType_default_src
+	DefaultType[0..1] role default
+end
+
+composition xxx_NodeType_data between
+	NodeType[0..1] role xxx_NodeType_data_src
+	DataType[*] role data
+end
+
+composition xxx_NodeType_port between
+	NodeType[0..1] role xxx_NodeType_port_src
+	PortType[*] role port
+end
+
+composition xxx_NodeType_graph between
+	NodeType[*] role xxx_NodeType_graph_src
+	GraphType[0..1] role graph
+end
+
+composition xxx_NodeType_locator between
+	NodeType[*] role xxx_NodeType_locator_src
+	LocatorType[0..1] role locator
+end
+
+composition xxx_PortType_data between
+	PortType[0..1] role xxx_PortType_data_src
+	DataType[*] role data
+end
+
+composition xxx_PortType_port between
+	PortType[0..1] role xxx_PortType_port_src
+	PortType[*] role port
+end
+

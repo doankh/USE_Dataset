@@ -1,0 +1,119 @@
+model PrimitiveTypes
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class ModelElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Classifier<ModelElement
+attributes
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class Enumeration<Classifier
+attributes
+operations
+end
+
+class EnumLiteral<ModelElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class StructuralFeature<ModelElement
+attributes
+	lower : Integer
+	upper : Integer
+	isOrdered : Boolean
+	isUnique : Boolean
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+class Reference<StructuralFeature
+attributes
+	isContainer : Boolean
+operations
+end
+
+class Package<ModelElement
+attributes
+operations
+end
+
+class Metamodel<LocatedElement
+attributes
+operations
+end
+
+association xxx_ModelElement_package between
+	ModelElement[*] role xxx_ModelElement_package_src
+	Package[1] role package
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	EnumLiteral[*] role literals
+end
+
+association xxx_Class_supertypes between
+	Class[0..1] role xxx_Class_supertypes_src
+	Class[*] role supertypes
+end
+
+composition xxx_Class_structuralFeatures between
+	Class[0..1] role xxx_Class_structuralFeatures_src
+	StructuralFeature[*] role structuralFeatures
+end
+
+association xxx_StructuralFeature_owner between
+	StructuralFeature[*] role xxx_StructuralFeature_owner_src
+	Class[1] role owner
+end
+
+association xxx_StructuralFeature_type between
+	StructuralFeature[*] role xxx_StructuralFeature_type_src
+	Classifier[1] role type
+end
+
+association xxx_Reference_opposite between
+	Reference[*] role xxx_Reference_opposite_src
+	Reference[0..1] role opposite
+end
+
+composition xxx_Package_contents between
+	Package[0..1] role xxx_Package_contents_src
+	ModelElement[*] role contents
+end
+
+association xxx_Package_metamodel between
+	Package[*] role xxx_Package_metamodel_src
+	Metamodel[1] role metamodel
+end
+
+composition xxx_Metamodel_contents between
+	Metamodel[0..1] role xxx_Metamodel_contents_src
+	Package[*] role contents
+end
+

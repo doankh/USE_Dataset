@@ -1,0 +1,412 @@
+model dialogScript
+enum Modifier{
+default
+}
+
+enum SwitchValue{
+default
+}
+
+class Script
+attributes
+operations
+end
+
+class CharactersDefintion
+attributes
+operations
+end
+
+class CharacterDefinition
+attributes
+	name : String
+operations
+end
+
+class SwitchesDefinition
+attributes
+operations
+end
+
+class SwitchDefinition
+attributes
+	name : String
+	value : SwitchValue
+operations
+end
+
+class ConditionsDefinition
+attributes
+operations
+end
+
+class ConditionDefinition
+attributes
+	name : String
+operations
+end
+
+class Scene
+attributes
+	name : String
+operations
+end
+
+class Dialog
+attributes
+operations
+end
+
+class Recursive
+attributes
+operations
+end
+
+class Defaults
+attributes
+	comment : String
+operations
+end
+
+class FirstTime
+attributes
+	comment : String
+operations
+end
+
+class OtherTimes
+attributes
+	comment : String
+operations
+end
+
+class PartingLines
+attributes
+	comment : String
+operations
+end
+
+class Hub<Recursive
+attributes
+	isHidden : Boolean
+	name : String
+	hubComment : String
+operations
+end
+
+class AbstractChoiceDialog
+attributes
+	modifiers : Modifier
+operations
+end
+
+class ConditionalChoiceDialog<AbstractChoiceDialog
+attributes
+	comment : String
+operations
+end
+
+class OtherwiseChoice
+attributes
+	modifiers : Modifier
+	comment : String
+operations
+end
+
+class ChoiceDialog<AbstractChoiceDialog
+attributes
+	name : String
+	choiceComment : String
+operations
+end
+
+class ConditionList
+attributes
+operations
+end
+
+class Jump
+attributes
+operations
+end
+
+class InvokeHub<Jump
+attributes
+operations
+end
+
+class InvokeScene<Jump
+attributes
+operations
+end
+
+class Exit<Jump
+attributes
+	exitHub : Boolean
+	exitScene : Boolean
+operations
+end
+
+class Conditional<Recursive,AbstractChoiceDialog,Statement
+attributes
+	comment : String
+operations
+end
+
+class SwitchList
+attributes
+operations
+end
+
+class Switch
+attributes
+	value : SwitchValue
+operations
+end
+
+class ConditionalBody
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class Otherwise
+attributes
+	modifiers : Modifier
+	comment : String
+operations
+end
+
+class SwitchOff
+attributes
+	comment : String
+operations
+end
+
+class SwitchOn
+attributes
+	comment : String
+operations
+end
+
+class DialogLine<Recursive,Statement
+attributes
+	lines : String
+	comment : String
+operations
+end
+
+composition xxx_Script_charactersDefinition between
+	Script[*] role xxx_Script_charactersDefinition_src
+	CharactersDefintion[0..1] role charactersDefinition
+end
+
+composition xxx_Script_switchesDefinition between
+	Script[*] role xxx_Script_switchesDefinition_src
+	SwitchesDefinition[0..1] role switchesDefinition
+end
+
+composition xxx_Script_conditionsDefinition between
+	Script[*] role xxx_Script_conditionsDefinition_src
+	ConditionsDefinition[0..1] role conditionsDefinition
+end
+
+composition xxx_Script_scenes between
+	Script[0..1] role xxx_Script_scenes_src
+	Scene[*] role scenes
+end
+
+composition xxx_CharactersDefintion_characters between
+	CharactersDefintion[0..1] role xxx_CharactersDefintion_characters_src
+	CharacterDefinition[*] role characters
+end
+
+composition xxx_SwitchesDefinition_switches between
+	SwitchesDefinition[0..1] role xxx_SwitchesDefinition_switches_src
+	SwitchDefinition[*] role switches
+end
+
+composition xxx_ConditionsDefinition_conditions between
+	ConditionsDefinition[0..1] role xxx_ConditionsDefinition_conditions_src
+	ConditionDefinition[*] role conditions
+end
+
+composition xxx_ConditionDefinition_switchList between
+	ConditionDefinition[*] role xxx_ConditionDefinition_switchList_src
+	SwitchList[0..1] role switchList
+end
+
+composition xxx_Scene_dialog between
+	Scene[*] role xxx_Scene_dialog_src
+	Dialog[0..1] role dialog
+end
+
+composition xxx_Dialog_defaults between
+	Dialog[*] role xxx_Dialog_defaults_src
+	Defaults[0..1] role defaults
+end
+
+composition xxx_Dialog_firstTime between
+	Dialog[*] role xxx_Dialog_firstTime_src
+	FirstTime[0..1] role firstTime
+end
+
+composition xxx_Dialog_recursives between
+	Dialog[0..1] role xxx_Dialog_recursives_src
+	Recursive[*] role recursives
+end
+
+composition xxx_Dialog_partingLines between
+	Dialog[*] role xxx_Dialog_partingLines_src
+	PartingLines[0..1] role partingLines
+end
+
+composition xxx_Defaults_body between
+	Defaults[*] role xxx_Defaults_body_src
+	ConditionalBody[0..1] role body
+end
+
+composition xxx_FirstTime_body between
+	FirstTime[*] role xxx_FirstTime_body_src
+	ConditionalBody[0..1] role body
+end
+
+composition xxx_FirstTime_otherTimes between
+	FirstTime[*] role xxx_FirstTime_otherTimes_src
+	OtherTimes[0..1] role otherTimes
+end
+
+composition xxx_OtherTimes_body between
+	OtherTimes[*] role xxx_OtherTimes_body_src
+	ConditionalBody[0..1] role body
+end
+
+composition xxx_PartingLines_body between
+	PartingLines[*] role xxx_PartingLines_body_src
+	ConditionalBody[0..1] role body
+end
+
+composition xxx_Hub_choiceDialogs between
+	Hub[0..1] role xxx_Hub_choiceDialogs_src
+	AbstractChoiceDialog[*] role choiceDialogs
+end
+
+composition xxx_ConditionalChoiceDialog_conditionList between
+	ConditionalChoiceDialog[*] role xxx_ConditionalChoiceDialog_conditionList_src
+	ConditionList[0..1] role conditionList
+end
+
+composition xxx_ConditionalChoiceDialog_choiceDialogs between
+	ConditionalChoiceDialog[0..1] role xxx_ConditionalChoiceDialog_choiceDialogs_src
+	ChoiceDialog[*] role choiceDialogs
+end
+
+composition xxx_ConditionalChoiceDialog_otherwiseChoices between
+	ConditionalChoiceDialog[0..1] role xxx_ConditionalChoiceDialog_otherwiseChoices_src
+	OtherwiseChoice[*] role otherwiseChoices
+end
+
+composition xxx_OtherwiseChoice_conditionList between
+	OtherwiseChoice[*] role xxx_OtherwiseChoice_conditionList_src
+	ConditionList[0..1] role conditionList
+end
+
+composition xxx_OtherwiseChoice_choices between
+	OtherwiseChoice[0..1] role xxx_OtherwiseChoice_choices_src
+	ChoiceDialog[*] role choices
+end
+
+composition xxx_ChoiceDialog_body between
+	ChoiceDialog[*] role xxx_ChoiceDialog_body_src
+	ConditionalBody[0..1] role body
+end
+
+association xxx_ConditionList_conditions between
+	ConditionList[0..1] role xxx_ConditionList_conditions_src
+	ConditionDefinition[*] role conditions
+end
+
+association xxx_InvokeHub_hub between
+	InvokeHub[*] role xxx_InvokeHub_hub_src
+	Hub[0..1] role hub
+end
+
+association xxx_InvokeScene_scene between
+	InvokeScene[*] role xxx_InvokeScene_scene_src
+	Scene[0..1] role scene
+end
+
+composition xxx_Conditional_conditionList between
+	Conditional[*] role xxx_Conditional_conditionList_src
+	ConditionList[0..1] role conditionList
+end
+
+composition xxx_Conditional_body between
+	Conditional[*] role xxx_Conditional_body_src
+	ConditionalBody[0..1] role body
+end
+
+composition xxx_Conditional_otherwiseList between
+	Conditional[0..1] role xxx_Conditional_otherwiseList_src
+	Otherwise[*] role otherwiseList
+end
+
+composition xxx_SwitchList_switches between
+	SwitchList[0..1] role xxx_SwitchList_switches_src
+	Switch[*] role switches
+end
+
+association xxx_Switch_switch between
+	Switch[*] role xxx_Switch_switch_src
+	SwitchDefinition[0..1] role switch
+end
+
+composition xxx_ConditionalBody_statements between
+	ConditionalBody[0..1] role xxx_ConditionalBody_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ConditionalBody_switchOn between
+	ConditionalBody[*] role xxx_ConditionalBody_switchOn_src
+	SwitchOn[0..1] role switchOn
+end
+
+composition xxx_ConditionalBody_switchOff between
+	ConditionalBody[*] role xxx_ConditionalBody_switchOff_src
+	SwitchOff[0..1] role switchOff
+end
+
+composition xxx_ConditionalBody_jump between
+	ConditionalBody[*] role xxx_ConditionalBody_jump_src
+	Jump[0..1] role jump
+end
+
+composition xxx_Otherwise_conditionList between
+	Otherwise[*] role xxx_Otherwise_conditionList_src
+	ConditionList[0..1] role conditionList
+end
+
+composition xxx_Otherwise_body between
+	Otherwise[*] role xxx_Otherwise_body_src
+	ConditionalBody[0..1] role body
+end
+
+association xxx_SwitchOff_sets between
+	SwitchOff[0..1] role xxx_SwitchOff_sets_src
+	SwitchDefinition[*] role sets
+end
+
+association xxx_SwitchOn_sets between
+	SwitchOn[0..1] role xxx_SwitchOn_sets_src
+	SwitchDefinition[*] role sets
+end
+
+association xxx_DialogLine_character between
+	DialogLine[*] role xxx_DialogLine_character_src
+	CharacterDefinition[0..1] role character
+end
+

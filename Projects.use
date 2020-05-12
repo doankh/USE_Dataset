@@ -1,0 +1,120 @@
+model Projects
+enum ProjectSize{
+default
+}
+
+enum ProjectStatus{
+default
+}
+
+class Company
+attributes
+	name : String
+operations
+	hire(w : Worker)
+	start(p : Project)
+	finish(p : Project)
+	createWorker(qs : Qualification):Worker
+	createProject(n : String,ws : Worker,qs : Qualification,s : ProjectSize):Project
+	fire(w : Worker)
+end
+
+class Worker
+attributes
+	nickname : String
+	salary : Integer
+operations
+	isOverloaded():Boolean
+end
+
+class Project
+attributes
+	name : String
+	size : ProjectSize
+	status : ProjectStatus
+operations
+	missingQualifications():Qualification
+	isHelpful(w : Worker):Boolean
+end
+
+class Qualification
+attributes
+	description : String
+operations
+end
+
+class Training<Project
+attributes
+operations
+end
+
+association xxx_Company_projects between
+	Company[0..1] role xxx_Company_projects_src
+	Project[*] role projects
+end
+
+association xxx_Company_employees between
+	Company[0..1] role xxx_Company_employees_src
+	Worker[1..*] role employees
+end
+
+association xxx_Worker_employer between
+	Worker[*] role xxx_Worker_employer_src
+	Company[0..1] role employer
+end
+
+association xxx_Worker_qualifications between
+	Worker[0..1] role xxx_Worker_qualifications_src
+	Qualification[1..*] role qualifications
+end
+
+association xxx_Worker_projects between
+	Worker[0..1] role xxx_Worker_projects_src
+	Project[*] role projects
+end
+
+association xxx_Project_company between
+	Project[*] role xxx_Project_company_src
+	Company[1] role company
+end
+
+association xxx_Project_members between
+	Project[0..1] role xxx_Project_members_src
+	Worker[*] role members
+end
+
+association xxx_Project_requirements between
+	Project[0..1] role xxx_Project_requirements_src
+	Qualification[1..*] role requirements
+end
+
+association xxx_Project_predecessors between
+	Project[0..1] role xxx_Project_predecessors_src
+	Project[*] role predecessors
+end
+
+association xxx_Project_successors between
+	Project[0..1] role xxx_Project_successors_src
+	Project[*] role successors
+end
+
+association xxx_Qualification_workers between
+	Qualification[0..1] role xxx_Qualification_workers_src
+	Worker[*] role workers
+end
+
+association xxx_Qualification_projects between
+	Qualification[0..1] role xxx_Qualification_projects_src
+	Project[*] role projects
+end
+
+association xxx_Qualification_trainings between
+	Qualification[*] role xxx_Qualification_trainings_src
+	Training[0..1] role trainings
+end
+
+association xxx_Training_trained between
+	Training[0..1] role xxx_Training_trained_src
+	Qualification[1..*] role trained
+end
+

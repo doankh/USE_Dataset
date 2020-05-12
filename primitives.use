@@ -1,0 +1,151 @@
+model primitives
+enum Mode{
+default
+}
+
+class AbstractType
+attributes
+	name : String
+operations
+end
+
+class AdaEnumerate
+attributes
+	value : String
+	pos : Integer
+operations
+end
+
+class AdaEnumeration
+attributes
+operations
+end
+
+abstract class AdaTypeDef
+attributes
+operations
+end
+
+class ExtTypeDef<AdaTypeDef
+attributes
+	name : String
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	mode : Mode
+operations
+end
+
+class PrimModel
+attributes
+operations
+	findPackage(name : String):PrimPackage
+	findAbstractType(name : String):AbstractType
+	findType(name : String):PrimType
+	getAllTypes():PrimType
+end
+
+class PrimPackage
+attributes
+	name : String
+operations
+end
+
+class PrimType
+attributes
+	name : String
+	excludedOpNames : String
+operations
+	getOperations():Operation
+end
+
+class StdTypeDef<AdaTypeDef
+attributes
+	name : String
+operations
+end
+
+class TypeRef<AdaTypeDef
+attributes
+operations
+end
+
+association xxx_AbstractType_parents between
+	AbstractType[0..1] role xxx_AbstractType_parents_src
+	AbstractType[*] role parents
+end
+
+association xxx_AbstractType_children between
+	AbstractType[0..1] role xxx_AbstractType_children_src
+	AbstractType[*] role children
+end
+
+composition xxx_AbstractType_operations_ between
+	AbstractType[0..1] role xxx_AbstractType_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_AdaEnumeration_enumerates between
+	AdaEnumeration[0..1] role xxx_AdaEnumeration_enumerates_src
+	AdaEnumerate[*] role enumerates
+end
+
+composition xxx_Operation_returnType between
+	Operation[*] role xxx_Operation_returnType_src
+	AdaTypeDef[0..1] role returnType
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	AdaTypeDef[0..1] role type
+end
+
+composition xxx_PrimModel_packages between
+	PrimModel[0..1] role xxx_PrimModel_packages_src
+	PrimPackage[*] role packages
+end
+
+composition xxx_PrimModel_abstractTypes between
+	PrimModel[0..1] role xxx_PrimModel_abstractTypes_src
+	AbstractType[*] role abstractTypes
+end
+
+composition xxx_PrimPackage_types between
+	PrimPackage[0..1] role xxx_PrimPackage_types_src
+	PrimType[*] role types
+end
+
+association xxx_PrimType_package between
+	PrimType[*] role xxx_PrimType_package_src
+	PrimPackage[0..1] role package
+end
+
+association xxx_PrimType_abstractType between
+	PrimType[*] role xxx_PrimType_abstractType_src
+	AbstractType[0..1] role abstractType
+end
+
+composition xxx_PrimType_enumeration between
+	PrimType[*] role xxx_PrimType_enumeration_src
+	AdaEnumeration[0..1] role enumeration
+end
+
+association xxx_TypeRef_ref between
+	TypeRef[*] role xxx_TypeRef_ref_src
+	AbstractType[0..1] role ref
+end
+

@@ -1,0 +1,126 @@
+model UseCases
+abstract class BehavioredClassifier
+attributes
+operations
+end
+
+abstract class Namespace
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+abstract class DirectedRelationship
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+abstract class RedefinableElement
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+class Actor<BehavioredClassifier
+attributes
+operations
+end
+
+class UseCase<BehavioredClassifier
+attributes
+operations
+end
+
+class ExtensionPoint<RedefinableElement
+attributes
+operations
+end
+
+class Extend<NamedElement,DirectedRelationship
+attributes
+operations
+end
+
+class Include<DirectedRelationship,NamedElement
+attributes
+operations
+end
+
+composition xxx_Classifier_ownedUseCase between
+	Classifier[0..1] role xxx_Classifier_ownedUseCase_src
+	UseCase[*] role ownedUseCase
+end
+
+association xxx_Classifier_useCase between
+	Classifier[0..1] role xxx_Classifier_useCase_src
+	UseCase[*] role useCase
+end
+
+association xxx_UseCase_subject between
+	UseCase[0..1] role xxx_UseCase_subject_src
+	Classifier[*] role subject
+end
+
+composition xxx_UseCase_extensionPoint between
+	UseCase[0..1] role xxx_UseCase_extensionPoint_src
+	ExtensionPoint[*] role extensionPoint
+end
+
+composition xxx_UseCase_extend between
+	UseCase[0..1] role xxx_UseCase_extend_src
+	Extend[*] role extend
+end
+
+association xxx_UseCase_include between
+	UseCase[0..1] role xxx_UseCase_include_src
+	Include[*] role include
+end
+
+association xxx_ExtensionPoint_useCase between
+	ExtensionPoint[*] role xxx_ExtensionPoint_useCase_src
+	UseCase[1] role useCase
+end
+
+association xxx_Extend_extensionLocation between
+	Extend[0..1] role xxx_Extend_extensionLocation_src
+	ExtensionPoint[1..*] role extensionLocation
+end
+
+association xxx_Extend_extension between
+	Extend[*] role xxx_Extend_extension_src
+	UseCase[1] role extension
+end
+
+composition xxx_Extend_condition between
+	Extend[*] role xxx_Extend_condition_src
+	Constraint[0..1] role condition
+end
+
+association xxx_Extend_extendedCase between
+	Extend[*] role xxx_Extend_extendedCase_src
+	UseCase[1] role extendedCase
+end
+
+association xxx_Include_includingCase between
+	Include[*] role xxx_Include_includingCase_src
+	UseCase[1] role includingCase
+end
+
+association xxx_Include_addition between
+	Include[*] role xxx_Include_addition_src
+	UseCase[1] role addition
+end
+

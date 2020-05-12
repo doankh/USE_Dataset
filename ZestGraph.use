@@ -1,0 +1,81 @@
+model ZestGraph
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ZestGraph<NamedElement
+attributes
+operations
+end
+
+class GraphContainer<NamedElement
+attributes
+operations
+end
+
+abstract class GraphItem
+attributes
+	text : String
+operations
+end
+
+class GraphNode<GraphItem
+attributes
+	shape : String
+	nodeStyle : String
+	backColor : String
+	width : Real
+	height : Real
+operations
+end
+
+class GraphConnection<GraphItem
+attributes
+	color : String
+	lineWidth : Integer
+	lineStyle : Integer
+operations
+end
+
+composition xxx_ZestGraph_items between
+	ZestGraph[0..1] role xxx_ZestGraph_items_src
+	GraphItem[*] role items
+end
+
+composition xxx_ZestGraph_containers between
+	ZestGraph[0..1] role xxx_ZestGraph_containers_src
+	GraphContainer[*] role containers
+end
+
+association xxx_GraphContainer_nodes between
+	GraphContainer[0..1] role xxx_GraphContainer_nodes_src
+	GraphNode[*] role nodes
+end
+
+association xxx_GraphItem_graph between
+	GraphItem[*] role xxx_GraphItem_graph_src
+	ZestGraph[0..1] role graph
+end
+
+association xxx_GraphNode_outgoing between
+	GraphNode[0..1] role xxx_GraphNode_outgoing_src
+	GraphConnection[*] role outgoing
+end
+
+association xxx_GraphNode_ingoing between
+	GraphNode[0..1] role xxx_GraphNode_ingoing_src
+	GraphConnection[*] role ingoing
+end
+
+association xxx_GraphConnection_sourceNode between
+	GraphConnection[*] role xxx_GraphConnection_sourceNode_src
+	GraphNode[0..1] role sourceNode
+end
+
+association xxx_GraphConnection_targetNode between
+	GraphConnection[*] role xxx_GraphConnection_targetNode_src
+	GraphNode[0..1] role targetNode
+end
+

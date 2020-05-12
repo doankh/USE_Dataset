@@ -1,0 +1,186 @@
+model Paper
+enum Sex{
+default
+}
+
+class User
+attributes
+	Gender : Sex
+	UserName : String
+	UserID : Integer
+	Age : Integer
+operations
+	UpdateUserName(name : String)
+	UpdateAge(age : Integer)
+	UpdateLoc(l : Location)
+	AssignRole(r : Role)
+	UpdateUserID(id : Integer)
+	UpdateGender(gender : Sex)
+end
+
+class Session
+attributes
+	MaxRoles : Integer
+operations
+	UpdateMaxRoles(NoOfRoles : Integer)
+end
+
+class Role
+attributes
+	RoleName : String
+operations
+	UpdateRoleName(name : String)
+	AddAssignLoc(l : Location)
+end
+
+class Location
+attributes
+	LocName : String
+operations
+	UpdateLocName(name : String)
+end
+
+class Permission
+attributes
+	PermName : String
+operations
+	UpdatePermName(name : String)
+end
+
+class Object
+attributes
+	ObjID : Integer
+operations
+	UpdateObjID(id : Integer)
+end
+
+class Operation
+attributes
+operations
+end
+
+class Read<Operation
+attributes
+operations
+end
+
+class Write<Operation
+attributes
+operations
+end
+
+class Execute<Operation
+attributes
+operations
+end
+
+association xxx_User_UserSess between
+	User[0..1] role xxx_User_UserSess_src
+	Session[*] role UserSess
+end
+
+association xxx_User_AssignedRoles between
+	User[0..1] role xxx_User_AssignedRoles_src
+	Role[*] role AssignedRoles
+end
+
+association xxx_User_UserLoc between
+	User[*] role xxx_User_UserLoc_src
+	Location[1] role UserLoc
+end
+
+association xxx_Session_SessRole between
+	Session[0..1] role xxx_Session_SessRole_src
+	Role[*] role SessRole
+end
+
+association xxx_Session_SessUser between
+	Session[*] role xxx_Session_SessUser_src
+	User[1] role SessUser
+end
+
+association xxx_Role_AssignUser between
+	Role[0..1] role xxx_Role_AssignUser_src
+	User[*] role AssignUser
+end
+
+association xxx_Role_AssignLoc between
+	Role[0..1] role xxx_Role_AssignLoc_src
+	Location[*] role AssignLoc
+end
+
+association xxx_Role_RoleSess between
+	Role[0..1] role xxx_Role_RoleSess_src
+	Session[*] role RoleSess
+end
+
+association xxx_Role_RolePerm between
+	Role[0..1] role xxx_Role_RolePerm_src
+	Permission[*] role RolePerm
+end
+
+association xxx_Location_LocUser between
+	Location[0..1] role xxx_Location_LocUser_src
+	User[*] role LocUser
+end
+
+association xxx_Location_LocAssign between
+	Location[0..1] role xxx_Location_LocAssign_src
+	Role[*] role LocAssign
+end
+
+association xxx_Location_LocObj between
+	Location[0..1] role xxx_Location_LocObj_src
+	Object[*] role LocObj
+end
+
+association xxx_Location_PermRoleLoc between
+	Location[0..1] role xxx_Location_PermRoleLoc_src
+	Permission[*] role PermRoleLoc
+end
+
+association xxx_Location_PermObjLoc between
+	Location[0..1] role xxx_Location_PermObjLoc_src
+	Permission[*] role PermObjLoc
+end
+
+association xxx_Permission_PermOper between
+	Permission[*] role xxx_Permission_PermOper_src
+	Operation[1] role PermOper
+end
+
+association xxx_Permission_PermObj between
+	Permission[*] role xxx_Permission_PermObj_src
+	Object[1] role PermObj
+end
+
+association xxx_Permission_PermRole between
+	Permission[*] role xxx_Permission_PermRole_src
+	Role[1] role PermRole
+end
+
+association xxx_Permission_RoleLocPerm between
+	Permission[*] role xxx_Permission_RoleLocPerm_src
+	Location[1] role RoleLocPerm
+end
+
+association xxx_Permission_ObjLocPerm between
+	Permission[*] role xxx_Permission_ObjLocPerm_src
+	Location[1] role ObjLocPerm
+end
+
+association xxx_Object_ObjLoc between
+	Object[*] role xxx_Object_ObjLoc_src
+	Location[1] role ObjLoc
+end
+
+association xxx_Object_ObjPerm between
+	Object[0..1] role xxx_Object_ObjPerm_src
+	Permission[*] role ObjPerm
+end
+
+association xxx_Operation_OperPerm between
+	Operation[0..1] role xxx_Operation_OperPerm_src
+	Permission[*] role OperPerm
+end
+

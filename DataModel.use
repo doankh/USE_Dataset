@@ -1,0 +1,184 @@
+model datamodel
+class tag
+attributes
+	pkey : String
+	name : String
+operations
+end
+
+class item_tag
+attributes
+operations
+end
+
+class bill
+attributes
+	pkey : String
+	place : String
+	date : String
+operations
+end
+
+class bill_item
+attributes
+	pkey : String
+	gloescht : String
+	price : String
+operations
+end
+
+class item_pimple
+attributes
+	viewed : String
+	payed : String
+	amount : String
+operations
+end
+
+class person
+attributes
+	pkey : String
+	name : String
+operations
+end
+
+class Account
+attributes
+	firstname : String
+	name : String
+	pkey : String
+	password : String
+	username : String
+operations
+end
+
+class product
+attributes
+	pkey : String
+	name : String
+	barcode : String
+operations
+end
+
+class price
+attributes
+	pkey : String
+	price : String
+operations
+end
+
+class shoppinglist
+attributes
+	pkey : String
+	date : String
+operations
+end
+
+class shoppinglist_item
+attributes
+	pkey : String
+	purchased : String
+	purchase_date : String
+operations
+end
+
+class shoppinglist_buyer
+attributes
+operations
+end
+
+class dauerauftrag
+attributes
+operations
+end
+
+association xxx_item_tag_fkey_ between
+	item_tag[*] role xxx_item_tag_fkey__src
+	tag[0..1] role fkey_
+end
+
+association xxx_item_tag_tag_fkey between
+	item_tag[*] role xxx_item_tag_tag_fkey_src
+	tag[1] role tag_fkey
+end
+
+association xxx_item_tag_bill_item_fkey between
+	item_tag[*] role xxx_item_tag_bill_item_fkey_src
+	bill_item[1] role bill_item_fkey
+end
+
+association xxx_bill_creator_fkey between
+	bill[*] role xxx_bill_creator_fkey_src
+	Account[1] role creator_fkey
+end
+
+association xxx_bill_buyer_fkey between
+	bill[*] role xxx_bill_buyer_fkey_src
+	person[1] role buyer_fkey
+end
+
+association xxx_bill_item_bill_fkey between
+	bill_item[*] role xxx_bill_item_bill_fkey_src
+	bill[1] role bill_fkey
+end
+
+association xxx_bill_item_product_fkey between
+	bill_item[*] role xxx_bill_item_product_fkey_src
+	product[1] role product_fkey
+end
+
+association xxx_bill_item_preis_fkey between
+	bill_item[*] role xxx_bill_item_preis_fkey_src
+	price[0..1] role preis_fkey
+end
+
+association xxx_item_pimple_bill_item_fkey between
+	item_pimple[*] role xxx_item_pimple_bill_item_fkey_src
+	bill_item[1] role bill_item_fkey
+end
+
+association xxx_item_pimple_pimple_fkey between
+	item_pimple[*] role xxx_item_pimple_pimple_fkey_src
+	person[1] role pimple_fkey
+end
+
+association xxx_person_creator_fkey between
+	person[*] role xxx_person_creator_fkey_src
+	Account[1] role creator_fkey
+end
+
+association xxx_person_account_mapping_fkey between
+	person[*] role xxx_person_account_mapping_fkey_src
+	Account[0..1] role account_mapping_fkey
+end
+
+association xxx_shoppinglist_creator_fkey between
+	shoppinglist[*] role xxx_shoppinglist_creator_fkey_src
+	Account[1] role creator_fkey
+end
+
+association xxx_shoppinglist_item_product_fkey between
+	shoppinglist_item[*] role xxx_shoppinglist_item_product_fkey_src
+	product[1] role product_fkey
+end
+
+association xxx_shoppinglist_item_preis_fkey between
+	shoppinglist_item[*] role xxx_shoppinglist_item_preis_fkey_src
+	price[0..1] role preis_fkey
+end
+
+association xxx_shoppinglist_item_einkaufszettel_fkey between
+	shoppinglist_item[*] role xxx_shoppinglist_item_einkaufszettel_fkey_src
+	shoppinglist[1] role einkaufszettel_fkey
+end
+
+association xxx_shoppinglist_buyer_einkaufszettel_fkey between
+	shoppinglist_buyer[*] role xxx_shoppinglist_buyer_einkaufszettel_fkey_src
+	shoppinglist[1] role einkaufszettel_fkey
+end
+
+association xxx_shoppinglist_buyer_buyer_fkey between
+	shoppinglist_buyer[*] role xxx_shoppinglist_buyer_buyer_fkey_src
+	person[1] role buyer_fkey
+end
+

@@ -1,0 +1,123 @@
+model patterns
+class PatternSpecification<TransformationDefinition
+attributes
+operations
+end
+
+class Pattern<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class POutputVariable
+attributes
+operations
+end
+
+class PObject<Variable,LocatedElement
+attributes
+operations
+end
+
+abstract class PFeature<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class PAttribute<PFeature
+attributes
+operations
+end
+
+class PReference<PFeature
+attributes
+operations
+end
+
+class CollectionReference<PReference
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+composition xxx_PatternSpecification_patterns between
+	PatternSpecification[0..1] role xxx_PatternSpecification_patterns_src
+	Pattern[*] role patterns
+end
+
+composition xxx_Pattern_objects between
+	Pattern[0..1] role xxx_Pattern_objects_src
+	PObject[*] role objects
+end
+
+composition xxx_Pattern_outputVariables between
+	Pattern[0..1] role xxx_Pattern_outputVariables_src
+	POutputVariable[*] role outputVariables
+end
+
+association xxx_POutputVariable_object between
+	POutputVariable[*] role xxx_POutputVariable_object_src
+	PObject[1] role object
+end
+
+composition xxx_PObject_type between
+	PObject[*] role xxx_PObject_type_src
+	ClassUse[0..1] role type
+end
+
+composition xxx_PObject_features between
+	PObject[0..1] role xxx_PObject_features_src
+	PFeature[*] role features
+end
+
+composition xxx_PAttribute_value between
+	PAttribute[*] role xxx_PAttribute_value_src
+	Expression[0..1] role value
+end
+
+association xxx_PAttribute_variable between
+	PAttribute[*] role xxx_PAttribute_variable_src
+	Variable[0..1] role variable
+end
+
+composition xxx_PReference_value between
+	PReference[0..1] role xxx_PReference_value_src
+	PObject[*] role value
+end
+

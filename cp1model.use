@@ -1,0 +1,84 @@
+model cp1model
+enum CP1DependencyType{
+default
+}
+
+class CP1Repository
+attributes
+operations
+end
+
+class CP1Project<CP1CodeElement
+attributes
+	name : String
+operations
+end
+
+class CP1Dependency
+attributes
+	type : CP1DependencyType
+operations
+end
+
+class CP1Class<CP1CodeElement
+attributes
+	extends : String
+	implements : String
+	simpleName : String
+	packageName : String
+operations
+end
+
+class CP1Method<CP1CodeElement
+attributes
+	signature : String
+operations
+end
+
+class CP1Field<CP1CodeElement
+attributes
+	signature : String
+operations
+end
+
+abstract class CP1CodeElement
+attributes
+	id : Integer
+operations
+end
+
+composition xxx_CP1Repository_projects between
+	CP1Repository[0..1] role xxx_CP1Repository_projects_src
+	CP1Project[*] role projects
+end
+
+composition xxx_CP1Repository_dependencies between
+	CP1Repository[0..1] role xxx_CP1Repository_dependencies_src
+	CP1Dependency[*] role dependencies
+end
+
+composition xxx_CP1Project_classes between
+	CP1Project[0..1] role xxx_CP1Project_classes_src
+	CP1Class[*] role classes
+end
+
+association xxx_CP1Dependency_from_ between
+	CP1Dependency[*] role xxx_CP1Dependency_from__src
+	CP1CodeElement[1] role from_
+end
+
+association xxx_CP1Dependency_to between
+	CP1Dependency[*] role xxx_CP1Dependency_to_src
+	CP1CodeElement[1] role to
+end
+
+composition xxx_CP1Class_methods between
+	CP1Class[0..1] role xxx_CP1Class_methods_src
+	CP1Method[*] role methods
+end
+
+composition xxx_CP1Class_fields between
+	CP1Class[0..1] role xxx_CP1Class_fields_src
+	CP1Field[*] role fields
+end
+

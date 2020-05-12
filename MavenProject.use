@@ -1,0 +1,94 @@
+model MavenProject
+class Project
+attributes
+	id : String
+	groupId : String
+	artifactId : String
+	name : String
+	description : String
+operations
+end
+
+class Build
+attributes
+	defaultGoal : String
+	sourceDirectory : String
+	unitTestSourceDirectory : String
+operations
+end
+
+class Resource
+attributes
+	targetPath : String
+	filtering : String
+	directory : String
+	includes : String
+	excludes : String
+operations
+end
+
+class MailingList
+attributes
+	name : String
+	subscribe : String
+	unsubscribe : String
+	post_ : String
+	archive : String
+	otherArchives : String
+operations
+end
+
+abstract class Person
+attributes
+	name : String
+	email : String
+	url : String
+	organization : String
+	organizationUrl : String
+	roles : String
+	timezone : String
+	properties : String
+operations
+end
+
+class Developer<Person
+attributes
+	id : String
+operations
+end
+
+class Contributor<Person
+attributes
+operations
+end
+
+composition xxx_Project_mailingLists between
+	Project[0..1] role xxx_Project_mailingLists_src
+	MailingList[*] role mailingLists
+end
+
+composition xxx_Project_developersAndContributors between
+	Project[0..1] role xxx_Project_developersAndContributors_src
+	Person[*] role developersAndContributors
+end
+
+composition xxx_Project_build between
+	Project[*] role xxx_Project_build_src
+	Build[0..1] role build
+end
+
+composition xxx_Project_dependencies between
+	Project[0..1] role xxx_Project_dependencies_src
+	Project[*] role dependencies
+end
+
+association xxx_Build_uniTest between
+	Build[0..1] role xxx_Build_uniTest_src
+	Resource[*] role uniTest
+end
+
+association xxx_Build_resources between
+	Build[0..1] role xxx_Build_resources_src
+	Resource[*] role resources
+end
+

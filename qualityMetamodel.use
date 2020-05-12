@@ -1,0 +1,168 @@
+model QualityMetamodel
+class QualityModel
+attributes
+	name : String
+operations
+end
+
+class QualityAttribute
+attributes
+	name : String
+operations
+end
+
+abstract class Value
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class ValueType
+attributes
+	name : String
+operations
+end
+
+class SingleValue<Value
+attributes
+operations
+end
+
+class AggregatedValue<Value
+attributes
+operations
+end
+
+class Operation
+attributes
+	name : String
+	body : String
+operations
+end
+
+class MetricProvider
+attributes
+	name : String
+	description : String
+	id : String
+operations
+end
+
+class TextValueType<ValueType
+attributes
+	value : String
+operations
+end
+
+class RangeValueType<ValueType
+attributes
+	min : Integer
+	max : Integer
+operations
+end
+
+class AggregatedValueMetric<ValueType
+attributes
+	minimum : String
+	maximum : String
+	average : String
+	median : String
+	standardDeviation : String
+operations
+end
+
+class EnumerationMetric<ValueType
+attributes
+operations
+end
+
+class EnumerationItem
+attributes
+	name : String
+operations
+end
+
+class RealValueType<ValueType
+attributes
+	value : String
+operations
+end
+
+class BooleanValueType<ValueType
+attributes
+	value : String
+operations
+end
+
+class IntegerValueType<ValueType
+attributes
+	value : Integer
+operations
+end
+
+composition xxx_QualityModel_metricProviders between
+	QualityModel[0..1] role xxx_QualityModel_metricProviders_src
+	MetricProvider[*] role metricProviders
+end
+
+composition xxx_QualityModel_qualityTypes between
+	QualityModel[0..1] role xxx_QualityModel_qualityTypes_src
+	ValueType[*] role qualityTypes
+end
+
+composition xxx_QualityModel_qualityAttributes between
+	QualityModel[0..1] role xxx_QualityModel_qualityAttributes_src
+	QualityAttribute[*] role qualityAttributes
+end
+
+composition xxx_QualityModel_qualityValues between
+	QualityModel[0..1] role xxx_QualityModel_qualityValues_src
+	Value[*] role qualityValues
+end
+
+association xxx_QualityAttribute_value between
+	QualityAttribute[*] role xxx_QualityAttribute_value_src
+	Value[1] role value
+end
+
+association xxx_QualityAttribute_qualityAttributes between
+	QualityAttribute[0..1] role xxx_QualityAttribute_qualityAttributes_src
+	QualityAttribute[*] role qualityAttributes
+end
+
+association xxx_Value_type between
+	Value[*] role xxx_Value_type_src
+	ValueType[1] role type
+end
+
+association xxx_ValueType_val between
+	ValueType[*] role xxx_ValueType_val_src
+	Value[1] role val
+end
+
+association xxx_SingleValue_measuredBy between
+	SingleValue[*] role xxx_SingleValue_measuredBy_src
+	MetricProvider[1] role measuredBy
+end
+
+composition xxx_AggregatedValue_calculatedBy between
+	AggregatedValue[*] role xxx_AggregatedValue_calculatedBy_src
+	Operation[1] role calculatedBy
+end
+
+association xxx_Operation_aggregatedValues between
+	Operation[0..1] role xxx_Operation_aggregatedValues_src
+	Value[1..*] role aggregatedValues
+end
+
+composition xxx_EnumerationMetric_set between
+	EnumerationMetric[0..1] role xxx_EnumerationMetric_set_src
+	EnumerationItem[1..*] role set
+end
+
+association xxx_EnumerationMetric_value between
+	EnumerationMetric[*] role xxx_EnumerationMetric_value_src
+	EnumerationItem[0..1] role value
+end
+

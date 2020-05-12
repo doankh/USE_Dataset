@@ -1,0 +1,82 @@
+model idmmodel
+enum EntityStatus{
+default
+}
+
+enum IDMTypes{
+default
+}
+
+class User<BasicEntity,Entity
+attributes
+	login : String
+operations
+end
+
+abstract class Entity
+attributes
+operations
+	getId():String
+	getName():String
+	getStatus():EntityStatus
+end
+
+class Organization<BasicEntity,Entity
+attributes
+operations
+	getLevel():Integer
+	getHierarchyDescription():String
+end
+
+abstract class BasicEntity
+attributes
+	id : Integer
+	name : String
+	status : EntityStatus
+operations
+end
+
+class UserOrganization
+attributes
+	startDate : String
+	endDate : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	type : IDMTypes
+operations
+end
+
+association xxx_User_work between
+	User[*] role xxx_User_work_src
+	UserOrganization[0..1] role work
+end
+
+composition xxx_User_hasAttributes between
+	User[0..1] role xxx_User_hasAttributes_src
+	Attribute[*] role hasAttributes
+end
+
+composition xxx_Organization_parentOrganization between
+	Organization[0..1] role xxx_Organization_parentOrganization_src
+	Organization[1..*] role parentOrganization
+end
+
+association xxx_Organization_has between
+	Organization[*] role xxx_Organization_has_src
+	UserOrganization[0..1] role has
+end
+
+composition xxx_Organization_hasAttributes between
+	Organization[0..1] role xxx_Organization_hasAttributes_src
+	Attribute[*] role hasAttributes
+end
+
+composition xxx_UserOrganization_hasAttributes between
+	UserOrganization[0..1] role xxx_UserOrganization_hasAttributes_src
+	Attribute[*] role hasAttributes
+end
+

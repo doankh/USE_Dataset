@@ -1,0 +1,49 @@
+model pub_src
+class Model
+attributes
+operations
+end
+
+class Reference
+attributes
+	title : String
+	year : Integer
+	publishedIn : String
+operations
+end
+
+class Author
+attributes
+	name : String
+operations
+end
+
+class Model1
+attributes
+operations
+end
+
+class Reference1
+attributes
+	title : String
+	year : Integer
+	publishedIn : String
+	name : String
+operations
+end
+
+composition xxx_Model_references between
+	Model[0..1] role xxx_Model_references_src
+	Reference[*] role references
+end
+
+composition xxx_Reference_authors between
+	Reference[0..1] role xxx_Reference_authors_src
+	Author[*] role authors
+end
+
+composition xxx_Model1_references between
+	Model1[0..1] role xxx_Model1_references_src
+	Reference1[*] role references
+end
+

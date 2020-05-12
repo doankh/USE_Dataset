@@ -1,0 +1,80 @@
+model petrinet
+class PetriNet<RefPetriNets
+attributes
+	name : String
+operations
+end
+
+abstract class RefPetriNets
+attributes
+operations
+end
+
+abstract class Node<RefNodes
+attributes
+	name : String
+operations
+end
+
+class Arc<RefArcs
+attributes
+	name : String
+operations
+end
+
+abstract class RefArcs
+attributes
+operations
+end
+
+abstract class RefNodes
+attributes
+operations
+end
+
+class Transition<Node
+attributes
+operations
+end
+
+class Place<Node
+attributes
+operations
+end
+
+class Token<RefTokens
+attributes
+	name : String
+operations
+end
+
+abstract class RefTokens
+attributes
+operations
+end
+
+composition xxx_PetriNet_nodes between
+	PetriNet[0..1] role xxx_PetriNet_nodes_src
+	RefNodes[*] role nodes
+end
+
+composition xxx_PetriNet_arcs between
+	PetriNet[0..1] role xxx_PetriNet_arcs_src
+	RefArcs[*] role arcs
+end
+
+association xxx_Arc_target between
+	Arc[*] role xxx_Arc_target_src
+	RefNodes[1] role target
+end
+
+association xxx_Arc_source between
+	Arc[*] role xxx_Arc_source_src
+	RefNodes[1] role source
+end
+
+composition xxx_Place_marking between
+	Place[0..1] role xxx_Place_marking_src
+	RefTokens[*] role marking
+end
+

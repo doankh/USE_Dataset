@@ -1,0 +1,487 @@
+model foundationmodel
+enum MemberType{
+default
+}
+
+enum ContributionType{
+default
+}
+
+class Person
+attributes
+	id : Integer
+	committerId : String
+	firstName : String
+	lastName : String
+	email : String
+	bugzillaEmail : String
+	gitEmail : String
+operations
+end
+
+abstract class Review
+attributes
+	description : String
+	startDate : String
+	endDate : String
+operations
+end
+
+class ReleaseReview<Review
+attributes
+operations
+end
+
+class GraduationReview<ReleaseReview
+attributes
+operations
+end
+
+class RestructuringReview<Review
+attributes
+operations
+end
+
+class Release
+attributes
+	name : String
+	updateSite : String
+	date : String
+operations
+end
+
+class CreationReview<Review
+attributes
+	whyEclipse : String
+	initialContribution : String
+	legalIssues : String
+operations
+end
+
+class TopLevelProject<Project
+attributes
+operations
+	getPmcMembers()
+	getPmcLead()
+	getArchitectureCouncilRep()
+	getPlanningCouncilRep()
+end
+
+class SubProject<Project
+attributes
+operations
+end
+
+abstract class Project
+attributes
+	id : Integer
+	projectId : String
+	name : String
+	longName : String
+	description : String
+	paragraph : String
+	downloadDirectory : String
+	sourceRepository : String
+	namespace : String
+	websiteUrl : String
+	wikiUrl : String
+	scope : String
+	retentionPolicy : String
+operations
+	getCommitters()
+	getLeaders()
+	getMentors()
+end
+
+class Organization
+attributes
+	name : String
+	id : Integer
+	description : String
+	logo : String
+	memberType : MemberType
+	active : Boolean
+operations
+	getPlanningCouncilRep()
+	getArchitectureCouncilRep()
+	getBoardMember()
+end
+
+class OrganizationRelationship
+attributes
+	startDate : String
+	endDate : String
+operations
+end
+
+class OrganizationRelation
+attributes
+	title : String
+	description : String
+operations
+end
+
+class ProjectRelationship
+attributes
+	startDate : String
+	endDate : String
+operations
+end
+
+class ProjectRelation
+attributes
+	title : String
+	description : String
+operations
+end
+
+class Approval
+attributes
+	date : String
+	comment : String
+operations
+end
+
+class NewAndNoteworthy
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Committer
+attributes
+	name : String
+	email : String
+	isProjectLead : Boolean
+	affiliation : String
+	rationale : String
+operations
+end
+
+class ProjectPlan
+attributes
+operations
+end
+
+class IPLog
+attributes
+operations
+end
+
+class SimultaneousRelease
+attributes
+	name : String
+	date : String
+operations
+end
+
+class SimultaneousReleaseProject
+attributes
+	joinDate : String
+operations
+end
+
+class BugzillaProjectLink
+attributes
+	product : String
+	component : String
+operations
+end
+
+class BugzillaPlanLink
+attributes
+	product : String
+	component : String
+	version : String
+operations
+end
+
+class Theme
+attributes
+	name : String
+	description : String
+operations
+end
+
+class TerminationReview<Review
+attributes
+operations
+end
+
+class CommitterAgreement
+attributes
+operations
+end
+
+class MemberCommitterAgreement<CommitterAgreement
+attributes
+operations
+end
+
+class IndividualCommitterAgreeemnt<CommitterAgreement
+attributes
+operations
+end
+
+class InterestedParty
+attributes
+	name : String
+	affiliation : String
+operations
+end
+
+class Charter
+attributes
+operations
+end
+
+class LogoAgreement
+attributes
+operations
+end
+
+class ContributionQuestionnaire
+attributes
+	title : String
+	version : String
+	filePattern : String
+	active : Boolean
+	type : ContributionType
+	date : String
+	id : Integer
+operations
+end
+
+class SourceAttachment
+attributes
+	active : Boolean
+	attachment : String
+operations
+end
+
+class Comment
+attributes
+	content : String
+	date : String
+operations
+end
+
+class Contribution
+attributes
+	amount : Integer
+operations
+end
+
+class License
+attributes
+	name : String
+	url : String
+operations
+end
+
+association xxx_Person_committerAgreement between
+	Person[*] role xxx_Person_committerAgreement_src
+	IndividualCommitterAgreeemnt[0..1] role committerAgreement
+end
+
+composition xxx_Review_approval between
+	Review[*] role xxx_Review_approval_src
+	Approval[0..1] role approval
+end
+
+association xxx_Review_comments between
+	Review[0..1] role xxx_Review_comments_src
+	Comment[*] role comments
+end
+
+association xxx_Release_Review between
+	Release[*] role xxx_Release_Review_src
+	ReleaseReview[0..1] role Review
+end
+
+association xxx_Release_newAndNoteworthy between
+	Release[0..1] role xxx_Release_newAndNoteworthy_src
+	NewAndNoteworthy[*] role newAndNoteworthy
+end
+
+association xxx_Release_EReference0 between
+	Release[*] role xxx_Release_EReference0_src
+	ProjectPlan[0..1] role EReference0
+end
+
+association xxx_Release_iplog between
+	Release[*] role xxx_Release_iplog_src
+	IPLog[0..1] role iplog
+end
+
+association xxx_CreationReview_committers between
+	CreationReview[*] role xxx_CreationReview_committers_src
+	Committer[0..1] role committers
+end
+
+association xxx_CreationReview_interestedParties between
+	CreationReview[0..1] role xxx_CreationReview_interestedParties_src
+	InterestedParty[*] role interestedParties
+end
+
+composition xxx_TopLevelProject_charter between
+	TopLevelProject[*] role xxx_TopLevelProject_charter_src
+	Charter[0..1] role charter
+end
+
+association xxx_SubProject_parent between
+	SubProject[*] role xxx_SubProject_parent_src
+	Project[0..1] role parent
+end
+
+association xxx_Project_reviews between
+	Project[0..1] role xxx_Project_reviews_src
+	Review[*] role reviews
+end
+
+composition xxx_Project_release between
+	Project[0..1] role xxx_Project_release_src
+	Release[*] role release
+end
+
+composition xxx_Project_approval between
+	Project[*] role xxx_Project_approval_src
+	Approval[0..1] role approval
+end
+
+association xxx_Project_bugzilla between
+	Project[0..1] role xxx_Project_bugzilla_src
+	BugzillaProjectLink[*] role bugzilla
+end
+
+composition xxx_Project_children between
+	Project[0..1] role xxx_Project_children_src
+	SubProject[*] role children
+end
+
+composition xxx_Project_relationship between
+	Project[0..1] role xxx_Project_relationship_src
+	ProjectRelationship[*] role relationship
+end
+
+association xxx_Organization_committerAgreement between
+	Organization[*] role xxx_Organization_committerAgreement_src
+	MemberCommitterAgreement[0..1] role committerAgreement
+end
+
+association xxx_Organization_logoAgreement between
+	Organization[*] role xxx_Organization_logoAgreement_src
+	LogoAgreement[0..1] role logoAgreement
+end
+
+association xxx_OrganizationRelationship_organization between
+	OrganizationRelationship[*] role xxx_OrganizationRelationship_organization_src
+	Organization[1] role organization
+end
+
+association xxx_OrganizationRelationship_employee between
+	OrganizationRelationship[*] role xxx_OrganizationRelationship_employee_src
+	Person[1] role employee
+end
+
+association xxx_OrganizationRelationship_relation between
+	OrganizationRelationship[*] role xxx_OrganizationRelationship_relation_src
+	OrganizationRelation[0..1] role relation
+end
+
+association xxx_ProjectRelationship_person between
+	ProjectRelationship[*] role xxx_ProjectRelationship_person_src
+	Person[1] role person
+end
+
+association xxx_ProjectRelationship_relation between
+	ProjectRelationship[*] role xxx_ProjectRelationship_relation_src
+	ProjectRelation[0..1] role relation
+end
+
+association xxx_Approval_person between
+	Approval[*] role xxx_Approval_person_src
+	Person[0..1] role person
+end
+
+association xxx_ProjectPlan_theme between
+	ProjectPlan[0..1] role xxx_ProjectPlan_theme_src
+	Theme[*] role theme
+end
+
+association xxx_SimultaneousRelease_participants between
+	SimultaneousRelease[0..1] role xxx_SimultaneousRelease_participants_src
+	SimultaneousReleaseProject[*] role participants
+end
+
+association xxx_SimultaneousReleaseProject_project between
+	SimultaneousReleaseProject[*] role xxx_SimultaneousReleaseProject_project_src
+	Project[1] role project
+end
+
+association xxx_SimultaneousReleaseProject_release between
+	SimultaneousReleaseProject[*] role xxx_SimultaneousReleaseProject_release_src
+	Release[1] role release
+end
+
+association xxx_Theme_bugzilla between
+	Theme[0..1] role xxx_Theme_bugzilla_src
+	BugzillaPlanLink[*] role bugzilla
+end
+
+composition xxx_ContributionQuestionnaire_attachments between
+	ContributionQuestionnaire[0..1] role xxx_ContributionQuestionnaire_attachments_src
+	SourceAttachment[*] role attachments
+end
+
+composition xxx_ContributionQuestionnaire_discussion between
+	ContributionQuestionnaire[0..1] role xxx_ContributionQuestionnaire_discussion_src
+	Comment[*] role discussion
+end
+
+composition xxx_ContributionQuestionnaire_pmcApproval between
+	ContributionQuestionnaire[*] role xxx_ContributionQuestionnaire_pmcApproval_src
+	Approval[0..1] role pmcApproval
+end
+
+composition xxx_ContributionQuestionnaire_ipTeamApproval between
+	ContributionQuestionnaire[*] role xxx_ContributionQuestionnaire_ipTeamApproval_src
+	Approval[0..1] role ipTeamApproval
+end
+
+composition xxx_ContributionQuestionnaire_emoApproval between
+	ContributionQuestionnaire[*] role xxx_ContributionQuestionnaire_emoApproval_src
+	Approval[0..1] role emoApproval
+end
+
+association xxx_ContributionQuestionnaire_requester between
+	ContributionQuestionnaire[*] role xxx_ContributionQuestionnaire_requester_src
+	Person[1] role requester
+end
+
+association xxx_ContributionQuestionnaire_license between
+	ContributionQuestionnaire[*] role xxx_ContributionQuestionnaire_license_src
+	License[1] role license
+end
+
+composition xxx_ContributionQuestionnaire_contributors between
+	ContributionQuestionnaire[*] role xxx_ContributionQuestionnaire_contributors_src
+	Contribution[0..1] role contributors
+end
+
+composition xxx_Comment_reply between
+	Comment[0..1] role xxx_Comment_reply_src
+	Comment[*] role reply
+end
+
+association xxx_Comment_author between
+	Comment[*] role xxx_Comment_author_src
+	Person[1] role author
+end
+
+association xxx_Contribution_contributor between
+	Contribution[*] role xxx_Contribution_contributor_src
+	Person[1] role contributor
+end
+

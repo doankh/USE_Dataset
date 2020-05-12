@@ -1,0 +1,350 @@
+model proyservsocial
+enum CarreraAlumno{
+default
+}
+
+enum TipoUsuario{
+default
+}
+
+enum CarreraProyecto{
+default
+}
+
+enum EstadoProyecto{
+default
+}
+
+class Cliente
+attributes
+operations
+end
+
+class Cliente__
+attributes
+operations
+end
+
+class Servidor
+attributes
+operations
+end
+
+class _PantallaAutorizacionesPendientes<_PantallaGeneral
+attributes
+	id : String
+operations
+	getPendiente()
+	autorizar()
+end
+
+class _PantallaGeneral
+attributes
+operations
+	despliegaMenu()
+	despliegaContenido()
+	finalizarSesion()
+end
+
+class _PantallaBienvenida<_PantallaGeneral
+attributes
+operations
+	autenticar()
+	registrar()
+end
+
+class _PantallaDetallesDelProyecto<_PantallaGeneral
+attributes
+	proyecto : String
+operations
+	desplegarProyecto()
+end
+
+class _PantallaMisProyectos<_PantallaGeneral
+attributes
+	usuario : String
+operations
+	desplegarContenido()
+end
+
+class _PantallaListaDeProyectos<_PantallaGeneral
+attributes
+	id : String
+operations
+	desplegarContenido()
+end
+
+class _FormaDeEntradaInicioDeSesion
+attributes
+	_ : String
+operations
+	crearSesion()
+	solicitarRegistro()
+end
+
+class _FormaDeEntradaRegistroDeProyecto<_PantallaGeneral
+attributes
+operations
+	mandarRegistro()
+end
+
+class _FormaDeEntradaRegistro<_PantallaGeneral
+attributes
+operations
+	mandarRegistro()
+end
+
+class _PantallaNotificacion
+attributes
+operations
+	mostrarMensaje()
+end
+
+class ConectaDb
+attributes
+operations
+	verProyectosDb()
+	proponerProyectoDBb()
+	autorizarProyectoDb()
+	rechazarProyectoDb()
+	verPostuladosDb()
+	aceptarAlumnoProyectoDb()
+	registrarDb()
+	aceptarResponsableDb()
+	rechazaAlumnoProyectoDb()
+	rechazaResponsableDb()
+	postularAProyectoDb()
+	validaUsuarioDb()
+end
+
+class Sesion
+attributes
+operations
+	autenticar()
+	cerrarSesion()
+end
+
+class Alumno<UsuarioRegistrado
+attributes
+	carrera : CarreraAlumno
+	porcentaje : Integer
+	estado : Boolean
+operations
+	postularseAProyecto()
+end
+
+class Admin<UsuarioRegistrado
+attributes
+operations
+	aceptaResponsable()
+	actualizaEstadoAlumno()
+	autorizarAlumnoProyecto()
+end
+
+class Responsable<UsuarioRegistrado
+attributes
+	descripcion : String
+	sitioweb : String
+	estado : Boolean
+operations
+	aceptaAlumnoProyecto()
+	registrarse()
+	seleccionarAlumnos()
+end
+
+class UsuarioRegistrado
+attributes
+	id : Integer
+	username : String
+	contrasea : String
+	tipo : TipoUsuario
+	nombre : String
+	telefono : String
+	email : String
+operations
+end
+
+class Proyecto
+attributes
+	id : Integer
+	nombre : String
+	responsable : Integer
+	areaConocimiento : String
+	email : String
+	telefono : Integer
+	direccion : String
+	carrera : CarreraProyecto
+	maxParticipante : Integer
+	descripcion : String
+	estado : EstadoProyecto
+operations
+	verProyectos()
+	propProyectos()
+	autorizarProyecto()
+	rechazarProyecto()
+	verListaPostulados()
+end
+
+class UsuariosBd
+attributes
+	datosUsuario : String
+	categoria : String
+operations
+	agregar()
+	consultar()
+	validar()
+	autorizar()
+	postular()
+end
+
+class ProyectosBd
+attributes
+	informacion : String
+operations
+	consultarProyecto()
+	agregarProyecto()
+	eliminarProyecto()
+	autorizarProyecto()
+	agregarAlumnoProyecto()
+end
+
+class InicioDeSesion
+attributes
+operations
+end
+
+class AceptarAlumno
+attributes
+operations
+end
+
+class ProponerProyectoError
+attributes
+operations
+end
+
+class InicioDeSesionError
+attributes
+operations
+end
+
+class AceptarAlumnoError
+attributes
+operations
+end
+
+class VerPerfilAlumnoResponsable
+attributes
+operations
+end
+
+class VerPerfilAlumnoResponsableError
+attributes
+operations
+end
+
+class PostularseAProyecto
+attributes
+operations
+end
+
+class PostularseProyectoError
+attributes
+operations
+end
+
+class VerPerfilAlumnoAdmin
+attributes
+operations
+end
+
+class VerPerfilAlumnoAdminError
+attributes
+operations
+end
+
+class Registrarse
+attributes
+operations
+end
+
+class RegistrarseError
+attributes
+operations
+end
+
+class AutorizarAlumno
+attributes
+operations
+end
+
+class AutorizarAlumnoError
+attributes
+operations
+end
+
+class VerPerfilResponsable
+attributes
+operations
+end
+
+class VerPerfilResponsableError
+attributes
+operations
+end
+
+class ProponerProyecto
+attributes
+operations
+end
+
+class VerProyectos
+attributes
+operations
+end
+
+class VerProyectosError
+attributes
+operations
+end
+
+class ConsultarProyecto
+attributes
+operations
+end
+
+class ConsultarProyectoError
+attributes
+operations
+end
+
+class AutorizarProyecto
+attributes
+operations
+end
+
+class AutorizarProyectoError
+attributes
+operations
+end
+
+class FinalizarSesion
+attributes
+operations
+end
+
+class FinalizarSesionError
+attributes
+operations
+end
+
+association xxx_Sesion_usuario between
+	Sesion[*] role xxx_Sesion_usuario_src
+	UsuarioRegistrado[1] role usuario
+end
+
+association xxx_UsuarioRegistrado_sesion between
+	UsuarioRegistrado[*] role xxx_UsuarioRegistrado_sesion_src
+	Sesion[1] role sesion
+end
+

@@ -1,0 +1,151 @@
+model gherkin
+class Feature
+attributes
+	tags : String
+	name : String
+operations
+end
+
+class NarrativeElement
+attributes
+	name : String
+operations
+end
+
+class FreeText<NarrativeElement
+attributes
+operations
+end
+
+class AsA<NarrativeElement
+attributes
+operations
+end
+
+class InOrderTo<NarrativeElement
+attributes
+operations
+end
+
+class IWantTo<NarrativeElement
+attributes
+operations
+end
+
+class AbstractScenario
+attributes
+	tags : String
+	name : String
+operations
+end
+
+class Scenario<AbstractScenario
+attributes
+operations
+end
+
+class ScenarioWithOutline<AbstractScenario
+attributes
+operations
+end
+
+class Example
+attributes
+operations
+end
+
+class ExampleRow
+attributes
+operations
+end
+
+class ExampleCell
+attributes
+	value : String
+operations
+end
+
+class Background<AbstractScenario
+attributes
+operations
+end
+
+class Step
+attributes
+	desc : String
+operations
+end
+
+class WhenStep<Step
+attributes
+	tags : String
+operations
+end
+
+class ThenStep<Step
+attributes
+	tags : String
+operations
+end
+
+class GivenStep<Step
+attributes
+	tags : String
+operations
+end
+
+class AndStep<Step
+attributes
+operations
+end
+
+composition xxx_Feature_elements between
+	Feature[0..1] role xxx_Feature_elements_src
+	NarrativeElement[*] role elements
+end
+
+composition xxx_Feature_scenarios between
+	Feature[0..1] role xxx_Feature_scenarios_src
+	AbstractScenario[*] role scenarios
+end
+
+composition xxx_AbstractScenario_steps between
+	AbstractScenario[0..1] role xxx_AbstractScenario_steps_src
+	Step[*] role steps
+end
+
+composition xxx_Scenario_elements between
+	Scenario[0..1] role xxx_Scenario_elements_src
+	NarrativeElement[*] role elements
+end
+
+composition xxx_ScenarioWithOutline_elements between
+	ScenarioWithOutline[0..1] role xxx_ScenarioWithOutline_elements_src
+	NarrativeElement[*] role elements
+end
+
+composition xxx_ScenarioWithOutline_example between
+	ScenarioWithOutline[*] role xxx_ScenarioWithOutline_example_src
+	Example[0..1] role example
+end
+
+composition xxx_Example_heading between
+	Example[*] role xxx_Example_heading_src
+	ExampleRow[0..1] role heading
+end
+
+composition xxx_Example_rows between
+	Example[0..1] role xxx_Example_rows_src
+	ExampleRow[*] role rows
+end
+
+composition xxx_ExampleRow_cells between
+	ExampleRow[0..1] role xxx_ExampleRow_cells_src
+	ExampleCell[*] role cells
+end
+
+composition xxx_Step_rows between
+	Step[0..1] role xxx_Step_rows_src
+	ExampleRow[*] role rows
+end
+

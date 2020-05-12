@@ -1,0 +1,83 @@
+model releng
+enum BuildType{
+default
+}
+
+class Server
+attributes
+	name : String
+operations
+end
+
+class BuildJob
+attributes
+	name : String
+	sourceBranch : String
+	buckminsterComponent : String
+	types : BuildType
+operations
+end
+
+class Promotion
+attributes
+	buildType : BuildType
+operations
+end
+
+class Criterion
+attributes
+	description : String
+operations
+end
+
+class Repository
+attributes
+	location : String
+operations
+end
+
+class CompositeRepository<Repository
+attributes
+operations
+end
+
+composition xxx_Server_buildJobs between
+	Server[0..1] role xxx_Server_buildJobs_src
+	BuildJob[*] role buildJobs
+end
+
+composition xxx_Server_repositories between
+	Server[0..1] role xxx_Server_repositories_src
+	Repository[*] role repositories
+end
+
+composition xxx_BuildJob_result between
+	BuildJob[*] role xxx_BuildJob_result_src
+	Repository[1] role result
+end
+
+composition xxx_BuildJob_promotions between
+	BuildJob[0..1] role xxx_BuildJob_promotions_src
+	Promotion[*] role promotions
+end
+
+association xxx_Promotion_build between
+	Promotion[*] role xxx_Promotion_build_src
+	BuildJob[0..1] role build
+end
+
+association xxx_Promotion_target between
+	Promotion[*] role xxx_Promotion_target_src
+	Repository[1] role target
+end
+
+composition xxx_Promotion_criteria between
+	Promotion[0..1] role xxx_Promotion_criteria_src
+	Criterion[*] role criteria
+end
+
+association xxx_CompositeRepository_elements between
+	CompositeRepository[0..1] role xxx_CompositeRepository_elements_src
+	Repository[1..*] role elements
+end
+

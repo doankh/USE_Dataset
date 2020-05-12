@@ -1,0 +1,1762 @@
+model PrimitiveTypes
+enum SettingMemberAccess{
+	ReadWrite,
+	ReadOnly,
+	WriteOnly
+}
+
+enum SettingMemberSecure{
+	Always,
+	PerInstance,
+	Never
+}
+
+enum RolesList{
+	Host,
+	Guest,
+	Parent,
+	Member,
+	Source,
+	Dependent,
+	Proxy,
+	Delegate,
+	Client,
+	Server
+}
+
+enum ProcessorArchitectures{
+	x86,
+	ia64,
+	amd64,
+	wow64,
+	msil,
+	shx,
+	arm,
+	data
+}
+
+enum Platform{
+	x86,
+	ia64,
+	amd64,
+	wow64,
+	msil,
+	shx,
+	arm,
+	data,
+	neutral
+}
+
+enum ConstraintEvaluation{
+	Design,
+	Never
+}
+
+class SystemDefinitionModel
+attributes
+operations
+end
+
+class Information
+attributes
+	friendlyname : String
+	companyname : String
+	copyright : String
+	trademark : String
+	comments : String
+operations
+end
+
+class Import
+attributes
+operations
+end
+
+class ImportNamespaceIdentity<NamespaceIdentity
+attributes
+operations
+end
+
+class SDMCommunicationDefinition<CommunicationDefinition
+attributes
+operations
+end
+
+class SDMContainmentDefinition<ContainmentDefinition
+attributes
+operations
+end
+
+class SDMDelegationDefinition<DelegationDefinition
+attributes
+operations
+end
+
+class SDMReferenceDefinition<ReferenceDefinition
+attributes
+operations
+end
+
+class SDMEndpointDefinition<EndpointDefinition
+attributes
+operations
+end
+
+class SDMResourceDefinition<ResourceDefinition
+attributes
+operations
+end
+
+class SDMSystemDefinition<SystemDefinition
+attributes
+operations
+end
+
+class SDMConstraintDefinition<ConstraintDefinition
+attributes
+operations
+end
+
+class SDMManager<ManagerDeclaration
+attributes
+operations
+end
+
+class ManagerDeclaration
+attributes
+	assemblyName : String
+	platform : Platform
+operations
+end
+
+class ObjectDefinition<Definition
+attributes
+	layer : String
+	abstract_ : Boolean
+operations
+end
+
+class OBFlow<FlowMember
+attributes
+operations
+end
+
+class OBRelationshipConstraint<RelationshipConstraint
+attributes
+operations
+end
+
+class OBConstraint<ConstraintMember
+attributes
+operations
+end
+
+class OBConstraintGroup<ConstraintGroup
+attributes
+operations
+end
+
+class OBEndpointDefinition<EndpointDefinition
+attributes
+operations
+end
+
+class OBSystemDefinition<SystemDefinition
+attributes
+operations
+end
+
+class OBResourceDefinition<ResourceDefinition
+attributes
+operations
+end
+
+class OBCommunicationDefinition<CommunicationDefinition
+attributes
+operations
+end
+
+class OBContainmentDefinition<ContainmentDefinition
+attributes
+operations
+end
+
+class OBDelegationDefinition<DelegationDefinition
+attributes
+operations
+end
+
+class OBReferenceDefinition<ReferenceDefinition
+attributes
+operations
+end
+
+class OBHostingDefinition<HostingDefinition
+attributes
+operations
+end
+
+class OBEndpoint<EndpointMember
+attributes
+operations
+end
+
+class OBSubsystem<SystemMember
+attributes
+operations
+end
+
+class OBResource<ResourceMember
+attributes
+operations
+end
+
+class OBHosting<HostingMember
+attributes
+operations
+end
+
+class OBContainment<ContainmentMember
+attributes
+operations
+end
+
+class OBConnection<CommunicationMember
+attributes
+operations
+end
+
+class OBDelegation<DelegationMember
+attributes
+operations
+end
+
+class OBReference<ReferenceMember
+attributes
+operations
+end
+
+class SystemDefinition<ObjectDefinition
+attributes
+	simulationRoot : Boolean
+operations
+end
+
+class EndpointDefinition<ObjectDefinition
+attributes
+operations
+end
+
+class ResourceDefinition<ObjectDefinition
+attributes
+operations
+end
+
+class RelationshipDefinition<Definition
+attributes
+	abstract_ : Boolean
+operations
+end
+
+class RDObjectConstraint<ObjectConstraint
+attributes
+operations
+end
+
+class RDConstraint<ConstraintMember
+attributes
+operations
+end
+
+class RDConstraintGroup<ConstraintGroup
+attributes
+operations
+end
+
+class RDFlow<FlowMember
+attributes
+operations
+end
+
+class RDConnection<CommunicationMember
+attributes
+operations
+end
+
+class RDHosting<HostingMember
+attributes
+operations
+end
+
+class RDDelegation<DelegationMember
+attributes
+operations
+end
+
+class RDReference<ReferenceMember
+attributes
+operations
+end
+
+class RDContainment<ContainmentMember
+attributes
+operations
+end
+
+class CommunicationDefinition<RelationshipDefinition
+attributes
+operations
+end
+
+class HostingDefinition<RelationshipDefinition
+attributes
+	simulationRoot : Boolean
+operations
+end
+
+class ContainmentDefinition<RelationshipDefinition
+attributes
+operations
+end
+
+class DelegationDefinition<RelationshipDefinition
+attributes
+operations
+end
+
+class ReferenceDefinition<RelationshipDefinition
+attributes
+operations
+end
+
+class Member
+attributes
+operations
+end
+
+class MembSettingValue<SettingValue
+attributes
+operations
+end
+
+class MembSettingValueList<SettingValueList
+attributes
+operations
+end
+
+class ObjectMember<Member
+attributes
+	reference : Boolean
+	proxy : Boolean
+operations
+end
+
+class RelationshipMember<Member
+attributes
+operations
+end
+
+class SystemMember<ObjectMember
+attributes
+operations
+end
+
+class EndpointMember<ObjectMember
+attributes
+operations
+end
+
+class ResourceMember<ObjectMember
+attributes
+operations
+end
+
+class HostingMember<RelationshipMember
+attributes
+operations
+end
+
+class CommunicationMember<RelationshipMember
+attributes
+operations
+end
+
+class ContainmentMember<RelationshipMember
+attributes
+operations
+end
+
+class DelegationMember<RelationshipMember
+attributes
+operations
+end
+
+class ReferenceMember<RelationshipMember
+attributes
+operations
+end
+
+class DesignData
+attributes
+operations
+end
+
+class NameSpace<Element
+attributes
+operations
+end
+
+class ObjectConstraint<StructuralConstraint
+attributes
+	primaryRole : RolesList
+	secondaryRole : RolesList
+operations
+end
+
+class OCConstraint<ConstraintMember
+attributes
+operations
+end
+
+class OCRelationshipConstraint<RelationshipConstraint
+attributes
+operations
+end
+
+class OCConstraintGroup<ConstraintGroup
+attributes
+operations
+end
+
+class RelationshipConstraint<StructuralConstraint
+attributes
+	targetRole : RolesList
+	delegationAware : Boolean
+operations
+end
+
+class RCConstraint<ConstraintMember
+attributes
+operations
+end
+
+class RCRelationshipConstraint<RelationshipConstraint
+attributes
+operations
+end
+
+class RCObjectConstraint<ObjectConstraint
+attributes
+operations
+end
+
+class RCConstraintGroup<ConstraintGroup
+attributes
+operations
+end
+
+class ConstraintGroup<StructuralConstraint
+attributes
+operations
+end
+
+class CGConstraint<ConstraintMember
+attributes
+operations
+end
+
+class CGRelationshipConstraint<RelationshipConstraint
+attributes
+operations
+end
+
+class CGObjectConstraint<ObjectConstraint
+attributes
+operations
+end
+
+class StructuralConstraint
+attributes
+	evaluate : ConstraintEvaluation
+	raiseError : Boolean
+	returnEarly : Boolean
+operations
+end
+
+class ConstraintDefinition<Definition
+attributes
+	returnEarly : Boolean
+operations
+end
+
+class CDRelationshipConstraint<RelationshipConstraint
+attributes
+operations
+end
+
+class CDConstraintGroup<ConstraintGroup
+attributes
+operations
+end
+
+class CDObjectConstraint<ObjectConstraint
+attributes
+operations
+end
+
+class CDConstraint<ConstraintMember
+attributes
+operations
+end
+
+class ConstraintMember<Member
+attributes
+	raiseError : Boolean
+	evaluate : ConstraintEvaluation
+operations
+end
+
+class Definition
+attributes
+	className : String
+operations
+end
+
+class DefSettingDeclaration<SettingMember
+attributes
+operations
+end
+
+class DefSettingValue<SettingValue
+attributes
+operations
+end
+
+class DefSettingValueList<SettingValueList
+attributes
+operations
+end
+
+class SimpleName<Element
+attributes
+operations
+end
+
+class QualifiedName<Element
+attributes
+operations
+end
+
+class Path<Element
+attributes
+operations
+end
+
+class SettingPath<Element
+attributes
+operations
+end
+
+class NamespaceIdentity
+attributes
+	platform : Platform
+operations
+end
+
+class FlowDefinition<Definition
+attributes
+operations
+end
+
+class FlowMember<Member
+attributes
+operations
+end
+
+class ValueTransfer
+attributes
+	cast : Boolean
+	convert : Boolean
+operations
+end
+
+class Output<ValueTransfer
+attributes
+	fixed : Boolean
+	replace : Boolean
+operations
+end
+
+class Input<ValueTransfer
+attributes
+operations
+end
+
+class SettingDefinitions
+attributes
+	clrNameSpace : String
+operations
+end
+
+class SettingMember<Member
+attributes
+operations
+end
+
+class SettingsAttributes
+attributes
+	list : Boolean
+	access : SettingMemberAccess
+	secure : SettingMemberSecure
+	deploymentTime : Boolean
+	required : Boolean
+	canBeNull : Boolean
+	elementsCanBeNull : Boolean
+	defaultRead : String
+	defaultWrite : String
+operations
+end
+
+class Facet
+attributes
+operations
+end
+
+class SettingValue
+attributes
+	contents : String
+operations
+end
+
+class SettingValueList
+attributes
+operations
+end
+
+class Value
+attributes
+	contents : String
+	isNull : Boolean
+operations
+end
+
+class SettingValueAttributes
+attributes
+	isNull : Boolean
+	fixed : Boolean
+	unset : Boolean
+	convert : Boolean
+	secure : Boolean
+	reference : Boolean
+operations
+end
+
+class Description
+attributes
+	resourceId : String
+operations
+end
+
+class Entry<DescriptionEntry
+attributes
+operations
+end
+
+class DescriptionEntry
+attributes
+	name : String
+	resourceId : String
+operations
+end
+
+class Substitute<PathList
+attributes
+operations
+end
+
+class PathList
+attributes
+operations
+end
+
+class MaxOccurs<Element
+attributes
+operations
+end
+
+class MinOccurs<Element
+attributes
+operations
+end
+
+class FourPartVersionType<Element
+attributes
+operations
+end
+
+class PublicKeyType<Element
+attributes
+operations
+end
+
+class PublicKeyTokenType<Element
+attributes
+operations
+end
+
+class CompilationHashType<Element
+attributes
+operations
+end
+
+class Culture<Element
+attributes
+operations
+end
+
+class CultureNeutral<Element
+attributes
+operations
+end
+
+class Element
+attributes
+	value : String
+operations
+end
+
+composition xxx_SystemDefinitionModel_information between
+	SystemDefinitionModel[*] role xxx_SystemDefinitionModel_information_src
+	Information[0..1] role information
+end
+
+composition xxx_SystemDefinitionModel_import between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_import_src
+	Import[*] role import
+end
+
+association xxx_SystemDefinitionModel_designData between
+	SystemDefinitionModel[*] role xxx_SystemDefinitionModel_designData_src
+	DesignData[0..1] role designData
+end
+
+association xxx_SystemDefinitionModel_settingDefinitions between
+	SystemDefinitionModel[*] role xxx_SystemDefinitionModel_settingDefinitions_src
+	SettingDefinitions[0..1] role settingDefinitions
+end
+
+composition xxx_SystemDefinitionModel_communicationDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_communicationDefinition_src
+	SDMCommunicationDefinition[*] role communicationDefinition
+end
+
+composition xxx_SystemDefinitionModel_containmentDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_containmentDefinition_src
+	SDMContainmentDefinition[*] role containmentDefinition
+end
+
+composition xxx_SystemDefinitionModel_delegationDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_delegationDefinition_src
+	SDMDelegationDefinition[*] role delegationDefinition
+end
+
+composition xxx_SystemDefinitionModel_referenceDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_referenceDefinition_src
+	SDMReferenceDefinition[*] role referenceDefinition
+end
+
+composition xxx_SystemDefinitionModel_endpointDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_endpointDefinition_src
+	SDMEndpointDefinition[*] role endpointDefinition
+end
+
+composition xxx_SystemDefinitionModel_resourceDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_resourceDefinition_src
+	SDMResourceDefinition[*] role resourceDefinition
+end
+
+composition xxx_SystemDefinitionModel_systemDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_systemDefinition_src
+	SDMSystemDefinition[*] role systemDefinition
+end
+
+composition xxx_SystemDefinitionModel_constraintDefinition between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_constraintDefinition_src
+	SDMConstraintDefinition[*] role constraintDefinition
+end
+
+composition xxx_SystemDefinitionModel_manager between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_manager_src
+	SDMManager[*] role manager
+end
+
+association xxx_SystemDefinitionModel_nameSpace between
+	SystemDefinitionModel[*] role xxx_SystemDefinitionModel_nameSpace_src
+	NameSpace[0..1] role nameSpace
+end
+
+association xxx_SystemDefinitionModel_namespaceIdentity between
+	SystemDefinitionModel[*] role xxx_SystemDefinitionModel_namespaceIdentity_src
+	NamespaceIdentity[1] role namespaceIdentity
+end
+
+association xxx_SystemDefinitionModel_documentLanguage between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_documentLanguage_src
+	Culture[*] role documentLanguage
+end
+
+association xxx_SystemDefinitionModel_compilationHash between
+	SystemDefinitionModel[0..1] role xxx_SystemDefinitionModel_compilationHash_src
+	CompilationHashType[*] role compilationHash
+end
+
+association xxx_Information_sdm between
+	Information[*] role xxx_Information_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_Information_description between
+	Information[*] role xxx_Information_description_src
+	Description[0..1] role description
+end
+
+association xxx_Information_compilerversion between
+	Information[*] role xxx_Information_compilerversion_src
+	FourPartVersionType[0..1] role compilerversion
+end
+
+association xxx_Import_sdm between
+	Import[*] role xxx_Import_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_Import_alias between
+	Import[*] role xxx_Import_alias_src
+	SimpleName[1] role alias
+end
+
+composition xxx_Import_identity between
+	Import[*] role xxx_Import_identity_src
+	ImportNamespaceIdentity[1] role identity
+end
+
+association xxx_ImportNamespaceIdentity_import between
+	ImportNamespaceIdentity[*] role xxx_ImportNamespaceIdentity_import_src
+	Import[1] role import
+end
+
+association xxx_SDMCommunicationDefinition_sdm between
+	SDMCommunicationDefinition[*] role xxx_SDMCommunicationDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMContainmentDefinition_sdm between
+	SDMContainmentDefinition[*] role xxx_SDMContainmentDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMDelegationDefinition_sdm between
+	SDMDelegationDefinition[*] role xxx_SDMDelegationDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMReferenceDefinition_sdm between
+	SDMReferenceDefinition[*] role xxx_SDMReferenceDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMEndpointDefinition_sdm between
+	SDMEndpointDefinition[*] role xxx_SDMEndpointDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMResourceDefinition_sdm between
+	SDMResourceDefinition[*] role xxx_SDMResourceDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMSystemDefinition_sdm between
+	SDMSystemDefinition[*] role xxx_SDMSystemDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMConstraintDefinition_sdm between
+	SDMConstraintDefinition[*] role xxx_SDMConstraintDefinition_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_SDMManager_sdm between
+	SDMManager[*] role xxx_SDMManager_sdm_src
+	SystemDefinitionModel[1] role sdm
+end
+
+association xxx_ManagerDeclaration_description between
+	ManagerDeclaration[*] role xxx_ManagerDeclaration_description_src
+	Description[0..1] role description
+end
+
+association xxx_ManagerDeclaration_name between
+	ManagerDeclaration[*] role xxx_ManagerDeclaration_name_src
+	SimpleName[0..1] role name
+end
+
+association xxx_ManagerDeclaration_version between
+	ManagerDeclaration[*] role xxx_ManagerDeclaration_version_src
+	FourPartVersionType[0..1] role version
+end
+
+association xxx_ManagerDeclaration_publicKeyToken between
+	ManagerDeclaration[*] role xxx_ManagerDeclaration_publicKeyToken_src
+	PublicKeyTokenType[0..1] role publicKeyToken
+end
+
+association xxx_ManagerDeclaration_culture between
+	ManagerDeclaration[*] role xxx_ManagerDeclaration_culture_src
+	CultureNeutral[0..1] role culture
+end
+
+association xxx_ManagerDeclaration_sourcePath between
+	ManagerDeclaration[*] role xxx_ManagerDeclaration_sourcePath_src
+	Path[0..1] role sourcePath
+end
+
+composition xxx_ObjectDefinition_flow between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_flow_src
+	OBFlow[*] role flow
+end
+
+composition xxx_ObjectDefinition_relationshipConstraint between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_relationshipConstraint_src
+	OBRelationshipConstraint[*] role relationshipConstraint
+end
+
+composition xxx_ObjectDefinition_constraint between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_constraint_src
+	OBConstraint[*] role constraint
+end
+
+composition xxx_ObjectDefinition_constraintGroup between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_constraintGroup_src
+	OBConstraintGroup[*] role constraintGroup
+end
+
+composition xxx_ObjectDefinition_endpointDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_endpointDefinition_src
+	OBEndpointDefinition[*] role endpointDefinition
+end
+
+composition xxx_ObjectDefinition_systemDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_systemDefinition_src
+	OBSystemDefinition[*] role systemDefinition
+end
+
+composition xxx_ObjectDefinition_resourceDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_resourceDefinition_src
+	OBResourceDefinition[*] role resourceDefinition
+end
+
+composition xxx_ObjectDefinition_communicationDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_communicationDefinition_src
+	OBCommunicationDefinition[*] role communicationDefinition
+end
+
+composition xxx_ObjectDefinition_containmentDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_containmentDefinition_src
+	OBContainmentDefinition[*] role containmentDefinition
+end
+
+composition xxx_ObjectDefinition_delegationDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_delegationDefinition_src
+	OBDelegationDefinition[*] role delegationDefinition
+end
+
+composition xxx_ObjectDefinition_referenceDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_referenceDefinition_src
+	OBReferenceDefinition[*] role referenceDefinition
+end
+
+composition xxx_ObjectDefinition_hostingDefinition between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_hostingDefinition_src
+	OBHostingDefinition[*] role hostingDefinition
+end
+
+composition xxx_ObjectDefinition_endpoint between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_endpoint_src
+	OBEndpoint[*] role endpoint
+end
+
+composition xxx_ObjectDefinition_subsystem between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_subsystem_src
+	OBSubsystem[*] role subsystem
+end
+
+composition xxx_ObjectDefinition_resource between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_resource_src
+	OBResource[*] role resource
+end
+
+composition xxx_ObjectDefinition_hosting between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_hosting_src
+	OBHosting[*] role hosting
+end
+
+composition xxx_ObjectDefinition_containment between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_containment_src
+	OBContainment[*] role containment
+end
+
+composition xxx_ObjectDefinition_connection between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_connection_src
+	OBConnection[*] role connection
+end
+
+composition xxx_ObjectDefinition_delegation between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_delegation_src
+	OBDelegation[*] role delegation
+end
+
+composition xxx_ObjectDefinition_obreference between
+	ObjectDefinition[0..1] role xxx_ObjectDefinition_obreference_src
+	OBReference[*] role obreference
+end
+
+association xxx_ObjectDefinition_extends between
+	ObjectDefinition[*] role xxx_ObjectDefinition_extends_src
+	QualifiedName[0..1] role extends
+end
+
+association xxx_OBFlow_objectDefinition between
+	OBFlow[*] role xxx_OBFlow_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBRelationshipConstraint_objectDefinition between
+	OBRelationshipConstraint[*] role xxx_OBRelationshipConstraint_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBConstraint_objectDefinition between
+	OBConstraint[*] role xxx_OBConstraint_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBConstraintGroup_objectDefinition between
+	OBConstraintGroup[*] role xxx_OBConstraintGroup_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBEndpointDefinition_objectDefinition between
+	OBEndpointDefinition[*] role xxx_OBEndpointDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBSystemDefinition_objectDefinition between
+	OBSystemDefinition[*] role xxx_OBSystemDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBResourceDefinition_objectDefinition between
+	OBResourceDefinition[*] role xxx_OBResourceDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBCommunicationDefinition_objectDefinition between
+	OBCommunicationDefinition[*] role xxx_OBCommunicationDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBContainmentDefinition_objectDefinition between
+	OBContainmentDefinition[*] role xxx_OBContainmentDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBDelegationDefinition_objectDefinition between
+	OBDelegationDefinition[*] role xxx_OBDelegationDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBReferenceDefinition_objectDefinition between
+	OBReferenceDefinition[*] role xxx_OBReferenceDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBHostingDefinition_objectDefinition between
+	OBHostingDefinition[*] role xxx_OBHostingDefinition_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBEndpoint_objectDefinition between
+	OBEndpoint[*] role xxx_OBEndpoint_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBSubsystem_objectDefinition between
+	OBSubsystem[*] role xxx_OBSubsystem_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBResource_objectDefinition between
+	OBResource[*] role xxx_OBResource_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBHosting_objectDefinition between
+	OBHosting[*] role xxx_OBHosting_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBContainment_objectDefinition between
+	OBContainment[*] role xxx_OBContainment_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBConnection_objectDefinition between
+	OBConnection[*] role xxx_OBConnection_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBDelegation_objectDefinition between
+	OBDelegation[*] role xxx_OBDelegation_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+association xxx_OBReference_objectDefinition between
+	OBReference[*] role xxx_OBReference_objectDefinition_src
+	ObjectDefinition[1] role objectDefinition
+end
+
+composition xxx_RelationshipDefinition_objectConstraint between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_objectConstraint_src
+	RDObjectConstraint[*] role objectConstraint
+end
+
+composition xxx_RelationshipDefinition_constraint between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_constraint_src
+	RDConstraint[*] role constraint
+end
+
+composition xxx_RelationshipDefinition_constraintGroup between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_constraintGroup_src
+	RDConstraintGroup[*] role constraintGroup
+end
+
+composition xxx_RelationshipDefinition_flow between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_flow_src
+	RDFlow[*] role flow
+end
+
+composition xxx_RelationshipDefinition_connection between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_connection_src
+	RDConnection[*] role connection
+end
+
+composition xxx_RelationshipDefinition_hosting between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_hosting_src
+	RDHosting[*] role hosting
+end
+
+composition xxx_RelationshipDefinition_delegation between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_delegation_src
+	RDDelegation[*] role delegation
+end
+
+composition xxx_RelationshipDefinition_reference between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_reference_src
+	RDReference[*] role reference
+end
+
+composition xxx_RelationshipDefinition_containment between
+	RelationshipDefinition[0..1] role xxx_RelationshipDefinition_containment_src
+	RDContainment[*] role containment
+end
+
+association xxx_RelationshipDefinition_extends between
+	RelationshipDefinition[*] role xxx_RelationshipDefinition_extends_src
+	QualifiedName[1] role extends
+end
+
+association xxx_RDObjectConstraint_relationshipDefinition between
+	RDObjectConstraint[*] role xxx_RDObjectConstraint_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDConstraint_relationshipDefinition between
+	RDConstraint[*] role xxx_RDConstraint_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDConstraintGroup_relationshipDefinition between
+	RDConstraintGroup[*] role xxx_RDConstraintGroup_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDFlow_relationshipDefinition between
+	RDFlow[*] role xxx_RDFlow_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDConnection_relationshipDefinition between
+	RDConnection[*] role xxx_RDConnection_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDHosting_relationshipDefinition between
+	RDHosting[*] role xxx_RDHosting_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDDelegation_relationshipDefinition between
+	RDDelegation[*] role xxx_RDDelegation_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDReference_relationshipDefinition between
+	RDReference[*] role xxx_RDReference_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_RDContainment_relationshipDefinition between
+	RDContainment[*] role xxx_RDContainment_relationshipDefinition_src
+	RelationshipDefinition[1] role relationshipDefinition
+end
+
+association xxx_CommunicationDefinition_clientDefinition between
+	CommunicationDefinition[*] role xxx_CommunicationDefinition_clientDefinition_src
+	QualifiedName[1] role clientDefinition
+end
+
+association xxx_CommunicationDefinition_serverDefinition between
+	CommunicationDefinition[*] role xxx_CommunicationDefinition_serverDefinition_src
+	QualifiedName[1] role serverDefinition
+end
+
+association xxx_HostingDefinition_guestDefinition between
+	HostingDefinition[*] role xxx_HostingDefinition_guestDefinition_src
+	QualifiedName[1] role guestDefinition
+end
+
+association xxx_HostingDefinition_hostDefinition between
+	HostingDefinition[*] role xxx_HostingDefinition_hostDefinition_src
+	QualifiedName[1] role hostDefinition
+end
+
+association xxx_ContainmentDefinition_parentDefinition between
+	ContainmentDefinition[*] role xxx_ContainmentDefinition_parentDefinition_src
+	QualifiedName[1] role parentDefinition
+end
+
+association xxx_ContainmentDefinition_memberDefinition between
+	ContainmentDefinition[*] role xxx_ContainmentDefinition_memberDefinition_src
+	QualifiedName[1] role memberDefinition
+end
+
+association xxx_DelegationDefinition_proxyDefinition between
+	DelegationDefinition[*] role xxx_DelegationDefinition_proxyDefinition_src
+	QualifiedName[1] role proxyDefinition
+end
+
+association xxx_DelegationDefinition_delegateDefinition between
+	DelegationDefinition[*] role xxx_DelegationDefinition_delegateDefinition_src
+	QualifiedName[1] role delegateDefinition
+end
+
+association xxx_ReferenceDefinition_dependentDefinition between
+	ReferenceDefinition[*] role xxx_ReferenceDefinition_dependentDefinition_src
+	QualifiedName[1] role dependentDefinition
+end
+
+association xxx_ReferenceDefinition_sourceDefinition between
+	ReferenceDefinition[*] role xxx_ReferenceDefinition_sourceDefinition_src
+	QualifiedName[1] role sourceDefinition
+end
+
+association xxx_Member_description between
+	Member[0..1] role xxx_Member_description_src
+	Description[*] role description
+end
+
+association xxx_Member_designData between
+	Member[*] role xxx_Member_designData_src
+	DesignData[1] role designData
+end
+
+composition xxx_Member_settingValue between
+	Member[0..1] role xxx_Member_settingValue_src
+	MembSettingValue[*] role settingValue
+end
+
+composition xxx_Member_settingValueList between
+	Member[0..1] role xxx_Member_settingValueList_src
+	MembSettingValueList[*] role settingValueList
+end
+
+association xxx_Member_name between
+	Member[*] role xxx_Member_name_src
+	SimpleName[1] role name
+end
+
+association xxx_Member_definition between
+	Member[*] role xxx_Member_definition_src
+	QualifiedName[1] role definition
+end
+
+association xxx_MembSettingValue_member between
+	MembSettingValue[*] role xxx_MembSettingValue_member_src
+	Member[1] role member
+end
+
+association xxx_MembSettingValueList_member between
+	MembSettingValueList[*] role xxx_MembSettingValueList_member_src
+	Member[1] role member
+end
+
+association xxx_ObjectMember_minOccurs between
+	ObjectMember[*] role xxx_ObjectMember_minOccurs_src
+	MinOccurs[0..1] role minOccurs
+end
+
+association xxx_ObjectMember_maxOccurs between
+	ObjectMember[*] role xxx_ObjectMember_maxOccurs_src
+	MaxOccurs[0..1] role maxOccurs
+end
+
+association xxx_HostingMember_guestMember between
+	HostingMember[*] role xxx_HostingMember_guestMember_src
+	Path[1] role guestMember
+end
+
+association xxx_HostingMember_hostMember between
+	HostingMember[*] role xxx_HostingMember_hostMember_src
+	Path[1] role hostMember
+end
+
+association xxx_CommunicationMember_clientMember between
+	CommunicationMember[*] role xxx_CommunicationMember_clientMember_src
+	Path[1] role clientMember
+end
+
+association xxx_CommunicationMember_serverMember between
+	CommunicationMember[*] role xxx_CommunicationMember_serverMember_src
+	Path[1] role serverMember
+end
+
+association xxx_ContainmentMember_childMember between
+	ContainmentMember[*] role xxx_ContainmentMember_childMember_src
+	Path[1] role childMember
+end
+
+association xxx_DelegationMember_proxyMember between
+	DelegationMember[*] role xxx_DelegationMember_proxyMember_src
+	Path[1] role proxyMember
+end
+
+association xxx_DelegationMember_delegateMember between
+	DelegationMember[*] role xxx_DelegationMember_delegateMember_src
+	Path[1] role delegateMember
+end
+
+association xxx_ReferenceMember_dependentMember between
+	ReferenceMember[*] role xxx_ReferenceMember_dependentMember_src
+	Path[1] role dependentMember
+end
+
+association xxx_ReferenceMember_sourceMember between
+	ReferenceMember[*] role xxx_ReferenceMember_sourceMember_src
+	Path[1] role sourceMember
+end
+
+composition xxx_DesignData_nameSpace between
+	DesignData[0..1] role xxx_DesignData_nameSpace_src
+	NameSpace[*] role nameSpace
+end
+
+association xxx_NameSpace_designData between
+	NameSpace[*] role xxx_NameSpace_designData_src
+	DesignData[1] role designData
+end
+
+composition xxx_ObjectConstraint_constraint between
+	ObjectConstraint[0..1] role xxx_ObjectConstraint_constraint_src
+	OCConstraint[*] role constraint
+end
+
+composition xxx_ObjectConstraint_relationshipConstraint between
+	ObjectConstraint[0..1] role xxx_ObjectConstraint_relationshipConstraint_src
+	OCRelationshipConstraint[*] role relationshipConstraint
+end
+
+composition xxx_ObjectConstraint_constraintGroup between
+	ObjectConstraint[0..1] role xxx_ObjectConstraint_constraintGroup_src
+	OCConstraintGroup[*] role constraintGroup
+end
+
+association xxx_ObjectConstraint_primaryObjectDefinition between
+	ObjectConstraint[*] role xxx_ObjectConstraint_primaryObjectDefinition_src
+	QualifiedName[1] role primaryObjectDefinition
+end
+
+association xxx_ObjectConstraint_secondaryObjectDefinition between
+	ObjectConstraint[0..1] role xxx_ObjectConstraint_secondaryObjectDefinition_src
+	QualifiedName[*] role secondaryObjectDefinition
+end
+
+association xxx_ObjectConstraint_minOccurs between
+	ObjectConstraint[0..1] role xxx_ObjectConstraint_minOccurs_src
+	MinOccurs[*] role minOccurs
+end
+
+association xxx_ObjectConstraint_maxOccurs between
+	ObjectConstraint[0..1] role xxx_ObjectConstraint_maxOccurs_src
+	MaxOccurs[*] role maxOccurs
+end
+
+association xxx_OCConstraint_objectConstraint between
+	OCConstraint[*] role xxx_OCConstraint_objectConstraint_src
+	ObjectConstraint[1] role objectConstraint
+end
+
+association xxx_OCRelationshipConstraint_objectConstraint_OC between
+	OCRelationshipConstraint[*] role xxx_OCRelationshipConstraint_objectConstraint_OC_src
+	ObjectConstraint[1] role objectConstraint_OC
+end
+
+association xxx_OCConstraintGroup_objectConstraint_OC between
+	OCConstraintGroup[*] role xxx_OCConstraintGroup_objectConstraint_OC_src
+	ObjectConstraint[1] role objectConstraint_OC
+end
+
+composition xxx_RelationshipConstraint_constraint between
+	RelationshipConstraint[0..1] role xxx_RelationshipConstraint_constraint_src
+	RCConstraint[*] role constraint
+end
+
+composition xxx_RelationshipConstraint_relationshipConstraint between
+	RelationshipConstraint[0..1] role xxx_RelationshipConstraint_relationshipConstraint_src
+	RCRelationshipConstraint[*] role relationshipConstraint
+end
+
+composition xxx_RelationshipConstraint_objectConstraint between
+	RelationshipConstraint[0..1] role xxx_RelationshipConstraint_objectConstraint_src
+	RCObjectConstraint[*] role objectConstraint
+end
+
+composition xxx_RelationshipConstraint_constraintGroup between
+	RelationshipConstraint[0..1] role xxx_RelationshipConstraint_constraintGroup_src
+	RCConstraintGroup[*] role constraintGroup
+end
+
+association xxx_RelationshipConstraint_relationshipDefinition between
+	RelationshipConstraint[*] role xxx_RelationshipConstraint_relationshipDefinition_src
+	QualifiedName[1] role relationshipDefinition
+end
+
+association xxx_RelationshipConstraint_targetObjectDefinition between
+	RelationshipConstraint[*] role xxx_RelationshipConstraint_targetObjectDefinition_src
+	QualifiedName[0..1] role targetObjectDefinition
+end
+
+association xxx_RelationshipConstraint_minOccurs between
+	RelationshipConstraint[*] role xxx_RelationshipConstraint_minOccurs_src
+	MinOccurs[0..1] role minOccurs
+end
+
+association xxx_RelationshipConstraint_maxOccurs between
+	RelationshipConstraint[*] role xxx_RelationshipConstraint_maxOccurs_src
+	MaxOccurs[0..1] role maxOccurs
+end
+
+association xxx_RCConstraint_relationshipConstraint between
+	RCConstraint[*] role xxx_RCConstraint_relationshipConstraint_src
+	RelationshipConstraint[1] role relationshipConstraint
+end
+
+association xxx_RCRelationshipConstraint_relationshipConstraint_RC between
+	RCRelationshipConstraint[*] role xxx_RCRelationshipConstraint_relationshipConstraint_RC_src
+	RelationshipConstraint[1] role relationshipConstraint_RC
+end
+
+association xxx_RCObjectConstraint_relationshipConstraint_RC between
+	RCObjectConstraint[*] role xxx_RCObjectConstraint_relationshipConstraint_RC_src
+	RelationshipConstraint[1] role relationshipConstraint_RC
+end
+
+association xxx_RCConstraintGroup_relationshipConstraint_RC between
+	RCConstraintGroup[*] role xxx_RCConstraintGroup_relationshipConstraint_RC_src
+	RelationshipConstraint[1] role relationshipConstraint_RC
+end
+
+composition xxx_ConstraintGroup_constraint between
+	ConstraintGroup[0..1] role xxx_ConstraintGroup_constraint_src
+	CGConstraint[*] role constraint
+end
+
+composition xxx_ConstraintGroup_relationshipConstraint between
+	ConstraintGroup[0..1] role xxx_ConstraintGroup_relationshipConstraint_src
+	CGRelationshipConstraint[*] role relationshipConstraint
+end
+
+composition xxx_ConstraintGroup_objectConstraint between
+	ConstraintGroup[0..1] role xxx_ConstraintGroup_objectConstraint_src
+	CGObjectConstraint[*] role objectConstraint
+end
+
+association xxx_CGConstraint_constraintGroup between
+	CGConstraint[*] role xxx_CGConstraint_constraintGroup_src
+	ConstraintGroup[1] role constraintGroup
+end
+
+association xxx_CGRelationshipConstraint_constraintGroup_CG between
+	CGRelationshipConstraint[*] role xxx_CGRelationshipConstraint_constraintGroup_CG_src
+	ConstraintGroup[1] role constraintGroup_CG
+end
+
+association xxx_CGObjectConstraint_constraintGroup_CG between
+	CGObjectConstraint[*] role xxx_CGObjectConstraint_constraintGroup_CG_src
+	ConstraintGroup[1] role constraintGroup_CG
+end
+
+association xxx_StructuralConstraint_description between
+	StructuralConstraint[*] role xxx_StructuralConstraint_description_src
+	Description[0..1] role description
+end
+
+association xxx_StructuralConstraint_designData between
+	StructuralConstraint[*] role xxx_StructuralConstraint_designData_src
+	DesignData[0..1] role designData
+end
+
+association xxx_StructuralConstraint_name between
+	StructuralConstraint[*] role xxx_StructuralConstraint_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_ConstraintDefinition_relationshipConstraint between
+	ConstraintDefinition[0..1] role xxx_ConstraintDefinition_relationshipConstraint_src
+	CDRelationshipConstraint[*] role relationshipConstraint
+end
+
+composition xxx_ConstraintDefinition_constraintGroup between
+	ConstraintDefinition[0..1] role xxx_ConstraintDefinition_constraintGroup_src
+	CDConstraintGroup[*] role constraintGroup
+end
+
+composition xxx_ConstraintDefinition_objectConstraint between
+	ConstraintDefinition[0..1] role xxx_ConstraintDefinition_objectConstraint_src
+	CDObjectConstraint[*] role objectConstraint
+end
+
+composition xxx_ConstraintDefinition_constraint between
+	ConstraintDefinition[0..1] role xxx_ConstraintDefinition_constraint_src
+	CDConstraint[*] role constraint
+end
+
+association xxx_ConstraintDefinition_targetDefinition between
+	ConstraintDefinition[*] role xxx_ConstraintDefinition_targetDefinition_src
+	QualifiedName[0..1] role targetDefinition
+end
+
+association xxx_CDRelationshipConstraint_constraintDefinition between
+	CDRelationshipConstraint[*] role xxx_CDRelationshipConstraint_constraintDefinition_src
+	ConstraintDefinition[1] role constraintDefinition
+end
+
+association xxx_CDConstraintGroup_constraintDefinition between
+	CDConstraintGroup[*] role xxx_CDConstraintGroup_constraintDefinition_src
+	ConstraintDefinition[1] role constraintDefinition
+end
+
+association xxx_CDObjectConstraint_constraintDefinition between
+	CDObjectConstraint[*] role xxx_CDObjectConstraint_constraintDefinition_src
+	ConstraintDefinition[1] role constraintDefinition
+end
+
+association xxx_CDConstraint_constraintDefinition between
+	CDConstraint[*] role xxx_CDConstraint_constraintDefinition_src
+	ConstraintDefinition[1] role constraintDefinition
+end
+
+association xxx_ConstraintMember_input between
+	ConstraintMember[0..1] role xxx_ConstraintMember_input_src
+	Input[*] role input
+end
+
+association xxx_Definition_description between
+	Definition[*] role xxx_Definition_description_src
+	Description[0..1] role description
+end
+
+association xxx_Definition_designData between
+	Definition[*] role xxx_Definition_designData_src
+	DesignData[0..1] role designData
+end
+
+composition xxx_Definition_settingDeclaration between
+	Definition[0..1] role xxx_Definition_settingDeclaration_src
+	DefSettingDeclaration[*] role settingDeclaration
+end
+
+composition xxx_Definition_settingValue between
+	Definition[0..1] role xxx_Definition_settingValue_src
+	DefSettingValue[*] role settingValue
+end
+
+composition xxx_Definition_settingValueList between
+	Definition[0..1] role xxx_Definition_settingValueList_src
+	DefSettingValueList[*] role settingValueList
+end
+
+association xxx_Definition_name between
+	Definition[*] role xxx_Definition_name_src
+	SimpleName[1] role name
+end
+
+association xxx_Definition_manager between
+	Definition[*] role xxx_Definition_manager_src
+	QualifiedName[0..1] role manager
+end
+
+association xxx_DefSettingDeclaration_definition_DSD between
+	DefSettingDeclaration[*] role xxx_DefSettingDeclaration_definition_DSD_src
+	Definition[1] role definition_DSD
+end
+
+association xxx_DefSettingValue_definition between
+	DefSettingValue[*] role xxx_DefSettingValue_definition_src
+	Definition[1] role definition
+end
+
+association xxx_DefSettingValueList_definition between
+	DefSettingValueList[*] role xxx_DefSettingValueList_definition_src
+	Definition[1] role definition
+end
+
+association xxx_NamespaceIdentity_name between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_name_src
+	Path[1] role name
+end
+
+association xxx_NamespaceIdentity_version between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_version_src
+	FourPartVersionType[0..1] role version
+end
+
+association xxx_NamespaceIdentity_publicKey between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_publicKey_src
+	PublicKeyType[0..1] role publicKey
+end
+
+association xxx_NamespaceIdentity_publicKeyToken between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_publicKeyToken_src
+	PublicKeyTokenType[0..1] role publicKeyToken
+end
+
+association xxx_NamespaceIdentity_culture between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_culture_src
+	CultureNeutral[0..1] role culture
+end
+
+association xxx_FlowMember_input between
+	FlowMember[0..1] role xxx_FlowMember_input_src
+	Input[*] role input
+end
+
+association xxx_FlowMember_output between
+	FlowMember[0..1] role xxx_FlowMember_output_src
+	Output[*] role output
+end
+
+association xxx_ValueTransfer_name between
+	ValueTransfer[*] role xxx_ValueTransfer_name_src
+	SimpleName[1] role name
+end
+
+association xxx_ValueTransfer_path between
+	ValueTransfer[*] role xxx_ValueTransfer_path_src
+	SettingPath[1] role path
+end
+
+association xxx_SettingDefinitions_nameSpace between
+	SettingDefinitions[*] role xxx_SettingDefinitions_nameSpace_src
+	NameSpace[0..1] role nameSpace
+end
+
+association xxx_SettingDefinitions_manager between
+	SettingDefinitions[*] role xxx_SettingDefinitions_manager_src
+	QualifiedName[1] role manager
+end
+
+association xxx_SettingMember_facet between
+	SettingMember[0..1] role xxx_SettingMember_facet_src
+	Facet[*] role facet
+end
+
+association xxx_SettingMember_settingAttributes between
+	SettingMember[*] role xxx_SettingMember_settingAttributes_src
+	SettingsAttributes[1] role settingAttributes
+end
+
+association xxx_Facet_name between
+	Facet[*] role xxx_Facet_name_src
+	SimpleName[1] role name
+end
+
+association xxx_SettingValue_settingValueAttributes between
+	SettingValue[*] role xxx_SettingValue_settingValueAttributes_src
+	SettingValueAttributes[1] role settingValueAttributes
+end
+
+association xxx_SettingValueList_value between
+	SettingValueList[0..1] role xxx_SettingValueList_value_src
+	Value[*] role value
+end
+
+association xxx_SettingValueList_settingValueAttributes between
+	SettingValueList[*] role xxx_SettingValueList_settingValueAttributes_src
+	SettingValueAttributes[1] role settingValueAttributes
+end
+
+association xxx_SettingValueAttributes_path between
+	SettingValueAttributes[*] role xxx_SettingValueAttributes_path_src
+	SettingPath[1] role path
+end
+
+association xxx_SettingValueAttributes_definition between
+	SettingValueAttributes[*] role xxx_SettingValueAttributes_definition_src
+	QualifiedName[0..1] role definition
+end
+
+composition xxx_Description_entry between
+	Description[0..1] role xxx_Description_entry_src
+	Entry[*] role entry
+end
+
+association xxx_Description_manager between
+	Description[*] role xxx_Description_manager_src
+	QualifiedName[0..1] role manager
+end
+
+association xxx_Entry_description between
+	Entry[*] role xxx_Entry_description_src
+	Description[1] role description
+end
+
+association xxx_DescriptionEntry_manager between
+	DescriptionEntry[*] role xxx_DescriptionEntry_manager_src
+	QualifiedName[0..1] role manager
+end
+
+composition xxx_DescriptionEntry_substitute between
+	DescriptionEntry[*] role xxx_DescriptionEntry_substitute_src
+	Substitute[0..1] role substitute
+end
+
+composition xxx_Substitute_descriptionEntry between
+	Substitute[*] role xxx_Substitute_descriptionEntry_src
+	DescriptionEntry[0..1] role descriptionEntry
+end
+
+association xxx_PathList_settingPath between
+	PathList[0..1] role xxx_PathList_settingPath_src
+	SettingPath[*] role settingPath
+end
+

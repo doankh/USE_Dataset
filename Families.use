@@ -1,0 +1,164 @@
+model Families
+class Country<NamedElement
+attributes
+operations
+end
+
+class Family
+attributes
+	lastName : String
+operations
+end
+
+class Parent<Member
+attributes
+operations
+end
+
+class Child<Member
+attributes
+operations
+end
+
+class Neighborhood<NamedElement
+attributes
+operations
+end
+
+class City<NamedElement
+attributes
+operations
+end
+
+class School<NamedElement
+attributes
+operations
+end
+
+class Company<NamedElement
+attributes
+operations
+end
+
+abstract class Member
+attributes
+	firstName : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Service
+attributes
+operations
+end
+
+composition xxx_Country_families between
+	Country[0..1] role xxx_Country_families_src
+	Family[1..*] role families
+end
+
+composition xxx_Country_cities between
+	Country[0..1] role xxx_Country_cities_src
+	City[1..*] role cities
+end
+
+composition xxx_Country_companies between
+	Country[0..1] role xxx_Country_companies_src
+	Company[*] role companies
+end
+
+composition xxx_Family_fathers between
+	Family[*] role xxx_Family_fathers_src
+	Parent[0..2] role fathers
+end
+
+composition xxx_Family_mothers between
+	Family[*] role xxx_Family_mothers_src
+	Parent[0..2] role mothers
+end
+
+composition xxx_Family_daughters between
+	Family[0..1] role xxx_Family_daughters_src
+	Child[*] role daughters
+end
+
+composition xxx_Family_sons between
+	Family[0..1] role xxx_Family_sons_src
+	Child[*] role sons
+end
+
+association xxx_Family_registeredIn between
+	Family[*] role xxx_Family_registeredIn_src
+	Neighborhood[1] role registeredIn
+end
+
+association xxx_Parent_worksIn between
+	Parent[*] role xxx_Parent_worksIn_src
+	Company[0..1] role worksIn
+end
+
+association xxx_Child_goesTo between
+	Child[*] role xxx_Child_goesTo_src
+	School[1] role goesTo
+end
+
+association xxx_Neighborhood_contains between
+	Neighborhood[0..1] role xxx_Neighborhood_contains_src
+	Family[1..*] role contains
+end
+
+composition xxx_Neighborhood_schools between
+	Neighborhood[0..1] role xxx_Neighborhood_schools_src
+	School[*] role schools
+end
+
+association xxx_City_companies between
+	City[0..1] role xxx_City_companies_src
+	Company[*] role companies
+end
+
+composition xxx_City_neighborhoods between
+	City[0..1] role xxx_City_neighborhoods_src
+	Neighborhood[1..*] role neighborhoods
+end
+
+composition xxx_School_ordinary between
+	School[0..1] role xxx_School_ordinary_src
+	Service[*] role ordinary
+end
+
+composition xxx_School_special between
+	School[0..1] role xxx_School_special_src
+	Service[*] role special
+end
+
+association xxx_School_students between
+	School[0..1] role xxx_School_students_src
+	Child[*] role students
+end
+
+association xxx_Company_employees between
+	Company[0..1] role xxx_Company_employees_src
+	Parent[*] role employees
+end
+
+association xxx_Company_isIn between
+	Company[0..1] role xxx_Company_isIn_src
+	City[1..*] role isIn
+end
+
+association xxx_Member_family between
+	Member[*] role xxx_Member_family_src
+	Family[1] role family
+end
+
+association xxx_Member_livesIn between
+	Member[*] role xxx_Member_livesIn_src
+	City[1] role livesIn
+end
+

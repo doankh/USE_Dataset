@@ -1,0 +1,1434 @@
+model gautosar
+enum GByteOrderEnum{
+default
+}
+
+enum GArgumentDirectionEnum{
+default
+}
+
+enum GIntervalTypeEnum{
+default
+}
+
+abstract class GARObject
+attributes
+	gChecksum : String
+	gTimestamp : String
+operations
+end
+
+abstract class GIdentifiable<GReferrable
+attributes
+	gUuid : String
+	gCategory : String
+operations
+	gGetExtensions()
+end
+
+abstract class GARPackage<GIdentifiable
+attributes
+operations
+end
+
+abstract class GAUTOSAR
+attributes
+operations
+	gGetMixed():String
+end
+
+abstract class GPackageableElement<GIdentifiable
+attributes
+operations
+end
+
+abstract class GReferrable<GARObject
+attributes
+	gShortName : String
+operations
+end
+
+abstract class GAnnotation<GGeneralAnnotation
+attributes
+operations
+end
+
+abstract class GRemark<GARObject
+attributes
+operations
+end
+
+abstract class GGeneralAnnotation<GARObject
+attributes
+	gAnnotationOrigin : String
+operations
+end
+
+abstract class GMultiLanguageParagraph
+attributes
+operations
+end
+
+abstract class GMultiLanguageOverviewParagraph
+attributes
+operations
+end
+
+abstract class GLParagraph<GMixedContentForParagraph
+attributes
+operations
+end
+
+abstract class GLOverviewParagraph<GMixedContentForOverviewParagraph
+attributes
+operations
+end
+
+abstract class GMixedContentForParagraph
+attributes
+operations
+	gGetMixed():String
+end
+
+abstract class GMixedContentForOverviewParagraph
+attributes
+operations
+	gGetMixed():String
+	gGetMixedText():String
+	gSetMixedText(text : String)
+end
+
+abstract class GSwSystemconstDependentFormula<GFormulaExpression
+attributes
+operations
+end
+
+abstract class GAttributeValueVariationPoint<GSwSystemconstDependentFormula
+attributes
+operations
+end
+
+abstract class GFormulaExpression<GARObject
+attributes
+operations
+	gGetMixed():String
+	gGetMixedText():String
+	gSetMixedText(text : String)
+end
+
+abstract class GParamConfMultiplicity<GARObject
+attributes
+operations
+	gGetLowerMultiplicityAsString():String
+	gSetLowerMultiplicityAsString(value : String)
+	gGetUpperMultiplicityAsString():String
+	gSetUpperMultiplicityAsString(value : String)
+	gGetUpperMultiplicityInfinite():Boolean
+	gSetUpperMultiplicityInfinite(value : Boolean)
+end
+
+abstract class GContainerDef<GIdentifiable,GParamConfMultiplicity
+attributes
+operations
+	gGetPostBuildChangeable():Boolean
+	gSetPostBuildChangeable(value : Boolean)
+end
+
+abstract class GModuleDef<GPackageableElement,GParamConfMultiplicity
+attributes
+operations
+	gGetRefinedModuleDef():GModuleDef
+	gSetRefinedModuleDef(value : GModuleDef)
+	gGetContainers()
+end
+
+abstract class GCommonConfigurationAttributes<GIdentifiable
+attributes
+operations
+	gGetOrigin():String
+	gSetOrigin(value : String)
+end
+
+abstract class GConfigParameter<GParamConfMultiplicity,GCommonConfigurationAttributes
+attributes
+operations
+	gGetSymbolicNameValue():Boolean
+	gSetSymbolicNameValue(value : Boolean)
+end
+
+abstract class GConfigReference<GParamConfMultiplicity,GCommonConfigurationAttributes
+attributes
+operations
+end
+
+abstract class GParamConfContainerDef<GContainerDef
+attributes
+operations
+	gGetParameters()
+	gGetReferences()
+	gGetSubContainers()
+end
+
+abstract class GChoiceContainerDef<GContainerDef
+attributes
+operations
+	gGetChoices()
+end
+
+abstract class GBooleanParamDef<GConfigParameter
+attributes
+operations
+end
+
+abstract class GIntegerParamDef<GConfigParameter
+attributes
+operations
+end
+
+abstract class GFloatParamDef<GConfigParameter
+attributes
+operations
+end
+
+abstract class GEnumerationParamDef<GConfigParameter
+attributes
+operations
+	gGetLiterals()
+	gGetDefaultValue():String
+	gSetDefaultValue(value : String)
+end
+
+abstract class GEnumerationLiteralDef<GIdentifiable
+attributes
+operations
+end
+
+abstract class GAbstractStringParamDef<GConfigParameter
+attributes
+operations
+end
+
+abstract class GStringParamDef<GAbstractStringParamDef
+attributes
+operations
+end
+
+abstract class GLinkerSymbolDef<GAbstractStringParamDef
+attributes
+operations
+end
+
+abstract class GFunctionNameDef<GAbstractStringParamDef
+attributes
+operations
+end
+
+abstract class GReferenceDef<GConfigReference
+attributes
+operations
+	gGetDestination():GParamConfContainerDef
+	gSetDestination(value : GParamConfContainerDef)
+end
+
+abstract class GSymbolicNameReferenceDef<GReferenceDef
+attributes
+operations
+end
+
+abstract class GInstanceReferenceDef<GConfigReference
+attributes
+operations
+	gGetDestinationType():String
+	gSetDestinationType(value : String)
+	gGetDestinationContext():String
+	gSetDestinationContext(value : String)
+end
+
+abstract class GForeignReferenceDef<GConfigReference
+attributes
+operations
+	gGetDestinationType():String
+	gSetDestinationType(value : String)
+end
+
+abstract class GChoiceReferenceDef<GConfigReference
+attributes
+operations
+	gGetDestinations()
+end
+
+abstract class GModuleConfiguration<GPackageableElement
+attributes
+operations
+	gGetDefinition():GModuleDef
+	gSetDefinition(value : GModuleDef)
+	gGetContainers()
+end
+
+abstract class GContainer<GIdentifiable
+attributes
+operations
+	gGetDefinition():GContainerDef
+	gSetDefinition(value : GContainerDef)
+	gGetParameterValues()
+	gGetReferenceValues()
+	gGetSubContainers()
+end
+
+abstract class GParameterValue<GARObject
+attributes
+operations
+	gGetDefinition():GConfigParameter
+	gSetDefinition(value : GConfigParameter)
+end
+
+abstract class GConfigReferenceValue<GARObject
+attributes
+operations
+	gGetDefinition():GConfigReference
+	gSetDefinition(value : GConfigReference)
+end
+
+abstract class GReferenceValue<GConfigReferenceValue
+attributes
+operations
+	gGetValue():GIdentifiable
+	gSetValue(value : GIdentifiable)
+end
+
+abstract class GInstanceReferenceValue<GConfigReferenceValue
+attributes
+operations
+end
+
+abstract class GBooleanValue<GParameterValue
+attributes
+	gValue : Boolean
+operations
+end
+
+abstract class GEnumerationValue<GParameterValue
+attributes
+	gValue : String
+operations
+end
+
+abstract class GIntegerValue<GParameterValue
+attributes
+	gValue : String
+operations
+end
+
+abstract class GStringValue<GParameterValue
+attributes
+	gValue : String
+operations
+end
+
+abstract class GLinkerSymbolValue<GStringValue
+attributes
+operations
+end
+
+abstract class GFunctionNameValue<GLinkerSymbolValue
+attributes
+operations
+end
+
+abstract class GFloatValue<GParameterValue
+attributes
+	gValue : Real
+operations
+end
+
+abstract class GApplicationSwComponentType<GAtomicSwComponentType
+attributes
+operations
+end
+
+abstract class GAtomicSwComponentType<GSwComponentType
+attributes
+operations
+end
+
+abstract class GSwComponentType<GPackageableElement
+attributes
+operations
+end
+
+abstract class GServiceSwComponentType<GAtomicSwComponentType
+attributes
+operations
+end
+
+abstract class GSensorActuatorSwComponentType<GAtomicSwComponentType
+attributes
+operations
+end
+
+abstract class GPortPrototype<GIdentifiable
+attributes
+operations
+end
+
+abstract class GPPortPrototype<GPortPrototype
+attributes
+operations
+end
+
+abstract class GRPortPrototype<GPortPrototype
+attributes
+operations
+end
+
+abstract class GVariableInAtomicSwcIRef<GARObject
+attributes
+operations
+end
+
+abstract class GRVariableInAtomicSwcIRef<GVariableInAtomicSwcIRef
+attributes
+operations
+end
+
+abstract class GPVariableInAtomicSwcIRef<GVariableInAtomicSwcIRef
+attributes
+operations
+end
+
+abstract class GOperationInAtomicSwcIRef<GARObject
+attributes
+operations
+end
+
+abstract class GROperationInAtomicSwcIRef<GOperationInAtomicSwcIRef
+attributes
+operations
+end
+
+abstract class GPOperationInAtomicSwcIRef<GOperationInAtomicSwcIRef
+attributes
+operations
+end
+
+abstract class GModeGroupInAtomicSwcIRef<GARObject
+attributes
+operations
+end
+
+abstract class GRModeGroupInAtomicSwcIRef<GModeGroupInAtomicSwcIRef
+attributes
+operations
+end
+
+abstract class GPModeGroupInAtomicSwcIRef<GModeGroupInAtomicSwcIRef
+attributes
+operations
+end
+
+abstract class GParameterInAtomicSwcIRef<GARObject
+attributes
+operations
+end
+
+abstract class GPortInterface<GPackageableElement
+attributes
+	gIsService : Boolean
+operations
+end
+
+abstract class GSenderReceiverInterface<GPortInterface
+attributes
+operations
+end
+
+abstract class GClientServerInterface<GPortInterface
+attributes
+operations
+end
+
+abstract class GParameterInterface<GPortInterface
+attributes
+operations
+end
+
+abstract class GNvDataInterface<GPortInterface
+attributes
+operations
+end
+
+abstract class GModeSwitchInterface<GPortInterface
+attributes
+operations
+end
+
+abstract class GTriggerInterface<GPortInterface
+attributes
+operations
+end
+
+abstract class GArgumentDataPrototype<GAutosarDataPrototype
+attributes
+	gDirection : GArgumentDirectionEnum
+operations
+end
+
+abstract class GClientServerOperation<GIdentifiable
+attributes
+operations
+end
+
+abstract class GApplicationError<GIdentifiable
+attributes
+	gErrorCode : Integer
+operations
+end
+
+abstract class GApplicationDataType<GAutosarDataType
+attributes
+operations
+end
+
+abstract class GAutosarDataType<GPackageableElement
+attributes
+operations
+end
+
+abstract class GApplicationPrimitiveDataType<GApplicationDataType
+attributes
+operations
+end
+
+abstract class GARLimit<GAbstractLimit
+attributes
+	gValue : String
+operations
+end
+
+abstract class GApplicationRecordDataType<GApplicationCompositeDataType
+attributes
+operations
+end
+
+abstract class GApplicationCompositeDataType<GApplicationDataType
+attributes
+operations
+end
+
+abstract class GLimit<GAbstractLimit,GAttributeValueVariationPoint
+attributes
+operations
+end
+
+abstract class GAbstractLimit<GARObject
+attributes
+	gIntervalType : GIntervalTypeEnum
+operations
+end
+
+abstract class GAutosarDataPrototype<GDataPrototype
+attributes
+operations
+end
+
+abstract class GDataPrototype<GIdentifiable
+attributes
+operations
+end
+
+abstract class GParameterDataPrototype<GAutosarDataPrototype
+attributes
+operations
+end
+
+abstract class GVariableDataPrototype<GAutosarDataPrototype
+attributes
+operations
+end
+
+abstract class GApplicationRecordElement<GApplicationCompositeElementDataPrototype
+attributes
+operations
+end
+
+abstract class GApplicationCompositeElementDataPrototype<GDataPrototype
+attributes
+operations
+end
+
+abstract class GCompuMethod<GPackageableElement
+attributes
+operations
+end
+
+abstract class GCompu<GARObject
+attributes
+operations
+end
+
+abstract class GCompuContent<GARObject
+attributes
+operations
+end
+
+abstract class GCompuScales<GCompuContent
+attributes
+operations
+end
+
+abstract class GCompuScale<GARObject
+attributes
+	gShortLabel : String
+operations
+end
+
+abstract class GCompuScaleContents<GARObject
+attributes
+operations
+end
+
+abstract class GCompuScaleConstantContents<GCompuScaleContents
+attributes
+operations
+end
+
+abstract class GCompuScaleRationalFormula<GCompuScaleContents
+attributes
+operations
+end
+
+abstract class GCompuConst<GARObject
+attributes
+operations
+end
+
+abstract class GCompuConstContent<GARObject
+attributes
+operations
+end
+
+abstract class GCompuConstTextContent<GCompuConstContent
+attributes
+	gVt : String
+operations
+end
+
+abstract class GCompuConstNumericContent<GCompuConstContent
+attributes
+	gV : String
+operations
+end
+
+abstract class GCompuConstFormulaContent<GCompuConstContent
+attributes
+operations
+end
+
+abstract class GCompuRationalCoeffs<GARObject
+attributes
+operations
+end
+
+abstract class GCompuNominatorDenominator<GARObject
+attributes
+operations
+end
+
+abstract class GUnit<GPackageableElement
+attributes
+	gFactorSiToUnit : Real
+	gOffsetSiToUnit : Real
+operations
+end
+
+abstract class GPhysicalDimension<GPackageableElement
+attributes
+	gCurrentExp : String
+	gLengthExp : String
+	gLuminousIntensityExp : String
+	gMassExp : String
+	gMolarAmountExp : String
+	gTemperatureExp : String
+	gTimeExp : String
+operations
+end
+
+abstract class GSwComponentPrototype<GIdentifiable
+attributes
+operations
+end
+
+abstract class GCompositionSwComponentType<GSwComponentType
+attributes
+operations
+end
+
+abstract class GSwConnector<GIdentifiable
+attributes
+operations
+end
+
+abstract class GAssemblySwConnector<GSwConnector
+attributes
+operations
+end
+
+abstract class GPPortInCompositionIRef<GARObject
+attributes
+operations
+end
+
+abstract class GRPortInCompositionIRef<GARObject
+attributes
+operations
+end
+
+abstract class GAssemblyConnectorPrototypeRequesterIRef<GRPortInCompositionIRef
+attributes
+operations
+end
+
+abstract class GAssemblyConnectorPrototypeProviderIRef<GPPortInCompositionIRef
+attributes
+operations
+end
+
+abstract class GSwcInternalBehavior<GInternalBehavior
+attributes
+	gSupportsMultipleInstantiation : Boolean
+operations
+end
+
+abstract class GRunnableEntity<GExecutableEntity
+attributes
+	gSymbol : String
+operations
+end
+
+abstract class GRTEEvent<GIdentifiable
+attributes
+operations
+end
+
+abstract class GDataReceivedEvent<GRTEEvent
+attributes
+operations
+end
+
+abstract class GSwcModeSwitchEvent<GRTEEvent
+attributes
+operations
+end
+
+abstract class GTimingEvent<GRTEEvent
+attributes
+	gPeriod : Real
+operations
+end
+
+abstract class GWaitPoint<GIdentifiable
+attributes
+	gTimeout : Real
+operations
+end
+
+abstract class GDataReceiveErrorEvent<GRTEEvent
+attributes
+operations
+end
+
+abstract class GOperationInvokedEvent<GRTEEvent
+attributes
+operations
+end
+
+abstract class GAsynchronousServerCallReturnsEvent<GRTEEvent
+attributes
+operations
+end
+
+abstract class GDataSendCompletedEvent<GRTEEvent
+attributes
+operations
+end
+
+abstract class GVariableAccess<GIdentifiable
+attributes
+operations
+end
+
+abstract class GParameterAccess<GIdentifiable
+attributes
+operations
+end
+
+abstract class GPerInstanceMemory<GIdentifiable
+attributes
+	gType : String
+	gTypeDefinition : String
+operations
+end
+
+abstract class GModeSwitchPoint<GIdentifiable
+attributes
+operations
+end
+
+abstract class GServerCallPoint<GIdentifiable
+attributes
+	gTimeout : Real
+operations
+end
+
+abstract class GAsynchronousServerCallPoint<GServerCallPoint
+attributes
+operations
+end
+
+abstract class GSynchronousServerCallPoint<GServerCallPoint
+attributes
+operations
+end
+
+abstract class GSwcImplementation<GImplementation
+attributes
+operations
+end
+
+abstract class GPPortComSpec<GARObject
+attributes
+operations
+end
+
+abstract class GServerComSpec<GPPortComSpec
+attributes
+	gQueueLength : Integer
+operations
+end
+
+abstract class GSenderComSpec<GPPortComSpec
+attributes
+operations
+end
+
+abstract class GQueuedSenderComSpec<GSenderComSpec
+attributes
+operations
+end
+
+abstract class GNonqueuedSenderComSpec<GSenderComSpec
+attributes
+operations
+end
+
+abstract class GRPortComSpec<GARObject
+attributes
+operations
+end
+
+abstract class GClientComSpec<GRPortComSpec
+attributes
+operations
+end
+
+abstract class GReceiverComSpec<GRPortComSpec
+attributes
+operations
+end
+
+abstract class GQueuedReceiverComSpec<GReceiverComSpec
+attributes
+	gQueueLength : Integer
+operations
+end
+
+abstract class GNonqueuedReceiverComSpec<GReceiverComSpec
+attributes
+operations
+end
+
+abstract class GImplementation<GPackageableElement
+attributes
+operations
+end
+
+abstract class GCode<GIdentifiable
+attributes
+operations
+end
+
+abstract class GEngineeringObject<GARObject
+attributes
+operations
+end
+
+abstract class GAutosarEngineeringObject<GEngineeringObject
+attributes
+operations
+end
+
+abstract class GResourceConsumption<GIdentifiable
+attributes
+operations
+end
+
+abstract class GModeDeclarationGroupPrototype<GIdentifiable
+attributes
+operations
+end
+
+abstract class GModeDeclarationGroup<GPackageableElement
+attributes
+operations
+end
+
+abstract class GModeDeclaration<GIdentifiable
+attributes
+operations
+end
+
+abstract class GExecutableEntity<GIdentifiable
+attributes
+operations
+end
+
+abstract class GExclusiveArea<GIdentifiable
+attributes
+operations
+end
+
+abstract class GInternalBehavior<GIdentifiable
+attributes
+operations
+end
+
+abstract class GValueSpecification<GARObject
+attributes
+operations
+end
+
+abstract class GSwDataDefPropsConditional<GARObject
+attributes
+operations
+end
+
+abstract class GBaseType<GARObject
+attributes
+operations
+end
+
+abstract class GBaseTypeDefinition<GARObject
+attributes
+operations
+end
+
+abstract class GBaseTypeDirectDefinition<GBaseTypeDefinition
+attributes
+	gBaseTypeEncoding : String
+	gMemAlignment : Integer
+	gByteOrder : GByteOrderEnum
+operations
+end
+
+abstract class GBaseTypeSizeDefinition<GARObject
+attributes
+operations
+end
+
+abstract class GBaseTypeAbsSize<GBaseTypeSizeDefinition
+attributes
+	gBaseTypeSize : Integer
+operations
+end
+
+abstract class GBaseTypeMaxSize<GBaseTypeSizeDefinition
+attributes
+	gMaxBaseTypeSize : Integer
+operations
+end
+
+abstract class GSwBaseType<GBaseType
+attributes
+operations
+end
+
+abstract class GSwSystemconst<GPackageableElement
+attributes
+operations
+end
+
+association xxx_GIdentifiable_gDesc between
+	GIdentifiable[*] role xxx_GIdentifiable_gDesc_src
+	GMultiLanguageOverviewParagraph[0..1] role gDesc
+end
+
+association xxx_GARPackage_gElements between
+	GARPackage[0..1] role xxx_GARPackage_gElements_src
+	GPackageableElement[*] role gElements
+end
+
+association xxx_GARPackage_gSubPackages between
+	GARPackage[0..1] role xxx_GARPackage_gSubPackages_src
+	GARPackage[*] role gSubPackages
+end
+
+association xxx_GAUTOSAR_gArPackages between
+	GAUTOSAR[0..1] role xxx_GAUTOSAR_gArPackages_src
+	GARPackage[*] role gArPackages
+end
+
+association xxx_GPackageableElement_gARPackage between
+	GPackageableElement[*] role xxx_GPackageableElement_gARPackage_src
+	GARPackage[0..1] role gARPackage
+end
+
+association xxx_GRemark_gPs between
+	GRemark[0..1] role xxx_GRemark_gPs_src
+	GMultiLanguageParagraph[*] role gPs
+end
+
+association xxx_GGeneralAnnotation_gAnnotationText between
+	GGeneralAnnotation[*] role xxx_GGeneralAnnotation_gAnnotationText_src
+	GRemark[0..1] role gAnnotationText
+end
+
+association xxx_GMultiLanguageParagraph_gL1s between
+	GMultiLanguageParagraph[0..1] role xxx_GMultiLanguageParagraph_gL1s_src
+	GLParagraph[*] role gL1s
+end
+
+association xxx_GMultiLanguageOverviewParagraph_gL2s between
+	GMultiLanguageOverviewParagraph[0..1] role xxx_GMultiLanguageOverviewParagraph_gL2s_src
+	GLOverviewParagraph[*] role gL2s
+end
+
+association xxx_GSwComponentType_gPorts between
+	GSwComponentType[0..1] role xxx_GSwComponentType_gPorts_src
+	GPortPrototype[*] role gPorts
+end
+
+association xxx_GPPortPrototype_gProvidedInterface between
+	GPPortPrototype[*] role xxx_GPPortPrototype_gProvidedInterface_src
+	GPortInterface[0..1] role gProvidedInterface
+end
+
+association xxx_GRPortPrototype_gRequiredInterface between
+	GRPortPrototype[*] role xxx_GRPortPrototype_gRequiredInterface_src
+	GPortInterface[0..1] role gRequiredInterface
+end
+
+association xxx_GRVariableInAtomicSwcIRef_gContextRPort between
+	GRVariableInAtomicSwcIRef[*] role xxx_GRVariableInAtomicSwcIRef_gContextRPort_src
+	GRPortPrototype[0..1] role gContextRPort
+end
+
+association xxx_GRVariableInAtomicSwcIRef_gTargetDataElement between
+	GRVariableInAtomicSwcIRef[*] role xxx_GRVariableInAtomicSwcIRef_gTargetDataElement_src
+	GVariableDataPrototype[0..1] role gTargetDataElement
+end
+
+association xxx_GPVariableInAtomicSwcIRef_gContextPPort between
+	GPVariableInAtomicSwcIRef[*] role xxx_GPVariableInAtomicSwcIRef_gContextPPort_src
+	GPPortPrototype[0..1] role gContextPPort
+end
+
+association xxx_GPVariableInAtomicSwcIRef_gTargetDataElement between
+	GPVariableInAtomicSwcIRef[*] role xxx_GPVariableInAtomicSwcIRef_gTargetDataElement_src
+	GVariableDataPrototype[0..1] role gTargetDataElement
+end
+
+association xxx_GROperationInAtomicSwcIRef_gContextRPort between
+	GROperationInAtomicSwcIRef[*] role xxx_GROperationInAtomicSwcIRef_gContextRPort_src
+	GRPortPrototype[0..1] role gContextRPort
+end
+
+association xxx_GROperationInAtomicSwcIRef_gTargetRequiredOperation between
+	GROperationInAtomicSwcIRef[*] role xxx_GROperationInAtomicSwcIRef_gTargetRequiredOperation_src
+	GClientServerOperation[0..1] role gTargetRequiredOperation
+end
+
+association xxx_GPOperationInAtomicSwcIRef_gContextPPort between
+	GPOperationInAtomicSwcIRef[*] role xxx_GPOperationInAtomicSwcIRef_gContextPPort_src
+	GPPortPrototype[0..1] role gContextPPort
+end
+
+association xxx_GPOperationInAtomicSwcIRef_gTargetProvidedOperation between
+	GPOperationInAtomicSwcIRef[*] role xxx_GPOperationInAtomicSwcIRef_gTargetProvidedOperation_src
+	GClientServerOperation[0..1] role gTargetProvidedOperation
+end
+
+association xxx_GRModeGroupInAtomicSwcIRef_gContextRPort between
+	GRModeGroupInAtomicSwcIRef[*] role xxx_GRModeGroupInAtomicSwcIRef_gContextRPort_src
+	GRPortPrototype[0..1] role gContextRPort
+end
+
+association xxx_GRModeGroupInAtomicSwcIRef_gTargetModeGroup between
+	GRModeGroupInAtomicSwcIRef[*] role xxx_GRModeGroupInAtomicSwcIRef_gTargetModeGroup_src
+	GModeDeclarationGroupPrototype[0..1] role gTargetModeGroup
+end
+
+association xxx_GPModeGroupInAtomicSwcIRef_gContextPPort between
+	GPModeGroupInAtomicSwcIRef[*] role xxx_GPModeGroupInAtomicSwcIRef_gContextPPort_src
+	GPPortPrototype[0..1] role gContextPPort
+end
+
+association xxx_GPModeGroupInAtomicSwcIRef_gTargetModeGroup between
+	GPModeGroupInAtomicSwcIRef[*] role xxx_GPModeGroupInAtomicSwcIRef_gTargetModeGroup_src
+	GModeDeclarationGroupPrototype[0..1] role gTargetModeGroup
+end
+
+association xxx_GParameterInAtomicSwcIRef_gContextPort between
+	GParameterInAtomicSwcIRef[*] role xxx_GParameterInAtomicSwcIRef_gContextPort_src
+	GPortPrototype[0..1] role gContextPort
+end
+
+association xxx_GParameterInAtomicSwcIRef_gTargetParameter between
+	GParameterInAtomicSwcIRef[*] role xxx_GParameterInAtomicSwcIRef_gTargetParameter_src
+	GDataPrototype[0..1] role gTargetParameter
+end
+
+association xxx_GSenderReceiverInterface_gDataElements between
+	GSenderReceiverInterface[0..1] role xxx_GSenderReceiverInterface_gDataElements_src
+	GVariableDataPrototype[*] role gDataElements
+end
+
+association xxx_GClientServerInterface_gOperations between
+	GClientServerInterface[0..1] role xxx_GClientServerInterface_gOperations_src
+	GClientServerOperation[*] role gOperations
+end
+
+association xxx_GClientServerInterface_gPossibleErrors between
+	GClientServerInterface[0..1] role xxx_GClientServerInterface_gPossibleErrors_src
+	GApplicationError[*] role gPossibleErrors
+end
+
+association xxx_GParameterInterface_gParameters between
+	GParameterInterface[0..1] role xxx_GParameterInterface_gParameters_src
+	GParameterDataPrototype[*] role gParameters
+end
+
+association xxx_GModeSwitchInterface_gModeGroups between
+	GModeSwitchInterface[0..1] role xxx_GModeSwitchInterface_gModeGroups_src
+	GModeDeclarationGroupPrototype[*] role gModeGroups
+end
+
+association xxx_GClientServerOperation_gArguments between
+	GClientServerOperation[0..1] role xxx_GClientServerOperation_gArguments_src
+	GArgumentDataPrototype[*] role gArguments
+end
+
+association xxx_GClientServerOperation_gPossibleErrors between
+	GClientServerOperation[0..1] role xxx_GClientServerOperation_gPossibleErrors_src
+	GApplicationError[*] role gPossibleErrors
+end
+
+association xxx_GApplicationRecordDataType_gElements between
+	GApplicationRecordDataType[0..1] role xxx_GApplicationRecordDataType_gElements_src
+	GApplicationRecordElement[*] role gElements
+end
+
+association xxx_GAutosarDataPrototype_gType between
+	GAutosarDataPrototype[*] role xxx_GAutosarDataPrototype_gType_src
+	GAutosarDataType[0..1] role gType
+end
+
+association xxx_GApplicationCompositeElementDataPrototype_gElementType between
+	GApplicationCompositeElementDataPrototype[*] role xxx_GApplicationCompositeElementDataPrototype_gElementType_src
+	GApplicationDataType[0..1] role gElementType
+end
+
+association xxx_GCompuMethod_gCompuPhysToInternal between
+	GCompuMethod[*] role xxx_GCompuMethod_gCompuPhysToInternal_src
+	GCompu[0..1] role gCompuPhysToInternal
+end
+
+association xxx_GCompuMethod_gCompuInternalToPhys between
+	GCompuMethod[*] role xxx_GCompuMethod_gCompuInternalToPhys_src
+	GCompu[0..1] role gCompuInternalToPhys
+end
+
+association xxx_GCompuMethod_gUnit between
+	GCompuMethod[*] role xxx_GCompuMethod_gUnit_src
+	GUnit[0..1] role gUnit
+end
+
+association xxx_GCompu_gCompuContent between
+	GCompu[*] role xxx_GCompu_gCompuContent_src
+	GCompuContent[0..1] role gCompuContent
+end
+
+association xxx_GCompuScales_gCompuScales between
+	GCompuScales[0..1] role xxx_GCompuScales_gCompuScales_src
+	GCompuScale[*] role gCompuScales
+end
+
+association xxx_GCompuScale_gCompuScaleContents between
+	GCompuScale[*] role xxx_GCompuScale_gCompuScaleContents_src
+	GCompuScaleContents[0..1] role gCompuScaleContents
+end
+
+association xxx_GCompuScale_gLowerLimit between
+	GCompuScale[*] role xxx_GCompuScale_gLowerLimit_src
+	GLimit[0..1] role gLowerLimit
+end
+
+association xxx_GCompuScale_gUpperLimit between
+	GCompuScale[*] role xxx_GCompuScale_gUpperLimit_src
+	GLimit[0..1] role gUpperLimit
+end
+
+association xxx_GCompuScaleConstantContents_gCompuConst between
+	GCompuScaleConstantContents[*] role xxx_GCompuScaleConstantContents_gCompuConst_src
+	GCompuConst[0..1] role gCompuConst
+end
+
+association xxx_GCompuScaleRationalFormula_gCompuRationalCoeffs between
+	GCompuScaleRationalFormula[*] role xxx_GCompuScaleRationalFormula_gCompuRationalCoeffs_src
+	GCompuRationalCoeffs[0..1] role gCompuRationalCoeffs
+end
+
+association xxx_GCompuConst_gCompuConstContentType between
+	GCompuConst[*] role xxx_GCompuConst_gCompuConstContentType_src
+	GCompuConstContent[0..1] role gCompuConstContentType
+end
+
+association xxx_GCompuRationalCoeffs_gCompuNumerator between
+	GCompuRationalCoeffs[*] role xxx_GCompuRationalCoeffs_gCompuNumerator_src
+	GCompuNominatorDenominator[0..1] role gCompuNumerator
+end
+
+association xxx_GCompuRationalCoeffs_gCompuDenominator between
+	GCompuRationalCoeffs[*] role xxx_GCompuRationalCoeffs_gCompuDenominator_src
+	GCompuNominatorDenominator[0..1] role gCompuDenominator
+end
+
+association xxx_GUnit_gPhysicalDimension between
+	GUnit[*] role xxx_GUnit_gPhysicalDimension_src
+	GPhysicalDimension[0..1] role gPhysicalDimension
+end
+
+association xxx_GSwComponentPrototype_gType between
+	GSwComponentPrototype[*] role xxx_GSwComponentPrototype_gType_src
+	GSwComponentType[0..1] role gType
+end
+
+association xxx_GCompositionSwComponentType_gComponents between
+	GCompositionSwComponentType[0..1] role xxx_GCompositionSwComponentType_gComponents_src
+	GSwComponentPrototype[*] role gComponents
+end
+
+association xxx_GAssemblySwConnector_gRequester between
+	GAssemblySwConnector[*] role xxx_GAssemblySwConnector_gRequester_src
+	GRPortInCompositionIRef[0..1] role gRequester
+end
+
+association xxx_GAssemblySwConnector_gProvider between
+	GAssemblySwConnector[*] role xxx_GAssemblySwConnector_gProvider_src
+	GPPortInCompositionIRef[0..1] role gProvider
+end
+
+association xxx_GPPortInCompositionIRef_gTargetPPort between
+	GPPortInCompositionIRef[*] role xxx_GPPortInCompositionIRef_gTargetPPort_src
+	GPPortPrototype[0..1] role gTargetPPort
+end
+
+association xxx_GPPortInCompositionIRef_gContextComponent between
+	GPPortInCompositionIRef[*] role xxx_GPPortInCompositionIRef_gContextComponent_src
+	GSwComponentPrototype[0..1] role gContextComponent
+end
+
+association xxx_GRPortInCompositionIRef_gTargetRPort between
+	GRPortInCompositionIRef[*] role xxx_GRPortInCompositionIRef_gTargetRPort_src
+	GRPortPrototype[0..1] role gTargetRPort
+end
+
+association xxx_GRPortInCompositionIRef_gContextComponent between
+	GRPortInCompositionIRef[*] role xxx_GRPortInCompositionIRef_gContextComponent_src
+	GSwComponentPrototype[0..1] role gContextComponent
+end
+
+association xxx_GSwcInternalBehavior_gRunnables between
+	GSwcInternalBehavior[0..1] role xxx_GSwcInternalBehavior_gRunnables_src
+	GRunnableEntity[*] role gRunnables
+end
+
+association xxx_GSwcInternalBehavior_gEvents between
+	GSwcInternalBehavior[0..1] role xxx_GSwcInternalBehavior_gEvents_src
+	GRTEEvent[*] role gEvents
+end
+
+association xxx_GSwcInternalBehavior_gPerInstanceMemories between
+	GSwcInternalBehavior[0..1] role xxx_GSwcInternalBehavior_gPerInstanceMemories_src
+	GPerInstanceMemory[*] role gPerInstanceMemories
+end
+
+association xxx_GSwcInternalBehavior_gComponent between
+	GSwcInternalBehavior[*] role xxx_GSwcInternalBehavior_gComponent_src
+	GAtomicSwComponentType[0..1] role gComponent
+end
+
+association xxx_GRunnableEntity_gWaitPoints between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gWaitPoints_src
+	GWaitPoint[*] role gWaitPoints
+end
+
+association xxx_GRunnableEntity_gReadVariables between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gReadVariables_src
+	GVariableDataPrototype[*] role gReadVariables
+end
+
+association xxx_GRunnableEntity_gWrittenVariables between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gWrittenVariables_src
+	GVariableDataPrototype[*] role gWrittenVariables
+end
+
+association xxx_GRunnableEntity_gDataReadAccess between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gDataReadAccess_src
+	GVariableAccess[*] role gDataReadAccess
+end
+
+association xxx_GRunnableEntity_gDataWriteAccess between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gDataWriteAccess_src
+	GVariableAccess[*] role gDataWriteAccess
+end
+
+association xxx_GRunnableEntity_gDataSendPoints between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gDataSendPoints_src
+	GVariableAccess[*] role gDataSendPoints
+end
+
+association xxx_GRunnableEntity_gDataReceivePoints between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gDataReceivePoints_src
+	GVariableAccess[*] role gDataReceivePoints
+end
+
+association xxx_GRunnableEntity_gServerCallPoints between
+	GRunnableEntity[0..1] role xxx_GRunnableEntity_gServerCallPoints_src
+	GServerCallPoint[*] role gServerCallPoints
+end
+
+association xxx_GRTEEvent_gStartOnEvent between
+	GRTEEvent[*] role xxx_GRTEEvent_gStartOnEvent_src
+	GRunnableEntity[0..1] role gStartOnEvent
+end
+
+association xxx_GDataReceivedEvent_gData between
+	GDataReceivedEvent[*] role xxx_GDataReceivedEvent_gData_src
+	GRVariableInAtomicSwcIRef[0..1] role gData
+end
+
+association xxx_GWaitPoint_gTriggers between
+	GWaitPoint[0..1] role xxx_GWaitPoint_gTriggers_src
+	GRTEEvent[*] role gTriggers
+end
+
+association xxx_GDataReceiveErrorEvent_gData between
+	GDataReceiveErrorEvent[*] role xxx_GDataReceiveErrorEvent_gData_src
+	GRVariableInAtomicSwcIRef[0..1] role gData
+end
+
+association xxx_GOperationInvokedEvent_gOperation between
+	GOperationInvokedEvent[*] role xxx_GOperationInvokedEvent_gOperation_src
+	GPOperationInAtomicSwcIRef[0..1] role gOperation
+end
+
+association xxx_GAsynchronousServerCallReturnsEvent_gEventSource between
+	GAsynchronousServerCallReturnsEvent[*] role xxx_GAsynchronousServerCallReturnsEvent_gEventSource_src
+	GAsynchronousServerCallPoint[0..1] role gEventSource
+end
+
+association xxx_GDataSendCompletedEvent_gEventSource between
+	GDataSendCompletedEvent[*] role xxx_GDataSendCompletedEvent_gEventSource_src
+	GVariableAccess[0..1] role gEventSource
+end
+
+association xxx_GVariableAccess_gDataElement between
+	GVariableAccess[*] role xxx_GVariableAccess_gDataElement_src
+	GVariableInAtomicSwcIRef[0..1] role gDataElement
+end
+
+association xxx_GParameterAccess_gParameter between
+	GParameterAccess[*] role xxx_GParameterAccess_gParameter_src
+	GParameterInAtomicSwcIRef[0..1] role gParameter
+end
+
+association xxx_GModeSwitchPoint_gModeGroup between
+	GModeSwitchPoint[*] role xxx_GModeSwitchPoint_gModeGroup_src
+	GPModeGroupInAtomicSwcIRef[0..1] role gModeGroup
+end
+
+association xxx_GSwcImplementation_gBehavior between
+	GSwcImplementation[*] role xxx_GSwcImplementation_gBehavior_src
+	GSwcInternalBehavior[0..1] role gBehavior
+end
+
+association xxx_GNonqueuedSenderComSpec_gInitValue between
+	GNonqueuedSenderComSpec[*] role xxx_GNonqueuedSenderComSpec_gInitValue_src
+	GValueSpecification[0..1] role gInitValue
+end
+
+association xxx_GNonqueuedReceiverComSpec_gInitValue between
+	GNonqueuedReceiverComSpec[*] role xxx_GNonqueuedReceiverComSpec_gInitValue_src
+	GValueSpecification[0..1] role gInitValue
+end
+
+association xxx_GImplementation_gResourceConsumption between
+	GImplementation[*] role xxx_GImplementation_gResourceConsumption_src
+	GResourceConsumption[0..1] role gResourceConsumption
+end
+
+association xxx_GImplementation_gCodeDescriptors between
+	GImplementation[0..1] role xxx_GImplementation_gCodeDescriptors_src
+	GCode[*] role gCodeDescriptors
+end
+
+association xxx_GModeDeclarationGroupPrototype_gType between
+	GModeDeclarationGroupPrototype[*] role xxx_GModeDeclarationGroupPrototype_gType_src
+	GModeDeclarationGroup[0..1] role gType
+end
+
+association xxx_GModeDeclarationGroup_gModeDeclarations between
+	GModeDeclarationGroup[0..1] role xxx_GModeDeclarationGroup_gModeDeclarations_src
+	GModeDeclaration[1..*] role gModeDeclarations
+end
+
+association xxx_GModeDeclarationGroup_gInitialMode between
+	GModeDeclarationGroup[*] role xxx_GModeDeclarationGroup_gInitialMode_src
+	GModeDeclaration[1] role gInitialMode
+end
+
+association xxx_GExecutableEntity_gRunsInsideExclusiveAreas between
+	GExecutableEntity[0..1] role xxx_GExecutableEntity_gRunsInsideExclusiveAreas_src
+	GExclusiveArea[*] role gRunsInsideExclusiveAreas
+end
+
+association xxx_GExecutableEntity_gCanEnterExclusiveAreas between
+	GExecutableEntity[0..1] role xxx_GExecutableEntity_gCanEnterExclusiveAreas_src
+	GExclusiveArea[*] role gCanEnterExclusiveAreas
+end
+
+association xxx_GInternalBehavior_gExclusiveAreas between
+	GInternalBehavior[0..1] role xxx_GInternalBehavior_gExclusiveAreas_src
+	GExclusiveArea[*] role gExclusiveAreas
+end
+
+association xxx_GSwDataDefPropsConditional_gBaseType between
+	GSwDataDefPropsConditional[*] role xxx_GSwDataDefPropsConditional_gBaseType_src
+	GSwBaseType[0..1] role gBaseType
+end
+
+association xxx_GSwDataDefPropsConditional_gInvalidValue between
+	GSwDataDefPropsConditional[*] role xxx_GSwDataDefPropsConditional_gInvalidValue_src
+	GValueSpecification[0..1] role gInvalidValue
+end
+
+association xxx_GBaseType_gBaseTypeDefinitionType between
+	GBaseType[*] role xxx_GBaseType_gBaseTypeDefinitionType_src
+	GBaseTypeDefinition[0..1] role gBaseTypeDefinitionType
+end
+
+association xxx_GBaseTypeDirectDefinition_gBaseTypeSizeDefinitionType between
+	GBaseTypeDirectDefinition[*] role xxx_GBaseTypeDirectDefinition_gBaseTypeSizeDefinitionType_src
+	GBaseTypeSizeDefinition[0..1] role gBaseTypeSizeDefinitionType
+end
+

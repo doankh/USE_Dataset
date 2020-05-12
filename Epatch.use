@@ -1,0 +1,175 @@
+model epatch
+class Epatch
+attributes
+	name : String
+operations
+end
+
+class ModelImport
+attributes
+	name : String
+operations
+end
+
+class ResourceImport<ModelImport
+attributes
+	uri : String
+operations
+end
+
+class EPackageImport<ModelImport
+attributes
+	nsURI : String
+operations
+end
+
+class NamedResource
+attributes
+	name : String
+	leftUri : String
+	rightUri : String
+operations
+end
+
+class NamedObject
+attributes
+	name : String
+operations
+end
+
+class ObjectRef<NamedObject
+attributes
+	leftFrag : String
+	rightFrag : String
+operations
+end
+
+class CreatedObject<NamedObject
+attributes
+operations
+end
+
+class Assignment
+attributes
+	feature : String
+operations
+end
+
+class SingleAssignment<Assignment
+attributes
+operations
+end
+
+class ListAssignment<Assignment
+attributes
+operations
+end
+
+class AssignmentValue
+attributes
+	value : String
+	refFeature : String
+	refIndex : String
+	impFrag : String
+	index : String
+	keyword : String
+operations
+end
+
+class ObjectNew<CreatedObject
+attributes
+	impFrag : String
+operations
+end
+
+class ObjectCopy<CreatedObject
+attributes
+	fragment : String
+operations
+end
+
+composition xxx_Epatch_modelImports between
+	Epatch[0..1] role xxx_Epatch_modelImports_src
+	ModelImport[*] role modelImports
+end
+
+composition xxx_Epatch_resources between
+	Epatch[0..1] role xxx_Epatch_resources_src
+	NamedResource[*] role resources
+end
+
+composition xxx_Epatch_objects between
+	Epatch[0..1] role xxx_Epatch_objects_src
+	ObjectRef[*] role objects
+end
+
+composition xxx_NamedResource_leftRoot between
+	NamedResource[*] role xxx_NamedResource_leftRoot_src
+	CreatedObject[0..1] role leftRoot
+end
+
+composition xxx_NamedResource_rightRoot between
+	NamedResource[*] role xxx_NamedResource_rightRoot_src
+	CreatedObject[0..1] role rightRoot
+end
+
+composition xxx_NamedObject_assignments between
+	NamedObject[0..1] role xxx_NamedObject_assignments_src
+	Assignment[*] role assignments
+end
+
+association xxx_ObjectRef_leftRes between
+	ObjectRef[*] role xxx_ObjectRef_leftRes_src
+	NamedResource[0..1] role leftRes
+end
+
+association xxx_ObjectRef_rightRes between
+	ObjectRef[*] role xxx_ObjectRef_rightRes_src
+	NamedResource[0..1] role rightRes
+end
+
+composition xxx_SingleAssignment_leftValue between
+	SingleAssignment[*] role xxx_SingleAssignment_leftValue_src
+	AssignmentValue[0..1] role leftValue
+end
+
+composition xxx_SingleAssignment_rightValue between
+	SingleAssignment[*] role xxx_SingleAssignment_rightValue_src
+	AssignmentValue[0..1] role rightValue
+end
+
+composition xxx_ListAssignment_leftValues between
+	ListAssignment[0..1] role xxx_ListAssignment_leftValues_src
+	AssignmentValue[*] role leftValues
+end
+
+composition xxx_ListAssignment_rightValues between
+	ListAssignment[0..1] role xxx_ListAssignment_rightValues_src
+	AssignmentValue[*] role rightValues
+end
+
+association xxx_AssignmentValue_refObject between
+	AssignmentValue[*] role xxx_AssignmentValue_refObject_src
+	NamedObject[0..1] role refObject
+end
+
+composition xxx_AssignmentValue_newObject between
+	AssignmentValue[*] role xxx_AssignmentValue_newObject_src
+	CreatedObject[0..1] role newObject
+end
+
+association xxx_AssignmentValue_import between
+	AssignmentValue[*] role xxx_AssignmentValue_import_src
+	ModelImport[0..1] role import
+end
+
+association xxx_ObjectNew_import between
+	ObjectNew[*] role xxx_ObjectNew_import_src
+	ModelImport[0..1] role import
+end
+
+association xxx_ObjectCopy_resource between
+	ObjectCopy[*] role xxx_ObjectCopy_resource_src
+	NamedResource[0..1] role resource
+end
+

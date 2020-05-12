@@ -1,0 +1,91 @@
+model Calendar
+class Calendar
+attributes
+	ID : String
+	name : String
+operations
+end
+
+class Profile
+attributes
+	URI : String
+operations
+end
+
+class Event
+attributes
+	URI : String
+	startTime : String
+	endTime : String
+	date : String
+	summary : String
+operations
+end
+
+abstract class Contact
+attributes
+	URI : String
+	email : String
+	description : String
+operations
+end
+
+class Person<Contact
+attributes
+	firstName : String
+	lastName : String
+operations
+end
+
+class Group<Contact
+attributes
+	name : String
+operations
+end
+
+class Image
+attributes
+	location : String
+operations
+end
+
+composition xxx_Calendar_events between
+	Calendar[0..1] role xxx_Calendar_events_src
+	Event[*] role events
+end
+
+composition xxx_Calendar_profiles between
+	Calendar[0..1] role xxx_Calendar_profiles_src
+	Profile[*] role profiles
+end
+
+association xxx_Profile_user between
+	Profile[*] role xxx_Profile_user_src
+	Contact[0..1] role user
+end
+
+association xxx_Profile_contacts between
+	Profile[0..1] role xxx_Profile_contacts_src
+	Contact[*] role contacts
+end
+
+association xxx_Event_attendees between
+	Event[0..1] role xxx_Event_attendees_src
+	Contact[*] role attendees
+end
+
+association xxx_Contact_image between
+	Contact[*] role xxx_Contact_image_src
+	Image[0..1] role image
+end
+
+association xxx_Contact_events between
+	Contact[0..1] role xxx_Contact_events_src
+	Event[*] role events
+end
+
+association xxx_Contact_contacts between
+	Contact[0..1] role xxx_Contact_contacts_src
+	Contact[*] role contacts
+end
+

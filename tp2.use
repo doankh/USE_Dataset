@@ -1,0 +1,100 @@
+model tp2
+enum Cout{
+default
+}
+
+enum Nature{
+default
+}
+
+class LivreRecettes
+attributes
+operations
+end
+
+class Recette
+attributes
+	nom : String
+	cout : Cout
+operations
+end
+
+class Ingredient
+attributes
+	name : String
+	nature : Nature
+	prix : Real
+operations
+end
+
+class Vin
+attributes
+	nom : String
+operations
+end
+
+class Compose
+attributes
+	name : String
+	quantite : Integer
+operations
+end
+
+class Localisation
+attributes
+	name : String
+operations
+end
+
+class Bouteille
+attributes
+	nom : String
+	prix : Real
+operations
+end
+
+composition xxx_LivreRecettes_recettes between
+	LivreRecettes[0..1] role xxx_LivreRecettes_recettes_src
+	Recette[*] role recettes
+end
+
+composition xxx_LivreRecettes_ingredients between
+	LivreRecettes[0..1] role xxx_LivreRecettes_ingredients_src
+	Ingredient[*] role ingredients
+end
+
+composition xxx_LivreRecettes_departements between
+	LivreRecettes[0..1] role xxx_LivreRecettes_departements_src
+	Localisation[*] role departements
+end
+
+composition xxx_LivreRecettes_vins between
+	LivreRecettes[0..1] role xxx_LivreRecettes_vins_src
+	Vin[*] role vins
+end
+
+composition xxx_Recette_composes between
+	Recette[0..1] role xxx_Recette_composes_src
+	Compose[*] role composes
+end
+
+association xxx_Recette_origineRegionale between
+	Recette[*] role xxx_Recette_origineRegionale_src
+	Localisation[0..1] role origineRegionale
+end
+
+composition xxx_Recette_vins between
+	Recette[*] role xxx_Recette_vins_src
+	Bouteille[0..2] role vins
+end
+
+association xxx_Compose__ingredient between
+	Compose[*] role xxx_Compose__ingredient_src
+	Ingredient[0..1] role _ingredient
+end
+
+association xxx_Bouteille__vin between
+	Bouteille[*] role xxx_Bouteille__vin_src
+	Vin[0..1] role _vin
+end
+

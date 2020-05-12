@@ -1,0 +1,59 @@
+model CDE
+class IUmlType
+attributes
+operations
+end
+
+class ICdeComponentSpec<IUmlType
+attributes
+operations
+end
+
+class IUmlClass<IUmlType
+attributes
+operations
+end
+
+class IUmlComponent<IUmlClass
+attributes
+operations
+end
+
+class ICdeServer<IUmlComponent
+attributes
+operations
+end
+
+class ICdeComponent<IUmlComponent
+attributes
+operations
+end
+
+class IUmlMember
+attributes
+operations
+end
+
+class ICdeMember<IUmlMember
+attributes
+operations
+end
+
+class ICdeMemberExe
+attributes
+	executionPerformance : String
+	resourceNeeded : String
+	executionDetails : String
+operations
+end
+
+association xxx_IUmlType_members between
+	IUmlType[0..1] role xxx_IUmlType_members_src
+	IUmlMember[*] role members
+end
+
+association xxx_ICdeServer_implements between
+	ICdeServer[0..1] role xxx_ICdeServer_implements_src
+	ICdeComponent[*] role implements
+end
+

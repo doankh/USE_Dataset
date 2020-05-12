@@ -1,0 +1,150 @@
+model SBCS
+enum State{
+default
+}
+
+enum ValveState{
+default
+}
+
+enum Mode{
+default
+}
+
+class PumpController_OpenPump<Transition
+attributes
+operations
+end
+
+class WaterLevelMeasurementDevice
+attributes
+	waterLevel : Real
+operations
+end
+
+class SteamBoiler_OpenValve<Transition
+attributes
+operations
+end
+
+class PumpControler
+attributes
+operations
+end
+
+class Snapshot
+attributes
+operations
+	getNext():Snapshot
+end
+
+class Pump
+attributes
+	mode : State
+operations
+end
+
+class ControlProgram_Start<Transition
+attributes
+operations
+end
+
+class SteamBoiler
+attributes
+	valveOpen : ValveState
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class WaterLevelMeaurementDevice_getLevel<Transition
+attributes
+	ret : Real
+operations
+end
+
+class ControlProgram
+attributes
+	mode : Mode
+	wlmdFailure : Boolean
+operations
+end
+
+class PumpController_ClosePump<Transition
+attributes
+operations
+end
+
+association xxx_PumpController_OpenPump_PCPre between
+	PumpController_OpenPump[*] role xxx_PumpController_OpenPump_PCPre_src
+	PumpControler[0..1] role PCPre
+end
+
+association xxx_PumpController_OpenPump_PCPost between
+	PumpController_OpenPump[*] role xxx_PumpController_OpenPump_PCPost_src
+	PumpControler[0..1] role PCPost
+end
+
+association xxx_SteamBoiler_OpenValve_SBPre between
+	SteamBoiler_OpenValve[*] role xxx_SteamBoiler_OpenValve_SBPre_src
+	SteamBoiler[0..1] role SBPre
+end
+
+association xxx_SteamBoiler_OpenValve_SBPost between
+	SteamBoiler_OpenValve[*] role xxx_SteamBoiler_OpenValve_SBPost_src
+	SteamBoiler[0..1] role SBPost
+end
+
+association xxx_PumpControler_PumpControlerPump between
+	PumpControler[*] role xxx_PumpControler_PumpControlerPump_src
+	Pump[1] role PumpControlerPump
+end
+
+association xxx_Snapshot_ControlProgramSnapshot between
+	Snapshot[*] role xxx_Snapshot_ControlProgramSnapshot_src
+	ControlProgram[1] role ControlProgramSnapshot
+end
+
+association xxx_Snapshot_AfterTrans between
+	Snapshot[*] role xxx_Snapshot_AfterTrans_src
+	Transition[1] role AfterTrans
+end
+
+association xxx_ControlProgram_Start_CPPost between
+	ControlProgram_Start[*] role xxx_ControlProgram_Start_CPPost_src
+	ControlProgram[0..1] role CPPost
+end
+
+association xxx_SteamBoiler_SteamBoilerControlProgram between
+	SteamBoiler[*] role xxx_SteamBoiler_SteamBoilerControlProgram_src
+	ControlProgram[1] role SteamBoilerControlProgram
+end
+
+association xxx_Transition_AfterTrans between
+	Transition[*] role xxx_Transition_AfterTrans_src
+	Snapshot[1] role AfterTrans
+end
+
+association xxx_WaterLevelMeaurementDevice_getLevel_wlmdPost between
+	WaterLevelMeaurementDevice_getLevel[*] role xxx_WaterLevelMeaurementDevice_getLevel_wlmdPost_src
+	WaterLevelMeasurementDevice[0..1] role wlmdPost
+end
+
+association xxx_ControlProgram_SnapshotControlProgram between
+	ControlProgram[*] role xxx_ControlProgram_SnapshotControlProgram_src
+	Snapshot[1] role SnapshotControlProgram
+end
+
+association xxx_PumpController_ClosePump_PCPre between
+	PumpController_ClosePump[*] role xxx_PumpController_ClosePump_PCPre_src
+	PumpControler[0..1] role PCPre
+end
+
+association xxx_PumpController_ClosePump_PCPost between
+	PumpController_ClosePump[*] role xxx_PumpController_ClosePump_PCPost_src
+	PumpControler[0..1] role PCPost
+end
+

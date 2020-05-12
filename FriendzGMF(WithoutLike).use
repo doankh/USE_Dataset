@@ -1,0 +1,130 @@
+model friendz
+class Friendz
+attributes
+operations
+end
+
+class User
+attributes
+	idUser : String
+	firstName : String
+	lastName : String
+operations
+end
+
+class Publication
+attributes
+	idPub : String
+	publication : String
+	datePub : String
+operations
+	isAuthor(p : Publication):User
+end
+
+class Comment
+attributes
+	idCom : String
+	comment : String
+	dateCom : String
+operations
+end
+
+class Enemity
+attributes
+	dateEnemy : String
+operations
+end
+
+class Friendship
+attributes
+	dateFriend : String
+operations
+end
+
+class Authorship
+attributes
+operations
+end
+
+class PubliRef
+attributes
+operations
+	isAuthor(p : Publication):User
+	isFriend(u : User):User
+end
+
+composition xxx_Friendz_users between
+	Friendz[0..1] role xxx_Friendz_users_src
+	User[*] role users
+end
+
+composition xxx_Friendz_friendships between
+	Friendz[0..1] role xxx_Friendz_friendships_src
+	Friendship[*] role friendships
+end
+
+composition xxx_Friendz_enemities between
+	Friendz[0..1] role xxx_Friendz_enemities_src
+	Enemity[*] role enemities
+end
+
+composition xxx_Friendz_publications between
+	Friendz[0..1] role xxx_Friendz_publications_src
+	Publication[*] role publications
+end
+
+composition xxx_Friendz_comments between
+	Friendz[0..1] role xxx_Friendz_comments_src
+	Comment[*] role comments
+end
+
+composition xxx_Friendz_authorships between
+	Friendz[0..1] role xxx_Friendz_authorships_src
+	Authorship[*] role authorships
+end
+
+composition xxx_Friendz_publiRefs between
+	Friendz[0..1] role xxx_Friendz_publiRefs_src
+	PubliRef[*] role publiRefs
+end
+
+composition xxx_Enemity_user1 between
+	Enemity[*] role xxx_Enemity_user1_src
+	User[0..1] role user1
+end
+
+composition xxx_Enemity_user2 between
+	Enemity[*] role xxx_Enemity_user2_src
+	User[0..1] role user2
+end
+
+composition xxx_Friendship_user3 between
+	Friendship[*] role xxx_Friendship_user3_src
+	User[0..1] role user3
+end
+
+composition xxx_Friendship_user4 between
+	Friendship[*] role xxx_Friendship_user4_src
+	User[0..1] role user4
+end
+
+composition xxx_Authorship_author between
+	Authorship[*] role xxx_Authorship_author_src
+	User[0..1] role author
+end
+
+composition xxx_Authorship_publi between
+	Authorship[*] role xxx_Authorship_publi_src
+	Publication[0..1] role publi
+end
+
+composition xxx_PubliRef_publi between
+	PubliRef[*] role xxx_PubliRef_publi_src
+	Publication[0..1] role publi
+end
+
+composition xxx_PubliRef_publiRef between
+	PubliRef[*] role xxx_PubliRef_publiRef_src
+	Publication[0..1] role publiRef
+end
+

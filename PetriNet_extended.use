@@ -1,0 +1,189 @@
+model PetriNet
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class PetriNet<NamedElement
+attributes
+operations
+end
+
+abstract class Element<NamedElement
+attributes
+operations
+end
+
+class Place<Element
+attributes
+operations
+end
+
+class Transition<Element
+attributes
+operations
+end
+
+abstract class Arc<NamedElement
+attributes
+	weight : Integer
+operations
+end
+
+class PlaceToTransition<Arc
+attributes
+operations
+end
+
+class TransitionToPlace<Arc
+attributes
+operations
+end
+
+class Execution
+attributes
+operations
+end
+
+class Token
+attributes
+operations
+end
+
+class Marking
+attributes
+operations
+end
+
+class Movement
+attributes
+operations
+end
+
+composition xxx_PetriNet_elements between
+	PetriNet[0..1] role xxx_PetriNet_elements_src
+	Element[*] role elements
+end
+
+composition xxx_PetriNet_arcs between
+	PetriNet[0..1] role xxx_PetriNet_arcs_src
+	Arc[*] role arcs
+end
+
+association xxx_PetriNet_execs between
+	PetriNet[0..1] role xxx_PetriNet_execs_src
+	Execution[*] role execs
+end
+
+association xxx_Element_net between
+	Element[*] role xxx_Element_net_src
+	PetriNet[1] role net
+end
+
+association xxx_Place_incomingArc between
+	Place[0..1] role xxx_Place_incomingArc_src
+	TransitionToPlace[*] role incomingArc
+end
+
+association xxx_Place_outgoingArc between
+	Place[0..1] role xxx_Place_outgoingArc_src
+	PlaceToTransition[*] role outgoingArc
+end
+
+association xxx_Transition_incomingArc between
+	Transition[0..1] role xxx_Transition_incomingArc_src
+	PlaceToTransition[1..*] role incomingArc
+end
+
+association xxx_Transition_outgoingArc between
+	Transition[0..1] role xxx_Transition_outgoingArc_src
+	TransitionToPlace[1..*] role outgoingArc
+end
+
+association xxx_Arc_net between
+	Arc[*] role xxx_Arc_net_src
+	PetriNet[1] role net
+end
+
+association xxx_PlaceToTransition_from_ between
+	PlaceToTransition[*] role xxx_PlaceToTransition_from__src
+	Place[1] role from_
+end
+
+association xxx_PlaceToTransition_to between
+	PlaceToTransition[*] role xxx_PlaceToTransition_to_src
+	Transition[1] role to
+end
+
+association xxx_TransitionToPlace_from_ between
+	TransitionToPlace[*] role xxx_TransitionToPlace_from__src
+	Transition[1] role from_
+end
+
+association xxx_TransitionToPlace_to between
+	TransitionToPlace[*] role xxx_TransitionToPlace_to_src
+	Place[1] role to
+end
+
+association xxx_Execution_net between
+	Execution[*] role xxx_Execution_net_src
+	PetriNet[1] role net
+end
+
+composition xxx_Execution_markings between
+	Execution[0..1] role xxx_Execution_markings_src
+	Marking[*] role markings
+end
+
+composition xxx_Execution_movements between
+	Execution[0..1] role xxx_Execution_movements_src
+	Movement[*] role movements
+end
+
+association xxx_Token_placedAt between
+	Token[*] role xxx_Token_placedAt_src
+	Place[1] role placedAt
+end
+
+association xxx_Token_marking between
+	Token[*] role xxx_Token_marking_src
+	Marking[1] role marking
+end
+
+association xxx_Marking_exec between
+	Marking[*] role xxx_Marking_exec_src
+	Execution[1] role exec
+end
+
+composition xxx_Marking_tokens between
+	Marking[0..1] role xxx_Marking_tokens_src
+	Token[*] role tokens
+end
+
+association xxx_Movement_exec between
+	Movement[*] role xxx_Movement_exec_src
+	Execution[1] role exec
+end
+
+association xxx_Movement_fire between
+	Movement[*] role xxx_Movement_fire_src
+	Transition[1] role fire
+end
+
+association xxx_Movement_source between
+	Movement[*] role xxx_Movement_source_src
+	Marking[1] role source
+end
+
+association xxx_Movement_target between
+	Movement[*] role xxx_Movement_target_src
+	Marking[1] role target
+end
+

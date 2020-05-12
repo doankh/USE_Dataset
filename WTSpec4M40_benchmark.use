@@ -1,0 +1,124 @@
+model WTSpec4M
+enum TypeEnum{
+default
+}
+
+enum CycleEnum{
+default
+}
+
+class WTSystem<WTElement
+attributes
+	model_ : String
+	version : String
+operations
+end
+
+class SystemInput<WTCtrlInput
+attributes
+operations
+end
+
+class SystemOutput<WTCtrlOutput
+attributes
+operations
+end
+
+class SystemAlarm<WTCtrlOutput
+attributes
+	activated : Boolean
+operations
+end
+
+class SystemParam<WTCtrlParam
+attributes
+	value : Integer
+operations
+end
+
+abstract class WTCtrlInput<WTElement
+attributes
+operations
+end
+
+abstract class WTCtrlOutput<WTElement
+attributes
+operations
+end
+
+abstract class WTCtrlParam<WTElement
+attributes
+operations
+end
+
+class Subsystem<WTElement
+attributes
+operations
+end
+
+class WTCtrl<WTElement
+attributes
+	type : TypeEnum
+	cycle : CycleEnum
+	order : Integer
+	enabled : Boolean
+operations
+end
+
+abstract class WTElement
+attributes
+	name : String
+	id : String
+operations
+end
+
+composition xxx_WTSystem_subsystems between
+	WTSystem[0..1] role xxx_WTSystem_subsystems_src
+	Subsystem[1..*] role subsystems
+end
+
+composition xxx_WTSystem_inputs between
+	WTSystem[0..1] role xxx_WTSystem_inputs_src
+	SystemInput[*] role inputs
+end
+
+composition xxx_WTSystem_outputs between
+	WTSystem[0..1] role xxx_WTSystem_outputs_src
+	SystemOutput[*] role outputs
+end
+
+composition xxx_WTSystem_params between
+	WTSystem[0..1] role xxx_WTSystem_params_src
+	SystemParam[*] role params
+end
+
+composition xxx_WTSystem_alarms between
+	WTSystem[0..1] role xxx_WTSystem_alarms_src
+	SystemAlarm[*] role alarms
+end
+
+composition xxx_Subsystem_subsystems between
+	Subsystem[0..1] role xxx_Subsystem_subsystems_src
+	Subsystem[*] role subsystems
+end
+
+composition xxx_Subsystem_wtctrls between
+	Subsystem[0..1] role xxx_Subsystem_wtctrls_src
+	WTCtrl[*] role wtctrls
+end
+
+association xxx_WTCtrl_input between
+	WTCtrl[*] role xxx_WTCtrl_input_src
+	WTCtrlInput[1] role input
+end
+
+association xxx_WTCtrl_param between
+	WTCtrl[*] role xxx_WTCtrl_param_src
+	WTCtrlParam[1] role param
+end
+
+association xxx_WTCtrl_output between
+	WTCtrl[*] role xxx_WTCtrl_output_src
+	WTCtrlOutput[1] role output
+end
+

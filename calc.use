@@ -1,0 +1,180 @@
+model calc
+enum PlusMinus{
+default
+}
+
+enum MulDiv{
+default
+}
+
+enum Comp{
+default
+}
+
+class Calculation
+attributes
+operations
+	getVariable(name : String):Variable
+end
+
+class Variable<NamedElement
+attributes
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class BinaryExpression<Expression
+attributes
+operations
+end
+
+class Additive<BinaryExpression
+attributes
+	operator : PlusMinus
+operations
+end
+
+class Multiplictive<BinaryExpression
+attributes
+	operator : MulDiv
+operations
+end
+
+class Negation<Expression
+attributes
+operations
+end
+
+class Or<BinaryExpression
+attributes
+operations
+end
+
+class And<BinaryExpression
+attributes
+operations
+end
+
+class Type<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Compound<Expression
+attributes
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class NumberLiteral<Literal
+attributes
+	value : Real
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class VariableReference<Expression
+attributes
+operations
+end
+
+class Compare<BinaryExpression
+attributes
+	operator : Comp
+operations
+end
+
+class FunctionCall<Expression,NamedElement
+attributes
+operations
+end
+
+composition xxx_Calculation_inputVariables between
+	Calculation[0..1] role xxx_Calculation_inputVariables_src
+	Variable[*] role inputVariables
+end
+
+composition xxx_Calculation_outputVariables between
+	Calculation[0..1] role xxx_Calculation_outputVariables_src
+	Variable[*] role outputVariables
+end
+
+composition xxx_Calculation_rules between
+	Calculation[0..1] role xxx_Calculation_rules_src
+	Rule[*] role rules
+end
+
+association xxx_Variable_type between
+	Variable[*] role xxx_Variable_type_src
+	Type[1] role type
+end
+
+composition xxx_Rule_condition between
+	Rule[*] role xxx_Rule_condition_src
+	Expression[0..1] role condition
+end
+
+association xxx_Rule_target between
+	Rule[*] role xxx_Rule_target_src
+	Variable[1] role target
+end
+
+composition xxx_Rule_right between
+	Rule[*] role xxx_Rule_right_src
+	Expression[1] role right
+end
+
+composition xxx_BinaryExpression_left between
+	BinaryExpression[*] role xxx_BinaryExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_BinaryExpression_right between
+	BinaryExpression[*] role xxx_BinaryExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_Negation_body between
+	Negation[*] role xxx_Negation_body_src
+	Expression[1] role body
+end
+
+composition xxx_Compound_body between
+	Compound[*] role xxx_Compound_body_src
+	Expression[1] role body
+end
+
+association xxx_VariableReference_variable between
+	VariableReference[*] role xxx_VariableReference_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_FunctionCall_arguments between
+	FunctionCall[0..1] role xxx_FunctionCall_arguments_src
+	Expression[*] role arguments
+end
+

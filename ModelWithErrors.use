@@ -1,0 +1,79 @@
+model modelWithErrors
+class Root
+attributes
+operations
+end
+
+class BadClass<Detritus
+attributes
+	attributeDefinedWithDerivationAndInitial : Integer
+	attributeDefinedWithInitial : Integer
+	attributeDefinedWithoutDerivation : Boolean
+	attributeDefinedWithoutDerivationBody : Boolean
+	attributeEvaluatingToInvalid : Boolean
+	attributeEvaluatingToNull : Boolean
+	attributeEvaluatingToWrongType : Boolean
+	attributeParsingToLexicalError : Boolean
+	attributeParsingToSemanticError : Boolean
+	attributeParsingToSyntacticError : Boolean
+operations
+	operationEvaluatingToInvalid():Boolean
+	operationEvaluatingToNull():Boolean
+	operationEvaluatingToWrongType():Boolean
+	operationDefinedWithoutBody():Boolean
+	operationDefinedWithoutBodyBody():Boolean
+	operationParsingToLexicalError():Boolean
+	operationParsingToSemanticError():Boolean
+	operationParsingToSyntacticError():Boolean
+end
+
+class Detritus
+attributes
+operations
+end
+
+class MissingConstraintBody<Detritus
+attributes
+operations
+end
+
+class ValidationEvaluatingToInvalid<Detritus
+attributes
+operations
+end
+
+class ValidationEvaluatingToNull<Detritus
+attributes
+operations
+end
+
+class ValidationEvaluatingToWrongType<Detritus
+attributes
+operations
+end
+
+class ValidationParsingToLexicalError<Detritus
+attributes
+operations
+end
+
+class ValidationParsingToSemanticError<Detritus
+attributes
+operations
+end
+
+class ValidationParsingToSyntacticError<Detritus
+attributes
+operations
+end
+
+class ValidationWithMessage<Detritus
+attributes
+operations
+end
+
+composition xxx_Root_detritus between
+	Root[0..1] role xxx_Root_detritus_src
+	Detritus[*] role detritus
+end
+

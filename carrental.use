@@ -1,0 +1,166 @@
+model CarRental
+enum CarGroupKind{
+default
+}
+
+class Person
+attributes
+	firstname : String
+	lastname : String
+	age : Integer
+	isMarried : Boolean
+operations
+	email():String
+	updateAge(newAge : Integer)
+end
+
+class Customer<Person
+attributes
+	address : String
+operations
+end
+
+class Employee<Person
+attributes
+	salary : Real
+operations
+	raiseSalary(amount : Real):Real
+end
+
+class Branch
+attributes
+	location : String
+operations
+end
+
+class Rental
+attributes
+	framDate : String
+	untilDate : String
+operations
+end
+
+class CarGroup
+attributes
+	kind : CarGroupKind
+operations
+end
+
+class Car
+attributes
+	id : String
+operations
+end
+
+class ServiceDepot
+attributes
+	location : String
+operations
+end
+
+class Check
+attributes
+	description : String
+operations
+end
+
+association xxx_Customer_rental between
+	Customer[0..1] role xxx_Customer_rental_src
+	Rental[*] role rental
+end
+
+association xxx_Employee_managedBranch between
+	Employee[*] role xxx_Employee_managedBranch_src
+	Branch[0..1] role managedBranch
+end
+
+association xxx_Employee_employer between
+	Employee[*] role xxx_Employee_employer_src
+	Branch[1] role employer
+end
+
+association xxx_Branch_manager between
+	Branch[*] role xxx_Branch_manager_src
+	Employee[1] role manager
+end
+
+association xxx_Branch_employee between
+	Branch[0..1] role xxx_Branch_employee_src
+	Employee[*] role employee
+end
+
+association xxx_Branch_car between
+	Branch[0..1] role xxx_Branch_car_src
+	Car[*] role car
+end
+
+association xxx_Branch_carGroup between
+	Branch[0..1] role xxx_Branch_carGroup_src
+	CarGroup[*] role carGroup
+end
+
+association xxx_Branch_rental between
+	Branch[0..1] role xxx_Branch_rental_src
+	Rental[*] role rental
+end
+
+association xxx_Rental_car between
+	Rental[*] role xxx_Rental_car_src
+	Car[0..1] role car
+end
+
+association xxx_Rental_customer between
+	Rental[*] role xxx_Rental_customer_src
+	Customer[1] role customer
+end
+
+association xxx_Rental_branch between
+	Rental[*] role xxx_Rental_branch_src
+	Branch[1] role branch
+end
+
+association xxx_Rental_carGroup between
+	Rental[*] role xxx_Rental_carGroup_src
+	CarGroup[1] role carGroup
+end
+
+association xxx_CarGroup_branch between
+	CarGroup[0..1] role xxx_CarGroup_branch_src
+	Branch[*] role branch
+end
+
+association xxx_CarGroup_car between
+	CarGroup[0..1] role xxx_CarGroup_car_src
+	Car[*] role car
+end
+
+association xxx_CarGroup_rental between
+	CarGroup[0..1] role xxx_CarGroup_rental_src
+	Rental[*] role rental
+end
+
+association xxx_CarGroup_higher between
+	CarGroup[*] role xxx_CarGroup_higher_src
+	CarGroup[0..1] role higher
+end
+
+association xxx_CarGroup_lower between
+	CarGroup[*] role xxx_CarGroup_lower_src
+	CarGroup[0..1] role lower
+end
+
+association xxx_Car_branch between
+	Car[*] role xxx_Car_branch_src
+	Branch[1] role branch
+end
+
+association xxx_Car_carGroup between
+	Car[*] role xxx_Car_carGroup_src
+	CarGroup[1] role carGroup
+end
+
+association xxx_Car_rental between
+	Car[*] role xxx_Car_rental_src
+	Rental[0..1] role rental
+end
+

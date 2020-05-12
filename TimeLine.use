@@ -1,0 +1,53 @@
+model TimeLine
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class TimeLine<NamedElement
+attributes
+operations
+end
+
+class Mesure
+attributes
+	timeStamp : Real
+	name : String
+operations
+end
+
+abstract class Value
+attributes
+operations
+end
+
+class BoolValue<Value
+attributes
+	value : Boolean
+operations
+end
+
+class IntValue<Value
+attributes
+	value : Integer
+operations
+end
+
+class RealValue<Value
+attributes
+	value : Real
+operations
+end
+
+class StringValue<Value
+attributes
+	value : String
+operations
+end
+
+composition xxx_Mesure_value between
+	Mesure[*] role xxx_Mesure_value_src
+	Value[0..1] role value
+end
+

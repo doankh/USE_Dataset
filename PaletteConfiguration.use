@@ -1,0 +1,89 @@
+model paletteconfiguration
+enum ToolKind{
+default
+}
+
+class PaletteConfiguration<Configuration
+attributes
+	requiredProfiles : String
+operations
+end
+
+class ToolConfiguration<LeafConfiguration
+attributes
+	kind : ToolKind
+operations
+end
+
+class StackConfiguration<ChildConfiguration
+attributes
+operations
+end
+
+abstract class ChildConfiguration<Configuration
+attributes
+operations
+end
+
+class DrawerConfiguration<Configuration
+attributes
+operations
+end
+
+abstract class Configuration
+attributes
+	id : String
+	label : String
+	description : String
+operations
+end
+
+class IconDescriptor
+attributes
+	pluginID : String
+	iconPath : String
+operations
+end
+
+class ElementDescriptor
+attributes
+	elementTypeId : String
+	graphicalHints : String
+operations
+end
+
+class SeparatorConfiguration<LeafConfiguration
+attributes
+operations
+end
+
+abstract class LeafConfiguration<ChildConfiguration
+attributes
+operations
+end
+
+composition xxx_PaletteConfiguration_drawerConfigurations between
+	PaletteConfiguration[0..1] role xxx_PaletteConfiguration_drawerConfigurations_src
+	DrawerConfiguration[1..*] role drawerConfigurations
+end
+
+composition xxx_ToolConfiguration_elementDescriptors between
+	ToolConfiguration[0..1] role xxx_ToolConfiguration_elementDescriptors_src
+	ElementDescriptor[*] role elementDescriptors
+end
+
+composition xxx_StackConfiguration_ownedConfigurations between
+	StackConfiguration[0..1] role xxx_StackConfiguration_ownedConfigurations_src
+	LeafConfiguration[1..*] role ownedConfigurations
+end
+
+composition xxx_DrawerConfiguration_ownedConfigurations between
+	DrawerConfiguration[0..1] role xxx_DrawerConfiguration_ownedConfigurations_src
+	ChildConfiguration[1..*] role ownedConfigurations
+end
+
+composition xxx_Configuration_icon between
+	Configuration[*] role xxx_Configuration_icon_src
+	IconDescriptor[0..1] role icon
+end
+

@@ -1,0 +1,138 @@
+model cloud
+class SLA
+attributes
+operations
+end
+
+class Provider
+attributes
+operations
+end
+
+class Customer
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class SLO
+attributes
+operations
+end
+
+class Penalty
+attributes
+operations
+end
+
+class DataLocationConstraint
+attributes
+operations
+end
+
+class PerformanceConstraint
+attributes
+	NegotiableParameter : String
+	NonNegotiableParameter : String
+operations
+end
+
+class Obligation
+attributes
+operations
+end
+
+class DataLocationObligation<Obligation
+attributes
+operations
+end
+
+class DataLocationPenalty<Penalty
+attributes
+operations
+end
+
+class Subject
+attributes
+operations
+end
+
+class Condition
+attributes
+operations
+end
+
+composition xxx_SLA_Providers between
+	SLA[*] role xxx_SLA_Providers_src
+	Provider[0..1] role Providers
+end
+
+association xxx_SLA_Customers between
+	SLA[*] role xxx_SLA_Customers_src
+	Customer[0..1] role Customers
+end
+
+association xxx_SLA_Constraints between
+	SLA[*] role xxx_SLA_Constraints_src
+	Constraint[0..1] role Constraints
+end
+
+association xxx_SLA_SLOs between
+	SLA[*] role xxx_SLA_SLOs_src
+	SLO[0..1] role SLOs
+end
+
+composition xxx_SLA_Penalties between
+	SLA[0..1] role xxx_SLA_Penalties_src
+	Penalty[1..*] role Penalties
+end
+
+composition xxx_SLA_Obligations between
+	SLA[0..1] role xxx_SLA_Obligations_src
+	Obligation[1..*] role Obligations
+end
+
+association xxx_Constraint_DataLocationConstraints between
+	Constraint[*] role xxx_Constraint_DataLocationConstraints_src
+	DataLocationConstraint[0..1] role DataLocationConstraints
+end
+
+association xxx_Constraint_PerformanceConstraints between
+	Constraint[*] role xxx_Constraint_PerformanceConstraints_src
+	PerformanceConstraint[0..1] role PerformanceConstraints
+end
+
+association xxx_DataLocationConstraint_DataLocationObligations between
+	DataLocationConstraint[*] role xxx_DataLocationConstraint_DataLocationObligations_src
+	DataLocationObligation[0..1] role DataLocationObligations
+end
+
+association xxx_DataLocationConstraint_DataLocationPenalties between
+	DataLocationConstraint[*] role xxx_DataLocationConstraint_DataLocationPenalties_src
+	DataLocationPenalty[0..1] role DataLocationPenalties
+end
+
+composition xxx_Obligation_Conditions between
+	Obligation[0..1] role xxx_Obligation_Conditions_src
+	Condition[1..*] role Conditions
+end
+
+composition xxx_Obligation_Subjects between
+	Obligation[0..1] role xxx_Obligation_Subjects_src
+	Subject[1..*] role Subjects
+end
+
+association xxx_Subject_Subjects between
+	Subject[*] role xxx_Subject_Subjects_src
+	Obligation[0..1] role Subjects
+end
+
+association xxx_Condition_Conditions between
+	Condition[*] role xxx_Condition_Conditions_src
+	Obligation[0..1] role Conditions
+end
+

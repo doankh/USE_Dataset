@@ -1,0 +1,290 @@
+model dsml
+enum Type{
+default
+}
+
+class Website
+attributes
+	name : String
+operations
+end
+
+class Page
+attributes
+	title : String
+	name : String
+operations
+end
+
+abstract class Field<FormElement
+attributes
+operations
+end
+
+class TextField<Field
+attributes
+	size : Integer
+	maxlength : Integer
+operations
+end
+
+class PasswordField<Field
+attributes
+	size : Integer
+	maxlength : Integer
+operations
+end
+
+class Label<FormElement
+attributes
+operations
+end
+
+abstract class Button<FormElement
+attributes
+operations
+end
+
+class RadioButton<ListField
+attributes
+operations
+end
+
+class CheckBox<FormElement
+attributes
+operations
+end
+
+class SubmitButton<Button
+attributes
+operations
+end
+
+class CancelButton<Button
+attributes
+operations
+end
+
+class Item
+attributes
+	value : String
+operations
+end
+
+class Select<ListField
+attributes
+	size : Integer
+operations
+end
+
+abstract class ListField<FormElement
+attributes
+operations
+end
+
+class TextArea<Field
+attributes
+	cols : Integer
+	rows : Integer
+operations
+end
+
+class ResetButton<Button
+attributes
+operations
+end
+
+class Link
+attributes
+	value : String
+operations
+	accept(visitor : Visitor):String
+end
+
+abstract class FormElement
+attributes
+	name : String
+	value : String
+operations
+	accept(visitor : Visitor):String
+end
+
+class Hidden<FormElement
+attributes
+operations
+end
+
+class Form
+attributes
+	action : String
+operations
+	accept(visitor : Visitor):String
+end
+
+class Text
+attributes
+	value : String
+operations
+	accept(visitor : Visitor):String
+end
+
+abstract class Validator
+attributes
+operations
+	accept(visitor : Visitor):String
+end
+
+class DateValidator<Validator
+attributes
+operations
+end
+
+class EmailValidator<Validator
+attributes
+operations
+end
+
+class Required<Validator
+attributes
+operations
+end
+
+class TimeValidator<Validator
+attributes
+operations
+end
+
+class URLValidator<Validator
+attributes
+operations
+end
+
+class TypeValidator<Validator
+attributes
+	type : Type
+operations
+end
+
+class GreaterThanValidator<Validator
+attributes
+	value : Integer
+operations
+end
+
+class LessThanValidator<Validator
+attributes
+	value : Integer
+operations
+end
+
+class BetweenValidator<Validator
+attributes
+	valueL : Integer
+	valueG : Integer
+operations
+end
+
+class RegexValidator<Validator
+attributes
+	regex : String
+operations
+end
+
+class StringLengthValidator<Validator
+attributes
+	min : Integer
+	max : Integer
+operations
+end
+
+class Success
+attributes
+operations
+end
+
+class Error
+attributes
+operations
+end
+
+class JSPVisitor<Visitor
+attributes
+operations
+end
+
+abstract class Visitor
+attributes
+	tag : String
+operations
+end
+
+class ResourceVisitor<Visitor
+attributes
+operations
+end
+
+class POJOVisitor<Visitor
+attributes
+operations
+end
+
+composition xxx_Website_Pages between
+	Website[0..1] role xxx_Website_Pages_src
+	Page[1..*] role Pages
+end
+
+composition xxx_Page_Form between
+	Page[*] role xxx_Page_Form_src
+	Form[0..1] role Form
+end
+
+composition xxx_Page_Texts between
+	Page[0..1] role xxx_Page_Texts_src
+	Text[*] role Texts
+end
+
+composition xxx_Page_Links between
+	Page[0..1] role xxx_Page_Links_src
+	Link[*] role Links
+end
+
+composition xxx_Field_Validator between
+	Field[0..1] role xxx_Field_Validator_src
+	Validator[*] role Validator
+end
+
+composition xxx_ListField_Items between
+	ListField[0..1] role xxx_ListField_Items_src
+	Item[*] role Items
+end
+
+association xxx_Link_LinkedPage between
+	Link[*] role xxx_Link_LinkedPage_src
+	Page[0..1] role LinkedPage
+end
+
+composition xxx_Form_FormElements between
+	Form[0..1] role xxx_Form_FormElements_src
+	FormElement[*] role FormElements
+end
+
+composition xxx_Form_Success between
+	Form[*] role xxx_Form_Success_src
+	Success[0..1] role Success
+end
+
+composition xxx_Form_Error between
+	Form[*] role xxx_Form_Error_src
+	Error[0..1] role Error
+end
+
+association xxx_Success_SuccessPage between
+	Success[*] role xxx_Success_SuccessPage_src
+	Page[0..1] role SuccessPage
+end
+
+association xxx_Error_ErrorPage between
+	Error[*] role xxx_Error_ErrorPage_src
+	Page[0..1] role ErrorPage
+end
+

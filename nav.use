@@ -1,0 +1,63 @@
+model nav
+class MenuItem<MenuItemContainer
+attributes
+	id : String
+	parentId : String
+	label : String
+	weight : Integer
+	bundle : String
+	iconName : String
+	clientPath : String
+operations
+end
+
+class Menu<MenuItemContainer
+attributes
+	id : String
+operations
+end
+
+abstract class MenuItemContainer
+attributes
+operations
+end
+
+class MenuCatalog<MenuItemContainer
+attributes
+operations
+end
+
+class PageMenuItem<MenuItem
+attributes
+	pageClass : String
+operations
+end
+
+class PageParameter
+attributes
+	key : String
+	value : String
+operations
+end
+
+class ProcessMenuItem<MenuItem
+attributes
+	processId : String
+operations
+end
+
+composition xxx_MenuItemContainer_items between
+	MenuItemContainer[0..1] role xxx_MenuItemContainer_items_src
+	MenuItem[*] role items
+end
+
+composition xxx_MenuCatalog_menus between
+	MenuCatalog[0..1] role xxx_MenuCatalog_menus_src
+	Menu[*] role menus
+end
+
+composition xxx_PageMenuItem_parameters between
+	PageMenuItem[0..1] role xxx_PageMenuItem_parameters_src
+	PageParameter[*] role parameters
+end
+

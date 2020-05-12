@@ -1,0 +1,219 @@
+model novafrigor
+class User
+attributes
+	name : String
+	surname : String
+	email : String
+	cell : String
+	active : Boolean
+operations
+end
+
+class AccessGroup
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Product
+attributes
+	name : String
+	code : String
+	active : Boolean
+operations
+end
+
+class ProductPhoto
+attributes
+	data : String
+operations
+end
+
+class ConservationState
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ProductType
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ProductRawMaterial
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ProductFlavor
+attributes
+	name : String
+	description : String
+operations
+end
+
+class WeightUnit
+attributes
+	name : String
+	tonUnit : Real
+operations
+end
+
+class ProductPacking
+attributes
+	tare : Real
+	weigth : Real
+operations
+end
+
+class Enrollment
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ProductLot
+attributes
+	productCode : Integer
+	lotNumber : Integer
+	previewDate : String
+	finalDate : String
+	previewQuantity : Integer
+	finalQuantity : Integer
+	insertionDate : String
+	lotDate : String
+	status : String
+operations
+end
+
+class Expedition
+attributes
+	lotNumber : Integer
+	productCode : Integer
+	finalDate : String
+	totalQuantity : Integer
+	sold : Integer
+	reserved : Integer
+operations
+end
+
+class ExpeditionDetail
+attributes
+	status : String
+	client : Integer
+	quantity : Integer
+operations
+end
+
+class ProductLotHistory
+attributes
+operations
+end
+
+class ExpeditionHistory
+attributes
+	user : Integer
+	date : String
+	description : String
+operations
+end
+
+class Client
+attributes
+operations
+end
+
+class Address
+attributes
+operations
+end
+
+class Position
+attributes
+	Latitude : Integer
+	Longitude : Integer
+operations
+end
+
+association xxx_User_access between
+	User[0..1] role xxx_User_access_src
+	AccessGroup[*] role access
+end
+
+association xxx_User_enrollment between
+	User[*] role xxx_User_enrollment_src
+	Enrollment[0..1] role enrollment
+end
+
+association xxx_User_address between
+	User[*] role xxx_User_address_src
+	Address[0..1] role address
+end
+
+association xxx_Product_photo between
+	Product[*] role xxx_Product_photo_src
+	ProductPhoto[0..1] role photo
+end
+
+association xxx_Product_conservation between
+	Product[*] role xxx_Product_conservation_src
+	ConservationState[0..1] role conservation
+end
+
+association xxx_Product_rawMaterial between
+	Product[*] role xxx_Product_rawMaterial_src
+	ProductRawMaterial[0..1] role rawMaterial
+end
+
+association xxx_Product_flavors between
+	Product[0..1] role xxx_Product_flavors_src
+	ProductFlavor[*] role flavors
+end
+
+association xxx_Product_packing between
+	Product[0..1] role xxx_Product_packing_src
+	ProductPacking[*] role packing
+end
+
+association xxx_Product_tipo between
+	Product[*] role xxx_Product_tipo_src
+	ProductType[0..1] role tipo
+end
+
+association xxx_ProductPacking_weigthUnit between
+	ProductPacking[*] role xxx_ProductPacking_weigthUnit_src
+	WeightUnit[1] role weigthUnit
+end
+
+association xxx_Enrollment_access between
+	Enrollment[*] role xxx_Enrollment_access_src
+	AccessGroup[0..1] role access
+end
+
+association xxx_ProductLot_weight between
+	ProductLot[*] role xxx_ProductLot_weight_src
+	WeightUnit[0..1] role weight
+end
+
+association xxx_Expedition_detail between
+	Expedition[*] role xxx_Expedition_detail_src
+	ExpeditionDetail[0..1] role detail
+end
+
+association xxx_Client_address between
+	Client[*] role xxx_Client_address_src
+	Address[0..1] role address
+end
+
+association xxx_Address_position between
+	Address[*] role xxx_Address_position_src
+	Position[0..1] role position
+end
+

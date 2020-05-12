@@ -1,0 +1,126 @@
+model PrimitiveTypes
+class Plan
+attributes
+operations
+end
+
+class Objective
+attributes
+operations
+end
+
+class EvaluationCriteria
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Actor
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+class TimeSpec
+attributes
+operations
+end
+
+composition xxx_Plan_sub_plans between
+	Plan[0..1] role xxx_Plan_sub_plans_src
+	Plan[*] role sub_plans
+end
+
+association xxx_Plan_super_plan between
+	Plan[*] role xxx_Plan_super_plan_src
+	Plan[1] role super_plan
+end
+
+composition xxx_Plan_objectives between
+	Plan[0..1] role xxx_Plan_objectives_src
+	Objective[*] role objectives
+end
+
+composition xxx_Plan_actions between
+	Plan[0..1] role xxx_Plan_actions_src
+	Action[*] role actions
+end
+
+association xxx_Objective_objective_plan between
+	Objective[*] role xxx_Objective_objective_plan_src
+	Plan[1] role objective_plan
+end
+
+composition xxx_Objective_criterias between
+	Objective[0..1] role xxx_Objective_criterias_src
+	EvaluationCriteria[*] role criterias
+end
+
+association xxx_EvaluationCriteria_criteria_objective between
+	EvaluationCriteria[*] role xxx_EvaluationCriteria_criteria_objective_src
+	Objective[1] role criteria_objective
+end
+
+association xxx_Action_action_plan between
+	Action[*] role xxx_Action_action_plan_src
+	Plan[1] role action_plan
+end
+
+composition xxx_Action_sub_actions between
+	Action[0..1] role xxx_Action_sub_actions_src
+	Action[*] role sub_actions
+end
+
+association xxx_Action_super_action between
+	Action[*] role xxx_Action_super_action_src
+	Action[1] role super_action
+end
+
+composition xxx_Action_actor between
+	Action[*] role xxx_Action_actor_src
+	Actor[1] role actor
+end
+
+composition xxx_Action_resources between
+	Action[0..1] role xxx_Action_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_Action_timeSpecs between
+	Action[0..1] role xxx_Action_timeSpecs_src
+	TimeSpec[*] role timeSpecs
+end
+
+association xxx_Actor_actor_action between
+	Actor[*] role xxx_Actor_actor_action_src
+	Action[1] role actor_action
+end
+
+composition xxx_Actor_sub_actors between
+	Actor[0..1] role xxx_Actor_sub_actors_src
+	Actor[*] role sub_actors
+end
+
+association xxx_Actor_super_actor between
+	Actor[*] role xxx_Actor_super_actor_src
+	Actor[1] role super_actor
+end
+
+association xxx_Resource_resource_action between
+	Resource[*] role xxx_Resource_resource_action_src
+	Action[1] role resource_action
+end
+
+association xxx_TimeSpec_timeSpec_action between
+	TimeSpec[*] role xxx_TimeSpec_timeSpec_action_src
+	Action[1] role timeSpec_action
+end
+

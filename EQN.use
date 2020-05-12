@@ -1,0 +1,126 @@
+model EQN
+class RoutingChain
+attributes
+operations
+end
+
+class QueuingNetwork
+attributes
+operations
+end
+
+class ExecutionGraph
+attributes
+operations
+end
+
+class Center
+attributes
+operations
+end
+
+class Node
+attributes
+operations
+end
+
+class Special<Center
+attributes
+operations
+end
+
+class ActiveCenter<Center
+attributes
+operations
+end
+
+class PassiveCenter<Center
+attributes
+operations
+end
+
+class Source<Special
+attributes
+operations
+end
+
+class Sink<Special
+attributes
+operations
+end
+
+class Fork<Special
+attributes
+operations
+end
+
+class Join<Special
+attributes
+operations
+end
+
+class Split<Special
+attributes
+operations
+end
+
+class Allocate<Special
+attributes
+operations
+end
+
+class Release<Special
+attributes
+operations
+end
+
+association xxx_RoutingChain_queuingNetwork between
+	RoutingChain[0..1] role xxx_RoutingChain_queuingNetwork_src
+	QueuingNetwork[*] role queuingNetwork
+end
+
+composition xxx_QueuingNetwork_center between
+	QueuingNetwork[0..1] role xxx_QueuingNetwork_center_src
+	Center[1..*] role center
+end
+
+composition xxx_QueuingNetwork_workLoad between
+	QueuingNetwork[*] role xxx_QueuingNetwork_workLoad_src
+	RoutingChain[1] role workLoad
+end
+
+association xxx_ExecutionGraph_nodeNested between
+	ExecutionGraph[*] role xxx_ExecutionGraph_nodeNested_src
+	Node[1] role nodeNested
+end
+
+composition xxx_ExecutionGraph_node between
+	ExecutionGraph[0..1] role xxx_ExecutionGraph_node_src
+	Node[1..*] role node
+end
+
+association xxx_Center_node between
+	Center[*] role xxx_Center_node_src
+	Node[1] role node
+end
+
+association xxx_Center_queuingNetwork between
+	Center[*] role xxx_Center_queuingNetwork_src
+	QueuingNetwork[1] role queuingNetwork
+end
+
+association xxx_Node_nested between
+	Node[*] role xxx_Node_nested_src
+	ExecutionGraph[1] role nested
+end
+
+association xxx_Node_executionGraph between
+	Node[*] role xxx_Node_executionGraph_src
+	ExecutionGraph[1] role executionGraph
+end
+
+association xxx_Node_demand between
+	Node[0..1] role xxx_Node_demand_src
+	Center[1..*] role demand
+end
+

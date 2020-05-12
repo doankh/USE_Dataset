@@ -1,0 +1,324 @@
+model chooseeditor
+class Diagram
+attributes
+operations
+end
+
+class Goal
+attributes
+	Name : String
+	Description : String
+operations
+end
+
+class Refinement
+attributes
+operations
+end
+
+class ActorContainer
+attributes
+	Name : String
+	Description : String
+operations
+end
+
+class OperationContainer
+attributes
+	Name : String
+	Description : String
+operations
+end
+
+class Object
+attributes
+	Name : String
+	Description : String
+operations
+end
+
+class Actor<ActorContainer
+attributes
+operations
+end
+
+class HumanActor<ActorContainer
+attributes
+operations
+end
+
+class Role<ActorContainer
+attributes
+operations
+end
+
+class Device<ActorContainer
+attributes
+operations
+end
+
+class SoftwareActor<ActorContainer
+attributes
+operations
+end
+
+class Operation<OperationContainer
+attributes
+operations
+end
+
+class Process<OperationContainer
+attributes
+operations
+end
+
+class Project<OperationContainer
+attributes
+operations
+end
+
+composition xxx_Diagram_Goals between
+	Diagram[0..1] role xxx_Diagram_Goals_src
+	Goal[*] role Goals
+end
+
+composition xxx_Diagram_Refinements between
+	Diagram[0..1] role xxx_Diagram_Refinements_src
+	Refinement[*] role Refinements
+end
+
+composition xxx_Diagram_Actors between
+	Diagram[0..1] role xxx_Diagram_Actors_src
+	ActorContainer[*] role Actors
+end
+
+composition xxx_Diagram_Objects between
+	Diagram[0..1] role xxx_Diagram_Objects_src
+	Object[*] role Objects
+end
+
+composition xxx_Diagram_Operations between
+	Diagram[0..1] role xxx_Diagram_Operations_src
+	OperationContainer[*] role Operations
+end
+
+association xxx_Goal_Conflicts between
+	Goal[0..1] role xxx_Goal_Conflicts_src
+	Goal[*] role Conflicts
+end
+
+association xxx_Goal_Conflicted between
+	Goal[0..1] role xxx_Goal_Conflicted_src
+	Goal[*] role Conflicted
+end
+
+association xxx_Goal_AssignedTo between
+	Goal[0..1] role xxx_Goal_AssignedTo_src
+	ActorContainer[*] role AssignedTo
+end
+
+association xxx_Goal_WishedBy between
+	Goal[0..1] role xxx_Goal_WishedBy_src
+	ActorContainer[*] role WishedBy
+end
+
+association xxx_Goal_OperationalizedBy between
+	Goal[0..1] role xxx_Goal_OperationalizedBy_src
+	OperationContainer[*] role OperationalizedBy
+end
+
+association xxx_Goal_ConcernsObjects between
+	Goal[0..1] role xxx_Goal_ConcernsObjects_src
+	Object[*] role ConcernsObjects
+end
+
+association xxx_Goal_Or between
+	Goal[0..1] role xxx_Goal_Or_src
+	Refinement[*] role Or
+end
+
+association xxx_Goal_And between
+	Goal[0..1] role xxx_Goal_And_src
+	Refinement[*] role And
+end
+
+association xxx_Refinement_Supergoal between
+	Refinement[*] role xxx_Refinement_Supergoal_src
+	Goal[1] role Supergoal
+end
+
+association xxx_Refinement_Subgoals between
+	Refinement[0..1] role xxx_Refinement_Subgoals_src
+	Goal[1..*] role Subgoals
+end
+
+association xxx_ActorContainer_Assignments between
+	ActorContainer[0..1] role xxx_ActorContainer_Assignments_src
+	Goal[*] role Assignments
+end
+
+association xxx_ActorContainer_Wishes between
+	ActorContainer[0..1] role xxx_ActorContainer_Wishes_src
+	Goal[*] role Wishes
+end
+
+association xxx_ActorContainer_Includes between
+	ActorContainer[0..1] role xxx_ActorContainer_Includes_src
+	ActorContainer[*] role Includes
+end
+
+association xxx_ActorContainer_PartOf between
+	ActorContainer[0..1] role xxx_ActorContainer_PartOf_src
+	ActorContainer[*] role PartOf
+end
+
+association xxx_ActorContainer_ResponsibleFor between
+	ActorContainer[0..1] role xxx_ActorContainer_ResponsibleFor_src
+	OperationContainer[*] role ResponsibleFor
+end
+
+association xxx_ActorContainer_AccountableFor between
+	ActorContainer[0..1] role xxx_ActorContainer_AccountableFor_src
+	OperationContainer[*] role AccountableFor
+end
+
+association xxx_ActorContainer_ConsultedFor between
+	ActorContainer[0..1] role xxx_ActorContainer_ConsultedFor_src
+	OperationContainer[*] role ConsultedFor
+end
+
+association xxx_ActorContainer_InformedFor between
+	ActorContainer[0..1] role xxx_ActorContainer_InformedFor_src
+	OperationContainer[*] role InformedFor
+end
+
+association xxx_ActorContainer_Controls between
+	ActorContainer[0..1] role xxx_ActorContainer_Controls_src
+	Object[*] role Controls
+end
+
+association xxx_ActorContainer_Monitors between
+	ActorContainer[0..1] role xxx_ActorContainer_Monitors_src
+	Object[*] role Monitors
+end
+
+association xxx_OperationContainer_Operationalizes between
+	OperationContainer[0..1] role xxx_OperationContainer_Operationalizes_src
+	Goal[*] role Operationalizes
+end
+
+association xxx_OperationContainer_Responsible between
+	OperationContainer[0..1] role xxx_OperationContainer_Responsible_src
+	ActorContainer[*] role Responsible
+end
+
+association xxx_OperationContainer_Accountable between
+	OperationContainer[*] role xxx_OperationContainer_Accountable_src
+	ActorContainer[1] role Accountable
+end
+
+association xxx_OperationContainer_Consult between
+	OperationContainer[0..1] role xxx_OperationContainer_Consult_src
+	ActorContainer[*] role Consult
+end
+
+association xxx_OperationContainer_Inform between
+	OperationContainer[0..1] role xxx_OperationContainer_Inform_src
+	ActorContainer[*] role Inform
+end
+
+association xxx_OperationContainer_Input between
+	OperationContainer[0..1] role xxx_OperationContainer_Input_src
+	Object[*] role Input
+end
+
+association xxx_OperationContainer_Output between
+	OperationContainer[0..1] role xxx_OperationContainer_Output_src
+	Object[*] role Output
+end
+
+association xxx_OperationContainer_PartOf between
+	OperationContainer[0..1] role xxx_OperationContainer_PartOf_src
+	OperationContainer[*] role PartOf
+end
+
+association xxx_OperationContainer_Includes between
+	OperationContainer[0..1] role xxx_OperationContainer_Includes_src
+	OperationContainer[*] role Includes
+end
+
+association xxx_Object_ConcernsGoals between
+	Object[0..1] role xxx_Object_ConcernsGoals_src
+	Goal[*] role ConcernsGoals
+end
+
+association xxx_Object_ControlledBy between
+	Object[0..1] role xxx_Object_ControlledBy_src
+	ActorContainer[*] role ControlledBy
+end
+
+association xxx_Object_MonitoredBy between
+	Object[0..1] role xxx_Object_MonitoredBy_src
+	ActorContainer[*] role MonitoredBy
+end
+
+association xxx_Object_InputFor between
+	Object[0..1] role xxx_Object_InputFor_src
+	OperationContainer[*] role InputFor
+end
+
+association xxx_Object_OutputOf between
+	Object[0..1] role xxx_Object_OutputOf_src
+	OperationContainer[*] role OutputOf
+end
+
+association xxx_Object_Associates between
+	Object[0..1] role xxx_Object_Associates_src
+	Object[*] role Associates
+end
+
+association xxx_Object_Associated between
+	Object[0..1] role xxx_Object_Associated_src
+	Object[*] role Associated
+end
+
+association xxx_Object_Specialization between
+	Object[0..1] role xxx_Object_Specialization_src
+	Object[*] role Specialization
+end
+
+association xxx_Object_SpecializedBy between
+	Object[0..1] role xxx_Object_SpecializedBy_src
+	Object[*] role SpecializedBy
+end
+
+association xxx_Object_Includes between
+	Object[0..1] role xxx_Object_Includes_src
+	Object[*] role Includes
+end
+
+association xxx_Object_PartOf between
+	Object[0..1] role xxx_Object_PartOf_src
+	Object[*] role PartOf
+end
+
+association xxx_HumanActor_Supervisees between
+	HumanActor[0..1] role xxx_HumanActor_Supervisees_src
+	HumanActor[*] role Supervisees
+end
+
+association xxx_HumanActor_Supervisors between
+	HumanActor[0..1] role xxx_HumanActor_Supervisors_src
+	HumanActor[*] role Supervisors
+end
+
+association xxx_HumanActor_Performs between
+	HumanActor[0..1] role xxx_HumanActor_Performs_src
+	Role[*] role Performs
+end
+
+association xxx_Role_PerformedBy between
+	Role[0..1] role xxx_Role_PerformedBy_src
+	HumanActor[*] role PerformedBy
+end
+

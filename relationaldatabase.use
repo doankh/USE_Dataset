@@ -1,0 +1,82 @@
+model relationaldatabase
+class RelationalDatabase
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Table<NamedElement
+attributes
+operations
+end
+
+class Column<NamedElement
+attributes
+operations
+end
+
+class ForeignKey<NamedElement
+attributes
+operations
+end
+
+composition xxx_RelationalDatabase_tables between
+	RelationalDatabase[0..1] role xxx_RelationalDatabase_tables_src
+	Table[*] role tables
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[1..*] role columns
+end
+
+association xxx_Table_primaryKey between
+	Table[*] role xxx_Table_primaryKey_src
+	Column[1] role primaryKey
+end
+
+composition xxx_Table_foreignKeys between
+	Table[0..1] role xxx_Table_foreignKeys_src
+	ForeignKey[*] role foreignKeys
+end
+
+association xxx_Column_table between
+	Column[*] role xxx_Column_table_src
+	Table[1] role table
+end
+
+association xxx_Column_tableAsPrimaryKey between
+	Column[*] role xxx_Column_tableAsPrimaryKey_src
+	Table[0..1] role tableAsPrimaryKey
+end
+
+association xxx_Column_foreignKeysAsColumn between
+	Column[0..1] role xxx_Column_foreignKeysAsColumn_src
+	ForeignKey[*] role foreignKeysAsColumn
+end
+
+association xxx_Column_foreignKeysAsForeignColumn between
+	Column[0..1] role xxx_Column_foreignKeysAsForeignColumn_src
+	ForeignKey[*] role foreignKeysAsForeignColumn
+end
+
+association xxx_ForeignKey_tableColumn between
+	ForeignKey[*] role xxx_ForeignKey_tableColumn_src
+	Column[1] role tableColumn
+end
+
+association xxx_ForeignKey_foreignColumn between
+	ForeignKey[*] role xxx_ForeignKey_foreignColumn_src
+	Column[1] role foreignColumn
+end
+
+association xxx_ForeignKey_table between
+	ForeignKey[*] role xxx_ForeignKey_table_src
+	Table[1] role table
+end
+

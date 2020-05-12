@@ -1,0 +1,111 @@
+model router
+class Provider<Agent
+attributes
+operations
+end
+
+class Agent
+attributes
+	name : String
+	speed : Integer
+operations
+end
+
+class Consumer<Agent
+attributes
+operations
+end
+
+class Device
+attributes
+	name : String
+operations
+end
+
+class Cable
+attributes
+	speed : Integer
+operations
+end
+
+class Server<Device
+attributes
+operations
+end
+
+class Computer<Device
+attributes
+operations
+end
+
+class Router<Device
+attributes
+	maxSpeed : Integer
+operations
+end
+
+class CopperCable<Cable
+attributes
+operations
+end
+
+class GlassFiberCable<Cable
+attributes
+operations
+end
+
+class Container
+attributes
+operations
+end
+
+association xxx_Provider_rightserv between
+	Provider[*] role xxx_Provider_rightserv_src
+	Server[1] role rightserv
+end
+
+association xxx_Consumer_rightcomp between
+	Consumer[*] role xxx_Consumer_rightcomp_src
+	Computer[1] role rightcomp
+end
+
+composition xxx_Device_outgoing between
+	Device[0..1] role xxx_Device_outgoing_src
+	Cable[*] role outgoing
+end
+
+association xxx_Device_incoming between
+	Device[0..1] role xxx_Device_incoming_src
+	Cable[*] role incoming
+end
+
+association xxx_Cable_source between
+	Cable[*] role xxx_Cable_source_src
+	Device[1] role source
+end
+
+association xxx_Cable_target between
+	Cable[*] role xxx_Cable_target_src
+	Device[1] role target
+end
+
+association xxx_Server_provider between
+	Server[*] role xxx_Server_provider_src
+	Provider[0..1] role provider
+end
+
+association xxx_Computer_consumer between
+	Computer[*] role xxx_Computer_consumer_src
+	Consumer[1] role consumer
+end
+
+composition xxx_Container_agents between
+	Container[0..1] role xxx_Container_agents_src
+	Agent[*] role agents
+end
+
+composition xxx_Container_devices between
+	Container[0..1] role xxx_Container_devices_src
+	Device[*] role devices
+end
+

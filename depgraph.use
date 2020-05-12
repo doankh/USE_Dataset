@@ -1,0 +1,139 @@
+model domain
+enum DependencyType{
+default
+}
+
+abstract class GraphElement
+attributes
+	uuid : String
+operations
+end
+
+abstract class CodeElement<GraphElement
+attributes
+	versions : String
+	id : Integer
+operations
+	getDisplayName():String
+end
+
+class Product<CodeElement
+attributes
+	name : String
+	containingFolders : String
+	productPath : String
+operations
+end
+
+class ApiClass<CodeElement
+attributes
+	simpleName : String
+	packageName : String
+	extends : String
+	implements : String
+	private : Boolean
+	anonymous : Boolean
+	referencedClasses : String
+operations
+	getFqName():String
+	getSourcePath():String
+end
+
+class Method<CodeElement
+attributes
+	signature : String
+	private : String
+	referencedFields : String
+	referencedMethods : String
+	static : Boolean
+operations
+end
+
+class Field<CodeElement
+attributes
+	signature : String
+	private : Boolean
+operations
+end
+
+class Dependency<GraphElement
+attributes
+	type : DependencyType
+operations
+end
+
+class DependencyGraph
+attributes
+operations
+end
+
+class TransitiveDependency<Dependency
+attributes
+operations
+end
+
+association xxx_CodeElement_incomingDeps between
+	CodeElement[0..1] role xxx_CodeElement_incomingDeps_src
+	Dependency[*] role incomingDeps
+end
+
+association xxx_CodeElement_outgoingDeps between
+	CodeElement[0..1] role xxx_CodeElement_outgoingDeps_src
+	Dependency[*] role outgoingDeps
+end
+
+composition xxx_Product_classes between
+	Product[0..1] role xxx_Product_classes_src
+	ApiClass[*] role classes
+end
+
+composition xxx_ApiClass_methods between
+	ApiClass[0..1] role xxx_ApiClass_methods_src
+	Method[*] role methods
+end
+
+composition xxx_ApiClass_fields between
+	ApiClass[0..1] role xxx_ApiClass_fields_src
+	Field[*] role fields
+end
+
+association xxx_ApiClass_product between
+	ApiClass[*] role xxx_ApiClass_product_src
+	Product[1] role product
+end
+
+association xxx_Method_apiClass between
+	Method[*] role xxx_Method_apiClass_src
+	ApiClass[1] role apiClass
+end
+
+association xxx_Field_apiClass between
+	Field[*] role xxx_Field_apiClass_src
+	ApiClass[1] role apiClass
+end
+
+association xxx_Dependency_from_ between
+	Dependency[*] role xxx_Dependency_from__src
+	CodeElement[1] role from_
+end
+
+association xxx_Dependency_to between
+	Dependency[*] role xxx_Dependency_to_src
+	CodeElement[1] role to
+end
+
+composition xxx_DependencyGraph_dependencies between
+	DependencyGraph[0..1] role xxx_DependencyGraph_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_DependencyGraph_products between
+	DependencyGraph[0..1] role xxx_DependencyGraph_products_src
+	Product[*] role products
+end
+
+association xxx_TransitiveDependency_transitiveFrom between
+	TransitiveDependency[0..1] role xxx_TransitiveDependency_transitiveFrom_src
+	Dependency[*] role transitiveFrom
+end
+

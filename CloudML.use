@@ -1,0 +1,226 @@
+model cloudml
+abstract class CloudMLElement
+attributes
+operations
+end
+
+abstract class NamedElement<CloudMLElement
+attributes
+	name : String
+operations
+end
+
+class Property<NamedElement
+attributes
+	value : String
+operations
+end
+
+abstract class WithProperties<NamedElement
+attributes
+operations
+end
+
+class Resource<WithProperties
+attributes
+	retrievingCommand : String
+	deployingCommand : String
+	configurationCommand : String
+	startCommand : String
+operations
+end
+
+class Provider<WithProperties
+attributes
+	credentials : String
+operations
+end
+
+class DeploymentModel<WithProperties
+attributes
+operations
+end
+
+class ArtefactPort<WithProperties
+attributes
+	portNumber : Integer
+operations
+end
+
+class Artefact<WithProperties
+attributes
+operations
+end
+
+class NodePort<WithProperties
+attributes
+operations
+end
+
+class Node<WithProperties
+attributes
+	minRam : Integer
+	minCore : Integer
+	minDisk : Integer
+	location : String
+	OS : String
+	sshKey : String
+	securityGroup : String
+	groupName : String
+	privateKey : String
+	imageID : String
+	is64os : Boolean
+operations
+end
+
+class ArtefactPortInstance<WithProperties
+attributes
+operations
+end
+
+class ArtefactInstance<WithProperties
+attributes
+operations
+end
+
+class NodePortInstance<WithProperties
+attributes
+operations
+end
+
+class NodeInstance<WithProperties
+attributes
+	publicAddress : String
+operations
+end
+
+class Composite<NamedElement
+attributes
+operations
+end
+
+composition xxx_WithProperties_properties between
+	WithProperties[0..1] role xxx_WithProperties_properties_src
+	Property[*] role properties
+end
+
+composition xxx_DeploymentModel_providers between
+	DeploymentModel[0..1] role xxx_DeploymentModel_providers_src
+	Provider[*] role providers
+end
+
+composition xxx_DeploymentModel_artefactTypes between
+	DeploymentModel[0..1] role xxx_DeploymentModel_artefactTypes_src
+	Artefact[*] role artefactTypes
+end
+
+composition xxx_DeploymentModel_nodeTypes between
+	DeploymentModel[0..1] role xxx_DeploymentModel_nodeTypes_src
+	Node[*] role nodeTypes
+end
+
+composition xxx_DeploymentModel_artefactInstances between
+	DeploymentModel[0..1] role xxx_DeploymentModel_artefactInstances_src
+	ArtefactInstance[*] role artefactInstances
+end
+
+composition xxx_DeploymentModel_nodeInstances between
+	DeploymentModel[0..1] role xxx_DeploymentModel_nodeInstances_src
+	NodeInstance[*] role nodeInstances
+end
+
+association xxx_Artefact_destination between
+	Artefact[*] role xxx_Artefact_destination_src
+	ArtefactPort[0..1] role destination
+end
+
+composition xxx_Artefact_resource between
+	Artefact[*] role xxx_Artefact_resource_src
+	Resource[0..1] role resource
+end
+
+composition xxx_Artefact_inputs between
+	Artefact[0..1] role xxx_Artefact_inputs_src
+	ArtefactPort[*] role inputs
+end
+
+association xxx_Artefact_outputs between
+	Artefact[0..1] role xxx_Artefact_outputs_src
+	ArtefactPort[*] role outputs
+end
+
+composition xxx_Artefact_provided between
+	Artefact[0..1] role xxx_Artefact_provided_src
+	ArtefactPort[*] role provided
+end
+
+association xxx_Artefact_required between
+	Artefact[0..1] role xxx_Artefact_required_src
+	ArtefactPort[*] role required
+end
+
+composition xxx_Node_provided between
+	Node[0..1] role xxx_Node_provided_src
+	NodePort[*] role provided
+end
+
+association xxx_Node_cloudProvider between
+	Node[*] role xxx_Node_cloudProvider_src
+	Provider[1] role cloudProvider
+end
+
+association xxx_ArtefactPortInstance_type between
+	ArtefactPortInstance[*] role xxx_ArtefactPortInstance_type_src
+	ArtefactPort[1] role type
+end
+
+association xxx_ArtefactInstance_type between
+	ArtefactInstance[*] role xxx_ArtefactInstance_type_src
+	Artefact[1] role type
+end
+
+association xxx_ArtefactInstance_destination between
+	ArtefactInstance[*] role xxx_ArtefactInstance_destination_src
+	NodePortInstance[0..1] role destination
+end
+
+composition xxx_ArtefactInstance_inputs between
+	ArtefactInstance[0..1] role xxx_ArtefactInstance_inputs_src
+	ArtefactPortInstance[*] role inputs
+end
+
+association xxx_ArtefactInstance_outputs between
+	ArtefactInstance[0..1] role xxx_ArtefactInstance_outputs_src
+	ArtefactPortInstance[*] role outputs
+end
+
+composition xxx_ArtefactInstance_provided between
+	ArtefactInstance[0..1] role xxx_ArtefactInstance_provided_src
+	ArtefactPortInstance[*] role provided
+end
+
+association xxx_ArtefactInstance_required between
+	ArtefactInstance[0..1] role xxx_ArtefactInstance_required_src
+	ArtefactPortInstance[*] role required
+end
+
+association xxx_NodePortInstance_type between
+	NodePortInstance[*] role xxx_NodePortInstance_type_src
+	NodePort[1] role type
+end
+
+association xxx_NodeInstance_type between
+	NodeInstance[*] role xxx_NodeInstance_type_src
+	Node[1] role type
+end
+
+composition xxx_NodeInstance_provided between
+	NodeInstance[0..1] role xxx_NodeInstance_provided_src
+	NodePortInstance[*] role provided
+end
+
+composition xxx_Composite_containedArtefacts between
+	Composite[0..1] role xxx_Composite_containedArtefacts_src
+	ArtefactInstance[*] role containedArtefacts
+end
+

@@ -1,0 +1,1761 @@
+model jucm_OneFileWorkaround
+enum ComponentKind{
+default
+}
+
+enum DeviceKind{
+default
+}
+
+enum ArrivalProcess{
+default
+}
+
+enum TimeUnit{
+default
+}
+
+enum WaitKind{
+default
+}
+
+enum AspectKind{
+default
+}
+
+enum PointcutKind{
+default
+}
+
+enum FailureKind{
+default
+}
+
+enum Criticality{
+default
+}
+
+enum IntentionalElementType{
+default
+}
+
+enum Priority{
+default
+}
+
+enum ContributionType{
+default
+}
+
+enum DecompositionType{
+default
+}
+
+enum QualitativeLabel{
+default
+}
+
+enum ImportanceType{
+default
+}
+
+class URNspec
+attributes
+	name : String
+	description : String
+	author : String
+	created : String
+	modified : String
+	specVersion : String
+	urnVersion : String
+	nextGlobalID : String
+operations
+end
+
+class URNlink
+attributes
+	type : String
+operations
+end
+
+class URNdefinition
+attributes
+operations
+end
+
+class Responsibility<UCMmodelElement
+attributes
+	empty : Boolean
+	expression : String
+	context_ : Boolean
+operations
+end
+
+class Component<UCMmodelElement,IURNContainer
+attributes
+	kind : ComponentKind
+	protected : Boolean
+	slot : Boolean
+	context_ : Boolean
+operations
+end
+
+class ComponentType<UCMmodelElement
+attributes
+operations
+end
+
+abstract class UCMmodelElement<URNmodelElement
+attributes
+operations
+end
+
+abstract class GRLmodelElement<URNmodelElement
+attributes
+operations
+end
+
+class NodeLabel<Label
+attributes
+operations
+end
+
+abstract class Label
+attributes
+	deltaX : Integer
+	deltaY : Integer
+operations
+end
+
+class ComponentLabel<Label
+attributes
+operations
+end
+
+class Condition<Label
+attributes
+	label : String
+	expression : String
+	description : String
+operations
+end
+
+abstract class IURNDiagram
+attributes
+operations
+end
+
+abstract class URNmodelElement
+attributes
+	id : String
+	name : String
+	description : String
+operations
+end
+
+abstract class IURNNode
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+abstract class IURNContainerRef
+attributes
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+	fixed : Boolean
+operations
+end
+
+abstract class IURNContainer
+attributes
+	lineColor : String
+	fillColor : String
+	filled : Boolean
+operations
+end
+
+abstract class IURNConnection
+attributes
+operations
+end
+
+class Metadata
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Concern<URNmodelElement
+attributes
+operations
+end
+
+class ConnectionLabel<Label
+attributes
+operations
+end
+
+class Comment
+attributes
+	description : String
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+	fillColor : String
+operations
+end
+
+class UCMspec
+attributes
+operations
+end
+
+class Workload<UCMmodelElement
+attributes
+	closed : Boolean
+	arrivalPattern : ArrivalProcess
+	arrivalParam1 : String
+	arrivalParam2 : String
+	externalDelay : String
+	value : String
+	coeffVarSeq : String
+	population : String
+	unit : TimeUnit
+operations
+end
+
+abstract class GeneralResource<UCMmodelElement
+attributes
+	multiplicity : String
+	schedPolicy : String
+operations
+end
+
+abstract class ActiveResource<GeneralResource
+attributes
+	opTime : String
+	unit : TimeUnit
+operations
+end
+
+class PassiveResource<GeneralResource
+attributes
+operations
+end
+
+class ExternalOperation<ActiveResource
+attributes
+operations
+end
+
+class ProcessingResource<ActiveResource
+attributes
+	kind : DeviceKind
+operations
+end
+
+class Demand
+attributes
+	quantity : String
+operations
+end
+
+class AndJoin<PathNode
+attributes
+	orientation : String
+operations
+end
+
+class OutBinding
+attributes
+operations
+end
+
+class InBinding
+attributes
+operations
+end
+
+class RespRef<PathNode
+attributes
+	repetitionCount : String
+	hostDemand : String
+operations
+end
+
+class OrJoin<PathNode
+attributes
+	orientation : String
+operations
+end
+
+class OrFork<PathNode
+attributes
+	orientation : String
+operations
+end
+
+class Connect<PathNode
+attributes
+operations
+end
+
+class NodeConnection<IURNConnection
+attributes
+	probability : Real
+	threshold : String
+operations
+end
+
+class WaitingPlace<PathNode
+attributes
+	waitType : WaitKind
+operations
+end
+
+class Stub<PathNode
+attributes
+	dynamic : Boolean
+	shared : Boolean
+	repetitionCount : String
+	pointcut : Boolean
+	synchronization : Boolean
+	blocking : Boolean
+	aopointcut : PointcutKind
+	aspect : AspectKind
+operations
+end
+
+abstract class PathNode<UCMmodelElement,IURNNode
+attributes
+operations
+end
+
+class EndPoint<PathNode
+attributes
+	local : Boolean
+operations
+end
+
+class StartPoint<PathNode
+attributes
+	local : Boolean
+	failureKind : FailureKind
+operations
+end
+
+class UCMmap<UCMmodelElement,IURNDiagram
+attributes
+	singleton : Boolean
+operations
+end
+
+class PluginBinding
+attributes
+	id : String
+	probability : Real
+	transaction : Boolean
+	replicationFactor : Integer
+operations
+end
+
+class ComponentRef<UCMmodelElement,IURNContainerRef
+attributes
+	role : String
+	replicationFactor : Integer
+	anchored : Boolean
+operations
+end
+
+class Timer<WaitingPlace
+attributes
+operations
+end
+
+class AndFork<PathNode
+attributes
+	orientation : String
+operations
+end
+
+class EmptyPoint<PathNode
+attributes
+operations
+end
+
+class DirectionArrow<PathNode
+attributes
+operations
+end
+
+class ComponentBinding
+attributes
+operations
+end
+
+class Anything<PathNode
+attributes
+operations
+end
+
+class FailurePoint<PathNode
+attributes
+	expression : String
+operations
+end
+
+class ResponsibilityBinding
+attributes
+operations
+end
+
+class Variable<UCMmodelElement
+attributes
+	type : String
+operations
+end
+
+class ScenarioDef<UCMmodelElement
+attributes
+operations
+end
+
+class ScenarioGroup<UCMmodelElement
+attributes
+operations
+end
+
+class EnumerationType<UCMmodelElement
+attributes
+	values : String
+operations
+end
+
+class Initialization
+attributes
+	value : String
+operations
+end
+
+class ScenarioStartPoint
+attributes
+	enabled : Boolean
+operations
+end
+
+class ScenarioEndPoint
+attributes
+	enabled : Boolean
+	mandatory : Boolean
+operations
+end
+
+class GRLspec
+attributes
+operations
+end
+
+class Belief<GRLNode
+attributes
+	author : String
+operations
+end
+
+class IntentionalElement<GRLLinkableElement
+attributes
+	type : IntentionalElementType
+	decompositionType : DecompositionType
+	importance : ImportanceType
+	importanceQuantitative : Integer
+	lineColor : String
+	fillColor : String
+	filled : Boolean
+operations
+end
+
+class Actor<GRLLinkableElement,IURNContainer
+attributes
+	importance : ImportanceType
+	importanceQuantitative : Integer
+operations
+end
+
+class GRLGraph<GRLmodelElement,IURNDiagram
+attributes
+operations
+end
+
+class ActorRef<GRLmodelElement,IURNContainerRef
+attributes
+operations
+end
+
+class IntentionalElementRef<GRLNode
+attributes
+	criticality : Criticality
+	priority : Priority
+operations
+end
+
+class Contribution<ElementLink
+attributes
+	contribution : ContributionType
+	quantitativeContribution : Integer
+	correlation : Boolean
+operations
+end
+
+class LinkRef<IURNConnection
+attributes
+operations
+end
+
+class ElementLink<GRLmodelElement
+attributes
+operations
+end
+
+class Decomposition<ElementLink
+attributes
+operations
+end
+
+class Dependency<ElementLink
+attributes
+operations
+end
+
+class Evaluation
+attributes
+	evaluation : Integer
+	qualitativeEvaluation : QualitativeLabel
+	exceeds : Boolean
+operations
+end
+
+class EvaluationStrategy<GRLmodelElement
+attributes
+	author : String
+operations
+end
+
+class GRLNode<GRLmodelElement,IURNNode
+attributes
+operations
+end
+
+class LinkRefBendpoint
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class BeliefLink<IURNConnection
+attributes
+operations
+end
+
+class StrategiesGroup<GRLmodelElement
+attributes
+operations
+end
+
+class ContributionContextGroup<GRLmodelElement
+attributes
+operations
+end
+
+class ContributionContext<GRLmodelElement
+attributes
+operations
+end
+
+class ContributionChange
+attributes
+	newContribution : ContributionType
+	newQuantitativeContribution : Integer
+operations
+end
+
+abstract class GRLLinkableElement<GRLmodelElement
+attributes
+operations
+end
+
+class CollapsedActorRef<GRLNode
+attributes
+operations
+end
+
+class EvaluationRange
+attributes
+	start : Integer
+	end_ : Integer
+	step : Integer
+operations
+end
+
+class ContributionRange
+attributes
+	start : Integer
+	end_ : Integer
+	step : Integer
+operations
+end
+
+class IndicatorGroup<GRLmodelElement
+attributes
+	isRedesignCategory : Boolean
+operations
+end
+
+class Indicator<IntentionalElement
+attributes
+operations
+end
+
+class KPIInformationElement<GRLmodelElement
+attributes
+operations
+end
+
+class KPIInformationElementRef<GRLNode
+attributes
+operations
+end
+
+class KPIModelLink<GRLmodelElement
+attributes
+operations
+end
+
+class KPIModelLinkRef<IURNConnection
+attributes
+operations
+end
+
+class KPIEvalValueSet
+attributes
+	targetValue : Real
+	thresholdValue : Real
+	worstValue : Real
+	evaluationValue : Real
+	unit : String
+	qualitativeEvaluationValue : String
+operations
+end
+
+class KPIInformationConfig
+attributes
+	levelOfDimension : String
+	valueOfDimension : String
+operations
+end
+
+class KPINewEvalValue
+attributes
+	evaluationValue : Real
+operations
+end
+
+abstract class KPIConversion<GRLmodelElement
+attributes
+operations
+end
+
+class QualitativeMappings<KPIConversion
+attributes
+operations
+end
+
+class QualitativeMapping
+attributes
+	realWorldLabel : String
+	evaluation : Integer
+	qualitativeEvaluation : QualitativeLabel
+	exceeds : Boolean
+operations
+end
+
+composition xxx_URNspec_ucmspec between
+	URNspec[*] role xxx_URNspec_ucmspec_src
+	UCMspec[0..1] role ucmspec
+end
+
+composition xxx_URNspec_grlspec between
+	URNspec[*] role xxx_URNspec_grlspec_src
+	GRLspec[0..1] role grlspec
+end
+
+composition xxx_URNspec_urndef between
+	URNspec[*] role xxx_URNspec_urndef_src
+	URNdefinition[1] role urndef
+end
+
+composition xxx_URNspec_urnLinks between
+	URNspec[0..1] role xxx_URNspec_urnLinks_src
+	URNlink[*] role urnLinks
+end
+
+composition xxx_URNspec_metadata between
+	URNspec[0..1] role xxx_URNspec_metadata_src
+	Metadata[*] role metadata
+end
+
+association xxx_URNlink_urnspec between
+	URNlink[*] role xxx_URNlink_urnspec_src
+	URNspec[1] role urnspec
+end
+
+association xxx_URNlink_fromElem between
+	URNlink[*] role xxx_URNlink_fromElem_src
+	URNmodelElement[1] role fromElem
+end
+
+association xxx_URNlink_toElem between
+	URNlink[*] role xxx_URNlink_toElem_src
+	URNmodelElement[1] role toElem
+end
+
+composition xxx_URNlink_metadata between
+	URNlink[0..1] role xxx_URNlink_metadata_src
+	Metadata[*] role metadata
+end
+
+association xxx_URNdefinition_urnspec between
+	URNdefinition[*] role xxx_URNdefinition_urnspec_src
+	URNspec[1] role urnspec
+end
+
+composition xxx_URNdefinition_responsibilities between
+	URNdefinition[0..1] role xxx_URNdefinition_responsibilities_src
+	Responsibility[*] role responsibilities
+end
+
+composition xxx_URNdefinition_specDiagrams between
+	URNdefinition[0..1] role xxx_URNdefinition_specDiagrams_src
+	IURNDiagram[*] role specDiagrams
+end
+
+composition xxx_URNdefinition_concerns between
+	URNdefinition[0..1] role xxx_URNdefinition_concerns_src
+	Concern[*] role concerns
+end
+
+composition xxx_URNdefinition_components between
+	URNdefinition[0..1] role xxx_URNdefinition_components_src
+	Component[*] role components
+end
+
+composition xxx_URNdefinition_componentTypes between
+	URNdefinition[0..1] role xxx_URNdefinition_componentTypes_src
+	ComponentType[*] role componentTypes
+end
+
+association xxx_Responsibility_urndefinition between
+	Responsibility[*] role xxx_Responsibility_urndefinition_src
+	URNdefinition[1] role urndefinition
+end
+
+composition xxx_Responsibility_demands between
+	Responsibility[0..1] role xxx_Responsibility_demands_src
+	Demand[*] role demands
+end
+
+association xxx_Responsibility_respRefs between
+	Responsibility[0..1] role xxx_Responsibility_respRefs_src
+	RespRef[1..*] role respRefs
+end
+
+association xxx_Responsibility_parentBindings between
+	Responsibility[0..1] role xxx_Responsibility_parentBindings_src
+	ResponsibilityBinding[*] role parentBindings
+end
+
+association xxx_Component_type between
+	Component[*] role xxx_Component_type_src
+	ComponentType[0..1] role type
+end
+
+association xxx_Component_urndefinition between
+	Component[*] role xxx_Component_urndefinition_src
+	URNdefinition[1] role urndefinition
+end
+
+association xxx_Component_includedComponent between
+	Component[0..1] role xxx_Component_includedComponent_src
+	Component[*] role includedComponent
+end
+
+association xxx_Component_includingComponent between
+	Component[*] role xxx_Component_includingComponent_src
+	Component[0..1] role includingComponent
+end
+
+association xxx_Component_resource between
+	Component[*] role xxx_Component_resource_src
+	PassiveResource[0..1] role resource
+end
+
+association xxx_Component_host between
+	Component[*] role xxx_Component_host_src
+	ProcessingResource[0..1] role host
+end
+
+association xxx_ComponentType_instances between
+	ComponentType[0..1] role xxx_ComponentType_instances_src
+	Component[*] role instances
+end
+
+association xxx_ComponentType_urndefinition between
+	ComponentType[*] role xxx_ComponentType_urndefinition_src
+	URNdefinition[1] role urndefinition
+end
+
+association xxx_NodeLabel_node between
+	NodeLabel[*] role xxx_NodeLabel_node_src
+	IURNNode[1] role node
+end
+
+association xxx_ComponentLabel_contRef between
+	ComponentLabel[*] role xxx_ComponentLabel_contRef_src
+	IURNContainerRef[0..1] role contRef
+end
+
+association xxx_Condition_startPoint between
+	Condition[*] role xxx_Condition_startPoint_src
+	StartPoint[0..1] role startPoint
+end
+
+association xxx_Condition_endPoint between
+	Condition[*] role xxx_Condition_endPoint_src
+	EndPoint[0..1] role endPoint
+end
+
+association xxx_Condition_pluginBinding between
+	Condition[*] role xxx_Condition_pluginBinding_src
+	PluginBinding[0..1] role pluginBinding
+end
+
+association xxx_Condition_nodeConnection between
+	Condition[*] role xxx_Condition_nodeConnection_src
+	NodeConnection[0..1] role nodeConnection
+end
+
+association xxx_Condition_concern between
+	Condition[*] role xxx_Condition_concern_src
+	Concern[0..1] role concern
+end
+
+association xxx_Condition_scenarioDefPre between
+	Condition[*] role xxx_Condition_scenarioDefPre_src
+	ScenarioDef[0..1] role scenarioDefPre
+end
+
+association xxx_Condition_scenarioDefPost between
+	Condition[*] role xxx_Condition_scenarioDefPost_src
+	ScenarioDef[0..1] role scenarioDefPost
+end
+
+association xxx_IURNDiagram_urndefinition between
+	IURNDiagram[*] role xxx_IURNDiagram_urndefinition_src
+	URNdefinition[1] role urndefinition
+end
+
+composition xxx_IURNDiagram_nodes between
+	IURNDiagram[0..1] role xxx_IURNDiagram_nodes_src
+	IURNNode[*] role nodes
+end
+
+composition xxx_IURNDiagram_contRefs between
+	IURNDiagram[0..1] role xxx_IURNDiagram_contRefs_src
+	IURNContainerRef[*] role contRefs
+end
+
+composition xxx_IURNDiagram_connections between
+	IURNDiagram[0..1] role xxx_IURNDiagram_connections_src
+	IURNConnection[*] role connections
+end
+
+association xxx_IURNDiagram_concern between
+	IURNDiagram[*] role xxx_IURNDiagram_concern_src
+	Concern[0..1] role concern
+end
+
+composition xxx_IURNDiagram_comments between
+	IURNDiagram[0..1] role xxx_IURNDiagram_comments_src
+	Comment[*] role comments
+end
+
+association xxx_URNmodelElement_fromLinks between
+	URNmodelElement[0..1] role xxx_URNmodelElement_fromLinks_src
+	URNlink[*] role fromLinks
+end
+
+association xxx_URNmodelElement_toLinks between
+	URNmodelElement[0..1] role xxx_URNmodelElement_toLinks_src
+	URNlink[*] role toLinks
+end
+
+composition xxx_URNmodelElement_metadata between
+	URNmodelElement[0..1] role xxx_URNmodelElement_metadata_src
+	Metadata[*] role metadata
+end
+
+association xxx_URNmodelElement_inconcern between
+	URNmodelElement[*] role xxx_URNmodelElement_inconcern_src
+	Concern[0..1] role inconcern
+end
+
+association xxx_IURNNode_diagram between
+	IURNNode[*] role xxx_IURNNode_diagram_src
+	IURNDiagram[1] role diagram
+end
+
+association xxx_IURNNode_contRef between
+	IURNNode[*] role xxx_IURNNode_contRef_src
+	IURNContainerRef[0..1] role contRef
+end
+
+association xxx_IURNNode_succ between
+	IURNNode[0..1] role xxx_IURNNode_succ_src
+	IURNConnection[*] role succ
+end
+
+association xxx_IURNNode_pred between
+	IURNNode[0..1] role xxx_IURNNode_pred_src
+	IURNConnection[*] role pred
+end
+
+composition xxx_IURNNode_label between
+	IURNNode[*] role xxx_IURNNode_label_src
+	NodeLabel[0..1] role label
+end
+
+association xxx_IURNContainerRef_diagram between
+	IURNContainerRef[*] role xxx_IURNContainerRef_diagram_src
+	IURNDiagram[1] role diagram
+end
+
+association xxx_IURNContainerRef_contDef between
+	IURNContainerRef[*] role xxx_IURNContainerRef_contDef_src
+	IURNContainer[1] role contDef
+end
+
+association xxx_IURNContainerRef_nodes between
+	IURNContainerRef[0..1] role xxx_IURNContainerRef_nodes_src
+	IURNNode[*] role nodes
+end
+
+composition xxx_IURNContainerRef_label between
+	IURNContainerRef[*] role xxx_IURNContainerRef_label_src
+	ComponentLabel[1] role label
+end
+
+association xxx_IURNContainerRef_parent between
+	IURNContainerRef[*] role xxx_IURNContainerRef_parent_src
+	IURNContainerRef[0..1] role parent
+end
+
+association xxx_IURNContainerRef_children between
+	IURNContainerRef[0..1] role xxx_IURNContainerRef_children_src
+	IURNContainerRef[*] role children
+end
+
+association xxx_IURNContainer_contRefs between
+	IURNContainer[0..1] role xxx_IURNContainer_contRefs_src
+	IURNContainerRef[*] role contRefs
+end
+
+association xxx_IURNConnection_source between
+	IURNConnection[*] role xxx_IURNConnection_source_src
+	IURNNode[1] role source
+end
+
+association xxx_IURNConnection_target between
+	IURNConnection[*] role xxx_IURNConnection_target_src
+	IURNNode[1] role target
+end
+
+association xxx_IURNConnection_diagram between
+	IURNConnection[*] role xxx_IURNConnection_diagram_src
+	IURNDiagram[1] role diagram
+end
+
+composition xxx_IURNConnection_label between
+	IURNConnection[*] role xxx_IURNConnection_label_src
+	ConnectionLabel[0..1] role label
+end
+
+association xxx_Concern_urndefinition between
+	Concern[*] role xxx_Concern_urndefinition_src
+	URNdefinition[1] role urndefinition
+end
+
+association xxx_Concern_specDiagrams between
+	Concern[0..1] role xxx_Concern_specDiagrams_src
+	IURNDiagram[*] role specDiagrams
+end
+
+association xxx_Concern_elements between
+	Concern[0..1] role xxx_Concern_elements_src
+	URNmodelElement[*] role elements
+end
+
+composition xxx_Concern_condition between
+	Concern[*] role xxx_Concern_condition_src
+	Condition[0..1] role condition
+end
+
+association xxx_ConnectionLabel_connection between
+	ConnectionLabel[*] role xxx_ConnectionLabel_connection_src
+	IURNConnection[1] role connection
+end
+
+association xxx_Comment_diagram between
+	Comment[*] role xxx_Comment_diagram_src
+	IURNDiagram[0..1] role diagram
+end
+
+association xxx_UCMspec_urnspec between
+	UCMspec[*] role xxx_UCMspec_urnspec_src
+	URNspec[1] role urnspec
+end
+
+composition xxx_UCMspec_resources between
+	UCMspec[0..1] role xxx_UCMspec_resources_src
+	GeneralResource[*] role resources
+end
+
+composition xxx_UCMspec_scenarioGroups between
+	UCMspec[0..1] role xxx_UCMspec_scenarioGroups_src
+	ScenarioGroup[*] role scenarioGroups
+end
+
+composition xxx_UCMspec_variables between
+	UCMspec[0..1] role xxx_UCMspec_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_UCMspec_enumerationTypes between
+	UCMspec[0..1] role xxx_UCMspec_enumerationTypes_src
+	EnumerationType[*] role enumerationTypes
+end
+
+association xxx_Workload_startPoint between
+	Workload[*] role xxx_Workload_startPoint_src
+	StartPoint[1] role startPoint
+end
+
+association xxx_GeneralResource_ucmspec between
+	GeneralResource[*] role xxx_GeneralResource_ucmspec_src
+	UCMspec[1] role ucmspec
+end
+
+association xxx_PassiveResource_component between
+	PassiveResource[*] role xxx_PassiveResource_component_src
+	Component[0..1] role component
+end
+
+association xxx_ExternalOperation_demands between
+	ExternalOperation[0..1] role xxx_ExternalOperation_demands_src
+	Demand[*] role demands
+end
+
+association xxx_ProcessingResource_components between
+	ProcessingResource[0..1] role xxx_ProcessingResource_components_src
+	Component[*] role components
+end
+
+association xxx_Demand_responsibility between
+	Demand[*] role xxx_Demand_responsibility_src
+	Responsibility[1] role responsibility
+end
+
+association xxx_Demand_resource between
+	Demand[*] role xxx_Demand_resource_src
+	ExternalOperation[1] role resource
+end
+
+association xxx_OutBinding_binding between
+	OutBinding[*] role xxx_OutBinding_binding_src
+	PluginBinding[1] role binding
+end
+
+association xxx_OutBinding_endPoint between
+	OutBinding[*] role xxx_OutBinding_endPoint_src
+	EndPoint[0..1] role endPoint
+end
+
+association xxx_OutBinding_stubExit between
+	OutBinding[*] role xxx_OutBinding_stubExit_src
+	NodeConnection[1] role stubExit
+end
+
+association xxx_OutBinding_pointcutEntry between
+	OutBinding[*] role xxx_OutBinding_pointcutEntry_src
+	NodeConnection[0..1] role pointcutEntry
+end
+
+association xxx_InBinding_binding between
+	InBinding[*] role xxx_InBinding_binding_src
+	PluginBinding[1] role binding
+end
+
+association xxx_InBinding_startPoint between
+	InBinding[*] role xxx_InBinding_startPoint_src
+	StartPoint[0..1] role startPoint
+end
+
+association xxx_InBinding_stubEntry between
+	InBinding[*] role xxx_InBinding_stubEntry_src
+	NodeConnection[1] role stubEntry
+end
+
+association xxx_InBinding_pointcutExit between
+	InBinding[*] role xxx_InBinding_pointcutExit_src
+	NodeConnection[0..1] role pointcutExit
+end
+
+association xxx_RespRef_respDef between
+	RespRef[*] role xxx_RespRef_respDef_src
+	Responsibility[1] role respDef
+end
+
+association xxx_RespRef_pluginBindings between
+	RespRef[0..1] role xxx_RespRef_pluginBindings_src
+	ResponsibilityBinding[*] role pluginBindings
+end
+
+association xxx_NodeConnection_inBindings between
+	NodeConnection[0..1] role xxx_NodeConnection_inBindings_src
+	InBinding[*] role inBindings
+end
+
+association xxx_NodeConnection_outBindings between
+	NodeConnection[0..1] role xxx_NodeConnection_outBindings_src
+	OutBinding[*] role outBindings
+end
+
+composition xxx_NodeConnection_condition between
+	NodeConnection[*] role xxx_NodeConnection_condition_src
+	Condition[0..1] role condition
+end
+
+association xxx_NodeConnection_outBindingsPlugin between
+	NodeConnection[0..1] role xxx_NodeConnection_outBindingsPlugin_src
+	OutBinding[*] role outBindingsPlugin
+end
+
+association xxx_NodeConnection_inBindingsPlugin between
+	NodeConnection[0..1] role xxx_NodeConnection_inBindingsPlugin_src
+	InBinding[*] role inBindingsPlugin
+end
+
+composition xxx_Stub_bindings between
+	Stub[0..1] role xxx_Stub_bindings_src
+	PluginBinding[*] role bindings
+end
+
+association xxx_EndPoint_outBindings between
+	EndPoint[0..1] role xxx_EndPoint_outBindings_src
+	OutBinding[*] role outBindings
+end
+
+composition xxx_EndPoint_postcondition between
+	EndPoint[*] role xxx_EndPoint_postcondition_src
+	Condition[0..1] role postcondition
+end
+
+association xxx_EndPoint_scenarioEndPoints between
+	EndPoint[0..1] role xxx_EndPoint_scenarioEndPoints_src
+	ScenarioEndPoint[*] role scenarioEndPoints
+end
+
+composition xxx_StartPoint_workload between
+	StartPoint[*] role xxx_StartPoint_workload_src
+	Workload[0..1] role workload
+end
+
+association xxx_StartPoint_inBindings between
+	StartPoint[0..1] role xxx_StartPoint_inBindings_src
+	InBinding[*] role inBindings
+end
+
+composition xxx_StartPoint_precondition between
+	StartPoint[*] role xxx_StartPoint_precondition_src
+	Condition[0..1] role precondition
+end
+
+association xxx_StartPoint_scenarioStartPoints between
+	StartPoint[0..1] role xxx_StartPoint_scenarioStartPoints_src
+	ScenarioStartPoint[*] role scenarioStartPoints
+end
+
+association xxx_UCMmap_parentStub between
+	UCMmap[0..1] role xxx_UCMmap_parentStub_src
+	PluginBinding[*] role parentStub
+end
+
+composition xxx_PluginBinding_in_ between
+	PluginBinding[0..1] role xxx_PluginBinding_in__src
+	InBinding[1..*] role in_
+end
+
+composition xxx_PluginBinding_out between
+	PluginBinding[0..1] role xxx_PluginBinding_out_src
+	OutBinding[1..*] role out
+end
+
+association xxx_PluginBinding_stub between
+	PluginBinding[*] role xxx_PluginBinding_stub_src
+	Stub[0..1] role stub
+end
+
+association xxx_PluginBinding_plugin between
+	PluginBinding[*] role xxx_PluginBinding_plugin_src
+	UCMmap[1] role plugin
+end
+
+composition xxx_PluginBinding_precondition between
+	PluginBinding[*] role xxx_PluginBinding_precondition_src
+	Condition[0..1] role precondition
+end
+
+composition xxx_PluginBinding_components between
+	PluginBinding[0..1] role xxx_PluginBinding_components_src
+	ComponentBinding[*] role components
+end
+
+composition xxx_PluginBinding_responsibilities between
+	PluginBinding[0..1] role xxx_PluginBinding_responsibilities_src
+	ResponsibilityBinding[*] role responsibilities
+end
+
+association xxx_ComponentRef_parentBindings between
+	ComponentRef[0..1] role xxx_ComponentRef_parentBindings_src
+	ComponentBinding[*] role parentBindings
+end
+
+association xxx_ComponentRef_pluginBindings between
+	ComponentRef[0..1] role xxx_ComponentRef_pluginBindings_src
+	ComponentBinding[*] role pluginBindings
+end
+
+association xxx_Timer_timeoutPath between
+	Timer[*] role xxx_Timer_timeoutPath_src
+	NodeConnection[0..1] role timeoutPath
+end
+
+association xxx_ComponentBinding_binding between
+	ComponentBinding[*] role xxx_ComponentBinding_binding_src
+	PluginBinding[1] role binding
+end
+
+association xxx_ComponentBinding_parentComponent between
+	ComponentBinding[*] role xxx_ComponentBinding_parentComponent_src
+	ComponentRef[1] role parentComponent
+end
+
+association xxx_ComponentBinding_pluginComponent between
+	ComponentBinding[*] role xxx_ComponentBinding_pluginComponent_src
+	ComponentRef[1] role pluginComponent
+end
+
+association xxx_ResponsibilityBinding_binding between
+	ResponsibilityBinding[*] role xxx_ResponsibilityBinding_binding_src
+	PluginBinding[1] role binding
+end
+
+association xxx_ResponsibilityBinding_pluginResp between
+	ResponsibilityBinding[*] role xxx_ResponsibilityBinding_pluginResp_src
+	RespRef[1] role pluginResp
+end
+
+association xxx_ResponsibilityBinding_parentResp between
+	ResponsibilityBinding[*] role xxx_ResponsibilityBinding_parentResp_src
+	Responsibility[1] role parentResp
+end
+
+association xxx_Variable_ucmspec between
+	Variable[*] role xxx_Variable_ucmspec_src
+	UCMspec[1] role ucmspec
+end
+
+association xxx_Variable_enumerationType between
+	Variable[*] role xxx_Variable_enumerationType_src
+	EnumerationType[0..1] role enumerationType
+end
+
+association xxx_ScenarioDef_group between
+	ScenarioDef[*] role xxx_ScenarioDef_group_src
+	ScenarioGroup[1] role group
+end
+
+association xxx_ScenarioDef_parentScenarios between
+	ScenarioDef[0..1] role xxx_ScenarioDef_parentScenarios_src
+	ScenarioDef[*] role parentScenarios
+end
+
+association xxx_ScenarioDef_includedScenarios between
+	ScenarioDef[0..1] role xxx_ScenarioDef_includedScenarios_src
+	ScenarioDef[*] role includedScenarios
+end
+
+composition xxx_ScenarioDef_preconditions between
+	ScenarioDef[0..1] role xxx_ScenarioDef_preconditions_src
+	Condition[*] role preconditions
+end
+
+composition xxx_ScenarioDef_postconditions between
+	ScenarioDef[0..1] role xxx_ScenarioDef_postconditions_src
+	Condition[*] role postconditions
+end
+
+composition xxx_ScenarioDef_initializations between
+	ScenarioDef[0..1] role xxx_ScenarioDef_initializations_src
+	Initialization[*] role initializations
+end
+
+composition xxx_ScenarioDef_startPoints between
+	ScenarioDef[0..1] role xxx_ScenarioDef_startPoints_src
+	ScenarioStartPoint[*] role startPoints
+end
+
+composition xxx_ScenarioDef_endPoints between
+	ScenarioDef[0..1] role xxx_ScenarioDef_endPoints_src
+	ScenarioEndPoint[*] role endPoints
+end
+
+association xxx_ScenarioGroup_ucmspec between
+	ScenarioGroup[*] role xxx_ScenarioGroup_ucmspec_src
+	UCMspec[1] role ucmspec
+end
+
+composition xxx_ScenarioGroup_scenarios between
+	ScenarioGroup[0..1] role xxx_ScenarioGroup_scenarios_src
+	ScenarioDef[*] role scenarios
+end
+
+association xxx_EnumerationType_ucmspec between
+	EnumerationType[*] role xxx_EnumerationType_ucmspec_src
+	UCMspec[1] role ucmspec
+end
+
+association xxx_EnumerationType_instances between
+	EnumerationType[0..1] role xxx_EnumerationType_instances_src
+	Variable[*] role instances
+end
+
+association xxx_Initialization_scenarioDef between
+	Initialization[*] role xxx_Initialization_scenarioDef_src
+	ScenarioDef[1] role scenarioDef
+end
+
+association xxx_Initialization_variable between
+	Initialization[*] role xxx_Initialization_variable_src
+	Variable[1] role variable
+end
+
+association xxx_ScenarioStartPoint_scenarioDef between
+	ScenarioStartPoint[*] role xxx_ScenarioStartPoint_scenarioDef_src
+	ScenarioDef[1] role scenarioDef
+end
+
+association xxx_ScenarioStartPoint_startPoint between
+	ScenarioStartPoint[*] role xxx_ScenarioStartPoint_startPoint_src
+	StartPoint[1] role startPoint
+end
+
+association xxx_ScenarioEndPoint_scenarioDef between
+	ScenarioEndPoint[*] role xxx_ScenarioEndPoint_scenarioDef_src
+	ScenarioDef[1] role scenarioDef
+end
+
+association xxx_ScenarioEndPoint_endPoint between
+	ScenarioEndPoint[*] role xxx_ScenarioEndPoint_endPoint_src
+	EndPoint[1] role endPoint
+end
+
+association xxx_GRLspec_urnspec between
+	GRLspec[*] role xxx_GRLspec_urnspec_src
+	URNspec[1] role urnspec
+end
+
+composition xxx_GRLspec_intElements between
+	GRLspec[0..1] role xxx_GRLspec_intElements_src
+	IntentionalElement[*] role intElements
+end
+
+composition xxx_GRLspec_actors between
+	GRLspec[0..1] role xxx_GRLspec_actors_src
+	Actor[*] role actors
+end
+
+composition xxx_GRLspec_links between
+	GRLspec[0..1] role xxx_GRLspec_links_src
+	ElementLink[*] role links
+end
+
+composition xxx_GRLspec_groups between
+	GRLspec[0..1] role xxx_GRLspec_groups_src
+	StrategiesGroup[*] role groups
+end
+
+composition xxx_GRLspec_strategies between
+	GRLspec[0..1] role xxx_GRLspec_strategies_src
+	EvaluationStrategy[*] role strategies
+end
+
+composition xxx_GRLspec_contributionGroups between
+	GRLspec[0..1] role xxx_GRLspec_contributionGroups_src
+	ContributionContextGroup[*] role contributionGroups
+end
+
+composition xxx_GRLspec_contributionContexts between
+	GRLspec[0..1] role xxx_GRLspec_contributionContexts_src
+	ContributionContext[*] role contributionContexts
+end
+
+composition xxx_GRLspec_kpiInformationElements between
+	GRLspec[0..1] role xxx_GRLspec_kpiInformationElements_src
+	KPIInformationElement[*] role kpiInformationElements
+end
+
+composition xxx_GRLspec_kpiModelLinks between
+	GRLspec[0..1] role xxx_GRLspec_kpiModelLinks_src
+	KPIModelLink[*] role kpiModelLinks
+end
+
+composition xxx_GRLspec_indicatorGroup between
+	GRLspec[0..1] role xxx_GRLspec_indicatorGroup_src
+	IndicatorGroup[*] role indicatorGroup
+end
+
+composition xxx_GRLspec_KPIConversion between
+	GRLspec[0..1] role xxx_GRLspec_KPIConversion_src
+	KPIConversion[*] role KPIConversion
+end
+
+association xxx_IntentionalElement_grlspec between
+	IntentionalElement[*] role xxx_IntentionalElement_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_IntentionalElement_refs between
+	IntentionalElement[0..1] role xxx_IntentionalElement_refs_src
+	IntentionalElementRef[*] role refs
+end
+
+association xxx_Actor_grlspec between
+	Actor[*] role xxx_Actor_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_Actor_includedActors between
+	Actor[0..1] role xxx_Actor_includedActors_src
+	Actor[*] role includedActors
+end
+
+association xxx_Actor_includingActor between
+	Actor[*] role xxx_Actor_includingActor_src
+	Actor[0..1] role includingActor
+end
+
+association xxx_Actor_collapsedRefs between
+	Actor[0..1] role xxx_Actor_collapsedRefs_src
+	CollapsedActorRef[*] role collapsedRefs
+end
+
+association xxx_IntentionalElementRef_def between
+	IntentionalElementRef[*] role xxx_IntentionalElementRef_def_src
+	IntentionalElement[1] role def
+end
+
+association xxx_LinkRef_link between
+	LinkRef[*] role xxx_LinkRef_link_src
+	ElementLink[1] role link
+end
+
+composition xxx_LinkRef_bendpoints between
+	LinkRef[0..1] role xxx_LinkRef_bendpoints_src
+	LinkRefBendpoint[*] role bendpoints
+end
+
+association xxx_ElementLink_refs between
+	ElementLink[0..1] role xxx_ElementLink_refs_src
+	LinkRef[*] role refs
+end
+
+association xxx_ElementLink_grlspec between
+	ElementLink[*] role xxx_ElementLink_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_ElementLink_dest between
+	ElementLink[*] role xxx_ElementLink_dest_src
+	GRLLinkableElement[1] role dest
+end
+
+association xxx_ElementLink_src between
+	ElementLink[*] role xxx_ElementLink_src_src
+	GRLLinkableElement[1] role src
+end
+
+association xxx_Evaluation_intElement between
+	Evaluation[*] role xxx_Evaluation_intElement_src
+	IntentionalElement[1] role intElement
+end
+
+association xxx_Evaluation_strategies between
+	Evaluation[*] role xxx_Evaluation_strategies_src
+	EvaluationStrategy[1] role strategies
+end
+
+composition xxx_Evaluation_kpiEvalValueSet between
+	Evaluation[*] role xxx_Evaluation_kpiEvalValueSet_src
+	KPIEvalValueSet[0..1] role kpiEvalValueSet
+end
+
+composition xxx_Evaluation_evalRange between
+	Evaluation[*] role xxx_Evaluation_evalRange_src
+	EvaluationRange[0..1] role evalRange
+end
+
+composition xxx_Evaluation_kpiNewEvalValue between
+	Evaluation[*] role xxx_Evaluation_kpiNewEvalValue_src
+	KPINewEvalValue[0..1] role kpiNewEvalValue
+end
+
+composition xxx_EvaluationStrategy_evaluations between
+	EvaluationStrategy[0..1] role xxx_EvaluationStrategy_evaluations_src
+	Evaluation[*] role evaluations
+end
+
+association xxx_EvaluationStrategy_group between
+	EvaluationStrategy[*] role xxx_EvaluationStrategy_group_src
+	StrategiesGroup[1] role group
+end
+
+association xxx_EvaluationStrategy_grlspec between
+	EvaluationStrategy[*] role xxx_EvaluationStrategy_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_EvaluationStrategy_includedStrategies between
+	EvaluationStrategy[0..1] role xxx_EvaluationStrategy_includedStrategies_src
+	EvaluationStrategy[*] role includedStrategies
+end
+
+association xxx_EvaluationStrategy_parentStrategies between
+	EvaluationStrategy[0..1] role xxx_EvaluationStrategy_parentStrategies_src
+	EvaluationStrategy[*] role parentStrategies
+end
+
+composition xxx_EvaluationStrategy_kpiInfoConfig between
+	EvaluationStrategy[0..1] role xxx_EvaluationStrategy_kpiInfoConfig_src
+	KPIInformationConfig[*] role kpiInfoConfig
+end
+
+association xxx_LinkRefBendpoint_linkref between
+	LinkRefBendpoint[*] role xxx_LinkRefBendpoint_linkref_src
+	LinkRef[1] role linkref
+end
+
+association xxx_StrategiesGroup_strategies between
+	StrategiesGroup[0..1] role xxx_StrategiesGroup_strategies_src
+	EvaluationStrategy[*] role strategies
+end
+
+association xxx_StrategiesGroup_grlspec between
+	StrategiesGroup[*] role xxx_StrategiesGroup_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_ContributionContextGroup_grlspec between
+	ContributionContextGroup[*] role xxx_ContributionContextGroup_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_ContributionContextGroup_contribs between
+	ContributionContextGroup[0..1] role xxx_ContributionContextGroup_contribs_src
+	ContributionContext[*] role contribs
+end
+
+association xxx_ContributionContext_grlspec between
+	ContributionContext[*] role xxx_ContributionContext_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_ContributionContext_groups between
+	ContributionContext[0..1] role xxx_ContributionContext_groups_src
+	ContributionContextGroup[*] role groups
+end
+
+composition xxx_ContributionContext_changes between
+	ContributionContext[0..1] role xxx_ContributionContext_changes_src
+	ContributionChange[*] role changes
+end
+
+association xxx_ContributionContext_parentContexts between
+	ContributionContext[0..1] role xxx_ContributionContext_parentContexts_src
+	ContributionContext[*] role parentContexts
+end
+
+association xxx_ContributionContext_includedContexts between
+	ContributionContext[0..1] role xxx_ContributionContext_includedContexts_src
+	ContributionContext[*] role includedContexts
+end
+
+association xxx_ContributionChange_context_ between
+	ContributionChange[*] role xxx_ContributionChange_context__src
+	ContributionContext[1] role context_
+end
+
+association xxx_ContributionChange_contribution between
+	ContributionChange[*] role xxx_ContributionChange_contribution_src
+	Contribution[1] role contribution
+end
+
+composition xxx_ContributionChange_contribRange between
+	ContributionChange[*] role xxx_ContributionChange_contribRange_src
+	ContributionRange[0..1] role contribRange
+end
+
+association xxx_GRLLinkableElement_linksDest between
+	GRLLinkableElement[0..1] role xxx_GRLLinkableElement_linksDest_src
+	ElementLink[*] role linksDest
+end
+
+association xxx_GRLLinkableElement_linksSrc between
+	GRLLinkableElement[0..1] role xxx_GRLLinkableElement_linksSrc_src
+	ElementLink[*] role linksSrc
+end
+
+association xxx_CollapsedActorRef_actor between
+	CollapsedActorRef[*] role xxx_CollapsedActorRef_actor_src
+	Actor[1] role actor
+end
+
+association xxx_EvaluationRange_eval between
+	EvaluationRange[*] role xxx_EvaluationRange_eval_src
+	Evaluation[1] role eval
+end
+
+association xxx_ContributionRange_change between
+	ContributionRange[*] role xxx_ContributionRange_change_src
+	ContributionChange[1] role change
+end
+
+association xxx_IndicatorGroup_grlspec between
+	IndicatorGroup[*] role xxx_IndicatorGroup_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_IndicatorGroup_indicators between
+	IndicatorGroup[0..1] role xxx_IndicatorGroup_indicators_src
+	Indicator[*] role indicators
+end
+
+association xxx_Indicator_kpiModelLinksDest between
+	Indicator[0..1] role xxx_Indicator_kpiModelLinksDest_src
+	KPIModelLink[*] role kpiModelLinksDest
+end
+
+association xxx_Indicator_groups between
+	Indicator[0..1] role xxx_Indicator_groups_src
+	IndicatorGroup[*] role groups
+end
+
+association xxx_KPIInformationElement_refs between
+	KPIInformationElement[0..1] role xxx_KPIInformationElement_refs_src
+	KPIInformationElementRef[*] role refs
+end
+
+association xxx_KPIInformationElement_grlspec between
+	KPIInformationElement[*] role xxx_KPIInformationElement_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_KPIInformationElement_kpiModelLinksSrc between
+	KPIInformationElement[0..1] role xxx_KPIInformationElement_kpiModelLinksSrc_src
+	KPIModelLink[*] role kpiModelLinksSrc
+end
+
+association xxx_KPIInformationElementRef_def between
+	KPIInformationElementRef[*] role xxx_KPIInformationElementRef_def_src
+	KPIInformationElement[1] role def
+end
+
+association xxx_KPIModelLink_kpiInformationElementSrc between
+	KPIModelLink[*] role xxx_KPIModelLink_kpiInformationElementSrc_src
+	KPIInformationElement[1] role kpiInformationElementSrc
+end
+
+association xxx_KPIModelLink_refs between
+	KPIModelLink[0..1] role xxx_KPIModelLink_refs_src
+	KPIModelLinkRef[*] role refs
+end
+
+association xxx_KPIModelLink_grlspec between
+	KPIModelLink[*] role xxx_KPIModelLink_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+association xxx_KPIModelLink_indDest between
+	KPIModelLink[*] role xxx_KPIModelLink_indDest_src
+	Indicator[1] role indDest
+end
+
+association xxx_KPIModelLinkRef_link between
+	KPIModelLinkRef[*] role xxx_KPIModelLinkRef_link_src
+	KPIModelLink[1] role link
+end
+
+association xxx_KPIEvalValueSet_eval between
+	KPIEvalValueSet[*] role xxx_KPIEvalValueSet_eval_src
+	Evaluation[1] role eval
+end
+
+association xxx_KPIEvalValueSet_kpiConv between
+	KPIEvalValueSet[*] role xxx_KPIEvalValueSet_kpiConv_src
+	KPIConversion[0..1] role kpiConv
+end
+
+association xxx_KPIInformationConfig_strategies between
+	KPIInformationConfig[*] role xxx_KPIInformationConfig_strategies_src
+	EvaluationStrategy[1] role strategies
+end
+
+association xxx_KPIInformationConfig_kpiInfoElement between
+	KPIInformationConfig[*] role xxx_KPIInformationConfig_kpiInfoElement_src
+	KPIInformationElement[1] role kpiInfoElement
+end
+
+association xxx_KPINewEvalValue_eval between
+	KPINewEvalValue[*] role xxx_KPINewEvalValue_eval_src
+	Evaluation[1] role eval
+end
+
+association xxx_KPIConversion_kpiEvalValueSet between
+	KPIConversion[0..1] role xxx_KPIConversion_kpiEvalValueSet_src
+	KPIEvalValueSet[*] role kpiEvalValueSet
+end
+
+association xxx_KPIConversion_grlspec between
+	KPIConversion[*] role xxx_KPIConversion_grlspec_src
+	GRLspec[1] role grlspec
+end
+
+composition xxx_QualitativeMappings_mapping between
+	QualitativeMappings[0..1] role xxx_QualitativeMappings_mapping_src
+	QualitativeMapping[*] role mapping
+end
+

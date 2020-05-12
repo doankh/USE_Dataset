@@ -1,0 +1,115 @@
+model QoSCharacteristic
+class QoSCharacteristic
+attributes
+operations
+end
+
+class BooleanExpression
+attributes
+	value : String
+operations
+end
+
+class MappingExpression
+attributes
+	value : String
+operations
+end
+
+class StatisticalAttributekindKind
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+class DataType
+attributes
+operations
+end
+
+class Domain<DataType
+attributes
+operations
+end
+
+class DirectionKind
+attributes
+	value : String
+operations
+end
+
+class Numeric<Domain
+attributes
+operations
+end
+
+class Set_<Domain
+attributes
+operations
+end
+
+class Enumeration<Domain
+attributes
+operations
+end
+
+class StringSet
+attributes
+	string : String
+operations
+end
+
+association xxx_QoSCharacteristic_invariant between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_invariant_src
+	BooleanExpression[1] role invariant
+end
+
+association xxx_QoSCharacteristic_parallel_and_composition between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_parallel_and_composition_src
+	MappingExpression[1] role parallel_and_composition
+end
+
+association xxx_QoSCharacteristic_parallel_or_composition between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_parallel_or_composition_src
+	MappingExpression[1] role parallel_or_composition
+end
+
+association xxx_QoSCharacteristic_sequential_composition between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_sequential_composition_src
+	MappingExpression[1] role sequential_composition
+end
+
+association xxx_QoSCharacteristic_values between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_values_src
+	MappingExpression[1] role values
+end
+
+composition xxx_QoSCharacteristic_statisticalAttribute between
+	QoSCharacteristic[0..1] role xxx_QoSCharacteristic_statisticalAttribute_src
+	StatisticalAttributekindKind[*] role statisticalAttribute
+end
+
+composition xxx_QoSCharacteristic_parameter between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_QoSCharacteristic_domain between
+	QoSCharacteristic[*] role xxx_QoSCharacteristic_domain_src
+	Domain[1] role domain
+end
+
+association xxx_Domain_direction between
+	Domain[*] role xxx_Domain_direction_src
+	DirectionKind[1] role direction
+end
+
+composition xxx_Set_stringSet between
+	Set_[0..1] role xxx_Set_stringSet_src
+	StringSet[1..*] role stringSet
+end
+

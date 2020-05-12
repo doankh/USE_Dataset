@@ -1,0 +1,679 @@
+model ht
+enum TBoolean{
+default
+}
+
+enum TPotentialDelegatees{
+default
+}
+
+class DocumentRoot
+attributes
+	mixed : String
+	group : String
+	user : String
+operations
+end
+
+class TArgument<TExtensibleMixedContentElements
+attributes
+	expressionLanguage : String
+	name : String
+operations
+end
+
+class TBooleanExpr<TExpression
+attributes
+operations
+end
+
+class TDeadline<TExtensibleElements
+attributes
+operations
+end
+
+class TDeadlineExpr<TExpression
+attributes
+operations
+end
+
+class TDeadlines<TExtensibleElements
+attributes
+operations
+end
+
+class TDelegation<TExtensibleElements
+attributes
+	potentialDelegatees : TPotentialDelegatees
+operations
+end
+
+class TDescription<TExtensibleMixedContentElements
+attributes
+	contentType : String
+	lang : String
+operations
+end
+
+class TDocumentation
+attributes
+	mixed : String
+	any : String
+	lang : String
+operations
+end
+
+class TDurationExpr<TExpression
+attributes
+operations
+end
+
+class TEscalation<TExtensibleElements
+attributes
+	name : String
+operations
+end
+
+class TExpression
+attributes
+	mixed : String
+	any : String
+	expressionLanguage : String
+	anyAttribute : String
+operations
+end
+
+class TExtensibleElements
+attributes
+	any : String
+	anyAttribute : String
+operations
+end
+
+class TExtensibleMixedContentElements
+attributes
+	mixed : String
+	any : String
+	anyAttribute : String
+operations
+end
+
+class TExtension<TExtensibleElements
+attributes
+	mustUnderstand : TBoolean
+	namespace : String
+operations
+end
+
+class TExtensions<TExtensibleElements
+attributes
+operations
+end
+
+class TFrom<TExtensibleMixedContentElements
+attributes
+	expressionLanguage : String
+	logicalPeopleGroup : String
+operations
+end
+
+class TGenericHumanRole<TExtensibleElements
+attributes
+operations
+end
+
+class TGrouplist
+attributes
+	group : String
+operations
+end
+
+class THumanInteractions<TExtensibleElements
+attributes
+	expressionLanguage : String
+	queryLanguage : String
+	targetNamespace : String
+operations
+end
+
+class TImport<TExtensibleElements
+attributes
+	importType : String
+	location : String
+	namespace : String
+operations
+end
+
+class TLiteral
+attributes
+	mixed : String
+	any : String
+	anyAttribute : String
+operations
+end
+
+class TLocalNotification<TExtensibleElements
+attributes
+	reference : String
+operations
+end
+
+class TLogicalPeopleGroup<TExtensibleElements
+attributes
+	name : String
+	reference : String
+operations
+end
+
+class TLogicalPeopleGroups<TExtensibleElements
+attributes
+operations
+end
+
+class TNotification<TExtensibleElements
+attributes
+	name : String
+operations
+end
+
+class TNotificationInterface<TExtensibleElements
+attributes
+	operation : String
+	portType : String
+operations
+end
+
+class TNotifications<TExtensibleElements
+attributes
+operations
+end
+
+class TOrganizationalEntity
+attributes
+operations
+end
+
+class TParameter<TExtensibleMixedContentElements
+attributes
+	name : String
+	type : String
+operations
+end
+
+class TPeopleAssignments<TExtensibleElements
+attributes
+	genericHumanRole : String
+operations
+end
+
+class TPresentationElements<TExtensibleElements
+attributes
+operations
+end
+
+class TPresentationParameter<TParameter
+attributes
+operations
+end
+
+class TPresentationParameters<TExtensibleElements
+attributes
+	expressionLanguage : String
+operations
+end
+
+class TPriority<TExpression
+attributes
+operations
+end
+
+class TQuery
+attributes
+	mixed : String
+	any : String
+	part : String
+	queryLanguage : String
+	anyAttribute : String
+operations
+end
+
+class TReassignment<TExtensibleElements
+attributes
+operations
+end
+
+class TRendering<TExtensibleElements
+attributes
+	type : String
+operations
+end
+
+class TRenderings<TExtensibleElements
+attributes
+operations
+end
+
+class TTask<TExtensibleElements
+attributes
+	name : String
+operations
+end
+
+class TTaskInterface<TExtensibleElements
+attributes
+	operation : String
+	portType : String
+	responseOperation : String
+	responsePortType : String
+operations
+end
+
+class TTasks<TExtensibleElements
+attributes
+operations
+end
+
+class TText<TExtensibleMixedContentElements
+attributes
+	lang : String
+operations
+end
+
+class TToPart<TExtensibleMixedContentElements
+attributes
+	expressionLanguage : String
+	name : String
+operations
+end
+
+class TToParts<TExtensibleElements
+attributes
+operations
+end
+
+class TUserlist
+attributes
+	user : String
+operations
+end
+
+composition xxx_DocumentRoot_businessAdministrators between
+	DocumentRoot[*] role xxx_DocumentRoot_businessAdministrators_src
+	TGenericHumanRole[*] role businessAdministrators
+end
+
+composition xxx_DocumentRoot_excludedOwners between
+	DocumentRoot[*] role xxx_DocumentRoot_excludedOwners_src
+	TGenericHumanRole[*] role excludedOwners
+end
+
+composition xxx_DocumentRoot_groups between
+	DocumentRoot[*] role xxx_DocumentRoot_groups_src
+	TGrouplist[*] role groups
+end
+
+composition xxx_DocumentRoot_humanInteractions between
+	DocumentRoot[*] role xxx_DocumentRoot_humanInteractions_src
+	THumanInteractions[*] role humanInteractions
+end
+
+composition xxx_DocumentRoot_import between
+	DocumentRoot[*] role xxx_DocumentRoot_import_src
+	TImport[*] role import
+end
+
+composition xxx_DocumentRoot_logicalPeopleGroups between
+	DocumentRoot[*] role xxx_DocumentRoot_logicalPeopleGroups_src
+	TLogicalPeopleGroups[*] role logicalPeopleGroups
+end
+
+composition xxx_DocumentRoot_notification between
+	DocumentRoot[*] role xxx_DocumentRoot_notification_src
+	TNotification[*] role notification
+end
+
+composition xxx_DocumentRoot_notifications between
+	DocumentRoot[*] role xxx_DocumentRoot_notifications_src
+	TNotifications[*] role notifications
+end
+
+composition xxx_DocumentRoot_organizationalEntity between
+	DocumentRoot[*] role xxx_DocumentRoot_organizationalEntity_src
+	TOrganizationalEntity[*] role organizationalEntity
+end
+
+composition xxx_DocumentRoot_peopleAssignments between
+	DocumentRoot[*] role xxx_DocumentRoot_peopleAssignments_src
+	TPeopleAssignments[*] role peopleAssignments
+end
+
+composition xxx_DocumentRoot_potentialOwners between
+	DocumentRoot[*] role xxx_DocumentRoot_potentialOwners_src
+	TGenericHumanRole[*] role potentialOwners
+end
+
+composition xxx_DocumentRoot_priority between
+	DocumentRoot[*] role xxx_DocumentRoot_priority_src
+	TPriority[*] role priority
+end
+
+composition xxx_DocumentRoot_recipients between
+	DocumentRoot[*] role xxx_DocumentRoot_recipients_src
+	TGenericHumanRole[*] role recipients
+end
+
+composition xxx_DocumentRoot_task between
+	DocumentRoot[*] role xxx_DocumentRoot_task_src
+	TTask[*] role task
+end
+
+composition xxx_DocumentRoot_taskInitiator between
+	DocumentRoot[*] role xxx_DocumentRoot_taskInitiator_src
+	TGenericHumanRole[*] role taskInitiator
+end
+
+composition xxx_DocumentRoot_tasks between
+	DocumentRoot[*] role xxx_DocumentRoot_tasks_src
+	TTasks[*] role tasks
+end
+
+composition xxx_DocumentRoot_taskStakeholders between
+	DocumentRoot[*] role xxx_DocumentRoot_taskStakeholders_src
+	TGenericHumanRole[*] role taskStakeholders
+end
+
+composition xxx_DocumentRoot_users between
+	DocumentRoot[*] role xxx_DocumentRoot_users_src
+	TUserlist[*] role users
+end
+
+composition xxx_TDeadline_for_ between
+	TDeadline[*] role xxx_TDeadline_for__src
+	TDurationExpr[0..1] role for_
+end
+
+composition xxx_TDeadline_until between
+	TDeadline[*] role xxx_TDeadline_until_src
+	TDeadlineExpr[0..1] role until
+end
+
+composition xxx_TDeadline_escalation between
+	TDeadline[0..1] role xxx_TDeadline_escalation_src
+	TEscalation[*] role escalation
+end
+
+composition xxx_TDeadlines_startDeadline between
+	TDeadlines[0..1] role xxx_TDeadlines_startDeadline_src
+	TDeadline[*] role startDeadline
+end
+
+composition xxx_TDeadlines_completionDeadline between
+	TDeadlines[0..1] role xxx_TDeadlines_completionDeadline_src
+	TDeadline[*] role completionDeadline
+end
+
+composition xxx_TDelegation_from_ between
+	TDelegation[*] role xxx_TDelegation_from__src
+	TFrom[0..1] role from_
+end
+
+composition xxx_TEscalation_condition between
+	TEscalation[*] role xxx_TEscalation_condition_src
+	TBooleanExpr[0..1] role condition
+end
+
+composition xxx_TEscalation_toParts between
+	TEscalation[0..1] role xxx_TEscalation_toParts_src
+	TToParts[*] role toParts
+end
+
+composition xxx_TEscalation_notification between
+	TEscalation[*] role xxx_TEscalation_notification_src
+	TNotification[0..1] role notification
+end
+
+composition xxx_TEscalation_localNotification between
+	TEscalation[*] role xxx_TEscalation_localNotification_src
+	TLocalNotification[0..1] role localNotification
+end
+
+composition xxx_TEscalation_reassignment between
+	TEscalation[*] role xxx_TEscalation_reassignment_src
+	TReassignment[0..1] role reassignment
+end
+
+composition xxx_TExtensibleElements_documentation between
+	TExtensibleElements[0..1] role xxx_TExtensibleElements_documentation_src
+	TDocumentation[*] role documentation
+end
+
+composition xxx_TExtensibleMixedContentElements_documentation between
+	TExtensibleMixedContentElements[0..1] role xxx_TExtensibleMixedContentElements_documentation_src
+	TDocumentation[*] role documentation
+end
+
+composition xxx_TExtensions_extension between
+	TExtensions[0..1] role xxx_TExtensions_extension_src
+	TExtension[1..*] role extension
+end
+
+composition xxx_TFrom_argument between
+	TFrom[0..1] role xxx_TFrom_argument_src
+	TArgument[*] role argument
+end
+
+composition xxx_TFrom_literal between
+	TFrom[*] role xxx_TFrom_literal_src
+	TLiteral[0..1] role literal
+end
+
+composition xxx_TGenericHumanRole_from_ between
+	TGenericHumanRole[*] role xxx_TGenericHumanRole_from__src
+	TFrom[1] role from_
+end
+
+composition xxx_THumanInteractions_extensions between
+	THumanInteractions[*] role xxx_THumanInteractions_extensions_src
+	TExtensions[0..1] role extensions
+end
+
+composition xxx_THumanInteractions_import between
+	THumanInteractions[0..1] role xxx_THumanInteractions_import_src
+	TImport[*] role import
+end
+
+composition xxx_THumanInteractions_logicalPeopleGroups between
+	THumanInteractions[*] role xxx_THumanInteractions_logicalPeopleGroups_src
+	TLogicalPeopleGroups[0..1] role logicalPeopleGroups
+end
+
+composition xxx_THumanInteractions_tasks between
+	THumanInteractions[*] role xxx_THumanInteractions_tasks_src
+	TTasks[0..1] role tasks
+end
+
+composition xxx_THumanInteractions_notifications between
+	THumanInteractions[*] role xxx_THumanInteractions_notifications_src
+	TNotifications[0..1] role notifications
+end
+
+composition xxx_TLocalNotification_priority between
+	TLocalNotification[*] role xxx_TLocalNotification_priority_src
+	TPriority[0..1] role priority
+end
+
+composition xxx_TLocalNotification_peopleAssignments between
+	TLocalNotification[*] role xxx_TLocalNotification_peopleAssignments_src
+	TPeopleAssignments[0..1] role peopleAssignments
+end
+
+composition xxx_TLogicalPeopleGroup_parameter between
+	TLogicalPeopleGroup[0..1] role xxx_TLogicalPeopleGroup_parameter_src
+	TParameter[*] role parameter
+end
+
+composition xxx_TLogicalPeopleGroups_logicalPeopleGroup between
+	TLogicalPeopleGroups[0..1] role xxx_TLogicalPeopleGroups_logicalPeopleGroup_src
+	TLogicalPeopleGroup[1..*] role logicalPeopleGroup
+end
+
+composition xxx_TNotification_interface between
+	TNotification[*] role xxx_TNotification_interface_src
+	TNotificationInterface[1] role interface
+end
+
+composition xxx_TNotification_priority between
+	TNotification[*] role xxx_TNotification_priority_src
+	TPriority[0..1] role priority
+end
+
+composition xxx_TNotification_peopleAssignments between
+	TNotification[*] role xxx_TNotification_peopleAssignments_src
+	TPeopleAssignments[1] role peopleAssignments
+end
+
+composition xxx_TNotification_presentationElements between
+	TNotification[*] role xxx_TNotification_presentationElements_src
+	TPresentationElements[1] role presentationElements
+end
+
+composition xxx_TNotification_renderings between
+	TNotification[*] role xxx_TNotification_renderings_src
+	TRenderings[0..1] role renderings
+end
+
+composition xxx_TNotifications_notification between
+	TNotifications[0..1] role xxx_TNotifications_notification_src
+	TNotification[1..*] role notification
+end
+
+composition xxx_TOrganizationalEntity_users between
+	TOrganizationalEntity[*] role xxx_TOrganizationalEntity_users_src
+	TUserlist[0..1] role users
+end
+
+composition xxx_TOrganizationalEntity_groups between
+	TOrganizationalEntity[*] role xxx_TOrganizationalEntity_groups_src
+	TGrouplist[0..1] role groups
+end
+
+composition xxx_TPeopleAssignments_potentialOwners between
+	TPeopleAssignments[0..1] role xxx_TPeopleAssignments_potentialOwners_src
+	TGenericHumanRole[*] role potentialOwners
+end
+
+composition xxx_TPeopleAssignments_excludedOwners between
+	TPeopleAssignments[0..1] role xxx_TPeopleAssignments_excludedOwners_src
+	TGenericHumanRole[*] role excludedOwners
+end
+
+composition xxx_TPeopleAssignments_taskInitiator between
+	TPeopleAssignments[0..1] role xxx_TPeopleAssignments_taskInitiator_src
+	TGenericHumanRole[*] role taskInitiator
+end
+
+composition xxx_TPeopleAssignments_taskStakeholders between
+	TPeopleAssignments[0..1] role xxx_TPeopleAssignments_taskStakeholders_src
+	TGenericHumanRole[*] role taskStakeholders
+end
+
+composition xxx_TPeopleAssignments_businessAdministrators between
+	TPeopleAssignments[0..1] role xxx_TPeopleAssignments_businessAdministrators_src
+	TGenericHumanRole[*] role businessAdministrators
+end
+
+composition xxx_TPeopleAssignments_recipients between
+	TPeopleAssignments[0..1] role xxx_TPeopleAssignments_recipients_src
+	TGenericHumanRole[*] role recipients
+end
+
+composition xxx_TPresentationElements_name between
+	TPresentationElements[0..1] role xxx_TPresentationElements_name_src
+	TText[*] role name
+end
+
+composition xxx_TPresentationElements_presentationParameters between
+	TPresentationElements[*] role xxx_TPresentationElements_presentationParameters_src
+	TPresentationParameters[0..1] role presentationParameters
+end
+
+composition xxx_TPresentationElements_subject between
+	TPresentationElements[0..1] role xxx_TPresentationElements_subject_src
+	TText[*] role subject
+end
+
+composition xxx_TPresentationElements_description between
+	TPresentationElements[0..1] role xxx_TPresentationElements_description_src
+	TDescription[*] role description
+end
+
+composition xxx_TPresentationParameters_presentationParameter between
+	TPresentationParameters[0..1] role xxx_TPresentationParameters_presentationParameter_src
+	TPresentationParameter[1..*] role presentationParameter
+end
+
+composition xxx_TReassignment_potentialOwners between
+	TReassignment[*] role xxx_TReassignment_potentialOwners_src
+	TGenericHumanRole[1] role potentialOwners
+end
+
+composition xxx_TRenderings_rendering between
+	TRenderings[0..1] role xxx_TRenderings_rendering_src
+	TRendering[1..*] role rendering
+end
+
+composition xxx_TTask_interface between
+	TTask[*] role xxx_TTask_interface_src
+	TTaskInterface[1] role interface
+end
+
+composition xxx_TTask_priority between
+	TTask[*] role xxx_TTask_priority_src
+	TPriority[0..1] role priority
+end
+
+composition xxx_TTask_peopleAssignments between
+	TTask[*] role xxx_TTask_peopleAssignments_src
+	TPeopleAssignments[1] role peopleAssignments
+end
+
+composition xxx_TTask_delegation between
+	TTask[*] role xxx_TTask_delegation_src
+	TDelegation[0..1] role delegation
+end
+
+composition xxx_TTask_presentationElements between
+	TTask[*] role xxx_TTask_presentationElements_src
+	TPresentationElements[1] role presentationElements
+end
+
+composition xxx_TTask_outcome between
+	TTask[*] role xxx_TTask_outcome_src
+	TQuery[0..1] role outcome
+end
+
+composition xxx_TTask_searchBy between
+	TTask[*] role xxx_TTask_searchBy_src
+	TExpression[0..1] role searchBy
+end
+
+composition xxx_TTask_renderings between
+	TTask[*] role xxx_TTask_renderings_src
+	TRenderings[0..1] role renderings
+end
+
+composition xxx_TTask_deadlines between
+	TTask[*] role xxx_TTask_deadlines_src
+	TDeadlines[0..1] role deadlines
+end
+
+composition xxx_TTasks_task between
+	TTasks[0..1] role xxx_TTasks_task_src
+	TTask[1..*] role task
+end
+
+composition xxx_TToParts_toPart between
+	TToParts[0..1] role xxx_TToParts_toPart_src
+	TToPart[1..*] role toPart
+end
+

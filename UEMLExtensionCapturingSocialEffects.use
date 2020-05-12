@@ -1,0 +1,341 @@
+model UEML
+class UEMLObject
+attributes
+operations
+end
+
+class UEMLModel<UEMLObject
+attributes
+operations
+end
+
+class Geometry
+attributes
+operations
+end
+
+class Port<UEMLObject
+attributes
+operations
+end
+
+class Flow<UEMLObject
+attributes
+operations
+end
+
+class Activity<UEMLObject
+attributes
+operations
+end
+
+class Object<UEMLObject
+attributes
+operations
+end
+
+class InformationObject<Object
+attributes
+operations
+end
+
+class Resource<Object
+attributes
+operations
+end
+
+class MaterialResource<Resource
+attributes
+operations
+end
+
+class HumanResource<Resource
+attributes
+operations
+end
+
+class ResourceFlow<Flow
+attributes
+operations
+end
+
+class IOFlow<Flow
+attributes
+operations
+end
+
+class ControlFlow<Flow
+attributes
+operations
+end
+
+class TriggerFlow<ControlFlow
+attributes
+operations
+end
+
+class ConstraintFlow<ControlFlow
+attributes
+operations
+end
+
+class ResourceRole<Port
+attributes
+operations
+end
+
+class RoleType
+attributes
+operations
+end
+
+class Anchor<Port
+attributes
+operations
+end
+
+class OutputPort<Anchor
+attributes
+operations
+end
+
+class InputPort<Anchor
+attributes
+operations
+end
+
+class ConnectionOperator<Anchor
+attributes
+operations
+end
+
+class AssociationConnector
+attributes
+operations
+end
+
+class Process<Activity
+attributes
+operations
+end
+
+class Service<Resource
+attributes
+operations
+end
+
+class Agent<Resource
+attributes
+operations
+end
+
+class Contract
+attributes
+operations
+end
+
+class Task<Activity
+attributes
+operations
+end
+
+class Commitment
+attributes
+operations
+end
+
+association xxx_UEMLObject_has between
+	UEMLObject[*] role xxx_UEMLObject_has_src
+	Geometry[0..1] role has
+end
+
+association xxx_UEMLObject_model_ between
+	UEMLObject[*] role xxx_UEMLObject_model__src
+	UEMLModel[0..1] role model_
+end
+
+composition xxx_UEMLModel_contains between
+	UEMLModel[0..1] role xxx_UEMLModel_contains_src
+	UEMLObject[*] role contains
+end
+
+association xxx_Geometry_object between
+	Geometry[*] role xxx_Geometry_object_src
+	UEMLObject[1] role object
+end
+
+association xxx_Flow_associationConnector between
+	Flow[*] role xxx_Flow_associationConnector_src
+	AssociationConnector[1] role associationConnector
+end
+
+association xxx_Activity_resourceRole between
+	Activity[0..1] role xxx_Activity_resourceRole_src
+	ResourceRole[*] role resourceRole
+end
+
+association xxx_Activity_parent between
+	Activity[*] role xxx_Activity_parent_src
+	Process[0..1] role parent
+end
+
+association xxx_Activity_hasOutput between
+	Activity[*] role xxx_Activity_hasOutput_src
+	OutputPort[1] role hasOutput
+end
+
+association xxx_Object_ioFlow between
+	Object[*] role xxx_Object_ioFlow_src
+	IOFlow[0..1] role ioFlow
+end
+
+association xxx_InformationObject_controlFlow between
+	InformationObject[*] role xxx_InformationObject_controlFlow_src
+	ControlFlow[0..1] role controlFlow
+end
+
+association xxx_Resource_carries between
+	Resource[*] role xxx_Resource_carries_src
+	ResourceFlow[0..1] role carries
+end
+
+association xxx_Resource_plays between
+	Resource[0..1] role xxx_Resource_plays_src
+	ResourceRole[*] role plays
+end
+
+association xxx_ResourceFlow_resourceCarries between
+	ResourceFlow[0..1] role xxx_ResourceFlow_resourceCarries_src
+	Resource[*] role resourceCarries
+end
+
+association xxx_IOFlow_carries between
+	IOFlow[0..1] role xxx_IOFlow_carries_src
+	Object[*] role carries
+end
+
+association xxx_ControlFlow_carries between
+	ControlFlow[0..1] role xxx_ControlFlow_carries_src
+	InformationObject[*] role carries
+end
+
+association xxx_ResourceRole_resourcePlays between
+	ResourceRole[0..1] role xxx_ResourceRole_resourcePlays_src
+	Resource[*] role resourcePlays
+end
+
+association xxx_ResourceRole_roleQualifier between
+	ResourceRole[*] role xxx_ResourceRole_roleQualifier_src
+	RoleType[0..1] role roleQualifier
+end
+
+association xxx_ResourceRole_in_ between
+	ResourceRole[*] role xxx_ResourceRole_in__src
+	Activity[1] role in_
+end
+
+association xxx_Anchor_target between
+	Anchor[*] role xxx_Anchor_target_src
+	AssociationConnector[1] role target
+end
+
+association xxx_Anchor_origin between
+	Anchor[*] role xxx_Anchor_origin_src
+	AssociationConnector[1] role origin
+end
+
+association xxx_OutputPort_activity between
+	OutputPort[*] role xxx_OutputPort_activity_src
+	Activity[1] role activity
+end
+
+association xxx_AssociationConnector_origin between
+	AssociationConnector[0..1] role xxx_AssociationConnector_origin_src
+	Anchor[*] role origin
+end
+
+association xxx_AssociationConnector_target between
+	AssociationConnector[0..1] role xxx_AssociationConnector_target_src
+	Anchor[*] role target
+end
+
+association xxx_AssociationConnector_classAssociation between
+	AssociationConnector[*] role xxx_AssociationConnector_classAssociation_src
+	Flow[1] role classAssociation
+end
+
+composition xxx_Process_child between
+	Process[*] role xxx_Process_child_src
+	Activity[1] role child
+end
+
+association xxx_Process_fulfills between
+	Process[0..1] role xxx_Process_fulfills_src
+	Contract[*] role fulfills
+end
+
+association xxx_Process_realises between
+	Process[*] role xxx_Process_realises_src
+	Service[1] role realises
+end
+
+association xxx_Service_process between
+	Service[*] role xxx_Service_process_src
+	Process[1] role process
+end
+
+association xxx_Agent_obliger between
+	Agent[*] role xxx_Agent_obliger_src
+	Commitment[1] role obliger
+end
+
+association xxx_Agent_claimer between
+	Agent[*] role xxx_Agent_claimer_src
+	Commitment[1] role claimer
+end
+
+association xxx_Agent_has_parties between
+	Agent[*] role xxx_Agent_has_parties_src
+	Contract[1] role has_parties
+end
+
+association xxx_Contract_process between
+	Contract[0..1] role xxx_Contract_process_src
+	Process[1..*] role process
+end
+
+association xxx_Contract_agent between
+	Contract[0..1] role xxx_Contract_agent_src
+	Agent[2..*] role agent
+end
+
+composition xxx_Contract_collection_of between
+	Contract[0..1] role xxx_Contract_collection_of_src
+	Commitment[1..*] role collection_of
+end
+
+association xxx_Task_fulfills between
+	Task[0..1] role xxx_Task_fulfills_src
+	Commitment[*] role fulfills
+end
+
+association xxx_Commitment_task between
+	Commitment[*] role xxx_Commitment_task_src
+	Task[1] role task
+end
+
+association xxx_Commitment_agentO between
+	Commitment[*] role xxx_Commitment_agentO_src
+	Agent[1] role agentO
+end
+
+association xxx_Commitment_agentC between
+	Commitment[*] role xxx_Commitment_agentC_src
+	Agent[1] role agentC
+end
+
+association xxx_Commitment_contract between
+	Commitment[*] role xxx_Commitment_contract_src
+	Contract[1] role contract
+end
+

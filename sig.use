@@ -1,0 +1,65 @@
+model sig
+class Ville
+attributes
+	nom : String
+operations
+end
+
+abstract class Batiment
+attributes
+	adresse : String
+operations
+end
+
+class Travail<Batiment
+attributes
+operations
+end
+
+class Etude<Batiment
+attributes
+operations
+end
+
+class Soins<Batiment
+attributes
+operations
+end
+
+class Monde
+attributes
+operations
+end
+
+class Personne
+attributes
+	nom : String
+	statut : String
+operations
+end
+
+composition xxx_Ville_batiments between
+	Ville[0..1] role xxx_Ville_batiments_src
+	Batiment[*] role batiments
+end
+
+composition xxx_Ville_personnes between
+	Ville[0..1] role xxx_Ville_personnes_src
+	Personne[*] role personnes
+end
+
+association xxx_Batiment_personnes between
+	Batiment[0..1] role xxx_Batiment_personnes_src
+	Personne[*] role personnes
+end
+
+composition xxx_Monde_villes between
+	Monde[0..1] role xxx_Monde_villes_src
+	Ville[*] role villes
+end
+
+association xxx_Personne_batiments between
+	Personne[0..1] role xxx_Personne_batiments_src
+	Batiment[*] role batiments
+end
+

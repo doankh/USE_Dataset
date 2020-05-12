@@ -1,0 +1,119 @@
+model petrinetDsl
+class PetriNet
+attributes
+operations
+end
+
+class Resource
+attributes
+	name : String
+operations
+end
+
+class Place
+attributes
+	name : String
+operations
+end
+
+class Storage
+attributes
+	count : Integer
+	capacity : Integer
+operations
+end
+
+class Transaction
+attributes
+	name : String
+operations
+end
+
+class AssureStatement
+attributes
+	count : Integer
+operations
+end
+
+class TakeStatement
+attributes
+	count : Integer
+operations
+end
+
+class PutStatement
+attributes
+	count : Integer
+operations
+end
+
+composition xxx_PetriNet_resources between
+	PetriNet[0..1] role xxx_PetriNet_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_PetriNet_places between
+	PetriNet[0..1] role xxx_PetriNet_places_src
+	Place[*] role places
+end
+
+composition xxx_PetriNet_transactions between
+	PetriNet[0..1] role xxx_PetriNet_transactions_src
+	Transaction[*] role transactions
+end
+
+composition xxx_Place_storages between
+	Place[0..1] role xxx_Place_storages_src
+	Storage[*] role storages
+end
+
+association xxx_Storage_resourceRef between
+	Storage[*] role xxx_Storage_resourceRef_src
+	Resource[0..1] role resourceRef
+end
+
+composition xxx_Transaction_assureStatements between
+	Transaction[0..1] role xxx_Transaction_assureStatements_src
+	AssureStatement[*] role assureStatements
+end
+
+composition xxx_Transaction_takeStatements between
+	Transaction[0..1] role xxx_Transaction_takeStatements_src
+	TakeStatement[*] role takeStatements
+end
+
+composition xxx_Transaction_putStatements between
+	Transaction[0..1] role xxx_Transaction_putStatements_src
+	PutStatement[*] role putStatements
+end
+
+association xxx_AssureStatement_resourceRef between
+	AssureStatement[*] role xxx_AssureStatement_resourceRef_src
+	Resource[0..1] role resourceRef
+end
+
+association xxx_AssureStatement_placeRef between
+	AssureStatement[*] role xxx_AssureStatement_placeRef_src
+	Place[0..1] role placeRef
+end
+
+association xxx_TakeStatement_resourceRef between
+	TakeStatement[*] role xxx_TakeStatement_resourceRef_src
+	Resource[0..1] role resourceRef
+end
+
+association xxx_TakeStatement_placeRef between
+	TakeStatement[*] role xxx_TakeStatement_placeRef_src
+	Place[0..1] role placeRef
+end
+
+association xxx_PutStatement_resourceRef between
+	PutStatement[*] role xxx_PutStatement_resourceRef_src
+	Resource[0..1] role resourceRef
+end
+
+association xxx_PutStatement_placeRef between
+	PutStatement[*] role xxx_PutStatement_placeRef_src
+	Place[0..1] role placeRef
+end
+

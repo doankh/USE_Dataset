@@ -1,0 +1,133 @@
+model PrimitiveTypes
+enum OIMAPrefixFormats{
+	opp_one,
+	opp_two
+}
+
+class TwoByteField
+attributes
+operations
+end
+
+class VariableLengthField
+attributes
+operations
+end
+
+class IMSTransactionMessage
+attributes
+	OIMAPrefixFormat : OIMAPrefixFormats
+	standardFieldsFlag : Boolean
+operations
+end
+
+class OIMAPrefix
+attributes
+operations
+end
+
+class ControlData
+attributes
+operations
+end
+
+class StateData
+attributes
+operations
+end
+
+class SecurityData
+attributes
+operations
+end
+
+class UserData
+attributes
+operations
+end
+
+class StandardFields
+attributes
+operations
+end
+
+class ApplicationData
+attributes
+operations
+end
+
+class Field
+attributes
+operations
+end
+
+class TDLangElement
+attributes
+operations
+end
+
+composition xxx_IMSTransactionMessage_OIMAPrefixComponent between
+	IMSTransactionMessage[*] role xxx_IMSTransactionMessage_OIMAPrefixComponent_src
+	OIMAPrefix[0..1] role OIMAPrefixComponent
+end
+
+composition xxx_IMSTransactionMessage_standardFieldComponent between
+	IMSTransactionMessage[*] role xxx_IMSTransactionMessage_standardFieldComponent_src
+	StandardFields[0..1] role standardFieldComponent
+end
+
+composition xxx_IMSTransactionMessage_messageComponent between
+	IMSTransactionMessage[*] role xxx_IMSTransactionMessage_messageComponent_src
+	ApplicationData[1] role messageComponent
+end
+
+composition xxx_OIMAPrefix_controlDataComponent between
+	OIMAPrefix[*] role xxx_OIMAPrefix_controlDataComponent_src
+	ControlData[1] role controlDataComponent
+end
+
+composition xxx_OIMAPrefix_stateDataComponent between
+	OIMAPrefix[*] role xxx_OIMAPrefix_stateDataComponent_src
+	StateData[1] role stateDataComponent
+end
+
+composition xxx_OIMAPrefix_securityDataComponent between
+	OIMAPrefix[*] role xxx_OIMAPrefix_securityDataComponent_src
+	SecurityData[0..1] role securityDataComponent
+end
+
+composition xxx_OIMAPrefix_userDataComponent between
+	OIMAPrefix[*] role xxx_OIMAPrefix_userDataComponent_src
+	UserData[0..1] role userDataComponent
+end
+
+association xxx_StandardFields_length between
+	StandardFields[*] role xxx_StandardFields_length_src
+	TwoByteField[1] role length
+end
+
+association xxx_StandardFields_reservedField between
+	StandardFields[*] role xxx_StandardFields_reservedField_src
+	TwoByteField[1] role reservedField
+end
+
+association xxx_StandardFields_transactionCode between
+	StandardFields[*] role xxx_StandardFields_transactionCode_src
+	VariableLengthField[1] role transactionCode
+end
+
+association xxx_ApplicationData_languageElements between
+	ApplicationData[0..1] role xxx_ApplicationData_languageElements_src
+	TDLangElement[*] role languageElements
+end
+
+composition xxx_ApplicationData_fieldComponents between
+	ApplicationData[0..1] role xxx_ApplicationData_fieldComponents_src
+	Field[1..*] role fieldComponents
+end
+
+association xxx_Field_fieldContainer between
+	Field[*] role xxx_Field_fieldContainer_src
+	ApplicationData[1] role fieldContainer
+end
+

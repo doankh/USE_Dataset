@@ -1,0 +1,159 @@
+model ovap
+class FilterInstance<Identifiable
+attributes
+operations
+end
+
+class FilterType<Identifiable
+attributes
+operations
+end
+
+class FiltersSetup<Identifiable
+attributes
+operations
+end
+
+class FilterConnection<Identifiable
+attributes
+operations
+end
+
+class PortIn<Port,Identifiable
+attributes
+operations
+end
+
+class PortOut<Port
+attributes
+operations
+end
+
+abstract class Port<Identifiable
+attributes
+operations
+end
+
+abstract class PortInstance<Identifiable
+attributes
+operations
+end
+
+class PortInInstance<PortInstance
+attributes
+operations
+end
+
+class PortOutInstance<PortInstance
+attributes
+operations
+end
+
+class Identifiable
+attributes
+	name : String
+operations
+	eURIFragmentSegment(eStructuralFeature : String,eObject : String):String
+	eObjectForURIFragmentSegment(uriFragmentSegment : String):String
+end
+
+association xxx_FilterInstance_type between
+	FilterInstance[*] role xxx_FilterInstance_type_src
+	FilterType[1] role type
+end
+
+composition xxx_FilterInstance_portInInstance between
+	FilterInstance[0..1] role xxx_FilterInstance_portInInstance_src
+	PortInInstance[*] role portInInstance
+end
+
+composition xxx_FilterInstance_portOutInstance between
+	FilterInstance[0..1] role xxx_FilterInstance_portOutInstance_src
+	PortOutInstance[*] role portOutInstance
+end
+
+composition xxx_FilterType_portOut between
+	FilterType[0..1] role xxx_FilterType_portOut_src
+	PortOut[*] role portOut
+end
+
+composition xxx_FilterType_portIn between
+	FilterType[0..1] role xxx_FilterType_portIn_src
+	PortIn[*] role portIn
+end
+
+association xxx_FilterType_filtersSetup between
+	FilterType[*] role xxx_FilterType_filtersSetup_src
+	FiltersSetup[0..1] role filtersSetup
+end
+
+composition xxx_FiltersSetup_filterInstances between
+	FiltersSetup[0..1] role xxx_FiltersSetup_filterInstances_src
+	FilterInstance[*] role filterInstances
+end
+
+composition xxx_FiltersSetup_connections between
+	FiltersSetup[0..1] role xxx_FiltersSetup_connections_src
+	FilterConnection[*] role connections
+end
+
+composition xxx_FiltersSetup_filterTypes between
+	FiltersSetup[0..1] role xxx_FiltersSetup_filterTypes_src
+	FilterType[*] role filterTypes
+end
+
+association xxx_FilterConnection_portInInstance between
+	FilterConnection[*] role xxx_FilterConnection_portInInstance_src
+	PortInInstance[1] role portInInstance
+end
+
+association xxx_FilterConnection_portOutInstance between
+	FilterConnection[*] role xxx_FilterConnection_portOutInstance_src
+	PortOutInstance[1] role portOutInstance
+end
+
+association xxx_FilterConnection_filtersSetup between
+	FilterConnection[*] role xxx_FilterConnection_filtersSetup_src
+	FiltersSetup[0..1] role filtersSetup
+end
+
+association xxx_PortIn_filterType between
+	PortIn[*] role xxx_PortIn_filterType_src
+	FilterType[0..1] role filterType
+end
+
+association xxx_PortOut_filterType between
+	PortOut[*] role xxx_PortOut_filterType_src
+	FilterType[0..1] role filterType
+end
+
+association xxx_PortInInstance_filterInstance between
+	PortInInstance[*] role xxx_PortInInstance_filterInstance_src
+	FilterInstance[1] role filterInstance
+end
+
+association xxx_PortInInstance_filterConnection between
+	PortInInstance[*] role xxx_PortInInstance_filterConnection_src
+	FilterConnection[1] role filterConnection
+end
+
+association xxx_PortInInstance_type between
+	PortInInstance[*] role xxx_PortInInstance_type_src
+	PortIn[1] role type
+end
+
+association xxx_PortOutInstance_filterInstance between
+	PortOutInstance[*] role xxx_PortOutInstance_filterInstance_src
+	FilterInstance[1] role filterInstance
+end
+
+association xxx_PortOutInstance_filterConnection between
+	PortOutInstance[0..1] role xxx_PortOutInstance_filterConnection_src
+	FilterConnection[*] role filterConnection
+end
+
+association xxx_PortOutInstance_type between
+	PortOutInstance[*] role xxx_PortOutInstance_type_src
+	PortOut[1] role type
+end
+

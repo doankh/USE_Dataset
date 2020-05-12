@@ -1,0 +1,213 @@
+model function
+class Model
+attributes
+operations
+end
+
+class Start
+attributes
+operations
+end
+
+class ExpWithDefinitions<Start
+attributes
+operations
+end
+
+class Exp<ExpWithDefinitions,TerminalExpression
+attributes
+operations
+end
+
+class Expression<Exp
+attributes
+	op : String
+operations
+end
+
+class TerminalExpression
+attributes
+	value : String
+operations
+end
+
+class MathFunction<Exp
+attributes
+	function : String
+operations
+end
+
+class MathTwoArg<MathFunction
+attributes
+operations
+end
+
+class MathOneArg<MathFunction
+attributes
+operations
+end
+
+class VariableDefinition<ExpWithDefinitions
+attributes
+	name : String
+	number : String
+operations
+end
+
+class FunctionDefinition<ExpWithDefinitions
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class FunctionCall<Start
+attributes
+operations
+end
+
+class ParamValues
+attributes
+	value : String
+operations
+end
+
+class ExpInFun<TerminalExpressionInFun
+attributes
+operations
+end
+
+class ExpressionInFun<ExpInFun
+attributes
+	op : String
+operations
+end
+
+class TerminalExpressionInFun
+attributes
+	value : String
+operations
+end
+
+class MathFunctionInFun<ExpInFun
+attributes
+	function : String
+operations
+end
+
+class MathTwoArgInFun<MathFunctionInFun
+attributes
+operations
+end
+
+class MathOneArgInFun<MathFunctionInFun
+attributes
+operations
+end
+
+class IfStatement<Start
+attributes
+	iftype : String
+operations
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	Start[*] role elements
+end
+
+composition xxx_Exp_left between
+	Exp[*] role xxx_Exp_left_src
+	TerminalExpression[0..1] role left
+end
+
+composition xxx_Expression_right between
+	Expression[0..1] role xxx_Expression_right_src
+	TerminalExpression[*] role right
+end
+
+association xxx_TerminalExpression_variable between
+	TerminalExpression[*] role xxx_TerminalExpression_variable_src
+	VariableDefinition[0..1] role variable
+end
+
+composition xxx_TerminalExpression_functioncall between
+	TerminalExpression[*] role xxx_TerminalExpression_functioncall_src
+	FunctionCall[0..1] role functioncall
+end
+
+composition xxx_MathTwoArg_right between
+	MathTwoArg[*] role xxx_MathTwoArg_right_src
+	TerminalExpression[0..1] role right
+end
+
+composition xxx_FunctionDefinition_parameters between
+	FunctionDefinition[0..1] role xxx_FunctionDefinition_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_FunctionDefinition_exp between
+	FunctionDefinition[*] role xxx_FunctionDefinition_exp_src
+	ExpInFun[0..1] role exp
+end
+
+association xxx_FunctionCall_func between
+	FunctionCall[*] role xxx_FunctionCall_func_src
+	FunctionDefinition[0..1] role func
+end
+
+composition xxx_FunctionCall_paramvalues between
+	FunctionCall[0..1] role xxx_FunctionCall_paramvalues_src
+	ParamValues[*] role paramvalues
+end
+
+association xxx_ParamValues_variable between
+	ParamValues[*] role xxx_ParamValues_variable_src
+	VariableDefinition[0..1] role variable
+end
+
+composition xxx_ExpInFun_left between
+	ExpInFun[*] role xxx_ExpInFun_left_src
+	TerminalExpressionInFun[0..1] role left
+end
+
+composition xxx_ExpressionInFun_right between
+	ExpressionInFun[0..1] role xxx_ExpressionInFun_right_src
+	TerminalExpressionInFun[*] role right
+end
+
+association xxx_TerminalExpressionInFun_parameter between
+	TerminalExpressionInFun[*] role xxx_TerminalExpressionInFun_parameter_src
+	Parameter[0..1] role parameter
+end
+
+composition xxx_MathTwoArgInFun_right between
+	MathTwoArgInFun[*] role xxx_MathTwoArgInFun_right_src
+	TerminalExpressionInFun[0..1] role right
+end
+
+composition xxx_IfStatement_left between
+	IfStatement[*] role xxx_IfStatement_left_src
+	Exp[0..1] role left
+end
+
+composition xxx_IfStatement_right between
+	IfStatement[*] role xxx_IfStatement_right_src
+	Exp[0..1] role right
+end
+
+composition xxx_IfStatement_whentrue between
+	IfStatement[*] role xxx_IfStatement_whentrue_src
+	Exp[0..1] role whentrue
+end
+
+composition xxx_IfStatement_whenfalse between
+	IfStatement[*] role xxx_IfStatement_whenfalse_src
+	Exp[0..1] role whenfalse
+end
+

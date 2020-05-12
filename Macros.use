@@ -1,0 +1,86 @@
+model macros
+class MainRule
+attributes
+operations
+end
+
+class Version_Statement
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class Tag_Statement<Statement
+attributes
+operations
+end
+
+class Url_Statement<Statement
+attributes
+operations
+end
+
+class Tab_Statement<Statement
+attributes
+operations
+end
+
+class Version_attr
+attributes
+	value : String
+operations
+end
+
+class Tag_attr
+attributes
+	tag : String
+	value : String
+operations
+end
+
+class url_attr
+attributes
+	value : String
+operations
+end
+
+class tab_attr
+attributes
+	value : String
+operations
+end
+
+composition xxx_MainRule_version between
+	MainRule[*] role xxx_MainRule_version_src
+	Version_Statement[0..1] role version
+end
+
+composition xxx_MainRule_statement between
+	MainRule[0..1] role xxx_MainRule_statement_src
+	Statement[*] role statement
+end
+
+composition xxx_Version_Statement_attribute between
+	Version_Statement[*] role xxx_Version_Statement_attribute_src
+	Version_attr[0..1] role attribute
+end
+
+composition xxx_Tag_Statement_tags between
+	Tag_Statement[0..1] role xxx_Tag_Statement_tags_src
+	Tag_attr[*] role tags
+end
+
+composition xxx_Url_Statement_urls between
+	Url_Statement[0..1] role xxx_Url_Statement_urls_src
+	url_attr[*] role urls
+end
+
+composition xxx_Tab_Statement_tabs between
+	Tab_Statement[0..1] role xxx_Tab_Statement_tabs_src
+	tab_attr[*] role tabs
+end
+

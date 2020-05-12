@@ -1,0 +1,224 @@
+model fj
+class Program
+attributes
+operations
+end
+
+class Type
+attributes
+	basic : String
+operations
+end
+
+class TypedElement
+attributes
+	name : String
+operations
+end
+
+class Class
+attributes
+	name : String
+operations
+end
+
+class Field<TypedElement
+attributes
+operations
+end
+
+class Parameter<TypedElement
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+operations
+end
+
+class MethodBody
+attributes
+operations
+end
+
+class Expression<Argument
+attributes
+operations
+end
+
+class Message
+attributes
+operations
+end
+
+class MethodCall<Message
+attributes
+operations
+end
+
+class FieldSelection<Message
+attributes
+operations
+end
+
+class This<Expression
+attributes
+	variable : String
+operations
+end
+
+class Variable<Expression
+attributes
+operations
+end
+
+class New<Expression
+attributes
+operations
+end
+
+class Cast<Expression
+attributes
+operations
+end
+
+class Constant<Expression
+attributes
+operations
+end
+
+class StringConstant<Constant
+attributes
+	constant : String
+operations
+end
+
+class IntConstant<Constant
+attributes
+	constant : Integer
+operations
+end
+
+class BoolConstant<Constant
+attributes
+	constant : String
+operations
+end
+
+class Argument
+attributes
+operations
+end
+
+class Selection<Expression
+attributes
+operations
+end
+
+composition xxx_Program_classes between
+	Program[0..1] role xxx_Program_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Program_main between
+	Program[*] role xxx_Program_main_src
+	Expression[0..1] role main
+end
+
+association xxx_Type_classref between
+	Type[*] role xxx_Type_classref_src
+	Class[0..1] role classref
+end
+
+composition xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_Class_extends between
+	Class[*] role xxx_Class_extends_src
+	Class[0..1] role extends
+end
+
+composition xxx_Class_fields between
+	Class[0..1] role xxx_Class_fields_src
+	Field[*] role fields
+end
+
+composition xxx_Class_methods between
+	Class[0..1] role xxx_Class_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Method_returntype between
+	Method[*] role xxx_Method_returntype_src
+	Type[0..1] role returntype
+end
+
+composition xxx_Method_params between
+	Method[0..1] role xxx_Method_params_src
+	Parameter[*] role params
+end
+
+composition xxx_Method_body between
+	Method[*] role xxx_Method_body_src
+	MethodBody[0..1] role body
+end
+
+composition xxx_MethodBody_expression between
+	MethodBody[*] role xxx_MethodBody_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_MethodCall_name between
+	MethodCall[*] role xxx_MethodCall_name_src
+	Method[0..1] role name
+end
+
+composition xxx_MethodCall_args between
+	MethodCall[0..1] role xxx_MethodCall_args_src
+	Argument[*] role args
+end
+
+association xxx_FieldSelection_name between
+	FieldSelection[*] role xxx_FieldSelection_name_src
+	Field[0..1] role name
+end
+
+association xxx_Variable_variable between
+	Variable[*] role xxx_Variable_variable_src
+	Parameter[0..1] role variable
+end
+
+association xxx_New_type between
+	New[*] role xxx_New_type_src
+	Class[0..1] role type
+end
+
+composition xxx_New_args between
+	New[0..1] role xxx_New_args_src
+	Argument[*] role args
+end
+
+association xxx_Cast_type between
+	Cast[*] role xxx_Cast_type_src
+	Class[0..1] role type
+end
+
+composition xxx_Cast_object between
+	Cast[*] role xxx_Cast_object_src
+	Expression[0..1] role object
+end
+
+composition xxx_Selection_receiver between
+	Selection[*] role xxx_Selection_receiver_src
+	Expression[0..1] role receiver
+end
+
+composition xxx_Selection_message between
+	Selection[*] role xxx_Selection_message_src
+	Message[0..1] role message
+end
+

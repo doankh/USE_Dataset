@@ -1,0 +1,95 @@
+model cartesiancoordinatesystem
+class CartesianCoordinateSystem<Element
+attributes
+	coeffX : Integer
+	coeffY : Integer
+	coeffZ : Integer
+operations
+end
+
+class Axis
+attributes
+operations
+end
+
+class Point<Element
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Segment<Element
+attributes
+operations
+end
+
+class AxeX<Axe
+attributes
+operations
+end
+
+class AxeY<Axe
+attributes
+operations
+end
+
+class AxeZ<Axe
+attributes
+operations
+end
+
+abstract class Axe<Element
+attributes
+	length : Integer
+operations
+end
+
+class Element
+attributes
+	name : String
+	description : String
+	color : String
+operations
+end
+
+composition xxx_CartesianCoordinateSystem_axes between
+	CartesianCoordinateSystem[*] role xxx_CartesianCoordinateSystem_axes_src
+	Axis[2..3] role axes
+end
+
+composition xxx_CartesianCoordinateSystem_points between
+	CartesianCoordinateSystem[0..1] role xxx_CartesianCoordinateSystem_points_src
+	Point[*] role points
+end
+
+composition xxx_CartesianCoordinateSystem_segments between
+	CartesianCoordinateSystem[0..1] role xxx_CartesianCoordinateSystem_segments_src
+	Segment[*] role segments
+end
+
+association xxx_CartesianCoordinateSystem_axeX between
+	CartesianCoordinateSystem[*] role xxx_CartesianCoordinateSystem_axeX_src
+	AxeX[0..1] role axeX
+end
+
+association xxx_CartesianCoordinateSystem_axeY between
+	CartesianCoordinateSystem[*] role xxx_CartesianCoordinateSystem_axeY_src
+	AxeY[0..1] role axeY
+end
+
+association xxx_CartesianCoordinateSystem_axeZ between
+	CartesianCoordinateSystem[*] role xxx_CartesianCoordinateSystem_axeZ_src
+	AxeZ[0..1] role axeZ
+end
+
+association xxx_Segment_a between
+	Segment[*] role xxx_Segment_a_src
+	Point[1] role a
+end
+
+association xxx_Segment_b between
+	Segment[*] role xxx_Segment_b_src
+	Point[1] role b
+end
+

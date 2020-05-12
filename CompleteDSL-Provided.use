@@ -1,0 +1,60 @@
+model complextriggersReqfsmProvactionscriptingProvExpressionPckProv
+abstract class Expression
+attributes
+operations
+	eval(context_ : String)
+end
+
+abstract class Literal
+attributes
+operations
+end
+
+class ArithmeticExpression
+attributes
+operations
+end
+
+class RelationalExpression
+attributes
+operations
+end
+
+class Block
+attributes
+operations
+	evalStatement(context_ : String)
+end
+
+class StateMachine
+attributes
+operations
+end
+
+class Region
+attributes
+operations
+end
+
+abstract class AbstractState
+attributes
+operations
+end
+
+class State
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Trigger
+attributes
+	expression : String
+operations
+	evalTrigger(events : String)
+end
+

@@ -1,0 +1,790 @@
+model modembed
+abstract class MODembedElement
+attributes
+	description : String
+operations
+end
+
+class Annotation
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class NamedElement<MODembedElement
+attributes
+	name : String
+operations
+end
+
+abstract class RootElement<NamedElement
+attributes
+operations
+end
+
+class AttributeContainerDefinition<RootElement
+attributes
+operations
+end
+
+class AttributeDefinition<NamedElement
+attributes
+operations
+end
+
+class AttributeValueContainer<RootElement
+attributes
+operations
+end
+
+class AttributeValue<MODembedElement
+attributes
+	value : Integer
+operations
+end
+
+abstract class Origin
+attributes
+operations
+end
+
+class TextOrigin<Origin
+attributes
+	fileName : String
+	line : Integer
+operations
+end
+
+class ModelOrigin<Origin
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class IntegerConstantExpression<Expression
+attributes
+	value : Integer
+operations
+end
+
+class OperationExpression<Expression
+attributes
+	operation : String
+operations
+end
+
+class InstructionSet<RootElement
+attributes
+operations
+end
+
+class Instruction<NamedElement
+attributes
+operations
+end
+
+class InstructionParameter<NamedElement
+attributes
+	defaultValue : Integer
+operations
+end
+
+abstract class InstructionSection<MODembedElement
+attributes
+	size : Integer
+	shift : Integer
+operations
+end
+
+class ConstantSection<InstructionSection
+attributes
+	value : Integer
+operations
+end
+
+class ParameterSection<InstructionSection
+attributes
+operations
+end
+
+class InstructionWord<MODembedElement
+attributes
+operations
+end
+
+abstract class InstructionWordCondition<MODembedElement
+attributes
+operations
+end
+
+class InstructionWordMaskedValueCondition<InstructionWordCondition
+attributes
+	mask : Integer
+	value : Integer
+operations
+end
+
+class AssemblerObject<RootElement
+attributes
+	startAddress : Integer
+operations
+end
+
+class InstructionCall<MODembedElement
+attributes
+operations
+end
+
+class InstructionCallParameter<MODembedElement
+attributes
+	value : Integer
+	label : Boolean
+operations
+end
+
+class DeviceAbstraction<RootElement
+attributes
+operations
+end
+
+abstract class TypeDefinition<MODembedElement
+attributes
+operations
+end
+
+abstract class PrimitiveTypeDefinition<TypeDefinition
+attributes
+operations
+end
+
+abstract class CompositeTypeDefinition<TypeDefinition
+attributes
+operations
+end
+
+class UnsignedTypeDefinition<PrimitiveTypeDefinition
+attributes
+	bits : Integer
+operations
+end
+
+class ReferenceTypeDefinition<CompositeTypeDefinition
+attributes
+operations
+end
+
+class PointerTypeDefinition<CompositeTypeDefinition
+attributes
+operations
+end
+
+class ArrayDefinition<PointerTypeDefinition
+attributes
+operations
+end
+
+class StructureTypeDefinition<CompositeTypeDefinition
+attributes
+operations
+end
+
+class StructureTypeElement<NamedElement
+attributes
+operations
+end
+
+class CodeLabelTypeDefinition<PrimitiveTypeDefinition
+attributes
+operations
+end
+
+class Type<RootElement
+attributes
+operations
+end
+
+class MemoryType<NamedElement
+attributes
+	accessCost : Integer
+	contentVolatile : Boolean
+	forData : Boolean
+	forProgram : Boolean
+operations
+end
+
+class MemoryInstance<NamedElement
+attributes
+	startAddress : Integer
+	size : Integer
+operations
+end
+
+class SequentialBehaviorModule<RootElement
+attributes
+operations
+end
+
+class SymbolMap<RootElement
+attributes
+operations
+end
+
+class SymbolMappingRules<RootElement
+attributes
+operations
+end
+
+class SymbolMappingRule<MODembedElement
+attributes
+	startAddress : Integer
+	endAddress : Integer
+	classes : String
+operations
+end
+
+abstract class SequentialBehavior
+attributes
+operations
+end
+
+class RootSequentialBehavior<RootElement,SequentialBehavior
+attributes
+operations
+end
+
+class SequentialBehaviorPart<NamedElement,SequentialBehavior
+attributes
+	parameters : String
+operations
+end
+
+abstract class SequentialAction<MODembedElement
+attributes
+operations
+end
+
+class CodeSymbolPlacement<SequentialAction
+attributes
+	symbol : String
+operations
+end
+
+class OperationExecution<SequentialAction
+attributes
+	arguments : String
+	operation : String
+operations
+end
+
+abstract class SymbolAssignment<MODembedElement
+attributes
+	symbol : String
+operations
+end
+
+class SymbolAllocation<SymbolAssignment
+attributes
+operations
+end
+
+class SymbolAddressAssignment<SymbolAssignment
+attributes
+	address : Integer
+operations
+end
+
+class SymbolValueAssignment<SymbolAssignment
+attributes
+	value : Integer
+operations
+end
+
+class OperationDefinition<MODembedElement
+attributes
+	operation : String
+operations
+end
+
+class OperationArgument<NamedElement
+attributes
+operations
+end
+
+class InstructionCallOperationStep<OperationStep
+attributes
+operations
+end
+
+abstract class OperationStep<MODembedElement
+attributes
+operations
+end
+
+class OperationLocalLabel<OperationStep,NamedElement
+attributes
+operations
+end
+
+
+class LabelParameterValue<Expression
+attributes
+operations
+end
+
+class InstructionParameterMapping<Expression
+attributes
+operations
+end
+
+class StructuredModule<RootElement
+attributes
+operations
+end
+
+class VariableDeclaration<NamedElement
+attributes
+	const : Boolean
+	global : Boolean
+operations
+end
+
+class StructuredFunction<NamedElement
+attributes
+operations
+end
+
+class VariableReferenceExpression<Expression
+attributes
+operations
+end
+
+class FunctionCallExpression<Expression
+attributes
+operations
+end
+
+abstract class Operation<MODembedElement
+attributes
+operations
+end
+
+class ReturnOperation<Operation
+attributes
+operations
+end
+
+class ExpressionOperation<Operation
+attributes
+operations
+end
+
+class OperationBlock<Operation
+attributes
+operations
+end
+
+class ConditionalOperation<Operation, OperationStep
+attributes
+operations
+end
+
+class LoopOperation<Operation
+attributes
+operations
+end
+
+composition xxx_MODembedElement_origins between
+	MODembedElement[0..1] role xxx_MODembedElement_origins_src
+	Origin[*] role origins
+end
+
+composition xxx_MODembedElement_annotations between
+	MODembedElement[0..1] role xxx_MODembedElement_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_AttributeContainerDefinition_attributes_ between
+	AttributeContainerDefinition[0..1] role xxx_AttributeContainerDefinition_attributes__src
+	AttributeDefinition[*] role attributes_
+end
+
+association xxx_AttributeValueContainer_definition between
+	AttributeValueContainer[*] role xxx_AttributeValueContainer_definition_src
+	AttributeContainerDefinition[1] role definition
+end
+
+composition xxx_AttributeValueContainer_values between
+	AttributeValueContainer[0..1] role xxx_AttributeValueContainer_values_src
+	AttributeValue[*] role values
+end
+
+association xxx_AttributeValue_definition between
+	AttributeValue[*] role xxx_AttributeValue_definition_src
+	AttributeDefinition[1] role definition
+end
+
+association xxx_ModelOrigin_element between
+	ModelOrigin[*] role xxx_ModelOrigin_element_src
+	MODembedElement[1] role element
+end
+
+composition xxx_OperationExpression_arguments between
+	OperationExpression[0..1] role xxx_OperationExpression_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_InstructionSet_instructions between
+	InstructionSet[0..1] role xxx_InstructionSet_instructions_src
+	Instruction[*] role instructions
+end
+
+association xxx_InstructionSet_extend between
+	InstructionSet[*] role xxx_InstructionSet_extend_src
+	InstructionSet[0..1] role extend
+end
+
+composition xxx_Instruction_parameters between
+	Instruction[0..1] role xxx_Instruction_parameters_src
+	InstructionParameter[*] role parameters
+end
+
+composition xxx_Instruction_words between
+	Instruction[0..1] role xxx_Instruction_words_src
+	InstructionWord[*] role words
+end
+
+association xxx_ParameterSection_parameter between
+	ParameterSection[*] role xxx_ParameterSection_parameter_src
+	InstructionParameter[1] role parameter
+end
+
+composition xxx_InstructionWord_sections between
+	InstructionWord[0..1] role xxx_InstructionWord_sections_src
+	InstructionSection[*] role sections
+end
+
+composition xxx_InstructionWord_condition between
+	InstructionWord[0..1] role xxx_InstructionWord_condition_src
+	InstructionWordCondition[*] role condition
+end
+
+association xxx_InstructionWordMaskedValueCondition_argument between
+	InstructionWordMaskedValueCondition[*] role xxx_InstructionWordMaskedValueCondition_argument_src
+	InstructionParameter[1] role argument
+end
+
+composition xxx_AssemblerObject_instructions between
+	AssemblerObject[0..1] role xxx_AssemblerObject_instructions_src
+	InstructionCall[*] role instructions
+end
+
+composition xxx_InstructionCall_parameters between
+	InstructionCall[0..1] role xxx_InstructionCall_parameters_src
+	InstructionCallParameter[*] role parameters
+end
+
+association xxx_InstructionCall_instruction between
+	InstructionCall[*] role xxx_InstructionCall_instruction_src
+	Instruction[0..1] role instruction
+end
+
+association xxx_InstructionCallParameter_definition between
+	InstructionCallParameter[*] role xxx_InstructionCallParameter_definition_src
+	InstructionParameter[0..1] role definition
+end
+
+association xxx_DeviceAbstraction_ancestor between
+	DeviceAbstraction[*] role xxx_DeviceAbstraction_ancestor_src
+	DeviceAbstraction[0..1] role ancestor
+end
+
+association xxx_DeviceAbstraction_instructionset between
+	DeviceAbstraction[*] role xxx_DeviceAbstraction_instructionset_src
+	InstructionSet[0..1] role instructionset
+end
+
+composition xxx_DeviceAbstraction_memoryTypes between
+	DeviceAbstraction[0..1] role xxx_DeviceAbstraction_memoryTypes_src
+	MemoryType[*] role memoryTypes
+end
+
+composition xxx_DeviceAbstraction_memoryInstances between
+	DeviceAbstraction[0..1] role xxx_DeviceAbstraction_memoryInstances_src
+	MemoryInstance[*] role memoryInstances
+end
+
+composition xxx_DeviceAbstraction_operation between
+	DeviceAbstraction[0..1] role xxx_DeviceAbstraction_operation_src
+	OperationDefinition[*] role operation
+end
+
+association xxx_ReferenceTypeDefinition_type between
+	ReferenceTypeDefinition[*] role xxx_ReferenceTypeDefinition_type_src
+	Type[1] role type
+end
+
+composition xxx_PointerTypeDefinition_pointerType between
+	PointerTypeDefinition[*] role xxx_PointerTypeDefinition_pointerType_src
+	TypeDefinition[1] role pointerType
+end
+
+composition xxx_StructureTypeDefinition_elements between
+	StructureTypeDefinition[0..1] role xxx_StructureTypeDefinition_elements_src
+	StructureTypeElement[*] role elements
+end
+
+composition xxx_StructureTypeElement_type between
+	StructureTypeElement[*] role xxx_StructureTypeElement_type_src
+	TypeDefinition[1] role type
+end
+
+composition xxx_Type_definition between
+	Type[*] role xxx_Type_definition_src
+	TypeDefinition[1] role definition
+end
+
+composition xxx_MemoryType_attributes_ between
+	MemoryType[*] role xxx_MemoryType_attributes__src
+	AttributeContainerDefinition[0..1] role attributes_
+end
+
+association xxx_MemoryInstance_type between
+	MemoryInstance[*] role xxx_MemoryInstance_type_src
+	MemoryType[1] role type
+end
+
+composition xxx_MemoryInstance_attributes_ between
+	MemoryInstance[*] role xxx_MemoryInstance_attributes__src
+	AttributeValueContainer[0..1] role attributes_
+end
+
+association xxx_SequentialBehaviorModule_device between
+	SequentialBehaviorModule[*] role xxx_SequentialBehaviorModule_device_src
+	DeviceAbstraction[0..1] role device
+end
+
+composition xxx_SequentialBehaviorModule_symbolMappings between
+	SequentialBehaviorModule[0..1] role xxx_SequentialBehaviorModule_symbolMappings_src
+	SymbolAssignment[*] role symbolMappings
+end
+
+composition xxx_SequentialBehaviorModule_behaviorModels between
+	SequentialBehaviorModule[0..1] role xxx_SequentialBehaviorModule_behaviorModels_src
+	SequentialBehaviorPart[*] role behaviorModels
+end
+
+composition xxx_SequentialBehaviorModule_initSequence between
+	SequentialBehaviorModule[*] role xxx_SequentialBehaviorModule_initSequence_src
+	SequentialBehaviorPart[0..1] role initSequence
+end
+
+association xxx_SymbolMap_device between
+	SymbolMap[*] role xxx_SymbolMap_device_src
+	DeviceAbstraction[0..1] role device
+end
+
+composition xxx_SymbolMap_symbolMappings between
+	SymbolMap[0..1] role xxx_SymbolMap_symbolMappings_src
+	SymbolAddressAssignment[*] role symbolMappings
+end
+
+association xxx_SymbolMappingRules_device between
+	SymbolMappingRules[*] role xxx_SymbolMappingRules_device_src
+	DeviceAbstraction[0..1] role device
+end
+
+composition xxx_SymbolMappingRules_rules between
+	SymbolMappingRules[0..1] role xxx_SymbolMappingRules_rules_src
+	SymbolMappingRule[*] role rules
+end
+
+association xxx_SymbolMappingRule_memInstance between
+	SymbolMappingRule[*] role xxx_SymbolMappingRule_memInstance_src
+	MemoryInstance[0..1] role memInstance
+end
+
+composition xxx_SequentialBehavior_actions between
+	SequentialBehavior[0..1] role xxx_SequentialBehavior_actions_src
+	SequentialAction[*] role actions
+end
+
+composition xxx_SequentialBehavior_localSymbols between
+	SequentialBehavior[0..1] role xxx_SequentialBehavior_localSymbols_src
+	SymbolAssignment[*] role localSymbols
+end
+
+association xxx_RootSequentialBehavior_device between
+	RootSequentialBehavior[*] role xxx_RootSequentialBehavior_device_src
+	DeviceAbstraction[0..1] role device
+end
+
+composition xxx_SymbolAssignment_type between
+	SymbolAssignment[*] role xxx_SymbolAssignment_type_src
+	TypeDefinition[1] role type
+end
+
+association xxx_SymbolAddressAssignment_memoryInstance between
+	SymbolAddressAssignment[*] role xxx_SymbolAddressAssignment_memoryInstance_src
+	MemoryInstance[1] role memoryInstance
+end
+
+composition xxx_OperationDefinition_arguments between
+	OperationDefinition[0..1] role xxx_OperationDefinition_arguments_src
+	OperationArgument[*] role arguments
+end
+
+composition xxx_OperationDefinition_steps between
+	OperationDefinition[0..1] role xxx_OperationDefinition_steps_src
+	OperationStep[*] role steps
+end
+
+composition xxx_OperationArgument_type between
+	OperationArgument[*] role xxx_OperationArgument_type_src
+	TypeDefinition[0..1] role type
+end
+
+association xxx_OperationArgument_memType between
+	OperationArgument[*] role xxx_OperationArgument_memType_src
+	MemoryType[0..1] role memType
+end
+
+association xxx_InstructionCallOperationStep_instruction between
+	InstructionCallOperationStep[*] role xxx_InstructionCallOperationStep_instruction_src
+	Instruction[0..1] role instruction
+end
+
+composition xxx_InstructionCallOperationStep_arguments between
+	InstructionCallOperationStep[0..1] role xxx_InstructionCallOperationStep_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_ConditionalOperation_steps between
+	ConditionalOperation[0..1] role xxx_ConditionalOperation_steps_src
+	OperationStep[*] role steps
+end
+
+association xxx_LabelParameterValue_label between
+	LabelParameterValue[*] role xxx_LabelParameterValue_label_src
+	OperationLocalLabel[1] role label
+end
+
+association xxx_InstructionParameterMapping_value between
+	InstructionParameterMapping[*] role xxx_InstructionParameterMapping_value_src
+	OperationArgument[1] role value
+end
+
+association xxx_InstructionParameterMapping_attribute between
+	InstructionParameterMapping[*] role xxx_InstructionParameterMapping_attribute_src
+	AttributeDefinition[0..1] role attribute
+end
+
+composition xxx_StructuredModule_functions between
+	StructuredModule[0..1] role xxx_StructuredModule_functions_src
+	StructuredFunction[*] role functions
+end
+
+composition xxx_StructuredModule_variables between
+	StructuredModule[0..1] role xxx_StructuredModule_variables_src
+	VariableDeclaration[*] role variables
+end
+
+association xxx_StructuredModule_uses between
+	StructuredModule[0..1] role xxx_StructuredModule_uses_src
+	StructuredModule[*] role uses
+end
+
+composition xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	TypeDefinition[1] role type
+end
+
+composition xxx_VariableDeclaration_initValue between
+	VariableDeclaration[*] role xxx_VariableDeclaration_initValue_src
+	Expression[0..1] role initValue
+end
+
+composition xxx_StructuredFunction_resultType between
+	StructuredFunction[*] role xxx_StructuredFunction_resultType_src
+	TypeDefinition[1] role resultType
+end
+
+composition xxx_StructuredFunction_parameters between
+	StructuredFunction[0..1] role xxx_StructuredFunction_parameters_src
+	VariableDeclaration[*] role parameters
+end
+
+composition xxx_StructuredFunction_implementation between
+	StructuredFunction[*] role xxx_StructuredFunction_implementation_src
+	Operation[0..1] role implementation
+end
+
+association xxx_VariableReferenceExpression_variable between
+	VariableReferenceExpression[*] role xxx_VariableReferenceExpression_variable_src
+	VariableDeclaration[1] role variable
+end
+
+association xxx_FunctionCallExpression_function between
+	FunctionCallExpression[*] role xxx_FunctionCallExpression_function_src
+	StructuredFunction[0..1] role function
+end
+
+composition xxx_FunctionCallExpression_arguments between
+	FunctionCallExpression[0..1] role xxx_FunctionCallExpression_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_ReturnOperation_result between
+	ReturnOperation[*] role xxx_ReturnOperation_result_src
+	Expression[0..1] role result
+end
+
+composition xxx_ExpressionOperation_expression between
+	ExpressionOperation[*] role xxx_ExpressionOperation_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_OperationBlock_variables between
+	OperationBlock[0..1] role xxx_OperationBlock_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_OperationBlock_steps between
+	OperationBlock[0..1] role xxx_OperationBlock_steps_src
+	Operation[*] role steps
+end
+
+composition xxx_ConditionalOperation_condition between
+	ConditionalOperation[*] role xxx_ConditionalOperation_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ConditionalOperation_trueBranch between
+	ConditionalOperation[*] role xxx_ConditionalOperation_trueBranch_src
+	Operation[0..1] role trueBranch
+end
+
+composition xxx_ConditionalOperation_falseBranch between
+	ConditionalOperation[*] role xxx_ConditionalOperation_falseBranch_src
+	Operation[0..1] role falseBranch
+end
+
+composition xxx_LoopOperation_entryCondition between
+	LoopOperation[*] role xxx_LoopOperation_entryCondition_src
+	Expression[0..1] role entryCondition
+end
+
+composition xxx_LoopOperation_exitCondition between
+	LoopOperation[*] role xxx_LoopOperation_exitCondition_src
+	Expression[0..1] role exitCondition
+end
+
+composition xxx_LoopOperation_body between
+	LoopOperation[*] role xxx_LoopOperation_body_src
+	Operation[1] role body
+end
+

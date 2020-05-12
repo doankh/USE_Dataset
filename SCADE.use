@@ -1,0 +1,1791 @@
+model SCADE
+class ListString
+attributes
+	value : String
+operations
+end
+
+class ListInteger
+attributes
+	value : Integer
+operations
+end
+
+class Model<MtcEntity
+attributes
+	library : Boolean
+	pathname : String
+operations
+end
+
+class Implementation<Object
+attributes
+operations
+end
+
+class ConstBlock<ModelBlock
+attributes
+operations
+end
+
+class VarBlock<ModelBlock
+attributes
+operations
+end
+
+class GlobalVariable<Variable
+attributes
+operations
+end
+
+class TypeBlock<ModelBlock
+attributes
+operations
+end
+
+class Session
+attributes
+	DefinedIn : String
+operations
+end
+
+class Descriptor<Object
+attributes
+	modelFileName : String
+	sernFileName : String
+	sernPersistAs : String
+	rnetFileName : String
+	rnetPersistAs : String
+	occBase : Integer
+	size : Integer
+	nameVerify : Boolean
+	checked : Boolean
+operations
+end
+
+class StorageUnit<Object
+attributes
+	saoFileName : String
+	annFileName : String
+	persistAs : String
+	loaded : Boolean
+	saoModified : Boolean
+	annModified : Boolean
+operations
+end
+
+abstract class StorageElement<Annotable
+attributes
+operations
+end
+
+abstract class Object
+attributes
+	name : String
+	runLine : Integer
+operations
+end
+
+abstract class Block<StorageElement
+attributes
+	zoomCoeff : Integer
+	fromat : String
+	lanscape : Boolean
+	defaultPageFormat : Boolean
+operations
+end
+
+class NodeBlock<Block
+attributes
+operations
+end
+
+abstract class ModelBlock<Block
+attributes
+operations
+end
+
+abstract class Expression<Object
+attributes
+operations
+end
+
+class Label<Object
+attributes
+operations
+end
+
+class ExprNull<Expression
+attributes
+operations
+end
+
+class ConstValue<Expression
+attributes
+	value : String
+operations
+end
+
+class ExprContact<Expression
+attributes
+operations
+end
+
+class ExprCall<Expression
+attributes
+	numOcc : Integer
+	predefOpr : Integer
+operations
+end
+
+class Operator<MtcEntity
+attributes
+	category : String
+	conversion : Boolean
+	state : Boolean
+	index : Integer
+operations
+end
+
+class ExprId<Expression
+attributes
+operations
+end
+
+class LocalVariable<Variable
+attributes
+	optional : Boolean
+	const : Boolean
+	probe : Boolean
+	pure : Boolean
+	initValue : String
+operations
+end
+
+class Node<Operator
+attributes
+operations
+end
+
+class ParamBlock<NodeBlock
+attributes
+operations
+end
+
+class ParamArray<Annotable
+attributes
+operations
+end
+
+class ConstVar<Annotable
+attributes
+operations
+end
+
+class Constant<ConstVar
+attributes
+	imported : Boolean
+operations
+end
+
+class Variable<ConstVar
+attributes
+operations
+end
+
+abstract class Type<Annotable
+attributes
+operations
+end
+
+class Table<Type
+attributes
+	size : Integer
+operations
+end
+
+class NamedType<Type
+attributes
+operations
+end
+
+class Enumeration<Type
+attributes
+operations
+end
+
+abstract class Composite<Type
+attributes
+operations
+end
+
+class CompositeElement<Object
+attributes
+operations
+end
+
+class Structure<Composite
+attributes
+operations
+end
+
+class Tuple_<Composite
+attributes
+operations
+end
+
+class EqBlock<NodeBlock
+attributes
+operations
+end
+
+class Equation<Annotable
+attributes
+	rotation : Integer
+	symetrical : Boolean
+	terminator : Boolean
+operations
+end
+
+class Assertion<Annotable
+attributes
+operations
+end
+
+abstract class Annotable<Object
+attributes
+	DefinedIn : String
+operations
+end
+
+class Prop
+attributes
+	name : String
+operations
+end
+
+class Configuration
+attributes
+	name : String
+operations
+end
+
+class Project<Annotable
+attributes
+	pathname : String
+operations
+end
+
+abstract class Element<MtcEntity
+attributes
+	name : String
+	derived_ : Boolean
+	ident : String
+	description : String
+operations
+end
+
+class FileRef<Element
+attributes
+	pathname : String
+	persistAs : String
+	DefinedIn : String
+operations
+end
+
+class Folder<Element
+attributes
+	extensions : String
+operations
+end
+
+abstract class Reference
+attributes
+operations
+end
+
+class TypeReference<Reference
+attributes
+operations
+end
+
+class OperatorReference<Reference
+attributes
+operations
+end
+
+class VariableReference<Reference
+attributes
+operations
+end
+
+class Error
+attributes
+operations
+end
+
+class Edge<Object
+attributes
+	leftVarIndex : Integer
+	labelOrientation : Integer
+operations
+end
+
+class RPoint
+attributes
+operations
+end
+
+class RSize
+attributes
+operations
+end
+
+abstract class Entity
+attributes
+	DefinedIn : String
+operations
+end
+
+abstract class StateObj<Entity
+attributes
+operations
+end
+
+abstract class GraphicalObject<StateObj
+attributes
+operations
+end
+
+abstract class StInputOutput<GraphicalObject
+attributes
+	name : String
+	type : String
+	clock : Boolean
+	const : Boolean
+	optional : Boolean
+operations
+end
+
+class StInitInput<StInputOutput
+attributes
+operations
+end
+
+class StInput<StInputOutput
+attributes
+operations
+end
+
+class StOutput<StInputOutput
+attributes
+operations
+end
+
+class Transition<GraphicalObject
+attributes
+	conditions : String
+	transKind : Integer
+operations
+end
+
+class State<GraphicalObject
+attributes
+	name : String
+	cx : Real
+	cy : Real
+operations
+end
+
+class InitialStPtr<GraphicalObject
+attributes
+	cx : Real
+	cy : Real
+operations
+end
+
+class StateMachine<Object
+attributes
+operations
+end
+
+abstract class Base
+attributes
+	DefineIn : String
+operations
+end
+
+class StateBase<Base
+attributes
+operations
+end
+
+class AnnNote
+attributes
+	name : String
+	modified : Boolean
+operations
+end
+
+abstract class AnnAttValue
+attributes
+operations
+end
+
+class AnnNoteType
+attributes
+	name : String
+operations
+end
+
+class AnnAttDefinition
+attributes
+	name : String
+	type : Integer
+operations
+end
+
+class AnnAttIntValue<AnnAttValue
+attributes
+	value : Integer
+operations
+end
+
+class AnnAttBoolValue<AnnAttValue
+attributes
+	value : Boolean
+operations
+end
+
+class AnnAttCharValue<AnnAttValue
+attributes
+	value : String
+operations
+end
+
+class AnnAttRealValue<AnnAttValue
+attributes
+	value : Real
+operations
+end
+
+class AnnAttStringValue<AnnAttValue
+attributes
+	value : String
+operations
+end
+
+class AnnAttFileValue<AnnAttStringValue
+attributes
+operations
+end
+
+class AnnAttDateValue<AnnAttStringValue
+attributes
+operations
+end
+
+class AnnAttOidValue<AnnAttStringValue
+attributes
+operations
+end
+
+class AnnAttEnumValue<AnnAttStringValue
+attributes
+operations
+end
+
+class AnnProperty
+attributes
+	name : String
+	type : Integer
+operations
+end
+
+class AnnPropertyInt<AnnProperty
+attributes
+	value : Integer
+operations
+end
+
+class AnnPropertyBool<AnnProperty
+attributes
+	value : Boolean
+operations
+end
+
+class AnnPropertyChar<AnnProperty
+attributes
+	value : String
+operations
+end
+
+class AnnPropertyReal<AnnProperty
+attributes
+	value : Real
+operations
+end
+
+class AnnPropertyString<AnnProperty
+attributes
+	value : String
+operations
+end
+
+class AnnPropertyEnum<AnnProperty
+attributes
+operations
+end
+
+class AnnotSchema
+attributes
+	pathname : String
+operations
+end
+
+class AnnCategory
+attributes
+	name : String
+operations
+end
+
+class Annotability
+attributes
+	minCardinality : Integer
+	maxCardinality : Integer
+	defaultNote : Boolean
+operations
+end
+
+class AnnAttGroup
+attributes
+	name : String
+operations
+end
+
+abstract class File<MtcEntity
+attributes
+operations
+end
+
+class MtcApplication
+attributes
+operations
+end
+
+class CoverageFile<File
+attributes
+operations
+end
+
+class CriterionFile<File
+attributes
+operations
+end
+
+abstract class MtcEntity
+attributes
+operations
+end
+
+class HistoryEntry<MtcEntity
+attributes
+operations
+end
+
+class Criterion<MtcEntity
+attributes
+	ident : String
+	name : String
+	description : String
+operations
+end
+
+class Instance<MtcEntity
+attributes
+	index : Integer
+	occ : String
+operations
+end
+
+class AssociationClass
+attributes
+operations
+end
+
+class Result<MtcEntity
+attributes
+	elementCount : Integer
+operations
+end
+
+class Record<MtcEntity
+attributes
+	creator : String
+	name : String
+	date : String
+	author : String
+	description : String
+operations
+end
+
+class Loader
+attributes
+operations
+end
+
+association xxx_Model_descriptor between
+	Model[*] role xxx_Model_descriptor_src
+	Descriptor[0..1] role descriptor
+end
+
+association xxx_Model_project between
+	Model[*] role xxx_Model_project_src
+	Project[0..1] role project
+end
+
+association xxx_Model_fileRef between
+	Model[*] role xxx_Model_fileRef_src
+	FileRef[0..1] role fileRef
+end
+
+composition xxx_Model_storageUnitM between
+	Model[0..1] role xxx_Model_storageUnitM_src
+	StorageUnit[*] role storageUnitM
+end
+
+composition xxx_Model_enumsBlock between
+	Model[*] role xxx_Model_enumsBlock_src
+	ConstBlock[1] role enumsBlock
+end
+
+association xxx_Model_importedOperator between
+	Model[0..1] role xxx_Model_importedOperator_src
+	Operator[*] role importedOperator
+end
+
+association xxx_Model_client between
+	Model[0..1] role xxx_Model_client_src
+	Model[*] role client
+end
+
+association xxx_Model_libraries between
+	Model[0..1] role xxx_Model_libraries_src
+	Model[*] role libraries
+end
+
+association xxx_Model_allLibry between
+	Model[0..1] role xxx_Model_allLibry_src
+	Model[*] role allLibry
+end
+
+composition xxx_Model_typeM between
+	Model[0..1] role xxx_Model_typeM_src
+	Type[*] role typeM
+end
+
+association xxx_Model_model_ between
+	Model[*] role xxx_Model_model__src
+	Model[1] role model_
+end
+
+association xxx_Model_coverageFileM between
+	Model[*] role xxx_Model_coverageFileM_src
+	CoverageFile[1] role coverageFileM
+end
+
+association xxx_Model_criterionFileM between
+	Model[*] role xxx_Model_criterionFileM_src
+	CriterionFile[1] role criterionFileM
+end
+
+composition xxx_Model_root between
+	Model[*] role xxx_Model_root_src
+	Instance[1] role root
+end
+
+composition xxx_Model_all between
+	Model[0..1] role xxx_Model_all_src
+	Operator[*] role all
+end
+
+association xxx_Model_application between
+	Model[*] role xxx_Model_application_src
+	MtcApplication[1] role application
+end
+
+composition xxx_Model_reference between
+	Model[0..1] role xxx_Model_reference_src
+	Reference[*] role reference
+end
+
+composition xxx_Model_tmpNode between
+	Model[0..1] role xxx_Model_tmpNode_src
+	Node[*] role tmpNode
+end
+
+composition xxx_Model_constBlockK between
+	Model[*] role xxx_Model_constBlockK_src
+	ConstBlock[0..1] role constBlockK
+end
+
+composition xxx_Model_node between
+	Model[*] role xxx_Model_node_src
+	Node[0..1] role node
+end
+
+composition xxx_Model_varBlockK between
+	Model[*] role xxx_Model_varBlockK_src
+	VarBlock[0..1] role varBlockK
+end
+
+composition xxx_Model_typeBlock between
+	Model[*] role xxx_Model_typeBlock_src
+	TypeBlock[0..1] role typeBlock
+end
+
+composition xxx_Model_refinement between
+	Model[*] role xxx_Model_refinement_src
+	NamedType[0..1] role refinement
+end
+
+composition xxx_Model_implementation between
+	Model[*] role xxx_Model_implementation_src
+	Implementation[0..1] role implementation
+end
+
+association xxx_Model_constant between
+	Model[*] role xxx_Model_constant_src
+	Constant[0..1] role constant
+end
+
+association xxx_Model_allConstant between
+	Model[*] role xxx_Model_allConstant_src
+	Constant[0..1] role allConstant
+end
+
+association xxx_Model_allvariable between
+	Model[*] role xxx_Model_allvariable_src
+	GlobalVariable[0..1] role allvariable
+end
+
+association xxx_Model_variable between
+	Model[*] role xxx_Model_variable_src
+	GlobalVariable[0..1] role variable
+end
+
+association xxx_Model_allConstVar between
+	Model[*] role xxx_Model_allConstVar_src
+	ConstVar[0..1] role allConstVar
+end
+
+association xxx_Model_constVar between
+	Model[*] role xxx_Model_constVar_src
+	ConstVar[0..1] role constVar
+end
+
+composition xxx_Model_constBlock between
+	Model[*] role xxx_Model_constBlock_src
+	ConstBlock[0..1] role constBlock
+end
+
+composition xxx_Model_varBlock between
+	Model[*] role xxx_Model_varBlock_src
+	VarBlock[0..1] role varBlock
+end
+
+composition xxx_Model_allNamedType between
+	Model[*] role xxx_Model_allNamedType_src
+	NamedType[0..1] role allNamedType
+end
+
+composition xxx_Model_namedType between
+	Model[*] role xxx_Model_namedType_src
+	NamedType[0..1] role namedType
+end
+
+association xxx_Implementation_key between
+	Implementation[*] role xxx_Implementation_key_src
+	Model[1] role key
+end
+
+association xxx_Implementation_namedTypeI between
+	Implementation[0..1] role xxx_Implementation_namedTypeI_src
+	NamedType[1..*] role namedTypeI
+end
+
+association xxx_ConstBlock_modelC between
+	ConstBlock[*] role xxx_ConstBlock_modelC_src
+	Model[1] role modelC
+end
+
+association xxx_ConstBlock_keyC between
+	ConstBlock[*] role xxx_ConstBlock_keyC_src
+	Model[1] role keyC
+end
+
+association xxx_ConstBlock_key between
+	ConstBlock[*] role xxx_ConstBlock_key_src
+	Model[1] role key
+end
+
+composition xxx_ConstBlock_constant between
+	ConstBlock[*] role xxx_ConstBlock_constant_src
+	Constant[0..1] role constant
+end
+
+composition xxx_VarBlock_variable between
+	VarBlock[*] role xxx_VarBlock_variable_src
+	GlobalVariable[0..1] role variable
+end
+
+association xxx_VarBlock_keyVB between
+	VarBlock[*] role xxx_VarBlock_keyVB_src
+	Model[1] role keyVB
+end
+
+association xxx_VarBlock_key between
+	VarBlock[*] role xxx_VarBlock_key_src
+	Model[1] role key
+end
+
+association xxx_GlobalVariable_key between
+	GlobalVariable[*] role xxx_GlobalVariable_key_src
+	VarBlock[0..1] role key
+end
+
+composition xxx_TypeBlock_type between
+	TypeBlock[*] role xxx_TypeBlock_type_src
+	NamedType[0..1] role type
+end
+
+association xxx_TypeBlock_key between
+	TypeBlock[*] role xxx_TypeBlock_key_src
+	Model[1] role key
+end
+
+association xxx_Session_descriptor between
+	Session[*] role xxx_Session_descriptor_src
+	Descriptor[1] role descriptor
+end
+
+association xxx_Session_model_ between
+	Session[*] role xxx_Session_model__src
+	Model[0..1] role model_
+end
+
+association xxx_Session_loadsModel between
+	Session[0..1] role xxx_Session_loadsModel_src
+	Model[*] role loadsModel
+end
+
+composition xxx_Session_loader between
+	Session[*] role xxx_Session_loader_src
+	Loader[1] role loader
+end
+
+association xxx_Descriptor_libraryModels between
+	Descriptor[0..1] role xxx_Descriptor_libraryModels_src
+	ListString[*] role libraryModels
+end
+
+association xxx_Descriptor_annTypeFiles between
+	Descriptor[0..1] role xxx_Descriptor_annTypeFiles_src
+	ListString[*] role annTypeFiles
+end
+
+association xxx_Descriptor_modelD between
+	Descriptor[*] role xxx_Descriptor_modelD_src
+	Model[1] role modelD
+end
+
+association xxx_StorageUnit_fileRef between
+	StorageUnit[*] role xxx_StorageUnit_fileRef_src
+	FileRef[1] role fileRef
+end
+
+association xxx_StorageUnit_modelS between
+	StorageUnit[*] role xxx_StorageUnit_modelS_src
+	Model[1] role modelS
+end
+
+association xxx_StorageUnit_element between
+	StorageUnit[0..1] role xxx_StorageUnit_element_src
+	StorageElement[*] role element
+end
+
+association xxx_StorageElement_storageUnitE between
+	StorageElement[*] role xxx_StorageElement_storageUnitE_src
+	StorageUnit[1] role storageUnitE
+end
+
+association xxx_NodeBlock_node between
+	NodeBlock[*] role xxx_NodeBlock_node_src
+	Node[1] role node
+end
+
+composition xxx_ModelBlock_columnsSize between
+	ModelBlock[0..1] role xxx_ModelBlock_columnsSize_src
+	ListInteger[*] role columnsSize
+end
+
+association xxx_ModelBlock_model_ between
+	ModelBlock[*] role xxx_ModelBlock_model__src
+	Model[1] role model_
+end
+
+composition xxx_Expression_label between
+	Expression[*] role xxx_Expression_label_src
+	Label[0..1] role label
+end
+
+association xxx_Expression_exprContactE between
+	Expression[*] role xxx_Expression_exprContactE_src
+	ExprContact[1] role exprContactE
+end
+
+association xxx_Expression_exprCallE between
+	Expression[*] role xxx_Expression_exprCallE_src
+	ExprCall[0..1] role exprCallE
+end
+
+association xxx_Expression_dependance between
+	Expression[*] role xxx_Expression_dependance_src
+	ConstVar[0..1] role dependance
+end
+
+association xxx_Expression_subExprId between
+	Expression[0..1] role xxx_Expression_subExprId_src
+	ExprId[*] role subExprId
+end
+
+association xxx_Expression_paramArray between
+	Expression[*] role xxx_Expression_paramArray_src
+	ParamArray[0..1] role paramArray
+end
+
+association xxx_Expression_constant between
+	Expression[*] role xxx_Expression_constant_src
+	Constant[0..1] role constant
+end
+
+association xxx_Expression_equationE between
+	Expression[*] role xxx_Expression_equationE_src
+	Equation[0..1] role equationE
+end
+
+association xxx_Expression_assertionE between
+	Expression[*] role xxx_Expression_assertionE_src
+	Assertion[0..1] role assertionE
+end
+
+association xxx_Label_expression between
+	Label[*] role xxx_Label_expression_src
+	Expression[1] role expression
+end
+
+association xxx_ConstValue_kind between
+	ConstValue[*] role xxx_ConstValue_kind_src
+	Object[1] role kind
+end
+
+composition xxx_ExprContact_boolAct between
+	ExprContact[*] role xxx_ExprContact_boolAct_src
+	ExprId[1] role boolAct
+end
+
+composition xxx_ExprContact_initValue between
+	ExprContact[0..1] role xxx_ExprContact_initValue_src
+	Expression[*] role initValue
+end
+
+composition xxx_ExprContact_calledOpr between
+	ExprContact[*] role xxx_ExprContact_calledOpr_src
+	ExprCall[1] role calledOpr
+end
+
+composition xxx_ExprCall_parameter between
+	ExprCall[0..1] role xxx_ExprCall_parameter_src
+	Expression[*] role parameter
+end
+
+association xxx_ExprCall_exprContactEC between
+	ExprCall[*] role xxx_ExprCall_exprContactEC_src
+	ExprContact[1] role exprContactEC
+end
+
+association xxx_ExprCall_operator between
+	ExprCall[*] role xxx_ExprCall_operator_src
+	Operator[0..1] role operator
+end
+
+association xxx_Operator_variable between
+	Operator[*] role xxx_Operator_variable_src
+	LocalVariable[0..1] role variable
+end
+
+composition xxx_Operator_input between
+	Operator[0..1] role xxx_Operator_input_src
+	LocalVariable[*] role input
+end
+
+composition xxx_Operator_output between
+	Operator[0..1] role xxx_Operator_output_src
+	LocalVariable[*] role output
+end
+
+composition xxx_Operator_hidden between
+	Operator[0..1] role xxx_Operator_hidden_src
+	LocalVariable[*] role hidden
+end
+
+association xxx_Operator_client between
+	Operator[0..1] role xxx_Operator_client_src
+	EqBlock[*] role client
+end
+
+association xxx_Operator_modelO between
+	Operator[*] role xxx_Operator_modelO_src
+	Model[1] role modelO
+end
+
+association xxx_Operator_modelOp between
+	Operator[*] role xxx_Operator_modelOp_src
+	Model[1] role modelOp
+end
+
+association xxx_Operator_criterionO between
+	Operator[*] role xxx_Operator_criterionO_src
+	Criterion[0..1] role criterionO
+end
+
+association xxx_Operator_intanceO between
+	Operator[0..1] role xxx_Operator_intanceO_src
+	Instance[*] role intanceO
+end
+
+association xxx_Operator_operator between
+	Operator[*] role xxx_Operator_operator_src
+	Operator[1] role operator
+end
+
+association xxx_ExprId_exprContactEI between
+	ExprId[*] role xxx_ExprId_exprContactEI_src
+	ExprContact[1] role exprContactEI
+end
+
+association xxx_ExprId_reference between
+	ExprId[*] role xxx_ExprId_reference_src
+	ConstVar[1] role reference
+end
+
+association xxx_LocalVariable_operatorI between
+	LocalVariable[*] role xxx_LocalVariable_operatorI_src
+	Operator[0..1] role operatorI
+end
+
+association xxx_LocalVariable_operatorO between
+	LocalVariable[*] role xxx_LocalVariable_operatorO_src
+	Operator[0..1] role operatorO
+end
+
+association xxx_LocalVariable_operatorH between
+	LocalVariable[*] role xxx_LocalVariable_operatorH_src
+	Operator[0..1] role operatorH
+end
+
+association xxx_LocalVariable_nodeL between
+	LocalVariable[*] role xxx_LocalVariable_nodeL_src
+	Node[0..1] role nodeL
+end
+
+association xxx_LocalVariable_nodeI between
+	LocalVariable[*] role xxx_LocalVariable_nodeI_src
+	Node[0..1] role nodeI
+end
+
+association xxx_Node_nodeKind between
+	Node[*] role xxx_Node_nodeKind_src
+	Object[1] role nodeKind
+end
+
+composition xxx_Node_eqBlock between
+	Node[*] role xxx_Node_eqBlock_src
+	EqBlock[0..1] role eqBlock
+end
+
+composition xxx_Node_paramBlock between
+	Node[*] role xxx_Node_paramBlock_src
+	ParamBlock[0..1] role paramBlock
+end
+
+composition xxx_Node_local between
+	Node[0..1] role xxx_Node_local_src
+	LocalVariable[*] role local
+end
+
+composition xxx_Node_internal between
+	Node[0..1] role xxx_Node_internal_src
+	LocalVariable[*] role internal
+end
+
+association xxx_Node_key between
+	Node[*] role xxx_Node_key_src
+	Model[1] role key
+end
+
+association xxx_Node_stateMachine between
+	Node[*] role xxx_Node_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+association xxx_Node_modelN between
+	Node[*] role xxx_Node_modelN_src
+	Model[1] role modelN
+end
+
+association xxx_ParamBlock_key between
+	ParamBlock[*] role xxx_ParamBlock_key_src
+	Node[1] role key
+end
+
+composition xxx_ParamBlock_columnsSize between
+	ParamBlock[0..1] role xxx_ParamBlock_columnsSize_src
+	ListInteger[*] role columnsSize
+end
+
+composition xxx_ParamBlock_array between
+	ParamBlock[0..1] role xxx_ParamBlock_array_src
+	ParamArray[1..*] role array
+end
+
+composition xxx_ParamArray_notes between
+	ParamArray[0..1] role xxx_ParamArray_notes_src
+	ListString[*] role notes
+end
+
+association xxx_ParamArray_paramBlock between
+	ParamArray[*] role xxx_ParamArray_paramBlock_src
+	ParamBlock[1] role paramBlock
+end
+
+association xxx_ParamArray_operator between
+	ParamArray[*] role xxx_ParamArray_operator_src
+	Operator[1] role operator
+end
+
+composition xxx_ParamArray_value between
+	ParamArray[0..1] role xxx_ParamArray_value_src
+	Expression[*] role value
+end
+
+association xxx_ConstVar_kind between
+	ConstVar[*] role xxx_ConstVar_kind_src
+	Object[1] role kind
+end
+
+association xxx_ConstVar_type between
+	ConstVar[*] role xxx_ConstVar_type_src
+	Type[1] role type
+end
+
+association xxx_ConstVar_client between
+	ConstVar[0..1] role xxx_ConstVar_client_src
+	EqBlock[*] role client
+end
+
+composition xxx_Constant_value between
+	Constant[*] role xxx_Constant_value_src
+	Expression[0..1] role value
+end
+
+association xxx_Constant_enumeration between
+	Constant[*] role xxx_Constant_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+association xxx_Constant_key between
+	Constant[*] role xxx_Constant_key_src
+	ConstBlock[0..1] role key
+end
+
+association xxx_Variable_clock between
+	Variable[*] role xxx_Variable_clock_src
+	Variable[0..1] role clock
+end
+
+association xxx_Variable_definition between
+	Variable[0..1] role xxx_Variable_definition_src
+	Equation[*] role definition
+end
+
+association xxx_Type_usedType between
+	Type[0..1] role xxx_Type_usedType_src
+	Type[*] role usedType
+end
+
+association xxx_Type_model_ between
+	Type[*] role xxx_Type_model__src
+	Model[1] role model_
+end
+
+association xxx_Type_namedTypeT between
+	Type[0..1] role xxx_Type_namedTypeT_src
+	NamedType[*] role namedTypeT
+end
+
+association xxx_Type_tableT between
+	Type[0..1] role xxx_Type_tableT_src
+	Table[*] role tableT
+end
+
+association xxx_Type_compositeElementT between
+	Type[0..1] role xxx_Type_compositeElementT_src
+	CompositeElement[*] role compositeElementT
+end
+
+association xxx_Type_constVar between
+	Type[0..1] role xxx_Type_constVar_src
+	ConstVar[*] role constVar
+end
+
+association xxx_Table_typeT between
+	Table[*] role xxx_Table_typeT_src
+	Type[0..1] role typeT
+end
+
+association xxx_NamedType_kind between
+	NamedType[*] role xxx_NamedType_kind_src
+	Object[1] role kind
+end
+
+association xxx_NamedType_refinement between
+	NamedType[0..1] role xxx_NamedType_refinement_src
+	NamedType[*] role refinement
+end
+
+association xxx_NamedType_refined between
+	NamedType[0..1] role xxx_NamedType_refined_src
+	NamedType[*] role refined
+end
+
+association xxx_NamedType_to between
+	NamedType[*] role xxx_NamedType_to_src
+	Operator[0..1] role to
+end
+
+association xxx_NamedType_from_ between
+	NamedType[*] role xxx_NamedType_from__src
+	Operator[0..1] role from_
+end
+
+association xxx_NamedType_implementation between
+	NamedType[*] role xxx_NamedType_implementation_src
+	Implementation[0..1] role implementation
+end
+
+association xxx_NamedType_definition between
+	NamedType[*] role xxx_NamedType_definition_src
+	Type[0..1] role definition
+end
+
+association xxx_NamedType_keyM between
+	NamedType[*] role xxx_NamedType_keyM_src
+	Model[1] role keyM
+end
+
+association xxx_NamedType_key between
+	NamedType[*] role xxx_NamedType_key_src
+	TypeBlock[1] role key
+end
+
+composition xxx_Enumeration_value between
+	Enumeration[0..1] role xxx_Enumeration_value_src
+	Constant[1..*] role value
+end
+
+composition xxx_Composite_element between
+	Composite[*] role xxx_Composite_element_src
+	CompositeElement[0..1] role element
+end
+
+association xxx_CompositeElement_typeC between
+	CompositeElement[*] role xxx_CompositeElement_typeC_src
+	Type[0..1] role typeC
+end
+
+association xxx_CompositeElement_key between
+	CompositeElement[*] role xxx_CompositeElement_key_src
+	Composite[1] role key
+end
+
+composition xxx_EqBlock_equation between
+	EqBlock[0..1] role xxx_EqBlock_equation_src
+	Equation[1..*] role equation
+end
+
+composition xxx_EqBlock_assertion between
+	EqBlock[*] role xxx_EqBlock_assertion_src
+	Assertion[0..1] role assertion
+end
+
+association xxx_EqBlock_key between
+	EqBlock[*] role xxx_EqBlock_key_src
+	Node[1] role key
+end
+
+association xxx_EqBlock_calledOperator between
+	EqBlock[0..1] role xxx_EqBlock_calledOperator_src
+	Operator[*] role calledOperator
+end
+
+association xxx_EqBlock_referencedId between
+	EqBlock[0..1] role xxx_EqBlock_referencedId_src
+	ConstVar[*] role referencedId
+end
+
+association xxx_Equation_eqBlock between
+	Equation[*] role xxx_Equation_eqBlock_src
+	EqBlock[1] role eqBlock
+end
+
+association xxx_Equation_left between
+	Equation[0..1] role xxx_Equation_left_src
+	Variable[*] role left
+end
+
+composition xxx_Equation_right between
+	Equation[*] role xxx_Equation_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Equation_outEdge between
+	Equation[0..1] role xxx_Equation_outEdge_src
+	Edge[*] role outEdge
+end
+
+composition xxx_Equation_position between
+	Equation[*] role xxx_Equation_position_src
+	RPoint[0..1] role position
+end
+
+composition xxx_Equation_size between
+	Equation[*] role xxx_Equation_size_src
+	RSize[0..1] role size
+end
+
+association xxx_Assertion_key between
+	Assertion[*] role xxx_Assertion_key_src
+	EqBlock[0..1] role key
+end
+
+composition xxx_Assertion_expression between
+	Assertion[*] role xxx_Assertion_expression_src
+	Expression[1] role expression
+end
+
+association xxx_Assertion_edge between
+	Assertion[*] role xxx_Assertion_edge_src
+	Edge[0..1] role edge
+end
+
+composition xxx_Assertion_position between
+	Assertion[*] role xxx_Assertion_position_src
+	RPoint[0..1] role position
+end
+
+composition xxx_Annotable_propA between
+	Annotable[0..1] role xxx_Annotable_propA_src
+	Prop[*] role propA
+end
+
+composition xxx_Prop_values between
+	Prop[0..1] role xxx_Prop_values_src
+	ListString[*] role values
+end
+
+association xxx_Prop_entity between
+	Prop[*] role xxx_Prop_entity_src
+	Annotable[1] role entity
+end
+
+association xxx_Prop_configurationP between
+	Prop[*] role xxx_Prop_configurationP_src
+	Configuration[0..1] role configurationP
+end
+
+composition xxx_Configuration_propC between
+	Configuration[0..1] role xxx_Configuration_propC_src
+	Prop[*] role propC
+end
+
+composition xxx_Configuration_projectC between
+	Configuration[*] role xxx_Configuration_projectC_src
+	Project[1] role projectC
+end
+
+composition xxx_Project_configuration between
+	Project[0..1] role xxx_Project_configuration_src
+	Configuration[*] role configuration
+end
+
+association xxx_Project_fileRef between
+	Project[0..1] role xxx_Project_fileRef_src
+	FileRef[*] role fileRef
+end
+
+composition xxx_Project_owner between
+	Project[0..1] role xxx_Project_owner_src
+	Element[*] role owner
+end
+
+association xxx_Element_root between
+	Element[*] role xxx_Element_root_src
+	Project[0..1] role root
+end
+
+association xxx_Element_folder between
+	Element[*] role xxx_Element_folder_src
+	Folder[0..1] role folder
+end
+
+association xxx_Element_criterionE between
+	Element[*] role xxx_Element_criterionE_src
+	Criterion[1] role criterionE
+end
+
+composition xxx_Folder_element between
+	Folder[0..1] role xxx_Folder_element_src
+	Element[*] role element
+end
+
+association xxx_Edge_leftVar between
+	Edge[*] role xxx_Edge_leftVar_src
+	Variable[1] role leftVar
+end
+
+association xxx_Edge_rightExpression between
+	Edge[*] role xxx_Edge_rightExpression_src
+	ExprId[1] role rightExpression
+end
+
+association xxx_Edge_srcEquation between
+	Edge[*] role xxx_Edge_srcEquation_src
+	Equation[1] role srcEquation
+end
+
+composition xxx_Edge_assertion between
+	Edge[*] role xxx_Edge_assertion_src
+	Assertion[0..1] role assertion
+end
+
+composition xxx_Edge_position between
+	Edge[0..1] role xxx_Edge_position_src
+	RPoint[*] role position
+end
+
+association xxx_Edge_dstEquation between
+	Edge[*] role xxx_Edge_dstEquation_src
+	Equation[1] role dstEquation
+end
+
+association xxx_Transition_state1 between
+	Transition[*] role xxx_Transition_state1_src
+	State[1] role state1
+end
+
+association xxx_Transition_state2 between
+	Transition[*] role xxx_Transition_state2_src
+	State[1] role state2
+end
+
+association xxx_State_transition1 between
+	State[0..1] role xxx_State_transition1_src
+	Transition[*] role transition1
+end
+
+association xxx_State_transition2 between
+	State[0..1] role xxx_State_transition2_src
+	Transition[*] role transition2
+end
+
+association xxx_State_stOutput between
+	State[*] role xxx_State_stOutput_src
+	StOutput[1] role stOutput
+end
+
+association xxx_InitialStPtr_state between
+	InitialStPtr[*] role xxx_InitialStPtr_state_src
+	State[1] role state
+end
+
+association xxx_StateMachine_initialStPtr between
+	StateMachine[*] role xxx_StateMachine_initialStPtr_src
+	InitialStPtr[1] role initialStPtr
+end
+
+association xxx_StateMachine_state between
+	StateMachine[0..1] role xxx_StateMachine_state_src
+	State[*] role state
+end
+
+association xxx_StateMachine_transition between
+	StateMachine[0..1] role xxx_StateMachine_transition_src
+	Transition[*] role transition
+end
+
+association xxx_AnnNote_annNoteType between
+	AnnNote[*] role xxx_AnnNote_annNoteType_src
+	AnnNoteType[1] role annNoteType
+end
+
+association xxx_AnnNote_annotable between
+	AnnNote[*] role xxx_AnnNote_annotable_src
+	Annotable[1] role annotable
+end
+
+composition xxx_AnnNote_annAttValue between
+	AnnNote[0..1] role xxx_AnnNote_annAttValue_src
+	AnnAttValue[1..*] role annAttValue
+end
+
+association xxx_AnnAttValue_annNote between
+	AnnAttValue[*] role xxx_AnnAttValue_annNote_src
+	AnnNote[1] role annNote
+end
+
+association xxx_AnnAttValue_annAttDefinition between
+	AnnAttValue[*] role xxx_AnnAttValue_annAttDefinition_src
+	AnnAttDefinition[1] role annAttDefinition
+end
+
+composition xxx_AnnNoteType_annAttDefinition between
+	AnnNoteType[*] role xxx_AnnNoteType_annAttDefinition_src
+	AnnAttDefinition[0..1] role annAttDefinition
+end
+
+composition xxx_AnnNoteType_annAttGroup between
+	AnnNoteType[*] role xxx_AnnNoteType_annAttGroup_src
+	AnnAttGroup[0..1] role annAttGroup
+end
+
+association xxx_AnnNoteType_key between
+	AnnNoteType[*] role xxx_AnnNoteType_key_src
+	AnnotSchema[1] role key
+end
+
+association xxx_AnnAttDefinition_annAttGroup between
+	AnnAttDefinition[*] role xxx_AnnAttDefinition_annAttGroup_src
+	AnnAttGroup[1] role annAttGroup
+end
+
+association xxx_AnnAttDefinition_key between
+	AnnAttDefinition[*] role xxx_AnnAttDefinition_key_src
+	AnnNoteType[1] role key
+end
+
+composition xxx_AnnAttDefinition_annProperty between
+	AnnAttDefinition[*] role xxx_AnnAttDefinition_annProperty_src
+	AnnProperty[0..1] role annProperty
+end
+
+association xxx_AnnProperty_key between
+	AnnProperty[*] role xxx_AnnProperty_key_src
+	AnnAttDefinition[1] role key
+end
+
+association xxx_AnnPropertyEnum_value between
+	AnnPropertyEnum[*] role xxx_AnnPropertyEnum_value_src
+	Object[1] role value
+end
+
+composition xxx_AnnotSchema_annNoteType between
+	AnnotSchema[*] role xxx_AnnotSchema_annNoteType_src
+	AnnNoteType[1] role annNoteType
+end
+
+composition xxx_AnnotSchema_annCategory between
+	AnnotSchema[*] role xxx_AnnotSchema_annCategory_src
+	AnnCategory[1] role annCategory
+end
+
+association xxx_AnnCategory_key between
+	AnnCategory[*] role xxx_AnnCategory_key_src
+	AnnotSchema[1] role key
+end
+
+composition xxx_AnnCategory_anootability between
+	AnnCategory[0..1] role xxx_AnnCategory_anootability_src
+	Annotability[*] role anootability
+end
+
+association xxx_Annotability_annNoteType between
+	Annotability[*] role xxx_Annotability_annNoteType_src
+	AnnNoteType[1] role annNoteType
+end
+
+association xxx_AnnAttGroup_key between
+	AnnAttGroup[*] role xxx_AnnAttGroup_key_src
+	AnnNoteType[1] role key
+end
+
+composition xxx_MtcApplication_coverageFileCov between
+	MtcApplication[0..1] role xxx_MtcApplication_coverageFileCov_src
+	CoverageFile[*] role coverageFileCov
+end
+
+composition xxx_MtcApplication_criterionFileCri between
+	MtcApplication[0..1] role xxx_MtcApplication_criterionFileCri_src
+	CriterionFile[*] role criterionFileCri
+end
+
+composition xxx_MtcApplication_modelM between
+	MtcApplication[*] role xxx_MtcApplication_modelM_src
+	Model[1] role modelM
+end
+
+composition xxx_CoverageFile_record between
+	CoverageFile[*] role xxx_CoverageFile_record_src
+	Record[0..1] role record
+end
+
+composition xxx_CoverageFile_modelCov between
+	CoverageFile[*] role xxx_CoverageFile_modelCov_src
+	Model[1] role modelCov
+end
+
+association xxx_CoverageFile_application between
+	CoverageFile[*] role xxx_CoverageFile_application_src
+	MtcApplication[1] role application
+end
+
+composition xxx_CoverageFile_recordCov between
+	CoverageFile[*] role xxx_CoverageFile_recordCov_src
+	Record[0..1] role recordCov
+end
+
+association xxx_CriterionFile_application between
+	CriterionFile[*] role xxx_CriterionFile_application_src
+	MtcApplication[1] role application
+end
+
+composition xxx_CriterionFile_modelCri between
+	CriterionFile[*] role xxx_CriterionFile_modelCri_src
+	Model[1] role modelCri
+end
+
+composition xxx_CriterionFile_criterionC between
+	CriterionFile[0..1] role xxx_CriterionFile_criterionC_src
+	Criterion[*] role criterionC
+end
+
+association xxx_MtcEntity_file between
+	MtcEntity[*] role xxx_MtcEntity_file_src
+	File[0..1] role file
+end
+
+association xxx_Criterion_criterionFileC between
+	Criterion[*] role xxx_Criterion_criterionFileC_src
+	CriterionFile[1] role criterionFileC
+end
+
+association xxx_Criterion_operatorC between
+	Criterion[*] role xxx_Criterion_operatorC_src
+	Operator[1] role operatorC
+end
+
+composition xxx_Criterion_element between
+	Criterion[0..1] role xxx_Criterion_element_src
+	Element[*] role element
+end
+
+association xxx_Instance_modelI between
+	Instance[*] role xxx_Instance_modelI_src
+	Model[1] role modelI
+end
+
+association xxx_Instance_operatorI between
+	Instance[*] role xxx_Instance_operatorI_src
+	Operator[1] role operatorI
+end
+
+association xxx_Instance_associationClassI between
+	Instance[*] role xxx_Instance_associationClassI_src
+	AssociationClass[1] role associationClassI
+end
+
+association xxx_Instance_caller between
+	Instance[*] role xxx_Instance_caller_src
+	Instance[1] role caller
+end
+
+composition xxx_Instance_called between
+	Instance[0..1] role xxx_Instance_called_src
+	Instance[*] role called
+end
+
+association xxx_Instance_origin between
+	Instance[*] role xxx_Instance_origin_src
+	Instance[0..1] role origin
+end
+
+association xxx_Instance_related between
+	Instance[0..1] role xxx_Instance_related_src
+	Instance[*] role related
+end
+
+association xxx_AssociationClass_resultA between
+	AssociationClass[*] role xxx_AssociationClass_resultA_src
+	Result[1] role resultA
+end
+
+association xxx_AssociationClass_recordA between
+	AssociationClass[0..1] role xxx_AssociationClass_recordA_src
+	Record[*] role recordA
+end
+
+association xxx_AssociationClass_instanceA between
+	AssociationClass[0..1] role xxx_AssociationClass_instanceA_src
+	Instance[*] role instanceA
+end
+
+association xxx_Result_associationClassRs between
+	Result[*] role xxx_Result_associationClassRs_src
+	AssociationClass[1] role associationClassRs
+end
+
+association xxx_Result_record between
+	Result[*] role xxx_Result_record_src
+	Record[1] role record
+end
+
+association xxx_Record_key between
+	Record[*] role xxx_Record_key_src
+	CoverageFile[1] role key
+end
+
+association xxx_Record_associationClassRc between
+	Record[*] role xxx_Record_associationClassRc_src
+	AssociationClass[1] role associationClassRc
+end
+
+association xxx_Record_coverageFileR between
+	Record[*] role xxx_Record_coverageFileR_src
+	CoverageFile[1] role coverageFileR
+end
+
+composition xxx_Record_result between
+	Record[0..1] role xxx_Record_result_src
+	Result[*] role result
+end
+
+composition xxx_Loader_descriptor between
+	Loader[*] role xxx_Loader_descriptor_src
+	Descriptor[0..1] role descriptor
+end
+
+association xxx_Loader_session between
+	Loader[*] role xxx_Loader_session_src
+	Session[1] role session
+end
+

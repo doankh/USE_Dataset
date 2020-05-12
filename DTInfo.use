@@ -1,0 +1,75 @@
+model dtinfo
+class DTInfo
+attributes
+operations
+end
+
+class TagConvertInfo
+attributes
+operations
+end
+
+class Operation
+attributes
+	id : String
+operations
+end
+
+class Parameter
+attributes
+	value : String
+operations
+end
+
+class TagDecorateInfo
+attributes
+	id : String
+	minHeight : Integer
+	minWidth : Integer
+	multiLevel : Boolean
+	needBorderDecorator : Boolean
+	needTableDecorator : Boolean
+	nonVisual : Boolean
+	nonVisualImagePath : String
+	resolveChildText : Boolean
+	setNonVisualChildElements : Boolean
+	widget : Boolean
+operations
+end
+
+class ResolveAttributeValue
+attributes
+	attributeName : String
+operations
+end
+
+composition xxx_DTInfo_tagConvertInfo between
+	DTInfo[*] role xxx_DTInfo_tagConvertInfo_src
+	TagConvertInfo[1] role tagConvertInfo
+end
+
+composition xxx_DTInfo_tagDecorateInfos between
+	DTInfo[0..1] role xxx_DTInfo_tagDecorateInfos_src
+	TagDecorateInfo[*] role tagDecorateInfos
+end
+
+composition xxx_TagConvertInfo_operations_ between
+	TagConvertInfo[0..1] role xxx_TagConvertInfo_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Operation_operations_ between
+	Operation[0..1] role xxx_Operation_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_TagDecorateInfo_resolveAttributeValue between
+	TagDecorateInfo[*] role xxx_TagDecorateInfo_resolveAttributeValue_src
+	ResolveAttributeValue[0..1] role resolveAttributeValue
+end
+

@@ -1,0 +1,2259 @@
+model facesconfig
+class AbsoluteOrderingType
+attributes
+operations
+end
+
+class ActionListenerType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ApplicationFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ApplicationType
+attributes
+	id : String
+operations
+end
+
+class ApplicationExtensionType<ExtensionType
+attributes
+operations
+end
+
+class AttributeClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class AttributeExtensionType<ExtensionType
+attributes
+operations
+end
+
+class AttributeNameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class AttributeType
+attributes
+	id : String
+operations
+end
+
+class BehaviorClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class BehaviorIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class BehaviorType
+attributes
+operations
+end
+
+class BehaviorExtensionType<ExtensionType
+attributes
+operations
+end
+
+class ClientBehaviorRendererClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ClientBehaviorRendererType
+attributes
+operations
+end
+
+class ClientBehaviorRendererTypeType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ComponentClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ComponentExtensionType<ExtensionType
+attributes
+operations
+end
+
+class ComponentFamilyType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ComponentType
+attributes
+	id : String
+operations
+end
+
+class ComponentTypeType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ConverterClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ConverterForClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ConverterIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ConverterType
+attributes
+	id : String
+operations
+end
+
+class ConverterExtensionType<ExtensionType
+attributes
+operations
+end
+
+class DefaultLocaleType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class DefaultRenderKitIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class DefaultValidatorsType
+attributes
+	id : String
+operations
+end
+
+class DefaultValueType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class DescriptionType
+attributes
+	textContent : String
+	lang : String
+	id : String
+operations
+end
+
+class DisplayNameType
+attributes
+	textContent : String
+	lang : String
+	id : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class DynamicAttribute
+attributes
+	name : String
+	value : String
+operations
+end
+
+class DynamicElement
+attributes
+	name : String
+	textContent : String
+operations
+end
+
+class ELResolverType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ExceptionHandlerFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+abstract class ExtensionType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ExternalContextFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class FacesConfigType
+attributes
+	xmlns : String
+	id : String
+	metadataComplete : Boolean
+operations
+end
+
+class FacesConfigExtensionType<ExtensionType
+attributes
+operations
+end
+
+class FacesContextFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class FacetExtensionType<ExtensionType
+attributes
+operations
+end
+
+class FacetNameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class FacetType
+attributes
+	id : String
+operations
+end
+
+class FactoryType
+attributes
+	id : String
+operations
+end
+
+class FactoryExtensionType<ExtensionType
+attributes
+operations
+end
+
+class FromActionType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class FromOutcomeType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class FromViewIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class IconType
+attributes
+	lang : String
+	id : String
+operations
+end
+
+class IfType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class KeyClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class KeyType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class LargeIconType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class LifecycleFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class LifecycleType
+attributes
+	id : String
+operations
+end
+
+class LifecycleExtensionType<ExtensionType
+attributes
+operations
+end
+
+class ListEntriesType
+attributes
+	id : String
+operations
+end
+
+class LocaleConfigType
+attributes
+	id : String
+operations
+end
+
+class ManagedBeanClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ManagedBeanNameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ManagedBeanScopeType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ManagedBeanType
+attributes
+	id : String
+	eager : Boolean
+operations
+end
+
+class ManagedBeanExtensionType<ExtensionType
+attributes
+operations
+end
+
+class ManagedPropertyType
+attributes
+	id : String
+operations
+end
+
+class MapEntriesType
+attributes
+	id : String
+operations
+end
+
+class MapEntryType
+attributes
+	id : String
+operations
+end
+
+class MessageBundleType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class NameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class NavigationCaseType
+attributes
+	id : String
+operations
+end
+
+class NavigationHandlerType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class NavigationRuleType
+attributes
+	id : String
+operations
+end
+
+class NavigationRuleExtensionType<ExtensionType
+attributes
+operations
+end
+
+class NullValueType
+attributes
+	id : String
+operations
+end
+
+class OrderingType
+attributes
+operations
+end
+
+class OrderingOrderingType
+attributes
+operations
+end
+
+class OrderingOthersType
+attributes
+	id : String
+operations
+end
+
+class PartialViewContextFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class PhaseListenerType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class PropertyClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class PropertyExtensionType<ExtensionType
+attributes
+operations
+end
+
+class PropertyNameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class PropertyResolverType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class PropertyType
+attributes
+	id : String
+operations
+end
+
+class RedirectType
+attributes
+	id : String
+	includeViewParams : Boolean
+operations
+end
+
+class RedirectViewParamType
+attributes
+	id : String
+operations
+end
+
+class ReferencedBeanClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ReferencedBeanNameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ReferencedBeanType
+attributes
+	id : String
+operations
+end
+
+class RendererClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class RendererExtensionType<ExtensionType
+attributes
+operations
+end
+
+class RendererType
+attributes
+	id : String
+operations
+end
+
+class RendererTypeType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class RenderKitClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class RenderKitFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class RenderKitIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class RenderKitType
+attributes
+	id : String
+operations
+end
+
+class RenderKitExtensionType<ExtensionType
+attributes
+operations
+end
+
+class ResourceHandlerType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SmallIconType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SourceClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class StateManagerType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SuggestedValueType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SupportedLocaleType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SystemEventClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SystemEventListenerClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class SystemEventListenerType
+attributes
+	id : String
+operations
+end
+
+class TagHandlerDelegateFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ToViewIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ValidatorClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ValidatorIdType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ValidatorType
+attributes
+	id : String
+operations
+end
+
+class ValidatorExtensionType<ExtensionType
+attributes
+operations
+end
+
+class ValueClassType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ValueType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class VariableResolverType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ViewHandlerType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ResourceBundleType
+attributes
+	id : String
+operations
+end
+
+class BaseNameType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class VarType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class ViewDeclarationLanguageFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+class VisitContextFactoryType
+attributes
+	textContent : String
+	id : String
+operations
+end
+
+composition xxx_AbsoluteOrderingType_name between
+	AbsoluteOrderingType[0..1] role xxx_AbsoluteOrderingType_name_src
+	NameType[*] role name
+end
+
+composition xxx_AbsoluteOrderingType_others between
+	AbsoluteOrderingType[*] role xxx_AbsoluteOrderingType_others_src
+	OrderingOthersType[0..1] role others
+end
+
+composition xxx_ApplicationType_actionListener between
+	ApplicationType[0..1] role xxx_ApplicationType_actionListener_src
+	ActionListenerType[*] role actionListener
+end
+
+composition xxx_ApplicationType_defaultRenderKitId between
+	ApplicationType[0..1] role xxx_ApplicationType_defaultRenderKitId_src
+	DefaultRenderKitIdType[*] role defaultRenderKitId
+end
+
+composition xxx_ApplicationType_messageBundle between
+	ApplicationType[0..1] role xxx_ApplicationType_messageBundle_src
+	MessageBundleType[*] role messageBundle
+end
+
+composition xxx_ApplicationType_navigationHandler between
+	ApplicationType[0..1] role xxx_ApplicationType_navigationHandler_src
+	NavigationHandlerType[*] role navigationHandler
+end
+
+composition xxx_ApplicationType_viewHandler between
+	ApplicationType[0..1] role xxx_ApplicationType_viewHandler_src
+	ViewHandlerType[*] role viewHandler
+end
+
+composition xxx_ApplicationType_stateManager between
+	ApplicationType[0..1] role xxx_ApplicationType_stateManager_src
+	StateManagerType[*] role stateManager
+end
+
+association xxx_ApplicationType_eLResolver between
+	ApplicationType[0..1] role xxx_ApplicationType_eLResolver_src
+	ELResolverType[*] role eLResolver
+end
+
+composition xxx_ApplicationType_propertyResolver between
+	ApplicationType[0..1] role xxx_ApplicationType_propertyResolver_src
+	PropertyResolverType[*] role propertyResolver
+end
+
+composition xxx_ApplicationType_variableResolver between
+	ApplicationType[0..1] role xxx_ApplicationType_variableResolver_src
+	VariableResolverType[*] role variableResolver
+end
+
+composition xxx_ApplicationType_resourceHandler between
+	ApplicationType[0..1] role xxx_ApplicationType_resourceHandler_src
+	ResourceHandlerType[*] role resourceHandler
+end
+
+association xxx_ApplicationType_systemEventListener between
+	ApplicationType[0..1] role xxx_ApplicationType_systemEventListener_src
+	SystemEventListenerType[*] role systemEventListener
+end
+
+composition xxx_ApplicationType_localeConfig between
+	ApplicationType[0..1] role xxx_ApplicationType_localeConfig_src
+	LocaleConfigType[*] role localeConfig
+end
+
+association xxx_ApplicationType_resourceBundle between
+	ApplicationType[0..1] role xxx_ApplicationType_resourceBundle_src
+	ResourceBundleType[*] role resourceBundle
+end
+
+association xxx_ApplicationType_applicationExtension between
+	ApplicationType[0..1] role xxx_ApplicationType_applicationExtension_src
+	ApplicationExtensionType[*] role applicationExtension
+end
+
+association xxx_ApplicationType_defaultValidators between
+	ApplicationType[0..1] role xxx_ApplicationType_defaultValidators_src
+	DefaultValidatorsType[*] role defaultValidators
+end
+
+composition xxx_AttributeType_description between
+	AttributeType[0..1] role xxx_AttributeType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_AttributeType_displayName between
+	AttributeType[0..1] role xxx_AttributeType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_AttributeType_icon between
+	AttributeType[0..1] role xxx_AttributeType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_AttributeType_attributeName between
+	AttributeType[*] role xxx_AttributeType_attributeName_src
+	AttributeNameType[1] role attributeName
+end
+
+composition xxx_AttributeType_attributeClass between
+	AttributeType[*] role xxx_AttributeType_attributeClass_src
+	AttributeClassType[1] role attributeClass
+end
+
+composition xxx_AttributeType_defaultValue between
+	AttributeType[*] role xxx_AttributeType_defaultValue_src
+	DefaultValueType[0..1] role defaultValue
+end
+
+composition xxx_AttributeType_suggestedValue between
+	AttributeType[*] role xxx_AttributeType_suggestedValue_src
+	SuggestedValueType[0..1] role suggestedValue
+end
+
+composition xxx_AttributeType_attributeExtension between
+	AttributeType[0..1] role xxx_AttributeType_attributeExtension_src
+	AttributeExtensionType[*] role attributeExtension
+end
+
+composition xxx_BehaviorType_description between
+	BehaviorType[0..1] role xxx_BehaviorType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_BehaviorType_displayName between
+	BehaviorType[0..1] role xxx_BehaviorType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_BehaviorType_icon between
+	BehaviorType[0..1] role xxx_BehaviorType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_BehaviorType_behaviorId between
+	BehaviorType[*] role xxx_BehaviorType_behaviorId_src
+	BehaviorIdType[1] role behaviorId
+end
+
+composition xxx_BehaviorType_behaviorClass between
+	BehaviorType[*] role xxx_BehaviorType_behaviorClass_src
+	BehaviorClassType[1] role behaviorClass
+end
+
+composition xxx_BehaviorType_attribute between
+	BehaviorType[0..1] role xxx_BehaviorType_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_BehaviorType_property between
+	BehaviorType[0..1] role xxx_BehaviorType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_BehaviorType_behaviorExtension between
+	BehaviorType[0..1] role xxx_BehaviorType_behaviorExtension_src
+	BehaviorExtensionType[*] role behaviorExtension
+end
+
+composition xxx_ClientBehaviorRendererType_clientBehaviorRendererType between
+	ClientBehaviorRendererType[*] role xxx_ClientBehaviorRendererType_clientBehaviorRendererType_src
+	ClientBehaviorRendererTypeType[1] role clientBehaviorRendererType
+end
+
+composition xxx_ClientBehaviorRendererType_clientBehaviorRendererClass between
+	ClientBehaviorRendererType[*] role xxx_ClientBehaviorRendererType_clientBehaviorRendererClass_src
+	ClientBehaviorRendererClassType[1] role clientBehaviorRendererClass
+end
+
+composition xxx_ComponentType_description between
+	ComponentType[0..1] role xxx_ComponentType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ComponentType_displayName between
+	ComponentType[0..1] role xxx_ComponentType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ComponentType_icon between
+	ComponentType[0..1] role xxx_ComponentType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_ComponentType_componentType between
+	ComponentType[*] role xxx_ComponentType_componentType_src
+	ComponentTypeType[1] role componentType
+end
+
+composition xxx_ComponentType_componentClass between
+	ComponentType[*] role xxx_ComponentType_componentClass_src
+	ComponentClassType[1] role componentClass
+end
+
+composition xxx_ComponentType_facet between
+	ComponentType[0..1] role xxx_ComponentType_facet_src
+	FacetType[*] role facet
+end
+
+composition xxx_ComponentType_attribute between
+	ComponentType[0..1] role xxx_ComponentType_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_ComponentType_property between
+	ComponentType[0..1] role xxx_ComponentType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_ComponentType_componentExtension between
+	ComponentType[0..1] role xxx_ComponentType_componentExtension_src
+	ComponentExtensionType[*] role componentExtension
+end
+
+composition xxx_ConverterType_description between
+	ConverterType[0..1] role xxx_ConverterType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ConverterType_displayName between
+	ConverterType[0..1] role xxx_ConverterType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ConverterType_icon between
+	ConverterType[0..1] role xxx_ConverterType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_ConverterType_converterId between
+	ConverterType[*] role xxx_ConverterType_converterId_src
+	ConverterIdType[0..1] role converterId
+end
+
+composition xxx_ConverterType_converterForClass between
+	ConverterType[*] role xxx_ConverterType_converterForClass_src
+	ConverterForClassType[0..1] role converterForClass
+end
+
+composition xxx_ConverterType_converterClass between
+	ConverterType[*] role xxx_ConverterType_converterClass_src
+	ConverterClassType[1] role converterClass
+end
+
+composition xxx_ConverterType_attribute between
+	ConverterType[0..1] role xxx_ConverterType_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_ConverterType_property between
+	ConverterType[0..1] role xxx_ConverterType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_ConverterType_converterExtension between
+	ConverterType[0..1] role xxx_ConverterType_converterExtension_src
+	ConverterExtensionType[*] role converterExtension
+end
+
+composition xxx_DefaultValidatorsType_validatorId between
+	DefaultValidatorsType[0..1] role xxx_DefaultValidatorsType_validatorId_src
+	ValidatorIdType[*] role validatorId
+end
+
+composition xxx_DocumentRoot_absoluteOrdering between
+	DocumentRoot[*] role xxx_DocumentRoot_absoluteOrdering_src
+	AbsoluteOrderingType[*] role absoluteOrdering
+end
+
+composition xxx_DocumentRoot_actionListener between
+	DocumentRoot[*] role xxx_DocumentRoot_actionListener_src
+	ActionListenerType[*] role actionListener
+end
+
+composition xxx_DocumentRoot_application between
+	DocumentRoot[*] role xxx_DocumentRoot_application_src
+	ApplicationType[*] role application
+end
+
+composition xxx_DocumentRoot_applicationFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_applicationFactory_src
+	ApplicationFactoryType[*] role applicationFactory
+end
+
+composition xxx_DocumentRoot_attribute between
+	DocumentRoot[*] role xxx_DocumentRoot_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_DocumentRoot_attributeClass between
+	DocumentRoot[*] role xxx_DocumentRoot_attributeClass_src
+	AttributeClassType[*] role attributeClass
+end
+
+composition xxx_DocumentRoot_attributeExtension between
+	DocumentRoot[*] role xxx_DocumentRoot_attributeExtension_src
+	AttributeExtensionType[*] role attributeExtension
+end
+
+composition xxx_DocumentRoot_attributeName between
+	DocumentRoot[*] role xxx_DocumentRoot_attributeName_src
+	AttributeNameType[*] role attributeName
+end
+
+composition xxx_DocumentRoot_behavior between
+	DocumentRoot[*] role xxx_DocumentRoot_behavior_src
+	BehaviorType[*] role behavior
+end
+
+composition xxx_DocumentRoot_behaviorClass between
+	DocumentRoot[*] role xxx_DocumentRoot_behaviorClass_src
+	BehaviorClassType[*] role behaviorClass
+end
+
+composition xxx_DocumentRoot_behaviorId between
+	DocumentRoot[*] role xxx_DocumentRoot_behaviorId_src
+	BehaviorIdType[*] role behaviorId
+end
+
+composition xxx_DocumentRoot_behaviorExtension between
+	DocumentRoot[*] role xxx_DocumentRoot_behaviorExtension_src
+	BehaviorExtensionType[*] role behaviorExtension
+end
+
+composition xxx_DocumentRoot_component between
+	DocumentRoot[*] role xxx_DocumentRoot_component_src
+	ComponentType[*] role component
+end
+
+composition xxx_DocumentRoot_componentClass between
+	DocumentRoot[*] role xxx_DocumentRoot_componentClass_src
+	ComponentClassType[*] role componentClass
+end
+
+composition xxx_DocumentRoot_componentExtension between
+	DocumentRoot[*] role xxx_DocumentRoot_componentExtension_src
+	ComponentExtensionType[*] role componentExtension
+end
+
+composition xxx_DocumentRoot_componentFamily between
+	DocumentRoot[*] role xxx_DocumentRoot_componentFamily_src
+	ComponentFamilyType[*] role componentFamily
+end
+
+composition xxx_DocumentRoot_componentType between
+	DocumentRoot[*] role xxx_DocumentRoot_componentType_src
+	ComponentTypeType[*] role componentType
+end
+
+composition xxx_DocumentRoot_converter between
+	DocumentRoot[*] role xxx_DocumentRoot_converter_src
+	ConverterType[*] role converter
+end
+
+composition xxx_DocumentRoot_converterClass between
+	DocumentRoot[*] role xxx_DocumentRoot_converterClass_src
+	ConverterClassType[*] role converterClass
+end
+
+composition xxx_DocumentRoot_converterForClass between
+	DocumentRoot[*] role xxx_DocumentRoot_converterForClass_src
+	ConverterForClassType[*] role converterForClass
+end
+
+composition xxx_DocumentRoot_converterId between
+	DocumentRoot[*] role xxx_DocumentRoot_converterId_src
+	ConverterIdType[*] role converterId
+end
+
+composition xxx_DocumentRoot_defaultLocale between
+	DocumentRoot[*] role xxx_DocumentRoot_defaultLocale_src
+	DefaultLocaleType[*] role defaultLocale
+end
+
+composition xxx_DocumentRoot_defaultRenderKitId between
+	DocumentRoot[*] role xxx_DocumentRoot_defaultRenderKitId_src
+	DefaultRenderKitIdType[*] role defaultRenderKitId
+end
+
+composition xxx_DocumentRoot_defaultValidators between
+	DocumentRoot[*] role xxx_DocumentRoot_defaultValidators_src
+	DefaultValidatorsType[*] role defaultValidators
+end
+
+composition xxx_DocumentRoot_defaultValue between
+	DocumentRoot[*] role xxx_DocumentRoot_defaultValue_src
+	DefaultValueType[*] role defaultValue
+end
+
+composition xxx_DocumentRoot_description between
+	DocumentRoot[*] role xxx_DocumentRoot_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_DocumentRoot_displayName between
+	DocumentRoot[*] role xxx_DocumentRoot_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_DocumentRoot_exceptionHandlerFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_exceptionHandlerFactory_src
+	ExceptionHandlerFactoryType[*] role exceptionHandlerFactory
+end
+
+composition xxx_DocumentRoot_externalContextFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_externalContextFactory_src
+	ExternalContextFactoryType[*] role externalContextFactory
+end
+
+composition xxx_DocumentRoot_facesConfig between
+	DocumentRoot[*] role xxx_DocumentRoot_facesConfig_src
+	FacesConfigType[*] role facesConfig
+end
+
+composition xxx_DocumentRoot_facesContextFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_facesContextFactory_src
+	FacesContextFactoryType[*] role facesContextFactory
+end
+
+composition xxx_DocumentRoot_facet between
+	DocumentRoot[*] role xxx_DocumentRoot_facet_src
+	FacetType[*] role facet
+end
+
+composition xxx_DocumentRoot_facetExtension between
+	DocumentRoot[*] role xxx_DocumentRoot_facetExtension_src
+	FacetExtensionType[*] role facetExtension
+end
+
+composition xxx_DocumentRoot_facetName between
+	DocumentRoot[*] role xxx_DocumentRoot_facetName_src
+	FacetNameType[*] role facetName
+end
+
+composition xxx_DocumentRoot_factory between
+	DocumentRoot[*] role xxx_DocumentRoot_factory_src
+	FactoryType[*] role factory
+end
+
+composition xxx_DocumentRoot_fromAction between
+	DocumentRoot[*] role xxx_DocumentRoot_fromAction_src
+	FromActionType[*] role fromAction
+end
+
+composition xxx_DocumentRoot_fromOutcome between
+	DocumentRoot[*] role xxx_DocumentRoot_fromOutcome_src
+	FromOutcomeType[*] role fromOutcome
+end
+
+composition xxx_DocumentRoot_fromViewId between
+	DocumentRoot[*] role xxx_DocumentRoot_fromViewId_src
+	FromViewIdType[*] role fromViewId
+end
+
+composition xxx_DocumentRoot_icon between
+	DocumentRoot[*] role xxx_DocumentRoot_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_DocumentRoot_if_ between
+	DocumentRoot[*] role xxx_DocumentRoot_if__src
+	IfType[*] role if_
+end
+
+composition xxx_DocumentRoot_key between
+	DocumentRoot[*] role xxx_DocumentRoot_key_src
+	KeyType[*] role key
+end
+
+composition xxx_DocumentRoot_keyClass between
+	DocumentRoot[*] role xxx_DocumentRoot_keyClass_src
+	KeyClassType[*] role keyClass
+end
+
+composition xxx_DocumentRoot_largeIcon between
+	DocumentRoot[*] role xxx_DocumentRoot_largeIcon_src
+	LargeIconType[*] role largeIcon
+end
+
+composition xxx_DocumentRoot_lifecycle between
+	DocumentRoot[*] role xxx_DocumentRoot_lifecycle_src
+	LifecycleType[*] role lifecycle
+end
+
+composition xxx_DocumentRoot_lifecycleFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_lifecycleFactory_src
+	LifecycleFactoryType[*] role lifecycleFactory
+end
+
+composition xxx_DocumentRoot_listEntries between
+	DocumentRoot[*] role xxx_DocumentRoot_listEntries_src
+	ListEntriesType[*] role listEntries
+end
+
+composition xxx_DocumentRoot_localeConfig between
+	DocumentRoot[*] role xxx_DocumentRoot_localeConfig_src
+	LocaleConfigType[*] role localeConfig
+end
+
+composition xxx_DocumentRoot_managedBean between
+	DocumentRoot[*] role xxx_DocumentRoot_managedBean_src
+	ManagedBeanType[*] role managedBean
+end
+
+composition xxx_DocumentRoot_managedBeanClass between
+	DocumentRoot[*] role xxx_DocumentRoot_managedBeanClass_src
+	ManagedBeanClassType[*] role managedBeanClass
+end
+
+composition xxx_DocumentRoot_managedBeanName between
+	DocumentRoot[*] role xxx_DocumentRoot_managedBeanName_src
+	ManagedBeanNameType[*] role managedBeanName
+end
+
+composition xxx_DocumentRoot_managedBeanScope between
+	DocumentRoot[*] role xxx_DocumentRoot_managedBeanScope_src
+	ManagedBeanScopeType[*] role managedBeanScope
+end
+
+composition xxx_DocumentRoot_managedProperty between
+	DocumentRoot[*] role xxx_DocumentRoot_managedProperty_src
+	ManagedPropertyType[*] role managedProperty
+end
+
+composition xxx_DocumentRoot_mapEntries between
+	DocumentRoot[*] role xxx_DocumentRoot_mapEntries_src
+	MapEntriesType[*] role mapEntries
+end
+
+composition xxx_DocumentRoot_mapEntry between
+	DocumentRoot[*] role xxx_DocumentRoot_mapEntry_src
+	MapEntryType[*] role mapEntry
+end
+
+composition xxx_DocumentRoot_messageBundle between
+	DocumentRoot[*] role xxx_DocumentRoot_messageBundle_src
+	MessageBundleType[*] role messageBundle
+end
+
+composition xxx_DocumentRoot_name between
+	DocumentRoot[*] role xxx_DocumentRoot_name_src
+	NameType[*] role name
+end
+
+composition xxx_DocumentRoot_navigationCase between
+	DocumentRoot[*] role xxx_DocumentRoot_navigationCase_src
+	NavigationCaseType[*] role navigationCase
+end
+
+composition xxx_DocumentRoot_navigationHandler between
+	DocumentRoot[*] role xxx_DocumentRoot_navigationHandler_src
+	NavigationHandlerType[*] role navigationHandler
+end
+
+composition xxx_DocumentRoot_navigationRule between
+	DocumentRoot[*] role xxx_DocumentRoot_navigationRule_src
+	NavigationRuleType[*] role navigationRule
+end
+
+composition xxx_DocumentRoot_nullValue between
+	DocumentRoot[*] role xxx_DocumentRoot_nullValue_src
+	NullValueType[*] role nullValue
+end
+
+composition xxx_DocumentRoot_ordering between
+	DocumentRoot[*] role xxx_DocumentRoot_ordering_src
+	OrderingType[*] role ordering
+end
+
+composition xxx_DocumentRoot_orderingOrdering between
+	DocumentRoot[*] role xxx_DocumentRoot_orderingOrdering_src
+	OrderingOrderingType[*] role orderingOrdering
+end
+
+composition xxx_DocumentRoot_others between
+	DocumentRoot[*] role xxx_DocumentRoot_others_src
+	OrderingOthersType[*] role others
+end
+
+composition xxx_DocumentRoot_partialViewContextFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_partialViewContextFactory_src
+	PartialViewContextFactoryType[*] role partialViewContextFactory
+end
+
+composition xxx_DocumentRoot_phaseListener between
+	DocumentRoot[*] role xxx_DocumentRoot_phaseListener_src
+	PhaseListenerType[*] role phaseListener
+end
+
+composition xxx_DocumentRoot_property between
+	DocumentRoot[*] role xxx_DocumentRoot_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_DocumentRoot_propertyClass between
+	DocumentRoot[*] role xxx_DocumentRoot_propertyClass_src
+	PropertyClassType[*] role propertyClass
+end
+
+composition xxx_DocumentRoot_propertyExtension between
+	DocumentRoot[*] role xxx_DocumentRoot_propertyExtension_src
+	PropertyExtensionType[*] role propertyExtension
+end
+
+composition xxx_DocumentRoot_propertyName between
+	DocumentRoot[*] role xxx_DocumentRoot_propertyName_src
+	PropertyNameType[*] role propertyName
+end
+
+composition xxx_DocumentRoot_propertyResolver between
+	DocumentRoot[*] role xxx_DocumentRoot_propertyResolver_src
+	PropertyResolverType[*] role propertyResolver
+end
+
+composition xxx_DocumentRoot_redirect between
+	DocumentRoot[*] role xxx_DocumentRoot_redirect_src
+	RedirectType[*] role redirect
+end
+
+composition xxx_DocumentRoot_redirectViewParam between
+	DocumentRoot[*] role xxx_DocumentRoot_redirectViewParam_src
+	RedirectViewParamType[*] role redirectViewParam
+end
+
+composition xxx_DocumentRoot_referencedBean between
+	DocumentRoot[*] role xxx_DocumentRoot_referencedBean_src
+	ReferencedBeanType[*] role referencedBean
+end
+
+composition xxx_DocumentRoot_referencedBeanClass between
+	DocumentRoot[*] role xxx_DocumentRoot_referencedBeanClass_src
+	ReferencedBeanClassType[*] role referencedBeanClass
+end
+
+composition xxx_DocumentRoot_referencedBeanName between
+	DocumentRoot[*] role xxx_DocumentRoot_referencedBeanName_src
+	ReferencedBeanNameType[*] role referencedBeanName
+end
+
+composition xxx_DocumentRoot_renderer between
+	DocumentRoot[*] role xxx_DocumentRoot_renderer_src
+	RendererType[*] role renderer
+end
+
+composition xxx_DocumentRoot_rendererClass between
+	DocumentRoot[*] role xxx_DocumentRoot_rendererClass_src
+	RendererClassType[*] role rendererClass
+end
+
+composition xxx_DocumentRoot_rendererExtension between
+	DocumentRoot[*] role xxx_DocumentRoot_rendererExtension_src
+	RendererExtensionType[*] role rendererExtension
+end
+
+composition xxx_DocumentRoot_rendererType between
+	DocumentRoot[*] role xxx_DocumentRoot_rendererType_src
+	RendererTypeType[*] role rendererType
+end
+
+composition xxx_DocumentRoot_renderKit between
+	DocumentRoot[*] role xxx_DocumentRoot_renderKit_src
+	RenderKitType[*] role renderKit
+end
+
+composition xxx_DocumentRoot_renderKitClass between
+	DocumentRoot[*] role xxx_DocumentRoot_renderKitClass_src
+	RenderKitClassType[*] role renderKitClass
+end
+
+composition xxx_DocumentRoot_renderKitFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_renderKitFactory_src
+	RenderKitFactoryType[*] role renderKitFactory
+end
+
+composition xxx_DocumentRoot_renderKitId between
+	DocumentRoot[*] role xxx_DocumentRoot_renderKitId_src
+	RenderKitIdType[*] role renderKitId
+end
+
+composition xxx_DocumentRoot_resourceHandler between
+	DocumentRoot[*] role xxx_DocumentRoot_resourceHandler_src
+	ResourceHandlerType[*] role resourceHandler
+end
+
+composition xxx_DocumentRoot_smallIcon between
+	DocumentRoot[*] role xxx_DocumentRoot_smallIcon_src
+	SmallIconType[*] role smallIcon
+end
+
+composition xxx_DocumentRoot_sourceClass between
+	DocumentRoot[*] role xxx_DocumentRoot_sourceClass_src
+	SourceClassType[*] role sourceClass
+end
+
+composition xxx_DocumentRoot_stateManager between
+	DocumentRoot[*] role xxx_DocumentRoot_stateManager_src
+	StateManagerType[*] role stateManager
+end
+
+composition xxx_DocumentRoot_suggestedValue between
+	DocumentRoot[*] role xxx_DocumentRoot_suggestedValue_src
+	SuggestedValueType[*] role suggestedValue
+end
+
+composition xxx_DocumentRoot_supportedLocale between
+	DocumentRoot[*] role xxx_DocumentRoot_supportedLocale_src
+	SupportedLocaleType[*] role supportedLocale
+end
+
+composition xxx_DocumentRoot_systemEventClass between
+	DocumentRoot[*] role xxx_DocumentRoot_systemEventClass_src
+	SystemEventClassType[*] role systemEventClass
+end
+
+composition xxx_DocumentRoot_systemEventListener between
+	DocumentRoot[*] role xxx_DocumentRoot_systemEventListener_src
+	SystemEventListenerType[*] role systemEventListener
+end
+
+composition xxx_DocumentRoot_systemEventListenerClass between
+	DocumentRoot[*] role xxx_DocumentRoot_systemEventListenerClass_src
+	SystemEventListenerClassType[*] role systemEventListenerClass
+end
+
+composition xxx_DocumentRoot_tagHandlerDelegateFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_tagHandlerDelegateFactory_src
+	TagHandlerDelegateFactoryType[*] role tagHandlerDelegateFactory
+end
+
+composition xxx_DocumentRoot_toViewId between
+	DocumentRoot[*] role xxx_DocumentRoot_toViewId_src
+	ToViewIdType[*] role toViewId
+end
+
+composition xxx_DocumentRoot_validator between
+	DocumentRoot[*] role xxx_DocumentRoot_validator_src
+	ValidatorType[*] role validator
+end
+
+composition xxx_DocumentRoot_validatorClass between
+	DocumentRoot[*] role xxx_DocumentRoot_validatorClass_src
+	ValidatorClassType[*] role validatorClass
+end
+
+composition xxx_DocumentRoot_validatorId between
+	DocumentRoot[*] role xxx_DocumentRoot_validatorId_src
+	ValidatorIdType[*] role validatorId
+end
+
+composition xxx_DocumentRoot_value between
+	DocumentRoot[*] role xxx_DocumentRoot_value_src
+	ValueType[*] role value
+end
+
+composition xxx_DocumentRoot_valueClass between
+	DocumentRoot[*] role xxx_DocumentRoot_valueClass_src
+	ValueClassType[*] role valueClass
+end
+
+composition xxx_DocumentRoot_variableResolver between
+	DocumentRoot[*] role xxx_DocumentRoot_variableResolver_src
+	VariableResolverType[*] role variableResolver
+end
+
+composition xxx_DocumentRoot_viewDeclarationLanguageFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_viewDeclarationLanguageFactory_src
+	ViewDeclarationLanguageFactoryType[*] role viewDeclarationLanguageFactory
+end
+
+composition xxx_DocumentRoot_viewHandler between
+	DocumentRoot[*] role xxx_DocumentRoot_viewHandler_src
+	ViewHandlerType[*] role viewHandler
+end
+
+composition xxx_DocumentRoot_visitContextFactory between
+	DocumentRoot[*] role xxx_DocumentRoot_visitContextFactory_src
+	VisitContextFactoryType[*] role visitContextFactory
+end
+
+composition xxx_DynamicElement_childNodes between
+	DynamicElement[0..1] role xxx_DynamicElement_childNodes_src
+	DynamicElement[*] role childNodes
+end
+
+association xxx_DynamicElement_attributes_ between
+	DynamicElement[0..1] role xxx_DynamicElement_attributes__src
+	DynamicAttribute[*] role attributes_
+end
+
+association xxx_ExtensionType_childNodes between
+	ExtensionType[0..1] role xxx_ExtensionType_childNodes_src
+	DynamicElement[*] role childNodes
+end
+
+composition xxx_FacesConfigType_application between
+	FacesConfigType[0..1] role xxx_FacesConfigType_application_src
+	ApplicationType[*] role application
+end
+
+composition xxx_FacesConfigType_ordering between
+	FacesConfigType[0..1] role xxx_FacesConfigType_ordering_src
+	OrderingType[*] role ordering
+end
+
+composition xxx_FacesConfigType_absoluteOrdering between
+	FacesConfigType[*] role xxx_FacesConfigType_absoluteOrdering_src
+	AbsoluteOrderingType[0..1] role absoluteOrdering
+end
+
+composition xxx_FacesConfigType_factory between
+	FacesConfigType[0..1] role xxx_FacesConfigType_factory_src
+	FactoryType[*] role factory
+end
+
+composition xxx_FacesConfigType_component between
+	FacesConfigType[0..1] role xxx_FacesConfigType_component_src
+	ComponentType[*] role component
+end
+
+composition xxx_FacesConfigType_converter between
+	FacesConfigType[0..1] role xxx_FacesConfigType_converter_src
+	ConverterType[*] role converter
+end
+
+composition xxx_FacesConfigType_managedBean between
+	FacesConfigType[0..1] role xxx_FacesConfigType_managedBean_src
+	ManagedBeanType[*] role managedBean
+end
+
+composition xxx_FacesConfigType_name between
+	FacesConfigType[*] role xxx_FacesConfigType_name_src
+	NameType[0..1] role name
+end
+
+composition xxx_FacesConfigType_navigationRule between
+	FacesConfigType[0..1] role xxx_FacesConfigType_navigationRule_src
+	NavigationRuleType[*] role navigationRule
+end
+
+composition xxx_FacesConfigType_referencedBean between
+	FacesConfigType[0..1] role xxx_FacesConfigType_referencedBean_src
+	ReferencedBeanType[*] role referencedBean
+end
+
+composition xxx_FacesConfigType_renderKit between
+	FacesConfigType[0..1] role xxx_FacesConfigType_renderKit_src
+	RenderKitType[*] role renderKit
+end
+
+composition xxx_FacesConfigType_lifecycle between
+	FacesConfigType[0..1] role xxx_FacesConfigType_lifecycle_src
+	LifecycleType[*] role lifecycle
+end
+
+composition xxx_FacesConfigType_validator between
+	FacesConfigType[0..1] role xxx_FacesConfigType_validator_src
+	ValidatorType[*] role validator
+end
+
+composition xxx_FacesConfigType_behavior between
+	FacesConfigType[0..1] role xxx_FacesConfigType_behavior_src
+	BehaviorType[*] role behavior
+end
+
+association xxx_FacesConfigType_facesConfigExtension between
+	FacesConfigType[0..1] role xxx_FacesConfigType_facesConfigExtension_src
+	FacesConfigExtensionType[*] role facesConfigExtension
+end
+
+composition xxx_FacetType_description between
+	FacetType[0..1] role xxx_FacetType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_FacetType_displayName between
+	FacetType[0..1] role xxx_FacetType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_FacetType_icon between
+	FacetType[0..1] role xxx_FacetType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_FacetType_facetName between
+	FacetType[*] role xxx_FacetType_facetName_src
+	FacetNameType[1] role facetName
+end
+
+composition xxx_FacetType_facetExtension between
+	FacetType[0..1] role xxx_FacetType_facetExtension_src
+	FacetExtensionType[*] role facetExtension
+end
+
+composition xxx_FactoryType_applicationFactory between
+	FactoryType[0..1] role xxx_FactoryType_applicationFactory_src
+	ApplicationFactoryType[*] role applicationFactory
+end
+
+composition xxx_FactoryType_exceptionHandlerFactory between
+	FactoryType[0..1] role xxx_FactoryType_exceptionHandlerFactory_src
+	ExceptionHandlerFactoryType[*] role exceptionHandlerFactory
+end
+
+composition xxx_FactoryType_externalContextFactory between
+	FactoryType[0..1] role xxx_FactoryType_externalContextFactory_src
+	ExternalContextFactoryType[*] role externalContextFactory
+end
+
+composition xxx_FactoryType_facesContextFactory between
+	FactoryType[0..1] role xxx_FactoryType_facesContextFactory_src
+	FacesContextFactoryType[*] role facesContextFactory
+end
+
+composition xxx_FactoryType_partialViewContextFactory between
+	FactoryType[0..1] role xxx_FactoryType_partialViewContextFactory_src
+	PartialViewContextFactoryType[*] role partialViewContextFactory
+end
+
+composition xxx_FactoryType_lifecycleFactory between
+	FactoryType[0..1] role xxx_FactoryType_lifecycleFactory_src
+	LifecycleFactoryType[*] role lifecycleFactory
+end
+
+composition xxx_FactoryType_viewDeclarationLanguageFactory between
+	FactoryType[0..1] role xxx_FactoryType_viewDeclarationLanguageFactory_src
+	ViewDeclarationLanguageFactoryType[*] role viewDeclarationLanguageFactory
+end
+
+composition xxx_FactoryType_tagHandlerDelegateFactory between
+	FactoryType[0..1] role xxx_FactoryType_tagHandlerDelegateFactory_src
+	TagHandlerDelegateFactoryType[*] role tagHandlerDelegateFactory
+end
+
+composition xxx_FactoryType_renderKitFactory between
+	FactoryType[0..1] role xxx_FactoryType_renderKitFactory_src
+	RenderKitFactoryType[*] role renderKitFactory
+end
+
+composition xxx_FactoryType_visitContextFactory between
+	FactoryType[0..1] role xxx_FactoryType_visitContextFactory_src
+	VisitContextFactoryType[*] role visitContextFactory
+end
+
+association xxx_FactoryType_factoryExtension between
+	FactoryType[0..1] role xxx_FactoryType_factoryExtension_src
+	FactoryExtensionType[*] role factoryExtension
+end
+
+composition xxx_IconType_smallIcon between
+	IconType[*] role xxx_IconType_smallIcon_src
+	SmallIconType[0..1] role smallIcon
+end
+
+composition xxx_IconType_largeIcon between
+	IconType[*] role xxx_IconType_largeIcon_src
+	LargeIconType[0..1] role largeIcon
+end
+
+composition xxx_LifecycleType_phaseListener between
+	LifecycleType[0..1] role xxx_LifecycleType_phaseListener_src
+	PhaseListenerType[*] role phaseListener
+end
+
+composition xxx_LifecycleType_lifecycleExtension between
+	LifecycleType[0..1] role xxx_LifecycleType_lifecycleExtension_src
+	LifecycleExtensionType[*] role lifecycleExtension
+end
+
+composition xxx_ListEntriesType_valueClass between
+	ListEntriesType[*] role xxx_ListEntriesType_valueClass_src
+	ValueClassType[0..1] role valueClass
+end
+
+composition xxx_ListEntriesType_nullValue between
+	ListEntriesType[0..1] role xxx_ListEntriesType_nullValue_src
+	NullValueType[*] role nullValue
+end
+
+composition xxx_ListEntriesType_value between
+	ListEntriesType[0..1] role xxx_ListEntriesType_value_src
+	ValueType[*] role value
+end
+
+composition xxx_LocaleConfigType_defaultLocale between
+	LocaleConfigType[*] role xxx_LocaleConfigType_defaultLocale_src
+	DefaultLocaleType[0..1] role defaultLocale
+end
+
+composition xxx_LocaleConfigType_supportedLocale between
+	LocaleConfigType[0..1] role xxx_LocaleConfigType_supportedLocale_src
+	SupportedLocaleType[*] role supportedLocale
+end
+
+composition xxx_ManagedBeanType_description between
+	ManagedBeanType[0..1] role xxx_ManagedBeanType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ManagedBeanType_displayName between
+	ManagedBeanType[0..1] role xxx_ManagedBeanType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ManagedBeanType_icon between
+	ManagedBeanType[0..1] role xxx_ManagedBeanType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_ManagedBeanType_managedBeanName between
+	ManagedBeanType[*] role xxx_ManagedBeanType_managedBeanName_src
+	ManagedBeanNameType[1] role managedBeanName
+end
+
+composition xxx_ManagedBeanType_managedBeanClass between
+	ManagedBeanType[*] role xxx_ManagedBeanType_managedBeanClass_src
+	ManagedBeanClassType[1] role managedBeanClass
+end
+
+composition xxx_ManagedBeanType_managedBeanScope between
+	ManagedBeanType[*] role xxx_ManagedBeanType_managedBeanScope_src
+	ManagedBeanScopeType[1] role managedBeanScope
+end
+
+composition xxx_ManagedBeanType_managedProperty between
+	ManagedBeanType[0..1] role xxx_ManagedBeanType_managedProperty_src
+	ManagedPropertyType[*] role managedProperty
+end
+
+composition xxx_ManagedBeanType_mapEntries between
+	ManagedBeanType[*] role xxx_ManagedBeanType_mapEntries_src
+	MapEntriesType[0..1] role mapEntries
+end
+
+composition xxx_ManagedBeanType_listEntries between
+	ManagedBeanType[*] role xxx_ManagedBeanType_listEntries_src
+	ListEntriesType[0..1] role listEntries
+end
+
+composition xxx_ManagedBeanType_managedBeanExtension between
+	ManagedBeanType[0..1] role xxx_ManagedBeanType_managedBeanExtension_src
+	ManagedBeanExtensionType[*] role managedBeanExtension
+end
+
+composition xxx_ManagedPropertyType_description between
+	ManagedPropertyType[0..1] role xxx_ManagedPropertyType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ManagedPropertyType_displayName between
+	ManagedPropertyType[0..1] role xxx_ManagedPropertyType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ManagedPropertyType_icon between
+	ManagedPropertyType[0..1] role xxx_ManagedPropertyType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_ManagedPropertyType_propertyName between
+	ManagedPropertyType[*] role xxx_ManagedPropertyType_propertyName_src
+	PropertyNameType[1] role propertyName
+end
+
+composition xxx_ManagedPropertyType_propertyClass between
+	ManagedPropertyType[*] role xxx_ManagedPropertyType_propertyClass_src
+	PropertyClassType[0..1] role propertyClass
+end
+
+composition xxx_ManagedPropertyType_mapEntries between
+	ManagedPropertyType[*] role xxx_ManagedPropertyType_mapEntries_src
+	MapEntriesType[0..1] role mapEntries
+end
+
+composition xxx_ManagedPropertyType_nullValue between
+	ManagedPropertyType[*] role xxx_ManagedPropertyType_nullValue_src
+	NullValueType[0..1] role nullValue
+end
+
+composition xxx_ManagedPropertyType_value between
+	ManagedPropertyType[*] role xxx_ManagedPropertyType_value_src
+	ValueType[0..1] role value
+end
+
+composition xxx_ManagedPropertyType_listEntries between
+	ManagedPropertyType[*] role xxx_ManagedPropertyType_listEntries_src
+	ListEntriesType[0..1] role listEntries
+end
+
+composition xxx_MapEntriesType_keyClass between
+	MapEntriesType[*] role xxx_MapEntriesType_keyClass_src
+	KeyClassType[0..1] role keyClass
+end
+
+composition xxx_MapEntriesType_valueClass between
+	MapEntriesType[*] role xxx_MapEntriesType_valueClass_src
+	ValueClassType[0..1] role valueClass
+end
+
+composition xxx_MapEntriesType_mapEntry between
+	MapEntriesType[0..1] role xxx_MapEntriesType_mapEntry_src
+	MapEntryType[*] role mapEntry
+end
+
+composition xxx_MapEntryType_key between
+	MapEntryType[*] role xxx_MapEntryType_key_src
+	KeyType[1] role key
+end
+
+composition xxx_MapEntryType_nullValue between
+	MapEntryType[*] role xxx_MapEntryType_nullValue_src
+	NullValueType[0..1] role nullValue
+end
+
+composition xxx_MapEntryType_value between
+	MapEntryType[*] role xxx_MapEntryType_value_src
+	ValueType[0..1] role value
+end
+
+composition xxx_NavigationCaseType_description between
+	NavigationCaseType[0..1] role xxx_NavigationCaseType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_NavigationCaseType_displayName between
+	NavigationCaseType[0..1] role xxx_NavigationCaseType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_NavigationCaseType_icon between
+	NavigationCaseType[0..1] role xxx_NavigationCaseType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_NavigationCaseType_fromAction between
+	NavigationCaseType[*] role xxx_NavigationCaseType_fromAction_src
+	FromActionType[0..1] role fromAction
+end
+
+composition xxx_NavigationCaseType_fromOutcome between
+	NavigationCaseType[*] role xxx_NavigationCaseType_fromOutcome_src
+	FromOutcomeType[0..1] role fromOutcome
+end
+
+composition xxx_NavigationCaseType_if_ between
+	NavigationCaseType[*] role xxx_NavigationCaseType_if__src
+	IfType[0..1] role if_
+end
+
+composition xxx_NavigationCaseType_toViewId between
+	NavigationCaseType[*] role xxx_NavigationCaseType_toViewId_src
+	ToViewIdType[1] role toViewId
+end
+
+composition xxx_NavigationCaseType_redirect between
+	NavigationCaseType[*] role xxx_NavigationCaseType_redirect_src
+	RedirectType[0..1] role redirect
+end
+
+composition xxx_NavigationRuleType_description between
+	NavigationRuleType[0..1] role xxx_NavigationRuleType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_NavigationRuleType_displayName between
+	NavigationRuleType[0..1] role xxx_NavigationRuleType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_NavigationRuleType_icon between
+	NavigationRuleType[0..1] role xxx_NavigationRuleType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_NavigationRuleType_fromViewId between
+	NavigationRuleType[*] role xxx_NavigationRuleType_fromViewId_src
+	FromViewIdType[0..1] role fromViewId
+end
+
+composition xxx_NavigationRuleType_navigationCase between
+	NavigationRuleType[0..1] role xxx_NavigationRuleType_navigationCase_src
+	NavigationCaseType[*] role navigationCase
+end
+
+composition xxx_NavigationRuleType_navigationRuleExtension between
+	NavigationRuleType[0..1] role xxx_NavigationRuleType_navigationRuleExtension_src
+	NavigationRuleExtensionType[*] role navigationRuleExtension
+end
+
+composition xxx_OrderingType_before between
+	OrderingType[*] role xxx_OrderingType_before_src
+	OrderingOrderingType[0..1] role before
+end
+
+composition xxx_OrderingType_after between
+	OrderingType[*] role xxx_OrderingType_after_src
+	OrderingOrderingType[0..1] role after
+end
+
+composition xxx_OrderingOrderingType_name between
+	OrderingOrderingType[0..1] role xxx_OrderingOrderingType_name_src
+	NameType[*] role name
+end
+
+composition xxx_OrderingOrderingType_others between
+	OrderingOrderingType[*] role xxx_OrderingOrderingType_others_src
+	OrderingOthersType[0..1] role others
+end
+
+composition xxx_PropertyType_description between
+	PropertyType[0..1] role xxx_PropertyType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_PropertyType_displayName between
+	PropertyType[0..1] role xxx_PropertyType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_PropertyType_icon between
+	PropertyType[0..1] role xxx_PropertyType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_PropertyType_propertyName between
+	PropertyType[*] role xxx_PropertyType_propertyName_src
+	PropertyNameType[1] role propertyName
+end
+
+composition xxx_PropertyType_propertyClass between
+	PropertyType[*] role xxx_PropertyType_propertyClass_src
+	PropertyClassType[1] role propertyClass
+end
+
+composition xxx_PropertyType_defaultValue between
+	PropertyType[*] role xxx_PropertyType_defaultValue_src
+	DefaultValueType[0..1] role defaultValue
+end
+
+composition xxx_PropertyType_suggestedValue between
+	PropertyType[*] role xxx_PropertyType_suggestedValue_src
+	SuggestedValueType[0..1] role suggestedValue
+end
+
+composition xxx_PropertyType_propertyExtension between
+	PropertyType[0..1] role xxx_PropertyType_propertyExtension_src
+	PropertyExtensionType[*] role propertyExtension
+end
+
+composition xxx_RedirectType_viewParam between
+	RedirectType[0..1] role xxx_RedirectType_viewParam_src
+	RedirectViewParamType[*] role viewParam
+end
+
+composition xxx_RedirectViewParamType_name between
+	RedirectViewParamType[*] role xxx_RedirectViewParamType_name_src
+	NameType[1] role name
+end
+
+composition xxx_RedirectViewParamType_value between
+	RedirectViewParamType[*] role xxx_RedirectViewParamType_value_src
+	ValueType[1] role value
+end
+
+composition xxx_ReferencedBeanType_description between
+	ReferencedBeanType[0..1] role xxx_ReferencedBeanType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ReferencedBeanType_displayName between
+	ReferencedBeanType[0..1] role xxx_ReferencedBeanType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ReferencedBeanType_icon between
+	ReferencedBeanType[0..1] role xxx_ReferencedBeanType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_ReferencedBeanType_referencedBeanName between
+	ReferencedBeanType[*] role xxx_ReferencedBeanType_referencedBeanName_src
+	ReferencedBeanNameType[1] role referencedBeanName
+end
+
+composition xxx_ReferencedBeanType_referencedBeanClass between
+	ReferencedBeanType[*] role xxx_ReferencedBeanType_referencedBeanClass_src
+	ReferencedBeanClassType[1] role referencedBeanClass
+end
+
+composition xxx_RendererType_description between
+	RendererType[0..1] role xxx_RendererType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_RendererType_displayName between
+	RendererType[0..1] role xxx_RendererType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_RendererType_icon between
+	RendererType[0..1] role xxx_RendererType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_RendererType_componentFamily between
+	RendererType[*] role xxx_RendererType_componentFamily_src
+	ComponentFamilyType[1] role componentFamily
+end
+
+composition xxx_RendererType_rendererType between
+	RendererType[*] role xxx_RendererType_rendererType_src
+	RendererTypeType[1] role rendererType
+end
+
+composition xxx_RendererType_rendererClass between
+	RendererType[*] role xxx_RendererType_rendererClass_src
+	RendererClassType[1] role rendererClass
+end
+
+composition xxx_RendererType_facet between
+	RendererType[0..1] role xxx_RendererType_facet_src
+	FacetType[*] role facet
+end
+
+composition xxx_RendererType_attribute between
+	RendererType[0..1] role xxx_RendererType_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_RendererType_rendererExtension between
+	RendererType[0..1] role xxx_RendererType_rendererExtension_src
+	RendererExtensionType[*] role rendererExtension
+end
+
+composition xxx_RenderKitType_description between
+	RenderKitType[0..1] role xxx_RenderKitType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_RenderKitType_displayName between
+	RenderKitType[0..1] role xxx_RenderKitType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_RenderKitType_icon between
+	RenderKitType[0..1] role xxx_RenderKitType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_RenderKitType_renderKitId between
+	RenderKitType[*] role xxx_RenderKitType_renderKitId_src
+	RenderKitIdType[0..1] role renderKitId
+end
+
+composition xxx_RenderKitType_renderKitClass between
+	RenderKitType[*] role xxx_RenderKitType_renderKitClass_src
+	RenderKitClassType[0..1] role renderKitClass
+end
+
+composition xxx_RenderKitType_renderer between
+	RenderKitType[0..1] role xxx_RenderKitType_renderer_src
+	RendererType[*] role renderer
+end
+
+composition xxx_RenderKitType_clientBehaviorRenderer between
+	RenderKitType[0..1] role xxx_RenderKitType_clientBehaviorRenderer_src
+	ClientBehaviorRendererType[*] role clientBehaviorRenderer
+end
+
+composition xxx_RenderKitType_renderKitExtension between
+	RenderKitType[0..1] role xxx_RenderKitType_renderKitExtension_src
+	RenderKitExtensionType[*] role renderKitExtension
+end
+
+composition xxx_SystemEventListenerType_systemEventListenerClass between
+	SystemEventListenerType[*] role xxx_SystemEventListenerType_systemEventListenerClass_src
+	SystemEventListenerClassType[1] role systemEventListenerClass
+end
+
+composition xxx_SystemEventListenerType_systemEventClass between
+	SystemEventListenerType[*] role xxx_SystemEventListenerType_systemEventClass_src
+	SystemEventClassType[1] role systemEventClass
+end
+
+composition xxx_SystemEventListenerType_sourceClass between
+	SystemEventListenerType[*] role xxx_SystemEventListenerType_sourceClass_src
+	SourceClassType[0..1] role sourceClass
+end
+
+composition xxx_ValidatorType_description between
+	ValidatorType[0..1] role xxx_ValidatorType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ValidatorType_displayName between
+	ValidatorType[0..1] role xxx_ValidatorType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ValidatorType_icon between
+	ValidatorType[0..1] role xxx_ValidatorType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_ValidatorType_validatorId between
+	ValidatorType[*] role xxx_ValidatorType_validatorId_src
+	ValidatorIdType[1] role validatorId
+end
+
+composition xxx_ValidatorType_validatorClass between
+	ValidatorType[*] role xxx_ValidatorType_validatorClass_src
+	ValidatorClassType[1] role validatorClass
+end
+
+composition xxx_ValidatorType_attribute between
+	ValidatorType[0..1] role xxx_ValidatorType_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_ValidatorType_property between
+	ValidatorType[0..1] role xxx_ValidatorType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_ValidatorType_validatorExtension between
+	ValidatorType[0..1] role xxx_ValidatorType_validatorExtension_src
+	ValidatorExtensionType[*] role validatorExtension
+end
+
+composition xxx_ResourceBundleType_description between
+	ResourceBundleType[0..1] role xxx_ResourceBundleType_description_src
+	DescriptionType[*] role description
+end
+
+composition xxx_ResourceBundleType_displayName between
+	ResourceBundleType[0..1] role xxx_ResourceBundleType_displayName_src
+	DisplayNameType[*] role displayName
+end
+
+composition xxx_ResourceBundleType_icon between
+	ResourceBundleType[0..1] role xxx_ResourceBundleType_icon_src
+	IconType[*] role icon
+end
+
+association xxx_ResourceBundleType_baseName between
+	ResourceBundleType[*] role xxx_ResourceBundleType_baseName_src
+	BaseNameType[0..1] role baseName
+end
+
+association xxx_ResourceBundleType_var between
+	ResourceBundleType[*] role xxx_ResourceBundleType_var_src
+	VarType[0..1] role var
+end
+

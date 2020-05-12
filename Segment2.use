@@ -1,0 +1,186 @@
+model segment2
+enum ImageValueType{
+default
+}
+
+class SegmentModel
+attributes
+	name : String
+operations
+end
+
+class PrimitivesDef
+attributes
+operations
+end
+
+class PrimitivesPackage
+attributes
+	name : String
+operations
+end
+
+class ImageValueParams
+attributes
+	param : String
+operations
+end
+
+class PrimitivesType
+attributes
+	name : String
+	initValue : String
+	nullValue : Boolean
+	imageValue : ImageValueType
+operations
+end
+
+class QualifierDefs
+attributes
+operations
+end
+
+class Segment
+attributes
+	name : String
+	unqualified : Boolean
+operations
+end
+
+class Qualifier
+attributes
+	name : String
+	desc : String
+operations
+end
+
+class Field
+attributes
+	name : String
+	length : Integer
+operations
+end
+
+class AdaMappings
+attributes
+operations
+end
+
+class FieldMapping
+attributes
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	isNullAllowed : Boolean
+operations
+end
+
+class FormatDefs
+attributes
+operations
+end
+
+class Format
+attributes
+	name : String
+operations
+end
+
+composition xxx_SegmentModel_primitives between
+	SegmentModel[*] role xxx_SegmentModel_primitives_src
+	PrimitivesDef[0..1] role primitives
+end
+
+composition xxx_SegmentModel_formats between
+	SegmentModel[*] role xxx_SegmentModel_formats_src
+	FormatDefs[0..1] role formats
+end
+
+composition xxx_SegmentModel_qualifierDefs between
+	SegmentModel[*] role xxx_SegmentModel_qualifierDefs_src
+	QualifierDefs[0..1] role qualifierDefs
+end
+
+composition xxx_SegmentModel_segments between
+	SegmentModel[0..1] role xxx_SegmentModel_segments_src
+	Segment[*] role segments
+end
+
+composition xxx_PrimitivesDef_packages between
+	PrimitivesDef[0..1] role xxx_PrimitivesDef_packages_src
+	PrimitivesPackage[*] role packages
+end
+
+composition xxx_PrimitivesDef_types between
+	PrimitivesDef[0..1] role xxx_PrimitivesDef_types_src
+	PrimitivesType[*] role types
+end
+
+association xxx_PrimitivesType_package between
+	PrimitivesType[*] role xxx_PrimitivesType_package_src
+	PrimitivesPackage[0..1] role package
+end
+
+composition xxx_PrimitivesType_params between
+	PrimitivesType[*] role xxx_PrimitivesType_params_src
+	ImageValueParams[0..1] role params
+end
+
+composition xxx_QualifierDefs_qualifiers between
+	QualifierDefs[0..1] role xxx_QualifierDefs_qualifiers_src
+	Qualifier[*] role qualifiers
+end
+
+association xxx_Segment_qualifiers between
+	Segment[0..1] role xxx_Segment_qualifiers_src
+	Qualifier[*] role qualifiers
+end
+
+composition xxx_Segment_fields between
+	Segment[0..1] role xxx_Segment_fields_src
+	Field[*] role fields
+end
+
+composition xxx_Segment_adaMapping between
+	Segment[*] role xxx_Segment_adaMapping_src
+	AdaMappings[0..1] role adaMapping
+end
+
+association xxx_Field_format between
+	Field[*] role xxx_Field_format_src
+	Format[0..1] role format
+end
+
+composition xxx_AdaMappings_fieldMapping between
+	AdaMappings[0..1] role xxx_AdaMappings_fieldMapping_src
+	FieldMapping[*] role fieldMapping
+end
+
+association xxx_FieldMapping_fields between
+	FieldMapping[0..1] role xxx_FieldMapping_fields_src
+	Field[*] role fields
+end
+
+composition xxx_FieldMapping_attribute between
+	FieldMapping[0..1] role xxx_FieldMapping_attribute_src
+	Attribute[*] role attribute
+end
+
+association xxx_Attribute_qualifiers between
+	Attribute[0..1] role xxx_Attribute_qualifiers_src
+	Qualifier[*] role qualifiers
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	PrimitivesType[0..1] role type
+end
+
+composition xxx_FormatDefs_formats between
+	FormatDefs[0..1] role xxx_FormatDefs_formats_src
+	Format[*] role formats
+end
+

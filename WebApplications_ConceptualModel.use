@@ -1,0 +1,256 @@
+model CompleteWebApplication
+class HyperLink
+attributes
+operations
+end
+
+class ClientPage
+attributes
+operations
+end
+
+class ClientPageModule
+attributes
+operations
+end
+
+class LogicInterface<ClientPageModule
+attributes
+operations
+end
+
+class DesignElement<ClientPageModule
+attributes
+operations
+end
+
+class ServerPage
+attributes
+operations
+end
+
+class ServerPageModule
+attributes
+operations
+end
+
+class DesignModule<ServerPageModule
+attributes
+operations
+end
+
+class LogicModule<ServerPageModule
+attributes
+operations
+end
+
+class Link
+attributes
+operations
+end
+
+class BeginUseCase<Link
+attributes
+operations
+end
+
+class UseCase<Link
+attributes
+operations
+end
+
+class LogicElement
+attributes
+operations
+end
+
+class Alternative<LogicElement
+attributes
+operations
+end
+
+class UserDecision<LogicElement
+attributes
+operations
+end
+
+class ServerDecision<LogicElement
+attributes
+operations
+end
+
+class Processor<LogicElement
+attributes
+operations
+end
+
+class Renderer<LogicElement
+attributes
+operations
+end
+
+class Data
+attributes
+operations
+end
+
+association xxx_HyperLink_server between
+	HyperLink[0..1] role xxx_HyperLink_server_src
+	ServerPage[*] role server
+end
+
+association xxx_ClientPage_hyperlink between
+	ClientPage[*] role xxx_ClientPage_hyperlink_src
+	HyperLink[1] role hyperlink
+end
+
+composition xxx_ClientPageModule_consistsOf between
+	ClientPageModule[*] role xxx_ClientPageModule_consistsOf_src
+	ClientPage[1] role consistsOf
+end
+
+association xxx_ClientPageModule_representsSMP between
+	ClientPageModule[*] role xxx_ClientPageModule_representsSMP_src
+	ServerPageModule[1] role representsSMP
+end
+
+association xxx_LogicInterface_represents between
+	LogicInterface[*] role xxx_LogicInterface_represents_src
+	LogicModule[1] role represents
+end
+
+association xxx_LogicInterface_generatedBy between
+	LogicInterface[*] role xxx_LogicInterface_generatedBy_src
+	Renderer[1] role generatedBy
+end
+
+association xxx_DesignElement_represents between
+	DesignElement[*] role xxx_DesignElement_represents_src
+	DesignModule[1] role represents
+end
+
+association xxx_ServerPage_link between
+	ServerPage[0..1] role xxx_ServerPage_link_src
+	HyperLink[*] role link
+end
+
+association xxx_ServerPage_generates between
+	ServerPage[0..1] role xxx_ServerPage_generates_src
+	ClientPage[*] role generates
+end
+
+composition xxx_ServerPage_module between
+	ServerPage[0..1] role xxx_ServerPage_module_src
+	ServerPageModule[1..*] role module
+end
+
+association xxx_ServerPageModule_contains between
+	ServerPageModule[0..1] role xxx_ServerPageModule_contains_src
+	ServerPage[1..*] role contains
+end
+
+association xxx_ServerPageModule_link between
+	ServerPageModule[*] role xxx_ServerPageModule_link_src
+	Link[1] role link
+end
+
+composition xxx_ServerPageModule_containsModule between
+	ServerPageModule[*] role xxx_ServerPageModule_containsModule_src
+	DesignModule[1] role containsModule
+end
+
+composition xxx_LogicModule_useCase between
+	LogicModule[0..1] role xxx_LogicModule_useCase_src
+	UseCase[1..*] role useCase
+end
+
+composition xxx_LogicModule_logicElement between
+	LogicModule[0..1] role xxx_LogicModule_logicElement_src
+	LogicElement[1..*] role logicElement
+end
+
+association xxx_Link_page between
+	Link[*] role xxx_Link_page_src
+	ServerPage[1] role page
+end
+
+association xxx_Link_posts between
+	Link[*] role xxx_Link_posts_src
+	Data[1] role posts
+end
+
+association xxx_BeginUseCase_useCase between
+	BeginUseCase[*] role xxx_BeginUseCase_useCase_src
+	UseCase[1] role useCase
+end
+
+composition xxx_UseCase_logicElem between
+	UseCase[0..1] role xxx_UseCase_logicElem_src
+	LogicElement[1..*] role logicElem
+end
+
+association xxx_LogicElement_uses between
+	LogicElement[0..1] role xxx_LogicElement_uses_src
+	UseCase[1..*] role uses
+end
+
+association xxx_LogicElement_generatedBy between
+	LogicElement[*] role xxx_LogicElement_generatedBy_src
+	LogicElement[1] role generatedBy
+end
+
+association xxx_LogicElement_next between
+	LogicElement[*] role xxx_LogicElement_next_src
+	LogicElement[1] role next
+end
+
+composition xxx_UserDecision_allows between
+	UserDecision[0..1] role xxx_UserDecision_allows_src
+	Alternative[1..*] role allows
+end
+
+association xxx_ServerDecision_evaluatesResultOf between
+	ServerDecision[*] role xxx_ServerDecision_evaluatesResultOf_src
+	Processor[1] role evaluatesResultOf
+end
+
+association xxx_Processor_persistentData between
+	Processor[0..1] role xxx_Processor_persistentData_src
+	Data[*] role persistentData
+end
+
+association xxx_Processor_inputData between
+	Processor[0..1] role xxx_Processor_inputData_src
+	Data[*] role inputData
+end
+
+association xxx_Processor_outputData between
+	Processor[0..1] role xxx_Processor_outputData_src
+	Data[1..*] role outputData
+end
+
+association xxx_Renderer_renders between
+	Renderer[0..1] role xxx_Renderer_renders_src
+	Data[1..*] role renders
+end
+
+association xxx_Data_renderer between
+	Data[0..1] role xxx_Data_renderer_src
+	Renderer[*] role renderer
+end
+
+association xxx_Data_persist between
+	Data[0..1] role xxx_Data_persist_src
+	Processor[*] role persist
+end
+
+association xxx_Data_uses between
+	Data[0..1] role xxx_Data_uses_src
+	Processor[*] role uses
+end
+
+association xxx_Data_computes between
+	Data[0..1] role xxx_Data_computes_src
+	Processor[*] role computes
+end
+

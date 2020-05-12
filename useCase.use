@@ -1,0 +1,77 @@
+model UseCase
+class Actor<NamedElement
+attributes
+operations
+end
+
+class UseCase<NamedElement
+attributes
+operations
+end
+
+class Extend
+attributes
+operations
+end
+
+class Include
+attributes
+operations
+end
+
+class UseCaseContainer
+attributes
+operations
+end
+
+class BehavioredClassifier
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Association<NamedElement
+attributes
+operations
+end
+
+composition xxx_UseCase_include between
+	UseCase[0..1] role xxx_UseCase_include_src
+	Include[1..*] role include
+end
+
+composition xxx_UseCase_extend between
+	UseCase[0..1] role xxx_UseCase_extend_src
+	Extend[1..*] role extend
+end
+
+association xxx_Extend_extension between
+	Extend[0..1] role xxx_Extend_extension_src
+	UseCase[1..*] role extension
+end
+
+association xxx_Include_includingCase between
+	Include[0..1] role xxx_Include_includingCase_src
+	UseCase[1..*] role includingCase
+end
+
+composition xxx_UseCaseContainer_ownedElement between
+	UseCaseContainer[0..1] role xxx_UseCaseContainer_ownedElement_src
+	NamedElement[*] role ownedElement
+end
+
+association xxx_Association_actor between
+	Association[*] role xxx_Association_actor_src
+	Actor[0..1] role actor
+end
+
+association xxx_Association_useCase between
+	Association[*] role xxx_Association_useCase_src
+	UseCase[0..1] role useCase
+end
+

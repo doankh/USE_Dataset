@@ -1,0 +1,125 @@
+model glucose
+enum AccessType{
+default
+}
+
+enum StatusType{
+default
+}
+
+enum UserActionType{
+default
+}
+
+enum CarbohydrateStatusType{
+default
+}
+
+class Person
+attributes
+	lastName : String
+	firstName : String
+	personID : String
+	status : StatusType
+operations
+	getName():String
+end
+
+class Patient<Person
+attributes
+	weight : String
+	medRecNum : String
+	studyID : String
+	birthdate : String
+	height : String
+operations
+	getBirthdateString():String
+	getTodayAgeYears():Integer
+	getTodayAgeDays():Integer
+	getDeltaAgeYears(date : String):Integer
+	getDeltaAgeDays(date : String):Integer
+end
+
+class User<Person
+attributes
+	accountRights : AccessType
+	accountName : String
+	passwordDigest : String
+operations
+end
+
+class ClinicalDecision
+attributes
+	decisionTimeStamp : String
+	observationDate : String
+	patientWeight : Real
+	patientHeight : Real
+	patientAgeDays : Integer
+	adviceText : String
+	rulesFiredText : String
+	rationaleText : String
+	declineComment : String
+	acceptComment : String
+	otherComment : String
+	userAction : UserActionType
+	minutesToNextEvaluation : Integer
+	decisionID : String
+	status : StatusType
+operations
+	advise(message : String)
+end
+
+class GlucoseDecision<ClinicalDecision
+attributes
+	previousGlucoseConcentration : Integer
+	previousObservationTime : String
+	serumGlucoseConcentration : Integer
+	currentInsulinDripRate : String
+	carbohydrateStatus : CarbohydrateStatusType
+	recommendedInsulinDripRate : String
+	recommendedInsulinBolus : String
+	recommendedGlucoseBolus : String
+	insulinMode : String
+operations
+end
+
+class IntensiveCareUnit
+attributes
+operations
+end
+
+composition xxx_Patient_decisions between
+	Patient[0..1] role xxx_Patient_decisions_src
+	GlucoseDecision[*] role decisions
+end
+
+association xxx_Patient_createdBy between
+	Patient[*] role xxx_Patient_createdBy_src
+	User[0..1] role createdBy
+end
+
+association xxx_User_createdBy between
+	User[*] role xxx_User_createdBy_src
+	User[0..1] role createdBy
+end
+
+association xxx_ClinicalDecision_createdBy between
+	ClinicalDecision[*] role xxx_ClinicalDecision_createdBy_src
+	User[0..1] role createdBy
+end
+
+association xxx_GlucoseDecision_patient between
+	GlucoseDecision[*] role xxx_GlucoseDecision_patient_src
+	Patient[1] role patient
+end
+
+composition xxx_IntensiveCareUnit_patients between
+	IntensiveCareUnit[0..1] role xxx_IntensiveCareUnit_patients_src
+	Patient[*] role patients
+end
+
+composition xxx_IntensiveCareUnit_users between
+	IntensiveCareUnit[0..1] role xxx_IntensiveCareUnit_users_src
+	User[*] role users
+end
+

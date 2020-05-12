@@ -1,0 +1,225 @@
+model model_
+enum Phase{
+default
+}
+
+enum Classifier{
+default
+}
+
+enum CrossValidationType{
+default
+}
+
+enum Features{
+default
+}
+
+enum ClassificationStyle{
+default
+}
+
+class ImproDiagram
+attributes
+operations
+	getElementsOfClass(class_ : String):DiagramElement
+end
+
+abstract class DiagramElement
+attributes
+	elementName : String
+	phase : Phase
+	elementComment : String
+operations
+end
+
+class SourceLinker
+attributes
+	sourceFilePath : String
+operations
+	getDependencies()
+end
+
+class DirInput<DiagramElement
+attributes
+	filter : String
+operations
+end
+
+class DirectoryType
+attributes
+	name : String
+operations
+end
+
+class ElementConnection
+attributes
+	connectionType : String
+operations
+end
+
+class Connector
+attributes
+	typeName : String
+operations
+end
+
+class CustomElement<DiagramElement
+attributes
+operations
+end
+
+class InputConnector<Connector
+attributes
+operations
+end
+
+class OutputConnector<Connector
+attributes
+operations
+end
+
+class ImagePreview<DiagramElement
+attributes
+operations
+end
+
+class Vignetting<DiagramElement
+attributes
+operations
+end
+
+class Crop<DiagramElement
+attributes
+	numberOfHorizontalPixels : Integer
+	numberOfVerticalPixels : Integer
+operations
+end
+
+class HistStretch<DiagramElement
+attributes
+operations
+end
+
+class NoiseRemove<DiagramElement
+attributes
+operations
+end
+
+class Multiplication<DiagramElement
+attributes
+operations
+end
+
+class SegAT<DiagramElement
+attributes
+	windowSize : Integer
+	at_threshold : Real
+	useMedian : Boolean
+operations
+end
+
+class SegFCM<DiagramElement
+attributes
+	fcm_clusters : Integer
+	fcm_options : String
+	fcm_threshold : Real
+operations
+end
+
+class SegFCMOff<DiagramElement
+attributes
+	fcm_off_clusters : Integer
+	fcm_off_options : String
+	fcm_off_threshold : Real
+operations
+end
+
+class SegCLN<DiagramElement
+attributes
+	clnLearningEpochs : Integer
+operations
+end
+
+class SegKM<DiagramElement
+attributes
+	KM_clusters : Integer
+operations
+end
+
+class SegKMOff<DiagramElement
+attributes
+	KM_Off_clusters : Integer
+operations
+end
+
+class ExtractFeatures<DiagramElement
+attributes
+	classificationGroup : String
+operations
+end
+
+class ForwardSelection<DiagramElement
+attributes
+	crossValidationType : CrossValidationType
+	classifiers : Classifier
+	features : Features
+operations
+end
+
+class FullSelection<DiagramElement
+attributes
+	crossValidationType : CrossValidationType
+	minimumFeatures : Integer
+	maximumFeatures : Integer
+	features : Features
+operations
+end
+
+class Classification<DiagramElement
+attributes
+	classificationStyle : ClassificationStyle
+	features : Features
+operations
+end
+
+composition xxx_ImproDiagram_elements between
+	ImproDiagram[0..1] role xxx_ImproDiagram_elements_src
+	DiagramElement[*] role elements
+end
+
+composition xxx_DiagramElement_connections between
+	DiagramElement[0..1] role xxx_DiagramElement_connections_src
+	ElementConnection[*] role connections
+end
+
+composition xxx_DiagramElement_inputs between
+	DiagramElement[0..1] role xxx_DiagramElement_inputs_src
+	InputConnector[*] role inputs
+end
+
+composition xxx_DiagramElement_outputs between
+	DiagramElement[0..1] role xxx_DiagramElement_outputs_src
+	OutputConnector[*] role outputs
+end
+
+association xxx_DiagramElement_connectedWith between
+	DiagramElement[0..1] role xxx_DiagramElement_connectedWith_src
+	DiagramElement[*] role connectedWith
+end
+
+composition xxx_DiagramElement_sourceLinker between
+	DiagramElement[*] role xxx_DiagramElement_sourceLinker_src
+	SourceLinker[1] role sourceLinker
+end
+
+composition xxx_DirInput_directory between
+	DirInput[*] role xxx_DirInput_directory_src
+	DirectoryType[1] role directory
+end
+
+association xxx_ElementConnection_target between
+	ElementConnection[*] role xxx_ElementConnection_target_src
+	DiagramElement[0..1] role target
+end
+

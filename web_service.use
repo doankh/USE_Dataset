@@ -1,0 +1,65 @@
+model web_service
+class Service
+attributes
+operations
+end
+
+class Endpoint
+attributes
+	name : String
+operations
+end
+
+class MessageFormatter
+attributes
+	name : String
+operations
+end
+
+class FunctionProvider
+attributes
+	name : String
+operations
+end
+
+class GenericMessageFormatter<MessageFormatter
+attributes
+operations
+end
+
+class GenericFunctionProvider<FunctionProvider
+attributes
+operations
+end
+
+class DataRecogniser
+attributes
+	name : String
+operations
+end
+
+class GenericDataRecogniser<DataRecogniser
+attributes
+operations
+end
+
+composition xxx_Service_endpoint between
+	Service[*] role xxx_Service_endpoint_src
+	Endpoint[1] role endpoint
+end
+
+composition xxx_Endpoint_formatters between
+	Endpoint[0..1] role xxx_Endpoint_formatters_src
+	MessageFormatter[1..*] role formatters
+end
+
+composition xxx_Endpoint_functions between
+	Endpoint[0..1] role xxx_Endpoint_functions_src
+	FunctionProvider[1..*] role functions
+end
+
+composition xxx_Endpoint_recognisers between
+	Endpoint[0..1] role xxx_Endpoint_recognisers_src
+	DataRecogniser[*] role recognisers
+end
+

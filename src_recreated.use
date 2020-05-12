@@ -1,0 +1,86 @@
+model src_recreated
+class ECU
+attributes
+	Name : String
+operations
+end
+
+class rootElement
+attributes
+operations
+end
+
+class VirtualDevice
+attributes
+	Name : String
+operations
+end
+
+class Distributable
+attributes
+	Name : String
+operations
+end
+
+class ExecFrame
+attributes
+	Name : String
+operations
+end
+
+class Signal
+attributes
+	Name : String
+operations
+end
+
+association xxx_ECU_VirtualDevice between
+	ECU[0..1] role xxx_ECU_VirtualDevice_src
+	VirtualDevice[*] role VirtualDevice
+end
+
+composition xxx_rootElement_ecu between
+	rootElement[0..1] role xxx_rootElement_ecu_src
+	ECU[*] role ecu
+end
+
+composition xxx_rootElement_Signal between
+	rootElement[0..1] role xxx_rootElement_Signal_src
+	Signal[*] role Signal
+end
+
+composition xxx_rootElement_ExecFrame between
+	rootElement[0..1] role xxx_rootElement_ExecFrame_src
+	ExecFrame[*] role ExecFrame
+end
+
+composition xxx_rootElement_VirtualDevice between
+	rootElement[0..1] role xxx_rootElement_VirtualDevice_src
+	VirtualDevice[*] role VirtualDevice
+end
+
+composition xxx_rootElement_Distributable between
+	rootElement[0..1] role xxx_rootElement_Distributable_src
+	Distributable[*] role Distributable
+end
+
+association xxx_VirtualDevice_Distributable between
+	VirtualDevice[0..1] role xxx_VirtualDevice_Distributable_src
+	Distributable[*] role Distributable
+end
+
+association xxx_Distributable_ExecFrame between
+	Distributable[0..1] role xxx_Distributable_ExecFrame_src
+	ExecFrame[1..*] role ExecFrame
+end
+
+association xxx_ExecFrame_Provided between
+	ExecFrame[0..1] role xxx_ExecFrame_Provided_src
+	Signal[*] role Provided
+end
+
+association xxx_ExecFrame_Required between
+	ExecFrame[0..1] role xxx_ExecFrame_Required_src
+	Signal[*] role Required
+end
+

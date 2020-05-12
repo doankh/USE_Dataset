@@ -1,0 +1,179 @@
+model SimulinkStateFlow
+enum Units{
+	alpha,
+	beta
+}
+
+enum TriggerEnum{
+	alpha,
+	beta
+}
+
+enum EnableEnum{
+	alpha,
+	beta
+}
+
+class Simulink
+attributes
+operations
+end
+
+class System
+attributes
+	name : String
+operations
+end
+
+class Connector
+attributes
+operations
+end
+
+class Line
+attributes
+	name : String
+operations
+end
+
+class BranchPoint<Connector
+attributes
+operations
+end
+
+class Port<Connector
+attributes
+	units : Units
+operations
+end
+
+class Block
+attributes
+	description : String
+	name : String
+	priority : String
+	natagme : String
+	blockType : String
+operations
+end
+
+class BlockRef
+attributes
+operations
+end
+
+class Primitive<Block
+attributes
+	deadLine : String
+	period : String
+	executionTime : String
+operations
+end
+
+class OutPut<Port
+attributes
+	number : Integer
+operations
+end
+
+class TriggerPort<Port
+attributes
+	triggerType : TriggerEnum
+operations
+end
+
+class EnablePort<Port
+attributes
+	statesWhenEnabling : EnableEnum
+operations
+end
+
+class Reference<Block
+attributes
+	sourceBlock : String
+	sourceType : String
+operations
+end
+
+class Annotation
+attributes
+	text : String
+operations
+end
+
+class Parameter
+attributes
+	value : String
+operations
+end
+
+composition xxx_Simulink_subSystem between
+	Simulink[0..1] role xxx_Simulink_subSystem_src
+	System[*] role subSystem
+end
+
+association xxx_System_simulink between
+	System[*] role xxx_System_simulink_src
+	Simulink[1] role simulink
+end
+
+association xxx_System_blocks between
+	System[*] role xxx_System_blocks_src
+	Block[1] role blocks
+end
+
+association xxx_System_lines between
+	System[*] role xxx_System_lines_src
+	Line[1] role lines
+end
+
+composition xxx_System_subSystem between
+	System[0..1] role xxx_System_subSystem_src
+	System[*] role subSystem
+end
+
+association xxx_Line_block between
+	Line[*] role xxx_Line_block_src
+	Block[1] role block
+end
+
+association xxx_Line_system between
+	Line[*] role xxx_Line_system_src
+	System[1] role system
+end
+
+composition xxx_Block_lines between
+	Block[0..1] role xxx_Block_lines_src
+	Line[*] role lines
+end
+
+composition xxx_Block_parameters between
+	Block[0..1] role xxx_Block_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Block_annotations between
+	Block[0..1] role xxx_Block_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_Block_blockRefs between
+	Block[0..1] role xxx_Block_blockRefs_src
+	BlockRef[*] role blockRefs
+end
+
+association xxx_Block_system between
+	Block[*] role xxx_Block_system_src
+	System[1] role system
+end
+
+association xxx_Annotation_block between
+	Annotation[*] role xxx_Annotation_block_src
+	Block[1] role block
+end
+
+association xxx_Parameter_block between
+	Parameter[*] role xxx_Parameter_block_src
+	Block[1] role block
+end
+

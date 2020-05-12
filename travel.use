@@ -1,0 +1,139 @@
+model nowheretravel
+enum InsuranceType{
+default
+}
+
+abstract class Node
+attributes
+operations
+end
+
+class Start<Node
+attributes
+operations
+end
+
+class End<Node
+attributes
+operations
+end
+
+abstract class Item<Node
+attributes
+	name : String
+operations
+end
+
+class Flight<Item
+attributes
+	destinationTown : String
+	destinationCountry : String
+operations
+end
+
+class Hotel<Item
+attributes
+	hotelName : String
+operations
+end
+
+abstract class Tour<Item
+attributes
+operations
+end
+
+class TrekkingTour<Tour
+attributes
+operations
+end
+
+class ParachuteTour<Tour
+attributes
+operations
+end
+
+class CarRental<Item
+attributes
+operations
+end
+
+class Insurance<Item
+attributes
+	type : InsuranceType
+operations
+end
+
+class Travel
+attributes
+operations
+end
+
+class Data
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Connection
+attributes
+	name : String
+operations
+end
+
+association xxx_Node_outgoingConnections between
+	Node[0..1] role xxx_Node_outgoingConnections_src
+	Connection[*] role outgoingConnections
+end
+
+association xxx_Node_ingoingConnections between
+	Node[0..1] role xxx_Node_ingoingConnections_src
+	Connection[*] role ingoingConnections
+end
+
+composition xxx_Travel_start between
+	Travel[*] role xxx_Travel_start_src
+	Start[1] role start
+end
+
+composition xxx_Travel_data between
+	Travel[0..1] role xxx_Travel_data_src
+	Data[*] role data
+end
+
+composition xxx_Travel_end_ between
+	Travel[*] role xxx_Travel_end__src
+	End[1] role end_
+end
+
+composition xxx_Travel_connections between
+	Travel[0..1] role xxx_Travel_connections_src
+	Connection[*] role connections
+end
+
+composition xxx_Travel_items between
+	Travel[0..1] role xxx_Travel_items_src
+	Item[*] role items
+end
+
+composition xxx_Data_parameters between
+	Data[0..1] role xxx_Data_parameters_src
+	Parameter[1..*] role parameters
+end
+
+association xxx_Connection_sourceNode between
+	Connection[*] role xxx_Connection_sourceNode_src
+	Node[1] role sourceNode
+end
+
+association xxx_Connection_targetNode between
+	Connection[*] role xxx_Connection_targetNode_src
+	Node[1] role targetNode
+end
+

@@ -1,0 +1,105 @@
+model componentmodel
+abstract class Component
+attributes
+	name : String
+	description : String
+	authorName : String
+	authorEmail : String
+operations
+end
+
+class PrimitiveComponent<Component
+attributes
+operations
+end
+
+class CompositeComponent<Component
+attributes
+operations
+end
+
+class InPort<Port
+attributes
+operations
+end
+
+class OutPort<Port
+attributes
+operations
+end
+
+abstract class Port
+attributes
+	type : String
+	typePackage : String
+	name : String
+	description : String
+operations
+end
+
+abstract class Property
+attributes
+	name : String
+	description : String
+operations
+end
+
+class NumericProperty<Property
+attributes
+	minValue : Real
+	maxValue : Real
+	defaultValue : Real
+operations
+end
+
+class EnumProperty<Property
+attributes
+	literalValue : String
+operations
+end
+
+composition xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[1..*] role ports
+end
+
+composition xxx_PrimitiveComponent_properties between
+	PrimitiveComponent[0..1] role xxx_PrimitiveComponent_properties_src
+	Property[*] role properties
+end
+
+composition xxx_CompositeComponent_components between
+	CompositeComponent[0..1] role xxx_CompositeComponent_components_src
+	Component[1..*] role components
+end
+
+association xxx_InPort_delegatesTo between
+	InPort[0..1] role xxx_InPort_delegatesTo_src
+	InPort[*] role delegatesTo
+end
+
+association xxx_InPort_source between
+	InPort[*] role xxx_InPort_source_src
+	OutPort[0..1] role source
+end
+
+association xxx_InPort_delegatesFrom between
+	InPort[*] role xxx_InPort_delegatesFrom_src
+	InPort[0..1] role delegatesFrom
+end
+
+association xxx_OutPort_propagatesFrom between
+	OutPort[*] role xxx_OutPort_propagatesFrom_src
+	OutPort[0..1] role propagatesFrom
+end
+
+association xxx_OutPort_sink between
+	OutPort[0..1] role xxx_OutPort_sink_src
+	InPort[*] role sink
+end
+
+association xxx_OutPort_propagatesTo between
+	OutPort[0..1] role xxx_OutPort_propagatesTo_src
+	OutPort[*] role propagatesTo
+end
+

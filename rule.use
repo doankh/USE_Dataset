@@ -1,0 +1,72 @@
+model rules
+abstract class V__________DesktopRuleEngine_________V
+attributes
+operations
+end
+
+class NewElementRules
+attributes
+	name : String
+	deletable : Boolean
+operations
+end
+
+class RuleValue
+attributes
+operations
+end
+
+class AvailableRuleDefinitions
+attributes
+operations
+end
+
+class RemusTransferType
+attributes
+	name : String
+	id : String
+operations
+end
+
+class RuleAction
+attributes
+	name : String
+	infoTypeId : String
+	groovyMatcher : String
+	postProcessingInstructions : String
+operations
+end
+
+class RuleResult
+attributes
+	value : String
+	description : String
+	transferType : String
+operations
+end
+
+composition xxx_NewElementRules_transferTypes between
+	NewElementRules[0..1] role xxx_NewElementRules_transferTypes_src
+	RemusTransferType[*] role transferTypes
+end
+
+association xxx_AvailableRuleDefinitions_newElementRules between
+	AvailableRuleDefinitions[0..1] role xxx_AvailableRuleDefinitions_newElementRules_src
+	NewElementRules[*] role newElementRules
+end
+
+composition xxx_RemusTransferType_actions between
+	RemusTransferType[0..1] role xxx_RemusTransferType_actions_src
+	RuleAction[*] role actions
+end
+
+composition xxx_RuleAction_ruleValue between
+	RuleAction[*] role xxx_RuleAction_ruleValue_src
+	RuleValue[0..1] role ruleValue
+end
+
+composition xxx_RuleResult_actions between
+	RuleResult[0..1] role xxx_RuleResult_actions_src
+	RuleAction[1..*] role actions
+end
+

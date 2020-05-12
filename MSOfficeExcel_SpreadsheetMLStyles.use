@@ -1,0 +1,969 @@
+model SpreadsheetMLStyles
+enum DisplayDrawingObjectsType{
+	ddot_displayShapes,
+	ddot_placeHolders,
+	ddot_hideAll
+}
+
+enum CalculationWorkbookType{
+	cwt_automaticCalculation,
+	cwt_manualCalculation,
+	cwt_semiAutomaticCalculation
+}
+
+enum ExcelWorksheetTypeType{
+	ewt_Worksheet,
+	ewt_Chart,
+	ewt_Macro,
+	ewt_Dialog
+}
+
+enum VisibleType{
+	vt_SheetVisible,
+	vt_SheetHidden,
+	vt_SheetVeryHidden
+}
+
+enum EnableSelectionType{
+	est_UnlockedCells,
+	est_NoSelection
+}
+
+enum OrientationType{
+	ot_Landscape,
+	ot_Portrait
+}
+
+enum CommentsLayoutType{
+	clt_InPlace,
+	clt_PrintNone,
+	clt_SheetEnd
+}
+
+enum HorizontalAlignementType{
+	hat_CenterAcrossSelection,
+	hat_Fill,
+	hat_Left,
+	hat_Right,
+	hat_Justify,
+	hat_Distributed,
+	hat_Center,
+	hat_Automatic,
+	hat_JustifyDistributed
+}
+
+enum ReadingOrderType{
+	rot_RightToLeft,
+	rot_LeftToRight,
+	rot_Context
+}
+
+enum VerticalAlignementType{
+	vat_Top,
+	vat_Bottom,
+	vat_Justify,
+	vat_Distributed,
+	vat_Center,
+	vat_Automatic,
+	vat_JustifyDistributed
+}
+
+enum PositionType{
+	pt_Left,
+	pt_Top,
+	pt_Right,
+	pt_Bottom,
+	pt_DiagonalLeft,
+	pt_DiagonalRight
+}
+
+enum LineStyleType{
+	lst_None,
+	lst_Continuous,
+	lst_Dash,
+	lst_Dot,
+	lst_DashDot,
+	lst_DashDotDot,
+	lst_SlantDashDot,
+	lst_Double
+}
+
+enum UnderlineType{
+	ut_None,
+	ut_Single,
+	ut_Double,
+	ut_SingleAccounting,
+	ut_DoubleAccounting
+}
+
+enum VerticalAlignType{
+	vat_None,
+	vat_Subscript,
+	vat_Superscript
+}
+
+enum PatternType{
+	pt_None,
+	pt_Solid,
+	pt_Gray75,
+	pt_Gray50,
+	pt_Gray25,
+	pt_Gray125,
+	pt_Gray0625,
+	pt_HorzStripe,
+	pt_VertStripe,
+	pt_ReverseDiagStripe,
+	pt_DiagStripe,
+	pt_DiagCross,
+	pt_ThickDiagCross,
+	pt_ThinHorzStripe,
+	pt_ThinVertStripe,
+	pt_ThinReverseDiagStripe,
+	pt_ThinDiagStripe,
+	pt_ThinHorzCross,
+	pt_ThinDiagCross
+}
+
+enum ExcelNumberFormatType{
+	enft_General,
+	enft_General_Number,
+	enft_General_Date,
+	enft_Long_Date,
+	enft_Medium_Date,
+	enft_Short_Date,
+	enft_Long_Time,
+	enft_Medium_Time,
+	enft_Short_Time,
+	enft_Currency,
+	enft_Euro_Currency,
+	enft_Fixed,
+	enft_Standard,
+	enft_Percent,
+	enft_Scientific,
+	enft_Yes_No,
+	enft_True_False,
+	enft_On_Off
+}
+
+class DateTimeType
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+operations
+end
+
+class VersionType
+attributes
+	n : Integer
+	nn : Integer
+operations
+end
+
+abstract class ValueType
+attributes
+operations
+end
+
+class StringValue<ValueType
+attributes
+	value : String
+operations
+end
+
+class NumberValue<ValueType
+attributes
+	value : Real
+operations
+end
+
+class DateTimeTypeValue<ValueType
+attributes
+operations
+end
+
+class BooleanValue<ValueType
+attributes
+	value : Boolean
+operations
+end
+
+class ErrorValue<ValueType
+attributes
+operations
+end
+
+class DocumentPropertiesCollection
+attributes
+	title : String
+	subject : String
+	keywords : String
+	description : String
+	category : String
+	author : String
+	lastAuthor : String
+	manager : String
+	company : String
+	hyperlinkBase : String
+	revision : Integer
+	presentationFormat : String
+	guid : String
+	appName : String
+	totalTime : Integer
+	pages : Integer
+	words : Integer
+	characters : Integer
+	charactersWithSpaces : Integer
+	bytes : Integer
+	lines : Integer
+	paragraphs : Integer
+operations
+end
+
+class CustomDocumentPropertiesCollection
+attributes
+operations
+end
+
+class CustomDocumentProperty
+attributes
+	name : String
+operations
+end
+
+class SmartTagType
+attributes
+	namespaceuri : String
+	name : String
+	url : String
+operations
+end
+
+class SmartTagsCollection
+attributes
+operations
+end
+
+class Workbook
+attributes
+operations
+end
+
+class Worksheet
+attributes
+	name : String
+	protected : Boolean
+	rightToLeft : Boolean
+operations
+end
+
+abstract class StyledElement
+attributes
+operations
+end
+
+class Table<StyledElement
+attributes
+	defaultColumnWidth : Real
+	defaultRowHeight : Real
+	expandedColumnCount : Integer
+	expandedRowCount : Integer
+	leftCell : Integer
+	topCell : Integer
+	fullColumns : Boolean
+	fullRows : Boolean
+operations
+end
+
+abstract class TableElement<StyledElement
+attributes
+	index : Integer
+operations
+end
+
+abstract class ColOrRowElement<TableElement
+attributes
+	hidden : Boolean
+	span : Integer
+operations
+end
+
+class Column<ColOrRowElement
+attributes
+	autoFitWidth : Boolean
+	width : Real
+operations
+end
+
+class Row<ColOrRowElement
+attributes
+	autoFitHeight : Boolean
+	height : Real
+operations
+end
+
+class Cell<TableElement
+attributes
+	arrayRange : String
+	formula : String
+	hRef : String
+	mergeAcross : Real
+	mergeDown : Real
+operations
+end
+
+class Comment
+attributes
+	author : String
+	showAlways : Boolean
+operations
+end
+
+class Data
+attributes
+operations
+end
+
+class ExcelWorkbook
+attributes
+	selectedSheets : Integer
+	windowHidden : Boolean
+	hideHorizontalScrollBar : Boolean
+	hideVerticalScrollBar : Boolean
+	hideWorkbookTabs : Boolean
+	windowHeight : Real
+	windowWidth : Real
+	windowTopX : Real
+	windowTopY : Real
+	activeSheet : Integer
+	activeChart : String
+	firstVisibleSheet : Integer
+	hidePivotTableFieldList : Boolean
+	protectStructure : Boolean
+	protectWindows : Boolean
+	displayInkNotes : Boolean
+	embedSaveSmartTags : Boolean
+	futureVer : String
+	tabRatio : Integer
+	windowIconic : Boolean
+	displayDrawingObjects : DisplayDrawingObjectsType
+	createBackup : Boolean
+	calculation : CalculationWorkbookType
+	doNotCalculateBeforeSave : Boolean
+	date1904 : Boolean
+	refModeR1C1 : Boolean
+	iteration : Boolean
+	maxIterations : Integer
+	maxChange : Real
+	precisionAsDisplayed : Boolean
+	doNotSaveLinkValues : Boolean
+	noAutoRecover : Boolean
+	acceptLabelsInFormulas : Boolean
+	uncalced : Boolean
+operations
+end
+
+class WorksheetOptionsElt
+attributes
+	fitToPage : Boolean
+	doNotDisplayColHeaders : Boolean
+	doNotDisplayRowHeaders : Boolean
+	gridlineColor : String
+	name : String
+	excelWorksheetType : ExcelWorksheetTypeType
+	intlMacro : Boolean
+	unsynced : Boolean
+	selected : Boolean
+	codeName : String
+	displayPageBreak : Boolean
+	transitionExpressionEvaluation : Boolean
+	transitionFormulaEntry : Boolean
+	zoom : Integer
+	pageBreakZoom : Integer
+	showPageBreakZoom : Boolean
+	defaultRowHeight : Integer
+	defaultColumnWidth : Integer
+	standardWidth : Integer
+	visible : VisibleType
+	leftColumnVisible : Integer
+	displayRightToLeft : Boolean
+	gridlineColorIndex : Integer
+	displayFormulas : Boolean
+	doNotDisplayGridlines : Boolean
+	doNotDisplayHeadings : Boolean
+	doNotDisplayOutline : Boolean
+	applyAutomaticOutlineStyles : Boolean
+	noSummaryRowsBelowDetail : Boolean
+	noSummaryColumnsRightDetail : Boolean
+	doNotDisplayZeros : Boolean
+	activeRow : Integer
+	activeColumn : Integer
+	filterOn : Boolean
+	rangeSelection : String
+	topRowVisible : Integer
+	topRowBottomPane : Integer
+	leftColumnRightPane : Integer
+	activePane : Integer
+	splitHorizontal : Integer
+	splitVertical : Integer
+	freezePanes : Boolean
+	frozenNoSplit : Boolean
+	tabColorIndex : Integer
+	protectContentst : Boolean
+	protectObjects : Boolean
+	protectScenarios : Boolean
+	enableSelection : EnableSelectionType
+	allowFormatCells : Boolean
+	allowSizeCols : Boolean
+	allowSizeRows : Boolean
+	allowInsertCols : Boolean
+	allowInsertRows : Boolean
+	allowInsertHyperlinks : Boolean
+	allowDeleteCols : Boolean
+	allowDeleteRows : Boolean
+	allowSort : Boolean
+	allowFilter : Boolean
+	allowUsePivotTables : Boolean
+operations
+end
+
+class PageSetup
+attributes
+operations
+end
+
+class Layout
+attributes
+	orientation : OrientationType
+	centerHorizontal : Boolean
+	centerVertical : Boolean
+	startPageNumber : String
+operations
+end
+
+abstract class HeaderOrFooterElt
+attributes
+	margin : Real
+	data : String
+operations
+end
+
+class Header<HeaderOrFooterElt
+attributes
+operations
+end
+
+class Footer<HeaderOrFooterElt
+attributes
+operations
+end
+
+class PageMarginsInfo
+attributes
+	left : Real
+	right : Real
+	top : Real
+	bottom : Real
+operations
+end
+
+class Print
+attributes
+	fitWidth : Integer
+	fitHeight : Integer
+	leftToRight : Boolean
+	blackAndWhite : Boolean
+	draftQuality : Boolean
+	commentsLayout : CommentsLayoutType
+	scale : Integer
+	printErrors : String
+	validPrinterInfo : Boolean
+	paperSizeIndex : Integer
+	horizontalResolution : Integer
+	verticalResolution : Integer
+	gridlines : Boolean
+	numberOfCopies : Integer
+	rowColHeadings : Boolean
+operations
+end
+
+class StylesCollection
+attributes
+operations
+end
+
+class StyleType
+attributes
+	id : String
+	name : String
+operations
+end
+
+class ProtectionType
+attributes
+	protected : Boolean
+operations
+end
+
+class AlignmentType
+attributes
+	horizontal : HorizontalAlignementType
+	readingOrder : ReadingOrderType
+	indent : Real
+	rotate : Real
+	shrinkToFit : Boolean
+	vertical : VerticalAlignementType
+	verticalText : Boolean
+	wrapText : Boolean
+operations
+end
+
+class BordersType
+attributes
+operations
+end
+
+class BorderType
+attributes
+	position : PositionType
+	color : String
+	lineStyle : LineStyleType
+	weight : Real
+operations
+end
+
+class FontType
+attributes
+	bold : Boolean
+	color : String
+	fontName : String
+	italic : Boolean
+	outline : Boolean
+	shadow : Boolean
+	size : Real
+	strikeThrough : Boolean
+	underline : UnderlineType
+	verticalAlign : VerticalAlignType
+operations
+end
+
+class InteriorType
+attributes
+	color : String
+	pattern : PatternType
+	patternColor : String
+operations
+end
+
+class NumberFormatType
+attributes
+	format : ExcelNumberFormatType
+operations
+end
+
+class NamesType
+attributes
+operations
+end
+
+class NamedRange
+attributes
+	name : String
+	refersTo : String
+	hidden : Boolean
+operations
+end
+
+association xxx_ValueType_vt_data between
+	ValueType[*] role xxx_ValueType_vt_data_src
+	Data[1] role vt_data
+end
+
+composition xxx_DateTimeTypeValue_value between
+	DateTimeTypeValue[*] role xxx_DateTimeTypeValue_value_src
+	DateTimeType[1] role value
+end
+
+association xxx_DocumentPropertiesCollection_dp_workbook between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_dp_workbook_src
+	Workbook[1] role dp_workbook
+end
+
+composition xxx_DocumentPropertiesCollection_version between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_version_src
+	VersionType[0..1] role version
+end
+
+composition xxx_DocumentPropertiesCollection_lastPrinted between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_lastPrinted_src
+	DateTimeType[0..1] role lastPrinted
+end
+
+composition xxx_DocumentPropertiesCollection_created between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_created_src
+	DateTimeType[0..1] role created
+end
+
+composition xxx_DocumentPropertiesCollection_lastSaved between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_lastSaved_src
+	DateTimeType[0..1] role lastSaved
+end
+
+association xxx_CustomDocumentPropertiesCollection_cdp_workbook between
+	CustomDocumentPropertiesCollection[*] role xxx_CustomDocumentPropertiesCollection_cdp_workbook_src
+	Workbook[1] role cdp_workbook
+end
+
+composition xxx_CustomDocumentPropertiesCollection_customDocumentProperties between
+	CustomDocumentPropertiesCollection[0..1] role xxx_CustomDocumentPropertiesCollection_customDocumentProperties_src
+	CustomDocumentProperty[1..*] role customDocumentProperties
+end
+
+association xxx_CustomDocumentProperty_customDocumentProperty_cdpe between
+	CustomDocumentProperty[*] role xxx_CustomDocumentProperty_customDocumentProperty_cdpe_src
+	CustomDocumentPropertiesCollection[1] role customDocumentProperty_cdpe
+end
+
+composition xxx_CustomDocumentProperty_value between
+	CustomDocumentProperty[*] role xxx_CustomDocumentProperty_value_src
+	ValueType[1] role value
+end
+
+association xxx_SmartTagType_smartTagType_ste between
+	SmartTagType[*] role xxx_SmartTagType_smartTagType_ste_src
+	SmartTagsCollection[1] role smartTagType_ste
+end
+
+association xxx_SmartTagsCollection_st_workbook between
+	SmartTagsCollection[*] role xxx_SmartTagsCollection_st_workbook_src
+	Workbook[1] role st_workbook
+end
+
+association xxx_SmartTagsCollection_st_cell between
+	SmartTagsCollection[*] role xxx_SmartTagsCollection_st_cell_src
+	Cell[1] role st_cell
+end
+
+composition xxx_SmartTagsCollection_smartTagTypes between
+	SmartTagsCollection[0..1] role xxx_SmartTagsCollection_smartTagTypes_src
+	SmartTagType[*] role smartTagTypes
+end
+
+composition xxx_Workbook_wb_smartTags between
+	Workbook[*] role xxx_Workbook_wb_smartTags_src
+	SmartTagsCollection[0..1] role wb_smartTags
+end
+
+composition xxx_Workbook_wb_docProperties between
+	Workbook[*] role xxx_Workbook_wb_docProperties_src
+	DocumentPropertiesCollection[0..1] role wb_docProperties
+end
+
+composition xxx_Workbook_wb_customDocProperties between
+	Workbook[*] role xxx_Workbook_wb_customDocProperties_src
+	CustomDocumentPropertiesCollection[0..1] role wb_customDocProperties
+end
+
+composition xxx_Workbook_wb_excelWorkbook between
+	Workbook[*] role xxx_Workbook_wb_excelWorkbook_src
+	ExcelWorkbook[0..1] role wb_excelWorkbook
+end
+
+composition xxx_Workbook_wb_styles between
+	Workbook[*] role xxx_Workbook_wb_styles_src
+	StylesCollection[0..1] role wb_styles
+end
+
+composition xxx_Workbook_wb_names between
+	Workbook[*] role xxx_Workbook_wb_names_src
+	NamesType[0..1] role wb_names
+end
+
+composition xxx_Workbook_wb_worksheets between
+	Workbook[0..1] role xxx_Workbook_wb_worksheets_src
+	Worksheet[*] role wb_worksheets
+end
+
+association xxx_Worksheet_ws_workbook between
+	Worksheet[*] role xxx_Worksheet_ws_workbook_src
+	Workbook[1] role ws_workbook
+end
+
+composition xxx_Worksheet_ws_table between
+	Worksheet[*] role xxx_Worksheet_ws_table_src
+	Table[0..1] role ws_table
+end
+
+composition xxx_Worksheet_w_worksheetOptions between
+	Worksheet[*] role xxx_Worksheet_w_worksheetOptions_src
+	WorksheetOptionsElt[0..1] role w_worksheetOptions
+end
+
+association xxx_StyledElement_styleID between
+	StyledElement[*] role xxx_StyledElement_styleID_src
+	StyleType[0..1] role styleID
+end
+
+association xxx_Table_t_worksheet between
+	Table[*] role xxx_Table_t_worksheet_src
+	Worksheet[1] role t_worksheet
+end
+
+composition xxx_Table_t_cols between
+	Table[0..1] role xxx_Table_t_cols_src
+	Column[*] role t_cols
+end
+
+composition xxx_Table_t_rows between
+	Table[0..1] role xxx_Table_t_rows_src
+	Row[*] role t_rows
+end
+
+association xxx_Column_c_table between
+	Column[*] role xxx_Column_c_table_src
+	Table[1] role c_table
+end
+
+association xxx_Row_r_table between
+	Row[*] role xxx_Row_r_table_src
+	Table[1] role r_table
+end
+
+composition xxx_Row_r_cells between
+	Row[0..1] role xxx_Row_r_cells_src
+	Cell[*] role r_cells
+end
+
+composition xxx_Cell_c_smartTags between
+	Cell[0..1] role xxx_Cell_c_smartTags_src
+	SmartTagsCollection[*] role c_smartTags
+end
+
+association xxx_Cell_c_row between
+	Cell[*] role xxx_Cell_c_row_src
+	Row[1] role c_row
+end
+
+composition xxx_Cell_c_data between
+	Cell[*] role xxx_Cell_c_data_src
+	Data[0..1] role c_data
+end
+
+composition xxx_Cell_c_comment between
+	Cell[*] role xxx_Cell_c_comment_src
+	Comment[0..1] role c_comment
+end
+
+association xxx_Comment_c_cell between
+	Comment[*] role xxx_Comment_c_cell_src
+	Cell[1] role c_cell
+end
+
+composition xxx_Comment_com_data between
+	Comment[*] role xxx_Comment_com_data_src
+	Data[1] role com_data
+end
+
+association xxx_Data_d_cell between
+	Data[*] role xxx_Data_d_cell_src
+	Cell[1] role d_cell
+end
+
+association xxx_Data_d_comment between
+	Data[*] role xxx_Data_d_comment_src
+	Comment[1] role d_comment
+end
+
+composition xxx_Data_value between
+	Data[*] role xxx_Data_value_src
+	ValueType[1] role value
+end
+
+association xxx_ExcelWorkbook_ew_workbook between
+	ExcelWorkbook[*] role xxx_ExcelWorkbook_ew_workbook_src
+	Workbook[1] role ew_workbook
+end
+
+association xxx_WorksheetOptionsElt_wo_worksheet between
+	WorksheetOptionsElt[*] role xxx_WorksheetOptionsElt_wo_worksheet_src
+	Worksheet[1] role wo_worksheet
+end
+
+composition xxx_WorksheetOptionsElt_wo_pageSetup between
+	WorksheetOptionsElt[*] role xxx_WorksheetOptionsElt_wo_pageSetup_src
+	PageSetup[0..1] role wo_pageSetup
+end
+
+composition xxx_WorksheetOptionsElt_wo_print between
+	WorksheetOptionsElt[*] role xxx_WorksheetOptionsElt_wo_print_src
+	Print[0..1] role wo_print
+end
+
+association xxx_PageSetup_ps_worksheetOptions between
+	PageSetup[*] role xxx_PageSetup_ps_worksheetOptions_src
+	WorksheetOptionsElt[1] role ps_worksheetOptions
+end
+
+composition xxx_PageSetup_ps_layout between
+	PageSetup[*] role xxx_PageSetup_ps_layout_src
+	Layout[0..1] role ps_layout
+end
+
+composition xxx_PageSetup_ps_header between
+	PageSetup[*] role xxx_PageSetup_ps_header_src
+	Header[0..1] role ps_header
+end
+
+composition xxx_PageSetup_ps_footer between
+	PageSetup[*] role xxx_PageSetup_ps_footer_src
+	Footer[0..1] role ps_footer
+end
+
+composition xxx_PageSetup_ps_pageMargins between
+	PageSetup[*] role xxx_PageSetup_ps_pageMargins_src
+	PageMarginsInfo[0..1] role ps_pageMargins
+end
+
+association xxx_Layout_l_pageSetup between
+	Layout[*] role xxx_Layout_l_pageSetup_src
+	PageSetup[1] role l_pageSetup
+end
+
+association xxx_Header_h_pageSetup between
+	Header[*] role xxx_Header_h_pageSetup_src
+	PageSetup[1] role h_pageSetup
+end
+
+association xxx_Footer_f_pageSetup between
+	Footer[*] role xxx_Footer_f_pageSetup_src
+	PageSetup[1] role f_pageSetup
+end
+
+association xxx_PageMarginsInfo_pm_pageSetup between
+	PageMarginsInfo[*] role xxx_PageMarginsInfo_pm_pageSetup_src
+	PageSetup[1] role pm_pageSetup
+end
+
+association xxx_Print_p_worksheetOptions between
+	Print[*] role xxx_Print_p_worksheetOptions_src
+	WorksheetOptionsElt[1] role p_worksheetOptions
+end
+
+association xxx_StylesCollection_s_workbook between
+	StylesCollection[*] role xxx_StylesCollection_s_workbook_src
+	Workbook[1] role s_workbook
+end
+
+composition xxx_StylesCollection_style between
+	StylesCollection[0..1] role xxx_StylesCollection_style_src
+	StyleType[*] role style
+end
+
+association xxx_StyleType_st_styles between
+	StyleType[*] role xxx_StyleType_st_styles_src
+	StylesCollection[1] role st_styles
+end
+
+association xxx_StyleType_st_styledElement between
+	StyleType[*] role xxx_StyleType_st_styledElement_src
+	StyledElement[1] role st_styledElement
+end
+
+association xxx_StyleType_parent between
+	StyleType[*] role xxx_StyleType_parent_src
+	StyleType[0..1] role parent
+end
+
+association xxx_StyleType_st_parent between
+	StyleType[*] role xxx_StyleType_st_parent_src
+	StyleType[1] role st_parent
+end
+
+composition xxx_StyleType_alignment between
+	StyleType[*] role xxx_StyleType_alignment_src
+	AlignmentType[0..1] role alignment
+end
+
+composition xxx_StyleType_borders between
+	StyleType[*] role xxx_StyleType_borders_src
+	BordersType[0..1] role borders
+end
+
+composition xxx_StyleType_font between
+	StyleType[*] role xxx_StyleType_font_src
+	FontType[0..1] role font
+end
+
+composition xxx_StyleType_interior between
+	StyleType[*] role xxx_StyleType_interior_src
+	InteriorType[0..1] role interior
+end
+
+composition xxx_StyleType_numberFormat between
+	StyleType[*] role xxx_StyleType_numberFormat_src
+	NumberFormatType[0..1] role numberFormat
+end
+
+composition xxx_StyleType_protection between
+	StyleType[*] role xxx_StyleType_protection_src
+	ProtectionType[0..1] role protection
+end
+
+association xxx_ProtectionType_pt_styleType between
+	ProtectionType[*] role xxx_ProtectionType_pt_styleType_src
+	StyleType[1] role pt_styleType
+end
+
+association xxx_AlignmentType_at_styleType between
+	AlignmentType[*] role xxx_AlignmentType_at_styleType_src
+	StyleType[1] role at_styleType
+end
+
+association xxx_BordersType_bt_styleType between
+	BordersType[*] role xxx_BordersType_bt_styleType_src
+	StyleType[1] role bt_styleType
+end
+
+composition xxx_BordersType_border between
+	BordersType[*] role xxx_BordersType_border_src
+	BorderType[0..6] role border
+end
+
+association xxx_BorderType_bt_bordersType between
+	BorderType[*] role xxx_BorderType_bt_bordersType_src
+	BordersType[1] role bt_bordersType
+end
+
+association xxx_FontType_ft_styleType between
+	FontType[*] role xxx_FontType_ft_styleType_src
+	StyleType[1] role ft_styleType
+end
+
+association xxx_InteriorType_it_styleType between
+	InteriorType[*] role xxx_InteriorType_it_styleType_src
+	StyleType[1] role it_styleType
+end
+
+association xxx_NumberFormatType_nft_styleType between
+	NumberFormatType[*] role xxx_NumberFormatType_nft_styleType_src
+	StyleType[1] role nft_styleType
+end
+
+association xxx_NamesType_nt_workbook between
+	NamesType[*] role xxx_NamesType_nt_workbook_src
+	Workbook[1] role nt_workbook
+end
+
+composition xxx_NamesType_namedRanges between
+	NamesType[0..1] role xxx_NamesType_namedRanges_src
+	NamedRange[*] role namedRanges
+end
+
+association xxx_NamedRange_nr_namesType between
+	NamedRange[*] role xxx_NamedRange_nr_namesType_src
+	NamesType[1] role nr_namesType
+end
+

@@ -1,0 +1,109 @@
+model constraintpuzzler
+class Puzzle
+attributes
+	name : String
+operations
+end
+
+class Grid
+attributes
+operations
+end
+
+class Cell
+attributes
+	values : String
+operations
+end
+
+class Solver
+attributes
+operations
+	solve()
+end
+
+class SolverPlugin
+attributes
+operations
+end
+
+class ConstraintGroup
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+composition xxx_Puzzle_grid between
+	Puzzle[*] role xxx_Puzzle_grid_src
+	Grid[1] role grid
+end
+
+composition xxx_Puzzle_constraintGroups between
+	Puzzle[0..1] role xxx_Puzzle_constraintGroups_src
+	ConstraintGroup[*] role constraintGroups
+end
+
+composition xxx_Puzzle_solver between
+	Puzzle[*] role xxx_Puzzle_solver_src
+	Solver[1] role solver
+end
+
+association xxx_Grid_puzzle between
+	Grid[*] role xxx_Grid_puzzle_src
+	Puzzle[1] role puzzle
+end
+
+composition xxx_Grid_cells between
+	Grid[0..1] role xxx_Grid_cells_src
+	Cell[*] role cells
+end
+
+association xxx_Cell_grid between
+	Cell[*] role xxx_Cell_grid_src
+	Grid[1] role grid
+end
+
+association xxx_Cell_constraintGroups between
+	Cell[0..1] role xxx_Cell_constraintGroups_src
+	ConstraintGroup[*] role constraintGroups
+end
+
+association xxx_Solver_puzzle between
+	Solver[*] role xxx_Solver_puzzle_src
+	Puzzle[1] role puzzle
+end
+
+composition xxx_Solver_solverPlugins between
+	Solver[0..1] role xxx_Solver_solverPlugins_src
+	SolverPlugin[*] role solverPlugins
+end
+
+association xxx_SolverPlugin_solver between
+	SolverPlugin[*] role xxx_SolverPlugin_solver_src
+	Solver[1] role solver
+end
+
+association xxx_ConstraintGroup_puzzle between
+	ConstraintGroup[*] role xxx_ConstraintGroup_puzzle_src
+	Puzzle[1] role puzzle
+end
+
+composition xxx_ConstraintGroup_constraints_ between
+	ConstraintGroup[0..1] role xxx_ConstraintGroup_constraints__src
+	Constraint[*] role constraints_
+end
+
+association xxx_ConstraintGroup_cells between
+	ConstraintGroup[0..1] role xxx_ConstraintGroup_cells_src
+	Cell[*] role cells
+end
+
+association xxx_Constraint_constraintGroup between
+	Constraint[*] role xxx_Constraint_constraintGroup_src
+	ConstraintGroup[1] role constraintGroup
+end
+

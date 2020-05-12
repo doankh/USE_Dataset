@@ -1,0 +1,135 @@
+model projet
+class EvolutionRule<Rule
+attributes
+operations
+end
+
+class Topology
+attributes
+	neighborSize : Integer
+operations
+end
+
+class Dimension
+attributes
+	size : Integer
+	isCircular : Boolean
+operations
+end
+
+class InitialisationRule<Rule
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+class Filter
+attributes
+operations
+end
+
+class BinaryExp<Expression
+attributes
+operations
+end
+
+class Plus<BinaryExp
+attributes
+operations
+end
+
+class Minus<BinaryExp
+attributes
+operations
+end
+
+class Mult<BinaryExp
+attributes
+operations
+end
+
+class Div<BinaryExp
+attributes
+operations
+end
+
+class Max<BinaryExp
+attributes
+operations
+end
+
+class Min<BinaryExp
+attributes
+operations
+end
+
+class Greater<BinaryExp
+attributes
+operations
+end
+
+class Lower<BinaryExp
+attributes
+operations
+end
+
+class Equals<BinaryExp
+attributes
+operations
+end
+
+class Constant<Expression
+attributes
+	integerValue : Integer
+operations
+end
+
+class If<Expression
+attributes
+operations
+end
+
+composition xxx_Topology_dimensions between
+	Topology[0..1] role xxx_Topology_dimensions_src
+	Dimension[1..*] role dimensions
+end
+
+composition xxx_Rule_condition between
+	Rule[*] role xxx_Rule_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_BinaryExp_rhs between
+	BinaryExp[*] role xxx_BinaryExp_rhs_src
+	Expression[1] role rhs
+end
+
+composition xxx_BinaryExp_lhs between
+	BinaryExp[*] role xxx_BinaryExp_lhs_src
+	Expression[1] role lhs
+end
+
+composition xxx_If_condition between
+	If[*] role xxx_If_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_If_thenPart between
+	If[*] role xxx_If_thenPart_src
+	Expression[0..1] role thenPart
+end
+
+composition xxx_If_elsePart between
+	If[*] role xxx_If_elsePart_src
+	Expression[0..1] role elsePart
+end
+

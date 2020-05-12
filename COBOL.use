@@ -1,0 +1,168 @@
+model COBOL
+enum COBOLUsageValue{
+	cuv_binary,
+	cuv_dbcs,
+	cuv_double,
+	cuv_display,
+	cuv_float,
+	cuv_index,
+	cuv_objectReference,
+	cuv_packedDecimal,
+	cuv_pointer,
+	cuv_procedurePointer
+}
+
+enum COBOLInitialValueKind{
+	civk_string_value,
+	civk_low_value,
+	civk_high_value,
+	civk_zero_value,
+	civk_quotes,
+	civk_null,
+	civk_all_literal
+}
+
+class COBOLElement
+attributes
+	level : String
+	refined : Boolean
+	name : String
+operations
+end
+
+class COBOLClassifier
+attributes
+	typeded : Boolean
+	name : String
+operations
+end
+
+class COBOLSimpleType<COBOLClassifier
+attributes
+	usageValue : COBOLUsageValue
+	pictureString : String
+	usage : Boolean
+operations
+end
+
+class COBOLComposedType<COBOLClassifier
+attributes
+operations
+end
+
+class COBOLElementInitialValue
+attributes
+	initVal : String
+	valueKind : COBOLInitialValueKind
+operations
+end
+
+class COBOL88Element
+attributes
+	name : String
+operations
+end
+
+class COBOL88ElementValue
+attributes
+	lowerLimit : String
+	upperLimit : String
+	range : Boolean
+operations
+end
+
+class COBOLRedefiningElement<COBOLElement
+attributes
+operations
+end
+
+class COBOL66Element
+attributes
+	name : String
+operations
+end
+
+class COBOLSourceText
+attributes
+	source : String
+	fileName : String
+operations
+end
+
+class COBOLFixedLengthArray
+attributes
+	maxUpper : Integer
+operations
+end
+
+class COBOLVariableLengthArray<COBOLFixedLengthArray
+attributes
+	minUpper : Integer
+operations
+end
+
+association xxx_COBOLElement_sharedType between
+	COBOLElement[*] role xxx_COBOLElement_sharedType_src
+	COBOLClassifier[1] role sharedType
+end
+
+association xxx_COBOLElement_group between
+	COBOLElement[*] role xxx_COBOLElement_group_src
+	COBOLComposedType[0..1] role group
+end
+
+association xxx_COBOLElement_initial between
+	COBOLElement[0..1] role xxx_COBOLElement_initial_src
+	COBOLElementInitialValue[*] role initial
+end
+
+composition xxx_COBOLElement_contains between
+	COBOLElement[0..1] role xxx_COBOLElement_contains_src
+	COBOL88Element[*] role contains
+end
+
+association xxx_COBOLElement_source between
+	COBOLElement[*] role xxx_COBOLElement_source_src
+	COBOLSourceText[1] role source
+end
+
+composition xxx_COBOLElement_array between
+	COBOLElement[*] role xxx_COBOLElement_array_src
+	COBOLFixedLengthArray[0..1] role array
+end
+
+association xxx_COBOLClassifier_typedElements between
+	COBOLClassifier[0..1] role xxx_COBOLClassifier_typedElements_src
+	COBOLElement[*] role typedElements
+end
+
+composition xxx_COBOLComposedType_elements between
+	COBOLComposedType[0..1] role xxx_COBOLComposedType_elements_src
+	COBOLElement[*] role elements
+end
+
+composition xxx_COBOL88Element_has between
+	COBOL88Element[0..1] role xxx_COBOL88Element_has_src
+	COBOL88ElementValue[1..*] role has
+end
+
+association xxx_COBOLRedefiningElement_redefines between
+	COBOLRedefiningElement[*] role xxx_COBOLRedefiningElement_redefines_src
+	COBOLElement[1] role redefines_
+end
+
+association xxx_COBOL66Element_end_ between
+	COBOL66Element[*] role xxx_COBOL66Element_end__src
+	COBOLElement[0..1] role end_
+end
+
+association xxx_COBOL66Element_start between
+	COBOL66Element[*] role xxx_COBOL66Element_start_src
+	COBOLElement[1] role start
+end
+
+association xxx_COBOLVariableLengthArray_dependingOn between
+	COBOLVariableLengthArray[*] role xxx_COBOLVariableLengthArray_dependingOn_src
+	COBOLElement[1] role dependingOn
+end
+

@@ -1,0 +1,323 @@
+model PrimitiveTypes
+enum SchedulingType{
+	FCFS,
+	preemptive_Priority,
+	head_of_line,
+	random
+}
+
+enum PhaseType{
+	stochastic,
+	deterministic
+}
+
+enum CallType{
+	synchronous,
+	asynchronous,
+	forwording
+}
+
+enum LinkType{
+	and_Fork,
+	and_join,
+	basic,
+	or_Fork,
+	or_join
+}
+
+enum TaskType{
+	a_reference,
+	non_reference
+}
+
+class LQN
+attributes
+	name : String
+	comment : String
+	author : String
+operations
+end
+
+class Task
+attributes
+	name : String
+	type : TaskType
+	priority : Integer
+	mutliplicity : Integer
+	replicas : Integer
+operations
+end
+
+class Processor
+attributes
+	name : String
+	scheduling : SchedulingType
+	mutliplicity : Integer
+	replicas : Integer
+	spped : Integer
+operations
+end
+
+class Entry
+attributes
+	name : String
+	num_Phase : Integer
+	arrival_Rate : Integer
+operations
+end
+
+class Phase
+attributes
+	number : Integer
+	type : PhaseType
+	think_Time : Integer
+	execution_Demand : Integer
+	COV : Integer
+operations
+end
+
+class Activity
+attributes
+	name : String
+	arrival_Rate : Integer
+operations
+end
+
+class Link
+attributes
+	type : LinkType
+	mean_Links : Integer
+operations
+end
+
+class CallPhase
+attributes
+	mean_Calls : Integer
+operations
+end
+
+class Call
+attributes
+	num_Phases : Integer
+	type : CallType
+operations
+end
+
+class EntryCall<Call
+attributes
+operations
+end
+
+class ActivityCall<Call
+attributes
+operations
+end
+
+class Date
+attributes
+	day : String
+	month : String
+	year : String
+operations
+end
+
+composition xxx_LQN_created_On between
+	LQN[*] role xxx_LQN_created_On_src
+	Date[1] role created_On
+end
+
+composition xxx_LQN_modified_On between
+	LQN[*] role xxx_LQN_modified_On_src
+	Date[1] role modified_On
+end
+
+composition xxx_LQN_task between
+	LQN[0..1] role xxx_LQN_task_src
+	Task[1..*] role task
+end
+
+composition xxx_LQN_processor between
+	LQN[0..1] role xxx_LQN_processor_src
+	Processor[1..*] role processor
+end
+
+composition xxx_Task_entry between
+	Task[0..1] role xxx_Task_entry_src
+	Entry[1..*] role entry
+end
+
+association xxx_Task_processor between
+	Task[*] role xxx_Task_processor_src
+	Processor[1] role processor
+end
+
+association xxx_Task_lqn between
+	Task[*] role xxx_Task_lqn_src
+	LQN[1] role lqn
+end
+
+association xxx_Task_activity between
+	Task[0..1] role xxx_Task_activity_src
+	Activity[1..*] role activity
+end
+
+association xxx_Processor_task between
+	Processor[*] role xxx_Processor_task_src
+	Task[1] role task
+end
+
+association xxx_Processor_lqn between
+	Processor[*] role xxx_Processor_lqn_src
+	LQN[1] role lqn
+end
+
+composition xxx_Entry_contained_In between
+	Entry[*] role xxx_Entry_contained_In_src
+	Task[1] role contained_In
+end
+
+composition xxx_Entry_replay_To between
+	Entry[*] role xxx_Entry_replay_To_src
+	Entry[1] role replay_To
+end
+
+association xxx_Entry_callreceives between
+	Entry[*] role xxx_Entry_callreceives_src
+	Call[1] role callreceives
+end
+
+association xxx_Entry_callsends between
+	Entry[*] role xxx_Entry_callsends_src
+	Call[1] role callsends
+end
+
+association xxx_Entry_phase between
+	Entry[0..1] role xxx_Entry_phase_src
+	Phase[1..*] role phase
+end
+
+composition xxx_Entry_activity between
+	Entry[*] role xxx_Entry_activity_src
+	Activity[0..1] role activity
+end
+
+association xxx_Entry_task between
+	Entry[*] role xxx_Entry_task_src
+	Task[1] role task
+end
+
+association xxx_Phase_entry between
+	Phase[*] role xxx_Phase_entry_src
+	Entry[1] role entry
+end
+
+association xxx_Phase_activity between
+	Phase[*] role xxx_Phase_activity_src
+	Activity[1] role activity
+end
+
+composition xxx_Activity_contained_In between
+	Activity[*] role xxx_Activity_contained_In_src
+	Task[1] role contained_In
+end
+
+composition xxx_Activity_replay_To between
+	Activity[*] role xxx_Activity_replay_To_src
+	Entry[1] role replay_To
+end
+
+association xxx_Activity_linkPrecedes between
+	Activity[0..1] role xxx_Activity_linkPrecedes_src
+	Link[1..*] role linkPrecedes
+end
+
+association xxx_Activity_linkfollows between
+	Activity[0..1] role xxx_Activity_linkfollows_src
+	Link[1..*] role linkfollows
+end
+
+association xxx_Activity_call between
+	Activity[0..1] role xxx_Activity_call_src
+	Call[*] role call
+end
+
+association xxx_Activity_phase between
+	Activity[*] role xxx_Activity_phase_src
+	Phase[1] role phase
+end
+
+association xxx_Activity_entry between
+	Activity[*] role xxx_Activity_entry_src
+	Entry[1] role entry
+end
+
+association xxx_Activity_task between
+	Activity[*] role xxx_Activity_task_src
+	Task[1] role task
+end
+
+composition xxx_Link_fromActivity between
+	Link[*] role xxx_Link_fromActivity_src
+	Activity[1] role fromActivity
+end
+
+composition xxx_Link_toActivity between
+	Link[*] role xxx_Link_toActivity_src
+	Activity[1] role toActivity
+end
+
+association xxx_Link_activityPrecedes between
+	Link[*] role xxx_Link_activityPrecedes_src
+	Activity[1] role activityPrecedes
+end
+
+association xxx_Link_activityfollows between
+	Link[*] role xxx_Link_activityfollows_src
+	Activity[1] role activityfollows
+end
+
+composition xxx_CallPhase_refers_To between
+	CallPhase[*] role xxx_CallPhase_refers_To_src
+	Phase[1] role refers_To
+end
+
+association xxx_CallPhase_call between
+	CallPhase[0..1] role xxx_CallPhase_call_src
+	Call[1..*] role call
+end
+
+composition xxx_Call_toEntry between
+	Call[*] role xxx_Call_toEntry_src
+	Entry[1] role toEntry
+end
+
+association xxx_Call_callPhase between
+	Call[0..1] role xxx_Call_callPhase_src
+	CallPhase[1..*] role callPhase
+end
+
+association xxx_Call_activity between
+	Call[*] role xxx_Call_activity_src
+	Activity[1] role activity
+end
+
+association xxx_Call_entryreceives between
+	Call[*] role xxx_Call_entryreceives_src
+	Entry[0..1] role entryreceives
+end
+
+association xxx_Call_entrysends between
+	Call[*] role xxx_Call_entrysends_src
+	Entry[0..1] role entrysends
+end
+
+composition xxx_EntryCall_from_Entry between
+	EntryCall[*] role xxx_EntryCall_from_Entry_src
+	Entry[1] role from_Entry
+end
+
+composition xxx_ActivityCall_fromActivity between
+	ActivityCall[*] role xxx_ActivityCall_fromActivity_src
+	Activity[1] role fromActivity
+end
+

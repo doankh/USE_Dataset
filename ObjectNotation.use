@@ -1,0 +1,129 @@
+model model_
+class Unit
+attributes
+operations
+end
+
+class Value
+attributes
+operations
+end
+
+class Literal<Value
+attributes
+operations
+end
+
+class Import
+attributes
+	name : String
+operations
+end
+
+class Container
+attributes
+	feature : String
+operations
+end
+
+class Instance<Value
+attributes
+	title : String
+	abstract_ : String
+	documentation : String
+	tags : String
+	name : String
+	type : String
+operations
+end
+
+class Slot
+attributes
+	name : String
+operations
+end
+
+class Array<Value
+attributes
+operations
+end
+
+class StringValue<Literal
+attributes
+	value : String
+operations
+end
+
+class BooleanValue<Literal
+attributes
+	value : String
+operations
+end
+
+class NullValue<Literal
+attributes
+operations
+end
+
+class NumberValue<Literal
+attributes
+	value : String
+operations
+end
+
+class InstanceRef<Value
+attributes
+operations
+end
+
+class EnumValue<Literal
+attributes
+	value : String
+operations
+end
+
+composition xxx_Unit_imports between
+	Unit[0..1] role xxx_Unit_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Unit_container between
+	Unit[*] role xxx_Unit_container_src
+	Container[0..1] role container
+end
+
+composition xxx_Unit_instances between
+	Unit[0..1] role xxx_Unit_instances_src
+	Instance[*] role instances
+end
+
+association xxx_Container_instance between
+	Container[*] role xxx_Container_instance_src
+	Instance[0..1] role instance
+end
+
+association xxx_Instance_see between
+	Instance[0..1] role xxx_Instance_see_src
+	Instance[*] role see
+end
+
+composition xxx_Instance_slots between
+	Instance[0..1] role xxx_Instance_slots_src
+	Slot[*] role slots
+end
+
+composition xxx_Slot_value between
+	Slot[*] role xxx_Slot_value_src
+	Value[0..1] role value
+end
+
+composition xxx_Array_value between
+	Array[0..1] role xxx_Array_value_src
+	Value[*] role value
+end
+
+association xxx_InstanceRef_value between
+	InstanceRef[*] role xxx_InstanceRef_value_src
+	Instance[0..1] role value
+end
+

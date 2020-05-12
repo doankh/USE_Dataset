@@ -1,0 +1,47 @@
+model ComponentsProv
+class Component
+attributes
+	isIndirectlyInstantiated : String
+operations
+end
+
+class ComponentRealization
+attributes
+operations
+end
+
+class Connector
+attributes
+operations
+end
+
+class ConnectorEnd
+attributes
+operations
+end
+
+abstract class ConnectableElement
+attributes
+operations
+end
+
+composition xxx_Component_realization between
+	Component[0..1] role xxx_Component_realization_src
+	ComponentRealization[*] role realization
+end
+
+association xxx_ComponentRealization_abstraction between
+	ComponentRealization[*] role xxx_ComponentRealization_abstraction_src
+	Component[0..1] role abstraction
+end
+
+composition xxx_Connector_end_ between
+	Connector[0..1] role xxx_Connector_end__src
+	ConnectorEnd[2..*] role end_
+end
+
+association xxx_ConnectorEnd_role between
+	ConnectorEnd[*] role xxx_ConnectorEnd_role_src
+	ConnectableElement[1] role role
+end
+

@@ -1,0 +1,118 @@
+model qa
+abstract class QAContainer
+attributes
+	title : String
+operations
+end
+
+class Question<QAPart
+attributes
+	text : String
+operations
+end
+
+abstract class Answer
+attributes
+operations
+end
+
+class TextAnswer<Answer
+attributes
+	text : String
+operations
+end
+
+class NumberAnswer<Answer
+attributes
+	number : Real
+	epsilon : Real
+operations
+end
+
+class YesNoAnswer<Answer
+attributes
+	yes : Boolean
+operations
+end
+
+class QATest<QAContainer
+attributes
+operations
+end
+
+class QASection<QAContainer,QAPart
+attributes
+operations
+end
+
+abstract class QAPart
+attributes
+	name : String
+operations
+end
+
+class OptionAnswer<Answer
+attributes
+	optionNumber : Integer
+operations
+end
+
+class ExpressionAnswer<NumberAnswer
+attributes
+	expression : String
+operations
+end
+
+class QAContainerOptions
+attributes
+	maxTries : Integer
+	revealAnswer : Boolean
+operations
+end
+
+class NextRule
+attributes
+	tries : Integer
+operations
+end
+
+composition xxx_QAContainer_options between
+	QAContainer[*] role xxx_QAContainer_options_src
+	QAContainerOptions[0..1] role options
+end
+
+composition xxx_Question_correct between
+	Question[*] role xxx_Question_correct_src
+	Answer[1] role correct
+end
+
+composition xxx_Question_candidates between
+	Question[0..1] role xxx_Question_candidates_src
+	Answer[*] role candidates
+end
+
+composition xxx_Question_nextRules between
+	Question[0..1] role xxx_Question_nextRules_src
+	NextRule[*] role nextRules
+end
+
+association xxx_Answer_question between
+	Answer[*] role xxx_Answer_question_src
+	Question[0..1] role question
+end
+
+composition xxx_QATest_parts between
+	QATest[0..1] role xxx_QATest_parts_src
+	QAPart[*] role parts
+end
+
+composition xxx_QASection_questions between
+	QASection[0..1] role xxx_QASection_questions_src
+	Question[*] role questions
+end
+
+association xxx_NextRule_next between
+	NextRule[*] role xxx_NextRule_next_src
+	QAPart[0..1] role next
+end
+

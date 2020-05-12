@@ -1,0 +1,166 @@
+model extlibrary
+enum BookCategory{
+default
+}
+
+class Book<CirculatingItem
+attributes
+	title : String
+	pages : Integer
+	category : BookCategory
+operations
+end
+
+class Library<Addressable
+attributes
+	name : String
+	people : String
+operations
+end
+
+class Writer<Person
+attributes
+	name : String
+operations
+end
+
+abstract class Item
+attributes
+	publicationDate : String
+operations
+end
+
+abstract class Lendable
+attributes
+	copies : Integer
+operations
+end
+
+abstract class CirculatingItem<Item,Lendable
+attributes
+operations
+end
+
+abstract class Periodical<Item
+attributes
+	title : String
+	issuesPerYear : Integer
+operations
+end
+
+abstract class AudioVisualItem<CirculatingItem
+attributes
+	title : String
+	minutesLength : Integer
+	damaged : Boolean
+operations
+end
+
+class BookOnTape<AudioVisualItem
+attributes
+operations
+end
+
+class VideoCassette<AudioVisualItem
+attributes
+operations
+end
+
+class Borrower<Person
+attributes
+operations
+end
+
+class Person<Addressable
+attributes
+	firstName : String
+	lastName : String
+operations
+end
+
+class Employee<Person
+attributes
+operations
+end
+
+abstract class Addressable
+attributes
+	address : String
+operations
+end
+
+association xxx_Book_author between
+	Book[*] role xxx_Book_author_src
+	Writer[1] role author
+end
+
+composition xxx_Library_writers between
+	Library[0..1] role xxx_Library_writers_src
+	Writer[*] role writers
+end
+
+composition xxx_Library_employees between
+	Library[0..1] role xxx_Library_employees_src
+	Employee[*] role employees
+end
+
+composition xxx_Library_borrowers between
+	Library[0..1] role xxx_Library_borrowers_src
+	Borrower[*] role borrowers
+end
+
+composition xxx_Library_stock between
+	Library[0..1] role xxx_Library_stock_src
+	Item[*] role stock
+end
+
+association xxx_Library_books between
+	Library[0..1] role xxx_Library_books_src
+	Book[*] role books
+end
+
+composition xxx_Library_branches between
+	Library[0..1] role xxx_Library_branches_src
+	Library[*] role branches
+end
+
+association xxx_Library_parentBranch between
+	Library[*] role xxx_Library_parentBranch_src
+	Library[0..1] role parentBranch
+end
+
+association xxx_Writer_books between
+	Writer[0..1] role xxx_Writer_books_src
+	Book[*] role books
+end
+
+association xxx_Lendable_borrowers between
+	Lendable[0..1] role xxx_Lendable_borrowers_src
+	Borrower[*] role borrowers
+end
+
+association xxx_BookOnTape_reader between
+	BookOnTape[*] role xxx_BookOnTape_reader_src
+	Person[0..1] role reader
+end
+
+association xxx_BookOnTape_author between
+	BookOnTape[*] role xxx_BookOnTape_author_src
+	Writer[0..1] role author
+end
+
+association xxx_VideoCassette_cast between
+	VideoCassette[0..1] role xxx_VideoCassette_cast_src
+	Person[*] role cast
+end
+
+association xxx_Borrower_borrowed between
+	Borrower[0..1] role xxx_Borrower_borrowed_src
+	Lendable[*] role borrowed
+end
+
+association xxx_Employee_manager between
+	Employee[*] role xxx_Employee_manager_src
+	Employee[0..1] role manager
+end
+

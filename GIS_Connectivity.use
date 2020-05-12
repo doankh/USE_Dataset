@@ -1,0 +1,815 @@
+model CIM14
+enum CableOuterJacketKind{
+default
+}
+
+enum CableShieldMaterialKind{
+default
+}
+
+enum ConductorInsulationKind{
+default
+}
+
+enum ConductorMaterialKind{
+default
+}
+
+enum ConductorUsageKind{
+default
+}
+
+enum CableConstructionKind{
+default
+}
+
+enum TransformerControlMode{
+default
+}
+
+enum WindingConnection{
+default
+}
+
+enum SynchronousMachineType{
+default
+}
+
+enum SynchronousMachineOperatingMode{
+default
+}
+
+enum PhaseCode{
+default
+}
+
+enum GeneratorControlSource{
+default
+}
+
+abstract class Element
+attributes
+	UUID : String
+operations
+end
+
+class DistributionTransformerWinding<ConductingEquipment
+attributes
+operations
+end
+
+class DistributionLineSegment<ACLineSegment
+attributes
+operations
+end
+
+class WindingPiImpedance<IdentifiedObject
+attributes
+	x : String
+	g : String
+	r0 : String
+	r : String
+	b : String
+	g0 : String
+	x0 : String
+	b0 : String
+operations
+end
+
+class DistributionTapChanger<RatioTapChanger
+attributes
+operations
+end
+
+class PerLengthSequenceImpedance<IdentifiedObject
+attributes
+	x : String
+	r0 : String
+	x0 : String
+	b0ch : String
+	r : String
+	bch : String
+operations
+end
+
+class TransformerBank<Equipment
+attributes
+operations
+end
+
+class PerLengthPhaseImpedance<IdentifiedObject
+attributes
+	conductorCount : Integer
+operations
+end
+
+class DistributionTransformer<Equipment
+attributes
+operations
+end
+
+class PhaseImpedanceData<Element
+attributes
+	x : String
+	sequenceNumber : Integer
+	b : String
+	r : String
+operations
+end
+
+class TransformerInfo<IdentifiedObject
+attributes
+operations
+end
+
+class ToWindingSpec<IdentifiedObject
+attributes
+	toTapStep : Integer
+	voltage : String
+	phaseShift : String
+operations
+end
+
+class WireArrangement<IdentifiedObject
+attributes
+	mountingPointX : String
+	mountingPointY : String
+	position : Integer
+operations
+end
+
+abstract class CableInfo<ConductorInfo
+attributes
+	nominalTemperature : String
+	diameterOverScreen : String
+	sheathAsNeutral : Boolean
+	diameterOverJacket : String
+	diameterOverCore : String
+	constructionKind : CableConstructionKind
+	outerJacketKind : CableOuterJacketKind
+	isStrandFill : Boolean
+	shieldMaterial : CableShieldMaterialKind
+	diameterOverInsulation : String
+operations
+end
+
+class OpenCircuitTest<DistributionWindingTest
+attributes
+	noLoadLossZero : String
+	noLoadLoss : String
+	excitingCurrent : String
+	excitingCurrentZero : String
+operations
+end
+
+class ConcentricNeutralCableInfo<CableInfo
+attributes
+	neutralStrandCount : Integer
+	diameterOverNeutral : String
+operations
+end
+
+class ConductorInfo<IdentifiedObject
+attributes
+	phaseCount : Integer
+	insulationMaterial : ConductorInsulationKind
+	insulationThickness : String
+	insulated : Boolean
+	usage : ConductorUsageKind
+operations
+end
+
+abstract class DistributionWindingTest<IdentifiedObject
+attributes
+	fromTapStep : Integer
+operations
+end
+
+class WireType<IdentifiedObject
+attributes
+	rAC75 : String
+	coreRadius : String
+	coreStrandCount : Integer
+	rAC25 : String
+	radius : String
+	gmr : String
+	rDC20 : String
+	rAC50 : String
+	material : ConductorMaterialKind
+	sizeDescription : String
+	strandCount : Integer
+	ratedCurrent : String
+operations
+end
+
+class WindingInfo<IdentifiedObject
+attributes
+	ratedS : String
+	ratedU : String
+	connectionKind : WindingConnection
+operations
+end
+
+class OverheadConductorInfo<ConductorInfo
+attributes
+	neutralInsulationThickness : String
+	phaseConductorCount : Integer
+	phaseConductorSpacing : String
+operations
+end
+
+class TapeShieldCableInfo<CableInfo
+attributes
+	tapeThickness : String
+	tapeLap : String
+operations
+end
+
+class ShortCircuitTest<DistributionWindingTest
+attributes
+	loadLossZero : String
+	leakageImpedanceZero : String
+	leakageImpedance : String
+	loadLoss : String
+operations
+end
+
+class GeoLocation<Location
+attributes
+operations
+end
+
+abstract class Location<IdentifiedObject
+attributes
+operations
+end
+
+class PositionPoint<Element
+attributes
+	xPosition : String
+	sequenceNumber : Integer
+	yPosition : String
+operations
+end
+
+class IEC61970CIMVersion<Element
+attributes
+	date : String
+	version : String
+operations
+end
+
+class BusbarSection<ConductingEquipment
+attributes
+operations
+end
+
+class LoadBreakSwitch<Switch
+attributes
+	ratedCurrent : String
+operations
+end
+
+abstract class TapChanger<PowerSystemResource
+attributes
+	stepVoltageIncrement : String
+	subsequentDelay : String
+	neutralStep : Integer
+	normalStep : Integer
+	ltcFlag : Boolean
+	neutralU : String
+	lowStep : Integer
+	initialDelay : String
+	regulationStatus : Boolean
+	highStep : Integer
+operations
+end
+
+class Fuse<Switch
+attributes
+	ratingCurrent : String
+operations
+end
+
+class Junction<ConductingEquipment
+attributes
+operations
+end
+
+class ACLineSegment<Conductor
+attributes
+	r : String
+	x0 : String
+	bch : String
+	x : String
+	b0ch : String
+	r0 : String
+operations
+end
+
+class Disconnector<Switch
+attributes
+operations
+end
+
+class EnergySource<ConductingEquipment
+attributes
+	x : String
+	voltageMagnitude : String
+	voltageAngle : String
+	nominalVoltage : String
+operations
+end
+
+class SynchronousMachine<ConductingEquipment
+attributes
+	baseQ : String
+	operatingMode : SynchronousMachineOperatingMode
+	type : SynchronousMachineType
+	maxQ : String
+	minQ : String
+operations
+end
+
+abstract class RatioTapChanger<TapChanger
+attributes
+	tculControlMode : TransformerControlMode
+operations
+end
+
+class EnergyConsumer<ConductingEquipment
+attributes
+	pfixed : String
+	qfixed : String
+	customerCount : Integer
+operations
+end
+
+abstract class Switch<ConductingEquipment
+attributes
+	normalOpen : Boolean
+operations
+end
+
+class Line<EquipmentContainer
+attributes
+operations
+end
+
+class ShuntCompensator<ConductingEquipment
+attributes
+	nomQ : String
+	nomU : String
+operations
+end
+
+class Breaker<Switch
+attributes
+	ratedCurrent : String
+operations
+end
+
+abstract class Conductor<ConductingEquipment
+attributes
+	length : String
+operations
+end
+
+abstract class ConnectivityNodeContainer<PowerSystemResource
+attributes
+operations
+end
+
+class VoltageLevel<EquipmentContainer
+attributes
+	lowVoltageLimit : String
+	highVoltageLimit : String
+operations
+end
+
+class Bay<EquipmentContainer
+attributes
+operations
+end
+
+abstract class Equipment<PowerSystemResource
+attributes
+	normaIlyInService : Boolean
+operations
+end
+
+class BaseVoltage<IdentifiedObject
+attributes
+	nominalVoltage : String
+operations
+end
+
+class PSRType<IdentifiedObject
+attributes
+operations
+end
+
+abstract class EquipmentContainer<ConnectivityNodeContainer
+attributes
+operations
+end
+
+abstract class IdentifiedObject<Element
+attributes
+	mRID : String
+	description : String
+	name : String
+	localName : String
+	aliasName : String
+operations
+end
+
+class Substation<EquipmentContainer
+attributes
+operations
+end
+
+abstract class ConductingEquipment<Equipment
+attributes
+	phases : PhaseCode
+operations
+end
+
+class SubGeographicalRegion<IdentifiedObject
+attributes
+operations
+end
+
+class Terminal<IdentifiedObject
+attributes
+	sequenceNumber : Integer
+	connected : Boolean
+operations
+end
+
+class GeographicalRegion<IdentifiedObject
+attributes
+operations
+end
+
+abstract class PowerSystemResource<IdentifiedObject
+attributes
+operations
+end
+
+class GeneratingUnit<Equipment
+attributes
+	ratedNetMaxP : String
+	genControlSource : GeneratorControlSource
+	initialP : String
+operations
+end
+
+class LoadResponseCharacteristic<IdentifiedObject
+attributes
+	pVoltageExponent : Real
+	qConstantCurrent : Real
+	pFrequencyExponent : Real
+	exponentModel : Boolean
+	qConstantImpedance : Real
+	pConstantCurrent : Real
+	qFrequencyExponent : Real
+	pConstantPower : Real
+	qVoltageExponent : Real
+	qConstantPower : Real
+	pConstantImpedance : Real
+operations
+end
+
+class SvTapStep<Element
+attributes
+	continuousPosition : Real
+	position : Integer
+operations
+end
+
+class ConnectivityNode<IdentifiedObject
+attributes
+operations
+end
+
+association xxx_DistributionTransformerWinding_WindingInfo between
+	DistributionTransformerWinding[*] role xxx_DistributionTransformerWinding_WindingInfo_src
+	WindingInfo[1] role WindingInfo
+end
+
+association xxx_DistributionTransformerWinding_Transformer between
+	DistributionTransformerWinding[*] role xxx_DistributionTransformerWinding_Transformer_src
+	DistributionTransformer[1] role Transformer
+end
+
+association xxx_DistributionTransformerWinding_RatioTapChanger between
+	DistributionTransformerWinding[*] role xxx_DistributionTransformerWinding_RatioTapChanger_src
+	RatioTapChanger[0..1] role RatioTapChanger
+end
+
+association xxx_DistributionLineSegment_ConductorInfo between
+	DistributionLineSegment[*] role xxx_DistributionLineSegment_ConductorInfo_src
+	ConductorInfo[0..1] role ConductorInfo
+end
+
+association xxx_DistributionLineSegment_SequenceImpedance between
+	DistributionLineSegment[*] role xxx_DistributionLineSegment_SequenceImpedance_src
+	PerLengthSequenceImpedance[0..1] role SequenceImpedance
+end
+
+association xxx_DistributionLineSegment_PhaseImpedance between
+	DistributionLineSegment[*] role xxx_DistributionLineSegment_PhaseImpedance_src
+	PerLengthPhaseImpedance[0..1] role PhaseImpedance
+end
+
+association xxx_PerLengthSequenceImpedance_ConductorSegments between
+	PerLengthSequenceImpedance[0..1] role xxx_PerLengthSequenceImpedance_ConductorSegments_src
+	DistributionLineSegment[*] role ConductorSegments
+end
+
+association xxx_TransformerBank_Transformers between
+	TransformerBank[0..1] role xxx_TransformerBank_Transformers_src
+	DistributionTransformer[*] role Transformers
+end
+
+association xxx_PerLengthPhaseImpedance_PhaseImpedanceData between
+	PerLengthPhaseImpedance[0..1] role xxx_PerLengthPhaseImpedance_PhaseImpedanceData_src
+	PhaseImpedanceData[*] role PhaseImpedanceData
+end
+
+association xxx_PerLengthPhaseImpedance_ConductorSegments between
+	PerLengthPhaseImpedance[0..1] role xxx_PerLengthPhaseImpedance_ConductorSegments_src
+	DistributionLineSegment[*] role ConductorSegments
+end
+
+association xxx_DistributionTransformer_TransformerInfo between
+	DistributionTransformer[*] role xxx_DistributionTransformer_TransformerInfo_src
+	TransformerInfo[1] role TransformerInfo
+end
+
+association xxx_DistributionTransformer_Windings between
+	DistributionTransformer[0..1] role xxx_DistributionTransformer_Windings_src
+	DistributionTransformerWinding[*] role Windings
+end
+
+association xxx_DistributionTransformer_TransformerBank between
+	DistributionTransformer[*] role xxx_DistributionTransformer_TransformerBank_src
+	TransformerBank[1] role TransformerBank
+end
+
+association xxx_PhaseImpedanceData_PhaseImpedance between
+	PhaseImpedanceData[*] role xxx_PhaseImpedanceData_PhaseImpedance_src
+	PerLengthPhaseImpedance[1] role PhaseImpedance
+end
+
+association xxx_TransformerInfo_Transformers between
+	TransformerInfo[0..1] role xxx_TransformerInfo_Transformers_src
+	DistributionTransformer[*] role Transformers
+end
+
+association xxx_ToWindingSpec_OpenCircuitTests between
+	ToWindingSpec[0..1] role xxx_ToWindingSpec_OpenCircuitTests_src
+	OpenCircuitTest[*] role OpenCircuitTests
+end
+
+association xxx_ToWindingSpec_ShortCircuitTests between
+	ToWindingSpec[0..1] role xxx_ToWindingSpec_ShortCircuitTests_src
+	ShortCircuitTest[*] role ShortCircuitTests
+end
+
+association xxx_ToWindingSpec_ToWinding between
+	ToWindingSpec[*] role xxx_ToWindingSpec_ToWinding_src
+	WindingInfo[1] role ToWinding
+end
+
+association xxx_WireArrangement_ConductorInfo between
+	WireArrangement[*] role xxx_WireArrangement_ConductorInfo_src
+	ConductorInfo[1] role ConductorInfo
+end
+
+association xxx_WireArrangement_WireType between
+	WireArrangement[*] role xxx_WireArrangement_WireType_src
+	WireType[1] role WireType
+end
+
+association xxx_OpenCircuitTest_MeasuredWindingSpecs between
+	OpenCircuitTest[0..1] role xxx_OpenCircuitTest_MeasuredWindingSpecs_src
+	ToWindingSpec[*] role MeasuredWindingSpecs
+end
+
+association xxx_ConcentricNeutralCableInfo_WireType between
+	ConcentricNeutralCableInfo[*] role xxx_ConcentricNeutralCableInfo_WireType_src
+	WireType[1] role WireType
+end
+
+association xxx_ConductorInfo_WireArrangements between
+	ConductorInfo[0..1] role xxx_ConductorInfo_WireArrangements_src
+	WireArrangement[*] role WireArrangements
+end
+
+association xxx_ConductorInfo_ConductorSegments between
+	ConductorInfo[0..1] role xxx_ConductorInfo_ConductorSegments_src
+	DistributionLineSegment[*] role ConductorSegments
+end
+
+association xxx_DistributionWindingTest_FromWinding between
+	DistributionWindingTest[*] role xxx_DistributionWindingTest_FromWinding_src
+	WindingInfo[1] role FromWinding
+end
+
+association xxx_WireType_ConcentricNeutralCableInfos between
+	WireType[0..1] role xxx_WireType_ConcentricNeutralCableInfos_src
+	ConcentricNeutralCableInfo[*] role ConcentricNeutralCableInfos
+end
+
+association xxx_WireType_WireArrangements between
+	WireType[0..1] role xxx_WireType_WireArrangements_src
+	WireArrangement[*] role WireArrangements
+end
+
+association xxx_WindingInfo_WindingTests between
+	WindingInfo[0..1] role xxx_WindingInfo_WindingTests_src
+	DistributionWindingTest[*] role WindingTests
+end
+
+association xxx_WindingInfo_ToWindingSpecs between
+	WindingInfo[0..1] role xxx_WindingInfo_ToWindingSpecs_src
+	ToWindingSpec[*] role ToWindingSpecs
+end
+
+association xxx_WindingInfo_Windings between
+	WindingInfo[0..1] role xxx_WindingInfo_Windings_src
+	DistributionTransformerWinding[*] role Windings
+end
+
+association xxx_ShortCircuitTest_ShortedWindingSpecs between
+	ShortCircuitTest[0..1] role xxx_ShortCircuitTest_ShortedWindingSpecs_src
+	ToWindingSpec[1..*] role ShortedWindingSpecs
+end
+
+association xxx_GeoLocation_PowerSystemResources between
+	GeoLocation[0..1] role xxx_GeoLocation_PowerSystemResources_src
+	PowerSystemResource[*] role PowerSystemResources
+end
+
+association xxx_Location_PositionPoints between
+	Location[0..1] role xxx_Location_PositionPoints_src
+	PositionPoint[*] role PositionPoints
+end
+
+association xxx_PositionPoint_Location between
+	PositionPoint[*] role xxx_PositionPoint_Location_src
+	Location[1] role Location
+end
+
+association xxx_TapChanger_SvTapStep between
+	TapChanger[*] role xxx_TapChanger_SvTapStep_src
+	SvTapStep[1] role SvTapStep
+end
+
+association xxx_SynchronousMachine_GeneratingUnit between
+	SynchronousMachine[*] role xxx_SynchronousMachine_GeneratingUnit_src
+	GeneratingUnit[1] role GeneratingUnit
+end
+
+association xxx_RatioTapChanger_Winding between
+	RatioTapChanger[*] role xxx_RatioTapChanger_Winding_src
+	DistributionTransformerWinding[1] role Winding
+end
+
+association xxx_Line_Region between
+	Line[*] role xxx_Line_Region_src
+	SubGeographicalRegion[0..1] role Region
+end
+
+association xxx_ConnectivityNodeContainer_ConnectivityNodes between
+	ConnectivityNodeContainer[0..1] role xxx_ConnectivityNodeContainer_ConnectivityNodes_src
+	ConnectivityNode[*] role ConnectivityNodes
+end
+
+association xxx_VoltageLevel_BaseVoltage between
+	VoltageLevel[*] role xxx_VoltageLevel_BaseVoltage_src
+	BaseVoltage[1] role BaseVoltage
+end
+
+association xxx_VoltageLevel_Bays between
+	VoltageLevel[0..1] role xxx_VoltageLevel_Bays_src
+	Bay[*] role Bays
+end
+
+association xxx_VoltageLevel_Substation between
+	VoltageLevel[*] role xxx_VoltageLevel_Substation_src
+	Substation[0..1] role Substation
+end
+
+association xxx_Bay_VoltageLevel between
+	Bay[*] role xxx_Bay_VoltageLevel_src
+	VoltageLevel[1] role VoltageLevel
+end
+
+association xxx_Equipment_EquipmentContainer between
+	Equipment[*] role xxx_Equipment_EquipmentContainer_src
+	EquipmentContainer[0..1] role EquipmentContainer
+end
+
+association xxx_BaseVoltage_ConductingEquipment between
+	BaseVoltage[0..1] role xxx_BaseVoltage_ConductingEquipment_src
+	ConductingEquipment[*] role ConductingEquipment
+end
+
+association xxx_BaseVoltage_VoltageLevel between
+	BaseVoltage[0..1] role xxx_BaseVoltage_VoltageLevel_src
+	VoltageLevel[*] role VoltageLevel
+end
+
+association xxx_PSRType_PowerSystemResources between
+	PSRType[0..1] role xxx_PSRType_PowerSystemResources_src
+	PowerSystemResource[*] role PowerSystemResources
+end
+
+association xxx_EquipmentContainer_Equipments between
+	EquipmentContainer[0..1] role xxx_EquipmentContainer_Equipments_src
+	Equipment[*] role Equipments
+end
+
+association xxx_Substation_Region between
+	Substation[*] role xxx_Substation_Region_src
+	SubGeographicalRegion[0..1] role Region
+end
+
+association xxx_Substation_VoltageLevels between
+	Substation[0..1] role xxx_Substation_VoltageLevels_src
+	VoltageLevel[*] role VoltageLevels
+end
+
+association xxx_ConductingEquipment_Terminals between
+	ConductingEquipment[0..1] role xxx_ConductingEquipment_Terminals_src
+	Terminal[1..*] role Terminals
+end
+
+association xxx_ConductingEquipment_BaseVoltage between
+	ConductingEquipment[*] role xxx_ConductingEquipment_BaseVoltage_src
+	BaseVoltage[0..1] role BaseVoltage
+end
+
+association xxx_SubGeographicalRegion_Region between
+	SubGeographicalRegion[*] role xxx_SubGeographicalRegion_Region_src
+	GeographicalRegion[1] role Region
+end
+
+association xxx_SubGeographicalRegion_Lines between
+	SubGeographicalRegion[0..1] role xxx_SubGeographicalRegion_Lines_src
+	Line[*] role Lines
+end
+
+association xxx_SubGeographicalRegion_Substations between
+	SubGeographicalRegion[0..1] role xxx_SubGeographicalRegion_Substations_src
+	Substation[*] role Substations
+end
+
+association xxx_Terminal_ConductingEquipment between
+	Terminal[*] role xxx_Terminal_ConductingEquipment_src
+	ConductingEquipment[1] role ConductingEquipment
+end
+
+association xxx_Terminal_ConnectivityNode between
+	Terminal[*] role xxx_Terminal_ConnectivityNode_src
+	ConnectivityNode[1] role ConnectivityNode
+end
+
+association xxx_GeographicalRegion_Regions between
+	GeographicalRegion[0..1] role xxx_GeographicalRegion_Regions_src
+	SubGeographicalRegion[*] role Regions
+end
+
+association xxx_PowerSystemResource_GeoLocation between
+	PowerSystemResource[*] role xxx_PowerSystemResource_GeoLocation_src
+	GeoLocation[0..1] role GeoLocation
+end
+
+association xxx_PowerSystemResource_PSRType between
+	PowerSystemResource[*] role xxx_PowerSystemResource_PSRType_src
+	PSRType[0..1] role PSRType
+end
+
+association xxx_GeneratingUnit_SynchronousMachines between
+	GeneratingUnit[0..1] role xxx_GeneratingUnit_SynchronousMachines_src
+	SynchronousMachine[*] role SynchronousMachines
+end
+
+association xxx_SvTapStep_TapChanger between
+	SvTapStep[*] role xxx_SvTapStep_TapChanger_src
+	TapChanger[1] role TapChanger
+end
+
+association xxx_ConnectivityNode_Terminals between
+	ConnectivityNode[0..1] role xxx_ConnectivityNode_Terminals_src
+	Terminal[*] role Terminals
+end
+
+association xxx_ConnectivityNode_ConnectivityNodeContainer between
+	ConnectivityNode[*] role xxx_ConnectivityNode_ConnectivityNodeContainer_src
+	ConnectivityNodeContainer[0..1] role ConnectivityNodeContainer
+end
+

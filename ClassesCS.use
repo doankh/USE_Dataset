@@ -1,0 +1,52 @@
+model classescs
+abstract class NamedElementCS
+attributes
+	name : String
+operations
+end
+
+class PackageCS<NamedElementCS
+attributes
+operations
+end
+
+class ClassCS<NamedElementCS
+attributes
+operations
+end
+
+class PathNameCS
+attributes
+operations
+end
+
+class PathElementCS<NamedElementCS
+attributes
+operations
+end
+
+class RootCS
+attributes
+operations
+end
+
+composition xxx_PackageCS_ownedClasses between
+	PackageCS[0..1] role xxx_PackageCS_ownedClasses_src
+	ClassCS[*] role ownedClasses
+end
+
+composition xxx_ClassCS_extends between
+	ClassCS[*] role xxx_ClassCS_extends_src
+	PathNameCS[0..1] role extends
+end
+
+composition xxx_PathNameCS_path between
+	PathNameCS[0..1] role xxx_PathNameCS_path_src
+	PathElementCS[1..*] role path
+end
+
+association xxx_RootCS_ownedPackages between
+	RootCS[*] role xxx_RootCS_ownedPackages_src
+	PackageCS[0..1] role ownedPackages
+end
+

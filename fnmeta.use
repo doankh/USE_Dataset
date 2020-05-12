@@ -1,0 +1,84 @@
+model model_
+enum Optionality{
+default
+}
+
+class Registry<FacadeElement
+attributes
+operations
+end
+
+class Assistant<FacadeElement
+attributes
+	name : String
+	type : String
+operations
+end
+
+class Option<FacadeElement
+attributes
+	value : String
+	displayValue : String
+operations
+end
+
+class Argument<FacadeElement
+attributes
+	defaultValue : String
+	name : String
+	optionality : Optionality
+	type : String
+	comment : String
+operations
+end
+
+class Function<FacadeElement
+attributes
+	name : String
+	namespace : String
+	returnType : String
+	comment : String
+	help : String
+	prefix : String
+	isDeprecated : String
+	deprecateComment : String
+	className : String
+operations
+end
+
+class FacadeElement
+attributes
+	element : String
+operations
+end
+
+composition xxx_Registry_functions between
+	Registry[0..1] role xxx_Registry_functions_src
+	Function[*] role functions
+end
+
+association xxx_Registry_assistants between
+	Registry[0..1] role xxx_Registry_assistants_src
+	Assistant[*] role assistants
+end
+
+association xxx_Registry_arguments between
+	Registry[0..1] role xxx_Registry_arguments_src
+	Argument[*] role arguments
+end
+
+association xxx_Assistant_options between
+	Assistant[0..1] role xxx_Assistant_options_src
+	Option[*] role options
+end
+
+association xxx_Argument_assistant between
+	Argument[*] role xxx_Argument_assistant_src
+	Assistant[0..1] role assistant
+end
+
+association xxx_Function_arguments between
+	Function[0..1] role xxx_Function_arguments_src
+	Argument[*] role arguments
+end
+

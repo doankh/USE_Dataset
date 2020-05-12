@@ -1,0 +1,896 @@
+model jFXCss
+enum BooleanValue{
+default
+}
+
+enum HPositionValue{
+default
+}
+
+class JFXCss
+attributes
+operations
+end
+
+class Definition
+attributes
+operations
+end
+
+class Selector
+attributes
+operations
+end
+
+class SimpleSelector
+attributes
+	element : String
+operations
+end
+
+class IdSelector
+attributes
+	id : String
+operations
+end
+
+class ClassSelector
+attributes
+	class_ : String
+operations
+end
+
+class PseudoClassSelector
+attributes
+	value : String
+operations
+end
+
+class FXProperty
+attributes
+operations
+end
+
+class FontProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class FontFamilyProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class FontSizeProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class FontStyleProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class FontWeightProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class CursorProperty<FXProperty
+attributes
+	value : String
+operations
+end
+
+class EffectProperty<FXProperty
+attributes
+operations
+end
+
+class Effect
+attributes
+operations
+end
+
+class EffectDropShadow<Effect
+attributes
+operations
+end
+
+class EffectInnerShadow<Effect
+attributes
+operations
+end
+
+class BooleanProperty<FXProperty
+attributes
+	property : String
+	value : BooleanValue
+operations
+end
+
+class SizeProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class NumberProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class IntegerProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class PaintProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class PaintProperties<FXProperty
+attributes
+	property : String
+operations
+end
+
+class BlendProperty<FXProperty
+attributes
+	value : String
+operations
+end
+
+class UrlProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class MultiSizeProperties<FXProperty
+attributes
+	property : String
+operations
+end
+
+class HPositionProperty<FXProperty
+attributes
+	property : String
+	value : HPositionValue
+operations
+end
+
+class VPositionProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class SideProperty<FXProperty
+attributes
+	property : String
+	value : String
+operations
+end
+
+class BarPolicyProperty<FXProperty
+attributes
+	property : String
+	value : String
+operations
+end
+
+class UrlProperties<FXProperty
+attributes
+	property : String
+operations
+end
+
+class RepeatProperties<FXProperty
+attributes
+	property : String
+operations
+end
+
+class MultiSizeProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class SizeProperties<FXProperty
+attributes
+	property : String
+operations
+end
+
+class MultiPaintProperties<FXProperty
+attributes
+	property : String
+operations
+end
+
+class ColorProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class StringProperty<FXProperty
+attributes
+	property : String
+	value : String
+operations
+end
+
+class PositionProperty<FXProperty
+attributes
+	property : String
+operations
+end
+
+class AlignmentProperty<FXProperty
+attributes
+	property : String
+	value : String
+operations
+end
+
+class StrokeLineCapProperty<FXProperty
+attributes
+	value : String
+operations
+end
+
+class StrokeLineJoinProperty<FXProperty
+attributes
+	value : String
+operations
+end
+
+class TextOriginProperty<FXProperty
+attributes
+	value : String
+operations
+end
+
+class BackgroundImageSizeProperty<FXProperty
+attributes
+operations
+end
+
+class BorderStyleProperty<FXProperty
+attributes
+operations
+end
+
+class BorderImageSliceProperty<FXProperty
+attributes
+operations
+end
+
+class TextOverrunProperty<FXProperty
+attributes
+	value : String
+operations
+end
+
+class InsetsProperty<FXProperty
+attributes
+operations
+end
+
+class HorizontalGridLineStrokeDashArrayProperty<FXProperty
+attributes
+operations
+end
+
+class VerticalGridLineStrokeDashArrayProperty<FXProperty
+attributes
+operations
+end
+
+class VPositionValue
+attributes
+	v : String
+operations
+end
+
+class BlurValue
+attributes
+	v : String
+operations
+end
+
+class NumberValue
+attributes
+operations
+end
+
+class IntegerValue<NumberValue
+attributes
+	value : Integer
+operations
+end
+
+class RealValue<NumberValue
+attributes
+	value : Real
+operations
+end
+
+class UrlValue
+attributes
+operations
+end
+
+class AddressValue
+attributes
+	value : String
+operations
+end
+
+class SizeValue
+attributes
+	dimension : String
+operations
+end
+
+class MultiSizeValue
+attributes
+operations
+end
+
+class BgPositionValue
+attributes
+	relx : String
+	rely : String
+operations
+end
+
+class RepeatStyleValue
+attributes
+	v : String
+	v2 : String
+operations
+end
+
+class BgSizeValue
+attributes
+	xauto : String
+	yauto : String
+	predefined : String
+operations
+end
+
+class MultiPaintValue
+attributes
+operations
+end
+
+class BorderStyleValue
+attributes
+	location : String
+	miterPredefined : String
+	lineCap : String
+operations
+end
+
+class DashStyleValue
+attributes
+	v : String
+operations
+end
+
+class SizeFill
+attributes
+	fill : String
+operations
+end
+
+class FontValue
+attributes
+	styleOrWeightString : String
+operations
+end
+
+class FontStyleValue
+attributes
+	value : String
+operations
+end
+
+class FontWeightValue
+attributes
+	valueString : String
+operations
+end
+
+class FontFamily
+attributes
+	value : String
+operations
+end
+
+class PaintValue
+attributes
+operations
+end
+
+class LinearGradient<PaintValue
+attributes
+operations
+end
+
+class RadialGradient<PaintValue
+attributes
+operations
+end
+
+class StopValue
+attributes
+operations
+end
+
+class ColorValue<PaintValue
+attributes
+operations
+end
+
+class LookedUpColor<ColorValue
+attributes
+	value : String
+operations
+end
+
+class NamedColor<ColorValue
+attributes
+	value : String
+operations
+end
+
+class RGBColor<ColorValue
+attributes
+	hex : String
+operations
+end
+
+class HSBColor<ColorValue
+attributes
+operations
+end
+
+class ColorFunction<ColorValue
+attributes
+operations
+end
+
+composition xxx_JFXCss_definitions between
+	JFXCss[0..1] role xxx_JFXCss_definitions_src
+	Definition[*] role definitions
+end
+
+composition xxx_Definition_selector between
+	Definition[0..1] role xxx_Definition_selector_src
+	Selector[*] role selector
+end
+
+composition xxx_Definition_properties between
+	Definition[0..1] role xxx_Definition_properties_src
+	FXProperty[*] role properties
+end
+
+composition xxx_Selector_simpleSelector between
+	Selector[0..1] role xxx_Selector_simpleSelector_src
+	SimpleSelector[*] role simpleSelector
+end
+
+composition xxx_SimpleSelector_id between
+	SimpleSelector[*] role xxx_SimpleSelector_id_src
+	IdSelector[0..1] role id
+end
+
+composition xxx_SimpleSelector_pseudoClass between
+	SimpleSelector[0..1] role xxx_SimpleSelector_pseudoClass_src
+	PseudoClassSelector[*] role pseudoClass
+end
+
+composition xxx_SimpleSelector_class_ between
+	SimpleSelector[*] role xxx_SimpleSelector_class__src
+	ClassSelector[0..1] role class_
+end
+
+composition xxx_FontProperty_value between
+	FontProperty[*] role xxx_FontProperty_value_src
+	FontValue[0..1] role value
+end
+
+composition xxx_FontFamilyProperty_value between
+	FontFamilyProperty[*] role xxx_FontFamilyProperty_value_src
+	FontFamily[0..1] role value
+end
+
+composition xxx_FontSizeProperty_value between
+	FontSizeProperty[*] role xxx_FontSizeProperty_value_src
+	SizeValue[0..1] role value
+end
+
+composition xxx_FontStyleProperty_value between
+	FontStyleProperty[*] role xxx_FontStyleProperty_value_src
+	FontStyleValue[0..1] role value
+end
+
+composition xxx_FontWeightProperty_value between
+	FontWeightProperty[*] role xxx_FontWeightProperty_value_src
+	FontWeightValue[0..1] role value
+end
+
+composition xxx_EffectProperty_value between
+	EffectProperty[*] role xxx_EffectProperty_value_src
+	Effect[0..1] role value
+end
+
+composition xxx_Effect_blur between
+	Effect[*] role xxx_Effect_blur_src
+	BlurValue[0..1] role blur
+end
+
+composition xxx_Effect_color between
+	Effect[*] role xxx_Effect_color_src
+	ColorValue[0..1] role color
+end
+
+composition xxx_Effect_blurRadius between
+	Effect[*] role xxx_Effect_blurRadius_src
+	NumberValue[0..1] role blurRadius
+end
+
+composition xxx_Effect_offsetX between
+	Effect[*] role xxx_Effect_offsetX_src
+	NumberValue[0..1] role offsetX
+end
+
+composition xxx_Effect_offsetY between
+	Effect[*] role xxx_Effect_offsetY_src
+	NumberValue[0..1] role offsetY
+end
+
+composition xxx_EffectDropShadow_spread between
+	EffectDropShadow[*] role xxx_EffectDropShadow_spread_src
+	NumberValue[0..1] role spread
+end
+
+composition xxx_EffectInnerShadow_choke between
+	EffectInnerShadow[*] role xxx_EffectInnerShadow_choke_src
+	NumberValue[0..1] role choke
+end
+
+composition xxx_SizeProperty_value between
+	SizeProperty[*] role xxx_SizeProperty_value_src
+	SizeValue[0..1] role value
+end
+
+composition xxx_NumberProperty_value between
+	NumberProperty[*] role xxx_NumberProperty_value_src
+	NumberValue[0..1] role value
+end
+
+composition xxx_IntegerProperty_value between
+	IntegerProperty[*] role xxx_IntegerProperty_value_src
+	IntegerValue[0..1] role value
+end
+
+composition xxx_PaintProperty_value between
+	PaintProperty[*] role xxx_PaintProperty_value_src
+	PaintValue[0..1] role value
+end
+
+composition xxx_PaintProperties_values between
+	PaintProperties[0..1] role xxx_PaintProperties_values_src
+	PaintValue[*] role values
+end
+
+composition xxx_UrlProperty_value between
+	UrlProperty[*] role xxx_UrlProperty_value_src
+	UrlValue[0..1] role value
+end
+
+composition xxx_MultiSizeProperties_values between
+	MultiSizeProperties[0..1] role xxx_MultiSizeProperties_values_src
+	MultiSizeValue[*] role values
+end
+
+composition xxx_VPositionProperty_value between
+	VPositionProperty[*] role xxx_VPositionProperty_value_src
+	VPositionValue[0..1] role value
+end
+
+composition xxx_UrlProperties_values between
+	UrlProperties[0..1] role xxx_UrlProperties_values_src
+	UrlValue[*] role values
+end
+
+composition xxx_RepeatProperties_values between
+	RepeatProperties[0..1] role xxx_RepeatProperties_values_src
+	RepeatStyleValue[*] role values
+end
+
+composition xxx_MultiSizeProperty_value between
+	MultiSizeProperty[*] role xxx_MultiSizeProperty_value_src
+	MultiSizeValue[0..1] role value
+end
+
+composition xxx_SizeProperties_values between
+	SizeProperties[0..1] role xxx_SizeProperties_values_src
+	SizeValue[*] role values
+end
+
+composition xxx_MultiPaintProperties_values between
+	MultiPaintProperties[0..1] role xxx_MultiPaintProperties_values_src
+	MultiPaintValue[*] role values
+end
+
+composition xxx_ColorProperty_value between
+	ColorProperty[*] role xxx_ColorProperty_value_src
+	ColorValue[0..1] role value
+end
+
+composition xxx_PositionProperty_values between
+	PositionProperty[0..1] role xxx_PositionProperty_values_src
+	BgPositionValue[*] role values
+end
+
+composition xxx_BackgroundImageSizeProperty_values between
+	BackgroundImageSizeProperty[0..1] role xxx_BackgroundImageSizeProperty_values_src
+	BgSizeValue[*] role values
+end
+
+composition xxx_BorderStyleProperty_values between
+	BorderStyleProperty[0..1] role xxx_BorderStyleProperty_values_src
+	BorderStyleValue[*] role values
+end
+
+composition xxx_BorderImageSliceProperty_values between
+	BorderImageSliceProperty[0..1] role xxx_BorderImageSliceProperty_values_src
+	SizeFill[*] role values
+end
+
+composition xxx_InsetsProperty_value between
+	InsetsProperty[0..1] role xxx_InsetsProperty_value_src
+	NumberValue[*] role value
+end
+
+composition xxx_HorizontalGridLineStrokeDashArrayProperty_value between
+	HorizontalGridLineStrokeDashArrayProperty[0..1] role xxx_HorizontalGridLineStrokeDashArrayProperty_value_src
+	NumberValue[*] role value
+end
+
+composition xxx_VerticalGridLineStrokeDashArrayProperty_values between
+	VerticalGridLineStrokeDashArrayProperty[0..1] role xxx_VerticalGridLineStrokeDashArrayProperty_values_src
+	NumberValue[*] role values
+end
+
+composition xxx_UrlValue_address between
+	UrlValue[*] role xxx_UrlValue_address_src
+	AddressValue[0..1] role address
+end
+
+composition xxx_SizeValue_value between
+	SizeValue[*] role xxx_SizeValue_value_src
+	NumberValue[0..1] role value
+end
+
+composition xxx_MultiSizeValue_values between
+	MultiSizeValue[0..1] role xxx_MultiSizeValue_values_src
+	SizeValue[*] role values
+end
+
+composition xxx_BgPositionValue_absx between
+	BgPositionValue[*] role xxx_BgPositionValue_absx_src
+	SizeValue[0..1] role absx
+end
+
+composition xxx_BgPositionValue_absy between
+	BgPositionValue[*] role xxx_BgPositionValue_absy_src
+	SizeValue[0..1] role absy
+end
+
+composition xxx_BgSizeValue_xsize between
+	BgSizeValue[*] role xxx_BgSizeValue_xsize_src
+	SizeValue[0..1] role xsize
+end
+
+composition xxx_BgSizeValue_ysize between
+	BgSizeValue[*] role xxx_BgSizeValue_ysize_src
+	SizeValue[0..1] role ysize
+end
+
+composition xxx_MultiPaintValue_values between
+	MultiPaintValue[0..1] role xxx_MultiPaintValue_values_src
+	PaintValue[*] role values
+end
+
+composition xxx_BorderStyleValue_dashStyle between
+	BorderStyleValue[*] role xxx_BorderStyleValue_dashStyle_src
+	DashStyleValue[0..1] role dashStyle
+end
+
+composition xxx_BorderStyleValue_miterAbs between
+	BorderStyleValue[*] role xxx_BorderStyleValue_miterAbs_src
+	NumberValue[0..1] role miterAbs
+end
+
+composition xxx_SizeFill_value between
+	SizeFill[*] role xxx_SizeFill_value_src
+	MultiSizeValue[0..1] role value
+end
+
+composition xxx_FontValue_weight between
+	FontValue[*] role xxx_FontValue_weight_src
+	IntegerProperty[0..1] role weight
+end
+
+composition xxx_FontValue_size between
+	FontValue[*] role xxx_FontValue_size_src
+	SizeValue[0..1] role size
+end
+
+composition xxx_FontValue_family between
+	FontValue[*] role xxx_FontValue_family_src
+	FontFamily[0..1] role family
+end
+
+composition xxx_FontWeightValue_valueInt between
+	FontWeightValue[*] role xxx_FontWeightValue_valueInt_src
+	NumberValue[0..1] role valueInt
+end
+
+composition xxx_LinearGradient_x1 between
+	LinearGradient[*] role xxx_LinearGradient_x1_src
+	SizeValue[0..1] role x1
+end
+
+composition xxx_LinearGradient_y1 between
+	LinearGradient[*] role xxx_LinearGradient_y1_src
+	SizeValue[0..1] role y1
+end
+
+composition xxx_LinearGradient_x2 between
+	LinearGradient[*] role xxx_LinearGradient_x2_src
+	SizeValue[0..1] role x2
+end
+
+composition xxx_LinearGradient_y2 between
+	LinearGradient[*] role xxx_LinearGradient_y2_src
+	SizeValue[0..1] role y2
+end
+
+composition xxx_LinearGradient_stops between
+	LinearGradient[0..1] role xxx_LinearGradient_stops_src
+	StopValue[*] role stops
+end
+
+composition xxx_RadialGradient_cx between
+	RadialGradient[*] role xxx_RadialGradient_cx_src
+	SizeValue[0..1] role cx
+end
+
+composition xxx_RadialGradient_cy between
+	RadialGradient[*] role xxx_RadialGradient_cy_src
+	SizeValue[0..1] role cy
+end
+
+composition xxx_RadialGradient_radius between
+	RadialGradient[*] role xxx_RadialGradient_radius_src
+	SizeValue[0..1] role radius
+end
+
+composition xxx_RadialGradient_fx between
+	RadialGradient[*] role xxx_RadialGradient_fx_src
+	SizeValue[0..1] role fx
+end
+
+composition xxx_RadialGradient_fy between
+	RadialGradient[*] role xxx_RadialGradient_fy_src
+	SizeValue[0..1] role fy
+end
+
+composition xxx_RadialGradient_stops between
+	RadialGradient[0..1] role xxx_RadialGradient_stops_src
+	StopValue[*] role stops
+end
+
+composition xxx_StopValue_pos between
+	StopValue[*] role xxx_StopValue_pos_src
+	SizeValue[0..1] role pos
+end
+
+composition xxx_StopValue_color between
+	StopValue[*] role xxx_StopValue_color_src
+	ColorValue[0..1] role color
+end
+
+composition xxx_RGBColor_r between
+	RGBColor[*] role xxx_RGBColor_r_src
+	IntegerValue[0..1] role r
+end
+
+composition xxx_RGBColor_g between
+	RGBColor[*] role xxx_RGBColor_g_src
+	IntegerValue[0..1] role g
+end
+
+composition xxx_RGBColor_b between
+	RGBColor[*] role xxx_RGBColor_b_src
+	IntegerValue[0..1] role b
+end
+
+composition xxx_RGBColor_rp between
+	RGBColor[*] role xxx_RGBColor_rp_src
+	IntegerValue[0..1] role rp
+end
+
+composition xxx_RGBColor_gp between
+	RGBColor[*] role xxx_RGBColor_gp_src
+	IntegerValue[0..1] role gp
+end
+
+composition xxx_RGBColor_bp between
+	RGBColor[*] role xxx_RGBColor_bp_src
+	IntegerValue[0..1] role bp
+end
+
+composition xxx_RGBColor_alpha between
+	RGBColor[*] role xxx_RGBColor_alpha_src
+	NumberValue[0..1] role alpha
+end
+
+composition xxx_HSBColor_hue between
+	HSBColor[*] role xxx_HSBColor_hue_src
+	NumberValue[0..1] role hue
+end
+
+composition xxx_HSBColor_saturation between
+	HSBColor[*] role xxx_HSBColor_saturation_src
+	NumberValue[0..1] role saturation
+end
+
+composition xxx_HSBColor_brightness between
+	HSBColor[*] role xxx_HSBColor_brightness_src
+	NumberValue[0..1] role brightness
+end
+
+composition xxx_HSBColor_alpha between
+	HSBColor[*] role xxx_HSBColor_alpha_src
+	NumberValue[0..1] role alpha
+end
+
+composition xxx_ColorFunction_orig between
+	ColorFunction[*] role xxx_ColorFunction_orig_src
+	ColorValue[0..1] role orig
+end
+
+composition xxx_ColorFunction_mod between
+	ColorFunction[*] role xxx_ColorFunction_mod_src
+	NumberValue[0..1] role mod
+end
+
+composition xxx_ColorFunction_stopNumbers between
+	ColorFunction[0..1] role xxx_ColorFunction_stopNumbers_src
+	NumberValue[*] role stopNumbers
+end
+
+composition xxx_ColorFunction_stopColors between
+	ColorFunction[0..1] role xxx_ColorFunction_stopColors_src
+	ColorValue[*] role stopColors
+end
+

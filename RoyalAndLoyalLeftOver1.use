@@ -1,0 +1,125 @@
+model RoyalAndLoyal
+class Service
+attributes
+operations
+end
+
+class LoyaltyProgram
+attributes
+operations
+	addService(s : Service,l : ServiceLevel,p : ProgramPartner)
+	enroll(c : Customer)
+end
+
+class ServiceLevel
+attributes
+operations
+end
+
+class Container_RandL
+attributes
+operations
+end
+
+class Customer
+attributes
+operations
+end
+
+class CustomerCard
+attributes
+	valid : Boolean
+operations
+end
+
+class ProgramPartner
+attributes
+	numberOfCustomers : Integer
+operations
+end
+
+association xxx_LoyaltyProgram_partners between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_partners_src
+	ProgramPartner[1..*] role partners
+end
+
+association xxx_LoyaltyProgram_levels between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_levels_src
+	ServiceLevel[1..*] role levels
+end
+
+association xxx_LoyaltyProgram_participants between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_participants_src
+	Customer[*] role participants
+end
+
+association xxx_ServiceLevel_program between
+	ServiceLevel[*] role xxx_ServiceLevel_program_src
+	LoyaltyProgram[0..1] role program
+end
+
+association xxx_ServiceLevel_availableServices between
+	ServiceLevel[0..1] role xxx_ServiceLevel_availableServices_src
+	Service[*] role availableServices
+end
+
+composition xxx_Container_RandL_ref_RandL_Customer between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Customer_src
+	Customer[*] role ref_RandL_Customer
+end
+
+composition xxx_Container_RandL_ref_RandL_CustomerCard between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_CustomerCard_src
+	CustomerCard[*] role ref_RandL_CustomerCard
+end
+
+composition xxx_Container_RandL_ref_RandL_Service between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Service_src
+	Service[*] role ref_RandL_Service
+end
+
+composition xxx_Container_RandL_ref_RandL_LoyaltyProgram between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_LoyaltyProgram_src
+	LoyaltyProgram[*] role ref_RandL_LoyaltyProgram
+end
+
+composition xxx_Container_RandL_ref_RandL_ServiceLevel between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_ServiceLevel_src
+	ServiceLevel[*] role ref_RandL_ServiceLevel
+end
+
+composition xxx_Container_RandL_ref_RandL_ProgramPartner between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_ProgramPartner_src
+	ProgramPartner[*] role ref_RandL_ProgramPartner
+end
+
+association xxx_Customer_programs between
+	Customer[0..1] role xxx_Customer_programs_src
+	LoyaltyProgram[*] role programs
+end
+
+association xxx_Customer_cards between
+	Customer[0..1] role xxx_Customer_cards_src
+	CustomerCard[*] role cards
+end
+
+composition xxx_CustomerCard_myLevel between
+	CustomerCard[*] role xxx_CustomerCard_myLevel_src
+	ServiceLevel[0..1] role myLevel
+end
+
+association xxx_CustomerCard_owner between
+	CustomerCard[*] role xxx_CustomerCard_owner_src
+	Customer[0..1] role owner
+end
+
+association xxx_ProgramPartner_deliveredServices between
+	ProgramPartner[0..1] role xxx_ProgramPartner_deliveredServices_src
+	Service[*] role deliveredServices
+end
+
+association xxx_ProgramPartner_programs between
+	ProgramPartner[0..1] role xxx_ProgramPartner_programs_src
+	LoyaltyProgram[1..*] role programs
+end
+

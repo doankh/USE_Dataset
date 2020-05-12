@@ -1,0 +1,79 @@
+model compositestates
+enum PseudostateKind{
+default
+}
+
+class Region<NamedElement
+attributes
+operations
+	initRegion(context_ : String)
+end
+
+class State<AbstractState
+attributes
+operations
+	evalState(context_ : String)
+end
+
+abstract class AbstractState
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Pseudostate<AbstractState
+attributes
+	kind : PseudostateKind
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+composition xxx_Region_subvertex between
+	Region[0..1] role xxx_Region_subvertex_src
+	AbstractState[*] role subvertex
+end
+
+association xxx_Region_ownerState between
+	Region[*] role xxx_Region_ownerState_src
+	State[0..1] role ownerState
+end
+
+composition xxx_State_ownedRegions between
+	State[0..1] role xxx_State_ownedRegions_src
+	Region[*] role ownedRegions
+end
+
+association xxx_AbstractState_incoming between
+	AbstractState[0..1] role xxx_AbstractState_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_AbstractState_outgoing between
+	AbstractState[0..1] role xxx_AbstractState_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_AbstractState_ownerRegion between
+	AbstractState[*] role xxx_AbstractState_ownerRegion_src
+	Region[1] role ownerRegion
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	AbstractState[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	AbstractState[1] role target
+end
+

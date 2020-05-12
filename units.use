@@ -1,0 +1,72 @@
+model units
+enum UnitNames{
+default
+}
+
+abstract class UnitCarryingElement
+attributes
+operations
+end
+
+abstract class Unit
+attributes
+operations
+end
+
+class BaseUnit<Unit
+attributes
+	name : UnitNames
+operations
+end
+
+class UnitRepository
+attributes
+operations
+end
+
+class UnitMultiplication<Unit
+attributes
+operations
+end
+
+class UnitPower<Unit
+attributes
+	exponent : Integer
+operations
+end
+
+class UnitDivision<Unit
+attributes
+operations
+end
+
+composition xxx_UnitCarryingElement_unit between
+	UnitCarryingElement[*] role xxx_UnitCarryingElement_unit_src
+	Unit[0..1] role unit
+end
+
+composition xxx_UnitRepository_units between
+	UnitRepository[0..1] role xxx_UnitRepository_units_src
+	BaseUnit[*] role units
+end
+
+composition xxx_UnitMultiplication_units between
+	UnitMultiplication[0..1] role xxx_UnitMultiplication_units_src
+	Unit[1..*] role units
+end
+
+composition xxx_UnitPower_unit between
+	UnitPower[*] role xxx_UnitPower_unit_src
+	Unit[1] role unit
+end
+
+composition xxx_UnitDivision_dividend between
+	UnitDivision[*] role xxx_UnitDivision_dividend_src
+	Unit[1] role dividend
+end
+
+composition xxx_UnitDivision_divisor between
+	UnitDivision[*] role xxx_UnitDivision_divisor_src
+	Unit[1] role divisor
+end
+

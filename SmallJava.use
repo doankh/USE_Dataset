@@ -1,0 +1,250 @@
+model smallJava
+enum SJAccessLevel{
+default
+}
+
+class SJProgram
+attributes
+	name : String
+operations
+end
+
+class SJImport
+attributes
+	importedNamespace : String
+operations
+end
+
+class SJClass
+attributes
+	name : String
+operations
+end
+
+class SJMember
+attributes
+	access : SJAccessLevel
+	name : String
+operations
+end
+
+class SJField<SJMember
+attributes
+operations
+end
+
+class SJMethod<SJMember
+attributes
+operations
+end
+
+class SJParameter<SJSymbol
+attributes
+operations
+end
+
+class SJMethodBody<SJBlock
+attributes
+operations
+end
+
+class SJStatement
+attributes
+operations
+end
+
+class SJReturn<SJStatement
+attributes
+operations
+end
+
+class SJVariableDeclaration<SJStatement,SJSymbol
+attributes
+operations
+end
+
+class SJIfStatement<SJStatement
+attributes
+operations
+end
+
+class SJIfBlock<SJBlock
+attributes
+operations
+end
+
+class SJBlock
+attributes
+operations
+end
+
+class SJSymbol
+attributes
+	name : String
+operations
+end
+
+class SJExpression<SJStatement
+attributes
+operations
+end
+
+class SJAssignment<SJExpression
+attributes
+operations
+end
+
+class SJMemberSelection<SJExpression
+attributes
+	methodinvocation : Boolean
+operations
+end
+
+class SJStringConstant<SJExpression
+attributes
+	value : String
+operations
+end
+
+class SJIntConstant<SJExpression
+attributes
+	value : Integer
+operations
+end
+
+class SJBoolConstant<SJExpression
+attributes
+	value : String
+operations
+end
+
+class SJThis<SJExpression
+attributes
+operations
+end
+
+class SJSuper<SJExpression
+attributes
+operations
+end
+
+class SJNull<SJExpression
+attributes
+operations
+end
+
+class SJSymbolRef<SJExpression
+attributes
+operations
+end
+
+class SJNew<SJExpression
+attributes
+operations
+end
+
+composition xxx_SJProgram_imports between
+	SJProgram[0..1] role xxx_SJProgram_imports_src
+	SJImport[*] role imports
+end
+
+composition xxx_SJProgram_classes between
+	SJProgram[0..1] role xxx_SJProgram_classes_src
+	SJClass[*] role classes
+end
+
+association xxx_SJClass_superclass between
+	SJClass[*] role xxx_SJClass_superclass_src
+	SJClass[0..1] role superclass
+end
+
+composition xxx_SJClass_members between
+	SJClass[0..1] role xxx_SJClass_members_src
+	SJMember[*] role members
+end
+
+association xxx_SJMember_type between
+	SJMember[*] role xxx_SJMember_type_src
+	SJClass[0..1] role type
+end
+
+composition xxx_SJMethod_params between
+	SJMethod[0..1] role xxx_SJMethod_params_src
+	SJParameter[*] role params
+end
+
+composition xxx_SJMethod_body between
+	SJMethod[*] role xxx_SJMethod_body_src
+	SJMethodBody[0..1] role body
+end
+
+composition xxx_SJReturn_expression between
+	SJReturn[*] role xxx_SJReturn_expression_src
+	SJExpression[0..1] role expression
+end
+
+composition xxx_SJVariableDeclaration_expression between
+	SJVariableDeclaration[*] role xxx_SJVariableDeclaration_expression_src
+	SJExpression[0..1] role expression
+end
+
+composition xxx_SJIfStatement_expression between
+	SJIfStatement[*] role xxx_SJIfStatement_expression_src
+	SJExpression[0..1] role expression
+end
+
+composition xxx_SJIfStatement_thenBlock between
+	SJIfStatement[*] role xxx_SJIfStatement_thenBlock_src
+	SJIfBlock[0..1] role thenBlock
+end
+
+composition xxx_SJIfStatement_elseBlock between
+	SJIfStatement[*] role xxx_SJIfStatement_elseBlock_src
+	SJIfBlock[0..1] role elseBlock
+end
+
+composition xxx_SJBlock_statements between
+	SJBlock[0..1] role xxx_SJBlock_statements_src
+	SJStatement[*] role statements
+end
+
+association xxx_SJSymbol_type between
+	SJSymbol[*] role xxx_SJSymbol_type_src
+	SJClass[0..1] role type
+end
+
+composition xxx_SJAssignment_left between
+	SJAssignment[*] role xxx_SJAssignment_left_src
+	SJExpression[0..1] role left
+end
+
+composition xxx_SJAssignment_right between
+	SJAssignment[*] role xxx_SJAssignment_right_src
+	SJExpression[0..1] role right
+end
+
+composition xxx_SJMemberSelection_receiver between
+	SJMemberSelection[*] role xxx_SJMemberSelection_receiver_src
+	SJExpression[0..1] role receiver
+end
+
+association xxx_SJMemberSelection_member between
+	SJMemberSelection[*] role xxx_SJMemberSelection_member_src
+	SJMember[0..1] role member
+end
+
+composition xxx_SJMemberSelection_args between
+	SJMemberSelection[0..1] role xxx_SJMemberSelection_args_src
+	SJExpression[*] role args
+end
+
+association xxx_SJSymbolRef_symbol between
+	SJSymbolRef[*] role xxx_SJSymbolRef_symbol_src
+	SJSymbol[0..1] role symbol
+end
+
+association xxx_SJNew_type between
+	SJNew[*] role xxx_SJNew_type_src
+	SJClass[0..1] role type
+end
+

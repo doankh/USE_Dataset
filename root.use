@@ -1,0 +1,126 @@
+model org_torusfw_core
+abstract class IFactory
+attributes
+	serviceID : String
+operations
+	create_(objectID : String,args : String):String
+end
+
+abstract class INode
+attributes
+	ID : String
+	local : String
+operations
+end
+
+class LocalNode<INode
+attributes
+operations
+	registerServiceFactory(factory : IFactory)
+end
+
+abstract class ICloud
+attributes
+	ID : String
+operations
+end
+
+abstract class IListener
+attributes
+operations
+	notifyChanged(notif : INotification)
+end
+
+abstract class INotification
+attributes
+	object : String
+	attributeName : String
+	attributeID : String
+	oldValue : String
+	newValue : String
+operations
+end
+
+class Notification<INotification
+attributes
+operations
+end
+
+abstract class INotifier
+attributes
+operations
+	notifyChanged(notif : INotification)
+end
+
+class Notifier<INotifier
+attributes
+operations
+end
+
+abstract class IObservable
+attributes
+operations
+end
+
+abstract class IParameter
+attributes
+	name : String
+	value : String
+	enabled : String
+	intValue : String
+	longValue : String
+operations
+end
+
+class CapabilityStore
+attributes
+operations
+end
+
+abstract class IChannel
+attributes
+	readable : String
+	writable : String
+operations
+end
+
+association xxx_INode_clouds between
+	INode[0..1] role xxx_INode_clouds_src
+	ICloud[*] role clouds
+end
+
+association xxx_INode_serviceFactories between
+	INode[0..1] role xxx_INode_serviceFactories_src
+	IFactory[*] role serviceFactories
+end
+
+association xxx_ICloud_nodes between
+	ICloud[0..1] role xxx_ICloud_nodes_src
+	INode[*] role nodes
+end
+
+association xxx_ICloud_parentClouds between
+	ICloud[0..1] role xxx_ICloud_parentClouds_src
+	ICloud[*] role parentClouds
+end
+
+association xxx_ICloud_childClouds between
+	ICloud[0..1] role xxx_ICloud_childClouds_src
+	ICloud[*] role childClouds
+end
+
+association xxx_INotifier_listeners between
+	INotifier[0..1] role xxx_INotifier_listeners_src
+	IListener[*] role listeners
+end
+
+association xxx_IObservable_notifier between
+	IObservable[*] role xxx_IObservable_notifier_src
+	INotifier[0..1] role notifier
+end
+
+association xxx_CapabilityStore_capability between
+	CapabilityStore[0..1] role xxx_CapabilityStore_capability_src
+	IParameter[*] role capability
+end
+

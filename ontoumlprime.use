@@ -1,0 +1,421 @@
+model ontoumlprime
+enum PrimitiveDataTypeType{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+abstract class PackageableElement<Element
+attributes
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class Package<NamedElement,PackageableElement
+attributes
+operations
+end
+
+abstract class Universal<NamedElement,PackageableElement
+attributes
+operations
+end
+
+class GeneralizationSet<NamedElement,PackageableElement
+attributes
+	isCovering : Boolean
+operations
+end
+
+abstract class DataType<NamedElement,PackageableElement
+attributes
+operations
+end
+
+class PrimitiveDataType<DataType
+attributes
+	_type : PrimitiveDataTypeType
+operations
+end
+
+abstract class UserDefinedDataType<DataType,NamedElement
+attributes
+operations
+end
+
+class ComplexDataType<UserDefinedDataType
+attributes
+operations
+end
+
+class DataTypeAttribute<NamedElement
+attributes
+operations
+end
+
+class Enumeration<UserDefinedDataType
+attributes
+	enumerationLiterals : String
+operations
+end
+
+class MeronymicRelation<PackageableElement,BinaryDirectedRelationship
+attributes
+	partIsEssential : Boolean
+	partIsInseparable : Boolean
+	partIsShareable : Boolean
+	partIsImmutable : Boolean
+operations
+end
+
+class ComponentOfRelation<MeronymicRelation
+attributes
+operations
+end
+
+class MembershipRelation<MeronymicRelation
+attributes
+operations
+end
+
+class SubCollectionRelation<MeronymicRelation
+attributes
+operations
+end
+
+class SubQuantityRelation<MeronymicRelation
+attributes
+operations
+end
+
+abstract class EndurantUniversal<Universal
+attributes
+operations
+end
+
+abstract class SubstantialUniversal<EndurantUniversal
+attributes
+operations
+end
+
+abstract class SortalUniversal<SubstantialUniversal
+attributes
+operations
+end
+
+abstract class RigidSortalUniversal<SortalUniversal
+attributes
+operations
+end
+
+abstract class AntiRigidSortalUniversal<SortalUniversal
+attributes
+operations
+end
+
+abstract class SubstanceSortalUniversal<RigidSortalUniversal
+attributes
+operations
+end
+
+class Kind<SubstanceSortalUniversal
+attributes
+operations
+end
+
+class QuantityUniversal<SubstanceSortalUniversal
+attributes
+operations
+end
+
+class CollectiveUniversal<SubstanceSortalUniversal
+attributes
+	isExtensional : Boolean
+operations
+end
+
+class SubKind<RigidSortalUniversal
+attributes
+operations
+end
+
+class Role<AntiRigidSortalUniversal,ExternallyDependentUniversal
+attributes
+operations
+end
+
+class Phase<AntiRigidSortalUniversal
+attributes
+operations
+end
+
+abstract class MixinUniversal<Universal
+attributes
+operations
+end
+
+abstract class RigidMixinUniversal<MixinUniversal
+attributes
+operations
+end
+
+class Category<RigidMixinUniversal
+attributes
+operations
+end
+
+abstract class NonRigidMixinUniversal<MixinUniversal
+attributes
+operations
+end
+
+abstract class SemiRigidMixinUniversal<NonRigidMixinUniversal
+attributes
+operations
+end
+
+class Mixin<SemiRigidMixinUniversal
+attributes
+operations
+end
+
+abstract class AntiRigidMixinUniversal<NonRigidMixinUniversal
+attributes
+operations
+end
+
+class RoleMixin<AntiRigidMixinUniversal,ExternallyDependentUniversal
+attributes
+operations
+end
+
+abstract class ExternallyDependentUniversal
+attributes
+operations
+end
+
+abstract class MomentUniversal<EndurantUniversal
+attributes
+operations
+end
+
+class RelatorUniversal<MomentUniversal
+attributes
+operations
+end
+
+abstract class BinaryDirectedRelationship
+attributes
+	sourceEndName : String
+	targetEndName : String
+	sourceLowerBound : Integer
+	sourceUpperBound : Integer
+	targetLowerBound : Integer
+	targetUpperBound : Integer
+operations
+end
+
+class BinaryMaterialRelation<BinaryDirectedRelationship,NamedElement,PackageableElement
+attributes
+operations
+end
+
+class BinaryFormalRelation<BinaryDirectedRelationship,NamedElement,PackageableElement
+attributes
+operations
+end
+
+class Mediation<BinaryDirectedRelationship
+attributes
+operations
+end
+
+class Characterization<BinaryDirectedRelationship
+attributes
+operations
+end
+
+abstract class IntrinsicMomentUniversal<MomentUniversal
+attributes
+operations
+end
+
+class ModeUniversal<IntrinsicMomentUniversal
+attributes
+operations
+end
+
+class QualityUniversal<IntrinsicMomentUniversal
+attributes
+operations
+end
+
+class nAryMaterialRelation<NamedElement,PackageableElement
+attributes
+	targetEndNames : String
+	sourceLowerBound : Integer
+	sourceUpperBound : Integer
+operations
+end
+
+class nAryFormalRelation<NamedElement,PackageableElement
+attributes
+	targetEndNames : String
+	sourceLowerBound : Integer
+	sourceUpperBound : Integer
+operations
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	PackageableElement[*] role elements
+end
+
+composition xxx_Package_elements between
+	Package[0..1] role xxx_Package_elements_src
+	PackageableElement[*] role elements
+end
+
+association xxx_Universal_isSpecializedVia between
+	Universal[0..1] role xxx_Universal_isSpecializedVia_src
+	GeneralizationSet[*] role isSpecializedVia
+end
+
+association xxx_Universal_specializesVia between
+	Universal[0..1] role xxx_Universal_specializesVia_src
+	GeneralizationSet[*] role specializesVia
+end
+
+association xxx_GeneralizationSet_specializedUniversal between
+	GeneralizationSet[*] role xxx_GeneralizationSet_specializedUniversal_src
+	Universal[1] role specializedUniversal
+end
+
+association xxx_GeneralizationSet_specializingUniversals between
+	GeneralizationSet[0..1] role xxx_GeneralizationSet_specializingUniversals_src
+	Universal[1..*] role specializingUniversals
+end
+
+composition xxx_ComplexDataType_attributes_ between
+	ComplexDataType[0..1] role xxx_ComplexDataType_attributes__src
+	DataTypeAttribute[2..*] role attributes_
+end
+
+association xxx_DataTypeAttribute_isOfType between
+	DataTypeAttribute[*] role xxx_DataTypeAttribute_isOfType_src
+	DataType[1] role isOfType
+end
+
+association xxx_DataTypeAttribute_complexDataType between
+	DataTypeAttribute[*] role xxx_DataTypeAttribute_complexDataType_src
+	ComplexDataType[1] role complexDataType
+end
+
+association xxx_MeronymicRelation_whole between
+	MeronymicRelation[*] role xxx_MeronymicRelation_whole_src
+	SubstantialUniversal[1] role whole
+end
+
+association xxx_MeronymicRelation_part between
+	MeronymicRelation[*] role xxx_MeronymicRelation_part_src
+	SubstantialUniversal[1] role part
+end
+
+composition xxx_EndurantUniversal_characterizedBy between
+	EndurantUniversal[0..1] role xxx_EndurantUniversal_characterizedBy_src
+	Characterization[*] role characterizedBy
+end
+
+association xxx_ExternallyDependentUniversal_mediation between
+	ExternallyDependentUniversal[*] role xxx_ExternallyDependentUniversal_mediation_src
+	Mediation[1] role mediation
+end
+
+composition xxx_RelatorUniversal_mediations between
+	RelatorUniversal[0..1] role xxx_RelatorUniversal_mediations_src
+	Mediation[2..*] role mediations
+end
+
+association xxx_BinaryMaterialRelation_derivedFrom between
+	BinaryMaterialRelation[*] role xxx_BinaryMaterialRelation_derivedFrom_src
+	RelatorUniversal[1] role derivedFrom
+end
+
+association xxx_BinaryMaterialRelation_source between
+	BinaryMaterialRelation[*] role xxx_BinaryMaterialRelation_source_src
+	ExternallyDependentUniversal[1] role source
+end
+
+association xxx_BinaryMaterialRelation_target between
+	BinaryMaterialRelation[*] role xxx_BinaryMaterialRelation_target_src
+	ExternallyDependentUniversal[1] role target
+end
+
+association xxx_BinaryFormalRelation_source between
+	BinaryFormalRelation[*] role xxx_BinaryFormalRelation_source_src
+	Universal[1] role source
+end
+
+association xxx_BinaryFormalRelation_target between
+	BinaryFormalRelation[*] role xxx_BinaryFormalRelation_target_src
+	Universal[1] role target
+end
+
+association xxx_Mediation_source between
+	Mediation[*] role xxx_Mediation_source_src
+	RelatorUniversal[1] role source
+end
+
+association xxx_Mediation_target between
+	Mediation[*] role xxx_Mediation_target_src
+	ExternallyDependentUniversal[1] role target
+end
+
+association xxx_Characterization_source between
+	Characterization[*] role xxx_Characterization_source_src
+	EndurantUniversal[1] role source
+end
+
+association xxx_Characterization_target between
+	Characterization[*] role xxx_Characterization_target_src
+	IntrinsicMomentUniversal[1] role target
+end
+
+association xxx_IntrinsicMomentUniversal_characterization between
+	IntrinsicMomentUniversal[*] role xxx_IntrinsicMomentUniversal_characterization_src
+	Characterization[1] role characterization
+end
+
+association xxx_QualityUniversal_datatypes between
+	QualityUniversal[0..1] role xxx_QualityUniversal_datatypes_src
+	DataType[*] role datatypes
+end
+
+association xxx_nAryMaterialRelation_derivedFrom between
+	nAryMaterialRelation[*] role xxx_nAryMaterialRelation_derivedFrom_src
+	RelatorUniversal[1] role derivedFrom
+end
+
+association xxx_nAryMaterialRelation_targetRelata between
+	nAryMaterialRelation[0..1] role xxx_nAryMaterialRelation_targetRelata_src
+	ExternallyDependentUniversal[*] role targetRelata
+end
+
+association xxx_nAryFormalRelation_targetRelata between
+	nAryFormalRelation[0..1] role xxx_nAryFormalRelation_targetRelata_src
+	Universal[*] role targetRelata
+end
+

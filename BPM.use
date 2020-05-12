@@ -1,0 +1,49 @@
+model slolpBPM
+class DomainModel
+attributes
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class Datatype<Type
+attributes
+operations
+end
+
+class Entity<Type
+attributes
+operations
+end
+
+class Feature
+attributes
+	many : Boolean
+	name : String
+operations
+end
+
+composition xxx_DomainModel_elements between
+	DomainModel[0..1] role xxx_DomainModel_elements_src
+	Type[*] role elements
+end
+
+association xxx_Entity_superType between
+	Entity[*] role xxx_Entity_superType_src
+	Entity[0..1] role superType
+end
+
+composition xxx_Entity_feautres between
+	Entity[0..1] role xxx_Entity_feautres_src
+	Feature[*] role feautres
+end
+
+association xxx_Feature_type between
+	Feature[*] role xxx_Feature_type_src
+	Type[0..1] role type
+end
+

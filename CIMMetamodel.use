@@ -1,0 +1,90 @@
+model ServiceCIM
+enum MediaType{
+default
+}
+
+enum CRUDVerb{
+default
+}
+
+class Resource
+attributes
+	isAlgorithmic : Boolean
+	name : String
+operations
+end
+
+class CRUDActivity
+attributes
+	CRUDVerb : CRUDVerb
+operations
+end
+
+class Property
+attributes
+	isUnique : Boolean
+	isNamingProperty : Boolean
+	name : String
+	type : String
+operations
+end
+
+class InputRepresentation
+attributes
+	inputMediaType : MediaType
+operations
+end
+
+class OutputRepresentation
+attributes
+	outputMediaType : MediaType
+operations
+end
+
+class RESTfulServiceCIM
+attributes
+	name : String
+	serviceOutputPath : String
+	serviceDatabaseIP : String
+	serviceDatabasePort : String
+	serviceDatabaseUsername : String
+	serviceDatabasePassword : String
+	serviceDatabaseType : String
+operations
+end
+
+composition xxx_Resource_hasInputRepresentation between
+	Resource[0..1] role xxx_Resource_hasInputRepresentation_src
+	InputRepresentation[1..*] role hasInputRepresentation
+end
+
+composition xxx_Resource_hasCRUDActivity between
+	Resource[*] role xxx_Resource_hasCRUDActivity_src
+	CRUDActivity[1..4] role hasCRUDActivity
+end
+
+composition xxx_Resource_hasProperty between
+	Resource[0..1] role xxx_Resource_hasProperty_src
+	Property[*] role hasProperty
+end
+
+composition xxx_Resource_hasOutputRepresentation between
+	Resource[0..1] role xxx_Resource_hasOutputRepresentation_src
+	OutputRepresentation[1..*] role hasOutputRepresentation
+end
+
+association xxx_Resource_hasRelatedResource between
+	Resource[0..1] role xxx_Resource_hasRelatedResource_src
+	Resource[*] role hasRelatedResource
+end
+
+association xxx_Resource_isRelatedResource between
+	Resource[0..1] role xxx_Resource_isRelatedResource_src
+	Resource[*] role isRelatedResource
+end
+
+composition xxx_RESTfulServiceCIM_hasResources between
+	RESTfulServiceCIM[0..1] role xxx_RESTfulServiceCIM_hasResources_src
+	Resource[1..*] role hasResources
+end
+

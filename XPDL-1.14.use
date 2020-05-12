@@ -1,0 +1,720 @@
+model PrimitiveTypes
+enum AssociationDirectionKind{
+	None,
+	To,
+	From,
+	Both
+}
+
+enum OrientationKind{
+	Horizontal,
+	Vertical
+}
+
+enum AccessLevelKind{
+	Public,
+	Private
+}
+
+enum ProcessTypeKind{
+	None,
+	Private,
+	Abstract,
+	Collaboration
+}
+
+enum StatusKind{
+	None,
+	Ready,
+	Active,
+	Cancelled,
+	Aborting,
+	Aborted,
+	Completing,
+	Completed
+}
+
+enum AdHocOrderingKind{
+	Sequential,
+	Parallel
+}
+
+enum ModeKind{
+	Automatic,
+	Manual
+}
+
+enum GatewayTypeKind{
+	Xor,
+	Or,
+	Complex,
+	And
+}
+
+enum ExecutionKind{
+	Asynchr,
+	Synchr
+}
+
+enum TriggerKind{
+	None,
+	Message,
+	Timer,
+	Rule,
+	Link,
+	Error,
+	Cancel,
+	Compensation,
+	Terminate,
+	Multiple
+}
+
+enum ImplementationKind{
+	WebService,
+	Other,
+	Unspecified
+}
+
+abstract class Element
+attributes
+	id : String
+	name : String
+operations
+end
+
+class Package<Element
+attributes
+operations
+end
+
+class MessageFlow<Element
+attributes
+operations
+end
+
+class Association<Element
+attributes
+	associationDirection : AssociationDirectionKind
+operations
+end
+
+class Pool<Element
+attributes
+	orientation : OrientationKind
+	boundaryVisible : Boolean
+operations
+end
+
+class Lane<Element
+attributes
+operations
+end
+
+class Participant<Element
+attributes
+operations
+end
+
+class Artifact<Element
+attributes
+	textAnnotation : String
+	group : String
+operations
+end
+
+class DataObject<Artifact
+attributes
+	state : String
+	requiredForStart : Boolean
+	producedAtCompletion : Boolean
+operations
+end
+
+class Group<Artifact
+attributes
+operations
+end
+
+class Annotation<Artifact
+attributes
+operations
+end
+
+class TypeDeclaration<Element
+attributes
+operations
+end
+
+class Application<Element
+attributes
+operations
+end
+
+class ParametrizedApplication<Application
+attributes
+operations
+end
+
+class ReferencedApplication<Application
+attributes
+operations
+end
+
+class Activity<Element
+attributes
+	isStartActivity : Boolean
+	status : StatusKind
+	startMode : ModeKind
+	finishMode : ModeKind
+	startQuantity : Integer
+	isATransaction : Boolean
+operations
+end
+
+abstract class Task<Activity
+attributes
+operations
+end
+
+class TaskService<Task
+attributes
+	implementation : ImplementationKind
+operations
+end
+
+class TaskReceive<Task
+attributes
+	instantiate : Boolean
+	implementation : ImplementationKind
+operations
+end
+
+class TaskManual<Task
+attributes
+operations
+end
+
+class TaskReference<Task
+attributes
+operations
+end
+
+class TaskScript<Task
+attributes
+operations
+end
+
+class TaskSend<Task
+attributes
+	implementation : ImplementationKind
+operations
+end
+
+class TaskUser<Task
+attributes
+	implementation : ImplementationKind
+operations
+end
+
+class TaskApplication<Task
+attributes
+operations
+end
+
+class Route<Activity
+attributes
+	gatewayType : GatewayTypeKind
+	instantiate : Boolean
+	markerVisiable : Boolean
+operations
+end
+
+class SubFlow<Activity
+attributes
+	execution : ExecutionKind
+	instanceDataField : String
+operations
+end
+
+class BlockActivity<Activity
+attributes
+operations
+end
+
+abstract class Event<Activity
+attributes
+	triggerKind : TriggerKind
+	implementation : ImplementationKind
+operations
+end
+
+abstract class Trigger
+attributes
+operations
+end
+
+class ResultCompensation<Trigger
+attributes
+operations
+end
+
+class ResultError<Trigger
+attributes
+	errorCode : String
+operations
+end
+
+class ResultMultiple<Trigger
+attributes
+operations
+end
+
+class TriggerResultLink<Trigger
+attributes
+operations
+end
+
+class TriggerResultMessage<Trigger
+attributes
+operations
+end
+
+class TriggerIntermediateMultiple<Trigger
+attributes
+operations
+end
+
+class TriggerMultiple<Trigger
+attributes
+operations
+end
+
+class TriggerRule<Trigger
+attributes
+	ruleName : String
+operations
+end
+
+class TriggerTimer<Trigger
+attributes
+	timeDate : String
+	timeCycle : String
+operations
+end
+
+class StartEvent<Event
+attributes
+operations
+end
+
+class IntermediateEvent<Event
+attributes
+operations
+end
+
+class EndEvent<Event
+attributes
+operations
+end
+
+class Gateway<Route
+attributes
+operations
+end
+
+class Process<Element
+attributes
+	accessLevel : AccessLevelKind
+	processType : ProcessTypeKind
+	status : StatusKind
+	suppressJoinFailure : Boolean
+	enableInstanceCompensation : Boolean
+	adHoc : Boolean
+	adHocOrdering : AdHocOrderingKind
+	adHocCompletionCondition : String
+operations
+end
+
+class Transition<Element
+attributes
+	quantity : Integer
+operations
+end
+
+class ActivitySet<Element
+attributes
+	adHoc : Boolean
+	adHocOrdering : AdHocOrderingKind
+	adHocCompletionCondition : String
+operations
+end
+
+class ExternalReference
+attributes
+	xref : String
+	location : String
+	namespace : String
+operations
+end
+
+class Object<Element
+attributes
+operations
+end
+
+class ExternalPackage<Element
+attributes
+	href : String
+operations
+end
+
+class Category<Element
+attributes
+operations
+end
+
+class DataField<Element
+attributes
+	isArray : Boolean
+	correlation : Boolean
+operations
+end
+
+class Script
+attributes
+	type : String
+	version : String
+	grammar : String
+operations
+end
+
+composition xxx_Package_script between
+	Package[*] role xxx_Package_script_src
+	Script[0..1] role script
+end
+
+composition xxx_Package_externalPackages between
+	Package[0..1] role xxx_Package_externalPackages_src
+	ExternalPackage[*] role externalPackages
+end
+
+composition xxx_Package_typeDeclarations between
+	Package[0..1] role xxx_Package_typeDeclarations_src
+	TypeDeclaration[*] role typeDeclarations
+end
+
+composition xxx_Package_participants between
+	Package[0..1] role xxx_Package_participants_src
+	Participant[*] role participants
+end
+
+composition xxx_Package_applications between
+	Package[0..1] role xxx_Package_applications_src
+	Application[*] role applications
+end
+
+composition xxx_Package_dataFields between
+	Package[0..1] role xxx_Package_dataFields_src
+	DataField[*] role dataFields
+end
+
+composition xxx_Package_pools between
+	Package[0..1] role xxx_Package_pools_src
+	Pool[*] role pools
+end
+
+composition xxx_Package_messageFlows between
+	Package[0..1] role xxx_Package_messageFlows_src
+	MessageFlow[*] role messageFlows
+end
+
+composition xxx_Package_associations between
+	Package[0..1] role xxx_Package_associations_src
+	Association[*] role associations
+end
+
+composition xxx_Package_artifacts between
+	Package[0..1] role xxx_Package_artifacts_src
+	Artifact[*] role artifacts
+end
+
+composition xxx_Package_workflowProcesses between
+	Package[0..1] role xxx_Package_workflowProcesses_src
+	Process[*] role workflowProcesses
+end
+
+association xxx_MessageFlow_targetActivity between
+	MessageFlow[*] role xxx_MessageFlow_targetActivity_src
+	Activity[0..1] role targetActivity
+end
+
+association xxx_MessageFlow_sourceActivity between
+	MessageFlow[*] role xxx_MessageFlow_sourceActivity_src
+	Activity[0..1] role sourceActivity
+end
+
+association xxx_MessageFlow_targetPool between
+	MessageFlow[*] role xxx_MessageFlow_targetPool_src
+	Pool[0..1] role targetPool
+end
+
+association xxx_MessageFlow_sourcePool between
+	MessageFlow[*] role xxx_MessageFlow_sourcePool_src
+	Pool[0..1] role sourcePool
+end
+
+composition xxx_MessageFlow_object between
+	MessageFlow[*] role xxx_MessageFlow_object_src
+	Object[0..1] role object
+end
+
+association xxx_Association_targetArtifact between
+	Association[*] role xxx_Association_targetArtifact_src
+	Artifact[0..1] role targetArtifact
+end
+
+association xxx_Association_sourceArtifact between
+	Association[*] role xxx_Association_sourceArtifact_src
+	Artifact[0..1] role sourceArtifact
+end
+
+association xxx_Association_targetPool between
+	Association[*] role xxx_Association_targetPool_src
+	Pool[0..1] role targetPool
+end
+
+association xxx_Association_sourcePool between
+	Association[*] role xxx_Association_sourcePool_src
+	Pool[0..1] role sourcePool
+end
+
+association xxx_Association_targetActivity between
+	Association[*] role xxx_Association_targetActivity_src
+	Activity[0..1] role targetActivity
+end
+
+association xxx_Association_sourceActivity between
+	Association[*] role xxx_Association_sourceActivity_src
+	Activity[0..1] role sourceActivity
+end
+
+composition xxx_Association_object between
+	Association[*] role xxx_Association_object_src
+	Object[0..1] role object
+end
+
+composition xxx_Pool_lanes between
+	Pool[0..1] role xxx_Pool_lanes_src
+	Lane[*] role lanes
+end
+
+composition xxx_Pool_object between
+	Pool[*] role xxx_Pool_object_src
+	Object[0..1] role object
+end
+
+association xxx_Pool_participant between
+	Pool[*] role xxx_Pool_participant_src
+	Participant[0..1] role participant
+end
+
+association xxx_Pool_process between
+	Pool[*] role xxx_Pool_process_src
+	Process[0..1] role process
+end
+
+composition xxx_Lane_object between
+	Lane[*] role xxx_Lane_object_src
+	Object[0..1] role object
+end
+
+association xxx_Lane_parentLane between
+	Lane[*] role xxx_Lane_parentLane_src
+	Lane[0..1] role parentLane
+end
+
+association xxx_Lane_parentPool between
+	Lane[*] role xxx_Lane_parentPool_src
+	Pool[0..1] role parentPool
+end
+
+composition xxx_Artifact_object between
+	Artifact[*] role xxx_Artifact_object_src
+	Object[0..1] role object
+end
+
+composition xxx_Artifact_dataObject between
+	Artifact[*] role xxx_Artifact_dataObject_src
+	DataObject[0..1] role dataObject
+end
+
+composition xxx_DataObject_dataFields between
+	DataObject[0..1] role xxx_DataObject_dataFields_src
+	DataField[*] role dataFields
+end
+
+composition xxx_ReferencedApplication_externalReference between
+	ReferencedApplication[*] role xxx_ReferencedApplication_externalReference_src
+	ExternalReference[0..1] role externalReference
+end
+
+composition xxx_Activity_dataFields between
+	Activity[0..1] role xxx_Activity_dataFields_src
+	DataField[*] role dataFields
+end
+
+composition xxx_Activity_object between
+	Activity[*] role xxx_Activity_object_src
+	Object[0..1] role object
+end
+
+association xxx_TaskReference_taskRef between
+	TaskReference[*] role xxx_TaskReference_taskRef_src
+	Task[1] role taskRef
+end
+
+composition xxx_TaskScript_script between
+	TaskScript[*] role xxx_TaskScript_script_src
+	Script[1] role script
+end
+
+association xxx_TaskApplication_packageRef between
+	TaskApplication[*] role xxx_TaskApplication_packageRef_src
+	Package[0..1] role packageRef
+end
+
+association xxx_SubFlow_packageRef between
+	SubFlow[*] role xxx_SubFlow_packageRef_src
+	Package[0..1] role packageRef
+end
+
+association xxx_SubFlow_startActivitySet between
+	SubFlow[*] role xxx_SubFlow_startActivitySet_src
+	ActivitySet[0..1] role startActivitySet
+end
+
+association xxx_SubFlow_startActivity between
+	SubFlow[*] role xxx_SubFlow_startActivity_src
+	Activity[0..1] role startActivity
+end
+
+association xxx_BlockActivity_activitySet between
+	BlockActivity[*] role xxx_BlockActivity_activitySet_src
+	ActivitySet[1] role activitySet
+end
+
+association xxx_BlockActivity_startActivity between
+	BlockActivity[*] role xxx_BlockActivity_startActivity_src
+	Activity[0..1] role startActivity
+end
+
+composition xxx_Event_trigger between
+	Event[*] role xxx_Event_trigger_src
+	Trigger[0..1] role trigger
+end
+
+association xxx_ResultCompensation_activity between
+	ResultCompensation[*] role xxx_ResultCompensation_activity_src
+	Activity[0..1] role activity
+end
+
+association xxx_TriggerResultLink_processRef between
+	TriggerResultLink[*] role xxx_TriggerResultLink_processRef_src
+	Process[1] role processRef
+end
+
+association xxx_IntermediateEvent_target between
+	IntermediateEvent[*] role xxx_IntermediateEvent_target_src
+	Activity[0..1] role target
+end
+
+composition xxx_Process_participant between
+	Process[0..1] role xxx_Process_participant_src
+	Participant[*] role participant
+end
+
+composition xxx_Process_applications between
+	Process[0..1] role xxx_Process_applications_src
+	Application[*] role applications
+end
+
+composition xxx_Process_dataField between
+	Process[*] role xxx_Process_dataField_src
+	DataField[1] role dataField
+end
+
+composition xxx_Process_activitySets between
+	Process[0..1] role xxx_Process_activitySets_src
+	ActivitySet[*] role activitySets
+end
+
+composition xxx_Process_activities between
+	Process[0..1] role xxx_Process_activities_src
+	Activity[*] role activities
+end
+
+composition xxx_Process_transitions_ between
+	Process[0..1] role xxx_Process_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Process_object between
+	Process[*] role xxx_Process_object_src
+	Object[0..1] role object
+end
+
+association xxx_Process_defaultStartActivitySet between
+	Process[*] role xxx_Process_defaultStartActivitySet_src
+	ActivitySet[0..1] role defaultStartActivitySet
+end
+
+association xxx_Process_defaultStartActivity between
+	Process[*] role xxx_Process_defaultStartActivity_src
+	Activity[0..1] role defaultStartActivity
+end
+
+composition xxx_Transition_object between
+	Transition[*] role xxx_Transition_object_src
+	Object[0..1] role object
+end
+
+association xxx_Transition_to between
+	Transition[*] role xxx_Transition_to_src
+	Activity[1] role to
+end
+
+association xxx_Transition_from_ between
+	Transition[*] role xxx_Transition_from__src
+	Activity[1] role from_
+end
+
+association xxx_ActivitySet_defaultStartActivity between
+	ActivitySet[*] role xxx_ActivitySet_defaultStartActivity_src
+	Activity[0..1] role defaultStartActivity
+end
+
+composition xxx_ActivitySet_activities between
+	ActivitySet[0..1] role xxx_ActivitySet_activities_src
+	Activity[*] role activities
+end
+
+composition xxx_ActivitySet_transitions_ between
+	ActivitySet[0..1] role xxx_ActivitySet_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_ActivitySet_object between
+	ActivitySet[*] role xxx_ActivitySet_object_src
+	Object[0..1] role object
+end
+
+composition xxx_Object_categories between
+	Object[0..1] role xxx_Object_categories_src
+	Category[*] role categories
+end
+
+composition xxx_DataField_dataType between
+	DataField[*] role xxx_DataField_dataType_src
+	TypeDeclaration[1] role dataType
+end
+

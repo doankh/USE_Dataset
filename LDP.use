@@ -1,0 +1,64 @@
+model LDP
+class Processus
+attributes
+operations
+end
+
+class Activite
+attributes
+	name : String
+	description : String
+operations
+	pasDansSuivant(act : Activite):Boolean
+end
+
+abstract class PseudoEtat
+attributes
+operations
+end
+
+class Debut<PseudoEtat
+attributes
+operations
+end
+
+class Fin<PseudoEtat
+attributes
+operations
+end
+
+composition xxx_Processus_activites between
+	Processus[0..1] role xxx_Processus_activites_src
+	Activite[1..*] role activites
+end
+
+composition xxx_Processus_debut between
+	Processus[*] role xxx_Processus_debut_src
+	Debut[1] role debut
+end
+
+composition xxx_Processus_fin between
+	Processus[*] role xxx_Processus_fin_src
+	Fin[1] role fin
+end
+
+association xxx_Processus_activiteCourante between
+	Processus[*] role xxx_Processus_activiteCourante_src
+	Activite[0..1] role activiteCourante
+end
+
+association xxx_Activite_suivante between
+	Activite[*] role xxx_Activite_suivante_src
+	Activite[0..1] role suivante
+end
+
+association xxx_Activite_precedente between
+	Activite[*] role xxx_Activite_precedente_src
+	Activite[0..1] role precedente
+end
+
+association xxx_PseudoEtat_reference between
+	PseudoEtat[*] role xxx_PseudoEtat_reference_src
+	Activite[1] role reference
+end
+

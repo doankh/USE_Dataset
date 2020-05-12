@@ -1,0 +1,308 @@
+model iso42010
+abstract class ADElement
+attributes
+	name : String
+operations
+end
+
+class ArchitectureDescription
+attributes
+operations
+end
+
+class Stakeholder<ADElement
+attributes
+operations
+end
+
+class ArchitectureViewpoint<ADElement
+attributes
+operations
+end
+
+class ModelKind<ADElement
+attributes
+operations
+end
+
+class ArchitectureModel<ADElement
+attributes
+operations
+end
+
+class ArchitectureView<ADElement
+attributes
+operations
+end
+
+class Concern<ADElement
+attributes
+operations
+end
+
+class System
+attributes
+	name : String
+operations
+end
+
+class Architecture
+attributes
+operations
+end
+
+class ArchitectureRationale<ADElement
+attributes
+operations
+end
+
+class Correspondence
+attributes
+operations
+end
+
+class CorrespondenceRule
+attributes
+operations
+end
+
+class ArchitectureDecision<ADElement
+attributes
+operations
+end
+
+class ArchitectureFramework
+attributes
+operations
+end
+
+association xxx_ADElement_affectedBy between
+	ADElement[0..1] role xxx_ADElement_affectedBy_src
+	ArchitectureDecision[*] role affectedBy
+end
+
+composition xxx_ArchitectureDescription_stakeholders between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_stakeholders_src
+	Stakeholder[1..*] role stakeholders
+end
+
+composition xxx_ArchitectureDescription_concerns between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_concerns_src
+	Concern[1..*] role concerns
+end
+
+composition xxx_ArchitectureDescription_viewpoints between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_viewpoints_src
+	ArchitectureViewpoint[1..*] role viewpoints
+end
+
+composition xxx_ArchitectureDescription_views between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_views_src
+	ArchitectureView[1..*] role views
+end
+
+composition xxx_ArchitectureDescription_system between
+	ArchitectureDescription[*] role xxx_ArchitectureDescription_system_src
+	System[1] role system
+end
+
+composition xxx_ArchitectureDescription_expresses between
+	ArchitectureDescription[*] role xxx_ArchitectureDescription_expresses_src
+	Architecture[1] role expresses
+end
+
+composition xxx_ArchitectureDescription_rationales between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_rationales_src
+	ArchitectureRationale[1..*] role rationales
+end
+
+composition xxx_ArchitectureDescription_correspondences between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_correspondences_src
+	Correspondence[*] role correspondences
+end
+
+composition xxx_ArchitectureDescription_rules between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_rules_src
+	CorrespondenceRule[*] role rules
+end
+
+composition xxx_ArchitectureDescription_decisions between
+	ArchitectureDescription[0..1] role xxx_ArchitectureDescription_decisions_src
+	ArchitectureDecision[*] role decisions
+end
+
+association xxx_Stakeholder_concerns between
+	Stakeholder[0..1] role xxx_Stakeholder_concerns_src
+	Concern[1..*] role concerns
+end
+
+association xxx_Stakeholder_viewpoints between
+	Stakeholder[0..1] role xxx_Stakeholder_viewpoints_src
+	ArchitectureViewpoint[1..*] role viewpoints
+end
+
+association xxx_Stakeholder_hasInterestIn between
+	Stakeholder[*] role xxx_Stakeholder_hasInterestIn_src
+	System[1] role hasInterestIn
+end
+
+composition xxx_ArchitectureViewpoint_modelKinds between
+	ArchitectureViewpoint[0..1] role xxx_ArchitectureViewpoint_modelKinds_src
+	ModelKind[1..*] role modelKinds
+end
+
+association xxx_ArchitectureViewpoint_governs between
+	ArchitectureViewpoint[*] role xxx_ArchitectureViewpoint_governs_src
+	ArchitectureView[1] role governs
+end
+
+association xxx_ArchitectureViewpoint_frames between
+	ArchitectureViewpoint[0..1] role xxx_ArchitectureViewpoint_frames_src
+	Concern[1..*] role frames
+end
+
+association xxx_ModelKind_governs between
+	ModelKind[0..1] role xxx_ModelKind_governs_src
+	ArchitectureModel[1..*] role governs
+end
+
+association xxx_ModelKind_viewpoint between
+	ModelKind[*] role xxx_ModelKind_viewpoint_src
+	ArchitectureViewpoint[1] role viewpoint
+end
+
+association xxx_ArchitectureModel_governedBy between
+	ArchitectureModel[*] role xxx_ArchitectureModel_governedBy_src
+	ModelKind[1] role governedBy
+end
+
+association xxx_ArchitectureModel_view between
+	ArchitectureModel[*] role xxx_ArchitectureModel_view_src
+	ArchitectureView[1] role view
+end
+
+association xxx_ArchitectureView_governedBy between
+	ArchitectureView[*] role xxx_ArchitectureView_governedBy_src
+	ArchitectureViewpoint[1] role governedBy
+end
+
+composition xxx_ArchitectureView_models between
+	ArchitectureView[0..1] role xxx_ArchitectureView_models_src
+	ArchitectureModel[1..*] role models
+end
+
+association xxx_ArchitectureView_addresses between
+	ArchitectureView[0..1] role xxx_ArchitectureView_addresses_src
+	Concern[1..*] role addresses
+end
+
+association xxx_Concern_framedBy between
+	Concern[0..1] role xxx_Concern_framedBy_src
+	ArchitectureViewpoint[1..*] role framedBy
+end
+
+association xxx_Concern_addressedBy between
+	Concern[0..1] role xxx_Concern_addressedBy_src
+	ArchitectureView[1..*] role addressedBy
+end
+
+association xxx_Concern_stakeholders between
+	Concern[0..1] role xxx_Concern_stakeholders_src
+	Stakeholder[1..*] role stakeholders
+end
+
+association xxx_Concern_raisedBy between
+	Concern[0..1] role xxx_Concern_raisedBy_src
+	ArchitectureDecision[*] role raisedBy
+end
+
+association xxx_Concern_decisions between
+	Concern[0..1] role xxx_Concern_decisions_src
+	ArchitectureDecision[*] role decisions
+end
+
+association xxx_System_stakeholders between
+	System[0..1] role xxx_System_stakeholders_src
+	Stakeholder[1..*] role stakeholders
+end
+
+association xxx_System_exhibits between
+	System[*] role xxx_System_exhibits_src
+	Architecture[1] role exhibits
+end
+
+association xxx_Architecture_exhibitedIn between
+	Architecture[*] role xxx_Architecture_exhibitedIn_src
+	System[1] role exhibitedIn
+end
+
+association xxx_ArchitectureRationale_justifies between
+	ArchitectureRationale[0..1] role xxx_ArchitectureRationale_justifies_src
+	ArchitectureDecision[1..*] role justifies
+end
+
+association xxx_Correspondence_governedBy between
+	Correspondence[0..1] role xxx_Correspondence_governedBy_src
+	CorrespondenceRule[*] role governedBy
+end
+
+association xxx_Correspondence_relates between
+	Correspondence[0..1] role xxx_Correspondence_relates_src
+	ADElement[2..*] role relates
+end
+
+association xxx_CorrespondenceRule_governs between
+	CorrespondenceRule[0..1] role xxx_CorrespondenceRule_governs_src
+	Correspondence[1..*] role governs
+end
+
+association xxx_ArchitectureDecision_justifiedBy between
+	ArchitectureDecision[0..1] role xxx_ArchitectureDecision_justifiedBy_src
+	ArchitectureRationale[*] role justifiedBy
+end
+
+association xxx_ArchitectureDecision_dependsUpon between
+	ArchitectureDecision[0..1] role xxx_ArchitectureDecision_dependsUpon_src
+	ArchitectureDecision[*] role dependsUpon
+end
+
+association xxx_ArchitectureDecision_dependents between
+	ArchitectureDecision[0..1] role xxx_ArchitectureDecision_dependents_src
+	ArchitectureDecision[*] role dependents
+end
+
+association xxx_ArchitectureDecision_raises between
+	ArchitectureDecision[0..1] role xxx_ArchitectureDecision_raises_src
+	Concern[*] role raises
+end
+
+association xxx_ArchitectureDecision_pertainsTo between
+	ArchitectureDecision[0..1] role xxx_ArchitectureDecision_pertainsTo_src
+	Concern[1..*] role pertainsTo
+end
+
+association xxx_ArchitectureDecision_affects between
+	ArchitectureDecision[0..1] role xxx_ArchitectureDecision_affects_src
+	ADElement[1..*] role affects
+end
+
+composition xxx_ArchitectureFramework_stakeholders between
+	ArchitectureFramework[0..1] role xxx_ArchitectureFramework_stakeholders_src
+	Stakeholder[1..*] role stakeholders
+end
+
+composition xxx_ArchitectureFramework_viewpoints between
+	ArchitectureFramework[0..1] role xxx_ArchitectureFramework_viewpoints_src
+	ArchitectureViewpoint[1..*] role viewpoints
+end
+
+composition xxx_ArchitectureFramework_rules between
+	ArchitectureFramework[0..1] role xxx_ArchitectureFramework_rules_src
+	CorrespondenceRule[*] role rules
+end
+
+composition xxx_ArchitectureFramework_concerns between
+	ArchitectureFramework[0..1] role xxx_ArchitectureFramework_concerns_src
+	Concern[1..*] role concerns
+end
+

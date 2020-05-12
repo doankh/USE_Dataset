@@ -1,0 +1,89 @@
+model PrimitiveTypes
+class Subsystem
+attributes
+operations
+end
+
+class Relation
+attributes
+operations
+end
+
+class Class
+attributes
+	name : String
+	is_deferred : Boolean
+operations
+end
+
+class Feature
+attributes
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class Entity<Feature
+attributes
+operations
+end
+
+class Routine<Feature
+attributes
+operations
+end
+
+composition xxx_Subsystem_classes between
+	Subsystem[0..1] role xxx_Subsystem_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Subsystem_relations between
+	Subsystem[0..1] role xxx_Subsystem_relations_src
+	Relation[*] role relations
+end
+
+association xxx_Relation_subsystem between
+	Relation[*] role xxx_Relation_subsystem_src
+	Subsystem[1] role subsystem
+end
+
+association xxx_Relation_classes between
+	Relation[*] role xxx_Relation_classes_src
+	Class[2] role classes
+end
+
+composition xxx_Class_features between
+	Class[0..1] role xxx_Class_features_src
+	Feature[*] role features
+end
+
+association xxx_Class_parentSubsystem between
+	Class[*] role xxx_Class_parentSubsystem_src
+	Subsystem[1] role parentSubsystem
+end
+
+association xxx_Class_subsystem between
+	Class[*] role xxx_Class_subsystem_src
+	Subsystem[1] role subsystem
+end
+
+association xxx_Class_relations between
+	Class[0..1] role xxx_Class_relations_src
+	Relation[*] role relations
+end
+
+association xxx_Feature_theClass between
+	Feature[*] role xxx_Feature_theClass_src
+	Class[1] role theClass
+end
+
+association xxx_Feature_type between
+	Feature[*] role xxx_Feature_type_src
+	Type[1] role type
+end
+

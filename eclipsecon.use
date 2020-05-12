@@ -1,0 +1,115 @@
+model eclipsecon
+enum HandoutKind{
+default
+}
+
+class Schedule
+attributes
+	dayNo : Integer
+operations
+end
+
+class TimeSlot
+attributes
+	start : String
+	end_ : String
+operations
+end
+
+class Tutorial
+attributes
+	title : String
+operations
+end
+
+class Conference
+attributes
+operations
+end
+
+class Participant
+attributes
+	name : String
+operations
+end
+
+class Presenter<Participant
+attributes
+	phone : Integer
+operations
+end
+
+class Handout
+attributes
+	kind : HandoutKind
+operations
+end
+
+class Resource
+attributes
+	name : String
+	location : String
+operations
+end
+
+class Profile
+attributes
+	bio : String
+operations
+end
+
+composition xxx_Schedule_slices between
+	Schedule[*] role xxx_Schedule_slices_src
+	TimeSlot[0..5] role slices
+end
+
+association xxx_Tutorial_presenters between
+	Tutorial[*] role xxx_Tutorial_presenters_src
+	Presenter[0..2] role presenters
+end
+
+association xxx_Tutorial_assigned between
+	Tutorial[*] role xxx_Tutorial_assigned_src
+	TimeSlot[0..1] role assigned
+end
+
+composition xxx_Tutorial_handouts between
+	Tutorial[0..1] role xxx_Tutorial_handouts_src
+	Handout[*] role handouts
+end
+
+composition xxx_Conference_tutorials between
+	Conference[*] role xxx_Conference_tutorials_src
+	Tutorial[0..20] role tutorials
+end
+
+composition xxx_Conference_attendees between
+	Conference[0..1] role xxx_Conference_attendees_src
+	Participant[*] role attendees
+end
+
+composition xxx_Conference_days between
+	Conference[*] role xxx_Conference_days_src
+	Schedule[0..2] role days
+end
+
+composition xxx_Conference_eclipsezilla between
+	Conference[0..1] role xxx_Conference_eclipsezilla_src
+	Resource[*] role eclipsezilla
+end
+
+composition xxx_Presenter_profile between
+	Presenter[*] role xxx_Presenter_profile_src
+	Profile[0..1] role profile
+end
+
+association xxx_Handout_eclipsezilla between
+	Handout[*] role xxx_Handout_eclipsezilla_src
+	Resource[0..1] role eclipsezilla
+end
+
+association xxx_Profile_eclipsezilla between
+	Profile[*] role xxx_Profile_eclipsezilla_src
+	Resource[0..1] role eclipsezilla
+end
+

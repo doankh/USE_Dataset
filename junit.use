@@ -1,0 +1,101 @@
+model notifier
+abstract class TestCase<Test
+attributes
+operations
+end
+
+class Fixture
+attributes
+operations
+end
+
+class Suite<ParentRunner
+attributes
+operations
+end
+
+class ParentRunner<Runner
+attributes
+operations
+end
+
+class Runner
+attributes
+operations
+end
+
+class RunNotifier
+attributes
+operations
+end
+
+class JUnitCore
+attributes
+operations
+end
+
+abstract class Test
+attributes
+operations
+end
+
+class Result
+attributes
+operations
+end
+
+class Method
+attributes
+operations
+end
+
+association xxx_TestCase_notifier between
+	TestCase[*] role xxx_TestCase_notifier_src
+	RunNotifier[1] role notifier
+end
+
+association xxx_Fixture_tests between
+	Fixture[0..1] role xxx_Fixture_tests_src
+	Test[1..*] role tests
+end
+
+composition xxx_Runner_fixtures between
+	Runner[0..1] role xxx_Runner_fixtures_src
+	Fixture[1..*] role fixtures
+end
+
+composition xxx_Runner_tests between
+	Runner[0..1] role xxx_Runner_tests_src
+	Test[1..*] role tests
+end
+
+composition xxx_JUnitCore_notifier between
+	JUnitCore[*] role xxx_JUnitCore_notifier_src
+	RunNotifier[1] role notifier
+end
+
+composition xxx_JUnitCore_runner between
+	JUnitCore[*] role xxx_JUnitCore_runner_src
+	Runner[1] role runner
+end
+
+composition xxx_JUnitCore_results between
+	JUnitCore[0..1] role xxx_JUnitCore_results_src
+	Result[1..*] role results
+end
+
+composition xxx_Test_testMethod between
+	Test[*] role xxx_Test_testMethod_src
+	Method[1] role testMethod
+end
+
+composition xxx_Method_befores between
+	Method[0..1] role xxx_Method_befores_src
+	Method[*] role befores
+end
+
+composition xxx_Method_afters between
+	Method[0..1] role xxx_Method_afters_src
+	Method[*] role afters
+end
+

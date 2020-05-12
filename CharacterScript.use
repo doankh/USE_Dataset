@@ -1,0 +1,168 @@
+model characterScript
+enum AttributeType{
+default
+}
+
+enum CharaType{
+default
+}
+
+enum CharaSex{
+default
+}
+
+class Characters
+attributes
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+operations
+end
+
+class Template
+attributes
+	name : String
+	defaults : String
+operations
+end
+
+class CustomAttribute
+attributes
+	type : AttributeType
+operations
+end
+
+class CustomAttributeName
+attributes
+	name : String
+operations
+end
+
+class EnumValue
+attributes
+	name : String
+operations
+end
+
+class Customs
+attributes
+operations
+end
+
+class Character
+attributes
+	name : String
+operations
+end
+
+class Property
+attributes
+	comment : String
+operations
+end
+
+class DefaultProperty<Property
+attributes
+operations
+end
+
+class FullName<DefaultProperty
+attributes
+	value : String
+operations
+end
+
+class Description<DefaultProperty
+attributes
+	value : String
+operations
+end
+
+class Type<DefaultProperty
+attributes
+	value : CharaType
+operations
+end
+
+class Age<DefaultProperty
+attributes
+	value : Integer
+operations
+end
+
+class Sex<DefaultProperty
+attributes
+	value : CharaSex
+operations
+end
+
+class CustomProperty<Property
+attributes
+	stringValue : String
+	intValue : Integer
+operations
+end
+
+composition xxx_Characters_imports between
+	Characters[0..1] role xxx_Characters_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Characters_templates between
+	Characters[0..1] role xxx_Characters_templates_src
+	Template[*] role templates
+end
+
+composition xxx_Characters_customs between
+	Characters[*] role xxx_Characters_customs_src
+	Customs[0..1] role customs
+end
+
+composition xxx_Characters_characters between
+	Characters[0..1] role xxx_Characters_characters_src
+	Character[*] role characters
+end
+
+composition xxx_Template_customs between
+	Template[0..1] role xxx_Template_customs_src
+	CustomAttribute[*] role customs
+end
+
+composition xxx_CustomAttribute_caName between
+	CustomAttribute[*] role xxx_CustomAttribute_caName_src
+	CustomAttributeName[0..1] role caName
+end
+
+composition xxx_CustomAttribute_enumValues between
+	CustomAttribute[0..1] role xxx_CustomAttribute_enumValues_src
+	EnumValue[*] role enumValues
+end
+
+composition xxx_Customs_customAttributes between
+	Customs[0..1] role xxx_Customs_customAttributes_src
+	CustomAttribute[*] role customAttributes
+end
+
+association xxx_Character_template between
+	Character[*] role xxx_Character_template_src
+	Template[0..1] role template
+end
+
+composition xxx_Character_properties between
+	Character[0..1] role xxx_Character_properties_src
+	Property[*] role properties
+end
+
+association xxx_CustomProperty_customAttributeRef between
+	CustomProperty[*] role xxx_CustomProperty_customAttributeRef_src
+	CustomAttributeName[0..1] role customAttributeRef
+end
+
+association xxx_CustomProperty_enumValue between
+	CustomProperty[*] role xxx_CustomProperty_enumValue_src
+	EnumValue[0..1] role enumValue
+end
+

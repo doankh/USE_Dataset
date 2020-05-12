@@ -1,0 +1,220 @@
+model tooldef
+enum StandardToolKind{
+default
+}
+
+enum ActionKind{
+default
+}
+
+enum AppearanceStyle{
+default
+}
+
+class ToolRegistry
+attributes
+operations
+end
+
+abstract class AbstractTool
+attributes
+	title : String
+	description : String
+operations
+end
+
+abstract class ToolContainer<AbstractTool
+attributes
+operations
+end
+
+class PaletteSeparator<AbstractTool
+attributes
+operations
+end
+
+class ToolGroup<ToolContainer
+attributes
+	collapsible : Boolean
+	stack : Boolean
+operations
+end
+
+class Palette<ToolContainer
+attributes
+operations
+end
+
+class StandardTool<AbstractTool
+attributes
+	toolKind : StandardToolKind
+operations
+end
+
+class CreationTool<AbstractTool
+attributes
+operations
+end
+
+class GenericTool<AbstractTool
+attributes
+	toolClass : String
+operations
+end
+
+abstract class ItemBase
+attributes
+operations
+end
+
+abstract class Menu
+attributes
+operations
+end
+
+class Separator<ItemBase
+attributes
+	name : String
+operations
+end
+
+class PredefinedItem<ItemBase
+attributes
+	identifier : String
+operations
+end
+
+class PredefinedMenu<Menu,PredefinedItem
+attributes
+operations
+end
+
+abstract class ContributionItem<ItemBase
+attributes
+	title : String
+operations
+end
+
+class MenuAction<ContributionItem
+attributes
+	kind : ActionKind
+	hotKey : String
+operations
+end
+
+class ItemRef<ItemBase
+attributes
+operations
+end
+
+class ContextMenu<Menu
+attributes
+operations
+end
+
+class PopupMenu<Menu,ContributionItem
+attributes
+	iD : String
+operations
+end
+
+class MainMenu<Menu
+attributes
+	title : String
+operations
+end
+
+class Toolbar<Menu
+attributes
+operations
+end
+
+abstract class Image
+attributes
+operations
+end
+
+class DefaultImage<Image
+attributes
+operations
+end
+
+class BundleImage<Image
+attributes
+	path : String
+	bundle : String
+operations
+end
+
+abstract class StyleSelector
+attributes
+operations
+	isOk(style : String):Boolean
+end
+
+class GenericStyleSelector<StyleSelector
+attributes
+	values : AppearanceStyle
+operations
+end
+
+composition xxx_ToolRegistry_sharedActions between
+	ToolRegistry[0..1] role xxx_ToolRegistry_sharedActions_src
+	MenuAction[*] role sharedActions
+end
+
+composition xxx_ToolRegistry_allMenus between
+	ToolRegistry[0..1] role xxx_ToolRegistry_allMenus_src
+	Menu[*] role allMenus
+end
+
+composition xxx_ToolRegistry_palette between
+	ToolRegistry[*] role xxx_ToolRegistry_palette_src
+	Palette[0..1] role palette
+end
+
+composition xxx_AbstractTool_smallIcon between
+	AbstractTool[*] role xxx_AbstractTool_smallIcon_src
+	Image[0..1] role smallIcon
+end
+
+composition xxx_AbstractTool_largeIcon between
+	AbstractTool[*] role xxx_AbstractTool_largeIcon_src
+	Image[0..1] role largeIcon
+end
+
+composition xxx_ToolContainer_tools between
+	ToolContainer[0..1] role xxx_ToolContainer_tools_src
+	AbstractTool[*] role tools
+end
+
+association xxx_ToolGroup_active between
+	ToolGroup[*] role xxx_ToolGroup_active_src
+	AbstractTool[0..1] role active
+end
+
+association xxx_Palette_default between
+	Palette[*] role xxx_Palette_default_src
+	AbstractTool[0..1] role default
+end
+
+composition xxx_Menu_items between
+	Menu[0..1] role xxx_Menu_items_src
+	ItemBase[*] role items
+end
+
+composition xxx_ContributionItem_icon between
+	ContributionItem[*] role xxx_ContributionItem_icon_src
+	Image[0..1] role icon
+end
+
+association xxx_ItemRef_item between
+	ItemRef[*] role xxx_ItemRef_item_src
+	ItemBase[1] role item
+end
+
+association xxx_ContextMenu_default between
+	ContextMenu[*] role xxx_ContextMenu_default_src
+	MenuAction[0..1] role default
+end
+

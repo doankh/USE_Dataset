@@ -1,0 +1,170 @@
+model PL_I
+class PLIClassifier
+attributes
+	name : String
+operations
+end
+
+class PLISimpleType<PLIClassifier
+attributes
+operations
+end
+
+class PLINamedType<PLIClassifier
+attributes
+operations
+end
+
+class PLIComposedType<PLIClassifier
+attributes
+operations
+end
+
+class PLIAlias
+attributes
+operations
+end
+
+class PLIAttribute
+attributes
+operations
+end
+
+class PLIComputationalType<PLISimpleType
+attributes
+operations
+end
+
+class PLINonComputationalType<PLISimpleType
+attributes
+operations
+end
+
+class PLIElement
+attributes
+	level : String
+	name : String
+operations
+end
+
+class PLIElementInitialValue
+attributes
+	initialValue : String
+operations
+end
+
+class PLISourceText
+attributes
+	source : String
+	fileName : String
+operations
+end
+
+class PLIArray
+attributes
+operations
+end
+
+class PLIFixedBoundArray<PLIArray
+attributes
+	IBound : Integer
+	uBound : Integer
+operations
+end
+
+class PLIFixedLboundArray<PLIArray
+attributes
+	IBound : Integer
+	uBoundToAllocate : String
+operations
+end
+
+class PLIHBoundArray<PLIArray
+attributes
+	uBound : Integer
+	IBoundToAllocate : String
+operations
+end
+
+class PLIVariableBoundArray<PLIArray
+attributes
+	IBoundToAllocate : String
+	hBoundToAllocate : String
+operations
+end
+
+association xxx_PLIClassifier_typedElements between
+	PLIClassifier[0..1] role xxx_PLIClassifier_typedElements_src
+	PLIElement[*] role typedElements
+end
+
+association xxx_PLISimpleType_alias between
+	PLISimpleType[*] role xxx_PLISimpleType_alias_src
+	PLIAlias[1] role alias
+end
+
+composition xxx_PLIComposedType_elements between
+	PLIComposedType[0..1] role xxx_PLIComposedType_elements_src
+	PLIElement[*] role elements
+end
+
+composition xxx_PLIAlias_type between
+	PLIAlias[*] role xxx_PLIAlias_type_src
+	PLISimpleType[1] role type
+end
+
+composition xxx_PLIAlias_contains between
+	PLIAlias[0..1] role xxx_PLIAlias_contains_src
+	PLIAttribute[1..*] role contains
+end
+
+association xxx_PLIElement_sharedType between
+	PLIElement[*] role xxx_PLIElement_sharedType_src
+	PLIClassifier[0..1] role sharedType
+end
+
+association xxx_PLIElement_group between
+	PLIElement[*] role xxx_PLIElement_group_src
+	PLIComposedType[0..1] role group
+end
+
+association xxx_PLIElement_initial between
+	PLIElement[*] role xxx_PLIElement_initial_src
+	PLIElementInitialValue[0..1] role initial
+end
+
+association xxx_PLIElement_source between
+	PLIElement[*] role xxx_PLIElement_source_src
+	PLISourceText[1] role source
+end
+
+composition xxx_PLIElement_array between
+	PLIElement[*] role xxx_PLIElement_array_src
+	PLIArray[0..1] role array
+end
+
+association xxx_PLIArray_arrayOf between
+	PLIArray[*] role xxx_PLIArray_arrayOf_src
+	PLIElement[0..1] role arrayOf
+end
+
+association xxx_PLIFixedBoundArray_referredTo between
+	PLIFixedBoundArray[*] role xxx_PLIFixedBoundArray_referredTo_src
+	PLIElement[1] role referredTo
+end
+
+association xxx_PLIFixedLboundArray_referredTo between
+	PLIFixedLboundArray[*] role xxx_PLIFixedLboundArray_referredTo_src
+	PLIElement[1] role referredTo
+end
+
+association xxx_PLIHBoundArray_referredTo between
+	PLIHBoundArray[*] role xxx_PLIHBoundArray_referredTo_src
+	PLIElement[1] role referredTo
+end
+
+association xxx_PLIVariableBoundArray_referredTo between
+	PLIVariableBoundArray[*] role xxx_PLIVariableBoundArray_referredTo_src
+	PLIElement[1] role referredTo
+end
+

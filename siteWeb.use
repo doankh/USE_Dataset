@@ -1,0 +1,112 @@
+model siteWeb
+class Contact
+attributes
+	nom : String
+	prenom : String
+	adresse : String
+	mail : String
+	telephone : String
+operations
+end
+
+class Photo
+attributes
+	taille : Real
+	extension : String
+	nom : String
+operations
+end
+
+class Rubriques
+attributes
+	texte : String
+	lien : String
+operations
+end
+
+class Liens
+attributes
+	fichier : String
+	adresseWeb : String
+	pageInterne : String
+operations
+end
+
+class PageInterne
+attributes
+	titrePage : String
+	texte : String
+operations
+end
+
+class Types
+attributes
+	gras : Boolean
+	italique : Boolean
+operations
+end
+
+class Fichiers
+attributes
+	type : String
+	taille : Integer
+	nom : String
+	emplacement : String
+operations
+end
+
+class ConfigurationPage
+attributes
+	couleurFond : String
+	titreSite : String
+	auteurs : String
+	couleurPolice : String
+	taillePolice : Integer
+operations
+end
+
+class PagePrincipale
+attributes
+operations
+end
+
+composition xxx_PageInterne_types between
+	PageInterne[*] role xxx_PageInterne_types_src
+	Types[0..1] role types
+end
+
+composition xxx_PageInterne_liens between
+	PageInterne[*] role xxx_PageInterne_liens_src
+	Liens[0..1] role liens
+end
+
+composition xxx_PageInterne_photo between
+	PageInterne[*] role xxx_PageInterne_photo_src
+	Photo[1] role photo
+end
+
+composition xxx_PagePrincipale_contacts between
+	PagePrincipale[0..1] role xxx_PagePrincipale_contacts_src
+	Contact[1..*] role contacts
+end
+
+composition xxx_PagePrincipale_rubriques between
+	PagePrincipale[*] role xxx_PagePrincipale_rubriques_src
+	Rubriques[0..1] role rubriques
+end
+
+composition xxx_PagePrincipale_fichiers between
+	PagePrincipale[0..1] role xxx_PagePrincipale_fichiers_src
+	Fichiers[*] role fichiers
+end
+
+composition xxx_PagePrincipale_configurationPage between
+	PagePrincipale[*] role xxx_PagePrincipale_configurationPage_src
+	ConfigurationPage[1] role configurationPage
+end
+
+composition xxx_PagePrincipale_pages between
+	PagePrincipale[0..1] role xxx_PagePrincipale_pages_src
+	PageInterne[1..*] role pages
+end
+

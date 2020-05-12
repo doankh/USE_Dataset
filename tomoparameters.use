@@ -1,0 +1,147 @@
+model parameters
+enum ScanMode{
+default
+}
+
+enum SampleWeight{
+default
+}
+
+enum Resolution{
+default
+}
+
+class AlignmentConfiguration
+attributes
+	id : String
+	energy : Real
+	description : String
+	scanMode : ScanMode
+	sampleExposureTime : Real
+	flatExposureTime : Real
+	createdUserId : String
+	createdDateTime : String
+	sampleWeight : SampleWeight
+	proposalId : String
+	selectedToRun : String
+	inBeamPosition : Real
+	outOfBeamPosition : Real
+	tomoRotationAxis : Integer
+operations
+	getMotorPosition(motorName : String):String
+end
+
+class DetectorBin
+attributes
+	binX : Integer
+	binY : Integer
+operations
+end
+
+class DetectorProperties
+attributes
+	desired3DResolution : Resolution
+	numberOfFramerPerProjection : Integer
+	acquisitionTimeDivider : Real
+operations
+end
+
+class DetectorRoi
+attributes
+	minX : Integer
+	maxX : Integer
+	minY : Integer
+	maxY : Integer
+operations
+end
+
+class Module
+attributes
+	moduleNumber : Integer
+	cameraMagnification : Real
+operations
+end
+
+class MotorPosition
+attributes
+	name : String
+	position : Real
+operations
+end
+
+class Parameters
+attributes
+operations
+	getAlignmentConfiguration(configurationId : String):AlignmentConfiguration
+	getIndex(alignmentConfiguration : AlignmentConfiguration):Integer
+end
+
+class ScanCollected
+attributes
+	scanNumber : String
+	startTime : String
+	endTime : String
+operations
+end
+
+class StitchParameters
+attributes
+	stitchingThetaAngle : Real
+	imageAtTheta : String
+	imageAtThetaPlus90 : String
+operations
+end
+
+class TomoExperiment
+attributes
+	description : String
+	totalTimeToRun : String
+	version : Integer
+operations
+end
+
+composition xxx_AlignmentConfiguration_detectorProperties between
+	AlignmentConfiguration[*] role xxx_AlignmentConfiguration_detectorProperties_src
+	DetectorProperties[1] role detectorProperties
+end
+
+composition xxx_AlignmentConfiguration_stitchParameters between
+	AlignmentConfiguration[*] role xxx_AlignmentConfiguration_stitchParameters_src
+	StitchParameters[1] role stitchParameters
+end
+
+composition xxx_AlignmentConfiguration_motorPositions between
+	AlignmentConfiguration[0..1] role xxx_AlignmentConfiguration_motorPositions_src
+	MotorPosition[*] role motorPositions
+end
+
+composition xxx_AlignmentConfiguration_scanCollected between
+	AlignmentConfiguration[0..1] role xxx_AlignmentConfiguration_scanCollected_src
+	ScanCollected[*] role scanCollected
+end
+
+composition xxx_DetectorProperties_detectorRoi between
+	DetectorProperties[*] role xxx_DetectorProperties_detectorRoi_src
+	DetectorRoi[1] role detectorRoi
+end
+
+composition xxx_DetectorProperties_detectorBin between
+	DetectorProperties[*] role xxx_DetectorProperties_detectorBin_src
+	DetectorBin[1] role detectorBin
+end
+
+composition xxx_DetectorProperties_moduleParameters between
+	DetectorProperties[*] role xxx_DetectorProperties_moduleParameters_src
+	Module[1] role moduleParameters
+end
+
+composition xxx_Parameters_configurationSet between
+	Parameters[0..1] role xxx_Parameters_configurationSet_src
+	AlignmentConfiguration[*] role configurationSet
+end
+
+composition xxx_TomoExperiment_parameters between
+	TomoExperiment[*] role xxx_TomoExperiment_parameters_src
+	Parameters[0..1] role parameters
+end
+

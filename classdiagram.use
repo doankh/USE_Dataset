@@ -1,0 +1,164 @@
+model ClassDiagram
+enum AggregationKind{
+	none,
+	shared,
+	composite
+}
+
+enum ParameterDirectionKind{
+	IN,
+	INOUT,
+	OUT,
+	RETURN
+}
+
+class Class<Classifier
+attributes
+operations
+end
+
+class Property<NamedElement
+attributes
+	aggregation : AggregationKind
+operations
+end
+
+class Operation<NamedElement
+attributes
+operations
+end
+
+class Interface<Classifier
+attributes
+operations
+end
+
+abstract class Classifier<type
+attributes
+operations
+end
+
+class Package<PackagedElement
+attributes
+operations
+end
+
+class Association<PackagedElement
+attributes
+operations
+end
+
+abstract class PackagedElement<NamedElement
+attributes
+operations
+end
+
+class Parameter<NamedElement
+attributes
+	direction : ParameterDirectionKind
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+abstract class type<PackagedElement
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+abstract class MultiplicityElement
+attributes
+	upper : Integer
+	lower : Integer
+operations
+end
+
+class EnumerationLiteral<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Generalization
+attributes
+operations
+end
+
+composition xxx_Class_nestedClassifier between
+	Class[0..1] role xxx_Class_nestedClassifier_src
+	Classifier[*] role nestedClassifier
+end
+
+composition xxx_Operation_ownedParmeter between
+	Operation[0..1] role xxx_Operation_ownedParmeter_src
+	Parameter[*] role ownedParmeter
+end
+
+composition xxx_Interface_nestedClassifier between
+	Interface[0..1] role xxx_Interface_nestedClassifier_src
+	Classifier[*] role nestedClassifier
+end
+
+composition xxx_Classifier_ownedProperty between
+	Classifier[0..1] role xxx_Classifier_ownedProperty_src
+	Property[*] role ownedProperty
+end
+
+composition xxx_Classifier_ownedOperation between
+	Classifier[0..1] role xxx_Classifier_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+composition xxx_Classifier_ownedElement between
+	Classifier[0..1] role xxx_Classifier_ownedElement_src
+	Generalization[*] role ownedElement
+end
+
+composition xxx_Package_ownedPackagedElement between
+	Package[0..1] role xxx_Package_ownedPackagedElement_src
+	PackagedElement[*] role ownedPackagedElement
+end
+
+composition xxx_Association_ownedEnd between
+	Association[0..1] role xxx_Association_ownedEnd_src
+	Property[*] role ownedEnd
+end
+
+association xxx_Association_memberEnd between
+	Association[0..1] role xxx_Association_memberEnd_src
+	Property[*] role memberEnd
+end
+
+composition xxx_Enumeration_ownedLiteral between
+	Enumeration[0..1] role xxx_Enumeration_ownedLiteral_src
+	EnumerationLiteral[*] role ownedLiteral
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	type[0..1] role type
+end
+
+association xxx_Generalization_general between
+	Generalization[*] role xxx_Generalization_general_src
+	Classifier[0..1] role general
+end
+

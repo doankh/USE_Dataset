@@ -1,0 +1,150 @@
+model GUI
+enum Layout{
+	default,
+	horizontal,
+	vertical
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class Named<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class GUI<Named
+attributes
+operations
+end
+
+class Tab<Named
+attributes
+	title : String
+operations
+end
+
+abstract class Composant<Named
+attributes
+operations
+end
+
+class Group<Composant
+attributes
+	title : String
+	layout : Layout
+	description : String
+operations
+end
+
+class Label<Composant
+attributes
+	text : String
+operations
+end
+
+class TextArea<Composant
+attributes
+	text : String
+	nbRows : Integer
+operations
+end
+
+class Table<Composant
+attributes
+operations
+end
+
+class Column<LocatedElement
+attributes
+	title : String
+operations
+end
+
+class ComboBox<Composant
+attributes
+operations
+end
+
+class Row<Composant
+attributes
+	text : String
+operations
+end
+
+class Item<Composant
+attributes
+	text : String
+operations
+end
+
+class Button<Composant
+attributes
+	title : String
+operations
+end
+
+composition xxx_GUI_guiTabs between
+	GUI[0..1] role xxx_GUI_guiTabs_src
+	Tab[*] role guiTabs
+end
+
+association xxx_Tab_gui between
+	Tab[*] role xxx_Tab_gui_src
+	GUI[1] role gui
+end
+
+association xxx_Tab_group between
+	Tab[*] role xxx_Tab_group_src
+	Group[1] role group
+end
+
+association xxx_Composant_composantGroup between
+	Composant[*] role xxx_Composant_composantGroup_src
+	Group[1] role composantGroup
+end
+
+association xxx_Group_tabGroup between
+	Group[*] role xxx_Group_tabGroup_src
+	Tab[0..1] role tabGroup
+end
+
+composition xxx_Group_composants between
+	Group[0..1] role xxx_Group_composants_src
+	Composant[*] role composants
+end
+
+composition xxx_Table_tabColumns between
+	Table[0..1] role xxx_Table_tabColumns_src
+	Column[*] role tabColumns
+end
+
+association xxx_Column_columnTab between
+	Column[*] role xxx_Column_columnTab_src
+	Table[1] role columnTab
+end
+
+composition xxx_ComboBox_listRows between
+	ComboBox[0..1] role xxx_ComboBox_listRows_src
+	Row[*] role listRows
+end
+
+association xxx_Row_rowList between
+	Row[*] role xxx_Row_rowList_src
+	ComboBox[1] role rowList
+end
+
+composition xxx_Row_listItems between
+	Row[0..1] role xxx_Row_listItems_src
+	Item[*] role listItems
+end
+
+association xxx_Item_itemList between
+	Item[*] role xxx_Item_itemList_src
+	Row[1] role itemList
+end
+

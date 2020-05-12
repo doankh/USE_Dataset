@@ -1,0 +1,86 @@
+model Industrial
+class PhysicalNode
+attributes
+	name : String
+operations
+end
+
+class Partition
+attributes
+	name : String
+operations
+end
+
+class Module
+attributes
+	name : String
+operations
+end
+
+class Scheduler
+attributes
+	name : String
+operations
+end
+
+class Service
+attributes
+	name : String
+operations
+end
+
+class RootElement
+attributes
+operations
+end
+
+association xxx_PhysicalNode_partition between
+	PhysicalNode[0..1] role xxx_PhysicalNode_partition_src
+	Partition[*] role partition
+end
+
+association xxx_Partition_module between
+	Partition[0..1] role xxx_Partition_module_src
+	Module[*] role module
+end
+
+association xxx_Module_scheduler between
+	Module[0..1] role xxx_Module_scheduler_src
+	Scheduler[*] role scheduler
+end
+
+association xxx_Scheduler_required between
+	Scheduler[*] role xxx_Scheduler_required_src
+	Service[0..1] role required
+end
+
+association xxx_Scheduler_provided between
+	Scheduler[0..1] role xxx_Scheduler_provided_src
+	Service[*] role provided
+end
+
+composition xxx_RootElement_hasPhysicalNode between
+	RootElement[0..1] role xxx_RootElement_hasPhysicalNode_src
+	PhysicalNode[*] role hasPhysicalNode
+end
+
+composition xxx_RootElement_hasPartition between
+	RootElement[0..1] role xxx_RootElement_hasPartition_src
+	Partition[*] role hasPartition
+end
+
+composition xxx_RootElement_hasModule between
+	RootElement[0..1] role xxx_RootElement_hasModule_src
+	Module[*] role hasModule
+end
+
+composition xxx_RootElement_hasScheduler between
+	RootElement[0..1] role xxx_RootElement_hasScheduler_src
+	Scheduler[*] role hasScheduler
+end
+
+composition xxx_RootElement_hasService between
+	RootElement[0..1] role xxx_RootElement_hasService_src
+	Scheduler[*] role hasService
+end
+

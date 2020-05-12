@@ -1,0 +1,145 @@
+model sqlDSL
+enum SDBEngine{
+default
+}
+
+enum SSimpleTypes{
+default
+}
+
+enum SIndex{
+default
+}
+
+class SModel
+attributes
+	generatedFile : String
+operations
+end
+
+class SSettings
+attributes
+	schema : String
+	javapackage : String
+	engine : SDBEngine
+operations
+end
+
+class SArtifact
+attributes
+	name : String
+operations
+end
+
+class STable<SArtifact
+attributes
+	entityname : String
+	cached : Boolean
+	prefix : String
+operations
+end
+
+class STableMember
+attributes
+	name : String
+operations
+end
+
+class SColumn<STableMember
+attributes
+	simpleType : SSimpleTypes
+operations
+end
+
+class SJoinColumn<STableMember
+attributes
+operations
+end
+
+class SColumnProps
+attributes
+	nullable : Boolean
+	aes : Boolean
+	index : SIndex
+	javacolumn : String
+operations
+end
+
+class SExtDeclaredSQLType
+attributes
+operations
+end
+
+class SInlinedSQLType
+attributes
+	value : Integer
+operations
+end
+
+class SEnum<SArtifact,SExtDeclaredSQLType
+attributes
+operations
+end
+
+class SEnumLiteral
+attributes
+	name : String
+	value : Integer
+operations
+end
+
+class SString<SInlinedSQLType
+attributes
+operations
+end
+
+class SDecimal<SInlinedSQLType
+attributes
+operations
+end
+
+composition xxx_SModel_settings between
+	SModel[*] role xxx_SModel_settings_src
+	SSettings[0..1] role settings
+end
+
+composition xxx_SModel_artifact between
+	SModel[0..1] role xxx_SModel_artifact_src
+	SArtifact[*] role artifact
+end
+
+composition xxx_STable_settings between
+	STable[*] role xxx_STable_settings_src
+	SSettings[0..1] role settings
+end
+
+composition xxx_STable_columns between
+	STable[0..1] role xxx_STable_columns_src
+	STableMember[*] role columns
+end
+
+composition xxx_STableMember_props between
+	STableMember[*] role xxx_STableMember_props_src
+	SColumnProps[0..1] role props
+end
+
+association xxx_SColumn_extType between
+	SColumn[*] role xxx_SColumn_extType_src
+	SExtDeclaredSQLType[0..1] role extType
+end
+
+composition xxx_SColumn_inlinedType between
+	SColumn[*] role xxx_SColumn_inlinedType_src
+	SInlinedSQLType[0..1] role inlinedType
+end
+
+association xxx_SJoinColumn_referencedType between
+	SJoinColumn[*] role xxx_SJoinColumn_referencedType_src
+	STable[0..1] role referencedType
+end
+
+composition xxx_SEnum_literals between
+	SEnum[0..1] role xxx_SEnum_literals_src
+	SEnumLiteral[*] role literals
+end
+

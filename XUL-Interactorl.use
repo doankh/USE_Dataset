@@ -1,0 +1,287 @@
+model XULInteractorMetaModel
+enum Orients{
+	horizontal,
+	vertical
+}
+
+class UIModel
+attributes
+operations
+end
+
+class Windows<Container
+attributes
+	id : String
+	title : String
+	orient : Orients
+	style : String
+operations
+end
+
+class Button<Containement
+attributes
+	tooltiptext : String
+	image : String
+operations
+end
+
+class Image<Containement
+attributes
+	src : String
+operations
+end
+
+class RadioGroup<Containement
+attributes
+operations
+end
+
+class Radio<Interactor
+attributes
+	id : String
+	label : String
+	selected : Boolean
+	disabled : Boolean
+operations
+end
+
+class ListBox<Containement
+attributes
+	rows : Integer
+operations
+end
+
+class ListItem<Interactor
+attributes
+	label : String
+	value : String
+operations
+end
+
+class MenuList<Containement
+attributes
+operations
+end
+
+class MenuItem<Interactor
+attributes
+	label : String
+operations
+end
+
+class vbox<Container
+attributes
+operations
+end
+
+class hbox<Container
+attributes
+operations
+end
+
+class Containement<Interactor
+attributes
+	style : String
+	accesskey : String
+	class_ : String
+	maxlength : Integer
+	label : String
+	orient : Orients
+	minlength : String
+	onclick : String
+	disabled : String
+operations
+end
+
+class GroupBox<Container
+attributes
+operations
+end
+
+class Container<Interactor
+attributes
+operations
+end
+
+class Interactor
+attributes
+	flex : Integer
+	id_ : String
+	stat : String
+	style_ : String
+operations
+end
+
+class TabBox<Containement
+attributes
+operations
+end
+
+class TextBox<Containement
+attributes
+	multiline : Boolean
+	value : String
+operations
+end
+
+class Spacer<Containement
+attributes
+operations
+end
+
+class Label<Containement
+attributes
+	value : String
+	control : String
+operations
+end
+
+class Grid<Containement
+attributes
+operations
+end
+
+class row<Container
+attributes
+operations
+end
+
+class column<Container
+attributes
+operations
+end
+
+class CheckBox<Containement
+attributes
+	checked : Boolean
+operations
+end
+
+class Caption<Containement
+attributes
+	label_ : String
+operations
+end
+
+class Description<Containement
+attributes
+	value : String
+operations
+end
+
+class HeaderCss
+attributes
+	ref : String
+	type : String
+operations
+end
+
+class HeaderJScript
+attributes
+	ref : String
+operations
+end
+
+class TabPanel<Container
+attributes
+	id : String
+	orient : Orients
+operations
+end
+
+class Event
+attributes
+	functionCalledName : String
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	value : String
+	name : String
+operations
+end
+
+class onClick<Event
+attributes
+operations
+end
+
+class Function
+attributes
+	name : String
+	body : String
+operations
+end
+
+composition xxx_UIModel_windows between
+	UIModel[*] role xxx_UIModel_windows_src
+	Windows[0..1] role windows
+end
+
+composition xxx_UIModel_functions between
+	UIModel[0..1] role xxx_UIModel_functions_src
+	Function[*] role functions
+end
+
+composition xxx_Windows_headers between
+	Windows[0..1] role xxx_Windows_headers_src
+	HeaderCss[*] role headers
+end
+
+association xxx_Windows_headersJScript between
+	Windows[0..1] role xxx_Windows_headersJScript_src
+	HeaderJScript[*] role headersJScript
+end
+
+composition xxx_RadioGroup_radiobuttons between
+	RadioGroup[0..1] role xxx_RadioGroup_radiobuttons_src
+	Radio[*] role radiobuttons
+end
+
+composition xxx_ListBox_listitems between
+	ListBox[0..1] role xxx_ListBox_listitems_src
+	ListItem[*] role listitems
+end
+
+composition xxx_MenuList_menuitems between
+	MenuList[0..1] role xxx_MenuList_menuitems_src
+	MenuItem[*] role menuitems
+end
+
+composition xxx_Container_xulInteractors between
+	Container[0..1] role xxx_Container_xulInteractors_src
+	Interactor[*] role xulInteractors
+end
+
+composition xxx_Interactor_events between
+	Interactor[0..1] role xxx_Interactor_events_src
+	Event[*] role events
+end
+
+composition xxx_TabBox_tabPanels between
+	TabBox[0..1] role xxx_TabBox_tabPanels_src
+	Interactor[*] role tabPanels
+end
+
+composition xxx_Grid_columns between
+	Grid[0..1] role xxx_Grid_columns_src
+	column[*] role columns
+end
+
+composition xxx_Grid_rows between
+	Grid[0..1] role xxx_Grid_rows_src
+	row[*] role rows
+end
+
+composition xxx_Event_functionCallParameters between
+	Event[0..1] role xxx_Event_functionCallParameters_src
+	Parameter[*] role functionCallParameters
+end
+
+association xxx_Function_functionUIModel between
+	Function[*] role xxx_Function_functionUIModel_src
+	UIModel[1] role functionUIModel
+end
+

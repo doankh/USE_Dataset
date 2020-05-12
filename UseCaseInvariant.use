@@ -1,0 +1,61 @@
+model usecaseinvariant
+class CounterActor<Actor
+attributes
+operations
+end
+
+class Value
+attributes
+	type : String
+	ID : String
+	inSet : Boolean
+operations
+end
+
+class UseCaseModel
+attributes
+	name : String
+operations
+end
+
+class NormalActor<Actor
+attributes
+operations
+end
+
+abstract class Actor
+attributes
+	name : String
+operations
+end
+
+association xxx_Value_asBefore between
+	Value[*] role xxx_Value_asBefore_src
+	Actor[0..1] role asBefore
+end
+
+association xxx_Value_asAfter between
+	Value[*] role xxx_Value_asAfter_src
+	Actor[0..1] role asAfter
+end
+
+composition xxx_UseCaseModel_invariants between
+	UseCaseModel[0..1] role xxx_UseCaseModel_invariants_src
+	Actor[*] role invariants
+end
+
+composition xxx_Actor_valuesAfter between
+	Actor[0..1] role xxx_Actor_valuesAfter_src
+	Value[*] role valuesAfter
+end
+
+composition xxx_Actor_valuesBefore between
+	Actor[0..1] role xxx_Actor_valuesBefore_src
+	Value[*] role valuesBefore
+end
+
+association xxx_Actor_model_ between
+	Actor[*] role xxx_Actor_model__src
+	UseCaseModel[0..1] role model_
+end
+

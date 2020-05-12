@@ -1,0 +1,190 @@
+model Pascal
+class Program
+attributes
+	name : String
+operations
+end
+
+class Variable
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class Parameter<Variable
+attributes
+operations
+end
+
+class Instruction
+attributes
+operations
+end
+
+class Calculation<Instruction
+attributes
+operations
+end
+
+class Control<Instruction
+attributes
+operations
+end
+
+class Assignment<Instruction
+attributes
+operations
+end
+
+class Block<Instruction
+attributes
+operations
+end
+
+class Conditional<Control
+attributes
+operations
+end
+
+class Loop<Control
+attributes
+operations
+end
+
+class Procedure<Control
+attributes
+	name : String
+operations
+end
+
+class Function<Procedure
+attributes
+operations
+end
+
+class For<Loop
+attributes
+operations
+end
+
+class While<Loop
+attributes
+operations
+end
+
+class Repeat<Loop
+attributes
+operations
+end
+
+composition xxx_Program_variables between
+	Program[0..1] role xxx_Program_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Program_types between
+	Program[0..1] role xxx_Program_types_src
+	Type[*] role types
+end
+
+composition xxx_Program_procedures between
+	Program[0..1] role xxx_Program_procedures_src
+	Procedure[*] role procedures
+end
+
+association xxx_Variable_program between
+	Variable[*] role xxx_Variable_program_src
+	Program[1] role program
+end
+
+association xxx_Variable_procedure between
+	Variable[*] role xxx_Variable_procedure_src
+	Procedure[1] role procedure
+end
+
+association xxx_Variable_type between
+	Variable[*] role xxx_Variable_type_src
+	Type[1] role type
+end
+
+association xxx_Type_program between
+	Type[*] role xxx_Type_program_src
+	Program[1] role program
+end
+
+association xxx_Type_variables between
+	Type[0..1] role xxx_Type_variables_src
+	Variable[*] role variables
+end
+
+association xxx_Parameter_procedure_parameter between
+	Parameter[*] role xxx_Parameter_procedure_parameter_src
+	Procedure[1] role procedure_parameter
+end
+
+association xxx_Instruction_block between
+	Instruction[*] role xxx_Instruction_block_src
+	Block[1] role block
+end
+
+composition xxx_Block_instructions between
+	Block[0..1] role xxx_Block_instructions_src
+	Instruction[*] role instructions
+end
+
+association xxx_Block_procedure between
+	Block[*] role xxx_Block_procedure_src
+	Procedure[1] role procedure
+end
+
+association xxx_Block_loop between
+	Block[*] role xxx_Block_loop_src
+	Loop[1] role loop
+end
+
+association xxx_Block_conditional between
+	Block[*] role xxx_Block_conditional_src
+	Conditional[1] role conditional
+end
+
+composition xxx_Conditional_blocks between
+	Conditional[*] role xxx_Conditional_blocks_src
+	Block[1..2] role blocks
+end
+
+composition xxx_Loop_block_loop between
+	Loop[*] role xxx_Loop_block_loop_src
+	Block[1] role block_loop
+end
+
+association xxx_Procedure_program between
+	Procedure[*] role xxx_Procedure_program_src
+	Program[1] role program
+end
+
+composition xxx_Procedure_variables between
+	Procedure[0..1] role xxx_Procedure_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Procedure_parameters between
+	Procedure[0..1] role xxx_Procedure_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Procedure_block_procedure between
+	Procedure[*] role xxx_Procedure_block_procedure_src
+	Block[1] role block_procedure
+end
+
+association xxx_Function_returnType between
+	Function[*] role xxx_Function_returnType_src
+	Type[1] role returnType
+end
+

@@ -1,0 +1,66 @@
+model PrimitiveTypes
+class Entity
+attributes
+operations
+end
+
+class AssociationEnd
+attributes
+operations
+end
+
+class Association
+attributes
+operations
+end
+
+class Method
+attributes
+operations
+end
+
+class Attribute
+attributes
+operations
+end
+
+association xxx_Entity_methods between
+	Entity[0..1] role xxx_Entity_methods_src
+	Method[*] role methods
+end
+
+association xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Entity_associationEnds between
+	Entity[0..1] role xxx_Entity_associationEnds_src
+	AssociationEnd[*] role associationEnds
+end
+
+association xxx_AssociationEnd_type between
+	AssociationEnd[*] role xxx_AssociationEnd_type_src
+	Entity[1] role type
+end
+
+association xxx_AssociationEnd_association_ between
+	AssociationEnd[*] role xxx_AssociationEnd_association__src
+	Association[1] role association_
+end
+
+association xxx_Association_associationEnds between
+	Association[*] role xxx_Association_associationEnds_src
+	AssociationEnd[2] role associationEnds
+end
+
+association xxx_Method_entity between
+	Method[*] role xxx_Method_entity_src
+	Entity[1] role entity
+end
+
+association xxx_Attribute_entity between
+	Attribute[*] role xxx_Attribute_entity_src
+	Entity[1] role entity
+end
+

@@ -1,0 +1,133 @@
+model TransformModel
+class TransformModel_
+attributes
+	name : String
+operations
+end
+
+class Behavior
+attributes
+	description : String
+	signature : String
+	class_ : String
+operations
+end
+
+class Rule
+attributes
+	name : String
+operations
+end
+
+abstract class Pattern
+attributes
+operations
+end
+
+class ExactSting<Pattern
+attributes
+	content : String
+operations
+end
+
+class Variable<Pattern
+attributes
+	name : String
+operations
+end
+
+class Alternation<Pattern
+attributes
+operations
+end
+
+class Optional<Pattern
+attributes
+operations
+end
+
+abstract class Transformation
+attributes
+operations
+end
+
+class Expression<Transformation
+attributes
+	value : String
+operations
+end
+
+class IfDef<Transformation
+attributes
+	variables : String
+operations
+end
+
+class Match<Transformation
+attributes
+operations
+end
+
+class KeyValue
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Fail<Transformation
+attributes
+	message : String
+operations
+end
+
+composition xxx_TransformModel__behaviors between
+	TransformModel_[0..1] role xxx_TransformModel__behaviors_src
+	Behavior[*] role behaviors
+end
+
+composition xxx_TransformModel__rules between
+	TransformModel_[0..1] role xxx_TransformModel__rules_src
+	Rule[1..*] role rules
+end
+
+composition xxx_Rule_patterns between
+	Rule[0..1] role xxx_Rule_patterns_src
+	Pattern[1..*] role patterns
+end
+
+composition xxx_Rule_transformation between
+	Rule[*] role xxx_Rule_transformation_src
+	Transformation[1] role transformation
+end
+
+composition xxx_Alternation_choices between
+	Alternation[0..1] role xxx_Alternation_choices_src
+	Pattern[2..*] role choices
+end
+
+composition xxx_Optional_value between
+	Optional[0..1] role xxx_Optional_value_src
+	Pattern[1..*] role value
+end
+
+composition xxx_IfDef_true_body between
+	IfDef[*] role xxx_IfDef_true_body_src
+	Transformation[1] role true_body
+end
+
+composition xxx_IfDef_false_body between
+	IfDef[*] role xxx_IfDef_false_body_src
+	Transformation[1] role false_body
+end
+
+association xxx_Match_rule between
+	Match[*] role xxx_Match_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_Match_assignments between
+	Match[0..1] role xxx_Match_assignments_src
+	KeyValue[*] role assignments
+end
+

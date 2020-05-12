@@ -1,0 +1,71 @@
+model datamodel
+class Repository
+attributes
+	absolutePath : String
+	name : String
+operations
+end
+
+class File
+attributes
+	relativePath : String
+operations
+	toString():String
+end
+
+class Line
+attributes
+	line : Integer
+	content : String
+	sourceCode : Boolean
+	documentation : Boolean
+operations
+end
+
+class Commit
+attributes
+	message : String
+	id : String
+	date : String
+operations
+end
+
+class Author
+attributes
+	name : String
+	email : String
+	numOfInsertions : Integer
+	numOfDeletions : Integer
+operations
+end
+
+composition xxx_Repository_files between
+	Repository[0..1] role xxx_Repository_files_src
+	File[*] role files
+end
+
+composition xxx_Repository_commits between
+	Repository[0..1] role xxx_Repository_commits_src
+	Commit[*] role commits
+end
+
+composition xxx_Repository_authors between
+	Repository[0..1] role xxx_Repository_authors_src
+	Author[1..*] role authors
+end
+
+composition xxx_File_lines between
+	File[0..1] role xxx_File_lines_src
+	Line[*] role lines
+end
+
+association xxx_Line_commit between
+	Line[*] role xxx_Line_commit_src
+	Commit[1] role commit
+end
+
+association xxx_Commit_author between
+	Commit[*] role xxx_Commit_author_src
+	Author[1] role author
+end
+

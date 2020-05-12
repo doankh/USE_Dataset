@@ -1,0 +1,122 @@
+model robmod
+enum ComponentType{
+default
+}
+
+class Component
+attributes
+	name : String
+	type : String
+	description : String
+	type2 : ComponentType
+	executionOrder : Integer
+	period : String
+operations
+end
+
+class Handler
+attributes
+	name : String
+	description : String
+operations
+end
+
+class InputPort<Port
+attributes
+	name : String
+	description : String
+operations
+end
+
+class OutputPort<Port
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class Port
+attributes
+	dataType : String
+	external : Boolean
+operations
+end
+
+class Property
+attributes
+	name : String
+	type : String
+	value : String
+operations
+end
+
+composition xxx_Component_composition_ between
+	Component[0..1] role xxx_Component_composition__src
+	Component[*] role composition_
+end
+
+composition xxx_Component_handlers between
+	Component[0..1] role xxx_Component_handlers_src
+	Handler[*] role handlers
+end
+
+composition xxx_Component_inputPorts between
+	Component[0..1] role xxx_Component_inputPorts_src
+	InputPort[*] role inputPorts
+end
+
+composition xxx_Component_outputPorts between
+	Component[0..1] role xxx_Component_outputPorts_src
+	OutputPort[*] role outputPorts
+end
+
+composition xxx_Component_properties between
+	Component[0..1] role xxx_Component_properties_src
+	Property[*] role properties
+end
+
+association xxx_Component_before between
+	Component[0..1] role xxx_Component_before_src
+	Component[*] role before
+end
+
+association xxx_Handler_trigeredBy between
+	Handler[0..1] role xxx_Handler_trigeredBy_src
+	InputPort[*] role trigeredBy
+end
+
+association xxx_Handler_generates between
+	Handler[0..1] role xxx_Handler_generates_src
+	OutputPort[*] role generates
+end
+
+association xxx_InputPort_connection between
+	InputPort[*] role xxx_InputPort_connection_src
+	OutputPort[0..1] role connection
+end
+
+association xxx_InputPort_propagation between
+	InputPort[0..1] role xxx_InputPort_propagation_src
+	InputPort[*] role propagation
+end
+
+association xxx_InputPort_trigger between
+	InputPort[0..1] role xxx_InputPort_trigger_src
+	Handler[*] role trigger
+end
+
+association xxx_OutputPort_connection between
+	OutputPort[0..1] role xxx_OutputPort_connection_src
+	InputPort[*] role connection
+end
+
+association xxx_OutputPort_delegation between
+	OutputPort[0..1] role xxx_OutputPort_delegation_src
+	OutputPort[*] role delegation
+end
+
+association xxx_Property_propagate between
+	Property[0..1] role xxx_Property_propagate_src
+	Property[*] role propagate
+end
+

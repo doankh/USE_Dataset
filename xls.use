@@ -1,0 +1,178 @@
+model xls
+class DateTimeType
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+operations
+end
+
+abstract class ValueType
+attributes
+operations
+end
+
+class StringValue<ValueType
+attributes
+	value : String
+operations
+end
+
+class NumberValue<ValueType
+attributes
+	value : Real
+operations
+end
+
+class DateTimeTypeValue<ValueType
+attributes
+operations
+end
+
+class BooleanValue<ValueType
+attributes
+	value : Boolean
+operations
+end
+
+class ErrorValue<ValueType
+attributes
+operations
+end
+
+class Workbook
+attributes
+operations
+end
+
+class Worksheet
+attributes
+	name : String
+operations
+end
+
+class Table
+attributes
+operations
+end
+
+abstract class TableElement
+attributes
+	index : Integer
+operations
+end
+
+abstract class ColOrRowElement<TableElement
+attributes
+	hidden : Boolean
+	span : Integer
+operations
+end
+
+class Column<ColOrRowElement
+attributes
+	autoFitWidth : Boolean
+	width : Real
+operations
+end
+
+class Row<ColOrRowElement
+attributes
+	autoFitHeight : Boolean
+	height : Real
+operations
+end
+
+class Cell<TableElement
+attributes
+	arrayRange : String
+	formula : String
+	hRef : String
+	mergeAcross : Real
+	mergeDown : Real
+operations
+end
+
+class Data
+attributes
+operations
+end
+
+association xxx_ValueType_vt_data between
+	ValueType[*] role xxx_ValueType_vt_data_src
+	Data[1] role vt_data
+end
+
+composition xxx_DateTimeTypeValue_value between
+	DateTimeTypeValue[*] role xxx_DateTimeTypeValue_value_src
+	DateTimeType[1] role value
+end
+
+composition xxx_Workbook_wb_worksheets between
+	Workbook[0..1] role xxx_Workbook_wb_worksheets_src
+	Worksheet[*] role wb_worksheets
+end
+
+association xxx_Worksheet_ws_workbook between
+	Worksheet[*] role xxx_Worksheet_ws_workbook_src
+	Workbook[1] role ws_workbook
+end
+
+composition xxx_Worksheet_ws_table between
+	Worksheet[*] role xxx_Worksheet_ws_table_src
+	Table[0..1] role ws_table
+end
+
+association xxx_Table_t_worksheet between
+	Table[*] role xxx_Table_t_worksheet_src
+	Worksheet[1] role t_worksheet
+end
+
+composition xxx_Table_t_cols between
+	Table[0..1] role xxx_Table_t_cols_src
+	Column[*] role t_cols
+end
+
+composition xxx_Table_t_rows between
+	Table[0..1] role xxx_Table_t_rows_src
+	Row[*] role t_rows
+end
+
+association xxx_Column_c_table between
+	Column[*] role xxx_Column_c_table_src
+	Table[1] role c_table
+end
+
+association xxx_Row_r_table between
+	Row[*] role xxx_Row_r_table_src
+	Table[1] role r_table
+end
+
+composition xxx_Row_r_cells between
+	Row[0..1] role xxx_Row_r_cells_src
+	Cell[*] role r_cells
+end
+
+association xxx_Cell_c_row between
+	Cell[*] role xxx_Cell_c_row_src
+	Row[1] role c_row
+end
+
+composition xxx_Cell_c_data between
+	Cell[*] role xxx_Cell_c_data_src
+	Data[0..1] role c_data
+end
+
+association xxx_Data_d_cell between
+	Data[*] role xxx_Data_d_cell_src
+	Cell[1] role d_cell
+end
+
+composition xxx_Data_value between
+	Data[*] role xxx_Data_value_src
+	ValueType[1] role value
+end
+

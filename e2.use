@@ -1,0 +1,173 @@
+model e2
+class Lecture
+attributes
+	Date : String
+	length : Integer
+operations
+end
+
+class Person
+attributes
+	Name : String
+operations
+end
+
+class Assingnment
+attributes
+	Type : String
+	isMandatory : Boolean
+	Deadline : String
+	StartDate : String
+	Title : String
+	Content : String
+operations
+end
+
+class Course
+attributes
+	ID : String
+	Name : String
+	credit : Real
+operations
+end
+
+class Group
+attributes
+	Name : String
+operations
+end
+
+class AssignmentSubmission
+attributes
+	Comments : String
+	assessment : Integer
+operations
+end
+
+class University
+attributes
+	Name : String
+operations
+end
+
+class LectureContent
+attributes
+	Type : String
+	Material : String
+operations
+end
+
+class Goal
+attributes
+	GoalID : String
+	GoalText : String
+operations
+end
+
+class EClass0
+attributes
+operations
+end
+
+class SubGoal
+attributes
+	GoalID : String
+	GoalText : String
+operations
+end
+
+composition xxx_Lecture_Content between
+	Lecture[0..1] role xxx_Lecture_Content_src
+	LectureContent[1..*] role Content
+end
+
+association xxx_Lecture_LearningGoals between
+	Lecture[0..1] role xxx_Lecture_LearningGoals_src
+	SubGoal[1..*] role LearningGoals
+end
+
+composition xxx_Person_Submitted between
+	Person[0..1] role xxx_Person_Submitted_src
+	AssignmentSubmission[*] role Submitted
+end
+
+association xxx_Assingnment_LearningGoals between
+	Assingnment[0..1] role xxx_Assingnment_LearningGoals_src
+	SubGoal[1..*] role LearningGoals
+end
+
+association xxx_Course_Students between
+	Course[0..1] role xxx_Course_Students_src
+	Person[*] role Students
+end
+
+association xxx_Course_Lecturerer between
+	Course[0..1] role xxx_Course_Lecturerer_src
+	Person[1..*] role Lecturerer
+end
+
+composition xxx_Course_Assingments between
+	Course[0..1] role xxx_Course_Assingments_src
+	Assingnment[*] role Assingments
+end
+
+composition xxx_Course_Lectures between
+	Course[0..1] role xxx_Course_Lectures_src
+	Lecture[*] role Lectures
+end
+
+composition xxx_Course_StudentGroups between
+	Course[0..1] role xxx_Course_StudentGroups_src
+	Group[*] role StudentGroups
+end
+
+association xxx_Course_TeachingAssistant between
+	Course[0..1] role xxx_Course_TeachingAssistant_src
+	Person[*] role TeachingAssistant
+end
+
+composition xxx_Course_LearningGoals between
+	Course[0..1] role xxx_Course_LearningGoals_src
+	Goal[1..*] role LearningGoals
+end
+
+association xxx_Group_GroupMember between
+	Group[*] role xxx_Group_GroupMember_src
+	Person[2..3] role GroupMember
+end
+
+composition xxx_Group_Submitted between
+	Group[0..1] role xxx_Group_Submitted_src
+	AssignmentSubmission[*] role Submitted
+end
+
+association xxx_AssignmentSubmission_Assignment between
+	AssignmentSubmission[*] role xxx_AssignmentSubmission_Assignment_src
+	Assingnment[1] role Assignment
+end
+
+association xxx_AssignmentSubmission_AssesedBy between
+	AssignmentSubmission[*] role xxx_AssignmentSubmission_AssesedBy_src
+	Person[1] role AssesedBy
+end
+
+composition xxx_University_Persons between
+	University[0..1] role xxx_University_Persons_src
+	Person[*] role Persons
+end
+
+composition xxx_University_Courses between
+	University[0..1] role xxx_University_Courses_src
+	Course[*] role Courses
+end
+
+composition xxx_LectureContent_LectureAssignment between
+	LectureContent[0..1] role xxx_LectureContent_LectureAssignment_src
+	Assingnment[*] role LectureAssignment
+end
+
+composition xxx_Goal_SubGoals between
+	Goal[0..1] role xxx_Goal_SubGoals_src
+	SubGoal[1..*] role SubGoals
+end
+

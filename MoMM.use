@@ -1,0 +1,78 @@
+model PrimitiveTypes
+class ModelElement
+attributes
+	level : Integer
+	name : String
+	potency : String
+operations
+end
+
+class Attribute<ModelElement
+attributes
+operations
+end
+
+abstract class Relationship<ModelElement
+attributes
+operations
+end
+
+class Generalization<Relationship
+attributes
+operations
+end
+
+class Association<Relationship
+attributes
+	maxSource : String
+	maxTarget : String
+	minSource : String
+	minTarget : String
+operations
+end
+
+association xxx_ModelElement_hasClass between
+	ModelElement[*] role xxx_ModelElement_hasClass_src
+	ModelElement[1] role hasClass
+end
+
+association xxx_ModelElement_classElement between
+	ModelElement[0..1] role xxx_ModelElement_classElement_src
+	ModelElement[*] role classElement
+end
+
+association xxx_ModelElement_elementTarget between
+	ModelElement[*] role xxx_ModelElement_elementTarget_src
+	Relationship[1] role elementTarget
+end
+
+association xxx_ModelElement_elementSource between
+	ModelElement[*] role xxx_ModelElement_elementSource_src
+	Relationship[1] role elementSource
+end
+
+association xxx_ModelElement_attributes_ between
+	ModelElement[0..1] role xxx_ModelElement_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_ModelElement_attType between
+	ModelElement[*] role xxx_ModelElement_attType_src
+	Attribute[1] role attType
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	ModelElement[1] role type
+end
+
+association xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	ModelElement[1] role target
+end
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	ModelElement[1] role source
+end
+

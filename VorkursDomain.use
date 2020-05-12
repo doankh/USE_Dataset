@@ -1,0 +1,121 @@
+model VorkursModel
+enum Nationality{
+default
+}
+
+enum Subject{
+default
+}
+
+enum Gender{
+default
+}
+
+enum ProgrammingLanguage{
+default
+}
+
+enum OperatingSystem{
+default
+}
+
+class RegistrationSystem
+attributes
+operations
+end
+
+abstract class Person
+attributes
+	firstname : String
+	lastname : String
+	gender : Gender
+	subject : Subject
+operations
+end
+
+class Address
+attributes
+	city : String
+	state : String
+	zip : String
+	street : String
+operations
+end
+
+class Notebook
+attributes
+	OperatingSystem : OperatingSystem
+	hasWLAN : Boolean
+operations
+end
+
+class Contact
+attributes
+	phonenumber : String
+	Email : String
+operations
+end
+
+class TeachingAssistant<Person
+attributes
+operations
+end
+
+class Qualification
+attributes
+	hasPCExperience : Boolean
+	hasProgrammingExperience : Boolean
+	Language : Nationality
+	programminLanguage : ProgrammingLanguage
+operations
+end
+
+class Student<Person
+attributes
+operations
+end
+
+class Room
+attributes
+	roomNr : Integer
+	sockets : Boolean
+	seats : Integer
+	hasComputers : Boolean
+operations
+end
+
+composition xxx_RegistrationSystem_students between
+	RegistrationSystem[0..1] role xxx_RegistrationSystem_students_src
+	Student[*] role students
+end
+
+composition xxx_RegistrationSystem_teachingAssistants between
+	RegistrationSystem[0..1] role xxx_RegistrationSystem_teachingAssistants_src
+	TeachingAssistant[*] role teachingAssistants
+end
+
+composition xxx_Person_contactinfo between
+	Person[*] role xxx_Person_contactinfo_src
+	Contact[1] role contactinfo
+end
+
+composition xxx_Person_notebook between
+	Person[*] role xxx_Person_notebook_src
+	Notebook[0..1] role notebook
+end
+
+composition xxx_Person_qualification between
+	Person[*] role xxx_Person_qualification_src
+	Qualification[1] role qualification
+end
+
+composition xxx_Contact_address between
+	Contact[*] role xxx_Contact_address_src
+	Address[0..1] role address
+end
+
+composition xxx_TeachingAssistant_room between
+	TeachingAssistant[*] role xxx_TeachingAssistant_room_src
+	Room[1] role room
+end
+

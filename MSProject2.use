@@ -1,0 +1,136 @@
+model PrimitiveTypes
+class MSPProject
+attributes
+operations
+end
+
+class MSPTask
+attributes
+operations
+end
+
+class MSPLink
+attributes
+operations
+end
+
+class MSPAssignment
+attributes
+operations
+end
+
+class MSPResource
+attributes
+	cost : Real
+operations
+end
+
+class MSPHumanResource<MSPResource
+attributes
+	email : String
+operations
+end
+
+class MSPMachine<MSPResource
+attributes
+operations
+end
+
+class Date
+attributes
+	day : Integer
+	month : Integer
+	year : Integer
+operations
+end
+
+composition xxx_MSPProject_resource between
+	MSPProject[0..1] role xxx_MSPProject_resource_src
+	MSPResource[*] role resource
+end
+
+composition xxx_MSPProject_link between
+	MSPProject[0..1] role xxx_MSPProject_link_src
+	MSPLink[*] role link
+end
+
+composition xxx_MSPProject_task between
+	MSPProject[0..1] role xxx_MSPProject_task_src
+	MSPTask[*] role task
+end
+
+composition xxx_MSPTask_finishDate between
+	MSPTask[*] role xxx_MSPTask_finishDate_src
+	Date[1] role finishDate
+end
+
+composition xxx_MSPTask_startDate between
+	MSPTask[*] role xxx_MSPTask_startDate_src
+	Date[1] role startDate
+end
+
+association xxx_MSPTask_project between
+	MSPTask[*] role xxx_MSPTask_project_src
+	MSPProject[1] role project
+end
+
+association xxx_MSPTask_superTask between
+	MSPTask[*] role xxx_MSPTask_superTask_src
+	MSPTask[0..1] role superTask
+end
+
+association xxx_MSPTask_subTask between
+	MSPTask[0..1] role xxx_MSPTask_subTask_src
+	MSPTask[*] role subTask
+end
+
+association xxx_MSPTask_assignment between
+	MSPTask[0..1] role xxx_MSPTask_assignment_src
+	MSPAssignment[*] role assignment
+end
+
+association xxx_MSPTask_inLink between
+	MSPTask[0..1] role xxx_MSPTask_inLink_src
+	MSPLink[*] role inLink
+end
+
+association xxx_MSPTask_outLink between
+	MSPTask[0..1] role xxx_MSPTask_outLink_src
+	MSPLink[*] role outLink
+end
+
+association xxx_MSPLink_project between
+	MSPLink[*] role xxx_MSPLink_project_src
+	MSPProject[1] role project
+end
+
+association xxx_MSPLink_succ between
+	MSPLink[*] role xxx_MSPLink_succ_src
+	MSPTask[1] role succ
+end
+
+association xxx_MSPLink_pred between
+	MSPLink[*] role xxx_MSPLink_pred_src
+	MSPTask[1] role pred
+end
+
+association xxx_MSPAssignment_task between
+	MSPAssignment[*] role xxx_MSPAssignment_task_src
+	MSPTask[1] role task
+end
+
+association xxx_MSPAssignment_resource between
+	MSPAssignment[*] role xxx_MSPAssignment_resource_src
+	MSPResource[1] role resource
+end
+
+association xxx_MSPResource_project between
+	MSPResource[*] role xxx_MSPResource_project_src
+	MSPProject[1] role project
+end
+
+association xxx_MSPResource_assignment between
+	MSPResource[0..1] role xxx_MSPResource_assignment_src
+	MSPAssignment[*] role assignment
+end
+

@@ -1,0 +1,167 @@
+model opencms
+class Diagrama
+attributes
+operations
+end
+
+class Componente
+attributes
+	name : String
+operations
+end
+
+abstract class ElementoOculto
+attributes
+	name : String
+	orden : Integer
+operations
+end
+
+class Url<ElementoOculto
+attributes
+operations
+end
+
+class SelectorArchivos<ElementoOculto
+attributes
+operations
+end
+
+class Tag<ElementoOculto
+attributes
+operations
+end
+
+class IdentificadorInterno<ElementoOculto
+attributes
+operations
+end
+
+abstract class ElementoVisual
+attributes
+	name : String
+	orden : Integer
+operations
+end
+
+class Fecha<ElementoVisual
+attributes
+operations
+end
+
+class Entradilla<ElementoVisual
+attributes
+operations
+end
+
+class BotonSeleccion<ElementoVisual
+attributes
+operations
+end
+
+class Enlace<ElementoVisual
+attributes
+operations
+end
+
+class Video<ElementoVisual
+attributes
+operations
+end
+
+class Texto<ElementoVisual
+attributes
+operations
+end
+
+class Boton<ElementoVisual
+attributes
+operations
+end
+
+class Titulo<ElementoVisual
+attributes
+	enlace : String
+operations
+end
+
+class Etiqueta<ElementoVisual
+attributes
+operations
+end
+
+class Audio<ElementoVisual
+attributes
+operations
+end
+
+class Subtitulo<ElementoVisual
+attributes
+	enlace : Boolean
+operations
+end
+
+class EntradaTexto<ElementoVisual
+attributes
+operations
+end
+
+class Imagen<ElementoVisual
+attributes
+	alto : String
+	ancho : String
+operations
+end
+
+abstract class ComponentePredeterminado
+attributes
+	name : String
+	orden : Integer
+operations
+end
+
+class Baner<ComponentePredeterminado
+attributes
+operations
+end
+
+class IconoRedSocial<ComponentePredeterminado
+attributes
+operations
+end
+
+class MenuDesplegable<ComponentePredeterminado
+attributes
+operations
+end
+
+class BarraDesplegable<ComponentePredeterminado
+attributes
+operations
+end
+
+class Slider<ComponentePredeterminado
+attributes
+operations
+end
+
+composition xxx_Diagrama_componente between
+	Diagrama[*] role xxx_Diagrama_componente_src
+	Componente[1] role componente
+end
+
+composition xxx_Componente_elementoOculto between
+	Componente[0..1] role xxx_Componente_elementoOculto_src
+	ElementoOculto[*] role elementoOculto
+end
+
+composition xxx_Componente_elementoVisual between
+	Componente[0..1] role xxx_Componente_elementoVisual_src
+	ElementoVisual[1..*] role elementoVisual
+end
+
+composition xxx_Componente_componentePredeterminado between
+	Componente[0..1] role xxx_Componente_componentePredeterminado_src
+	ComponentePredeterminado[*] role componentePredeterminado
+end
+

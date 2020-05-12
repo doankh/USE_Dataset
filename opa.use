@@ -1,0 +1,141 @@
+model opa
+enum Role{
+default
+}
+
+class Activity
+attributes
+	date : String
+	hours : Real
+	description : String
+operations
+end
+
+abstract class Entity
+attributes
+operations
+end
+
+class Person<Entity
+attributes
+	firstName : String
+	lastName : String
+	email : String
+	gender : String
+operations
+end
+
+class PersonCalendar
+attributes
+operations
+end
+
+class Project<Entity
+attributes
+	name : String
+operations
+end
+
+class ProjectCalendar
+attributes
+operations
+end
+
+class Task<Entity
+attributes
+	name : String
+	estimatedEffortPD : Integer
+	restEffortPD : Integer
+operations
+end
+
+class Team<Entity
+attributes
+	name : String
+operations
+end
+
+class TeamMember
+attributes
+	percentCapacity : Integer
+operations
+end
+
+class TeamRole
+attributes
+	role : Role
+	count : Integer
+operations
+end
+
+class Topic<Entity
+attributes
+	name : String
+operations
+end
+
+abstract class ValueObject
+attributes
+operations
+end
+
+composition xxx_Activity_person between
+	Activity[*] role xxx_Activity_person_src
+	Person[1] role person
+end
+
+composition xxx_Project_teams between
+	Project[0..1] role xxx_Project_teams_src
+	Team[*] role teams
+end
+
+association xxx_Task_assignedTo between
+	Task[*] role xxx_Task_assignedTo_src
+	TeamMember[1] role assignedTo
+end
+
+composition xxx_Task_activities between
+	Task[0..1] role xxx_Task_activities_src
+	Activity[*] role activities
+end
+
+composition xxx_Team_childTeams between
+	Team[0..1] role xxx_Team_childTeams_src
+	Team[*] role childTeams
+end
+
+composition xxx_Team_teamRoles between
+	Team[0..1] role xxx_Team_teamRoles_src
+	TeamRole[*] role teamRoles
+end
+
+composition xxx_Team_lead between
+	Team[*] role xxx_Team_lead_src
+	Person[1] role lead
+end
+
+composition xxx_Team_topics between
+	Team[0..1] role xxx_Team_topics_src
+	Topic[*] role topics
+end
+
+association xxx_TeamMember_person between
+	TeamMember[*] role xxx_TeamMember_person_src
+	Person[1] role person
+end
+
+composition xxx_TeamRole_member between
+	TeamRole[*] role xxx_TeamRole_member_src
+	TeamMember[1] role member
+end
+
+composition xxx_Topic_childTopics between
+	Topic[0..1] role xxx_Topic_childTopics_src
+	Topic[*] role childTopics
+end
+
+composition xxx_Topic_tasks between
+	Topic[0..1] role xxx_Topic_tasks_src
+	Task[*] role tasks
+end
+

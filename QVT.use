@@ -1,0 +1,1743 @@
+model qvttemplate
+enum SeverityKind{
+	error,
+	fatal,
+	warning
+}
+
+enum DirectionKind{
+	in_,
+	inout,
+	out
+}
+
+enum ImportKind{
+	extension,
+	access
+}
+
+enum EnforcementMode{
+	Deletion,
+	Creation
+}
+
+enum CollectionKind{
+	OrderedSet_,
+	Set_,
+	Bag_,
+	Sequence_
+}
+
+abstract class TemplateExp<LiteralExp
+attributes
+operations
+end
+
+class ObjectTemplateExp<TemplateExp
+attributes
+operations
+end
+
+class CollectionTemplateExp<TemplateExp
+attributes
+	kind : CollectionKind
+operations
+end
+
+class PropertyTemplateItem<Element
+attributes
+operations
+end
+
+class ImperativeIterateExp<ImperativeLoopExp
+attributes
+operations
+end
+
+class AssignExp<ImperativeExpression
+attributes
+	isReset : Boolean
+operations
+end
+
+class BlockExp<ImperativeExpression
+attributes
+operations
+end
+
+class SwitchExp<ImperativeExpression
+attributes
+operations
+end
+
+class VariableInitExp<ImperativeExpression
+attributes
+	withResult : Boolean
+operations
+end
+
+class WhileExp<ImperativeExpression
+attributes
+operations
+end
+
+class ComputeExp<ImperativeExpression
+attributes
+operations
+end
+
+class AltExp<ImperativeExpression
+attributes
+operations
+end
+
+class UnlinkExp<ImperativeExpression
+attributes
+operations
+end
+
+class ReturnExp<ImperativeExpression
+attributes
+operations
+end
+
+class BreakExp<ImperativeExpression
+attributes
+operations
+end
+
+class TryExp<ImperativeExpression
+attributes
+operations
+end
+
+class RaiseExp<ImperativeExpression
+attributes
+operations
+end
+
+class ContinueExp<ImperativeExpression
+attributes
+operations
+end
+
+class ForExp<ImperativeLoopExp
+attributes
+operations
+end
+
+class TupleExp<ImperativeExpression
+attributes
+operations
+end
+
+class Typedef<Class
+attributes
+operations
+end
+
+class InstantiationExp<ImperativeExpression
+attributes
+operations
+end
+
+class DictionaryType<CollectionType
+attributes
+operations
+end
+
+class DictLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class DictLiteralPart<Element
+attributes
+operations
+end
+
+class TemplateParameterType<Type
+attributes
+	specification : String
+operations
+end
+
+class LogExp<ImperativeExpression
+attributes
+	text : String
+	level : Integer
+operations
+end
+
+class AssertExp<ImperativeExpression
+attributes
+	severity : SeverityKind
+operations
+end
+
+abstract class ImperativeLoopExp<ImperativeExpression
+attributes
+operations
+end
+
+class CollectorExp<ImperativeLoopExp
+attributes
+operations
+end
+
+abstract class ImperativeExpression<OclExpression
+attributes
+operations
+end
+
+class UnpackExp<ImperativeExpression
+attributes
+operations
+end
+
+class AnonymousTupleType<Class
+attributes
+operations
+end
+
+class AnonymousTupleLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class AnonymousTupleLiteralPart<Element
+attributes
+operations
+end
+
+class ListType<CollectionType
+attributes
+operations
+end
+
+class Class<Type
+attributes
+	isAbstract : Boolean
+operations
+end
+
+abstract class DataType<Type
+attributes
+operations
+end
+
+abstract class Element<Object
+attributes
+operations
+end
+
+class Tag<Element
+attributes
+	value : String
+	name : String
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class Extent<Object
+attributes
+operations
+end
+
+class Object
+attributes
+operations
+end
+
+class Operation<TypedElement
+attributes
+operations
+end
+
+abstract class MultiplicityElement
+attributes
+	isOrdered : Boolean
+	isUnique : Boolean
+	lower : Integer
+	upper : String
+operations
+end
+
+class Package<NamedElement
+attributes
+	uri : String
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+class Parameter<TypedElement
+attributes
+operations
+end
+
+class EnumerationLiteral<NamedElement
+attributes
+operations
+end
+
+class Property<TypedElement
+attributes
+	isReadOnly : Boolean
+	isDerived : Boolean
+	isComposite : Boolean
+	isId : Boolean
+	default : String
+operations
+end
+
+abstract class TypedElement<NamedElement
+attributes
+operations
+end
+
+class PrimitiveType<DataType
+attributes
+operations
+end
+
+class URIExtent<Extent
+attributes
+operations
+end
+
+class Comment<Element
+attributes
+operations
+end
+
+class MappingBody<OperationBody
+attributes
+operations
+end
+
+class Helper<ImperativeOperation
+attributes
+	isQuery : Boolean
+operations
+end
+
+class ResolveExp<CallExp
+attributes
+	one : Boolean
+	isInverse : Boolean
+	isDeferred : Boolean
+operations
+end
+
+class ResolveInExp<ResolveExp
+attributes
+operations
+end
+
+class OperationalTransformation<Module
+attributes
+operations
+end
+
+class MappingParameter<VarParameter
+attributes
+operations
+end
+
+class MappingOperation<NamedElement
+attributes
+operations
+end
+
+class MappingCallExp<ImperativeCallExp
+attributes
+	isStrict : Boolean
+operations
+end
+
+class Constructor<ImperativeOperation
+attributes
+operations
+end
+
+class ContextualProperty<Property
+attributes
+operations
+end
+
+class EntryOperation<ImperativeOperation
+attributes
+operations
+end
+
+class ImperativeCallExp<OperationCallExp
+attributes
+	isVirtual : Boolean
+operations
+end
+
+class ImperativeOperation<Operation
+attributes
+	isBlackbox : Boolean
+operations
+end
+
+class Library<Module
+attributes
+operations
+end
+
+class ModelParameter<VarParameter
+attributes
+operations
+end
+
+class ModelType<URIExtent
+attributes
+	conformanceKind : String
+operations
+end
+
+class Module<Package
+attributes
+	isBlackbox : Boolean
+operations
+end
+
+class ModuleImport<Element
+attributes
+	kind : ImportKind
+operations
+end
+
+class VarParameter<Variable
+attributes
+	kind : DirectionKind
+operations
+end
+
+class OperationBody<Element
+attributes
+operations
+end
+
+class ConstructorBody<OperationBody
+attributes
+operations
+end
+
+class ObjectExp<InstantiationExp
+attributes
+operations
+end
+
+abstract class Area
+attributes
+operations
+end
+
+class Assignment
+attributes
+	isDefault : Boolean
+operations
+end
+
+class BottomPattern<CorePattern
+attributes
+operations
+end
+
+class GuardPattern<CorePattern
+attributes
+operations
+end
+
+class Mapping<Area
+attributes
+operations
+end
+
+class RealizedVariable<Variable
+attributes
+operations
+end
+
+class CoreDomain<Area
+attributes
+operations
+end
+
+class CorePattern<Pattern
+attributes
+operations
+end
+
+class EnforcementOperation
+attributes
+	enforcementMode : EnforcementMode
+operations
+end
+
+class Domain<NamedElement
+attributes
+	isCheckable : Boolean
+	isEnforceable : Boolean
+operations
+end
+
+class Transformation<Package
+attributes
+operations
+end
+
+class TypedModel<NamedElement
+attributes
+operations
+end
+
+class Rule<NamedElement
+attributes
+operations
+end
+
+class Pattern<Element
+attributes
+operations
+end
+
+class Predicate<Element
+attributes
+operations
+end
+
+class Function<Operation
+attributes
+operations
+end
+
+class FunctionParameter<Variable
+attributes
+operations
+end
+
+class RelationalTransformation<Transformation
+attributes
+operations
+end
+
+class Relation<Rule
+attributes
+	isTopLevel : Boolean
+operations
+end
+
+class RelationDomain<Domain
+attributes
+operations
+end
+
+class DomainPattern<Pattern
+attributes
+operations
+end
+
+class RelationImplementation<Element
+attributes
+operations
+end
+
+class Key<Element
+attributes
+operations
+end
+
+class BooleanLiteralExp<PrimitiveLiteralExp
+attributes
+	booleanSymbol : Boolean
+operations
+end
+
+abstract class CallExp<OclExpression
+attributes
+operations
+end
+
+abstract class OclExpression<TypedElement
+attributes
+operations
+end
+
+class UnlimitedNaturalExp<NumericLiteralExp
+attributes
+	symbol : String
+operations
+end
+
+class IfExp<OclExpression
+attributes
+operations
+end
+
+class LetExp<OclExpression
+attributes
+operations
+end
+
+class Variable<TypedElement
+attributes
+operations
+end
+
+class PropertyCallExp<FeaturePropertyCall
+attributes
+operations
+end
+
+class VariableExp<OclExpression
+attributes
+operations
+end
+
+class TypeExp<OclExpression
+attributes
+operations
+end
+
+abstract class LoopExp<OclExpression
+attributes
+operations
+end
+
+class IteratorExp<LoopExp
+attributes
+operations
+end
+
+class StringLiteralExp<PrimitiveLiteralExp
+attributes
+	stringSymbol : String
+operations
+end
+
+class IntegerLiteralExp<NumericLiteralExp
+attributes
+	integerSymbol : Integer
+operations
+end
+
+class OperationCallExp<FeaturePropertyCall
+attributes
+operations
+end
+
+class RealLiteralExp<NumericLiteralExp
+attributes
+	realSymbol : String
+operations
+end
+
+abstract class LiteralExp<OclExpression
+attributes
+operations
+end
+
+class IterateExp<LoopExp
+attributes
+operations
+end
+
+abstract class PrimitiveLiteralExp<LiteralExp
+attributes
+operations
+end
+
+abstract class NumericLiteralExp<PrimitiveLiteralExp
+attributes
+operations
+end
+
+class CollectionLiteralExp<LiteralExp
+attributes
+	kind : CollectionKind
+operations
+end
+
+abstract class CollectionLiteralPart<TypedElement
+attributes
+operations
+end
+
+class CollectionItem<CollectionLiteralPart
+attributes
+operations
+end
+
+class CollectionRange<CollectionLiteralPart
+attributes
+operations
+end
+
+class TupleLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class NullLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class ExpressionInOcl<OpaqueExpression
+attributes
+operations
+end
+
+class OpaqueExpression
+attributes
+operations
+end
+
+class InvalidLiteralExp<LiteralExp
+attributes
+operations
+end
+
+abstract class FeaturePropertyCall<CallExp
+attributes
+operations
+end
+
+class TupleLiteralPart<TypedElement
+attributes
+operations
+end
+
+class BagType<CollectionType
+attributes
+operations
+end
+
+abstract class CollectionType<DataType
+attributes
+operations
+end
+
+class EnumLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class InvalidType<Type
+attributes
+operations
+end
+
+class OrderedSetType<CollectionType
+attributes
+operations
+end
+
+class SequenceType<CollectionType
+attributes
+operations
+end
+
+class SetType<CollectionType
+attributes
+operations
+end
+
+class TupleType<DataType
+attributes
+operations
+end
+
+class VoidType<Type
+attributes
+operations
+end
+
+class AnyType<Type
+attributes
+operations
+end
+
+composition xxx_TemplateExp_bindsTo between
+	TemplateExp[*] role xxx_TemplateExp_bindsTo_src
+	Variable[0..1] role bindsTo
+end
+
+composition xxx_TemplateExp_where between
+	TemplateExp[*] role xxx_TemplateExp_where_src
+	OclExpression[0..1] role where
+end
+
+composition xxx_ObjectTemplateExp_part between
+	ObjectTemplateExp[0..1] role xxx_ObjectTemplateExp_part_src
+	PropertyTemplateItem[*] role part
+end
+
+association xxx_ObjectTemplateExp_referredClass between
+	ObjectTemplateExp[*] role xxx_ObjectTemplateExp_referredClass_src
+	Class[1] role referredClass
+end
+
+composition xxx_CollectionTemplateExp_part between
+	CollectionTemplateExp[0..1] role xxx_CollectionTemplateExp_part_src
+	OclExpression[*] role part
+end
+
+association xxx_CollectionTemplateExp_referredCollectionType between
+	CollectionTemplateExp[*] role xxx_CollectionTemplateExp_referredCollectionType_src
+	CollectionType[0..1] role referredCollectionType
+end
+
+association xxx_CollectionTemplateExp_match between
+	CollectionTemplateExp[*] role xxx_CollectionTemplateExp_match_src
+	OclExpression[0..1] role match
+end
+
+association xxx_PropertyTemplateItem_objContainer between
+	PropertyTemplateItem[*] role xxx_PropertyTemplateItem_objContainer_src
+	ObjectTemplateExp[1] role objContainer
+end
+
+composition xxx_PropertyTemplateItem_value between
+	PropertyTemplateItem[*] role xxx_PropertyTemplateItem_value_src
+	OclExpression[1] role value
+end
+
+association xxx_PropertyTemplateItem_referredProperty between
+	PropertyTemplateItem[*] role xxx_PropertyTemplateItem_referredProperty_src
+	Property[1] role referredProperty
+end
+
+composition xxx_ImperativeIterateExp_target between
+	ImperativeIterateExp[*] role xxx_ImperativeIterateExp_target_src
+	Variable[1] role target
+end
+
+composition xxx_AssignExp_value between
+	AssignExp[0..1] role xxx_AssignExp_value_src
+	OclExpression[*] role value
+end
+
+composition xxx_AssignExp_left between
+	AssignExp[*] role xxx_AssignExp_left_src
+	OclExpression[1] role left
+end
+
+composition xxx_AssignExp_defaultValue between
+	AssignExp[*] role xxx_AssignExp_defaultValue_src
+	OclExpression[0..1] role defaultValue
+end
+
+composition xxx_BlockExp_body between
+	BlockExp[0..1] role xxx_BlockExp_body_src
+	OclExpression[*] role body
+end
+
+composition xxx_SwitchExp_alternativePart between
+	SwitchExp[0..1] role xxx_SwitchExp_alternativePart_src
+	AltExp[*] role alternativePart
+end
+
+composition xxx_SwitchExp_elsePart between
+	SwitchExp[*] role xxx_SwitchExp_elsePart_src
+	OclExpression[0..1] role elsePart
+end
+
+composition xxx_VariableInitExp_referredVariable between
+	VariableInitExp[*] role xxx_VariableInitExp_referredVariable_src
+	Variable[1] role referredVariable
+end
+
+composition xxx_WhileExp_condition between
+	WhileExp[*] role xxx_WhileExp_condition_src
+	OclExpression[1] role condition
+end
+
+composition xxx_WhileExp_body between
+	WhileExp[*] role xxx_WhileExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_ComputeExp_returnedElement between
+	ComputeExp[*] role xxx_ComputeExp_returnedElement_src
+	Variable[1] role returnedElement
+end
+
+composition xxx_ComputeExp_body between
+	ComputeExp[*] role xxx_ComputeExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_AltExp_condition between
+	AltExp[*] role xxx_AltExp_condition_src
+	OclExpression[1] role condition
+end
+
+composition xxx_AltExp_body between
+	AltExp[*] role xxx_AltExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_UnlinkExp_target between
+	UnlinkExp[*] role xxx_UnlinkExp_target_src
+	OclExpression[1] role target
+end
+
+composition xxx_UnlinkExp_item between
+	UnlinkExp[*] role xxx_UnlinkExp_item_src
+	OclExpression[1] role item
+end
+
+composition xxx_ReturnExp_value between
+	ReturnExp[*] role xxx_ReturnExp_value_src
+	OclExpression[1] role value
+end
+
+composition xxx_TryExp_tryBody between
+	TryExp[*] role xxx_TryExp_tryBody_src
+	OclExpression[1] role tryBody
+end
+
+association xxx_TryExp_exception between
+	TryExp[0..1] role xxx_TryExp_exception_src
+	Type[*] role exception
+end
+
+composition xxx_TryExp_exceptBody between
+	TryExp[*] role xxx_TryExp_exceptBody_src
+	OclExpression[0..1] role exceptBody
+end
+
+association xxx_RaiseExp_exception between
+	RaiseExp[*] role xxx_RaiseExp_exception_src
+	Type[1] role exception
+end
+
+composition xxx_TupleExp_element between
+	TupleExp[0..1] role xxx_TupleExp_element_src
+	OclExpression[1..*] role element
+end
+
+association xxx_Typedef_base between
+	Typedef[*] role xxx_Typedef_base_src
+	Type[1] role base
+end
+
+composition xxx_Typedef_condition between
+	Typedef[*] role xxx_Typedef_condition_src
+	OclExpression[0..1] role condition
+end
+
+association xxx_InstantiationExp_instantiatedClass between
+	InstantiationExp[*] role xxx_InstantiationExp_instantiatedClass_src
+	Class[1] role instantiatedClass
+end
+
+association xxx_InstantiationExp_extent between
+	InstantiationExp[*] role xxx_InstantiationExp_extent_src
+	Variable[0..1] role extent
+end
+
+composition xxx_InstantiationExp_argument between
+	InstantiationExp[0..1] role xxx_InstantiationExp_argument_src
+	OclExpression[*] role argument
+end
+
+association xxx_DictionaryType_keyType between
+	DictionaryType[*] role xxx_DictionaryType_keyType_src
+	Type[0..1] role keyType
+end
+
+composition xxx_DictLiteralExp_part between
+	DictLiteralExp[0..1] role xxx_DictLiteralExp_part_src
+	DictLiteralPart[*] role part
+end
+
+composition xxx_DictLiteralPart_key between
+	DictLiteralPart[*] role xxx_DictLiteralPart_key_src
+	OclExpression[1] role key
+end
+
+composition xxx_DictLiteralPart_value between
+	DictLiteralPart[*] role xxx_DictLiteralPart_value_src
+	OclExpression[1] role value
+end
+
+composition xxx_LogExp_condition between
+	LogExp[*] role xxx_LogExp_condition_src
+	OclExpression[0..1] role condition
+end
+
+association xxx_LogExp_element between
+	LogExp[*] role xxx_LogExp_element_src
+	Element[0..1] role element
+end
+
+composition xxx_AssertExp_log between
+	AssertExp[*] role xxx_AssertExp_log_src
+	LogExp[0..1] role log
+end
+
+composition xxx_AssertExp_assertion between
+	AssertExp[*] role xxx_AssertExp_assertion_src
+	OclExpression[1] role assertion
+end
+
+composition xxx_ImperativeLoopExp_condition between
+	ImperativeLoopExp[*] role xxx_ImperativeLoopExp_condition_src
+	OclExpression[0..1] role condition
+end
+
+composition xxx_CollectorExp_target between
+	CollectorExp[*] role xxx_CollectorExp_target_src
+	Variable[1] role target
+end
+
+composition xxx_UnpackExp_variable between
+	UnpackExp[0..1] role xxx_UnpackExp_variable_src
+	Variable[1..*] role variable
+end
+
+association xxx_AnonymousTupleType_elementType between
+	AnonymousTupleType[0..1] role xxx_AnonymousTupleType_elementType_src
+	Type[*] role elementType
+end
+
+composition xxx_AnonymousTupleLiteralExp_part between
+	AnonymousTupleLiteralExp[0..1] role xxx_AnonymousTupleLiteralExp_part_src
+	AnonymousTupleLiteralPart[*] role part
+end
+
+composition xxx_AnonymousTupleLiteralPart_value between
+	AnonymousTupleLiteralPart[0..1] role xxx_AnonymousTupleLiteralPart_value_src
+	OclExpression[*] role value
+end
+
+composition xxx_Class_ownedAttribute between
+	Class[0..1] role xxx_Class_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_Class_ownedOperation between
+	Class[0..1] role xxx_Class_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+association xxx_Class_superClass between
+	Class[0..1] role xxx_Class_superClass_src
+	Class[*] role superClass
+end
+
+association xxx_Element_tag between
+	Element[0..1] role xxx_Element_tag_src
+	Tag[*] role tag
+end
+
+composition xxx_Element_ownedComment between
+	Element[0..1] role xxx_Element_ownedComment_src
+	Comment[*] role ownedComment
+end
+
+association xxx_Tag_element between
+	Tag[0..1] role xxx_Tag_element_src
+	Element[*] role element
+end
+
+association xxx_Tag_transformation between
+	Tag[*] role xxx_Tag_transformation_src
+	Transformation[0..1] role transformation
+end
+
+association xxx_Tag_owner between
+	Tag[*] role xxx_Tag_owner_src
+	Module[0..1] role owner
+end
+
+composition xxx_Enumeration_ownedLiteral between
+	Enumeration[0..1] role xxx_Enumeration_ownedLiteral_src
+	EnumerationLiteral[*] role ownedLiteral
+end
+
+association xxx_Operation_class_ between
+	Operation[*] role xxx_Operation_class__src
+	Class[1] role class_
+end
+
+composition xxx_Operation_ownedParameter between
+	Operation[0..1] role xxx_Operation_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+association xxx_Operation_raisedException between
+	Operation[0..1] role xxx_Operation_raisedException_src
+	Type[*] role raisedException
+end
+
+composition xxx_Package_ownedType between
+	Package[0..1] role xxx_Package_ownedType_src
+	Type[*] role ownedType
+end
+
+association xxx_Package_nestedPackage between
+	Package[0..1] role xxx_Package_nestedPackage_src
+	Package[*] role nestedPackage
+end
+
+association xxx_Type_package between
+	Type[*] role xxx_Type_package_src
+	Package[1] role package
+end
+
+association xxx_Parameter_operation between
+	Parameter[*] role xxx_Parameter_operation_src
+	Operation[0..1] role operation
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+association xxx_Property_Class between
+	Property[*] role xxx_Property_Class_src
+	Class[1] role Class
+end
+
+association xxx_Property_opposite between
+	Property[*] role xxx_Property_opposite_src
+	Property[0..1] role opposite
+end
+
+association xxx_Property_module between
+	Property[*] role xxx_Property_module_src
+	Module[0..1] role module
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_Comment_annotatedElement between
+	Comment[0..1] role xxx_Comment_annotatedElement_src
+	NamedElement[*] role annotatedElement
+end
+
+composition xxx_MappingBody_initSection between
+	MappingBody[0..1] role xxx_MappingBody_initSection_src
+	OclExpression[*] role initSection
+end
+
+composition xxx_MappingBody_endSection between
+	MappingBody[0..1] role xxx_MappingBody_endSection_src
+	OclExpression[*] role endSection
+end
+
+composition xxx_ResolveExp_condition between
+	ResolveExp[*] role xxx_ResolveExp_condition_src
+	OclExpression[0..1] role condition
+end
+
+association xxx_ResolveInExp_inMapping between
+	ResolveInExp[*] role xxx_ResolveInExp_inMapping_src
+	MappingOperation[0..1] role inMapping
+end
+
+association xxx_OperationalTransformation_intermediateClass between
+	OperationalTransformation[0..1] role xxx_OperationalTransformation_intermediateClass_src
+	Class[*] role intermediateClass
+end
+
+association xxx_OperationalTransformation_refined between
+	OperationalTransformation[*] role xxx_OperationalTransformation_refined_src
+	Transformation[0..1] role refined
+end
+
+association xxx_OperationalTransformation_intermediateProperty between
+	OperationalTransformation[0..1] role xxx_OperationalTransformation_intermediateProperty_src
+	Property[*] role intermediateProperty
+end
+
+composition xxx_OperationalTransformation_modelParameter between
+	OperationalTransformation[0..1] role xxx_OperationalTransformation_modelParameter_src
+	ModelParameter[*] role modelParameter
+end
+
+association xxx_OperationalTransformation_entry between
+	OperationalTransformation[*] role xxx_OperationalTransformation_entry_src
+	EntryOperation[0..1] role entry
+end
+
+composition xxx_OperationalTransformation_relation between
+	OperationalTransformation[0..1] role xxx_OperationalTransformation_relation_src
+	Relation[*] role relation
+end
+
+association xxx_MappingParameter_refinedDomain between
+	MappingParameter[*] role xxx_MappingParameter_refinedDomain_src
+	RelationDomain[0..1] role refinedDomain
+end
+
+association xxx_MappingParameter_extent between
+	MappingParameter[*] role xxx_MappingParameter_extent_src
+	ModelParameter[0..1] role extent
+end
+
+association xxx_MappingOperation_disjunct between
+	MappingOperation[0..1] role xxx_MappingOperation_disjunct_src
+	MappingOperation[*] role disjunct
+end
+
+association xxx_MappingOperation_refinedRelation between
+	MappingOperation[*] role xxx_MappingOperation_refinedRelation_src
+	Relation[1] role refinedRelation
+end
+
+association xxx_MappingOperation_merged between
+	MappingOperation[0..1] role xxx_MappingOperation_merged_src
+	MappingOperation[*] role merged
+end
+
+association xxx_MappingOperation_inherited between
+	MappingOperation[0..1] role xxx_MappingOperation_inherited_src
+	MappingOperation[*] role inherited
+end
+
+composition xxx_MappingOperation_when between
+	MappingOperation[0..1] role xxx_MappingOperation_when_src
+	OclExpression[*] role when
+end
+
+association xxx_ContextualProperty_context_ between
+	ContextualProperty[*] role xxx_ContextualProperty_context__src
+	Class[1] role context_
+end
+
+association xxx_ContextualProperty_overridden between
+	ContextualProperty[*] role xxx_ContextualProperty_overridden_src
+	Property[0..1] role overridden
+end
+
+composition xxx_ImperativeOperation_context_ between
+	ImperativeOperation[*] role xxx_ImperativeOperation_context__src
+	VarParameter[0..1] role context_
+end
+
+composition xxx_ImperativeOperation_result between
+	ImperativeOperation[0..1] role xxx_ImperativeOperation_result_src
+	VarParameter[*] role result
+end
+
+association xxx_ImperativeOperation_overridden between
+	ImperativeOperation[*] role xxx_ImperativeOperation_overridden_src
+	ImperativeOperation[0..1] role overridden
+end
+
+composition xxx_ImperativeOperation_body between
+	ImperativeOperation[*] role xxx_ImperativeOperation_body_src
+	OperationBody[0..1] role body
+end
+
+association xxx_ModelType_metamodel between
+	ModelType[0..1] role xxx_ModelType_metamodel_src
+	Package[*] role metamodel
+end
+
+composition xxx_ModelType_additionalCondition between
+	ModelType[0..1] role xxx_ModelType_additionalCondition_src
+	OclExpression[*] role additionalCondition
+end
+
+composition xxx_Module_ownedTag between
+	Module[0..1] role xxx_Module_ownedTag_src
+	Tag[*] role ownedTag
+end
+
+association xxx_Module_configProperty between
+	Module[0..1] role xxx_Module_configProperty_src
+	Property[*] role configProperty
+end
+
+composition xxx_Module_moduleImport between
+	Module[0..1] role xxx_Module_moduleImport_src
+	ModuleImport[*] role moduleImport
+end
+
+association xxx_Module_usedModelType between
+	Module[0..1] role xxx_Module_usedModelType_src
+	ModelType[*] role usedModelType
+end
+
+association xxx_ModuleImport_binding between
+	ModuleImport[0..1] role xxx_ModuleImport_binding_src
+	ModelType[*] role binding
+end
+
+association xxx_ModuleImport_module between
+	ModuleImport[*] role xxx_ModuleImport_module_src
+	Module[0..1] role module
+end
+
+association xxx_ModuleImport_importedModule between
+	ModuleImport[*] role xxx_ModuleImport_importedModule_src
+	Module[1] role importedModule
+end
+
+association xxx_VarParameter_ctxOwner between
+	VarParameter[*] role xxx_VarParameter_ctxOwner_src
+	ImperativeOperation[0..1] role ctxOwner
+end
+
+association xxx_VarParameter_resOwner between
+	VarParameter[*] role xxx_VarParameter_resOwner_src
+	ImperativeOperation[0..1] role resOwner
+end
+
+association xxx_OperationBody_operation between
+	OperationBody[*] role xxx_OperationBody_operation_src
+	ImperativeOperation[0..1] role operation
+end
+
+composition xxx_OperationBody_content between
+	OperationBody[0..1] role xxx_OperationBody_content_src
+	OclExpression[*] role content
+end
+
+association xxx_ObjectExp_referredObject between
+	ObjectExp[*] role xxx_ObjectExp_referredObject_src
+	Variable[0..1] role referredObject
+end
+
+composition xxx_ObjectExp_body between
+	ObjectExp[*] role xxx_ObjectExp_body_src
+	ConstructorBody[1] role body
+end
+
+composition xxx_Area_guardPattern between
+	Area[*] role xxx_Area_guardPattern_src
+	GuardPattern[1] role guardPattern
+end
+
+composition xxx_Area_bottomPattern between
+	Area[*] role xxx_Area_bottomPattern_src
+	BottomPattern[1] role bottomPattern
+end
+
+association xxx_Assignment_bottomPattern between
+	Assignment[*] role xxx_Assignment_bottomPattern_src
+	BottomPattern[1] role bottomPattern
+end
+
+composition xxx_Assignment_slotExpression between
+	Assignment[*] role xxx_Assignment_slotExpression_src
+	OclExpression[1] role slotExpression
+end
+
+composition xxx_Assignment_value between
+	Assignment[*] role xxx_Assignment_value_src
+	OclExpression[1] role value
+end
+
+association xxx_Assignment_targetProperty between
+	Assignment[*] role xxx_Assignment_targetProperty_src
+	Property[1] role targetProperty
+end
+
+association xxx_BottomPattern_area between
+	BottomPattern[*] role xxx_BottomPattern_area_src
+	Area[1] role area
+end
+
+composition xxx_BottomPattern_assignment between
+	BottomPattern[0..1] role xxx_BottomPattern_assignment_src
+	Assignment[*] role assignment
+end
+
+composition xxx_BottomPattern_realizedVariable between
+	BottomPattern[0..1] role xxx_BottomPattern_realizedVariable_src
+	RealizedVariable[*] role realizedVariable
+end
+
+composition xxx_BottomPattern_enforcementOperation between
+	BottomPattern[0..1] role xxx_BottomPattern_enforcementOperation_src
+	EnforcementOperation[*] role enforcementOperation
+end
+
+association xxx_GuardPattern_area between
+	GuardPattern[*] role xxx_GuardPattern_area_src
+	Area[1] role area
+end
+
+association xxx_Mapping_specification between
+	Mapping[0..1] role xxx_Mapping_specification_src
+	Mapping[*] role specification
+end
+
+association xxx_Mapping_local between
+	Mapping[0..1] role xxx_Mapping_local_src
+	Mapping[*] role local
+end
+
+association xxx_Mapping_context_ between
+	Mapping[*] role xxx_Mapping_context__src
+	Mapping[0..1] role context_
+end
+
+association xxx_EnforcementOperation_bottomPattern between
+	EnforcementOperation[*] role xxx_EnforcementOperation_bottomPattern_src
+	BottomPattern[0..1] role bottomPattern
+end
+
+association xxx_EnforcementOperation_operationCallExp between
+	EnforcementOperation[*] role xxx_EnforcementOperation_operationCallExp_src
+	OperationCallExp[1] role operationCallExp
+end
+
+association xxx_Domain_rule between
+	Domain[*] role xxx_Domain_rule_src
+	Rule[1] role rule
+end
+
+association xxx_Domain_typedModel between
+	Domain[*] role xxx_Domain_typedModel_src
+	TypedModel[1] role typedModel
+end
+
+composition xxx_Transformation_ownedTag between
+	Transformation[0..1] role xxx_Transformation_ownedTag_src
+	Tag[*] role ownedTag
+end
+
+composition xxx_Transformation_modelParameter between
+	Transformation[0..1] role xxx_Transformation_modelParameter_src
+	TypedModel[*] role modelParameter
+end
+
+composition xxx_Transformation_rule between
+	Transformation[0..1] role xxx_Transformation_rule_src
+	Rule[*] role rule
+end
+
+association xxx_Transformation_extends between
+	Transformation[*] role xxx_Transformation_extends_src
+	Transformation[0..1] role extends
+end
+
+association xxx_TypedModel_transformation between
+	TypedModel[*] role xxx_TypedModel_transformation_src
+	Transformation[1] role transformation
+end
+
+association xxx_TypedModel_usedPackage between
+	TypedModel[0..1] role xxx_TypedModel_usedPackage_src
+	Package[1..*] role usedPackage
+end
+
+association xxx_TypedModel_dependsOn between
+	TypedModel[0..1] role xxx_TypedModel_dependsOn_src
+	TypedModel[*] role dependsOn
+end
+
+composition xxx_Rule_domain between
+	Rule[0..1] role xxx_Rule_domain_src
+	Domain[*] role domain
+end
+
+association xxx_Rule_transformation between
+	Rule[*] role xxx_Rule_transformation_src
+	Transformation[1] role transformation
+end
+
+association xxx_Rule_overrides between
+	Rule[*] role xxx_Rule_overrides_src
+	Rule[0..1] role overrides
+end
+
+composition xxx_Pattern_predicate between
+	Pattern[0..1] role xxx_Pattern_predicate_src
+	Predicate[*] role predicate
+end
+
+composition xxx_Pattern_bindsTo between
+	Pattern[0..1] role xxx_Pattern_bindsTo_src
+	Variable[*] role bindsTo
+end
+
+association xxx_Pattern_whenOwner between
+	Pattern[*] role xxx_Pattern_whenOwner_src
+	Relation[0..1] role whenOwner
+end
+
+association xxx_Pattern_whereOwner between
+	Pattern[*] role xxx_Pattern_whereOwner_src
+	Relation[0..1] role whereOwner
+end
+
+composition xxx_Predicate_conditionExpression between
+	Predicate[*] role xxx_Predicate_conditionExpression_src
+	OclExpression[1] role conditionExpression
+end
+
+association xxx_Predicate_pattern between
+	Predicate[*] role xxx_Predicate_pattern_src
+	Pattern[1] role pattern
+end
+
+composition xxx_Function_queryExpression between
+	Function[*] role xxx_Function_queryExpression_src
+	OclExpression[0..1] role queryExpression
+end
+
+composition xxx_RelationalTransformation_ownedKey between
+	RelationalTransformation[0..1] role xxx_RelationalTransformation_ownedKey_src
+	Key[*] role ownedKey
+end
+
+composition xxx_Relation_variable between
+	Relation[0..1] role xxx_Relation_variable_src
+	Variable[*] role variable
+end
+
+association xxx_Relation_operationalImpl between
+	Relation[0..1] role xxx_Relation_operationalImpl_src
+	RelationImplementation[*] role operationalImpl
+end
+
+composition xxx_Relation_where between
+	Relation[*] role xxx_Relation_where_src
+	Pattern[0..1] role where
+end
+
+composition xxx_Relation_when between
+	Relation[*] role xxx_Relation_when_src
+	Pattern[0..1] role when
+end
+
+composition xxx_RelationDomain_pattern between
+	RelationDomain[*] role xxx_RelationDomain_pattern_src
+	DomainPattern[1] role pattern
+end
+
+association xxx_RelationDomain_rootVariable between
+	RelationDomain[*] role xxx_RelationDomain_rootVariable_src
+	Variable[1] role rootVariable
+end
+
+composition xxx_DomainPattern_templateExpression between
+	DomainPattern[*] role xxx_DomainPattern_templateExpression_src
+	TemplateExp[0..1] role templateExpression
+end
+
+association xxx_RelationImplementation_relation between
+	RelationImplementation[*] role xxx_RelationImplementation_relation_src
+	Relation[0..1] role relation
+end
+
+association xxx_RelationImplementation_impl between
+	RelationImplementation[*] role xxx_RelationImplementation_impl_src
+	Operation[1] role impl
+end
+
+association xxx_RelationImplementation_inDirectionOf between
+	RelationImplementation[*] role xxx_RelationImplementation_inDirectionOf_src
+	TypedModel[1] role inDirectionOf
+end
+
+association xxx_Key_identifies between
+	Key[*] role xxx_Key_identifies_src
+	Class[1] role identifies
+end
+
+association xxx_Key_part between
+	Key[0..1] role xxx_Key_part_src
+	Property[1..*] role part
+end
+
+association xxx_Key_transformation between
+	Key[*] role xxx_Key_transformation_src
+	RelationalTransformation[0..1] role transformation
+end
+
+composition xxx_CallExp_source between
+	CallExp[*] role xxx_CallExp_source_src
+	OclExpression[0..1] role source
+end
+
+association xxx_OclExpression_tryBodyOwner between
+	OclExpression[*] role xxx_OclExpression_tryBodyOwner_src
+	TryExp[0..1] role tryBodyOwner
+end
+
+composition xxx_IfExp_condition between
+	IfExp[*] role xxx_IfExp_condition_src
+	OclExpression[1] role condition
+end
+
+composition xxx_IfExp_thenExpression between
+	IfExp[*] role xxx_IfExp_thenExpression_src
+	OclExpression[1] role thenExpression
+end
+
+composition xxx_IfExp_elseExpression between
+	IfExp[*] role xxx_IfExp_elseExpression_src
+	OclExpression[1] role elseExpression
+end
+
+composition xxx_LetExp_in_ between
+	LetExp[0..1] role xxx_LetExp_in__src
+	OclExpression[*] role in_
+end
+
+composition xxx_LetExp_variable between
+	LetExp[*] role xxx_LetExp_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_Variable_initExpression between
+	Variable[*] role xxx_Variable_initExpression_src
+	OclExpression[0..1] role initExpression
+end
+
+association xxx_Variable_LetExp between
+	Variable[*] role xxx_Variable_LetExp_src
+	LetExp[0..1] role LetExp
+end
+
+association xxx_Variable_computeOwner between
+	Variable[*] role xxx_Variable_computeOwner_src
+	ComputeExp[0..1] role computeOwner
+end
+
+association xxx_Variable_bindParameter between
+	Variable[*] role xxx_Variable_bindParameter_src
+	Parameter[0..1] role bindParameter
+end
+
+association xxx_PropertyCallExp_referredProperty between
+	PropertyCallExp[*] role xxx_PropertyCallExp_referredProperty_src
+	Property[0..1] role referredProperty
+end
+
+association xxx_VariableExp_referredVariable between
+	VariableExp[*] role xxx_VariableExp_referredVariable_src
+	Variable[0..1] role referredVariable
+end
+
+association xxx_TypeExp_referredType between
+	TypeExp[*] role xxx_TypeExp_referredType_src
+	Type[0..1] role referredType
+end
+
+composition xxx_LoopExp_body between
+	LoopExp[*] role xxx_LoopExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_LoopExp_iterator between
+	LoopExp[0..1] role xxx_LoopExp_iterator_src
+	Variable[*] role iterator
+end
+
+composition xxx_OperationCallExp_argument between
+	OperationCallExp[0..1] role xxx_OperationCallExp_argument_src
+	OclExpression[*] role argument
+end
+
+association xxx_OperationCallExp_referredOperation between
+	OperationCallExp[*] role xxx_OperationCallExp_referredOperation_src
+	Operation[0..1] role referredOperation
+end
+
+composition xxx_IterateExp_result between
+	IterateExp[*] role xxx_IterateExp_result_src
+	Variable[0..1] role result
+end
+
+composition xxx_CollectionLiteralExp_part between
+	CollectionLiteralExp[0..1] role xxx_CollectionLiteralExp_part_src
+	CollectionLiteralPart[*] role part
+end
+
+association xxx_CollectionLiteralPart_CollectionLiteralExp between
+	CollectionLiteralPart[*] role xxx_CollectionLiteralPart_CollectionLiteralExp_src
+	CollectionLiteralExp[1] role CollectionLiteralExp
+end
+
+composition xxx_CollectionItem_item between
+	CollectionItem[*] role xxx_CollectionItem_item_src
+	OclExpression[1] role item
+end
+
+composition xxx_CollectionRange_first between
+	CollectionRange[*] role xxx_CollectionRange_first_src
+	OclExpression[1] role first
+end
+
+composition xxx_CollectionRange_last between
+	CollectionRange[*] role xxx_CollectionRange_last_src
+	OclExpression[1] role last
+end
+
+composition xxx_TupleLiteralExp_part between
+	TupleLiteralExp[0..1] role xxx_TupleLiteralExp_part_src
+	TupleLiteralPart[*] role part
+end
+
+composition xxx_ExpressionInOcl_bodyExpression between
+	ExpressionInOcl[*] role xxx_ExpressionInOcl_bodyExpression_src
+	OclExpression[1] role bodyExpression
+end
+
+composition xxx_ExpressionInOcl_context_ between
+	ExpressionInOcl[*] role xxx_ExpressionInOcl_context__src
+	Variable[0..1] role context_
+end
+
+composition xxx_ExpressionInOcl_resultVariable between
+	ExpressionInOcl[*] role xxx_ExpressionInOcl_resultVariable_src
+	Variable[0..1] role resultVariable
+end
+
+composition xxx_ExpressionInOcl_parameterVariable between
+	ExpressionInOcl[*] role xxx_ExpressionInOcl_parameterVariable_src
+	Variable[0..1] role parameterVariable
+end
+
+association xxx_TupleLiteralPart_TupleLiteralExp between
+	TupleLiteralPart[*] role xxx_TupleLiteralPart_TupleLiteralExp_src
+	TupleLiteralExp[0..1] role TupleLiteralExp
+end
+
+composition xxx_TupleLiteralPart_attribute between
+	TupleLiteralPart[*] role xxx_TupleLiteralPart_attribute_src
+	Property[0..1] role attribute
+end
+
+association xxx_CollectionType_elementType between
+	CollectionType[*] role xxx_CollectionType_elementType_src
+	Type[0..1] role elementType
+end
+
+association xxx_EnumLiteralExp_referredEnumLiteral between
+	EnumLiteralExp[*] role xxx_EnumLiteralExp_referredEnumLiteral_src
+	EnumerationLiteral[0..1] role referredEnumLiteral
+end
+

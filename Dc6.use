@@ -1,0 +1,81 @@
+model dc6
+enum ColorEnum{
+default
+}
+
+enum CornerEnum{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class Canvas
+attributes
+operations
+end
+
+class Square
+attributes
+operations
+end
+
+class Properties
+attributes
+operations
+end
+
+class Color<Properties
+attributes
+	color : ColorEnum
+operations
+end
+
+class Corner<Properties
+attributes
+	corner : CornerEnum
+operations
+end
+
+class Location<Properties
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Caption<Properties
+attributes
+	caption : String
+operations
+end
+
+class Size<Properties
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+composition xxx_Model_canvas between
+	Model[*] role xxx_Model_canvas_src
+	Canvas[0..1] role canvas
+end
+
+composition xxx_Canvas_squares between
+	Canvas[0..1] role xxx_Canvas_squares_src
+	Square[*] role squares
+end
+
+composition xxx_Square_properties between
+	Square[0..1] role xxx_Square_properties_src
+	Properties[*] role properties
+end
+
+composition xxx_Square_squares between
+	Square[0..1] role xxx_Square_squares_src
+	Square[*] role squares
+end
+

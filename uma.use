@@ -1,0 +1,797 @@
+model uma
+enum VariabilityType{
+default
+}
+
+enum WorkOrderType{
+default
+}
+
+class ActivityDescription<BreakdownElementDescription
+attributes
+	alternatives : String
+	howToStaff : String
+	purpose : String
+operations
+end
+
+class ApplicableMetaClassInfo<PackageableElement
+attributes
+	isPrimaryExtension : Boolean
+operations
+end
+
+class Artifact<WorkProduct
+attributes
+	group3 : String
+operations
+end
+
+class ArtifactDescription<WorkProductDescription
+attributes
+	briefOutline : String
+	representationOptions : String
+	representation : String
+	notation : String
+operations
+end
+
+class BreakdownElement<ProcessElement
+attributes
+	presentedAfter : String
+	presentedBefore : String
+	planningData : String
+	superActivity : String
+	group1 : String
+	checklist : String
+	concept : String
+	example : String
+	guideline : String
+	reusableAsset : String
+	supportingMaterial : String
+	whitepaper : String
+	hasMultipleOccurrences : Boolean
+	isOptional : Boolean
+	isPlanned : Boolean
+	prefix : String
+operations
+end
+
+class BreakdownElementDescription<ContentDescription
+attributes
+	usageGuidance : String
+operations
+end
+
+class CapabilityPattern<Process
+attributes
+operations
+end
+
+class Checklist<Guidance
+attributes
+operations
+end
+
+class CompositeRole<RoleDescriptor
+attributes
+	group2 : String
+operations
+end
+
+class Concept<Guidance
+attributes
+operations
+end
+
+class Constraint<MethodElement
+attributes
+	mainDescription : String
+operations
+end
+
+class ContentCategory<ContentElement
+attributes
+operations
+end
+
+class ContentCategoryPackage<MethodPackage
+attributes
+	group2 : String
+operations
+end
+
+class ContentDescription<MethodUnit
+attributes
+	mainDescription : String
+	keyConsiderations : String
+	externalId : String
+operations
+end
+
+class ContentElement<DescribableElement
+attributes
+	group1 : String
+	checklist : String
+	concept : String
+	example : String
+	guideline : String
+	reusableAsset : String
+	supportingMaterial : String
+	whitepaper : String
+	variabilityBasedOnElement : String
+	variabilityType : VariabilityType
+operations
+end
+
+class Activity<WorkBreakdownElement
+attributes
+	roadmap : String
+	precondition : String
+	postcondition : String
+	group3 : String
+	isEnactable : Boolean
+	variabilityBasedOnElement : String
+	variabilityType : VariabilityType
+operations
+end
+
+class ContentPackage<MethodPackage
+attributes
+	group2 : String
+operations
+end
+
+class CustomCategory<ContentCategory
+attributes
+	group2 : String
+	categorizedElement : String
+	subCategory : String
+operations
+end
+
+class Deliverable<WorkProduct
+attributes
+	group3 : String
+	deliveredWorkProduct : String
+operations
+end
+
+class DeliverableDescription<WorkProductDescription
+attributes
+	externalDescription : String
+	packagingGuidance : String
+operations
+end
+
+class DeliveryProcess<Process
+attributes
+	group4 : String
+	communicationsMaterial : String
+	educationMaterial : String
+operations
+end
+
+class DeliveryProcessDescription<ProcessDescription
+attributes
+	scale : String
+	projectCharacteristics : String
+	riskLevel : String
+	estimatingTechnique : String
+	projectMemberExpertise : String
+	typeOfContract : String
+operations
+end
+
+class DescribableElement<MethodElement
+attributes
+	fulfill : String
+	isAbstract : Boolean
+	nodeicon : String
+	shapeicon : String
+operations
+end
+
+class Descriptor<BreakdownElement
+attributes
+	isSynchronizedWithSource : Boolean
+operations
+end
+
+class DescriptorDescription<BreakdownElementDescription
+attributes
+	refinedDescription : String
+operations
+end
+
+class Discipline<ContentCategory
+attributes
+	group2 : String
+	task : String
+	referenceWorkflow : String
+operations
+end
+
+class DisciplineGrouping<ContentCategory
+attributes
+	group2 : String
+	discipline : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Domain<ContentCategory
+attributes
+	group2 : String
+	workProduct : String
+operations
+end
+
+class Element
+attributes
+operations
+end
+
+class Estimate<Guidance
+attributes
+	group2 : String
+	estimationMetric : String
+	estimationConsiderations : String
+operations
+end
+
+class EstimatingMetric<Guidance
+attributes
+operations
+end
+
+class EstimationConsiderations<Guidance
+attributes
+operations
+end
+
+class Example<Guidance
+attributes
+operations
+end
+
+class Guidance<ContentElement
+attributes
+operations
+end
+
+class GuidanceDescription<ContentDescription
+attributes
+	attachment : String
+operations
+end
+
+class Guideline<Guidance
+attributes
+operations
+end
+
+class Iteration<Activity
+attributes
+operations
+end
+
+class Kind<ContentElement
+attributes
+	applicableMetaClassInfo : String
+operations
+end
+
+class MethodConfiguration<MethodUnit
+attributes
+	baseConfiguration : String
+	methodPluginSelection : String
+	methodPackageSelection : String
+	defaultView : String
+	processView : String
+	subtractedCategory : String
+	addedCategory : String
+operations
+end
+
+class MethodElement<PackageableElement
+attributes
+	group : String
+	briefDescription : String
+	id : String
+	orderingGuide : String
+	presentationName : String
+	suppressed : Boolean
+operations
+end
+
+class MethodElementProperty<PackageableElement
+attributes
+	value : String
+operations
+end
+
+class MethodLibrary<MethodUnit
+attributes
+	tool : String
+operations
+end
+
+class MethodPackage<MethodElement
+attributes
+	group1 : String
+	reusedPackage : String
+	global : Boolean
+operations
+end
+
+class MethodPlugin<MethodUnit
+attributes
+	referencedMethodPlugin : String
+	supporting : Boolean
+	userChangeable : Boolean
+operations
+end
+
+class MethodUnit<MethodElement
+attributes
+	copyright : String
+	authors : String
+	changeDate : String
+	changeDescription : String
+	version : String
+operations
+end
+
+class Milestone<WorkBreakdownElement
+attributes
+	requiredResult : String
+operations
+end
+
+class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class Outcome<WorkProduct
+attributes
+operations
+end
+
+class PackageableElement<NamedElement
+attributes
+operations
+end
+
+class Phase<Activity
+attributes
+operations
+end
+
+class PlanningData<ProcessElement
+attributes
+	finishDate : String
+	rank : String
+	startDate : String
+operations
+end
+
+class Practice<Guidance
+attributes
+	group2 : String
+	activityReference : String
+	contentReference : String
+operations
+end
+
+class PracticeDescription<ContentDescription
+attributes
+	additionalInfo : String
+	application : String
+	background : String
+	goals : String
+	levelsOfAdoption : String
+	problem : String
+operations
+end
+
+class Process<Activity
+attributes
+	includesPattern : String
+	defaultContext : String
+	validContext : String
+	diagramURI : String
+operations
+end
+
+class ProcessComponent<ProcessPackage
+attributes
+	copyright : String
+	authors : String
+	changeDate : String
+	changeDescription : String
+	version : String
+operations
+end
+
+class ProcessComponentInterface<BreakdownElement
+attributes
+	group2 : String
+operations
+end
+
+class ProcessDescription<ActivityDescription
+attributes
+	scope : String
+	usageNotes : String
+operations
+end
+
+class ProcessElement<DescribableElement
+attributes
+operations
+end
+
+class ProcessPackage<MethodPackage
+attributes
+	group2 : String
+operations
+end
+
+class ProcessPlanningTemplate<Process
+attributes
+	group4 : String
+	baseProcess : String
+operations
+end
+
+class Report<Guidance
+attributes
+operations
+end
+
+class ReusableAsset<Guidance
+attributes
+operations
+end
+
+class Roadmap<Guidance
+attributes
+operations
+end
+
+class Role<ContentElement
+attributes
+	group2 : String
+	responsibleFor : String
+operations
+end
+
+class RoleDescription<ContentDescription
+attributes
+	assignmentApproaches : String
+	skills : String
+	synonyms : String
+operations
+end
+
+class RoleDescriptor<Descriptor
+attributes
+	role : String
+	responsibleFor : String
+operations
+end
+
+class RoleSet<ContentCategory
+attributes
+	group2 : String
+	role : String
+operations
+end
+
+class RoleSetGrouping<ContentCategory
+attributes
+	group2 : String
+	roleSet : String
+operations
+end
+
+class Section<MethodElement
+attributes
+	predecessor : String
+	description : String
+	sectionName : String
+	variabilityBasedOnElement : String
+	variabilityType : VariabilityType
+operations
+end
+
+class SupportingMaterial<Guidance
+attributes
+operations
+end
+
+class Task<ContentElement
+attributes
+	precondition : String
+	postcondition : String
+	performedBy : String
+	group2 : String
+	mandatoryInput : String
+	output : String
+	additionallyPerformedBy : String
+	optionalInput : String
+	estimate : String
+	estimationConsiderations : String
+	toolMentor : String
+operations
+end
+
+class TaskDescription<ContentDescription
+attributes
+	alternatives : String
+	purpose : String
+operations
+end
+
+class TaskDescriptor<WorkBreakdownElement
+attributes
+	task : String
+	group3 : String
+	performedPrimarilyBy : String
+	additionallyPerformedBy : String
+	assistedBy : String
+	externalInput : String
+	mandatoryInput : String
+	optionalInput : String
+	output : String
+	isSynchronizedWithSource : Boolean
+operations
+end
+
+class TeamProfile<BreakdownElement
+attributes
+	group2 : String
+	role : String
+	superTeam : String
+	subTeam : String
+operations
+end
+
+class Template<Guidance
+attributes
+operations
+end
+
+class TermDefinition<Guidance
+attributes
+operations
+end
+
+class Tool<ContentCategory
+attributes
+	group2 : String
+	toolMentor : String
+operations
+end
+
+class ToolMentor<Guidance
+attributes
+operations
+end
+
+class Whitepaper<Concept
+attributes
+operations
+end
+
+class WorkBreakdownElement<BreakdownElement
+attributes
+	group2 : String
+	isEventDriven : Boolean
+	isOngoing : Boolean
+	isRepeatable : Boolean
+operations
+end
+
+class WorkDefinition<MethodElement
+attributes
+	precondition : String
+	postcondition : String
+operations
+end
+
+class WorkOrder
+attributes
+	value : String
+	id : String
+	linkType : WorkOrderType
+	properties : String
+operations
+end
+
+class WorkProduct<ContentElement
+attributes
+	group2 : String
+	estimate : String
+	estimationConsiderations : String
+	report : String
+	template : String
+	toolMentor : String
+operations
+end
+
+class WorkProductDescription<ContentDescription
+attributes
+	impactOfNotHaving : String
+	purpose : String
+	reasonsForNotNeeding : String
+operations
+end
+
+class WorkProductDescriptor<Descriptor
+attributes
+	workProduct : String
+	responsibleRole : String
+	group2 : String
+	externalInputTo : String
+	impactedBy : String
+	impacts : String
+	mandatoryInputTo : String
+	optionalInputTo : String
+	outputFrom : String
+	deliverableParts : String
+	activityEntryState : String
+	activityExitState : String
+operations
+end
+
+class WorkProductType<ContentCategory
+attributes
+	group2 : String
+	workProduct : String
+operations
+end
+
+composition xxx_Artifact_containedArtifact between
+	Artifact[0..1] role xxx_Artifact_containedArtifact_src
+	Artifact[*] role containedArtifact
+end
+
+composition xxx_CompositeRole_aggregatedRole between
+	CompositeRole[0..1] role xxx_CompositeRole_aggregatedRole_src
+	Role[*] role aggregatedRole
+end
+
+composition xxx_ContentCategoryPackage_contentCategory between
+	ContentCategoryPackage[0..1] role xxx_ContentCategoryPackage_contentCategory_src
+	ContentCategory[*] role contentCategory
+end
+
+composition xxx_ContentDescription_section between
+	ContentDescription[0..1] role xxx_ContentDescription_section_src
+	Section[*] role section
+end
+
+composition xxx_Activity_breakdownElement between
+	Activity[0..1] role xxx_Activity_breakdownElement_src
+	BreakdownElement[*] role breakdownElement
+end
+
+composition xxx_ContentPackage_contentElement between
+	ContentPackage[0..1] role xxx_ContentPackage_contentElement_src
+	ContentElement[*] role contentElement
+end
+
+composition xxx_DescribableElement_presentation between
+	DescribableElement[*] role xxx_DescribableElement_presentation_src
+	ContentDescription[0..1] role presentation
+end
+
+composition xxx_Discipline_subDiscipline between
+	Discipline[0..1] role xxx_Discipline_subDiscipline_src
+	Discipline[*] role subDiscipline
+end
+
+composition xxx_DocumentRoot_methodConfiguration between
+	DocumentRoot[*] role xxx_DocumentRoot_methodConfiguration_src
+	MethodConfiguration[*] role methodConfiguration
+end
+
+composition xxx_DocumentRoot_methodLibrary between
+	DocumentRoot[*] role xxx_DocumentRoot_methodLibrary_src
+	MethodLibrary[*] role methodLibrary
+end
+
+composition xxx_DocumentRoot_methodPlugin between
+	DocumentRoot[*] role xxx_DocumentRoot_methodPlugin_src
+	MethodPlugin[*] role methodPlugin
+end
+
+composition xxx_Domain_subdomain between
+	Domain[0..1] role xxx_Domain_subdomain_src
+	Domain[*] role subdomain
+end
+
+composition xxx_MethodElement_ownedRule between
+	MethodElement[0..1] role xxx_MethodElement_ownedRule_src
+	Constraint[*] role ownedRule
+end
+
+composition xxx_MethodElement_methodElementProperty between
+	MethodElement[0..1] role xxx_MethodElement_methodElementProperty_src
+	MethodElementProperty[*] role methodElementProperty
+end
+
+composition xxx_MethodLibrary_methodPlugin between
+	MethodLibrary[0..1] role xxx_MethodLibrary_methodPlugin_src
+	MethodPlugin[*] role methodPlugin
+end
+
+composition xxx_MethodLibrary_methodConfiguration between
+	MethodLibrary[0..1] role xxx_MethodLibrary_methodConfiguration_src
+	MethodConfiguration[*] role methodConfiguration
+end
+
+composition xxx_MethodPackage_methodPackage between
+	MethodPackage[0..1] role xxx_MethodPackage_methodPackage_src
+	MethodPackage[*] role methodPackage
+end
+
+composition xxx_MethodPlugin_methodPackage between
+	MethodPlugin[0..1] role xxx_MethodPlugin_methodPackage_src
+	MethodPackage[*] role methodPackage
+end
+
+composition xxx_Practice_subPractice between
+	Practice[0..1] role xxx_Practice_subPractice_src
+	Practice[*] role subPractice
+end
+
+composition xxx_ProcessComponent_interface between
+	ProcessComponent[*] role xxx_ProcessComponent_interface_src
+	ProcessComponentInterface[0..1] role interface
+end
+
+composition xxx_ProcessComponent_process between
+	ProcessComponent[*] role xxx_ProcessComponent_process_src
+	Process[1] role process
+end
+
+composition xxx_ProcessComponentInterface_interfaceSpecification between
+	ProcessComponentInterface[0..1] role xxx_ProcessComponentInterface_interfaceSpecification_src
+	TaskDescriptor[*] role interfaceSpecification
+end
+
+composition xxx_ProcessComponentInterface_interfaceIO between
+	ProcessComponentInterface[0..1] role xxx_ProcessComponentInterface_interfaceIO_src
+	WorkProductDescriptor[*] role interfaceIO
+end
+
+composition xxx_ProcessPackage_processElement between
+	ProcessPackage[0..1] role xxx_ProcessPackage_processElement_src
+	ProcessElement[*] role processElement
+end
+
+composition xxx_Section_subSection between
+	Section[*] role xxx_Section_subSection_src
+	Section[0..1] role subSection
+end
+
+composition xxx_TaskDescriptor_step between
+	TaskDescriptor[0..1] role xxx_TaskDescriptor_step_src
+	Section[*] role step
+end
+
+composition xxx_WorkBreakdownElement_predecessor between
+	WorkBreakdownElement[0..1] role xxx_WorkBreakdownElement_predecessor_src
+	WorkOrder[*] role predecessor
+end
+

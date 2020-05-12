@@ -1,0 +1,83 @@
+model pDL2
+class Process
+attributes
+	name : String
+operations
+end
+
+class ProcessElement
+attributes
+operations
+end
+
+class WorkDefinition<ProcessElement
+attributes
+	name : String
+operations
+end
+
+class DependanceStart
+attributes
+operations
+end
+
+class WorkSequenceKindStart
+attributes
+	Started2Start : String
+	Started2Finish : String
+operations
+end
+
+class DependanceFinish
+attributes
+operations
+end
+
+class WorkSequenceKindFinish
+attributes
+	Finished2Start : String
+	Finished2Finish : String
+operations
+end
+
+class Guidance<ProcessElement
+attributes
+	text : String
+operations
+end
+
+composition xxx_Process_processElements between
+	Process[0..1] role xxx_Process_processElements_src
+	ProcessElement[*] role processElements
+end
+
+composition xxx_WorkDefinition_linksToPredecessors between
+	WorkDefinition[0..1] role xxx_WorkDefinition_linksToPredecessors_src
+	DependanceStart[*] role linksToPredecessors
+end
+
+composition xxx_WorkDefinition_linksToSuccessors between
+	WorkDefinition[0..1] role xxx_WorkDefinition_linksToSuccessors_src
+	DependanceFinish[*] role linksToSuccessors
+end
+
+association xxx_DependanceStart_predecessor between
+	DependanceStart[*] role xxx_DependanceStart_predecessor_src
+	WorkDefinition[0..1] role predecessor
+end
+
+composition xxx_DependanceStart_link between
+	DependanceStart[*] role xxx_DependanceStart_link_src
+	WorkSequenceKindStart[0..1] role link
+end
+
+association xxx_DependanceFinish_predecessor between
+	DependanceFinish[*] role xxx_DependanceFinish_predecessor_src
+	WorkDefinition[0..1] role predecessor
+end
+
+composition xxx_DependanceFinish_link between
+	DependanceFinish[*] role xxx_DependanceFinish_link_src
+	WorkSequenceKindFinish[0..1] role link
+end
+

@@ -1,0 +1,205 @@
+model pla
+class Query
+attributes
+operations
+end
+
+abstract class QueryRequest
+attributes
+operations
+end
+
+abstract class Answer
+attributes
+operations
+end
+
+class UserProfile
+attributes
+	name : String
+	id : String
+operations
+end
+
+class QueryDataType<QueryRequest
+attributes
+	dateTime : String
+operations
+end
+
+class QueryCloaker<QueryRequest
+attributes
+operations
+end
+
+class QueryPrivacyProfile<QueryRequest
+attributes
+operations
+end
+
+class AnswerPrivacyProfile<Answer
+attributes
+operations
+end
+
+abstract class AnswerDataType<Answer
+attributes
+	dateTime : String
+operations
+end
+
+class IntervalAnswer<AnswerDataType
+attributes
+	min : Real
+	max : Real
+operations
+end
+
+class ValueAnswer<AnswerDataType
+attributes
+	value : Real
+operations
+end
+
+class DataType
+attributes
+	name : String
+	location : String
+operations
+end
+
+class PrivacyProfile
+attributes
+operations
+end
+
+class PrivacyRule
+attributes
+	blurringAlgorithm : String
+operations
+end
+
+abstract class Blurring
+attributes
+operations
+end
+
+abstract class TimeBlurring<Blurring
+attributes
+operations
+end
+
+abstract class ValueBlurring<Blurring
+attributes
+operations
+end
+
+class TimeAveraging<TimeBlurring
+attributes
+	duration : Real
+operations
+end
+
+class IntervalBlurring<ValueBlurring
+attributes
+	intervalLength : Real
+operations
+end
+
+class NoiseBlurring<ValueBlurring
+attributes
+	variance : Real
+	typeOfNoise : String
+operations
+end
+
+composition xxx_Query_queryRequests between
+	Query[0..1] role xxx_Query_queryRequests_src
+	QueryRequest[*] role queryRequests
+end
+
+composition xxx_Query_answers between
+	Query[0..1] role xxx_Query_answers_src
+	Answer[*] role answers
+end
+
+composition xxx_Query_userProfile between
+	Query[*] role xxx_Query_userProfile_src
+	UserProfile[0..1] role userProfile
+end
+
+association xxx_QueryDataType_requestedTimeBlurring between
+	QueryDataType[*] role xxx_QueryDataType_requestedTimeBlurring_src
+	TimeBlurring[0..1] role requestedTimeBlurring
+end
+
+association xxx_QueryDataType_requestedValueBlurring between
+	QueryDataType[*] role xxx_QueryDataType_requestedValueBlurring_src
+	ValueBlurring[0..1] role requestedValueBlurring
+end
+
+composition xxx_QueryDataType_dataType between
+	QueryDataType[*] role xxx_QueryDataType_dataType_src
+	DataType[1] role dataType
+end
+
+association xxx_QueryCloaker_queriedDataType between
+	QueryCloaker[*] role xxx_QueryCloaker_queriedDataType_src
+	QueryDataType[1] role queriedDataType
+end
+
+association xxx_QueryCloaker_privacyRule between
+	QueryCloaker[*] role xxx_QueryCloaker_privacyRule_src
+	PrivacyRule[0..1] role privacyRule
+end
+
+association xxx_QueryPrivacyProfile_userProfile between
+	QueryPrivacyProfile[*] role xxx_QueryPrivacyProfile_userProfile_src
+	UserProfile[1] role userProfile
+end
+
+association xxx_QueryPrivacyProfile_dataType between
+	QueryPrivacyProfile[*] role xxx_QueryPrivacyProfile_dataType_src
+	DataType[1] role dataType
+end
+
+association xxx_AnswerPrivacyProfile_privacyRule between
+	AnswerPrivacyProfile[*] role xxx_AnswerPrivacyProfile_privacyRule_src
+	PrivacyRule[0..1] role privacyRule
+end
+
+association xxx_AnswerDataType_resultedTimeBlurring between
+	AnswerDataType[*] role xxx_AnswerDataType_resultedTimeBlurring_src
+	TimeBlurring[0..1] role resultedTimeBlurring
+end
+
+association xxx_AnswerDataType_resultedValueBlurring between
+	AnswerDataType[*] role xxx_AnswerDataType_resultedValueBlurring_src
+	ValueBlurring[0..1] role resultedValueBlurring
+end
+
+association xxx_PrivacyProfile_userProfile between
+	PrivacyProfile[*] role xxx_PrivacyProfile_userProfile_src
+	UserProfile[1] role userProfile
+end
+
+composition xxx_PrivacyProfile_privacyRules between
+	PrivacyProfile[0..1] role xxx_PrivacyProfile_privacyRules_src
+	PrivacyRule[*] role privacyRules
+end
+
+association xxx_PrivacyRule_dataType between
+	PrivacyRule[*] role xxx_PrivacyRule_dataType_src
+	DataType[1] role dataType
+end
+
+association xxx_PrivacyRule_timeBlurring between
+	PrivacyRule[*] role xxx_PrivacyRule_timeBlurring_src
+	TimeBlurring[0..1] role timeBlurring
+end
+
+association xxx_PrivacyRule_valueBlurring between
+	PrivacyRule[*] role xxx_PrivacyRule_valueBlurring_src
+	ValueBlurring[0..1] role valueBlurring
+end
+

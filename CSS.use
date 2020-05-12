@@ -1,0 +1,356 @@
+model css
+enum UNARY{
+default
+}
+
+enum KIND{
+default
+}
+
+enum ATTRIBUTE_OP{
+default
+}
+
+class Stylesheet
+attributes
+	charset : String
+operations
+end
+
+class Content
+attributes
+operations
+end
+
+class Import
+attributes
+	string : String
+	media : String
+operations
+end
+
+class Media<Content
+attributes
+	media : String
+operations
+end
+
+class Page<Content
+attributes
+operations
+end
+
+class PseudoPage
+attributes
+	id : String
+operations
+end
+
+class Ruleset<Content
+attributes
+operations
+end
+
+class Selector
+attributes
+operations
+end
+
+class CompositeSelector<Selector
+attributes
+operations
+end
+
+class SimpleSelector<Selector
+attributes
+	elementName : String
+operations
+end
+
+class SelectorCondition
+attributes
+operations
+end
+
+class Combinator
+attributes
+	kind : KIND
+operations
+end
+
+class Declaration
+attributes
+	property : String
+	important : Boolean
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Subterm
+attributes
+	operator : String
+operations
+end
+
+class Term
+attributes
+operations
+end
+
+class Function<Term
+attributes
+	name : String
+operations
+end
+
+class Name<Term
+attributes
+	value : String
+operations
+end
+
+class Number<Term
+attributes
+	value : String
+operations
+end
+
+class Percentage<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Length<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Ems<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Exs<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Angle<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Time<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Frequency<Term
+attributes
+	value : String
+	unit : String
+operations
+end
+
+class Uri<Term
+attributes
+	value : String
+operations
+end
+
+class StringValue<Term
+attributes
+	value : String
+operations
+end
+
+class HexColor<Term
+attributes
+	value : String
+operations
+end
+
+class Class<SelectorCondition
+attributes
+	class_ : String
+operations
+end
+
+class Attribute<SelectorCondition
+attributes
+	name : String
+operations
+end
+
+class AttributeValue
+attributes
+	operator : ATTRIBUTE_OP
+	value : String
+operations
+end
+
+class Pseudo<SelectorCondition
+attributes
+	pseudo : String
+	args : String
+operations
+end
+
+class CSSId<SelectorCondition
+attributes
+	value : String
+operations
+end
+
+class UnaryOperator
+attributes
+	operator : UNARY
+operations
+end
+
+composition xxx_Stylesheet_imports between
+	Stylesheet[0..1] role xxx_Stylesheet_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Stylesheet_contents between
+	Stylesheet[0..1] role xxx_Stylesheet_contents_src
+	Content[*] role contents
+end
+
+composition xxx_Import_uri between
+	Import[*] role xxx_Import_uri_src
+	Uri[0..1] role uri
+end
+
+composition xxx_Media_rules between
+	Media[0..1] role xxx_Media_rules_src
+	Ruleset[*] role rules
+end
+
+composition xxx_Page_pseudo between
+	Page[*] role xxx_Page_pseudo_src
+	PseudoPage[0..1] role pseudo
+end
+
+composition xxx_Page_declarations between
+	Page[0..1] role xxx_Page_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Ruleset_selectors between
+	Ruleset[0..1] role xxx_Ruleset_selectors_src
+	Selector[*] role selectors
+end
+
+composition xxx_Ruleset_properties between
+	Ruleset[0..1] role xxx_Ruleset_properties_src
+	Declaration[*] role properties
+end
+
+composition xxx_CompositeSelector_left between
+	CompositeSelector[*] role xxx_CompositeSelector_left_src
+	SimpleSelector[0..1] role left
+end
+
+composition xxx_CompositeSelector_combinator between
+	CompositeSelector[*] role xxx_CompositeSelector_combinator_src
+	Combinator[0..1] role combinator
+end
+
+composition xxx_CompositeSelector_right between
+	CompositeSelector[*] role xxx_CompositeSelector_right_src
+	Selector[0..1] role right
+end
+
+composition xxx_SimpleSelector_condition between
+	SimpleSelector[0..1] role xxx_SimpleSelector_condition_src
+	SelectorCondition[*] role condition
+end
+
+composition xxx_Declaration_expression between
+	Declaration[*] role xxx_Declaration_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Expression_terms between
+	Expression[*] role xxx_Expression_terms_src
+	Term[0..1] role terms
+end
+
+composition xxx_Expression_subterms between
+	Expression[0..1] role xxx_Expression_subterms_src
+	Subterm[*] role subterms
+end
+
+composition xxx_Subterm_term between
+	Subterm[*] role xxx_Subterm_term_src
+	Term[0..1] role term
+end
+
+composition xxx_Function_args between
+	Function[*] role xxx_Function_args_src
+	Expression[0..1] role args
+end
+
+composition xxx_Number_op between
+	Number[*] role xxx_Number_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Percentage_op between
+	Percentage[*] role xxx_Percentage_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Length_op between
+	Length[*] role xxx_Length_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Ems_op between
+	Ems[*] role xxx_Ems_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Exs_op between
+	Exs[*] role xxx_Exs_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Angle_op between
+	Angle[*] role xxx_Angle_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Time_op between
+	Time[*] role xxx_Time_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Frequency_op between
+	Frequency[*] role xxx_Frequency_op_src
+	UnaryOperator[0..1] role op
+end
+
+composition xxx_Attribute_value between
+	Attribute[*] role xxx_Attribute_value_src
+	AttributeValue[0..1] role value
+end
+

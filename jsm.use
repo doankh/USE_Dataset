@@ -1,0 +1,556 @@
+model jsm
+enum MPrimitiveTypes{
+default
+}
+
+enum MVisibility{
+default
+}
+
+abstract class AbstractMPackageContainer
+attributes
+operations
+end
+
+class MRoot<AbstractMPackageContainer
+attributes
+operations
+end
+
+class MPackage<AbstractMPackageContainer
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractMResource
+attributes
+	name : String
+	derived_ : Boolean
+operations
+end
+
+class MResource<AbstractMResource
+attributes
+	content : String
+operations
+end
+
+abstract class AbstractMTypeContainer
+attributes
+operations
+end
+
+class MCompilationUnit<AbstractMResource,AbstractMTypeContainer
+attributes
+operations
+end
+
+abstract class AbstractMDeclaredType<AbstractMTypeContainer
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractMExternalType
+attributes
+	fullQualifiedName : String
+operations
+end
+
+abstract class AbstractMType
+attributes
+operations
+end
+
+abstract class AbstractMTypeReference
+attributes
+	array : Boolean
+operations
+end
+
+class MDeclaredTypeReference<AbstractMTypeReference
+attributes
+operations
+end
+
+class MExternalTypeReference<AbstractMTypeReference
+attributes
+operations
+end
+
+class MPrimitiveTypeReference<AbstractMTypeReference
+attributes
+	type : MPrimitiveTypes
+operations
+end
+
+abstract class AbstractModifiers
+attributes
+	visibility : MVisibility
+	final : Boolean
+	synchronized : Boolean
+operations
+end
+
+abstract class AbstractMMethodLike<AbstractModifiers
+attributes
+operations
+end
+
+abstract class AbstractMTypeWithNameDeclaration
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractMClass<AbstractMType
+attributes
+operations
+end
+
+class MDeclaredClass<AbstractMClass,AbstractMDeclaredType
+attributes
+operations
+end
+
+class MAbstractDeclaredClass<MDeclaredClass
+attributes
+operations
+end
+
+class MExternalClass<AbstractMClass,AbstractMExternalType
+attributes
+operations
+end
+
+abstract class AbstractMInterface<AbstractMType
+attributes
+operations
+end
+
+class MDeclaredInterface<AbstractMInterface,AbstractMDeclaredType
+attributes
+operations
+end
+
+class MExternalInterface<AbstractMInterface,AbstractMExternalType
+attributes
+operations
+end
+
+abstract class AbstractMFieldDeclaration<AbstractMTypeWithNameDeclaration
+attributes
+operations
+end
+
+abstract class AbstractMClassFieldDeclaration<AbstractMFieldDeclaration
+attributes
+	visibility : MVisibility
+	final : Boolean
+operations
+end
+
+class MStaticClassFieldDeclaration<AbstractMClassFieldDeclaration
+attributes
+operations
+end
+
+class MInstanceClassFieldDeclaration<AbstractMClassFieldDeclaration
+attributes
+	transient : Boolean
+operations
+end
+
+class MConstantInterfaceFieldDeclaration<AbstractMFieldDeclaration
+attributes
+operations
+end
+
+abstract class AbstractMMethodDeclaration<AbstractMTypeWithNameDeclaration
+attributes
+operations
+end
+
+class MMethodDeclarationParameter<AbstractMTypeWithNameDeclaration
+attributes
+operations
+end
+
+class MImplicitMethodDeclaration<AbstractMMethodDeclaration
+attributes
+operations
+end
+
+abstract class AbstractMImplementableMethodDeclaration<AbstractMMethodDeclaration
+attributes
+operations
+end
+
+class MAbstractClassMethodDeclaration<AbstractMImplementableMethodDeclaration
+attributes
+	visibility : MVisibility
+operations
+end
+
+class MInterfaceMethodDeclaration<AbstractMImplementableMethodDeclaration
+attributes
+operations
+end
+
+class MNativeMethodDeclaration<AbstractMMethodDeclaration
+attributes
+operations
+end
+
+abstract class AbstractMMethodImplementation<AbstractMMethodLike
+attributes
+operations
+end
+
+class MDeclaredMethodImplementation<AbstractMMethodImplementation
+attributes
+operations
+end
+
+class MDirectMethodImplementation<AbstractMMethodImplementation
+attributes
+operations
+end
+
+class MMethodImplementationParameter
+attributes
+	final : Boolean
+	name : String
+operations
+end
+
+class MConstructor<AbstractMMethodLike
+attributes
+operations
+end
+
+class MConstructorParameter<AbstractMTypeWithNameDeclaration
+attributes
+	final : Boolean
+operations
+end
+
+abstract class AbstractCStatement
+attributes
+operations
+end
+
+class CBlockStatement<AbstractCStatement
+attributes
+operations
+end
+
+class CDeclarationStatement<AbstractCStatement,AbstractMTypeWithNameDeclaration
+attributes
+	final : Boolean
+operations
+end
+
+class CExpressionStatement<AbstractCStatement
+attributes
+operations
+end
+
+class CIfStatement<AbstractCStatement
+attributes
+operations
+end
+
+class CUnparsedStatement<AbstractCStatement
+attributes
+	code : String
+operations
+end
+
+abstract class AbstractCExpression
+attributes
+operations
+end
+
+class CConditionalExpression<AbstractCExpression
+attributes
+operations
+end
+
+class CUnparsedExpression<AbstractCExpression
+attributes
+	code : String
+operations
+end
+
+composition xxx_AbstractMPackageContainer_packages between
+	AbstractMPackageContainer[0..1] role xxx_AbstractMPackageContainer_packages_src
+	MPackage[*] role packages
+end
+
+composition xxx_MRoot_externalTypes between
+	MRoot[0..1] role xxx_MRoot_externalTypes_src
+	AbstractMExternalType[*] role externalTypes
+end
+
+association xxx_MPackage_packageContainer between
+	MPackage[*] role xxx_MPackage_packageContainer_src
+	AbstractMPackageContainer[1] role packageContainer
+end
+
+composition xxx_MPackage_resources between
+	MPackage[0..1] role xxx_MPackage_resources_src
+	AbstractMResource[*] role resources
+end
+
+association xxx_AbstractMResource_package between
+	AbstractMResource[*] role xxx_AbstractMResource_package_src
+	MPackage[1] role package
+end
+
+association xxx_AbstractMResource_derivedFrom between
+	AbstractMResource[0..1] role xxx_AbstractMResource_derivedFrom_src
+	AbstractMResource[*] role derivedFrom
+end
+
+association xxx_AbstractMResource_superOf between
+	AbstractMResource[0..1] role xxx_AbstractMResource_superOf_src
+	AbstractMResource[*] role superOf
+end
+
+composition xxx_AbstractMTypeContainer_types between
+	AbstractMTypeContainer[0..1] role xxx_AbstractMTypeContainer_types_src
+	AbstractMDeclaredType[*] role types
+end
+
+association xxx_MCompilationUnit_imports between
+	MCompilationUnit[0..1] role xxx_MCompilationUnit_imports_src
+	AbstractMType[*] role imports
+end
+
+association xxx_AbstractMDeclaredType_typeContainer between
+	AbstractMDeclaredType[*] role xxx_AbstractMDeclaredType_typeContainer_src
+	AbstractMTypeContainer[1] role typeContainer
+end
+
+association xxx_AbstractMExternalType_root between
+	AbstractMExternalType[*] role xxx_AbstractMExternalType_root_src
+	MRoot[1] role root
+end
+
+association xxx_MDeclaredTypeReference_type between
+	MDeclaredTypeReference[*] role xxx_MDeclaredTypeReference_type_src
+	AbstractMDeclaredType[1] role type
+end
+
+association xxx_MExternalTypeReference_type between
+	MExternalTypeReference[*] role xxx_MExternalTypeReference_type_src
+	AbstractMExternalType[1] role type
+end
+
+composition xxx_AbstractMMethodLike_statement between
+	AbstractMMethodLike[*] role xxx_AbstractMMethodLike_statement_src
+	AbstractCStatement[0..1] role statement
+end
+
+composition xxx_AbstractMTypeWithNameDeclaration_type between
+	AbstractMTypeWithNameDeclaration[*] role xxx_AbstractMTypeWithNameDeclaration_type_src
+	AbstractMTypeReference[1] role type
+end
+
+association xxx_MDeclaredClass_extends between
+	MDeclaredClass[*] role xxx_MDeclaredClass_extends_src
+	AbstractMClass[0..1] role extends
+end
+
+association xxx_MDeclaredClass_implements between
+	MDeclaredClass[0..1] role xxx_MDeclaredClass_implements_src
+	AbstractMInterface[*] role implements
+end
+
+composition xxx_MDeclaredClass_staticFields between
+	MDeclaredClass[0..1] role xxx_MDeclaredClass_staticFields_src
+	MStaticClassFieldDeclaration[*] role staticFields
+end
+
+composition xxx_MDeclaredClass_instanceFields between
+	MDeclaredClass[0..1] role xxx_MDeclaredClass_instanceFields_src
+	MInstanceClassFieldDeclaration[*] role instanceFields
+end
+
+composition xxx_MDeclaredClass_constructors between
+	MDeclaredClass[0..1] role xxx_MDeclaredClass_constructors_src
+	MConstructor[*] role constructors
+end
+
+composition xxx_MDeclaredClass_implementedMethods between
+	MDeclaredClass[0..1] role xxx_MDeclaredClass_implementedMethods_src
+	AbstractMMethodImplementation[*] role implementedMethods
+end
+
+composition xxx_MDeclaredClass_nativeMethods between
+	MDeclaredClass[0..1] role xxx_MDeclaredClass_nativeMethods_src
+	MNativeMethodDeclaration[*] role nativeMethods
+end
+
+composition xxx_MAbstractDeclaredClass_abstractMethods between
+	MAbstractDeclaredClass[0..1] role xxx_MAbstractDeclaredClass_abstractMethods_src
+	MAbstractClassMethodDeclaration[*] role abstractMethods
+end
+
+association xxx_MDeclaredInterface_extends between
+	MDeclaredInterface[0..1] role xxx_MDeclaredInterface_extends_src
+	AbstractMInterface[*] role extends
+end
+
+composition xxx_MDeclaredInterface_constants between
+	MDeclaredInterface[0..1] role xxx_MDeclaredInterface_constants_src
+	MConstantInterfaceFieldDeclaration[*] role constants
+end
+
+composition xxx_MDeclaredInterface_methods between
+	MDeclaredInterface[0..1] role xxx_MDeclaredInterface_methods_src
+	MInterfaceMethodDeclaration[*] role methods
+end
+
+composition xxx_AbstractMFieldDeclaration_initialValue between
+	AbstractMFieldDeclaration[*] role xxx_AbstractMFieldDeclaration_initialValue_src
+	AbstractCExpression[0..1] role initialValue
+end
+
+association xxx_MStaticClassFieldDeclaration_owner between
+	MStaticClassFieldDeclaration[*] role xxx_MStaticClassFieldDeclaration_owner_src
+	MDeclaredClass[1] role owner
+end
+
+association xxx_MInstanceClassFieldDeclaration_owner between
+	MInstanceClassFieldDeclaration[*] role xxx_MInstanceClassFieldDeclaration_owner_src
+	MDeclaredClass[1] role owner
+end
+
+association xxx_MConstantInterfaceFieldDeclaration_owner between
+	MConstantInterfaceFieldDeclaration[*] role xxx_MConstantInterfaceFieldDeclaration_owner_src
+	MDeclaredInterface[1] role owner
+end
+
+composition xxx_AbstractMMethodDeclaration_parameters between
+	AbstractMMethodDeclaration[0..1] role xxx_AbstractMMethodDeclaration_parameters_src
+	MMethodDeclarationParameter[*] role parameters
+end
+
+association xxx_MMethodDeclarationParameter_methodDeclaration between
+	MMethodDeclarationParameter[*] role xxx_MMethodDeclarationParameter_methodDeclaration_src
+	AbstractMMethodDeclaration[1] role methodDeclaration
+end
+
+association xxx_MImplicitMethodDeclaration_owner between
+	MImplicitMethodDeclaration[*] role xxx_MImplicitMethodDeclaration_owner_src
+	MDirectMethodImplementation[1] role owner
+end
+
+association xxx_AbstractMImplementableMethodDeclaration_implementations between
+	AbstractMImplementableMethodDeclaration[0..1] role xxx_AbstractMImplementableMethodDeclaration_implementations_src
+	MDeclaredMethodImplementation[*] role implementations
+end
+
+association xxx_MAbstractClassMethodDeclaration_owner between
+	MAbstractClassMethodDeclaration[*] role xxx_MAbstractClassMethodDeclaration_owner_src
+	MAbstractDeclaredClass[1] role owner
+end
+
+association xxx_MInterfaceMethodDeclaration_owner between
+	MInterfaceMethodDeclaration[*] role xxx_MInterfaceMethodDeclaration_owner_src
+	MDeclaredInterface[1] role owner
+end
+
+association xxx_MNativeMethodDeclaration_owner between
+	MNativeMethodDeclaration[*] role xxx_MNativeMethodDeclaration_owner_src
+	MDeclaredClass[1] role owner
+end
+
+association xxx_AbstractMMethodImplementation_owner between
+	AbstractMMethodImplementation[*] role xxx_AbstractMMethodImplementation_owner_src
+	MDeclaredClass[1] role owner
+end
+
+composition xxx_AbstractMMethodImplementation_parameters between
+	AbstractMMethodImplementation[0..1] role xxx_AbstractMMethodImplementation_parameters_src
+	MMethodImplementationParameter[*] role parameters
+end
+
+association xxx_MDeclaredMethodImplementation_declaration between
+	MDeclaredMethodImplementation[*] role xxx_MDeclaredMethodImplementation_declaration_src
+	AbstractMImplementableMethodDeclaration[1] role declaration
+end
+
+composition xxx_MDirectMethodImplementation_declaration between
+	MDirectMethodImplementation[*] role xxx_MDirectMethodImplementation_declaration_src
+	MImplicitMethodDeclaration[1] role declaration
+end
+
+association xxx_MMethodImplementationParameter_methodImplementation between
+	MMethodImplementationParameter[*] role xxx_MMethodImplementationParameter_methodImplementation_src
+	AbstractMMethodImplementation[1] role methodImplementation
+end
+
+association xxx_MConstructor_owner between
+	MConstructor[*] role xxx_MConstructor_owner_src
+	MDeclaredClass[1] role owner
+end
+
+composition xxx_MConstructor_parameters between
+	MConstructor[0..1] role xxx_MConstructor_parameters_src
+	MConstructorParameter[*] role parameters
+end
+
+association xxx_MConstructorParameter_constructor between
+	MConstructorParameter[*] role xxx_MConstructorParameter_constructor_src
+	MConstructor[1] role constructor
+end
+
+composition xxx_CBlockStatement_statements between
+	CBlockStatement[0..1] role xxx_CBlockStatement_statements_src
+	AbstractCStatement[*] role statements
+end
+
+composition xxx_CDeclarationStatement_value between
+	CDeclarationStatement[*] role xxx_CDeclarationStatement_value_src
+	AbstractCExpression[0..1] role value
+end
+
+composition xxx_CExpressionStatement_expression between
+	CExpressionStatement[*] role xxx_CExpressionStatement_expression_src
+	AbstractCExpression[1] role expression
+end
+
+composition xxx_CIfStatement_condition between
+	CIfStatement[*] role xxx_CIfStatement_condition_src
+	AbstractCExpression[1] role condition
+end
+
+composition xxx_CIfStatement_trueStatement between
+	CIfStatement[*] role xxx_CIfStatement_trueStatement_src
+	AbstractCStatement[1] role trueStatement
+end
+
+composition xxx_CIfStatement_falseStatement between
+	CIfStatement[*] role xxx_CIfStatement_falseStatement_src
+	AbstractCStatement[0..1] role falseStatement
+end
+
+composition xxx_CConditionalExpression_condition between
+	CConditionalExpression[*] role xxx_CConditionalExpression_condition_src
+	AbstractCExpression[1] role condition
+end
+
+composition xxx_CConditionalExpression_trueExpression between
+	CConditionalExpression[*] role xxx_CConditionalExpression_trueExpression_src
+	AbstractCExpression[1] role trueExpression
+end
+
+composition xxx_CConditionalExpression_falseExpression between
+	CConditionalExpression[*] role xxx_CConditionalExpression_falseExpression_src
+	AbstractCExpression[0..1] role falseExpression
+end
+

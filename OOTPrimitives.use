@@ -1,0 +1,424 @@
+model oOTPrimitives
+enum Mode{
+default
+}
+
+enum CnStrActualType{
+default
+}
+
+class PrimPkgModel
+attributes
+	toolVersion : String
+	sourceToolDbName : String
+operations
+end
+
+class PackageDescription
+attributes
+	name : String
+	codeDirectorySpec : String
+	absTypeFilespec : String
+operations
+end
+
+class TemplateFile
+attributes
+	directorySpec : String
+	fileType : String
+operations
+end
+
+class ConcreteTypeDescList
+attributes
+operations
+end
+
+class ConcreteTypeDesc
+attributes
+	adaId : String
+operations
+end
+
+class ConstructedImpl
+attributes
+operations
+end
+
+class ConcreteAdaImpl
+attributes
+	adaRepKind : String
+	packageAdaId : String
+operations
+end
+
+class CnstrInvocation
+attributes
+	abstractTypeName : String
+	constructorName : String
+operations
+end
+
+class CnStrActualList
+attributes
+operations
+end
+
+class CnStrActual
+attributes
+	formalName : String
+	type : CnStrActualType
+operations
+end
+
+class CnStrActualValue
+attributes
+	text : String
+operations
+end
+
+class CnStrActualKeyword
+attributes
+	keywordName : String
+operations
+end
+
+class CnStrActualTypeValue
+attributes
+	typeValueName : String
+operations
+end
+
+class PackageRef
+attributes
+	packageAdaId : String
+	sourceToolDbName : String
+operations
+end
+
+class PrimCodeGenRef
+attributes
+	directorySpec : String
+	packageRelFilespec : String
+operations
+end
+
+class OverrideAdaImplList
+attributes
+operations
+end
+
+class OverrideAdaImpl
+attributes
+	operationId : String
+operations
+end
+
+class AdaOpBody
+attributes
+	external : Boolean
+operations
+end
+
+class LiteralList
+attributes
+operations
+end
+
+class Literal
+attributes
+	enumLiteralId : String
+	representationInteger : Integer
+operations
+end
+
+class ConcreteAdaBodyList
+attributes
+operations
+end
+
+class ConcreteAdaBody
+attributes
+	operationId : String
+operations
+end
+
+class ConcreteOpSpec
+attributes
+operations
+end
+
+class OpSpec
+attributes
+	codeNameTextLine : String
+operations
+end
+
+class FunctionSpec
+attributes
+	operationID : String
+operations
+end
+
+class FunctionSpecFormalList
+attributes
+operations
+end
+
+class FunctionSpecFormal
+attributes
+	adaID : String
+	defaultTextLine : String
+operations
+end
+
+class ProcedureSpec
+attributes
+	adaID : String
+operations
+end
+
+class ProcedureSpecFormal
+attributes
+	adaID : String
+	mode : Mode
+operations
+end
+
+class ConstantSpec
+attributes
+	adaID : String
+operations
+end
+
+class CType
+attributes
+	self : Boolean
+	externalAdaName : String
+	ctypeStandardType : String
+operations
+end
+
+class TypeCodeGenerationFlagList
+attributes
+operations
+end
+
+class TypeCodeGenerationFlag
+attributes
+	typeCodeGenerationFlag : String
+operations
+end
+
+class ExcludedOpList
+attributes
+operations
+end
+
+class ExcludedOp
+attributes
+	opName : String
+operations
+end
+
+class Text
+attributes
+	text : String
+operations
+end
+
+composition xxx_PrimPkgModel_packageDescription between
+	PrimPkgModel[*] role xxx_PrimPkgModel_packageDescription_src
+	PackageDescription[0..1] role packageDescription
+end
+
+composition xxx_PackageDescription_templateFile between
+	PackageDescription[*] role xxx_PackageDescription_templateFile_src
+	TemplateFile[0..1] role templateFile
+end
+
+composition xxx_PackageDescription_descriptionText between
+	PackageDescription[*] role xxx_PackageDescription_descriptionText_src
+	Text[0..1] role descriptionText
+end
+
+composition xxx_PackageDescription_concreteTypeDescs between
+	PackageDescription[*] role xxx_PackageDescription_concreteTypeDescs_src
+	ConcreteTypeDescList[0..1] role concreteTypeDescs
+end
+
+composition xxx_ConcreteTypeDescList_elements between
+	ConcreteTypeDescList[0..1] role xxx_ConcreteTypeDescList_elements_src
+	ConcreteTypeDesc[*] role elements
+end
+
+composition xxx_ConcreteTypeDesc_descriptionText between
+	ConcreteTypeDesc[*] role xxx_ConcreteTypeDesc_descriptionText_src
+	Text[0..1] role descriptionText
+end
+
+composition xxx_ConcreteTypeDesc_constructedImpl between
+	ConcreteTypeDesc[*] role xxx_ConcreteTypeDesc_constructedImpl_src
+	ConstructedImpl[0..1] role constructedImpl
+end
+
+composition xxx_ConstructedImpl_cnstrInvocation between
+	ConstructedImpl[*] role xxx_ConstructedImpl_cnstrInvocation_src
+	CnstrInvocation[0..1] role cnstrInvocation
+end
+
+composition xxx_ConstructedImpl_literals between
+	ConstructedImpl[*] role xxx_ConstructedImpl_literals_src
+	LiteralList[0..1] role literals
+end
+
+composition xxx_ConstructedImpl_excludedOps between
+	ConstructedImpl[*] role xxx_ConstructedImpl_excludedOps_src
+	ExcludedOpList[0..1] role excludedOps
+end
+
+composition xxx_ConstructedImpl_concreteOpSpecs between
+	ConstructedImpl[*] role xxx_ConstructedImpl_concreteOpSpecs_src
+	ConcreteOpSpec[0..1] role concreteOpSpecs
+end
+
+composition xxx_ConstructedImpl_concreteAdaImpl between
+	ConstructedImpl[*] role xxx_ConstructedImpl_concreteAdaImpl_src
+	ConcreteAdaImpl[0..1] role concreteAdaImpl
+end
+
+composition xxx_ConstructedImpl_typeCodeGenerationFlags between
+	ConstructedImpl[0..1] role xxx_ConstructedImpl_typeCodeGenerationFlags_src
+	TypeCodeGenerationFlagList[*] role typeCodeGenerationFlags
+end
+
+composition xxx_ConstructedImpl_overrideAdaImpls between
+	ConstructedImpl[*] role xxx_ConstructedImpl_overrideAdaImpls_src
+	OverrideAdaImplList[0..1] role overrideAdaImpls
+end
+
+composition xxx_ConstructedImpl_concreteAdaBodies between
+	ConstructedImpl[*] role xxx_ConstructedImpl_concreteAdaBodies_src
+	ConcreteAdaBodyList[0..1] role concreteAdaBodies
+end
+
+composition xxx_CnstrInvocation_cnstrActuals between
+	CnstrInvocation[*] role xxx_CnstrInvocation_cnstrActuals_src
+	CnStrActualList[0..1] role cnstrActuals
+end
+
+composition xxx_CnStrActualList_elements between
+	CnStrActualList[0..1] role xxx_CnStrActualList_elements_src
+	CnStrActual[*] role elements
+end
+
+composition xxx_CnStrActualTypeValue_packageRef between
+	CnStrActualTypeValue[*] role xxx_CnStrActualTypeValue_packageRef_src
+	PackageRef[0..1] role packageRef
+end
+
+composition xxx_PackageRef_primCodeGenRef between
+	PackageRef[*] role xxx_PackageRef_primCodeGenRef_src
+	PrimCodeGenRef[0..1] role primCodeGenRef
+end
+
+composition xxx_OverrideAdaImplList_elements between
+	OverrideAdaImplList[0..1] role xxx_OverrideAdaImplList_elements_src
+	OverrideAdaImpl[*] role elements
+end
+
+composition xxx_OverrideAdaImpl_adaOpBody between
+	OverrideAdaImpl[*] role xxx_OverrideAdaImpl_adaOpBody_src
+	AdaOpBody[0..1] role adaOpBody
+end
+
+composition xxx_AdaOpBody_bodyText between
+	AdaOpBody[*] role xxx_AdaOpBody_bodyText_src
+	Text[0..1] role bodyText
+end
+
+composition xxx_LiteralList_elements between
+	LiteralList[0..1] role xxx_LiteralList_elements_src
+	Literal[*] role elements
+end
+
+composition xxx_ConcreteAdaBodyList_elements between
+	ConcreteAdaBodyList[0..1] role xxx_ConcreteAdaBodyList_elements_src
+	ConcreteAdaBody[*] role elements
+end
+
+composition xxx_ConcreteAdaBody_adaOpBody between
+	ConcreteAdaBody[*] role xxx_ConcreteAdaBody_adaOpBody_src
+	AdaOpBody[0..1] role adaOpBody
+end
+
+composition xxx_ConcreteOpSpec_opSpecs between
+	ConcreteOpSpec[0..1] role xxx_ConcreteOpSpec_opSpecs_src
+	OpSpec[*] role opSpecs
+end
+
+composition xxx_OpSpec_procedureSpec between
+	OpSpec[0..1] role xxx_OpSpec_procedureSpec_src
+	ProcedureSpec[*] role procedureSpec
+end
+
+composition xxx_OpSpec_functionSpec between
+	OpSpec[0..1] role xxx_OpSpec_functionSpec_src
+	FunctionSpec[*] role functionSpec
+end
+
+composition xxx_OpSpec_constantSpec between
+	OpSpec[0..1] role xxx_OpSpec_constantSpec_src
+	ConstantSpec[*] role constantSpec
+end
+
+composition xxx_OpSpec_descriptionText between
+	OpSpec[*] role xxx_OpSpec_descriptionText_src
+	Text[0..1] role descriptionText
+end
+
+composition xxx_FunctionSpec_formals between
+	FunctionSpec[*] role xxx_FunctionSpec_formals_src
+	FunctionSpecFormalList[0..1] role formals
+end
+
+composition xxx_FunctionSpec_returnCtype between
+	FunctionSpec[*] role xxx_FunctionSpec_returnCtype_src
+	CType[0..1] role returnCtype
+end
+
+composition xxx_FunctionSpecFormalList_elements between
+	FunctionSpecFormalList[0..1] role xxx_FunctionSpecFormalList_elements_src
+	FunctionSpecFormal[*] role elements
+end
+
+composition xxx_FunctionSpecFormal_cType between
+	FunctionSpecFormal[*] role xxx_FunctionSpecFormal_cType_src
+	CType[0..1] role cType
+end
+
+composition xxx_ProcedureSpec_formals between
+	ProcedureSpec[0..1] role xxx_ProcedureSpec_formals_src
+	ProcedureSpecFormal[*] role formals
+end
+
+composition xxx_ProcedureSpecFormal_cType between
+	ProcedureSpecFormal[*] role xxx_ProcedureSpecFormal_cType_src
+	CType[0..1] role cType
+end
+
+composition xxx_ConstantSpec_cType between
+	ConstantSpec[*] role xxx_ConstantSpec_cType_src
+	CType[0..1] role cType
+end
+
+composition xxx_TypeCodeGenerationFlagList_elements between
+	TypeCodeGenerationFlagList[0..1] role xxx_TypeCodeGenerationFlagList_elements_src
+	TypeCodeGenerationFlag[*] role elements
+end
+
+composition xxx_ExcludedOpList_elements between
+	ExcludedOpList[0..1] role xxx_ExcludedOpList_elements_src
+	ExcludedOp[*] role elements
+end
+

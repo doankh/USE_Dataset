@@ -1,0 +1,271 @@
+model cmsl
+abstract class ExtensionStatement
+attributes
+operations
+end
+
+class GrammarExtension
+attributes
+operations
+end
+
+class ExtensionProgram<GrammarExtensionUnit
+attributes
+operations
+end
+
+class Reference<ConstructReference
+attributes
+operations
+end
+
+class UpperLevelReference<ConstructReference
+attributes
+operations
+end
+
+abstract class BaseReference
+attributes
+operations
+end
+
+class Fragtypes<ExtensionStatement
+attributes
+operations
+end
+
+class ExtensionDeclaration
+attributes
+	name : String
+	nsuri : String
+	nsprefix : String
+	targeturl : String
+operations
+end
+
+abstract class Definition<ExtensionStatement
+attributes
+operations
+end
+
+class Arbitrary<Cardinality
+attributes
+operations
+end
+
+class Annotation<ExtensionStatement
+attributes
+operations
+end
+
+class Injection<ExtensionStatement
+attributes
+operations
+end
+
+class DefinitionList
+attributes
+operations
+end
+
+class Role
+attributes
+	value : String
+operations
+end
+
+abstract class NonTerminal
+attributes
+operations
+end
+
+class DefinitionChoice<Definition
+attributes
+operations
+end
+
+abstract class ConstructReference
+attributes
+operations
+end
+
+class NonTerminalIdentifier<NonTerminal
+attributes
+	value : String
+operations
+end
+
+abstract class GrammarExtensionUnit
+attributes
+operations
+end
+
+class Construct<ConstructReference
+attributes
+operations
+end
+
+class MoreThanOne<Cardinality
+attributes
+operations
+end
+
+abstract class Cardinality
+attributes
+operations
+end
+
+class DefinitionConstruct<Definition
+attributes
+operations
+end
+
+class Slotify<ExtensionStatement
+attributes
+operations
+end
+
+class BaseDeclaration
+attributes
+	name : String
+	nsuri : String
+	sourceurl : String
+operations
+end
+
+class DefinitionPart
+attributes
+operations
+end
+
+class BaseLanguageReference<BaseReference
+attributes
+	language : String
+operations
+end
+
+class ZeroOne<Cardinality
+attributes
+operations
+end
+
+composition xxx_GrammarExtension_unit between
+	GrammarExtension[*] role xxx_GrammarExtension_unit_src
+	GrammarExtensionUnit[1] role unit
+end
+
+composition xxx_ExtensionProgram_base between
+	ExtensionProgram[*] role xxx_ExtensionProgram_base_src
+	BaseDeclaration[1] role base
+end
+
+composition xxx_ExtensionProgram_extension between
+	ExtensionProgram[*] role xxx_ExtensionProgram_extension_src
+	ExtensionDeclaration[1] role extension
+end
+
+composition xxx_ExtensionProgram_statements between
+	ExtensionProgram[0..1] role xxx_ExtensionProgram_statements_src
+	ExtensionStatement[*] role statements
+end
+
+composition xxx_Reference_base between
+	Reference[*] role xxx_Reference_base_src
+	BaseReference[1] role base
+end
+
+composition xxx_Reference_cardinality between
+	Reference[*] role xxx_Reference_cardinality_src
+	Cardinality[0..1] role cardinality
+end
+
+composition xxx_UpperLevelReference_upper between
+	UpperLevelReference[*] role xxx_UpperLevelReference_upper_src
+	NonTerminal[1] role upper
+end
+
+composition xxx_Fragtypes_fragtype between
+	Fragtypes[0..1] role xxx_Fragtypes_fragtype_src
+	ConstructReference[*] role fragtype
+end
+
+composition xxx_Annotation_source between
+	Annotation[*] role xxx_Annotation_source_src
+	NonTerminal[1] role source
+end
+
+composition xxx_Annotation_target between
+	Annotation[*] role xxx_Annotation_target_src
+	NonTerminal[1] role target
+end
+
+composition xxx_Injection_source between
+	Injection[*] role xxx_Injection_source_src
+	NonTerminal[1] role source
+end
+
+composition xxx_Injection_target between
+	Injection[*] role xxx_Injection_target_src
+	BaseReference[1] role target
+end
+
+composition xxx_DefinitionList_refs between
+	DefinitionList[0..1] role xxx_DefinitionList_refs_src
+	DefinitionPart[1..*] role refs
+end
+
+composition xxx_DefinitionChoice_newConstruct between
+	DefinitionChoice[*] role xxx_DefinitionChoice_newConstruct_src
+	NonTerminal[1] role newConstruct
+end
+
+composition xxx_DefinitionChoice_choice between
+	DefinitionChoice[0..1] role xxx_DefinitionChoice_choice_src
+	NonTerminal[*] role choice
+end
+
+composition xxx_Construct_name between
+	Construct[*] role xxx_Construct_name_src
+	NonTerminal[1] role name
+end
+
+composition xxx_Construct_cardinality between
+	Construct[*] role xxx_Construct_cardinality_src
+	Cardinality[0..1] role cardinality
+end
+
+composition xxx_DefinitionConstruct_newConstruct between
+	DefinitionConstruct[*] role xxx_DefinitionConstruct_newConstruct_src
+	NonTerminal[1] role newConstruct
+end
+
+composition xxx_DefinitionConstruct_definition between
+	DefinitionConstruct[*] role xxx_DefinitionConstruct_definition_src
+	DefinitionList[0..1] role definition
+end
+
+composition xxx_Slotify_construct between
+	Slotify[*] role xxx_Slotify_construct_src
+	BaseReference[1] role construct
+end
+
+composition xxx_DefinitionPart_rolename between
+	DefinitionPart[*] role xxx_DefinitionPart_rolename_src
+	Role[1] role rolename
+end
+
+composition xxx_DefinitionPart_construct between
+	DefinitionPart[*] role xxx_DefinitionPart_construct_src
+	ConstructReference[1] role construct
+end
+
+composition xxx_DefinitionPart_annotation between
+	DefinitionPart[*] role xxx_DefinitionPart_annotation_src
+	UpperLevelReference[0..1] role annotation
+end
+
+composition xxx_BaseLanguageReference_base between
+	BaseLanguageReference[*] role xxx_BaseLanguageReference_base_src
+	NonTerminal[1] role base
+end
+

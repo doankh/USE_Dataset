@@ -1,0 +1,501 @@
+model saml
+class Model
+attributes
+operations
+end
+
+class ModuleElement
+attributes
+	name : String
+	client : String
+	shared : String
+	server : String
+operations
+end
+
+class ImportElement
+attributes
+	importedNamespace : String
+operations
+end
+
+class TranslationElement
+attributes
+	name : String
+operations
+end
+
+class LanguageAttribute
+attributes
+	lang : String
+	text : String
+operations
+end
+
+class LogicElement
+attributes
+	name : String
+	event : String
+	placement : String
+	source : String
+operations
+end
+
+class CodeElement<NamedTypeElement
+attributes
+	id : String
+	valueType : String
+operations
+end
+
+class LookupElement
+attributes
+	name : String
+operations
+end
+
+class TemplateElement
+attributes
+	name : String
+	definition : String
+operations
+end
+
+class FormElement<NamedTypeElement
+attributes
+	modal : String
+	columns : Integer
+	widthInPixels : Integer
+operations
+end
+
+class FormFieldElement<NamedTypeElement
+attributes
+	enabled : String
+	visible : String
+operations
+end
+
+class NamedTypeElement
+attributes
+	name : String
+operations
+end
+
+class CompositeFieldElement<FormFieldElement
+attributes
+operations
+end
+
+class SequenceBoxElement<CompositeFieldElement
+attributes
+	labelVisible : String
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class GroupBoxElement<CompositeFieldElement
+attributes
+	columns : Integer
+	labelVisible : String
+	borderVisible : String
+	borderDecoration : String
+	gridHeight : Integer
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class GenericValueFieldElement<ValueFieldElement
+attributes
+	valueType : String
+operations
+end
+
+class ValueFieldElement<FormFieldElement
+attributes
+	labelVisible : String
+	mandatory : String
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class StringElement<ValueFieldElement
+attributes
+	maxlen : Integer
+	gridHeight : Integer
+	horizontalAlign : String
+operations
+end
+
+class BigDecimalElement<ValueFieldElement
+attributes
+	percent : String
+	grouping : String
+	horizontalAlign : String
+	fractionDigits : Integer
+	min : String
+	max : String
+operations
+end
+
+class LongElement<ValueFieldElement
+attributes
+	horizontalAlign : String
+	min : Integer
+	max : Integer
+operations
+end
+
+class DateElement<ValueFieldElement
+attributes
+operations
+end
+
+class SmartfieldElement<GenericValueFieldElement
+attributes
+operations
+end
+
+class ListBoxElement<GenericValueFieldElement
+attributes
+	gridHeight : Integer
+operations
+end
+
+class CustomFieldElement<FormFieldElement
+attributes
+	labelVisible : String
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class ButtonElement<FormFieldElement
+attributes
+	processButton : String
+	type : String
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class MenuElement
+attributes
+	name : String
+	enabled : String
+	visible : String
+	singleSelect : String
+	multiSelect : String
+	emptySelect : String
+	type : String
+operations
+end
+
+class TableElement<FormFieldElement
+attributes
+	labelVisible : String
+	gridHeight : Integer
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class ColumnElement
+attributes
+	name : String
+	type : String
+	width : Integer
+	visible : String
+	displayable : String
+operations
+end
+
+class KeyElement
+attributes
+	name : String
+	stroke : String
+operations
+end
+
+class TabElement<CompositeFieldElement
+attributes
+	columns : Integer
+operations
+end
+
+class TabBoxElement<FormFieldElement
+attributes
+	gridWidth : Integer
+	widthInPixels : Integer
+operations
+end
+
+class CheckboxElement<ValueFieldElement
+attributes
+operations
+end
+
+class FileChooserElement<ValueFieldElement
+attributes
+	maxlen : Integer
+	mode : String
+	type : String
+	extensions : String
+	defaultDirectory : String
+	showDirectory : String
+	showFileName : String
+	showFileExtension : String
+operations
+end
+
+class RadioGroupElement<GenericValueFieldElement
+attributes
+operations
+end
+
+class RadioButtonElement<NamedTypeElement
+attributes
+	value : String
+	enabled : String
+	visible : String
+operations
+end
+
+composition xxx_Model_module between
+	Model[*] role xxx_Model_module_src
+	ModuleElement[0..1] role module
+end
+
+composition xxx_Model_imports between
+	Model[0..1] role xxx_Model_imports_src
+	ImportElement[*] role imports
+end
+
+composition xxx_Model_translations between
+	Model[0..1] role xxx_Model_translations_src
+	TranslationElement[*] role translations
+end
+
+composition xxx_Model_codes between
+	Model[0..1] role xxx_Model_codes_src
+	CodeElement[*] role codes
+end
+
+composition xxx_Model_lookups between
+	Model[0..1] role xxx_Model_lookups_src
+	LookupElement[*] role lookups
+end
+
+composition xxx_Model_templates between
+	Model[0..1] role xxx_Model_templates_src
+	TemplateElement[*] role templates
+end
+
+composition xxx_Model_forms between
+	Model[0..1] role xxx_Model_forms_src
+	FormElement[*] role forms
+end
+
+composition xxx_Model_logics between
+	Model[0..1] role xxx_Model_logics_src
+	LogicElement[*] role logics
+end
+
+composition xxx_TranslationElement_translations between
+	TranslationElement[0..1] role xxx_TranslationElement_translations_src
+	LanguageAttribute[*] role translations
+end
+
+association xxx_LogicElement_exec between
+	LogicElement[*] role xxx_LogicElement_exec_src
+	LogicElement[0..1] role exec
+end
+
+association xxx_CodeElement_text between
+	CodeElement[*] role xxx_CodeElement_text_src
+	TranslationElement[0..1] role text
+end
+
+composition xxx_CodeElement_logic between
+	CodeElement[0..1] role xxx_CodeElement_logic_src
+	LogicElement[*] role logic
+end
+
+composition xxx_CodeElement_codes between
+	CodeElement[0..1] role xxx_CodeElement_codes_src
+	CodeElement[*] role codes
+end
+
+composition xxx_LookupElement_logic between
+	LookupElement[0..1] role xxx_LookupElement_logic_src
+	LogicElement[*] role logic
+end
+
+association xxx_FormElement_title between
+	FormElement[*] role xxx_FormElement_title_src
+	TranslationElement[0..1] role title
+end
+
+association xxx_FormElement_subtitle between
+	FormElement[*] role xxx_FormElement_subtitle_src
+	TranslationElement[0..1] role subtitle
+end
+
+association xxx_FormElement_svcSuperType between
+	FormElement[*] role xxx_FormElement_svcSuperType_src
+	TemplateElement[0..1] role svcSuperType
+end
+
+composition xxx_FormElement_logic between
+	FormElement[0..1] role xxx_FormElement_logic_src
+	LogicElement[*] role logic
+end
+
+composition xxx_FormElement_fields between
+	FormElement[0..1] role xxx_FormElement_fields_src
+	FormFieldElement[*] role fields
+end
+
+composition xxx_FormElement_keyStrokes between
+	FormElement[0..1] role xxx_FormElement_keyStrokes_src
+	KeyElement[*] role keyStrokes
+end
+
+composition xxx_FormFieldElement_logic between
+	FormFieldElement[0..1] role xxx_FormFieldElement_logic_src
+	LogicElement[*] role logic
+end
+
+association xxx_NamedTypeElement_superType between
+	NamedTypeElement[*] role xxx_NamedTypeElement_superType_src
+	TemplateElement[0..1] role superType
+end
+
+association xxx_CompositeFieldElement_text between
+	CompositeFieldElement[*] role xxx_CompositeFieldElement_text_src
+	TranslationElement[0..1] role text
+end
+
+composition xxx_CompositeFieldElement_fields between
+	CompositeFieldElement[0..1] role xxx_CompositeFieldElement_fields_src
+	FormFieldElement[*] role fields
+end
+
+association xxx_ValueFieldElement_text between
+	ValueFieldElement[*] role xxx_ValueFieldElement_text_src
+	TranslationElement[0..1] role text
+end
+
+association xxx_ValueFieldElement_master between
+	ValueFieldElement[*] role xxx_ValueFieldElement_master_src
+	ValueFieldElement[0..1] role master
+end
+
+association xxx_SmartfieldElement_code between
+	SmartfieldElement[*] role xxx_SmartfieldElement_code_src
+	CodeElement[0..1] role code
+end
+
+association xxx_SmartfieldElement_lookup between
+	SmartfieldElement[*] role xxx_SmartfieldElement_lookup_src
+	LookupElement[0..1] role lookup
+end
+
+composition xxx_SmartfieldElement_menus between
+	SmartfieldElement[0..1] role xxx_SmartfieldElement_menus_src
+	MenuElement[*] role menus
+end
+
+association xxx_ListBoxElement_code between
+	ListBoxElement[*] role xxx_ListBoxElement_code_src
+	CodeElement[0..1] role code
+end
+
+association xxx_ListBoxElement_lookup between
+	ListBoxElement[*] role xxx_ListBoxElement_lookup_src
+	LookupElement[0..1] role lookup
+end
+
+association xxx_CustomFieldElement_text between
+	CustomFieldElement[*] role xxx_CustomFieldElement_text_src
+	TranslationElement[0..1] role text
+end
+
+composition xxx_CustomFieldElement_fields between
+	CustomFieldElement[0..1] role xxx_CustomFieldElement_fields_src
+	FormFieldElement[*] role fields
+end
+
+association xxx_ButtonElement_text between
+	ButtonElement[*] role xxx_ButtonElement_text_src
+	TranslationElement[0..1] role text
+end
+
+composition xxx_ButtonElement_menus between
+	ButtonElement[0..1] role xxx_ButtonElement_menus_src
+	MenuElement[*] role menus
+end
+
+association xxx_MenuElement_text between
+	MenuElement[*] role xxx_MenuElement_text_src
+	TranslationElement[0..1] role text
+end
+
+association xxx_MenuElement_superType between
+	MenuElement[*] role xxx_MenuElement_superType_src
+	TemplateElement[0..1] role superType
+end
+
+composition xxx_MenuElement_logic between
+	MenuElement[0..1] role xxx_MenuElement_logic_src
+	LogicElement[*] role logic
+end
+
+composition xxx_MenuElement_menus between
+	MenuElement[0..1] role xxx_MenuElement_menus_src
+	MenuElement[*] role menus
+end
+
+association xxx_TableElement_text between
+	TableElement[*] role xxx_TableElement_text_src
+	TranslationElement[0..1] role text
+end
+
+composition xxx_TableElement_menus between
+	TableElement[0..1] role xxx_TableElement_menus_src
+	MenuElement[*] role menus
+end
+
+composition xxx_TableElement_columns between
+	TableElement[0..1] role xxx_TableElement_columns_src
+	ColumnElement[*] role columns
+end
+
+association xxx_ColumnElement_text between
+	ColumnElement[*] role xxx_ColumnElement_text_src
+	TranslationElement[0..1] role text
+end
+
+composition xxx_KeyElement_logic between
+	KeyElement[0..1] role xxx_KeyElement_logic_src
+	LogicElement[*] role logic
+end
+
+composition xxx_TabBoxElement_tabs between
+	TabBoxElement[0..1] role xxx_TabBoxElement_tabs_src
+	TabElement[*] role tabs
+end
+
+composition xxx_RadioGroupElement_options between
+	RadioGroupElement[0..1] role xxx_RadioGroupElement_options_src
+	RadioButtonElement[*] role options
+end
+
+association xxx_RadioButtonElement_text between
+	RadioButtonElement[*] role xxx_RadioButtonElement_text_src
+	TranslationElement[0..1] role text
+end
+

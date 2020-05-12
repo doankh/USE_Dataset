@@ -1,0 +1,249 @@
+model CompositeStructures
+class Connector<Feature
+attributes
+operations
+end
+
+abstract class Feature<RedefinableElement
+attributes
+operations
+end
+
+abstract class RedefinableElement
+attributes
+operations
+end
+
+class StructuredClassifier<Classifier
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+abstract class Namespace
+attributes
+operations
+end
+
+abstract class StructuralFeature
+attributes
+operations
+end
+
+class Class<StructuredClassifier,EncapsulatedClassifier
+attributes
+operations
+end
+
+abstract class ConnectableElement<TypedElement
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+class Property<StructuralFeature,ConnectableElement
+attributes
+operations
+end
+
+class ConnectorEnd
+attributes
+operations
+end
+
+class Association
+attributes
+operations
+end
+
+class Port<Property
+attributes
+	isBehavior : String
+	isService : String
+	isConjugated : String
+operations
+end
+
+class Interface
+attributes
+operations
+end
+
+abstract class EncapsulatedClassifier<StructuredClassifier
+attributes
+operations
+end
+
+class Parameter<ConnectableElement
+attributes
+operations
+end
+
+class Collaboration<StructuredClassifier,BehavioredClassifier
+attributes
+operations
+end
+
+class BehavioredClassifier
+attributes
+operations
+end
+
+class CollaborationUse<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+abstract class InvocationAction
+attributes
+operations
+end
+
+abstract class Trigger
+attributes
+operations
+end
+
+class Variable<ConnectableElement
+attributes
+operations
+end
+
+association xxx_Connector_redefinedConnector between
+	Connector[0..1] role xxx_Connector_redefinedConnector_src
+	Connector[*] role redefinedConnector
+end
+
+composition xxx_Connector_end_ between
+	Connector[0..1] role xxx_Connector_end__src
+	ConnectorEnd[2..*] role end_
+end
+
+association xxx_Feature_featuringClassifier between
+	Feature[0..1] role xxx_Feature_featuringClassifier_src
+	Classifier[*] role featuringClassifier
+end
+
+composition xxx_StructuredClassifier_ownedConnector between
+	StructuredClassifier[0..1] role xxx_StructuredClassifier_ownedConnector_src
+	Connector[*] role ownedConnector
+end
+
+association xxx_StructuredClassifier_role between
+	StructuredClassifier[0..1] role xxx_StructuredClassifier_role_src
+	ConnectableElement[*] role role
+end
+
+composition xxx_StructuredClassifier_structuredOwnedAttribute between
+	StructuredClassifier[0..1] role xxx_StructuredClassifier_structuredOwnedAttribute_src
+	Property[*] role structuredOwnedAttribute
+end
+
+association xxx_StructuredClassifier_part between
+	StructuredClassifier[0..1] role xxx_StructuredClassifier_part_src
+	Property[*] role part
+end
+
+association xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+composition xxx_Classifier_collaborationUse between
+	Classifier[0..1] role xxx_Classifier_collaborationUse_src
+	CollaborationUse[*] role collaborationUse
+end
+
+association xxx_Classifier_representation between
+	Classifier[*] role xxx_Classifier_representation_src
+	CollaborationUse[0..1] role representation
+end
+
+association xxx_ConnectableElement_end_ between
+	ConnectableElement[0..1] role xxx_ConnectableElement_end__src
+	ConnectorEnd[*] role end_
+end
+
+association xxx_ConnectorEnd_type between
+	ConnectorEnd[*] role xxx_ConnectorEnd_type_src
+	Association[0..1] role type
+end
+
+association xxx_ConnectorEnd_role between
+	ConnectorEnd[*] role xxx_ConnectorEnd_role_src
+	ConnectableElement[1] role role
+end
+
+association xxx_ConnectorEnd_definingEnd between
+	ConnectorEnd[*] role xxx_ConnectorEnd_definingEnd_src
+	Property[0..1] role definingEnd
+end
+
+association xxx_ConnectorEnd_partWithPort between
+	ConnectorEnd[*] role xxx_ConnectorEnd_partWithPort_src
+	Property[0..1] role partWithPort
+end
+
+association xxx_Port_required between
+	Port[0..1] role xxx_Port_required_src
+	Interface[*] role required
+end
+
+association xxx_Port_provided between
+	Port[0..1] role xxx_Port_provided_src
+	Interface[*] role provided
+end
+
+association xxx_Port_redefinedPort between
+	Port[0..1] role xxx_Port_redefinedPort_src
+	Port[*] role redefinedPort
+end
+
+composition xxx_EncapsulatedClassifier_ownedPort between
+	EncapsulatedClassifier[0..1] role xxx_EncapsulatedClassifier_ownedPort_src
+	Port[*] role ownedPort
+end
+
+association xxx_Collaboration_collaborationRole between
+	Collaboration[0..1] role xxx_Collaboration_collaborationRole_src
+	ConnectableElement[*] role collaborationRole
+end
+
+association xxx_CollaborationUse_type between
+	CollaborationUse[*] role xxx_CollaborationUse_type_src
+	Collaboration[1] role type
+end
+
+composition xxx_CollaborationUse_roleBinding between
+	CollaborationUse[0..1] role xxx_CollaborationUse_roleBinding_src
+	Dependency[*] role roleBinding
+end
+
+association xxx_InvocationAction_onPort between
+	InvocationAction[*] role xxx_InvocationAction_onPort_src
+	Port[0..1] role onPort
+end
+
+association xxx_Trigger_port between
+	Trigger[0..1] role xxx_Trigger_port_src
+	Port[*] role port
+end
+

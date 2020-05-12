@@ -1,0 +1,43 @@
+model PrimitiveTypes
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Network<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Services<LocatedElement
+attributes
+	name : String
+	URL : String
+	descriptions : String
+operations
+end
+
+class WebService<Services
+attributes
+operations
+end
+
+class RSS<Services
+attributes
+operations
+end
+
+composition xxx_Network_services between
+	Network[0..1] role xxx_Network_services_src
+	Services[*] role services
+end
+
+association xxx_WebService_linkedServices between
+	WebService[0..1] role xxx_WebService_linkedServices_src
+	Services[*] role linkedServices
+end
+

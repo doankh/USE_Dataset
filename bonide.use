@@ -1,0 +1,175 @@
+model bonIDE
+enum ImplementationStatus{
+default
+}
+
+enum RelationshipType{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+abstract class Abstraction
+attributes
+operations
+end
+
+class Cluster<StaticAbstraction
+attributes
+	name : String
+	collapsed : Boolean
+	expandedHeight : Integer
+operations
+end
+
+class BONClass<StaticAbstraction
+attributes
+	name : String
+	isDeferred : Boolean
+	implementationStatus : ImplementationStatus
+operations
+end
+
+abstract class StaticAbstraction<Abstraction
+attributes
+operations
+end
+
+class Feature
+attributes
+	names : String
+	modifier : String
+	type : String
+	comment : String
+operations
+end
+
+class IndexClause
+attributes
+	identifier : String
+	terms : String
+operations
+end
+
+class InheritanceClause
+attributes
+	parentNames : String
+operations
+end
+
+class FeatureArgument
+attributes
+	name : String
+	type : String
+	containerType : String
+operations
+end
+
+class PreCondition
+attributes
+	content : String
+operations
+end
+
+class PostCondition
+attributes
+	content : String
+operations
+end
+
+class Invariant
+attributes
+	content : String
+operations
+end
+
+class StaticRelationship
+attributes
+	type : RelationshipType
+operations
+end
+
+class InheritanceRel<StaticRelationship
+attributes
+operations
+end
+
+class ClientSupplierRel<StaticRelationship
+attributes
+	name : String
+operations
+end
+
+class AggregationRel<ClientSupplierRel
+attributes
+operations
+end
+
+class AssociationRel<ClientSupplierRel
+attributes
+operations
+end
+
+composition xxx_Model_abstractions between
+	Model[0..1] role xxx_Model_abstractions_src
+	Abstraction[*] role abstractions
+end
+
+composition xxx_Model_relationships between
+	Model[0..1] role xxx_Model_relationships_src
+	StaticRelationship[*] role relationships
+end
+
+composition xxx_Cluster_contents between
+	Cluster[0..1] role xxx_Cluster_contents_src
+	StaticAbstraction[*] role contents
+end
+
+composition xxx_BONClass_features between
+	BONClass[0..1] role xxx_BONClass_features_src
+	Feature[*] role features
+end
+
+composition xxx_BONClass_indexes between
+	BONClass[0..1] role xxx_BONClass_indexes_src
+	IndexClause[*] role indexes
+end
+
+composition xxx_BONClass_parents between
+	BONClass[*] role xxx_BONClass_parents_src
+	InheritanceClause[0..1] role parents
+end
+
+composition xxx_BONClass_invariants between
+	BONClass[0..1] role xxx_BONClass_invariants_src
+	Invariant[*] role invariants
+end
+
+composition xxx_Feature_arguments between
+	Feature[0..1] role xxx_Feature_arguments_src
+	FeatureArgument[*] role arguments
+end
+
+composition xxx_Feature_postConditions between
+	Feature[0..1] role xxx_Feature_postConditions_src
+	PostCondition[*] role postConditions
+end
+
+composition xxx_Feature_preConditions between
+	Feature[0..1] role xxx_Feature_preConditions_src
+	PreCondition[*] role preConditions
+end
+
+association xxx_StaticRelationship_source between
+	StaticRelationship[*] role xxx_StaticRelationship_source_src
+	Abstraction[0..1] role source
+end
+
+association xxx_StaticRelationship_target between
+	StaticRelationship[*] role xxx_StaticRelationship_target_src
+	Abstraction[0..1] role target
+end
+

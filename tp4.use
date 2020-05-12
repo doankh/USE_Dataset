@@ -1,0 +1,167 @@
+model tp4
+enum Categorie{
+default
+}
+
+enum Nature{
+default
+}
+
+class Infrastructure
+attributes
+operations
+end
+
+class Calculateur<ElementEmbarque
+attributes
+	categorie : Categorie
+operations
+end
+
+class Peripherique<ElementEmbarque
+attributes
+	nature : Nature
+operations
+end
+
+class Nomenclature
+attributes
+	name : String
+operations
+end
+
+class Famille
+attributes
+	nom : String
+operations
+end
+
+class Interface<ElementEmbarque
+attributes
+operations
+end
+
+class Localisation
+attributes
+	name : String
+	coteX : Integer
+	coteY : Integer
+operations
+end
+
+class Documentation
+attributes
+	description : String
+operations
+end
+
+class VueDocumentation
+attributes
+	name : String
+operations
+end
+
+class Processeur<ElementEmbarque
+attributes
+operations
+end
+
+class ElementEmbarque
+attributes
+	name : String
+	cadence : Real
+operations
+end
+
+class Trace
+attributes
+	date_heure : String
+operations
+end
+
+class ZLocalisation
+attributes
+	cordZ : Integer
+operations
+end
+
+composition xxx_Infrastructure_calculateurs between
+	Infrastructure[0..1] role xxx_Infrastructure_calculateurs_src
+	Calculateur[*] role calculateurs
+end
+
+composition xxx_Infrastructure_peripheriques between
+	Infrastructure[0..1] role xxx_Infrastructure_peripheriques_src
+	Peripherique[*] role peripheriques
+end
+
+composition xxx_Infrastructure_localisations between
+	Infrastructure[0..1] role xxx_Infrastructure_localisations_src
+	Localisation[*] role localisations
+end
+
+composition xxx_Infrastructure_documentation between
+	Infrastructure[*] role xxx_Infrastructure_documentation_src
+	VueDocumentation[0..1] role documentation
+end
+
+composition xxx_Calculateur_interfaces between
+	Calculateur[0..1] role xxx_Calculateur_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_Calculateur_processeurs between
+	Calculateur[0..1] role xxx_Calculateur_processeurs_src
+	Processeur[*] role processeurs
+end
+
+composition xxx_Nomenclature_zlocalisation between
+	Nomenclature[*] role xxx_Nomenclature_zlocalisation_src
+	ZLocalisation[0..1] role zlocalisation
+end
+
+composition xxx_Famille_docus between
+	Famille[0..1] role xxx_Famille_docus_src
+	Documentation[*] role docus
+end
+
+association xxx_Interface__peripherique between
+	Interface[*] role xxx_Interface__peripherique_src
+	Peripherique[0..1] role _peripherique
+end
+
+association xxx_Interface_calculateur between
+	Interface[*] role xxx_Interface_calculateur_src
+	Calculateur[0..1] role calculateur
+end
+
+composition xxx_VueDocumentation_familles between
+	VueDocumentation[0..1] role xxx_VueDocumentation_familles_src
+	Famille[*] role familles
+end
+
+composition xxx_VueDocumentation_nomenclatures between
+	VueDocumentation[0..1] role xxx_VueDocumentation_nomenclatures_src
+	Nomenclature[*] role nomenclatures
+end
+
+association xxx_Processeur__famille between
+	Processeur[*] role xxx_Processeur__famille_src
+	Famille[0..1] role _famille
+end
+
+composition xxx_ElementEmbarque_trace between
+	ElementEmbarque[*] role xxx_ElementEmbarque_trace_src
+	Trace[0..1] role trace
+end
+
+association xxx_Trace_t_nomenclature between
+	Trace[*] role xxx_Trace_t_nomenclature_src
+	Nomenclature[0..1] role t_nomenclature
+end
+
+association xxx_ZLocalisation_localisation between
+	ZLocalisation[*] role xxx_ZLocalisation_localisation_src
+	Localisation[0..1] role localisation
+end
+

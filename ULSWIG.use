@@ -1,0 +1,219 @@
+model ulswig
+class LinkSpec
+attributes
+	packagename : String
+	name : String
+operations
+end
+
+class Constructor
+attributes
+	isPublic : Boolean
+	name : String
+	parameters : String
+operations
+end
+
+class ConstructorAddressParameters
+attributes
+operations
+end
+
+class NamedAddresses<ConstructorAddressParameters
+attributes
+	addressNames : String
+operations
+end
+
+class AddressTuple<ConstructorAddressParameters
+attributes
+	elements : String
+operations
+end
+
+class Member
+attributes
+operations
+end
+
+class LinkBinding<Member
+attributes
+operations
+end
+
+class TosNetLinkBinding<LinkBinding
+attributes
+operations
+end
+
+class LinkProperty
+attributes
+	ctrlName : String
+	baseValue : Integer
+	uartName : String
+operations
+end
+
+class Expansion<Member
+attributes
+	name : String
+operations
+end
+
+class SimpleExpansion<Expansion
+attributes
+operations
+end
+
+class AddressExpansion<Expansion
+attributes
+operations
+end
+
+class Argument
+attributes
+	simple : String
+	lhs : String
+	text : String
+operations
+end
+
+class AddressBinding
+attributes
+	name : String
+	addresses : String
+operations
+end
+
+class Instantiation<Member
+attributes
+	kind : String
+operations
+end
+
+class AddressSpec
+attributes
+	name : String
+operations
+end
+
+class DirectAddressSpec<AddressSpec
+attributes
+	address : String
+operations
+end
+
+class NamedAddressSpec<AddressSpec
+attributes
+operations
+end
+
+class InstantiationProperty
+attributes
+operations
+end
+
+class Grouping<Member
+attributes
+	name : String
+operations
+end
+
+class GroupElement
+attributes
+operations
+end
+
+class PathElement
+attributes
+	simple : String
+operations
+end
+
+class IDProperty<InstantiationProperty
+attributes
+operations
+end
+
+class CRCProperty<InstantiationProperty
+attributes
+operations
+end
+
+class PublishProperty<InstantiationProperty
+attributes
+	mode : Integer
+	rate : Integer
+operations
+end
+
+composition xxx_LinkSpec_constructors between
+	LinkSpec[0..1] role xxx_LinkSpec_constructors_src
+	Constructor[*] role constructors
+end
+
+composition xxx_Constructor_addresses between
+	Constructor[*] role xxx_Constructor_addresses_src
+	ConstructorAddressParameters[0..1] role addresses
+end
+
+composition xxx_Constructor_members between
+	Constructor[0..1] role xxx_Constructor_members_src
+	Member[*] role members
+end
+
+composition xxx_TosNetLinkBinding_properties between
+	TosNetLinkBinding[0..1] role xxx_TosNetLinkBinding_properties_src
+	LinkProperty[*] role properties
+end
+
+association xxx_Expansion_constructor between
+	Expansion[*] role xxx_Expansion_constructor_src
+	Constructor[0..1] role constructor
+end
+
+composition xxx_Expansion_arguments between
+	Expansion[0..1] role xxx_Expansion_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_SimpleExpansion_bindings between
+	SimpleExpansion[0..1] role xxx_SimpleExpansion_bindings_src
+	AddressBinding[*] role bindings
+end
+
+composition xxx_Argument_rhs between
+	Argument[*] role xxx_Argument_rhs_src
+	Argument[0..1] role rhs
+end
+
+composition xxx_Instantiation_address between
+	Instantiation[*] role xxx_Instantiation_address_src
+	AddressSpec[0..1] role address
+end
+
+composition xxx_Instantiation_properties between
+	Instantiation[0..1] role xxx_Instantiation_properties_src
+	InstantiationProperty[*] role properties
+end
+
+composition xxx_Grouping_elements between
+	Grouping[0..1] role xxx_Grouping_elements_src
+	GroupElement[*] role elements
+end
+
+composition xxx_GroupElement_path between
+	GroupElement[0..1] role xxx_GroupElement_path_src
+	PathElement[*] role path
+end
+
+association xxx_PathElement_type between
+	PathElement[*] role xxx_PathElement_type_src
+	Constructor[0..1] role type
+end
+
+composition xxx_IDProperty_id between
+	IDProperty[*] role xxx_IDProperty_id_src
+	Argument[0..1] role id
+end
+

@@ -1,0 +1,78 @@
+model netracer
+class NetTracerModel
+attributes
+operations
+	getRootRows():NetTracerRow
+end
+
+class NetTracerColumn
+attributes
+operations
+end
+
+class NetTracerColumnDescriptor
+attributes
+operations
+end
+
+class NetTracerRow
+attributes
+operations
+	getChildrenRow():NetTracerRow
+	createCell(row : NetTracerColumn,col : NetTracerColumn):NetTracerCell
+end
+
+class NetTracerPinRow<NetTracerRow
+attributes
+	pin : String
+operations
+end
+
+class NetTracerModuleRow<NetTracerRow
+attributes
+operations
+end
+
+class NetTracerCell
+attributes
+	colIndex : Integer
+operations
+end
+
+class NetTracerPinCell<NetTracerCell
+attributes
+	portDBNode : String
+operations
+end
+
+class NetTracerModulePinsCell<NetTracerCell
+attributes
+	portDBNodes : String
+operations
+end
+
+class NetTracerPinModel<NetTracerModel
+attributes
+operations
+end
+
+association xxx_NetTracerModel_columns between
+	NetTracerModel[0..1] role xxx_NetTracerModel_columns_src
+	NetTracerColumn[*] role columns
+end
+
+association xxx_NetTracerColumn_colDescriptor between
+	NetTracerColumn[*] role xxx_NetTracerColumn_colDescriptor_src
+	NetTracerColumnDescriptor[0..1] role colDescriptor
+end
+
+association xxx_NetTracerRow_tracerCells between
+	NetTracerRow[0..1] role xxx_NetTracerRow_tracerCells_src
+	NetTracerCell[*] role tracerCells
+end
+
+association xxx_NetTracerRow_tracerModel between
+	NetTracerRow[*] role xxx_NetTracerRow_tracerModel_src
+	NetTracerModel[0..1] role tracerModel
+end
+

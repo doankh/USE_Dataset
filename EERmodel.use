@@ -1,0 +1,356 @@
+model EER
+enum DependencyType{
+default
+}
+
+enum GeneralizationType{
+default
+}
+
+class Project
+attributes
+	name : String
+operations
+end
+
+abstract class AttributedNode
+attributes
+	name : String
+operations
+end
+
+class Entity<Node
+attributes
+operations
+end
+
+class WeakEntity<Entity
+attributes
+operations
+end
+
+class Constraint
+attributes
+	name : String
+operations
+end
+
+class Exclusive<Constraint
+attributes
+operations
+end
+
+class Inclusiveness<Constraint
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class Exclusion<Constraint
+attributes
+operations
+end
+
+class Inclusion<Constraint
+attributes
+operations
+end
+
+class CandidateKey
+attributes
+	name : String
+operations
+end
+
+abstract class Attribute
+attributes
+	name : String
+	nullable : Boolean
+operations
+end
+
+class CompositeAttribute<Attribute
+attributes
+operations
+end
+
+class SingleAttribute<Attribute
+attributes
+	derivate : Boolean
+	multiplicity : Integer
+operations
+end
+
+abstract class Domain
+attributes
+	name : String
+operations
+end
+
+class EnumerationType<Domain
+attributes
+operations
+end
+
+class PrimitiveType<Domain
+attributes
+operations
+end
+
+class EnumeratedLiteral
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractRelationship<Node
+attributes
+operations
+end
+
+class Relationship<AbstractRelationship
+attributes
+operations
+end
+
+class DependencyRelationship<AbstractRelationship
+attributes
+	type : DependencyType
+operations
+end
+
+class Participant<AbstractParticipant
+attributes
+operations
+end
+
+class Generalization<AttributedNode
+attributes
+	type : GeneralizationType
+operations
+end
+
+class SpecializationRelationship
+attributes
+operations
+end
+
+class GeneralizationRelationship
+attributes
+operations
+end
+
+abstract class AbstractParticipant
+attributes
+	role : String
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class AggregationParticipant<AbstractParticipant
+attributes
+operations
+end
+
+abstract class Node<AttributedNode
+attributes
+operations
+end
+
+class Aggregation<AttributedNode
+attributes
+operations
+end
+
+composition xxx_Project_domains between
+	Project[0..1] role xxx_Project_domains_src
+	Domain[*] role domains
+end
+
+composition xxx_Project_nodes between
+	Project[0..1] role xxx_Project_nodes_src
+	AttributedNode[*] role nodes
+end
+
+association xxx_Entity_primaryKey between
+	Entity[*] role xxx_Entity_primaryKey_src
+	CandidateKey[0..1] role primaryKey
+end
+
+composition xxx_Entity_candidateKey between
+	Entity[0..1] role xxx_Entity_candidateKey_src
+	CandidateKey[1..*] role candidateKey
+end
+
+composition xxx_Entity_dependencyRelationships between
+	Entity[0..1] role xxx_Entity_dependencyRelationships_src
+	DependencyRelationship[*] role dependencyRelationships
+end
+
+composition xxx_Entity_isSpecializedBy between
+	Entity[0..1] role xxx_Entity_isSpecializedBy_src
+	SpecializationRelationship[*] role isSpecializedBy
+end
+
+composition xxx_Entity_specializes between
+	Entity[0..1] role xxx_Entity_specializes_src
+	GeneralizationRelationship[*] role specializes
+end
+
+association xxx_Exclusive_source between
+	Exclusive[*] role xxx_Exclusive_source_src
+	Participant[1] role source
+end
+
+association xxx_Exclusive_target between
+	Exclusive[*] role xxx_Exclusive_target_src
+	Participant[1] role target
+end
+
+association xxx_Inclusiveness_source between
+	Inclusiveness[*] role xxx_Inclusiveness_source_src
+	Participant[1] role source
+end
+
+association xxx_Inclusiveness_target between
+	Inclusiveness[*] role xxx_Inclusiveness_target_src
+	Participant[1] role target
+end
+
+association xxx_Exclusion_source between
+	Exclusion[*] role xxx_Exclusion_source_src
+	Relationship[1] role source
+end
+
+association xxx_Exclusion_target between
+	Exclusion[*] role xxx_Exclusion_target_src
+	Relationship[1] role target
+end
+
+association xxx_Inclusion_source between
+	Inclusion[*] role xxx_Inclusion_source_src
+	Relationship[1] role source
+end
+
+association xxx_Inclusion_target between
+	Inclusion[*] role xxx_Inclusion_target_src
+	Relationship[1] role target
+end
+
+association xxx_CandidateKey_attributes_ between
+	CandidateKey[0..1] role xxx_CandidateKey_attributes__src
+	Attribute[1..*] role attributes_
+end
+
+composition xxx_CompositeAttribute_singlesAttributes between
+	CompositeAttribute[0..1] role xxx_CompositeAttribute_singlesAttributes_src
+	Attribute[2..*] role singlesAttributes
+end
+
+association xxx_SingleAttribute_domain between
+	SingleAttribute[*] role xxx_SingleAttribute_domain_src
+	Domain[1] role domain
+end
+
+composition xxx_EnumerationType_literals between
+	EnumerationType[0..1] role xxx_EnumerationType_literals_src
+	EnumeratedLiteral[1..*] role literals
+end
+
+composition xxx_AbstractRelationship_participants between
+	AbstractRelationship[0..1] role xxx_AbstractRelationship_participants_src
+	Participant[2..*] role participants
+end
+
+composition xxx_Relationship_exclusionConstraints between
+	Relationship[0..1] role xxx_Relationship_exclusionConstraints_src
+	Exclusion[*] role exclusionConstraints
+end
+
+composition xxx_Relationship_inclusionConstraints between
+	Relationship[0..1] role xxx_Relationship_inclusionConstraints_src
+	Inclusion[*] role inclusionConstraints
+end
+
+association xxx_Participant_target between
+	Participant[*] role xxx_Participant_target_src
+	Entity[1] role target
+end
+
+association xxx_Participant_source between
+	Participant[*] role xxx_Participant_source_src
+	AbstractRelationship[1] role source
+end
+
+composition xxx_Participant_exclusiveConstraint between
+	Participant[0..1] role xxx_Participant_exclusiveConstraint_src
+	Exclusive[*] role exclusiveConstraint
+end
+
+composition xxx_Participant_inclusivenessConstraint between
+	Participant[0..1] role xxx_Participant_inclusivenessConstraint_src
+	Inclusiveness[*] role inclusivenessConstraint
+end
+
+association xxx_Generalization_parent between
+	Generalization[*] role xxx_Generalization_parent_src
+	SpecializationRelationship[1] role parent
+end
+
+association xxx_Generalization_childs between
+	Generalization[0..1] role xxx_Generalization_childs_src
+	GeneralizationRelationship[1..*] role childs
+end
+
+composition xxx_Generalization_attribute between
+	Generalization[*] role xxx_Generalization_attribute_src
+	Attribute[0..1] role attribute
+end
+
+association xxx_SpecializationRelationship_source between
+	SpecializationRelationship[*] role xxx_SpecializationRelationship_source_src
+	Entity[1] role source
+end
+
+association xxx_SpecializationRelationship_relationship between
+	SpecializationRelationship[*] role xxx_SpecializationRelationship_relationship_src
+	Generalization[1] role relationship
+end
+
+association xxx_GeneralizationRelationship_relationship between
+	GeneralizationRelationship[*] role xxx_GeneralizationRelationship_relationship_src
+	Generalization[1] role relationship
+end
+
+association xxx_GeneralizationRelationship_child between
+	GeneralizationRelationship[*] role xxx_GeneralizationRelationship_child_src
+	Entity[1] role child
+end
+
+association xxx_AggregationParticipant_target between
+	AggregationParticipant[*] role xxx_AggregationParticipant_target_src
+	Node[0..1] role target
+end
+
+association xxx_AggregationParticipant_source between
+	AggregationParticipant[*] role xxx_AggregationParticipant_source_src
+	Aggregation[1] role source
+end
+
+composition xxx_Node_attributes_ between
+	Node[0..1] role xxx_Node_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Aggregation_source between
+	Aggregation[*] role xxx_Aggregation_source_src
+	Entity[1] role source
+end
+
+composition xxx_Aggregation_participants between
+	Aggregation[0..1] role xxx_Aggregation_participants_src
+	AggregationParticipant[1..*] role participants
+end
+

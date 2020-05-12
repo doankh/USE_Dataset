@@ -1,0 +1,108 @@
+model Persons
+class Community
+attributes
+operations
+end
+
+abstract class Person
+attributes
+	fullName : String
+operations
+end
+
+class Man<Person
+attributes
+operations
+end
+
+class Woman<Person
+attributes
+operations
+end
+
+class TownHall<NamedElement
+attributes
+operations
+end
+
+class Association<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Committee<NamedElement
+attributes
+operations
+end
+
+class District<NamedElement
+attributes
+operations
+end
+
+abstract class Facility<NamedElement
+attributes
+operations
+end
+
+class SpecialFacility<Facility
+attributes
+operations
+end
+
+class OrdinaryFacility<Facility
+attributes
+operations
+end
+
+composition xxx_Community_persons between
+	Community[0..1] role xxx_Community_persons_src
+	Person[1..*] role persons
+end
+
+composition xxx_Community_townHalls between
+	Community[0..1] role xxx_Community_townHalls_src
+	TownHall[1..*] role townHalls
+end
+
+composition xxx_Community_associations between
+	Community[0..1] role xxx_Community_associations_src
+	Association[*] role associations
+end
+
+association xxx_TownHall_workers between
+	TownHall[0..1] role xxx_TownHall_workers_src
+	Person[*] role workers
+end
+
+composition xxx_TownHall_committee between
+	TownHall[*] role xxx_TownHall_committee_src
+	Committee[1] role committee
+end
+
+composition xxx_TownHall_districts between
+	TownHall[0..1] role xxx_TownHall_districts_src
+	District[1..*] role districts
+end
+
+association xxx_Association_committee between
+	Association[*] role xxx_Association_committee_src
+	Committee[0..1] role committee
+end
+
+composition xxx_District_facilities between
+	District[0..1] role xxx_District_facilities_src
+	Facility[*] role facilities
+end
+
+association xxx_Facility_members between
+	Facility[0..1] role xxx_Facility_members_src
+	Person[*] role members
+end
+

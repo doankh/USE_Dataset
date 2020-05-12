@@ -1,0 +1,219 @@
+model GAIA
+class OrganizationalStructure
+attributes
+operations
+end
+
+class Organization
+attributes
+operations
+end
+
+class OrganizationalRule
+attributes
+operations
+end
+
+class SafetyRule<OrganizationalRule
+attributes
+operations
+end
+
+class LivenessRule<OrganizationalRule
+attributes
+operations
+end
+
+class AgentType
+attributes
+operations
+end
+
+class Service
+attributes
+	inputs : String
+	outputs : String
+	pre_conditions : String
+	post_conditions : String
+operations
+end
+
+class Role
+attributes
+operations
+end
+
+class Activity
+attributes
+operations
+end
+
+class Responsibility
+attributes
+operations
+end
+
+class LivenessProperty<Responsibility
+attributes
+operations
+end
+
+class SafetyProperty<Responsibility
+attributes
+operations
+end
+
+class AssociationConnector
+attributes
+operations
+end
+
+class Permission
+attributes
+operations
+end
+
+class Resource
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Environnement
+attributes
+operations
+end
+
+class Action
+attributes
+	type : String
+operations
+end
+
+class Communication
+attributes
+operations
+end
+
+class Protocol
+attributes
+	name : String
+	initiator : String
+	partner : String
+	inputs : String
+	outputs : String
+	description : String
+operations
+end
+
+composition xxx_OrganizationalStructure_organization between
+	OrganizationalStructure[0..1] role xxx_OrganizationalStructure_organization_src
+	Organization[*] role organization
+end
+
+association xxx_Organization_collaborates between
+	Organization[*] role xxx_Organization_collaborates_src
+	Organization[1] role collaborates
+end
+
+association xxx_Organization_interacts between
+	Organization[*] role xxx_Organization_interacts_src
+	Organization[1] role interacts
+end
+
+composition xxx_Organization_member between
+	Organization[0..1] role xxx_Organization_member_src
+	AgentType[*] role member
+end
+
+association xxx_Organization_observes between
+	Organization[0..1] role xxx_Organization_observes_src
+	OrganizationalRule[*] role observes
+end
+
+association xxx_AgentType_provides between
+	AgentType[0..1] role xxx_AgentType_provides_src
+	Service[1..*] role provides
+end
+
+association xxx_AgentType_collaborates between
+	AgentType[*] role xxx_AgentType_collaborates_src
+	AgentType[1] role collaborates
+end
+
+association xxx_AgentType_agentType between
+	AgentType[*] role xxx_AgentType_agentType_src
+	AgentType[1] role agentType
+end
+
+association xxx_AgentType_plays between
+	AgentType[0..1] role xxx_AgentType_plays_src
+	Role[*] role plays
+end
+
+association xxx_Role_activity between
+	Role[0..1] role xxx_Role_activity_src
+	Activity[1..*] role activity
+end
+
+association xxx_Role_communication between
+	Role[0..1] role xxx_Role_communication_src
+	Communication[*] role communication
+end
+
+association xxx_Role_responsibility between
+	Role[0..1] role xxx_Role_responsibility_src
+	Responsibility[1..*] role responsibility
+end
+
+association xxx_Role_actsOn between
+	Role[*] role xxx_Role_actsOn_src
+	AssociationConnector[0..1] role actsOn
+end
+
+association xxx_AssociationConnector_actsOn between
+	AssociationConnector[0..1] role xxx_AssociationConnector_actsOn_src
+	Resource[*] role actsOn
+end
+
+association xxx_AssociationConnector_role between
+	AssociationConnector[*] role xxx_AssociationConnector_role_src
+	Role[1] role role
+end
+
+association xxx_AssociationConnector_permission between
+	AssociationConnector[0..1] role xxx_AssociationConnector_permission_src
+	Permission[*] role permission
+end
+
+association xxx_Permission_association_ between
+	Permission[*] role xxx_Permission_association__src
+	AssociationConnector[1] role association_
+end
+
+association xxx_Resource_permitted_action between
+	Resource[0..1] role xxx_Resource_permitted_action_src
+	Action[*] role permitted_action
+end
+
+association xxx_Resource_environnement between
+	Resource[*] role xxx_Resource_environnement_src
+	Environnement[1] role environnement
+end
+
+composition xxx_Environnement_resource between
+	Environnement[0..1] role xxx_Environnement_resource_src
+	Resource[*] role resource
+end
+
+association xxx_Communication_observes between
+	Communication[0..1] role xxx_Communication_observes_src
+	OrganizationalRule[*] role observes
+end
+
+association xxx_Communication_protocol between
+	Communication[*] role xxx_Communication_protocol_src
+	Protocol[1] role protocol
+end
+

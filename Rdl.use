@@ -1,0 +1,210 @@
+model Rdl
+class AssignmentType
+attributes
+operations
+end
+
+class DataInputAssociationType
+attributes
+	targetRef : String
+operations
+end
+
+class DataInputType
+attributes
+	value : String
+	id : String
+	name : String
+operations
+end
+
+class DefinitionsType
+attributes
+	expressionLanguage : String
+	id : String
+	schemaLocation : String
+	targetNamespace : String
+	typeLanguage : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class EndEventType
+attributes
+	terminateEventDefinition : String
+	id : String
+	name : String
+operations
+end
+
+class ExclusiveGatewayType
+attributes
+	value : String
+	gatewayDirection : String
+	id : String
+	name : String
+operations
+end
+
+class FromType
+attributes
+	value : String
+	type : String
+operations
+end
+
+class InputSetType
+attributes
+	dataInputRefs : String
+operations
+end
+
+class IoSpecificationType
+attributes
+	outputSet : String
+operations
+end
+
+class ItemDefinitionType
+attributes
+	value : String
+	id : String
+	structureRef : String
+operations
+end
+
+class ProcessType
+attributes
+	id : String
+	isExecutable : Boolean
+	name : String
+	processType : String
+operations
+end
+
+class PropertyType
+attributes
+	value : String
+	id : String
+	itemSubjectRef : String
+operations
+end
+
+class SequenceFlowType
+attributes
+	value : String
+	id : String
+	sourceRef : String
+	targetRef : String
+operations
+end
+
+class StartEventType
+attributes
+	value : String
+	id : String
+	name : String
+operations
+end
+
+class TaskType
+attributes
+	id : String
+	name : String
+	taskName : String
+operations
+end
+
+class ToType
+attributes
+	value : String
+	type : String
+operations
+end
+
+composition xxx_AssignmentType_from_ between
+	AssignmentType[*] role xxx_AssignmentType_from__src
+	FromType[0..1] role from_
+end
+
+composition xxx_AssignmentType_to between
+	AssignmentType[*] role xxx_AssignmentType_to_src
+	ToType[0..1] role to
+end
+
+composition xxx_DataInputAssociationType_assignment between
+	DataInputAssociationType[*] role xxx_DataInputAssociationType_assignment_src
+	AssignmentType[0..1] role assignment
+end
+
+composition xxx_DefinitionsType_itemDefinition between
+	DefinitionsType[*] role xxx_DefinitionsType_itemDefinition_src
+	ItemDefinitionType[0..1] role itemDefinition
+end
+
+composition xxx_DefinitionsType_process between
+	DefinitionsType[*] role xxx_DefinitionsType_process_src
+	ProcessType[0..1] role process
+end
+
+
+composition xxx_DocumentRoot_definitions between
+	DocumentRoot[*] role xxx_DocumentRoot_definitions_src
+	DefinitionsType[*] role definitions
+end
+
+composition xxx_IoSpecificationType_dataInput between
+	IoSpecificationType[*] role xxx_IoSpecificationType_dataInput_src
+	DataInputType[0..1] role dataInput
+end
+
+composition xxx_IoSpecificationType_inputSet between
+	IoSpecificationType[*] role xxx_IoSpecificationType_inputSet_src
+	InputSetType[0..1] role inputSet
+end
+
+composition xxx_ProcessType_property between
+	ProcessType[0..1] role xxx_ProcessType_property_src
+	PropertyType[1..*] role property
+end
+
+composition xxx_ProcessType_startEvent between
+	ProcessType[*] role xxx_ProcessType_startEvent_src
+	StartEventType[0..1] role startEvent
+end
+
+composition xxx_ProcessType_sequenceFlow between
+	ProcessType[0..1] role xxx_ProcessType_sequenceFlow_src
+	SequenceFlowType[1..*] role sequenceFlow
+end
+
+composition xxx_ProcessType_task between
+	ProcessType[0..1] role xxx_ProcessType_task_src
+	TaskType[1..*] role task
+end
+
+composition xxx_ProcessType_exclusiveGateway between
+	ProcessType[0..1] role xxx_ProcessType_exclusiveGateway_src
+	ExclusiveGatewayType[1..*] role exclusiveGateway
+end
+
+composition xxx_ProcessType_endEvent between
+	ProcessType[*] role xxx_ProcessType_endEvent_src
+	EndEventType[0..1] role endEvent
+end
+
+composition xxx_TaskType_ioSpecification between
+	TaskType[*] role xxx_TaskType_ioSpecification_src
+	IoSpecificationType[0..1] role ioSpecification
+end
+
+composition xxx_TaskType_dataInputAssociation between
+	TaskType[*] role xxx_TaskType_dataInputAssociation_src
+	DataInputAssociationType[0..1] role dataInputAssociation
+end
+

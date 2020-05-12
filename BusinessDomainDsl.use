@@ -1,0 +1,246 @@
+model BusinessDomainDsl
+enum Multiplicity{
+default
+}
+
+enum DateTimeAccuracy{
+default
+}
+
+enum PersistencyMode{
+default
+}
+
+class ModelElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class BusinessDomainModel<ModelElement
+attributes
+operations
+end
+
+class BusinessClass<AbstractBusinessClass
+attributes
+operations
+end
+
+class Property<ModelElement
+attributes
+	dataType : String
+	nullable : Boolean
+	derived_ : Boolean
+	writable : Boolean
+	persistency : PersistencyMode
+	hasDefault : Boolean
+operations
+end
+
+class Enumeration<ModelElement
+attributes
+operations
+end
+
+class EnumerationLiteral<ModelElement
+attributes
+	persistedValue : Integer
+operations
+end
+
+class AbstractBusinessRule<ModelElement
+attributes
+operations
+end
+
+class BoolProperty<Property
+attributes
+	defaultValue : Boolean
+operations
+end
+
+class DateTimeProperty<Property
+attributes
+	accuracy : DateTimeAccuracy
+	defaultValue : String
+operations
+end
+
+class EnumerationProperty<Property
+attributes
+	defaultValueAsString : String
+operations
+end
+
+class IntegerProperty<Property
+attributes
+	minValue : Integer
+	maxValue : Integer
+	defaultValue : Integer
+operations
+end
+
+class StringProperty<Property
+attributes
+	regularExpression : String
+	minLength : Integer
+	maxLength : Integer
+	defaultValue : String
+operations
+end
+
+abstract class AbstractType<ModelElement
+attributes
+operations
+end
+
+class BlobBinaryProperty<Property
+attributes
+operations
+end
+
+class BlobTextProperty<Property
+attributes
+operations
+end
+
+class Association<ModelElement
+attributes
+	sourceRoleName : String
+	sourceMultiplicity : Multiplicity
+	targetRoleName : String
+	targetMultiplicity : Multiplicity
+	composite : Boolean
+	bidirectional : Boolean
+	ordered_ : Boolean
+operations
+end
+
+class DecimalProperty<Property
+attributes
+	minValue : Real
+	maxValue : Real
+	minInclusive : Boolean
+	maxInclusive : Boolean
+	defaultValue : Real
+operations
+end
+
+class AbstractBusinessClass<AbstractType
+attributes
+operations
+end
+
+class BusinessClassReference<AbstractBusinessClass
+attributes
+	referredModel : String
+operations
+end
+
+class UniqueRule<AbstractBusinessRule
+attributes
+operations
+end
+
+class BusinessRule<AbstractBusinessRule
+attributes
+operations
+end
+
+composition xxx_BusinessDomainModel_enumerations between
+	BusinessDomainModel[0..1] role xxx_BusinessDomainModel_enumerations_src
+	Enumeration[*] role enumerations
+end
+
+composition xxx_BusinessDomainModel_types between
+	BusinessDomainModel[0..1] role xxx_BusinessDomainModel_types_src
+	AbstractType[*] role types
+end
+
+composition xxx_BusinessDomainModel_associations between
+	BusinessDomainModel[0..1] role xxx_BusinessDomainModel_associations_src
+	Association[*] role associations
+end
+
+composition xxx_BusinessClass_businessRules between
+	BusinessClass[0..1] role xxx_BusinessClass_businessRules_src
+	AbstractBusinessRule[*] role businessRules
+end
+
+association xxx_BusinessClass_superclass between
+	BusinessClass[*] role xxx_BusinessClass_superclass_src
+	BusinessClass[0..1] role superclass
+end
+
+association xxx_BusinessClass_associationsTo between
+	BusinessClass[0..1] role xxx_BusinessClass_associationsTo_src
+	Association[*] role associationsTo
+end
+
+association xxx_Property_owningType between
+	Property[*] role xxx_Property_owningType_src
+	AbstractType[0..1] role owningType
+end
+
+composition xxx_Enumeration_enumerationLiterals between
+	Enumeration[0..1] role xxx_Enumeration_enumerationLiterals_src
+	EnumerationLiteral[*] role enumerationLiterals
+end
+
+association xxx_Enumeration_model_ between
+	Enumeration[*] role xxx_Enumeration_model__src
+	BusinessDomainModel[0..1] role model_
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+association xxx_AbstractBusinessRule_businessClass between
+	AbstractBusinessRule[*] role xxx_AbstractBusinessRule_businessClass_src
+	BusinessClass[0..1] role businessClass
+end
+
+association xxx_EnumerationProperty_type between
+	EnumerationProperty[*] role xxx_EnumerationProperty_type_src
+	Enumeration[1] role type
+end
+
+composition xxx_AbstractType_properties between
+	AbstractType[0..1] role xxx_AbstractType_properties_src
+	Property[*] role properties
+end
+
+association xxx_AbstractType_model_ between
+	AbstractType[*] role xxx_AbstractType_model__src
+	BusinessDomainModel[0..1] role model_
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	BusinessClass[1] role source
+end
+
+association xxx_Association_target between
+	Association[*] role xxx_Association_target_src
+	AbstractBusinessClass[1] role target
+end
+
+association xxx_Association_model_ between
+	Association[*] role xxx_Association_model__src
+	BusinessDomainModel[0..1] role model_
+end
+
+association xxx_AbstractBusinessClass_associationsFrom between
+	AbstractBusinessClass[0..1] role xxx_AbstractBusinessClass_associationsFrom_src
+	Association[*] role associationsFrom
+end
+
+association xxx_UniqueRule_properties between
+	UniqueRule[0..1] role xxx_UniqueRule_properties_src
+	Property[*] role properties
+end
+

@@ -1,0 +1,706 @@
+model gmfgraph
+enum ColorConstants{
+default
+}
+
+enum FontStyle{
+default
+}
+
+enum Direction{
+default
+}
+
+enum LineKind{
+default
+}
+
+enum Alignment{
+default
+}
+
+class Canvas<Identity
+attributes
+operations
+end
+
+class FigureGallery<Identity
+attributes
+	implementationBundle : String
+operations
+end
+
+abstract class Identity
+attributes
+	name : String
+operations
+end
+
+abstract class DiagramElement<Identity
+attributes
+operations
+end
+
+class Node<AbstractNode
+attributes
+	resizeConstraint : Direction
+	affixedParentSide : Direction
+operations
+end
+
+class Connection<DiagramElement
+attributes
+operations
+end
+
+class Compartment<DiagramElement
+attributes
+	collapsible : Boolean
+	needsTitle : Boolean
+operations
+end
+
+class DiagramLabel<Node
+attributes
+	elementIcon : Boolean
+	external : Boolean
+operations
+end
+
+abstract class VisualFacet
+attributes
+operations
+end
+
+class GeneralFacet<VisualFacet
+attributes
+	identifier : String
+	data : String
+operations
+end
+
+class AlignmentFacet<VisualFacet
+attributes
+	alignment : Alignment
+operations
+end
+
+class GradientFacet<VisualFacet
+attributes
+	direction : Direction
+operations
+end
+
+class LabelOffsetFacet<VisualFacet
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+abstract class Figure<Layoutable
+attributes
+operations
+end
+
+class FigureRef<AbstractFigure
+attributes
+operations
+end
+
+abstract class ConnectionFigure<RealFigure
+attributes
+operations
+end
+
+abstract class DecorationFigure<RealFigure
+attributes
+operations
+end
+
+abstract class Shape<RealFigure
+attributes
+	outline : Boolean
+	fill : Boolean
+	lineWidth : Integer
+	lineKind : LineKind
+	xorFill : Boolean
+	xorOutline : Boolean
+operations
+end
+
+class Label<RealFigure
+attributes
+	text : String
+operations
+end
+
+class LabeledContainer<RealFigure
+attributes
+operations
+end
+
+class Rectangle<Shape
+attributes
+operations
+end
+
+class RoundedRectangle<Shape
+attributes
+	cornerWidth : Integer
+	cornerHeight : Integer
+operations
+end
+
+class Ellipse<Shape
+attributes
+operations
+end
+
+class Polyline<Shape
+attributes
+operations
+end
+
+class Polygon<Polyline
+attributes
+operations
+end
+
+class PolylineConnection<Polyline,ConnectionFigure
+attributes
+operations
+end
+
+class PolylineDecoration<Polyline,DecorationFigure
+attributes
+operations
+end
+
+class PolygonDecoration<Polygon,DecorationFigure
+attributes
+operations
+end
+
+abstract class CustomClass
+attributes
+	qualifiedClassName : String
+operations
+end
+
+class CustomAttribute
+attributes
+	name : String
+	value : String
+	directAccess : Boolean
+	multiStatementValue : Boolean
+operations
+end
+
+class FigureAccessor
+attributes
+	accessor : String
+operations
+end
+
+class CustomFigure<RealFigure,CustomClass
+attributes
+operations
+end
+
+class CustomDecoration<CustomFigure,DecorationFigure
+attributes
+operations
+end
+
+class CustomConnection<CustomFigure,ConnectionFigure
+attributes
+operations
+end
+
+abstract class Color
+attributes
+operations
+end
+
+class RGBColor<Color
+attributes
+	red : Integer
+	green : Integer
+	blue : Integer
+operations
+end
+
+class ConstantColor<Color
+attributes
+	value : ColorConstants
+operations
+end
+
+abstract class Font
+attributes
+operations
+end
+
+class BasicFont<Font
+attributes
+	faceName : String
+	height : Integer
+	style : FontStyle
+operations
+end
+
+class Point
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Dimension
+attributes
+	dx : Integer
+	dy : Integer
+operations
+end
+
+class Insets
+attributes
+	top : Integer
+	left : Integer
+	bottom : Integer
+	right : Integer
+operations
+end
+
+abstract class Border
+attributes
+operations
+end
+
+class LineBorder<Border
+attributes
+	width : Integer
+operations
+end
+
+class MarginBorder<Border
+attributes
+operations
+end
+
+class CompoundBorder<Border
+attributes
+operations
+end
+
+class CustomBorder<Border,CustomClass
+attributes
+operations
+end
+
+abstract class LayoutData
+attributes
+operations
+end
+
+class CustomLayoutData<LayoutData,CustomClass
+attributes
+operations
+end
+
+class GridLayoutData<LayoutData
+attributes
+	grabExcessHorizontalSpace : Boolean
+	grabExcessVerticalSpace : Boolean
+	verticalAlignment : Alignment
+	horizontalAlignment : Alignment
+	verticalSpan : Integer
+	horizontalSpan : Integer
+	horizontalIndent : Integer
+operations
+end
+
+class BorderLayoutData<LayoutData
+attributes
+	alignment : Alignment
+	vertical : Boolean
+operations
+end
+
+abstract class Layoutable
+attributes
+operations
+end
+
+abstract class Layout
+attributes
+operations
+end
+
+class CustomLayout<Layout,CustomClass
+attributes
+operations
+end
+
+class GridLayout<Layout
+attributes
+	numColumns : Integer
+	equalWidth : Boolean
+operations
+end
+
+class BorderLayout<Layout
+attributes
+operations
+end
+
+class FlowLayout<Layout
+attributes
+	vertical : Boolean
+	matchMinorSize : Boolean
+	forceSingleLine : Boolean
+	majorAlignment : Alignment
+	minorAlignment : Alignment
+	majorSpacing : Integer
+	minorSpacing : Integer
+operations
+end
+
+class XYLayout<Layout
+attributes
+operations
+end
+
+class XYLayoutData<LayoutData
+attributes
+operations
+end
+
+class StackLayout<Layout
+attributes
+operations
+end
+
+class ScalablePolygon<Polygon
+attributes
+operations
+end
+
+class DefaultSizeFacet<VisualFacet
+attributes
+operations
+end
+
+abstract class AbstractNode<DiagramElement
+attributes
+operations
+end
+
+abstract class RealFigure<AbstractFigure
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractFigure<Figure
+attributes
+operations
+end
+
+class FigureDescriptor<Identity
+attributes
+operations
+end
+
+class ChildAccess
+attributes
+	accessor : String
+operations
+end
+
+class BorderRef<Border
+attributes
+operations
+end
+
+class LayoutRef<Layout
+attributes
+operations
+end
+
+composition xxx_Canvas_figures between
+	Canvas[0..1] role xxx_Canvas_figures_src
+	FigureGallery[*] role figures
+end
+
+composition xxx_Canvas_nodes between
+	Canvas[0..1] role xxx_Canvas_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_Canvas_connections between
+	Canvas[0..1] role xxx_Canvas_connections_src
+	Connection[*] role connections
+end
+
+composition xxx_Canvas_compartments between
+	Canvas[0..1] role xxx_Canvas_compartments_src
+	Compartment[*] role compartments
+end
+
+composition xxx_Canvas_labels between
+	Canvas[0..1] role xxx_Canvas_labels_src
+	DiagramLabel[*] role labels
+end
+
+composition xxx_FigureGallery_figures between
+	FigureGallery[0..1] role xxx_FigureGallery_figures_src
+	RealFigure[*] role figures
+end
+
+composition xxx_FigureGallery_descriptors between
+	FigureGallery[0..1] role xxx_FigureGallery_descriptors_src
+	FigureDescriptor[*] role descriptors
+end
+
+composition xxx_FigureGallery_borders between
+	FigureGallery[0..1] role xxx_FigureGallery_borders_src
+	Border[*] role borders
+end
+
+composition xxx_FigureGallery_layouts between
+	FigureGallery[0..1] role xxx_FigureGallery_layouts_src
+	Layout[*] role layouts
+end
+
+association xxx_DiagramElement_figure between
+	DiagramElement[*] role xxx_DiagramElement_figure_src
+	FigureDescriptor[1] role figure
+end
+
+composition xxx_DiagramElement_facets between
+	DiagramElement[0..1] role xxx_DiagramElement_facets_src
+	VisualFacet[*] role facets
+end
+
+association xxx_Node_contentPane between
+	Node[*] role xxx_Node_contentPane_src
+	ChildAccess[0..1] role contentPane
+end
+
+association xxx_Compartment_accessor between
+	Compartment[*] role xxx_Compartment_accessor_src
+	ChildAccess[0..1] role accessor
+end
+
+association xxx_DiagramLabel_accessor between
+	DiagramLabel[*] role xxx_DiagramLabel_accessor_src
+	ChildAccess[0..1] role accessor
+end
+
+association xxx_DiagramLabel_container between
+	DiagramLabel[*] role xxx_DiagramLabel_container_src
+	ChildAccess[0..1] role container
+end
+
+composition xxx_Figure_foregroundColor between
+	Figure[*] role xxx_Figure_foregroundColor_src
+	Color[0..1] role foregroundColor
+end
+
+composition xxx_Figure_backgroundColor between
+	Figure[*] role xxx_Figure_backgroundColor_src
+	Color[0..1] role backgroundColor
+end
+
+composition xxx_Figure_maximumSize between
+	Figure[*] role xxx_Figure_maximumSize_src
+	Dimension[0..1] role maximumSize
+end
+
+composition xxx_Figure_minimumSize between
+	Figure[*] role xxx_Figure_minimumSize_src
+	Dimension[0..1] role minimumSize
+end
+
+composition xxx_Figure_preferredSize between
+	Figure[*] role xxx_Figure_preferredSize_src
+	Dimension[0..1] role preferredSize
+end
+
+composition xxx_Figure_font between
+	Figure[*] role xxx_Figure_font_src
+	Font[0..1] role font
+end
+
+composition xxx_Figure_insets between
+	Figure[*] role xxx_Figure_insets_src
+	Insets[0..1] role insets
+end
+
+composition xxx_Figure_border between
+	Figure[*] role xxx_Figure_border_src
+	Border[0..1] role border
+end
+
+composition xxx_Figure_location between
+	Figure[*] role xxx_Figure_location_src
+	Point[0..1] role location
+end
+
+composition xxx_Figure_size between
+	Figure[*] role xxx_Figure_size_src
+	Point[0..1] role size
+end
+
+association xxx_Figure_descriptor between
+	Figure[*] role xxx_Figure_descriptor_src
+	FigureDescriptor[0..1] role descriptor
+end
+
+association xxx_FigureRef_figure between
+	FigureRef[*] role xxx_FigureRef_figure_src
+	RealFigure[1] role figure
+end
+
+association xxx_Shape_resolvedChildren between
+	Shape[0..1] role xxx_Shape_resolvedChildren_src
+	Figure[*] role resolvedChildren
+end
+
+composition xxx_Polyline_template between
+	Polyline[0..1] role xxx_Polyline_template_src
+	Point[*] role template
+end
+
+association xxx_PolylineConnection_sourceDecoration between
+	PolylineConnection[*] role xxx_PolylineConnection_sourceDecoration_src
+	DecorationFigure[0..1] role sourceDecoration
+end
+
+association xxx_PolylineConnection_targetDecoration between
+	PolylineConnection[*] role xxx_PolylineConnection_targetDecoration_src
+	DecorationFigure[0..1] role targetDecoration
+end
+
+composition xxx_CustomClass_attributes_ between
+	CustomClass[0..1] role xxx_CustomClass_attributes__src
+	CustomAttribute[*] role attributes_
+end
+
+composition xxx_FigureAccessor_typedFigure between
+	FigureAccessor[*] role xxx_FigureAccessor_typedFigure_src
+	RealFigure[1] role typedFigure
+end
+
+composition xxx_CustomFigure_customChildren between
+	CustomFigure[0..1] role xxx_CustomFigure_customChildren_src
+	FigureAccessor[*] role customChildren
+end
+
+composition xxx_LineBorder_color between
+	LineBorder[*] role xxx_LineBorder_color_src
+	Color[0..1] role color
+end
+
+composition xxx_MarginBorder_insets between
+	MarginBorder[*] role xxx_MarginBorder_insets_src
+	Insets[0..1] role insets
+end
+
+composition xxx_CompoundBorder_outer between
+	CompoundBorder[*] role xxx_CompoundBorder_outer_src
+	Border[0..1] role outer
+end
+
+composition xxx_CompoundBorder_inner between
+	CompoundBorder[*] role xxx_CompoundBorder_inner_src
+	Border[0..1] role inner
+end
+
+association xxx_LayoutData_owner between
+	LayoutData[*] role xxx_LayoutData_owner_src
+	Layoutable[1] role owner
+end
+
+composition xxx_GridLayoutData_sizeHint between
+	GridLayoutData[*] role xxx_GridLayoutData_sizeHint_src
+	Dimension[0..1] role sizeHint
+end
+
+composition xxx_Layoutable_layoutData between
+	Layoutable[*] role xxx_Layoutable_layoutData_src
+	LayoutData[0..1] role layoutData
+end
+
+composition xxx_Layoutable_layout between
+	Layoutable[*] role xxx_Layoutable_layout_src
+	Layout[0..1] role layout
+end
+
+composition xxx_GridLayout_margins between
+	GridLayout[*] role xxx_GridLayout_margins_src
+	Dimension[0..1] role margins
+end
+
+composition xxx_GridLayout_spacing between
+	GridLayout[*] role xxx_GridLayout_spacing_src
+	Dimension[0..1] role spacing
+end
+
+composition xxx_BorderLayout_spacing between
+	BorderLayout[*] role xxx_BorderLayout_spacing_src
+	Dimension[0..1] role spacing
+end
+
+composition xxx_XYLayoutData_topLeft between
+	XYLayoutData[*] role xxx_XYLayoutData_topLeft_src
+	Point[1] role topLeft
+end
+
+composition xxx_XYLayoutData_size between
+	XYLayoutData[*] role xxx_XYLayoutData_size_src
+	Dimension[1] role size
+end
+
+composition xxx_DefaultSizeFacet_defaultSize between
+	DefaultSizeFacet[*] role xxx_DefaultSizeFacet_defaultSize_src
+	Dimension[0..1] role defaultSize
+end
+
+composition xxx_RealFigure_children between
+	RealFigure[0..1] role xxx_RealFigure_children_src
+	Figure[*] role children
+end
+
+composition xxx_FigureDescriptor_actualFigure between
+	FigureDescriptor[*] role xxx_FigureDescriptor_actualFigure_src
+	Figure[1] role actualFigure
+end
+
+composition xxx_FigureDescriptor_accessors between
+	FigureDescriptor[0..1] role xxx_FigureDescriptor_accessors_src
+	ChildAccess[*] role accessors
+end
+
+association xxx_ChildAccess_owner between
+	ChildAccess[*] role xxx_ChildAccess_owner_src
+	FigureDescriptor[1] role owner
+end
+
+association xxx_ChildAccess_figure between
+	ChildAccess[*] role xxx_ChildAccess_figure_src
+	Figure[1] role figure
+end
+
+association xxx_BorderRef_actual between
+	BorderRef[*] role xxx_BorderRef_actual_src
+	Border[1] role actual
+end
+
+association xxx_LayoutRef_actual between
+	LayoutRef[*] role xxx_LayoutRef_actual_src
+	Layout[1] role actual
+end
+

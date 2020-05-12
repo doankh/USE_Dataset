@@ -1,0 +1,399 @@
+model PRR
+class Element
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class RuleSet<Element
+attributes
+operations
+end
+
+class Rule<NamedElement
+attributes
+operations
+end
+
+class RuleAction<Element
+attributes
+operations
+end
+
+class RuleCondition<Element
+attributes
+operations
+end
+
+class Binding<Element
+attributes
+operations
+end
+
+class RuleVariable<VariableDeclaration
+attributes
+operations
+end
+
+class DeleteAction<RuleAction
+attributes
+operations
+end
+
+class CreateAction<VariableDeclaration
+attributes
+operations
+end
+
+class AssignAction<RuleAction
+attributes
+operations
+end
+
+class InvokeAction<RuleAction
+attributes
+operations
+end
+
+abstract class PropertyCallExp<OclExpression
+attributes
+operations
+end
+
+abstract class OclExpression<Element
+attributes
+operations
+end
+
+class IteratorExp<LoopExp
+attributes
+	name : String
+operations
+end
+
+class LoopExp<PropertyCallExp
+attributes
+operations
+end
+
+class OperatorCallExp<OperationCallExp
+attributes
+operations
+end
+
+class OperationCallExp<PropertyCallExp
+attributes
+	operationName : String
+	signature : String
+operations
+end
+
+class CollectionOperationCallExp<OperationCallExp
+attributes
+operations
+end
+
+class StringExp<PrimitiveExp
+attributes
+	stringSymbol : String
+operations
+end
+
+class BooleanExp<PrimitiveExp
+attributes
+	booleanSymbol : Boolean
+operations
+end
+
+abstract class NumericExp<PrimitiveExp
+attributes
+operations
+end
+
+class IntegerExp<NumericExp
+attributes
+	integerSymbol : Integer
+operations
+end
+
+class RealExp<NumericExp
+attributes
+	realSymbol : Real
+operations
+end
+
+abstract class PrimitiveExp<OclExpression
+attributes
+operations
+end
+
+class NavigationOrAttributeCallExp<PropertyCallExp
+attributes
+	name : String
+operations
+end
+
+class Iterator<VariableDeclaration
+attributes
+operations
+end
+
+class VariableDeclaration<Element
+attributes
+	varName : String
+operations
+end
+
+class VariableExp<OclExpression
+attributes
+operations
+end
+
+class TypeExp<OclExpression
+attributes
+operations
+end
+
+class AllInstanceExp<OclExpression
+attributes
+operations
+end
+
+class OclType<NamedElement
+attributes
+operations
+end
+
+class StringType<Primitive
+attributes
+operations
+end
+
+abstract class Primitive<OclType
+attributes
+operations
+end
+
+class RealType<NumericType
+attributes
+operations
+end
+
+class BooleanType<Primitive
+attributes
+operations
+end
+
+abstract class NumericType<Primitive
+attributes
+operations
+end
+
+class IntegerType<NumericType
+attributes
+operations
+end
+
+composition xxx_RuleSet_rules between
+	RuleSet[0..1] role xxx_RuleSet_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Rule_binding between
+	Rule[*] role xxx_Rule_binding_src
+	Binding[0..1] role binding
+end
+
+composition xxx_Rule_condition between
+	Rule[*] role xxx_Rule_condition_src
+	RuleCondition[0..1] role condition
+end
+
+composition xxx_Rule_actions between
+	Rule[0..1] role xxx_Rule_actions_src
+	RuleAction[*] role actions
+end
+
+association xxx_Rule_ruleOwner between
+	Rule[*] role xxx_Rule_ruleOwner_src
+	RuleSet[0..1] role ruleOwner
+end
+
+association xxx_RuleAction_actionOwner between
+	RuleAction[*] role xxx_RuleAction_actionOwner_src
+	Rule[0..1] role actionOwner
+end
+
+association xxx_RuleCondition_ruleConditionOwner between
+	RuleCondition[*] role xxx_RuleCondition_ruleConditionOwner_src
+	Rule[0..1] role ruleConditionOwner
+end
+
+composition xxx_RuleCondition_conditionExp between
+	RuleCondition[*] role xxx_RuleCondition_conditionExp_src
+	OclExpression[0..1] role conditionExp
+end
+
+association xxx_Binding_bindingOwner between
+	Binding[*] role xxx_Binding_bindingOwner_src
+	Rule[1] role bindingOwner
+end
+
+composition xxx_Binding_ruleVariable between
+	Binding[0..1] role xxx_Binding_ruleVariable_src
+	RuleVariable[*] role ruleVariable
+end
+
+association xxx_RuleVariable_ruleVariableOwner between
+	RuleVariable[*] role xxx_RuleVariable_ruleVariableOwner_src
+	Binding[1] role ruleVariableOwner
+end
+
+composition xxx_RuleVariable_filter between
+	RuleVariable[*] role xxx_RuleVariable_filter_src
+	OclExpression[0..1] role filter
+end
+
+composition xxx_DeleteAction_objValue between
+	DeleteAction[*] role xxx_DeleteAction_objValue_src
+	OclExpression[1] role objValue
+end
+
+composition xxx_CreateAction_insertArguments between
+	CreateAction[0..1] role xxx_CreateAction_insertArguments_src
+	OclExpression[*] role insertArguments
+end
+
+composition xxx_AssignAction_objValue between
+	AssignAction[*] role xxx_AssignAction_objValue_src
+	OclExpression[1] role objValue
+end
+
+composition xxx_AssignAction_aValue between
+	AssignAction[*] role xxx_AssignAction_aValue_src
+	OclExpression[1] role aValue
+end
+
+composition xxx_InvokeAction_invocation between
+	InvokeAction[*] role xxx_InvokeAction_invocation_src
+	OclExpression[1] role invocation
+end
+
+composition xxx_PropertyCallExp_source between
+	PropertyCallExp[*] role xxx_PropertyCallExp_source_src
+	OclExpression[0..1] role source
+end
+
+association xxx_OclExpression_loopExp between
+	OclExpression[*] role xxx_OclExpression_loopExp_src
+	LoopExp[0..1] role loopExp
+end
+
+association xxx_OclExpression_appliedProperty between
+	OclExpression[*] role xxx_OclExpression_appliedProperty_src
+	PropertyCallExp[0..1] role appliedProperty
+end
+
+association xxx_OclExpression_parentOperation between
+	OclExpression[*] role xxx_OclExpression_parentOperation_src
+	OperationCallExp[0..1] role parentOperation
+end
+
+association xxx_OclExpression_parentInsert between
+	OclExpression[*] role xxx_OclExpression_parentInsert_src
+	CreateAction[0..1] role parentInsert
+end
+
+composition xxx_OclExpression_type between
+	OclExpression[*] role xxx_OclExpression_type_src
+	OclType[1] role type
+end
+
+association xxx_OclExpression_filterRuleVariableOwner between
+	OclExpression[*] role xxx_OclExpression_filterRuleVariableOwner_src
+	RuleVariable[0..1] role filterRuleVariableOwner
+end
+
+association xxx_OclExpression_conditionOwner between
+	OclExpression[*] role xxx_OclExpression_conditionOwner_src
+	RuleCondition[0..1] role conditionOwner
+end
+
+association xxx_OclExpression_assignedObj between
+	OclExpression[*] role xxx_OclExpression_assignedObj_src
+	AssignAction[0..1] role assignedObj
+end
+
+composition xxx_LoopExp_body between
+	LoopExp[*] role xxx_LoopExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_LoopExp_iterators between
+	LoopExp[0..1] role xxx_LoopExp_iterators_src
+	Iterator[1..*] role iterators
+end
+
+composition xxx_OperationCallExp_arguments between
+	OperationCallExp[0..1] role xxx_OperationCallExp_arguments_src
+	OclExpression[*] role arguments
+end
+
+association xxx_Iterator_loopExpr between
+	Iterator[*] role xxx_Iterator_loopExpr_src
+	LoopExp[0..1] role loopExpr
+end
+
+composition xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	OclType[1] role type
+end
+
+association xxx_VariableDeclaration_variableExp between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_variableExp_src
+	VariableExp[*] role variableExp
+end
+
+association xxx_VariableExp_referredVariable between
+	VariableExp[*] role xxx_VariableExp_referredVariable_src
+	VariableDeclaration[1] role referredVariable
+end
+
+composition xxx_TypeExp_referredType between
+	TypeExp[*] role xxx_TypeExp_referredType_src
+	OclType[0..1] role referredType
+end
+
+composition xxx_AllInstanceExp_sourceType between
+	AllInstanceExp[*] role xxx_AllInstanceExp_sourceType_src
+	OclType[1] role sourceType
+end
+
+association xxx_OclType_variableDeclaration between
+	OclType[0..1] role xxx_OclType_variableDeclaration_src
+	VariableDeclaration[*] role variableDeclaration
+end
+
+association xxx_OclType_oclExpression between
+	OclType[0..1] role xxx_OclType_oclExpression_src
+	OclExpression[*] role oclExpression
+end
+
+association xxx_OclType_appliedAllInstance between
+	OclType[*] role xxx_OclType_appliedAllInstance_src
+	AllInstanceExp[0..1] role appliedAllInstance
+end
+
+association xxx_OclType_typeExp between
+	OclType[0..1] role xxx_OclType_typeExp_src
+	TypeExp[*] role typeExp
+end
+

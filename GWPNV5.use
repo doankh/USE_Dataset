@@ -1,0 +1,107 @@
+model PetriNet
+class Place
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Net
+attributes
+operations
+end
+
+abstract class Arc
+attributes
+	weight : Integer
+operations
+end
+
+class PTArc<Arc
+attributes
+operations
+end
+
+class TPArc<Arc
+attributes
+operations
+end
+
+class Token
+attributes
+operations
+end
+
+association xxx_Place_net between
+	Place[*] role xxx_Place_net_src
+	Net[1] role net
+end
+
+association xxx_Place_out between
+	Place[0..1] role xxx_Place_out_src
+	PTArc[*] role out
+end
+
+association xxx_Place_in_ between
+	Place[0..1] role xxx_Place_in__src
+	TPArc[*] role in_
+end
+
+composition xxx_Place_token between
+	Place[0..1] role xxx_Place_token_src
+	Token[*] role token
+end
+
+association xxx_Transition_net between
+	Transition[*] role xxx_Transition_net_src
+	Net[1] role net
+end
+
+association xxx_Transition_in_ between
+	Transition[0..1] role xxx_Transition_in__src
+	PTArc[1..*] role in_
+end
+
+association xxx_Transition_out between
+	Transition[0..1] role xxx_Transition_out_src
+	TPArc[1..*] role out
+end
+
+composition xxx_Net_place between
+	Net[0..1] role xxx_Net_place_src
+	Place[1..*] role place
+end
+
+composition xxx_Net_transition between
+	Net[0..1] role xxx_Net_transition_src
+	Transition[1..*] role transition
+end
+
+association xxx_PTArc_dst between
+	PTArc[*] role xxx_PTArc_dst_src
+	Transition[1] role dst
+end
+
+association xxx_PTArc_src between
+	PTArc[*] role xxx_PTArc_src_src
+	Place[1] role src
+end
+
+association xxx_TPArc_src between
+	TPArc[*] role xxx_TPArc_src_src
+	Transition[1] role src
+end
+
+association xxx_TPArc_dst between
+	TPArc[*] role xxx_TPArc_dst_src
+	Place[1] role dst
+end
+
+association xxx_Token_place between
+	Token[*] role xxx_Token_place_src
+	Place[1] role place
+end
+

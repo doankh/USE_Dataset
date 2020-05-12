@@ -1,0 +1,702 @@
+model plsql
+enum BooleanOperatorType{
+default
+}
+
+enum ArithmeticOperatorType{
+default
+}
+
+enum LiteralExpressionType{
+default
+}
+
+enum BasicTypes{
+default
+}
+
+abstract class Statement
+attributes
+operations
+end
+
+class AssignmentStatement<Statement
+attributes
+operations
+end
+
+class ExitStatement<Statement
+attributes
+operations
+end
+
+class GotoStatement<Statement,NamedElement
+attributes
+operations
+end
+
+class CaseStatement<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class LoopStatement<Statement
+attributes
+operations
+end
+
+class ForStatement<LoopStatement
+attributes
+operations
+end
+
+class NullStatement<Statement
+attributes
+operations
+end
+
+class RaiseStatement<Statement
+attributes
+	exception : String
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+operations
+end
+
+class BlockStatement<Statement
+attributes
+operations
+end
+
+class FunctionCallStatement<Statement,NamedElement,Expression
+attributes
+operations
+end
+
+class SQLStatement<Statement
+attributes
+operations
+end
+
+class ControlSQLStatement<SQLStatement
+attributes
+operations
+end
+
+class CloseStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class CommitStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class FetchStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class LockTableStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class OpenStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class RollbackStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class SavepointStatement<ControlSQLStatement
+attributes
+operations
+end
+
+class ModifySQLStatement<SQLStatement
+attributes
+operations
+end
+
+class SelectStatement<ModifySQLStatement
+attributes
+	distinct : Boolean
+	unique : Boolean
+	all : Boolean
+	selectList : String
+	bulk : Boolean
+	collect : Boolean
+	from_ : String
+	isCount : Boolean
+operations
+end
+
+class InsertStatement<ModifySQLStatement
+attributes
+	into_ : String
+	columns : String
+operations
+end
+
+class UpdateStatement<ModifySQLStatement
+attributes
+	table : String
+operations
+end
+
+class UpdatePair
+attributes
+	column : String
+operations
+end
+
+class DeleteStatement<ModifySQLStatement
+attributes
+operations
+end
+
+class SetTransactionStatement<ModifySQLStatement
+attributes
+operations
+end
+
+class ExceptionSection
+attributes
+	exceptionNames : String
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class BooleanExpression<Expression,SQLCondition
+attributes
+	type : BooleanOperatorType
+operations
+end
+
+class NotExpression<Expression
+attributes
+operations
+end
+
+class IsNullExpression<Expression
+attributes
+operations
+end
+
+class InRangeExpression<Expression
+attributes
+operations
+end
+
+class LikeExpression<Expression
+attributes
+operations
+end
+
+class FoundExpression<Expression
+attributes
+operations
+end
+
+abstract class VarRefExpression<Expression
+attributes
+operations
+end
+
+class FormsVarRef<VarRefExpression
+attributes
+	reference : String
+operations
+end
+
+class SQLVariable<VarRefExpression
+attributes
+operations
+end
+
+class SQLCursor<VarRefExpression
+attributes
+operations
+end
+
+class PropertyAccess<Expression
+attributes
+	propertyName : String
+operations
+end
+
+class StringOperation<Expression
+attributes
+operations
+end
+
+class LiteralExpression<Expression
+attributes
+	type : LiteralExpressionType
+	value : String
+operations
+end
+
+class FunctionCallParameter<NamedElement
+attributes
+operations
+end
+
+class ArithmeticExpression<Expression
+attributes
+	type : ArithmeticOperatorType
+operations
+end
+
+class ConcatString<StringOperation
+attributes
+operations
+end
+
+class Type
+attributes
+operations
+end
+
+class Datatype<Type
+attributes
+	name : BasicTypes
+	range : Integer
+operations
+end
+
+class IndirectType<Type
+attributes
+	identifier : String
+	rowtype : Boolean
+	type : Boolean
+	range : Integer
+operations
+end
+
+class GenericType<Type
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+abstract class SQLCondition
+attributes
+operations
+end
+
+class BooleanCondition<SQLCondition
+attributes
+	type : BooleanOperatorType
+operations
+end
+
+class NotCondition<SQLCondition
+attributes
+operations
+end
+
+class ConditionComparison<SQLCondition
+attributes
+	type : BooleanOperatorType
+operations
+end
+
+class VariableDeclaration<Declaration,TypedElement
+attributes
+	constant : Boolean
+	notnull : Boolean
+	default : Boolean
+operations
+end
+
+class CursorDeclaration<Declaration
+attributes
+operations
+end
+
+abstract class Declaration<NamedElement
+attributes
+operations
+end
+
+class ProcedureDeclaration<Declaration
+attributes
+operations
+end
+
+class FunctionDeclaration<TypedElement,Declaration
+attributes
+operations
+end
+
+class Argument<NamedElement,TypedElement
+attributes
+	in_ : Boolean
+	out : Boolean
+	default : Boolean
+operations
+end
+
+class Package<NamedElement
+attributes
+operations
+end
+
+class TriggerBlock<NamedElement,BlockStatement
+attributes
+operations
+end
+
+class PLSQLDefinition
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+composition xxx_AssignmentStatement_expression between
+	AssignmentStatement[*] role xxx_AssignmentStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_AssignmentStatement_receptor between
+	AssignmentStatement[*] role xxx_AssignmentStatement_receptor_src
+	Expression[1] role receptor
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_IfStatement_ifStatements between
+	IfStatement[0..1] role xxx_IfStatement_ifStatements_src
+	Statement[*] role ifStatements
+end
+
+composition xxx_IfStatement_elsif between
+	IfStatement[0..1] role xxx_IfStatement_elsif_src
+	IfStatement[*] role elsif
+end
+
+composition xxx_IfStatement_elseStatements between
+	IfStatement[0..1] role xxx_IfStatement_elseStatements_src
+	Statement[*] role elseStatements
+end
+
+composition xxx_LoopStatement_statements between
+	LoopStatement[0..1] role xxx_LoopStatement_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ForStatement_index between
+	ForStatement[*] role xxx_ForStatement_index_src
+	VariableDeclaration[0..1] role index
+end
+
+composition xxx_ForStatement_param between
+	ForStatement[*] role xxx_ForStatement_param_src
+	Expression[0..1] role param
+end
+
+composition xxx_ReturnStatement_expression between
+	ReturnStatement[*] role xxx_ReturnStatement_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_BlockStatement_declarations between
+	BlockStatement[0..1] role xxx_BlockStatement_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_BlockStatement_statements between
+	BlockStatement[0..1] role xxx_BlockStatement_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_BlockStatement_exceptionSections between
+	BlockStatement[0..1] role xxx_BlockStatement_exceptionSections_src
+	ExceptionSection[*] role exceptionSections
+end
+
+composition xxx_FunctionCallStatement_parameters between
+	FunctionCallStatement[0..1] role xxx_FunctionCallStatement_parameters_src
+	FunctionCallParameter[*] role parameters
+end
+
+association xxx_CloseStatement_cursor between
+	CloseStatement[*] role xxx_CloseStatement_cursor_src
+	CursorDeclaration[0..1] role cursor
+end
+
+association xxx_FetchStatement_cursor between
+	FetchStatement[*] role xxx_FetchStatement_cursor_src
+	CursorDeclaration[0..1] role cursor
+end
+
+composition xxx_FetchStatement_into between
+	FetchStatement[0..1] role xxx_FetchStatement_into_src
+	VarRefExpression[*] role into_
+end
+
+association xxx_OpenStatement_cursor between
+	OpenStatement[*] role xxx_OpenStatement_cursor_src
+	CursorDeclaration[0..1] role cursor
+end
+
+composition xxx_OpenStatement_exprs between
+	OpenStatement[0..1] role xxx_OpenStatement_exprs_src
+	Expression[*] role exprs
+end
+
+composition xxx_SelectStatement_into between
+	SelectStatement[0..1] role xxx_SelectStatement_into_src
+	VarRefExpression[*] role into_
+end
+
+composition xxx_SelectStatement_where between
+	SelectStatement[*] role xxx_SelectStatement_where_src
+	SQLCondition[0..1] role where
+end
+
+composition xxx_SelectStatement_orderBy between
+	SelectStatement[0..1] role xxx_SelectStatement_orderBy_src
+	Expression[*] role orderBy
+end
+
+composition xxx_InsertStatement_values between
+	InsertStatement[0..1] role xxx_InsertStatement_values_src
+	Expression[*] role values
+end
+
+composition xxx_UpdateStatement_pairs between
+	UpdateStatement[0..1] role xxx_UpdateStatement_pairs_src
+	UpdatePair[*] role pairs
+end
+
+composition xxx_UpdateStatement_where between
+	UpdateStatement[*] role xxx_UpdateStatement_where_src
+	SQLCondition[0..1] role where
+end
+
+composition xxx_UpdatePair_expression between
+	UpdatePair[*] role xxx_UpdatePair_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ExceptionSection_statements between
+	ExceptionSection[0..1] role xxx_ExceptionSection_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_BooleanExpression_expr1 between
+	BooleanExpression[*] role xxx_BooleanExpression_expr1_src
+	Expression[0..1] role expr1
+end
+
+composition xxx_BooleanExpression_expr2 between
+	BooleanExpression[*] role xxx_BooleanExpression_expr2_src
+	Expression[0..1] role expr2
+end
+
+composition xxx_NotExpression_expr between
+	NotExpression[*] role xxx_NotExpression_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_IsNullExpression_expr between
+	IsNullExpression[*] role xxx_IsNullExpression_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_InRangeExpression_expr between
+	InRangeExpression[*] role xxx_InRangeExpression_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_InRangeExpression_lower between
+	InRangeExpression[*] role xxx_InRangeExpression_lower_src
+	Expression[0..1] role lower
+end
+
+composition xxx_InRangeExpression_upper between
+	InRangeExpression[*] role xxx_InRangeExpression_upper_src
+	Expression[0..1] role upper
+end
+
+composition xxx_LikeExpression_expr1 between
+	LikeExpression[*] role xxx_LikeExpression_expr1_src
+	Expression[0..1] role expr1
+end
+
+composition xxx_LikeExpression_expr2 between
+	LikeExpression[*] role xxx_LikeExpression_expr2_src
+	Expression[0..1] role expr2
+end
+
+association xxx_FoundExpression_cursor between
+	FoundExpression[*] role xxx_FoundExpression_cursor_src
+	CursorDeclaration[0..1] role cursor
+end
+
+association xxx_SQLVariable_reference between
+	SQLVariable[*] role xxx_SQLVariable_reference_src
+	VariableDeclaration[0..1] role reference
+end
+
+association xxx_SQLCursor_reference between
+	SQLCursor[*] role xxx_SQLCursor_reference_src
+	CursorDeclaration[0..1] role reference
+end
+
+composition xxx_PropertyAccess_expr between
+	PropertyAccess[*] role xxx_PropertyAccess_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_FunctionCallParameter_expr between
+	FunctionCallParameter[*] role xxx_FunctionCallParameter_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_ArithmeticExpression_expr1 between
+	ArithmeticExpression[*] role xxx_ArithmeticExpression_expr1_src
+	Expression[0..1] role expr1
+end
+
+composition xxx_ArithmeticExpression_expr2 between
+	ArithmeticExpression[*] role xxx_ArithmeticExpression_expr2_src
+	Expression[0..1] role expr2
+end
+
+composition xxx_ConcatString_exprs between
+	ConcatString[0..1] role xxx_ConcatString_exprs_src
+	Expression[*] role exprs
+end
+
+composition xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[1] role type
+end
+
+composition xxx_BooleanCondition_expr1 between
+	BooleanCondition[*] role xxx_BooleanCondition_expr1_src
+	SQLCondition[0..1] role expr1
+end
+
+composition xxx_BooleanCondition_expr2 between
+	BooleanCondition[*] role xxx_BooleanCondition_expr2_src
+	SQLCondition[0..1] role expr2
+end
+
+composition xxx_NotCondition_expr between
+	NotCondition[*] role xxx_NotCondition_expr_src
+	SQLCondition[0..1] role expr
+end
+
+composition xxx_ConditionComparison_expr1 between
+	ConditionComparison[*] role xxx_ConditionComparison_expr1_src
+	Expression[0..1] role expr1
+end
+
+composition xxx_ConditionComparison_expr2 between
+	ConditionComparison[*] role xxx_ConditionComparison_expr2_src
+	Expression[0..1] role expr2
+end
+
+composition xxx_VariableDeclaration_assign between
+	VariableDeclaration[*] role xxx_VariableDeclaration_assign_src
+	Expression[0..1] role assign
+end
+
+composition xxx_CursorDeclaration_arguments between
+	CursorDeclaration[0..1] role xxx_CursorDeclaration_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_CursorDeclaration_select between
+	CursorDeclaration[*] role xxx_CursorDeclaration_select_src
+	SelectStatement[0..1] role select
+end
+
+composition xxx_ProcedureDeclaration_arguments between
+	ProcedureDeclaration[0..1] role xxx_ProcedureDeclaration_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_ProcedureDeclaration_declarations between
+	ProcedureDeclaration[0..1] role xxx_ProcedureDeclaration_declarations_src
+	Declaration[*] role declarations
+end
+
+association xxx_ProcedureDeclaration_statements between
+	ProcedureDeclaration[0..1] role xxx_ProcedureDeclaration_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_FunctionDeclaration_arguments between
+	FunctionDeclaration[0..1] role xxx_FunctionDeclaration_arguments_src
+	Argument[*] role arguments
+end
+
+composition xxx_FunctionDeclaration_declarations between
+	FunctionDeclaration[0..1] role xxx_FunctionDeclaration_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_FunctionDeclaration_statements between
+	FunctionDeclaration[0..1] role xxx_FunctionDeclaration_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_FunctionDeclaration_exceptionSection between
+	FunctionDeclaration[*] role xxx_FunctionDeclaration_exceptionSection_src
+	ExceptionSection[0..1] role exceptionSection
+end
+
+composition xxx_Argument_assign between
+	Argument[*] role xxx_Argument_assign_src
+	Expression[0..1] role assign
+end
+
+composition xxx_Package_declarations between
+	Package[0..1] role xxx_Package_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Package_statements between
+	Package[0..1] role xxx_Package_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_PLSQLDefinition_triggers between
+	PLSQLDefinition[0..1] role xxx_PLSQLDefinition_triggers_src
+	TriggerBlock[*] role triggers
+end
+

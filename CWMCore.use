@@ -1,0 +1,151 @@
+model CWMCore
+enum VisibilityKind{
+	vk_public_vis,
+	vk_private_vis,
+	vk_protected_vis
+}
+
+class BooleanExpression
+attributes
+	expresssion : String
+operations
+end
+
+class ModelElement
+attributes
+	name : String
+	visibility : VisibilityKind
+operations
+end
+
+class Dependency<ModelElement
+attributes
+	kind : String
+operations
+end
+
+class Constraint<ModelElement
+attributes
+operations
+end
+
+class Feature<ModelElement
+attributes
+operations
+end
+
+class StructuralFeature<Feature
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+class NameSpace<ModelElement
+attributes
+operations
+end
+
+class Classifier<NameSpace
+attributes
+operations
+end
+
+class Package<NameSpace
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+operations
+end
+
+class Datatype<Classifier
+attributes
+operations
+end
+
+class Subsystem<Package
+attributes
+operations
+end
+
+class Model<Package
+attributes
+operations
+end
+
+association xxx_ModelElement_contraints between
+	ModelElement[0..1] role xxx_ModelElement_contraints_src
+	Constraint[*] role contraints
+end
+
+association xxx_ModelElement_clientDependencies between
+	ModelElement[0..1] role xxx_ModelElement_clientDependencies_src
+	Dependency[*] role clientDependencies
+end
+
+association xxx_ModelElement_supplierDependencies between
+	ModelElement[0..1] role xxx_ModelElement_supplierDependencies_src
+	Dependency[*] role supplierDependencies
+end
+
+association xxx_ModelElement_namespace between
+	ModelElement[*] role xxx_ModelElement_namespace_src
+	NameSpace[0..1] role namespace
+end
+
+association xxx_ModelElement_importers between
+	ModelElement[0..1] role xxx_ModelElement_importers_src
+	Package[*] role importers
+end
+
+association xxx_Dependency_clients between
+	Dependency[0..1] role xxx_Dependency_clients_src
+	ModelElement[1..*] role clients
+end
+
+association xxx_Dependency_suppliers between
+	Dependency[0..1] role xxx_Dependency_suppliers_src
+	ModelElement[1..*] role suppliers
+end
+
+composition xxx_Constraint_body between
+	Constraint[*] role xxx_Constraint_body_src
+	BooleanExpression[1] role body
+end
+
+association xxx_Constraint_constrainedElements between
+	Constraint[0..1] role xxx_Constraint_constrainedElements_src
+	ModelElement[*] role constrainedElements
+end
+
+association xxx_Feature_owner between
+	Feature[*] role xxx_Feature_owner_src
+	Classifier[0..1] role owner
+end
+
+association xxx_StructuralFeature_type between
+	StructuralFeature[*] role xxx_StructuralFeature_type_src
+	Classifier[1] role type
+end
+
+composition xxx_NameSpace_ownedElements between
+	NameSpace[0..1] role xxx_NameSpace_ownedElements_src
+	ModelElement[*] role ownedElements
+end
+
+composition xxx_Classifier_features between
+	Classifier[0..1] role xxx_Classifier_features_src
+	Feature[*] role features
+end
+
+association xxx_Package_importedElements between
+	Package[0..1] role xxx_Package_importedElements_src
+	ModelElement[*] role importedElements
+end
+

@@ -1,0 +1,271 @@
+model PrimitiveTypes
+enum BreakType{
+	bt_page,
+	bt_column,
+	bt_text_wrapping
+}
+
+enum NoteValue{
+	ftn_normal,
+	ftn_separator,
+	ftn_continuation_separator,
+	ftn_continuation_notice
+}
+
+enum OnOffType{
+	oot_on,
+	oot_off
+}
+
+enum FldCharTypeProperty{
+	fctp_begin,
+	fctp_separate,
+	fctp_end
+}
+
+class StringProperty<StringType
+attributes
+operations
+end
+
+class StringType
+attributes
+	val : String
+operations
+end
+
+class WordDocument
+attributes
+operations
+end
+
+class BodyElt
+attributes
+operations
+end
+
+abstract class BlockLevelElt
+attributes
+operations
+end
+
+abstract class BlockLevelChunkElt<BlockLevelElt
+attributes
+operations
+end
+
+class ParaElt<BlockLevelChunkElt
+attributes
+operations
+end
+
+abstract class ParaContentElt
+attributes
+operations
+end
+
+class RunElt<ParaContentElt
+attributes
+operations
+end
+
+abstract class RunContentElt
+attributes
+operations
+end
+
+class BreakElt<RunContentElt
+attributes
+	type : BreakType
+operations
+end
+
+class Text<StringType
+attributes
+operations
+end
+
+class DelText<StringType
+attributes
+operations
+end
+
+class InstrText<StringType
+attributes
+operations
+end
+
+class DelInstrText<StringType
+attributes
+operations
+end
+
+class NoBreakHyphen<RunContentElt
+attributes
+operations
+end
+
+class SoftHyphen<RunContentElt
+attributes
+operations
+end
+
+class AnnotationRef<RunContentElt
+attributes
+operations
+end
+
+class FootnoteRef<RunContentElt
+attributes
+operations
+end
+
+class EndnoteRef<RunContentElt
+attributes
+operations
+end
+
+class Separator<RunContentElt
+attributes
+operations
+end
+
+class ContinuationSeparator<RunContentElt
+attributes
+operations
+end
+
+class PgNum<RunContentElt
+attributes
+operations
+end
+
+class Cr<RunContentElt
+attributes
+operations
+end
+
+class Footnote<NoteElt
+attributes
+operations
+end
+
+class Endnote<NoteElt
+attributes
+operations
+end
+
+abstract class NoteElt
+attributes
+	type : NoteValue
+	suppressRef : OnOffType
+operations
+end
+
+class Picture<RunContentElt
+attributes
+operations
+end
+
+class Symbol<SymElt
+attributes
+operations
+end
+
+class SymElt
+attributes
+operations
+end
+
+class Tab<RunContentElt
+attributes
+operations
+end
+
+class FldChar<FldCharElt
+attributes
+operations
+end
+
+class FldCharElt
+attributes
+	fldCharType : FldCharTypeProperty
+	fldLock : OnOffType
+operations
+end
+
+composition xxx_WordDocument_ignoreSubtree between
+	WordDocument[*] role xxx_WordDocument_ignoreSubtree_src
+	StringProperty[0..1] role ignoreSubtree
+end
+
+composition xxx_WordDocument_ignoreElements between
+	WordDocument[*] role xxx_WordDocument_ignoreElements_src
+	StringProperty[0..1] role ignoreElements
+end
+
+composition xxx_WordDocument_body between
+	WordDocument[*] role xxx_WordDocument_body_src
+	BodyElt[1] role body
+end
+
+association xxx_BodyElt_be_wordDocument between
+	BodyElt[*] role xxx_BodyElt_be_wordDocument_src
+	WordDocument[1] role be_wordDocument
+end
+
+composition xxx_BodyElt_blockLevelElts between
+	BodyElt[0..1] role xxx_BodyElt_blockLevelElts_src
+	BlockLevelElt[*] role blockLevelElts
+end
+
+association xxx_BlockLevelElt_ble_bodyElt between
+	BlockLevelElt[*] role xxx_BlockLevelElt_ble_bodyElt_src
+	BodyElt[1] role ble_bodyElt
+end
+
+association xxx_BlockLevelElt_ble_note between
+	BlockLevelElt[*] role xxx_BlockLevelElt_ble_note_src
+	NoteElt[1] role ble_note
+end
+
+composition xxx_ParaElt_pContentElts between
+	ParaElt[0..1] role xxx_ParaElt_pContentElts_src
+	ParaContentElt[*] role pContentElts
+end
+
+association xxx_ParaContentElt_pce_pElt between
+	ParaContentElt[*] role xxx_ParaContentElt_pce_pElt_src
+	ParaElt[1] role pce_pElt
+end
+
+composition xxx_RunElt_rContentElts between
+	RunElt[0..1] role xxx_RunElt_rContentElts_src
+	RunContentElt[*] role rContentElts
+end
+
+association xxx_RunContentElt_rce_rElt between
+	RunContentElt[*] role xxx_RunContentElt_rce_rElt_src
+	RunElt[1] role rce_rElt
+end
+
+composition xxx_NoteElt_n_blockLevelElts between
+	NoteElt[0..1] role xxx_NoteElt_n_blockLevelElts_src
+	BlockLevelElt[1..*] role n_blockLevelElts
+end
+
+composition xxx_SymElt_font between
+	SymElt[*] role xxx_SymElt_font_src
+	StringType[1] role font
+end
+
+composition xxx_SymElt_char between
+	SymElt[*] role xxx_SymElt_char_src
+	StringType[1] role char
+end
+
+composition xxx_FldCharElt_fldData between
+	FldCharElt[*] role xxx_FldCharElt_fldData_src
+	StringType[0..1] role fldData
+end
+

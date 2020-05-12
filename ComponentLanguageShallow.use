@@ -1,0 +1,41 @@
+model ComponentLanguageShallow
+class Component
+attributes
+operations
+end
+
+abstract class Port
+attributes
+operations
+end
+
+class Connector
+attributes
+operations
+end
+
+class InPort<Port
+attributes
+operations
+end
+
+class OutPort<Port
+attributes
+operations
+end
+
+composition xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[*] role ports
+end
+
+association xxx_Connector_in_ between
+	Connector[0..1] role xxx_Connector_in__src
+	Port[*] role in_
+end
+
+association xxx_Connector_out between
+	Connector[0..1] role xxx_Connector_out_src
+	Port[*] role out
+end
+

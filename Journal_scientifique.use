@@ -1,0 +1,115 @@
+model Journal
+enum TYPE_ARTICLE{
+default
+}
+
+class Journal
+attributes
+	name : String
+	IssueNumber : Integer
+operations
+	getPapers():Paper
+	getIssues(numero : Integer)
+	getResearchPaper(typeArticle : TYPE_ARTICLE):Issue
+end
+
+class Issue
+attributes
+	number : Integer
+	pages : Integer
+	SpecialIssues : Boolean
+	title : String
+operations
+	pageNumber():Integer
+end
+
+class Paper
+attributes
+	typeArticle : TYPE_ARTICLE
+	firstPage : Integer
+	LastPage : Integer
+operations
+end
+
+class Autheur
+attributes
+	nameAuthor : String
+operations
+end
+
+class Reviewer
+attributes
+	nameReviewer : String
+operations
+end
+
+association xxx_Journal_issues between
+	Journal[0..1] role xxx_Journal_issues_src
+	Issue[*] role issues
+end
+
+association xxx_Journal_autheur between
+	Journal[*] role xxx_Journal_autheur_src
+	Autheur[0..1] role autheur
+end
+
+association xxx_Issue_journal between
+	Issue[*] role xxx_Issue_journal_src
+	Journal[1] role journal
+end
+
+composition xxx_Issue_publie between
+	Issue[0..1] role xxx_Issue_publie_src
+	Paper[1..*] role publie
+end
+
+association xxx_Issue_submit between
+	Issue[0..1] role xxx_Issue_submit_src
+	Paper[*] role submit
+end
+
+association xxx_Paper_issueOfPublication between
+	Paper[*] role xxx_Paper_issueOfPublication_src
+	Issue[1] role issueOfPublication
+end
+
+association xxx_Paper_redaction between
+	Paper[0..1] role xxx_Paper_redaction_src
+	Autheur[1..*] role redaction
+end
+
+association xxx_Paper_revisioner between
+	Paper[*] role xxx_Paper_revisioner_src
+	Autheur[1..3] role revisioner
+end
+
+association xxx_Paper_reviewer between
+	Paper[*] role xxx_Paper_reviewer_src
+	Reviewer[0..3] role reviewer
+end
+
+association xxx_Paper_issueOfSubmission between
+	Paper[0..1] role xxx_Paper_issueOfSubmission_src
+	Issue[*] role issueOfSubmission
+end
+
+association xxx_Autheur_ecrit between
+	Autheur[0..1] role xxx_Autheur_ecrit_src
+	Paper[*] role ecrit
+end
+
+association xxx_Autheur_examine between
+	Autheur[*] role xxx_Autheur_examine_src
+	Paper[0..1] role examine
+end
+
+association xxx_Autheur_journal between
+	Autheur[*] role xxx_Autheur_journal_src
+	Journal[0..1] role journal
+end
+
+association xxx_Reviewer_Review between
+	Reviewer[0..1] role xxx_Reviewer_Review_src
+	Paper[*] role Review
+end
+

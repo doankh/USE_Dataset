@@ -1,0 +1,220 @@
+model vcproj
+class ActiveXReferenceType
+attributes
+	controlGUID : String
+	controlVersion : String
+	wrapperTool : String
+operations
+end
+
+class AssemblyReferenceType
+attributes
+	relativePath : String
+operations
+end
+
+class ConfigurationsType
+attributes
+operations
+end
+
+class ConfigurationType
+attributes
+	name : String
+	anyAttribute : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class FilesType
+attributes
+	group : String
+operations
+end
+
+class FileType
+attributes
+	group : String
+	relativePath : String
+	anyAttribute : String
+operations
+end
+
+class FilterType
+attributes
+	group : String
+	name : String
+	anyAttribute : String
+operations
+end
+
+class GlobalsType
+attributes
+operations
+end
+
+class GlobalType
+attributes
+	name : String
+	value : String
+operations
+end
+
+class PlatformsType
+attributes
+operations
+end
+
+class PlatformType
+attributes
+	name : String
+operations
+end
+
+class ProjectReferenceType
+attributes
+	name : String
+	referencedProjectIdentifier : String
+operations
+end
+
+class ReferencesType
+attributes
+	group : String
+operations
+end
+
+class ToolType
+attributes
+	name : String
+	anyAttribute : String
+operations
+end
+
+class VisualStudioProjectType
+attributes
+	keyword : String
+	name : String
+	projectGUID : String
+	projectType : String
+	rootNamespace : String
+	version : String
+	anyAttribute : String
+operations
+end
+
+composition xxx_ActiveXReferenceType_referenceConfiguration between
+	ActiveXReferenceType[0..1] role xxx_ActiveXReferenceType_referenceConfiguration_src
+	ConfigurationType[*] role referenceConfiguration
+end
+
+composition xxx_AssemblyReferenceType_referenceConfiguration between
+	AssemblyReferenceType[0..1] role xxx_AssemblyReferenceType_referenceConfiguration_src
+	ConfigurationType[*] role referenceConfiguration
+end
+
+composition xxx_ConfigurationsType_configuration between
+	ConfigurationsType[0..1] role xxx_ConfigurationsType_configuration_src
+	ConfigurationType[1..*] role configuration
+end
+
+composition xxx_ConfigurationType_tool between
+	ConfigurationType[0..1] role xxx_ConfigurationType_tool_src
+	ToolType[*] role tool
+end
+
+composition xxx_DocumentRoot_visualStudioProject between
+	DocumentRoot[*] role xxx_DocumentRoot_visualStudioProject_src
+	VisualStudioProjectType[*] role visualStudioProject
+end
+
+composition xxx_FilesType_filter between
+	FilesType[0..1] role xxx_FilesType_filter_src
+	FilterType[*] role filter
+end
+
+composition xxx_FilesType_file between
+	FilesType[0..1] role xxx_FilesType_file_src
+	FileType[*] role file
+end
+
+composition xxx_FileType_file between
+	FileType[0..1] role xxx_FileType_file_src
+	FileType[*] role file
+end
+
+composition xxx_FileType_fileConfiguration between
+	FileType[0..1] role xxx_FileType_fileConfiguration_src
+	ConfigurationType[*] role fileConfiguration
+end
+
+composition xxx_FilterType_filter between
+	FilterType[0..1] role xxx_FilterType_filter_src
+	FilterType[*] role filter
+end
+
+composition xxx_FilterType_file between
+	FilterType[0..1] role xxx_FilterType_file_src
+	FileType[*] role file
+end
+
+composition xxx_GlobalsType_global between
+	GlobalsType[0..1] role xxx_GlobalsType_global_src
+	GlobalType[*] role global
+end
+
+composition xxx_PlatformsType_platform between
+	PlatformsType[0..1] role xxx_PlatformsType_platform_src
+	PlatformType[1..*] role platform
+end
+
+composition xxx_ProjectReferenceType_referenceConfiguration between
+	ProjectReferenceType[0..1] role xxx_ProjectReferenceType_referenceConfiguration_src
+	ConfigurationType[*] role referenceConfiguration
+end
+
+composition xxx_ReferencesType_assemblyReference between
+	ReferencesType[0..1] role xxx_ReferencesType_assemblyReference_src
+	AssemblyReferenceType[*] role assemblyReference
+end
+
+composition xxx_ReferencesType_projectReference between
+	ReferencesType[0..1] role xxx_ReferencesType_projectReference_src
+	ProjectReferenceType[*] role projectReference
+end
+
+composition xxx_ReferencesType_activeXReference between
+	ReferencesType[0..1] role xxx_ReferencesType_activeXReference_src
+	ActiveXReferenceType[*] role activeXReference
+end
+
+composition xxx_VisualStudioProjectType_platforms between
+	VisualStudioProjectType[*] role xxx_VisualStudioProjectType_platforms_src
+	PlatformsType[1] role platforms
+end
+
+composition xxx_VisualStudioProjectType_configurations between
+	VisualStudioProjectType[*] role xxx_VisualStudioProjectType_configurations_src
+	ConfigurationsType[1] role configurations
+end
+
+composition xxx_VisualStudioProjectType_references between
+	VisualStudioProjectType[*] role xxx_VisualStudioProjectType_references_src
+	ReferencesType[0..1] role references
+end
+
+composition xxx_VisualStudioProjectType_files between
+	VisualStudioProjectType[*] role xxx_VisualStudioProjectType_files_src
+	FilesType[0..1] role files
+end
+
+composition xxx_VisualStudioProjectType_globals between
+	VisualStudioProjectType[*] role xxx_VisualStudioProjectType_globals_src
+	GlobalsType[0..1] role globals
+end
+

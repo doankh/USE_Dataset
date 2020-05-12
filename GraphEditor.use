@@ -1,0 +1,96 @@
+model graphEditor
+enum FunctionType{
+default
+}
+
+enum VariableType{
+default
+}
+
+enum MessageType{
+default
+}
+
+class Graph
+attributes
+	name : String
+	result : String
+operations
+	getGraphElement(id : Integer):GraphElement
+	getConnectingVariablenodes(node : Factornode):Variablenode
+end
+
+abstract class GraphElement
+attributes
+	id : Integer
+operations
+end
+
+abstract class Node<GraphElement
+attributes
+	name : String
+operations
+end
+
+class Factornode<Node
+attributes
+	type : FunctionType
+	values : String
+operations
+end
+
+class Variablenode<Node
+attributes
+	type : VariableType
+	values : Real
+	isKnown : Boolean
+operations
+end
+
+class Message<GraphElement
+attributes
+	count : Integer
+	type : MessageType
+operations
+end
+
+class Edge<GraphElement
+attributes
+operations
+end
+
+composition xxx_Graph_nodes between
+	Graph[0..1] role xxx_Graph_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_Graph_edges between
+	Graph[0..1] role xxx_Graph_edges_src
+	Edge[*] role edges
+end
+
+composition xxx_Graph_messages between
+	Graph[0..1] role xxx_Graph_messages_src
+	Message[*] role messages
+end
+
+association xxx_Message_from_ between
+	Message[*] role xxx_Message_from__src
+	Node[1] role from_
+end
+
+association xxx_Message_to between
+	Message[*] role xxx_Message_to_src
+	Node[1] role to
+end
+
+association xxx_Edge_from_ between
+	Edge[*] role xxx_Edge_from__src
+	Node[1] role from_
+end
+
+association xxx_Edge_to between
+	Edge[*] role xxx_Edge_to_src
+	Node[1] role to
+end
+

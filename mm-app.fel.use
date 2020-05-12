@@ -1,0 +1,130 @@
+model mm
+enum InheritanceType{
+default
+}
+
+enum ReferenceType{
+default
+}
+
+class ModelRoot
+attributes
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+abstract class ModelOperation
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Class<NamedElement
+attributes
+	isPrimitive : Boolean
+operations
+end
+
+class ClassSerialization
+attributes
+	isTransient : Boolean
+	isEmbedded : Boolean
+	tableName : String
+	inheritanceType : InheritanceType
+operations
+end
+
+class Property<NamedElement
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+	isUnique : Boolean
+	isOrdered : Boolean
+operations
+end
+
+class PropertySerialization
+attributes
+	isTransient : Boolean
+	isEmbedded : Boolean
+	columnNamePattern : String
+	isID : Boolean
+	sequenceName : String
+	columnName : String
+operations
+end
+
+composition xxx_ModelRoot_sourceModel between
+	ModelRoot[*] role xxx_ModelRoot_sourceModel_src
+	Model[1] role sourceModel
+end
+
+composition xxx_ModelRoot_targetModel between
+	ModelRoot[*] role xxx_ModelRoot_targetModel_src
+	Model[0..1] role targetModel
+end
+
+composition xxx_ModelRoot_operations_ between
+	ModelRoot[0..1] role xxx_ModelRoot_operations__src
+	ModelOperation[*] role operations_
+end
+
+composition xxx_Model_classes between
+	Model[0..1] role xxx_Model_classes_src
+	Class[*] role classes
+end
+
+association xxx_ModelOperation_modelRoot between
+	ModelOperation[*] role xxx_ModelOperation_modelRoot_src
+	ModelRoot[1] role modelRoot
+end
+
+association xxx_Class_owningModel between
+	Class[*] role xxx_Class_owningModel_src
+	Model[1] role owningModel
+end
+
+association xxx_Class_parent between
+	Class[*] role xxx_Class_parent_src
+	Class[0..1] role parent
+end
+
+composition xxx_Class_properties between
+	Class[0..1] role xxx_Class_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Class_classSerialization between
+	Class[*] role xxx_Class_classSerialization_src
+	ClassSerialization[0..1] role classSerialization
+end
+
+association xxx_Property_owningClass between
+	Property[*] role xxx_Property_owningClass_src
+	Class[1] role owningClass
+end
+
+composition xxx_Property_serialization between
+	Property[*] role xxx_Property_serialization_src
+	PropertySerialization[0..1] role serialization
+end
+
+association xxx_Property_type between
+	Property[*] role xxx_Property_type_src
+	Class[1] role type
+end
+
+association xxx_Property_opositeProperty between
+	Property[*] role xxx_Property_opositeProperty_src
+	Property[0..1] role opositeProperty
+end
+

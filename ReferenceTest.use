@@ -1,0 +1,95 @@
+model TestPackage
+enum TestEnum{
+default
+}
+
+enum SubTestEnum{
+default
+}
+
+class TestClass<SuperClass,UberClass
+attributes
+operations
+end
+
+abstract class TestInterface<SuperClass
+attributes
+	testAttr : String
+operations
+end
+
+abstract class SuperClass
+attributes
+operations
+end
+
+abstract class UberClass
+attributes
+operations
+end
+
+class SubTestClass
+attributes
+operations
+end
+
+abstract class SubTestInterface
+attributes
+operations
+end
+
+composition xxx_TestClass_testRef between
+	TestClass[*] role xxx_TestClass_testRef_src
+	SubTestClass[0..1] role testRef
+end
+
+association xxx_TestClass_testRef2 between
+	TestClass[*] role xxx_TestClass_testRef2_src
+	TestInterface[0..1] role testRef2
+end
+
+association xxx_TestClass_testRef3 between
+	TestClass[*] role xxx_TestClass_testRef3_src
+	TestInterface[1] role testRef3
+end
+
+association xxx_TestClass_testRef4 between
+	TestClass[0..1] role xxx_TestClass_testRef4_src
+	TestInterface[*] role testRef4
+end
+
+association xxx_TestClass_testRef5 between
+	TestClass[*] role xxx_TestClass_testRef5_src
+	TestInterface[1..5] role testRef5
+end
+
+association xxx_TestClass_testRef6 between
+	TestClass[0..1] role xxx_TestClass_testRef6_src
+	TestInterface[1..*] role testRef6
+end
+
+association xxx_TestClass_testRefWithExp between
+	TestClass[*] role xxx_TestClass_testRefWithExp_src
+	TestInterface[0..1] role testRefWithExp
+end
+
+association xxx_TestClass_testRefWithKey between
+	TestClass[*] role xxx_TestClass_testRefWithKey_src
+	TestInterface[0..1] role testRefWithKey
+end
+
+association xxx_TestClass_testRef7 between
+	TestClass[0..1] role xxx_TestClass_testRef7_src
+	TestInterface[*] role testRef7
+end
+
+association xxx_TestClass_testRef8 between
+	TestClass[*] role xxx_TestClass_testRef8_src
+	TestInterface[1..5] role testRef8
+end
+
+association xxx_TestClass_testRef9 between
+	TestClass[0..1] role xxx_TestClass_testRef9_src
+	TestInterface[1..*] role testRef9
+end
+

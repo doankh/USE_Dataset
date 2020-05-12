@@ -1,0 +1,221 @@
+model soamodel
+enum HttpMethod{
+default
+}
+
+class ServiceComponent
+attributes
+	name : String
+	namespace : String
+	URI : String
+operations
+end
+
+class CSharpComponent<ServiceComponent
+attributes
+operations
+end
+
+class JEEComponent<ServiceComponent
+attributes
+operations
+end
+
+class ServiceMethod
+attributes
+	description : String
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+abstract class DataType
+attributes
+	name : String
+operations
+end
+
+class Entity<DataType
+attributes
+	generatedID : Boolean
+operations
+end
+
+class BuiltInDataType<DataType
+attributes
+operations
+end
+
+class CollectionType<DataType
+attributes
+operations
+end
+
+class Attribute
+attributes
+	name : String
+operations
+end
+
+class ServiceOrientedArchitecture
+attributes
+	name : String
+operations
+end
+
+abstract class OCLConstraint
+attributes
+	constraint : String
+	description : String
+operations
+end
+
+class Enum<DataType
+attributes
+operations
+end
+
+class EnumLiteral
+attributes
+	name : String
+	value : Integer
+operations
+end
+
+class OSGiComponent<ServiceComponent
+attributes
+operations
+end
+
+class OCLPostcondition<OCLConstraint
+attributes
+operations
+end
+
+class OCLDataConstraint<OCLConstraint
+attributes
+operations
+end
+
+class OCLPrecondition<OCLConstraint
+attributes
+operations
+end
+
+class RestMethod<ServiceMethod
+attributes
+	httpMethod : HttpMethod
+	path : String
+operations
+end
+
+composition xxx_ServiceComponent_methods between
+	ServiceComponent[0..1] role xxx_ServiceComponent_methods_src
+	ServiceMethod[*] role methods
+end
+
+association xxx_ServiceComponent_connectsTo between
+	ServiceComponent[0..1] role xxx_ServiceComponent_connectsTo_src
+	ServiceComponent[*] role connectsTo
+end
+
+association xxx_ServiceComponent_persists between
+	ServiceComponent[0..1] role xxx_ServiceComponent_persists_src
+	Entity[*] role persists
+end
+
+association xxx_ServiceComponent_inArchitecture between
+	ServiceComponent[*] role xxx_ServiceComponent_inArchitecture_src
+	ServiceOrientedArchitecture[1] role inArchitecture
+end
+
+composition xxx_ServiceMethod_parameters between
+	ServiceMethod[0..1] role xxx_ServiceMethod_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_ServiceMethod_methodType between
+	ServiceMethod[*] role xxx_ServiceMethod_methodType_src
+	DataType[0..1] role methodType
+end
+
+composition xxx_ServiceMethod_postconditions between
+	ServiceMethod[0..1] role xxx_ServiceMethod_postconditions_src
+	OCLPostcondition[*] role postconditions
+end
+
+composition xxx_ServiceMethod_preconditions between
+	ServiceMethod[0..1] role xxx_ServiceMethod_preconditions_src
+	OCLPrecondition[*] role preconditions
+end
+
+association xxx_Parameter_parameterType between
+	Parameter[*] role xxx_Parameter_parameterType_src
+	DataType[1] role parameterType
+end
+
+association xxx_DataType_extendedBy between
+	DataType[*] role xxx_DataType_extendedBy_src
+	Entity[0..1] role extendedBy
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Entity_oclConstraints between
+	Entity[0..1] role xxx_Entity_oclConstraints_src
+	OCLDataConstraint[*] role oclConstraints
+end
+
+association xxx_Entity_superType between
+	Entity[*] role xxx_Entity_superType_src
+	DataType[0..1] role superType
+end
+
+association xxx_Entity_persistedBy between
+	Entity[*] role xxx_Entity_persistedBy_src
+	ServiceComponent[0..1] role persistedBy
+end
+
+association xxx_Entity_ID between
+	Entity[*] role xxx_Entity_ID_src
+	Attribute[1] role ID
+end
+
+association xxx_CollectionType_itemType between
+	CollectionType[*] role xxx_CollectionType_itemType_src
+	DataType[1] role itemType
+end
+
+association xxx_Attribute_attributeType between
+	Attribute[*] role xxx_Attribute_attributeType_src
+	DataType[1] role attributeType
+end
+
+association xxx_Attribute_attributeOf between
+	Attribute[*] role xxx_Attribute_attributeOf_src
+	Entity[1] role attributeOf
+end
+
+composition xxx_ServiceOrientedArchitecture_components between
+	ServiceOrientedArchitecture[0..1] role xxx_ServiceOrientedArchitecture_components_src
+	ServiceComponent[*] role components
+end
+
+composition xxx_ServiceOrientedArchitecture_dataTypes between
+	ServiceOrientedArchitecture[0..1] role xxx_ServiceOrientedArchitecture_dataTypes_src
+	DataType[*] role dataTypes
+end
+
+composition xxx_Enum_literals between
+	Enum[0..1] role xxx_Enum_literals_src
+	EnumLiteral[1..*] role literals
+end
+

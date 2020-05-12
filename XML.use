@@ -1,0 +1,42 @@
+model XML
+abstract class Node
+attributes
+	startLine : Integer
+	startColumn : Integer
+	endLine : Integer
+	endColumn : Integer
+	name : String
+	value : String
+operations
+end
+
+class Attribute<Node
+attributes
+operations
+end
+
+class Text<Node
+attributes
+operations
+end
+
+class Element<Node
+attributes
+operations
+end
+
+class Root<Element
+attributes
+operations
+end
+
+association xxx_Node_parent between
+	Node[*] role xxx_Node_parent_src
+	Element[0..1] role parent
+end
+
+composition xxx_Element_children between
+	Element[0..1] role xxx_Element_children_src
+	Node[*] role children
+end
+

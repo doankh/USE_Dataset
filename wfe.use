@@ -1,0 +1,229 @@
+model wfe
+class Arc
+attributes
+	name : String
+operations
+end
+
+class Workflow
+attributes
+	name : String
+operations
+	nextStep():Boolean
+end
+
+abstract class Activity<Node
+attributes
+	description : String
+operations
+end
+
+class Gate<Activity
+attributes
+operations
+	strategy():Boolean
+end
+
+class Custom<Activity
+attributes
+	path : String
+operations
+	strategy():Boolean
+end
+
+class Sleep<Activity
+attributes
+	seconds : Real
+operations
+	strategy():Boolean
+end
+
+class StartNode<Node
+attributes
+operations
+end
+
+class EndNode<Node
+attributes
+operations
+end
+
+class Synchbar<Activity
+attributes
+operations
+	strategy():Boolean
+end
+
+abstract class Resource
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Actor<Resource
+attributes
+	first_name : String
+	last_name : String
+operations
+end
+
+class Item<Resource
+attributes
+operations
+end
+
+abstract class Node
+attributes
+	name : String
+	success : Boolean
+	finished : Boolean
+	started : Boolean
+operations
+	strategy():Boolean
+	run()
+end
+
+class Confirm<Activity
+attributes
+operations
+	strategy():Boolean
+end
+
+abstract class Expression
+attributes
+	name : String
+operations
+	calculate():Boolean
+end
+
+abstract class Operator<Expression
+attributes
+operations
+end
+
+abstract class BinaryOperator<Operator
+attributes
+operations
+end
+
+class NOT<Operator
+attributes
+operations
+	calculate():Boolean
+end
+
+class AND<BinaryOperator
+attributes
+operations
+	calculate():Boolean
+end
+
+class OR<BinaryOperator
+attributes
+operations
+	calculate():Boolean
+end
+
+abstract class Value<Expression
+attributes
+operations
+end
+
+class SetVariable<Activity
+attributes
+operations
+	strategy():Boolean
+end
+
+class True<Value
+attributes
+operations
+end
+
+class Variable<Value
+attributes
+	value : Boolean
+operations
+end
+
+class False<Value
+attributes
+operations
+end
+
+association xxx_Arc_source between
+	Arc[*] role xxx_Arc_source_src
+	Node[1] role source
+end
+
+association xxx_Arc_target between
+	Arc[*] role xxx_Arc_target_src
+	Node[1] role target
+end
+
+composition xxx_Workflow_contains_arcs between
+	Workflow[0..1] role xxx_Workflow_contains_arcs_src
+	Arc[*] role contains_arcs
+end
+
+composition xxx_Workflow_has_resources between
+	Workflow[0..1] role xxx_Workflow_has_resources_src
+	Resource[*] role has_resources
+end
+
+composition xxx_Workflow_contains_nodes between
+	Workflow[0..1] role xxx_Workflow_contains_nodes_src
+	Node[3..*] role contains_nodes
+end
+
+composition xxx_Workflow_contains_expressions between
+	Workflow[0..1] role xxx_Workflow_contains_expressions_src
+	Expression[*] role contains_expressions
+end
+
+association xxx_Activity_has_assigned between
+	Activity[0..1] role xxx_Activity_has_assigned_src
+	Resource[*] role has_assigned
+end
+
+association xxx_Gate_condition between
+	Gate[*] role xxx_Gate_condition_src
+	Expression[1] role condition
+end
+
+association xxx_Node_outgoing between
+	Node[0..1] role xxx_Node_outgoing_src
+	Arc[*] role outgoing
+end
+
+association xxx_Node_incoming between
+	Node[0..1] role xxx_Node_incoming_src
+	Arc[*] role incoming
+end
+
+association xxx_Node_in_ between
+	Node[*] role xxx_Node_in__src
+	Workflow[1] role in_
+end
+
+composition xxx_Operator_lhs between
+	Operator[*] role xxx_Operator_lhs_src
+	Expression[1] role lhs
+end
+
+composition xxx_BinaryOperator_rhs between
+	BinaryOperator[*] role xxx_BinaryOperator_rhs_src
+	Expression[1] role rhs
+end
+
+association xxx_SetVariable_sets_variable between
+	SetVariable[*] role xxx_SetVariable_sets_variable_src
+	Variable[1] role sets_variable
+end
+
+association xxx_SetVariable_evaluated_expression between
+	SetVariable[*] role xxx_SetVariable_evaluated_expression_src
+	Expression[0..1] role evaluated_expression
+end
+

@@ -1,0 +1,152 @@
+model multirobotsystem
+class System
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Agent
+attributes
+	name : String
+	description : String
+	node : String
+operations
+end
+
+class Effector<IOElement
+attributes
+operations
+end
+
+class Sensor<IOElement
+attributes
+	name : String
+operations
+end
+
+class Transmitter<IOElement
+attributes
+	name : String
+operations
+end
+
+class TransitionFunction
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Behaviour
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Condition
+attributes
+	description : String
+operations
+end
+
+class InputBuffer<OpaqueData
+attributes
+	name : String
+	description : String
+operations
+end
+
+class OutputBuffer<OpaqueData
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class IOElement
+attributes
+	description : String
+operations
+end
+
+abstract class OpaqueData
+attributes
+	type : String
+	package : String
+operations
+end
+
+class InternalData<OpaqueData
+attributes
+	name : String
+	description : String
+operations
+end
+
+composition xxx_System_agents between
+	System[0..1] role xxx_System_agents_src
+	Agent[1..*] role agents
+end
+
+composition xxx_Agent_effector between
+	Agent[*] role xxx_Agent_effector_src
+	Effector[0..1] role effector
+end
+
+composition xxx_Agent_sensors between
+	Agent[0..1] role xxx_Agent_sensors_src
+	Sensor[*] role sensors
+end
+
+composition xxx_Agent_transmitters between
+	Agent[0..1] role xxx_Agent_transmitters_src
+	Transmitter[*] role transmitters
+end
+
+composition xxx_Agent_behaviours between
+	Agent[0..1] role xxx_Agent_behaviours_src
+	Behaviour[1..*] role behaviours
+end
+
+composition xxx_Agent_memory between
+	Agent[0..1] role xxx_Agent_memory_src
+	InternalData[*] role memory
+end
+
+association xxx_Transmitter_remote between
+	Transmitter[*] role xxx_Transmitter_remote_src
+	Agent[1] role remote
+end
+
+association xxx_TransitionFunction_stimuli between
+	TransitionFunction[0..1] role xxx_TransitionFunction_stimuli_src
+	InputBuffer[*] role stimuli
+end
+
+composition xxx_Behaviour_functions between
+	Behaviour[0..1] role xxx_Behaviour_functions_src
+	TransitionFunction[*] role functions
+end
+
+composition xxx_Behaviour_initial between
+	Behaviour[*] role xxx_Behaviour_initial_src
+	Condition[1] role initial
+end
+
+composition xxx_Behaviour_terminal between
+	Behaviour[*] role xxx_Behaviour_terminal_src
+	Condition[1] role terminal
+end
+
+composition xxx_IOElement_inputs between
+	IOElement[0..1] role xxx_IOElement_inputs_src
+	InputBuffer[*] role inputs
+end
+
+composition xxx_IOElement_outputs between
+	IOElement[0..1] role xxx_IOElement_outputs_src
+	OutputBuffer[*] role outputs
+end
+

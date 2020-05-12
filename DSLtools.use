@@ -1,0 +1,146 @@
+model DSL
+abstract class NamedElement
+attributes
+	name : String
+	identity : String
+operations
+end
+
+abstract class LoadedElement<Namespace
+attributes
+	isLoaded : Boolean
+operations
+end
+
+abstract class Namespace<NamedElement
+attributes
+	namespace : String
+operations
+end
+
+class DomainModel<LoadedElement
+attributes
+operations
+end
+
+abstract class Classifier<LoadedElement
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class Class<Classifier
+attributes
+	isSerializationRoot : Boolean
+operations
+end
+
+class Relationship<Classifier
+attributes
+	isEmbedding : Boolean
+operations
+end
+
+class Role<NamedElement
+attributes
+	min : Integer
+	max : Integer
+	isUnbounded : Boolean
+	accepts : String
+	isOrdered : Boolean
+	isNavigableFrom : Boolean
+	isPropertyGenerator : Boolean
+operations
+end
+
+class ValueProperty<NamedElement
+attributes
+operations
+end
+
+abstract class Type<Namespace
+attributes
+operations
+end
+
+class SimpleType<Type
+attributes
+operations
+end
+
+class EnumerationLiteral<NamedElement
+attributes
+	value : Integer
+operations
+end
+
+class Enumeration<Type
+attributes
+operations
+end
+
+composition xxx_DomainModel_classifiers between
+	DomainModel[0..1] role xxx_DomainModel_classifiers_src
+	Classifier[*] role classifiers
+end
+
+composition xxx_DomainModel_types between
+	DomainModel[0..1] role xxx_DomainModel_types_src
+	Type[*] role types
+end
+
+composition xxx_Classifier_properties between
+	Classifier[0..1] role xxx_Classifier_properties_src
+	ValueProperty[*] role properties
+end
+
+association xxx_Classifier_superType between
+	Classifier[*] role xxx_Classifier_superType_src
+	Classifier[0..1] role superType
+end
+
+association xxx_Classifier_subTypes between
+	Classifier[0..1] role xxx_Classifier_subTypes_src
+	Classifier[*] role subTypes
+end
+
+association xxx_Classifier_domainModel between
+	Classifier[*] role xxx_Classifier_domainModel_src
+	DomainModel[1] role domainModel
+end
+
+composition xxx_Relationship_roles between
+	Relationship[*] role xxx_Relationship_roles_src
+	Role[2] role roles
+end
+
+association xxx_Role_source between
+	Role[*] role xxx_Role_source_src
+	Classifier[1] role source
+end
+
+association xxx_Role_type between
+	Role[*] role xxx_Role_type_src
+	Classifier[1] role type
+end
+
+association xxx_Role_relation between
+	Role[*] role xxx_Role_relation_src
+	Relationship[1] role relation
+end
+
+association xxx_ValueProperty_owner between
+	ValueProperty[*] role xxx_ValueProperty_owner_src
+	Classifier[1] role owner
+end
+
+association xxx_ValueProperty_type between
+	ValueProperty[*] role xxx_ValueProperty_type_src
+	Type[1] role type
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	EnumerationLiteral[*] role literals
+end
+

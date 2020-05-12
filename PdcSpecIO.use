@@ -1,0 +1,220 @@
+model pdcSpecIO
+class IoPackage
+attributes
+	name : String
+	abbr : String
+	descr : String
+operations
+end
+
+class ParamProfile
+attributes
+	name : String
+	isrecord : Boolean
+operations
+end
+
+class ParamStruct
+attributes
+	name : String
+operations
+end
+
+class Item
+attributes
+	name : String
+	descr : String
+	sql : String
+operations
+end
+
+class Cursor<Item
+attributes
+	overload : Boolean
+	hold : Boolean
+	isDbkey : Boolean
+operations
+end
+
+class Fun<Item
+attributes
+	eofOK : Boolean
+	eofresult : String
+	okNull : Boolean
+	nokNull : Boolean
+operations
+end
+
+class Proc<Item
+attributes
+	eofOK : Boolean
+operations
+end
+
+class NameType
+attributes
+	name : String
+operations
+end
+
+class InParam
+attributes
+	name : String
+	okNull : Boolean
+operations
+end
+
+class OutParam
+attributes
+	name : String
+	okNull : Boolean
+	nokNull : Boolean
+operations
+end
+
+class ParamFull
+attributes
+	name : String
+	isIn : Boolean
+	isOut : Boolean
+	okNull : Boolean
+	nokNull : Boolean
+operations
+end
+
+class Type
+attributes
+	package : String
+	name : String
+operations
+end
+
+class DefVal
+attributes
+	package : String
+	name : String
+	defNull : Boolean
+	defFirst : Boolean
+operations
+end
+
+composition xxx_IoPackage_profiles between
+	IoPackage[0..1] role xxx_IoPackage_profiles_src
+	ParamProfile[*] role profiles
+end
+
+composition xxx_IoPackage_structures between
+	IoPackage[0..1] role xxx_IoPackage_structures_src
+	ParamStruct[*] role structures
+end
+
+composition xxx_IoPackage_items between
+	IoPackage[0..1] role xxx_IoPackage_items_src
+	Item[*] role items
+end
+
+composition xxx_ParamProfile_outParams between
+	ParamProfile[0..1] role xxx_ParamProfile_outParams_src
+	OutParam[*] role outParams
+end
+
+composition xxx_ParamStruct_type between
+	ParamStruct[*] role xxx_ParamStruct_type_src
+	Type[0..1] role type
+end
+
+composition xxx_ParamStruct_attrs between
+	ParamStruct[0..1] role xxx_ParamStruct_attrs_src
+	NameType[*] role attrs
+end
+
+composition xxx_Cursor_inParams between
+	Cursor[0..1] role xxx_Cursor_inParams_src
+	InParam[*] role inParams
+end
+
+composition xxx_Cursor_openOutParams between
+	Cursor[0..1] role xxx_Cursor_openOutParams_src
+	OutParam[*] role openOutParams
+end
+
+association xxx_Cursor_profile between
+	Cursor[*] role xxx_Cursor_profile_src
+	ParamProfile[0..1] role profile
+end
+
+composition xxx_Cursor_outParams between
+	Cursor[0..1] role xxx_Cursor_outParams_src
+	OutParam[*] role outParams
+end
+
+association xxx_Fun_resultstruct between
+	Fun[*] role xxx_Fun_resultstruct_src
+	ParamStruct[0..1] role resultstruct
+end
+
+composition xxx_Fun_resulttype between
+	Fun[*] role xxx_Fun_resulttype_src
+	Type[0..1] role resulttype
+end
+
+composition xxx_Fun_params between
+	Fun[0..1] role xxx_Fun_params_src
+	InParam[*] role params
+end
+
+composition xxx_Proc_params between
+	Proc[0..1] role xxx_Proc_params_src
+	ParamFull[*] role params
+end
+
+composition xxx_NameType_type between
+	NameType[*] role xxx_NameType_type_src
+	Type[0..1] role type
+end
+
+association xxx_InParam_struct between
+	InParam[*] role xxx_InParam_struct_src
+	ParamStruct[0..1] role struct
+end
+
+composition xxx_InParam_type between
+	InParam[*] role xxx_InParam_type_src
+	Type[0..1] role type
+end
+
+composition xxx_InParam_def between
+	InParam[*] role xxx_InParam_def_src
+	DefVal[0..1] role def
+end
+
+composition xxx_OutParam_type between
+	OutParam[*] role xxx_OutParam_type_src
+	Type[0..1] role type
+end
+
+composition xxx_OutParam_def between
+	OutParam[*] role xxx_OutParam_def_src
+	DefVal[0..1] role def
+end
+
+association xxx_ParamFull_struct between
+	ParamFull[*] role xxx_ParamFull_struct_src
+	ParamStruct[0..1] role struct
+end
+
+composition xxx_ParamFull_type between
+	ParamFull[*] role xxx_ParamFull_type_src
+	Type[0..1] role type
+end
+
+composition xxx_ParamFull_indef between
+	ParamFull[*] role xxx_ParamFull_indef_src
+	DefVal[0..1] role indef
+end
+
+composition xxx_ParamFull_outdef between
+	ParamFull[*] role xxx_ParamFull_outdef_src
+	DefVal[0..1] role outdef
+end
+

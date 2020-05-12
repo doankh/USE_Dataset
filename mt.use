@@ -1,0 +1,283 @@
+model mt
+class ResourceSet
+attributes
+operations
+end
+
+abstract class Resource
+attributes
+	name : String
+operations
+end
+
+abstract class ASTNode
+attributes
+	begin_ : Integer
+	end_ : Integer
+operations
+	getTemplate():Template
+end
+
+class Template<Resource
+attributes
+	beginTag : String
+	endTag : String
+operations
+end
+
+class Script<ASTNode
+attributes
+operations
+end
+
+class ScriptDescriptor<ASTNode
+attributes
+	name : String
+	type : String
+	description : String
+operations
+end
+
+class FilePath<ASTNode
+attributes
+operations
+end
+
+class Metamodel<Resource
+attributes
+	packageClass : String
+operations
+end
+
+class Service<Resource
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+	return : String
+operations
+end
+
+class Parameter
+attributes
+	type : String
+operations
+end
+
+abstract class Expression<ASTNode
+attributes
+operations
+end
+
+class CallSet<Expression
+attributes
+operations
+end
+
+class Call<ASTNode
+attributes
+	name : String
+	prefix : String
+operations
+end
+
+class Not<Expression
+attributes
+operations
+end
+
+class Operator<Expression
+attributes
+	operator : String
+operations
+end
+
+class Parenthesis<Expression
+attributes
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	value : Integer
+operations
+end
+
+class DoubleLiteral<Literal
+attributes
+	value : Real
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	value : Boolean
+operations
+end
+
+class NullLiteral<Literal
+attributes
+operations
+end
+
+abstract class Statement<ASTNode
+attributes
+operations
+end
+
+class Comment<Statement
+attributes
+	value : String
+operations
+end
+
+class If<Statement
+attributes
+operations
+end
+
+class For<Statement
+attributes
+operations
+end
+
+class Feature<Statement
+attributes
+operations
+end
+
+class Text<Statement
+attributes
+	value : String
+operations
+end
+
+composition xxx_ResourceSet_resources between
+	ResourceSet[0..1] role xxx_ResourceSet_resources_src
+	Resource[*] role resources
+end
+
+association xxx_Template_imports between
+	Template[0..1] role xxx_Template_imports_src
+	Resource[*] role imports
+end
+
+composition xxx_Template_scripts between
+	Template[0..1] role xxx_Template_scripts_src
+	Script[*] role scripts
+end
+
+composition xxx_Script_descriptor between
+	Script[*] role xxx_Script_descriptor_src
+	ScriptDescriptor[1] role descriptor
+end
+
+composition xxx_Script_statements between
+	Script[0..1] role xxx_Script_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ScriptDescriptor_file between
+	ScriptDescriptor[*] role xxx_ScriptDescriptor_file_src
+	FilePath[0..1] role file
+end
+
+composition xxx_ScriptDescriptor_post_ between
+	ScriptDescriptor[*] role xxx_ScriptDescriptor_post__src
+	Expression[0..1] role post_
+end
+
+composition xxx_FilePath_statements between
+	FilePath[0..1] role xxx_FilePath_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Service_methods between
+	Service[0..1] role xxx_Service_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_CallSet_calls between
+	CallSet[0..1] role xxx_CallSet_calls_src
+	Call[*] role calls
+end
+
+composition xxx_Call_arguments between
+	Call[0..1] role xxx_Call_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_Call_filter between
+	Call[*] role xxx_Call_filter_src
+	Expression[0..1] role filter
+end
+
+composition xxx_Not_expression between
+	Not[*] role xxx_Not_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_Operator_operands between
+	Operator[0..1] role xxx_Operator_operands_src
+	Expression[2..*] role operands
+end
+
+composition xxx_Parenthesis_expression between
+	Parenthesis[*] role xxx_Parenthesis_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_If_condition between
+	If[*] role xxx_If_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_If_thenStatements between
+	If[0..1] role xxx_If_thenStatements_src
+	Statement[*] role thenStatements
+end
+
+composition xxx_If_elseStatements between
+	If[0..1] role xxx_If_elseStatements_src
+	Statement[*] role elseStatements
+end
+
+composition xxx_If_elseIf between
+	If[0..1] role xxx_If_elseIf_src
+	If[*] role elseIf
+end
+
+composition xxx_For_iterator between
+	For[*] role xxx_For_iterator_src
+	Expression[1] role iterator
+end
+
+composition xxx_For_statements between
+	For[0..1] role xxx_For_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Feature_expression between
+	Feature[*] role xxx_Feature_expression_src
+	Expression[1] role expression
+end
+

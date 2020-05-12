@@ -1,0 +1,165 @@
+model itculiacan
+enum Nombramiento{
+default
+}
+
+class Alumno
+attributes
+	nombre : String
+	numeroControl : Integer
+operations
+end
+
+class Generacion
+attributes
+	fechaInicio : String
+	fechaFin : String
+operations
+end
+
+class Grupo
+attributes
+	clave : Integer
+operations
+end
+
+class Aula
+attributes
+	clave : Integer
+	capacidad : Integer
+operations
+end
+
+class Materia
+attributes
+	clave : Integer
+	nombre : String
+operations
+end
+
+class Profesor
+attributes
+	clave : Integer
+	nombre : String
+	numeroMaterias : Integer
+	nombramiento : Nombramiento
+operations
+end
+
+class PlanEstudio
+attributes
+	clave : Integer
+	nombre : String
+operations
+end
+
+class Universidad
+attributes
+operations
+end
+
+association xxx_Alumno_generacion between
+	Alumno[*] role xxx_Alumno_generacion_src
+	Generacion[1] role generacion
+end
+
+association xxx_Alumno_cursa between
+	Alumno[*] role xxx_Alumno_cursa_src
+	PlanEstudio[1] role cursa
+end
+
+association xxx_Alumno_grupos between
+	Alumno[0..1] role xxx_Alumno_grupos_src
+	Grupo[1..*] role grupos
+end
+
+association xxx_Generacion_alumnos between
+	Generacion[0..1] role xxx_Generacion_alumnos_src
+	Alumno[1..*] role alumnos
+end
+
+association xxx_Grupo_aula between
+	Grupo[*] role xxx_Grupo_aula_src
+	Aula[1] role aula
+end
+
+association xxx_Grupo_materia between
+	Grupo[*] role xxx_Grupo_materia_src
+	Materia[1] role materia
+end
+
+association xxx_Grupo_profesor between
+	Grupo[*] role xxx_Grupo_profesor_src
+	Profesor[1] role profesor
+end
+
+association xxx_Grupo_alumnos between
+	Grupo[0..1] role xxx_Grupo_alumnos_src
+	Alumno[1..*] role alumnos
+end
+
+association xxx_Aula_grupos between
+	Aula[0..1] role xxx_Aula_grupos_src
+	Grupo[1..*] role grupos
+end
+
+association xxx_Materia_grupos between
+	Materia[0..1] role xxx_Materia_grupos_src
+	Grupo[1..*] role grupos
+end
+
+association xxx_Materia_planesEstudio between
+	Materia[0..1] role xxx_Materia_planesEstudio_src
+	PlanEstudio[1..*] role planesEstudio
+end
+
+association xxx_Profesor_grupos between
+	Profesor[0..1] role xxx_Profesor_grupos_src
+	Grupo[1..*] role grupos
+end
+
+association xxx_PlanEstudio_alumnos between
+	PlanEstudio[0..1] role xxx_PlanEstudio_alumnos_src
+	Alumno[1..*] role alumnos
+end
+
+association xxx_PlanEstudio_materias between
+	PlanEstudio[0..1] role xxx_PlanEstudio_materias_src
+	Materia[1..*] role materias
+end
+
+composition xxx_Universidad_refProfesor between
+	Universidad[0..1] role xxx_Universidad_refProfesor_src
+	Profesor[1..*] role refProfesor
+end
+
+composition xxx_Universidad_refAulas between
+	Universidad[0..1] role xxx_Universidad_refAulas_src
+	Aula[1..*] role refAulas
+end
+
+composition xxx_Universidad_refPlanEstudio between
+	Universidad[0..1] role xxx_Universidad_refPlanEstudio_src
+	PlanEstudio[1..*] role refPlanEstudio
+end
+
+composition xxx_Universidad_refAlumno between
+	Universidad[0..1] role xxx_Universidad_refAlumno_src
+	Alumno[1..*] role refAlumno
+end
+
+composition xxx_Universidad_refGeneracion between
+	Universidad[0..1] role xxx_Universidad_refGeneracion_src
+	Generacion[1..*] role refGeneracion
+end
+
+composition xxx_Universidad_refMateria between
+	Universidad[0..1] role xxx_Universidad_refMateria_src
+	Materia[1..*] role refMateria
+end
+
+composition xxx_Universidad_refGrupo between
+	Universidad[0..1] role xxx_Universidad_refGrupo_src
+	Grupo[1..*] role refGrupo
+end
+

@@ -1,0 +1,26 @@
+model roostructure
+class EClass
+attributes
+operations
+end
+
+class eLiterals
+attributes
+operations
+end
+
+class EEnum
+attributes
+operations
+end
+
+class EAttribute
+attributes
+operations
+end
+
+class EReference
+attributes
+operations
+end
+

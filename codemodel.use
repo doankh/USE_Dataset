@@ -1,0 +1,103 @@
+model codemodel
+abstract class CMElement
+attributes
+	name : String
+operations
+end
+
+class CodeModel<CMElement
+attributes
+operations
+end
+
+class Variable<CMElement
+attributes
+operations
+end
+
+class D<CMElement
+attributes
+operations
+end
+
+class E<CMElement
+attributes
+operations
+end
+
+abstract class Expression<CMElement
+attributes
+operations
+end
+
+class VarExp<Expression
+attributes
+operations
+end
+
+class BinExp<Expression
+attributes
+	operator : String
+operations
+end
+
+abstract class Statement<CMElement
+attributes
+operations
+end
+
+class AsgnStmt<Statement
+attributes
+operations
+end
+
+class CompStmt<Statement
+attributes
+operations
+end
+
+composition xxx_CodeModel_vars between
+	CodeModel[0..1] role xxx_CodeModel_vars_src
+	Variable[*] role vars
+end
+
+composition xxx_CodeModel_stmts between
+	CodeModel[0..1] role xxx_CodeModel_stmts_src
+	Statement[*] role stmts
+end
+
+association xxx_D_refE between
+	D[0..1] role xxx_D_refE_src
+	E[*] role refE
+end
+
+association xxx_VarExp_variable between
+	VarExp[*] role xxx_VarExp_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_BinExp_left between
+	BinExp[*] role xxx_BinExp_left_src
+	Expression[1] role left
+end
+
+composition xxx_BinExp_right between
+	BinExp[*] role xxx_BinExp_right_src
+	Expression[1] role right
+end
+
+composition xxx_AsgnStmt_leftExp between
+	AsgnStmt[*] role xxx_AsgnStmt_leftExp_src
+	Expression[1] role leftExp
+end
+
+composition xxx_AsgnStmt_rightExp between
+	AsgnStmt[*] role xxx_AsgnStmt_rightExp_src
+	Expression[1] role rightExp
+end
+
+composition xxx_CompStmt_statements between
+	CompStmt[0..1] role xxx_CompStmt_statements_src
+	Statement[*] role statements
+end
+

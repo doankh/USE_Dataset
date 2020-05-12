@@ -1,0 +1,130 @@
+model ServiceDsl
+enum MethodType{
+default
+}
+
+enum CollectionType{
+default
+}
+
+class ServiceModel<ModelElement
+attributes
+operations
+end
+
+class ModelElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class DtoReference<ModelElement
+attributes
+	modelname : String
+operations
+end
+
+class CustomMethod<ServiceMethod
+attributes
+operations
+end
+
+class CrudService<ModelElement
+attributes
+operations
+end
+
+class SpecialMethod<ServiceMethod
+attributes
+operations
+end
+
+class ServiceMethod<ModelElement
+attributes
+	type : MethodType
+operations
+end
+
+class Parameter<ModelElement
+attributes
+	collection : CollectionType
+operations
+end
+
+class AssociationMethod<ServiceMethod
+attributes
+	rolename : String
+operations
+end
+
+composition xxx_ServiceModel_methods between
+	ServiceModel[0..1] role xxx_ServiceModel_methods_src
+	ServiceMethod[*] role methods
+end
+
+composition xxx_ServiceModel_dtoReferences between
+	ServiceModel[0..1] role xxx_ServiceModel_dtoReferences_src
+	DtoReference[*] role dtoReferences
+end
+
+composition xxx_ServiceModel_crudServices between
+	ServiceModel[0..1] role xxx_ServiceModel_crudServices_src
+	CrudService[*] role crudServices
+end
+
+association xxx_DtoReference_model_ between
+	DtoReference[*] role xxx_DtoReference_model__src
+	ServiceModel[0..1] role model_
+end
+
+composition xxx_CustomMethod_outParameter between
+	CustomMethod[*] role xxx_CustomMethod_outParameter_src
+	Parameter[0..1] role outParameter
+end
+
+composition xxx_CustomMethod_inParameters between
+	CustomMethod[0..1] role xxx_CustomMethod_inParameters_src
+	Parameter[*] role inParameters
+end
+
+association xxx_CrudService_dto between
+	CrudService[*] role xxx_CrudService_dto_src
+	DtoReference[0..1] role dto
+end
+
+association xxx_CrudService_model_ between
+	CrudService[*] role xxx_CrudService_model__src
+	ServiceModel[0..1] role model_
+end
+
+association xxx_SpecialMethod_dto between
+	SpecialMethod[*] role xxx_SpecialMethod_dto_src
+	DtoReference[0..1] role dto
+end
+
+association xxx_ServiceMethod_model_ between
+	ServiceMethod[*] role xxx_ServiceMethod_model__src
+	ServiceModel[0..1] role model_
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	DtoReference[0..1] role type
+end
+
+association xxx_Parameter_method between
+	Parameter[*] role xxx_Parameter_method_src
+	CustomMethod[0..1] role method
+end
+
+association xxx_AssociationMethod_main between
+	AssociationMethod[*] role xxx_AssociationMethod_main_src
+	DtoReference[0..1] role main
+end
+
+association xxx_AssociationMethod_part between
+	AssociationMethod[*] role xxx_AssociationMethod_part_src
+	DtoReference[0..1] role part
+end
+

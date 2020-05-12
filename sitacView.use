@@ -1,0 +1,148 @@
+model sitacview
+class MoyenClipboard<View
+attributes
+operations
+end
+
+class MapWidget<View,DragTarget
+attributes
+	actualZoomLevel : String
+	actualLat : String
+	actualLong : String
+operations
+end
+
+class TabView<View
+attributes
+operations
+end
+
+class View
+attributes
+operations
+end
+
+class TitledView<View
+attributes
+	name : String
+operations
+end
+
+class LibToolBox<ToolBox
+attributes
+operations
+end
+
+class MapItemPoint<MapItem
+attributes
+operations
+end
+
+class MapLine<MapItem
+attributes
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+class ToolBox<View
+attributes
+operations
+end
+
+class MapItem<Selectable
+attributes
+operations
+end
+
+class MapZone<MapItem
+attributes
+operations
+end
+
+class MapPoint
+attributes
+	lat : String
+	long : String
+operations
+end
+
+abstract class Selectable
+attributes
+	selected : Boolean
+operations
+end
+
+class ItemType<Draggable
+attributes
+operations
+end
+
+class PropertyEditor<View
+attributes
+operations
+end
+
+class Draggable
+attributes
+operations
+end
+
+class DragTarget
+attributes
+operations
+end
+
+class ChatPanel<View
+attributes
+operations
+end
+
+composition xxx_MapWidget_items between
+	MapWidget[0..1] role xxx_MapWidget_items_src
+	MapItem[*] role items
+end
+
+composition xxx_TabView_childs between
+	TabView[0..1] role xxx_TabView_childs_src
+	TitledView[*] role childs
+end
+
+association xxx_TabView_selected between
+	TabView[*] role xxx_TabView_selected_src
+	TitledView[0..1] role selected
+end
+
+composition xxx_LibToolBox_library between
+	LibToolBox[0..1] role xxx_LibToolBox_library_src
+	Library[*] role library
+end
+
+composition xxx_MapItemPoint_pos between
+	MapItemPoint[*] role xxx_MapItemPoint_pos_src
+	MapPoint[0..1] role pos
+end
+
+composition xxx_MapLine_points between
+	MapLine[0..1] role xxx_MapLine_points_src
+	MapPoint[*] role points
+end
+
+association xxx_Library_items between
+	Library[0..1] role xxx_Library_items_src
+	ItemType[*] role items
+end
+
+composition xxx_MapZone_points between
+	MapZone[0..1] role xxx_MapZone_points_src
+	MapPoint[*] role points
+end
+
+association xxx_PropertyEditor_element between
+	PropertyEditor[*] role xxx_PropertyEditor_element_src
+	Selectable[0..1] role element
+end
+

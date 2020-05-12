@@ -1,0 +1,153 @@
+model evm
+abstract class ModelElement
+attributes
+	name : String
+operations
+end
+
+class Navigationpath<ModelElement
+attributes
+operations
+end
+
+abstract class DesignPattern<ModelElement
+attributes
+operations
+end
+
+class EyeViewModel
+attributes
+operations
+end
+
+class Formular<DesignPattern
+attributes
+operations
+end
+
+class PopUp<DesignPattern
+attributes
+operations
+end
+
+class Report<DesignPattern
+attributes
+operations
+end
+
+abstract class Layout
+attributes
+operations
+end
+
+class VerticalLayout<Layout
+attributes
+operations
+end
+
+class HorizontalLayout<Layout
+attributes
+operations
+end
+
+class Button<InteractionElement
+attributes
+	text : String
+	img : String
+operations
+end
+
+class Label<InteractionElement
+attributes
+	text : String
+	img : String
+operations
+end
+
+class InputField<InteractionElement
+attributes
+operations
+end
+
+abstract class InteractionElement
+attributes
+	name : String
+operations
+end
+
+class Service
+attributes
+	className : String
+	methodName : String
+operations
+end
+
+class ProjectMetaData
+attributes
+	projectName : String
+	groupId : String
+	artifactId : String
+	version : String
+operations
+end
+
+composition xxx_DesignPattern_layouts between
+	DesignPattern[*] role xxx_DesignPattern_layouts_src
+	Layout[1] role layouts
+end
+
+composition xxx_EyeViewModel_elements between
+	EyeViewModel[0..1] role xxx_EyeViewModel_elements_src
+	ModelElement[1..*] role elements
+end
+
+composition xxx_EyeViewModel_projectData between
+	EyeViewModel[*] role xxx_EyeViewModel_projectData_src
+	ProjectMetaData[1] role projectData
+end
+
+composition xxx_Formular_labels between
+	Formular[0..1] role xxx_Formular_labels_src
+	Label[*] role labels
+end
+
+composition xxx_Formular_buttons between
+	Formular[0..1] role xxx_Formular_buttons_src
+	Button[*] role buttons
+end
+
+composition xxx_Formular_inputs between
+	Formular[0..1] role xxx_Formular_inputs_src
+	InputField[*] role inputs
+end
+
+association xxx_Layout_content between
+	Layout[0..1] role xxx_Layout_content_src
+	InteractionElement[*] role content
+end
+
+composition xxx_Layout_sublayout between
+	Layout[0..1] role xxx_Layout_sublayout_src
+	Layout[*] role sublayout
+end
+
+composition xxx_Button_validationService between
+	Button[*] role xxx_Button_validationService_src
+	Service[0..1] role validationService
+end
+
+composition xxx_Button_actionService between
+	Button[*] role xxx_Button_actionService_src
+	Service[1] role actionService
+end
+
+association xxx_Label_button between
+	Label[*] role xxx_Label_button_src
+	Button[0..1] role button
+end
+
+composition xxx_InputField_validationService between
+	InputField[*] role xxx_InputField_validationService_src
+	Service[0..1] role validationService
+end
+

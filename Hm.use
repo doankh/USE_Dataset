@@ -1,0 +1,977 @@
+model hm
+class BackprojectionType
+attributes
+	imageCentre : String
+operations
+end
+
+class BeamlineUserType
+attributes
+	beamlineName : String
+	year : String
+	month : String
+	date : String
+	visitNumber : String
+	inputDataFolder : String
+	inputScanFolder : String
+	outputDataFolder : String
+	outputScanFolder : String
+	done : String
+operations
+end
+
+class BitsTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class ByteOrderType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class CirclesType
+attributes
+	comm : String
+operations
+end
+
+class ClockwiseRotationType
+attributes
+	value : String
+	done : String
+	info : String
+operations
+end
+
+class CoordinateSystemType
+attributes
+	slice : String
+	done : String
+operations
+end
+
+class DarkFieldType
+attributes
+	valueBefore : String
+	valueAfter : String
+	fileBefore : String
+	fileAfter : String
+	fileProfile : String
+operations
+end
+
+class DefaultXmlType
+attributes
+	value : String
+	done : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class ExtrapolationTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class FBPType
+attributes
+	gPUDeviceNumber : String
+	logFile : String
+operations
+end
+
+class FilterType
+attributes
+	bandwidth : String
+	pixelSize : String
+operations
+end
+
+class FirstImageIndexType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class FlatDarkFieldsType
+attributes
+operations
+end
+
+class FlatFieldType
+attributes
+	valueBefore : String
+	valueAfter : String
+	fileBefore : String
+	fileAfter : String
+	fileProfile : String
+operations
+end
+
+class GapType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class HighPeaksAfterColumnsType
+attributes
+	numberPixels : String
+	jump : String
+operations
+end
+
+class HighPeaksAfterRowsType
+attributes
+	numberPixels : String
+	jump : String
+operations
+end
+
+class HighPeaksBeforeType
+attributes
+	numberPixels : String
+	jump : String
+operations
+end
+
+class HMxmlType
+attributes
+operations
+end
+
+class ImageFirstType
+attributes
+	value : String
+	done : String
+operations
+end
+
+class ImageLastType
+attributes
+	value : String
+	done : String
+operations
+end
+
+class ImageStepType
+attributes
+	value : String
+	done : String
+operations
+end
+
+class InputDataType
+attributes
+	folder : String
+	prefix : String
+	suffix : String
+	extension : String
+	fileFirst : String
+	fileLast : String
+	fileStep : String
+	imagesPerFile : String
+	valueMin : String
+	valueMax : String
+	pixelParam : String
+operations
+end
+
+class IntensityType
+attributes
+	columnLeft : String
+	columnRight : String
+	zeroLeft : String
+	zeroRight : String
+operations
+end
+
+class InterpolationType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class MemorySizeMaxType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class MemorySizeMinType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class MissedProjectionsType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class MissedProjectionsTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class NameType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class NODType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class NormalisationType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class NumSeriesType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class OffsetType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class OrientationType
+attributes
+	value : String
+	done : String
+	info : String
+operations
+end
+
+class OutputDataType
+attributes
+	folder : String
+	prefix : String
+	suffix : String
+	extension : String
+	nOD : String
+	fileFirst : String
+	fileStep : String
+	bits : String
+	valueMin : String
+	valueMax : String
+operations
+end
+
+class OutputWidthTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class PolarCartesianInterpolationType
+attributes
+	value : String
+	done : String
+	info : String
+operations
+end
+
+class PreprocessingType
+attributes
+operations
+end
+
+class ProfileTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class ProfileTypeType1
+attributes
+	value : String
+	info : String
+operations
+end
+
+class RawType
+attributes
+	bits : String
+	xlen : String
+	ylen : String
+	zlen : String
+	done : String
+operations
+end
+
+class RestrictionsType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class RestrictionsType1
+attributes
+	value : String
+	info : String
+operations
+end
+
+class RingArtefactsType
+attributes
+	parameterN : String
+	parameterR : String
+operations
+end
+
+class ROIType
+attributes
+	xmin : String
+	xmax : String
+	ymin : String
+	ymax : String
+	outputWidth : String
+	angle : String
+operations
+end
+
+class RotationAngleEndPointsType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class RotationAngleTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class ScaleTypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class ShapeType
+attributes
+	value : String
+	done : String
+	info : String
+operations
+end
+
+class ShapeType1
+attributes
+	value : String
+	info : String
+operations
+end
+
+class StateType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TiltType
+attributes
+	xTilt : String
+	zTilt : String
+	done : String
+operations
+end
+
+class TransformType
+attributes
+	rotationAngle : String
+	reCentreAngle : String
+	reCentreRadius : String
+	cropTop : String
+	cropBottom : String
+	cropLeft : String
+	cropRight : String
+	scaleWidth : String
+	scaleHeight : String
+	extrapolationPixels : String
+	extrapolationWidth : String
+operations
+end
+
+class TypeType
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType1
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType2
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType3
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType4
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType5
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType6
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType7
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType8
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType9
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType10
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType11
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType12
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType13
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType14
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType15
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType16
+attributes
+	value : String
+	info : String
+operations
+end
+
+class TypeType17
+attributes
+	value : String
+	info : String
+operations
+end
+
+class ValueMaxType
+attributes
+	percent : String
+	pixel : String
+operations
+end
+
+class ValueMinType
+attributes
+	percent : String
+	pixel : String
+operations
+end
+
+class ValueStepType
+attributes
+	percent : String
+	pixel : String
+operations
+end
+
+class WindowNameType
+attributes
+	value : String
+	info : String
+operations
+end
+
+composition xxx_BackprojectionType_filter between
+	BackprojectionType[*] role xxx_BackprojectionType_filter_src
+	FilterType[0..1] role filter
+end
+
+composition xxx_BackprojectionType_clockwiseRotation between
+	BackprojectionType[*] role xxx_BackprojectionType_clockwiseRotation_src
+	ClockwiseRotationType[0..1] role clockwiseRotation
+end
+
+composition xxx_BackprojectionType_tilt between
+	BackprojectionType[*] role xxx_BackprojectionType_tilt_src
+	TiltType[0..1] role tilt
+end
+
+composition xxx_BackprojectionType_coordinateSystem between
+	BackprojectionType[*] role xxx_BackprojectionType_coordinateSystem_src
+	CoordinateSystemType[0..1] role coordinateSystem
+end
+
+composition xxx_BackprojectionType_circles between
+	BackprojectionType[*] role xxx_BackprojectionType_circles_src
+	CirclesType[0..1] role circles
+end
+
+composition xxx_BackprojectionType_rOI between
+	BackprojectionType[*] role xxx_BackprojectionType_rOI_src
+	ROIType[0..1] role rOI
+end
+
+composition xxx_BackprojectionType_polarCartesianInterpolation between
+	BackprojectionType[*] role xxx_BackprojectionType_polarCartesianInterpolation_src
+	PolarCartesianInterpolationType[0..1] role polarCartesianInterpolation
+end
+
+composition xxx_BeamlineUserType_type between
+	BeamlineUserType[*] role xxx_BeamlineUserType_type_src
+	TypeType17[0..1] role type
+end
+
+composition xxx_CirclesType_valueMin between
+	CirclesType[*] role xxx_CirclesType_valueMin_src
+	ValueMinType[0..1] role valueMin
+end
+
+composition xxx_CirclesType_valueMax between
+	CirclesType[*] role xxx_CirclesType_valueMax_src
+	ValueMaxType[0..1] role valueMax
+end
+
+composition xxx_CirclesType_valueStep between
+	CirclesType[*] role xxx_CirclesType_valueStep_src
+	ValueStepType[0..1] role valueStep
+end
+
+composition xxx_CoordinateSystemType_type between
+	CoordinateSystemType[*] role xxx_CoordinateSystemType_type_src
+	TypeType9[0..1] role type
+end
+
+composition xxx_DarkFieldType_type between
+	DarkFieldType[*] role xxx_DarkFieldType_type_src
+	TypeType13[0..1] role type
+end
+
+composition xxx_DarkFieldType_profileType between
+	DarkFieldType[*] role xxx_DarkFieldType_profileType_src
+	ProfileTypeType[0..1] role profileType
+end
+
+composition xxx_DocumentRoot_hMxml between
+	DocumentRoot[*] role xxx_DocumentRoot_hMxml_src
+	HMxmlType[*] role hMxml
+end
+
+composition xxx_FBPType_defaultXml between
+	FBPType[*] role xxx_FBPType_defaultXml_src
+	DefaultXmlType[0..1] role defaultXml
+end
+
+composition xxx_FBPType_beamlineUser between
+	FBPType[*] role xxx_FBPType_beamlineUser_src
+	BeamlineUserType[0..1] role beamlineUser
+end
+
+composition xxx_FBPType_inputData between
+	FBPType[*] role xxx_FBPType_inputData_src
+	InputDataType[0..1] role inputData
+end
+
+composition xxx_FBPType_flatDarkFields between
+	FBPType[*] role xxx_FBPType_flatDarkFields_src
+	FlatDarkFieldsType[0..1] role flatDarkFields
+end
+
+composition xxx_FBPType_preprocessing between
+	FBPType[*] role xxx_FBPType_preprocessing_src
+	PreprocessingType[0..1] role preprocessing
+end
+
+composition xxx_FBPType_transform between
+	FBPType[*] role xxx_FBPType_transform_src
+	TransformType[0..1] role transform
+end
+
+composition xxx_FBPType_backprojection between
+	FBPType[*] role xxx_FBPType_backprojection_src
+	BackprojectionType[0..1] role backprojection
+end
+
+composition xxx_FBPType_outputData between
+	FBPType[*] role xxx_FBPType_outputData_src
+	OutputDataType[0..1] role outputData
+end
+
+composition xxx_FilterType_type between
+	FilterType[*] role xxx_FilterType_type_src
+	TypeType7[0..1] role type
+end
+
+composition xxx_FilterType_name between
+	FilterType[*] role xxx_FilterType_name_src
+	NameType[0..1] role name
+end
+
+composition xxx_FilterType_windowName between
+	FilterType[*] role xxx_FilterType_windowName_src
+	WindowNameType[0..1] role windowName
+end
+
+composition xxx_FilterType_normalisation between
+	FilterType[*] role xxx_FilterType_normalisation_src
+	NormalisationType[0..1] role normalisation
+end
+
+composition xxx_FlatDarkFieldsType_flatField between
+	FlatDarkFieldsType[*] role xxx_FlatDarkFieldsType_flatField_src
+	FlatFieldType[0..1] role flatField
+end
+
+composition xxx_FlatDarkFieldsType_darkField between
+	FlatDarkFieldsType[*] role xxx_FlatDarkFieldsType_darkField_src
+	DarkFieldType[0..1] role darkField
+end
+
+composition xxx_FlatFieldType_type between
+	FlatFieldType[*] role xxx_FlatFieldType_type_src
+	TypeType15[0..1] role type
+end
+
+composition xxx_FlatFieldType_profileType between
+	FlatFieldType[*] role xxx_FlatFieldType_profileType_src
+	ProfileTypeType1[0..1] role profileType
+end
+
+composition xxx_HighPeaksAfterColumnsType_type between
+	HighPeaksAfterColumnsType[*] role xxx_HighPeaksAfterColumnsType_type_src
+	TypeType10[0..1] role type
+end
+
+composition xxx_HighPeaksAfterRowsType_type between
+	HighPeaksAfterRowsType[*] role xxx_HighPeaksAfterRowsType_type_src
+	TypeType12[0..1] role type
+end
+
+composition xxx_HighPeaksBeforeType_type between
+	HighPeaksBeforeType[*] role xxx_HighPeaksBeforeType_type_src
+	TypeType1[0..1] role type
+end
+
+composition xxx_HMxmlType_fBP between
+	HMxmlType[*] role xxx_HMxmlType_fBP_src
+	FBPType[0..1] role fBP
+end
+
+composition xxx_InputDataType_nOD between
+	InputDataType[*] role xxx_InputDataType_nOD_src
+	NODType[0..1] role nOD
+end
+
+composition xxx_InputDataType_memorySizeMax between
+	InputDataType[*] role xxx_InputDataType_memorySizeMax_src
+	MemorySizeMaxType[0..1] role memorySizeMax
+end
+
+composition xxx_InputDataType_memorySizeMin between
+	InputDataType[*] role xxx_InputDataType_memorySizeMin_src
+	MemorySizeMinType[0..1] role memorySizeMin
+end
+
+composition xxx_InputDataType_orientation between
+	InputDataType[*] role xxx_InputDataType_orientation_src
+	OrientationType[0..1] role orientation
+end
+
+composition xxx_InputDataType_imageFirst between
+	InputDataType[*] role xxx_InputDataType_imageFirst_src
+	ImageFirstType[0..1] role imageFirst
+end
+
+composition xxx_InputDataType_imageLast between
+	InputDataType[*] role xxx_InputDataType_imageLast_src
+	ImageLastType[0..1] role imageLast
+end
+
+composition xxx_InputDataType_imageStep between
+	InputDataType[*] role xxx_InputDataType_imageStep_src
+	ImageStepType[0..1] role imageStep
+end
+
+composition xxx_InputDataType_raw between
+	InputDataType[*] role xxx_InputDataType_raw_src
+	RawType[0..1] role raw
+end
+
+composition xxx_InputDataType_firstImageIndex between
+	InputDataType[*] role xxx_InputDataType_firstImageIndex_src
+	FirstImageIndexType[0..1] role firstImageIndex
+end
+
+composition xxx_InputDataType_restrictions between
+	InputDataType[*] role xxx_InputDataType_restrictions_src
+	RestrictionsType1[0..1] role restrictions
+end
+
+composition xxx_InputDataType_type between
+	InputDataType[*] role xxx_InputDataType_type_src
+	TypeType14[0..1] role type
+end
+
+composition xxx_InputDataType_shape between
+	InputDataType[*] role xxx_InputDataType_shape_src
+	ShapeType1[0..1] role shape
+end
+
+composition xxx_IntensityType_type between
+	IntensityType[*] role xxx_IntensityType_type_src
+	TypeType6[0..1] role type
+end
+
+composition xxx_OutputDataType_type between
+	OutputDataType[*] role xxx_OutputDataType_type_src
+	TypeType2[0..1] role type
+end
+
+composition xxx_OutputDataType_state between
+	OutputDataType[*] role xxx_OutputDataType_state_src
+	StateType[0..1] role state
+end
+
+composition xxx_OutputDataType_bitsType between
+	OutputDataType[*] role xxx_OutputDataType_bitsType_src
+	BitsTypeType[0..1] role bitsType
+end
+
+composition xxx_OutputDataType_restrictions between
+	OutputDataType[*] role xxx_OutputDataType_restrictions_src
+	RestrictionsType[0..1] role restrictions
+end
+
+composition xxx_OutputDataType_shape between
+	OutputDataType[*] role xxx_OutputDataType_shape_src
+	ShapeType[0..1] role shape
+end
+
+composition xxx_PreprocessingType_highPeaksBefore between
+	PreprocessingType[*] role xxx_PreprocessingType_highPeaksBefore_src
+	HighPeaksBeforeType[0..1] role highPeaksBefore
+end
+
+composition xxx_PreprocessingType_ringArtefacts between
+	PreprocessingType[*] role xxx_PreprocessingType_ringArtefacts_src
+	RingArtefactsType[0..1] role ringArtefacts
+end
+
+composition xxx_PreprocessingType_intensity between
+	PreprocessingType[*] role xxx_PreprocessingType_intensity_src
+	IntensityType[0..1] role intensity
+end
+
+composition xxx_PreprocessingType_highPeaksAfterRows between
+	PreprocessingType[*] role xxx_PreprocessingType_highPeaksAfterRows_src
+	HighPeaksAfterRowsType[0..1] role highPeaksAfterRows
+end
+
+composition xxx_PreprocessingType_highPeaksAfterColumns between
+	PreprocessingType[*] role xxx_PreprocessingType_highPeaksAfterColumns_src
+	HighPeaksAfterColumnsType[0..1] role highPeaksAfterColumns
+end
+
+composition xxx_RawType_type between
+	RawType[*] role xxx_RawType_type_src
+	TypeType16[0..1] role type
+end
+
+composition xxx_RawType_offset between
+	RawType[*] role xxx_RawType_offset_src
+	OffsetType[0..1] role offset
+end
+
+composition xxx_RawType_byteOrder between
+	RawType[*] role xxx_RawType_byteOrder_src
+	ByteOrderType[0..1] role byteOrder
+end
+
+composition xxx_RawType_gap between
+	RawType[*] role xxx_RawType_gap_src
+	GapType[0..1] role gap
+end
+
+composition xxx_RingArtefactsType_type between
+	RingArtefactsType[*] role xxx_RingArtefactsType_type_src
+	TypeType5[0..1] role type
+end
+
+composition xxx_RingArtefactsType_numSeries between
+	RingArtefactsType[*] role xxx_RingArtefactsType_numSeries_src
+	NumSeriesType[0..1] role numSeries
+end
+
+composition xxx_ROIType_type between
+	ROIType[*] role xxx_ROIType_type_src
+	TypeType3[0..1] role type
+end
+
+composition xxx_ROIType_outputWidthType between
+	ROIType[*] role xxx_ROIType_outputWidthType_src
+	OutputWidthTypeType[0..1] role outputWidthType
+end
+
+composition xxx_TiltType_type between
+	TiltType[*] role xxx_TiltType_type_src
+	TypeType8[0..1] role type
+end
+
+composition xxx_TransformType_missedProjections between
+	TransformType[*] role xxx_TransformType_missedProjections_src
+	MissedProjectionsType[0..1] role missedProjections
+end
+
+composition xxx_TransformType_missedProjectionsType between
+	TransformType[*] role xxx_TransformType_missedProjectionsType_src
+	MissedProjectionsTypeType[0..1] role missedProjectionsType
+end
+
+composition xxx_TransformType_rotationAngleType between
+	TransformType[*] role xxx_TransformType_rotationAngleType_src
+	RotationAngleTypeType[0..1] role rotationAngleType
+end
+
+composition xxx_TransformType_rotationAngleEndPoints between
+	TransformType[*] role xxx_TransformType_rotationAngleEndPoints_src
+	RotationAngleEndPointsType[0..1] role rotationAngleEndPoints
+end
+
+composition xxx_TransformType_scaleType between
+	TransformType[*] role xxx_TransformType_scaleType_src
+	ScaleTypeType[0..1] role scaleType
+end
+
+composition xxx_TransformType_extrapolationType between
+	TransformType[*] role xxx_TransformType_extrapolationType_src
+	ExtrapolationTypeType[0..1] role extrapolationType
+end
+
+composition xxx_TransformType_interpolation between
+	TransformType[*] role xxx_TransformType_interpolation_src
+	InterpolationType[0..1] role interpolation
+end
+
+composition xxx_ValueMaxType_type between
+	ValueMaxType[*] role xxx_ValueMaxType_type_src
+	TypeType[0..1] role type
+end
+
+composition xxx_ValueMinType_type between
+	ValueMinType[*] role xxx_ValueMinType_type_src
+	TypeType11[0..1] role type
+end
+
+composition xxx_ValueStepType_type between
+	ValueStepType[*] role xxx_ValueStepType_type_src
+	TypeType4[0..1] role type
+end
+

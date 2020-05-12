@@ -1,0 +1,62 @@
+model murdercase
+class House
+attributes
+operations
+end
+
+class Person
+attributes
+	name : String
+	age : Integer
+	profession : String
+	alive : Boolean
+operations
+end
+
+class Room
+attributes
+	name : String
+operations
+end
+
+class Door
+attributes
+operations
+end
+
+class Object
+attributes
+	name : String
+operations
+end
+
+composition xxx_House_people between
+	House[0..1] role xxx_House_people_src
+	Person[*] role people
+end
+
+composition xxx_House_rooms between
+	House[0..1] role xxx_House_rooms_src
+	Room[*] role rooms
+end
+
+composition xxx_House_doors between
+	House[0..1] role xxx_House_doors_src
+	Door[*] role doors
+end
+
+composition xxx_Room_objects between
+	Room[0..1] role xxx_Room_objects_src
+	Object[*] role objects
+end
+
+composition xxx_Room_people between
+	Room[0..1] role xxx_Room_people_src
+	Person[*] role people
+end
+
+association xxx_Door_rooms between
+	Door[*] role xxx_Door_rooms_src
+	Room[2] role rooms
+end
+

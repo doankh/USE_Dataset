@@ -1,0 +1,107 @@
+model cm
+class Checklist
+attributes
+	inspector : String
+	qmFileName : String
+operations
+end
+
+class InspectionMeasure
+attributes
+	measureInfo : String
+	measureName : String
+	instrumentInfo : String
+	sampleType : String
+operations
+end
+
+class InspectionItem
+attributes
+operations
+end
+
+class Sample
+attributes
+	name : String
+	packagePath : String
+	sourcePath : String
+	lineNumber : Integer
+	sourceStart : Integer
+	sourceEnd : Integer
+operations
+end
+
+class Documentation
+attributes
+	name : String
+	path : String
+	type : String
+operations
+end
+
+class InspectionEvaluation
+attributes
+	value : Integer
+operations
+end
+
+composition xxx_Checklist_inspectionItems between
+	Checklist[0..1] role xxx_Checklist_inspectionItems_src
+	InspectionItem[1..*] role inspectionItems
+end
+
+composition xxx_Checklist_inspectionMeasures between
+	Checklist[0..1] role xxx_Checklist_inspectionMeasures_src
+	InspectionMeasure[1..*] role inspectionMeasures
+end
+
+composition xxx_InspectionMeasure_documentations between
+	InspectionMeasure[0..1] role xxx_InspectionMeasure_documentations_src
+	Documentation[*] role documentations
+end
+
+association xxx_InspectionItem_checklist between
+	InspectionItem[*] role xxx_InspectionItem_checklist_src
+	Checklist[1] role checklist
+end
+
+association xxx_InspectionItem_inspectionMeasures between
+	InspectionItem[0..1] role xxx_InspectionItem_inspectionMeasures_src
+	InspectionMeasure[1..*] role inspectionMeasures
+end
+
+composition xxx_InspectionItem_samples between
+	InspectionItem[0..1] role xxx_InspectionItem_samples_src
+	Sample[1..*] role samples
+end
+
+composition xxx_InspectionItem_inspectionEvaluations between
+	InspectionItem[0..1] role xxx_InspectionItem_inspectionEvaluations_src
+	InspectionEvaluation[1..*] role inspectionEvaluations
+end
+
+association xxx_Sample_inspectionItem between
+	Sample[*] role xxx_Sample_inspectionItem_src
+	InspectionItem[1] role inspectionItem
+end
+
+association xxx_Documentation_inspectionMeasure between
+	Documentation[*] role xxx_Documentation_inspectionMeasure_src
+	InspectionMeasure[1] role inspectionMeasure
+end
+
+association xxx_InspectionEvaluation_sample between
+	InspectionEvaluation[*] role xxx_InspectionEvaluation_sample_src
+	Sample[1] role sample
+end
+
+association xxx_InspectionEvaluation_inspectionMeasure between
+	InspectionEvaluation[*] role xxx_InspectionEvaluation_inspectionMeasure_src
+	InspectionMeasure[1] role inspectionMeasure
+end
+
+association xxx_InspectionEvaluation_inspectionItem between
+	InspectionEvaluation[*] role xxx_InspectionEvaluation_inspectionItem_src
+	InspectionItem[1] role inspectionItem
+end
+

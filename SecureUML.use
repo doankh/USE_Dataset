@@ -1,0 +1,126 @@
+model PrimitiveTypes
+class Group<Subject
+attributes
+operations
+end
+
+class User<Subject
+attributes
+operations
+end
+
+class Subject
+attributes
+operations
+end
+
+class Role
+attributes
+operations
+end
+
+class Permission
+attributes
+operations
+end
+
+class AuthorizationConstraint
+attributes
+operations
+end
+
+class AtomicAction<Action
+attributes
+operations
+end
+
+class CompositeAction<Action
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+composition xxx_Group_subjectGroup between
+	Group[0..1] role xxx_Group_subjectGroup_src
+	Subject[*] role subjectGroup
+end
+
+association xxx_Subject_group between
+	Subject[*] role xxx_Subject_group_src
+	Group[1] role group
+end
+
+association xxx_Subject_role between
+	Subject[0..1] role xxx_Subject_role_src
+	Role[*] role role
+end
+
+composition xxx_Role_roleHierarchy between
+	Role[0..1] role xxx_Role_roleHierarchy_src
+	Role[*] role roleHierarchy
+end
+
+association xxx_Role_subjectAssignment between
+	Role[0..1] role xxx_Role_subjectAssignment_src
+	Subject[*] role subjectAssignment
+end
+
+association xxx_Role_permissionAssignment between
+	Role[0..1] role xxx_Role_permissionAssignment_src
+	Permission[*] role permissionAssignment
+end
+
+association xxx_Permission_role between
+	Permission[0..1] role xxx_Permission_role_src
+	Role[*] role role
+end
+
+association xxx_Permission_constraintAssignment between
+	Permission[*] role xxx_Permission_constraintAssignment_src
+	AuthorizationConstraint[0..1] role constraintAssignment
+end
+
+association xxx_Permission_actionAssignment between
+	Permission[0..1] role xxx_Permission_actionAssignment_src
+	Action[1..*] role actionAssignment
+end
+
+association xxx_AuthorizationConstraint_permission between
+	AuthorizationConstraint[0..1] role xxx_AuthorizationConstraint_permission_src
+	Permission[*] role permission
+end
+
+composition xxx_CompositeAction_subordinatedAction between
+	CompositeAction[0..1] role xxx_CompositeAction_subordinatedAction_src
+	Action[*] role subordinatedAction
+end
+
+association xxx_Action_permission between
+	Action[0..1] role xxx_Action_permission_src
+	Permission[*] role permission
+end
+
+association xxx_Action_resource between
+	Action[*] role xxx_Action_resource_src
+	Resource[1] role resource
+end
+
+association xxx_Action_actionHyerarchy between
+	Action[0..1] role xxx_Action_actionHyerarchy_src
+	CompositeAction[*] role actionHyerarchy
+end
+
+composition xxx_Resource_resourceAction between
+	Resource[0..1] role xxx_Resource_resourceAction_src
+	Action[*] role resourceAction
+end
+

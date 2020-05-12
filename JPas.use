@@ -1,0 +1,184 @@
+model jPas
+enum Operator{
+default
+}
+
+enum Datatype{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class Program
+attributes
+	name : String
+operations
+end
+
+class Method
+attributes
+operations
+end
+
+class Function
+attributes
+	name : String
+	returntype : Datatype
+operations
+end
+
+class Procedure
+attributes
+	name : String
+operations
+end
+
+class ProcParam
+attributes
+	out : String
+	name : String
+	type : Datatype
+operations
+end
+
+class Param
+attributes
+	name : String
+	type : Datatype
+operations
+end
+
+class VariableDeclaration
+attributes
+operations
+end
+
+class Variable
+attributes
+	name : String
+	type : Datatype
+operations
+end
+
+class StatementSequence
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class AssignStatement<Statement
+attributes
+	variable : String
+operations
+end
+
+class Condition<IfStatement,WhileStatement
+attributes
+	left : String
+	operator : Operator
+	right : String
+operations
+end
+
+composition xxx_Model_program between
+	Model[*] role xxx_Model_program_src
+	Program[0..1] role program
+end
+
+composition xxx_Program_methods between
+	Program[0..1] role xxx_Program_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Program_variableDeclaration between
+	Program[*] role xxx_Program_variableDeclaration_src
+	VariableDeclaration[0..1] role variableDeclaration
+end
+
+composition xxx_Program_statementsequence between
+	Program[*] role xxx_Program_statementsequence_src
+	StatementSequence[0..1] role statementsequence
+end
+
+composition xxx_Method_function between
+	Method[*] role xxx_Method_function_src
+	Function[0..1] role function
+end
+
+composition xxx_Method_procedure between
+	Method[*] role xxx_Method_procedure_src
+	Procedure[0..1] role procedure
+end
+
+composition xxx_Function_params between
+	Function[0..1] role xxx_Function_params_src
+	Param[*] role params
+end
+
+composition xxx_Function_variableDeclaration between
+	Function[*] role xxx_Function_variableDeclaration_src
+	VariableDeclaration[0..1] role variableDeclaration
+end
+
+composition xxx_Function_statementsequence between
+	Function[*] role xxx_Function_statementsequence_src
+	StatementSequence[0..1] role statementsequence
+end
+
+composition xxx_Procedure_params between
+	Procedure[0..1] role xxx_Procedure_params_src
+	ProcParam[*] role params
+end
+
+composition xxx_Procedure_variableDeclaration between
+	Procedure[*] role xxx_Procedure_variableDeclaration_src
+	VariableDeclaration[0..1] role variableDeclaration
+end
+
+composition xxx_Procedure_statementsequence between
+	Procedure[*] role xxx_Procedure_statementsequence_src
+	StatementSequence[0..1] role statementsequence
+end
+
+composition xxx_VariableDeclaration_variables between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_StatementSequence_statements between
+	StatementSequence[0..1] role xxx_StatementSequence_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Condition_ifstatements between
+	Condition[*] role xxx_Condition_ifstatements_src
+	StatementSequence[0..1] role ifstatements
+end
+
+composition xxx_Condition_elsestatements between
+	Condition[*] role xxx_Condition_elsestatements_src
+	StatementSequence[0..1] role elsestatements
+end
+
+composition xxx_Condition_whilestatements between
+	Condition[*] role xxx_Condition_whilestatements_src
+	StatementSequence[0..1] role whilestatements
+end
+

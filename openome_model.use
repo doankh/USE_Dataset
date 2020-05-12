@@ -1,0 +1,511 @@
+model openome_model
+enum EvaluationLabel{
+default
+}
+
+enum GoalModelingContributionType{
+default
+}
+
+enum GoalModelingContributionSymmetry{
+default
+}
+
+class Actor<Container
+attributes
+operations
+end
+
+class Agent<Container
+attributes
+operations
+end
+
+class AndDecomposition<Decomposition
+attributes
+operations
+end
+
+class Contribution<Link
+attributes
+	goal_model_symmetry : GoalModelingContributionSymmetry
+operations
+end
+
+class Decomposition<Link
+attributes
+operations
+end
+
+class Dependency<Link
+attributes
+	trust : Real
+	label : String
+operations
+end
+
+class Goal<Intention
+attributes
+operations
+end
+
+class Intention<Dependable
+attributes
+	name : String
+	system : String
+	boundary : String
+	exclusive : String
+	sequential : String
+	parallel : String
+	QualitativeReasoningCombinedLabel : EvaluationLabel
+	QualitativeReasoningSatisfiedLabel : EvaluationLabel
+	QualitativeReasoningDenialLabel : EvaluationLabel
+	QuantitativeReasoningCombinedLabel : Real
+	QuantitativeReasoningDeniedLabel : Real
+	QuantitativeReasoningSatisfiedLabel : Real
+	initialEvalLabel : EvaluationLabel
+operations
+end
+
+class Model
+attributes
+	name : String
+operations
+end
+
+class OrDecomposition<Decomposition
+attributes
+operations
+end
+
+class Position<Container
+attributes
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Resource<Intention
+attributes
+operations
+end
+
+class Role<Container
+attributes
+operations
+end
+
+class Softgoal<Intention
+attributes
+	topic : String
+operations
+end
+
+class Task<Intention
+attributes
+operations
+end
+
+abstract class Container<Dependable
+attributes
+	name : String
+operations
+end
+
+class Belief<Intention
+attributes
+operations
+end
+
+abstract class Link
+attributes
+operations
+end
+
+class Correlation<Link
+attributes
+operations
+end
+
+abstract class Dependable
+attributes
+operations
+end
+
+class HelpContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class HurtContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class MakeContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class BreakContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class SomePlusContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class SomeMinusContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class UnknownContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class AndContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class OrContribution<Contribution
+attributes
+	contributionType : String
+operations
+end
+
+class Association<Link
+attributes
+operations
+end
+
+class IsAAssociation<Association
+attributes
+	label : String
+operations
+end
+
+class CoversAssociation<Association
+attributes
+	label : String
+operations
+end
+
+class IsPartOfAssociation<Association
+attributes
+	label : String
+operations
+end
+
+class OccupiesAssociation<Association
+attributes
+	label : String
+operations
+end
+
+class PlaysAssociation<Association
+attributes
+	label : String
+operations
+end
+
+class INSAssociation<Association
+attributes
+	label : String
+operations
+end
+
+class Alternative
+attributes
+	name : String
+	description : String
+	evalLabels : EvaluationLabel
+	direction : String
+operations
+end
+
+class IntentionToEvaluationLabelMap
+attributes
+	value : EvaluationLabel
+operations
+end
+
+class HumanJudgment
+attributes
+	resultLabel : EvaluationLabel
+	enabled : Boolean
+operations
+end
+
+class LabelBag
+attributes
+	labelBagEvalLabels : EvaluationLabel
+	toResolve : Boolean
+	allPositive : Boolean
+	allNegative : Boolean
+	hasFullPositive : Boolean
+	hasFullNegative : Boolean
+	hasUnknown : Boolean
+	hasConflict : Boolean
+	allUnknown : Boolean
+	allConflict : Boolean
+operations
+end
+
+association xxx_Actor_is_a between
+	Actor[0..1] role xxx_Actor_is_a_src
+	Actor[*] role is_a
+end
+
+association xxx_Actor_is_part_of between
+	Actor[0..1] role xxx_Actor_is_part_of_src
+	Actor[*] role is_part_of
+end
+
+association xxx_Actor_believes between
+	Actor[0..1] role xxx_Actor_believes_src
+	Belief[*] role believes
+end
+
+association xxx_Agent_plays between
+	Agent[0..1] role xxx_Agent_plays_src
+	Role[*] role plays
+end
+
+association xxx_Agent_occupies between
+	Agent[0..1] role xxx_Agent_occupies_src
+	Position[*] role occupies
+end
+
+association xxx_Agent_ins between
+	Agent[*] role xxx_Agent_ins_src
+	Agent[0..1] role ins
+end
+
+association xxx_Contribution_target between
+	Contribution[*] role xxx_Contribution_target_src
+	Intention[0..1] role target
+end
+
+association xxx_Contribution_model_ between
+	Contribution[*] role xxx_Contribution_model__src
+	Model[0..1] role model_
+end
+
+association xxx_Contribution_source between
+	Contribution[*] role xxx_Contribution_source_src
+	Intention[0..1] role source
+end
+
+association xxx_Decomposition_source between
+	Decomposition[*] role xxx_Decomposition_source_src
+	Intention[0..1] role source
+end
+
+association xxx_Decomposition_target between
+	Decomposition[*] role xxx_Decomposition_target_src
+	Intention[0..1] role target
+end
+
+association xxx_Decomposition_model_ between
+	Decomposition[*] role xxx_Decomposition_model__src
+	Model[0..1] role model_
+end
+
+association xxx_Dependency_dependencyFrom between
+	Dependency[*] role xxx_Dependency_dependencyFrom_src
+	Dependable[0..1] role dependencyFrom
+end
+
+association xxx_Dependency_dependencyTo between
+	Dependency[*] role xxx_Dependency_dependencyTo_src
+	Dependable[0..1] role dependencyTo
+end
+
+association xxx_Dependency_model_ between
+	Dependency[*] role xxx_Dependency_model__src
+	Model[0..1] role model_
+end
+
+composition xxx_Intention_property between
+	Intention[0..1] role xxx_Intention_property_src
+	Property[*] role property
+end
+
+association xxx_Intention_decompositions between
+	Intention[0..1] role xxx_Intention_decompositions_src
+	Decomposition[*] role decompositions
+end
+
+association xxx_Intention_parentDecompositions between
+	Intention[0..1] role xxx_Intention_parentDecompositions_src
+	Decomposition[*] role parentDecompositions
+end
+
+association xxx_Intention_container between
+	Intention[*] role xxx_Intention_container_src
+	Container[0..1] role container
+end
+
+association xxx_Intention_contributesTo between
+	Intention[0..1] role xxx_Intention_contributesTo_src
+	Contribution[*] role contributesTo
+end
+
+association xxx_Intention_contributesFrom between
+	Intention[0..1] role xxx_Intention_contributesFrom_src
+	Contribution[*] role contributesFrom
+end
+
+composition xxx_Intention_labelBag between
+	Intention[*] role xxx_Intention_labelBag_src
+	LabelBag[0..1] role labelBag
+end
+
+composition xxx_Intention_reverseLabelBag between
+	Intention[*] role xxx_Intention_reverseLabelBag_src
+	LabelBag[0..1] role reverseLabelBag
+end
+
+composition xxx_Intention_humanJudgments between
+	Intention[0..1] role xxx_Intention_humanJudgments_src
+	HumanJudgment[*] role humanJudgments
+end
+
+composition xxx_Model_intentions between
+	Model[0..1] role xxx_Model_intentions_src
+	Intention[*] role intentions
+end
+
+composition xxx_Model_contributions between
+	Model[0..1] role xxx_Model_contributions_src
+	Contribution[*] role contributions
+end
+
+composition xxx_Model_dependencies between
+	Model[0..1] role xxx_Model_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_Model_decompositions between
+	Model[0..1] role xxx_Model_decompositions_src
+	Decomposition[*] role decompositions
+end
+
+composition xxx_Model_containers between
+	Model[0..1] role xxx_Model_containers_src
+	Container[*] role containers
+end
+
+association xxx_Model_correlations between
+	Model[0..1] role xxx_Model_correlations_src
+	Correlation[*] role correlations
+end
+
+composition xxx_Model_associations between
+	Model[0..1] role xxx_Model_associations_src
+	Association[*] role associations
+end
+
+composition xxx_Model_alternatives between
+	Model[0..1] role xxx_Model_alternatives_src
+	Alternative[*] role alternatives
+end
+
+association xxx_Position_covers between
+	Position[0..1] role xxx_Position_covers_src
+	Role[*] role covers
+end
+
+composition xxx_Container_sub between
+	Container[0..1] role xxx_Container_sub_src
+	Actor[*] role sub
+end
+
+composition xxx_Container_intentions between
+	Container[0..1] role xxx_Container_intentions_src
+	Intention[*] role intentions
+end
+
+association xxx_Container_model_ between
+	Container[*] role xxx_Container_model__src
+	Model[0..1] role model_
+end
+
+association xxx_Container_associationTo between
+	Container[0..1] role xxx_Container_associationTo_src
+	Association[*] role associationTo
+end
+
+association xxx_Container_associationFrom between
+	Container[0..1] role xxx_Container_associationFrom_src
+	Association[*] role associationFrom
+end
+
+association xxx_Correlation_target between
+	Correlation[*] role xxx_Correlation_target_src
+	Intention[0..1] role target
+end
+
+association xxx_Correlation_source between
+	Correlation[*] role xxx_Correlation_source_src
+	Intention[0..1] role source
+end
+
+association xxx_Dependable_dependencyFrom between
+	Dependable[0..1] role xxx_Dependable_dependencyFrom_src
+	Dependency[*] role dependencyFrom
+end
+
+association xxx_Dependable_dependencyTo between
+	Dependable[0..1] role xxx_Dependable_dependencyTo_src
+	Dependency[*] role dependencyTo
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	Container[0..1] role source
+end
+
+association xxx_Association_target between
+	Association[*] role xxx_Association_target_src
+	Container[0..1] role target
+end
+
+association xxx_Alternative_intentions between
+	Alternative[0..1] role xxx_Alternative_intentions_src
+	Intention[*] role intentions
+end
+
+composition xxx_IntentionToEvaluationLabelMap_key between
+	IntentionToEvaluationLabelMap[*] role xxx_IntentionToEvaluationLabelMap_key_src
+	Intention[0..1] role key
+end
+
+composition xxx_HumanJudgment_labelBag between
+	HumanJudgment[*] role xxx_HumanJudgment_labelBag_src
+	LabelBag[0..1] role labelBag
+end
+
+association xxx_LabelBag_labelBagIntentions between
+	LabelBag[0..1] role xxx_LabelBag_labelBagIntentions_src
+	Intention[*] role labelBagIntentions
+end
+

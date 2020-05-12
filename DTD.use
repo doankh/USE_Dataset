@@ -1,0 +1,155 @@
+model DTD
+enum Occurence{
+	zeroOrOne,
+	zeroOrMore,
+	oneOrMore,
+	one
+}
+
+enum OtherAttributeTypeEnum{
+	cdata,
+	id,
+	idref,
+	entityType,
+	entities,
+	nmtoken,
+	nmtakens
+}
+
+abstract class TypeDescription
+attributes
+	name : String
+operations
+end
+
+class Notation<TypeDescription
+attributes
+	content : String
+operations
+end
+
+class Entity<TypeDescription
+attributes
+	content : String
+	isInternal : Boolean
+operations
+end
+
+abstract class Element<TypeDescription
+attributes
+operations
+end
+
+class AnyElement<Element
+attributes
+operations
+end
+
+class RestrictedElement<Element
+attributes
+operations
+end
+
+abstract class ElementContent
+attributes
+operations
+end
+
+class Mixed<ElementContent
+attributes
+	elements : String
+operations
+end
+
+abstract class Children<ElementContent
+attributes
+	occ : Occurence
+operations
+end
+
+class Sequence_<Children
+attributes
+operations
+end
+
+class Leaf<Children
+attributes
+	elementName : String
+operations
+end
+
+class Choice<Children
+attributes
+operations
+end
+
+class AttributeList<TypeDescription
+attributes
+operations
+end
+
+abstract class AttributeDescription<TypeDescription
+attributes
+operations
+end
+
+class NoDefaultValue<AttributeDescription
+attributes
+	isRequired : Boolean
+operations
+end
+
+class DefaultValue<AttributeDescription
+attributes
+	value : String
+	isFixed : Boolean
+operations
+end
+
+abstract class AttributeType
+attributes
+operations
+end
+
+class Enumeration<AttributeType
+attributes
+	values : String
+operations
+end
+
+class OtherAttributeType
+attributes
+	type : OtherAttributeTypeEnum
+operations
+end
+
+composition xxx_RestrictedElement_content between
+	RestrictedElement[*] role xxx_RestrictedElement_content_src
+	ElementContent[0..1] role content
+end
+
+association xxx_Sequence_children between
+	Sequence_[0..1] role xxx_Sequence_children_src
+	Children[2..*] role children
+end
+
+association xxx_Choice_childrenChoice between
+	Choice[0..1] role xxx_Choice_childrenChoice_src
+	Children[2..*] role childrenChoice
+end
+
+association xxx_AttributeList_containsAttributes between
+	AttributeList[0..1] role xxx_AttributeList_containsAttributes_src
+	AttributeDescription[1..*] role containsAttributes
+end
+
+association xxx_AttributeDescription_attributeList between
+	AttributeDescription[*] role xxx_AttributeDescription_attributeList_src
+	AttributeList[1] role attributeList
+end
+
+composition xxx_AttributeDescription_type between
+	AttributeDescription[*] role xxx_AttributeDescription_type_src
+	AttributeType[1] role type
+end
+

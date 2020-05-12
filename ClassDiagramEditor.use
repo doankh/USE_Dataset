@@ -1,0 +1,217 @@
+model classdiagrameditor
+enum TiposBasicos{
+default
+}
+
+abstract class ElementoDiagrama
+attributes
+	nombre : String
+operations
+end
+
+class DiagramEditor<ElementoDiagrama
+attributes
+operations
+end
+
+class Clase<ElementoDiagrama
+attributes
+operations
+end
+
+class Atributo<ElementoDiagrama
+attributes
+	tipo : TiposBasicos
+operations
+end
+
+class Agregacion<ElementoDiagrama
+attributes
+operations
+end
+
+class Composicion<ElementoDiagrama
+attributes
+operations
+end
+
+class RelacionBelongTo<ElementoDiagrama
+attributes
+operations
+end
+
+class RelacionHasOne<ElementoDiagrama
+attributes
+operations
+end
+
+class RelacionHasMany<ElementoDiagrama
+attributes
+operations
+end
+
+class RelacionHasManyThrough<ElementoDiagrama
+attributes
+operations
+end
+
+composition xxx_DiagramEditor_clases between
+	DiagramEditor[0..1] role xxx_DiagramEditor_clases_src
+	Clase[*] role clases
+end
+
+composition xxx_Clase_atributos between
+	Clase[0..1] role xxx_Clase_atributos_src
+	Atributo[*] role atributos
+end
+
+association xxx_Clase_agrega between
+	Clase[0..1] role xxx_Clase_agrega_src
+	Agregacion[*] role agrega
+end
+
+association xxx_Clase_es_agregada between
+	Clase[0..1] role xxx_Clase_es_agregada_src
+	Agregacion[*] role es_agregada
+end
+
+association xxx_Clase_compone between
+	Clase[0..1] role xxx_Clase_compone_src
+	Composicion[*] role compone
+end
+
+association xxx_Clase_es_compuesta between
+	Clase[0..1] role xxx_Clase_es_compuesta_src
+	Composicion[*] role es_compuesta
+end
+
+composition xxx_Clase_composiciones between
+	Clase[0..1] role xxx_Clase_composiciones_src
+	Composicion[*] role composiciones
+end
+
+composition xxx_Clase_agregaciones between
+	Clase[0..1] role xxx_Clase_agregaciones_src
+	Agregacion[*] role agregaciones
+end
+
+composition xxx_Clase_relacionesBT between
+	Clase[0..1] role xxx_Clase_relacionesBT_src
+	RelacionBelongTo[*] role relacionesBT
+end
+
+association xxx_Clase_relacionaBT between
+	Clase[0..1] role xxx_Clase_relacionaBT_src
+	RelacionBelongTo[*] role relacionaBT
+end
+
+association xxx_Clase_es_relacionadaBT between
+	Clase[0..1] role xxx_Clase_es_relacionadaBT_src
+	RelacionBelongTo[*] role es_relacionadaBT
+end
+
+composition xxx_Clase_relacionesHO between
+	Clase[0..1] role xxx_Clase_relacionesHO_src
+	RelacionHasOne[*] role relacionesHO
+end
+
+association xxx_Clase_relacionaHO between
+	Clase[0..1] role xxx_Clase_relacionaHO_src
+	RelacionHasOne[*] role relacionaHO
+end
+
+association xxx_Clase_es_relacionadaHO between
+	Clase[0..1] role xxx_Clase_es_relacionadaHO_src
+	RelacionHasOne[*] role es_relacionadaHO
+end
+
+composition xxx_Clase_relacionesHM between
+	Clase[0..1] role xxx_Clase_relacionesHM_src
+	RelacionHasMany[*] role relacionesHM
+end
+
+association xxx_Clase_relacionaHM between
+	Clase[0..1] role xxx_Clase_relacionaHM_src
+	RelacionHasMany[*] role relacionaHM
+end
+
+association xxx_Clase_es_reacionadaHM between
+	Clase[0..1] role xxx_Clase_es_reacionadaHM_src
+	RelacionHasMany[*] role es_reacionadaHM
+end
+
+composition xxx_Clase_relacionesHMT between
+	Clase[0..1] role xxx_Clase_relacionesHMT_src
+	RelacionHasManyThrough[*] role relacionesHMT
+end
+
+association xxx_Clase_relacionaHMT between
+	Clase[0..1] role xxx_Clase_relacionaHMT_src
+	RelacionHasManyThrough[*] role relacionaHMT
+end
+
+association xxx_Clase_es_relacionadaHMT between
+	Clase[0..1] role xxx_Clase_es_relacionadaHMT_src
+	RelacionHasManyThrough[*] role es_relacionadaHMT
+end
+
+association xxx_Agregacion_origen_a between
+	Agregacion[*] role xxx_Agregacion_origen_a_src
+	Clase[1] role origen_a
+end
+
+association xxx_Agregacion_destino_a between
+	Agregacion[*] role xxx_Agregacion_destino_a_src
+	Clase[1] role destino_a
+end
+
+association xxx_Composicion_origen_c between
+	Composicion[*] role xxx_Composicion_origen_c_src
+	Clase[1] role origen_c
+end
+
+association xxx_Composicion_destino_c between
+	Composicion[*] role xxx_Composicion_destino_c_src
+	Clase[1] role destino_c
+end
+
+association xxx_RelacionBelongTo_origen_BT between
+	RelacionBelongTo[*] role xxx_RelacionBelongTo_origen_BT_src
+	Clase[1] role origen_BT
+end
+
+association xxx_RelacionBelongTo_destino_BT between
+	RelacionBelongTo[*] role xxx_RelacionBelongTo_destino_BT_src
+	Clase[1] role destino_BT
+end
+
+association xxx_RelacionHasOne_origen_HO between
+	RelacionHasOne[*] role xxx_RelacionHasOne_origen_HO_src
+	Clase[1] role origen_HO
+end
+
+association xxx_RelacionHasOne_destino_HO between
+	RelacionHasOne[*] role xxx_RelacionHasOne_destino_HO_src
+	Clase[1] role destino_HO
+end
+
+association xxx_RelacionHasMany_origen_HM between
+	RelacionHasMany[*] role xxx_RelacionHasMany_origen_HM_src
+	Clase[1] role origen_HM
+end
+
+association xxx_RelacionHasMany_destino_HM between
+	RelacionHasMany[*] role xxx_RelacionHasMany_destino_HM_src
+	Clase[1] role destino_HM
+end
+
+association xxx_RelacionHasManyThrough_origen_HMT between
+	RelacionHasManyThrough[*] role xxx_RelacionHasManyThrough_origen_HMT_src
+	Clase[1] role origen_HMT
+end
+
+association xxx_RelacionHasManyThrough_destino_HMT between
+	RelacionHasManyThrough[*] role xxx_RelacionHasManyThrough_destino_HMT_src
+	Clase[1] role destino_HMT
+end
+

@@ -1,0 +1,93 @@
+model model_
+enum EvaComponentType{
+default
+}
+
+enum EvaParameterType{
+default
+}
+
+class EvaComponentFactoryMeta
+attributes
+	name : String
+	version : String
+operations
+end
+
+class EvaComponentMeta
+attributes
+	stateless : Boolean
+	synchronous : Boolean
+	serializable : Boolean
+operations
+end
+
+class EvaPort
+attributes
+	name : String
+operations
+end
+
+class EvaPin
+attributes
+	name : String
+	type : String
+	validatorClass : String
+	validatorDetail : String
+operations
+end
+
+class EvaParameter
+attributes
+	name : String
+	type : EvaParameterType
+operations
+end
+
+class EvaArgument
+attributes
+	name : String
+	value : String
+operations
+end
+
+composition xxx_EvaComponentFactoryMeta_instanceParameters between
+	EvaComponentFactoryMeta[0..1] role xxx_EvaComponentFactoryMeta_instanceParameters_src
+	EvaParameter[*] role instanceParameters
+end
+
+association xxx_EvaComponentMeta_factory between
+	EvaComponentMeta[*] role xxx_EvaComponentMeta_factory_src
+	EvaComponentMeta[1] role factory
+end
+
+composition xxx_EvaComponentMeta_factoryArguments between
+	EvaComponentMeta[0..1] role xxx_EvaComponentMeta_factoryArguments_src
+	EvaArgument[*] role factoryArguments
+end
+
+composition xxx_EvaComponentMeta_inputPorts between
+	EvaComponentMeta[0..1] role xxx_EvaComponentMeta_inputPorts_src
+	EvaPort[*] role inputPorts
+end
+
+composition xxx_EvaComponentMeta_outputPorts between
+	EvaComponentMeta[0..1] role xxx_EvaComponentMeta_outputPorts_src
+	EvaPort[*] role outputPorts
+end
+
+composition xxx_EvaPort_pins between
+	EvaPort[0..1] role xxx_EvaPort_pins_src
+	EvaPin[1..*] role pins
+end
+
+association xxx_EvaPin_port between
+	EvaPin[*] role xxx_EvaPin_port_src
+	EvaPort[1] role port
+end
+
+association xxx_EvaArgument_parameter between
+	EvaArgument[*] role xxx_EvaArgument_parameter_src
+	EvaParameter[1] role parameter
+end
+

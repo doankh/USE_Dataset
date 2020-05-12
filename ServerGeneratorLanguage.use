@@ -1,0 +1,125 @@
+model serverGeneratorLanguage
+class Model
+attributes
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class Server<Type
+attributes
+operations
+end
+
+class Config
+attributes
+	name : String
+operations
+end
+
+class rootConfig<Config
+attributes
+operations
+end
+
+class hostNameConfig<Config
+attributes
+operations
+end
+
+class portConfig<Config
+attributes
+operations
+end
+
+class logConfig<Config
+attributes
+operations
+end
+
+class sqldbConfig<Config
+attributes
+operations
+end
+
+class resourceConfig<Config
+attributes
+operations
+end
+
+class DomainModel<Type
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+operations
+end
+
+class StringAttribute<Attribute
+attributes
+operations
+end
+
+class NumberAttribute<Attribute
+attributes
+operations
+end
+
+class ImageAttribute<Attribute
+attributes
+operations
+end
+
+class Relationship
+attributes
+operations
+end
+
+composition xxx_Model_types between
+	Model[0..1] role xxx_Model_types_src
+	Type[*] role types
+end
+
+composition xxx_Server_Configs between
+	Server[0..1] role xxx_Server_Configs_src
+	Config[*] role Configs
+end
+
+composition xxx_DomainModel_Entitys between
+	DomainModel[0..1] role xxx_DomainModel_Entitys_src
+	Entity[*] role Entitys
+end
+
+composition xxx_DomainModel_Relationships between
+	DomainModel[0..1] role xxx_DomainModel_Relationships_src
+	Relationship[*] role Relationships
+end
+
+composition xxx_Entity_Attributes between
+	Entity[0..1] role xxx_Entity_Attributes_src
+	Attribute[*] role Attributes
+end
+
+association xxx_Relationship_name between
+	Relationship[*] role xxx_Relationship_name_src
+	Attribute[0..1] role name
+end
+
+association xxx_Relationship_refName between
+	Relationship[*] role xxx_Relationship_refName_src
+	Attribute[0..1] role refName
+end
+

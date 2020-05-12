@@ -1,0 +1,154 @@
+model userdefevents
+enum LOGICAL_OP{
+default
+}
+
+enum COMPARE_OP{
+default
+}
+
+class TriggerEvent
+attributes
+operations
+end
+
+abstract class UserDefinedOperation
+attributes
+operations
+end
+
+class CompareOperation<UserDefinedOperation
+attributes
+	type : COMPARE_OP
+operations
+end
+
+class LogicalOperation<UserDefinedOperation
+attributes
+	type : LOGICAL_OP
+operations
+end
+
+abstract class MathValue<TraceValue
+attributes
+operations
+end
+
+abstract class TraceValue
+attributes
+operations
+end
+
+class ActualTraceValue<TraceValue
+attributes
+operations
+end
+
+class AbsoluteTraceValue<TraceValue
+attributes
+operations
+end
+
+class ConstValue<TraceValue
+attributes
+	value : Real
+operations
+end
+
+class DndmVariable
+attributes
+	unique_id : String
+operations
+end
+
+class DNDM
+attributes
+	name : String
+operations
+end
+
+class Addition<TraceValue,MathValue
+attributes
+operations
+end
+
+class Subtraction<MathValue,TraceValue
+attributes
+operations
+end
+
+class Division<MathValue
+attributes
+operations
+end
+
+class Multiplication<MathValue
+attributes
+operations
+end
+
+class Sqrt<MathValue
+attributes
+operations
+end
+
+composition xxx_TriggerEvent_ops between
+	TriggerEvent[0..1] role xxx_TriggerEvent_ops_src
+	UserDefinedOperation[1..*] role ops
+end
+
+association xxx_CompareOperation_rhop between
+	CompareOperation[*] role xxx_CompareOperation_rhop_src
+	TraceValue[1] role rhop
+end
+
+association xxx_CompareOperation_lhop between
+	CompareOperation[*] role xxx_CompareOperation_lhop_src
+	TraceValue[1] role lhop
+end
+
+association xxx_LogicalOperation_lhop between
+	LogicalOperation[*] role xxx_LogicalOperation_lhop_src
+	UserDefinedOperation[1] role lhop
+end
+
+association xxx_LogicalOperation_rhop between
+	LogicalOperation[*] role xxx_LogicalOperation_rhop_src
+	UserDefinedOperation[1] role rhop
+end
+
+association xxx_MathValue_lhop between
+	MathValue[*] role xxx_MathValue_lhop_src
+	TraceValue[1] role lhop
+end
+
+association xxx_MathValue_rhop between
+	MathValue[*] role xxx_MathValue_rhop_src
+	TraceValue[1] role rhop
+end
+
+association xxx_ActualTraceValue_refers_to between
+	ActualTraceValue[*] role xxx_ActualTraceValue_refers_to_src
+	DndmVariable[1] role refers_to
+end
+
+association xxx_AbsoluteTraceValue_refers_to between
+	AbsoluteTraceValue[*] role xxx_AbsoluteTraceValue_refers_to_src
+	DndmVariable[1] role refers_to
+end
+
+composition xxx_DNDM_variables between
+	DNDM[0..1] role xxx_DNDM_variables_src
+	DndmVariable[*] role variables
+end
+
+composition xxx_DNDM_triggers between
+	DNDM[0..1] role xxx_DNDM_triggers_src
+	TriggerEvent[*] role triggers
+end
+
+composition xxx_DNDM_values between
+	DNDM[0..1] role xxx_DNDM_values_src
+	TraceValue[*] role values
+end
+

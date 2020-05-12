@@ -1,0 +1,64 @@
+model simplepdl
+enum WorkSequenceType{
+default
+}
+
+class Process
+attributes
+	name : String
+operations
+end
+
+class WorkDefinition<ProcessElement
+attributes
+	name : String
+operations
+end
+
+class WorkSequence<ProcessElement
+attributes
+	linkType : WorkSequenceType
+operations
+end
+
+abstract class ProcessElement
+attributes
+operations
+end
+
+class Guidance<ProcessElement
+attributes
+	text : String
+operations
+end
+
+composition xxx_Process_processElements between
+	Process[0..1] role xxx_Process_processElements_src
+	ProcessElement[*] role processElements
+end
+
+association xxx_WorkDefinition_linksToPredecessors between
+	WorkDefinition[0..1] role xxx_WorkDefinition_linksToPredecessors_src
+	WorkSequence[*] role linksToPredecessors
+end
+
+association xxx_WorkDefinition_linksToSuccessors between
+	WorkDefinition[0..1] role xxx_WorkDefinition_linksToSuccessors_src
+	WorkSequence[*] role linksToSuccessors
+end
+
+association xxx_WorkSequence_predecessor between
+	WorkSequence[*] role xxx_WorkSequence_predecessor_src
+	WorkDefinition[1] role predecessor
+end
+
+association xxx_WorkSequence_successor between
+	WorkSequence[*] role xxx_WorkSequence_successor_src
+	WorkDefinition[1] role successor
+end
+
+association xxx_Guidance_element between
+	Guidance[0..1] role xxx_Guidance_element_src
+	ProcessElement[*] role element
+end
+

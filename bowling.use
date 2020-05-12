@@ -1,0 +1,62 @@
+model bowling
+enum TournamentType{
+default
+}
+
+class Player
+attributes
+	name : String
+	dateOfBirth : String
+	height : Real
+	isProfessional : Boolean
+operations
+end
+
+class League
+attributes
+	name : String
+operations
+end
+
+class Tournament
+attributes
+	type : TournamentType
+operations
+end
+
+class Matchup
+attributes
+operations
+end
+
+class Game
+attributes
+	frames : Integer
+operations
+end
+
+composition xxx_League_players between
+	League[0..1] role xxx_League_players_src
+	Player[*] role players
+end
+
+composition xxx_Tournament_matchups between
+	Tournament[0..1] role xxx_Tournament_matchups_src
+	Matchup[*] role matchups
+end
+
+composition xxx_Matchup_games between
+	Matchup[*] role xxx_Matchup_games_src
+	Game[2] role games
+end
+
+association xxx_Game_matchup between
+	Game[*] role xxx_Game_matchup_src
+	Matchup[1] role matchup
+end
+
+association xxx_Game_player between
+	Game[*] role xxx_Game_player_src
+	Player[0..1] role player
+end
+

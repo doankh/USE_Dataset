@@ -1,0 +1,124 @@
+model turing
+enum Mouvement{
+default
+}
+
+class Alphabet
+attributes
+operations
+end
+
+class Symbole
+attributes
+	caractere : String
+operations
+end
+
+class Ruban
+attributes
+	teteLecture : Integer
+operations
+end
+
+class Registre
+attributes
+operations
+end
+
+class Etat
+attributes
+	nom : String
+operations
+end
+
+class TableActions
+attributes
+operations
+end
+
+class vMachineTuring
+attributes
+operations
+end
+
+class Action
+attributes
+	mouvement : Mouvement
+operations
+end
+
+class Case
+attributes
+operations
+end
+
+composition xxx_Alphabet_symboles between
+	Alphabet[0..1] role xxx_Alphabet_symboles_src
+	Symbole[*] role symboles
+end
+
+composition xxx_Ruban_cases between
+	Ruban[0..1] role xxx_Ruban_cases_src
+	Case[*] role cases
+end
+
+association xxx_Registre_etatCourant between
+	Registre[*] role xxx_Registre_etatCourant_src
+	Etat[1] role etatCourant
+end
+
+composition xxx_TableActions_actions between
+	TableActions[0..1] role xxx_TableActions_actions_src
+	Action[*] role actions
+end
+
+composition xxx_vMachineTuring_ruban between
+	vMachineTuring[*] role xxx_vMachineTuring_ruban_src
+	Ruban[1] role ruban
+end
+
+composition xxx_vMachineTuring_tableAction between
+	vMachineTuring[*] role xxx_vMachineTuring_tableAction_src
+	TableActions[1] role tableAction
+end
+
+composition xxx_vMachineTuring_registre between
+	vMachineTuring[*] role xxx_vMachineTuring_registre_src
+	Registre[1] role registre
+end
+
+composition xxx_vMachineTuring_alphabet between
+	vMachineTuring[*] role xxx_vMachineTuring_alphabet_src
+	Alphabet[1] role alphabet
+end
+
+composition xxx_vMachineTuring_listeEtats between
+	vMachineTuring[0..1] role xxx_vMachineTuring_listeEtats_src
+	Etat[*] role listeEtats
+end
+
+association xxx_Action_lu between
+	Action[*] role xxx_Action_lu_src
+	Symbole[1] role lu
+end
+
+association xxx_Action_etatCourant between
+	Action[*] role xxx_Action_etatCourant_src
+	Etat[1] role etatCourant
+end
+
+association xxx_Action_ecrit between
+	Action[*] role xxx_Action_ecrit_src
+	Symbole[1] role ecrit
+end
+
+association xxx_Action_etatSuivant between
+	Action[*] role xxx_Action_etatSuivant_src
+	Etat[1] role etatSuivant
+end
+
+association xxx_Case_pointeSur between
+	Case[*] role xxx_Case_pointeSur_src
+	Symbole[1] role pointeSur
+end
+

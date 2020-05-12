@@ -1,0 +1,168 @@
+model box
+enum BaseTypes{
+default
+}
+
+class Box
+attributes
+	comment : String
+	name : String
+operations
+end
+
+class BoxReference
+attributes
+	isPointer : Boolean
+	isReference : Boolean
+	name : String
+operations
+end
+
+class WireReference
+attributes
+operations
+end
+
+class LocalWireReference<WireReference
+attributes
+operations
+end
+
+class ExternalWireReference<WireReference
+attributes
+operations
+end
+
+class Connection
+attributes
+operations
+end
+
+class Wire
+attributes
+	isInput : Boolean
+	name : String
+operations
+end
+
+class Type
+attributes
+	isPointer : Boolean
+	isReference : Boolean
+operations
+end
+
+class BasicType<Type
+attributes
+	basicType : BaseTypes
+operations
+end
+
+class OtherType<Type
+attributes
+	namespace : String
+	name : String
+operations
+end
+
+class Method
+attributes
+	comment : String
+	isPrivate : Boolean
+	name : String
+operations
+end
+
+class Param
+attributes
+	comment : String
+	name : String
+	defaultValue : String
+operations
+end
+
+class WireMany<Wire
+attributes
+operations
+end
+
+class WireMethod<Wire
+attributes
+operations
+end
+
+composition xxx_Box_attributes_ between
+	Box[0..1] role xxx_Box_attributes__src
+	Param[*] role attributes_
+end
+
+composition xxx_Box_methods between
+	Box[0..1] role xxx_Box_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Box_wires between
+	Box[0..1] role xxx_Box_wires_src
+	Wire[*] role wires
+end
+
+composition xxx_Box_boxes between
+	Box[0..1] role xxx_Box_boxes_src
+	BoxReference[*] role boxes
+end
+
+composition xxx_Box_connection between
+	Box[0..1] role xxx_Box_connection_src
+	Connection[*] role connection
+end
+
+association xxx_BoxReference_box between
+	BoxReference[*] role xxx_BoxReference_box_src
+	Box[0..1] role box
+end
+
+association xxx_WireReference_wire between
+	WireReference[*] role xxx_WireReference_wire_src
+	Wire[0..1] role wire
+end
+
+association xxx_ExternalWireReference_boxReference between
+	ExternalWireReference[*] role xxx_ExternalWireReference_boxReference_src
+	BoxReference[0..1] role boxReference
+end
+
+composition xxx_Connection_from_ between
+	Connection[*] role xxx_Connection_from__src
+	WireReference[0..1] role from_
+end
+
+composition xxx_Connection_to between
+	Connection[*] role xxx_Connection_to_src
+	WireReference[0..1] role to
+end
+
+composition xxx_Wire_type between
+	Wire[*] role xxx_Wire_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Method_type between
+	Method[*] role xxx_Method_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Param[*] role parameters
+end
+
+composition xxx_Param_type between
+	Param[*] role xxx_Param_type_src
+	Type[0..1] role type
+end
+
+association xxx_WireMethod_method between
+	WireMethod[*] role xxx_WireMethod_method_src
+	Method[0..1] role method
+end
+

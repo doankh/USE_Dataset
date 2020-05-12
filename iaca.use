@@ -1,0 +1,250 @@
+model iaca
+enum Type{
+default
+}
+
+class Attributs
+attributes
+	name : String
+	type : Type
+operations
+end
+
+class Component
+attributes
+	name : String
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+abstract class Input<IO
+attributes
+operations
+end
+
+abstract class Output<IO
+attributes
+operations
+end
+
+class DataInput<Input
+attributes
+operations
+end
+
+class DataOutput<Output
+attributes
+operations
+end
+
+class EventInput<Input
+attributes
+operations
+end
+
+class EventOuput<Output
+attributes
+operations
+end
+
+abstract class IO
+attributes
+	name : String
+operations
+end
+
+class DataConnection
+attributes
+operations
+end
+
+class EventConnection
+attributes
+operations
+end
+
+class ComponentInst
+attributes
+operations
+end
+
+class InputInstance
+attributes
+operations
+end
+
+class AttributsInst
+attributes
+	value : String
+operations
+end
+
+class Process
+attributes
+operations
+end
+
+abstract class IOInst
+attributes
+operations
+end
+
+abstract class InputInst<IOInst
+attributes
+operations
+end
+
+abstract class OuputInst<IOInst
+attributes
+operations
+end
+
+class DataInputInst<InputInst
+attributes
+operations
+end
+
+class EventInputInst<InputInst
+attributes
+operations
+end
+
+class DataOuputInst<OuputInst
+attributes
+operations
+end
+
+class EventOutputInst<OuputInst
+attributes
+operations
+end
+
+class EventConnectionInst
+attributes
+operations
+end
+
+class DataConnectionInst
+attributes
+operations
+end
+
+composition xxx_Component_att between
+	Component[0..1] role xxx_Component_att_src
+	Attributs[*] role att
+end
+
+composition xxx_Component_IOs between
+	Component[0..1] role xxx_Component_IOs_src
+	IO[1..*] role IOs
+end
+
+composition xxx_Library_c between
+	Library[0..1] role xxx_Library_c_src
+	Component[1..*] role c
+end
+
+composition xxx_DataInput_connections between
+	DataInput[0..1] role xxx_DataInput_connections_src
+	DataConnection[*] role connections
+end
+
+composition xxx_DataOutput_connection between
+	DataOutput[*] role xxx_DataOutput_connection_src
+	DataConnection[0..1] role connection
+end
+
+composition xxx_EventInput_connections between
+	EventInput[0..1] role xxx_EventInput_connections_src
+	EventConnection[*] role connections
+end
+
+composition xxx_EventOuput_connection between
+	EventOuput[*] role xxx_EventOuput_connection_src
+	EventConnection[0..1] role connection
+end
+
+association xxx_DataConnection_inputs between
+	DataConnection[0..1] role xxx_DataConnection_inputs_src
+	DataInput[1..*] role inputs
+end
+
+association xxx_EventConnection_inputs between
+	EventConnection[0..1] role xxx_EventConnection_inputs_src
+	EventInput[1..*] role inputs
+end
+
+association xxx_ComponentInst_instanceOf between
+	ComponentInst[*] role xxx_ComponentInst_instanceOf_src
+	Component[1] role instanceOf
+end
+
+composition xxx_ComponentInst_attsInst between
+	ComponentInst[*] role xxx_ComponentInst_attsInst_src
+	AttributsInst[1] role attsInst
+end
+
+association xxx_AttributsInst_instanceOf between
+	AttributsInst[*] role xxx_AttributsInst_instanceOf_src
+	Attributs[1] role instanceOf
+end
+
+association xxx_Process_instanceOf between
+	Process[0..1] role xxx_Process_instanceOf_src
+	ComponentInst[1..*] role instanceOf
+end
+
+association xxx_DataInputInst_instanceOf between
+	DataInputInst[*] role xxx_DataInputInst_instanceOf_src
+	DataInput[1] role instanceOf
+end
+
+association xxx_EventInputInst_instanceOf between
+	EventInputInst[*] role xxx_EventInputInst_instanceOf_src
+	EventInput[1] role instanceOf
+end
+
+association xxx_DataOuputInst_instanceOf between
+	DataOuputInst[*] role xxx_DataOuputInst_instanceOf_src
+	DataOutput[1] role instanceOf
+end
+
+composition xxx_DataOuputInst_connectionInst between
+	DataOuputInst[*] role xxx_DataOuputInst_connectionInst_src
+	DataConnectionInst[0..1] role connectionInst
+end
+
+association xxx_EventOutputInst_instanceOf between
+	EventOutputInst[*] role xxx_EventOutputInst_instanceOf_src
+	EventOuput[1] role instanceOf
+end
+
+composition xxx_EventOutputInst_connectionIns between
+	EventOutputInst[*] role xxx_EventOutputInst_connectionIns_src
+	EventConnectionInst[0..1] role connectionIns
+end
+
+association xxx_EventConnectionInst_instanceOf between
+	EventConnectionInst[*] role xxx_EventConnectionInst_instanceOf_src
+	EventConnection[1] role instanceOf
+end
+
+association xxx_EventConnectionInst_inputsInst between
+	EventConnectionInst[0..1] role xxx_EventConnectionInst_inputsInst_src
+	EventInputInst[1..*] role inputsInst
+end
+
+association xxx_DataConnectionInst_instanceOf between
+	DataConnectionInst[*] role xxx_DataConnectionInst_instanceOf_src
+	DataConnection[1] role instanceOf
+end
+
+association xxx_DataConnectionInst_inputsInst between
+	DataConnectionInst[0..1] role xxx_DataConnectionInst_inputsInst_src
+	DataInputInst[1..*] role inputsInst
+end
+

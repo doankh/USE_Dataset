@@ -1,0 +1,342 @@
+model cucumberfeature
+class Cucumber
+attributes
+operations
+end
+
+class Feature
+attributes
+operations
+end
+
+class FeatureBlock
+attributes
+operations
+end
+
+class FeatureIdentifier
+attributes
+operations
+end
+
+class FeatureDescription
+attributes
+	text : String
+operations
+end
+
+class BusinessValueDefinition
+attributes
+	text : String
+operations
+end
+
+class RoleDefinition
+attributes
+	text : String
+operations
+end
+
+class SomeActionDefinition
+attributes
+	text : String
+operations
+end
+
+class Background
+attributes
+operations
+end
+
+class BackgroundIdentifier
+attributes
+operations
+end
+
+abstract class Scenario
+attributes
+operations
+end
+
+class BasicScenario<Scenario
+attributes
+operations
+end
+
+class TableScenario<Scenario
+attributes
+operations
+end
+
+class TableScenarioIdentifier
+attributes
+operations
+end
+
+class TableBlock
+attributes
+operations
+end
+
+class TableIdentifier
+attributes
+operations
+end
+
+class TableHeader
+attributes
+	text : String
+operations
+end
+
+class TableRow
+attributes
+	text : String
+operations
+end
+
+class ScenarioIdentifier
+attributes
+operations
+end
+
+class ScenarioDescription
+attributes
+	text : String
+operations
+end
+
+class GivenBlock
+attributes
+operations
+end
+
+class GivenIdentifier
+attributes
+operations
+end
+
+class WhenBlock
+attributes
+operations
+end
+
+class WhenIdentifier
+attributes
+operations
+end
+
+class ThenBlock
+attributes
+operations
+end
+
+class ThenIdentifier
+attributes
+operations
+end
+
+class AndBlock
+attributes
+operations
+end
+
+class AndIdentifier
+attributes
+operations
+end
+
+class GivenDefinition
+attributes
+	text : String
+operations
+end
+
+class WhenDefinition
+attributes
+	text : String
+operations
+end
+
+class ThenDefinition
+attributes
+	text : String
+operations
+end
+
+class AndDefinition
+attributes
+	text : String
+operations
+end
+
+composition xxx_Cucumber_f between
+	Cucumber[0..1] role xxx_Cucumber_f_src
+	Feature[*] role f
+end
+
+composition xxx_Feature_fb between
+	Feature[*] role xxx_Feature_fb_src
+	FeatureBlock[0..1] role fb
+end
+
+composition xxx_Feature_ss between
+	Feature[0..1] role xxx_Feature_ss_src
+	Scenario[*] role ss
+end
+
+composition xxx_Feature_fd between
+	Feature[*] role xxx_Feature_fd_src
+	FeatureDescription[0..1] role fd
+end
+
+composition xxx_Feature_b between
+	Feature[*] role xxx_Feature_b_src
+	Background[0..1] role b
+end
+
+composition xxx_Feature_fi between
+	Feature[*] role xxx_Feature_fi_src
+	FeatureIdentifier[0..1] role fi
+end
+
+composition xxx_FeatureBlock_sad between
+	FeatureBlock[*] role xxx_FeatureBlock_sad_src
+	SomeActionDefinition[0..1] role sad
+end
+
+composition xxx_FeatureBlock_bvd between
+	FeatureBlock[*] role xxx_FeatureBlock_bvd_src
+	BusinessValueDefinition[0..1] role bvd
+end
+
+composition xxx_FeatureBlock_rd between
+	FeatureBlock[*] role xxx_FeatureBlock_rd_src
+	RoleDefinition[0..1] role rd
+end
+
+composition xxx_Background_wb between
+	Background[*] role xxx_Background_wb_src
+	WhenBlock[0..1] role wb
+end
+
+composition xxx_Background_tb between
+	Background[*] role xxx_Background_tb_src
+	ThenBlock[0..1] role tb
+end
+
+composition xxx_Background_bi between
+	Background[*] role xxx_Background_bi_src
+	BackgroundIdentifier[0..1] role bi
+end
+
+composition xxx_Background_gb between
+	Background[*] role xxx_Background_gb_src
+	GivenBlock[0..1] role gb
+end
+
+composition xxx_Scenario_gb between
+	Scenario[*] role xxx_Scenario_gb_src
+	GivenBlock[0..1] role gb
+end
+
+composition xxx_Scenario_wb between
+	Scenario[*] role xxx_Scenario_wb_src
+	WhenBlock[0..1] role wb
+end
+
+composition xxx_Scenario_sd between
+	Scenario[*] role xxx_Scenario_sd_src
+	ScenarioDescription[0..1] role sd
+end
+
+composition xxx_Scenario_tb between
+	Scenario[*] role xxx_Scenario_tb_src
+	ThenBlock[0..1] role tb
+end
+
+composition xxx_BasicScenario_si between
+	BasicScenario[*] role xxx_BasicScenario_si_src
+	ScenarioIdentifier[0..1] role si
+end
+
+composition xxx_TableScenario_table_block between
+	TableScenario[*] role xxx_TableScenario_table_block_src
+	TableBlock[0..1] role table_block
+end
+
+composition xxx_TableScenario_tsi between
+	TableScenario[*] role xxx_TableScenario_tsi_src
+	TableScenarioIdentifier[0..1] role tsi
+end
+
+composition xxx_TableBlock_th between
+	TableBlock[*] role xxx_TableBlock_th_src
+	TableHeader[0..1] role th
+end
+
+composition xxx_TableBlock_ti between
+	TableBlock[*] role xxx_TableBlock_ti_src
+	TableIdentifier[0..1] role ti
+end
+
+composition xxx_TableBlock_tr between
+	TableBlock[0..1] role xxx_TableBlock_tr_src
+	TableRow[*] role tr
+end
+
+composition xxx_GivenBlock_gi between
+	GivenBlock[*] role xxx_GivenBlock_gi_src
+	GivenIdentifier[0..1] role gi
+end
+
+composition xxx_GivenBlock_ab between
+	GivenBlock[0..1] role xxx_GivenBlock_ab_src
+	AndBlock[*] role ab
+end
+
+composition xxx_GivenBlock_given_def between
+	GivenBlock[*] role xxx_GivenBlock_given_def_src
+	GivenDefinition[0..1] role given_def
+end
+
+composition xxx_WhenBlock_when_def between
+	WhenBlock[*] role xxx_WhenBlock_when_def_src
+	WhenDefinition[0..1] role when_def
+end
+
+composition xxx_WhenBlock_wi between
+	WhenBlock[*] role xxx_WhenBlock_wi_src
+	WhenIdentifier[0..1] role wi
+end
+
+composition xxx_WhenBlock_ab between
+	WhenBlock[0..1] role xxx_WhenBlock_ab_src
+	AndBlock[*] role ab
+end
+
+composition xxx_ThenBlock_then_def between
+	ThenBlock[*] role xxx_ThenBlock_then_def_src
+	ThenDefinition[0..1] role then_def
+end
+
+composition xxx_ThenBlock_ab between
+	ThenBlock[0..1] role xxx_ThenBlock_ab_src
+	AndBlock[*] role ab
+end
+
+composition xxx_ThenBlock_ti between
+	ThenBlock[*] role xxx_ThenBlock_ti_src
+	ThenIdentifier[0..1] role ti
+end
+
+composition xxx_AndBlock_ai between
+	AndBlock[*] role xxx_AndBlock_ai_src
+	AndIdentifier[0..1] role ai
+end
+
+composition xxx_AndBlock_and_def between
+	AndBlock[*] role xxx_AndBlock_and_def_src
+	AndDefinition[0..1] role and_def
+end
+

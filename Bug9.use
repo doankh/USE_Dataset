@@ -1,0 +1,1088 @@
+model pivot
+enum AssociativityKind{
+default
+}
+
+enum CollectionKind{
+default
+}
+
+enum ParameterDirectionKind{
+default
+}
+
+class Annotation<NamedElement
+attributes
+operations
+end
+
+class AnyType<Class
+attributes
+operations
+end
+
+class AssociationClass<Class
+attributes
+operations
+end
+
+class AssociationClassCallExp<NavigationCallExp
+attributes
+operations
+end
+
+class BagType<CollectionType
+attributes
+operations
+end
+
+class BooleanLiteralExp<PrimitiveLiteralExp
+attributes
+	booleanSymbol : Boolean
+operations
+end
+
+abstract class CallExp<OclExpression
+attributes
+	implicit : Boolean
+operations
+end
+
+class CallOperationAction<NamedElement
+attributes
+operations
+end
+
+class Class<Type,Namespace
+attributes
+	isAbstract : Boolean
+	isInterface : Boolean
+operations
+end
+
+class Classifier<Type
+attributes
+operations
+end
+
+class ClassifierType<DataType
+attributes
+operations
+end
+
+class CollectionItem<CollectionLiteralPart
+attributes
+operations
+end
+
+class CollectionLiteralExp<LiteralExp
+attributes
+	kind : CollectionKind
+operations
+end
+
+abstract class CollectionLiteralPart<TypedElement
+attributes
+operations
+end
+
+class CollectionRange<CollectionLiteralPart
+attributes
+operations
+end
+
+class CollectionType<DataType
+attributes
+operations
+end
+
+class Comment<Element
+attributes
+	body : String
+operations
+end
+
+class Constraint<NamedElement
+attributes
+	stereotype : String
+	isCallable : Boolean
+operations
+end
+
+class DataType<Class
+attributes
+	isSerializable : Boolean
+operations
+end
+
+class Detail<NamedElement
+attributes
+	value : String
+operations
+end
+
+abstract class Element<Visitable
+attributes
+operations
+end
+
+class EnumLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+class EnumerationLiteral<NamedElement
+attributes
+	value : Integer
+operations
+end
+
+class ExpressionInOCL<OpaqueExpression
+attributes
+operations
+end
+
+abstract class Feature<TypedMultiplicityElement
+attributes
+	implementationClass : String
+	implementation : String
+operations
+end
+
+abstract class FeatureCallExp<CallExp
+attributes
+	isPre : Boolean
+operations
+end
+
+class IfExp<OclExpression
+attributes
+operations
+end
+
+class IntegerLiteralExp<NumericLiteralExp
+attributes
+	integerSymbol : Integer
+operations
+end
+
+class InvalidLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class InvalidType<Class
+attributes
+operations
+end
+
+class IterateExp<LoopExp
+attributes
+operations
+end
+
+class Iteration<Operation
+attributes
+operations
+end
+
+class IteratorExp<LoopExp
+attributes
+operations
+end
+
+class LambdaType<DataType
+attributes
+operations
+end
+
+class LetExp<OclExpression
+attributes
+operations
+end
+
+class Library<Package
+attributes
+operations
+end
+
+abstract class LiteralExp<OclExpression
+attributes
+operations
+end
+
+abstract class LoopExp<CallExp
+attributes
+operations
+end
+
+class MessageExp<OclExpression
+attributes
+operations
+end
+
+class MessageType<Type
+attributes
+operations
+end
+
+abstract class MonikeredElement<Element
+attributes
+	moniker : String
+operations
+	hasMoniker():Boolean
+end
+
+abstract class MultiplicityElement<MonikeredElement
+attributes
+	isOrdered : Boolean
+	isUnique : Boolean
+	lower : Integer
+	upper : String
+operations
+	lowerBound():Integer
+	upperBound():String
+	isMultivalued():Boolean
+	includesCardinality(C : Integer):Boolean
+	includesMultiplicity(M : MultiplicityElement):Boolean
+end
+
+abstract class Nameable
+attributes
+operations
+end
+
+abstract class NamedElement<MonikeredElement,Nameable
+attributes
+	name : String
+	isStatic : Boolean
+operations
+end
+
+abstract class Namespace<NamedElement
+attributes
+operations
+end
+
+abstract class NavigationCallExp<FeatureCallExp
+attributes
+operations
+end
+
+class NullLiteralExp<PrimitiveLiteralExp
+attributes
+operations
+end
+
+abstract class NumericLiteralExp<PrimitiveLiteralExp
+attributes
+operations
+end
+
+abstract class OclExpression<TypedElement
+attributes
+operations
+end
+
+class OpaqueExpression<ValueSpecification
+attributes
+	body : String
+	language : String
+	message : String
+operations
+end
+
+class Operation<Feature,Namespace,TemplateableElement,ParameterableElement
+attributes
+operations
+	testConstraint(diagnostics : String,context_ : String):Boolean
+end
+
+class OperationCallExp<FeatureCallExp
+attributes
+operations
+end
+
+class OperationTemplateParameter<TemplateParameter
+attributes
+operations
+end
+
+class OrderedSetType<CollectionType
+attributes
+operations
+end
+
+class Package<Namespace,TemplateableElement
+attributes
+	nsPrefix : String
+	nsURI : String
+operations
+end
+
+abstract class PackageableElement<ParameterableElement
+attributes
+operations
+end
+
+class Parameter<TypedMultiplicityElement,VariableDeclaration
+attributes
+	kind : ParameterDirectionKind
+operations
+	asProperty():Property
+end
+
+abstract class ParameterableElement<MonikeredElement
+attributes
+operations
+	isTemplateParameter():Boolean
+end
+
+abstract class Pivotable
+attributes
+operations
+end
+
+class Precedence<NamedElement
+attributes
+	associativity : AssociativityKind
+	order : Integer
+operations
+end
+
+abstract class PrimitiveLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class PrimitiveType<DataType
+attributes
+operations
+end
+
+class Property<Feature,ParameterableElement
+attributes
+	isReadOnly : Boolean
+	default : String
+	isComposite : Boolean
+	isDerived : Boolean
+	implicit : Boolean
+	isID : Boolean
+	isResolveProxies : Boolean
+	isTransient : Boolean
+	isUnsettable : Boolean
+	isVolatile : Boolean
+operations
+end
+
+class PropertyCallExp<NavigationCallExp
+attributes
+operations
+end
+
+class RealLiteralExp<NumericLiteralExp
+attributes
+	realSymbol : Real
+operations
+end
+
+class SendSignalAction<NamedElement
+attributes
+operations
+end
+
+class SequenceType<CollectionType
+attributes
+operations
+end
+
+class SetType<CollectionType
+attributes
+operations
+end
+
+class Signal<NamedElement
+attributes
+operations
+end
+
+class State<NamedElement
+attributes
+operations
+end
+
+class StateExp<OclExpression
+attributes
+operations
+end
+
+class StringLiteralExp<PrimitiveLiteralExp
+attributes
+	stringSymbol : String
+operations
+end
+
+class TemplateBinding<Element
+attributes
+operations
+end
+
+class TemplateParameter<Element
+attributes
+operations
+end
+
+class TemplateParameterSubstitution<Element
+attributes
+operations
+end
+
+class TemplateParameterType<Type
+attributes
+	specification : String
+operations
+end
+
+class TemplateSignature<MonikeredElement
+attributes
+operations
+end
+
+abstract class TemplateableElement<MonikeredElement
+attributes
+operations
+	parameterableElements():ParameterableElement
+	isTemplate():Boolean
+end
+
+class TupleLiteralExp<LiteralExp
+attributes
+operations
+end
+
+class TupleLiteralPart<VariableDeclaration
+attributes
+operations
+end
+
+class TupleType<DataType
+attributes
+operations
+end
+
+class Type<NamedElement,TemplateableElement,ParameterableElement
+attributes
+	instanceClassName : String
+operations
+end
+
+class TypeExp<OclExpression
+attributes
+operations
+end
+
+class TypeTemplateParameter<TemplateParameter
+attributes
+	allowSubstitutable : Boolean
+operations
+end
+
+abstract class TypedElement<NamedElement
+attributes
+operations
+end
+
+abstract class TypedMultiplicityElement<TypedElement,MultiplicityElement
+attributes
+operations
+end
+
+class UnlimitedNaturalLiteralExp<NumericLiteralExp
+attributes
+	unlimitedNaturalSymbol : String
+operations
+end
+
+class UnspecifiedType<Class
+attributes
+operations
+end
+
+class UnspecifiedValueExp<OclExpression
+attributes
+operations
+end
+
+abstract class ValueSpecification<TypedElement,ParameterableElement
+attributes
+operations
+	isComputable():Boolean
+	integerValue():Integer
+	booleanValue():Boolean
+	stringValue():String
+	unlimitedValue():String
+	isNull():Boolean
+end
+
+class Variable<VariableDeclaration
+attributes
+	implicit : Boolean
+operations
+end
+
+abstract class VariableDeclaration<TypedElement
+attributes
+operations
+end
+
+class VariableExp<OclExpression
+attributes
+	implicit : Boolean
+operations
+end
+
+abstract class Visitable
+attributes
+operations
+end
+
+abstract class Visitor
+attributes
+operations
+end
+
+class VoidType<Class
+attributes
+operations
+end
+
+composition xxx_Annotation_ownedContent between
+	Annotation[0..1] role xxx_Annotation_ownedContent_src
+	Element[*] role ownedContent
+end
+
+composition xxx_Annotation_ownedDetail between
+	Annotation[0..1] role xxx_Annotation_ownedDetail_src
+	Detail[*] role ownedDetail
+end
+
+association xxx_Annotation_reference between
+	Annotation[0..1] role xxx_Annotation_reference_src
+	Element[*] role reference
+end
+
+association xxx_AssociationClass_unownedAttribute between
+	AssociationClass[0..1] role xxx_AssociationClass_unownedAttribute_src
+	Property[*] role unownedAttribute
+end
+
+association xxx_AssociationClassCallExp_referredAssociationClass between
+	AssociationClassCallExp[*] role xxx_AssociationClassCallExp_referredAssociationClass_src
+	AssociationClass[0..1] role referredAssociationClass
+end
+
+composition xxx_CallExp_source between
+	CallExp[*] role xxx_CallExp_source_src
+	OclExpression[0..1] role source
+end
+
+association xxx_CallOperationAction_operation between
+	CallOperationAction[*] role xxx_CallOperationAction_operation_src
+	Operation[1] role operation
+end
+
+composition xxx_Class_ownedAttribute between
+	Class[0..1] role xxx_Class_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_Class_ownedOperation between
+	Class[0..1] role xxx_Class_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+association xxx_Class_superClass between
+	Class[0..1] role xxx_Class_superClass_src
+	Class[*] role superClass
+end
+
+association xxx_Class_subClass between
+	Class[0..1] role xxx_Class_subClass_src
+	Class[*] role subClass
+end
+
+association xxx_ClassifierType_instanceType between
+	ClassifierType[*] role xxx_ClassifierType_instanceType_src
+	Type[1] role instanceType
+end
+
+composition xxx_CollectionItem_item between
+	CollectionItem[*] role xxx_CollectionItem_item_src
+	OclExpression[1] role item
+end
+
+composition xxx_CollectionLiteralExp_part between
+	CollectionLiteralExp[0..1] role xxx_CollectionLiteralExp_part_src
+	CollectionLiteralPart[*] role part
+end
+
+composition xxx_CollectionRange_first between
+	CollectionRange[*] role xxx_CollectionRange_first_src
+	OclExpression[1] role first
+end
+
+composition xxx_CollectionRange_last between
+	CollectionRange[*] role xxx_CollectionRange_last_src
+	OclExpression[1] role last
+end
+
+association xxx_CollectionType_elementType between
+	CollectionType[*] role xxx_CollectionType_elementType_src
+	Type[1] role elementType
+end
+
+association xxx_Comment_annotatedElement between
+	Comment[0..1] role xxx_Comment_annotatedElement_src
+	Element[*] role annotatedElement
+end
+
+association xxx_Constraint_constrainedElement between
+	Constraint[0..1] role xxx_Constraint_constrainedElement_src
+	Element[*] role constrainedElement
+end
+
+composition xxx_Constraint_specification between
+	Constraint[*] role xxx_Constraint_specification_src
+	ValueSpecification[1] role specification
+end
+
+association xxx_Constraint_context_ between
+	Constraint[*] role xxx_Constraint_context__src
+	NamedElement[0..1] role context_
+end
+
+association xxx_DataType_behavioralType between
+	DataType[*] role xxx_DataType_behavioralType_src
+	Type[0..1] role behavioralType
+end
+
+composition xxx_Element_ownedComment between
+	Element[0..1] role xxx_Element_ownedComment_src
+	Comment[*] role ownedComment
+end
+
+association xxx_EnumLiteralExp_referredEnumLiteral between
+	EnumLiteralExp[*] role xxx_EnumLiteralExp_referredEnumLiteral_src
+	EnumerationLiteral[0..1] role referredEnumLiteral
+end
+
+composition xxx_Enumeration_ownedLiteral between
+	Enumeration[0..1] role xxx_Enumeration_ownedLiteral_src
+	EnumerationLiteral[*] role ownedLiteral
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+composition xxx_ExpressionInOCL_bodyExpression between
+	ExpressionInOCL[*] role xxx_ExpressionInOCL_bodyExpression_src
+	OclExpression[1] role bodyExpression
+end
+
+composition xxx_ExpressionInOCL_contextVariable between
+	ExpressionInOCL[*] role xxx_ExpressionInOCL_contextVariable_src
+	Variable[0..1] role contextVariable
+end
+
+composition xxx_ExpressionInOCL_resultVariable between
+	ExpressionInOCL[*] role xxx_ExpressionInOCL_resultVariable_src
+	Variable[0..1] role resultVariable
+end
+
+composition xxx_ExpressionInOCL_parameterVariable between
+	ExpressionInOCL[0..1] role xxx_ExpressionInOCL_parameterVariable_src
+	Variable[*] role parameterVariable
+end
+
+composition xxx_ExpressionInOCL_messageExpression between
+	ExpressionInOCL[*] role xxx_ExpressionInOCL_messageExpression_src
+	OclExpression[0..1] role messageExpression
+end
+
+composition xxx_IfExp_condition between
+	IfExp[*] role xxx_IfExp_condition_src
+	OclExpression[1] role condition
+end
+
+composition xxx_IfExp_thenExpression between
+	IfExp[*] role xxx_IfExp_thenExpression_src
+	OclExpression[1] role thenExpression
+end
+
+composition xxx_IfExp_elseExpression between
+	IfExp[*] role xxx_IfExp_elseExpression_src
+	OclExpression[1] role elseExpression
+end
+
+composition xxx_IterateExp_result between
+	IterateExp[*] role xxx_IterateExp_result_src
+	Variable[0..1] role result
+end
+
+composition xxx_Iteration_ownedIterator between
+	Iteration[0..1] role xxx_Iteration_ownedIterator_src
+	Parameter[*] role ownedIterator
+end
+
+composition xxx_Iteration_ownedAccumulator between
+	Iteration[0..1] role xxx_Iteration_ownedAccumulator_src
+	Parameter[*] role ownedAccumulator
+end
+
+association xxx_LambdaType_contextType between
+	LambdaType[*] role xxx_LambdaType_contextType_src
+	Type[1] role contextType
+end
+
+association xxx_LambdaType_parameterType between
+	LambdaType[0..1] role xxx_LambdaType_parameterType_src
+	Type[*] role parameterType
+end
+
+association xxx_LambdaType_resultType between
+	LambdaType[*] role xxx_LambdaType_resultType_src
+	Type[1] role resultType
+end
+
+composition xxx_LetExp_in_ between
+	LetExp[*] role xxx_LetExp_in__src
+	OclExpression[1] role in_
+end
+
+composition xxx_LetExp_variable between
+	LetExp[*] role xxx_LetExp_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_LoopExp_body between
+	LoopExp[*] role xxx_LoopExp_body_src
+	OclExpression[1] role body
+end
+
+composition xxx_LoopExp_iterator between
+	LoopExp[0..1] role xxx_LoopExp_iterator_src
+	Variable[*] role iterator
+end
+
+association xxx_LoopExp_referredIteration between
+	LoopExp[*] role xxx_LoopExp_referredIteration_src
+	Iteration[0..1] role referredIteration
+end
+
+composition xxx_MessageExp_target between
+	MessageExp[*] role xxx_MessageExp_target_src
+	OclExpression[1] role target
+end
+
+composition xxx_MessageExp_argument between
+	MessageExp[0..1] role xxx_MessageExp_argument_src
+	OclExpression[*] role argument
+end
+
+composition xxx_MessageExp_calledOperation between
+	MessageExp[*] role xxx_MessageExp_calledOperation_src
+	CallOperationAction[0..1] role calledOperation
+end
+
+composition xxx_MessageExp_sentSignal between
+	MessageExp[*] role xxx_MessageExp_sentSignal_src
+	SendSignalAction[0..1] role sentSignal
+end
+
+association xxx_MessageType_referredSignal between
+	MessageType[*] role xxx_MessageType_referredSignal_src
+	Signal[0..1] role referredSignal
+end
+
+association xxx_MessageType_referredOperation between
+	MessageType[*] role xxx_MessageType_referredOperation_src
+	Operation[0..1] role referredOperation
+end
+
+composition xxx_NamedElement_ownedRule between
+	NamedElement[0..1] role xxx_NamedElement_ownedRule_src
+	Constraint[*] role ownedRule
+end
+
+composition xxx_NamedElement_ownedAnnotation between
+	NamedElement[0..1] role xxx_NamedElement_ownedAnnotation_src
+	Annotation[*] role ownedAnnotation
+end
+
+association xxx_NavigationCallExp_qualifier between
+	NavigationCallExp[0..1] role xxx_NavigationCallExp_qualifier_src
+	OclExpression[*] role qualifier
+end
+
+association xxx_NavigationCallExp_navigationSource between
+	NavigationCallExp[*] role xxx_NavigationCallExp_navigationSource_src
+	Property[0..1] role navigationSource
+end
+
+association xxx_OpaqueExpression_valueExpression between
+	OpaqueExpression[*] role xxx_OpaqueExpression_valueExpression_src
+	ExpressionInOCL[0..1] role valueExpression
+end
+
+association xxx_Operation_raisedException between
+	Operation[0..1] role xxx_Operation_raisedException_src
+	Type[*] role raisedException
+end
+
+composition xxx_Operation_ownedParameter between
+	Operation[0..1] role xxx_Operation_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+association xxx_Operation_precedence between
+	Operation[*] role xxx_Operation_precedence_src
+	Precedence[0..1] role precedence
+end
+
+association xxx_Operation_class_ between
+	Operation[*] role xxx_Operation_class__src
+	Class[0..1] role class_
+end
+
+composition xxx_OperationCallExp_argument between
+	OperationCallExp[0..1] role xxx_OperationCallExp_argument_src
+	OclExpression[*] role argument
+end
+
+association xxx_OperationCallExp_referredOperation between
+	OperationCallExp[*] role xxx_OperationCallExp_referredOperation_src
+	Operation[0..1] role referredOperation
+end
+
+composition xxx_Package_nestedPackage between
+	Package[0..1] role xxx_Package_nestedPackage_src
+	Package[*] role nestedPackage
+end
+
+association xxx_Package_nestingPackage between
+	Package[*] role xxx_Package_nestingPackage_src
+	Package[0..1] role nestingPackage
+end
+
+composition xxx_Package_ownedPrecedence between
+	Package[0..1] role xxx_Package_ownedPrecedence_src
+	Precedence[*] role ownedPrecedence
+end
+
+composition xxx_Package_ownedType between
+	Package[0..1] role xxx_Package_ownedType_src
+	Type[*] role ownedType
+end
+
+association xxx_Parameter_operation between
+	Parameter[*] role xxx_Parameter_operation_src
+	Operation[0..1] role operation
+end
+
+association xxx_ParameterableElement_owningTemplateParameter between
+	ParameterableElement[*] role xxx_ParameterableElement_owningTemplateParameter_src
+	TemplateParameter[0..1] role owningTemplateParameter
+end
+
+association xxx_ParameterableElement_templateParameter between
+	ParameterableElement[*] role xxx_ParameterableElement_templateParameter_src
+	TemplateParameter[0..1] role templateParameter
+end
+
+association xxx_Property_opposite between
+	Property[*] role xxx_Property_opposite_src
+	Property[0..1] role opposite
+end
+
+association xxx_Property_association_ between
+	Property[*] role xxx_Property_association__src
+	AssociationClass[0..1] role association_
+end
+
+association xxx_Property_keys between
+	Property[0..1] role xxx_Property_keys_src
+	Property[*] role keys
+end
+
+association xxx_Property_class_ between
+	Property[*] role xxx_Property_class__src
+	Class[0..1] role class_
+end
+
+association xxx_PropertyCallExp_referredProperty between
+	PropertyCallExp[*] role xxx_PropertyCallExp_referredProperty_src
+	Property[0..1] role referredProperty
+end
+
+association xxx_SendSignalAction_signal between
+	SendSignalAction[*] role xxx_SendSignalAction_signal_src
+	Signal[1] role signal
+end
+
+association xxx_StateExp_referredState between
+	StateExp[*] role xxx_StateExp_referredState_src
+	State[0..1] role referredState
+end
+
+association xxx_TemplateBinding_signature between
+	TemplateBinding[*] role xxx_TemplateBinding_signature_src
+	TemplateSignature[1] role signature
+end
+
+composition xxx_TemplateBinding_parameterSubstitution between
+	TemplateBinding[0..1] role xxx_TemplateBinding_parameterSubstitution_src
+	TemplateParameterSubstitution[*] role parameterSubstitution
+end
+
+association xxx_TemplateBinding_boundElement between
+	TemplateBinding[*] role xxx_TemplateBinding_boundElement_src
+	TemplateableElement[1] role boundElement
+end
+
+association xxx_TemplateParameter_signature between
+	TemplateParameter[*] role xxx_TemplateParameter_signature_src
+	TemplateSignature[1] role signature
+end
+
+association xxx_TemplateParameter_parameteredElement between
+	TemplateParameter[*] role xxx_TemplateParameter_parameteredElement_src
+	ParameterableElement[1] role parameteredElement
+end
+
+composition xxx_TemplateParameter_ownedParameteredElement between
+	TemplateParameter[*] role xxx_TemplateParameter_ownedParameteredElement_src
+	ParameterableElement[0..1] role ownedParameteredElement
+end
+
+association xxx_TemplateParameter_default between
+	TemplateParameter[*] role xxx_TemplateParameter_default_src
+	ParameterableElement[0..1] role default
+end
+
+composition xxx_TemplateParameter_ownedDefault between
+	TemplateParameter[*] role xxx_TemplateParameter_ownedDefault_src
+	ParameterableElement[0..1] role ownedDefault
+end
+
+association xxx_TemplateParameterSubstitution_formal between
+	TemplateParameterSubstitution[*] role xxx_TemplateParameterSubstitution_formal_src
+	TemplateParameter[1] role formal
+end
+
+association xxx_TemplateParameterSubstitution_actual between
+	TemplateParameterSubstitution[*] role xxx_TemplateParameterSubstitution_actual_src
+	ParameterableElement[1] role actual
+end
+
+composition xxx_TemplateParameterSubstitution_ownedActual between
+	TemplateParameterSubstitution[*] role xxx_TemplateParameterSubstitution_ownedActual_src
+	ParameterableElement[0..1] role ownedActual
+end
+
+association xxx_TemplateParameterSubstitution_templateBinding between
+	TemplateParameterSubstitution[*] role xxx_TemplateParameterSubstitution_templateBinding_src
+	TemplateBinding[1] role templateBinding
+end
+
+association xxx_TemplateSignature_parameter between
+	TemplateSignature[0..1] role xxx_TemplateSignature_parameter_src
+	TemplateParameter[1..*] role parameter
+end
+
+composition xxx_TemplateSignature_ownedParameter between
+	TemplateSignature[0..1] role xxx_TemplateSignature_ownedParameter_src
+	TemplateParameter[*] role ownedParameter
+end
+
+association xxx_TemplateSignature_template between
+	TemplateSignature[*] role xxx_TemplateSignature_template_src
+	TemplateableElement[1] role template
+end
+
+composition xxx_TemplateableElement_templateBinding between
+	TemplateableElement[0..1] role xxx_TemplateableElement_templateBinding_src
+	TemplateBinding[*] role templateBinding
+end
+
+composition xxx_TemplateableElement_ownedTemplateSignature between
+	TemplateableElement[*] role xxx_TemplateableElement_ownedTemplateSignature_src
+	TemplateSignature[0..1] role ownedTemplateSignature
+end
+
+association xxx_TemplateableElement_unspecializedElement between
+	TemplateableElement[*] role xxx_TemplateableElement_unspecializedElement_src
+	TemplateableElement[0..1] role unspecializedElement
+end
+
+composition xxx_TupleLiteralExp_part between
+	TupleLiteralExp[0..1] role xxx_TupleLiteralExp_part_src
+	TupleLiteralPart[*] role part
+end
+
+composition xxx_TupleLiteralPart_initExpression between
+	TupleLiteralPart[*] role xxx_TupleLiteralPart_initExpression_src
+	OclExpression[0..1] role initExpression
+end
+
+association xxx_Type_package between
+	Type[*] role xxx_Type_package_src
+	Package[0..1] role package
+end
+
+association xxx_TypeExp_referredType between
+	TypeExp[*] role xxx_TypeExp_referredType_src
+	Type[0..1] role referredType
+end
+
+association xxx_TypeTemplateParameter_constrainingType between
+	TypeTemplateParameter[0..1] role xxx_TypeTemplateParameter_constrainingType_src
+	Type[*] role constrainingType
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_UnspecifiedType_lowerBound between
+	UnspecifiedType[*] role xxx_UnspecifiedType_lowerBound_src
+	Type[1] role lowerBound
+end
+
+association xxx_UnspecifiedType_upperBound between
+	UnspecifiedType[*] role xxx_UnspecifiedType_upperBound_src
+	Type[1] role upperBound
+end
+
+composition xxx_Variable_initExpression between
+	Variable[*] role xxx_Variable_initExpression_src
+	OclExpression[0..1] role initExpression
+end
+
+association xxx_Variable_representedParameter between
+	Variable[*] role xxx_Variable_representedParameter_src
+	Parameter[0..1] role representedParameter
+end
+
+association xxx_VariableExp_referredVariable between
+	VariableExp[*] role xxx_VariableExp_referredVariable_src
+	VariableDeclaration[0..1] role referredVariable
+end
+

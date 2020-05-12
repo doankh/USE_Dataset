@@ -1,0 +1,151 @@
+model OCLValues
+abstract class Value
+attributes
+operations
+end
+
+abstract class Type
+attributes
+operations
+end
+
+abstract class BasicValue<Value
+attributes
+operations
+end
+
+class IntegerValue<BasicValue
+attributes
+	val : Integer
+operations
+end
+
+class RealValue<BasicValue
+attributes
+	val : Real
+operations
+end
+
+class StringValue<BasicValue
+attributes
+	val : String
+operations
+end
+
+class BooleanValue<BasicValue
+attributes
+	val : Boolean
+operations
+end
+
+class ObjectValue<Value
+attributes
+operations
+end
+
+class Object
+attributes
+operations
+end
+
+class EnumValue<Value
+attributes
+operations
+end
+
+class EnumLiteral
+attributes
+operations
+end
+
+class UndefinedValue<Value
+attributes
+operations
+end
+
+abstract class CollectionValue<Value
+attributes
+operations
+end
+
+class BagValue
+attributes
+operations
+end
+
+class SequenceValue
+attributes
+operations
+end
+
+class SetValue
+attributes
+operations
+end
+
+class Count
+attributes
+	num : Integer
+operations
+end
+
+composition xxx_Value_type between
+	Value[*] role xxx_Value_type_src
+	Type[1] role type
+end
+
+association xxx_Value_bagValue between
+	Value[0..1] role xxx_Value_bagValue_src
+	BagValue[*] role bagValue
+end
+
+association xxx_Value_sequenceValue between
+	Value[0..1] role xxx_Value_sequenceValue_src
+	SequenceValue[*] role sequenceValue
+end
+
+association xxx_Value_setValue between
+	Value[0..1] role xxx_Value_setValue_src
+	SetValue[*] role setValue
+end
+
+association xxx_Type_value between
+	Type[0..1] role xxx_Type_value_src
+	Value[*] role value
+end
+
+composition xxx_ObjectValue_object between
+	ObjectValue[*] role xxx_ObjectValue_object_src
+	Object[1] role object
+end
+
+association xxx_Object_objectValue between
+	Object[*] role xxx_Object_objectValue_src
+	ObjectValue[0..1] role objectValue
+end
+
+composition xxx_EnumValue_enumLiteral between
+	EnumValue[*] role xxx_EnumValue_enumLiteral_src
+	EnumLiteral[1] role enumLiteral
+end
+
+association xxx_EnumLiteral_enumValue between
+	EnumLiteral[*] role xxx_EnumLiteral_enumValue_src
+	EnumValue[0..1] role enumValue
+end
+
+composition xxx_BagValue_elements between
+	BagValue[0..1] role xxx_BagValue_elements_src
+	Value[*] role elements
+end
+
+composition xxx_SequenceValue_elements between
+	SequenceValue[0..1] role xxx_SequenceValue_elements_src
+	Value[*] role elements
+end
+
+composition xxx_SetValue_elements between
+	SetValue[0..1] role xxx_SetValue_elements_src
+	Value[*] role elements
+end
+

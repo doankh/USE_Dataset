@@ -1,0 +1,192 @@
+model manufacturingSystem
+enum BinaryType{
+default
+}
+
+class WorkPiece
+attributes
+operations
+end
+
+class ManufacturingStep<Step
+attributes
+operations
+end
+
+class ManufacturingSystem
+attributes
+	name : String
+operations
+end
+
+class TransportStep<Step
+attributes
+operations
+end
+
+class QualityAssuranceStep<Step
+attributes
+operations
+end
+
+abstract class Step<ManufacturingSystemElement
+attributes
+	speed : Integer
+operations
+end
+
+class Responsible
+attributes
+	name : String
+operations
+end
+
+class InputCondition
+attributes
+	name : String
+operations
+end
+
+class StoragePoint<ManufacturingSystemElement
+attributes
+operations
+end
+
+class ManufacturingSystemElement
+attributes
+	name : String
+operations
+end
+
+class CompositeStep<Step
+attributes
+operations
+end
+
+class WorkPieceType
+attributes
+	name : String
+operations
+end
+
+class OutputDecision
+attributes
+operations
+end
+
+class WorkPieceCondition<InputCondition
+attributes
+operations
+end
+
+class BinaryCondition<InputCondition
+attributes
+	type : BinaryType
+operations
+end
+
+class Negation<InputCondition
+attributes
+operations
+end
+
+association xxx_WorkPiece_hasType between
+	WorkPiece[*] role xxx_WorkPiece_hasType_src
+	WorkPieceType[1] role hasType
+end
+
+composition xxx_ManufacturingSystem_consistsOf between
+	ManufacturingSystem[0..1] role xxx_ManufacturingSystem_consistsOf_src
+	ManufacturingSystemElement[1..*] role consistsOf
+end
+
+association xxx_ManufacturingSystem_start between
+	ManufacturingSystem[0..1] role xxx_ManufacturingSystem_start_src
+	StoragePoint[1..*] role start
+end
+
+association xxx_ManufacturingSystem_end_ between
+	ManufacturingSystem[0..1] role xxx_ManufacturingSystem_end__src
+	StoragePoint[1..*] role end_
+end
+
+composition xxx_ManufacturingSystem_uses between
+	ManufacturingSystem[0..1] role xxx_ManufacturingSystem_uses_src
+	WorkPieceType[*] role uses
+end
+
+composition xxx_ManufacturingSystem_transforms between
+	ManufacturingSystem[0..1] role xxx_ManufacturingSystem_transforms_src
+	WorkPiece[*] role transforms
+end
+
+association xxx_ManufacturingSystem_responsible between
+	ManufacturingSystem[*] role xxx_ManufacturingSystem_responsible_src
+	Responsible[0..1] role responsible
+end
+
+composition xxx_ManufacturingSystem_staff between
+	ManufacturingSystem[0..1] role xxx_ManufacturingSystem_staff_src
+	Responsible[*] role staff
+end
+
+composition xxx_Step_input between
+	Step[0..1] role xxx_Step_input_src
+	InputCondition[1..*] role input
+end
+
+composition xxx_Step_output between
+	Step[0..1] role xxx_Step_output_src
+	OutputDecision[1..*] role output
+end
+
+association xxx_StoragePoint_stores between
+	StoragePoint[0..1] role xxx_StoragePoint_stores_src
+	WorkPieceType[*] role stores
+end
+
+association xxx_ManufacturingSystemElement_transition between
+	ManufacturingSystemElement[0..1] role xxx_ManufacturingSystemElement_transition_src
+	ManufacturingSystemElement[*] role transition
+end
+
+association xxx_ManufacturingSystemElement_responsible between
+	ManufacturingSystemElement[*] role xxx_ManufacturingSystemElement_responsible_src
+	Responsible[0..1] role responsible
+end
+
+composition xxx_CompositeStep_contains between
+	CompositeStep[*] role xxx_CompositeStep_contains_src
+	ManufacturingSystem[1] role contains
+end
+
+association xxx_OutputDecision_outputTypes between
+	OutputDecision[*] role xxx_OutputDecision_outputTypes_src
+	WorkPieceType[0..1] role outputTypes
+end
+
+association xxx_OutputDecision_input between
+	OutputDecision[0..1] role xxx_OutputDecision_input_src
+	InputCondition[1..*] role input
+end
+
+association xxx_WorkPieceCondition_requiresType between
+	WorkPieceCondition[*] role xxx_WorkPieceCondition_requiresType_src
+	WorkPieceType[1] role requiresType
+end
+
+association xxx_BinaryCondition_left between
+	BinaryCondition[*] role xxx_BinaryCondition_left_src
+	InputCondition[1] role left
+end
+
+association xxx_BinaryCondition_right between
+	BinaryCondition[*] role xxx_BinaryCondition_right_src
+	InputCondition[1] role right
+end
+
+association xxx_Negation_contains between
+	Negation[*] role xxx_Negation_contains_src
+	InputCondition[1] role contains
+end
+

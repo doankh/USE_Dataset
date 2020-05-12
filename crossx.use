@@ -1,0 +1,62 @@
+model crossx
+class ModelInfo
+attributes
+	lastChanged : String
+	modelname : String
+	resource : String
+	dslname : String
+operations
+end
+
+class Symbol
+attributes
+	name : String
+	type : String
+operations
+end
+
+class SymbolProperty
+attributes
+	name : String
+operations
+end
+
+class LiteralSymbolProperty<SymbolProperty
+attributes
+	value : String
+operations
+end
+
+class ReferenceSymbolProperty<SymbolProperty
+attributes
+	type : String
+	modelname : String
+	symbolname : String
+operations
+end
+
+composition xxx_ModelInfo_symbols between
+	ModelInfo[0..1] role xxx_ModelInfo_symbols_src
+	Symbol[*] role symbols
+end
+
+composition xxx_Symbol_properties between
+	Symbol[0..1] role xxx_Symbol_properties_src
+	SymbolProperty[*] role properties
+end
+
+composition xxx_Symbol_subSymbols between
+	Symbol[0..1] role xxx_Symbol_subSymbols_src
+	Symbol[*] role subSymbols
+end
+
+association xxx_Symbol_owner between
+	Symbol[*] role xxx_Symbol_owner_src
+	ModelInfo[0..1] role owner
+end
+
+composition xxx_SymbolProperty_subProperties between
+	SymbolProperty[0..1] role xxx_SymbolProperty_subProperties_src
+	SymbolProperty[*] role subProperties
+end
+

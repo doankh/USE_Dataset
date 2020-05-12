@@ -1,0 +1,249 @@
+model simulator
+class SimModel
+attributes
+operations
+end
+
+class Workload
+attributes
+	name : String
+operations
+end
+
+class Service
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ResourceQueue
+attributes
+	name : String
+	description : String
+	capacity : Integer
+operations
+end
+
+class Step
+attributes
+	name : String
+operations
+end
+
+class Transition
+attributes
+	prob : Real
+operations
+end
+
+class Start<Step
+attributes
+operations
+end
+
+class End<Step
+attributes
+operations
+end
+
+class Activity<Step
+attributes
+	repetitions : Integer
+operations
+end
+
+class DiscreteFailMode<FailMode
+attributes
+operations
+end
+
+class ContinuousFailMode<FailMode
+attributes
+	internalFailProb : Real
+operations
+end
+
+class FailMode
+attributes
+operations
+end
+
+class ServiceCall
+attributes
+operations
+end
+
+class SynchServiceCall<ServiceCall
+attributes
+operations
+end
+
+class AsynchServiceCall<ServiceCall
+attributes
+operations
+end
+
+class Branch<Step
+attributes
+operations
+end
+
+class Join<Step
+attributes
+	nTransition : Integer
+operations
+end
+
+class Fork<Step
+attributes
+operations
+end
+
+class Wait<Step
+attributes
+operations
+end
+
+class OpenWorkload<Workload
+attributes
+operations
+end
+
+class ClosedWorkload<Workload
+attributes
+	population : Integer
+operations
+end
+
+class ExternalService<Step
+attributes
+operations
+end
+
+class ServiceWake<Step
+attributes
+operations
+end
+
+class EClass0
+attributes
+operations
+end
+
+class ProbabilityDistributionFunction
+attributes
+operations
+end
+
+class Normal<ProbabilityDistributionFunction
+attributes
+	mean : Real
+	variance : Real
+operations
+end
+
+class Poisson<ProbabilityDistributionFunction
+attributes
+	mean : Real
+operations
+end
+
+class Uniform<ProbabilityDistributionFunction
+attributes
+	min : Real
+	max : Real
+operations
+end
+
+class Exponential<ProbabilityDistributionFunction
+attributes
+	mean : Real
+operations
+end
+
+composition xxx_SimModel_workload between
+	SimModel[0..1] role xxx_SimModel_workload_src
+	Workload[*] role workload
+end
+
+composition xxx_SimModel_resource between
+	SimModel[0..1] role xxx_SimModel_resource_src
+	ResourceQueue[1..*] role resource
+end
+
+composition xxx_Workload_step between
+	Workload[0..1] role xxx_Workload_step_src
+	Step[1..*] role step
+end
+
+composition xxx_Service_step between
+	Service[0..1] role xxx_Service_step_src
+	Step[1..*] role step
+end
+
+composition xxx_ResourceQueue_offeredService between
+	ResourceQueue[0..1] role xxx_ResourceQueue_offeredService_src
+	Service[1..*] role offeredService
+end
+
+composition xxx_Step_outTransition between
+	Step[0..1] role xxx_Step_outTransition_src
+	Transition[*] role outTransition
+end
+
+association xxx_Transition_from_ between
+	Transition[*] role xxx_Transition_from__src
+	Step[1] role from_
+end
+
+association xxx_Transition_to between
+	Transition[*] role xxx_Transition_to_src
+	Step[1] role to
+end
+
+composition xxx_Activity_serviceTime between
+	Activity[*] role xxx_Activity_serviceTime_src
+	ProbabilityDistributionFunction[1] role serviceTime
+end
+
+composition xxx_Activity_failMode between
+	Activity[*] role xxx_Activity_failMode_src
+	FailMode[1] role failMode
+end
+
+composition xxx_DiscreteFailMode_internalFailTime between
+	DiscreteFailMode[*] role xxx_DiscreteFailMode_internalFailTime_src
+	ProbabilityDistributionFunction[1] role internalFailTime
+end
+
+association xxx_ServiceCall_service between
+	ServiceCall[*] role xxx_ServiceCall_service_src
+	Service[1] role service
+end
+
+association xxx_Join_inTransition between
+	Join[0..1] role xxx_Join_inTransition_src
+	Transition[1..*] role inTransition
+end
+
+composition xxx_OpenWorkload_arrivalProcess between
+	OpenWorkload[*] role xxx_OpenWorkload_arrivalProcess_src
+	ProbabilityDistributionFunction[1] role arrivalProcess
+end
+
+composition xxx_ExternalService_serviceCall between
+	ExternalService[*] role xxx_ExternalService_serviceCall_src
+	ServiceCall[1] role serviceCall
+end
+
+composition xxx_ExternalService_failProb between
+	ExternalService[*] role xxx_ExternalService_failProb_src
+	ContinuousFailMode[0..1] role failProb
+end
+
+association xxx_ServiceWake_signal between
+	ServiceWake[*] role xxx_ServiceWake_signal_src
+	Wait[1] role signal
+end
+

@@ -1,0 +1,53 @@
+model base
+enum VirtualMachineImageType{
+default
+}
+
+class MonitoringProbe
+attributes
+	uID : String
+	name : String
+	description : String
+	uRL : String
+operations
+end
+
+class ResizingAction
+attributes
+	uID : String
+	name : String
+	description : String
+	uRL : String
+operations
+end
+
+class SoftwareDependency
+attributes
+	uID : String
+	name : String
+	description : String
+	uRL : String
+	type : String
+operations
+end
+
+class VirtualMachineImage
+attributes
+	uID : String
+	name : String
+	description : String
+	type : VirtualMachineImageType
+	uRL : String
+operations
+end
+
+class UserApplication
+attributes
+	uID : String
+	name : String
+	description : String
+	uRL : String
+	type : String
+operations
+end
+

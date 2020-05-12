@@ -1,0 +1,139 @@
+model play
+enum PindexType{
+default
+}
+
+class ActType
+attributes
+	pindex : String
+	title : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	groupDescription : String
+	line : String
+	p : String
+	persona : String
+	playSubTitle : String
+	sceneDescription : String
+	speaker : String
+	stageDirections : String
+	title : String
+operations
+end
+
+class FmType
+attributes
+	p : String
+operations
+end
+
+class PersonaeType
+attributes
+	group : String
+	title : String
+	persona : String
+operations
+end
+
+class PersonaGroupType
+attributes
+	persona : String
+	groupDescription : String
+operations
+end
+
+class PlayType
+attributes
+	title : String
+	sceneDescription : String
+	playSubTitle : String
+operations
+end
+
+class SceneType
+attributes
+	group : String
+	stageDirections : String
+	pindex : PindexType
+	title : String
+operations
+end
+
+class SpeechType
+attributes
+	group : String
+	speaker : String
+	line : String
+	stageDirections : String
+operations
+end
+
+composition xxx_ActType_scene between
+	ActType[0..1] role xxx_ActType_scene_src
+	SceneType[1..*] role scene
+end
+
+composition xxx_DocumentRoot_act between
+	DocumentRoot[*] role xxx_DocumentRoot_act_src
+	ActType[*] role act
+end
+
+composition xxx_DocumentRoot_fm between
+	DocumentRoot[*] role xxx_DocumentRoot_fm_src
+	FmType[*] role fm
+end
+
+composition xxx_DocumentRoot_personae between
+	DocumentRoot[*] role xxx_DocumentRoot_personae_src
+	PersonaeType[*] role personae
+end
+
+composition xxx_DocumentRoot_personaGroup between
+	DocumentRoot[*] role xxx_DocumentRoot_personaGroup_src
+	PersonaGroupType[*] role personaGroup
+end
+
+composition xxx_DocumentRoot_play between
+	DocumentRoot[*] role xxx_DocumentRoot_play_src
+	PlayType[*] role play
+end
+
+composition xxx_DocumentRoot_scene between
+	DocumentRoot[*] role xxx_DocumentRoot_scene_src
+	SceneType[*] role scene
+end
+
+composition xxx_DocumentRoot_speech between
+	DocumentRoot[*] role xxx_DocumentRoot_speech_src
+	SpeechType[*] role speech
+end
+
+composition xxx_PersonaeType_personaGroup between
+	PersonaeType[0..1] role xxx_PersonaeType_personaGroup_src
+	PersonaGroupType[*] role personaGroup
+end
+
+composition xxx_PlayType_fm between
+	PlayType[*] role xxx_PlayType_fm_src
+	FmType[1] role fm
+end
+
+composition xxx_PlayType_personae between
+	PlayType[*] role xxx_PlayType_personae_src
+	PersonaeType[1] role personae
+end
+
+composition xxx_PlayType_act between
+	PlayType[0..1] role xxx_PlayType_act_src
+	ActType[1..*] role act
+end
+
+composition xxx_SceneType_speech between
+	SceneType[0..1] role xxx_SceneType_speech_src
+	SpeechType[*] role speech
+end
+

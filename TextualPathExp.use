@@ -1,0 +1,43 @@
+model TextualPathExp
+class TextualPathExp
+attributes
+operations
+end
+
+class Path
+attributes
+operations
+end
+
+abstract class Transition
+attributes
+	isMultiple : Boolean
+operations
+end
+
+class AlternativeTrans<Transition
+attributes
+operations
+end
+
+class PrimitiveTrans<Transition
+attributes
+	name : String
+operations
+end
+
+composition xxx_TextualPathExp_path between
+	TextualPathExp[*] role xxx_TextualPathExp_path_src
+	Path[1] role path
+end
+
+composition xxx_Path_transitions_ between
+	Path[0..1] role xxx_Path_transitions__src
+	Transition[1..*] role transitions_
+end
+
+composition xxx_AlternativeTrans_altPaths between
+	AlternativeTrans[0..1] role xxx_AlternativeTrans_altPaths_src
+	Path[1..*] role altPaths
+end
+

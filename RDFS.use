@@ -1,0 +1,297 @@
+model RDFS
+class Resource
+attributes
+operations
+end
+
+class Graph<Resource
+attributes
+operations
+end
+
+class List<Resource
+attributes
+operations
+end
+
+class Container<Resource
+attributes
+operations
+end
+
+class Alt<Container
+attributes
+operations
+end
+
+class Bag_<Container
+attributes
+operations
+end
+
+class Seq<Container
+attributes
+operations
+end
+
+class Property<Resource
+attributes
+operations
+end
+
+class ContainerMembershipProperty
+attributes
+operations
+end
+
+class Statement<Resource
+attributes
+	isReifiedOnly : Boolean
+	isReified : Boolean
+operations
+end
+
+class URIReferenceNode<Resource
+attributes
+operations
+end
+
+class BlankNode<Resource
+attributes
+	nodeId : String
+operations
+end
+
+class Class<Resource
+attributes
+operations
+end
+
+class Datatype<Class
+attributes
+operations
+end
+
+class Literal<Resource
+attributes
+	lexicalForm : String
+operations
+end
+
+class PlainLiteral<Literal
+attributes
+	language : String
+operations
+end
+
+class TypedLiteral<Literal
+attributes
+operations
+end
+
+class RDFXMLLiteral<TypedLiteral
+attributes
+operations
+end
+
+class URIReference
+attributes
+operations
+end
+
+class UniformResourceIdentifier<URIReference
+attributes
+	name : String
+operations
+end
+
+association xxx_Resource_graph between
+	Resource[*] role xxx_Resource_graph_src
+	Graph[1] role graph
+end
+
+composition xxx_Resource_uriRef between
+	Resource[0..1] role xxx_Resource_uriRef_src
+	URIReference[*] role uriRef
+end
+
+association xxx_Resource_subjectStatement between
+	Resource[0..1] role xxx_Resource_subjectStatement_src
+	Statement[*] role subjectStatement
+end
+
+association xxx_Resource_objectStatement between
+	Resource[0..1] role xxx_Resource_objectStatement_src
+	Statement[*] role objectStatement
+end
+
+composition xxx_Resource_label between
+	Resource[0..1] role xxx_Resource_label_src
+	PlainLiteral[*] role label
+end
+
+association xxx_Resource_type between
+	Resource[0..1] role xxx_Resource_type_src
+	Class[1..*] role type
+end
+
+association xxx_Resource_seeAlso between
+	Resource[0..1] role xxx_Resource_seeAlso_src
+	Resource[*] role seeAlso
+end
+
+association xxx_Resource_referringResource between
+	Resource[0..1] role xxx_Resource_referringResource_src
+	Resource[*] role referringResource
+end
+
+association xxx_Resource_member between
+	Resource[0..1] role xxx_Resource_member_src
+	Resource[*] role member
+end
+
+association xxx_Resource_container between
+	Resource[0..1] role xxx_Resource_container_src
+	Resource[*] role container
+end
+
+association xxx_Resource_list between
+	Resource[0..1] role xxx_Resource_list_src
+	List[*] role list
+end
+
+composition xxx_Graph_graphName between
+	Graph[*] role xxx_Graph_graphName_src
+	URIReference[0..1] role graphName
+end
+
+composition xxx_Graph_resources between
+	Graph[0..1] role xxx_Graph_resources_src
+	Resource[*] role resources
+end
+
+association xxx_List_first between
+	List[*] role xxx_List_first_src
+	Resource[0..1] role first
+end
+
+association xxx_List_rest between
+	List[*] role xxx_List_rest_src
+	List[0..1] role rest
+end
+
+association xxx_List_originalList between
+	List[0..1] role xxx_List_originalList_src
+	List[*] role originalList
+end
+
+association xxx_Property_predicateStatement between
+	Property[0..1] role xxx_Property_predicateStatement_src
+	Statement[*] role predicateStatement
+end
+
+association xxx_Property_subPropertyOf between
+	Property[0..1] role xxx_Property_subPropertyOf_src
+	Property[*] role subPropertyOf
+end
+
+association xxx_Property_superProperty between
+	Property[0..1] role xxx_Property_superProperty_src
+	Property[*] role superProperty
+end
+
+association xxx_Property_domain between
+	Property[0..1] role xxx_Property_domain_src
+	Class[*] role domain
+end
+
+association xxx_Property_range between
+	Property[0..1] role xxx_Property_range_src
+	Class[*] role range
+end
+
+association xxx_Statement_predicate between
+	Statement[*] role xxx_Statement_predicate_src
+	Property[0..1] role predicate
+end
+
+association xxx_Statement_object between
+	Statement[*] role xxx_Statement_object_src
+	Resource[1] role object
+end
+
+association xxx_Statement_subject between
+	Statement[*] role xxx_Statement_subject_src
+	Resource[1] role subject
+end
+
+association xxx_Statement_nameForReification between
+	Statement[0..1] role xxx_Statement_nameForReification_src
+	URIReference[*] role nameForReification
+end
+
+association xxx_Class_subClassOf between
+	Class[0..1] role xxx_Class_subClassOf_src
+	Class[*] role subClassOf
+end
+
+association xxx_Class_superClass between
+	Class[0..1] role xxx_Class_superClass_src
+	Class[*] role superClass
+end
+
+association xxx_Class_typedResource between
+	Class[0..1] role xxx_Class_typedResource_src
+	Resource[*] role typedResource
+end
+
+association xxx_Class_propertyForDomain between
+	Class[0..1] role xxx_Class_propertyForDomain_src
+	Property[*] role propertyForDomain
+end
+
+association xxx_Class_propertyForRange between
+	Class[0..1] role xxx_Class_propertyForRange_src
+	Property[*] role propertyForRange
+end
+
+association xxx_PlainLiteral_labeledResource between
+	PlainLiteral[*] role xxx_PlainLiteral_labeledResource_src
+	Resource[1] role labeledResource
+end
+
+association xxx_TypedLiteral_datatypeURI between
+	TypedLiteral[*] role xxx_TypedLiteral_datatypeURI_src
+	URIReference[1] role datatypeURI
+end
+
+association xxx_URIReference_uri between
+	URIReference[*] role xxx_URIReference_uri_src
+	UniformResourceIdentifier[0..1] role uri
+end
+
+association xxx_URIReference_resource between
+	URIReference[*] role xxx_URIReference_resource_src
+	Resource[0..1] role resource
+end
+
+association xxx_URIReference_literal between
+	URIReference[*] role xxx_URIReference_literal_src
+	TypedLiteral[0..1] role literal
+end
+
+association xxx_URIReference_namedGraph between
+	URIReference[*] role xxx_URIReference_namedGraph_src
+	Graph[0..1] role namedGraph
+end
+
+association xxx_URIReference_reifiedStatement between
+	URIReference[0..1] role xxx_URIReference_reifiedStatement_src
+	Statement[*] role reifiedStatement
+end
+
+association xxx_UniformResourceIdentifier_uriRef between
+	UniformResourceIdentifier[0..1] role xxx_UniformResourceIdentifier_uriRef_src
+	URIReference[*] role uriRef
+end
+

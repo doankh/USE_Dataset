@@ -1,0 +1,73 @@
+model StateMachineHyperedges
+class StateMachine
+attributes
+operations
+end
+
+abstract class StateVertex
+attributes
+	name : String
+operations
+end
+
+class Transition
+attributes
+	name : String
+operations
+end
+
+class InitialState<StateVertex
+attributes
+operations
+end
+
+class SimpleState<StateVertex
+attributes
+operations
+end
+
+class FinalState<StateVertex
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+composition xxx_StateMachine_states_ between
+	StateMachine[0..1] role xxx_StateMachine_states__src
+	StateVertex[*] role states_
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Transition[*] role transitions_
+end
+
+association xxx_StateVertex_outgoing between
+	StateVertex[0..1] role xxx_StateVertex_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_StateVertex_incoming between
+	StateVertex[0..1] role xxx_StateVertex_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_Transition_trigger between
+	Transition[*] role xxx_Transition_trigger_src
+	Event[0..1] role trigger
+end
+
+association xxx_Transition_sources between
+	Transition[0..1] role xxx_Transition_sources_src
+	StateVertex[*] role sources
+end
+
+association xxx_Transition_targets between
+	Transition[0..1] role xxx_Transition_targets_src
+	StateVertex[*] role targets
+end
+

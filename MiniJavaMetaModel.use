@@ -1,0 +1,215 @@
+model MiniJavaMetamodel
+enum LogicalOperator{
+default
+}
+
+enum ComparisonOperator{
+default
+}
+
+enum BinaryOperator{
+default
+}
+
+class Program
+attributes
+operations
+end
+
+class Declaration
+attributes
+	variableList : String
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class Empty<Statement
+attributes
+operations
+end
+
+class Compound<Statement
+attributes
+operations
+end
+
+class Read<Statement
+attributes
+	lhs : String
+operations
+end
+
+class Write<Statement
+attributes
+operations
+end
+
+class IfThenElse<Statement
+attributes
+operations
+end
+
+class Loop<Statement
+attributes
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+class LogicalCondition<Condition
+attributes
+	operator : LogicalOperator
+operations
+end
+
+class ComparisonCondition<Condition
+attributes
+	operator : ComparisonOperator
+operations
+end
+
+class NotCondition<Condition
+attributes
+operations
+end
+
+class GroupedCondition<Condition
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class Identifier<Expression
+attributes
+	id : String
+operations
+end
+
+class IntConstant<Expression
+attributes
+	value : Integer
+operations
+end
+
+class SignedExpression<Expression
+attributes
+operations
+end
+
+class BinaryExpression<Expression
+attributes
+	operator : BinaryOperator
+operations
+end
+
+class GroupedExpression<Expression
+attributes
+operations
+end
+
+composition xxx_Program_declarations between
+	Program[0..1] role xxx_Program_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Program_statements between
+	Program[0..1] role xxx_Program_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Compound_innerStatements between
+	Compound[0..1] role xxx_Compound_innerStatements_src
+	Statement[*] role innerStatements
+end
+
+composition xxx_Write_expression between
+	Write[*] role xxx_Write_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_IfThenElse_condition between
+	IfThenElse[*] role xxx_IfThenElse_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_IfThenElse_then_ between
+	IfThenElse[*] role xxx_IfThenElse_then__src
+	Statement[0..1] role then_
+end
+
+composition xxx_IfThenElse_else_ between
+	IfThenElse[*] role xxx_IfThenElse_else__src
+	Statement[0..1] role else_
+end
+
+composition xxx_Loop_condition between
+	Loop[*] role xxx_Loop_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_Loop_statement between
+	Loop[*] role xxx_Loop_statement_src
+	Statement[0..1] role statement
+end
+
+composition xxx_LogicalCondition_left between
+	LogicalCondition[*] role xxx_LogicalCondition_left_src
+	Condition[0..1] role left
+end
+
+composition xxx_LogicalCondition_right between
+	LogicalCondition[*] role xxx_LogicalCondition_right_src
+	Condition[0..1] role right
+end
+
+composition xxx_ComparisonCondition_left between
+	ComparisonCondition[*] role xxx_ComparisonCondition_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ComparisonCondition_right between
+	ComparisonCondition[*] role xxx_ComparisonCondition_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_NotCondition_condition between
+	NotCondition[*] role xxx_NotCondition_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_GroupedCondition_condition between
+	GroupedCondition[*] role xxx_GroupedCondition_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_SignedExpression_expression between
+	SignedExpression[*] role xxx_SignedExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_BinaryExpression_left between
+	BinaryExpression[*] role xxx_BinaryExpression_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_BinaryExpression_right between
+	BinaryExpression[*] role xxx_BinaryExpression_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_GroupedExpression_expression between
+	GroupedExpression[*] role xxx_GroupedExpression_expression_src
+	Expression[0..1] role expression
+end
+

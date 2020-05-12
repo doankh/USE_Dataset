@@ -1,0 +1,98 @@
+model layersconfig
+enum ClassnameKind{
+default
+}
+
+class Folder<FolderElement
+attributes
+operations
+end
+
+abstract class FolderElement
+attributes
+	name : String
+operations
+end
+
+class LayerOperatorConfig<InstanciableElement
+attributes
+operations
+	createLayersOperatorDescriptor():String
+end
+
+abstract class InstanciableElement<FolderElement
+attributes
+	classname : String
+	bundleID : String
+	displayName : String
+	iconPath : String
+	classnameKind : ClassnameKind
+operations
+end
+
+class OperatorConfig<InstanciableElement
+attributes
+operations
+	createOperatorDescriptor():String
+end
+
+class PropertyId<FolderElement
+attributes
+operations
+end
+
+class TypeConfig<FolderElement
+attributes
+operations
+end
+
+class LayerOperatorMultipleBinding<FolderElement
+attributes
+operations
+end
+
+class OperatorBinding
+attributes
+operations
+end
+
+composition xxx_Folder_folderElements between
+	Folder[0..1] role xxx_Folder_folderElements_src
+	FolderElement[*] role folderElements
+end
+
+association xxx_PropertyId_type between
+	PropertyId[*] role xxx_PropertyId_type_src
+	TypeConfig[1] role type
+end
+
+association xxx_LayerOperatorMultipleBinding_layerOperatorConfig between
+	LayerOperatorMultipleBinding[*] role xxx_LayerOperatorMultipleBinding_layerOperatorConfig_src
+	LayerOperatorConfig[1] role layerOperatorConfig
+end
+
+composition xxx_LayerOperatorMultipleBinding_bindings between
+	LayerOperatorMultipleBinding[0..1] role xxx_LayerOperatorMultipleBinding_bindings_src
+	OperatorBinding[*] role bindings
+end
+
+association xxx_OperatorBinding_operator between
+	OperatorBinding[*] role xxx_OperatorBinding_operator_src
+	OperatorConfig[1] role operator
+end
+
+association xxx_OperatorBinding_layerOperatorConfig between
+	OperatorBinding[*] role xxx_OperatorBinding_layerOperatorConfig_src
+	LayerOperatorConfig[1] role layerOperatorConfig
+end
+
+association xxx_OperatorBinding_propertyId between
+	OperatorBinding[*] role xxx_OperatorBinding_propertyId_src
+	PropertyId[1] role propertyId
+end
+
+association xxx_OperatorBinding_owner between
+	OperatorBinding[*] role xxx_OperatorBinding_owner_src
+	LayerOperatorMultipleBinding[1] role owner
+end
+

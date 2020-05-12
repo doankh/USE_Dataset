@@ -1,0 +1,58 @@
+model ControlStructures
+abstract class Instruction
+attributes
+operations
+	evalInstruction(context_ : String)
+end
+
+abstract class Expression<Instruction
+attributes
+operations
+	eval(context_ : String)
+end
+
+abstract class ControlStructure<Instruction
+attributes
+operations
+end
+
+class If<ControlStructure
+attributes
+operations
+end
+
+class Block<ControlStructure
+attributes
+operations
+end
+
+class While<ControlStructure
+attributes
+operations
+end
+
+composition xxx_If_body between
+	If[*] role xxx_If_body_src
+	Block[0..1] role body
+end
+
+composition xxx_If_condition between
+	If[*] role xxx_If_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_Block_instructions between
+	Block[0..1] role xxx_Block_instructions_src
+	Instruction[*] role instructions
+end
+
+composition xxx_While_body between
+	While[*] role xxx_While_body_src
+	Block[0..1] role body
+end
+
+composition xxx_While_guard between
+	While[*] role xxx_While_guard_src
+	Expression[1] role guard
+end
+

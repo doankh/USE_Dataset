@@ -1,0 +1,41 @@
+model LogoLiteralsProv
+abstract class Expression
+attributes
+operations
+	eval(context_ : String)
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class Integer<Literal
+attributes
+	value : String
+operations
+end
+
+class Void<Literal
+attributes
+operations
+end
+
+class Double<Literal
+attributes
+	value : String
+operations
+end
+
+class String<Literal
+attributes
+	value : String
+operations
+end
+
+class Boolean<Literal
+attributes
+	value : String
+operations
+end
+

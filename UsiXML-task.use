@@ -1,0 +1,100 @@
+model TaskUsiXML
+enum BinaryType{
+	Enabling,
+	Disabling,
+	SuspendResume,
+	OrderIndependence,
+	IndependentConcurrency,
+	ConcurencyWithInformationPassing,
+	UnderterministicChoice,
+	EnablingWithInformationPassing
+}
+
+enum UnaryType{
+	Optional,
+	Iteration,
+	finitIteration
+}
+
+class Task
+attributes
+	id : String
+	name : String
+	category : String
+	frequency : Integer
+	importance : Integer
+	structurationLevel : Integer
+	complexityLevel : Integer
+	criticity : Integer
+	centrality : Integer
+	terminationValue : String
+	taskType : String
+	taskItem : String
+operations
+end
+
+abstract class Operator
+attributes
+	id : String
+	name : String
+operations
+end
+
+class BinaryOperator<Operator
+attributes
+	type : BinaryType
+operations
+end
+
+class UnaryOperator<Operator
+attributes
+	UnaryType : UnaryType
+operations
+end
+
+class FiniteInteration<UnaryOperator
+attributes
+	interation : Integer
+operations
+end
+
+composition xxx_Task_decompositionTasks between
+	Task[0..1] role xxx_Task_decompositionTasks_src
+	Task[*] role decompositionTasks
+end
+
+association xxx_Task_decomposedTask between
+	Task[*] role xxx_Task_decomposedTask_src
+	Task[0..1] role decomposedTask
+end
+
+association xxx_Task_leftOperator between
+	Task[*] role xxx_Task_leftOperator_src
+	BinaryOperator[0..1] role leftOperator
+end
+
+association xxx_Task_rightOperator between
+	Task[*] role xxx_Task_rightOperator_src
+	BinaryOperator[0..1] role rightOperator
+end
+
+association xxx_Task_decoration between
+	Task[*] role xxx_Task_decoration_src
+	UnaryOperator[0..1] role decoration
+end
+
+association xxx_BinaryOperator_leftTask between
+	BinaryOperator[*] role xxx_BinaryOperator_leftTask_src
+	Task[1] role leftTask
+end
+
+association xxx_BinaryOperator_rightTask between
+	BinaryOperator[*] role xxx_BinaryOperator_rightTask_src
+	Task[1] role rightTask
+end
+
+association xxx_UnaryOperator_decoratedTask between
+	UnaryOperator[*] role xxx_UnaryOperator_decoratedTask_src
+	Task[1] role decoratedTask
+end
+

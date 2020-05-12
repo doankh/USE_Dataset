@@ -1,0 +1,111 @@
+model trustmetamodel
+class TrustRoot
+attributes
+operations
+end
+
+class TrustRelationship
+attributes
+	context_ : String
+	idTRelationship : String
+operations
+end
+
+class Trustor
+attributes
+	idTrustor : String
+operations
+end
+
+class Trustee
+attributes
+	idTrustee : String
+operations
+end
+
+class TrustValue
+attributes
+	value : String
+	timeStamp : String
+operations
+end
+
+class Metric
+attributes
+	idMetric : String
+	context_ : String
+	engine : String
+operations
+end
+
+class Variable
+attributes
+	context_ : String
+	idVariable : String
+	idSource : String
+	idTarget : String
+	name : String
+operations
+end
+
+class VariableValue
+attributes
+	value : String
+operations
+end
+
+composition xxx_TrustRoot_variables between
+	TrustRoot[0..1] role xxx_TrustRoot_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_TrustRoot_metrics between
+	TrustRoot[0..1] role xxx_TrustRoot_metrics_src
+	Metric[*] role metrics
+end
+
+composition xxx_TrustRoot_tRelationships between
+	TrustRoot[0..1] role xxx_TrustRoot_tRelationships_src
+	TrustRelationship[*] role tRelationships
+end
+
+composition xxx_TrustRoot_trustors between
+	TrustRoot[0..1] role xxx_TrustRoot_trustors_src
+	Trustor[*] role trustors
+end
+
+composition xxx_TrustRoot_trustees between
+	TrustRoot[0..1] role xxx_TrustRoot_trustees_src
+	Trustee[*] role trustees
+end
+
+composition xxx_TrustRelationship_trustee between
+	TrustRelationship[*] role xxx_TrustRelationship_trustee_src
+	Trustee[1] role trustee
+end
+
+composition xxx_TrustRelationship_trustor between
+	TrustRelationship[*] role xxx_TrustRelationship_trustor_src
+	Trustor[1] role trustor
+end
+
+composition xxx_TrustRelationship_trustValue between
+	TrustRelationship[*] role xxx_TrustRelationship_trustValue_src
+	TrustValue[1] role trustValue
+end
+
+composition xxx_Trustor_trustorTrustees between
+	Trustor[0..1] role xxx_Trustor_trustorTrustees_src
+	Trustee[*] role trustorTrustees
+end
+
+composition xxx_Trustor_trustorMetrics between
+	Trustor[0..1] role xxx_Trustor_trustorMetrics_src
+	Metric[*] role trustorMetrics
+end
+
+association xxx_Variable_value between
+	Variable[*] role xxx_Variable_value_src
+	VariableValue[1] role value
+end
+

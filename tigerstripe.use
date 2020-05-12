@@ -1,0 +1,294 @@
+model visualeditor
+enum AggregationEnum{
+default
+}
+
+enum ChangeableEnum{
+default
+}
+
+enum AssocMultiplicity{
+default
+}
+
+enum TypeMultiplicity{
+default
+}
+
+enum Visibility{
+default
+}
+
+class NamedElement
+attributes
+	name : String
+	stereotypes : String
+operations
+end
+
+class QualifiedNamedElement<NamedElement
+attributes
+	package : String
+	isReadonly : Boolean
+	isAbstract : Boolean
+operations
+	getFullyQualifiedName():String
+end
+
+class AbstractArtifact<QualifiedNamedElement
+attributes
+operations
+end
+
+class ManagedEntityArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class DatatypeArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class NotificationArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class NamedQueryArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class Enumeration<AbstractArtifact
+attributes
+	baseType : String
+operations
+end
+
+class UpdateProcedureArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class ExceptionArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class SessionFacadeArtifact<AbstractArtifact
+attributes
+operations
+end
+
+class Association<QualifiedNamedElement
+attributes
+	aEndName : String
+	aEndMultiplicity : AssocMultiplicity
+	aEndIsNavigable : Boolean
+	aEndIsOrdered : Boolean
+	aEndIsUnique : Boolean
+	aEndIsChangeable : ChangeableEnum
+	aEndAggregation : AggregationEnum
+	zEndName : String
+	zEndMultiplicity : AssocMultiplicity
+	zEndIsNavigable : Boolean
+	zEndIsOrdered : Boolean
+	zEndIsUnique : Boolean
+	zEndIsChangeable : ChangeableEnum
+	zEndAggregation : AggregationEnum
+	aEndVisibility : Visibility
+	zEndVisibility : Visibility
+operations
+end
+
+class AssociationClass<Association
+attributes
+operations
+end
+
+class TypedElement<NamedElement
+attributes
+	type : String
+	multiplicity : TypeMultiplicity
+	visibility : Visibility
+	isOrdered : Boolean
+	isUnique : Boolean
+	typeMultiplicity : AssocMultiplicity
+	defaultValue : String
+operations
+end
+
+class Attribute<TypedElement
+attributes
+operations
+end
+
+class Method<TypedElement
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class Literal<TypedElement
+attributes
+	value : String
+operations
+end
+
+class Parameter<TypedElement
+attributes
+operations
+end
+
+class Map
+attributes
+	basePackage : String
+operations
+end
+
+class Reference<NamedElement
+attributes
+	multiplicity : TypeMultiplicity
+	typeMultiplicity : AssocMultiplicity
+	isOrdered : Boolean
+	isUnique : Boolean
+operations
+end
+
+class Dependency<QualifiedNamedElement
+attributes
+	aEndMultiplicity : AssocMultiplicity
+	aEndIsNavigable : Boolean
+	zEndMultiplicity : AssocMultiplicity
+	zEndIsNavigable : Boolean
+operations
+end
+
+class AssociationClassClass<AbstractArtifact
+attributes
+operations
+end
+
+class DiagramProperty
+attributes
+	name : String
+	value : String
+operations
+end
+
+composition xxx_NamedElement_properties between
+	NamedElement[0..1] role xxx_NamedElement_properties_src
+	DiagramProperty[*] role properties
+end
+
+association xxx_AbstractArtifact_extends between
+	AbstractArtifact[*] role xxx_AbstractArtifact_extends_src
+	AbstractArtifact[0..1] role extends
+end
+
+composition xxx_AbstractArtifact_attributes_ between
+	AbstractArtifact[0..1] role xxx_AbstractArtifact_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_AbstractArtifact_literals between
+	AbstractArtifact[0..1] role xxx_AbstractArtifact_literals_src
+	Literal[*] role literals
+end
+
+composition xxx_AbstractArtifact_methods between
+	AbstractArtifact[0..1] role xxx_AbstractArtifact_methods_src
+	Method[*] role methods
+end
+
+composition xxx_AbstractArtifact_references between
+	AbstractArtifact[0..1] role xxx_AbstractArtifact_references_src
+	Reference[*] role references
+end
+
+association xxx_AbstractArtifact_implements between
+	AbstractArtifact[0..1] role xxx_AbstractArtifact_implements_src
+	AbstractArtifact[*] role implements
+end
+
+association xxx_NamedQueryArtifact_returnedType between
+	NamedQueryArtifact[*] role xxx_NamedQueryArtifact_returnedType_src
+	AbstractArtifact[0..1] role returnedType
+end
+
+association xxx_SessionFacadeArtifact_managedEntities between
+	SessionFacadeArtifact[0..1] role xxx_SessionFacadeArtifact_managedEntities_src
+	ManagedEntityArtifact[*] role managedEntities
+end
+
+association xxx_SessionFacadeArtifact_emittedNotifications between
+	SessionFacadeArtifact[0..1] role xxx_SessionFacadeArtifact_emittedNotifications_src
+	NotificationArtifact[*] role emittedNotifications
+end
+
+association xxx_SessionFacadeArtifact_namedQueries between
+	SessionFacadeArtifact[0..1] role xxx_SessionFacadeArtifact_namedQueries_src
+	NamedQueryArtifact[*] role namedQueries
+end
+
+association xxx_SessionFacadeArtifact_exposedProcedures between
+	SessionFacadeArtifact[0..1] role xxx_SessionFacadeArtifact_exposedProcedures_src
+	UpdateProcedureArtifact[*] role exposedProcedures
+end
+
+association xxx_Association_aEnd between
+	Association[*] role xxx_Association_aEnd_src
+	AbstractArtifact[0..1] role aEnd
+end
+
+association xxx_Association_zEnd between
+	Association[*] role xxx_Association_zEnd_src
+	AbstractArtifact[0..1] role zEnd
+end
+
+association xxx_AssociationClass_associatedClass between
+	AssociationClass[*] role xxx_AssociationClass_associatedClass_src
+	AssociationClassClass[0..1] role associatedClass
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Map_artifacts between
+	Map[0..1] role xxx_Map_artifacts_src
+	AbstractArtifact[*] role artifacts
+end
+
+composition xxx_Map_associations between
+	Map[0..1] role xxx_Map_associations_src
+	Association[*] role associations
+end
+
+composition xxx_Map_dependencies between
+	Map[0..1] role xxx_Map_dependencies_src
+	Dependency[*] role dependencies
+end
+
+composition xxx_Map_properties between
+	Map[0..1] role xxx_Map_properties_src
+	DiagramProperty[*] role properties
+end
+
+association xxx_Reference_zEnd between
+	Reference[*] role xxx_Reference_zEnd_src
+	AbstractArtifact[0..1] role zEnd
+end
+
+association xxx_Dependency_aEnd between
+	Dependency[*] role xxx_Dependency_aEnd_src
+	AbstractArtifact[0..1] role aEnd
+end
+
+association xxx_Dependency_zEnd between
+	Dependency[*] role xxx_Dependency_zEnd_src
+	AbstractArtifact[0..1] role zEnd
+end
+

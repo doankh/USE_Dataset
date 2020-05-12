@@ -1,0 +1,180 @@
+model workaround
+class Workaround
+attributes
+operations
+end
+
+class Operation
+attributes
+	task : String
+operations
+end
+
+class Vehicle
+attributes
+	licenceNumber : String
+	description : String
+	automotive : String
+operations
+end
+
+class Job
+attributes
+	startDate : String
+	endDate : String
+	startDriveDate : String
+	endDriveDate : String
+	remark : String
+operations
+end
+
+class Machine
+attributes
+	description : String
+	handHeld : String
+operations
+end
+
+class Plot
+attributes
+	plotNumber : String
+	underNumber : String
+	cadastralArea : Integer
+	nettoArea : Integer
+operations
+end
+
+class Acreage
+attributes
+	acreageName : String
+	number : String
+operations
+end
+
+class Person
+attributes
+	lastName : String
+	firstName : String
+	birthday : String
+	street : String
+	housenumber : Integer
+	phone : String
+	mobile : String
+	eMail : String
+operations
+end
+
+class District
+attributes
+	districtName : String
+operations
+end
+
+class Preparation
+attributes
+	preparationName : String
+	abbreviation : String
+operations
+end
+
+class PostArea
+attributes
+	postcode : Integer
+operations
+end
+
+composition xxx_Workaround_operationList between
+	Workaround[0..1] role xxx_Workaround_operationList_src
+	Operation[*] role operationList
+end
+
+composition xxx_Workaround_vehicleList between
+	Workaround[0..1] role xxx_Workaround_vehicleList_src
+	Vehicle[*] role vehicleList
+end
+
+composition xxx_Workaround_machineList between
+	Workaround[0..1] role xxx_Workaround_machineList_src
+	Machine[*] role machineList
+end
+
+composition xxx_Workaround_acreageList between
+	Workaround[0..1] role xxx_Workaround_acreageList_src
+	Acreage[*] role acreageList
+end
+
+composition xxx_Workaround_personList between
+	Workaround[0..1] role xxx_Workaround_personList_src
+	Person[*] role personList
+end
+
+composition xxx_Workaround_jobList between
+	Workaround[0..1] role xxx_Workaround_jobList_src
+	Job[*] role jobList
+end
+
+composition xxx_Workaround_districtList between
+	Workaround[0..1] role xxx_Workaround_districtList_src
+	District[*] role districtList
+end
+
+composition xxx_Workaround_preparationList between
+	Workaround[0..1] role xxx_Workaround_preparationList_src
+	Preparation[*] role preparationList
+end
+
+composition xxx_Workaround_postAreaList between
+	Workaround[0..1] role xxx_Workaround_postAreaList_src
+	PostArea[*] role postAreaList
+end
+
+association xxx_Job_operation between
+	Job[*] role xxx_Job_operation_src
+	Operation[1] role operation
+end
+
+association xxx_Job_vehicles between
+	Job[0..1] role xxx_Job_vehicles_src
+	Vehicle[*] role vehicles
+end
+
+association xxx_Job_machines between
+	Job[0..1] role xxx_Job_machines_src
+	Machine[*] role machines
+end
+
+association xxx_Job_acreage between
+	Job[*] role xxx_Job_acreage_src
+	Acreage[1] role acreage
+end
+
+association xxx_Job_persons between
+	Job[0..1] role xxx_Job_persons_src
+	Person[1..*] role persons
+end
+
+association xxx_Job_preparations between
+	Job[0..1] role xxx_Job_preparations_src
+	Preparation[*] role preparations
+end
+
+association xxx_Acreage_district between
+	Acreage[*] role xxx_Acreage_district_src
+	District[1] role district
+end
+
+composition xxx_Acreage_plotList between
+	Acreage[0..1] role xxx_Acreage_plotList_src
+	Plot[*] role plotList
+end
+
+association xxx_Person_postarea between
+	Person[*] role xxx_Person_postarea_src
+	PostArea[0..1] role postarea
+end
+
+association xxx_PostArea_district between
+	PostArea[*] role xxx_PostArea_district_src
+	District[1] role district
+end
+

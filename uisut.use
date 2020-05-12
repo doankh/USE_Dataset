@@ -1,0 +1,183 @@
+model uisut
+class UISUT<UISUTElement
+attributes
+operations
+end
+
+class ApplicationSystem<UISUTElement
+attributes
+operations
+end
+
+class UIStatemachine<UISUTElement
+attributes
+operations
+end
+
+class UIState<AbstractState
+attributes
+	isInitial : Boolean
+	pic : String
+operations
+end
+
+class UITransition<UISUTElement
+attributes
+	triggerStr : String
+	guardStr : String
+	actionStr : String
+	scriptStr : String
+operations
+end
+
+abstract class UITrigger<UISUTElement
+attributes
+operations
+end
+
+class UserTrigger<UITrigger
+attributes
+operations
+end
+
+class ComponentTrigger<UITrigger
+attributes
+operations
+end
+
+class UICondition<UISUTElement
+attributes
+operations
+end
+
+class Action<UISUTElement
+attributes
+operations
+end
+
+class UIControl<UISUTElement
+attributes
+	variableName : String
+	valueExpression : String
+operations
+end
+
+class UIDataVariable<UISUTElement
+attributes
+	constraintRE : String
+operations
+end
+
+abstract class UISUTElement
+attributes
+	name : String
+	description : String
+	id : String
+operations
+end
+
+class InitialState<AbstractState
+attributes
+operations
+end
+
+class FinalState<AbstractState
+attributes
+operations
+end
+
+abstract class AbstractState<UISUTElement
+attributes
+operations
+end
+
+composition xxx_UISUT_itsSTM between
+	UISUT[*] role xxx_UISUT_itsSTM_src
+	UIStatemachine[0..1] role itsSTM
+end
+
+composition xxx_ApplicationSystem_itsUISUT between
+	ApplicationSystem[*] role xxx_ApplicationSystem_itsUISUT_src
+	UISUT[0..1] role itsUISUT
+end
+
+composition xxx_UIStatemachine_itsState between
+	UIStatemachine[0..1] role xxx_UIStatemachine_itsState_src
+	AbstractState[*] role itsState
+end
+
+composition xxx_UIStatemachine_itsTransition between
+	UIStatemachine[0..1] role xxx_UIStatemachine_itsTransition_src
+	UITransition[*] role itsTransition
+end
+
+composition xxx_UIStatemachine_itsDataVariable between
+	UIStatemachine[0..1] role xxx_UIStatemachine_itsDataVariable_src
+	UIDataVariable[*] role itsDataVariable
+end
+
+composition xxx_UIState_itsUIControl between
+	UIState[0..1] role xxx_UIState_itsUIControl_src
+	UIControl[*] role itsUIControl
+end
+
+association xxx_UIState_addedDataVariable between
+	UIState[0..1] role xxx_UIState_addedDataVariable_src
+	UIDataVariable[*] role addedDataVariable
+end
+
+association xxx_UIState_deletedDataVariable between
+	UIState[0..1] role xxx_UIState_deletedDataVariable_src
+	UIDataVariable[*] role deletedDataVariable
+end
+
+association xxx_UITransition_itsTrgtState between
+	UITransition[*] role xxx_UITransition_itsTrgtState_src
+	AbstractState[1] role itsTrgtState
+end
+
+association xxx_UITransition_itsSrcState between
+	UITransition[*] role xxx_UITransition_itsSrcState_src
+	AbstractState[1] role itsSrcState
+end
+
+composition xxx_UITransition_itsTrigger between
+	UITransition[*] role xxx_UITransition_itsTrigger_src
+	UITrigger[0..1] role itsTrigger
+end
+
+composition xxx_UITransition_itsCondition between
+	UITransition[*] role xxx_UITransition_itsCondition_src
+	UICondition[0..1] role itsCondition
+end
+
+composition xxx_UITransition_itsAction between
+	UITransition[*] role xxx_UITransition_itsAction_src
+	Action[0..1] role itsAction
+end
+
+association xxx_UITransition_guardedDataVariable between
+	UITransition[0..1] role xxx_UITransition_guardedDataVariable_src
+	UIDataVariable[*] role guardedDataVariable
+end
+
+association xxx_UIControl_itsInputDaa between
+	UIControl[*] role xxx_UIControl_itsInputDaa_src
+	UIDataVariable[0..1] role itsInputDaa
+end
+
+association xxx_UIControl_itsOutputData between
+	UIControl[*] role xxx_UIControl_itsOutputData_src
+	UIDataVariable[0..1] role itsOutputData
+end
+
+association xxx_AbstractState_itsInTransition between
+	AbstractState[0..1] role xxx_AbstractState_itsInTransition_src
+	UITransition[*] role itsInTransition
+end
+
+association xxx_AbstractState_itsOutTransition between
+	AbstractState[0..1] role xxx_AbstractState_itsOutTransition_src
+	UITransition[*] role itsOutTransition
+end
+

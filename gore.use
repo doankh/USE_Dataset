@@ -1,0 +1,224 @@
+model gore
+enum AggregationLevel{
+default
+}
+
+enum DefinableRequirementState{
+default
+}
+
+enum DifferentialRelationOperator{
+default
+}
+
+enum MonitorableMethod{
+default
+}
+
+enum ParameterMetric{
+default
+}
+
+enum ParameterType{
+default
+}
+
+enum RefinementType{
+default
+}
+
+class Requirement
+attributes
+	refinementType : RefinementType
+operations
+	findGoalModel():GoalModel
+	getChildrenStateCount():Integer
+	replaceWith(newRequirement : Requirement)
+end
+
+class DefinableRequirement<Requirement
+attributes
+	time : String
+	state : DefinableRequirementState
+operations
+	start()
+	end_()
+	success()
+	fail()
+	checkState()
+end
+
+class Softgoal<Requirement
+attributes
+operations
+end
+
+class PerformativeRequirement<DefinableRequirement
+attributes
+	startTime : String
+operations
+	cancel()
+	checkState()
+end
+
+class QualityConstraint<DefinableRequirement
+attributes
+operations
+	replaceWith(newRequirement : Requirement)
+end
+
+class AwReq<DefinableRequirement
+attributes
+	incrementCoefficient : Real
+operations
+end
+
+class DomainAssumption<DefinableRequirement
+attributes
+operations
+end
+
+class Goal<PerformativeRequirement
+attributes
+operations
+end
+
+class Task<PerformativeRequirement
+attributes
+operations
+end
+
+class Actor
+attributes
+operations
+end
+
+class Configuration
+attributes
+operations
+end
+
+class DifferentialRelation
+attributes
+	lowerBound : String
+	upperBound : String
+	operator : DifferentialRelationOperator
+	value : Real
+operations
+end
+
+class GoalModel
+attributes
+	internalId : Integer
+operations
+	getId():Integer
+	filterRelations(indicator : AwReq):DifferentialRelation
+	filterRelations1(parameter : Parameter):DifferentialRelation
+	filterRelations2(indicator : AwReq,parameter : Parameter):DifferentialRelation
+	filterRelations3(indicator : AwReq,parameter : Parameter,value : String):DifferentialRelation
+end
+
+class Parameter
+attributes
+	type : ParameterType
+	unit : String
+	value : String
+	metric : ParameterMetric
+operations
+	greaterThan(value : String):String
+	fewerThan(value : String):String
+	equalTo(value : String):String
+	addedTo(value : String):String
+	multipliedBy(value : String):String
+	subtractedFrom(value : String):String
+	withinBoundsOf(relation : DifferentialRelation):String
+	incrementableIn(relation : DifferentialRelation):String
+	createCopy():Parameter
+	increment(relation : DifferentialRelation,value : String)
+end
+
+composition xxx_Requirement_children between
+	Requirement[0..1] role xxx_Requirement_children_src
+	Requirement[*] role children
+end
+
+association xxx_Requirement_parent between
+	Requirement[*] role xxx_Requirement_parent_src
+	Requirement[0..1] role parent
+end
+
+association xxx_Softgoal_constraints_ between
+	Softgoal[0..1] role xxx_Softgoal_constraints__src
+	QualityConstraint[*] role constraints_
+end
+
+association xxx_QualityConstraint_softgoal between
+	QualityConstraint[*] role xxx_QualityConstraint_softgoal_src
+	Softgoal[1] role softgoal
+end
+
+association xxx_AwReq_otherTargets between
+	AwReq[0..1] role xxx_AwReq_otherTargets_src
+	DefinableRequirement[*] role otherTargets
+end
+
+association xxx_AwReq_target between
+	AwReq[*] role xxx_AwReq_target_src
+	DefinableRequirement[1] role target
+end
+
+association xxx_Goal_goalModel between
+	Goal[*] role xxx_Goal_goalModel_src
+	GoalModel[0..1] role goalModel
+end
+
+association xxx_Actor_goalModel between
+	Actor[*] role xxx_Actor_goalModel_src
+	GoalModel[0..1] role goalModel
+end
+
+composition xxx_Configuration_parameters between
+	Configuration[0..1] role xxx_Configuration_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Configuration_goalModel between
+	Configuration[*] role xxx_Configuration_goalModel_src
+	GoalModel[0..1] role goalModel
+end
+
+association xxx_DifferentialRelation_indicator between
+	DifferentialRelation[*] role xxx_DifferentialRelation_indicator_src
+	AwReq[0..1] role indicator
+end
+
+association xxx_DifferentialRelation_parameter between
+	DifferentialRelation[*] role xxx_DifferentialRelation_parameter_src
+	Parameter[0..1] role parameter
+end
+
+composition xxx_GoalModel_rootGoal between
+	GoalModel[*] role xxx_GoalModel_rootGoal_src
+	Goal[1] role rootGoal
+end
+
+composition xxx_GoalModel_actors between
+	GoalModel[0..1] role xxx_GoalModel_actors_src
+	Actor[*] role actors
+end
+
+composition xxx_GoalModel_configuration between
+	GoalModel[*] role xxx_GoalModel_configuration_src
+	Configuration[0..1] role configuration
+end
+
+association xxx_GoalModel_relations between
+	GoalModel[0..1] role xxx_GoalModel_relations_src
+	DifferentialRelation[*] role relations
+end
+
+association xxx_Parameter_configuration between
+	Parameter[*] role xxx_Parameter_configuration_src
+	Configuration[0..1] role configuration
+end
+

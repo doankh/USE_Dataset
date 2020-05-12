@@ -1,0 +1,88 @@
+model mdd4cca
+enum ListType{
+default
+}
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Web<NamedElement
+attributes
+operations
+end
+
+class List<NamedElement
+attributes
+	Type : ListType
+operations
+end
+
+class ContentType<NamedElement
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class Field<NamedElement
+attributes
+operations
+end
+
+abstract class FieldType
+attributes
+operations
+end
+
+class Number<FieldType
+attributes
+operations
+end
+
+class Boolean<FieldType
+attributes
+operations
+end
+
+class Text<FieldType
+attributes
+operations
+end
+
+class Reference<FieldType
+attributes
+operations
+end
+
+composition xxx_Web_ownedList between
+	Web[0..1] role xxx_Web_ownedList_src
+	List[*] role ownedList
+end
+
+composition xxx_Web_ownedWeb between
+	Web[0..1] role xxx_Web_ownedWeb_src
+	Web[*] role ownedWeb
+end
+
+association xxx_List_contentTypes between
+	List[0..1] role xxx_List_contentTypes_src
+	ContentType[*] role contentTypes
+end
+
+composition xxx_ContentType_ownedField between
+	ContentType[0..1] role xxx_ContentType_ownedField_src
+	Field[*] role ownedField
+end
+
+composition xxx_Field_FieldType between
+	Field[*] role xxx_Field_FieldType_src
+	FieldType[1] role FieldType
+end
+
+association xxx_Reference_contentType between
+	Reference[*] role xxx_Reference_contentType_src
+	ContentType[1] role contentType
+end
+

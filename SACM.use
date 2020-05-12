@@ -1,0 +1,1037 @@
+model SACM
+enum ReliabilityLevel{
+default
+}
+
+enum CompletenessLevel{
+default
+}
+
+enum OriginalityLevel{
+default
+}
+
+enum ConsistencyLevel{
+default
+}
+
+enum Level{
+default
+}
+
+enum SupportLevel{
+default
+}
+
+enum ReportingLevel{
+default
+}
+
+enum ConfidenceLevel{
+default
+}
+
+enum AccuracyLevel{
+default
+}
+
+enum StandardOfProof{
+default
+}
+
+class Annotation<UtilityElement
+attributes
+	content : String
+operations
+end
+
+class AssuranceCase<ModelElement
+attributes
+	name : String
+	gid : String
+operations
+end
+
+class Datetime
+attributes
+	datetime : String
+operations
+end
+
+abstract class ModelElement<SACMElement
+attributes
+	id : String
+operations
+end
+
+abstract class SACMElement
+attributes
+operations
+end
+
+class TaggedValue<UtilityElement
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class UtilityElement<SACMElement
+attributes
+operations
+end
+
+class Argumentation<ArgumentationElement
+attributes
+operations
+end
+
+abstract class ArgumentElement<ArgumentationElement
+attributes
+operations
+end
+
+class CitationElement<ArgumentElement
+attributes
+operations
+end
+
+class InformationElement<ArgumentElement
+attributes
+	url : String
+operations
+end
+
+abstract class ReasoningElement<ArgumentElement
+attributes
+operations
+end
+
+
+class ArgumentReasoning<ReasoningElement
+attributes
+operations
+end
+
+abstract class AssertedRelationship<Assertion
+attributes
+operations
+end
+
+class Claim<Assertion
+attributes
+	assumed : Boolean
+	toBeSupported : Boolean
+operations
+end
+
+class AssertedInference<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedEvidence<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedContext<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedChallenge<AssertedRelationship
+attributes
+operations
+end
+
+class AssertedCounterEvidence<AssertedRelationship
+attributes
+operations
+end
+
+abstract class ArgumentationElement<ModelElement
+attributes
+	description : String
+	content : String
+operations
+end
+
+abstract class EvidenceAttribute<EvidenceAssertion
+attributes
+operations
+end
+
+class Consistency<DocumentProperty
+attributes
+	value : ConsistencyLevel
+operations
+end
+
+class Completeness<DocumentProperty
+attributes
+	status : CompletenessLevel
+operations
+end
+
+class Document<Exhibit
+attributes
+	title : String
+	citation : String
+operations
+end
+
+class Confidence<EvidenceAttribute
+attributes
+	value : ConfidenceLevel
+operations
+end
+
+class ApprovedBy<Provenance
+attributes
+operations
+end
+
+class CreatedBy<Provenance
+attributes
+operations
+end
+
+class Tool<CollectionMethod
+attributes
+	version : String
+operations
+end
+
+class Method<CollectionMethod
+attributes
+operations
+end
+
+abstract class EvidenceItem<EvidenceElement
+attributes
+operations
+end
+
+class IsBasedOn<ExhibitProperty
+attributes
+operations
+end
+
+abstract class FormalAssertion<FormalElement
+attributes
+	content : String
+operations
+end
+
+class IsA<EvidenceInterpretation
+attributes
+operations
+end
+
+class IsCharacterizedBy<EvidenceInterpretation
+attributes
+operations
+end
+
+class Person<Stakeholder
+attributes
+operations
+end
+
+class Organization<Stakeholder
+attributes
+	address : String
+operations
+end
+
+class EvidenceContainer<ModelElement
+attributes
+	name : String
+	gid : String
+	version : String
+operations
+end
+
+class EndTime<EffectiveTime
+attributes
+operations
+end
+
+class Assertion<FormalAssertion,ReasoningElement
+attributes
+	facttype : String
+operations
+end
+
+class Object<FormalObject
+attributes
+	concept : String
+operations
+end
+
+class CompositeObject<FormalObject
+attributes
+operations
+end
+
+class RoleBinding<UtilityElement
+attributes
+	role : String
+operations
+end
+
+class StartTime<EffectiveTime
+attributes
+operations
+end
+
+class Relevance<EvidenceAttribute
+attributes
+	value : Level
+operations
+end
+
+class Significance<EvidenceAttribute
+attributes
+	value : Level
+operations
+end
+
+class Accuracy<EvidenceAttribute
+attributes
+	value : AccuracyLevel
+operations
+end
+
+class HasRoleIn<ProjectProperty
+attributes
+	role : String
+operations
+end
+
+class IsScopedBy<EvidenceInterpretation
+attributes
+operations
+end
+
+abstract class EffectiveTime<TimingProperty
+attributes
+operations
+end
+
+class AtTime<TimingProperty
+attributes
+operations
+end
+
+class Originality<DocumentProperty
+attributes
+	value : OriginalityLevel
+operations
+end
+
+class Reporting<EvidenceAttribute
+attributes
+	value : ReportingLevel
+operations
+end
+
+class Reliability<DocumentProperty
+attributes
+	value : ReliabilityLevel
+operations
+end
+
+class Supports<EvidenceRelation
+attributes
+operations
+end
+
+class IsGeneratedAt<EvidenceEvent
+attributes
+operations
+end
+
+abstract class CollectionMethod<ProjectElement
+attributes
+operations
+end
+
+abstract class EvidenceRelation<EvidenceEvaluation
+attributes
+operations
+end
+
+class Support<EvidenceAttribute
+attributes
+	value : SupportLevel
+operations
+end
+
+class Conflicts<EvidenceObservation
+attributes
+operations
+end
+
+class Refutes<EvidenceResolution
+attributes
+operations
+end
+
+class Negates<EvidenceResolution
+attributes
+operations
+end
+
+class UnknownObject<FormalObject
+attributes
+operations
+end
+
+abstract class EvidenceEvaluation<EvidenceAssertion
+attributes
+operations
+end
+
+class Resolves<EvidenceResolution
+attributes
+operations
+end
+
+abstract class Stakeholder<ProjectElement
+attributes
+operations
+end
+
+class EvidenceRequest<ProjectElement
+attributes
+operations
+end
+
+class ProjectObjective<ProjectElement
+attributes
+operations
+end
+
+class Activity<ProjectElement
+attributes
+operations
+end
+
+class DependsOn<ProjectProperty
+attributes
+operations
+end
+
+class Satisfies<ProjectProperty
+attributes
+operations
+end
+
+abstract class ProjectElement<EvidenceElement
+attributes
+	name : String
+	content : String
+operations
+end
+
+class ReferencedClaim<FormalAssertion
+attributes
+operations
+end
+
+abstract class EvidenceObservation<EvidenceEvaluation
+attributes
+operations
+end
+
+abstract class EvidenceResolution<EvidenceEvaluation
+attributes
+operations
+end
+
+class Weakens<Contributes
+attributes
+operations
+end
+
+class Amplifies<Contributes
+attributes
+operations
+end
+
+abstract class Contributes<EvidenceObservation
+attributes
+operations
+end
+
+class Challenges<EvidenceRelation
+attributes
+operations
+end
+
+class Strength<EvidenceAttribute
+attributes
+	value : Integer
+operations
+end
+
+class IsAcquiredAt<EvidenceEvent
+attributes
+operations
+end
+
+class IsTransferredTo<EvidenceEvent
+attributes
+operations
+end
+
+abstract class DocumentProperty<ExhibitProperty
+attributes
+operations
+end
+
+abstract class EvidenceEvent<EvidenceProperty
+attributes
+operations
+end
+
+class OwnedBy<Provenance
+attributes
+operations
+end
+
+abstract class Provenance<EvidenceProperty
+attributes
+operations
+end
+
+abstract class TimingProperty<EvidenceProperty
+attributes
+operations
+end
+
+class IsPartOf<ExhibitProperty
+attributes
+operations
+end
+
+class IsRevokedAt<EvidenceEvent
+attributes
+operations
+end
+
+class ProvidesContext<EvidenceInterpretation
+attributes
+operations
+end
+
+abstract class FormalObject<FormalElement
+attributes
+	name : String
+operations
+end
+
+class MeansThat<EvidenceInterpretation
+attributes
+operations
+end
+
+abstract class EvidenceElement<ModelElement
+attributes
+operations
+end
+
+class CareOf<CustodyProperty
+attributes
+operations
+end
+
+abstract class CustodyProperty<EvidenceProperty
+attributes
+operations
+end
+
+class AtLocation<CustodyProperty
+attributes
+operations
+end
+
+class IsCreatedAt<EvidenceEvent
+attributes
+operations
+end
+
+class RequiresContainer<ProjectProperty
+attributes
+operations
+end
+
+abstract class ProjectProperty<EvidenceProperty
+attributes
+operations
+end
+
+class Service<CollectionMethod
+attributes
+operations
+end
+
+class HasElectronicSource<ExhibitProperty
+attributes
+	source : String
+	format : String
+	fileSize : Integer
+operations
+end
+
+class IsExpressedInLanguage<DocumentProperty
+attributes
+	language : String
+	IsPrimary : Boolean
+operations
+end
+
+class UsingProcess<CustodyProperty
+attributes
+operations
+end
+
+class HasSecurityClassification<DocumentProperty
+attributes
+	securityClassification : String
+operations
+end
+
+class IsReleaseableTo<DocumentProperty
+attributes
+	releasability : String
+operations
+end
+
+class EvidenceGroup<EvidenceItem
+attributes
+	name : String
+operations
+end
+
+class HasVersion<DocumentProperty
+attributes
+	version : String
+operations
+end
+
+class HasMedia<ExhibitProperty
+attributes
+	media : String
+operations
+end
+
+class Exhibit<EvidenceItem
+attributes
+	name : String
+	url : String
+operations
+end
+
+abstract class FormalElement<EvidenceItem
+attributes
+operations
+end
+
+abstract class ExhibitProperty<EvidenceProperty
+attributes
+operations
+end
+
+abstract class EvidenceInterpretation<EvidenceEvaluation
+attributes
+operations
+end
+
+abstract class EvidenceAssertion<EvidenceElement
+attributes
+operations
+end
+
+abstract class EvidenceProperty<EvidenceAssertion
+attributes
+operations
+end
+
+class ExtendedEvidenceAttribute<EvidenceAttribute
+attributes
+operations
+end
+
+class ExtendedDocumentProperty<DocumentProperty
+attributes
+operations
+end
+
+class Record<EvidenceItem
+attributes
+	name : String
+	content : String
+operations
+end
+
+class ObjectifiedAssertion<FormalObject
+attributes
+operations
+end
+
+class IsModifiedBy<EvidenceEvent
+attributes
+operations
+end
+
+class PerformedBy<Provenance
+attributes
+operations
+end
+
+class ContainerConsistency<ProjectProperty
+attributes
+	value : ConsistencyLevel
+operations
+end
+
+class ContainerCompleteness<ProjectProperty
+attributes
+	value : CompletenessLevel
+operations
+end
+
+class CompliesTo<ProjectProperty
+attributes
+	criteria : StandardOfProof
+operations
+end
+
+class ExtendedProjectProperty<ProjectProperty
+attributes
+operations
+end
+
+composition xxx_AssuranceCase_argument between
+	AssuranceCase[0..1] role xxx_AssuranceCase_argument_src
+	Argumentation[*] role argument
+end
+
+composition xxx_AssuranceCase_evidence between
+	AssuranceCase[0..1] role xxx_AssuranceCase_evidence_src
+	EvidenceContainer[*] role evidence
+end
+
+composition xxx_ModelElement_taggedValue between
+	ModelElement[0..1] role xxx_ModelElement_taggedValue_src
+	TaggedValue[*] role taggedValue
+end
+
+composition xxx_ModelElement_annotation between
+	ModelElement[0..1] role xxx_ModelElement_annotation_src
+	Annotation[*] role annotation
+end
+
+composition xxx_Argumentation_argumentation between
+	Argumentation[0..1] role xxx_Argumentation_argumentation_src
+	Argumentation[*] role argumentation
+end
+
+composition xxx_Argumentation_argumentElement between
+	Argumentation[0..1] role xxx_Argumentation_argumentElement_src
+	ArgumentElement[*] role argumentElement
+end
+
+association xxx_CitationElement_argumentElementReference between
+	CitationElement[0..1] role xxx_CitationElement_argumentElementReference_src
+	ArgumentElement[*] role argumentElementReference
+end
+
+association xxx_CitationElement_argumentationReference between
+	CitationElement[0..1] role xxx_CitationElement_argumentationReference_src
+	Argumentation[*] role argumentationReference
+end
+
+association xxx_InformationElement_evidence between
+	InformationElement[0..1] role xxx_InformationElement_evidence_src
+	EvidenceItem[*] role evidence
+end
+
+association xxx_ArgumentReasoning_structure between
+	ArgumentReasoning[0..1] role xxx_ArgumentReasoning_structure_src
+	Argumentation[*] role structure
+end
+
+association xxx_ArgumentReasoning_describedInference between
+	ArgumentReasoning[0..1] role xxx_ArgumentReasoning_describedInference_src
+	AssertedInference[*] role describedInference
+end
+
+association xxx_ArgumentReasoning_describedChallenge between
+	ArgumentReasoning[0..1] role xxx_ArgumentReasoning_describedChallenge_src
+	AssertedChallenge[*] role describedChallenge
+end
+
+association xxx_AssertedRelationship_source between
+	AssertedRelationship[0..1] role xxx_AssertedRelationship_source_src
+	ArgumentElement[*] role source
+end
+
+association xxx_AssertedRelationship_target between
+	AssertedRelationship[0..1] role xxx_AssertedRelationship_target_src
+	ArgumentElement[*] role target
+end
+
+association xxx_ApprovedBy_supervisor between
+	ApprovedBy[*] role xxx_ApprovedBy_supervisor_src
+	Stakeholder[1] role supervisor
+end
+
+association xxx_CreatedBy_source between
+	CreatedBy[*] role xxx_CreatedBy_source_src
+	Stakeholder[1] role source
+end
+
+association xxx_IsBasedOn_source between
+	IsBasedOn[*] role xxx_IsBasedOn_source_src
+	EvidenceItem[1] role source
+end
+
+association xxx_IsA_definition between
+	IsA[*] role xxx_IsA_definition_src
+	FormalElement[1] role definition
+end
+
+association xxx_IsCharacterizedBy_assertion between
+	IsCharacterizedBy[*] role xxx_IsCharacterizedBy_assertion_src
+	FormalAssertion[1] role assertion
+end
+
+composition xxx_EvidenceContainer_evaluation between
+	EvidenceContainer[0..1] role xxx_EvidenceContainer_evaluation_src
+	EvidenceEvaluation[*] role evaluation
+end
+
+composition xxx_EvidenceContainer_item between
+	EvidenceContainer[0..1] role xxx_EvidenceContainer_item_src
+	EvidenceItem[*] role item
+end
+
+composition xxx_EvidenceContainer_property between
+	EvidenceContainer[0..1] role xxx_EvidenceContainer_property_src
+	ProjectProperty[*] role property
+end
+
+composition xxx_EvidenceContainer_element between
+	EvidenceContainer[0..1] role xxx_EvidenceContainer_element_src
+	ProjectElement[*] role element
+end
+
+association xxx_EndTime_datetime between
+	EndTime[*] role xxx_EndTime_datetime_src
+	Datetime[1] role datetime
+end
+
+composition xxx_Assertion_role between
+	Assertion[0..1] role xxx_Assertion_role_src
+	RoleBinding[*] role role
+end
+
+composition xxx_CompositeObject_element between
+	CompositeObject[0..1] role xxx_CompositeObject_element_src
+	FormalObject[*] role element
+end
+
+association xxx_RoleBinding_subject between
+	RoleBinding[*] role xxx_RoleBinding_subject_src
+	FormalObject[0..1] role subject
+end
+
+association xxx_StartTime_datetime between
+	StartTime[*] role xxx_StartTime_datetime_src
+	Datetime[1] role datetime
+end
+
+association xxx_HasRoleIn_organization between
+	HasRoleIn[*] role xxx_HasRoleIn_organization_src
+	Organization[1] role organization
+end
+
+association xxx_IsScopedBy_scope between
+	IsScopedBy[*] role xxx_IsScopedBy_scope_src
+	FormalElement[1] role scope
+end
+
+association xxx_AtTime_dateTtime between
+	AtTime[*] role xxx_AtTime_dateTtime_src
+	Datetime[1] role dateTtime
+end
+
+association xxx_EvidenceRelation_assertion between
+	EvidenceRelation[*] role xxx_EvidenceRelation_assertion_src
+	FormalAssertion[1] role assertion
+end
+
+association xxx_EvidenceRelation_subject between
+	EvidenceRelation[*] role xxx_EvidenceRelation_subject_src
+	EvidenceItem[1] role subject
+end
+
+association xxx_Conflicts_assertion between
+	Conflicts[*] role xxx_Conflicts_assertion_src
+	FormalAssertion[1] role assertion
+end
+
+association xxx_Conflicts_subject between
+	Conflicts[*] role xxx_Conflicts_subject_src
+	FormalAssertion[1] role subject
+end
+
+association xxx_Refutes_element between
+	Refutes[*] role xxx_Refutes_element_src
+	FormalAssertion[1] role element
+end
+
+association xxx_Negates_element between
+	Negates[*] role xxx_Negates_element_src
+	EvidenceRelation[1] role element
+end
+
+composition xxx_EvidenceEvaluation_attribute between
+	EvidenceEvaluation[0..1] role xxx_EvidenceEvaluation_attribute_src
+	EvidenceAttribute[*] role attribute
+end
+
+association xxx_Resolves_element between
+	Resolves[*] role xxx_Resolves_element_src
+	EvidenceObservation[1] role element
+end
+
+association xxx_EvidenceRequest_item between
+	EvidenceRequest[0..1] role xxx_EvidenceRequest_item_src
+	EvidenceItem[*] role item
+end
+
+association xxx_DependsOn_element between
+	DependsOn[*] role xxx_DependsOn_element_src
+	ProjectElement[1] role element
+end
+
+association xxx_Satisfies_element between
+	Satisfies[*] role xxx_Satisfies_element_src
+	ProjectElement[1] role element
+end
+
+composition xxx_ProjectElement_property between
+	ProjectElement[0..1] role xxx_ProjectElement_property_src
+	ProjectProperty[*] role property
+end
+
+association xxx_ReferencedClaim_claim between
+	ReferencedClaim[*] role xxx_ReferencedClaim_claim_src
+	Claim[0..1] role claim
+end
+
+composition xxx_EvidenceResolution_subject between
+	EvidenceResolution[*] role xxx_EvidenceResolution_subject_src
+	EvidenceElement[1] role subject
+end
+
+association xxx_Contributes_subject between
+	Contributes[*] role xxx_Contributes_subject_src
+	EvidenceRelation[1] role subject
+end
+
+association xxx_Contributes_relation between
+	Contributes[*] role xxx_Contributes_relation_src
+	EvidenceRelation[1] role relation
+end
+
+association xxx_OwnedBy_owner between
+	OwnedBy[*] role xxx_OwnedBy_owner_src
+	Stakeholder[1] role owner
+end
+
+association xxx_IsPartOf_whole between
+	IsPartOf[*] role xxx_IsPartOf_whole_src
+	Exhibit[1] role whole
+end
+
+association xxx_ProvidesContext_context_ between
+	ProvidesContext[*] role xxx_ProvidesContext_context__src
+	EvidenceElement[1] role context_
+end
+
+association xxx_MeansThat_meaning between
+	MeansThat[*] role xxx_MeansThat_meaning_src
+	FormalAssertion[1] role meaning
+end
+
+composition xxx_EvidenceElement_timing between
+	EvidenceElement[0..1] role xxx_EvidenceElement_timing_src
+	TimingProperty[*] role timing
+end
+
+composition xxx_EvidenceElement_custody between
+	EvidenceElement[0..1] role xxx_EvidenceElement_custody_src
+	CustodyProperty[*] role custody
+end
+
+composition xxx_EvidenceElement_provenance between
+	EvidenceElement[0..1] role xxx_EvidenceElement_provenance_src
+	Provenance[*] role provenance
+end
+
+composition xxx_EvidenceElement_event between
+	EvidenceElement[0..1] role xxx_EvidenceElement_event_src
+	EvidenceEvent[*] role event
+end
+
+association xxx_CareOf_custodian between
+	CareOf[*] role xxx_CareOf_custodian_src
+	Person[1] role custodian
+end
+
+association xxx_AtLocation_location between
+	AtLocation[*] role xxx_AtLocation_location_src
+	Organization[1] role location
+end
+
+association xxx_RequiresContainer_container between
+	RequiresContainer[*] role xxx_RequiresContainer_container_src
+	EvidenceContainer[1] role container
+end
+
+association xxx_UsingProcess_method between
+	UsingProcess[*] role xxx_UsingProcess_method_src
+	CollectionMethod[1] role method
+end
+
+association xxx_EvidenceGroup_element between
+	EvidenceGroup[0..1] role xxx_EvidenceGroup_element_src
+	EvidenceElement[*] role element
+end
+
+composition xxx_Exhibit_property between
+	Exhibit[0..1] role xxx_Exhibit_property_src
+	ExhibitProperty[*] role property
+end
+
+association xxx_EvidenceInterpretation_subject between
+	EvidenceInterpretation[*] role xxx_EvidenceInterpretation_subject_src
+	EvidenceElement[1] role subject
+end
+
+association xxx_ObjectifiedAssertion_assertion between
+	ObjectifiedAssertion[*] role xxx_ObjectifiedAssertion_assertion_src
+	FormalAssertion[1] role assertion
+end
+
+association xxx_PerformedBy_executor between
+	PerformedBy[*] role xxx_PerformedBy_executor_src
+	Stakeholder[1] role executor
+end
+

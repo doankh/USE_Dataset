@@ -1,0 +1,115 @@
+model EclipsePlugIn
+class Application
+attributes
+	name : String
+	version : String
+	author : String
+operations
+end
+
+class ExtensionPoint
+attributes
+	name : String
+	id : String
+operations
+end
+
+class Description
+attributes
+	xmlSchema : String
+operations
+end
+
+class Extension
+attributes
+	name : String
+	id : String
+operations
+end
+
+class PlugIn
+attributes
+	id : String
+	displayableName : String
+	version : String
+	supplier : String
+operations
+end
+
+class Librairy
+attributes
+	name : String
+operations
+end
+
+class Class
+attributes
+	name : String
+operations
+end
+
+composition xxx_Application_extensionPoints between
+	Application[0..1] role xxx_Application_extensionPoints_src
+	ExtensionPoint[1..*] role extensionPoints
+end
+
+association xxx_ExtensionPoint_application between
+	ExtensionPoint[*] role xxx_ExtensionPoint_application_src
+	Application[1] role application
+end
+
+association xxx_ExtensionPoint_descriptions between
+	ExtensionPoint[0..1] role xxx_ExtensionPoint_descriptions_src
+	Description[*] role descriptions
+end
+
+association xxx_ExtensionPoint_plugIn between
+	ExtensionPoint[*] role xxx_ExtensionPoint_plugIn_src
+	PlugIn[1] role plugIn
+end
+
+association xxx_Description_extensionPoints between
+	Description[0..1] role xxx_Description_extensionPoints_src
+	ExtensionPoint[*] role extensionPoints
+end
+
+association xxx_Extension_isConfiguredInto between
+	Extension[*] role xxx_Extension_isConfiguredInto_src
+	ExtensionPoint[1] role isConfiguredInto
+end
+
+association xxx_PlugIn_configures between
+	PlugIn[0..1] role xxx_PlugIn_configures_src
+	Extension[1..*] role configures
+end
+
+composition xxx_PlugIn_extensionPoints between
+	PlugIn[0..1] role xxx_PlugIn_extensionPoints_src
+	ExtensionPoint[*] role extensionPoints
+end
+
+association xxx_PlugIn_requires between
+	PlugIn[0..1] role xxx_PlugIn_requires_src
+	PlugIn[*] role requires
+end
+
+association xxx_PlugIn_uses between
+	PlugIn[0..1] role xxx_PlugIn_uses_src
+	Librairy[*] role uses
+end
+
+association xxx_Librairy_plugIn between
+	Librairy[*] role xxx_Librairy_plugIn_src
+	PlugIn[1] role plugIn
+end
+
+composition xxx_Librairy_classes between
+	Librairy[0..1] role xxx_Librairy_classes_src
+	Class[1..*] role classes
+end
+
+association xxx_Class_librairy between
+	Class[*] role xxx_Class_librairy_src
+	Librairy[1] role librairy
+end
+

@@ -1,0 +1,168 @@
+model mapping
+enum DataType{
+default
+}
+
+class Model
+attributes
+	packageName : String
+operations
+end
+
+class Import
+attributes
+	fullName : String
+	name : String
+operations
+end
+
+class Structure
+attributes
+	name : String
+operations
+end
+
+class StructureMapping
+attributes
+operations
+end
+
+class StructurePOJOMapping<StructureMapping
+attributes
+	name : String
+operations
+end
+
+class StructureFieldPOJOMapping
+attributes
+	name : String
+	inactive : Boolean
+	type : DataType
+	attribute : String
+	comment : String
+operations
+end
+
+class FunctionModule
+attributes
+	name : String
+operations
+end
+
+class FunctionModuleMapping
+attributes
+operations
+end
+
+class FunctionModulePOJOMapping<FunctionModuleMapping
+attributes
+operations
+end
+
+class FunctionModulePOJOCallMapping<FunctionModulePOJOMapping
+attributes
+	className : String
+operations
+end
+
+class FunctionModulePOJORequestResponseMapping<FunctionModulePOJOMapping
+attributes
+	requestClassName : String
+	responseClassName : String
+operations
+end
+
+class FunctionModulePOJOParameterMapping
+attributes
+	name : String
+	inactive : Boolean
+	attribute : String
+	external : Boolean
+	comment : String
+operations
+end
+
+class FunctionModulePOJOImportingParameter<FunctionModulePOJOParameterMapping
+attributes
+	type : DataType
+	structure : Boolean
+	table : Boolean
+operations
+end
+
+class FunctionModulePOJOExportingParameter<FunctionModulePOJOParameterMapping
+attributes
+	type : DataType
+	structure : Boolean
+	table : Boolean
+operations
+end
+
+class FunctionModulePOJOChangingParameter<FunctionModulePOJOParameterMapping
+attributes
+	type : DataType
+	structure : Boolean
+	table : Boolean
+operations
+end
+
+class FunctionModulePOJOTablesParameter<FunctionModulePOJOParameterMapping
+attributes
+operations
+end
+
+composition xxx_Model_imports between
+	Model[0..1] role xxx_Model_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Model_structures between
+	Model[0..1] role xxx_Model_structures_src
+	Structure[*] role structures
+end
+
+composition xxx_Model_functionModules between
+	Model[0..1] role xxx_Model_functionModules_src
+	FunctionModule[*] role functionModules
+end
+
+composition xxx_Structure_mapping between
+	Structure[*] role xxx_Structure_mapping_src
+	StructureMapping[0..1] role mapping
+end
+
+composition xxx_StructurePOJOMapping_fields between
+	StructurePOJOMapping[0..1] role xxx_StructurePOJOMapping_fields_src
+	StructureFieldPOJOMapping[*] role fields
+end
+
+composition xxx_FunctionModule_mapping between
+	FunctionModule[*] role xxx_FunctionModule_mapping_src
+	FunctionModuleMapping[0..1] role mapping
+end
+
+composition xxx_FunctionModulePOJOCallMapping_parameters between
+	FunctionModulePOJOCallMapping[0..1] role xxx_FunctionModulePOJOCallMapping_parameters_src
+	FunctionModulePOJOParameterMapping[*] role parameters
+end
+
+composition xxx_FunctionModulePOJORequestResponseMapping_requestParameters between
+	FunctionModulePOJORequestResponseMapping[0..1] role xxx_FunctionModulePOJORequestResponseMapping_requestParameters_src
+	FunctionModulePOJOParameterMapping[*] role requestParameters
+end
+
+composition xxx_FunctionModulePOJORequestResponseMapping_responseParameters between
+	FunctionModulePOJORequestResponseMapping[0..1] role xxx_FunctionModulePOJORequestResponseMapping_responseParameters_src
+	FunctionModulePOJOParameterMapping[*] role responseParameters
+end
+
+association xxx_FunctionModulePOJOParameterMapping_structureMapping between
+	FunctionModulePOJOParameterMapping[*] role xxx_FunctionModulePOJOParameterMapping_structureMapping_src
+	StructurePOJOMapping[0..1] role structureMapping
+end
+
+association xxx_FunctionModulePOJOParameterMapping_externalClass between
+	FunctionModulePOJOParameterMapping[*] role xxx_FunctionModulePOJOParameterMapping_externalClass_src
+	Import[0..1] role externalClass
+end
+

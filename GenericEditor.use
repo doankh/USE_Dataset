@@ -1,0 +1,104 @@
+model Editor
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+class Editor<LocatedElement
+attributes
+	extension : String
+operations
+end
+
+abstract class AbstractElement<LocatedElement
+attributes
+	type : String
+operations
+end
+
+class Block<AbstractElement
+attributes
+	blockbegin : String
+	blockend : String
+operations
+end
+
+class GroupElement<AbstractElement
+attributes
+operations
+end
+
+class Element<LocatedElement
+attributes
+	element : String
+operations
+end
+
+class Format<LocatedElement
+attributes
+operations
+end
+
+class Color<LocatedElement
+attributes
+	red : Integer
+	green : Integer
+	blue : Integer
+operations
+end
+
+class Font<LocatedElement
+attributes
+	font : String
+	bold : Boolean
+	italic : Boolean
+operations
+end
+
+class Indent<LocatedElement
+attributes
+	retrait : String
+operations
+end
+
+composition xxx_Editor_abstractElements between
+	Editor[0..1] role xxx_Editor_abstractElements_src
+	AbstractElement[*] role abstractElements
+end
+
+composition xxx_AbstractElement_format between
+	AbstractElement[*] role xxx_AbstractElement_format_src
+	Format[0..1] role format
+end
+
+composition xxx_GroupElement_indent between
+	GroupElement[*] role xxx_GroupElement_indent_src
+	Indent[0..1] role indent
+end
+
+composition xxx_GroupElement_element between
+	GroupElement[0..1] role xxx_GroupElement_element_src
+	Element[*] role element
+end
+
+association xxx_Element_groupElement between
+	Element[*] role xxx_Element_groupElement_src
+	GroupElement[1] role groupElement
+end
+
+composition xxx_Format_color between
+	Format[*] role xxx_Format_color_src
+	Color[0..1] role color
+end
+
+composition xxx_Format_font between
+	Format[*] role xxx_Format_font_src
+	Font[0..1] role font
+end
+
+association xxx_Indent_groupElementIndent between
+	Indent[*] role xxx_Indent_groupElementIndent_src
+	GroupElement[1] role groupElementIndent
+end
+

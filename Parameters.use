@@ -1,0 +1,18 @@
+model PrimitiveTypes
+class ParametersList
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	value : String
+operations
+end
+
+association xxx_ParametersList_parameters between
+	ParametersList[0..1] role xxx_ParametersList_parameters_src
+	Parameter[*] role parameters
+end
+

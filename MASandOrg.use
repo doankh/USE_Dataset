@@ -1,0 +1,75 @@
+model MASandOrg
+class MASandOrgViewpoint
+attributes
+operations
+end
+
+class SemanticWebOrganization
+attributes
+	name : String
+operations
+end
+
+class Role
+attributes
+	name : String
+operations
+end
+
+class SemanticWebAgent
+attributes
+	name : String
+operations
+end
+
+class Environment
+attributes
+	name : String
+operations
+end
+
+composition xxx_MASandOrgViewpoint_containsSemanticWebOrganization between
+	MASandOrgViewpoint[0..1] role xxx_MASandOrgViewpoint_containsSemanticWebOrganization_src
+	SemanticWebOrganization[1..*] role containsSemanticWebOrganization
+end
+
+composition xxx_MASandOrgViewpoint_containsRole between
+	MASandOrgViewpoint[0..1] role xxx_MASandOrgViewpoint_containsRole_src
+	Role[1..*] role containsRole
+end
+
+composition xxx_MASandOrgViewpoint_containsSemanticWebAgent between
+	MASandOrgViewpoint[0..1] role xxx_MASandOrgViewpoint_containsSemanticWebAgent_src
+	SemanticWebAgent[1..*] role containsSemanticWebAgent
+end
+
+composition xxx_MASandOrgViewpoint_containsEnvironment between
+	MASandOrgViewpoint[0..1] role xxx_MASandOrgViewpoint_containsEnvironment_src
+	Environment[1..*] role containsEnvironment
+end
+
+composition xxx_SemanticWebOrganization_contains between
+	SemanticWebOrganization[0..1] role xxx_SemanticWebOrganization_contains_src
+	SemanticWebOrganization[1..*] role contains
+end
+
+association xxx_SemanticWebOrganization_has between
+	SemanticWebOrganization[0..1] role xxx_SemanticWebOrganization_has_src
+	Role[1..*] role has
+end
+
+association xxx_SemanticWebOrganization_interacts_with between
+	SemanticWebOrganization[*] role xxx_SemanticWebOrganization_interacts_with_src
+	Environment[1] role interacts_with
+end
+
+association xxx_SemanticWebAgent_works_in between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_works_in_src
+	SemanticWebOrganization[1..*] role works_in
+end
+
+association xxx_SemanticWebAgent_cooperates between
+	SemanticWebAgent[0..1] role xxx_SemanticWebAgent_cooperates_src
+	SemanticWebAgent[1..*] role cooperates
+end
+

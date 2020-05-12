@@ -1,0 +1,699 @@
+model SWRC
+class Bibliography
+attributes
+operations
+end
+
+abstract class Publication
+attributes
+	title : String
+	abstract_ : String
+	keywords : String
+	note : String
+	year : Integer
+operations
+end
+
+class Article<Publication
+attributes
+	journal : String
+	month : String
+	number : Integer
+	pages : String
+	volume : Integer
+operations
+end
+
+class Book<Publication
+attributes
+	month : String
+	number : Integer
+	volume : Integer
+	series : String
+	source : String
+	address : String
+	edition : String
+	isbn : String
+	price : String
+operations
+end
+
+class InBook<Publication
+attributes
+	month : String
+	number : Integer
+	pages : String
+	volume : Integer
+	series : String
+	chapter : String
+	type : String
+	address : String
+operations
+end
+
+class Booklet<Publication
+attributes
+	month : String
+	address : String
+	edition : String
+	howpublished : String
+operations
+end
+
+class InCollection<Publication
+attributes
+	month : String
+	number : Integer
+	pages : String
+	address : String
+	edition : String
+	volume : Integer
+	series : String
+	chapter : String
+	type : String
+	booktitle : String
+operations
+end
+
+class InProceedings<Publication
+attributes
+	month : String
+	number : Integer
+	pages : String
+	address : String
+	volume : Integer
+	series : String
+	booktitle : String
+operations
+end
+
+class Proceedings<Publication
+attributes
+	month : String
+	number : String
+	volume : String
+	address : String
+	series : String
+operations
+end
+
+class Manual<Publication
+attributes
+	month : String
+	address : String
+	edition : String
+operations
+end
+
+class Misc<Publication
+attributes
+	month : String
+	howpublished : String
+operations
+end
+
+class Unpublished<Publication
+attributes
+	month : String
+operations
+end
+
+abstract class Thesis<Publication
+attributes
+	month : String
+	address : String
+	type : String
+operations
+end
+
+class MasterThesis<Thesis
+attributes
+operations
+end
+
+class PhDThesis<Thesis
+attributes
+operations
+end
+
+abstract class Report<Publication
+attributes
+operations
+end
+
+class ProjectReport<Report
+attributes
+operations
+end
+
+class TechnicalReport<Report
+attributes
+	series : String
+operations
+end
+
+class Event
+attributes
+	name : String
+	date : String
+	eventTitle : String
+	location : String
+operations
+end
+
+class Conference<Event
+attributes
+	series : String
+operations
+end
+
+class Workshop<Event
+attributes
+	series : String
+operations
+end
+
+class Exhibition<Event
+attributes
+operations
+end
+
+class Lecture<Event
+attributes
+operations
+end
+
+class Meeting<Event
+attributes
+	title : String
+operations
+end
+
+class ProjectMeeting<Meeting
+attributes
+operations
+end
+
+class Person
+attributes
+	address : String
+	name : String
+	email : String
+	fax : String
+	homepage : String
+	phone : String
+	photo : String
+operations
+end
+
+class Employee<Person
+attributes
+operations
+end
+
+class Manager<Employee
+attributes
+operations
+end
+
+class AdministrativeStaff<Employee
+attributes
+operations
+end
+
+class TechnicalStaff<Employee
+attributes
+operations
+end
+
+class AcademicStaff<Person
+attributes
+operations
+end
+
+class Lecturer<AcademicStaff
+attributes
+operations
+end
+
+class FacultyMember<AcademicStaff
+attributes
+operations
+end
+
+class FullProfessor<FacultyMember
+attributes
+operations
+end
+
+class AssistantProfessor<FacultyMember
+attributes
+operations
+end
+
+class AssociateProfessor<FacultyMember
+attributes
+operations
+end
+
+class Student<Person
+attributes
+operations
+end
+
+class Undergraduate<Student
+attributes
+operations
+end
+
+class Graduate<Student
+attributes
+operations
+end
+
+class PhDStudent<Graduate
+attributes
+operations
+end
+
+class Organization
+attributes
+	location : String
+	name : String
+operations
+end
+
+class ResearchGroup<Organization
+attributes
+operations
+end
+
+class Association<Organization
+attributes
+operations
+end
+
+class Department<Organization
+attributes
+operations
+end
+
+class Institute<Organization
+attributes
+operations
+end
+
+class Enterprise<Organization
+attributes
+operations
+end
+
+class University<Organization
+attributes
+operations
+end
+
+abstract class Project
+attributes
+	name : String
+operations
+end
+
+class ResearchProject<Project
+attributes
+operations
+end
+
+class DevelopmentProject<Project
+attributes
+operations
+end
+
+class SoftwareProject<Project
+attributes
+operations
+end
+
+class Product
+attributes
+	name : String
+operations
+end
+
+class SoftwareComponent<Product
+attributes
+	hasPrice : Integer
+operations
+end
+
+class Topic
+attributes
+	name : String
+operations
+end
+
+class ResearchTopic<Topic
+attributes
+operations
+end
+
+composition xxx_Bibliography_publications between
+	Bibliography[0..1] role xxx_Bibliography_publications_src
+	Publication[*] role publications
+end
+
+association xxx_Article_author between
+	Article[0..1] role xxx_Article_author_src
+	Person[1..*] role author
+end
+
+association xxx_Book_editor between
+	Book[*] role xxx_Book_editor_src
+	Person[1] role editor
+end
+
+association xxx_Book_publisher between
+	Book[*] role xxx_Book_publisher_src
+	Organization[1] role publisher
+end
+
+association xxx_Book_author between
+	Book[0..1] role xxx_Book_author_src
+	Person[1..*] role author
+end
+
+association xxx_InBook_author between
+	InBook[0..1] role xxx_InBook_author_src
+	Person[1..*] role author
+end
+
+association xxx_InBook_publisher between
+	InBook[*] role xxx_InBook_publisher_src
+	Organization[1] role publisher
+end
+
+association xxx_InBook_editor between
+	InBook[*] role xxx_InBook_editor_src
+	Person[1] role editor
+end
+
+association xxx_Booklet_author between
+	Booklet[0..1] role xxx_Booklet_author_src
+	Person[1..*] role author
+end
+
+association xxx_InCollection_editor between
+	InCollection[*] role xxx_InCollection_editor_src
+	Person[1] role editor
+end
+
+association xxx_InCollection_author between
+	InCollection[0..1] role xxx_InCollection_author_src
+	Person[1..*] role author
+end
+
+association xxx_InCollection_publisher between
+	InCollection[*] role xxx_InCollection_publisher_src
+	Organization[1] role publisher
+end
+
+association xxx_InProceedings_editor between
+	InProceedings[*] role xxx_InProceedings_editor_src
+	Person[1] role editor
+end
+
+association xxx_InProceedings_author between
+	InProceedings[0..1] role xxx_InProceedings_author_src
+	Person[1..*] role author
+end
+
+association xxx_InProceedings_organization between
+	InProceedings[*] role xxx_InProceedings_organization_src
+	Organization[1] role organization
+end
+
+association xxx_InProceedings_publisher between
+	InProceedings[*] role xxx_InProceedings_publisher_src
+	Organization[1] role publisher
+end
+
+association xxx_Proceedings_editor between
+	Proceedings[*] role xxx_Proceedings_editor_src
+	Person[1] role editor
+end
+
+association xxx_Proceedings_publisher between
+	Proceedings[*] role xxx_Proceedings_publisher_src
+	Organization[1] role publisher
+end
+
+association xxx_Proceedings_organization between
+	Proceedings[*] role xxx_Proceedings_organization_src
+	Organization[1] role organization
+end
+
+association xxx_Manual_author between
+	Manual[0..1] role xxx_Manual_author_src
+	Person[1..*] role author
+end
+
+association xxx_Manual_organization between
+	Manual[*] role xxx_Manual_organization_src
+	Organization[1] role organization
+end
+
+association xxx_Unpublished_author between
+	Unpublished[0..1] role xxx_Unpublished_author_src
+	Person[1..*] role author
+end
+
+association xxx_Thesis_author between
+	Thesis[0..1] role xxx_Thesis_author_src
+	Person[1..*] role author
+end
+
+association xxx_Thesis_school between
+	Thesis[*] role xxx_Thesis_school_src
+	University[1] role school
+end
+
+association xxx_Report_author between
+	Report[0..1] role xxx_Report_author_src
+	Person[*] role author
+end
+
+association xxx_ProjectReport_describesProject between
+	ProjectReport[*] role xxx_ProjectReport_describesProject_src
+	Project[1] role describesProject
+end
+
+association xxx_TechnicalReport_organization between
+	TechnicalReport[*] role xxx_TechnicalReport_organization_src
+	Organization[1] role organization
+end
+
+association xxx_Event_atEvent between
+	Event[*] role xxx_Event_atEvent_src
+	Event[1] role atEvent
+end
+
+association xxx_Event_hasPartEvent between
+	Event[*] role xxx_Event_hasPartEvent_src
+	Event[1] role hasPartEvent
+end
+
+association xxx_Lecture_givenBy between
+	Lecture[*] role xxx_Lecture_givenBy_src
+	Person[1] role givenBy
+end
+
+association xxx_Meeting_participant between
+	Meeting[0..1] role xxx_Meeting_participant_src
+	Person[*] role participant
+end
+
+association xxx_Employee_affiliation between
+	Employee[*] role xxx_Employee_affiliation_src
+	Organization[1] role affiliation
+end
+
+association xxx_AcademicStaff_cooperateWith between
+	AcademicStaff[0..1] role xxx_AcademicStaff_cooperateWith_src
+	AcademicStaff[*] role cooperateWith
+end
+
+association xxx_AcademicStaff_editor between
+	AcademicStaff[*] role xxx_AcademicStaff_editor_src
+	Publication[1] role editor
+end
+
+association xxx_AcademicStaff_headOf between
+	AcademicStaff[*] role xxx_AcademicStaff_headOf_src
+	Project[1] role headOf
+end
+
+association xxx_AcademicStaff_headOfGroup between
+	AcademicStaff[*] role xxx_AcademicStaff_headOfGroup_src
+	ResearchGroup[1] role headOfGroup
+end
+
+association xxx_AcademicStaff_memberOfPC between
+	AcademicStaff[*] role xxx_AcademicStaff_memberOfPC_src
+	Event[1] role memberOfPC
+end
+
+association xxx_AcademicStaff_organizerOrChairOf between
+	AcademicStaff[*] role xxx_AcademicStaff_organizerOrChairOf_src
+	Event[1] role organizerOrChairOf
+end
+
+association xxx_AcademicStaff_publication between
+	AcademicStaff[0..1] role xxx_AcademicStaff_publication_src
+	Publication[*] role publication
+end
+
+association xxx_AcademicStaff_supervises between
+	AcademicStaff[0..1] role xxx_AcademicStaff_supervises_src
+	PhDStudent[*] role supervises
+end
+
+association xxx_AcademicStaff_worksAtProject between
+	AcademicStaff[*] role xxx_AcademicStaff_worksAtProject_src
+	ResearchTopic[1] role worksAtProject
+end
+
+association xxx_Student_studiesAt between
+	Student[*] role xxx_Student_studiesAt_src
+	University[1] role studiesAt
+end
+
+association xxx_PhDStudent_publication between
+	PhDStudent[0..1] role xxx_PhDStudent_publication_src
+	Publication[*] role publication
+end
+
+association xxx_PhDStudent_worksAtProject between
+	PhDStudent[*] role xxx_PhDStudent_worksAtProject_src
+	Project[1] role worksAtProject
+end
+
+association xxx_PhDStudent_supervisor between
+	PhDStudent[*] role xxx_PhDStudent_supervisor_src
+	AcademicStaff[1] role supervisor
+end
+
+association xxx_Organization_carriesOut between
+	Organization[0..1] role xxx_Organization_carriesOut_src
+	Project[*] role carriesOut
+end
+
+association xxx_Organization_develops between
+	Organization[0..1] role xxx_Organization_develops_src
+	Product[*] role develops
+end
+
+association xxx_Organization_employs between
+	Organization[0..1] role xxx_Organization_employs_src
+	Employee[*] role employs
+end
+
+association xxx_Organization_finances between
+	Organization[0..1] role xxx_Organization_finances_src
+	Project[*] role finances
+end
+
+association xxx_Organization_publishes between
+	Organization[0..1] role xxx_Organization_publishes_src
+	Publication[*] role publishes
+end
+
+association xxx_Organization_technicalReport between
+	Organization[0..1] role xxx_Organization_technicalReport_src
+	TechnicalReport[*] role technicalReport
+end
+
+association xxx_ResearchGroup_head between
+	ResearchGroup[*] role xxx_ResearchGroup_head_src
+	AcademicStaff[1] role head
+end
+
+association xxx_ResearchGroup_member between
+	ResearchGroup[0..1] role xxx_ResearchGroup_member_src
+	Employee[*] role member
+end
+
+association xxx_Department_hasParts between
+	Department[*] role xxx_Department_hasParts_src
+	Institute[1] role hasParts
+end
+
+association xxx_Institute_cooperateWith between
+	Institute[*] role xxx_Institute_cooperateWith_src
+	Institute[1] role cooperateWith
+end
+
+association xxx_Institute_hasParts between
+	Institute[0..1] role xxx_Institute_hasParts_src
+	ResearchGroup[*] role hasParts
+end
+
+association xxx_University_hasParts between
+	University[0..1] role xxx_University_hasParts_src
+	Department[*] role hasParts
+end
+
+composition xxx_University_student between
+	University[0..1] role xxx_University_student_src
+	Student[*] role student
+end
+
+association xxx_Project_carriedOutBy between
+	Project[*] role xxx_Project_carriedOutBy_src
+	Organization[1] role carriedOutBy
+end
+
+association xxx_Project_financedBy between
+	Project[*] role xxx_Project_financedBy_src
+	Organization[1] role financedBy
+end
+
+association xxx_Project_head between
+	Project[*] role xxx_Project_head_src
+	AcademicStaff[1] role head
+end
+
+association xxx_Project_isAbout between
+	Project[0..1] role xxx_Project_isAbout_src
+	ResearchTopic[1..*] role isAbout
+end
+
+association xxx_Project_member between
+	Project[0..1] role xxx_Project_member_src
+	Person[*] role member
+end
+
+association xxx_Project_projectInfo between
+	Project[0..1] role xxx_Project_projectInfo_src
+	ProjectReport[*] role projectInfo
+end
+
+association xxx_SoftwareProject_product between
+	SoftwareProject[*] role xxx_SoftwareProject_product_src
+	Product[1] role product
+end
+
+association xxx_Product_developedBy between
+	Product[*] role xxx_Product_developedBy_src
+	Organization[1] role developedBy
+end
+
+association xxx_ResearchTopic_dealWithIn between
+	ResearchTopic[*] role xxx_ResearchTopic_dealWithIn_src
+	Project[1] role dealWithIn
+end
+
+association xxx_ResearchTopic_isWorkedOnBy between
+	ResearchTopic[0..1] role xxx_ResearchTopic_isWorkedOnBy_src
+	AcademicStaff[*] role isWorkedOnBy
+end
+

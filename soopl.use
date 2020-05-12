@@ -1,0 +1,287 @@
+model soopl
+enum DataType{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Package<NamedElement
+attributes
+operations
+end
+
+class Class<NamedElement
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class StatefulClass<Class
+attributes
+operations
+end
+
+class StateClass<Class
+attributes
+operations
+end
+
+class StateImplementationClass<Class
+attributes
+operations
+end
+
+class SimpleTypeProperty<Property
+attributes
+	dataType : DataType
+operations
+end
+
+class ComplexTypeProperty<Property
+attributes
+operations
+end
+
+class Method<NamedElement
+attributes
+operations
+end
+
+class TransitionMethod<Method
+attributes
+operations
+end
+
+abstract class Property<NamedElement
+attributes
+	upperBound : Integer
+	lowerBound : Integer
+	multiValued : Boolean
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+abstract class Guard
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class Parameter<NamedElement
+attributes
+operations
+end
+
+class SimpleTypeParameter<Parameter
+attributes
+	dataType : DataType
+operations
+end
+
+class ComplexTypeParameter<Parameter
+attributes
+operations
+end
+
+abstract class CallMethodAction<Action
+attributes
+operations
+end
+
+class ParameterBinding
+attributes
+operations
+end
+
+abstract class IsInStateCondition<Guard
+attributes
+operations
+end
+
+class PropertyIsInState<IsInStateCondition
+attributes
+operations
+end
+
+class ParameterIsInState<IsInStateCondition
+attributes
+operations
+end
+
+class CallMethodOfProperty<CallMethodAction
+attributes
+operations
+end
+
+class CallMethodOfParameter<CallMethodAction
+attributes
+operations
+end
+
+class AssignProperty<Action
+attributes
+operations
+end
+
+composition xxx_Package_classes between
+	Package[0..1] role xxx_Package_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Package_packages between
+	Package[0..1] role xxx_Package_packages_src
+	Package[*] role packages
+end
+
+association xxx_Package_parentPackage between
+	Package[*] role xxx_Package_parentPackage_src
+	Package[0..1] role parentPackage
+end
+
+composition xxx_Class_methods between
+	Class[0..1] role xxx_Class_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Class_properties between
+	Class[0..1] role xxx_Class_properties_src
+	Property[*] role properties
+end
+
+association xxx_Class_superClass between
+	Class[*] role xxx_Class_superClass_src
+	Class[0..1] role superClass
+end
+
+association xxx_StatefulClass_initialState between
+	StatefulClass[*] role xxx_StatefulClass_initialState_src
+	StateImplementationClass[1] role initialState
+end
+
+association xxx_StatefulClass_stateClass between
+	StatefulClass[*] role xxx_StatefulClass_stateClass_src
+	StateClass[1] role stateClass
+end
+
+association xxx_StateClass_statefulClass between
+	StateClass[*] role xxx_StateClass_statefulClass_src
+	StatefulClass[1] role statefulClass
+end
+
+association xxx_StateImplementationClass_entryMethod between
+	StateImplementationClass[0..1] role xxx_StateImplementationClass_entryMethod_src
+	Method[*] role entryMethod
+end
+
+association xxx_StateImplementationClass_stateClass between
+	StateImplementationClass[*] role xxx_StateImplementationClass_stateClass_src
+	StateClass[1] role stateClass
+end
+
+association xxx_ComplexTypeProperty_type between
+	ComplexTypeProperty[*] role xxx_ComplexTypeProperty_type_src
+	Class[1] role type
+end
+
+association xxx_ComplexTypeProperty_opposite between
+	ComplexTypeProperty[*] role xxx_ComplexTypeProperty_opposite_src
+	ComplexTypeProperty[0..1] role opposite
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_TransitionMethod_transitions_ between
+	TransitionMethod[0..1] role xxx_TransitionMethod_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_Transition_actions between
+	Transition[0..1] role xxx_Transition_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[0..1] role guard
+end
+
+association xxx_Transition_targetState between
+	Transition[*] role xxx_Transition_targetState_src
+	StateImplementationClass[1] role targetState
+end
+
+association xxx_ComplexTypeParameter_classType between
+	ComplexTypeParameter[*] role xxx_ComplexTypeParameter_classType_src
+	Class[1] role classType
+end
+
+association xxx_CallMethodAction_calledMethod between
+	CallMethodAction[*] role xxx_CallMethodAction_calledMethod_src
+	Method[1] role calledMethod
+end
+
+composition xxx_CallMethodAction_parameterBinding between
+	CallMethodAction[0..1] role xxx_CallMethodAction_parameterBinding_src
+	ParameterBinding[*] role parameterBinding
+end
+
+association xxx_ParameterBinding_structuralFeatureBinding between
+	ParameterBinding[*] role xxx_ParameterBinding_structuralFeatureBinding_src
+	Property[0..1] role structuralFeatureBinding
+end
+
+association xxx_ParameterBinding_parameter between
+	ParameterBinding[*] role xxx_ParameterBinding_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_IsInStateCondition_inState between
+	IsInStateCondition[*] role xxx_IsInStateCondition_inState_src
+	StateImplementationClass[1] role inState
+end
+
+association xxx_PropertyIsInState_property between
+	PropertyIsInState[*] role xxx_PropertyIsInState_property_src
+	ComplexTypeProperty[1] role property
+end
+
+association xxx_ParameterIsInState_parameter between
+	ParameterIsInState[*] role xxx_ParameterIsInState_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_CallMethodOfProperty_property between
+	CallMethodOfProperty[*] role xxx_CallMethodOfProperty_property_src
+	ComplexTypeProperty[1] role property
+end
+
+association xxx_CallMethodOfParameter_parameter between
+	CallMethodOfParameter[*] role xxx_CallMethodOfParameter_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_AssignProperty_parameter between
+	AssignProperty[*] role xxx_AssignProperty_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_AssignProperty_property between
+	AssignProperty[*] role xxx_AssignProperty_property_src
+	ComplexTypeProperty[1] role property
+end
+

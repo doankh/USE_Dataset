@@ -1,0 +1,427 @@
+model seal
+class Program
+attributes
+	isEmptyEnv : Boolean
+operations
+end
+
+class Range
+attributes
+	from_ : String
+	to : String
+	delta : String
+operations
+end
+
+class Action
+attributes
+	name : String
+operations
+end
+
+class ModuleDefine
+attributes
+	name : String
+operations
+end
+
+class VariableDeclaration
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+class NDCase
+attributes
+operations
+end
+
+class Case
+attributes
+	hasCondition : Boolean
+operations
+end
+
+class Update
+attributes
+operations
+end
+
+class Environment
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class NoAction<Update
+attributes
+operations
+end
+
+class Assign<Update
+attributes
+operations
+end
+
+class And<Expression
+attributes
+operations
+end
+
+class Or<Expression
+attributes
+operations
+end
+
+class Leq<Expression
+attributes
+operations
+end
+
+class Less<Expression
+attributes
+operations
+end
+
+class Eq<Expression
+attributes
+operations
+end
+
+class Neq<Expression
+attributes
+operations
+end
+
+class Geq<Expression
+attributes
+operations
+end
+
+class Gtr<Expression
+attributes
+operations
+end
+
+class Plus<Expression
+attributes
+operations
+end
+
+class Minus<Expression
+attributes
+operations
+end
+
+class Multi<Expression
+attributes
+operations
+end
+
+class Div<Expression
+attributes
+operations
+end
+
+class Not<Expression
+attributes
+operations
+end
+
+class Literal<Expression
+attributes
+	value : String
+operations
+end
+
+class Quantifier<Expression
+attributes
+	name : String
+operations
+end
+
+class ExternalReference<Expression
+attributes
+operations
+end
+
+class LocalReference<Expression
+attributes
+operations
+end
+
+composition xxx_Program_actions between
+	Program[0..1] role xxx_Program_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Program_modules between
+	Program[0..1] role xxx_Program_modules_src
+	ModuleDefine[*] role modules
+end
+
+composition xxx_Program_environment between
+	Program[*] role xxx_Program_environment_src
+	Environment[0..1] role environment
+end
+
+composition xxx_Program_ranges between
+	Program[0..1] role xxx_Program_ranges_src
+	Range[*] role ranges
+end
+
+association xxx_Range_module between
+	Range[*] role xxx_Range_module_src
+	ModuleDefine[0..1] role module
+end
+
+association xxx_Range_variable between
+	Range[*] role xxx_Range_variable_src
+	VariableDeclaration[0..1] role variable
+end
+
+composition xxx_ModuleDefine_variables between
+	ModuleDefine[0..1] role xxx_ModuleDefine_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_ModuleDefine_rules between
+	ModuleDefine[0..1] role xxx_ModuleDefine_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_ModuleDefine_never between
+	ModuleDefine[0..1] role xxx_ModuleDefine_never_src
+	Expression[*] role never
+end
+
+composition xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_VariableDeclaration_expr between
+	VariableDeclaration[*] role xxx_VariableDeclaration_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_Rule_cond between
+	Rule[*] role xxx_Rule_cond_src
+	Expression[0..1] role cond
+end
+
+association xxx_Rule_action between
+	Rule[*] role xxx_Rule_action_src
+	Action[0..1] role action
+end
+
+composition xxx_Rule_ndCases between
+	Rule[0..1] role xxx_Rule_ndCases_src
+	NDCase[*] role ndCases
+end
+
+composition xxx_NDCase_cases between
+	NDCase[0..1] role xxx_NDCase_cases_src
+	Case[*] role cases
+end
+
+composition xxx_Case_weight between
+	Case[*] role xxx_Case_weight_src
+	Expression[0..1] role weight
+end
+
+composition xxx_Case_cond between
+	Case[*] role xxx_Case_cond_src
+	Expression[0..1] role cond
+end
+
+composition xxx_Case_update between
+	Case[0..1] role xxx_Case_update_src
+	Update[*] role update
+end
+
+association xxx_Environment_modules between
+	Environment[0..1] role xxx_Environment_modules_src
+	ModuleDefine[*] role modules
+end
+
+association xxx_Environment_actions between
+	Environment[0..1] role xxx_Environment_actions_src
+	Action[*] role actions
+end
+
+association xxx_Assign_variable between
+	Assign[*] role xxx_Assign_variable_src
+	VariableDeclaration[0..1] role variable
+end
+
+composition xxx_Assign_expr between
+	Assign[*] role xxx_Assign_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_And_left between
+	And[*] role xxx_And_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_And_right between
+	And[*] role xxx_And_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Or_left between
+	Or[*] role xxx_Or_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Or_right between
+	Or[*] role xxx_Or_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Leq_left between
+	Leq[*] role xxx_Leq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Leq_right between
+	Leq[*] role xxx_Leq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Less_left between
+	Less[*] role xxx_Less_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Less_right between
+	Less[*] role xxx_Less_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Eq_left between
+	Eq[*] role xxx_Eq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Eq_right between
+	Eq[*] role xxx_Eq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Neq_left between
+	Neq[*] role xxx_Neq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Neq_right between
+	Neq[*] role xxx_Neq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Geq_left between
+	Geq[*] role xxx_Geq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Geq_right between
+	Geq[*] role xxx_Geq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Gtr_left between
+	Gtr[*] role xxx_Gtr_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Gtr_right between
+	Gtr[*] role xxx_Gtr_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Plus_left between
+	Plus[*] role xxx_Plus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Plus_right between
+	Plus[*] role xxx_Plus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Minus_left between
+	Minus[*] role xxx_Minus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Minus_right between
+	Minus[*] role xxx_Minus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Multi_left between
+	Multi[*] role xxx_Multi_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Multi_right between
+	Multi[*] role xxx_Multi_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Div_left between
+	Div[*] role xxx_Div_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Div_right between
+	Div[*] role xxx_Div_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Not_cond between
+	Not[*] role xxx_Not_cond_src
+	Expression[0..1] role cond
+end
+
+association xxx_Quantifier_module between
+	Quantifier[*] role xxx_Quantifier_module_src
+	ModuleDefine[0..1] role module
+end
+
+composition xxx_Quantifier_cond between
+	Quantifier[*] role xxx_Quantifier_cond_src
+	Expression[0..1] role cond
+end
+
+association xxx_ExternalReference_module between
+	ExternalReference[*] role xxx_ExternalReference_module_src
+	Quantifier[0..1] role module
+end
+
+association xxx_ExternalReference_variable between
+	ExternalReference[*] role xxx_ExternalReference_variable_src
+	VariableDeclaration[0..1] role variable
+end
+
+association xxx_LocalReference_variable between
+	LocalReference[*] role xxx_LocalReference_variable_src
+	VariableDeclaration[0..1] role variable
+end
+

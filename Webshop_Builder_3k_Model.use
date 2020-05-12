@@ -1,0 +1,305 @@
+model webshop_builder_3k_model
+enum Alignment{
+default
+}
+
+class Page
+attributes
+	width : Integer
+	title : String
+	height : Integer
+	canvas_color : String
+operations
+end
+
+class Reuse_component
+attributes
+	xposition : Integer
+	yposition : Integer
+operations
+end
+
+abstract class Component
+attributes
+	xposition : Integer
+	yposition : Integer
+	width : Integer
+	height : Integer
+	name : String
+	alignment : Alignment
+operations
+end
+
+class Picture<Component
+attributes
+	source : String
+	title : String
+	alternative_text : String
+operations
+end
+
+class Text_field<Component
+attributes
+	header_level : Integer
+	text : String
+operations
+end
+
+class User_input_field
+attributes
+	label : String
+operations
+end
+
+class Knowledge_base
+attributes
+	xml_file_uri : String
+operations
+end
+
+class Item_to_KB_link
+attributes
+operations
+end
+
+class Checkbox<User_input_field
+attributes
+operations
+end
+
+class Branding<Component
+attributes
+operations
+end
+
+class Radio_button<User_input_field
+attributes
+operations
+end
+
+class Text_input_field<User_input_field
+attributes
+operations
+end
+
+class Reuses_component_link
+attributes
+operations
+end
+
+class Webshop_builder_3k
+attributes
+	company_name : String
+operations
+end
+
+class Item<Component
+attributes
+operations
+end
+
+class Login_widget
+attributes
+operations
+end
+
+class Slideshow
+attributes
+operations
+end
+
+class Social_button
+attributes
+operations
+end
+
+class Newsletter_subscription_widget
+attributes
+operations
+end
+
+class Shopping_cart_button
+attributes
+operations
+end
+
+class Search_widget
+attributes
+operations
+end
+
+class Menu
+attributes
+operations
+end
+
+class Component_group
+attributes
+operations
+end
+
+class Result_list<Component
+attributes
+	number_of_items_per_page : Integer
+	distance_between_items : Integer
+operations
+end
+
+class Source_code
+attributes
+operations
+end
+
+class Navigation_button<Component
+attributes
+operations
+end
+
+class Navigation_to_Page_link
+attributes
+operations
+end
+
+class Style
+attributes
+	background_color : String
+operations
+end
+
+class Border
+attributes
+	thickness : Integer
+	color : String
+operations
+end
+
+composition xxx_Page_components between
+	Page[0..1] role xxx_Page_components_src
+	Component[1..*] role components
+end
+
+composition xxx_Page_reuse_components between
+	Page[0..1] role xxx_Page_reuse_components_src
+	Reuse_component[*] role reuse_components
+end
+
+composition xxx_Page_style between
+	Page[*] role xxx_Page_style_src
+	Style[0..1] role style
+end
+
+composition xxx_Reuse_component_link between
+	Reuse_component[*] role xxx_Reuse_component_link_src
+	Reuses_component_link[1] role link
+end
+
+composition xxx_Component_style between
+	Component[*] role xxx_Component_style_src
+	Style[0..1] role style
+end
+
+association xxx_Item_to_KB_link_item between
+	Item_to_KB_link[*] role xxx_Item_to_KB_link_item_src
+	Item[1] role item
+end
+
+association xxx_Item_to_KB_link_knowledge_base between
+	Item_to_KB_link[*] role xxx_Item_to_KB_link_knowledge_base_src
+	Knowledge_base[1] role knowledge_base
+end
+
+composition xxx_Branding_company_name between
+	Branding[*] role xxx_Branding_company_name_src
+	Text_field[1] role company_name
+end
+
+composition xxx_Branding_company_logo between
+	Branding[*] role xxx_Branding_company_logo_src
+	Picture[1] role company_logo
+end
+
+association xxx_Reuses_component_link_source between
+	Reuses_component_link[*] role xxx_Reuses_component_link_source_src
+	Reuse_component[1] role source
+end
+
+association xxx_Reuses_component_link_target between
+	Reuses_component_link[*] role xxx_Reuses_component_link_target_src
+	Component[1] role target
+end
+
+composition xxx_Webshop_builder_3k_pages between
+	Webshop_builder_3k[0..1] role xxx_Webshop_builder_3k_pages_src
+	Page[1..*] role pages
+end
+
+composition xxx_Webshop_builder_3k_free_components between
+	Webshop_builder_3k[0..1] role xxx_Webshop_builder_3k_free_components_src
+	Component[*] role free_components
+end
+
+composition xxx_Webshop_builder_3k_knowledge_bases between
+	Webshop_builder_3k[0..1] role xxx_Webshop_builder_3k_knowledge_bases_src
+	Knowledge_base[1..*] role knowledge_bases
+end
+
+association xxx_Webshop_builder_3k_index_page between
+	Webshop_builder_3k[*] role xxx_Webshop_builder_3k_index_page_src
+	Page[1] role index_page
+end
+
+association xxx_Webshop_builder_3k_item_details_page between
+	Webshop_builder_3k[*] role xxx_Webshop_builder_3k_item_details_page_src
+	Page[0..1] role item_details_page
+end
+
+composition xxx_Item_item_picture between
+	Item[*] role xxx_Item_item_picture_src
+	Picture[1] role item_picture
+end
+
+composition xxx_Item_text_fields between
+	Item[0..1] role xxx_Item_text_fields_src
+	Text_field[1..*] role text_fields
+end
+
+composition xxx_Item_kb_link between
+	Item[*] role xxx_Item_kb_link_src
+	Item_to_KB_link[1] role kb_link
+end
+
+composition xxx_Result_list_result_template between
+	Result_list[*] role xxx_Result_list_result_template_src
+	Item[1] role result_template
+end
+
+composition xxx_Navigation_button_link between
+	Navigation_button[*] role xxx_Navigation_button_link_src
+	Navigation_to_Page_link[1] role link
+end
+
+composition xxx_Navigation_button_picture between
+	Navigation_button[*] role xxx_Navigation_button_picture_src
+	Picture[0..1] role picture
+end
+
+composition xxx_Navigation_button_text between
+	Navigation_button[*] role xxx_Navigation_button_text_src
+	Text_field[0..1] role text
+end
+
+association xxx_Navigation_to_Page_link_Source between
+	Navigation_to_Page_link[*] role xxx_Navigation_to_Page_link_Source_src
+	Navigation_button[1] role Source
+end
+
+association xxx_Navigation_to_Page_link_target between
+	Navigation_to_Page_link[*] role xxx_Navigation_to_Page_link_target_src
+	Page[1] role target
+end
+
+composition xxx_Style_border between
+	Style[*] role xxx_Style_border_src
+	Border[0..1] role border
+end
+

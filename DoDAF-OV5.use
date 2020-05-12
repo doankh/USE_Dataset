@@ -1,0 +1,435 @@
+model DoDAF
+abstract class Element
+attributes
+	name : String
+	description : String
+	view : String
+operations
+end
+
+class DoDAFModel<Element
+attributes
+operations
+end
+
+class Document<Element
+attributes
+	type : String
+operations
+end
+
+class AMSpecification<Document
+attributes
+operations
+end
+
+class AMSpecificationElement<Element
+attributes
+operations
+end
+
+class PAExchangeRequirement<Element
+attributes
+operations
+end
+
+class ArchitectureDocument<Element
+attributes
+operations
+end
+
+class IE<Element
+attributes
+operations
+end
+
+class AMIERole<Element
+attributes
+operations
+end
+
+class Control<AMIERole
+attributes
+	source : String
+	destination : String
+operations
+end
+
+class Input<AMIERole
+attributes
+	source : String
+	destination : String
+	information : String
+operations
+end
+
+class Output<AMIERole
+attributes
+	source : String
+	destination : String
+	information : String
+operations
+end
+
+class Mechanism<AMIERole
+attributes
+	source : String
+	destination : String
+	resourceType : String
+operations
+end
+
+class MechanismSystem<Mechanism
+attributes
+operations
+end
+
+class MechanismReference<Mechanism
+attributes
+operations
+end
+
+class MechanismFacility<Mechanism
+attributes
+operations
+end
+
+class InformationAssetDocument<Element
+attributes
+operations
+end
+
+class AMPA<Element
+attributes
+operations
+end
+
+class PACapability<Element
+attributes
+operations
+end
+
+class PA<Element
+attributes
+operations
+end
+
+class AM<InformationAsset
+attributes
+	type : String
+operations
+end
+
+abstract class InformationAsset<Element
+attributes
+operations
+end
+
+class Task<Element
+attributes
+	levelIdentifier : String
+	references : String
+	cost : String
+operations
+end
+
+class PATask<Task
+attributes
+operations
+end
+
+class Organization<Element
+attributes
+operations
+end
+
+class OrganizationType<Element
+attributes
+operations
+end
+
+class OperationalRole<Element
+attributes
+operations
+end
+
+class Occupation<Element
+attributes
+operations
+end
+
+class PersonType<Element
+attributes
+operations
+end
+
+class Skill<Element
+attributes
+operations
+end
+
+class DOSCR<Element
+attributes
+operations
+end
+
+composition xxx_DoDAFModel_document between
+	DoDAFModel[0..1] role xxx_DoDAFModel_document_src
+	Document[*] role document
+end
+
+composition xxx_DoDAFModel_am between
+	DoDAFModel[0..1] role xxx_DoDAFModel_am_src
+	AM[*] role am
+end
+
+composition xxx_DoDAFModel_task between
+	DoDAFModel[0..1] role xxx_DoDAFModel_task_src
+	Task[*] role task
+end
+
+composition xxx_DoDAFModel_iaDocument between
+	DoDAFModel[0..1] role xxx_DoDAFModel_iaDocument_src
+	InformationAssetDocument[*] role iaDocument
+end
+
+composition xxx_DoDAFModel_amSpecification between
+	DoDAFModel[0..1] role xxx_DoDAFModel_amSpecification_src
+	AMSpecification[*] role amSpecification
+end
+
+composition xxx_DoDAFModel_doscr between
+	DoDAFModel[0..1] role xxx_DoDAFModel_doscr_src
+	DOSCR[*] role doscr
+end
+
+composition xxx_DoDAFModel_organizationType between
+	DoDAFModel[0..1] role xxx_DoDAFModel_organizationType_src
+	OrganizationType[*] role organizationType
+end
+
+association xxx_Document_cites between
+	Document[0..1] role xxx_Document_cites_src
+	InformationAssetDocument[*] role cites
+end
+
+composition xxx_Document_records between
+	Document[0..1] role xxx_Document_records_src
+	ArchitectureDocument[*] role records
+end
+
+composition xxx_Document_isTheReferenceFor between
+	Document[0..1] role xxx_Document_isTheReferenceFor_src
+	IE[*] role isTheReferenceFor
+end
+
+composition xxx_Document_isThePrimaryReferenceFor between
+	Document[0..1] role xxx_Document_isThePrimaryReferenceFor_src
+	PA[*] role isThePrimaryReferenceFor
+end
+
+composition xxx_AMSpecification_isSpecifiedUsing between
+	AMSpecification[0..1] role xxx_AMSpecification_isSpecifiedUsing_src
+	AMSpecificationElement[*] role isSpecifiedUsing
+end
+
+association xxx_AMSpecificationElement_subject between
+	AMSpecificationElement[*] role xxx_AMSpecificationElement_subject_src
+	PAExchangeRequirement[0..1] role subject
+end
+
+association xxx_PAExchangeRequirement_isTheSubjectOf between
+	PAExchangeRequirement[0..1] role xxx_PAExchangeRequirement_isTheSubjectOf_src
+	AMSpecificationElement[*] role isTheSubjectOf
+end
+
+association xxx_IE_isAssociatedWith between
+	IE[0..1] role xxx_IE_isAssociatedWith_src
+	AMIERole[*] role isAssociatedWith
+end
+
+association xxx_IE_isOrdinateOf between
+	IE[0..1] role xxx_IE_isOrdinateOf_src
+	IE[*] role isOrdinateOf
+end
+
+association xxx_IE_isSubordinateOf between
+	IE[0..1] role xxx_IE_isSubordinateOf_src
+	IE[*] role isSubordinateOf
+end
+
+association xxx_AMIERole_defines between
+	AMIERole[0..1] role xxx_AMIERole_defines_src
+	AMPA[*] role defines
+end
+
+association xxx_Input_isTheInputThatIsDefinedBy between
+	Input[0..1] role xxx_Input_isTheInputThatIsDefinedBy_src
+	Output[*] role isTheInputThatIsDefinedBy
+end
+
+association xxx_AMPA_isOrdinateOf between
+	AMPA[0..1] role xxx_AMPA_isOrdinateOf_src
+	AMPA[*] role isOrdinateOf
+end
+
+association xxx_AMPA_isSubordinateOf between
+	AMPA[0..1] role xxx_AMPA_isSubordinateOf_src
+	AMPA[*] role isSubordinateOf
+end
+
+composition xxx_AMPA_defines between
+	AMPA[0..1] role xxx_AMPA_defines_src
+	AMIERole[*] role defines
+end
+
+composition xxx_PA_isTheProducerFor between
+	PA[0..1] role xxx_PA_isTheProducerFor_src
+	PAExchangeRequirement[*] role isTheProducerFor
+end
+
+composition xxx_PA_isTheConsumerFor between
+	PA[0..1] role xxx_PA_isTheConsumerFor_src
+	PAExchangeRequirement[*] role isTheConsumerFor
+end
+
+association xxx_PA_isParentFor between
+	PA[0..1] role xxx_PA_isParentFor_src
+	PA[*] role isParentFor
+end
+
+association xxx_PA_isChildFor between
+	PA[0..1] role xxx_PA_isChildFor_src
+	PA[*] role isChildFor
+end
+
+composition xxx_PA_has between
+	PA[0..1] role xxx_PA_has_src
+	PACapability[*] role has
+end
+
+association xxx_PA_isIncludedIn between
+	PA[0..1] role xxx_PA_isIncludedIn_src
+	AMPA[*] role isIncludedIn
+end
+
+association xxx_PA_correspondsTo between
+	PA[0..1] role xxx_PA_correspondsTo_src
+	PATask[*] role correspondsTo
+end
+
+association xxx_AM_specifies between
+	AM[0..1] role xxx_AM_specifies_src
+	AMSpecification[*] role specifies
+end
+
+composition xxx_AM_includes between
+	AM[0..1] role xxx_AM_includes_src
+	AMPA[*] role includes
+end
+
+association xxx_AM_paTask between
+	AM[0..1] role xxx_AM_paTask_src
+	PATask[*] role paTask
+end
+
+composition xxx_InformationAsset_isDescribedUsing between
+	InformationAsset[0..1] role xxx_InformationAsset_isDescribedUsing_src
+	PACapability[*] role isDescribedUsing
+end
+
+association xxx_InformationAsset_isCitedIn between
+	InformationAsset[0..1] role xxx_InformationAsset_isCitedIn_src
+	InformationAssetDocument[*] role isCitedIn
+end
+
+association xxx_PATask_isCitedBy between
+	PATask[*] role xxx_PATask_isCitedBy_src
+	InformationAsset[1] role isCitedBy
+end
+
+association xxx_Organization_type between
+	Organization[*] role xxx_Organization_type_src
+	OrganizationType[1] role type
+end
+
+association xxx_Organization_supplies between
+	Organization[0..1] role xxx_Organization_supplies_src
+	InformationAsset[*] role supplies
+end
+
+association xxx_Organization_providesStewardshipFor between
+	Organization[0..1] role xxx_Organization_providesStewardshipFor_src
+	InformationAsset[*] role providesStewardshipFor
+end
+
+association xxx_Organization_owns between
+	Organization[0..1] role xxx_Organization_owns_src
+	InformationAsset[*] role owns
+end
+
+association xxx_Organization_develops between
+	Organization[0..1] role xxx_Organization_develops_src
+	IE[*] role develops
+end
+
+association xxx_Organization_isCitedAs between
+	Organization[0..1] role xxx_Organization_isCitedAs_src
+	MechanismReference[*] role isCitedAs
+end
+
+composition xxx_OrganizationType_isTheTypeOf between
+	OrganizationType[0..1] role xxx_OrganizationType_isTheTypeOf_src
+	Organization[*] role isTheTypeOf
+end
+
+composition xxx_OrganizationType_isCitedAs between
+	OrganizationType[0..1] role xxx_OrganizationType_isCitedAs_src
+	MechanismReference[*] role isCitedAs
+end
+
+composition xxx_OperationalRole_isCitedAs between
+	OperationalRole[0..1] role xxx_OperationalRole_isCitedAs_src
+	MechanismReference[*] role isCitedAs
+end
+
+composition xxx_Occupation_mayBeCitedForOR between
+	Occupation[0..1] role xxx_Occupation_mayBeCitedForOR_src
+	OperationalRole[*] role mayBeCitedForOR
+end
+
+composition xxx_Occupation_mayBeCitedForPT between
+	Occupation[0..1] role xxx_Occupation_mayBeCitedForPT_src
+	PersonType[*] role mayBeCitedForPT
+end
+
+composition xxx_PersonType_mayBeCitedFor between
+	PersonType[0..1] role xxx_PersonType_mayBeCitedFor_src
+	OperationalRole[*] role mayBeCitedFor
+end
+
+composition xxx_PersonType_can between
+	PersonType[0..1] role xxx_PersonType_can_src
+	Skill[*] role can
+end
+
+composition xxx_Skill_mayBeCitedFor between
+	Skill[0..1] role xxx_Skill_mayBeCitedFor_src
+	OperationalRole[*] role mayBeCitedFor
+end
+
+composition xxx_DOSCR_mayBeAn between
+	DOSCR[*] role xxx_DOSCR_mayBeAn_src
+	Occupation[1] role mayBeAn
+end
+
+composition xxx_DOSCR_appliesTo between
+	DOSCR[0..1] role xxx_DOSCR_appliesTo_src
+	PersonType[*] role appliesTo
+end
+
+composition xxx_DOSCR_mayBeCitedFor between
+	DOSCR[0..1] role xxx_DOSCR_mayBeCitedFor_src
+	OperationalRole[*] role mayBeCitedFor
+end
+

@@ -1,0 +1,70 @@
+model maps
+class map
+attributes
+	name : String
+operations
+end
+
+abstract class Road
+attributes
+	name : String
+	length : Integer
+operations
+end
+
+abstract class PublicSpace
+attributes
+	name : String
+operations
+end
+
+class Street<Road
+attributes
+operations
+end
+
+class Boulevard<Road
+attributes
+operations
+end
+
+class Pedestrian<Road
+attributes
+operations
+end
+
+class Garden<PublicSpace
+attributes
+operations
+end
+
+class Square<PublicSpace
+attributes
+operations
+end
+
+composition xxx_map_roads between
+	map[0..1] role xxx_map_roads_src
+	Road[*] role roads
+end
+
+composition xxx_map_spaces between
+	map[0..1] role xxx_map_spaces_src
+	PublicSpace[*] role spaces
+end
+
+association xxx_Road_border between
+	Road[0..1] role xxx_Road_border_src
+	PublicSpace[*] role border
+end
+
+association xxx_Road_meet between
+	Road[0..1] role xxx_Road_meet_src
+	Road[*] role meet
+end
+
+association xxx_PublicSpace_borderedBy between
+	PublicSpace[0..1] role xxx_PublicSpace_borderedBy_src
+	Road[1..*] role borderedBy
+end
+

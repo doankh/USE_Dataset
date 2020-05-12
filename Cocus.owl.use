@@ -1,0 +1,780 @@
+model Cocus
+class Thing
+attributes
+operations
+end
+
+class Meta_Reviewer<Reviewer
+attributes
+operations
+end
+
+class Reviewer<User
+attributes
+operations
+end
+
+class Decision
+attributes
+operations
+end
+
+class Preference
+attributes
+operations
+end
+
+class ProgramCommittee
+attributes
+operations
+end
+
+class Bid
+attributes
+operations
+end
+
+class Conference<Event
+attributes
+	date : String
+	reviewsPerPaper : Integer
+	logoURL : String
+	acceptsHardcopySubmissions : Boolean
+	siteURL : String
+operations
+end
+
+class ConferenceChair<Chairman
+attributes
+operations
+end
+
+class ConferenceMember<Person
+attributes
+operations
+end
+
+class AssociatedChair<Chairman
+attributes
+operations
+end
+
+class ProgramCommitteeMember<ConferenceMember
+attributes
+	maxPapers : Integer
+operations
+end
+
+class AuthorNotReviewer<Author
+attributes
+operations
+end
+
+class SubjectArea
+attributes
+operations
+end
+
+class ExternalReviewer<Person
+attributes
+operations
+end
+
+class Chairman<ConferenceMember
+attributes
+operations
+end
+
+class ProgramCommitteeChair<Chairman
+attributes
+operations
+end
+
+class Acceptance<Decision
+attributes
+operations
+end
+
+class Rejection<Decision
+attributes
+operations
+end
+
+class Review<Document
+attributes
+operations
+end
+
+class Paper<Document
+attributes
+	paperID : String
+	title : String
+operations
+end
+
+class Author<User
+attributes
+operations
+end
+
+class Co_author<Author
+attributes
+operations
+end
+
+class PaperAbstract<Paper
+attributes
+operations
+end
+
+class PaperFullVersion<Paper
+attributes
+operations
+end
+
+class Administrator<Person
+attributes
+operations
+end
+
+class Meta_Review<Review
+attributes
+operations
+end
+
+class Workshop<Event
+attributes
+operations
+end
+
+class Event<Thing
+attributes
+operations
+end
+
+class Account
+attributes
+operations
+end
+
+class Inforamtion
+attributes
+operations
+end
+
+class User<Person
+attributes
+operations
+end
+
+class Role<Thing
+attributes
+operations
+end
+
+class Help_Request<Request
+attributes
+operations
+end
+
+class Person<Thing
+attributes
+	email : String
+operations
+end
+
+class Symposium<Event
+attributes
+operations
+end
+
+class Abstract<Paper
+attributes
+operations
+end
+
+class Document<Thing
+attributes
+operations
+end
+
+class Invited_Paper<Paper
+attributes
+operations
+end
+
+class Admin_Role<Role
+attributes
+operations
+end
+
+class Paper_Typologies<Event_Setup
+attributes
+operations
+end
+
+class Event_Setup
+attributes
+operations
+end
+
+class Event_URL<URL
+attributes
+operations
+end
+
+class URL
+attributes
+operations
+end
+
+class Notification_Email<Email
+attributes
+operations
+end
+
+class Email<Document
+attributes
+operations
+end
+
+class Short_Paper<Paper
+attributes
+operations
+end
+
+class Author_Role<Role
+attributes
+operations
+end
+
+class Preview<Review_Form
+attributes
+operations
+end
+
+class Review_Form<Event_Setup
+attributes
+operations
+end
+
+class Committe_Role<Role
+attributes
+operations
+end
+
+class Group_Email<Email
+attributes
+operations
+end
+
+class Submission_Template<Event_Setup
+attributes
+operations
+end
+
+class Review_Form_Setup<Review_Form
+attributes
+operations
+end
+
+class Misc<Help_Request
+attributes
+operations
+end
+
+class Event_Creation<Activity
+attributes
+operations
+end
+
+class Approval_Email<Email
+attributes
+operations
+end
+
+class Rejection_Email<Email
+attributes
+operations
+end
+
+class Submission<Document
+attributes
+operations
+end
+
+class Template<Document
+attributes
+operations
+end
+
+class Feature_Request<Help_Request
+attributes
+operations
+end
+
+class Committee<User
+attributes
+operations
+end
+
+class Event_Tracks<Event_Setup
+attributes
+operations
+end
+
+class Request<Activity
+attributes
+operations
+end
+
+class Activity
+attributes
+operations
+end
+
+class Head_Role<Role
+attributes
+operations
+end
+
+class Detail<Thing
+attributes
+operations
+end
+
+class Corresponding_Author<Author
+attributes
+operations
+end
+
+class Reviewer_Role<Role
+attributes
+operations
+end
+
+class Event_Approval<Activity
+attributes
+operations
+end
+
+class Registration<Activity
+attributes
+operations
+end
+
+class Full_Paper<Paper
+attributes
+operations
+end
+
+class Research_Topic<Event_Setup
+attributes
+operations
+end
+
+class Description
+attributes
+operations
+end
+
+class Assistance<Help_Request
+attributes
+operations
+end
+
+class Email_Template<Event_Setup
+attributes
+operations
+end
+
+association xxx_Reviewer_assignedByAdministrator between
+	Reviewer[*] role xxx_Reviewer_assignedByAdministrator_src
+	Administrator[0..1] role assignedByAdministrator
+end
+
+association xxx_Reviewer_adjustBid between
+	Reviewer[*] role xxx_Reviewer_adjustBid_src
+	Bid[0..1] role adjustBid
+end
+
+association xxx_Reviewer_readPaper between
+	Reviewer[*] role xxx_Reviewer_readPaper_src
+	Paper[0..1] role readPaper
+end
+
+association xxx_Reviewer_hasBeenAssigned between
+	Reviewer[*] role xxx_Reviewer_hasBeenAssigned_src
+	Paper[0..1] role hasBeenAssigned
+end
+
+association xxx_Reviewer_writeReview between
+	Reviewer[*] role xxx_Reviewer_writeReview_src
+	Review[0..1] role writeReview
+end
+
+association xxx_Reviewer_assignExternalReviewer between
+	Reviewer[*] role xxx_Reviewer_assignExternalReviewer_src
+	ExternalReviewer[0..1] role assignExternalReviewer
+end
+
+association xxx_ProgramCommittee_hasProgramCommitteeMember between
+	ProgramCommittee[*] role xxx_ProgramCommittee_hasProgramCommitteeMember_src
+	ProgramCommitteeMember[0..1] role hasProgramCommitteeMember
+end
+
+association xxx_Bid_adjustedBy between
+	Bid[*] role xxx_Bid_adjustedBy_src
+	Reviewer[0..1] role adjustedBy
+end
+
+association xxx_Conference_hasConferenceMember between
+	Conference[*] role xxx_Conference_hasConferenceMember_src
+	ConferenceMember[0..1] role hasConferenceMember
+end
+
+association xxx_Conference_paperAssignmentFinalizedBy between
+	Conference[*] role xxx_Conference_paperAssignmentFinalizedBy_src
+	Administrator[0..1] role paperAssignmentFinalizedBy
+end
+
+association xxx_Conference_reviewCriteriaEnteredBy between
+	Conference[*] role xxx_Conference_reviewCriteriaEnteredBy_src
+	Administrator[0..1] role reviewCriteriaEnteredBy
+end
+
+association xxx_Conference_paperAssignmentToolsRunBy between
+	Conference[*] role xxx_Conference_paperAssignmentToolsRunBy_src
+	Administrator[0..1] role paperAssignmentToolsRunBy
+end
+
+association xxx_Conference_virtualMeetingEnabledBy between
+	Conference[*] role xxx_Conference_virtualMeetingEnabledBy_src
+	Administrator[0..1] role virtualMeetingEnabledBy
+end
+
+association xxx_Conference_hardcopyMailingManifestsPrintedBy between
+	Conference[*] role xxx_Conference_hardcopyMailingManifestsPrintedBy_src
+	Administrator[0..1] role hardcopyMailingManifestsPrintedBy
+end
+
+association xxx_Conference_detailsEnteredBy between
+	Conference[*] role xxx_Conference_detailsEnteredBy_src
+	Administrator[0..1] role detailsEnteredBy
+end
+
+association xxx_Conference_reviewerBiddingStartedBy between
+	Conference[*] role xxx_Conference_reviewerBiddingStartedBy_src
+	Administrator[0..1] role reviewerBiddingStartedBy
+end
+
+association xxx_ConferenceMember_memberOfConference between
+	ConferenceMember[*] role xxx_ConferenceMember_memberOfConference_src
+	Conference[0..1] role memberOfConference
+end
+
+association xxx_ProgramCommitteeMember_memberOfProgramCommittee between
+	ProgramCommitteeMember[*] role xxx_ProgramCommitteeMember_memberOfProgramCommittee_src
+	ProgramCommittee[0..1] role memberOfProgramCommittee
+end
+
+association xxx_ProgramCommitteeMember_addedBy between
+	ProgramCommitteeMember[*] role xxx_ProgramCommitteeMember_addedBy_src
+	Administrator[0..1] role addedBy
+end
+
+association xxx_ExternalReviewer_assignedByReviewer between
+	ExternalReviewer[*] role xxx_ExternalReviewer_assignedByReviewer_src
+	Reviewer[1] role assignedByReviewer
+end
+
+association xxx_ProgramCommitteeChair_endReview between
+	ProgramCommitteeChair[*] role xxx_ProgramCommitteeChair_endReview_src
+	Review[0..1] role endReview
+end
+
+association xxx_Review_writtenBy between
+	Review[*] role xxx_Review_writtenBy_src
+	Reviewer[0..1] role writtenBy
+end
+
+association xxx_Paper_hasCo_author between
+	Paper[*] role xxx_Paper_hasCo_author_src
+	Co_author[0..1] role hasCo_author
+end
+
+association xxx_Paper_hasBid between
+	Paper[*] role xxx_Paper_hasBid_src
+	Bid[0..1] role hasBid
+end
+
+association xxx_Paper_hasDecision between
+	Paper[*] role xxx_Paper_hasDecision_src
+	Decision[0..1] role hasDecision
+end
+
+association xxx_Paper_assignedTo between
+	Paper[*] role xxx_Paper_assignedTo_src
+	Reviewer[0..1] role assignedTo
+end
+
+association xxx_Paper_hasSubjectArea between
+	Paper[*] role xxx_Paper_hasSubjectArea_src
+	SubjectArea[0..1] role hasSubjectArea
+end
+
+association xxx_Paper_readByReviewer between
+	Paper[*] role xxx_Paper_readByReviewer_src
+	Reviewer[1] role readByReviewer
+end
+
+association xxx_Paper_hasAuthor between
+	Paper[*] role xxx_Paper_hasAuthor_src
+	Author[0..1] role hasAuthor
+end
+
+association xxx_Paper_acceptedBy between
+	Paper[*] role xxx_Paper_acceptedBy_src
+	Administrator[0..1] role acceptedBy
+end
+
+association xxx_Paper_rejectedBy between
+	Paper[*] role xxx_Paper_rejectedBy_src
+	Administrator[0..1] role rejectedBy
+end
+
+association xxx_Paper_readByMeta_Reviewer between
+	Paper[*] role xxx_Paper_readByMeta_Reviewer_src
+	Meta_Reviewer[0..1] role readByMeta_Reviewer
+end
+
+association xxx_Author_submitPaper between
+	Author[*] role xxx_Author_submitPaper_src
+	Paper[0..1] role submitPaper
+end
+
+association xxx_Author_writePaper between
+	Author[*] role xxx_Author_writePaper_src
+	Paper[0..1] role writePaper
+end
+
+association xxx_Co_author_co_writePaper between
+	Co_author[*] role xxx_Co_author_co_writePaper_src
+	Paper[0..1] role co_writePaper
+end
+
+association xxx_Administrator_approve between
+	Administrator[*] role xxx_Administrator_approve_src
+	Event[0..1] role approve
+end
+
+association xxx_Administrator_assign between
+	Administrator[*] role xxx_Administrator_assign_src
+	Role[0..1] role assign
+end
+
+association xxx_Administrator_finalizePaperAssignment between
+	Administrator[*] role xxx_Administrator_finalizePaperAssignment_src
+	Conference[0..1] role finalizePaperAssignment
+end
+
+association xxx_Administrator_runPaperAssignmentTools between
+	Administrator[*] role xxx_Administrator_runPaperAssignmentTools_src
+	Conference[0..1] role runPaperAssignmentTools
+end
+
+association xxx_Administrator_enableVirtualMeeting between
+	Administrator[*] role xxx_Administrator_enableVirtualMeeting_src
+	Conference[0..1] role enableVirtualMeeting
+end
+
+association xxx_Administrator_startReviewerBidding between
+	Administrator[*] role xxx_Administrator_startReviewerBidding_src
+	Conference[0..1] role startReviewerBidding
+end
+
+association xxx_Administrator_assignReviewer between
+	Administrator[*] role xxx_Administrator_assignReviewer_src
+	Reviewer[0..1] role assignReviewer
+end
+
+association xxx_Administrator_rejectPaper between
+	Administrator[*] role xxx_Administrator_rejectPaper_src
+	Paper[0..1] role rejectPaper
+end
+
+association xxx_Administrator_enterConferenceDetails between
+	Administrator[*] role xxx_Administrator_enterConferenceDetails_src
+	Conference[0..1] role enterConferenceDetails
+end
+
+association xxx_Administrator_printHardcopyMailingManifests between
+	Administrator[*] role xxx_Administrator_printHardcopyMailingManifests_src
+	Conference[0..1] role printHardcopyMailingManifests
+end
+
+association xxx_Administrator_setMaxPapers between
+	Administrator[*] role xxx_Administrator_setMaxPapers_src
+	ProgramCommitteeMember[0..1] role setMaxPapers
+end
+
+association xxx_Administrator_enterReviewCriteria between
+	Administrator[*] role xxx_Administrator_enterReviewCriteria_src
+	Conference[0..1] role enterReviewCriteria
+end
+
+association xxx_Administrator_acceptPaper between
+	Administrator[*] role xxx_Administrator_acceptPaper_src
+	Paper[0..1] role acceptPaper
+end
+
+association xxx_Administrator_addProgramCommitteeMember between
+	Administrator[*] role xxx_Administrator_addProgramCommitteeMember_src
+	ProgramCommitteeMember[0..1] role addProgramCommitteeMember
+end
+
+association xxx_Event_conists_of between
+	Event[*] role xxx_Event_conists_of_src
+	Event_Tracks[0..1] role conists_of
+end
+
+association xxx_Event_confirmed_by between
+	Event[*] role xxx_Event_confirmed_by_src
+	Approval_Email[0..1] role confirmed_by
+end
+
+association xxx_Event_defined_by between
+	Event[*] role xxx_Event_defined_by_src
+	Event_Setup[0..1] role defined_by
+end
+
+association xxx_Event_approved_by between
+	Event[*] role xxx_Event_approved_by_src
+	Administrator[0..1] role approved_by
+end
+
+association xxx_Account_registred_by between
+	Account[*] role xxx_Account_registred_by_src
+	Person[0..1] role registred_by
+end
+
+association xxx_User_recieve between
+	User[*] role xxx_User_recieve_src
+	Document[0..1] role recieve
+end
+
+association xxx_User_create between
+	User[0..1] role xxx_User_create_src
+	Thing[*] role create_
+end
+
+association xxx_User_submit between
+	User[*] role xxx_User_submit_src
+	Document[0..1] role submit
+end
+
+association xxx_Role_assigned_by between
+	Role[*] role xxx_Role_assigned_by_src
+	Administrator[0..1] role assigned_by
+end
+
+association xxx_Person_inverse_of_add between
+	Person[0..1] role xxx_Person_inverse_of_add_src
+	Thing[*] role inverse_of_add
+end
+
+association xxx_Person_execute between
+	Person[0..1] role xxx_Person_execute_src
+	Thing[*] role execute
+end
+
+association xxx_Person_get between
+	Person[*] role xxx_Person_get_src
+	Inforamtion[0..1] role get
+end
+
+association xxx_Person_use between
+	Person[*] role xxx_Person_use_src
+	Document[0..1] role use
+end
+
+association xxx_Person_register between
+	Person[*] role xxx_Person_register_src
+	Account[0..1] role register
+end
+
+association xxx_Person_modify between
+	Person[0..1] role xxx_Person_modify_src
+	Thing[*] role modify
+end
+
+association xxx_Person_take_part_in between
+	Person[*] role xxx_Person_take_part_in_src
+	Event[0..1] role take_part_in
+end
+
+association xxx_Person_remove between
+	Person[0..1] role xxx_Person_remove_src
+	Thing[*] role remove
+end
+
+association xxx_Person_add between
+	Person[*] role xxx_Person_add_src
+	Person[0..1] role add
+end
+
+association xxx_Person_send between
+	Person[*] role xxx_Person_send_src
+	Activity[0..1] role send
+end
+
+association xxx_Person_added_by between
+	Person[*] role xxx_Person_added_by_src
+	Person[0..1] role added_by
+end
+
+association xxx_Person_hasConflictOfInterest between
+	Person[*] role xxx_Person_hasConflictOfInterest_src
+	Document[0..1] role hasConflictOfInterest
+end
+
+association xxx_Document_recieved_by between
+	Document[*] role xxx_Document_recieved_by_src
+	User[0..1] role recieved_by
+end
+
+association xxx_Document_used_by between
+	Document[*] role xxx_Document_used_by_src
+	Person[0..1] role used_by
+end
+
+association xxx_Document_submited__by between
+	Document[*] role xxx_Document_submited__by_src
+	User[0..1] role submited__by
+end
+
+association xxx_Event_Setup_define between
+	Event_Setup[*] role xxx_Event_Setup_define_src
+	Event[0..1] role define
+end
+
+association xxx_Event_URL_concerned between
+	Event_URL[*] role xxx_Event_URL_concerned_src
+	Event[0..1] role concerned
+end
+
+association xxx_Approval_Email_confirm between
+	Approval_Email[*] role xxx_Approval_Email_confirm_src
+	Event[0..1] role confirm
+end
+
+association xxx_Activity_has_result between
+	Activity[0..1] role xxx_Activity_has_result_src
+	Thing[*] role has_result
+end
+
+association xxx_Activity_sent_by between
+	Activity[*] role xxx_Activity_sent_by_src
+	Person[0..1] role sent_by
+end
+

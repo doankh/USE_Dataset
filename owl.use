@@ -1,0 +1,861 @@
+model RDFS
+enum ReificationKind{
+	none,
+	reifiedOnly,
+	reified
+}
+
+class Document<RDFSResource
+attributes
+operations
+end
+
+class LocalName
+attributes
+	name : String
+operations
+end
+
+class Namespace
+attributes
+operations
+end
+
+class NamespaceDefinition
+attributes
+	namespacePrefix : String
+operations
+end
+
+class RDFSResource
+attributes
+operations
+end
+
+class RDFGraph<RDFSResource
+attributes
+operations
+end
+
+class List<RDFSResource
+attributes
+operations
+end
+
+class Container<RDFSResource
+attributes
+operations
+end
+
+class Alt<Container
+attributes
+operations
+end
+
+class Bag_<Container
+attributes
+operations
+end
+
+class Seq<Container
+attributes
+operations
+end
+
+class RDFProperty<RDFSResource
+attributes
+operations
+end
+
+class ContainerMembershipProperty
+attributes
+operations
+end
+
+class RDFStatement<RDFSResource
+attributes
+	reificationKind : ReificationKind
+operations
+end
+
+class URIReferenceNode<RDFSResource
+attributes
+operations
+end
+
+class BlankNode<RDFSResource
+attributes
+	nodeId : String
+operations
+end
+
+class RDFSClass<RDFSResource
+attributes
+operations
+end
+
+class RDFSDataType<RDFSClass
+attributes
+operations
+end
+
+class RDFSLiteral<RDFSResource
+attributes
+	lexicalForm : String
+operations
+end
+
+class PlainLiteral<RDFSLiteral
+attributes
+	language : String
+operations
+end
+
+class TypedLiteral<RDFSLiteral
+attributes
+operations
+end
+
+class XMLLiteral<TypedLiteral
+attributes
+operations
+end
+
+class URIReference
+attributes
+operations
+end
+
+class UniformResourceIdentifier<URIReference
+attributes
+	name : String
+operations
+end
+
+class OWLOntology<RDFSResource
+attributes
+operations
+end
+
+class OWLGraph<RDFGraph
+attributes
+operations
+end
+
+class OWLStatement<RDFStatement
+attributes
+operations
+end
+
+class OWLUniverse<RDFSResource
+attributes
+operations
+end
+
+class OWLClass<OWLUniverse
+attributes
+	isDeprecated : Boolean
+operations
+end
+
+class IntersectionClass<OWLClass
+attributes
+operations
+end
+
+class UnionClass<OWLClass
+attributes
+operations
+end
+
+class ComplementClass<OWLClass
+attributes
+operations
+end
+
+class EnumeratedClass<OWLClass
+attributes
+operations
+end
+
+class OWLRestriction<OWLClass
+attributes
+operations
+end
+
+class HasValueRestriction<OWLRestriction
+attributes
+operations
+end
+
+class AllValuesFromRestriction<OWLRestriction
+attributes
+operations
+end
+
+class SomeValuesFromRestriction<OWLRestriction
+attributes
+operations
+end
+
+class CardinalityRestriction<OWLRestriction
+attributes
+operations
+end
+
+class MaxCardinalityRestriction<OWLRestriction
+attributes
+operations
+end
+
+class MinCardinalityRestriction<OWLRestriction
+attributes
+operations
+end
+
+class OWLAnnotationProperty<OWLUniverse
+attributes
+operations
+end
+
+class OWLOntologyProperty<OWLUniverse
+attributes
+operations
+end
+
+abstract class Property<OWLUniverse
+attributes
+	isDeprecated : Boolean
+operations
+end
+
+class FunctionalProperty<Property
+attributes
+operations
+end
+
+class OWLDatatypeProperty<Property
+attributes
+operations
+end
+
+class OWLObjectProperty<Property
+attributes
+operations
+end
+
+class InverseFunctionalProperty<OWLObjectProperty
+attributes
+operations
+end
+
+class SymmetricProperty<OWLObjectProperty
+attributes
+operations
+end
+
+class TransitiveProperty<OWLObjectProperty
+attributes
+operations
+end
+
+class Individual<OWLUniverse
+attributes
+operations
+end
+
+class OWLAllDifferent<OWLClass
+attributes
+operations
+end
+
+class OWLDataRange<OWLUniverse
+attributes
+operations
+end
+
+composition xxx_Document_localName between
+	Document[0..1] role xxx_Document_localName_src
+	LocalName[*] role localName
+end
+
+association xxx_Document_xmlBase between
+	Document[0..1] role xxx_Document_xmlBase_src
+	Namespace[*] role xmlBase
+end
+
+composition xxx_Document_namespaceDefinition between
+	Document[0..1] role xxx_Document_namespaceDefinition_src
+	NamespaceDefinition[*] role namespaceDefinition
+end
+
+association xxx_Document_statement between
+	Document[0..1] role xxx_Document_statement_src
+	RDFStatement[1..*] role statement
+end
+
+association xxx_LocalName_document between
+	LocalName[*] role xxx_LocalName_document_src
+	Document[1] role document
+end
+
+association xxx_LocalName_uriRef between
+	LocalName[0..1] role xxx_LocalName_uriRef_src
+	URIReference[*] role uriRef
+end
+
+association xxx_Namespace_document between
+	Namespace[0..1] role xxx_Namespace_document_src
+	Document[1..*] role document
+end
+
+association xxx_Namespace_namespaceURIRef between
+	Namespace[*] role xxx_Namespace_namespaceURIRef_src
+	URIReference[1] role namespaceURIRef
+end
+
+association xxx_Namespace_namespaceDefinition between
+	Namespace[0..1] role xxx_Namespace_namespaceDefinition_src
+	NamespaceDefinition[*] role namespaceDefinition
+end
+
+association xxx_NamespaceDefinition_document between
+	NamespaceDefinition[*] role xxx_NamespaceDefinition_document_src
+	Document[1] role document
+end
+
+association xxx_NamespaceDefinition_namespace between
+	NamespaceDefinition[*] role xxx_NamespaceDefinition_namespace_src
+	Namespace[1] role namespace
+end
+
+composition xxx_RDFSResource_uriRef between
+	RDFSResource[0..1] role xxx_RDFSResource_uriRef_src
+	URIReference[*] role uriRef
+end
+
+association xxx_RDFSResource_subjectStatement between
+	RDFSResource[0..1] role xxx_RDFSResource_subjectStatement_src
+	RDFStatement[*] role subjectStatement
+end
+
+association xxx_RDFSResource_objectStatement between
+	RDFSResource[0..1] role xxx_RDFSResource_objectStatement_src
+	RDFStatement[*] role objectStatement
+end
+
+composition xxx_RDFSResource_label between
+	RDFSResource[0..1] role xxx_RDFSResource_label_src
+	PlainLiteral[*] role label
+end
+
+association xxx_RDFSResource_type between
+	RDFSResource[0..1] role xxx_RDFSResource_type_src
+	RDFSClass[1..*] role type
+end
+
+composition xxx_RDFSResource_comment between
+	RDFSResource[0..1] role xxx_RDFSResource_comment_src
+	PlainLiteral[*] role comment
+end
+
+association xxx_RDFSResource_seeAlso between
+	RDFSResource[0..1] role xxx_RDFSResource_seeAlso_src
+	RDFSResource[*] role seeAlso
+end
+
+association xxx_RDFSResource_referringResource between
+	RDFSResource[0..1] role xxx_RDFSResource_referringResource_src
+	RDFSResource[*] role referringResource
+end
+
+association xxx_RDFSResource_isDefinedBy between
+	RDFSResource[0..1] role xxx_RDFSResource_isDefinedBy_src
+	RDFSResource[*] role isDefinedBy
+end
+
+association xxx_RDFSResource_definedResource between
+	RDFSResource[0..1] role xxx_RDFSResource_definedResource_src
+	RDFSResource[*] role definedResource
+end
+
+association xxx_RDFSResource_member between
+	RDFSResource[0..1] role xxx_RDFSResource_member_src
+	RDFSResource[*] role member
+end
+
+association xxx_RDFSResource_container between
+	RDFSResource[0..1] role xxx_RDFSResource_container_src
+	RDFSResource[*] role container
+end
+
+association xxx_RDFSResource_list between
+	RDFSResource[0..1] role xxx_RDFSResource_list_src
+	List[*] role list
+end
+
+composition xxx_RDFGraph_graphName between
+	RDFGraph[*] role xxx_RDFGraph_graphName_src
+	URIReference[0..1] role graphName
+end
+
+association xxx_RDFGraph_statement between
+	RDFGraph[0..1] role xxx_RDFGraph_statement_src
+	RDFStatement[1..*] role statement
+end
+
+association xxx_List_first between
+	List[*] role xxx_List_first_src
+	RDFSResource[0..1] role first
+end
+
+association xxx_List_rest between
+	List[*] role xxx_List_rest_src
+	List[0..1] role rest
+end
+
+association xxx_List_originalList between
+	List[0..1] role xxx_List_originalList_src
+	List[*] role originalList
+end
+
+association xxx_RDFProperty_predicateStatement between
+	RDFProperty[0..1] role xxx_RDFProperty_predicateStatement_src
+	RDFStatement[*] role predicateStatement
+end
+
+association xxx_RDFProperty_subPropertyOf between
+	RDFProperty[0..1] role xxx_RDFProperty_subPropertyOf_src
+	RDFProperty[*] role subPropertyOf
+end
+
+association xxx_RDFProperty_superProperty between
+	RDFProperty[0..1] role xxx_RDFProperty_superProperty_src
+	RDFProperty[*] role superProperty
+end
+
+association xxx_RDFProperty_domain between
+	RDFProperty[0..1] role xxx_RDFProperty_domain_src
+	RDFSClass[*] role domain
+end
+
+association xxx_RDFProperty_range between
+	RDFProperty[0..1] role xxx_RDFProperty_range_src
+	RDFSClass[*] role range
+end
+
+association xxx_RDFProperty_propertyRestriction between
+	RDFProperty[0..1] role xxx_RDFProperty_propertyRestriction_src
+	OWLRestriction[*] role propertyRestriction
+end
+
+association xxx_RDFStatement_graph between
+	RDFStatement[0..1] role xxx_RDFStatement_graph_src
+	RDFGraph[1..*] role graph
+end
+
+association xxx_RDFStatement_RDFpredicate between
+	RDFStatement[*] role xxx_RDFStatement_RDFpredicate_src
+	RDFProperty[0..1] role RDFpredicate
+end
+
+association xxx_RDFStatement_RDFobject between
+	RDFStatement[*] role xxx_RDFStatement_RDFobject_src
+	RDFSResource[1] role RDFobject
+end
+
+association xxx_RDFStatement_RDFsubject between
+	RDFStatement[*] role xxx_RDFStatement_RDFsubject_src
+	RDFSResource[1] role RDFsubject
+end
+
+association xxx_RDFStatement_nameForReification between
+	RDFStatement[0..1] role xxx_RDFStatement_nameForReification_src
+	URIReference[*] role nameForReification
+end
+
+association xxx_RDFStatement_document between
+	RDFStatement[0..1] role xxx_RDFStatement_document_src
+	Document[1..*] role document
+end
+
+association xxx_RDFSClass_subClassOf between
+	RDFSClass[0..1] role xxx_RDFSClass_subClassOf_src
+	RDFSClass[*] role subClassOf
+end
+
+association xxx_RDFSClass_superClass between
+	RDFSClass[0..1] role xxx_RDFSClass_superClass_src
+	RDFSClass[*] role superClass
+end
+
+association xxx_RDFSClass_typedResource between
+	RDFSClass[0..1] role xxx_RDFSClass_typedResource_src
+	RDFSResource[*] role typedResource
+end
+
+association xxx_RDFSClass_propertyForDomain between
+	RDFSClass[0..1] role xxx_RDFSClass_propertyForDomain_src
+	RDFProperty[*] role propertyForDomain
+end
+
+association xxx_RDFSClass_propertyForRange between
+	RDFSClass[0..1] role xxx_RDFSClass_propertyForRange_src
+	RDFProperty[*] role propertyForRange
+end
+
+association xxx_RDFSDataType_dataRange between
+	RDFSDataType[0..1] role xxx_RDFSDataType_dataRange_src
+	OWLDataRange[*] role dataRange
+end
+
+association xxx_RDFSLiteral_restrictionClass between
+	RDFSLiteral[0..1] role xxx_RDFSLiteral_restrictionClass_src
+	HasValueRestriction[*] role restrictionClass
+end
+
+association xxx_RDFSLiteral_dataRange between
+	RDFSLiteral[0..1] role xxx_RDFSLiteral_dataRange_src
+	OWLDataRange[*] role dataRange
+end
+
+association xxx_PlainLiteral_labeledResource between
+	PlainLiteral[*] role xxx_PlainLiteral_labeledResource_src
+	RDFSResource[1] role labeledResource
+end
+
+association xxx_PlainLiteral_commentedResource between
+	PlainLiteral[*] role xxx_PlainLiteral_commentedResource_src
+	RDFSResource[1] role commentedResource
+end
+
+association xxx_TypedLiteral_datatypeURI between
+	TypedLiteral[*] role xxx_TypedLiteral_datatypeURI_src
+	URIReference[1] role datatypeURI
+end
+
+association xxx_TypedLiteral_cardinalityRestriction between
+	TypedLiteral[0..1] role xxx_TypedLiteral_cardinalityRestriction_src
+	CardinalityRestriction[*] role cardinalityRestriction
+end
+
+association xxx_TypedLiteral_minCardinalityRestriction between
+	TypedLiteral[0..1] role xxx_TypedLiteral_minCardinalityRestriction_src
+	MinCardinalityRestriction[*] role minCardinalityRestriction
+end
+
+association xxx_TypedLiteral_maxCardinalityRestriction between
+	TypedLiteral[0..1] role xxx_TypedLiteral_maxCardinalityRestriction_src
+	MaxCardinalityRestriction[*] role maxCardinalityRestriction
+end
+
+association xxx_URIReference_uri between
+	URIReference[*] role xxx_URIReference_uri_src
+	UniformResourceIdentifier[0..1] role uri
+end
+
+association xxx_URIReference_resource between
+	URIReference[*] role xxx_URIReference_resource_src
+	RDFSResource[0..1] role resource
+end
+
+association xxx_URIReference_literal between
+	URIReference[0..1] role xxx_URIReference_literal_src
+	TypedLiteral[*] role literal
+end
+
+association xxx_URIReference_namedGraph between
+	URIReference[*] role xxx_URIReference_namedGraph_src
+	RDFGraph[0..1] role namedGraph
+end
+
+association xxx_URIReference_reifiedStatement between
+	URIReference[0..1] role xxx_URIReference_reifiedStatement_src
+	RDFStatement[*] role reifiedStatement
+end
+
+association xxx_URIReference_fragmentIdentifier between
+	URIReference[*] role xxx_URIReference_fragmentIdentifier_src
+	LocalName[0..1] role fragmentIdentifier
+end
+
+association xxx_URIReference_namespace between
+	URIReference[*] role xxx_URIReference_namespace_src
+	Namespace[0..1] role namespace
+end
+
+association xxx_UniformResourceIdentifier_uriRef between
+	UniformResourceIdentifier[0..1] role xxx_UniformResourceIdentifier_uriRef_src
+	URIReference[*] role uriRef
+end
+
+association xxx_OWLOntology_owlUniverse between
+	OWLOntology[0..1] role xxx_OWLOntology_owlUniverse_src
+	OWLUniverse[*] role owlUniverse
+end
+
+association xxx_OWLOntology_OWLPriorVersion between
+	OWLOntology[0..1] role xxx_OWLOntology_OWLPriorVersion_src
+	OWLOntology[*] role OWLPriorVersion
+end
+
+association xxx_OWLOntology_newerOntology between
+	OWLOntology[0..1] role xxx_OWLOntology_newerOntology_src
+	OWLOntology[*] role newerOntology
+end
+
+association xxx_OWLOntology_OWLIncompatibleWith between
+	OWLOntology[0..1] role xxx_OWLOntology_OWLIncompatibleWith_src
+	OWLOntology[*] role OWLIncompatibleWith
+end
+
+association xxx_OWLOntology_incompatibleOntology between
+	OWLOntology[0..1] role xxx_OWLOntology_incompatibleOntology_src
+	OWLOntology[*] role incompatibleOntology
+end
+
+association xxx_OWLOntology_OWLImports between
+	OWLOntology[0..1] role xxx_OWLOntology_OWLImports_src
+	OWLOntology[*] role OWLImports
+end
+
+association xxx_OWLOntology_importingOntology between
+	OWLOntology[0..1] role xxx_OWLOntology_importingOntology_src
+	OWLOntology[*] role importingOntology
+end
+
+association xxx_OWLOntology_owlGraph between
+	OWLOntology[0..1] role xxx_OWLOntology_owlGraph_src
+	OWLGraph[1..*] role owlGraph
+end
+
+association xxx_OWLOntology_owlStatement between
+	OWLOntology[0..1] role xxx_OWLOntology_owlStatement_src
+	OWLStatement[1..*] role owlStatement
+end
+
+composition xxx_OWLOntology_versionInfo between
+	OWLOntology[0..1] role xxx_OWLOntology_versionInfo_src
+	RDFSLiteral[*] role versionInfo
+end
+
+association xxx_OWLGraph_ontology between
+	OWLGraph[0..1] role xxx_OWLGraph_ontology_src
+	OWLOntology[*] role ontology
+end
+
+association xxx_OWLGraph_owlStatement between
+	OWLGraph[0..1] role xxx_OWLGraph_owlStatement_src
+	OWLStatement[1..*] role owlStatement
+end
+
+association xxx_OWLStatement_ontology between
+	OWLStatement[0..1] role xxx_OWLStatement_ontology_src
+	OWLOntology[*] role ontology
+end
+
+association xxx_OWLStatement_owlGraph between
+	OWLStatement[0..1] role xxx_OWLStatement_owlGraph_src
+	OWLGraph[1..*] role owlGraph
+end
+
+association xxx_OWLUniverse_ontology between
+	OWLUniverse[0..1] role xxx_OWLUniverse_ontology_src
+	OWLOntology[1..*] role ontology
+end
+
+association xxx_OWLClass_OWLequivalentClass between
+	OWLClass[0..1] role xxx_OWLClass_OWLequivalentClass_src
+	OWLClass[*] role OWLequivalentClass
+end
+
+association xxx_OWLClass_equivalentClass between
+	OWLClass[0..1] role xxx_OWLClass_equivalentClass_src
+	OWLClass[*] role equivalentClass
+end
+
+association xxx_OWLClass_OWLdisjointWith between
+	OWLClass[0..1] role xxx_OWLClass_OWLdisjointWith_src
+	OWLClass[*] role OWLdisjointWith
+end
+
+association xxx_OWLClass_disjointClass between
+	OWLClass[0..1] role xxx_OWLClass_disjointClass_src
+	OWLClass[*] role disjointClass
+end
+
+association xxx_OWLClass_intersectionClass between
+	OWLClass[0..1] role xxx_OWLClass_intersectionClass_src
+	IntersectionClass[*] role intersectionClass
+end
+
+association xxx_OWLClass_unionClass between
+	OWLClass[0..1] role xxx_OWLClass_unionClass_src
+	UnionClass[*] role unionClass
+end
+
+association xxx_OWLClass_complementClass between
+	OWLClass[0..1] role xxx_OWLClass_complementClass_src
+	ComplementClass[*] role complementClass
+end
+
+association xxx_OWLClass_allValuesFromRestrictionClass between
+	OWLClass[0..1] role xxx_OWLClass_allValuesFromRestrictionClass_src
+	AllValuesFromRestriction[*] role allValuesFromRestrictionClass
+end
+
+association xxx_OWLClass_someValuesFromRestrictionClass between
+	OWLClass[0..1] role xxx_OWLClass_someValuesFromRestrictionClass_src
+	SomeValuesFromRestriction[*] role someValuesFromRestrictionClass
+end
+
+association xxx_IntersectionClass_OWLIntersectionOf between
+	IntersectionClass[0..1] role xxx_IntersectionClass_OWLIntersectionOf_src
+	OWLClass[*] role OWLIntersectionOf
+end
+
+association xxx_UnionClass_OWLUnionOf between
+	UnionClass[0..1] role xxx_UnionClass_OWLUnionOf_src
+	OWLClass[*] role OWLUnionOf
+end
+
+association xxx_ComplementClass_OWLComplementOf between
+	ComplementClass[0..1] role xxx_ComplementClass_OWLComplementOf_src
+	OWLClass[*] role OWLComplementOf
+end
+
+association xxx_EnumeratedClass_OWLOneOf between
+	EnumeratedClass[0..1] role xxx_EnumeratedClass_OWLOneOf_src
+	Individual[*] role OWLOneOf
+end
+
+association xxx_OWLRestriction_OWLOnProperty between
+	OWLRestriction[*] role xxx_OWLRestriction_OWLOnProperty_src
+	RDFProperty[1] role OWLOnProperty
+end
+
+association xxx_HasValueRestriction_OWLHasLiteralValue between
+	HasValueRestriction[*] role xxx_HasValueRestriction_OWLHasLiteralValue_src
+	RDFSLiteral[0..1] role OWLHasLiteralValue
+end
+
+association xxx_HasValueRestriction_OWLHasIndividualValue between
+	HasValueRestriction[*] role xxx_HasValueRestriction_OWLHasIndividualValue_src
+	Individual[0..1] role OWLHasIndividualValue
+end
+
+association xxx_AllValuesFromRestriction_OWLAllValuesFromDataRange between
+	AllValuesFromRestriction[*] role xxx_AllValuesFromRestriction_OWLAllValuesFromDataRange_src
+	OWLDataRange[0..1] role OWLAllValuesFromDataRange
+end
+
+association xxx_AllValuesFromRestriction_OWLAllValuesFromClass between
+	AllValuesFromRestriction[*] role xxx_AllValuesFromRestriction_OWLAllValuesFromClass_src
+	OWLClass[0..1] role OWLAllValuesFromClass
+end
+
+association xxx_SomeValuesFromRestriction_OWLSomeValuesFromClass between
+	SomeValuesFromRestriction[*] role xxx_SomeValuesFromRestriction_OWLSomeValuesFromClass_src
+	OWLClass[0..1] role OWLSomeValuesFromClass
+end
+
+association xxx_SomeValuesFromRestriction_OWLSomeValuesFromDataRange between
+	SomeValuesFromRestriction[*] role xxx_SomeValuesFromRestriction_OWLSomeValuesFromDataRange_src
+	OWLDataRange[0..1] role OWLSomeValuesFromDataRange
+end
+
+association xxx_CardinalityRestriction_OWLCardinality between
+	CardinalityRestriction[*] role xxx_CardinalityRestriction_OWLCardinality_src
+	TypedLiteral[1] role OWLCardinality
+end
+
+association xxx_MaxCardinalityRestriction_OWLMaxCardinality between
+	MaxCardinalityRestriction[*] role xxx_MaxCardinalityRestriction_OWLMaxCardinality_src
+	TypedLiteral[1] role OWLMaxCardinality
+end
+
+association xxx_MinCardinalityRestriction_OWLMinCardinality between
+	MinCardinalityRestriction[*] role xxx_MinCardinalityRestriction_OWLMinCardinality_src
+	TypedLiteral[1] role OWLMinCardinality
+end
+
+association xxx_Property_OWLEquivalentProperty between
+	Property[0..1] role xxx_Property_OWLEquivalentProperty_src
+	Property[*] role OWLEquivalentProperty
+end
+
+association xxx_Property_equivalentProperty between
+	Property[0..1] role xxx_Property_equivalentProperty_src
+	Property[*] role equivalentProperty
+end
+
+association xxx_OWLObjectProperty_OWLInverseOf between
+	OWLObjectProperty[*] role xxx_OWLObjectProperty_OWLInverseOf_src
+	OWLObjectProperty[0..1] role OWLInverseOf
+end
+
+association xxx_OWLObjectProperty_inverseProperty between
+	OWLObjectProperty[0..1] role xxx_OWLObjectProperty_inverseProperty_src
+	OWLObjectProperty[*] role inverseProperty
+end
+
+association xxx_Individual_OWLDifferentFrom between
+	Individual[0..1] role xxx_Individual_OWLDifferentFrom_src
+	Individual[*] role OWLDifferentFrom
+end
+
+association xxx_Individual_differentIndividual between
+	Individual[0..1] role xxx_Individual_differentIndividual_src
+	Individual[*] role differentIndividual
+end
+
+association xxx_Individual_OWLSameAs between
+	Individual[0..1] role xxx_Individual_OWLSameAs_src
+	Individual[*] role OWLSameAs
+end
+
+association xxx_Individual_sameIndividual between
+	Individual[0..1] role xxx_Individual_sameIndividual_src
+	Individual[*] role sameIndividual
+end
+
+association xxx_Individual_allDifferent between
+	Individual[0..1] role xxx_Individual_allDifferent_src
+	OWLAllDifferent[*] role allDifferent
+end
+
+association xxx_Individual_enumeratedClass between
+	Individual[0..1] role xxx_Individual_enumeratedClass_src
+	EnumeratedClass[*] role enumeratedClass
+end
+
+association xxx_Individual_restrictionClass between
+	Individual[0..1] role xxx_Individual_restrictionClass_src
+	HasValueRestriction[*] role restrictionClass
+end
+
+association xxx_OWLAllDifferent_OWLDistinctMembers between
+	OWLAllDifferent[0..1] role xxx_OWLAllDifferent_OWLDistinctMembers_src
+	Individual[2..*] role OWLDistinctMembers
+end
+
+association xxx_OWLDataRange_datatype between
+	OWLDataRange[*] role xxx_OWLDataRange_datatype_src
+	RDFSDataType[0..1] role datatype
+end
+
+association xxx_OWLDataRange_OWLOneOf between
+	OWLDataRange[0..1] role xxx_OWLDataRange_OWLOneOf_src
+	RDFSLiteral[*] role OWLOneOf
+end
+
+association xxx_OWLDataRange_someValuesFromRestrictionClass between
+	OWLDataRange[*] role xxx_OWLDataRange_someValuesFromRestrictionClass_src
+	SomeValuesFromRestriction[0..1] role someValuesFromRestrictionClass
+end
+
+association xxx_OWLDataRange_allValuesFromRestrictionClass between
+	OWLDataRange[*] role xxx_OWLDataRange_allValuesFromRestrictionClass_src
+	AllValuesFromRestriction[0..1] role allValuesFromRestrictionClass
+end
+

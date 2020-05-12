@@ -1,0 +1,198 @@
+model ootDatabase
+class DatabaseModel
+attributes
+	name : String
+operations
+end
+
+class Class
+attributes
+	Name : String
+	abbrName : String
+operations
+end
+
+class Attribut
+attributes
+	Name : String
+	typeAdaId : String
+	packageAdaId : String
+	DBNullAllowed : String
+operations
+end
+
+class Attr
+attributes
+	Name : String
+	private : String
+operations
+end
+
+class CodeGenFlag
+attributes
+	Name : String
+operations
+end
+
+class PrimaryKey
+attributes
+	Name : String
+operations
+end
+
+class ForeignKey
+attributes
+	Name : String
+operations
+end
+
+class ReferencedClassName
+attributes
+	Name : String
+operations
+end
+
+class Index
+attributes
+	name : String
+	unique : String
+operations
+end
+
+class ForeignAttr
+attributes
+	Name : String
+	ReferencedAttrName : String
+operations
+end
+
+class DbClassCodeGenCntrl
+attributes
+	Name : String
+operations
+end
+
+class Ccgflag
+attributes
+	Name : String
+operations
+end
+
+class CcgFlagActuals
+attributes
+	kind : String
+operations
+end
+
+class CcgActualTextLine
+attributes
+	ParamName : String
+	Name : String
+operations
+end
+
+class PackageRef
+attributes
+	Name : String
+	PackageAdaId : String
+	SourceToolDbName : String
+operations
+end
+
+class PrimCodeGenRef
+attributes
+	DirectorySpec : String
+	PackageRelFilespec : String
+operations
+end
+
+composition xxx_DatabaseModel_classes between
+	DatabaseModel[0..1] role xxx_DatabaseModel_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribut[*] role attributes_
+end
+
+composition xxx_Class_PrimaryKey between
+	Class[*] role xxx_Class_PrimaryKey_src
+	PrimaryKey[0..1] role PrimaryKey
+end
+
+composition xxx_Class_indices between
+	Class[0..1] role xxx_Class_indices_src
+	Index[*] role indices
+end
+
+composition xxx_Class_foreignKeys between
+	Class[0..1] role xxx_Class_foreignKeys_src
+	ForeignKey[*] role foreignKeys
+end
+
+composition xxx_Class_DbClassCodeGenCntrl between
+	Class[*] role xxx_Class_DbClassCodeGenCntrl_src
+	DbClassCodeGenCntrl[0..1] role DbClassCodeGenCntrl
+end
+
+composition xxx_Class_packageRef between
+	Class[0..1] role xxx_Class_packageRef_src
+	PackageRef[*] role packageRef
+end
+
+composition xxx_Attribut_attr between
+	Attribut[*] role xxx_Attribut_attr_src
+	Attr[0..1] role attr
+end
+
+composition xxx_Attribut_codeGenFlag between
+	Attribut[0..1] role xxx_Attribut_codeGenFlag_src
+	CodeGenFlag[*] role codeGenFlag
+end
+
+composition xxx_CodeGenFlag_ccgFlagActuals between
+	CodeGenFlag[0..1] role xxx_CodeGenFlag_ccgFlagActuals_src
+	CcgFlagActuals[*] role ccgFlagActuals
+end
+
+composition xxx_PrimaryKey_attr between
+	PrimaryKey[0..1] role xxx_PrimaryKey_attr_src
+	Attr[*] role attr
+end
+
+composition xxx_ForeignKey_ReferencedClassName between
+	ForeignKey[*] role xxx_ForeignKey_ReferencedClassName_src
+	ReferencedClassName[0..1] role ReferencedClassName
+end
+
+composition xxx_ForeignKey_foreignAttrs between
+	ForeignKey[0..1] role xxx_ForeignKey_foreignAttrs_src
+	ForeignAttr[*] role foreignAttrs
+end
+
+composition xxx_Index_attr between
+	Index[0..1] role xxx_Index_attr_src
+	Attr[*] role attr
+end
+
+composition xxx_DbClassCodeGenCntrl_ccgflag between
+	DbClassCodeGenCntrl[0..1] role xxx_DbClassCodeGenCntrl_ccgflag_src
+	Ccgflag[*] role ccgflag
+end
+
+composition xxx_Ccgflag_ccgFlagActuals between
+	Ccgflag[*] role xxx_Ccgflag_ccgFlagActuals_src
+	CcgFlagActuals[0..1] role ccgFlagActuals
+end
+
+composition xxx_CcgFlagActuals_CcgActualTextLine between
+	CcgFlagActuals[0..1] role xxx_CcgFlagActuals_CcgActualTextLine_src
+	CcgActualTextLine[*] role CcgActualTextLine
+end
+
+composition xxx_PackageRef_PrimCodeGenRef between
+	PackageRef[*] role xxx_PackageRef_PrimCodeGenRef_src
+	PrimCodeGenRef[0..1] role PrimCodeGenRef
+end
+

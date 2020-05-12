@@ -1,0 +1,137 @@
+model EA_Model
+class CrashedVehicle<TravelingVehicle
+attributes
+operations
+end
+
+class DeceasedPerson<Person
+attributes
+operations
+end
+
+class Driver<Traveler
+attributes
+operations
+end
+
+class LivingPerson<Person
+attributes
+operations
+end
+
+class Passenger<Traveler
+attributes
+operations
+end
+
+class Person
+attributes
+operations
+end
+
+class RearEndCollision<RoadTrafficAccident
+attributes
+operations
+end
+
+class RoadTrafficAccident
+attributes
+	fatalvictims : Integer
+operations
+end
+
+class Roadway
+attributes
+operations
+end
+
+class RoadwayWithAccident<Roadway
+attributes
+operations
+end
+
+class Travel
+attributes
+operations
+end
+
+class Traveler<Person
+attributes
+operations
+end
+
+class TravelingVehicle<Vehicle
+attributes
+operations
+end
+
+class Vehicle
+attributes
+operations
+end
+
+class Victim<Traveler
+attributes
+operations
+end
+
+association xxx_CrashedVehicle_accident between
+	CrashedVehicle[*] role xxx_CrashedVehicle_accident_src
+	RoadTrafficAccident[1] role accident
+end
+
+association xxx_CrashedVehicle_roadwaywithaccident between
+	CrashedVehicle[*] role xxx_CrashedVehicle_roadwaywithaccident_src
+	RoadwayWithAccident[1] role roadwaywithaccident
+end
+
+association xxx_RoadTrafficAccident_vehicles between
+	RoadTrafficAccident[0..1] role xxx_RoadTrafficAccident_vehicles_src
+	CrashedVehicle[1..*] role vehicles
+end
+
+association xxx_RoadTrafficAccident_victims between
+	RoadTrafficAccident[0..1] role xxx_RoadTrafficAccident_victims_src
+	Victim[1..*] role victims
+end
+
+association xxx_RoadTrafficAccident_roadwaywithaccident between
+	RoadTrafficAccident[*] role xxx_RoadTrafficAccident_roadwaywithaccident_src
+	RoadwayWithAccident[1] role roadwaywithaccident
+end
+
+association xxx_RoadwayWithAccident_roadtrafficaccident between
+	RoadwayWithAccident[0..1] role xxx_RoadwayWithAccident_roadtrafficaccident_src
+	RoadTrafficAccident[1..*] role roadtrafficaccident
+end
+
+association xxx_RoadwayWithAccident_crashedvehicle between
+	RoadwayWithAccident[0..1] role xxx_RoadwayWithAccident_crashedvehicle_src
+	CrashedVehicle[1..*] role crashedvehicle
+end
+
+association xxx_Travel_travelers between
+	Travel[0..1] role xxx_Travel_travelers_src
+	Traveler[1..*] role travelers
+end
+
+association xxx_Travel_vehicle between
+	Travel[*] role xxx_Travel_vehicle_src
+	TravelingVehicle[1] role vehicle
+end
+
+association xxx_Traveler_travel between
+	Traveler[*] role xxx_Traveler_travel_src
+	Travel[1] role travel
+end
+
+association xxx_TravelingVehicle_travel between
+	TravelingVehicle[*] role xxx_TravelingVehicle_travel_src
+	Travel[1] role travel
+end
+
+association xxx_Victim_accident between
+	Victim[*] role xxx_Victim_accident_src
+	RoadTrafficAccident[1] role accident
+end
+

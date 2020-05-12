@@ -1,0 +1,105 @@
+model collaborativemdeprocess
+class Project
+attributes
+	id : Integer
+	name : String
+	description : String
+operations
+end
+
+class Participant
+attributes
+	id : Integer
+	firstName : String
+	email : String
+	lastName : String
+	name : String
+operations
+end
+
+class Workgroup
+attributes
+	id : Integer
+	name : String
+operations
+end
+
+class Role
+attributes
+	id : Integer
+	name : String
+operations
+end
+
+class Session
+attributes
+	id : Integer
+	name : String
+operations
+end
+
+class MDEProcess
+attributes
+operations
+end
+
+composition xxx_Project_workgroups between
+	Project[0..1] role xxx_Project_workgroups_src
+	Workgroup[*] role workgroups
+end
+
+composition xxx_Project_participants between
+	Project[0..1] role xxx_Project_participants_src
+	Participant[*] role participants
+end
+
+composition xxx_Project_roles between
+	Project[0..1] role xxx_Project_roles_src
+	Role[*] role roles
+end
+
+composition xxx_Participant_roles between
+	Participant[0..1] role xxx_Participant_roles_src
+	Role[*] role roles
+end
+
+composition xxx_Participant_projects between
+	Participant[0..1] role xxx_Participant_projects_src
+	Project[*] role projects
+end
+
+association xxx_Participant_workgroups between
+	Participant[0..1] role xxx_Participant_workgroups_src
+	Workgroup[*] role workgroups
+end
+
+composition xxx_Workgroup_sessions between
+	Workgroup[0..1] role xxx_Workgroup_sessions_src
+	Session[*] role sessions
+end
+
+composition xxx_Workgroup_participants between
+	Workgroup[0..1] role xxx_Workgroup_participants_src
+	Participant[*] role participants
+end
+
+composition xxx_Role_participants between
+	Role[0..1] role xxx_Role_participants_src
+	Participant[*] role participants
+end
+
+composition xxx_Session_acceptedRoles between
+	Session[0..1] role xxx_Session_acceptedRoles_src
+	Role[*] role acceptedRoles
+end
+
+composition xxx_MDEProcess_project between
+	MDEProcess[*] role xxx_MDEProcess_project_src
+	Project[0..1] role project
+end
+
+composition xxx_MDEProcess_participants between
+	MDEProcess[0..1] role xxx_MDEProcess_participants_src
+	Participant[*] role participants
+end
+

@@ -1,0 +1,172 @@
+model HPROF
+enum Day{
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+	Sunday
+}
+
+enum Month{
+	January,
+	February,
+	March,
+	April,
+	May,
+	June,
+	July,
+	August,
+	September,
+	October,
+	November,
+	December
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Profile<LocatedElement
+attributes
+	header : String
+operations
+end
+
+class Method<LocatedElement
+attributes
+	fullyQualifiedName : String
+operations
+end
+
+abstract class ThreadAction<LocatedElement
+attributes
+	id : Integer
+operations
+end
+
+class ThreadStart<ThreadAction
+attributes
+	obj : Integer
+	name : String
+	group : String
+operations
+end
+
+class ThreadEnd<ThreadAction
+attributes
+operations
+end
+
+class Trace<LocatedElement
+attributes
+	id : Integer
+	threadId : Integer
+operations
+end
+
+class StackTraceElement<LocatedElement
+attributes
+	fileName : String
+	line : Integer
+operations
+end
+
+class Times<LocatedElement
+attributes
+	unit : String
+	total : Integer
+operations
+end
+
+class Time<LocatedElement
+attributes
+	rank : Integer
+	self : Real
+	accum : Real
+	count : Integer
+operations
+end
+
+class Date<LocatedElement
+attributes
+	day : Day
+	month : Month
+	dayOfMonth : Integer
+	hour : Integer
+	minutes : Integer
+	seconds : Integer
+	year : Integer
+operations
+end
+
+composition xxx_Profile_threadActions between
+	Profile[0..1] role xxx_Profile_threadActions_src
+	ThreadAction[*] role threadActions
+end
+
+composition xxx_Profile_traces between
+	Profile[0..1] role xxx_Profile_traces_src
+	Trace[*] role traces
+end
+
+composition xxx_Profile_times between
+	Profile[*] role xxx_Profile_times_src
+	Times[1] role times
+end
+
+composition xxx_Profile_methods between
+	Profile[0..1] role xxx_Profile_methods_src
+	Method[*] role methods
+end
+
+association xxx_Method_stackTraceElements between
+	Method[0..1] role xxx_Method_stackTraceElements_src
+	StackTraceElement[*] role stackTraceElements
+end
+
+composition xxx_Trace_elements between
+	Trace[0..1] role xxx_Trace_elements_src
+	StackTraceElement[*] role elements
+end
+
+association xxx_Trace_times between
+	Trace[0..1] role xxx_Trace_times_src
+	Time[*] role times
+end
+
+association xxx_StackTraceElement_method between
+	StackTraceElement[*] role xxx_StackTraceElement_method_src
+	Method[1] role method
+end
+
+association xxx_StackTraceElement_trace between
+	StackTraceElement[*] role xxx_StackTraceElement_trace_src
+	Trace[1] role trace
+end
+
+composition xxx_Times_date between
+	Times[*] role xxx_Times_date_src
+	Date[1] role date
+end
+
+composition xxx_Times_elements between
+	Times[0..1] role xxx_Times_elements_src
+	Time[*] role elements
+end
+
+association xxx_Time_trace between
+	Time[*] role xxx_Time_trace_src
+	Trace[1] role trace
+end
+
+association xxx_Time_method between
+	Time[*] role xxx_Time_method_src
+	Method[1] role method
+end
+

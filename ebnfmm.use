@@ -1,0 +1,101 @@
+model ebnfmm
+class EBNFDescription
+attributes
+operations
+end
+
+class NonTerminal<Container
+attributes
+	id : String
+operations
+end
+
+abstract class Symbol
+attributes
+operations
+end
+
+class Terminal<SymbolWithFactor
+attributes
+	terminalString : String
+operations
+end
+
+abstract class Control<SymbolWithFactor,Container
+attributes
+operations
+end
+
+class Optional<Control
+attributes
+operations
+end
+
+class Repetition<Control
+attributes
+operations
+end
+
+class NonTerminalReference<SymbolWithFactor
+attributes
+operations
+end
+
+class Group<Control
+attributes
+operations
+end
+
+class SpecialSequence<SymbolWithFactor
+attributes
+	text : String
+operations
+end
+
+class Except<Control
+attributes
+operations
+end
+
+class Choice<Symbol,Container
+attributes
+operations
+end
+
+abstract class SymbolWithFactor<Symbol
+attributes
+	factor : Integer
+operations
+	isContainedByChoose():Boolean
+end
+
+abstract class Container
+attributes
+operations
+end
+
+composition xxx_EBNFDescription_rules between
+	EBNFDescription[0..1] role xxx_EBNFDescription_rules_src
+	NonTerminal[*] role rules
+end
+
+association xxx_Symbol_container between
+	Symbol[*] role xxx_Symbol_container_src
+	Container[0..1] role container
+end
+
+association xxx_NonTerminalReference_nonTerminal between
+	NonTerminalReference[*] role xxx_NonTerminalReference_nonTerminal_src
+	NonTerminal[1] role nonTerminal
+end
+
+composition xxx_Except_except between
+	Except[*] role xxx_Except_except_src
+	Symbol[1] role except
+end
+
+composition xxx_Container_definitionList between
+	Container[0..1] role xxx_Container_definitionList_src
+	Symbol[*] role definitionList
+end
+

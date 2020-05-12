@@ -1,0 +1,59 @@
+model necsis14_classdiagram
+class ClassDiagram
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Class<NamedElement
+attributes
+operations
+end
+
+class Association<NamedElement
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class Attribute<NamedElement
+attributes
+operations
+end
+
+composition xxx_ClassDiagram_classes between
+	ClassDiagram[0..1] role xxx_ClassDiagram_classes_src
+	Class[*] role classes
+end
+
+composition xxx_ClassDiagram_associations between
+	ClassDiagram[0..1] role xxx_ClassDiagram_associations_src
+	Association[*] role associations
+end
+
+association xxx_Class_parent between
+	Class[*] role xxx_Class_parent_src
+	Class[0..1] role parent
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	Class[1] role source
+end
+
+association xxx_Association_target between
+	Association[*] role xxx_Association_target_src
+	Class[1] role target
+end
+

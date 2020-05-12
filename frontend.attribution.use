@@ -1,0 +1,141 @@
+model attribution
+class AttributionTransformation<TransformationDefinition
+attributes
+operations
+end
+
+abstract class AttributeDcl<Variable,TypedWithClass,LocatedElement
+attributes
+operations
+end
+
+class InheritedAttributeDcl<AttributeDcl
+attributes
+operations
+end
+
+class SynthesizedAttributeDcl<AttributeDcl
+attributes
+operations
+end
+
+class AttributionRule<LocatedElement
+attributes
+operations
+end
+
+class RuleSelf<Variable
+attributes
+operations
+end
+
+class AttributeInit<Statement
+attributes
+operations
+end
+
+class AttributeUse<Expression
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class TypedWithClass
+attributes
+operations
+end
+
+composition xxx_AttributionTransformation_attributes_ between
+	AttributionTransformation[0..1] role xxx_AttributionTransformation_attributes__src
+	AttributeDcl[*] role attributes_
+end
+
+composition xxx_AttributionTransformation_rules between
+	AttributionTransformation[0..1] role xxx_AttributionTransformation_rules_src
+	AttributionRule[*] role rules
+end
+
+composition xxx_AttributionRule_type between
+	AttributionRule[*] role xxx_AttributionRule_type_src
+	ClassUse[1] role type
+end
+
+composition xxx_AttributionRule_self between
+	AttributionRule[*] role xxx_AttributionRule_self_src
+	RuleSelf[1] role self
+end
+
+composition xxx_AttributionRule_condition between
+	AttributionRule[*] role xxx_AttributionRule_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_AttributionRule_statements between
+	AttributionRule[0..1] role xxx_AttributionRule_statements_src
+	Statement[*] role statements
+end
+
+association xxx_AttributeInit_attribute between
+	AttributeInit[*] role xxx_AttributeInit_attribute_src
+	AttributeDcl[1] role attribute
+end
+
+composition xxx_AttributeInit_receptor between
+	AttributeInit[*] role xxx_AttributeInit_receptor_src
+	Expression[1] role receptor
+end
+
+composition xxx_AttributeInit_right between
+	AttributeInit[*] role xxx_AttributeInit_right_src
+	Expression[1] role right
+end
+
+composition xxx_AttributeUse_expr between
+	AttributeUse[*] role xxx_AttributeUse_expr_src
+	Expression[1] role expr
+end
+
+association xxx_AttributeUse_attribute between
+	AttributeUse[*] role xxx_AttributeUse_attribute_src
+	AttributeDcl[1] role attribute
+end
+

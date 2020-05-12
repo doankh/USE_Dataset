@@ -1,0 +1,1454 @@
+model guidesign
+enum ServerityType{
+default
+}
+
+enum AttachSideType{
+default
+}
+
+enum AlignmentType{
+default
+}
+
+enum ModalityType{
+default
+}
+
+enum SelectionType{
+default
+}
+
+enum SeperatorType{
+default
+}
+
+enum SplitDirectionType{
+default
+}
+
+enum DateFormatType{
+default
+}
+
+enum TimeFormatType{
+default
+}
+
+enum DomainDisplayType{
+default
+}
+
+enum DomainOrderType{
+default
+}
+
+enum EmptyBoolean{
+default
+}
+
+enum PropertyDirection{
+default
+}
+
+enum PropertyType{
+default
+}
+
+enum BeanBaseType{
+default
+}
+
+enum WeekendStyleType{
+default
+}
+
+enum MenuType{
+default
+}
+
+enum BooleanFormatType{
+default
+}
+
+enum PagingControlStyle{
+default
+}
+
+enum PagingControlCustomStyle{
+default
+}
+
+enum DomainFormatType{
+default
+}
+
+enum ColorName{
+default
+}
+
+enum FontStyle{
+default
+}
+
+enum OperatorType{
+default
+}
+
+enum VariableAccess{
+default
+}
+
+enum WidgetModelType{
+default
+}
+
+enum CompositeMenuType{
+default
+}
+
+class XMAComponent<IValidateableObject,IDialogPageCalculateable,IMarkable,IInitFunctionCaller,IAssignableBDVariable,ILifeCycleFunctionCaller,IXMADocumentable
+attributes
+	namPackage : String
+	namClass : String
+	uriHelp : String
+	codLanguage : String
+	ynStateless : Boolean
+	markers : Integer
+operations
+end
+
+abstract class XMAPage<IDialogPageCalculateable,IValidateableObject,IComponentCalculateable,IExpMultiValid,IInitFunctionCaller,IAssignableBDVariable,IMarkable,ILifeCycleFunctionCaller,IXMADocumentable
+attributes
+	namClass : String
+	namInstance : String
+	uriHelp : String
+	ynModelLazyGenerated : Boolean
+	ynStateless : Boolean
+	markers : Integer
+	ynGenerated : Boolean
+operations
+end
+
+class PushButton<XMAButton,IBDAttachable
+attributes
+	ynSelectionEvent : Boolean
+	ynToggle : String
+operations
+end
+
+abstract class XMAButton<XMAWidget,ILabelCalculateable,IImageUrl,ISelectFunctionCaller
+attributes
+	codAlignment : AlignmentType
+	rscButLabel : String
+	namRscKeyLabel : String
+	uriImage : String
+operations
+end
+
+abstract class XMAWidget<IDialogPageCalculateable,IValidateableObject,IComponentCalculateable,IMarkable,IGeneratable,IColorable
+attributes
+	namInstance : String
+	ynEnabled : Boolean
+	ynVisible : Boolean
+	ynBorder : Boolean
+	ynTabSequence : Boolean
+	rscTooltip : String
+	namRscKeyTooltip : String
+	markers : Integer
+	ynGenerated : Boolean
+	widgetVariant : String
+operations
+end
+
+class PageComposite<XMAComposite
+attributes
+operations
+end
+
+class XMADialogPage<XMAPage,ILabelCalculateable,IDialogRoot,IImageUrl
+attributes
+	qntWidth : Integer
+	qntHeight : Integer
+	codModality : ModalityType
+	rscDlgLabel : String
+	namRscKeyLabel : String
+	ynClose : Boolean
+	ynMin : Boolean
+	ynMax : Boolean
+	ynResize : Boolean
+	uriImage : String
+	qntXPos : Integer
+	qntYPos : Integer
+	qntMinWidth : Integer
+	qntMinHeight : Integer
+	ynStatusBar : Boolean
+	ynCenter : Boolean
+operations
+end
+
+class XMAText<AbstractXMAText,IFormaterAttachable,IWidgetWithLabel,IExpValid,IEditable
+attributes
+	ynMulitRow : Boolean
+	ynWrap : Boolean
+	ynHScroll : Boolean
+	ynVScroll : Boolean
+	codAlignment : AlignmentType
+	ynEditable : Boolean
+operations
+end
+
+class XMAComposite<XMAWidget
+attributes
+	qntMarginHeight : Integer
+	qntMarginWidth : Integer
+	ynSimpleLayout : Boolean
+operations
+end
+
+class XMASashForm<XMAWidget
+attributes
+	codSplitDirection : SplitDirectionType
+	ratLeftChildSize : Integer
+operations
+end
+
+class XMATabFolder<XMAWidget
+attributes
+operations
+end
+
+class XMAGroup<XMAComposite,ILabelCalculateable
+attributes
+	rscGrpLabel : String
+	namRscKeyLabel : String
+operations
+end
+
+class NotebookPage<XMAPage,ILabelCalculateable,IImageUrl
+attributes
+	rscTabName : String
+	rscTooltip : String
+	namRscKeyTooltip : String
+	namRscKeyLabel : String
+	uriImage : String
+	ynDynamic : Boolean
+operations
+end
+
+class CheckButton<XMAButton,IBDAttachable,IEditable,IExpSimpleSelectable
+attributes
+	ynEditable : Boolean
+	ynSelectionEvent : Boolean
+operations
+end
+
+class RadioButton<XMAButton,IExpSimpleSelectable
+attributes
+	ynEditable : Boolean
+	ynSelectionEvent : Boolean
+operations
+end
+
+abstract class Validator
+attributes
+	ynMandatory : Boolean
+operations
+end
+
+class BDAttribute
+attributes
+	namAttrVal : String
+	namPropertyType : String
+	namGetter : String
+	namSetter : String
+	namBDInstance : String
+	namSetterParamType : String
+	namSetterExceptionType : String
+operations
+end
+
+class XMALabel<XMAWidget,ILabelCalculateable,IImageUrl
+attributes
+	codAlignment : AlignmentType
+	ynWrap : Boolean
+	rscLabel : String
+	namRscKeyLabel : String
+	uriImage : String
+	ynBold : Boolean
+operations
+end
+
+class XMATree<XMAWidget,IDefSelectFunctionCaller,IExpSelectable,IExpSize
+attributes
+	ynSelEvent : Boolean
+	ynDefSelEvent : Boolean
+	codSelection : SelectionType
+	ynExpandEvent : Boolean
+	ynCollapseEvent : Boolean
+operations
+end
+
+class XMATreeColumn<IFormaterAttachable,IValidateableObject,ILabelCalculateable,IImageUrl,IMarkable,IColorable
+attributes
+	namInstance : String
+	rscColName : String
+	namRscKeyLabel : String
+	ynResizeable : Boolean
+	codAlignment : AlignmentType
+	uriImage : String
+	qntWidth : Integer
+	ynHiden : Boolean
+	ynAutoPack : Boolean
+	markers : Integer
+	qntPercent : Real
+	qntMaxWidth : Integer
+	qntMinWidth : Integer
+operations
+end
+
+class XMATable<XMAWidget,IBDAttachable,IDefSelectFunctionCaller,IExpSelectable,IExpSize,ICanBeMandatory
+attributes
+	codSelection : SelectionType
+	ynHeaderVisible : Boolean
+	ynGrid : Boolean
+	ynSelEvent : Boolean
+	ynDefSelEvent : Boolean
+	ynOneway : Boolean
+	ynSortIndicator : Boolean
+	qntDefaultColumnWidth : Integer
+	qntDefaultColumnMaxWidth : Integer
+	qntDefaultColumnMinWidth : Integer
+	qntColumnMinWidthLimit : Integer
+	cntStrechColumn : Integer
+	ynCombo : Boolean
+	ynMandatory : String
+operations
+end
+
+class XMASeperator<XMAWidget
+attributes
+	codSerperator : SeperatorType
+operations
+end
+
+class XMACombo<XMAWidget,IBDAttachable,IWidgetWithLabel,IEditable,ISelectFunctionCaller,IExpSelectable,ICanBeMandatory
+attributes
+	uriDataSource : String
+	codDisplaytype : DomainDisplayType
+	codOrder : DomainOrderType
+	ynMandatory : Boolean
+	ynEditable : Boolean
+	ynSelEvent : Boolean
+	ynDynamic : Boolean
+operations
+end
+
+class XMAList<XMAWidget,IWidgetWithLabel,IFormaterAttachable,IBDAttachable,IDefSelectFunctionCaller,IExpSelectable,IExpSize,ICanBeMandatory
+attributes
+	ynMultiSelection : Boolean
+	ynHScroll : Boolean
+	ynVScroll : Boolean
+	ynSelEvent : Boolean
+	ynDefSelEvent : Boolean
+operations
+end
+
+class XMATableColumn<IFormaterAttachable,IBDAttachable,IValidateableObject,ILabelCalculateable,IImageUrl,IMarkable,IColorable
+attributes
+	namInstance : String
+	rscColName : String
+	namRscKeyLabel : String
+	ynResizeable : Boolean
+	codAlignment : AlignmentType
+	uriImage : String
+	qntWidth : Integer
+	ynHiden : Boolean
+	ynAutoPack : Boolean
+	ynSortable : Boolean
+	markers : Integer
+	qntPercent : Real
+	qntMaxWidth : Integer
+	qntMinWidth : Integer
+operations
+end
+
+class XMAFormData
+attributes
+	qntWidth : Integer
+	qntHeight : Integer
+operations
+end
+
+class XMAFormAttachment
+attributes
+	codAttachSide : AttachSideType
+	qntOffset : Integer
+	qntNominator : Integer
+	qntDenominator : Integer
+operations
+end
+
+class BcdValidator<Validator
+attributes
+	ynThousandSep : EmptyBoolean
+	ynNegative : EmptyBoolean
+	cntBeforeComma : String
+	cntAfterComma : String
+	qntMinVal : String
+	qntMaxVal : String
+	ynSuppressZero : Boolean
+operations
+end
+
+class DateValidator<Validator
+attributes
+	codFormat : DateFormatType
+operations
+end
+
+class StringValidator<Validator
+attributes
+	cntMaxLength : String
+	txtFormatrange : String
+	cntMinLength : String
+operations
+end
+
+class TimeStampValidator<Validator
+attributes
+	codFormat : TimeFormatType
+operations
+end
+
+class State
+attributes
+	namState : String
+operations
+end
+
+class WidgetInState
+attributes
+	ynEnabled : Boolean
+	ynVisible : Boolean
+	ynReadonly : Boolean
+operations
+end
+
+class HiddenWidget<AbstractXMAText
+attributes
+operations
+end
+
+class ValidInState
+attributes
+operations
+end
+
+abstract class IFormaterAttachable<IDialogPageCalculateable
+attributes
+operations
+end
+
+class BDCollection
+attributes
+operations
+end
+
+class BusinessData<IGeneratable
+attributes
+	namInstance : String
+	namBDClass : String
+	namBaseType : BeanBaseType
+	ynGenerated : Boolean
+	ynCollection : Boolean
+operations
+end
+
+abstract class IBDAttachable<IComponentCalculateable
+attributes
+operations
+	getNamInstance():String
+end
+
+abstract class IWidgetWithLabel
+attributes
+operations
+end
+
+abstract class IDialogPageCalculateable
+attributes
+operations
+	getDialogPage():IDialogRoot
+end
+
+abstract class IValidateableObject
+attributes
+operations
+end
+
+abstract class IComponentCalculateable
+attributes
+operations
+end
+
+abstract class ILabelCalculateable
+attributes
+operations
+	getLabelName():String
+	setLabelName(label : String)
+end
+
+class EmbeddedPage<XMAPage,IDialogRoot
+attributes
+	qntWidth : Integer
+	qntHeight : Integer
+	ynExport : Boolean
+operations
+end
+
+class XMAContainer<XMAWidget,IXMADocumentable
+attributes
+	uriComponent : String
+	ynLocalComponent : Boolean
+operations
+end
+
+abstract class AbstractXMAText<XMAWidget,IBDAttachable,IFormaterAttachable,IExpValue,ICanBeMandatory
+attributes
+operations
+end
+
+abstract class IDialogRoot
+attributes
+operations
+end
+
+abstract class IImageUrl
+attributes
+operations
+	getUriImage():String
+end
+
+class SimpleCombo<XMAWidget,IWidgetWithLabel,IFormaterAttachable,IBDAttachable,IEditable,ISelectFunctionCaller,IExpValid,IExpSelectable,IExpSize,ICanBeMandatory
+attributes
+	ynDropDown : Boolean
+	ynReadOnly : Boolean
+	ynEditable : Boolean
+	ynSelEvent : Boolean
+	ynStrict : Boolean
+operations
+end
+
+class XMACompProperty<IMarkable,IGeneratable,IExpValue,IXMADocumentable
+attributes
+	namProperty : String
+	codDirection : PropertyDirection
+	codType : PropertyType
+	ynBound : Boolean
+	ynMandatory : Boolean
+	txtDefaultValue : String
+	markers : Integer
+	ynGenerated : Boolean
+operations
+end
+
+class CustomValidator<Validator
+attributes
+	txtFormatingString : String
+operations
+end
+
+abstract class IMarkable
+attributes
+operations
+end
+
+class XMAScrolledComposite<XMAWidget
+attributes
+	ynExpandChild : Boolean
+operations
+end
+
+class DatePicker<XMAWidget,IWidgetWithLabel,IBDAttachable,IFormaterAttachable,IEditable,IExpValue,IExpValid,ICanBeMandatory
+attributes
+	codAlignment : AlignmentType
+	ynEditable : Boolean
+	codWeekendStyle : WeekendStyleType
+operations
+end
+
+class XMAGrid<XMAWidget,ISelectFunctionCaller
+attributes
+	ynHeaderVisible : Boolean
+	ynGrid : Boolean
+	ynSelEvent : Boolean
+operations
+end
+
+class BooleanValidator<Validator
+attributes
+	codFormat : BooleanFormatType
+operations
+end
+
+class AppShell<XMADialogPage
+attributes
+	codMenuType : MenuType
+operations
+end
+
+abstract class IEditable
+attributes
+operations
+end
+
+class XMAWizardPage<XMADialogPage
+attributes
+operations
+end
+
+class XMAPagingControl<XMAWidget,IFunctionCaller,IExpValid,IExpSize,ICustomStyleableWidget
+attributes
+	pageSize : Integer
+	maxPageSize : Integer
+	jumpSize : Integer
+	pagingControlStyle : PagingControlStyle
+	ynReloadEvent : Boolean
+operations
+end
+
+abstract class ICustomStyleableWidget
+attributes
+operations
+end
+
+class CustomStylesCollection
+attributes
+operations
+end
+
+class DataLabel<AbstractXMAText,IWidgetWithLabel
+attributes
+	ynWrap : Boolean
+	codAlignment : AlignmentType
+operations
+end
+
+class DomainValidator<Validator
+attributes
+	uriDataSource : String
+	codFormattype : DomainFormatType
+operations
+end
+
+abstract class IColorable
+attributes
+operations
+end
+
+class NamedFlag
+attributes
+	name : String
+	value : Boolean
+operations
+end
+
+class KeyboardKeyCode
+attributes
+	mod1 : Boolean
+	mod2 : Boolean
+	mod3 : Boolean
+	mod4 : Boolean
+	key : Integer
+operations
+end
+
+class XMAColor
+attributes
+	colorName : ColorName
+	red : Integer
+	green : Integer
+	blue : Integer
+operations
+end
+
+class XMAFont
+attributes
+	name : String
+	size : Integer
+operations
+end
+
+class XMAFunction<IXMADocumentable
+attributes
+	namFunction : String
+	ynServerSide : Boolean
+	refParent4Copy : String
+operations
+end
+
+class XMAApplicationContext
+attributes
+	namApplication : String
+operations
+end
+
+class XMAStateFlag<IExpValue
+attributes
+	namState : String
+operations
+end
+
+class ApplicationFunction<IXMADocumentable
+attributes
+	namFunction : String
+operations
+end
+
+class ApplicationProperty<IExpValue,IXMADocumentable
+attributes
+	namProperty : String
+	typProperty : PropertyType
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class OperatorExpression<Expression
+attributes
+	typOperator : OperatorType
+operations
+end
+
+class BracketExpression<Expression
+attributes
+operations
+end
+
+class LiteralExpression<Expression
+attributes
+	txtLiteral : String
+	typLiteral : PropertyType
+operations
+end
+
+class FunctionExpression<Expression
+attributes
+operations
+end
+
+class VariableExpression<Expression
+attributes
+	typAccess : VariableAccess
+operations
+end
+
+abstract class IExpVariable
+attributes
+operations
+end
+
+abstract class IExpValue<IExpVariable
+attributes
+operations
+end
+
+abstract class IExpSimpleSelectable<IExpVariable
+attributes
+operations
+end
+
+abstract class IExpSelectable<IExpVariable
+attributes
+operations
+end
+
+abstract class IExpSize<IExpVariable
+attributes
+operations
+end
+
+abstract class IExpValid<IExpVariable
+attributes
+operations
+end
+
+abstract class IExpMultiValid<IExpVariable
+attributes
+operations
+end
+
+abstract class ISelectFunctionCaller<IFunctionCaller
+attributes
+operations
+end
+
+abstract class IDefSelectFunctionCaller<ISelectFunctionCaller
+attributes
+operations
+end
+
+class CompoundValidator<Validator
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class UserDefinedValidator<Validator
+attributes
+	namClass : String
+	typModel : WidgetModelType
+	txtParameterString : String
+operations
+end
+
+abstract class IGeneratable
+attributes
+operations
+	isYnGenerated():Boolean
+end
+
+abstract class IInitFunctionCaller<IFunctionCaller
+attributes
+operations
+end
+
+abstract class IAssignableBDVariable
+attributes
+operations
+end
+
+abstract class IFunctionCaller
+attributes
+operations
+end
+
+class CollapseChain
+attributes
+	codDircection : Integer
+operations
+end
+
+class CollapseGroup
+attributes
+operations
+end
+
+abstract class ICanBeMandatory
+attributes
+operations
+end
+
+abstract class ILifeCycleFunctionCaller<IFunctionCaller
+attributes
+operations
+end
+
+abstract class IXMADocumentable
+attributes
+	txtDescription : String
+operations
+end
+
+class Menu
+attributes
+operations
+end
+
+class CompositeMenu<Menu
+attributes
+	type : CompositeMenuType
+operations
+end
+
+class MenuItem
+attributes
+	rscMnuLabel : String
+	namRscKeyLabel : String
+	uriImage : String
+operations
+end
+
+composition xxx_XMAComponent_page between
+	XMAComponent[0..1] role xxx_XMAComponent_page_src
+	XMAPage[*] role page
+end
+
+composition xxx_XMAComponent_businessdataCol between
+	XMAComponent[*] role xxx_XMAComponent_businessdataCol_src
+	BDCollection[1] role businessdataCol
+end
+
+composition xxx_XMAComponent_property between
+	XMAComponent[0..1] role xxx_XMAComponent_property_src
+	XMACompProperty[*] role property
+end
+
+composition xxx_XMAComponent_functions between
+	XMAComponent[0..1] role xxx_XMAComponent_functions_src
+	XMAFunction[*] role functions
+end
+
+composition xxx_XMAComponent_applicationContext between
+	XMAComponent[*] role xxx_XMAComponent_applicationContext_src
+	XMAApplicationContext[0..1] role applicationContext
+end
+
+composition xxx_XMAComponent_stateFlags between
+	XMAComponent[0..1] role xxx_XMAComponent_stateFlags_src
+	XMAStateFlag[*] role stateFlags
+end
+
+association xxx_XMAPage_component between
+	XMAPage[*] role xxx_XMAPage_component_src
+	XMAComponent[1] role component
+end
+
+composition xxx_XMAPage_composite between
+	XMAPage[*] role xxx_XMAPage_composite_src
+	PageComposite[0..1] role composite
+end
+
+composition xxx_XMAPage_functions between
+	XMAPage[0..1] role xxx_XMAPage_functions_src
+	XMAFunction[*] role functions
+end
+
+composition xxx_XMAPage_stateFlags between
+	XMAPage[0..1] role xxx_XMAPage_stateFlags_src
+	XMAStateFlag[*] role stateFlags
+end
+
+association xxx_PushButton_defButtonPage between
+	PushButton[*] role xxx_PushButton_defButtonPage_src
+	NotebookPage[0..1] role defButtonPage
+end
+
+composition xxx_XMAWidget_font between
+	XMAWidget[*] role xxx_XMAWidget_font_src
+	XMAFont[0..1] role font
+end
+
+association xxx_XMAWidget_initFocusPage between
+	XMAWidget[*] role xxx_XMAWidget_initFocusPage_src
+	XMADialogPage[0..1] role initFocusPage
+end
+
+association xxx_XMAWidget_parentcomp between
+	XMAWidget[*] role xxx_XMAWidget_parentcomp_src
+	XMAComposite[0..1] role parentcomp
+end
+
+composition xxx_XMAWidget_formData between
+	XMAWidget[*] role xxx_XMAWidget_formData_src
+	XMAFormData[0..1] role formData
+end
+
+association xxx_XMAWidget_leftContainer between
+	XMAWidget[*] role xxx_XMAWidget_leftContainer_src
+	XMASashForm[0..1] role leftContainer
+end
+
+association xxx_XMAWidget_rightContainer between
+	XMAWidget[*] role xxx_XMAWidget_rightContainer_src
+	XMASashForm[0..1] role rightContainer
+end
+
+composition xxx_XMAWidget_state between
+	XMAWidget[0..1] role xxx_XMAWidget_state_src
+	WidgetInState[*] role state
+end
+
+composition xxx_XMAWidget_exprEnabled between
+	XMAWidget[*] role xxx_XMAWidget_exprEnabled_src
+	Expression[0..1] role exprEnabled
+end
+
+composition xxx_XMAWidget_exprVisible between
+	XMAWidget[*] role xxx_XMAWidget_exprVisible_src
+	Expression[0..1] role exprVisible
+end
+
+association xxx_PageComposite_page between
+	PageComposite[*] role xxx_PageComposite_page_src
+	XMAPage[0..1] role page
+end
+
+association xxx_XMADialogPage_initFocusEl between
+	XMADialogPage[*] role xxx_XMADialogPage_initFocusEl_src
+	XMAWidget[1] role initFocusEl
+end
+
+composition xxx_XMAComposite_controls between
+	XMAComposite[0..1] role xxx_XMAComposite_controls_src
+	XMAWidget[1..*] role controls
+end
+
+association xxx_XMAComposite_scrolledComp between
+	XMAComposite[*] role xxx_XMAComposite_scrolledComp_src
+	XMAScrolledComposite[0..1] role scrolledComp
+end
+
+composition xxx_XMAComposite_collapseChains between
+	XMAComposite[0..1] role xxx_XMAComposite_collapseChains_src
+	CollapseChain[*] role collapseChains
+end
+
+composition xxx_XMASashForm_leftEl between
+	XMASashForm[*] role xxx_XMASashForm_leftEl_src
+	XMAWidget[1] role leftEl
+end
+
+composition xxx_XMASashForm_rightEl between
+	XMASashForm[*] role xxx_XMASashForm_rightEl_src
+	XMAWidget[1] role rightEl
+end
+
+composition xxx_XMATabFolder_nbPage between
+	XMATabFolder[0..1] role xxx_XMATabFolder_nbPage_src
+	NotebookPage[1..*] role nbPage
+end
+
+association xxx_NotebookPage_defaultButton between
+	NotebookPage[*] role xxx_NotebookPage_defaultButton_src
+	PushButton[1] role defaultButton
+end
+
+association xxx_NotebookPage_folder between
+	NotebookPage[*] role xxx_NotebookPage_folder_src
+	XMATabFolder[1] role folder
+end
+
+association xxx_Validator_bdvalidatorParent between
+	Validator[*] role xxx_Validator_bdvalidatorParent_src
+	IFormaterAttachable[0..1] role bdvalidatorParent
+end
+
+association xxx_BDAttribute_widget between
+	BDAttribute[0..1] role xxx_BDAttribute_widget_src
+	IBDAttachable[*] role widget
+end
+
+association xxx_BDAttribute_bdObject between
+	BDAttribute[*] role xxx_BDAttribute_bdObject_src
+	BusinessData[1] role bdObject
+end
+
+association xxx_XMALabel_labelWidget between
+	XMALabel[*] role xxx_XMALabel_labelWidget_src
+	IWidgetWithLabel[0..1] role labelWidget
+end
+
+association xxx_XMATree_expandFunction between
+	XMATree[0..1] role xxx_XMATree_expandFunction_src
+	XMAFunction[*] role expandFunction
+end
+
+association xxx_XMATree_collapseFunction between
+	XMATree[0..1] role xxx_XMATree_collapseFunction_src
+	XMAFunction[*] role collapseFunction
+end
+
+composition xxx_XMATree_columns between
+	XMATree[0..1] role xxx_XMATree_columns_src
+	XMATreeColumn[*] role columns
+end
+
+composition xxx_XMATreeColumn_font between
+	XMATreeColumn[*] role xxx_XMATreeColumn_font_src
+	XMAFont[0..1] role font
+end
+
+association xxx_XMATreeColumn_tree between
+	XMATreeColumn[*] role xxx_XMATreeColumn_tree_src
+	XMATree[1] role tree
+end
+
+composition xxx_XMATable_column between
+	XMATable[0..1] role xxx_XMATable_column_src
+	XMATableColumn[1..*] role column
+end
+
+association xxx_XMATable_pagingControl between
+	XMATable[*] role xxx_XMATable_pagingControl_src
+	XMAPagingControl[0..1] role pagingControl
+end
+
+association xxx_XMATable_label between
+	XMATable[*] role xxx_XMATable_label_src
+	XMALabel[0..1] role label
+end
+
+composition xxx_XMATableColumn_font between
+	XMATableColumn[*] role xxx_XMATableColumn_font_src
+	XMAFont[0..1] role font
+end
+
+association xxx_XMATableColumn_table between
+	XMATableColumn[*] role xxx_XMATableColumn_table_src
+	XMATable[1] role table
+end
+
+composition xxx_XMAFormData_topAttach between
+	XMAFormData[*] role xxx_XMAFormData_topAttach_src
+	XMAFormAttachment[0..1] role topAttach
+end
+
+composition xxx_XMAFormData_bottomAttach between
+	XMAFormData[*] role xxx_XMAFormData_bottomAttach_src
+	XMAFormAttachment[0..1] role bottomAttach
+end
+
+composition xxx_XMAFormData_leftAttach between
+	XMAFormData[*] role xxx_XMAFormData_leftAttach_src
+	XMAFormAttachment[0..1] role leftAttach
+end
+
+composition xxx_XMAFormData_rightAttach between
+	XMAFormData[*] role xxx_XMAFormData_rightAttach_src
+	XMAFormAttachment[0..1] role rightAttach
+end
+
+association xxx_XMAFormData_widget between
+	XMAFormData[*] role xxx_XMAFormData_widget_src
+	XMAWidget[1] role widget
+end
+
+association xxx_XMAFormAttachment_topParent between
+	XMAFormAttachment[*] role xxx_XMAFormAttachment_topParent_src
+	XMAFormData[0..1] role topParent
+end
+
+association xxx_XMAFormAttachment_bottomParent between
+	XMAFormAttachment[*] role xxx_XMAFormAttachment_bottomParent_src
+	XMAFormData[0..1] role bottomParent
+end
+
+association xxx_XMAFormAttachment_leftParent between
+	XMAFormAttachment[*] role xxx_XMAFormAttachment_leftParent_src
+	XMAFormData[0..1] role leftParent
+end
+
+association xxx_XMAFormAttachment_rightParent between
+	XMAFormAttachment[*] role xxx_XMAFormAttachment_rightParent_src
+	XMAFormData[0..1] role rightParent
+end
+
+association xxx_XMAFormAttachment_attachElement between
+	XMAFormAttachment[*] role xxx_XMAFormAttachment_attachElement_src
+	XMAWidget[1] role attachElement
+end
+
+association xxx_State_dialog between
+	State[*] role xxx_State_dialog_src
+	IDialogRoot[1] role dialog
+end
+
+association xxx_WidgetInState_widget between
+	WidgetInState[*] role xxx_WidgetInState_widget_src
+	XMAWidget[1] role widget
+end
+
+association xxx_WidgetInState_state between
+	WidgetInState[*] role xxx_WidgetInState_state_src
+	State[1] role state
+end
+
+composition xxx_ValidInState_validator between
+	ValidInState[*] role xxx_ValidInState_validator_src
+	Validator[1] role validator
+end
+
+association xxx_ValidInState_state between
+	ValidInState[*] role xxx_ValidInState_state_src
+	State[1] role state
+end
+
+association xxx_ValidInState_parent between
+	ValidInState[*] role xxx_ValidInState_parent_src
+	IFormaterAttachable[1] role parent
+end
+
+composition xxx_IFormaterAttachable_validator between
+	IFormaterAttachable[0..1] role xxx_IFormaterAttachable_validator_src
+	ValidInState[*] role validator
+end
+
+composition xxx_IFormaterAttachable_bdValidator between
+	IFormaterAttachable[*] role xxx_IFormaterAttachable_bdValidator_src
+	Validator[0..1] role bdValidator
+end
+
+association xxx_BDCollection_XMAComponent between
+	BDCollection[*] role xxx_BDCollection_XMAComponent_src
+	XMAComponent[1] role XMAComponent
+end
+
+composition xxx_BDCollection_businessdata between
+	BDCollection[0..1] role xxx_BDCollection_businessdata_src
+	BusinessData[*] role businessdata
+end
+
+association xxx_BusinessData_BDCollection between
+	BusinessData[*] role xxx_BusinessData_BDCollection_src
+	BDCollection[1] role BDCollection
+end
+
+composition xxx_BusinessData_attributes_ between
+	BusinessData[0..1] role xxx_BusinessData_attributes__src
+	BDAttribute[*] role attributes_
+end
+
+association xxx_BusinessData_isAttributeOf between
+	BusinessData[*] role xxx_BusinessData_isAttributeOf_src
+	BusinessData[0..1] role isAttributeOf
+end
+
+association xxx_IBDAttachable_dataAttribute between
+	IBDAttachable[*] role xxx_IBDAttachable_dataAttribute_src
+	BDAttribute[0..1] role dataAttribute
+end
+
+association xxx_IWidgetWithLabel_label between
+	IWidgetWithLabel[*] role xxx_IWidgetWithLabel_label_src
+	XMALabel[0..1] role label
+end
+
+association xxx_EmbeddedPage_container between
+	EmbeddedPage[0..1] role xxx_EmbeddedPage_container_src
+	XMAContainer[*] role container
+end
+
+association xxx_XMAContainer_embeddedPage between
+	XMAContainer[*] role xxx_XMAContainer_embeddedPage_src
+	EmbeddedPage[1] role embeddedPage
+end
+
+composition xxx_IDialogRoot_state between
+	IDialogRoot[0..1] role xxx_IDialogRoot_state_src
+	State[1..*] role state
+end
+
+association xxx_XMACompProperty_component between
+	XMACompProperty[*] role xxx_XMACompProperty_component_src
+	XMAComponent[1] role component
+end
+
+composition xxx_XMAScrolledComposite_innerComp between
+	XMAScrolledComposite[*] role xxx_XMAScrolledComposite_innerComp_src
+	XMAComposite[0..1] role innerComp
+end
+
+composition xxx_AppShell_Menu between
+	AppShell[*] role xxx_AppShell_Menu_src
+	Menu[0..1] role Menu
+end
+
+composition xxx_AppShell_CompositeMenu between
+	AppShell[0..1] role xxx_AppShell_CompositeMenu_src
+	CompositeMenu[*] role CompositeMenu
+end
+
+composition xxx_IEditable_exprEditable between
+	IEditable[*] role xxx_IEditable_exprEditable_src
+	Expression[0..1] role exprEditable
+end
+
+association xxx_XMAPagingControl_table between
+	XMAPagingControl[*] role xxx_XMAPagingControl_table_src
+	XMATable[1] role table
+end
+
+association xxx_XMAPagingControl_navigateFunction between
+	XMAPagingControl[0..1] role xxx_XMAPagingControl_navigateFunction_src
+	XMAFunction[*] role navigateFunction
+end
+
+composition xxx_ICustomStyleableWidget_customStyles between
+	ICustomStyleableWidget[*] role xxx_ICustomStyleableWidget_customStyles_src
+	CustomStylesCollection[0..1] role customStyles
+end
+
+composition xxx_CustomStylesCollection_styles between
+	CustomStylesCollection[0..1] role xxx_CustomStylesCollection_styles_src
+	NamedFlag[1..*] role styles
+end
+
+composition xxx_IColorable_backgroundColor between
+	IColorable[*] role xxx_IColorable_backgroundColor_src
+	XMAColor[0..1] role backgroundColor
+end
+
+composition xxx_IColorable_foregroundColor between
+	IColorable[*] role xxx_IColorable_foregroundColor_src
+	XMAColor[0..1] role foregroundColor
+end
+
+composition xxx_XMAFont_styles between
+	XMAFont[*] role xxx_XMAFont_styles_src
+	CustomStylesCollection[1] role styles
+end
+
+composition xxx_XMAApplicationContext_stateFlags between
+	XMAApplicationContext[0..1] role xxx_XMAApplicationContext_stateFlags_src
+	XMAStateFlag[*] role stateFlags
+end
+
+composition xxx_XMAApplicationContext_functions between
+	XMAApplicationContext[0..1] role xxx_XMAApplicationContext_functions_src
+	ApplicationFunction[*] role functions
+end
+
+composition xxx_XMAApplicationContext_properties between
+	XMAApplicationContext[0..1] role xxx_XMAApplicationContext_properties_src
+	ApplicationProperty[*] role properties
+end
+
+composition xxx_XMAStateFlag_condition between
+	XMAStateFlag[*] role xxx_XMAStateFlag_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_OperatorExpression_leftExpression between
+	OperatorExpression[*] role xxx_OperatorExpression_leftExpression_src
+	Expression[0..1] role leftExpression
+end
+
+composition xxx_OperatorExpression_rightExpression between
+	OperatorExpression[*] role xxx_OperatorExpression_rightExpression_src
+	Expression[1] role rightExpression
+end
+
+composition xxx_BracketExpression_subExpression between
+	BracketExpression[*] role xxx_BracketExpression_subExpression_src
+	Expression[1] role subExpression
+end
+
+composition xxx_FunctionExpression_parameter between
+	FunctionExpression[*] role xxx_FunctionExpression_parameter_src
+	LiteralExpression[1] role parameter
+end
+
+association xxx_FunctionExpression_function between
+	FunctionExpression[*] role xxx_FunctionExpression_function_src
+	ApplicationFunction[1] role function
+end
+
+association xxx_VariableExpression_source between
+	VariableExpression[*] role xxx_VariableExpression_source_src
+	IExpVariable[1] role source
+end
+
+association xxx_ISelectFunctionCaller_selectFunction between
+	ISelectFunctionCaller[0..1] role xxx_ISelectFunctionCaller_selectFunction_src
+	XMAFunction[*] role selectFunction
+end
+
+association xxx_IDefSelectFunctionCaller_defSelectFunction between
+	IDefSelectFunctionCaller[0..1] role xxx_IDefSelectFunctionCaller_defSelectFunction_src
+	XMAFunction[*] role defSelectFunction
+end
+
+composition xxx_CompoundValidator_constraints_ between
+	CompoundValidator[0..1] role xxx_CompoundValidator_constraints__src
+	Constraint[1..*] role constraints_
+end
+
+association xxx_CompoundValidator_formatter between
+	CompoundValidator[*] role xxx_CompoundValidator_formatter_src
+	Validator[0..1] role formatter
+end
+
+composition xxx_Constraint_validator between
+	Constraint[*] role xxx_Constraint_validator_src
+	Validator[1] role validator
+end
+
+composition xxx_Constraint_condition between
+	Constraint[*] role xxx_Constraint_condition_src
+	Expression[0..1] role condition
+end
+
+association xxx_IInitFunctionCaller_initFunction between
+	IInitFunctionCaller[0..1] role xxx_IInitFunctionCaller_initFunction_src
+	XMAFunction[*] role initFunction
+end
+
+association xxx_IAssignableBDVariable_businessDataVariables between
+	IAssignableBDVariable[0..1] role xxx_IAssignableBDVariable_businessDataVariables_src
+	BusinessData[*] role businessDataVariables
+end
+
+composition xxx_CollapseChain_collapseGroups between
+	CollapseChain[0..1] role xxx_CollapseChain_collapseGroups_src
+	CollapseGroup[*] role collapseGroups
+end
+
+association xxx_CollapseGroup_mainWidget between
+	CollapseGroup[*] role xxx_CollapseGroup_mainWidget_src
+	XMAWidget[1] role mainWidget
+end
+
+association xxx_CollapseGroup_secondaryWidgets between
+	CollapseGroup[0..1] role xxx_CollapseGroup_secondaryWidgets_src
+	XMAWidget[*] role secondaryWidgets
+end
+
+composition xxx_CollapseGroup_exprCollapsed between
+	CollapseGroup[*] role xxx_CollapseGroup_exprCollapsed_src
+	Expression[0..1] role exprCollapsed
+end
+
+composition xxx_ICanBeMandatory_exprMandatory between
+	ICanBeMandatory[*] role xxx_ICanBeMandatory_exprMandatory_src
+	Expression[0..1] role exprMandatory
+end
+
+association xxx_ILifeCycleFunctionCaller_enterFunction between
+	ILifeCycleFunctionCaller[0..1] role xxx_ILifeCycleFunctionCaller_enterFunction_src
+	XMAFunction[*] role enterFunction
+end
+
+association xxx_ILifeCycleFunctionCaller_leaveFunction between
+	ILifeCycleFunctionCaller[0..1] role xxx_ILifeCycleFunctionCaller_leaveFunction_src
+	XMAFunction[*] role leaveFunction
+end
+
+composition xxx_Menu_MenuItem between
+	Menu[0..1] role xxx_Menu_MenuItem_src
+	MenuItem[1..*] role MenuItem
+end
+
+association xxx_CompositeMenu_XMAComposite between
+	CompositeMenu[*] role xxx_CompositeMenu_XMAComposite_src
+	XMAComposite[1] role XMAComposite
+end
+
+composition xxx_MenuItem_accelerator between
+	MenuItem[*] role xxx_MenuItem_accelerator_src
+	KeyboardKeyCode[0..1] role accelerator
+end
+
+association xxx_MenuItem_Expression between
+	MenuItem[*] role xxx_MenuItem_Expression_src
+	Expression[0..1] role Expression
+end
+
+composition xxx_MenuItem_MenuItem between
+	MenuItem[0..1] role xxx_MenuItem_MenuItem_src
+	MenuItem[*] role MenuItem
+end
+
+association xxx_MenuItem_XMAFunction between
+	MenuItem[*] role xxx_MenuItem_XMAFunction_src
+	XMAFunction[0..1] role XMAFunction
+end
+

@@ -1,0 +1,70 @@
+model knowledge
+abstract class AbstractKnowledge
+attributes
+	name : String
+operations
+end
+
+abstract class KnowledgeNode<AbstractKnowledge
+attributes
+operations
+end
+
+class KnowledgeElement<KnowledgeNode
+attributes
+operations
+end
+
+class Leaf<KnowledgeNode
+attributes
+	type : String
+operations
+end
+
+class Ensemble<AbstractElement
+attributes
+operations
+end
+
+class Process<AbstractElement
+attributes
+operations
+end
+
+abstract class AbstractElement
+attributes
+	name : String
+	period : Integer
+operations
+end
+
+class DEECoModel
+attributes
+operations
+end
+
+association xxx_AbstractKnowledge_reader between
+	AbstractKnowledge[0..1] role xxx_AbstractKnowledge_reader_src
+	AbstractElement[*] role reader
+end
+
+composition xxx_KnowledgeElement_child between
+	KnowledgeElement[0..1] role xxx_KnowledgeElement_child_src
+	KnowledgeNode[1..*] role child
+end
+
+association xxx_Leaf_writer between
+	Leaf[*] role xxx_Leaf_writer_src
+	AbstractElement[0..1] role writer
+end
+
+composition xxx_DEECoModel_elements between
+	DEECoModel[0..1] role xxx_DEECoModel_elements_src
+	AbstractElement[*] role elements
+end
+
+composition xxx_DEECoModel_knowledges between
+	DEECoModel[0..1] role xxx_DEECoModel_knowledges_src
+	AbstractKnowledge[*] role knowledges
+end
+

@@ -1,0 +1,96 @@
+model chain
+class ChainTransformation<TransformationDefinition
+attributes
+operations
+end
+
+class GeneratedModel<RepresentModel,NamedElement
+attributes
+operations
+end
+
+class TransformationExecution<LocatedElement
+attributes
+operations
+end
+
+abstract class AvailableTransformation
+attributes
+operations
+end
+
+class ExternalTransformation<AvailableTransformation,NamedElement
+attributes
+operations
+end
+
+class CompositeTransformation<AvailableTransformation,TransformationDefinition
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class RepresentModel
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+composition xxx_ChainTransformation_composites between
+	ChainTransformation[0..1] role xxx_ChainTransformation_composites_src
+	CompositeTransformation[*] role composites
+end
+
+composition xxx_ChainTransformation_externals between
+	ChainTransformation[0..1] role xxx_ChainTransformation_externals_src
+	ExternalTransformation[*] role externals
+end
+
+composition xxx_ChainTransformation_generatedModels between
+	ChainTransformation[0..1] role xxx_ChainTransformation_generatedModels_src
+	GeneratedModel[*] role generatedModels
+end
+
+composition xxx_ChainTransformation_executions between
+	ChainTransformation[0..1] role xxx_ChainTransformation_executions_src
+	TransformationExecution[*] role executions
+end
+
+association xxx_TransformationExecution_transformation between
+	TransformationExecution[*] role xxx_TransformationExecution_transformation_src
+	AvailableTransformation[1] role transformation
+end
+
+association xxx_TransformationExecution_inputModels between
+	TransformationExecution[0..1] role xxx_TransformationExecution_inputModels_src
+	RepresentModel[*] role inputModels
+end
+
+association xxx_TransformationExecution_outputModels between
+	TransformationExecution[0..1] role xxx_TransformationExecution_outputModels_src
+	RepresentModel[*] role outputModels
+end
+
+composition xxx_CompositeTransformation_executions between
+	CompositeTransformation[0..1] role xxx_CompositeTransformation_executions_src
+	TransformationExecution[*] role executions
+end
+

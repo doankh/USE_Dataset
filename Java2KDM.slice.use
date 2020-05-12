@@ -1,0 +1,231 @@
+model error1
+class AnnotationMemberValuePair<NamedElement
+attributes
+operations
+end
+
+class CompilationUnit<NamedElement
+attributes
+operations
+end
+
+class EnumDeclaration<AbstractTypeDeclaration
+attributes
+operations
+end
+
+class PrimitiveTypeChar<PrimitiveType
+attributes
+operations
+end
+
+class Initializer<BodyDeclaration
+attributes
+operations
+end
+
+class ParameterizedType<Type
+attributes
+operations
+end
+
+class PrimitiveTypeDouble<PrimitiveType
+attributes
+operations
+end
+
+class Package<NamedElement
+attributes
+operations
+end
+
+class TypeParameter<Type
+attributes
+operations
+end
+
+class PrimitiveTypeFloat<PrimitiveType
+attributes
+operations
+end
+
+class ArrayType<Type
+attributes
+operations
+end
+
+class AnnotationTypeDeclaration<AbstractTypeDeclaration
+attributes
+operations
+end
+
+class VariableDeclarationFragment<VariableDeclaration
+attributes
+operations
+end
+
+class WildCardType<Type
+attributes
+operations
+end
+
+class EnumConstantDeclaration<BodyDeclaration,VariableDeclaration
+attributes
+operations
+end
+
+class ClassDeclaration<TypeDeclaration
+attributes
+operations
+end
+
+abstract class BodyDeclaration<NamedElement
+attributes
+operations
+end
+
+abstract class AbstractMethodDeclaration<BodyDeclaration
+attributes
+operations
+end
+
+class PrimitiveTypeVoid<PrimitiveType
+attributes
+operations
+end
+
+class InterfaceDeclaration<TypeDeclaration
+attributes
+operations
+end
+
+class PrimitiveTypeInt<PrimitiveType
+attributes
+operations
+end
+
+class PrimitiveTypeLong<PrimitiveType
+attributes
+operations
+end
+
+class PrimitiveTypeBoolean<PrimitiveType
+attributes
+operations
+end
+
+class FieldDeclaration<BodyDeclaration,AbstractVariablesContainer
+attributes
+operations
+end
+
+class PrimitiveTypeShort<PrimitiveType
+attributes
+operations
+end
+
+class SingleVariableDeclaration<VariableDeclaration
+attributes
+operations
+end
+
+abstract class NamedElement<ASTNode
+attributes
+operations
+end
+
+class LabeledStatement<NamedElement,Statement
+attributes
+operations
+end
+
+class ThisModule
+attributes
+operations
+end
+
+class Archive<NamedElement
+attributes
+operations
+end
+
+class PrimitiveTypeByte<PrimitiveType
+attributes
+operations
+end
+
+class AnnotationTypeMemberDeclaration<BodyDeclaration
+attributes
+operations
+end
+
+abstract class AbstractVariablesContainer<ASTNode
+attributes
+operations
+end
+
+abstract class AbstractTypeDeclaration<BodyDeclaration,Type
+attributes
+operations
+end
+
+abstract class TypeDeclaration<AbstractTypeDeclaration
+attributes
+operations
+end
+
+abstract class ASTNode
+attributes
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+class PrimitiveType<Type
+attributes
+operations
+end
+
+abstract class VariableDeclaration<NamedElement
+attributes
+operations
+end
+
+abstract class Statement<ASTNode
+attributes
+operations
+end
+
+association xxx_VariableDeclarationFragment_variablesContainer between
+	VariableDeclarationFragment[*] role xxx_VariableDeclarationFragment_variablesContainer_src
+	AbstractVariablesContainer[0..1] role variablesContainer
+end
+
+composition xxx_AbstractMethodDeclaration_typeParameters between
+	AbstractMethodDeclaration[0..1] role xxx_AbstractMethodDeclaration_typeParameters_src
+	TypeParameter[*] role typeParameters
+end
+
+association xxx_SingleVariableDeclaration_methodDeclaration between
+	SingleVariableDeclaration[*] role xxx_SingleVariableDeclaration_methodDeclaration_src
+	AbstractMethodDeclaration[0..1] role methodDeclaration
+end
+
+composition xxx_AbstractVariablesContainer_fragments between
+	AbstractVariablesContainer[0..1] role xxx_AbstractVariablesContainer_fragments_src
+	VariableDeclarationFragment[*] role fragments
+end
+
+composition xxx_AbstractTypeDeclaration_bodyDeclarations between
+	AbstractTypeDeclaration[0..1] role xxx_AbstractTypeDeclaration_bodyDeclarations_src
+	BodyDeclaration[*] role bodyDeclarations
+end
+
+composition xxx_TypeDeclaration_typeParameters between
+	TypeDeclaration[0..1] role xxx_TypeDeclaration_typeParameters_src
+	TypeParameter[*] role typeParameters
+end
+

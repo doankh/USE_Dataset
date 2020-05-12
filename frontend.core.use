@@ -1,0 +1,595 @@
+model core
+enum BinaryOp{
+default
+}
+
+enum ResolveTraceCardinality{
+default
+}
+
+abstract class LocatedElement
+attributes
+	row : Integer
+	column : Integer
+	file : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class DefinitionParameter<NamedElement
+attributes
+operations
+end
+
+class ModuleParameter<DefinitionParameter
+attributes
+operations
+end
+
+abstract class ModuleDefinition<LocatedElement,NamedElement,AnnotableElement
+attributes
+operations
+end
+
+abstract class AnnotableElement
+attributes
+operations
+end
+
+class ImplicitlyAnnotableElement
+attributes
+operations
+end
+
+abstract class Annotation
+attributes
+operations
+end
+
+class OptimizationsAnnotation<Annotation
+attributes
+	enabled : Boolean
+operations
+end
+
+class MetamodelModelAnnotation<Annotation
+attributes
+	metamodel : String
+operations
+end
+
+abstract class SingleAnnotation<Annotation
+attributes
+operations
+end
+
+class PotencyAnnotation<SingleAnnotation
+attributes
+	value : Integer
+operations
+end
+
+class GenericAnnotation
+attributes
+	name : String
+operations
+end
+
+abstract class AnnotationParameter
+attributes
+operations
+end
+
+abstract class RepresentModel<AnnotableElement
+attributes
+operations
+end
+
+abstract class TransformationDefinition<ModuleDefinition
+attributes
+operations
+end
+
+class EclecticTransformationDefinition<TransformationDefinition
+attributes
+operations
+end
+
+class TransformationDefinitionParameter<DefinitionParameter,RepresentModel
+attributes
+operations
+end
+
+class ImportedModel<RepresentModel,NamedElement
+attributes
+operations
+end
+
+class UseDeclaration<RepresentModel
+attributes
+	module : String
+	as : String
+operations
+end
+
+class RequireDeclaration<RepresentModel
+attributes
+	name : String
+	default : String
+operations
+end
+
+abstract class RequireParameter
+attributes
+	formalParameterName : String
+operations
+end
+
+class RequireModelParameter<RequireParameter
+attributes
+operations
+end
+
+abstract class Variable
+attributes
+	name : String
+operations
+end
+
+abstract class Statement<LocatedElement
+attributes
+operations
+end
+
+abstract class Expression<Statement
+attributes
+operations
+end
+
+class DefineVariable<Statement,Variable
+attributes
+operations
+end
+
+class PropertyWrite<Expression
+attributes
+	property : String
+operations
+end
+
+class ModelReference<ClassUse,Expression
+attributes
+operations
+end
+
+class VariableReference<Expression
+attributes
+operations
+end
+
+class MethodCall<Expression
+attributes
+	methodName : String
+	withParameters : Boolean
+operations
+end
+
+class KeywordMethodCall<Expression
+attributes
+operations
+end
+
+class KeywordParameter
+attributes
+	keyword : String
+operations
+end
+
+class BinaryExpr<Expression
+attributes
+	binaryOp : BinaryOp
+operations
+end
+
+class ClosureDeclaration<Expression
+attributes
+operations
+end
+
+class ClosureParameter<Variable
+attributes
+operations
+end
+
+class ResolveLink<Expression
+attributes
+	isExternal : String
+	linkName : String
+	featureName : String
+operations
+end
+
+class IfExpr<Expression
+attributes
+operations
+end
+
+class IfBranch
+attributes
+operations
+end
+
+class NumLiteral<Expression
+attributes
+	value : Integer
+operations
+end
+
+class DoubleLiteral<Expression
+attributes
+	value : Real
+operations
+end
+
+class StringLiteral<Expression
+attributes
+	value : String
+operations
+end
+
+class BooleanLiteral<Expression
+attributes
+	value : Boolean
+operations
+end
+
+abstract class TypeExpression
+attributes
+operations
+end
+
+class ClassUse<TypeExpression,ImplicitlyAnnotableElement
+attributes
+	className : String
+	strictType : Boolean
+operations
+end
+
+class TraceUse<TypeExpression
+attributes
+operations
+end
+
+abstract class TypedWithClass
+attributes
+operations
+end
+
+class TraceInterface<ModuleDefinition
+attributes
+operations
+end
+
+class TracedModelParameter<DefinitionParameter,RepresentModel
+attributes
+operations
+end
+
+class TraceDefinition<NamedElement
+attributes
+operations
+end
+
+class TraceElement<NamedElement
+attributes
+operations
+end
+
+class InlineModel<ModuleDefinition,RepresentModel
+attributes
+operations
+end
+
+class InlineClass<NamedElement
+attributes
+operations
+end
+
+class InlineFeature<NamedElement
+attributes
+	multivalued : Boolean
+operations
+end
+
+class InlineAttribute<InlineFeature
+attributes
+operations
+end
+
+class InlineReference<InlineFeature
+attributes
+operations
+end
+
+class MatchTrace<Expression
+attributes
+	cardinality : ResolveTraceCardinality
+operations
+end
+
+class TraceCompareExpression
+attributes
+	multivaluedTag : Boolean
+operations
+end
+
+class PutTrace<Expression
+attributes
+operations
+end
+
+class PutTraceParameter
+attributes
+operations
+end
+
+association xxx_AnnotableElement_annotatedWith between
+	AnnotableElement[0..1] role xxx_AnnotableElement_annotatedWith_src
+	Annotation[*] role annotatedWith
+end
+
+composition xxx_ImplicitlyAnnotableElement_annotations between
+	ImplicitlyAnnotableElement[0..1] role xxx_ImplicitlyAnnotableElement_annotations_src
+	SingleAnnotation[*] role annotations
+end
+
+association xxx_Annotation_annotatedElement between
+	Annotation[*] role xxx_Annotation_annotatedElement_src
+	AnnotableElement[0..1] role annotatedElement
+end
+
+composition xxx_GenericAnnotation_parameters between
+	GenericAnnotation[0..1] role xxx_GenericAnnotation_parameters_src
+	AnnotationParameter[1..*] role parameters
+end
+
+composition xxx_TransformationDefinition_inModels between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_inModels_src
+	TransformationDefinitionParameter[*] role inModels
+end
+
+composition xxx_TransformationDefinition_outModels between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_outModels_src
+	TransformationDefinitionParameter[*] role outModels
+end
+
+composition xxx_TransformationDefinition_importedModels between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_importedModels_src
+	ImportedModel[*] role importedModels
+end
+
+composition xxx_TransformationDefinition_inlineModels between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_inlineModels_src
+	InlineModel[*] role inlineModels
+end
+
+composition xxx_TransformationDefinition_annotations between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_TransformationDefinition_uses between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_uses_src
+	UseDeclaration[*] role uses
+end
+
+composition xxx_TransformationDefinition_requires between
+	TransformationDefinition[0..1] role xxx_TransformationDefinition_requires_src
+	RequireDeclaration[*] role requires
+end
+
+composition xxx_EclecticTransformationDefinition_transformations between
+	EclecticTransformationDefinition[0..1] role xxx_EclecticTransformationDefinition_transformations_src
+	TransformationDefinition[*] role transformations
+end
+
+composition xxx_RequireDeclaration_parameters between
+	RequireDeclaration[0..1] role xxx_RequireDeclaration_parameters_src
+	RequireParameter[*] role parameters
+end
+
+association xxx_RequireModelParameter_model_ between
+	RequireModelParameter[*] role xxx_RequireModelParameter_model__src
+	RepresentModel[1] role model_
+end
+
+composition xxx_DefineVariable_expression between
+	DefineVariable[*] role xxx_DefineVariable_expression_src
+	Expression[1] role expression
+end
+
+association xxx_PropertyWrite_receptor between
+	PropertyWrite[*] role xxx_PropertyWrite_receptor_src
+	Variable[1] role receptor
+end
+
+composition xxx_PropertyWrite_expression between
+	PropertyWrite[*] role xxx_PropertyWrite_expression_src
+	Expression[1] role expression
+end
+
+association xxx_VariableReference_variable between
+	VariableReference[*] role xxx_VariableReference_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_MethodCall_receptor between
+	MethodCall[*] role xxx_MethodCall_receptor_src
+	Expression[1] role receptor
+end
+
+composition xxx_MethodCall_parameters between
+	MethodCall[0..1] role xxx_MethodCall_parameters_src
+	Expression[*] role parameters
+end
+
+composition xxx_KeywordMethodCall_receptor between
+	KeywordMethodCall[*] role xxx_KeywordMethodCall_receptor_src
+	Expression[1] role receptor
+end
+
+composition xxx_KeywordMethodCall_parameters between
+	KeywordMethodCall[0..1] role xxx_KeywordMethodCall_parameters_src
+	KeywordParameter[*] role parameters
+end
+
+composition xxx_KeywordParameter_value between
+	KeywordParameter[*] role xxx_KeywordParameter_value_src
+	Expression[1] role value
+end
+
+composition xxx_BinaryExpr_left between
+	BinaryExpr[*] role xxx_BinaryExpr_left_src
+	Expression[1] role left
+end
+
+composition xxx_BinaryExpr_right between
+	BinaryExpr[*] role xxx_BinaryExpr_right_src
+	Expression[1] role right
+end
+
+composition xxx_ClosureDeclaration_statements between
+	ClosureDeclaration[0..1] role xxx_ClosureDeclaration_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ClosureDeclaration_formalParameters between
+	ClosureDeclaration[0..1] role xxx_ClosureDeclaration_formalParameters_src
+	ClosureParameter[*] role formalParameters
+end
+
+composition xxx_ResolveLink_expr between
+	ResolveLink[*] role xxx_ResolveLink_expr_src
+	Expression[1] role expr
+end
+
+association xxx_ResolveLink_module between
+	ResolveLink[*] role xxx_ResolveLink_module_src
+	UseDeclaration[0..1] role module
+end
+
+composition xxx_IfExpr_then_ between
+	IfExpr[*] role xxx_IfExpr_then__src
+	IfBranch[1] role then_
+end
+
+composition xxx_IfExpr_elsifs between
+	IfExpr[0..1] role xxx_IfExpr_elsifs_src
+	IfBranch[*] role elsifs
+end
+
+composition xxx_IfExpr_else_ between
+	IfExpr[*] role xxx_IfExpr_else__src
+	IfBranch[0..1] role else_
+end
+
+composition xxx_IfBranch_condition between
+	IfBranch[*] role xxx_IfBranch_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_IfBranch_statements between
+	IfBranch[0..1] role xxx_IfBranch_statements_src
+	Statement[*] role statements
+end
+
+association xxx_ClassUse_model_ between
+	ClassUse[*] role xxx_ClassUse_model__src
+	RepresentModel[1] role model_
+end
+
+association xxx_TraceUse_trace between
+	TraceUse[*] role xxx_TraceUse_trace_src
+	TraceDefinition[1] role trace
+end
+
+composition xxx_TypedWithClass_type_ between
+	TypedWithClass[*] role xxx_TypedWithClass_type__src
+	ClassUse[1] role type_
+end
+
+composition xxx_TraceInterface_definitions between
+	TraceInterface[0..1] role xxx_TraceInterface_definitions_src
+	TraceDefinition[*] role definitions
+end
+
+composition xxx_TraceDefinition_elements between
+	TraceDefinition[0..1] role xxx_TraceDefinition_elements_src
+	TraceElement[1..*] role elements
+end
+
+composition xxx_TraceElement_type between
+	TraceElement[*] role xxx_TraceElement_type_src
+	TypeExpression[1] role type
+end
+
+composition xxx_InlineModel_classes between
+	InlineModel[0..1] role xxx_InlineModel_classes_src
+	InlineClass[*] role classes
+end
+
+composition xxx_InlineClass_features between
+	InlineClass[0..1] role xxx_InlineClass_features_src
+	InlineFeature[*] role features
+end
+
+composition xxx_InlineFeature_type between
+	InlineFeature[*] role xxx_InlineFeature_type_src
+	TypeExpression[1] role type
+end
+
+association xxx_MatchTrace_trace between
+	MatchTrace[*] role xxx_MatchTrace_trace_src
+	TraceDefinition[1] role trace
+end
+
+composition xxx_MatchTrace_traceExpr between
+	MatchTrace[*] role xxx_MatchTrace_traceExpr_src
+	TraceCompareExpression[1] role traceExpr
+end
+
+association xxx_TraceCompareExpression_traceVar between
+	TraceCompareExpression[*] role xxx_TraceCompareExpression_traceVar_src
+	TraceElement[1] role traceVar
+end
+
+composition xxx_TraceCompareExpression_expr between
+	TraceCompareExpression[*] role xxx_TraceCompareExpression_expr_src
+	Expression[1] role expr
+end
+
+association xxx_PutTrace_trace between
+	PutTrace[*] role xxx_PutTrace_trace_src
+	TraceDefinition[1] role trace
+end
+
+composition xxx_PutTrace_parameters between
+	PutTrace[0..1] role xxx_PutTrace_parameters_src
+	PutTraceParameter[*] role parameters
+end
+
+composition xxx_PutTraceParameter_value between
+	PutTraceParameter[*] role xxx_PutTraceParameter_value_src
+	Expression[1] role value
+end
+
+association xxx_PutTraceParameter_traceVar between
+	PutTraceParameter[*] role xxx_PutTraceParameter_traceVar_src
+	TraceElement[1] role traceVar
+end
+

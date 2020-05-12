@@ -1,0 +1,283 @@
+model DiagramInterchange
+class Dimension
+attributes
+	width : Real
+	heigth : Real
+operations
+end
+
+class Point
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class BezierPoint<Point
+attributes
+operations
+end
+
+class Property
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class DiagramElement
+attributes
+	isVisible : Boolean
+operations
+end
+
+class Reference<DiagramElement
+attributes
+	isIndividualRepresentation : Boolean
+operations
+end
+
+abstract class GraphElement<DiagramElement
+attributes
+operations
+end
+
+class GraphEdge<GraphElement
+attributes
+operations
+end
+
+class GraphNode<GraphElement
+attributes
+operations
+end
+
+class GraphConnector
+attributes
+operations
+end
+
+class DiagramLink
+attributes
+	zoom : Real
+operations
+end
+
+abstract class SemanticModelBridge
+attributes
+	presentation : String
+operations
+end
+
+class Diagram<GraphNode
+attributes
+	name : String
+	zoom : Real
+operations
+end
+
+class SimpleSemanticModelElement<SemanticModelBridge
+attributes
+	typeInfo : String
+operations
+end
+
+class UML1SemanticModelBridge<SemanticModelBridge
+attributes
+operations
+end
+
+class CoreSemanticModelBridge<SemanticModelBridge
+attributes
+operations
+end
+
+class CoreElement
+attributes
+operations
+end
+
+class ElementsElement
+attributes
+operations
+end
+
+abstract class LeafElement<DiagramElement
+attributes
+operations
+end
+
+class TextElement<LeafElement
+attributes
+	text : String
+operations
+end
+
+class Image<LeafElement
+attributes
+	uri : String
+	mimeType : String
+operations
+end
+
+abstract class GraphicPrimitive<LeafElement
+attributes
+operations
+end
+
+class Polyline<GraphicPrimitive
+attributes
+	closed : Boolean
+operations
+end
+
+class Ellipse<GraphicPrimitive
+attributes
+	radiusX : Real
+	radiusY : Real
+	rotation : Real
+	startAngle : Real
+	endAngle : Real
+operations
+end
+
+association xxx_BezierPoint_controls between
+	BezierPoint[*] role xxx_BezierPoint_controls_src
+	Point[0..2] role controls
+end
+
+composition xxx_DiagramElement_properties between
+	DiagramElement[0..1] role xxx_DiagramElement_properties_src
+	Property[*] role properties
+end
+
+association xxx_DiagramElement_references between
+	DiagramElement[0..1] role xxx_DiagramElement_references_src
+	Reference[*] role references
+end
+
+association xxx_DiagramElement_de_container between
+	DiagramElement[*] role xxx_DiagramElement_de_container_src
+	GraphElement[0..1] role de_container
+end
+
+association xxx_Reference_referenced between
+	Reference[*] role xxx_Reference_referenced_src
+	DiagramElement[1] role referenced
+end
+
+association xxx_GraphElement_position between
+	GraphElement[*] role xxx_GraphElement_position_src
+	Point[1] role position
+end
+
+composition xxx_GraphElement_contained between
+	GraphElement[0..1] role xxx_GraphElement_contained_src
+	DiagramElement[*] role contained
+end
+
+composition xxx_GraphElement_semanticModel between
+	GraphElement[*] role xxx_GraphElement_semanticModel_src
+	SemanticModelBridge[1] role semanticModel
+end
+
+composition xxx_GraphElement_anchorages between
+	GraphElement[0..1] role xxx_GraphElement_anchorages_src
+	GraphConnector[*] role anchorages
+end
+
+composition xxx_GraphElement_links between
+	GraphElement[0..1] role xxx_GraphElement_links_src
+	DiagramLink[*] role links
+end
+
+association xxx_GraphEdge_waypoints between
+	GraphEdge[*] role xxx_GraphEdge_waypoints_src
+	Point[0..2] role waypoints
+end
+
+association xxx_GraphEdge_anchors between
+	GraphEdge[*] role xxx_GraphEdge_anchors_src
+	GraphConnector[2] role anchors
+end
+
+association xxx_GraphNode_size between
+	GraphNode[*] role xxx_GraphNode_size_src
+	Dimension[0..1] role size
+end
+
+association xxx_GraphConnector_position between
+	GraphConnector[*] role xxx_GraphConnector_position_src
+	Point[1] role position
+end
+
+association xxx_GraphConnector_gc_graphElement between
+	GraphConnector[*] role xxx_GraphConnector_gc_graphElement_src
+	GraphElement[1] role gc_graphElement
+end
+
+association xxx_GraphConnector_graphEdges between
+	GraphConnector[0..1] role xxx_GraphConnector_graphEdges_src
+	GraphEdge[*] role graphEdges
+end
+
+association xxx_DiagramLink_viewPort between
+	DiagramLink[*] role xxx_DiagramLink_viewPort_src
+	Point[1] role viewPort
+end
+
+association xxx_DiagramLink_dl_graphElement between
+	DiagramLink[*] role xxx_DiagramLink_dl_graphElement_src
+	GraphElement[1] role dl_graphElement
+end
+
+association xxx_DiagramLink_dl_diagram between
+	DiagramLink[*] role xxx_DiagramLink_dl_diagram_src
+	Diagram[1] role dl_diagram
+end
+
+association xxx_SemanticModelBridge_smb_graphElement between
+	SemanticModelBridge[*] role xxx_SemanticModelBridge_smb_graphElement_src
+	GraphElement[0..1] role smb_graphElement
+end
+
+association xxx_SemanticModelBridge_smb_diagram between
+	SemanticModelBridge[*] role xxx_SemanticModelBridge_smb_diagram_src
+	Diagram[0..1] role smb_diagram
+end
+
+association xxx_Diagram_viewPort between
+	Diagram[*] role xxx_Diagram_viewPort_src
+	Point[1] role viewPort
+end
+
+association xxx_Diagram_diagramLinks between
+	Diagram[0..1] role xxx_Diagram_diagramLinks_src
+	DiagramLink[*] role diagramLinks
+end
+
+composition xxx_Diagram_namespace between
+	Diagram[*] role xxx_Diagram_namespace_src
+	SemanticModelBridge[1] role namespace
+end
+
+association xxx_UML1SemanticModelBridge_element between
+	UML1SemanticModelBridge[*] role xxx_UML1SemanticModelBridge_element_src
+	CoreElement[1] role element
+end
+
+association xxx_CoreSemanticModelBridge_element between
+	CoreSemanticModelBridge[*] role xxx_CoreSemanticModelBridge_element_src
+	ElementsElement[1] role element
+end
+
+association xxx_Polyline_waypoints between
+	Polyline[0..1] role xxx_Polyline_waypoints_src
+	Point[2..*] role waypoints
+end
+
+association xxx_Ellipse_center between
+	Ellipse[*] role xxx_Ellipse_center_src
+	Point[1] role center
+end
+

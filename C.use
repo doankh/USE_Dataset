@@ -1,0 +1,204 @@
+model PrimitiveTypes
+class CDataType<CClassifier
+attributes
+operations
+end
+
+class CIntegral<CDataType
+attributes
+operations
+end
+
+class CFloating<CDataType
+attributes
+operations
+end
+
+class CBitField<CDataType
+attributes
+operations
+end
+
+class CVoid<CDataType
+attributes
+operations
+end
+
+class CEnumeration<CIntegral
+attributes
+operations
+end
+
+class CInt<CIntegral
+attributes
+operations
+end
+
+class CChar<CIntegral
+attributes
+operations
+end
+
+class CDouble<CFloating
+attributes
+operations
+end
+
+class CFloat<CFloating
+attributes
+operations
+end
+
+class CLongDouble<CFloating
+attributes
+operations
+end
+
+class CUnsignedInt<CInt
+attributes
+operations
+end
+
+class CLong<CInt
+attributes
+operations
+end
+
+class CLongLong<CInt
+attributes
+operations
+end
+
+class CShort<CInt
+attributes
+operations
+end
+
+class CSignedChar<CChar
+attributes
+operations
+end
+
+class CUnsignedChar<CChar
+attributes
+operations
+end
+
+class CWChar<CChar
+attributes
+operations
+end
+
+class UnsignedLong<CUnsignedInt
+attributes
+operations
+end
+
+class UnsignedLongLong<CUnsignedInt
+attributes
+operations
+end
+
+class UnsignedShort<CUnsignedInt
+attributes
+operations
+end
+
+class CClassifier
+attributes
+operations
+end
+
+class Derived<CClassifier
+attributes
+operations
+end
+
+class CStructureContents
+attributes
+operations
+end
+
+class CStructured<CStructureContents
+attributes
+operations
+end
+
+class CStruct<CStructured
+attributes
+operations
+end
+
+class CUnion<CStructured
+attributes
+operations
+end
+
+class CSourceText
+attributes
+	source : String
+	fileName : String
+operations
+end
+
+class CTypedElement
+attributes
+operations
+end
+
+class CStructuralFeature<CTypedElement
+attributes
+operations
+end
+
+class CField<CStructuralFeature
+attributes
+operations
+end
+
+class CParameter<CTypedElement
+attributes
+operations
+end
+
+class BehavioralFeature
+attributes
+operations
+end
+
+class CFunction<BehavioralFeature
+attributes
+	isVarArg : Boolean
+operations
+end
+
+association xxx_CStructureContents_sc_container between
+	CStructureContents[*] role xxx_CStructureContents_sc_container_src
+	CStructured[0..1] role sc_container
+end
+
+composition xxx_CStructured_contains between
+	CStructured[0..1] role xxx_CStructured_contains_src
+	CStructureContents[*] role contains
+end
+
+association xxx_CTypedElement_type between
+	CTypedElement[*] role xxx_CTypedElement_type_src
+	CClassifier[1] role type
+end
+
+association xxx_CTypedElement_source between
+	CTypedElement[*] role xxx_CTypedElement_source_src
+	CSourceText[1] role source
+end
+
+association xxx_CParameter_behavioralFeature between
+	CParameter[*] role xxx_CParameter_behavioralFeature_src
+	BehavioralFeature[0..1] role behavioralFeature
+end
+
+composition xxx_BehavioralFeature_parameters between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_parameters_src
+	CParameter[*] role parameters
+end
+

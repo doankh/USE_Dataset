@@ -1,0 +1,118 @@
+model formsfamily
+class Form
+attributes
+	caption : String
+operations
+end
+
+class BasicItem<Item
+attributes
+operations
+end
+
+abstract class ItemType
+attributes
+operations
+end
+
+class FreeText<ItemType
+attributes
+operations
+end
+
+class Choice<ItemType
+attributes
+	multiple : Boolean
+operations
+end
+
+class Option
+attributes
+	id : String
+	text : String
+operations
+end
+
+class Date<ItemType
+attributes
+operations
+end
+
+class Number<ItemType
+attributes
+operations
+end
+
+class Group
+attributes
+	name : String
+operations
+end
+
+class Decision<ItemType
+attributes
+operations
+end
+
+class LikertScale<Item
+attributes
+operations
+end
+
+class GuttmanScale<Item
+attributes
+operations
+end
+
+abstract class Item
+attributes
+	text : String
+	explanation : String
+operations
+end
+
+composition xxx_Form_groups between
+	Form[0..1] role xxx_Form_groups_src
+	Group[1..*] role groups
+end
+
+composition xxx_BasicItem_itemType between
+	BasicItem[*] role xxx_BasicItem_itemType_src
+	ItemType[1] role itemType
+end
+
+association xxx_BasicItem_dependentOf between
+	BasicItem[0..1] role xxx_BasicItem_dependentOf_src
+	Option[*] role dependentOf
+end
+
+composition xxx_Choice_options between
+	Choice[0..1] role xxx_Choice_options_src
+	Option[1..*] role options
+end
+
+composition xxx_Group_items between
+	Group[0..1] role xxx_Group_items_src
+	Item[1..*] role items
+end
+
+association xxx_Group_form between
+	Group[*] role xxx_Group_form_src
+	Form[0..1] role form
+end
+
+composition xxx_Decision_options between
+	Decision[*] role xxx_Decision_options_src
+	Option[2] role options
+end
+
+composition xxx_LikertScale_options between
+	LikertScale[0..1] role xxx_LikertScale_options_src
+	Option[1..*] role options
+end
+
+composition xxx_GuttmanScale_options between
+	GuttmanScale[0..1] role xxx_GuttmanScale_options_src
+	Option[1..*] role options
+end
+

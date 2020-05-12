@@ -1,0 +1,132 @@
+model test
+enum StudentType{
+default
+}
+
+class Student
+attributes
+	nicknames : String
+	name : String
+	type : StudentType
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class UnaryExpression<Expression
+attributes
+	operator : String
+operations
+end
+
+abstract class BinaryExpression<UnaryExpression
+attributes
+operations
+end
+
+class IntegerExpression<Expression
+attributes
+	value : Integer
+operations
+end
+
+class BracketExpression<BinaryExpression
+attributes
+operations
+end
+
+class ExpressionContainer
+attributes
+	isEvaluated : Boolean
+operations
+end
+
+abstract class Person
+attributes
+	name : String
+operations
+end
+
+abstract class Addressable
+attributes
+	address : String
+operations
+end
+
+abstract class AddressablePerson<Addressable,Person
+attributes
+operations
+end
+
+class Employee<AddressablePerson
+attributes
+	nickname : String
+operations
+end
+
+class Manager<AddressablePerson
+attributes
+	num_employees : Integer
+operations
+end
+
+class AddressBook
+attributes
+operations
+end
+
+class Author
+attributes
+	name : String
+operations
+end
+
+class Book
+attributes
+	title : String
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+association xxx_UnaryExpression_left between
+	UnaryExpression[*] role xxx_UnaryExpression_left_src
+	Expression[1] role left
+end
+
+association xxx_BinaryExpression_right between
+	BinaryExpression[*] role xxx_BinaryExpression_right_src
+	Expression[1] role right
+end
+
+association xxx_ExpressionContainer_expression between
+	ExpressionContainer[*] role xxx_ExpressionContainer_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_AddressBook_entries between
+	AddressBook[0..1] role xxx_AddressBook_entries_src
+	AddressablePerson[*] role entries
+end
+
+association xxx_Book_author between
+	Book[0..1] role xxx_Book_author_src
+	Author[*] role author
+end
+
+composition xxx_Library_books between
+	Library[0..1] role xxx_Library_books_src
+	Book[*] role books
+end
+
+composition xxx_Library_authors between
+	Library[0..1] role xxx_Library_authors_src
+	Author[*] role authors
+end
+

@@ -1,0 +1,48 @@
+model signature_and_call
+class Signature<Named
+attributes
+operations
+end
+
+class Parameter<Named
+attributes
+operations
+end
+
+class Named
+attributes
+	name : String
+operations
+end
+
+class Call<Expression
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class StringLiteral<Expression
+attributes
+	symbol : String
+operations
+end
+
+composition xxx_Signature_parameters between
+	Signature[0..1] role xxx_Signature_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Call_signature between
+	Call[*] role xxx_Call_signature_src
+	Signature[1] role signature
+end
+
+composition xxx_Call_arguments between
+	Call[0..1] role xxx_Call_arguments_src
+	Expression[*] role arguments
+end
+

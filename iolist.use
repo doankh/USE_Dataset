@@ -1,0 +1,339 @@
+model model_
+enum DataType{
+default
+}
+
+enum Rounding{
+default
+}
+
+enum AverageReferenceType{
+default
+}
+
+enum MovingAverageReferenceType{
+default
+}
+
+class Item
+attributes
+	device : String
+	name : String
+	dataType : DataType
+	unit : String
+	alias : String
+	description : String
+	attributeSummaryLevel : Integer
+	eventCommand : Boolean
+	localManual : Boolean
+	localManualPreset : String
+	remoteManual : Boolean
+	system : String
+	hierarchy : String
+	remoteMin : Boolean
+	remoteMax : Boolean
+	remoteHighHigh : Boolean
+	remoteHigh : Boolean
+	remoteLow : Boolean
+	remoteLowLow : Boolean
+	remoteBool : Boolean
+	remoteBoolAckValue : String
+	input : Boolean
+	output : Boolean
+	localScaleAvailable : Boolean
+	localScaleFactor : String
+	localScaleOffset : String
+	debugInformation : String
+	ignoreSummary : Boolean
+	block : Boolean
+	enabled : Boolean
+	hdStorage : String
+	simulationValue : String
+	roundingAvailable : Boolean
+	roundingValue : Rounding
+	defaultMonitorDemote : String
+operations
+end
+
+class HierarchySummaryGroup<SummaryGroup
+attributes
+	name : String
+operations
+end
+
+class FormulaItem<Item
+attributes
+	inputFormula : String
+	outputFormula : String
+	outputDatasourceId : String
+	writeValueName : String
+	initScript : String
+	outputDatasourceType : DataType
+operations
+end
+
+class FormulaInput
+attributes
+	name : String
+	datasourceId : String
+	type : DataType
+operations
+end
+
+class ScriptModule
+attributes
+	data : String
+	resource : Boolean
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class ScriptItem<Item
+attributes
+	scriptEngine : String
+	initScript : String
+	updateScript : String
+	timerScript : String
+	timerPeriod : Integer
+	writeCommand : String
+operations
+	addInput(name : String,datasourceId : String,dataType : DataType)
+end
+
+class ScriptOutput
+attributes
+	datasourceId : String
+	name : String
+operations
+end
+
+class Mapper
+attributes
+	mapperId : String
+	fromAttribute : String
+	toAttribute : String
+operations
+end
+
+abstract class Monitor
+attributes
+	active : Boolean
+	suppressEvents : Boolean
+operations
+end
+
+class LevelMonitor<BasicMonitor
+attributes
+	preset : String
+operations
+end
+
+class ListMonitor<Monitor
+attributes
+	defaultAck : Boolean
+	defaultSeverity : String
+	messageAttribute : String
+operations
+end
+
+class BooleanMonitor<BasicMonitor
+attributes
+	okValue : Boolean
+operations
+end
+
+class Average
+attributes
+	id : String
+	sources : String
+	percentRequired : Real
+	numRequired : Integer
+operations
+end
+
+class AverageItem<Item
+attributes
+	type : AverageReferenceType
+operations
+end
+
+class ConstantItem<Item
+attributes
+operations
+end
+
+class MovingAverageItem<Item
+attributes
+	type : MovingAverageReferenceType
+operations
+end
+
+class MovingAverage
+attributes
+	id : String
+	source : String
+	trigger : Integer
+	range : Integer
+	nullRange : Integer
+	triggerOnly : Boolean
+operations
+end
+
+class ListMonitorEntry
+attributes
+	value : String
+	severity : String
+	requireAck : String
+operations
+end
+
+abstract class BasicMonitor<Monitor
+attributes
+	ack : Boolean
+	severity : String
+operations
+end
+
+class WeakSummaryReference
+attributes
+	dataSourceId : String
+operations
+end
+
+abstract class SummaryGroup
+attributes
+	dataSourceIds : String
+	hierarchy : String
+operations
+end
+
+class PlainSummaryGroup<SummaryGroup
+attributes
+	id : String
+operations
+end
+
+composition xxx_Item_mapper between
+	Item[0..1] role xxx_Item_mapper_src
+	Mapper[*] role mapper
+end
+
+composition xxx_Item_localHighHigh between
+	Item[*] role xxx_Item_localHighHigh_src
+	LevelMonitor[0..1] role localHighHigh
+end
+
+composition xxx_Item_localHigh between
+	Item[*] role xxx_Item_localHigh_src
+	LevelMonitor[0..1] role localHigh
+end
+
+composition xxx_Item_localLow between
+	Item[*] role xxx_Item_localLow_src
+	LevelMonitor[0..1] role localLow
+end
+
+composition xxx_Item_localLowLow between
+	Item[*] role xxx_Item_localLowLow_src
+	LevelMonitor[0..1] role localLowLow
+end
+
+composition xxx_Item_localMin between
+	Item[*] role xxx_Item_localMin_src
+	LevelMonitor[0..1] role localMin
+end
+
+composition xxx_Item_localMax between
+	Item[*] role xxx_Item_localMax_src
+	LevelMonitor[0..1] role localMax
+end
+
+composition xxx_Item_localListMonitor between
+	Item[*] role xxx_Item_localListMonitor_src
+	ListMonitor[0..1] role localListMonitor
+end
+
+composition xxx_Item_localBooleanMonitor between
+	Item[*] role xxx_Item_localBooleanMonitor_src
+	BooleanMonitor[0..1] role localBooleanMonitor
+end
+
+association xxx_HierarchySummaryGroup_parent between
+	HierarchySummaryGroup[*] role xxx_HierarchySummaryGroup_parent_src
+	HierarchySummaryGroup[0..1] role parent
+end
+
+composition xxx_HierarchySummaryGroup_children between
+	HierarchySummaryGroup[0..1] role xxx_HierarchySummaryGroup_children_src
+	HierarchySummaryGroup[*] role children
+end
+
+composition xxx_HierarchySummaryGroup_weakReferences between
+	HierarchySummaryGroup[0..1] role xxx_HierarchySummaryGroup_weakReferences_src
+	WeakSummaryReference[*] role weakReferences
+end
+
+composition xxx_FormulaItem_inputs between
+	FormulaItem[0..1] role xxx_FormulaItem_inputs_src
+	FormulaInput[*] role inputs
+end
+
+composition xxx_FormulaItem_scriptModules between
+	FormulaItem[0..1] role xxx_FormulaItem_scriptModules_src
+	ScriptModule[*] role scriptModules
+end
+
+composition xxx_Model_items between
+	Model[0..1] role xxx_Model_items_src
+	Item[*] role items
+end
+
+composition xxx_Model_averages between
+	Model[0..1] role xxx_Model_averages_src
+	Average[*] role averages
+end
+
+composition xxx_Model_movingAverages between
+	Model[0..1] role xxx_Model_movingAverages_src
+	MovingAverage[*] role movingAverages
+end
+
+composition xxx_Model_rootSummary between
+	Model[*] role xxx_Model_rootSummary_src
+	HierarchySummaryGroup[0..1] role rootSummary
+end
+
+composition xxx_Model_plainSummary between
+	Model[0..1] role xxx_Model_plainSummary_src
+	PlainSummaryGroup[*] role plainSummary
+end
+
+composition xxx_ScriptItem_inputs between
+	ScriptItem[0..1] role xxx_ScriptItem_inputs_src
+	FormulaInput[*] role inputs
+end
+
+composition xxx_ScriptItem_outputs between
+	ScriptItem[0..1] role xxx_ScriptItem_outputs_src
+	ScriptOutput[*] role outputs
+end
+
+composition xxx_ListMonitor_entries between
+	ListMonitor[0..1] role xxx_ListMonitor_entries_src
+	ListMonitorEntry[*] role entries
+end
+
+association xxx_AverageItem_average between
+	AverageItem[*] role xxx_AverageItem_average_src
+	Average[1] role average
+end
+
+association xxx_MovingAverageItem_average between
+	MovingAverageItem[*] role xxx_MovingAverageItem_average_src
+	MovingAverage[1] role average
+end
+

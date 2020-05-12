@@ -1,0 +1,50 @@
+model TestPackage
+enum TestEnum{
+default
+}
+
+enum SubTestEnum{
+default
+}
+
+class TestClass<SuperClass,UberClass
+attributes
+operations
+	testOp(testParam : Boolean,testParam2 : String):String
+	testOp1():String
+	testOp2():String
+	testOp3():String
+	testOp4():String
+	testOp5():String
+	testVoidOp()
+	testOp6():String
+	testOp7():String
+	testOp8():String
+	testOp9(testParam : Boolean,testParam2 : String):String
+end
+
+abstract class TestInterface<SuperClass
+attributes
+operations
+end
+
+abstract class SuperClass
+attributes
+operations
+end
+
+abstract class UberClass
+attributes
+operations
+end
+
+class SubTestClass
+attributes
+operations
+end
+
+abstract class SubTestInterface
+attributes
+operations
+end
+

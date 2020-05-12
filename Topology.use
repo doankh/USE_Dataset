@@ -1,0 +1,137 @@
+model Topology
+enum OpenFlowVersion{
+default
+}
+
+abstract class NetworkElement<NamedElement
+attributes
+	ip : String
+	dpid : String
+	prefix : Integer
+	mac : String
+operations
+end
+
+class Switch<NetworkElement
+attributes
+	nebsVersion : Integer
+	mTimeToFailure : Integer
+	mTimeToRepair : Integer
+operations
+end
+
+class NetworkEnvironment<NamedElement
+attributes
+	ofVersion : OpenFlowVersion
+operations
+end
+
+class Network<NamedElement
+attributes
+operations
+end
+
+class Port<NamedElement
+attributes
+	id : Integer
+	hwAddr : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Host<NetworkElement
+attributes
+operations
+end
+
+class Connector
+attributes
+	jitter : Real
+	bitErrorRate : Real
+	datarate : Real
+	latency : Real
+operations
+end
+
+class Controller<NamedElement
+attributes
+	ip : String
+	portNo : Integer
+operations
+end
+
+association xxx_NetworkElement_topology between
+	NetworkElement[*] role xxx_NetworkElement_topology_src
+	Network[1] role topology
+end
+
+composition xxx_NetworkElement_ports between
+	NetworkElement[0..1] role xxx_NetworkElement_ports_src
+	Port[1..*] role ports
+end
+
+association xxx_Switch_controller between
+	Switch[*] role xxx_Switch_controller_src
+	Controller[0..1] role controller
+end
+
+composition xxx_NetworkEnvironment_networks between
+	NetworkEnvironment[0..1] role xxx_NetworkEnvironment_networks_src
+	Network[*] role networks
+end
+
+composition xxx_NetworkEnvironment_controllers between
+	NetworkEnvironment[0..1] role xxx_NetworkEnvironment_controllers_src
+	Controller[*] role controllers
+end
+
+composition xxx_Network_networkelements between
+	Network[0..1] role xxx_Network_networkelements_src
+	NetworkElement[*] role networkelements
+end
+
+association xxx_Network_networkenvironment between
+	Network[*] role xxx_Network_networkenvironment_src
+	NetworkEnvironment[1] role networkenvironment
+end
+
+composition xxx_Network_connectors between
+	Network[0..1] role xxx_Network_connectors_src
+	Connector[*] role connectors
+end
+
+association xxx_Port_networkelement between
+	Port[*] role xxx_Port_networkelement_src
+	NetworkElement[1] role networkelement
+end
+
+association xxx_Port_connector between
+	Port[*] role xxx_Port_connector_src
+	Connector[0..1] role connector
+end
+
+association xxx_Connector_connectedports between
+	Connector[*] role xxx_Connector_connectedports_src
+	Port[2] role connectedports
+end
+
+association xxx_Connector_network between
+	Connector[*] role xxx_Connector_network_src
+	Network[1] role network
+end
+
+association xxx_Controller_switches between
+	Controller[0..1] role xxx_Controller_switches_src
+	Switch[*] role switches
+end
+
+association xxx_Controller_networkenvironment between
+	Controller[*] role xxx_Controller_networkenvironment_src
+	NetworkEnvironment[1] role networkenvironment
+end
+

@@ -1,0 +1,140 @@
+model PNML
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class IdedElement<LocatedElement
+attributes
+	id : String
+operations
+end
+
+class URI<LocatedElement
+attributes
+	value : String
+operations
+end
+
+class PNMLDocument<LocatedElement
+attributes
+operations
+end
+
+class NetElement<IdedElement
+attributes
+operations
+end
+
+abstract class NetContent<LocatedElement
+attributes
+operations
+end
+
+abstract class LabeledElement<LocatedElement
+attributes
+operations
+end
+
+class Label<LocatedElement
+attributes
+	text : String
+operations
+end
+
+class Name<LabeledElement
+attributes
+operations
+end
+
+abstract class NetContentElement<IdedElement
+attributes
+operations
+end
+
+class Arc<IdedElement
+attributes
+operations
+end
+
+class Place<NetContentElement
+attributes
+operations
+end
+
+class Transition<NetContentElement
+attributes
+operations
+end
+
+composition xxx_PNMLDocument_xmlns between
+	PNMLDocument[*] role xxx_PNMLDocument_xmlns_src
+	URI[1] role xmlns
+end
+
+composition xxx_PNMLDocument_nets between
+	PNMLDocument[0..1] role xxx_PNMLDocument_nets_src
+	NetElement[1..*] role nets
+end
+
+composition xxx_NetElement_type between
+	NetElement[*] role xxx_NetElement_type_src
+	URI[1] role type
+end
+
+association xxx_NetElement_document between
+	NetElement[*] role xxx_NetElement_document_src
+	PNMLDocument[1] role document
+end
+
+composition xxx_NetElement_contents between
+	NetElement[0..1] role xxx_NetElement_contents_src
+	NetContent[*] role contents
+end
+
+composition xxx_NetElement_name between
+	NetElement[*] role xxx_NetElement_name_src
+	Name[0..1] role name
+end
+
+association xxx_NetContent_net between
+	NetContent[*] role xxx_NetContent_net_src
+	NetElement[1] role net
+end
+
+composition xxx_NetContent_name between
+	NetContent[*] role xxx_NetContent_name_src
+	Name[0..1] role name
+end
+
+composition xxx_LabeledElement_labels between
+	LabeledElement[0..1] role xxx_LabeledElement_labels_src
+	Label[*] role labels
+end
+
+association xxx_Label_labeledElement between
+	Label[*] role xxx_Label_labeledElement_src
+	LabeledElement[1] role labeledElement
+end
+
+association xxx_Name_net between
+	Name[*] role xxx_Name_net_src
+	NetElement[0..1] role net
+end
+
+association xxx_Name_netContent between
+	Name[*] role xxx_Name_netContent_src
+	NetContent[0..1] role netContent
+end
+
+association xxx_Arc_source between
+	Arc[*] role xxx_Arc_source_src
+	NetContentElement[1] role source
+end
+
+association xxx_Arc_target between
+	Arc[*] role xxx_Arc_target_src
+	NetContentElement[1] role target
+end
+

@@ -1,0 +1,226 @@
+model UMLConfig
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class UMLConfig<NamedElement
+attributes
+operations
+end
+
+abstract class Entity<NamedElement
+attributes
+operations
+end
+
+class ActivityGroup<Entity
+attributes
+	no : Integer
+operations
+end
+
+class InitialThread<Entity
+attributes
+operations
+end
+
+class CallStack
+attributes
+operations
+end
+
+class Object<Entity
+attributes
+	type : String
+operations
+end
+
+class Port<Entity
+attributes
+	type : String
+operations
+end
+
+class Observer<Entity
+attributes
+	type : String
+operations
+end
+
+class EventSet
+attributes
+operations
+end
+
+class Event
+attributes
+	number : Integer
+operations
+end
+
+class Action
+attributes
+	kind : String
+	value : String
+operations
+end
+
+abstract class Time<Entity
+attributes
+operations
+end
+
+class DiscreteTime<Time
+attributes
+operations
+end
+
+class DbmTime<Time
+attributes
+operations
+end
+
+class Pid<VariableValue,NamedElement
+attributes
+	number : Integer
+operations
+end
+
+abstract class VariableValue
+attributes
+operations
+end
+
+class Queue
+attributes
+operations
+end
+
+class Message
+attributes
+	signalType : String
+operations
+end
+
+composition xxx_UMLConfig_activityGroups between
+	UMLConfig[0..1] role xxx_UMLConfig_activityGroups_src
+	ActivityGroup[*] role activityGroups
+end
+
+composition xxx_UMLConfig_initialThread between
+	UMLConfig[*] role xxx_UMLConfig_initialThread_src
+	InitialThread[0..1] role initialThread
+end
+
+composition xxx_UMLConfig_objects between
+	UMLConfig[0..1] role xxx_UMLConfig_objects_src
+	Object[*] role objects
+end
+
+composition xxx_UMLConfig_ports between
+	UMLConfig[0..1] role xxx_UMLConfig_ports_src
+	Port[*] role ports
+end
+
+composition xxx_UMLConfig_observers between
+	UMLConfig[0..1] role xxx_UMLConfig_observers_src
+	Observer[*] role observers
+end
+
+composition xxx_UMLConfig_time between
+	UMLConfig[*] role xxx_UMLConfig_time_src
+	Time[0..1] role time
+end
+
+association xxx_ActivityGroup_objects between
+	ActivityGroup[0..1] role xxx_ActivityGroup_objects_src
+	Object[*] role objects
+end
+
+composition xxx_ActivityGroup_queue between
+	ActivityGroup[*] role xxx_ActivityGroup_queue_src
+	Queue[0..1] role queue
+end
+
+association xxx_ActivityGroup_runing between
+	ActivityGroup[*] role xxx_ActivityGroup_runing_src
+	Object[0..1] role runing
+end
+
+composition xxx_ActivityGroup_callStack between
+	ActivityGroup[*] role xxx_ActivityGroup_callStack_src
+	CallStack[0..1] role callStack
+end
+
+composition xxx_InitialThread_callStack between
+	InitialThread[*] role xxx_InitialThread_callStack_src
+	CallStack[0..1] role callStack
+end
+
+composition xxx_Object_ports between
+	Object[0..1] role xxx_Object_ports_src
+	Port[*] role ports
+end
+
+composition xxx_Object_queue between
+	Object[*] role xxx_Object_queue_src
+	Queue[0..1] role queue
+end
+
+composition xxx_Port_queue between
+	Port[*] role xxx_Port_queue_src
+	Queue[0..1] role queue
+end
+
+composition xxx_Observer_eventSet between
+	Observer[*] role xxx_Observer_eventSet_src
+	EventSet[0..1] role eventSet
+end
+
+composition xxx_EventSet_events between
+	EventSet[0..1] role xxx_EventSet_events_src
+	Event[*] role events
+end
+
+composition xxx_Event_actions between
+	Event[0..1] role xxx_Event_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Action_process between
+	Action[*] role xxx_Action_process_src
+	Pid[0..1] role process
+end
+
+composition xxx_Action_by between
+	Action[*] role xxx_Action_by_src
+	Pid[0..1] role by
+end
+
+composition xxx_Action_from_ between
+	Action[*] role xxx_Action_from__src
+	Pid[0..1] role from_
+end
+
+composition xxx_Action_via between
+	Action[*] role xxx_Action_via_src
+	Pid[0..1] role via
+end
+
+composition xxx_Action_to between
+	Action[*] role xxx_Action_to_src
+	Pid[0..1] role to
+end
+
+composition xxx_Queue_messages between
+	Queue[0..1] role xxx_Queue_messages_src
+	Message[*] role messages
+end
+
+composition xxx_Message_destinationPid between
+	Message[*] role xxx_Message_destinationPid_src
+	Pid[0..1] role destinationPid
+end
+

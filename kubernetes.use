@@ -1,0 +1,93 @@
+model kubernetes
+enum ServiceType{
+default
+}
+
+enum CloudType{
+default
+}
+
+class Service
+attributes
+	name : String
+	port : Integer
+	targetPort : Integer
+	type : ServiceType
+operations
+end
+
+class Deployment
+attributes
+	replicas : Integer
+operations
+end
+
+class Container
+attributes
+	name : String
+	image : String
+	containerPort : Integer
+operations
+end
+
+class Label
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Kubernetes
+attributes
+	cloud : CloudType
+	name : String
+operations
+end
+
+class Environment
+attributes
+	name : String
+	value : String
+operations
+end
+
+association xxx_Service_deployment between
+	Service[*] role xxx_Service_deployment_src
+	Deployment[1] role deployment
+end
+
+association xxx_Deployment_labels between
+	Deployment[0..1] role xxx_Deployment_labels_src
+	Label[1..*] role labels
+end
+
+composition xxx_Deployment_containers between
+	Deployment[0..1] role xxx_Deployment_containers_src
+	Container[*] role containers
+end
+
+association xxx_Container_environments between
+	Container[0..1] role xxx_Container_environments_src
+	Environment[*] role environments
+end
+
+composition xxx_Kubernetes_services between
+	Kubernetes[0..1] role xxx_Kubernetes_services_src
+	Service[*] role services
+end
+
+composition xxx_Kubernetes_deps between
+	Kubernetes[0..1] role xxx_Kubernetes_deps_src
+	Deployment[*] role deps
+end
+
+composition xxx_Kubernetes_envs between
+	Kubernetes[0..1] role xxx_Kubernetes_envs_src
+	Environment[*] role envs
+end
+
+composition xxx_Kubernetes_labs between
+	Kubernetes[0..1] role xxx_Kubernetes_labs_src
+	Label[*] role labs
+end
+

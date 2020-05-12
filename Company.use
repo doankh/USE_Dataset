@@ -1,0 +1,142 @@
+model company
+enum VAT{
+default
+}
+
+abstract class Addressable
+attributes
+	name : String
+	street : String
+	city : String
+operations
+end
+
+class Company<Addressable
+attributes
+operations
+end
+
+class Supplier<Addressable
+attributes
+	preferred : Boolean
+operations
+end
+
+class Customer<Addressable
+attributes
+operations
+end
+
+class Order
+attributes
+operations
+end
+
+class OrderDetail
+attributes
+	price : Real
+operations
+end
+
+class PurchaseOrder<Order
+attributes
+	date : String
+operations
+end
+
+class SalesOrder<Order
+attributes
+	id : Integer
+operations
+end
+
+class Category
+attributes
+	name : String
+operations
+end
+
+class Product
+attributes
+	name : String
+	vat : VAT
+	description : String
+	price : Real
+operations
+end
+
+composition xxx_Company_categories between
+	Company[0..1] role xxx_Company_categories_src
+	Category[*] role categories
+end
+
+composition xxx_Company_suppliers between
+	Company[0..1] role xxx_Company_suppliers_src
+	Supplier[*] role suppliers
+end
+
+composition xxx_Company_customers between
+	Company[0..1] role xxx_Company_customers_src
+	Customer[*] role customers
+end
+
+composition xxx_Company_purchaseOrders between
+	Company[0..1] role xxx_Company_purchaseOrders_src
+	PurchaseOrder[*] role purchaseOrders
+end
+
+composition xxx_Company_salesOrders between
+	Company[0..1] role xxx_Company_salesOrders_src
+	SalesOrder[*] role salesOrders
+end
+
+association xxx_Supplier_purchaseOrders between
+	Supplier[0..1] role xxx_Supplier_purchaseOrders_src
+	PurchaseOrder[*] role purchaseOrders
+end
+
+association xxx_Customer_salesOrders between
+	Customer[0..1] role xxx_Customer_salesOrders_src
+	SalesOrder[*] role salesOrders
+end
+
+composition xxx_Order_orderDetails between
+	Order[0..1] role xxx_Order_orderDetails_src
+	OrderDetail[*] role orderDetails
+end
+
+association xxx_OrderDetail_order between
+	OrderDetail[*] role xxx_OrderDetail_order_src
+	Order[1] role order
+end
+
+association xxx_OrderDetail_product between
+	OrderDetail[*] role xxx_OrderDetail_product_src
+	Product[0..1] role product
+end
+
+association xxx_PurchaseOrder_supplier between
+	PurchaseOrder[*] role xxx_PurchaseOrder_supplier_src
+	Supplier[1] role supplier
+end
+
+association xxx_SalesOrder_customer between
+	SalesOrder[*] role xxx_SalesOrder_customer_src
+	Customer[1] role customer
+end
+
+composition xxx_Category_categories between
+	Category[0..1] role xxx_Category_categories_src
+	Category[*] role categories
+end
+
+composition xxx_Category_products between
+	Category[0..1] role xxx_Category_products_src
+	Product[*] role products
+end
+
+association xxx_Product_orderDetails between
+	Product[0..1] role xxx_Product_orderDetails_src
+	OrderDetail[*] role orderDetails
+end
+

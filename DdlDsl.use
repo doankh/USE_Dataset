@@ -1,0 +1,295 @@
+model ddlDsl
+enum SortDirectionEnum{
+default
+}
+
+class Ddl
+attributes
+operations
+end
+
+class DdlStatement
+attributes
+operations
+end
+
+class Alter<DdlStatement
+attributes
+operations
+end
+
+class AlterTableAction
+attributes
+operations
+end
+
+class DropTableConstraint<AlterTableAction
+attributes
+operations
+end
+
+class Comment<DdlStatement
+attributes
+	comment : String
+operations
+end
+
+class TableComment<Comment
+attributes
+operations
+end
+
+class ColumnComment<Comment
+attributes
+operations
+end
+
+class AddTableConstraint<AlterTableAction
+attributes
+	name : String
+operations
+end
+
+class Create<DdlStatement
+attributes
+	name : String
+operations
+end
+
+class CreateTable<Create
+attributes
+operations
+end
+
+class CreateIndex<Create
+attributes
+	unique : Boolean
+	sortOrders : SortDirectionEnum
+operations
+end
+
+class TableProperty
+attributes
+	name : String
+operations
+end
+
+class Column<TableProperty
+attributes
+	sorted : Boolean
+	default : String
+operations
+end
+
+class Drop<DdlStatement
+attributes
+	object : String
+operations
+end
+
+class Constraint<TableProperty
+attributes
+operations
+end
+
+class NullableConstraint<Constraint
+attributes
+	not_ : Boolean
+operations
+end
+
+class UniqueKeyConstraint<Constraint
+attributes
+operations
+end
+
+class PrimaryKeyConstraint<Constraint
+attributes
+operations
+end
+
+class ForeignKeyConstraint<Constraint
+attributes
+operations
+end
+
+class ReferenceClause
+attributes
+operations
+end
+
+class SqlDataType
+attributes
+	name : String
+operations
+end
+
+class SqlCharacter<SqlDataType
+attributes
+	national : Boolean
+	size : Integer
+operations
+end
+
+class SqlNumber<SqlDataType
+attributes
+	hasPrecision : Boolean
+	precision : Integer
+	scale : Integer
+operations
+end
+
+class LongRaw<SqlDataType
+attributes
+operations
+end
+
+class Long<LongRaw
+attributes
+	raw : Boolean
+operations
+end
+
+class Raw<LongRaw
+attributes
+	size : Integer
+operations
+end
+
+class SqlDateTime<SqlDataType
+attributes
+operations
+end
+
+class SqlDate<SqlDateTime
+attributes
+operations
+end
+
+class SqlTimeStamp<SqlDateTime
+attributes
+	precision : Integer
+operations
+end
+
+class SqlInterval<SqlDateTime
+attributes
+	year : Boolean
+	day : Boolean
+	precision : Integer
+	secondsPrecision : Integer
+operations
+end
+
+class LargeObjectType<SqlDataType
+attributes
+	size : Integer
+operations
+end
+
+class RowIdType<SqlDataType
+attributes
+	size : Integer
+operations
+end
+
+class SqlBoolean<SqlDataType
+attributes
+operations
+end
+
+composition xxx_Ddl_statements between
+	Ddl[0..1] role xxx_Ddl_statements_src
+	DdlStatement[*] role statements
+end
+
+association xxx_Alter_table between
+	Alter[*] role xxx_Alter_table_src
+	CreateTable[0..1] role table
+end
+
+composition xxx_Alter_action between
+	Alter[*] role xxx_Alter_action_src
+	AlterTableAction[0..1] role action
+end
+
+composition xxx_AlterTableAction_constraint between
+	AlterTableAction[*] role xxx_AlterTableAction_constraint_src
+	Constraint[0..1] role constraint
+end
+
+association xxx_DropTableConstraint_constraintRef between
+	DropTableConstraint[*] role xxx_DropTableConstraint_constraintRef_src
+	Constraint[0..1] role constraintRef
+end
+
+association xxx_TableComment_table between
+	TableComment[*] role xxx_TableComment_table_src
+	CreateTable[0..1] role table
+end
+
+association xxx_ColumnComment_column between
+	ColumnComment[*] role xxx_ColumnComment_column_src
+	Column[0..1] role column
+end
+
+composition xxx_CreateTable_properties between
+	CreateTable[0..1] role xxx_CreateTable_properties_src
+	TableProperty[*] role properties
+end
+
+association xxx_CreateIndex_table between
+	CreateIndex[*] role xxx_CreateIndex_table_src
+	CreateTable[0..1] role table
+end
+
+association xxx_CreateIndex_columns between
+	CreateIndex[0..1] role xxx_CreateIndex_columns_src
+	Column[*] role columns
+end
+
+composition xxx_Column_type between
+	Column[*] role xxx_Column_type_src
+	SqlDataType[0..1] role type
+end
+
+composition xxx_Column_constraint between
+	Column[*] role xxx_Column_constraint_src
+	Constraint[0..1] role constraint
+end
+
+composition xxx_Column_reference between
+	Column[*] role xxx_Column_reference_src
+	ReferenceClause[0..1] role reference
+end
+
+association xxx_UniqueKeyConstraint_columns between
+	UniqueKeyConstraint[0..1] role xxx_UniqueKeyConstraint_columns_src
+	Column[*] role columns
+end
+
+association xxx_PrimaryKeyConstraint_columns between
+	PrimaryKeyConstraint[0..1] role xxx_PrimaryKeyConstraint_columns_src
+	Column[*] role columns
+end
+
+association xxx_ForeignKeyConstraint_columns between
+	ForeignKeyConstraint[0..1] role xxx_ForeignKeyConstraint_columns_src
+	Column[*] role columns
+end
+
+composition xxx_ForeignKeyConstraint_reference between
+	ForeignKeyConstraint[*] role xxx_ForeignKeyConstraint_reference_src
+	ReferenceClause[0..1] role reference
+end
+
+association xxx_ReferenceClause_table between
+	ReferenceClause[*] role xxx_ReferenceClause_table_src
+	CreateTable[0..1] role table
+end
+
+association xxx_ReferenceClause_columns between
+	ReferenceClause[0..1] role xxx_ReferenceClause_columns_src
+	Column[*] role columns
+end
+

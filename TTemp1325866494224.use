@@ -1,0 +1,124 @@
+model Graph
+class Graph
+attributes
+	id : String
+operations
+end
+
+class ID1006
+attributes
+	id : String
+	name : String
+operations
+end
+
+class TString
+attributes
+	id : String
+	name : String
+operations
+end
+
+class TBoolean
+attributes
+	value : Boolean
+operations
+end
+
+class TChar
+attributes
+	value : String
+operations
+end
+
+class TByte
+attributes
+	value : Boolean
+operations
+end
+
+class TShort
+attributes
+	value : Integer
+operations
+end
+
+class TInt
+attributes
+	value : Integer
+operations
+end
+
+class TLong
+attributes
+	value : Integer
+operations
+end
+
+class TFloat
+attributes
+	value : Real
+operations
+end
+
+class TDouble
+attributes
+	value : Real
+operations
+end
+
+composition xxx_Graph_id1006s between
+	Graph[0..1] role xxx_Graph_id1006s_src
+	ID1006[*] role id1006s
+end
+
+composition xxx_Graph_tBooleans between
+	Graph[0..1] role xxx_Graph_tBooleans_src
+	TBoolean[*] role tBooleans
+end
+
+composition xxx_Graph_tChars between
+	Graph[0..1] role xxx_Graph_tChars_src
+	TChar[*] role tChars
+end
+
+composition xxx_Graph_tBytes between
+	Graph[0..1] role xxx_Graph_tBytes_src
+	TByte[*] role tBytes
+end
+
+composition xxx_Graph_tShorts between
+	Graph[0..1] role xxx_Graph_tShorts_src
+	TShort[*] role tShorts
+end
+
+composition xxx_Graph_tInts between
+	Graph[0..1] role xxx_Graph_tInts_src
+	TInt[*] role tInts
+end
+
+composition xxx_Graph_tLongs between
+	Graph[0..1] role xxx_Graph_tLongs_src
+	TLong[*] role tLongs
+end
+
+composition xxx_Graph_tFloats between
+	Graph[0..1] role xxx_Graph_tFloats_src
+	TFloat[*] role tFloats
+end
+
+composition xxx_Graph_tDoubles between
+	Graph[0..1] role xxx_Graph_tDoubles_src
+	TDouble[*] role tDoubles
+end
+
+composition xxx_Graph_tStrings between
+	Graph[0..1] role xxx_Graph_tStrings_src
+	TString[*] role tStrings
+end
+
+association xxx_ID1006_outID1008s between
+	ID1006[0..1] role xxx_ID1006_outID1008s_src
+	TString[*] role outID1008s
+end
+

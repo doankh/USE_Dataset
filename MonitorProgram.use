@@ -1,0 +1,247 @@
+model MonitorProgram
+enum Direction{
+	in_,
+	out
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Structure<NamedElement
+attributes
+operations
+end
+
+abstract class ProcContainerElement<Structure
+attributes
+operations
+end
+
+class Program<ProcContainerElement
+attributes
+operations
+end
+
+class Monitor<ProcContainerElement
+attributes
+operations
+end
+
+class Procedure<Structure
+attributes
+operations
+end
+
+class VariableDeclaration<NamedElement
+attributes
+operations
+end
+
+class Parameter<VariableDeclaration
+attributes
+	direction : Direction
+operations
+end
+
+class Type<NamedElement
+attributes
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class VariableExp<Expression
+attributes
+operations
+end
+
+abstract class PropertyCallExp<Expression
+attributes
+	name : String
+operations
+end
+
+class OperatorCallExp<PropertyCallExp
+attributes
+operations
+end
+
+class AttributeCallExp<PropertyCallExp
+attributes
+operations
+end
+
+class ProcedureCallExp<PropertyCallExp
+attributes
+operations
+end
+
+abstract class LiteralExp<Expression
+attributes
+operations
+end
+
+class BooleanExp<LiteralExp
+attributes
+	symbol : Boolean
+operations
+end
+
+class IntegerExp<LiteralExp
+attributes
+	symbol : Integer
+operations
+end
+
+abstract class Statement<LocatedElement
+attributes
+operations
+end
+
+class AssignmentStat<Statement
+attributes
+operations
+end
+
+class ConditionalStat<Statement
+attributes
+operations
+end
+
+class WhileStat<Statement
+attributes
+operations
+end
+
+class ExpressionStat<Statement
+attributes
+operations
+end
+
+composition xxx_Structure_variables between
+	Structure[0..1] role xxx_Structure_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_ProcContainerElement_procedures between
+	ProcContainerElement[0..1] role xxx_ProcContainerElement_procedures_src
+	Procedure[*] role procedures
+end
+
+composition xxx_Program_monitors between
+	Program[0..1] role xxx_Program_monitors_src
+	Monitor[*] role monitors
+end
+
+association xxx_Monitor_program between
+	Monitor[*] role xxx_Monitor_program_src
+	Program[1] role program
+end
+
+association xxx_Procedure_container between
+	Procedure[*] role xxx_Procedure_container_src
+	ProcContainerElement[1] role container
+end
+
+composition xxx_Procedure_parameters between
+	Procedure[0..1] role xxx_Procedure_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Procedure_statements between
+	Procedure[0..1] role xxx_Procedure_statements_src
+	Statement[*] role statements
+end
+
+association xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	Type[1] role type
+end
+
+composition xxx_VariableDeclaration_initialValue between
+	VariableDeclaration[*] role xxx_VariableDeclaration_initialValue_src
+	Expression[0..1] role initialValue
+end
+
+association xxx_VariableDeclaration_structure between
+	VariableDeclaration[*] role xxx_VariableDeclaration_structure_src
+	Structure[1] role structure
+end
+
+association xxx_Parameter_procedure between
+	Parameter[*] role xxx_Parameter_procedure_src
+	Procedure[1] role procedure
+end
+
+association xxx_VariableExp_declaration between
+	VariableExp[*] role xxx_VariableExp_declaration_src
+	VariableDeclaration[1] role declaration
+end
+
+composition xxx_PropertyCallExp_source between
+	PropertyCallExp[*] role xxx_PropertyCallExp_source_src
+	Expression[1] role source
+end
+
+composition xxx_OperatorCallExp_right between
+	OperatorCallExp[*] role xxx_OperatorCallExp_right_src
+	Expression[1] role right
+end
+
+composition xxx_ProcedureCallExp_arguments between
+	ProcedureCallExp[0..1] role xxx_ProcedureCallExp_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_AssignmentStat_target between
+	AssignmentStat[*] role xxx_AssignmentStat_target_src
+	VariableExp[1] role target
+end
+
+composition xxx_AssignmentStat_value between
+	AssignmentStat[*] role xxx_AssignmentStat_value_src
+	Expression[1] role value
+end
+
+composition xxx_ConditionalStat_condition between
+	ConditionalStat[*] role xxx_ConditionalStat_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ConditionalStat_thenStats between
+	ConditionalStat[0..1] role xxx_ConditionalStat_thenStats_src
+	Statement[1..*] role thenStats
+end
+
+composition xxx_ConditionalStat_elseStats between
+	ConditionalStat[0..1] role xxx_ConditionalStat_elseStats_src
+	Statement[*] role elseStats
+end
+
+composition xxx_WhileStat_condition between
+	WhileStat[*] role xxx_WhileStat_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_WhileStat_doStats between
+	WhileStat[0..1] role xxx_WhileStat_doStats_src
+	Statement[1..*] role doStats
+end
+
+composition xxx_ExpressionStat_expression between
+	ExpressionStat[*] role xxx_ExpressionStat_expression_src
+	Expression[1] role expression
+end
+

@@ -1,0 +1,76 @@
+model customizationplugin
+class CustomizationConfiguration
+attributes
+	plugin : String
+operations
+end
+
+abstract class CustomizableElement
+attributes
+operations
+end
+
+abstract class FileBasedCustomizableElement<CustomizableElement
+attributes
+	file : String
+operations
+end
+
+class PropertyView<FileBasedCustomizableElement
+attributes
+operations
+end
+
+class UICustom<FileBasedCustomizableElement
+attributes
+	loadByDefault : Boolean
+operations
+end
+
+class ModelTemplate<FileBasedCustomizableElement
+attributes
+	language : String
+	name : String
+	id : String
+operations
+end
+
+class Palette<FileBasedCustomizableElement
+attributes
+operations
+end
+
+class Profile<FileBasedCustomizableElement
+attributes
+	qualifiednames : String
+	iconpath : String
+	description : String
+	provider : String
+	name : String
+operations
+end
+
+class UMLModel<FileBasedCustomizableElement
+attributes
+	name : String
+	iconpath : String
+	description : String
+	provider : String
+operations
+end
+
+class ConstraintsEnvironment<FileBasedCustomizableElement
+attributes
+operations
+end
+
+class PropertyViewEnvironment<FileBasedCustomizableElement
+attributes
+operations
+end
+
+composition xxx_CustomizationConfiguration_elements between
+	CustomizationConfiguration[0..1] role xxx_CustomizationConfiguration_elements_src
+	CustomizableElement[*] role elements
+end
+

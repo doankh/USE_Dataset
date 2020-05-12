@@ -1,0 +1,120 @@
+model epo2
+enum OrderStatus{
+default
+}
+
+class Item
+attributes
+	productName : String
+	quantity : Integer
+	USPrice : Integer
+	comment : String
+	shipDate : String
+	partNum : String
+operations
+end
+
+class USAddress<Address
+attributes
+	street : String
+	city : String
+	state : String
+	zip : Integer
+operations
+end
+
+class PurchaseOrder
+attributes
+	comment : String
+	orderDate : String
+	status : OrderStatus
+	totalAmount : Integer
+operations
+end
+
+abstract class Address
+attributes
+	name : String
+	country : String
+operations
+end
+
+class Supplier
+attributes
+	name : String
+operations
+end
+
+class Customer
+attributes
+	customerID : Integer
+operations
+end
+
+class GlobalAddress<Address,GlobalLocation
+attributes
+	location : String
+operations
+end
+
+class GlobalLocation
+attributes
+	countryCode : Integer
+operations
+end
+
+association xxx_Item_order between
+	Item[*] role xxx_Item_order_src
+	PurchaseOrder[1] role order
+end
+
+composition xxx_PurchaseOrder_items between
+	PurchaseOrder[0..1] role xxx_PurchaseOrder_items_src
+	Item[*] role items
+end
+
+composition xxx_PurchaseOrder_billTo between
+	PurchaseOrder[*] role xxx_PurchaseOrder_billTo_src
+	Address[1] role billTo
+end
+
+composition xxx_PurchaseOrder_shipTo between
+	PurchaseOrder[*] role xxx_PurchaseOrder_shipTo_src
+	Address[0..1] role shipTo
+end
+
+association xxx_PurchaseOrder_customer between
+	PurchaseOrder[*] role xxx_PurchaseOrder_customer_src
+	Customer[1] role customer
+end
+
+association xxx_PurchaseOrder_previousOrder between
+	PurchaseOrder[*] role xxx_PurchaseOrder_previousOrder_src
+	PurchaseOrder[0..1] role previousOrder
+end
+
+composition xxx_Supplier_customers between
+	Supplier[0..1] role xxx_Supplier_customers_src
+	Customer[*] role customers
+end
+
+composition xxx_Supplier_orders between
+	Supplier[0..1] role xxx_Supplier_orders_src
+	PurchaseOrder[*] role orders
+end
+
+association xxx_Supplier_pendingOrders between
+	Supplier[0..1] role xxx_Supplier_pendingOrders_src
+	PurchaseOrder[*] role pendingOrders
+end
+
+association xxx_Supplier_shippedOrders between
+	Supplier[0..1] role xxx_Supplier_shippedOrders_src
+	PurchaseOrder[*] role shippedOrders
+end
+
+association xxx_Customer_orders between
+	Customer[0..1] role xxx_Customer_orders_src
+	PurchaseOrder[*] role orders
+end
+

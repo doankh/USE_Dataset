@@ -1,0 +1,47 @@
+model CFG
+abstract class AbstractNode
+attributes
+operations
+end
+
+class Node<AbstractNode
+attributes
+operations
+end
+
+class ConditionalNode<AbstractNode
+attributes
+operations
+end
+
+class Expression
+attributes
+	expressionName : String
+operations
+end
+
+composition xxx_AbstractNode_expression between
+	AbstractNode[*] role xxx_AbstractNode_expression_src
+	Expression[1] role expression
+end
+
+association xxx_Node_inNode between
+	Node[*] role xxx_Node_inNode_src
+	Node[0..1] role inNode
+end
+
+association xxx_Node_outNode between
+	Node[*] role xxx_Node_outNode_src
+	Node[0..1] role outNode
+end
+
+association xxx_ConditionalNode_trueConditionNode between
+	ConditionalNode[*] role xxx_ConditionalNode_trueConditionNode_src
+	Node[1] role trueConditionNode
+end
+
+association xxx_ConditionalNode_falseConditionNode between
+	ConditionalNode[*] role xxx_ConditionalNode_falseConditionNode_src
+	Node[1] role falseConditionNode
+end
+

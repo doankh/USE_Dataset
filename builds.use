@@ -1,0 +1,350 @@
+model builds
+enum TestCaseResult{
+default
+}
+
+class StringToStringMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Artifact<BuildElement
+attributes
+	relativePath : String
+operations
+end
+
+class Build<BuildElement
+attributes
+	id : String
+	buildNumber : Integer
+	timestamp : Integer
+	duration : Integer
+	displayName : String
+	state : String
+	status : String
+	label : String
+	summary : String
+operations
+end
+
+class BuildCause
+attributes
+	description : String
+operations
+end
+
+class BuildReference
+attributes
+	plan : String
+	build : String
+operations
+end
+
+abstract class BuildElement
+attributes
+	url : String
+	name : String
+	operations_ : String
+	elementStatus : String
+	refreshDate : String
+operations
+	getLabel():String
+	getServer():BuildServer
+end
+
+class BuildPlan<BuildElement
+attributes
+	health : Integer
+	id : String
+	info : String
+	selected : Boolean
+	summary : String
+	state : String
+	status : String
+	description : String
+	flags : String
+operations
+end
+
+class HealthReport
+attributes
+	health : Integer
+	description : String
+operations
+end
+
+class BuildModel
+attributes
+operations
+end
+
+class BuildServer<BuildElement
+attributes
+	location : String
+	connectorKind : String
+	repositoryUrl : String
+operations
+end
+
+class Change
+attributes
+	message : String
+	date : Integer
+	revision : String
+operations
+end
+
+class ChangeSet
+attributes
+	kind : String
+operations
+end
+
+class ChangeArtifact
+attributes
+	file : String
+	relativePath : String
+	prevRevision : String
+	revision : String
+	dead : Boolean
+	editType : String
+operations
+end
+
+class User<BuildElement
+attributes
+	id : String
+	email : String
+operations
+end
+
+abstract class ParameterDefinition
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ChoiceParameterDefinition<ParameterDefinition
+attributes
+	options : String
+	defaultValue : String
+operations
+end
+
+class BooleanParameterDefinition<ParameterDefinition
+attributes
+	defaultValue : Boolean
+operations
+end
+
+class FileParameterDefinition<ParameterDefinition
+attributes
+operations
+end
+
+class PlanParameterDefinition<ParameterDefinition
+attributes
+operations
+end
+
+class PasswordParameterDefinition<ParameterDefinition
+attributes
+	defaultValue : String
+operations
+end
+
+class BuildParameterDefinition<ParameterDefinition
+attributes
+	buildPlanId : String
+operations
+end
+
+class StringParameterDefinition<ParameterDefinition
+attributes
+	defaultValue : String
+operations
+end
+
+class TestResult
+attributes
+	duration : Integer
+	failCount : Integer
+	passCount : Integer
+	ignoredCount : Integer
+	errorCount : Integer
+operations
+end
+
+class TestElement
+attributes
+	label : String
+	duration : Integer
+	errorOutput : String
+	output : String
+operations
+end
+
+class TestSuite<TestElement
+attributes
+operations
+end
+
+class TestCase<TestElement
+attributes
+	className : String
+	skipped : Boolean
+	status : TestCaseResult
+	message : String
+	stackTrace : String
+operations
+end
+
+composition xxx_Build_artifacts between
+	Build[0..1] role xxx_Build_artifacts_src
+	Artifact[*] role artifacts
+end
+
+composition xxx_Build_changeSet between
+	Build[*] role xxx_Build_changeSet_src
+	ChangeSet[0..1] role changeSet
+end
+
+association xxx_Build_plan between
+	Build[*] role xxx_Build_plan_src
+	BuildPlan[0..1] role plan
+end
+
+association xxx_Build_server between
+	Build[*] role xxx_Build_server_src
+	BuildServer[0..1] role server
+end
+
+composition xxx_Build_testResult between
+	Build[*] role xxx_Build_testResult_src
+	TestResult[0..1] role testResult
+end
+
+composition xxx_Build_culprits between
+	Build[0..1] role xxx_Build_culprits_src
+	User[*] role culprits
+end
+
+composition xxx_Build_cause between
+	Build[0..1] role xxx_Build_cause_src
+	BuildCause[*] role cause
+end
+
+composition xxx_BuildCause_build between
+	BuildCause[*] role xxx_BuildCause_build_src
+	BuildReference[0..1] role build
+end
+
+composition xxx_BuildCause_user between
+	BuildCause[*] role xxx_BuildCause_user_src
+	User[0..1] role user
+end
+
+composition xxx_BuildElement_attributes_ between
+	BuildElement[0..1] role xxx_BuildElement_attributes__src
+	StringToStringMap[*] role attributes_
+end
+
+association xxx_BuildPlan_server between
+	BuildPlan[*] role xxx_BuildPlan_server_src
+	BuildServer[1] role server
+end
+
+association xxx_BuildPlan_children between
+	BuildPlan[0..1] role xxx_BuildPlan_children_src
+	BuildPlan[*] role children
+end
+
+association xxx_BuildPlan_parent between
+	BuildPlan[*] role xxx_BuildPlan_parent_src
+	BuildPlan[0..1] role parent
+end
+
+association xxx_BuildPlan_lastBuild between
+	BuildPlan[*] role xxx_BuildPlan_lastBuild_src
+	Build[0..1] role lastBuild
+end
+
+composition xxx_BuildPlan_parameterDefinitions between
+	BuildPlan[0..1] role xxx_BuildPlan_parameterDefinitions_src
+	ParameterDefinition[*] role parameterDefinitions
+end
+
+composition xxx_BuildPlan_healthReports between
+	BuildPlan[0..1] role xxx_BuildPlan_healthReports_src
+	HealthReport[*] role healthReports
+end
+
+composition xxx_BuildModel_servers between
+	BuildModel[0..1] role xxx_BuildModel_servers_src
+	BuildServer[*] role servers
+end
+
+composition xxx_BuildModel_plans between
+	BuildModel[0..1] role xxx_BuildModel_plans_src
+	BuildPlan[*] role plans
+end
+
+composition xxx_BuildModel_builds between
+	BuildModel[0..1] role xxx_BuildModel_builds_src
+	Build[*] role builds
+end
+
+composition xxx_Change_artifacts between
+	Change[0..1] role xxx_Change_artifacts_src
+	ChangeArtifact[*] role artifacts
+end
+
+composition xxx_Change_author between
+	Change[*] role xxx_Change_author_src
+	User[0..1] role author
+end
+
+composition xxx_ChangeSet_changes between
+	ChangeSet[0..1] role xxx_ChangeSet_changes_src
+	Change[*] role changes
+end
+
+association xxx_ParameterDefinition_containingBuildPlan between
+	ParameterDefinition[*] role xxx_ParameterDefinition_containingBuildPlan_src
+	BuildPlan[0..1] role containingBuildPlan
+end
+
+association xxx_BuildParameterDefinition_buildPlan between
+	BuildParameterDefinition[*] role xxx_BuildParameterDefinition_buildPlan_src
+	BuildPlan[0..1] role buildPlan
+end
+
+association xxx_TestResult_build between
+	TestResult[*] role xxx_TestResult_build_src
+	Build[0..1] role build
+end
+
+composition xxx_TestResult_suites between
+	TestResult[0..1] role xxx_TestResult_suites_src
+	TestSuite[*] role suites
+end
+
+composition xxx_TestSuite_cases between
+	TestSuite[0..1] role xxx_TestSuite_cases_src
+	TestCase[*] role cases
+end
+
+association xxx_TestSuite_result between
+	TestSuite[*] role xxx_TestSuite_result_src
+	TestResult[0..1] role result
+end
+
+association xxx_TestCase_suite between
+	TestCase[*] role xxx_TestCase_suite_src
+	TestSuite[0..1] role suite
+end
+

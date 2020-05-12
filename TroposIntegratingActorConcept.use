@@ -1,0 +1,36 @@
+model IntegratingTroposActorConcept
+class Actor
+attributes
+operations
+end
+
+class Agent<Actor
+attributes
+operations
+end
+
+class Position<Actor
+attributes
+operations
+end
+
+class Role<Actor
+attributes
+operations
+end
+
+association xxx_Agent_occupy between
+	Agent[*] role xxx_Agent_occupy_src
+	Position[1] role occupy
+end
+
+association xxx_Agent_play between
+	Agent[0..1] role xxx_Agent_play_src
+	Role[*] role play
+end
+
+composition xxx_Position_cover between
+	Position[0..1] role xxx_Position_cover_src
+	Role[*] role cover
+end
+

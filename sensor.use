@@ -1,0 +1,68 @@
+model sensor
+enum SensorType{
+default
+}
+
+class AdapterCBESensorType<SensorBaseType
+attributes
+operations
+end
+
+class SensorBaseType
+attributes
+operations
+end
+
+class SensorConfigType
+attributes
+	confidenceBufferSize : Integer
+	fileFooterSize : Integer
+	maximumBlocking : String
+	type : SensorType
+operations
+end
+
+class SensorPropertyType
+attributes
+	propertyName : String
+	propertyValue : String
+operations
+end
+
+class SingleFileSensorType<SensorBaseType
+attributes
+	converter : String
+	directory : String
+	fileName : String
+	shell : String
+operations
+end
+
+class StaticParserSensorType<SensorBaseType
+attributes
+	directory : String
+	fileName : String
+	parserClassName : String
+operations
+end
+
+composition xxx_SensorBaseType_sensorProperty between
+	SensorBaseType[0..1] role xxx_SensorBaseType_sensorProperty_src
+	SensorPropertyType[*] role sensorProperty
+end
+
+composition xxx_SensorConfigType_singleFileSensor between
+	SensorConfigType[*] role xxx_SensorConfigType_singleFileSensor_src
+	SingleFileSensorType[0..1] role singleFileSensor
+end
+
+composition xxx_SensorConfigType_adapterCBESensor between
+	SensorConfigType[*] role xxx_SensorConfigType_adapterCBESensor_src
+	AdapterCBESensorType[0..1] role adapterCBESensor
+end
+
+composition xxx_SensorConfigType_staticParserSensor between
+	SensorConfigType[*] role xxx_SensorConfigType_staticParserSensor_src
+	StaticParserSensorType[0..1] role staticParserSensor
+end
+

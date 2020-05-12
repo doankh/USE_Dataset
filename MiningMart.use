@@ -1,0 +1,728 @@
+model PrimitiveTypes
+enum InOut{
+	Input,
+	OutPut
+}
+
+enum ParameterType{
+	Value,
+	Concept,
+	RelationShip,
+	FeatureAttribute
+}
+
+class LinkPackage
+attributes
+	type : InOut
+operations
+end
+
+class ModelElement
+attributes
+operations
+end
+
+class Classifier<ModelElement
+attributes
+operations
+end
+
+class StructuralFeature<ModelElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	name : String
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+class Column<Attribute
+attributes
+	name : String
+operations
+end
+
+class ColumnSet<Class
+attributes
+	number : Integer
+	file : String
+	dbConnectString : String
+	user : String
+operations
+end
+
+class ColumnStatistics
+attributes
+	unique : Integer
+	missing : Integer
+	min : Integer
+	max : Integer
+	average : Integer
+	standarDeviation : Integer
+	distributionValue : String
+	distributionCount : Integer
+	distributionMin : Integer
+	distributionMax : Integer
+operations
+end
+
+class ColumnSetStatistics<ModelElement
+attributes
+	allNumber : Integer
+	ordinalNumber : Integer
+	nominalNumber : Integer
+	timeNumber : Integer
+operations
+end
+
+class Snapshot<ColumnSet
+attributes
+operations
+end
+
+class Table<ColumnSet
+attributes
+operations
+end
+
+class View<ColumnSet
+attributes
+operations
+end
+
+class Key<ModelElement
+attributes
+	isUsedForIndex : Boolean
+operations
+end
+
+class ForeignKey<Key
+attributes
+operations
+end
+
+class PrimaryKey<Key
+attributes
+operations
+end
+
+class Concept<Parameter
+attributes
+	subConceptRestriction : String
+operations
+end
+
+class RelationShip<Parameter
+attributes
+	subRelationShipRestriction : String
+	defined : String
+operations
+end
+
+class FeatureAttribute<Attribute
+attributes
+	name : String
+	relevanceForMining : Boolean
+operations
+end
+
+class BaseAttribute<FeatureAttribute
+attributes
+operations
+end
+
+class MultiColumnFeature<FeatureAttribute
+attributes
+operations
+end
+
+class Value<Parameter
+attributes
+operations
+end
+
+class UserInput<Class
+attributes
+operations
+end
+
+class Ordinal<DomainDataType
+attributes
+operations
+end
+
+class Scalar<Ordinal
+attributes
+operations
+end
+
+class Time<Scalar
+attributes
+operations
+end
+
+class Binary<Nominal
+attributes
+operations
+end
+
+class Categorial<Nominal
+attributes
+operations
+end
+
+class KeyAttribute<Nominal
+attributes
+operations
+end
+
+class TimeGroup<KeyAttribute
+attributes
+operations
+end
+
+class Spatial<KeyAttribute
+attributes
+operations
+end
+
+class Constant<Nominal
+attributes
+operations
+end
+
+class RoleRestriction<Attribute
+attributes
+	name : String
+	min : Integer
+	max : Integer
+operations
+end
+
+class DomainDataType<DataType
+attributes
+operations
+end
+
+class Nominal<DomainDataType
+attributes
+operations
+end
+
+class Case<ModelElement
+attributes
+	name : String
+	caseMode : Boolean
+	documentation : String
+operations
+end
+
+class Step<ModelElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class LoopStep<Step
+attributes
+operations
+end
+
+class MultiStep<Step
+attributes
+	iterationCondition : String
+operations
+end
+
+abstract class Operator<ModelElement
+attributes
+	loopable : Boolean
+	numberOfInputParameters : Integer
+	numberOfOutputParameters : Integer
+	manual : Boolean
+	tool : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	place : String
+	parameterType : ParameterType
+operations
+end
+
+class FeatureConstruction<Operator
+attributes
+	scalingFactor : Integer
+operations
+end
+
+class DataMinStep<Operator
+attributes
+operations
+end
+
+class TimeOperator<Operator
+attributes
+operations
+end
+
+class FeatureSelection<Operator
+attributes
+operations
+end
+
+class MultiRelFeatureConstr<Operator
+attributes
+operations
+end
+
+class RowSelection<Operator
+attributes
+operations
+end
+
+class Agregation<MultiRelFeatureConstr
+attributes
+operations
+end
+
+class Scaling<FeatureConstruction
+attributes
+operations
+end
+
+class Discretization<FeatureConstruction
+attributes
+operations
+end
+
+class Segmentation<RowSelection
+attributes
+operations
+end
+
+class Sampling<RowSelection
+attributes
+operations
+end
+
+class ExecutionElement
+attributes
+operations
+end
+
+class DataObject
+attributes
+operations
+end
+
+class MSL_Tool<ExecutionElement
+attributes
+operations
+end
+
+class TransformationGroup<ExecutionElement
+attributes
+operations
+end
+
+class Transformation<ExecutionElement
+attributes
+operations
+end
+
+class Function<Transformation
+attributes
+	nameOf : String
+	signature : String
+operations
+end
+
+class StoredProcedure<Transformation
+attributes
+	nameOf : String
+	signature : String
+operations
+end
+
+class SQLQuery<Transformation
+attributes
+	where : String
+operations
+end
+
+association xxx_LinkPackage_dataObject between
+	LinkPackage[*] role xxx_LinkPackage_dataObject_src
+	DataObject[1] role dataObject
+end
+
+association xxx_LinkPackage_value between
+	LinkPackage[*] role xxx_LinkPackage_value_src
+	Value[0..1] role value
+end
+
+association xxx_LinkPackage_column between
+	LinkPackage[*] role xxx_LinkPackage_column_src
+	Column[0..1] role column
+end
+
+association xxx_LinkPackage_columnSet between
+	LinkPackage[*] role xxx_LinkPackage_columnSet_src
+	ColumnSet[0..1] role columnSet
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribute[1..*] role attributes_
+end
+
+association xxx_DataType_attribute between
+	DataType[*] role xxx_DataType_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Attribute_class_ between
+	Attribute[*] role xxx_Attribute_class__src
+	Class[1] role class_
+end
+
+association xxx_Attribute_has between
+	Attribute[*] role xxx_Attribute_has_src
+	DataType[1] role has
+end
+
+association xxx_Column_dataType between
+	Column[*] role xxx_Column_dataType_src
+	DataType[1] role dataType
+end
+
+association xxx_Column_keys between
+	Column[0..1] role xxx_Column_keys_src
+	Key[*] role keys
+end
+
+association xxx_Column_belongsToColumnSet between
+	Column[*] role xxx_Column_belongsToColumnSet_src
+	ColumnSet[1] role belongsToColumnSet
+end
+
+association xxx_Column_corespondsToBaseAttribute between
+	Column[*] role xxx_Column_corespondsToBaseAttribute_src
+	BaseAttribute[1] role corespondsToBaseAttribute
+end
+
+association xxx_Column_linkPackage between
+	Column[*] role xxx_Column_linkPackage_src
+	LinkPackage[0..1] role linkPackage
+end
+
+association xxx_ColumnSet_hasColumn between
+	ColumnSet[0..1] role xxx_ColumnSet_hasColumn_src
+	Column[1..*] role hasColumn
+end
+
+association xxx_ColumnSet_hasKey between
+	ColumnSet[0..1] role xxx_ColumnSet_hasKey_src
+	Key[1..*] role hasKey
+end
+
+association xxx_ColumnSet_correspondsToConcept between
+	ColumnSet[*] role xxx_ColumnSet_correspondsToConcept_src
+	Concept[0..1] role correspondsToConcept
+end
+
+association xxx_ColumnSet_correspondsToRelationShip between
+	ColumnSet[*] role xxx_ColumnSet_correspondsToRelationShip_src
+	RelationShip[0..1] role correspondsToRelationShip
+end
+
+association xxx_ColumnSet_linkPackage between
+	ColumnSet[*] role xxx_ColumnSet_linkPackage_src
+	LinkPackage[0..1] role linkPackage
+end
+
+association xxx_ColumnStatistics_forColumn between
+	ColumnStatistics[*] role xxx_ColumnStatistics_forColumn_src
+	Column[1] role forColumn
+end
+
+association xxx_ColumnSetStatistics_forColumnSet between
+	ColumnSetStatistics[*] role xxx_ColumnSetStatistics_forColumnSet_src
+	ColumnSet[1] role forColumnSet
+end
+
+association xxx_Key_hasColumn between
+	Key[0..1] role xxx_Key_hasColumn_src
+	Column[1..*] role hasColumn
+end
+
+association xxx_Key_isAssociatedToColumnSet between
+	Key[*] role xxx_Key_isAssociatedToColumnSet_src
+	ColumnSet[1] role isAssociatedToColumnSet
+end
+
+association xxx_ForeignKey_isConnectionTo between
+	ForeignKey[*] role xxx_ForeignKey_isConnectionTo_src
+	Table[0..1] role isConnectionTo
+end
+
+association xxx_ForeignKey_correspondsToRelationShip between
+	ForeignKey[*] role xxx_ForeignKey_correspondsToRelationShip_src
+	RelationShip[0..1] role correspondsToRelationShip
+end
+
+association xxx_Concept_isA between
+	Concept[*] role xxx_Concept_isA_src
+	Concept[1] role isA
+end
+
+association xxx_Concept_FromConcept between
+	Concept[*] role xxx_Concept_FromConcept_src
+	RelationShip[1] role FromConcept
+end
+
+association xxx_Concept_ToConcept between
+	Concept[*] role xxx_Concept_ToConcept_src
+	RelationShip[1] role ToConcept
+end
+
+association xxx_Concept_correspondsToColumnSet between
+	Concept[*] role xxx_Concept_correspondsToColumnSet_src
+	ColumnSet[0..1] role correspondsToColumnSet
+end
+
+association xxx_RelationShip_isA between
+	RelationShip[*] role xxx_RelationShip_isA_src
+	RelationShip[1] role isA
+end
+
+association xxx_RelationShip_correspondsToForeignKey between
+	RelationShip[0..1] role xxx_RelationShip_correspondsToForeignKey_src
+	ForeignKey[1..*] role correspondsToForeignKey
+end
+
+association xxx_RelationShip_correspondsToColumnSet between
+	RelationShip[*] role xxx_RelationShip_correspondsToColumnSet_src
+	ColumnSet[0..1] role correspondsToColumnSet
+end
+
+association xxx_RelationShip_FromConcept between
+	RelationShip[*] role xxx_RelationShip_FromConcept_src
+	Concept[1] role FromConcept
+end
+
+association xxx_RelationShip_ToConcept between
+	RelationShip[*] role xxx_RelationShip_ToConcept_src
+	Concept[1] role ToConcept
+end
+
+association xxx_FeatureAttribute_attributeType between
+	FeatureAttribute[*] role xxx_FeatureAttribute_attributeType_src
+	DataType[1] role attributeType
+end
+
+composition xxx_FeatureAttribute_belongsToConcept between
+	FeatureAttribute[*] role xxx_FeatureAttribute_belongsToConcept_src
+	Concept[1] role belongsToConcept
+end
+
+association xxx_FeatureAttribute_correspondsToColumns between
+	FeatureAttribute[0..1] role xxx_FeatureAttribute_correspondsToColumns_src
+	Column[1..*] role correspondsToColumns
+end
+
+association xxx_BaseAttribute_isPartMultiColumnFeature between
+	BaseAttribute[*] role xxx_BaseAttribute_isPartMultiColumnFeature_src
+	MultiColumnFeature[0..1] role isPartMultiColumnFeature
+end
+
+association xxx_BaseAttribute_domainDataType between
+	BaseAttribute[*] role xxx_BaseAttribute_domainDataType_src
+	DomainDataType[1] role domainDataType
+end
+
+composition xxx_MultiColumnFeature_consitsOfBaseAttributes between
+	MultiColumnFeature[0..1] role xxx_MultiColumnFeature_consitsOfBaseAttributes_src
+	BaseAttribute[*] role consitsOfBaseAttributes
+end
+
+association xxx_Value_domainDataType between
+	Value[*] role xxx_Value_domainDataType_src
+	DomainDataType[1] role domainDataType
+end
+
+composition xxx_Value_belongsToUserInput between
+	Value[0..1] role xxx_Value_belongsToUserInput_src
+	UserInput[1..*] role belongsToUserInput
+end
+
+association xxx_Value_linkPackage between
+	Value[*] role xxx_Value_linkPackage_src
+	LinkPackage[0..1] role linkPackage
+end
+
+association xxx_UserInput_containsValues between
+	UserInput[0..1] role xxx_UserInput_containsValues_src
+	Value[1..*] role containsValues
+end
+
+association xxx_RoleRestriction_restrictionForRelationShip between
+	RoleRestriction[*] role xxx_RoleRestriction_restrictionForRelationShip_src
+	RelationShip[1] role restrictionForRelationShip
+end
+
+association xxx_RoleRestriction_restrictionForConcept between
+	RoleRestriction[*] role xxx_RoleRestriction_restrictionForConcept_src
+	Concept[1] role restrictionForConcept
+end
+
+association xxx_RoleRestriction_restrictionToConcept between
+	RoleRestriction[*] role xxx_RoleRestriction_restrictionToConcept_src
+	Concept[1] role restrictionToConcept
+end
+
+association xxx_RoleRestriction_belongsToConcept between
+	RoleRestriction[*] role xxx_RoleRestriction_belongsToConcept_src
+	Concept[1] role belongsToConcept
+end
+
+association xxx_DomainDataType_baseAttributeD between
+	DomainDataType[*] role xxx_DomainDataType_baseAttributeD_src
+	BaseAttribute[1] role baseAttributeD
+end
+
+association xxx_Case_caseInput between
+	Case[*] role xxx_Case_caseInput_src
+	Parameter[1] role caseInput
+end
+
+association xxx_Case_caseOutput between
+	Case[*] role xxx_Case_caseOutput_src
+	Concept[1] role caseOutput
+end
+
+composition xxx_Case_listOfStep between
+	Case[0..1] role xxx_Case_listOfStep_src
+	Step[1..*] role listOfStep
+end
+
+association xxx_Case_population between
+	Case[*] role xxx_Case_population_src
+	Concept[1] role population
+end
+
+association xxx_Case_targetAttributes between
+	Case[*] role xxx_Case_targetAttributes_src
+	FeatureAttribute[1] role targetAttributes
+end
+
+association xxx_Step_belongsToCase between
+	Step[*] role xxx_Step_belongsToCase_src
+	Case[1] role belongsToCase
+end
+
+association xxx_Step_embedsOperator between
+	Step[*] role xxx_Step_embedsOperator_src
+	Operator[1] role embedsOperator
+end
+
+association xxx_Step_predecessors between
+	Step[0..1] role xxx_Step_predecessors_src
+	Step[*] role predecessors
+end
+
+association xxx_Step_successors between
+	Step[0..1] role xxx_Step_successors_src
+	Step[*] role successors
+end
+
+association xxx_LoopStep_iterationSet between
+	LoopStep[0..1] role xxx_LoopStep_iterationSet_src
+	FeatureAttribute[*] role iterationSet
+end
+
+association xxx_LoopStep_outputSet between
+	LoopStep[0..1] role xxx_LoopStep_outputSet_src
+	FeatureAttribute[*] role outputSet
+end
+
+association xxx_Operator_input between
+	Operator[0..1] role xxx_Operator_input_src
+	Parameter[1..*] role input
+end
+
+association xxx_Operator_output between
+	Operator[0..1] role xxx_Operator_output_src
+	Parameter[1..*] role output
+end
+
+association xxx_Operator_realizes between
+	Operator[*] role xxx_Operator_realizes_src
+	ExecutionElement[1] role realizes
+end
+
+association xxx_Parameter_belongsToOperator between
+	Parameter[*] role xxx_Parameter_belongsToOperator_src
+	Operator[1] role belongsToOperator
+end
+
+association xxx_ExecutionElement_source between
+	ExecutionElement[*] role xxx_ExecutionElement_source_src
+	DataObject[1] role source
+end
+
+association xxx_ExecutionElement_target between
+	ExecutionElement[*] role xxx_ExecutionElement_target_src
+	DataObject[1] role target
+end
+
+association xxx_DataObject_source between
+	DataObject[*] role xxx_DataObject_source_src
+	ExecutionElement[1] role source
+end
+
+association xxx_DataObject_target between
+	DataObject[*] role xxx_DataObject_target_src
+	ExecutionElement[1] role target
+end
+
+association xxx_DataObject_linkPackageCaseRepresentation between
+	DataObject[*] role xxx_DataObject_linkPackageCaseRepresentation_src
+	LinkPackage[1] role linkPackageCaseRepresentation
+end
+
+composition xxx_TransformationGroup_transformation between
+	TransformationGroup[0..1] role xxx_TransformationGroup_transformation_src
+	Transformation[*] role transformation
+end
+
+association xxx_Transformation_transformationGroup between
+	Transformation[*] role xxx_Transformation_transformationGroup_src
+	TransformationGroup[1] role transformationGroup
+end
+
+association xxx_SQLQuery_select between
+	SQLQuery[0..1] role xxx_SQLQuery_select_src
+	Column[1..*] role select
+end
+
+association xxx_SQLQuery_from_ between
+	SQLQuery[0..1] role xxx_SQLQuery_from__src
+	ColumnSet[1..*] role from_
+end
+

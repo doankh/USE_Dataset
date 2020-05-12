@@ -1,0 +1,51 @@
+model review
+enum Rating{
+default
+}
+
+class Review
+attributes
+operations
+end
+
+class ReviewResult
+attributes
+	text : String
+	rating : Rating
+	reviewer : String
+operations
+end
+
+class Patch<ScopeItem
+attributes
+	contents : String
+	creationDate : String
+	fileName : String
+operations
+	parse():String
+end
+
+class ScopeItem
+attributes
+	author : String
+operations
+end
+
+class Changeset<ScopeItem
+attributes
+	revision : String
+	projecturl : String
+	comment : String
+operations
+end
+
+association xxx_Review_result between
+	Review[*] role xxx_Review_result_src
+	ReviewResult[0..1] role result
+end
+
+association xxx_Review_scope between
+	Review[0..1] role xxx_Review_scope_src
+	ScopeItem[*] role scope
+end
+

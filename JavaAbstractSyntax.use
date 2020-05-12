@@ -1,0 +1,1328 @@
+model PrimitiveTypes
+enum AssignementOperatorKind{
+	RIGHT_SHIFT_SIGNED_ASSIGN,
+	BIT_XOR_ASSIGN,
+	TIMES_ASSIGN,
+	LEFT_SHIFT_ASSIGN,
+	MINUS_ASSIGN,
+	BIT_OR_ASSIGN,
+	PLUS_ASSIGN,
+	ASSIGN,
+	RIGHT_SHIFT_UNSIGNED_ASSIGN,
+	REMAINDER_ASSIGN,
+	DIVIDE_ASSIGN,
+	BIT_AND_ASSIGN
+}
+
+enum InfixExpressionOperatorKind{
+	GREATER_EQUALS,
+	OR,
+	RIGHT_SHIFT_SIGNED,
+	MINUS,
+	XOR,
+	LESS_EQUALS,
+	EQUALS,
+	NOT_EQUALS,
+	AND,
+	PLUS,
+	GREATER,
+	CONDITIONAL_OR,
+	REMAINDER,
+	LESS,
+	LEFT_SHIFT,
+	RIGHT_SHIFT_UNSIGNED,
+	CONDITIONAL_AND,
+	TIMES,
+	DIVIDE
+}
+
+enum PostfixExpresssionOperatorKind{
+	INCREMENT,
+	DECREMENT
+}
+
+enum PrefixExpresssionOperatorKind{
+	MINUS,
+	NOT,
+	DECREMENT,
+	COMPLEMENT,
+	INCREMENT,
+	PLUS
+}
+
+class AST
+attributes
+operations
+end
+
+abstract class ASTNode
+attributes
+operations
+end
+
+class AnonymousClassDeclaration<ASTNode
+attributes
+operations
+end
+
+abstract class BodyDeclaration<ASTNode
+attributes
+operations
+end
+
+class CatchClause<ASTNode
+attributes
+operations
+end
+
+abstract class Comment<ASTNode
+attributes
+operations
+end
+
+class CompilationUnit<ASTNode
+attributes
+operations
+end
+
+abstract class Expression<ASTNode
+attributes
+	resolveBoxing : Boolean
+	resolveUnboxing : Boolean
+operations
+end
+
+class ImportDeclaration<ASTNode
+attributes
+	onDemand : Boolean
+	static : Boolean
+operations
+end
+
+class MemberRef<ASTNode
+attributes
+operations
+end
+
+class MemberValuePair<ASTNode
+attributes
+operations
+end
+
+class MethodRef<ASTNode
+attributes
+operations
+end
+
+class MethodRefParameter<ASTNode
+attributes
+	varargs : Boolean
+operations
+end
+
+abstract class ExtendedModifier
+attributes
+operations
+end
+
+class Modifier<ExtendedModifier
+attributes
+	abstract_ : Boolean
+	final : Boolean
+	native : Boolean
+	none : Boolean
+	private : Boolean
+	protected : Boolean
+	public : Boolean
+	static : Boolean
+	strictfp : Boolean
+	synchronized : Boolean
+	transient : Boolean
+	volatile : Boolean
+operations
+end
+
+class PackageDeclaration<ASTNode
+attributes
+operations
+end
+
+abstract class Statement<ASTNode
+attributes
+operations
+end
+
+class TagElement<ASTNode
+attributes
+	tagName : String
+	nested : Boolean
+operations
+end
+
+class TextElement<ASTNode
+attributes
+	text : String
+operations
+end
+
+abstract class Type<ASTNode
+attributes
+operations
+end
+
+class TypeParameter<ASTNode
+attributes
+operations
+end
+
+abstract class VariableDeclaration<ASTNode
+attributes
+	extraDimensions : Integer
+operations
+end
+
+abstract class AbstractTypeDeclaration<BodyDeclaration
+attributes
+	localTypeDeclaration : Boolean
+	memberTypeDeclaration : Boolean
+	packageMemberTypeDeclaration : Boolean
+operations
+end
+
+class AnnotationTypeMemberDeclaration<BodyDeclaration
+attributes
+operations
+end
+
+class EnumConstantDeclaration<BodyDeclaration
+attributes
+operations
+end
+
+class FieldDeclaration<BodyDeclaration
+attributes
+operations
+end
+
+class Initializer<BodyDeclaration
+attributes
+operations
+end
+
+class MethodDeclaration<BodyDeclaration
+attributes
+	extraDimensions : Integer
+	constructor : Boolean
+	varargs : Boolean
+operations
+end
+
+class AnnotationTypeDeclaration<AbstractTypeDeclaration
+attributes
+operations
+end
+
+class EnumDeclaration<AbstractTypeDeclaration
+attributes
+operations
+end
+
+class TypeDeclaration<AbstractTypeDeclaration
+attributes
+	interface : Boolean
+operations
+end
+
+class BlockComment<Comment
+attributes
+operations
+end
+
+class Javadoc<Comment
+attributes
+operations
+end
+
+class LineComment<Comment
+attributes
+operations
+end
+
+abstract class Annotation<ExtendedModifier
+attributes
+operations
+end
+
+class ArrayAccess<Expression
+attributes
+operations
+end
+
+class ArrayCreation<Expression
+attributes
+operations
+end
+
+class ArrayInitializer<Expression
+attributes
+operations
+end
+
+class Assignment<Expression
+attributes
+	operator : AssignementOperatorKind
+operations
+end
+
+class BooleanLiteral<Expression
+attributes
+	booleanValue : Boolean
+operations
+end
+
+class CastExpression<Expression
+attributes
+operations
+end
+
+class CharacterLiteral<Expression
+attributes
+	charValue : String
+	escapedValue : String
+operations
+end
+
+class ClassInstanceCreation<Expression
+attributes
+operations
+end
+
+class ConditionalExpression<Expression
+attributes
+operations
+end
+
+class FieldAccess<Expression
+attributes
+operations
+end
+
+class InfixExpression<Expression
+attributes
+	operator : InfixExpressionOperatorKind
+operations
+end
+
+class InstanceofExpression<Expression
+attributes
+operations
+end
+
+class MethodInvocation<Expression
+attributes
+operations
+end
+
+abstract class Name<Expression
+attributes
+	fullyQualifiedName : String
+operations
+end
+
+class NullLiteral<Expression
+attributes
+operations
+end
+
+class NumberLiteral<Expression
+attributes
+	token : String
+operations
+end
+
+class ParenthesizedExpression<Expression
+attributes
+operations
+end
+
+class PostfixExpression<Expression
+attributes
+	operator : PostfixExpresssionOperatorKind
+operations
+end
+
+class PrefixExpression<Expression
+attributes
+	operator : PrefixExpresssionOperatorKind
+operations
+end
+
+class StringLiteral<Expression
+attributes
+	escapedValue : String
+	literalValue : String
+operations
+end
+
+class SuperFieldAccess<Expression
+attributes
+operations
+end
+
+class SuperMethodInvocation<Expression
+attributes
+operations
+end
+
+class ThisExpression<Expression
+attributes
+operations
+end
+
+class TypeLiteral<Expression
+attributes
+operations
+end
+
+class VariableDeclarationExpression<Expression
+attributes
+operations
+end
+
+class AssertStatement<Statement
+attributes
+operations
+end
+
+class Block<Statement
+attributes
+operations
+end
+
+class BreakStatement<Statement
+attributes
+operations
+end
+
+class ConstructorInvocation<Statement
+attributes
+operations
+end
+
+class ContinueStatement<Statement
+attributes
+operations
+end
+
+class DoStatement<Statement
+attributes
+operations
+end
+
+class EmptyStatement<Statement
+attributes
+operations
+end
+
+class EnhancedForStatement<Statement
+attributes
+operations
+end
+
+class ExpressionStatement<Statement
+attributes
+operations
+end
+
+class ForStatement<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class LabeledStatement<Statement
+attributes
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+operations
+end
+
+class SuperConstructorInvocation<Statement
+attributes
+operations
+end
+
+class SwitchCase<Statement
+attributes
+	default : Boolean
+operations
+end
+
+class SwitchStatement<Statement
+attributes
+operations
+end
+
+class SynchronizedStatement<Statement
+attributes
+operations
+end
+
+class ThrowStatement<Statement
+attributes
+operations
+end
+
+class TryStatement<Statement
+attributes
+operations
+end
+
+class TypeDeclarationStatement<Statement
+attributes
+operations
+end
+
+class VariableDeclarationStatement<Statement
+attributes
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class ArrayType<Type
+attributes
+	dimensions : Integer
+operations
+end
+
+class ParameterizedType<Type
+attributes
+operations
+end
+
+class PrimitiveType<Type
+attributes
+	code : String
+operations
+end
+
+class QualifiedType<Type
+attributes
+operations
+end
+
+class SimpleType<Type
+attributes
+operations
+end
+
+class WildcardType<Type
+attributes
+	upperBound : Boolean
+operations
+end
+
+class SingleVariableDeclaration<VariableDeclaration
+attributes
+	varargs : Boolean
+operations
+end
+
+class VariableDeclarationFragment<VariableDeclaration
+attributes
+operations
+end
+
+class QualifiedName<Name
+attributes
+operations
+end
+
+class SimpleName<Name
+attributes
+	identifier : String
+	declaration : Boolean
+operations
+end
+
+class MarkerAnnotation<Annotation
+attributes
+operations
+end
+
+class NormalAnnotation<Annotation
+attributes
+operations
+end
+
+class SingleMemberAnnotation<Annotation
+attributes
+operations
+end
+
+composition xxx_AST_root between
+	AST[*] role xxx_AST_root_src
+	ASTNode[1] role root
+end
+
+composition xxx_AnonymousClassDeclaration_bodyDeclarations between
+	AnonymousClassDeclaration[0..1] role xxx_AnonymousClassDeclaration_bodyDeclarations_src
+	BodyDeclaration[*] role bodyDeclarations
+end
+
+composition xxx_BodyDeclaration_modifiers between
+	BodyDeclaration[0..1] role xxx_BodyDeclaration_modifiers_src
+	ExtendedModifier[*] role modifiers
+end
+
+composition xxx_BodyDeclaration_javadoc between
+	BodyDeclaration[*] role xxx_BodyDeclaration_javadoc_src
+	Javadoc[1] role javadoc
+end
+
+composition xxx_CatchClause_body between
+	CatchClause[*] role xxx_CatchClause_body_src
+	Block[1] role body
+end
+
+composition xxx_CatchClause_exception between
+	CatchClause[*] role xxx_CatchClause_exception_src
+	SingleVariableDeclaration[1] role exception
+end
+
+association xxx_Comment_alternateRoot between
+	Comment[*] role xxx_Comment_alternateRoot_src
+	ASTNode[1] role alternateRoot
+end
+
+composition xxx_CompilationUnit_comments between
+	CompilationUnit[0..1] role xxx_CompilationUnit_comments_src
+	Comment[*] role comments
+end
+
+composition xxx_CompilationUnit_package between
+	CompilationUnit[*] role xxx_CompilationUnit_package_src
+	PackageDeclaration[1] role package
+end
+
+composition xxx_CompilationUnit_imports between
+	CompilationUnit[0..1] role xxx_CompilationUnit_imports_src
+	ImportDeclaration[*] role imports
+end
+
+composition xxx_CompilationUnit_types between
+	CompilationUnit[0..1] role xxx_CompilationUnit_types_src
+	AbstractTypeDeclaration[*] role types
+end
+
+composition xxx_ImportDeclaration_name between
+	ImportDeclaration[*] role xxx_ImportDeclaration_name_src
+	Name[1] role name
+end
+
+composition xxx_MemberRef_name between
+	MemberRef[*] role xxx_MemberRef_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_MemberRef_qualifier between
+	MemberRef[*] role xxx_MemberRef_qualifier_src
+	Name[1] role qualifier
+end
+
+composition xxx_MemberValuePair_name between
+	MemberValuePair[*] role xxx_MemberValuePair_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_MemberValuePair_value between
+	MemberValuePair[*] role xxx_MemberValuePair_value_src
+	Expression[1] role value
+end
+
+composition xxx_MethodRef_name between
+	MethodRef[*] role xxx_MethodRef_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_MethodRef_qualifier between
+	MethodRef[*] role xxx_MethodRef_qualifier_src
+	Name[1] role qualifier
+end
+
+composition xxx_MethodRef_parameters between
+	MethodRef[0..1] role xxx_MethodRef_parameters_src
+	MethodRefParameter[*] role parameters
+end
+
+composition xxx_MethodRefParameter_name between
+	MethodRefParameter[*] role xxx_MethodRefParameter_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_MethodRefParameter_type between
+	MethodRefParameter[*] role xxx_MethodRefParameter_type_src
+	Type[1] role type
+end
+
+composition xxx_PackageDeclaration_annotations between
+	PackageDeclaration[0..1] role xxx_PackageDeclaration_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_PackageDeclaration_javadoc between
+	PackageDeclaration[*] role xxx_PackageDeclaration_javadoc_src
+	Javadoc[1] role javadoc
+end
+
+composition xxx_PackageDeclaration_name between
+	PackageDeclaration[*] role xxx_PackageDeclaration_name_src
+	Name[1] role name
+end
+
+composition xxx_TagElement_fragments between
+	TagElement[0..1] role xxx_TagElement_fragments_src
+	ASTNode[*] role fragments
+end
+
+composition xxx_TypeParameter_name between
+	TypeParameter[*] role xxx_TypeParameter_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_TypeParameter_typeBounds between
+	TypeParameter[0..1] role xxx_TypeParameter_typeBounds_src
+	Type[*] role typeBounds
+end
+
+composition xxx_VariableDeclaration_initializer between
+	VariableDeclaration[*] role xxx_VariableDeclaration_initializer_src
+	Expression[1] role initializer
+end
+
+composition xxx_VariableDeclaration_name between
+	VariableDeclaration[*] role xxx_VariableDeclaration_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_AbstractTypeDeclaration_bodyDeclarations between
+	AbstractTypeDeclaration[0..1] role xxx_AbstractTypeDeclaration_bodyDeclarations_src
+	BodyDeclaration[*] role bodyDeclarations
+end
+
+composition xxx_AbstractTypeDeclaration_name between
+	AbstractTypeDeclaration[*] role xxx_AbstractTypeDeclaration_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_AnnotationTypeMemberDeclaration_default between
+	AnnotationTypeMemberDeclaration[*] role xxx_AnnotationTypeMemberDeclaration_default_src
+	Expression[1] role default
+end
+
+composition xxx_AnnotationTypeMemberDeclaration_name between
+	AnnotationTypeMemberDeclaration[*] role xxx_AnnotationTypeMemberDeclaration_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_AnnotationTypeMemberDeclaration_type between
+	AnnotationTypeMemberDeclaration[*] role xxx_AnnotationTypeMemberDeclaration_type_src
+	Type[1] role type
+end
+
+composition xxx_EnumConstantDeclaration_arguments between
+	EnumConstantDeclaration[0..1] role xxx_EnumConstantDeclaration_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_EnumConstantDeclaration_anonymousClassDeclaration between
+	EnumConstantDeclaration[*] role xxx_EnumConstantDeclaration_anonymousClassDeclaration_src
+	AnonymousClassDeclaration[1] role anonymousClassDeclaration
+end
+
+composition xxx_EnumConstantDeclaration_name between
+	EnumConstantDeclaration[*] role xxx_EnumConstantDeclaration_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_FieldDeclaration_fragments between
+	FieldDeclaration[0..1] role xxx_FieldDeclaration_fragments_src
+	VariableDeclarationFragment[*] role fragments
+end
+
+composition xxx_FieldDeclaration_type between
+	FieldDeclaration[*] role xxx_FieldDeclaration_type_src
+	Type[1] role type
+end
+
+composition xxx_Initializer_body between
+	Initializer[*] role xxx_Initializer_body_src
+	Block[1] role body
+end
+
+composition xxx_MethodDeclaration_body between
+	MethodDeclaration[*] role xxx_MethodDeclaration_body_src
+	Block[1] role body
+end
+
+composition xxx_MethodDeclaration_name between
+	MethodDeclaration[*] role xxx_MethodDeclaration_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_MethodDeclaration_returnType between
+	MethodDeclaration[*] role xxx_MethodDeclaration_returnType_src
+	Type[1] role returnType
+end
+
+composition xxx_MethodDeclaration_parameters between
+	MethodDeclaration[0..1] role xxx_MethodDeclaration_parameters_src
+	SingleVariableDeclaration[*] role parameters
+end
+
+composition xxx_MethodDeclaration_thrownExceptions between
+	MethodDeclaration[0..1] role xxx_MethodDeclaration_thrownExceptions_src
+	Name[*] role thrownExceptions
+end
+
+composition xxx_MethodDeclaration_typeParameters between
+	MethodDeclaration[0..1] role xxx_MethodDeclaration_typeParameters_src
+	TypeParameter[*] role typeParameters
+end
+
+composition xxx_EnumDeclaration_superInterfaceTypes between
+	EnumDeclaration[0..1] role xxx_EnumDeclaration_superInterfaceTypes_src
+	Type[*] role superInterfaceTypes
+end
+
+composition xxx_EnumDeclaration_enumConstants between
+	EnumDeclaration[0..1] role xxx_EnumDeclaration_enumConstants_src
+	EnumConstantDeclaration[*] role enumConstants
+end
+
+composition xxx_TypeDeclaration_superclassType between
+	TypeDeclaration[*] role xxx_TypeDeclaration_superclassType_src
+	Type[1] role superclassType
+end
+
+composition xxx_TypeDeclaration_superInterfaceTypes between
+	TypeDeclaration[0..1] role xxx_TypeDeclaration_superInterfaceTypes_src
+	Type[*] role superInterfaceTypes
+end
+
+composition xxx_TypeDeclaration_typeParameters between
+	TypeDeclaration[0..1] role xxx_TypeDeclaration_typeParameters_src
+	TypeParameter[*] role typeParameters
+end
+
+composition xxx_Javadoc_tags between
+	Javadoc[0..1] role xxx_Javadoc_tags_src
+	TagElement[*] role tags
+end
+
+composition xxx_Annotation_typeName between
+	Annotation[*] role xxx_Annotation_typeName_src
+	Name[1] role typeName
+end
+
+composition xxx_ArrayAccess_array between
+	ArrayAccess[*] role xxx_ArrayAccess_array_src
+	Expression[1] role array
+end
+
+composition xxx_ArrayAccess_index between
+	ArrayAccess[*] role xxx_ArrayAccess_index_src
+	Expression[1] role index
+end
+
+composition xxx_ArrayCreation_dimensions between
+	ArrayCreation[0..1] role xxx_ArrayCreation_dimensions_src
+	Expression[*] role dimensions
+end
+
+composition xxx_ArrayCreation_initializer between
+	ArrayCreation[*] role xxx_ArrayCreation_initializer_src
+	ArrayInitializer[1] role initializer
+end
+
+composition xxx_ArrayCreation_type between
+	ArrayCreation[*] role xxx_ArrayCreation_type_src
+	ArrayType[1] role type
+end
+
+composition xxx_ArrayInitializer_expressions between
+	ArrayInitializer[0..1] role xxx_ArrayInitializer_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_Assignment_leftHandSide between
+	Assignment[*] role xxx_Assignment_leftHandSide_src
+	Expression[1] role leftHandSide
+end
+
+composition xxx_Assignment_rightHandSide between
+	Assignment[*] role xxx_Assignment_rightHandSide_src
+	Expression[1] role rightHandSide
+end
+
+composition xxx_CastExpression_expression between
+	CastExpression[*] role xxx_CastExpression_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_CastExpression_type between
+	CastExpression[*] role xxx_CastExpression_type_src
+	Type[1] role type
+end
+
+composition xxx_ClassInstanceCreation_arguments between
+	ClassInstanceCreation[0..1] role xxx_ClassInstanceCreation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_ClassInstanceCreation_anonymousClassDeclaration between
+	ClassInstanceCreation[*] role xxx_ClassInstanceCreation_anonymousClassDeclaration_src
+	AnonymousClassDeclaration[1] role anonymousClassDeclaration
+end
+
+composition xxx_ClassInstanceCreation_expression between
+	ClassInstanceCreation[*] role xxx_ClassInstanceCreation_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ClassInstanceCreation_type between
+	ClassInstanceCreation[*] role xxx_ClassInstanceCreation_type_src
+	Type[1] role type
+end
+
+composition xxx_ClassInstanceCreation_typeArguments between
+	ClassInstanceCreation[0..1] role xxx_ClassInstanceCreation_typeArguments_src
+	Type[*] role typeArguments
+end
+
+composition xxx_ConditionalExpression_elseExpression between
+	ConditionalExpression[*] role xxx_ConditionalExpression_elseExpression_src
+	Expression[1] role elseExpression
+end
+
+composition xxx_ConditionalExpression_expression between
+	ConditionalExpression[*] role xxx_ConditionalExpression_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ConditionalExpression_thenExpression between
+	ConditionalExpression[*] role xxx_ConditionalExpression_thenExpression_src
+	Expression[1] role thenExpression
+end
+
+composition xxx_FieldAccess_expression between
+	FieldAccess[*] role xxx_FieldAccess_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_FieldAccess_name between
+	FieldAccess[*] role xxx_FieldAccess_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_InfixExpression_extendedOperands between
+	InfixExpression[0..1] role xxx_InfixExpression_extendedOperands_src
+	Expression[*] role extendedOperands
+end
+
+composition xxx_InfixExpression_leftOperand between
+	InfixExpression[*] role xxx_InfixExpression_leftOperand_src
+	Expression[1] role leftOperand
+end
+
+composition xxx_InfixExpression_rightOperand between
+	InfixExpression[*] role xxx_InfixExpression_rightOperand_src
+	Expression[1] role rightOperand
+end
+
+composition xxx_InstanceofExpression_leftOperand between
+	InstanceofExpression[*] role xxx_InstanceofExpression_leftOperand_src
+	Expression[1] role leftOperand
+end
+
+composition xxx_InstanceofExpression_rightOperand between
+	InstanceofExpression[*] role xxx_InstanceofExpression_rightOperand_src
+	Type[1] role rightOperand
+end
+
+composition xxx_MethodInvocation_arguments between
+	MethodInvocation[0..1] role xxx_MethodInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_MethodInvocation_expression between
+	MethodInvocation[*] role xxx_MethodInvocation_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_MethodInvocation_name between
+	MethodInvocation[*] role xxx_MethodInvocation_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_MethodInvocation_typeArguments between
+	MethodInvocation[0..1] role xxx_MethodInvocation_typeArguments_src
+	Type[*] role typeArguments
+end
+
+composition xxx_ParenthesizedExpression_expression between
+	ParenthesizedExpression[*] role xxx_ParenthesizedExpression_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_PostfixExpression_operand between
+	PostfixExpression[*] role xxx_PostfixExpression_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_PrefixExpression_operand between
+	PrefixExpression[*] role xxx_PrefixExpression_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_SuperFieldAccess_name between
+	SuperFieldAccess[*] role xxx_SuperFieldAccess_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_SuperFieldAccess_qualifier between
+	SuperFieldAccess[*] role xxx_SuperFieldAccess_qualifier_src
+	Name[1] role qualifier
+end
+
+composition xxx_SuperMethodInvocation_arguments between
+	SuperMethodInvocation[0..1] role xxx_SuperMethodInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_SuperMethodInvocation_name between
+	SuperMethodInvocation[*] role xxx_SuperMethodInvocation_name_src
+	Name[1] role name
+end
+
+composition xxx_SuperMethodInvocation_qualifier between
+	SuperMethodInvocation[*] role xxx_SuperMethodInvocation_qualifier_src
+	Name[1] role qualifier
+end
+
+composition xxx_SuperMethodInvocation_typeArguments between
+	SuperMethodInvocation[0..1] role xxx_SuperMethodInvocation_typeArguments_src
+	Type[*] role typeArguments
+end
+
+composition xxx_ThisExpression_qualifier between
+	ThisExpression[*] role xxx_ThisExpression_qualifier_src
+	Name[1] role qualifier
+end
+
+composition xxx_TypeLiteral_type between
+	TypeLiteral[*] role xxx_TypeLiteral_type_src
+	Type[1] role type
+end
+
+composition xxx_VariableDeclarationExpression_fragments between
+	VariableDeclarationExpression[0..1] role xxx_VariableDeclarationExpression_fragments_src
+	VariableDeclarationFragment[*] role fragments
+end
+
+composition xxx_VariableDeclarationExpression_modifiers between
+	VariableDeclarationExpression[0..1] role xxx_VariableDeclarationExpression_modifiers_src
+	ExtendedModifier[*] role modifiers
+end
+
+composition xxx_VariableDeclarationExpression_type between
+	VariableDeclarationExpression[*] role xxx_VariableDeclarationExpression_type_src
+	Type[1] role type
+end
+
+composition xxx_AssertStatement_expression between
+	AssertStatement[*] role xxx_AssertStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_AssertStatement_message between
+	AssertStatement[*] role xxx_AssertStatement_message_src
+	Expression[1] role message
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_BreakStatement_label between
+	BreakStatement[*] role xxx_BreakStatement_label_src
+	SimpleName[1] role label
+end
+
+composition xxx_ConstructorInvocation_arguments between
+	ConstructorInvocation[0..1] role xxx_ConstructorInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_ConstructorInvocation_typeArguments between
+	ConstructorInvocation[0..1] role xxx_ConstructorInvocation_typeArguments_src
+	Type[*] role typeArguments
+end
+
+composition xxx_ContinueStatement_label between
+	ContinueStatement[*] role xxx_ContinueStatement_label_src
+	SimpleName[1] role label
+end
+
+composition xxx_DoStatement_body between
+	DoStatement[*] role xxx_DoStatement_body_src
+	Statement[1] role body
+end
+
+composition xxx_DoStatement_expression between
+	DoStatement[*] role xxx_DoStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_EnhancedForStatement_body between
+	EnhancedForStatement[*] role xxx_EnhancedForStatement_body_src
+	Statement[1] role body
+end
+
+composition xxx_EnhancedForStatement_expression between
+	EnhancedForStatement[*] role xxx_EnhancedForStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_EnhancedForStatement_parameter between
+	EnhancedForStatement[*] role xxx_EnhancedForStatement_parameter_src
+	SingleVariableDeclaration[1] role parameter
+end
+
+composition xxx_ExpressionStatement_expression between
+	ExpressionStatement[*] role xxx_ExpressionStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ForStatement_body between
+	ForStatement[*] role xxx_ForStatement_body_src
+	Statement[1] role body
+end
+
+composition xxx_ForStatement_expression between
+	ForStatement[*] role xxx_ForStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ForStatement_initializers between
+	ForStatement[0..1] role xxx_ForStatement_initializers_src
+	Expression[*] role initializers
+end
+
+composition xxx_ForStatement_updaters between
+	ForStatement[0..1] role xxx_ForStatement_updaters_src
+	Expression[*] role updaters
+end
+
+composition xxx_IfStatement_elseStatement between
+	IfStatement[*] role xxx_IfStatement_elseStatement_src
+	Statement[1] role elseStatement
+end
+
+composition xxx_IfStatement_expression between
+	IfStatement[*] role xxx_IfStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_IfStatement_thenStatement between
+	IfStatement[*] role xxx_IfStatement_thenStatement_src
+	Statement[1] role thenStatement
+end
+
+composition xxx_LabeledStatement_body between
+	LabeledStatement[*] role xxx_LabeledStatement_body_src
+	Statement[1] role body
+end
+
+composition xxx_LabeledStatement_label between
+	LabeledStatement[*] role xxx_LabeledStatement_label_src
+	SimpleName[1] role label
+end
+
+composition xxx_ReturnStatement_expression between
+	ReturnStatement[*] role xxx_ReturnStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_SuperConstructorInvocation_arguments between
+	SuperConstructorInvocation[0..1] role xxx_SuperConstructorInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_SuperConstructorInvocation_expression between
+	SuperConstructorInvocation[*] role xxx_SuperConstructorInvocation_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_SuperConstructorInvocation_typeArguments between
+	SuperConstructorInvocation[0..1] role xxx_SuperConstructorInvocation_typeArguments_src
+	Type[*] role typeArguments
+end
+
+composition xxx_SwitchCase_expression between
+	SwitchCase[*] role xxx_SwitchCase_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_SwitchStatement_expression between
+	SwitchStatement[*] role xxx_SwitchStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_SwitchStatement_statements between
+	SwitchStatement[0..1] role xxx_SwitchStatement_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_SynchronizedStatement_body between
+	SynchronizedStatement[*] role xxx_SynchronizedStatement_body_src
+	Block[1] role body
+end
+
+composition xxx_SynchronizedStatement_expression between
+	SynchronizedStatement[*] role xxx_SynchronizedStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ThrowStatement_expression between
+	ThrowStatement[*] role xxx_ThrowStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_TryStatement_catchClauses between
+	TryStatement[0..1] role xxx_TryStatement_catchClauses_src
+	CatchClause[*] role catchClauses
+end
+
+composition xxx_TryStatement_body between
+	TryStatement[*] role xxx_TryStatement_body_src
+	Block[1] role body
+end
+
+composition xxx_TryStatement_finally between
+	TryStatement[*] role xxx_TryStatement_finally_src
+	Block[1] role finally
+end
+
+composition xxx_TypeDeclarationStatement_declaration between
+	TypeDeclarationStatement[*] role xxx_TypeDeclarationStatement_declaration_src
+	AbstractTypeDeclaration[1] role declaration
+end
+
+composition xxx_VariableDeclarationStatement_fragments between
+	VariableDeclarationStatement[0..1] role xxx_VariableDeclarationStatement_fragments_src
+	VariableDeclarationFragment[*] role fragments
+end
+
+composition xxx_VariableDeclarationStatement_modifiers between
+	VariableDeclarationStatement[0..1] role xxx_VariableDeclarationStatement_modifiers_src
+	ExtendedModifier[*] role modifiers
+end
+
+composition xxx_VariableDeclarationStatement_type between
+	VariableDeclarationStatement[*] role xxx_VariableDeclarationStatement_type_src
+	Type[1] role type
+end
+
+composition xxx_WhileStatement_body between
+	WhileStatement[*] role xxx_WhileStatement_body_src
+	Statement[1] role body
+end
+
+composition xxx_WhileStatement_expression between
+	WhileStatement[*] role xxx_WhileStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ArrayType_componentType between
+	ArrayType[*] role xxx_ArrayType_componentType_src
+	Type[1] role componentType
+end
+
+composition xxx_ArrayType_elementType between
+	ArrayType[*] role xxx_ArrayType_elementType_src
+	Type[1] role elementType
+end
+
+composition xxx_ParameterizedType_type between
+	ParameterizedType[*] role xxx_ParameterizedType_type_src
+	Type[1] role type
+end
+
+composition xxx_ParameterizedType_typeArguments between
+	ParameterizedType[0..1] role xxx_ParameterizedType_typeArguments_src
+	Type[*] role typeArguments
+end
+
+composition xxx_QualifiedType_name between
+	QualifiedType[*] role xxx_QualifiedType_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_QualifiedType_qualifier between
+	QualifiedType[*] role xxx_QualifiedType_qualifier_src
+	Type[1] role qualifier
+end
+
+composition xxx_SimpleType_name between
+	SimpleType[*] role xxx_SimpleType_name_src
+	Name[1] role name
+end
+
+composition xxx_WildcardType_bound between
+	WildcardType[*] role xxx_WildcardType_bound_src
+	Type[1] role bound
+end
+
+composition xxx_SingleVariableDeclaration_type between
+	SingleVariableDeclaration[*] role xxx_SingleVariableDeclaration_type_src
+	Type[1] role type
+end
+
+composition xxx_SingleVariableDeclaration_modifiers between
+	SingleVariableDeclaration[0..1] role xxx_SingleVariableDeclaration_modifiers_src
+	ExtendedModifier[*] role modifiers
+end
+
+composition xxx_QualifiedName_name between
+	QualifiedName[*] role xxx_QualifiedName_name_src
+	SimpleName[1] role name
+end
+
+composition xxx_QualifiedName_qualifier between
+	QualifiedName[*] role xxx_QualifiedName_qualifier_src
+	Name[1] role qualifier
+end
+
+composition xxx_NormalAnnotation_values between
+	NormalAnnotation[0..1] role xxx_NormalAnnotation_values_src
+	MemberValuePair[*] role values
+end
+
+composition xxx_SingleMemberAnnotation_value between
+	SingleMemberAnnotation[*] role xxx_SingleMemberAnnotation_value_src
+	Expression[1] role value
+end
+

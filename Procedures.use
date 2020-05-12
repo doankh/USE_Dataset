@@ -1,0 +1,44 @@
+model Procedures
+abstract class Instruction
+attributes
+operations
+	evalInstruction(context_ : String)
+end
+
+abstract class Expression<Instruction
+attributes
+operations
+	eval(context_ : String)
+end
+
+class Procedure<Instruction
+attributes
+	name : String
+operations
+end
+
+class ProcedureCall<Expression
+attributes
+operations
+end
+
+abstract class Literal
+attributes
+operations
+end
+
+composition xxx_Procedure_body between
+	Procedure[0..1] role xxx_Procedure_body_src
+	Instruction[*] role body
+end
+
+composition xxx_Procedure_returnType between
+	Procedure[*] role xxx_Procedure_returnType_src
+	Literal[0..1] role returnType
+end
+
+association xxx_ProcedureCall_ref between
+	ProcedureCall[*] role xxx_ProcedureCall_ref_src
+	Procedure[0..1] role ref
+end
+

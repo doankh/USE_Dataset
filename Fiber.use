@@ -1,0 +1,129 @@
+model fiber
+enum AttributeManyReference{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class ClassType<Type
+attributes
+operations
+end
+
+class SimpleType<ClassType
+attributes
+operations
+end
+
+class TypeId
+attributes
+	name : String
+operations
+end
+
+class Class<ClassType
+attributes
+operations
+end
+
+class Attribute
+attributes
+	manyReference : AttributeManyReference
+	name : String
+operations
+end
+
+class Enumeration<Type
+attributes
+operations
+end
+
+class EnumerationLiteral
+attributes
+	name : String
+	ordinal : Integer
+operations
+end
+
+class Service
+attributes
+	name : String
+operations
+end
+
+class Method
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+composition xxx_Model_types between
+	Model[0..1] role xxx_Model_types_src
+	Type[*] role types
+end
+
+composition xxx_Model_services between
+	Model[0..1] role xxx_Model_services_src
+	Service[*] role services
+end
+
+composition xxx_SimpleType_mappedType between
+	SimpleType[*] role xxx_SimpleType_mappedType_src
+	TypeId[0..1] role mappedType
+end
+
+association xxx_Class_superTypes between
+	Class[0..1] role xxx_Class_superTypes_src
+	ClassType[*] role superTypes
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	EnumerationLiteral[*] role literals
+end
+
+composition xxx_Service_methods between
+	Service[0..1] role xxx_Service_methods_src
+	Method[*] role methods
+end
+
+association xxx_Method_returnType between
+	Method[*] role xxx_Method_returnType_src
+	Type[0..1] role returnType
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[0..1] role type
+end
+

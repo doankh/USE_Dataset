@@ -1,0 +1,147 @@
+model SignalFlow
+class RootFolder
+attributes
+operations
+end
+
+class CompoundComponent<BaseComponent
+attributes
+operations
+end
+
+class PrimitiveComponent<BaseComponent
+attributes
+operations
+end
+
+class BaseComponent
+attributes
+	name : String
+	position : String
+operations
+end
+
+class InputPort<PortBase
+attributes
+operations
+end
+
+class LocalPort<PortBase
+attributes
+operations
+end
+
+class OutputPort<PortBase
+attributes
+operations
+end
+
+class PortBase
+attributes
+	name : String
+	position : String
+operations
+end
+
+class Signal
+attributes
+	name : String
+	position : String
+operations
+end
+
+class AssociationPortBase_PortBase
+attributes
+operations
+end
+
+composition xxx_RootFolder_compoundComponent between
+	RootFolder[0..1] role xxx_RootFolder_compoundComponent_src
+	CompoundComponent[*] role compoundComponent
+end
+
+association xxx_CompoundComponent_rootFolder between
+	CompoundComponent[*] role xxx_CompoundComponent_rootFolder_src
+	RootFolder[1] role rootFolder
+end
+
+composition xxx_CompoundComponent_baseComponent between
+	CompoundComponent[0..1] role xxx_CompoundComponent_baseComponent_src
+	BaseComponent[*] role baseComponent
+end
+
+composition xxx_CompoundComponent_localPort between
+	CompoundComponent[0..1] role xxx_CompoundComponent_localPort_src
+	LocalPort[*] role localPort
+end
+
+composition xxx_BaseComponent_signal between
+	BaseComponent[0..1] role xxx_BaseComponent_signal_src
+	Signal[*] role signal
+end
+
+composition xxx_BaseComponent_outputPort between
+	BaseComponent[0..1] role xxx_BaseComponent_outputPort_src
+	OutputPort[*] role outputPort
+end
+
+composition xxx_BaseComponent_inputPort between
+	BaseComponent[0..1] role xxx_BaseComponent_inputPort_src
+	InputPort[*] role inputPort
+end
+
+association xxx_BaseComponent_compoundComponent between
+	BaseComponent[*] role xxx_BaseComponent_compoundComponent_src
+	CompoundComponent[1] role compoundComponent
+end
+
+association xxx_InputPort_baseComponent between
+	InputPort[*] role xxx_InputPort_baseComponent_src
+	BaseComponent[1] role baseComponent
+end
+
+association xxx_LocalPort_compoundComponent between
+	LocalPort[*] role xxx_LocalPort_compoundComponent_src
+	CompoundComponent[1] role compoundComponent
+end
+
+association xxx_OutputPort_baseComponent between
+	OutputPort[*] role xxx_OutputPort_baseComponent_src
+	BaseComponent[1] role baseComponent
+end
+
+association xxx_PortBase_associationPortBase_PortBasesrc between
+	PortBase[*] role xxx_PortBase_associationPortBase_PortBasesrc_src
+	AssociationPortBase_PortBase[1] role associationPortBase_PortBasesrc
+end
+
+association xxx_PortBase_associationPortBase_PortBasedst between
+	PortBase[*] role xxx_PortBase_associationPortBase_PortBasedst_src
+	AssociationPortBase_PortBase[1] role associationPortBase_PortBasedst
+end
+
+association xxx_Signal_baseComponent between
+	Signal[*] role xxx_Signal_baseComponent_src
+	BaseComponent[1] role baseComponent
+end
+
+association xxx_Signal_associationPortBase_PortBase between
+	Signal[*] role xxx_Signal_associationPortBase_PortBase_src
+	AssociationPortBase_PortBase[1] role associationPortBase_PortBase
+end
+
+association xxx_AssociationPortBase_PortBase_srcPortBase between
+	AssociationPortBase_PortBase[0..1] role xxx_AssociationPortBase_PortBase_srcPortBase_src
+	PortBase[1..*] role srcPortBase
+end
+
+association xxx_AssociationPortBase_PortBase_dstPortBase between
+	AssociationPortBase_PortBase[0..1] role xxx_AssociationPortBase_PortBase_dstPortBase_src
+	PortBase[1..*] role dstPortBase
+end
+
+association xxx_AssociationPortBase_PortBase_signal between
+	AssociationPortBase_PortBase[*] role xxx_AssociationPortBase_PortBase_signal_src
+	Signal[1] role signal
+end
+

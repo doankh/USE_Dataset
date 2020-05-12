@@ -1,0 +1,34 @@
+model PrimitiveTypes
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class File<NamedElement
+attributes
+	owner : String
+	group : String
+operations
+end
+
+class Directory<File
+attributes
+operations
+end
+
+class FileSystemRoot<Directory
+attributes
+operations
+end
+
+class TextFile<File
+attributes
+operations
+end
+
+composition xxx_Directory_contents between
+	Directory[0..1] role xxx_Directory_contents_src
+	File[*] role contents
+end
+

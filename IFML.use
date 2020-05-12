@@ -1,0 +1,589 @@
+model ifml
+enum SortOrderEnum{
+default
+}
+
+enum SystemEventTypeEnum{
+default
+}
+
+enum ParameterKind{
+default
+}
+
+class Form<ViewComponent
+attributes
+operations
+end
+
+abstract class Field<ViewComponentPart
+attributes
+operations
+end
+
+class SelectionField<Field
+attributes
+	isMultiSelection : Boolean
+operations
+end
+
+class ValidationRule
+attributes
+operations
+end
+
+class Slot<ViewComponentPart
+attributes
+operations
+end
+
+class SortAttribute
+attributes
+	order : SortOrderEnum
+operations
+end
+
+class SelectEvent<ViewElementEvent
+attributes
+operations
+end
+
+class List<ViewComponent
+attributes
+operations
+end
+
+class SimpleField<Field
+attributes
+operations
+end
+
+class SubmitEvent<ViewElementEvent
+attributes
+operations
+end
+
+class Selector<Expression,ViewComponentPart
+attributes
+operations
+end
+
+class Device<ContextDimension
+attributes
+operations
+end
+
+class Position<ContextDimension
+attributes
+operations
+end
+
+class UserRole<ContextDimension
+attributes
+operations
+end
+
+class Details<ViewComponent
+attributes
+operations
+end
+
+class Window<ViewContainer
+attributes
+	isXor : Boolean
+	isModal : Boolean
+	isNew : Boolean
+operations
+end
+
+class ViewPoint<NamedElement
+attributes
+operations
+end
+
+abstract class InteractionFlowElement<NamedElement,InteractionFlowModelElement,TemplaetableElement
+attributes
+operations
+end
+
+class NavigationFlow<InteractionFlow
+attributes
+operations
+end
+
+class ActionEvent<Event
+attributes
+operations
+end
+
+class InteractionFlowModel<NamedElement
+attributes
+operations
+end
+
+class ParameterBindingGroup<InteractionFlowModelElement
+attributes
+operations
+end
+
+class ParameterBinding<InteractionFlowModelElement
+attributes
+operations
+end
+
+class ContentModel<NamedElement
+attributes
+operations
+end
+
+class ViewElement<InteractionFlowElement
+attributes
+operations
+end
+
+class Action<InteractionFlowElement
+attributes
+operations
+end
+
+class DynamicBehavior<ContentBinding
+attributes
+operations
+end
+
+class DataFlow<InteractionFlow
+attributes
+operations
+end
+
+abstract class InteractionFlow<InteractionFlowModelElement
+attributes
+operations
+end
+
+class ViewElementEvent<Event
+attributes
+operations
+end
+
+abstract class InteractionFlowModelElement<Element
+attributes
+operations
+end
+
+class ExternalEvent<Event
+attributes
+operations
+end
+
+class ViewComponentPart<InteractionFlowElement
+attributes
+operations
+end
+
+class ViewContainer<ViewElement
+attributes
+	isLandMark : Boolean
+	isDefault : Boolean
+operations
+end
+
+class IFMLModel<NamedElement
+attributes
+operations
+end
+
+class Event<InteractionFlowElement
+attributes
+operations
+end
+
+abstract class ContentBinding<ViewComponentPart
+attributes
+	uniformResourceIdentifier : String
+operations
+end
+
+class InteractionFlowExpression<Expression
+attributes
+operations
+end
+
+class DataBinding<ContentBinding
+attributes
+operations
+end
+
+class ViewComponent<ViewElement
+attributes
+operations
+end
+
+class SystemEvent<Event
+attributes
+	type : SystemEventTypeEnum
+operations
+end
+
+class BooleanExpression<Expression
+attributes
+operations
+end
+
+class ActivationExpression<BooleanExpression
+attributes
+operations
+end
+
+abstract class Expression<InteractionFlowModelElement
+attributes
+	language : String
+	body : String
+operations
+end
+
+class Parameter<InteractionFlowModelElement,MultiplicityElement,TypedElement,NamedElement
+attributes
+	kind : ParameterKind
+operations
+end
+
+class ConditionalExpression<Expression,ViewComponentPart
+attributes
+operations
+end
+
+class Context<Element
+attributes
+operations
+end
+
+class ContextDimension<NamedElement
+attributes
+operations
+end
+
+class VisualizationAttribute<ViewComponentPart
+attributes
+operations
+end
+
+class Module<InteractionFlowModelElement
+attributes
+operations
+end
+
+class Port<InteractionFlowElement
+attributes
+operations
+end
+
+class Association<Classifier
+attributes
+operations
+end
+
+class Classifier<NamedElement,TemplaetableElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+operations
+end
+
+class Element
+attributes
+	id : String
+operations
+end
+
+class BehavioralFeature<NamedElement
+attributes
+operations
+end
+
+class Behavior<Class
+attributes
+operations
+end
+
+class TemplaetableElement<Element
+attributes
+operations
+end
+
+class TypedElement<NamedElement
+attributes
+	type : String
+operations
+end
+
+class MultiplicityElement<Element
+attributes
+operations
+end
+
+class StructuralFeature<MultiplicityElement,TypedElement
+attributes
+operations
+end
+
+class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class Annotation
+attributes
+	text : String
+operations
+end
+
+association xxx_Form_submitEvent between
+	Form[0..1] role xxx_Form_submitEvent_src
+	SubmitEvent[*] role submitEvent
+end
+
+association xxx_Slot_parameter between
+	Slot[*] role xxx_Slot_parameter_src
+	Parameter[0..1] role parameter
+end
+
+composition xxx_List_selectEvent between
+	List[0..1] role xxx_List_selectEvent_src
+	SelectEvent[*] role selectEvent
+end
+
+association xxx_List_submitEvent between
+	List[0..1] role xxx_List_submitEvent_src
+	SubmitEvent[*] role submitEvent
+end
+
+association xxx_ViewPoint_interactionFlowModelElements between
+	ViewPoint[0..1] role xxx_ViewPoint_interactionFlowModelElements_src
+	InteractionFlowModelElement[*] role interactionFlowModelElements
+end
+
+association xxx_ViewPoint_context_ between
+	ViewPoint[*] role xxx_ViewPoint_context__src
+	Context[1] role context_
+end
+
+composition xxx_InteractionFlowElement_parameters between
+	InteractionFlowElement[0..1] role xxx_InteractionFlowElement_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_InteractionFlowElement_inInteractionFlows between
+	InteractionFlowElement[0..1] role xxx_InteractionFlowElement_inInteractionFlows_src
+	InteractionFlow[*] role inInteractionFlows
+end
+
+composition xxx_InteractionFlowElement_outInteractionFlows between
+	InteractionFlowElement[0..1] role xxx_InteractionFlowElement_outInteractionFlows_src
+	InteractionFlow[*] role outInteractionFlows
+end
+
+association xxx_NavigationFlow_dataFlows between
+	NavigationFlow[0..1] role xxx_NavigationFlow_dataFlows_src
+	DataFlow[*] role dataFlows
+end
+
+composition xxx_InteractionFlowModel_interactionFlowModelElements between
+	InteractionFlowModel[0..1] role xxx_InteractionFlowModel_interactionFlowModelElements_src
+	InteractionFlowModelElement[*] role interactionFlowModelElements
+end
+
+composition xxx_ParameterBindingGroup_parameterBindings between
+	ParameterBindingGroup[0..1] role xxx_ParameterBindingGroup_parameterBindings_src
+	ParameterBinding[*] role parameterBindings
+end
+
+association xxx_ParameterBinding_sourceParameter between
+	ParameterBinding[*] role xxx_ParameterBinding_sourceParameter_src
+	Parameter[1] role sourceParameter
+end
+
+association xxx_ParameterBinding_targetParameter between
+	ParameterBinding[*] role xxx_ParameterBinding_targetParameter_src
+	Parameter[1] role targetParameter
+end
+
+composition xxx_ContentModel_elements between
+	ContentModel[0..1] role xxx_ContentModel_elements_src
+	Element[*] role elements
+end
+
+composition xxx_ViewElement_viewElementEvents between
+	ViewElement[0..1] role xxx_ViewElement_viewElementEvents_src
+	ViewElementEvent[*] role viewElementEvents
+end
+
+association xxx_ViewElement_activationExpression between
+	ViewElement[*] role xxx_ViewElement_activationExpression_src
+	ActivationExpression[0..1] role activationExpression
+end
+
+association xxx_ViewElement_viewContainer between
+	ViewElement[*] role xxx_ViewElement_viewContainer_src
+	ViewContainer[0..1] role viewContainer
+end
+
+composition xxx_Action_actionEvents between
+	Action[0..1] role xxx_Action_actionEvents_src
+	ActionEvent[*] role actionEvents
+end
+
+composition xxx_Action_dynamicBehavior between
+	Action[*] role xxx_Action_dynamicBehavior_src
+	DynamicBehavior[0..1] role dynamicBehavior
+end
+
+association xxx_DynamicBehavior_behavioralFeature between
+	DynamicBehavior[*] role xxx_DynamicBehavior_behavioralFeature_src
+	BehavioralFeature[0..1] role behavioralFeature
+end
+
+association xxx_DynamicBehavior_behavior between
+	DynamicBehavior[*] role xxx_DynamicBehavior_behavior_src
+	Behavior[0..1] role behavior
+end
+
+association xxx_InteractionFlow_srcInteractionFlowElement between
+	InteractionFlow[*] role xxx_InteractionFlow_srcInteractionFlowElement_src
+	InteractionFlowElement[1] role srcInteractionFlowElement
+end
+
+association xxx_InteractionFlow_trgtInteractionFlowElement between
+	InteractionFlow[*] role xxx_InteractionFlow_trgtInteractionFlowElement_src
+	InteractionFlowElement[1] role trgtInteractionFlowElement
+end
+
+composition xxx_InteractionFlow_parameterBindingGroup between
+	InteractionFlow[*] role xxx_InteractionFlow_parameterBindingGroup_src
+	ParameterBindingGroup[0..1] role parameterBindingGroup
+end
+
+composition xxx_ViewComponentPart_viewElementEvents between
+	ViewComponentPart[0..1] role xxx_ViewComponentPart_viewElementEvents_src
+	ViewElementEvent[*] role viewElementEvents
+end
+
+association xxx_ViewComponentPart_activationExpression between
+	ViewComponentPart[*] role xxx_ViewComponentPart_activationExpression_src
+	ActivationExpression[0..1] role activationExpression
+end
+
+association xxx_ViewComponentPart_subViewComponentParts between
+	ViewComponentPart[0..1] role xxx_ViewComponentPart_subViewComponentParts_src
+	ViewComponentPart[*] role subViewComponentParts
+end
+
+association xxx_ViewComponentPart_parentViewComponentPart between
+	ViewComponentPart[*] role xxx_ViewComponentPart_parentViewComponentPart_src
+	ViewComponentPart[1] role parentViewComponentPart
+end
+
+composition xxx_ViewContainer_viewElements between
+	ViewContainer[0..1] role xxx_ViewContainer_viewElements_src
+	ViewElement[*] role viewElements
+end
+
+composition xxx_IFMLModel_interactionFlowModel between
+	IFMLModel[*] role xxx_IFMLModel_interactionFlowModel_src
+	InteractionFlowModel[1] role interactionFlowModel
+end
+
+composition xxx_IFMLModel_contentModel between
+	IFMLModel[*] role xxx_IFMLModel_contentModel_src
+	ContentModel[1] role contentModel
+end
+
+composition xxx_IFMLModel_interactionFlowModelViewPoints between
+	IFMLModel[0..1] role xxx_IFMLModel_interactionFlowModelViewPoints_src
+	ViewPoint[*] role interactionFlowModelViewPoints
+end
+
+association xxx_Event_activationExpression between
+	Event[*] role xxx_Event_activationExpression_src
+	ActivationExpression[0..1] role activationExpression
+end
+
+composition xxx_Event_navigationFlows between
+	Event[0..1] role xxx_Event_navigationFlows_src
+	NavigationFlow[*] role navigationFlows
+end
+
+composition xxx_Event_interactionFlowExpression between
+	Event[*] role xxx_Event_interactionFlowExpression_src
+	InteractionFlowExpression[0..1] role interactionFlowExpression
+end
+
+association xxx_InteractionFlowExpression_interactionFlows between
+	InteractionFlowExpression[0..1] role xxx_InteractionFlowExpression_interactionFlows_src
+	InteractionFlow[1..*] role interactionFlows
+end
+
+association xxx_DataBinding_conditionalExpression between
+	DataBinding[0..1] role xxx_DataBinding_conditionalExpression_src
+	ConditionalExpression[*] role conditionalExpression
+end
+
+association xxx_DataBinding_visualizationAttributes between
+	DataBinding[0..1] role xxx_DataBinding_visualizationAttributes_src
+	VisualizationAttribute[*] role visualizationAttributes
+end
+
+association xxx_DataBinding_classifier between
+	DataBinding[*] role xxx_DataBinding_classifier_src
+	Classifier[1] role classifier
+end
+
+composition xxx_ViewComponent_viewComponentParts between
+	ViewComponent[0..1] role xxx_ViewComponent_viewComponentParts_src
+	ViewComponentPart[*] role viewComponentParts
+end
+
+composition xxx_SystemEvent_triggeringExpressions between
+	SystemEvent[0..1] role xxx_SystemEvent_triggeringExpressions_src
+	Expression[1..*] role triggeringExpressions
+end
+
+association xxx_Context_contextDimensions between
+	Context[0..1] role xxx_Context_contextDimensions_src
+	ContextDimension[*] role contextDimensions
+end
+
+association xxx_VisualizationAttribute_structuralFeature between
+	VisualizationAttribute[*] role xxx_VisualizationAttribute_structuralFeature_src
+	StructuralFeature[0..1] role structuralFeature
+end
+
+association xxx_Module_inputPorts between
+	Module[0..1] role xxx_Module_inputPorts_src
+	Port[1..*] role inputPorts
+end
+
+association xxx_Module_outputPorts between
+	Module[0..1] role xxx_Module_outputPorts_src
+	Port[1..*] role outputPorts
+end
+
+association xxx_Module_interactionFlowModelElements between
+	Module[0..1] role xxx_Module_interactionFlowModelElements_src
+	InteractionFlowModelElement[1..*] role interactionFlowModelElements
+end
+
+composition xxx_Classifier_structuralFeatures between
+	Classifier[0..1] role xxx_Classifier_structuralFeatures_src
+	StructuralFeature[*] role structuralFeatures
+end
+
+composition xxx_Element_annotations between
+	Element[0..1] role xxx_Element_annotations_src
+	Annotation[*] role annotations
+end
+

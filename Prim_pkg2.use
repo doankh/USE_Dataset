@@ -1,0 +1,297 @@
+model prim_pkg2
+enum Op{
+default
+}
+
+enum ParamType{
+default
+}
+
+enum StandardType{
+default
+}
+
+class PrimPkgModel
+attributes
+	name : String
+	description : String
+	pregencodepublicspec : String
+	postgencodepublicspec : String
+	pregencodeprivatespec : String
+	postgencodeprivatespec : String
+	pregencodebody : String
+	postgencodebody : String
+operations
+end
+
+class AdaType
+attributes
+	name : String
+	description : String
+	isPrivate : Boolean
+	isDisplayable : Boolean
+	isNullable : Boolean
+	isNumeric : Boolean
+	isEnum : Boolean
+	isreference : Boolean
+	isdefinition : Boolean
+	suppressXMLwarning : Boolean
+	isdynamic : Boolean
+	isnvtype : Boolean
+	supportOld : Boolean
+	journal : Boolean
+	isChar : Boolean
+	isDate : Boolean
+	isDatetime : Boolean
+	isBitstring : Boolean
+	itemTagName : String
+	isSet : Boolean
+	isTime : Boolean
+	isDecimal : Boolean
+	precision : Integer
+	scale : Integer
+	mindef : String
+	maxdef : String
+	suppressDecOps : Boolean
+	isString : Boolean
+	nchars : Integer
+	multiline : Boolean
+	maxlines : Integer
+	removeLFinImage : Boolean
+	issubtype : Boolean
+	isVstring : Boolean
+	isStringArray : Boolean
+	nlines : Integer
+	lits : String
+	isBlob : Boolean
+	segsize : Integer
+	isStructure : Boolean
+	constattr : String
+	constval : String
+	isTimestamp : Boolean
+	isExternal : Boolean
+	tinyint : Boolean
+	smallint : Boolean
+	integer : Boolean
+	bigint : Boolean
+	notInDB : Boolean
+	defn : String
+	isDirectSubtype : Boolean
+	isconstrained : Boolean
+	firstlit : String
+	firstnum : Integer
+	tickfirst : Boolean
+	tickfirstsucc : Boolean
+	lastlit : String
+	lastnum : Integer
+	ticklast : Boolean
+	ticklastpred : Boolean
+	xmlEnabled : Boolean
+	xmlDatatype : String
+	opsExcluded : Op
+	opsIncluded : Op
+operations
+end
+
+class MinVal
+attributes
+	int8 : Boolean
+	int16 : Boolean
+	int32 : Boolean
+	int64 : Boolean
+operations
+end
+
+class MaxVal
+attributes
+	int8 : Boolean
+	int16 : Boolean
+	int32 : Boolean
+	int64 : Boolean
+operations
+end
+
+class Modification
+attributes
+	by : String
+	on : String
+	mod : String
+operations
+end
+
+class PackageName
+attributes
+	pnl : String
+operations
+end
+
+class Extpackage
+attributes
+	renameAs : String
+operations
+end
+
+class TypeRef
+attributes
+	isSelf : Boolean
+	typs : StandardType
+	pkg : String
+	type : String
+operations
+end
+
+class Stype
+attributes
+	name : String
+	discriminant : Boolean
+operations
+end
+
+class Lit
+attributes
+	literal : String
+	idval : Integer
+operations
+end
+
+class OpOverride
+attributes
+	op : Op
+	value : String
+operations
+end
+
+class OpAdditional
+attributes
+	isConst : Boolean
+	id : String
+	codename : String
+	isProc : Boolean
+	isFun : Boolean
+	isExternal : Boolean
+	body : String
+	description : String
+operations
+end
+
+class Param
+attributes
+	name : String
+	ptyp : ParamType
+	defval : String
+operations
+end
+
+class Fullint
+attributes
+	isNeg : Boolean
+	absval : Integer
+	absvalstr : String
+operations
+end
+
+composition xxx_PrimPkgModel_modHistorys between
+	PrimPkgModel[0..1] role xxx_PrimPkgModel_modHistorys_src
+	Modification[*] role modHistorys
+end
+
+composition xxx_PrimPkgModel_modHistoryb between
+	PrimPkgModel[0..1] role xxx_PrimPkgModel_modHistoryb_src
+	Modification[*] role modHistoryb
+end
+
+composition xxx_PrimPkgModel_extpackages between
+	PrimPkgModel[0..1] role xxx_PrimPkgModel_extpackages_src
+	Extpackage[*] role extpackages
+end
+
+composition xxx_PrimPkgModel_extpackageb between
+	PrimPkgModel[0..1] role xxx_PrimPkgModel_extpackageb_src
+	Extpackage[*] role extpackageb
+end
+
+composition xxx_PrimPkgModel_types between
+	PrimPkgModel[0..1] role xxx_PrimPkgModel_types_src
+	AdaType[*] role types
+end
+
+composition xxx_AdaType_minval between
+	AdaType[*] role xxx_AdaType_minval_src
+	MinVal[0..1] role minval
+end
+
+composition xxx_AdaType_maxval between
+	AdaType[*] role xxx_AdaType_maxval_src
+	MaxVal[0..1] role maxval
+end
+
+composition xxx_AdaType_literals between
+	AdaType[0..1] role xxx_AdaType_literals_src
+	Lit[*] role literals
+end
+
+composition xxx_AdaType_reftype between
+	AdaType[*] role xxx_AdaType_reftype_src
+	TypeRef[0..1] role reftype
+end
+
+composition xxx_AdaType_structure between
+	AdaType[0..1] role xxx_AdaType_structure_src
+	Stype[*] role structure
+end
+
+composition xxx_AdaType_opsOveridden between
+	AdaType[0..1] role xxx_AdaType_opsOveridden_src
+	OpOverride[*] role opsOveridden
+end
+
+composition xxx_AdaType_opsAdded between
+	AdaType[0..1] role xxx_AdaType_opsAdded_src
+	OpAdditional[*] role opsAdded
+end
+
+composition xxx_MinVal_intval between
+	MinVal[*] role xxx_MinVal_intval_src
+	Fullint[0..1] role intval
+end
+
+composition xxx_MaxVal_intval between
+	MaxVal[*] role xxx_MaxVal_intval_src
+	Fullint[0..1] role intval
+end
+
+composition xxx_Extpackage_pkg between
+	Extpackage[*] role xxx_Extpackage_pkg_src
+	PackageName[0..1] role pkg
+end
+
+association xxx_TypeRef_typr between
+	TypeRef[*] role xxx_TypeRef_typr_src
+	AdaType[0..1] role typr
+end
+
+composition xxx_Stype_ltype between
+	Stype[*] role xxx_Stype_ltype_src
+	TypeRef[0..1] role ltype
+end
+
+composition xxx_OpAdditional_ctype between
+	OpAdditional[*] role xxx_OpAdditional_ctype_src
+	TypeRef[0..1] role ctype
+end
+
+composition xxx_OpAdditional_params between
+	OpAdditional[0..1] role xxx_OpAdditional_params_src
+	Param[*] role params
+end
+
+composition xxx_OpAdditional_result between
+	OpAdditional[*] role xxx_OpAdditional_result_src
+	TypeRef[0..1] role result
+end
+
+composition xxx_Param_dtype between
+	Param[*] role xxx_Param_dtype_src
+	TypeRef[0..1] role dtype
+end
+

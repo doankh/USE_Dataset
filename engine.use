@@ -1,0 +1,74 @@
+model Engine
+class Workflow
+attributes
+operations
+end
+
+class Node
+attributes
+operations
+end
+
+class Task<Node
+attributes
+	name : String
+	state : String
+	isEnd : String
+	isStart : String
+operations
+end
+
+class Transition<Node
+attributes
+	name : String
+operations
+end
+
+class BTask<Task
+attributes
+operations
+end
+
+class ITask<Task
+attributes
+operations
+end
+
+class ITransition<Transition
+attributes
+	transit : Integer
+operations
+end
+
+class BTransition<Transition
+attributes
+	transit : String
+operations
+end
+
+class Arc
+attributes
+	name : String
+operations
+end
+
+class DTransition<Transition
+attributes
+operations
+end
+
+class Split<DTransition
+attributes
+operations
+end
+
+class Merge<DTransition
+attributes
+operations
+end
+
+class Simple<DTransition
+attributes
+operations
+end
+

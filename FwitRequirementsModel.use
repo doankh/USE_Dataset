@@ -1,0 +1,351 @@
+model fwitRequirementsModel
+class FwitRequirementModel
+attributes
+operations
+end
+
+class SystemElement
+attributes
+operations
+end
+
+class Include<SystemElement
+attributes
+	file : String
+operations
+end
+
+class Type<SystemElement
+attributes
+	name : String
+	className : String
+operations
+end
+
+class SystemDeclaration
+attributes
+	name : String
+operations
+end
+
+class Module<SystemElement
+attributes
+	name : String
+operations
+end
+
+class FieldDeclaration
+attributes
+operations
+end
+
+class FunctionDeclaration
+attributes
+	name : String
+operations
+end
+
+class Block<ElseBlock
+attributes
+operations
+end
+
+class Expression
+attributes
+	operator : String
+operations
+end
+
+class Conjunction
+attributes
+	operator : String
+operations
+end
+
+class Comparision
+attributes
+	operator : String
+operations
+end
+
+class ValueExpression
+attributes
+	operator : String
+operations
+end
+
+class Multiplication
+attributes
+	operator : String
+operations
+end
+
+class BasicExpression
+attributes
+operations
+end
+
+class Name<BasicExpression
+attributes
+operations
+end
+
+class Literal<Name
+attributes
+operations
+end
+
+class String<Literal
+attributes
+	value : String
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	value : Integer
+operations
+end
+
+class QualifiedExpression<BasicExpression
+attributes
+	value : String
+operations
+end
+
+class NullLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class PrefixOperatorExpression<BasicExpression
+attributes
+	operator : String
+operations
+end
+
+class MethodInvocationExpression<BasicExpression,TaskStatement
+attributes
+operations
+end
+
+class MethodInvocation
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class LocalVariableDeclaration<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement,ElseBlock
+attributes
+operations
+end
+
+class ElseBlock
+attributes
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+	value : String
+operations
+end
+
+class TaskStatement<Statement
+attributes
+operations
+end
+
+class AssignmentStatement<TaskStatement
+attributes
+	operator : String
+operations
+end
+
+class ParExpression<BasicExpression
+attributes
+operations
+end
+
+class VariableDeclaration
+attributes
+	name : String
+operations
+end
+
+composition xxx_FwitRequirementModel_system between
+	FwitRequirementModel[*] role xxx_FwitRequirementModel_system_src
+	SystemDeclaration[0..1] role system
+end
+
+composition xxx_FwitRequirementModel_elements between
+	FwitRequirementModel[0..1] role xxx_FwitRequirementModel_elements_src
+	SystemElement[*] role elements
+end
+
+composition xxx_SystemDeclaration_framework between
+	SystemDeclaration[*] role xxx_SystemDeclaration_framework_src
+	QualifiedExpression[0..1] role framework
+end
+
+composition xxx_Module_fields between
+	Module[0..1] role xxx_Module_fields_src
+	FieldDeclaration[*] role fields
+end
+
+composition xxx_Module_functions between
+	Module[0..1] role xxx_Module_functions_src
+	FunctionDeclaration[*] role functions
+end
+
+association xxx_FieldDeclaration_type between
+	FieldDeclaration[*] role xxx_FieldDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_FieldDeclaration_variables between
+	FieldDeclaration[0..1] role xxx_FieldDeclaration_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_FunctionDeclaration_body between
+	FunctionDeclaration[*] role xxx_FunctionDeclaration_body_src
+	Block[0..1] role body
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Expression_leftOperand between
+	Expression[*] role xxx_Expression_leftOperand_src
+	Conjunction[0..1] role leftOperand
+end
+
+composition xxx_Expression_rightOperand between
+	Expression[*] role xxx_Expression_rightOperand_src
+	Expression[0..1] role rightOperand
+end
+
+composition xxx_Conjunction_leftOperand between
+	Conjunction[*] role xxx_Conjunction_leftOperand_src
+	Comparision[0..1] role leftOperand
+end
+
+composition xxx_Conjunction_rightOperand between
+	Conjunction[*] role xxx_Conjunction_rightOperand_src
+	Conjunction[0..1] role rightOperand
+end
+
+composition xxx_Comparision_leftOperand between
+	Comparision[*] role xxx_Comparision_leftOperand_src
+	ValueExpression[0..1] role leftOperand
+end
+
+composition xxx_Comparision_rightOperand between
+	Comparision[*] role xxx_Comparision_rightOperand_src
+	Comparision[0..1] role rightOperand
+end
+
+composition xxx_ValueExpression_leftOperand between
+	ValueExpression[*] role xxx_ValueExpression_leftOperand_src
+	Multiplication[0..1] role leftOperand
+end
+
+composition xxx_ValueExpression_rightOperand between
+	ValueExpression[*] role xxx_ValueExpression_rightOperand_src
+	ValueExpression[0..1] role rightOperand
+end
+
+composition xxx_Multiplication_leftOperand between
+	Multiplication[*] role xxx_Multiplication_leftOperand_src
+	BasicExpression[0..1] role leftOperand
+end
+
+composition xxx_Multiplication_rightOperand between
+	Multiplication[*] role xxx_Multiplication_rightOperand_src
+	BasicExpression[0..1] role rightOperand
+end
+
+composition xxx_PrefixOperatorExpression_operand between
+	PrefixOperatorExpression[*] role xxx_PrefixOperatorExpression_operand_src
+	Expression[0..1] role operand
+end
+
+association xxx_MethodInvocationExpression_receiver between
+	MethodInvocationExpression[*] role xxx_MethodInvocationExpression_receiver_src
+	VariableDeclaration[0..1] role receiver
+end
+
+composition xxx_MethodInvocationExpression_method between
+	MethodInvocationExpression[*] role xxx_MethodInvocationExpression_method_src
+	MethodInvocation[0..1] role method
+end
+
+composition xxx_MethodInvocation_name between
+	MethodInvocation[*] role xxx_MethodInvocation_name_src
+	String[0..1] role name
+end
+
+composition xxx_MethodInvocation_arguments between
+	MethodInvocation[0..1] role xxx_MethodInvocation_arguments_src
+	Expression[*] role arguments
+end
+
+association xxx_LocalVariableDeclaration_type between
+	LocalVariableDeclaration[*] role xxx_LocalVariableDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_LocalVariableDeclaration_variables between
+	LocalVariableDeclaration[0..1] role xxx_LocalVariableDeclaration_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	ParExpression[0..1] role condition
+end
+
+composition xxx_IfStatement_thenBlok between
+	IfStatement[*] role xxx_IfStatement_thenBlok_src
+	Block[0..1] role thenBlok
+end
+
+composition xxx_IfStatement_elseBlock between
+	IfStatement[*] role xxx_IfStatement_elseBlock_src
+	ElseBlock[0..1] role elseBlock
+end
+
+association xxx_AssignmentStatement_variable between
+	AssignmentStatement[*] role xxx_AssignmentStatement_variable_src
+	VariableDeclaration[0..1] role variable
+end
+
+composition xxx_AssignmentStatement_value between
+	AssignmentStatement[*] role xxx_AssignmentStatement_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_ParExpression_expression between
+	ParExpression[*] role xxx_ParExpression_expression_src
+	Expression[0..1] role expression
+end
+

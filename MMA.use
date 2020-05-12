@@ -1,0 +1,87 @@
+model mma
+class Project
+attributes
+	Title : String
+operations
+end
+
+class Automaton
+attributes
+	Name : String
+operations
+end
+
+class Location
+attributes
+	Name : String
+	IsInitial : Boolean
+operations
+end
+
+class Rectangle<Location
+attributes
+	Edge : Real
+operations
+end
+
+class Ellipse<Location
+attributes
+	Radius : Real
+operations
+end
+
+class Triangle<Location
+attributes
+	Side : Real
+operations
+end
+
+class Edge
+attributes
+	Action : String
+operations
+end
+
+class Update
+attributes
+	Urgent : Boolean
+operations
+end
+
+class Variable
+attributes
+	Name : String
+	Type : String
+operations
+end
+
+composition xxx_Project_bodies between
+	Project[0..1] role xxx_Project_bodies_src
+	Automaton[1..*] role bodies
+end
+
+composition xxx_Automaton_locations between
+	Automaton[0..1] role xxx_Automaton_locations_src
+	Location[1..*] role locations
+end
+
+composition xxx_Location_outgoingEdges between
+	Location[0..1] role xxx_Location_outgoingEdges_src
+	Edge[*] role outgoingEdges
+end
+
+composition xxx_Location_updates between
+	Location[*] role xxx_Location_updates_src
+	Update[0..1] role updates
+end
+
+association xxx_Edge_targetLocation between
+	Edge[*] role xxx_Edge_targetLocation_src
+	Location[1] role targetLocation
+end
+
+composition xxx_Update_variables between
+	Update[0..1] role xxx_Update_variables_src
+	Variable[1..*] role variables
+end
+

@@ -1,0 +1,443 @@
+model mappings
+enum MappingCardinality{
+default
+}
+
+class MappingTransformation<TransformationDefinition
+attributes
+operations
+end
+
+class MappingVariable<Variable
+attributes
+operations
+end
+
+class MatchedElement<ClassUse,MappingVariable
+attributes
+operations
+end
+
+class Delegate<LocatedElement
+attributes
+	isExternal : String
+	linkName : String
+	featureName : String
+operations
+end
+
+class Context<LocatedElement
+attributes
+operations
+end
+
+class Section<LocatedElement
+attributes
+	sectionType : String
+operations
+end
+
+abstract class MappingElement<LocatedElement
+attributes
+operations
+end
+
+abstract class ClassMapping<MappingElement
+attributes
+operations
+end
+
+abstract class Feature2Feature<MappingElement
+attributes
+operations
+end
+
+class AttributeMapping<Feature2Feature
+attributes
+operations
+end
+
+abstract class AttributeRightPart
+attributes
+operations
+end
+
+class AttributeIsString<AttributeRightPart
+attributes
+	strValue : String
+operations
+end
+
+class AttributeIsBoolean<AttributeRightPart
+attributes
+	boolValue : String
+operations
+end
+
+class AttributeIsDouble<AttributeRightPart
+attributes
+	doubleValue : String
+operations
+end
+
+class AttributeIsResolveLink<AttributeRightPart
+attributes
+operations
+end
+
+class AttributeIsInteger<AttributeRightPart
+attributes
+	intValue : Integer
+operations
+end
+
+class Converter
+attributes
+	isExternal : String
+	converterName : String
+operations
+end
+
+class Tag<NamedElement
+attributes
+operations
+end
+
+class Class2Class<ClassMapping
+attributes
+	cardinality : MappingCardinality
+operations
+end
+
+abstract class C2CModifier<MappingElement
+attributes
+operations
+end
+
+class RelatedBy<C2CModifier
+attributes
+operations
+end
+
+class LinkedBy<C2CModifier
+attributes
+operations
+end
+
+class EqualityFilter<C2CModifier
+attributes
+	filter : String
+operations
+end
+
+abstract class Operator<LocatedElement
+attributes
+operations
+end
+
+class Split<Operator
+attributes
+operations
+end
+
+class Join<Operator
+attributes
+operations
+end
+
+class Attribute2Attribute<Feature2Feature,AttributeRightPart
+attributes
+	cardinality : MappingCardinality
+operations
+end
+
+class Reference2Reference<Feature2Feature
+attributes
+	cardinality : MappingCardinality
+	resolverName : String
+operations
+end
+
+abstract class Modifier
+attributes
+operations
+end
+
+abstract class AttributeModifier<Modifier
+attributes
+operations
+end
+
+class ConvertModifier<AttributeModifier
+attributes
+	converter : String
+operations
+end
+
+abstract class DefaultValue<AttributeModifier
+attributes
+operations
+end
+
+class IntDefaultValue<DefaultValue
+attributes
+	defaultValue : Integer
+operations
+end
+
+abstract class MetamodelElementRef
+attributes
+operations
+end
+
+class ClassRef<MetamodelElementRef
+attributes
+operations
+end
+
+class FeatureRef<MetamodelElementRef,Feature2Feature
+attributes
+	featureName : String
+	multivalued : Boolean
+operations
+end
+
+class AttributeRef<MetamodelElementRef
+attributes
+	featureName : String
+	multivalued : Boolean
+operations
+end
+
+class ReferenceRef<MetamodelElementRef
+attributes
+	featureName : String
+	multivalued : Boolean
+operations
+end
+
+class NamedElement
+attributes
+operations
+end
+
+class TransformationDefinition
+attributes
+operations
+end
+
+class TransformationDefinitionParameter
+attributes
+operations
+end
+
+class LocatedElement
+attributes
+operations
+end
+
+class ClassUse
+attributes
+operations
+end
+
+class UseDeclaration
+attributes
+operations
+end
+
+class ResolveLink
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+composition xxx_MappingTransformation_delegates between
+	MappingTransformation[0..1] role xxx_MappingTransformation_delegates_src
+	Delegate[*] role delegates
+end
+
+composition xxx_MappingTransformation_contexts between
+	MappingTransformation[0..1] role xxx_MappingTransformation_contexts_src
+	Context[*] role contexts
+end
+
+composition xxx_Delegate_left between
+	Delegate[0..1] role xxx_Delegate_left_src
+	MatchedElement[*] role left
+end
+
+association xxx_Delegate_module between
+	Delegate[*] role xxx_Delegate_module_src
+	UseDeclaration[0..1] role module
+end
+
+composition xxx_Delegate_tags between
+	Delegate[0..1] role xxx_Delegate_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_Context_left between
+	Context[0..1] role xxx_Context_left_src
+	MatchedElement[*] role left
+end
+
+composition xxx_Context_right between
+	Context[0..1] role xxx_Context_right_src
+	MatchedElement[*] role right
+end
+
+composition xxx_Context_mappings between
+	Context[0..1] role xxx_Context_mappings_src
+	MappingElement[*] role mappings
+end
+
+composition xxx_Context_modifiers between
+	Context[0..1] role xxx_Context_modifiers_src
+	C2CModifier[*] role modifiers
+end
+
+composition xxx_Context_sections between
+	Context[0..1] role xxx_Context_sections_src
+	Section[*] role sections
+end
+
+composition xxx_Context_tags between
+	Context[0..1] role xxx_Context_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_Section_mappings between
+	Section[0..1] role xxx_Section_mappings_src
+	MappingElement[*] role mappings
+end
+
+composition xxx_Feature2Feature_leftFeature between
+	Feature2Feature[*] role xxx_Feature2Feature_leftFeature_src
+	FeatureRef[0..1] role leftFeature
+end
+
+composition xxx_Feature2Feature_converter between
+	Feature2Feature[*] role xxx_Feature2Feature_converter_src
+	Converter[0..1] role converter
+end
+
+composition xxx_AttributeMapping_left between
+	AttributeMapping[0..1] role xxx_AttributeMapping_left_src
+	AttributeRef[*] role left
+end
+
+composition xxx_AttributeMapping_rightPart between
+	AttributeMapping[*] role xxx_AttributeMapping_rightPart_src
+	AttributeRightPart[1] role rightPart
+end
+
+composition xxx_AttributeIsResolveLink_resolveLink between
+	AttributeIsResolveLink[*] role xxx_AttributeIsResolveLink_resolveLink_src
+	ResolveLink[1] role resolveLink
+end
+
+association xxx_Converter_module between
+	Converter[*] role xxx_Converter_module_src
+	UseDeclaration[0..1] role module
+end
+
+composition xxx_Class2Class_modifiers between
+	Class2Class[0..1] role xxx_Class2Class_modifiers_src
+	C2CModifier[*] role modifiers
+end
+
+composition xxx_Class2Class_left between
+	Class2Class[0..1] role xxx_Class2Class_left_src
+	ClassRef[1..*] role left
+end
+
+composition xxx_Class2Class_right between
+	Class2Class[0..1] role xxx_Class2Class_right_src
+	ClassRef[1..*] role right
+end
+
+composition xxx_Class2Class_scopedAttributes between
+	Class2Class[0..1] role xxx_Class2Class_scopedAttributes_src
+	Attribute2Attribute[*] role scopedAttributes
+end
+
+composition xxx_RelatedBy_attribute between
+	RelatedBy[*] role xxx_RelatedBy_attribute_src
+	AttributeRef[1] role attribute
+end
+
+composition xxx_LinkedBy_attribute between
+	LinkedBy[*] role xxx_LinkedBy_attribute_src
+	AttributeRef[1] role attribute
+end
+
+association xxx_LinkedBy_linkedElement between
+	LinkedBy[*] role xxx_LinkedBy_linkedElement_src
+	MatchedElement[1] role linkedElement
+end
+
+composition xxx_EqualityFilter_attribute between
+	EqualityFilter[*] role xxx_EqualityFilter_attribute_src
+	AttributeRef[1] role attribute
+end
+
+composition xxx_Split_mappings between
+	Split[0..1] role xxx_Split_mappings_src
+	ClassMapping[*] role mappings
+end
+
+composition xxx_Join_mappings between
+	Join[0..1] role xxx_Join_mappings_src
+	ClassMapping[*] role mappings
+end
+
+association xxx_Attribute2Attribute_context_ between
+	Attribute2Attribute[*] role xxx_Attribute2Attribute_context__src
+	Class2Class[0..1] role context_
+end
+
+composition xxx_Attribute2Attribute_right between
+	Attribute2Attribute[0..1] role xxx_Attribute2Attribute_right_src
+	AttributeRef[1..*] role right
+end
+
+composition xxx_Attribute2Attribute_modifiers between
+	Attribute2Attribute[0..1] role xxx_Attribute2Attribute_modifiers_src
+	AttributeModifier[*] role modifiers
+end
+
+composition xxx_Reference2Reference_left between
+	Reference2Reference[0..1] role xxx_Reference2Reference_left_src
+	ReferenceRef[*] role left
+end
+
+composition xxx_Reference2Reference_right between
+	Reference2Reference[0..1] role xxx_Reference2Reference_right_src
+	ReferenceRef[1..*] role right
+end
+
+association xxx_ClassRef_klass between
+	ClassRef[*] role xxx_ClassRef_klass_src
+	ClassUse[1] role klass
+end
+
+association xxx_FeatureRef_referredElement between
+	FeatureRef[*] role xxx_FeatureRef_referredElement_src
+	MatchedElement[1] role referredElement
+end
+
+association xxx_AttributeRef_referredElement between
+	AttributeRef[*] role xxx_AttributeRef_referredElement_src
+	MatchedElement[1] role referredElement
+end
+
+association xxx_ReferenceRef_referredElement between
+	ReferenceRef[*] role xxx_ReferenceRef_referredElement_src
+	MatchedElement[1] role referredElement
+end
+

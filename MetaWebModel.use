@@ -1,0 +1,251 @@
+model metawebmodel
+enum InputType{
+default
+}
+
+enum Method{
+default
+}
+
+enum SQLDataType{
+default
+}
+
+class WebSite
+attributes
+	name : String
+operations
+end
+
+class Controller
+attributes
+operations
+end
+
+class View
+attributes
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class DAO
+attributes
+operations
+	EntityToSqlTable(entity : Entity):SQLTable
+	SQLTableToEntity(table : SQLTable):Entity
+end
+
+class DataBase
+attributes
+	name : String
+	url : String
+	userName : String
+	password : String
+operations
+end
+
+class Entity<DataType
+attributes
+operations
+end
+
+class SQLTable
+attributes
+	name : String
+operations
+end
+
+class Row
+attributes
+operations
+end
+
+class Column
+attributes
+	Type : String
+	Nom : String
+operations
+end
+
+class Data
+attributes
+	value : String
+operations
+end
+
+class Page
+attributes
+	head : String
+	name : String
+operations
+end
+
+class Form
+attributes
+	action : String
+	method : Method
+operations
+end
+
+class Content
+attributes
+	htmlText : String
+operations
+end
+
+class Field
+attributes
+operations
+end
+
+class Input
+attributes
+	inputType : InputType
+	name : String
+	value : String
+operations
+end
+
+class Label
+attributes
+	value : String
+operations
+end
+
+class CSS
+attributes
+	content : String
+operations
+end
+
+class EntityAtribute
+attributes
+	name : String
+operations
+end
+
+class DataType
+attributes
+	nom : String
+operations
+end
+
+composition xxx_WebSite_controllers between
+	WebSite[0..1] role xxx_WebSite_controllers_src
+	Controller[1..*] role controllers
+end
+
+composition xxx_WebSite_models between
+	WebSite[0..1] role xxx_WebSite_models_src
+	Model[1..*] role models
+end
+
+composition xxx_WebSite_vues between
+	WebSite[0..1] role xxx_WebSite_vues_src
+	View[1..*] role vues
+end
+
+association xxx_Controller_controledViews between
+	Controller[0..1] role xxx_Controller_controledViews_src
+	View[1..*] role controledViews
+end
+
+association xxx_Controller_model_ between
+	Controller[*] role xxx_Controller_model__src
+	Model[0..1] role model_
+end
+
+association xxx_View_model_ between
+	View[0..1] role xxx_View_model__src
+	Model[1..*] role model_
+end
+
+composition xxx_View_pages between
+	View[0..1] role xxx_View_pages_src
+	Page[1..*] role pages
+end
+
+composition xxx_Model_dao between
+	Model[0..1] role xxx_Model_dao_src
+	DAO[1..*] role dao
+end
+
+composition xxx_DAO_dataBase between
+	DAO[0..1] role xxx_DAO_dataBase_src
+	DataBase[1..*] role dataBase
+end
+
+composition xxx_DAO_managedEntities between
+	DAO[0..1] role xxx_DAO_managedEntities_src
+	Entity[1..*] role managedEntities
+end
+
+composition xxx_DataBase_tables between
+	DataBase[0..1] role xxx_DataBase_tables_src
+	SQLTable[1..*] role tables
+end
+
+composition xxx_Entity_atributes between
+	Entity[0..1] role xxx_Entity_atributes_src
+	EntityAtribute[*] role atributes
+end
+
+composition xxx_SQLTable_Rows between
+	SQLTable[0..1] role xxx_SQLTable_Rows_src
+	Row[*] role Rows
+end
+
+composition xxx_SQLTable_columns between
+	SQLTable[0..1] role xxx_SQLTable_columns_src
+	Column[1..*] role columns
+end
+
+composition xxx_Row_content between
+	Row[0..1] role xxx_Row_content_src
+	Data[1..*] role content
+end
+
+association xxx_Data_column between
+	Data[*] role xxx_Data_column_src
+	Column[1] role column
+end
+
+composition xxx_Page_formulaire between
+	Page[0..1] role xxx_Page_formulaire_src
+	Form[1..*] role formulaire
+end
+
+composition xxx_Page_htmlContent between
+	Page[*] role xxx_Page_htmlContent_src
+	Content[0..1] role htmlContent
+end
+
+association xxx_Page_css between
+	Page[0..1] role xxx_Page_css_src
+	CSS[*] role css
+end
+
+composition xxx_Form_fields between
+	Form[0..1] role xxx_Form_fields_src
+	Field[1..*] role fields
+end
+
+composition xxx_Field_input between
+	Field[*] role xxx_Field_input_src
+	Input[0..1] role input
+end
+
+composition xxx_Field_label between
+	Field[*] role xxx_Field_label_src
+	Label[0..1] role label
+end
+
+association xxx_EntityAtribute_type between
+	EntityAtribute[*] role xxx_EntityAtribute_type_src
+	DataType[1] role type
+end
+

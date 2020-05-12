@@ -1,0 +1,73 @@
+model inheritancemapping
+enum USState{
+default
+}
+
+abstract class Address
+attributes
+	name : String
+	street : String
+	city : String
+operations
+end
+
+class ContentList
+attributes
+	name : String
+operations
+end
+
+class DistrictUKAddress<UKAddress
+attributes
+	district : String
+operations
+end
+
+class InternationalPrice<Price
+attributes
+	currency : String
+operations
+end
+
+class Price
+attributes
+	name : String
+	value : String
+operations
+end
+
+class UKAddress<Address
+attributes
+	postcode : String
+operations
+end
+
+class USAddress<Address
+attributes
+	state : USState
+	zip : String
+operations
+end
+
+class Customer
+attributes
+	name : String
+operations
+end
+
+class SpecificCustomer<Customer
+attributes
+	specificName : String
+operations
+end
+
+association xxx_ContentList_address between
+	ContentList[0..1] role xxx_ContentList_address_src
+	Address[1..*] role address
+end
+
+association xxx_ContentList_price between
+	ContentList[0..1] role xxx_ContentList_price_src
+	Price[1..*] role price
+end
+

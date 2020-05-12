@@ -1,0 +1,90 @@
+model genesis
+class Model
+attributes
+operations
+end
+
+class Section
+attributes
+	name : String
+operations
+end
+
+class CommonsenseKnowledge<Section
+attributes
+operations
+end
+
+class ReflexiveKnowledge<Section
+attributes
+operations
+end
+
+class ReflexiveDescription
+attributes
+	name : String
+operations
+end
+
+class Perspective<Section
+attributes
+operations
+end
+
+class Story
+attributes
+	name : String
+operations
+end
+
+class Description
+attributes
+operations
+end
+
+class Sentence
+attributes
+	fragments : String
+operations
+end
+
+composition xxx_Model_header between
+	Model[0..1] role xxx_Model_header_src
+	Sentence[*] role header
+end
+
+composition xxx_Model_sections between
+	Model[0..1] role xxx_Model_sections_src
+	Section[*] role sections
+end
+
+composition xxx_CommonsenseKnowledge_body between
+	CommonsenseKnowledge[*] role xxx_CommonsenseKnowledge_body_src
+	Description[0..1] role body
+end
+
+composition xxx_ReflexiveKnowledge_subsections between
+	ReflexiveKnowledge[0..1] role xxx_ReflexiveKnowledge_subsections_src
+	ReflexiveDescription[*] role subsections
+end
+
+composition xxx_ReflexiveDescription_body between
+	ReflexiveDescription[*] role xxx_ReflexiveDescription_body_src
+	Description[0..1] role body
+end
+
+composition xxx_Perspective_subsections between
+	Perspective[0..1] role xxx_Perspective_subsections_src
+	Story[*] role subsections
+end
+
+composition xxx_Story_body between
+	Story[*] role xxx_Story_body_src
+	Description[0..1] role body
+end
+
+composition xxx_Description_sentences between
+	Description[0..1] role xxx_Description_sentences_src
+	Sentence[*] role sentences
+end
+

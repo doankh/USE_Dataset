@@ -1,0 +1,53 @@
+model PrimitiveTypes
+class State
+attributes
+	name : String
+	isStart : Boolean
+	isEnd : Boolean
+	isFail : Boolean
+operations
+end
+
+class Transition
+attributes
+	transProb : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	type : String
+operations
+end
+
+association xxx_State_incoming between
+	State[0..1] role xxx_State_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_State_outGoing between
+	State[0..1] role xxx_State_outGoing_src
+	Transition[*] role outGoing
+end
+
+association xxx_State_formalParam between
+	State[0..1] role xxx_State_formalParam_src
+	Parameter[*] role formalParam
+end
+
+association xxx_Transition_to between
+	Transition[*] role xxx_Transition_to_src
+	State[1] role to
+end
+
+association xxx_Transition_from between
+	Transition[*] role xxx_Transition_from_src
+	State[1] role from_
+end
+
+association xxx_Parameter_state between
+	Parameter[*] role xxx_Parameter_state_src
+	State[1] role state
+end
+

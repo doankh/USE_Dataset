@@ -1,0 +1,383 @@
+model faceletTaglib
+enum FaceletTaglibVersion{
+default
+}
+
+enum GenericBooleanBase{
+default
+}
+
+class Description
+attributes
+	any : String
+	id : String
+	lang : String
+operations
+end
+
+class DisplayName<IdentifiableLangStringValue
+attributes
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class FaceletTaglibCanonicalName
+attributes
+	value : String
+	id : String
+operations
+end
+
+class FaceletTaglibExtension
+attributes
+	any : String
+	id : String
+operations
+end
+
+class FaceletTaglibFunction<UserVisibleTaglibObject
+attributes
+operations
+end
+
+class FaceletTaglibTagAttribute<UserVisibleTaglibObject
+attributes
+	id : String
+	name : String
+	required : Boolean
+	type : String
+	methodSignature : String
+operations
+end
+
+class FaceletTaglibTagBehaviorExtension
+attributes
+	any : String
+	id : String
+operations
+end
+
+class FaceletTaglibTagBehavior<UserVisibleTaglibObject
+attributes
+operations
+end
+
+class FaceletTaglibTagComponentExtension
+attributes
+	any : String
+	id : String
+operations
+end
+
+class FaceletTaglibTagComponent<UserVisibleTaglibObject
+attributes
+operations
+end
+
+class FaceletTaglibTagConverterExtension
+attributes
+	any : String
+	id : String
+operations
+end
+
+class FaceletTaglibTagConverter<UserVisibleTaglibObject
+attributes
+operations
+end
+
+class FaceletTaglibTagExtension
+attributes
+	any : String
+	id : String
+operations
+end
+
+class FaceletTaglibTag<UserVisibleTaglibObject
+attributes
+	tagName : String
+	handlerClass : String
+operations
+end
+
+class FaceletTaglibTagValidatorExtension
+attributes
+	any : String
+	id : String
+operations
+end
+
+class FaceletTaglibTagValidator<UserVisibleTaglibObject
+attributes
+operations
+end
+
+class FaceletTaglib<UserVisibleTaglibObject
+attributes
+	group : String
+	id : String
+	version : FaceletTaglibVersion
+	namespaceUri : String
+	shortName : String
+operations
+end
+
+class FullyQualifiedClass<IdentifiableStringValue
+attributes
+operations
+end
+
+class GenericBoolean<IdentifiableStringValue
+attributes
+operations
+end
+
+class Icon
+attributes
+	id : String
+	lang : String
+operations
+end
+
+class JavaIdentifier<IdentifiableStringValue
+attributes
+operations
+end
+
+class Path<IdentifiableStringValue
+attributes
+operations
+end
+
+class IdentifiableStringValue
+attributes
+	value : String
+	id : String
+operations
+end
+
+abstract class IdentifiableLangStringValue<IdentifiableStringValue
+attributes
+	lang : String
+operations
+end
+
+abstract class UserVisibleTaglibObject
+attributes
+operations
+	getDescription(language : String,separationString : String):String
+	getDefaultDescription(separationString : String):String
+	getDisplayName(language : String,separationString : String):String
+	getDefaultDisplayName(separationString : String):String
+end
+
+composition xxx_DocumentRoot_faceletTaglib between
+	DocumentRoot[*] role xxx_DocumentRoot_faceletTaglib_src
+	FaceletTaglib[*] role faceletTaglib
+end
+
+composition xxx_FaceletTaglibFunction_functionName between
+	FaceletTaglibFunction[*] role xxx_FaceletTaglibFunction_functionName_src
+	IdentifiableStringValue[1] role functionName
+end
+
+composition xxx_FaceletTaglibFunction_functionClass between
+	FaceletTaglibFunction[*] role xxx_FaceletTaglibFunction_functionClass_src
+	FullyQualifiedClass[1] role functionClass
+end
+
+composition xxx_FaceletTaglibFunction_functionSignature between
+	FaceletTaglibFunction[*] role xxx_FaceletTaglibFunction_functionSignature_src
+	IdentifiableStringValue[1] role functionSignature
+end
+
+composition xxx_FaceletTaglibTagAttribute_nameElement between
+	FaceletTaglibTagAttribute[*] role xxx_FaceletTaglibTagAttribute_nameElement_src
+	FaceletTaglibCanonicalName[1] role nameElement
+end
+
+composition xxx_FaceletTaglibTagAttribute_requiredElement between
+	FaceletTaglibTagAttribute[*] role xxx_FaceletTaglibTagAttribute_requiredElement_src
+	GenericBoolean[0..1] role requiredElement
+end
+
+composition xxx_FaceletTaglibTagAttribute_typeElement between
+	FaceletTaglibTagAttribute[*] role xxx_FaceletTaglibTagAttribute_typeElement_src
+	FullyQualifiedClass[0..1] role typeElement
+end
+
+composition xxx_FaceletTaglibTagAttribute_methodSignatureElement between
+	FaceletTaglibTagAttribute[*] role xxx_FaceletTaglibTagAttribute_methodSignatureElement_src
+	IdentifiableStringValue[0..1] role methodSignatureElement
+end
+
+composition xxx_FaceletTaglibTagBehavior_behaviorId between
+	FaceletTaglibTagBehavior[*] role xxx_FaceletTaglibTagBehavior_behaviorId_src
+	IdentifiableStringValue[1] role behaviorId
+end
+
+composition xxx_FaceletTaglibTagBehavior_handlerClass between
+	FaceletTaglibTagBehavior[*] role xxx_FaceletTaglibTagBehavior_handlerClass_src
+	FullyQualifiedClass[0..1] role handlerClass
+end
+
+composition xxx_FaceletTaglibTagBehavior_behaviorExtension between
+	FaceletTaglibTagBehavior[0..1] role xxx_FaceletTaglibTagBehavior_behaviorExtension_src
+	FaceletTaglibTagBehaviorExtension[*] role behaviorExtension
+end
+
+composition xxx_FaceletTaglibTagComponent_componentType between
+	FaceletTaglibTagComponent[*] role xxx_FaceletTaglibTagComponent_componentType_src
+	IdentifiableStringValue[1] role componentType
+end
+
+composition xxx_FaceletTaglibTagComponent_rendererType between
+	FaceletTaglibTagComponent[*] role xxx_FaceletTaglibTagComponent_rendererType_src
+	IdentifiableStringValue[0..1] role rendererType
+end
+
+composition xxx_FaceletTaglibTagComponent_handlerClass between
+	FaceletTaglibTagComponent[*] role xxx_FaceletTaglibTagComponent_handlerClass_src
+	FullyQualifiedClass[0..1] role handlerClass
+end
+
+composition xxx_FaceletTaglibTagComponent_componentExtension between
+	FaceletTaglibTagComponent[0..1] role xxx_FaceletTaglibTagComponent_componentExtension_src
+	FaceletTaglibTagComponentExtension[*] role componentExtension
+end
+
+composition xxx_FaceletTaglibTagConverter_converterId between
+	FaceletTaglibTagConverter[*] role xxx_FaceletTaglibTagConverter_converterId_src
+	IdentifiableStringValue[1] role converterId
+end
+
+composition xxx_FaceletTaglibTagConverter_handlerClass between
+	FaceletTaglibTagConverter[*] role xxx_FaceletTaglibTagConverter_handlerClass_src
+	FullyQualifiedClass[0..1] role handlerClass
+end
+
+composition xxx_FaceletTaglibTagConverter_converterExtension between
+	FaceletTaglibTagConverter[0..1] role xxx_FaceletTaglibTagConverter_converterExtension_src
+	FaceletTaglibTagConverterExtension[*] role converterExtension
+end
+
+composition xxx_FaceletTaglibTag_tagNameElement between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_tagNameElement_src
+	FaceletTaglibCanonicalName[1] role tagNameElement
+end
+
+composition xxx_FaceletTaglibTag_handlerClassElement between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_handlerClassElement_src
+	FullyQualifiedClass[0..1] role handlerClassElement
+end
+
+composition xxx_FaceletTaglibTag_behavior between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_behavior_src
+	FaceletTaglibTagBehavior[0..1] role behavior
+end
+
+composition xxx_FaceletTaglibTag_component between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_component_src
+	FaceletTaglibTagComponent[0..1] role component
+end
+
+composition xxx_FaceletTaglibTag_converter between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_converter_src
+	FaceletTaglibTagConverter[0..1] role converter
+end
+
+composition xxx_FaceletTaglibTag_validator between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_validator_src
+	FaceletTaglibTagValidator[0..1] role validator
+end
+
+composition xxx_FaceletTaglibTag_source between
+	FaceletTaglibTag[*] role xxx_FaceletTaglibTag_source_src
+	IdentifiableStringValue[0..1] role source
+end
+
+composition xxx_FaceletTaglibTag_attribute between
+	FaceletTaglibTag[0..1] role xxx_FaceletTaglibTag_attribute_src
+	FaceletTaglibTagAttribute[*] role attribute
+end
+
+composition xxx_FaceletTaglibTag_tagExtension between
+	FaceletTaglibTag[0..1] role xxx_FaceletTaglibTag_tagExtension_src
+	FaceletTaglibTagExtension[*] role tagExtension
+end
+
+composition xxx_FaceletTaglibTagValidator_validatorId between
+	FaceletTaglibTagValidator[*] role xxx_FaceletTaglibTagValidator_validatorId_src
+	IdentifiableStringValue[1] role validatorId
+end
+
+composition xxx_FaceletTaglibTagValidator_handlerClass between
+	FaceletTaglibTagValidator[*] role xxx_FaceletTaglibTagValidator_handlerClass_src
+	FullyQualifiedClass[0..1] role handlerClass
+end
+
+composition xxx_FaceletTaglibTagValidator_validatorExtension between
+	FaceletTaglibTagValidator[0..1] role xxx_FaceletTaglibTagValidator_validatorExtension_src
+	FaceletTaglibTagValidatorExtension[*] role validatorExtension
+end
+
+composition xxx_FaceletTaglib_libraryClass between
+	FaceletTaglib[*] role xxx_FaceletTaglib_libraryClass_src
+	FullyQualifiedClass[0..1] role libraryClass
+end
+
+composition xxx_FaceletTaglib_namespace between
+	FaceletTaglib[*] role xxx_FaceletTaglib_namespace_src
+	IdentifiableStringValue[0..1] role namespace
+end
+
+composition xxx_FaceletTaglib_compositeLibraryName between
+	FaceletTaglib[*] role xxx_FaceletTaglib_compositeLibraryName_src
+	FullyQualifiedClass[0..1] role compositeLibraryName
+end
+
+composition xxx_FaceletTaglib_tag between
+	FaceletTaglib[0..1] role xxx_FaceletTaglib_tag_src
+	FaceletTaglibTag[*] role tag
+end
+
+composition xxx_FaceletTaglib_function between
+	FaceletTaglib[0..1] role xxx_FaceletTaglib_function_src
+	FaceletTaglibFunction[*] role function
+end
+
+composition xxx_FaceletTaglib_taglibExtension between
+	FaceletTaglib[0..1] role xxx_FaceletTaglib_taglibExtension_src
+	FaceletTaglibExtension[*] role taglibExtension
+end
+
+composition xxx_Icon_smallIcon between
+	Icon[*] role xxx_Icon_smallIcon_src
+	Path[0..1] role smallIcon
+end
+
+composition xxx_Icon_largeIcon between
+	Icon[*] role xxx_Icon_largeIcon_src
+	Path[0..1] role largeIcon
+end
+
+composition xxx_UserVisibleTaglibObject_description between
+	UserVisibleTaglibObject[0..1] role xxx_UserVisibleTaglibObject_description_src
+	Description[*] role description
+end
+
+composition xxx_UserVisibleTaglibObject_displayName between
+	UserVisibleTaglibObject[0..1] role xxx_UserVisibleTaglibObject_displayName_src
+	DisplayName[*] role displayName
+end
+
+composition xxx_UserVisibleTaglibObject_icon between
+	UserVisibleTaglibObject[0..1] role xxx_UserVisibleTaglibObject_icon_src
+	Icon[*] role icon
+end
+

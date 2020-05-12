@@ -1,0 +1,123 @@
+model packages
+class TclPackageInfo
+attributes
+	name : String
+	version : String
+	sources : String
+	fetched : Boolean
+	libraries : String
+operations
+end
+
+class TclInterpreterInfo
+attributes
+	installLocation : String
+	name : String
+	fetched : Boolean
+	fetchedAt : String
+	environment : String
+operations
+end
+
+class TclProjectInfo
+attributes
+	name : String
+operations
+	findModule(handle : String):TclModuleInfo
+end
+
+class TclModuleInfo
+attributes
+	handle : String
+	external : Boolean
+operations
+end
+
+class TclSourceEntry
+attributes
+	value : String
+	start : Integer
+	end_ : Integer
+operations
+end
+
+class UserCorrection
+attributes
+	originalValue : String
+	userValue : String
+	variable : Boolean
+operations
+end
+
+class VariableMapEntry
+attributes
+	key : String
+operations
+end
+
+class VariableValue
+attributes
+	value : String
+operations
+end
+
+class VariableMap
+attributes
+operations
+end
+
+association xxx_TclPackageInfo_dependencies between
+	TclPackageInfo[0..1] role xxx_TclPackageInfo_dependencies_src
+	TclPackageInfo[*] role dependencies
+end
+
+composition xxx_TclInterpreterInfo_packages between
+	TclInterpreterInfo[0..1] role xxx_TclInterpreterInfo_packages_src
+	TclPackageInfo[*] role packages
+end
+
+composition xxx_TclProjectInfo_modules between
+	TclProjectInfo[0..1] role xxx_TclProjectInfo_modules_src
+	TclModuleInfo[*] role modules
+end
+
+composition xxx_TclProjectInfo_variables between
+	TclProjectInfo[0..1] role xxx_TclProjectInfo_variables_src
+	VariableMapEntry[*] role variables
+end
+
+composition xxx_TclModuleInfo_required between
+	TclModuleInfo[0..1] role xxx_TclModuleInfo_required_src
+	TclSourceEntry[*] role required
+end
+
+composition xxx_TclModuleInfo_provided between
+	TclModuleInfo[0..1] role xxx_TclModuleInfo_provided_src
+	TclSourceEntry[*] role provided
+end
+
+composition xxx_TclModuleInfo_sourced between
+	TclModuleInfo[0..1] role xxx_TclModuleInfo_sourced_src
+	TclSourceEntry[*] role sourced
+end
+
+composition xxx_TclModuleInfo_packageCorrections between
+	TclModuleInfo[0..1] role xxx_TclModuleInfo_packageCorrections_src
+	UserCorrection[*] role packageCorrections
+end
+
+composition xxx_TclModuleInfo_sourceCorrections between
+	TclModuleInfo[0..1] role xxx_TclModuleInfo_sourceCorrections_src
+	UserCorrection[*] role sourceCorrections
+end
+
+composition xxx_VariableMapEntry_value between
+	VariableMapEntry[*] role xxx_VariableMapEntry_value_src
+	VariableValue[0..1] role value
+end
+
+composition xxx_VariableMap_variables between
+	VariableMap[0..1] role xxx_VariableMap_variables_src
+	VariableMapEntry[*] role variables
+end
+

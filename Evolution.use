@@ -1,0 +1,147 @@
+model evolution
+class Expression
+attributes
+operations
+end
+
+class EvolutionRule
+attributes
+operations
+end
+
+class BinaryExp<Expression
+attributes
+operations
+end
+
+class Plus<BinaryExp
+attributes
+operations
+end
+
+class Minus<BinaryExp
+attributes
+operations
+end
+
+class Mult<BinaryExp
+attributes
+operations
+end
+
+class Div<BinaryExp
+attributes
+operations
+end
+
+class Max<BinaryExp
+attributes
+operations
+end
+
+class Min<BinaryExp
+attributes
+operations
+end
+
+class Greater<BinaryExp
+attributes
+operations
+end
+
+class Lower<BinaryExp
+attributes
+operations
+end
+
+class Equals<BinaryExp
+attributes
+operations
+end
+
+class Constant<Expression
+attributes
+	integerValue : Integer
+operations
+end
+
+class If<Expression
+attributes
+operations
+end
+
+class NeighbourNumber<Expression
+attributes
+operations
+end
+
+class Interval
+attributes
+operations
+end
+
+class EvolutionRules
+attributes
+operations
+end
+
+class State<Expression
+attributes
+operations
+end
+
+composition xxx_EvolutionRule_nextValue between
+	EvolutionRule[*] role xxx_EvolutionRule_nextValue_src
+	Expression[1] role nextValue
+end
+
+composition xxx_EvolutionRule_interval between
+	EvolutionRule[*] role xxx_EvolutionRule_interval_src
+	Interval[1] role interval
+end
+
+composition xxx_BinaryExp_rhs between
+	BinaryExp[*] role xxx_BinaryExp_rhs_src
+	Expression[1] role rhs
+end
+
+composition xxx_BinaryExp_lhs between
+	BinaryExp[*] role xxx_BinaryExp_lhs_src
+	Expression[1] role lhs
+end
+
+composition xxx_If_condition between
+	If[*] role xxx_If_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_If_thenPart between
+	If[*] role xxx_If_thenPart_src
+	Expression[1] role thenPart
+end
+
+composition xxx_If_elsePart between
+	If[*] role xxx_If_elsePart_src
+	Expression[1] role elsePart
+end
+
+composition xxx_NeighbourNumber_state between
+	NeighbourNumber[*] role xxx_NeighbourNumber_state_src
+	Expression[1] role state
+end
+
+composition xxx_Interval_inf between
+	Interval[*] role xxx_Interval_inf_src
+	Constant[1] role inf
+end
+
+composition xxx_Interval_sup between
+	Interval[*] role xxx_Interval_sup_src
+	Constant[1] role sup
+end
+
+composition xxx_EvolutionRules_rules between
+	EvolutionRules[0..1] role xxx_EvolutionRules_rules_src
+	EvolutionRule[*] role rules
+end
+

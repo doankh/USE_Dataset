@@ -1,0 +1,229 @@
+model kappa
+class Model
+attributes
+operations
+end
+
+class Line
+attributes
+operations
+end
+
+class CommentLine<Line
+attributes
+	comment : String
+operations
+end
+
+class Initialise<Line
+attributes
+	multiple : Integer
+operations
+end
+
+class Rule<Line
+attributes
+	name : String
+operations
+end
+
+class RuleRhs
+attributes
+	direction : String
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Agent
+attributes
+	id : String
+operations
+end
+
+class Site
+attributes
+	id : String
+operations
+end
+
+class Mrk
+attributes
+	n : Integer
+	id : String
+operations
+end
+
+class Link
+attributes
+	n : Integer
+	c : String
+operations
+end
+
+class Observe<Line
+attributes
+	label : String
+operations
+end
+
+class Story<Line
+attributes
+	story : String
+operations
+end
+
+class Modification<Line
+attributes
+operations
+end
+
+class Concentration
+attributes
+	op : String
+operations
+end
+
+class Assignment
+attributes
+	name : String
+operations
+end
+
+class ValueCalc
+attributes
+operations
+end
+
+class Atom<ValueCalc
+attributes
+	label : String
+operations
+end
+
+class Number
+attributes
+	nint : Integer
+	ndecimal : String
+operations
+end
+
+class Op
+attributes
+	op : String
+operations
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	Line[*] role elements
+end
+
+composition xxx_Initialise_agents between
+	Initialise[0..1] role xxx_Initialise_agents_src
+	Expression[*] role agents
+end
+
+composition xxx_Rule_lhs between
+	Rule[*] role xxx_Rule_lhs_src
+	Expression[0..1] role lhs
+end
+
+composition xxx_Rule_rhs between
+	Rule[*] role xxx_Rule_rhs_src
+	RuleRhs[0..1] role rhs
+end
+
+composition xxx_RuleRhs_exp between
+	RuleRhs[*] role xxx_RuleRhs_exp_src
+	Expression[0..1] role exp
+end
+
+composition xxx_RuleRhs_rate1 between
+	RuleRhs[*] role xxx_RuleRhs_rate1_src
+	Number[0..1] role rate1
+end
+
+composition xxx_RuleRhs_rate2 between
+	RuleRhs[*] role xxx_RuleRhs_rate2_src
+	Number[0..1] role rate2
+end
+
+composition xxx_Expression_agents between
+	Expression[0..1] role xxx_Expression_agents_src
+	Agent[*] role agents
+end
+
+composition xxx_Agent_sites between
+	Agent[0..1] role xxx_Agent_sites_src
+	Site[*] role sites
+end
+
+composition xxx_Site_state between
+	Site[*] role xxx_Site_state_src
+	Mrk[0..1] role state
+end
+
+composition xxx_Site_link between
+	Site[*] role xxx_Site_link_src
+	Link[0..1] role link
+end
+
+composition xxx_Observe_expression between
+	Observe[*] role xxx_Observe_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Modification_time between
+	Modification[*] role xxx_Modification_time_src
+	Number[0..1] role time
+end
+
+composition xxx_Modification_a between
+	Modification[*] role xxx_Modification_a_src
+	Assignment[0..1] role a
+end
+
+composition xxx_Modification_concentrationTest between
+	Modification[*] role xxx_Modification_concentrationTest_src
+	Concentration[0..1] role concentrationTest
+end
+
+composition xxx_Concentration_lhs between
+	Concentration[*] role xxx_Concentration_lhs_src
+	ValueCalc[0..1] role lhs
+end
+
+composition xxx_Concentration_rhs between
+	Concentration[*] role xxx_Concentration_rhs_src
+	ValueCalc[0..1] role rhs
+end
+
+composition xxx_Assignment_value between
+	Assignment[*] role xxx_Assignment_value_src
+	ValueCalc[0..1] role value
+end
+
+composition xxx_Atom_op between
+	Atom[*] role xxx_Atom_op_src
+	Op[0..1] role op
+end
+
+composition xxx_Atom_rhs between
+	Atom[*] role xxx_Atom_rhs_src
+	ValueCalc[0..1] role rhs
+end
+
+composition xxx_Atom_exp between
+	Atom[*] role xxx_Atom_exp_src
+	ValueCalc[0..1] role exp
+end
+
+composition xxx_Atom_number between
+	Atom[*] role xxx_Atom_number_src
+	Number[0..1] role number
+end
+

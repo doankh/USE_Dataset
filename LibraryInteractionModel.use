@@ -1,0 +1,149 @@
+model libraryinteractionmodel
+class Library
+attributes
+operations
+end
+
+class Book
+attributes
+	isbn : String
+	title : String
+operations
+end
+
+class Books
+attributes
+operations
+end
+
+class Authors
+attributes
+operations
+end
+
+class AuthorShort
+attributes
+	nationality : String
+	name : String
+operations
+end
+
+class Client
+attributes
+	name : String
+	email : String
+operations
+end
+
+class Clients
+attributes
+operations
+end
+
+class Reservation
+attributes
+	to : String
+	from_ : String
+operations
+end
+
+class Author
+attributes
+	name : String
+	nationality : String
+	fullBio : String
+operations
+end
+
+class BookShort
+attributes
+	isbn : String
+	title : String
+operations
+end
+
+class Reservations
+attributes
+operations
+end
+
+association xxx_Library_availableBooks between
+	Library[*] role xxx_Library_availableBooks_src
+	Books[1] role availableBooks
+end
+
+association xxx_Library_authors between
+	Library[*] role xxx_Library_authors_src
+	Authors[1] role authors
+end
+
+association xxx_Library_clients between
+	Library[*] role xxx_Library_clients_src
+	Clients[1] role clients
+end
+
+composition xxx_Book_author between
+	Book[*] role xxx_Book_author_src
+	AuthorShort[1] role author
+end
+
+association xxx_Book_currentReservation between
+	Book[*] role xxx_Book_currentReservation_src
+	Reservation[0..1] role currentReservation
+end
+
+association xxx_Book_reservations between
+	Book[*] role xxx_Book_reservations_src
+	Reservations[1] role reservations
+end
+
+composition xxx_Books_items between
+	Books[0..1] role xxx_Books_items_src
+	BookShort[*] role items
+end
+
+composition xxx_Authors_items between
+	Authors[0..1] role xxx_Authors_items_src
+	AuthorShort[*] role items
+end
+
+association xxx_AuthorShort_self between
+	AuthorShort[*] role xxx_AuthorShort_self_src
+	Author[1] role self
+end
+
+association xxx_Client_self between
+	Client[*] role xxx_Client_self_src
+	Client[1] role self
+end
+
+composition xxx_Clients_items between
+	Clients[0..1] role xxx_Clients_items_src
+	Client[*] role items
+end
+
+association xxx_Reservation_client between
+	Reservation[*] role xxx_Reservation_client_src
+	Client[1] role client
+end
+
+association xxx_Reservation_book between
+	Reservation[*] role xxx_Reservation_book_src
+	Book[1] role book
+end
+
+composition xxx_Author_books between
+	Author[0..1] role xxx_Author_books_src
+	BookShort[*] role books
+end
+
+association xxx_BookShort_self between
+	BookShort[*] role xxx_BookShort_self_src
+	Book[1] role self
+end
+
+composition xxx_Reservations_items between
+	Reservations[0..1] role xxx_Reservations_items_src
+	Reservation[*] role items
+end
+

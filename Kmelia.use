@@ -1,0 +1,175 @@
+model Kmelia
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Component<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Service<LocatedElement
+attributes
+	name : String
+	isRequired : Boolean
+operations
+end
+
+class ExternalService<Service
+attributes
+operations
+end
+
+class InternalService<Service
+attributes
+	returnType : String
+operations
+end
+
+class Parameter<LocatedElement
+attributes
+	name : String
+	type : String
+operations
+end
+
+class Body<LocatedElement
+attributes
+operations
+end
+
+class Interface<LocatedElement
+attributes
+operations
+end
+
+class Behavior<LocatedElement
+attributes
+operations
+end
+
+class State<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Transition<LocatedElement
+attributes
+operations
+end
+
+abstract class Action<LocatedElement
+attributes
+operations
+end
+
+class FunctionCall<Action
+attributes
+	name : String
+operations
+end
+
+abstract class Communication<Action
+attributes
+	channel : String
+operations
+end
+
+class ServiceCall<Communication
+attributes
+	name : String
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class StringExp<Expression
+attributes
+	value : String
+operations
+end
+
+association xxx_Component_provides between
+	Component[0..1] role xxx_Component_provides_src
+	Service[*] role provides
+end
+
+association xxx_Component_requires between
+	Component[0..1] role xxx_Component_requires_src
+	Service[*] role requires
+end
+
+composition xxx_Component_services between
+	Component[0..1] role xxx_Component_services_src
+	Service[*] role services
+end
+
+composition xxx_InternalService_parameters between
+	InternalService[0..1] role xxx_InternalService_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_InternalService_body between
+	InternalService[*] role xxx_InternalService_body_src
+	Body[0..1] role body
+end
+
+composition xxx_Body_interface between
+	Body[*] role xxx_Body_interface_src
+	Interface[1] role interface
+end
+
+composition xxx_Body_behavior between
+	Body[*] role xxx_Body_behavior_src
+	Behavior[0..1] role behavior
+end
+
+association xxx_Behavior_initialState between
+	Behavior[*] role xxx_Behavior_initialState_src
+	State[1] role initialState
+end
+
+association xxx_Behavior_finalStates between
+	Behavior[0..1] role xxx_Behavior_finalStates_src
+	State[1..*] role finalStates
+end
+
+composition xxx_Behavior_states_ between
+	Behavior[0..1] role xxx_Behavior_states__src
+	State[1..*] role states_
+end
+
+composition xxx_Behavior_transitions_ between
+	Behavior[0..1] role xxx_Behavior_transitions__src
+	Transition[1..*] role transitions_
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	State[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+composition xxx_Transition_actions between
+	Transition[0..1] role xxx_Transition_actions_src
+	Action[*] role actions
+end
+
+composition xxx_FunctionCall_arguments between
+	FunctionCall[0..1] role xxx_FunctionCall_arguments_src
+	Expression[*] role arguments
+end
+

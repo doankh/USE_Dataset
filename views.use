@@ -1,0 +1,260 @@
+model views
+class Class
+attributes
+	name : String
+operations
+end
+
+class Property
+attributes
+	isID : Boolean
+	lowerBound : Integer
+	upperBound : Integer
+	name : String
+operations
+end
+
+abstract class NamedType
+attributes
+	name : String
+operations
+end
+
+class DomainModel
+attributes
+operations
+end
+
+abstract class AssociationEnd
+attributes
+	name : String
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class NavigableAssociationEnd<AssociationEnd
+attributes
+operations
+end
+
+class NonNavigableAssociationEnd<AssociationEnd
+attributes
+	partOf : Boolean
+operations
+end
+
+class Association
+attributes
+	name : String
+operations
+end
+
+class DataType<NamedType
+attributes
+operations
+end
+
+class EnumerationType<NamedType
+attributes
+operations
+end
+
+class Literal
+attributes
+	name : String
+	value : String
+operations
+end
+
+class ViewModel
+attributes
+operations
+end
+
+abstract class View
+attributes
+	name : String
+	header : String
+	description : String
+operations
+end
+
+class ViewGroup
+attributes
+	name : String
+	WelcomeViewGroup : Boolean
+operations
+end
+
+class ClassIndexView<View
+attributes
+operations
+end
+
+class ClassOperationView<View
+attributes
+operations
+	Create(obj : Class)
+	Read(obj : Class):Class
+	Update(obj : Class):Class
+	Delete(obj : Class)
+end
+
+abstract class ViewElement
+attributes
+	label : String
+	elementID : String
+operations
+end
+
+class ElementGroups
+attributes
+	header : String
+operations
+end
+
+abstract class PropertyElements<ViewElement
+attributes
+operations
+end
+
+class AssociationElements<ViewElement
+attributes
+operations
+end
+
+abstract class Text<PropertyElements
+attributes
+	format : String
+operations
+end
+
+class ShortText<Text
+attributes
+operations
+end
+
+class LongText<Text
+attributes
+operations
+end
+
+class DateTimePicker<PropertyElements
+attributes
+	format : String
+operations
+end
+
+class Selection<PropertyElements
+attributes
+operations
+end
+
+class SelectionItem
+attributes
+	value : String
+operations
+end
+
+class EnumerationLiteralItem
+attributes
+	literal : String
+operations
+end
+
+composition xxx_Class_associations between
+	Class[0..1] role xxx_Class_associations_src
+	Association[*] role associations
+end
+
+composition xxx_Class_properties between
+	Class[0..1] role xxx_Class_properties_src
+	Property[*] role properties
+end
+
+association xxx_Class_superclass between
+	Class[*] role xxx_Class_superclass_src
+	Class[0..1] role superclass
+end
+
+association xxx_Property_type between
+	Property[*] role xxx_Property_type_src
+	NamedType[0..1] role type
+end
+
+composition xxx_DomainModel_namedtypes between
+	DomainModel[0..1] role xxx_DomainModel_namedtypes_src
+	NamedType[*] role namedtypes
+end
+
+composition xxx_DomainModel_classes between
+	DomainModel[0..1] role xxx_DomainModel_classes_src
+	Class[*] role classes
+end
+
+association xxx_AssociationEnd_type between
+	AssociationEnd[*] role xxx_AssociationEnd_type_src
+	Class[1] role type
+end
+
+composition xxx_Association_nonnavigableassociationend between
+	Association[*] role xxx_Association_nonnavigableassociationend_src
+	NonNavigableAssociationEnd[1] role nonnavigableassociationend
+end
+
+composition xxx_Association_navigableassociationend between
+	Association[*] role xxx_Association_navigableassociationend_src
+	NavigableAssociationEnd[1] role navigableassociationend
+end
+
+composition xxx_EnumerationType_literal between
+	EnumerationType[0..1] role xxx_EnumerationType_literal_src
+	Literal[1..*] role literal
+end
+
+composition xxx_ViewModel_viewgroup between
+	ViewModel[0..1] role xxx_ViewModel_viewgroup_src
+	ViewGroup[*] role viewgroup
+end
+
+composition xxx_ViewGroup_view between
+	ViewGroup[0..1] role xxx_ViewGroup_view_src
+	View[*] role view
+end
+
+association xxx_ViewGroup_startView between
+	ViewGroup[*] role xxx_ViewGroup_startView_src
+	View[0..1] role startView
+end
+
+association xxx_ViewGroup_class_ between
+	ViewGroup[*] role xxx_ViewGroup_class__src
+	Class[1] role class_
+end
+
+composition xxx_ClassOperationView_viewelement between
+	ClassOperationView[0..1] role xxx_ClassOperationView_viewelement_src
+	ViewElement[*] role viewelement
+end
+
+association xxx_ClassOperationView_definedForClass between
+	ClassOperationView[*] role xxx_ClassOperationView_definedForClass_src
+	Class[1] role definedForClass
+end
+
+composition xxx_ElementGroups_viewelement between
+	ElementGroups[0..1] role xxx_ElementGroups_viewelement_src
+	ViewElement[*] role viewelement
+end
+
+composition xxx_Selection_selectionitem between
+	Selection[0..1] role xxx_Selection_selectionitem_src
+	SelectionItem[*] role selectionitem
+end
+
+composition xxx_Selection_enumerationliteralitem between
+	Selection[0..1] role xxx_Selection_enumerationliteralitem_src
+	EnumerationLiteralItem[*] role enumerationliteralitem
+end
+

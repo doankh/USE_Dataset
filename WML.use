@@ -1,0 +1,169 @@
+model wml
+class WMLRoot<WMLGrammarElement
+attributes
+operations
+end
+
+class WMLGrammarElement<ESerializable
+attributes
+operations
+end
+
+class WMLTag<WMLRootExpression
+attributes
+	plus : String
+	endName : String
+	_InhertedTagName : String
+	_NeedingExpansion : Boolean
+	_Description : String
+operations
+	getWMLTags()
+	getWMLKeys()
+end
+
+class WMLKey<WMLExpression
+attributes
+	eol : String
+	_Enum : Boolean
+	_Translatable : Boolean
+	_DataType : String
+operations
+	getValue():String
+end
+
+class WMLKeyValue<WMLGrammarElement
+attributes
+operations
+end
+
+class WMLMacroCall<WMLKeyValue,WMLMacroCallParameter,WMLRootExpression
+attributes
+	point : String
+	relative : String
+operations
+end
+
+class WMLMacroCallParameter<WMLGrammarElement
+attributes
+operations
+end
+
+class WMLArrayCall<WMLKeyValue
+attributes
+operations
+end
+
+class WMLMacroDefine<WMLRootExpression
+attributes
+	endName : String
+operations
+end
+
+class WMLPreprocIF<WMLRootExpression
+attributes
+	Elses : String
+	endName : String
+operations
+end
+
+class WMLRootExpression<WMLExpression
+attributes
+operations
+end
+
+class WMLExpression<WMLValuedExpression
+attributes
+	name : String
+	_LuaBased : Boolean
+	_DefinitionLocation : String
+	_DefinitionOffset : Integer
+	_Cardinality : String
+operations
+	is_Required():Boolean
+	is_Forbidden():Boolean
+	is_Optional():Boolean
+	is_Repeatable():Boolean
+	getAllowedCount():Integer
+	isWMLTag():Boolean
+	asWMLTag():WMLTag
+	isWMLKey():Boolean
+	asWMLKey():WMLKey
+end
+
+class WMLValuedExpression<WMLGrammarElement
+attributes
+operations
+end
+
+class WMLTextdomain<WMLRootExpression
+attributes
+operations
+end
+
+class WMLLuaCode<WMLKeyValue
+attributes
+	value : String
+operations
+end
+
+class WMLMacroParameter<WMLMacroCallParameter
+attributes
+	value : String
+operations
+end
+
+class WMLValue<WMLKeyValue,WMLValuedExpression,WMLMacroParameter
+attributes
+operations
+end
+
+class MacroTokens<WMLMacroParameter
+attributes
+operations
+end
+
+abstract class ESerializable
+attributes
+operations
+end
+
+composition xxx_WMLRoot_Expressions between
+	WMLRoot[0..1] role xxx_WMLRoot_Expressions_src
+	WMLRootExpression[*] role Expressions
+end
+
+composition xxx_WMLTag_Expressions between
+	WMLTag[0..1] role xxx_WMLTag_Expressions_src
+	WMLExpression[*] role Expressions
+end
+
+composition xxx_WMLKey_values between
+	WMLKey[0..1] role xxx_WMLKey_values_src
+	WMLKeyValue[*] role values
+end
+
+composition xxx_WMLMacroCall_Parameters between
+	WMLMacroCall[0..1] role xxx_WMLMacroCall_Parameters_src
+	WMLMacroCallParameter[*] role Parameters
+end
+
+composition xxx_WMLArrayCall_value between
+	WMLArrayCall[0..1] role xxx_WMLArrayCall_value_src
+	WMLValue[*] role value
+end
+
+composition xxx_WMLMacroDefine_Expressions between
+	WMLMacroDefine[0..1] role xxx_WMLMacroDefine_Expressions_src
+	WMLValuedExpression[*] role Expressions
+end
+
+composition xxx_WMLPreprocIF_Expressions between
+	WMLPreprocIF[0..1] role xxx_WMLPreprocIF_Expressions_src
+	WMLValuedExpression[*] role Expressions
+end
+
+composition xxx_WMLPreprocIF_ElseExpressions between
+	WMLPreprocIF[0..1] role xxx_WMLPreprocIF_ElseExpressions_src
+	WMLValuedExpression[*] role ElseExpressions
+end
+

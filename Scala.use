@@ -1,0 +1,214 @@
+model scala
+enum VisibilityKind{
+default
+}
+
+abstract class Element
+attributes
+	ownedComment : String
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+abstract class TypedElement<Element
+attributes
+	isOption : Boolean
+operations
+end
+
+abstract class Classifier<NamedElement,Type
+attributes
+operations
+end
+
+abstract class CaseClassifier<Classifier,VisibilityScope
+attributes
+	isCase : Boolean
+operations
+end
+
+class ExtendableClassifier<Classifier
+attributes
+	isSealed : Boolean
+operations
+end
+
+class Class<CaseClassifier,ExtendableClassifier
+attributes
+	isFinal : Boolean
+	isAbstract : Boolean
+operations
+end
+
+class Object<CaseClassifier
+attributes
+operations
+end
+
+class Trait<ExtendableClassifier
+attributes
+operations
+end
+
+class Field<NamedElement,TypedElement
+attributes
+	isConstructorProperty : Boolean
+	isFinal : Boolean
+	isOverriding : Boolean
+operations
+end
+
+class Constructor<Element
+attributes
+operations
+end
+
+class Method<NamedElement
+attributes
+	isAbstract : Boolean
+	isFinal : Boolean
+	isOverriding : Boolean
+operations
+end
+
+class MethodSignature<TypedElement,Type
+attributes
+operations
+end
+
+class Model<NamedElement
+attributes
+operations
+end
+
+class Parameter<NamedElement,TypedElement
+attributes
+operations
+end
+
+class Package<NamedElement,VisibilityScope
+attributes
+operations
+end
+
+class File<NamedElement
+attributes
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+class Visibility
+attributes
+	kind : VisibilityKind
+operations
+end
+
+abstract class VisibilityScope
+attributes
+operations
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[1] role type
+end
+
+composition xxx_Classifier_fields between
+	Classifier[0..1] role xxx_Classifier_fields_src
+	Field[*] role fields
+end
+
+composition xxx_Classifier_methods between
+	Classifier[0..1] role xxx_Classifier_methods_src
+	Method[*] role methods
+end
+
+association xxx_Classifier_superType between
+	Classifier[*] role xxx_Classifier_superType_src
+	ExtendableClassifier[0..1] role superType
+end
+
+association xxx_Classifier_traits between
+	Classifier[0..1] role xxx_Classifier_traits_src
+	Trait[*] role traits
+end
+
+composition xxx_Class_constructors between
+	Class[0..1] role xxx_Class_constructors_src
+	Constructor[*] role constructors
+end
+
+association xxx_Class_companionObject between
+	Class[*] role xxx_Class_companionObject_src
+	Object[0..1] role companionObject
+end
+
+association xxx_Object_companionClass between
+	Object[*] role xxx_Object_companionClass_src
+	Class[0..1] role companionClass
+end
+
+composition xxx_Field_visibility between
+	Field[*] role xxx_Field_visibility_src
+	Visibility[1] role visibility
+end
+
+composition xxx_Constructor_parameters between
+	Constructor[0..1] role xxx_Constructor_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Method_signature between
+	Method[*] role xxx_Method_signature_src
+	MethodSignature[1] role signature
+end
+
+composition xxx_Method_visibility between
+	Method[*] role xxx_Method_visibility_src
+	Visibility[0..1] role visibility
+end
+
+composition xxx_MethodSignature_parameters between
+	MethodSignature[0..1] role xxx_MethodSignature_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Model_packages between
+	Model[0..1] role xxx_Model_packages_src
+	Package[*] role packages
+end
+
+composition xxx_Package_files between
+	Package[0..1] role xxx_Package_files_src
+	File[*] role files
+end
+
+composition xxx_Package_subPackages between
+	Package[0..1] role xxx_Package_subPackages_src
+	Package[*] role subPackages
+end
+
+association xxx_Package_superPackage between
+	Package[*] role xxx_Package_superPackage_src
+	Package[0..1] role superPackage
+end
+
+composition xxx_File_classifiers between
+	File[0..1] role xxx_File_classifiers_src
+	Classifier[*] role classifiers
+end
+
+association xxx_Visibility_scope between
+	Visibility[*] role xxx_Visibility_scope_src
+	VisibilityScope[0..1] role scope
+end
+

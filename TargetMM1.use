@@ -1,0 +1,117 @@
+model target
+abstract class A<Namespace
+attributes
+operations
+end
+
+class A1<A
+attributes
+operations
+end
+
+class A2<A
+attributes
+operations
+end
+
+class A3<A2
+attributes
+operations
+end
+
+class B<NamedElement
+attributes
+operations
+end
+
+class C<NamedElement
+attributes
+operations
+end
+
+class D<Visitable
+attributes
+operations
+end
+
+class TRoot<Visitable
+attributes
+operations
+end
+
+class NamedElement<Visitable
+attributes
+	name : String
+operations
+end
+
+abstract class Visitable
+attributes
+operations
+end
+
+class Namespace<NamedElement
+attributes
+operations
+end
+
+composition xxx_A1_ownsB between
+	A1[0..1] role xxx_A1_ownsB_src
+	B[*] role ownsB
+end
+
+composition xxx_A2_ownsC between
+	A2[0..1] role xxx_A2_ownsC_src
+	C[*] role ownsC
+end
+
+association xxx_B_toA1 between
+	B[*] role xxx_B_toA1_src
+	A1[0..1] role toA1
+end
+
+composition xxx_B_ownsD between
+	B[*] role xxx_B_ownsD_src
+	D[0..1] role ownsD
+end
+
+association xxx_C_toA2 between
+	C[*] role xxx_C_toA2_src
+	A2[0..1] role toA2
+end
+
+composition xxx_C_ownsD between
+	C[*] role xxx_C_ownsD_src
+	D[0..1] role ownsD
+end
+
+association xxx_D_toC between
+	D[*] role xxx_D_toC_src
+	C[0..1] role toC
+end
+
+association xxx_D_toB between
+	D[*] role xxx_D_toB_src
+	B[0..1] role toB
+end
+
+association xxx_D_toA between
+	D[*] role xxx_D_toA_src
+	A[1] role toA
+end
+
+association xxx_D_refsB between
+	D[*] role xxx_D_refsB_src
+	B[0..1] role refsB
+end
+
+association xxx_D_refsC between
+	D[*] role xxx_D_refsC_src
+	C[0..1] role refsC
+end
+
+composition xxx_TRoot_ownedA between
+	TRoot[0..1] role xxx_TRoot_ownedA_src
+	A[*] role ownedA
+end
+

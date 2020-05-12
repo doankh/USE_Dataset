@@ -1,0 +1,183 @@
+model criteria
+enum BooleanOperator{
+default
+}
+
+enum ComparisionOperator{
+default
+}
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class NullLiteral<Literal
+attributes
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	value : Integer
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class TimeLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class CurrentTime<Literal
+attributes
+	format : String
+operations
+end
+
+class Function<Expression
+attributes
+	name : String
+operations
+end
+
+abstract class Path<Expression
+attributes
+operations
+end
+
+abstract class Predicate<Expression
+attributes
+	negated : Boolean
+operations
+end
+
+class PredicateBooleanOperator<Predicate
+attributes
+	operator : BooleanOperator
+operations
+end
+
+class PredicateEqualityOperator<Predicate
+attributes
+operations
+end
+
+class PredicateComparisonOperator<Predicate
+attributes
+	operator : ComparisionOperator
+operations
+end
+
+class PredicateIsOperator<Predicate
+attributes
+operations
+end
+
+class PredicateLikeOperator<Predicate
+attributes
+operations
+end
+
+class PredicateIsEmpty<Predicate
+attributes
+operations
+end
+
+class PredicateIsNull<Predicate
+attributes
+operations
+end
+
+abstract class Order
+attributes
+operations
+end
+
+class Asc<Order
+attributes
+operations
+end
+
+class Desc<Order
+attributes
+operations
+end
+
+composition xxx_PredicateBooleanOperator_expressions between
+	PredicateBooleanOperator[0..1] role xxx_PredicateBooleanOperator_expressions_src
+	Predicate[1..*] role expressions
+end
+
+composition xxx_PredicateEqualityOperator_left between
+	PredicateEqualityOperator[*] role xxx_PredicateEqualityOperator_left_src
+	Expression[1] role left
+end
+
+composition xxx_PredicateEqualityOperator_right between
+	PredicateEqualityOperator[*] role xxx_PredicateEqualityOperator_right_src
+	Expression[1] role right
+end
+
+composition xxx_PredicateComparisonOperator_left between
+	PredicateComparisonOperator[*] role xxx_PredicateComparisonOperator_left_src
+	Expression[1] role left
+end
+
+composition xxx_PredicateComparisonOperator_right between
+	PredicateComparisonOperator[*] role xxx_PredicateComparisonOperator_right_src
+	Expression[1] role right
+end
+
+composition xxx_PredicateIsOperator_left between
+	PredicateIsOperator[*] role xxx_PredicateIsOperator_left_src
+	Expression[1] role left
+end
+
+composition xxx_PredicateIsOperator_right between
+	PredicateIsOperator[*] role xxx_PredicateIsOperator_right_src
+	Expression[1] role right
+end
+
+composition xxx_PredicateLikeOperator_left between
+	PredicateLikeOperator[*] role xxx_PredicateLikeOperator_left_src
+	Expression[1] role left
+end
+
+composition xxx_PredicateLikeOperator_right between
+	PredicateLikeOperator[*] role xxx_PredicateLikeOperator_right_src
+	Expression[1] role right
+end
+
+composition xxx_PredicateIsEmpty_feature between
+	PredicateIsEmpty[*] role xxx_PredicateIsEmpty_feature_src
+	Path[0..1] role feature
+end
+
+composition xxx_PredicateIsNull_feature between
+	PredicateIsNull[*] role xxx_PredicateIsNull_feature_src
+	Path[0..1] role feature
+end
+
+composition xxx_Order_path between
+	Order[*] role xxx_Order_path_src
+	Path[1] role path
+end
+

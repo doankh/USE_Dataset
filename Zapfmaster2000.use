@@ -1,0 +1,328 @@
+model zapfmaster2000
+enum Sex{
+default
+}
+
+enum ChallengeType{
+default
+}
+
+enum UserType{
+default
+}
+
+enum ChallengeState{
+default
+}
+
+class Achievement
+attributes
+	id : Integer
+	name : String
+	description : String
+	imagePath : String
+operations
+end
+
+class Box
+attributes
+	id : Integer
+	version : String
+	passphrase : String
+	location : String
+	tickDisturbanceTerm : Real
+	tickRegressor : Real
+	tickReduction : Integer
+	a0 : Real
+	a1 : Real
+	a2 : Real
+	newCalc : Boolean
+operations
+end
+
+class Account
+attributes
+	id : Integer
+	name : String
+operations
+end
+
+abstract class Challenge
+attributes
+	id : Integer
+	finished : Boolean
+	startTime : String
+	state : ChallengeState
+operations
+end
+
+class Challenge1v1<Challenge
+attributes
+	duration : Integer
+operations
+end
+
+class Drawing
+attributes
+	id : Integer
+	amount : Real
+	date : String
+operations
+end
+
+class GainedAchievement
+attributes
+	id : Integer
+	date : String
+operations
+end
+
+class Keg
+attributes
+	id : Integer
+	brand : String
+	size : Integer
+	startDate : String
+	endDate : String
+operations
+end
+
+abstract class News
+attributes
+	id : Integer
+	date : String
+operations
+end
+
+class DrawingNews<News
+attributes
+operations
+end
+
+class AchievementNews<News
+attributes
+operations
+end
+
+class OtherNews<News
+attributes
+	contents : String
+	imagePath : String
+operations
+end
+
+class Challenge1v1StartedNews<News
+attributes
+operations
+end
+
+class Challenge1v1DeclinedNews<News
+attributes
+operations
+end
+
+class Challenge1v1DoneNews<News
+attributes
+operations
+end
+
+class NewKegNews<News
+attributes
+operations
+end
+
+class NewUserNews<News
+attributes
+operations
+end
+
+class MappingQrRfid
+attributes
+	id : Integer
+	qrCode : Integer
+	rfidTag : Integer
+operations
+end
+
+class User
+attributes
+	id : Integer
+	name : String
+	password : String
+	imagePath : String
+	rfidTag : Integer
+	sex : Sex
+	weight : Integer
+	type : UserType
+operations
+end
+
+class Token
+attributes
+	id : Integer
+	token : String
+operations
+end
+
+class Image
+attributes
+	id : Integer
+	path : String
+	contentType : String
+	content : String
+	contentBig : String
+operations
+end
+
+class Ticks
+attributes
+	date : String
+	ticks : Integer
+operations
+end
+
+composition xxx_Achievement_gained between
+	Achievement[0..1] role xxx_Achievement_gained_src
+	GainedAchievement[*] role gained
+end
+
+association xxx_Box_account between
+	Box[*] role xxx_Box_account_src
+	Account[1] role account
+end
+
+composition xxx_Box_kegs between
+	Box[0..1] role xxx_Box_kegs_src
+	Keg[*] role kegs
+end
+
+composition xxx_Account_boxes between
+	Account[0..1] role xxx_Account_boxes_src
+	Box[*] role boxes
+end
+
+composition xxx_Account_news between
+	Account[0..1] role xxx_Account_news_src
+	News[*] role news
+end
+
+association xxx_Account_users between
+	Account[0..1] role xxx_Account_users_src
+	User[*] role users
+end
+
+association xxx_Challenge1v1_user1 between
+	Challenge1v1[*] role xxx_Challenge1v1_user1_src
+	User[0..1] role user1
+end
+
+association xxx_Challenge1v1_user2 between
+	Challenge1v1[*] role xxx_Challenge1v1_user2_src
+	User[0..1] role user2
+end
+
+association xxx_Challenge1v1_winner between
+	Challenge1v1[*] role xxx_Challenge1v1_winner_src
+	User[0..1] role winner
+end
+
+association xxx_Drawing_user between
+	Drawing[*] role xxx_Drawing_user_src
+	User[1] role user
+end
+
+association xxx_Drawing_keg between
+	Drawing[*] role xxx_Drawing_keg_src
+	Keg[1] role keg
+end
+
+composition xxx_Drawing_ticks between
+	Drawing[0..1] role xxx_Drawing_ticks_src
+	Ticks[*] role ticks
+end
+
+association xxx_GainedAchievement_achievement between
+	GainedAchievement[*] role xxx_GainedAchievement_achievement_src
+	Achievement[1] role achievement
+end
+
+association xxx_GainedAchievement_user between
+	GainedAchievement[*] role xxx_GainedAchievement_user_src
+	User[0..1] role user
+end
+
+association xxx_Keg_drawings between
+	Keg[0..1] role xxx_Keg_drawings_src
+	Drawing[*] role drawings
+end
+
+association xxx_Keg_box between
+	Keg[*] role xxx_Keg_box_src
+	Box[1] role box
+end
+
+association xxx_News_account between
+	News[*] role xxx_News_account_src
+	Account[0..1] role account
+end
+
+association xxx_DrawingNews_drawing between
+	DrawingNews[*] role xxx_DrawingNews_drawing_src
+	Drawing[0..1] role drawing
+end
+
+association xxx_AchievementNews_gainedAchievment between
+	AchievementNews[*] role xxx_AchievementNews_gainedAchievment_src
+	GainedAchievement[0..1] role gainedAchievment
+end
+
+association xxx_Challenge1v1StartedNews_challenge between
+	Challenge1v1StartedNews[*] role xxx_Challenge1v1StartedNews_challenge_src
+	Challenge1v1[0..1] role challenge
+end
+
+association xxx_Challenge1v1DeclinedNews_challenge between
+	Challenge1v1DeclinedNews[*] role xxx_Challenge1v1DeclinedNews_challenge_src
+	Challenge1v1[0..1] role challenge
+end
+
+association xxx_Challenge1v1DoneNews_challenge between
+	Challenge1v1DoneNews[*] role xxx_Challenge1v1DoneNews_challenge_src
+	Challenge1v1[0..1] role challenge
+end
+
+association xxx_NewKegNews_keg between
+	NewKegNews[*] role xxx_NewKegNews_keg_src
+	Keg[0..1] role keg
+end
+
+association xxx_NewUserNews_user between
+	NewUserNews[*] role xxx_NewUserNews_user_src
+	User[0..1] role user
+end
+
+association xxx_User_gained between
+	User[0..1] role xxx_User_gained_src
+	GainedAchievement[*] role gained
+end
+
+association xxx_User_drawings between
+	User[0..1] role xxx_User_drawings_src
+	Drawing[*] role drawings
+end
+
+association xxx_User_account between
+	User[*] role xxx_User_account_src
+	Account[0..1] role account
+end
+
+association xxx_Token_account between
+	Token[*] role xxx_Token_account_src
+	Account[0..1] role account
+end
+
+association xxx_Token_user between
+	Token[*] role xxx_Token_user_src
+	User[0..1] role user
+end
+

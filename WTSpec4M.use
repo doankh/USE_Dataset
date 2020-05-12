@@ -1,0 +1,1089 @@
+model WTSpec4M
+class WT
+attributes
+	sysId : String
+	model_ : String
+	version : String
+operations
+end
+
+class SystemInput<WTCInput
+attributes
+	sysId : String
+	description : String
+operations
+end
+
+class SystemOutput<WTCOutput
+attributes
+	sysId : String
+	description : String
+operations
+end
+
+class SystemFault<WTCFault
+attributes
+	sysId : String
+	description : String
+	value : Integer
+operations
+end
+
+class SystemParam<WTCParam
+attributes
+	sysId : String
+	description : String
+	value : Integer
+	settable : Boolean
+operations
+end
+
+class SystemTimer<WTCTimer
+attributes
+	sysId : String
+	description : String
+	value : Integer
+operations
+end
+
+class SystemVariable<WTCInput,WTCOutput
+attributes
+	sysId : String
+	description : String
+operations
+end
+
+abstract class WTCInput
+attributes
+operations
+end
+
+abstract class WTCOutput
+attributes
+operations
+end
+
+abstract class WTCParam
+attributes
+operations
+end
+
+abstract class WTCTimer
+attributes
+operations
+end
+
+abstract class WTCFault
+attributes
+operations
+end
+
+class Subsystem
+attributes
+	sysId : String
+	description : String
+operations
+end
+
+abstract class wtc
+attributes
+	sysId : String
+	description : String
+	cycle : Integer
+	priority : Integer
+	enabled : Boolean
+operations
+end
+
+class CtrlUnit5<wtc
+attributes
+operations
+end
+
+class CtrlUnit9<wtc
+attributes
+	BhvParam__BhvParam1 : String
+	BhvParam__BhvParam2 : String
+operations
+end
+
+class CtrlUnit10<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit11<wtc
+attributes
+operations
+end
+
+class CtrlUnit13<wtc
+attributes
+	BhvParam__BhvParam1 : String
+	BhvParam__BhvParam2 : String
+operations
+end
+
+class CtrlUnit15<wtc
+attributes
+operations
+end
+
+class CtrlUnit18<wtc
+attributes
+operations
+end
+
+class CtrlUnit27<wtc
+attributes
+operations
+end
+
+class CtrlUnit29<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit31<wtc
+attributes
+operations
+end
+
+class CtrlUnit34<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit36<wtc
+attributes
+operations
+end
+
+class CtrlUnit37<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit39<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit40<wtc
+attributes
+operations
+end
+
+class CtrlUnit44<wtc
+attributes
+operations
+end
+
+class CtrlUnit46<wtc
+attributes
+operations
+end
+
+class CtrlUnit47<wtc
+attributes
+operations
+end
+
+class CtrlUnit49<wtc
+attributes
+operations
+end
+
+class CtrlUnit50<wtc
+attributes
+operations
+end
+
+class CtrlUnit58<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit59<wtc
+attributes
+operations
+end
+
+class CtrlUnit65<wtc
+attributes
+operations
+end
+
+class CtrlUnit68<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit71<wtc
+attributes
+operations
+end
+
+class CtrlUnit73<wtc
+attributes
+operations
+end
+
+class CtrlUnit78<wtc
+attributes
+operations
+end
+
+class CtrlUnit80<wtc
+attributes
+operations
+end
+
+class CtrlUnit92<wtc
+attributes
+	BhvParam__BhvParam1 : String
+operations
+end
+
+class CtrlUnit94<wtc
+attributes
+operations
+end
+
+class CtrlUnit102<wtc
+attributes
+operations
+end
+
+class CtrlUnit124<wtc
+attributes
+operations
+end
+
+class CtrlUnit125<wtc
+attributes
+operations
+end
+
+class CtrlUnit126<wtc
+attributes
+operations
+end
+
+class MainSubsystem<Subsystem
+attributes
+operations
+end
+
+composition xxx_WT_itsSubsystems between
+	WT[0..1] role xxx_WT_itsSubsystems_src
+	MainSubsystem[*] role itsSubsystems
+end
+
+composition xxx_WT_itsInputs between
+	WT[0..1] role xxx_WT_itsInputs_src
+	SystemInput[*] role itsInputs
+end
+
+composition xxx_WT_itsOutputs between
+	WT[0..1] role xxx_WT_itsOutputs_src
+	SystemOutput[*] role itsOutputs
+end
+
+composition xxx_WT_itsParams between
+	WT[0..1] role xxx_WT_itsParams_src
+	SystemParam[*] role itsParams
+end
+
+composition xxx_WT_itsTimers between
+	WT[0..1] role xxx_WT_itsTimers_src
+	SystemTimer[*] role itsTimers
+end
+
+composition xxx_WT_itsFaults between
+	WT[0..1] role xxx_WT_itsFaults_src
+	SystemFault[*] role itsFaults
+end
+
+composition xxx_WT_itsVariables between
+	WT[0..1] role xxx_WT_itsVariables_src
+	SystemVariable[*] role itsVariables
+end
+
+composition xxx_Subsystem_itsWTCs between
+	Subsystem[0..1] role xxx_Subsystem_itsWTCs_src
+	wtc[*] role itsWTCs
+end
+
+composition xxx_Subsystem_itsSubsystems between
+	Subsystem[0..1] role xxx_Subsystem_itsSubsystems_src
+	Subsystem[*] role itsSubsystems
+end
+
+association xxx_CtrlUnit5_Input__iInput1 between
+	CtrlUnit5[*] role xxx_CtrlUnit5_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit5_Input__iInput2 between
+	CtrlUnit5[*] role xxx_CtrlUnit5_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit5_Output__oOutput1 between
+	CtrlUnit5[*] role xxx_CtrlUnit5_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit9_Input__iInput1 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit9_Input__iInput2 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit9_Input__iInput3 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit9_Input__iInput4 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Input__iInput4_src
+	WTCInput[0..1] role Input__iInput4
+end
+
+association xxx_CtrlUnit9_Output__oOutput1 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit9_Parameter__pParam1 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit9_Parameter__pParam2 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit9_Timer__tTimer1 between
+	CtrlUnit9[*] role xxx_CtrlUnit9_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit10_Input__iInput1 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit10_Output__oOutput1 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit10_Parameter__pParam1 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit10_Parameter__pParam2 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit10_Parameter__pParam3 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Parameter__pParam3_src
+	WTCParam[0..1] role Parameter__pParam3
+end
+
+association xxx_CtrlUnit10_Parameter__pParam4 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Parameter__pParam4_src
+	WTCParam[0..1] role Parameter__pParam4
+end
+
+association xxx_CtrlUnit10_Parameter__pParam5 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Parameter__pParam5_src
+	WTCParam[0..1] role Parameter__pParam5
+end
+
+association xxx_CtrlUnit10_Parameter__pParam6 between
+	CtrlUnit10[*] role xxx_CtrlUnit10_Parameter__pParam6_src
+	WTCParam[0..1] role Parameter__pParam6
+end
+
+association xxx_CtrlUnit11_Input__iInput1 between
+	CtrlUnit11[*] role xxx_CtrlUnit11_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit11_Input__iInput2 between
+	CtrlUnit11[*] role xxx_CtrlUnit11_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit11_Output__oOutput1 between
+	CtrlUnit11[*] role xxx_CtrlUnit11_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit13_Input__iInput1 between
+	CtrlUnit13[*] role xxx_CtrlUnit13_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit13_Input__iInput2 between
+	CtrlUnit13[*] role xxx_CtrlUnit13_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit13_Input__iInput3 between
+	CtrlUnit13[*] role xxx_CtrlUnit13_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit13_Output__oOutput1 between
+	CtrlUnit13[*] role xxx_CtrlUnit13_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit13_Parameter__pParam1 between
+	CtrlUnit13[*] role xxx_CtrlUnit13_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit13_Parameter__pParam2 between
+	CtrlUnit13[*] role xxx_CtrlUnit13_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit15_Input__iInput1 between
+	CtrlUnit15[*] role xxx_CtrlUnit15_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit15_Output__oOutput1 between
+	CtrlUnit15[*] role xxx_CtrlUnit15_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit15_Parameter__pParam1 between
+	CtrlUnit15[*] role xxx_CtrlUnit15_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit18_Input__iInput1 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit18_Input__iInput2 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit18_Input__iInput3 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit18_Input__iInput4 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Input__iInput4_src
+	WTCInput[0..1] role Input__iInput4
+end
+
+association xxx_CtrlUnit18_Input__iInput5 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Input__iInput5_src
+	WTCInput[0..1] role Input__iInput5
+end
+
+association xxx_CtrlUnit18_Input__iInput6 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Input__iInput6_src
+	WTCInput[0..1] role Input__iInput6
+end
+
+association xxx_CtrlUnit18_Output__oOutput1 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit18_Parameter__pParam1 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit18_Parameter__pParam2 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit18_Parameter__pParam3 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam3_src
+	WTCParam[0..1] role Parameter__pParam3
+end
+
+association xxx_CtrlUnit18_Parameter__pParam4 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam4_src
+	WTCParam[0..1] role Parameter__pParam4
+end
+
+association xxx_CtrlUnit18_Parameter__pParam5 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam5_src
+	WTCParam[0..1] role Parameter__pParam5
+end
+
+association xxx_CtrlUnit18_Parameter__pParam6 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam6_src
+	WTCParam[0..1] role Parameter__pParam6
+end
+
+association xxx_CtrlUnit18_Parameter__pParam7 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Parameter__pParam7_src
+	WTCParam[0..1] role Parameter__pParam7
+end
+
+association xxx_CtrlUnit18_Timer__tTimer1 between
+	CtrlUnit18[*] role xxx_CtrlUnit18_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit27_Input__iInput1 between
+	CtrlUnit27[*] role xxx_CtrlUnit27_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit27_Input__iInput2 between
+	CtrlUnit27[*] role xxx_CtrlUnit27_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit27_Output__oOutput1 between
+	CtrlUnit27[*] role xxx_CtrlUnit27_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit27_Output__oOutput2 between
+	CtrlUnit27[*] role xxx_CtrlUnit27_Output__oOutput2_src
+	WTCOutput[0..1] role Output__oOutput2
+end
+
+association xxx_CtrlUnit27_Parameter__pParam1 between
+	CtrlUnit27[*] role xxx_CtrlUnit27_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit29_Input__iInput1 between
+	CtrlUnit29[*] role xxx_CtrlUnit29_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit29_Input__iInput2 between
+	CtrlUnit29[*] role xxx_CtrlUnit29_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit29_Fault__fFault1 between
+	CtrlUnit29[*] role xxx_CtrlUnit29_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit31_Input__iInput1 between
+	CtrlUnit31[*] role xxx_CtrlUnit31_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit31_Output__oOutput1 between
+	CtrlUnit31[*] role xxx_CtrlUnit31_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit31_Parameter__pParam1 between
+	CtrlUnit31[*] role xxx_CtrlUnit31_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit34_Input__iInput1 between
+	CtrlUnit34[*] role xxx_CtrlUnit34_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit34_Input__iInput2 between
+	CtrlUnit34[*] role xxx_CtrlUnit34_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit34_Output__oOutput1 between
+	CtrlUnit34[*] role xxx_CtrlUnit34_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit34_Output__oOutput2 between
+	CtrlUnit34[*] role xxx_CtrlUnit34_Output__oOutput2_src
+	WTCOutput[0..1] role Output__oOutput2
+end
+
+association xxx_CtrlUnit34_Timer__tTimer1 between
+	CtrlUnit34[*] role xxx_CtrlUnit34_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit34_Timer__tTimer2 between
+	CtrlUnit34[*] role xxx_CtrlUnit34_Timer__tTimer2_src
+	WTCTimer[0..1] role Timer__tTimer2
+end
+
+association xxx_CtrlUnit36_Input__iInput1 between
+	CtrlUnit36[*] role xxx_CtrlUnit36_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit36_Output__oOutput1 between
+	CtrlUnit36[*] role xxx_CtrlUnit36_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit36_Parameter__pParam1 between
+	CtrlUnit36[*] role xxx_CtrlUnit36_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit36_Parameter__pParam2 between
+	CtrlUnit36[*] role xxx_CtrlUnit36_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit37_Input__iInput1 between
+	CtrlUnit37[*] role xxx_CtrlUnit37_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit37_Input__iInput2 between
+	CtrlUnit37[*] role xxx_CtrlUnit37_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit37_Input__iInput3 between
+	CtrlUnit37[*] role xxx_CtrlUnit37_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit37_Output__oOutput1 between
+	CtrlUnit37[*] role xxx_CtrlUnit37_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit37_Fault__fFault1 between
+	CtrlUnit37[*] role xxx_CtrlUnit37_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit37_Timer__tTimer1 between
+	CtrlUnit37[*] role xxx_CtrlUnit37_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit39_Input__iInput1 between
+	CtrlUnit39[*] role xxx_CtrlUnit39_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit39_Input__iInput2 between
+	CtrlUnit39[*] role xxx_CtrlUnit39_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit39_Fault__fFault1 between
+	CtrlUnit39[*] role xxx_CtrlUnit39_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit39_Timer__tTimer1 between
+	CtrlUnit39[*] role xxx_CtrlUnit39_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit40_Input__iInput1 between
+	CtrlUnit40[*] role xxx_CtrlUnit40_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit40_Output__oOutput1 between
+	CtrlUnit40[*] role xxx_CtrlUnit40_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit40_Timer__tTimer1 between
+	CtrlUnit40[*] role xxx_CtrlUnit40_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit44_Input__iInput1 between
+	CtrlUnit44[*] role xxx_CtrlUnit44_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit44_Output__oOutput1 between
+	CtrlUnit44[*] role xxx_CtrlUnit44_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit46_Output__oOutput1 between
+	CtrlUnit46[*] role xxx_CtrlUnit46_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit47_Input__iInput1 between
+	CtrlUnit47[*] role xxx_CtrlUnit47_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit47_Fault__fFault1 between
+	CtrlUnit47[*] role xxx_CtrlUnit47_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit49_Input__iInput1 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit49_Input__iInput2 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit49_Input__iInput3 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit49_Input__iInput4 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Input__iInput4_src
+	WTCInput[0..1] role Input__iInput4
+end
+
+association xxx_CtrlUnit49_Output__oOutput1 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit49_Output__oOutput2 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Output__oOutput2_src
+	WTCOutput[0..1] role Output__oOutput2
+end
+
+association xxx_CtrlUnit49_Parameter__pParam1 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit49_Parameter__pParam2 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit49_Parameter__pParam3 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Parameter__pParam3_src
+	WTCParam[0..1] role Parameter__pParam3
+end
+
+association xxx_CtrlUnit49_Parameter__pParam4 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Parameter__pParam4_src
+	WTCParam[0..1] role Parameter__pParam4
+end
+
+association xxx_CtrlUnit49_Fault__fFault1 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit49_Timer__tTimer1 between
+	CtrlUnit49[*] role xxx_CtrlUnit49_Timer__tTimer1_src
+	WTCTimer[0..1] role Timer__tTimer1
+end
+
+association xxx_CtrlUnit50_Output__oOutput1 between
+	CtrlUnit50[*] role xxx_CtrlUnit50_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit50_Fault__fFault1 between
+	CtrlUnit50[*] role xxx_CtrlUnit50_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit58_Input__iInput1 between
+	CtrlUnit58[*] role xxx_CtrlUnit58_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit58_Output__oOutput1 between
+	CtrlUnit58[*] role xxx_CtrlUnit58_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit58_Parameter__pParam1 between
+	CtrlUnit58[*] role xxx_CtrlUnit58_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit59_Input__iInput1 between
+	CtrlUnit59[*] role xxx_CtrlUnit59_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit59_Output__oOutput1 between
+	CtrlUnit59[*] role xxx_CtrlUnit59_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit65_Output__oOutput1 between
+	CtrlUnit65[*] role xxx_CtrlUnit65_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit65_Fault__fFault1 between
+	CtrlUnit65[*] role xxx_CtrlUnit65_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit68_Input__iInput1 between
+	CtrlUnit68[*] role xxx_CtrlUnit68_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit68_Input__iInput2 between
+	CtrlUnit68[*] role xxx_CtrlUnit68_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit68_Output__oOutput1 between
+	CtrlUnit68[*] role xxx_CtrlUnit68_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit71_Input__iInput1 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit71_Input__iInput2 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit71_Input__iInput3 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit71_Input__iInput4 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Input__iInput4_src
+	WTCInput[0..1] role Input__iInput4
+end
+
+association xxx_CtrlUnit71_Input__iInput5 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Input__iInput5_src
+	WTCInput[0..1] role Input__iInput5
+end
+
+association xxx_CtrlUnit71_Input__iInput6 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Input__iInput6_src
+	WTCInput[0..1] role Input__iInput6
+end
+
+association xxx_CtrlUnit71_Output__oOutput1 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit71_Output__oOutput2 between
+	CtrlUnit71[*] role xxx_CtrlUnit71_Output__oOutput2_src
+	WTCOutput[0..1] role Output__oOutput2
+end
+
+association xxx_CtrlUnit73_Input__iInput1 between
+	CtrlUnit73[*] role xxx_CtrlUnit73_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit73_Output__oOutput1 between
+	CtrlUnit73[*] role xxx_CtrlUnit73_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit78_Input__iInput1 between
+	CtrlUnit78[*] role xxx_CtrlUnit78_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit78_Input__iInput2 between
+	CtrlUnit78[*] role xxx_CtrlUnit78_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit78_Output__oOutput1 between
+	CtrlUnit78[*] role xxx_CtrlUnit78_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit80_Input__iInput1 between
+	CtrlUnit80[*] role xxx_CtrlUnit80_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit80_Input__iInput2 between
+	CtrlUnit80[*] role xxx_CtrlUnit80_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit80_Input__iInput3 between
+	CtrlUnit80[*] role xxx_CtrlUnit80_Input__iInput3_src
+	WTCInput[0..1] role Input__iInput3
+end
+
+association xxx_CtrlUnit80_Input__iInput4 between
+	CtrlUnit80[*] role xxx_CtrlUnit80_Input__iInput4_src
+	WTCInput[0..1] role Input__iInput4
+end
+
+association xxx_CtrlUnit80_Input__iInput5 between
+	CtrlUnit80[*] role xxx_CtrlUnit80_Input__iInput5_src
+	WTCInput[0..1] role Input__iInput5
+end
+
+association xxx_CtrlUnit80_Output__oOutput1 between
+	CtrlUnit80[*] role xxx_CtrlUnit80_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit92_Input__iInput1 between
+	CtrlUnit92[*] role xxx_CtrlUnit92_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit92_Input__iInput2 between
+	CtrlUnit92[*] role xxx_CtrlUnit92_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit92_Parameter__pParam1 between
+	CtrlUnit92[*] role xxx_CtrlUnit92_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit92_Parameter__pParam2 between
+	CtrlUnit92[*] role xxx_CtrlUnit92_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit92_Fault__fFault1 between
+	CtrlUnit92[*] role xxx_CtrlUnit92_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit94_Input__iInput1 between
+	CtrlUnit94[*] role xxx_CtrlUnit94_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit94_Output__oOutput1 between
+	CtrlUnit94[*] role xxx_CtrlUnit94_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit102_Input__iInput1 between
+	CtrlUnit102[*] role xxx_CtrlUnit102_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit102_Input__iInput2 between
+	CtrlUnit102[*] role xxx_CtrlUnit102_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit102_Output__oOutput1 between
+	CtrlUnit102[*] role xxx_CtrlUnit102_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit102_Fault__fFault1 between
+	CtrlUnit102[*] role xxx_CtrlUnit102_Fault__fFault1_src
+	WTCFault[0..1] role Fault__fFault1
+end
+
+association xxx_CtrlUnit124_Input__iInput1 between
+	CtrlUnit124[*] role xxx_CtrlUnit124_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit124_Input__iInput2 between
+	CtrlUnit124[*] role xxx_CtrlUnit124_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit124_Output__oOutput1 between
+	CtrlUnit124[*] role xxx_CtrlUnit124_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit125_Input__iInput1 between
+	CtrlUnit125[*] role xxx_CtrlUnit125_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit125_Output__oOutput1 between
+	CtrlUnit125[*] role xxx_CtrlUnit125_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit125_Parameter__pParam1 between
+	CtrlUnit125[*] role xxx_CtrlUnit125_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit125_Parameter__pParam2 between
+	CtrlUnit125[*] role xxx_CtrlUnit125_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+
+association xxx_CtrlUnit126_Input__iInput1 between
+	CtrlUnit126[*] role xxx_CtrlUnit126_Input__iInput1_src
+	WTCInput[0..1] role Input__iInput1
+end
+
+association xxx_CtrlUnit126_Input__iInput2 between
+	CtrlUnit126[*] role xxx_CtrlUnit126_Input__iInput2_src
+	WTCInput[0..1] role Input__iInput2
+end
+
+association xxx_CtrlUnit126_Output__oOutput1 between
+	CtrlUnit126[*] role xxx_CtrlUnit126_Output__oOutput1_src
+	WTCOutput[0..1] role Output__oOutput1
+end
+
+association xxx_CtrlUnit126_Output__oOutput2 between
+	CtrlUnit126[*] role xxx_CtrlUnit126_Output__oOutput2_src
+	WTCOutput[0..1] role Output__oOutput2
+end
+
+association xxx_CtrlUnit126_Parameter__pParam1 between
+	CtrlUnit126[*] role xxx_CtrlUnit126_Parameter__pParam1_src
+	WTCParam[0..1] role Parameter__pParam1
+end
+
+association xxx_CtrlUnit126_Parameter__pParam2 between
+	CtrlUnit126[*] role xxx_CtrlUnit126_Parameter__pParam2_src
+	WTCParam[0..1] role Parameter__pParam2
+end
+

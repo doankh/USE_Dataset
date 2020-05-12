@@ -1,0 +1,84 @@
+model datatypes
+class TypesLibrary
+attributes
+	name : String
+operations
+end
+
+abstract class DataType
+attributes
+	name : String
+operations
+end
+
+class SimpleType<DataType
+attributes
+operations
+end
+
+abstract class ComplexType<DataType
+attributes
+operations
+	getLabel():String
+end
+
+class RosIDLReference<IDLReference
+attributes
+	namespace : String
+	rosPackage : String
+operations
+end
+
+class VectorType<ComplexType
+attributes
+operations
+end
+
+class CustomType<ComplexType
+attributes
+operations
+end
+
+class Field
+attributes
+	name : String
+	description : String
+	measureUnit : String
+operations
+end
+
+abstract class IDLReference<ComplexType
+attributes
+operations
+end
+
+composition xxx_TypesLibrary_types between
+	TypesLibrary[0..1] role xxx_TypesLibrary_types_src
+	DataType[*] role types
+end
+
+association xxx_TypesLibrary_includes between
+	TypesLibrary[0..1] role xxx_TypesLibrary_includes_src
+	TypesLibrary[*] role includes
+end
+
+association xxx_DataType_typesLibrary between
+	DataType[*] role xxx_DataType_typesLibrary_src
+	TypesLibrary[1] role typesLibrary
+end
+
+association xxx_VectorType_template between
+	VectorType[*] role xxx_VectorType_template_src
+	DataType[1] role template
+end
+
+composition xxx_CustomType_fields between
+	CustomType[0..1] role xxx_CustomType_fields_src
+	Field[1..*] role fields
+end
+
+association xxx_Field_type between
+	Field[*] role xxx_Field_type_src
+	DataType[1] role type
+end
+

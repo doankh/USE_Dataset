@@ -1,0 +1,158 @@
+model class_diagramm
+enum ModifierType{
+default
+}
+
+class Package<RefPackage
+attributes
+	name : String
+operations
+end
+
+class DataType<RefDataType
+attributes
+	name : String
+operations
+end
+
+class Method<RefMethod
+attributes
+	name : String
+	modifier : ModifierType
+operations
+end
+
+class Attribute<RefAttribute
+attributes
+	name : String
+	modifier : ModifierType
+operations
+end
+
+class Parameter<RefParameter
+attributes
+	name : String
+operations
+end
+
+class Class<RefClass
+attributes
+	modifier : ModifierType
+	name : String
+operations
+end
+
+class Association<RefAssociation
+attributes
+	minCardinality : Integer
+	maxCardinality : Integer
+	name : String
+	isAggregation : Boolean
+operations
+end
+
+abstract class RefAttribute
+attributes
+operations
+end
+
+abstract class RefAssociation
+attributes
+operations
+end
+
+abstract class RefMethod
+attributes
+operations
+end
+
+abstract class RefParameter
+attributes
+operations
+end
+
+abstract class RefPackage
+attributes
+operations
+end
+
+abstract class RefDataType
+attributes
+operations
+end
+
+abstract class RefClass
+attributes
+operations
+end
+
+composition xxx_Package_associations between
+	Package[0..1] role xxx_Package_associations_src
+	RefAssociation[*] role associations
+end
+
+composition xxx_Package_classes between
+	Package[0..1] role xxx_Package_classes_src
+	RefClass[*] role classes
+end
+
+association xxx_Method_return between
+	Method[*] role xxx_Method_return_src
+	RefClass[0..1] role return
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	RefParameter[*] role parameters
+end
+
+composition xxx_Method_primitive_return between
+	Method[*] role xxx_Method_primitive_return_src
+	RefDataType[0..1] role primitive_return
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	RefClass[0..1] role type
+end
+
+composition xxx_Attribute_primitive_type between
+	Attribute[*] role xxx_Attribute_primitive_type_src
+	RefDataType[0..1] role primitive_type
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	RefClass[0..1] role type
+end
+
+composition xxx_Parameter_primitive_type between
+	Parameter[*] role xxx_Parameter_primitive_type_src
+	RefDataType[0..1] role primitive_type
+end
+
+association xxx_Class_parent between
+	Class[*] role xxx_Class_parent_src
+	RefClass[0..1] role parent
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	RefAttribute[*] role attributes_
+end
+
+composition xxx_Class_methods between
+	Class[0..1] role xxx_Class_methods_src
+	RefMethod[*] role methods
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	RefClass[1] role source
+end
+
+association xxx_Association_target between
+	Association[*] role xxx_Association_target_src
+	RefClass[1] role target
+end
+

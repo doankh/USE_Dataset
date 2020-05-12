@@ -1,0 +1,166 @@
+model IEEE1471
+class Viewpoint
+attributes
+operations
+end
+
+class Concern
+attributes
+operations
+end
+
+class Stakeholder
+attributes
+operations
+end
+
+class ViewpointImport
+attributes
+operations
+end
+
+class ViewpointDependency
+attributes
+operations
+end
+
+class Process
+attributes
+operations
+end
+
+class Technique
+attributes
+operations
+end
+
+class AnalysisMethod
+attributes
+operations
+end
+
+class ArchitecturalConstruct
+attributes
+operations
+end
+
+class Rule<ArchitecturalConstruct
+attributes
+operations
+end
+
+class ModelOrganization<Rule
+attributes
+operations
+end
+
+class ModellingRule
+attributes
+operations
+end
+
+class Language<ArchitecturalConstruct
+attributes
+operations
+end
+
+class Mapping<ArchitecturalConstruct
+attributes
+operations
+end
+
+class Pattern<ArchitecturalConstruct
+attributes
+operations
+end
+
+association xxx_Viewpoint_source between
+	Viewpoint[0..1] role xxx_Viewpoint_source_src
+	ViewpointImport[1..*] role source
+end
+
+association xxx_Viewpoint_covers between
+	Viewpoint[0..1] role xxx_Viewpoint_covers_src
+	Concern[1..*] role covers
+end
+
+association xxx_Viewpoint_supplierDependency between
+	Viewpoint[0..1] role xxx_Viewpoint_supplierDependency_src
+	ViewpointDependency[*] role supplierDependency
+end
+
+association xxx_Viewpoint_clientDependency between
+	Viewpoint[0..1] role xxx_Viewpoint_clientDependency_src
+	ViewpointDependency[*] role clientDependency
+end
+
+association xxx_Viewpoint_isImportTo between
+	Viewpoint[*] role xxx_Viewpoint_isImportTo_src
+	Stakeholder[0..1] role isImportTo
+end
+
+composition xxx_Viewpoint_architecturalConstruct between
+	Viewpoint[0..1] role xxx_Viewpoint_architecturalConstruct_src
+	ArchitecturalConstruct[*] role architecturalConstruct
+end
+
+composition xxx_Viewpoint_process between
+	Viewpoint[*] role xxx_Viewpoint_process_src
+	Process[1] role process
+end
+
+association xxx_Stakeholder_concerns between
+	Stakeholder[*] role xxx_Stakeholder_concerns_src
+	Concern[0..1] role concerns
+end
+
+association xxx_ViewpointDependency_supplier between
+	ViewpointDependency[*] role xxx_ViewpointDependency_supplier_src
+	Viewpoint[1] role supplier
+end
+
+association xxx_ViewpointDependency_client between
+	ViewpointDependency[*] role xxx_ViewpointDependency_client_src
+	Viewpoint[1] role client
+end
+
+association xxx_Process_methodology between
+	Process[0..1] role xxx_Process_methodology_src
+	Technique[1..*] role methodology
+end
+
+association xxx_Technique_methods between
+	Technique[0..1] role xxx_Technique_methods_src
+	AnalysisMethod[*] role methods
+end
+
+association xxx_Technique_applies between
+	Technique[0..1] role xxx_Technique_applies_src
+	Rule[1..*] role applies
+end
+
+association xxx_AnalysisMethod_analysis between
+	AnalysisMethod[*] role xxx_AnalysisMethod_analysis_src
+	Language[1] role analysis
+end
+
+association xxx_Rule_techniques between
+	Rule[0..1] role xxx_Rule_techniques_src
+	Technique[1..*] role techniques
+end
+
+association xxx_Rule_guidance between
+	Rule[*] role xxx_Rule_guidance_src
+	Language[1] role guidance
+end
+
+association xxx_Mapping_input between
+	Mapping[*] role xxx_Mapping_input_src
+	Language[1] role input
+end
+
+association xxx_Mapping_ouput between
+	Mapping[*] role xxx_Mapping_ouput_src
+	Language[1] role ouput
+end
+

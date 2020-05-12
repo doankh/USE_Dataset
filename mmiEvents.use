@@ -1,0 +1,473 @@
+model events
+enum event_t{
+default
+}
+
+abstract class Event
+attributes
+	type : Integer
+	timestamp : Integer
+operations
+end
+
+abstract class InputEvent<Event
+attributes
+operations
+end
+
+abstract class OutputEvent<Event
+attributes
+operations
+end
+
+abstract class DialogueContentEvent<Event
+attributes
+	nitems : Integer
+operations
+end
+
+abstract class MetacommEvent<Event
+attributes
+operations
+end
+
+abstract class TurnControlEvent<Event
+attributes
+operations
+end
+
+abstract class TurnTimingEvent<Event
+attributes
+operations
+end
+
+abstract class NavigationEvent<InputEvent
+attributes
+operations
+end
+
+abstract class TextEvent<InputEvent
+attributes
+operations
+end
+
+abstract class SpeechInputEvent<InputEvent
+attributes
+operations
+end
+
+abstract class ScreenEvent<OutputEvent
+attributes
+operations
+end
+
+abstract class ScreenContentEvent<ScreenEvent
+attributes
+	nitems : Integer
+operations
+end
+
+abstract class SpeechOutputEvent<OutputEvent
+attributes
+operations
+end
+
+abstract class SpeechOutputContentEvent<SpeechOutputEvent
+attributes
+	nitems : Integer
+operations
+end
+
+class TouchEvent<NavigationEvent
+attributes
+operations
+end
+
+class ClickEvent<NavigationEvent
+attributes
+operations
+end
+
+class LongClickEvent<NavigationEvent
+attributes
+operations
+end
+
+class ScrollEvent<NavigationEvent
+attributes
+operations
+end
+
+class MoveEvent<NavigationEvent
+attributes
+	length : Integer
+operations
+end
+
+class NavigationMoveEvent<NavigationEvent
+attributes
+	length : Integer
+operations
+end
+
+class NavigationActionEvent<NavigationEvent
+attributes
+operations
+end
+
+class NavigationExploreEvent<NavigationEvent
+attributes
+operations
+end
+
+class KeyTextEvent<TextEvent
+attributes
+	code : Integer
+operations
+end
+
+class KeyExploreEvent<TextEvent
+attributes
+	code : Integer
+operations
+end
+
+class KeyCommandEvent<TextEvent
+attributes
+	code : Integer
+operations
+end
+
+class TextWordEvent<TextEvent
+attributes
+operations
+end
+
+class TextExploreEvent<TextEvent
+attributes
+operations
+end
+
+class TextCommandEvent<TextEvent
+attributes
+operations
+end
+
+class GuiElementsEvent<ScreenContentEvent
+attributes
+operations
+end
+
+class GuiFeedbackEvent<ScreenContentEvent
+attributes
+operations
+end
+
+class GuiConceptsEvent<ScreenContentEvent
+attributes
+operations
+end
+
+class GuiNoiseEvent<ScreenContentEvent
+attributes
+operations
+end
+
+class GuiQuestionsEvent<ScreenContentEvent
+attributes
+operations
+end
+
+class SpeechElementsEvent<SpeechOutputContentEvent
+attributes
+operations
+end
+
+class SpeechFeedbackEvent<SpeechOutputContentEvent
+attributes
+operations
+end
+
+class SpeechConceptsEvent<SpeechOutputContentEvent
+attributes
+operations
+end
+
+class SpeechNoiseEvent<SpeechOutputContentEvent
+attributes
+operations
+end
+
+class SpeechQuestionsEvent<SpeechOutputContentEvent
+attributes
+operations
+end
+
+class CorrectAnswerEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class IncorrectAnswerEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class PartiallyCorrectAnswerEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class NotAnswerEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class OpenPromptEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class HalfOpenPromptEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class ClosedPromptEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class NoQuestionPromptEvent<SpeechOutputEvent
+attributes
+operations
+end
+
+class OverallWordsEvent<SpeechInputEvent
+attributes
+	nwords : Integer
+operations
+end
+
+class SubstitutedWordsEvent<SpeechInputEvent
+attributes
+	nwords : Integer
+operations
+end
+
+class DeletedWordsEvent<SpeechInputEvent
+attributes
+	nwords : Integer
+operations
+end
+
+class InsertedWordsEvent<SpeechInputEvent
+attributes
+	nwords : Integer
+operations
+end
+
+class OverallSentencesEvent<SpeechInputEvent
+attributes
+	nsentences : Integer
+operations
+end
+
+class SubstitutedSentencesEvent<SpeechInputEvent
+attributes
+	nsentences : Integer
+operations
+end
+
+class DeletedSentencesEvent<SpeechInputEvent
+attributes
+	nsentences : Integer
+operations
+end
+
+class InsertedSentencesEvent<SpeechInputEvent
+attributes
+	nsentences : Integer
+operations
+end
+
+class OverallConceptsEvent<SpeechInputEvent
+attributes
+	nconcepts : Integer
+operations
+end
+
+class SubstitutedConceptsEvent<SpeechInputEvent
+attributes
+	nconcepts : Integer
+operations
+end
+
+class DeletedConceptsEvent<SpeechInputEvent
+attributes
+	nconcepts : Integer
+operations
+end
+
+class InsertedConceptsEvent<SpeechInputEvent
+attributes
+	nconcepts : Integer
+operations
+end
+
+class CorrectlyParsedUtteranceEvent<SpeechInputEvent
+attributes
+operations
+end
+
+class PartiallyParsedUtteranceEvent<SpeechInputEvent
+attributes
+operations
+end
+
+class IncorrectlyParsedUtteranceEvent<SpeechInputEvent
+attributes
+operations
+end
+
+class NewElementsEvent<DialogueContentEvent
+attributes
+operations
+end
+
+class NewFeedbackElementsEvent<DialogueContentEvent
+attributes
+operations
+end
+
+class NewConceptsEvent<DialogueContentEvent
+attributes
+operations
+end
+
+class NewNoiseEvent<DialogueContentEvent
+attributes
+operations
+end
+
+class NewQuestionsEvent<DialogueContentEvent
+attributes
+operations
+end
+
+class HelpTurnEvent<MetacommEvent
+attributes
+operations
+end
+
+class CorrectionTurnEvent<MetacommEvent
+attributes
+operations
+end
+
+class CancelTurnEvent<MetacommEvent
+attributes
+operations
+end
+
+class RestartTurnEvent<MetacommEvent
+attributes
+operations
+end
+
+class BargeinEvent<MetacommEvent
+attributes
+	successful : Boolean
+operations
+end
+
+class DIVRejectionEvent<MetacommEvent
+attributes
+operations
+end
+
+class ASRRejectionEvent<MetacommEvent
+attributes
+operations
+end
+
+class GRRejectionEvent<MetacommEvent
+attributes
+operations
+end
+
+class TimeoutEvent<MetacommEvent
+attributes
+operations
+end
+
+class AppStartEvent<TurnControlEvent
+attributes
+operations
+end
+
+class AppEndEvent<TurnControlEvent
+attributes
+operations
+end
+
+class StartDialogueEvent<TurnControlEvent
+attributes
+operations
+end
+
+class EndDialogueEvent<TurnControlEvent
+attributes
+operations
+end
+
+class StartSystemTurnEvent<TurnControlEvent
+attributes
+operations
+end
+
+class EndSystemTurnEvent<TurnControlEvent
+attributes
+operations
+end
+
+class StartUserTurnEvent<TurnControlEvent
+attributes
+operations
+end
+
+class EndUserTurnEvent<TurnControlEvent
+attributes
+operations
+end
+
+class SystemFeedbackStartEvent<TurnTimingEvent
+attributes
+operations
+end
+
+class SystemActionStartEvent<TurnTimingEvent
+attributes
+operations
+end
+
+class SystemActionEndEvent<TurnTimingEvent
+attributes
+operations
+end
+
+class UserFeedbackStartEvent<TurnTimingEvent
+attributes
+operations
+end
+
+class UserActionStartEvent<TurnTimingEvent
+attributes
+operations
+end
+
+class UserActionEndEvent<TurnTimingEvent
+attributes
+operations
+end
+

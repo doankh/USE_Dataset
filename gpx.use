@@ -1,0 +1,190 @@
+model gpx
+enum FixType{
+default
+}
+
+class BoundsType
+attributes
+	maxlat : String
+	maxlon : String
+	minlat : String
+	minlon : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class GpxType
+attributes
+	name : String
+	desc : String
+	author : String
+	email : String
+	url : String
+	urlname : String
+	time : String
+	keywords : String
+	any : String
+	creator : String
+	version : String
+operations
+end
+
+class RteptType
+attributes
+	ele : String
+	time : String
+	magvar : String
+	geoidheight : String
+	name : String
+	cmt : String
+	desc : String
+	src : String
+	url : String
+	urlname : String
+	sym : String
+	type : String
+	fix : FixType
+	sat : String
+	hdop : String
+	vdop : String
+	pdop : String
+	ageofdgpsdata : String
+	dgpsid : String
+	any : String
+	lat : String
+	lon : String
+operations
+end
+
+class RteType
+attributes
+	name : String
+	cmt : String
+	desc : String
+	src : String
+	url : String
+	urlname : String
+	number : String
+	any : String
+operations
+end
+
+class TrkptType
+attributes
+	ele : String
+	time : String
+	course : String
+	speed : String
+	magvar : String
+	geoidheight : String
+	name : String
+	cmt : String
+	desc : String
+	src : String
+	url : String
+	urlname : String
+	sym : String
+	type : String
+	fix : FixType
+	sat : String
+	hdop : String
+	vdop : String
+	pdop : String
+	ageofdgpsdata : String
+	dgpsid : String
+	any : String
+	lat : String
+	lon : String
+operations
+end
+
+class TrksegType
+attributes
+operations
+end
+
+class TrkType
+attributes
+	name : String
+	cmt : String
+	desc : String
+	src : String
+	url : String
+	urlname : String
+	number : String
+	any : String
+operations
+end
+
+class WptType
+attributes
+	ele : String
+	time : String
+	magvar : String
+	geoidheight : String
+	name : String
+	cmt : String
+	desc : String
+	src : String
+	url : String
+	urlname : String
+	sym : String
+	type : String
+	fix : FixType
+	sat : String
+	hdop : String
+	vdop : String
+	pdop : String
+	ageofdgpsdata : String
+	dgpsid : String
+	any : String
+	lat : String
+	lon : String
+operations
+end
+
+composition xxx_DocumentRoot_gpx between
+	DocumentRoot[*] role xxx_DocumentRoot_gpx_src
+	GpxType[*] role gpx
+end
+
+composition xxx_GpxType_bounds between
+	GpxType[*] role xxx_GpxType_bounds_src
+	BoundsType[0..1] role bounds
+end
+
+composition xxx_GpxType_wpt between
+	GpxType[0..1] role xxx_GpxType_wpt_src
+	WptType[*] role wpt
+end
+
+composition xxx_GpxType_rte between
+	GpxType[0..1] role xxx_GpxType_rte_src
+	RteType[*] role rte
+end
+
+composition xxx_GpxType_trk between
+	GpxType[0..1] role xxx_GpxType_trk_src
+	TrkType[*] role trk
+end
+
+composition xxx_RteType_rtept between
+	RteType[0..1] role xxx_RteType_rtept_src
+	RteptType[*] role rtept
+end
+
+composition xxx_TrksegType_trkpt between
+	TrksegType[0..1] role xxx_TrksegType_trkpt_src
+	TrkptType[*] role trkpt
+end
+
+composition xxx_TrkType_trkseg between
+	TrkType[0..1] role xxx_TrkType_trkseg_src
+	TrksegType[*] role trkseg
+end
+

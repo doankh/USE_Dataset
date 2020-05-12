@@ -1,0 +1,935 @@
+model TCS
+enum TemplateModifiers{
+default
+}
+
+enum SpaceKind{
+default
+}
+
+enum Associativity{
+default
+}
+
+enum AutoCreateKind{
+default
+}
+
+enum ScopeKind{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ConcreteSyntax<NamedElement
+attributes
+	k : Integer
+	lexer : String
+operations
+end
+
+abstract class Template<QualifiedNamedElement
+attributes
+	disambiguate : String
+	disambiguateV3 : String
+	semDisambiguate : String
+operations
+end
+
+class FunctionTemplate<Template
+attributes
+	functionName : String
+operations
+end
+
+class ClassTemplate<ContextTemplate
+attributes
+	modifiers : TemplateModifiers
+	isAbstract : Boolean
+	isDeep : Boolean
+	isOperatored : Boolean
+	isMain : Boolean
+	isMulti : Boolean
+	isNonPrimary : Boolean
+	mode : String
+operations
+end
+
+class PrimitiveTemplate<Template
+attributes
+	templateName : String
+	default : Boolean
+	tokenName : String
+	value : String
+	serializer : String
+	orKeyword : Boolean
+operations
+end
+
+class OperatorTemplate<ContextTemplate
+attributes
+	source : String
+operations
+end
+
+class EnumerationTemplate<Template
+attributes
+	automatic : Boolean
+operations
+end
+
+class EnumLiteralMapping
+attributes
+operations
+end
+
+abstract class Literal<NamedElement
+attributes
+	value : String
+operations
+end
+
+class Symbol<Literal
+attributes
+	spaces : SpaceKind
+operations
+end
+
+class Keyword<Literal
+attributes
+operations
+end
+
+class OperatorList
+attributes
+	name : String
+operations
+end
+
+class Priority
+attributes
+	value : Integer
+	associativity : Associativity
+operations
+end
+
+class Operator<NamedElement
+attributes
+	postfix : Boolean
+	arity : Integer
+operations
+end
+
+class Sequence_
+attributes
+operations
+end
+
+abstract class SequenceElement
+attributes
+operations
+end
+
+class LiteralRef<SequenceElement
+attributes
+operations
+end
+
+class Property<SequenceElement
+attributes
+operations
+end
+
+class CustomSeparator<SequenceElement
+attributes
+	name : String
+operations
+end
+
+class Block<SequenceElement
+attributes
+operations
+end
+
+class ConditionalElement<SequenceElement
+attributes
+operations
+end
+
+class PrimitivePropertyInit<PropertyInit
+attributes
+operations
+end
+
+class Alternative<SequenceElement
+attributes
+	isMulti : Boolean
+operations
+end
+
+class FunctionCall<SequenceElement
+attributes
+operations
+end
+
+abstract class PropertyArg
+attributes
+operations
+end
+
+class RefersToPArg<PropertyArg
+attributes
+	propertyName : String
+operations
+end
+
+class LookInPArg<PropertyArg
+attributes
+	propertyName : String
+operations
+end
+
+class CreateInPArg<PropertyArg
+attributes
+	propertyName : String
+operations
+end
+
+class RefersToKeyPArg<PropertyArg
+attributes
+operations
+end
+
+class SeparatorPArg<PropertyArg
+attributes
+operations
+end
+
+class AutoCreatePArg<PropertyArg
+attributes
+	value : AutoCreateKind
+operations
+end
+
+class ImportContextPArg<PropertyArg
+attributes
+operations
+end
+
+class ForcedLowerPArg<PropertyArg
+attributes
+	value : Integer
+operations
+end
+
+class CreateAsPArg<PropertyArg
+attributes
+	name : String
+operations
+end
+
+class AsPArg<PropertyArg
+attributes
+	value : String
+operations
+end
+
+class ModePArg<PropertyArg
+attributes
+	mode : String
+operations
+end
+
+abstract class BlockArg
+attributes
+operations
+end
+
+class NbNLBArg<BlockArg
+attributes
+	value : Integer
+operations
+end
+
+class IndentIncrBArg<BlockArg
+attributes
+	value : Integer
+operations
+end
+
+class StartNLBArg<BlockArg
+attributes
+	value : Boolean
+operations
+end
+
+class StartNbNLBArg<BlockArg
+attributes
+	value : Integer
+operations
+end
+
+class EndNLBArg<BlockArg
+attributes
+	value : Boolean
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class AndExp<Expression
+attributes
+operations
+end
+
+abstract class AtomExp
+attributes
+	propertyName : String
+operations
+end
+
+class EqualsExp<AtomExp
+attributes
+operations
+end
+
+class BooleanPropertyExp<AtomExp
+attributes
+operations
+end
+
+class IsDefinedExp<AtomExp
+attributes
+operations
+end
+
+class OneExp<AtomExp
+attributes
+operations
+end
+
+abstract class Value
+attributes
+	name : String
+operations
+end
+
+class PropertyVal<Value
+attributes
+operations
+end
+
+class Token<NamedElement
+attributes
+	omitted : Boolean
+operations
+end
+
+class OrPattern
+attributes
+operations
+end
+
+abstract class SimplePattern<NamedElement
+attributes
+operations
+end
+
+class RulePattern<SimplePattern
+attributes
+operations
+end
+
+abstract class Rule
+attributes
+operations
+end
+
+class WordRule<Rule
+attributes
+operations
+end
+
+class Word<NamedElement
+attributes
+	token : String
+operations
+end
+
+class EndOfLineRule<Rule
+attributes
+	dropStart : Boolean
+operations
+end
+
+class MultiLineRule<Rule
+attributes
+	dropStart : Boolean
+	dropEnd : Boolean
+operations
+end
+
+abstract class Mapping
+attributes
+operations
+end
+
+class SimpleMapping<Mapping
+attributes
+	key : String
+	value : String
+operations
+end
+
+class WildcardMapping<Mapping
+attributes
+operations
+end
+
+class OctalMapping<Mapping
+attributes
+operations
+end
+
+class HexadecimalMapping<Mapping
+attributes
+operations
+end
+
+class StringPattern<SimplePattern
+attributes
+operations
+end
+
+class ClassPattern<SimplePattern
+attributes
+operations
+end
+
+class QualifiedNamedElement
+attributes
+	names : String
+operations
+end
+
+class ForcedUpperPArg<PropertyArg
+attributes
+	value : Integer
+operations
+end
+
+class InjectorActionsBlock<SequenceElement
+attributes
+operations
+end
+
+class LookupScopePArg<PropertyArg
+attributes
+	query : String
+operations
+end
+
+class ReferenceByPArg<PropertyArg
+attributes
+	referenceBy : String
+operations
+end
+
+class PrefixPArg<PropertyArg
+attributes
+	prefix : String
+operations
+end
+
+class PostfixPArg<PropertyArg
+attributes
+	postfix : String
+operations
+end
+
+class PropertyReference
+attributes
+	name : String
+operations
+end
+
+class ContextTemplate<Template
+attributes
+	isContext : Boolean
+	isAddToContext : Boolean
+	isReferenceOnly : Boolean
+operations
+end
+
+class ContextTags
+attributes
+	tags : String
+operations
+end
+
+abstract class InjectorAction
+attributes
+operations
+end
+
+abstract class PropertyInit<InjectorAction
+attributes
+	value : String
+	default : Boolean
+operations
+end
+
+class ScopeArg
+attributes
+	scope : ScopeKind
+operations
+end
+
+class ForeachPredicatePropertyInit<PropertyInit
+attributes
+	mode : String
+operations
+end
+
+class PredicateSemantic
+attributes
+	when : String
+	mode : String
+operations
+end
+
+class SequenceInAlternative<Sequence_
+attributes
+	disambiguate : String
+operations
+end
+
+class PartialPArg<PropertyArg
+attributes
+operations
+end
+
+class DisambiguatePArg<PropertyArg
+attributes
+	disambiguation : String
+operations
+end
+
+class InstanceOfExp<AtomExp
+attributes
+	supertype : String
+operations
+end
+
+class EnumLiteralVal<Value
+attributes
+operations
+end
+
+class StringVal<Value
+attributes
+	symbol : String
+operations
+end
+
+class IntegerVal<Value
+attributes
+	symbol : Integer
+operations
+end
+
+class NegativeIntegerVal<Value
+attributes
+	symbol : Integer
+operations
+end
+
+class LookupPropertyInit<PropertyInit
+attributes
+operations
+end
+
+composition xxx_ConcreteSyntax_templates between
+	ConcreteSyntax[0..1] role xxx_ConcreteSyntax_templates_src
+	Template[*] role templates
+end
+
+composition xxx_ConcreteSyntax_keywords between
+	ConcreteSyntax[0..1] role xxx_ConcreteSyntax_keywords_src
+	Keyword[*] role keywords
+end
+
+composition xxx_ConcreteSyntax_symbols between
+	ConcreteSyntax[0..1] role xxx_ConcreteSyntax_symbols_src
+	Symbol[*] role symbols
+end
+
+composition xxx_ConcreteSyntax_operatorLists between
+	ConcreteSyntax[0..1] role xxx_ConcreteSyntax_operatorLists_src
+	OperatorList[*] role operatorLists
+end
+
+composition xxx_ConcreteSyntax_tokens between
+	ConcreteSyntax[0..1] role xxx_ConcreteSyntax_tokens_src
+	Token[*] role tokens
+end
+
+association xxx_Template_concreteSyntax between
+	Template[*] role xxx_Template_concreteSyntax_src
+	ConcreteSyntax[1] role concreteSyntax
+end
+
+composition xxx_FunctionTemplate_functionSequence between
+	FunctionTemplate[*] role xxx_FunctionTemplate_functionSequence_src
+	Sequence_[1] role functionSequence
+end
+
+association xxx_ClassTemplate_operatorList between
+	ClassTemplate[*] role xxx_ClassTemplate_operatorList_src
+	OperatorList[0..1] role operatorList
+end
+
+association xxx_OperatorTemplate_operators between
+	OperatorTemplate[0..1] role xxx_OperatorTemplate_operators_src
+	Operator[*] role operators
+end
+
+composition xxx_OperatorTemplate_storeOperatorTo between
+	OperatorTemplate[*] role xxx_OperatorTemplate_storeOperatorTo_src
+	PropertyReference[0..1] role storeOperatorTo
+end
+
+composition xxx_OperatorTemplate_storeLeftSideTo between
+	OperatorTemplate[*] role xxx_OperatorTemplate_storeLeftSideTo_src
+	PropertyReference[0..1] role storeLeftSideTo
+end
+
+composition xxx_OperatorTemplate_storeRightSideTo between
+	OperatorTemplate[*] role xxx_OperatorTemplate_storeRightSideTo_src
+	PropertyReference[0..1] role storeRightSideTo
+end
+
+composition xxx_EnumerationTemplate_mappings between
+	EnumerationTemplate[0..1] role xxx_EnumerationTemplate_mappings_src
+	EnumLiteralMapping[*] role mappings
+end
+
+composition xxx_EnumLiteralMapping_literal between
+	EnumLiteralMapping[*] role xxx_EnumLiteralMapping_literal_src
+	EnumLiteralVal[1] role literal
+end
+
+composition xxx_EnumLiteralMapping_element between
+	EnumLiteralMapping[*] role xxx_EnumLiteralMapping_element_src
+	SequenceElement[0..1] role element
+end
+
+association xxx_Literal_operators between
+	Literal[0..1] role xxx_Literal_operators_src
+	Operator[*] role operators
+end
+
+association xxx_Literal_literalRefs between
+	Literal[0..1] role xxx_Literal_literalRefs_src
+	LiteralRef[*] role literalRefs
+end
+
+composition xxx_OperatorList_priorities between
+	OperatorList[0..1] role xxx_OperatorList_priorities_src
+	Priority[*] role priorities
+end
+
+association xxx_Priority_list between
+	Priority[*] role xxx_Priority_list_src
+	OperatorList[1] role list
+end
+
+composition xxx_Priority_operators between
+	Priority[0..1] role xxx_Priority_operators_src
+	Operator[*] role operators
+end
+
+association xxx_Operator_literal between
+	Operator[*] role xxx_Operator_literal_src
+	Literal[0..1] role literal
+end
+
+association xxx_Operator_priority between
+	Operator[*] role xxx_Operator_priority_src
+	Priority[1] role priority
+end
+
+association xxx_Operator_templates between
+	Operator[0..1] role xxx_Operator_templates_src
+	OperatorTemplate[*] role templates
+end
+
+composition xxx_Sequence_elements between
+	Sequence_[0..1] role xxx_Sequence_elements_src
+	SequenceElement[*] role elements
+end
+
+association xxx_Sequence_templateContainer between
+	Sequence_[*] role xxx_Sequence_templateContainer_src
+	ClassTemplate[0..1] role templateContainer
+end
+
+association xxx_Sequence_prefixContainer between
+	Sequence_[*] role xxx_Sequence_prefixContainer_src
+	ClassTemplate[0..1] role prefixContainer
+end
+
+association xxx_Sequence_functionContainer between
+	Sequence_[*] role xxx_Sequence_functionContainer_src
+	FunctionTemplate[0..1] role functionContainer
+end
+
+association xxx_Sequence_blockContainer between
+	Sequence_[*] role xxx_Sequence_blockContainer_src
+	Block[0..1] role blockContainer
+end
+
+association xxx_Sequence_thenContainer between
+	Sequence_[*] role xxx_Sequence_thenContainer_src
+	ConditionalElement[0..1] role thenContainer
+end
+
+association xxx_Sequence_elseContainer between
+	Sequence_[*] role xxx_Sequence_elseContainer_src
+	ConditionalElement[0..1] role elseContainer
+end
+
+association xxx_Sequence_separatorContainer between
+	Sequence_[*] role xxx_Sequence_separatorContainer_src
+	SeparatorPArg[0..1] role separatorContainer
+end
+
+association xxx_Sequence_otContainer between
+	Sequence_[*] role xxx_Sequence_otContainer_src
+	OperatorTemplate[0..1] role otContainer
+end
+
+association xxx_SequenceElement_elementSequence between
+	SequenceElement[*] role xxx_SequenceElement_elementSequence_src
+	Sequence_[0..1] role elementSequence
+end
+
+association xxx_SequenceElement_parentTemplate between
+	SequenceElement[*] role xxx_SequenceElement_parentTemplate_src
+	Template[0..1] role parentTemplate
+end
+
+association xxx_LiteralRef_referredLiteral between
+	LiteralRef[*] role xxx_LiteralRef_referredLiteral_src
+	Literal[1] role referredLiteral
+end
+
+composition xxx_Property_propertyArgs between
+	Property[0..1] role xxx_Property_propertyArgs_src
+	PropertyArg[*] role propertyArgs
+end
+
+composition xxx_Property_propertyReference between
+	Property[*] role xxx_Property_propertyReference_src
+	PropertyReference[1] role propertyReference
+end
+
+composition xxx_Block_blockSequence between
+	Block[*] role xxx_Block_blockSequence_src
+	Sequence_[1] role blockSequence
+end
+
+composition xxx_Block_blockArgs between
+	Block[0..1] role xxx_Block_blockArgs_src
+	BlockArg[*] role blockArgs
+end
+
+composition xxx_ConditionalElement_condition between
+	ConditionalElement[*] role xxx_ConditionalElement_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ConditionalElement_thenSequence between
+	ConditionalElement[*] role xxx_ConditionalElement_thenSequence_src
+	Sequence_[1] role thenSequence
+end
+
+composition xxx_ConditionalElement_elseSequence between
+	ConditionalElement[*] role xxx_ConditionalElement_elseSequence_src
+	Sequence_[1] role elseSequence
+end
+
+composition xxx_Alternative_sequences between
+	Alternative[0..1] role xxx_Alternative_sequences_src
+	SequenceInAlternative[2..*] role sequences
+end
+
+association xxx_FunctionCall_calledFunction between
+	FunctionCall[*] role xxx_FunctionCall_calledFunction_src
+	FunctionTemplate[1] role calledFunction
+end
+
+association xxx_PropertyArg_property between
+	PropertyArg[*] role xxx_PropertyArg_property_src
+	Property[1] role property
+end
+
+composition xxx_SeparatorPArg_separatorSequence between
+	SeparatorPArg[*] role xxx_SeparatorPArg_separatorSequence_src
+	Sequence_[1] role separatorSequence
+end
+
+association xxx_AsPArg_template between
+	AsPArg[*] role xxx_AsPArg_template_src
+	Template[1] role template
+end
+
+association xxx_BlockArg_block between
+	BlockArg[*] role xxx_BlockArg_block_src
+	Block[1] role block
+end
+
+association xxx_Expression_conditionalElement between
+	Expression[*] role xxx_Expression_conditionalElement_src
+	ConditionalElement[1] role conditionalElement
+end
+
+composition xxx_AndExp_expressions between
+	AndExp[0..1] role xxx_AndExp_expressions_src
+	AtomExp[*] role expressions
+end
+
+association xxx_AtomExp_andExp between
+	AtomExp[*] role xxx_AtomExp_andExp_src
+	AndExp[1] role andExp
+end
+
+composition xxx_AtomExp_propertyReference between
+	AtomExp[*] role xxx_AtomExp_propertyReference_src
+	PropertyReference[0..1] role propertyReference
+end
+
+composition xxx_EqualsExp_value between
+	EqualsExp[*] role xxx_EqualsExp_value_src
+	Value[1] role value
+end
+
+composition xxx_Token_pattern between
+	Token[*] role xxx_Token_pattern_src
+	OrPattern[1] role pattern
+end
+
+composition xxx_OrPattern_simplePatterns between
+	OrPattern[0..1] role xxx_OrPattern_simplePatterns_src
+	SimplePattern[1..*] role simplePatterns
+end
+
+composition xxx_RulePattern_rule between
+	RulePattern[*] role xxx_RulePattern_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_WordRule_start between
+	WordRule[*] role xxx_WordRule_start_src
+	OrPattern[1] role start
+end
+
+composition xxx_WordRule_part between
+	WordRule[*] role xxx_WordRule_part_src
+	OrPattern[1] role part
+end
+
+composition xxx_WordRule_end_ between
+	WordRule[*] role xxx_WordRule_end__src
+	OrPattern[0..1] role end_
+end
+
+composition xxx_WordRule_words between
+	WordRule[0..1] role xxx_WordRule_words_src
+	Word[*] role words
+end
+
+composition xxx_EndOfLineRule_start between
+	EndOfLineRule[*] role xxx_EndOfLineRule_start_src
+	StringPattern[1] role start
+end
+
+composition xxx_MultiLineRule_start between
+	MultiLineRule[*] role xxx_MultiLineRule_start_src
+	StringPattern[1] role start
+end
+
+composition xxx_MultiLineRule_end_ between
+	MultiLineRule[*] role xxx_MultiLineRule_end__src
+	StringPattern[1] role end_
+end
+
+composition xxx_MultiLineRule_esc between
+	MultiLineRule[*] role xxx_MultiLineRule_esc_src
+	StringPattern[0..1] role esc
+end
+
+composition xxx_MultiLineRule_escMappings between
+	MultiLineRule[0..1] role xxx_MultiLineRule_escMappings_src
+	Mapping[*] role escMappings
+end
+
+
+composition xxx_InjectorActionsBlock_injectorActions between
+	InjectorActionsBlock[0..1] role xxx_InjectorActionsBlock_injectorActions_src
+	InjectorAction[*] role injectorActions
+end
+
+
+composition xxx_ContextTemplate_contextTags between
+	ContextTemplate[*] role xxx_ContextTemplate_contextTags_src
+	ContextTags[0..1] role contextTags
+end
+
+composition xxx_ContextTemplate_scope between
+	ContextTemplate[*] role xxx_ContextTemplate_scope_src
+	ScopeArg[0..1] role scope
+end
+
+composition xxx_ContextTemplate_templateSequence between
+	ContextTemplate[*] role xxx_ContextTemplate_templateSequence_src
+	Sequence_[1] role templateSequence
+end
+
+association xxx_InjectorAction_injectorActionsBlock between
+	InjectorAction[*] role xxx_InjectorAction_injectorActionsBlock_src
+	InjectorActionsBlock[0..1] role injectorActionsBlock
+end
+
+composition xxx_PropertyInit_propertyReference between
+	PropertyInit[*] role xxx_PropertyInit_propertyReference_src
+	PropertyReference[0..1] role propertyReference
+end
+
+composition xxx_ForeachPredicatePropertyInit_predicateSemantic between
+	ForeachPredicatePropertyInit[0..1] role xxx_ForeachPredicatePropertyInit_predicateSemantic_src
+	PredicateSemantic[*] role predicateSemantic
+end
+
+association xxx_PredicateSemantic_as between
+	PredicateSemantic[*] role xxx_PredicateSemantic_as_src
+	Template[0..1] role as
+end
+
+association xxx_PredicateSemantic_foreachParent between
+	PredicateSemantic[*] role xxx_PredicateSemantic_foreachParent_src
+	ForeachPredicatePropertyInit[1] role foreachParent
+end
+
+association xxx_SequenceInAlternative_alternativeContainer between
+	SequenceInAlternative[*] role xxx_SequenceInAlternative_alternativeContainer_src
+	Alternative[0..1] role alternativeContainer
+end
+

@@ -1,0 +1,422 @@
+model PrimitiveTypes
+enum DisplayDrawingObjectsType{
+	ddot_displayShapes,
+	ddot_placeHolders,
+	ddot_hideAll
+}
+
+enum CalculationWorkbookType{
+	cwt_automaticCalculation,
+	cwt_manualCalculation,
+	cwt_semiAutomaticCalculation
+}
+
+class DateTimeType
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+operations
+end
+
+class VersionType
+attributes
+	n : Integer
+	nn : Integer
+operations
+end
+
+abstract class ValueType
+attributes
+operations
+end
+
+class StringValue<ValueType
+attributes
+	value : String
+operations
+end
+
+class NumberValue<ValueType
+attributes
+	value : Real
+operations
+end
+
+class DateTimeTypeValue<ValueType
+attributes
+operations
+end
+
+class BooleanValue<ValueType
+attributes
+	value : Boolean
+operations
+end
+
+class ErrorValue<ValueType
+attributes
+operations
+end
+
+class DocumentPropertiesCollection
+attributes
+	title : String
+	subject : String
+	keywords : String
+	description : String
+	category : String
+	author : String
+	lastAuthor : String
+	manager : String
+	company : String
+	hyperlinkBase : String
+	revision : Integer
+	presentationFormat : String
+	guid : String
+	appName : String
+	totalTime : Integer
+	pages : Integer
+	words : Integer
+	characters : Integer
+	charactersWithSpaces : Integer
+	bytes : Integer
+	lines : Integer
+	paragraphs : Integer
+operations
+end
+
+class CustomDocumentPropertiesCollection
+attributes
+operations
+end
+
+class CustomDocumentProperty
+attributes
+	name : String
+operations
+end
+
+class SmartTagType
+attributes
+	namespaceuri : String
+	name : String
+	url : String
+operations
+end
+
+class SmartTagsCollection
+attributes
+operations
+end
+
+class Workbook
+attributes
+operations
+end
+
+class Worksheet
+attributes
+	name : String
+operations
+end
+
+abstract class StyledElement
+attributes
+operations
+end
+
+class Table<StyledElement
+attributes
+	defaultColumnWidth : Real
+	defaultRowHeight : Real
+	expandedColumnCount : Integer
+	expandedRowCount : Integer
+	leftCell : Integer
+	topCell : Integer
+	fullColumns : Boolean
+	fullRows : Boolean
+operations
+end
+
+abstract class TableElement<StyledElement
+attributes
+	index : Integer
+operations
+end
+
+abstract class ColOrRowElement<TableElement
+attributes
+	hidden : Boolean
+	span : Integer
+operations
+end
+
+class Column<ColOrRowElement
+attributes
+	autoFitWidth : Boolean
+	width : Real
+operations
+end
+
+class Row<ColOrRowElement
+attributes
+	autoFitHeight : Boolean
+	height : Real
+operations
+end
+
+class Cell<TableElement
+attributes
+	arrayRange : String
+	formula : String
+	hRef : String
+	mergeAcross : Real
+	mergeDown : Real
+operations
+end
+
+class Comment
+attributes
+	author : String
+	showAlways : Boolean
+operations
+end
+
+class Data
+attributes
+operations
+end
+
+class ExcelWorkbook
+attributes
+	selectedSheets : Integer
+	windowHidden : Boolean
+	hideHorizontalScrollBar : Boolean
+	hideVerticalScrollBar : Boolean
+	hideWorkbookTabs : Boolean
+	windowHeight : Real
+	windowWidth : Real
+	windowTopX : Real
+	windowTopY : Real
+	activeSheet : Integer
+	activeChart : String
+	firstVisibleSheet : Integer
+	hidePivotTableFieldList : Boolean
+	protectStructure : Boolean
+	protectWindows : Boolean
+	displayInkNotes : Boolean
+	embedSaveSmartTags : Boolean
+	futureVer : String
+	tabRatio : Integer
+	windowIconic : Boolean
+	displayDrawingObjects : DisplayDrawingObjectsType
+	createBackup : Boolean
+	calculation : CalculationWorkbookType
+	doNotCalculateBeforeSave : Boolean
+	date1904 : Boolean
+	refModeR1C1 : Boolean
+	iteration : Boolean
+	maxIterations : Integer
+	maxChange : Real
+	precisionAsDisplayed : Boolean
+	doNotSaveLinkValues : Boolean
+	noAutoRecover : Boolean
+	acceptLabelsInFormulas : Boolean
+	uncalced : Boolean
+operations
+end
+
+association xxx_ValueType_vt_data between
+	ValueType[*] role xxx_ValueType_vt_data_src
+	Data[1] role vt_data
+end
+
+composition xxx_DateTimeTypeValue_value between
+	DateTimeTypeValue[*] role xxx_DateTimeTypeValue_value_src
+	DateTimeType[1] role value
+end
+
+association xxx_DocumentPropertiesCollection_dp_workbook between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_dp_workbook_src
+	Workbook[1] role dp_workbook
+end
+
+composition xxx_DocumentPropertiesCollection_version between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_version_src
+	VersionType[0..1] role version
+end
+
+composition xxx_DocumentPropertiesCollection_lastPrinted between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_lastPrinted_src
+	DateTimeType[0..1] role lastPrinted
+end
+
+composition xxx_DocumentPropertiesCollection_created between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_created_src
+	DateTimeType[0..1] role created
+end
+
+composition xxx_DocumentPropertiesCollection_lastSaved between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_lastSaved_src
+	DateTimeType[0..1] role lastSaved
+end
+
+association xxx_CustomDocumentPropertiesCollection_cdp_workbook between
+	CustomDocumentPropertiesCollection[*] role xxx_CustomDocumentPropertiesCollection_cdp_workbook_src
+	Workbook[1] role cdp_workbook
+end
+
+composition xxx_CustomDocumentPropertiesCollection_customDocumentProperties between
+	CustomDocumentPropertiesCollection[0..1] role xxx_CustomDocumentPropertiesCollection_customDocumentProperties_src
+	CustomDocumentProperty[1..*] role customDocumentProperties
+end
+
+association xxx_CustomDocumentProperty_customDocumentProperty_cdpe between
+	CustomDocumentProperty[*] role xxx_CustomDocumentProperty_customDocumentProperty_cdpe_src
+	CustomDocumentPropertiesCollection[1] role customDocumentProperty_cdpe
+end
+
+composition xxx_CustomDocumentProperty_value between
+	CustomDocumentProperty[*] role xxx_CustomDocumentProperty_value_src
+	ValueType[1] role value
+end
+
+association xxx_SmartTagType_smartTagType_ste between
+	SmartTagType[*] role xxx_SmartTagType_smartTagType_ste_src
+	SmartTagsCollection[1] role smartTagType_ste
+end
+
+association xxx_SmartTagsCollection_st_workbook between
+	SmartTagsCollection[*] role xxx_SmartTagsCollection_st_workbook_src
+	Workbook[1] role st_workbook
+end
+
+association xxx_SmartTagsCollection_st_cell between
+	SmartTagsCollection[*] role xxx_SmartTagsCollection_st_cell_src
+	Cell[1] role st_cell
+end
+
+composition xxx_SmartTagsCollection_smartTagTypes between
+	SmartTagsCollection[0..1] role xxx_SmartTagsCollection_smartTagTypes_src
+	SmartTagType[*] role smartTagTypes
+end
+
+composition xxx_Workbook_wb_smartTags between
+	Workbook[*] role xxx_Workbook_wb_smartTags_src
+	SmartTagsCollection[0..1] role wb_smartTags
+end
+
+composition xxx_Workbook_wb_docProperties between
+	Workbook[*] role xxx_Workbook_wb_docProperties_src
+	DocumentPropertiesCollection[0..1] role wb_docProperties
+end
+
+composition xxx_Workbook_wb_customDocProperties between
+	Workbook[*] role xxx_Workbook_wb_customDocProperties_src
+	CustomDocumentPropertiesCollection[0..1] role wb_customDocProperties
+end
+
+composition xxx_Workbook_wb_excelWorkbook between
+	Workbook[*] role xxx_Workbook_wb_excelWorkbook_src
+	ExcelWorkbook[0..1] role wb_excelWorkbook
+end
+
+composition xxx_Workbook_wb_worksheets between
+	Workbook[0..1] role xxx_Workbook_wb_worksheets_src
+	Worksheet[*] role wb_worksheets
+end
+
+association xxx_Worksheet_ws_workbook between
+	Worksheet[*] role xxx_Worksheet_ws_workbook_src
+	Workbook[1] role ws_workbook
+end
+
+composition xxx_Worksheet_ws_table between
+	Worksheet[*] role xxx_Worksheet_ws_table_src
+	Table[0..1] role ws_table
+end
+
+association xxx_Table_t_worksheet between
+	Table[*] role xxx_Table_t_worksheet_src
+	Worksheet[1] role t_worksheet
+end
+
+composition xxx_Table_t_cols between
+	Table[0..1] role xxx_Table_t_cols_src
+	Column[*] role t_cols
+end
+
+composition xxx_Table_t_rows between
+	Table[0..1] role xxx_Table_t_rows_src
+	Row[*] role t_rows
+end
+
+association xxx_Column_c_table between
+	Column[*] role xxx_Column_c_table_src
+	Table[1] role c_table
+end
+
+association xxx_Row_r_table between
+	Row[*] role xxx_Row_r_table_src
+	Table[1] role r_table
+end
+
+composition xxx_Row_r_cells between
+	Row[0..1] role xxx_Row_r_cells_src
+	Cell[*] role r_cells
+end
+
+composition xxx_Cell_c_smartTags between
+	Cell[0..1] role xxx_Cell_c_smartTags_src
+	SmartTagsCollection[*] role c_smartTags
+end
+
+association xxx_Cell_c_row between
+	Cell[*] role xxx_Cell_c_row_src
+	Row[1] role c_row
+end
+
+composition xxx_Cell_c_data between
+	Cell[*] role xxx_Cell_c_data_src
+	Data[0..1] role c_data
+end
+
+composition xxx_Cell_c_comment between
+	Cell[*] role xxx_Cell_c_comment_src
+	Comment[0..1] role c_comment
+end
+
+association xxx_Comment_c_cell between
+	Comment[*] role xxx_Comment_c_cell_src
+	Cell[1] role c_cell
+end
+
+composition xxx_Comment_com_data between
+	Comment[*] role xxx_Comment_com_data_src
+	Data[1] role com_data
+end
+
+association xxx_Data_d_cell between
+	Data[*] role xxx_Data_d_cell_src
+	Cell[1] role d_cell
+end
+
+association xxx_Data_d_comment between
+	Data[*] role xxx_Data_d_comment_src
+	Comment[1] role d_comment
+end
+
+composition xxx_Data_value between
+	Data[*] role xxx_Data_value_src
+	ValueType[1] role value
+end
+
+association xxx_ExcelWorkbook_ew_workbook between
+	ExcelWorkbook[*] role xxx_ExcelWorkbook_ew_workbook_src
+	Workbook[1] role ew_workbook
+end
+

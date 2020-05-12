@@ -1,0 +1,635 @@
+model pp
+class PuppetManifest<ExpressionBlock
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class ResourceBody
+attributes
+operations
+end
+
+class AttributeOperation
+attributes
+	key : String
+	op : String
+operations
+end
+
+class AttributeOperations
+attributes
+operations
+end
+
+abstract class ICollectQuery
+attributes
+operations
+end
+
+class VirtualCollectQuery<UnaryExpression,ICollectQuery
+attributes
+operations
+end
+
+class ExportedCollectQuery<UnaryExpression,ICollectQuery
+attributes
+operations
+end
+
+class HostClassDefinition<Definition
+attributes
+operations
+end
+
+class Definition<Expression
+attributes
+	className : String
+operations
+end
+
+class DefinitionArgumentList
+attributes
+operations
+end
+
+class DefinitionArgument
+attributes
+	argName : String
+	op : String
+operations
+end
+
+class CaseExpression<Expression
+attributes
+operations
+end
+
+class Case
+attributes
+operations
+end
+
+class IfExpression<Expression
+attributes
+operations
+end
+
+abstract class LiteralExpression<Expression
+attributes
+operations
+end
+
+class LiteralNameOrReference<LiteralExpression
+attributes
+	value : String
+operations
+end
+
+class ResourceExpression<Expression
+attributes
+operations
+end
+
+class ImportExpression<Expression
+attributes
+operations
+end
+
+class LiteralList<LiteralExpression
+attributes
+operations
+end
+
+class LiteralHash<LiteralExpression
+attributes
+operations
+end
+
+class HashEntry
+attributes
+operations
+end
+
+class LiteralBoolean<LiteralExpression
+attributes
+	value : Boolean
+operations
+end
+
+class LiteralUndef<LiteralExpression
+attributes
+operations
+end
+
+class LiteralDefault<LiteralExpression
+attributes
+operations
+end
+
+class LiteralRegex<LiteralExpression
+attributes
+	value : String
+operations
+end
+
+class LiteralName<LiteralExpression
+attributes
+	value : String
+operations
+end
+
+class VariableExpression<Expression
+attributes
+	varName : String
+operations
+end
+
+class RelationshipExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class AssignmentExpression<BinaryExpression
+attributes
+operations
+end
+
+class AppendExpression<BinaryExpression
+attributes
+operations
+end
+
+class OrExpression<BinaryExpression
+attributes
+operations
+end
+
+class AndExpression<BinaryExpression
+attributes
+operations
+end
+
+class RelationalExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class EqualityExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class ShiftExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class AdditiveExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class MultiplicativeExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class MatchingExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class InExpression<BinaryOpExpression
+attributes
+operations
+end
+
+class AtExpression<ParameterizedExpression
+attributes
+operations
+end
+
+class CollectExpression<Expression
+attributes
+operations
+end
+
+class SelectorExpression<ParameterizedExpression
+attributes
+operations
+end
+
+class SelectorEntry<BinaryExpression
+attributes
+operations
+end
+
+class FunctionCall<WithLambdaExpression
+attributes
+operations
+end
+
+abstract class BinaryOpExpression<BinaryExpression
+attributes
+	opName : String
+operations
+end
+
+abstract class BinaryExpression<Expression
+attributes
+operations
+end
+
+abstract class ParameterizedExpression<Expression
+attributes
+operations
+end
+
+class NodeDefinition<Expression
+attributes
+operations
+end
+
+abstract class UnaryExpression<Expression
+attributes
+operations
+end
+
+class UnaryMinusExpression<UnaryExpression
+attributes
+operations
+end
+
+class UnaryNotExpression<UnaryExpression
+attributes
+operations
+end
+
+abstract class ExpressionBlock<Expression
+attributes
+operations
+end
+
+class ElseExpression<ExpressionBlock
+attributes
+operations
+end
+
+class ElseIfExpression<IfExpression
+attributes
+operations
+end
+
+class VirtualNameOrReference<LiteralExpression
+attributes
+	value : String
+	exported : Boolean
+operations
+end
+
+class ParenthesisedExpression<Expression
+attributes
+operations
+end
+
+class ExprList<Expression
+attributes
+operations
+end
+
+class DoubleQuotedString<StringExpression,IQuotedString
+attributes
+operations
+end
+
+class SingleQuotedString<StringExpression,IQuotedString
+attributes
+	text : String
+operations
+end
+
+abstract class StringExpression<Expression
+attributes
+operations
+end
+
+class UnquotedString<StringExpression
+attributes
+operations
+end
+
+abstract class IQuotedString
+attributes
+operations
+end
+
+class InterpolatedVariable<Expression
+attributes
+	varName : String
+operations
+end
+
+abstract class TextExpression
+attributes
+operations
+end
+
+class VerbatimTE<TextExpression
+attributes
+	text : String
+operations
+end
+
+class ExpressionTE<TextExpression
+attributes
+operations
+end
+
+class VariableTE<TextExpression
+attributes
+	varName : String
+operations
+end
+
+class LiteralClass<LiteralExpression
+attributes
+operations
+end
+
+class UnlessExpression<Expression
+attributes
+operations
+end
+
+abstract class Lambda<ExpressionBlock
+attributes
+operations
+end
+
+class NamedAccessExpression<BinaryExpression
+attributes
+operations
+end
+
+class MethodCall<WithLambdaExpression
+attributes
+	parenthesized : Boolean
+operations
+end
+
+class WithLambdaExpression<ParameterizedExpression
+attributes
+operations
+end
+
+class JavaLambda<Lambda
+attributes
+	farrow : Boolean
+operations
+end
+
+class RubyLambda<Lambda
+attributes
+operations
+end
+
+class SeparatorExpression<Expression
+attributes
+operations
+end
+
+composition xxx_ResourceBody_attributes_ between
+	ResourceBody[*] role xxx_ResourceBody_attributes__src
+	AttributeOperations[0..1] role attributes_
+end
+
+composition xxx_ResourceBody_nameExpr between
+	ResourceBody[*] role xxx_ResourceBody_nameExpr_src
+	Expression[0..1] role nameExpr
+end
+
+composition xxx_AttributeOperation_value between
+	AttributeOperation[*] role xxx_AttributeOperation_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_AttributeOperations_attributes_ between
+	AttributeOperations[0..1] role xxx_AttributeOperations_attributes__src
+	AttributeOperation[*] role attributes_
+end
+
+composition xxx_HostClassDefinition_parent between
+	HostClassDefinition[*] role xxx_HostClassDefinition_parent_src
+	LiteralExpression[0..1] role parent
+end
+
+composition xxx_Definition_arguments between
+	Definition[*] role xxx_Definition_arguments_src
+	DefinitionArgumentList[0..1] role arguments
+end
+
+composition xxx_Definition_statements between
+	Definition[0..1] role xxx_Definition_statements_src
+	Expression[*] role statements
+end
+
+composition xxx_DefinitionArgumentList_arguments between
+	DefinitionArgumentList[0..1] role xxx_DefinitionArgumentList_arguments_src
+	DefinitionArgument[*] role arguments
+end
+
+composition xxx_DefinitionArgument_value between
+	DefinitionArgument[*] role xxx_DefinitionArgument_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_CaseExpression_switchExpr between
+	CaseExpression[*] role xxx_CaseExpression_switchExpr_src
+	Expression[0..1] role switchExpr
+end
+
+composition xxx_CaseExpression_cases between
+	CaseExpression[0..1] role xxx_CaseExpression_cases_src
+	Case[*] role cases
+end
+
+composition xxx_Case_statements between
+	Case[0..1] role xxx_Case_statements_src
+	Expression[*] role statements
+end
+
+composition xxx_Case_values between
+	Case[0..1] role xxx_Case_values_src
+	Expression[*] role values
+end
+
+composition xxx_IfExpression_condExpr between
+	IfExpression[*] role xxx_IfExpression_condExpr_src
+	Expression[0..1] role condExpr
+end
+
+composition xxx_IfExpression_thenStatements between
+	IfExpression[0..1] role xxx_IfExpression_thenStatements_src
+	Expression[*] role thenStatements
+end
+
+composition xxx_IfExpression_elseStatement between
+	IfExpression[*] role xxx_IfExpression_elseStatement_src
+	Expression[0..1] role elseStatement
+end
+
+composition xxx_ResourceExpression_resourceExpr between
+	ResourceExpression[*] role xxx_ResourceExpression_resourceExpr_src
+	Expression[0..1] role resourceExpr
+end
+
+composition xxx_ResourceExpression_resourceData between
+	ResourceExpression[0..1] role xxx_ResourceExpression_resourceData_src
+	ResourceBody[*] role resourceData
+end
+
+composition xxx_ImportExpression_values between
+	ImportExpression[0..1] role xxx_ImportExpression_values_src
+	IQuotedString[*] role values
+end
+
+composition xxx_LiteralList_elements between
+	LiteralList[0..1] role xxx_LiteralList_elements_src
+	Expression[*] role elements
+end
+
+composition xxx_LiteralHash_elements between
+	LiteralHash[0..1] role xxx_LiteralHash_elements_src
+	HashEntry[*] role elements
+end
+
+composition xxx_HashEntry_key between
+	HashEntry[*] role xxx_HashEntry_key_src
+	Expression[0..1] role key
+end
+
+composition xxx_HashEntry_value between
+	HashEntry[*] role xxx_HashEntry_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_CollectExpression_classReference between
+	CollectExpression[*] role xxx_CollectExpression_classReference_src
+	Expression[0..1] role classReference
+end
+
+composition xxx_CollectExpression_query between
+	CollectExpression[*] role xxx_CollectExpression_query_src
+	ICollectQuery[0..1] role query
+end
+
+composition xxx_CollectExpression_attributes_ between
+	CollectExpression[*] role xxx_CollectExpression_attributes__src
+	AttributeOperations[0..1] role attributes_
+end
+
+composition xxx_BinaryExpression_leftExpr between
+	BinaryExpression[*] role xxx_BinaryExpression_leftExpr_src
+	Expression[0..1] role leftExpr
+end
+
+composition xxx_BinaryExpression_rightExpr between
+	BinaryExpression[*] role xxx_BinaryExpression_rightExpr_src
+	Expression[0..1] role rightExpr
+end
+
+composition xxx_ParameterizedExpression_leftExpr between
+	ParameterizedExpression[*] role xxx_ParameterizedExpression_leftExpr_src
+	Expression[0..1] role leftExpr
+end
+
+composition xxx_ParameterizedExpression_parameters between
+	ParameterizedExpression[0..1] role xxx_ParameterizedExpression_parameters_src
+	Expression[*] role parameters
+end
+
+composition xxx_NodeDefinition_hostNames between
+	NodeDefinition[0..1] role xxx_NodeDefinition_hostNames_src
+	Expression[*] role hostNames
+end
+
+composition xxx_NodeDefinition_parentName between
+	NodeDefinition[*] role xxx_NodeDefinition_parentName_src
+	Expression[0..1] role parentName
+end
+
+composition xxx_NodeDefinition_statements between
+	NodeDefinition[0..1] role xxx_NodeDefinition_statements_src
+	Expression[*] role statements
+end
+
+composition xxx_UnaryExpression_expr between
+	UnaryExpression[*] role xxx_UnaryExpression_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_ExpressionBlock_statements between
+	ExpressionBlock[0..1] role xxx_ExpressionBlock_statements_src
+	Expression[*] role statements
+end
+
+composition xxx_ParenthesisedExpression_expr between
+	ParenthesisedExpression[*] role xxx_ParenthesisedExpression_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_ExprList_expressions between
+	ExprList[0..1] role xxx_ExprList_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_DoubleQuotedString_stringPart between
+	DoubleQuotedString[0..1] role xxx_DoubleQuotedString_stringPart_src
+	TextExpression[*] role stringPart
+end
+
+composition xxx_UnquotedString_expression between
+	UnquotedString[*] role xxx_UnquotedString_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_ExpressionTE_expression between
+	ExpressionTE[*] role xxx_ExpressionTE_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_UnlessExpression_condExpr between
+	UnlessExpression[*] role xxx_UnlessExpression_condExpr_src
+	Expression[0..1] role condExpr
+end
+
+composition xxx_UnlessExpression_thenStatements between
+	UnlessExpression[0..1] role xxx_UnlessExpression_thenStatements_src
+	Expression[*] role thenStatements
+end
+
+composition xxx_UnlessExpression_elseStatement between
+	UnlessExpression[*] role xxx_UnlessExpression_elseStatement_src
+	Expression[0..1] role elseStatement
+end
+
+composition xxx_Lambda_arguments between
+	Lambda[*] role xxx_Lambda_arguments_src
+	DefinitionArgumentList[0..1] role arguments
+end
+
+composition xxx_MethodCall_methodExpr between
+	MethodCall[*] role xxx_MethodCall_methodExpr_src
+	Expression[1] role methodExpr
+end
+
+composition xxx_WithLambdaExpression_lambda between
+	WithLambdaExpression[*] role xxx_WithLambdaExpression_lambda_src
+	Lambda[0..1] role lambda
+end
+

@@ -1,0 +1,185 @@
+model QL
+enum BinaryOperators{
+default
+}
+
+enum DataTypes{
+default
+}
+
+class BinaryOperatorExpression<Expression
+attributes
+	operator : BinaryOperators
+operations
+end
+
+class BooleanNegationExpression<Expression
+attributes
+operations
+end
+
+class ComputedItem<SimpleFormElement,ExpressiveFormElement
+attributes
+operations
+end
+
+class ConditionalGroup<SequentialComposition,FormElement,ExpressiveFormElement
+attributes
+operations
+end
+
+class DataTypeLiteral<TypeLiteral
+attributes
+	dataType : DataTypes
+operations
+end
+
+abstract class Documented
+attributes
+	documentation : String
+operations
+end
+
+class Enumeration<Named
+attributes
+operations
+end
+
+class EnumerationLiteral<Named
+attributes
+operations
+end
+
+class EnumerationReferenceLiteral<TypeLiteral
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class ExpressiveFormElement<FormElement
+attributes
+operations
+end
+
+class Form<SequentialComposition,Named
+attributes
+operations
+end
+
+abstract class FormElement
+attributes
+operations
+end
+
+abstract class Named
+attributes
+	name : String
+operations
+end
+
+abstract class OptionallyNamed
+attributes
+	name : String
+operations
+end
+
+class Question<SimpleFormElement
+attributes
+operations
+end
+
+class Questionnaire<Documented
+attributes
+operations
+end
+
+abstract class SequentialComposition
+attributes
+operations
+end
+
+abstract class SimpleFormElement<FormElement,Named
+attributes
+	label : String
+operations
+end
+
+abstract class TypeLiteral
+attributes
+operations
+end
+
+class ValueReference<Expression
+attributes
+operations
+end
+
+composition xxx_BinaryOperatorExpression_leftOperand between
+	BinaryOperatorExpression[*] role xxx_BinaryOperatorExpression_leftOperand_src
+	Expression[1] role leftOperand
+end
+
+composition xxx_BinaryOperatorExpression_rightOperand between
+	BinaryOperatorExpression[*] role xxx_BinaryOperatorExpression_rightOperand_src
+	Expression[1] role rightOperand
+end
+
+composition xxx_BooleanNegationExpression_operand between
+	BooleanNegationExpression[*] role xxx_BooleanNegationExpression_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_ComputedItem_expression between
+	ComputedItem[*] role xxx_ComputedItem_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_ConditionalGroup_enablingCondition between
+	ConditionalGroup[*] role xxx_ConditionalGroup_enablingCondition_src
+	Expression[1] role enablingCondition
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	EnumerationLiteral[1..*] role literals
+end
+
+association xxx_EnumerationReferenceLiteral_enumeration between
+	EnumerationReferenceLiteral[*] role xxx_EnumerationReferenceLiteral_enumeration_src
+	Enumeration[1] role enumeration
+end
+
+association xxx_EnumerationReferenceLiteral_literal between
+	EnumerationReferenceLiteral[*] role xxx_EnumerationReferenceLiteral_literal_src
+	EnumerationLiteral[0..1] role literal
+end
+
+composition xxx_Question_type between
+	Question[*] role xxx_Question_type_src
+	TypeLiteral[1] role type
+end
+
+composition xxx_Questionnaire_enumerations between
+	Questionnaire[0..1] role xxx_Questionnaire_enumerations_src
+	Enumeration[*] role enumerations
+end
+
+composition xxx_Questionnaire_forms between
+	Questionnaire[0..1] role xxx_Questionnaire_forms_src
+	Form[*] role forms
+end
+
+composition xxx_SequentialComposition_elements between
+	SequentialComposition[0..1] role xxx_SequentialComposition_elements_src
+	FormElement[*] role elements
+end
+
+association xxx_ValueReference_question between
+	ValueReference[*] role xxx_ValueReference_question_src
+	Question[1] role question
+end
+

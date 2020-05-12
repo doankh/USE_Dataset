@@ -1,0 +1,69 @@
+model CompositeStructuresProv
+class StructuredClassifier
+attributes
+operations
+end
+
+class Port
+attributes
+	isBehavior : String
+	isService : String
+	isConjugated : String
+operations
+end
+
+abstract class EncapsulatedClassifier<StructuredClassifier
+attributes
+operations
+end
+
+class Collaboration<StructuredClassifier
+attributes
+operations
+end
+
+class CollaborationUse
+attributes
+operations
+end
+
+abstract class InvocationAction
+attributes
+operations
+end
+
+abstract class Trigger
+attributes
+operations
+end
+
+class Variable
+attributes
+operations
+end
+
+association xxx_Port_redefinedPort between
+	Port[0..1] role xxx_Port_redefinedPort_src
+	Port[*] role redefinedPort
+end
+
+composition xxx_EncapsulatedClassifier_ownedPort between
+	EncapsulatedClassifier[0..1] role xxx_EncapsulatedClassifier_ownedPort_src
+	Port[*] role ownedPort
+end
+
+association xxx_CollaborationUse_type between
+	CollaborationUse[*] role xxx_CollaborationUse_type_src
+	Collaboration[1] role type
+end
+
+association xxx_InvocationAction_onPort between
+	InvocationAction[*] role xxx_InvocationAction_onPort_src
+	Port[0..1] role onPort
+end
+
+association xxx_Trigger_port between
+	Trigger[0..1] role xxx_Trigger_port_src
+	Port[*] role port
+end
+

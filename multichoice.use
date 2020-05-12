@@ -1,0 +1,109 @@
+model multichoicesystem
+class System
+attributes
+operations
+end
+
+class MultipleChoice
+attributes
+	timeLimit : Integer
+	name : String
+operations
+end
+
+class User
+attributes
+	name : String
+	pwd : String
+operations
+end
+
+class Administrator
+attributes
+	name : String
+	pwd : String
+operations
+end
+
+class MultipleChoiceInst
+attributes
+	canEdit : Boolean
+operations
+	awardedPoints()
+end
+
+class Statement
+attributes
+	isMultiple : Boolean
+	points : Integer
+	penality : Integer
+	value : String
+	image : String
+	pointsByAnswer : Integer
+	penalityByAnswer : Integer
+operations
+end
+
+class Answer
+attributes
+	isRight : Boolean
+	value : String
+operations
+end
+
+class StatementInst
+attributes
+operations
+	awardedPoints()
+end
+
+composition xxx_System_administrators between
+	System[0..1] role xxx_System_administrators_src
+	Administrator[1..*] role administrators
+end
+
+composition xxx_System_users between
+	System[0..1] role xxx_System_users_src
+	User[*] role users
+end
+
+composition xxx_MultipleChoice_statements between
+	MultipleChoice[0..1] role xxx_MultipleChoice_statements_src
+	Statement[1..*] role statements
+end
+
+composition xxx_User_filledQCMs between
+	User[0..1] role xxx_User_filledQCMs_src
+	MultipleChoiceInst[*] role filledQCMs
+end
+
+composition xxx_Administrator_multipleChoices between
+	Administrator[0..1] role xxx_Administrator_multipleChoices_src
+	MultipleChoice[*] role multipleChoices
+end
+
+association xxx_MultipleChoiceInst_definition between
+	MultipleChoiceInst[*] role xxx_MultipleChoiceInst_definition_src
+	MultipleChoice[1] role definition
+end
+
+composition xxx_MultipleChoiceInst_statements between
+	MultipleChoiceInst[0..1] role xxx_MultipleChoiceInst_statements_src
+	StatementInst[*] role statements
+end
+
+composition xxx_Statement_answers between
+	Statement[0..1] role xxx_Statement_answers_src
+	Answer[1..*] role answers
+end
+
+association xxx_StatementInst_definition between
+	StatementInst[*] role xxx_StatementInst_definition_src
+	Statement[1] role definition
+end
+
+association xxx_StatementInst_choices between
+	StatementInst[0..1] role xxx_StatementInst_choices_src
+	Answer[*] role choices
+end
+

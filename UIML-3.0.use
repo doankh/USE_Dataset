@@ -1,0 +1,1103 @@
+model UIML
+enum UsedInTagKind{
+	event,
+	listener,
+	part
+}
+
+enum MapsTypeKind{
+	attribute,
+	getMethod,
+	setMethod,
+	method
+}
+
+enum HowKind{
+	append,
+	cascade,
+	replace,
+	union,
+	delete_
+}
+
+enum ExportKind{
+	hidden,
+	optional,
+	required
+}
+
+enum WhereKind{
+	first,
+	last,
+	before,
+	after
+}
+
+class UIML
+attributes
+operations
+end
+
+class Header
+attributes
+operations
+end
+
+class MetaData
+attributes
+	name : String
+	content : String
+operations
+end
+
+class Peer<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class Presentation<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+	base : String
+operations
+end
+
+class Logic<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class DComponent<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+	mapsTo : String
+	location : String
+operations
+end
+
+class DClass<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+	mapsTo : String
+	mapsType : String
+operations
+end
+
+class DProperty
+attributes
+	id : String
+	mapsType : MapsTypeKind
+	mapsTo : String
+	returnType : String
+operations
+end
+
+class DMethod<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+	mapsTo : String
+	returnType : String
+operations
+end
+
+class DParam
+attributes
+	id : String
+	type : String
+	value : String
+operations
+end
+
+class Script<ExtensibleElement
+attributes
+	id : String
+	type : String
+	how : HowKind
+	export : ExportKind
+	value : String
+	source : String
+operations
+end
+
+class Listener
+attributes
+	class_ : String
+	attacher : String
+operations
+end
+
+abstract class ExtensibleElement
+attributes
+operations
+end
+
+abstract class Source
+attributes
+operations
+end
+
+class LocalSource<Source
+attributes
+operations
+end
+
+class RemoteSource<Source
+attributes
+	location : String
+operations
+end
+
+class Interface<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class Structure<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class Part<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+	class_ : String
+	wherePart : String
+operations
+end
+
+class Style<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class Property<ExtensibleElement
+attributes
+	name : String
+	how : HowKind
+	export : ExportKind
+	values : String
+operations
+end
+
+class Content<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class Behavior<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+class Repeat
+attributes
+operations
+end
+
+class Constant<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+	model_ : String
+	value : String
+operations
+end
+
+class Reference
+attributes
+operations
+end
+
+class Rule<ExtensibleElement
+attributes
+	id : String
+	how : HowKind
+	export : ExportKind
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+class EventCondition<Condition
+attributes
+operations
+end
+
+class EqualCondition<Condition
+attributes
+operations
+end
+
+class OpCondition<Condition
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Action_1<Action
+attributes
+operations
+end
+
+class Action_2<Action
+attributes
+operations
+end
+
+class Call
+attributes
+	name : String
+operations
+end
+
+abstract class Parameter
+attributes
+	name : String
+operations
+end
+
+class PropertyParameter<Parameter
+attributes
+operations
+end
+
+class ReferenceParameter<Parameter
+attributes
+operations
+end
+
+class CallParameter<Parameter
+attributes
+operations
+end
+
+class OperationParameter<Parameter
+attributes
+operations
+end
+
+class EventParameter<Parameter
+attributes
+operations
+end
+
+class ConstantParameter<Parameter
+attributes
+operations
+end
+
+class IteratorParameter<Parameter
+attributes
+operations
+end
+
+abstract class Iterator
+attributes
+	id : String
+operations
+end
+
+class ConstantIterator<Iterator
+attributes
+operations
+end
+
+class PropertyIterator<Iterator
+attributes
+operations
+end
+
+class CallIterator<Iterator
+attributes
+operations
+end
+
+class TextIterator<Iterator
+attributes
+	value : Integer
+operations
+end
+
+class Event
+attributes
+	class_ : String
+operations
+end
+
+abstract class Equal
+attributes
+operations
+end
+
+class EqualToConstant<Equal
+attributes
+operations
+end
+
+class EqualToProperty<Equal
+attributes
+operations
+end
+
+class EqualToReference<Equal
+attributes
+operations
+end
+
+class EqualToOperation<Equal
+attributes
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class Restructure<ExtensibleElement
+attributes
+	how : HowKind
+operations
+end
+
+class Branch
+attributes
+operations
+end
+
+class WhenTrue<Branch
+attributes
+operations
+end
+
+class WhenFalse<Branch
+attributes
+operations
+end
+
+class ByDefault<Branch
+attributes
+operations
+end
+
+abstract class Template
+attributes
+	id : String
+operations
+end
+
+class BehaviorTemplate<Template
+attributes
+operations
+end
+
+class DClassTemplate<Template
+attributes
+operations
+end
+
+class DComponentTemplate<Template
+attributes
+operations
+end
+
+class ConstantTemplate<Template
+attributes
+operations
+end
+
+class ContentTemplate<Template
+attributes
+operations
+end
+
+class InterfaceTemplate<Template
+attributes
+operations
+end
+
+class LogicTemplate<Template
+attributes
+operations
+end
+
+class PartTemplate<Template
+attributes
+operations
+end
+
+class PeerTemplate<Template
+attributes
+operations
+end
+
+class PresentationTemplate<Template
+attributes
+operations
+end
+
+class PropertyTemplate<Template
+attributes
+operations
+end
+
+class RestructureTemplate<Template
+attributes
+operations
+end
+
+class RuleTemplate<Template
+attributes
+operations
+end
+
+class ScriptTemplate<Template
+attributes
+operations
+end
+
+class StructureTemplate<Template
+attributes
+operations
+end
+
+class StyleTemplate<Template
+attributes
+operations
+end
+
+composition xxx_UIML_head between
+	UIML[*] role xxx_UIML_head_src
+	Header[0..1] role head
+end
+
+composition xxx_UIML_templates between
+	UIML[0..1] role xxx_UIML_templates_src
+	Template[*] role templates
+end
+
+composition xxx_UIML_interfaces between
+	UIML[0..1] role xxx_UIML_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_UIML_peers between
+	UIML[0..1] role xxx_UIML_peers_src
+	Peer[*] role peers
+end
+
+composition xxx_Header_metas between
+	Header[0..1] role xxx_Header_metas_src
+	MetaData[*] role metas
+end
+
+association xxx_Peer_source between
+	Peer[*] role xxx_Peer_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Peer_presentations between
+	Peer[0..1] role xxx_Peer_presentations_src
+	Presentation[*] role presentations
+end
+
+composition xxx_Peer_logics between
+	Peer[0..1] role xxx_Peer_logics_src
+	Logic[*] role logics
+end
+
+association xxx_Presentation_source between
+	Presentation[*] role xxx_Presentation_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Presentation_dClasses between
+	Presentation[0..1] role xxx_Presentation_dClasses_src
+	DClass[*] role dClasses
+end
+
+association xxx_Logic_source between
+	Logic[*] role xxx_Logic_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Logic_dComponents between
+	Logic[0..1] role xxx_Logic_dComponents_src
+	DComponent[*] role dComponents
+end
+
+association xxx_DComponent_source between
+	DComponent[*] role xxx_DComponent_source_src
+	Source[0..1] role source
+end
+
+composition xxx_DComponent_dMethods between
+	DComponent[0..1] role xxx_DComponent_dMethods_src
+	DMethod[*] role dMethods
+end
+
+association xxx_DClass_source between
+	DClass[*] role xxx_DClass_source_src
+	Source[0..1] role source
+end
+
+composition xxx_DClass_dMethods between
+	DClass[0..1] role xxx_DClass_dMethods_src
+	DMethod[*] role dMethods
+end
+
+composition xxx_DClass_dProperties between
+	DClass[0..1] role xxx_DClass_dProperties_src
+	DProperty[*] role dProperties
+end
+
+composition xxx_DClass_events between
+	DClass[0..1] role xxx_DClass_events_src
+	Event[*] role events
+end
+
+composition xxx_DClass_listeners between
+	DClass[0..1] role xxx_DClass_listeners_src
+	Listener[*] role listeners
+end
+
+composition xxx_DProperty_dMethods between
+	DProperty[0..1] role xxx_DProperty_dMethods_src
+	DMethod[*] role dMethods
+end
+
+composition xxx_DProperty_dParams between
+	DProperty[0..1] role xxx_DProperty_dParams_src
+	DParam[*] role dParams
+end
+
+association xxx_DMethod_source between
+	DMethod[*] role xxx_DMethod_source_src
+	Source[0..1] role source
+end
+
+composition xxx_DMethod_dParams between
+	DMethod[0..1] role xxx_DMethod_dParams_src
+	DParam[*] role dParams
+end
+
+composition xxx_DMethod_script between
+	DMethod[*] role xxx_DMethod_script_src
+	Script[0..1] role script
+end
+
+association xxx_LocalSource_source between
+	LocalSource[*] role xxx_LocalSource_source_src
+	ExtensibleElement[1] role source
+end
+
+association xxx_Interface_source between
+	Interface[*] role xxx_Interface_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Interface_structure between
+	Interface[0..1] role xxx_Interface_structure_src
+	Structure[*] role structure
+end
+
+composition xxx_Interface_style between
+	Interface[0..1] role xxx_Interface_style_src
+	Style[*] role style
+end
+
+composition xxx_Interface_content between
+	Interface[0..1] role xxx_Interface_content_src
+	Content[*] role content
+end
+
+composition xxx_Interface_behavior between
+	Interface[0..1] role xxx_Interface_behavior_src
+	Behavior[*] role behavior
+end
+
+association xxx_Structure_source between
+	Structure[*] role xxx_Structure_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Structure_parts between
+	Structure[0..1] role xxx_Structure_parts_src
+	Part[*] role parts
+end
+
+association xxx_Part_source between
+	Part[*] role xxx_Part_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Part_style between
+	Part[*] role xxx_Part_style_src
+	Style[0..1] role style
+end
+
+composition xxx_Part_content between
+	Part[*] role xxx_Part_content_src
+	Content[0..1] role content
+end
+
+composition xxx_Part_behavior between
+	Part[*] role xxx_Part_behavior_src
+	Behavior[0..1] role behavior
+end
+
+composition xxx_Part_parts between
+	Part[0..1] role xxx_Part_parts_src
+	Part[*] role parts
+end
+
+composition xxx_Part_repeats between
+	Part[0..1] role xxx_Part_repeats_src
+	Repeat[*] role repeats
+end
+
+association xxx_Style_source between
+	Style[*] role xxx_Style_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Style_properties between
+	Style[0..1] role xxx_Style_properties_src
+	Property[*] role properties
+end
+
+association xxx_Property_parts between
+	Property[0..1] role xxx_Property_parts_src
+	Part[*] role parts
+end
+
+association xxx_Property_events between
+	Property[0..1] role xxx_Property_events_src
+	Event[*] role events
+end
+
+association xxx_Property_source between
+	Property[*] role xxx_Property_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Property_constants between
+	Property[0..1] role xxx_Property_constants_src
+	Constant[*] role constants
+end
+
+composition xxx_Property_properties between
+	Property[0..1] role xxx_Property_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Property_references between
+	Property[0..1] role xxx_Property_references_src
+	Reference[*] role references
+end
+
+composition xxx_Property_calls between
+	Property[0..1] role xxx_Property_calls_src
+	Call[*] role calls
+end
+
+composition xxx_Property_iterators between
+	Property[0..1] role xxx_Property_iterators_src
+	Iterator[*] role iterators
+end
+
+association xxx_Content_source between
+	Content[*] role xxx_Content_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Content_constants between
+	Content[0..1] role xxx_Content_constants_src
+	Constant[*] role constants
+end
+
+association xxx_Behavior_source between
+	Behavior[*] role xxx_Behavior_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Behavior_rules between
+	Behavior[0..1] role xxx_Behavior_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Repeat_iterator between
+	Repeat[*] role xxx_Repeat_iterator_src
+	Iterator[1] role iterator
+end
+
+composition xxx_Repeat_parts between
+	Repeat[0..1] role xxx_Repeat_parts_src
+	Part[1..*] role parts
+end
+
+association xxx_Constant_source between
+	Constant[*] role xxx_Constant_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Constant_constants between
+	Constant[0..1] role xxx_Constant_constants_src
+	Constant[*] role constants
+end
+
+association xxx_Reference_constant between
+	Reference[*] role xxx_Reference_constant_src
+	Constant[0..1] role constant
+end
+
+association xxx_Rule_source between
+	Rule[*] role xxx_Rule_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Rule_condition between
+	Rule[*] role xxx_Rule_condition_src
+	Condition[1] role condition
+end
+
+composition xxx_Rule_action between
+	Rule[*] role xxx_Rule_action_src
+	Action[1] role action
+end
+
+composition xxx_EventCondition_event between
+	EventCondition[*] role xxx_EventCondition_event_src
+	Event[1] role event
+end
+
+composition xxx_EqualCondition_equal between
+	EqualCondition[*] role xxx_EqualCondition_equal_src
+	Equal[1] role equal
+end
+
+composition xxx_OpCondition_op between
+	OpCondition[*] role xxx_OpCondition_op_src
+	Operation[1] role op
+end
+
+association xxx_Action_1_event between
+	Action_1[*] role xxx_Action_1_event_src
+	Event[0..1] role event
+end
+
+composition xxx_Action_1_properties between
+	Action_1[0..1] role xxx_Action_1_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Action_1_calls between
+	Action_1[0..1] role xxx_Action_1_calls_src
+	Call[*] role calls
+end
+
+composition xxx_Action_1_restructures between
+	Action_1[0..1] role xxx_Action_1_restructures_src
+	Restructure[*] role restructures
+end
+
+association xxx_Action_2_whenTrue between
+	Action_2[*] role xxx_Action_2_whenTrue_src
+	WhenTrue[0..1] role whenTrue
+end
+
+association xxx_Action_2_whenFalse between
+	Action_2[*] role xxx_Action_2_whenFalse_src
+	WhenFalse[0..1] role whenFalse
+end
+
+association xxx_Action_2_byDefault between
+	Action_2[*] role xxx_Action_2_byDefault_src
+	ByDefault[0..1] role byDefault
+end
+
+composition xxx_Call_params between
+	Call[0..1] role xxx_Call_params_src
+	Parameter[*] role params
+end
+
+association xxx_PropertyParameter_property between
+	PropertyParameter[*] role xxx_PropertyParameter_property_src
+	Property[1] role property
+end
+
+association xxx_ReferenceParameter_reference between
+	ReferenceParameter[*] role xxx_ReferenceParameter_reference_src
+	Reference[1] role reference
+end
+
+association xxx_CallParameter_call between
+	CallParameter[*] role xxx_CallParameter_call_src
+	Call[1] role call
+end
+
+association xxx_OperationParameter_op between
+	OperationParameter[*] role xxx_OperationParameter_op_src
+	Operation[1] role op
+end
+
+association xxx_EventParameter_event between
+	EventParameter[*] role xxx_EventParameter_event_src
+	Event[1] role event
+end
+
+association xxx_ConstantParameter_constant between
+	ConstantParameter[*] role xxx_ConstantParameter_constant_src
+	Constant[1] role constant
+end
+
+association xxx_IteratorParameter_iterator between
+	IteratorParameter[*] role xxx_IteratorParameter_iterator_src
+	Iterator[1] role iterator
+end
+
+composition xxx_ConstantIterator_constant between
+	ConstantIterator[*] role xxx_ConstantIterator_constant_src
+	Constant[1] role constant
+end
+
+composition xxx_PropertyIterator_property between
+	PropertyIterator[*] role xxx_PropertyIterator_property_src
+	Property[1] role property
+end
+
+composition xxx_CallIterator_call between
+	CallIterator[*] role xxx_CallIterator_call_src
+	Call[1] role call
+end
+
+association xxx_Event_parts between
+	Event[0..1] role xxx_Event_parts_src
+	Part[*] role parts
+end
+
+association xxx_Equal_event between
+	Equal[*] role xxx_Equal_event_src
+	Event[1] role event
+end
+
+association xxx_EqualToConstant_constant between
+	EqualToConstant[*] role xxx_EqualToConstant_constant_src
+	Constant[1] role constant
+end
+
+association xxx_EqualToProperty_property between
+	EqualToProperty[*] role xxx_EqualToProperty_property_src
+	Property[1] role property
+end
+
+association xxx_EqualToReference_reference between
+	EqualToReference[*] role xxx_EqualToReference_reference_src
+	Reference[1] role reference
+end
+
+association xxx_EqualToOperation_op between
+	EqualToOperation[*] role xxx_EqualToOperation_op_src
+	Operation[1] role op
+end
+
+composition xxx_Operation_constants between
+	Operation[0..1] role xxx_Operation_constants_src
+	Constant[*] role constants
+end
+
+composition xxx_Operation_properties between
+	Operation[0..1] role xxx_Operation_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Operation_references between
+	Operation[0..1] role xxx_Operation_references_src
+	Reference[*] role references
+end
+
+composition xxx_Operation_calls between
+	Operation[0..1] role xxx_Operation_calls_src
+	Call[*] role calls
+end
+
+composition xxx_Operation_ops between
+	Operation[0..1] role xxx_Operation_ops_src
+	Operation[*] role ops
+end
+
+composition xxx_Operation_events between
+	Operation[0..1] role xxx_Operation_events_src
+	Event[*] role events
+end
+
+association xxx_Restructure_atPart between
+	Restructure[*] role xxx_Restructure_atPart_src
+	Part[0..1] role atPart
+end
+
+association xxx_Restructure_wherePart between
+	Restructure[*] role xxx_Restructure_wherePart_src
+	Part[0..1] role wherePart
+end
+
+association xxx_Restructure_source between
+	Restructure[*] role xxx_Restructure_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Restructure_template between
+	Restructure[*] role xxx_Restructure_template_src
+	Template[0..1] role template
+end
+
+composition xxx_Branch_properties between
+	Branch[0..1] role xxx_Branch_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Branch_calls between
+	Branch[0..1] role xxx_Branch_calls_src
+	Call[*] role calls
+end
+
+composition xxx_Branch_restructure between
+	Branch[*] role xxx_Branch_restructure_src
+	Restructure[0..1] role restructure
+end
+
+composition xxx_Branch_op between
+	Branch[*] role xxx_Branch_op_src
+	Operation[0..1] role op
+end
+
+composition xxx_Branch_equal between
+	Branch[*] role xxx_Branch_equal_src
+	Equal[0..1] role equal
+end
+
+composition xxx_Branch_event between
+	Branch[*] role xxx_Branch_event_src
+	Event[0..1] role event
+end
+
+composition xxx_BehaviorTemplate_behavior between
+	BehaviorTemplate[*] role xxx_BehaviorTemplate_behavior_src
+	Behavior[1] role behavior
+end
+
+composition xxx_DClassTemplate_dClass between
+	DClassTemplate[*] role xxx_DClassTemplate_dClass_src
+	DClass[1] role dClass
+end
+
+composition xxx_DComponentTemplate_dComponent between
+	DComponentTemplate[*] role xxx_DComponentTemplate_dComponent_src
+	DComponent[1] role dComponent
+end
+
+composition xxx_ConstantTemplate_constant between
+	ConstantTemplate[*] role xxx_ConstantTemplate_constant_src
+	Constant[1] role constant
+end
+
+composition xxx_ContentTemplate_content between
+	ContentTemplate[*] role xxx_ContentTemplate_content_src
+	Content[1] role content
+end
+
+composition xxx_InterfaceTemplate_interface between
+	InterfaceTemplate[*] role xxx_InterfaceTemplate_interface_src
+	Interface[1] role interface
+end
+
+composition xxx_LogicTemplate_logic between
+	LogicTemplate[*] role xxx_LogicTemplate_logic_src
+	Logic[1] role logic
+end
+
+composition xxx_PartTemplate_part between
+	PartTemplate[*] role xxx_PartTemplate_part_src
+	Part[1] role part
+end
+
+composition xxx_PeerTemplate_peer between
+	PeerTemplate[*] role xxx_PeerTemplate_peer_src
+	Peer[1] role peer
+end
+
+composition xxx_PresentationTemplate_presentation between
+	PresentationTemplate[*] role xxx_PresentationTemplate_presentation_src
+	Presentation[1] role presentation
+end
+
+composition xxx_PropertyTemplate_property between
+	PropertyTemplate[*] role xxx_PropertyTemplate_property_src
+	Property[1] role property
+end
+
+composition xxx_RestructureTemplate_restructure between
+	RestructureTemplate[*] role xxx_RestructureTemplate_restructure_src
+	Restructure[1] role restructure
+end
+
+composition xxx_RuleTemplate_rule between
+	RuleTemplate[*] role xxx_RuleTemplate_rule_src
+	Rule[1] role rule
+end
+
+composition xxx_ScriptTemplate_script between
+	ScriptTemplate[*] role xxx_ScriptTemplate_script_src
+	Script[1] role script
+end
+
+composition xxx_StructureTemplate_structure between
+	StructureTemplate[*] role xxx_StructureTemplate_structure_src
+	Structure[1] role structure
+end
+
+composition xxx_StyleTemplate_style between
+	StyleTemplate[*] role xxx_StyleTemplate_style_src
+	Style[1] role style
+end
+

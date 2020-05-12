@@ -1,0 +1,1074 @@
+model spem
+enum ParameterDirectionKind{
+default
+}
+
+enum WorkSequenceKind{
+default
+}
+
+enum ActivityUseKind{
+default
+}
+
+enum OptionalityKind{
+default
+}
+
+enum VariabilityType{
+default
+}
+
+enum WorkProductRelationshipKind{
+default
+}
+
+enum RiskLevel{
+default
+}
+
+enum EstimatingTechnique{
+default
+}
+
+enum ExpertiseLevel{
+default
+}
+
+enum ContractKind{
+default
+}
+
+abstract class ExtensibleElement
+attributes
+operations
+end
+
+class Kind<ExtensibleElement
+attributes
+operations
+end
+
+abstract class WorkDefinitionPerformer
+attributes
+operations
+end
+
+abstract class WorkDefinition
+attributes
+	preCondition : String
+	postCondition : String
+operations
+end
+
+class WorkDefinitionParameter
+attributes
+	direction : ParameterDirectionKind
+operations
+end
+
+abstract class BreakdownElement<ProcessElement
+attributes
+	hasMultipleOccurrences : Boolean
+	isOptional : Boolean
+	isPlanned : Boolean
+operations
+end
+
+abstract class WorkBreakdownElement<BreakdownElement
+attributes
+	isRepeatable : Boolean
+	isOngoing : Boolean
+	isEventDriven : Boolean
+operations
+end
+
+class WorkSequence<BreakdownElement
+attributes
+	linkKind : WorkSequenceKind
+operations
+end
+
+class Activity<WorkDefinition,WorkBreakdownElement,VariabilityElement
+attributes
+	useKind : ActivityUseKind
+	isEnactable : Boolean
+operations
+end
+
+class ProcessPerformer<WorkDefinitionPerformer,BreakdownElement
+attributes
+operations
+end
+
+class RoleUse<MethodContentUse
+attributes
+operations
+end
+
+class ProcessResponsibilityAssignment<BreakdownElement
+attributes
+operations
+end
+
+class WorkProductUse<MethodContentUse
+attributes
+operations
+end
+
+class WorkProductUseRelationship<BreakdownElement
+attributes
+	relationshipKind : WorkProductRelationshipKind
+operations
+end
+
+class ProcessParameter<WorkDefinitionParameter,BreakdownElement
+attributes
+	optionality : OptionalityKind
+operations
+end
+
+class Milestone<WorkBreakdownElement
+attributes
+operations
+end
+
+abstract class ProcessElement<DescribableElement,ProcessPackageableElement
+attributes
+operations
+end
+
+abstract class DescribableElement<ExtensibleElement
+attributes
+	presentationName : String
+	briefDescription : String
+	mainDescription : String
+	purpose : String
+	copyright : String
+	author : String
+	changeDate : String
+	changeDescription : String
+	version : String
+operations
+end
+
+class Category<MethodContentElement
+attributes
+operations
+end
+
+class Guidance<MethodContentElement
+attributes
+operations
+end
+
+class Metric<DescribableElement
+attributes
+	expression : String
+operations
+end
+
+abstract class MethodContentElement<DescribableElement,MethodContentPackageableElement,VariabilityElement
+attributes
+operations
+end
+
+class ToolDefinition<MethodContentElement
+attributes
+operations
+end
+
+class TaskDefinition<WorkDefinition,MethodContentElement
+attributes
+operations
+end
+
+class Step<WorkDefinition,DescribableElement,VariabilityElement
+attributes
+	name : String
+operations
+end
+
+class WorkProductDefinition<MethodContentElement
+attributes
+operations
+end
+
+class RoleDefinition<MethodContentElement
+attributes
+	synonym : String
+operations
+end
+
+class WorkProductDefinitionRelationship<MethodContentElement
+attributes
+operations
+end
+
+class Default_TaskDefinitionPerformer<MethodContentElement
+attributes
+operations
+end
+
+class Default_ResponsibilityAssignment<MethodContentElement
+attributes
+operations
+end
+
+class Default_TaskDefinitionParameter<WorkDefinitionParameter
+attributes
+	name : String
+	optionality : OptionalityKind
+operations
+end
+
+class Qualification<MethodContentElement
+attributes
+operations
+end
+
+abstract class MethodContentPackageableElement
+attributes
+	name : String
+operations
+end
+
+abstract class ProcessPackageableElement
+attributes
+	name : String
+operations
+end
+
+class MethodContentPackage<MethodContentPackageableElement,MethodPluginPackageableElement
+attributes
+operations
+end
+
+class ProcessPackage<ProcessPackageableElement,MethodPluginPackageableElement
+attributes
+operations
+end
+
+abstract class MethodContentKind<MethodContentElement,Kind
+attributes
+operations
+end
+
+abstract class ProcessKind<ProcessElement,Kind
+attributes
+operations
+end
+
+class PlanningData<ProcessElement
+attributes
+	startDate : String
+	finishDate : String
+	rank : Integer
+	duration : String
+operations
+end
+
+abstract class MethodContentUse<BreakdownElement
+attributes
+	isSynchronizedWithSource : Boolean
+operations
+end
+
+class TaskUse<MethodContentUse,WorkBreakdownElement
+attributes
+	preCondition : String
+	postCondition : String
+operations
+end
+
+class CompositeRole<RoleUse
+attributes
+operations
+end
+
+class TeamProfile<BreakdownElement
+attributes
+operations
+end
+
+abstract class VariabilityElement
+attributes
+	variabilityType : VariabilityType
+operations
+end
+
+class ProcessComponent<ProcessPackage
+attributes
+operations
+end
+
+class ProcessComponentUse<MethodContentUse
+attributes
+operations
+end
+
+abstract class MethodLibraryPackageableElement
+attributes
+	name : String
+operations
+end
+
+abstract class MethodPluginPackageableElement
+attributes
+operations
+end
+
+class MethodConfiguration<MethodLibraryPackageableElement
+attributes
+operations
+end
+
+class MethodPlugin<MethodLibraryPackageableElement
+attributes
+operations
+end
+
+class MethodLibrary
+attributes
+	name : String
+operations
+end
+
+class WorkProductPort<ProcessElement
+attributes
+	isOptional : Boolean
+	portKind : ParameterDirectionKind
+operations
+end
+
+class WorkProductPortConnector<ProcessElement
+attributes
+operations
+end
+
+class Artifact<WorkProductUse
+attributes
+operations
+end
+
+class CapabilityPattern<Process
+attributes
+operations
+end
+
+class Checklist<Guidance
+attributes
+operations
+end
+
+class Concept<Guidance
+attributes
+operations
+end
+
+class CategoryPackage<MethodContentPackage
+attributes
+operations
+end
+
+class CustomCategory<Category
+attributes
+operations
+end
+
+class Deliverable<WorkProductUse
+attributes
+	externalDescription : String
+	packagingGuidance : String
+operations
+end
+
+class Process<Activity
+attributes
+	scope : String
+	usageNote : String
+operations
+end
+
+class DeliveryProcess<Process
+attributes
+	scale : String
+	projectCharacteristics : String
+	riskLevel : RiskLevel
+	estimatingTechnique : EstimatingTechnique
+	projectMemberExpertise : ExpertiseLevel
+	typeOfContract : ContractKind
+operations
+end
+
+class Discipline<Category
+attributes
+operations
+end
+
+class DisciplineGrouping<Category
+attributes
+operations
+end
+
+class Root
+attributes
+operations
+end
+
+class Domain<Category
+attributes
+operations
+end
+
+class EstimatingConsideration<Guidance
+attributes
+operations
+end
+
+class Example<Guidance
+attributes
+operations
+end
+
+class Iteration<Activity
+attributes
+operations
+end
+
+class Outcome<WorkProductUse
+attributes
+operations
+end
+
+class Phase<Activity
+attributes
+operations
+end
+
+class Practice<Guidance
+attributes
+	additionalInfo : String
+	application : String
+	background : String
+	goal : String
+	levelOfAdoption : String
+	problem : String
+operations
+end
+
+class ProcessPlanningTemplate<Process
+attributes
+operations
+end
+
+class Report<Guidance
+attributes
+operations
+end
+
+class ReusableAsset<Guidance
+attributes
+operations
+end
+
+class Roadmap<Guidance
+attributes
+operations
+end
+
+class Template<Guidance
+attributes
+operations
+end
+
+class TermDefinition<Guidance
+attributes
+operations
+end
+
+class ToolMentor<Guidance
+attributes
+operations
+end
+
+class Whitepaper<Concept
+attributes
+operations
+end
+
+class Guideline<Guidance
+attributes
+operations
+end
+
+class SupportingMaterial<Guidance
+attributes
+operations
+end
+
+class RoleDefinitionPackage<MethodContentPackage
+attributes
+operations
+end
+
+class TaskDefinitionPackage<MethodContentPackage
+attributes
+operations
+end
+
+class WorkProductDefinitionPackage<MethodContentPackage
+attributes
+operations
+end
+
+class GuidancePackage<MethodContentPackage
+attributes
+operations
+end
+
+class DisciplinePackage<MethodContentPackage
+attributes
+operations
+end
+
+class DomainPackage<MethodContentPackage
+attributes
+operations
+end
+
+class WorkProductKindPackage<MethodContentPackage
+attributes
+operations
+end
+
+class RoleSetPackage<MethodContentPackage
+attributes
+operations
+end
+
+class ToolDefinitionPackage<MethodContentPackage
+attributes
+operations
+end
+
+class ConfigurationPackage<MethodContentPackage
+attributes
+operations
+end
+
+class CapabilityPatternPackage<ProcessPackage
+attributes
+operations
+end
+
+class DeliveryProcessPackage<ProcessPackage
+attributes
+operations
+end
+
+class RoleSet<MethodContentElement
+attributes
+operations
+end
+
+class QualificationPackage<MethodContentPackage
+attributes
+operations
+end
+
+class ProcessComponentPackage<ProcessPackage
+attributes
+operations
+end
+
+class WorkProductKind<Kind,MethodContentElement
+attributes
+operations
+end
+
+association xxx_ExtensibleElement_kind between
+	ExtensibleElement[*] role xxx_ExtensibleElement_kind_src
+	Kind[0..1] role kind
+end
+
+association xxx_WorkDefinitionPerformer_linkedWorkDefinition between
+	WorkDefinitionPerformer[*] role xxx_WorkDefinitionPerformer_linkedWorkDefinition_src
+	WorkDefinition[0..1] role linkedWorkDefinition
+end
+
+association xxx_WorkDefinition_ownedParameter between
+	WorkDefinition[0..1] role xxx_WorkDefinition_ownedParameter_src
+	WorkDefinitionParameter[*] role ownedParameter
+end
+
+composition xxx_BreakdownElement_planningData between
+	BreakdownElement[*] role xxx_BreakdownElement_planningData_src
+	PlanningData[0..1] role planningData
+end
+
+association xxx_WorkBreakdownElement_linkToPredecessor between
+	WorkBreakdownElement[0..1] role xxx_WorkBreakdownElement_linkToPredecessor_src
+	WorkSequence[*] role linkToPredecessor
+end
+
+association xxx_WorkBreakdownElement_linkToSuccessor between
+	WorkBreakdownElement[0..1] role xxx_WorkBreakdownElement_linkToSuccessor_src
+	WorkSequence[*] role linkToSuccessor
+end
+
+association xxx_WorkSequence_predecessor between
+	WorkSequence[*] role xxx_WorkSequence_predecessor_src
+	WorkBreakdownElement[1] role predecessor
+end
+
+association xxx_WorkSequence_successor between
+	WorkSequence[*] role xxx_WorkSequence_successor_src
+	WorkBreakdownElement[1] role successor
+end
+
+association xxx_Activity_usedActivity between
+	Activity[*] role xxx_Activity_usedActivity_src
+	Activity[0..1] role usedActivity
+end
+
+composition xxx_Activity_nestedBreakdownElement between
+	Activity[0..1] role xxx_Activity_nestedBreakdownElement_src
+	BreakdownElement[*] role nestedBreakdownElement
+end
+
+association xxx_Activity_suppressedBreakdownElement between
+	Activity[0..1] role xxx_Activity_suppressedBreakdownElement_src
+	BreakdownElement[*] role suppressedBreakdownElement
+end
+
+composition xxx_Activity_ownedProcessParameter between
+	Activity[0..1] role xxx_Activity_ownedProcessParameter_src
+	ProcessParameter[*] role ownedProcessParameter
+end
+
+association xxx_Activity_defaultContext between
+	Activity[*] role xxx_Activity_defaultContext_src
+	MethodConfiguration[0..1] role defaultContext
+end
+
+association xxx_Activity_validContext between
+	Activity[0..1] role xxx_Activity_validContext_src
+	MethodConfiguration[*] role validContext
+end
+
+association xxx_ProcessPerformer_linkedRoleUse between
+	ProcessPerformer[0..1] role xxx_ProcessPerformer_linkedRoleUse_src
+	RoleUse[1..*] role linkedRoleUse
+end
+
+association xxx_ProcessPerformer_linkedActivity between
+	ProcessPerformer[*] role xxx_ProcessPerformer_linkedActivity_src
+	Activity[0..1] role linkedActivity
+end
+
+association xxx_ProcessPerformer_linkedTaskUse between
+	ProcessPerformer[*] role xxx_ProcessPerformer_linkedTaskUse_src
+	TaskUse[0..1] role linkedTaskUse
+end
+
+association xxx_RoleUse_role between
+	RoleUse[*] role xxx_RoleUse_role_src
+	RoleDefinition[0..1] role role
+end
+
+association xxx_RoleUse_appliedQualification between
+	RoleUse[0..1] role xxx_RoleUse_appliedQualification_src
+	Qualification[*] role appliedQualification
+end
+
+association xxx_ProcessResponsibilityAssignment_linkedRoleUse between
+	ProcessResponsibilityAssignment[0..1] role xxx_ProcessResponsibilityAssignment_linkedRoleUse_src
+	RoleUse[1..*] role linkedRoleUse
+end
+
+association xxx_ProcessResponsibilityAssignment_linkedWorkProductUse between
+	ProcessResponsibilityAssignment[*] role xxx_ProcessResponsibilityAssignment_linkedWorkProductUse_src
+	WorkProductUse[1] role linkedWorkProductUse
+end
+
+association xxx_WorkProductUse_workProduct between
+	WorkProductUse[*] role xxx_WorkProductUse_workProduct_src
+	WorkProductDefinition[0..1] role workProduct
+end
+
+association xxx_WorkProductUseRelationship_source between
+	WorkProductUseRelationship[*] role xxx_WorkProductUseRelationship_source_src
+	WorkProductUse[1] role source
+end
+
+association xxx_WorkProductUseRelationship_target between
+	WorkProductUseRelationship[0..1] role xxx_WorkProductUseRelationship_target_src
+	WorkProductUse[1..*] role target
+end
+
+association xxx_ProcessParameter_parameterType between
+	ProcessParameter[*] role xxx_ProcessParameter_parameterType_src
+	WorkProductUse[0..1] role parameterType
+end
+
+association xxx_Milestone_requiredResult between
+	Milestone[0..1] role xxx_Milestone_requiredResult_src
+	WorkProductUse[*] role requiredResult
+end
+
+association xxx_ProcessElement_processKind between
+	ProcessElement[*] role xxx_ProcessElement_processKind_src
+	ProcessKind[0..1] role processKind
+end
+
+association xxx_DescribableElement_guidance between
+	DescribableElement[0..1] role xxx_DescribableElement_guidance_src
+	Guidance[*] role guidance
+end
+
+association xxx_DescribableElement_metric between
+	DescribableElement[0..1] role xxx_DescribableElement_metric_src
+	Metric[*] role metric
+end
+
+association xxx_DescribableElement_category between
+	DescribableElement[0..1] role xxx_DescribableElement_category_src
+	Category[*] role category
+end
+
+association xxx_Category_subCategory between
+	Category[0..1] role xxx_Category_subCategory_src
+	Category[*] role subCategory
+end
+
+association xxx_Category_categorizedElement between
+	Category[0..1] role xxx_Category_categorizedElement_src
+	DescribableElement[*] role categorizedElement
+end
+
+association xxx_MethodContentElement_methodContentKind between
+	MethodContentElement[*] role xxx_MethodContentElement_methodContentKind_src
+	MethodContentKind[0..1] role methodContentKind
+end
+
+association xxx_ToolDefinition_managedWorkProduct between
+	ToolDefinition[0..1] role xxx_ToolDefinition_managedWorkProduct_src
+	WorkProductDefinition[*] role managedWorkProduct
+end
+
+composition xxx_TaskDefinition_ownedTaskDefinitionParameter between
+	TaskDefinition[0..1] role xxx_TaskDefinition_ownedTaskDefinitionParameter_src
+	Default_TaskDefinitionParameter[*] role ownedTaskDefinitionParameter
+end
+
+association xxx_TaskDefinition_usedTool between
+	TaskDefinition[0..1] role xxx_TaskDefinition_usedTool_src
+	ToolDefinition[*] role usedTool
+end
+
+composition xxx_TaskDefinition_step between
+	TaskDefinition[0..1] role xxx_TaskDefinition_step_src
+	Step[*] role step
+end
+
+association xxx_TaskDefinition_requiredQualification between
+	TaskDefinition[0..1] role xxx_TaskDefinition_requiredQualification_src
+	Qualification[*] role requiredQualification
+end
+
+association xxx_Step_predecessor between
+	Step[*] role xxx_Step_predecessor_src
+	Step[0..1] role predecessor
+end
+
+association xxx_Step_successor between
+	Step[*] role xxx_Step_successor_src
+	Step[0..1] role successor
+end
+
+association xxx_RoleDefinition_providedQualification between
+	RoleDefinition[0..1] role xxx_RoleDefinition_providedQualification_src
+	Qualification[*] role providedQualification
+end
+
+association xxx_WorkProductDefinitionRelationship_source between
+	WorkProductDefinitionRelationship[*] role xxx_WorkProductDefinitionRelationship_source_src
+	WorkProductDefinition[1] role source
+end
+
+association xxx_WorkProductDefinitionRelationship_target between
+	WorkProductDefinitionRelationship[0..1] role xxx_WorkProductDefinitionRelationship_target_src
+	WorkProductDefinition[1..*] role target
+end
+
+association xxx_Default_TaskDefinitionPerformer_linkedTaskDefinition between
+	Default_TaskDefinitionPerformer[*] role xxx_Default_TaskDefinitionPerformer_linkedTaskDefinition_src
+	TaskDefinition[1] role linkedTaskDefinition
+end
+
+association xxx_Default_TaskDefinitionPerformer_linkedRoleDefinition between
+	Default_TaskDefinitionPerformer[0..1] role xxx_Default_TaskDefinitionPerformer_linkedRoleDefinition_src
+	RoleDefinition[1..*] role linkedRoleDefinition
+end
+
+association xxx_Default_ResponsibilityAssignment_linkedRoleDefinition between
+	Default_ResponsibilityAssignment[0..1] role xxx_Default_ResponsibilityAssignment_linkedRoleDefinition_src
+	RoleDefinition[1..*] role linkedRoleDefinition
+end
+
+association xxx_Default_ResponsibilityAssignment_linkedWorkProductDefinition between
+	Default_ResponsibilityAssignment[*] role xxx_Default_ResponsibilityAssignment_linkedWorkProductDefinition_src
+	WorkProductDefinition[1] role linkedWorkProductDefinition
+end
+
+association xxx_Default_TaskDefinitionParameter_parameterType between
+	Default_TaskDefinitionParameter[*] role xxx_Default_TaskDefinitionParameter_parameterType_src
+	WorkProductDefinition[0..1] role parameterType
+end
+
+composition xxx_MethodContentPackage_ownedMethodContentMember between
+	MethodContentPackage[0..1] role xxx_MethodContentPackage_ownedMethodContentMember_src
+	MethodContentPackageableElement[*] role ownedMethodContentMember
+end
+
+association xxx_MethodContentPackage_reusedPackage between
+	MethodContentPackage[0..1] role xxx_MethodContentPackage_reusedPackage_src
+	MethodContentPackage[*] role reusedPackage
+end
+
+composition xxx_ProcessPackage_ownedProcessMember between
+	ProcessPackage[0..1] role xxx_ProcessPackage_ownedProcessMember_src
+	ProcessPackageableElement[*] role ownedProcessMember
+end
+
+association xxx_TaskUse_task between
+	TaskUse[*] role xxx_TaskUse_task_src
+	TaskDefinition[0..1] role task
+end
+
+association xxx_TaskUse_usedQualification between
+	TaskUse[0..1] role xxx_TaskUse_usedQualification_src
+	Qualification[*] role usedQualification
+end
+
+association xxx_TaskUse_selectedStep between
+	TaskUse[0..1] role xxx_TaskUse_selectedStep_src
+	Step[*] role selectedStep
+end
+
+composition xxx_TaskUse_ownedProcessParameter between
+	TaskUse[0..1] role xxx_TaskUse_ownedProcessParameter_src
+	ProcessParameter[*] role ownedProcessParameter
+end
+
+association xxx_CompositeRole_aggregatedRole between
+	CompositeRole[0..1] role xxx_CompositeRole_aggregatedRole_src
+	RoleDefinition[*] role aggregatedRole
+end
+
+composition xxx_TeamProfile_subTeam between
+	TeamProfile[0..1] role xxx_TeamProfile_subTeam_src
+	TeamProfile[*] role subTeam
+end
+
+association xxx_TeamProfile_superTeam between
+	TeamProfile[*] role xxx_TeamProfile_superTeam_src
+	TeamProfile[0..1] role superTeam
+end
+
+association xxx_TeamProfile_teamRole between
+	TeamProfile[0..1] role xxx_TeamProfile_teamRole_src
+	RoleUse[*] role teamRole
+end
+
+association xxx_VariabilityElement_variabilityBasedOnElement between
+	VariabilityElement[*] role xxx_VariabilityElement_variabilityBasedOnElement_src
+	VariabilityElement[0..1] role variabilityBasedOnElement
+end
+
+composition xxx_ProcessComponent_process between
+	ProcessComponent[*] role xxx_ProcessComponent_process_src
+	Activity[0..1] role process
+end
+
+composition xxx_ProcessComponent_ownedPort between
+	ProcessComponent[0..1] role xxx_ProcessComponent_ownedPort_src
+	WorkProductPort[*] role ownedPort
+end
+
+association xxx_ProcessComponentUse_processComponent between
+	ProcessComponentUse[*] role xxx_ProcessComponentUse_processComponent_src
+	ProcessComponent[1] role processComponent
+end
+
+composition xxx_ProcessComponentUse_usedPort between
+	ProcessComponentUse[0..1] role xxx_ProcessComponentUse_usedPort_src
+	WorkProductPort[*] role usedPort
+end
+
+association xxx_MethodConfiguration_baseConfiguration between
+	MethodConfiguration[0..1] role xxx_MethodConfiguration_baseConfiguration_src
+	MethodConfiguration[*] role baseConfiguration
+end
+
+association xxx_MethodConfiguration_methodPluginSelection between
+	MethodConfiguration[0..1] role xxx_MethodConfiguration_methodPluginSelection_src
+	MethodPlugin[1..*] role methodPluginSelection
+end
+
+association xxx_MethodConfiguration_processPackageSelection between
+	MethodConfiguration[0..1] role xxx_MethodConfiguration_processPackageSelection_src
+	ProcessPackage[*] role processPackageSelection
+end
+
+association xxx_MethodConfiguration_contentPackageSelection between
+	MethodConfiguration[0..1] role xxx_MethodConfiguration_contentPackageSelection_src
+	MethodContentPackage[*] role contentPackageSelection
+end
+
+association xxx_MethodConfiguration_substractedCategory between
+	MethodConfiguration[0..1] role xxx_MethodConfiguration_substractedCategory_src
+	Category[*] role substractedCategory
+end
+
+association xxx_MethodConfiguration_defaultView between
+	MethodConfiguration[*] role xxx_MethodConfiguration_defaultView_src
+	Category[1] role defaultView
+end
+
+association xxx_MethodConfiguration_processView between
+	MethodConfiguration[0..1] role xxx_MethodConfiguration_processView_src
+	Category[*] role processView
+end
+
+composition xxx_MethodPlugin_ownedMethodContentPackage between
+	MethodPlugin[0..1] role xxx_MethodPlugin_ownedMethodContentPackage_src
+	MethodContentPackage[*] role ownedMethodContentPackage
+end
+
+composition xxx_MethodPlugin_ownedProcessPackage between
+	MethodPlugin[0..1] role xxx_MethodPlugin_ownedProcessPackage_src
+	ProcessPackage[*] role ownedProcessPackage
+end
+
+association xxx_MethodPlugin_basePlugin between
+	MethodPlugin[0..1] role xxx_MethodPlugin_basePlugin_src
+	MethodPlugin[*] role basePlugin
+end
+
+composition xxx_MethodLibrary_ownedMethodPlugin between
+	MethodLibrary[0..1] role xxx_MethodLibrary_ownedMethodPlugin_src
+	MethodPlugin[*] role ownedMethodPlugin
+end
+
+composition xxx_MethodLibrary_predefinedConfiguration between
+	MethodLibrary[0..1] role xxx_MethodLibrary_predefinedConfiguration_src
+	MethodConfiguration[*] role predefinedConfiguration
+end
+
+composition xxx_MethodLibrary_configurationPackage between
+	MethodLibrary[*] role xxx_MethodLibrary_configurationPackage_src
+	MethodContentPackage[0..1] role configurationPackage
+end
+
+association xxx_WorkProductPort_portType between
+	WorkProductPort[*] role xxx_WorkProductPort_portType_src
+	WorkProductDefinition[0..1] role portType
+end
+
+association xxx_WorkProductPortConnector_connectedPort between
+	WorkProductPortConnector[0..1] role xxx_WorkProductPortConnector_connectedPort_src
+	WorkProductPort[*] role connectedPort
+end
+
+composition xxx_Artifact_containedArtifact between
+	Artifact[0..1] role xxx_Artifact_containedArtifact_src
+	Artifact[*] role containedArtifact
+end
+
+association xxx_Deliverable_deliveredProduct between
+	Deliverable[0..1] role xxx_Deliverable_deliveredProduct_src
+	WorkProductUse[*] role deliveredProduct
+end
+
+composition xxx_Process_includedPattern between
+	Process[0..1] role xxx_Process_includedPattern_src
+	CapabilityPattern[*] role includedPattern
+end
+
+composition xxx_Process_includedConnector between
+	Process[0..1] role xxx_Process_includedConnector_src
+	WorkProductPortConnector[*] role includedConnector
+end
+
+association xxx_DeliveryProcess_communicationMaterial between
+	DeliveryProcess[0..1] role xxx_DeliveryProcess_communicationMaterial_src
+	SupportingMaterial[*] role communicationMaterial
+end
+
+association xxx_DeliveryProcess_educationalMaterial between
+	DeliveryProcess[0..1] role xxx_DeliveryProcess_educationalMaterial_src
+	SupportingMaterial[*] role educationalMaterial
+end
+
+association xxx_Discipline_relatedTask between
+	Discipline[0..1] role xxx_Discipline_relatedTask_src
+	TaskDefinition[*] role relatedTask
+end
+
+association xxx_Discipline_relatedWorflow between
+	Discipline[0..1] role xxx_Discipline_relatedWorflow_src
+	Process[*] role relatedWorflow
+end
+
+composition xxx_Root_methodConfiguration between
+	Root[*] role xxx_Root_methodConfiguration_src
+	MethodConfiguration[*] role methodConfiguration
+end
+
+composition xxx_Root_methodLibrary between
+	Root[*] role xxx_Root_methodLibrary_src
+	MethodLibrary[*] role methodLibrary
+end
+
+composition xxx_Root_MethodPlugin between
+	Root[*] role xxx_Root_MethodPlugin_src
+	MethodPlugin[*] role MethodPlugin
+end
+
+association xxx_Domain_relatedProduct between
+	Domain[0..1] role xxx_Domain_relatedProduct_src
+	WorkProductDefinition[*] role relatedProduct
+end
+
+composition xxx_Practice_subPractice between
+	Practice[0..1] role xxx_Practice_subPractice_src
+	Practice[*] role subPractice
+end
+
+association xxx_Practice_referencedActivity between
+	Practice[0..1] role xxx_Practice_referencedActivity_src
+	Activity[*] role referencedActivity
+end
+
+association xxx_Practice_contentReference between
+	Practice[0..1] role xxx_Practice_contentReference_src
+	MethodContentElement[*] role contentReference
+end
+
+association xxx_ProcessPlanningTemplate_baseProcess between
+	ProcessPlanningTemplate[0..1] role xxx_ProcessPlanningTemplate_baseProcess_src
+	Process[*] role baseProcess
+end
+
+composition xxx_ConfigurationPackage_ownedConfiguration between
+	ConfigurationPackage[0..1] role xxx_ConfigurationPackage_ownedConfiguration_src
+	MethodConfiguration[*] role ownedConfiguration
+end
+
+association xxx_RoleSet_role between
+	RoleSet[0..1] role xxx_RoleSet_role_src
+	RoleDefinition[*] role role
+end
+

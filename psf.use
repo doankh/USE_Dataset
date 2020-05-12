@@ -1,0 +1,68 @@
+model psf
+class PSF
+attributes
+	version : String
+operations
+end
+
+class RepositoryProvider
+attributes
+	id : String
+operations
+end
+
+class WorkingSet
+attributes
+	id : String
+	label : String
+	name : String
+	editPageId : String
+operations
+end
+
+class Item
+attributes
+	factoryID : String
+	elementID : String
+	path : String
+	type : Integer
+operations
+end
+
+class Project
+attributes
+	reference : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+composition xxx_PSF_providers between
+	PSF[0..1] role xxx_PSF_providers_src
+	RepositoryProvider[*] role providers
+end
+
+composition xxx_PSF_workingSets between
+	PSF[0..1] role xxx_PSF_workingSets_src
+	WorkingSet[*] role workingSets
+end
+
+composition xxx_RepositoryProvider_projects between
+	RepositoryProvider[0..1] role xxx_RepositoryProvider_projects_src
+	Project[*] role projects
+end
+
+composition xxx_WorkingSet_items between
+	WorkingSet[0..1] role xxx_WorkingSet_items_src
+	Item[*] role items
+end
+
+composition xxx_DocumentRoot_psf between
+	DocumentRoot[*] role xxx_DocumentRoot_psf_src
+	PSF[1] role psf
+end
+

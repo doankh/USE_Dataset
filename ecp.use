@@ -1,0 +1,179 @@
+model ecp
+class Project
+attributes
+	name : String
+	properties : String
+operations
+end
+
+class Repository
+attributes
+	name : String
+	properties : String
+operations
+end
+
+abstract class Provider
+attributes
+operations
+end
+
+class ProviderRegistry
+attributes
+	INSTANCE : String
+operations
+end
+
+class WorkspaceProvider<Provider
+attributes
+operations
+end
+
+class EMFStoreProvider<Provider
+attributes
+operations
+end
+
+class CDOProvider<Provider
+attributes
+operations
+end
+
+class RepositoryManager
+attributes
+	INSTANCE : String
+operations
+end
+
+class ProviderParser
+attributes
+operations
+end
+
+class RepositoryParser
+attributes
+operations
+end
+
+class ProjectManager
+attributes
+	INSTANCE : String
+operations
+end
+
+abstract class ExtensionPoint
+attributes
+operations
+end
+
+class repositories<ExtensionPoint
+attributes
+operations
+end
+
+class providers<ExtensionPoint
+attributes
+operations
+end
+
+class uiProviders<ExtensionPoint
+attributes
+operations
+end
+
+abstract class UIProvider
+attributes
+operations
+end
+
+class UIProviderRegistry
+attributes
+	INSTANCE : String
+operations
+end
+
+class UIProviderParser
+attributes
+operations
+end
+
+class CDOUIProvider<UIProvider
+attributes
+operations
+end
+
+class WorkspaceUIProvider<UIProvider
+attributes
+operations
+end
+
+class EMFStoreUIProvider<UIProvider
+attributes
+operations
+end
+
+association xxx_Project_repository between
+	Project[*] role xxx_Project_repository_src
+	Repository[1] role repository
+end
+
+association xxx_Repository_provider between
+	Repository[*] role xxx_Repository_provider_src
+	Provider[1] role provider
+end
+
+composition xxx_ProviderRegistry_providers between
+	ProviderRegistry[0..1] role xxx_ProviderRegistry_providers_src
+	Provider[*] role providers
+end
+
+composition xxx_RepositoryManager_repositories between
+	RepositoryManager[0..1] role xxx_RepositoryManager_repositories_src
+	Repository[*] role repositories
+end
+
+association xxx_ProviderParser_extensionPoint between
+	ProviderParser[*] role xxx_ProviderParser_extensionPoint_src
+	providers[1] role extensionPoint
+end
+
+association xxx_ProviderParser_populates between
+	ProviderParser[*] role xxx_ProviderParser_populates_src
+	ProviderRegistry[1] role populates
+end
+
+association xxx_RepositoryParser_extensionPoint between
+	RepositoryParser[*] role xxx_RepositoryParser_extensionPoint_src
+	repositories[1] role extensionPoint
+end
+
+association xxx_RepositoryParser_populates between
+	RepositoryParser[*] role xxx_RepositoryParser_populates_src
+	RepositoryManager[1] role populates
+end
+
+composition xxx_ProjectManager_projects between
+	ProjectManager[0..1] role xxx_ProjectManager_projects_src
+	Project[*] role projects
+end
+
+association xxx_UIProvider_core between
+	UIProvider[*] role xxx_UIProvider_core_src
+	Provider[1] role core
+end
+
+composition xxx_UIProviderRegistry_uiProviders between
+	UIProviderRegistry[0..1] role xxx_UIProviderRegistry_uiProviders_src
+	UIProvider[*] role uiProviders
+end
+
+association xxx_UIProviderParser_extensionPoint between
+	UIProviderParser[*] role xxx_UIProviderParser_extensionPoint_src
+	uiProviders[1] role extensionPoint
+end
+
+association xxx_UIProviderParser_populates between
+	UIProviderParser[*] role xxx_UIProviderParser_populates_src
+	UIProviderRegistry[1] role populates
+end
+

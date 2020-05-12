@@ -1,0 +1,105 @@
+model markup
+class BulletElement<CompoundElement
+attributes
+	level : String
+operations
+end
+
+class CompoundElement<MarkupElement
+attributes
+operations
+end
+
+class FigureElement<MarkupElement
+attributes
+	id : Integer
+	src : String
+	alt : String
+	def : String
+	requiredWidth : String
+	requiredHeight : String
+	actualWidth : Integer
+	actualHeight : Integer
+operations
+end
+
+class FigureRefElement<MarkupElement
+attributes
+operations
+end
+
+class FontElement<CompoundElement
+attributes
+	font : String
+operations
+end
+
+class FootnoteElement<CompoundElement
+attributes
+operations
+end
+
+class HeadingElement<CompoundElement
+attributes
+	level : String
+operations
+end
+
+class Markup<CompoundElement
+attributes
+operations
+end
+
+class MarkupElement
+attributes
+	uniqueId : Integer
+operations
+end
+
+class NewLineElement<MarkupElement
+attributes
+	text : String
+operations
+end
+
+class NullElement<CompoundElement
+attributes
+operations
+end
+
+class OCLCodeElement<CompoundElement
+attributes
+operations
+end
+
+class OCLEvalElement<CompoundElement
+attributes
+operations
+end
+
+class OCLTextElement<CompoundElement
+attributes
+operations
+end
+
+class TextElement<MarkupElement
+attributes
+	text : String
+operations
+end
+
+composition xxx_CompoundElement_elements between
+	CompoundElement[0..1] role xxx_CompoundElement_elements_src
+	MarkupElement[*] role elements
+end
+
+association xxx_FigureRefElement_ref between
+	FigureRefElement[*] role xxx_FigureRefElement_ref_src
+	FigureElement[1] role ref
+end
+
+association xxx_MarkupElement_owner between
+	MarkupElement[*] role xxx_MarkupElement_owner_src
+	CompoundElement[0..1] role owner
+end
+

@@ -1,0 +1,686 @@
+model lua
+class Chunk
+attributes
+operations
+end
+
+class Block<Chunk
+attributes
+operations
+end
+
+class LastStatement
+attributes
+operations
+end
+
+class LastStatement_Return<LastStatement
+attributes
+operations
+end
+
+class LastStatement_Break<LastStatement
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class Statement_Block<Statement
+attributes
+operations
+end
+
+class Statement_While<Statement
+attributes
+operations
+end
+
+class Statement_Repeat<Statement
+attributes
+operations
+end
+
+class Statement_If_Then_Else<Statement
+attributes
+operations
+end
+
+class Statement_If_Then_Else_ElseIfPart
+attributes
+operations
+end
+
+class Statement_For_Numeric<Statement
+attributes
+	iteratorName : String
+operations
+end
+
+class Statement_For_Generic<Statement
+attributes
+	names : String
+operations
+end
+
+class Statement_GlobalFunction_Declaration<Statement
+attributes
+	prefix : String
+	functionName : String
+operations
+end
+
+class Statement_LocalFunction_Declaration<Statement
+attributes
+	functionName : String
+operations
+end
+
+class Statement_Local_Variable_Declaration<Statement
+attributes
+	variableNames : String
+operations
+end
+
+class Statement_FunctioncallOrAssignment<Statement
+attributes
+operations
+end
+
+class Expression<Statement_FunctioncallOrAssignment
+attributes
+operations
+end
+
+class Expression_Nil<Expression
+attributes
+operations
+end
+
+class Expression_True<Expression
+attributes
+operations
+end
+
+class Expression_False<Expression
+attributes
+operations
+end
+
+class Expression_Number<Expression
+attributes
+	value : Real
+operations
+end
+
+class Expression_VarArgs<Expression
+attributes
+operations
+end
+
+class Expression_String<Expression
+attributes
+	value : String
+operations
+end
+
+class Expression_Function<Expression
+attributes
+operations
+end
+
+class Expression_TableConstructor<Expression
+attributes
+operations
+end
+
+class Function
+attributes
+	parameters : String
+	varArgs : Boolean
+operations
+end
+
+class Functioncall_Arguments
+attributes
+operations
+end
+
+class Field
+attributes
+operations
+end
+
+class Field_AddEntryToTable_Brackets<Field
+attributes
+operations
+end
+
+class Field_AddEntryToTable<Field
+attributes
+	key : String
+operations
+end
+
+class Field_AppendEntryToTable<Field
+attributes
+operations
+end
+
+class LastStatement_ReturnWithValue<LastStatement_Return
+attributes
+operations
+end
+
+class Statement_Assignment<Statement_FunctioncallOrAssignment
+attributes
+operations
+end
+
+class Statement_CallMemberFunction<Statement_FunctioncallOrAssignment
+attributes
+	memberFunctionName : String
+operations
+end
+
+class Statement_CallFunction<Statement_FunctioncallOrAssignment
+attributes
+operations
+end
+
+class Expression_Or<Expression
+attributes
+operations
+end
+
+class Expression_And<Expression
+attributes
+operations
+end
+
+class Expression_Larger<Expression
+attributes
+operations
+end
+
+class Expression_Larger_Equal<Expression
+attributes
+operations
+end
+
+class Expression_Smaller<Expression
+attributes
+operations
+end
+
+class Expression_Smaller_Equal<Expression
+attributes
+operations
+end
+
+class Expression_Equal<Expression
+attributes
+operations
+end
+
+class Expression_Not_Equal<Expression
+attributes
+operations
+end
+
+class Expression_Concatenation<Expression
+attributes
+operations
+end
+
+class Expression_Plus<Expression
+attributes
+operations
+end
+
+class Expression_Minus<Expression
+attributes
+operations
+end
+
+class Expression_Multiplication<Expression
+attributes
+operations
+end
+
+class Expression_Division<Expression
+attributes
+operations
+end
+
+class Expression_Modulo<Expression
+attributes
+operations
+end
+
+class Expression_Negate<Expression
+attributes
+operations
+end
+
+class Expression_Length<Expression
+attributes
+operations
+end
+
+class Expression_Invert<Expression
+attributes
+operations
+end
+
+class Expression_Exponentiation<Expression
+attributes
+operations
+end
+
+class Expression_CallMemberFunction<Expression
+attributes
+	memberFunctionName : String
+operations
+end
+
+class Expression_CallFunction<Expression
+attributes
+operations
+end
+
+class Expression_AccessArray<Expression
+attributes
+operations
+end
+
+class Expression_AccessMember<Expression
+attributes
+	memberName : String
+operations
+end
+
+class Expression_VariableName<Expression
+attributes
+	variable : String
+operations
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Block_returnValue between
+	Block[*] role xxx_Block_returnValue_src
+	LastStatement[0..1] role returnValue
+end
+
+composition xxx_Statement_Block_block between
+	Statement_Block[*] role xxx_Statement_Block_block_src
+	Block[0..1] role block
+end
+
+composition xxx_Statement_While_expression between
+	Statement_While[*] role xxx_Statement_While_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Statement_While_block between
+	Statement_While[*] role xxx_Statement_While_block_src
+	Block[0..1] role block
+end
+
+composition xxx_Statement_Repeat_block between
+	Statement_Repeat[*] role xxx_Statement_Repeat_block_src
+	Block[0..1] role block
+end
+
+composition xxx_Statement_Repeat_expression between
+	Statement_Repeat[*] role xxx_Statement_Repeat_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_Statement_If_Then_Else_ifExpression between
+	Statement_If_Then_Else[*] role xxx_Statement_If_Then_Else_ifExpression_src
+	Expression[0..1] role ifExpression
+end
+
+composition xxx_Statement_If_Then_Else_ifBlock between
+	Statement_If_Then_Else[*] role xxx_Statement_If_Then_Else_ifBlock_src
+	Block[0..1] role ifBlock
+end
+
+composition xxx_Statement_If_Then_Else_elseIf between
+	Statement_If_Then_Else[0..1] role xxx_Statement_If_Then_Else_elseIf_src
+	Statement_If_Then_Else_ElseIfPart[*] role elseIf
+end
+
+composition xxx_Statement_If_Then_Else_elseBlock between
+	Statement_If_Then_Else[*] role xxx_Statement_If_Then_Else_elseBlock_src
+	Block[0..1] role elseBlock
+end
+
+composition xxx_Statement_If_Then_Else_ElseIfPart_elseifExpression between
+	Statement_If_Then_Else_ElseIfPart[*] role xxx_Statement_If_Then_Else_ElseIfPart_elseifExpression_src
+	Expression[0..1] role elseifExpression
+end
+
+composition xxx_Statement_If_Then_Else_ElseIfPart_elseifBlock between
+	Statement_If_Then_Else_ElseIfPart[*] role xxx_Statement_If_Then_Else_ElseIfPart_elseifBlock_src
+	Block[0..1] role elseifBlock
+end
+
+composition xxx_Statement_For_Numeric_startExpr between
+	Statement_For_Numeric[*] role xxx_Statement_For_Numeric_startExpr_src
+	Expression[0..1] role startExpr
+end
+
+composition xxx_Statement_For_Numeric_untilExpr between
+	Statement_For_Numeric[*] role xxx_Statement_For_Numeric_untilExpr_src
+	Expression[0..1] role untilExpr
+end
+
+composition xxx_Statement_For_Numeric_stepExpr between
+	Statement_For_Numeric[*] role xxx_Statement_For_Numeric_stepExpr_src
+	Expression[0..1] role stepExpr
+end
+
+composition xxx_Statement_For_Numeric_block between
+	Statement_For_Numeric[*] role xxx_Statement_For_Numeric_block_src
+	Block[0..1] role block
+end
+
+composition xxx_Statement_For_Generic_expressions between
+	Statement_For_Generic[0..1] role xxx_Statement_For_Generic_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_Statement_For_Generic_block between
+	Statement_For_Generic[*] role xxx_Statement_For_Generic_block_src
+	Block[0..1] role block
+end
+
+composition xxx_Statement_GlobalFunction_Declaration_function between
+	Statement_GlobalFunction_Declaration[*] role xxx_Statement_GlobalFunction_Declaration_function_src
+	Function[0..1] role function
+end
+
+composition xxx_Statement_LocalFunction_Declaration_function between
+	Statement_LocalFunction_Declaration[*] role xxx_Statement_LocalFunction_Declaration_function_src
+	Function[0..1] role function
+end
+
+composition xxx_Statement_Local_Variable_Declaration_initialValue between
+	Statement_Local_Variable_Declaration[0..1] role xxx_Statement_Local_Variable_Declaration_initialValue_src
+	Expression[*] role initialValue
+end
+
+composition xxx_Expression_Function_function between
+	Expression_Function[*] role xxx_Expression_Function_function_src
+	Function[0..1] role function
+end
+
+composition xxx_Expression_TableConstructor_fields between
+	Expression_TableConstructor[0..1] role xxx_Expression_TableConstructor_fields_src
+	Field[*] role fields
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	Block[0..1] role body
+end
+
+composition xxx_Functioncall_Arguments_arguments between
+	Functioncall_Arguments[0..1] role xxx_Functioncall_Arguments_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_Field_value between
+	Field[*] role xxx_Field_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_Field_AddEntryToTable_Brackets_indexExpression between
+	Field_AddEntryToTable_Brackets[*] role xxx_Field_AddEntryToTable_Brackets_indexExpression_src
+	Expression[0..1] role indexExpression
+end
+
+composition xxx_LastStatement_ReturnWithValue_returnValues between
+	LastStatement_ReturnWithValue[0..1] role xxx_LastStatement_ReturnWithValue_returnValues_src
+	Expression[*] role returnValues
+end
+
+composition xxx_Statement_Assignment_variable between
+	Statement_Assignment[0..1] role xxx_Statement_Assignment_variable_src
+	Expression[*] role variable
+end
+
+composition xxx_Statement_Assignment_values between
+	Statement_Assignment[0..1] role xxx_Statement_Assignment_values_src
+	Expression[*] role values
+end
+
+composition xxx_Statement_CallMemberFunction_object between
+	Statement_CallMemberFunction[*] role xxx_Statement_CallMemberFunction_object_src
+	Expression[0..1] role object
+end
+
+composition xxx_Statement_CallMemberFunction_arguments between
+	Statement_CallMemberFunction[*] role xxx_Statement_CallMemberFunction_arguments_src
+	Functioncall_Arguments[0..1] role arguments
+end
+
+composition xxx_Statement_CallFunction_object between
+	Statement_CallFunction[*] role xxx_Statement_CallFunction_object_src
+	Expression[0..1] role object
+end
+
+composition xxx_Statement_CallFunction_arguments between
+	Statement_CallFunction[*] role xxx_Statement_CallFunction_arguments_src
+	Functioncall_Arguments[0..1] role arguments
+end
+
+composition xxx_Expression_Or_left between
+	Expression_Or[*] role xxx_Expression_Or_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Or_right between
+	Expression_Or[*] role xxx_Expression_Or_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_And_left between
+	Expression_And[*] role xxx_Expression_And_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_And_right between
+	Expression_And[*] role xxx_Expression_And_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Larger_left between
+	Expression_Larger[*] role xxx_Expression_Larger_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Larger_right between
+	Expression_Larger[*] role xxx_Expression_Larger_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Larger_Equal_left between
+	Expression_Larger_Equal[*] role xxx_Expression_Larger_Equal_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Larger_Equal_right between
+	Expression_Larger_Equal[*] role xxx_Expression_Larger_Equal_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Smaller_left between
+	Expression_Smaller[*] role xxx_Expression_Smaller_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Smaller_right between
+	Expression_Smaller[*] role xxx_Expression_Smaller_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Smaller_Equal_left between
+	Expression_Smaller_Equal[*] role xxx_Expression_Smaller_Equal_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Smaller_Equal_right between
+	Expression_Smaller_Equal[*] role xxx_Expression_Smaller_Equal_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Equal_left between
+	Expression_Equal[*] role xxx_Expression_Equal_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Equal_right between
+	Expression_Equal[*] role xxx_Expression_Equal_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Not_Equal_left between
+	Expression_Not_Equal[*] role xxx_Expression_Not_Equal_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Not_Equal_right between
+	Expression_Not_Equal[*] role xxx_Expression_Not_Equal_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Concatenation_left between
+	Expression_Concatenation[*] role xxx_Expression_Concatenation_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Concatenation_right between
+	Expression_Concatenation[*] role xxx_Expression_Concatenation_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Plus_left between
+	Expression_Plus[*] role xxx_Expression_Plus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Plus_right between
+	Expression_Plus[*] role xxx_Expression_Plus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Minus_left between
+	Expression_Minus[*] role xxx_Expression_Minus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Minus_right between
+	Expression_Minus[*] role xxx_Expression_Minus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Multiplication_left between
+	Expression_Multiplication[*] role xxx_Expression_Multiplication_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Multiplication_right between
+	Expression_Multiplication[*] role xxx_Expression_Multiplication_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Division_left between
+	Expression_Division[*] role xxx_Expression_Division_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Division_right between
+	Expression_Division[*] role xxx_Expression_Division_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Modulo_left between
+	Expression_Modulo[*] role xxx_Expression_Modulo_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Modulo_right between
+	Expression_Modulo[*] role xxx_Expression_Modulo_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_Negate_exp between
+	Expression_Negate[*] role xxx_Expression_Negate_exp_src
+	Expression[0..1] role exp
+end
+
+composition xxx_Expression_Length_exp between
+	Expression_Length[*] role xxx_Expression_Length_exp_src
+	Expression[0..1] role exp
+end
+
+composition xxx_Expression_Invert_exp between
+	Expression_Invert[*] role xxx_Expression_Invert_exp_src
+	Expression[0..1] role exp
+end
+
+composition xxx_Expression_Exponentiation_left between
+	Expression_Exponentiation[*] role xxx_Expression_Exponentiation_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Expression_Exponentiation_right between
+	Expression_Exponentiation[*] role xxx_Expression_Exponentiation_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Expression_CallMemberFunction_object between
+	Expression_CallMemberFunction[*] role xxx_Expression_CallMemberFunction_object_src
+	Expression[0..1] role object
+end
+
+composition xxx_Expression_CallMemberFunction_arguments between
+	Expression_CallMemberFunction[*] role xxx_Expression_CallMemberFunction_arguments_src
+	Functioncall_Arguments[0..1] role arguments
+end
+
+composition xxx_Expression_CallFunction_object between
+	Expression_CallFunction[*] role xxx_Expression_CallFunction_object_src
+	Expression[0..1] role object
+end
+
+composition xxx_Expression_CallFunction_arguments between
+	Expression_CallFunction[*] role xxx_Expression_CallFunction_arguments_src
+	Functioncall_Arguments[0..1] role arguments
+end
+
+composition xxx_Expression_AccessArray_array between
+	Expression_AccessArray[*] role xxx_Expression_AccessArray_array_src
+	Expression[0..1] role array
+end
+
+composition xxx_Expression_AccessArray_index between
+	Expression_AccessArray[*] role xxx_Expression_AccessArray_index_src
+	Expression[0..1] role index
+end
+
+composition xxx_Expression_AccessMember_object between
+	Expression_AccessMember[*] role xxx_Expression_AccessMember_object_src
+	Expression[0..1] role object
+end
+

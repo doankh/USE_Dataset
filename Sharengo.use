@@ -1,0 +1,80 @@
+model MMASharengo
+abstract class ModelElement
+attributes
+	name : String
+operations
+end
+
+abstract class Classifier<ModelElement
+attributes
+operations
+end
+
+class Operation<ModelElement
+attributes
+operations
+end
+
+class Service<Classifier
+attributes
+operations
+end
+
+class BusinessObject<Classifier
+attributes
+operations
+end
+
+class ServiceOperation<Operation
+attributes
+operations
+end
+
+class BusinessObjectOperation<Operation
+attributes
+operations
+end
+
+class BusinessRule<ModelElement
+attributes
+	expr : String
+operations
+end
+
+abstract class Flow<ModelElement
+attributes
+	source : String
+	target : String
+operations
+end
+
+class Service2BusinessObjectFlow<Flow
+attributes
+operations
+end
+
+composition xxx_Service_operations_ between
+	Service[0..1] role xxx_Service_operations__src
+	ServiceOperation[*] role operations_
+end
+
+composition xxx_BusinessObject_operations_ between
+	BusinessObject[0..1] role xxx_BusinessObject_operations__src
+	BusinessObjectOperation[*] role operations_
+end
+
+composition xxx_ServiceOperation_BOFlows between
+	ServiceOperation[0..1] role xxx_ServiceOperation_BOFlows_src
+	Service2BusinessObjectFlow[*] role BOFlows
+end
+
+composition xxx_ServiceOperation_rules between
+	ServiceOperation[0..1] role xxx_ServiceOperation_rules_src
+	BusinessRule[*] role rules
+end
+
+composition xxx_BusinessObjectOperation_rules between
+	BusinessObjectOperation[0..1] role xxx_BusinessObjectOperation_rules_src
+	BusinessRule[*] role rules
+end
+

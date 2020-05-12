@@ -1,0 +1,115 @@
+model projectGenerator
+enum Locale{
+default
+}
+
+enum DbType{
+default
+}
+
+enum Boolean{
+default
+}
+
+enum During{
+default
+}
+
+enum Notify{
+default
+}
+
+class Module
+attributes
+	name : String
+	key : String
+	cdiEnabled : Boolean
+operations
+end
+
+class ServiceConfig
+attributes
+operations
+end
+
+class Observer
+attributes
+	name : String
+	type : String
+	during : During
+	notify : Notify
+	className : String
+	qualifier : String
+operations
+end
+
+class JpaConfig
+attributes
+operations
+end
+
+class Localized
+attributes
+	name : String
+operations
+end
+
+class LocalizedEntry
+attributes
+	localizedKey : String
+	args : String
+operations
+end
+
+class LocalizedValue
+attributes
+	locale : Locale
+	values : String
+operations
+end
+
+composition xxx_Module_messageBundles between
+	Module[0..1] role xxx_Module_messageBundles_src
+	Localized[*] role messageBundles
+end
+
+composition xxx_Module_observers between
+	Module[0..1] role xxx_Module_observers_src
+	Observer[*] role observers
+end
+
+composition xxx_Module_jpaConfig between
+	Module[*] role xxx_Module_jpaConfig_src
+	JpaConfig[0..1] role jpaConfig
+end
+
+composition xxx_Module_serviceConfig between
+	Module[*] role xxx_Module_serviceConfig_src
+	ServiceConfig[0..1] role serviceConfig
+end
+
+composition xxx_ServiceConfig_observers between
+	ServiceConfig[0..1] role xxx_ServiceConfig_observers_src
+	Observer[*] role observers
+end
+
+association xxx_ServiceConfig_messageBundles between
+	ServiceConfig[0..1] role xxx_ServiceConfig_messageBundles_src
+	Localized[*] role messageBundles
+end
+
+association xxx_JpaConfig_localizedEnums between
+	JpaConfig[0..1] role xxx_JpaConfig_localizedEnums_src
+	Localized[*] role localizedEnums
+end
+
+composition xxx_Localized_values between
+	Localized[0..1] role xxx_Localized_values_src
+	LocalizedEntry[*] role values
+end
+
+composition xxx_LocalizedEntry_values between
+	LocalizedEntry[0..1] role xxx_LocalizedEntry_values_src
+	LocalizedValue[*] role values
+end
+

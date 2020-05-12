@@ -1,0 +1,247 @@
+model OCCAM
+class OCCAM_Program
+attributes
+operations
+end
+
+class OCCAM_Element
+attributes
+	name : String
+operations
+end
+
+class Process<OCCAM_Element
+attributes
+operations
+end
+
+class Channel
+attributes
+	name : String
+	type : String
+operations
+end
+
+class Action<OCCAM_Element
+attributes
+operations
+end
+
+class Assignment<Action
+attributes
+operations
+end
+
+class Input<Action
+attributes
+operations
+end
+
+class Output<Action
+attributes
+operations
+end
+
+class Constructor<OCCAM_Element
+attributes
+operations
+end
+
+class Buckel
+attributes
+operations
+end
+
+class If<Buckel
+attributes
+operations
+end
+
+class While_<Buckel
+attributes
+operations
+end
+
+class Condition
+attributes
+	elementRight : String
+	elementLeft : String
+	typeCondition : String
+operations
+end
+
+class Sequential<Constructor
+attributes
+operations
+end
+
+class Parallel<Constructor
+attributes
+operations
+end
+
+class Alternative<Constructor
+attributes
+operations
+end
+
+class DataType<OCCAM_Element
+attributes
+	dataType : String
+operations
+end
+
+class Library
+attributes
+	name : String
+operations
+end
+
+class File
+attributes
+	name : String
+operations
+end
+
+class Server
+attributes
+	name : String
+operations
+end
+
+class Declaration
+attributes
+	name : String
+operations
+end
+
+composition xxx_OCCAM_Program_occam_Elements between
+	OCCAM_Program[0..1] role xxx_OCCAM_Program_occam_Elements_src
+	OCCAM_Element[*] role occam_Elements
+end
+
+composition xxx_OCCAM_Program_files between
+	OCCAM_Program[0..1] role xxx_OCCAM_Program_files_src
+	File[*] role files
+end
+
+composition xxx_Process_declaration between
+	Process[*] role xxx_Process_declaration_src
+	Declaration[1] role declaration
+end
+
+composition xxx_Process_constructors between
+	Process[0..1] role xxx_Process_constructors_src
+	Constructor[*] role constructors
+end
+
+association xxx_Process_parameters between
+	Process[0..1] role xxx_Process_parameters_src
+	DataType[*] role parameters
+end
+
+association xxx_Process_libraries between
+	Process[0..1] role xxx_Process_libraries_src
+	Library[*] role libraries
+end
+
+association xxx_Process_toChannel between
+	Process[*] role xxx_Process_toChannel_src
+	Channel[1] role toChannel
+end
+
+association xxx_Channel_toServer between
+	Channel[*] role xxx_Channel_toServer_src
+	Server[1] role toServer
+end
+
+association xxx_Channel_toProcess between
+	Channel[*] role xxx_Channel_toProcess_src
+	Process[1] role toProcess
+end
+
+association xxx_Action_constructor between
+	Action[*] role xxx_Action_constructor_src
+	Constructor[1] role constructor
+end
+
+association xxx_Action_while between
+	Action[*] role xxx_Action_while_src
+	While_[1] role While_
+end
+
+association xxx_Action_if_ between
+	Action[*] role xxx_Action_if__src
+	If[1] role if_
+end
+
+association xxx_Constructor_process between
+	Constructor[*] role xxx_Constructor_process_src
+	Process[1] role process
+end
+
+composition xxx_Constructor_actions between
+	Constructor[0..1] role xxx_Constructor_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Constructor_buckels between
+	Constructor[0..1] role xxx_Constructor_buckels_src
+	Buckel[*] role buckels
+end
+
+composition xxx_Constructor_childrens between
+	Constructor[0..1] role xxx_Constructor_childrens_src
+	Constructor[*] role childrens
+end
+
+association xxx_Buckel_constructor between
+	Buckel[*] role xxx_Buckel_constructor_src
+	Constructor[1] role constructor
+end
+
+composition xxx_If_conditions between
+	If[0..1] role xxx_If_conditions_src
+	Condition[*] role conditions
+end
+
+composition xxx_If_actions between
+	If[0..1] role xxx_If_actions_src
+	Action[*] role actions
+end
+
+composition xxx_While_conditions between
+	While_[0..1] role xxx_While_conditions_src
+	Condition[*] role conditions
+end
+
+composition xxx_While_actions between
+	While_[0..1] role xxx_While_actions_src
+	Action[*] role actions
+end
+
+association xxx_Condition_if_ between
+	Condition[*] role xxx_Condition_if__src
+	If[1] role if_
+end
+
+association xxx_Condition_while between
+	Condition[*] role xxx_Condition_while_src
+	While_[1] role While_
+end
+
+association xxx_Server_toChannel between
+	Server[*] role xxx_Server_toChannel_src
+	Channel[1] role toChannel
+end
+
+association xxx_Declaration_process between
+	Declaration[*] role xxx_Declaration_process_src
+	Process[1] role process
+end
+
+composition xxx_Declaration_elements between
+	Declaration[0..1] role xxx_Declaration_elements_src
+	DataType[*] role elements
+end
+

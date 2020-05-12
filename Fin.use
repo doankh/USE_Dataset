@@ -1,0 +1,139 @@
+model fin
+enum MONAT{
+default
+}
+
+enum Buchungsart{
+default
+}
+
+class FinModelFile
+attributes
+	name : String
+operations
+end
+
+class Element
+attributes
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+operations
+end
+
+class Konto<Element
+attributes
+	name : String
+	ktoNr : Integer
+	blz : Integer
+	verwendung : String
+	bemerkung : String
+operations
+end
+
+class Intervall
+attributes
+	tag : String
+	monate : MONAT
+operations
+end
+
+class Kategorie<Element
+attributes
+	name : String
+operations
+end
+
+class Buchungsintervall<Element
+attributes
+	name : String
+operations
+end
+
+class Buchung<Element
+attributes
+	name : String
+	betrag : String
+	buchungsart : Buchungsart
+operations
+end
+
+class Kontakt<Element
+attributes
+	vorname : String
+	nachname : String
+	strasse : String
+	plz : Integer
+	ort : String
+	bemerkung : String
+operations
+end
+
+composition xxx_FinModelFile_imports between
+	FinModelFile[0..1] role xxx_FinModelFile_imports_src
+	Import[*] role imports
+end
+
+composition xxx_FinModelFile_elements between
+	FinModelFile[0..1] role xxx_FinModelFile_elements_src
+	Element[*] role elements
+end
+
+association xxx_Konto_inhaber between
+	Konto[*] role xxx_Konto_inhaber_src
+	Kontakt[0..1] role inhaber
+end
+
+association xxx_Konto_bank between
+	Konto[*] role xxx_Konto_bank_src
+	Kontakt[0..1] role bank
+end
+
+composition xxx_Buchungsintervall_intervall between
+	Buchungsintervall[*] role xxx_Buchungsintervall_intervall_src
+	Intervall[0..1] role intervall
+end
+
+association xxx_Buchung_konto between
+	Buchung[*] role xxx_Buchung_konto_src
+	Konto[0..1] role konto
+end
+
+association xxx_Buchung_empfaenger between
+	Buchung[*] role xxx_Buchung_empfaenger_src
+	Kontakt[0..1] role empfaenger
+end
+
+association xxx_Buchung_empfaengerKto between
+	Buchung[*] role xxx_Buchung_empfaengerKto_src
+	Konto[0..1] role empfaengerKto
+end
+
+association xxx_Buchung_von between
+	Buchung[*] role xxx_Buchung_von_src
+	Kontakt[0..1] role von
+end
+
+association xxx_Buchung_vonKto between
+	Buchung[*] role xxx_Buchung_vonKto_src
+	Konto[0..1] role vonKto
+end
+
+composition xxx_Buchung_intervall between
+	Buchung[*] role xxx_Buchung_intervall_src
+	Intervall[0..1] role intervall
+end
+
+association xxx_Buchung_intervallRef between
+	Buchung[*] role xxx_Buchung_intervallRef_src
+	Buchungsintervall[0..1] role intervallRef
+end
+
+association xxx_Buchung_kategorie between
+	Buchung[0..1] role xxx_Buchung_kategorie_src
+	Kategorie[*] role kategorie
+end
+

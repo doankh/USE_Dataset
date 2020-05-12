@@ -1,0 +1,349 @@
+model SVG
+abstract class Element
+attributes
+	fill : String
+	viewBox : String
+	identifier : String
+operations
+end
+
+abstract class StructuralElement<Element
+attributes
+operations
+end
+
+class Image<StructuralElement
+attributes
+operations
+end
+
+class Svg<StructuralElement
+attributes
+	namespace : String
+	version : String
+	baseProfile : String
+operations
+end
+
+abstract class GroupingElement<StructuralElement
+attributes
+operations
+end
+
+class G<GroupingElement
+attributes
+	name : String
+operations
+end
+
+class Defs<GroupingElement
+attributes
+operations
+end
+
+class Symbol<GroupingElement
+attributes
+operations
+end
+
+class Use<StructuralElement
+attributes
+operations
+end
+
+abstract class GraphicalElement<Element
+attributes
+	stroke : String
+operations
+end
+
+abstract class Shape<GraphicalElement
+attributes
+operations
+end
+
+abstract class TextElement<GraphicalElement
+attributes
+	rotate : Real
+	textLength : String
+	fontSize : String
+operations
+end
+
+class Rect<Shape
+attributes
+	rx : Real
+	ry : Real
+operations
+end
+
+class Circle<Shape
+attributes
+operations
+end
+
+class Ellipse<Shape
+attributes
+operations
+end
+
+class Line<Shape
+attributes
+	markerEnd : String
+	markerStart : String
+operations
+end
+
+class Polyline<Shape
+attributes
+	strokeDashArray : String
+	markerEnd : String
+	markerStart : String
+operations
+end
+
+class Polygon<Shape
+attributes
+	markerEnd : String
+	markerStart : String
+operations
+end
+
+class Path<Shape
+attributes
+	pathLength : Real
+	d : String
+	markerEnd : String
+	markerStart : String
+operations
+end
+
+class Point<Shape
+attributes
+operations
+end
+
+class Marker<Shape
+attributes
+	markerUnits : String
+	refX : Real
+	refY : Real
+	markerWidth : Real
+	markerHeight : Real
+	orient : String
+operations
+end
+
+class Text<TextElement
+attributes
+	lengthAdjust : String
+	content : String
+operations
+end
+
+class Tspan<TextElement
+attributes
+	content : String
+operations
+end
+
+class Tref<TextElement
+attributes
+operations
+end
+
+abstract class Attribute
+attributes
+operations
+end
+
+abstract class Transform<Attribute
+attributes
+operations
+end
+
+class Scale<Transform
+attributes
+	sx : Real
+	sy : Real
+operations
+end
+
+class Translate<Transform
+attributes
+	tx : Real
+	ty : Real
+operations
+end
+
+class Rotate<Transform
+attributes
+	angle : Real
+	cx : Real
+	cy : Real
+operations
+end
+
+class Visibility<Attribute
+attributes
+	visible : Boolean
+operations
+end
+
+class FontWeight<Attribute
+attributes
+	bold : Boolean
+operations
+end
+
+class FontStyle<Attribute
+attributes
+	italic : Boolean
+operations
+end
+
+class Dimension
+attributes
+	width : Real
+	height : Real
+operations
+end
+
+abstract class Coordinates
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class RelativeCoord<Coordinates
+attributes
+operations
+end
+
+class AbsoluteCoord<Coordinates
+attributes
+operations
+end
+
+abstract class ReferencedFile
+attributes
+	name : String
+operations
+end
+
+class SvgFile<ReferencedFile
+attributes
+operations
+end
+
+association xxx_Element_owner between
+	Element[0..1] role xxx_Element_owner_src
+	SvgFile[*] role owner
+end
+
+association xxx_Element_target between
+	Element[0..1] role xxx_Element_target_src
+	Use[*] role target
+end
+
+association xxx_Element_attribute between
+	Element[0..1] role xxx_Element_attribute_src
+	Attribute[*] role attribute
+end
+
+composition xxx_Element_position between
+	Element[*] role xxx_Element_position_src
+	Coordinates[0..1] role position
+end
+
+composition xxx_Element_size between
+	Element[*] role xxx_Element_size_src
+	Dimension[0..1] role size
+end
+
+association xxx_Element_root between
+	Element[*] role xxx_Element_root_src
+	Svg[0..1] role root
+end
+
+association xxx_Element_group between
+	Element[*] role xxx_Element_group_src
+	GroupingElement[0..1] role group
+end
+
+association xxx_Element_drawsMarker between
+	Element[*] role xxx_Element_drawsMarker_src
+	Marker[0..1] role drawsMarker
+end
+
+association xxx_Image_referee between
+	Image[0..1] role xxx_Image_referee_src
+	ReferencedFile[*] role referee
+end
+
+association xxx_Svg_owner_SVG between
+	Svg[0..1] role xxx_Svg_owner_SVG_src
+	SvgFile[*] role owner_SVG
+end
+
+composition xxx_Svg_children between
+	Svg[0..1] role xxx_Svg_children_src
+	Element[*] role children
+end
+
+composition xxx_GroupingElement_groupContent between
+	GroupingElement[0..1] role xxx_GroupingElement_groupContent_src
+	Element[*] role groupContent
+end
+
+association xxx_Use_use between
+	Use[0..1] role xxx_Use_use_src
+	Element[*] role use
+end
+
+association xxx_Line_between_ between
+	Line[*] role xxx_Line_between__src
+	Point[2] role between_
+end
+
+composition xxx_Polyline_waypoints between
+	Polyline[0..1] role xxx_Polyline_waypoints_src
+	Point[*] role waypoints
+end
+
+association xxx_Polygon_waypoints between
+	Polygon[0..1] role xxx_Polygon_waypoints_src
+	Point[*] role waypoints
+end
+
+composition xxx_Marker_drawing between
+	Marker[0..1] role xxx_Marker_drawing_src
+	Element[*] role drawing
+end
+
+association xxx_Tref_xlinkHref between
+	Tref[*] role xxx_Tref_xlinkHref_src
+	TextElement[1] role xlinkHref
+end
+
+association xxx_Attribute_attOwner between
+	Attribute[0..1] role xxx_Attribute_attOwner_src
+	Element[*] role attOwner
+end
+
+association xxx_ReferencedFile_referer between
+	ReferencedFile[0..1] role xxx_ReferencedFile_referer_src
+	Image[*] role referer
+end
+
+association xxx_SvgFile_tag between
+	SvgFile[*] role xxx_SvgFile_tag_src
+	Svg[1] role tag
+end
+
+association xxx_SvgFile_elements between
+	SvgFile[0..1] role xxx_SvgFile_elements_src
+	Element[*] role elements
+end
+

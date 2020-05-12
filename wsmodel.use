@@ -1,0 +1,165 @@
+model wsmodel
+enum WDependencyType{
+default
+}
+
+class WProject<WNamedElement
+attributes
+operations
+end
+
+class WWorkspace
+attributes
+operations
+end
+
+abstract class WNamedElement
+attributes
+	name : String
+	handler : String
+operations
+	getParent():WNamedElement
+	getChildren()
+	setParent(parent : WNamedElement)
+	addChild(child : WNamedElement)
+end
+
+class WDependency
+attributes
+	type : WDependencyType
+operations
+end
+
+class WPackageFragmentRoot<WNamedElement
+attributes
+operations
+end
+
+class WPackageFragment<WNamedElement
+attributes
+operations
+end
+
+class WCompilationUnit<WNamedElement
+attributes
+operations
+end
+
+class WType<WNamedElement
+attributes
+operations
+end
+
+class WMethod<WNamedElement
+attributes
+	signature : String
+	EAttribute0 : String
+operations
+end
+
+class WField<WNamedElement
+attributes
+	signature : String
+operations
+end
+
+composition xxx_WProject_packageFragmentRoots between
+	WProject[0..1] role xxx_WProject_packageFragmentRoots_src
+	WPackageFragmentRoot[*] role packageFragmentRoots
+end
+
+association xxx_WProject_workspace between
+	WProject[*] role xxx_WProject_workspace_src
+	WWorkspace[0..1] role workspace
+end
+
+composition xxx_WWorkspace_projects between
+	WWorkspace[0..1] role xxx_WWorkspace_projects_src
+	WProject[*] role projects
+end
+
+association xxx_WWorkspace_elements between
+	WWorkspace[0..1] role xxx_WWorkspace_elements_src
+	WNamedElement[*] role elements
+end
+
+composition xxx_WWorkspace_dependencties between
+	WWorkspace[0..1] role xxx_WWorkspace_dependencties_src
+	WDependency[*] role dependencties
+end
+
+association xxx_WNamedElement_incomingDependencies between
+	WNamedElement[0..1] role xxx_WNamedElement_incomingDependencies_src
+	WDependency[*] role incomingDependencies
+end
+
+association xxx_WNamedElement_outgoingDependencies between
+	WNamedElement[0..1] role xxx_WNamedElement_outgoingDependencies_src
+	WDependency[*] role outgoingDependencies
+end
+
+association xxx_WDependency_from_ between
+	WDependency[*] role xxx_WDependency_from__src
+	WNamedElement[1] role from_
+end
+
+association xxx_WDependency_to between
+	WDependency[*] role xxx_WDependency_to_src
+	WNamedElement[1] role to
+end
+
+association xxx_WPackageFragmentRoot_project between
+	WPackageFragmentRoot[*] role xxx_WPackageFragmentRoot_project_src
+	WProject[0..1] role project
+end
+
+composition xxx_WPackageFragmentRoot_packageFragments between
+	WPackageFragmentRoot[0..1] role xxx_WPackageFragmentRoot_packageFragments_src
+	WPackageFragment[*] role packageFragments
+end
+
+association xxx_WPackageFragment_packageFragmentRoot between
+	WPackageFragment[*] role xxx_WPackageFragment_packageFragmentRoot_src
+	WPackageFragmentRoot[0..1] role packageFragmentRoot
+end
+
+composition xxx_WPackageFragment_compilationUnits between
+	WPackageFragment[0..1] role xxx_WPackageFragment_compilationUnits_src
+	WCompilationUnit[*] role compilationUnits
+end
+
+association xxx_WCompilationUnit_packageFragment between
+	WCompilationUnit[*] role xxx_WCompilationUnit_packageFragment_src
+	WPackageFragment[0..1] role packageFragment
+end
+
+composition xxx_WCompilationUnit_types between
+	WCompilationUnit[0..1] role xxx_WCompilationUnit_types_src
+	WType[*] role types
+end
+
+association xxx_WType_compilationUnit between
+	WType[*] role xxx_WType_compilationUnit_src
+	WCompilationUnit[0..1] role compilationUnit
+end
+
+composition xxx_WType_methods between
+	WType[0..1] role xxx_WType_methods_src
+	WMethod[*] role methods
+end
+
+composition xxx_WType_fields between
+	WType[0..1] role xxx_WType_fields_src
+	WField[*] role fields
+end
+
+association xxx_WMethod_type between
+	WMethod[*] role xxx_WMethod_type_src
+	WType[0..1] role type
+end
+
+association xxx_WField_type between
+	WField[*] role xxx_WField_type_src
+	WType[0..1] role type
+end
+

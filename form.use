@@ -1,0 +1,167 @@
+model form
+enum SelectionFieldType{
+default
+}
+
+class Form
+attributes
+operations
+end
+
+class Page
+attributes
+	title : String
+operations
+end
+
+abstract class PageElement
+attributes
+	elementId : String
+operations
+end
+
+abstract class InputField<PageElement
+attributes
+	label : String
+	mandatory : Boolean
+operations
+end
+
+class TextField<InputField
+attributes
+	encrypted : Boolean
+operations
+end
+
+class SelectionField<InputField
+attributes
+	selectionFieldType : SelectionFieldType
+operations
+end
+
+class TextArea<InputField
+attributes
+operations
+end
+
+class SelectionItem
+attributes
+	label : String
+	selected : Boolean
+operations
+end
+
+abstract class Text<PageElement
+attributes
+	content : String
+operations
+end
+
+class Heading<Text
+attributes
+	level : Integer
+operations
+end
+
+class Paragraph<Text
+attributes
+operations
+end
+
+class List<PageElement
+attributes
+	ordered_ : Boolean
+operations
+end
+
+class ListItem
+attributes
+	label : String
+operations
+end
+
+abstract class VisibilityCondition
+attributes
+operations
+end
+
+class SelectionCondition<VisibilityCondition
+attributes
+operations
+end
+
+composition xxx_Form_pages between
+	Form[0..1] role xxx_Form_pages_src
+	Page[*] role pages
+end
+
+association xxx_Form_welcomePage between
+	Form[*] role xxx_Form_welcomePage_src
+	Page[1] role welcomePage
+end
+
+association xxx_Page_allPreviousPages between
+	Page[0..1] role xxx_Page_allPreviousPages_src
+	Page[*] role allPreviousPages
+end
+
+association xxx_Page_allNextPages between
+	Page[0..1] role xxx_Page_allNextPages_src
+	Page[*] role allNextPages
+end
+
+association xxx_Page_nextPage between
+	Page[*] role xxx_Page_nextPage_src
+	Page[0..1] role nextPage
+end
+
+composition xxx_Page_elements between
+	Page[0..1] role xxx_Page_elements_src
+	PageElement[*] role elements
+end
+
+association xxx_Page_previousPage between
+	Page[*] role xxx_Page_previousPage_src
+	Page[0..1] role previousPage
+end
+
+composition xxx_Page_visibilityConditions between
+	Page[0..1] role xxx_Page_visibilityConditions_src
+	VisibilityCondition[*] role visibilityConditions
+end
+
+association xxx_PageElement_page between
+	PageElement[*] role xxx_PageElement_page_src
+	Page[1] role page
+end
+
+composition xxx_SelectionField_items between
+	SelectionField[0..1] role xxx_SelectionField_items_src
+	SelectionItem[1..*] role items
+end
+
+association xxx_SelectionItem_field between
+	SelectionItem[*] role xxx_SelectionItem_field_src
+	SelectionField[1] role field
+end
+
+composition xxx_List_items between
+	List[0..1] role xxx_List_items_src
+	ListItem[1..*] role items
+end
+
+association xxx_VisibilityCondition_page between
+	VisibilityCondition[*] role xxx_VisibilityCondition_page_src
+	Page[1] role page
+end
+
+association xxx_VisibilityCondition_concernsElements between
+	VisibilityCondition[0..1] role xxx_VisibilityCondition_concernsElements_src
+	PageElement[*] role concernsElements
+end
+
+association xxx_SelectionCondition_item between
+	SelectionCondition[*] role xxx_SelectionCondition_item_src
+	SelectionItem[1] role item
+end
+

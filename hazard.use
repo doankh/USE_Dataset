@@ -1,0 +1,111 @@
+model hazard
+enum Severity_FAA{
+default
+}
+
+enum Likelihood_FAA{
+default
+}
+
+enum Severity_MIL_STD_882D{
+default
+}
+
+enum Likelihood_MIL_STD_882D{
+default
+}
+
+class ComparativeRiskAssessmentForm
+attributes
+	secTrackingNumber : String
+	craTitle : String
+	system : String
+	summary : String
+	baseline : String
+	proposedChange : String
+	description : String
+	assessmentSummary : String
+operations
+end
+
+class HazardList
+attributes
+operations
+end
+
+class Hazard
+attributes
+	number : Integer
+	hazardCondition : String
+operations
+end
+
+class Reference
+attributes
+	name : String
+operations
+end
+
+class RiskAssessment
+attributes
+	severity : Severity_FAA
+	probability : Likelihood_FAA
+	assessment : String
+	severityRationale : String
+	probabilityRationale : String
+operations
+end
+
+class RiskAssessmentCode
+attributes
+	baseline : String
+	optionB : String
+	optionC : String
+	optionD : String
+	optionE : String
+operations
+end
+
+class HazardClassificationRationale
+attributes
+	hazardId : String
+	summary : String
+	option : String
+operations
+end
+
+composition xxx_ComparativeRiskAssessmentForm_references between
+	ComparativeRiskAssessmentForm[0..1] role xxx_ComparativeRiskAssessmentForm_references_src
+	Reference[*] role references
+end
+
+composition xxx_ComparativeRiskAssessmentForm_riskAssessment between
+	ComparativeRiskAssessmentForm[*] role xxx_ComparativeRiskAssessmentForm_riskAssessment_src
+	RiskAssessment[0..1] role riskAssessment
+end
+
+composition xxx_ComparativeRiskAssessmentForm_hazardList between
+	ComparativeRiskAssessmentForm[*] role xxx_ComparativeRiskAssessmentForm_hazardList_src
+	HazardList[0..1] role hazardList
+end
+
+composition xxx_HazardList_hazards between
+	HazardList[0..1] role xxx_HazardList_hazards_src
+	Hazard[*] role hazards
+end
+
+composition xxx_Hazard_riskAssessmentCode between
+	Hazard[*] role xxx_Hazard_riskAssessmentCode_src
+	RiskAssessmentCode[0..1] role riskAssessmentCode
+end
+
+association xxx_Hazard_hazardClassificationRationale between
+	Hazard[*] role xxx_Hazard_hazardClassificationRationale_src
+	HazardClassificationRationale[0..1] role hazardClassificationRationale
+end
+
+association xxx_HazardClassificationRationale_riskAssessment between
+	HazardClassificationRationale[*] role xxx_HazardClassificationRationale_riskAssessment_src
+	RiskAssessment[0..1] role riskAssessment
+end
+

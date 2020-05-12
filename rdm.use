@@ -1,0 +1,559 @@
+model PrimitiveTypes
+class DifferentFrom<PredicateSymbol
+attributes
+operations
+end
+
+class SameAs<PredicateSymbol
+attributes
+operations
+end
+
+class IndividualVariable<Variable
+attributes
+operations
+end
+
+class DataVariable<Variable
+attributes
+operations
+end
+
+class Constant<Term
+attributes
+operations
+end
+
+class Variable<Term
+attributes
+	name : String
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+class BuiltIn<PredicateSymbol
+attributes
+	buildInID : String
+operations
+end
+
+class PredicateSymbol
+attributes
+operations
+end
+
+class Atom
+attributes
+	name : String
+operations
+end
+
+class Consequent
+attributes
+operations
+end
+
+class Antecedent
+attributes
+operations
+end
+
+class Rule<OntologyElement
+attributes
+operations
+end
+
+class MinCardinalityRestriction<Restriction
+attributes
+operations
+end
+
+class MaxCardinalityRestriction<Restriction
+attributes
+operations
+end
+
+class CardinalityRestriction<Restriction
+attributes
+operations
+end
+
+class TransitiveProperty<ObjectProperty
+attributes
+operations
+end
+
+class SymmetricProperty<ObjectProperty
+attributes
+operations
+end
+
+class InverseFunctionalProperty<ObjectProperty
+attributes
+operations
+end
+
+class FunctionalProperty<Property
+attributes
+operations
+end
+
+class PlainLiteral<Literal
+attributes
+	language : String
+operations
+end
+
+class TypedLiteral<Literal
+attributes
+	theType : String
+operations
+end
+
+abstract class Literal<Datatype
+attributes
+	lexicalForm : String
+operations
+end
+
+abstract class Datatype<OntologyElement
+attributes
+operations
+end
+
+class DataRange<Class
+attributes
+operations
+end
+
+class AllValuesFromRestriction<Restriction
+attributes
+operations
+end
+
+class SomeValuesFromRestriction<Restriction
+attributes
+operations
+end
+
+class OntologyPropertyValue<OntologyProperty
+attributes
+operations
+end
+
+class URI<Annotation
+attributes
+operations
+end
+
+abstract class Annotation
+attributes
+operations
+end
+
+class AnnotationPropertyValue
+attributes
+operations
+end
+
+class EnumeratedDatatype<Datatype
+attributes
+operations
+end
+
+class PrimitiveType<Datatype
+attributes
+operations
+end
+
+class HasValueRestriction<Restriction
+attributes
+operations
+end
+
+abstract class Restriction<Class
+attributes
+operations
+end
+
+class AllDiferent<Class
+attributes
+operations
+end
+
+class DataValue<Constant,Annotation
+attributes
+	value : String
+operations
+end
+
+class DatatypePropertyValue<PropertyValue
+attributes
+operations
+end
+
+class ObjectPropertyValue<PropertyValue
+attributes
+operations
+end
+
+abstract class PropertyValue
+attributes
+operations
+end
+
+class UnionClass<Class
+attributes
+operations
+end
+
+class IntersectionClass<Class
+attributes
+operations
+end
+
+class ComplementClass<Class
+attributes
+operations
+end
+
+class EnumeratedClass<Class
+attributes
+operations
+end
+
+class Namespace
+attributes
+	name : String
+	uri : String
+operations
+end
+
+class DatatypeProperty<Property
+attributes
+operations
+end
+
+class ObjectProperty<Property
+attributes
+	transitive : Boolean
+	symmetric : Boolean
+	inverseFunctional : Boolean
+	complex : Boolean
+operations
+end
+
+class Individual<Constant,Annotation,Class
+attributes
+operations
+end
+
+class Class<PredicateSymbol,OntologyElement
+attributes
+operations
+end
+
+abstract class Property<PredicateSymbol,OntologyElement
+attributes
+	deprecated : Boolean
+	functional : Boolean
+operations
+end
+
+class AnnotationProperty<OntologyElement
+attributes
+operations
+end
+
+abstract class OntologyProperty<OntologyElement
+attributes
+operations
+end
+
+class OntologyElement<NamedElement,AnnotatableElement
+attributes
+operations
+end
+
+class Ontology<AnnotatableElement
+attributes
+operations
+end
+
+abstract class AnnotatableElement
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	uri : String
+	name : String
+	qualifiedName : String
+operations
+end
+
+association xxx_IndividualVariable_classRef between
+	IndividualVariable[*] role xxx_IndividualVariable_classRef_src
+	Class[0..1] role classRef
+end
+
+association xxx_Variable_type between
+	Variable[*] role xxx_Variable_type_src
+	Datatype[0..1] role type
+end
+
+association xxx_Atom_hasPredicateSymbol between
+	Atom[*] role xxx_Atom_hasPredicateSymbol_src
+	PredicateSymbol[1] role hasPredicateSymbol
+end
+
+association xxx_Atom_terms between
+	Atom[0..1] role xxx_Atom_terms_src
+	Term[*] role terms
+end
+
+association xxx_Consequent_containsAtom between
+	Consequent[0..1] role xxx_Consequent_containsAtom_src
+	Atom[*] role containsAtom
+end
+
+association xxx_Antecedent_containsAtom between
+	Antecedent[0..1] role xxx_Antecedent_containsAtom_src
+	Atom[*] role containsAtom
+end
+
+association xxx_Rule_hasAntecedent between
+	Rule[*] role xxx_Rule_hasAntecedent_src
+	Antecedent[1] role hasAntecedent
+end
+
+association xxx_Rule_hasConsequent between
+	Rule[*] role xxx_Rule_hasConsequent_src
+	Consequent[1] role hasConsequent
+end
+
+association xxx_MinCardinalityRestriction_minCardinality between
+	MinCardinalityRestriction[*] role xxx_MinCardinalityRestriction_minCardinality_src
+	TypedLiteral[1] role minCardinality
+end
+
+association xxx_MaxCardinalityRestriction_maxCardinality between
+	MaxCardinalityRestriction[*] role xxx_MaxCardinalityRestriction_maxCardinality_src
+	TypedLiteral[1] role maxCardinality
+end
+
+association xxx_CardinalityRestriction_cardinality between
+	CardinalityRestriction[*] role xxx_CardinalityRestriction_cardinality_src
+	TypedLiteral[1] role cardinality
+end
+
+association xxx_DataRange_datatype between
+	DataRange[*] role xxx_DataRange_datatype_src
+	Datatype[0..1] role datatype
+end
+
+association xxx_DataRange_oneOf between
+	DataRange[0..1] role xxx_DataRange_oneOf_src
+	Literal[*] role oneOf
+end
+
+association xxx_AllValuesFromRestriction_allValuesFromRange between
+	AllValuesFromRestriction[*] role xxx_AllValuesFromRestriction_allValuesFromRange_src
+	DataRange[0..1] role allValuesFromRange
+end
+
+association xxx_AllValuesFromRestriction_allValuesFromClass between
+	AllValuesFromRestriction[*] role xxx_AllValuesFromRestriction_allValuesFromClass_src
+	Class[0..1] role allValuesFromClass
+end
+
+association xxx_SomeValuesFromRestriction_someValuesFromClass between
+	SomeValuesFromRestriction[*] role xxx_SomeValuesFromRestriction_someValuesFromClass_src
+	Class[0..1] role someValuesFromClass
+end
+
+association xxx_SomeValuesFromRestriction_someValuesFromRange between
+	SomeValuesFromRestriction[*] role xxx_SomeValuesFromRestriction_someValuesFromRange_src
+	DataRange[0..1] role someValuesFromRange
+end
+
+association xxx_AnnotationPropertyValue_object between
+	AnnotationPropertyValue[*] role xxx_AnnotationPropertyValue_object_src
+	Annotation[1] role object
+end
+
+association xxx_AnnotationPropertyValue_subject between
+	AnnotationPropertyValue[*] role xxx_AnnotationPropertyValue_subject_src
+	AnnotatableElement[1] role subject
+end
+
+association xxx_AnnotationPropertyValue_type between
+	AnnotationPropertyValue[*] role xxx_AnnotationPropertyValue_type_src
+	AnnotationProperty[1] role type
+end
+
+association xxx_EnumeratedDatatype_collectionOf between
+	EnumeratedDatatype[0..1] role xxx_EnumeratedDatatype_collectionOf_src
+	DataValue[*] role collectionOf
+end
+
+association xxx_HasValueRestriction_hasLiteralValue between
+	HasValueRestriction[*] role xxx_HasValueRestriction_hasLiteralValue_src
+	Literal[0..1] role hasLiteralValue
+end
+
+association xxx_HasValueRestriction_hasValue between
+	HasValueRestriction[*] role xxx_HasValueRestriction_hasValue_src
+	Individual[0..1] role hasValue
+end
+
+association xxx_Restriction_onProperty between
+	Restriction[0..1] role xxx_Restriction_onProperty_src
+	Property[*] role onProperty
+end
+
+association xxx_Restriction_toDatatype between
+	Restriction[*] role xxx_Restriction_toDatatype_src
+	Datatype[0..1] role toDatatype
+end
+
+association xxx_AllDiferent_distinctMembers between
+	AllDiferent[0..1] role xxx_AllDiferent_distinctMembers_src
+	Individual[*] role distinctMembers
+end
+
+association xxx_DataValue_type between
+	DataValue[*] role xxx_DataValue_type_src
+	Datatype[1] role type
+end
+
+association xxx_DatatypePropertyValue_object between
+	DatatypePropertyValue[*] role xxx_DatatypePropertyValue_object_src
+	DataValue[1] role object
+end
+
+association xxx_ObjectPropertyValue_object between
+	ObjectPropertyValue[*] role xxx_ObjectPropertyValue_object_src
+	Individual[1] role object
+end
+
+association xxx_PropertyValue_subject between
+	PropertyValue[*] role xxx_PropertyValue_subject_src
+	Individual[1] role subject
+end
+
+association xxx_UnionClass_unionOf between
+	UnionClass[0..1] role xxx_UnionClass_unionOf_src
+	Class[*] role unionOf
+end
+
+association xxx_IntersectionClass_intersectionOf between
+	IntersectionClass[0..1] role xxx_IntersectionClass_intersectionOf_src
+	Class[*] role intersectionOf
+end
+
+association xxx_ComplementClass_complementOf between
+	ComplementClass[*] role xxx_ComplementClass_complementOf_src
+	Class[1] role complementOf
+end
+
+association xxx_EnumeratedClass_oneOf between
+	EnumeratedClass[0..1] role xxx_EnumeratedClass_oneOf_src
+	Individual[*] role oneOf
+end
+
+composition xxx_Namespace_members between
+	Namespace[0..1] role xxx_Namespace_members_src
+	NamedElement[*] role members
+end
+
+association xxx_DatatypeProperty_range between
+	DatatypeProperty[0..1] role xxx_DatatypeProperty_range_src
+	DataRange[*] role range
+end
+
+association xxx_ObjectProperty_range between
+	ObjectProperty[0..1] role xxx_ObjectProperty_range_src
+	Class[*] role range
+end
+
+association xxx_ObjectProperty_inverseOf between
+	ObjectProperty[0..1] role xxx_ObjectProperty_inverseOf_src
+	ObjectProperty[*] role inverseOf
+end
+
+association xxx_Individual_sameAs between
+	Individual[0..1] role xxx_Individual_sameAs_src
+	Individual[*] role sameAs
+end
+
+association xxx_Individual_differentFrom between
+	Individual[0..1] role xxx_Individual_differentFrom_src
+	Individual[*] role differentFrom
+end
+
+association xxx_Individual_type between
+	Individual[*] role xxx_Individual_type_src
+	Class[1] role type
+end
+
+association xxx_Class_disjointWith between
+	Class[0..1] role xxx_Class_disjointWith_src
+	Class[*] role disjointWith
+end
+
+association xxx_Class_subClassOf between
+	Class[0..1] role xxx_Class_subClassOf_src
+	Class[*] role subClassOf
+end
+
+association xxx_Class_equivalentClass between
+	Class[0..1] role xxx_Class_equivalentClass_src
+	Class[*] role equivalentClass
+end
+
+association xxx_Property_domain between
+	Property[0..1] role xxx_Property_domain_src
+	Class[*] role domain
+end
+
+association xxx_Property_equivalentProperty between
+	Property[0..1] role xxx_Property_equivalentProperty_src
+	Property[*] role equivalentProperty
+end
+
+association xxx_Property_subPropertyOf between
+	Property[0..1] role xxx_Property_subPropertyOf_src
+	Property[*] role subPropertyOf
+end
+
+association xxx_Ontology_imports between
+	Ontology[0..1] role xxx_Ontology_imports_src
+	Ontology[*] role imports
+end
+
+association xxx_Ontology_priorVersion between
+	Ontology[*] role xxx_Ontology_priorVersion_src
+	Ontology[0..1] role priorVersion
+end
+
+composition xxx_Ontology_elements between
+	Ontology[0..1] role xxx_Ontology_elements_src
+	NamedElement[*] role elements
+end
+
+association xxx_Ontology_incompatibleWith between
+	Ontology[0..1] role xxx_Ontology_incompatibleWith_src
+	Ontology[*] role incompatibleWith
+end
+
+association xxx_Ontology_reference between
+	Ontology[0..1] role xxx_Ontology_reference_src
+	OntologyPropertyValue[*] role reference
+end
+

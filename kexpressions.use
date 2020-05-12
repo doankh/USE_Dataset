@@ -1,0 +1,206 @@
+model kexpressions
+enum CombineOperator{
+default
+}
+
+enum OperatorType{
+default
+}
+
+enum ValueType{
+default
+}
+
+class ComplexExpression<Expression
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class TextualCode
+attributes
+	code : String
+	type : String
+operations
+end
+
+class Signal<ValuedObject
+attributes
+	isInput : Boolean
+	isOutput : Boolean
+	combineOperator : CombineOperator
+	hostCombineOperator : String
+operations
+end
+
+class ValuedObject
+attributes
+	name : String
+	type : ValueType
+	initialValue : String
+	hostType : String
+operations
+end
+
+class Variable<ValuedObject
+attributes
+	const : Boolean
+operations
+end
+
+class ValuedObjectReference<ComplexExpression
+attributes
+operations
+end
+
+class Value<Expression
+attributes
+operations
+end
+
+class IntValue<Value
+attributes
+	value : Integer
+operations
+end
+
+class FloatValue<Value
+attributes
+	value : String
+operations
+end
+
+class BooleanValue<Value
+attributes
+	value : String
+operations
+end
+
+class OperatorExpression<ComplexExpression
+attributes
+	operator : OperatorType
+operations
+end
+
+class TextExpression<ComplexExpression,TextualCode
+attributes
+operations
+end
+
+class InterfaceDeclaration
+attributes
+operations
+end
+
+class InterfaceSignalDecl<InterfaceDeclaration
+attributes
+operations
+end
+
+class ISignal<Signal
+attributes
+operations
+end
+
+class ChannelDescription
+attributes
+operations
+end
+
+class TypeIdentifier
+attributes
+	type : ValueType
+	typeID : String
+	operator : CombineOperator
+operations
+end
+
+class InterfaceVariableDecl<InterfaceDeclaration
+attributes
+operations
+end
+
+class VariableDecl
+attributes
+operations
+end
+
+class IVariable<Variable
+attributes
+operations
+end
+
+class Input<InterfaceSignalDecl
+attributes
+operations
+end
+
+class Output<InterfaceSignalDecl
+attributes
+operations
+end
+
+class InputOutput<InterfaceSignalDecl
+attributes
+operations
+end
+
+class Return<InterfaceSignalDecl
+attributes
+operations
+end
+
+composition xxx_ComplexExpression_subExpressions between
+	ComplexExpression[0..1] role xxx_ComplexExpression_subExpressions_src
+	Expression[*] role subExpressions
+end
+
+association xxx_ValuedObjectReference_valuedObject between
+	ValuedObjectReference[*] role xxx_ValuedObjectReference_valuedObject_src
+	ValuedObject[1] role valuedObject
+end
+
+composition xxx_InterfaceSignalDecl_signals between
+	InterfaceSignalDecl[0..1] role xxx_InterfaceSignalDecl_signals_src
+	ISignal[*] role signals
+end
+
+composition xxx_ISignal_channelDescr between
+	ISignal[*] role xxx_ISignal_channelDescr_src
+	ChannelDescription[0..1] role channelDescr
+end
+
+composition xxx_ChannelDescription_type between
+	ChannelDescription[*] role xxx_ChannelDescription_type_src
+	TypeIdentifier[0..1] role type
+end
+
+composition xxx_ChannelDescription_expression between
+	ChannelDescription[*] role xxx_ChannelDescription_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_InterfaceVariableDecl_varDecls between
+	InterfaceVariableDecl[0..1] role xxx_InterfaceVariableDecl_varDecls_src
+	VariableDecl[*] role varDecls
+end
+
+composition xxx_VariableDecl_variables between
+	VariableDecl[0..1] role xxx_VariableDecl_variables_src
+	IVariable[*] role variables
+end
+
+composition xxx_VariableDecl_type between
+	VariableDecl[*] role xxx_VariableDecl_type_src
+	TypeIdentifier[0..1] role type
+end
+
+composition xxx_IVariable_expression between
+	IVariable[*] role xxx_IVariable_expression_src
+	Expression[0..1] role expression
+end
+

@@ -1,0 +1,127 @@
+model servicedata
+class ServiceData
+attributes
+	version : String
+operations
+end
+
+class LayoutAlgorithm
+attributes
+	id : String
+	name : String
+	description : String
+	version : String
+	previewImagePath : String
+operations
+end
+
+class LayoutType
+attributes
+	id : String
+	name : String
+	description : String
+operations
+end
+
+class LayoutOption
+attributes
+	id : String
+	type : String
+	name : String
+	description : String
+	appliesTo : String
+	default : String
+	advanced : Boolean
+	implementation : String
+operations
+end
+
+class Category
+attributes
+	id : String
+	name : String
+operations
+end
+
+class KnownOption
+attributes
+	default : String
+operations
+end
+
+class SupportedDiagram
+attributes
+	type : String
+	priority : Integer
+operations
+end
+
+class RemoteEnum
+attributes
+	values : String
+operations
+end
+
+class SupportedFormat
+attributes
+	id : String
+	description : String
+	name : String
+operations
+end
+
+composition xxx_ServiceData_layoutAlgorithms between
+	ServiceData[0..1] role xxx_ServiceData_layoutAlgorithms_src
+	LayoutAlgorithm[*] role layoutAlgorithms
+end
+
+composition xxx_ServiceData_layoutTypes between
+	ServiceData[0..1] role xxx_ServiceData_layoutTypes_src
+	LayoutType[*] role layoutTypes
+end
+
+composition xxx_ServiceData_layoutOptions between
+	ServiceData[0..1] role xxx_ServiceData_layoutOptions_src
+	LayoutOption[*] role layoutOptions
+end
+
+composition xxx_ServiceData_categories between
+	ServiceData[0..1] role xxx_ServiceData_categories_src
+	Category[*] role categories
+end
+
+composition xxx_ServiceData_supportedFormats between
+	ServiceData[0..1] role xxx_ServiceData_supportedFormats_src
+	SupportedFormat[*] role supportedFormats
+end
+
+composition xxx_LayoutAlgorithm_knownOptions between
+	LayoutAlgorithm[0..1] role xxx_LayoutAlgorithm_knownOptions_src
+	KnownOption[*] role knownOptions
+end
+
+composition xxx_LayoutAlgorithm_supportedDiagrams between
+	LayoutAlgorithm[0..1] role xxx_LayoutAlgorithm_supportedDiagrams_src
+	SupportedDiagram[*] role supportedDiagrams
+end
+
+association xxx_LayoutAlgorithm_category between
+	LayoutAlgorithm[*] role xxx_LayoutAlgorithm_category_src
+	Category[0..1] role category
+end
+
+association xxx_LayoutAlgorithm_type between
+	LayoutAlgorithm[*] role xxx_LayoutAlgorithm_type_src
+	LayoutType[0..1] role type
+end
+
+composition xxx_LayoutOption_remoteEnum between
+	LayoutOption[*] role xxx_LayoutOption_remoteEnum_src
+	RemoteEnum[0..1] role remoteEnum
+end
+
+association xxx_KnownOption_option between
+	KnownOption[*] role xxx_KnownOption_option_src
+	LayoutOption[1] role option
+end
+

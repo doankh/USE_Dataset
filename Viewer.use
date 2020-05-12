@@ -1,0 +1,101 @@
+model viewer
+class Sig
+attributes
+	parentID : Integer
+	label : String
+	builtin : String
+	ID : Integer
+	abstract_ : String
+operations
+end
+
+class Field
+attributes
+	ID : Integer
+	parentID : Integer
+	label : String
+operations
+end
+
+class Instance
+attributes
+	bitwidth : Integer
+	maxseq : Integer
+	command : String
+	filename : String
+operations
+end
+
+class Atom
+attributes
+	label : String
+operations
+end
+
+class AlloyTuple
+attributes
+operations
+end
+
+class alloy
+attributes
+	builddate : String
+operations
+end
+
+class Types
+attributes
+operations
+end
+
+class Type
+attributes
+	ID : Integer
+operations
+end
+
+composition xxx_Sig_atom between
+	Sig[0..1] role xxx_Sig_atom_src
+	Atom[*] role atom
+end
+
+composition xxx_Sig_type between
+	Sig[0..1] role xxx_Sig_type_src
+	Type[*] role type
+end
+
+composition xxx_Field_tuple between
+	Field[0..1] role xxx_Field_tuple_src
+	AlloyTuple[*] role tuple
+end
+
+composition xxx_Field_types between
+	Field[0..1] role xxx_Field_types_src
+	Types[*] role types
+end
+
+composition xxx_Instance_sig between
+	Instance[0..1] role xxx_Instance_sig_src
+	Sig[*] role sig
+end
+
+composition xxx_Instance_field between
+	Instance[0..1] role xxx_Instance_field_src
+	Field[*] role field
+end
+
+composition xxx_AlloyTuple_atom between
+	AlloyTuple[0..1] role xxx_AlloyTuple_atom_src
+	Atom[*] role atom
+end
+
+composition xxx_alloy_instance between
+	alloy[0..1] role xxx_alloy_instance_src
+	Instance[*] role instance
+end
+
+composition xxx_Types_type between
+	Types[0..1] role xxx_Types_type_src
+	Type[*] role type
+end
+

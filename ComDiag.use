@@ -1,0 +1,50 @@
+model ComDiag
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ComDiag<NamedElement
+attributes
+	level : String
+operations
+end
+
+class ComDiagElement<NamedElement
+attributes
+operations
+end
+
+class Lifeline<ComDiagElement
+attributes
+	number : Integer
+operations
+end
+
+class Message<ComDiagElement
+attributes
+	occurence : Integer
+operations
+end
+
+composition xxx_ComDiag_elements between
+	ComDiag[0..1] role xxx_ComDiag_elements_src
+	ComDiagElement[*] role elements
+end
+
+association xxx_ComDiagElement_graph between
+	ComDiagElement[*] role xxx_ComDiagElement_graph_src
+	ComDiag[0..1] role graph
+end
+
+association xxx_Message_source between
+	Message[*] role xxx_Message_source_src
+	Lifeline[0..1] role source
+end
+
+association xxx_Message_target between
+	Message[*] role xxx_Message_target_src
+	Lifeline[0..1] role target
+end
+

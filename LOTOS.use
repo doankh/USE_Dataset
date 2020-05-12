@@ -1,0 +1,484 @@
+model LOTOS
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Specification<NamedElement
+attributes
+	gates : String
+	isExit : Boolean
+operations
+end
+
+class Definition<LocatedElement
+attributes
+operations
+end
+
+abstract class TypeOrProcessDeclaration<NamedElement
+attributes
+operations
+end
+
+class Process<TypeOrProcessDeclaration
+attributes
+	gates : String
+	isExit : Boolean
+operations
+end
+
+abstract class Behaviour<LocatedElement
+attributes
+operations
+end
+
+class Let<Behaviour
+attributes
+operations
+end
+
+class Choice<Behaviour
+attributes
+operations
+end
+
+class Hide<Behaviour
+attributes
+	gates : String
+operations
+end
+
+class ProcessCall<Behaviour,NamedElement
+attributes
+	gates : String
+operations
+end
+
+abstract class Parallel<Behaviour
+attributes
+operations
+end
+
+class SimpleParallel<Parallel
+attributes
+operations
+end
+
+class GatedParallel<Parallel
+attributes
+	gates : String
+operations
+end
+
+class GuardedBehaviour<Behaviour
+attributes
+operations
+end
+
+class ActionBehaviour<Behaviour
+attributes
+operations
+end
+
+class Alternative<Behaviour
+attributes
+operations
+end
+
+abstract class Action<LocatedElement
+attributes
+operations
+end
+
+class GateAction<Action
+attributes
+	gate : String
+operations
+end
+
+abstract class Communication<LocatedElement
+attributes
+operations
+end
+
+class InComm<Communication
+attributes
+operations
+end
+
+class OutComm<Communication
+attributes
+operations
+end
+
+abstract class GuardExpression<LocatedElement
+attributes
+operations
+end
+
+class EqualityTestGuardExp<GuardExpression
+attributes
+operations
+end
+
+class BooleanGuardExp<GuardExpression
+attributes
+operations
+end
+
+abstract class Value<LocatedElement
+attributes
+operations
+end
+
+class Variable<Value
+attributes
+operations
+end
+
+class OperationCall<Value
+attributes
+	operationName : String
+operations
+end
+
+class OperatorCall<Value
+attributes
+	operatorName : String
+operations
+end
+
+class IntegerVal<Value
+attributes
+	value : Integer
+operations
+end
+
+class BooleanVal<Value
+attributes
+	value : Boolean
+operations
+end
+
+class CastVal<Value
+attributes
+	toType : String
+operations
+end
+
+abstract class Declaration<NamedElement
+attributes
+operations
+end
+
+class VariableDeclaration<Declaration
+attributes
+operations
+end
+
+class VariableDeclarations<LocatedElement
+attributes
+	type : String
+operations
+end
+
+class Parameter<VariableDeclaration
+attributes
+operations
+end
+
+abstract class Type<TypeOrProcessDeclaration
+attributes
+operations
+end
+
+class LibraryList<Type
+attributes
+	names : String
+operations
+end
+
+class TypeDefinition<Type,NamedElement
+attributes
+	types : String
+	sorts : String
+operations
+end
+
+class Operations<LocatedElement
+attributes
+	parameterTypes : String
+	returnType : String
+operations
+end
+
+class OperationDeclaration<Declaration
+attributes
+operations
+end
+
+class Equations<NamedElement
+attributes
+operations
+end
+
+class OfSort<NamedElement
+attributes
+operations
+end
+
+abstract class Equation<LocatedElement
+attributes
+operations
+end
+
+class SimpleEquation<Equation
+attributes
+operations
+end
+
+class GuardedEquation<Equation
+attributes
+operations
+end
+
+composition xxx_Specification_parameters between
+	Specification[0..1] role xxx_Specification_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Specification_types between
+	Specification[0..1] role xxx_Specification_types_src
+	Type[*] role types
+end
+
+composition xxx_Specification_definition between
+	Specification[*] role xxx_Specification_definition_src
+	Definition[0..1] role definition
+end
+
+composition xxx_Definition_behaviour between
+	Definition[*] role xxx_Definition_behaviour_src
+	Behaviour[1] role behaviour
+end
+
+composition xxx_Definition_declarations between
+	Definition[0..1] role xxx_Definition_declarations_src
+	TypeOrProcessDeclaration[*] role declarations
+end
+
+composition xxx_Process_variables between
+	Process[0..1] role xxx_Process_variables_src
+	VariableDeclarations[*] role variables
+end
+
+composition xxx_Process_parameters between
+	Process[0..1] role xxx_Process_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Process_definition between
+	Process[*] role xxx_Process_definition_src
+	Definition[1] role definition
+end
+
+composition xxx_Let_variables between
+	Let[*] role xxx_Let_variables_src
+	VariableDeclarations[1] role variables
+end
+
+composition xxx_Let_value between
+	Let[*] role xxx_Let_value_src
+	Value[1] role value
+end
+
+composition xxx_Let_behaviour between
+	Let[*] role xxx_Let_behaviour_src
+	Behaviour[1] role behaviour
+end
+
+composition xxx_Choice_variables between
+	Choice[*] role xxx_Choice_variables_src
+	VariableDeclarations[1] role variables
+end
+
+composition xxx_Choice_behaviour between
+	Choice[*] role xxx_Choice_behaviour_src
+	Behaviour[1] role behaviour
+end
+
+composition xxx_Hide_behaviour between
+	Hide[*] role xxx_Hide_behaviour_src
+	Behaviour[1] role behaviour
+end
+
+composition xxx_ProcessCall_arguments between
+	ProcessCall[0..1] role xxx_ProcessCall_arguments_src
+	Value[*] role arguments
+end
+
+composition xxx_Parallel_left between
+	Parallel[*] role xxx_Parallel_left_src
+	Behaviour[1] role left
+end
+
+composition xxx_Parallel_right between
+	Parallel[*] role xxx_Parallel_right_src
+	Behaviour[1] role right
+end
+
+composition xxx_GuardedBehaviour_guard between
+	GuardedBehaviour[*] role xxx_GuardedBehaviour_guard_src
+	GuardExpression[1] role guard
+end
+
+composition xxx_GuardedBehaviour_behaviour between
+	GuardedBehaviour[*] role xxx_GuardedBehaviour_behaviour_src
+	Behaviour[1] role behaviour
+end
+
+composition xxx_ActionBehaviour_action between
+	ActionBehaviour[*] role xxx_ActionBehaviour_action_src
+	Action[1] role action
+end
+
+composition xxx_ActionBehaviour_behaviour between
+	ActionBehaviour[*] role xxx_ActionBehaviour_behaviour_src
+	Behaviour[1] role behaviour
+end
+
+composition xxx_Alternative_left between
+	Alternative[*] role xxx_Alternative_left_src
+	Behaviour[1] role left
+end
+
+composition xxx_Alternative_right between
+	Alternative[*] role xxx_Alternative_right_src
+	Behaviour[1] role right
+end
+
+composition xxx_GateAction_communications between
+	GateAction[0..1] role xxx_GateAction_communications_src
+	Communication[*] role communications
+end
+
+composition xxx_GateAction_guard between
+	GateAction[*] role xxx_GateAction_guard_src
+	GuardExpression[0..1] role guard
+end
+
+composition xxx_InComm_declarations between
+	InComm[*] role xxx_InComm_declarations_src
+	VariableDeclarations[1] role declarations
+end
+
+composition xxx_OutComm_value between
+	OutComm[*] role xxx_OutComm_value_src
+	Value[1] role value
+end
+
+composition xxx_EqualityTestGuardExp_left between
+	EqualityTestGuardExp[*] role xxx_EqualityTestGuardExp_left_src
+	Value[1] role left
+end
+
+composition xxx_EqualityTestGuardExp_right between
+	EqualityTestGuardExp[*] role xxx_EqualityTestGuardExp_right_src
+	Value[1] role right
+end
+
+composition xxx_BooleanGuardExp_value between
+	BooleanGuardExp[*] role xxx_BooleanGuardExp_value_src
+	Value[1] role value
+end
+
+association xxx_Variable_declaration between
+	Variable[*] role xxx_Variable_declaration_src
+	Declaration[1] role declaration
+end
+
+composition xxx_OperationCall_arguments between
+	OperationCall[0..1] role xxx_OperationCall_arguments_src
+	Value[*] role arguments
+end
+
+composition xxx_OperatorCall_left between
+	OperatorCall[*] role xxx_OperatorCall_left_src
+	Value[1] role left
+end
+
+composition xxx_OperatorCall_right between
+	OperatorCall[*] role xxx_OperatorCall_right_src
+	Value[1] role right
+end
+
+composition xxx_CastVal_value between
+	CastVal[*] role xxx_CastVal_value_src
+	IntegerVal[1] role value
+end
+
+composition xxx_VariableDeclarations_declarations between
+	VariableDeclarations[0..1] role xxx_VariableDeclarations_declarations_src
+	VariableDeclaration[*] role declarations
+end
+
+composition xxx_TypeDefinition_operations_ between
+	TypeDefinition[0..1] role xxx_TypeDefinition_operations__src
+	Operations[*] role operations_
+end
+
+composition xxx_TypeDefinition_equations between
+	TypeDefinition[0..1] role xxx_TypeDefinition_equations_src
+	Equations[*] role equations
+end
+
+composition xxx_Operations_declarations between
+	Operations[0..1] role xxx_Operations_declarations_src
+	OperationDeclaration[1..*] role declarations
+end
+
+composition xxx_Equations_declarations between
+	Equations[0..1] role xxx_Equations_declarations_src
+	VariableDeclarations[1..*] role declarations
+end
+
+composition xxx_Equations_ofSorts between
+	Equations[0..1] role xxx_Equations_ofSorts_src
+	OfSort[*] role ofSorts
+end
+
+composition xxx_OfSort_equations between
+	OfSort[0..1] role xxx_OfSort_equations_src
+	Equation[*] role equations
+end
+
+composition xxx_SimpleEquation_left between
+	SimpleEquation[*] role xxx_SimpleEquation_left_src
+	Value[1] role left
+end
+
+composition xxx_SimpleEquation_right between
+	SimpleEquation[*] role xxx_SimpleEquation_right_src
+	Value[1] role right
+end
+
+composition xxx_GuardedEquation_guard between
+	GuardedEquation[*] role xxx_GuardedEquation_guard_src
+	GuardExpression[1] role guard
+end
+
+composition xxx_GuardedEquation_equation between
+	GuardedEquation[*] role xxx_GuardedEquation_equation_src
+	SimpleEquation[1] role equation
+end
+

@@ -1,0 +1,78 @@
+model wSTest
+class Model
+attributes
+	address : String
+	port : Integer
+	totalThreadsNum : Integer
+operations
+end
+
+class ClientModel
+attributes
+	version : Integer
+	percentage : Integer
+	path : String
+	post_ : Boolean
+	put : Boolean
+	delete_ : Boolean
+	get : Boolean
+	json : Boolean
+	xml : Boolean
+operations
+end
+
+class DataModel
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+	recordNum : Integer
+operations
+end
+
+class Field_Def
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	integer : Boolean
+	double : Boolean
+	float : Boolean
+	varchar : Boolean
+	length : Integer
+	date : Boolean
+	timestamp : Boolean
+operations
+end
+
+composition xxx_Model_clientmodel between
+	Model[0..1] role xxx_Model_clientmodel_src
+	ClientModel[*] role clientmodel
+end
+
+composition xxx_ClientModel_datamodel between
+	ClientModel[*] role xxx_ClientModel_datamodel_src
+	DataModel[0..1] role datamodel
+end
+
+composition xxx_DataModel_entities between
+	DataModel[0..1] role xxx_DataModel_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_Entity_fields between
+	Entity[0..1] role xxx_Entity_fields_src
+	Field_Def[*] role fields
+end
+
+composition xxx_Field_Def_type between
+	Field_Def[*] role xxx_Field_Def_type_src
+	Type[0..1] role type
+end
+

@@ -1,0 +1,113 @@
+model PetriNet
+class PetriNet<IdentifiableElement
+attributes
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class PrimitiveAttribute
+attributes
+	name : String
+	primType : String
+operations
+end
+
+class Token
+attributes
+	values : String
+operations
+end
+
+class Place<IdentifiableElement
+attributes
+operations
+end
+
+class Transition<IdentifiableElement
+attributes
+operations
+end
+
+abstract class Arc
+attributes
+	weight : Integer
+operations
+end
+
+class PlaceToTransArc<Arc
+attributes
+operations
+end
+
+class TransToPlaceArc<Arc
+attributes
+operations
+end
+
+abstract class IdentifiableElement
+attributes
+	name : String
+	author : String
+operations
+end
+
+composition xxx_PetriNet_places between
+	PetriNet[0..1] role xxx_PetriNet_places_src
+	Place[*] role places
+end
+
+composition xxx_PetriNet_transitions_ between
+	PetriNet[0..1] role xxx_PetriNet_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_PetriNet_arcs between
+	PetriNet[0..1] role xxx_PetriNet_arcs_src
+	Arc[*] role arcs
+end
+
+composition xxx_PetriNet_types between
+	PetriNet[0..1] role xxx_PetriNet_types_src
+	Type[*] role types
+end
+
+composition xxx_Type_components between
+	Type[0..1] role xxx_Type_components_src
+	PrimitiveAttribute[*] role components
+end
+
+composition xxx_Place_tokens between
+	Place[0..1] role xxx_Place_tokens_src
+	Token[*] role tokens
+end
+
+association xxx_Place_type between
+	Place[*] role xxx_Place_type_src
+	Type[1] role type
+end
+
+association xxx_PlaceToTransArc_source between
+	PlaceToTransArc[*] role xxx_PlaceToTransArc_source_src
+	Place[1] role source
+end
+
+association xxx_PlaceToTransArc_target between
+	PlaceToTransArc[*] role xxx_PlaceToTransArc_target_src
+	Transition[1] role target
+end
+
+association xxx_TransToPlaceArc_source between
+	TransToPlaceArc[*] role xxx_TransToPlaceArc_source_src
+	Transition[1] role source
+end
+
+association xxx_TransToPlaceArc_target between
+	TransToPlaceArc[*] role xxx_TransToPlaceArc_target_src
+	Place[1] role target
+end
+

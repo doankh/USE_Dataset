@@ -1,0 +1,94 @@
+model DeploymentsProv
+class Artifact<DeployedArtifact
+attributes
+	fileName : String
+operations
+end
+
+class Manifestation
+attributes
+operations
+end
+
+class Node<DeploymentTarget
+attributes
+operations
+end
+
+class Device<Node
+attributes
+operations
+end
+
+class ExecutionEnvironment<Node
+attributes
+operations
+end
+
+class CommunicationPath
+attributes
+operations
+end
+
+abstract class DeploymentTarget
+attributes
+operations
+end
+
+class Deployment
+attributes
+operations
+end
+
+abstract class DeployedArtifact
+attributes
+operations
+end
+
+class DeploymentSpecification<Artifact
+attributes
+	deploymentLocation : String
+	executionLocation : String
+operations
+end
+
+composition xxx_Artifact_nestedArtifact between
+	Artifact[0..1] role xxx_Artifact_nestedArtifact_src
+	Artifact[*] role nestedArtifact
+end
+
+composition xxx_Artifact_manifestation between
+	Artifact[0..1] role xxx_Artifact_manifestation_src
+	Manifestation[*] role manifestation
+end
+
+composition xxx_Node_nestedNode between
+	Node[0..1] role xxx_Node_nestedNode_src
+	Node[*] role nestedNode
+end
+
+composition xxx_DeploymentTarget_deployment between
+	DeploymentTarget[0..1] role xxx_DeploymentTarget_deployment_src
+	Deployment[*] role deployment
+end
+
+association xxx_Deployment_location between
+	Deployment[*] role xxx_Deployment_location_src
+	DeploymentTarget[1] role location
+end
+
+association xxx_Deployment_deployedArtifact between
+	Deployment[0..1] role xxx_Deployment_deployedArtifact_src
+	DeployedArtifact[*] role deployedArtifact
+end
+
+composition xxx_Deployment_configuration between
+	Deployment[0..1] role xxx_Deployment_configuration_src
+	DeploymentSpecification[*] role configuration
+end
+
+association xxx_DeploymentSpecification_deployment between
+	DeploymentSpecification[*] role xxx_DeploymentSpecification_deployment_src
+	Deployment[0..1] role deployment
+end
+

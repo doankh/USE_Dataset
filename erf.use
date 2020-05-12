@@ -1,0 +1,287 @@
+model erf
+abstract class AttributeDefinition<Identifiable
+attributes
+	ident : Boolean
+	unique : Boolean
+operations
+end
+
+abstract class AttributeValue<Identifiable
+attributes
+operations
+end
+
+abstract class DatatypeDefinition<Identifiable
+attributes
+operations
+end
+
+abstract class SpecElementWithUserDefinedAttributes<Identifiable
+attributes
+operations
+end
+
+class SpecObject<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+class SpecType<Identifiable
+attributes
+operations
+end
+
+abstract class Map
+attributes
+operations
+end
+
+class AttributeValueSimple<AttributeValue
+attributes
+	theValue : String
+operations
+end
+
+class DatatypeDefinitionInteger<DatatypeDefinitionSimple
+attributes
+	max : Integer
+	min : Integer
+operations
+end
+
+abstract class DatatypeDefinitionSimple<DatatypeDefinition
+attributes
+operations
+end
+
+class DatatypeDefinitionString<DatatypeDefinitionSimple
+attributes
+	maxLength : Integer
+operations
+end
+
+abstract class Identifiable
+attributes
+	iD : String
+	desc : String
+	longName : String
+operations
+end
+
+class AttributeDefinitionSimple<AttributeDefinition
+attributes
+operations
+end
+
+class ERF
+attributes
+operations
+end
+
+class Content
+attributes
+operations
+end
+
+class SpecRelation<SpecElementWithUserDefinedAttributes
+attributes
+operations
+end
+
+class EmbeddedValue
+attributes
+	key : Integer
+	otherContent : String
+operations
+end
+
+class EnumValue<Identifiable
+attributes
+operations
+end
+
+class DatatypeDefinitionEnumeration<DatatypeDefinition
+attributes
+operations
+end
+
+class AttributeDefinitionEnumeration<AttributeDefinition
+attributes
+	multiValued : Boolean
+operations
+end
+
+class AttributeValueEnumeration<AttributeValue
+attributes
+operations
+end
+
+class DatatypeDefinitionBoolean<DatatypeDefinition
+attributes
+operations
+end
+
+class AttributeDefinitionBoolean<AttributeDefinition
+attributes
+operations
+end
+
+class AttributeValueBoolean<AttributeValue
+attributes
+	theValue : String
+operations
+end
+
+abstract class ToolExtension
+attributes
+operations
+end
+
+class View<Identifiable
+attributes
+operations
+end
+
+class ViewElement
+attributes
+	editorShowLabel : Boolean
+	editorRowNumber : Integer
+	editorColumnSpan : Integer
+operations
+end
+
+class EraToolExtension<ToolExtension
+attributes
+operations
+end
+
+association xxx_AttributeDefinition_type between
+	AttributeDefinition[*] role xxx_AttributeDefinition_type_src
+	DatatypeDefinition[1] role type
+end
+
+association xxx_AttributeDefinition_specType between
+	AttributeDefinition[*] role xxx_AttributeDefinition_specType_src
+	SpecType[1] role specType
+end
+
+association xxx_AttributeValue_definition between
+	AttributeValue[*] role xxx_AttributeValue_definition_src
+	AttributeDefinition[1] role definition
+end
+
+association xxx_DatatypeDefinition_attributeDefinitions between
+	DatatypeDefinition[0..1] role xxx_DatatypeDefinition_attributeDefinitions_src
+	AttributeDefinition[*] role attributeDefinitions
+end
+
+composition xxx_SpecElementWithUserDefinedAttributes_values between
+	SpecElementWithUserDefinedAttributes[0..1] role xxx_SpecElementWithUserDefinedAttributes_values_src
+	AttributeValue[*] role values
+end
+
+association xxx_SpecElementWithUserDefinedAttributes_type between
+	SpecElementWithUserDefinedAttributes[*] role xxx_SpecElementWithUserDefinedAttributes_type_src
+	SpecType[0..1] role type
+end
+
+association xxx_SpecObject_sources between
+	SpecObject[0..1] role xxx_SpecObject_sources_src
+	SpecRelation[*] role sources
+end
+
+association xxx_SpecObject_targets between
+	SpecObject[0..1] role xxx_SpecObject_targets_src
+	SpecRelation[*] role targets
+end
+
+composition xxx_SpecType_specAttributes between
+	SpecType[0..1] role xxx_SpecType_specAttributes_src
+	AttributeDefinition[*] role specAttributes
+end
+
+composition xxx_AttributeDefinitionSimple_defaultValue between
+	AttributeDefinitionSimple[*] role xxx_AttributeDefinitionSimple_defaultValue_src
+	AttributeValueSimple[0..1] role defaultValue
+end
+
+composition xxx_ERF_coreContent between
+	ERF[*] role xxx_ERF_coreContent_src
+	Content[1] role coreContent
+end
+
+composition xxx_ERF_toolExtensions between
+	ERF[0..1] role xxx_ERF_toolExtensions_src
+	ToolExtension[*] role toolExtensions
+end
+
+composition xxx_Content_specObjects between
+	Content[0..1] role xxx_Content_specObjects_src
+	SpecObject[*] role specObjects
+end
+
+composition xxx_Content_specTypes between
+	Content[0..1] role xxx_Content_specTypes_src
+	SpecType[*] role specTypes
+end
+
+composition xxx_Content_dataTypes between
+	Content[0..1] role xxx_Content_dataTypes_src
+	DatatypeDefinition[*] role dataTypes
+end
+
+composition xxx_Content_specRelations between
+	Content[0..1] role xxx_Content_specRelations_src
+	SpecRelation[*] role specRelations
+end
+
+association xxx_SpecRelation_source between
+	SpecRelation[*] role xxx_SpecRelation_source_src
+	SpecObject[1] role source
+end
+
+association xxx_SpecRelation_target between
+	SpecRelation[*] role xxx_SpecRelation_target_src
+	SpecObject[1] role target
+end
+
+composition xxx_EnumValue_properties between
+	EnumValue[*] role xxx_EnumValue_properties_src
+	EmbeddedValue[1] role properties
+end
+
+composition xxx_DatatypeDefinitionEnumeration_specifiedValues between
+	DatatypeDefinitionEnumeration[0..1] role xxx_DatatypeDefinitionEnumeration_specifiedValues_src
+	EnumValue[*] role specifiedValues
+end
+
+composition xxx_AttributeDefinitionEnumeration_defaultValue between
+	AttributeDefinitionEnumeration[*] role xxx_AttributeDefinitionEnumeration_defaultValue_src
+	AttributeValueEnumeration[0..1] role defaultValue
+end
+
+association xxx_AttributeValueEnumeration_values between
+	AttributeValueEnumeration[0..1] role xxx_AttributeValueEnumeration_values_src
+	EnumValue[1..*] role values
+end
+
+composition xxx_AttributeDefinitionBoolean_defaultValue between
+	AttributeDefinitionBoolean[*] role xxx_AttributeDefinitionBoolean_defaultValue_src
+	AttributeValueBoolean[0..1] role defaultValue
+end
+
+composition xxx_View_viewElements between
+	View[0..1] role xxx_View_viewElements_src
+	ViewElement[*] role viewElements
+end
+
+association xxx_ViewElement_attributeDefinition between
+	ViewElement[*] role xxx_ViewElement_attributeDefinition_src
+	AttributeDefinition[1] role attributeDefinition
+end
+
+composition xxx_EraToolExtension_views between
+	EraToolExtension[0..1] role xxx_EraToolExtension_views_src
+	View[*] role views
+end
+

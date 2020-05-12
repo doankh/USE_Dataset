@@ -1,0 +1,157 @@
+model JAVA
+abstract class Modifier
+attributes
+	visibility : String
+	state : String
+	name : String
+operations
+end
+
+class Class<Modifier
+attributes
+operations
+end
+
+class Interface<Modifier
+attributes
+operations
+end
+
+class Method<Modifier
+attributes
+	share : Boolean
+operations
+end
+
+class Field<Modifier
+attributes
+	share : Boolean
+operations
+end
+
+class Value
+attributes
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+operations
+end
+
+class ReferenceType<Type
+attributes
+operations
+end
+
+class PrimitiveType<Type
+attributes
+operations
+end
+
+class Int<PrimitiveType
+attributes
+operations
+end
+
+association xxx_Class_superClass between
+	Class[*] role xxx_Class_superClass_src
+	Class[0..1] role superClass
+end
+
+association xxx_Class_implement between
+	Class[0..1] role xxx_Class_implement_src
+	Interface[*] role implement
+end
+
+composition xxx_Class_methods between
+	Class[0..1] role xxx_Class_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Class_fields between
+	Class[0..1] role xxx_Class_fields_src
+	Field[*] role fields
+end
+
+association xxx_Interface_superInterface between
+	Interface[0..1] role xxx_Interface_superInterface_src
+	Interface[*] role superInterface
+end
+
+association xxx_Interface_implementedBy between
+	Interface[0..1] role xxx_Interface_implementedBy_src
+	Class[*] role implementedBy
+end
+
+composition xxx_Interface_abstractMethods between
+	Interface[0..1] role xxx_Interface_abstractMethods_src
+	Method[*] role abstractMethods
+end
+
+composition xxx_Interface_constants between
+	Interface[0..1] role xxx_Interface_constants_src
+	Field[*] role constants
+end
+
+association xxx_Method_class_ between
+	Method[*] role xxx_Method_class__src
+	Class[1] role class_
+end
+
+association xxx_Method_interface between
+	Method[*] role xxx_Method_interface_src
+	Interface[1] role interface
+end
+
+association xxx_Method_resultOf between
+	Method[*] role xxx_Method_resultOf_src
+	Type[0..1] role resultOf
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Field_class_ between
+	Field[*] role xxx_Field_class__src
+	Class[1] role class_
+end
+
+association xxx_Field_interface between
+	Field[*] role xxx_Field_interface_src
+	Interface[1] role interface
+end
+
+composition xxx_Field_value between
+	Field[*] role xxx_Field_value_src
+	Value[1] role value
+end
+
+association xxx_Field_typeOf between
+	Field[*] role xxx_Field_typeOf_src
+	Type[1] role typeOf
+end
+
+association xxx_Parameter_typeOf between
+	Parameter[*] role xxx_Parameter_typeOf_src
+	Type[0..1] role typeOf
+end
+
+association xxx_Parameter_owner between
+	Parameter[*] role xxx_Parameter_owner_src
+	Method[1] role owner
+end
+
+association xxx_ReferenceType_reference between
+	ReferenceType[*] role xxx_ReferenceType_reference_src
+	Class[1] role reference
+end
+

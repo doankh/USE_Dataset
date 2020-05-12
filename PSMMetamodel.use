@@ -1,0 +1,418 @@
+model RESTfulServicePSM
+enum HTTPVerb{
+default
+}
+
+enum MediaType{
+default
+}
+
+enum LinkType{
+default
+}
+
+class HibernateActivity
+attributes
+	name : String
+	HibernateActivityHTTPVerb : HTTPVerb
+operations
+end
+
+class HibernateAnnotation
+attributes
+	HibernateAnnotationText : String
+operations
+end
+
+class HibernateController
+attributes
+	name : String
+operations
+end
+
+class HTTPActivity
+attributes
+	ActivityHTTPVerb : HTTPVerb
+	name : String
+	HTTPActivityURI : String
+operations
+end
+
+class HTTPActivityFunctionParameter<FunctionParameter
+attributes
+operations
+end
+
+class HTTPActivityHandler
+attributes
+	name : String
+	HandlerHTTPVerb : HTTPVerb
+operations
+end
+
+class JavaAlgoResourceController
+attributes
+	name : String
+	controllerURI : String
+	parentName : String
+operations
+end
+
+class JavaAlgoResourceModel
+attributes
+	name : String
+	parentName : String
+operations
+end
+
+class JavaFunction
+attributes
+	name : String
+operations
+end
+
+class JavaGetterFunction<JavaFunction
+attributes
+operations
+end
+
+class JavaHypermediaFunction
+attributes
+operations
+end
+
+class JavaResourceController
+attributes
+	name : String
+	controllerURI : String
+	parentName : String
+operations
+end
+
+class JavaResourceControllerManager
+attributes
+	name : String
+	controllerURI : String
+	parentName : String
+operations
+end
+
+class JavaResourceModel
+attributes
+	name : String
+	parentName : String
+operations
+end
+
+class JavaResourceModelManager
+attributes
+	name : String
+	parentName : String
+operations
+end
+
+class PSMComponentProperty
+attributes
+	name : String
+	type : String
+	bIsUnique : Boolean
+	bIsNamingProperty : Boolean
+	bIsPrimaryIdentifier : Boolean
+operations
+end
+
+class JavaSetterFunction<JavaFunction
+attributes
+operations
+end
+
+class JAXBAnnotation
+attributes
+	JAXBAnnotationText : String
+operations
+end
+
+class JAXRSAnnotation
+attributes
+	JAXRSAnnotationText : String
+operations
+end
+
+class PSMHypermediaLink
+attributes
+	LinkHTTPVerb : HTTPVerb
+	LinkType : LinkType
+operations
+end
+
+class ServicePSM
+attributes
+	name : String
+	serviceOutputPath : String
+	serviceDatabaseIP : String
+	serviceDatabasePort : String
+	serviceDatabaseUsername : String
+	serviceDatabasePassword : String
+	serviceDatabaseType : String
+operations
+end
+
+class FunctionParameter
+attributes
+	name : String
+	type : String
+	bIsUnique : Boolean
+	bIsReturnParameter : Boolean
+operations
+end
+
+composition xxx_HibernateController_hasHibernateActivity between
+	HibernateController[0..1] role xxx_HibernateController_hasHibernateActivity_src
+	HibernateActivity[1..*] role hasHibernateActivity
+end
+
+association xxx_HTTPActivity_isMappedToHibernateActivity between
+	HTTPActivity[*] role xxx_HTTPActivity_isMappedToHibernateActivity_src
+	HibernateActivity[1] role isMappedToHibernateActivity
+end
+
+composition xxx_HTTPActivity_hasHTTPActivityParameter between
+	HTTPActivity[0..1] role xxx_HTTPActivity_hasHTTPActivityParameter_src
+	HTTPActivityFunctionParameter[*] role hasHTTPActivityParameter
+end
+
+composition xxx_HTTPActivity_hasHTTPActivityHandler between
+	HTTPActivity[*] role xxx_HTTPActivity_hasHTTPActivityHandler_src
+	HTTPActivityHandler[1] role hasHTTPActivityHandler
+end
+
+composition xxx_HTTPActivity_HTTPActivityHasJAXRSAnnotation between
+	HTTPActivity[0..1] role xxx_HTTPActivity_HTTPActivityHasJAXRSAnnotation_src
+	JAXRSAnnotation[1..*] role HTTPActivityHasJAXRSAnnotation
+end
+
+composition xxx_HTTPActivityFunctionParameter_HTTPFunctionParameterHasJAXRSAnnotation between
+	HTTPActivityFunctionParameter[*] role xxx_HTTPActivityFunctionParameter_HTTPFunctionParameterHasJAXRSAnnotation_src
+	JAXRSAnnotation[0..1] role HTTPFunctionParameterHasJAXRSAnnotation
+end
+
+composition xxx_HTTPActivityHandler_hasHypermediaFunction between
+	HTTPActivityHandler[*] role xxx_HTTPActivityHandler_hasHypermediaFunction_src
+	JavaHypermediaFunction[1] role hasHypermediaFunction
+end
+
+association xxx_JavaAlgoResourceController_hasAssociatedAlgoModel between
+	JavaAlgoResourceController[*] role xxx_JavaAlgoResourceController_hasAssociatedAlgoModel_src
+	JavaAlgoResourceModel[1] role hasAssociatedAlgoModel
+end
+
+composition xxx_JavaAlgoResourceController_JavaAlgoRControllerHasHTTPActivity between
+	JavaAlgoResourceController[*] role xxx_JavaAlgoResourceController_JavaAlgoRControllerHasHTTPActivity_src
+	HTTPActivity[1] role JavaAlgoRControllerHasHTTPActivity
+end
+
+composition xxx_JavaAlgoResourceController_AlgoControllerHasJAXRSAnnotation between
+	JavaAlgoResourceController[*] role xxx_JavaAlgoResourceController_AlgoControllerHasJAXRSAnnotation_src
+	JAXRSAnnotation[1] role AlgoControllerHasJAXRSAnnotation
+end
+
+composition xxx_JavaAlgoResourceModel_JavaAlgoModelHasJAXBAnnotation between
+	JavaAlgoResourceModel[*] role xxx_JavaAlgoResourceModel_JavaAlgoModelHasJAXBAnnotation_src
+	JAXBAnnotation[1] role JavaAlgoModelHasJAXBAnnotation
+end
+
+composition xxx_JavaAlgoResourceModel_JavaAlgoModelHasProperty between
+	JavaAlgoResourceModel[*] role xxx_JavaAlgoResourceModel_JavaAlgoModelHasProperty_src
+	PSMComponentProperty[1] role JavaAlgoModelHasProperty
+end
+
+composition xxx_JavaAlgoResourceModel_JavaAlgoModelHasSetterFunction between
+	JavaAlgoResourceModel[*] role xxx_JavaAlgoResourceModel_JavaAlgoModelHasSetterFunction_src
+	JavaSetterFunction[1] role JavaAlgoModelHasSetterFunction
+end
+
+composition xxx_JavaAlgoResourceModel_JavaAlgoModelHasGetterFunction between
+	JavaAlgoResourceModel[*] role xxx_JavaAlgoResourceModel_JavaAlgoModelHasGetterFunction_src
+	JavaGetterFunction[1] role JavaAlgoModelHasGetterFunction
+end
+
+association xxx_JavaAlgoResourceModel_hasRelatedAlgoModel between
+	JavaAlgoResourceModel[0..1] role xxx_JavaAlgoResourceModel_hasRelatedAlgoModel_src
+	JavaAlgoResourceModel[*] role hasRelatedAlgoModel
+end
+
+association xxx_JavaAlgoResourceModel_isRelatedAlgoModel between
+	JavaAlgoResourceModel[0..1] role xxx_JavaAlgoResourceModel_isRelatedAlgoModel_src
+	JavaAlgoResourceModel[*] role isRelatedAlgoModel
+end
+
+composition xxx_JavaFunction_hasFunctionParameter between
+	JavaFunction[0..1] role xxx_JavaFunction_hasFunctionParameter_src
+	FunctionParameter[*] role hasFunctionParameter
+end
+
+association xxx_JavaGetterFunction_getsProperty between
+	JavaGetterFunction[*] role xxx_JavaGetterFunction_getsProperty_src
+	PSMComponentProperty[1] role getsProperty
+end
+
+composition xxx_JavaHypermediaFunction_hasPSMHypermediaLink between
+	JavaHypermediaFunction[0..1] role xxx_JavaHypermediaFunction_hasPSMHypermediaLink_src
+	PSMHypermediaLink[1..*] role hasPSMHypermediaLink
+end
+
+composition xxx_JavaResourceController_JavaRControllerHasJAXRSAnnotation between
+	JavaResourceController[*] role xxx_JavaResourceController_JavaRControllerHasJAXRSAnnotation_src
+	JAXRSAnnotation[1] role JavaRControllerHasJAXRSAnnotation
+end
+
+composition xxx_JavaResourceController_JavaRControllerHasHTTPActivity between
+	JavaResourceController[0..1] role xxx_JavaResourceController_JavaRControllerHasHTTPActivity_src
+	HTTPActivity[1..*] role JavaRControllerHasHTTPActivity
+end
+
+association xxx_JavaResourceController_hasAssociatedJavaRModel between
+	JavaResourceController[*] role xxx_JavaResourceController_hasAssociatedJavaRModel_src
+	JavaResourceModel[1] role hasAssociatedJavaRModel
+end
+
+composition xxx_JavaResourceControllerManager_JavaRCManagerHasJAXRSAnnotation between
+	JavaResourceControllerManager[*] role xxx_JavaResourceControllerManager_JavaRCManagerHasJAXRSAnnotation_src
+	JAXRSAnnotation[1] role JavaRCManagerHasJAXRSAnnotation
+end
+
+composition xxx_JavaResourceControllerManager_JavaRCManagerHasHTTPActivity between
+	JavaResourceControllerManager[*] role xxx_JavaResourceControllerManager_JavaRCManagerHasHTTPActivity_src
+	HTTPActivity[2] role JavaRCManagerHasHTTPActivity
+end
+
+association xxx_JavaResourceControllerManager_hasAssociatedRMManager between
+	JavaResourceControllerManager[*] role xxx_JavaResourceControllerManager_hasAssociatedRMManager_src
+	JavaResourceModelManager[1] role hasAssociatedRMManager
+end
+
+composition xxx_JavaResourceModel_JavaRModelHasJAXBAnnotation between
+	JavaResourceModel[*] role xxx_JavaResourceModel_JavaRModelHasJAXBAnnotation_src
+	JAXBAnnotation[1] role JavaRModelHasJAXBAnnotation
+end
+
+composition xxx_JavaResourceModel_JavaRModelHasProperty between
+	JavaResourceModel[0..1] role xxx_JavaResourceModel_JavaRModelHasProperty_src
+	PSMComponentProperty[1..*] role JavaRModelHasProperty
+end
+
+association xxx_JavaResourceModel_hasRelatedJavaRMManager between
+	JavaResourceModel[0..1] role xxx_JavaResourceModel_hasRelatedJavaRMManager_src
+	JavaResourceModelManager[*] role hasRelatedJavaRMManager
+end
+
+composition xxx_JavaResourceModel_JavaRModelHasHibernateAnnotation between
+	JavaResourceModel[*] role xxx_JavaResourceModel_JavaRModelHasHibernateAnnotation_src
+	HibernateAnnotation[2] role JavaRModelHasHibernateAnnotation
+end
+
+composition xxx_JavaResourceModel_JavaRModelHasSetter between
+	JavaResourceModel[0..1] role xxx_JavaResourceModel_JavaRModelHasSetter_src
+	JavaSetterFunction[1..*] role JavaRModelHasSetter
+end
+
+composition xxx_JavaResourceModel_JavaRModelHasGetter between
+	JavaResourceModel[0..1] role xxx_JavaResourceModel_JavaRModelHasGetter_src
+	JavaGetterFunction[1..*] role JavaRModelHasGetter
+end
+
+association xxx_JavaResourceModel_hasRelatedJavaAlgoModel between
+	JavaResourceModel[0..1] role xxx_JavaResourceModel_hasRelatedJavaAlgoModel_src
+	JavaAlgoResourceModel[*] role hasRelatedJavaAlgoModel
+end
+
+composition xxx_JavaResourceModelManager_JavaRMManagerHasJAXBAnnotation between
+	JavaResourceModelManager[*] role xxx_JavaResourceModelManager_JavaRMManagerHasJAXBAnnotation_src
+	JAXBAnnotation[1] role JavaRMManagerHasJAXBAnnotation
+end
+
+composition xxx_JavaResourceModelManager_JavaRMManagerHasProperty between
+	JavaResourceModelManager[*] role xxx_JavaResourceModelManager_JavaRMManagerHasProperty_src
+	PSMComponentProperty[1] role JavaRMManagerHasProperty
+end
+
+association xxx_JavaResourceModelManager_hasRelatedJavaRModel between
+	JavaResourceModelManager[*] role xxx_JavaResourceModelManager_hasRelatedJavaRModel_src
+	JavaResourceModel[1] role hasRelatedJavaRModel
+end
+
+composition xxx_JavaResourceModelManager_JavaRMManagerHasSetter between
+	JavaResourceModelManager[*] role xxx_JavaResourceModelManager_JavaRMManagerHasSetter_src
+	JavaSetterFunction[1] role JavaRMManagerHasSetter
+end
+
+composition xxx_JavaResourceModelManager_JavaRMManagerHasGetter between
+	JavaResourceModelManager[*] role xxx_JavaResourceModelManager_JavaRMManagerHasGetter_src
+	JavaGetterFunction[1] role JavaRMManagerHasGetter
+end
+
+composition xxx_PSMComponentProperty_PropertyHasHibernateAnnotation between
+	PSMComponentProperty[0..1] role xxx_PSMComponentProperty_PropertyHasHibernateAnnotation_src
+	HibernateAnnotation[1..*] role PropertyHasHibernateAnnotation
+end
+
+association xxx_JavaSetterFunction_setsProperty between
+	JavaSetterFunction[*] role xxx_JavaSetterFunction_setsProperty_src
+	PSMComponentProperty[1] role setsProperty
+end
+
+composition xxx_JavaSetterFunction_SetterFunctionHasJAXBAnnotation between
+	JavaSetterFunction[*] role xxx_JavaSetterFunction_SetterFunctionHasJAXBAnnotation_src
+	JAXBAnnotation[0..1] role SetterFunctionHasJAXBAnnotation
+end
+
+association xxx_PSMHypermediaLink_hasTargetJavaAlgoController between
+	PSMHypermediaLink[*] role xxx_PSMHypermediaLink_hasTargetJavaAlgoController_src
+	JavaAlgoResourceController[0..1] role hasTargetJavaAlgoController
+end
+
+association xxx_PSMHypermediaLink_hasTargetJavaRController between
+	PSMHypermediaLink[*] role xxx_PSMHypermediaLink_hasTargetJavaRController_src
+	JavaResourceController[0..1] role hasTargetJavaRController
+end
+
+association xxx_PSMHypermediaLink_hasTargetRCManager between
+	PSMHypermediaLink[*] role xxx_PSMHypermediaLink_hasTargetRCManager_src
+	JavaResourceControllerManager[0..1] role hasTargetRCManager
+end
+
+composition xxx_ServicePSM_hasJavaRModel between
+	ServicePSM[0..1] role xxx_ServicePSM_hasJavaRModel_src
+	JavaResourceModel[*] role hasJavaRModel
+end
+
+composition xxx_ServicePSM_hasJavaRController between
+	ServicePSM[0..1] role xxx_ServicePSM_hasJavaRController_src
+	JavaResourceController[*] role hasJavaRController
+end
+
+composition xxx_ServicePSM_hasJavaRCManager between
+	ServicePSM[0..1] role xxx_ServicePSM_hasJavaRCManager_src
+	JavaResourceControllerManager[*] role hasJavaRCManager
+end
+
+composition xxx_ServicePSM_hasJavaRMManager between
+	ServicePSM[0..1] role xxx_ServicePSM_hasJavaRMManager_src
+	JavaResourceModelManager[*] role hasJavaRMManager
+end
+
+composition xxx_ServicePSM_hasJavaAlgoModel between
+	ServicePSM[0..1] role xxx_ServicePSM_hasJavaAlgoModel_src
+	JavaAlgoResourceModel[*] role hasJavaAlgoModel
+end
+
+composition xxx_ServicePSM_hasJavaAlgoController between
+	ServicePSM[0..1] role xxx_ServicePSM_hasJavaAlgoController_src
+	JavaAlgoResourceController[*] role hasJavaAlgoController
+end
+
+composition xxx_ServicePSM_hasHibernateController between
+	ServicePSM[*] role xxx_ServicePSM_hasHibernateController_src
+	HibernateController[1] role hasHibernateController
+end
+

@@ -1,0 +1,213 @@
+model dpim
+enum ComputeTechType{
+default
+}
+
+enum ProcessingType{
+default
+}
+
+enum StorageSystemType{
+default
+}
+
+enum SourceNodeType{
+default
+}
+
+enum MachineLearningAlgorithm{
+default
+}
+
+enum DataOperation{
+default
+}
+
+class DIA
+attributes
+	modelId : String
+	dscription : String
+operations
+end
+
+abstract class DIAElement
+attributes
+	id : String
+operations
+end
+
+class ComputeNode<DIAElement
+attributes
+	targetTech : ComputeTechType
+	processingType : ProcessingType
+operations
+end
+
+class DataSource<DIAElement
+attributes
+	description : String
+operations
+end
+
+class StorageSystem<DataSource
+attributes
+	user : String
+	password : String
+	type : StorageSystemType
+operations
+end
+
+abstract class QualityRequirement
+attributes
+	requirementId : String
+operations
+end
+
+class Dataset<DIAElement
+attributes
+	description : String
+operations
+end
+
+class SourceNode<DataSource
+attributes
+	emitRate : Real
+	type : SourceNodeType
+operations
+end
+
+class FilterNode<ComputeNode
+attributes
+operations
+end
+
+class VisualizationNode<ComputeNode
+attributes
+operations
+end
+
+class Property
+attributes
+	value : String
+	name : String
+operations
+end
+
+class MachineLearningNode<ComputeNode
+attributes
+	algoithm : MachineLearningAlgorithm
+operations
+end
+
+class User
+attributes
+	roleId : String
+operations
+end
+
+class Role
+attributes
+	roleId : String
+operations
+end
+
+class Permission<DIAElement
+attributes
+	validityStartTime : String
+	validityEndTime : String
+	checkingPeriod : Integer
+operations
+end
+
+class ActionType
+attributes
+	operation : DataOperation
+operations
+end
+
+class SchemaField<DIAElement
+attributes
+operations
+end
+
+class SafetyRequirement<QualityRequirement
+attributes
+operations
+end
+
+class PerformanceRequirement<QualityRequirement
+attributes
+	maxCompletionTime : String
+operations
+end
+
+composition xxx_DIA_elements between
+	DIA[0..1] role xxx_DIA_elements_src
+	DIAElement[1..*] role elements
+end
+
+composition xxx_DIA_requirements between
+	DIA[0..1] role xxx_DIA_requirements_src
+	QualityRequirement[*] role requirements
+end
+
+composition xxx_DIA_properties between
+	DIA[0..1] role xxx_DIA_properties_src
+	Property[*] role properties
+end
+
+composition xxx_DIAElement_properties between
+	DIAElement[0..1] role xxx_DIAElement_properties_src
+	Property[*] role properties
+end
+
+association xxx_ComputeNode_processInputData between
+	ComputeNode[0..1] role xxx_ComputeNode_processInputData_src
+	Dataset[1..*] role processInputData
+end
+
+association xxx_ComputeNode_storeOutput between
+	ComputeNode[0..1] role xxx_ComputeNode_storeOutput_src
+	StorageSystem[*] role storeOutput
+end
+
+association xxx_ComputeNode_produceOutputData between
+	ComputeNode[0..1] role xxx_ComputeNode_produceOutputData_src
+	Dataset[1..*] role produceOutputData
+end
+
+composition xxx_Dataset_fields between
+	Dataset[0..1] role xxx_Dataset_fields_src
+	SchemaField[*] role fields
+end
+
+association xxx_Dataset_providedBy between
+	Dataset[0..1] role xxx_Dataset_providedBy_src
+	DataSource[*] role providedBy
+end
+
+association xxx_User_hasRole between
+	User[0..1] role xxx_User_hasRole_src
+	Role[1..*] role hasRole
+end
+
+association xxx_User_accessComputeNode between
+	User[0..1] role xxx_User_accessComputeNode_src
+	ComputeNode[*] role accessComputeNode
+end
+
+composition xxx_Permission_actionType between
+	Permission[0..1] role xxx_Permission_actionType_src
+	ActionType[1..*] role actionType
+end
+
+association xxx_Permission_owner between
+	Permission[*] role xxx_Permission_owner_src
+	DIAElement[1] role owner
+end
+
+association xxx_ActionType_protectedElement between
+	ActionType[0..1] role xxx_ActionType_protectedElement_src
+	DIAElement[1..*] role protectedElement
+end
+

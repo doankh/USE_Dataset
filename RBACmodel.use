@@ -1,0 +1,758 @@
+model RBACmodel
+enum TimeUnitType{
+default
+}
+
+enum DayType{
+default
+}
+
+enum CardinalType{
+default
+}
+
+enum QualitativeType{
+default
+}
+
+enum delegationType{
+default
+}
+
+class User
+attributes
+	idUser : String
+operations
+	assignRole(r : Role)
+	accessHistory():History
+end
+
+class Role
+attributes
+	idRole : String
+	isDependent : Boolean
+	isStrong : Boolean
+	isCascading : Boolean
+operations
+	getCurrentAbsoluteTE(u : RBACUtility):AbsoluteTE
+	assignPermission(p : Permission)
+	accessHistory():History
+	logBOCurrentProcessInstance():History
+	getAlljuniors():Role
+end
+
+class Session
+attributes
+	idSession : String
+operations
+	accessHistory():History
+	enableRole(r : Role)
+	disableRole(r : Role)
+	activateRole(r : Role)
+	deactivateRole(r : Role)
+	performOperation(op : Operation,p : Permission,r : Role)
+	delegateRole(r : Role)
+end
+
+class Permission
+attributes
+	idPermission : String
+operations
+end
+
+class Operation
+attributes
+	idOperation : String
+operations
+	accessHistory():History
+end
+
+class Object
+attributes
+	idObject : String
+operations
+	accessHistory():History
+end
+
+abstract class RBACContext
+attributes
+	idContext : String
+operations
+	checkAccess(c : RBACContext):Boolean
+end
+
+class TimeExpression
+attributes
+operations
+end
+
+class SpatialContext<RBACContext
+attributes
+	label : String
+operations
+end
+
+class Delegation
+attributes
+	idDelegation : String
+	isRevoked : Boolean
+	isTransfer : delegationType
+	isTotal : Boolean
+	startDate : String
+	endDate : String
+	maxDepth : Integer
+operations
+	revoke()
+	getAbsoluteDelegationPath():Delegation
+end
+
+class History
+attributes
+	idLog : String
+operations
+end
+
+class Root
+attributes
+operations
+end
+
+class RBACUtility
+attributes
+	maxPermission : Integer
+	maxActiveRole : Integer
+	maxRole : Integer
+operations
+	getBoundPermission():Permission
+	getCurrentDate():String
+	getCurrentTime():TimePoint
+	getDayOfWeek():RelativeTimePoint
+	getCumulativeActiveDuration(r : Role,u : User,unit : TimeUnitType):ActivationDuration
+	getActiveDuration(r : Role,unit : TimeUnitType):ActivationDuration
+end
+
+class AbsoluteTE
+attributes
+operations
+	hasDuration():Boolean
+end
+
+class RelativeTE
+attributes
+	idRelativeTE : String
+operations
+end
+
+class ActivationDuration
+attributes
+	idDuration : String
+	value : Integer
+	timeUnit : TimeUnitType
+	isContinous : Boolean
+operations
+	greaterThan(d : ActivationDuration):Boolean
+end
+
+class TimePoint<AbsoluteTE
+attributes
+	idTimePoint : String
+	second : Integer
+	minute : Integer
+	hour : Integer
+	day : Integer
+	month : Integer
+	year : Integer
+operations
+	equalTo(t : TimePoint):Boolean
+	isBefore(t : TimePoint):Boolean
+	isAfter(t : TimePoint):Boolean
+	isContained(t : TimeInterval):Boolean
+end
+
+class TimeInterval<AbsoluteTE
+attributes
+	idTimeInterval : String
+operations
+end
+
+abstract class ComposedRelativeTE<RelativeTE
+attributes
+operations
+	checkHours(u : RBACUtility):Boolean
+	checkDays(u : RBACUtility):Boolean
+	checkDaysRank(u : RBACUtility):Boolean
+end
+
+class RelativeTimeInterval<ComposedRelativeTE
+attributes
+	idRelativeTimeInterval : String
+operations
+end
+
+class RelativeTimePoint<ComposedRelativeTE
+attributes
+	idRelativeTimePoint : String
+	rank : Integer
+operations
+	isContained(t : RelativeTimeInterval):Boolean
+	equalTo(t : RelativeTimePoint):Boolean
+	isAfter(t : RelativeTimePoint):Boolean
+	isBefore(t : RelativeTimePoint):Boolean
+end
+
+class DayOfWeek<RelativeTimePoint
+attributes
+	day : DayType
+operations
+end
+
+class DayOfMonth<RelativeTimePoint
+attributes
+	day : Integer
+	month : Integer
+operations
+end
+
+class MonthOfYear<RelativeTimePoint
+attributes
+	month : Integer
+operations
+end
+
+class HourOfDay<RelativeTimePoint
+attributes
+	hour : Integer
+operations
+end
+
+class PeriodicTime<RelativeTE
+attributes
+	frequency : Integer
+	timeUnit : TimeUnitType
+	idPeriodicTime : String
+operations
+end
+
+class RelativeLocation
+attributes
+	distance : Real
+	unit : String
+operations
+end
+
+class Location
+attributes
+	label : String
+operations
+	disjoint(l : Location):Boolean
+	contains(l : Location):Boolean
+	overlaps(l : Location):Boolean
+	computeRelative(r : RelativeLocation):Location
+end
+
+class PhysicalLocation<Location
+attributes
+operations
+end
+
+class LogicalLocation<Location
+attributes
+operations
+end
+
+class Point<PhysicalLocation
+attributes
+	long : Real
+	lat : Real
+operations
+end
+
+class Polygon<PhysicalLocation
+attributes
+operations
+end
+
+class Circle<PhysicalLocation
+attributes
+	radius : Real
+operations
+end
+
+class Polyline
+attributes
+operations
+end
+
+class RelativeDirection
+attributes
+operations
+end
+
+class CardinalDirection<RelativeDirection
+attributes
+	direction : CardinalType
+	angle : Real
+operations
+end
+
+class QualitativeDirection<RelativeDirection
+attributes
+	direction : QualitativeType
+operations
+end
+
+class TemporalContext<RBACContext
+attributes
+operations
+end
+
+association xxx_User_roles between
+	User[0..1] role xxx_User_roles_src
+	Role[1..*] role roles
+end
+
+association xxx_User_sessions between
+	User[0..1] role xxx_User_sessions_src
+	Session[*] role sessions
+end
+
+association xxx_User_delegation between
+	User[0..1] role xxx_User_delegation_src
+	Delegation[*] role delegation
+end
+
+association xxx_User_recieveddelegation between
+	User[0..1] role xxx_User_recieveddelegation_src
+	Delegation[*] role recieveddelegation
+end
+
+association xxx_User_revocation between
+	User[0..1] role xxx_User_revocation_src
+	Delegation[*] role revocation
+end
+
+association xxx_User_delegatedRoles between
+	User[0..1] role xxx_User_delegatedRoles_src
+	Role[*] role delegatedRoles
+end
+
+association xxx_User_userLocation between
+	User[*] role xxx_User_userLocation_src
+	SpatialContext[1] role userLocation
+end
+
+association xxx_User_userLog between
+	User[0..1] role xxx_User_userLog_src
+	History[*] role userLog
+end
+
+association xxx_Role_users between
+	Role[0..1] role xxx_Role_users_src
+	User[1..*] role users
+end
+
+association xxx_Role_sessionsA between
+	Role[0..1] role xxx_Role_sessionsA_src
+	Session[*] role sessionsA
+end
+
+association xxx_Role_sessionsE between
+	Role[0..1] role xxx_Role_sessionsE_src
+	Session[*] role sessionsE
+end
+
+association xxx_Role_permissions between
+	Role[0..1] role xxx_Role_permissions_src
+	Permission[1..*] role permissions
+end
+
+association xxx_Role_juniors between
+	Role[0..1] role xxx_Role_juniors_src
+	Role[*] role juniors
+end
+
+association xxx_Role_seniors between
+	Role[0..1] role xxx_Role_seniors_src
+	Role[*] role seniors
+end
+
+association xxx_Role_user between
+	Role[0..1] role xxx_Role_user_src
+	User[*] role user
+end
+
+association xxx_Role_delegation between
+	Role[0..1] role xxx_Role_delegation_src
+	Delegation[*] role delegation
+end
+
+association xxx_Role_roleContextAssignment between
+	Role[0..1] role xxx_Role_roleContextAssignment_src
+	RBACContext[*] role roleContextAssignment
+end
+
+association xxx_Role_roleContextEnabling between
+	Role[0..1] role xxx_Role_roleContextEnabling_src
+	RBACContext[*] role roleContextEnabling
+end
+
+association xxx_Role_logRole between
+	Role[0..1] role xxx_Role_logRole_src
+	History[*] role logRole
+end
+
+association xxx_Session_activeRoles between
+	Session[0..1] role xxx_Session_activeRoles_src
+	Role[*] role activeRoles
+end
+
+association xxx_Session_enabledRoles between
+	Session[0..1] role xxx_Session_enabledRoles_src
+	Role[*] role enabledRoles
+end
+
+association xxx_Session_user between
+	Session[*] role xxx_Session_user_src
+	User[1] role user
+end
+
+association xxx_Permission_roles between
+	Permission[0..1] role xxx_Permission_roles_src
+	Role[1..*] role roles
+end
+
+association xxx_Permission_operations_ between
+	Permission[0..1] role xxx_Permission_operations__src
+	Operation[1..*] role operations_
+end
+
+association xxx_Permission_object between
+	Permission[*] role xxx_Permission_object_src
+	Object[1] role object
+end
+
+association xxx_Permission_delegation between
+	Permission[0..1] role xxx_Permission_delegation_src
+	Delegation[*] role delegation
+end
+
+association xxx_Permission_logPermission between
+	Permission[0..1] role xxx_Permission_logPermission_src
+	History[*] role logPermission
+end
+
+association xxx_Permission_permissionContextAssignment between
+	Permission[0..1] role xxx_Permission_permissionContextAssignment_src
+	RBACContext[*] role permissionContextAssignment
+end
+
+association xxx_Permission_permissionContextEnabling between
+	Permission[0..1] role xxx_Permission_permissionContextEnabling_src
+	RBACContext[*] role permissionContextEnabling
+end
+
+association xxx_Operation_permissions between
+	Operation[0..1] role xxx_Operation_permissions_src
+	Permission[1..*] role permissions
+end
+
+association xxx_Operation_logOperation between
+	Operation[0..1] role xxx_Operation_logOperation_src
+	History[*] role logOperation
+end
+
+association xxx_Object_permissions between
+	Object[0..1] role xxx_Object_permissions_src
+	Permission[1..*] role permissions
+end
+
+association xxx_Object_logObject between
+	Object[0..1] role xxx_Object_logObject_src
+	History[*] role logObject
+end
+
+association xxx_RBACContext_logContext between
+	RBACContext[0..1] role xxx_RBACContext_logContext_src
+	History[*] role logContext
+end
+
+association xxx_RBACContext_p1 between
+	RBACContext[*] role xxx_RBACContext_p1_src
+	Permission[0..1] role p1
+end
+
+association xxx_RBACContext_p2 between
+	RBACContext[*] role xxx_RBACContext_p2_src
+	Permission[0..1] role p2
+end
+
+association xxx_RBACContext_r1 between
+	RBACContext[*] role xxx_RBACContext_r1_src
+	Role[0..1] role r1
+end
+
+association xxx_RBACContext_r2 between
+	RBACContext[*] role xxx_RBACContext_r2_src
+	Role[0..1] role r2
+end
+
+composition xxx_TimeExpression_absolute between
+	TimeExpression[0..1] role xxx_TimeExpression_absolute_src
+	AbsoluteTE[*] role absolute
+end
+
+composition xxx_TimeExpression_relative between
+	TimeExpression[0..1] role xxx_TimeExpression_relative_src
+	RelativeTE[*] role relative
+end
+
+composition xxx_SpatialContext_location between
+	SpatialContext[0..1] role xxx_SpatialContext_location_src
+	Location[1..*] role location
+end
+
+association xxx_Delegation_delegatorUser between
+	Delegation[*] role xxx_Delegation_delegatorUser_src
+	User[1] role delegatorUser
+end
+
+association xxx_Delegation_delegateUser between
+	Delegation[*] role xxx_Delegation_delegateUser_src
+	User[1] role delegateUser
+end
+
+association xxx_Delegation_revokingUser between
+	Delegation[*] role xxx_Delegation_revokingUser_src
+	User[0..1] role revokingUser
+end
+
+association xxx_Delegation_delegatedDelegation between
+	Delegation[0..1] role xxx_Delegation_delegatedDelegation_src
+	Delegation[*] role delegatedDelegation
+end
+
+association xxx_Delegation_delegatedPermissions between
+	Delegation[0..1] role xxx_Delegation_delegatedPermissions_src
+	Permission[1..*] role delegatedPermissions
+end
+
+association xxx_Delegation_delegatedRole between
+	Delegation[*] role xxx_Delegation_delegatedRole_src
+	Role[1] role delegatedRole
+end
+
+association xxx_History_role between
+	History[*] role xxx_History_role_src
+	Role[1] role role
+end
+
+association xxx_History_object between
+	History[*] role xxx_History_object_src
+	Object[1] role object
+end
+
+association xxx_History_op between
+	History[*] role xxx_History_op_src
+	Operation[1] role op
+end
+
+association xxx_History_permission between
+	History[*] role xxx_History_permission_src
+	Permission[1] role permission
+end
+
+association xxx_History_context_ between
+	History[*] role xxx_History_context__src
+	RBACContext[1..2] role context_
+end
+
+association xxx_History_user between
+	History[*] role xxx_History_user_src
+	User[1] role user
+end
+
+composition xxx_Root_sys between
+	Root[*] role xxx_Root_sys_src
+	RBACUtility[0..1] role sys
+end
+
+composition xxx_Root_Obj between
+	Root[0..1] role xxx_Root_Obj_src
+	Object[*] role Obj
+end
+
+composition xxx_Root_op between
+	Root[0..1] role xxx_Root_op_src
+	Operation[*] role op
+end
+
+composition xxx_Root_c between
+	Root[0..1] role xxx_Root_c_src
+	RBACContext[*] role c
+end
+
+composition xxx_Root_p between
+	Root[0..1] role xxx_Root_p_src
+	Permission[*] role p
+end
+
+composition xxx_Root_r between
+	Root[0..1] role xxx_Root_r_src
+	Role[*] role r
+end
+
+composition xxx_Root_s between
+	Root[0..1] role xxx_Root_s_src
+	Session[*] role s
+end
+
+composition xxx_Root_u between
+	Root[0..1] role xxx_Root_u_src
+	User[*] role u
+end
+
+composition xxx_Root_d between
+	Root[0..1] role xxx_Root_d_src
+	Delegation[*] role d
+end
+
+composition xxx_Root_log between
+	Root[0..1] role xxx_Root_log_src
+	History[*] role log
+end
+
+composition xxx_Root_dur between
+	Root[0..1] role xxx_Root_dur_src
+	ActivationDuration[*] role dur
+end
+
+composition xxx_Root_period between
+	Root[0..1] role xxx_Root_period_src
+	PeriodicTime[*] role period
+end
+
+composition xxx_Root_rloc between
+	Root[0..1] role xxx_Root_rloc_src
+	RelativeLocation[*] role rloc
+end
+
+composition xxx_Root_rd between
+	Root[0..1] role xxx_Root_rd_src
+	RelativeDirection[*] role rd
+end
+
+association xxx_RBACUtility_businessTaskList between
+	RBACUtility[0..1] role xxx_RBACUtility_businessTaskList_src
+	Operation[*] role businessTaskList
+end
+
+association xxx_RBACUtility_boundedPermissions between
+	RBACUtility[0..1] role xxx_RBACUtility_boundedPermissions_src
+	Permission[*] role boundedPermissions
+end
+
+association xxx_RBACUtility_currentT between
+	RBACUtility[*] role xxx_RBACUtility_currentT_src
+	TimePoint[0..1] role currentT
+end
+
+association xxx_RBACUtility_currentDay between
+	RBACUtility[*] role xxx_RBACUtility_currentDay_src
+	RelativeTimePoint[0..1] role currentDay
+end
+
+association xxx_AbsoluteTE_duration between
+	AbsoluteTE[*] role xxx_AbsoluteTE_duration_src
+	ActivationDuration[0..1] role duration
+end
+
+association xxx_RelativeTE_d2 between
+	RelativeTE[*] role xxx_RelativeTE_d2_src
+	ActivationDuration[0..1] role d2
+end
+
+association xxx_ActivationDuration_aexp between
+	ActivationDuration[*] role xxx_ActivationDuration_aexp_src
+	AbsoluteTE[0..1] role aexp
+end
+
+association xxx_ActivationDuration_rexp between
+	ActivationDuration[*] role xxx_ActivationDuration_rexp_src
+	RelativeTE[0..1] role rexp
+end
+
+composition xxx_TimeInterval_start between
+	TimeInterval[*] role xxx_TimeInterval_start_src
+	TimePoint[1] role start
+end
+
+composition xxx_TimeInterval_end_ between
+	TimeInterval[*] role xxx_TimeInterval_end__src
+	TimePoint[0..1] role end_
+end
+
+association xxx_ComposedRelativeTE_overlay between
+	ComposedRelativeTE[0..1] role xxx_ComposedRelativeTE_overlay_src
+	ComposedRelativeTE[*] role overlay
+end
+
+composition xxx_RelativeTimeInterval_start between
+	RelativeTimeInterval[*] role xxx_RelativeTimeInterval_start_src
+	RelativeTimePoint[1] role start
+end
+
+composition xxx_RelativeTimeInterval_end_ between
+	RelativeTimeInterval[*] role xxx_RelativeTimeInterval_end__src
+	RelativeTimePoint[0..1] role end_
+end
+
+composition xxx_PeriodicTime_nextStart between
+	PeriodicTime[*] role xxx_PeriodicTime_nextStart_src
+	TimePoint[0..1] role nextStart
+end
+
+association xxx_RelativeLocation_location between
+	RelativeLocation[0..1] role xxx_RelativeLocation_location_src
+	Location[1..*] role location
+end
+
+association xxx_RelativeLocation_relativedirection between
+	RelativeLocation[*] role xxx_RelativeLocation_relativedirection_src
+	RelativeDirection[1] role relativedirection
+end
+
+association xxx_Location_relativelocation between
+	Location[*] role xxx_Location_relativelocation_src
+	RelativeLocation[0..1] role relativelocation
+end
+
+composition xxx_Polygon_segment between
+	Polygon[0..1] role xxx_Polygon_segment_src
+	Polyline[3..*] role segment
+end
+
+composition xxx_Circle_center between
+	Circle[*] role xxx_Circle_center_src
+	Point[1] role center
+end
+
+composition xxx_Polyline_start between
+	Polyline[*] role xxx_Polyline_start_src
+	Point[1] role start
+end
+
+composition xxx_Polyline_end_ between
+	Polyline[*] role xxx_Polyline_end__src
+	Point[1] role end_
+end
+
+association xxx_RelativeDirection_relativelocation between
+	RelativeDirection[*] role xxx_RelativeDirection_relativelocation_src
+	RelativeLocation[0..1] role relativelocation
+end
+
+composition xxx_TemporalContext_timeexpression between
+	TemporalContext[0..1] role xxx_TemporalContext_timeexpression_src
+	TimeExpression[1..*] role timeexpression
+end
+

@@ -1,0 +1,135 @@
+model OurPartialIFC
+class OurIFC
+attributes
+operations
+end
+
+class OurIfcRelAssociatesMaterial<Identifiable
+attributes
+operations
+end
+
+abstract class OurIfcMaterialSelect<Identifiable
+attributes
+operations
+end
+
+class OurIfcElement<OurIfcRoot
+attributes
+	Description : String
+	Type : String
+operations
+end
+
+abstract class Identifiable
+attributes
+	ID : Integer
+operations
+end
+
+class OurIfcElementType<OurIfcRoot
+attributes
+operations
+end
+
+abstract class OurIfcRoot<Identifiable
+attributes
+operations
+end
+
+class OurIfcRelDefinesByType
+attributes
+operations
+end
+
+class OurIfcMaterial<OurIfcMaterialSelect
+attributes
+	Name : String
+operations
+end
+
+class OurIfcMaterialLayer<OurIfcMaterialSelect
+attributes
+operations
+end
+
+class OurIfcMaterialList<OurIfcMaterialSelect
+attributes
+operations
+end
+
+class OurIfcMaterialLayerSet<OurIfcMaterialSelect
+attributes
+operations
+end
+
+class OurIfcMaterialLayerSetUsage<OurIfcMaterialSelect
+attributes
+operations
+end
+
+composition xxx_OurIFC_materialAssociation between
+	OurIFC[0..1] role xxx_OurIFC_materialAssociation_src
+	OurIfcRelAssociatesMaterial[*] role materialAssociation
+end
+
+composition xxx_OurIFC_typedefinitions between
+	OurIFC[0..1] role xxx_OurIFC_typedefinitions_src
+	OurIfcRelDefinesByType[*] role typedefinitions
+end
+
+composition xxx_OurIFC_elementtypes between
+	OurIFC[0..1] role xxx_OurIFC_elementtypes_src
+	OurIfcElementType[*] role elementtypes
+end
+
+composition xxx_OurIFC_materials between
+	OurIFC[0..1] role xxx_OurIFC_materials_src
+	OurIfcMaterial[*] role materials
+end
+
+composition xxx_OurIFC_materialLists between
+	OurIFC[0..1] role xxx_OurIFC_materialLists_src
+	OurIfcMaterialList[*] role materialLists
+end
+
+composition xxx_OurIFC_materialLayers between
+	OurIFC[0..1] role xxx_OurIFC_materialLayers_src
+	OurIfcMaterialLayer[*] role materialLayers
+end
+
+composition xxx_OurIFC_materialLayerSet between
+	OurIFC[0..1] role xxx_OurIFC_materialLayerSet_src
+	OurIfcMaterialLayerSet[*] role materialLayerSet
+end
+
+composition xxx_OurIFC_materialLayerSetUsage between
+	OurIFC[0..1] role xxx_OurIFC_materialLayerSetUsage_src
+	OurIfcMaterialLayerSetUsage[*] role materialLayerSetUsage
+end
+
+composition xxx_OurIFC_elements between
+	OurIFC[0..1] role xxx_OurIFC_elements_src
+	OurIfcElement[*] role elements
+end
+
+association xxx_OurIfcRelAssociatesMaterial_relatedElements between
+	OurIfcRelAssociatesMaterial[0..1] role xxx_OurIfcRelAssociatesMaterial_relatedElements_src
+	OurIfcRoot[*] role relatedElements
+end
+
+association xxx_OurIfcRelAssociatesMaterial_material between
+	OurIfcRelAssociatesMaterial[*] role xxx_OurIfcRelAssociatesMaterial_material_src
+	OurIfcMaterialSelect[1] role material
+end
+
+association xxx_OurIfcRelDefinesByType_elementType between
+	OurIfcRelDefinesByType[*] role xxx_OurIfcRelDefinesByType_elementType_src
+	OurIfcElementType[1] role elementType
+end
+
+association xxx_OurIfcRelDefinesByType_definedElements between
+	OurIfcRelDefinesByType[0..1] role xxx_OurIfcRelDefinesByType_definedElements_src
+	OurIfcElement[*] role definedElements
+end
+

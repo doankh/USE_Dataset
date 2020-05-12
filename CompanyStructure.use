@@ -1,0 +1,71 @@
+model CompanyStructure
+class Company
+attributes
+operations
+end
+
+class CorporateHQ
+attributes
+operations
+end
+
+class Store
+attributes
+operations
+end
+
+class CorporateHQBackOffice
+attributes
+operations
+end
+
+class StoreBackOffice
+attributes
+operations
+end
+
+class Employee
+attributes
+operations
+end
+
+class CashRegister
+attributes
+operations
+end
+
+composition xxx_Company_corporateHQ between
+	Company[*] role xxx_Company_corporateHQ_src
+	CorporateHQ[1] role corporateHQ
+end
+
+composition xxx_Company_Store between
+	Company[0..1] role xxx_Company_Store_src
+	Store[*] role Store
+end
+
+association xxx_CorporateHQ_manages between
+	CorporateHQ[0..1] role xxx_CorporateHQ_manages_src
+	Store[*] role manages
+end
+
+composition xxx_CorporateHQ_corporateHQBackOffice between
+	CorporateHQ[*] role xxx_CorporateHQ_corporateHQBackOffice_src
+	CorporateHQBackOffice[1] role corporateHQBackOffice
+end
+
+composition xxx_Store_storeBackOffice between
+	Store[*] role xxx_Store_storeBackOffice_src
+	StoreBackOffice[1] role storeBackOffice
+end
+
+composition xxx_Store_employee between
+	Store[0..1] role xxx_Store_employee_src
+	Employee[*] role employee
+end
+
+composition xxx_Store_cashRegister between
+	Store[0..1] role xxx_Store_cashRegister_src
+	CashRegister[*] role cashRegister
+end
+

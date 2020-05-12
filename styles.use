@@ -1,0 +1,58 @@
+model styles
+abstract class StyleItem
+attributes
+	name : String
+	source : String
+operations
+end
+
+class StyleSelector
+attributes
+	property : String
+	selector : String
+operations
+end
+
+class Style
+attributes
+	name : String
+operations
+end
+
+class Styled
+attributes
+	name : String
+	role : String
+operations
+end
+
+class ColorItem<StyleItem
+attributes
+operations
+end
+
+class ImageItem<StyleItem
+attributes
+operations
+end
+
+class FontItem<StyleItem
+attributes
+operations
+end
+
+composition xxx_Style_styleItems between
+	Style[0..1] role xxx_Style_styleItems_src
+	StyleItem[*] role styleItems
+end
+
+composition xxx_Style_styleSelectors between
+	Style[0..1] role xxx_Style_styleSelectors_src
+	StyleSelector[*] role styleSelectors
+end
+
+composition xxx_Styled_style between
+	Styled[*] role xxx_Styled_style_src
+	Style[0..1] role style
+end
+

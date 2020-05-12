@@ -1,0 +1,374 @@
+model CommonBehavior
+enum CallConcurrencyFeature{
+default
+}
+
+class BehavioredClassifier<Classifier
+attributes
+operations
+end
+
+abstract class Classifier<RedefinableElement
+attributes
+operations
+end
+
+abstract class Class<Classifier,BehavioredClassifier
+attributes
+operations
+end
+
+abstract class Behavior<Class
+attributes
+	isReentrant : String
+operations
+end
+
+abstract class RedefinableElement
+attributes
+operations
+end
+
+class OpaqueBehavior<Behavior
+attributes
+	body : String
+	language : String
+operations
+end
+
+class FunctionBehavior<OpaqueBehavior
+attributes
+operations
+end
+
+abstract class BehavioralFeature
+attributes
+	concurrency : CallConcurrencyFeature
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+class OpaqueExpression
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class Signal<Classifier
+attributes
+operations
+end
+
+class Property
+attributes
+operations
+end
+
+class Reception<BehavioralFeature
+attributes
+operations
+end
+
+class Interface<Classifier
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Trigger<NamedElement
+attributes
+operations
+end
+
+abstract class PackageableElement
+attributes
+operations
+end
+
+abstract class Event<PackageableElement
+attributes
+operations
+end
+
+abstract class MessageEvent<Event
+attributes
+operations
+end
+
+class AnyReceiveEvent<MessageEvent
+attributes
+operations
+end
+
+class SignalEvent<MessageEvent
+attributes
+operations
+end
+
+class CallEvent<MessageEvent
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+class ChangeEvent<Event
+attributes
+operations
+end
+
+abstract class ValueSpecification
+attributes
+operations
+end
+
+class TimeEvent
+attributes
+	isRelative : String
+operations
+end
+
+class TimeExpression<ValueSpecification
+attributes
+operations
+end
+
+abstract class Observation<PackageableElement
+attributes
+operations
+end
+
+class TimeObservation<Observation
+attributes
+	firstEvent : String
+operations
+end
+
+class DurationObservation<Observation
+attributes
+	firstEvent : String
+operations
+end
+
+class Duration<ValueSpecification
+attributes
+operations
+end
+
+class Interval<ValueSpecification
+attributes
+operations
+end
+
+class TimeInterval<Interval
+attributes
+operations
+end
+
+class DurationInterval<Interval
+attributes
+operations
+end
+
+class IntervalConstraint<Constraint
+attributes
+operations
+end
+
+class TimeConstraint<IntervalConstraint
+attributes
+	firstEvent : String
+operations
+end
+
+class DurationConstraint<IntervalConstraint
+attributes
+	firstEvent : String
+operations
+end
+
+composition xxx_BehavioredClassifier_ownedBehavior between
+	BehavioredClassifier[0..1] role xxx_BehavioredClassifier_ownedBehavior_src
+	Behavior[*] role ownedBehavior
+end
+
+association xxx_BehavioredClassifier_classifierBehavior between
+	BehavioredClassifier[*] role xxx_BehavioredClassifier_classifierBehavior_src
+	Behavior[0..1] role classifierBehavior
+end
+
+composition xxx_Class_ownedReception between
+	Class[0..1] role xxx_Class_ownedReception_src
+	Reception[*] role ownedReception
+end
+
+association xxx_Behavior_context_ between
+	Behavior[*] role xxx_Behavior_context__src
+	BehavioredClassifier[0..1] role context_
+end
+
+association xxx_Behavior_redefinedBehavior between
+	Behavior[0..1] role xxx_Behavior_redefinedBehavior_src
+	Behavior[*] role redefinedBehavior
+end
+
+association xxx_Behavior_specification between
+	Behavior[*] role xxx_Behavior_specification_src
+	BehavioralFeature[0..1] role specification
+end
+
+composition xxx_Behavior_ownedParameter between
+	Behavior[0..1] role xxx_Behavior_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+composition xxx_Behavior_precondition between
+	Behavior[0..1] role xxx_Behavior_precondition_src
+	Constraint[*] role precondition
+end
+
+composition xxx_Behavior_postcondition between
+	Behavior[0..1] role xxx_Behavior_postcondition_src
+	Constraint[*] role postcondition
+end
+
+association xxx_BehavioralFeature_method between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_method_src
+	Behavior[*] role method
+end
+
+association xxx_OpaqueExpression_result between
+	OpaqueExpression[*] role xxx_OpaqueExpression_result_src
+	Parameter[0..1] role result
+end
+
+association xxx_OpaqueExpression_behavior between
+	OpaqueExpression[*] role xxx_OpaqueExpression_behavior_src
+	Behavior[0..1] role behavior
+end
+
+composition xxx_Signal_ownedAttribute between
+	Signal[0..1] role xxx_Signal_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+association xxx_Reception_signal between
+	Reception[*] role xxx_Reception_signal_src
+	Signal[1] role signal
+end
+
+composition xxx_Interface_ownedReception between
+	Interface[0..1] role xxx_Interface_ownedReception_src
+	Reception[*] role ownedReception
+end
+
+association xxx_Trigger_event between
+	Trigger[*] role xxx_Trigger_event_src
+	Event[1] role event
+end
+
+association xxx_SignalEvent_signal between
+	SignalEvent[*] role xxx_SignalEvent_signal_src
+	Signal[1] role signal
+end
+
+association xxx_CallEvent_operation between
+	CallEvent[*] role xxx_CallEvent_operation_src
+	Operation[1] role operation
+end
+
+association xxx_ChangeEvent_changeExpression between
+	ChangeEvent[*] role xxx_ChangeEvent_changeExpression_src
+	ValueSpecification[1] role changeExpression
+end
+
+composition xxx_TimeEvent_when between
+	TimeEvent[*] role xxx_TimeEvent_when_src
+	TimeExpression[1] role when
+end
+
+composition xxx_TimeExpression_expr between
+	TimeExpression[*] role xxx_TimeExpression_expr_src
+	ValueSpecification[0..1] role expr
+end
+
+association xxx_TimeExpression_observation between
+	TimeExpression[0..1] role xxx_TimeExpression_observation_src
+	Observation[*] role observation
+end
+
+association xxx_TimeObservation_event between
+	TimeObservation[*] role xxx_TimeObservation_event_src
+	NamedElement[1] role event
+end
+
+association xxx_DurationObservation_event between
+	DurationObservation[*] role xxx_DurationObservation_event_src
+	NamedElement[1..2] role event
+end
+
+composition xxx_Duration_expr between
+	Duration[*] role xxx_Duration_expr_src
+	ValueSpecification[0..1] role expr
+end
+
+association xxx_Duration_observation between
+	Duration[0..1] role xxx_Duration_observation_src
+	Observation[*] role observation
+end
+
+association xxx_Interval_max between
+	Interval[*] role xxx_Interval_max_src
+	ValueSpecification[1] role max
+end
+
+association xxx_Interval_min between
+	Interval[*] role xxx_Interval_min_src
+	ValueSpecification[1] role min
+end
+
+association xxx_TimeInterval_timeMax between
+	TimeInterval[*] role xxx_TimeInterval_timeMax_src
+	TimeExpression[1] role timeMax
+end
+
+association xxx_TimeInterval_timeMin between
+	TimeInterval[*] role xxx_TimeInterval_timeMin_src
+	TimeExpression[1] role timeMin
+end
+
+association xxx_DurationInterval_durationMax between
+	DurationInterval[*] role xxx_DurationInterval_durationMax_src
+	Duration[1] role durationMax
+end
+
+association xxx_DurationInterval_durationMin between
+	DurationInterval[*] role xxx_DurationInterval_durationMin_src
+	Duration[1] role durationMin
+end
+
+association xxx_TimeConstraint_timeSpecification between
+	TimeConstraint[*] role xxx_TimeConstraint_timeSpecification_src
+	TimeInterval[1] role timeSpecification
+end
+
+association xxx_DurationConstraint_durationSpecification between
+	DurationConstraint[*] role xxx_DurationConstraint_durationSpecification_src
+	DurationInterval[1] role durationSpecification
+end
+

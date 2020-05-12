@@ -1,0 +1,127 @@
+model vML
+class Module
+attributes
+	name : String
+operations
+end
+
+class TypeDecl
+attributes
+	name : String
+operations
+end
+
+class Stream
+attributes
+	name : String
+operations
+end
+
+class Input<Stream
+attributes
+operations
+end
+
+class Output<Stream
+attributes
+operations
+end
+
+class ModuleInstances
+attributes
+	name : String
+operations
+end
+
+class Literal<Stream
+attributes
+	value : String
+operations
+end
+
+class NativeType<TypeDecl
+attributes
+operations
+end
+
+class List<TypeDecl
+attributes
+operations
+end
+
+class Hash<TypeDecl
+attributes
+operations
+end
+
+class NativeTypeOptions
+attributes
+operations
+end
+
+class HashItem
+attributes
+	name : String
+operations
+end
+
+composition xxx_Module_input between
+	Module[0..1] role xxx_Module_input_src
+	Input[*] role input
+end
+
+composition xxx_Module_output between
+	Module[0..1] role xxx_Module_output_src
+	Output[*] role output
+end
+
+composition xxx_Module_instances between
+	Module[0..1] role xxx_Module_instances_src
+	ModuleInstances[*] role instances
+end
+
+composition xxx_Module_types between
+	Module[0..1] role xxx_Module_types_src
+	TypeDecl[*] role types
+end
+
+association xxx_Stream_type between
+	Stream[*] role xxx_Stream_type_src
+	TypeDecl[0..1] role type
+end
+
+association xxx_Output_left between
+	Output[*] role xxx_Output_left_src
+	Stream[0..1] role left
+end
+
+association xxx_ModuleInstances_desc between
+	ModuleInstances[*] role xxx_ModuleInstances_desc_src
+	Module[0..1] role desc
+end
+
+composition xxx_ModuleInstances_left between
+	ModuleInstances[0..1] role xxx_ModuleInstances_left_src
+	Stream[*] role left
+end
+
+composition xxx_NativeType_type between
+	NativeType[*] role xxx_NativeType_type_src
+	NativeTypeOptions[0..1] role type
+end
+
+association xxx_List_type between
+	List[*] role xxx_List_type_src
+	TypeDecl[0..1] role type
+end
+
+composition xxx_Hash_items between
+	Hash[0..1] role xxx_Hash_items_src
+	HashItem[*] role items
+end
+
+association xxx_HashItem_type between
+	HashItem[*] role xxx_HashItem_type_src
+	TypeDecl[0..1] role type
+end
+

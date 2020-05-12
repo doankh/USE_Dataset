@@ -1,0 +1,159 @@
+model PrimitiveTypes
+class ArtifactUsageName
+attributes
+	isInput : Boolean
+	isOutput : Boolean
+	hasWorkPerArtifact : Boolean
+operations
+end
+
+class ProcessDefinitionElement
+attributes
+operations
+end
+
+class Guidance<ProcessDefinitionElement
+attributes
+operations
+end
+
+class ArtifactKind<ProcessDefinitionElement
+attributes
+operations
+end
+
+class WorkItem<ProcessDefinitionElement
+attributes
+operations
+end
+
+class RoleKind<ProcessDefinitionElement
+attributes
+operations
+end
+
+class Condition<ProcessDefinitionElement
+attributes
+operations
+end
+
+class ProcessComponent<ProcessDefinitionElement
+attributes
+operations
+end
+
+class Goal<Condition
+attributes
+operations
+end
+
+class Precondition<Condition
+attributes
+operations
+end
+
+class WorkDefinition<WorkItem
+attributes
+operations
+end
+
+class ActivityKind<WorkDefinition
+attributes
+operations
+end
+
+class Iteration<WorkDefinition
+attributes
+operations
+end
+
+class Phase<WorkDefinition
+attributes
+operations
+end
+
+class Lifecycle<WorkDefinition
+attributes
+operations
+end
+
+association xxx_ArtifactUsageName_artifactKind between
+	ArtifactUsageName[*] role xxx_ArtifactUsageName_artifactKind_src
+	ArtifactKind[1] role artifactKind
+end
+
+association xxx_ArtifactUsageName_workDefinition between
+	ArtifactUsageName[*] role xxx_ArtifactUsageName_workDefinition_src
+	WorkDefinition[1] role workDefinition
+end
+
+association xxx_ProcessDefinitionElement_guidances between
+	ProcessDefinitionElement[0..1] role xxx_ProcessDefinitionElement_guidances_src
+	Guidance[*] role guidances
+end
+
+association xxx_ProcessDefinitionElement_processComponents between
+	ProcessDefinitionElement[0..1] role xxx_ProcessDefinitionElement_processComponents_src
+	ProcessComponent[*] role processComponents
+end
+
+association xxx_Guidance_processDefinitionElements between
+	Guidance[0..1] role xxx_Guidance_processDefinitionElements_src
+	ProcessDefinitionElement[1..*] role processDefinitionElements
+end
+
+association xxx_ArtifactKind_artifactUsageNames between
+	ArtifactKind[0..1] role xxx_ArtifactKind_artifactUsageNames_src
+	ArtifactUsageName[*] role artifactUsageNames
+end
+
+association xxx_ArtifactKind_responsible between
+	ArtifactKind[*] role xxx_ArtifactKind_responsible_src
+	RoleKind[0..1] role responsible
+end
+
+association xxx_RoleKind_artifactKinds between
+	RoleKind[0..1] role xxx_RoleKind_artifactKinds_src
+	ArtifactKind[*] role artifactKinds
+end
+
+association xxx_ProcessComponent_processDefinitionElements between
+	ProcessComponent[0..1] role xxx_ProcessComponent_processDefinitionElements_src
+	ProcessDefinitionElement[*] role processDefinitionElements
+end
+
+association xxx_Goal_workDefinition between
+	Goal[*] role xxx_Goal_workDefinition_src
+	WorkDefinition[1] role workDefinition
+end
+
+association xxx_Precondition_workDefinition between
+	Precondition[*] role xxx_Precondition_workDefinition_src
+	WorkDefinition[1] role workDefinition
+end
+
+composition xxx_WorkDefinition_artifactUsageNames between
+	WorkDefinition[0..1] role xxx_WorkDefinition_artifactUsageNames_src
+	ArtifactUsageName[*] role artifactUsageNames
+end
+
+composition xxx_WorkDefinition_goal between
+	WorkDefinition[*] role xxx_WorkDefinition_goal_src
+	Goal[0..1] role goal
+end
+
+composition xxx_WorkDefinition_precondition between
+	WorkDefinition[*] role xxx_WorkDefinition_precondition_src
+	Precondition[0..1] role precondition
+end
+
+association xxx_ActivityKind_performer between
+	ActivityKind[0..1] role xxx_ActivityKind_performer_src
+	RoleKind[1..*] role performer
+end
+
+association xxx_ActivityKind_assistant between
+	ActivityKind[0..1] role xxx_ActivityKind_assistant_src
+	RoleKind[*] role assistant
+end
+

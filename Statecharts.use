@@ -1,0 +1,138 @@
+model PrimitiveTypes
+class BooleanExpression
+attributes
+	value : String
+operations
+end
+
+class StateMachine
+attributes
+operations
+end
+
+class State<StateVertex
+attributes
+operations
+end
+
+class CompositeState<State
+attributes
+	isConcurrent : Boolean
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class StateVertex
+attributes
+operations
+end
+
+class Guard
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_StateMachine_top between
+	StateMachine[0..1] role xxx_StateMachine_top_src
+	State[*] role top
+end
+
+association xxx_State_state_container between
+	State[*] role xxx_State_state_container_src
+	StateMachine[1] role state_container
+end
+
+composition xxx_State_internalTransitions between
+	State[0..1] role xxx_State_internalTransitions_src
+	Transition[*] role internalTransitions
+end
+
+association xxx_State_deferrableEvents between
+	State[0..1] role xxx_State_deferrableEvents_src
+	Event[*] role deferrableEvents
+end
+
+composition xxx_CompositeState_subVertexes between
+	CompositeState[0..1] role xxx_CompositeState_subVertexes_src
+	StateVertex[*] role subVertexes
+end
+
+association xxx_Transition_transSM_container between
+	Transition[*] role xxx_Transition_transSM_container_src
+	StateMachine[0..1] role transSM_container
+end
+
+association xxx_Transition_transS_container between
+	Transition[*] role xxx_Transition_transS_container_src
+	State[0..1] role transS_container
+end
+
+composition xxx_Transition_trigger between
+	Transition[*] role xxx_Transition_trigger_src
+	Event[0..1] role trigger
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Guard[0..1] role guard
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	StateVertex[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	StateVertex[1] role target
+end
+
+association xxx_StateVertex_sv_container between
+	StateVertex[*] role xxx_StateVertex_sv_container_src
+	CompositeState[0..1] role sv_container
+end
+
+association xxx_StateVertex_outgoing between
+	StateVertex[0..1] role xxx_StateVertex_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_StateVertex_incoming between
+	StateVertex[0..1] role xxx_StateVertex_incoming_src
+	Transition[*] role incoming
+end
+
+association xxx_Guard_gua_container between
+	Guard[*] role xxx_Guard_gua_container_src
+	Transition[1] role gua_container
+end
+
+association xxx_Guard_expression between
+	Guard[*] role xxx_Guard_expression_src
+	BooleanExpression[1] role expression
+end
+
+association xxx_Event_evt_container between
+	Event[0..1] role xxx_Event_evt_container_src
+	Transition[*] role evt_container
+end
+
+association xxx_Event_targets between
+	Event[0..1] role xxx_Event_targets_src
+	State[*] role targets
+end
+

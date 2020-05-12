@@ -1,0 +1,70 @@
+model DOT
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Graph<NamedElement
+attributes
+	type : String
+	rankDir : String
+	dim : Integer
+operations
+end
+
+abstract class GraphElement<NamedElement
+attributes
+	label : String
+	color : String
+	z : Integer
+operations
+end
+
+class Node<NamedElement
+attributes
+	shape : String
+	style : String
+operations
+end
+
+class DirectedArc<GraphElement
+attributes
+	sourceNode : String
+	sourcePart : String
+	targetNode : String
+	targetPart : String
+	shape : String
+operations
+end
+
+class Constraint<GraphElement
+attributes
+	val : String
+	refers : String
+operations
+end
+
+class SubGraph<GraphElement
+attributes
+operations
+end
+
+composition xxx_Graph_contents between
+	Graph[0..1] role xxx_Graph_contents_src
+	GraphElement[*] role contents
+end
+
+association xxx_GraphElement_graph between
+	GraphElement[*] role xxx_GraphElement_graph_src
+	Graph[1] role graph
+end
+

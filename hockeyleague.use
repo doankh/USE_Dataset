@@ -1,0 +1,162 @@
+model hockeyleague
+enum DefencePositionKind{
+default
+}
+
+enum ForwardPositionKind{
+default
+}
+
+enum HeightKind{
+default
+}
+
+enum ShotKind{
+default
+}
+
+enum WeightKind{
+default
+}
+
+class Arena<HockeyleagueObject
+attributes
+	address : String
+	capacity : Integer
+operations
+end
+
+class Defence<Player
+attributes
+	position : DefencePositionKind
+operations
+end
+
+class Forward<Player
+attributes
+	position : ForwardPositionKind
+operations
+end
+
+class Goalie<Player
+attributes
+operations
+end
+
+class GoalieStats
+attributes
+	year : String
+	gamesPlayedIn : Integer
+	minutesPlayedIn : Integer
+	goalsAgainstAverage : Real
+	wins : Integer
+	losses : Integer
+	ties : Integer
+	emptyNetGoals : Integer
+	shutouts : Integer
+	goalsAgainst : Integer
+	saves : Integer
+	penaltyMinutes : Integer
+	goals : Integer
+	assists : Integer
+	points : Integer
+operations
+end
+
+abstract class HockeyleagueObject
+attributes
+	name : String
+operations
+end
+
+class League<HockeyleagueObject
+attributes
+	headoffice : String
+operations
+end
+
+abstract class Player<HockeyleagueObject
+attributes
+	birthplace : String
+	number : Integer
+	heightMesurement : HeightKind
+	heightValue : Integer
+	weightMesurement : WeightKind
+	weightValue : Integer
+	shot : ShotKind
+	birthdate : String
+operations
+end
+
+class PlayerStats
+attributes
+	year : String
+	gamesPlayedIn : Integer
+	goals : Integer
+	assists : Integer
+	points : Integer
+	plusMinus : Integer
+	penaltyMinutes : Integer
+	powerPlayGoals : Integer
+	shortHandedGoals : Integer
+	gameWinningGoals : Integer
+	shots : Integer
+	shotPercentage : Real
+operations
+end
+
+class Team<HockeyleagueObject
+attributes
+operations
+end
+
+composition xxx_Defence_playerStats between
+	Defence[0..1] role xxx_Defence_playerStats_src
+	PlayerStats[*] role playerStats
+end
+
+composition xxx_Forward_playerStats between
+	Forward[0..1] role xxx_Forward_playerStats_src
+	PlayerStats[*] role playerStats
+end
+
+composition xxx_Goalie_goalieStats between
+	Goalie[0..1] role xxx_Goalie_goalieStats_src
+	GoalieStats[*] role goalieStats
+end
+
+association xxx_GoalieStats_team between
+	GoalieStats[*] role xxx_GoalieStats_team_src
+	Team[0..1] role team
+end
+
+composition xxx_League_teams between
+	League[0..1] role xxx_League_teams_src
+	Team[*] role teams
+end
+
+association xxx_PlayerStats_team between
+	PlayerStats[*] role xxx_PlayerStats_team_src
+	Team[0..1] role team
+end
+
+composition xxx_Team_forwards between
+	Team[0..1] role xxx_Team_forwards_src
+	Forward[*] role forwards
+end
+
+composition xxx_Team_defencemen between
+	Team[0..1] role xxx_Team_defencemen_src
+	Defence[*] role defencemen
+end
+
+composition xxx_Team_goalies between
+	Team[0..1] role xxx_Team_goalies_src
+	Goalie[*] role goalies
+end
+
+composition xxx_Team_arena between
+	Team[*] role xxx_Team_arena_src
+	Arena[0..1] role arena
+end
+

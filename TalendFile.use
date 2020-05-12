@@ -1,0 +1,402 @@
+model talendfile
+class ColumnType
+attributes
+	comment : String
+	defaultValue : String
+	key : Boolean
+	length : Integer
+	name : String
+	nullable : Boolean
+	originalDbColumnName : String
+	pattern : String
+	precision : Integer
+	sourceType : String
+	type : String
+	relatedEntity : String
+	relationshipType : String
+	originalLength : Integer
+operations
+end
+
+class ConnectionType
+attributes
+	connectorName : String
+	label : String
+	lineStyle : Integer
+	mergeOrder : Integer
+	metaname : String
+	offsetLabelX : Integer
+	offsetLabelY : Integer
+	outputId : Integer
+	source : String
+	target : String
+operations
+end
+
+class ContextParameterType
+attributes
+	comment : String
+	name : String
+	prompt : String
+	promptNeeded : Boolean
+	repositoryContextId : String
+	type : String
+	value : String
+operations
+end
+
+class ContextType
+attributes
+	confirmationNeeded : Boolean
+	name : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class ElementParameterType
+attributes
+	field : String
+	name : String
+	value : String
+	contextMode : Boolean
+operations
+end
+
+class ElementValueType
+attributes
+	elementRef : String
+	value : String
+	type : String
+operations
+end
+
+class JobType
+attributes
+	context_ : String
+	name : String
+operations
+end
+
+class LogsType
+attributes
+operations
+end
+
+class LogToDatabaseType
+attributes
+	database : String
+	level : Integer
+	selected : Boolean
+operations
+end
+
+class LogToFileType
+attributes
+	filename : String
+	level : Integer
+	selected : Boolean
+operations
+end
+
+class LogToStdOutType
+attributes
+	level : Integer
+	selected : Boolean
+operations
+end
+
+class MetadataType
+attributes
+	comment : String
+	connector : String
+	label : String
+	name : String
+	source : String
+operations
+end
+
+class NodeType
+attributes
+	binaryData : String
+	stringData : String
+	componentName : String
+	componentVersion : String
+	offsetLabelX : Integer
+	offsetLabelY : Integer
+	posX : Integer
+	posY : Integer
+	sizeX : Integer
+	sizeY : Integer
+	screenshot : String
+operations
+end
+
+class NoteType
+attributes
+	opaque : Boolean
+	posX : Integer
+	posY : Integer
+	sizeHeight : Integer
+	sizeWidth : Integer
+	text : String
+operations
+end
+
+class ParametersType
+attributes
+operations
+end
+
+class ProcessType
+attributes
+	description : String
+	author : String
+	comment : String
+	defaultContext : String
+	name : String
+	purpose : String
+	repositoryContextId : String
+	status : String
+	version : String
+	screenshot : String
+operations
+end
+
+class RequiredType
+attributes
+operations
+end
+
+class SubjobType
+attributes
+operations
+end
+
+class ItemInforType
+attributes
+	idOrName : String
+	system : Boolean
+operations
+end
+
+abstract class AbstractExternalData
+attributes
+operations
+end
+
+class RoutinesParameterType
+attributes
+	id : String
+	name : String
+operations
+end
+
+class NodeContainerType
+attributes
+operations
+end
+
+class ScreenshotsMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+class AdditionalFieldMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_ColumnType_additionalField between
+	ColumnType[0..1] role xxx_ColumnType_additionalField_src
+	AdditionalFieldMap[*] role additionalField
+end
+
+composition xxx_ConnectionType_elementParameter between
+	ConnectionType[0..1] role xxx_ConnectionType_elementParameter_src
+	ElementParameterType[*] role elementParameter
+end
+
+composition xxx_ContextType_contextParameter between
+	ContextType[0..1] role xxx_ContextType_contextParameter_src
+	ContextParameterType[*] role contextParameter
+end
+
+composition xxx_DocumentRoot_connection between
+	DocumentRoot[*] role xxx_DocumentRoot_connection_src
+	ConnectionType[*] role connection
+end
+
+composition xxx_DocumentRoot_context_ between
+	DocumentRoot[*] role xxx_DocumentRoot_context__src
+	ContextType[*] role context_
+end
+
+composition xxx_DocumentRoot_elementParameter between
+	DocumentRoot[*] role xxx_DocumentRoot_elementParameter_src
+	ElementParameterType[*] role elementParameter
+end
+
+composition xxx_DocumentRoot_node between
+	DocumentRoot[*] role xxx_DocumentRoot_node_src
+	NodeType[*] role node
+end
+
+composition xxx_DocumentRoot_note between
+	DocumentRoot[*] role xxx_DocumentRoot_note_src
+	NoteType[*] role note
+end
+
+composition xxx_DocumentRoot_parameters between
+	DocumentRoot[*] role xxx_DocumentRoot_parameters_src
+	ParametersType[*] role parameters
+end
+
+composition xxx_DocumentRoot_process between
+	DocumentRoot[*] role xxx_DocumentRoot_process_src
+	ProcessType[*] role process
+end
+
+composition xxx_DocumentRoot_required between
+	DocumentRoot[*] role xxx_DocumentRoot_required_src
+	RequiredType[*] role required
+end
+
+composition xxx_DocumentRoot_subjob between
+	DocumentRoot[*] role xxx_DocumentRoot_subjob_src
+	SubjobType[*] role subjob
+end
+
+composition xxx_ElementParameterType_elementValue between
+	ElementParameterType[0..1] role xxx_ElementParameterType_elementValue_src
+	ElementValueType[*] role elementValue
+end
+
+composition xxx_LogsType_logToFile between
+	LogsType[*] role xxx_LogsType_logToFile_src
+	LogToFileType[1] role logToFile
+end
+
+composition xxx_LogsType_logToDatabase between
+	LogsType[*] role xxx_LogsType_logToDatabase_src
+	LogToDatabaseType[1] role logToDatabase
+end
+
+composition xxx_LogsType_logToStdOut between
+	LogsType[*] role xxx_LogsType_logToStdOut_src
+	LogToStdOutType[1] role logToStdOut
+end
+
+composition xxx_MetadataType_column between
+	MetadataType[0..1] role xxx_MetadataType_column_src
+	ColumnType[*] role column
+end
+
+composition xxx_NodeType_elementParameter between
+	NodeType[0..1] role xxx_NodeType_elementParameter_src
+	ElementParameterType[1..*] role elementParameter
+end
+
+composition xxx_NodeType_metadata between
+	NodeType[0..1] role xxx_NodeType_metadata_src
+	MetadataType[*] role metadata
+end
+
+composition xxx_NodeType_nodeData between
+	NodeType[*] role xxx_NodeType_nodeData_src
+	AbstractExternalData[0..1] role nodeData
+end
+
+composition xxx_NodeType_nodeContainer between
+	NodeType[*] role xxx_NodeType_nodeContainer_src
+	NodeContainerType[0..1] role nodeContainer
+end
+
+composition xxx_NoteType_elementParameter between
+	NoteType[0..1] role xxx_NoteType_elementParameter_src
+	ElementParameterType[1..*] role elementParameter
+end
+
+composition xxx_ParametersType_elementParameter between
+	ParametersType[0..1] role xxx_ParametersType_elementParameter_src
+	ElementParameterType[1..*] role elementParameter
+end
+
+composition xxx_ParametersType_routinesParameter between
+	ParametersType[0..1] role xxx_ParametersType_routinesParameter_src
+	RoutinesParameterType[*] role routinesParameter
+end
+
+composition xxx_ProcessType_required between
+	ProcessType[*] role xxx_ProcessType_required_src
+	RequiredType[0..1] role required
+end
+
+composition xxx_ProcessType_context_ between
+	ProcessType[0..1] role xxx_ProcessType_context__src
+	ContextType[*] role context_
+end
+
+composition xxx_ProcessType_parameters between
+	ProcessType[*] role xxx_ProcessType_parameters_src
+	ParametersType[0..1] role parameters
+end
+
+composition xxx_ProcessType_node between
+	ProcessType[0..1] role xxx_ProcessType_node_src
+	NodeType[*] role node
+end
+
+composition xxx_ProcessType_connection between
+	ProcessType[0..1] role xxx_ProcessType_connection_src
+	ConnectionType[*] role connection
+end
+
+composition xxx_ProcessType_note between
+	ProcessType[0..1] role xxx_ProcessType_note_src
+	NoteType[*] role note
+end
+
+composition xxx_ProcessType_logs between
+	ProcessType[*] role xxx_ProcessType_logs_src
+	LogsType[0..1] role logs
+end
+
+composition xxx_ProcessType_subjob between
+	ProcessType[0..1] role xxx_ProcessType_subjob_src
+	SubjobType[*] role subjob
+end
+
+composition xxx_ProcessType_screenshots between
+	ProcessType[0..1] role xxx_ProcessType_screenshots_src
+	ScreenshotsMap[*] role screenshots
+end
+
+composition xxx_ProcessType_routinesDependencies between
+	ProcessType[0..1] role xxx_ProcessType_routinesDependencies_src
+	ItemInforType[*] role routinesDependencies
+end
+
+composition xxx_RequiredType_job between
+	RequiredType[0..1] role xxx_RequiredType_job_src
+	JobType[*] role job
+end
+
+composition xxx_SubjobType_elementParameter between
+	SubjobType[0..1] role xxx_SubjobType_elementParameter_src
+	ElementParameterType[1..*] role elementParameter
+end
+
+composition xxx_NodeContainerType_elementParameter between
+	NodeContainerType[0..1] role xxx_NodeContainerType_elementParameter_src
+	ElementParameterType[1..*] role elementParameter
+end
+

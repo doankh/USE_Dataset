@@ -1,0 +1,1530 @@
+model scl
+enum NameStructureType{
+default
+}
+
+enum TAssociationKindEnum{
+default
+}
+
+enum TAuthenticationEnum{
+default
+}
+
+enum TDomainLNGroupAEnum{
+default
+}
+
+enum TDomainLNGroupCEnum{
+default
+}
+
+enum TDomainLNGroupGEnum{
+default
+}
+
+enum TDomainLNGroupIEnum{
+default
+}
+
+enum TDomainLNGroupMEnum{
+default
+}
+
+enum TDomainLNGroupPEnum{
+default
+}
+
+enum TDomainLNGroupREnum{
+default
+}
+
+enum TDomainLNGroupSEnum{
+default
+}
+
+enum TDomainLNGroupTEnum{
+default
+}
+
+enum TDomainLNGroupXEnum{
+default
+}
+
+enum TDomainLNGroupYEnum{
+default
+}
+
+enum TDomainLNGroupZEnum{
+default
+}
+
+enum TFCEnum{
+default
+}
+
+enum TGSEControlTypeEnum{
+default
+}
+
+enum TLLN0Enum{
+default
+}
+
+enum TLPHDEnum{
+default
+}
+
+enum TPhaseEnum{
+default
+}
+
+enum TPowerTransformerEnum{
+default
+}
+
+enum TPredefinedAttributeNameEnum{
+default
+}
+
+enum TPredefinedBasicTypeEnum{
+default
+}
+
+enum TPredefinedCDCEnum{
+default
+}
+
+enum TPredefinedCommonConductingEquipmentEnum{
+default
+}
+
+enum TPredefinedGeneralEquipmentEnum{
+default
+}
+
+enum TPredefinedPTypeEnum{
+default
+}
+
+enum TServiceFCEnum{
+default
+}
+
+enum TServiceSettingsEnum{
+default
+}
+
+enum TSIUnitEnum{
+default
+}
+
+enum TTransformerWindingEnum{
+default
+}
+
+enum TTrgOptControlEnum{
+default
+}
+
+enum TTrgOptEnum{
+default
+}
+
+enum TUnitMultiplierEnum{
+default
+}
+
+enum TValKindEnum{
+default
+}
+
+class AuthenticationType
+attributes
+	certificate : Boolean
+	none : Boolean
+	password : Boolean
+	strong : Boolean
+	weak : Boolean
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class HistoryType
+attributes
+operations
+end
+
+class LN0Type<TLN0
+attributes
+operations
+end
+
+class OptFieldsType
+attributes
+	bufOvfl : Boolean
+	configRef : Boolean
+	dataRef : Boolean
+	dataSet : Boolean
+	entryID : Boolean
+	reasonCode : Boolean
+	seqNum : Boolean
+	timeStamp : Boolean
+operations
+end
+
+class SCLType<TBaseElement
+attributes
+operations
+end
+
+class SettingGroupsType
+attributes
+operations
+end
+
+class SmvOptsType
+attributes
+	dataSet : Boolean
+	refreshTime : Boolean
+	sampleRate : Boolean
+	sampleSynchronized : Boolean
+	security : Boolean
+operations
+end
+
+abstract class TAbstractConductingEquipment<TEquipment
+attributes
+operations
+end
+
+abstract class TAbstractDataAttribute<TUnNaming
+attributes
+	bType : String
+	count : String
+	name : String
+	sAddr : String
+	type : String
+	valKind : TValKindEnum
+operations
+end
+
+class TAccessControl<TAnyContentFromOtherNamespace
+attributes
+operations
+end
+
+class TAccessPoint<TNaming
+attributes
+	clock : Boolean
+	router : Boolean
+operations
+end
+
+class TAddress
+attributes
+operations
+end
+
+abstract class TAnyContentFromOtherNamespace
+attributes
+	mixed : String
+	group : String
+	any : String
+	anyAttribute : String
+operations
+end
+
+abstract class TAnyLN<TUnNaming
+attributes
+	lnType : String
+operations
+end
+
+class TAssociation
+attributes
+	associationID : String
+	iedName : String
+	kind : TAssociationKindEnum
+	ldInst : String
+	lnClass : String
+	lnInst : String
+	prefix : String
+operations
+end
+
+abstract class TBaseElement
+attributes
+	any : String
+	anyAttribute : String
+operations
+end
+
+class TBay<TEquipmentContainer
+attributes
+operations
+end
+
+class TBDA<TAbstractDataAttribute
+attributes
+operations
+end
+
+class TBitRateInMbPerSec<TValueWithUnit
+attributes
+operations
+end
+
+class TClientLN
+attributes
+	iedName : String
+	ldInst : String
+	lnClass : String
+	lnInst : String
+	prefix : String
+operations
+end
+
+class TClientServices
+attributes
+	bufReport : Boolean
+	goose : Boolean
+	gsse : Boolean
+	readLog : Boolean
+	unbufReport : Boolean
+operations
+end
+
+class TCommunication<TUnNaming
+attributes
+operations
+end
+
+class TConductingEquipment<TAbstractConductingEquipment
+attributes
+	type : String
+operations
+end
+
+class TConfLNs
+attributes
+	fixLnInst : Boolean
+	fixPrefix : Boolean
+operations
+end
+
+class TConnectedAP<TUnNaming
+attributes
+	apName : String
+	iedName : String
+operations
+end
+
+class TConnectivityNode<TLNodeContainer
+attributes
+	pathName : String
+operations
+end
+
+abstract class TControl<TNaming
+attributes
+	datSet : String
+operations
+end
+
+abstract class TControlBlock<TUnNaming
+attributes
+	cbName : String
+	ldInst : String
+operations
+end
+
+class TControlWithIEDName<TControl
+attributes
+	iEDName : String
+	confRev : String
+operations
+end
+
+abstract class TControlWithTriggerOpt<TControl
+attributes
+	intgPd : String
+operations
+end
+
+class TDA<TAbstractDataAttribute
+attributes
+	dchg : Boolean
+	dupd : Boolean
+	fc : TFCEnum
+	qchg : Boolean
+operations
+end
+
+class TDAI<TUnNaming
+attributes
+	ix : String
+	name : String
+	sAddr : String
+	valKind : TValKindEnum
+operations
+end
+
+class TDataSet<TNaming
+attributes
+	group : String
+operations
+end
+
+class TDataTypeTemplates
+attributes
+operations
+end
+
+class TDAType<TIDNaming
+attributes
+	iedType : String
+operations
+end
+
+class TDO<TUnNaming
+attributes
+	accessControl : String
+	name : String
+	transient : Boolean
+	type : String
+operations
+end
+
+class TDOI<TUnNaming
+attributes
+	group : String
+	accessControl : String
+	ix : String
+	name : String
+operations
+end
+
+class TDOType<TIDNaming
+attributes
+	group : String
+	cdc : String
+	iedType : String
+operations
+end
+
+class TDurationInMilliSec<TValueWithUnit
+attributes
+operations
+end
+
+class TDurationInSec<TValueWithUnit
+attributes
+operations
+end
+
+class TEnumType<TIDNaming
+attributes
+operations
+end
+
+class TEnumVal
+attributes
+	value : String
+	ord : Integer
+operations
+end
+
+abstract class TEquipment<TPowerSystemResource
+attributes
+	virtual : Boolean
+operations
+end
+
+abstract class TEquipmentContainer<TPowerSystemResource
+attributes
+operations
+end
+
+class TExtRef
+attributes
+	daName : String
+	doName : String
+	iedName : String
+	intAddr : String
+	ldInst : String
+	lnClass : String
+	lnInst : String
+	prefix : String
+operations
+end
+
+class TFCCB
+attributes
+	cbName : String
+	daName : String
+	fc : TServiceFCEnum
+	ldInst : String
+	lnClass : String
+	lnInst : String
+	prefix : String
+operations
+end
+
+class TFCDA
+attributes
+	daName : String
+	doName : String
+	fc : TFCEnum
+	ldInst : String
+	lnClass : String
+	lnInst : String
+	prefix : String
+operations
+end
+
+class TFunction<TPowerSystemResource
+attributes
+operations
+end
+
+class TGeneralEquipment<TEquipment
+attributes
+	type : String
+operations
+end
+
+class TGSE<TControlBlock
+attributes
+operations
+end
+
+class TGSEControl<TControlWithIEDName
+attributes
+	appID : String
+	type : TGSEControlTypeEnum
+operations
+end
+
+class TGSESettings<TServiceSettings
+attributes
+	appID : TServiceSettingsEnum
+	dataLabel : TServiceSettingsEnum
+operations
+end
+
+class THeader
+attributes
+	id : String
+	nameStructure : NameStructureType
+	revision : String
+	toolID : String
+	version : String
+operations
+end
+
+class THitem<TAnyContentFromOtherNamespace
+attributes
+	revision : String
+	version : String
+	what : String
+	when : String
+	who : String
+	why : String
+operations
+end
+
+abstract class TIDNaming<TBaseElement
+attributes
+	desc : String
+	id : String
+operations
+end
+
+class TIED<TNaming
+attributes
+	configVersion : String
+	manufacturer : String
+	type : String
+operations
+end
+
+class TInputs<TUnNaming
+attributes
+operations
+end
+
+class TLDevice<TUnNaming
+attributes
+	inst : String
+	ldName : String
+operations
+end
+
+class TLN<TAnyLN
+attributes
+	inst : String
+	lnClass : String
+	prefix : String
+operations
+end
+
+class TLN0<TAnyLN
+attributes
+	inst : String
+	lnClass : String
+operations
+end
+
+class TLNode<TUnNaming
+attributes
+	iedName : String
+	ldInst : String
+	lnClass : String
+	lnInst : String
+	lnType : String
+	prefix : String
+operations
+end
+
+abstract class TLNodeContainer<TNaming
+attributes
+operations
+end
+
+class TLNodeType<TIDNaming
+attributes
+	iedType : String
+	lnClass : String
+operations
+end
+
+class TLog<TAnyContentFromOtherNamespace
+attributes
+operations
+end
+
+class TLogControl<TControlWithTriggerOpt
+attributes
+	logEna : Boolean
+	logName : String
+	reasonCode : Boolean
+operations
+end
+
+class TLogSettings<TServiceSettings
+attributes
+	intgPd : TServiceSettingsEnum
+	logEna : TServiceSettingsEnum
+	trgOps : TServiceSettingsEnum
+operations
+end
+
+abstract class TNaming<TBaseElement
+attributes
+	desc : String
+	name : String
+operations
+end
+
+class TP
+attributes
+	value : String
+	type : String
+operations
+end
+
+class TPAPPID<TP
+attributes
+operations
+end
+
+class TPhysConn
+attributes
+	type : String
+operations
+end
+
+class TPIP<TP
+attributes
+operations
+end
+
+class TPIPGATEWAY<TP
+attributes
+operations
+end
+
+class TPIPSUBNET<TP
+attributes
+operations
+end
+
+class TPMACAddress<TP
+attributes
+operations
+end
+
+class TPOSIAEInvoke<TP
+attributes
+operations
+end
+
+class TPOSIAEQualifier<TP
+attributes
+operations
+end
+
+class TPOSIAPInvoke<TP
+attributes
+operations
+end
+
+class TPOSIAPTitle<TP
+attributes
+operations
+end
+
+class TPOSINSAP<TP
+attributes
+operations
+end
+
+class TPOSIPSEL<TP
+attributes
+operations
+end
+
+class TPOSISSEL<TP
+attributes
+operations
+end
+
+class TPOSITSEL<TP
+attributes
+operations
+end
+
+abstract class TPowerSystemResource<TLNodeContainer
+attributes
+operations
+end
+
+class TPowerTransformer<TEquipment
+attributes
+	type : TPowerTransformerEnum
+operations
+end
+
+class TPrivate<TAnyContentFromOtherNamespace
+attributes
+	source : String
+	type : String
+operations
+end
+
+class TPVLANID<TP
+attributes
+operations
+end
+
+class TPVLANPRIORITY<TP
+attributes
+operations
+end
+
+class TReportControl<TControlWithTriggerOpt
+attributes
+	buffered : Boolean
+	bufTime : String
+	confRev : String
+	rptID : String
+operations
+end
+
+class TReportSettings<TServiceSettings
+attributes
+	bufTime : TServiceSettingsEnum
+	intgPd : TServiceSettingsEnum
+	optFields : TServiceSettingsEnum
+	rptID : TServiceSettingsEnum
+	trgOps : TServiceSettingsEnum
+operations
+end
+
+class TRptEnabled<TUnNaming
+attributes
+	max : String
+operations
+end
+
+class TSampledValueControl<TControlWithIEDName
+attributes
+	multicast : Boolean
+	nofASDU : String
+	smpRate : String
+	smvID : String
+operations
+end
+
+class TSCLControl<TUnNaming
+attributes
+operations
+end
+
+class TSDI<TUnNaming
+attributes
+	group : String
+	ix : String
+	name : String
+operations
+end
+
+class TSDO<TNaming
+attributes
+	type : String
+operations
+end
+
+class TServer<TUnNaming
+attributes
+	timeout : String
+operations
+end
+
+class TServices
+attributes
+operations
+end
+
+abstract class TServiceSettings
+attributes
+	cbName : TServiceSettingsEnum
+	datSet : TServiceSettingsEnum
+operations
+end
+
+class TServiceWithMax
+attributes
+	max : String
+operations
+end
+
+class TServiceWithMaxAndMaxAttributes<TServiceWithMax
+attributes
+	maxAttributes : String
+operations
+end
+
+class TServiceWithMaxAndMaxAttributesAndModify<TServiceWithMaxAndMaxAttributes
+attributes
+	modify : Boolean
+operations
+end
+
+class TServiceWithMaxAndModify<TServiceWithMax
+attributes
+	modify : Boolean
+operations
+end
+
+class TServiceYesNo
+attributes
+operations
+end
+
+class TSettingControl<TUnNaming
+attributes
+	actSG : String
+	numOfSGs : String
+operations
+end
+
+class TSMV<TControlBlock
+attributes
+operations
+end
+
+class TSMVSettings<TServiceSettings
+attributes
+	smpRate : String
+	optFields : TServiceSettingsEnum
+	smpRate1 : TServiceSettingsEnum
+	svID : TServiceSettingsEnum
+operations
+end
+
+class TSubEquipment<TPowerSystemResource
+attributes
+	phase : TPhaseEnum
+	virtual : Boolean
+operations
+end
+
+class TSubFunction<TPowerSystemResource
+attributes
+operations
+end
+
+class TSubNetwork<TNaming
+attributes
+	type : String
+operations
+end
+
+class TSubstation<TEquipmentContainer
+attributes
+operations
+end
+
+class TTapChanger<TPowerSystemResource
+attributes
+	type : String
+	virtual : Boolean
+operations
+end
+
+class TTerminal<TUnNaming
+attributes
+	bayName : String
+	cNodeName : String
+	connectivityNode : String
+	name : String
+	substationName : String
+	voltageLevelName : String
+operations
+end
+
+class TText<TAnyContentFromOtherNamespace
+attributes
+	source : String
+operations
+end
+
+class TTransformerWinding<TAbstractConductingEquipment
+attributes
+	type : TTransformerWindingEnum
+operations
+end
+
+class TTrgOps
+attributes
+	dchg : Boolean
+	dupd : Boolean
+	period : Boolean
+	qchg : Boolean
+operations
+end
+
+abstract class TUnNaming<TBaseElement
+attributes
+	desc : String
+operations
+end
+
+class TVal
+attributes
+	value : String
+	sGroup : String
+operations
+end
+
+class TValueWithUnit
+attributes
+	value : String
+	multiplier : TUnitMultiplierEnum
+	unit : TSIUnitEnum
+operations
+end
+
+class TVoltage<TValueWithUnit
+attributes
+operations
+end
+
+class TVoltageLevel<TEquipmentContainer
+attributes
+operations
+end
+
+
+composition xxx_DocumentRoot_communication between
+	DocumentRoot[*] role xxx_DocumentRoot_communication_src
+	TCommunication[*] role communication
+end
+
+composition xxx_DocumentRoot_dataTypeTemplates between
+	DocumentRoot[*] role xxx_DocumentRoot_dataTypeTemplates_src
+	TDataTypeTemplates[*] role dataTypeTemplates
+end
+
+composition xxx_DocumentRoot_iED between
+	DocumentRoot[*] role xxx_DocumentRoot_iED_src
+	TIED[*] role iED
+end
+
+composition xxx_DocumentRoot_lN between
+	DocumentRoot[*] role xxx_DocumentRoot_lN_src
+	TLN[*] role lN
+end
+
+composition xxx_DocumentRoot_lN0 between
+	DocumentRoot[*] role xxx_DocumentRoot_lN0_src
+	LN0Type[*] role lN0
+end
+
+composition xxx_DocumentRoot_sCL between
+	DocumentRoot[*] role xxx_DocumentRoot_sCL_src
+	SCLType[*] role sCL
+end
+
+composition xxx_DocumentRoot_substation between
+	DocumentRoot[*] role xxx_DocumentRoot_substation_src
+	TSubstation[*] role substation
+end
+
+composition xxx_HistoryType_hitem between
+	HistoryType[0..1] role xxx_HistoryType_hitem_src
+	THitem[1..*] role hitem
+end
+
+composition xxx_SCLType_header between
+	SCLType[*] role xxx_SCLType_header_src
+	THeader[1] role header
+end
+
+composition xxx_SCLType_substation between
+	SCLType[0..1] role xxx_SCLType_substation_src
+	TSubstation[*] role substation
+end
+
+composition xxx_SCLType_communication between
+	SCLType[*] role xxx_SCLType_communication_src
+	TCommunication[0..1] role communication
+end
+
+composition xxx_SCLType_iED between
+	SCLType[0..1] role xxx_SCLType_iED_src
+	TIED[*] role iED
+end
+
+composition xxx_SCLType_dataTypeTemplates between
+	SCLType[*] role xxx_SCLType_dataTypeTemplates_src
+	TDataTypeTemplates[0..1] role dataTypeTemplates
+end
+
+composition xxx_SettingGroupsType_sGEdit between
+	SettingGroupsType[*] role xxx_SettingGroupsType_sGEdit_src
+	TServiceYesNo[0..1] role sGEdit
+end
+
+composition xxx_SettingGroupsType_confSG between
+	SettingGroupsType[*] role xxx_SettingGroupsType_confSG_src
+	TServiceYesNo[0..1] role confSG
+end
+
+composition xxx_TAbstractConductingEquipment_terminal between
+	TAbstractConductingEquipment[*] role xxx_TAbstractConductingEquipment_terminal_src
+	TTerminal[0..2] role terminal
+end
+
+composition xxx_TAbstractConductingEquipment_subEquipment between
+	TAbstractConductingEquipment[0..1] role xxx_TAbstractConductingEquipment_subEquipment_src
+	TSubEquipment[*] role subEquipment
+end
+
+composition xxx_TAbstractDataAttribute_val between
+	TAbstractDataAttribute[0..1] role xxx_TAbstractDataAttribute_val_src
+	TVal[*] role val
+end
+
+composition xxx_TAccessPoint_server between
+	TAccessPoint[*] role xxx_TAccessPoint_server_src
+	TServer[0..1] role server
+end
+
+composition xxx_TAccessPoint_lN between
+	TAccessPoint[0..1] role xxx_TAccessPoint_lN_src
+	TLN[*] role lN
+end
+
+composition xxx_TAddress_p between
+	TAddress[0..1] role xxx_TAddress_p_src
+	TP[1..*] role p
+end
+
+composition xxx_TAnyLN_dataSet between
+	TAnyLN[0..1] role xxx_TAnyLN_dataSet_src
+	TDataSet[*] role dataSet
+end
+
+composition xxx_TAnyLN_reportControl between
+	TAnyLN[0..1] role xxx_TAnyLN_reportControl_src
+	TReportControl[*] role reportControl
+end
+
+composition xxx_TAnyLN_logControl between
+	TAnyLN[0..1] role xxx_TAnyLN_logControl_src
+	TLogControl[*] role logControl
+end
+
+composition xxx_TAnyLN_dOI between
+	TAnyLN[0..1] role xxx_TAnyLN_dOI_src
+	TDOI[*] role dOI
+end
+
+composition xxx_TAnyLN_inputs between
+	TAnyLN[*] role xxx_TAnyLN_inputs_src
+	TInputs[0..1] role inputs
+end
+
+composition xxx_TBaseElement_text between
+	TBaseElement[*] role xxx_TBaseElement_text_src
+	TText[0..1] role text
+end
+
+composition xxx_TBaseElement_private between
+	TBaseElement[0..1] role xxx_TBaseElement_private_src
+	TPrivate[*] role private
+end
+
+composition xxx_TBay_conductingEquipment between
+	TBay[0..1] role xxx_TBay_conductingEquipment_src
+	TConductingEquipment[*] role conductingEquipment
+end
+
+composition xxx_TBay_connectivityNode between
+	TBay[0..1] role xxx_TBay_connectivityNode_src
+	TConnectivityNode[*] role connectivityNode
+end
+
+composition xxx_TCommunication_subNetwork between
+	TCommunication[0..1] role xxx_TCommunication_subNetwork_src
+	TSubNetwork[1..*] role subNetwork
+end
+
+composition xxx_TConnectedAP_address between
+	TConnectedAP[*] role xxx_TConnectedAP_address_src
+	TAddress[0..1] role address
+end
+
+composition xxx_TConnectedAP_gSE between
+	TConnectedAP[0..1] role xxx_TConnectedAP_gSE_src
+	TGSE[*] role gSE
+end
+
+composition xxx_TConnectedAP_sMV between
+	TConnectedAP[0..1] role xxx_TConnectedAP_sMV_src
+	TSMV[*] role sMV
+end
+
+composition xxx_TConnectedAP_physConn between
+	TConnectedAP[0..1] role xxx_TConnectedAP_physConn_src
+	TPhysConn[*] role physConn
+end
+
+composition xxx_TControlBlock_address between
+	TControlBlock[*] role xxx_TControlBlock_address_src
+	TAddress[0..1] role address
+end
+
+composition xxx_TControlWithTriggerOpt_trgOps between
+	TControlWithTriggerOpt[*] role xxx_TControlWithTriggerOpt_trgOps_src
+	TTrgOps[0..1] role trgOps
+end
+
+composition xxx_TDAI_val between
+	TDAI[0..1] role xxx_TDAI_val_src
+	TVal[*] role val
+end
+
+composition xxx_TDataSet_fCDA between
+	TDataSet[0..1] role xxx_TDataSet_fCDA_src
+	TFCDA[*] role fCDA
+end
+
+composition xxx_TDataSet_fCCB between
+	TDataSet[0..1] role xxx_TDataSet_fCCB_src
+	TFCCB[*] role fCCB
+end
+
+composition xxx_TDataTypeTemplates_lNodeType between
+	TDataTypeTemplates[0..1] role xxx_TDataTypeTemplates_lNodeType_src
+	TLNodeType[1..*] role lNodeType
+end
+
+composition xxx_TDataTypeTemplates_dOType between
+	TDataTypeTemplates[0..1] role xxx_TDataTypeTemplates_dOType_src
+	TDOType[1..*] role dOType
+end
+
+composition xxx_TDataTypeTemplates_dAType between
+	TDataTypeTemplates[0..1] role xxx_TDataTypeTemplates_dAType_src
+	TDAType[*] role dAType
+end
+
+composition xxx_TDataTypeTemplates_enumType between
+	TDataTypeTemplates[0..1] role xxx_TDataTypeTemplates_enumType_src
+	TEnumType[*] role enumType
+end
+
+composition xxx_TDAType_bDA between
+	TDAType[0..1] role xxx_TDAType_bDA_src
+	TBDA[1..*] role bDA
+end
+
+composition xxx_TDOI_sDI between
+	TDOI[0..1] role xxx_TDOI_sDI_src
+	TSDI[*] role sDI
+end
+
+composition xxx_TDOI_dAI between
+	TDOI[0..1] role xxx_TDOI_dAI_src
+	TDAI[*] role dAI
+end
+
+composition xxx_TDOType_sDO between
+	TDOType[0..1] role xxx_TDOType_sDO_src
+	TSDO[*] role sDO
+end
+
+composition xxx_TDOType_dA between
+	TDOType[0..1] role xxx_TDOType_dA_src
+	TDA[*] role dA
+end
+
+composition xxx_TEnumType_enumVal between
+	TEnumType[0..1] role xxx_TEnumType_enumVal_src
+	TEnumVal[1..*] role enumVal
+end
+
+composition xxx_TEquipmentContainer_powerTransformer between
+	TEquipmentContainer[0..1] role xxx_TEquipmentContainer_powerTransformer_src
+	TPowerTransformer[*] role powerTransformer
+end
+
+composition xxx_TEquipmentContainer_generalEquipment between
+	TEquipmentContainer[0..1] role xxx_TEquipmentContainer_generalEquipment_src
+	TGeneralEquipment[*] role generalEquipment
+end
+
+composition xxx_TFunction_subFunction between
+	TFunction[0..1] role xxx_TFunction_subFunction_src
+	TSubFunction[*] role subFunction
+end
+
+composition xxx_TFunction_generalEquipment between
+	TFunction[0..1] role xxx_TFunction_generalEquipment_src
+	TGeneralEquipment[*] role generalEquipment
+end
+
+composition xxx_TGSE_minTime between
+	TGSE[*] role xxx_TGSE_minTime_src
+	TDurationInMilliSec[0..1] role minTime
+end
+
+composition xxx_TGSE_maxTime between
+	TGSE[*] role xxx_TGSE_maxTime_src
+	TDurationInMilliSec[0..1] role maxTime
+end
+
+composition xxx_THeader_text between
+	THeader[*] role xxx_THeader_text_src
+	TText[0..1] role text
+end
+
+composition xxx_THeader_history between
+	THeader[*] role xxx_THeader_history_src
+	HistoryType[0..1] role history
+end
+
+composition xxx_TIED_services between
+	TIED[*] role xxx_TIED_services_src
+	TServices[0..1] role services
+end
+
+composition xxx_TIED_accessPoint between
+	TIED[0..1] role xxx_TIED_accessPoint_src
+	TAccessPoint[1..*] role accessPoint
+end
+
+composition xxx_TInputs_extRef between
+	TInputs[0..1] role xxx_TInputs_extRef_src
+	TExtRef[1..*] role extRef
+end
+
+composition xxx_TLDevice_lN0 between
+	TLDevice[*] role xxx_TLDevice_lN0_src
+	LN0Type[1] role lN0
+end
+
+composition xxx_TLDevice_lN between
+	TLDevice[0..1] role xxx_TLDevice_lN_src
+	TLN[*] role lN
+end
+
+composition xxx_TLDevice_accessControl between
+	TLDevice[*] role xxx_TLDevice_accessControl_src
+	TAccessControl[0..1] role accessControl
+end
+
+composition xxx_TLN0_gSEControl between
+	TLN0[0..1] role xxx_TLN0_gSEControl_src
+	TGSEControl[*] role gSEControl
+end
+
+composition xxx_TLN0_sampledValueControl between
+	TLN0[0..1] role xxx_TLN0_sampledValueControl_src
+	TSampledValueControl[*] role sampledValueControl
+end
+
+composition xxx_TLN0_settingControl between
+	TLN0[*] role xxx_TLN0_settingControl_src
+	TSettingControl[0..1] role settingControl
+end
+
+composition xxx_TLN0_sCLControl between
+	TLN0[*] role xxx_TLN0_sCLControl_src
+	TSCLControl[0..1] role sCLControl
+end
+
+composition xxx_TLN0_log between
+	TLN0[*] role xxx_TLN0_log_src
+	TLog[0..1] role log
+end
+
+composition xxx_TLNodeContainer_lNode between
+	TLNodeContainer[0..1] role xxx_TLNodeContainer_lNode_src
+	TLNode[*] role lNode
+end
+
+composition xxx_TLNodeType_dO between
+	TLNodeType[0..1] role xxx_TLNodeType_dO_src
+	TDO[1..*] role dO
+end
+
+composition xxx_TPhysConn_p between
+	TPhysConn[0..1] role xxx_TPhysConn_p_src
+	TP[*] role p
+end
+
+composition xxx_TPowerTransformer_transformerWinding between
+	TPowerTransformer[0..1] role xxx_TPowerTransformer_transformerWinding_src
+	TTransformerWinding[1..*] role transformerWinding
+end
+
+composition xxx_TReportControl_optFields between
+	TReportControl[*] role xxx_TReportControl_optFields_src
+	OptFieldsType[1] role optFields
+end
+
+composition xxx_TReportControl_rptEnabled between
+	TReportControl[*] role xxx_TReportControl_rptEnabled_src
+	TRptEnabled[0..1] role rptEnabled
+end
+
+composition xxx_TRptEnabled_clientLN between
+	TRptEnabled[0..1] role xxx_TRptEnabled_clientLN_src
+	TClientLN[*] role clientLN
+end
+
+composition xxx_TSampledValueControl_smvOpts between
+	TSampledValueControl[*] role xxx_TSampledValueControl_smvOpts_src
+	SmvOptsType[1] role smvOpts
+end
+
+composition xxx_TSDI_sDI between
+	TSDI[0..1] role xxx_TSDI_sDI_src
+	TSDI[*] role sDI
+end
+
+composition xxx_TSDI_dAI between
+	TSDI[0..1] role xxx_TSDI_dAI_src
+	TDAI[*] role dAI
+end
+
+composition xxx_TServer_authentication between
+	TServer[*] role xxx_TServer_authentication_src
+	AuthenticationType[1] role authentication
+end
+
+composition xxx_TServer_lDevice between
+	TServer[0..1] role xxx_TServer_lDevice_src
+	TLDevice[1..*] role lDevice
+end
+
+composition xxx_TServer_association_ between
+	TServer[0..1] role xxx_TServer_association__src
+	TAssociation[*] role association_
+end
+
+composition xxx_TServices_dynAssociation between
+	TServices[*] role xxx_TServices_dynAssociation_src
+	TServiceYesNo[0..1] role dynAssociation
+end
+
+composition xxx_TServices_settingGroups between
+	TServices[*] role xxx_TServices_settingGroups_src
+	SettingGroupsType[0..1] role settingGroups
+end
+
+composition xxx_TServices_getDirectory between
+	TServices[*] role xxx_TServices_getDirectory_src
+	TServiceYesNo[0..1] role getDirectory
+end
+
+composition xxx_TServices_getDataObjectDefinition between
+	TServices[*] role xxx_TServices_getDataObjectDefinition_src
+	TServiceYesNo[0..1] role getDataObjectDefinition
+end
+
+composition xxx_TServices_dataObjectDirectory between
+	TServices[*] role xxx_TServices_dataObjectDirectory_src
+	TServiceYesNo[0..1] role dataObjectDirectory
+end
+
+composition xxx_TServices_getDataSetValue between
+	TServices[*] role xxx_TServices_getDataSetValue_src
+	TServiceYesNo[0..1] role getDataSetValue
+end
+
+composition xxx_TServices_setDataSetValue between
+	TServices[*] role xxx_TServices_setDataSetValue_src
+	TServiceYesNo[0..1] role setDataSetValue
+end
+
+composition xxx_TServices_dataSetDirectory between
+	TServices[*] role xxx_TServices_dataSetDirectory_src
+	TServiceYesNo[0..1] role dataSetDirectory
+end
+
+composition xxx_TServices_confDataSet between
+	TServices[*] role xxx_TServices_confDataSet_src
+	TServiceWithMaxAndMaxAttributesAndModify[0..1] role confDataSet
+end
+
+composition xxx_TServices_dynDataSet between
+	TServices[*] role xxx_TServices_dynDataSet_src
+	TServiceWithMaxAndMaxAttributes[0..1] role dynDataSet
+end
+
+composition xxx_TServices_readWrite between
+	TServices[*] role xxx_TServices_readWrite_src
+	TServiceYesNo[0..1] role readWrite
+end
+
+composition xxx_TServices_timerActivatedControl between
+	TServices[*] role xxx_TServices_timerActivatedControl_src
+	TServiceYesNo[0..1] role timerActivatedControl
+end
+
+composition xxx_TServices_confReportControl between
+	TServices[*] role xxx_TServices_confReportControl_src
+	TServiceWithMax[0..1] role confReportControl
+end
+
+composition xxx_TServices_getCBValues between
+	TServices[*] role xxx_TServices_getCBValues_src
+	TServiceYesNo[0..1] role getCBValues
+end
+
+composition xxx_TServices_confLogControl between
+	TServices[*] role xxx_TServices_confLogControl_src
+	TServiceWithMax[0..1] role confLogControl
+end
+
+composition xxx_TServices_reportSettings between
+	TServices[*] role xxx_TServices_reportSettings_src
+	TReportSettings[0..1] role reportSettings
+end
+
+composition xxx_TServices_logSettings between
+	TServices[*] role xxx_TServices_logSettings_src
+	TLogSettings[0..1] role logSettings
+end
+
+composition xxx_TServices_gSESettings between
+	TServices[*] role xxx_TServices_gSESettings_src
+	TGSESettings[0..1] role gSESettings
+end
+
+composition xxx_TServices_sMVSettings between
+	TServices[*] role xxx_TServices_sMVSettings_src
+	TSMVSettings[0..1] role sMVSettings
+end
+
+composition xxx_TServices_gSEDir between
+	TServices[*] role xxx_TServices_gSEDir_src
+	TServiceYesNo[0..1] role gSEDir
+end
+
+composition xxx_TServices_gOOSE between
+	TServices[*] role xxx_TServices_gOOSE_src
+	TServiceWithMax[0..1] role gOOSE
+end
+
+composition xxx_TServices_gSSE between
+	TServices[*] role xxx_TServices_gSSE_src
+	TServiceWithMax[0..1] role gSSE
+end
+
+composition xxx_TServices_fileHandling between
+	TServices[*] role xxx_TServices_fileHandling_src
+	TServiceYesNo[0..1] role fileHandling
+end
+
+composition xxx_TServices_confLNs between
+	TServices[*] role xxx_TServices_confLNs_src
+	TConfLNs[0..1] role confLNs
+end
+
+composition xxx_TServices_clientServices between
+	TServices[*] role xxx_TServices_clientServices_src
+	TClientServices[0..1] role clientServices
+end
+
+composition xxx_TSubFunction_generalEquipment between
+	TSubFunction[0..1] role xxx_TSubFunction_generalEquipment_src
+	TGeneralEquipment[*] role generalEquipment
+end
+
+composition xxx_TSubNetwork_bitRate between
+	TSubNetwork[*] role xxx_TSubNetwork_bitRate_src
+	TBitRateInMbPerSec[0..1] role bitRate
+end
+
+composition xxx_TSubNetwork_connectedAP between
+	TSubNetwork[0..1] role xxx_TSubNetwork_connectedAP_src
+	TConnectedAP[1..*] role connectedAP
+end
+
+composition xxx_TSubstation_voltageLevel between
+	TSubstation[0..1] role xxx_TSubstation_voltageLevel_src
+	TVoltageLevel[1..*] role voltageLevel
+end
+
+composition xxx_TSubstation_function between
+	TSubstation[0..1] role xxx_TSubstation_function_src
+	TFunction[*] role function
+end
+
+composition xxx_TTransformerWinding_tapChanger between
+	TTransformerWinding[*] role xxx_TTransformerWinding_tapChanger_src
+	TTapChanger[0..1] role tapChanger
+end
+
+composition xxx_TVoltageLevel_voltage between
+	TVoltageLevel[*] role xxx_TVoltageLevel_voltage_src
+	TVoltage[0..1] role voltage
+end
+
+composition xxx_TVoltageLevel_bay between
+	TVoltageLevel[0..1] role xxx_TVoltageLevel_bay_src
+	TBay[1..*] role bay
+end
+

@@ -1,0 +1,191 @@
+model scd
+enum PortType{
+default
+}
+
+enum ComponentType{
+default
+}
+
+class ComponentFeatures
+attributes
+operations
+end
+
+class ComponentRepId
+attributes
+	repid : String
+operations
+end
+
+class InheritsInterface
+attributes
+	repid : String
+operations
+end
+
+class Interface
+attributes
+	name : String
+	repid : String
+operations
+	isInstance(obj : Interface):Boolean
+end
+
+class Interfaces
+attributes
+operations
+end
+
+class LocalFile
+attributes
+	name : String
+operations
+end
+
+class Ports
+attributes
+	group : String
+operations
+end
+
+class PortTypeContainer
+attributes
+	type : PortType
+operations
+end
+
+class PropertyFile
+attributes
+	type : String
+operations
+end
+
+class Provides<AbstractPort
+attributes
+	providesName : String
+operations
+end
+
+abstract class AbstractPort
+attributes
+	name : String
+	repID : String
+operations
+	isBiDirectional():Boolean
+	getSibling():AbstractPort
+end
+
+class ScdDocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class SoftwareComponent
+attributes
+	corbaVersion : String
+	componentType : String
+	repId : String
+operations
+end
+
+class SupportsInterface
+attributes
+	repId : String
+	supportsName : String
+	id : String
+operations
+end
+
+class Uses<AbstractPort
+attributes
+	usesName : String
+operations
+end
+
+composition xxx_ComponentFeatures_supportsInterface between
+	ComponentFeatures[0..1] role xxx_ComponentFeatures_supportsInterface_src
+	SupportsInterface[*] role supportsInterface
+end
+
+composition xxx_ComponentFeatures_ports between
+	ComponentFeatures[*] role xxx_ComponentFeatures_ports_src
+	Ports[1] role ports
+end
+
+association xxx_ComponentRepId_interface between
+	ComponentRepId[*] role xxx_ComponentRepId_interface_src
+	Interface[0..1] role interface
+end
+
+association xxx_InheritsInterface_interface between
+	InheritsInterface[*] role xxx_InheritsInterface_interface_src
+	Interface[0..1] role interface
+end
+
+composition xxx_Interface_inheritsInterfaces between
+	Interface[0..1] role xxx_Interface_inheritsInterfaces_src
+	InheritsInterface[*] role inheritsInterfaces
+end
+
+composition xxx_Interfaces_interface between
+	Interfaces[0..1] role xxx_Interfaces_interface_src
+	Interface[1..*] role interface
+end
+
+composition xxx_Ports_provides between
+	Ports[0..1] role xxx_Ports_provides_src
+	Provides[*] role provides
+end
+
+composition xxx_Ports_uses between
+	Ports[0..1] role xxx_Ports_uses_src
+	Uses[*] role uses
+end
+
+composition xxx_PropertyFile_localFile between
+	PropertyFile[*] role xxx_PropertyFile_localFile_src
+	LocalFile[1] role localFile
+end
+
+composition xxx_AbstractPort_portType between
+	AbstractPort[0..1] role xxx_AbstractPort_portType_src
+	PortTypeContainer[*] role portType
+end
+
+association xxx_AbstractPort_interface between
+	AbstractPort[*] role xxx_AbstractPort_interface_src
+	Interface[0..1] role interface
+end
+
+composition xxx_ScdDocumentRoot_softwarecomponent between
+	ScdDocumentRoot[*] role xxx_ScdDocumentRoot_softwarecomponent_src
+	SoftwareComponent[*] role softwarecomponent
+end
+
+composition xxx_SoftwareComponent_componentRepID between
+	SoftwareComponent[*] role xxx_SoftwareComponent_componentRepID_src
+	ComponentRepId[1] role componentRepID
+end
+
+composition xxx_SoftwareComponent_componentFeatures between
+	SoftwareComponent[*] role xxx_SoftwareComponent_componentFeatures_src
+	ComponentFeatures[1] role componentFeatures
+end
+
+composition xxx_SoftwareComponent_interfaces between
+	SoftwareComponent[*] role xxx_SoftwareComponent_interfaces_src
+	Interfaces[1] role interfaces
+end
+
+composition xxx_SoftwareComponent_propertyFile between
+	SoftwareComponent[*] role xxx_SoftwareComponent_propertyFile_src
+	PropertyFile[0..1] role propertyFile
+end
+
+association xxx_SupportsInterface_interface between
+	SupportsInterface[*] role xxx_SupportsInterface_interface_src
+	Interface[0..1] role interface
+end
+

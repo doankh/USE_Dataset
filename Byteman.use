@@ -1,0 +1,472 @@
+model byteman
+class DomainModel
+attributes
+operations
+end
+
+class Element
+attributes
+operations
+end
+
+class BytemanRule<Element
+attributes
+	name : String
+operations
+end
+
+class Body
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+class EventClass
+attributes
+	keyword : String
+	name : String
+operations
+end
+
+class EventMethod
+attributes
+	name : String
+operations
+end
+
+class Helper<Element
+attributes
+	helper : String
+operations
+end
+
+class LocationSpecifier
+attributes
+operations
+end
+
+class AtLocation<LocationSpecifier
+attributes
+operations
+end
+
+class AfterLocation<LocationSpecifier
+attributes
+	counter : String
+operations
+end
+
+class AtEntry<AtLocation
+attributes
+operations
+end
+
+class AtExit<AtLocation
+attributes
+operations
+end
+
+class AtLine<LocationSpecifier,AtLocation
+attributes
+	line : String
+operations
+end
+
+class AtRead<AtLocation
+attributes
+	name : String
+	counter : String
+operations
+end
+
+class AtReadField<AtRead
+attributes
+operations
+end
+
+class AtReadLocal<AtRead
+attributes
+operations
+end
+
+class AfterRead<AfterLocation
+attributes
+	name : String
+operations
+end
+
+class AfterReadField<AfterRead
+attributes
+operations
+end
+
+class AfterReadLocal<AfterRead
+attributes
+operations
+end
+
+class AtWrite<AtLocation
+attributes
+	name : String
+	counter : String
+operations
+end
+
+class AtWriteField<AtWrite
+attributes
+operations
+end
+
+class AtWriteLocal<AtWrite
+attributes
+operations
+end
+
+class AfterWrite<AfterLocation
+attributes
+	name : String
+operations
+end
+
+class AfterWriteField<AfterWrite
+attributes
+operations
+end
+
+class AfterWriteLocal<AfterWrite
+attributes
+operations
+end
+
+class AtInvoke<AtLocation
+attributes
+	name : String
+	counter : String
+operations
+end
+
+class AfterInvoke<AfterLocation
+attributes
+	name : String
+operations
+end
+
+class AtSynchronize<AtLocation
+attributes
+	counter : String
+operations
+end
+
+class AfterSynchronize<AfterLocation
+attributes
+operations
+end
+
+class AtThrow<AtLocation,AfterLocation
+attributes
+	name : String
+operations
+end
+
+class ParameterTypes
+attributes
+	paramTypeNames : String
+operations
+end
+
+class Bind
+attributes
+operations
+end
+
+class Bindings
+attributes
+operations
+end
+
+class Binding
+attributes
+	bindVariable : String
+	typename : String
+operations
+end
+
+class Condition
+attributes
+operations
+end
+
+class Actions
+attributes
+operations
+end
+
+class ActionList
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Expression<Condition,Action
+attributes
+	op : String
+operations
+end
+
+class CallArguments
+attributes
+operations
+end
+
+class AssignmentExpr<Expression
+attributes
+operations
+end
+
+class OperatorExpr<Expression
+attributes
+operations
+end
+
+class PlusMinusOperand<Expression
+attributes
+operations
+end
+
+class TimesDivOperand<Expression
+attributes
+operations
+end
+
+class BitwiseOperand<Expression
+attributes
+operations
+end
+
+class LogicalOperand<Expression
+attributes
+operations
+end
+
+class AccessExpr<Expression
+attributes
+	value : String
+operations
+end
+
+class BuiltinExpr<Expression
+attributes
+	value : String
+operations
+end
+
+class NewExpr<Expression
+attributes
+	value : String
+operations
+end
+
+class SimpleName<Expression
+attributes
+	value : String
+operations
+end
+
+class IndexedSpecialVar<Expression
+attributes
+operations
+end
+
+class SpecialVar<Expression
+attributes
+	value : String
+operations
+end
+
+class IntConstantExpr<Expression
+attributes
+	value : String
+operations
+end
+
+class StringConstantExpr<Expression
+attributes
+	value : String
+operations
+end
+
+class BooleanConstantExpr<Expression
+attributes
+	value : String
+operations
+end
+
+class FloatConstantExpr<Expression
+attributes
+	value : String
+operations
+end
+
+composition xxx_DomainModel_elements between
+	DomainModel[0..1] role xxx_DomainModel_elements_src
+	Element[*] role elements
+end
+
+composition xxx_BytemanRule_event between
+	BytemanRule[*] role xxx_BytemanRule_event_src
+	Event[0..1] role event
+end
+
+composition xxx_BytemanRule_body between
+	BytemanRule[*] role xxx_BytemanRule_body_src
+	Body[0..1] role body
+end
+
+composition xxx_Body_bind between
+	Body[*] role xxx_Body_bind_src
+	Bind[0..1] role bind
+end
+
+composition xxx_Body_condition between
+	Body[*] role xxx_Body_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_Body_actions between
+	Body[*] role xxx_Body_actions_src
+	Actions[0..1] role actions
+end
+
+composition xxx_Event_class_ between
+	Event[*] role xxx_Event_class__src
+	EventClass[0..1] role class_
+end
+
+composition xxx_Event_interface between
+	Event[*] role xxx_Event_interface_src
+	EventClass[0..1] role interface
+end
+
+composition xxx_Event_method between
+	Event[*] role xxx_Event_method_src
+	EventMethod[0..1] role method
+end
+
+composition xxx_Event_helper between
+	Event[*] role xxx_Event_helper_src
+	Helper[0..1] role helper
+end
+
+composition xxx_Event_locationSpec between
+	Event[*] role xxx_Event_locationSpec_src
+	LocationSpecifier[0..1] role locationSpec
+end
+
+composition xxx_EventMethod_parameterTypes between
+	EventMethod[*] role xxx_EventMethod_parameterTypes_src
+	ParameterTypes[0..1] role parameterTypes
+end
+
+composition xxx_AtInvoke_parameterTypes between
+	AtInvoke[*] role xxx_AtInvoke_parameterTypes_src
+	ParameterTypes[0..1] role parameterTypes
+end
+
+composition xxx_AfterInvoke_parameterTypes between
+	AfterInvoke[*] role xxx_AfterInvoke_parameterTypes_src
+	ParameterTypes[0..1] role parameterTypes
+end
+
+composition xxx_Bind_bind between
+	Bind[*] role xxx_Bind_bind_src
+	Bindings[0..1] role bind
+end
+
+composition xxx_Bindings_bindings between
+	Bindings[0..1] role xxx_Bindings_bindings_src
+	Binding[*] role bindings
+end
+
+composition xxx_Binding_value between
+	Binding[*] role xxx_Binding_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_Actions_actionList between
+	Actions[*] role xxx_Actions_actionList_src
+	ActionList[0..1] role actionList
+end
+
+composition xxx_ActionList_actions between
+	ActionList[0..1] role xxx_ActionList_actions_src
+	Action[*] role actions
+end
+
+composition xxx_Expression_operand1 between
+	Expression[*] role xxx_Expression_operand1_src
+	Expression[0..1] role operand1
+end
+
+composition xxx_CallArguments_args between
+	CallArguments[0..1] role xxx_CallArguments_args_src
+	Expression[*] role args
+end
+
+composition xxx_AssignmentExpr_operand2 between
+	AssignmentExpr[*] role xxx_AssignmentExpr_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_OperatorExpr_operand2 between
+	OperatorExpr[*] role xxx_OperatorExpr_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_PlusMinusOperand_operand2 between
+	PlusMinusOperand[*] role xxx_PlusMinusOperand_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_TimesDivOperand_operand2 between
+	TimesDivOperand[*] role xxx_TimesDivOperand_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_BitwiseOperand_operand2 between
+	BitwiseOperand[*] role xxx_BitwiseOperand_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_LogicalOperand_operand2 between
+	LogicalOperand[*] role xxx_LogicalOperand_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_AccessExpr_operand2 between
+	AccessExpr[*] role xxx_AccessExpr_operand2_src
+	Expression[0..1] role operand2
+end
+
+composition xxx_AccessExpr_args between
+	AccessExpr[*] role xxx_AccessExpr_args_src
+	CallArguments[0..1] role args
+end
+
+composition xxx_BuiltinExpr_args between
+	BuiltinExpr[*] role xxx_BuiltinExpr_args_src
+	CallArguments[0..1] role args
+end
+
+composition xxx_NewExpr_params between
+	NewExpr[*] role xxx_NewExpr_params_src
+	CallArguments[0..1] role params
+end
+

@@ -1,0 +1,272 @@
+model general
+enum EventType{
+default
+}
+
+enum ConnectionType{
+default
+}
+
+enum QualityCriteria{
+default
+}
+
+enum documentType{
+default
+}
+
+enum Milestone{
+default
+}
+
+class User
+attributes
+	userId : String
+	username : String
+	password : String
+	email : String
+	lastUsed : String
+	timesUsed : Integer
+	deleted : Boolean
+operations
+end
+
+class Event
+attributes
+	eventId : String
+	message : String
+	date : String
+	userRelevant : Boolean
+	type : String
+	source : String
+operations
+end
+
+class DataSource
+attributes
+	name : String
+	dataSourceId : String
+	created : String
+	modified : String
+	addInfo1 : String
+	addInfo2 : String
+	addInfo3 : String
+operations
+end
+
+class Connection
+attributes
+	connectionId : String
+	username : String
+	password : String
+	connectionType : ConnectionType
+	database : String
+	project : String
+	release : String
+	addInfo1 : String
+	addInfo2 : String
+	addInfo3 : String
+	addInfo4 : String
+	created : String
+	modified : String
+	lastUsed : String
+	deleted : Boolean
+operations
+end
+
+class Container
+attributes
+	containerId : String
+	name : String
+	created : String
+	modified : String
+	addInfo1 : String
+	addInfo2 : String
+	addInfo3 : String
+	deleted : Boolean
+	ownerId : String
+operations
+end
+
+class Snapshot
+attributes
+	snapshotId : String
+	created : String
+	name : String
+	comment : String
+	deleted : Boolean
+operations
+end
+
+class ContentObject
+attributes
+	objectId : String
+	name : String
+	level : Integer
+	version : String
+	release : String
+	modfiedDate : String
+	fullName : String
+	dummy : Boolean
+operations
+end
+
+class File<ContentObject
+attributes
+	objectName : String
+	creationDate : String
+	status : String
+	suffix : String
+operations
+end
+
+class Folder<ContentObject
+attributes
+operations
+end
+
+class FileType
+attributes
+	fileTypeId : String
+	name : String
+	description : String
+	icon : String
+	suffix : String
+operations
+end
+
+class Function
+attributes
+	functionId : String
+	name : String
+	created : String
+	overallStatus : String
+	modified : String
+	deleted : Boolean
+operations
+end
+
+class FileFunctionStatus
+attributes
+	fileFunctionStatusId : String
+	required : Boolean
+	upToDate : QualityCriteria
+	reviewed : QualityCriteria
+	configurationManagement : QualityCriteria
+	rating : QualityCriteria
+	comment : String
+	setOn : String
+	type : documentType
+operations
+end
+
+class UserList
+attributes
+	Users : String
+operations
+end
+
+class Task
+attributes
+	taskId : String
+	finished : Boolean
+	description : String
+	created : String
+operations
+end
+
+class SessionSatus
+attributes
+	mksStatus : Boolean
+	dbStatus : Boolean
+	synergySession : String
+operations
+end
+
+class CheckInMilestone
+attributes
+	checkInMilestoneId : String
+	milestone : Milestone
+operations
+end
+
+composition xxx_Event_user between
+	Event[*] role xxx_Event_user_src
+	User[0..1] role user
+end
+
+association xxx_DataSource_setting between
+	DataSource[0..1] role xxx_DataSource_setting_src
+	Connection[*] role setting
+end
+
+association xxx_Connection_source between
+	Connection[*] role xxx_Connection_source_src
+	DataSource[1] role source
+end
+
+association xxx_Connection_partOf between
+	Connection[*] role xxx_Connection_partOf_src
+	Container[1] role partOf
+end
+
+composition xxx_Container_owner between
+	Container[*] role xxx_Container_owner_src
+	User[0..1] role owner
+end
+
+association xxx_Snapshot_via between
+	Snapshot[*] role xxx_Snapshot_via_src
+	Connection[0..1] role via
+end
+
+association xxx_ContentObject_partOf between
+	ContentObject[*] role xxx_ContentObject_partOf_src
+	Snapshot[1] role partOf
+end
+
+association xxx_ContentObject_function between
+	ContentObject[0..1] role xxx_ContentObject_function_src
+	Function[*] role function
+end
+
+association xxx_File_rootDir between
+	File[*] role xxx_File_rootDir_src
+	Folder[1] role rootDir
+end
+
+association xxx_Folder_rootDirectory between
+	Folder[*] role xxx_Folder_rootDirectory_src
+	Folder[0..1] role rootDirectory
+end
+
+association xxx_Function_snapshot between
+	Function[*] role xxx_Function_snapshot_src
+	Snapshot[0..1] role snapshot
+end
+
+association xxx_FileFunctionStatus_ofFile between
+	FileFunctionStatus[*] role xxx_FileFunctionStatus_ofFile_src
+	ContentObject[0..1] role ofFile
+end
+
+association xxx_FileFunctionStatus_ofFunction between
+	FileFunctionStatus[*] role xxx_FileFunctionStatus_ofFunction_src
+	Function[0..1] role ofFunction
+end
+
+composition xxx_Task_owner between
+	Task[*] role xxx_Task_owner_src
+	User[0..1] role owner
+end
+
+association xxx_CheckInMilestone_container between
+	CheckInMilestone[*] role xxx_CheckInMilestone_container_src
+	Container[0..1] role container
+end
+
+association xxx_CheckInMilestone_fileStatus between
+	CheckInMilestone[0..1] role xxx_CheckInMilestone_fileStatus_src
+	FileFunctionStatus[*] role fileStatus
+end
+

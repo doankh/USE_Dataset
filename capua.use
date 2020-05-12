@@ -1,0 +1,152 @@
+model capua
+abstract class NamedObject
+attributes
+	name : String
+	id : String
+operations
+end
+
+abstract class AttributedObject<NamedObject
+attributes
+	trackingId : Integer
+operations
+end
+
+class AttributeInstance<NamedObject
+attributes
+	value : String
+operations
+end
+
+class Attribute<NamedObject
+attributes
+	defaultValue : String
+operations
+end
+
+abstract class ObjectCollection<AttributedObject
+attributes
+	description : String
+operations
+end
+
+class Link<AttributedObject
+attributes
+operations
+end
+
+class Heading<AttributedObject
+attributes
+operations
+end
+
+class AttributeType<NamedObject
+attributes
+	definition : String
+operations
+end
+
+class Document<ObjectCollection
+attributes
+operations
+end
+
+class ConceptTree<ObjectCollection
+attributes
+operations
+end
+
+class TrackingGroup<NamedObject
+attributes
+	description : String
+	nextFreeId : Integer
+	prefix : String
+	postfix : String
+operations
+end
+
+class Paragraph<AttributedObject
+attributes
+operations
+end
+
+class Sentence<AttributedObject
+attributes
+operations
+end
+
+composition xxx_AttributedObject_children between
+	AttributedObject[0..1] role xxx_AttributedObject_children_src
+	AttributedObject[*] role children
+end
+
+association xxx_AttributedObject_parent between
+	AttributedObject[*] role xxx_AttributedObject_parent_src
+	AttributedObject[1] role parent
+end
+
+composition xxx_AttributedObject_attributeInstances between
+	AttributedObject[0..1] role xxx_AttributedObject_attributeInstances_src
+	AttributeInstance[*] role attributeInstances
+end
+
+association xxx_AttributedObject_outlinks between
+	AttributedObject[0..1] role xxx_AttributedObject_outlinks_src
+	Link[*] role outlinks
+end
+
+association xxx_AttributedObject_inlinks between
+	AttributedObject[0..1] role xxx_AttributedObject_inlinks_src
+	Link[*] role inlinks
+end
+
+association xxx_AttributedObject_trackingGroup between
+	AttributedObject[*] role xxx_AttributedObject_trackingGroup_src
+	TrackingGroup[0..1] role trackingGroup
+end
+
+association xxx_AttributeInstance_owner between
+	AttributeInstance[*] role xxx_AttributeInstance_owner_src
+	AttributedObject[1] role owner
+end
+
+association xxx_AttributeInstance_instantiates between
+	AttributeInstance[*] role xxx_AttributeInstance_instantiates_src
+	Attribute[1] role instantiates
+end
+
+association xxx_Attribute_owner between
+	Attribute[*] role xxx_Attribute_owner_src
+	ObjectCollection[1] role owner
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	AttributeType[1] role type
+end
+
+composition xxx_ObjectCollection_attributes_ between
+	ObjectCollection[0..1] role xxx_ObjectCollection_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_ObjectCollection_types between
+	ObjectCollection[0..1] role xxx_ObjectCollection_types_src
+	AttributeType[*] role types
+end
+
+association xxx_Link_source between
+	Link[*] role xxx_Link_source_src
+	AttributedObject[1] role source
+end
+
+association xxx_Link_target between
+	Link[*] role xxx_Link_target_src
+	AttributedObject[1] role target
+end
+
+association xxx_AttributeType_owner between
+	AttributeType[*] role xxx_AttributeType_owner_src
+	ObjectCollection[1] role owner
+end
+

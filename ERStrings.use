@@ -1,0 +1,81 @@
+model ER
+class Schema
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class Relship
+attributes
+	name : String
+operations
+end
+
+class RelshipEnd
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	isKey : Boolean
+operations
+end
+
+composition xxx_Schema_entities between
+	Schema[0..1] role xxx_Schema_entities_src
+	Entity[1..*] role entities
+end
+
+composition xxx_Schema_relships between
+	Schema[0..1] role xxx_Schema_relships_src
+	Relship[*] role relships
+end
+
+association xxx_Entity_schema between
+	Entity[*] role xxx_Entity_schema_src
+	Schema[1] role schema
+end
+
+association xxx_Entity_ends between
+	Entity[0..1] role xxx_Entity_ends_src
+	RelshipEnd[*] role ends
+end
+
+composition xxx_Entity_attrs between
+	Entity[0..1] role xxx_Entity_attrs_src
+	Attribute[1..*] role attrs
+end
+
+association xxx_Relship_schema between
+	Relship[*] role xxx_Relship_schema_src
+	Schema[1] role schema
+end
+
+composition xxx_Relship_ends between
+	Relship[0..1] role xxx_Relship_ends_src
+	RelshipEnd[2..*] role ends
+end
+
+association xxx_RelshipEnd_type between
+	RelshipEnd[*] role xxx_RelshipEnd_type_src
+	Entity[1] role type
+end
+
+association xxx_RelshipEnd_relship between
+	RelshipEnd[*] role xxx_RelshipEnd_relship_src
+	Relship[1] role relship
+end
+
+association xxx_Attribute_entity between
+	Attribute[*] role xxx_Attribute_entity_src
+	Entity[1] role entity
+end
+

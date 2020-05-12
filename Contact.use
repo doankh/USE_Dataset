@@ -1,0 +1,40 @@
+model Contact
+class Contact
+attributes
+	nom : String
+	prenom : String
+operations
+end
+
+class Num_fixe
+attributes
+	numero : String
+operations
+end
+
+class Num_portable
+attributes
+	numero : String
+operations
+end
+
+composition xxx_Contact_num_fixes between
+	Contact[0..1] role xxx_Contact_num_fixes_src
+	Num_fixe[*] role num_fixes
+end
+
+composition xxx_Contact_num_portables between
+	Contact[0..1] role xxx_Contact_num_portables_src
+	Num_portable[*] role num_portables
+end
+
+association xxx_Num_fixe_contact_fixe between
+	Num_fixe[*] role xxx_Num_fixe_contact_fixe_src
+	Contact[1] role contact_fixe
+end
+
+association xxx_Num_portable_contact_portable between
+	Num_portable[*] role xxx_Num_portable_contact_portable_src
+	Contact[1] role contact_portable
+end
+

@@ -1,0 +1,91 @@
+model CProvML
+enum OSType{
+default
+}
+
+enum CPUType{
+default
+}
+
+enum StorageType{
+default
+}
+
+enum NetworkType{
+default
+}
+
+class Node
+attributes
+	name : String
+operations
+end
+
+class Instance<Node
+attributes
+	CPU : CPUType
+	OS : OSType
+	RAM : Integer
+operations
+end
+
+class Storage<Node
+attributes
+	Size : Integer
+	Type : StorageType
+operations
+end
+
+class NodesDiagram
+attributes
+operations
+end
+
+class Connection
+attributes
+operations
+end
+
+class SecurityGroup<Node
+attributes
+	IPRange : String
+	VPCName : String
+operations
+end
+
+class Network<Node
+attributes
+	Type : NetworkType
+operations
+end
+
+class Environment<Node
+attributes
+operations
+end
+
+composition xxx_Node_sourceConnections between
+	Node[0..1] role xxx_Node_sourceConnections_src
+	Connection[*] role sourceConnections
+end
+
+association xxx_Node_targetConnections between
+	Node[0..1] role xxx_Node_targetConnections_src
+	Connection[*] role targetConnections
+end
+
+composition xxx_NodesDiagram_nodes between
+	NodesDiagram[0..1] role xxx_NodesDiagram_nodes_src
+	Node[*] role nodes
+end
+
+association xxx_Connection_source between
+	Connection[*] role xxx_Connection_source_src
+	Node[1] role source
+end
+
+association xxx_Connection_target between
+	Connection[*] role xxx_Connection_target_src
+	Node[1] role target
+end
+

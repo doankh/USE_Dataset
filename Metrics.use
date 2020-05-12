@@ -1,0 +1,42 @@
+model PrimitiveTypes
+class Metric
+attributes
+	name : String
+operations
+end
+
+abstract class MetricValue
+attributes
+	tag : String
+operations
+end
+
+class StringMetricValue<MetricValue
+attributes
+	value : String
+operations
+end
+
+class BooleanMetricValue<MetricValue
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerMetricValue<MetricValue
+attributes
+	value : Integer
+operations
+end
+
+class DoubleMetricValue<MetricValue
+attributes
+	value : Real
+operations
+end
+
+composition xxx_Metric_values between
+	Metric[0..1] role xxx_Metric_values_src
+	MetricValue[*] role values
+end
+

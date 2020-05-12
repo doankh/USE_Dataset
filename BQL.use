@@ -1,0 +1,75 @@
+model BQL
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Query
+attributes
+operations
+end
+
+class Entry<LocatedElement
+attributes
+	name : String
+	type : String
+	allFields : Boolean
+operations
+end
+
+class Field
+attributes
+	name : String
+operations
+end
+
+class Predicate
+attributes
+operations
+end
+
+class Expression
+attributes
+	field : String
+	value : String
+operations
+end
+
+composition xxx_Query_entries between
+	Query[0..1] role xxx_Query_entries_src
+	Entry[*] role entries
+end
+
+composition xxx_Query_predicates between
+	Query[0..1] role xxx_Query_predicates_src
+	Predicate[*] role predicates
+end
+
+composition xxx_Entry_fields between
+	Entry[0..1] role xxx_Entry_fields_src
+	Field[1..*] role fields
+end
+
+association xxx_Entry_predicate between
+	Entry[*] role xxx_Entry_predicate_src
+	Predicate[0..1] role predicate
+end
+
+association xxx_Field_entry between
+	Field[*] role xxx_Field_entry_src
+	Entry[1] role entry
+end
+
+association xxx_Predicate_entry between
+	Predicate[*] role xxx_Predicate_entry_src
+	Entry[1] role entry
+end
+
+composition xxx_Predicate_expression between
+	Predicate[0..1] role xxx_Predicate_expression_src
+	Expression[1..*] role expression
+end
+

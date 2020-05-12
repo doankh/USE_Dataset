@@ -1,0 +1,192 @@
+model KDMSimplified
+abstract class Element
+attributes
+operations
+end
+
+abstract class ModelElement<Element
+attributes
+operations
+end
+
+abstract class KDMEntity<ModelElement
+attributes
+	name : String
+operations
+end
+
+abstract class KDMContainer<KDMEntity
+attributes
+operations
+end
+
+abstract class KDMGroup<KDMEntity
+attributes
+operations
+end
+
+abstract class KDMRelationship<ModelElement
+attributes
+operations
+end
+
+class Annotation<Element
+attributes
+	note : String
+operations
+end
+
+class Attribute<Element
+attributes
+	tag : String
+	value : String
+operations
+end
+
+class KDMExtensionFamily<Element
+attributes
+	name : String
+operations
+end
+
+class Stereotype<Element
+attributes
+	baseClass : String
+	name : String
+operations
+end
+
+class TagDefinition<Element
+attributes
+	tag : String
+	type : String
+operations
+end
+
+class TaggedValue<Element
+attributes
+	value : String
+operations
+end
+
+abstract class KDMFramework<Element
+attributes
+	name : String
+operations
+end
+
+abstract class KDMModel<KDMFramework
+attributes
+operations
+end
+
+composition xxx_Element_annotation between
+	Element[0..1] role xxx_Element_annotation_src
+	Annotation[*] role annotation
+end
+
+composition xxx_Element_attribute between
+	Element[0..1] role xxx_Element_attribute_src
+	Attribute[*] role attribute
+end
+
+composition xxx_ModelElement_taggedValue between
+	ModelElement[0..1] role xxx_ModelElement_taggedValue_src
+	TaggedValue[*] role taggedValue
+end
+
+association xxx_ModelElement_stereotype between
+	ModelElement[*] role xxx_ModelElement_stereotype_src
+	Stereotype[0..1] role stereotype
+end
+
+association xxx_KDMEntity_inbound between
+	KDMEntity[0..1] role xxx_KDMEntity_inbound_src
+	KDMRelationship[*] role inbound
+end
+
+association xxx_KDMEntity_outbound between
+	KDMEntity[0..1] role xxx_KDMEntity_outbound_src
+	KDMRelationship[*] role outbound
+end
+
+association xxx_KDMEntity_owner between
+	KDMEntity[*] role xxx_KDMEntity_owner_src
+	KDMContainer[0..1] role owner
+end
+
+association xxx_KDMEntity_group between
+	KDMEntity[0..1] role xxx_KDMEntity_group_src
+	KDMGroup[*] role group
+end
+
+association xxx_KDMEntity_model_ between
+	KDMEntity[*] role xxx_KDMEntity_model__src
+	KDMModel[1] role model_
+end
+
+composition xxx_KDMContainer_ownedElement between
+	KDMContainer[0..1] role xxx_KDMContainer_ownedElement_src
+	KDMEntity[*] role ownedElement
+end
+
+association xxx_KDMGroup_groupedElement between
+	KDMGroup[0..1] role xxx_KDMGroup_groupedElement_src
+	KDMEntity[*] role groupedElement
+end
+
+association xxx_KDMRelationship_to between
+	KDMRelationship[*] role xxx_KDMRelationship_to_src
+	KDMEntity[1] role to
+end
+
+association xxx_KDMRelationship_from_ between
+	KDMRelationship[*] role xxx_KDMRelationship_from__src
+	KDMEntity[1] role from_
+end
+
+association xxx_KDMRelationship_model_ between
+	KDMRelationship[*] role xxx_KDMRelationship_model__src
+	KDMModel[1] role model_
+end
+
+composition xxx_KDMExtensionFamily_stereotype between
+	KDMExtensionFamily[0..1] role xxx_KDMExtensionFamily_stereotype_src
+	Stereotype[*] role stereotype
+end
+
+association xxx_Stereotype_family between
+	Stereotype[*] role xxx_Stereotype_family_src
+	KDMExtensionFamily[1] role family
+end
+
+association xxx_Stereotype_extendedElement between
+	Stereotype[*] role xxx_Stereotype_extendedElement_src
+	ModelElement[1] role extendedElement
+end
+
+composition xxx_Stereotype_tag between
+	Stereotype[0..1] role xxx_Stereotype_tag_src
+	TagDefinition[*] role tag
+end
+
+association xxx_TaggedValue_tag between
+	TaggedValue[*] role xxx_TaggedValue_tag_src
+	TagDefinition[1] role tag
+end
+
+composition xxx_KDMFramework_extension between
+	KDMFramework[0..1] role xxx_KDMFramework_extension_src
+	KDMExtensionFamily[*] role extension
+end
+
+composition xxx_KDMModel_ownedElement between
+	KDMModel[0..1] role xxx_KDMModel_ownedElement_src
+	KDMEntity[*] role ownedElement
+end
+
+composition xxx_KDMModel_ownedRelation between
+	KDMModel[0..1] role xxx_KDMModel_ownedRelation_src
+	KDMRelationship[*] role ownedRelation
+end
+

@@ -1,0 +1,118 @@
+model toe
+class AllHolder
+attributes
+operations
+end
+
+abstract class AllBase
+attributes
+operations
+end
+
+class Employee<AllBase
+attributes
+	name : String
+	salary : Integer
+operations
+end
+
+class Manager<Employee
+attributes
+operations
+end
+
+class Contribution<AllBase
+attributes
+	description : String
+operations
+end
+
+class Department<AllBase
+attributes
+	name : String
+operations
+	allSubDepartments():Department
+end
+
+class Project<AllBase
+attributes
+	name : String
+	departmentWide : Boolean
+operations
+end
+
+composition xxx_AllHolder_all between
+	AllHolder[0..1] role xxx_AllHolder_all_src
+	AllBase[*] role all
+end
+
+association xxx_Employee_projects between
+	Employee[0..1] role xxx_Employee_projects_src
+	Project[*] role projects
+end
+
+association xxx_Employee_department between
+	Employee[*] role xxx_Employee_department_src
+	Department[0..1] role department
+end
+
+association xxx_Employee_contributions between
+	Employee[0..1] role xxx_Employee_contributions_src
+	Contribution[*] role contributions
+end
+
+association xxx_Manager_leads between
+	Manager[0..1] role xxx_Manager_leads_src
+	Project[*] role leads
+end
+
+association xxx_Manager_managedDepartment between
+	Manager[*] role xxx_Manager_managedDepartment_src
+	Department[0..1] role managedDepartment
+end
+
+association xxx_Contribution_employee between
+	Contribution[*] role xxx_Contribution_employee_src
+	Employee[0..1] role employee
+end
+
+association xxx_Contribution_project between
+	Contribution[*] role xxx_Contribution_project_src
+	Project[0..1] role project
+end
+
+composition xxx_Department_subDepartments between
+	Department[0..1] role xxx_Department_subDepartments_src
+	Department[*] role subDepartments
+end
+
+composition xxx_Department_employees between
+	Department[0..1] role xxx_Department_employees_src
+	Employee[*] role employees
+end
+
+association xxx_Department_parentDepartment between
+	Department[*] role xxx_Department_parentDepartment_src
+	Department[0..1] role parentDepartment
+end
+
+association xxx_Department_manager between
+	Department[*] role xxx_Department_manager_src
+	Manager[1] role manager
+end
+
+association xxx_Project_projectTeam between
+	Project[0..1] role xxx_Project_projectTeam_src
+	Employee[*] role projectTeam
+end
+
+association xxx_Project_lead between
+	Project[*] role xxx_Project_lead_src
+	Manager[0..1] role lead
+end
+
+association xxx_Project_contributions between
+	Project[0..1] role xxx_Project_contributions_src
+	Contribution[*] role contributions
+end
+

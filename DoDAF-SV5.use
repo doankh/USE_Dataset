@@ -1,0 +1,466 @@
+model DoDAF
+enum SupportStatusCode{
+	red,
+	yellow,
+	green
+}
+
+abstract class Element
+attributes
+	name : String
+	description : String
+	view : String
+operations
+end
+
+class DoDAFModel<Element
+attributes
+operations
+end
+
+class Document<Element
+attributes
+	type : String
+operations
+end
+
+class SystemFunctionTraceabilityMatrix<Document
+attributes
+operations
+end
+
+class SystemFunctionTraceabilityElement<Element
+attributes
+	supportStatusCode : SupportStatusCode
+operations
+end
+
+class SystemDocument<Element
+attributes
+operations
+end
+
+class ArchitectureDocument<Element
+attributes
+operations
+end
+
+class PA<Element
+attributes
+operations
+end
+
+class SystemFunction<PA
+attributes
+operations
+end
+
+class SystemPA<Element
+attributes
+operations
+end
+
+class SoftwareApplicationProcedurePA<Element
+attributes
+operations
+end
+
+class AM<InformationAsset
+attributes
+	type : String
+operations
+end
+
+abstract class InformationAsset<Element
+attributes
+operations
+end
+
+class AMPA<Element
+attributes
+operations
+end
+
+class System<Element
+attributes
+operations
+end
+
+class Task<Element
+attributes
+	levelIdentifier : String
+	references : String
+	cost : String
+operations
+end
+
+class ArchitectureTask<Element
+attributes
+operations
+end
+
+class OperationalCapabilityTask<Task
+attributes
+operations
+end
+
+class SystemOperationalCapabilityTask<Task
+attributes
+operations
+end
+
+class PATask<Task
+attributes
+operations
+end
+
+class Capability<Element
+attributes
+operations
+end
+
+class CapabilityDocument<Element
+attributes
+operations
+end
+
+class SystemCapability<Element
+attributes
+operations
+end
+
+class NetworkCapability<Capability
+attributes
+operations
+end
+
+class NodeLinkCapability<Capability
+attributes
+operations
+end
+
+class MaterielItemCapabilityNorm<Capability
+attributes
+operations
+end
+
+class OrganizationTypeCapabilityNorm<Capability
+attributes
+operations
+end
+
+class RequiredInformationTechnologyCapability<Capability
+attributes
+operations
+end
+
+class InformationTechnologyRequirement<Element
+attributes
+operations
+end
+
+class InformationExchangeRequirement<InformationTechnologyRequirement
+attributes
+operations
+end
+
+class PAExchangeRequirement<InformationTechnologyRequirement
+attributes
+operations
+end
+
+composition xxx_DoDAFModel_document between
+	DoDAFModel[0..1] role xxx_DoDAFModel_document_src
+	Document[*] role document
+end
+
+composition xxx_DoDAFModel_sftm between
+	DoDAFModel[0..1] role xxx_DoDAFModel_sftm_src
+	SystemFunctionTraceabilityMatrix[*] role sftm
+end
+
+composition xxx_DoDAFModel_sd between
+	DoDAFModel[0..1] role xxx_DoDAFModel_sd_src
+	SystemDocument[*] role sd
+end
+
+composition xxx_DoDAFModel_am between
+	DoDAFModel[0..1] role xxx_DoDAFModel_am_src
+	AM[*] role am
+end
+
+composition xxx_DoDAFModel_system between
+	DoDAFModel[0..1] role xxx_DoDAFModel_system_src
+	System[*] role system
+end
+
+composition xxx_DoDAFModel_task between
+	DoDAFModel[0..1] role xxx_DoDAFModel_task_src
+	Task[*] role task
+end
+
+composition xxx_DoDAFModel_capability between
+	DoDAFModel[0..1] role xxx_DoDAFModel_capability_src
+	Capability[*] role capability
+end
+
+composition xxx_DoDAFModel_capabilityDocument between
+	DoDAFModel[0..1] role xxx_DoDAFModel_capabilityDocument_src
+	CapabilityDocument[*] role capabilityDocument
+end
+
+composition xxx_DoDAFModel_systemCapability between
+	DoDAFModel[0..1] role xxx_DoDAFModel_systemCapability_src
+	SystemCapability[*] role systemCapability
+end
+
+association xxx_Document_cites between
+	Document[0..1] role xxx_Document_cites_src
+	CapabilityDocument[*] role cites
+end
+
+association xxx_Document_describes between
+	Document[0..1] role xxx_Document_describes_src
+	SystemDocument[*] role describes
+end
+
+composition xxx_Document_records between
+	Document[0..1] role xxx_Document_records_src
+	ArchitectureDocument[*] role records
+end
+
+composition xxx_Document_isThePrimaryReferenceFor between
+	Document[0..1] role xxx_Document_isThePrimaryReferenceFor_src
+	PA[*] role isThePrimaryReferenceFor
+end
+
+composition xxx_SystemFunctionTraceabilityMatrix_isDefinedBy between
+	SystemFunctionTraceabilityMatrix[0..1] role xxx_SystemFunctionTraceabilityMatrix_isDefinedBy_src
+	SystemFunctionTraceabilityElement[*] role isDefinedBy
+end
+
+association xxx_SystemFunctionTraceabilityElement_systemFunction between
+	SystemFunctionTraceabilityElement[*] role xxx_SystemFunctionTraceabilityElement_systemFunction_src
+	SystemFunction[0..1] role systemFunction
+end
+
+association xxx_SystemFunctionTraceabilityElement_operationalActivity between
+	SystemFunctionTraceabilityElement[*] role xxx_SystemFunctionTraceabilityElement_operationalActivity_src
+	Task[0..1] role operationalActivity
+end
+
+association xxx_SystemFunctionTraceabilityElement_systemProcessActivity between
+	SystemFunctionTraceabilityElement[*] role xxx_SystemFunctionTraceabilityElement_systemProcessActivity_src
+	SystemPA[0..1] role systemProcessActivity
+end
+
+association xxx_SystemFunctionTraceabilityElement_system between
+	SystemFunctionTraceabilityElement[*] role xxx_SystemFunctionTraceabilityElement_system_src
+	System[0..1] role system
+end
+
+association xxx_SystemFunctionTraceabilityElement_capability between
+	SystemFunctionTraceabilityElement[*] role xxx_SystemFunctionTraceabilityElement_capability_src
+	Capability[0..1] role capability
+end
+
+association xxx_PA_isParentFor between
+	PA[0..1] role xxx_PA_isParentFor_src
+	PA[*] role isParentFor
+end
+
+association xxx_PA_isChildFor between
+	PA[0..1] role xxx_PA_isChildFor_src
+	PA[*] role isChildFor
+end
+
+association xxx_PA_correspondsTo between
+	PA[0..1] role xxx_PA_correspondsTo_src
+	PATask[*] role correspondsTo
+end
+
+association xxx_PA_isIncludedIn between
+	PA[0..1] role xxx_PA_isIncludedIn_src
+	AMPA[*] role isIncludedIn
+end
+
+association xxx_PA_isAssignedTo between
+	PA[0..1] role xxx_PA_isAssignedTo_src
+	SystemPA[*] role isAssignedTo
+end
+
+composition xxx_PA_isSupportedBy between
+	PA[0..1] role xxx_PA_isSupportedBy_src
+	SoftwareApplicationProcedurePA[*] role isSupportedBy
+end
+
+composition xxx_PA_isTheConsumerFor between
+	PA[0..1] role xxx_PA_isTheConsumerFor_src
+	PAExchangeRequirement[*] role isTheConsumerFor
+end
+
+composition xxx_PA_isTheProducerFor between
+	PA[0..1] role xxx_PA_isTheProducerFor_src
+	PAExchangeRequirement[*] role isTheProducerFor
+end
+
+association xxx_SystemFunction_isCitedFor between
+	SystemFunction[0..1] role xxx_SystemFunction_isCitedFor_src
+	SystemFunctionTraceabilityElement[*] role isCitedFor
+end
+
+association xxx_SystemPA_mayBeCitedFor between
+	SystemPA[0..1] role xxx_SystemPA_mayBeCitedFor_src
+	SystemFunctionTraceabilityElement[*] role mayBeCitedFor
+end
+
+composition xxx_SystemPA_provides between
+	SystemPA[0..1] role xxx_SystemPA_provides_src
+	SystemCapability[*] role provides
+end
+
+composition xxx_SystemPA_enables between
+	SystemPA[0..1] role xxx_SystemPA_enables_src
+	SystemOperationalCapabilityTask[*] role enables
+end
+
+composition xxx_AM_isCitedBy between
+	AM[0..1] role xxx_AM_isCitedBy_src
+	PATask[*] role isCitedBy
+end
+
+composition xxx_AM_includes between
+	AM[0..1] role xxx_AM_includes_src
+	AMPA[*] role includes
+end
+
+association xxx_AMPA_isOrdinateOf between
+	AMPA[0..1] role xxx_AMPA_isOrdinateOf_src
+	AMPA[*] role isOrdinateOf
+end
+
+association xxx_AMPA_isSubordinateOf between
+	AMPA[0..1] role xxx_AMPA_isSubordinateOf_src
+	AMPA[*] role isSubordinateOf
+end
+
+composition xxx_System_isDesignedToProvide between
+	System[0..1] role xxx_System_isDesignedToProvide_src
+	SystemPA[*] role isDesignedToProvide
+end
+
+association xxx_System_isDescribedBy between
+	System[0..1] role xxx_System_isDescribedBy_src
+	SystemDocument[*] role isDescribedBy
+end
+
+association xxx_System_performs between
+	System[0..1] role xxx_System_performs_src
+	SystemCapability[*] role performs
+end
+
+association xxx_System_isUsedToAccomplish between
+	System[0..1] role xxx_System_isUsedToAccomplish_src
+	SystemOperationalCapabilityTask[*] role isUsedToAccomplish
+end
+
+association xxx_Task_correspondsTo between
+	Task[0..1] role xxx_Task_correspondsTo_src
+	PATask[*] role correspondsTo
+end
+
+association xxx_Task_isSupportedBy between
+	Task[0..1] role xxx_Task_isSupportedBy_src
+	ArchitectureTask[*] role isSupportedBy
+end
+
+composition xxx_Task_isTheSourceOfNeedFor between
+	Task[0..1] role xxx_Task_isTheSourceOfNeedFor_src
+	InformationExchangeRequirement[*] role isTheSourceOfNeedFor
+end
+
+composition xxx_Task_isTheDestinationOfNeedFor between
+	Task[0..1] role xxx_Task_isTheDestinationOfNeedFor_src
+	InformationExchangeRequirement[*] role isTheDestinationOfNeedFor
+end
+
+association xxx_Task_isCitedFor between
+	Task[0..1] role xxx_Task_isCitedFor_src
+	SystemFunctionTraceabilityElement[*] role isCitedFor
+end
+
+association xxx_OperationalCapabilityTask_isAccomplishedA between
+	OperationalCapabilityTask[*] role xxx_OperationalCapabilityTask_isAccomplishedA_src
+	SystemOperationalCapabilityTask[1] role isAccomplishedA
+end
+
+association xxx_Capability_isPerformedBy between
+	Capability[0..1] role xxx_Capability_isPerformedBy_src
+	SystemCapability[*] role isPerformedBy
+end
+
+association xxx_Capability_isOrdinateFor between
+	Capability[0..1] role xxx_Capability_isOrdinateFor_src
+	Capability[*] role isOrdinateFor
+end
+
+association xxx_Capability_isSubordinateOf between
+	Capability[0..1] role xxx_Capability_isSubordinateOf_src
+	Capability[*] role isSubordinateOf
+end
+
+association xxx_Capability_isPerformedByNC between
+	Capability[0..1] role xxx_Capability_isPerformedByNC_src
+	NetworkCapability[*] role isPerformedByNC
+end
+
+association xxx_Capability_isPerformedByNLC between
+	Capability[0..1] role xxx_Capability_isPerformedByNLC_src
+	NodeLinkCapability[*] role isPerformedByNLC
+end
+
+association xxx_Capability_isPerformedBySC between
+	Capability[0..1] role xxx_Capability_isPerformedBySC_src
+	SystemCapability[*] role isPerformedBySC
+end
+
+association xxx_Capability_isCitedInCD between
+	Capability[0..1] role xxx_Capability_isCitedInCD_src
+	CapabilityDocument[*] role isCitedInCD
+end
+
+association xxx_Capability_isUsedInMICN between
+	Capability[0..1] role xxx_Capability_isUsedInMICN_src
+	MaterielItemCapabilityNorm[*] role isUsedInMICN
+end
+
+association xxx_Capability_isUsedInOTCN between
+	Capability[0..1] role xxx_Capability_isUsedInOTCN_src
+	OrganizationTypeCapabilityNorm[*] role isUsedInOTCN
+end
+
+association xxx_Capability_isAttainedFor between
+	Capability[0..1] role xxx_Capability_isAttainedFor_src
+	RequiredInformationTechnologyCapability[*] role isAttainedFor
+end
+
+association xxx_CapabilityDocument_isCitedIn between
+	CapabilityDocument[0..1] role xxx_CapabilityDocument_isCitedIn_src
+	Capability[*] role isCitedIn
+end
+
+association xxx_SystemCapability_isCitedIn between
+	SystemCapability[0..1] role xxx_SystemCapability_isCitedIn_src
+	Capability[*] role isCitedIn
+end
+
+association xxx_InformationTechnologyRequirement_specifies between
+	InformationTechnologyRequirement[0..1] role xxx_InformationTechnologyRequirement_specifies_src
+	RequiredInformationTechnologyCapability[*] role specifies
+end
+
+composition xxx_PAExchangeRequirement_isCitedIn between
+	PAExchangeRequirement[0..1] role xxx_PAExchangeRequirement_isCitedIn_src
+	InformationExchangeRequirement[*] role isCitedIn
+end
+

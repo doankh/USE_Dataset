@@ -1,0 +1,136 @@
+model pop
+abstract class Stream
+attributes
+operations
+end
+
+abstract class IntegrationStream<Stream
+attributes
+operations
+end
+
+class TaskStream<Stream
+attributes
+operations
+end
+
+abstract class DevelopmentStream<IntegrationStream
+attributes
+operations
+end
+
+class MaintenanceStream<IntegrationStream
+attributes
+operations
+end
+
+class Pop<DevelopmentStream
+attributes
+operations
+end
+
+class Delivery
+attributes
+operations
+end
+
+class Release<Target
+attributes
+operations
+end
+
+class Milestone<Target
+attributes
+operations
+end
+
+class Merge
+attributes
+operations
+end
+
+class Baseline
+attributes
+operations
+end
+
+abstract class Target
+attributes
+operations
+end
+
+class Committer
+attributes
+operations
+end
+
+class TargetBaseline<Baseline
+attributes
+operations
+end
+
+class PopManager
+attributes
+operations
+end
+
+composition xxx_Stream_merges between
+	Stream[0..1] role xxx_Stream_merges_src
+	Merge[*] role merges
+end
+
+association xxx_Stream_baseline between
+	Stream[*] role xxx_Stream_baseline_src
+	Baseline[0..1] role baseline
+end
+
+composition xxx_IntegrationStream_releases between
+	IntegrationStream[0..1] role xxx_IntegrationStream_releases_src
+	Release[*] role releases
+end
+
+composition xxx_IntegrationStream_taskStreams between
+	IntegrationStream[0..1] role xxx_IntegrationStream_taskStreams_src
+	TaskStream[*] role taskStreams
+end
+
+composition xxx_TaskStream_deliveries between
+	TaskStream[0..1] role xxx_TaskStream_deliveries_src
+	Delivery[*] role deliveries
+end
+
+association xxx_TaskStream_targets between
+	TaskStream[0..1] role xxx_TaskStream_targets_src
+	Target[1..*] role targets
+end
+
+composition xxx_DevelopmentStream_maintenanceStreams between
+	DevelopmentStream[0..1] role xxx_DevelopmentStream_maintenanceStreams_src
+	MaintenanceStream[*] role maintenanceStreams
+end
+
+composition xxx_Pop_committers between
+	Pop[0..1] role xxx_Pop_committers_src
+	Committer[1..*] role committers
+end
+
+composition xxx_Release_milestones between
+	Release[0..1] role xxx_Release_milestones_src
+	Milestone[*] role milestones
+end
+
+association xxx_Merge_delivery between
+	Merge[*] role xxx_Merge_delivery_src
+	Delivery[1] role delivery
+end
+
+association xxx_TargetBaseline_target between
+	TargetBaseline[*] role xxx_TargetBaseline_target_src
+	Target[1] role target
+end
+
+composition xxx_PopManager_pops between
+	PopManager[0..1] role xxx_PopManager_pops_src
+	Pop[*] role pops
+end
+

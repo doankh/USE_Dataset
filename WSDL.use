@@ -1,0 +1,221 @@
+model WSDL
+class Port
+attributes
+	name : String
+operations
+end
+
+class Service
+attributes
+	name : String
+operations
+end
+
+class Param
+attributes
+	name : String
+operations
+end
+
+class Input<Param
+attributes
+operations
+end
+
+class Output<Param
+attributes
+operations
+end
+
+class PortType
+attributes
+	name : String
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class StartWithExtensions
+attributes
+operations
+end
+
+class Binding<StartWithExtensions
+attributes
+	name : String
+operations
+end
+
+class BindingFault<StartWithExtensions
+attributes
+operations
+end
+
+class BindingOperation<StartWithExtensions
+attributes
+	name : String
+operations
+end
+
+class Fault
+attributes
+	name : String
+operations
+end
+
+class Message
+attributes
+	name : String
+operations
+end
+
+class Part
+attributes
+	name : String
+operations
+end
+
+association xxx_Port_service between
+	Port[*] role xxx_Port_service_src
+	Service[1] role service
+end
+
+association xxx_Port_binding between
+	Port[*] role xxx_Port_binding_src
+	Binding[1] role binding
+end
+
+composition xxx_Service_ports between
+	Service[0..1] role xxx_Service_ports_src
+	Port[*] role ports
+end
+
+association xxx_Param_message between
+	Param[*] role xxx_Param_message_src
+	Message[1] role message
+end
+
+association xxx_Input_operation between
+	Input[*] role xxx_Input_operation_src
+	Operation[1] role operation
+end
+
+association xxx_Output_operation between
+	Output[*] role xxx_Output_operation_src
+	Operation[1] role operation
+end
+
+composition xxx_PortType_operations_ between
+	PortType[0..1] role xxx_PortType_operations__src
+	Operation[*] role operations_
+end
+
+association xxx_PortType_bindings between
+	PortType[0..1] role xxx_PortType_bindings_src
+	Binding[*] role bindings
+end
+
+composition xxx_Operation_input between
+	Operation[*] role xxx_Operation_input_src
+	Input[0..1] role input
+end
+
+composition xxx_Operation_output between
+	Operation[*] role xxx_Operation_output_src
+	Output[0..1] role output
+end
+
+association xxx_Operation_type between
+	Operation[*] role xxx_Operation_type_src
+	PortType[1] role type
+end
+
+composition xxx_Operation_faults between
+	Operation[0..1] role xxx_Operation_faults_src
+	Fault[*] role faults
+end
+
+association xxx_Binding_ports between
+	Binding[0..1] role xxx_Binding_ports_src
+	Port[*] role ports
+end
+
+association xxx_Binding_type between
+	Binding[*] role xxx_Binding_type_src
+	PortType[1] role type
+end
+
+composition xxx_Binding_operations_ between
+	Binding[0..1] role xxx_Binding_operations__src
+	BindingOperation[*] role operations_
+end
+
+composition xxx_BindingFault_operation between
+	BindingFault[*] role xxx_BindingFault_operation_src
+	BindingOperation[1] role operation
+end
+
+association xxx_BindingFault_binding between
+	BindingFault[*] role xxx_BindingFault_binding_src
+	Fault[1] role binding
+end
+
+association xxx_BindingOperation_bind between
+	BindingOperation[*] role xxx_BindingOperation_bind_src
+	Binding[1] role bind
+end
+
+association xxx_BindingOperation_binding between
+	BindingOperation[*] role xxx_BindingOperation_binding_src
+	Operation[1] role binding
+end
+
+association xxx_BindingOperation_input between
+	BindingOperation[*] role xxx_BindingOperation_input_src
+	StartWithExtensions[0..1] role input
+end
+
+association xxx_BindingOperation_output between
+	BindingOperation[*] role xxx_BindingOperation_output_src
+	StartWithExtensions[0..1] role output
+end
+
+composition xxx_BindingOperation_faults between
+	BindingOperation[0..1] role xxx_BindingOperation_faults_src
+	BindingFault[*] role faults
+end
+
+association xxx_Fault_operation between
+	Fault[*] role xxx_Fault_operation_src
+	Operation[1] role operation
+end
+
+association xxx_Fault_message between
+	Fault[*] role xxx_Fault_message_src
+	Message[1] role message
+end
+
+association xxx_Message_params between
+	Message[0..1] role xxx_Message_params_src
+	Param[*] role params
+end
+
+association xxx_Message_faults between
+	Message[0..1] role xxx_Message_faults_src
+	Fault[*] role faults
+end
+
+association xxx_Message_parts between
+	Message[0..1] role xxx_Message_parts_src
+	Part[*] role parts
+end
+
+association xxx_Part_message between
+	Part[*] role xxx_Part_message_src
+	Message[1] role message
+end
+

@@ -1,0 +1,186 @@
+model requirements_editor
+enum BinaryOperator{
+default
+}
+
+abstract class Requirement
+attributes
+	identifier : String
+	name : String
+	priority : Integer
+	isMandatory : Boolean
+operations
+	findLeafNodes(argument : Argument):RequirementArgument
+end
+
+class Category
+attributes
+	name : String
+operations
+end
+
+abstract class Description
+attributes
+operations
+end
+
+class TextualDescription<Description
+attributes
+	description : String
+operations
+end
+
+class QualityRequirement<Requirement
+attributes
+operations
+end
+
+class FunctionalRequirement<Requirement
+attributes
+operations
+end
+
+class Person
+attributes
+	name : String
+operations
+end
+
+abstract class Dependency
+attributes
+operations
+end
+
+abstract class SimpleDependency<Dependency
+attributes
+	comment : String
+operations
+end
+
+class Refines<SimpleDependency
+attributes
+operations
+end
+
+class ICost<SimpleDependency
+attributes
+operations
+end
+
+class CValue<SimpleDependency
+attributes
+operations
+end
+
+class Requires<Dependency
+attributes
+operations
+end
+
+abstract class Argument
+attributes
+operations
+end
+
+class BinaryOperatorArgument<Argument
+attributes
+	operator : BinaryOperator
+operations
+end
+
+class RequirementArgument<Argument
+attributes
+operations
+end
+
+class DocumentRoot
+attributes
+	name : String
+operations
+end
+
+class NOTOperator<Argument
+attributes
+operations
+end
+
+composition xxx_Requirement_description between
+	Requirement[*] role xxx_Requirement_description_src
+	Description[1] role description
+end
+
+association xxx_Requirement_requirementOwnedBy between
+	Requirement[*] role xxx_Requirement_requirementOwnedBy_src
+	Person[1] role requirementOwnedBy
+end
+
+composition xxx_Requirement_dependencySource between
+	Requirement[0..1] role xxx_Requirement_dependencySource_src
+	Dependency[*] role dependencySource
+end
+
+composition xxx_Category_subcategoryOf between
+	Category[0..1] role xxx_Category_subcategoryOf_src
+	Category[*] role subcategoryOf
+end
+
+association xxx_Category_categoryOwnedBy between
+	Category[*] role xxx_Category_categoryOwnedBy_src
+	Person[1] role categoryOwnedBy
+end
+
+composition xxx_Category_requirement between
+	Category[0..1] role xxx_Category_requirement_src
+	Requirement[*] role requirement
+end
+
+association xxx_Person_personOwnsRequirement between
+	Person[0..1] role xxx_Person_personOwnsRequirement_src
+	Requirement[*] role personOwnsRequirement
+end
+
+association xxx_Person_personOwnsCategory between
+	Person[0..1] role xxx_Person_personOwnsCategory_src
+	Category[*] role personOwnsCategory
+end
+
+association xxx_SimpleDependency_dependencyTarget between
+	SimpleDependency[*] role xxx_SimpleDependency_dependencyTarget_src
+	Requirement[1] role dependencyTarget
+end
+
+composition xxx_Requires_argument between
+	Requires[*] role xxx_Requires_argument_src
+	Argument[1] role argument
+end
+
+composition xxx_BinaryOperatorArgument_rightSideArgument between
+	BinaryOperatorArgument[*] role xxx_BinaryOperatorArgument_rightSideArgument_src
+	Argument[1] role rightSideArgument
+end
+
+composition xxx_BinaryOperatorArgument_leftSideArgument between
+	BinaryOperatorArgument[*] role xxx_BinaryOperatorArgument_leftSideArgument_src
+	Argument[1] role leftSideArgument
+end
+
+association xxx_RequirementArgument_requirement between
+	RequirementArgument[*] role xxx_RequirementArgument_requirement_src
+	Requirement[1] role requirement
+end
+
+composition xxx_DocumentRoot_rootCategories between
+	DocumentRoot[0..1] role xxx_DocumentRoot_rootCategories_src
+	Category[*] role rootCategories
+end
+
+composition xxx_DocumentRoot_person between
+	DocumentRoot[0..1] role xxx_DocumentRoot_person_src
+	Person[*] role person
+end
+
+composition xxx_NOTOperator_argument between
+	NOTOperator[*] role xxx_NOTOperator_argument_src
+	Argument[1] role argument
+end
+

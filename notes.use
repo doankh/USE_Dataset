@@ -1,0 +1,84 @@
+model notes
+class NoteDocument<Namedelement
+attributes
+operations
+end
+
+abstract class Namedelement
+attributes
+	name : String
+operations
+end
+
+class Section<Part,Namedelement
+attributes
+	id : String
+operations
+end
+
+abstract class Part
+attributes
+operations
+end
+
+class BulletPoint<Part
+attributes
+operations
+end
+
+abstract class TextPart
+attributes
+	text : String
+operations
+end
+
+class SimpleText<TextPart
+attributes
+operations
+end
+
+abstract class EmphasisedText<TextPart
+attributes
+operations
+end
+
+class Bold<EmphasisedText
+attributes
+operations
+end
+
+class Italic<EmphasisedText
+attributes
+operations
+end
+
+class TypeWriter<EmphasisedText
+attributes
+operations
+end
+
+composition xxx_NoteDocument_parts between
+	NoteDocument[0..1] role xxx_NoteDocument_parts_src
+	Part[*] role parts
+end
+
+association xxx_Section_superSection between
+	Section[*] role xxx_Section_superSection_src
+	Section[0..1] role superSection
+end
+
+composition xxx_Section_bullets between
+	Section[0..1] role xxx_Section_bullets_src
+	BulletPoint[*] role bullets
+end
+
+composition xxx_BulletPoint_textParts between
+	BulletPoint[0..1] role xxx_BulletPoint_textParts_src
+	TextPart[1..*] role textParts
+end
+
+composition xxx_BulletPoint_subPoints between
+	BulletPoint[0..1] role xxx_BulletPoint_subPoints_src
+	BulletPoint[*] role subPoints
+end
+

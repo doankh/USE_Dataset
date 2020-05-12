@@ -1,0 +1,183 @@
+model CORBAComponent
+class InterfaceDef
+attributes
+operations
+end
+
+class OperationDef
+attributes
+operations
+end
+
+class ValueDef
+attributes
+operations
+end
+
+class ComponentDef<InterfaceDef
+attributes
+	isBasic : Boolean
+operations
+end
+
+class ProvidesDef
+attributes
+operations
+end
+
+class UsesDef
+attributes
+	multiple : Boolean
+operations
+end
+
+class EventDef
+attributes
+operations
+end
+
+class EmitsDef<EventDef
+attributes
+operations
+end
+
+class PublishesDef<EventDef
+attributes
+operations
+end
+
+class ConsumesDef<EventDef
+attributes
+operations
+end
+
+class HomeDef<InterfaceDef
+attributes
+operations
+end
+
+class FactoryDef<OperationDef
+attributes
+operations
+end
+
+class FinderDef<OperationDef
+attributes
+operations
+end
+
+class PrimaryKeyDef
+attributes
+operations
+end
+
+composition xxx_ComponentDef_facets between
+	ComponentDef[0..1] role xxx_ComponentDef_facets_src
+	ProvidesDef[*] role facets
+end
+
+composition xxx_ComponentDef_receptacles between
+	ComponentDef[0..1] role xxx_ComponentDef_receptacles_src
+	UsesDef[*] role receptacles
+end
+
+association xxx_ComponentDef_supports between
+	ComponentDef[0..1] role xxx_ComponentDef_supports_src
+	InterfaceDef[*] role supports
+end
+
+composition xxx_ComponentDef_emits between
+	ComponentDef[0..1] role xxx_ComponentDef_emits_src
+	EmitsDef[*] role emits
+end
+
+composition xxx_ComponentDef_publishes between
+	ComponentDef[0..1] role xxx_ComponentDef_publishes_src
+	PublishesDef[*] role publishes
+end
+
+composition xxx_ComponentDef_consumes between
+	ComponentDef[0..1] role xxx_ComponentDef_consumes_src
+	ConsumesDef[*] role consumes
+end
+
+association xxx_ProvidesDef_provides between
+	ProvidesDef[*] role xxx_ProvidesDef_provides_src
+	InterfaceDef[1] role provides
+end
+
+association xxx_ProvidesDef_prd_home between
+	ProvidesDef[*] role xxx_ProvidesDef_prd_home_src
+	ComponentDef[1] role prd_home
+end
+
+association xxx_UsesDef_uses between
+	UsesDef[*] role xxx_UsesDef_uses_src
+	InterfaceDef[1] role uses
+end
+
+association xxx_UsesDef_ud_home between
+	UsesDef[*] role xxx_UsesDef_ud_home_src
+	ComponentDef[1] role ud_home
+end
+
+association xxx_EventDef_type between
+	EventDef[*] role xxx_EventDef_type_src
+	ValueDef[1] role type
+end
+
+association xxx_EmitsDef_ed_home between
+	EmitsDef[*] role xxx_EmitsDef_ed_home_src
+	ComponentDef[1] role ed_home
+end
+
+association xxx_PublishesDef_pud_home between
+	PublishesDef[*] role xxx_PublishesDef_pud_home_src
+	ComponentDef[1] role pud_home
+end
+
+association xxx_ConsumesDef_cd_home between
+	ConsumesDef[*] role xxx_ConsumesDef_cd_home_src
+	ComponentDef[1] role cd_home
+end
+
+association xxx_HomeDef_manages between
+	HomeDef[*] role xxx_HomeDef_manages_src
+	ComponentDef[1] role manages
+end
+
+composition xxx_HomeDef_factories between
+	HomeDef[0..1] role xxx_HomeDef_factories_src
+	FactoryDef[*] role factories
+end
+
+composition xxx_HomeDef_finders between
+	HomeDef[0..1] role xxx_HomeDef_finders_src
+	FinderDef[*] role finders
+end
+
+composition xxx_HomeDef_key between
+	HomeDef[*] role xxx_HomeDef_key_src
+	PrimaryKeyDef[0..1] role key
+end
+
+association xxx_FactoryDef_fa_home between
+	FactoryDef[*] role xxx_FactoryDef_fa_home_src
+	HomeDef[1] role fa_home
+end
+
+association xxx_FinderDef_fi_home between
+	FinderDef[*] role xxx_FinderDef_fi_home_src
+	HomeDef[1] role fi_home
+end
+
+association xxx_PrimaryKeyDef_pkd_home between
+	PrimaryKeyDef[*] role xxx_PrimaryKeyDef_pkd_home_src
+	HomeDef[1] role pkd_home
+end
+
+association xxx_PrimaryKeyDef_type between
+	PrimaryKeyDef[*] role xxx_PrimaryKeyDef_type_src
+	ValueDef[1] role type
+end
+

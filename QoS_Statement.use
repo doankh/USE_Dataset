@@ -1,0 +1,62 @@
+model QoSStatement
+class QoSStatement
+attributes
+operations
+end
+
+class SingleQoSStatement<QoSStatement
+attributes
+operations
+end
+
+class CoumpoundQoSStatement<QoSStatement
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+class QoSContraint
+attributes
+operations
+end
+
+class QualificationKind<QoSCharacteristic
+attributes
+	value : String
+operations
+end
+
+class QoSCharacteristic
+attributes
+operations
+end
+
+association xxx_QoSStatement_relation between
+	QoSStatement[*] role xxx_QoSStatement_relation_src
+	CoumpoundQoSStatement[1] role relation
+end
+
+composition xxx_QoSStatement_parameter between
+	QoSStatement[0..1] role xxx_QoSStatement_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_SingleQoSStatement_contraint between
+	SingleQoSStatement[*] role xxx_SingleQoSStatement_contraint_src
+	QoSContraint[1] role contraint
+end
+
+composition xxx_CoumpoundQoSStatement_statement between
+	CoumpoundQoSStatement[0..1] role xxx_CoumpoundQoSStatement_statement_src
+	QoSStatement[2..*] role statement
+end
+
+association xxx_QoSContraint_qualification between
+	QoSContraint[*] role xxx_QoSContraint_qualification_src
+	QualificationKind[1] role qualification
+end
+

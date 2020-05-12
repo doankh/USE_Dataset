@@ -1,0 +1,244 @@
+model HSM
+class MgaObject
+attributes
+	name : String
+	position : String
+operations
+end
+
+class StateBase<MgaObject
+attributes
+	defaultTransition : String
+	marked : Boolean
+operations
+end
+
+class DataVar<MgaObject
+attributes
+operations
+end
+
+class Transition<MgaObject
+attributes
+	guard : String
+	trigger : String
+	action : String
+	isSync : Boolean
+operations
+end
+
+class StateDateRelation<MgaObject
+attributes
+	value : String
+	color : String
+operations
+end
+
+class RootFolder
+attributes
+	name : String
+operations
+end
+
+class OrState<CompoundState
+attributes
+operations
+end
+
+class AndState<CompoundState
+attributes
+operations
+end
+
+class CompoundState<StateBase
+attributes
+operations
+end
+
+class PrimitiveState<StateBase
+attributes
+operations
+end
+
+class Init<PrimitiveState
+attributes
+operations
+end
+
+class State<PrimitiveState
+attributes
+operations
+end
+
+class StateDataRelation<PrimitiveState
+attributes
+	value : String
+	color : String
+operations
+end
+
+class AssociationStateState
+attributes
+operations
+end
+
+class AssociationDataStateBase
+attributes
+operations
+end
+
+association xxx_StateBase_associationStateStatedst between
+	StateBase[0..1] role xxx_StateBase_associationStateStatedst_src
+	AssociationStateState[1..*] role associationStateStatedst
+end
+
+association xxx_StateBase_associationStateStatesrc between
+	StateBase[0..1] role xxx_StateBase_associationStateStatesrc_src
+	AssociationStateState[1..*] role associationStateStatesrc
+end
+
+association xxx_StateBase_data between
+	StateBase[0..1] role xxx_StateBase_data_src
+	DataVar[*] role data
+end
+
+association xxx_StateBase_associationDataStateBase between
+	StateBase[*] role xxx_StateBase_associationDataStateBase_src
+	AssociationDataStateBase[1] role associationDataStateBase
+end
+
+association xxx_DataVar_stateBase between
+	DataVar[0..1] role xxx_DataVar_stateBase_src
+	StateBase[*] role stateBase
+end
+
+association xxx_DataVar_orState between
+	DataVar[*] role xxx_DataVar_orState_src
+	OrState[1] role orState
+end
+
+association xxx_DataVar_associationDataStateBase between
+	DataVar[*] role xxx_DataVar_associationDataStateBase_src
+	AssociationDataStateBase[1] role associationDataStateBase
+end
+
+association xxx_Transition_orState between
+	Transition[*] role xxx_Transition_orState_src
+	OrState[1] role orState
+end
+
+association xxx_Transition_associationStateState between
+	Transition[*] role xxx_Transition_associationStateState_src
+	AssociationStateState[1] role associationStateState
+end
+
+composition xxx_RootFolder_rootFolders between
+	RootFolder[0..1] role xxx_RootFolder_rootFolders_src
+	RootFolder[*] role rootFolders
+end
+
+composition xxx_RootFolder_orState between
+	RootFolder[0..1] role xxx_RootFolder_orState_src
+	OrState[*] role orState
+end
+
+association xxx_OrState_rootFolder between
+	OrState[*] role xxx_OrState_rootFolder_src
+	RootFolder[1] role rootFolder
+end
+
+composition xxx_OrState_state between
+	OrState[0..1] role xxx_OrState_state_src
+	State[*] role state
+end
+
+composition xxx_OrState_init between
+	OrState[*] role xxx_OrState_init_src
+	Init[1] role init
+end
+
+composition xxx_OrState_dataVar between
+	OrState[0..1] role xxx_OrState_dataVar_src
+	DataVar[*] role dataVar
+end
+
+composition xxx_OrState_stateDataRelation between
+	OrState[0..1] role xxx_OrState_stateDataRelation_src
+	StateDataRelation[*] role stateDataRelation
+end
+
+composition xxx_OrState_transition between
+	OrState[0..1] role xxx_OrState_transition_src
+	Transition[*] role transition
+end
+
+composition xxx_OrState_compoundState between
+	OrState[0..1] role xxx_OrState_compoundState_src
+	CompoundState[*] role compoundState
+end
+
+composition xxx_AndState_compoundState between
+	AndState[0..1] role xxx_AndState_compoundState_src
+	CompoundState[*] role compoundState
+end
+
+association xxx_CompoundState_andState between
+	CompoundState[*] role xxx_CompoundState_andState_src
+	AndState[1] role andState
+end
+
+association xxx_CompoundState_orState between
+	CompoundState[*] role xxx_CompoundState_orState_src
+	OrState[1] role orState
+end
+
+association xxx_Init_orState between
+	Init[*] role xxx_Init_orState_src
+	OrState[1] role orState
+end
+
+association xxx_State_orState between
+	State[*] role xxx_State_orState_src
+	OrState[1] role orState
+end
+
+association xxx_StateDataRelation_orState between
+	StateDataRelation[*] role xxx_StateDataRelation_orState_src
+	OrState[1] role orState
+end
+
+association xxx_StateDataRelation_associationDataStateBase1 between
+	StateDataRelation[*] role xxx_StateDataRelation_associationDataStateBase1_src
+	AssociationDataStateBase[1] role associationDataStateBase1
+end
+
+association xxx_AssociationStateState_transition between
+	AssociationStateState[*] role xxx_AssociationStateState_transition_src
+	Transition[1] role transition
+end
+
+association xxx_AssociationStateState_dstTransition between
+	AssociationStateState[0..1] role xxx_AssociationStateState_dstTransition_src
+	StateBase[1..*] role dstTransition
+end
+
+association xxx_AssociationStateState_srcTransition between
+	AssociationStateState[0..1] role xxx_AssociationStateState_srcTransition_src
+	StateBase[1..*] role srcTransition
+end
+
+association xxx_AssociationDataStateBase_stateDataRelation between
+	AssociationDataStateBase[*] role xxx_AssociationDataStateBase_stateDataRelation_src
+	StateDataRelation[1] role stateDataRelation
+end
+
+association xxx_AssociationDataStateBase_dataVar between
+	AssociationDataStateBase[0..1] role xxx_AssociationDataStateBase_dataVar_src
+	DataVar[1..*] role dataVar
+end
+
+association xxx_AssociationDataStateBase_stateBase between
+	AssociationDataStateBase[0..1] role xxx_AssociationDataStateBase_stateBase_src
+	StateBase[1..*] role stateBase
+end
+

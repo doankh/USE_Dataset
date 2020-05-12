@@ -1,0 +1,55 @@
+model PDG
+class MProgramDependenceGraph
+attributes
+operations
+end
+
+class EnterNode
+attributes
+	name : String
+operations
+end
+
+class ExpressionNode
+attributes
+	name : String
+operations
+end
+
+class Expression
+attributes
+	name : String
+	isIdentifier : Boolean
+operations
+end
+
+composition xxx_MProgramDependenceGraph_node between
+	MProgramDependenceGraph[*] role xxx_MProgramDependenceGraph_node_src
+	EnterNode[1] role node
+end
+
+composition xxx_EnterNode_controlDependenceNodes between
+	EnterNode[0..1] role xxx_EnterNode_controlDependenceNodes_src
+	ExpressionNode[*] role controlDependenceNodes
+end
+
+composition xxx_ExpressionNode_expression between
+	ExpressionNode[*] role xxx_ExpressionNode_expression_src
+	Expression[1] role expression
+end
+
+association xxx_ExpressionNode_dataDependenceNodes between
+	ExpressionNode[0..1] role xxx_ExpressionNode_dataDependenceNodes_src
+	ExpressionNode[*] role dataDependenceNodes
+end
+
+composition xxx_ExpressionNode_controlDependenceNodes between
+	ExpressionNode[0..1] role xxx_ExpressionNode_controlDependenceNodes_src
+	ExpressionNode[*] role controlDependenceNodes
+end
+
+composition xxx_Expression_innerExpressions between
+	Expression[0..1] role xxx_Expression_innerExpressions_src
+	Expression[*] role innerExpressions
+end
+

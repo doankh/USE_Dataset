@@ -1,0 +1,92 @@
+model PetriNetModel
+class PetriNet
+attributes
+	name : String
+operations
+end
+
+class Transition
+attributes
+	name : String
+operations
+end
+
+class ArcPT
+attributes
+	inscription : String
+operations
+end
+
+class ArcTP
+attributes
+	inscription : String
+operations
+end
+
+class Place
+attributes
+	name : String
+	token : Integer
+operations
+end
+
+composition xxx_PetriNet_transition between
+	PetriNet[0..1] role xxx_PetriNet_transition_src
+	Transition[*] role transition
+end
+
+composition xxx_PetriNet_arcPT between
+	PetriNet[0..1] role xxx_PetriNet_arcPT_src
+	ArcPT[*] role arcPT
+end
+
+composition xxx_PetriNet_arcTP between
+	PetriNet[0..1] role xxx_PetriNet_arcTP_src
+	ArcTP[*] role arcTP
+end
+
+composition xxx_PetriNet_place between
+	PetriNet[0..1] role xxx_PetriNet_place_src
+	Place[*] role place
+end
+
+association xxx_Transition_preArc between
+	Transition[0..1] role xxx_Transition_preArc_src
+	ArcPT[*] role preArc
+end
+
+association xxx_Transition_postArc between
+	Transition[0..1] role xxx_Transition_postArc_src
+	ArcTP[*] role postArc
+end
+
+association xxx_ArcPT_transition between
+	ArcPT[*] role xxx_ArcPT_transition_src
+	Transition[0..1] role transition
+end
+
+association xxx_ArcPT_place between
+	ArcPT[*] role xxx_ArcPT_place_src
+	Place[0..1] role place
+end
+
+association xxx_ArcTP_place between
+	ArcTP[*] role xxx_ArcTP_place_src
+	Place[0..1] role place
+end
+
+association xxx_ArcTP_transition between
+	ArcTP[*] role xxx_ArcTP_transition_src
+	Transition[0..1] role transition
+end
+
+association xxx_Place_preArc between
+	Place[0..1] role xxx_Place_preArc_src
+	ArcTP[*] role preArc
+end
+
+association xxx_Place_postArc between
+	Place[0..1] role xxx_Place_postArc_src
+	ArcPT[*] role postArc
+end
+

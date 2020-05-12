@@ -1,0 +1,93 @@
+model performance
+enum Dimension{
+default
+}
+
+class SystemUnderTest<Properties
+attributes
+	name : String
+operations
+end
+
+class Environment<Properties
+attributes
+operations
+end
+
+class Scenario<Properties
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class Properties
+attributes
+operations
+end
+
+class Property
+attributes
+	key : String
+	value : String
+operations
+end
+
+class PerformanceTest
+attributes
+operations
+end
+
+class TestResult
+attributes
+operations
+end
+
+class DataPoint
+attributes
+operations
+end
+
+class Measure
+attributes
+	name : String
+	dimension : Dimension
+	value : Real
+operations
+end
+
+composition xxx_Properties_properties between
+	Properties[0..1] role xxx_Properties_properties_src
+	Property[*] role properties
+end
+
+composition xxx_PerformanceTest_sut between
+	PerformanceTest[*] role xxx_PerformanceTest_sut_src
+	SystemUnderTest[1] role sut
+end
+
+composition xxx_PerformanceTest_environment between
+	PerformanceTest[*] role xxx_PerformanceTest_environment_src
+	Environment[1] role environment
+end
+
+composition xxx_PerformanceTest_results between
+	PerformanceTest[0..1] role xxx_PerformanceTest_results_src
+	TestResult[*] role results
+end
+
+composition xxx_TestResult_scenario between
+	TestResult[*] role xxx_TestResult_scenario_src
+	Scenario[1] role scenario
+end
+
+composition xxx_TestResult_dataPoints between
+	TestResult[0..1] role xxx_TestResult_dataPoints_src
+	DataPoint[*] role dataPoints
+end
+
+composition xxx_DataPoint_measures between
+	DataPoint[0..1] role xxx_DataPoint_measures_src
+	Measure[*] role measures
+end
+

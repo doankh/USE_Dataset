@@ -1,0 +1,28 @@
+model MSProject
+class MSProject
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Task<NamedElement
+attributes
+	UID : String
+operations
+end
+
+composition xxx_MSProject_tasks between
+	MSProject[0..1] role xxx_MSProject_tasks_src
+	Task[1..*] role tasks
+end
+
+association xxx_Task_predecessors between
+	Task[0..1] role xxx_Task_predecessors_src
+	Task[*] role predecessors
+end
+

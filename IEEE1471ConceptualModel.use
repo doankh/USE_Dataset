@@ -1,0 +1,228 @@
+model PrimitiveTypes
+abstract class Element
+attributes
+	name : String
+	content : String
+operations
+end
+
+class IEEE1471Model<Element
+attributes
+operations
+end
+
+class System<Element
+attributes
+operations
+end
+
+class Mission<Element
+attributes
+operations
+end
+
+class Environment<Element
+attributes
+operations
+end
+
+class Architecture<Element
+attributes
+operations
+end
+
+class Rationale<Element
+attributes
+operations
+end
+
+class ArchitecturalDescription<Element
+attributes
+operations
+end
+
+class View<Element
+attributes
+operations
+end
+
+class Model<Element
+attributes
+operations
+end
+
+class Stakeholder<Element
+attributes
+operations
+end
+
+class Concern<Element
+attributes
+operations
+end
+
+class Viewpoint<Element
+attributes
+operations
+end
+
+class LibraryViewpoint<Element
+attributes
+operations
+end
+
+composition xxx_IEEE1471Model_system between
+	IEEE1471Model[*] role xxx_IEEE1471Model_system_src
+	System[1] role system
+end
+
+composition xxx_IEEE1471Model_environment between
+	IEEE1471Model[*] role xxx_IEEE1471Model_environment_src
+	Environment[1] role environment
+end
+
+composition xxx_IEEE1471Model_missions between
+	IEEE1471Model[0..1] role xxx_IEEE1471Model_missions_src
+	Mission[*] role missions
+end
+
+composition xxx_IEEE1471Model_architecture between
+	IEEE1471Model[*] role xxx_IEEE1471Model_architecture_src
+	Architecture[1] role architecture
+end
+
+composition xxx_IEEE1471Model_stakeholders between
+	IEEE1471Model[0..1] role xxx_IEEE1471Model_stakeholders_src
+	Stakeholder[*] role stakeholders
+end
+
+composition xxx_IEEE1471Model_concerns between
+	IEEE1471Model[0..1] role xxx_IEEE1471Model_concerns_src
+	Concern[*] role concerns
+end
+
+composition xxx_IEEE1471Model_viewpoints between
+	IEEE1471Model[0..1] role xxx_IEEE1471Model_viewpoints_src
+	Viewpoint[*] role viewpoints
+end
+
+composition xxx_IEEE1471Model_libraryViewpoints between
+	IEEE1471Model[0..1] role xxx_IEEE1471Model_libraryViewpoints_src
+	LibraryViewpoint[*] role libraryViewpoints
+end
+
+composition xxx_IEEE1471Model_architecturalDescription between
+	IEEE1471Model[*] role xxx_IEEE1471Model_architecturalDescription_src
+	ArchitecturalDescription[1] role architecturalDescription
+end
+
+composition xxx_IEEE1471Model_rationale between
+	IEEE1471Model[*] role xxx_IEEE1471Model_rationale_src
+	Rationale[1] role rationale
+end
+
+association xxx_System_fulfils between
+	System[0..1] role xxx_System_fulfils_src
+	Mission[1..*] role fulfils
+end
+
+association xxx_System_inhabits between
+	System[*] role xxx_System_inhabits_src
+	Environment[1] role inhabits
+end
+
+association xxx_System_hasAn between
+	System[*] role xxx_System_hasAn_src
+	Architecture[1] role hasAn
+end
+
+association xxx_System_has between
+	System[0..1] role xxx_System_has_src
+	Stakeholder[1..*] role has
+end
+
+association xxx_Environment_influences between
+	Environment[*] role xxx_Environment_influences_src
+	System[1] role influences
+end
+
+association xxx_Architecture_describedBy between
+	Architecture[*] role xxx_Architecture_describedBy_src
+	ArchitecturalDescription[1] role describedBy
+end
+
+association xxx_Rationale_provides between
+	Rationale[*] role xxx_Rationale_provides_src
+	ArchitecturalDescription[1] role provides
+end
+
+association xxx_ArchitecturalDescription_identifiesS between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_identifiesS_src
+	Stakeholder[1..*] role identifiesS
+end
+
+association xxx_ArchitecturalDescription_identifiesC between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_identifiesC_src
+	Concern[1..*] role identifiesC
+end
+
+association xxx_ArchitecturalDescription_selects between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_selects_src
+	Viewpoint[1..*] role selects
+end
+
+composition xxx_ArchitecturalDescription_organizedBy between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_organizedBy_src
+	View[1..*] role organizedBy
+end
+
+composition xxx_ArchitecturalDescription_aggregates between
+	ArchitecturalDescription[0..1] role xxx_ArchitecturalDescription_aggregates_src
+	Model[1..*] role aggregates
+end
+
+association xxx_View_conformsTo between
+	View[*] role xxx_View_conformsTo_src
+	Viewpoint[1] role conformsTo
+end
+
+association xxx_View_consitsOf between
+	View[0..1] role xxx_View_consitsOf_src
+	Model[1..*] role consitsOf
+end
+
+association xxx_Model_participatesInV between
+	Model[0..1] role xxx_Model_participatesInV_src
+	View[1..*] role participatesInV
+end
+
+association xxx_Model_participatesInAD between
+	Model[*] role xxx_Model_participatesInAD_src
+	ArchitecturalDescription[1] role participatesInAD
+end
+
+association xxx_Stakeholder_has between
+	Stakeholder[0..1] role xxx_Stakeholder_has_src
+	Concern[1..*] role has
+end
+
+association xxx_Concern_isImportantTo between
+	Concern[0..1] role xxx_Concern_isImportantTo_src
+	Stakeholder[1..*] role isImportantTo
+end
+
+association xxx_Viewpoint_hasSource between
+	Viewpoint[*] role xxx_Viewpoint_hasSource_src
+	LibraryViewpoint[0..1] role hasSource
+end
+
+association xxx_Viewpoint_usedToCover between
+	Viewpoint[0..1] role xxx_Viewpoint_usedToCover_src
+	Concern[1..*] role usedToCover
+end
+
+association xxx_Viewpoint_establishesMethodsFor between
+	Viewpoint[0..1] role xxx_Viewpoint_establishesMethodsFor_src
+	Model[1..*] role establishesMethodsFor
+end
+

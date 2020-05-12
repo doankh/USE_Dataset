@@ -1,0 +1,122 @@
+model screens
+class Application
+attributes
+	name : String
+	identifier : String
+operations
+end
+
+abstract class Screen
+attributes
+	id : String
+	title : String
+operations
+end
+
+class Dashboard<Screen
+attributes
+operations
+end
+
+class ListScreen<Screen
+attributes
+	creatable : Boolean
+	deletable : Boolean
+	showItemDetails : String
+operations
+end
+
+class DetailsScreen<Screen
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+	isHierarchical : Boolean
+operations
+end
+
+abstract class EntityProperty
+attributes
+	name : String
+	binding : String
+	isIdentifier : Boolean
+operations
+end
+
+class TextProperty<EntityProperty
+attributes
+operations
+end
+
+class BoolProperty<EntityProperty
+attributes
+operations
+end
+
+class RefProperty<EntityProperty
+attributes
+	isMultiref : Boolean
+	creatable : Boolean
+	refEntityName : String
+operations
+end
+
+class IntProperty<EntityProperty
+attributes
+operations
+end
+
+class FloatProperty<EntityProperty
+attributes
+operations
+end
+
+class EnumProperty<EntityProperty
+attributes
+	options : String
+operations
+end
+
+composition xxx_Application_screens between
+	Application[0..1] role xxx_Application_screens_src
+	Screen[1..*] role screens
+end
+
+association xxx_Dashboard_screens between
+	Dashboard[0..1] role xxx_Dashboard_screens_src
+	Screen[1..*] role screens
+end
+
+association xxx_ListScreen_entity between
+	ListScreen[*] role xxx_ListScreen_entity_src
+	Entity[1] role entity
+end
+
+composition xxx_ListScreen_detailsScreen between
+	ListScreen[*] role xxx_ListScreen_detailsScreen_src
+	DetailsScreen[0..1] role detailsScreen
+end
+
+association xxx_DetailsScreen_entity between
+	DetailsScreen[*] role xxx_DetailsScreen_entity_src
+	Entity[1] role entity
+end
+
+composition xxx_DetailsScreen_refScreens between
+	DetailsScreen[0..1] role xxx_DetailsScreen_refScreens_src
+	DetailsScreen[*] role refScreens
+end
+
+composition xxx_Entity_fields between
+	Entity[0..1] role xxx_Entity_fields_src
+	EntityProperty[*] role fields
+end
+
+association xxx_EntityProperty_entity between
+	EntityProperty[*] role xxx_EntityProperty_entity_src
+	Entity[1] role entity
+end
+

@@ -1,0 +1,41 @@
+model city2
+class City
+attributes
+	name : String
+operations
+end
+
+abstract class House
+attributes
+	owner : String
+operations
+end
+
+class Mansion<House
+attributes
+	number : Integer
+operations
+end
+
+class Appartment<House
+attributes
+	label : String
+operations
+end
+
+class Mayor
+attributes
+	name : String
+operations
+end
+
+composition xxx_City_houses between
+	City[0..1] role xxx_City_houses_src
+	House[*] role houses
+end
+
+composition xxx_City_mayor between
+	City[*] role xxx_City_mayor_src
+	Mayor[1] role mayor
+end
+

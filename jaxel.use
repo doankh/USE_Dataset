@@ -1,0 +1,65 @@
+model jaxel
+class Sheet
+attributes
+	name : String
+	numberOfRows : Integer
+	numberOfColumns : Integer
+operations
+end
+
+class Document
+attributes
+	binFolder : String
+operations
+end
+
+class Row
+attributes
+operations
+	toString():String
+end
+
+class CellColumn
+attributes
+	value : String
+	result : String
+operations
+end
+
+class EIntegerObjectToCellColumnMap
+attributes
+	key : Integer
+operations
+end
+
+class EIntegerObjectToRowMap
+attributes
+	key : Integer
+operations
+end
+
+composition xxx_Sheet_rows between
+	Sheet[0..1] role xxx_Sheet_rows_src
+	EIntegerObjectToRowMap[*] role rows
+end
+
+composition xxx_Document_sheet_file between
+	Document[0..1] role xxx_Document_sheet_file_src
+	Sheet[1..*] role sheet_file
+end
+
+composition xxx_Row_columns between
+	Row[0..1] role xxx_Row_columns_src
+	EIntegerObjectToCellColumnMap[*] role columns
+end
+
+composition xxx_EIntegerObjectToCellColumnMap_value between
+	EIntegerObjectToCellColumnMap[*] role xxx_EIntegerObjectToCellColumnMap_value_src
+	CellColumn[1] role value
+end
+
+composition xxx_EIntegerObjectToRowMap_value between
+	EIntegerObjectToRowMap[*] role xxx_EIntegerObjectToRowMap_value_src
+	Row[1] role value
+end
+

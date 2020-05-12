@@ -1,0 +1,640 @@
+model fractalIDL
+enum TypeQualifier{
+default
+}
+
+enum TypeSpecifier{
+default
+}
+
+enum ParameterQualifier{
+default
+}
+
+class ItfFile
+attributes
+operations
+end
+
+class TypeDefinition
+attributes
+operations
+end
+
+class TypedefSpecification<TypeDefinition
+attributes
+operations
+end
+
+class QualifiedTypeSpecification
+attributes
+	typeQualifier : TypeQualifier
+operations
+end
+
+class TypeSpecification
+attributes
+	typeDefName : String
+	typeSpecifier : TypeSpecifier
+operations
+end
+
+class StructOrUnionSpecification<TypeDefinition,TypeSpecification
+attributes
+	struct : String
+	id : String
+operations
+end
+
+class StructOrUnionDefinition<StructOrUnionSpecification
+attributes
+operations
+end
+
+class StructorUnionReference<StructOrUnionSpecification
+attributes
+operations
+end
+
+class StructMember
+attributes
+operations
+end
+
+class EnumSpecification<TypeDefinition,TypeSpecification
+attributes
+	id : String
+operations
+end
+
+class EnumDefinition<EnumSpecification
+attributes
+operations
+end
+
+class EnumReference<EnumSpecification
+attributes
+operations
+end
+
+class EnumMemberList
+attributes
+operations
+end
+
+class EnumMember<EnumMemberList
+attributes
+	id : String
+operations
+end
+
+class Declarators
+attributes
+operations
+end
+
+class Declarator
+attributes
+operations
+end
+
+class AbstractDeclarator
+attributes
+operations
+end
+
+class PointerSpecification
+attributes
+operations
+end
+
+class Qualified_PointerSpecification
+attributes
+	typeQualifier : TypeQualifier
+operations
+end
+
+class DirectDeclarator
+attributes
+	id : String
+operations
+end
+
+class AbstractDirectDeclarator
+attributes
+operations
+end
+
+class ArraySpecification
+attributes
+operations
+end
+
+class ConstantDefinition
+attributes
+	id : String
+operations
+end
+
+class InterfaceDefinition
+attributes
+	name : String
+	fqn2 : String
+operations
+end
+
+class MethodDefinition
+attributes
+	id : String
+operations
+end
+
+class ParameterList
+attributes
+operations
+end
+
+class Parameter
+attributes
+	ParameterQualifier : ParameterQualifier
+operations
+end
+
+class IncludeDirective
+attributes
+	importedURI : String
+	includeID : String
+operations
+end
+
+class Annotations
+attributes
+operations
+end
+
+class Annotation<AnnotationValue
+attributes
+	fqn : String
+operations
+end
+
+class AnnotationParameters
+attributes
+operations
+end
+
+class AnnotationValuePairs
+attributes
+operations
+end
+
+class AnnotationValuePair
+attributes
+	id : String
+operations
+end
+
+class AnnotationValue
+attributes
+operations
+end
+
+class ArrayAnnotationValue<AnnotationValue
+attributes
+operations
+end
+
+class ConstantExpression<PrimaryExpression
+attributes
+operations
+end
+
+class LogicalOrExpression<ConstantExpression
+attributes
+operations
+end
+
+class LogicalAndExpression
+attributes
+operations
+end
+
+class OrExpression
+attributes
+operations
+end
+
+class XorExpression
+attributes
+operations
+end
+
+class AndExpression
+attributes
+operations
+end
+
+class ShiftExpression
+attributes
+	op : String
+operations
+end
+
+class AdditiveExpression
+attributes
+	op : String
+operations
+end
+
+class MulExpression
+attributes
+	op : String
+operations
+end
+
+class CastExpression
+attributes
+operations
+end
+
+class UnaryExpression
+attributes
+	unaryExpr : String
+operations
+end
+
+class PrimaryExpression
+attributes
+operations
+end
+
+class Literal
+attributes
+operations
+end
+
+composition xxx_ItfFile_includes between
+	ItfFile[0..1] role xxx_ItfFile_includes_src
+	IncludeDirective[*] role includes
+end
+
+composition xxx_ItfFile_constant between
+	ItfFile[0..1] role xxx_ItfFile_constant_src
+	ConstantDefinition[*] role constant
+end
+
+composition xxx_ItfFile_type between
+	ItfFile[0..1] role xxx_ItfFile_type_src
+	TypeDefinition[*] role type
+end
+
+composition xxx_ItfFile_interface between
+	ItfFile[*] role xxx_ItfFile_interface_src
+	InterfaceDefinition[0..1] role interface
+end
+
+composition xxx_TypedefSpecification_qualifedType between
+	TypedefSpecification[*] role xxx_TypedefSpecification_qualifedType_src
+	QualifiedTypeSpecification[0..1] role qualifedType
+end
+
+composition xxx_TypedefSpecification_dec between
+	TypedefSpecification[*] role xxx_TypedefSpecification_dec_src
+	Declarators[0..1] role dec
+end
+
+composition xxx_QualifiedTypeSpecification_typeSpec between
+	QualifiedTypeSpecification[*] role xxx_QualifiedTypeSpecification_typeSpec_src
+	TypeSpecification[0..1] role typeSpec
+end
+
+composition xxx_StructOrUnionDefinition_structMember between
+	StructOrUnionDefinition[0..1] role xxx_StructOrUnionDefinition_structMember_src
+	StructMember[*] role structMember
+end
+
+composition xxx_StructMember_annotations between
+	StructMember[*] role xxx_StructMember_annotations_src
+	Annotations[0..1] role annotations
+end
+
+composition xxx_StructMember_qualType between
+	StructMember[*] role xxx_StructMember_qualType_src
+	QualifiedTypeSpecification[0..1] role qualType
+end
+
+composition xxx_StructMember_dec between
+	StructMember[*] role xxx_StructMember_dec_src
+	Declarators[0..1] role dec
+end
+
+composition xxx_StructMember_constExpr between
+	StructMember[*] role xxx_StructMember_constExpr_src
+	ConstantExpression[0..1] role constExpr
+end
+
+composition xxx_EnumDefinition_enumMemberList between
+	EnumDefinition[*] role xxx_EnumDefinition_enumMemberList_src
+	EnumMemberList[0..1] role enumMemberList
+end
+
+composition xxx_EnumMember_enumMember between
+	EnumMember[0..1] role xxx_EnumMember_enumMember_src
+	EnumMember[*] role enumMember
+end
+
+composition xxx_EnumMember_annotations between
+	EnumMember[*] role xxx_EnumMember_annotations_src
+	Annotations[0..1] role annotations
+end
+
+composition xxx_EnumMember_constExpr between
+	EnumMember[*] role xxx_EnumMember_constExpr_src
+	ConstantExpression[0..1] role constExpr
+end
+
+composition xxx_Declarators_dec between
+	Declarators[*] role xxx_Declarators_dec_src
+	Declarator[0..1] role dec
+end
+
+composition xxx_Declarators_declaratorList between
+	Declarators[0..1] role xxx_Declarators_declaratorList_src
+	Declarator[*] role declaratorList
+end
+
+composition xxx_Declarator_pointer between
+	Declarator[*] role xxx_Declarator_pointer_src
+	PointerSpecification[0..1] role pointer
+end
+
+composition xxx_Declarator_dc between
+	Declarator[*] role xxx_Declarator_dc_src
+	DirectDeclarator[0..1] role dc
+end
+
+composition xxx_AbstractDeclarator_pointer between
+	AbstractDeclarator[*] role xxx_AbstractDeclarator_pointer_src
+	PointerSpecification[0..1] role pointer
+end
+
+composition xxx_AbstractDeclarator_dc between
+	AbstractDeclarator[*] role xxx_AbstractDeclarator_dc_src
+	AbstractDirectDeclarator[0..1] role dc
+end
+
+composition xxx_PointerSpecification_qualifiedPointer between
+	PointerSpecification[0..1] role xxx_PointerSpecification_qualifiedPointer_src
+	Qualified_PointerSpecification[*] role qualifiedPointer
+end
+
+composition xxx_DirectDeclarator_dec between
+	DirectDeclarator[*] role xxx_DirectDeclarator_dec_src
+	Declarator[0..1] role dec
+end
+
+composition xxx_DirectDeclarator_array between
+	DirectDeclarator[0..1] role xxx_DirectDeclarator_array_src
+	ArraySpecification[*] role array
+end
+
+composition xxx_AbstractDirectDeclarator_dec between
+	AbstractDirectDeclarator[*] role xxx_AbstractDirectDeclarator_dec_src
+	AbstractDeclarator[0..1] role dec
+end
+
+composition xxx_AbstractDirectDeclarator_arrays between
+	AbstractDirectDeclarator[0..1] role xxx_AbstractDirectDeclarator_arrays_src
+	ArraySpecification[*] role arrays
+end
+
+composition xxx_AbstractDirectDeclarator_array between
+	AbstractDirectDeclarator[0..1] role xxx_AbstractDirectDeclarator_array_src
+	ArraySpecification[*] role array
+end
+
+composition xxx_ArraySpecification_constExpr between
+	ArraySpecification[*] role xxx_ArraySpecification_constExpr_src
+	ConstantExpression[0..1] role constExpr
+end
+
+composition xxx_ConstantDefinition_expr between
+	ConstantDefinition[*] role xxx_ConstantDefinition_expr_src
+	ConstantExpression[0..1] role expr
+end
+
+composition xxx_InterfaceDefinition_annotations between
+	InterfaceDefinition[*] role xxx_InterfaceDefinition_annotations_src
+	Annotations[0..1] role annotations
+end
+
+composition xxx_InterfaceDefinition_methodDef between
+	InterfaceDefinition[0..1] role xxx_InterfaceDefinition_methodDef_src
+	MethodDefinition[*] role methodDef
+end
+
+composition xxx_MethodDefinition_annotations between
+	MethodDefinition[*] role xxx_MethodDefinition_annotations_src
+	Annotations[0..1] role annotations
+end
+
+composition xxx_MethodDefinition_qualifiedTypeSpec between
+	MethodDefinition[*] role xxx_MethodDefinition_qualifiedTypeSpec_src
+	QualifiedTypeSpecification[0..1] role qualifiedTypeSpec
+end
+
+composition xxx_MethodDefinition_pointerSpecification between
+	MethodDefinition[*] role xxx_MethodDefinition_pointerSpecification_src
+	PointerSpecification[0..1] role pointerSpecification
+end
+
+composition xxx_MethodDefinition_ParameterList between
+	MethodDefinition[*] role xxx_MethodDefinition_ParameterList_src
+	ParameterList[0..1] role ParameterList
+end
+
+composition xxx_ParameterList_param between
+	ParameterList[*] role xxx_ParameterList_param_src
+	Parameter[0..1] role param
+end
+
+composition xxx_ParameterList_params between
+	ParameterList[0..1] role xxx_ParameterList_params_src
+	Parameter[*] role params
+end
+
+composition xxx_Parameter_annotations between
+	Parameter[*] role xxx_Parameter_annotations_src
+	Annotations[0..1] role annotations
+end
+
+composition xxx_Parameter_qualifiedTypeSpec between
+	Parameter[*] role xxx_Parameter_qualifiedTypeSpec_src
+	QualifiedTypeSpecification[0..1] role qualifiedTypeSpec
+end
+
+composition xxx_Parameter_dec between
+	Parameter[*] role xxx_Parameter_dec_src
+	Declarator[0..1] role dec
+end
+
+composition xxx_Parameter_absDec between
+	Parameter[*] role xxx_Parameter_absDec_src
+	AbstractDeclarator[0..1] role absDec
+end
+
+composition xxx_Annotations_annotations between
+	Annotations[0..1] role xxx_Annotations_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_Annotation_annotationParamaters between
+	Annotation[*] role xxx_Annotation_annotationParamaters_src
+	AnnotationParameters[0..1] role annotationParamaters
+end
+
+composition xxx_AnnotationParameters_valuePair between
+	AnnotationParameters[*] role xxx_AnnotationParameters_valuePair_src
+	AnnotationValuePairs[0..1] role valuePair
+end
+
+composition xxx_AnnotationParameters_value between
+	AnnotationParameters[*] role xxx_AnnotationParameters_value_src
+	AnnotationValue[0..1] role value
+end
+
+composition xxx_AnnotationValuePairs_first between
+	AnnotationValuePairs[*] role xxx_AnnotationValuePairs_first_src
+	AnnotationValuePair[0..1] role first
+end
+
+composition xxx_AnnotationValuePairs_listValue between
+	AnnotationValuePairs[0..1] role xxx_AnnotationValuePairs_listValue_src
+	AnnotationValuePair[*] role listValue
+end
+
+composition xxx_AnnotationValuePair_value between
+	AnnotationValuePair[*] role xxx_AnnotationValuePair_value_src
+	AnnotationValue[0..1] role value
+end
+
+composition xxx_ArrayAnnotationValue_firstValue between
+	ArrayAnnotationValue[*] role xxx_ArrayAnnotationValue_firstValue_src
+	AnnotationValue[0..1] role firstValue
+end
+
+composition xxx_ArrayAnnotationValue_values between
+	ArrayAnnotationValue[0..1] role xxx_ArrayAnnotationValue_values_src
+	AnnotationValue[*] role values
+end
+
+composition xxx_LogicalOrExpression_leftExpr between
+	LogicalOrExpression[*] role xxx_LogicalOrExpression_leftExpr_src
+	LogicalAndExpression[0..1] role leftExpr
+end
+
+composition xxx_LogicalOrExpression_rightExpr between
+	LogicalOrExpression[*] role xxx_LogicalOrExpression_rightExpr_src
+	LogicalOrExpression[0..1] role rightExpr
+end
+
+composition xxx_LogicalAndExpression_leftExpr between
+	LogicalAndExpression[*] role xxx_LogicalAndExpression_leftExpr_src
+	OrExpression[0..1] role leftExpr
+end
+
+composition xxx_LogicalAndExpression_rightExpr between
+	LogicalAndExpression[*] role xxx_LogicalAndExpression_rightExpr_src
+	LogicalAndExpression[0..1] role rightExpr
+end
+
+composition xxx_OrExpression_leftExpr between
+	OrExpression[*] role xxx_OrExpression_leftExpr_src
+	XorExpression[0..1] role leftExpr
+end
+
+composition xxx_OrExpression_rightExpr between
+	OrExpression[*] role xxx_OrExpression_rightExpr_src
+	OrExpression[0..1] role rightExpr
+end
+
+composition xxx_XorExpression_leftExpr between
+	XorExpression[*] role xxx_XorExpression_leftExpr_src
+	AndExpression[0..1] role leftExpr
+end
+
+composition xxx_XorExpression_rightExpr between
+	XorExpression[*] role xxx_XorExpression_rightExpr_src
+	XorExpression[0..1] role rightExpr
+end
+
+composition xxx_AndExpression_leftExpr between
+	AndExpression[*] role xxx_AndExpression_leftExpr_src
+	ShiftExpression[0..1] role leftExpr
+end
+
+composition xxx_AndExpression_rightExpr between
+	AndExpression[*] role xxx_AndExpression_rightExpr_src
+	AndExpression[0..1] role rightExpr
+end
+
+composition xxx_ShiftExpression_leftExpr between
+	ShiftExpression[*] role xxx_ShiftExpression_leftExpr_src
+	AdditiveExpression[0..1] role leftExpr
+end
+
+composition xxx_ShiftExpression_rightExpr between
+	ShiftExpression[*] role xxx_ShiftExpression_rightExpr_src
+	ShiftExpression[0..1] role rightExpr
+end
+
+composition xxx_AdditiveExpression_leftExpr between
+	AdditiveExpression[*] role xxx_AdditiveExpression_leftExpr_src
+	MulExpression[0..1] role leftExpr
+end
+
+composition xxx_AdditiveExpression_rightExpr between
+	AdditiveExpression[*] role xxx_AdditiveExpression_rightExpr_src
+	AdditiveExpression[0..1] role rightExpr
+end
+
+composition xxx_MulExpression_leftExpr between
+	MulExpression[*] role xxx_MulExpression_leftExpr_src
+	CastExpression[0..1] role leftExpr
+end
+
+composition xxx_MulExpression_rightExpr between
+	MulExpression[*] role xxx_MulExpression_rightExpr_src
+	MulExpression[0..1] role rightExpr
+end
+
+composition xxx_CastExpression_type between
+	CastExpression[*] role xxx_CastExpression_type_src
+	QualifiedTypeSpecification[0..1] role type
+end
+
+composition xxx_CastExpression_expr between
+	CastExpression[*] role xxx_CastExpression_expr_src
+	CastExpression[0..1] role expr
+end
+
+composition xxx_CastExpression_unaryExpr between
+	CastExpression[*] role xxx_CastExpression_unaryExpr_src
+	UnaryExpression[0..1] role unaryExpr
+end
+
+composition xxx_UnaryExpression_primaryExpr between
+	UnaryExpression[*] role xxx_UnaryExpression_primaryExpr_src
+	PrimaryExpression[0..1] role primaryExpr
+end
+
+composition xxx_PrimaryExpression_literal between
+	PrimaryExpression[*] role xxx_PrimaryExpression_literal_src
+	Literal[0..1] role literal
+end
+
+association xxx_Literal_ref between
+	Literal[*] role xxx_Literal_ref_src
+	ConstantDefinition[0..1] role ref
+end
+

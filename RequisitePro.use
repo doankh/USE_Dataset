@@ -1,0 +1,101 @@
+model RequisitePro
+abstract class DescribedElt
+attributes
+	description : String
+operations
+end
+
+abstract class NamedElt
+attributes
+	name : String
+operations
+end
+
+abstract class ContainerElt<DescribedElt
+attributes
+operations
+end
+
+class Project<ContainerElt
+attributes
+operations
+end
+
+class Package<ContainerElt
+attributes
+operations
+end
+
+abstract class ContainedElt
+attributes
+operations
+end
+
+abstract class TypedElt
+attributes
+	type : String
+operations
+end
+
+class Document<TypedElt
+attributes
+operations
+end
+
+class Attribute<TypedElt
+attributes
+	value : String
+operations
+end
+
+class Requirement<TypedElt
+attributes
+	text : String
+operations
+end
+
+composition xxx_ContainerElt_content between
+	ContainerElt[0..1] role xxx_ContainerElt_content_src
+	ContainedElt[*] role content
+end
+
+composition xxx_ContainerElt_packages between
+	ContainerElt[0..1] role xxx_ContainerElt_packages_src
+	Package[*] role packages
+end
+
+association xxx_Package_parentPackage between
+	Package[*] role xxx_Package_parentPackage_src
+	ContainerElt[1] role parentPackage
+end
+
+association xxx_ContainedElt_package between
+	ContainedElt[*] role xxx_ContainedElt_package_src
+	ContainerElt[1] role package
+end
+
+composition xxx_Requirement_attributes_ between
+	Requirement[0..1] role xxx_Requirement_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Requirement_location between
+	Requirement[*] role xxx_Requirement_location_src
+	Document[1] role location
+end
+
+association xxx_Requirement_parent between
+	Requirement[*] role xxx_Requirement_parent_src
+	Requirement[0..1] role parent
+end
+
+association xxx_Requirement_children between
+	Requirement[0..1] role xxx_Requirement_children_src
+	Requirement[*] role children
+end
+
+association xxx_Requirement_coverLink between
+	Requirement[0..1] role xxx_Requirement_coverLink_src
+	Requirement[*] role coverLink
+end
+

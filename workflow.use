@@ -1,0 +1,65 @@
+model flow_diagrams
+class FlowDiagram
+attributes
+operations
+end
+
+abstract class Node
+attributes
+operations
+end
+
+class Task<Node
+attributes
+	name : String
+	isInitial : Boolean
+operations
+end
+
+class Fork<Node
+attributes
+	name : String
+operations
+end
+
+class Join<Node
+attributes
+	name : String
+operations
+end
+
+class FlowEdge
+attributes
+operations
+end
+
+composition xxx_FlowDiagram_nodes between
+	FlowDiagram[0..1] role xxx_FlowDiagram_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_FlowDiagram_edges between
+	FlowDiagram[0..1] role xxx_FlowDiagram_edges_src
+	FlowEdge[*] role edges
+end
+
+association xxx_Node_outs between
+	Node[0..1] role xxx_Node_outs_src
+	FlowEdge[*] role outs
+end
+
+association xxx_Node_ins between
+	Node[0..1] role xxx_Node_ins_src
+	FlowEdge[*] role ins
+end
+
+association xxx_FlowEdge_input between
+	FlowEdge[*] role xxx_FlowEdge_input_src
+	Node[1] role input
+end
+
+association xxx_FlowEdge_output between
+	FlowEdge[*] role xxx_FlowEdge_output_src
+	Node[1] role output
+end
+

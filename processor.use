@@ -1,0 +1,395 @@
+model processor
+class Multiplexor
+attributes
+	numInputs : Integer
+operations
+	multiplexorBehavior()
+end
+
+class SeletorRegisterFile
+attributes
+	value : Integer
+operations
+end
+
+class Demultiplexor
+attributes
+	numOutputs : Integer
+operations
+	demultiplexorBehavior()
+end
+
+class RegisterFile
+attributes
+	registers : String
+operations
+	registerFileBehavior()
+end
+
+class RegisterAssyncReset
+attributes
+	internalData : Integer
+operations
+	RegisterBehaviour()
+end
+
+class Write
+attributes
+	value : Boolean
+operations
+end
+
+class Read
+attributes
+	value : Boolean
+operations
+end
+
+class ReadWrite
+attributes
+	value : Boolean
+operations
+end
+
+class Register
+attributes
+	value : Integer
+operations
+end
+
+class ControlUnit
+attributes
+	state : Integer
+	instructionSubstate : Integer
+operations
+	controlUnitBehavior()
+	processInstruction()
+	processMiscellaneousInstruction()
+	processControlInstruction()
+	processRegisterInstruction()
+	processMemoryInstruction()
+	resetAllLoads()
+	incrementPC()
+	loadsARWithPc()
+end
+
+class ULA
+attributes
+operations
+	ULABehavior()
+end
+
+class InputBoolean
+attributes
+	value : Boolean
+operations
+end
+
+class Reset
+attributes
+	value : Boolean
+operations
+end
+
+class Clock
+attributes
+	value : Boolean
+operations
+end
+
+class OutputBoolean
+attributes
+	value : Boolean
+operations
+end
+
+class InputMultiplexor
+attributes
+	value : Integer
+operations
+end
+
+class OutputMultiplexor
+attributes
+	value : Integer
+operations
+end
+
+class OutputDemux
+attributes
+	value : Integer
+operations
+end
+
+class InputDemux
+attributes
+	value : Integer
+operations
+end
+
+class InputRegisterFile
+attributes
+	value : Integer
+operations
+end
+
+class OutputRegisterFile
+attributes
+	value : Integer
+operations
+end
+
+class InputRegisterAssync
+attributes
+	value : Integer
+operations
+end
+
+class OutputRegisterAssync
+attributes
+	value : Integer
+operations
+end
+
+class Load
+attributes
+	value : Boolean
+operations
+end
+
+class InputMemory
+attributes
+	value : Integer
+operations
+end
+
+class OutputMemory
+attributes
+	value : Integer
+operations
+end
+
+class AddressMemory
+attributes
+	value : Integer
+operations
+end
+
+class Memory
+attributes
+	mem : String
+operations
+	t_sync_mem()
+end
+
+class Operation
+attributes
+	value : Integer
+operations
+end
+
+class OutputULA
+attributes
+	value : Integer
+operations
+end
+
+class SeletorULA
+attributes
+	value : Integer
+operations
+end
+
+class Status
+attributes
+	value : Boolean
+operations
+end
+
+class LoadControlUnit
+attributes
+	value : Boolean
+operations
+end
+
+class SeletorControlUnit
+attributes
+	value : Integer
+operations
+end
+
+association xxx_Multiplexor_inputs between
+	Multiplexor[0..1] role xxx_Multiplexor_inputs_src
+	InputMultiplexor[1..*] role inputs
+end
+
+association xxx_Multiplexor_output between
+	Multiplexor[*] role xxx_Multiplexor_output_src
+	OutputMultiplexor[1] role output
+end
+
+association xxx_Multiplexor_inout between
+	Multiplexor[*] role xxx_Multiplexor_inout_src
+	Multiplexor[0..1] role inout
+end
+
+association xxx_Multiplexor_inputsMul between
+	Multiplexor[0..1] role xxx_Multiplexor_inputsMul_src
+	InputMultiplexor[1..*] role inputsMul
+end
+
+association xxx_Multiplexor_outputMul between
+	Multiplexor[*] role xxx_Multiplexor_outputMul_src
+	OutputMultiplexor[1] role outputMul
+end
+
+association xxx_Demultiplexor_outputs between
+	Demultiplexor[0..1] role xxx_Demultiplexor_outputs_src
+	OutputDemux[1..*] role outputs
+end
+
+association xxx_Demultiplexor_input between
+	Demultiplexor[*] role xxx_Demultiplexor_input_src
+	InputDemux[1] role input
+end
+
+association xxx_Demultiplexor_outin between
+	Demultiplexor[*] role xxx_Demultiplexor_outin_src
+	Demultiplexor[0..1] role outin
+end
+
+association xxx_Demultiplexor_outputsDemux between
+	Demultiplexor[0..1] role xxx_Demultiplexor_outputsDemux_src
+	OutputDemux[1..*] role outputsDemux
+end
+
+association xxx_Demultiplexor_inputDemux between
+	Demultiplexor[*] role xxx_Demultiplexor_inputDemux_src
+	InputDemux[1] role inputDemux
+end
+
+association xxx_RegisterFile_sel between
+	RegisterFile[*] role xxx_RegisterFile_sel_src
+	SeletorRegisterFile[1] role sel
+end
+
+association xxx_RegisterFile_rwBit between
+	RegisterFile[*] role xxx_RegisterFile_rwBit_src
+	ReadWrite[1] role rwBit
+end
+
+association xxx_RegisterFile_clock between
+	RegisterFile[*] role xxx_RegisterFile_clock_src
+	Clock[1] role clock
+end
+
+association xxx_RegisterFile_inRf between
+	RegisterFile[*] role xxx_RegisterFile_inRf_src
+	InputRegisterFile[1] role inRf
+end
+
+association xxx_RegisterFile_outRf between
+	RegisterFile[*] role xxx_RegisterFile_outRf_src
+	OutputRegisterFile[1] role outRf
+end
+
+association xxx_RegisterAssyncReset_outRa between
+	RegisterAssyncReset[*] role xxx_RegisterAssyncReset_outRa_src
+	OutputRegisterAssync[1] role outRa
+end
+
+association xxx_RegisterAssyncReset_inRa between
+	RegisterAssyncReset[*] role xxx_RegisterAssyncReset_inRa_src
+	InputRegisterAssync[1] role inRa
+end
+
+association xxx_RegisterAssyncReset_reset between
+	RegisterAssyncReset[*] role xxx_RegisterAssyncReset_reset_src
+	Reset[1] role reset
+end
+
+association xxx_RegisterAssyncReset_clock between
+	RegisterAssyncReset[*] role xxx_RegisterAssyncReset_clock_src
+	Clock[1] role clock
+end
+
+association xxx_RegisterAssyncReset_load between
+	RegisterAssyncReset[*] role xxx_RegisterAssyncReset_load_src
+	Load[1] role load
+end
+
+association xxx_ControlUnit_loads between
+	ControlUnit[0..1] role xxx_ControlUnit_loads_src
+	LoadControlUnit[1..*] role loads
+end
+
+association xxx_ControlUnit_writeMemory between
+	ControlUnit[*] role xxx_ControlUnit_writeMemory_src
+	Write[1] role writeMemory
+end
+
+association xxx_ControlUnit_readwritebit between
+	ControlUnit[*] role xxx_ControlUnit_readwritebit_src
+	ReadWrite[1] role readwritebit
+end
+
+association xxx_ControlUnit_selControlUnit between
+	ControlUnit[*] role xxx_ControlUnit_selControlUnit_src
+	SeletorControlUnit[1] role selControlUnit
+end
+
+composition xxx_ULA_opSel between
+	ULA[*] role xxx_ULA_opSel_src
+	SeletorRegisterFile[1] role opSel
+end
+
+association xxx_ULA_ulastatus between
+	ULA[*] role xxx_ULA_ulastatus_src
+	Status[1] role ulastatus
+end
+
+association xxx_ULA_operations_ between
+	ULA[0..1] role xxx_ULA_operations__src
+	Operation[1..*] role operations_
+end
+
+association xxx_ULA_opSelUla between
+	ULA[*] role xxx_ULA_opSelUla_src
+	SeletorULA[1] role opSelUla
+end
+
+association xxx_ULA_ulaOut between
+	ULA[*] role xxx_ULA_ulaOut_src
+	OutputULA[1] role ulaOut
+end
+
+association xxx_Memory_write between
+	Memory[*] role xxx_Memory_write_src
+	Write[1] role write
+end
+
+association xxx_Memory_reset between
+	Memory[*] role xxx_Memory_reset_src
+	Reset[1] role reset
+end
+
+association xxx_Memory_clock between
+	Memory[*] role xxx_Memory_clock_src
+	Clock[1] role clock
+end
+
+association xxx_Memory_datai between
+	Memory[*] role xxx_Memory_datai_src
+	InputMemory[1] role datai
+end
+
+association xxx_Memory_datao between
+	Memory[*] role xxx_Memory_datao_src
+	OutputMemory[1] role datao
+end
+
+association xxx_Memory_address between
+	Memory[*] role xxx_Memory_address_src
+	AddressMemory[1] role address
+end
+

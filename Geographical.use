@@ -1,0 +1,195 @@
+model CIM15
+abstract class Element
+attributes
+	UUID : String
+operations
+end
+
+class Fuse<ConductingEquipment
+attributes
+operations
+end
+
+class EnergyConsumer<ConductingEquipment
+attributes
+operations
+end
+
+class Disconnector<ConductingEquipment
+attributes
+operations
+end
+
+class ACLineSegment<ConductingEquipment
+attributes
+operations
+end
+
+class SynchronousMachine<ConductingEquipment
+attributes
+operations
+end
+
+class BusbarSection<ConductingEquipment
+attributes
+operations
+end
+
+class LoadBreakSwitch<ConductingEquipment
+attributes
+operations
+end
+
+class GroundDisconnector<ConductingEquipment
+attributes
+operations
+end
+
+class SeriesCompensator<ConductingEquipment
+attributes
+operations
+end
+
+class Junction<ConductingEquipment
+attributes
+operations
+end
+
+class Breaker<ConductingEquipment
+attributes
+operations
+end
+
+class DCLineSegment<ConductingEquipment
+attributes
+operations
+end
+
+class Line<PowerSystemResource
+attributes
+operations
+end
+
+class PowerTransformer<ConductingEquipment
+attributes
+operations
+end
+
+class EnergySource<ConductingEquipment
+attributes
+operations
+end
+
+class ShuntCompensator<ConductingEquipment
+attributes
+operations
+end
+
+class Jumper<ConductingEquipment
+attributes
+operations
+end
+
+abstract class ConductingEquipment<Equipment
+attributes
+operations
+end
+
+abstract class NameType<Element
+attributes
+operations
+end
+
+abstract class Equipment<PowerSystemResource
+attributes
+operations
+end
+
+abstract class IdentifiedObject<Element
+attributes
+	aliasName : String
+	name : String
+operations
+end
+
+class Name<Element
+attributes
+	name : String
+operations
+end
+
+abstract class PowerSystemResource<IdentifiedObject
+attributes
+operations
+end
+
+class Location<IdentifiedObject
+attributes
+operations
+end
+
+class CoordinateSystem<IdentifiedObject
+attributes
+	crsUrn : String
+operations
+end
+
+class PositionPoint<Element
+attributes
+	xPosition : String
+	zPosition : String
+	sequenceNumber : Integer
+	yPosition : String
+operations
+end
+
+association xxx_NameType_Names between
+	NameType[0..1] role xxx_NameType_Names_src
+	Name[*] role Names
+end
+
+association xxx_IdentifiedObject_Names between
+	IdentifiedObject[0..1] role xxx_IdentifiedObject_Names_src
+	Name[*] role Names
+end
+
+association xxx_Name_NameType between
+	Name[*] role xxx_Name_NameType_src
+	NameType[1] role NameType
+end
+
+association xxx_Name_IdentifiedObject between
+	Name[*] role xxx_Name_IdentifiedObject_src
+	IdentifiedObject[1] role IdentifiedObject
+end
+
+association xxx_PowerSystemResource_Location between
+	PowerSystemResource[*] role xxx_PowerSystemResource_Location_src
+	Location[1] role Location
+end
+
+association xxx_Location_PowerSystemResources between
+	Location[0..1] role xxx_Location_PowerSystemResources_src
+	PowerSystemResource[*] role PowerSystemResources
+end
+
+association xxx_Location_PositionPoints between
+	Location[0..1] role xxx_Location_PositionPoints_src
+	PositionPoint[*] role PositionPoints
+end
+
+association xxx_Location_CoordinateSystem between
+	Location[*] role xxx_Location_CoordinateSystem_src
+	CoordinateSystem[1] role CoordinateSystem
+end
+
+association xxx_CoordinateSystem_Location between
+	CoordinateSystem[0..1] role xxx_CoordinateSystem_Location_src
+	Location[*] role Location
+end
+
+association xxx_PositionPoint_Location between
+	PositionPoint[*] role xxx_PositionPoint_Location_src
+	Location[1] role Location
+end
+

@@ -1,0 +1,74 @@
+model TefkatConfig
+enum ExecutionMode{
+default
+}
+
+class Configuration
+attributes
+	PackageClasses : String
+operations
+end
+
+class TransformationTask
+attributes
+	enabled : Boolean
+	mode : ExecutionMode
+operations
+end
+
+class Model
+attributes
+	locationUri : String
+	varGroup : String
+operations
+end
+
+class URIMapEntry
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Property
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_Configuration_transformationTasks between
+	Configuration[0..1] role xxx_Configuration_transformationTasks_src
+	TransformationTask[*] role transformationTasks
+end
+
+composition xxx_TransformationTask_transformation between
+	TransformationTask[*] role xxx_TransformationTask_transformation_src
+	Model[1] role transformation
+end
+
+composition xxx_TransformationTask_sourceModels between
+	TransformationTask[0..1] role xxx_TransformationTask_sourceModels_src
+	Model[*] role sourceModels
+end
+
+composition xxx_TransformationTask_targetModels between
+	TransformationTask[0..1] role xxx_TransformationTask_targetModels_src
+	Model[*] role targetModels
+end
+
+composition xxx_TransformationTask_trace between
+	TransformationTask[*] role xxx_TransformationTask_trace_src
+	Model[0..1] role trace
+end
+
+composition xxx_TransformationTask_properties between
+	TransformationTask[0..1] role xxx_TransformationTask_properties_src
+	Property[*] role properties
+end
+
+composition xxx_TransformationTask_uriMap between
+	TransformationTask[0..1] role xxx_TransformationTask_uriMap_src
+	URIMapEntry[*] role uriMap
+end
+

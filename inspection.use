@@ -1,0 +1,87 @@
+model inspection
+class Description<Reference
+attributes
+	any : String
+operations
+end
+
+class WSILDocument
+attributes
+	mixed : String
+operations
+end
+
+class Inspection<ItemWithAbstracts
+attributes
+	groups : String
+operations
+end
+
+abstract class ItemWithAbstracts
+attributes
+operations
+end
+
+class Link<Reference
+attributes
+	any : String
+operations
+end
+
+class Name
+attributes
+	value : String
+	lang : String
+operations
+end
+
+class Reference<ItemWithAbstracts
+attributes
+	location : String
+	referencedNamespace : String
+operations
+end
+
+class Service<ItemWithAbstracts
+attributes
+operations
+end
+
+class TypeOfAbstract
+attributes
+	value : String
+	lang : String
+operations
+end
+
+
+composition xxx_WSILDocument_inspection between
+	WSILDocument[*] role xxx_WSILDocument_inspection_src
+	Inspection[*] role inspection
+end
+
+composition xxx_Inspection_services between
+	Inspection[0..1] role xxx_Inspection_services_src
+	Service[*] role services
+end
+
+composition xxx_Inspection_links between
+	Inspection[0..1] role xxx_Inspection_links_src
+	Link[*] role links
+end
+
+composition xxx_ItemWithAbstracts_abstract_ between
+	ItemWithAbstracts[0..1] role xxx_ItemWithAbstracts_abstract__src
+	TypeOfAbstract[*] role abstract_
+end
+
+composition xxx_Service_name between
+	Service[0..1] role xxx_Service_name_src
+	Name[*] role name
+end
+
+composition xxx_Service_description between
+	Service[0..1] role xxx_Service_description_src
+	Description[1..*] role description
+end
+

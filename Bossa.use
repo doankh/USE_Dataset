@@ -1,0 +1,1242 @@
+model Bossa
+class BossaProgramm
+attributes
+operations
+end
+
+abstract class Scheduler
+attributes
+	defaultAtt : Boolean
+	high_Res : Boolean
+	low_Res : Boolean
+	id : String
+operations
+end
+
+class NormalScheduler<Scheduler
+attributes
+operations
+end
+
+class VirtualScheduler<Scheduler
+attributes
+operations
+end
+
+abstract class AbstractSchedulerDecl
+attributes
+operations
+end
+
+class SchedulerDecl<AbstractSchedulerDecl
+attributes
+operations
+end
+
+class VSchdulerDecl<AbstractSchedulerDecl
+attributes
+operations
+end
+
+class ConstDef
+attributes
+	id : String
+operations
+end
+
+class TypeDef
+attributes
+operations
+end
+
+class EnumRange
+attributes
+operations
+end
+
+class EnumDef
+attributes
+	theIds : String
+operations
+end
+
+class BagId
+attributes
+	theValue : String
+operations
+end
+
+class RangeDef
+attributes
+operations
+end
+
+class ProcessDef
+attributes
+operations
+end
+
+class SchedulerDef
+attributes
+operations
+end
+
+class ProcessVarDecl
+attributes
+	id : String
+operations
+end
+
+class Timer_ProcessVarDecl<ProcessVarDecl
+attributes
+operations
+end
+
+class System_ProcessVarDecl<ProcessVarDecl
+attributes
+	system : Boolean
+operations
+end
+
+class Normal_ProcessVarDecl<ProcessVarDecl
+attributes
+operations
+end
+
+class HandlerDef
+attributes
+	id : String
+operations
+end
+
+class InterfaceDef
+attributes
+operations
+end
+
+class FunctionDef
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class Integer_Expression<Expression
+attributes
+	theValue : Integer
+operations
+end
+
+class Id_Expression<Expression
+attributes
+	id : String
+operations
+end
+
+class State_Expression<Expression
+attributes
+	theValue : String
+operations
+end
+
+class True_Expression<Expression
+attributes
+operations
+end
+
+class False_Expression<Expression
+attributes
+operations
+end
+
+class Unop_Expression<Expression
+attributes
+operations
+end
+
+class Etoile_Expression<Expression
+attributes
+operations
+end
+
+class ExpId_Expression<Expression
+attributes
+	id : String
+operations
+end
+
+class Select_Expression<Expression
+attributes
+operations
+end
+
+class FnName_Expression<Expression
+attributes
+operations
+end
+
+class Empty_Expression<Expression
+attributes
+operations
+end
+
+class SRCOnSched_Expression<Expression
+attributes
+operations
+end
+
+class SchedulerOf_Expression<Expression
+attributes
+operations
+end
+
+class In_Expression<Expression
+attributes
+	in_ : Boolean
+operations
+end
+
+class Parenthese_Expression<Expression
+attributes
+operations
+end
+
+class Binop_Expression<Expression
+attributes
+operations
+end
+
+class Compo_Binop_Expression
+attributes
+operations
+end
+
+class ValDecl
+attributes
+	id : String
+operations
+end
+
+class Normal_ValDecl<ValDecl
+attributes
+operations
+end
+
+class System_ValDecl<ValDecl
+attributes
+operations
+end
+
+class Timer_ValDecl<ValDecl
+attributes
+operations
+end
+
+class FunDecl
+attributes
+operations
+end
+
+class StateDef
+attributes
+operations
+end
+
+class ClassNameStorage
+attributes
+	id : String
+operations
+end
+
+class OrderDef
+attributes
+operations
+end
+
+class AdmissionDef
+attributes
+operations
+end
+
+class TraceDef
+attributes
+operations
+end
+
+class TypeExpr
+attributes
+	id : String
+operations
+end
+
+class TypeOrVoid
+attributes
+	isVoid : Boolean
+operations
+end
+
+class ParameterType
+attributes
+operations
+end
+
+abstract class Storage
+attributes
+operations
+end
+
+class Process_Storage<Storage
+attributes
+operations
+end
+
+class Scheduler_Storage<Storage
+attributes
+operations
+end
+
+class Queue_Storage<Storage
+attributes
+operations
+end
+
+class KeyCritDecls
+attributes
+operations
+end
+
+class CompoKeyCritDecls
+attributes
+operations
+end
+
+class CritDecls
+attributes
+operations
+end
+
+abstract class CritDecl
+attributes
+operations
+end
+
+class CritDeclWhithId<CritDecl
+attributes
+	id : String
+operations
+end
+
+class CritDeclWhithoutId<CritDecl
+attributes
+operations
+end
+
+class ValDef
+attributes
+	id : String
+operations
+end
+
+class AdmCrit
+attributes
+operations
+end
+
+class AttachDetach
+attributes
+operations
+end
+
+class ParamVarDecl
+attributes
+	id : String
+operations
+end
+
+class SeqStmt
+attributes
+operations
+end
+
+class TraceEvent
+attributes
+operations
+end
+
+class TraceExpr
+attributes
+	id : String
+operations
+end
+
+class TraceTest
+attributes
+operations
+end
+
+class ProcParam
+attributes
+	id : String
+	process : Boolean
+	scheduler : Boolean
+operations
+end
+
+abstract class Statment
+attributes
+operations
+end
+
+class IfStmt<Statment
+attributes
+operations
+end
+
+abstract class ForStmt<Statment
+attributes
+operations
+end
+
+class ForeachForStmt<ForStmt
+attributes
+	id : String
+	isIn : Boolean
+operations
+end
+
+class ForEachIncreasingForStmt<ForStmt
+attributes
+	id : String
+operations
+end
+
+class ForEachDecreasingForStmt<ForStmt
+attributes
+	id : String
+operations
+end
+
+class ReturnStmt<Statment
+attributes
+operations
+end
+
+class SwitchStmt<Statment
+attributes
+operations
+end
+
+class AssignStmt<Statment
+attributes
+operations
+end
+
+abstract class MoveStmt<Statment
+attributes
+	isHead : Boolean
+	isTail : Boolean
+operations
+end
+
+class NormalMoveStmt<MoveStmt
+attributes
+operations
+end
+
+class ForwardMoveStmt<MoveStmt
+attributes
+operations
+end
+
+class StateRef
+attributes
+	stateRef : String
+operations
+end
+
+class DeferStmt<Statment
+attributes
+	deferStmt : String
+operations
+end
+
+class PrimStmt<Statment
+attributes
+operations
+end
+
+class ErrorStmt<Statment
+attributes
+	errorType : String
+operations
+end
+
+class BreakStmt<Statment
+attributes
+operations
+end
+
+class LocExpr
+attributes
+	stateName : String
+	id : String
+operations
+end
+
+abstract class MoveExpr
+attributes
+operations
+end
+
+class Select_MoveExpr<MoveExpr
+attributes
+operations
+end
+
+class SatateName_MoveExpr<MoveExpr
+attributes
+operations
+end
+
+class ID_MoveExpr<MoveExpr
+attributes
+	id : String
+operations
+end
+
+class IDSource_MoveExpr<MoveExpr
+attributes
+	id : String
+operations
+end
+
+class IDTarget_MoveExpr<MoveExpr
+attributes
+	id : String
+operations
+end
+
+class ClassState
+attributes
+	state : Boolean
+operations
+end
+
+class OnHandlerDef
+attributes
+operations
+end
+
+class EventName
+attributes
+	eventNameLeft : String
+	eventNameRight : String
+operations
+end
+
+class ComposantOfSwitchStmt
+attributes
+operations
+end
+
+class ComposantOfInterFunc
+attributes
+	id : String
+operations
+end
+
+class BossaTypeExpr
+attributes
+	bossaTypeExpr : String
+operations
+end
+
+abstract class QueueType
+attributes
+operations
+end
+
+class Normal_QueueType<QueueType
+attributes
+operations
+end
+
+class Fifo_QueueType<QueueType
+attributes
+operations
+end
+
+class Lifo_QueueType<QueueType
+attributes
+operations
+end
+
+class Critop
+attributes
+	lowest : Boolean
+	highest : Boolean
+operations
+end
+
+class StateVisibility
+attributes
+	public : Boolean
+	private : Boolean
+operations
+end
+
+class ClassName
+attributes
+	className : String
+operations
+end
+
+class NonProcType
+attributes
+	system : Boolean
+	struct : Boolean
+	id : Boolean
+	nonProcType : String
+operations
+end
+
+class Unop
+attributes
+	plus : Boolean
+	minus : Boolean
+	excl : Boolean
+	tild : Boolean
+operations
+end
+
+class Binop
+attributes
+	plus : Boolean
+	minus : Boolean
+	star : Boolean
+	slash : Boolean
+	percentage : Boolean
+	doubleAnd : Boolean
+	doubleVerticalBar : Boolean
+	and_ : Boolean
+	eq : Boolean
+	ne : Boolean
+	lt : Boolean
+	gt : Boolean
+	le : Boolean
+	ge : Boolean
+	doubleLt : Boolean
+	doubleGt : Boolean
+operations
+end
+
+class AssignUnop
+attributes
+	doublePlus : Boolean
+	doubleMoins : Boolean
+operations
+end
+
+class AssignBinop
+attributes
+	affect : Boolean
+	plusEqual : Boolean
+	moinsEqual : Boolean
+	starEqual : Boolean
+	slashEqual : Boolean
+	percentageEqual : Boolean
+	andEqual : Boolean
+	orEqual : Boolean
+	doubleLtEqual : Boolean
+	doubleGtEqual : Boolean
+operations
+end
+
+composition xxx_BossaProgramm_scheduler between
+	BossaProgramm[*] role xxx_BossaProgramm_scheduler_src
+	Scheduler[1] role scheduler
+end
+
+composition xxx_Scheduler_handlerDef between
+	Scheduler[*] role xxx_Scheduler_handlerDef_src
+	HandlerDef[1] role handlerDef
+end
+
+composition xxx_Scheduler_interfaceDef between
+	Scheduler[*] role xxx_Scheduler_interfaceDef_src
+	InterfaceDef[1] role interfaceDef
+end
+
+composition xxx_Scheduler_functionDef between
+	Scheduler[*] role xxx_Scheduler_functionDef_src
+	FunctionDef[1] role functionDef
+end
+
+composition xxx_NormalScheduler_schedulerDecl between
+	NormalScheduler[*] role xxx_NormalScheduler_schedulerDecl_src
+	SchedulerDecl[1] role schedulerDecl
+end
+
+composition xxx_VirtualScheduler_vschedulerDecl between
+	VirtualScheduler[*] role xxx_VirtualScheduler_vschedulerDecl_src
+	VSchdulerDecl[1] role vschedulerDecl
+end
+
+composition xxx_AbstractSchedulerDecl_constDef between
+	AbstractSchedulerDecl[0..1] role xxx_AbstractSchedulerDecl_constDef_src
+	ConstDef[*] role constDef
+end
+
+composition xxx_AbstractSchedulerDecl_typeDef between
+	AbstractSchedulerDecl[0..1] role xxx_AbstractSchedulerDecl_typeDef_src
+	TypeDef[*] role typeDef
+end
+
+composition xxx_AbstractSchedulerDecl_funDecl between
+	AbstractSchedulerDecl[0..1] role xxx_AbstractSchedulerDecl_funDecl_src
+	FunDecl[*] role funDecl
+end
+
+composition xxx_AbstractSchedulerDecl_valDecl between
+	AbstractSchedulerDecl[0..1] role xxx_AbstractSchedulerDecl_valDecl_src
+	ValDecl[*] role valDecl
+end
+
+composition xxx_AbstractSchedulerDecl_stateDef between
+	AbstractSchedulerDecl[*] role xxx_AbstractSchedulerDecl_stateDef_src
+	StateDef[1] role stateDef
+end
+
+composition xxx_AbstractSchedulerDecl_orderDef between
+	AbstractSchedulerDecl[*] role xxx_AbstractSchedulerDecl_orderDef_src
+	OrderDef[0..1] role orderDef
+end
+
+composition xxx_AbstractSchedulerDecl_admissionDef between
+	AbstractSchedulerDecl[*] role xxx_AbstractSchedulerDecl_admissionDef_src
+	AdmissionDef[0..1] role admissionDef
+end
+
+composition xxx_AbstractSchedulerDecl_traceDef between
+	AbstractSchedulerDecl[*] role xxx_AbstractSchedulerDecl_traceDef_src
+	TraceDef[0..1] role traceDef
+end
+
+composition xxx_SchedulerDecl_processDef between
+	SchedulerDecl[*] role xxx_SchedulerDecl_processDef_src
+	ProcessDef[1] role processDef
+end
+
+composition xxx_VSchdulerDecl_schedulerDef between
+	VSchdulerDecl[*] role xxx_VSchdulerDecl_schedulerDef_src
+	SchedulerDef[1] role schedulerDef
+end
+
+composition xxx_ConstDef_expr between
+	ConstDef[*] role xxx_ConstDef_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_ConstDef_bossaTypeExpr between
+	ConstDef[*] role xxx_ConstDef_bossaTypeExpr_src
+	BossaTypeExpr[1] role bossaTypeExpr
+end
+
+composition xxx_TypeDef_enumRang between
+	TypeDef[*] role xxx_TypeDef_enumRang_src
+	EnumRange[1] role enumRang
+end
+
+composition xxx_EnumRange_enumDef between
+	EnumRange[*] role xxx_EnumRange_enumDef_src
+	EnumDef[0..1] role enumDef
+end
+
+composition xxx_EnumRange_rangeDef between
+	EnumRange[*] role xxx_EnumRange_rangeDef_src
+	RangeDef[0..1] role rangeDef
+end
+
+composition xxx_RangeDef_expr between
+	RangeDef[*] role xxx_RangeDef_expr_src
+	Expression[2] role expr
+end
+
+composition xxx_ProcessDef_processVarDecl between
+	ProcessDef[0..1] role xxx_ProcessDef_processVarDecl_src
+	ProcessVarDecl[1..*] role processVarDecl
+end
+
+composition xxx_SchedulerDef_processVarDecl between
+	SchedulerDef[0..1] role xxx_SchedulerDef_processVarDecl_src
+	ProcessVarDecl[1..*] role processVarDecl
+end
+
+association xxx_ProcessVarDecl_processDef between
+	ProcessVarDecl[*] role xxx_ProcessVarDecl_processDef_src
+	ProcessDef[1] role processDef
+end
+
+association xxx_ProcessVarDecl_schedulerDef between
+	ProcessVarDecl[*] role xxx_ProcessVarDecl_schedulerDef_src
+	SchedulerDef[1] role schedulerDef
+end
+
+composition xxx_System_ProcessVarDecl_typeExpr between
+	System_ProcessVarDecl[*] role xxx_System_ProcessVarDecl_typeExpr_src
+	TypeExpr[1] role typeExpr
+end
+
+composition xxx_Normal_ProcessVarDecl_typeExpr between
+	Normal_ProcessVarDecl[*] role xxx_Normal_ProcessVarDecl_typeExpr_src
+	TypeExpr[1] role typeExpr
+end
+
+association xxx_HandlerDef_scheduler between
+	HandlerDef[*] role xxx_HandlerDef_scheduler_src
+	Scheduler[1] role scheduler
+end
+
+composition xxx_HandlerDef_onHandlerDef between
+	HandlerDef[0..1] role xxx_HandlerDef_onHandlerDef_src
+	OnHandlerDef[1..*] role onHandlerDef
+end
+
+composition xxx_InterfaceDef_composantOfInterFunc between
+	InterfaceDef[0..1] role xxx_InterfaceDef_composantOfInterFunc_src
+	ComposantOfInterFunc[1..*] role composantOfInterFunc
+end
+
+association xxx_InterfaceDef_scheduler between
+	InterfaceDef[*] role xxx_InterfaceDef_scheduler_src
+	Scheduler[1] role scheduler
+end
+
+composition xxx_FunctionDef_composantOfInterFunc between
+	FunctionDef[0..1] role xxx_FunctionDef_composantOfInterFunc_src
+	ComposantOfInterFunc[1..*] role composantOfInterFunc
+end
+
+association xxx_FunctionDef_scheduler between
+	FunctionDef[*] role xxx_FunctionDef_scheduler_src
+	Scheduler[1] role scheduler
+end
+
+composition xxx_Unop_Expression_unop between
+	Unop_Expression[*] role xxx_Unop_Expression_unop_src
+	Unop[1] role unop
+end
+
+composition xxx_Unop_Expression_expr between
+	Unop_Expression[*] role xxx_Unop_Expression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_Etoile_Expression_expr between
+	Etoile_Expression[*] role xxx_Etoile_Expression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_ExpId_Expression_expr between
+	ExpId_Expression[*] role xxx_ExpId_Expression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_FnName_Expression_expr between
+	FnName_Expression[0..1] role xxx_FnName_Expression_expr_src
+	Expression[*] role expr
+end
+
+composition xxx_Empty_Expression_classState between
+	Empty_Expression[*] role xxx_Empty_Expression_classState_src
+	ClassState[1] role classState
+end
+
+composition xxx_SchedulerOf_Expression_expr between
+	SchedulerOf_Expression[*] role xxx_SchedulerOf_Expression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_In_Expression_expr between
+	In_Expression[*] role xxx_In_Expression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_In_Expression_classState between
+	In_Expression[*] role xxx_In_Expression_classState_src
+	ClassState[1] role classState
+end
+
+composition xxx_Parenthese_Expression_expr between
+	Parenthese_Expression[*] role xxx_Parenthese_Expression_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_Binop_Expression_id_Expression between
+	Binop_Expression[*] role xxx_Binop_Expression_id_Expression_src
+	Id_Expression[1] role id_Expression
+end
+
+composition xxx_Binop_Expression_compo_Binop_Expression between
+	Binop_Expression[*] role xxx_Binop_Expression_compo_Binop_Expression_src
+	Compo_Binop_Expression[1] role compo_Binop_Expression
+end
+
+composition xxx_Compo_Binop_Expression_binop between
+	Compo_Binop_Expression[*] role xxx_Compo_Binop_Expression_binop_src
+	Binop[1] role binop
+end
+
+composition xxx_Compo_Binop_Expression_id_Expression between
+	Compo_Binop_Expression[*] role xxx_Compo_Binop_Expression_id_Expression_src
+	Id_Expression[1] role id_Expression
+end
+
+association xxx_ValDecl_abstractSchedulerDecl between
+	ValDecl[*] role xxx_ValDecl_abstractSchedulerDecl_src
+	AbstractSchedulerDecl[1] role abstractSchedulerDecl
+end
+
+composition xxx_Normal_ValDecl_nonProcType between
+	Normal_ValDecl[*] role xxx_Normal_ValDecl_nonProcType_src
+	NonProcType[0..1] role nonProcType
+end
+
+composition xxx_System_ValDecl_nonProcType between
+	System_ValDecl[*] role xxx_System_ValDecl_nonProcType_src
+	NonProcType[0..1] role nonProcType
+end
+
+composition xxx_FunDecl_parameterTypes between
+	FunDecl[*] role xxx_FunDecl_parameterTypes_src
+	ParameterType[0..1] role parameterTypes
+end
+
+composition xxx_FunDecl_nonProcType between
+	FunDecl[*] role xxx_FunDecl_nonProcType_src
+	NonProcType[0..1] role nonProcType
+end
+
+association xxx_FunDecl_abstractSchedulerDecl between
+	FunDecl[*] role xxx_FunDecl_abstractSchedulerDecl_src
+	AbstractSchedulerDecl[1] role abstractSchedulerDecl
+end
+
+composition xxx_StateDef_classNameStorage between
+	StateDef[0..1] role xxx_StateDef_classNameStorage_src
+	ClassNameStorage[1..*] role classNameStorage
+end
+
+association xxx_StateDef_abstractSchedulerDecl between
+	StateDef[*] role xxx_StateDef_abstractSchedulerDecl_src
+	AbstractSchedulerDecl[1] role abstractSchedulerDecl
+end
+
+composition xxx_ClassNameStorage_className between
+	ClassNameStorage[*] role xxx_ClassNameStorage_className_src
+	ClassName[1] role className
+end
+
+composition xxx_ClassNameStorage_storage between
+	ClassNameStorage[*] role xxx_ClassNameStorage_storage_src
+	Storage[0..1] role storage
+end
+
+composition xxx_OrderDef_keyCritDecl between
+	OrderDef[*] role xxx_OrderDef_keyCritDecl_src
+	KeyCritDecls[1] role keyCritDecl
+end
+
+composition xxx_OrderDef_critDecls between
+	OrderDef[*] role xxx_OrderDef_critDecls_src
+	CritDecls[1] role critDecls
+end
+
+association xxx_OrderDef_abstractSchedulerDecl between
+	OrderDef[*] role xxx_OrderDef_abstractSchedulerDecl_src
+	AbstractSchedulerDecl[1] role abstractSchedulerDecl
+end
+
+composition xxx_AdmissionDef_valDef between
+	AdmissionDef[0..1] role xxx_AdmissionDef_valDef_src
+	ValDef[*] role valDef
+end
+
+composition xxx_AdmissionDef_admCrit between
+	AdmissionDef[*] role xxx_AdmissionDef_admCrit_src
+	AdmCrit[1] role admCrit
+end
+
+composition xxx_AdmissionDef_attachDetach between
+	AdmissionDef[*] role xxx_AdmissionDef_attachDetach_src
+	AttachDetach[0..1] role attachDetach
+end
+
+association xxx_AdmissionDef_abstractSchedulerDecl between
+	AdmissionDef[*] role xxx_AdmissionDef_abstractSchedulerDecl_src
+	AbstractSchedulerDecl[1] role abstractSchedulerDecl
+end
+
+composition xxx_TraceDef_traceEvent between
+	TraceDef[*] role xxx_TraceDef_traceEvent_src
+	TraceEvent[0..1] role traceEvent
+end
+
+composition xxx_TraceDef_traceExpr between
+	TraceDef[*] role xxx_TraceDef_traceExpr_src
+	TraceExpr[0..1] role traceExpr
+end
+
+composition xxx_TraceDef_traceTest between
+	TraceDef[*] role xxx_TraceDef_traceTest_src
+	TraceTest[0..1] role traceTest
+end
+
+association xxx_TraceDef_abstractSchedulerDecl between
+	TraceDef[*] role xxx_TraceDef_abstractSchedulerDecl_src
+	AbstractSchedulerDecl[1] role abstractSchedulerDecl
+end
+
+composition xxx_TypeExpr_bossaTypeExpr between
+	TypeExpr[*] role xxx_TypeExpr_bossaTypeExpr_src
+	BossaTypeExpr[0..1] role bossaTypeExpr
+end
+
+composition xxx_TypeOrVoid_typeExpr between
+	TypeOrVoid[*] role xxx_TypeOrVoid_typeExpr_src
+	TypeExpr[0..1] role typeExpr
+end
+
+composition xxx_ParameterType_typeExpr between
+	ParameterType[0..1] role xxx_ParameterType_typeExpr_src
+	TypeExpr[1..*] role typeExpr
+end
+
+composition xxx_Scheduler_Storage_stateVisibility between
+	Scheduler_Storage[*] role xxx_Scheduler_Storage_stateVisibility_src
+	StateVisibility[0..1] role stateVisibility
+end
+
+composition xxx_Queue_Storage_stateVisibility between
+	Queue_Storage[*] role xxx_Queue_Storage_stateVisibility_src
+	StateVisibility[0..1] role stateVisibility
+end
+
+composition xxx_Queue_Storage_queueType between
+	Queue_Storage[*] role xxx_Queue_Storage_queueType_src
+	QueueType[0..1] role queueType
+end
+
+composition xxx_KeyCritDecls_compoKeyCritDecls between
+	KeyCritDecls[0..1] role xxx_KeyCritDecls_compoKeyCritDecls_src
+	CompoKeyCritDecls[1..*] role compoKeyCritDecls
+end
+
+composition xxx_CompoKeyCritDecls_critDecl between
+	CompoKeyCritDecls[*] role xxx_CompoKeyCritDecls_critDecl_src
+	CritDecl[1] role critDecl
+end
+
+composition xxx_CritDecls_critDecl between
+	CritDecls[0..1] role xxx_CritDecls_critDecl_src
+	CritDecl[1..*] role critDecl
+end
+
+composition xxx_CritDecl_critop between
+	CritDecl[*] role xxx_CritDecl_critop_src
+	Critop[1] role critop
+end
+
+composition xxx_CritDeclWhithoutId_expr between
+	CritDeclWhithoutId[*] role xxx_CritDeclWhithoutId_expr_src
+	Expression[2..3] role expr
+end
+
+composition xxx_ValDef_typeExpr between
+	ValDef[*] role xxx_ValDef_typeExpr_src
+	TypeExpr[1] role typeExpr
+end
+
+composition xxx_ValDef_expr between
+	ValDef[*] role xxx_ValDef_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_AdmCrit_paramVarDecl between
+	AdmCrit[0..1] role xxx_AdmCrit_paramVarDecl_src
+	ParamVarDecl[*] role paramVarDecl
+end
+
+composition xxx_AdmCrit_expr between
+	AdmCrit[*] role xxx_AdmCrit_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_AttachDetach_procParam1 between
+	AttachDetach[*] role xxx_AttachDetach_procParam1_src
+	ProcParam[1] role procParam1
+end
+
+composition xxx_AttachDetach_procParam2 between
+	AttachDetach[*] role xxx_AttachDetach_procParam2_src
+	ProcParam[1] role procParam2
+end
+
+composition xxx_AttachDetach_seqStmt1 between
+	AttachDetach[*] role xxx_AttachDetach_seqStmt1_src
+	SeqStmt[1] role seqStmt1
+end
+
+composition xxx_AttachDetach_seqStmt2 between
+	AttachDetach[*] role xxx_AttachDetach_seqStmt2_src
+	SeqStmt[1] role seqStmt2
+end
+
+composition xxx_ParamVarDecl_typeExpr between
+	ParamVarDecl[*] role xxx_ParamVarDecl_typeExpr_src
+	TypeExpr[1] role typeExpr
+end
+
+composition xxx_SeqStmt_valDef between
+	SeqStmt[0..1] role xxx_SeqStmt_valDef_src
+	ValDef[*] role valDef
+end
+
+composition xxx_SeqStmt_stmt between
+	SeqStmt[0..1] role xxx_SeqStmt_stmt_src
+	Statment[*] role stmt
+end
+
+composition xxx_TraceEvent_eventName between
+	TraceEvent[0..1] role xxx_TraceEvent_eventName_src
+	EventName[1..*] role eventName
+end
+
+composition xxx_TraceTest_expr between
+	TraceTest[*] role xxx_TraceTest_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_IfStmt_expr between
+	IfStmt[*] role xxx_IfStmt_expr_src
+	Expression[1] role expr
+end
+
+composition xxx_IfStmt_seqStmt between
+	IfStmt[*] role xxx_IfStmt_seqStmt_src
+	SeqStmt[1..2] role seqStmt
+end
+
+composition xxx_ForeachForStmt_classState between
+	ForeachForStmt[0..1] role xxx_ForeachForStmt_classState_src
+	ClassState[*] role classState
+end
+
+composition xxx_ForeachForStmt_seqStmt between
+	ForeachForStmt[*] role xxx_ForeachForStmt_seqStmt_src
+	SeqStmt[1] role seqStmt
+end
+
+composition xxx_ForEachIncreasingForStmt_seqStmt between
+	ForEachIncreasingForStmt[*] role xxx_ForEachIncreasingForStmt_seqStmt_src
+	SeqStmt[1] role seqStmt
+end
+
+composition xxx_ForEachDecreasingForStmt_seqStmt between
+	ForEachDecreasingForStmt[*] role xxx_ForEachDecreasingForStmt_seqStmt_src
+	SeqStmt[1] role seqStmt
+end
+
+composition xxx_ReturnStmt_expr between
+	ReturnStmt[*] role xxx_ReturnStmt_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_SwitchStmt_locExpr between
+	SwitchStmt[*] role xxx_SwitchStmt_locExpr_src
+	LocExpr[1] role locExpr
+end
+
+composition xxx_SwitchStmt_composantOfSwitchStmt between
+	SwitchStmt[0..1] role xxx_SwitchStmt_composantOfSwitchStmt_src
+	ComposantOfSwitchStmt[*] role composantOfSwitchStmt
+end
+
+composition xxx_AssignStmt_locExpr between
+	AssignStmt[*] role xxx_AssignStmt_locExpr_src
+	LocExpr[1] role locExpr
+end
+
+composition xxx_AssignStmt_assignUnop between
+	AssignStmt[*] role xxx_AssignStmt_assignUnop_src
+	AssignUnop[0..1] role assignUnop
+end
+
+composition xxx_AssignStmt_assignBinop between
+	AssignStmt[*] role xxx_AssignStmt_assignBinop_src
+	AssignBinop[0..1] role assignBinop
+end
+
+composition xxx_AssignStmt_expr between
+	AssignStmt[*] role xxx_AssignStmt_expr_src
+	Expression[0..1] role expr
+end
+
+composition xxx_MoveStmt_moveExpr between
+	MoveStmt[*] role xxx_MoveStmt_moveExpr_src
+	MoveExpr[1] role moveExpr
+end
+
+composition xxx_NormalMoveStmt_stateRef between
+	NormalMoveStmt[*] role xxx_NormalMoveStmt_stateRef_src
+	StateRef[1] role stateRef
+end
+
+composition xxx_PrimStmt_expr between
+	PrimStmt[0..1] role xxx_PrimStmt_expr_src
+	Expression[*] role expr
+end
+
+composition xxx_ClassState_className between
+	ClassState[*] role xxx_ClassState_className_src
+	ClassName[0..1] role className
+end
+
+composition xxx_OnHandlerDef_eventName between
+	OnHandlerDef[0..1] role xxx_OnHandlerDef_eventName_src
+	EventName[*] role eventName
+end
+
+composition xxx_OnHandlerDef_seqStmt between
+	OnHandlerDef[*] role xxx_OnHandlerDef_seqStmt_src
+	SeqStmt[1] role seqStmt
+end
+
+composition xxx_ComposantOfSwitchStmt_classState between
+	ComposantOfSwitchStmt[0..1] role xxx_ComposantOfSwitchStmt_classState_src
+	ClassState[1..*] role classState
+end
+
+composition xxx_ComposantOfSwitchStmt_seqStmt between
+	ComposantOfSwitchStmt[*] role xxx_ComposantOfSwitchStmt_seqStmt_src
+	SeqStmt[1] role seqStmt
+end
+
+composition xxx_ComposantOfInterFunc_typeOrVoid between
+	ComposantOfInterFunc[*] role xxx_ComposantOfInterFunc_typeOrVoid_src
+	TypeOrVoid[1] role typeOrVoid
+end
+
+composition xxx_ComposantOfInterFunc_paramVarDecl between
+	ComposantOfInterFunc[0..1] role xxx_ComposantOfInterFunc_paramVarDecl_src
+	ParamVarDecl[*] role paramVarDecl
+end
+
+composition xxx_ComposantOfInterFunc_seqStmt between
+	ComposantOfInterFunc[*] role xxx_ComposantOfInterFunc_seqStmt_src
+	SeqStmt[1] role seqStmt
+end
+

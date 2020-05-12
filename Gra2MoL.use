@@ -1,0 +1,321 @@
+model Gra2MoL
+enum RuleType{
+default
+}
+
+enum InitUnitElementValueType{
+default
+}
+
+enum InitUnitGroupType{
+default
+}
+
+enum ParameterType{
+default
+}
+
+enum HashValueType{
+default
+}
+
+enum FilterType{
+default
+}
+
+enum FilterOperationType{
+default
+}
+
+enum QueryElementType{
+default
+}
+
+enum FilterExpressionType{
+default
+}
+
+enum ExpressionElementType{
+default
+}
+
+enum OperationType{
+default
+}
+
+class Transformation
+attributes
+	name : String
+	sourceGrammar : String
+	targetMetamodel : String
+operations
+end
+
+abstract class Rule
+attributes
+	name : String
+operations
+	prepareQueryUnits()
+	getQuery(variableName : String):QueryUnit
+end
+
+class StandardRule<Rule
+attributes
+	type : RuleType
+	context_ : String
+	mixins : String
+operations
+end
+
+class MixinRule<Rule
+attributes
+operations
+end
+
+class FromElement
+attributes
+	name : String
+	alias : String
+operations
+end
+
+class ToElement
+attributes
+	name : String
+	alias : String
+operations
+end
+
+class InitUnit
+attributes
+operations
+end
+
+class InitUnitElement<InitUnit
+attributes
+	element : String
+	extension : String
+operations
+end
+
+class InitUnitElementValue
+attributes
+	type : InitUnitElementValueType
+	value : String
+	extension : String
+operations
+end
+
+class InitUnitGroup<InitUnit
+attributes
+	type : InitUnitGroupType
+operations
+end
+
+class Parameter
+attributes
+	value : String
+	valuePosition : String
+	extension : String
+	extensionPosition : String
+	type : ParameterType
+operations
+end
+
+class Hash
+attributes
+	name : String
+operations
+end
+
+class HashValue
+attributes
+	fromElement : String
+	fromElementType : HashValueType
+	toElement : String
+	toElementType : HashValueType
+operations
+end
+
+class QueryUnit
+attributes
+	variable : String
+	cast : String
+	absoluteQuery : Boolean
+operations
+	getMarkedFilterUnit():FilterUnit
+end
+
+class QueryControl
+attributes
+operations
+end
+
+class QueryControlFor<QueryControl
+attributes
+	variable : String
+	queryVariable : String
+operations
+end
+
+class QueryControlGreater<QueryControl
+attributes
+	variable : String
+	nodeId : String
+	nodePosition : Integer
+operations
+end
+
+class QueryControlExtension<QueryControl
+attributes
+	operation : String
+operations
+end
+
+class FilterUnit
+attributes
+	type : FilterType
+	operation : FilterOperationType
+	position : Integer
+operations
+end
+
+class QueryElement
+attributes
+	name : String
+	type : QueryElementType
+	mark : Boolean
+operations
+end
+
+abstract class FilterExpression
+attributes
+operations
+end
+
+class FilterExpressionComplex<FilterExpression
+attributes
+	type : FilterExpressionType
+operations
+end
+
+class FilterExpressionUnit<FilterExpression
+attributes
+	operation : String
+	global : Boolean
+operations
+end
+
+class ExpressionElement
+attributes
+	name : String
+	type : ExpressionElementType
+	position : Integer
+operations
+end
+
+composition xxx_Transformation_hashes between
+	Transformation[0..1] role xxx_Transformation_hashes_src
+	Hash[*] role hashes
+end
+
+composition xxx_Transformation_rules between
+	Transformation[0..1] role xxx_Transformation_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Rule_queries between
+	Rule[0..1] role xxx_Rule_queries_src
+	QueryUnit[*] role queries
+end
+
+composition xxx_Rule_inits between
+	Rule[*] role xxx_Rule_inits_src
+	InitUnitGroup[0..1] role inits
+end
+
+composition xxx_StandardRule_from_ between
+	StandardRule[*] role xxx_StandardRule_from__src
+	FromElement[1] role from_
+end
+
+composition xxx_StandardRule_to between
+	StandardRule[*] role xxx_StandardRule_to_src
+	ToElement[0..1] role to
+end
+
+composition xxx_FromElement_filter between
+	FromElement[*] role xxx_FromElement_filter_src
+	QueryUnit[0..1] role filter
+end
+
+composition xxx_InitUnitElement_value between
+	InitUnitElement[*] role xxx_InitUnitElement_value_src
+	InitUnitElementValue[0..1] role value
+end
+
+composition xxx_InitUnitElementValue_params between
+	InitUnitElementValue[0..1] role xxx_InitUnitElementValue_params_src
+	Parameter[*] role params
+end
+
+composition xxx_InitUnitGroup_inits between
+	InitUnitGroup[0..1] role xxx_InitUnitGroup_inits_src
+	InitUnit[*] role inits
+end
+
+composition xxx_InitUnitGroup_expression between
+	InitUnitGroup[*] role xxx_InitUnitGroup_expression_src
+	FilterExpression[0..1] role expression
+end
+
+composition xxx_Hash_content between
+	Hash[0..1] role xxx_Hash_content_src
+	HashValue[*] role content
+end
+
+composition xxx_QueryUnit_filter between
+	QueryUnit[*] role xxx_QueryUnit_filter_src
+	FilterUnit[0..1] role filter
+end
+
+composition xxx_QueryUnit_control between
+	QueryUnit[*] role xxx_QueryUnit_control_src
+	QueryControl[0..1] role control
+end
+
+composition xxx_QueryControlExtension_params between
+	QueryControlExtension[0..1] role xxx_QueryControlExtension_params_src
+	Parameter[*] role params
+end
+
+composition xxx_FilterUnit_element between
+	FilterUnit[*] role xxx_FilterUnit_element_src
+	QueryElement[0..1] role element
+end
+
+composition xxx_FilterUnit_expression between
+	FilterUnit[*] role xxx_FilterUnit_expression_src
+	FilterExpression[0..1] role expression
+end
+
+composition xxx_FilterUnit_next between
+	FilterUnit[*] role xxx_FilterUnit_next_src
+	FilterUnit[0..1] role next
+end
+
+composition xxx_FilterExpressionComplex_expressions between
+	FilterExpressionComplex[0..1] role xxx_FilterExpressionComplex_expressions_src
+	FilterExpression[*] role expressions
+end
+
+composition xxx_FilterExpressionUnit_element between
+	FilterExpressionUnit[*] role xxx_FilterExpressionUnit_element_src
+	ExpressionElement[0..1] role element
+end
+
+composition xxx_FilterExpressionUnit_parameters between
+	FilterExpressionUnit[0..1] role xxx_FilterExpressionUnit_parameters_src
+	Parameter[*] role parameters
+end
+

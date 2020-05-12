@@ -1,0 +1,74 @@
+model cp2model
+class CP2Repository
+attributes
+operations
+end
+
+class CP2Project<C2CodeElement
+attributes
+	name : String
+operations
+end
+
+class CP2Class<C2CodeElement
+attributes
+	extends : String
+	implements : String
+	simpleName : String
+operations
+end
+
+class CP2Field<C2CodeElement
+attributes
+	name : String
+operations
+end
+
+abstract class C2CodeElement
+attributes
+	id : Integer
+operations
+end
+
+class C2Methods<C2CodeElement
+attributes
+	name : String
+operations
+end
+
+class CP2Dependency
+attributes
+	type : Integer
+operations
+end
+
+composition xxx_CP2Repository_elements between
+	CP2Repository[0..1] role xxx_CP2Repository_elements_src
+	C2CodeElement[*] role elements
+end
+
+association xxx_CP2Project_classes between
+	CP2Project[0..1] role xxx_CP2Project_classes_src
+	CP2Class[*] role classes
+end
+
+association xxx_CP2Class_fields between
+	CP2Class[0..1] role xxx_CP2Class_fields_src
+	CP2Field[*] role fields
+end
+
+association xxx_CP2Class_methods between
+	CP2Class[0..1] role xxx_CP2Class_methods_src
+	C2Methods[*] role methods
+end
+
+association xxx_CP2Dependency_from_ between
+	CP2Dependency[*] role xxx_CP2Dependency_from__src
+	C2CodeElement[1] role from_
+end
+
+association xxx_CP2Dependency_to between
+	CP2Dependency[*] role xxx_CP2Dependency_to_src
+	C2CodeElement[1] role to
+end
+

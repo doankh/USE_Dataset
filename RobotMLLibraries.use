@@ -1,0 +1,1078 @@
+model RobotMLLibraries
+enum STATUS_TYPE{
+default
+}
+
+enum SERVICE_TYPE{
+default
+}
+
+enum COVARIANCE_TYPE{
+default
+}
+
+class DiagnosticArray
+attributes
+operations
+end
+
+class DiagnosticStatus
+attributes
+	OK : String
+	WARN : String
+	ERROR : String
+	level : String
+	name : String
+	message : String
+	hardware_id : String
+operations
+end
+
+class KeyValue
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Point
+attributes
+	x : String
+	y : String
+	z : String
+operations
+end
+
+class Point32
+attributes
+	x : String
+	y : String
+	z : String
+operations
+end
+
+class PointStamped
+attributes
+operations
+end
+
+class Polygon
+attributes
+operations
+end
+
+class PolygonStamped
+attributes
+operations
+end
+
+class Vector3
+attributes
+	x : String
+	y : String
+	z : String
+operations
+end
+
+class Vector3Stamped
+attributes
+operations
+end
+
+class Quaternion
+attributes
+	x : String
+	y : String
+	z : String
+	w : String
+operations
+end
+
+class Pose
+attributes
+operations
+end
+
+class PoseStamped
+attributes
+operations
+end
+
+class TwistWithCovariance
+attributes
+	covariance : String
+operations
+end
+
+class Twist
+attributes
+operations
+end
+
+class TwistStamped
+attributes
+operations
+end
+
+class PoseWithCovariance
+attributes
+	covariance : String
+operations
+end
+
+class Pose2D
+attributes
+	x : String
+	y : String
+	theta : String
+operations
+end
+
+class PoseWithCovarianceStamped
+attributes
+operations
+end
+
+class PoseArray
+attributes
+operations
+end
+
+class QuaternionStamped
+attributes
+operations
+end
+
+class Transform
+attributes
+operations
+end
+
+class WrenchStamped
+attributes
+operations
+end
+
+class Wrench
+attributes
+operations
+end
+
+class Path
+attributes
+operations
+end
+
+class Odometry
+attributes
+	child_frame_id : String
+operations
+end
+
+class MapMetaData
+attributes
+	map_load_time : String
+	resolution : String
+	width : String
+operations
+end
+
+class OccupancyGrid
+attributes
+	data : String
+operations
+end
+
+class GridCells
+attributes
+	cell_width : String
+	cell_height : String
+operations
+end
+
+class RegionOfInterest
+attributes
+	x_offset : String
+	y_offset : String
+	height : String
+	do_rectify : String
+	width : String
+operations
+end
+
+class Range
+attributes
+	ULTRASOUND : String
+	INFRARED : String
+	radiation_type : String
+	field_of_view : String
+	min_range : String
+	max_range : String
+	range : String
+operations
+end
+
+class CameraInfo
+attributes
+	height : String
+	width : String
+	distorsion_model : String
+	D : String
+	K : String
+	R : String
+	P : String
+	binning_x : String
+	binning_y : String
+operations
+end
+
+class Imu
+attributes
+	orientation_covariance : String
+	angular_velocity_covariance : String
+	linear_acceleration_covariance : String
+operations
+end
+
+class LaserScan
+attributes
+	angle_min : String
+	angle_max : String
+	angle_increment : String
+	time_increment : String
+	scan_time : String
+	range_min : String
+	range_max : String
+	range : String
+	intensities : String
+operations
+end
+
+class Image
+attributes
+	height : String
+	width : String
+	encoding : String
+	is_bigendian : String
+	step : String
+	data : String
+operations
+end
+
+class ChannelFloat32
+attributes
+	name : String
+	values : String
+operations
+end
+
+class CompressedImage
+attributes
+	format : String
+	data : String
+operations
+end
+
+class PointCloud
+attributes
+operations
+end
+
+class PointField
+attributes
+	name : String
+	offset : String
+	datatype : String
+	count : String
+operations
+end
+
+class PointCloud2
+attributes
+	height : String
+	width : String
+	is_bigendian : String
+	point_step : String
+	row_step : String
+	data : String
+	is_dense : String
+operations
+end
+
+class JointState
+attributes
+	name : String
+	position : String
+	velocity : String
+	effort : String
+operations
+end
+
+class NavSatStatus
+attributes
+	STATUS_NO_FIX : String
+	STATUS_FIX : String
+	STATUS_SBAS_FIX : String
+	STATUS_GBAS_FIX : String
+	status : String
+	SERVICE_GPS : String
+	SERVICE_GLONASS : String
+	SERVICE_COMPASS : String
+	SERVICE_GALILEO : String
+	service : String
+operations
+end
+
+class NavSatFix
+attributes
+	status : STATUS_TYPE
+	service : SERVICE_TYPE
+	latitude : String
+	longitude : String
+	altitude : String
+	position_covariance : String
+	position_covariance_type : COVARIANCE_TYPE
+operations
+end
+
+class Joy
+attributes
+	axes : String
+	buttons : String
+operations
+end
+
+class JoyFeedback
+attributes
+	TYPE_LED : String
+	TYPE_RUMBLE : String
+	TYPE_BUZZER : String
+	type : String
+	id : String
+	intensity : String
+operations
+end
+
+class JoyFeedbackArray
+attributes
+operations
+end
+
+class CarLikeOdometry
+attributes
+	steering_angle : String
+	left_rear_wheel_distance : String
+	right_rear_wheel_distance : String
+	right_rear_wheel_velocity : String
+	left_rear_wheel_velocity : String
+operations
+end
+
+class DifferentialOdometry
+attributes
+	right_distance : String
+	left_distance : String
+	left_velocity : String
+	right_velocity : String
+operations
+end
+
+class GoalID
+attributes
+	stamp : String
+	id : String
+operations
+end
+
+class GoalStatus
+attributes
+	PENDING : String
+	ACTIVE : String
+	PREEMPTED : String
+	SUCCEEDED : String
+	ABORTED : String
+	REJECTED : String
+	PREEMPTING : String
+	RECALLING : String
+	RECALLED : String
+	LOST : String
+	text : String
+	status : String
+operations
+end
+
+class GoalStatusArray
+attributes
+operations
+end
+
+class CarLikeCommand
+attributes
+	velocity : String
+	steeringAngle : String
+operations
+end
+
+class MultiLayerLidarScan
+attributes
+	nbLayer : String
+operations
+end
+
+class ExtentedLidarScan
+attributes
+	layerId : String
+	layerAngle : String
+operations
+end
+
+class Velocity_Linear
+attributes
+	value : String
+operations
+end
+
+class Art_Set_Point
+attributes
+operations
+end
+
+class Velocity_Angular
+attributes
+	value : String
+operations
+end
+
+class Distance
+attributes
+	value : String
+operations
+end
+
+class Metric
+attributes
+	value : String
+operations
+end
+
+class Angular
+attributes
+	value : String
+operations
+end
+
+class Op_Set_Point
+attributes
+operations
+end
+
+class Speed_Tics_Left_Right
+attributes
+operations
+end
+
+class Speed_Tics
+attributes
+	value : String
+operations
+end
+
+class Odometer_Tics
+attributes
+	value : String
+operations
+end
+
+class Odometer_Tics_Left_Right
+attributes
+operations
+end
+
+class Proxi_Left_Right
+attributes
+operations
+end
+
+class Milli_Amp
+attributes
+	value : String
+operations
+end
+
+class Odometer_Linear_Left_Right
+attributes
+operations
+end
+
+class Velocity_Angular_Left_Right
+attributes
+operations
+end
+
+class Velocity
+attributes
+operations
+end
+
+class Header
+attributes
+	seq : String
+	stamp : String
+	frame_id : String
+operations
+end
+
+class MultiArrayDimension
+attributes
+	label : String
+	size : String
+	stride : String
+operations
+end
+
+class MultiArrayLayout
+attributes
+	data_offset : String
+operations
+end
+
+class ByteMultiArray
+attributes
+	data : String
+operations
+end
+
+class ColorRGBA
+attributes
+	r : String
+	g : String
+	b : String
+	a : String
+operations
+end
+
+class Float32MultiArray
+attributes
+	data : String
+operations
+end
+
+class Int32MultiArray
+attributes
+	data : String
+operations
+end
+
+class Int8MultiArray
+attributes
+	data : String
+operations
+end
+
+class Int16MultiArray
+attributes
+	data : String
+operations
+end
+
+class Int64MultiArray
+attributes
+	data : String
+operations
+end
+
+class Float64MultiArray
+attributes
+	data : String
+operations
+end
+
+class UInt64MultiArray
+attributes
+	data : String
+operations
+end
+
+class UIint16MultiArray
+attributes
+	data : String
+operations
+end
+
+class UInt32MultiArray
+attributes
+	data : String
+operations
+end
+
+class UInt8MultiArray
+attributes
+	data : String
+operations
+end
+
+composition xxx_DiagnosticArray_header between
+	DiagnosticArray[*] role xxx_DiagnosticArray_header_src
+	Header[1] role header
+end
+
+composition xxx_DiagnosticArray_status between
+	DiagnosticArray[0..1] role xxx_DiagnosticArray_status_src
+	DiagnosticStatus[*] role status
+end
+
+composition xxx_DiagnosticArray_values between
+	DiagnosticArray[0..1] role xxx_DiagnosticArray_values_src
+	KeyValue[*] role values
+end
+
+composition xxx_DiagnosticStatus_values between
+	DiagnosticStatus[0..1] role xxx_DiagnosticStatus_values_src
+	KeyValue[*] role values
+end
+
+composition xxx_PointStamped_header between
+	PointStamped[*] role xxx_PointStamped_header_src
+	Header[1] role header
+end
+
+composition xxx_PointStamped_point between
+	PointStamped[*] role xxx_PointStamped_point_src
+	Point[1] role point
+end
+
+composition xxx_Polygon_point between
+	Polygon[0..1] role xxx_Polygon_point_src
+	Point32[3..*] role point
+end
+
+composition xxx_PolygonStamped_header between
+	PolygonStamped[*] role xxx_PolygonStamped_header_src
+	Header[1] role header
+end
+
+composition xxx_PolygonStamped_polygon between
+	PolygonStamped[*] role xxx_PolygonStamped_polygon_src
+	Polygon[1] role polygon
+end
+
+composition xxx_Vector3Stamped_header between
+	Vector3Stamped[*] role xxx_Vector3Stamped_header_src
+	Header[1] role header
+end
+
+composition xxx_Vector3Stamped_vector between
+	Vector3Stamped[*] role xxx_Vector3Stamped_vector_src
+	Vector3[1] role vector
+end
+
+composition xxx_Pose_position between
+	Pose[*] role xxx_Pose_position_src
+	Point[1] role position
+end
+
+composition xxx_Pose_orientation between
+	Pose[*] role xxx_Pose_orientation_src
+	Quaternion[1] role orientation
+end
+
+composition xxx_PoseStamped_header between
+	PoseStamped[*] role xxx_PoseStamped_header_src
+	Header[1] role header
+end
+
+composition xxx_PoseStamped_pose between
+	PoseStamped[*] role xxx_PoseStamped_pose_src
+	Pose[1] role pose
+end
+
+composition xxx_TwistWithCovariance_twist between
+	TwistWithCovariance[*] role xxx_TwistWithCovariance_twist_src
+	Twist[1] role twist
+end
+
+composition xxx_Twist_linear between
+	Twist[*] role xxx_Twist_linear_src
+	Vector3[1] role linear
+end
+
+composition xxx_Twist_angular between
+	Twist[*] role xxx_Twist_angular_src
+	Vector3[1] role angular
+end
+
+composition xxx_TwistStamped_header between
+	TwistStamped[*] role xxx_TwistStamped_header_src
+	Header[1] role header
+end
+
+composition xxx_TwistStamped_twist between
+	TwistStamped[*] role xxx_TwistStamped_twist_src
+	Twist[1] role twist
+end
+
+composition xxx_PoseWithCovariance_pose between
+	PoseWithCovariance[*] role xxx_PoseWithCovariance_pose_src
+	Pose[1] role pose
+end
+
+composition xxx_PoseArray_header between
+	PoseArray[*] role xxx_PoseArray_header_src
+	Header[1] role header
+end
+
+composition xxx_PoseArray_poses between
+	PoseArray[0..1] role xxx_PoseArray_poses_src
+	Pose[*] role poses
+end
+
+composition xxx_QuaternionStamped_header between
+	QuaternionStamped[*] role xxx_QuaternionStamped_header_src
+	Header[1] role header
+end
+
+composition xxx_QuaternionStamped_quaternion between
+	QuaternionStamped[*] role xxx_QuaternionStamped_quaternion_src
+	Quaternion[1] role quaternion
+end
+
+composition xxx_Transform_translation between
+	Transform[*] role xxx_Transform_translation_src
+	Vector3[1] role translation
+end
+
+composition xxx_Transform_rotation between
+	Transform[*] role xxx_Transform_rotation_src
+	Quaternion[1] role rotation
+end
+
+composition xxx_WrenchStamped_header between
+	WrenchStamped[*] role xxx_WrenchStamped_header_src
+	Header[1] role header
+end
+
+composition xxx_WrenchStamped_wrench between
+	WrenchStamped[*] role xxx_WrenchStamped_wrench_src
+	Wrench[1] role wrench
+end
+
+composition xxx_Wrench_force between
+	Wrench[*] role xxx_Wrench_force_src
+	Vector3[1] role force
+end
+
+composition xxx_Wrench_torque between
+	Wrench[*] role xxx_Wrench_torque_src
+	Vector3[1] role torque
+end
+
+composition xxx_Path_header between
+	Path[*] role xxx_Path_header_src
+	Header[1] role header
+end
+
+composition xxx_Path_poses between
+	Path[0..1] role xxx_Path_poses_src
+	PoseStamped[*] role poses
+end
+
+composition xxx_Odometry_header between
+	Odometry[*] role xxx_Odometry_header_src
+	Header[1] role header
+end
+
+composition xxx_Odometry_pose between
+	Odometry[*] role xxx_Odometry_pose_src
+	PoseWithCovariance[1] role pose
+end
+
+composition xxx_Odometry_twist between
+	Odometry[*] role xxx_Odometry_twist_src
+	TwistWithCovariance[1] role twist
+end
+
+composition xxx_MapMetaData_origin between
+	MapMetaData[*] role xxx_MapMetaData_origin_src
+	Pose[1] role origin
+end
+
+composition xxx_OccupancyGrid_header between
+	OccupancyGrid[*] role xxx_OccupancyGrid_header_src
+	Header[1] role header
+end
+
+composition xxx_OccupancyGrid_info between
+	OccupancyGrid[*] role xxx_OccupancyGrid_info_src
+	MapMetaData[1] role info
+end
+
+composition xxx_GridCells_header between
+	GridCells[*] role xxx_GridCells_header_src
+	Header[1] role header
+end
+
+composition xxx_GridCells_cells between
+	GridCells[0..1] role xxx_GridCells_cells_src
+	Point[*] role cells
+end
+
+composition xxx_Range_header between
+	Range[*] role xxx_Range_header_src
+	Header[1] role header
+end
+
+composition xxx_CameraInfo_header between
+	CameraInfo[*] role xxx_CameraInfo_header_src
+	Header[1] role header
+end
+
+composition xxx_CameraInfo_roi between
+	CameraInfo[*] role xxx_CameraInfo_roi_src
+	RegionOfInterest[1] role roi
+end
+
+composition xxx_Imu_header between
+	Imu[*] role xxx_Imu_header_src
+	Header[1] role header
+end
+
+composition xxx_Imu_orientation between
+	Imu[*] role xxx_Imu_orientation_src
+	Quaternion[1] role orientation
+end
+
+composition xxx_Imu_angular_velocity between
+	Imu[*] role xxx_Imu_angular_velocity_src
+	Vector3[1] role angular_velocity
+end
+
+composition xxx_Imu_linear_acceleration between
+	Imu[*] role xxx_Imu_linear_acceleration_src
+	Vector3[1] role linear_acceleration
+end
+
+composition xxx_LaserScan_header between
+	LaserScan[*] role xxx_LaserScan_header_src
+	Header[1] role header
+end
+
+composition xxx_Image_header between
+	Image[*] role xxx_Image_header_src
+	Header[1] role header
+end
+
+composition xxx_CompressedImage_header between
+	CompressedImage[*] role xxx_CompressedImage_header_src
+	Header[1] role header
+end
+
+composition xxx_PointCloud_header between
+	PointCloud[*] role xxx_PointCloud_header_src
+	Header[1] role header
+end
+
+composition xxx_PointCloud_points between
+	PointCloud[0..1] role xxx_PointCloud_points_src
+	Point32[*] role points
+end
+
+composition xxx_PointCloud_channels between
+	PointCloud[0..1] role xxx_PointCloud_channels_src
+	ChannelFloat32[*] role channels
+end
+
+composition xxx_PointCloud2_header between
+	PointCloud2[*] role xxx_PointCloud2_header_src
+	Header[1] role header
+end
+
+composition xxx_PointCloud2_fields between
+	PointCloud2[0..1] role xxx_PointCloud2_fields_src
+	PointField[*] role fields
+end
+
+composition xxx_NavSatFix_header between
+	NavSatFix[*] role xxx_NavSatFix_header_src
+	Header[1] role header
+end
+
+composition xxx_Joy_header between
+	Joy[*] role xxx_Joy_header_src
+	Header[1] role header
+end
+
+composition xxx_JoyFeedbackArray_array between
+	JoyFeedbackArray[0..1] role xxx_JoyFeedbackArray_array_src
+	JoyFeedback[*] role array
+end
+
+composition xxx_CarLikeOdometry_header between
+	CarLikeOdometry[*] role xxx_CarLikeOdometry_header_src
+	Header[1] role header
+end
+
+composition xxx_DifferentialOdometry_header between
+	DifferentialOdometry[*] role xxx_DifferentialOdometry_header_src
+	Header[1] role header
+end
+
+composition xxx_GoalStatusArray_header between
+	GoalStatusArray[*] role xxx_GoalStatusArray_header_src
+	Header[1] role header
+end
+
+composition xxx_GoalStatusArray_status_list between
+	GoalStatusArray[0..1] role xxx_GoalStatusArray_status_list_src
+	GoalStatus[*] role status_list
+end
+
+composition xxx_MultiLayerLidarScan_layers between
+	MultiLayerLidarScan[*] role xxx_MultiLayerLidarScan_layers_src
+	ExtentedLidarScan[1] role layers
+end
+
+composition xxx_ExtentedLidarScan_scan between
+	ExtentedLidarScan[*] role xxx_ExtentedLidarScan_scan_src
+	LaserScan[1] role scan
+end
+
+composition xxx_Art_Set_Point_omega_left between
+	Art_Set_Point[*] role xxx_Art_Set_Point_omega_left_src
+	Velocity_Angular[1] role omega_left
+end
+
+composition xxx_Art_Set_Point_omega_right between
+	Art_Set_Point[*] role xxx_Art_Set_Point_omega_right_src
+	Velocity_Angular[1] role omega_right
+end
+
+composition xxx_Op_Set_Point_velocity between
+	Op_Set_Point[*] role xxx_Op_Set_Point_velocity_src
+	Velocity_Linear[1] role velocity
+end
+
+composition xxx_Op_Set_Point_orientation between
+	Op_Set_Point[*] role xxx_Op_Set_Point_orientation_src
+	Angular[1] role orientation
+end
+
+composition xxx_Speed_Tics_Left_Right_speed_tics_left between
+	Speed_Tics_Left_Right[*] role xxx_Speed_Tics_Left_Right_speed_tics_left_src
+	Speed_Tics[1] role speed_tics_left
+end
+
+composition xxx_Speed_Tics_Left_Right_speed_tics_right between
+	Speed_Tics_Left_Right[*] role xxx_Speed_Tics_Left_Right_speed_tics_right_src
+	Speed_Tics[1] role speed_tics_right
+end
+
+composition xxx_Odometer_Tics_Left_Right_odometer_tics_left between
+	Odometer_Tics_Left_Right[*] role xxx_Odometer_Tics_Left_Right_odometer_tics_left_src
+	Odometer_Tics[1] role odometer_tics_left
+end
+
+composition xxx_Odometer_Tics_Left_Right_odometer_tics_right between
+	Odometer_Tics_Left_Right[*] role xxx_Odometer_Tics_Left_Right_odometer_tics_right_src
+	Odometer_Tics[1] role odometer_tics_right
+end
+
+composition xxx_Proxi_Left_Right_proxi_left between
+	Proxi_Left_Right[*] role xxx_Proxi_Left_Right_proxi_left_src
+	Distance[1] role proxi_left
+end
+
+composition xxx_Proxi_Left_Right_proxi_right between
+	Proxi_Left_Right[*] role xxx_Proxi_Left_Right_proxi_right_src
+	Distance[1] role proxi_right
+end
+
+composition xxx_Odometer_Linear_Left_Right_odometer_linear_left between
+	Odometer_Linear_Left_Right[*] role xxx_Odometer_Linear_Left_Right_odometer_linear_left_src
+	Metric[1] role odometer_linear_left
+end
+
+composition xxx_Odometer_Linear_Left_Right_odometer_linear_right between
+	Odometer_Linear_Left_Right[*] role xxx_Odometer_Linear_Left_Right_odometer_linear_right_src
+	Metric[1] role odometer_linear_right
+end
+
+composition xxx_Velocity_Angular_Left_Right_velocity_angular_left between
+	Velocity_Angular_Left_Right[*] role xxx_Velocity_Angular_Left_Right_velocity_angular_left_src
+	Velocity_Angular[1] role velocity_angular_left
+end
+
+composition xxx_Velocity_Angular_Left_Right_velocity_angular_right between
+	Velocity_Angular_Left_Right[*] role xxx_Velocity_Angular_Left_Right_velocity_angular_right_src
+	Velocity_Angular[1] role velocity_angular_right
+end
+
+composition xxx_Velocity_velocity_linear between
+	Velocity[*] role xxx_Velocity_velocity_linear_src
+	Velocity_Linear[1] role velocity_linear
+end
+
+composition xxx_Velocity_velocity_angular between
+	Velocity[*] role xxx_Velocity_velocity_angular_src
+	Velocity_Angular[1] role velocity_angular
+end
+
+composition xxx_MultiArrayLayout_dim between
+	MultiArrayLayout[0..1] role xxx_MultiArrayLayout_dim_src
+	MultiArrayDimension[*] role dim
+end
+
+composition xxx_ByteMultiArray_layout between
+	ByteMultiArray[*] role xxx_ByteMultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_Float32MultiArray_layout between
+	Float32MultiArray[*] role xxx_Float32MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_Int32MultiArray_layout between
+	Int32MultiArray[*] role xxx_Int32MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_Int8MultiArray_layout between
+	Int8MultiArray[*] role xxx_Int8MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_Int16MultiArray_layout between
+	Int16MultiArray[*] role xxx_Int16MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_Int64MultiArray_layout between
+	Int64MultiArray[*] role xxx_Int64MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_Float64MultiArray_layout between
+	Float64MultiArray[*] role xxx_Float64MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_UInt64MultiArray_layout between
+	UInt64MultiArray[*] role xxx_UInt64MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_UIint16MultiArray_layout between
+	UIint16MultiArray[*] role xxx_UIint16MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_UInt32MultiArray_layout between
+	UInt32MultiArray[*] role xxx_UInt32MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+
+composition xxx_UInt8MultiArray_layout between
+	UInt8MultiArray[*] role xxx_UInt8MultiArray_layout_src
+	MultiArrayLayout[1] role layout
+end
+

@@ -1,0 +1,177 @@
+model featherweightjava
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Class<NamedElement
+attributes
+operations
+end
+
+abstract class Member<NamedElement
+attributes
+operations
+end
+
+class Constructor<Member
+attributes
+operations
+end
+
+class Parameter<NamedElement
+attributes
+operations
+end
+
+class FieldInitialisiation
+attributes
+operations
+end
+
+class Method<Member
+attributes
+operations
+end
+
+class Field<Member
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class ConstructorCall<Expression
+attributes
+operations
+end
+
+class FieldAccess<Expression
+attributes
+operations
+end
+
+abstract class FieldAccessChild
+attributes
+operations
+end
+
+class ParameterAccess<Expression,FieldAccessChild
+attributes
+operations
+end
+
+class This<Expression,FieldAccessChild
+attributes
+operations
+end
+
+class MethodCall<Expression,FieldAccessChild
+attributes
+operations
+end
+
+class Cast<Expression,FieldAccessChild
+attributes
+operations
+end
+
+composition xxx_Class_members between
+	Class[0..1] role xxx_Class_members_src
+	Member[*] role members
+end
+
+association xxx_Class_superclass between
+	Class[*] role xxx_Class_superclass_src
+	Class[1] role superclass
+end
+
+composition xxx_Constructor_parameters between
+	Constructor[0..1] role xxx_Constructor_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Constructor_initialisations between
+	Constructor[0..1] role xxx_Constructor_initialisations_src
+	FieldInitialisiation[*] role initialisations
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Class[1] role type
+end
+
+association xxx_FieldInitialisiation_field between
+	FieldInitialisiation[*] role xxx_FieldInitialisiation_field_src
+	Field[1] role field
+end
+
+association xxx_FieldInitialisiation_parameter between
+	FieldInitialisiation[*] role xxx_FieldInitialisiation_parameter_src
+	Parameter[1] role parameter
+end
+
+composition xxx_Method_returnValue between
+	Method[*] role xxx_Method_returnValue_src
+	Expression[1] role returnValue
+end
+
+association xxx_Method_returnType between
+	Method[*] role xxx_Method_returnType_src
+	Class[1] role returnType
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Field_type between
+	Field[*] role xxx_Field_type_src
+	Class[1] role type
+end
+
+association xxx_ConstructorCall_type between
+	ConstructorCall[*] role xxx_ConstructorCall_type_src
+	Class[1] role type
+end
+
+composition xxx_ConstructorCall_arguments between
+	ConstructorCall[0..1] role xxx_ConstructorCall_arguments_src
+	Expression[*] role arguments
+end
+
+association xxx_FieldAccess_field between
+	FieldAccess[*] role xxx_FieldAccess_field_src
+	Field[1] role field
+end
+
+composition xxx_FieldAccess_expression between
+	FieldAccess[*] role xxx_FieldAccess_expression_src
+	FieldAccessChild[1] role expression
+end
+
+association xxx_ParameterAccess_parameter between
+	ParameterAccess[*] role xxx_ParameterAccess_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_MethodCall_method between
+	MethodCall[*] role xxx_MethodCall_method_src
+	Method[1] role method
+end
+
+association xxx_Cast_type between
+	Cast[*] role xxx_Cast_type_src
+	Class[1] role type
+end
+
+composition xxx_Cast_expression between
+	Cast[*] role xxx_Cast_expression_src
+	Expression[1] role expression
+end
+

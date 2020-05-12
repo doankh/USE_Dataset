@@ -1,0 +1,224 @@
+model mvcmetamodel
+enum Size{
+default
+}
+
+enum Align{
+default
+}
+
+enum Operation{
+default
+}
+
+class Form<Content
+attributes
+	method : String
+	action : String
+operations
+end
+
+class Page
+attributes
+	name : String
+	type : String
+operations
+end
+
+class TextLabel<Final
+attributes
+	value : String
+	checkRessource : Boolean
+	key : String
+operations
+end
+
+class WebApp
+attributes
+	name : String
+operations
+end
+
+class Table<Container
+attributes
+operations
+end
+
+class Link<Container
+attributes
+	pageName : String
+	pageType : String
+operations
+end
+
+class Component<Content
+attributes
+operations
+end
+
+class Input<Final
+attributes
+operations
+end
+
+class Body
+attributes
+operations
+end
+
+class Head
+attributes
+operations
+end
+
+class Title<Container
+attributes
+	size : Size
+operations
+end
+
+class TextField<Input
+attributes
+	size : Integer
+	name : String
+	maxLength : Integer
+operations
+end
+
+class Password<Input
+attributes
+	name : String
+	size : Integer
+	maxLength : Integer
+operations
+end
+
+class RadioButton<Input
+attributes
+	value : String
+operations
+end
+
+class CheckBox<Input
+attributes
+	value : String
+operations
+end
+
+class SubmitButton<Input
+attributes
+	value : String
+	successTarget : String
+	errorTarget : String
+	successType : String
+	errorType : String
+operations
+end
+
+class Paragraph<Container
+attributes
+operations
+end
+
+class Cell
+attributes
+	align : Align
+	colspan : Integer
+operations
+end
+
+class Line
+attributes
+operations
+end
+
+class Content
+attributes
+operations
+end
+
+class Container<Component
+attributes
+operations
+end
+
+class Final<Component
+attributes
+operations
+end
+
+class HeadTitle
+attributes
+operations
+end
+
+composition xxx_Form_components between
+	Form[0..1] role xxx_Form_components_src
+	Component[*] role components
+end
+
+composition xxx_Page_body between
+	Page[*] role xxx_Page_body_src
+	Body[1] role body
+end
+
+composition xxx_Page_head between
+	Page[*] role xxx_Page_head_src
+	Head[1] role head
+end
+
+composition xxx_WebApp_pages between
+	WebApp[0..1] role xxx_WebApp_pages_src
+	Page[*] role pages
+end
+
+composition xxx_WebApp_startPage between
+	WebApp[*] role xxx_WebApp_startPage_src
+	Page[1] role startPage
+end
+
+composition xxx_Table_lines between
+	Table[0..1] role xxx_Table_lines_src
+	Line[*] role lines
+end
+
+composition xxx_Body_contents between
+	Body[0..1] role xxx_Body_contents_src
+	Content[*] role contents
+end
+
+composition xxx_Head_headTitle between
+	Head[*] role xxx_Head_headTitle_src
+	HeadTitle[1] role headTitle
+end
+
+composition xxx_TextField_errorText between
+	TextField[*] role xxx_TextField_errorText_src
+	TextLabel[1] role errorText
+end
+
+composition xxx_Password_errorPassword between
+	Password[*] role xxx_Password_errorPassword_src
+	TextLabel[1] role errorPassword
+end
+
+composition xxx_Cell_components between
+	Cell[0..1] role xxx_Cell_components_src
+	Component[*] role components
+end
+
+composition xxx_Line_cells between
+	Line[0..1] role xxx_Line_cells_src
+	Cell[*] role cells
+end
+
+composition xxx_Container_components between
+	Container[0..1] role xxx_Container_components_src
+	Component[*] role components
+end
+
+composition xxx_HeadTitle_text between
+	HeadTitle[*] role xxx_HeadTitle_text_src
+	TextLabel[1] role text
+end
+

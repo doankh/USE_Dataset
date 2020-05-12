@@ -1,0 +1,148 @@
+model things
+enum DataType{
+default
+}
+
+enum AccessType{
+default
+}
+
+class Universe<NamedElement
+attributes
+operations
+end
+
+class Thing<Struct
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+	label : String
+operations
+end
+
+class Property<NamedElement,TypedElement
+attributes
+	access : AccessType
+operations
+end
+
+class Event<NamedElement,TypedElement
+attributes
+operations
+end
+
+class Service<NamedElement
+attributes
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+class ServiceResponse<TypedElement
+attributes
+operations
+end
+
+class ServiceParameter<NamedElement,TypedElement
+attributes
+operations
+end
+
+abstract class TypedElement<NamedElement
+attributes
+	dataType : DataType
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class Struct<Type
+attributes
+operations
+end
+
+abstract class CustomPrimitiveType<Type
+attributes
+	dataType : DataType
+operations
+end
+
+class String<CustomPrimitiveType
+attributes
+	maxLength : Integer
+operations
+end
+
+class Number<CustomPrimitiveType
+attributes
+operations
+end
+
+class Date<CustomPrimitiveType
+attributes
+operations
+end
+
+class Boolean<CustomPrimitiveType
+attributes
+operations
+end
+
+abstract class Constraint<NamedElement
+attributes
+operations
+end
+
+class Regex<Constraint
+attributes
+	pattern : String
+operations
+end
+
+composition xxx_Universe_contents between
+	Universe[0..1] role xxx_Universe_contents_src
+	Type[*] role contents
+end
+
+composition xxx_Thing_services between
+	Thing[0..1] role xxx_Thing_services_src
+	Service[*] role services
+end
+
+composition xxx_Thing_events between
+	Thing[0..1] role xxx_Thing_events_src
+	Event[*] role events
+end
+
+composition xxx_Service_response between
+	Service[*] role xxx_Service_response_src
+	ServiceResponse[0..1] role response
+end
+
+composition xxx_Service_parameters between
+	Service[0..1] role xxx_Service_parameters_src
+	ServiceParameter[*] role parameters
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[1] role type
+end
+
+composition xxx_Struct_properties between
+	Struct[0..1] role xxx_Struct_properties_src
+	Property[1..*] role properties
+end
+
+composition xxx_String_regexConstraint between
+	String[*] role xxx_String_regexConstraint_src
+	Regex[0..1] role regexConstraint
+end
+

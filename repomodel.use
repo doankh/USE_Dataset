@@ -1,0 +1,136 @@
+model repomodel
+abstract class RRepositoryItem
+attributes
+	uuid : String
+operations
+end
+
+abstract class RCodeElement<RRepositoryItem
+attributes
+	versions : String
+	id : Integer
+operations
+	getDisplayName():String
+end
+
+class RProject<RCodeElement
+attributes
+	name : String
+	containingFolders : String
+	productPath : String
+	storeLocation : String
+operations
+end
+
+class RClass<RCodeElement
+attributes
+	simpleName : String
+	packageName : String
+	extends : String
+	implements : String
+	private : Boolean
+	anonymous : Boolean
+	referencedClasses : String
+	fqName : String
+operations
+	getSourcePath():String
+end
+
+class RMethod<RCodeElement
+attributes
+	signature : String
+	private : String
+	referencedFields : String
+	referencedMethods : String
+	static : Boolean
+operations
+end
+
+class RField<RCodeElement
+attributes
+	signature : String
+	private : Boolean
+operations
+end
+
+class RDependency<RRepositoryItem
+attributes
+	depType : Integer
+operations
+end
+
+class RRepository
+attributes
+operations
+end
+
+class RTransitiveDependency<RDependency
+attributes
+operations
+end
+
+association xxx_RCodeElement_rIncoming between
+	RCodeElement[0..1] role xxx_RCodeElement_rIncoming_src
+	RDependency[*] role rIncoming
+end
+
+association xxx_RCodeElement_rOutgoing between
+	RCodeElement[0..1] role xxx_RCodeElement_rOutgoing_src
+	RDependency[*] role rOutgoing
+end
+
+composition xxx_RProject_rClasses between
+	RProject[0..1] role xxx_RProject_rClasses_src
+	RClass[*] role rClasses
+end
+
+composition xxx_RClass_rMethods between
+	RClass[0..1] role xxx_RClass_rMethods_src
+	RMethod[*] role rMethods
+end
+
+composition xxx_RClass_rFields between
+	RClass[0..1] role xxx_RClass_rFields_src
+	RField[*] role rFields
+end
+
+association xxx_RClass_rProject between
+	RClass[*] role xxx_RClass_rProject_src
+	RProject[1] role rProject
+end
+
+association xxx_RMethod_rClass between
+	RMethod[*] role xxx_RMethod_rClass_src
+	RClass[1] role rClass
+end
+
+association xxx_RField_rClass between
+	RField[*] role xxx_RField_rClass_src
+	RClass[1] role rClass
+end
+
+association xxx_RDependency_rFrom between
+	RDependency[*] role xxx_RDependency_rFrom_src
+	RCodeElement[1] role rFrom
+end
+
+association xxx_RDependency_rTo between
+	RDependency[*] role xxx_RDependency_rTo_src
+	RCodeElement[1] role rTo
+end
+
+composition xxx_RRepository_rDependencies between
+	RRepository[0..1] role xxx_RRepository_rDependencies_src
+	RDependency[*] role rDependencies
+end
+
+composition xxx_RRepository_rProjects between
+	RRepository[0..1] role xxx_RRepository_rProjects_src
+	RProject[*] role rProjects
+end
+
+association xxx_RTransitiveDependency_rTtransitiveFrom between
+	RTransitiveDependency[0..1] role xxx_RTransitiveDependency_rTtransitiveFrom_src
+	RDependency[*] role rTtransitiveFrom
+end
+

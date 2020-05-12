@@ -1,0 +1,494 @@
+model its
+enum DirType{
+default
+}
+
+enum DirType1{
+default
+}
+
+enum DirType2{
+default
+}
+
+enum LocNoteTypeType{
+default
+}
+
+enum LocNoteTypeType1{
+default
+}
+
+enum TermType{
+default
+}
+
+enum TermType1{
+default
+}
+
+enum TranslateType{
+default
+}
+
+enum TranslateType1{
+default
+}
+
+enum WithinTextType{
+default
+}
+
+class DirRuleType
+attributes
+	dir : DirType2
+	selector : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class ItsLocNoteContent
+attributes
+	mixed : String
+	group : String
+operations
+end
+
+class ItsLocNoteRuleContent
+attributes
+operations
+end
+
+class ItsRbcContent
+attributes
+operations
+end
+
+class ItsRbContent
+attributes
+	mixed : String
+operations
+end
+
+class ItsRtcContent
+attributes
+operations
+end
+
+class ItsRtContent
+attributes
+	mixed : String
+operations
+end
+
+class ItsRubyContent
+attributes
+operations
+end
+
+class ItsRubyRuleContent
+attributes
+operations
+end
+
+class ItsRulesContent
+attributes
+	group : String
+operations
+end
+
+class ItsSpanContent
+attributes
+	mixed : String
+	group : String
+operations
+end
+
+class LangRuleType
+attributes
+	langPointer : String
+	selector : String
+operations
+end
+
+class LocNoteRuleType<ItsLocNoteRuleContent
+attributes
+	locNotePointer : String
+	locNoteRef : String
+	locNoteRefPointer : String
+	locNoteType : LocNoteTypeType
+	selector : String
+operations
+end
+
+class LocNoteType<ItsLocNoteContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RbcType<ItsRbcContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RbType<ItsRbContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RpType
+attributes
+	mixed : String
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RtcType<ItsRtcContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RtType<ItsRtContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	rbspan : String
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RubyRuleType<ItsRubyRuleContent
+attributes
+	rbcPointer : String
+	rbspanPointer : String
+	rpPointer : String
+	rtcPointer : String
+	rtPointer : String
+	rubyPointer : String
+	selector : String
+operations
+end
+
+class RubyTextType
+attributes
+	mixed : String
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	rbspan : String
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RubyType<ItsRubyContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class RulesType<ItsRulesContent
+attributes
+	href : String
+	type : String
+	version : Real
+operations
+end
+
+class SpanType<ItsSpanContent
+attributes
+	dir : DirType1
+	locNote : String
+	locNoteRef : String
+	locNoteType : LocNoteTypeType1
+	term : TermType1
+	termInfoRef : String
+	translate : TranslateType1
+operations
+end
+
+class TermRuleType
+attributes
+	selector : String
+	term : TermType
+	termInfoPointer : String
+	termInfoRef : String
+	termInfoRefPointer : String
+operations
+end
+
+class TranslateRuleType
+attributes
+	selector : String
+	translate : TranslateType
+operations
+end
+
+class WithinTextRuleType
+attributes
+	selector : String
+	withinText : WithinTextType
+operations
+end
+
+composition xxx_DocumentRoot_dirRule between
+	DocumentRoot[*] role xxx_DocumentRoot_dirRule_src
+	DirRuleType[*] role dirRule
+end
+
+composition xxx_DocumentRoot_langRule between
+	DocumentRoot[*] role xxx_DocumentRoot_langRule_src
+	LangRuleType[*] role langRule
+end
+
+composition xxx_DocumentRoot_locNote between
+	DocumentRoot[*] role xxx_DocumentRoot_locNote_src
+	LocNoteType[*] role locNote
+end
+
+composition xxx_DocumentRoot_locNoteRule between
+	DocumentRoot[*] role xxx_DocumentRoot_locNoteRule_src
+	LocNoteRuleType[*] role locNoteRule
+end
+
+composition xxx_DocumentRoot_rb between
+	DocumentRoot[*] role xxx_DocumentRoot_rb_src
+	RbType[*] role rb
+end
+
+composition xxx_DocumentRoot_rbc between
+	DocumentRoot[*] role xxx_DocumentRoot_rbc_src
+	RbcType[*] role rbc
+end
+
+composition xxx_DocumentRoot_rp between
+	DocumentRoot[*] role xxx_DocumentRoot_rp_src
+	RpType[*] role rp
+end
+
+composition xxx_DocumentRoot_rt between
+	DocumentRoot[*] role xxx_DocumentRoot_rt_src
+	RtType[*] role rt
+end
+
+composition xxx_DocumentRoot_rtc between
+	DocumentRoot[*] role xxx_DocumentRoot_rtc_src
+	RtcType[*] role rtc
+end
+
+composition xxx_DocumentRoot_ruby between
+	DocumentRoot[*] role xxx_DocumentRoot_ruby_src
+	RubyType[*] role ruby
+end
+
+composition xxx_DocumentRoot_rubyRule between
+	DocumentRoot[*] role xxx_DocumentRoot_rubyRule_src
+	RubyRuleType[*] role rubyRule
+end
+
+composition xxx_DocumentRoot_rubyText between
+	DocumentRoot[*] role xxx_DocumentRoot_rubyText_src
+	RubyTextType[*] role rubyText
+end
+
+composition xxx_DocumentRoot_rules between
+	DocumentRoot[*] role xxx_DocumentRoot_rules_src
+	RulesType[*] role rules
+end
+
+composition xxx_DocumentRoot_span between
+	DocumentRoot[*] role xxx_DocumentRoot_span_src
+	SpanType[*] role span
+end
+
+composition xxx_DocumentRoot_termRule between
+	DocumentRoot[*] role xxx_DocumentRoot_termRule_src
+	TermRuleType[*] role termRule
+end
+
+composition xxx_DocumentRoot_translateRule between
+	DocumentRoot[*] role xxx_DocumentRoot_translateRule_src
+	TranslateRuleType[*] role translateRule
+end
+
+composition xxx_DocumentRoot_withinTextRule between
+	DocumentRoot[*] role xxx_DocumentRoot_withinTextRule_src
+	WithinTextRuleType[*] role withinTextRule
+end
+
+composition xxx_ItsLocNoteContent_ruby between
+	ItsLocNoteContent[0..1] role xxx_ItsLocNoteContent_ruby_src
+	RubyType[*] role ruby
+end
+
+composition xxx_ItsLocNoteContent_span between
+	ItsLocNoteContent[0..1] role xxx_ItsLocNoteContent_span_src
+	SpanType[*] role span
+end
+
+composition xxx_ItsLocNoteRuleContent_locNote between
+	ItsLocNoteRuleContent[*] role xxx_ItsLocNoteRuleContent_locNote_src
+	LocNoteType[0..1] role locNote
+end
+
+composition xxx_ItsRbcContent_rb between
+	ItsRbcContent[0..1] role xxx_ItsRbcContent_rb_src
+	RbType[1..*] role rb
+end
+
+composition xxx_ItsRbContent_span between
+	ItsRbContent[0..1] role xxx_ItsRbContent_span_src
+	SpanType[*] role span
+end
+
+composition xxx_ItsRtcContent_rt between
+	ItsRtcContent[0..1] role xxx_ItsRtcContent_rt_src
+	RtType[1..*] role rt
+end
+
+composition xxx_ItsRtContent_span between
+	ItsRtContent[0..1] role xxx_ItsRtContent_span_src
+	SpanType[*] role span
+end
+
+composition xxx_ItsRubyContent_rb between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rb_src
+	RbType[0..1] role rb
+end
+
+composition xxx_ItsRubyContent_rt between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rt_src
+	RtType[0..1] role rt
+end
+
+composition xxx_ItsRubyContent_rp between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rp_src
+	RpType[0..1] role rp
+end
+
+composition xxx_ItsRubyContent_rt1 between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rt1_src
+	RtType[0..1] role rt1
+end
+
+composition xxx_ItsRubyContent_rp1 between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rp1_src
+	RpType[0..1] role rp1
+end
+
+composition xxx_ItsRubyContent_rbc between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rbc_src
+	RbcType[0..1] role rbc
+end
+
+composition xxx_ItsRubyContent_rtc between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rtc_src
+	RtcType[0..1] role rtc
+end
+
+composition xxx_ItsRubyContent_rtc1 between
+	ItsRubyContent[*] role xxx_ItsRubyContent_rtc1_src
+	RtcType[0..1] role rtc1
+end
+
+composition xxx_ItsRubyRuleContent_rubyText between
+	ItsRubyRuleContent[*] role xxx_ItsRubyRuleContent_rubyText_src
+	RubyTextType[0..1] role rubyText
+end
+
+composition xxx_ItsRulesContent_translateRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_translateRule_src
+	TranslateRuleType[*] role translateRule
+end
+
+composition xxx_ItsRulesContent_locNoteRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_locNoteRule_src
+	LocNoteRuleType[*] role locNoteRule
+end
+
+composition xxx_ItsRulesContent_termRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_termRule_src
+	TermRuleType[*] role termRule
+end
+
+composition xxx_ItsRulesContent_dirRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_dirRule_src
+	DirRuleType[*] role dirRule
+end
+
+composition xxx_ItsRulesContent_rubyRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_rubyRule_src
+	RubyRuleType[*] role rubyRule
+end
+
+composition xxx_ItsRulesContent_langRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_langRule_src
+	LangRuleType[*] role langRule
+end
+
+composition xxx_ItsRulesContent_withinTextRule between
+	ItsRulesContent[0..1] role xxx_ItsRulesContent_withinTextRule_src
+	WithinTextRuleType[*] role withinTextRule
+end
+
+composition xxx_ItsSpanContent_ruby between
+	ItsSpanContent[0..1] role xxx_ItsSpanContent_ruby_src
+	RubyType[*] role ruby
+end
+
+composition xxx_ItsSpanContent_span between
+	ItsSpanContent[0..1] role xxx_ItsSpanContent_span_src
+	SpanType[*] role span
+end
+

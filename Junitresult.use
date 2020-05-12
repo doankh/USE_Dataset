@@ -1,0 +1,116 @@
+model junitresult
+class Testsuite<AbstractAggregatedTest
+attributes
+	system_out : String
+	system_err : String
+	hostname : String
+	timestamp : String
+	time : Real
+	id : Integer
+	package : String
+	disabled : Integer
+	skipped : Integer
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Testcase
+attributes
+	name : String
+	classname : String
+	time : Real
+	system_out : String
+	system_err : String
+	status : String
+	assertions : String
+operations
+end
+
+class Error<NegativeResult
+attributes
+operations
+end
+
+class Failure<NegativeResult
+attributes
+operations
+end
+
+abstract class NegativeResult
+attributes
+	message : String
+	type : String
+	value : String
+operations
+end
+
+class Testrun<AbstractAggregatedTest
+attributes
+	project : String
+	started : Integer
+	ignored : Integer
+operations
+end
+
+abstract class AbstractAggregatedTest<JunitResult
+attributes
+	name : String
+	tests : Integer
+	failures : Integer
+	errors : Integer
+operations
+end
+
+class Testsuites<AbstractAggregatedTest
+attributes
+	time : Real
+	disabled : Integer
+operations
+end
+
+abstract class JunitResult
+attributes
+operations
+end
+
+class Skipped<NegativeResult
+attributes
+operations
+end
+
+composition xxx_Testsuite_properties between
+	Testsuite[0..1] role xxx_Testsuite_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Testsuite_testcases between
+	Testsuite[0..1] role xxx_Testsuite_testcases_src
+	Testcase[*] role testcases
+end
+
+composition xxx_Testcase_skipped between
+	Testcase[*] role xxx_Testcase_skipped_src
+	Skipped[0..1] role skipped
+end
+
+composition xxx_Testcase_failures between
+	Testcase[0..1] role xxx_Testcase_failures_src
+	Failure[*] role failures
+end
+
+composition xxx_Testcase_errors between
+	Testcase[0..1] role xxx_Testcase_errors_src
+	Error[*] role errors
+end
+
+composition xxx_AbstractAggregatedTest_testsuites between
+	AbstractAggregatedTest[0..1] role xxx_AbstractAggregatedTest_testsuites_src
+	Testsuite[*] role testsuites
+end
+

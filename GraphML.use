@@ -1,0 +1,151 @@
+model GraphML
+enum ElemType{
+	edge,
+	node,
+	graph
+}
+
+enum AttrType{
+	double,
+	string,
+	integer,
+	boolean
+}
+
+enum EdgeType{
+	directed,
+	undirected
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Root<LocatedElement
+attributes
+operations
+end
+
+class Element<LocatedElement
+attributes
+	id : String
+operations
+end
+
+class Key<Element
+attributes
+	for_ : ElemType
+	attrName : String
+	type : AttrType
+	defValue : String
+operations
+end
+
+class Graph<Element
+attributes
+	edgeDefault : EdgeType
+operations
+end
+
+class Edge<Element
+attributes
+operations
+end
+
+class HyperEdge<Element
+attributes
+operations
+end
+
+class Node<Element
+attributes
+operations
+end
+
+class Port<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class EndPoint<LocatedElement
+attributes
+operations
+end
+
+class Data<LocatedElement
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_Root_keys between
+	Root[0..1] role xxx_Root_keys_src
+	Key[*] role keys
+end
+
+composition xxx_Root_graphs between
+	Root[0..1] role xxx_Root_graphs_src
+	Graph[*] role graphs
+end
+
+composition xxx_Element_datas between
+	Element[0..1] role xxx_Element_datas_src
+	Data[*] role datas
+end
+
+composition xxx_Graph_contents between
+	Graph[0..1] role xxx_Graph_contents_src
+	Element[*] role contents
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	Node[1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	Node[1] role target
+end
+
+association xxx_Edge_sourceport between
+	Edge[*] role xxx_Edge_sourceport_src
+	Port[1] role sourceport
+end
+
+association xxx_Edge_targetport between
+	Edge[*] role xxx_Edge_targetport_src
+	Port[1] role targetport
+end
+
+composition xxx_HyperEdge_endpoints between
+	HyperEdge[0..1] role xxx_HyperEdge_endpoints_src
+	EndPoint[*] role endpoints
+end
+
+composition xxx_Node_subgraph between
+	Node[*] role xxx_Node_subgraph_src
+	Graph[1] role subgraph
+end
+
+composition xxx_Node_ports between
+	Node[0..1] role xxx_Node_ports_src
+	Port[*] role ports
+end
+
+association xxx_EndPoint_node between
+	EndPoint[*] role xxx_EndPoint_node_src
+	Node[1] role node
+end
+
+association xxx_EndPoint_port between
+	EndPoint[*] role xxx_EndPoint_port_src
+	Port[1] role port
+end
+

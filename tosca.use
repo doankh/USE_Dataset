@@ -1,0 +1,233 @@
+model tosca
+class NodeTemplate
+attributes
+	node_template_name : String
+	type : String
+	description : String
+operations
+end
+
+class Interface
+attributes
+	interface_name : String
+	type : String
+operations
+end
+
+class Relationship
+attributes
+	type : String
+	target : String
+	relationship_name : String
+operations
+end
+
+class Property
+attributes
+	property_name : String
+	value : String
+operations
+end
+
+class Attribute
+attributes
+	attribute_name : String
+operations
+end
+
+class Requirement
+attributes
+	requirement_name : String
+	node : String
+	capabiity : String
+operations
+end
+
+class Operation
+attributes
+	operation_name : String
+	description : String
+	dependentArtifacts : String
+	primary : String
+operations
+end
+
+class TopologyTemplate
+attributes
+	tosca_definitions_version : String
+	description : String
+operations
+end
+
+class Import
+attributes
+	import_name : String
+	file : String
+	repository : String
+	namespace_uri : String
+	namespace_prefix : String
+operations
+end
+
+class Group
+attributes
+	group_name : String
+	type : String
+	description : String
+	targets : String
+operations
+end
+
+class Policy
+attributes
+	policy_name : String
+	type : String
+operations
+end
+
+class Capability
+attributes
+	type : String
+	description : String
+	capability_name : String
+operations
+end
+
+class Parameter
+attributes
+	parameter_name : String
+operations
+end
+
+class Artifact
+attributes
+	name : String
+	artifactUri : String
+operations
+end
+
+composition xxx_NodeTemplate_interfaces between
+	NodeTemplate[0..1] role xxx_NodeTemplate_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_NodeTemplate_properties between
+	NodeTemplate[0..1] role xxx_NodeTemplate_properties_src
+	Property[*] role properties
+end
+
+composition xxx_NodeTemplate_attributes_ between
+	NodeTemplate[0..1] role xxx_NodeTemplate_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_NodeTemplate_requirements between
+	NodeTemplate[0..1] role xxx_NodeTemplate_requirements_src
+	Requirement[*] role requirements
+end
+
+composition xxx_NodeTemplate_relationships between
+	NodeTemplate[0..1] role xxx_NodeTemplate_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_NodeTemplate_capabilities between
+	NodeTemplate[0..1] role xxx_NodeTemplate_capabilities_src
+	Capability[*] role capabilities
+end
+
+composition xxx_Interface_operations_ between
+	Interface[0..1] role xxx_Interface_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_Interface_inputs between
+	Interface[0..1] role xxx_Interface_inputs_src
+	Property[*] role inputs
+end
+
+composition xxx_Relationship_interfaces between
+	Relationship[0..1] role xxx_Relationship_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_Relationship_properties between
+	Relationship[0..1] role xxx_Relationship_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Relationship_attributes_ between
+	Relationship[0..1] role xxx_Relationship_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Relationship_source_interfaces between
+	Relationship[0..1] role xxx_Relationship_source_interfaces_src
+	Interface[*] role source_interfaces
+end
+
+composition xxx_Relationship_target_interfaces between
+	Relationship[0..1] role xxx_Relationship_target_interfaces_src
+	Interface[*] role target_interfaces
+end
+
+composition xxx_Operation_inputs between
+	Operation[0..1] role xxx_Operation_inputs_src
+	Property[*] role inputs
+end
+
+composition xxx_TopologyTemplate_imports between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_imports_src
+	Import[*] role imports
+end
+
+composition xxx_TopologyTemplate_outputs between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_outputs_src
+	Parameter[*] role outputs
+end
+
+composition xxx_TopologyTemplate_inputs between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_inputs_src
+	Parameter[*] role inputs
+end
+
+composition xxx_TopologyTemplate_nodeTemplates between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_nodeTemplates_src
+	NodeTemplate[*] role nodeTemplates
+end
+
+composition xxx_TopologyTemplate_realtionships between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_realtionships_src
+	Relationship[*] role realtionships
+end
+
+composition xxx_TopologyTemplate_groups between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_groups_src
+	Group[*] role groups
+end
+
+composition xxx_TopologyTemplate_policies between
+	TopologyTemplate[0..1] role xxx_TopologyTemplate_policies_src
+	Policy[*] role policies
+end
+
+composition xxx_Group_properties between
+	Group[*] role xxx_Group_properties_src
+	Property[0..1] role properties
+end
+
+composition xxx_Group_interfaces between
+	Group[0..1] role xxx_Group_interfaces_src
+	Interface[*] role interfaces
+end
+
+composition xxx_Capability_properties between
+	Capability[0..1] role xxx_Capability_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Capability_attributes_ between
+	Capability[0..1] role xxx_Capability_attributes__src
+	Attribute[*] role attributes_
+end
+

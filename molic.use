@@ -1,0 +1,80 @@
+model molic
+class Diagram
+attributes
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+abstract class Connection
+attributes
+	label : String
+operations
+end
+
+class Scene<Element
+attributes
+	name : String
+	dialogue : String
+operations
+end
+
+class Monologue<Element
+attributes
+	label : String
+operations
+end
+
+class Utterance<Connection
+attributes
+operations
+end
+
+class BRTUtterance<Connection
+attributes
+operations
+end
+
+class SystemProcess<Element
+attributes
+operations
+end
+
+class UbiquitousAccess<Element
+attributes
+operations
+end
+
+class OpeningPoint<Element
+attributes
+operations
+end
+
+class ClosingPoint<Element
+attributes
+operations
+end
+
+composition xxx_Diagram_element between
+	Diagram[0..1] role xxx_Diagram_element_src
+	Element[*] role element
+end
+
+composition xxx_Diagram_utterance between
+	Diagram[0..1] role xxx_Diagram_utterance_src
+	Connection[*] role utterance
+end
+
+association xxx_Connection_source between
+	Connection[*] role xxx_Connection_source_src
+	Element[0..1] role source
+end
+
+association xxx_Connection_target between
+	Connection[*] role xxx_Connection_target_src
+	Element[0..1] role target
+end
+

@@ -1,0 +1,97 @@
+model CacheTracability
+class TraceabilityLink
+attributes
+	deleted : Boolean
+	label : String
+operations
+end
+
+class Attribute
+attributes
+operations
+end
+
+class TraceableElement<URIElement
+attributes
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class AnalyzedResource<URIElement
+attributes
+	modificationTime : String
+operations
+end
+
+abstract class URIElement
+attributes
+	uri : String
+operations
+end
+
+class Property
+attributes
+	name : String
+	value : String
+operations
+end
+
+composition xxx_TraceabilityLink_attributes_ between
+	TraceabilityLink[0..1] role xxx_TraceabilityLink_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_TraceabilityLink_sources between
+	TraceabilityLink[0..1] role xxx_TraceabilityLink_sources_src
+	TraceableElement[*] role sources
+end
+
+association xxx_TraceabilityLink_targets between
+	TraceabilityLink[0..1] role xxx_TraceabilityLink_targets_src
+	TraceableElement[*] role targets
+end
+
+association xxx_TraceabilityLink_resource between
+	TraceabilityLink[*] role xxx_TraceabilityLink_resource_src
+	AnalyzedResource[0..1] role resource
+end
+
+association xxx_TraceableElement_outgoings between
+	TraceableElement[0..1] role xxx_TraceableElement_outgoings_src
+	TraceabilityLink[*] role outgoings
+end
+
+association xxx_TraceableElement_incomings between
+	TraceableElement[0..1] role xxx_TraceableElement_incomings_src
+	TraceabilityLink[*] role incomings
+end
+
+composition xxx_TraceableElement_properties between
+	TraceableElement[0..1] role xxx_TraceableElement_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Model_traceables between
+	Model[0..1] role xxx_Model_traceables_src
+	TraceableElement[*] role traceables
+end
+
+composition xxx_Model_resources between
+	Model[0..1] role xxx_Model_resources_src
+	AnalyzedResource[*] role resources
+end
+
+association xxx_AnalyzedResource_contained between
+	AnalyzedResource[*] role xxx_AnalyzedResource_contained_src
+	TraceabilityLink[0..1] role contained
+end
+
+composition xxx_AnalyzedResource_links between
+	AnalyzedResource[0..1] role xxx_AnalyzedResource_links_src
+	TraceabilityLink[*] role links
+end
+

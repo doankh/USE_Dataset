@@ -1,0 +1,92 @@
+model ludomodel
+enum Color{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class LudoModell
+attributes
+operations
+end
+
+class LudoGame<NamedElement
+attributes
+operations
+end
+
+class Cube<NamedElement
+attributes
+operations
+end
+
+class Player<NamedElement
+attributes
+operations
+end
+
+class GameingPieces<NamedElement
+attributes
+	pieceColor : Color
+operations
+end
+
+class Board<NamedElement
+attributes
+operations
+end
+
+composition xxx_LudoModell_ludoGame between
+	LudoModell[0..1] role xxx_LudoModell_ludoGame_src
+	LudoGame[*] role ludoGame
+end
+
+composition xxx_LudoGame_cube between
+	LudoGame[*] role xxx_LudoGame_cube_src
+	Cube[1] role cube
+end
+
+composition xxx_LudoGame_player between
+	LudoGame[*] role xxx_LudoGame_player_src
+	Player[2..4] role player
+end
+
+composition xxx_LudoGame_gamingPieces between
+	LudoGame[*] role xxx_LudoGame_gamingPieces_src
+	GameingPieces[8..16] role gamingPieces
+end
+
+composition xxx_LudoGame_board between
+	LudoGame[*] role xxx_LudoGame_board_src
+	Board[1] role board
+end
+
+association xxx_Cube_ludoGame between
+	Cube[*] role xxx_Cube_ludoGame_src
+	LudoGame[1] role ludoGame
+end
+
+association xxx_Player_ludoGame between
+	Player[*] role xxx_Player_ludoGame_src
+	LudoGame[1] role ludoGame
+end
+
+association xxx_Player_gamingPieces between
+	Player[*] role xxx_Player_gamingPieces_src
+	GameingPieces[4] role gamingPieces
+end
+
+association xxx_GameingPieces_ludoGame between
+	GameingPieces[*] role xxx_GameingPieces_ludoGame_src
+	LudoGame[1] role ludoGame
+end
+
+association xxx_Board_ludoGame between
+	Board[*] role xxx_Board_ludoGame_src
+	LudoGame[1] role ludoGame
+end
+

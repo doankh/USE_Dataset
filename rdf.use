@@ -1,0 +1,263 @@
+model rdf
+abstract class URIElement
+attributes
+	URI : String
+operations
+	getLocalName():String
+end
+
+class Namespace<URIElement
+attributes
+	prefix : String
+operations
+end
+
+abstract class RDFGraph<URIElement
+attributes
+	nodes : String
+operations
+	isEquivalentTo(graph : RDFGraph):Boolean
+	add(graph : RDFGraph)
+	union(graph : RDFGraph):RDFGraph
+	diff(graph : RDFGraph):RDFGraph
+	addTriple(subject : Node,property : Property,object : Node):Triple
+	listSubjectsWithProperty(property : Property):SubjectNode
+	listSubjectsWithPropertyValue(property : Property,object : Node):SubjectNode
+	listSubjects():SubjectNode
+	getResource(uri : String):Resource
+	getProperty(uri : String):Property
+	getDatatype(uri : String):Datatype
+	getBlankNode(nodeID : String):BlankNode
+	listAllTriples():Triple
+	listAllResources():Resource
+	listAllProperties():Property
+end
+
+class DocumentGraph<RDFGraph
+attributes
+operations
+	getNamedGraph(uri : String):NamedGraph
+end
+
+class Triple
+attributes
+operations
+end
+
+abstract class Node
+attributes
+	label : String
+	comment : String
+operations
+end
+
+abstract class SubjectNode<Node
+attributes
+operations
+	isTypeOf(uri : String):Boolean
+	getTypes():Resource
+	getStringValue(uri : String):String
+	getValues(uri : String):Node
+	getURIValues(uri : String):String
+	getObject(uri : String):Node
+end
+
+class NamedGraph<RDFGraph,Node
+attributes
+operations
+end
+
+class BlankNode<SubjectNode
+attributes
+	nodeID : String
+operations
+end
+
+class TripleNode<Resource
+attributes
+operations
+end
+
+class Resource<SubjectNode,URIElement
+attributes
+operations
+	isTypeOf(uri : String):Boolean
+end
+
+class Property<Resource
+attributes
+operations
+end
+
+class Datatype<Resource
+attributes
+operations
+end
+
+class Literal<Node
+attributes
+	lexicalForm : String
+	lang : String
+operations
+end
+
+abstract class RDFSContainer<BlankNode
+attributes
+operations
+end
+
+class RDFBag<RDFSContainer
+attributes
+operations
+end
+
+class RDFAlt<RDFSContainer
+attributes
+operations
+end
+
+class RDFSeq<RDFSContainer
+attributes
+operations
+end
+
+class RDFList<BlankNode
+attributes
+operations
+end
+
+association xxx_URIElement_namespace between
+	URIElement[*] role xxx_URIElement_namespace_src
+	Namespace[0..1] role namespace
+end
+
+association xxx_Namespace_graph between
+	Namespace[*] role xxx_Namespace_graph_src
+	DocumentGraph[1] role graph
+end
+
+composition xxx_RDFGraph_resources between
+	RDFGraph[0..1] role xxx_RDFGraph_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_RDFGraph_properties between
+	RDFGraph[0..1] role xxx_RDFGraph_properties_src
+	Property[*] role properties
+end
+
+composition xxx_RDFGraph_blankNodes between
+	RDFGraph[0..1] role xxx_RDFGraph_blankNodes_src
+	BlankNode[*] role blankNodes
+end
+
+composition xxx_RDFGraph_datatypes between
+	RDFGraph[0..1] role xxx_RDFGraph_datatypes_src
+	Datatype[*] role datatypes
+end
+
+composition xxx_RDFGraph_literals between
+	RDFGraph[0..1] role xxx_RDFGraph_literals_src
+	Literal[*] role literals
+end
+
+composition xxx_RDFGraph_triples between
+	RDFGraph[0..1] role xxx_RDFGraph_triples_src
+	Triple[*] role triples
+end
+
+composition xxx_DocumentGraph_namespaces between
+	DocumentGraph[0..1] role xxx_DocumentGraph_namespaces_src
+	Namespace[*] role namespaces
+end
+
+association xxx_DocumentGraph_subGraphs between
+	DocumentGraph[0..1] role xxx_DocumentGraph_subGraphs_src
+	NamedGraph[*] role subGraphs
+end
+
+association xxx_Triple_subject between
+	Triple[*] role xxx_Triple_subject_src
+	SubjectNode[1] role subject
+end
+
+association xxx_Triple_predicate between
+	Triple[*] role xxx_Triple_predicate_src
+	Property[1] role predicate
+end
+
+association xxx_Triple_object between
+	Triple[*] role xxx_Triple_object_src
+	Node[1] role object
+end
+
+association xxx_Triple_graph between
+	Triple[*] role xxx_Triple_graph_src
+	RDFGraph[1] role graph
+end
+
+association xxx_Node_objectOf between
+	Node[0..1] role xxx_Node_objectOf_src
+	Triple[*] role objectOf
+end
+
+association xxx_SubjectNode_subjectOf between
+	SubjectNode[0..1] role xxx_SubjectNode_subjectOf_src
+	Triple[*] role subjectOf
+end
+
+association xxx_NamedGraph_document between
+	NamedGraph[*] role xxx_NamedGraph_document_src
+	DocumentGraph[1] role document
+end
+
+association xxx_BlankNode_graph between
+	BlankNode[*] role xxx_BlankNode_graph_src
+	RDFGraph[0..1] role graph
+end
+
+association xxx_TripleNode_triple between
+	TripleNode[*] role xxx_TripleNode_triple_src
+	Triple[1] role triple
+end
+
+association xxx_Resource_graph between
+	Resource[*] role xxx_Resource_graph_src
+	RDFGraph[0..1] role graph
+end
+
+association xxx_Property_predicateOf between
+	Property[0..1] role xxx_Property_predicateOf_src
+	Triple[*] role predicateOf
+end
+
+association xxx_Literal_datatype between
+	Literal[*] role xxx_Literal_datatype_src
+	Datatype[1] role datatype
+end
+
+association xxx_Literal_graph between
+	Literal[*] role xxx_Literal_graph_src
+	RDFGraph[0..1] role graph
+end
+
+association xxx_RDFBag_elements between
+	RDFBag[0..1] role xxx_RDFBag_elements_src
+	Node[*] role elements
+end
+
+association xxx_RDFAlt_elements between
+	RDFAlt[0..1] role xxx_RDFAlt_elements_src
+	Node[*] role elements
+end
+
+association xxx_RDFSeq_elements between
+	RDFSeq[0..1] role xxx_RDFSeq_elements_src
+	Node[*] role elements
+end
+
+association xxx_RDFList_elements between
+	RDFList[0..1] role xxx_RDFList_elements_src
+	Node[*] role elements
+end
+

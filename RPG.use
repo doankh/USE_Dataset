@@ -1,0 +1,156 @@
+model rpg
+class RPG
+attributes
+operations
+end
+
+abstract class Object
+attributes
+	name : String
+operations
+end
+
+abstract class Item<Object
+attributes
+operations
+end
+
+class Key<Item
+attributes
+operations
+end
+
+class Door<Object
+attributes
+operations
+end
+
+abstract class Agent
+attributes
+	name : String
+operations
+end
+
+class Inventory
+attributes
+operations
+end
+
+abstract class NonPlayableCharacther<Agent
+attributes
+operations
+end
+
+class Hostile<NonPlayableCharacther
+attributes
+operations
+end
+
+class Friendly<NonPlayableCharacther
+attributes
+operations
+end
+
+class Hero<Agent
+attributes
+operations
+end
+
+class WorldMap
+attributes
+operations
+end
+
+class Scene
+attributes
+operations
+end
+
+class Cell
+attributes
+	name : String
+	x : Integer
+	y : Integer
+operations
+end
+
+composition xxx_RPG_hasWorldMap between
+	RPG[*] role xxx_RPG_hasWorldMap_src
+	WorldMap[1] role hasWorldMap
+end
+
+composition xxx_RPG_hasAgents between
+	RPG[0..1] role xxx_RPG_hasAgents_src
+	NonPlayableCharacther[*] role hasAgents
+end
+
+composition xxx_RPG_hasHero between
+	RPG[*] role xxx_RPG_hasHero_src
+	Hero[1] role hasHero
+end
+
+composition xxx_RPG_hasObject between
+	RPG[0..1] role xxx_RPG_hasObject_src
+	Object[*] role hasObject
+end
+
+association xxx_Object_occupies between
+	Object[*] role xxx_Object_occupies_src
+	Cell[0..1] role occupies
+end
+
+association xxx_Key_opens between
+	Key[*] role xxx_Key_opens_src
+	Door[1] role opens
+end
+
+association xxx_Door_exit between
+	Door[*] role xxx_Door_exit_src
+	Cell[1] role exit
+end
+
+association xxx_Agent_occupies between
+	Agent[*] role xxx_Agent_occupies_src
+	Cell[1] role occupies
+end
+
+composition xxx_Agent_hasInventory between
+	Agent[*] role xxx_Agent_hasInventory_src
+	Inventory[0..1] role hasInventory
+end
+
+association xxx_Inventory_hasItems between
+	Inventory[0..1] role xxx_Inventory_hasItems_src
+	Item[*] role hasItems
+end
+
+composition xxx_WorldMap_hasScene between
+	WorldMap[0..1] role xxx_WorldMap_hasScene_src
+	Scene[1..*] role hasScene
+end
+
+composition xxx_Scene_hasCell between
+	Scene[0..1] role xxx_Scene_hasCell_src
+	Cell[1..*] role hasCell
+end
+
+association xxx_Cell_left between
+	Cell[*] role xxx_Cell_left_src
+	Cell[0..1] role left
+end
+
+association xxx_Cell_right between
+	Cell[*] role xxx_Cell_right_src
+	Cell[0..1] role right
+end
+
+association xxx_Cell_top between
+	Cell[*] role xxx_Cell_top_src
+	Cell[0..1] role top
+end
+
+association xxx_Cell_bottom between
+	Cell[*] role xxx_Cell_bottom_src
+	Cell[0..1] role bottom
+end
+

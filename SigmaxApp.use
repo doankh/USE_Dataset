@@ -1,0 +1,90 @@
+model sigmaxapp
+class App
+attributes
+	name : String
+	identifier : String
+operations
+end
+
+abstract class Pattern
+attributes
+operations
+end
+
+class CRUD<Pattern
+attributes
+	entityName : String
+	name : String
+	isHierarchical : Boolean
+operations
+end
+
+class CRUDReference
+attributes
+	name : String
+	isMultiref : Boolean
+operations
+end
+
+abstract class Property
+attributes
+	name : String
+	binding : String
+	isCreateOnly : Boolean
+	isIdentifier : Boolean
+	isRequired : Boolean
+operations
+end
+
+class Text<Property
+attributes
+operations
+end
+
+class Bool<Property
+attributes
+operations
+end
+
+class Number<Property
+attributes
+	decimals : Boolean
+operations
+end
+
+class Choose<Property
+attributes
+	choices : String
+operations
+end
+
+composition xxx_App_patterns between
+	App[0..1] role xxx_App_patterns_src
+	Pattern[1..*] role patterns
+end
+
+composition xxx_CRUD_properties between
+	CRUD[0..1] role xxx_CRUD_properties_src
+	Property[1..*] role properties
+end
+
+composition xxx_CRUD_references between
+	CRUD[0..1] role xxx_CRUD_references_src
+	CRUDReference[*] role references
+end
+
+association xxx_CRUDReference_source between
+	CRUDReference[*] role xxx_CRUDReference_source_src
+	CRUD[1] role source
+end
+
+association xxx_CRUDReference_target between
+	CRUDReference[*] role xxx_CRUDReference_target_src
+	CRUD[1] role target
+end
+
+composition xxx_CRUDReference_properties between
+	CRUDReference[0..1] role xxx_CRUDReference_properties_src
+	Property[*] role properties
+end
+

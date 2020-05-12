@@ -1,0 +1,77 @@
+model Logo
+class LogoProgram
+attributes
+operations
+end
+
+abstract class Primitive
+attributes
+operations
+end
+
+class Back<Primitive
+attributes
+operations
+end
+
+class Forward<Primitive
+attributes
+operations
+end
+
+class Left<Primitive
+attributes
+operations
+end
+
+class Right<Primitive
+attributes
+operations
+end
+
+class PenDown<Primitive
+attributes
+operations
+end
+
+class PenUp<Primitive
+attributes
+operations
+end
+
+class Clear<Primitive
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+	eval(context_ : String)
+end
+
+composition xxx_LogoProgram_primitives between
+	LogoProgram[0..1] role xxx_LogoProgram_primitives_src
+	Primitive[*] role primitives
+end
+
+composition xxx_Back_steps between
+	Back[*] role xxx_Back_steps_src
+	Expression[1] role steps
+end
+
+composition xxx_Forward_steps between
+	Forward[*] role xxx_Forward_steps_src
+	Expression[1] role steps
+end
+
+composition xxx_Left_angle between
+	Left[*] role xxx_Left_angle_src
+	Expression[0..1] role angle
+end
+
+composition xxx_Right_angle between
+	Right[*] role xxx_Right_angle_src
+	Expression[0..1] role angle
+end
+

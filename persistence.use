@@ -1,0 +1,192 @@
+model persistence
+class AlloyType
+attributes
+	builddate : String
+operations
+end
+
+class AtomType
+attributes
+	value : String
+	label : String
+	changed : String
+	impact : String
+	bound : String
+	reasoned : Boolean
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class EntryType
+attributes
+	value : String
+	key : String
+operations
+end
+
+class FieldType
+attributes
+	iD : String
+	label : String
+	parentID : String
+operations
+end
+
+class InstanceType
+attributes
+	bitwidth : String
+	filename : String
+	maxseq : String
+	metamodel : String
+operations
+end
+
+class ItemType
+attributes
+	group : String
+	id : String
+operations
+end
+
+class RepositoryType
+attributes
+	nextId : String
+operations
+end
+
+class SigType
+attributes
+	mixed : String
+	abstract_ : String
+	builtin : String
+	enum_ : String
+	iD : String
+	label : String
+	lone : String
+	meta : String
+	one : String
+	parentID : String
+	private : String
+	some : String
+	subset : String
+	subsig : String
+operations
+end
+
+class SourceType
+attributes
+	value : String
+	content : String
+	filename : String
+operations
+end
+
+class TupleType
+attributes
+	bound : String
+	reasoned : Boolean
+operations
+end
+
+class TypesType
+attributes
+operations
+end
+
+class TypeType
+attributes
+	value : String
+	iD : String
+operations
+end
+
+class RelationType
+attributes
+operations
+end
+
+composition xxx_AlloyType_instance between
+	AlloyType[*] role xxx_AlloyType_instance_src
+	InstanceType[1] role instance
+end
+
+composition xxx_AlloyType_repository between
+	AlloyType[*] role xxx_AlloyType_repository_src
+	RepositoryType[1] role repository
+end
+
+composition xxx_AlloyType_source between
+	AlloyType[0..1] role xxx_AlloyType_source_src
+	SourceType[*] role source
+end
+
+composition xxx_AlloyType_relation between
+	AlloyType[*] role xxx_AlloyType_relation_src
+	RelationType[0..1] role relation
+end
+
+composition xxx_DocumentRoot_alloy between
+	DocumentRoot[*] role xxx_DocumentRoot_alloy_src
+	AlloyType[*] role alloy
+end
+
+composition xxx_FieldType_tuple between
+	FieldType[0..1] role xxx_FieldType_tuple_src
+	TupleType[*] role tuple
+end
+
+composition xxx_FieldType_types between
+	FieldType[0..1] role xxx_FieldType_types_src
+	TypesType[*] role types
+end
+
+composition xxx_InstanceType_sig between
+	InstanceType[0..1] role xxx_InstanceType_sig_src
+	SigType[*] role sig
+end
+
+composition xxx_InstanceType_field between
+	InstanceType[0..1] role xxx_InstanceType_field_src
+	FieldType[*] role field
+end
+
+composition xxx_ItemType_entry between
+	ItemType[0..1] role xxx_ItemType_entry_src
+	EntryType[*] role entry
+end
+
+composition xxx_RepositoryType_item between
+	RepositoryType[0..1] role xxx_RepositoryType_item_src
+	ItemType[*] role item
+end
+
+composition xxx_SigType_atom between
+	SigType[0..1] role xxx_SigType_atom_src
+	AtomType[*] role atom
+end
+
+composition xxx_SigType_type between
+	SigType[0..1] role xxx_SigType_type_src
+	TypeType[*] role type
+end
+
+composition xxx_TupleType_atom between
+	TupleType[0..1] role xxx_TupleType_atom_src
+	AtomType[*] role atom
+end
+
+composition xxx_TypesType_type between
+	TypesType[0..1] role xxx_TypesType_type_src
+	TypeType[*] role type
+end
+
+composition xxx_RelationType_tuple between
+	RelationType[0..1] role xxx_RelationType_tuple_src
+	TupleType[*] role tuple
+end
+

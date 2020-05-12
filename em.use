@@ -1,0 +1,71 @@
+model em
+class XClazz
+attributes
+	Abstract : Boolean
+	DefaultDomainKey : String
+	ImplementSerializable : Boolean
+	Imports : String
+	IsPersistent : Boolean
+	Methods : String
+	MethodVisibility : Boolean
+	Name : String
+	PackageName : String
+	PrimaryKey : String
+	Serializable : Boolean
+	SubImports : String
+	SuperClassName : String
+	SuperClassPackage : String
+operations
+	iterateAssociation()
+	iterateAttribute()
+	iterateGeneralization()
+	iterateGroup()
+	iterateMethod()
+	iterateRealization()
+end
+
+class XConverter
+attributes
+operations
+end
+
+class XInterfaze
+attributes
+operations
+end
+
+class XGroup
+attributes
+operations
+end
+
+class XAssociation
+attributes
+operations
+end
+
+class XMember
+attributes
+operations
+end
+
+class XRealization
+attributes
+operations
+end
+
+class XGeneralization
+attributes
+operations
+end
+
+class XEnumerator
+attributes
+operations
+end
+
+class XEnumValue
+attributes
+operations
+end
+

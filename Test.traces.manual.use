@@ -1,0 +1,121 @@
+model traces
+abstract class Trace
+attributes
+operations
+end
+
+class R1_Trace<Trace
+attributes
+operations
+end
+
+class R2_Trace<Trace
+attributes
+operations
+end
+
+abstract class RootIn
+attributes
+operations
+end
+
+class A<RootIn
+attributes
+	name : String
+operations
+end
+
+class B<RootIn
+attributes
+	name : String
+operations
+end
+
+class C<RootIn
+attributes
+	name : String
+operations
+end
+
+abstract class RootOut
+attributes
+operations
+end
+
+class D<RootOut
+attributes
+	name : String
+operations
+end
+
+class E<RootOut
+attributes
+	name : String
+operations
+end
+
+association xxx_Trace_from_ between
+	Trace[0..1] role xxx_Trace_from__src
+	RootIn[1..*] role from_
+end
+
+association xxx_Trace_to between
+	Trace[0..1] role xxx_Trace_to_src
+	RootOut[1..*] role to
+end
+
+association xxx_R1_Trace_s between
+	R1_Trace[*] role xxx_R1_Trace_s_src
+	A[1] role s
+end
+
+association xxx_R1_Trace_t1 between
+	R1_Trace[*] role xxx_R1_Trace_t1_src
+	D[1] role t1
+end
+
+association xxx_R1_Trace_t2 between
+	R1_Trace[*] role xxx_R1_Trace_t2_src
+	D[1] role t2
+end
+
+association xxx_R2_Trace_s between
+	R2_Trace[*] role xxx_R2_Trace_s_src
+	B[1] role s
+end
+
+association xxx_R2_Trace_t between
+	R2_Trace[*] role xxx_R2_Trace_t_src
+	E[1] role t
+end
+
+association xxx_A_refB between
+	A[0..1] role xxx_A_refB_src
+	B[*] role refB
+end
+
+association xxx_A_refC between
+	A[0..1] role xxx_A_refC_src
+	C[*] role refC
+end
+
+association xxx_B_refA between
+	B[*] role xxx_B_refA_src
+	A[0..1] role refA
+end
+
+association xxx_D_refE between
+	D[0..1] role xxx_D_refE_src
+	E[*] role refE
+end
+
+association xxx_D_refD between
+	D[*] role xxx_D_refD_src
+	D[0..1] role refD
+end
+
+association xxx_E_refD between
+	E[*] role xxx_E_refD_src
+	D[0..1] role refD
+end
+

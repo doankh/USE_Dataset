@@ -1,0 +1,135 @@
+model model_
+class OrganizationModel
+attributes
+operations
+end
+
+class Organization
+attributes
+	name : String
+	longName : String
+	version : String
+	description : String
+operations
+	getUnits():OrganizationUnit
+	getRoles():BusinessRole
+	getPersons():Person
+	getWorkers():Worker
+	getGroups():Group
+	getPartnerships():Partnership
+end
+
+class OrganizationUnit<OrganizationMember
+attributes
+	name : String
+	longName : String
+	description : String
+operations
+end
+
+class OrganizationUnitType<OrganizationMember
+attributes
+	name : String
+	longName : String
+	description : String
+operations
+end
+
+class BusinessRole<OrganizationMember
+attributes
+	name : String
+	longName : String
+	description : String
+operations
+end
+
+class Person<OrganizationMember
+attributes
+	name : String
+	firstName : String
+	middleName : String
+	lastName : String
+	email : String
+operations
+end
+
+class Worker<OrganizationMember
+attributes
+operations
+end
+
+class Group<OrganizationMember
+attributes
+	name : String
+	longName : String
+	description : String
+operations
+end
+
+class Partnership<OrganizationMember
+attributes
+	name : String
+	agreement : String
+operations
+end
+
+abstract class OrganizationMember
+attributes
+operations
+end
+
+composition xxx_OrganizationModel_organization between
+	OrganizationModel[*] role xxx_OrganizationModel_organization_src
+	Organization[0..1] role organization
+end
+
+composition xxx_OrganizationModel_organizationUnitTypes between
+	OrganizationModel[0..1] role xxx_OrganizationModel_organizationUnitTypes_src
+	OrganizationUnitType[*] role organizationUnitTypes
+end
+
+composition xxx_Organization_elements between
+	Organization[0..1] role xxx_Organization_elements_src
+	OrganizationMember[*] role elements
+end
+
+association xxx_OrganizationUnit_parent between
+	OrganizationUnit[*] role xxx_OrganizationUnit_parent_src
+	OrganizationUnit[0..1] role parent
+end
+
+association xxx_OrganizationUnit_types between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_types_src
+	OrganizationUnitType[*] role types
+end
+
+association xxx_Worker_person between
+	Worker[*] role xxx_Worker_person_src
+	Person[0..1] role person
+end
+
+association xxx_Worker_allocationUnit between
+	Worker[*] role xxx_Worker_allocationUnit_src
+	OrganizationUnit[0..1] role allocationUnit
+end
+
+association xxx_Worker_playRoles between
+	Worker[0..1] role xxx_Worker_playRoles_src
+	BusinessRole[*] role playRoles
+end
+
+association xxx_Group_workers between
+	Group[0..1] role xxx_Group_workers_src
+	Worker[*] role workers
+end
+
+association xxx_Partnership_company between
+	Partnership[*] role xxx_Partnership_company_src
+	Organization[0..1] role company
+end
+
+association xxx_Partnership_responsible between
+	Partnership[*] role xxx_Partnership_responsible_src
+	Worker[0..1] role responsible
+end
+

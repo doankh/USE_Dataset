@@ -1,0 +1,231 @@
+model third
+enum TimeSelection{
+default
+}
+
+class SimpleBPMN
+attributes
+operations
+end
+
+abstract class Events<Elements
+attributes
+operations
+end
+
+abstract class Task<Elements
+attributes
+operations
+end
+
+abstract class Flow
+attributes
+operations
+end
+
+class Start<Nodes
+attributes
+	name : String
+operations
+end
+
+class End<Nodes
+attributes
+	name : String
+operations
+end
+
+class Message<Events
+attributes
+	message : String
+	Default : String
+operations
+end
+
+class Normal<Task
+attributes
+	name : String
+operations
+end
+
+class Extended<Task
+attributes
+	name : String
+operations
+end
+
+class NormalF<Flow
+attributes
+	name : String
+operations
+end
+
+abstract class Conditional<Flow
+attributes
+	name : String
+operations
+end
+
+abstract class Values
+attributes
+operations
+end
+
+class Input<Values
+attributes
+	name : String
+operations
+end
+
+class Output<Values
+attributes
+	name : String
+operations
+end
+
+class ConditionalIN<Conditional
+attributes
+	cond : String
+operations
+end
+
+class ConditionalINOUT<Conditional
+attributes
+	cond : String
+operations
+end
+
+class Interval<Events
+attributes
+	name : String
+	Value : Integer
+	Time : TimeSelection
+operations
+end
+
+class Date<Events
+attributes
+	name : String
+operations
+end
+
+abstract class Parameters
+attributes
+operations
+end
+
+class Descripcion<Parameters
+attributes
+	name : String
+operations
+end
+
+class ParticipantETSK<Parameters
+attributes
+	name : String
+operations
+end
+
+class datainETSK<Parameters
+attributes
+	name : String
+operations
+end
+
+class dataoutETSK<Parameters
+attributes
+	name : String
+operations
+end
+
+class DateETSK<Parameters
+attributes
+	name : String
+operations
+end
+
+class Nodes<Elements
+attributes
+operations
+end
+
+abstract class Elements
+attributes
+operations
+end
+
+composition xxx_SimpleBPMN_OwnedEvents between
+	SimpleBPMN[0..1] role xxx_SimpleBPMN_OwnedEvents_src
+	Events[*] role OwnedEvents
+end
+
+composition xxx_SimpleBPMN_OwnedTasks between
+	SimpleBPMN[0..1] role xxx_SimpleBPMN_OwnedTasks_src
+	Task[*] role OwnedTasks
+end
+
+composition xxx_SimpleBPMN_OwnedFlows between
+	SimpleBPMN[0..1] role xxx_SimpleBPMN_OwnedFlows_src
+	Flow[*] role OwnedFlows
+end
+
+composition xxx_SimpleBPMN_StartNodes between
+	SimpleBPMN[*] role xxx_SimpleBPMN_StartNodes_src
+	Start[1] role StartNodes
+end
+
+composition xxx_SimpleBPMN_EndNodes between
+	SimpleBPMN[*] role xxx_SimpleBPMN_EndNodes_src
+	End[1] role EndNodes
+end
+
+composition xxx_Task_valuesin between
+	Task[*] role xxx_Task_valuesin_src
+	Input[0..1] role valuesin
+end
+
+association xxx_Task_EReference0 between
+	Task[*] role xxx_Task_EReference0_src
+	Parameters[0..1] role EReference0
+end
+
+composition xxx_Task_valuesout between
+	Task[*] role xxx_Task_valuesout_src
+	Output[0..1] role valuesout
+end
+
+composition xxx_Extended_owns between
+	Extended[0..1] role xxx_Extended_owns_src
+	Parameters[*] role owns
+end
+
+association xxx_NormalF_from_ between
+	NormalF[*] role xxx_NormalF_from__src
+	Elements[1] role from_
+end
+
+association xxx_NormalF_to between
+	NormalF[*] role xxx_NormalF_to_src
+	Elements[1] role to
+end
+
+association xxx_ConditionalIN_to between
+	ConditionalIN[*] role xxx_ConditionalIN_to_src
+	Task[0..1] role to
+end
+
+association xxx_ConditionalIN_from_ between
+	ConditionalIN[*] role xxx_ConditionalIN_from__src
+	Output[0..1] role from_
+end
+
+association xxx_ConditionalINOUT_to between
+	ConditionalINOUT[*] role xxx_ConditionalINOUT_to_src
+	Input[0..1] role to
+end
+
+association xxx_ConditionalINOUT_from_ between
+	ConditionalINOUT[*] role xxx_ConditionalINOUT_from__src
+	Output[0..1] role from_
+end
+

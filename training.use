@@ -1,0 +1,76 @@
+model training
+class Session
+attributes
+	date : String
+operations
+end
+
+abstract class Person
+attributes
+	firstname : String
+	lastname : String
+operations
+end
+
+class TrainingOrganization
+attributes
+	name : String
+operations
+end
+
+class Training
+attributes
+	title : String
+operations
+end
+
+class Trainer<Person
+attributes
+operations
+end
+
+class Trainee<Person
+attributes
+operations
+end
+
+association xxx_Session_training between
+	Session[*] role xxx_Session_training_src
+	Training[1] role training
+end
+
+association xxx_Session_trainer between
+	Session[*] role xxx_Session_trainer_src
+	Trainer[1] role trainer
+end
+
+association xxx_Session_Trainees between
+	Session[0..1] role xxx_Session_Trainees_src
+	Person[1..*] role Trainees
+end
+
+composition xxx_TrainingOrganization_people between
+	TrainingOrganization[0..1] role xxx_TrainingOrganization_people_src
+	Person[*] role people
+end
+
+composition xxx_TrainingOrganization_sessions between
+	TrainingOrganization[0..1] role xxx_TrainingOrganization_sessions_src
+	Session[*] role sessions
+end
+
+composition xxx_TrainingOrganization_training between
+	TrainingOrganization[0..1] role xxx_TrainingOrganization_training_src
+	Training[*] role training
+end
+
+association xxx_Training_canBeProvidedBy between
+	Training[0..1] role xxx_Training_canBeProvidedBy_src
+	Trainer[1..*] role canBeProvidedBy
+end
+
+association xxx_Trainer_canProvide between
+	Trainer[0..1] role xxx_Trainer_canProvide_src
+	Training[1..*] role canProvide
+end
+

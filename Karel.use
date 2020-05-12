@@ -1,0 +1,174 @@
+model karel
+enum HeadingKind{
+default
+}
+
+enum CommandKind{
+default
+}
+
+enum ConditionKind{
+default
+}
+
+class Program
+attributes
+operations
+end
+
+class InitSection
+attributes
+operations
+end
+
+class InitCommand
+attributes
+operations
+end
+
+class InitPositionCommand<InitCommand
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class InitHeadingCommand<InitCommand
+attributes
+	heading : HeadingKind
+operations
+end
+
+class InitBoardSizeCommand<InitCommand
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class UserDefinedCommand
+attributes
+	name : String
+operations
+end
+
+class Main
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class UserDefinedCommandStatement<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class IterateStatement<Statement
+attributes
+	times : Integer
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class DocumentationComment
+attributes
+	text : String
+operations
+end
+
+class CommandStatement<Statement
+attributes
+	kind : CommandKind
+operations
+end
+
+class ConditionExpr
+attributes
+	negation : Boolean
+	expr : ConditionKind
+operations
+end
+
+composition xxx_Program_initSection between
+	Program[*] role xxx_Program_initSection_src
+	InitSection[0..1] role initSection
+end
+
+composition xxx_Program_userDefinedCommands between
+	Program[0..1] role xxx_Program_userDefinedCommands_src
+	UserDefinedCommand[*] role userDefinedCommands
+end
+
+composition xxx_Program_main between
+	Program[*] role xxx_Program_main_src
+	Main[0..1] role main
+end
+
+composition xxx_InitSection_initCommands between
+	InitSection[0..1] role xxx_InitSection_initCommands_src
+	InitCommand[*] role initCommands
+end
+
+composition xxx_UserDefinedCommand_doc between
+	UserDefinedCommand[*] role xxx_UserDefinedCommand_doc_src
+	DocumentationComment[0..1] role doc
+end
+
+composition xxx_UserDefinedCommand_statements between
+	UserDefinedCommand[0..1] role xxx_UserDefinedCommand_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Main_statements between
+	Main[0..1] role xxx_Main_statements_src
+	Statement[*] role statements
+end
+
+association xxx_UserDefinedCommandStatement_command between
+	UserDefinedCommandStatement[*] role xxx_UserDefinedCommandStatement_command_src
+	UserDefinedCommand[0..1] role command
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	ConditionExpr[0..1] role condition
+end
+
+composition xxx_IfStatement_statements between
+	IfStatement[0..1] role xxx_IfStatement_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_IfStatement_elseStatements between
+	IfStatement[0..1] role xxx_IfStatement_elseStatements_src
+	Statement[*] role elseStatements
+end
+
+composition xxx_IterateStatement_statements between
+	IterateStatement[0..1] role xxx_IterateStatement_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_WhileStatement_condition between
+	WhileStatement[*] role xxx_WhileStatement_condition_src
+	ConditionExpr[0..1] role condition
+end
+
+composition xxx_WhileStatement_statements between
+	WhileStatement[0..1] role xxx_WhileStatement_statements_src
+	Statement[*] role statements
+end
+

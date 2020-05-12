@@ -1,0 +1,227 @@
+model ODPIV
+class InvariantSchema
+attributes
+operations
+end
+
+class InformationObjectTemplate
+attributes
+operations
+end
+
+class InformationObjectType
+attributes
+operations
+end
+
+class InformationObject
+attributes
+operations
+end
+
+class State
+attributes
+operations
+end
+
+class StateChange
+attributes
+operations
+end
+
+class DynamicSchema
+attributes
+operations
+end
+
+class StaticSchema
+attributes
+	locationTime : Real
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class ActionType
+attributes
+operations
+end
+
+class ActionTemplate
+attributes
+operations
+end
+
+association xxx_InvariantSchema_constrainer_AT between
+	InvariantSchema[0..1] role xxx_InvariantSchema_constrainer_AT_src
+	ActionTemplate[*] role constrainer_AT
+end
+
+association xxx_InvariantSchema_constrainer_ATy between
+	InvariantSchema[0..1] role xxx_InvariantSchema_constrainer_ATy_src
+	ActionType[*] role constrainer_ATy
+end
+
+association xxx_InvariantSchema_constrainer_SC between
+	InvariantSchema[0..1] role xxx_InvariantSchema_constrainer_SC_src
+	StateChange[*] role constrainer_SC
+end
+
+association xxx_InvariantSchema_constrainer_S between
+	InvariantSchema[0..1] role xxx_InvariantSchema_constrainer_S_src
+	State[*] role constrainer_S
+end
+
+association xxx_InvariantSchema_constrainer_IOT between
+	InvariantSchema[0..1] role xxx_InvariantSchema_constrainer_IOT_src
+	InformationObjectTemplate[*] role constrainer_IOT
+end
+
+association xxx_InvariantSchema_constrainer_IOTy between
+	InvariantSchema[0..1] role xxx_InvariantSchema_constrainer_IOTy_src
+	InformationObjectType[*] role constrainer_IOTy
+end
+
+association xxx_InformationObjectTemplate_IOT_IO between
+	InformationObjectTemplate[0..1] role xxx_InformationObjectTemplate_IOT_IO_src
+	InformationObject[*] role IOT_IO
+end
+
+association xxx_InformationObjectTemplate_IOT_constrainer between
+	InformationObjectTemplate[0..1] role xxx_InformationObjectTemplate_IOT_constrainer_src
+	InvariantSchema[*] role IOT_constrainer
+end
+
+association xxx_InformationObjectType_IOTy_IO between
+	InformationObjectType[0..1] role xxx_InformationObjectType_IOTy_IO_src
+	InformationObject[*] role IOTy_IO
+end
+
+association xxx_InformationObjectType_IOTy_constrainer between
+	InformationObjectType[0..1] role xxx_InformationObjectType_IOTy_constrainer_src
+	InvariantSchema[*] role IOTy_constrainer
+end
+
+association xxx_InformationObject_describer between
+	InformationObject[0..1] role xxx_InformationObject_describer_src
+	StaticSchema[*] role describer
+end
+
+association xxx_InformationObject_IO_IOT between
+	InformationObject[0..1] role xxx_InformationObject_IO_IOT_src
+	InformationObjectTemplate[*] role IO_IOT
+end
+
+association xxx_InformationObject_IO_IOTy between
+	InformationObject[0..1] role xxx_InformationObject_IO_IOTy_src
+	InformationObjectType[*] role IO_IOTy
+end
+
+association xxx_InformationObject_IO_A between
+	InformationObject[0..1] role xxx_InformationObject_IO_A_src
+	Action[*] role IO_A
+end
+
+association xxx_InformationObject_IO_S between
+	InformationObject[*] role xxx_InformationObject_IO_S_src
+	State[1] role IO_S
+end
+
+association xxx_State_change between
+	State[*] role xxx_State_change_src
+	StateChange[1] role change
+end
+
+association xxx_State_causeSC between
+	State[*] role xxx_State_causeSC_src
+	StateChange[1] role causeSC
+end
+
+composition xxx_State_S_IO between
+	State[*] role xxx_State_S_IO_src
+	InformationObject[1] role S_IO
+end
+
+association xxx_State_S_constrainer between
+	State[0..1] role xxx_State_S_constrainer_src
+	InvariantSchema[*] role S_constrainer
+end
+
+association xxx_StateChange_startState between
+	StateChange[*] role xxx_StateChange_startState_src
+	State[1] role startState
+end
+
+association xxx_StateChange_endState between
+	StateChange[*] role xxx_StateChange_endState_src
+	State[1] role endState
+end
+
+association xxx_StateChange_specifier between
+	StateChange[0..1] role xxx_StateChange_specifier_src
+	DynamicSchema[1..*] role specifier
+end
+
+association xxx_StateChange_cause between
+	StateChange[0..1] role xxx_StateChange_cause_src
+	Action[*] role cause
+end
+
+association xxx_StateChange_SC_constrainer between
+	StateChange[0..1] role xxx_StateChange_SC_constrainer_src
+	InvariantSchema[*] role SC_constrainer
+end
+
+association xxx_DynamicSchema_dsStateChange between
+	DynamicSchema[0..1] role xxx_DynamicSchema_dsStateChange_src
+	StateChange[*] role dsStateChange
+end
+
+association xxx_StaticSchema_SS_IO between
+	StaticSchema[0..1] role xxx_StaticSchema_SS_IO_src
+	InformationObject[1..*] role SS_IO
+end
+
+association xxx_Action_effect between
+	Action[0..1] role xxx_Action_effect_src
+	StateChange[*] role effect
+end
+
+association xxx_Action_A_AT between
+	Action[0..1] role xxx_Action_A_AT_src
+	ActionTemplate[*] role A_AT
+end
+
+association xxx_Action_participant between
+	Action[0..1] role xxx_Action_participant_src
+	InformationObject[*] role participant
+end
+
+association xxx_Action_A_ATy between
+	Action[0..1] role xxx_Action_A_ATy_src
+	ActionType[*] role A_ATy
+end
+
+association xxx_ActionType_ATy_A between
+	ActionType[0..1] role xxx_ActionType_ATy_A_src
+	Action[*] role ATy_A
+end
+
+association xxx_ActionType_ATy_constrainer between
+	ActionType[0..1] role xxx_ActionType_ATy_constrainer_src
+	InvariantSchema[*] role ATy_constrainer
+end
+
+association xxx_ActionTemplate_AT_A between
+	ActionTemplate[0..1] role xxx_ActionTemplate_AT_A_src
+	Action[*] role AT_A
+end
+
+association xxx_ActionTemplate_AT_constrainer between
+	ActionTemplate[0..1] role xxx_ActionTemplate_AT_constrainer_src
+	InvariantSchema[*] role AT_constrainer
+end
+

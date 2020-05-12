@@ -1,0 +1,141 @@
+model vpm
+enum Extensible{
+default
+}
+
+enum VariabilityType{
+default
+}
+
+enum BindingTime{
+default
+}
+
+class VariationPoint<Identifier,CustomizableNameHaving,CustomizableDescriptionHaving
+attributes
+	variabilityType : VariabilityType
+	bindingTime : BindingTime
+	extensibility : Extensible
+	refactored : Boolean
+operations
+	allValidatorsSucceed(chain : String,context_ : String):Boolean
+end
+
+class Variant
+attributes
+	id : String
+	leading : String
+operations
+end
+
+class VariationPointModel
+attributes
+operations
+end
+
+class VariationPointGroup<CustomizableNameHaving,CustomizableDescriptionHaving
+attributes
+operations
+	isRefactored():Boolean
+end
+
+abstract class CustomizableDescriptionHaving
+attributes
+	description : String
+operations
+end
+
+abstract class CustomizableNameHaving
+attributes
+	name : String
+operations
+end
+
+class Identifier
+attributes
+	id : String
+operations
+end
+
+abstract class SoftwareElement
+attributes
+operations
+	getLabel():String
+	getName():String
+	getSourceLocation():SourceLocation
+	getWrappedElement():String
+	getQualifiedName():String
+end
+
+abstract class JavaSoftwareElement<SoftwareElement
+attributes
+operations
+end
+
+class SourceLocation
+attributes
+	filePath : String
+	startLine : Integer
+	startPosition : Integer
+	endPosition : Integer
+operations
+end
+
+class VariabilityMechanism
+attributes
+	name : String
+	refactoringID : String
+operations
+end
+
+composition xxx_VariationPoint_variants between
+	VariationPoint[0..1] role xxx_VariationPoint_variants_src
+	Variant[*] role variants
+end
+
+association xxx_VariationPoint_location between
+	VariationPoint[*] role xxx_VariationPoint_location_src
+	SoftwareElement[1] role location
+end
+
+association xxx_VariationPoint_group between
+	VariationPoint[*] role xxx_VariationPoint_group_src
+	VariationPointGroup[1] role group
+end
+
+composition xxx_VariationPoint_variabilityMechanism between
+	VariationPoint[*] role xxx_VariationPoint_variabilityMechanism_src
+	VariabilityMechanism[0..1] role variabilityMechanism
+end
+
+association xxx_Variant_implementingElements between
+	Variant[0..1] role xxx_Variant_implementingElements_src
+	SoftwareElement[1..*] role implementingElements
+end
+
+association xxx_Variant_variationPoint between
+	Variant[*] role xxx_Variant_variationPoint_src
+	VariationPoint[1] role variationPoint
+end
+
+composition xxx_VariationPointModel_variationPointGroups between
+	VariationPointModel[0..1] role xxx_VariationPointModel_variationPointGroups_src
+	VariationPointGroup[*] role variationPointGroups
+end
+
+composition xxx_VariationPointModel_softwareElements between
+	VariationPointModel[0..1] role xxx_VariationPointModel_softwareElements_src
+	SoftwareElement[*] role softwareElements
+end
+
+composition xxx_VariationPointGroup_variationPoints between
+	VariationPointGroup[0..1] role xxx_VariationPointGroup_variationPoints_src
+	VariationPoint[1..*] role variationPoints
+end
+
+association xxx_VariationPointGroup_model_ between
+	VariationPointGroup[*] role xxx_VariationPointGroup_model__src
+	VariationPointModel[1] role model_
+end
+
+

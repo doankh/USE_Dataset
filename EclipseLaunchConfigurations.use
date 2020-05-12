@@ -1,0 +1,71 @@
+model EclipseLaunchConfigurations
+class LaunchConfiguration
+attributes
+	type : String
+operations
+end
+
+abstract class Attribute
+attributes
+	key : String
+operations
+end
+
+class StringAttribute<Attribute
+attributes
+	value : String
+operations
+end
+
+class BooleanAttribute<Attribute
+attributes
+	value : Boolean
+operations
+end
+
+class MapAttribute<Attribute
+attributes
+operations
+end
+
+class MapEntry<StringAttribute
+attributes
+operations
+end
+
+class ListAttribute<Attribute
+attributes
+operations
+end
+
+class ListEntry
+attributes
+	value : String
+operations
+end
+
+composition xxx_LaunchConfiguration_attributes_ between
+	LaunchConfiguration[0..1] role xxx_LaunchConfiguration_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_MapAttribute_entries between
+	MapAttribute[0..1] role xxx_MapAttribute_entries_src
+	MapEntry[*] role entries
+end
+
+association xxx_MapEntry_mapAttribute between
+	MapEntry[*] role xxx_MapEntry_mapAttribute_src
+	MapAttribute[1] role mapAttribute
+end
+
+composition xxx_ListAttribute_entries between
+	ListAttribute[0..1] role xxx_ListAttribute_entries_src
+	ListEntry[*] role entries
+end
+
+association xxx_ListEntry_listAttribute between
+	ListEntry[*] role xxx_ListEntry_listAttribute_src
+	ListAttribute[1] role listAttribute
+end
+

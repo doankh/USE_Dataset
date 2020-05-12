@@ -1,0 +1,67 @@
+model JavaMetamodel
+class JavaSource
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ClassDeclaration<NamedElement
+attributes
+operations
+end
+
+class MethodDefinition<NamedElement
+attributes
+operations
+end
+
+class MethodInvocation
+attributes
+operations
+end
+
+class JavaPackage
+attributes
+operations
+end
+
+composition xxx_JavaSource_classes between
+	JavaSource[0..1] role xxx_JavaSource_classes_src
+	ClassDeclaration[1..*] role classes
+end
+
+association xxx_ClassDeclaration_superclass between
+	ClassDeclaration[*] role xxx_ClassDeclaration_superclass_src
+	ClassDeclaration[0..1] role superclass
+end
+
+composition xxx_ClassDeclaration_methods between
+	ClassDeclaration[0..1] role xxx_ClassDeclaration_methods_src
+	MethodDefinition[*] role methods
+end
+
+association xxx_MethodDefinition_class_ between
+	MethodDefinition[*] role xxx_MethodDefinition_class__src
+	ClassDeclaration[1] role class_
+end
+
+composition xxx_MethodDefinition_invocations between
+	MethodDefinition[0..1] role xxx_MethodDefinition_invocations_src
+	MethodInvocation[*] role invocations
+end
+
+association xxx_MethodInvocation_method between
+	MethodInvocation[*] role xxx_MethodInvocation_method_src
+	MethodDefinition[1] role method
+end
+
+composition xxx_JavaPackage_sources between
+	JavaPackage[0..1] role xxx_JavaPackage_sources_src
+	JavaSource[*] role sources
+end
+

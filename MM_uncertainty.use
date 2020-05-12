@@ -1,0 +1,187 @@
+model MM_uncertainty
+enum UBoolean{
+default
+}
+
+class Metamodel
+attributes
+operations
+end
+
+abstract class ConstrainedElement
+attributes
+operations
+end
+
+class Class<ConstrainedElement
+attributes
+	name : String
+	mandatoryAllowed : Boolean
+	isAbstract : UBoolean
+operations
+end
+
+class Feature<ConstrainedElement
+attributes
+	name : String
+operations
+end
+
+abstract class FeatureType
+attributes
+operations
+end
+
+class Reference<FeatureType
+attributes
+operations
+end
+
+class Attribute<FeatureType
+attributes
+operations
+end
+
+abstract class Cardinality
+attributes
+operations
+end
+
+class UnknownCardinality<Cardinality
+attributes
+operations
+end
+
+class Many<Cardinality
+attributes
+	isOrdered : UBoolean
+	isDuplicated : UBoolean
+operations
+end
+
+class Number<Cardinality
+attributes
+	value : Integer
+	allowLess : Boolean
+	allowMore : Boolean
+operations
+end
+
+abstract class DataType
+attributes
+operations
+end
+
+class UnknownType<DataType
+attributes
+operations
+end
+
+abstract class Numeric<DataType
+attributes
+operations
+end
+
+class Real_<Numeric
+attributes
+operations
+end
+
+class Integer_<Numeric
+attributes
+operations
+end
+
+class String_<DataType
+attributes
+operations
+end
+
+class Enum<DataType
+attributes
+	name : String
+operations
+end
+
+class Literal
+attributes
+	name : String
+operations
+end
+
+class Constraint
+attributes
+	constraint : String
+operations
+end
+
+class UnknowClass<Class
+attributes
+operations
+end
+
+class Boolean_<DataType
+attributes
+operations
+end
+
+composition xxx_Metamodel_classes between
+	Metamodel[0..1] role xxx_Metamodel_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Metamodel_dataType between
+	Metamodel[0..1] role xxx_Metamodel_dataType_src
+	DataType[*] role dataType
+end
+
+composition xxx_ConstrainedElement_constraints_ between
+	ConstrainedElement[0..1] role xxx_ConstrainedElement_constraints__src
+	Constraint[*] role constraints_
+end
+
+association xxx_Class_ancs between
+	Class[0..1] role xxx_Class_ancs_src
+	Class[*] role ancs
+end
+
+association xxx_Class_antiancs between
+	Class[0..1] role xxx_Class_antiancs_src
+	Class[*] role antiancs
+end
+
+composition xxx_Class_feats between
+	Class[0..1] role xxx_Class_feats_src
+	Feature[*] role feats
+end
+
+composition xxx_Feature_min between
+	Feature[*] role xxx_Feature_min_src
+	Cardinality[1] role min
+end
+
+composition xxx_Feature_max between
+	Feature[*] role xxx_Feature_max_src
+	Cardinality[1] role max
+end
+
+composition xxx_Feature_hasType between
+	Feature[0..1] role xxx_Feature_hasType_src
+	FeatureType[*] role hasType
+end
+
+association xxx_Reference_target between
+	Reference[0..1] role xxx_Reference_target_src
+	Class[*] role target
+end
+
+association xxx_Attribute_type between
+	Attribute[0..1] role xxx_Attribute_type_src
+	DataType[*] role type
+end
+
+composition xxx_Enum_literals between
+	Enum[0..1] role xxx_Enum_literals_src
+	Literal[*] role literals
+end
+

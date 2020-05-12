@@ -1,0 +1,247 @@
+model bodymodel
+abstract class PositionedElement
+attributes
+	x : Real
+	y : Real
+	z : Real
+	color_r : Integer
+	color_g : Integer
+	color_b : Integer
+operations
+end
+
+class HumanLink
+attributes
+operations
+end
+
+class Body
+attributes
+operations
+end
+
+class Head<PositionedElement
+attributes
+operations
+end
+
+class CenterShoulder<PositionedElement
+attributes
+operations
+end
+
+class LeftShoulder<PositionedElement
+attributes
+operations
+end
+
+class RightShoulder<PositionedElement
+attributes
+operations
+end
+
+class LeftElbow<PositionedElement
+attributes
+operations
+end
+
+class RightElbow<PositionedElement
+attributes
+operations
+end
+
+class LeftWrist<PositionedElement
+attributes
+operations
+end
+
+class RightWrist<PositionedElement
+attributes
+operations
+end
+
+class LeftHand<PositionedElement
+attributes
+operations
+end
+
+class RightHand<PositionedElement
+attributes
+operations
+end
+
+class Spine<PositionedElement
+attributes
+operations
+end
+
+class CenterHip<PositionedElement
+attributes
+operations
+end
+
+class LeftHip<PositionedElement
+attributes
+operations
+end
+
+class RightHip<PositionedElement
+attributes
+operations
+end
+
+class LeftKnee<PositionedElement
+attributes
+operations
+end
+
+class RightKnee<PositionedElement
+attributes
+operations
+end
+
+class LeftAnkle<PositionedElement
+attributes
+operations
+end
+
+class RightAnkle<PositionedElement
+attributes
+operations
+end
+
+class LeftFoot<PositionedElement
+attributes
+operations
+end
+
+class RightFoot<PositionedElement
+attributes
+operations
+end
+
+association xxx_PositionedElement_incomingLinks between
+	PositionedElement[0..1] role xxx_PositionedElement_incomingLinks_src
+	HumanLink[*] role incomingLinks
+end
+
+association xxx_PositionedElement_outgoingLinks between
+	PositionedElement[0..1] role xxx_PositionedElement_outgoingLinks_src
+	HumanLink[*] role outgoingLinks
+end
+
+association xxx_HumanLink_source between
+	HumanLink[*] role xxx_HumanLink_source_src
+	PositionedElement[0..1] role source
+end
+
+association xxx_HumanLink_target between
+	HumanLink[*] role xxx_HumanLink_target_src
+	PositionedElement[0..1] role target
+end
+
+composition xxx_Body_Head between
+	Body[*] role xxx_Body_Head_src
+	Head[1] role Head
+end
+
+composition xxx_Body_CenterShoulder between
+	Body[*] role xxx_Body_CenterShoulder_src
+	CenterShoulder[1] role CenterShoulder
+end
+
+composition xxx_Body_LeftShoulder between
+	Body[*] role xxx_Body_LeftShoulder_src
+	LeftShoulder[1] role LeftShoulder
+end
+
+composition xxx_Body_RightShoulder between
+	Body[*] role xxx_Body_RightShoulder_src
+	RightShoulder[1] role RightShoulder
+end
+
+composition xxx_Body_LeftElbow between
+	Body[*] role xxx_Body_LeftElbow_src
+	LeftElbow[1] role LeftElbow
+end
+
+composition xxx_Body_RightElbow between
+	Body[*] role xxx_Body_RightElbow_src
+	RightElbow[1] role RightElbow
+end
+
+composition xxx_Body_LeftWrist between
+	Body[*] role xxx_Body_LeftWrist_src
+	LeftWrist[1] role LeftWrist
+end
+
+composition xxx_Body_RightWrist between
+	Body[*] role xxx_Body_RightWrist_src
+	RightWrist[1] role RightWrist
+end
+
+composition xxx_Body_LeftHand between
+	Body[*] role xxx_Body_LeftHand_src
+	LeftHand[1] role LeftHand
+end
+
+composition xxx_Body_RightHand between
+	Body[*] role xxx_Body_RightHand_src
+	RightHand[1] role RightHand
+end
+
+composition xxx_Body_Spine between
+	Body[*] role xxx_Body_Spine_src
+	Spine[1] role Spine
+end
+
+composition xxx_Body_CenterHip between
+	Body[*] role xxx_Body_CenterHip_src
+	CenterHip[1] role CenterHip
+end
+
+composition xxx_Body_LeftHip between
+	Body[*] role xxx_Body_LeftHip_src
+	LeftHip[1] role LeftHip
+end
+
+composition xxx_Body_RightHip between
+	Body[*] role xxx_Body_RightHip_src
+	RightHip[1] role RightHip
+end
+
+composition xxx_Body_LeftKnee between
+	Body[*] role xxx_Body_LeftKnee_src
+	LeftKnee[1] role LeftKnee
+end
+
+composition xxx_Body_RightKnee between
+	Body[*] role xxx_Body_RightKnee_src
+	RightKnee[1] role RightKnee
+end
+
+composition xxx_Body_LeftFoot between
+	Body[*] role xxx_Body_LeftFoot_src
+	LeftFoot[1] role LeftFoot
+end
+
+composition xxx_Body_RightFoot between
+	Body[*] role xxx_Body_RightFoot_src
+	RightFoot[1] role RightFoot
+end
+
+composition xxx_Body_links between
+	Body[0..1] role xxx_Body_links_src
+	HumanLink[*] role links
+end
+
+composition xxx_Body_LeftAnkle between
+	Body[*] role xxx_Body_LeftAnkle_src
+	LeftAnkle[1] role LeftAnkle
+end
+
+composition xxx_Body_RightAnkle between
+	Body[*] role xxx_Body_RightAnkle_src
+	RightAnkle[1] role RightAnkle
+end
+

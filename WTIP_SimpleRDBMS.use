@@ -1,0 +1,44 @@
+model SimpleRDBMS
+class Table
+attributes
+	name : String
+operations
+end
+
+class Column
+attributes
+	name : String
+	type : String
+operations
+end
+
+class FKey
+attributes
+operations
+end
+
+composition xxx_Table_fkeys between
+	Table[0..1] role xxx_Table_fkeys_src
+	FKey[*] role fkeys
+end
+
+association xxx_Table_pkey between
+	Table[0..1] role xxx_Table_pkey_src
+	Column[*] role pkey
+end
+
+composition xxx_Table_cols between
+	Table[0..1] role xxx_Table_cols_src
+	Column[*] role cols
+end
+
+association xxx_FKey_references between
+	FKey[*] role xxx_FKey_references_src
+	Table[1] role references
+end
+
+association xxx_FKey_cols between
+	FKey[0..1] role xxx_FKey_cols_src
+	Column[*] role cols
+end
+

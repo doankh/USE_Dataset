@@ -1,0 +1,74 @@
+model furniture
+enum Occlusion{
+default
+}
+
+class CutList
+attributes
+	name : String
+operations
+end
+
+abstract class Panel
+attributes
+	name : String
+	copies : Integer
+	description : String
+operations
+end
+
+class PanelType
+attributes
+	thickness : Real
+	name : String
+operations
+end
+
+class RectangularPanel<Panel
+attributes
+	width : Real
+	height : Real
+	top : Occlusion
+	bottom : Occlusion
+	left : Occlusion
+	right : Occlusion
+operations
+end
+
+class PathPanel<Panel
+attributes
+operations
+end
+
+class XEdge<Edge
+attributes
+operations
+end
+
+abstract class Edge
+attributes
+	length : Real
+	occlusion : Occlusion
+operations
+end
+
+class YEdge<Edge
+attributes
+operations
+end
+
+composition xxx_CutList_panels between
+	CutList[0..1] role xxx_CutList_panels_src
+	Panel[*] role panels
+end
+
+association xxx_Panel_type between
+	Panel[*] role xxx_Panel_type_src
+	PanelType[0..1] role type
+end
+
+composition xxx_PathPanel_edges between
+	PathPanel[0..1] role xxx_PathPanel_edges_src
+	Edge[*] role edges
+end
+

@@ -1,0 +1,275 @@
+model RAW29
+enum ChangeCode{
+default
+}
+
+enum BusTypeCode{
+default
+}
+
+enum WindingCode{
+default
+}
+
+enum ImpedanceCode{
+default
+}
+
+enum AdmittanceCode{
+default
+}
+
+enum TransformerStatus{
+default
+}
+
+enum TransformerControlMode{
+default
+}
+
+class Case
+attributes
+	ChangeCode : ChangeCode
+	Sb : Real
+	heading : String
+	subheading : String
+operations
+end
+
+class Bus
+attributes
+	number : Integer
+	name : String
+	baseKV : Real
+	type : BusTypeCode
+	Gs : Real
+	Bs : Real
+	Vm : Real
+	Va : Real
+operations
+end
+
+class Load
+attributes
+	id : String
+	status : Boolean
+	Pd : Real
+	Qd : Real
+	Pi : Real
+	Qi : Real
+	Py : Real
+	Qy : Real
+operations
+end
+
+class Generator
+attributes
+	id : String
+	Pg : Real
+	Qg : Real
+	Qmax : Real
+	Qmin : Real
+	Vg : Real
+	mBase : Real
+	Rz : Real
+	Xz : Real
+	Rt : Real
+	Xt : Real
+	tapRatio : Real
+	status : Boolean
+	Qpct : Real
+	Pmax : Real
+	Pmin : Real
+	fraction : Real
+operations
+end
+
+class Branch
+attributes
+	circuit : String
+	R : Real
+	X : Real
+	B : Real
+	rateA : Real
+	rateB : Real
+	rateC : Real
+	Gf : Real
+	Bf : Real
+	Gt : Real
+	Bt : Real
+	status : Boolean
+	length : Real
+	fraction : Real
+operations
+end
+
+class Transformer
+attributes
+	circuit : String
+	windingCode : WindingCode
+	impedanceCode : ImpedanceCode
+	admittanceCode : AdmittanceCode
+	Gm : Real
+	Bm : Real
+	name : String
+	status : TransformerStatus
+	fraction : Real
+	R12 : Real
+	X12 : Real
+	Sb12 : Real
+	R23 : Real
+	X23 : Real
+	Sb23 : Real
+	R31 : Real
+	X31 : Real
+	VmStar : Real
+	VaStar : Real
+	V1w : Real
+	V1n : Real
+	Va1 : Real
+	rateA1 : Real
+	rateB1 : Real
+	rateC1 : Real
+	controlMode : TransformerControlMode
+	Rmax : Real
+	Rmin : Real
+	Vmax : Real
+	Vmin : Real
+	tapPositions : Integer
+	Rc : Real
+	Xc : Real
+	V2w : Real
+	V2n : Real
+	Va2 : Real
+	rateA2 : Real
+	rateB2 : Real
+	rateC2 : Real
+	V3w : Real
+	V3n : Real
+	Va3 : Real
+	rateA3 : Real
+	rateB3 : Real
+	rateC3 : Real
+operations
+end
+
+class Area
+attributes
+operations
+end
+
+class Zone
+attributes
+operations
+end
+
+class Owner
+attributes
+operations
+end
+
+class TransformerImpedanceCorrectionTable
+attributes
+operations
+end
+
+association xxx_Bus_Area between
+	Bus[*] role xxx_Bus_Area_src
+	Area[0..1] role Area
+end
+
+association xxx_Bus_Zone between
+	Bus[*] role xxx_Bus_Zone_src
+	Zone[0..1] role Zone
+end
+
+association xxx_Bus_Owner between
+	Bus[*] role xxx_Bus_Owner_src
+	Owner[0..1] role Owner
+end
+
+association xxx_Load_Bus between
+	Load[*] role xxx_Load_Bus_src
+	Bus[1] role Bus
+end
+
+association xxx_Load_Area between
+	Load[*] role xxx_Load_Area_src
+	Area[0..1] role Area
+end
+
+association xxx_Load_Zone between
+	Load[*] role xxx_Load_Zone_src
+	Zone[0..1] role Zone
+end
+
+association xxx_Load_Owner between
+	Load[*] role xxx_Load_Owner_src
+	Owner[0..1] role Owner
+end
+
+association xxx_Generator_Bus between
+	Generator[*] role xxx_Generator_Bus_src
+	Bus[0..1] role Bus
+end
+
+association xxx_Generator_Regulating between
+	Generator[*] role xxx_Generator_Regulating_src
+	Bus[0..1] role Regulating
+end
+
+association xxx_Generator_Owners between
+	Generator[*] role xxx_Generator_Owners_src
+	Owner[0..4] role Owners
+end
+
+association xxx_Branch_FromBus between
+	Branch[*] role xxx_Branch_FromBus_src
+	Bus[1] role FromBus
+end
+
+association xxx_Branch_ToBus between
+	Branch[*] role xxx_Branch_ToBus_src
+	Bus[1] role ToBus
+end
+
+association xxx_Branch_Owners between
+	Branch[*] role xxx_Branch_Owners_src
+	Owner[0..4] role Owners
+end
+
+association xxx_Transformer_Bus1 between
+	Transformer[*] role xxx_Transformer_Bus1_src
+	Bus[1] role Bus1
+end
+
+association xxx_Transformer_Bus2 between
+	Transformer[*] role xxx_Transformer_Bus2_src
+	Bus[1] role Bus2
+end
+
+association xxx_Transformer_Bus3 between
+	Transformer[*] role xxx_Transformer_Bus3_src
+	Bus[0..1] role Bus3
+end
+
+association xxx_Transformer_NonmeteredBus between
+	Transformer[*] role xxx_Transformer_NonmeteredBus_src
+	Bus[0..1] role NonmeteredBus
+end
+
+association xxx_Transformer_Owners between
+	Transformer[*] role xxx_Transformer_Owners_src
+	Owner[0..4] role Owners
+end
+
+association xxx_Transformer_ControlledBus between
+	Transformer[*] role xxx_Transformer_ControlledBus_src
+	Bus[0..1] role ControlledBus
+end
+
+association xxx_Transformer_impedanceTable between
+	Transformer[*] role xxx_Transformer_impedanceTable_src
+	TransformerImpedanceCorrectionTable[0..1] role impedanceTable
+end
+

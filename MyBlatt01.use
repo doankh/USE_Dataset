@@ -1,0 +1,113 @@
+model Blatt01
+class Schaltelemente
+attributes
+operations
+end
+
+class And<Schaltelemente
+attributes
+operations
+end
+
+class Or<Schaltelemente
+attributes
+operations
+end
+
+class Not<Schaltelemente
+attributes
+operations
+end
+
+class Schaltbild<Ausgabe
+attributes
+operations
+end
+
+class Eingabe
+attributes
+	name : String
+operations
+end
+
+class Ausgabe
+attributes
+	name : String
+operations
+end
+
+class Eingang
+attributes
+operations
+end
+
+class Ausgang
+attributes
+operations
+end
+
+association xxx_Schaltelemente_out between
+	Schaltelemente[*] role xxx_Schaltelemente_out_src
+	Ausgang[0..1] role out
+end
+
+association xxx_And_in_ between
+	And[*] role xxx_And_in__src
+	Eingang[0..2] role in_
+end
+
+association xxx_Or_in_ between
+	Or[*] role xxx_Or_in__src
+	Eingang[0..2] role in_
+end
+
+association xxx_Not_in_ between
+	Not[*] role xxx_Not_in__src
+	Eingang[0..1] role in_
+end
+
+composition xxx_Schaltbild_elemente between
+	Schaltbild[0..1] role xxx_Schaltbild_elemente_src
+	Schaltelemente[*] role elemente
+end
+
+composition xxx_Schaltbild_Ausgaben between
+	Schaltbild[0..1] role xxx_Schaltbild_Ausgaben_src
+	Ausgabe[*] role Ausgaben
+end
+
+composition xxx_Schaltbild_Eingaben between
+	Schaltbild[0..1] role xxx_Schaltbild_Eingaben_src
+	Eingabe[*] role Eingaben
+end
+
+composition xxx_Schaltbild_Eingang between
+	Schaltbild[0..1] role xxx_Schaltbild_Eingang_src
+	Eingang[*] role Eingang
+end
+
+composition xxx_Schaltbild_Ausgang between
+	Schaltbild[0..1] role xxx_Schaltbild_Ausgang_src
+	Ausgang[*] role Ausgang
+end
+
+association xxx_Eingabe_out between
+	Eingabe[*] role xxx_Eingabe_out_src
+	Ausgang[0..1] role out
+end
+
+association xxx_Ausgabe_in_ between
+	Ausgabe[*] role xxx_Ausgabe_in__src
+	Eingang[0..1] role in_
+end
+
+association xxx_Eingang_Ausgang between
+	Eingang[*] role xxx_Eingang_Ausgang_src
+	Ausgang[0..1] role Ausgang
+end
+
+association xxx_Ausgang_Eingang between
+	Ausgang[0..1] role xxx_Ausgang_Eingang_src
+	Eingang[*] role Eingang
+end
+

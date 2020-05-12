@@ -1,0 +1,211 @@
+model PASSI
+class FIPA_Platform_Agent
+attributes
+operations
+end
+
+class FIPA_platform_Task
+attributes
+operations
+end
+
+class Service
+attributes
+operations
+end
+
+class Agent
+attributes
+	Name : String
+operations
+end
+
+class Role
+attributes
+operations
+end
+
+class Task
+attributes
+	Name : String
+operations
+end
+
+class Communication
+attributes
+	Name : String
+operations
+end
+
+class Message
+attributes
+operations
+end
+
+class AIP
+attributes
+	Name : String
+operations
+end
+
+class Performative
+attributes
+operations
+end
+
+class Ressource
+attributes
+	Name : String
+operations
+end
+
+class Non_functionnal_Requirement
+attributes
+operations
+end
+
+class Requirement
+attributes
+operations
+end
+
+class Scenario
+attributes
+operations
+end
+
+class Ontology
+attributes
+operations
+end
+
+class Concept<Ontology
+attributes
+operations
+end
+
+class Action<Ontology
+attributes
+operations
+end
+
+class Predicate<Ontology
+attributes
+operations
+end
+
+composition xxx_FIPA_Platform_Agent_fipa_platform_Task between
+	FIPA_Platform_Agent[0..1] role xxx_FIPA_Platform_Agent_fipa_platform_Task_src
+	FIPA_platform_Task[*] role fipa_platform_Task
+end
+
+association xxx_FIPA_Platform_Agent_agent between
+	FIPA_Platform_Agent[*] role xxx_FIPA_Platform_Agent_agent_src
+	Agent[1] role agent
+end
+
+association xxx_FIPA_platform_Task_fipa_platform_Agent between
+	FIPA_platform_Task[*] role xxx_FIPA_platform_Task_fipa_platform_Agent_src
+	FIPA_Platform_Agent[1] role fipa_platform_Agent
+end
+
+association xxx_FIPA_platform_Task_task between
+	FIPA_platform_Task[*] role xxx_FIPA_platform_Task_task_src
+	Task[1] role task
+end
+
+association xxx_Agent_Knowledge between
+	Agent[*] role xxx_Agent_Knowledge_src
+	Ontology[1] role Knowledge
+end
+
+association xxx_Agent_fipa_platform_AgentA between
+	Agent[*] role xxx_Agent_fipa_platform_AgentA_src
+	FIPA_Platform_Agent[1] role fipa_platform_AgentA
+end
+
+composition xxx_Agent_role between
+	Agent[*] role xxx_Agent_role_src
+	Role[1] role role
+end
+
+association xxx_Agent_resource between
+	Agent[0..1] role xxx_Agent_resource_src
+	Ressource[*] role resource
+end
+
+association xxx_Agent_non_functionnal_Requirement between
+	Agent[0..1] role xxx_Agent_non_functionnal_Requirement_src
+	Non_functionnal_Requirement[*] role non_functionnal_Requirement
+end
+
+association xxx_Agent_requirement between
+	Agent[0..1] role xxx_Agent_requirement_src
+	Requirement[1..*] role requirement
+end
+
+association xxx_Role_agentR between
+	Role[*] role xxx_Role_agentR_src
+	Agent[1] role agentR
+end
+
+association xxx_Role_service between
+	Role[0..1] role xxx_Role_service_src
+	Service[*] role service
+end
+
+association xxx_Role_task between
+	Role[0..1] role xxx_Role_task_src
+	Task[1..*] role task
+end
+
+association xxx_Role_scenario between
+	Role[0..1] role xxx_Role_scenario_src
+	Scenario[1..*] role scenario
+end
+
+association xxx_Role_communication between
+	Role[0..1] role xxx_Role_communication_src
+	Communication[*] role communication
+end
+
+association xxx_Task_fipa_platform_TaskT between
+	Task[*] role xxx_Task_fipa_platform_TaskT_src
+	FIPA_platform_Task[1] role fipa_platform_TaskT
+end
+
+association xxx_Communication_Exchanged_Knowledge between
+	Communication[*] role xxx_Communication_Exchanged_Knowledge_src
+	Ontology[1] role Exchanged_Knowledge
+end
+
+composition xxx_Communication_message between
+	Communication[*] role xxx_Communication_message_src
+	Message[1] role message
+end
+
+association xxx_Communication_aip between
+	Communication[*] role xxx_Communication_aip_src
+	AIP[1] role aip
+end
+
+association xxx_Message_communication between
+	Message[*] role xxx_Message_communication_src
+	Communication[1] role communication
+end
+
+association xxx_Message_Comm_Act between
+	Message[*] role xxx_Message_Comm_Act_src
+	Performative[1] role Comm_Act
+end
+
+composition xxx_AIP_performative between
+	AIP[*] role xxx_AIP_performative_src
+	Performative[1] role performative
+end
+
+association xxx_Performative_aip between
+	Performative[*] role xxx_Performative_aip_src
+	AIP[1] role aip
+end
+

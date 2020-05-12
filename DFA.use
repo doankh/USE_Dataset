@@ -1,0 +1,91 @@
+model dfa
+class Dfa<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class State<NamedElement
+attributes
+	description : String
+operations
+end
+
+class InitialState<RegularState
+attributes
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Language<NamedElement
+attributes
+operations
+end
+
+class Symbol
+attributes
+	literal : String
+	description : String
+	direction : String
+operations
+end
+
+class RegularState<State
+attributes
+operations
+end
+
+composition xxx_Dfa_language between
+	Dfa[*] role xxx_Dfa_language_src
+	Language[1] role language
+end
+
+composition xxx_Dfa_regularStates between
+	Dfa[0..1] role xxx_Dfa_regularStates_src
+	RegularState[*] role regularStates
+end
+
+composition xxx_Dfa_initialState between
+	Dfa[*] role xxx_Dfa_initialState_src
+	InitialState[1] role initialState
+end
+
+composition xxx_Dfa_finalStates between
+	Dfa[0..1] role xxx_Dfa_finalStates_src
+	FinalState[*] role finalStates
+end
+
+association xxx_Transition_targetState between
+	Transition[*] role xxx_Transition_targetState_src
+	State[1] role targetState
+end
+
+association xxx_Transition_symbols between
+	Transition[*] role xxx_Transition_symbols_src
+	Symbol[0..1] role symbols
+end
+
+composition xxx_Language_symbols between
+	Language[0..1] role xxx_Language_symbols_src
+	Symbol[*] role symbols
+end
+
+composition xxx_RegularState_transitions_ between
+	RegularState[0..1] role xxx_RegularState_transitions__src
+	Transition[1..*] role transitions_
+end
+

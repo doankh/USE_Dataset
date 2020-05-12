@@ -1,0 +1,666 @@
+model application
+enum SideValue{
+default
+}
+
+enum ItemType{
+default
+}
+
+class StringToStringMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Application
+attributes
+operations
+end
+
+abstract class ApplicationElement
+attributes
+	elementId : String
+	tags : String
+	contributorURI : String
+operations
+end
+
+abstract class Contribution<ApplicationElement
+attributes
+	contributionURI : String
+	object : String
+operations
+end
+
+class Addon<Contribution
+attributes
+operations
+end
+
+class StringToObjectMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class BindingTableContainer
+attributes
+operations
+end
+
+abstract class Bindings
+attributes
+operations
+end
+
+class BindingContext<ApplicationElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class BindingTable<ApplicationElement
+attributes
+operations
+end
+
+class Command<ApplicationElement
+attributes
+	commandName : String
+	description : String
+operations
+	getLocalizedCommandName():String
+	getLocalizedDescription():String
+end
+
+class CommandParameter<ApplicationElement
+attributes
+	name : String
+	typeId : String
+	optional : Boolean
+operations
+end
+
+class Handler<Contribution
+attributes
+operations
+end
+
+abstract class HandlerContainer
+attributes
+operations
+end
+
+class KeyBinding<ApplicationElement,KeySequence
+attributes
+operations
+end
+
+abstract class KeySequence
+attributes
+	keySequence : String
+operations
+end
+
+class Parameter<ApplicationElement
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Category<ApplicationElement
+attributes
+	name : String
+	description : String
+operations
+	getLocalizedName():String
+	getLocalizedDescription():String
+end
+
+abstract class Context
+attributes
+	context_ : String
+	variables : String
+operations
+end
+
+abstract class Dirtyable
+attributes
+	dirty : Boolean
+operations
+end
+
+abstract class Input
+attributes
+	inputURI : String
+operations
+end
+
+abstract class UIElement<ApplicationElement
+attributes
+	widget : String
+	renderer : String
+	toBeRendered : Boolean
+	onTop : Boolean
+	visible : Boolean
+	containerData : String
+	accessibilityPhrase : String
+operations
+	getLocalizedAccessibilityPhrase():String
+end
+
+abstract class ElementContainer<UIElement
+attributes
+operations
+end
+
+abstract class UILabel
+attributes
+	label : String
+	iconURI : String
+	tooltip : String
+operations
+	getLocalizedLabel():String
+	getLocalizedTooltip():String
+end
+
+abstract class GenericStack
+attributes
+operations
+end
+
+abstract class GenericTile
+attributes
+	horizontal : Boolean
+operations
+end
+
+abstract class GenericTrimContainer
+attributes
+	side : SideValue
+operations
+end
+
+abstract class Expression<ApplicationElement
+attributes
+operations
+end
+
+class CoreExpression<Expression
+attributes
+	coreExpressionId : String
+	coreExpression : String
+operations
+end
+
+abstract class SnippetContainer
+attributes
+operations
+end
+
+abstract class Item<UIElement,UILabel
+attributes
+	enabled : Boolean
+	selected : Boolean
+	type : ItemType
+operations
+end
+
+abstract class HandledItem<Item
+attributes
+	wbCommand : String
+operations
+end
+
+abstract class MenuElement<UIElement,UILabel
+attributes
+	mnemonics : String
+operations
+	getLocalizedMnemonics():String
+end
+
+abstract class MenuItem<Item,MenuElement
+attributes
+operations
+end
+
+class MenuSeparator<MenuElement
+attributes
+operations
+end
+
+class Menu
+attributes
+	enabled : Boolean
+operations
+end
+
+class MenuContribution
+attributes
+	positionInParent : String
+	parentId : String
+operations
+end
+
+class PopupMenu<Menu,Context
+attributes
+operations
+end
+
+class DirectMenuItem<MenuItem,Contribution
+attributes
+operations
+end
+
+class HandledMenuItem<MenuItem,HandledItem
+attributes
+operations
+end
+
+abstract class ToolItem<Item,ToolBarElement
+attributes
+operations
+end
+
+class ToolBar
+attributes
+operations
+end
+
+abstract class ToolBarElement<UIElement
+attributes
+operations
+end
+
+class ToolControl<ToolBarElement,Contribution,TrimElement
+attributes
+operations
+end
+
+class HandledToolItem<ToolItem,HandledItem
+attributes
+operations
+end
+
+class DirectToolItem<ToolItem,Contribution
+attributes
+operations
+end
+
+class ToolBarSeparator<ToolBarElement
+attributes
+operations
+end
+
+abstract class MenuContributions
+attributes
+operations
+end
+
+class RenderedMenu<Menu
+attributes
+	contributionManager : String
+operations
+end
+
+class RenderedToolBar<ToolBar
+attributes
+	contributionManager : String
+operations
+end
+
+class ToolBarContribution
+attributes
+	parentId : String
+	positionInParent : String
+operations
+end
+
+abstract class ToolBarContributions
+attributes
+operations
+end
+
+class TrimContribution
+attributes
+	parentId : String
+	positionInParent : String
+operations
+end
+
+abstract class TrimContributions
+attributes
+operations
+end
+
+class RenderedMenuItem<MenuItem
+attributes
+	contributionItem : String
+operations
+end
+
+class OpaqueToolItem<ToolItem
+attributes
+	opaqueItem : String
+operations
+end
+
+class OpaqueMenuItem<MenuItem
+attributes
+	opaqueItem : String
+operations
+end
+
+class OpaqueMenuSeparator<MenuSeparator
+attributes
+	opaqueItem : String
+operations
+end
+
+class OpaqueMenu<Menu
+attributes
+operations
+end
+
+class DynamicMenuContribution<MenuItem,Contribution
+attributes
+operations
+end
+
+class Part<UIElement,PartSashContainerElement,StackElement,Contribution,Context,UILabel,HandlerContainer,Dirtyable,Bindings,WindowElement
+attributes
+	closeable : Boolean
+	description : String
+operations
+	getLocalizedDescription():String
+end
+
+class InputPart<Part,Input
+attributes
+operations
+end
+
+class PartStack
+attributes
+operations
+end
+
+class PartSashContainer
+attributes
+operations
+end
+
+class Window
+attributes
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+operations
+end
+
+class TrimmedWindow<Window
+attributes
+operations
+end
+
+abstract class TrimElement<UIElement
+attributes
+operations
+end
+
+abstract class PartSashContainerElement<UIElement
+attributes
+operations
+end
+
+abstract class WindowElement<UIElement
+attributes
+operations
+end
+
+class TrimBar
+attributes
+operations
+end
+
+abstract class StackElement<UIElement
+attributes
+operations
+end
+
+class Placeholder<UIElement,PartSashContainerElement,StackElement
+attributes
+	closeable : Boolean
+operations
+end
+
+class Perspective
+attributes
+operations
+end
+
+class PerspectiveStack
+attributes
+operations
+end
+
+class Area<PartSashContainer,UILabel
+attributes
+operations
+end
+
+class PartDescriptor<ApplicationElement,UILabel,HandlerContainer,Bindings
+attributes
+	allowMultiple : Boolean
+	category : String
+	closeable : Boolean
+	dirtyable : Boolean
+	contributionURI : String
+	description : String
+operations
+	getLocalizedDescription():String
+end
+
+abstract class PartDescriptorContainer
+attributes
+operations
+end
+
+composition xxx_Application_commands between
+	Application[0..1] role xxx_Application_commands_src
+	Command[*] role commands
+end
+
+composition xxx_Application_addons between
+	Application[0..1] role xxx_Application_addons_src
+	Addon[*] role addons
+end
+
+composition xxx_Application_categories between
+	Application[0..1] role xxx_Application_categories_src
+	Category[*] role categories
+end
+
+composition xxx_ApplicationElement_persistedState between
+	ApplicationElement[0..1] role xxx_ApplicationElement_persistedState_src
+	StringToStringMap[*] role persistedState
+end
+
+composition xxx_ApplicationElement_transientData between
+	ApplicationElement[0..1] role xxx_ApplicationElement_transientData_src
+	StringToObjectMap[*] role transientData
+end
+
+composition xxx_BindingTableContainer_bindingTables between
+	BindingTableContainer[0..1] role xxx_BindingTableContainer_bindingTables_src
+	BindingTable[*] role bindingTables
+end
+
+composition xxx_BindingTableContainer_rootContext between
+	BindingTableContainer[0..1] role xxx_BindingTableContainer_rootContext_src
+	BindingContext[*] role rootContext
+end
+
+association xxx_Bindings_bindingContexts between
+	Bindings[0..1] role xxx_Bindings_bindingContexts_src
+	BindingContext[*] role bindingContexts
+end
+
+composition xxx_BindingContext_children between
+	BindingContext[0..1] role xxx_BindingContext_children_src
+	BindingContext[*] role children
+end
+
+composition xxx_BindingTable_bindings between
+	BindingTable[0..1] role xxx_BindingTable_bindings_src
+	KeyBinding[*] role bindings
+end
+
+association xxx_BindingTable_bindingContext between
+	BindingTable[*] role xxx_BindingTable_bindingContext_src
+	BindingContext[1] role bindingContext
+end
+
+composition xxx_Command_parameters between
+	Command[0..1] role xxx_Command_parameters_src
+	CommandParameter[*] role parameters
+end
+
+association xxx_Command_category between
+	Command[*] role xxx_Command_category_src
+	Category[0..1] role category
+end
+
+association xxx_Handler_command between
+	Handler[*] role xxx_Handler_command_src
+	Command[1] role command
+end
+
+composition xxx_HandlerContainer_handlers between
+	HandlerContainer[0..1] role xxx_HandlerContainer_handlers_src
+	Handler[*] role handlers
+end
+
+association xxx_KeyBinding_command between
+	KeyBinding[*] role xxx_KeyBinding_command_src
+	Command[1] role command
+end
+
+composition xxx_KeyBinding_parameters between
+	KeyBinding[0..1] role xxx_KeyBinding_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Context_properties between
+	Context[0..1] role xxx_Context_properties_src
+	StringToStringMap[*] role properties
+end
+
+
+association xxx_UIElement_curSharedRef between
+	UIElement[*] role xxx_UIElement_curSharedRef_src
+	Placeholder[0..1] role curSharedRef
+end
+
+composition xxx_UIElement_visibleWhen between
+	UIElement[*] role xxx_UIElement_visibleWhen_src
+	Expression[0..1] role visibleWhen
+end
+
+
+composition xxx_SnippetContainer_snippets between
+	SnippetContainer[0..1] role xxx_SnippetContainer_snippets_src
+	UIElement[*] role snippets
+end
+
+association xxx_HandledItem_command between
+	HandledItem[*] role xxx_HandledItem_command_src
+	Command[0..1] role command
+end
+
+composition xxx_HandledItem_parameters between
+	HandledItem[0..1] role xxx_HandledItem_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_ToolItem_menu between
+	ToolItem[*] role xxx_ToolItem_menu_src
+	Menu[0..1] role menu
+end
+
+composition xxx_MenuContributions_menuContributions between
+	MenuContributions[0..1] role xxx_MenuContributions_menuContributions_src
+	MenuContribution[*] role menuContributions
+end
+
+composition xxx_ToolBarContributions_toolBarContributions between
+	ToolBarContributions[0..1] role xxx_ToolBarContributions_toolBarContributions_src
+	ToolBarContribution[*] role toolBarContributions
+end
+
+composition xxx_TrimContributions_trimContributions between
+	TrimContributions[0..1] role xxx_TrimContributions_trimContributions_src
+	TrimContribution[*] role trimContributions
+end
+
+composition xxx_Part_menus between
+	Part[0..1] role xxx_Part_menus_src
+	Menu[*] role menus
+end
+
+composition xxx_Part_toolbar between
+	Part[*] role xxx_Part_toolbar_src
+	ToolBar[0..1] role toolbar
+end
+
+composition xxx_Window_mainMenu between
+	Window[*] role xxx_Window_mainMenu_src
+	Menu[0..1] role mainMenu
+end
+
+composition xxx_Window_windows between
+	Window[0..1] role xxx_Window_windows_src
+	Window[*] role windows
+end
+
+composition xxx_Window_sharedElements between
+	Window[0..1] role xxx_Window_sharedElements_src
+	UIElement[*] role sharedElements
+end
+
+composition xxx_TrimmedWindow_trimBars between
+	TrimmedWindow[0..1] role xxx_TrimmedWindow_trimBars_src
+	TrimBar[*] role trimBars
+end
+
+association xxx_Placeholder_ref between
+	Placeholder[*] role xxx_Placeholder_ref_src
+	UIElement[1] role ref
+end
+
+composition xxx_Perspective_windows between
+	Perspective[0..1] role xxx_Perspective_windows_src
+	Window[*] role windows
+end
+
+composition xxx_PartDescriptor_menus between
+	PartDescriptor[0..1] role xxx_PartDescriptor_menus_src
+	Menu[*] role menus
+end
+
+composition xxx_PartDescriptor_toolbar between
+	PartDescriptor[*] role xxx_PartDescriptor_toolbar_src
+	ToolBar[0..1] role toolbar
+end
+
+composition xxx_PartDescriptorContainer_descriptors between
+	PartDescriptorContainer[0..1] role xxx_PartDescriptorContainer_descriptors_src
+	PartDescriptor[*] role descriptors
+end
+

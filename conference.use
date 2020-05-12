@@ -1,0 +1,80 @@
+model conference
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Conference<NamedElement
+attributes
+operations
+end
+
+abstract class ConferenceElement
+attributes
+operations
+end
+
+class Track<ConferenceElement,NamedElement
+attributes
+operations
+end
+
+class Slot<TimedElement
+attributes
+operations
+end
+
+class Talk<NamedElement
+attributes
+operations
+end
+
+class Participant<NamedElement
+attributes
+	country : String
+operations
+end
+
+class Lunch<ConferenceElement,TimedElement
+attributes
+operations
+end
+
+class TimedElement
+attributes
+	hour : Integer
+	minute : Integer
+operations
+end
+
+composition xxx_Conference_elements between
+	Conference[0..1] role xxx_Conference_elements_src
+	ConferenceElement[*] role elements
+end
+
+association xxx_Conference_organizers between
+	Conference[0..1] role xxx_Conference_organizers_src
+	Participant[1..*] role organizers
+end
+
+composition xxx_Conference_speakers between
+	Conference[0..1] role xxx_Conference_speakers_src
+	Participant[1..*] role speakers
+end
+
+composition xxx_Track_slots between
+	Track[0..1] role xxx_Track_slots_src
+	Slot[*] role slots
+end
+
+composition xxx_Slot_talk between
+	Slot[*] role xxx_Slot_talk_src
+	Talk[1] role talk
+end
+
+association xxx_Talk_presenter between
+	Talk[*] role xxx_Talk_presenter_src
+	Participant[1] role presenter
+end
+

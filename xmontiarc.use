@@ -1,0 +1,131 @@
+model xmontiarc
+enum DataType{
+default
+}
+
+class ComponentType
+attributes
+	name : String
+	behavior : String
+operations
+end
+
+abstract class Port
+attributes
+	type : DataType
+	name : String
+operations
+end
+
+class IncomingPort<Port
+attributes
+operations
+end
+
+class OutgoingPort<Port
+attributes
+	initialValue : String
+operations
+end
+
+abstract class Connector
+attributes
+operations
+end
+
+class IntermediateConnector<Connector
+attributes
+operations
+end
+
+class IncomingConnector<Connector
+attributes
+operations
+end
+
+class OutgoingConnector<Connector
+attributes
+operations
+end
+
+class Subcomponent
+attributes
+	name : String
+operations
+end
+
+composition xxx_ComponentType_connectors between
+	ComponentType[0..1] role xxx_ComponentType_connectors_src
+	Connector[*] role connectors
+end
+
+composition xxx_ComponentType_subcomponents between
+	ComponentType[0..1] role xxx_ComponentType_subcomponents_src
+	Subcomponent[*] role subcomponents
+end
+
+composition xxx_ComponentType_incomingPorts between
+	ComponentType[0..1] role xxx_ComponentType_incomingPorts_src
+	IncomingPort[*] role incomingPorts
+end
+
+composition xxx_ComponentType_outgoingPorts between
+	ComponentType[0..1] role xxx_ComponentType_outgoingPorts_src
+	OutgoingPort[*] role outgoingPorts
+end
+
+association xxx_Connector_parent between
+	Connector[*] role xxx_Connector_parent_src
+	ComponentType[0..1] role parent
+end
+
+association xxx_IntermediateConnector_source between
+	IntermediateConnector[*] role xxx_IntermediateConnector_source_src
+	OutgoingPort[1] role source
+end
+
+association xxx_IntermediateConnector_target between
+	IntermediateConnector[*] role xxx_IntermediateConnector_target_src
+	IncomingPort[1] role target
+end
+
+association xxx_IncomingConnector_source between
+	IncomingConnector[*] role xxx_IncomingConnector_source_src
+	IncomingPort[1] role source
+end
+
+association xxx_IncomingConnector_target between
+	IncomingConnector[*] role xxx_IncomingConnector_target_src
+	IncomingPort[1] role target
+end
+
+association xxx_OutgoingConnector_source between
+	OutgoingConnector[*] role xxx_OutgoingConnector_source_src
+	OutgoingPort[1] role source
+end
+
+association xxx_OutgoingConnector_target between
+	OutgoingConnector[*] role xxx_OutgoingConnector_target_src
+	OutgoingPort[1] role target
+end
+
+association xxx_Subcomponent_type between
+	Subcomponent[*] role xxx_Subcomponent_type_src
+	ComponentType[1] role type
+end
+
+composition xxx_Subcomponent_incomingPorts between
+	Subcomponent[0..1] role xxx_Subcomponent_incomingPorts_src
+	IncomingPort[*] role incomingPorts
+end
+
+association xxx_Subcomponent_parent between
+	Subcomponent[*] role xxx_Subcomponent_parent_src
+	ComponentType[0..1] role parent
+end
+
+composition xxx_Subcomponent_outgoingPorts between
+	Subcomponent[0..1] role xxx_Subcomponent_outgoingPorts_src
+	OutgoingPort[*] role outgoingPorts
+end
+

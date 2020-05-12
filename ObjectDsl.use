@@ -1,0 +1,80 @@
+model objectDsl
+class NamespaceDefinition
+attributes
+operations
+end
+
+class NamespaceDeclaration
+attributes
+	name : String
+operations
+end
+
+class ImportDeclaration
+attributes
+operations
+end
+
+class Import
+attributes
+	qname : String
+operations
+end
+
+class Object
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+operations
+end
+
+class DataType
+attributes
+operations
+end
+
+class ObjectReference<DataType
+attributes
+operations
+end
+
+composition xxx_NamespaceDefinition_namespaceDeclaration between
+	NamespaceDefinition[*] role xxx_NamespaceDefinition_namespaceDeclaration_src
+	NamespaceDeclaration[0..1] role namespaceDeclaration
+end
+
+composition xxx_NamespaceDefinition_importDeclaration between
+	NamespaceDefinition[*] role xxx_NamespaceDefinition_importDeclaration_src
+	ImportDeclaration[0..1] role importDeclaration
+end
+
+composition xxx_NamespaceDefinition_object between
+	NamespaceDefinition[*] role xxx_NamespaceDefinition_object_src
+	Object[0..1] role object
+end
+
+composition xxx_ImportDeclaration_imports between
+	ImportDeclaration[0..1] role xxx_ImportDeclaration_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Object_attributes_ between
+	Object[0..1] role xxx_Object_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Attribute_dataType between
+	Attribute[*] role xxx_Attribute_dataType_src
+	DataType[0..1] role dataType
+end
+
+association xxx_ObjectReference_object between
+	ObjectReference[*] role xxx_ObjectReference_object_src
+	Object[0..1] role object
+end
+

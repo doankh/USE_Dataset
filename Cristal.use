@@ -1,0 +1,86 @@
+model Cristal
+class Condition
+attributes
+operations
+end
+
+class CompositeParDef<PartDefinition
+attributes
+operations
+end
+
+class ElementaryPartDef<PartDefinition
+attributes
+operations
+end
+
+class ElementaryActDef<ActivityDefinition
+attributes
+operations
+end
+
+class CompositeActDef<ActivityDefinition
+attributes
+operations
+end
+
+class ActCompositeMember
+attributes
+operations
+end
+
+class ActivityDefinition
+attributes
+operations
+end
+
+class PartDefinition
+attributes
+operations
+end
+
+class PartCompositeMember
+attributes
+operations
+end
+
+association xxx_Condition_partCompositeMembers between
+	Condition[0..1] role xxx_Condition_partCompositeMembers_src
+	PartCompositeMember[*] role partCompositeMembers
+end
+
+association xxx_Condition_actCompositeMembers between
+	Condition[0..1] role xxx_Condition_actCompositeMembers_src
+	ActCompositeMember[*] role actCompositeMembers
+end
+
+composition xxx_CompositeParDef_partCompositeMember between
+	CompositeParDef[0..1] role xxx_CompositeParDef_partCompositeMember_src
+	PartCompositeMember[*] role partCompositeMember
+end
+
+composition xxx_CompositeActDef_actCompositeMembers between
+	CompositeActDef[0..1] role xxx_CompositeActDef_actCompositeMembers_src
+	ActCompositeMember[*] role actCompositeMembers
+end
+
+association xxx_ActCompositeMember_activityDefinitions between
+	ActCompositeMember[0..1] role xxx_ActCompositeMember_activityDefinitions_src
+	ActivityDefinition[*] role activityDefinitions
+end
+
+association xxx_ActivityDefinition_actCompositeMember between
+	ActivityDefinition[*] role xxx_ActivityDefinition_actCompositeMember_src
+	ActCompositeMember[1] role actCompositeMember
+end
+
+association xxx_PartDefinition_partCompositeMembers between
+	PartDefinition[0..1] role xxx_PartDefinition_partCompositeMembers_src
+	PartCompositeMember[*] role partCompositeMembers
+end
+
+association xxx_PartCompositeMember_partDefinitions between
+	PartCompositeMember[*] role xxx_PartCompositeMember_partDefinitions_src
+	PartDefinition[1] role partDefinitions
+end
+

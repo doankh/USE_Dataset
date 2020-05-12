@@ -1,0 +1,241 @@
+model logging
+enum JobState{
+default
+}
+
+enum ViewEventType{
+default
+}
+
+class ModelLog<Log
+attributes
+operations
+end
+
+abstract class Event
+attributes
+	time : Integer
+operations
+end
+
+abstract class TagEvent<ModelEvent
+attributes
+	tagName : String
+operations
+end
+
+abstract class WaypointEvent<ModelEvent
+attributes
+operations
+end
+
+class LogFile
+attributes
+operations
+end
+
+class WaypointState
+attributes
+	waypointType : String
+	tagNames : String
+operations
+end
+
+class UILog<Log
+attributes
+operations
+end
+
+class CurrentWaypoints<Log
+attributes
+operations
+end
+
+class WaypointAttribute
+attributes
+	name : String
+	value : String
+operations
+end
+
+class NewWaypointEvent<WaypointEvent
+attributes
+operations
+end
+
+class DeletedWaypointEvent<WaypointEvent
+attributes
+operations
+end
+
+class WaypointChangeEvent<WaypointEvent
+attributes
+operations
+end
+
+class TagNameChangeEvent<TagEvent
+attributes
+	oldName : String
+operations
+end
+
+class WaypointTagNameChangeEvent<WaypointEvent
+attributes
+	newTagName : String
+	oldTagName : String
+operations
+end
+
+class WaypointTagsChangedEvent<WaypointEvent
+attributes
+	oldTags : String
+operations
+end
+
+class TagWaypointsChangedEvent<TagEvent
+attributes
+operations
+end
+
+class NewTagEvent<TagEvent
+attributes
+operations
+end
+
+class DeletedTagEvent<TagEvent
+attributes
+operations
+end
+
+class JobEvent<ModelEvent
+attributes
+	state : JobState
+	name : String
+operations
+end
+
+abstract class Log
+attributes
+	uid : Integer
+	date : String
+	uname : String
+	country : String
+	language : String
+	session : Integer
+operations
+end
+
+class NavigateEvent<UIEvent
+attributes
+operations
+end
+
+class ViewEvent<UIEvent
+attributes
+	type : ViewEventType
+	viewid : String
+	filterString : String
+operations
+end
+
+class FiltersChangedEvent<UIEvent
+attributes
+	visible : String
+	hidden : String
+operations
+end
+
+abstract class UIEvent<Event
+attributes
+	hierarchyOn : Boolean
+operations
+end
+
+abstract class ModelEvent<Event
+attributes
+operations
+end
+
+class ModelRecordStartEvent<ModelEvent
+attributes
+operations
+end
+
+class UIRecordStartEvent<UIEvent
+attributes
+operations
+end
+
+class TaskNavigateEvent<UIEvent
+attributes
+	description : String
+	line : Integer
+	resource : String
+operations
+end
+
+composition xxx_ModelLog_events between
+	ModelLog[0..1] role xxx_ModelLog_events_src
+	ModelEvent[*] role events
+end
+
+composition xxx_WaypointEvent_waypoint between
+	WaypointEvent[*] role xxx_WaypointEvent_waypoint_src
+	WaypointState[1] role waypoint
+end
+
+composition xxx_LogFile_modelLog between
+	LogFile[*] role xxx_LogFile_modelLog_src
+	ModelLog[0..1] role modelLog
+end
+
+composition xxx_LogFile_uiLog between
+	LogFile[0..1] role xxx_LogFile_uiLog_src
+	UILog[*] role uiLog
+end
+
+composition xxx_LogFile_currentWaypoints between
+	LogFile[*] role xxx_LogFile_currentWaypoints_src
+	CurrentWaypoints[0..1] role currentWaypoints
+end
+
+composition xxx_WaypointState_attributes_ between
+	WaypointState[0..1] role xxx_WaypointState_attributes__src
+	WaypointAttribute[1..*] role attributes_
+end
+
+composition xxx_UILog_events between
+	UILog[0..1] role xxx_UILog_events_src
+	UIEvent[*] role events
+end
+
+composition xxx_CurrentWaypoints_waypoint between
+	CurrentWaypoints[0..1] role xxx_CurrentWaypoints_waypoint_src
+	WaypointState[*] role waypoint
+end
+
+composition xxx_WaypointChangeEvent_newAttributes between
+	WaypointChangeEvent[0..1] role xxx_WaypointChangeEvent_newAttributes_src
+	WaypointAttribute[*] role newAttributes
+end
+
+composition xxx_WaypointChangeEvent_oldAttributes between
+	WaypointChangeEvent[0..1] role xxx_WaypointChangeEvent_oldAttributes_src
+	WaypointAttribute[*] role oldAttributes
+end
+
+composition xxx_TagWaypointsChangedEvent_oldWaypoint between
+	TagWaypointsChangedEvent[0..1] role xxx_TagWaypointsChangedEvent_oldWaypoint_src
+	WaypointState[*] role oldWaypoint
+end
+
+composition xxx_TagWaypointsChangedEvent_newWaypoint between
+	TagWaypointsChangedEvent[0..1] role xxx_TagWaypointsChangedEvent_newWaypoint_src
+	WaypointState[*] role newWaypoint
+end
+
+composition xxx_NavigateEvent_waypoint between
+	NavigateEvent[*] role xxx_NavigateEvent_waypoint_src
+	WaypointState[1] role waypoint
+end
+

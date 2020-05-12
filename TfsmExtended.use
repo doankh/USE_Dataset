@@ -1,0 +1,164 @@
+model tfsmextended
+class TFSM<NamedElement
+attributes
+operations
+	init()
+end
+
+class State<NamedElement
+attributes
+operations
+	onEnter()
+	onLeave()
+end
+
+class Transition<NamedElement
+attributes
+	action : String
+operations
+	fire()
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Guard<NamedElement
+attributes
+operations
+end
+
+class TemporalGuard<Guard
+attributes
+	afterDuration : Integer
+operations
+end
+
+class EventGuard<Guard
+attributes
+operations
+end
+
+class FSMEvent<NamedElement
+attributes
+	isTriggered : Boolean
+operations
+	trigger()
+	unTrigger()
+end
+
+class FSMClock<NamedElement
+attributes
+	numberOfTicks : Integer
+operations
+	ticks():Integer
+end
+
+class TimedSystem<NamedElement
+attributes
+operations
+end
+
+class EvaluateGuard<Guard
+attributes
+	condition : String
+operations
+end
+
+composition xxx_TFSM_ownedStates between
+	TFSM[0..1] role xxx_TFSM_ownedStates_src
+	State[*] role ownedStates
+end
+
+association xxx_TFSM_initialState between
+	TFSM[*] role xxx_TFSM_initialState_src
+	State[1] role initialState
+end
+
+composition xxx_TFSM_localEvents between
+	TFSM[0..1] role xxx_TFSM_localEvents_src
+	FSMEvent[*] role localEvents
+end
+
+composition xxx_TFSM_localClock between
+	TFSM[*] role xxx_TFSM_localClock_src
+	FSMClock[1] role localClock
+end
+
+composition xxx_TFSM_ownedTransitions between
+	TFSM[0..1] role xxx_TFSM_ownedTransitions_src
+	Transition[*] role ownedTransitions
+end
+
+association xxx_TFSM_currentState between
+	TFSM[*] role xxx_TFSM_currentState_src
+	State[0..1] role currentState
+end
+
+association xxx_State_owningFSM between
+	State[*] role xxx_State_owningFSM_src
+	TFSM[1] role owningFSM
+end
+
+association xxx_State_outgoingTransitions between
+	State[0..1] role xxx_State_outgoingTransitions_src
+	Transition[*] role outgoingTransitions
+end
+
+association xxx_State_incomingTransitions between
+	State[0..1] role xxx_State_incomingTransitions_src
+	Transition[*] role incomingTransitions
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	State[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+composition xxx_Transition_ownedGuard between
+	Transition[*] role xxx_Transition_ownedGuard_src
+	Guard[1] role ownedGuard
+end
+
+association xxx_Transition_generatedEvents between
+	Transition[0..1] role xxx_Transition_generatedEvents_src
+	FSMEvent[*] role generatedEvents
+end
+
+association xxx_TemporalGuard_onClock between
+	TemporalGuard[*] role xxx_TemporalGuard_onClock_src
+	FSMClock[1] role onClock
+end
+
+association xxx_EventGuard_triggeringEvent between
+	EventGuard[*] role xxx_EventGuard_triggeringEvent_src
+	FSMEvent[1] role triggeringEvent
+end
+
+association xxx_FSMEvent_sollicitingTransitions between
+	FSMEvent[0..1] role xxx_FSMEvent_sollicitingTransitions_src
+	Transition[*] role sollicitingTransitions
+end
+
+composition xxx_TimedSystem_tfsms between
+	TimedSystem[0..1] role xxx_TimedSystem_tfsms_src
+	TFSM[*] role tfsms
+end
+
+composition xxx_TimedSystem_globalClocks between
+	TimedSystem[0..1] role xxx_TimedSystem_globalClocks_src
+	FSMClock[*] role globalClocks
+end
+
+composition xxx_TimedSystem_globalEvents between
+	TimedSystem[0..1] role xxx_TimedSystem_globalEvents_src
+	FSMEvent[*] role globalEvents
+end
+

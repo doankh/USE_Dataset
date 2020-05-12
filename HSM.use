@@ -1,0 +1,74 @@
+model HSM
+class StateMachine
+attributes
+	name : String
+operations
+end
+
+class Transition
+attributes
+	label : String
+operations
+end
+
+abstract class AbstractState
+attributes
+	name : String
+operations
+end
+
+class InitialState<AbstractState
+attributes
+operations
+end
+
+class RegularState<AbstractState
+attributes
+operations
+end
+
+class CompositeState<AbstractState
+attributes
+operations
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_StateMachine_states_ between
+	StateMachine[0..1] role xxx_StateMachine_states__src
+	AbstractState[*] role states_
+end
+
+association xxx_Transition_stateMachine between
+	Transition[*] role xxx_Transition_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	AbstractState[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	AbstractState[1] role target
+end
+
+association xxx_AbstractState_stateMachine between
+	AbstractState[*] role xxx_AbstractState_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+association xxx_AbstractState_compositeState between
+	AbstractState[*] role xxx_AbstractState_compositeState_src
+	CompositeState[0..1] role compositeState
+end
+
+association xxx_CompositeState_states_ between
+	CompositeState[0..1] role xxx_CompositeState_states__src
+	AbstractState[*] role states_
+end
+

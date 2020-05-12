@@ -1,0 +1,95 @@
+model Grammar
+enum Multiplicity{
+default
+}
+
+abstract class Grammar<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class NonTerminalRule<Rule
+attributes
+operations
+end
+
+class TerminalRule<Rule
+attributes
+operations
+end
+
+abstract class Rule<NamedElement
+attributes
+operations
+end
+
+class TerminalMacro<Rule
+attributes
+operations
+end
+
+class CharClass<MacroToken
+attributes
+	value : String
+operations
+end
+
+class Literal<MacroToken
+attributes
+	value : String
+operations
+end
+
+abstract class MacroToken<Token
+attributes
+operations
+end
+
+abstract class Occurrence
+attributes
+	multiplicity : Multiplicity
+operations
+end
+
+class GrammarDetails<Grammar
+attributes
+	shouldLexerUseReflection : Boolean
+operations
+end
+
+abstract class Token<Occurrence
+attributes
+operations
+end
+
+class MacroRef<Token
+attributes
+operations
+end
+
+composition xxx_Grammar_rules between
+	Grammar[0..1] role xxx_Grammar_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_TerminalRule_tokens between
+	TerminalRule[0..1] role xxx_TerminalRule_tokens_src
+	Token[1..*] role tokens
+end
+
+composition xxx_TerminalMacro_macro between
+	TerminalMacro[*] role xxx_TerminalMacro_macro_src
+	MacroToken[1] role macro
+end
+
+association xxx_MacroRef_to between
+	MacroRef[*] role xxx_MacroRef_to_src
+	TerminalMacro[1] role to
+end
+

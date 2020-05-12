@@ -1,0 +1,166 @@
+model emf
+enum YesNoDef{
+default
+}
+
+enum CONNECT_DIRECTIVE{
+default
+}
+
+enum HG_CLASS{
+default
+}
+
+class PMConfig
+attributes
+	name : String
+	model_ : String
+operations
+end
+
+class VoltageDomain
+attributes
+	name : String
+	separateMemPMode : Boolean
+	memGroup : String
+	hgClass : HG_CLASS
+	jupiterClass : Boolean
+operations
+end
+
+class VoltageSource
+attributes
+	pin : String
+	pdPortDefault : String
+	name : String
+operations
+end
+
+class PowerDomain
+attributes
+	name : String
+	separateMemPMode : YesNoDef
+	memGroup : String
+	hgClass : HG_CLASS
+operations
+end
+
+class PDSupplyDirective
+attributes
+	pdPort : String
+	default : Boolean
+operations
+end
+
+class PDomainInstance
+attributes
+	instance : String
+	group : String
+	instanceName : String
+	isLeaf : String
+	separateMemPMode : YesNoDef
+	memGroup : String
+operations
+end
+
+class PowerSourceInstance
+attributes
+	model_ : String
+	name : String
+	connectInputVoltage : CONNECT_DIRECTIVE
+	connectControl : CONNECT_DIRECTIVE
+	connectPrefix : String
+operations
+end
+
+class PowerSourcePin<VoltageSource
+attributes
+	outputPort : String
+operations
+end
+
+composition xxx_PMConfig_vdomains between
+	PMConfig[0..1] role xxx_PMConfig_vdomains_src
+	VoltageDomain[*] role vdomains
+end
+
+association xxx_VoltageDomain_voltageSrcs between
+	VoltageDomain[0..1] role xxx_VoltageDomain_voltageSrcs_src
+	VoltageSource[*] role voltageSrcs
+end
+
+composition xxx_VoltageDomain_pdomains between
+	VoltageDomain[0..1] role xxx_VoltageDomain_pdomains_src
+	PowerDomain[*] role pdomains
+end
+
+composition xxx_VoltageDomain_powerSources between
+	VoltageDomain[0..1] role xxx_VoltageDomain_powerSources_src
+	PowerSourceInstance[*] role powerSources
+end
+
+association xxx_VoltageDomain_config between
+	VoltageDomain[*] role xxx_VoltageDomain_config_src
+	PMConfig[1] role config
+end
+
+association xxx_VoltageSource_voltageDomain between
+	VoltageSource[*] role xxx_VoltageSource_voltageDomain_src
+	VoltageDomain[1] role voltageDomain
+end
+
+association xxx_VoltageSource_defaultSuppliedPDomains between
+	VoltageSource[0..1] role xxx_VoltageSource_defaultSuppliedPDomains_src
+	PowerDomain[*] role defaultSuppliedPDomains
+end
+
+composition xxx_PowerDomain_supplies between
+	PowerDomain[0..1] role xxx_PowerDomain_supplies_src
+	PDSupplyDirective[*] role supplies
+end
+
+association xxx_PowerDomain_vdomain between
+	PowerDomain[*] role xxx_PowerDomain_vdomain_src
+	VoltageDomain[1] role vdomain
+end
+
+composition xxx_PowerDomain_instances between
+	PowerDomain[0..1] role xxx_PowerDomain_instances_src
+	PDomainInstance[*] role instances
+end
+
+association xxx_PowerDomain_defaultSupplies between
+	PowerDomain[0..1] role xxx_PowerDomain_defaultSupplies_src
+	PDSupplyDirective[*] role defaultSupplies
+end
+
+association xxx_PDSupplyDirective_driver between
+	PDSupplyDirective[*] role xxx_PDSupplyDirective_driver_src
+	VoltageSource[1] role driver
+end
+
+association xxx_PDomainInstance_pdomain between
+	PDomainInstance[*] role xxx_PDomainInstance_pdomain_src
+	PowerDomain[1] role pdomain
+end
+
+composition xxx_PowerSourceInstance_pins between
+	PowerSourceInstance[0..1] role xxx_PowerSourceInstance_pins_src
+	PowerSourcePin[*] role pins
+end
+
+association xxx_PowerSourceInstance_vdomain between
+	PowerSourceInstance[*] role xxx_PowerSourceInstance_vdomain_src
+	VoltageDomain[0..1] role vdomain
+end
+
+association xxx_PowerSourceInstance_defaultSuppliedPDomains between
+	PowerSourceInstance[0..1] role xxx_PowerSourceInstance_defaultSuppliedPDomains_src
+	PowerDomain[*] role defaultSuppliedPDomains
+end
+
+association xxx_PowerSourcePin_powerInstance between
+	PowerSourcePin[*] role xxx_PowerSourcePin_powerInstance_src
+	PowerSourceInstance[1] role powerInstance
+end
+

@@ -1,0 +1,75 @@
+model viewers
+class ListViewerInput
+attributes
+operations
+end
+
+class ListViewerElement
+attributes
+	label : String
+operations
+end
+
+class TableViewerInput
+attributes
+operations
+end
+
+class TableViewerElement
+attributes
+	name : String
+	label : String
+operations
+end
+
+class TreeViewerInput
+attributes
+operations
+end
+
+class TreeViewerElement
+attributes
+	label : String
+operations
+end
+
+class ViewerInputs
+attributes
+operations
+end
+
+composition xxx_ListViewerInput_elements between
+	ListViewerInput[0..1] role xxx_ListViewerInput_elements_src
+	ListViewerElement[*] role elements
+end
+
+composition xxx_TableViewerInput_elements between
+	TableViewerInput[0..1] role xxx_TableViewerInput_elements_src
+	TableViewerElement[*] role elements
+end
+
+composition xxx_TreeViewerInput_elements between
+	TreeViewerInput[0..1] role xxx_TreeViewerInput_elements_src
+	TreeViewerElement[*] role elements
+end
+
+composition xxx_TreeViewerElement_children between
+	TreeViewerElement[0..1] role xxx_TreeViewerElement_children_src
+	TreeViewerElement[*] role children
+end
+
+composition xxx_ViewerInputs_listInputs between
+	ViewerInputs[0..1] role xxx_ViewerInputs_listInputs_src
+	ListViewerInput[*] role listInputs
+end
+
+composition xxx_ViewerInputs_tableInputs between
+	ViewerInputs[0..1] role xxx_ViewerInputs_tableInputs_src
+	TableViewerInput[*] role tableInputs
+end
+
+composition xxx_ViewerInputs_treeInputs between
+	ViewerInputs[0..1] role xxx_ViewerInputs_treeInputs_src
+	TreeViewerInput[*] role treeInputs
+end
+

@@ -1,0 +1,103 @@
+model SeminarSchedulingSystem
+class SeminarSchedulingSystem
+attributes
+operations
+end
+
+class Presenter
+attributes
+	name : String
+operations
+end
+
+class Seminar
+attributes
+	title : String
+operations
+end
+
+class Offering
+attributes
+	is_cancelled : Boolean
+operations
+end
+
+class Date
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+operations
+end
+
+class Attendee
+attributes
+	name : String
+operations
+end
+
+association xxx_SeminarSchedulingSystem_presenter between
+	SeminarSchedulingSystem[0..1] role xxx_SeminarSchedulingSystem_presenter_src
+	Presenter[*] role presenter
+end
+
+association xxx_SeminarSchedulingSystem_seminar between
+	SeminarSchedulingSystem[0..1] role xxx_SeminarSchedulingSystem_seminar_src
+	Seminar[*] role seminar
+end
+
+association xxx_Presenter_seminarSchedulingSystem between
+	Presenter[*] role xxx_Presenter_seminarSchedulingSystem_src
+	SeminarSchedulingSystem[1] role seminarSchedulingSystem
+end
+
+association xxx_Presenter_qualifiedFor between
+	Presenter[0..1] role xxx_Presenter_qualifiedFor_src
+	Seminar[*] role qualifiedFor
+end
+
+association xxx_Presenter_offering between
+	Presenter[0..1] role xxx_Presenter_offering_src
+	Offering[*] role offering
+end
+
+association xxx_Seminar_seminarSchedulingSystem between
+	Seminar[*] role xxx_Seminar_seminarSchedulingSystem_src
+	SeminarSchedulingSystem[1] role seminarSchedulingSystem
+end
+
+association xxx_Seminar_qualified between
+	Seminar[0..1] role xxx_Seminar_qualified_src
+	Presenter[*] role qualified
+end
+
+association xxx_Seminar_offering between
+	Seminar[0..1] role xxx_Seminar_offering_src
+	Offering[*] role offering
+end
+
+association xxx_Offering_date between
+	Offering[*] role xxx_Offering_date_src
+	Date[1] role date
+end
+
+association xxx_Offering_attendee between
+	Offering[0..1] role xxx_Offering_attendee_src
+	Attendee[*] role attendee
+end
+
+association xxx_Offering_presenter between
+	Offering[*] role xxx_Offering_presenter_src
+	Presenter[0..1] role presenter
+end
+
+association xxx_Offering_seminar between
+	Offering[*] role xxx_Offering_seminar_src
+	Seminar[0..1] role seminar
+end
+
+association xxx_Attendee_offering between
+	Attendee[0..1] role xxx_Attendee_offering_src
+	Offering[*] role offering
+end
+

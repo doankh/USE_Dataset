@@ -1,0 +1,73 @@
+model KSecurityModel
+class KSecurityRoot
+attributes
+operations
+end
+
+class KSecurityRule
+attributes
+	kElementQuery : String
+	primitiveTypes : String
+	endValidity : String
+operations
+end
+
+class Primitives
+attributes
+operations
+end
+
+class KPublicKey
+attributes
+	key : String
+	endValidity : String
+operations
+end
+
+class SignedModel
+attributes
+	model_ : String
+operations
+end
+
+class KSignature
+attributes
+	key : String
+operations
+end
+
+composition xxx_KSecurityRoot_no_authorized between
+	KSecurityRoot[0..1] role xxx_KSecurityRoot_no_authorized_src
+	KSecurityRule[*] role no_authorized
+end
+
+composition xxx_KSecurityRoot_authorized between
+	KSecurityRoot[0..1] role xxx_KSecurityRoot_authorized_src
+	KSecurityRule[*] role authorized
+end
+
+association xxx_KSecurityRule_EReference0 between
+	KSecurityRule[*] role xxx_KSecurityRule_EReference0_src
+	KSecurityRoot[0..1] role EReference0
+end
+
+association xxx_KSecurityRule_authorized between
+	KSecurityRule[0..1] role xxx_KSecurityRule_authorized_src
+	KSecurityRoot[*] role authorized
+end
+
+association xxx_KSecurityRule_allowed between
+	KSecurityRule[0..1] role xxx_KSecurityRule_allowed_src
+	KPublicKey[*] role allowed
+end
+
+association xxx_KSecurityRule_acceptBinding between
+	KSecurityRule[0..1] role xxx_KSecurityRule_acceptBinding_src
+	KSecurityRule[*] role acceptBinding
+end
+
+association xxx_SignedModel_signed between
+	SignedModel[0..1] role xxx_SignedModel_signed_src
+	KSignature[1..*] role signed
+end
+

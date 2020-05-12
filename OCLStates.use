@@ -1,0 +1,84 @@
+model oclstates
+class Module
+attributes
+	name : String
+operations
+end
+
+class Statemachine
+attributes
+	initial : Boolean
+	name : String
+	value : Integer
+operations
+end
+
+class Event
+attributes
+	name : String
+operations
+end
+
+class State
+attributes
+	initial : Boolean
+	name : String
+operations
+end
+
+class SimpleState<State
+attributes
+	value : Integer
+operations
+end
+
+class CompoundState<State
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+composition xxx_Module_machines between
+	Module[0..1] role xxx_Module_machines_src
+	Statemachine[*] role machines
+end
+
+composition xxx_Statemachine_events between
+	Statemachine[0..1] role xxx_Statemachine_events_src
+	Event[*] role events
+end
+
+composition xxx_Statemachine_states_ between
+	Statemachine[0..1] role xxx_Statemachine_states__src
+	State[*] role states_
+end
+
+composition xxx_State_transitions_ between
+	State[0..1] role xxx_State_transitions__src
+	Transition[*] role transitions_
+end
+
+association xxx_State_statemachine between
+	State[*] role xxx_State_statemachine_src
+	Statemachine[0..1] role statemachine
+end
+
+association xxx_CompoundState_machine between
+	CompoundState[*] role xxx_CompoundState_machine_src
+	Statemachine[0..1] role machine
+end
+
+association xxx_Transition_event between
+	Transition[*] role xxx_Transition_event_src
+	Event[0..1] role event
+end
+
+association xxx_Transition_state between
+	Transition[*] role xxx_Transition_state_src
+	State[0..1] role state
+end
+

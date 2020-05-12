@@ -1,0 +1,241 @@
+model com_hassanpur_cmpe235_adtouch_MainActivity2
+class MainActivity
+attributes
+operations
+end
+
+class CaptureActivity
+attributes
+operations
+end
+
+class DisplayScanResultActivity
+attributes
+operations
+end
+
+class DisplayScanResultActionBar
+attributes
+operations
+end
+
+class DisplayAdActivity
+attributes
+operations
+end
+
+class ImageRequest
+attributes
+operations
+end
+
+class ImageRequestTask
+attributes
+operations
+end
+
+class AudioPlayerActivty
+attributes
+operations
+end
+
+class JSONRequestThread
+attributes
+operations
+end
+
+class MapLocationActivity
+attributes
+operations
+end
+
+class MapItemizedOverLay
+attributes
+operations
+end
+
+class VideoPlayerActivity
+attributes
+operations
+end
+
+class Utility
+attributes
+operations
+end
+
+class LoginActivity
+attributes
+operations
+end
+
+class AuthenticationResult
+attributes
+operations
+end
+
+class AuthenticationRequestThread
+attributes
+operations
+end
+
+class SignUpActivity
+attributes
+operations
+end
+
+class RegistrationRequestThread
+attributes
+operations
+end
+
+class RegistrationResult
+attributes
+operations
+end
+
+class DebugActivity
+attributes
+operations
+end
+
+association xxx_MainActivity_captureActivity between
+	MainActivity[*] role xxx_MainActivity_captureActivity_src
+	CaptureActivity[1] role captureActivity
+end
+
+association xxx_MainActivity_displayScanResultActivity between
+	MainActivity[*] role xxx_MainActivity_displayScanResultActivity_src
+	DisplayScanResultActivity[1] role displayScanResultActivity
+end
+
+association xxx_MainActivity_debugActivity between
+	MainActivity[*] role xxx_MainActivity_debugActivity_src
+	DebugActivity[1] role debugActivity
+end
+
+composition xxx_DisplayScanResultActivity_displayScanResultActionBar between
+	DisplayScanResultActivity[0..1] role xxx_DisplayScanResultActivity_displayScanResultActionBar_src
+	DisplayScanResultActionBar[*] role displayScanResultActionBar
+end
+
+association xxx_DisplayScanResultActivity_displayAdActivity between
+	DisplayScanResultActivity[0..1] role xxx_DisplayScanResultActivity_displayAdActivity_src
+	DisplayAdActivity[*] role displayAdActivity
+end
+
+association xxx_DisplayScanResultActivity_loginActivity between
+	DisplayScanResultActivity[*] role xxx_DisplayScanResultActivity_loginActivity_src
+	LoginActivity[1] role loginActivity
+end
+
+association xxx_DisplayScanResultActionBar_displayScanResultActivity between
+	DisplayScanResultActionBar[*] role xxx_DisplayScanResultActionBar_displayScanResultActivity_src
+	DisplayScanResultActivity[1] role displayScanResultActivity
+end
+
+association xxx_DisplayAdActivity_imageRequest between
+	DisplayAdActivity[0..1] role xxx_DisplayAdActivity_imageRequest_src
+	ImageRequest[*] role imageRequest
+end
+
+association xxx_DisplayAdActivity_audioPlayerActivty between
+	DisplayAdActivity[*] role xxx_DisplayAdActivity_audioPlayerActivty_src
+	AudioPlayerActivty[1] role audioPlayerActivty
+end
+
+composition xxx_DisplayAdActivity_jSONRequestThread between
+	DisplayAdActivity[0..1] role xxx_DisplayAdActivity_jSONRequestThread_src
+	JSONRequestThread[*] role jSONRequestThread
+end
+
+association xxx_DisplayAdActivity_mapLocationActivity between
+	DisplayAdActivity[*] role xxx_DisplayAdActivity_mapLocationActivity_src
+	MapLocationActivity[1] role mapLocationActivity
+end
+
+association xxx_DisplayAdActivity_videoPlayerActivity between
+	DisplayAdActivity[*] role xxx_DisplayAdActivity_videoPlayerActivity_src
+	VideoPlayerActivity[1] role videoPlayerActivity
+end
+
+association xxx_DisplayAdActivity_utility between
+	DisplayAdActivity[0..1] role xxx_DisplayAdActivity_utility_src
+	Utility[*] role utility
+end
+
+association xxx_ImageRequest_imageRequestTask between
+	ImageRequest[*] role xxx_ImageRequest_imageRequestTask_src
+	ImageRequestTask[1] role imageRequestTask
+end
+
+association xxx_ImageRequestTask_imageRequest between
+	ImageRequestTask[*] role xxx_ImageRequestTask_imageRequest_src
+	ImageRequest[1] role imageRequest
+end
+
+association xxx_JSONRequestThread_displayAdActivity between
+	JSONRequestThread[*] role xxx_JSONRequestThread_displayAdActivity_src
+	DisplayAdActivity[0..1] role displayAdActivity
+end
+
+association xxx_MapLocationActivity_mapItemizedOverLay between
+	MapLocationActivity[0..1] role xxx_MapLocationActivity_mapItemizedOverLay_src
+	MapItemizedOverLay[*] role mapItemizedOverLay
+end
+
+association xxx_MapItemizedOverLay_mapLocationActivity between
+	MapItemizedOverLay[0..1] role xxx_MapItemizedOverLay_mapLocationActivity_src
+	MapLocationActivity[*] role mapLocationActivity
+end
+
+composition xxx_LoginActivity_authenticationResult between
+	LoginActivity[0..1] role xxx_LoginActivity_authenticationResult_src
+	AuthenticationResult[*] role authenticationResult
+end
+
+composition xxx_LoginActivity_signUpActivity between
+	LoginActivity[0..1] role xxx_LoginActivity_signUpActivity_src
+	SignUpActivity[*] role signUpActivity
+end
+
+association xxx_AuthenticationResult_authenticationRequestThread between
+	AuthenticationResult[0..1] role xxx_AuthenticationResult_authenticationRequestThread_src
+	AuthenticationRequestThread[*] role authenticationRequestThread
+end
+
+association xxx_AuthenticationResult_loginActivity between
+	AuthenticationResult[*] role xxx_AuthenticationResult_loginActivity_src
+	LoginActivity[1] role loginActivity
+end
+
+association xxx_AuthenticationRequestThread_authenticationResult between
+	AuthenticationRequestThread[0..1] role xxx_AuthenticationRequestThread_authenticationResult_src
+	AuthenticationResult[*] role authenticationResult
+end
+
+composition xxx_SignUpActivity_registrationRequestThread between
+	SignUpActivity[0..1] role xxx_SignUpActivity_registrationRequestThread_src
+	RegistrationRequestThread[*] role registrationRequestThread
+end
+
+composition xxx_SignUpActivity_registrationResult between
+	SignUpActivity[0..1] role xxx_SignUpActivity_registrationResult_src
+	RegistrationResult[*] role registrationResult
+end
+
+association xxx_SignUpActivity_loginActivity between
+	SignUpActivity[*] role xxx_SignUpActivity_loginActivity_src
+	LoginActivity[1] role loginActivity
+end
+
+association xxx_RegistrationRequestThread_signUpActivity between
+	RegistrationRequestThread[*] role xxx_RegistrationRequestThread_signUpActivity_src
+	SignUpActivity[1] role signUpActivity
+end
+
+association xxx_RegistrationResult_signUpActivity between
+	RegistrationResult[*] role xxx_RegistrationResult_signUpActivity_src
+	SignUpActivity[1] role signUpActivity
+end
+

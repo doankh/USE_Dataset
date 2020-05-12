@@ -1,0 +1,216 @@
+model BusinessProcessModel
+abstract class Namespace
+attributes
+operations
+end
+
+abstract class Task<Namespace
+attributes
+operations
+end
+
+abstract class DataSet<Namespace
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+abstract class DataElement<Parameter
+attributes
+operations
+end
+
+abstract class ModelElement
+attributes
+operations
+end
+
+class Flow<ModelElement
+attributes
+operations
+end
+
+class DataFlow<Flow
+attributes
+operations
+end
+
+class ControlFlow<Flow
+attributes
+operations
+end
+
+class ControlPoint<ModelElement
+attributes
+operations
+end
+
+class Input<DataElement
+attributes
+operations
+end
+
+class Output<DataElement
+attributes
+operations
+end
+
+class OutputSet<DataSet
+attributes
+operations
+end
+
+class InputSet<DataSet
+attributes
+operations
+end
+
+class Exception<Output
+attributes
+operations
+end
+
+class SimpleTask<Task
+attributes
+operations
+end
+
+class CoumpoundTask<Task
+attributes
+operations
+end
+
+class MutliTask<CoumpoundTask
+attributes
+operations
+end
+
+class InvokerTask<SimpleTask
+attributes
+operations
+end
+
+class TerminatorTask<SimpleTask
+attributes
+operations
+end
+
+class ApplicationTask<SimpleTask
+attributes
+operations
+end
+
+class Decision<ApplicationTask
+attributes
+operations
+end
+
+class Clock<ApplicationTask
+attributes
+operations
+end
+
+class SendCommunication<ApplicationTask
+attributes
+operations
+end
+
+class ReceiveCommunication<ApplicationTask
+attributes
+operations
+end
+
+class BusinessProcess<ApplicationTask
+attributes
+operations
+end
+
+composition xxx_Task_containsDataSet between
+	Task[0..1] role xxx_Task_containsDataSet_src
+	DataSet[3..*] role containsDataSet
+end
+
+composition xxx_Task_containsControlPoint between
+	Task[0..1] role xxx_Task_containsControlPoint_src
+	ControlPoint[*] role containsControlPoint
+end
+
+association xxx_Task_invoker between
+	Task[0..1] role xxx_Task_invoker_src
+	InvokerTask[*] role invoker
+end
+
+association xxx_Task_terminator between
+	Task[0..1] role xxx_Task_terminator_src
+	TerminatorTask[*] role terminator
+end
+
+composition xxx_DataSet_contains between
+	DataSet[0..1] role xxx_DataSet_contains_src
+	DataElement[*] role contains
+end
+
+association xxx_DataSet_source between
+	DataSet[0..1] role xxx_DataSet_source_src
+	ControlFlow[*] role source
+end
+
+association xxx_DataSet_triggers between
+	DataSet[0..1] role xxx_DataSet_triggers_src
+	ControlPoint[*] role triggers
+end
+
+association xxx_DataElement_sink between
+	DataElement[*] role xxx_DataElement_sink_src
+	DataFlow[1] role sink
+end
+
+association xxx_DataElement_source between
+	DataElement[*] role xxx_DataElement_source_src
+	DataFlow[1] role source
+end
+
+association xxx_ControlPoint_sink between
+	ControlPoint[0..1] role xxx_ControlPoint_sink_src
+	ControlFlow[*] role sink
+end
+
+composition xxx_OutputSet_containsOutput between
+	OutputSet[0..1] role xxx_OutputSet_containsOutput_src
+	Output[*] role containsOutput
+end
+
+composition xxx_InputSet_containsInput between
+	InputSet[0..1] role xxx_InputSet_containsInput_src
+	Input[*] role containsInput
+end
+
+composition xxx_CoumpoundTask_containsTask between
+	CoumpoundTask[0..1] role xxx_CoumpoundTask_containsTask_src
+	Task[*] role containsTask
+end
+
+composition xxx_CoumpoundTask_containsFlow between
+	CoumpoundTask[0..1] role xxx_CoumpoundTask_containsFlow_src
+	Flow[*] role containsFlow
+end
+
+association xxx_CoumpoundTask_realizes between
+	CoumpoundTask[*] role xxx_CoumpoundTask_realizes_src
+	BusinessProcess[1] role realizes
+end
+
+association xxx_InvokerTask_invokes between
+	InvokerTask[0..1] role xxx_InvokerTask_invokes_src
+	Task[*] role invokes
+end
+
+association xxx_TerminatorTask_terminates between
+	TerminatorTask[0..1] role xxx_TerminatorTask_terminates_src
+	Task[*] role terminates
+end
+

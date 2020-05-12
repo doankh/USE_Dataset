@@ -1,0 +1,305 @@
+model FordOtosan
+class Container
+attributes
+operations
+end
+
+abstract class CPSC
+attributes
+	cpscNo : String
+operations
+end
+
+abstract class IPart<CPSC
+attributes
+	baseNumber : String
+	partAttributes : String
+operations
+end
+
+abstract class Relation<CPSC
+attributes
+	relationAttributes : String
+operations
+end
+
+abstract class RelationViaPart<Relation
+attributes
+operations
+end
+
+class Joint<RelationViaPart
+attributes
+operations
+end
+
+class Bolt<RelationPart
+attributes
+operations
+end
+
+class Angle<Relation
+attributes
+operations
+end
+
+abstract class RelationPart<IPart
+attributes
+operations
+end
+
+abstract class SystemPart<IPart
+attributes
+operations
+end
+
+class Vehicle<CPSC
+attributes
+operations
+end
+
+class Engine<CPSC
+attributes
+operations
+end
+
+class EngineModules<CPSC
+attributes
+operations
+end
+
+abstract class EngineModule<SystemPart
+attributes
+operations
+end
+
+class FrontCover<EngineModule
+attributes
+operations
+end
+
+class CrankshaftPulley<EngineModule
+attributes
+operations
+end
+
+class OilPan<EngineModule
+attributes
+operations
+end
+
+class CylinderBlock<EngineModule
+attributes
+operations
+end
+
+class CylinderHead<EngineModule
+attributes
+operations
+end
+
+class AccessoryDriveSubsystem<CPSC
+attributes
+operations
+end
+
+abstract class AccessoryDriveSubsystemPart<SystemPart
+attributes
+operations
+end
+
+class Tensioner<AccessoryDriveSubsystemPart
+attributes
+operations
+end
+
+class Idler<AccessoryDriveSubsystemPart
+attributes
+operations
+end
+
+class Belt<AccessoryDriveSubsystemPart
+attributes
+operations
+end
+
+class WaterPumpPulley<AccessoryDriveSubsystemPart
+attributes
+operations
+end
+
+class ExhaustGasRecirculationSubsystem<CPSC
+attributes
+operations
+end
+
+abstract class ExhaustGasRecirculationSubsystemPart<SystemPart
+attributes
+operations
+end
+
+class EGRTube<ExhaustGasRecirculationSubsystemPart
+attributes
+operations
+end
+
+class EGRModule<ExhaustGasRecirculationSubsystemPart
+attributes
+operations
+end
+
+class IntakeDuct<ExhaustGasRecirculationSubsystemPart
+attributes
+operations
+end
+
+class ClimateControlSystem<CPSC
+attributes
+operations
+end
+
+abstract class ClimateControlSystemPart<SystemPart
+attributes
+operations
+end
+
+class Refrigeration_AC_Subsystem<CPSC
+attributes
+operations
+end
+
+abstract class Refrigeration_AC_SubsystemPart<SystemPart
+attributes
+operations
+end
+
+class AC_Compressor<Refrigeration_AC_SubsystemPart
+attributes
+operations
+end
+
+class ElectricalPowerSupplySystem<CPSC
+attributes
+operations
+end
+
+abstract class ElectricalPowerSupplySystemPart<SystemPart
+attributes
+operations
+end
+
+class GeneratorAlternatorRegulatorSubSystem<CPSC
+attributes
+operations
+end
+
+abstract class GeneratorAlternatorRegulatorSubSystemPart<SystemPart
+attributes
+operations
+end
+
+class Alternator<GeneratorAlternatorRegulatorSubSystemPart
+attributes
+operations
+end
+
+composition xxx_Container_vehicle between
+	Container[*] role xxx_Container_vehicle_src
+	Vehicle[1] role vehicle
+end
+
+association xxx_Relation_target between
+	Relation[0..1] role xxx_Relation_target_src
+	SystemPart[1..*] role target
+end
+
+association xxx_Relation_source between
+	Relation[*] role xxx_Relation_source_src
+	SystemPart[1] role source
+end
+
+composition xxx_RelationViaPart_relatedBy between
+	RelationViaPart[*] role xxx_RelationViaPart_relatedBy_src
+	RelationPart[1] role relatedBy
+end
+
+composition xxx_SystemPart_relation between
+	SystemPart[0..1] role xxx_SystemPart_relation_src
+	Relation[*] role relation
+end
+
+composition xxx_Vehicle_engine between
+	Vehicle[*] role xxx_Vehicle_engine_src
+	Engine[1] role engine
+end
+
+composition xxx_Vehicle_climateControlSystem between
+	Vehicle[*] role xxx_Vehicle_climateControlSystem_src
+	ClimateControlSystem[1] role climateControlSystem
+end
+
+composition xxx_Vehicle_electricalPowerSupplySystem between
+	Vehicle[*] role xxx_Vehicle_electricalPowerSupplySystem_src
+	ElectricalPowerSupplySystem[1] role electricalPowerSupplySystem
+end
+
+composition xxx_Engine_engineModules between
+	Engine[*] role xxx_Engine_engineModules_src
+	EngineModules[1] role engineModules
+end
+
+composition xxx_Engine_accessoryDriveSubsystem between
+	Engine[*] role xxx_Engine_accessoryDriveSubsystem_src
+	AccessoryDriveSubsystem[1] role accessoryDriveSubsystem
+end
+
+composition xxx_Engine_exhaustGasRecirculationSubsystem between
+	Engine[*] role xxx_Engine_exhaustGasRecirculationSubsystem_src
+	ExhaustGasRecirculationSubsystem[1] role exhaustGasRecirculationSubsystem
+end
+
+composition xxx_EngineModules_engineModule between
+	EngineModules[0..1] role xxx_EngineModules_engineModule_src
+	EngineModule[*] role engineModule
+end
+
+composition xxx_AccessoryDriveSubsystem_accessoryDriveSubsystemPart between
+	AccessoryDriveSubsystem[0..1] role xxx_AccessoryDriveSubsystem_accessoryDriveSubsystemPart_src
+	AccessoryDriveSubsystemPart[*] role accessoryDriveSubsystemPart
+end
+
+composition xxx_ExhaustGasRecirculationSubsystem_exhaustGasRecirculationSubsystemPart between
+	ExhaustGasRecirculationSubsystem[0..1] role xxx_ExhaustGasRecirculationSubsystem_exhaustGasRecirculationSubsystemPart_src
+	ExhaustGasRecirculationSubsystemPart[*] role exhaustGasRecirculationSubsystemPart
+end
+
+composition xxx_ClimateControlSystem_climateControlSystemPart between
+	ClimateControlSystem[0..1] role xxx_ClimateControlSystem_climateControlSystemPart_src
+	ClimateControlSystemPart[*] role climateControlSystemPart
+end
+
+composition xxx_ClimateControlSystem_refrigeration_AC_Subsystem between
+	ClimateControlSystem[*] role xxx_ClimateControlSystem_refrigeration_AC_Subsystem_src
+	Refrigeration_AC_Subsystem[1] role refrigeration_AC_Subsystem
+end
+
+composition xxx_Refrigeration_AC_Subsystem_refrigeration_AC_SubsystemPart between
+	Refrigeration_AC_Subsystem[0..1] role xxx_Refrigeration_AC_Subsystem_refrigeration_AC_SubsystemPart_src
+	Refrigeration_AC_SubsystemPart[*] role refrigeration_AC_SubsystemPart
+end
+
+composition xxx_ElectricalPowerSupplySystem_electricalPowerSupplySystemPart between
+	ElectricalPowerSupplySystem[0..1] role xxx_ElectricalPowerSupplySystem_electricalPowerSupplySystemPart_src
+	ElectricalPowerSupplySystemPart[*] role electricalPowerSupplySystemPart
+end
+
+composition xxx_ElectricalPowerSupplySystem_generatorAlternatorRegulatorSubSystem between
+	ElectricalPowerSupplySystem[*] role xxx_ElectricalPowerSupplySystem_generatorAlternatorRegulatorSubSystem_src
+	GeneratorAlternatorRegulatorSubSystem[1] role generatorAlternatorRegulatorSubSystem
+end
+
+composition xxx_GeneratorAlternatorRegulatorSubSystem_generatorAlternatorRegulatorSystemPart between
+	GeneratorAlternatorRegulatorSubSystem[0..1] role xxx_GeneratorAlternatorRegulatorSubSystem_generatorAlternatorRegulatorSystemPart_src
+	GeneratorAlternatorRegulatorSubSystemPart[*] role generatorAlternatorRegulatorSystemPart
+end
+

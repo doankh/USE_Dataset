@@ -1,0 +1,88 @@
+model formular
+class Formular
+attributes
+	titel : String
+operations
+end
+
+class Frage
+attributes
+	text : String
+	erklaerung : String
+operations
+end
+
+abstract class AntwortTyp
+attributes
+operations
+end
+
+class Freitext<AntwortTyp
+attributes
+operations
+end
+
+class Auswahl<AntwortTyp
+attributes
+	mehrfach : Boolean
+operations
+end
+
+class Option
+attributes
+	id : String
+	text : String
+operations
+end
+
+class Datum<AntwortTyp
+attributes
+operations
+end
+
+class Zahl<AntwortTyp
+attributes
+operations
+end
+
+class Gruppe
+attributes
+	name : String
+operations
+end
+
+class Entscheidung<AntwortTyp
+attributes
+operations
+end
+
+composition xxx_Formular_gruppen between
+	Formular[0..1] role xxx_Formular_gruppen_src
+	Gruppe[1..*] role gruppen
+end
+
+composition xxx_Frage_antwortTyp between
+	Frage[*] role xxx_Frage_antwortTyp_src
+	AntwortTyp[1] role antwortTyp
+end
+
+association xxx_Frage_abhaengigVon between
+	Frage[0..1] role xxx_Frage_abhaengigVon_src
+	Option[*] role abhaengigVon
+end
+
+composition xxx_Auswahl_optionen between
+	Auswahl[0..1] role xxx_Auswahl_optionen_src
+	Option[1..*] role optionen
+end
+
+composition xxx_Gruppe_fragen between
+	Gruppe[0..1] role xxx_Gruppe_fragen_src
+	Frage[1..*] role fragen
+end
+
+composition xxx_Entscheidung_optionen between
+	Entscheidung[*] role xxx_Entscheidung_optionen_src
+	Option[2] role optionen
+end
+

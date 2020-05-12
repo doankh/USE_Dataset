@@ -1,0 +1,551 @@
+model PrimitiveTypes
+enum AltitudeModeValue{
+	clampedToGround,
+	relativeToGround,
+	absolute
+}
+
+enum ColorModeValue{
+	normal,
+	random
+}
+
+abstract class Node
+attributes
+	name : String
+operations
+end
+
+abstract class ElementNode<Node
+attributes
+operations
+end
+
+class AttributeNode<Node
+attributes
+	value : String
+operations
+end
+
+abstract class RootNode<ElementNode
+attributes
+operations
+end
+
+class TextNode<ElementNode
+attributes
+operations
+end
+
+abstract class KMLNode<ElementNode
+attributes
+operations
+end
+
+class KMLRootNode<RootNode
+attributes
+operations
+end
+
+class Address<KMLNode
+attributes
+	value : String
+operations
+end
+
+class AltitudeMode<KMLNode
+attributes
+	value : AltitudeModeValue
+operations
+end
+
+class BalloonStyle<KMLNode
+attributes
+operations
+end
+
+class Color<KMLNode
+attributes
+	value : String
+operations
+end
+
+class ColorMode<KMLNode
+attributes
+	value : ColorModeValue
+operations
+end
+
+class Cookie<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Coordinates<KMLNode
+attributes
+operations
+end
+
+class Coordinate<KMLNode
+attributes
+operations
+end
+
+class Description<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Document<KMLNode
+attributes
+operations
+end
+
+class DrawOrder<KMLNode
+attributes
+	value : Integer
+operations
+end
+
+class East<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class Extrude<KMLNode
+attributes
+	value : Boolean
+operations
+end
+
+class Fill<KMLNode
+attributes
+	value : Boolean
+operations
+end
+
+class FlyToView<KMLNode
+attributes
+	value : Boolean
+operations
+end
+
+class Folder<KMLNode
+attributes
+operations
+end
+
+class GroundOverlay<KMLNode
+attributes
+operations
+end
+
+class H<KMLNode
+attributes
+	value : Integer
+operations
+end
+
+class Heading<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class Href<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Icon<KMLNode
+attributes
+operations
+end
+
+class IconStyle<KMLNode
+attributes
+operations
+end
+
+class InnerBoundaryIs<KMLNode
+attributes
+operations
+end
+
+class Key<KMLNode
+attributes
+	value : String
+operations
+end
+
+class LabelStyle<KMLNode
+attributes
+operations
+end
+
+class Latitude<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class LatLonBox<KMLNode
+attributes
+operations
+end
+
+class LinearRing<KMLNode
+attributes
+operations
+end
+
+class LineString<KMLNode
+attributes
+operations
+end
+
+class LineStyle<KMLNode
+attributes
+	id : String
+operations
+end
+
+class LinkDescription<KMLNode
+attributes
+	value : String
+operations
+end
+
+class LinkName<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Longitude<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class LookAt<KMLNode
+attributes
+operations
+end
+
+class Message<KMLNode
+attributes
+operations
+end
+
+class MinRefreshPeriod<KMLNode
+attributes
+	value : String
+operations
+end
+
+class MultiGeometry<KMLNode
+attributes
+operations
+end
+
+class Name<KMLNode
+attributes
+	value : String
+operations
+end
+
+class NetworkLink<KMLNode
+attributes
+operations
+end
+
+class NetworkLinkControl<KMLNode
+attributes
+operations
+end
+
+class North<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class ObjArrayField<KMLNode
+attributes
+operations
+end
+
+class ObjField<KMLNode
+attributes
+operations
+end
+
+class Open<KMLNode
+attributes
+	value : String
+operations
+end
+
+class OuterBoundaryIs<KMLNode
+attributes
+operations
+end
+
+class Outline<KMLNode
+attributes
+	value : String
+operations
+end
+
+class OverlayXY<KMLNode
+attributes
+	x : String
+	y : String
+	xunits : String
+	yunits : String
+operations
+end
+
+class Pair<KMLNode
+attributes
+operations
+end
+
+class Parent<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Placemark<KMLNode
+attributes
+operations
+end
+
+class Point<KMLNode
+attributes
+operations
+end
+
+class Polygon<KMLNode
+attributes
+operations
+end
+
+class PolyStyle<KMLNode
+attributes
+operations
+end
+
+class Range<KMLNode
+attributes
+	value : String
+operations
+end
+
+class RefreshInterval<KMLNode
+attributes
+	value : String
+operations
+end
+
+class RefreshMode<KMLNode
+attributes
+	value : String
+operations
+end
+
+class RefreshVisibility<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Rotation<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Schema<KMLNode
+attributes
+operations
+end
+
+class Scale<KMLNode
+attributes
+	value : String
+operations
+end
+
+class ScreenOverlay<KMLNode
+attributes
+	id : String
+operations
+end
+
+class ScreenXY<KMLNode
+attributes
+	x : String
+	y : String
+	xunits : String
+	yunits : String
+operations
+end
+
+class SimpleArrayField<KMLNode
+attributes
+operations
+end
+
+class SimpleField<KMLNode
+attributes
+operations
+end
+
+class Size<KMLNode
+attributes
+	x : String
+	y : String
+	xunits : String
+	yunits : String
+operations
+end
+
+class South<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class Snippet<KMLNode
+attributes
+operations
+end
+
+class Style<KMLNode
+attributes
+	id : String
+operations
+end
+
+class StyleMap<KMLNode
+attributes
+operations
+end
+
+class StyleUrl<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Tessellate<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Text<KMLNode
+attributes
+operations
+end
+
+class TextColor<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Tilt<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Type<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Url<KMLNode
+attributes
+operations
+end
+
+class ViewBoundScale<KMLNode
+attributes
+	value : String
+operations
+end
+
+class ViewRefreshMode<KMLNode
+attributes
+	value : String
+operations
+end
+
+class ViewRefreshTime<KMLNode
+attributes
+	value : Integer
+operations
+end
+
+class ViewFormat<KMLNode
+attributes
+	value : String
+operations
+end
+
+class Visibility<KMLNode
+attributes
+	value : String
+operations
+end
+
+class W<KMLNode
+attributes
+	value : Integer
+operations
+end
+
+class West<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class Width<KMLNode
+attributes
+	value : Real
+operations
+end
+
+class X<KMLNode
+attributes
+	value : Integer
+operations
+end
+
+class Y<KMLNode
+attributes
+	value : Integer
+operations
+end
+
+association xxx_Node_parentNode between
+	Node[*] role xxx_Node_parentNode_src
+	ElementNode[0..1] role parentNode
+end
+
+composition xxx_ElementNode_nodes between
+	ElementNode[0..1] role xxx_ElementNode_nodes_src
+	Node[*] role nodes
+end
+

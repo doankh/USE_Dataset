@@ -1,0 +1,179 @@
+model score
+enum Step{
+default
+}
+
+enum NoteType{
+default
+}
+
+enum AccidentalType{
+default
+}
+
+enum TimeSymbol{
+default
+}
+
+enum ClefSign{
+default
+}
+
+enum Position{
+default
+}
+
+class Score
+attributes
+operations
+end
+
+class Staff
+attributes
+operations
+end
+
+class Part
+attributes
+operations
+end
+
+class StaffGroup
+attributes
+operations
+end
+
+class PartList
+attributes
+operations
+end
+
+class Measure
+attributes
+	marker : String
+	divisions : Integer
+	duration : Integer
+operations
+end
+
+class Note
+attributes
+	duration : Integer
+	type : NoteType
+	accidental : AccidentalType
+	dots : Integer
+operations
+end
+
+class Pitch
+attributes
+	octave : Integer
+	alteration : Real
+	step : Step
+operations
+end
+
+class Key
+attributes
+	fifths : Integer
+	mode : String
+operations
+end
+
+class Time
+attributes
+	numerator : Integer
+	denominator : Integer
+operations
+end
+
+class Clef
+attributes
+	sign : ClefSign
+	line : Integer
+	octaveChange : Integer
+operations
+end
+
+class Rest
+attributes
+	measure : Boolean
+operations
+end
+
+class BarLine
+attributes
+	position : Position
+operations
+end
+
+composition xxx_Score_partList between
+	Score[*] role xxx_Score_partList_src
+	PartList[1] role partList
+end
+
+composition xxx_Score_parts between
+	Score[0..1] role xxx_Score_parts_src
+	Part[*] role parts
+end
+
+composition xxx_Part_measures between
+	Part[0..1] role xxx_Part_measures_src
+	Measure[*] role measures
+end
+
+association xxx_Part_score between
+	Part[*] role xxx_Part_score_src
+	Score[1] role score
+end
+
+association xxx_PartList_parts between
+	PartList[0..1] role xxx_PartList_parts_src
+	Part[*] role parts
+end
+
+composition xxx_Measure_notes between
+	Measure[0..1] role xxx_Measure_notes_src
+	Note[*] role notes
+end
+
+composition xxx_Measure_key between
+	Measure[*] role xxx_Measure_key_src
+	Key[0..1] role key
+end
+
+composition xxx_Measure_time between
+	Measure[*] role xxx_Measure_time_src
+	Time[0..1] role time
+end
+
+composition xxx_Measure_clef between
+	Measure[*] role xxx_Measure_clef_src
+	Clef[0..1] role clef
+end
+
+association xxx_Measure_part between
+	Measure[*] role xxx_Measure_part_src
+	Part[1] role part
+end
+
+composition xxx_Measure_barLines between
+	Measure[0..1] role xxx_Measure_barLines_src
+	BarLine[*] role barLines
+end
+
+composition xxx_Note_pitch between
+	Note[*] role xxx_Note_pitch_src
+	Pitch[0..1] role pitch
+end
+
+association xxx_Note_measure between
+	Note[*] role xxx_Note_measure_src
+	Measure[0..1] role measure
+end
+
+composition xxx_Note_rest between
+	Note[*] role xxx_Note_rest_src
+	Rest[0..1] role rest
+end
+

@@ -1,0 +1,46 @@
+model layouts
+class LayoutData
+attributes
+operations
+end
+
+class Layout
+attributes
+operations
+	createLayoutData()
+end
+
+class RectangleLayout
+attributes
+operations
+end
+
+class RectangleLayoutData<LayoutData,Rectangle
+attributes
+operations
+end
+
+class Position
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Dimension
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class Rectangle<Position,Dimension
+attributes
+operations
+end
+
+composition xxx_RectangleLayout_defaultLayoutData between
+	RectangleLayout[*] role xxx_RectangleLayout_defaultLayoutData_src
+	RectangleLayoutData[0..1] role defaultLayoutData
+end
+

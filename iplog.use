@@ -1,0 +1,133 @@
+model iplog
+enum StateType{
+default
+}
+
+class Committer
+attributes
+	active : Boolean
+	affiliation : String
+	comments : String
+	firstName : String
+	hasCommits : Boolean
+	id : String
+	lastName : String
+operations
+end
+
+class Contribution
+attributes
+	comment : String
+	description : String
+	id : String
+	size : String
+	url : String
+operations
+end
+
+class Contributor
+attributes
+	id : String
+	name : String
+operations
+end
+
+class Cq
+attributes
+	comments : String
+	description : String
+	id : String
+	license : String
+	state : StateType
+	use : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Iplog
+attributes
+	comment : String
+	name : String
+operations
+end
+
+class License
+attributes
+	comments : String
+	description : String
+	id : String
+operations
+end
+
+class Meta
+attributes
+	key : String
+	value : String
+operations
+end
+
+class Project
+attributes
+	comments : String
+	id : String
+	name : String
+	version : String
+operations
+end
+
+composition xxx_Contributor_contribution between
+	Contributor[0..1] role xxx_Contributor_contribution_src
+	Contribution[1..*] role contribution
+end
+
+
+composition xxx_DocumentRoot_iplog between
+	DocumentRoot[*] role xxx_DocumentRoot_iplog_src
+	Iplog[1] role iplog
+end
+
+composition xxx_Iplog_project between
+	Iplog[*] role xxx_Iplog_project_src
+	Project[1] role project
+end
+
+composition xxx_Iplog_includes between
+	Iplog[0..1] role xxx_Iplog_includes_src
+	Project[*] role includes
+end
+
+composition xxx_Iplog_consumes between
+	Iplog[0..1] role xxx_Iplog_consumes_src
+	Project[*] role consumes
+end
+
+composition xxx_Iplog_meta between
+	Iplog[0..1] role xxx_Iplog_meta_src
+	Meta[*] role meta
+end
+
+composition xxx_Iplog_license between
+	Iplog[0..1] role xxx_Iplog_license_src
+	License[*] role license
+end
+
+composition xxx_Iplog_cq between
+	Iplog[0..1] role xxx_Iplog_cq_src
+	Cq[*] role cq
+end
+
+composition xxx_Iplog_committer between
+	Iplog[0..1] role xxx_Iplog_committer_src
+	Committer[*] role committer
+end
+
+composition xxx_Iplog_contributor between
+	Iplog[0..1] role xxx_Iplog_contributor_src
+	Contributor[*] role contributor
+end
+

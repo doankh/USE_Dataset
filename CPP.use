@@ -1,0 +1,133 @@
+model PrimitiveTypes
+enum VisibilityKind{
+	vk_public,
+	vk_private,
+	vk_protected
+}
+
+class CDerived
+attributes
+operations
+end
+
+class CStructured
+attributes
+operations
+end
+
+class CBehavorialFeature
+attributes
+operations
+end
+
+class CFunction<CBehavorialFeature
+attributes
+	isVsrArg : Boolean
+operations
+end
+
+class CStructureContents
+attributes
+operations
+end
+
+class CField
+attributes
+operations
+end
+
+class CDerivableType
+attributes
+operations
+end
+
+class CPPReference<CDerived
+attributes
+operations
+end
+
+class CPPExtern<CDerived
+attributes
+	linkage : String
+operations
+end
+
+class CPPConst<CDerived
+attributes
+operations
+end
+
+class CPPTemplate<CDerived
+attributes
+operations
+end
+
+class CPPClass<CStructured
+attributes
+	isAbstract : Boolean
+	isVolatile : Boolean
+	visibility : VisibilityKind
+operations
+end
+
+class CPPGeneralization
+attributes
+	visibility : VisibilityKind
+	isVirtual : Boolean
+operations
+end
+
+class CPPOperation<CStructureContents
+attributes
+	isStatic : Boolean
+	isExtern : Boolean
+	isInline : Boolean
+	isVirtual : Boolean
+	isPure : Boolean
+	visibility : VisibilityKind
+	isCtor : Boolean
+	isDtor : Boolean
+operations
+end
+
+class CPPOperator<CStructureContents
+attributes
+	isInline : Boolean
+	visibility : VisibilityKind
+operations
+end
+
+class CPPMember
+attributes
+	isStatic : Boolean
+	isVolatile : Boolean
+	isRegister : Boolean
+	visibility : VisibilityKind
+operations
+end
+
+association xxx_CPPTemplate_classes between
+	CPPTemplate[0..1] role xxx_CPPTemplate_classes_src
+	CPPClass[*] role classes
+end
+
+association xxx_CPPClass_templates between
+	CPPClass[0..1] role xxx_CPPClass_templates_src
+	CPPTemplate[*] role templates
+end
+
+association xxx_CPPClass_generalizations between
+	CPPClass[0..1] role xxx_CPPClass_generalizations_src
+	CPPGeneralization[*] role generalizations
+end
+
+association xxx_CPPGeneralization_supertype between
+	CPPGeneralization[*] role xxx_CPPGeneralization_supertype_src
+	CPPClass[1] role supertype
+end
+
+association xxx_CPPOperation_throws between
+	CPPOperation[0..1] role xxx_CPPOperation_throws_src
+	CPPClass[*] role throws
+end
+

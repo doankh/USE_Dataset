@@ -1,0 +1,196 @@
+model CSM
+class CSM
+attributes
+operations
+end
+
+class GeneralResource
+attributes
+operations
+end
+
+class Step<Scenarion
+attributes
+operations
+end
+
+class Scenarion
+attributes
+operations
+end
+
+class Start<Step
+attributes
+operations
+end
+
+class End<Step
+attributes
+operations
+end
+
+class ResourceAcquire<Step
+attributes
+operations
+end
+
+class ResourceRelease<Step
+attributes
+operations
+end
+
+class Workload
+attributes
+operations
+end
+
+class Component<PassiveResource
+attributes
+operations
+end
+
+class ProcessingResource<ActiveResource
+attributes
+operations
+end
+
+class ExternalService<ActiveResource
+attributes
+operations
+end
+
+class ActiveResource<GeneralResource
+attributes
+operations
+end
+
+class PassiveResource<GeneralResource
+attributes
+operations
+end
+
+class Message
+attributes
+operations
+end
+
+class PathConnection
+attributes
+operations
+end
+
+class Join<PathConnection
+attributes
+operations
+end
+
+class Fork<PathConnection
+attributes
+operations
+end
+
+class Merge<PathConnection
+attributes
+operations
+end
+
+class Branch<PathConnection
+attributes
+operations
+end
+
+class Seqence<PathConnection
+attributes
+operations
+end
+
+composition xxx_CSM_step between
+	CSM[0..1] role xxx_CSM_step_src
+	Step[1..*] role step
+end
+
+composition xxx_CSM_generalResource between
+	CSM[0..1] role xxx_CSM_generalResource_src
+	GeneralResource[1..*] role generalResource
+end
+
+composition xxx_CSM_scenarion between
+	CSM[0..1] role xxx_CSM_scenarion_src
+	Scenarion[1..*] role scenarion
+end
+
+association xxx_GeneralResource_resourceAcquire between
+	GeneralResource[0..1] role xxx_GeneralResource_resourceAcquire_src
+	ResourceAcquire[*] role resourceAcquire
+end
+
+association xxx_GeneralResource_resourceRelease between
+	GeneralResource[0..1] role xxx_GeneralResource_resourceRelease_src
+	ResourceRelease[*] role resourceRelease
+end
+
+association xxx_Step_postPath between
+	Step[*] role xxx_Step_postPath_src
+	PathConnection[0..1] role postPath
+end
+
+association xxx_Step_prePath between
+	Step[*] role xxx_Step_prePath_src
+	PathConnection[0..1] role prePath
+end
+
+association xxx_Step_activeResource between
+	Step[*] role xxx_Step_activeResource_src
+	ActiveResource[1] role activeResource
+end
+
+composition xxx_Scenarion_step between
+	Scenarion[0..1] role xxx_Scenarion_step_src
+	Step[1..*] role step
+end
+
+association xxx_Scenarion_root between
+	Scenarion[0..1] role xxx_Scenarion_root_src
+	Start[1..*] role root
+end
+
+association xxx_Start_workload between
+	Start[*] role xxx_Start_workload_src
+	Workload[0..1] role workload
+end
+
+association xxx_ResourceAcquire_generalResource between
+	ResourceAcquire[*] role xxx_ResourceAcquire_generalResource_src
+	GeneralResource[1] role generalResource
+end
+
+association xxx_ResourceRelease_generalResource between
+	ResourceRelease[*] role xxx_ResourceRelease_generalResource_src
+	GeneralResource[1] role generalResource
+end
+
+association xxx_Workload_start between
+	Workload[*] role xxx_Workload_start_src
+	Start[1] role start
+end
+
+association xxx_ActiveResource_step between
+	ActiveResource[0..1] role xxx_ActiveResource_step_src
+	Step[*] role step
+end
+
+association xxx_PathConnection_message between
+	PathConnection[*] role xxx_PathConnection_message_src
+	Message[0..1] role message
+end
+
+association xxx_PathConnection_post_ between
+	PathConnection[0..1] role xxx_PathConnection_post__src
+	Step[*] role post_
+end
+
+association xxx_PathConnection_pre_ between
+	PathConnection[0..1] role xxx_PathConnection_pre__src
+	Step[*] role pre_
+end
+

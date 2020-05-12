@@ -1,0 +1,805 @@
+model fr
+enum EnablementEnum{
+	Off,
+	On
+}
+
+enum VisibilityEnum{
+	private,
+	protected,
+	public
+}
+
+enum QualifierEnum{
+	byRef,
+	byVal
+}
+
+enum Qualifier_2Enum{
+	static,
+	const,
+	dim
+}
+
+enum NameEnum{
+	trueLit,
+	falseLit,
+	nothing
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class VB_LangElement<LocatedElement
+attributes
+operations
+end
+
+class VB_Content<VB_LangElement
+attributes
+	hasVersion : Boolean
+	version : String
+	hasClass : Boolean
+	hasBeginEnd : Boolean
+operations
+end
+
+class VB_GlobalVariable<VB_LangElement
+attributes
+	name : String
+operations
+end
+
+abstract class VB_ContentElement<VB_LangElement
+attributes
+operations
+end
+
+class VB_FileAttribute<VB_ContentElement
+attributes
+	name : String
+operations
+end
+
+class VB_Option<VB_ContentElement
+attributes
+	name : String
+	hasEnablement : Boolean
+	enablement : EnablementEnum
+operations
+end
+
+class VB_Imports<VB_ContentElement
+attributes
+operations
+end
+
+class VB_Implements<VB_ContentElement
+attributes
+operations
+end
+
+class VB_Assembly<VB_ContentElement
+attributes
+operations
+end
+
+class VB_Class<VB_Type
+attributes
+	isFriend : Boolean
+	hasVisibility : Boolean
+	visibility : VisibilityEnum
+	name : String
+	hasInherits : Boolean
+operations
+end
+
+class VB_Module<VB_ContentElement
+attributes
+	name : String
+operations
+end
+
+abstract class VB_Type<VB_LangElement
+attributes
+operations
+end
+
+abstract class VB_Data<VB_LangElement
+attributes
+operations
+end
+
+class VB_SimpleType<VB_ContentElement
+attributes
+	visibility : VisibilityEnum
+	name : String
+operations
+end
+
+class VB_Enum<VB_ContentElement
+attributes
+	visibility : VisibilityEnum
+	name : String
+operations
+end
+
+class VB_PreprocIf<VB_ContentElement
+attributes
+operations
+end
+
+abstract class VB_Feature<VB_ContentElement
+attributes
+operations
+end
+
+class VB_Region<VB_Feature
+attributes
+	name : String
+operations
+end
+
+class VB_Sub<VB_Feature
+attributes
+	hasAnnotation : Boolean
+	isFriend : Boolean
+	hasVisibility : Boolean
+	visibility : VisibilityEnum
+	isOverloads : Boolean
+	isOverrides : Boolean
+	name : String
+	hasHandles : Boolean
+operations
+end
+
+class VB_Function<VB_Feature
+attributes
+	isFriend : Boolean
+	hasVisibility : Boolean
+	visibility : VisibilityEnum
+	name : String
+operations
+end
+
+class VB_DeclareFunction<VB_Feature
+attributes
+	hasVisibility : Boolean
+	visibility : VisibilityEnum
+	isAuto : Boolean
+	name : String
+	lib : String
+	isAlias : Boolean
+	alias : String
+operations
+end
+
+class VB_DeclareSub<VB_Feature
+attributes
+	hasVisibility : Boolean
+	visibility : VisibilityEnum
+	isAuto : Boolean
+	name : String
+	lib : String
+	isAlias : Boolean
+	alias : String
+operations
+end
+
+class VB_Parameter<VB_Data
+attributes
+	isOptional : Boolean
+	hasQualifier : Boolean
+	qualifier : QualifierEnum
+	name : String
+	isArray : Boolean
+	hasType : Boolean
+	hasInitialValue : Boolean
+operations
+end
+
+class VB_Property<VB_Feature
+attributes
+	visibility : VisibilityEnum
+	isShared : Boolean
+	isGetOnly : Boolean
+	isSet : Boolean
+	isLet : Boolean
+	name : String
+operations
+end
+
+abstract class VB_Modifier<VB_LangElement
+attributes
+operations
+end
+
+class VB_Set<VB_Modifier
+attributes
+	hasParameters : Boolean
+operations
+end
+
+class VB_Get<VB_Modifier
+attributes
+	hasParameters : Boolean
+operations
+end
+
+class VB_Attribute<VB_Feature
+attributes
+	hasVisibility : Boolean
+	visibility : VisibilityEnum
+	hasQualifier : Boolean
+	qualifier : Qualifier_2Enum
+	isFriend : Boolean
+	isWithEvents : Boolean
+	isShared : Boolean
+	name : String
+	isArray : Boolean
+	hasType : Boolean
+	hasInitialValue : Boolean
+	hasNext : Boolean
+operations
+end
+
+class VB_GraphicalElement<VB_Data
+attributes
+	name : String
+operations
+end
+
+abstract class VB_GraphicalField<VB_LangElement
+attributes
+operations
+end
+
+class VB_GraphicalPropertySet<VB_GraphicalField
+attributes
+	name : String
+	hasArguments : Boolean
+	hasBrackets : Boolean
+operations
+end
+
+class VB_GraphicalProperty<VB_GraphicalField
+attributes
+operations
+end
+
+abstract class VB_Statement<VB_Modifier
+attributes
+operations
+end
+
+class VB_Call<VB_Statement
+attributes
+operations
+end
+
+abstract class VB_CallArgument<VB_LangElement
+attributes
+operations
+end
+
+class VB_CallEmptyArgument<VB_CallArgument
+attributes
+operations
+end
+
+class VB_CallExpressionArgument<VB_CallArgument
+attributes
+	hasSeparator : Boolean
+operations
+end
+
+class VB_Case<VB_LangElement
+attributes
+	hasSeparator : Boolean
+operations
+end
+
+class VB_RawBody<VB_Statement
+attributes
+	value : String
+operations
+end
+
+abstract class VB_Expression<VB_LangElement
+attributes
+operations
+end
+
+class VB_AssignmentExpression<VB_Expression
+attributes
+operations
+end
+
+class VB_TypeOfExpression<VB_Expression
+attributes
+operations
+end
+
+class VB_OperatorExpression<VB_Expression
+attributes
+	operatorName : String
+operations
+end
+
+class VB_NewExpression<VB_Expression
+attributes
+	hasArguments : Boolean
+	hasInitialization : Boolean
+operations
+end
+
+class VB_NotExpression<VB_Expression
+attributes
+operations
+end
+
+class VB_NegativeExpression<VB_Expression
+attributes
+operations
+end
+
+class VB_ParenthesisExpression<VB_Expression
+attributes
+operations
+end
+
+class VB_TabValuesExpression<VB_Expression
+attributes
+operations
+end
+
+class VB_ByValExpression<VB_Expression
+attributes
+operations
+end
+
+abstract class VB_Value<VB_Expression
+attributes
+operations
+end
+
+class VB_NegativeValue<VB_Value
+attributes
+operations
+end
+
+class VB_VariableSystem<VB_Value
+attributes
+	name : NameEnum
+operations
+end
+
+abstract class VB_Literal<VB_Value
+attributes
+	value : String
+operations
+end
+
+class VB_Literal_Literal<VB_Literal
+attributes
+operations
+end
+
+class VB_Literal_Number<VB_Literal
+attributes
+operations
+end
+
+class VB_Literal_Value<VB_Literal
+attributes
+operations
+end
+
+class VB_FullTypeRef<VB_LangElement
+attributes
+operations
+end
+
+class VB_TypeRef<VB_LangElement
+attributes
+	typeValue : String
+operations
+end
+
+class VB_FullDataRef<VB_Expression
+attributes
+	self : Boolean
+	hasRecSet : Boolean
+operations
+end
+
+class VB_DataRef<VB_LangElement
+attributes
+	dataValue : String
+	hasArguments : Boolean
+	hasRefMarker : Boolean
+	hasSubMarker : Boolean
+operations
+end
+
+class VB_LabelRef<VB_LangElement
+attributes
+	labelValue : String
+operations
+end
+
+composition xxx_VB_Content_beginEndGlobalVariables between
+	VB_Content[0..1] role xxx_VB_Content_beginEndGlobalVariables_src
+	VB_GlobalVariable[*] role beginEndGlobalVariables
+end
+
+composition xxx_VB_Content_globalVariables between
+	VB_Content[0..1] role xxx_VB_Content_globalVariables_src
+	VB_GlobalVariable[*] role globalVariables
+end
+
+composition xxx_VB_Content_elements between
+	VB_Content[0..1] role xxx_VB_Content_elements_src
+	VB_ContentElement[*] role elements
+end
+
+composition xxx_VB_GlobalVariable_value between
+	VB_GlobalVariable[0..1] role xxx_VB_GlobalVariable_value_src
+	VB_Expression[1..*] role value
+end
+
+composition xxx_VB_FileAttribute_initialValue between
+	VB_FileAttribute[0..1] role xxx_VB_FileAttribute_initialValue_src
+	VB_Expression[1..*] role initialValue
+end
+
+composition xxx_VB_Imports_imports between
+	VB_Imports[*] role xxx_VB_Imports_imports_src
+	VB_FullTypeRef[1] role imports
+end
+
+composition xxx_VB_Implements_implements between
+	VB_Implements[*] role xxx_VB_Implements_implements_src
+	VB_FullTypeRef[1] role implements
+end
+
+composition xxx_VB_Assembly_call between
+	VB_Assembly[*] role xxx_VB_Assembly_call_src
+	VB_Call[1] role call
+end
+
+composition xxx_VB_Class_inherits between
+	VB_Class[*] role xxx_VB_Class_inherits_src
+	VB_FullTypeRef[0..1] role inherits
+end
+
+composition xxx_VB_Class_features between
+	VB_Class[0..1] role xxx_VB_Class_features_src
+	VB_Feature[*] role features
+end
+
+composition xxx_VB_Module_features between
+	VB_Module[0..1] role xxx_VB_Module_features_src
+	VB_Feature[*] role features
+end
+
+composition xxx_VB_SimpleType_features between
+	VB_SimpleType[0..1] role xxx_VB_SimpleType_features_src
+	VB_Feature[*] role features
+end
+
+composition xxx_VB_Enum_features between
+	VB_Enum[0..1] role xxx_VB_Enum_features_src
+	VB_Feature[*] role features
+end
+
+composition xxx_VB_PreprocIf_condition between
+	VB_PreprocIf[*] role xxx_VB_PreprocIf_condition_src
+	VB_Expression[1] role condition
+end
+
+composition xxx_VB_PreprocIf_features between
+	VB_PreprocIf[0..1] role xxx_VB_PreprocIf_features_src
+	VB_Feature[*] role features
+end
+
+composition xxx_VB_Region_features between
+	VB_Region[0..1] role xxx_VB_Region_features_src
+	VB_Feature[*] role features
+end
+
+composition xxx_VB_Sub_annotation between
+	VB_Sub[*] role xxx_VB_Sub_annotation_src
+	VB_Call[0..1] role annotation
+end
+
+composition xxx_VB_Sub_parameters between
+	VB_Sub[0..1] role xxx_VB_Sub_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_Sub_handles between
+	VB_Sub[0..1] role xxx_VB_Sub_handles_src
+	VB_FullTypeRef[*] role handles
+end
+
+composition xxx_VB_Sub_statements between
+	VB_Sub[0..1] role xxx_VB_Sub_statements_src
+	VB_Statement[*] role statements
+end
+
+composition xxx_VB_Function_parameters between
+	VB_Function[0..1] role xxx_VB_Function_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_Function_return between
+	VB_Function[*] role xxx_VB_Function_return_src
+	VB_FullTypeRef[0..1] role return
+end
+
+composition xxx_VB_Function_statements between
+	VB_Function[0..1] role xxx_VB_Function_statements_src
+	VB_Statement[*] role statements
+end
+
+composition xxx_VB_DeclareFunction_parameters between
+	VB_DeclareFunction[0..1] role xxx_VB_DeclareFunction_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_DeclareFunction_return between
+	VB_DeclareFunction[*] role xxx_VB_DeclareFunction_return_src
+	VB_FullTypeRef[1] role return
+end
+
+composition xxx_VB_DeclareSub_parameters between
+	VB_DeclareSub[0..1] role xxx_VB_DeclareSub_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_Parameter_arrayExpression between
+	VB_Parameter[*] role xxx_VB_Parameter_arrayExpression_src
+	VB_Expression[0..1] role arrayExpression
+end
+
+composition xxx_VB_Parameter_type between
+	VB_Parameter[*] role xxx_VB_Parameter_type_src
+	VB_FullTypeRef[0..1] role type
+end
+
+composition xxx_VB_Parameter_value between
+	VB_Parameter[*] role xxx_VB_Parameter_value_src
+	VB_Expression[0..1] role value
+end
+
+composition xxx_VB_Property_parameters between
+	VB_Property[0..1] role xxx_VB_Property_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_Property_type between
+	VB_Property[*] role xxx_VB_Property_type_src
+	VB_FullTypeRef[0..1] role type
+end
+
+composition xxx_VB_Property_modifiers between
+	VB_Property[0..1] role xxx_VB_Property_modifiers_src
+	VB_Modifier[*] role modifiers
+end
+
+composition xxx_VB_Property_statements between
+	VB_Property[0..1] role xxx_VB_Property_statements_src
+	VB_Statement[*] role statements
+end
+
+composition xxx_VB_Set_parameters between
+	VB_Set[0..1] role xxx_VB_Set_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_Set_statements between
+	VB_Set[0..1] role xxx_VB_Set_statements_src
+	VB_Statement[*] role statements
+end
+
+composition xxx_VB_Get_parameters between
+	VB_Get[0..1] role xxx_VB_Get_parameters_src
+	VB_Parameter[*] role parameters
+end
+
+composition xxx_VB_Get_statements between
+	VB_Get[0..1] role xxx_VB_Get_statements_src
+	VB_Statement[*] role statements
+end
+
+composition xxx_VB_Attribute_arrayExpressions between
+	VB_Attribute[0..1] role xxx_VB_Attribute_arrayExpressions_src
+	VB_Expression[*] role arrayExpressions
+end
+
+composition xxx_VB_Attribute_type between
+	VB_Attribute[*] role xxx_VB_Attribute_type_src
+	VB_Expression[0..1] role type
+end
+
+composition xxx_VB_Attribute_initialValue between
+	VB_Attribute[*] role xxx_VB_Attribute_initialValue_src
+	VB_Expression[0..1] role initialValue
+end
+
+composition xxx_VB_GraphicalElement_type between
+	VB_GraphicalElement[*] role xxx_VB_GraphicalElement_type_src
+	VB_FullTypeRef[1] role type
+end
+
+composition xxx_VB_GraphicalElement_fields between
+	VB_GraphicalElement[0..1] role xxx_VB_GraphicalElement_fields_src
+	VB_GraphicalField[*] role fields
+end
+
+composition xxx_VB_GraphicalElement_children between
+	VB_GraphicalElement[0..1] role xxx_VB_GraphicalElement_children_src
+	VB_GraphicalElement[*] role children
+end
+
+composition xxx_VB_GraphicalPropertySet_arguments between
+	VB_GraphicalPropertySet[0..1] role xxx_VB_GraphicalPropertySet_arguments_src
+	VB_Expression[*] role arguments
+end
+
+composition xxx_VB_GraphicalPropertySet_fields between
+	VB_GraphicalPropertySet[0..1] role xxx_VB_GraphicalPropertySet_fields_src
+	VB_GraphicalField[*] role fields
+end
+
+composition xxx_VB_GraphicalProperty_property between
+	VB_GraphicalProperty[*] role xxx_VB_GraphicalProperty_property_src
+	VB_FullDataRef[1] role property
+end
+
+composition xxx_VB_GraphicalProperty_value between
+	VB_GraphicalProperty[*] role xxx_VB_GraphicalProperty_value_src
+	VB_Expression[1] role value
+end
+
+composition xxx_VB_Call_expression between
+	VB_Call[*] role xxx_VB_Call_expression_src
+	VB_FullDataRef[1] role expression
+end
+
+composition xxx_VB_Call_arguments between
+	VB_Call[0..1] role xxx_VB_Call_arguments_src
+	VB_CallArgument[*] role arguments
+end
+
+composition xxx_VB_CallExpressionArgument_expression between
+	VB_CallExpressionArgument[*] role xxx_VB_CallExpressionArgument_expression_src
+	VB_Expression[1] role expression
+end
+
+composition xxx_VB_Case_values between
+	VB_Case[0..1] role xxx_VB_Case_values_src
+	VB_Expression[1..*] role values
+end
+
+composition xxx_VB_Case_statements between
+	VB_Case[0..1] role xxx_VB_Case_statements_src
+	VB_Statement[*] role statements
+end
+
+composition xxx_VB_AssignmentExpression_variable between
+	VB_AssignmentExpression[*] role xxx_VB_AssignmentExpression_variable_src
+	VB_FullDataRef[1] role variable
+end
+
+composition xxx_VB_AssignmentExpression_expression between
+	VB_AssignmentExpression[*] role xxx_VB_AssignmentExpression_expression_src
+	VB_Expression[1] role expression
+end
+
+composition xxx_VB_TypeOfExpression_variable between
+	VB_TypeOfExpression[*] role xxx_VB_TypeOfExpression_variable_src
+	VB_FullDataRef[1] role variable
+end
+
+composition xxx_VB_TypeOfExpression_type between
+	VB_TypeOfExpression[*] role xxx_VB_TypeOfExpression_type_src
+	VB_FullTypeRef[1] role type
+end
+
+composition xxx_VB_OperatorExpression_leftHand between
+	VB_OperatorExpression[*] role xxx_VB_OperatorExpression_leftHand_src
+	VB_Expression[1] role leftHand
+end
+
+composition xxx_VB_OperatorExpression_rightHand between
+	VB_OperatorExpression[*] role xxx_VB_OperatorExpression_rightHand_src
+	VB_Expression[1] role rightHand
+end
+
+composition xxx_VB_NewExpression_type between
+	VB_NewExpression[*] role xxx_VB_NewExpression_type_src
+	VB_FullTypeRef[1] role type
+end
+
+composition xxx_VB_NewExpression_arguments between
+	VB_NewExpression[0..1] role xxx_VB_NewExpression_arguments_src
+	VB_Expression[*] role arguments
+end
+
+composition xxx_VB_NewExpression_initializations between
+	VB_NewExpression[0..1] role xxx_VB_NewExpression_initializations_src
+	VB_Expression[*] role initializations
+end
+
+composition xxx_VB_NotExpression_expression between
+	VB_NotExpression[*] role xxx_VB_NotExpression_expression_src
+	VB_Expression[1] role expression
+end
+
+composition xxx_VB_NegativeExpression_expression between
+	VB_NegativeExpression[*] role xxx_VB_NegativeExpression_expression_src
+	VB_Expression[1] role expression
+end
+
+composition xxx_VB_ParenthesisExpression_expression between
+	VB_ParenthesisExpression[*] role xxx_VB_ParenthesisExpression_expression_src
+	VB_Expression[1] role expression
+end
+
+composition xxx_VB_TabValuesExpression_arguments between
+	VB_TabValuesExpression[0..1] role xxx_VB_TabValuesExpression_arguments_src
+	VB_Expression[*] role arguments
+end
+
+composition xxx_VB_ByValExpression_value between
+	VB_ByValExpression[*] role xxx_VB_ByValExpression_value_src
+	VB_Expression[1] role value
+end
+
+composition xxx_VB_NegativeValue_value between
+	VB_NegativeValue[*] role xxx_VB_NegativeValue_value_src
+	VB_Value[1] role value
+end
+
+composition xxx_VB_FullTypeRef_members between
+	VB_FullTypeRef[0..1] role xxx_VB_FullTypeRef_members_src
+	VB_TypeRef[1..*] role members
+end
+
+association xxx_VB_TypeRef_type between
+	VB_TypeRef[*] role xxx_VB_TypeRef_type_src
+	VB_LangElement[1] role type
+end
+
+composition xxx_VB_FullDataRef_members between
+	VB_FullDataRef[0..1] role xxx_VB_FullDataRef_members_src
+	VB_DataRef[1..*] role members
+end
+
+composition xxx_VB_FullDataRef_recSetMember between
+	VB_FullDataRef[*] role xxx_VB_FullDataRef_recSetMember_src
+	VB_DataRef[0..1] role recSetMember
+end
+
+association xxx_VB_DataRef_data between
+	VB_DataRef[*] role xxx_VB_DataRef_data_src
+	VB_LangElement[1] role data
+end
+
+composition xxx_VB_DataRef_arguments between
+	VB_DataRef[0..1] role xxx_VB_DataRef_arguments_src
+	VB_CallArgument[*] role arguments
+end
+
+association xxx_VB_LabelRef_label between
+	VB_LabelRef[*] role xxx_VB_LabelRef_label_src
+	VB_LangElement[1] role label
+end
+

@@ -1,0 +1,291 @@
+model webAppDSL
+class View
+attributes
+	name : String
+operations
+end
+
+class Block
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class ForLoopStatement<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class VariableDeclaration<Statement
+attributes
+	component : String
+	name : String
+operations
+end
+
+class VariableType
+attributes
+operations
+end
+
+class ComponentType<VariableType
+attributes
+operations
+end
+
+class IntType<VariableType
+attributes
+operations
+end
+
+class BoolType<VariableType
+attributes
+operations
+end
+
+class FloatType<VariableType
+attributes
+operations
+end
+
+class StringType<VariableType
+attributes
+operations
+end
+
+class FunctionType<VariableType
+attributes
+operations
+end
+
+class ArrayType<VariableType
+attributes
+operations
+end
+
+class Expression<Statement
+attributes
+operations
+end
+
+class JavaExpression<Expression
+attributes
+operations
+end
+
+class ParentReference<Expression
+attributes
+operations
+end
+
+class VariableUse<Expression,ParentReference
+attributes
+operations
+end
+
+class Parameters
+attributes
+operations
+end
+
+class Member
+attributes
+operations
+end
+
+class Value<Expression
+attributes
+operations
+end
+
+class NullValue
+attributes
+operations
+end
+
+class BooleanValue<Value
+attributes
+	value : String
+operations
+end
+
+class NumberValue<Value
+attributes
+	number : Integer
+operations
+end
+
+class TextValue<Value
+attributes
+	text : String
+operations
+end
+
+class ArrayValue<Value
+attributes
+operations
+end
+
+class ComponentValue<Value
+attributes
+	type : String
+operations
+end
+
+class FunctionValue<Value
+attributes
+	events : String
+operations
+end
+
+class AssignmentOperation<Expression
+attributes
+	op : String
+operations
+end
+
+class OperationCall<Expression
+attributes
+	op : String
+operations
+end
+
+composition xxx_View_viewBlock between
+	View[*] role xxx_View_viewBlock_src
+	Block[0..1] role viewBlock
+end
+
+composition xxx_Block_statements between
+	Block[0..1] role xxx_Block_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_ForLoopStatement_initialization between
+	ForLoopStatement[*] role xxx_ForLoopStatement_initialization_src
+	Statement[0..1] role initialization
+end
+
+composition xxx_ForLoopStatement_condition between
+	ForLoopStatement[*] role xxx_ForLoopStatement_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_ForLoopStatement_afterthought between
+	ForLoopStatement[*] role xxx_ForLoopStatement_afterthought_src
+	Expression[0..1] role afterthought
+end
+
+composition xxx_ForLoopStatement_loopBlock between
+	ForLoopStatement[*] role xxx_ForLoopStatement_loopBlock_src
+	Block[0..1] role loopBlock
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_IfStatement_consequent between
+	IfStatement[*] role xxx_IfStatement_consequent_src
+	Block[0..1] role consequent
+end
+
+composition xxx_IfStatement_alternative between
+	IfStatement[*] role xxx_IfStatement_alternative_src
+	Block[0..1] role alternative
+end
+
+composition xxx_VariableDeclaration_variableType between
+	VariableDeclaration[*] role xxx_VariableDeclaration_variableType_src
+	VariableType[0..1] role variableType
+end
+
+composition xxx_VariableDeclaration_value between
+	VariableDeclaration[*] role xxx_VariableDeclaration_value_src
+	Expression[0..1] role value
+end
+
+composition xxx_JavaExpression_eval between
+	JavaExpression[*] role xxx_JavaExpression_eval_src
+	TextValue[0..1] role eval
+end
+
+association xxx_VariableUse_ref between
+	VariableUse[*] role xxx_VariableUse_ref_src
+	VariableDeclaration[0..1] role ref
+end
+
+composition xxx_VariableUse_functionCall between
+	VariableUse[*] role xxx_VariableUse_functionCall_src
+	Parameters[0..1] role functionCall
+end
+
+composition xxx_VariableUse_rgt between
+	VariableUse[*] role xxx_VariableUse_rgt_src
+	Member[0..1] role rgt
+end
+
+composition xxx_Parameters_parameters between
+	Parameters[0..1] role xxx_Parameters_parameters_src
+	Expression[*] role parameters
+end
+
+composition xxx_Member_member between
+	Member[*] role xxx_Member_member_src
+	VariableUse[0..1] role member
+end
+
+composition xxx_ArrayValue_values between
+	ArrayValue[0..1] role xxx_ArrayValue_values_src
+	Expression[*] role values
+end
+
+composition xxx_ComponentValue_properties between
+	ComponentValue[0..1] role xxx_ComponentValue_properties_src
+	TextValue[*] role properties
+end
+
+composition xxx_ComponentValue_declarations between
+	ComponentValue[0..1] role xxx_ComponentValue_declarations_src
+	VariableDeclaration[*] role declarations
+end
+
+composition xxx_FunctionValue_arguments between
+	FunctionValue[0..1] role xxx_FunctionValue_arguments_src
+	VariableDeclaration[*] role arguments
+end
+
+composition xxx_FunctionValue_functionBlock between
+	FunctionValue[*] role xxx_FunctionValue_functionBlock_src
+	Block[0..1] role functionBlock
+end
+
+composition xxx_AssignmentOperation_owner between
+	AssignmentOperation[*] role xxx_AssignmentOperation_owner_src
+	Expression[0..1] role owner
+end
+
+composition xxx_AssignmentOperation_right between
+	AssignmentOperation[*] role xxx_AssignmentOperation_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_OperationCall_owner between
+	OperationCall[*] role xxx_OperationCall_owner_src
+	Expression[0..1] role owner
+end
+
+composition xxx_OperationCall_right between
+	OperationCall[*] role xxx_OperationCall_right_src
+	Expression[0..1] role right
+end
+

@@ -1,0 +1,493 @@
+model PrimitiveTypes
+enum InOut{
+	in_,
+	out
+}
+
+enum PreDef{
+	Preserve,
+	Default
+}
+
+class Man
+attributes
+	language : String
+	title : String
+	type : String
+	date : String
+	name : String
+	keyword : String
+	exemple : String
+operations
+end
+
+class Meta
+attributes
+	meta : String
+	path : String
+	category : String
+	version_CSI : String
+	version_DOC : String
+	author : String
+operations
+end
+
+class Short_Description<Biblio
+attributes
+	name : String
+	verb : String
+operations
+end
+
+class Calling_Sequence
+attributes
+operations
+end
+
+class Calling_Sequence_Item
+attributes
+	calling_Sequence_Item : String
+operations
+end
+
+class Param
+attributes
+	target : InOut
+operations
+end
+
+class Param_Indent
+attributes
+operations
+end
+
+class Param_Item
+attributes
+	label : String
+operations
+end
+
+class Param_Name
+attributes
+	verb : String
+operations
+end
+
+class Param_Description<Used_Functions
+attributes
+operations
+end
+
+class Description<Used_Functions
+attributes
+operations
+end
+
+class Description_Indent
+attributes
+operations
+end
+
+class Description_Item
+attributes
+	label : String
+operations
+end
+
+class AIMG
+attributes
+	verb : String
+operations
+end
+
+class See_Also
+attributes
+operations
+end
+
+class Exemple
+attributes
+	exemple : String
+	xml_space : PreDef
+operations
+end
+
+class See_Also_Item
+attributes
+operations
+end
+
+class A<AIMG
+attributes
+	href : String
+operations
+end
+
+class Img<AIMG
+attributes
+	src : String
+operations
+end
+
+class Biblio
+attributes
+operations
+end
+
+class Used_Functions<Biblio
+attributes
+	verbatim : String
+operations
+end
+
+class PSPPP
+attributes
+	verb : String
+	em : String
+	bd : String
+	tt : String
+operations
+end
+
+class P<PSPPP
+attributes
+operations
+end
+
+class SP<PSPPP
+attributes
+operations
+end
+
+class PP<PSPPP
+attributes
+operations
+end
+
+class Itemize<Used_Functions
+attributes
+	label : String
+operations
+end
+
+class Item<Itemize
+attributes
+operations
+end
+
+class Table
+attributes
+operations
+end
+
+class Table_New_Row
+attributes
+operations
+end
+
+class Table_New_Column
+attributes
+	Verb : String
+	em : String
+	bd : String
+	tt : String
+operations
+end
+
+class Link
+attributes
+	link : String
+operations
+end
+
+class Authors
+attributes
+operations
+end
+
+class Authors_Item<Biblio
+attributes
+	Verb : String
+	em : String
+	bd : String
+	tt : String
+	verbatim : String
+	label : String
+operations
+end
+
+class Section<Itemize
+attributes
+operations
+end
+
+composition xxx_Man_meta between
+	Man[0..1] role xxx_Man_meta_src
+	Meta[*] role meta
+end
+
+association xxx_Meta_man between
+	Meta[*] role xxx_Meta_man_src
+	Man[1] role man
+end
+
+composition xxx_Calling_Sequence_calling_Sequence_Item between
+	Calling_Sequence[0..1] role xxx_Calling_Sequence_calling_Sequence_Item_src
+	Calling_Sequence_Item[*] role calling_Sequence_Item
+end
+
+association xxx_Calling_Sequence_Item_calling_Sequence between
+	Calling_Sequence_Item[*] role xxx_Calling_Sequence_Item_calling_Sequence_src
+	Calling_Sequence[1] role calling_Sequence
+end
+
+composition xxx_Param_param_Indent between
+	Param[0..1] role xxx_Param_param_Indent_src
+	Param_Indent[*] role param_Indent
+end
+
+association xxx_Param_Indent_param between
+	Param_Indent[*] role xxx_Param_Indent_param_src
+	Param[1] role param
+end
+
+association xxx_Param_Indent_param_Description between
+	Param_Indent[*] role xxx_Param_Indent_param_Description_src
+	Param_Description[1] role param_Description
+end
+
+composition xxx_Param_Indent_param_Item between
+	Param_Indent[0..1] role xxx_Param_Indent_param_Item_src
+	Param_Item[1..*] role param_Item
+end
+
+association xxx_Param_Item_param_Indent between
+	Param_Item[*] role xxx_Param_Item_param_Indent_src
+	Param_Indent[1] role param_Indent
+end
+
+composition xxx_Param_Item_param_Name between
+	Param_Item[*] role xxx_Param_Item_param_Name_src
+	Param_Name[1] role param_Name
+end
+
+composition xxx_Param_Item_param_Description between
+	Param_Item[*] role xxx_Param_Item_param_Description_src
+	Param_Description[1] role param_Description
+end
+
+association xxx_Param_Name_param_Item between
+	Param_Name[*] role xxx_Param_Name_param_Item_src
+	Param_Item[1] role param_Item
+end
+
+composition xxx_Param_Description_param_Indent between
+	Param_Description[0..1] role xxx_Param_Description_param_Indent_src
+	Param_Indent[*] role param_Indent
+end
+
+association xxx_Param_Description_param_Item between
+	Param_Description[*] role xxx_Param_Description_param_Item_src
+	Param_Item[1] role param_Item
+end
+
+composition xxx_Description_itemize between
+	Description[0..1] role xxx_Description_itemize_src
+	Itemize[*] role itemize
+end
+
+composition xxx_Description_description_Indent between
+	Description[0..1] role xxx_Description_description_Indent_src
+	Description_Indent[*] role description_Indent
+end
+
+association xxx_Description_Indent_description between
+	Description_Indent[*] role xxx_Description_Indent_description_src
+	Description[1] role description
+end
+
+composition xxx_Description_Indent_description_Item between
+	Description_Indent[0..1] role xxx_Description_Indent_description_Item_src
+	Description_Item[1..*] role description_Item
+end
+
+association xxx_Description_Item_description_Indent between
+	Description_Item[*] role xxx_Description_Item_description_Indent_src
+	Description_Indent[1] role description_Indent
+end
+
+composition xxx_See_Also_see_Also_Item between
+	See_Also[0..1] role xxx_See_Also_see_Also_Item_src
+	See_Also_Item[*] role see_Also_Item
+end
+
+association xxx_See_Also_Item_see_Also between
+	See_Also_Item[*] role xxx_See_Also_Item_see_Also_src
+	See_Also[1] role see_Also
+end
+
+composition xxx_See_Also_Item_link between
+	See_Also_Item[0..1] role xxx_See_Also_Item_link_src
+	Link[*] role link
+end
+
+association xxx_A_psppp between
+	A[*] role xxx_A_psppp_src
+	PSPPP[1] role psppp
+end
+
+association xxx_A_authors_Item between
+	A[*] role xxx_A_authors_Item_src
+	Authors_Item[1] role authors_Item
+end
+
+association xxx_Img_psppp between
+	Img[*] role xxx_Img_psppp_src
+	PSPPP[1] role psppp
+end
+
+composition xxx_Biblio_p between
+	Biblio[0..1] role xxx_Biblio_p_src
+	P[*] role p
+end
+
+composition xxx_Biblio_sp between
+	Biblio[0..1] role xxx_Biblio_sp_src
+	SP[*] role sp
+end
+
+composition xxx_Biblio_pp between
+	Biblio[0..1] role xxx_Biblio_pp_src
+	PP[*] role pp
+end
+
+composition xxx_Used_Functions_table between
+	Used_Functions[0..1] role xxx_Used_Functions_table_src
+	Table[*] role table
+end
+
+composition xxx_PSPPP_a between
+	PSPPP[0..1] role xxx_PSPPP_a_src
+	A[*] role a
+end
+
+composition xxx_PSPPP_link between
+	PSPPP[0..1] role xxx_PSPPP_link_src
+	Link[*] role link
+end
+
+composition xxx_PSPPP_img between
+	PSPPP[0..1] role xxx_PSPPP_img_src
+	Img[*] role img
+end
+
+association xxx_P_biblio between
+	P[*] role xxx_P_biblio_src
+	Biblio[1] role biblio
+end
+
+association xxx_SP_biblio between
+	SP[*] role xxx_SP_biblio_src
+	Biblio[1] role biblio
+end
+
+association xxx_PP_biblio between
+	PP[*] role xxx_PP_biblio_src
+	Biblio[1] role biblio
+end
+
+association xxx_Itemize_item between
+	Itemize[*] role xxx_Itemize_item_src
+	Item[1] role item
+end
+
+association xxx_Itemize_section between
+	Itemize[*] role xxx_Itemize_section_src
+	Section[1] role section
+end
+
+association xxx_Itemize_authors_Item between
+	Itemize[*] role xxx_Itemize_authors_Item_src
+	Authors_Item[1] role authors_Item
+end
+
+association xxx_Itemize_description between
+	Itemize[*] role xxx_Itemize_description_src
+	Description[1] role description
+end
+
+composition xxx_Item_itemize between
+	Item[0..1] role xxx_Item_itemize_src
+	Itemize[*] role itemize
+end
+
+composition xxx_Table_table_New_Row between
+	Table[0..1] role xxx_Table_table_New_Row_src
+	Table_New_Row[1..*] role table_New_Row
+end
+
+association xxx_Table_used_Functions between
+	Table[*] role xxx_Table_used_Functions_src
+	Used_Functions[1] role used_Functions
+end
+
+composition xxx_Table_New_Row_table_New_Column between
+	Table_New_Row[0..1] role xxx_Table_New_Row_table_New_Column_src
+	Table_New_Column[1..*] role table_New_Column
+end
+
+association xxx_Table_New_Row_table between
+	Table_New_Row[*] role xxx_Table_New_Row_table_src
+	Table[1] role table
+end
+
+association xxx_Table_New_Column_table_New_Row between
+	Table_New_Column[*] role xxx_Table_New_Column_table_New_Row_src
+	Table_New_Row[1] role table_New_Row
+end
+
+association xxx_Link_psppp between
+	Link[*] role xxx_Link_psppp_src
+	PSPPP[1] role psppp
+end
+
+association xxx_Link_see_Also_Item between
+	Link[*] role xxx_Link_see_Also_Item_src
+	See_Also_Item[1] role see_Also_Item
+end
+
+association xxx_Link_authors_Item between
+	Link[*] role xxx_Link_authors_Item_src
+	Authors_Item[1] role authors_Item
+end
+
+composition xxx_Authors_authors_Item between
+	Authors[0..1] role xxx_Authors_authors_Item_src
+	Authors_Item[1..*] role authors_Item
+end
+
+composition xxx_Authors_Item_a between
+	Authors_Item[0..1] role xxx_Authors_Item_a_src
+	A[*] role a
+end
+
+composition xxx_Authors_Item_link between
+	Authors_Item[0..1] role xxx_Authors_Item_link_src
+	Link[*] role link
+end
+
+association xxx_Authors_Item_authors between
+	Authors_Item[*] role xxx_Authors_Item_authors_src
+	Authors[1] role authors
+end
+
+composition xxx_Authors_Item_itemize between
+	Authors_Item[0..1] role xxx_Authors_Item_itemize_src
+	Itemize[1..*] role itemize
+end
+
+composition xxx_Section_itemize between
+	Section[0..1] role xxx_Section_itemize_src
+	Itemize[*] role itemize
+end
+

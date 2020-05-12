@@ -1,0 +1,982 @@
+model jpdl32
+enum BindingType{
+default
+}
+
+enum BooleanType{
+default
+}
+
+enum ConfigType{
+default
+}
+
+enum PriorityTypeMember0{
+default
+}
+
+enum SignalType{
+default
+}
+
+enum TypeTypeMember1{
+default
+}
+
+class ActionType
+attributes
+	mixed : String
+	any : String
+	acceptPropagatedEvents : BooleanType
+	async : String
+	class_ : String
+	configType : String
+	expression : String
+	name : String
+	refName : String
+operations
+end
+
+class AssignmentType<Delegation
+attributes
+	actorId : String
+	expression : String
+	pooledActors : String
+operations
+end
+
+class CancelTimerType
+attributes
+	name : String
+operations
+end
+
+class ConditionType
+attributes
+	mixed : String
+	group : String
+	any : String
+	expression : String
+operations
+end
+
+class CreateTimerType
+attributes
+	duedate : String
+	name : String
+	repeat : String
+	transition : String
+operations
+end
+
+class DecisionType
+attributes
+	group : String
+	description : String
+	async : String
+	expression : String
+	name : String
+operations
+end
+
+class Delegation
+attributes
+	mixed : String
+	any : String
+	class_ : String
+	configType : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	description : String
+	recipients : String
+	subject : String
+	template : String
+	text : String
+	to : String
+operations
+end
+
+class EndStateType
+attributes
+	group : String
+	description : String
+	endCompleteProcess : BooleanType
+	name : String
+operations
+end
+
+class EventType
+attributes
+	actionElements : String
+	type : String
+operations
+end
+
+class ExceptionHandlerType
+attributes
+	group : String
+	exceptionClass : String
+operations
+end
+
+class ForkType
+attributes
+	group : String
+	description : String
+	async : String
+	name : String
+operations
+end
+
+class JoinType
+attributes
+	nodeContentElements : String
+	description : String
+	async : String
+	name : String
+operations
+end
+
+class MailNodeType
+attributes
+	group : String
+	subject : String
+	text : String
+	description : String
+	actors : String
+	async : String
+	name : String
+	subject1 : String
+	template : String
+	text1 : String
+	to : String
+operations
+end
+
+class MailType
+attributes
+	group : String
+	subject : String
+	text : String
+	actors : String
+	async : String
+	name : String
+	subject1 : String
+	template : String
+	text1 : String
+	to : String
+operations
+end
+
+class NodeType
+attributes
+	nodeContentElements : String
+	description : String
+	async : String
+	name : String
+operations
+end
+
+class ProcessDefinitionType
+attributes
+	group : String
+	description : String
+	name : String
+operations
+end
+
+class ProcessStateType
+attributes
+	group : String
+	description : String
+	async : String
+	binding : BindingType
+	name : String
+operations
+end
+
+class ReminderType
+attributes
+	duedate : String
+	repeat : String
+operations
+end
+
+class ScriptType
+attributes
+	mixed : String
+	any : String
+	acceptPropagatedEvents : BooleanType
+	name : String
+operations
+end
+
+class StartStateType
+attributes
+	group : String
+	description : String
+	name : String
+operations
+end
+
+class StateType
+attributes
+	nodeContentElements : String
+	description : String
+	async : String
+	name : String
+operations
+end
+
+class SubProcessType
+attributes
+	binding : String
+	name : String
+	version : Integer
+operations
+end
+
+class SuperStateType
+attributes
+	group : String
+	description : String
+	async : String
+	name : String
+operations
+end
+
+class SwimlaneType
+attributes
+	name : String
+operations
+end
+
+class TaskNodeType
+attributes
+	group : String
+	description : String
+	async : String
+	createTasks : BooleanType
+	endTasks : BooleanType
+	name : String
+	signal : SignalType
+operations
+end
+
+class TaskType
+attributes
+	group : String
+	description : String
+	blocking : BooleanType
+	description1 : String
+	duedate : String
+	name : String
+	notify : BooleanType
+	priority : String
+	signalling : BooleanType
+	swimlane : String
+operations
+end
+
+class TimerType
+attributes
+	duedate : String
+	name : String
+	repeat : String
+	transition : String
+operations
+end
+
+class TransitionType
+attributes
+	group : String
+	description : String
+	name : String
+	to : String
+operations
+end
+
+class VariableType
+attributes
+	any : String
+	access : String
+	mappedName : String
+	name : String
+operations
+end
+
+composition xxx_CreateTimerType_action between
+	CreateTimerType[*] role xxx_CreateTimerType_action_src
+	ActionType[0..1] role action
+end
+
+composition xxx_CreateTimerType_script between
+	CreateTimerType[*] role xxx_CreateTimerType_script_src
+	ScriptType[0..1] role script
+end
+
+composition xxx_DecisionType_handler between
+	DecisionType[0..1] role xxx_DecisionType_handler_src
+	Delegation[*] role handler
+end
+
+composition xxx_DecisionType_event between
+	DecisionType[0..1] role xxx_DecisionType_event_src
+	EventType[*] role event
+end
+
+composition xxx_DecisionType_exceptionHandler between
+	DecisionType[0..1] role xxx_DecisionType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_DecisionType_transition between
+	DecisionType[0..1] role xxx_DecisionType_transition_src
+	TransitionType[*] role transition
+end
+
+
+composition xxx_DocumentRoot_action between
+	DocumentRoot[*] role xxx_DocumentRoot_action_src
+	ActionType[*] role action
+end
+
+composition xxx_DocumentRoot_assignment between
+	DocumentRoot[*] role xxx_DocumentRoot_assignment_src
+	AssignmentType[*] role assignment
+end
+
+composition xxx_DocumentRoot_cancelTimer between
+	DocumentRoot[*] role xxx_DocumentRoot_cancelTimer_src
+	CancelTimerType[*] role cancelTimer
+end
+
+composition xxx_DocumentRoot_controller between
+	DocumentRoot[*] role xxx_DocumentRoot_controller_src
+	Delegation[*] role controller
+end
+
+composition xxx_DocumentRoot_createTimer between
+	DocumentRoot[*] role xxx_DocumentRoot_createTimer_src
+	CreateTimerType[*] role createTimer
+end
+
+composition xxx_DocumentRoot_decision between
+	DocumentRoot[*] role xxx_DocumentRoot_decision_src
+	DecisionType[*] role decision
+end
+
+composition xxx_DocumentRoot_endState between
+	DocumentRoot[*] role xxx_DocumentRoot_endState_src
+	EndStateType[*] role endState
+end
+
+composition xxx_DocumentRoot_event between
+	DocumentRoot[*] role xxx_DocumentRoot_event_src
+	EventType[*] role event
+end
+
+composition xxx_DocumentRoot_exceptionHandler between
+	DocumentRoot[*] role xxx_DocumentRoot_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_DocumentRoot_fork between
+	DocumentRoot[*] role xxx_DocumentRoot_fork_src
+	ForkType[*] role fork
+end
+
+composition xxx_DocumentRoot_join between
+	DocumentRoot[*] role xxx_DocumentRoot_join_src
+	JoinType[*] role join
+end
+
+composition xxx_DocumentRoot_mail between
+	DocumentRoot[*] role xxx_DocumentRoot_mail_src
+	MailType[*] role mail
+end
+
+composition xxx_DocumentRoot_mailNode between
+	DocumentRoot[*] role xxx_DocumentRoot_mailNode_src
+	MailNodeType[*] role mailNode
+end
+
+composition xxx_DocumentRoot_node between
+	DocumentRoot[*] role xxx_DocumentRoot_node_src
+	NodeType[*] role node
+end
+
+composition xxx_DocumentRoot_processDefinition between
+	DocumentRoot[*] role xxx_DocumentRoot_processDefinition_src
+	ProcessDefinitionType[*] role processDefinition
+end
+
+composition xxx_DocumentRoot_processState between
+	DocumentRoot[*] role xxx_DocumentRoot_processState_src
+	ProcessStateType[*] role processState
+end
+
+composition xxx_DocumentRoot_script between
+	DocumentRoot[*] role xxx_DocumentRoot_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_DocumentRoot_startState between
+	DocumentRoot[*] role xxx_DocumentRoot_startState_src
+	StartStateType[*] role startState
+end
+
+composition xxx_DocumentRoot_state between
+	DocumentRoot[*] role xxx_DocumentRoot_state_src
+	StateType[*] role state
+end
+
+composition xxx_DocumentRoot_superState between
+	DocumentRoot[*] role xxx_DocumentRoot_superState_src
+	SuperStateType[*] role superState
+end
+
+composition xxx_DocumentRoot_swimlane between
+	DocumentRoot[*] role xxx_DocumentRoot_swimlane_src
+	SwimlaneType[*] role swimlane
+end
+
+composition xxx_DocumentRoot_task between
+	DocumentRoot[*] role xxx_DocumentRoot_task_src
+	TaskType[*] role task
+end
+
+composition xxx_DocumentRoot_taskNode between
+	DocumentRoot[*] role xxx_DocumentRoot_taskNode_src
+	TaskNodeType[*] role taskNode
+end
+
+composition xxx_DocumentRoot_timer between
+	DocumentRoot[*] role xxx_DocumentRoot_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_DocumentRoot_transition between
+	DocumentRoot[*] role xxx_DocumentRoot_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_DocumentRoot_variable between
+	DocumentRoot[*] role xxx_DocumentRoot_variable_src
+	VariableType[*] role variable
+end
+
+composition xxx_EndStateType_event between
+	EndStateType[0..1] role xxx_EndStateType_event_src
+	EventType[*] role event
+end
+
+composition xxx_EndStateType_exceptionHandler between
+	EndStateType[0..1] role xxx_EndStateType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_EventType_action between
+	EventType[0..1] role xxx_EventType_action_src
+	ActionType[*] role action
+end
+
+composition xxx_EventType_script between
+	EventType[0..1] role xxx_EventType_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_EventType_createTimer between
+	EventType[0..1] role xxx_EventType_createTimer_src
+	CreateTimerType[*] role createTimer
+end
+
+composition xxx_EventType_cancelTimer between
+	EventType[0..1] role xxx_EventType_cancelTimer_src
+	CancelTimerType[*] role cancelTimer
+end
+
+composition xxx_EventType_mail between
+	EventType[0..1] role xxx_EventType_mail_src
+	MailType[*] role mail
+end
+
+composition xxx_ExceptionHandlerType_action between
+	ExceptionHandlerType[0..1] role xxx_ExceptionHandlerType_action_src
+	ActionType[*] role action
+end
+
+composition xxx_ExceptionHandlerType_script between
+	ExceptionHandlerType[0..1] role xxx_ExceptionHandlerType_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_ForkType_script between
+	ForkType[0..1] role xxx_ForkType_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_ForkType_event between
+	ForkType[0..1] role xxx_ForkType_event_src
+	EventType[*] role event
+end
+
+composition xxx_ForkType_exceptionHandler between
+	ForkType[0..1] role xxx_ForkType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_ForkType_timer between
+	ForkType[0..1] role xxx_ForkType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_ForkType_transition between
+	ForkType[0..1] role xxx_ForkType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_JoinType_event between
+	JoinType[0..1] role xxx_JoinType_event_src
+	EventType[*] role event
+end
+
+composition xxx_JoinType_exceptionHandler between
+	JoinType[0..1] role xxx_JoinType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_JoinType_timer between
+	JoinType[0..1] role xxx_JoinType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_JoinType_transition between
+	JoinType[0..1] role xxx_JoinType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_MailNodeType_event between
+	MailNodeType[0..1] role xxx_MailNodeType_event_src
+	EventType[*] role event
+end
+
+composition xxx_MailNodeType_exceptionHandler between
+	MailNodeType[0..1] role xxx_MailNodeType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_MailNodeType_timer between
+	MailNodeType[0..1] role xxx_MailNodeType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_MailNodeType_transition between
+	MailNodeType[0..1] role xxx_MailNodeType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_NodeType_action between
+	NodeType[*] role xxx_NodeType_action_src
+	ActionType[0..1] role action
+end
+
+composition xxx_NodeType_script between
+	NodeType[*] role xxx_NodeType_script_src
+	ScriptType[0..1] role script
+end
+
+composition xxx_NodeType_createTimer between
+	NodeType[*] role xxx_NodeType_createTimer_src
+	CreateTimerType[0..1] role createTimer
+end
+
+composition xxx_NodeType_cancelTimer between
+	NodeType[*] role xxx_NodeType_cancelTimer_src
+	CancelTimerType[0..1] role cancelTimer
+end
+
+composition xxx_NodeType_mail between
+	NodeType[*] role xxx_NodeType_mail_src
+	MailType[0..1] role mail
+end
+
+composition xxx_NodeType_event between
+	NodeType[0..1] role xxx_NodeType_event_src
+	EventType[*] role event
+end
+
+composition xxx_NodeType_exceptionHandler between
+	NodeType[0..1] role xxx_NodeType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_NodeType_timer between
+	NodeType[0..1] role xxx_NodeType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_NodeType_transition between
+	NodeType[0..1] role xxx_NodeType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_ProcessDefinitionType_swimlane between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_swimlane_src
+	SwimlaneType[*] role swimlane
+end
+
+composition xxx_ProcessDefinitionType_startState between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_startState_src
+	StartStateType[*] role startState
+end
+
+composition xxx_ProcessDefinitionType_node between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_node_src
+	NodeType[*] role node
+end
+
+composition xxx_ProcessDefinitionType_state between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_state_src
+	StateType[*] role state
+end
+
+composition xxx_ProcessDefinitionType_taskNode between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_taskNode_src
+	TaskNodeType[*] role taskNode
+end
+
+composition xxx_ProcessDefinitionType_superState between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_superState_src
+	SuperStateType[*] role superState
+end
+
+composition xxx_ProcessDefinitionType_processState between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_processState_src
+	ProcessStateType[*] role processState
+end
+
+composition xxx_ProcessDefinitionType_fork between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_fork_src
+	ForkType[*] role fork
+end
+
+composition xxx_ProcessDefinitionType_join between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_join_src
+	JoinType[*] role join
+end
+
+composition xxx_ProcessDefinitionType_decision between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_decision_src
+	DecisionType[*] role decision
+end
+
+composition xxx_ProcessDefinitionType_endState between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_endState_src
+	EndStateType[*] role endState
+end
+
+composition xxx_ProcessDefinitionType_mailNode between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_mailNode_src
+	MailNodeType[*] role mailNode
+end
+
+composition xxx_ProcessDefinitionType_action between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_action_src
+	ActionType[*] role action
+end
+
+composition xxx_ProcessDefinitionType_script between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_ProcessDefinitionType_createTimer between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_createTimer_src
+	CreateTimerType[*] role createTimer
+end
+
+composition xxx_ProcessDefinitionType_cancelTimer between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_cancelTimer_src
+	CancelTimerType[*] role cancelTimer
+end
+
+composition xxx_ProcessDefinitionType_mail between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_mail_src
+	MailType[*] role mail
+end
+
+composition xxx_ProcessDefinitionType_event between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_event_src
+	EventType[*] role event
+end
+
+composition xxx_ProcessDefinitionType_exceptionHandler between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_ProcessDefinitionType_task between
+	ProcessDefinitionType[0..1] role xxx_ProcessDefinitionType_task_src
+	TaskType[*] role task
+end
+
+composition xxx_ProcessStateType_subProcess between
+	ProcessStateType[0..1] role xxx_ProcessStateType_subProcess_src
+	SubProcessType[*] role subProcess
+end
+
+composition xxx_ProcessStateType_variable between
+	ProcessStateType[0..1] role xxx_ProcessStateType_variable_src
+	VariableType[*] role variable
+end
+
+composition xxx_ProcessStateType_event between
+	ProcessStateType[0..1] role xxx_ProcessStateType_event_src
+	EventType[*] role event
+end
+
+composition xxx_ProcessStateType_exceptionHandler between
+	ProcessStateType[0..1] role xxx_ProcessStateType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_ProcessStateType_timer between
+	ProcessStateType[0..1] role xxx_ProcessStateType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_ProcessStateType_transition between
+	ProcessStateType[0..1] role xxx_ProcessStateType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_StartStateType_task between
+	StartStateType[0..1] role xxx_StartStateType_task_src
+	TaskType[*] role task
+end
+
+composition xxx_StartStateType_transition between
+	StartStateType[0..1] role xxx_StartStateType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_StartStateType_event between
+	StartStateType[0..1] role xxx_StartStateType_event_src
+	EventType[*] role event
+end
+
+composition xxx_StartStateType_exceptionHandler between
+	StartStateType[0..1] role xxx_StartStateType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_StateType_event between
+	StateType[0..1] role xxx_StateType_event_src
+	EventType[*] role event
+end
+
+composition xxx_StateType_exceptionHandler between
+	StateType[0..1] role xxx_StateType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_StateType_timer between
+	StateType[0..1] role xxx_StateType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_StateType_transition between
+	StateType[0..1] role xxx_StateType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_SuperStateType_node between
+	SuperStateType[0..1] role xxx_SuperStateType_node_src
+	NodeType[*] role node
+end
+
+composition xxx_SuperStateType_state between
+	SuperStateType[0..1] role xxx_SuperStateType_state_src
+	StateType[*] role state
+end
+
+composition xxx_SuperStateType_taskNode between
+	SuperStateType[0..1] role xxx_SuperStateType_taskNode_src
+	TaskNodeType[*] role taskNode
+end
+
+composition xxx_SuperStateType_superState between
+	SuperStateType[0..1] role xxx_SuperStateType_superState_src
+	SuperStateType[*] role superState
+end
+
+composition xxx_SuperStateType_processState between
+	SuperStateType[0..1] role xxx_SuperStateType_processState_src
+	ProcessStateType[*] role processState
+end
+
+composition xxx_SuperStateType_fork between
+	SuperStateType[0..1] role xxx_SuperStateType_fork_src
+	ForkType[*] role fork
+end
+
+composition xxx_SuperStateType_join between
+	SuperStateType[0..1] role xxx_SuperStateType_join_src
+	JoinType[*] role join
+end
+
+composition xxx_SuperStateType_decision between
+	SuperStateType[0..1] role xxx_SuperStateType_decision_src
+	DecisionType[*] role decision
+end
+
+composition xxx_SuperStateType_endState between
+	SuperStateType[0..1] role xxx_SuperStateType_endState_src
+	EndStateType[*] role endState
+end
+
+composition xxx_SuperStateType_mailNode between
+	SuperStateType[0..1] role xxx_SuperStateType_mailNode_src
+	MailNodeType[*] role mailNode
+end
+
+composition xxx_SuperStateType_event between
+	SuperStateType[0..1] role xxx_SuperStateType_event_src
+	EventType[*] role event
+end
+
+composition xxx_SuperStateType_exceptionHandler between
+	SuperStateType[0..1] role xxx_SuperStateType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_SuperStateType_timer between
+	SuperStateType[0..1] role xxx_SuperStateType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_SuperStateType_transition between
+	SuperStateType[0..1] role xxx_SuperStateType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_SwimlaneType_assignment between
+	SwimlaneType[*] role xxx_SwimlaneType_assignment_src
+	AssignmentType[0..1] role assignment
+end
+
+composition xxx_TaskNodeType_task between
+	TaskNodeType[0..1] role xxx_TaskNodeType_task_src
+	TaskType[*] role task
+end
+
+composition xxx_TaskNodeType_event between
+	TaskNodeType[0..1] role xxx_TaskNodeType_event_src
+	EventType[*] role event
+end
+
+composition xxx_TaskNodeType_exceptionHandler between
+	TaskNodeType[0..1] role xxx_TaskNodeType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+
+composition xxx_TaskNodeType_timer between
+	TaskNodeType[0..1] role xxx_TaskNodeType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_TaskNodeType_transition between
+	TaskNodeType[0..1] role xxx_TaskNodeType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_TaskType_assignment between
+	TaskType[0..1] role xxx_TaskType_assignment_src
+	AssignmentType[*] role assignment
+end
+
+composition xxx_TaskType_controller between
+	TaskType[0..1] role xxx_TaskType_controller_src
+	Delegation[*] role controller
+end
+
+composition xxx_TaskType_event between
+	TaskType[0..1] role xxx_TaskType_event_src
+	EventType[*] role event
+end
+
+composition xxx_TaskType_timer between
+	TaskType[0..1] role xxx_TaskType_timer_src
+	TimerType[*] role timer
+end
+
+composition xxx_TaskType_reminder between
+	TaskType[0..1] role xxx_TaskType_reminder_src
+	ReminderType[*] role reminder
+end
+
+composition xxx_TimerType_action between
+	TimerType[*] role xxx_TimerType_action_src
+	ActionType[0..1] role action
+end
+
+composition xxx_TimerType_script between
+	TimerType[*] role xxx_TimerType_script_src
+	ScriptType[0..1] role script
+end
+
+composition xxx_TimerType_createTimer between
+	TimerType[*] role xxx_TimerType_createTimer_src
+	CreateTimerType[0..1] role createTimer
+end
+
+composition xxx_TimerType_cancelTimer between
+	TimerType[*] role xxx_TimerType_cancelTimer_src
+	CancelTimerType[0..1] role cancelTimer
+end
+
+composition xxx_TimerType_mail between
+	TimerType[*] role xxx_TimerType_mail_src
+	MailType[0..1] role mail
+end
+
+composition xxx_TransitionType_condition between
+	TransitionType[0..1] role xxx_TransitionType_condition_src
+	ConditionType[*] role condition
+end
+
+composition xxx_TransitionType_action between
+	TransitionType[0..1] role xxx_TransitionType_action_src
+	ActionType[*] role action
+end
+
+composition xxx_TransitionType_script between
+	TransitionType[0..1] role xxx_TransitionType_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_TransitionType_createTimer between
+	TransitionType[0..1] role xxx_TransitionType_createTimer_src
+	CreateTimerType[*] role createTimer
+end
+
+composition xxx_TransitionType_cancelTimer between
+	TransitionType[0..1] role xxx_TransitionType_cancelTimer_src
+	CancelTimerType[*] role cancelTimer
+end
+
+composition xxx_TransitionType_mail between
+	TransitionType[0..1] role xxx_TransitionType_mail_src
+	MailType[*] role mail
+end
+
+composition xxx_TransitionType_exceptionHandler between
+	TransitionType[0..1] role xxx_TransitionType_exceptionHandler_src
+	ExceptionHandlerType[*] role exceptionHandler
+end
+

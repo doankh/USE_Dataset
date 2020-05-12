@@ -1,0 +1,146 @@
+model z3py
+abstract class Expression
+attributes
+operations
+end
+
+class FunctionCall<Expression
+attributes
+operations
+end
+
+abstract class Quantification<Expression
+attributes
+	comments : String
+operations
+end
+
+class UniversalQuantification<Quantification
+attributes
+operations
+end
+
+class ExistentialQuantification<Quantification
+attributes
+operations
+end
+
+class Conjunction<LogicalBinaryExpression
+attributes
+operations
+end
+
+class Disjunction<LogicalBinaryExpression
+attributes
+operations
+end
+
+class ExclusiveDisjunction<LogicalBinaryExpression
+attributes
+operations
+end
+
+class LogicalNegation<Expression
+attributes
+operations
+end
+
+class Implication<LogicalBinaryExpression
+attributes
+operations
+end
+
+class BiImplication<LogicalBinaryExpression
+attributes
+operations
+end
+
+abstract class LogicalBinaryExpression<Expression
+attributes
+operations
+end
+
+class BooleanFunctionDefinition
+attributes
+	name : String
+	numberOfArguments : Integer
+operations
+end
+
+class IntConstant
+attributes
+	name : String
+operations
+end
+
+class OntoUMLZ3System
+attributes
+	fileName : String
+operations
+end
+
+class Equality<Expression
+attributes
+operations
+end
+
+association xxx_FunctionCall_calledFunction between
+	FunctionCall[*] role xxx_FunctionCall_calledFunction_src
+	BooleanFunctionDefinition[1] role calledFunction
+end
+
+association xxx_FunctionCall_arguments between
+	FunctionCall[0..1] role xxx_FunctionCall_arguments_src
+	IntConstant[1..*] role arguments
+end
+
+association xxx_Quantification_expression between
+	Quantification[*] role xxx_Quantification_expression_src
+	Expression[1] role expression
+end
+
+association xxx_Quantification_quantifiesOver between
+	Quantification[0..1] role xxx_Quantification_quantifiesOver_src
+	IntConstant[1..*] role quantifiesOver
+end
+
+association xxx_LogicalNegation_operand between
+	LogicalNegation[*] role xxx_LogicalNegation_operand_src
+	Expression[1] role operand
+end
+
+association xxx_LogicalBinaryExpression_operand1 between
+	LogicalBinaryExpression[*] role xxx_LogicalBinaryExpression_operand1_src
+	Expression[1] role operand1
+end
+
+association xxx_LogicalBinaryExpression_operand2 between
+	LogicalBinaryExpression[*] role xxx_LogicalBinaryExpression_operand2_src
+	Expression[1] role operand2
+end
+
+composition xxx_OntoUMLZ3System_functions between
+	OntoUMLZ3System[0..1] role xxx_OntoUMLZ3System_functions_src
+	BooleanFunctionDefinition[1..*] role functions
+end
+
+composition xxx_OntoUMLZ3System_constants between
+	OntoUMLZ3System[0..1] role xxx_OntoUMLZ3System_constants_src
+	IntConstant[1..*] role constants
+end
+
+composition xxx_OntoUMLZ3System_formulas between
+	OntoUMLZ3System[0..1] role xxx_OntoUMLZ3System_formulas_src
+	Quantification[1..*] role formulas
+end
+
+association xxx_Equality_operand1 between
+	Equality[*] role xxx_Equality_operand1_src
+	IntConstant[1] role operand1
+end
+
+association xxx_Equality_operand2 between
+	Equality[*] role xxx_Equality_operand2_src
+	IntConstant[1] role operand2
+end
+

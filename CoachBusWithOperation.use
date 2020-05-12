@@ -1,0 +1,181 @@
+model CoachBusWithOperation
+enum Sex{
+default
+}
+
+class Trip
+attributes
+	name : String
+	origin : String
+	destination : String
+	number : Integer
+operations
+	addPassenger(p : Passenger)
+end
+
+class RegularTrip<Trip
+attributes
+operations
+end
+
+class PrivateTrip<Trip
+attributes
+	extras : String
+operations
+end
+
+class Coach
+attributes
+	id : Integer
+	name : String
+	model_ : String
+	noOfSeats : Integer
+operations
+	updateNoOfSeats(newNoOfSeats : Integer)
+	addTrip(trip : Trip)
+end
+
+class Passenger
+attributes
+	name : String
+	age : Integer
+	idCard : String
+	sex : Sex
+operations
+	updateAge(newAge : Integer)
+end
+
+class Employee
+attributes
+	id : Integer
+	baseSalary : Real
+operations
+end
+
+class SecurityGuard<Employee
+attributes
+	shift : String
+operations
+end
+
+class Manager<Employee
+attributes
+	hasMBA : Boolean
+operations
+end
+
+class BookingOffice
+attributes
+	name : String
+	location : String
+	officeID : Integer
+operations
+end
+
+class Ticket
+attributes
+	number : Integer
+	price : Real
+	isRoundTrip : Boolean
+operations
+	updateNumber(newNumber : Integer)
+end
+
+class VendingMachine
+attributes
+	number : Integer
+operations
+end
+
+class AdultTicket<Ticket
+attributes
+	isElderlyDiscount : Boolean
+operations
+end
+
+class ChildTicket<Ticket
+attributes
+	isSchoolTrip : Boolean
+operations
+end
+
+association xxx_Trip_coaches between
+	Trip[0..1] role xxx_Trip_coaches_src
+	Coach[*] role coaches
+end
+
+association xxx_Trip_passengers between
+	Trip[0..1] role xxx_Trip_passengers_src
+	Passenger[*] role passengers
+end
+
+association xxx_Coach_trips between
+	Coach[0..1] role xxx_Coach_trips_src
+	Trip[*] role trips
+end
+
+association xxx_Coach_guards between
+	Coach[0..1] role xxx_Coach_guards_src
+	SecurityGuard[*] role guards
+end
+
+association xxx_Coach_offices between
+	Coach[0..1] role xxx_Coach_offices_src
+	BookingOffice[*] role offices
+end
+
+association xxx_Passenger_trips between
+	Passenger[0..1] role xxx_Passenger_trips_src
+	Trip[*] role trips
+end
+
+association xxx_Passenger_tickets between
+	Passenger[0..1] role xxx_Passenger_tickets_src
+	Ticket[*] role tickets
+end
+
+association xxx_SecurityGuard_coach between
+	SecurityGuard[*] role xxx_SecurityGuard_coach_src
+	Coach[0..1] role coach
+end
+
+association xxx_Manager_office between
+	Manager[*] role xxx_Manager_office_src
+	BookingOffice[0..1] role office
+end
+
+association xxx_BookingOffice_coaches between
+	BookingOffice[0..1] role xxx_BookingOffice_coaches_src
+	Coach[*] role coaches
+end
+
+association xxx_BookingOffice_manager between
+	BookingOffice[*] role xxx_BookingOffice_manager_src
+	Manager[0..1] role manager
+end
+
+association xxx_BookingOffice_vms between
+	BookingOffice[0..1] role xxx_BookingOffice_vms_src
+	VendingMachine[*] role vms
+end
+
+association xxx_Ticket_psg between
+	Ticket[*] role xxx_Ticket_psg_src
+	Passenger[0..1] role psg
+end
+
+association xxx_Ticket_vm between
+	Ticket[*] role xxx_Ticket_vm_src
+	VendingMachine[0..1] role vm
+end
+
+association xxx_VendingMachine_tickets between
+	VendingMachine[0..1] role xxx_VendingMachine_tickets_src
+	Ticket[*] role tickets
+end
+
+association xxx_VendingMachine_office between
+	VendingMachine[*] role xxx_VendingMachine_office_src
+	BookingOffice[0..1] role office
+end
+

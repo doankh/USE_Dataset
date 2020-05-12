@@ -1,0 +1,297 @@
+model type
+enum ActivityType{
+	SubProcess,
+	EventEndMultiple,
+	EventEndMessage,
+	EventIntermediateMessage,
+	EventStartMultiple,
+	EventIntermediateMultiple,
+	GatewayParallel,
+	EventStartTimer,
+	EventStartEmpty,
+	EventIntermediateCancel,
+	EventEndError,
+	EventStartRule,
+	EventEndTerminate,
+	EventStartLink,
+	EventIntermediateLink,
+	EventEndCancel,
+	EventEndLink,
+	EventIntermediateEmpty,
+	EventIntermediateCompensation,
+	Task,
+	GatewayDataBasedExclusive,
+	GatewayComplex,
+	EventEndEmpty,
+	EventIntermediateError,
+	EventIntermediateTimer,
+	EventEndCompensation,
+	EventStartMessage,
+	GatewayDataBasedInclusive,
+	GatewayEventBasedExclusive,
+	EventIntermediateRule
+}
+
+enum DirectionType{
+	Both,
+	From,
+	To,
+	None
+}
+
+class Activity<NamedBpmnObject
+attributes
+	activityType : ActivityType
+	looping : Boolean
+operations
+end
+
+class Artifact<NamedBpmnObject
+attributes
+operations
+end
+
+class ArtifactsContainer<NamedBpmnObject
+attributes
+operations
+end
+
+class Association
+attributes
+	direction : DirectionType
+operations
+end
+
+class BpmnDiagram<ArtifactsContainer
+attributes
+	author : String
+	title : String
+operations
+end
+
+class DataObject<Artifact
+attributes
+operations
+end
+
+class Graph<ArtifactsContainer
+attributes
+operations
+end
+
+class Group<Artifact
+attributes
+operations
+end
+
+class Identifiable
+attributes
+	iD : Integer
+operations
+end
+
+class IdentifiableNode<Identifiable
+attributes
+operations
+end
+
+class Lane<NamedBpmnObject
+attributes
+operations
+end
+
+class MessagingEdge<NamedBpmnObject
+attributes
+operations
+end
+
+class NamedBpmnObject
+attributes
+	documentation : String
+	name : String
+	ncname : String
+operations
+end
+
+class Pool<NamedBpmnObject
+attributes
+operations
+end
+
+class SequenceEdge<NamedBpmnObject
+attributes
+	isDefault : Boolean
+operations
+end
+
+class SubProcess<Graph
+attributes
+	isTransaction : Boolean
+operations
+end
+
+class TextAnnotation<Artifact
+attributes
+operations
+end
+
+class Vertex<IdentifiableNode
+attributes
+operations
+end
+
+composition xxx_Activity_orderedMessages between
+	Activity[0..1] role xxx_Activity_orderedMessages_src
+	MessagingEdge[*] role orderedMessages
+end
+
+association xxx_Activity_incomingMessages between
+	Activity[0..1] role xxx_Activity_incomingMessages_src
+	MessagingEdge[*] role incomingMessages
+end
+
+association xxx_Activity_outgoingMessages between
+	Activity[0..1] role xxx_Activity_outgoingMessages_src
+	MessagingEdge[*] role outgoingMessages
+end
+
+association xxx_Activity_groups between
+	Activity[0..1] role xxx_Activity_groups_src
+	Group[*] role groups
+end
+
+association xxx_Activity_eventHandlerFor between
+	Activity[*] role xxx_Activity_eventHandlerFor_src
+	SubProcess[0..1] role eventHandlerFor
+end
+
+association xxx_Activity_lane between
+	Activity[*] role xxx_Activity_lane_src
+	Lane[0..1] role lane
+end
+
+composition xxx_Artifact_associations between
+	Artifact[0..1] role xxx_Artifact_associations_src
+	Association[*] role associations
+end
+
+association xxx_Artifact_artifactsContainer between
+	Artifact[*] role xxx_Artifact_artifactsContainer_src
+	ArtifactsContainer[0..1] role artifactsContainer
+end
+
+composition xxx_ArtifactsContainer_artifacts between
+	ArtifactsContainer[0..1] role xxx_ArtifactsContainer_artifacts_src
+	Artifact[*] role artifacts
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	Artifact[0..1] role source
+end
+
+association xxx_Association_target between
+	Association[*] role xxx_Association_target_src
+	IdentifiableNode[0..1] role target
+end
+
+composition xxx_BpmnDiagram_pools between
+	BpmnDiagram[0..1] role xxx_BpmnDiagram_pools_src
+	Pool[*] role pools
+end
+
+composition xxx_BpmnDiagram_messages between
+	BpmnDiagram[0..1] role xxx_BpmnDiagram_messages_src
+	MessagingEdge[*] role messages
+end
+
+composition xxx_Graph_vertices between
+	Graph[0..1] role xxx_Graph_vertices_src
+	Vertex[*] role vertices
+end
+
+composition xxx_Graph_sequenceEdges between
+	Graph[0..1] role xxx_Graph_sequenceEdges_src
+	SequenceEdge[*] role sequenceEdges
+end
+
+association xxx_Group_activities between
+	Group[0..1] role xxx_Group_activities_src
+	Activity[*] role activities
+end
+
+association xxx_IdentifiableNode_associations between
+	IdentifiableNode[0..1] role xxx_IdentifiableNode_associations_src
+	Association[*] role associations
+end
+
+association xxx_Lane_activities between
+	Lane[0..1] role xxx_Lane_activities_src
+	Activity[*] role activities
+end
+
+association xxx_Lane_pool between
+	Lane[*] role xxx_Lane_pool_src
+	Pool[0..1] role pool
+end
+
+association xxx_MessagingEdge_bpmnDiagram between
+	MessagingEdge[*] role xxx_MessagingEdge_bpmnDiagram_src
+	BpmnDiagram[0..1] role bpmnDiagram
+end
+
+association xxx_MessagingEdge_source between
+	MessagingEdge[*] role xxx_MessagingEdge_source_src
+	Activity[0..1] role source
+end
+
+association xxx_MessagingEdge_target between
+	MessagingEdge[*] role xxx_MessagingEdge_target_src
+	Activity[0..1] role target
+end
+
+composition xxx_Pool_lanes between
+	Pool[0..1] role xxx_Pool_lanes_src
+	Lane[*] role lanes
+end
+
+association xxx_Pool_bpmnDiagram between
+	Pool[*] role xxx_Pool_bpmnDiagram_src
+	BpmnDiagram[0..1] role bpmnDiagram
+end
+
+association xxx_SequenceEdge_graph between
+	SequenceEdge[*] role xxx_SequenceEdge_graph_src
+	Graph[0..1] role graph
+end
+
+association xxx_SequenceEdge_source between
+	SequenceEdge[*] role xxx_SequenceEdge_source_src
+	Vertex[0..1] role source
+end
+
+association xxx_SequenceEdge_target between
+	SequenceEdge[*] role xxx_SequenceEdge_target_src
+	Vertex[0..1] role target
+end
+
+composition xxx_SubProcess_eventHandlers between
+	SubProcess[0..1] role xxx_SubProcess_eventHandlers_src
+	Activity[*] role eventHandlers
+end
+
+association xxx_Vertex_outgoingEdges between
+	Vertex[0..1] role xxx_Vertex_outgoingEdges_src
+	SequenceEdge[*] role outgoingEdges
+end
+
+association xxx_Vertex_incomingEdges between
+	Vertex[0..1] role xxx_Vertex_incomingEdges_src
+	SequenceEdge[*] role incomingEdges
+end
+
+association xxx_Vertex_graph between
+	Vertex[*] role xxx_Vertex_graph_src
+	Graph[0..1] role graph
+end
+

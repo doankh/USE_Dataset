@@ -1,0 +1,207 @@
+model Freemind
+enum BOLDType{
+default
+}
+
+enum FOLDEDType{
+default
+}
+
+enum ITALICType{
+default
+}
+
+enum POSITIONType{
+default
+}
+
+class ArrowlinkType
+attributes
+	Color : String
+	Destination : String
+	EndArrow : String
+	EndInclination : String
+	Id : String
+	StartArrow : String
+	StartInclination : String
+operations
+end
+
+class CloudType
+attributes
+	Color : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class EdgeType
+attributes
+	Color : String
+	Style : String
+	Width : String
+operations
+end
+
+class FontType
+attributes
+	Bold : BOLDType
+	Italic : ITALICType
+	Name : String
+	Size : Integer
+operations
+end
+
+class HookType
+attributes
+	Name : String
+operations
+end
+
+class IconType
+attributes
+	Builtin : String
+operations
+end
+
+class MapType
+attributes
+	version : String
+operations
+end
+
+class NodeType
+attributes
+	group : String
+	BackgroundColor : String
+	Color : String
+	Created : Integer
+	EncryptedContent : String
+	Folded : FOLDEDType
+	Hgap : Integer
+	Id : String
+	Link : String
+	Modified : Integer
+	Position : POSITIONType
+	Style : String
+	Text : String
+	Vgap : Integer
+	Vshift : Integer
+operations
+end
+
+class ParametersType
+attributes
+	RemindUserAt : Integer
+operations
+end
+
+class TextType
+attributes
+operations
+end
+
+composition xxx_DocumentRoot_arrowlink between
+	DocumentRoot[0..1] role xxx_DocumentRoot_arrowlink_src
+	ArrowlinkType[*] role arrowlink
+end
+
+composition xxx_DocumentRoot_cloud between
+	DocumentRoot[0..1] role xxx_DocumentRoot_cloud_src
+	CloudType[*] role cloud
+end
+
+composition xxx_DocumentRoot_edge between
+	DocumentRoot[0..1] role xxx_DocumentRoot_edge_src
+	EdgeType[*] role edge
+end
+
+composition xxx_DocumentRoot_font between
+	DocumentRoot[0..1] role xxx_DocumentRoot_font_src
+	FontType[*] role font
+end
+
+composition xxx_DocumentRoot_hook between
+	DocumentRoot[0..1] role xxx_DocumentRoot_hook_src
+	HookType[*] role hook
+end
+
+composition xxx_DocumentRoot_icon between
+	DocumentRoot[0..1] role xxx_DocumentRoot_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_DocumentRoot_map between
+	DocumentRoot[0..1] role xxx_DocumentRoot_map_src
+	MapType[*] role map
+end
+
+composition xxx_DocumentRoot_node between
+	DocumentRoot[0..1] role xxx_DocumentRoot_node_src
+	NodeType[*] role node
+end
+
+composition xxx_DocumentRoot_parameters between
+	DocumentRoot[0..1] role xxx_DocumentRoot_parameters_src
+	ParametersType[*] role parameters
+end
+
+composition xxx_DocumentRoot_text between
+	DocumentRoot[0..1] role xxx_DocumentRoot_text_src
+	TextType[*] role text
+end
+
+composition xxx_HookType_parameters between
+	HookType[*] role xxx_HookType_parameters_src
+	ParametersType[0..1] role parameters
+end
+
+composition xxx_HookType_text between
+	HookType[*] role xxx_HookType_text_src
+	TextType[0..1] role text
+end
+
+composition xxx_MapType_node between
+	MapType[*] role xxx_MapType_node_src
+	NodeType[1] role node
+end
+
+composition xxx_NodeType_arrowlink between
+	NodeType[0..1] role xxx_NodeType_arrowlink_src
+	ArrowlinkType[*] role arrowlink
+end
+
+composition xxx_NodeType_cloud between
+	NodeType[0..1] role xxx_NodeType_cloud_src
+	CloudType[*] role cloud
+end
+
+composition xxx_NodeType_edge between
+	NodeType[0..1] role xxx_NodeType_edge_src
+	EdgeType[*] role edge
+end
+
+composition xxx_NodeType_font between
+	NodeType[0..1] role xxx_NodeType_font_src
+	FontType[*] role font
+end
+
+composition xxx_NodeType_hook between
+	NodeType[0..1] role xxx_NodeType_hook_src
+	HookType[*] role hook
+end
+
+composition xxx_NodeType_icon between
+	NodeType[0..1] role xxx_NodeType_icon_src
+	IconType[*] role icon
+end
+
+composition xxx_NodeType_node between
+	NodeType[0..1] role xxx_NodeType_node_src
+	NodeType[*] role node
+end
+

@@ -1,0 +1,1776 @@
+model xAL
+enum DependentThoroughfaresType{
+default
+}
+
+enum IndicatorOccurenceType{
+default
+}
+
+enum IndicatorOccurrenceType{
+default
+}
+
+enum IndicatorOccurrenceType1{
+default
+}
+
+enum IndicatorOccurrenceType2{
+default
+}
+
+enum IndicatorOccurrenceType3{
+default
+}
+
+enum IndicatorOccurrenceType4{
+default
+}
+
+enum NameNumberOccurrenceType{
+default
+}
+
+enum NumberOccurrenceType{
+default
+}
+
+enum NumberRangeOccurenceType{
+default
+}
+
+enum NumberRangeOccurrenceType{
+default
+}
+
+enum NumberTypeOccurrenceType{
+default
+}
+
+enum NumberTypeOccurrenceType1{
+default
+}
+
+enum NumberTypeType{
+default
+}
+
+enum NumberTypeType1{
+default
+}
+
+enum RangeTypeType{
+default
+}
+
+enum TypeOccurrenceType{
+default
+}
+
+enum TypeOccurrenceType1{
+default
+}
+
+enum TypeOccurrenceType2{
+default
+}
+
+class AddressDetails
+attributes
+	any : String
+	addressDetailsKey : String
+	addressType : String
+	code : String
+	currentStatus : String
+	usage : String
+	validFromDate : String
+	validToDate : String
+	anyAttribute : String
+operations
+end
+
+class AddressIdentifierType
+attributes
+	mixed : String
+	code : String
+	identifierType : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AddressLatitudeDirectionType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AddressLatitudeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AddressLinesType
+attributes
+	any : String
+	anyAttribute : String
+operations
+end
+
+class AddressLineType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AddressLongitudeDirectionType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AddressLongitudeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AddressType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AdministrativeAreaNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class AdministrativeAreaType
+attributes
+	any : String
+	indicator : String
+	type : String
+	usageType : String
+	anyAttribute : String
+operations
+end
+
+class BarcodeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class BuildingNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	typeOccurrence : TypeOccurrenceType2
+	anyAttribute : String
+operations
+end
+
+class CountryNameCodeType
+attributes
+	mixed : String
+	code : String
+	scheme : String
+	anyAttribute : String
+operations
+end
+
+class CountryNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class CountryType
+attributes
+	any : String
+	anyAttribute : String
+operations
+end
+
+class DepartmentNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class DepartmentType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class DependentLocalityNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class DependentLocalityNumberType
+attributes
+	mixed : String
+	code : String
+	nameNumberOccurrence : NameNumberOccurrenceType
+	anyAttribute : String
+operations
+end
+
+class DependentLocalityType
+attributes
+	any : String
+	connector : String
+	indicator : String
+	type : String
+	usageType : String
+	anyAttribute : String
+operations
+end
+
+class DependentThoroughfareType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class EndorsementLineCodeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class FirmNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class FirmType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class KeyLineCodeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class LargeMailUserIdentifierType
+attributes
+	mixed : String
+	code : String
+	indicator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class LargeMailUserNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class LargeMailUserType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class LocalityNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class LocalityType
+attributes
+	any : String
+	indicator : String
+	type : String
+	usageType : String
+	anyAttribute : String
+operations
+end
+
+class MailStopNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class MailStopNumberType
+attributes
+	mixed : String
+	code : String
+	nameNumberSeparator : String
+	anyAttribute : String
+operations
+end
+
+class MailStopType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostalCodeNumberExtensionType
+attributes
+	mixed : String
+	code : String
+	numberExtensionSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostalCodeNumberType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostalCodeType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostalRouteNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostalRouteNumberType
+attributes
+	mixed : String
+	code : String
+	anyAttribute : String
+operations
+end
+
+class PostalRouteType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostalServiceElementsType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostBoxNumberExtensionType
+attributes
+	mixed : String
+	numberExtensionSeparator : String
+	anyAttribute : String
+operations
+end
+
+class PostBoxNumberPrefixType
+attributes
+	mixed : String
+	code : String
+	numberPrefixSeparator : String
+	anyAttribute : String
+operations
+end
+
+class PostBoxNumberSuffixType
+attributes
+	mixed : String
+	code : String
+	numberSuffixSeparator : String
+	anyAttribute : String
+operations
+end
+
+class PostBoxNumberType
+attributes
+	mixed : String
+	code : String
+	anyAttribute : String
+operations
+end
+
+class PostBoxType
+attributes
+	any : String
+	indicator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostOfficeNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostOfficeNumberType
+attributes
+	mixed : String
+	code : String
+	indicator : String
+	indicatorOccurrence : IndicatorOccurrenceType2
+	anyAttribute : String
+operations
+end
+
+class PostOfficeType
+attributes
+	any : String
+	indicator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostTownNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PostTownSuffixType
+attributes
+	mixed : String
+	code : String
+	anyAttribute : String
+operations
+end
+
+class PostTownType
+attributes
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PremiseLocationType
+attributes
+	mixed : String
+	code : String
+	anyAttribute : String
+operations
+end
+
+class PremiseNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	typeOccurrence : TypeOccurrenceType1
+	anyAttribute : String
+operations
+end
+
+class PremiseNumberPrefixType
+attributes
+	value : String
+	code : String
+	numberPrefixSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PremiseNumberRangeFromType
+attributes
+operations
+end
+
+class PremiseNumberRangeToType
+attributes
+operations
+end
+
+class PremiseNumberRangeType
+attributes
+	indicator : String
+	indicatorOccurence : IndicatorOccurenceType
+	numberRangeOccurence : NumberRangeOccurenceType
+	rangeType : String
+	separator : String
+	type : String
+operations
+end
+
+class PremiseNumberSuffixType
+attributes
+	mixed : String
+	code : String
+	numberSuffixSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PremiseNumberType
+attributes
+	mixed : String
+	code : String
+	indicator : String
+	indicatorOccurrence : IndicatorOccurrenceType3
+	numberType : NumberTypeType
+	numberTypeOccurrence : NumberTypeOccurrenceType1
+	type : String
+	anyAttribute : String
+operations
+end
+
+class PremiseType
+attributes
+	any : String
+	premiseDependency : String
+	premiseDependencyType : String
+	premiseThoroughfareConnector : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class SortingCodeType
+attributes
+	code : String
+	type : String
+operations
+end
+
+class SubAdministrativeAreaNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class SubAdministrativeAreaType
+attributes
+	any : String
+	indicator : String
+	type : String
+	usageType : String
+	anyAttribute : String
+operations
+end
+
+class SubPremiseLocationType
+attributes
+	mixed : String
+	code : String
+operations
+end
+
+class SubPremiseNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	typeOccurrence : TypeOccurrenceType
+	anyAttribute : String
+operations
+end
+
+class SubPremiseNumberPrefixType
+attributes
+	mixed : String
+	code : String
+	numberPrefixSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class SubPremiseNumberSuffixType
+attributes
+	mixed : String
+	code : String
+	numberSuffixSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class SubPremiseNumberType
+attributes
+	mixed : String
+	code : String
+	indicator : String
+	indicatorOccurrence : IndicatorOccurrenceType
+	numberTypeOccurrence : NumberTypeOccurrenceType
+	premiseNumberSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class SubPremiseType
+attributes
+	any : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class SupplementaryPostalServiceDataType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareLeadingTypeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNameType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNumberFromType
+attributes
+	mixed : String
+	code : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNumberPrefixType
+attributes
+	mixed : String
+	code : String
+	numberPrefixSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNumberRangeType
+attributes
+	code : String
+	indicator : String
+	indicatorOccurrence : IndicatorOccurrenceType1
+	numberRangeOccurrence : NumberRangeOccurrenceType
+	rangeType : RangeTypeType
+	separator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNumberSuffixType
+attributes
+	mixed : String
+	code : String
+	numberSuffixSeparator : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNumberToType
+attributes
+	mixed : String
+	code : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareNumberType
+attributes
+	mixed : String
+	code : String
+	indicator : String
+	indicatorOccurrence : IndicatorOccurrenceType4
+	numberOccurrence : NumberOccurrenceType
+	numberType : NumberTypeType1
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfarePostDirectionType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfarePreDirectionType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareTrailingTypeType
+attributes
+	mixed : String
+	code : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class ThoroughfareType
+attributes
+	group : String
+	any : String
+	dependentThoroughfares : DependentThoroughfaresType
+	dependentThoroughfaresConnector : String
+	dependentThoroughfaresIndicator : String
+	dependentThoroughfaresType : String
+	type : String
+	anyAttribute : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class XALType
+attributes
+	any : String
+	version : String
+	anyAttribute : String
+operations
+end
+
+composition xxx_AddressDetails_postalServiceElements between
+	AddressDetails[*] role xxx_AddressDetails_postalServiceElements_src
+	PostalServiceElementsType[0..1] role postalServiceElements
+end
+
+composition xxx_AddressDetails_address between
+	AddressDetails[*] role xxx_AddressDetails_address_src
+	AddressType[0..1] role address
+end
+
+composition xxx_AddressDetails_addressLines between
+	AddressDetails[*] role xxx_AddressDetails_addressLines_src
+	AddressLinesType[0..1] role addressLines
+end
+
+composition xxx_AddressDetails_country between
+	AddressDetails[*] role xxx_AddressDetails_country_src
+	CountryType[0..1] role country
+end
+
+composition xxx_AddressDetails_administrativeArea between
+	AddressDetails[*] role xxx_AddressDetails_administrativeArea_src
+	AdministrativeAreaType[0..1] role administrativeArea
+end
+
+composition xxx_AddressDetails_locality between
+	AddressDetails[*] role xxx_AddressDetails_locality_src
+	LocalityType[0..1] role locality
+end
+
+composition xxx_AddressDetails_thoroughfare between
+	AddressDetails[*] role xxx_AddressDetails_thoroughfare_src
+	ThoroughfareType[0..1] role thoroughfare
+end
+
+composition xxx_AddressLinesType_addressLine between
+	AddressLinesType[0..1] role xxx_AddressLinesType_addressLine_src
+	AddressLineType[1..*] role addressLine
+end
+
+composition xxx_AdministrativeAreaType_addressLine between
+	AdministrativeAreaType[0..1] role xxx_AdministrativeAreaType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_AdministrativeAreaType_administrativeAreaName between
+	AdministrativeAreaType[0..1] role xxx_AdministrativeAreaType_administrativeAreaName_src
+	AdministrativeAreaNameType[*] role administrativeAreaName
+end
+
+composition xxx_AdministrativeAreaType_subAdministrativeArea between
+	AdministrativeAreaType[*] role xxx_AdministrativeAreaType_subAdministrativeArea_src
+	SubAdministrativeAreaType[0..1] role subAdministrativeArea
+end
+
+composition xxx_AdministrativeAreaType_locality between
+	AdministrativeAreaType[*] role xxx_AdministrativeAreaType_locality_src
+	LocalityType[0..1] role locality
+end
+
+composition xxx_AdministrativeAreaType_postOffice between
+	AdministrativeAreaType[*] role xxx_AdministrativeAreaType_postOffice_src
+	PostOfficeType[0..1] role postOffice
+end
+
+composition xxx_AdministrativeAreaType_postalCode between
+	AdministrativeAreaType[*] role xxx_AdministrativeAreaType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_CountryType_addressLine between
+	CountryType[0..1] role xxx_CountryType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_CountryType_countryNameCode between
+	CountryType[0..1] role xxx_CountryType_countryNameCode_src
+	CountryNameCodeType[*] role countryNameCode
+end
+
+composition xxx_CountryType_countryName between
+	CountryType[0..1] role xxx_CountryType_countryName_src
+	CountryNameType[*] role countryName
+end
+
+composition xxx_CountryType_administrativeArea between
+	CountryType[*] role xxx_CountryType_administrativeArea_src
+	AdministrativeAreaType[0..1] role administrativeArea
+end
+
+composition xxx_CountryType_locality between
+	CountryType[*] role xxx_CountryType_locality_src
+	LocalityType[0..1] role locality
+end
+
+composition xxx_CountryType_thoroughfare between
+	CountryType[*] role xxx_CountryType_thoroughfare_src
+	ThoroughfareType[0..1] role thoroughfare
+end
+
+composition xxx_DepartmentType_addressLine between
+	DepartmentType[0..1] role xxx_DepartmentType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_DepartmentType_departmentName between
+	DepartmentType[0..1] role xxx_DepartmentType_departmentName_src
+	DepartmentNameType[*] role departmentName
+end
+
+composition xxx_DepartmentType_mailStop between
+	DepartmentType[*] role xxx_DepartmentType_mailStop_src
+	MailStopType[0..1] role mailStop
+end
+
+composition xxx_DepartmentType_postalCode between
+	DepartmentType[*] role xxx_DepartmentType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_DependentLocalityType_addressLine between
+	DependentLocalityType[0..1] role xxx_DependentLocalityType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_DependentLocalityType_dependentLocalityName between
+	DependentLocalityType[0..1] role xxx_DependentLocalityType_dependentLocalityName_src
+	DependentLocalityNameType[*] role dependentLocalityName
+end
+
+composition xxx_DependentLocalityType_dependentLocalityNumber between
+	DependentLocalityType[*] role xxx_DependentLocalityType_dependentLocalityNumber_src
+	DependentLocalityNumberType[0..1] role dependentLocalityNumber
+end
+
+composition xxx_DependentLocalityType_postBox between
+	DependentLocalityType[*] role xxx_DependentLocalityType_postBox_src
+	PostBoxType[0..1] role postBox
+end
+
+composition xxx_DependentLocalityType_largeMailUser between
+	DependentLocalityType[*] role xxx_DependentLocalityType_largeMailUser_src
+	LargeMailUserType[0..1] role largeMailUser
+end
+
+composition xxx_DependentLocalityType_postOffice between
+	DependentLocalityType[*] role xxx_DependentLocalityType_postOffice_src
+	PostOfficeType[0..1] role postOffice
+end
+
+composition xxx_DependentLocalityType_postalRoute between
+	DependentLocalityType[*] role xxx_DependentLocalityType_postalRoute_src
+	PostalRouteType[0..1] role postalRoute
+end
+
+composition xxx_DependentLocalityType_thoroughfare between
+	DependentLocalityType[*] role xxx_DependentLocalityType_thoroughfare_src
+	ThoroughfareType[0..1] role thoroughfare
+end
+
+composition xxx_DependentLocalityType_premise between
+	DependentLocalityType[*] role xxx_DependentLocalityType_premise_src
+	PremiseType[0..1] role premise
+end
+
+composition xxx_DependentLocalityType_dependentLocality between
+	DependentLocalityType[*] role xxx_DependentLocalityType_dependentLocality_src
+	DependentLocalityType[0..1] role dependentLocality
+end
+
+composition xxx_DependentLocalityType_postalCode between
+	DependentLocalityType[*] role xxx_DependentLocalityType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_DependentThoroughfareType_addressLine between
+	DependentThoroughfareType[0..1] role xxx_DependentThoroughfareType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_DependentThoroughfareType_thoroughfarePreDirection between
+	DependentThoroughfareType[*] role xxx_DependentThoroughfareType_thoroughfarePreDirection_src
+	ThoroughfarePreDirectionType[0..1] role thoroughfarePreDirection
+end
+
+composition xxx_DependentThoroughfareType_thoroughfareLeadingType between
+	DependentThoroughfareType[*] role xxx_DependentThoroughfareType_thoroughfareLeadingType_src
+	ThoroughfareLeadingTypeType[0..1] role thoroughfareLeadingType
+end
+
+composition xxx_DependentThoroughfareType_thoroughfareName between
+	DependentThoroughfareType[0..1] role xxx_DependentThoroughfareType_thoroughfareName_src
+	ThoroughfareNameType[*] role thoroughfareName
+end
+
+composition xxx_DependentThoroughfareType_thoroughfareTrailingType between
+	DependentThoroughfareType[*] role xxx_DependentThoroughfareType_thoroughfareTrailingType_src
+	ThoroughfareTrailingTypeType[0..1] role thoroughfareTrailingType
+end
+
+composition xxx_DependentThoroughfareType_thoroughfarePostDirection between
+	DependentThoroughfareType[*] role xxx_DependentThoroughfareType_thoroughfarePostDirection_src
+	ThoroughfarePostDirectionType[0..1] role thoroughfarePostDirection
+end
+
+composition xxx_FirmType_addressLine between
+	FirmType[0..1] role xxx_FirmType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_FirmType_firmName between
+	FirmType[0..1] role xxx_FirmType_firmName_src
+	FirmNameType[*] role firmName
+end
+
+composition xxx_FirmType_department between
+	FirmType[0..1] role xxx_FirmType_department_src
+	DepartmentType[*] role department
+end
+
+composition xxx_FirmType_mailStop between
+	FirmType[*] role xxx_FirmType_mailStop_src
+	MailStopType[0..1] role mailStop
+end
+
+composition xxx_FirmType_postalCode between
+	FirmType[*] role xxx_FirmType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_LargeMailUserType_addressLine between
+	LargeMailUserType[0..1] role xxx_LargeMailUserType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_LargeMailUserType_largeMailUserName between
+	LargeMailUserType[0..1] role xxx_LargeMailUserType_largeMailUserName_src
+	LargeMailUserNameType[*] role largeMailUserName
+end
+
+composition xxx_LargeMailUserType_largeMailUserIdentifier between
+	LargeMailUserType[*] role xxx_LargeMailUserType_largeMailUserIdentifier_src
+	LargeMailUserIdentifierType[0..1] role largeMailUserIdentifier
+end
+
+composition xxx_LargeMailUserType_buildingName between
+	LargeMailUserType[0..1] role xxx_LargeMailUserType_buildingName_src
+	BuildingNameType[*] role buildingName
+end
+
+composition xxx_LargeMailUserType_department between
+	LargeMailUserType[*] role xxx_LargeMailUserType_department_src
+	DepartmentType[0..1] role department
+end
+
+composition xxx_LargeMailUserType_postBox between
+	LargeMailUserType[*] role xxx_LargeMailUserType_postBox_src
+	PostBoxType[0..1] role postBox
+end
+
+composition xxx_LargeMailUserType_thoroughfare between
+	LargeMailUserType[*] role xxx_LargeMailUserType_thoroughfare_src
+	ThoroughfareType[0..1] role thoroughfare
+end
+
+composition xxx_LargeMailUserType_postalCode between
+	LargeMailUserType[*] role xxx_LargeMailUserType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_LocalityType_addressLine between
+	LocalityType[0..1] role xxx_LocalityType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_LocalityType_localityName between
+	LocalityType[0..1] role xxx_LocalityType_localityName_src
+	LocalityNameType[*] role localityName
+end
+
+composition xxx_LocalityType_postBox between
+	LocalityType[*] role xxx_LocalityType_postBox_src
+	PostBoxType[0..1] role postBox
+end
+
+composition xxx_LocalityType_largeMailUser between
+	LocalityType[*] role xxx_LocalityType_largeMailUser_src
+	LargeMailUserType[0..1] role largeMailUser
+end
+
+composition xxx_LocalityType_postOffice between
+	LocalityType[*] role xxx_LocalityType_postOffice_src
+	PostOfficeType[0..1] role postOffice
+end
+
+composition xxx_LocalityType_postalRoute between
+	LocalityType[*] role xxx_LocalityType_postalRoute_src
+	PostalRouteType[0..1] role postalRoute
+end
+
+composition xxx_LocalityType_thoroughfare between
+	LocalityType[*] role xxx_LocalityType_thoroughfare_src
+	ThoroughfareType[0..1] role thoroughfare
+end
+
+composition xxx_LocalityType_premise between
+	LocalityType[*] role xxx_LocalityType_premise_src
+	PremiseType[0..1] role premise
+end
+
+composition xxx_LocalityType_dependentLocality between
+	LocalityType[*] role xxx_LocalityType_dependentLocality_src
+	DependentLocalityType[0..1] role dependentLocality
+end
+
+composition xxx_LocalityType_postalCode between
+	LocalityType[*] role xxx_LocalityType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_MailStopType_addressLine between
+	MailStopType[0..1] role xxx_MailStopType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_MailStopType_mailStopName between
+	MailStopType[*] role xxx_MailStopType_mailStopName_src
+	MailStopNameType[0..1] role mailStopName
+end
+
+composition xxx_MailStopType_mailStopNumber between
+	MailStopType[*] role xxx_MailStopType_mailStopNumber_src
+	MailStopNumberType[0..1] role mailStopNumber
+end
+
+composition xxx_PostalCodeType_addressLine between
+	PostalCodeType[0..1] role xxx_PostalCodeType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PostalCodeType_postalCodeNumber between
+	PostalCodeType[0..1] role xxx_PostalCodeType_postalCodeNumber_src
+	PostalCodeNumberType[*] role postalCodeNumber
+end
+
+composition xxx_PostalCodeType_postalCodeNumberExtension between
+	PostalCodeType[0..1] role xxx_PostalCodeType_postalCodeNumberExtension_src
+	PostalCodeNumberExtensionType[*] role postalCodeNumberExtension
+end
+
+composition xxx_PostalCodeType_postTown between
+	PostalCodeType[*] role xxx_PostalCodeType_postTown_src
+	PostTownType[0..1] role postTown
+end
+
+composition xxx_PostalRouteType_addressLine between
+	PostalRouteType[0..1] role xxx_PostalRouteType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PostalRouteType_postalRouteName between
+	PostalRouteType[0..1] role xxx_PostalRouteType_postalRouteName_src
+	PostalRouteNameType[*] role postalRouteName
+end
+
+composition xxx_PostalRouteType_postalRouteNumber between
+	PostalRouteType[*] role xxx_PostalRouteType_postalRouteNumber_src
+	PostalRouteNumberType[0..1] role postalRouteNumber
+end
+
+composition xxx_PostalRouteType_postBox between
+	PostalRouteType[*] role xxx_PostalRouteType_postBox_src
+	PostBoxType[0..1] role postBox
+end
+
+composition xxx_PostalServiceElementsType_addressIdentifier between
+	PostalServiceElementsType[0..1] role xxx_PostalServiceElementsType_addressIdentifier_src
+	AddressIdentifierType[*] role addressIdentifier
+end
+
+composition xxx_PostalServiceElementsType_endorsementLineCode between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_endorsementLineCode_src
+	EndorsementLineCodeType[0..1] role endorsementLineCode
+end
+
+composition xxx_PostalServiceElementsType_keyLineCode between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_keyLineCode_src
+	KeyLineCodeType[0..1] role keyLineCode
+end
+
+composition xxx_PostalServiceElementsType_barcode between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_barcode_src
+	BarcodeType[0..1] role barcode
+end
+
+composition xxx_PostalServiceElementsType_sortingCode between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_sortingCode_src
+	SortingCodeType[0..1] role sortingCode
+end
+
+composition xxx_PostalServiceElementsType_addressLatitude between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_addressLatitude_src
+	AddressLatitudeType[0..1] role addressLatitude
+end
+
+composition xxx_PostalServiceElementsType_addressLatitudeDirection between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_addressLatitudeDirection_src
+	AddressLatitudeDirectionType[0..1] role addressLatitudeDirection
+end
+
+composition xxx_PostalServiceElementsType_addressLongitude between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_addressLongitude_src
+	AddressLongitudeType[0..1] role addressLongitude
+end
+
+composition xxx_PostalServiceElementsType_addressLongitudeDirection between
+	PostalServiceElementsType[*] role xxx_PostalServiceElementsType_addressLongitudeDirection_src
+	AddressLongitudeDirectionType[0..1] role addressLongitudeDirection
+end
+
+composition xxx_PostalServiceElementsType_supplementaryPostalServiceData between
+	PostalServiceElementsType[0..1] role xxx_PostalServiceElementsType_supplementaryPostalServiceData_src
+	SupplementaryPostalServiceDataType[*] role supplementaryPostalServiceData
+end
+
+composition xxx_PostBoxType_addressLine between
+	PostBoxType[0..1] role xxx_PostBoxType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PostBoxType_postBoxNumber between
+	PostBoxType[*] role xxx_PostBoxType_postBoxNumber_src
+	PostBoxNumberType[1] role postBoxNumber
+end
+
+composition xxx_PostBoxType_postBoxNumberPrefix between
+	PostBoxType[*] role xxx_PostBoxType_postBoxNumberPrefix_src
+	PostBoxNumberPrefixType[0..1] role postBoxNumberPrefix
+end
+
+composition xxx_PostBoxType_postBoxNumberSuffix between
+	PostBoxType[*] role xxx_PostBoxType_postBoxNumberSuffix_src
+	PostBoxNumberSuffixType[0..1] role postBoxNumberSuffix
+end
+
+composition xxx_PostBoxType_postBoxNumberExtension between
+	PostBoxType[*] role xxx_PostBoxType_postBoxNumberExtension_src
+	PostBoxNumberExtensionType[0..1] role postBoxNumberExtension
+end
+
+composition xxx_PostBoxType_firm between
+	PostBoxType[*] role xxx_PostBoxType_firm_src
+	FirmType[0..1] role firm
+end
+
+composition xxx_PostBoxType_postalCode between
+	PostBoxType[*] role xxx_PostBoxType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_PostOfficeType_addressLine between
+	PostOfficeType[0..1] role xxx_PostOfficeType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PostOfficeType_postOfficeName between
+	PostOfficeType[0..1] role xxx_PostOfficeType_postOfficeName_src
+	PostOfficeNameType[*] role postOfficeName
+end
+
+composition xxx_PostOfficeType_postOfficeNumber between
+	PostOfficeType[*] role xxx_PostOfficeType_postOfficeNumber_src
+	PostOfficeNumberType[0..1] role postOfficeNumber
+end
+
+composition xxx_PostOfficeType_postalRoute between
+	PostOfficeType[*] role xxx_PostOfficeType_postalRoute_src
+	PostalRouteType[0..1] role postalRoute
+end
+
+composition xxx_PostOfficeType_postBox between
+	PostOfficeType[*] role xxx_PostOfficeType_postBox_src
+	PostBoxType[0..1] role postBox
+end
+
+composition xxx_PostOfficeType_postalCode between
+	PostOfficeType[*] role xxx_PostOfficeType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_PostTownType_addressLine between
+	PostTownType[0..1] role xxx_PostTownType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PostTownType_postTownName between
+	PostTownType[0..1] role xxx_PostTownType_postTownName_src
+	PostTownNameType[*] role postTownName
+end
+
+composition xxx_PostTownType_postTownSuffix between
+	PostTownType[*] role xxx_PostTownType_postTownSuffix_src
+	PostTownSuffixType[0..1] role postTownSuffix
+end
+
+composition xxx_PremiseNumberRangeFromType_addressLine between
+	PremiseNumberRangeFromType[0..1] role xxx_PremiseNumberRangeFromType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PremiseNumberRangeFromType_premiseNumberPrefix between
+	PremiseNumberRangeFromType[0..1] role xxx_PremiseNumberRangeFromType_premiseNumberPrefix_src
+	PremiseNumberPrefixType[*] role premiseNumberPrefix
+end
+
+composition xxx_PremiseNumberRangeFromType_premiseNumber between
+	PremiseNumberRangeFromType[0..1] role xxx_PremiseNumberRangeFromType_premiseNumber_src
+	PremiseNumberType[1..*] role premiseNumber
+end
+
+composition xxx_PremiseNumberRangeFromType_premiseNumberSuffix between
+	PremiseNumberRangeFromType[0..1] role xxx_PremiseNumberRangeFromType_premiseNumberSuffix_src
+	PremiseNumberSuffixType[*] role premiseNumberSuffix
+end
+
+composition xxx_PremiseNumberRangeToType_addressLine between
+	PremiseNumberRangeToType[0..1] role xxx_PremiseNumberRangeToType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PremiseNumberRangeToType_premiseNumberPrefix between
+	PremiseNumberRangeToType[0..1] role xxx_PremiseNumberRangeToType_premiseNumberPrefix_src
+	PremiseNumberPrefixType[*] role premiseNumberPrefix
+end
+
+composition xxx_PremiseNumberRangeToType_premiseNumber between
+	PremiseNumberRangeToType[0..1] role xxx_PremiseNumberRangeToType_premiseNumber_src
+	PremiseNumberType[1..*] role premiseNumber
+end
+
+composition xxx_PremiseNumberRangeToType_premiseNumberSuffix between
+	PremiseNumberRangeToType[0..1] role xxx_PremiseNumberRangeToType_premiseNumberSuffix_src
+	PremiseNumberSuffixType[*] role premiseNumberSuffix
+end
+
+composition xxx_PremiseNumberRangeType_premiseNumberRangeFrom between
+	PremiseNumberRangeType[*] role xxx_PremiseNumberRangeType_premiseNumberRangeFrom_src
+	PremiseNumberRangeFromType[1] role premiseNumberRangeFrom
+end
+
+composition xxx_PremiseNumberRangeType_premiseNumberRangeTo between
+	PremiseNumberRangeType[*] role xxx_PremiseNumberRangeType_premiseNumberRangeTo_src
+	PremiseNumberRangeToType[1] role premiseNumberRangeTo
+end
+
+composition xxx_PremiseType_addressLine between
+	PremiseType[0..1] role xxx_PremiseType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_PremiseType_premiseName between
+	PremiseType[0..1] role xxx_PremiseType_premiseName_src
+	PremiseNameType[*] role premiseName
+end
+
+composition xxx_PremiseType_premiseLocation between
+	PremiseType[*] role xxx_PremiseType_premiseLocation_src
+	PremiseLocationType[0..1] role premiseLocation
+end
+
+composition xxx_PremiseType_premiseNumber between
+	PremiseType[0..1] role xxx_PremiseType_premiseNumber_src
+	PremiseNumberType[*] role premiseNumber
+end
+
+composition xxx_PremiseType_premiseNumberRange between
+	PremiseType[*] role xxx_PremiseType_premiseNumberRange_src
+	PremiseNumberRangeType[0..1] role premiseNumberRange
+end
+
+composition xxx_PremiseType_premiseNumberPrefix between
+	PremiseType[0..1] role xxx_PremiseType_premiseNumberPrefix_src
+	PremiseNumberPrefixType[*] role premiseNumberPrefix
+end
+
+composition xxx_PremiseType_premiseNumberSuffix between
+	PremiseType[0..1] role xxx_PremiseType_premiseNumberSuffix_src
+	PremiseNumberSuffixType[*] role premiseNumberSuffix
+end
+
+composition xxx_PremiseType_buildingName between
+	PremiseType[0..1] role xxx_PremiseType_buildingName_src
+	BuildingNameType[*] role buildingName
+end
+
+composition xxx_PremiseType_subPremise between
+	PremiseType[0..1] role xxx_PremiseType_subPremise_src
+	SubPremiseType[*] role subPremise
+end
+
+composition xxx_PremiseType_firm between
+	PremiseType[*] role xxx_PremiseType_firm_src
+	FirmType[0..1] role firm
+end
+
+composition xxx_PremiseType_mailStop between
+	PremiseType[*] role xxx_PremiseType_mailStop_src
+	MailStopType[0..1] role mailStop
+end
+
+composition xxx_PremiseType_postalCode between
+	PremiseType[*] role xxx_PremiseType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_PremiseType_premise between
+	PremiseType[*] role xxx_PremiseType_premise_src
+	PremiseType[0..1] role premise
+end
+
+composition xxx_SubAdministrativeAreaType_addressLine between
+	SubAdministrativeAreaType[0..1] role xxx_SubAdministrativeAreaType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_SubAdministrativeAreaType_subAdministrativeAreaName between
+	SubAdministrativeAreaType[0..1] role xxx_SubAdministrativeAreaType_subAdministrativeAreaName_src
+	SubAdministrativeAreaNameType[*] role subAdministrativeAreaName
+end
+
+composition xxx_SubAdministrativeAreaType_locality between
+	SubAdministrativeAreaType[*] role xxx_SubAdministrativeAreaType_locality_src
+	LocalityType[0..1] role locality
+end
+
+composition xxx_SubAdministrativeAreaType_postOffice between
+	SubAdministrativeAreaType[*] role xxx_SubAdministrativeAreaType_postOffice_src
+	PostOfficeType[0..1] role postOffice
+end
+
+composition xxx_SubAdministrativeAreaType_postalCode between
+	SubAdministrativeAreaType[*] role xxx_SubAdministrativeAreaType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_SubPremiseType_addressLine between
+	SubPremiseType[0..1] role xxx_SubPremiseType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_SubPremiseType_subPremiseName between
+	SubPremiseType[0..1] role xxx_SubPremiseType_subPremiseName_src
+	SubPremiseNameType[*] role subPremiseName
+end
+
+composition xxx_SubPremiseType_subPremiseLocation between
+	SubPremiseType[*] role xxx_SubPremiseType_subPremiseLocation_src
+	SubPremiseLocationType[0..1] role subPremiseLocation
+end
+
+composition xxx_SubPremiseType_subPremiseNumber between
+	SubPremiseType[0..1] role xxx_SubPremiseType_subPremiseNumber_src
+	SubPremiseNumberType[*] role subPremiseNumber
+end
+
+composition xxx_SubPremiseType_subPremiseNumberPrefix between
+	SubPremiseType[0..1] role xxx_SubPremiseType_subPremiseNumberPrefix_src
+	SubPremiseNumberPrefixType[*] role subPremiseNumberPrefix
+end
+
+composition xxx_SubPremiseType_subPremiseNumberSuffix between
+	SubPremiseType[0..1] role xxx_SubPremiseType_subPremiseNumberSuffix_src
+	SubPremiseNumberSuffixType[*] role subPremiseNumberSuffix
+end
+
+composition xxx_SubPremiseType_buildingName between
+	SubPremiseType[0..1] role xxx_SubPremiseType_buildingName_src
+	BuildingNameType[*] role buildingName
+end
+
+composition xxx_SubPremiseType_firm between
+	SubPremiseType[*] role xxx_SubPremiseType_firm_src
+	FirmType[0..1] role firm
+end
+
+composition xxx_SubPremiseType_mailStop between
+	SubPremiseType[*] role xxx_SubPremiseType_mailStop_src
+	MailStopType[0..1] role mailStop
+end
+
+composition xxx_SubPremiseType_postalCode between
+	SubPremiseType[*] role xxx_SubPremiseType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_SubPremiseType_subPremise between
+	SubPremiseType[*] role xxx_SubPremiseType_subPremise_src
+	SubPremiseType[0..1] role subPremise
+end
+
+composition xxx_ThoroughfareNumberFromType_addressLine between
+	ThoroughfareNumberFromType[0..1] role xxx_ThoroughfareNumberFromType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_ThoroughfareNumberFromType_thoroughfareNumberPrefix between
+	ThoroughfareNumberFromType[0..1] role xxx_ThoroughfareNumberFromType_thoroughfareNumberPrefix_src
+	ThoroughfareNumberPrefixType[*] role thoroughfareNumberPrefix
+end
+
+composition xxx_ThoroughfareNumberFromType_thoroughfareNumber between
+	ThoroughfareNumberFromType[0..1] role xxx_ThoroughfareNumberFromType_thoroughfareNumber_src
+	ThoroughfareNumberType[1..*] role thoroughfareNumber
+end
+
+composition xxx_ThoroughfareNumberFromType_thoroughfareNumberSuffix between
+	ThoroughfareNumberFromType[0..1] role xxx_ThoroughfareNumberFromType_thoroughfareNumberSuffix_src
+	ThoroughfareNumberSuffixType[*] role thoroughfareNumberSuffix
+end
+
+composition xxx_ThoroughfareNumberRangeType_addressLine between
+	ThoroughfareNumberRangeType[0..1] role xxx_ThoroughfareNumberRangeType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_ThoroughfareNumberRangeType_thoroughfareNumberFrom between
+	ThoroughfareNumberRangeType[*] role xxx_ThoroughfareNumberRangeType_thoroughfareNumberFrom_src
+	ThoroughfareNumberFromType[1] role thoroughfareNumberFrom
+end
+
+composition xxx_ThoroughfareNumberRangeType_thoroughfareNumberTo between
+	ThoroughfareNumberRangeType[*] role xxx_ThoroughfareNumberRangeType_thoroughfareNumberTo_src
+	ThoroughfareNumberToType[1] role thoroughfareNumberTo
+end
+
+composition xxx_ThoroughfareNumberToType_addressLine between
+	ThoroughfareNumberToType[0..1] role xxx_ThoroughfareNumberToType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_ThoroughfareNumberToType_thoroughfareNumberPrefix between
+	ThoroughfareNumberToType[0..1] role xxx_ThoroughfareNumberToType_thoroughfareNumberPrefix_src
+	ThoroughfareNumberPrefixType[*] role thoroughfareNumberPrefix
+end
+
+composition xxx_ThoroughfareNumberToType_thoroughfareNumber between
+	ThoroughfareNumberToType[0..1] role xxx_ThoroughfareNumberToType_thoroughfareNumber_src
+	ThoroughfareNumberType[1..*] role thoroughfareNumber
+end
+
+composition xxx_ThoroughfareNumberToType_thoroughfareNumberSuffix between
+	ThoroughfareNumberToType[0..1] role xxx_ThoroughfareNumberToType_thoroughfareNumberSuffix_src
+	ThoroughfareNumberSuffixType[*] role thoroughfareNumberSuffix
+end
+
+composition xxx_ThoroughfareType_addressLine between
+	ThoroughfareType[0..1] role xxx_ThoroughfareType_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_ThoroughfareType_thoroughfareNumber between
+	ThoroughfareType[0..1] role xxx_ThoroughfareType_thoroughfareNumber_src
+	ThoroughfareNumberType[*] role thoroughfareNumber
+end
+
+composition xxx_ThoroughfareType_thoroughfareNumberRange between
+	ThoroughfareType[0..1] role xxx_ThoroughfareType_thoroughfareNumberRange_src
+	ThoroughfareNumberRangeType[*] role thoroughfareNumberRange
+end
+
+composition xxx_ThoroughfareType_thoroughfareNumberPrefix between
+	ThoroughfareType[0..1] role xxx_ThoroughfareType_thoroughfareNumberPrefix_src
+	ThoroughfareNumberPrefixType[*] role thoroughfareNumberPrefix
+end
+
+composition xxx_ThoroughfareType_thoroughfareNumberSuffix between
+	ThoroughfareType[0..1] role xxx_ThoroughfareType_thoroughfareNumberSuffix_src
+	ThoroughfareNumberSuffixType[*] role thoroughfareNumberSuffix
+end
+
+composition xxx_ThoroughfareType_thoroughfarePreDirection between
+	ThoroughfareType[*] role xxx_ThoroughfareType_thoroughfarePreDirection_src
+	ThoroughfarePreDirectionType[0..1] role thoroughfarePreDirection
+end
+
+composition xxx_ThoroughfareType_thoroughfareLeadingType between
+	ThoroughfareType[*] role xxx_ThoroughfareType_thoroughfareLeadingType_src
+	ThoroughfareLeadingTypeType[0..1] role thoroughfareLeadingType
+end
+
+composition xxx_ThoroughfareType_thoroughfareName between
+	ThoroughfareType[0..1] role xxx_ThoroughfareType_thoroughfareName_src
+	ThoroughfareNameType[*] role thoroughfareName
+end
+
+composition xxx_ThoroughfareType_thoroughfareTrailingType between
+	ThoroughfareType[*] role xxx_ThoroughfareType_thoroughfareTrailingType_src
+	ThoroughfareTrailingTypeType[0..1] role thoroughfareTrailingType
+end
+
+composition xxx_ThoroughfareType_thoroughfarePostDirection between
+	ThoroughfareType[*] role xxx_ThoroughfareType_thoroughfarePostDirection_src
+	ThoroughfarePostDirectionType[0..1] role thoroughfarePostDirection
+end
+
+composition xxx_ThoroughfareType_dependentThoroughfare between
+	ThoroughfareType[*] role xxx_ThoroughfareType_dependentThoroughfare_src
+	DependentThoroughfareType[0..1] role dependentThoroughfare
+end
+
+composition xxx_ThoroughfareType_dependentLocality between
+	ThoroughfareType[*] role xxx_ThoroughfareType_dependentLocality_src
+	DependentLocalityType[0..1] role dependentLocality
+end
+
+composition xxx_ThoroughfareType_premise between
+	ThoroughfareType[*] role xxx_ThoroughfareType_premise_src
+	PremiseType[0..1] role premise
+end
+
+composition xxx_ThoroughfareType_firm between
+	ThoroughfareType[*] role xxx_ThoroughfareType_firm_src
+	FirmType[0..1] role firm
+end
+
+composition xxx_ThoroughfareType_postalCode between
+	ThoroughfareType[*] role xxx_ThoroughfareType_postalCode_src
+	PostalCodeType[0..1] role postalCode
+end
+
+composition xxx_DocumentRoot_addressDetails between
+	DocumentRoot[*] role xxx_DocumentRoot_addressDetails_src
+	AddressDetails[*] role addressDetails
+end
+
+composition xxx_DocumentRoot_addressLine between
+	DocumentRoot[*] role xxx_DocumentRoot_addressLine_src
+	AddressLineType[*] role addressLine
+end
+
+composition xxx_DocumentRoot_administrativeArea between
+	DocumentRoot[*] role xxx_DocumentRoot_administrativeArea_src
+	AdministrativeAreaType[*] role administrativeArea
+end
+
+composition xxx_DocumentRoot_countryName between
+	DocumentRoot[*] role xxx_DocumentRoot_countryName_src
+	CountryNameType[*] role countryName
+end
+
+composition xxx_DocumentRoot_department between
+	DocumentRoot[*] role xxx_DocumentRoot_department_src
+	DepartmentType[*] role department
+end
+
+composition xxx_DocumentRoot_locality between
+	DocumentRoot[*] role xxx_DocumentRoot_locality_src
+	LocalityType[*] role locality
+end
+
+composition xxx_DocumentRoot_postalCode between
+	DocumentRoot[*] role xxx_DocumentRoot_postalCode_src
+	PostalCodeType[*] role postalCode
+end
+
+composition xxx_DocumentRoot_postBox between
+	DocumentRoot[*] role xxx_DocumentRoot_postBox_src
+	PostBoxType[*] role postBox
+end
+
+composition xxx_DocumentRoot_postOffice between
+	DocumentRoot[*] role xxx_DocumentRoot_postOffice_src
+	PostOfficeType[*] role postOffice
+end
+
+composition xxx_DocumentRoot_premise between
+	DocumentRoot[*] role xxx_DocumentRoot_premise_src
+	PremiseType[*] role premise
+end
+
+composition xxx_DocumentRoot_premiseNumber between
+	DocumentRoot[*] role xxx_DocumentRoot_premiseNumber_src
+	PremiseNumberType[*] role premiseNumber
+end
+
+composition xxx_DocumentRoot_premiseNumberPrefix between
+	DocumentRoot[*] role xxx_DocumentRoot_premiseNumberPrefix_src
+	PremiseNumberPrefixType[*] role premiseNumberPrefix
+end
+
+composition xxx_DocumentRoot_premiseNumberSuffix between
+	DocumentRoot[*] role xxx_DocumentRoot_premiseNumberSuffix_src
+	PremiseNumberSuffixType[*] role premiseNumberSuffix
+end
+
+composition xxx_DocumentRoot_thoroughfare between
+	DocumentRoot[*] role xxx_DocumentRoot_thoroughfare_src
+	ThoroughfareType[*] role thoroughfare
+end
+
+composition xxx_DocumentRoot_thoroughfareNumber between
+	DocumentRoot[*] role xxx_DocumentRoot_thoroughfareNumber_src
+	ThoroughfareNumberType[*] role thoroughfareNumber
+end
+
+composition xxx_DocumentRoot_thoroughfareNumberPrefix between
+	DocumentRoot[*] role xxx_DocumentRoot_thoroughfareNumberPrefix_src
+	ThoroughfareNumberPrefixType[*] role thoroughfareNumberPrefix
+end
+
+composition xxx_DocumentRoot_thoroughfareNumberSuffix between
+	DocumentRoot[*] role xxx_DocumentRoot_thoroughfareNumberSuffix_src
+	ThoroughfareNumberSuffixType[*] role thoroughfareNumberSuffix
+end
+
+composition xxx_DocumentRoot_xAL between
+	DocumentRoot[*] role xxx_DocumentRoot_xAL_src
+	XALType[*] role xAL
+end
+
+composition xxx_XALType_addressDetails between
+	XALType[0..1] role xxx_XALType_addressDetails_src
+	AddressDetails[1..*] role addressDetails
+end
+

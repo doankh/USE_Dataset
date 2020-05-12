@@ -1,0 +1,145 @@
+model Core
+enum ScopeKind{
+	sk_instance,
+	sk_classifier
+}
+
+enum VisibilityKind{
+	vk_public,
+	vk_protected,
+	vk_private,
+	vk_package
+}
+
+abstract class Element
+attributes
+operations
+end
+
+abstract class ModelElement<Element
+attributes
+	name : String
+	visibility : VisibilityKind
+	isSpecification : Boolean
+operations
+end
+
+abstract class GeneralizableElement<ModelElement
+attributes
+	isRoot : Boolean
+	isLeaf : Boolean
+	isAbstract : Boolean
+operations
+end
+
+abstract class Namespace<ModelElement
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+abstract class Feature<ModelElement
+attributes
+	ownerScope : ScopeKind
+operations
+end
+
+abstract class Relationship<ModelElement
+attributes
+operations
+end
+
+class Generalization<Relationship
+attributes
+	discriminator : String
+operations
+end
+
+class Package<Namespace
+attributes
+operations
+end
+
+class Model<Package
+attributes
+operations
+end
+
+class Subsystem<Classifier
+attributes
+	isInstantiable : Boolean
+operations
+end
+
+class ElementImport
+attributes
+	visibility : VisibilityKind
+	alias : String
+	isSpecification : Boolean
+operations
+end
+
+association xxx_ModelElement_namespace between
+	ModelElement[*] role xxx_ModelElement_namespace_src
+	Namespace[0..1] role namespace
+end
+
+association xxx_GeneralizableElement_generalization between
+	GeneralizableElement[0..1] role xxx_GeneralizableElement_generalization_src
+	Generalization[*] role generalization
+end
+
+composition xxx_Namespace_ownedElement between
+	Namespace[0..1] role xxx_Namespace_ownedElement_src
+	ModelElement[*] role ownedElement
+end
+
+association xxx_Classifier_powertypeRange between
+	Classifier[0..1] role xxx_Classifier_powertypeRange_src
+	Generalization[*] role powertypeRange
+end
+
+composition xxx_Classifier_feature between
+	Classifier[0..1] role xxx_Classifier_feature_src
+	Feature[*] role feature
+end
+
+association xxx_Feature_owner between
+	Feature[*] role xxx_Feature_owner_src
+	Classifier[0..1] role owner
+end
+
+association xxx_Generalization_parent between
+	Generalization[*] role xxx_Generalization_parent_src
+	GeneralizableElement[1] role parent
+end
+
+association xxx_Generalization_powertype between
+	Generalization[*] role xxx_Generalization_powertype_src
+	Classifier[0..1] role powertype
+end
+
+association xxx_Generalization_child between
+	Generalization[*] role xxx_Generalization_child_src
+	GeneralizableElement[1] role child
+end
+
+composition xxx_Package_elementImport between
+	Package[0..1] role xxx_Package_elementImport_src
+	ElementImport[*] role elementImport
+end
+
+association xxx_ElementImport_package between
+	ElementImport[*] role xxx_ElementImport_package_src
+	Package[1] role package
+end
+
+association xxx_ElementImport_importedElement between
+	ElementImport[*] role xxx_ElementImport_importedElement_src
+	ModelElement[1] role importedElement
+end
+

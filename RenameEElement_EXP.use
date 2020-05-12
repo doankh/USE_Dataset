@@ -1,0 +1,68 @@
+model complex
+class Management
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Project<NamedElement
+attributes
+	projectID : String
+operations
+end
+
+class Location
+attributes
+	city : String
+	country : String
+operations
+end
+
+class Employee<NamedElement
+attributes
+	freelancerID : String
+	experienceInYears : Integer
+	isManager : Boolean
+operations
+end
+
+class JavaEEExpert<Employee
+attributes
+operations
+end
+
+class MSNetExpert<Employee
+attributes
+operations
+end
+
+composition xxx_Management_projects between
+	Management[0..1] role xxx_Management_projects_src
+	Project[*] role projects
+end
+
+composition xxx_Management_freelancers between
+	Management[0..1] role xxx_Management_freelancers_src
+	Employee[*] role freelancers
+end
+
+association xxx_Project_hasWorker between
+	Project[0..1] role xxx_Project_hasWorker_src
+	Employee[*] role hasWorker
+end
+
+association xxx_Project_location between
+	Project[*] role xxx_Project_location_src
+	Location[1] role location
+end
+
+association xxx_Employee_hasProject between
+	Employee[0..1] role xxx_Employee_hasProject_src
+	Project[*] role hasProject
+end
+

@@ -1,0 +1,95 @@
+model parametercheck
+class ParameterCheckModel
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+operations
+end
+
+class ParameterDecl
+attributes
+	name : String
+	type : String
+operations
+end
+
+abstract class ParameterUsage
+attributes
+operations
+end
+
+class DeclaredParameter<ParameterUsage
+attributes
+	asString : String
+operations
+end
+
+class Literal<ParameterUsage
+attributes
+	value : String
+operations
+end
+
+class Check
+attributes
+	name : String
+	exceptionIfTrue : Boolean
+operations
+end
+
+class Exception
+attributes
+	package : String
+	name : String
+operations
+end
+
+composition xxx_ParameterCheckModel_method between
+	ParameterCheckModel[0..1] role xxx_ParameterCheckModel_method_src
+	Method[1..*] role method
+end
+
+composition xxx_Method_parameter between
+	Method[0..1] role xxx_Method_parameter_src
+	ParameterDecl[*] role parameter
+end
+
+composition xxx_Method_check between
+	Method[0..1] role xxx_Method_check_src
+	Check[1..*] role check
+end
+
+association xxx_DeclaredParameter_parameter between
+	DeclaredParameter[*] role xxx_DeclaredParameter_parameter_src
+	ParameterDecl[1] role parameter
+end
+
+composition xxx_Check_parameterusage between
+	Check[0..1] role xxx_Check_parameterusage_src
+	ParameterUsage[*] role parameterusage
+end
+
+composition xxx_Check_exception between
+	Check[*] role xxx_Check_exception_src
+	Exception[1] role exception
+end
+
+association xxx_Check_parentmethod between
+	Check[*] role xxx_Check_parentmethod_src
+	Method[1] role parentmethod
+end
+
+composition xxx_Exception_parameterusage between
+	Exception[0..1] role xxx_Exception_parameterusage_src
+	ParameterUsage[*] role parameterusage
+end
+
+association xxx_Exception_parentcheck between
+	Exception[*] role xxx_Exception_parentcheck_src
+	Check[1] role parentcheck
+end
+

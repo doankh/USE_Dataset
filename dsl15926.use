@@ -1,0 +1,198 @@
+model dsl15926
+abstract class AbstractObject<Thing
+attributes
+operations
+end
+
+class Template<AbstractObject
+attributes
+operations
+end
+
+class TemplateRole<NamedElement
+attributes
+	qualifiedCardinality : String
+operations
+end
+
+class Repository
+attributes
+	url : String
+	imports : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	label : String
+operations
+end
+
+class Annotation
+attributes
+	type : String
+	value : String
+	lang : String
+operations
+end
+
+class Individual<Thing
+attributes
+operations
+end
+
+class Class<AbstractObject
+attributes
+operations
+end
+
+class TemplateInstance
+attributes
+operations
+end
+
+class TemplateRoleInstance
+attributes
+operations
+end
+
+abstract class Thing<NamedElement
+attributes
+operations
+end
+
+class Classification
+attributes
+operations
+end
+
+class Specialization
+attributes
+operations
+end
+
+composition xxx_Template_roles between
+	Template[0..1] role xxx_Template_roles_src
+	TemplateRole[*] role roles
+end
+
+association xxx_Template_instances between
+	Template[0..1] role xxx_Template_instances_src
+	TemplateInstance[*] role instances
+end
+
+association xxx_Template_repository between
+	Template[*] role xxx_Template_repository_src
+	Repository[0..1] role repository
+end
+
+association xxx_TemplateRole_instances between
+	TemplateRole[0..1] role xxx_TemplateRole_instances_src
+	TemplateRoleInstance[*] role instances
+end
+
+association xxx_TemplateRole_entityType between
+	TemplateRole[*] role xxx_TemplateRole_entityType_src
+	AbstractObject[0..1] role entityType
+end
+
+composition xxx_Repository_classes between
+	Repository[0..1] role xxx_Repository_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Repository_templates between
+	Repository[0..1] role xxx_Repository_templates_src
+	Template[*] role templates
+end
+
+composition xxx_Repository_individuals between
+	Repository[0..1] role xxx_Repository_individuals_src
+	Individual[*] role individuals
+end
+
+composition xxx_Repository_templateInstances between
+	Repository[0..1] role xxx_Repository_templateInstances_src
+	TemplateInstance[*] role templateInstances
+end
+
+composition xxx_Repository_classifications between
+	Repository[0..1] role xxx_Repository_classifications_src
+	Classification[*] role classifications
+end
+
+composition xxx_Repository_specializations between
+	Repository[0..1] role xxx_Repository_specializations_src
+	Specialization[*] role specializations
+end
+
+composition xxx_NamedElement_annotations between
+	NamedElement[0..1] role xxx_NamedElement_annotations_src
+	Annotation[*] role annotations
+end
+
+association xxx_Individual_repository between
+	Individual[*] role xxx_Individual_repository_src
+	Repository[0..1] role repository
+end
+
+association xxx_Class_individuals between
+	Class[0..1] role xxx_Class_individuals_src
+	Thing[*] role individuals
+end
+
+association xxx_Class_repository between
+	Class[*] role xxx_Class_repository_src
+	Repository[0..1] role repository
+end
+
+association xxx_TemplateInstance_template between
+	TemplateInstance[*] role xxx_TemplateInstance_template_src
+	Template[0..1] role template
+end
+
+composition xxx_TemplateInstance_roles between
+	TemplateInstance[0..1] role xxx_TemplateInstance_roles_src
+	TemplateRoleInstance[*] role roles
+end
+
+association xxx_TemplateInstance_repository between
+	TemplateInstance[*] role xxx_TemplateInstance_repository_src
+	Repository[0..1] role repository
+end
+
+association xxx_TemplateRoleInstance_templateRole between
+	TemplateRoleInstance[*] role xxx_TemplateRoleInstance_templateRole_src
+	TemplateRole[0..1] role templateRole
+end
+
+association xxx_TemplateRoleInstance_propertyInstance between
+	TemplateRoleInstance[*] role xxx_TemplateRoleInstance_propertyInstance_src
+	Thing[1] role propertyInstance
+end
+
+association xxx_Thing_classes between
+	Thing[0..1] role xxx_Thing_classes_src
+	Class[*] role classes
+end
+
+association xxx_Classification_classifier between
+	Classification[*] role xxx_Classification_classifier_src
+	Class[0..1] role classifier
+end
+
+association xxx_Classification_classified between
+	Classification[*] role xxx_Classification_classified_src
+	Thing[0..1] role classified
+end
+
+association xxx_Specialization_superClass between
+	Specialization[*] role xxx_Specialization_superClass_src
+	AbstractObject[0..1] role superClass
+end
+
+association xxx_Specialization_subClass between
+	Specialization[*] role xxx_Specialization_subClass_src
+	AbstractObject[0..1] role subClass
+end
+

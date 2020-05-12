@@ -1,0 +1,1278 @@
+model DatadiagramMLXForm
+class DateTimeType
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+operations
+end
+
+class CellType
+attributes
+	unit : String
+	formula : String
+	err : String
+	value : String
+operations
+end
+
+class VisioDocument
+attributes
+	start : Integer
+	key : String
+	metric : Boolean
+	buildnum : Integer
+	version : String
+	docLangId : Integer
+operations
+end
+
+class DocumentPropertiesCollection
+attributes
+	title : String
+	subject : String
+	creator : String
+	manager : String
+	company : String
+	category : String
+	keywords : String
+	description : String
+	hyperlinkBase_href : String
+	alternateNames : String
+	template : String
+	buildNumberCreated : String
+	buildNumberEdited : String
+operations
+end
+
+class CustomPropertiesCollection
+attributes
+operations
+end
+
+class CustomProperty
+attributes
+	name : String
+	dataType : String
+operations
+end
+
+class DocumentSettingsElt
+attributes
+	glueSettings : Integer
+	snapSettings : Integer
+	snapExtensions : Integer
+	dynamicGridEnabled : Boolean
+	protectStyles : Boolean
+	protectShapes : Boolean
+	protectMasters : Boolean
+	protectBkgnds : Boolean
+	customMenusFile : String
+	customToolbarsFile : String
+	attachedToolbars : String
+operations
+end
+
+class SnapAnglesCollection
+attributes
+operations
+end
+
+class SnapAngle
+attributes
+	angleValue : Real
+operations
+end
+
+class ColorsTable
+attributes
+operations
+end
+
+class ColorEntry<IXrequiredElt
+attributes
+	rgb : String
+operations
+end
+
+class PrintSetup
+attributes
+operations
+end
+
+class FontsTable
+attributes
+operations
+end
+
+class FontEntry<IdentifiedElt
+attributes
+	name : String
+	charSet : String
+	pitchAndFamily : String
+	attributes_ : Integer
+	weight : Integer
+	unicode : Boolean
+operations
+end
+
+class FaceNamesTable
+attributes
+operations
+end
+
+class FaceName<IdentifiedElt
+attributes
+	name : String
+	unicodeRanges : String
+	charSet : String
+	panos : String
+	flags : Integer
+operations
+end
+
+class VBProjectData
+attributes
+	data : String
+operations
+end
+
+class EmailRoutingData
+attributes
+	data : String
+	size : Integer
+operations
+end
+
+class StyleSheetsCollection
+attributes
+operations
+end
+
+class StyleSheet<NamedElt
+attributes
+operations
+end
+
+class DocumentSheet<NamedElt
+attributes
+operations
+end
+
+class PageSheet<PageElt
+attributes
+operations
+end
+
+abstract class NamedElt
+attributes
+	name : String
+	nameU : String
+operations
+end
+
+abstract class IdentifiedElt
+attributes
+	ID : Integer
+operations
+end
+
+abstract class UniqueIdElt
+attributes
+	UniqueID : String
+operations
+end
+
+class Shape
+attributes
+	lineStyle : Integer
+	fillStyle : Integer
+	textStyle : Integer
+operations
+end
+
+abstract class ShapeElt
+attributes
+operations
+end
+
+abstract class IXElt
+attributes
+	iX : Integer
+operations
+end
+
+abstract class DelElt
+attributes
+	del : Boolean
+operations
+end
+
+class Geom<DelElt
+attributes
+operations
+end
+
+abstract class XYElt<DelElt
+attributes
+operations
+end
+
+class LineTo<XYElt
+attributes
+operations
+end
+
+class MoveTo<XYElt
+attributes
+operations
+end
+
+abstract class XYAElt<XYElt
+attributes
+operations
+end
+
+class ArcTo<XYAElt
+attributes
+operations
+end
+
+class SplineKnot<XYAElt
+attributes
+operations
+end
+
+class PolylineTo<XYAElt
+attributes
+operations
+end
+
+abstract class XYABElt<XYAElt
+attributes
+operations
+end
+
+class InfiniteLine<XYABElt
+attributes
+operations
+end
+
+abstract class XYABCDElt<XYABElt
+attributes
+operations
+end
+
+class Ellipse<XYABCDElt
+attributes
+operations
+end
+
+class EllipticalArcTo<XYABCDElt
+attributes
+operations
+end
+
+class SplineStart<XYABCDElt
+attributes
+operations
+end
+
+abstract class XYABCDEElt<XYABCDElt
+attributes
+operations
+end
+
+class NURBSTo<XYABCDEElt
+attributes
+operations
+end
+
+class Text<ShapeElt
+attributes
+operations
+end
+
+abstract class TextElt
+attributes
+operations
+end
+
+abstract class IXrequiredElt
+attributes
+	iX : Integer
+operations
+end
+
+class Cp<TextElt
+attributes
+operations
+end
+
+class Pp<TextElt
+attributes
+operations
+end
+
+class Tp<TextElt
+attributes
+operations
+end
+
+class Fld<TextElt
+attributes
+operations
+end
+
+class StringElt<TextElt
+attributes
+	value : String
+operations
+end
+
+class Char<DelElt
+attributes
+operations
+end
+
+class Para<DelElt
+attributes
+operations
+end
+
+class TabsCollection<DelElt
+attributes
+operations
+end
+
+class Tab<IXElt
+attributes
+operations
+end
+
+class Field<DelElt
+attributes
+operations
+end
+
+class XForm<DelElt
+attributes
+operations
+end
+
+class MastersCollection
+attributes
+operations
+end
+
+class MasterShortCut<NamedElt
+attributes
+	iconSize : Integer
+	patternFlags : Integer
+	prompt : String
+	shortcutURL : String
+	shortcutHelp : String
+	alignName : Integer
+operations
+end
+
+class Icon<MasterElt
+attributes
+	value : String
+operations
+end
+
+class Master<NamedElt
+attributes
+	baseID : String
+	matchByName : Boolean
+	iconSize : Integer
+	patternFlags : Integer
+	prompt : String
+	hidden : Boolean
+	iconUpdate : Boolean
+	alignName : Integer
+operations
+end
+
+class ShapesCollection<PageElt
+attributes
+operations
+end
+
+class ConnectsCollection<PageElt
+attributes
+operations
+end
+
+class Connect
+attributes
+	fromSheet : Integer
+	toSheet : Integer
+	fromCell : String
+	toCell : String
+	fromPart : Integer
+	toPart : Integer
+operations
+end
+
+abstract class MasterElt
+attributes
+operations
+end
+
+class PagesCollection
+attributes
+operations
+end
+
+class Page<NamedElt
+attributes
+	background : Boolean
+	backPage : Integer
+	viewScale : Real
+	viewCenterX : Real
+	ViewCenterY : Real
+	reviewerID : Integer
+	associatedPage : Integer
+operations
+end
+
+abstract class PageElt
+attributes
+operations
+end
+
+class WindowsInfo
+attributes
+operations
+end
+
+class EventList
+attributes
+operations
+end
+
+class HeaderFooter
+attributes
+operations
+end
+
+class SolutionXML
+attributes
+operations
+end
+
+composition xxx_VisioDocument_docProps between
+	VisioDocument[*] role xxx_VisioDocument_docProps_src
+	DocumentPropertiesCollection[0..1] role docProps
+end
+
+composition xxx_VisioDocument_docSettings between
+	VisioDocument[*] role xxx_VisioDocument_docSettings_src
+	DocumentSettingsElt[0..1] role docSettings
+end
+
+composition xxx_VisioDocument_docColors between
+	VisioDocument[*] role xxx_VisioDocument_docColors_src
+	ColorsTable[0..1] role docColors
+end
+
+composition xxx_VisioDocument_docPrintSetup between
+	VisioDocument[*] role xxx_VisioDocument_docPrintSetup_src
+	PrintSetup[0..1] role docPrintSetup
+end
+
+composition xxx_VisioDocument_docFonts between
+	VisioDocument[*] role xxx_VisioDocument_docFonts_src
+	FontsTable[0..1] role docFonts
+end
+
+composition xxx_VisioDocument_docFaceNames between
+	VisioDocument[*] role xxx_VisioDocument_docFaceNames_src
+	FaceNamesTable[0..1] role docFaceNames
+end
+
+composition xxx_VisioDocument_docStyleSheets between
+	VisioDocument[*] role xxx_VisioDocument_docStyleSheets_src
+	StyleSheetsCollection[0..1] role docStyleSheets
+end
+
+composition xxx_VisioDocument_docDocumentSheet between
+	VisioDocument[*] role xxx_VisioDocument_docDocumentSheet_src
+	DocumentSheet[0..1] role docDocumentSheet
+end
+
+composition xxx_VisioDocument_docMasters between
+	VisioDocument[*] role xxx_VisioDocument_docMasters_src
+	MastersCollection[0..1] role docMasters
+end
+
+composition xxx_VisioDocument_docPages between
+	VisioDocument[*] role xxx_VisioDocument_docPages_src
+	PagesCollection[0..1] role docPages
+end
+
+composition xxx_VisioDocument_docWindows between
+	VisioDocument[*] role xxx_VisioDocument_docWindows_src
+	WindowsInfo[0..1] role docWindows
+end
+
+composition xxx_VisioDocument_docEventList between
+	VisioDocument[*] role xxx_VisioDocument_docEventList_src
+	EventList[0..1] role docEventList
+end
+
+composition xxx_VisioDocument_docHeaderFooter between
+	VisioDocument[*] role xxx_VisioDocument_docHeaderFooter_src
+	HeaderFooter[0..1] role docHeaderFooter
+end
+
+composition xxx_VisioDocument_docVBProjectData between
+	VisioDocument[*] role xxx_VisioDocument_docVBProjectData_src
+	VBProjectData[0..1] role docVBProjectData
+end
+
+composition xxx_VisioDocument_docEmailRoutingData between
+	VisioDocument[*] role xxx_VisioDocument_docEmailRoutingData_src
+	EmailRoutingData[0..1] role docEmailRoutingData
+end
+
+composition xxx_VisioDocument_docSolutionXML between
+	VisioDocument[0..1] role xxx_VisioDocument_docSolutionXML_src
+	SolutionXML[*] role docSolutionXML
+end
+
+association xxx_DocumentPropertiesCollection_dps_visioDocument between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_dps_visioDocument_src
+	VisioDocument[1] role dps_visioDocument
+end
+
+composition xxx_DocumentPropertiesCollection_customProps between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_customProps_src
+	CustomPropertiesCollection[0..1] role customProps
+end
+
+composition xxx_DocumentPropertiesCollection_timeCreated between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_timeCreated_src
+	DateTimeType[0..1] role timeCreated
+end
+
+composition xxx_DocumentPropertiesCollection_timeSaved between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_timeSaved_src
+	DateTimeType[0..1] role timeSaved
+end
+
+composition xxx_DocumentPropertiesCollection_timeEdited between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_timeEdited_src
+	DateTimeType[0..1] role timeEdited
+end
+
+composition xxx_DocumentPropertiesCollection_timePrinted between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_timePrinted_src
+	DateTimeType[0..1] role timePrinted
+end
+
+association xxx_CustomPropertiesCollection_cps_docProp between
+	CustomPropertiesCollection[*] role xxx_CustomPropertiesCollection_cps_docProp_src
+	DocumentPropertiesCollection[1] role cps_docProp
+end
+
+composition xxx_CustomPropertiesCollection_cps_customProps between
+	CustomPropertiesCollection[0..1] role xxx_CustomPropertiesCollection_cps_customProps_src
+	CustomProperty[*] role cps_customProps
+end
+
+association xxx_CustomProperty_cp_customProps between
+	CustomProperty[*] role xxx_CustomProperty_cp_customProps_src
+	CustomPropertiesCollection[1] role cp_customProps
+end
+
+association xxx_DocumentSettingsElt_dss_visioDocument between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_dss_visioDocument_src
+	VisioDocument[1] role dss_visioDocument
+end
+
+composition xxx_DocumentSettingsElt_topPage between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_topPage_src
+	Page[0..1] role topPage
+end
+
+composition xxx_DocumentSettingsElt_defaultTextStyle between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_defaultTextStyle_src
+	StyleSheet[0..1] role defaultTextStyle
+end
+
+composition xxx_DocumentSettingsElt_defaultLineStyle between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_defaultLineStyle_src
+	StyleSheet[0..1] role defaultLineStyle
+end
+
+composition xxx_DocumentSettingsElt_defaultFillStyle between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_defaultFillStyle_src
+	StyleSheet[0..1] role defaultFillStyle
+end
+
+composition xxx_DocumentSettingsElt_defaultGuideStyle between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_defaultGuideStyle_src
+	StyleSheet[0..1] role defaultGuideStyle
+end
+
+composition xxx_DocumentSettingsElt_ds_snapAngles between
+	DocumentSettingsElt[*] role xxx_DocumentSettingsElt_ds_snapAngles_src
+	SnapAnglesCollection[0..1] role ds_snapAngles
+end
+
+association xxx_SnapAnglesCollection_sa_docSettings between
+	SnapAnglesCollection[*] role xxx_SnapAnglesCollection_sa_docSettings_src
+	DocumentSettingsElt[1] role sa_docSettings
+end
+
+composition xxx_SnapAnglesCollection_snapAngles between
+	SnapAnglesCollection[0..1] role xxx_SnapAnglesCollection_snapAngles_src
+	SnapAngle[*] role snapAngles
+end
+
+association xxx_SnapAngle_sa_snapAngles between
+	SnapAngle[*] role xxx_SnapAngle_sa_snapAngles_src
+	SnapAnglesCollection[1] role sa_snapAngles
+end
+
+association xxx_ColorsTable_cs_visioDocument between
+	ColorsTable[*] role xxx_ColorsTable_cs_visioDocument_src
+	VisioDocument[1] role cs_visioDocument
+end
+
+composition xxx_ColorsTable_colorEntries between
+	ColorsTable[0..1] role xxx_ColorsTable_colorEntries_src
+	ColorEntry[*] role colorEntries
+end
+
+association xxx_ColorEntry_ce_colors between
+	ColorEntry[*] role xxx_ColorEntry_ce_colors_src
+	ColorsTable[1] role ce_colors
+end
+
+association xxx_PrintSetup_ps_visioDocument between
+	PrintSetup[*] role xxx_PrintSetup_ps_visioDocument_src
+	VisioDocument[1] role ps_visioDocument
+end
+
+association xxx_FontsTable_fs_visioDocument between
+	FontsTable[*] role xxx_FontsTable_fs_visioDocument_src
+	VisioDocument[1] role fs_visioDocument
+end
+
+composition xxx_FontsTable_fontEntries between
+	FontsTable[0..1] role xxx_FontsTable_fontEntries_src
+	FontEntry[*] role fontEntries
+end
+
+association xxx_FontEntry_fe_fonts between
+	FontEntry[*] role xxx_FontEntry_fe_fonts_src
+	FontsTable[1] role fe_fonts
+end
+
+association xxx_FaceNamesTable_fns_visioDocument between
+	FaceNamesTable[*] role xxx_FaceNamesTable_fns_visioDocument_src
+	VisioDocument[1] role fns_visioDocument
+end
+
+composition xxx_FaceNamesTable_faceNameEntries between
+	FaceNamesTable[0..1] role xxx_FaceNamesTable_faceNameEntries_src
+	FaceName[*] role faceNameEntries
+end
+
+association xxx_FaceName_fn_faceNames between
+	FaceName[*] role xxx_FaceName_fn_faceNames_src
+	FaceNamesTable[1] role fn_faceNames
+end
+
+association xxx_VBProjectData_vpd_visioDocument between
+	VBProjectData[*] role xxx_VBProjectData_vpd_visioDocument_src
+	VisioDocument[1] role vpd_visioDocument
+end
+
+association xxx_EmailRoutingData_erd_visioDocument between
+	EmailRoutingData[*] role xxx_EmailRoutingData_erd_visioDocument_src
+	VisioDocument[1] role erd_visioDocument
+end
+
+association xxx_StyleSheetsCollection_sss_visioDocument between
+	StyleSheetsCollection[*] role xxx_StyleSheetsCollection_sss_visioDocument_src
+	VisioDocument[1] role sss_visioDocument
+end
+
+composition xxx_StyleSheetsCollection_stylesSheets between
+	StyleSheetsCollection[0..1] role xxx_StyleSheetsCollection_stylesSheets_src
+	StyleSheet[*] role stylesSheets
+end
+
+association xxx_StyleSheet_ss_stylesSheets between
+	StyleSheet[*] role xxx_StyleSheet_ss_stylesSheets_src
+	StyleSheetsCollection[1] role ss_stylesSheets
+end
+
+association xxx_DocumentSheet_ds_visioDocument between
+	DocumentSheet[*] role xxx_DocumentSheet_ds_visioDocument_src
+	VisioDocument[1] role ds_visioDocument
+end
+
+association xxx_Shape_ss_shapes between
+	Shape[*] role xxx_Shape_ss_shapes_src
+	ShapesCollection[1] role ss_shapes
+end
+
+composition xxx_Shape_shapeElts between
+	Shape[0..1] role xxx_Shape_shapeElts_src
+	ShapeElt[*] role shapeElts
+end
+
+association xxx_ShapeElt_sse_shapeSheet between
+	ShapeElt[*] role xxx_ShapeElt_sse_shapeSheet_src
+	Shape[1] role sse_shapeSheet
+end
+
+composition xxx_Geom_noFill between
+	Geom[*] role xxx_Geom_noFill_src
+	CellType[0..1] role noFill
+end
+
+composition xxx_Geom_noLine between
+	Geom[*] role xxx_Geom_noLine_src
+	CellType[0..1] role noLine
+end
+
+composition xxx_Geom_noShow between
+	Geom[*] role xxx_Geom_noShow_src
+	CellType[0..1] role noShow
+end
+
+composition xxx_Geom_noSnap between
+	Geom[*] role xxx_Geom_noSnap_src
+	CellType[0..1] role noSnap
+end
+
+composition xxx_Geom_linesTo between
+	Geom[0..1] role xxx_Geom_linesTo_src
+	LineTo[*] role linesTo
+end
+
+composition xxx_Geom_movesTo between
+	Geom[0..1] role xxx_Geom_movesTo_src
+	MoveTo[*] role movesTo
+end
+
+composition xxx_Geom_arcsTo between
+	Geom[0..1] role xxx_Geom_arcsTo_src
+	ArcTo[*] role arcsTo
+end
+
+composition xxx_Geom_splineKnots between
+	Geom[0..1] role xxx_Geom_splineKnots_src
+	SplineKnot[*] role splineKnots
+end
+
+composition xxx_Geom_polylinesTo between
+	Geom[0..1] role xxx_Geom_polylinesTo_src
+	PolylineTo[*] role polylinesTo
+end
+
+composition xxx_Geom_infiniteLines between
+	Geom[0..1] role xxx_Geom_infiniteLines_src
+	InfiniteLine[*] role infiniteLines
+end
+
+composition xxx_Geom_ellipses between
+	Geom[0..1] role xxx_Geom_ellipses_src
+	Ellipse[*] role ellipses
+end
+
+composition xxx_Geom_ellipticalArcsTo between
+	Geom[0..1] role xxx_Geom_ellipticalArcsTo_src
+	EllipticalArcTo[*] role ellipticalArcsTo
+end
+
+composition xxx_Geom_splineStarts between
+	Geom[0..1] role xxx_Geom_splineStarts_src
+	SplineStart[*] role splineStarts
+end
+
+composition xxx_Geom_nurbsTo between
+	Geom[0..1] role xxx_Geom_nurbsTo_src
+	NURBSTo[*] role nurbsTo
+end
+
+composition xxx_XYElt_x between
+	XYElt[*] role xxx_XYElt_x_src
+	CellType[0..1] role x
+end
+
+composition xxx_XYElt_y between
+	XYElt[*] role xxx_XYElt_y_src
+	CellType[0..1] role y
+end
+
+association xxx_LineTo_lt_geom between
+	LineTo[*] role xxx_LineTo_lt_geom_src
+	Geom[1] role lt_geom
+end
+
+association xxx_MoveTo_mt_geom between
+	MoveTo[*] role xxx_MoveTo_mt_geom_src
+	Geom[1] role mt_geom
+end
+
+composition xxx_XYAElt_a between
+	XYAElt[*] role xxx_XYAElt_a_src
+	CellType[0..1] role a
+end
+
+association xxx_ArcTo_ac_geom between
+	ArcTo[*] role xxx_ArcTo_ac_geom_src
+	Geom[1] role ac_geom
+end
+
+association xxx_SplineKnot_sk_geom between
+	SplineKnot[*] role xxx_SplineKnot_sk_geom_src
+	Geom[1] role sk_geom
+end
+
+association xxx_PolylineTo_pt_geom between
+	PolylineTo[*] role xxx_PolylineTo_pt_geom_src
+	Geom[1] role pt_geom
+end
+
+composition xxx_XYABElt_b between
+	XYABElt[*] role xxx_XYABElt_b_src
+	CellType[0..1] role b
+end
+
+association xxx_InfiniteLine_il_geom between
+	InfiniteLine[*] role xxx_InfiniteLine_il_geom_src
+	Geom[1] role il_geom
+end
+
+composition xxx_XYABCDElt_c between
+	XYABCDElt[*] role xxx_XYABCDElt_c_src
+	CellType[0..1] role c
+end
+
+composition xxx_XYABCDElt_d between
+	XYABCDElt[*] role xxx_XYABCDElt_d_src
+	CellType[0..1] role d
+end
+
+association xxx_Ellipse_e_geom between
+	Ellipse[*] role xxx_Ellipse_e_geom_src
+	Geom[1] role e_geom
+end
+
+association xxx_EllipticalArcTo_eat_geom between
+	EllipticalArcTo[*] role xxx_EllipticalArcTo_eat_geom_src
+	Geom[1] role eat_geom
+end
+
+association xxx_SplineStart_ss_geom between
+	SplineStart[*] role xxx_SplineStart_ss_geom_src
+	Geom[1] role ss_geom
+end
+
+composition xxx_XYABCDEElt_e between
+	XYABCDEElt[*] role xxx_XYABCDEElt_e_src
+	CellType[0..1] role e
+end
+
+association xxx_NURBSTo_nt_geom between
+	NURBSTo[*] role xxx_NURBSTo_nt_geom_src
+	Geom[1] role nt_geom
+end
+
+composition xxx_Text_textElts between
+	Text[0..1] role xxx_Text_textElts_src
+	TextElt[*] role textElts
+end
+
+association xxx_TextElt_te_text between
+	TextElt[*] role xxx_TextElt_te_text_src
+	Text[1] role te_text
+end
+
+composition xxx_Char_font between
+	Char[*] role xxx_Char_font_src
+	CellType[0..1] role font
+end
+
+composition xxx_Char_color between
+	Char[*] role xxx_Char_color_src
+	CellType[0..1] role color
+end
+
+composition xxx_Char_style between
+	Char[*] role xxx_Char_style_src
+	CellType[0..1] role style
+end
+
+composition xxx_Char_case between
+	Char[*] role xxx_Char_case_src
+	CellType[0..1] role case
+end
+
+composition xxx_Char_pos between
+	Char[*] role xxx_Char_pos_src
+	CellType[0..1] role pos
+end
+
+composition xxx_Char_fontScale between
+	Char[*] role xxx_Char_fontScale_src
+	CellType[0..1] role fontScale
+end
+
+composition xxx_Char_size between
+	Char[*] role xxx_Char_size_src
+	CellType[0..1] role size
+end
+
+composition xxx_Char_dblUnderline between
+	Char[*] role xxx_Char_dblUnderline_src
+	CellType[0..1] role dblUnderline
+end
+
+composition xxx_Char_overline between
+	Char[*] role xxx_Char_overline_src
+	CellType[0..1] role overline
+end
+
+composition xxx_Char_strikethru between
+	Char[*] role xxx_Char_strikethru_src
+	CellType[0..1] role strikethru
+end
+
+composition xxx_Char_doubleStrikethrough between
+	Char[*] role xxx_Char_doubleStrikethrough_src
+	CellType[0..1] role doubleStrikethrough
+end
+
+composition xxx_Char_rtlText between
+	Char[*] role xxx_Char_rtlText_src
+	CellType[0..1] role rtlText
+end
+
+composition xxx_Char_runVertical between
+	Char[*] role xxx_Char_runVertical_src
+	CellType[0..1] role runVertical
+end
+
+composition xxx_Char_letterspace between
+	Char[*] role xxx_Char_letterspace_src
+	CellType[0..1] role letterspace
+end
+
+composition xxx_Char_colorTrans between
+	Char[*] role xxx_Char_colorTrans_src
+	CellType[0..1] role colorTrans
+end
+
+composition xxx_Char_localizeFont between
+	Char[*] role xxx_Char_localizeFont_src
+	CellType[0..1] role localizeFont
+end
+
+composition xxx_Char_langID between
+	Char[*] role xxx_Char_langID_src
+	CellType[0..1] role langID
+end
+
+composition xxx_Para_indFirst between
+	Para[*] role xxx_Para_indFirst_src
+	CellType[0..1] role indFirst
+end
+
+composition xxx_Para_indLeft between
+	Para[*] role xxx_Para_indLeft_src
+	CellType[0..1] role indLeft
+end
+
+composition xxx_Para_indRight between
+	Para[*] role xxx_Para_indRight_src
+	CellType[0..1] role indRight
+end
+
+composition xxx_Para_spLine between
+	Para[*] role xxx_Para_spLine_src
+	CellType[0..1] role spLine
+end
+
+composition xxx_Para_spBefore between
+	Para[*] role xxx_Para_spBefore_src
+	CellType[0..1] role spBefore
+end
+
+composition xxx_Para_spAfter between
+	Para[*] role xxx_Para_spAfter_src
+	CellType[0..1] role spAfter
+end
+
+composition xxx_Para_horzAlign between
+	Para[*] role xxx_Para_horzAlign_src
+	CellType[0..1] role horzAlign
+end
+
+composition xxx_Para_bullet between
+	Para[*] role xxx_Para_bullet_src
+	CellType[0..1] role bullet
+end
+
+composition xxx_Para_bulletStr between
+	Para[*] role xxx_Para_bulletStr_src
+	CellType[0..1] role bulletStr
+end
+
+composition xxx_Para_bulletFont between
+	Para[*] role xxx_Para_bulletFont_src
+	CellType[0..1] role bulletFont
+end
+
+composition xxx_Para_localizeBulletFont between
+	Para[*] role xxx_Para_localizeBulletFont_src
+	CellType[0..1] role localizeBulletFont
+end
+
+composition xxx_Para_bulletFontSize between
+	Para[*] role xxx_Para_bulletFontSize_src
+	CellType[0..1] role bulletFontSize
+end
+
+composition xxx_Para_textPosAfterBullet between
+	Para[*] role xxx_Para_textPosAfterBullet_src
+	CellType[0..1] role textPosAfterBullet
+end
+
+composition xxx_Para_flags between
+	Para[*] role xxx_Para_flags_src
+	CellType[0..1] role flags
+end
+
+composition xxx_TabsCollection_tabs between
+	TabsCollection[0..1] role xxx_TabsCollection_tabs_src
+	Tab[*] role tabs
+end
+
+association xxx_Tab_t_tabs between
+	Tab[*] role xxx_Tab_t_tabs_src
+	TabsCollection[1] role t_tabs
+end
+
+composition xxx_Tab_position between
+	Tab[*] role xxx_Tab_position_src
+	CellType[0..1] role position
+end
+
+composition xxx_Tab_alignment between
+	Tab[*] role xxx_Tab_alignment_src
+	CellType[0..1] role alignment
+end
+
+composition xxx_Field_value between
+	Field[*] role xxx_Field_value_src
+	CellType[0..1] role value
+end
+
+composition xxx_Field_editMode between
+	Field[*] role xxx_Field_editMode_src
+	CellType[0..1] role editMode
+end
+
+composition xxx_Field_format between
+	Field[*] role xxx_Field_format_src
+	CellType[0..1] role format
+end
+
+composition xxx_Field_type between
+	Field[*] role xxx_Field_type_src
+	CellType[0..1] role type
+end
+
+composition xxx_Field_uiCat between
+	Field[*] role xxx_Field_uiCat_src
+	CellType[0..1] role uiCat
+end
+
+composition xxx_Field_uiCode between
+	Field[*] role xxx_Field_uiCode_src
+	CellType[0..1] role uiCode
+end
+
+composition xxx_Field_uiFmt between
+	Field[*] role xxx_Field_uiFmt_src
+	CellType[0..1] role uiFmt
+end
+
+composition xxx_Field_calendar between
+	Field[*] role xxx_Field_calendar_src
+	CellType[0..1] role calendar
+end
+
+composition xxx_Field_objectKind between
+	Field[*] role xxx_Field_objectKind_src
+	CellType[0..1] role objectKind
+end
+
+composition xxx_XForm_pinX between
+	XForm[*] role xxx_XForm_pinX_src
+	CellType[0..1] role pinX
+end
+
+composition xxx_XForm_pinY between
+	XForm[*] role xxx_XForm_pinY_src
+	CellType[0..1] role pinY
+end
+
+composition xxx_XForm_width between
+	XForm[*] role xxx_XForm_width_src
+	CellType[0..1] role width
+end
+
+composition xxx_XForm_height between
+	XForm[*] role xxx_XForm_height_src
+	CellType[0..1] role height
+end
+
+composition xxx_XForm_locPinX between
+	XForm[*] role xxx_XForm_locPinX_src
+	CellType[0..1] role locPinX
+end
+
+composition xxx_XForm_locPinY between
+	XForm[*] role xxx_XForm_locPinY_src
+	CellType[0..1] role locPinY
+end
+
+composition xxx_XForm_angle between
+	XForm[*] role xxx_XForm_angle_src
+	CellType[0..1] role angle
+end
+
+composition xxx_XForm_flipX between
+	XForm[*] role xxx_XForm_flipX_src
+	CellType[0..1] role flipX
+end
+
+composition xxx_XForm_flipY between
+	XForm[*] role xxx_XForm_flipY_src
+	CellType[0..1] role flipY
+end
+
+composition xxx_XForm_resizeMode between
+	XForm[*] role xxx_XForm_resizeMode_src
+	CellType[0..1] role resizeMode
+end
+
+association xxx_MastersCollection_ms_visioDocument between
+	MastersCollection[*] role xxx_MastersCollection_ms_visioDocument_src
+	VisioDocument[1] role ms_visioDocument
+end
+
+composition xxx_MastersCollection_masters between
+	MastersCollection[0..1] role xxx_MastersCollection_masters_src
+	Master[*] role masters
+end
+
+composition xxx_MastersCollection_masterShortCuts between
+	MastersCollection[0..1] role xxx_MastersCollection_masterShortCuts_src
+	MasterShortCut[*] role masterShortCuts
+end
+
+association xxx_MasterShortCut_m_masterShortCuts between
+	MasterShortCut[*] role xxx_MasterShortCut_m_masterShortCuts_src
+	MastersCollection[1] role m_masterShortCuts
+end
+
+composition xxx_MasterShortCut_icons between
+	MasterShortCut[0..1] role xxx_MasterShortCut_icons_src
+	Icon[*] role icons
+end
+
+association xxx_Icon_i_masterShortCut between
+	Icon[*] role xxx_Icon_i_masterShortCut_src
+	MasterShortCut[1] role i_masterShortCut
+end
+
+association xxx_Master_m_masters between
+	Master[*] role xxx_Master_m_masters_src
+	MastersCollection[1] role m_masters
+end
+
+composition xxx_Master_masterElts between
+	Master[0..1] role xxx_Master_masterElts_src
+	MasterElt[*] role masterElts
+end
+
+composition xxx_ShapesCollection_shapes between
+	ShapesCollection[0..1] role xxx_ShapesCollection_shapes_src
+	Shape[*] role shapes
+end
+
+composition xxx_ConnectsCollection_connections between
+	ConnectsCollection[0..1] role xxx_ConnectsCollection_connections_src
+	Connect[*] role connections
+end
+
+association xxx_Connect_c_connects between
+	Connect[*] role xxx_Connect_c_connects_src
+	ConnectsCollection[1] role c_connects
+end
+
+association xxx_MasterElt_me_master between
+	MasterElt[*] role xxx_MasterElt_me_master_src
+	Master[1] role me_master
+end
+
+association xxx_PagesCollection_ps_visioDocument between
+	PagesCollection[*] role xxx_PagesCollection_ps_visioDocument_src
+	VisioDocument[1] role ps_visioDocument
+end
+
+composition xxx_PagesCollection_pages between
+	PagesCollection[0..1] role xxx_PagesCollection_pages_src
+	Page[*] role pages
+end
+
+association xxx_Page_p_pages between
+	Page[*] role xxx_Page_p_pages_src
+	PagesCollection[1] role p_pages
+end
+
+composition xxx_Page_pageElts between
+	Page[0..1] role xxx_Page_pageElts_src
+	PageElt[*] role pageElts
+end
+
+association xxx_PageElt_pe_page between
+	PageElt[*] role xxx_PageElt_pe_page_src
+	Page[1] role pe_page
+end
+
+association xxx_WindowsInfo_ws_visioDocument between
+	WindowsInfo[*] role xxx_WindowsInfo_ws_visioDocument_src
+	VisioDocument[1] role ws_visioDocument
+end
+
+association xxx_EventList_el_visioDocument between
+	EventList[*] role xxx_EventList_el_visioDocument_src
+	VisioDocument[1] role el_visioDocument
+end
+
+association xxx_HeaderFooter_ef_visioDocument between
+	HeaderFooter[*] role xxx_HeaderFooter_ef_visioDocument_src
+	VisioDocument[1] role ef_visioDocument
+end
+
+association xxx_SolutionXML_sx_visioDocument between
+	SolutionXML[*] role xxx_SolutionXML_sx_visioDocument_src
+	VisioDocument[1] role sx_visioDocument
+end
+

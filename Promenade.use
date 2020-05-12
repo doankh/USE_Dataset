@@ -1,0 +1,202 @@
+model PrimitiveTypes
+class Strong<BasPrecedence
+attributes
+operations
+end
+
+class Start<BasPrecedence
+attributes
+operations
+end
+
+class End<BasPrecedence
+attributes
+operations
+end
+
+class FeedBack<BasPrecedence
+attributes
+operations
+end
+
+class Weak<DerPrecedence
+attributes
+operations
+end
+
+class Grouping<DerPrecedence
+attributes
+operations
+end
+
+class Precedence
+attributes
+operations
+end
+
+class DynPrecedence<Precedence
+attributes
+operations
+end
+
+class DerPrecedence<Precedence
+attributes
+operations
+end
+
+class BasPrecedence<Precedence
+attributes
+operations
+end
+
+class MetaTaskOccurence<ModelElement
+attributes
+operations
+end
+
+class ParBinding
+attributes
+	inclusion : Boolean
+operations
+end
+
+class ParameterPrec<ParameterUML
+attributes
+operations
+end
+
+class ModelElement
+attributes
+operations
+end
+
+class DependancyUML
+attributes
+operations
+end
+
+class MetaTask<ModelElement
+attributes
+operations
+end
+
+class ParameterUML
+attributes
+operations
+end
+
+class MetaDocument
+attributes
+operations
+end
+
+association xxx_Precedence_deprecs between
+	Precedence[0..1] role xxx_Precedence_deprecs_src
+	DerPrecedence[*] role deprecs
+end
+
+association xxx_Precedence_parbind between
+	Precedence[0..1] role xxx_Precedence_parbind_src
+	ParBinding[*] role parbind
+end
+
+association xxx_DerPrecedence_precs between
+	DerPrecedence[0..1] role xxx_DerPrecedence_precs_src
+	Precedence[1..*] role precs
+end
+
+association xxx_DerPrecedence_auxTasks between
+	DerPrecedence[0..1] role xxx_DerPrecedence_auxTasks_src
+	MetaTaskOccurence[*] role auxTasks
+end
+
+association xxx_MetaTaskOccurence_dprecs between
+	MetaTaskOccurence[0..1] role xxx_MetaTaskOccurence_dprecs_src
+	DerPrecedence[*] role dprecs
+end
+
+association xxx_MetaTaskOccurence_taskCl between
+	MetaTaskOccurence[0..1] role xxx_MetaTaskOccurence_taskCl_src
+	MetaTask[*] role taskCl
+end
+
+association xxx_ParBinding_precs between
+	ParBinding[0..1] role xxx_ParBinding_precs_src
+	Precedence[1..*] role precs
+end
+
+association xxx_ParBinding_targetPar between
+	ParBinding[*] role xxx_ParBinding_targetPar_src
+	ParameterPrec[1] role targetPar
+end
+
+association xxx_ParBinding_sourcePar between
+	ParBinding[*] role xxx_ParBinding_sourcePar_src
+	ParameterPrec[1] role sourcePar
+end
+
+association xxx_ParameterPrec_parbindsTar between
+	ParameterPrec[0..1] role xxx_ParameterPrec_parbindsTar_src
+	ParBinding[1..*] role parbindsTar
+end
+
+association xxx_ParameterPrec_parbindsSour between
+	ParameterPrec[0..1] role xxx_ParameterPrec_parbindsSour_src
+	ParBinding[1..*] role parbindsSour
+end
+
+association xxx_ParameterPrec_dstParams between
+	ParameterPrec[0..1] role xxx_ParameterPrec_dstParams_src
+	ParameterPrec[1..*] role dstParams
+end
+
+association xxx_ParameterPrec_orParams between
+	ParameterPrec[0..1] role xxx_ParameterPrec_orParams_src
+	ParameterPrec[1..*] role orParams
+end
+
+association xxx_ModelElement_dependencyUMLsupp between
+	ModelElement[*] role xxx_ModelElement_dependencyUMLsupp_src
+	DependancyUML[1] role dependencyUMLsupp
+end
+
+association xxx_ModelElement_dependencyUMLcli between
+	ModelElement[*] role xxx_ModelElement_dependencyUMLcli_src
+	DependancyUML[1] role dependencyUMLcli
+end
+
+association xxx_DependancyUML_suppier between
+	DependancyUML[0..1] role xxx_DependancyUML_suppier_src
+	ModelElement[1..*] role suppier
+end
+
+association xxx_DependancyUML_client between
+	DependancyUML[0..1] role xxx_DependancyUML_client_src
+	ModelElement[1..*] role client
+end
+
+association xxx_MetaTask_params between
+	MetaTask[0..1] role xxx_MetaTask_params_src
+	ParameterUML[1..*] role params
+end
+
+association xxx_MetaTask_occurs between
+	MetaTask[0..1] role xxx_MetaTask_occurs_src
+	MetaTaskOccurence[*] role occurs
+end
+
+association xxx_ParameterUML_task between
+	ParameterUML[*] role xxx_ParameterUML_task_src
+	MetaTask[1] role task
+end
+
+association xxx_ParameterUML_doc between
+	ParameterUML[0..1] role xxx_ParameterUML_doc_src
+	MetaDocument[1..*] role doc
+end
+
+association xxx_MetaDocument_params between
+	MetaDocument[0..1] role xxx_MetaDocument_params_src
+	ParameterUML[1..*] role params
+end
+

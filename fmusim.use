@@ -1,0 +1,140 @@
+model fmusim
+class FMU
+attributes
+operations
+	fmiInstantiateSlave()
+	fmiInitializeSlave()
+	fmiGetReal()
+	fmiSetReal()
+	fmiDoStep()
+	fmiTerminateSlave()
+	fmiResetSlave()
+	fmiFreeSlave()
+end
+
+class ModelDescription
+attributes
+operations
+end
+
+class Graph
+attributes
+operations
+end
+
+class Component
+attributes
+operations
+end
+
+class Connection
+attributes
+	value : String
+operations
+end
+
+class Port
+attributes
+operations
+end
+
+class ScalarVariable
+attributes
+operations
+end
+
+class Type
+attributes
+operations
+end
+
+class BaseUnit
+attributes
+operations
+end
+
+class Experiment
+attributes
+operations
+end
+
+class Implementation
+attributes
+operations
+end
+
+class EClass0
+attributes
+operations
+end
+
+association xxx_FMU_modelDescription between
+	FMU[*] role xxx_FMU_modelDescription_src
+	ModelDescription[1] role modelDescription
+end
+
+composition xxx_ModelDescription_modelVariables between
+	ModelDescription[0..1] role xxx_ModelDescription_modelVariables_src
+	ScalarVariable[*] role modelVariables
+end
+
+composition xxx_ModelDescription_typeDefinitions between
+	ModelDescription[0..1] role xxx_ModelDescription_typeDefinitions_src
+	Type[*] role typeDefinitions
+end
+
+composition xxx_ModelDescription_unitDefinitions between
+	ModelDescription[0..1] role xxx_ModelDescription_unitDefinitions_src
+	BaseUnit[*] role unitDefinitions
+end
+
+composition xxx_ModelDescription_defaultExperiment between
+	ModelDescription[*] role xxx_ModelDescription_defaultExperiment_src
+	Experiment[0..1] role defaultExperiment
+end
+
+composition xxx_ModelDescription_implementation between
+	ModelDescription[*] role xxx_ModelDescription_implementation_src
+	Implementation[0..1] role implementation
+end
+
+composition xxx_Graph_components between
+	Graph[0..1] role xxx_Graph_components_src
+	Component[1..*] role components
+end
+
+association xxx_Graph_EReference0 between
+	Graph[*] role xxx_Graph_EReference0_src
+	Connection[0..1] role EReference0
+end
+
+composition xxx_Graph_connections between
+	Graph[0..1] role xxx_Graph_connections_src
+	Connection[*] role connections
+end
+
+association xxx_Component_inputs between
+	Component[0..1] role xxx_Component_inputs_src
+	Port[*] role inputs
+end
+
+association xxx_Component_outputs between
+	Component[0..1] role xxx_Component_outputs_src
+	Port[*] role outputs
+end
+
+association xxx_Component_fmu between
+	Component[*] role xxx_Component_fmu_src
+	FMU[1] role fmu
+end
+
+association xxx_Port_connection between
+	Port[*] role xxx_Port_connection_src
+	Connection[1] role connection
+end
+
+association xxx_Port_variable between
+	Port[*] role xxx_Port_variable_src
+	ScalarVariable[1] role variable
+end
+

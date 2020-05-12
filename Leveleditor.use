@@ -1,0 +1,439 @@
+model Leveleditor
+enum ERoomEventCondition{
+default
+}
+
+enum ERoomEventAction{
+default
+}
+
+enum ECreatureClass{
+default
+}
+
+enum ECreatureRace{
+default
+}
+
+enum EElement{
+default
+}
+
+enum ESkill{
+default
+}
+
+enum EArmorType{
+default
+}
+
+enum EAura{
+default
+}
+
+class Act
+attributes
+	actName : String
+	description : String
+operations
+end
+
+abstract class Room
+attributes
+	name : String
+	description : String
+	postDescription : String
+	postItemsDescription : String
+	revealedDescription : String
+	hiddenDescription : String
+	isLocked : Boolean
+	isHidden : Boolean
+	isRevealed : Boolean
+	isHiddenEvent : Boolean
+	autosave : Boolean
+operations
+end
+
+class NPC<Enemy
+attributes
+	talking : Boolean
+	firsttime : Boolean
+	gotoId : Integer
+operations
+end
+
+abstract class Item
+attributes
+	name : String
+operations
+end
+
+class Key<Item
+attributes
+	id : String
+operations
+end
+
+class EventRoom<Room
+attributes
+operations
+end
+
+class RoomEvent
+attributes
+	condition : ERoomEventCondition
+	action : ERoomEventAction
+	isEnemyDead : Boolean
+	isItemused : Boolean
+	isItemtaken : Boolean
+	roomenteredtimes : Integer
+	roomdescription : String
+	trapdescription : String
+	HP : Integer
+	finishedtalking : Boolean
+	npcGotoId : Integer
+operations
+end
+
+class Trap
+attributes
+	poison : Integer
+	fire : Integer
+	ice : Integer
+	lightning : Integer
+	normal : Integer
+	trapagility : Integer
+	trapdescription : String
+	type : EElement
+operations
+end
+
+abstract class Creature
+attributes
+	name : String
+	initHp : Integer
+	initMana : Integer
+	mana : Integer
+	strength : Integer
+	agility : Integer
+	charisma : Integer
+	level : Integer
+	experience : Integer
+	gold : Integer
+	initPlayerActions : Integer
+	resistLightning : Integer
+	resistFire : Integer
+	resistPoison : Integer
+	resistIce : Integer
+	isMale : Boolean
+	race : ECreatureRace
+	creatureClass : ECreatureClass
+	armor : Integer
+operations
+end
+
+class Enemy<Creature
+attributes
+	isAttacking : Boolean
+	scarefactor : Integer
+	damageFire : Integer
+	damageLightning : Integer
+	damageIce : Integer
+	damagePoison : Integer
+	boss : Boolean
+operations
+end
+
+class DialogController
+attributes
+operations
+end
+
+class DialogChoices
+attributes
+	id : Integer
+operations
+end
+
+class Dialog
+attributes
+	optiontext : String
+	answertext : String
+	id : Integer
+	gotoId : Integer
+	isFinal : Boolean
+	giveItem : Boolean
+	isAttacking : Boolean
+	event : Boolean
+operations
+end
+
+class DialogSkillTest
+attributes
+	skill : ESkill
+	gotoIdSuccess : Integer
+	gotoIdFail : Integer
+	skillNPC : Integer
+	sucessText : String
+	failText : String
+operations
+end
+
+class Gold<Item
+attributes
+	ammount : Integer
+operations
+end
+
+class Potion<Item
+attributes
+	skill : ESkill
+	addSkill : Integer
+operations
+end
+
+class Weapon<Item
+attributes
+	damage : Integer
+	isTwohanded : Boolean
+	damageLightning : Integer
+	damageFire : Integer
+	damagePoison : Integer
+	damageIce : Integer
+	classes : ECreatureClass
+	hp : Integer
+	mana : Integer
+	strength : Integer
+	agility : Integer
+	charisma : Integer
+operations
+end
+
+class Armor<Item
+attributes
+	armor : Integer
+	armorType : EArmorType
+	resistLightning : Integer
+	resistIce : Integer
+	resistFire : Integer
+	resistPoison : Integer
+	classes : ECreatureClass
+	hp : Integer
+	mana : Integer
+	strength : Integer
+	agility : Integer
+	charisma : Integer
+operations
+end
+
+class FinalRoom<EventRoom
+attributes
+	isFinal : Boolean
+operations
+end
+
+class Quest
+attributes
+	id : Integer
+	introduction : String
+	description : String
+	completeText : String
+	questCondition : ERoomEventCondition
+	isComplete : Boolean
+	xpEarned : Integer
+	dialogid : Integer
+operations
+end
+
+class Accessory<Item
+attributes
+operations
+end
+
+class Aura
+attributes
+	auraType : EAura
+	ammount : Integer
+operations
+end
+
+composition xxx_Act_world between
+	Act[0..1] role xxx_Act_world_src
+	Room[1..*] role world
+end
+
+association xxx_Act_gotoAct between
+	Act[*] role xxx_Act_gotoAct_src
+	Act[0..1] role gotoAct
+end
+
+composition xxx_Room_enemies between
+	Room[0..1] role xxx_Room_enemies_src
+	Enemy[*] role enemies
+end
+
+composition xxx_Room_npcs between
+	Room[0..1] role xxx_Room_npcs_src
+	NPC[*] role npcs
+end
+
+composition xxx_Room_items between
+	Room[0..1] role xxx_Room_items_src
+	Item[*] role items
+end
+
+association xxx_Room_unlockKeys between
+	Room[0..1] role xxx_Room_unlockKeys_src
+	Key[*] role unlockKeys
+end
+
+association xxx_Room_north between
+	Room[*] role xxx_Room_north_src
+	Room[0..1] role north
+end
+
+association xxx_Room_south between
+	Room[*] role xxx_Room_south_src
+	Room[0..1] role south
+end
+
+association xxx_Room_west between
+	Room[*] role xxx_Room_west_src
+	Room[0..1] role west
+end
+
+association xxx_Room_east between
+	Room[*] role xxx_Room_east_src
+	Room[0..1] role east
+end
+
+composition xxx_NPC_dialogcontroller between
+	NPC[*] role xxx_NPC_dialogcontroller_src
+	DialogController[1] role dialogcontroller
+end
+
+composition xxx_EventRoom_events between
+	EventRoom[0..1] role xxx_EventRoom_events_src
+	RoomEvent[*] role events
+end
+
+composition xxx_EventRoom_quest between
+	EventRoom[*] role xxx_EventRoom_quest_src
+	Quest[0..1] role quest
+end
+
+association xxx_RoomEvent_itemtaken between
+	RoomEvent[*] role xxx_RoomEvent_itemtaken_src
+	Item[0..1] role itemtaken
+end
+
+association xxx_RoomEvent_enemyattack between
+	RoomEvent[*] role xxx_RoomEvent_enemyattack_src
+	Enemy[0..1] role enemyattack
+end
+
+composition xxx_RoomEvent_trap between
+	RoomEvent[*] role xxx_RoomEvent_trap_src
+	Trap[0..1] role trap
+end
+
+composition xxx_RoomEvent_receivedItem between
+	RoomEvent[*] role xxx_RoomEvent_receivedItem_src
+	Item[0..1] role receivedItem
+end
+
+association xxx_RoomEvent_itemUsed between
+	RoomEvent[*] role xxx_RoomEvent_itemUsed_src
+	Item[0..1] role itemUsed
+end
+
+association xxx_RoomEvent_placeenemy between
+	RoomEvent[*] role xxx_RoomEvent_placeenemy_src
+	Enemy[0..1] role placeenemy
+end
+
+association xxx_RoomEvent_room between
+	RoomEvent[*] role xxx_RoomEvent_room_src
+	Room[0..1] role room
+end
+
+association xxx_RoomEvent_npc between
+	RoomEvent[*] role xxx_RoomEvent_npc_src
+	NPC[0..1] role npc
+end
+
+association xxx_RoomEvent_hiddenroomfound between
+	RoomEvent[*] role xxx_RoomEvent_hiddenroomfound_src
+	Room[0..1] role hiddenroomfound
+end
+
+association xxx_RoomEvent_quest between
+	RoomEvent[*] role xxx_RoomEvent_quest_src
+	Quest[0..1] role quest
+end
+
+composition xxx_Creature_inventory between
+	Creature[0..1] role xxx_Creature_inventory_src
+	Item[*] role inventory
+end
+
+composition xxx_Enemy_auras between
+	Enemy[0..1] role xxx_Enemy_auras_src
+	Aura[*] role auras
+end
+
+composition xxx_DialogController_conversation between
+	DialogController[0..1] role xxx_DialogController_conversation_src
+	DialogChoices[*] role conversation
+end
+
+composition xxx_DialogChoices_choices between
+	DialogChoices[0..1] role xxx_DialogChoices_choices_src
+	Dialog[*] role choices
+end
+
+composition xxx_Dialog_dialogskilltest between
+	Dialog[*] role xxx_Dialog_dialogskilltest_src
+	DialogSkillTest[0..1] role dialogskilltest
+end
+
+association xxx_Dialog_item between
+	Dialog[*] role xxx_Dialog_item_src
+	Item[0..1] role item
+end
+
+composition xxx_Dialog_quest between
+	Dialog[*] role xxx_Dialog_quest_src
+	Quest[0..1] role quest
+end
+
+association xxx_Quest_questItem between
+	Quest[*] role xxx_Quest_questItem_src
+	Item[0..1] role questItem
+end
+
+composition xxx_Quest_awardItem between
+	Quest[*] role xxx_Quest_awardItem_src
+	Item[0..1] role awardItem
+end
+
+association xxx_Quest_npcGivenby between
+	Quest[*] role xxx_Quest_npcGivenby_src
+	NPC[0..1] role npcGivenby
+end
+
+association xxx_Quest_enemydead between
+	Quest[*] role xxx_Quest_enemydead_src
+	Enemy[0..1] role enemydead
+end
+
+association xxx_Quest_room between
+	Quest[*] role xxx_Quest_room_src
+	Room[0..1] role room
+end
+
+association xxx_Accessory_room between
+	Accessory[*] role xxx_Accessory_room_src
+	Room[0..1] role room
+end
+

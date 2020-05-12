@@ -1,0 +1,345 @@
+model cssExtDsl
+class CssExtension
+attributes
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+operations
+end
+
+class PackageDefinition
+attributes
+	name : String
+operations
+end
+
+class Doku
+attributes
+	content : String
+operations
+end
+
+class CSSRule
+attributes
+operations
+end
+
+class CSSType<CSSRule
+attributes
+	type : String
+operations
+end
+
+class ElementDefinition
+attributes
+	name : String
+	styleclass : String
+operations
+end
+
+class Definition
+attributes
+	name : String
+operations
+end
+
+class PseudoClassDefinition
+attributes
+	name : String
+operations
+end
+
+class CSSRuleRef<CSSRule
+attributes
+operations
+end
+
+class CSSDefaultValue
+attributes
+	ival : Integer
+	dval : Real
+	sval : String
+operations
+end
+
+class SubstructureSelector
+attributes
+	selectorName : String
+	var : String
+operations
+end
+
+class Substructure
+attributes
+	name : String
+operations
+end
+
+class SubstructureStyleclass
+attributes
+operations
+end
+
+class CSSRangedIntType<CSSType
+attributes
+	from_ : Integer
+	to : Integer
+operations
+end
+
+class CSSRangedDoubleType<CSSType
+attributes
+	from_ : Real
+	to : Real
+operations
+end
+
+class PropertyDefinition<Definition
+attributes
+operations
+end
+
+class CSSRuleDefinition<Definition
+attributes
+operations
+end
+
+class CSSRuleFunc<CSSRule
+attributes
+	name : String
+operations
+end
+
+class CSSRuleOr<CSSRule
+attributes
+operations
+end
+
+class CSSRuleXor<CSSRule
+attributes
+operations
+end
+
+class CSSRuleConcat<CSSRule
+attributes
+operations
+end
+
+class CSSRuleConcatWithoutSpace<CSSRule
+attributes
+operations
+end
+
+class CSSRulePostfix<CSSRule
+attributes
+	cardinality : String
+operations
+end
+
+class CSSRuleBracket<CSSRule
+attributes
+operations
+end
+
+class CSSNumLiteral<CSSRule
+attributes
+	value : Integer
+operations
+end
+
+class CSSRuleRegex<CSSRule
+attributes
+	regex : String
+operations
+end
+
+class CSSRuleLiteral<CSSRule
+attributes
+	value : String
+operations
+end
+
+class CSSRuleSymbol<CSSRule
+attributes
+	symbol : String
+operations
+end
+
+composition xxx_CssExtension_imports between
+	CssExtension[0..1] role xxx_CssExtension_imports_src
+	Import[*] role imports
+end
+
+composition xxx_CssExtension_packageDef between
+	CssExtension[*] role xxx_CssExtension_packageDef_src
+	PackageDefinition[0..1] role packageDef
+end
+
+composition xxx_PackageDefinition_doku between
+	PackageDefinition[*] role xxx_PackageDefinition_doku_src
+	Doku[0..1] role doku
+end
+
+composition xxx_PackageDefinition_rules between
+	PackageDefinition[0..1] role xxx_PackageDefinition_rules_src
+	Definition[*] role rules
+end
+
+composition xxx_PackageDefinition_subpackages between
+	PackageDefinition[0..1] role xxx_PackageDefinition_subpackages_src
+	PackageDefinition[*] role subpackages
+end
+
+composition xxx_PackageDefinition_elements between
+	PackageDefinition[0..1] role xxx_PackageDefinition_elements_src
+	ElementDefinition[*] role elements
+end
+
+composition xxx_CSSType_doku between
+	CSSType[*] role xxx_CSSType_doku_src
+	Doku[0..1] role doku
+end
+
+composition xxx_ElementDefinition_doku between
+	ElementDefinition[*] role xxx_ElementDefinition_doku_src
+	Doku[0..1] role doku
+end
+
+association xxx_ElementDefinition_super between
+	ElementDefinition[0..1] role xxx_ElementDefinition_super_src
+	ElementDefinition[*] role super
+end
+
+composition xxx_ElementDefinition_properties between
+	ElementDefinition[0..1] role xxx_ElementDefinition_properties_src
+	Definition[*] role properties
+end
+
+composition xxx_ElementDefinition_pseudoClasses between
+	ElementDefinition[0..1] role xxx_ElementDefinition_pseudoClasses_src
+	PseudoClassDefinition[*] role pseudoClasses
+end
+
+composition xxx_ElementDefinition_substructures between
+	ElementDefinition[0..1] role xxx_ElementDefinition_substructures_src
+	Substructure[*] role substructures
+end
+
+composition xxx_Definition_doku between
+	Definition[*] role xxx_Definition_doku_src
+	Doku[0..1] role doku
+end
+
+composition xxx_Definition_rule between
+	Definition[*] role xxx_Definition_rule_src
+	CSSRule[0..1] role rule
+end
+
+composition xxx_PseudoClassDefinition_doku between
+	PseudoClassDefinition[*] role xxx_PseudoClassDefinition_doku_src
+	Doku[0..1] role doku
+end
+
+composition xxx_CSSRuleRef_doku between
+	CSSRuleRef[*] role xxx_CSSRuleRef_doku_src
+	Doku[0..1] role doku
+end
+
+association xxx_CSSRuleRef_ref between
+	CSSRuleRef[*] role xxx_CSSRuleRef_ref_src
+	Definition[0..1] role ref
+end
+
+composition xxx_CSSDefaultValue_val between
+	CSSDefaultValue[*] role xxx_CSSDefaultValue_val_src
+	CSSRule[0..1] role val
+end
+
+composition xxx_Substructure_doku between
+	Substructure[*] role xxx_Substructure_doku_src
+	Doku[0..1] role doku
+end
+
+composition xxx_Substructure_childs between
+	Substructure[0..1] role xxx_Substructure_childs_src
+	SubstructureStyleclass[*] role childs
+end
+
+composition xxx_SubstructureStyleclass_doku between
+	SubstructureStyleclass[*] role xxx_SubstructureStyleclass_doku_src
+	Doku[0..1] role doku
+end
+
+association xxx_SubstructureStyleclass_element between
+	SubstructureStyleclass[*] role xxx_SubstructureStyleclass_element_src
+	ElementDefinition[0..1] role element
+end
+
+composition xxx_SubstructureStyleclass_selectors between
+	SubstructureStyleclass[0..1] role xxx_SubstructureStyleclass_selectors_src
+	SubstructureSelector[*] role selectors
+end
+
+composition xxx_SubstructureStyleclass_childs between
+	SubstructureStyleclass[0..1] role xxx_SubstructureStyleclass_childs_src
+	SubstructureStyleclass[*] role childs
+end
+
+composition xxx_PropertyDefinition_default between
+	PropertyDefinition[*] role xxx_PropertyDefinition_default_src
+	CSSDefaultValue[0..1] role default
+end
+
+composition xxx_CSSRuleDefinition_func between
+	CSSRuleDefinition[*] role xxx_CSSRuleDefinition_func_src
+	CSSRule[0..1] role func
+end
+
+composition xxx_CSSRuleFunc_params between
+	CSSRuleFunc[*] role xxx_CSSRuleFunc_params_src
+	CSSRule[0..1] role params
+end
+
+composition xxx_CSSRuleOr_ors between
+	CSSRuleOr[0..1] role xxx_CSSRuleOr_ors_src
+	CSSRule[*] role ors
+end
+
+composition xxx_CSSRuleXor_xors between
+	CSSRuleXor[0..1] role xxx_CSSRuleXor_xors_src
+	CSSRule[*] role xors
+end
+
+composition xxx_CSSRuleConcat_conc between
+	CSSRuleConcat[0..1] role xxx_CSSRuleConcat_conc_src
+	CSSRule[*] role conc
+end
+
+composition xxx_CSSRuleConcatWithoutSpace_conc between
+	CSSRuleConcatWithoutSpace[0..1] role xxx_CSSRuleConcatWithoutSpace_conc_src
+	CSSRule[*] role conc
+end
+
+composition xxx_CSSRulePostfix_rule between
+	CSSRulePostfix[*] role xxx_CSSRulePostfix_rule_src
+	CSSRule[0..1] role rule
+end
+
+composition xxx_CSSRuleBracket_inner between
+	CSSRuleBracket[*] role xxx_CSSRuleBracket_inner_src
+	CSSRule[0..1] role inner
+end
+
+composition xxx_CSSRuleLiteral_doku between
+	CSSRuleLiteral[*] role xxx_CSSRuleLiteral_doku_src
+	Doku[0..1] role doku
+end
+
+composition xxx_CSSRuleSymbol_doku between
+	CSSRuleSymbol[*] role xxx_CSSRuleSymbol_doku_src
+	Doku[0..1] role doku
+end
+

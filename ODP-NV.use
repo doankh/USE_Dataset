@@ -1,0 +1,383 @@
+model ODPNV
+class Node
+attributes
+	location : String
+operations
+end
+
+class Nucleus<EngineeringObject
+attributes
+operations
+end
+
+class Capsule
+attributes
+operations
+end
+
+class EngineeringObject
+attributes
+operations
+end
+
+class CapsuleManager<EngineeringObject
+attributes
+operations
+end
+
+class Cluster
+attributes
+operations
+end
+
+class ClusterManager<EngineeringObject
+attributes
+operations
+end
+
+class BEO<EngineeringObject
+attributes
+operations
+end
+
+class Stub<EngineeringObject
+attributes
+operations
+end
+
+class Binder<EngineeringObject
+attributes
+operations
+end
+
+class ProtocolObject<EngineeringObject
+attributes
+	type : String
+operations
+end
+
+class Interceptor<EngineeringObject
+attributes
+operations
+end
+
+class Channel
+attributes
+operations
+end
+
+class ClientServerChannel<Channel
+attributes
+operations
+end
+
+class ControllingObject<EngineeringObject
+attributes
+operations
+end
+
+class SecurityAuthority<ControllingObject
+attributes
+operations
+end
+
+class ManagementAuthority<ControllingObject
+attributes
+operations
+end
+
+class AddressingAuthority<ControllingObject
+attributes
+operations
+end
+
+class NamingAuthority<ControllingObject
+attributes
+operations
+end
+
+class ControlledObject<EngineeringObject
+attributes
+operations
+end
+
+class Domain
+attributes
+operations
+end
+
+class SecurityDomain<Domain
+attributes
+operations
+end
+
+class ManagementDomain<Domain
+attributes
+operations
+end
+
+class AddressingDomain<Domain
+attributes
+operations
+end
+
+class NamingDomain<Domain
+attributes
+operations
+end
+
+class EngineeringInterfaceReferenceManagementDomain<NamingDomain
+attributes
+operations
+end
+
+class EngineeringInterfaceReferenceManagementPolicy
+attributes
+operations
+end
+
+class EngineeringInterfaceReference
+attributes
+operations
+end
+
+composition xxx_Node_manager between
+	Node[*] role xxx_Node_manager_src
+	Nucleus[1] role manager
+end
+
+composition xxx_Node_capsules between
+	Node[0..1] role xxx_Node_capsules_src
+	Capsule[*] role capsules
+end
+
+association xxx_Nucleus_otherEngObjects between
+	Nucleus[0..1] role xxx_Nucleus_otherEngObjects_src
+	EngineeringObject[*] role otherEngObjects
+end
+
+association xxx_Nucleus_beos between
+	Nucleus[0..1] role xxx_Nucleus_beos_src
+	BEO[*] role beos
+end
+
+composition xxx_Capsule_otherEngObjects between
+	Capsule[0..1] role xxx_Capsule_otherEngObjects_src
+	EngineeringObject[*] role otherEngObjects
+end
+
+composition xxx_Capsule_capsuleManager between
+	Capsule[*] role xxx_Capsule_capsuleManager_src
+	CapsuleManager[1] role capsuleManager
+end
+
+composition xxx_Capsule_clusterManagers between
+	Capsule[0..1] role xxx_Capsule_clusterManagers_src
+	ClusterManager[*] role clusterManagers
+end
+
+composition xxx_Capsule_clusters between
+	Capsule[0..1] role xxx_Capsule_clusters_src
+	Cluster[*] role clusters
+end
+
+association xxx_EngineeringObject_nodeManager between
+	EngineeringObject[*] role xxx_EngineeringObject_nodeManager_src
+	Nucleus[1] role nodeManager
+end
+
+association xxx_CapsuleManager_cmClusterManagers between
+	CapsuleManager[0..1] role xxx_CapsuleManager_cmClusterManagers_src
+	ClusterManager[*] role cmClusterManagers
+end
+
+association xxx_Cluster_clusterManager between
+	Cluster[*] role xxx_Cluster_clusterManager_src
+	ClusterManager[1] role clusterManager
+end
+
+composition xxx_Cluster_clusterBeos between
+	Cluster[0..1] role xxx_Cluster_clusterBeos_src
+	BEO[*] role clusterBeos
+end
+
+association xxx_ClusterManager_clusters between
+	ClusterManager[0..1] role xxx_ClusterManager_clusters_src
+	Cluster[1..*] role clusters
+end
+
+association xxx_ClusterManager_clustermanagerBeos between
+	ClusterManager[0..1] role xxx_ClusterManager_clustermanagerBeos_src
+	BEO[*] role clustermanagerBeos
+end
+
+association xxx_ClusterManager_capsuleManager between
+	ClusterManager[*] role xxx_ClusterManager_capsuleManager_src
+	CapsuleManager[1] role capsuleManager
+end
+
+association xxx_BEO_beoNodeManager between
+	BEO[*] role xxx_BEO_beoNodeManager_src
+	Nucleus[1] role beoNodeManager
+end
+
+association xxx_BEO_locallyBoundObjects between
+	BEO[0..1] role xxx_BEO_locallyBoundObjects_src
+	BEO[*] role locallyBoundObjects
+end
+
+association xxx_BEO_localbinds between
+	BEO[0..1] role xxx_BEO_localbinds_src
+	BEO[*] role localbinds
+end
+
+association xxx_BEO_beoManager between
+	BEO[*] role xxx_BEO_beoManager_src
+	ClusterManager[1] role beoManager
+end
+
+association xxx_BEO_beoChannel between
+	BEO[0..1] role xxx_BEO_beoChannel_src
+	Channel[*] role beoChannel
+end
+
+association xxx_BEO_beoStub between
+	BEO[0..1] role xxx_BEO_beoStub_src
+	Stub[*] role beoStub
+end
+
+association xxx_Stub_stChannel between
+	Stub[*] role xxx_Stub_stChannel_src
+	Channel[1] role stChannel
+end
+
+association xxx_Stub_stBinder between
+	Stub[*] role xxx_Stub_stBinder_src
+	Binder[1] role stBinder
+end
+
+association xxx_Stub_stBeo between
+	Stub[*] role xxx_Stub_stBeo_src
+	BEO[1] role stBeo
+end
+
+association xxx_Binder_bdChannel between
+	Binder[*] role xxx_Binder_bdChannel_src
+	Channel[1] role bdChannel
+end
+
+association xxx_Binder_chBinder between
+	Binder[*] role xxx_Binder_chBinder_src
+	Stub[1] role chBinder
+end
+
+association xxx_Binder_bdProtocolObject between
+	Binder[0..1] role xxx_Binder_bdProtocolObject_src
+	ProtocolObject[1..*] role bdProtocolObject
+end
+
+association xxx_ProtocolObject_poChannel between
+	ProtocolObject[*] role xxx_ProtocolObject_poChannel_src
+	Channel[1] role poChannel
+end
+
+association xxx_ProtocolObject_poBinder between
+	ProtocolObject[*] role xxx_ProtocolObject_poBinder_src
+	Binder[1] role poBinder
+end
+
+association xxx_ProtocolObject_poInterceptor between
+	ProtocolObject[0..1] role xxx_ProtocolObject_poInterceptor_src
+	Interceptor[*] role poInterceptor
+end
+
+association xxx_ProtocolObject_poBoundProtocolObject between
+	ProtocolObject[0..1] role xxx_ProtocolObject_poBoundProtocolObject_src
+	ProtocolObject[*] role poBoundProtocolObject
+end
+
+association xxx_Interceptor_intChannel between
+	Interceptor[*] role xxx_Interceptor_intChannel_src
+	Channel[1] role intChannel
+end
+
+association xxx_Interceptor_intProtocolObject between
+	Interceptor[*] role xxx_Interceptor_intProtocolObject_src
+	ProtocolObject[2] role intProtocolObject
+end
+
+composition xxx_Channel_chStub between
+	Channel[0..1] role xxx_Channel_chStub_src
+	Stub[2..*] role chStub
+end
+
+composition xxx_Channel_chBinder between
+	Channel[0..1] role xxx_Channel_chBinder_src
+	Binder[2..*] role chBinder
+end
+
+composition xxx_Channel_chPObject between
+	Channel[0..1] role xxx_Channel_chPObject_src
+	ProtocolObject[2..*] role chPObject
+end
+
+composition xxx_Channel_chInterceptor between
+	Channel[0..1] role xxx_Channel_chInterceptor_src
+	Interceptor[*] role chInterceptor
+end
+
+association xxx_Channel_chEndPoint between
+	Channel[0..1] role xxx_Channel_chEndPoint_src
+	BEO[2..*] role chEndPoint
+end
+
+association xxx_ControllingObject_coDomain between
+	ControllingObject[0..1] role xxx_ControllingObject_coDomain_src
+	Domain[*] role coDomain
+end
+
+association xxx_ControlledObject_cdoDomain between
+	ControlledObject[0..1] role xxx_ControlledObject_cdoDomain_src
+	Domain[*] role cdoDomain
+end
+
+association xxx_Domain_parentDomain between
+	Domain[*] role xxx_Domain_parentDomain_src
+	Domain[1] role parentDomain
+end
+
+association xxx_Domain_subDomain between
+	Domain[0..1] role xxx_Domain_subDomain_src
+	Domain[*] role subDomain
+end
+
+association xxx_Domain_domControllingObject between
+	Domain[*] role xxx_Domain_domControllingObject_src
+	ControllingObject[1] role domControllingObject
+end
+
+association xxx_Domain_domMember between
+	Domain[0..1] role xxx_Domain_domMember_src
+	ControlledObject[*] role domMember
+end
+
+association xxx_EngineeringInterfaceReferenceManagementDomain_eirmdReference between
+	EngineeringInterfaceReferenceManagementDomain[0..1] role xxx_EngineeringInterfaceReferenceManagementDomain_eirmdReference_src
+	EngineeringInterfaceReference[*] role eirmdReference
+end
+
+association xxx_EngineeringInterfaceReferenceManagementDomain_eirmdManagementPolicy between
+	EngineeringInterfaceReferenceManagementDomain[*] role xxx_EngineeringInterfaceReferenceManagementDomain_eirmdManagementPolicy_src
+	EngineeringInterfaceReferenceManagementPolicy[1] role eirmdManagementPolicy
+end
+
+association xxx_EngineeringInterfaceReferenceManagementPolicy_eirmpManagementDomain between
+	EngineeringInterfaceReferenceManagementPolicy[0..1] role xxx_EngineeringInterfaceReferenceManagementPolicy_eirmpManagementDomain_src
+	EngineeringInterfaceReferenceManagementDomain[*] role eirmpManagementDomain
+end
+
+association xxx_EngineeringInterfaceReference_eirManagementDomain between
+	EngineeringInterfaceReference[*] role xxx_EngineeringInterfaceReference_eirManagementDomain_src
+	EngineeringInterfaceReferenceManagementDomain[1] role eirManagementDomain
+end
+

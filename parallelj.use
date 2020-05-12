@@ -1,0 +1,192 @@
+model parallelj
+enum SplitType{
+default
+}
+
+enum JoinType{
+default
+}
+
+class Program<NamedElement
+attributes
+	capacity : Integer
+operations
+end
+
+class Specification
+attributes
+operations
+end
+
+class InputCondition<Condition
+attributes
+operations
+end
+
+class OutputCondition<Condition
+attributes
+operations
+end
+
+class Predicate<NamedElement
+attributes
+operations
+end
+
+class Condition<Element
+attributes
+operations
+end
+
+class Link<NamedElement
+attributes
+operations
+end
+
+class Element<NamedElement
+attributes
+operations
+end
+
+class Procedure<Element
+attributes
+	executable : String
+	join : JoinType
+	split : SplitType
+	capacity : Integer
+operations
+end
+
+class ForEachLoop<Procedure
+attributes
+operations
+end
+
+class WhileLoop<Procedure
+attributes
+operations
+end
+
+class Data<NamedElement
+attributes
+	type : String
+operations
+end
+
+class MetaInformationContainer
+attributes
+operations
+end
+
+class MetaInformation
+attributes
+operations
+end
+
+class Handler<Procedure
+attributes
+operations
+end
+
+class Pipeline<Procedure
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class BusinessProcedure<Procedure
+attributes
+operations
+end
+
+association xxx_Program_inputCondition between
+	Program[*] role xxx_Program_inputCondition_src
+	InputCondition[1] role inputCondition
+end
+
+association xxx_Program_outputCondition between
+	Program[*] role xxx_Program_outputCondition_src
+	OutputCondition[1] role outputCondition
+end
+
+composition xxx_Program_predicates between
+	Program[0..1] role xxx_Program_predicates_src
+	Predicate[*] role predicates
+end
+
+composition xxx_Program_elements between
+	Program[0..1] role xxx_Program_elements_src
+	Element[*] role elements
+end
+
+composition xxx_Program_data between
+	Program[0..1] role xxx_Program_data_src
+	Data[*] role data
+end
+
+composition xxx_Specification_programs between
+	Specification[0..1] role xxx_Specification_programs_src
+	Program[*] role programs
+end
+
+composition xxx_Specification_metaInformationContainer between
+	Specification[*] role xxx_Specification_metaInformationContainer_src
+	MetaInformationContainer[0..1] role metaInformationContainer
+end
+
+association xxx_Link_predicate between
+	Link[*] role xxx_Link_predicate_src
+	Predicate[0..1] role predicate
+end
+
+association xxx_Link_destination between
+	Link[*] role xxx_Link_destination_src
+	Element[1] role destination
+end
+
+association xxx_Element_inputLinks between
+	Element[0..1] role xxx_Element_inputLinks_src
+	Link[*] role inputLinks
+end
+
+composition xxx_Element_outputLinks between
+	Element[0..1] role xxx_Element_outputLinks_src
+	Link[*] role outputLinks
+end
+
+association xxx_ForEachLoop_iterable between
+	ForEachLoop[*] role xxx_ForEachLoop_iterable_src
+	Data[1] role iterable
+end
+
+association xxx_WhileLoop_predicate between
+	WhileLoop[*] role xxx_WhileLoop_predicate_src
+	Predicate[1] role predicate
+end
+
+composition xxx_MetaInformationContainer_metaInformation between
+	MetaInformationContainer[0..1] role xxx_MetaInformationContainer_metaInformation_src
+	MetaInformation[*] role metaInformation
+end
+
+association xxx_Handler_procedures between
+	Handler[0..1] role xxx_Handler_procedures_src
+	Procedure[*] role procedures
+end
+
+composition xxx_Pipeline_procedures between
+	Pipeline[0..1] role xxx_Pipeline_procedures_src
+	Procedure[*] role procedures
+end
+
+association xxx_Pipeline_iterable between
+	Pipeline[*] role xxx_Pipeline_iterable_src
+	Data[1] role iterable
+end
+

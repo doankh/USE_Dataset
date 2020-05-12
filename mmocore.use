@@ -1,0 +1,136 @@
+model model_
+abstract class Identifiable
+attributes
+	id : String
+	literal : String
+	tags : String
+operations
+end
+
+abstract class Resource<Identifiable
+attributes
+operations
+end
+
+class UrlResource<Resource
+attributes
+	path : String
+operations
+end
+
+abstract class Version
+attributes
+	uniqueId : String
+	version : String
+operations
+end
+
+abstract class Project<Version,Decorate,PreferencesContributor
+attributes
+operations
+end
+
+abstract class Decorate<Identifiable
+attributes
+	description : String
+operations
+end
+
+abstract class ImageResource<UrlResource
+attributes
+operations
+end
+
+class PluginDependence
+attributes
+	plugin : String
+	minVersion : String
+	maxVersion : String
+operations
+end
+
+class TextResource<Resource
+attributes
+	text : String
+operations
+end
+
+class StringToStringMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+class PreferencesNode<Identifiable
+attributes
+operations
+end
+
+class PreferencesContributor
+attributes
+operations
+end
+
+class BeanContributor
+attributes
+	beanName : String
+operations
+end
+
+abstract class PropertiesContributor
+attributes
+operations
+end
+
+class i18nString
+attributes
+	id : String
+operations
+end
+
+composition xxx_Project_plugins between
+	Project[0..1] role xxx_Project_plugins_src
+	PluginDependence[*] role plugins
+end
+
+composition xxx_Project_messages between
+	Project[0..1] role xxx_Project_messages_src
+	i18nString[*] role messages
+end
+
+association xxx_Decorate_icon between
+	Decorate[*] role xxx_Decorate_icon_src
+	ImageResource[0..1] role icon
+end
+
+association xxx_PreferencesNode_parent between
+	PreferencesNode[*] role xxx_PreferencesNode_parent_src
+	PreferencesNode[0..1] role parent
+end
+
+composition xxx_PreferencesNode_children between
+	PreferencesNode[0..1] role xxx_PreferencesNode_children_src
+	PreferencesNode[*] role children
+end
+
+composition xxx_PreferencesNode_attributes_ between
+	PreferencesNode[0..1] role xxx_PreferencesNode_attributes__src
+	StringToStringMap[*] role attributes_
+end
+
+association xxx_PreferencesContributor_preferences between
+	PreferencesContributor[*] role xxx_PreferencesContributor_preferences_src
+	PreferencesNode[0..1] role preferences
+end
+
+composition xxx_PropertiesContributor_properties between
+	PropertiesContributor[0..1] role xxx_PropertiesContributor_properties_src
+	StringToStringMap[*] role properties
+end
+
+composition xxx_i18nString_value between
+	i18nString[0..1] role xxx_i18nString_value_src
+	StringToStringMap[*] role value
+end
+

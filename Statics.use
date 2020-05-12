@@ -1,0 +1,57 @@
+model statics
+class Package<CodeElement,IStaticElement
+attributes
+operations
+end
+
+class Class<CodeElement,IStaticElement
+attributes
+operations
+end
+
+class Attribute
+attributes
+	type : String
+	name : String
+operations
+end
+
+class Method<CodeElement
+attributes
+	returnType : String
+operations
+end
+
+abstract class CodeElement
+attributes
+	name : String
+	line : Integer
+	filename : String
+operations
+end
+
+abstract class IStaticElement
+attributes
+operations
+end
+
+composition xxx_Package_children between
+	Package[0..1] role xxx_Package_children_src
+	IStaticElement[*] role children
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Class_methods between
+	Class[0..1] role xxx_Class_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	Attribute[*] role parameters
+end
+

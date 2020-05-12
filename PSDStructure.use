@@ -1,0 +1,172 @@
+model psdstructure
+abstract class View
+attributes
+	ID : String
+operations
+end
+
+class Vector
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class ViewGroup<View
+attributes
+operations
+end
+
+class Button<View
+attributes
+	text : String
+operations
+end
+
+class BackgroundImage
+attributes
+	image : String
+operations
+end
+
+class Grid<ViewGroup
+attributes
+	cols : Integer
+	rows : Integer
+operations
+end
+
+class Scroll<ViewGroup
+attributes
+operations
+end
+
+class ProgressSpinner<View
+attributes
+operations
+end
+
+class Image<View
+attributes
+operations
+end
+
+class Text<View
+attributes
+	text : String
+	editable : Boolean
+	type : String
+operations
+end
+
+class Select<View
+attributes
+operations
+end
+
+class ProgressBar<View
+attributes
+operations
+end
+
+class WebView<View
+attributes
+	url : String
+operations
+end
+
+class DatePicker<View
+attributes
+	min : String
+	max : String
+	default : String
+operations
+end
+
+class Slider<View
+attributes
+	max : Integer
+	default : Integer
+operations
+end
+
+class Switch<View
+attributes
+	selected : Boolean
+operations
+end
+
+class Checkbox<View
+attributes
+	value : String
+	selected : Boolean
+operations
+end
+
+class Map<View
+attributes
+	apikey : String
+	clickable : Boolean
+operations
+end
+
+class RadioButton<View
+attributes
+	value : String
+	selected : Boolean
+operations
+end
+
+class AdView<View
+attributes
+	unitid : String
+operations
+end
+
+class SelectOption
+attributes
+	label : String
+	value : String
+operations
+end
+
+composition xxx_View_pos between
+	View[*] role xxx_View_pos_src
+	Vector[0..1] role pos
+end
+
+composition xxx_View_size between
+	View[*] role xxx_View_size_src
+	Vector[0..1] role size
+end
+
+composition xxx_View_backgrounds between
+	View[0..1] role xxx_View_backgrounds_src
+	BackgroundImage[*] role backgrounds
+end
+
+composition xxx_ViewGroup_children between
+	ViewGroup[0..1] role xxx_ViewGroup_children_src
+	View[*] role children
+end
+
+composition xxx_BackgroundImage_size between
+	BackgroundImage[*] role xxx_BackgroundImage_size_src
+	Vector[0..1] role size
+end
+
+composition xxx_BackgroundImage_pos between
+	BackgroundImage[*] role xxx_BackgroundImage_pos_src
+	Vector[0..1] role pos
+end
+
+association xxx_Select_default between
+	Select[*] role xxx_Select_default_src
+	SelectOption[0..1] role default
+end
+
+composition xxx_Select_options between
+	Select[0..1] role xxx_Select_options_src
+	SelectOption[*] role options
+end
+

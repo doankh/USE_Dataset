@@ -1,0 +1,337 @@
+model modelica
+enum VisibilityKind{
+default
+}
+
+enum ModelicaCausalityKind{
+default
+}
+
+enum ModelicaVariabilityKind{
+default
+}
+
+enum ModelicaFlowFlag{
+default
+}
+
+enum ModelicaScopeKind{
+default
+}
+
+abstract class ModelicaClassDefinition
+attributes
+	name : String
+	isPartial : Boolean
+	isFinal : Boolean
+	isModelicaEncapsulated : Boolean
+	fromLibrary : String
+	isReplaceable : Boolean
+operations
+end
+
+class Class<ModelicaClassDefinition
+attributes
+operations
+end
+
+class Connector<ModelicaClassDefinition
+attributes
+	isExpandable : Boolean
+operations
+end
+
+class Model<ModelicaClassDefinition
+attributes
+operations
+end
+
+class Record<ModelicaClassDefinition
+attributes
+operations
+end
+
+class Block<ModelicaClassDefinition
+attributes
+operations
+end
+
+class Package<ModelicaClassDefinition
+attributes
+	withinClause : String
+operations
+end
+
+class Function<ModelicaClassDefinition
+attributes
+	externalLanguage : String
+	externalInclude : String
+	externalLibrary : String
+operations
+end
+
+class DerFunction<Function
+attributes
+	variable : String
+operations
+end
+
+class ExtendsClause
+attributes
+	modification : String
+	arraySize : String
+	visibility : VisibilityKind
+	from_modelica_standard_library : String
+operations
+end
+
+class ModelicaModel
+attributes
+	name : String
+operations
+end
+
+abstract class ModelicaComponent
+attributes
+	conditionalExpression : String
+	name : String
+	isFinal : Boolean
+	modification : String
+	isReplaceable : Boolean
+	arraySize : String
+	type_specifier : String
+operations
+end
+
+class ModelicaValueProperty<ModelicaComponent
+attributes
+	visibility : VisibilityKind
+	causality : ModelicaCausalityKind
+	variability : ModelicaVariabilityKind
+	flowFlag : ModelicaFlowFlag
+	scope : ModelicaScopeKind
+	default_value : String
+operations
+end
+
+class ModelicaPart<ModelicaComponent
+attributes
+	visibility : VisibilityKind
+	scope : ModelicaScopeKind
+operations
+end
+
+class ModelicaPort<ModelicaComponent
+attributes
+	causality : ModelicaCausalityKind
+operations
+end
+
+class Equation
+attributes
+	isInitial : Boolean
+	body : String
+operations
+end
+
+class Connect
+attributes
+	fromPort : String
+	toPort : String
+	fromPart : String
+	toPart : String
+operations
+end
+
+class EquationSection
+attributes
+operations
+end
+
+class ModelicaFunctionParameter
+attributes
+	name : String
+	causality : ModelicaCausalityKind
+	modification : String
+	isReplaceable : Boolean
+	declarationEquation : String
+	isFinal : Boolean
+	arraySize : String
+	variability : ModelicaVariabilityKind
+	type_specifier : String
+operations
+end
+
+class AlgorithmSection
+attributes
+	body : String
+operations
+end
+
+class ConstrainedByClause
+attributes
+	modification : String
+operations
+end
+
+class Annotation
+attributes
+	body : String
+operations
+end
+
+composition xxx_ModelicaClassDefinition_extends between
+	ModelicaClassDefinition[0..1] role xxx_ModelicaClassDefinition_extends_src
+	ExtendsClause[*] role extends
+end
+
+association xxx_ModelicaClassDefinition_ownerModel between
+	ModelicaClassDefinition[*] role xxx_ModelicaClassDefinition_ownerModel_src
+	ModelicaModel[0..1] role ownerModel
+end
+
+association xxx_ModelicaClassDefinition_ownerPackage between
+	ModelicaClassDefinition[*] role xxx_ModelicaClassDefinition_ownerPackage_src
+	Package[0..1] role ownerPackage
+end
+
+composition xxx_ModelicaClassDefinition_modelicaComponents between
+	ModelicaClassDefinition[0..1] role xxx_ModelicaClassDefinition_modelicaComponents_src
+	ModelicaComponent[*] role modelicaComponents
+end
+
+composition xxx_ModelicaClassDefinition_equationSection between
+	ModelicaClassDefinition[*] role xxx_ModelicaClassDefinition_equationSection_src
+	EquationSection[0..1] role equationSection
+end
+
+composition xxx_ModelicaClassDefinition_algorithmSections between
+	ModelicaClassDefinition[0..1] role xxx_ModelicaClassDefinition_algorithmSections_src
+	AlgorithmSection[*] role algorithmSections
+end
+
+composition xxx_ModelicaClassDefinition_annotations between
+	ModelicaClassDefinition[0..1] role xxx_ModelicaClassDefinition_annotations_src
+	Annotation[*] role annotations
+end
+
+composition xxx_Package_modelicaClasses between
+	Package[0..1] role xxx_Package_modelicaClasses_src
+	ModelicaClassDefinition[*] role modelicaClasses
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	ModelicaFunctionParameter[*] role parameters
+end
+
+association xxx_DerFunction_der between
+	DerFunction[*] role xxx_DerFunction_der_src
+	Function[0..1] role der
+end
+
+association xxx_ExtendsClause_ownerModelicaClassDefinition between
+	ExtendsClause[*] role xxx_ExtendsClause_ownerModelicaClassDefinition_src
+	ModelicaClassDefinition[0..1] role ownerModelicaClassDefinition
+end
+
+association xxx_ExtendsClause_extendedModelicaClass between
+	ExtendsClause[*] role xxx_ExtendsClause_extendedModelicaClass_src
+	ModelicaClassDefinition[0..1] role extendedModelicaClass
+end
+
+composition xxx_ModelicaModel_modelicaClasses between
+	ModelicaModel[0..1] role xxx_ModelicaModel_modelicaClasses_src
+	ModelicaClassDefinition[*] role modelicaClasses
+end
+
+association xxx_ModelicaComponent_ownerModelicaClassDefinition between
+	ModelicaComponent[*] role xxx_ModelicaComponent_ownerModelicaClassDefinition_src
+	ModelicaClassDefinition[0..1] role ownerModelicaClassDefinition
+end
+
+association xxx_ModelicaPart_type_part between
+	ModelicaPart[*] role xxx_ModelicaPart_type_part_src
+	ModelicaClassDefinition[0..1] role type_part
+end
+
+composition xxx_ModelicaPart_constrainedBy between
+	ModelicaPart[*] role xxx_ModelicaPart_constrainedBy_src
+	ConstrainedByClause[0..1] role constrainedBy
+end
+
+association xxx_ModelicaPort_type_connector between
+	ModelicaPort[*] role xxx_ModelicaPort_type_connector_src
+	Connector[0..1] role type_connector
+end
+
+association xxx_Equation_ownerEquationSection between
+	Equation[*] role xxx_Equation_ownerEquationSection_src
+	EquationSection[0..1] role ownerEquationSection
+end
+
+association xxx_Connect_ownerEquationSection between
+	Connect[*] role xxx_Connect_ownerEquationSection_src
+	EquationSection[0..1] role ownerEquationSection
+end
+
+association xxx_Connect_from_ between
+	Connect[*] role xxx_Connect_from__src
+	ModelicaPort[1] role from_
+end
+
+association xxx_Connect_to between
+	Connect[*] role xxx_Connect_to_src
+	ModelicaPort[1] role to
+end
+
+association xxx_Connect_fromModelicaPart between
+	Connect[*] role xxx_Connect_fromModelicaPart_src
+	ModelicaPart[1] role fromModelicaPart
+end
+
+association xxx_Connect_toModelicaPart between
+	Connect[*] role xxx_Connect_toModelicaPart_src
+	ModelicaPart[1] role toModelicaPart
+end
+
+association xxx_EquationSection_ownerModelicaClassDefinition between
+	EquationSection[*] role xxx_EquationSection_ownerModelicaClassDefinition_src
+	ModelicaClassDefinition[1] role ownerModelicaClassDefinition
+end
+
+composition xxx_EquationSection_equations between
+	EquationSection[0..1] role xxx_EquationSection_equations_src
+	Equation[*] role equations
+end
+
+composition xxx_EquationSection_connects between
+	EquationSection[0..1] role xxx_EquationSection_connects_src
+	Connect[*] role connects
+end
+
+association xxx_ModelicaFunctionParameter_ownerFunction between
+	ModelicaFunctionParameter[*] role xxx_ModelicaFunctionParameter_ownerFunction_src
+	Function[0..1] role ownerFunction
+end
+
+association xxx_AlgorithmSection_ownerModelicaClassDefinition between
+	AlgorithmSection[*] role xxx_AlgorithmSection_ownerModelicaClassDefinition_src
+	ModelicaClassDefinition[1] role ownerModelicaClassDefinition
+end
+
+association xxx_ConstrainedByClause_ownerInstance between
+	ConstrainedByClause[*] role xxx_ConstrainedByClause_ownerInstance_src
+	ModelicaPart[0..1] role ownerInstance
+end
+
+association xxx_ConstrainedByClause_instanceForConstrainedBy between
+	ConstrainedByClause[*] role xxx_ConstrainedByClause_instanceForConstrainedBy_src
+	ModelicaPart[0..1] role instanceForConstrainedBy
+end
+
+association xxx_Annotation_ownerMCD between
+	Annotation[*] role xxx_Annotation_ownerMCD_src
+	ModelicaClassDefinition[0..1] role ownerMCD
+end
+

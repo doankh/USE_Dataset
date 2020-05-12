@@ -1,0 +1,109 @@
+model captah
+enum DataEncoding{
+default
+}
+
+enum SensorType{
+default
+}
+
+class Sensor<Component
+attributes
+	sensorUrl : String
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Component<NamedElement
+attributes
+operations
+end
+
+class Widget<Component
+attributes
+	pattern : String
+operations
+end
+
+class Instance<NamedElement
+attributes
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class Composite<Component
+attributes
+operations
+end
+
+class Connector
+attributes
+operations
+end
+
+class Port<NamedElement
+attributes
+	portType : SensorType
+	portEncoding : DataEncoding
+operations
+end
+
+class Dashboard<Composite
+attributes
+operations
+end
+
+composition xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[*] role ports
+end
+
+association xxx_Instance_type between
+	Instance[*] role xxx_Instance_type_src
+	Component[1] role type
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	Component[*] role elements
+end
+
+composition xxx_Composite_instances between
+	Composite[0..1] role xxx_Composite_instances_src
+	Instance[1..*] role instances
+end
+
+composition xxx_Composite_connectors between
+	Composite[0..1] role xxx_Composite_connectors_src
+	Connector[*] role connectors
+end
+
+association xxx_Connector_source between
+	Connector[*] role xxx_Connector_source_src
+	Instance[1] role source
+end
+
+association xxx_Connector_target between
+	Connector[*] role xxx_Connector_target_src
+	Instance[1] role target
+end
+
+association xxx_Connector_port between
+	Connector[*] role xxx_Connector_port_src
+	Port[1] role port
+end
+
+association xxx_Port_myConnection between
+	Port[*] role xxx_Port_myConnection_src
+	Connector[0..1] role myConnection
+end
+

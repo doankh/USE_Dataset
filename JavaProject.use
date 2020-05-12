@@ -1,0 +1,106 @@
+model JavaProject
+enum MEMBER_KIND{
+default
+}
+
+class JavaProject<NamedElement
+attributes
+operations
+end
+
+class PackageFragment<NamedElement
+attributes
+operations
+end
+
+class CompilationUnit<NamedElement
+attributes
+operations
+end
+
+class ImportDeclaration<NamedElement
+attributes
+operations
+end
+
+class Type<JavaElement
+attributes
+	elementName : String
+	member_kind : MEMBER_KIND
+operations
+end
+
+class Field<JavaElement
+attributes
+operations
+end
+
+class Method<JavaElement
+attributes
+	returnType : String
+	parametersName : String
+	parametersType : String
+operations
+end
+
+abstract class JavaElement<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class PackageDeclaration<NamedElement
+attributes
+operations
+end
+
+composition xxx_JavaProject_ownedPackageFragment between
+	JavaProject[0..1] role xxx_JavaProject_ownedPackageFragment_src
+	PackageFragment[*] role ownedPackageFragment
+end
+
+composition xxx_PackageFragment_ownedCompilationUnit between
+	PackageFragment[0..1] role xxx_PackageFragment_ownedCompilationUnit_src
+	CompilationUnit[*] role ownedCompilationUnit
+end
+
+composition xxx_CompilationUnit_importDeclaration between
+	CompilationUnit[0..1] role xxx_CompilationUnit_importDeclaration_src
+	ImportDeclaration[*] role importDeclaration
+end
+
+composition xxx_CompilationUnit_ownedType between
+	CompilationUnit[0..1] role xxx_CompilationUnit_ownedType_src
+	Type[*] role ownedType
+end
+
+composition xxx_CompilationUnit_declaration between
+	CompilationUnit[*] role xxx_CompilationUnit_declaration_src
+	PackageDeclaration[0..1] role declaration
+end
+
+composition xxx_Type_nestedType between
+	Type[0..1] role xxx_Type_nestedType_src
+	Type[*] role nestedType
+end
+
+association xxx_Type_ownedSuperType between
+	Type[0..1] role xxx_Type_ownedSuperType_src
+	Type[*] role ownedSuperType
+end
+
+composition xxx_Type_methods between
+	Type[0..1] role xxx_Type_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Type_fields between
+	Type[0..1] role xxx_Type_fields_src
+	Field[*] role fields
+end
+

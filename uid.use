@@ -1,0 +1,282 @@
+model uid
+enum ETransitionTypesIn{
+default
+}
+
+enum ETransitionTypeOut{
+default
+}
+
+enum EuiEventCallbacks{
+default
+}
+
+class EntityTransition
+attributes
+	name : String
+	animationTypeIn : ETransitionTypesIn
+	animationTypeOut : ETransitionTypeOut
+	animationInTime : Integer
+	animationOutTime : Integer
+operations
+end
+
+class Application
+attributes
+	name : String
+operations
+end
+
+class Component
+attributes
+	name : String
+	visible : Boolean
+	x : Integer
+	y : Integer
+operations
+end
+
+class Switch<Button
+attributes
+	value : Boolean
+operations
+end
+
+class Mediator
+attributes
+	name : String
+operations
+end
+
+class Regulator<Component
+attributes
+	minValue : Real
+	maxValue : Real
+	value : Real
+	defaultValue : Real
+operations
+	setValue():Integer
+end
+
+class Matrix<Component
+attributes
+	image_background : String
+	image_tap : String
+	image_doubleTap : String
+	value : String
+operations
+end
+
+class Container<Component
+attributes
+operations
+end
+
+class Display<Component
+attributes
+	image_background : String
+	value : String
+operations
+end
+
+class Button<Component
+attributes
+	image_on : String
+	image_off : String
+	image_disabled : String
+	label : String
+operations
+end
+
+class Notification
+attributes
+	name : String
+operations
+end
+
+class Command
+attributes
+	name : String
+operations
+end
+
+class Event
+attributes
+	name : String
+	callback : EuiEventCallbacks
+operations
+end
+
+class NotificationHandler
+attributes
+	name : String
+operations
+end
+
+class Stage
+attributes
+	background : String
+	name : String
+operations
+end
+
+class Views
+attributes
+operations
+end
+
+class Controllers
+attributes
+operations
+end
+
+class Models
+attributes
+operations
+end
+
+class Notifications
+attributes
+operations
+end
+
+class StateTransition
+attributes
+operations
+end
+
+association xxx_EntityTransition_hasComponent between
+	EntityTransition[*] role xxx_EntityTransition_hasComponent_src
+	Component[1] role hasComponent
+end
+
+composition xxx_Application_hasEntityTransition between
+	Application[0..1] role xxx_Application_hasEntityTransition_src
+	EntityTransition[*] role hasEntityTransition
+end
+
+composition xxx_Application_hasViews between
+	Application[*] role xxx_Application_hasViews_src
+	Views[1] role hasViews
+end
+
+composition xxx_Application_hasControllers between
+	Application[*] role xxx_Application_hasControllers_src
+	Controllers[1] role hasControllers
+end
+
+composition xxx_Application_hasNotifications between
+	Application[*] role xxx_Application_hasNotifications_src
+	Notifications[1] role hasNotifications
+end
+
+composition xxx_Application_hasModels between
+	Application[*] role xxx_Application_hasModels_src
+	Models[1] role hasModels
+end
+
+composition xxx_Application_hasMediator between
+	Application[*] role xxx_Application_hasMediator_src
+	Mediator[1] role hasMediator
+end
+
+association xxx_Application_hasInitialView between
+	Application[*] role xxx_Application_hasInitialView_src
+	Stage[1] role hasInitialView
+end
+
+composition xxx_Component_hasEvents between
+	Component[0..1] role xxx_Component_hasEvents_src
+	Event[*] role hasEvents
+end
+
+composition xxx_Mediator_hasNotificationHandler between
+	Mediator[0..1] role xxx_Mediator_hasNotificationHandler_src
+	NotificationHandler[*] role hasNotificationHandler
+end
+
+association xxx_Notification_recievedByCommand between
+	Notification[*] role xxx_Notification_recievedByCommand_src
+	Command[0..1] role recievedByCommand
+end
+
+association xxx_Command_hasNotification between
+	Command[0..1] role xxx_Command_hasNotification_src
+	Notification[*] role hasNotification
+end
+
+association xxx_Event_sendsNotification between
+	Event[0..1] role xxx_Event_sendsNotification_src
+	Notification[*] role sendsNotification
+end
+
+association xxx_NotificationHandler_recievesNotification between
+	NotificationHandler[*] role xxx_NotificationHandler_recievesNotification_src
+	Notification[0..1] role recievesNotification
+end
+
+association xxx_NotificationHandler_sendsNotification between
+	NotificationHandler[0..1] role xxx_NotificationHandler_sendsNotification_src
+	Notification[*] role sendsNotification
+end
+
+association xxx_NotificationHandler_changeStageTo between
+	NotificationHandler[*] role xxx_NotificationHandler_changeStageTo_src
+	Stage[1] role changeStageTo
+end
+
+composition xxx_Stage_hasDisplay between
+	Stage[0..1] role xxx_Stage_hasDisplay_src
+	Display[*] role hasDisplay
+end
+
+composition xxx_Stage_hasContainer between
+	Stage[0..1] role xxx_Stage_hasContainer_src
+	Container[*] role hasContainer
+end
+
+composition xxx_Stage_hasMatrix between
+	Stage[0..1] role xxx_Stage_hasMatrix_src
+	Matrix[*] role hasMatrix
+end
+
+composition xxx_Stage_hasRegulator between
+	Stage[0..1] role xxx_Stage_hasRegulator_src
+	Regulator[*] role hasRegulator
+end
+
+composition xxx_Stage_hasButton between
+	Stage[0..1] role xxx_Stage_hasButton_src
+	Button[*] role hasButton
+end
+
+composition xxx_Stage_hasSwitch between
+	Stage[0..1] role xxx_Stage_hasSwitch_src
+	Switch[*] role hasSwitch
+end
+
+composition xxx_Stage_hasEvents between
+	Stage[0..1] role xxx_Stage_hasEvents_src
+	Event[*] role hasEvents
+end
+
+composition xxx_Views_hasStage between
+	Views[0..1] role xxx_Views_hasStage_src
+	Stage[1..*] role hasStage
+end
+
+composition xxx_Views_hasMediator between
+	Views[0..1] role xxx_Views_hasMediator_src
+	Mediator[*] role hasMediator
+end
+
+composition xxx_Controllers_hasCommand between
+	Controllers[0..1] role xxx_Controllers_hasCommand_src
+	Command[*] role hasCommand
+end
+
+composition xxx_Notifications_hasNotification between
+	Notifications[0..1] role xxx_Notifications_hasNotification_src
+	Notification[*] role hasNotification
+end
+

@@ -1,0 +1,539 @@
+model YasperEPNML114
+enum TextType1{
+default
+}
+
+enum TextType2{
+default
+}
+
+enum TextTypeMember0{
+default
+}
+
+enum Tool{
+default
+}
+
+enum Version{
+default
+}
+
+class AnnotationGraphics
+attributes
+operations
+end
+
+class Arc
+attributes
+	group : String
+	id : String
+	source : String
+	target : String
+operations
+end
+
+class ArcType
+attributes
+	text : String
+operations
+end
+
+class ConnectionWeight
+attributes
+	connection : String
+operations
+end
+
+class ConnectionWeights
+attributes
+operations
+end
+
+class Cost
+attributes
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class EdgeGraphics
+attributes
+operations
+end
+
+class InitialMarking
+attributes
+	text : String
+operations
+end
+
+class Inscription
+attributes
+	text : String
+operations
+end
+
+class Net
+attributes
+	group : String
+	id : String
+	type : String
+operations
+end
+
+class NetGraphics
+attributes
+	group : String
+operations
+end
+
+class NodeGraphics
+attributes
+	group : String
+operations
+end
+
+class Page
+attributes
+	group : String
+	id : String
+operations
+end
+
+class Place
+attributes
+	group : String
+	id : String
+operations
+end
+
+class PlaceType
+attributes
+	text : TextType2
+operations
+end
+
+class PlaceType1<Place
+attributes
+operations
+end
+
+class Pnml
+attributes
+	group : String
+operations
+end
+
+class PnmlAnnotation
+attributes
+	text : String
+operations
+end
+
+class ProcessingTime
+attributes
+operations
+end
+
+class ReferencePlace
+attributes
+	group : String
+	id : String
+	ref : String
+operations
+end
+
+class ReferencePlaceSpecific
+attributes
+	tool : String
+	version : String
+operations
+end
+
+class Role
+attributes
+	text : String
+operations
+end
+
+class Roles
+attributes
+operations
+end
+
+class Stat
+attributes
+	text : String
+operations
+end
+
+class ToolspecificType
+attributes
+	mixed : String
+	group : String
+	any : String
+	tool : String
+	version : String
+operations
+end
+
+class Transformation
+attributes
+	text : String
+operations
+end
+
+class Transition
+attributes
+	group : String
+	id : String
+operations
+end
+
+class TransitionSpecific
+attributes
+	tokenCaseSensitive : Boolean
+	tool : String
+	version : String
+operations
+end
+
+class TransitionType
+attributes
+	text : TextType1
+operations
+end
+
+class TwoDimVector
+attributes
+	x : String
+	y : String
+operations
+end
+
+composition xxx_AnnotationGraphics_offset between
+	AnnotationGraphics[0..1] role xxx_AnnotationGraphics_offset_src
+	TwoDimVector[*] role offset
+end
+
+composition xxx_Arc_type between
+	Arc[0..1] role xxx_Arc_type_src
+	ArcType[*] role type
+end
+
+composition xxx_Arc_graphics between
+	Arc[0..1] role xxx_Arc_graphics_src
+	EdgeGraphics[*] role graphics
+end
+
+composition xxx_Arc_inscription between
+	Arc[0..1] role xxx_Arc_inscription_src
+	Inscription[*] role inscription
+end
+
+composition xxx_Arc_name between
+	Arc[0..1] role xxx_Arc_name_src
+	PnmlAnnotation[*] role name
+end
+
+composition xxx_Arc_description between
+	Arc[0..1] role xxx_Arc_description_src
+	PnmlAnnotation[*] role description
+end
+
+composition xxx_Arc_toolspecific between
+	Arc[0..1] role xxx_Arc_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_ConnectionWeight_weight between
+	ConnectionWeight[*] role xxx_ConnectionWeight_weight_src
+	Stat[1] role weight
+end
+
+composition xxx_ConnectionWeights_connectionWeight between
+	ConnectionWeights[0..1] role xxx_ConnectionWeights_connectionWeight_src
+	ConnectionWeight[*] role connectionWeight
+end
+
+composition xxx_Cost_fixed between
+	Cost[*] role xxx_Cost_fixed_src
+	Stat[0..1] role fixed
+end
+
+composition xxx_Cost_variable between
+	Cost[*] role xxx_Cost_variable_src
+	Stat[0..1] role variable
+end
+
+
+composition xxx_DocumentRoot_pnml between
+	DocumentRoot[*] role xxx_DocumentRoot_pnml_src
+	Pnml[*] role pnml
+end
+
+composition xxx_EdgeGraphics_position between
+	EdgeGraphics[0..1] role xxx_EdgeGraphics_position_src
+	TwoDimVector[*] role position
+end
+
+composition xxx_InitialMarking_graphics between
+	InitialMarking[*] role xxx_InitialMarking_graphics_src
+	AnnotationGraphics[0..1] role graphics
+end
+
+composition xxx_Inscription_graphics between
+	Inscription[*] role xxx_Inscription_graphics_src
+	AnnotationGraphics[0..1] role graphics
+end
+
+composition xxx_Net_graphics between
+	Net[0..1] role xxx_Net_graphics_src
+	NetGraphics[*] role graphics
+end
+
+composition xxx_Net_place between
+	Net[0..1] role xxx_Net_place_src
+	PlaceType1[*] role place
+end
+
+composition xxx_Net_transition between
+	Net[0..1] role xxx_Net_transition_src
+	Transition[*] role transition
+end
+
+composition xxx_Net_arc between
+	Net[0..1] role xxx_Net_arc_src
+	Arc[*] role arc
+end
+
+composition xxx_Net_page between
+	Net[0..1] role xxx_Net_page_src
+	Page[*] role page
+end
+
+composition xxx_Net_name between
+	Net[0..1] role xxx_Net_name_src
+	PnmlAnnotation[*] role name
+end
+
+composition xxx_Net_description between
+	Net[0..1] role xxx_Net_description_src
+	PnmlAnnotation[*] role description
+end
+
+composition xxx_Net_toolspecific between
+	Net[0..1] role xxx_Net_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_NetGraphics_position between
+	NetGraphics[0..1] role xxx_NetGraphics_position_src
+	TwoDimVector[*] role position
+end
+
+composition xxx_NetGraphics_dimension between
+	NetGraphics[0..1] role xxx_NetGraphics_dimension_src
+	TwoDimVector[*] role dimension
+end
+
+composition xxx_NodeGraphics_position between
+	NodeGraphics[0..1] role xxx_NodeGraphics_position_src
+	TwoDimVector[*] role position
+end
+
+composition xxx_NodeGraphics_dimension between
+	NodeGraphics[0..1] role xxx_NodeGraphics_dimension_src
+	TwoDimVector[*] role dimension
+end
+
+composition xxx_Page_referencePlace between
+	Page[0..1] role xxx_Page_referencePlace_src
+	ReferencePlace[*] role referencePlace
+end
+
+composition xxx_Page_graphics between
+	Page[0..1] role xxx_Page_graphics_src
+	NetGraphics[*] role graphics
+end
+
+composition xxx_Page_type between
+	Page[0..1] role xxx_Page_type_src
+	TransitionType[*] role type
+end
+
+composition xxx_Page_place between
+	Page[0..1] role xxx_Page_place_src
+	PlaceType1[*] role place
+end
+
+composition xxx_Page_transition between
+	Page[0..1] role xxx_Page_transition_src
+	Transition[*] role transition
+end
+
+composition xxx_Page_arc between
+	Page[0..1] role xxx_Page_arc_src
+	Arc[*] role arc
+end
+
+composition xxx_Page_page between
+	Page[0..1] role xxx_Page_page_src
+	Page[*] role page
+end
+
+composition xxx_Page_name between
+	Page[0..1] role xxx_Page_name_src
+	PnmlAnnotation[*] role name
+end
+
+composition xxx_Page_description between
+	Page[0..1] role xxx_Page_description_src
+	PnmlAnnotation[*] role description
+end
+
+composition xxx_Page_toolspecific between
+	Page[0..1] role xxx_Page_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_Place_type between
+	Place[0..1] role xxx_Place_type_src
+	PlaceType[*] role type
+end
+
+composition xxx_Place_graphics between
+	Place[0..1] role xxx_Place_graphics_src
+	NodeGraphics[*] role graphics
+end
+
+composition xxx_Place_initialMarking between
+	Place[0..1] role xxx_Place_initialMarking_src
+	InitialMarking[*] role initialMarking
+end
+
+composition xxx_Place_name between
+	Place[0..1] role xxx_Place_name_src
+	PnmlAnnotation[*] role name
+end
+
+composition xxx_Place_description between
+	Place[0..1] role xxx_Place_description_src
+	PnmlAnnotation[*] role description
+end
+
+composition xxx_Place_toolspecific between
+	Place[0..1] role xxx_Place_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_Pnml_net between
+	Pnml[0..1] role xxx_Pnml_net_src
+	Net[*] role net
+end
+
+composition xxx_Pnml_toolspecific between
+	Pnml[0..1] role xxx_Pnml_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_PnmlAnnotation_graphics between
+	PnmlAnnotation[*] role xxx_PnmlAnnotation_graphics_src
+	AnnotationGraphics[0..1] role graphics
+end
+
+composition xxx_ProcessingTime_mean between
+	ProcessingTime[*] role xxx_ProcessingTime_mean_src
+	Stat[0..1] role mean
+end
+
+composition xxx_ProcessingTime_deviation between
+	ProcessingTime[*] role xxx_ProcessingTime_deviation_src
+	Stat[0..1] role deviation
+end
+
+composition xxx_ReferencePlace_graphics between
+	ReferencePlace[0..1] role xxx_ReferencePlace_graphics_src
+	NodeGraphics[*] role graphics
+end
+
+composition xxx_ReferencePlace_name between
+	ReferencePlace[0..1] role xxx_ReferencePlace_name_src
+	PnmlAnnotation[*] role name
+end
+
+composition xxx_ReferencePlace_description between
+	ReferencePlace[0..1] role xxx_ReferencePlace_description_src
+	PnmlAnnotation[*] role description
+end
+
+composition xxx_ReferencePlace_toolspecific between
+	ReferencePlace[0..1] role xxx_ReferencePlace_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_ReferencePlaceSpecific_pathGraphics between
+	ReferencePlaceSpecific[*] role xxx_ReferencePlaceSpecific_pathGraphics_src
+	NodeGraphics[0..1] role pathGraphics
+end
+
+composition xxx_Roles_role between
+	Roles[0..1] role xxx_Roles_role_src
+	Role[1..*] role role
+end
+
+composition xxx_Transformation_graphics between
+	Transformation[*] role xxx_Transformation_graphics_src
+	AnnotationGraphics[0..1] role graphics
+end
+
+composition xxx_Transition_type between
+	Transition[0..1] role xxx_Transition_type_src
+	TransitionType[*] role type
+end
+
+composition xxx_Transition_graphics between
+	Transition[0..1] role xxx_Transition_graphics_src
+	NodeGraphics[*] role graphics
+end
+
+composition xxx_Transition_transformation between
+	Transition[0..1] role xxx_Transition_transformation_src
+	Transformation[*] role transformation
+end
+
+composition xxx_Transition_name between
+	Transition[0..1] role xxx_Transition_name_src
+	PnmlAnnotation[*] role name
+end
+
+composition xxx_Transition_description between
+	Transition[0..1] role xxx_Transition_description_src
+	PnmlAnnotation[*] role description
+end
+
+composition xxx_Transition_toolspecific between
+	Transition[0..1] role xxx_Transition_toolspecific_src
+	ToolspecificType[*] role toolspecific
+end
+
+composition xxx_TransitionSpecific_roles between
+	TransitionSpecific[*] role xxx_TransitionSpecific_roles_src
+	Roles[0..1] role roles
+end
+
+composition xxx_TransitionSpecific_cost between
+	TransitionSpecific[*] role xxx_TransitionSpecific_cost_src
+	Cost[0..1] role cost
+end
+
+composition xxx_TransitionSpecific_processingTime between
+	TransitionSpecific[*] role xxx_TransitionSpecific_processingTime_src
+	ProcessingTime[0..1] role processingTime
+end
+

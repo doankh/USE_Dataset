@@ -1,0 +1,24 @@
+model Family
+class Family
+attributes
+	name : String
+operations
+end
+
+class Person
+attributes
+	firstName : String
+	emailAddresses : String
+operations
+end
+
+association xxx_Family_members between
+	Family[0..1] role xxx_Family_members_src
+	Person[*] role members
+end
+
+association xxx_Person_closestFriend between
+	Person[*] role xxx_Person_closestFriend_src
+	Person[1] role closestFriend
+end
+

@@ -1,0 +1,1238 @@
+model SATEL
+class Model
+attributes
+operations
+end
+
+class TestIntentionModule
+attributes
+	name : String
+operations
+end
+
+class TestIntentionInterface
+attributes
+operations
+end
+
+class IntentionDec
+attributes
+	name : String
+operations
+end
+
+class TestIntentionBody
+attributes
+operations
+end
+
+class AxiomDeclaration
+attributes
+operations
+end
+
+class Axiom
+attributes
+operations
+end
+
+class Inclusion<ConditionAtom
+attributes
+operations
+end
+
+class Condition
+attributes
+operations
+end
+
+abstract class DomainQuantifier
+attributes
+operations
+end
+
+class UniformityList<DomainQuantifier
+attributes
+operations
+end
+
+class SubuniformityList<DomainQuantifier
+attributes
+operations
+end
+
+class ConditionBody
+attributes
+operations
+end
+
+abstract class ConditionAtom
+attributes
+operations
+end
+
+class NameList
+attributes
+operations
+end
+
+class HMLTerm
+attributes
+operations
+end
+
+abstract class HMLFormula
+attributes
+operations
+end
+
+class HMLFormulaHMLFormulaContent<HMLFormula
+attributes
+operations
+end
+
+class HMLFormulaPrimitiveHMLVarDec<HMLFormula
+attributes
+operations
+end
+
+abstract class HMLFormulaContent
+attributes
+operations
+end
+
+class HMLNext<HMLFormulaContent
+attributes
+operations
+end
+
+class HMLNot<HMLFormulaContent
+attributes
+operations
+end
+
+class HMLAnd<HMLFormulaContent
+attributes
+operations
+end
+
+class HMLTop<HMLFormulaContent
+attributes
+operations
+end
+
+class HMLEvent
+attributes
+operations
+end
+
+abstract class SynchronizationTerm
+attributes
+operations
+end
+
+abstract class SynchronizationInputTerm<SynchronizationTerm
+attributes
+operations
+end
+
+class SynchronizationEventInputTerm<SynchronizationInputTerm
+attributes
+operations
+end
+
+abstract class SynchronizationOutputTerm<SynchronizationTerm
+attributes
+operations
+end
+
+class SynchronizationEventOutputTerm<SynchronizationOutputTerm
+attributes
+operations
+end
+
+class WPrimitiveObservationVarDec<SynchronizationOutputTerm
+attributes
+operations
+end
+
+class WPrimitiveStimulationVarDec<SynchronizationInputTerm
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+abstract class InputEvent
+attributes
+operations
+end
+
+abstract class OutputEvent
+attributes
+operations
+end
+
+abstract class AlgebraicEquality<ConditionAtom
+attributes
+operations
+end
+
+class AlgEquality<AlgebraicEquality
+attributes
+operations
+end
+
+class SyncEquality<AlgebraicEquality
+attributes
+operations
+end
+
+class HMLEquality<AlgebraicEquality
+attributes
+operations
+end
+
+class BooleanEquality<AlgebraicEquality
+attributes
+operations
+end
+
+class ArithmeticEquality<AlgebraicEquality
+attributes
+operations
+end
+
+abstract class BooleanTerm<ConditionAtom
+attributes
+operations
+end
+
+class Not<BooleanTerm
+attributes
+operations
+end
+
+class Sequence_<BooleanTerm
+attributes
+operations
+end
+
+class Positive<BooleanTerm
+attributes
+operations
+end
+
+class Trace<BooleanTerm
+attributes
+operations
+end
+
+class BooleanVariable<BooleanTerm
+attributes
+operations
+end
+
+class BooleanValue<BooleanTerm
+attributes
+	value : Boolean
+operations
+end
+
+class BOPAnd<BooleanTerm
+attributes
+operations
+end
+
+class BOPOr<BooleanTerm
+attributes
+operations
+end
+
+class Equals<BooleanTerm
+attributes
+operations
+end
+
+class NotEquals<BooleanTerm
+attributes
+operations
+end
+
+class GT<BooleanTerm
+attributes
+operations
+end
+
+class LT<BooleanTerm
+attributes
+operations
+end
+
+class GTE<BooleanTerm
+attributes
+operations
+end
+
+class LTE<BooleanTerm
+attributes
+operations
+end
+
+abstract class ArithmeticTerm
+attributes
+operations
+end
+
+class IntegerVariable<ArithmeticTerm
+attributes
+operations
+end
+
+class IntegerValue<ArithmeticTerm
+attributes
+	value : Integer
+operations
+end
+
+class BOPPlus<ArithmeticTerm
+attributes
+operations
+end
+
+class BOPMinus<ArithmeticTerm
+attributes
+operations
+end
+
+class BOPTimes<ArithmeticTerm
+attributes
+operations
+end
+
+class BOPDiv<ArithmeticTerm
+attributes
+operations
+end
+
+class NBEvents<ArithmeticTerm
+attributes
+operations
+end
+
+class Depth<ArithmeticTerm
+attributes
+operations
+end
+
+class UOPMinus<ArithmeticTerm
+attributes
+operations
+end
+
+abstract class AlgebraicTerm
+attributes
+operations
+end
+
+class VariableRef<AlgebraicTerm, Term
+attributes
+operations
+end
+
+abstract class AbstractCompositeTerm<AlgebraicTerm
+attributes
+	iter : Integer
+operations
+end
+
+class CompositeTerm<AbstractCompositeTerm
+attributes
+operations
+end
+
+class VariableDeclaration
+attributes
+operations
+end
+
+abstract class VariableDec
+attributes
+	name : String
+operations
+end
+
+class PrimitiveHMLVarDec<VariableDec
+attributes
+operations
+end
+
+class PrimitiveStimulationVarDec<VariableDec
+attributes
+operations
+end
+
+class PrimitiveObservationVarDec<VariableDec
+attributes
+operations
+end
+
+class PrimitiveIntegerVarDec<VariableDec
+attributes
+operations
+end
+
+class PrimitiveBooleanVarDec<VariableDec
+attributes
+operations
+end
+
+class AlgebraicSortVarDec<VariableDec
+attributes
+operations
+end
+
+abstract class VarDecType
+attributes
+operations
+end
+
+class PrimitiveHML<VarDecType
+attributes
+operations
+end
+
+class PrimitiveStimulation<VarDecType
+attributes
+operations
+end
+
+class PrimitiveObservation<VarDecType
+attributes
+operations
+end
+
+class PrimitiveInteger<VarDecType
+attributes
+operations
+end
+
+class PrimitiveBoolean<VarDecType
+attributes
+operations
+end
+
+class APN<Environment
+attributes
+	name : String
+operations
+end
+
+abstract class Node
+attributes
+	name : String
+operations
+end
+
+class Arc
+attributes
+	Name : String
+operations
+end
+
+class Place<Node
+attributes
+operations
+end
+
+class Transition<Node
+attributes
+operations
+end
+
+class Method<InputEvent
+attributes
+	name : String
+operations
+end
+
+class Gate<OutputEvent
+attributes
+	name : String
+operations
+end
+
+class GateCall
+attributes
+operations
+end
+
+class MethodCall
+attributes
+operations
+end
+
+abstract class Environment
+attributes
+operations
+end
+
+class Guard<Environment
+attributes
+operations
+end
+
+class ADT<Environment
+attributes
+	name : String
+operations
+end
+
+class Sort<AbstractSort
+attributes
+operations
+end
+
+class Operation<AbstractOperation
+attributes
+operations
+end
+
+class Variable
+attributes
+	name : String
+operations
+end
+
+class CondEquation
+attributes
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+class CTerm<Term
+attributes
+	iter : Integer
+operations
+end
+
+abstract class AbstractEquation
+attributes
+operations
+end
+
+class Equation<AbstractEquation
+attributes
+operations
+end
+
+class Inequation<AbstractEquation
+attributes
+operations
+end
+
+abstract class AbstractSort
+attributes
+operations
+end
+
+class AtomicSort<Sort
+attributes
+operations
+end
+
+class SortDeclaration
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractOperation
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractGenericOp<AbstractOperation
+attributes
+operations
+end
+
+class Multiset<Environment
+attributes
+operations
+end
+
+class NumOfTerms
+attributes
+	card : Integer
+operations
+end
+
+abstract class MSElement
+attributes
+operations
+end
+
+class TermReference<MSElement
+attributes
+operations
+end
+
+composition xxx_Model_testIntentionModule between
+	Model[0..1] role xxx_Model_testIntentionModule_src
+	TestIntentionModule[1..*] role testIntentionModule
+end
+
+composition xxx_TestIntentionModule_testIntentionBody between
+	TestIntentionModule[*] role xxx_TestIntentionModule_testIntentionBody_src
+	TestIntentionBody[1] role testIntentionBody
+end
+
+composition xxx_TestIntentionModule_testIntentionInterface between
+	TestIntentionModule[*] role xxx_TestIntentionModule_testIntentionInterface_src
+	TestIntentionInterface[0..1] role testIntentionInterface
+end
+
+composition xxx_TestIntentionModule_focus between
+	TestIntentionModule[*] role xxx_TestIntentionModule_focus_src
+	APN[1] role focus
+end
+
+composition xxx_TestIntentionModule_algebra between
+	TestIntentionModule[0..1] role xxx_TestIntentionModule_algebra_src
+	ADT[*] role algebra
+end
+
+composition xxx_TestIntentionInterface_intention between
+	TestIntentionInterface[0..1] role xxx_TestIntentionInterface_intention_src
+	IntentionDec[1..*] role intention
+end
+
+composition xxx_TestIntentionBody_axiomDeclaration between
+	TestIntentionBody[*] role xxx_TestIntentionBody_axiomDeclaration_src
+	AxiomDeclaration[1] role axiomDeclaration
+end
+
+composition xxx_TestIntentionBody_variableDeclaration between
+	TestIntentionBody[*] role xxx_TestIntentionBody_variableDeclaration_src
+	VariableDeclaration[0..1] role variableDeclaration
+end
+
+composition xxx_AxiomDeclaration_axiom between
+	AxiomDeclaration[0..1] role xxx_AxiomDeclaration_axiom_src
+	Axiom[1..*] role axiom
+end
+
+composition xxx_Axiom_condition between
+	Axiom[*] role xxx_Axiom_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_Axiom_inclusion between
+	Axiom[*] role xxx_Axiom_inclusion_src
+	Inclusion[1] role inclusion
+end
+
+composition xxx_Inclusion_hmlTerm between
+	Inclusion[*] role xxx_Inclusion_hmlTerm_src
+	HMLTerm[1] role hmlTerm
+end
+
+association xxx_Inclusion_in_ between
+	Inclusion[*] role xxx_Inclusion_in__src
+	IntentionDec[1] role in_
+end
+
+composition xxx_Condition_domainQuantifier between
+	Condition[*] role xxx_Condition_domainQuantifier_src
+	DomainQuantifier[0..1] role domainQuantifier
+end
+
+composition xxx_Condition_conditionBody between
+	Condition[*] role xxx_Condition_conditionBody_src
+	ConditionBody[1] role conditionBody
+end
+
+composition xxx_DomainQuantifier_list between
+	DomainQuantifier[*] role xxx_DomainQuantifier_list_src
+	NameList[1] role list
+end
+
+composition xxx_ConditionBody_conditionAtom between
+	ConditionBody[0..1] role xxx_ConditionBody_conditionAtom_src
+	ConditionAtom[1..*] role conditionAtom
+end
+
+association xxx_NameList_nameRef between
+	NameList[0..1] role xxx_NameList_nameRef_src
+	VariableDec[1..*] role nameRef
+end
+
+composition xxx_HMLTerm_hmlFormula between
+	HMLTerm[0..1] role xxx_HMLTerm_hmlFormula_src
+	HMLFormula[1..*] role hmlFormula
+end
+
+composition xxx_HMLFormulaHMLFormulaContent_hmlFormulaContent between
+	HMLFormulaHMLFormulaContent[*] role xxx_HMLFormulaHMLFormulaContent_hmlFormulaContent_src
+	HMLFormulaContent[1] role hmlFormulaContent
+end
+
+association xxx_HMLFormulaPrimitiveHMLVarDec_primitiveHMLVarDec between
+	HMLFormulaPrimitiveHMLVarDec[*] role xxx_HMLFormulaPrimitiveHMLVarDec_primitiveHMLVarDec_src
+	PrimitiveHMLVarDec[1] role primitiveHMLVarDec
+end
+
+composition xxx_HMLNext_hmlFormulaContent between
+	HMLNext[*] role xxx_HMLNext_hmlFormulaContent_src
+	HMLFormulaContent[1] role hmlFormulaContent
+end
+
+composition xxx_HMLNext_hmlEvent between
+	HMLNext[*] role xxx_HMLNext_hmlEvent_src
+	HMLEvent[1] role hmlEvent
+end
+
+composition xxx_HMLNot_hmlFormulaContent between
+	HMLNot[*] role xxx_HMLNot_hmlFormulaContent_src
+	HMLFormulaContent[1] role hmlFormulaContent
+end
+
+composition xxx_HMLAnd_hmlFormulaContentL between
+	HMLAnd[*] role xxx_HMLAnd_hmlFormulaContentL_src
+	HMLFormulaContent[1] role hmlFormulaContentL
+end
+
+composition xxx_HMLAnd_hmlFormulaContentR between
+	HMLAnd[*] role xxx_HMLAnd_hmlFormulaContentR_src
+	HMLFormulaContent[1] role hmlFormulaContentR
+end
+
+composition xxx_HMLEvent_inputTerm between
+	HMLEvent[*] role xxx_HMLEvent_inputTerm_src
+	SynchronizationInputTerm[1] role inputTerm
+end
+
+composition xxx_HMLEvent_outputTerm between
+	HMLEvent[*] role xxx_HMLEvent_outputTerm_src
+	SynchronizationOutputTerm[0..1] role outputTerm
+end
+
+association xxx_SynchronizationEventInputTerm_event between
+	SynchronizationEventInputTerm[*] role xxx_SynchronizationEventInputTerm_event_src
+	InputEvent[1] role event
+end
+
+composition xxx_SynchronizationEventInputTerm_parameters between
+	SynchronizationEventInputTerm[*] role xxx_SynchronizationEventInputTerm_parameters_src
+	Parameter[0..1] role parameters
+end
+
+association xxx_SynchronizationEventOutputTerm_event between
+	SynchronizationEventOutputTerm[*] role xxx_SynchronizationEventOutputTerm_event_src
+	OutputEvent[1] role event
+end
+
+composition xxx_SynchronizationEventOutputTerm_parameters between
+	SynchronizationEventOutputTerm[*] role xxx_SynchronizationEventOutputTerm_parameters_src
+	Parameter[0..1] role parameters
+end
+
+association xxx_WPrimitiveObservationVarDec_primitiveObservation between
+	WPrimitiveObservationVarDec[*] role xxx_WPrimitiveObservationVarDec_primitiveObservation_src
+	PrimitiveObservationVarDec[1] role primitiveObservation
+end
+
+association xxx_WPrimitiveStimulationVarDec_primitiveStimulation between
+	WPrimitiveStimulationVarDec[*] role xxx_WPrimitiveStimulationVarDec_primitiveStimulation_src
+	PrimitiveStimulationVarDec[1] role primitiveStimulation
+end
+
+composition xxx_Parameter_value between
+	Parameter[*] role xxx_Parameter_value_src
+	AlgebraicTerm[1] role value
+end
+
+composition xxx_Parameter_next between
+	Parameter[*] role xxx_Parameter_next_src
+	Parameter[0..1] role next
+end
+
+composition xxx_AlgEquality_algebraicTermL between
+	AlgEquality[*] role xxx_AlgEquality_algebraicTermL_src
+	AlgebraicTerm[1] role algebraicTermL
+end
+
+composition xxx_AlgEquality_algebraicTermR between
+	AlgEquality[*] role xxx_AlgEquality_algebraicTermR_src
+	AlgebraicTerm[1] role algebraicTermR
+end
+
+composition xxx_SyncEquality_synchronizationTermL between
+	SyncEquality[*] role xxx_SyncEquality_synchronizationTermL_src
+	SynchronizationTerm[1] role synchronizationTermL
+end
+
+composition xxx_SyncEquality_synchronizationTermR between
+	SyncEquality[*] role xxx_SyncEquality_synchronizationTermR_src
+	SynchronizationTerm[1] role synchronizationTermR
+end
+
+composition xxx_HMLEquality_hmlTermL between
+	HMLEquality[*] role xxx_HMLEquality_hmlTermL_src
+	HMLTerm[1] role hmlTermL
+end
+
+composition xxx_HMLEquality_hmlTermR between
+	HMLEquality[*] role xxx_HMLEquality_hmlTermR_src
+	HMLTerm[1] role hmlTermR
+end
+
+composition xxx_BooleanEquality_booleanTermR between
+	BooleanEquality[*] role xxx_BooleanEquality_booleanTermR_src
+	BooleanTerm[1] role booleanTermR
+end
+
+composition xxx_BooleanEquality_booleanTermL between
+	BooleanEquality[*] role xxx_BooleanEquality_booleanTermL_src
+	BooleanTerm[1] role booleanTermL
+end
+
+composition xxx_ArithmeticEquality_arithmeticTermL between
+	ArithmeticEquality[*] role xxx_ArithmeticEquality_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_ArithmeticEquality_arithmeticTermR between
+	ArithmeticEquality[*] role xxx_ArithmeticEquality_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_Not_booleanTerm between
+	Not[*] role xxx_Not_booleanTerm_src
+	BooleanTerm[1] role booleanTerm
+end
+
+composition xxx_Sequence_hmlTerm between
+	Sequence_[*] role xxx_Sequence_hmlTerm_src
+	HMLTerm[1] role hmlTerm
+end
+
+composition xxx_Positive_hmlTerm between
+	Positive[*] role xxx_Positive_hmlTerm_src
+	HMLTerm[1] role hmlTerm
+end
+
+composition xxx_Trace_hmlTerm between
+	Trace[*] role xxx_Trace_hmlTerm_src
+	HMLTerm[1] role hmlTerm
+end
+
+association xxx_BooleanVariable_booleanVariable between
+	BooleanVariable[*] role xxx_BooleanVariable_booleanVariable_src
+	PrimitiveBooleanVarDec[1] role booleanVariable
+end
+
+composition xxx_BOPAnd_booleanTermL between
+	BOPAnd[*] role xxx_BOPAnd_booleanTermL_src
+	BooleanTerm[1] role booleanTermL
+end
+
+composition xxx_BOPAnd_booleanTermR between
+	BOPAnd[*] role xxx_BOPAnd_booleanTermR_src
+	BooleanTerm[1] role booleanTermR
+end
+
+composition xxx_BOPOr_booleanTermL between
+	BOPOr[*] role xxx_BOPOr_booleanTermL_src
+	BooleanTerm[1] role booleanTermL
+end
+
+composition xxx_BOPOr_booleanTermR between
+	BOPOr[*] role xxx_BOPOr_booleanTermR_src
+	BooleanTerm[1] role booleanTermR
+end
+
+composition xxx_Equals_arithmeticTermR between
+	Equals[*] role xxx_Equals_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_Equals_arithmeticTermL between
+	Equals[*] role xxx_Equals_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_NotEquals_arithmeticTermR between
+	NotEquals[*] role xxx_NotEquals_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_NotEquals_arithmeticTermL between
+	NotEquals[*] role xxx_NotEquals_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_GT_arithmeticTermR between
+	GT[*] role xxx_GT_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_GT_arithmeticTermL between
+	GT[*] role xxx_GT_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_LT_arithmeticTermR between
+	LT[*] role xxx_LT_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_LT_arithmeticTermL between
+	LT[*] role xxx_LT_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_GTE_arithmeticTermR between
+	GTE[*] role xxx_GTE_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_GTE_arithmeticTermL between
+	GTE[*] role xxx_GTE_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_LTE_arithmeticTermR between
+	LTE[*] role xxx_LTE_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_LTE_arithmeticTermL between
+	LTE[*] role xxx_LTE_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+association xxx_IntegerVariable_integerVariable between
+	IntegerVariable[*] role xxx_IntegerVariable_integerVariable_src
+	PrimitiveIntegerVarDec[1] role integerVariable
+end
+
+composition xxx_BOPPlus_arithmeticTermL between
+	BOPPlus[*] role xxx_BOPPlus_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_BOPPlus_arithmeticTermR between
+	BOPPlus[*] role xxx_BOPPlus_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_BOPMinus_arithmeticTermL between
+	BOPMinus[*] role xxx_BOPMinus_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_BOPMinus_arithmeticTermR between
+	BOPMinus[*] role xxx_BOPMinus_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_BOPTimes_arithmeticTermR between
+	BOPTimes[*] role xxx_BOPTimes_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_BOPTimes_arithmeticTermL between
+	BOPTimes[*] role xxx_BOPTimes_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_BOPDiv_arithmeticTermL between
+	BOPDiv[*] role xxx_BOPDiv_arithmeticTermL_src
+	ArithmeticTerm[1] role arithmeticTermL
+end
+
+composition xxx_BOPDiv_arithmeticTermR between
+	BOPDiv[*] role xxx_BOPDiv_arithmeticTermR_src
+	ArithmeticTerm[1] role arithmeticTermR
+end
+
+composition xxx_NBEvents_hmlTerm between
+	NBEvents[*] role xxx_NBEvents_hmlTerm_src
+	HMLTerm[1] role hmlTerm
+end
+
+composition xxx_Depth_hmlTerm between
+	Depth[*] role xxx_Depth_hmlTerm_src
+	HMLTerm[1] role hmlTerm
+end
+
+composition xxx_UOPMinus_arithmeticTerm between
+	UOPMinus[*] role xxx_UOPMinus_arithmeticTerm_src
+	ArithmeticTerm[1] role arithmeticTerm
+end
+
+association xxx_VariableRef_var between
+	VariableRef[*] role xxx_VariableRef_var_src
+	AlgebraicSortVarDec[1] role var
+end
+
+composition xxx_AbstractCompositeTerm_terms between
+	AbstractCompositeTerm[0..1] role xxx_AbstractCompositeTerm_terms_src
+	AlgebraicTerm[*] role terms
+end
+
+association xxx_AbstractCompositeTerm_op between
+	AbstractCompositeTerm[*] role xxx_AbstractCompositeTerm_op_src
+	Operation[1] role op
+end
+
+composition xxx_VariableDeclaration_variable between
+	VariableDeclaration[0..1] role xxx_VariableDeclaration_variable_src
+	VariableDec[*] role variable
+end
+
+composition xxx_PrimitiveHMLVarDec_type between
+	PrimitiveHMLVarDec[*] role xxx_PrimitiveHMLVarDec_type_src
+	PrimitiveHML[0..1] role type
+end
+
+composition xxx_PrimitiveStimulationVarDec_type between
+	PrimitiveStimulationVarDec[*] role xxx_PrimitiveStimulationVarDec_type_src
+	PrimitiveStimulation[0..1] role type
+end
+
+composition xxx_PrimitiveObservationVarDec_type between
+	PrimitiveObservationVarDec[*] role xxx_PrimitiveObservationVarDec_type_src
+	PrimitiveObservation[0..1] role type
+end
+
+composition xxx_PrimitiveIntegerVarDec_type between
+	PrimitiveIntegerVarDec[*] role xxx_PrimitiveIntegerVarDec_type_src
+	PrimitiveInteger[0..1] role type
+end
+
+composition xxx_PrimitiveBooleanVarDec_type between
+	PrimitiveBooleanVarDec[*] role xxx_PrimitiveBooleanVarDec_type_src
+	PrimitiveBoolean[0..1] role type
+end
+
+association xxx_AlgebraicSortVarDec_type between
+	AlgebraicSortVarDec[*] role xxx_AlgebraicSortVarDec_type_src
+	SortDeclaration[1] role type
+end
+
+composition xxx_APN_ownedPlaces between
+	APN[0..1] role xxx_APN_ownedPlaces_src
+	Place[1..*] role ownedPlaces
+end
+
+composition xxx_APN_ownedArcs between
+	APN[0..1] role xxx_APN_ownedArcs_src
+	Arc[*] role ownedArcs
+end
+
+composition xxx_APN_ownedVariables between
+	APN[0..1] role xxx_APN_ownedVariables_src
+	Variable[*] role ownedVariables
+end
+
+composition xxx_APN_methods between
+	APN[0..1] role xxx_APN_methods_src
+	Method[*] role methods
+end
+
+composition xxx_APN_gates between
+	APN[0..1] role xxx_APN_gates_src
+	Gate[*] role gates
+end
+
+composition xxx_APN_ownedTransitions between
+	APN[0..1] role xxx_APN_ownedTransitions_src
+	Transition[1..*] role ownedTransitions
+end
+
+association xxx_Arc_from_ between
+	Arc[*] role xxx_Arc_from__src
+	Node[1] role from_
+end
+
+association xxx_Arc_to between
+	Arc[*] role xxx_Arc_to_src
+	Node[1] role to
+end
+
+composition xxx_Arc_ownedArcMultiset between
+	Arc[*] role xxx_Arc_ownedArcMultiset_src
+	Multiset[1] role ownedArcMultiset
+end
+
+composition xxx_Place_ownedPlaceMultiset between
+	Place[*] role xxx_Place_ownedPlaceMultiset_src
+	Multiset[1] role ownedPlaceMultiset
+end
+
+composition xxx_Place_sort between
+	Place[*] role xxx_Place_sort_src
+	Sort[1] role sort
+end
+
+composition xxx_Transition_ownedGuard between
+	Transition[*] role xxx_Transition_ownedGuard_src
+	Guard[0..1] role ownedGuard
+end
+
+composition xxx_Transition_gateCalls between
+	Transition[0..1] role xxx_Transition_gateCalls_src
+	GateCall[*] role gateCalls
+end
+
+composition xxx_Transition_methodCall between
+	Transition[*] role xxx_Transition_methodCall_src
+	MethodCall[0..1] role methodCall
+end
+
+association xxx_GateCall_gate between
+	GateCall[*] role xxx_GateCall_gate_src
+	Gate[1] role gate
+end
+
+composition xxx_GateCall_params between
+	GateCall[0..1] role xxx_GateCall_params_src
+	Term[*] role params
+end
+
+association xxx_MethodCall_method between
+	MethodCall[*] role xxx_MethodCall_method_src
+	Method[1] role method
+end
+
+composition xxx_MethodCall_params between
+	MethodCall[0..1] role xxx_MethodCall_params_src
+	Term[*] role params
+end
+
+composition xxx_Guard_ownedEquations between
+	Guard[0..1] role xxx_Guard_ownedEquations_src
+	AbstractEquation[1..*] role ownedEquations
+end
+
+composition xxx_Guard_ownedVariables between
+	Guard[0..1] role xxx_Guard_ownedVariables_src
+	Variable[*] role ownedVariables
+end
+
+composition xxx_ADT_ownedSorts between
+	ADT[0..1] role xxx_ADT_ownedSorts_src
+	SortDeclaration[*] role ownedSorts
+end
+
+composition xxx_ADT_ownedOperations between
+	ADT[0..1] role xxx_ADT_ownedOperations_src
+	Operation[*] role ownedOperations
+end
+
+composition xxx_ADT_ownedGenerators between
+	ADT[0..1] role xxx_ADT_ownedGenerators_src
+	Operation[*] role ownedGenerators
+end
+
+composition xxx_ADT_ownedVariables between
+	ADT[0..1] role xxx_ADT_ownedVariables_src
+	Variable[*] role ownedVariables
+end
+
+composition xxx_ADT_ownedAxioms between
+	ADT[0..1] role xxx_ADT_ownedAxioms_src
+	CondEquation[*] role ownedAxioms
+end
+
+composition xxx_Operation_operationSorts between
+	Operation[0..1] role xxx_Operation_operationSorts_src
+	Sort[*] role operationSorts
+end
+
+composition xxx_Operation_result between
+	Operation[*] role xxx_Operation_result_src
+	Sort[1] role result
+end
+
+composition xxx_Variable_variableSort between
+	Variable[*] role xxx_Variable_variableSort_src
+	Sort[0..1] role variableSort
+end
+
+composition xxx_CondEquation_ownedConditions between
+	CondEquation[0..1] role xxx_CondEquation_ownedConditions_src
+	AbstractEquation[*] role ownedConditions
+end
+
+composition xxx_CondEquation_ownedEquation between
+	CondEquation[*] role xxx_CondEquation_ownedEquation_src
+	Equation[1] role ownedEquation
+end
+
+association xxx_VariableRef_variable between
+	VariableRef[*] role xxx_VariableRef_variable_src
+	Variable[1] role variable
+end
+
+composition xxx_CTerm_ownedTerms between
+	CTerm[0..1] role xxx_CTerm_ownedTerms_src
+	Term[*] role ownedTerms
+end
+
+association xxx_CTerm_op between
+	CTerm[*] role xxx_CTerm_op_src
+	Operation[1] role op
+end
+
+composition xxx_AbstractEquation_ownedRightTerm between
+	AbstractEquation[*] role xxx_AbstractEquation_ownedRightTerm_src
+	Term[1] role ownedRightTerm
+end
+
+composition xxx_AbstractEquation_ownedLeftTerm between
+	AbstractEquation[*] role xxx_AbstractEquation_ownedLeftTerm_src
+	Term[1] role ownedLeftTerm
+end
+
+association xxx_AtomicSort_declaration between
+	AtomicSort[*] role xxx_AtomicSort_declaration_src
+	SortDeclaration[1] role declaration
+end
+
+composition xxx_Multiset_msSort between
+	Multiset[*] role xxx_Multiset_msSort_src
+	Sort[0..1] role msSort
+end
+
+composition xxx_Multiset_ownedNumOfTerms between
+	Multiset[0..1] role xxx_Multiset_ownedNumOfTerms_src
+	NumOfTerms[*] role ownedNumOfTerms
+end
+
+composition xxx_Multiset_ownedVariables between
+	Multiset[0..1] role xxx_Multiset_ownedVariables_src
+	Variable[*] role ownedVariables
+end
+
+composition xxx_NumOfTerms_ownedElement between
+	NumOfTerms[*] role xxx_NumOfTerms_ownedElement_src
+	MSElement[1] role ownedElement
+end
+
+composition xxx_TermReference_termReferenced between
+	TermReference[*] role xxx_TermReference_termReferenced_src
+	Term[1] role termReferenced
+end
+

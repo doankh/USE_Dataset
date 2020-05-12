@@ -1,0 +1,465 @@
+model openAir
+enum ClassType{
+default
+}
+
+enum Units{
+default
+}
+
+enum WE{
+default
+}
+
+enum NS{
+default
+}
+
+class OpenAir
+attributes
+operations
+end
+
+class Airspace
+attributes
+operations
+end
+
+class TheDef
+attributes
+operations
+end
+
+class AsClass
+attributes
+	name : ClassType
+operations
+end
+
+class SP
+attributes
+	sp0 : Integer
+	sp1 : Integer
+	sp2 : Integer
+	sp3 : Integer
+	sp4 : Integer
+operations
+end
+
+class SB
+attributes
+	sbVal1 : Integer
+	sbVal2 : Integer
+	sbVal3 : Integer
+operations
+end
+
+class AsName
+attributes
+	name : String
+operations
+end
+
+class Limites
+attributes
+operations
+end
+
+class TheGeom
+attributes
+operations
+end
+
+class LowLimit
+attributes
+operations
+end
+
+class HighLimit
+attributes
+operations
+end
+
+class Limit
+attributes
+operations
+end
+
+class FL<Limit
+attributes
+	value : Integer
+operations
+end
+
+class SFC<Limit
+attributes
+operations
+end
+
+class GND<Limit
+attributes
+operations
+end
+
+class UNL<Limit
+attributes
+operations
+end
+
+class VAL<Limit
+attributes
+	value : Integer
+	unit : Units
+operations
+end
+
+class V<TheGeom
+attributes
+operations
+end
+
+class Vsub
+attributes
+operations
+end
+
+class Dir
+attributes
+operations
+end
+
+class Plus<Dir
+attributes
+operations
+end
+
+class Minus<Dir
+attributes
+operations
+end
+
+class DC<TheGeom
+attributes
+operations
+end
+
+class Radius
+attributes
+	intValue : Integer
+	reakValuer : String
+operations
+end
+
+class DP<TheGeom
+attributes
+operations
+end
+
+class Point
+attributes
+	ns : NS
+	we : WE
+operations
+end
+
+class Point1<Point
+attributes
+operations
+end
+
+class Point2<Point
+attributes
+operations
+end
+
+class Point3<Point
+attributes
+operations
+end
+
+class Point4<Point
+attributes
+operations
+end
+
+class LongDegr
+attributes
+	value : Integer
+operations
+end
+
+class LatDegr
+attributes
+	value : Integer
+operations
+end
+
+class MinSec
+attributes
+	value : Integer
+operations
+end
+
+class SecDec
+attributes
+	value : String
+operations
+end
+
+class MinDec
+attributes
+	value : String
+operations
+end
+
+class LongDec
+attributes
+	value : String
+operations
+end
+
+class LatDec
+attributes
+	value : String
+operations
+end
+
+class DA<TheGeom
+attributes
+operations
+end
+
+class DaParams
+attributes
+	angleStart : Integer
+	angleEnd : Integer
+operations
+end
+
+class DaParams1<DaParams
+attributes
+	radius : String
+operations
+end
+
+class DaParams2<DaParams
+attributes
+	radius : Integer
+operations
+end
+
+class DB<TheGeom
+attributes
+operations
+end
+
+class AT
+attributes
+operations
+end
+
+composition xxx_OpenAir_airspaces between
+	OpenAir[0..1] role xxx_OpenAir_airspaces_src
+	Airspace[*] role airspaces
+end
+
+composition xxx_Airspace_thedef between
+	Airspace[*] role xxx_Airspace_thedef_src
+	TheDef[0..1] role thedef
+end
+
+composition xxx_Airspace_thegeom between
+	Airspace[0..1] role xxx_Airspace_thegeom_src
+	TheGeom[*] role thegeom
+end
+
+composition xxx_TheDef_asclass between
+	TheDef[*] role xxx_TheDef_asclass_src
+	AsClass[0..1] role asclass
+end
+
+composition xxx_TheDef_sp between
+	TheDef[0..1] role xxx_TheDef_sp_src
+	SP[*] role sp
+end
+
+composition xxx_TheDef_sb between
+	TheDef[0..1] role xxx_TheDef_sb_src
+	SB[*] role sb
+end
+
+composition xxx_TheDef_name between
+	TheDef[*] role xxx_TheDef_name_src
+	AsName[0..1] role name
+end
+
+composition xxx_TheDef_at between
+	TheDef[0..1] role xxx_TheDef_at_src
+	AT[*] role at
+end
+
+composition xxx_TheDef_limit between
+	TheDef[*] role xxx_TheDef_limit_src
+	Limites[0..1] role limit
+end
+
+composition xxx_Limites_lowLimit between
+	Limites[*] role xxx_Limites_lowLimit_src
+	LowLimit[0..1] role lowLimit
+end
+
+composition xxx_Limites_highLimit between
+	Limites[*] role xxx_Limites_highLimit_src
+	HighLimit[0..1] role highLimit
+end
+
+composition xxx_Limites_heighLimit between
+	Limites[*] role xxx_Limites_heighLimit_src
+	HighLimit[0..1] role heighLimit
+end
+
+composition xxx_LowLimit_ll between
+	LowLimit[*] role xxx_LowLimit_ll_src
+	Limit[0..1] role ll
+end
+
+composition xxx_HighLimit_hl between
+	HighLimit[*] role xxx_HighLimit_hl_src
+	Limit[0..1] role hl
+end
+
+composition xxx_V_vsub between
+	V[*] role xxx_V_vsub_src
+	Vsub[0..1] role vsub
+end
+
+composition xxx_Vsub_x between
+	Vsub[*] role xxx_Vsub_x_src
+	Point[0..1] role x
+end
+
+composition xxx_Vsub_d between
+	Vsub[*] role xxx_Vsub_d_src
+	Dir[0..1] role d
+end
+
+composition xxx_DC_radius between
+	DC[*] role xxx_DC_radius_src
+	Radius[0..1] role radius
+end
+
+composition xxx_DP_dp between
+	DP[*] role xxx_DP_dp_src
+	Point[0..1] role dp
+end
+
+composition xxx_Point1_longD between
+	Point1[*] role xxx_Point1_longD_src
+	LongDegr[0..1] role longD
+end
+
+composition xxx_Point1_longM between
+	Point1[*] role xxx_Point1_longM_src
+	MinSec[0..1] role longM
+end
+
+composition xxx_Point1_longS between
+	Point1[*] role xxx_Point1_longS_src
+	MinSec[0..1] role longS
+end
+
+composition xxx_Point1_latD between
+	Point1[*] role xxx_Point1_latD_src
+	LatDegr[0..1] role latD
+end
+
+composition xxx_Point1_latM between
+	Point1[*] role xxx_Point1_latM_src
+	MinSec[0..1] role latM
+end
+
+composition xxx_Point1_latS between
+	Point1[*] role xxx_Point1_latS_src
+	MinSec[0..1] role latS
+end
+
+composition xxx_Point2_longD between
+	Point2[*] role xxx_Point2_longD_src
+	LongDegr[0..1] role longD
+end
+
+composition xxx_Point2_longMf between
+	Point2[*] role xxx_Point2_longMf_src
+	MinDec[0..1] role longMf
+end
+
+composition xxx_Point2_latD between
+	Point2[*] role xxx_Point2_latD_src
+	LatDegr[0..1] role latD
+end
+
+composition xxx_Point2_latMf between
+	Point2[*] role xxx_Point2_latMf_src
+	MinDec[0..1] role latMf
+end
+
+composition xxx_Point3_longD between
+	Point3[*] role xxx_Point3_longD_src
+	LongDegr[0..1] role longD
+end
+
+composition xxx_Point3_longM between
+	Point3[*] role xxx_Point3_longM_src
+	MinSec[0..1] role longM
+end
+
+composition xxx_Point3_longS between
+	Point3[*] role xxx_Point3_longS_src
+	SecDec[0..1] role longS
+end
+
+composition xxx_Point3_latD between
+	Point3[*] role xxx_Point3_latD_src
+	LatDegr[0..1] role latD
+end
+
+composition xxx_Point3_latM between
+	Point3[*] role xxx_Point3_latM_src
+	MinSec[0..1] role latM
+end
+
+composition xxx_Point3_latS between
+	Point3[*] role xxx_Point3_latS_src
+	SecDec[0..1] role latS
+end
+
+composition xxx_Point4_longD between
+	Point4[*] role xxx_Point4_longD_src
+	LongDec[0..1] role longD
+end
+
+composition xxx_Point4_latD between
+	Point4[*] role xxx_Point4_latD_src
+	LatDec[0..1] role latD
+end
+
+composition xxx_DA_da between
+	DA[*] role xxx_DA_da_src
+	DaParams[0..1] role da
+end
+
+composition xxx_DB_dp0 between
+	DB[*] role xxx_DB_dp0_src
+	Point[0..1] role dp0
+end
+
+composition xxx_DB_dp1 between
+	DB[*] role xxx_DB_dp1_src
+	Point[0..1] role dp1
+end
+
+composition xxx_AT_lp between
+	AT[*] role xxx_AT_lp_src
+	Point[0..1] role lp
+end
+

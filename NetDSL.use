@@ -1,0 +1,584 @@
+model netDSL
+class Model
+attributes
+operations
+end
+
+class Integer
+attributes
+	i : Integer
+operations
+end
+
+class DomainDefinition
+attributes
+operations
+end
+
+class DomainHeader
+attributes
+operations
+end
+
+class DomainElement<ClassElement
+attributes
+operations
+end
+
+class Attribute<ClassElement
+attributes
+operations
+end
+
+class BasicNode<DomainElement
+attributes
+	keyword : String
+	id : String
+operations
+end
+
+class StatesAttribute<Attribute
+attributes
+	states_ : String
+operations
+end
+
+class LabelAttribute<Attribute,NodeAttributes
+attributes
+	value : String
+operations
+end
+
+class PositionAttribute<Attribute,NodeAttributes
+attributes
+operations
+end
+
+class SubtypeAttribute<Attribute
+attributes
+	subtype : String
+operations
+end
+
+class StateValuesAttribute<Attribute
+attributes
+	numbers : Integer
+operations
+end
+
+class ApplicationAttribute<Attribute,NodeAttributes
+attributes
+	key : String
+	value : String
+operations
+end
+
+class NodeSizeAttribute<Attribute
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class Potential<DomainElement
+attributes
+operations
+end
+
+class PotentialGraph
+attributes
+	children : String
+	parents : String
+operations
+end
+
+class PotentialModel
+attributes
+operations
+end
+
+class PotentialAttribute
+attributes
+operations
+end
+
+class PotentialDataAttribute<PotentialAttribute
+attributes
+operations
+end
+
+class MatrixRow
+attributes
+operations
+end
+
+class PotentialTableAttribute<PotentialAttribute
+attributes
+operations
+end
+
+class ModelNodesAttribute
+attributes
+	configurations : String
+operations
+end
+
+class SamplesAttribute
+attributes
+	value : Integer
+operations
+end
+
+class ModelDataAttribute
+attributes
+operations
+end
+
+class ClassDefinition<DomainElement
+attributes
+	name : String
+operations
+end
+
+class ClassElement
+attributes
+operations
+end
+
+class ClassInstance<ClassElement
+attributes
+	instanceName : String
+	className : String
+operations
+end
+
+class InputBindings
+attributes
+operations
+end
+
+class InputBinding
+attributes
+	formal : String
+	actual : String
+operations
+end
+
+class OutputBindings
+attributes
+operations
+end
+
+class OutputBinding
+attributes
+	actual : String
+	formal : String
+operations
+end
+
+class NodeAttributes
+attributes
+operations
+end
+
+class ExpressionSequence
+attributes
+operations
+end
+
+class Expression
+attributes
+	op : String
+operations
+end
+
+class assignmentOpExpression<Expression
+attributes
+operations
+end
+
+class orExpression<assignmentOpExpression
+attributes
+operations
+end
+
+class andExpression<orExpression
+attributes
+operations
+end
+
+class relationalExpression<andExpression
+attributes
+operations
+end
+
+class additiveExpression<relationalExpression
+attributes
+operations
+end
+
+class multiplicativeExpression<additiveExpression
+attributes
+operations
+end
+
+class unaryExpression<multiplicativeExpression
+attributes
+operations
+end
+
+class Operator<TermExpression
+attributes
+operations
+end
+
+class TermExpression<unaryExpression
+attributes
+operations
+end
+
+class TermLiteral<TermExpression
+attributes
+operations
+end
+
+class IntegerLiteral<PositionAttribute,TermLiteral
+attributes
+	value : Integer
+operations
+end
+
+class List5<MatrixRow
+attributes
+operations
+end
+
+class List4<MatrixRow
+attributes
+operations
+end
+
+class List3<MatrixRow
+attributes
+operations
+end
+
+class List2<MatrixRow
+attributes
+operations
+end
+
+class List1<MatrixRow
+attributes
+operations
+end
+
+class Assignment<Expression
+attributes
+operations
+end
+
+class AssignmentOp<assignmentOpExpression
+attributes
+operations
+end
+
+class OrExp<orExpression
+attributes
+operations
+end
+
+class AndExp<andExpression
+attributes
+operations
+end
+
+class RelationalExp<relationalExpression
+attributes
+operations
+end
+
+class AdditiveExp<additiveExpression
+attributes
+operations
+end
+
+class MultiplicativeExp<multiplicativeExpression
+attributes
+operations
+end
+
+class VarRef<TermLiteral
+attributes
+	value : String
+operations
+end
+
+class BooleanLiteral<TermLiteral
+attributes
+	value : Boolean
+operations
+end
+
+class StringLiteral<TermLiteral
+attributes
+	value : String
+operations
+end
+
+class DoubleLiteral<TermLiteral
+attributes
+	value : Real
+operations
+end
+
+composition xxx_Model_domain between
+	Model[*] role xxx_Model_domain_src
+	DomainDefinition[0..1] role domain
+end
+
+composition xxx_DomainDefinition_header between
+	DomainDefinition[*] role xxx_DomainDefinition_header_src
+	DomainHeader[0..1] role header
+end
+
+composition xxx_DomainDefinition_elements between
+	DomainDefinition[0..1] role xxx_DomainDefinition_elements_src
+	DomainElement[*] role elements
+end
+
+composition xxx_DomainHeader_attributes_ between
+	DomainHeader[0..1] role xxx_DomainHeader_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_BasicNode_attributes_ between
+	BasicNode[0..1] role xxx_BasicNode_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Potential_graph between
+	Potential[*] role xxx_Potential_graph_src
+	PotentialGraph[0..1] role graph
+end
+
+composition xxx_Potential_model_ between
+	Potential[*] role xxx_Potential_model__src
+	PotentialModel[0..1] role model_
+end
+
+composition xxx_PotentialModel_attributes_ between
+	PotentialModel[0..1] role xxx_PotentialModel_attributes__src
+	PotentialAttribute[*] role attributes_
+end
+
+composition xxx_PotentialDataAttribute_data between
+	PotentialDataAttribute[*] role xxx_PotentialDataAttribute_data_src
+	MatrixRow[0..1] role data
+end
+
+composition xxx_MatrixRow_r5 between
+	MatrixRow[0..1] role xxx_MatrixRow_r5_src
+	MatrixRow[*] role r5
+end
+
+composition xxx_MatrixRow_r4 between
+	MatrixRow[0..1] role xxx_MatrixRow_r4_src
+	MatrixRow[*] role r4
+end
+
+composition xxx_MatrixRow_r3 between
+	MatrixRow[0..1] role xxx_MatrixRow_r3_src
+	MatrixRow[*] role r3
+end
+
+composition xxx_MatrixRow_r2 between
+	MatrixRow[0..1] role xxx_MatrixRow_r2_src
+	MatrixRow[*] role r2
+end
+
+composition xxx_MatrixRow_r1 between
+	MatrixRow[*] role xxx_MatrixRow_r1_src
+	MatrixRow[0..1] role r1
+end
+
+composition xxx_PotentialTableAttribute_nodes between
+	PotentialTableAttribute[*] role xxx_PotentialTableAttribute_nodes_src
+	ModelNodesAttribute[0..1] role nodes
+end
+
+composition xxx_PotentialTableAttribute_samples between
+	PotentialTableAttribute[*] role xxx_PotentialTableAttribute_samples_src
+	SamplesAttribute[0..1] role samples
+end
+
+composition xxx_PotentialTableAttribute_data between
+	PotentialTableAttribute[*] role xxx_PotentialTableAttribute_data_src
+	ModelDataAttribute[0..1] role data
+end
+
+composition xxx_ModelDataAttribute_sequence between
+	ModelDataAttribute[*] role xxx_ModelDataAttribute_sequence_src
+	ExpressionSequence[0..1] role sequence
+end
+
+composition xxx_ClassDefinition_elements between
+	ClassDefinition[0..1] role xxx_ClassDefinition_elements_src
+	ClassElement[*] role elements
+end
+
+composition xxx_ClassInstance_input between
+	ClassInstance[*] role xxx_ClassInstance_input_src
+	InputBindings[0..1] role input
+end
+
+composition xxx_ClassInstance_output between
+	ClassInstance[*] role xxx_ClassInstance_output_src
+	OutputBindings[0..1] role output
+end
+
+composition xxx_ClassInstance_attributes_ between
+	ClassInstance[*] role xxx_ClassInstance_attributes__src
+	NodeAttributes[0..1] role attributes_
+end
+
+composition xxx_InputBindings_lhs between
+	InputBindings[*] role xxx_InputBindings_lhs_src
+	InputBinding[0..1] role lhs
+end
+
+composition xxx_InputBindings_rhs between
+	InputBindings[*] role xxx_InputBindings_rhs_src
+	InputBindings[0..1] role rhs
+end
+
+composition xxx_OutputBindings_lhs between
+	OutputBindings[*] role xxx_OutputBindings_lhs_src
+	OutputBinding[0..1] role lhs
+end
+
+composition xxx_OutputBindings_rhs between
+	OutputBindings[*] role xxx_OutputBindings_rhs_src
+	OutputBindings[0..1] role rhs
+end
+
+composition xxx_ExpressionSequence_expressions between
+	ExpressionSequence[0..1] role xxx_ExpressionSequence_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_unaryExpression_expr between
+	unaryExpression[*] role xxx_unaryExpression_expr_src
+	TermExpression[0..1] role expr
+end
+
+composition xxx_Operator_sequence between
+	Operator[*] role xxx_Operator_sequence_src
+	ExpressionSequence[0..1] role sequence
+end
+
+composition xxx_IntegerLiteral_x between
+	IntegerLiteral[*] role xxx_IntegerLiteral_x_src
+	Integer[0..1] role x
+end
+
+composition xxx_IntegerLiteral_y between
+	IntegerLiteral[*] role xxx_IntegerLiteral_y_src
+	Integer[0..1] role y
+end
+
+composition xxx_List5_list between
+	List5[0..1] role xxx_List5_list_src
+	MatrixRow[*] role list
+end
+
+composition xxx_List4_list between
+	List4[0..1] role xxx_List4_list_src
+	MatrixRow[*] role list
+end
+
+composition xxx_List3_list between
+	List3[0..1] role xxx_List3_list_src
+	MatrixRow[*] role list
+end
+
+composition xxx_List2_list between
+	List2[0..1] role xxx_List2_list_src
+	MatrixRow[*] role list
+end
+
+composition xxx_List1_items between
+	List1[0..1] role xxx_List1_items_src
+	unaryExpression[*] role items
+end
+
+composition xxx_Assignment_left between
+	Assignment[*] role xxx_Assignment_left_src
+	assignmentOpExpression[0..1] role left
+end
+
+composition xxx_Assignment_right between
+	Assignment[*] role xxx_Assignment_right_src
+	orExpression[0..1] role right
+end
+
+composition xxx_AssignmentOp_left between
+	AssignmentOp[*] role xxx_AssignmentOp_left_src
+	orExpression[0..1] role left
+end
+
+composition xxx_AssignmentOp_right between
+	AssignmentOp[*] role xxx_AssignmentOp_right_src
+	orExpression[0..1] role right
+end
+
+composition xxx_OrExp_left between
+	OrExp[*] role xxx_OrExp_left_src
+	andExpression[0..1] role left
+end
+
+composition xxx_OrExp_right between
+	OrExp[*] role xxx_OrExp_right_src
+	orExpression[0..1] role right
+end
+
+composition xxx_AndExp_left between
+	AndExp[*] role xxx_AndExp_left_src
+	relationalExpression[0..1] role left
+end
+
+composition xxx_AndExp_right between
+	AndExp[*] role xxx_AndExp_right_src
+	andExpression[0..1] role right
+end
+
+composition xxx_RelationalExp_left between
+	RelationalExp[*] role xxx_RelationalExp_left_src
+	additiveExpression[0..1] role left
+end
+
+composition xxx_RelationalExp_right between
+	RelationalExp[*] role xxx_RelationalExp_right_src
+	relationalExpression[0..1] role right
+end
+
+composition xxx_AdditiveExp_left between
+	AdditiveExp[*] role xxx_AdditiveExp_left_src
+	multiplicativeExpression[0..1] role left
+end
+
+composition xxx_AdditiveExp_right between
+	AdditiveExp[*] role xxx_AdditiveExp_right_src
+	additiveExpression[0..1] role right
+end
+
+composition xxx_MultiplicativeExp_left between
+	MultiplicativeExp[*] role xxx_MultiplicativeExp_left_src
+	unaryExpression[0..1] role left
+end
+
+composition xxx_MultiplicativeExp_right between
+	MultiplicativeExp[*] role xxx_MultiplicativeExp_right_src
+	multiplicativeExpression[0..1] role right
+end
+

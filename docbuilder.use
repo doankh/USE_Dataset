@@ -1,0 +1,85 @@
+model dbuilder
+enum DocFormat{
+default
+}
+
+class DocManager
+attributes
+operations
+	enableDocBuilder(project : String)
+	disableDocBuilder(project : String)
+	getDocumentedProject(project : String):DocumentedProject
+end
+
+class DocumentedProject
+attributes
+	iProjectInstance : String
+	name : String
+	version : String
+operations
+	build()
+	clean()
+end
+
+class Document
+attributes
+	enabled : Boolean
+	name : String
+	version : String
+operations
+	build()
+	clean()
+end
+
+class DocInput<DocResource
+attributes
+operations
+end
+
+class DocOutput<DocResource
+attributes
+	format : DocFormat
+operations
+end
+
+abstract class DocResource
+attributes
+	path : String
+	directory : Boolean
+operations
+	getDocument():Document
+	getIFolder():String
+	getIFile():String
+	getIResource():String
+end
+
+composition xxx_DocumentedProject_documents between
+	DocumentedProject[0..1] role xxx_DocumentedProject_documents_src
+	Document[*] role documents
+end
+
+association xxx_Document_project between
+	Document[*] role xxx_Document_project_src
+	DocumentedProject[0..1] role project
+end
+
+composition xxx_Document_inputs between
+	Document[0..1] role xxx_Document_inputs_src
+	DocInput[*] role inputs
+end
+
+composition xxx_Document_outputs between
+	Document[0..1] role xxx_Document_outputs_src
+	DocOutput[*] role outputs
+end
+
+association xxx_DocInput_document between
+	DocInput[*] role xxx_DocInput_document_src
+	Document[0..1] role document
+end
+
+association xxx_DocOutput_document between
+	DocOutput[*] role xxx_DocOutput_document_src
+	Document[0..1] role document
+end
+

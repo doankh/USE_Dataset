@@ -1,0 +1,53 @@
+model Deployment
+abstract class Node
+attributes
+	name : String
+operations
+end
+
+class Device<Node
+attributes
+operations
+end
+
+class ExecutionEnvironment<Node
+attributes
+operations
+end
+
+class Specification
+attributes
+operations
+end
+
+class CommunicationLink
+attributes
+	name : String
+operations
+end
+
+composition xxx_Node_nestedNode between
+	Node[0..1] role xxx_Node_nestedNode_src
+	Node[*] role nestedNode
+end
+
+composition xxx_Specification_ownedNode between
+	Specification[0..1] role xxx_Specification_ownedNode_src
+	Node[*] role ownedNode
+end
+
+composition xxx_Specification_ownedCommunicationLink between
+	Specification[0..1] role xxx_Specification_ownedCommunicationLink_src
+	CommunicationLink[*] role ownedCommunicationLink
+end
+
+association xxx_CommunicationLink_source between
+	CommunicationLink[*] role xxx_CommunicationLink_source_src
+	Node[0..1] role source
+end
+
+association xxx_CommunicationLink_target between
+	CommunicationLink[*] role xxx_CommunicationLink_target_src
+	Node[0..1] role target
+end
+

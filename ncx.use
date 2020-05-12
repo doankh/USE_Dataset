@@ -1,0 +1,342 @@
+model ncx
+enum BookStruct{
+default
+}
+
+enum DefaultState{
+default
+}
+
+enum DirType{
+default
+}
+
+enum OverrideType{
+default
+}
+
+enum Type{
+default
+}
+
+class Audio
+attributes
+	class_ : String
+	clipBegin : String
+	clipEnd : String
+	id : String
+	src : String
+operations
+end
+
+class Content
+attributes
+	id : String
+	src : String
+operations
+end
+
+class DocAuthor
+attributes
+	dir : DirType
+	id : String
+	lang : String
+operations
+end
+
+class DocTitle
+attributes
+	dir : DirType
+	id : String
+	lang : String
+operations
+end
+
+class Head
+attributes
+	groups : String
+operations
+end
+
+class Img
+attributes
+	class_ : String
+	id : String
+	src : String
+operations
+end
+
+class Meta
+attributes
+	content : String
+	name : String
+	scheme : String
+operations
+end
+
+class NavInfo
+attributes
+	dir : DirType
+	lang : String
+operations
+end
+
+class NavLabel
+attributes
+	dir : DirType
+	lang : String
+operations
+end
+
+class NavList
+attributes
+	class_ : String
+	id : String
+operations
+end
+
+class NavMap
+attributes
+	id : String
+operations
+end
+
+class NavPoint
+attributes
+	class_ : String
+	id : String
+	playOrder : Integer
+operations
+end
+
+class NavTarget
+attributes
+	class_ : String
+	id : String
+	playOrder : String
+	value : String
+operations
+end
+
+class Ncx
+attributes
+	dir : DirType
+	lang : String
+	version : String
+operations
+end
+
+class PageList
+attributes
+	class_ : String
+	id : String
+operations
+end
+
+class PageTarget
+attributes
+	class_ : String
+	id : String
+	playOrder : String
+	type : Type
+	value : String
+operations
+end
+
+class SmilCustomTest
+attributes
+	bookStruct : BookStruct
+	defaultState : DefaultState
+	id : String
+	override : OverrideType
+operations
+end
+
+class Text
+attributes
+	mixed : String
+	class_ : String
+	id : String
+operations
+end
+
+composition xxx_DocAuthor_text between
+	DocAuthor[*] role xxx_DocAuthor_text_src
+	Text[1] role text
+end
+
+composition xxx_DocAuthor_audio between
+	DocAuthor[*] role xxx_DocAuthor_audio_src
+	Audio[0..1] role audio
+end
+
+composition xxx_DocAuthor_img between
+	DocAuthor[*] role xxx_DocAuthor_img_src
+	Img[0..1] role img
+end
+
+composition xxx_DocTitle_text between
+	DocTitle[*] role xxx_DocTitle_text_src
+	Text[1] role text
+end
+
+composition xxx_DocTitle_audio between
+	DocTitle[*] role xxx_DocTitle_audio_src
+	Audio[0..1] role audio
+end
+
+composition xxx_DocTitle_img between
+	DocTitle[*] role xxx_DocTitle_img_src
+	Img[0..1] role img
+end
+
+composition xxx_Head_smilCustomTests between
+	Head[0..1] role xxx_Head_smilCustomTests_src
+	SmilCustomTest[*] role smilCustomTests
+end
+
+composition xxx_Head_metas between
+	Head[0..1] role xxx_Head_metas_src
+	Meta[*] role metas
+end
+
+composition xxx_NavInfo_text between
+	NavInfo[*] role xxx_NavInfo_text_src
+	Text[0..1] role text
+end
+
+composition xxx_NavInfo_audio between
+	NavInfo[*] role xxx_NavInfo_audio_src
+	Audio[0..1] role audio
+end
+
+composition xxx_NavInfo_img between
+	NavInfo[*] role xxx_NavInfo_img_src
+	Img[0..1] role img
+end
+
+composition xxx_NavLabel_text between
+	NavLabel[*] role xxx_NavLabel_text_src
+	Text[0..1] role text
+end
+
+composition xxx_NavLabel_audio between
+	NavLabel[*] role xxx_NavLabel_audio_src
+	Audio[0..1] role audio
+end
+
+composition xxx_NavLabel_img between
+	NavLabel[*] role xxx_NavLabel_img_src
+	Img[0..1] role img
+end
+
+composition xxx_NavList_navInfos between
+	NavList[0..1] role xxx_NavList_navInfos_src
+	NavInfo[*] role navInfos
+end
+
+composition xxx_NavList_navLabels between
+	NavList[0..1] role xxx_NavList_navLabels_src
+	NavLabel[1..*] role navLabels
+end
+
+composition xxx_NavList_navTargets between
+	NavList[0..1] role xxx_NavList_navTargets_src
+	NavTarget[1..*] role navTargets
+end
+
+composition xxx_NavMap_navInfos between
+	NavMap[0..1] role xxx_NavMap_navInfos_src
+	NavInfo[*] role navInfos
+end
+
+composition xxx_NavMap_navLabels between
+	NavMap[0..1] role xxx_NavMap_navLabels_src
+	NavLabel[*] role navLabels
+end
+
+composition xxx_NavMap_navPoints between
+	NavMap[0..1] role xxx_NavMap_navPoints_src
+	NavPoint[1..*] role navPoints
+end
+
+composition xxx_NavPoint_navLabels between
+	NavPoint[0..1] role xxx_NavPoint_navLabels_src
+	NavLabel[1..*] role navLabels
+end
+
+composition xxx_NavPoint_content between
+	NavPoint[*] role xxx_NavPoint_content_src
+	Content[1] role content
+end
+
+composition xxx_NavPoint_navPoints between
+	NavPoint[0..1] role xxx_NavPoint_navPoints_src
+	NavPoint[*] role navPoints
+end
+
+composition xxx_NavTarget_navLabels between
+	NavTarget[0..1] role xxx_NavTarget_navLabels_src
+	NavLabel[1..*] role navLabels
+end
+
+composition xxx_NavTarget_content between
+	NavTarget[*] role xxx_NavTarget_content_src
+	Content[1] role content
+end
+
+composition xxx_Ncx_head between
+	Ncx[*] role xxx_Ncx_head_src
+	Head[1] role head
+end
+
+composition xxx_Ncx_docTitle between
+	Ncx[*] role xxx_Ncx_docTitle_src
+	DocTitle[1] role docTitle
+end
+
+composition xxx_Ncx_docAuthors between
+	Ncx[0..1] role xxx_Ncx_docAuthors_src
+	DocAuthor[*] role docAuthors
+end
+
+composition xxx_Ncx_navMap between
+	Ncx[*] role xxx_Ncx_navMap_src
+	NavMap[1] role navMap
+end
+
+composition xxx_Ncx_pageList between
+	Ncx[*] role xxx_Ncx_pageList_src
+	PageList[0..1] role pageList
+end
+
+composition xxx_Ncx_navLists between
+	Ncx[0..1] role xxx_Ncx_navLists_src
+	NavList[*] role navLists
+end
+
+composition xxx_PageList_navInfos between
+	PageList[0..1] role xxx_PageList_navInfos_src
+	NavInfo[*] role navInfos
+end
+
+composition xxx_PageList_navLabels between
+	PageList[0..1] role xxx_PageList_navLabels_src
+	NavLabel[*] role navLabels
+end
+
+composition xxx_PageList_pageTargets between
+	PageList[0..1] role xxx_PageList_pageTargets_src
+	PageTarget[1..*] role pageTargets
+end
+
+composition xxx_PageTarget_navLabels between
+	PageTarget[0..1] role xxx_PageTarget_navLabels_src
+	NavLabel[1..*] role navLabels
+end
+
+composition xxx_PageTarget_content between
+	PageTarget[*] role xxx_PageTarget_content_src
+	Content[1] role content
+end
+

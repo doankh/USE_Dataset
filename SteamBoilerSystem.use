@@ -1,0 +1,331 @@
+model SBCS
+enum Mode{
+default
+}
+
+enum State{
+default
+}
+
+enum ValveState{
+default
+}
+
+class SteamBoiler
+attributes
+	ready : Boolean
+	capacity : Real
+	minimalNormal : Real
+	maximalNormal : Real
+	maximumIncrease : Real
+	maximumDecrease : Real
+	minimalLimit : Real
+	maximalLimit : Real
+	valveOpen : ValveState
+operations
+end
+
+class Snapshot
+attributes
+operations
+	getNext():Snapshot
+	futureClosure(s : Snapshot):Snapshot
+	getPost():Snapshot
+	getPrevious():Snapshot
+	previousClosure(s : Snapshot):Snapshot
+	getPre():Snapshot
+end
+
+class ControlProgram
+attributes
+	mode : Mode
+	ready : Boolean
+	failureDetected : Boolean
+	wlmdFailure : Boolean
+	smdFailure : Boolean
+	pumpFailure : Boolean
+	pumpControlerFailure : Boolean
+operations
+end
+
+class Pump
+attributes
+	ready : Boolean
+	capacity : Real
+	mode : State
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class PumpControler
+attributes
+	ready : Boolean
+	circulating : Boolean
+operations
+end
+
+class SteamMeasurementDevice
+attributes
+	ready : Boolean
+	evaporationRate : Boolean
+	waterLevel : Real
+operations
+end
+
+class WaterLevelMeasurementDevice
+attributes
+	ready : Boolean
+	waterLevel : Real
+operations
+end
+
+class ControlProgram_Start<Transition
+attributes
+operations
+end
+
+class WaterLevelMeaurementDevice_getLevel<Transition
+attributes
+	ret : Real
+operations
+end
+
+class SteamBoiler_OpenValve<Transition
+attributes
+operations
+end
+
+class PumpController_ClosePump<Transition
+attributes
+operations
+end
+
+class PumpController_OpenPump<Transition
+attributes
+operations
+end
+
+association xxx_SteamBoiler_SnapshotSteamBoiler between
+	SteamBoiler[*] role xxx_SteamBoiler_SnapshotSteamBoiler_src
+	Snapshot[1] role SnapshotSteamBoiler
+end
+
+association xxx_SteamBoiler_SteamBoilerControlProgram between
+	SteamBoiler[*] role xxx_SteamBoiler_SteamBoilerControlProgram_src
+	ControlProgram[1] role SteamBoilerControlProgram
+end
+
+association xxx_SteamBoiler_SteqmBoilerPump between
+	SteamBoiler[*] role xxx_SteamBoiler_SteqmBoilerPump_src
+	Pump[1] role SteqmBoilerPump
+end
+
+association xxx_SteamBoiler_SteamBoilerSMD between
+	SteamBoiler[*] role xxx_SteamBoiler_SteamBoilerSMD_src
+	SteamMeasurementDevice[1] role SteamBoilerSMD
+end
+
+association xxx_SteamBoiler_SteamBoilerWLMD between
+	SteamBoiler[*] role xxx_SteamBoiler_SteamBoilerWLMD_src
+	WaterLevelMeasurementDevice[1] role SteamBoilerWLMD
+end
+
+association xxx_Snapshot_SteamBoilerSnapshot between
+	Snapshot[*] role xxx_Snapshot_SteamBoilerSnapshot_src
+	SteamBoiler[0..1] role SteamBoilerSnapshot
+end
+
+association xxx_Snapshot_ControlProgramSnapshot between
+	Snapshot[*] role xxx_Snapshot_ControlProgramSnapshot_src
+	ControlProgram[1] role ControlProgramSnapshot
+end
+
+association xxx_Snapshot_PumpSnapshot between
+	Snapshot[*] role xxx_Snapshot_PumpSnapshot_src
+	Pump[1] role PumpSnapshot
+end
+
+association xxx_Snapshot_WLMDSnapshot between
+	Snapshot[*] role xxx_Snapshot_WLMDSnapshot_src
+	WaterLevelMeasurementDevice[1] role WLMDSnapshot
+end
+
+association xxx_Snapshot_SteamBoilerMeasurementDeviceSnapshot between
+	Snapshot[*] role xxx_Snapshot_SteamBoilerMeasurementDeviceSnapshot_src
+	SteamMeasurementDevice[1] role SteamBoilerMeasurementDeviceSnapshot
+end
+
+association xxx_Snapshot_PumpControlSnapshot between
+	Snapshot[*] role xxx_Snapshot_PumpControlSnapshot_src
+	PumpControler[1] role PumpControlSnapshot
+end
+
+association xxx_Snapshot_BeforeTrans between
+	Snapshot[*] role xxx_Snapshot_BeforeTrans_src
+	Transition[1] role BeforeTrans
+end
+
+association xxx_Snapshot_AfterTrans between
+	Snapshot[*] role xxx_Snapshot_AfterTrans_src
+	Transition[1] role AfterTrans
+end
+
+association xxx_ControlProgram_SnapshotControlProgram between
+	ControlProgram[*] role xxx_ControlProgram_SnapshotControlProgram_src
+	Snapshot[1] role SnapshotControlProgram
+end
+
+association xxx_ControlProgram_ControlProgramPump between
+	ControlProgram[*] role xxx_ControlProgram_ControlProgramPump_src
+	Pump[1] role ControlProgramPump
+end
+
+association xxx_ControlProgram_ControlProgramWLMD between
+	ControlProgram[*] role xxx_ControlProgram_ControlProgramWLMD_src
+	WaterLevelMeasurementDevice[1] role ControlProgramWLMD
+end
+
+association xxx_ControlProgram_ControlProgramSMD between
+	ControlProgram[*] role xxx_ControlProgram_ControlProgramSMD_src
+	SteamMeasurementDevice[1] role ControlProgramSMD
+end
+
+association xxx_ControlProgram_ControlProgramSteamBoiler between
+	ControlProgram[*] role xxx_ControlProgram_ControlProgramSteamBoiler_src
+	SteamBoiler[1] role ControlProgramSteamBoiler
+end
+
+association xxx_ControlProgram_ControlProgramPumpControler between
+	ControlProgram[*] role xxx_ControlProgram_ControlProgramPumpControler_src
+	PumpControler[1] role ControlProgramPumpControler
+end
+
+association xxx_Pump_PumpSnapshot between
+	Pump[*] role xxx_Pump_PumpSnapshot_src
+	Snapshot[1] role PumpSnapshot
+end
+
+association xxx_Pump_PumpControlProgram between
+	Pump[*] role xxx_Pump_PumpControlProgram_src
+	ControlProgram[1] role PumpControlProgram
+end
+
+association xxx_Pump_PumpPumpControler between
+	Pump[*] role xxx_Pump_PumpPumpControler_src
+	PumpControler[1] role PumpPumpControler
+end
+
+association xxx_Pump_PumpSteamBoiler between
+	Pump[*] role xxx_Pump_PumpSteamBoiler_src
+	SteamBoiler[1] role PumpSteamBoiler
+end
+
+association xxx_Transition_BeforeTrans between
+	Transition[*] role xxx_Transition_BeforeTrans_src
+	Snapshot[1] role BeforeTrans
+end
+
+association xxx_Transition_AfterTrans between
+	Transition[*] role xxx_Transition_AfterTrans_src
+	Snapshot[1] role AfterTrans
+end
+
+association xxx_PumpControler_SnapshotPumpControl between
+	PumpControler[*] role xxx_PumpControler_SnapshotPumpControl_src
+	Snapshot[1] role SnapshotPumpControl
+end
+
+association xxx_PumpControler_PumpControlerControlProgram between
+	PumpControler[*] role xxx_PumpControler_PumpControlerControlProgram_src
+	ControlProgram[1] role PumpControlerControlProgram
+end
+
+association xxx_PumpControler_PumpControlerPump between
+	PumpControler[*] role xxx_PumpControler_PumpControlerPump_src
+	Pump[1] role PumpControlerPump
+end
+
+association xxx_SteamMeasurementDevice_SnapshotSBMD between
+	SteamMeasurementDevice[*] role xxx_SteamMeasurementDevice_SnapshotSBMD_src
+	Snapshot[1] role SnapshotSBMD
+end
+
+association xxx_SteamMeasurementDevice_SMDControlProgram between
+	SteamMeasurementDevice[*] role xxx_SteamMeasurementDevice_SMDControlProgram_src
+	ControlProgram[1] role SMDControlProgram
+end
+
+association xxx_SteamMeasurementDevice_SMDSteamBoiler between
+	SteamMeasurementDevice[*] role xxx_SteamMeasurementDevice_SMDSteamBoiler_src
+	SteamBoiler[1] role SMDSteamBoiler
+end
+
+association xxx_WaterLevelMeasurementDevice_SnapshotWLMD between
+	WaterLevelMeasurementDevice[*] role xxx_WaterLevelMeasurementDevice_SnapshotWLMD_src
+	Snapshot[1] role SnapshotWLMD
+end
+
+association xxx_WaterLevelMeasurementDevice_WLMDControlProgram between
+	WaterLevelMeasurementDevice[*] role xxx_WaterLevelMeasurementDevice_WLMDControlProgram_src
+	ControlProgram[1] role WLMDControlProgram
+end
+
+association xxx_WaterLevelMeasurementDevice_WLMDSteamBoiler between
+	WaterLevelMeasurementDevice[*] role xxx_WaterLevelMeasurementDevice_WLMDSteamBoiler_src
+	SteamBoiler[1] role WLMDSteamBoiler
+end
+
+association xxx_ControlProgram_Start_CPPre between
+	ControlProgram_Start[*] role xxx_ControlProgram_Start_CPPre_src
+	ControlProgram[0..1] role CPPre
+end
+
+association xxx_ControlProgram_Start_CPPost between
+	ControlProgram_Start[*] role xxx_ControlProgram_Start_CPPost_src
+	ControlProgram[0..1] role CPPost
+end
+
+association xxx_WaterLevelMeaurementDevice_getLevel_wlmdPre between
+	WaterLevelMeaurementDevice_getLevel[*] role xxx_WaterLevelMeaurementDevice_getLevel_wlmdPre_src
+	WaterLevelMeasurementDevice[0..1] role wlmdPre
+end
+
+association xxx_WaterLevelMeaurementDevice_getLevel_wlmdPost between
+	WaterLevelMeaurementDevice_getLevel[*] role xxx_WaterLevelMeaurementDevice_getLevel_wlmdPost_src
+	WaterLevelMeasurementDevice[0..1] role wlmdPost
+end
+
+association xxx_SteamBoiler_OpenValve_SBPre between
+	SteamBoiler_OpenValve[*] role xxx_SteamBoiler_OpenValve_SBPre_src
+	SteamBoiler[0..1] role SBPre
+end
+
+association xxx_SteamBoiler_OpenValve_SBPost between
+	SteamBoiler_OpenValve[*] role xxx_SteamBoiler_OpenValve_SBPost_src
+	SteamBoiler[0..1] role SBPost
+end
+
+association xxx_PumpController_ClosePump_PCPre between
+	PumpController_ClosePump[*] role xxx_PumpController_ClosePump_PCPre_src
+	PumpControler[0..1] role PCPre
+end
+
+association xxx_PumpController_ClosePump_PCPost between
+	PumpController_ClosePump[*] role xxx_PumpController_ClosePump_PCPost_src
+	PumpControler[0..1] role PCPost
+end
+
+association xxx_PumpController_OpenPump_PCPre between
+	PumpController_OpenPump[*] role xxx_PumpController_OpenPump_PCPre_src
+	PumpControler[0..1] role PCPre
+end
+
+association xxx_PumpController_OpenPump_PCPost between
+	PumpController_OpenPump[*] role xxx_PumpController_OpenPump_PCPost_src
+	PumpControler[0..1] role PCPost
+end
+

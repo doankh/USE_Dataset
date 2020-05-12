@@ -1,0 +1,142 @@
+model Calender
+enum WorkingDayType{
+default
+}
+
+enum WeekDay{
+default
+}
+
+enum MonthName{
+default
+}
+
+class Calender
+attributes
+	name : String
+operations
+	showGui()
+end
+
+class Date
+attributes
+	day : String
+	name : String
+	dayType : WorkingDayType
+	weekday : WeekDay
+operations
+end
+
+abstract class Person
+attributes
+	name : String
+	leaveDays : Integer
+operations
+end
+
+class HolidayApplication
+attributes
+	id : Integer
+	isAccepted : Boolean
+	name : String
+operations
+end
+
+class ResponsiblePerson<Person
+attributes
+operations
+end
+
+class Employee<Person
+attributes
+operations
+end
+
+class Year
+attributes
+	year : Integer
+operations
+end
+
+class KW
+attributes
+	kw : Integer
+operations
+end
+
+class Month
+attributes
+	monthname : MonthName
+operations
+end
+
+composition xxx_Calender_dates between
+	Calender[0..1] role xxx_Calender_dates_src
+	Date[*] role dates
+end
+
+composition xxx_Calender_persons between
+	Calender[0..1] role xxx_Calender_persons_src
+	Person[*] role persons
+end
+
+composition xxx_Calender_years between
+	Calender[0..1] role xxx_Calender_years_src
+	Year[*] role years
+end
+
+composition xxx_Calender_kws between
+	Calender[0..1] role xxx_Calender_kws_src
+	KW[*] role kws
+end
+
+association xxx_Date_holidayapplications between
+	Date[*] role xxx_Date_holidayapplications_src
+	HolidayApplication[0..1] role holidayapplications
+end
+
+association xxx_HolidayApplication_dates between
+	HolidayApplication[*] role xxx_HolidayApplication_dates_src
+	Date[0..1] role dates
+end
+
+association xxx_HolidayApplication_employee between
+	HolidayApplication[*] role xxx_HolidayApplication_employee_src
+	Employee[0..1] role employee
+end
+
+association xxx_ResponsiblePerson_employees between
+	ResponsiblePerson[0..1] role xxx_ResponsiblePerson_employees_src
+	Employee[*] role employees
+end
+
+association xxx_Employee_standin between
+	Employee[*] role xxx_Employee_standin_src
+	Employee[0..1] role standin
+end
+
+association xxx_Employee_responsible between
+	Employee[*] role xxx_Employee_responsible_src
+	ResponsiblePerson[0..1] role responsible
+end
+
+composition xxx_Employee_holidayapplications between
+	Employee[0..1] role xxx_Employee_holidayapplications_src
+	HolidayApplication[*] role holidayapplications
+end
+
+composition xxx_Year_months between
+	Year[0..1] role xxx_Year_months_src
+	Month[*] role months
+end
+
+association xxx_KW_weekdates between
+	KW[*] role xxx_KW_weekdates_src
+	Date[0..1] role weekdates
+end
+
+association xxx_Month_kws between
+	Month[0..1] role xxx_Month_kws_src
+	KW[*] role kws
+end
+

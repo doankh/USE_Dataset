@@ -1,0 +1,85 @@
+model slamodel
+class SLAModel
+attributes
+operations
+end
+
+class SLA
+attributes
+operations
+end
+
+class CustomerSLA<SLA
+attributes
+	customerID : String
+operations
+end
+
+class PerformanceConstraint<Constraint
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class Penalty
+attributes
+operations
+end
+
+class TimedWindowValueConstraint<PerformanceConstraint
+attributes
+	time : Real
+	unit : String
+	value : String
+	aggregationMethod : String
+operations
+end
+
+class MetricTypeName
+attributes
+	query : String
+operations
+end
+
+class StructuralReference
+attributes
+	query : String
+operations
+end
+
+class TimedPenalty<Penalty
+attributes
+	unit : String
+	price : Real
+operations
+end
+
+composition xxx_SLAModel_slas between
+	SLAModel[0..1] role xxx_SLAModel_slas_src
+	SLA[*] role slas
+end
+
+composition xxx_SLA_constraints_ between
+	SLA[0..1] role xxx_SLA_constraints__src
+	Constraint[*] role constraints_
+end
+
+composition xxx_Constraint_penalties between
+	Constraint[0..1] role xxx_Constraint_penalties_src
+	Penalty[*] role penalties
+end
+
+composition xxx_TimedWindowValueConstraint_metricTypeNames between
+	TimedWindowValueConstraint[*] role xxx_TimedWindowValueConstraint_metricTypeNames_src
+	MetricTypeName[1] role metricTypeNames
+end
+
+composition xxx_TimedWindowValueConstraint_structuralReferences between
+	TimedWindowValueConstraint[0..1] role xxx_TimedWindowValueConstraint_structuralReferences_src
+	StructuralReference[*] role structuralReferences
+end
+

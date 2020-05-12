@@ -1,0 +1,224 @@
+model flowcharts
+class WorkflowDiagram
+attributes
+	name : String
+operations
+end
+
+abstract class DiagramNode
+attributes
+	label : String
+operations
+end
+
+abstract class ControlFlowNode<DiagramNode
+attributes
+operations
+end
+
+abstract class ActivityNode<DiagramNode
+attributes
+	optional : Boolean
+	minTime : Integer
+	cost : Integer
+	probability : Real
+	maxTime : Integer
+operations
+end
+
+abstract class ResourceNode<DiagramNode
+attributes
+operations
+end
+
+class StartNode<SimpleNode
+attributes
+operations
+end
+
+class Endnode<SimpleNode
+attributes
+operations
+end
+
+abstract class SimpleNode<ControlFlowNode
+attributes
+operations
+end
+
+abstract class StructuredNode<ControlFlowNode
+attributes
+operations
+end
+
+class SplitNode<SimpleNode
+attributes
+operations
+end
+
+class MergeNode<SimpleNode
+attributes
+operations
+end
+
+class Flow<StructuredNode
+attributes
+operations
+end
+
+class SimpleActivity<ActivityNode
+attributes
+operations
+end
+
+class Subprocess<ActivityNode
+attributes
+	weight : Integer
+operations
+end
+
+class Workflow
+attributes
+operations
+end
+
+class PersistentResource<ResourceNode
+attributes
+operations
+end
+
+class TransientResource<ResourceNode
+attributes
+operations
+end
+
+class Document<ResourceNode
+attributes
+operations
+end
+
+class Event<ActivityNode
+attributes
+operations
+end
+
+class DiagramArc
+attributes
+	label : String
+	optional : Boolean
+	probability : Real
+	minWeight : Integer
+	maxWeight : Integer
+operations
+end
+
+composition xxx_WorkflowDiagram_diagramNodes between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_diagramNodes_src
+	DiagramNode[*] role diagramNodes
+end
+
+association xxx_WorkflowDiagram_startNode between
+	WorkflowDiagram[*] role xxx_WorkflowDiagram_startNode_src
+	StartNode[1] role startNode
+end
+
+association xxx_WorkflowDiagram_endNode between
+	WorkflowDiagram[*] role xxx_WorkflowDiagram_endNode_src
+	Endnode[1] role endNode
+end
+
+association xxx_WorkflowDiagram_processOutput between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_processOutput_src
+	ResourceNode[*] role processOutput
+end
+
+association xxx_WorkflowDiagram_processOutputOpt between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_processOutputOpt_src
+	ResourceNode[*] role processOutputOpt
+end
+
+composition xxx_WorkflowDiagram_diagramArcs between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_diagramArcs_src
+	DiagramArc[*] role diagramArcs
+end
+
+association xxx_WorkflowDiagram_processInput between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_processInput_src
+	ResourceNode[*] role processInput
+end
+
+association xxx_WorkflowDiagram_processInputOpt between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_processInputOpt_src
+	ResourceNode[*] role processInputOpt
+end
+
+association xxx_WorkflowDiagram_processCalls between
+	WorkflowDiagram[0..1] role xxx_WorkflowDiagram_processCalls_src
+	Subprocess[*] role processCalls
+end
+
+association xxx_DiagramNode_incoming between
+	DiagramNode[0..1] role xxx_DiagramNode_incoming_src
+	DiagramArc[*] role incoming
+end
+
+association xxx_DiagramNode_outgoing between
+	DiagramNode[0..1] role xxx_DiagramNode_outgoing_src
+	DiagramArc[*] role outgoing
+end
+
+association xxx_ActivityNode_activityOutput between
+	ActivityNode[0..1] role xxx_ActivityNode_activityOutput_src
+	ResourceNode[*] role activityOutput
+end
+
+association xxx_ActivityNode_activityOutputOpt between
+	ActivityNode[0..1] role xxx_ActivityNode_activityOutputOpt_src
+	ResourceNode[*] role activityOutputOpt
+end
+
+association xxx_ActivityNode_activityInputOpt between
+	ActivityNode[0..1] role xxx_ActivityNode_activityInputOpt_src
+	ResourceNode[*] role activityInputOpt
+end
+
+association xxx_ActivityNode_activityInput between
+	ActivityNode[0..1] role xxx_ActivityNode_activityInput_src
+	ResourceNode[*] role activityInput
+end
+
+composition xxx_StructuredNode_childNodes between
+	StructuredNode[0..1] role xxx_StructuredNode_childNodes_src
+	DiagramNode[1..*] role childNodes
+end
+
+association xxx_Flow_startNode between
+	Flow[0..1] role xxx_Flow_startNode_src
+	StartNode[1..*] role startNode
+end
+
+association xxx_Flow_endNode between
+	Flow[0..1] role xxx_Flow_endNode_src
+	Endnode[1..*] role endNode
+end
+
+association xxx_Subprocess_subprocess between
+	Subprocess[*] role xxx_Subprocess_subprocess_src
+	WorkflowDiagram[1] role subprocess
+end
+
+composition xxx_Workflow_processes between
+	Workflow[0..1] role xxx_Workflow_processes_src
+	WorkflowDiagram[*] role processes
+end
+
+association xxx_DiagramArc_src between
+	DiagramArc[*] role xxx_DiagramArc_src_src
+	DiagramNode[1] role src
+end
+
+association xxx_DiagramArc_target between
+	DiagramArc[*] role xxx_DiagramArc_target_src
+	DiagramNode[1] role target
+end
+

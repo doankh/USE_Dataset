@@ -1,0 +1,208 @@
+model ide
+enum MindPathKind{
+default
+}
+
+enum ComponentKind{
+default
+}
+
+class MindRepo<MindObject
+attributes
+operations
+end
+
+class MindRootSrc<MindObject
+attributes
+	fullpath : String
+	folder : String
+operations
+end
+
+class MindPackage<MindObject
+attributes
+	fullpath : String
+operations
+end
+
+class MindAdl<MindFile
+attributes
+	kind : ComponentKind
+operations
+	setReferences(references : String)
+end
+
+class MindC<MindFile
+attributes
+operations
+end
+
+class MindItf<MindFile
+attributes
+operations
+end
+
+class MindH<MindFile
+attributes
+operations
+end
+
+class MindIdf<MindFile
+attributes
+operations
+end
+
+class MindFile<MindObject
+attributes
+	fullpath : String
+	qualifiedName : String
+	icon : String
+operations
+end
+
+class MindAllRepo
+attributes
+operations
+end
+
+abstract class MindObject
+attributes
+	mindId : String
+	name : String
+operations
+end
+
+class MindProject<MindLibOrProject
+attributes
+	project : String
+operations
+	setMindpath(mindpath : MindPathEntry)
+	addMindPathProjectReferenceFromFile(file : MindFile):MindPathEntry
+	addMindPathImportPackageFromFile(file : MindFile):MindPathEntry
+end
+
+class MindPathEntry<MindObject
+attributes
+	entryKind : MindPathKind
+	targetFilter : String
+operations
+	getResource():String
+end
+
+class MindLibrary<MindLibOrProject,MindRootSrc
+attributes
+	targetFilter : String
+	fullpathLib : String
+	active : Boolean
+operations
+end
+
+abstract class MindLibOrProject<MindObject
+attributes
+operations
+	getRawMinpath():MindPathEntry
+	getResolvedMindpath(ignoreUnresolvedEntry : Boolean):MindPathEntry
+	resolveAdl(componentName : String,defaultPackage : String,imports : String):MindAdl
+	resolvePossibleAdlInMindPath(componentName : String):MindAdl
+	resolvePossibleAdlInPackage(packageName : String):MindAdl
+	resolvePossibleAdlInWorkspace(componentName : String):MindAdl
+	resolveItf(componentName : String,defaultPackage : String,imports : String):MindItf
+	resolvePossibleItfInMindPath(componentName : String):MindItf
+	resolvePossibleItfInPackage(packageName : String):MindItf
+	resolvePossibleItfInWorkspace(componentName : String):MindItf
+	findQualifiedComponent(cn : String):MindAdl
+	getAllFiles():MindFile
+	findMindFile(qualifiedName : String):MindFile
+	exists(obj : MindFile):Boolean
+end
+
+composition xxx_MindRepo_rootsrcs between
+	MindRepo[0..1] role xxx_MindRepo_rootsrcs_src
+	MindRootSrc[*] role rootsrcs
+end
+
+composition xxx_MindRepo_mindLibOrProjects between
+	MindRepo[0..1] role xxx_MindRepo_mindLibOrProjects_src
+	MindLibOrProject[*] role mindLibOrProjects
+end
+
+composition xxx_MindRootSrc_packages between
+	MindRootSrc[0..1] role xxx_MindRootSrc_packages_src
+	MindPackage[*] role packages
+end
+
+association xxx_MindRootSrc_project between
+	MindRootSrc[*] role xxx_MindRootSrc_project_src
+	MindLibOrProject[0..1] role project
+end
+
+association xxx_MindRootSrc_repoFromRootSrc between
+	MindRootSrc[*] role xxx_MindRootSrc_repoFromRootSrc_src
+	MindRepo[1] role repoFromRootSrc
+end
+
+association xxx_MindRootSrc_dependencies between
+	MindRootSrc[0..1] role xxx_MindRootSrc_dependencies_src
+	MindRootSrc[*] role dependencies
+end
+
+composition xxx_MindPackage_files between
+	MindPackage[0..1] role xxx_MindPackage_files_src
+	MindFile[*] role files
+end
+
+association xxx_MindPackage_rootsrc between
+	MindPackage[*] role xxx_MindPackage_rootsrc_src
+	MindRootSrc[1] role rootsrc
+end
+
+association xxx_MindFile_package between
+	MindFile[*] role xxx_MindFile_package_src
+	MindPackage[1] role package
+end
+
+composition xxx_MindAllRepo_repos between
+	MindAllRepo[0..1] role xxx_MindAllRepo_repos_src
+	MindRepo[*] role repos
+end
+
+association xxx_MindObject_resolvedMindPathEntries between
+	MindObject[0..1] role xxx_MindObject_resolvedMindPathEntries_src
+	MindPathEntry[*] role resolvedMindPathEntries
+end
+
+association xxx_MindProject_allsrc between
+	MindProject[0..1] role xxx_MindProject_allsrc_src
+	MindRootSrc[*] role allsrc
+end
+
+association xxx_MindPathEntry_ownerProject between
+	MindPathEntry[*] role xxx_MindPathEntry_ownerProject_src
+	MindLibOrProject[1] role ownerProject
+end
+
+association xxx_MindPathEntry_resolvedBy between
+	MindPathEntry[*] role xxx_MindPathEntry_resolvedBy_src
+	MindObject[0..1] role resolvedBy
+end
+
+composition xxx_MindLibOrProject_mindpathentries between
+	MindLibOrProject[0..1] role xxx_MindLibOrProject_mindpathentries_src
+	MindPathEntry[*] role mindpathentries
+end
+
+association xxx_MindLibOrProject_repoFromLibOrProject between
+	MindLibOrProject[*] role xxx_MindLibOrProject_repoFromLibOrProject_src
+	MindRepo[1] role repoFromLibOrProject
+end
+
+association xxx_MindLibOrProject_uses between
+	MindLibOrProject[0..1] role xxx_MindLibOrProject_uses_src
+	MindLibOrProject[*] role uses
+end
+
+association xxx_MindLibOrProject_rootsrcs between
+	MindLibOrProject[0..1] role xxx_MindLibOrProject_rootsrcs_src
+	MindRootSrc[*] role rootsrcs
+end
+

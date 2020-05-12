@@ -1,0 +1,163 @@
+model PrimitiveTypes
+class QueryExpression
+attributes
+	expresssion : String
+operations
+end
+
+class CheckConstraint
+attributes
+operations
+end
+
+class Column
+attributes
+	precision : Integer
+	scale : Integer
+	isNullable : Boolean
+	length : Integer
+	collectionName : String
+	characterSetName : String
+operations
+end
+
+class ColumnSet
+attributes
+operations
+end
+
+class NamedColumnSet<ColumnSet
+attributes
+operations
+end
+
+class QueryColumnSet<ColumnSet
+attributes
+operations
+end
+
+class Table<NamedColumnSet
+attributes
+	isTemporary : Boolean
+	temporaryScope : String
+	isSystem : Boolean
+operations
+end
+
+class View<NamedColumnSet
+attributes
+	isReadOnly : Boolean
+	checkOption : Boolean
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+class SQLDataType
+attributes
+	typeNumber : Integer
+operations
+end
+
+class SQLDistinctType<SQLDataType
+attributes
+	length : Integer
+	precision : Integer
+	scale : Integer
+operations
+end
+
+class SQLSimpleType<SQLDataType
+attributes
+	characterMaximumLength : Integer
+	characterOctetLength : Integer
+	numericPrecision : Integer
+	numericPrecisionRadix : Integer
+	numericScale : Integer
+	dateTimePrecision : Integer
+operations
+end
+
+association xxx_CheckConstraint_constraintElements between
+	CheckConstraint[0..1] role xxx_CheckConstraint_constraintElements_src
+	Column[*] role constraintElements
+end
+
+association xxx_CheckConstraint_constrainedElements between
+	CheckConstraint[0..1] role xxx_CheckConstraint_constrainedElements_src
+	Table[*] role constrainedElements
+end
+
+association xxx_Column_column_constraints between
+	Column[0..1] role xxx_Column_column_constraints_src
+	CheckConstraint[*] role column_constraints
+end
+
+association xxx_Column_type between
+	Column[*] role xxx_Column_type_src
+	SQLDataType[1] role type
+end
+
+association xxx_Column_owner between
+	Column[*] role xxx_Column_owner_src
+	ColumnSet[0..1] role owner
+end
+
+association xxx_Column_optionScopeColumnSet between
+	Column[*] role xxx_Column_optionScopeColumnSet_src
+	NamedColumnSet[0..1] role optionScopeColumnSet
+end
+
+composition xxx_ColumnSet_features between
+	ColumnSet[0..1] role xxx_ColumnSet_features_src
+	Column[*] role features
+end
+
+association xxx_NamedColumnSet_optionScopeColumn between
+	NamedColumnSet[*] role xxx_NamedColumnSet_optionScopeColumn_src
+	Column[1] role optionScopeColumn
+end
+
+association xxx_NamedColumnSet_triggers between
+	NamedColumnSet[0..1] role xxx_NamedColumnSet_triggers_src
+	Trigger[*] role triggers
+end
+
+composition xxx_QueryColumnSet_query between
+	QueryColumnSet[*] role xxx_QueryColumnSet_query_src
+	QueryExpression[1] role query
+end
+
+association xxx_Table_table_constraints between
+	Table[0..1] role xxx_Table_table_constraints_src
+	CheckConstraint[*] role table_constraints
+end
+
+composition xxx_View_queryExpression between
+	View[*] role xxx_View_queryExpression_src
+	QueryExpression[1] role queryExpression
+end
+
+association xxx_Trigger_namedColumnSet between
+	Trigger[*] role xxx_Trigger_namedColumnSet_src
+	NamedColumnSet[1] role namedColumnSet
+end
+
+association xxx_SQLDataType_structuralFeatures between
+	SQLDataType[0..1] role xxx_SQLDataType_structuralFeatures_src
+	Column[*] role structuralFeatures
+end
+
+association xxx_SQLDistinctType_sqlSimpleType between
+	SQLDistinctType[*] role xxx_SQLDistinctType_sqlSimpleType_src
+	SQLSimpleType[1] role sqlSimpleType
+end
+
+association xxx_SQLSimpleType_sqlDistinctTypes between
+	SQLSimpleType[0..1] role xxx_SQLSimpleType_sqlDistinctTypes_src
+	SQLDistinctType[*] role sqlDistinctTypes
+end
+

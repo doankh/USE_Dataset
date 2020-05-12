@@ -1,0 +1,108 @@
+model gsml
+enum MinRequirementType{
+default
+}
+
+class Course
+attributes
+	Name : String
+operations
+end
+
+abstract class Task
+attributes
+	Name : String
+	MinRequirement : Real
+	MinRequirementType : MinRequirementType
+operations
+end
+
+class ConcreteTask<Task
+attributes
+	MaxPoints : Real
+operations
+end
+
+class TaskGroup<Task
+attributes
+operations
+end
+
+class GradingScheme
+attributes
+operations
+end
+
+class Grade
+attributes
+	Name : String
+	RequiredPoints : Real
+operations
+end
+
+class GradingSystem
+attributes
+operations
+end
+
+class Grading
+attributes
+	Semester : String
+operations
+end
+
+composition xxx_Course_gradings between
+	Course[0..1] role xxx_Course_gradings_src
+	Grading[*] role gradings
+end
+
+association xxx_Course_gradingschemes between
+	Course[0..1] role xxx_Course_gradingschemes_src
+	GradingScheme[*] role gradingschemes
+end
+
+association xxx_Course_gradingscheme between
+	Course[*] role xxx_Course_gradingscheme_src
+	GradingScheme[1] role gradingscheme
+end
+
+composition xxx_Course_gradingScheme between
+	Course[*] role xxx_Course_gradingScheme_src
+	GradingScheme[1] role gradingScheme
+end
+
+composition xxx_TaskGroup_contains between
+	TaskGroup[0..1] role xxx_TaskGroup_contains_src
+	Task[*] role contains
+end
+
+composition xxx_GradingScheme_grades between
+	GradingScheme[0..1] role xxx_GradingScheme_grades_src
+	Grade[*] role grades
+end
+
+composition xxx_GradingScheme_fallback between
+	GradingScheme[*] role xxx_GradingScheme_fallback_src
+	Grade[1] role fallback
+end
+
+composition xxx_GradingSystem_courses between
+	GradingSystem[0..1] role xxx_GradingSystem_courses_src
+	Course[*] role courses
+end
+
+association xxx_Grading_gradingscheme between
+	Grading[*] role xxx_Grading_gradingscheme_src
+	GradingScheme[1] role gradingscheme
+end
+
+composition xxx_Grading_tasks between
+	Grading[0..1] role xxx_Grading_tasks_src
+	Task[*] role tasks
+end
+
+composition xxx_Grading_has between
+	Grading[0..1] role xxx_Grading_has_src
+	Task[1..*] role has
+end
+

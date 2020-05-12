@@ -1,0 +1,205 @@
+model nima
+enum TypeDef{
+default
+}
+
+enum typeAtt{
+default
+}
+
+enum TypeAttaque{
+default
+}
+
+class Archetype<Fiche
+attributes
+	hp : Integer
+	init_ : Integer
+	attaque : Integer
+	defense : Integer
+	typeDef : TypeDef
+	rphy : Integer
+	rmys : Integer
+	rpsy : Integer
+	perf : Integer
+	tran : Integer
+	con : Integer
+	cha : Integer
+	froid : Integer
+	elec : Integer
+	ener : Integer
+	nbDef : Integer
+	joueur : Boolean
+	nbAction : Integer
+	peutAgir : Boolean
+	rolledInit : Integer
+	hpMax : Integer
+	malusCritTemp : Integer
+	bonusAtaque : Integer
+	bonusDef : Integer
+operations
+	getIP(type : typeAtt):Integer
+	resetRound()
+	getTotalAttaque():Integer
+	getTotalDefense():Integer
+	baston(bonus : Integer)
+end
+
+class Config
+attributes
+	init : Integer
+	defense : Integer
+	degats : Integer
+	typeDegat : typeAtt
+	nom : String
+	description : String
+	attaque : Integer
+	nbAttaques : Integer
+	typeDef : TypeDef
+	typeAttaque : TypeAttaque
+operations
+	calcMalusDef(attaquand : Config):Integer
+	attaque(bonus : Integer):Integer
+end
+
+class Univers
+attributes
+operations
+end
+
+class Combat<Fiche
+attributes
+	nbRound : Integer
+operations
+	resetRound()
+	resetAndRun()
+end
+
+class Fiche
+attributes
+	nom : String
+	description : String
+operations
+end
+
+class Lien
+attributes
+operations
+end
+
+class Box
+attributes
+operations
+end
+
+class ListeCategorie
+attributes
+operations
+end
+
+class Categorie
+attributes
+	nom : String
+operations
+end
+
+composition xxx_Archetype_configs between
+	Archetype[0..1] role xxx_Archetype_configs_src
+	Config[*] role configs
+end
+
+association xxx_Archetype_active between
+	Archetype[*] role xxx_Archetype_active_src
+	Config[0..1] role active
+end
+
+association xxx_Archetype_cible between
+	Archetype[*] role xxx_Archetype_cible_src
+	Archetype[0..1] role cible
+end
+
+association xxx_Archetype_current between
+	Archetype[*] role xxx_Archetype_current_src
+	Config[0..1] role current
+end
+
+association xxx_Archetype_contre between
+	Archetype[*] role xxx_Archetype_contre_src
+	Config[0..1] role contre
+end
+
+association xxx_Config_owner between
+	Config[*] role xxx_Config_owner_src
+	Archetype[1] role owner
+end
+
+association xxx_Config_enchaine between
+	Config[*] role xxx_Config_enchaine_src
+	Config[0..1] role enchaine
+end
+
+composition xxx_Univers_fiches between
+	Univers[0..1] role xxx_Univers_fiches_src
+	Fiche[*] role fiches
+end
+
+composition xxx_Univers_combats between
+	Univers[0..1] role xxx_Univers_combats_src
+	Combat[*] role combats
+end
+
+composition xxx_Univers_categorie between
+	Univers[*] role xxx_Univers_categorie_src
+	ListeCategorie[0..1] role categorie
+end
+
+composition xxx_Combat_archetypes between
+	Combat[0..1] role xxx_Combat_archetypes_src
+	Archetype[*] role archetypes
+end
+
+composition xxx_Fiche_boxes between
+	Fiche[0..1] role xxx_Fiche_boxes_src
+	Box[*] role boxes
+end
+
+composition xxx_Fiche_liens between
+	Fiche[0..1] role xxx_Fiche_liens_src
+	Lien[*] role liens
+end
+
+association xxx_Fiche_categorie between
+	Fiche[*] role xxx_Fiche_categorie_src
+	Categorie[0..1] role categorie
+end
+
+association xxx_Lien_source between
+	Lien[*] role xxx_Lien_source_src
+	Box[1] role source
+end
+
+association xxx_Lien_cible between
+	Lien[*] role xxx_Lien_cible_src
+	Box[1] role cible
+end
+
+association xxx_Lien_categorie between
+	Lien[*] role xxx_Lien_categorie_src
+	Categorie[0..1] role categorie
+end
+
+association xxx_Box_fiche between
+	Box[*] role xxx_Box_fiche_src
+	Fiche[1] role fiche
+end
+
+association xxx_Box_cible between
+	Box[*] role xxx_Box_cible_src
+	Fiche[0..1] role cible
+end
+
+composition xxx_ListeCategorie_categories between
+	ListeCategorie[0..1] role xxx_ListeCategorie_categories_src
+	Categorie[*] role categories
+end
+

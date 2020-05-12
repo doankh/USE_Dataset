@@ -1,0 +1,146 @@
+model bootstrap
+class Site
+attributes
+	title : String
+operations
+end
+
+class Page
+attributes
+	title : String
+	description : String
+	name : String
+operations
+end
+
+class MainPage
+attributes
+	title : String
+	description : String
+operations
+end
+
+class Section
+attributes
+	title : String
+	description : String
+operations
+end
+
+abstract class Widget
+attributes
+	title : String
+operations
+end
+
+class Form<Widget
+attributes
+operations
+end
+
+class Table<Widget
+attributes
+	columnNames : String
+	rowNames : String
+	striped : Boolean
+	bordered : Boolean
+operations
+end
+
+class Text<Widget
+attributes
+	columnNumber : Integer
+operations
+end
+
+class Video<Widget
+attributes
+	path : String
+operations
+end
+
+class Gallery<Widget
+attributes
+	imagesPath : String
+operations
+end
+
+class ImagesBlock<Widget
+attributes
+	imagesPath : String
+operations
+end
+
+abstract class FormWidget
+attributes
+	label : String
+operations
+end
+
+class TextArea<FormWidget
+attributes
+operations
+end
+
+class Spinner<FormWidget
+attributes
+	values : String
+operations
+end
+
+class CheckBox<FormWidget
+attributes
+	description : String
+operations
+end
+
+composition xxx_Site_pages between
+	Site[0..1] role xxx_Site_pages_src
+	Page[*] role pages
+end
+
+composition xxx_Site_mainPage between
+	Site[*] role xxx_Site_mainPage_src
+	MainPage[1] role mainPage
+end
+
+composition xxx_Page_sections between
+	Page[0..1] role xxx_Page_sections_src
+	Section[1..*] role sections
+end
+
+association xxx_Page_site between
+	Page[*] role xxx_Page_site_src
+	Site[1] role site
+end
+
+association xxx_MainPage_site between
+	MainPage[*] role xxx_MainPage_site_src
+	Site[1] role site
+end
+
+composition xxx_Section_widgets between
+	Section[0..1] role xxx_Section_widgets_src
+	Widget[1..*] role widgets
+end
+
+association xxx_Section_page between
+	Section[*] role xxx_Section_page_src
+	Page[1] role page
+end
+
+association xxx_Widget_section between
+	Widget[*] role xxx_Widget_section_src
+	Section[1] role section
+end
+
+composition xxx_Form_formWidgets between
+	Form[0..1] role xxx_Form_formWidgets_src
+	FormWidget[1..*] role formWidgets
+end
+
+association xxx_FormWidget_form between
+	FormWidget[*] role xxx_FormWidget_form_src
+	Form[1] role form
+end
+

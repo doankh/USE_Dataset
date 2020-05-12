@@ -1,0 +1,78 @@
+model quality_requirements_metamodel
+enum Metrics{
+default
+}
+
+enum RelationalOperators{
+default
+}
+
+enum Units{
+default
+}
+
+class QualityScenario
+attributes
+	testResult : String
+	name : String
+operations
+end
+
+class Architecture
+attributes
+	name : String
+operations
+end
+
+class Dashboard
+attributes
+	id : String
+operations
+end
+
+class Stimulus
+attributes
+	name : String
+operations
+end
+
+class ResponseMetric
+attributes
+	metric : Metrics
+	operator : RelationalOperators
+	value : String
+	unit : Units
+	name : String
+operations
+end
+
+association xxx_QualityScenario_responseMetric between
+	QualityScenario[*] role xxx_QualityScenario_responseMetric_src
+	ResponseMetric[1] role responseMetric
+end
+
+association xxx_QualityScenario_service between
+	QualityScenario[*] role xxx_QualityScenario_service_src
+	Stimulus[1] role service
+end
+
+composition xxx_Architecture_services between
+	Architecture[0..1] role xxx_Architecture_services_src
+	Stimulus[1..*] role services
+end
+
+composition xxx_Dashboard_architectures between
+	Dashboard[0..1] role xxx_Dashboard_architectures_src
+	Architecture[1..*] role architectures
+end
+
+composition xxx_Dashboard_metrics between
+	Dashboard[0..1] role xxx_Dashboard_metrics_src
+	ResponseMetric[1..*] role metrics
+end
+
+composition xxx_Dashboard_scenarios between
+	Dashboard[0..1] role xxx_Dashboard_scenarios_src
+	QualityScenario[1..*] role scenarios
+end
+

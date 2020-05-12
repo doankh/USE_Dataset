@@ -1,0 +1,417 @@
+model SimplfiedMiningMart
+class ModelElement
+attributes
+operations
+end
+
+class Classifier<ModelElement
+attributes
+operations
+end
+
+class StructuralFeature<ModelElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	name : String
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+class Column<Attribute
+attributes
+	name : String
+operations
+end
+
+class ColumnSet<Class
+attributes
+	number : Integer
+	file : String
+	dbConnectString : String
+	user : String
+operations
+end
+
+class ColumnStatistics
+attributes
+	unique : Integer
+	missing : Integer
+	min : Integer
+	max : Integer
+	average : Integer
+	standarDeviation : Integer
+	distributionValue : String
+	distributionCount : Integer
+	distributionMin : Integer
+	distributionMax : Integer
+operations
+end
+
+class ColumnSetStatistics<ModelElement
+attributes
+	allNumber : Integer
+	ordinalNumber : Integer
+	nominalNumber : Integer
+	timeNumber : Integer
+operations
+end
+
+class Snapshot<ColumnSet
+attributes
+operations
+end
+
+class Table<ColumnSet
+attributes
+operations
+end
+
+class View<ColumnSet
+attributes
+operations
+end
+
+class Key<ModelElement
+attributes
+	isUsedForIndex : Boolean
+operations
+end
+
+class ForeignKey<Key
+attributes
+operations
+end
+
+class PrimaryKey<Key
+attributes
+operations
+end
+
+class Concept<Parameter
+attributes
+	subConceptRestriction : String
+operations
+end
+
+class RelationShip<Parameter
+attributes
+	name : String
+	subRelationShipRestriction : String
+	defined : String
+operations
+end
+
+class FeatureAttribute<Attribute
+attributes
+	name : String
+	relevanceForMining : Boolean
+operations
+end
+
+class BaseAttribute<FeatureAttribute
+attributes
+operations
+end
+
+class MultiColumnFeature<FeatureAttribute
+attributes
+operations
+end
+
+class Value<Parameter
+attributes
+	name : String
+operations
+end
+
+class UserInput<Class
+attributes
+operations
+end
+
+class Ordinal<DomainDataType
+attributes
+operations
+end
+
+class Scalar<Ordinal
+attributes
+operations
+end
+
+class Time<Scalar
+attributes
+operations
+end
+
+class Binary<Nominal
+attributes
+operations
+end
+
+class Categorial<Nominal
+attributes
+operations
+end
+
+class KeyAttribute<Nominal
+attributes
+operations
+end
+
+class TimeGroup<KeyAttribute
+attributes
+operations
+end
+
+class Spatial<KeyAttribute
+attributes
+operations
+end
+
+class Constant<Nominal
+attributes
+operations
+end
+
+class RoleRestriction<Attribute
+attributes
+	name : String
+	min : Integer
+	max : Integer
+operations
+end
+
+class DomainDataType<DataType
+attributes
+operations
+end
+
+class Nominal<DomainDataType
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribute[1..*] role attributes_
+end
+
+association xxx_DataType_attribute between
+	DataType[*] role xxx_DataType_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Attribute_class_ between
+	Attribute[*] role xxx_Attribute_class__src
+	Class[1] role class_
+end
+
+association xxx_Attribute_has between
+	Attribute[*] role xxx_Attribute_has_src
+	DataType[1] role has
+end
+
+association xxx_Column_dataType between
+	Column[*] role xxx_Column_dataType_src
+	DataType[1] role dataType
+end
+
+association xxx_Column_keys between
+	Column[0..1] role xxx_Column_keys_src
+	Key[*] role keys
+end
+
+association xxx_Column_belongsToColumnSet between
+	Column[*] role xxx_Column_belongsToColumnSet_src
+	ColumnSet[1] role belongsToColumnSet
+end
+
+association xxx_Column_corespondsToBaseAttribute between
+	Column[*] role xxx_Column_corespondsToBaseAttribute_src
+	BaseAttribute[1] role corespondsToBaseAttribute
+end
+
+association xxx_ColumnSet_hasColumn between
+	ColumnSet[0..1] role xxx_ColumnSet_hasColumn_src
+	Column[1..*] role hasColumn
+end
+
+association xxx_ColumnSet_hasKey between
+	ColumnSet[0..1] role xxx_ColumnSet_hasKey_src
+	Key[1..*] role hasKey
+end
+
+association xxx_ColumnSet_correspondsToConcept between
+	ColumnSet[*] role xxx_ColumnSet_correspondsToConcept_src
+	Concept[0..1] role correspondsToConcept
+end
+
+association xxx_ColumnSet_correspondsToRelationShip between
+	ColumnSet[*] role xxx_ColumnSet_correspondsToRelationShip_src
+	RelationShip[0..1] role correspondsToRelationShip
+end
+
+association xxx_ColumnStatistics_forColumn between
+	ColumnStatistics[*] role xxx_ColumnStatistics_forColumn_src
+	Column[1] role forColumn
+end
+
+association xxx_ColumnSetStatistics_forColumnSet between
+	ColumnSetStatistics[*] role xxx_ColumnSetStatistics_forColumnSet_src
+	ColumnSet[1] role forColumnSet
+end
+
+association xxx_Key_hasColumn between
+	Key[0..1] role xxx_Key_hasColumn_src
+	Column[1..*] role hasColumn
+end
+
+association xxx_Key_isAssociatedToColumnSet between
+	Key[*] role xxx_Key_isAssociatedToColumnSet_src
+	ColumnSet[1] role isAssociatedToColumnSet
+end
+
+association xxx_ForeignKey_isConnectionTo between
+	ForeignKey[*] role xxx_ForeignKey_isConnectionTo_src
+	Table[0..1] role isConnectionTo
+end
+
+association xxx_ForeignKey_correspondsToRelationShip between
+	ForeignKey[*] role xxx_ForeignKey_correspondsToRelationShip_src
+	RelationShip[0..1] role correspondsToRelationShip
+end
+
+association xxx_Concept_isA between
+	Concept[*] role xxx_Concept_isA_src
+	Concept[1] role isA
+end
+
+association xxx_Concept_FromConcept between
+	Concept[*] role xxx_Concept_FromConcept_src
+	RelationShip[1] role FromConcept
+end
+
+association xxx_Concept_ToConcept between
+	Concept[*] role xxx_Concept_ToConcept_src
+	RelationShip[1] role ToConcept
+end
+
+association xxx_Concept_correspondsToColumnSet between
+	Concept[*] role xxx_Concept_correspondsToColumnSet_src
+	ColumnSet[0..1] role correspondsToColumnSet
+end
+
+association xxx_RelationShip_isA between
+	RelationShip[*] role xxx_RelationShip_isA_src
+	RelationShip[1] role isA
+end
+
+association xxx_RelationShip_correspondsToForeignKey between
+	RelationShip[0..1] role xxx_RelationShip_correspondsToForeignKey_src
+	ForeignKey[1..*] role correspondsToForeignKey
+end
+
+association xxx_RelationShip_correspondsToColumnSet between
+	RelationShip[*] role xxx_RelationShip_correspondsToColumnSet_src
+	ColumnSet[0..1] role correspondsToColumnSet
+end
+
+association xxx_RelationShip_FromConcept between
+	RelationShip[*] role xxx_RelationShip_FromConcept_src
+	Concept[1] role FromConcept
+end
+
+association xxx_RelationShip_ToConcept between
+	RelationShip[*] role xxx_RelationShip_ToConcept_src
+	Concept[1] role ToConcept
+end
+
+association xxx_FeatureAttribute_attributeType between
+	FeatureAttribute[*] role xxx_FeatureAttribute_attributeType_src
+	DataType[1] role attributeType
+end
+
+composition xxx_FeatureAttribute_belongsToConcept between
+	FeatureAttribute[*] role xxx_FeatureAttribute_belongsToConcept_src
+	Concept[1] role belongsToConcept
+end
+
+association xxx_FeatureAttribute_correspondsToColumns between
+	FeatureAttribute[0..1] role xxx_FeatureAttribute_correspondsToColumns_src
+	Column[1..*] role correspondsToColumns
+end
+
+association xxx_BaseAttribute_isPartMultiColumnFeature between
+	BaseAttribute[*] role xxx_BaseAttribute_isPartMultiColumnFeature_src
+	MultiColumnFeature[0..1] role isPartMultiColumnFeature
+end
+
+association xxx_BaseAttribute_domainDataType between
+	BaseAttribute[*] role xxx_BaseAttribute_domainDataType_src
+	DomainDataType[1] role domainDataType
+end
+
+composition xxx_MultiColumnFeature_consitsOfBaseAttributes between
+	MultiColumnFeature[0..1] role xxx_MultiColumnFeature_consitsOfBaseAttributes_src
+	BaseAttribute[*] role consitsOfBaseAttributes
+end
+
+association xxx_Value_domainDataType between
+	Value[*] role xxx_Value_domainDataType_src
+	DomainDataType[1] role domainDataType
+end
+
+composition xxx_Value_belongsToUserInput between
+	Value[0..1] role xxx_Value_belongsToUserInput_src
+	UserInput[1..*] role belongsToUserInput
+end
+
+association xxx_UserInput_containsValues between
+	UserInput[0..1] role xxx_UserInput_containsValues_src
+	Value[1..*] role containsValues
+end
+
+association xxx_RoleRestriction_restrictionForRelationShip between
+	RoleRestriction[*] role xxx_RoleRestriction_restrictionForRelationShip_src
+	RelationShip[1] role restrictionForRelationShip
+end
+
+association xxx_RoleRestriction_restrictionForConcept between
+	RoleRestriction[*] role xxx_RoleRestriction_restrictionForConcept_src
+	Concept[1] role restrictionForConcept
+end
+
+association xxx_RoleRestriction_restrictionToConcept between
+	RoleRestriction[*] role xxx_RoleRestriction_restrictionToConcept_src
+	Concept[1] role restrictionToConcept
+end
+
+association xxx_RoleRestriction_belongsToConcept between
+	RoleRestriction[*] role xxx_RoleRestriction_belongsToConcept_src
+	Concept[1] role belongsToConcept
+end
+
+association xxx_DomainDataType_baseAttributeD between
+	DomainDataType[*] role xxx_DomainDataType_baseAttributeD_src
+	BaseAttribute[1] role baseAttributeD
+end
+

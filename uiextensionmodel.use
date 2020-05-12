@@ -1,0 +1,82 @@
+model uiextensionmodel
+class ActivityExtension
+attributes
+	x : Integer
+	y : Integer
+	width : Integer
+	height : Integer
+	implicit : Boolean
+operations
+end
+
+class CaseExtension
+attributes
+	displayName : String
+operations
+end
+
+class CopyExtension
+attributes
+	fromType : Integer
+	toType : Integer
+operations
+end
+
+class EndNode
+attributes
+operations
+end
+
+class LinkExtension
+attributes
+operations
+end
+
+class OnAlarmExtension
+attributes
+	displayName : String
+operations
+end
+
+class OnEventExtension
+attributes
+	displayName : String
+operations
+end
+
+class OnMessageExtension
+attributes
+	displayName : String
+operations
+end
+
+class PartnerLinkExtension
+attributes
+	partnerKind : Integer
+operations
+end
+
+class ProcessExtension
+attributes
+	specCompliant : Boolean
+	modificationStamp : Integer
+operations
+end
+
+class ReferencePartnerLinks
+attributes
+operations
+end
+
+class StartNode
+attributes
+operations
+end
+
+class VariableExtension
+attributes
+	advancedKind : Integer
+	variableKind : Integer
+operations
+end
+

@@ -1,0 +1,154 @@
+model DSLModel
+class Model
+attributes
+	domainModel : String
+operations
+end
+
+abstract class Element
+attributes
+	type : String
+	id : String
+operations
+end
+
+class ModelElement<Element
+attributes
+operations
+end
+
+class ModelElementLink<ModelElement
+attributes
+operations
+end
+
+class EmbeddingLink<NamedElement
+attributes
+operations
+end
+
+class ReferenceLink<Element
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Property<NamedElement
+attributes
+operations
+end
+
+class Role<NamedElement
+attributes
+operations
+end
+
+abstract class Value
+attributes
+operations
+end
+
+class IntegerValue<Value
+attributes
+	value : Integer
+operations
+end
+
+class DoubleValue<Value
+attributes
+	value : Real
+operations
+end
+
+class BooleanValue<Value
+attributes
+	value : Boolean
+operations
+end
+
+class StringValue<Value
+attributes
+	value : String
+operations
+end
+
+composition xxx_Model_contents between
+	Model[0..1] role xxx_Model_contents_src
+	ModelElement[*] role contents
+end
+
+association xxx_ModelElement_parentLink between
+	ModelElement[*] role xxx_ModelElement_parentLink_src
+	EmbeddingLink[1] role parentLink
+end
+
+composition xxx_ModelElement_properties between
+	ModelElement[0..1] role xxx_ModelElement_properties_src
+	Property[*] role properties
+end
+
+composition xxx_ModelElement_embeddinglinks between
+	ModelElement[0..1] role xxx_ModelElement_embeddinglinks_src
+	EmbeddingLink[*] role embeddinglinks
+end
+
+composition xxx_ModelElement_referencelinks between
+	ModelElement[0..1] role xxx_ModelElement_referencelinks_src
+	ReferenceLink[*] role referencelinks
+end
+
+association xxx_ModelElementLink_links between
+	ModelElementLink[0..1] role xxx_ModelElementLink_links_src
+	ReferenceLink[*] role links
+end
+
+association xxx_EmbeddingLink_owner between
+	EmbeddingLink[*] role xxx_EmbeddingLink_owner_src
+	ModelElement[0..1] role owner
+end
+
+composition xxx_EmbeddingLink_elements between
+	EmbeddingLink[0..1] role xxx_EmbeddingLink_elements_src
+	ModelElement[*] role elements
+end
+
+association xxx_ReferenceLink_owner between
+	ReferenceLink[*] role xxx_ReferenceLink_owner_src
+	ModelElement[0..1] role owner
+end
+
+association xxx_ReferenceLink_modelElement between
+	ReferenceLink[*] role xxx_ReferenceLink_modelElement_src
+	ModelElementLink[1] role modelElement
+end
+
+composition xxx_ReferenceLink_roles between
+	ReferenceLink[*] role xxx_ReferenceLink_roles_src
+	Role[2] role roles
+end
+
+association xxx_Property_owner between
+	Property[*] role xxx_Property_owner_src
+	ModelElement[1] role owner
+end
+
+composition xxx_Property_value between
+	Property[*] role xxx_Property_value_src
+	Value[1] role value
+end
+
+association xxx_Role_element between
+	Role[*] role xxx_Role_element_src
+	ModelElement[1] role element
+end
+
+association xxx_Role_owner between
+	Role[*] role xxx_Role_owner_src
+	ReferenceLink[1] role owner
+end
+

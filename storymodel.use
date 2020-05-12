@@ -1,0 +1,109 @@
+model model_
+class File
+attributes
+	filename : String
+	author : String
+	version : String
+operations
+end
+
+class Project<FileElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class FileElement
+attributes
+	id : Integer
+operations
+end
+
+abstract class Category<FileElement
+attributes
+	name : String
+operations
+end
+
+abstract class Note<FileElement
+attributes
+	refId : String
+operations
+end
+
+class PersonNote<Note
+attributes
+	name : String
+	cv : String
+	age : String
+	hairColor : String
+	eyeColor : String
+	size : Integer
+	weight : Real
+	skinColor : String
+	socialBackground : String
+	hobbies : String
+	psychologicalBackground : String
+operations
+end
+
+class SettingNote<Note
+attributes
+	name : String
+	kind : String
+	description : String
+operations
+end
+
+class PlotNote<Note
+attributes
+	number : String
+	title : String
+	description : String
+	insideOutline : Boolean
+operations
+end
+
+class GenericNote<Note
+attributes
+	title : String
+	description : String
+operations
+end
+
+class GenericCategory<Category
+attributes
+operations
+end
+
+class PersonCategory<Category
+attributes
+operations
+end
+
+class SettingCategory<Category
+attributes
+operations
+end
+
+class PlotCategory<Category
+attributes
+operations
+end
+
+composition xxx_File_projects between
+	File[0..1] role xxx_File_projects_src
+	Project[*] role projects
+end
+
+composition xxx_Project_categories between
+	Project[0..1] role xxx_Project_categories_src
+	Category[*] role categories
+end
+
+composition xxx_Category_notes between
+	Category[0..1] role xxx_Category_notes_src
+	Note[*] role notes
+end
+

@@ -1,0 +1,522 @@
+model dime
+class Document
+attributes
+	name : String
+operations
+end
+
+class Statement<AbstractElement
+attributes
+	com : String
+operations
+end
+
+class AbstractElement
+attributes
+operations
+end
+
+class State
+attributes
+	name : String
+	times : Integer
+	timeout : Integer
+operations
+end
+
+class VoiceTag<AbstractElement
+attributes
+	name : String
+operations
+end
+
+class Wait<VoiceTag
+attributes
+	seconds : Integer
+operations
+end
+
+class Data<VoiceTag
+attributes
+operations
+end
+
+class Call<VoiceTag
+attributes
+operations
+end
+
+class Dial<VoiceTag
+attributes
+operations
+end
+
+class Play<VoiceTag
+attributes
+operations
+end
+
+class Record<VoiceTag
+attributes
+	time : Integer
+operations
+end
+
+class Reject<VoiceTag
+attributes
+operations
+end
+
+class Hangup<VoiceTag
+attributes
+operations
+end
+
+class GetDigits<VoiceTag
+attributes
+	numDigits : Integer
+operations
+end
+
+class Send<VoiceTag
+attributes
+operations
+end
+
+class SendBlock
+attributes
+operations
+end
+
+class NotPrimaryParam
+attributes
+operations
+end
+
+class Param
+attributes
+	name : String
+operations
+end
+
+class Say<VoiceTag
+attributes
+operations
+end
+
+class Sms<VoiceTag
+attributes
+operations
+end
+
+class Email<VoiceTag
+attributes
+operations
+end
+
+class Transition<AbstractElement
+attributes
+	name : String
+operations
+end
+
+class IfExp<AbstractElement
+attributes
+operations
+end
+
+class CondBlock
+attributes
+operations
+end
+
+class Block
+attributes
+operations
+end
+
+class BoolExpression
+attributes
+operations
+end
+
+class Brackets<BoolExpression
+attributes
+	open : String
+	close : String
+operations
+end
+
+class CompareExpression<BoolExpression
+attributes
+	op : String
+operations
+end
+
+class NegExpression<BoolExpression
+attributes
+	op : String
+operations
+end
+
+class MathExpression
+attributes
+operations
+end
+
+class MathBrackets<MathExpression
+attributes
+	open : String
+	close : String
+operations
+end
+
+class ConcatenationExpression
+attributes
+operations
+end
+
+class ConcatenationBrackets<ConcatenationExpression
+attributes
+	open : String
+	close : String
+operations
+end
+
+class StringVariable<Statement,Vars
+attributes
+	name : String
+operations
+end
+
+class NumVariable<Statement,Vars
+attributes
+	name : String
+operations
+end
+
+class BoolVariable<Statement,Vars
+attributes
+	name : String
+operations
+end
+
+class Constant<Statement,Vars
+attributes
+	name : String
+operations
+end
+
+class Primitive<LiteralAbs
+attributes
+	value : String
+operations
+end
+
+class Vars
+attributes
+operations
+end
+
+class LiteralAbs<ConcatenationExpression
+attributes
+operations
+end
+
+class Literal<BoolExpression,MathExpression,LiteralAbs
+attributes
+	nul : String
+operations
+end
+
+class BoolLiteral<BoolExpression,Primitive
+attributes
+operations
+end
+
+class NumLiteral<MathExpression,Primitive
+attributes
+operations
+end
+
+class StringLiteral<Primitive
+attributes
+operations
+end
+
+class EVENT
+attributes
+	name : String
+operations
+end
+
+class SESSION<Literal
+attributes
+	name : String
+operations
+end
+
+class CALLSTATUS<BoolExpression
+attributes
+	name : String
+operations
+end
+
+class OperationBool<BoolExpression
+attributes
+	op : String
+operations
+end
+
+class Operation<MathExpression
+attributes
+	op : String
+operations
+end
+
+class Concatenation<ConcatenationExpression
+attributes
+	op : String
+operations
+end
+
+composition xxx_Document_elements between
+	Document[0..1] role xxx_Document_elements_src
+	Statement[*] role elements
+end
+
+composition xxx_Document_sta between
+	Document[0..1] role xxx_Document_sta_src
+	State[*] role sta
+end
+
+composition xxx_State_stms between
+	State[0..1] role xxx_State_stms_src
+	AbstractElement[*] role stms
+end
+
+association xxx_Data_vari between
+	Data[*] role xxx_Data_vari_src
+	Vars[0..1] role vari
+end
+
+composition xxx_Data_value between
+	Data[*] role xxx_Data_value_src
+	Param[0..1] role value
+end
+
+composition xxx_Data_stms between
+	Data[0..1] role xxx_Data_stms_src
+	NotPrimaryParam[*] role stms
+end
+
+composition xxx_Data_url between
+	Data[*] role xxx_Data_url_src
+	ConcatenationExpression[0..1] role url
+end
+
+composition xxx_Call_to between
+	Call[*] role xxx_Call_to_src
+	ConcatenationExpression[0..1] role to
+end
+
+composition xxx_Dial_to between
+	Dial[*] role xxx_Dial_to_src
+	ConcatenationExpression[0..1] role to
+end
+
+composition xxx_Play_file between
+	Play[*] role xxx_Play_file_src
+	ConcatenationExpression[0..1] role file
+end
+
+composition xxx_Send_params between
+	Send[*] role xxx_Send_params_src
+	SendBlock[0..1] role params
+end
+
+composition xxx_Send_url between
+	Send[*] role xxx_Send_url_src
+	ConcatenationExpression[0..1] role url
+end
+
+composition xxx_SendBlock_value between
+	SendBlock[*] role xxx_SendBlock_value_src
+	Param[0..1] role value
+end
+
+composition xxx_SendBlock_stms between
+	SendBlock[0..1] role xxx_SendBlock_stms_src
+	NotPrimaryParam[*] role stms
+end
+
+composition xxx_NotPrimaryParam_value between
+	NotPrimaryParam[*] role xxx_NotPrimaryParam_value_src
+	Param[0..1] role value
+end
+
+composition xxx_Param_value between
+	Param[*] role xxx_Param_value_src
+	ConcatenationExpression[0..1] role value
+end
+
+composition xxx_Say_that between
+	Say[*] role xxx_Say_that_src
+	ConcatenationExpression[0..1] role that
+end
+
+composition xxx_Sms_value between
+	Sms[*] role xxx_Sms_value_src
+	ConcatenationExpression[0..1] role value
+end
+
+composition xxx_Sms_to between
+	Sms[*] role xxx_Sms_to_src
+	ConcatenationExpression[0..1] role to
+end
+
+composition xxx_Email_title between
+	Email[*] role xxx_Email_title_src
+	ConcatenationExpression[0..1] role title
+end
+
+composition xxx_Email_from_ between
+	Email[*] role xxx_Email_from__src
+	ConcatenationExpression[0..1] role from_
+end
+
+composition xxx_Email_value between
+	Email[*] role xxx_Email_value_src
+	ConcatenationExpression[0..1] role value
+end
+
+composition xxx_Email_to between
+	Email[*] role xxx_Email_to_src
+	ConcatenationExpression[0..1] role to
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[0..1] role target
+end
+
+composition xxx_Transition_event between
+	Transition[*] role xxx_Transition_event_src
+	EVENT[0..1] role event
+end
+
+composition xxx_IfExp_block between
+	IfExp[*] role xxx_IfExp_block_src
+	CondBlock[0..1] role block
+end
+
+composition xxx_IfExp_blocks between
+	IfExp[0..1] role xxx_IfExp_blocks_src
+	CondBlock[*] role blocks
+end
+
+composition xxx_IfExp_defaultBlock between
+	IfExp[*] role xxx_IfExp_defaultBlock_src
+	Block[0..1] role defaultBlock
+end
+
+composition xxx_CondBlock_cond between
+	CondBlock[*] role xxx_CondBlock_cond_src
+	BoolExpression[0..1] role cond
+end
+
+composition xxx_CondBlock_action between
+	CondBlock[*] role xxx_CondBlock_action_src
+	Block[0..1] role action
+end
+
+composition xxx_Block_sta between
+	Block[0..1] role xxx_Block_sta_src
+	AbstractElement[*] role sta
+end
+
+composition xxx_Brackets_obj between
+	Brackets[*] role xxx_Brackets_obj_src
+	BoolExpression[0..1] role obj
+end
+
+composition xxx_CompareExpression_left between
+	CompareExpression[*] role xxx_CompareExpression_left_src
+	LiteralAbs[0..1] role left
+end
+
+composition xxx_CompareExpression_right between
+	CompareExpression[*] role xxx_CompareExpression_right_src
+	LiteralAbs[0..1] role right
+end
+
+composition xxx_NegExpression_obj between
+	NegExpression[*] role xxx_NegExpression_obj_src
+	BoolExpression[0..1] role obj
+end
+
+composition xxx_MathBrackets_obj between
+	MathBrackets[*] role xxx_MathBrackets_obj_src
+	MathExpression[0..1] role obj
+end
+
+composition xxx_ConcatenationBrackets_obj between
+	ConcatenationBrackets[*] role xxx_ConcatenationBrackets_obj_src
+	ConcatenationExpression[0..1] role obj
+end
+
+composition xxx_StringVariable_value between
+	StringVariable[*] role xxx_StringVariable_value_src
+	ConcatenationExpression[0..1] role value
+end
+
+composition xxx_NumVariable_value between
+	NumVariable[*] role xxx_NumVariable_value_src
+	MathExpression[0..1] role value
+end
+
+composition xxx_BoolVariable_value between
+	BoolVariable[*] role xxx_BoolVariable_value_src
+	BoolExpression[0..1] role value
+end
+
+composition xxx_Constant_value between
+	Constant[*] role xxx_Constant_value_src
+	Primitive[0..1] role value
+end
+
+association xxx_Literal_v between
+	Literal[*] role xxx_Literal_v_src
+	Vars[0..1] role v
+end
+
+composition xxx_OperationBool_left between
+	OperationBool[*] role xxx_OperationBool_left_src
+	BoolExpression[0..1] role left
+end
+
+composition xxx_OperationBool_right between
+	OperationBool[*] role xxx_OperationBool_right_src
+	BoolExpression[0..1] role right
+end
+
+composition xxx_Operation_left between
+	Operation[*] role xxx_Operation_left_src
+	MathExpression[0..1] role left
+end
+
+composition xxx_Operation_right between
+	Operation[*] role xxx_Operation_right_src
+	MathExpression[0..1] role right
+end
+
+composition xxx_Concatenation_left between
+	Concatenation[*] role xxx_Concatenation_left_src
+	ConcatenationExpression[0..1] role left
+end
+
+composition xxx_Concatenation_right between
+	Concatenation[*] role xxx_Concatenation_right_src
+	ConcatenationExpression[0..1] role right
+end
+

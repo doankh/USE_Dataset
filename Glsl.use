@@ -1,0 +1,656 @@
+model glsl
+enum LogicOp{
+default
+}
+
+class SourceFile
+attributes
+operations
+end
+
+class PrecompilerStatement
+attributes
+operations
+end
+
+class PrecompilerVersion<PrecompilerStatement
+attributes
+	version : Integer
+	profile : String
+operations
+end
+
+class Symbol
+attributes
+operations
+end
+
+class FunctionPrototype<Symbol,FunctionDefinition
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class ScalarType<Type
+attributes
+operations
+end
+
+class ComplexType<Type
+attributes
+operations
+end
+
+class VecType<ComplexType
+attributes
+operations
+end
+
+class MatType<ComplexType
+attributes
+operations
+end
+
+class FunctionDefinition<Symbol
+attributes
+operations
+end
+
+class FunctionCall
+attributes
+	name : String
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class SwitchCase
+attributes
+	case : Integer
+	fcase : String
+operations
+end
+
+class BlockStatement<Statement
+attributes
+operations
+end
+
+class JumpStatement<Statement
+attributes
+operations
+end
+
+class VariableDeclaration<Symbol,Statement
+attributes
+	name : String
+operations
+end
+
+class AssignmentStatement<Statement
+attributes
+operations
+end
+
+class Exp
+attributes
+operations
+end
+
+class AbstractDefinition
+attributes
+	name : String
+operations
+end
+
+class Definition<AbstractDefinition
+attributes
+operations
+end
+
+class DeclaredParameter<AbstractDefinition
+attributes
+operations
+end
+
+class Evaluation
+attributes
+operations
+end
+
+class UniformDeclaration<Symbol
+attributes
+	qualifier : String
+	name : String
+operations
+end
+
+class InAttributeDeclaration<Symbol
+attributes
+	qualifier : String
+	name : String
+operations
+end
+
+class OutAttributeDeclaration<Symbol
+attributes
+	qualifier : String
+	name : String
+operations
+end
+
+class InOutAttributeDeclaration<Symbol
+attributes
+	qualifier : String
+	name : String
+operations
+end
+
+class VoidType<Type
+attributes
+operations
+end
+
+class IntType<ScalarType
+attributes
+operations
+end
+
+class UIntType<ScalarType
+attributes
+operations
+end
+
+class BoolType<ScalarType
+attributes
+operations
+end
+
+class FloatType<ScalarType
+attributes
+operations
+end
+
+class Vec2Type<VecType
+attributes
+operations
+end
+
+class Vec3Type<VecType
+attributes
+operations
+end
+
+class Vec4Type<VecType
+attributes
+operations
+end
+
+class IVec2Type<VecType
+attributes
+operations
+end
+
+class IVec3Type<VecType
+attributes
+operations
+end
+
+class IVec4Type<VecType
+attributes
+operations
+end
+
+class UVec2Type<VecType
+attributes
+operations
+end
+
+class UVec3Type<VecType
+attributes
+operations
+end
+
+class UVec4Type<VecType
+attributes
+operations
+end
+
+class BVec2Type<VecType
+attributes
+operations
+end
+
+class BVec3Type<VecType
+attributes
+operations
+end
+
+class BVec4Type<VecType
+attributes
+operations
+end
+
+class Mat2Type<MatType
+attributes
+operations
+end
+
+class Mat3Type<MatType
+attributes
+operations
+end
+
+class Mat4Type<MatType
+attributes
+operations
+end
+
+class Mat2x2Type<MatType
+attributes
+operations
+end
+
+class Mat2x3Type<MatType
+attributes
+operations
+end
+
+class Mat2x4Type<MatType
+attributes
+operations
+end
+
+class Mat3x2Type<MatType
+attributes
+operations
+end
+
+class Mat3x3Type<MatType
+attributes
+operations
+end
+
+class Mat3x4Type<MatType
+attributes
+operations
+end
+
+class Mat4x2Type<MatType
+attributes
+operations
+end
+
+class Mat4x3Type<MatType
+attributes
+operations
+end
+
+class Mat4x4Type<MatType
+attributes
+operations
+end
+
+class SymbolRef<Statement,Exp
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class WhileStatement<Statement
+attributes
+operations
+end
+
+class ForStatement<Statement
+attributes
+operations
+end
+
+class SwitchStatement<Statement
+attributes
+operations
+end
+
+class Return<JumpStatement
+attributes
+operations
+end
+
+class InlineIfExp<Exp
+attributes
+operations
+end
+
+class LogicExp<Exp
+attributes
+	op : LogicOp
+operations
+end
+
+class AddExp<Exp
+attributes
+	op : String
+operations
+end
+
+class MulExp<Exp
+attributes
+	op : String
+operations
+end
+
+class SymbolRefInvocation<Exp
+attributes
+operations
+end
+
+class SymbolRefMember<Exp
+attributes
+	member : String
+operations
+end
+
+class Constructor<Exp
+attributes
+operations
+end
+
+class IntegerLiteral<Exp
+attributes
+	value : Integer
+operations
+end
+
+class UIntegerLiteral<Exp
+attributes
+	value : Integer
+operations
+end
+
+class FloatLiteral<Exp
+attributes
+	value : String
+operations
+end
+
+class BoolLiteral<Exp
+attributes
+	value : Boolean
+operations
+end
+
+composition xxx_SourceFile_pre_ between
+	SourceFile[0..1] role xxx_SourceFile_pre__src
+	PrecompilerStatement[*] role pre_
+end
+
+composition xxx_SourceFile_uniforms between
+	SourceFile[0..1] role xxx_SourceFile_uniforms_src
+	Symbol[*] role uniforms
+end
+
+composition xxx_SourceFile_attribs between
+	SourceFile[0..1] role xxx_SourceFile_attribs_src
+	Symbol[*] role attribs
+end
+
+composition xxx_SourceFile_prototypes between
+	SourceFile[0..1] role xxx_SourceFile_prototypes_src
+	FunctionPrototype[*] role prototypes
+end
+
+composition xxx_SourceFile_functions between
+	SourceFile[0..1] role xxx_SourceFile_functions_src
+	FunctionDefinition[*] role functions
+end
+
+composition xxx_SourceFile_variables between
+	SourceFile[0..1] role xxx_SourceFile_variables_src
+	VariableDeclaration[*] role variables
+end
+
+composition xxx_FunctionPrototype_type between
+	FunctionPrototype[*] role xxx_FunctionPrototype_type_src
+	Type[0..1] role type
+end
+
+composition xxx_FunctionPrototype_params between
+	FunctionPrototype[0..1] role xxx_FunctionPrototype_params_src
+	Parameter[*] role params
+end
+
+composition xxx_FunctionPrototype_statements between
+	FunctionPrototype[0..1] role xxx_FunctionPrototype_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[0..1] role type
+end
+
+association xxx_FunctionCall_func between
+	FunctionCall[*] role xxx_FunctionCall_func_src
+	FunctionDefinition[0..1] role func
+end
+
+composition xxx_FunctionCall_args between
+	FunctionCall[0..1] role xxx_FunctionCall_args_src
+	Exp[*] role args
+end
+
+composition xxx_SwitchCase_then_ between
+	SwitchCase[*] role xxx_SwitchCase_then__src
+	Statement[0..1] role then_
+end
+
+composition xxx_BlockStatement_statements between
+	BlockStatement[0..1] role xxx_BlockStatement_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_VariableDeclaration_type between
+	VariableDeclaration[*] role xxx_VariableDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_VariableDeclaration_init between
+	VariableDeclaration[*] role xxx_VariableDeclaration_init_src
+	Exp[0..1] role init
+end
+
+association xxx_AssignmentStatement_variable between
+	AssignmentStatement[*] role xxx_AssignmentStatement_variable_src
+	Symbol[0..1] role variable
+end
+
+composition xxx_AssignmentStatement_right between
+	AssignmentStatement[*] role xxx_AssignmentStatement_right_src
+	Exp[0..1] role right
+end
+
+composition xxx_Definition_args between
+	Definition[0..1] role xxx_Definition_args_src
+	DeclaredParameter[*] role args
+end
+
+composition xxx_Evaluation_expression between
+	Evaluation[*] role xxx_Evaluation_expression_src
+	Exp[0..1] role expression
+end
+
+composition xxx_UniformDeclaration_type between
+	UniformDeclaration[*] role xxx_UniformDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_InAttributeDeclaration_type between
+	InAttributeDeclaration[*] role xxx_InAttributeDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_OutAttributeDeclaration_type between
+	OutAttributeDeclaration[*] role xxx_OutAttributeDeclaration_type_src
+	Type[0..1] role type
+end
+
+composition xxx_InOutAttributeDeclaration_type between
+	InOutAttributeDeclaration[*] role xxx_InOutAttributeDeclaration_type_src
+	Type[0..1] role type
+end
+
+association xxx_SymbolRef_symbol between
+	SymbolRef[*] role xxx_SymbolRef_symbol_src
+	Symbol[0..1] role symbol
+end
+
+composition xxx_SymbolRef_actuals between
+	SymbolRef[0..1] role xxx_SymbolRef_actuals_src
+	Exp[*] role actuals
+end
+
+composition xxx_IfStatement_condition between
+	IfStatement[*] role xxx_IfStatement_condition_src
+	Exp[0..1] role condition
+end
+
+composition xxx_IfStatement_then_ between
+	IfStatement[*] role xxx_IfStatement_then__src
+	Statement[0..1] role then_
+end
+
+composition xxx_IfStatement_else_ between
+	IfStatement[*] role xxx_IfStatement_else__src
+	Statement[0..1] role else_
+end
+
+composition xxx_WhileStatement_condition between
+	WhileStatement[*] role xxx_WhileStatement_condition_src
+	Exp[0..1] role condition
+end
+
+composition xxx_WhileStatement_do between
+	WhileStatement[*] role xxx_WhileStatement_do_src
+	Statement[0..1] role do_
+end
+
+composition xxx_ForStatement_b between
+	ForStatement[*] role xxx_ForStatement_b_src
+	Exp[0..1] role b
+end
+
+composition xxx_ForStatement_c between
+	ForStatement[*] role xxx_ForStatement_c_src
+	Exp[0..1] role c
+end
+
+composition xxx_ForStatement_do between
+	ForStatement[*] role xxx_ForStatement_do_src
+	Statement[0..1] role do_
+end
+
+composition xxx_SwitchStatement_a between
+	SwitchStatement[*] role xxx_SwitchStatement_a_src
+	Exp[0..1] role a
+end
+
+composition xxx_SwitchStatement_cases between
+	SwitchStatement[0..1] role xxx_SwitchStatement_cases_src
+	SwitchCase[*] role cases
+end
+
+composition xxx_Return_value between
+	Return[*] role xxx_Return_value_src
+	Exp[0..1] role value
+end
+
+composition xxx_InlineIfExp_condition between
+	InlineIfExp[*] role xxx_InlineIfExp_condition_src
+	Exp[0..1] role condition
+end
+
+composition xxx_InlineIfExp_then_ between
+	InlineIfExp[*] role xxx_InlineIfExp_then__src
+	Exp[0..1] role then_
+end
+
+composition xxx_InlineIfExp_else_ between
+	InlineIfExp[*] role xxx_InlineIfExp_else__src
+	Exp[0..1] role else_
+end
+
+composition xxx_LogicExp_left between
+	LogicExp[*] role xxx_LogicExp_left_src
+	Exp[0..1] role left
+end
+
+composition xxx_LogicExp_right between
+	LogicExp[*] role xxx_LogicExp_right_src
+	Exp[0..1] role right
+end
+
+composition xxx_AddExp_left between
+	AddExp[*] role xxx_AddExp_left_src
+	Exp[0..1] role left
+end
+
+composition xxx_AddExp_right between
+	AddExp[*] role xxx_AddExp_right_src
+	Exp[0..1] role right
+end
+
+composition xxx_MulExp_left between
+	MulExp[*] role xxx_MulExp_left_src
+	Exp[0..1] role left
+end
+
+composition xxx_MulExp_right between
+	MulExp[*] role xxx_MulExp_right_src
+	Exp[0..1] role right
+end
+
+composition xxx_SymbolRefInvocation_symbolref between
+	SymbolRefInvocation[*] role xxx_SymbolRefInvocation_symbolref_src
+	SymbolRef[0..1] role symbolref
+end
+
+composition xxx_SymbolRefInvocation_actuals between
+	SymbolRefInvocation[0..1] role xxx_SymbolRefInvocation_actuals_src
+	Exp[*] role actuals
+end
+
+composition xxx_SymbolRefMember_symbolref between
+	SymbolRefMember[*] role xxx_SymbolRefMember_symbolref_src
+	SymbolRef[0..1] role symbolref
+end
+
+composition xxx_Constructor_type between
+	Constructor[*] role xxx_Constructor_type_src
+	ComplexType[0..1] role type
+end
+
+composition xxx_Constructor_params between
+	Constructor[0..1] role xxx_Constructor_params_src
+	Exp[*] role params
+end
+

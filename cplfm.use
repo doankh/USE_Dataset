@@ -1,0 +1,185 @@
+model cplfm
+class ConstituentModel
+attributes
+	name : String
+operations
+end
+
+class Parallel
+attributes
+	processList : Integer
+operations
+end
+
+abstract class Grid
+attributes
+operations
+end
+
+abstract class StructuredGrid<Grid
+attributes
+operations
+end
+
+class LogicallyRectangularGrid<StructuredGrid
+attributes
+operations
+end
+
+class UnstructuredGrid<Grid
+attributes
+operations
+end
+
+class Field
+attributes
+	name : String
+operations
+end
+
+class Coordinates
+attributes
+operations
+end
+
+class UniformCoordinates<Coordinates
+attributes
+operations
+end
+
+class RectilinearCoordinates<Coordinates
+attributes
+operations
+end
+
+class CurvilinearCoordinates<Coordinates
+attributes
+operations
+end
+
+abstract class DomainDecomposition
+attributes
+operations
+end
+
+class SegmentDecomposition<DomainDecomposition
+attributes
+operations
+end
+
+class BlockDecomposition<DomainDecomposition
+attributes
+operations
+end
+
+class Coupler
+attributes
+	name : String
+operations
+end
+
+abstract class Connector
+attributes
+operations
+end
+
+class MemoryToMemoryConnector<Connector
+attributes
+operations
+end
+
+class MemoryToFileConnector<Connector
+attributes
+operations
+end
+
+class MPIConnector<Connector
+attributes
+operations
+end
+
+abstract class Transformation
+attributes
+operations
+end
+
+abstract class InterconstituentTransformation<Transformation
+attributes
+operations
+end
+
+class CopyTransformation<InterconstituentTransformation
+attributes
+operations
+end
+
+class RedistributeTransformation<InterconstituentTransformation
+attributes
+operations
+end
+
+abstract class RegridTransformation<InterconstituentTransformation
+attributes
+operations
+end
+
+class LinearRegridTransformation<RegridTransformation
+attributes
+operations
+end
+
+class ConservativeRegridTransformation<RegridTransformation
+attributes
+operations
+end
+
+abstract class IntraconstituentTransformation<Transformation
+attributes
+operations
+end
+
+class TimeIntegrationTransformation<IntraconstituentTransformation
+attributes
+operations
+end
+
+composition xxx_ConstituentModel_grid between
+	ConstituentModel[*] role xxx_ConstituentModel_grid_src
+	Grid[1] role grid
+end
+
+composition xxx_ConstituentModel_parallel between
+	ConstituentModel[*] role xxx_ConstituentModel_parallel_src
+	Parallel[0..1] role parallel
+end
+
+composition xxx_ConstituentModel_field between
+	ConstituentModel[0..1] role xxx_ConstituentModel_field_src
+	Field[*] role field
+end
+
+association xxx_Parallel_domainDecomposition between
+	Parallel[*] role xxx_Parallel_domainDecomposition_src
+	DomainDecomposition[1] role domainDecomposition
+end
+
+composition xxx_LogicallyRectangularGrid_coordinates between
+	LogicallyRectangularGrid[*] role xxx_LogicallyRectangularGrid_coordinates_src
+	Coordinates[0..1] role coordinates
+end
+
+composition xxx_Coupler_connector between
+	Coupler[*] role xxx_Coupler_connector_src
+	Connector[1] role connector
+end
+
+composition xxx_Coupler_transformation between
+	Coupler[*] role xxx_Coupler_transformation_src
+	Transformation[1] role transformation
+end
+
+composition xxx_Coupler_constituentModel between
+	Coupler[0..1] role xxx_Coupler_constituentModel_src
+	ConstituentModel[*] role constituentModel
+end
+

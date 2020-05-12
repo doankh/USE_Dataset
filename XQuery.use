@@ -1,0 +1,228 @@
+model XQuery
+class XQueryProgram
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class ExecutableExpression<Expression
+attributes
+operations
+end
+
+class Node<Expression
+attributes
+	name : String
+operations
+end
+
+class FLWOR<ExecutableExpression
+attributes
+operations
+end
+
+class FunctionCall<ExecutableExpression
+attributes
+	name : String
+operations
+end
+
+class FunctionDeclaration<ExecutableExpression
+attributes
+	name : String
+operations
+end
+
+class ElementNode<Node
+attributes
+operations
+end
+
+class AttributeNode<Node
+attributes
+	value : String
+operations
+end
+
+class TextNode<ElementNode
+attributes
+operations
+end
+
+class ReturnXPath<Expression
+attributes
+	value : String
+operations
+end
+
+class XPath<ReturnXPath
+attributes
+operations
+end
+
+class BooleanExp<XPath
+attributes
+operations
+end
+
+class For
+attributes
+	var : String
+operations
+end
+
+class Let_
+attributes
+	var : String
+operations
+end
+
+class Where
+attributes
+operations
+end
+
+class OrderBy
+attributes
+operations
+end
+
+class Return
+attributes
+operations
+end
+
+composition xxx_XQueryProgram_expressions between
+	XQueryProgram[0..1] role xxx_XQueryProgram_expressions_src
+	ExecutableExpression[*] role expressions
+end
+
+association xxx_Expression_parentNode between
+	Expression[*] role xxx_Expression_parentNode_src
+	ElementNode[0..1] role parentNode
+end
+
+association xxx_Expression_returnEx between
+	Expression[*] role xxx_Expression_returnEx_src
+	Return[1] role returnEx
+end
+
+association xxx_ExecutableExpression_xQueryProgram between
+	ExecutableExpression[*] role xxx_ExecutableExpression_xQueryProgram_src
+	XQueryProgram[1] role xQueryProgram
+end
+
+association xxx_ExecutableExpression_functionDeclaration between
+	ExecutableExpression[*] role xxx_ExecutableExpression_functionDeclaration_src
+	FunctionDeclaration[1] role functionDeclaration
+end
+
+composition xxx_FLWOR_for_ between
+	FLWOR[*] role xxx_FLWOR_for__src
+	For[1] role for_
+end
+
+composition xxx_FLWOR_let between
+	FLWOR[*] role xxx_FLWOR_let_src
+	Let_[1] role let_
+end
+
+composition xxx_FLWOR_where between
+	FLWOR[*] role xxx_FLWOR_where_src
+	Where[1] role where
+end
+
+composition xxx_FLWOR_orderBy between
+	FLWOR[*] role xxx_FLWOR_orderBy_src
+	OrderBy[1] role orderBy
+end
+
+composition xxx_FLWOR_return between
+	FLWOR[*] role xxx_FLWOR_return_src
+	Return[1] role return
+end
+
+composition xxx_FunctionCall_parameters between
+	FunctionCall[0..1] role xxx_FunctionCall_parameters_src
+	XPath[*] role parameters
+end
+
+composition xxx_FunctionDeclaration_expression between
+	FunctionDeclaration[0..1] role xxx_FunctionDeclaration_expression_src
+	ExecutableExpression[1..*] role expression
+end
+
+composition xxx_ElementNode_nodes between
+	ElementNode[0..1] role xxx_ElementNode_nodes_src
+	Expression[*] role nodes
+end
+
+association xxx_XPath_functionCall between
+	XPath[*] role xxx_XPath_functionCall_src
+	FunctionCall[1] role functionCall
+end
+
+association xxx_XPath_for_ between
+	XPath[*] role xxx_XPath_for__src
+	For[1] role for_
+end
+
+association xxx_XPath_let between
+	XPath[*] role xxx_XPath_let_src
+	Let_[1] role Let_
+end
+
+association xxx_BooleanExp_where between
+	BooleanExp[*] role xxx_BooleanExp_where_src
+	Where[1] role where
+end
+
+association xxx_For_flwor between
+	For[*] role xxx_For_flwor_src
+	FLWOR[1] role flwor
+end
+
+composition xxx_For_expression between
+	For[*] role xxx_For_expression_src
+	XPath[1] role expression
+end
+
+association xxx_Let_flwor between
+	Let_[*] role xxx_Let_flwor_src
+	FLWOR[1] role flwor
+end
+
+composition xxx_Let_expression between
+	Let_[*] role xxx_Let_expression_src
+	XPath[1] role expression
+end
+
+association xxx_Where_flwor between
+	Where[*] role xxx_Where_flwor_src
+	FLWOR[1] role flwor
+end
+
+composition xxx_Where_expression between
+	Where[*] role xxx_Where_expression_src
+	BooleanExp[1] role expression
+end
+
+composition xxx_OrderBy_flwor between
+	OrderBy[*] role xxx_OrderBy_flwor_src
+	FLWOR[1] role flwor
+end
+
+association xxx_Return_flwor between
+	Return[*] role xxx_Return_flwor_src
+	FLWOR[1] role flwor
+end
+
+composition xxx_Return_expressions between
+	Return[0..1] role xxx_Return_expressions_src
+	Expression[*] role expressions
+end
+

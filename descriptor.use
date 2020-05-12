@@ -1,0 +1,101 @@
+model descriptor
+class DescriptorLibrary<NamedElement
+attributes
+operations
+end
+
+class TriggerDesc<BuildingBlockDesc
+attributes
+operations
+end
+
+class ConditionDesc<BuildingBlockDesc
+attributes
+operations
+end
+
+class ConditionalStepDesc<StepDesc
+attributes
+operations
+end
+
+class DomainObjectDesc<Classifier
+attributes
+	contentURI : String
+	projection : String
+	selection : String
+	selectionArgs : String
+	sortOrder : String
+operations
+end
+
+class QueryDesc<BuildingBlockDesc
+attributes
+operations
+end
+
+abstract class BuildingBlockDesc<Classifier
+attributes
+	iconUrl : String
+operations
+end
+
+class Property<NamedElement
+attributes
+	canReferToOther : Boolean
+	canBeReferedTo : Boolean
+	isResultValue : Boolean
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class Value
+attributes
+	name : String
+operations
+end
+
+class StepDesc<BuildingBlockDesc
+attributes
+operations
+end
+
+abstract class Classifier<NamedElement
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+	userFriendlyName : String
+	description : String
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+composition xxx_DescriptorLibrary_buildingBlocks between
+	DescriptorLibrary[0..1] role xxx_DescriptorLibrary_buildingBlocks_src
+	Classifier[*] role buildingBlocks
+end
+
+composition xxx_BuildingBlockDesc_properties between
+	BuildingBlockDesc[0..1] role xxx_BuildingBlockDesc_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Property_allowedValues between
+	Property[0..1] role xxx_Property_allowedValues_src
+	Value[*] role allowedValues
+end
+
+association xxx_Property_dataType between
+	Property[*] role xxx_Property_dataType_src
+	Classifier[1] role dataType
+end
+

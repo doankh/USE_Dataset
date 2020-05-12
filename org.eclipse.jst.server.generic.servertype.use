@@ -1,0 +1,214 @@
+model definition
+class ArchiveType
+attributes
+	path : String
+operations
+end
+
+class ArgumentPair
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Classpath
+attributes
+	group : String
+	id : String
+operations
+end
+
+class ExcludeType
+attributes
+	name : String
+operations
+end
+
+class External
+attributes
+	value : String
+	os : String
+operations
+end
+
+class FilesetType
+attributes
+	group : String
+	casesensitive : Boolean
+	dir : String
+operations
+end
+
+class IncludeType
+attributes
+	name : String
+operations
+end
+
+class JndiConnection
+attributes
+	providerUrl : String
+	group : String
+	initialContextFactory : String
+operations
+end
+
+class LaunchConfiguration
+attributes
+	group : String
+	group1 : String
+	programArguments : String
+	workingDirectory : String
+	mainClass : String
+	group2 : String
+	vmParameters : String
+	classpathReference : String
+	debugPort : String
+	group3 : String
+operations
+end
+
+class Module
+attributes
+	type : String
+	publishDir : String
+	publisherReference : String
+operations
+end
+
+class Port
+attributes
+	no : String
+	name : String
+	protocol : String
+operations
+end
+
+class Project
+attributes
+	classpathReference : String
+operations
+end
+
+class Property
+attributes
+	context_ : String
+	default : String
+	id : String
+	label : String
+	type : String
+operations
+end
+
+class Publisher
+attributes
+	group : String
+	id : String
+operations
+end
+
+class PublisherData
+attributes
+	dataname : String
+	datavalue : String
+operations
+end
+
+class ServerRuntime
+attributes
+	group : String
+	group1 : String
+	group2 : String
+	group3 : String
+	group4 : String
+	name : String
+	version : String
+operations
+end
+
+composition xxx_Classpath_archive between
+	Classpath[0..1] role xxx_Classpath_archive_src
+	ArchiveType[*] role archive
+end
+
+composition xxx_Classpath_fileset between
+	Classpath[0..1] role xxx_Classpath_fileset_src
+	FilesetType[*] role fileset
+end
+
+composition xxx_FilesetType_include between
+	FilesetType[0..1] role xxx_FilesetType_include_src
+	IncludeType[*] role include
+end
+
+composition xxx_FilesetType_exclude between
+	FilesetType[0..1] role xxx_FilesetType_exclude_src
+	ExcludeType[*] role exclude
+end
+
+composition xxx_JndiConnection_jndiProperty between
+	JndiConnection[0..1] role xxx_JndiConnection_jndiProperty_src
+	ArgumentPair[*] role jndiProperty
+end
+
+composition xxx_LaunchConfiguration_environmentVariable between
+	LaunchConfiguration[0..1] role xxx_LaunchConfiguration_environmentVariable_src
+	ArgumentPair[*] role environmentVariable
+end
+
+composition xxx_LaunchConfiguration_external between
+	LaunchConfiguration[0..1] role xxx_LaunchConfiguration_external_src
+	External[*] role external
+end
+
+composition xxx_Publisher_publisherdata between
+	Publisher[0..1] role xxx_Publisher_publisherdata_src
+	PublisherData[1..*] role publisherdata
+end
+
+composition xxx_ServerRuntime_property between
+	ServerRuntime[0..1] role xxx_ServerRuntime_property_src
+	Property[*] role property
+end
+
+composition xxx_ServerRuntime_port between
+	ServerRuntime[0..1] role xxx_ServerRuntime_port_src
+	Port[*] role port
+end
+
+composition xxx_ServerRuntime_module between
+	ServerRuntime[0..1] role xxx_ServerRuntime_module_src
+	Module[1..*] role module
+end
+
+composition xxx_ServerRuntime_project between
+	ServerRuntime[*] role xxx_ServerRuntime_project_src
+	Project[1] role project
+end
+
+composition xxx_ServerRuntime_start between
+	ServerRuntime[*] role xxx_ServerRuntime_start_src
+	LaunchConfiguration[1] role start
+end
+
+composition xxx_ServerRuntime_stop between
+	ServerRuntime[*] role xxx_ServerRuntime_stop_src
+	LaunchConfiguration[1] role stop
+end
+
+composition xxx_ServerRuntime_publisher between
+	ServerRuntime[0..1] role xxx_ServerRuntime_publisher_src
+	Publisher[*] role publisher
+end
+
+composition xxx_ServerRuntime_classpath between
+	ServerRuntime[0..1] role xxx_ServerRuntime_classpath_src
+	Classpath[1..*] role classpath
+end
+
+composition xxx_ServerRuntime_jndiConnection between
+	ServerRuntime[*] role xxx_ServerRuntime_jndiConnection_src
+	JndiConnection[1] role jndiConnection
+end
+

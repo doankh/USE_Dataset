@@ -1,0 +1,114 @@
+model karteikastensystem
+enum Sprache{
+default
+}
+
+enum Karteifachtyp{
+default
+}
+
+class KarteikastenSystem
+attributes
+	filePath : String
+operations
+	addBenutzer(name : String):Person
+	addKarte(id : String):Karte
+end
+
+class Person
+attributes
+	name : String
+	nickName : String
+operations
+	getKarteikasten(von : Sprache,nach : Sprache):Karteikasten
+	addKarteikasten(von : Sprache,nach : Sprache):Karteikasten
+end
+
+class Karteikasten
+attributes
+	vonSprache : Sprache
+	nachSprache : Sprache
+operations
+	getFach(typ : Karteifachtyp):Fach
+	addFach(typ : Karteifachtyp):Fach
+	moveKarteUp(fromFach : Fach,karte : Karte):Boolean
+	moveKarteDown(fach : Fach,karte : Karte):Boolean
+end
+
+class Fach
+attributes
+	typ : Karteifachtyp
+	anzahlKarten : Integer
+	anzahlUnbekannt : Integer
+operations
+	addKarte(karte : Karte)
+	removeKarte(karte : Karte):Boolean
+	getNextKarte():Karte
+	getAnzahlKartenInFolgeGewusst(inFolgeGewusst : Integer):Integer
+end
+
+class Karte
+attributes
+	id : String
+	anzahlGewusstInFolge : Integer
+operations
+	beschrifteSeite(sprache : Sprache,vokabel : String,beispiel : String):Kartenseite
+	getSeite(sprache : Sprache):Kartenseite
+	addSeite(sprache : Sprache):Kartenseite
+	richtig():Integer
+	falsch():Integer
+end
+
+class Kartenseite
+attributes
+	sprache : Sprache
+	vokabel : String
+	beispiel : String
+operations
+end
+
+composition xxx_KarteikastenSystem_benutzer between
+	KarteikastenSystem[0..1] role xxx_KarteikastenSystem_benutzer_src
+	Person[*] role benutzer
+end
+
+composition xxx_KarteikastenSystem_karten between
+	KarteikastenSystem[0..1] role xxx_KarteikastenSystem_karten_src
+	Karte[*] role karten
+end
+
+composition xxx_Person_karteikaesten between
+	Person[*] role xxx_Person_karteikaesten_src
+	Karteikasten[0..12] role karteikaesten
+end
+
+composition xxx_Karteikasten_faecher between
+	Karteikasten[*] role xxx_Karteikasten_faecher_src
+	Fach[5] role faecher
+end
+
+association xxx_Karteikasten_person between
+	Karteikasten[*] role xxx_Karteikasten_person_src
+	Person[1] role person
+end
+
+association xxx_Fach_karten between
+	Fach[0..1] role xxx_Fach_karten_src
+	Karte[*] role karten
+end
+
+association xxx_Fach_karteikasten between
+	Fach[*] role xxx_Fach_karteikasten_src
+	Karteikasten[1] role karteikasten
+end
+
+composition xxx_Karte_seiten between
+	Karte[*] role xxx_Karte_seiten_src
+	Kartenseite[1..2] role seiten
+end
+
+association xxx_Kartenseite_karte between
+	Kartenseite[*] role xxx_Kartenseite_karte_src
+	Karte[0..1] role karte
+end
+

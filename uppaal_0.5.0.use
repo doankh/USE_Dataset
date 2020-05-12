@@ -1,0 +1,1001 @@
+model uppaal
+enum BuiltInType{
+default
+}
+
+enum DataVariablePrefix{
+default
+}
+
+enum CallType{
+default
+}
+
+enum LocationKind{
+default
+}
+
+enum SynchronizationKind{
+default
+}
+
+enum AssignmentOperator{
+default
+}
+
+enum ArithmeticOperator{
+default
+}
+
+enum LogicalOperator{
+default
+}
+
+enum CompareOperator{
+default
+}
+
+enum Quantifier{
+default
+}
+
+enum IncrementDecrementOperator{
+default
+}
+
+enum IncrementDecrementPosition{
+default
+}
+
+enum BitShiftOperator{
+default
+}
+
+enum MinMaxOperator{
+default
+}
+
+enum BitwiseOperator{
+default
+}
+
+enum ColorKind{
+default
+}
+
+class NTA<NamedElement,CommentableElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class CommentableElement
+attributes
+	comment : String
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+	baseType : BuiltInType
+operations
+end
+
+class PredefinedType<Type
+attributes
+	type : BuiltInType
+operations
+end
+
+class DeclaredType<Type
+attributes
+operations
+end
+
+abstract class TypeDefinition
+attributes
+	baseType : BuiltInType
+operations
+end
+
+class TypeReference<TypeDefinition
+attributes
+operations
+end
+
+abstract class TypeSpecification<TypeDefinition
+attributes
+operations
+end
+
+class ScalarTypeSpecification<TypeSpecification
+attributes
+operations
+end
+
+class StructTypeSpecification<TypeSpecification
+attributes
+operations
+end
+
+class RangeTypeSpecification<TypeSpecification
+attributes
+operations
+end
+
+class IntegerBounds
+attributes
+operations
+end
+
+class Library
+attributes
+operations
+end
+
+abstract class Declarations
+attributes
+operations
+end
+
+class GlobalDeclarations<Declarations
+attributes
+operations
+end
+
+class LocalDeclarations<Declarations
+attributes
+operations
+end
+
+class SystemDeclarations<Declarations
+attributes
+operations
+end
+
+abstract class Declaration
+attributes
+operations
+end
+
+abstract class VariableDeclaration<Declaration,VariableContainer
+attributes
+operations
+end
+
+class ChannelVariableDeclaration<VariableDeclaration
+attributes
+	urgent : Boolean
+	broadcast : Boolean
+operations
+end
+
+class ClockVariableDeclaration<VariableDeclaration
+attributes
+operations
+end
+
+class DataVariableDeclaration<VariableDeclaration
+attributes
+	prefix : DataVariablePrefix
+operations
+end
+
+class FunctionDeclaration<Declaration
+attributes
+operations
+end
+
+class Function<NamedElement
+attributes
+operations
+end
+
+class TypeDeclaration<Declaration
+attributes
+operations
+end
+
+class Variable<NamedElement
+attributes
+operations
+end
+
+abstract class Index
+attributes
+operations
+end
+
+class ValueIndex<Index
+attributes
+operations
+end
+
+class TypeIndex<Index
+attributes
+operations
+end
+
+abstract class VariableContainer
+attributes
+operations
+end
+
+class Parameter
+attributes
+	callType : CallType
+operations
+end
+
+abstract class Initializer
+attributes
+operations
+end
+
+class ExpressionInitializer<Initializer
+attributes
+operations
+end
+
+class ArrayInitializer<Initializer
+attributes
+operations
+end
+
+class ChannelPriority
+attributes
+operations
+end
+
+abstract class ChannelPriorityItem
+attributes
+operations
+end
+
+class ChannelList<ChannelPriorityItem
+attributes
+operations
+end
+
+class DefaultChannelPriority<ChannelPriorityItem
+attributes
+operations
+end
+
+class TemplateDeclaration<Declaration
+attributes
+operations
+end
+
+class System
+attributes
+operations
+end
+
+class InstantiationList
+attributes
+operations
+end
+
+class ProgressMeasure
+attributes
+operations
+end
+
+abstract class AbstractTemplate<NamedElement,CommentableElement
+attributes
+operations
+end
+
+class Template<AbstractTemplate
+attributes
+operations
+end
+
+class RedefinedTemplate<AbstractTemplate
+attributes
+operations
+end
+
+class Location<NamedElement,CommentableElement,PlanarElement,ColoredElement
+attributes
+	locationTimeKind : LocationKind
+operations
+end
+
+class Edge<LinearElement,CommentableElement,ColoredElement
+attributes
+operations
+end
+
+class Synchronization
+attributes
+	kind : SynchronizationKind
+operations
+end
+
+class Selection<VariableContainer
+attributes
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class Block<Statement
+attributes
+operations
+end
+
+class EmptyStatement<Statement
+attributes
+operations
+end
+
+class ForLoop<Statement
+attributes
+operations
+end
+
+class Iteration<Statement,VariableContainer
+attributes
+operations
+end
+
+class WhileLoop<Statement
+attributes
+operations
+end
+
+class DoWhileLoop<Statement
+attributes
+operations
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+operations
+end
+
+class ExpressionStatement<Statement
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class NegationExpression<Expression
+attributes
+operations
+end
+
+class PlusExpression<Expression
+attributes
+operations
+end
+
+class MinusExpression<Expression
+attributes
+operations
+end
+
+abstract class BinaryExpression<Expression
+attributes
+operations
+end
+
+class AssignmentExpression<BinaryExpression
+attributes
+	operator : AssignmentOperator
+operations
+end
+
+class IdentifierExpression<Expression
+attributes
+operations
+end
+
+class LiteralExpression<Expression
+attributes
+	text : String
+operations
+end
+
+class ArithmeticExpression<BinaryExpression
+attributes
+	operator : ArithmeticOperator
+operations
+end
+
+class LogicalExpression<BinaryExpression
+attributes
+	operator : LogicalOperator
+operations
+end
+
+class FunctionCallExpression<Expression
+attributes
+operations
+end
+
+class CompareExpression<BinaryExpression
+attributes
+	operator : CompareOperator
+operations
+end
+
+class ConditionExpression<Expression
+attributes
+operations
+end
+
+class ScopedIdentifierExpression<Expression
+attributes
+operations
+end
+
+class QuantificationExpression<Expression,VariableContainer
+attributes
+	quantifier : Quantifier
+operations
+end
+
+class IncrementDecrementExpression<Expression
+attributes
+	position : IncrementDecrementPosition
+	operator : IncrementDecrementOperator
+operations
+end
+
+class BitShiftExpression<BinaryExpression
+attributes
+	operator : BitShiftOperator
+operations
+end
+
+class MinMaxExpression<BinaryExpression
+attributes
+	operator : MinMaxOperator
+operations
+end
+
+class BitwiseExpression<BinaryExpression
+attributes
+	operator : BitwiseOperator
+operations
+end
+
+abstract class ColoredElement
+attributes
+	color : ColorKind
+	colorCode : String
+operations
+end
+
+abstract class PlanarElement
+attributes
+operations
+end
+
+abstract class LinearElement
+attributes
+operations
+end
+
+class Point
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+composition xxx_NTA_globalDeclarations between
+	NTA[*] role xxx_NTA_globalDeclarations_src
+	GlobalDeclarations[0..1] role globalDeclarations
+end
+
+composition xxx_NTA_template between
+	NTA[0..1] role xxx_NTA_template_src
+	Template[1..*] role template
+end
+
+composition xxx_NTA_systemDeclarations between
+	NTA[*] role xxx_NTA_systemDeclarations_src
+	SystemDeclarations[1] role systemDeclarations
+end
+
+composition xxx_NTA_int between
+	NTA[*] role xxx_NTA_int_src
+	PredefinedType[1] role int
+end
+
+composition xxx_NTA_bool between
+	NTA[*] role xxx_NTA_bool_src
+	PredefinedType[1] role bool
+end
+
+composition xxx_NTA_clock between
+	NTA[*] role xxx_NTA_clock_src
+	PredefinedType[1] role clock
+end
+
+composition xxx_NTA_chan between
+	NTA[*] role xxx_NTA_chan_src
+	PredefinedType[1] role chan
+end
+
+composition xxx_NTA_void between
+	NTA[*] role xxx_NTA_void_src
+	PredefinedType[1] role void
+end
+
+composition xxx_Type_index between
+	Type[0..1] role xxx_Type_index_src
+	Index[*] role index
+end
+
+association xxx_Type_typeSpecification between
+	Type[*] role xxx_Type_typeSpecification_src
+	TypeSpecification[0..1] role typeSpecification
+end
+
+association xxx_DeclaredType_typeDeclaration between
+	DeclaredType[*] role xxx_DeclaredType_typeDeclaration_src
+	TypeDeclaration[1] role typeDeclaration
+end
+
+association xxx_DeclaredType_typeDefinition between
+	DeclaredType[*] role xxx_DeclaredType_typeDefinition_src
+	TypeDefinition[1] role typeDefinition
+end
+
+association xxx_TypeDefinition_typeSpecification between
+	TypeDefinition[*] role xxx_TypeDefinition_typeSpecification_src
+	TypeSpecification[0..1] role typeSpecification
+end
+
+association xxx_TypeReference_referredType between
+	TypeReference[*] role xxx_TypeReference_referredType_src
+	Type[1] role referredType
+end
+
+composition xxx_ScalarTypeSpecification_sizeExpression between
+	ScalarTypeSpecification[*] role xxx_ScalarTypeSpecification_sizeExpression_src
+	Expression[1] role sizeExpression
+end
+
+composition xxx_StructTypeSpecification_declaration between
+	StructTypeSpecification[0..1] role xxx_StructTypeSpecification_declaration_src
+	DataVariableDeclaration[1..*] role declaration
+end
+
+composition xxx_RangeTypeSpecification_bounds between
+	RangeTypeSpecification[*] role xxx_RangeTypeSpecification_bounds_src
+	IntegerBounds[1] role bounds
+end
+
+composition xxx_IntegerBounds_lowerBound between
+	IntegerBounds[*] role xxx_IntegerBounds_lowerBound_src
+	Expression[1] role lowerBound
+end
+
+composition xxx_IntegerBounds_upperBound between
+	IntegerBounds[*] role xxx_IntegerBounds_upperBound_src
+	Expression[1] role upperBound
+end
+
+composition xxx_Library_types between
+	Library[*] role xxx_Library_types_src
+	PredefinedType[0..1] role types
+end
+
+composition xxx_Declarations_declaration between
+	Declarations[0..1] role xxx_Declarations_declaration_src
+	Declaration[*] role declaration
+end
+
+composition xxx_GlobalDeclarations_channelPriority between
+	GlobalDeclarations[*] role xxx_GlobalDeclarations_channelPriority_src
+	ChannelPriority[0..1] role channelPriority
+end
+
+composition xxx_SystemDeclarations_system between
+	SystemDeclarations[*] role xxx_SystemDeclarations_system_src
+	System[1] role system
+end
+
+composition xxx_SystemDeclarations_progressMeasure between
+	SystemDeclarations[*] role xxx_SystemDeclarations_progressMeasure_src
+	ProgressMeasure[0..1] role progressMeasure
+end
+
+composition xxx_FunctionDeclaration_function between
+	FunctionDeclaration[*] role xxx_FunctionDeclaration_function_src
+	Function[1] role function
+end
+
+composition xxx_Function_returnType between
+	Function[*] role xxx_Function_returnType_src
+	TypeDefinition[1] role returnType
+end
+
+composition xxx_Function_block between
+	Function[*] role xxx_Function_block_src
+	Block[1] role block
+end
+
+composition xxx_Function_parameter between
+	Function[0..1] role xxx_Function_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_TypeDeclaration_type between
+	TypeDeclaration[0..1] role xxx_TypeDeclaration_type_src
+	DeclaredType[1..*] role type
+end
+
+composition xxx_TypeDeclaration_typeDefinition between
+	TypeDeclaration[*] role xxx_TypeDeclaration_typeDefinition_src
+	TypeDefinition[1] role typeDefinition
+end
+
+composition xxx_Variable_index between
+	Variable[0..1] role xxx_Variable_index_src
+	Index[*] role index
+end
+
+association xxx_Variable_container between
+	Variable[*] role xxx_Variable_container_src
+	VariableContainer[1] role container
+end
+
+association xxx_Variable_typeDefinition between
+	Variable[*] role xxx_Variable_typeDefinition_src
+	TypeDefinition[1] role typeDefinition
+end
+
+composition xxx_Variable_initializer between
+	Variable[*] role xxx_Variable_initializer_src
+	Initializer[0..1] role initializer
+end
+
+composition xxx_ValueIndex_sizeExpression between
+	ValueIndex[*] role xxx_ValueIndex_sizeExpression_src
+	Expression[1] role sizeExpression
+end
+
+composition xxx_TypeIndex_typeDefinition between
+	TypeIndex[*] role xxx_TypeIndex_typeDefinition_src
+	TypeDefinition[1] role typeDefinition
+end
+
+composition xxx_VariableContainer_typeDefinition between
+	VariableContainer[*] role xxx_VariableContainer_typeDefinition_src
+	TypeDefinition[1] role typeDefinition
+end
+
+composition xxx_VariableContainer_variable between
+	VariableContainer[0..1] role xxx_VariableContainer_variable_src
+	Variable[1..*] role variable
+end
+
+composition xxx_Parameter_variableDeclaration between
+	Parameter[*] role xxx_Parameter_variableDeclaration_src
+	VariableDeclaration[1] role variableDeclaration
+end
+
+composition xxx_ExpressionInitializer_expression between
+	ExpressionInitializer[*] role xxx_ExpressionInitializer_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_ArrayInitializer_initializer between
+	ArrayInitializer[0..1] role xxx_ArrayInitializer_initializer_src
+	Initializer[1..*] role initializer
+end
+
+composition xxx_ChannelPriority_item between
+	ChannelPriority[0..1] role xxx_ChannelPriority_item_src
+	ChannelPriorityItem[1..*] role item
+end
+
+composition xxx_ChannelList_channelExpression between
+	ChannelList[0..1] role xxx_ChannelList_channelExpression_src
+	IdentifierExpression[1..*] role channelExpression
+end
+
+composition xxx_TemplateDeclaration_declaredTemplate between
+	TemplateDeclaration[*] role xxx_TemplateDeclaration_declaredTemplate_src
+	RedefinedTemplate[1] role declaredTemplate
+end
+
+composition xxx_TemplateDeclaration_argument between
+	TemplateDeclaration[0..1] role xxx_TemplateDeclaration_argument_src
+	Expression[*] role argument
+end
+
+composition xxx_System_instantiationList between
+	System[0..1] role xxx_System_instantiationList_src
+	InstantiationList[1..*] role instantiationList
+end
+
+association xxx_InstantiationList_template between
+	InstantiationList[0..1] role xxx_InstantiationList_template_src
+	AbstractTemplate[1..*] role template
+end
+
+composition xxx_ProgressMeasure_expression between
+	ProgressMeasure[0..1] role xxx_ProgressMeasure_expression_src
+	Expression[1..*] role expression
+end
+
+composition xxx_AbstractTemplate_parameter between
+	AbstractTemplate[0..1] role xxx_AbstractTemplate_parameter_src
+	Parameter[*] role parameter
+end
+
+composition xxx_Template_declarations between
+	Template[*] role xxx_Template_declarations_src
+	LocalDeclarations[0..1] role declarations
+end
+
+composition xxx_Template_location between
+	Template[0..1] role xxx_Template_location_src
+	Location[1..*] role location
+end
+
+composition xxx_Template_edge between
+	Template[0..1] role xxx_Template_edge_src
+	Edge[*] role edge
+end
+
+association xxx_Template_init between
+	Template[*] role xxx_Template_init_src
+	Location[1] role init
+end
+
+association xxx_RedefinedTemplate_referredTemplate between
+	RedefinedTemplate[*] role xxx_RedefinedTemplate_referredTemplate_src
+	AbstractTemplate[1] role referredTemplate
+end
+
+association xxx_RedefinedTemplate_declaration between
+	RedefinedTemplate[*] role xxx_RedefinedTemplate_declaration_src
+	TemplateDeclaration[1] role declaration
+end
+
+association xxx_Location_parentTemplate between
+	Location[*] role xxx_Location_parentTemplate_src
+	Template[1] role parentTemplate
+end
+
+composition xxx_Location_invariant between
+	Location[*] role xxx_Location_invariant_src
+	Expression[0..1] role invariant
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	Location[1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	Location[1] role target
+end
+
+association xxx_Edge_parentTemplate between
+	Edge[*] role xxx_Edge_parentTemplate_src
+	Template[1] role parentTemplate
+end
+
+composition xxx_Edge_guard between
+	Edge[*] role xxx_Edge_guard_src
+	Expression[0..1] role guard
+end
+
+composition xxx_Edge_update between
+	Edge[0..1] role xxx_Edge_update_src
+	Expression[*] role update
+end
+
+composition xxx_Edge_synchronization between
+	Edge[*] role xxx_Edge_synchronization_src
+	Synchronization[0..1] role synchronization
+end
+
+composition xxx_Edge_selection between
+	Edge[0..1] role xxx_Edge_selection_src
+	Selection[*] role selection
+end
+
+composition xxx_Synchronization_channelExpression between
+	Synchronization[*] role xxx_Synchronization_channelExpression_src
+	IdentifierExpression[1] role channelExpression
+end
+
+composition xxx_Block_declarations between
+	Block[*] role xxx_Block_declarations_src
+	LocalDeclarations[0..1] role declarations
+end
+
+composition xxx_Block_statement between
+	Block[0..1] role xxx_Block_statement_src
+	Statement[1..*] role statement
+end
+
+composition xxx_ForLoop_initialization between
+	ForLoop[*] role xxx_ForLoop_initialization_src
+	Expression[1] role initialization
+end
+
+composition xxx_ForLoop_condition between
+	ForLoop[*] role xxx_ForLoop_condition_src
+	Expression[1] role condition
+end
+
+composition xxx_ForLoop_iteration between
+	ForLoop[*] role xxx_ForLoop_iteration_src
+	Expression[1] role iteration
+end
+
+composition xxx_ForLoop_statement between
+	ForLoop[*] role xxx_ForLoop_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_Iteration_statement between
+	Iteration[*] role xxx_Iteration_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_WhileLoop_expression between
+	WhileLoop[*] role xxx_WhileLoop_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_WhileLoop_statement between
+	WhileLoop[*] role xxx_WhileLoop_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_DoWhileLoop_statement between
+	DoWhileLoop[*] role xxx_DoWhileLoop_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_DoWhileLoop_expression between
+	DoWhileLoop[*] role xxx_DoWhileLoop_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_IfStatement_ifExpression between
+	IfStatement[*] role xxx_IfStatement_ifExpression_src
+	Expression[1] role ifExpression
+end
+
+composition xxx_IfStatement_thenStatement between
+	IfStatement[*] role xxx_IfStatement_thenStatement_src
+	Statement[1] role thenStatement
+end
+
+composition xxx_IfStatement_elseStatement between
+	IfStatement[*] role xxx_IfStatement_elseStatement_src
+	Statement[0..1] role elseStatement
+end
+
+composition xxx_ReturnStatement_returnExpression between
+	ReturnStatement[*] role xxx_ReturnStatement_returnExpression_src
+	Expression[0..1] role returnExpression
+end
+
+composition xxx_ExpressionStatement_expression between
+	ExpressionStatement[*] role xxx_ExpressionStatement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_NegationExpression_negatedExpression between
+	NegationExpression[*] role xxx_NegationExpression_negatedExpression_src
+	Expression[1] role negatedExpression
+end
+
+composition xxx_PlusExpression_confirmedExpression between
+	PlusExpression[*] role xxx_PlusExpression_confirmedExpression_src
+	Expression[1] role confirmedExpression
+end
+
+composition xxx_MinusExpression_invertedExpression between
+	MinusExpression[*] role xxx_MinusExpression_invertedExpression_src
+	Expression[1] role invertedExpression
+end
+
+composition xxx_BinaryExpression_firstExpr between
+	BinaryExpression[*] role xxx_BinaryExpression_firstExpr_src
+	Expression[1] role firstExpr
+end
+
+composition xxx_BinaryExpression_secondExpr between
+	BinaryExpression[*] role xxx_BinaryExpression_secondExpr_src
+	Expression[1] role secondExpr
+end
+
+association xxx_IdentifierExpression_identifier between
+	IdentifierExpression[*] role xxx_IdentifierExpression_identifier_src
+	NamedElement[1] role identifier
+end
+
+composition xxx_IdentifierExpression_index between
+	IdentifierExpression[0..1] role xxx_IdentifierExpression_index_src
+	Expression[*] role index
+end
+
+association xxx_FunctionCallExpression_function between
+	FunctionCallExpression[*] role xxx_FunctionCallExpression_function_src
+	Function[1] role function
+end
+
+composition xxx_FunctionCallExpression_argument between
+	FunctionCallExpression[0..1] role xxx_FunctionCallExpression_argument_src
+	Expression[*] role argument
+end
+
+composition xxx_ConditionExpression_ifExpression between
+	ConditionExpression[*] role xxx_ConditionExpression_ifExpression_src
+	Expression[1] role ifExpression
+end
+
+composition xxx_ConditionExpression_thenExpression between
+	ConditionExpression[*] role xxx_ConditionExpression_thenExpression_src
+	Expression[1] role thenExpression
+end
+
+composition xxx_ConditionExpression_elseExpression between
+	ConditionExpression[*] role xxx_ConditionExpression_elseExpression_src
+	Expression[1] role elseExpression
+end
+
+composition xxx_ScopedIdentifierExpression_scope between
+	ScopedIdentifierExpression[*] role xxx_ScopedIdentifierExpression_scope_src
+	Expression[1] role scope
+end
+
+composition xxx_ScopedIdentifierExpression_identifier between
+	ScopedIdentifierExpression[*] role xxx_ScopedIdentifierExpression_identifier_src
+	IdentifierExpression[1] role identifier
+end
+
+composition xxx_QuantificationExpression_expression between
+	QuantificationExpression[*] role xxx_QuantificationExpression_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_IncrementDecrementExpression_expression between
+	IncrementDecrementExpression[*] role xxx_IncrementDecrementExpression_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_PlanarElement_position between
+	PlanarElement[*] role xxx_PlanarElement_position_src
+	Point[0..1] role position
+end
+
+composition xxx_LinearElement_bendPoint between
+	LinearElement[0..1] role xxx_LinearElement_bendPoint_src
+	Point[*] role bendPoint
+end
+

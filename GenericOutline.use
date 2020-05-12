@@ -1,0 +1,65 @@
+model Outline
+abstract class LocatedElement
+attributes
+	location : String
+operations
+end
+
+class Outline<LocatedElement
+attributes
+	extension : String
+operations
+end
+
+class Node<LocatedElement
+attributes
+	name : String
+	icon : String
+operations
+end
+
+class Label<LocatedElement
+attributes
+	label : String
+	methodCall : String
+operations
+end
+
+class LabelSuite<LocatedElement
+attributes
+	label : String
+	methodCall : String
+operations
+end
+
+class Map<LocatedElement
+attributes
+	mapString : String
+operations
+end
+
+composition xxx_Outline_nodes between
+	Outline[0..1] role xxx_Outline_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_Node_label between
+	Node[*] role xxx_Node_label_src
+	Label[1] role label
+end
+
+association xxx_Node_outline between
+	Node[*] role xxx_Node_outline_src
+	Outline[0..1] role outline
+end
+
+composition xxx_Node_mapping between
+	Node[0..1] role xxx_Node_mapping_src
+	Map[*] role mapping
+end
+
+composition xxx_Label_labelSuite between
+	Label[0..1] role xxx_Label_labelSuite_src
+	LabelSuite[*] role labelSuite
+end
+

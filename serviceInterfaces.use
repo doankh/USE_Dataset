@@ -1,0 +1,158 @@
+model serviceInterfaces
+enum CodeGenLanguage{
+default
+}
+
+enum PointcutType{
+default
+}
+
+enum InjectionMode{
+default
+}
+
+class InterfaceRepository
+attributes
+operations
+end
+
+abstract class Packageable
+attributes
+operations
+end
+
+class Package<Packageable
+attributes
+	name : String
+operations
+end
+
+abstract class Interface<Packageable
+attributes
+	qName : String
+	description : String
+operations
+end
+
+class InjectorAcceptorInterfaceL1<Interface
+attributes
+operations
+end
+
+class TransformationLibrary
+attributes
+	name : String
+	language : CodeGenLanguage
+operations
+end
+
+class SlotPlugInterfaceL1<Interface
+attributes
+operations
+end
+
+abstract class Pointcut
+attributes
+	type : PointcutType
+operations
+end
+
+class ClassPointcut<Pointcut
+attributes
+operations
+end
+
+class MethodPoincut<Pointcut
+attributes
+operations
+end
+
+class ImportElementPointcut<Pointcut
+attributes
+operations
+end
+
+class StatementPoincut<Pointcut
+attributes
+operations
+end
+
+class InjectorAcceptorInterfaceL0<Interface
+attributes
+	mode : InjectionMode
+operations
+end
+
+abstract class JavaTypeDeclaration
+attributes
+	qualifiedName : String
+operations
+end
+
+class JavaInterface<JavaTypeDeclaration
+attributes
+operations
+end
+
+class JavaClass<JavaTypeDeclaration
+attributes
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class SlotPlugInterfaceL0<Interface
+attributes
+operations
+end
+
+class ExtensionPoint
+attributes
+	id : String
+operations
+end
+
+composition xxx_InterfaceRepository_contents between
+	InterfaceRepository[0..1] role xxx_InterfaceRepository_contents_src
+	Packageable[*] role contents
+end
+
+composition xxx_Package_contents between
+	Package[0..1] role xxx_Package_contents_src
+	Packageable[*] role contents
+end
+
+association xxx_InjectorAcceptorInterfaceL1_injectorProvides between
+	InjectorAcceptorInterfaceL1[*] role xxx_InjectorAcceptorInterfaceL1_injectorProvides_src
+	TransformationLibrary[0..1] role injectorProvides
+end
+
+association xxx_SlotPlugInterfaceL1_pointcuts between
+	SlotPlugInterfaceL1[*] role xxx_SlotPlugInterfaceL1_pointcuts_src
+	Pointcut[0..1] role pointcuts
+end
+
+composition xxx_InjectorAcceptorInterfaceL0_injectorImplements between
+	InjectorAcceptorInterfaceL0[0..1] role xxx_InjectorAcceptorInterfaceL0_injectorImplements_src
+	JavaTypeDeclaration[1..*] role injectorImplements
+end
+
+composition xxx_JavaInterface_operations_ between
+	JavaInterface[0..1] role xxx_JavaInterface_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_JavaClass_operations_ between
+	JavaClass[0..1] role xxx_JavaClass_operations__src
+	Operation[*] role operations_
+end
+
+composition xxx_SlotPlugInterfaceL0_slot between
+	SlotPlugInterfaceL0[0..1] role xxx_SlotPlugInterfaceL0_slot_src
+	ExtensionPoint[1..*] role slot
+end
+

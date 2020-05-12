@@ -1,0 +1,137 @@
+model BoxMM
+class Box<NamedElement
+attributes
+operations
+end
+
+abstract class Slot<NamedElement
+attributes
+operations
+end
+
+class InputSlot<Slot
+attributes
+operations
+end
+
+class OutputSlot<Slot
+attributes
+operations
+end
+
+class SettingSlot<Slot
+attributes
+operations
+end
+
+class BoxInstance<NamedElement
+attributes
+operations
+end
+
+class Connection
+attributes
+operations
+end
+
+class SlotInstance
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Package<NamedElement
+attributes
+operations
+end
+
+class ProcessSlot<Slot
+attributes
+operations
+end
+
+composition xxx_Box_settings between
+	Box[0..1] role xxx_Box_settings_src
+	SettingSlot[*] role settings
+end
+
+composition xxx_Box_inputs between
+	Box[0..1] role xxx_Box_inputs_src
+	InputSlot[*] role inputs
+end
+
+composition xxx_Box_outputs between
+	Box[0..1] role xxx_Box_outputs_src
+	OutputSlot[*] role outputs
+end
+
+composition xxx_Box_instances between
+	Box[0..1] role xxx_Box_instances_src
+	BoxInstance[*] role instances
+end
+
+composition xxx_Box_connections between
+	Box[0..1] role xxx_Box_connections_src
+	Connection[*] role connections
+end
+
+association xxx_Box_container between
+	Box[*] role xxx_Box_container_src
+	Package[0..1] role container
+end
+
+composition xxx_Box_processes between
+	Box[0..1] role xxx_Box_processes_src
+	ProcessSlot[*] role processes
+end
+
+association xxx_BoxInstance_type between
+	BoxInstance[*] role xxx_BoxInstance_type_src
+	Box[1] role type
+end
+
+association xxx_BoxInstance_box between
+	BoxInstance[*] role xxx_BoxInstance_box_src
+	Box[1] role box
+end
+
+composition xxx_Connection_input between
+	Connection[*] role xxx_Connection_input_src
+	SlotInstance[1] role input
+end
+
+composition xxx_Connection_output between
+	Connection[*] role xxx_Connection_output_src
+	SlotInstance[1] role output
+end
+
+association xxx_Connection_box between
+	Connection[*] role xxx_Connection_box_src
+	Box[1] role box
+end
+
+association xxx_SlotInstance_box between
+	SlotInstance[*] role xxx_SlotInstance_box_src
+	BoxInstance[0..1] role box
+end
+
+association xxx_SlotInstance_slot between
+	SlotInstance[*] role xxx_SlotInstance_slot_src
+	Slot[1] role slot
+end
+
+composition xxx_Package_boxes between
+	Package[0..1] role xxx_Package_boxes_src
+	Box[*] role boxes
+end
+
+association xxx_Package_imports between
+	Package[0..1] role xxx_Package_imports_src
+	Package[*] role imports
+end
+

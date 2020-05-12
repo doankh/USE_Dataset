@@ -1,0 +1,81 @@
+model rails
+abstract class Component
+attributes
+	name : String
+operations
+end
+
+class Train
+attributes
+	name : String
+operations
+end
+
+class Project
+attributes
+	name : String
+operations
+end
+
+class Track<Component
+attributes
+operations
+end
+
+class Switch<Component
+attributes
+operations
+end
+
+abstract class Port
+attributes
+	name : String
+operations
+end
+
+class Connection
+attributes
+	name : String
+operations
+end
+
+class Out<Port
+attributes
+operations
+end
+
+class In<Port
+attributes
+operations
+end
+
+composition xxx_Component_trains between
+	Component[0..1] role xxx_Component_trains_src
+	Train[*] role trains
+end
+
+composition xxx_Component_ports between
+	Component[0..1] role xxx_Component_ports_src
+	Port[*] role ports
+end
+
+composition xxx_Project_components between
+	Project[0..1] role xxx_Project_components_src
+	Component[*] role components
+end
+
+composition xxx_Project_connections between
+	Project[0..1] role xxx_Project_connections_src
+	Connection[*] role connections
+end
+
+association xxx_Connection_from_ between
+	Connection[*] role xxx_Connection_from__src
+	Out[1] role from_
+end
+
+association xxx_Connection_to between
+	Connection[*] role xxx_Connection_to_src
+	In[1] role to
+end
+

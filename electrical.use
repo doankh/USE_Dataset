@@ -1,0 +1,31 @@
+model electrical
+class Input
+attributes
+operations
+end
+
+abstract class FunctionalBlock
+attributes
+operations
+end
+
+class Inverter<FunctionalBlock
+attributes
+operations
+end
+
+class AmplitudeMultiplication<FunctionalBlock
+attributes
+operations
+end
+
+class PhaseShift<FunctionalBlock
+attributes
+operations
+end
+
+class Output
+attributes
+operations
+end
+

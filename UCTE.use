@@ -1,0 +1,837 @@
+model UCTE
+enum FuelType{
+default
+}
+
+enum WindingType{
+default
+}
+
+enum WindingConnection{
+default
+}
+
+enum RegulatingControlModeKind{
+default
+}
+
+enum SynchronousMachineType{
+default
+}
+
+enum SynchronousMachineOperatingMode{
+default
+}
+
+enum PhaseTapChangerKind{
+default
+}
+
+enum OperationalLimitDirectionKind{
+default
+}
+
+class Element
+attributes
+	URI : String
+operations
+end
+
+class Model
+attributes
+	URI : String
+operations
+end
+
+class IEC61970CIMVersion<Element
+attributes
+	date : String
+	version : String
+operations
+end
+
+class SvVoltage<StateVariable
+attributes
+	angle : String
+	v : String
+operations
+end
+
+class SvShuntCompensatorSections<StateVariable
+attributes
+	continuousSections : String
+operations
+end
+
+class StateVariable<Element
+attributes
+operations
+end
+
+class SvTapStep<StateVariable
+attributes
+	continuousPosition : String
+operations
+end
+
+class SvPowerFlow<StateVariable
+attributes
+	p : String
+	q : String
+operations
+end
+
+class Curve<IdentifiedObject
+attributes
+operations
+end
+
+class ConnectivityNodeContainer<IdentifiedObject
+attributes
+operations
+end
+
+class VoltageLevel<EquipmentContainer
+attributes
+operations
+end
+
+class Equipment<IdentifiedObject
+attributes
+	equivalent : String
+operations
+end
+
+class BaseVoltage<IdentifiedObject
+attributes
+	nominalVoltage : String
+	isDC : String
+operations
+end
+
+class EquipmentContainer<ConnectivityNodeContainer
+attributes
+operations
+end
+
+class IdentifiedObject<Element
+attributes
+	description : String
+	name : String
+	aliasName : String
+operations
+end
+
+class Substation<EquipmentContainer
+attributes
+operations
+end
+
+class ConductingEquipment<Equipment
+attributes
+operations
+end
+
+class SubGeographicalRegion<IdentifiedObject
+attributes
+operations
+end
+
+class Terminal<IdentifiedObject
+attributes
+	sequenceNumber : String
+	connected : String
+operations
+end
+
+class GeographicalRegion<IdentifiedObject
+attributes
+operations
+end
+
+class CurveData<Element
+attributes
+	y1value : String
+	xvalue : String
+	y2value : String
+operations
+end
+
+class ControlArea<IdentifiedObject
+attributes
+	pTolerance : String
+	netInterchange : String
+operations
+end
+
+class ControlAreaGeneratingUnit<Element
+attributes
+operations
+end
+
+class TieFlow<Element
+attributes
+	positiveFlowIn : String
+operations
+end
+
+class WindGeneratingUnit<GeneratingUnit
+attributes
+operations
+end
+
+class GeneratingUnit<Equipment
+attributes
+	maxOperatingP : String
+	startupCost : Real
+	nominalP : String
+	governorSCD : String
+	maximumAllowableSpinningReserve : String
+	variableCost : Real
+	minOperatingP : String
+	normalPF : String
+operations
+end
+
+class FossilFuel<IdentifiedObject
+attributes
+	fossilFuelType : FuelType
+operations
+end
+
+class NuclearGeneratingUnit<GeneratingUnit
+attributes
+operations
+end
+
+class HydroGeneratingUnit<GeneratingUnit
+attributes
+operations
+end
+
+class ThermalGeneratingUnit<GeneratingUnit
+attributes
+operations
+end
+
+class HydroPump<IdentifiedObject
+attributes
+operations
+end
+
+class LoadResponseCharacteristic<IdentifiedObject
+attributes
+	pVoltageExponent : String
+	qConstantCurrent : String
+	pConstantCurrent : String
+	exponentModel : String
+	pConstantPower : String
+	qVoltageExponent : String
+	qConstantPower : String
+	qConstantImpedance : String
+	pConstantImpedance : String
+operations
+end
+
+class TopologicalNode<IdentifiedObject
+attributes
+	sShortCircuit : String
+	equivalent : String
+	x0PerX : String
+	r0PerR : String
+	xPerR : String
+operations
+end
+
+class TopologicalIsland<IdentifiedObject
+attributes
+operations
+end
+
+class EquivalentEquipment<ConductingEquipment
+attributes
+operations
+end
+
+class BusbarSection<ConductingEquipment
+attributes
+operations
+end
+
+class TapChanger<IdentifiedObject
+attributes
+	stepVoltageIncrement : String
+	neutralU : String
+	lowStep : String
+	neutralStep : String
+	highStep : String
+operations
+end
+
+class TransformerWinding<ConductingEquipment
+attributes
+	x : String
+	b : String
+	connectionType : WindingConnection
+	ratedS : String
+	x0 : String
+	r : String
+	r0 : String
+	b0 : String
+	ratedU : String
+	g0 : String
+	g : String
+	xground : String
+	windingType : WindingType
+	rground : String
+operations
+end
+
+class RegulatingControl<IdentifiedObject
+attributes
+	mode : RegulatingControlModeKind
+	discrete : String
+	targetValue : String
+	targetRange : String
+operations
+end
+
+class ReactiveCapabilityCurve<Curve
+attributes
+operations
+end
+
+class ACLineSegment<Conductor
+attributes
+operations
+end
+
+class PhaseTapChanger<TapChanger
+attributes
+	xStepMin : String
+	xStepMax : String
+	stepPhaseShiftIncrement : String
+	windingConnectionAngle : String
+	phaseTapChangerType : PhaseTapChangerKind
+	voltageStepIncrementOutOfPhase : String
+operations
+end
+
+class MutualCoupling<IdentifiedObject
+attributes
+	distance22 : String
+	g0ch : String
+	distance21 : String
+	r0 : String
+	b0ch : String
+	x0 : String
+	distance11 : String
+	distance12 : String
+operations
+end
+
+class SynchronousMachine<RegulatingCondEq
+attributes
+	x0 : String
+	operatingMode : SynchronousMachineOperatingMode
+	r0 : String
+	qPercent : String
+	x2 : String
+	type : SynchronousMachineType
+	r2 : String
+	r : String
+	maxQ : String
+	x : String
+	ratedS : String
+	minQ : String
+operations
+end
+
+class RatioTapChanger<TapChanger
+attributes
+operations
+end
+
+class PowerTransformer<Equipment
+attributes
+operations
+end
+
+class EnergyConsumer<ConductingEquipment
+attributes
+operations
+end
+
+class Switch<ConductingEquipment
+attributes
+operations
+end
+
+class RegulatingCondEq<ConductingEquipment
+attributes
+operations
+end
+
+class VoltageControlZone<IdentifiedObject
+attributes
+operations
+end
+
+class Line<EquipmentContainer
+attributes
+operations
+end
+
+class ShuntCompensator<RegulatingCondEq
+attributes
+	b0PerSection : String
+	maximumSections : String
+	g0PerSection : String
+	bPerSection : String
+	gPerSection : String
+operations
+end
+
+class Conductor<ConductingEquipment
+attributes
+	b0ch : String
+	bch : String
+	r0 : String
+	x0 : String
+	gch : String
+	x : String
+	length : String
+	r : String
+	g0ch : String
+operations
+end
+
+class CurrentLimit<OperationalLimit
+attributes
+	value : String
+operations
+end
+
+class VoltageLimit<OperationalLimit
+attributes
+	value : String
+operations
+end
+
+class OperationalLimit<IdentifiedObject
+attributes
+operations
+end
+
+class OperationalLimitSet<IdentifiedObject
+attributes
+operations
+end
+
+class OperationalLimitType<IdentifiedObject
+attributes
+	direction : OperationalLimitDirectionKind
+	acceptableDuration : String
+operations
+end
+
+association xxx_Element_Model between
+	Element[*] role xxx_Element_Model_src
+	Model[1] role Model
+end
+
+association xxx_Model_Elements between
+	Model[0..1] role xxx_Model_Elements_src
+	Element[*] role Elements
+end
+
+association xxx_SvVoltage_TopologicalNode between
+	SvVoltage[*] role xxx_SvVoltage_TopologicalNode_src
+	TopologicalNode[1] role TopologicalNode
+end
+
+association xxx_SvShuntCompensatorSections_ShuntCompensator between
+	SvShuntCompensatorSections[*] role xxx_SvShuntCompensatorSections_ShuntCompensator_src
+	ShuntCompensator[1] role ShuntCompensator
+end
+
+association xxx_SvTapStep_TapChanger between
+	SvTapStep[*] role xxx_SvTapStep_TapChanger_src
+	TapChanger[1] role TapChanger
+end
+
+association xxx_SvPowerFlow_Terminal between
+	SvPowerFlow[*] role xxx_SvPowerFlow_Terminal_src
+	Terminal[1] role Terminal
+end
+
+association xxx_Curve_CurveScheduleDatas between
+	Curve[0..1] role xxx_Curve_CurveScheduleDatas_src
+	CurveData[*] role CurveScheduleDatas
+end
+
+association xxx_ConnectivityNodeContainer_TopologicalNode between
+	ConnectivityNodeContainer[0..1] role xxx_ConnectivityNodeContainer_TopologicalNode_src
+	TopologicalNode[*] role TopologicalNode
+end
+
+association xxx_VoltageLevel_BaseVoltage between
+	VoltageLevel[*] role xxx_VoltageLevel_BaseVoltage_src
+	BaseVoltage[1] role BaseVoltage
+end
+
+association xxx_VoltageLevel_MemberOf_Substation between
+	VoltageLevel[*] role xxx_VoltageLevel_MemberOf_Substation_src
+	Substation[1] role MemberOf_Substation
+end
+
+association xxx_Equipment_MemberOf_EquipmentContainer between
+	Equipment[*] role xxx_Equipment_MemberOf_EquipmentContainer_src
+	EquipmentContainer[0..1] role MemberOf_EquipmentContainer
+end
+
+association xxx_BaseVoltage_ConductingEquipment between
+	BaseVoltage[0..1] role xxx_BaseVoltage_ConductingEquipment_src
+	ConductingEquipment[*] role ConductingEquipment
+end
+
+association xxx_BaseVoltage_VoltageLevel between
+	BaseVoltage[0..1] role xxx_BaseVoltage_VoltageLevel_src
+	VoltageLevel[*] role VoltageLevel
+end
+
+association xxx_BaseVoltage_TopologicalNode between
+	BaseVoltage[0..1] role xxx_BaseVoltage_TopologicalNode_src
+	TopologicalNode[*] role TopologicalNode
+end
+
+association xxx_EquipmentContainer_Contains_Equipments between
+	EquipmentContainer[0..1] role xxx_EquipmentContainer_Contains_Equipments_src
+	Equipment[*] role Contains_Equipments
+end
+
+association xxx_Substation_Contains_VoltageLevels between
+	Substation[0..1] role xxx_Substation_Contains_VoltageLevels_src
+	VoltageLevel[*] role Contains_VoltageLevels
+end
+
+association xxx_Substation_Region between
+	Substation[*] role xxx_Substation_Region_src
+	SubGeographicalRegion[1] role Region
+end
+
+association xxx_ConductingEquipment_BaseVoltage between
+	ConductingEquipment[*] role xxx_ConductingEquipment_BaseVoltage_src
+	BaseVoltage[0..1] role BaseVoltage
+end
+
+association xxx_ConductingEquipment_Terminals between
+	ConductingEquipment[0..1] role xxx_ConductingEquipment_Terminals_src
+	Terminal[*] role Terminals
+end
+
+association xxx_SubGeographicalRegion_Substations between
+	SubGeographicalRegion[0..1] role xxx_SubGeographicalRegion_Substations_src
+	Substation[*] role Substations
+end
+
+association xxx_SubGeographicalRegion_Region between
+	SubGeographicalRegion[*] role xxx_SubGeographicalRegion_Region_src
+	GeographicalRegion[1] role Region
+end
+
+association xxx_Terminal_HasFirst_MutualCoupling between
+	Terminal[0..1] role xxx_Terminal_HasFirst_MutualCoupling_src
+	MutualCoupling[*] role HasFirst_MutualCoupling
+end
+
+association xxx_Terminal_OperationalLimitSet between
+	Terminal[0..1] role xxx_Terminal_OperationalLimitSet_src
+	OperationalLimitSet[*] role OperationalLimitSet
+end
+
+association xxx_Terminal_SvPowerFlow between
+	Terminal[*] role xxx_Terminal_SvPowerFlow_src
+	SvPowerFlow[0..1] role SvPowerFlow
+end
+
+association xxx_Terminal_RegulatingControl between
+	Terminal[0..1] role xxx_Terminal_RegulatingControl_src
+	RegulatingControl[*] role RegulatingControl
+end
+
+association xxx_Terminal_TieFlow between
+	Terminal[0..1] role xxx_Terminal_TieFlow_src
+	TieFlow[*] role TieFlow
+end
+
+association xxx_Terminal_ConductingEquipment between
+	Terminal[*] role xxx_Terminal_ConductingEquipment_src
+	ConductingEquipment[1] role ConductingEquipment
+end
+
+association xxx_Terminal_TopologicalNode between
+	Terminal[*] role xxx_Terminal_TopologicalNode_src
+	TopologicalNode[1] role TopologicalNode
+end
+
+association xxx_Terminal_HasSecond_MutualCoupling between
+	Terminal[0..1] role xxx_Terminal_HasSecond_MutualCoupling_src
+	MutualCoupling[*] role HasSecond_MutualCoupling
+end
+
+association xxx_GeographicalRegion_Regions between
+	GeographicalRegion[0..1] role xxx_GeographicalRegion_Regions_src
+	SubGeographicalRegion[*] role Regions
+end
+
+association xxx_CurveData_CurveSchedule between
+	CurveData[*] role xxx_CurveData_CurveSchedule_src
+	Curve[1] role CurveSchedule
+end
+
+association xxx_ControlArea_TopologicalNode between
+	ControlArea[0..1] role xxx_ControlArea_TopologicalNode_src
+	TopologicalNode[*] role TopologicalNode
+end
+
+association xxx_ControlArea_TieFlow between
+	ControlArea[0..1] role xxx_ControlArea_TieFlow_src
+	TieFlow[*] role TieFlow
+end
+
+association xxx_ControlArea_ControlAreaGeneratingUnit between
+	ControlArea[0..1] role xxx_ControlArea_ControlAreaGeneratingUnit_src
+	ControlAreaGeneratingUnit[*] role ControlAreaGeneratingUnit
+end
+
+association xxx_ControlAreaGeneratingUnit_ControlArea between
+	ControlAreaGeneratingUnit[*] role xxx_ControlAreaGeneratingUnit_ControlArea_src
+	ControlArea[1] role ControlArea
+end
+
+association xxx_ControlAreaGeneratingUnit_GeneratingUnit between
+	ControlAreaGeneratingUnit[*] role xxx_ControlAreaGeneratingUnit_GeneratingUnit_src
+	GeneratingUnit[1] role GeneratingUnit
+end
+
+association xxx_TieFlow_ControlArea between
+	TieFlow[*] role xxx_TieFlow_ControlArea_src
+	ControlArea[1] role ControlArea
+end
+
+association xxx_TieFlow_Terminal between
+	TieFlow[*] role xxx_TieFlow_Terminal_src
+	Terminal[1] role Terminal
+end
+
+association xxx_GeneratingUnit_Contains_SynchronousMachines between
+	GeneratingUnit[0..1] role xxx_GeneratingUnit_Contains_SynchronousMachines_src
+	SynchronousMachine[*] role Contains_SynchronousMachines
+end
+
+association xxx_GeneratingUnit_ControlAreaGeneratingUnit between
+	GeneratingUnit[0..1] role xxx_GeneratingUnit_ControlAreaGeneratingUnit_src
+	ControlAreaGeneratingUnit[*] role ControlAreaGeneratingUnit
+end
+
+association xxx_FossilFuel_ThermalGeneratingUnit between
+	FossilFuel[*] role xxx_FossilFuel_ThermalGeneratingUnit_src
+	ThermalGeneratingUnit[0..1] role ThermalGeneratingUnit
+end
+
+association xxx_ThermalGeneratingUnit_FossilFuels between
+	ThermalGeneratingUnit[*] role xxx_ThermalGeneratingUnit_FossilFuels_src
+	FossilFuel[1] role FossilFuels
+end
+
+association xxx_HydroPump_DrivenBy_SynchronousMachine between
+	HydroPump[*] role xxx_HydroPump_DrivenBy_SynchronousMachine_src
+	SynchronousMachine[1] role DrivenBy_SynchronousMachine
+end
+
+association xxx_LoadResponseCharacteristic_EnergyConsumer between
+	LoadResponseCharacteristic[0..1] role xxx_LoadResponseCharacteristic_EnergyConsumer_src
+	EnergyConsumer[*] role EnergyConsumer
+end
+
+association xxx_TopologicalNode_ControlArea between
+	TopologicalNode[*] role xxx_TopologicalNode_ControlArea_src
+	ControlArea[1] role ControlArea
+end
+
+association xxx_TopologicalNode_BaseVoltage between
+	TopologicalNode[*] role xxx_TopologicalNode_BaseVoltage_src
+	BaseVoltage[1] role BaseVoltage
+end
+
+association xxx_TopologicalNode_SvVoltage between
+	TopologicalNode[*] role xxx_TopologicalNode_SvVoltage_src
+	SvVoltage[0..1] role SvVoltage
+end
+
+association xxx_TopologicalNode_TopologicalIsland between
+	TopologicalNode[*] role xxx_TopologicalNode_TopologicalIsland_src
+	TopologicalIsland[1] role TopologicalIsland
+end
+
+association xxx_TopologicalNode_AngleRef_TopologicalIsland between
+	TopologicalNode[*] role xxx_TopologicalNode_AngleRef_TopologicalIsland_src
+	TopologicalIsland[0..1] role AngleRef_TopologicalIsland
+end
+
+association xxx_TopologicalNode_ConnectivityNodeContainer between
+	TopologicalNode[*] role xxx_TopologicalNode_ConnectivityNodeContainer_src
+	ConnectivityNodeContainer[0..1] role ConnectivityNodeContainer
+end
+
+association xxx_TopologicalNode_Terminal between
+	TopologicalNode[0..1] role xxx_TopologicalNode_Terminal_src
+	Terminal[*] role Terminal
+end
+
+association xxx_TopologicalIsland_TopologicalNodes between
+	TopologicalIsland[0..1] role xxx_TopologicalIsland_TopologicalNodes_src
+	TopologicalNode[*] role TopologicalNodes
+end
+
+association xxx_TopologicalIsland_AngleRef_TopologicalNode between
+	TopologicalIsland[*] role xxx_TopologicalIsland_AngleRef_TopologicalNode_src
+	TopologicalNode[0..1] role AngleRef_TopologicalNode
+end
+
+association xxx_BusbarSection_VoltageControlZone between
+	BusbarSection[*] role xxx_BusbarSection_VoltageControlZone_src
+	VoltageControlZone[1] role VoltageControlZone
+end
+
+association xxx_TapChanger_SvTapStep between
+	TapChanger[*] role xxx_TapChanger_SvTapStep_src
+	SvTapStep[0..1] role SvTapStep
+end
+
+association xxx_TapChanger_RegulatingControl between
+	TapChanger[*] role xxx_TapChanger_RegulatingControl_src
+	RegulatingControl[0..1] role RegulatingControl
+end
+
+association xxx_TransformerWinding_MemberOf_PowerTransformer between
+	TransformerWinding[*] role xxx_TransformerWinding_MemberOf_PowerTransformer_src
+	PowerTransformer[1] role MemberOf_PowerTransformer
+end
+
+association xxx_TransformerWinding_RatioTapChanger between
+	TransformerWinding[*] role xxx_TransformerWinding_RatioTapChanger_src
+	RatioTapChanger[0..1] role RatioTapChanger
+end
+
+association xxx_TransformerWinding_PhaseTapChanger between
+	TransformerWinding[*] role xxx_TransformerWinding_PhaseTapChanger_src
+	PhaseTapChanger[0..1] role PhaseTapChanger
+end
+
+association xxx_RegulatingControl_Terminal between
+	RegulatingControl[*] role xxx_RegulatingControl_Terminal_src
+	Terminal[1] role Terminal
+end
+
+association xxx_RegulatingControl_RegulatingCondEq between
+	RegulatingControl[0..1] role xxx_RegulatingControl_RegulatingCondEq_src
+	RegulatingCondEq[*] role RegulatingCondEq
+end
+
+association xxx_RegulatingControl_TapChanger between
+	RegulatingControl[0..1] role xxx_RegulatingControl_TapChanger_src
+	TapChanger[*] role TapChanger
+end
+
+association xxx_ReactiveCapabilityCurve_InitiallyUsedBySynchronousMachine between
+	ReactiveCapabilityCurve[0..1] role xxx_ReactiveCapabilityCurve_InitiallyUsedBySynchronousMachine_src
+	SynchronousMachine[*] role InitiallyUsedBySynchronousMachine
+end
+
+association xxx_PhaseTapChanger_TransformerWinding between
+	PhaseTapChanger[*] role xxx_PhaseTapChanger_TransformerWinding_src
+	TransformerWinding[1] role TransformerWinding
+end
+
+association xxx_MutualCoupling_First_Terminal between
+	MutualCoupling[*] role xxx_MutualCoupling_First_Terminal_src
+	Terminal[1] role First_Terminal
+end
+
+association xxx_MutualCoupling_Second_Terminal between
+	MutualCoupling[*] role xxx_MutualCoupling_Second_Terminal_src
+	Terminal[1] role Second_Terminal
+end
+
+association xxx_SynchronousMachine_InitialReactiveCapabilityCurve between
+	SynchronousMachine[*] role xxx_SynchronousMachine_InitialReactiveCapabilityCurve_src
+	ReactiveCapabilityCurve[0..1] role InitialReactiveCapabilityCurve
+end
+
+association xxx_SynchronousMachine_Drives_HydroPump between
+	SynchronousMachine[*] role xxx_SynchronousMachine_Drives_HydroPump_src
+	HydroPump[0..1] role Drives_HydroPump
+end
+
+association xxx_SynchronousMachine_MemberOf_GeneratingUnit between
+	SynchronousMachine[*] role xxx_SynchronousMachine_MemberOf_GeneratingUnit_src
+	GeneratingUnit[1] role MemberOf_GeneratingUnit
+end
+
+association xxx_RatioTapChanger_TransformerWinding between
+	RatioTapChanger[*] role xxx_RatioTapChanger_TransformerWinding_src
+	TransformerWinding[1] role TransformerWinding
+end
+
+association xxx_PowerTransformer_Contains_TransformerWindings between
+	PowerTransformer[0..1] role xxx_PowerTransformer_Contains_TransformerWindings_src
+	TransformerWinding[*] role Contains_TransformerWindings
+end
+
+association xxx_EnergyConsumer_LoadResponse between
+	EnergyConsumer[*] role xxx_EnergyConsumer_LoadResponse_src
+	LoadResponseCharacteristic[1] role LoadResponse
+end
+
+association xxx_RegulatingCondEq_RegulatingControl between
+	RegulatingCondEq[*] role xxx_RegulatingCondEq_RegulatingControl_src
+	RegulatingControl[0..1] role RegulatingControl
+end
+
+association xxx_VoltageControlZone_BusbarSection between
+	VoltageControlZone[*] role xxx_VoltageControlZone_BusbarSection_src
+	BusbarSection[0..1] role BusbarSection
+end
+
+association xxx_ShuntCompensator_SvShuntCompensatorSections between
+	ShuntCompensator[*] role xxx_ShuntCompensator_SvShuntCompensatorSections_src
+	SvShuntCompensatorSections[0..1] role SvShuntCompensatorSections
+end
+
+association xxx_OperationalLimit_OperationalLimitSet between
+	OperationalLimit[*] role xxx_OperationalLimit_OperationalLimitSet_src
+	OperationalLimitSet[1] role OperationalLimitSet
+end
+
+association xxx_OperationalLimit_OperationalLimitType between
+	OperationalLimit[*] role xxx_OperationalLimit_OperationalLimitType_src
+	OperationalLimitType[1] role OperationalLimitType
+end
+
+association xxx_OperationalLimitSet_Terminal between
+	OperationalLimitSet[*] role xxx_OperationalLimitSet_Terminal_src
+	Terminal[1] role Terminal
+end
+
+association xxx_OperationalLimitSet_OperationalLimitValue between
+	OperationalLimitSet[0..1] role xxx_OperationalLimitSet_OperationalLimitValue_src
+	OperationalLimit[*] role OperationalLimitValue
+end
+
+association xxx_OperationalLimitType_OperationalLimit between
+	OperationalLimitType[0..1] role xxx_OperationalLimitType_OperationalLimit_src
+	OperationalLimit[*] role OperationalLimit
+end
+

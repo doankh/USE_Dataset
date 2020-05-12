@@ -1,0 +1,70 @@
+model textadventure
+class Adventure
+attributes
+	name : String
+operations
+end
+
+class Room<AdventureElement
+attributes
+	name : String
+operations
+end
+
+class Item
+attributes
+	name : String
+operations
+end
+
+abstract class RoomConnector<AdventureElement
+attributes
+operations
+end
+
+class Key<Item
+attributes
+operations
+end
+
+class Door<RoomConnector
+attributes
+	name : String
+operations
+end
+
+class Stairs<RoomConnector
+attributes
+operations
+end
+
+abstract class AdventureElement
+attributes
+operations
+end
+
+composition xxx_Adventure_elements between
+	Adventure[0..1] role xxx_Adventure_elements_src
+	AdventureElement[*] role elements
+end
+
+composition xxx_Room_items between
+	Room[0..1] role xxx_Room_items_src
+	Item[*] role items
+end
+
+association xxx_RoomConnector_from_ between
+	RoomConnector[*] role xxx_RoomConnector_from__src
+	Room[1] role from_
+end
+
+association xxx_RoomConnector_to between
+	RoomConnector[*] role xxx_RoomConnector_to_src
+	Room[1] role to
+end
+
+association xxx_Key_opens between
+	Key[0..1] role xxx_Key_opens_src
+	Door[1..*] role opens
+end
+

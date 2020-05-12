@@ -1,0 +1,450 @@
+model smi
+class Module
+attributes
+	name : String
+operations
+end
+
+class Imports
+attributes
+operations
+end
+
+class ImportClosure
+attributes
+	importURI : String
+operations
+end
+
+class ImportRefs
+attributes
+operations
+end
+
+class ImportRef
+attributes
+operations
+end
+
+class ObjectReferenceable
+attributes
+	name : String
+operations
+end
+
+class Object
+attributes
+operations
+end
+
+class ObjectReference
+attributes
+	name : String
+	subIds : Integer
+operations
+end
+
+class Attribute
+attributes
+operations
+end
+
+class AttributeValue
+attributes
+	text : String
+operations
+end
+
+class Identifier
+attributes
+	id : String
+operations
+end
+
+class BracedObjectReference
+attributes
+operations
+end
+
+class Referenceable<TypeAssignment
+attributes
+	name : String
+operations
+end
+
+class TypeNotation
+attributes
+	name : String
+operations
+end
+
+class ValueNotation
+attributes
+	name : String
+operations
+end
+
+class TypeAssignment<TypeNotationRight
+attributes
+operations
+end
+
+class TypeNotationRight
+attributes
+operations
+end
+
+class ValueAssignment
+attributes
+operations
+end
+
+class Value<TypeAssignment
+attributes
+	implicit : Boolean
+operations
+end
+
+class Tag
+attributes
+	tagValue : Integer
+operations
+end
+
+class ValueType
+attributes
+	id : String
+operations
+end
+
+class MacroValueType
+attributes
+	update : Boolean
+	valueCAP : Boolean
+	oi : String
+	string : String
+operations
+end
+
+class ASN1_TYPE
+attributes
+operations
+end
+
+class ASN1_SIMPLE<ASN1_TYPE
+attributes
+	name : String
+operations
+end
+
+class ASN1_INTEGER_REFINEMENT
+attributes
+	refinements : String
+	ints : Integer
+operations
+end
+
+class ASN1_RANGE
+attributes
+	value : Integer
+	start : Integer
+	end_ : Integer
+operations
+end
+
+class ASN1_CHOICE<ASN1_TYPE
+attributes
+operations
+end
+
+class ASN1_SEQUENCE<ASN1_TYPE
+attributes
+operations
+end
+
+class ASN1_SEQUENCE_OF
+attributes
+operations
+end
+
+class ASN1_CHOICE_ENTRY
+attributes
+	id : String
+operations
+end
+
+class ChoiceType
+attributes
+operations
+end
+
+class MacroValue<Value
+attributes
+operations
+end
+
+class ASN1_OCTET_STRING<ASN1_SIMPLE
+attributes
+operations
+end
+
+composition xxx_Module_imports between
+	Module[*] role xxx_Module_imports_src
+	Imports[0..1] role imports
+end
+
+composition xxx_Module_objects between
+	Module[0..1] role xxx_Module_objects_src
+	ObjectReferenceable[*] role objects
+end
+
+composition xxx_Module_types between
+	Module[0..1] role xxx_Module_types_src
+	Referenceable[*] role types
+end
+
+composition xxx_Imports_imports between
+	Imports[0..1] role xxx_Imports_imports_src
+	ImportClosure[*] role imports
+end
+
+composition xxx_ImportClosure_refs between
+	ImportClosure[*] role xxx_ImportClosure_refs_src
+	ImportRefs[0..1] role refs
+end
+
+composition xxx_ImportRefs_refs between
+	ImportRefs[0..1] role xxx_ImportRefs_refs_src
+	ImportRef[*] role refs
+end
+
+association xxx_ImportRef_oiRef between
+	ImportRef[*] role xxx_ImportRef_oiRef_src
+	ObjectReferenceable[0..1] role oiRef
+end
+
+association xxx_ImportRef_typeRef between
+	ImportRef[*] role xxx_ImportRef_typeRef_src
+	Referenceable[0..1] role typeRef
+end
+
+composition xxx_ObjectReferenceable_object between
+	ObjectReferenceable[*] role xxx_ObjectReferenceable_object_src
+	Object[0..1] role object
+end
+
+composition xxx_ObjectReferenceable_objectValue between
+	ObjectReferenceable[*] role xxx_ObjectReferenceable_objectValue_src
+	ObjectReference[0..1] role objectValue
+end
+
+association xxx_Object_macroRef between
+	Object[*] role xxx_Object_macroRef_src
+	Referenceable[0..1] role macroRef
+end
+
+composition xxx_Object_attributes_ between
+	Object[0..1] role xxx_Object_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_ObjectReference_descriptorRef between
+	ObjectReference[*] role xxx_ObjectReference_descriptorRef_src
+	ObjectReferenceable[0..1] role descriptorRef
+end
+
+association xxx_Attribute_paramRef between
+	Attribute[*] role xxx_Attribute_paramRef_src
+	Referenceable[0..1] role paramRef
+end
+
+composition xxx_Attribute_values between
+	Attribute[*] role xxx_Attribute_values_src
+	AttributeValue[0..1] role values
+end
+
+composition xxx_AttributeValue_identifier between
+	AttributeValue[*] role xxx_AttributeValue_identifier_src
+	Identifier[0..1] role identifier
+end
+
+association xxx_AttributeValue_typeRef between
+	AttributeValue[*] role xxx_AttributeValue_typeRef_src
+	Referenceable[0..1] role typeRef
+end
+
+composition xxx_AttributeValue_subType between
+	AttributeValue[*] role xxx_AttributeValue_subType_src
+	ASN1_SIMPLE[0..1] role subType
+end
+
+composition xxx_AttributeValue_objectRef between
+	AttributeValue[*] role xxx_AttributeValue_objectRef_src
+	BracedObjectReference[0..1] role objectRef
+end
+
+composition xxx_AttributeValue_integer between
+	AttributeValue[*] role xxx_AttributeValue_integer_src
+	ASN1_SIMPLE[0..1] role integer
+end
+
+composition xxx_AttributeValue_sequenceOf between
+	AttributeValue[*] role xxx_AttributeValue_sequenceOf_src
+	ASN1_SEQUENCE_OF[0..1] role sequenceOf
+end
+
+association xxx_BracedObjectReference_objectRef between
+	BracedObjectReference[*] role xxx_BracedObjectReference_objectRef_src
+	ObjectReferenceable[0..1] role objectRef
+end
+
+composition xxx_Referenceable_values between
+	Referenceable[0..1] role xxx_Referenceable_values_src
+	Value[*] role values
+end
+
+composition xxx_Referenceable_typeNotation between
+	Referenceable[*] role xxx_Referenceable_typeNotation_src
+	TypeNotation[0..1] role typeNotation
+end
+
+composition xxx_Referenceable_valueNotation between
+	Referenceable[*] role xxx_Referenceable_valueNotation_src
+	ValueNotation[0..1] role valueNotation
+end
+
+composition xxx_Referenceable_innerTypes between
+	Referenceable[0..1] role xxx_Referenceable_innerTypes_src
+	Referenceable[*] role innerTypes
+end
+
+composition xxx_Referenceable_right between
+	Referenceable[*] role xxx_Referenceable_right_src
+	TypeNotationRight[0..1] role right
+end
+
+composition xxx_TypeNotation_typeNotations between
+	TypeNotation[0..1] role xxx_TypeNotation_typeNotations_src
+	TypeAssignment[*] role typeNotations
+end
+
+composition xxx_ValueNotation_valueNotations between
+	ValueNotation[0..1] role xxx_ValueNotation_valueNotations_src
+	ValueAssignment[*] role valueNotations
+end
+
+composition xxx_TypeAssignment_parentRef between
+	TypeAssignment[*] role xxx_TypeAssignment_parentRef_src
+	TypeAssignment[0..1] role parentRef
+end
+
+composition xxx_TypeAssignment_childRef between
+	TypeAssignment[*] role xxx_TypeAssignment_childRef_src
+	TypeAssignment[0..1] role childRef
+end
+
+association xxx_TypeAssignment_type between
+	TypeAssignment[*] role xxx_TypeAssignment_type_src
+	Referenceable[0..1] role type
+end
+
+composition xxx_TypeNotationRight_value between
+	TypeNotationRight[*] role xxx_TypeNotationRight_value_src
+	Value[0..1] role value
+end
+
+composition xxx_ValueAssignment_valueNotation between
+	ValueAssignment[*] role xxx_ValueAssignment_valueNotation_src
+	Value[0..1] role valueNotation
+end
+
+composition xxx_Value_tag between
+	Value[*] role xxx_Value_tag_src
+	Tag[0..1] role tag
+end
+
+composition xxx_Value_valueTypes between
+	Value[0..1] role xxx_Value_valueTypes_src
+	ValueType[*] role valueTypes
+end
+
+composition xxx_ValueType_param between
+	ValueType[*] role xxx_ValueType_param_src
+	Referenceable[0..1] role param
+end
+
+composition xxx_ValueType_types between
+	ValueType[*] role xxx_ValueType_types_src
+	TypeAssignment[0..1] role types
+end
+
+composition xxx_ValueType_simpleType between
+	ValueType[*] role xxx_ValueType_simpleType_src
+	ASN1_TYPE[0..1] role simpleType
+end
+
+composition xxx_ValueType_macroValue between
+	ValueType[*] role xxx_ValueType_macroValue_src
+	Value[0..1] role macroValue
+end
+
+composition xxx_MacroValueType_ref between
+	MacroValueType[*] role xxx_MacroValueType_ref_src
+	TypeAssignment[0..1] role ref
+end
+
+composition xxx_ASN1_SIMPLE_constraint between
+	ASN1_SIMPLE[*] role xxx_ASN1_SIMPLE_constraint_src
+	ASN1_SIMPLE[0..1] role constraint
+end
+
+composition xxx_ASN1_SIMPLE_range between
+	ASN1_SIMPLE[*] role xxx_ASN1_SIMPLE_range_src
+	ASN1_RANGE[0..1] role range
+end
+
+composition xxx_ASN1_SIMPLE_refinement between
+	ASN1_SIMPLE[*] role xxx_ASN1_SIMPLE_refinement_src
+	ASN1_INTEGER_REFINEMENT[0..1] role refinement
+end
+
+composition xxx_ASN1_SIMPLE_ranges between
+	ASN1_SIMPLE[0..1] role xxx_ASN1_SIMPLE_ranges_src
+	ASN1_RANGE[*] role ranges
+end
+
+composition xxx_ASN1_CHOICE_choiceType between
+	ASN1_CHOICE[0..1] role xxx_ASN1_CHOICE_choiceType_src
+	ASN1_CHOICE_ENTRY[*] role choiceType
+end
+
+composition xxx_ASN1_SEQUENCE_choiceType between
+	ASN1_SEQUENCE[0..1] role xxx_ASN1_SEQUENCE_choiceType_src
+	ASN1_CHOICE_ENTRY[*] role choiceType
+end
+
+composition xxx_ASN1_SEQUENCE_OF_ref between
+	ASN1_SEQUENCE_OF[*] role xxx_ASN1_SEQUENCE_OF_ref_src
+	TypeAssignment[0..1] role ref
+end
+
+composition xxx_ASN1_CHOICE_ENTRY_valueType between
+	ASN1_CHOICE_ENTRY[*] role xxx_ASN1_CHOICE_ENTRY_valueType_src
+	ChoiceType[0..1] role valueType
+end
+
+composition xxx_ChoiceType_typeRef between
+	ChoiceType[*] role xxx_ChoiceType_typeRef_src
+	TypeAssignment[0..1] role typeRef
+end
+
+composition xxx_ChoiceType_simpleType between
+	ChoiceType[*] role xxx_ChoiceType_simpleType_src
+	ASN1_TYPE[0..1] role simpleType
+end
+
+composition xxx_MacroValue_valueType between
+	MacroValue[*] role xxx_MacroValue_valueType_src
+	MacroValueType[0..1] role valueType
+end
+

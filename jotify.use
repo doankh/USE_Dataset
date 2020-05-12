@@ -1,0 +1,129 @@
+model jotify
+class Album<Media
+attributes
+	name : String
+	cover : String
+	type : String
+	review : String
+	year : Integer
+operations
+	getLink():Link
+	getHashCode():Integer
+end
+
+class Artist
+attributes
+	name : String
+	portrait : String
+	genres : String
+	yearsActive : String
+	bios : String
+operations
+	getLink():Link
+	equals(o : String):Boolean
+	getHashCode():Integer
+end
+
+class Biography
+attributes
+	text : String
+	portraits : String
+operations
+end
+
+class Disc
+attributes
+	name : String
+	number : Integer
+operations
+end
+
+class File<Comparable
+attributes
+operations
+	toString():String
+	getHashCode():Integer
+	equals(o : String):Boolean
+end
+
+class Link
+attributes
+operations
+end
+
+class Media
+attributes
+operations
+end
+
+class Playlist
+attributes
+operations
+end
+
+class PlaylistConfimation
+attributes
+operations
+end
+
+class PlaylistContainer
+attributes
+operations
+end
+
+class Restriction
+attributes
+operations
+end
+
+class Result
+attributes
+operations
+end
+
+class Track
+attributes
+operations
+end
+
+class User
+attributes
+operations
+end
+
+abstract class Comparable
+attributes
+operations
+	compareTo(file : File):Integer
+end
+
+association xxx_Album_artist between
+	Album[*] role xxx_Album_artist_src
+	Artist[0..1] role artist
+end
+
+association xxx_Album_similarAlbums between
+	Album[0..1] role xxx_Album_similarAlbums_src
+	Album[*] role similarAlbums
+end
+
+association xxx_Album_discs between
+	Album[0..1] role xxx_Album_discs_src
+	Disc[*] role discs
+end
+
+association xxx_Artist_albums between
+	Artist[0..1] role xxx_Artist_albums_src
+	Album[*] role albums
+end
+
+association xxx_Artist_similarArtists between
+	Artist[0..1] role xxx_Artist_similarArtists_src
+	Artist[*] role similarArtists
+end
+
+association xxx_Disc_tracks between
+	Disc[0..1] role xxx_Disc_tracks_src
+	Track[*] role tracks
+end
+

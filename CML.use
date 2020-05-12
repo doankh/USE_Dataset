@@ -1,0 +1,373 @@
+model PrimitiveTypes
+enum AngleUnits{
+	degrees,
+	radians
+}
+
+enum StringBuiltin{
+	id,
+	elementType,
+	atomId,
+	residueType,
+	residueId,
+	atomRef,
+	order,
+	stereo,
+	spaceground
+}
+
+enum FloatBuiltin{
+	x2,
+	y2,
+	x3,
+	y3,
+	z3,
+	xFract,
+	yFract,
+	zFract,
+	occupancy,
+	isotope,
+	formalCharge,
+	hydrogenCount,
+	nonHydrogenCount,
+	atomParity,
+	length,
+	acell,
+	bcell,
+	ccell,
+	alpha,
+	beta,
+	gamma,
+	z
+}
+
+enum IntegerBuiltin{
+	isotope,
+	formalCharge,
+	hydrogenCount,
+	nonHydrogenCount,
+	atomParity,
+	z
+}
+
+enum Coordinate2Builtin{
+	xy2
+}
+
+enum Coordinate3Builtin{
+	xyz3,
+	xyzFract
+}
+
+abstract class PCDATA
+attributes
+	value : String
+operations
+end
+
+abstract class Any
+attributes
+operations
+end
+
+abstract class TitledElement
+attributes
+	title : String
+operations
+end
+
+abstract class IdedElement
+attributes
+	id : String
+operations
+end
+
+abstract class ConventionnedElement
+attributes
+	convention : String
+operations
+end
+
+abstract class DictRefElement
+attributes
+	dictRef : String
+operations
+end
+
+abstract class SimpleLink_Element
+attributes
+	href : String
+operations
+end
+
+abstract class Counted_Element
+attributes
+	count : String
+operations
+end
+
+abstract class Sized_Element
+attributes
+	size : String
+operations
+end
+
+abstract class Rows_Element
+attributes
+	rows : String
+operations
+end
+
+abstract class Columns_Element
+attributes
+	colums : String
+operations
+end
+
+abstract class Min_Element
+attributes
+	min : String
+operations
+end
+
+abstract class Max_Element
+attributes
+	max : String
+operations
+end
+
+abstract class Units_Element
+attributes
+	units : String
+operations
+end
+
+abstract class AngleUnits_Element
+attributes
+	angleUnits : AngleUnits
+operations
+end
+
+abstract class UnitsRef_Element
+attributes
+	unitsRef : String
+operations
+end
+
+abstract class AtomRefs_Element
+attributes
+	atomRefs : String
+operations
+end
+
+abstract class _StringBuiltin<AtomRefs_Element
+attributes
+	builtin : StringBuiltin
+operations
+end
+
+class _String<ConventionnedElement
+attributes
+operations
+end
+
+class _Link<ConventionnedElement
+attributes
+operations
+end
+
+abstract class _FloatBuiltin
+attributes
+	builtin : FloatBuiltin
+operations
+end
+
+class _Float<ConventionnedElement
+attributes
+operations
+end
+
+abstract class _IntegerBuiltin
+attributes
+	builtin : IntegerBuiltin
+operations
+end
+
+class _Integer<ConventionnedElement
+attributes
+operations
+end
+
+class _StringArray<ConventionnedElement
+attributes
+	delimiter : String
+operations
+end
+
+class _FloatArray<ConventionnedElement
+attributes
+operations
+end
+
+class _IntegerArray<ConventionnedElement
+attributes
+operations
+end
+
+class _FloatMatrix<ConventionnedElement
+attributes
+operations
+end
+
+abstract class _Coordinate2Builtin
+attributes
+	builtin : Coordinate2Builtin
+operations
+end
+
+class _Coordinate2<ConventionnedElement
+attributes
+operations
+end
+
+abstract class _Coordinate3Builtin
+attributes
+	builtin : Coordinate3Builtin
+operations
+end
+
+class _Coordinate3<ConventionnedElement
+attributes
+operations
+end
+
+class _Angle<ConventionnedElement
+attributes
+operations
+end
+
+class _Torsion<ConventionnedElement
+attributes
+operations
+end
+
+class _List<IdedElement
+attributes
+operations
+end
+
+class Molecule<ConventionnedElement
+attributes
+operations
+end
+
+class Formula<ConventionnedElement
+attributes
+operations
+end
+
+class Atom<ConventionnedElement
+attributes
+operations
+end
+
+class Atom_Array<ConventionnedElement
+attributes
+operations
+end
+
+class Bond<ConventionnedElement
+attributes
+operations
+end
+
+class Bond_Array<ConventionnedElement
+attributes
+operations
+end
+
+class Electron<ConventionnedElement
+attributes
+operations
+end
+
+class Reaction<ConventionnedElement
+attributes
+operations
+end
+
+class Crystal<ConventionnedElement
+attributes
+operations
+end
+
+class Sequence_<ConventionnedElement
+attributes
+operations
+end
+
+class Feature<ConventionnedElement
+attributes
+operations
+end
+
+association xxx__List_any between
+	_List[0..1] role xxx__List_any_src
+	Any[*] role any
+end
+
+association xxx_Molecule_any between
+	Molecule[0..1] role xxx_Molecule_any_src
+	Any[*] role any
+end
+
+association xxx_Formula_any between
+	Formula[0..1] role xxx_Formula_any_src
+	Any[*] role any
+end
+
+association xxx_Atom_any between
+	Atom[0..1] role xxx_Atom_any_src
+	Any[*] role any
+end
+
+association xxx_Atom_Array_any between
+	Atom_Array[0..1] role xxx_Atom_Array_any_src
+	Any[*] role any
+end
+
+association xxx_Bond_any between
+	Bond[0..1] role xxx_Bond_any_src
+	Any[*] role any
+end
+
+association xxx_Bond_Array_any between
+	Bond_Array[0..1] role xxx_Bond_Array_any_src
+	Any[*] role any
+end
+
+association xxx_Electron_any between
+	Electron[0..1] role xxx_Electron_any_src
+	Any[*] role any
+end
+
+association xxx_Reaction_any between
+	Reaction[0..1] role xxx_Reaction_any_src
+	Any[*] role any
+end
+
+association xxx_Crystal_any between
+	Crystal[0..1] role xxx_Crystal_any_src
+	Any[*] role any
+end
+
+association xxx_Sequence_any between
+	Sequence_[0..1] role xxx_Sequence_any_src
+	Any[*] role any
+end
+
+association xxx_Feature_any between
+	Feature[0..1] role xxx_Feature_any_src
+	Any[*] role any
+end
+

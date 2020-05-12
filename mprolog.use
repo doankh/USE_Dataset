@@ -1,0 +1,131 @@
+model mprolog
+class Model
+attributes
+	name : String
+operations
+end
+
+class Clause
+attributes
+operations
+end
+
+class Head
+attributes
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+class Body
+attributes
+operations
+end
+
+class Variable<Term
+attributes
+	name : String
+operations
+end
+
+class Functor<Term
+attributes
+	text : String
+operations
+end
+
+class QuotedAtom<Term
+attributes
+	text : String
+operations
+end
+
+class List<Term
+attributes
+operations
+end
+
+class InfixExpression<Term
+attributes
+operations
+end
+
+class Operator
+attributes
+	symbol : String
+operations
+end
+
+class Parenthesis<Term
+attributes
+operations
+end
+
+composition xxx_Model_ownedClause between
+	Model[0..1] role xxx_Model_ownedClause_src
+	Clause[*] role ownedClause
+end
+
+composition xxx_Clause_ownedHead between
+	Clause[*] role xxx_Clause_ownedHead_src
+	Head[0..1] role ownedHead
+end
+
+composition xxx_Clause_ownedBody between
+	Clause[*] role xxx_Clause_ownedBody_src
+	Body[0..1] role ownedBody
+end
+
+composition xxx_Head_ownedFunctor between
+	Head[*] role xxx_Head_ownedFunctor_src
+	Functor[1] role ownedFunctor
+end
+
+composition xxx_Term_nextTerm between
+	Term[*] role xxx_Term_nextTerm_src
+	Term[0..1] role nextTerm
+end
+
+composition xxx_Body_ownedTerm between
+	Body[*] role xxx_Body_ownedTerm_src
+	Term[1] role ownedTerm
+end
+
+composition xxx_Functor_ownedTerm between
+	Functor[*] role xxx_Functor_ownedTerm_src
+	Term[0..1] role ownedTerm
+end
+
+composition xxx_List_ownedHeadTerms between
+	List[*] role xxx_List_ownedHeadTerms_src
+	Term[0..1] role ownedHeadTerms
+end
+
+composition xxx_List_ownedTailTerms between
+	List[*] role xxx_List_ownedTailTerms_src
+	Term[0..1] role ownedTailTerms
+end
+
+composition xxx_InfixExpression_leftTerm between
+	InfixExpression[*] role xxx_InfixExpression_leftTerm_src
+	Term[1] role leftTerm
+end
+
+composition xxx_InfixExpression_rightTerm between
+	InfixExpression[*] role xxx_InfixExpression_rightTerm_src
+	Term[1] role rightTerm
+end
+
+composition xxx_InfixExpression_ownedOperator between
+	InfixExpression[*] role xxx_InfixExpression_ownedOperator_src
+	Operator[1] role ownedOperator
+end
+
+composition xxx_Parenthesis_ownedTerm between
+	Parenthesis[*] role xxx_Parenthesis_ownedTerm_src
+	Term[1] role ownedTerm
+end
+

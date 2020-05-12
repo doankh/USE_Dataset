@@ -1,0 +1,118 @@
+model csvml
+enum FieldTypTypes{
+default
+}
+
+enum AggregationTypes{
+default
+}
+
+enum CompOperatorTypes{
+default
+}
+
+enum LogicalOperatorTypes{
+default
+}
+
+class FileDefinitionSet
+attributes
+operations
+end
+
+class FileDefinition
+attributes
+	Name : String
+operations
+end
+
+abstract class FieldDefinition
+attributes
+	Index : Integer
+	Name : String
+	FieldType : FieldTypTypes
+operations
+end
+
+class StaticField<FieldDefinition
+attributes
+operations
+end
+
+class DerivedField<FieldDefinition
+attributes
+operations
+end
+
+class AggregationField<FieldDefinition
+attributes
+	AggregationType : AggregationTypes
+operations
+end
+
+class RuleBasedField<FieldDefinition
+attributes
+operations
+end
+
+abstract class Rule
+attributes
+	index : Integer
+	ResultValue : String
+	DefaultValue : String
+operations
+end
+
+class ComparisonRule<Rule
+attributes
+	ComparisonValue : String
+	Operator : CompOperatorTypes
+operations
+end
+
+class CompositeRule<Rule
+attributes
+	Operator : LogicalOperatorTypes
+operations
+end
+
+composition xxx_FileDefinitionSet_filedefinitions between
+	FileDefinitionSet[0..1] role xxx_FileDefinitionSet_filedefinitions_src
+	FileDefinition[*] role filedefinitions
+end
+
+composition xxx_FileDefinition_fielddefinitions between
+	FileDefinition[0..1] role xxx_FileDefinition_fielddefinitions_src
+	FieldDefinition[1..*] role fielddefinitions
+end
+
+association xxx_FieldDefinition_rule between
+	FieldDefinition[*] role xxx_FieldDefinition_rule_src
+	Rule[0..1] role rule
+end
+
+association xxx_AggregationField_aggregatedfields between
+	AggregationField[0..1] role xxx_AggregationField_aggregatedfields_src
+	FieldDefinition[1..*] role aggregatedfields
+end
+
+composition xxx_AggregationField_fields between
+	AggregationField[0..1] role xxx_AggregationField_fields_src
+	FieldDefinition[1..*] role fields
+end
+
+association xxx_RuleBasedField_rules between
+	RuleBasedField[0..1] role xxx_RuleBasedField_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_ComparisonRule_comparisonfield between
+	ComparisonRule[*] role xxx_ComparisonRule_comparisonfield_src
+	FieldDefinition[1] role comparisonfield
+end
+
+association xxx_CompositeRule_composedrules between
+	CompositeRule[0..1] role xxx_CompositeRule_composedrules_src
+	Rule[1..*] role composedrules
+end
+

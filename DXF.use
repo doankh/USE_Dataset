@@ -1,0 +1,36 @@
+model DXF
+class DXF
+attributes
+operations
+end
+
+class Mesh
+attributes
+	name : String
+operations
+end
+
+class Point
+attributes
+	name : String
+	x : Real
+	y : Real
+	z : Real
+operations
+end
+
+composition xxx_DXF_meshes between
+	DXF[0..1] role xxx_DXF_meshes_src
+	Mesh[*] role meshes
+end
+
+composition xxx_Mesh_points between
+	Mesh[0..1] role xxx_Mesh_points_src
+	Point[*] role points
+end
+
+association xxx_Point_mesh between
+	Point[*] role xxx_Point_mesh_src
+	Mesh[1] role mesh
+end
+

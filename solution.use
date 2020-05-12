@@ -1,0 +1,181 @@
+model solution
+enum Datatype{
+default
+}
+
+class WebApplication
+attributes
+	name : String
+	creationDate : String
+operations
+end
+
+class WebPage
+attributes
+	name : String
+operations
+end
+
+class StaticPage<WebPage
+attributes
+	relativeURL : String
+operations
+end
+
+class DynamicPage<WebPage
+attributes
+operations
+end
+
+class EntityPage<DynamicPage
+attributes
+operations
+end
+
+class EditablePage<DynamicPage
+attributes
+operations
+end
+
+class CreatePage<EditablePage
+attributes
+operations
+end
+
+class UpdatePage<EditablePage
+attributes
+operations
+end
+
+class DeletePage<EditablePage
+attributes
+operations
+end
+
+class IndexPage<DynamicPage
+attributes
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	type : Datatype
+operations
+end
+
+class Relationship
+attributes
+	name : String
+	lower : Integer
+	upper : Integer
+operations
+end
+
+class Link
+attributes
+	name : String
+operations
+end
+
+class NonContextualLink<Link
+attributes
+operations
+end
+
+class ContextualLink<Link
+attributes
+operations
+end
+
+composition xxx_WebApplication_entities between
+	WebApplication[0..1] role xxx_WebApplication_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_WebApplication_relationships between
+	WebApplication[0..1] role xxx_WebApplication_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_WebApplication_webPages between
+	WebApplication[0..1] role xxx_WebApplication_webPages_src
+	WebPage[*] role webPages
+end
+
+association xxx_WebApplication_homepage between
+	WebApplication[*] role xxx_WebApplication_homepage_src
+	StaticPage[0..1] role homepage
+end
+
+composition xxx_WebPage_source between
+	WebPage[0..1] role xxx_WebPage_source_src
+	Link[*] role source
+end
+
+association xxx_WebPage_home between
+	WebPage[*] role xxx_WebPage_home_src
+	NonContextualLink[0..1] role home
+end
+
+composition xxx_DynamicPage_webPages between
+	DynamicPage[0..1] role xxx_DynamicPage_webPages_src
+	DynamicPage[*] role webPages
+end
+
+association xxx_DynamicPage_entity between
+	DynamicPage[*] role xxx_DynamicPage_entity_src
+	Entity[0..1] role entity
+end
+
+composition xxx_EditablePage_back between
+	EditablePage[*] role xxx_EditablePage_back_src
+	ContextualLink[0..1] role back
+end
+
+composition xxx_IndexPage_back between
+	IndexPage[*] role xxx_IndexPage_back_src
+	ContextualLink[0..1] role back
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Entity_id between
+	Entity[*] role xxx_Entity_id_src
+	Attribute[0..1] role id
+end
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	Entity[0..1] role source
+end
+
+association xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	Entity[0..1] role target
+end
+
+association xxx_Relationship_ref between
+	Relationship[*] role xxx_Relationship_ref_src
+	Relationship[0..1] role ref
+end
+
+association xxx_Link_target between
+	Link[*] role xxx_Link_target_src
+	WebPage[0..1] role target
+end
+
+association xxx_ContextualLink_information between
+	ContextualLink[*] role xxx_ContextualLink_information_src
+	Entity[0..1] role information
+end
+

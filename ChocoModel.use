@@ -1,0 +1,162 @@
+model ChocoModel
+enum OpConstraint{
+	eq,
+	and2,
+	or2,
+	gt,
+	ge,
+	lt,
+	le,
+	plus
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Package<LocatedElement
+attributes
+	name : String
+operations
+end
+
+class Import<LocatedElement
+attributes
+	fqn : String
+operations
+end
+
+class ChocoProblem<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Element<LocatedElement
+attributes
+	label : String
+operations
+end
+
+abstract class Expression<Element
+attributes
+operations
+end
+
+class ConstraintDef<Expression
+attributes
+	op : OpConstraint
+operations
+end
+
+class IntVar<Expression
+attributes
+operations
+end
+
+class Domain<LocatedElement
+attributes
+	lower : Integer
+	upper : Integer
+operations
+end
+
+class IntConstant<Expression
+attributes
+	val : Integer
+operations
+end
+
+class SymbolicTerm<Expression
+attributes
+operations
+end
+
+class IntValue<Expression
+attributes
+	val : Integer
+operations
+end
+
+class IntExp<Expression
+attributes
+	op : OpConstraint
+operations
+end
+
+class Constraint<Expression
+attributes
+	op : OpConstraint
+operations
+end
+
+class PostConstraint<Element
+attributes
+	op : OpConstraint
+operations
+end
+
+composition xxx_Package_import between
+	Package[0..1] role xxx_Package_import_src
+	Import[*] role import
+end
+
+composition xxx_Package_problem between
+	Package[*] role xxx_Package_problem_src
+	ChocoProblem[1] role problem
+end
+
+composition xxx_ChocoProblem_elements between
+	ChocoProblem[0..1] role xxx_ChocoProblem_elements_src
+	Element[*] role elements
+end
+
+composition xxx_ConstraintDef_left between
+	ConstraintDef[*] role xxx_ConstraintDef_left_src
+	Expression[1] role left
+end
+
+composition xxx_ConstraintDef_right between
+	ConstraintDef[*] role xxx_ConstraintDef_right_src
+	Expression[1] role right
+end
+
+composition xxx_IntVar_domain between
+	IntVar[*] role xxx_IntVar_domain_src
+	Domain[1] role domain
+end
+
+association xxx_SymbolicTerm_term between
+	SymbolicTerm[*] role xxx_SymbolicTerm_term_src
+	Expression[1] role term
+end
+
+composition xxx_IntExp_left between
+	IntExp[*] role xxx_IntExp_left_src
+	Expression[1] role left
+end
+
+composition xxx_IntExp_right between
+	IntExp[*] role xxx_IntExp_right_src
+	Expression[1] role right
+end
+
+composition xxx_Constraint_left between
+	Constraint[*] role xxx_Constraint_left_src
+	Expression[1] role left
+end
+
+composition xxx_Constraint_right between
+	Constraint[*] role xxx_Constraint_right_src
+	Expression[1] role right
+end
+
+association xxx_PostConstraint_constraint between
+	PostConstraint[*] role xxx_PostConstraint_constraint_src
+	ConstraintDef[1] role constraint
+end
+

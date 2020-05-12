@@ -1,0 +1,80 @@
+model basic
+abstract class TypeItem
+attributes
+	sourceStart : Integer
+	sourceEnd : Integer
+	typeName : String
+operations
+end
+
+class Alias<TypeItem
+attributes
+	rawName : String
+	name : String
+operations
+end
+
+class Widget<Alias
+attributes
+operations
+end
+
+class Plugin<Alias
+attributes
+operations
+end
+
+class ExtJSProject
+attributes
+	name : String
+operations
+end
+
+class Layout<Alias
+attributes
+operations
+end
+
+class Feature<Alias
+attributes
+operations
+end
+
+class File
+attributes
+	name : String
+operations
+	cleanAliases()
+	addAlias(name : String,sourceStart : Integer,sourceEnd : Integer,type : String)
+end
+
+class Event<TypeItem
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	type : String
+	description : String
+operations
+end
+
+composition xxx_ExtJSProject_files between
+	ExtJSProject[0..1] role xxx_ExtJSProject_files_src
+	File[*] role files
+end
+
+composition xxx_File_aliases between
+	File[0..1] role xxx_File_aliases_src
+	Alias[*] role aliases
+end
+
+composition xxx_Event_parameters between
+	Event[0..1] role xxx_Event_parameters_src
+	Parameter[*] role parameters
+end
+

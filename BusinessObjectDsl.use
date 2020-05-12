@@ -1,0 +1,86 @@
+model businessObjectDsl
+class Model
+attributes
+operations
+end
+
+class Package
+attributes
+	name : String
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+operations
+end
+
+class BusinessObject<Type
+attributes
+operations
+end
+
+class Enumeration<Type
+attributes
+operations
+end
+
+class EnumLiteral
+attributes
+	name : String
+operations
+end
+
+class Attribute
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class SimpleType<Type
+attributes
+operations
+end
+
+composition xxx_Model_types between
+	Model[0..1] role xxx_Model_types_src
+	SimpleType[*] role types
+end
+
+composition xxx_Model_package between
+	Model[*] role xxx_Model_package_src
+	Package[0..1] role package
+end
+
+composition xxx_Package_imports between
+	Package[0..1] role xxx_Package_imports_src
+	Import[*] role imports
+end
+
+composition xxx_Package_type between
+	Package[*] role xxx_Package_type_src
+	Type[0..1] role type
+end
+
+composition xxx_BusinessObject_attributes_ between
+	BusinessObject[0..1] role xxx_BusinessObject_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	EnumLiteral[*] role literals
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Type[0..1] role type
+end
+

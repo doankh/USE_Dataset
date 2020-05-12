@@ -1,0 +1,75 @@
+model questionnaire
+enum ClosedEndedQuestionType{
+default
+}
+
+class Questionnaire
+attributes
+	title : String
+operations
+end
+
+class Question
+attributes
+	text : String
+	mandatory : Boolean
+operations
+end
+
+class QuestionGroup
+attributes
+	name : String
+operations
+end
+
+class OpenEndedQuestion<Question
+attributes
+	multiline : Boolean
+operations
+end
+
+class ClosedEndedQuestion<Question
+attributes
+	type : ClosedEndedQuestionType
+operations
+end
+
+class Answer
+attributes
+	text : String
+	openAnswer : Boolean
+operations
+end
+
+class LikertScaleQuestion<Question
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+composition xxx_Questionnaire_questionGroups between
+	Questionnaire[0..1] role xxx_Questionnaire_questionGroups_src
+	QuestionGroup[1..*] role questionGroups
+end
+
+composition xxx_QuestionGroup_questions between
+	QuestionGroup[0..1] role xxx_QuestionGroup_questions_src
+	Question[1..*] role questions
+end
+
+composition xxx_ClosedEndedQuestion_answers between
+	ClosedEndedQuestion[0..1] role xxx_ClosedEndedQuestion_answers_src
+	Answer[1..*] role answers
+end
+
+association xxx_ClosedEndedQuestion_defaultAnswer between
+	ClosedEndedQuestion[*] role xxx_ClosedEndedQuestion_defaultAnswer_src
+	Answer[0..1] role defaultAnswer
+end
+
+association xxx_Answer_enablesQuestion between
+	Answer[0..1] role xxx_Answer_enablesQuestion_src
+	Question[*] role enablesQuestion
+end
+

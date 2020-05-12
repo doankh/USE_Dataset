@@ -1,0 +1,433 @@
+model webIDL
+class IDLDefinitions
+attributes
+operations
+end
+
+class Import
+attributes
+	importURI : String
+operations
+end
+
+class TypeDef<Types,Definitions
+attributes
+	name : String
+operations
+end
+
+class TypeRef
+attributes
+	isArray : Boolean
+operations
+end
+
+class UserTypeRef<TypeRef
+attributes
+operations
+end
+
+class Types
+attributes
+operations
+end
+
+class PrimitiveTypeRef<TypeRef
+attributes
+	unsigned : Boolean
+	name : String
+	nullable : Boolean
+operations
+end
+
+class SequenceType<TypeRef
+attributes
+	nullable : Boolean
+operations
+end
+
+class Callable
+attributes
+operations
+end
+
+class Constructor<NamedConstructor,InterfaceExtendedAttribute
+attributes
+	name : String
+operations
+end
+
+class NamedConstructor<InterfaceExtendedAttribute
+attributes
+operations
+end
+
+class Callback<InterfaceExtendedAttribute
+attributes
+	functionOnly : Boolean
+	propertyOnly : Boolean
+operations
+end
+
+class NoInterfaceObject<InterfaceExtendedAttribute,ExceptionExtendedAttribute
+attributes
+operations
+end
+
+class PrototypeRoot<InterfaceExtendedAttribute
+attributes
+operations
+end
+
+class PutForwards<AttributeExtendedAttribute
+attributes
+operations
+end
+
+class TreatNullAs<OperationExtendedAttribute,AttributeExtendedAttribute,ArgumentExtendedAttribute
+attributes
+operations
+end
+
+class TreatUndefinedAs<OperationExtendedAttribute,AttributeExtendedAttribute,ArgumentExtendedAttribute
+attributes
+	asEmptyString : Boolean
+	asNull : Boolean
+operations
+end
+
+class AllowAny<ArgumentExtendedAttribute
+attributes
+operations
+end
+
+class Replaceable<AttributeExtendedAttribute
+attributes
+operations
+end
+
+class Supplemental<InterfaceExtendedAttribute
+attributes
+operations
+end
+
+class ReplaceableNamedProperties<InterfaceExtendedAttribute
+attributes
+operations
+end
+
+class AbstractDefinitions
+attributes
+operations
+end
+
+class Definitions<AbstractDefinitions
+attributes
+operations
+end
+
+class ImplementStatement<Definitions
+attributes
+operations
+end
+
+class Module<AbstractDefinitions
+attributes
+	name : String
+operations
+end
+
+class ModuleExtendedAttribute
+attributes
+operations
+end
+
+class Prefix<ModuleExtendedAttribute
+attributes
+	value : String
+operations
+end
+
+class NamespaceObject<ModuleExtendedAttribute
+attributes
+operations
+end
+
+class Interface<Types,Definitions
+attributes
+	name : String
+operations
+	getOperations():Operation
+	getAttributes():Attribute
+end
+
+class InterfaceExtendedAttribute
+attributes
+operations
+end
+
+class InterfaceMember
+attributes
+operations
+end
+
+class InterfaceFeature<Types,InterfaceMember
+attributes
+	stringifier : Boolean
+	name : String
+operations
+end
+
+class Operation<InterfaceFeature
+attributes
+	omittable : Boolean
+operations
+end
+
+class OperationExtendedAttribute
+attributes
+operations
+end
+
+class OperationSpecial
+attributes
+operations
+end
+
+class Attribute<InterfaceFeature
+attributes
+operations
+end
+
+class AttributeExtendedAttribute
+attributes
+operations
+end
+
+class Exception<Definitions
+attributes
+	name : String
+operations
+end
+
+class ExceptionMember
+attributes
+operations
+end
+
+class ExceptionField<ExceptionMember
+attributes
+	name : String
+operations
+end
+
+class ExceptionExtendedAttribute
+attributes
+operations
+end
+
+class Argument
+attributes
+	in_ : Boolean
+	optional : Boolean
+	ellipsis : Boolean
+	name : String
+operations
+end
+
+class ArgumentExtendedAttribute
+attributes
+operations
+end
+
+class Const<InterfaceMember,ExceptionMember
+attributes
+	name : String
+operations
+end
+
+class ConstExpr
+attributes
+operations
+end
+
+class OperationSpecialGetter<OperationSpecial
+attributes
+operations
+end
+
+class OperationSpecialSetter<OperationSpecial
+attributes
+operations
+end
+
+class OperationSpecialCreator<OperationSpecial
+attributes
+operations
+end
+
+class OperationSpecialDeleter<OperationSpecial
+attributes
+operations
+end
+
+class OperationSpecialCaller<OperationSpecial
+attributes
+operations
+end
+
+composition xxx_IDLDefinitions_imports between
+	IDLDefinitions[0..1] role xxx_IDLDefinitions_imports_src
+	Import[*] role imports
+end
+
+composition xxx_IDLDefinitions_definitions between
+	IDLDefinitions[0..1] role xxx_IDLDefinitions_definitions_src
+	AbstractDefinitions[*] role definitions
+end
+
+composition xxx_TypeDef_type between
+	TypeDef[*] role xxx_TypeDef_type_src
+	TypeRef[0..1] role type
+end
+
+association xxx_UserTypeRef_type between
+	UserTypeRef[*] role xxx_UserTypeRef_type_src
+	Types[0..1] role type
+end
+
+composition xxx_SequenceType_type between
+	SequenceType[*] role xxx_SequenceType_type_src
+	TypeRef[0..1] role type
+end
+
+association xxx_Callable_target between
+	Callable[*] role xxx_Callable_target_src
+	Operation[0..1] role target
+end
+
+composition xxx_Constructor_arguments between
+	Constructor[0..1] role xxx_Constructor_arguments_src
+	Argument[*] role arguments
+end
+
+association xxx_PutForwards_target between
+	PutForwards[*] role xxx_PutForwards_target_src
+	Attribute[0..1] role target
+end
+
+association xxx_ImplementStatement_source between
+	ImplementStatement[*] role xxx_ImplementStatement_source_src
+	Interface[0..1] role source
+end
+
+association xxx_ImplementStatement_target between
+	ImplementStatement[*] role xxx_ImplementStatement_target_src
+	Interface[0..1] role target
+end
+
+composition xxx_Module_extendedAttributes between
+	Module[0..1] role xxx_Module_extendedAttributes_src
+	ModuleExtendedAttribute[*] role extendedAttributes
+end
+
+composition xxx_Module_definitions between
+	Module[0..1] role xxx_Module_definitions_src
+	AbstractDefinitions[*] role definitions
+end
+
+composition xxx_Interface_extendedAttributes between
+	Interface[0..1] role xxx_Interface_extendedAttributes_src
+	InterfaceExtendedAttribute[*] role extendedAttributes
+end
+
+composition xxx_Interface_extendedAttribute between
+	Interface[0..1] role xxx_Interface_extendedAttribute_src
+	InterfaceExtendedAttribute[*] role extendedAttribute
+end
+
+association xxx_Interface_superType between
+	Interface[0..1] role xxx_Interface_superType_src
+	Interface[*] role superType
+end
+
+composition xxx_Interface_members between
+	Interface[0..1] role xxx_Interface_members_src
+	InterfaceMember[*] role members
+end
+
+composition xxx_Operation_extendedAttributes between
+	Operation[0..1] role xxx_Operation_extendedAttributes_src
+	OperationExtendedAttribute[*] role extendedAttributes
+end
+
+composition xxx_Operation_specials between
+	Operation[0..1] role xxx_Operation_specials_src
+	OperationSpecial[*] role specials
+end
+
+composition xxx_Operation_return between
+	Operation[*] role xxx_Operation_return_src
+	TypeRef[0..1] role return
+end
+
+composition xxx_Operation_arguments between
+	Operation[0..1] role xxx_Operation_arguments_src
+	Argument[*] role arguments
+end
+
+association xxx_Operation_raises between
+	Operation[0..1] role xxx_Operation_raises_src
+	Exception[*] role raises
+end
+
+composition xxx_Attribute_extendedAttributes between
+	Attribute[0..1] role xxx_Attribute_extendedAttributes_src
+	AttributeExtendedAttribute[*] role extendedAttributes
+end
+
+composition xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	TypeRef[0..1] role type
+end
+
+association xxx_Attribute_getRaises between
+	Attribute[0..1] role xxx_Attribute_getRaises_src
+	Exception[*] role getRaises
+end
+
+association xxx_Attribute_setRaises between
+	Attribute[0..1] role xxx_Attribute_setRaises_src
+	Exception[*] role setRaises
+end
+
+composition xxx_Exception_extendedAttributes between
+	Exception[0..1] role xxx_Exception_extendedAttributes_src
+	ExceptionExtendedAttribute[*] role extendedAttributes
+end
+
+composition xxx_Exception_members between
+	Exception[0..1] role xxx_Exception_members_src
+	ExceptionMember[*] role members
+end
+
+composition xxx_ExceptionMember_type between
+	ExceptionMember[*] role xxx_ExceptionMember_type_src
+	TypeRef[0..1] role type
+end
+
+composition xxx_Argument_extendedAttributes between
+	Argument[0..1] role xxx_Argument_extendedAttributes_src
+	ArgumentExtendedAttribute[*] role extendedAttributes
+end
+
+composition xxx_Argument_type between
+	Argument[*] role xxx_Argument_type_src
+	TypeRef[0..1] role type
+end
+
+composition xxx_Const_expr between
+	Const[*] role xxx_Const_expr_src
+	ConstExpr[0..1] role expr
+end
+

@@ -1,0 +1,69 @@
+model policyengine
+enum Operator{
+default
+}
+
+class Statement
+attributes
+operations
+	execute()
+end
+
+class IfStatement<Statement
+attributes
+operations
+end
+
+class Expression
+attributes
+	sensorId : String
+	operator : Operator
+operations
+end
+
+class Value
+attributes
+operations
+end
+
+class FloatValue<Value
+attributes
+operations
+end
+
+class SetStatement<Statement
+attributes
+	sensorId : String
+operations
+end
+
+class SensorValueCache
+attributes
+operations
+end
+
+composition xxx_IfStatement_then_ between
+	IfStatement[0..1] role xxx_IfStatement_then__src
+	Statement[*] role then_
+end
+
+composition xxx_IfStatement_else_ between
+	IfStatement[0..1] role xxx_IfStatement_else__src
+	Statement[*] role else_
+end
+
+composition xxx_IfStatement_conditions between
+	IfStatement[0..1] role xxx_IfStatement_conditions_src
+	Expression[*] role conditions
+end
+
+composition xxx_Expression_value between
+	Expression[*] role xxx_Expression_value_src
+	Value[1] role value
+end
+
+composition xxx_SetStatement_value between
+	SetStatement[*] role xxx_SetStatement_value_src
+	Value[1] role value
+end
+

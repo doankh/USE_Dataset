@@ -1,0 +1,85 @@
+model RequirementsMetamodel
+enum Status{
+default
+}
+
+enum Priority{
+default
+}
+
+class RequirementsModel
+attributes
+	name : String
+operations
+end
+
+class Requirement
+attributes
+	ID : Integer
+	name : String
+	description : String
+	reason : String
+operations
+end
+
+abstract class Relationship
+attributes
+operations
+end
+
+class Require<Relationship
+attributes
+operations
+end
+
+class Refine<Relationship
+attributes
+operations
+end
+
+class PartiallyRefine<Relationship
+attributes
+operations
+end
+
+class Conflict<Relationship
+attributes
+operations
+end
+
+class Contain<Relationship
+attributes
+operations
+end
+
+class RequirementPart
+attributes
+	name : String
+operations
+end
+
+composition xxx_RequirementsModel_requirements between
+	RequirementsModel[0..1] role xxx_RequirementsModel_requirements_src
+	Requirement[*] role requirements
+end
+
+composition xxx_RequirementsModel_relationships between
+	RequirementsModel[0..1] role xxx_RequirementsModel_relationships_src
+	Relationship[*] role relationships
+end
+
+composition xxx_Requirement_parts between
+	Requirement[0..1] role xxx_Requirement_parts_src
+	RequirementPart[*] role parts
+end
+
+association xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	Requirement[0..1] role source
+end
+
+association xxx_Relationship_target between
+	Relationship[0..1] role xxx_Relationship_target_src
+	Requirement[*] role target
+end
+

@@ -1,0 +1,197 @@
+model icm
+enum SinkPinMode{
+default
+}
+
+enum SourcePinMode{
+default
+}
+
+class AssemblyInstance
+attributes
+	name : String
+	connectionOverhead : Real
+	sourceFile : String
+operations
+end
+
+class IcmComponent<ElementInstance
+attributes
+operations
+end
+
+class Constant<Distribution
+attributes
+	value : Real
+	offset : Real
+operations
+end
+
+abstract class Distribution
+attributes
+operations
+	add(value : Real)
+end
+
+abstract class ElementInstance
+attributes
+	name : String
+	nodeNum : Integer
+	typeName : String
+	typeNodeNum : Integer
+operations
+end
+
+class Exponential<Distribution
+attributes
+	mean : Real
+operations
+end
+
+class Normal<Distribution
+attributes
+	mean : Real
+	stdDev : Real
+operations
+end
+
+abstract class PinInstance
+attributes
+	nodeNum : Integer
+	name : String
+	id : Integer
+operations
+end
+
+class SSComponent<IcmComponent
+attributes
+	budget : Real
+	replenishmentPeriod : Integer
+	backgroundPriority : Integer
+operations
+end
+
+class IcmService<ElementInstance
+attributes
+	priority : Integer
+operations
+end
+
+class ServiceSourcePinIcm<SourcePinInstance
+attributes
+	deadline : Real
+operations
+end
+
+class SinkPinInstance<PinInstance
+attributes
+	mode : SinkPinMode
+	priority : Integer
+	downsamplingFactor : Integer
+operations
+end
+
+class SourcePinInstance<PinInstance
+attributes
+	mode : SourcePinMode
+operations
+end
+
+class Uniform<Distribution
+attributes
+	max : Real
+	min : Real
+operations
+end
+
+class Unknown<Distribution
+attributes
+	mean : Real
+	min : Real
+	max : Real
+operations
+end
+
+class Scenario
+attributes
+	name : String
+	number : Integer
+operations
+end
+
+class Mutex
+attributes
+	name : String
+operations
+end
+
+composition xxx_AssemblyInstance_elements between
+	AssemblyInstance[0..1] role xxx_AssemblyInstance_elements_src
+	ElementInstance[*] role elements
+end
+
+composition xxx_AssemblyInstance_scenarios between
+	AssemblyInstance[0..1] role xxx_AssemblyInstance_scenarios_src
+	Scenario[*] role scenarios
+end
+
+composition xxx_AssemblyInstance_mutexes between
+	AssemblyInstance[0..1] role xxx_AssemblyInstance_mutexes_src
+	Mutex[*] role mutexes
+end
+
+composition xxx_ElementInstance_pins between
+	ElementInstance[0..1] role xxx_ElementInstance_pins_src
+	PinInstance[*] role pins
+end
+
+association xxx_PinInstance_elementInstance between
+	PinInstance[*] role xxx_PinInstance_elementInstance_src
+	ElementInstance[0..1] role elementInstance
+end
+
+association xxx_PinInstance_scenarios between
+	PinInstance[0..1] role xxx_PinInstance_scenarios_src
+	Scenario[*] role scenarios
+end
+
+composition xxx_ServiceSourcePinIcm_eventDistribution between
+	ServiceSourcePinIcm[*] role xxx_ServiceSourcePinIcm_eventDistribution_src
+	Distribution[1] role eventDistribution
+end
+
+composition xxx_ServiceSourcePinIcm_execTimeDistribution between
+	ServiceSourcePinIcm[*] role xxx_ServiceSourcePinIcm_execTimeDistribution_src
+	Distribution[0..1] role execTimeDistribution
+end
+
+association xxx_SinkPinInstance_reactSources between
+	SinkPinInstance[0..1] role xxx_SinkPinInstance_reactSources_src
+	SourcePinInstance[*] role reactSources
+end
+
+association xxx_SinkPinInstance_linkSources between
+	SinkPinInstance[0..1] role xxx_SinkPinInstance_linkSources_src
+	SourcePinInstance[*] role linkSources
+end
+
+composition xxx_SinkPinInstance_execTimeDistribution between
+	SinkPinInstance[*] role xxx_SinkPinInstance_execTimeDistribution_src
+	Distribution[1] role execTimeDistribution
+end
+
+association xxx_SinkPinInstance_mutexes between
+	SinkPinInstance[0..1] role xxx_SinkPinInstance_mutexes_src
+	Mutex[*] role mutexes
+end
+
+association xxx_SourcePinInstance_sinks between
+	SourcePinInstance[0..1] role xxx_SourcePinInstance_sinks_src
+	SinkPinInstance[*] role sinks
+end
+
+association xxx_SourcePinInstance_reactSinks between
+	SourcePinInstance[0..1] role xxx_SourcePinInstance_reactSinks_src
+	SinkPinInstance[*] role reactSinks
+end
+

@@ -1,0 +1,199 @@
+model inventory
+class Stock
+attributes
+	name : String
+operations
+end
+
+abstract class Product
+attributes
+	name : String
+operations
+	getCost():Real
+end
+
+class StockProduct<Product
+attributes
+	cost : Real
+	available : Integer
+	orderLimit : Integer
+operations
+end
+
+class Recipe<Product
+attributes
+	cost : Real
+operations
+end
+
+class Ingredient
+attributes
+	quantity : Integer
+operations
+end
+
+class MenuCard
+attributes
+	title : String
+operations
+end
+
+class Restaurant
+attributes
+	name : String
+operations
+end
+
+class Department<Station
+attributes
+operations
+end
+
+class Offering
+attributes
+	name : String
+	description : String
+	price : Real
+operations
+end
+
+class Table<Station
+attributes
+	seats : Integer
+operations
+end
+
+class Employee
+attributes
+	name : String
+operations
+end
+
+abstract class Station
+attributes
+	stationID : String
+operations
+end
+
+class Section
+attributes
+	title : String
+	text : String
+operations
+end
+
+composition xxx_Stock_products between
+	Stock[0..1] role xxx_Stock_products_src
+	StockProduct[*] role products
+end
+
+association xxx_Stock_department between
+	Stock[*] role xxx_Stock_department_src
+	Department[1] role department
+end
+
+association xxx_StockProduct_stock between
+	StockProduct[*] role xxx_StockProduct_stock_src
+	Stock[1] role stock
+end
+
+composition xxx_Recipe_ingredients between
+	Recipe[0..1] role xxx_Recipe_ingredients_src
+	Ingredient[*] role ingredients
+end
+
+association xxx_Recipe_department between
+	Recipe[*] role xxx_Recipe_department_src
+	Department[0..1] role department
+end
+
+association xxx_Ingredient_recipe between
+	Ingredient[*] role xxx_Ingredient_recipe_src
+	Recipe[1] role recipe
+end
+
+association xxx_Ingredient_product between
+	Ingredient[*] role xxx_Ingredient_product_src
+	Product[1] role product
+end
+
+association xxx_MenuCard_restaurant between
+	MenuCard[*] role xxx_MenuCard_restaurant_src
+	Restaurant[1] role restaurant
+end
+
+composition xxx_MenuCard_sections between
+	MenuCard[0..1] role xxx_MenuCard_sections_src
+	Section[1..*] role sections
+end
+
+composition xxx_Restaurant_departments between
+	Restaurant[0..1] role xxx_Restaurant_departments_src
+	Department[*] role departments
+end
+
+composition xxx_Restaurant_menuCards between
+	Restaurant[0..1] role xxx_Restaurant_menuCards_src
+	MenuCard[*] role menuCards
+end
+
+composition xxx_Restaurant_tables between
+	Restaurant[0..1] role xxx_Restaurant_tables_src
+	Table[*] role tables
+end
+
+association xxx_Restaurant_stations between
+	Restaurant[0..1] role xxx_Restaurant_stations_src
+	Station[*] role stations
+end
+
+composition xxx_Department_recipes between
+	Department[0..1] role xxx_Department_recipes_src
+	Recipe[*] role recipes
+end
+
+association xxx_Department_restaurant between
+	Department[*] role xxx_Department_restaurant_src
+	Restaurant[1] role restaurant
+end
+
+composition xxx_Department_employees between
+	Department[0..1] role xxx_Department_employees_src
+	Employee[*] role employees
+end
+
+composition xxx_Department_stocks between
+	Department[0..1] role xxx_Department_stocks_src
+	Stock[1..*] role stocks
+end
+
+association xxx_Offering_product between
+	Offering[*] role xxx_Offering_product_src
+	Product[1] role product
+end
+
+association xxx_Offering_section between
+	Offering[*] role xxx_Offering_section_src
+	Section[1] role section
+end
+
+association xxx_Table_restaurant between
+	Table[*] role xxx_Table_restaurant_src
+	Restaurant[1] role restaurant
+end
+
+association xxx_Employee_department between
+	Employee[*] role xxx_Employee_department_src
+	Department[0..1] role department
+end
+
+association xxx_Section_menuCard between
+	Section[*] role xxx_Section_menuCard_src
+	MenuCard[1] role menuCard
+end
+
+composition xxx_Section_offerings between
+	Section[0..1] role xxx_Section_offerings_src
+	Offering[1..*] role offerings
+end
+

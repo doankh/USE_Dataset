@@ -1,0 +1,47 @@
+model classes
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Namespace
+attributes
+operations
+end
+
+class Package<NamedElement,Namespace
+attributes
+operations
+end
+
+class Class<NamedElement
+attributes
+operations
+end
+
+class Root
+attributes
+operations
+end
+
+composition xxx_Package_ownedClasses between
+	Package[0..1] role xxx_Package_ownedClasses_src
+	Class[*] role ownedClasses
+end
+
+composition xxx_Package_ownedPackages between
+	Package[0..1] role xxx_Package_ownedPackages_src
+	Package[*] role ownedPackages
+end
+
+association xxx_Class_superClass between
+	Class[*] role xxx_Class_superClass_src
+	Class[0..1] role superClass
+end
+
+composition xxx_Root_ownedPackages between
+	Root[0..1] role xxx_Root_ownedPackages_src
+	Package[*] role ownedPackages
+end
+

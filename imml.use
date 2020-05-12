@@ -1,0 +1,211 @@
+model imml
+enum objectType{
+default
+}
+
+enum structureOperatorType{
+default
+}
+
+class interfaceModel
+attributes
+	application : String
+operations
+end
+
+class domainFunction
+attributes
+	name : String
+	preCondition : String
+	postCondition : String
+operations
+end
+
+class State
+attributes
+	name : String
+operations
+end
+
+class Control
+attributes
+	name : String
+operations
+end
+
+class domainObject
+attributes
+	name : String
+	type : objectType
+operations
+end
+
+class domainModel
+attributes
+operations
+end
+
+class inputOperand<Operand
+attributes
+operations
+end
+
+class outputOperand<Operand
+attributes
+operations
+end
+
+class interactionModel
+attributes
+operations
+end
+
+class functionInteraction
+attributes
+	name : String
+operations
+end
+
+abstract class interactionStructure
+attributes
+operations
+end
+
+abstract class basicInteraction
+attributes
+operations
+end
+
+class enterInformation<manipulateInformation
+attributes
+operations
+end
+
+class selectInformation<manipulateInformation
+attributes
+operations
+end
+
+class perceiveInforrmation<manipulateInformation
+attributes
+	constant : String
+operations
+end
+
+class activeControl<basicInteraction
+attributes
+operations
+end
+
+abstract class Operand
+attributes
+operations
+end
+
+abstract class structureOperator
+attributes
+	type : structureOperatorType
+operations
+end
+
+abstract class manipulateInformation<basicInteraction
+attributes
+operations
+end
+
+class Task
+attributes
+	name : String
+operations
+end
+
+composition xxx_interfaceModel_domain between
+	interfaceModel[*] role xxx_interfaceModel_domain_src
+	domainModel[1] role domain
+end
+
+composition xxx_interfaceModel_interaction between
+	interfaceModel[*] role xxx_interfaceModel_interaction_src
+	interactionModel[1] role interaction
+end
+
+composition xxx_domainFunction_states_ between
+	domainFunction[0..1] role xxx_domainFunction_states__src
+	State[2..*] role states_
+end
+
+composition xxx_domainFunction_controls between
+	domainFunction[0..1] role xxx_domainFunction_controls_src
+	Control[1..*] role controls
+end
+
+composition xxx_domainFunction_operands between
+	domainFunction[0..1] role xxx_domainFunction_operands_src
+	Operand[*] role operands
+end
+
+association xxx_Control_changeFrom between
+	Control[*] role xxx_Control_changeFrom_src
+	State[1] role changeFrom
+end
+
+association xxx_Control_changeTo between
+	Control[*] role xxx_Control_changeTo_src
+	State[1] role changeTo
+end
+
+composition xxx_domainModel_domainObjects between
+	domainModel[0..1] role xxx_domainModel_domainObjects_src
+	domainObject[*] role domainObjects
+end
+
+composition xxx_domainModel_domainFunctions between
+	domainModel[0..1] role xxx_domainModel_domainFunctions_src
+	domainFunction[1..*] role domainFunctions
+end
+
+composition xxx_interactionModel_interactions between
+	interactionModel[0..1] role xxx_interactionModel_interactions_src
+	functionInteraction[1..*] role interactions
+end
+
+composition xxx_interactionModel_tasks between
+	interactionModel[0..1] role xxx_interactionModel_tasks_src
+	Task[*] role tasks
+end
+
+composition xxx_functionInteraction_structures between
+	functionInteraction[0..1] role xxx_functionInteraction_structures_src
+	interactionStructure[*] role structures
+end
+
+association xxx_functionInteraction_function between
+	functionInteraction[*] role xxx_functionInteraction_function_src
+	domainFunction[1] role function
+end
+
+composition xxx_interactionStructure_interactions between
+	interactionStructure[0..1] role xxx_interactionStructure_interactions_src
+	basicInteraction[1..*] role interactions
+end
+
+association xxx_activeControl_control between
+	activeControl[*] role xxx_activeControl_control_src
+	Control[1] role control
+end
+
+association xxx_Operand_object between
+	Operand[*] role xxx_Operand_object_src
+	domainObject[1] role object
+end
+
+composition xxx_structureOperator_structures between
+	structureOperator[0..1] role xxx_structureOperator_structures_src
+	structureOperator[*] role structures
+end
+
+association xxx_manipulateInformation_object between
+	manipulateInformation[*] role xxx_manipulateInformation_object_src
+	domainObject[1] role object
+end
+

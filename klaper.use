@@ -1,0 +1,217 @@
+model Klaper
+class Resource
+attributes
+	name : String
+	type : String
+	capacity : Integer
+	schedulingPolicy : String
+	description : String
+operations
+end
+
+class Service
+attributes
+	name : String
+	formalParams : String
+	speedAttr : String
+	failAttr : String
+	description : String
+operations
+end
+
+class Behavior
+attributes
+operations
+end
+
+class WorkLoad
+attributes
+	workLoadType : String
+	arrivalProcess : String
+	population : String
+	initialResource : String
+operations
+end
+
+class Step<Behavior
+attributes
+	name : String
+	repetition : String
+	internalExecTime : String
+	internalFailProb : String
+	completionModel : String
+operations
+end
+
+class Start<Step
+attributes
+operations
+end
+
+class End<Step
+attributes
+operations
+end
+
+class Control<Step
+attributes
+operations
+end
+
+class InternalActivity<Step
+attributes
+operations
+end
+
+class ServiceCall<Step
+attributes
+	resourceType : String
+	serviceName : String
+	isSynch : Boolean
+operations
+end
+
+class ActualParam
+attributes
+	value : String
+operations
+end
+
+class Branch<Control
+attributes
+	branchProbs : String
+operations
+end
+
+class Fork<Control
+attributes
+operations
+end
+
+class Join<Control
+attributes
+operations
+end
+
+class Acquire<Control
+attributes
+	resourceUnits : String
+operations
+end
+
+class Release<Control
+attributes
+	resourceUnits : String
+operations
+end
+
+association xxx_Resource_acquire between
+	Resource[*] role xxx_Resource_acquire_src
+	Acquire[1] role acquire
+end
+
+association xxx_Resource_release between
+	Resource[*] role xxx_Resource_release_src
+	Release[1] role release
+end
+
+association xxx_Service_behavior between
+	Service[0..1] role xxx_Service_behavior_src
+	Behavior[1..*] role behavior
+end
+
+association xxx_Service_behaviorUsed between
+	Service[0..1] role xxx_Service_behaviorUsed_src
+	Behavior[*] role behaviorUsed
+end
+
+association xxx_Service_serviceCall between
+	Service[0..1] role xxx_Service_serviceCall_src
+	ServiceCall[*] role serviceCall
+end
+
+association xxx_Behavior_stepn between
+	Behavior[*] role xxx_Behavior_stepn_src
+	Step[1] role stepn
+end
+
+composition xxx_Behavior_stepb between
+	Behavior[0..1] role xxx_Behavior_stepb_src
+	Step[1..*] role stepb
+end
+
+association xxx_Behavior_service between
+	Behavior[*] role xxx_Behavior_service_src
+	Service[1] role service
+end
+
+association xxx_Behavior_usedService between
+	Behavior[0..1] role xxx_Behavior_usedService_src
+	Service[*] role usedService
+end
+
+association xxx_Behavior_workLoad between
+	Behavior[*] role xxx_Behavior_workLoad_src
+	WorkLoad[0..1] role workLoad
+end
+
+association xxx_WorkLoad_behavior between
+	WorkLoad[*] role xxx_WorkLoad_behavior_src
+	Behavior[1] role behavior
+end
+
+composition xxx_Step_serviceCall between
+	Step[0..1] role xxx_Step_serviceCall_src
+	ServiceCall[*] role serviceCall
+end
+
+association xxx_Step_predecessor between
+	Step[0..1] role xxx_Step_predecessor_src
+	Step[*] role predecessor
+end
+
+association xxx_Step_successor between
+	Step[0..1] role xxx_Step_successor_src
+	Step[*] role successor
+end
+
+association xxx_Step_behavior between
+	Step[*] role xxx_Step_behavior_src
+	Behavior[1] role behavior
+end
+
+association xxx_Step_nestedBehavior between
+	Step[*] role xxx_Step_nestedBehavior_src
+	Behavior[0..1] role nestedBehavior
+end
+
+association xxx_ServiceCall_actualParam between
+	ServiceCall[0..1] role xxx_ServiceCall_actualParam_src
+	ActualParam[*] role actualParam
+end
+
+association xxx_ServiceCall_step between
+	ServiceCall[*] role xxx_ServiceCall_step_src
+	Step[1] role step
+end
+
+association xxx_ServiceCall_calledService between
+	ServiceCall[*] role xxx_ServiceCall_calledService_src
+	Service[0..1] role calledService
+end
+
+association xxx_ActualParam_serviceCall between
+	ActualParam[*] role xxx_ActualParam_serviceCall_src
+	ServiceCall[1] role serviceCall
+end
+
+association xxx_Acquire_resource between
+	Acquire[*] role xxx_Acquire_resource_src
+	Resource[1] role resource
+end
+
+association xxx_Release_resource between
+	Release[*] role xxx_Release_resource_src
+	Resource[1] role resource
+end
+

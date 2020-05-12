@@ -1,0 +1,100 @@
+model defs
+class DefContainer
+attributes
+operations
+end
+
+abstract class Def
+attributes
+operations
+	getInstance():String
+	unsetInstance()
+end
+
+abstract class ExecutorServiceDef<Def
+attributes
+operations
+end
+
+class ThreadPoolDef<ExecutorServiceDef
+attributes
+operations
+end
+
+class RandomizerDef<Def
+attributes
+	algorithmName : String
+	providerName : String
+	seed : String
+operations
+end
+
+class UserManagerDef<Def
+attributes
+operations
+end
+
+class User
+attributes
+	userID : String
+	password : String
+operations
+end
+
+class PasswordCredentialsProviderDef<CredentialsProviderDef
+attributes
+	password : String
+operations
+end
+
+abstract class CredentialsProviderDef<Def
+attributes
+	userID : String
+operations
+end
+
+abstract class NegotiatorDef<Def
+attributes
+operations
+end
+
+class ResponseNegotiatorDef<NegotiatorDef
+attributes
+operations
+end
+
+class ChallengeNegotiatorDef<NegotiatorDef
+attributes
+operations
+end
+
+composition xxx_DefContainer_definitions between
+	DefContainer[0..1] role xxx_DefContainer_definitions_src
+	Def[1..*] role definitions
+end
+
+association xxx_DefContainer_defaultDefinition between
+	DefContainer[*] role xxx_DefContainer_defaultDefinition_src
+	Def[0..1] role defaultDefinition
+end
+
+association xxx_UserManagerDef_user between
+	UserManagerDef[0..1] role xxx_UserManagerDef_user_src
+	User[1..*] role user
+end
+
+association xxx_ResponseNegotiatorDef_credentialsProvider between
+	ResponseNegotiatorDef[*] role xxx_ResponseNegotiatorDef_credentialsProvider_src
+	CredentialsProviderDef[0..1] role credentialsProvider
+end
+
+association xxx_ChallengeNegotiatorDef_userManager between
+	ChallengeNegotiatorDef[*] role xxx_ChallengeNegotiatorDef_userManager_src
+	UserManagerDef[0..1] role userManager
+end
+
+association xxx_ChallengeNegotiatorDef_randomizer between
+	ChallengeNegotiatorDef[*] role xxx_ChallengeNegotiatorDef_randomizer_src
+	RandomizerDef[0..1] role randomizer
+end
+

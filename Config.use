@@ -1,0 +1,68 @@
+model config
+class TestConfig
+attributes
+	seed : Integer
+	nsURI : String
+	count : Integer
+	testClass : String
+	id : String
+operations
+end
+
+class TestRun
+attributes
+	time : String
+operations
+end
+
+class TestResult
+attributes
+	seedCount : Integer
+	testName : String
+	error : String
+	failure : String
+	executionTime : Integer
+operations
+end
+
+class TestDiff
+attributes
+	lastUpdate : String
+operations
+end
+
+class DiffReport
+attributes
+operations
+end
+
+composition xxx_TestRun_config between
+	TestRun[*] role xxx_TestRun_config_src
+	TestConfig[0..1] role config
+end
+
+composition xxx_TestRun_results between
+	TestRun[0..1] role xxx_TestRun_results_src
+	TestResult[*] role results
+end
+
+association xxx_TestDiff_config between
+	TestDiff[*] role xxx_TestDiff_config_src
+	TestConfig[0..1] role config
+end
+
+composition xxx_TestDiff_oldResult between
+	TestDiff[*] role xxx_TestDiff_oldResult_src
+	TestResult[0..1] role oldResult
+end
+
+composition xxx_TestDiff_newResult between
+	TestDiff[*] role xxx_TestDiff_newResult_src
+	TestResult[0..1] role newResult
+end
+
+composition xxx_DiffReport_diffs between
+	DiffReport[0..1] role xxx_DiffReport_diffs_src
+	TestDiff[*] role diffs
+end
+

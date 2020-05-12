@@ -1,0 +1,128 @@
+model eTPhys
+enum ExecMode{
+default
+}
+
+enum ThreadModel{
+default
+}
+
+class PhysicalModel
+attributes
+	name : String
+operations
+end
+
+class PhysicalSystem
+attributes
+	name : String
+operations
+end
+
+class NodeRef
+attributes
+	name : String
+operations
+end
+
+class NodeClass
+attributes
+	name : String
+	priomin : Integer
+	priomax : Integer
+operations
+end
+
+class PhysicalThread
+attributes
+	default : Boolean
+	name : String
+	execmode : ExecMode
+	time : Integer
+	prio : Integer
+	stacksize : Integer
+	msgblocksize : Integer
+	msgpoolsize : Integer
+operations
+end
+
+class RuntimeClass
+attributes
+	name : String
+	threadModel : ThreadModel
+operations
+end
+
+class Documentation
+attributes
+	text : String
+operations
+end
+
+class Import
+attributes
+	importedNamespace : String
+	importURI : String
+operations
+end
+
+composition xxx_PhysicalModel_imports between
+	PhysicalModel[0..1] role xxx_PhysicalModel_imports_src
+	Import[*] role imports
+end
+
+composition xxx_PhysicalModel_systems between
+	PhysicalModel[0..1] role xxx_PhysicalModel_systems_src
+	PhysicalSystem[*] role systems
+end
+
+composition xxx_PhysicalModel_nodeClasses between
+	PhysicalModel[0..1] role xxx_PhysicalModel_nodeClasses_src
+	NodeClass[*] role nodeClasses
+end
+
+composition xxx_PhysicalModel_runtimeClasses between
+	PhysicalModel[0..1] role xxx_PhysicalModel_runtimeClasses_src
+	RuntimeClass[*] role runtimeClasses
+end
+
+composition xxx_PhysicalSystem_docu between
+	PhysicalSystem[*] role xxx_PhysicalSystem_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_PhysicalSystem_nodeRefs between
+	PhysicalSystem[0..1] role xxx_PhysicalSystem_nodeRefs_src
+	NodeRef[*] role nodeRefs
+end
+
+association xxx_NodeRef_type between
+	NodeRef[*] role xxx_NodeRef_type_src
+	NodeClass[0..1] role type
+end
+
+composition xxx_NodeRef_docu between
+	NodeRef[*] role xxx_NodeRef_docu_src
+	Documentation[0..1] role docu
+end
+
+composition xxx_NodeClass_docu between
+	NodeClass[*] role xxx_NodeClass_docu_src
+	Documentation[0..1] role docu
+end
+
+association xxx_NodeClass_runtime between
+	NodeClass[*] role xxx_NodeClass_runtime_src
+	RuntimeClass[0..1] role runtime
+end
+
+composition xxx_NodeClass_threads between
+	NodeClass[0..1] role xxx_NodeClass_threads_src
+	PhysicalThread[*] role threads
+end
+
+composition xxx_RuntimeClass_docu between
+	RuntimeClass[*] role xxx_RuntimeClass_docu_src
+	Documentation[0..1] role docu
+end
+

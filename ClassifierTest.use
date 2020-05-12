@@ -1,0 +1,39 @@
+model TestPackage
+enum TestEnum{
+default
+}
+
+enum SubTestEnum{
+default
+}
+
+class TestClass<SuperClass,UberClass
+attributes
+operations
+end
+
+abstract class TestInterface<SuperClass
+attributes
+operations
+end
+
+abstract class SuperClass
+attributes
+operations
+end
+
+abstract class UberClass
+attributes
+operations
+end
+
+class SubTestClass
+attributes
+operations
+end
+
+abstract class SubTestInterface
+attributes
+operations
+end
+

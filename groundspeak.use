@@ -1,0 +1,170 @@
+model groundspeak
+class AttributesType
+attributes
+operations
+end
+
+class AttributeType
+attributes
+	value : String
+	id : String
+	inc : String
+operations
+end
+
+class CacheType
+attributes
+	name : String
+	placedBy : String
+	type : String
+	container : String
+	difficulty : String
+	terrain : String
+	country : String
+	state : String
+	encodedHints : String
+	archived : String
+	available : String
+	id : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class FinderType
+attributes
+	value : String
+	id : String
+operations
+end
+
+class LogsType
+attributes
+operations
+end
+
+class LogType
+attributes
+	date : String
+	type : String
+	id : String
+operations
+end
+
+class LogWptType
+attributes
+	lat : String
+	lon : String
+operations
+end
+
+class LongDescriptionType
+attributes
+	value : String
+	html : String
+operations
+end
+
+class OwnerType
+attributes
+	value : String
+	id : String
+operations
+end
+
+class ShortDescriptionType
+attributes
+	value : String
+	html : String
+operations
+end
+
+class TextType
+attributes
+	value : String
+	encoded : String
+operations
+end
+
+class TravelbugsType
+attributes
+operations
+end
+
+class TravelbugType
+attributes
+	name : String
+	id : String
+	ref : String
+operations
+end
+
+composition xxx_AttributesType_attribute between
+	AttributesType[0..1] role xxx_AttributesType_attribute_src
+	AttributeType[*] role attribute
+end
+
+composition xxx_CacheType_owner between
+	CacheType[0..1] role xxx_CacheType_owner_src
+	OwnerType[*] role owner
+end
+
+composition xxx_CacheType_attributes_ between
+	CacheType[0..1] role xxx_CacheType_attributes__src
+	AttributesType[*] role attributes_
+end
+
+composition xxx_CacheType_shortDescription between
+	CacheType[0..1] role xxx_CacheType_shortDescription_src
+	ShortDescriptionType[*] role shortDescription
+end
+
+composition xxx_CacheType_longDescription between
+	CacheType[0..1] role xxx_CacheType_longDescription_src
+	LongDescriptionType[*] role longDescription
+end
+
+composition xxx_CacheType_logs between
+	CacheType[0..1] role xxx_CacheType_logs_src
+	LogsType[*] role logs
+end
+
+composition xxx_CacheType_travelbugs between
+	CacheType[0..1] role xxx_CacheType_travelbugs_src
+	TravelbugsType[*] role travelbugs
+end
+
+composition xxx_DocumentRoot_cache between
+	DocumentRoot[*] role xxx_DocumentRoot_cache_src
+	CacheType[*] role cache
+end
+
+composition xxx_LogsType_log between
+	LogsType[0..1] role xxx_LogsType_log_src
+	LogType[*] role log
+end
+
+composition xxx_LogType_finder between
+	LogType[0..1] role xxx_LogType_finder_src
+	FinderType[*] role finder
+end
+
+composition xxx_LogType_text between
+	LogType[0..1] role xxx_LogType_text_src
+	TextType[*] role text
+end
+
+composition xxx_LogType_logWpt between
+	LogType[0..1] role xxx_LogType_logWpt_src
+	LogWptType[*] role logWpt
+end
+
+composition xxx_TravelbugsType_travelbug between
+	TravelbugsType[0..1] role xxx_TravelbugsType_travelbug_src
+	TravelbugType[*] role travelbug
+end
+

@@ -1,0 +1,52 @@
+model Trace
+class Trace
+attributes
+	name : String
+operations
+end
+
+class Level
+attributes
+operations
+end
+
+class Call
+attributes
+	methodName : String
+	DBAccessesNumber : Integer
+	DBRowsNumber : Integer
+	CPUTime : Integer
+operations
+end
+
+class Index
+attributes
+	value : Integer
+operations
+end
+
+composition xxx_Trace_levels between
+	Trace[0..1] role xxx_Trace_levels_src
+	Level[*] role levels
+end
+
+association xxx_Level_trace between
+	Level[*] role xxx_Level_trace_src
+	Trace[1] role trace
+end
+
+composition xxx_Level_calls between
+	Level[0..1] role xxx_Level_calls_src
+	Call[*] role calls
+end
+
+association xxx_Call_level between
+	Call[*] role xxx_Call_level_src
+	Level[1] role level
+end
+
+composition xxx_Call_indexes between
+	Call[0..1] role xxx_Call_indexes_src
+	Index[1..*] role indexes
+end
+

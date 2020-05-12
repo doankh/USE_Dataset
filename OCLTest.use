@@ -1,0 +1,85 @@
+model OclTest
+enum Color{
+default
+}
+
+abstract class Fruit
+attributes
+	color : Color
+	name : String
+operations
+	ripen(color : Color):Boolean
+	preferredColor():Color
+	newFruit():Fruit
+	setColor(fruit : Fruit,newColor : Color)
+end
+
+class Apple<Fruit
+attributes
+	label : String
+operations
+	label(text : String)
+	newApple():Apple
+	preferredLabel(text : String):String
+end
+
+class Stem
+attributes
+operations
+end
+
+class FruitUtil
+attributes
+operations
+	processOrderedSet(fruits : Fruit):Fruit
+	processSet(fruits : Fruit):Fruit
+	processBag(fruits : Fruit):Fruit
+	processSequence(fruits : Fruit):Fruit
+end
+
+class Tree
+attributes
+	name : String
+operations
+end
+
+association xxx_Fruit_relatedFruits between
+	Fruit[0..1] role xxx_Fruit_relatedFruits_src
+	Fruit[*] role relatedFruits
+end
+
+composition xxx_Apple_stem between
+	Apple[*] role xxx_Apple_stem_src
+	Stem[0..1] role stem
+end
+
+association xxx_FruitUtil_orderedSet between
+	FruitUtil[0..1] role xxx_FruitUtil_orderedSet_src
+	Fruit[*] role orderedSet
+end
+
+association xxx_FruitUtil_set between
+	FruitUtil[0..1] role xxx_FruitUtil_set_src
+	Fruit[*] role set
+end
+
+association xxx_FruitUtil_bag between
+	FruitUtil[0..1] role xxx_FruitUtil_bag_src
+	Fruit[*] role bag
+end
+
+association xxx_FruitUtil_sequence between
+	FruitUtil[0..1] role xxx_FruitUtil_sequence_src
+	Fruit[*] role sequence
+end
+
+composition xxx_Tree_fruits between
+	Tree[0..1] role xxx_Tree_fruits_src
+	Fruit[*] role fruits
+end
+
+association xxx_Tree_fruitsDroppedUnder between
+	Tree[0..1] role xxx_Tree_fruitsDroppedUnder_src
+	Fruit[*] role fruitsDroppedUnder
+end
+

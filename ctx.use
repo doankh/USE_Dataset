@@ -1,0 +1,133 @@
+model ctx
+class ContextModel
+attributes
+operations
+end
+
+abstract class ModelClass<ContextModelElement
+attributes
+operations
+end
+
+class EntityClass<ModelClass,ComparableElements
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class RelatorClass<ModelClass
+attributes
+operations
+end
+
+class Attribute<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class DataType<ContextModelElement,ComparableElements
+attributes
+operations
+end
+
+class ComparativeFormalRelation<ContextModelElement
+attributes
+operations
+end
+
+class Association<ContextModelElement
+attributes
+operations
+end
+
+abstract class ContextModelElement<NamedElement
+attributes
+operations
+end
+
+class QualitativeFormalRelation<ContextModelElement
+attributes
+operations
+end
+
+class QualitativeParameter<NamedElement
+attributes
+operations
+end
+
+abstract class ComparableElements
+attributes
+operations
+end
+
+class PrimitiveFormalRelation<ComparativeFormalRelation
+attributes
+operations
+end
+
+class PrimitiveDataType<DataType
+attributes
+operations
+end
+
+composition xxx_ContextModel_elements between
+	ContextModel[0..1] role xxx_ContextModel_elements_src
+	ContextModelElement[*] role elements
+end
+
+composition xxx_ModelClass_attribute between
+	ModelClass[0..1] role xxx_ModelClass_attribute_src
+	Attribute[*] role attribute
+end
+
+association xxx_EntityClass_superclass between
+	EntityClass[*] role xxx_EntityClass_superclass_src
+	EntityClass[0..1] role superclass
+end
+
+association xxx_Attribute_datatype between
+	Attribute[*] role xxx_Attribute_datatype_src
+	DataType[1] role datatype
+end
+
+association xxx_ComparativeFormalRelation_target between
+	ComparativeFormalRelation[0..1] role xxx_ComparativeFormalRelation_target_src
+	ComparableElements[1..*] role target
+end
+
+association xxx_ComparativeFormalRelation_source between
+	ComparativeFormalRelation[0..1] role xxx_ComparativeFormalRelation_source_src
+	ComparableElements[1..*] role source
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	RelatorClass[1] role source
+end
+
+association xxx_Association_target between
+	Association[*] role xxx_Association_target_src
+	EntityClass[1] role target
+end
+
+composition xxx_QualitativeFormalRelation_parameter between
+	QualitativeFormalRelation[0..1] role xxx_QualitativeFormalRelation_parameter_src
+	QualitativeParameter[1..*] role parameter
+end
+
+association xxx_QualitativeFormalRelation_datatype between
+	QualitativeFormalRelation[*] role xxx_QualitativeFormalRelation_datatype_src
+	DataType[1] role datatype
+end
+
+association xxx_QualitativeParameter_element between
+	QualitativeParameter[*] role xxx_QualitativeParameter_element_src
+	ComparableElements[1] role element
+end
+

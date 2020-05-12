@@ -1,0 +1,193 @@
+model gv
+enum Compass{
+default
+}
+
+abstract class AbstractGraph<Identifiable
+attributes
+operations
+end
+
+class AList<Commentable
+attributes
+operations
+end
+
+class AssignmentStatement<Statement,Commentable
+attributes
+	left : String
+	right : String
+operations
+end
+
+abstract class Attributable
+attributes
+operations
+end
+
+class Attribute<Commentable
+attributes
+	key : String
+	value : String
+operations
+end
+
+class AttributeList<Commentable
+attributes
+operations
+end
+
+class AttributeStatement<Statement,Commentable
+attributes
+	context_ : String
+operations
+end
+
+abstract class Commentable
+attributes
+	comments : String
+operations
+end
+
+abstract class Connectable
+attributes
+operations
+end
+
+class EdgeStatement<Statement,Attributable,Commentable
+attributes
+operations
+end
+
+class Graph<AbstractGraph,Commentable
+attributes
+	type : String
+	strict : String
+operations
+end
+
+abstract class Identifiable
+attributes
+	id : String
+operations
+end
+
+class NodeStatement<Statement,Attributable,Attribute
+attributes
+operations
+end
+
+class NodeID<Connectable,StrictIdentifiable,Commentable
+attributes
+operations
+end
+
+class Port<Identifiable,Commentable
+attributes
+	compass : Compass
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class StatementList<Commentable
+attributes
+operations
+end
+
+abstract class StrictIdentifiable
+attributes
+	id : String
+operations
+end
+
+class Subgraph<AbstractGraph,Connectable,Commentable
+attributes
+	type : String
+operations
+end
+
+class Target<Commentable
+attributes
+	operation : String
+operations
+end
+
+composition xxx_AbstractGraph_statements between
+	AbstractGraph[*] role xxx_AbstractGraph_statements_src
+	StatementList[0..1] role statements
+end
+
+composition xxx_AList_attribute between
+	AList[*] role xxx_AList_attribute_src
+	Attribute[1] role attribute
+end
+
+composition xxx_AList_tail between
+	AList[*] role xxx_AList_tail_src
+	AList[0..1] role tail
+end
+
+composition xxx_Attributable_attributes_ between
+	Attributable[*] role xxx_Attributable_attributes__src
+	AttributeList[0..1] role attributes_
+end
+
+composition xxx_AttributeList_list between
+	AttributeList[*] role xxx_AttributeList_list_src
+	AList[1] role list
+end
+
+composition xxx_AttributeList_next between
+	AttributeList[*] role xxx_AttributeList_next_src
+	AttributeList[0..1] role next
+end
+
+composition xxx_AttributeStatement_attributes_ between
+	AttributeStatement[*] role xxx_AttributeStatement_attributes__src
+	AttributeList[1] role attributes_
+end
+
+composition xxx_EdgeStatement_source between
+	EdgeStatement[*] role xxx_EdgeStatement_source_src
+	Connectable[1] role source
+end
+
+composition xxx_EdgeStatement_target between
+	EdgeStatement[*] role xxx_EdgeStatement_target_src
+	Target[1] role target
+end
+
+composition xxx_NodeStatement_node_id between
+	NodeStatement[*] role xxx_NodeStatement_node_id_src
+	NodeID[1] role node_id
+end
+
+composition xxx_NodeID_port between
+	NodeID[*] role xxx_NodeID_port_src
+	Port[0..1] role port
+end
+
+composition xxx_StatementList_statement between
+	StatementList[*] role xxx_StatementList_statement_src
+	Statement[1] role statement
+end
+
+composition xxx_StatementList_tail between
+	StatementList[*] role xxx_StatementList_tail_src
+	StatementList[0..1] role tail
+end
+
+composition xxx_Target_next_target between
+	Target[*] role xxx_Target_next_target_src
+	Target[0..1] role next_target
+end
+
+composition xxx_Target_target between
+	Target[*] role xxx_Target_target_src
+	Connectable[1] role target
+end
+

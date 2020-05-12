@@ -1,0 +1,108 @@
+model simplerailctrl
+enum TRACK{
+default
+}
+
+enum POINT{
+default
+}
+
+enum POSITION{
+default
+}
+
+enum DIRECTION{
+default
+}
+
+enum SIGNALCOLOR{
+default
+}
+
+enum MOTORDIR{
+default
+}
+
+enum CONDITION{
+default
+}
+
+enum CONJUNCTION{
+default
+}
+
+class EventWait<Transition
+attributes
+	seconds : Integer
+operations
+end
+
+class Node
+attributes
+	initial : Boolean
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class EventContact<Transition
+attributes
+	track : TRACK
+	position : POSITION
+operations
+end
+
+class SetSpeed<Node
+attributes
+	track : TRACK
+	speed : Integer
+	direction : MOTORDIR
+operations
+end
+
+class SetPoint<Node
+attributes
+	point : POINT
+	direction : DIRECTION
+operations
+end
+
+class RailController
+attributes
+operations
+end
+
+class SetSignal<Node
+attributes
+	track : TRACK
+	position : POSITION
+	color : SIGNALCOLOR
+operations
+end
+
+class EventOccupied<Transition
+attributes
+	track : TRACK
+	condition : CONDITION
+	conjunction : CONJUNCTION
+operations
+end
+
+composition xxx_Node_outTransitions between
+	Node[0..1] role xxx_Node_outTransitions_src
+	Transition[*] role outTransitions
+end
+
+association xxx_Transition_destination between
+	Transition[*] role xxx_Transition_destination_src
+	Node[1] role destination
+end
+
+composition xxx_RailController_nodes between
+	RailController[0..1] role xxx_RailController_nodes_src
+	Node[*] role nodes
+end
+

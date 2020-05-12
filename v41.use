@@ -1,0 +1,276 @@
+model v41
+class Datetime
+attributes
+	date : String
+	time : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Implementationguideline
+attributes
+	id : String
+	versionNum : String
+	releaseNum : String
+	controllingAgencyCode : String
+operations
+end
+
+class InterchangeMessageType
+attributes
+	any : String
+operations
+end
+
+class Messageidentifier
+attributes
+	id : String
+	versionNum : String
+	releaseNum : String
+	controllingAgencyCode : String
+	associationAssignedCode : String
+	codeListDirVersionNum : String
+	typeSubFunctionId : String
+operations
+end
+
+class Messageversion
+attributes
+	versionNum : String
+	releaseNum : String
+	associationCode : String
+operations
+end
+
+class Recipient
+attributes
+	id : String
+	codeQualifier : String
+	internalId : String
+	internalSubId : String
+operations
+end
+
+class Recipientapp
+attributes
+	id : String
+	codeQualifier : String
+operations
+end
+
+class Recipientref
+attributes
+	ref : String
+	refQualifier : String
+operations
+end
+
+class Scenario
+attributes
+	id : String
+	versionNum : String
+	releaseNum : String
+	controllingAgencyCode : String
+operations
+end
+
+class Sender
+attributes
+	id : String
+	codeQualifier : String
+	internalId : String
+	internalSubId : String
+operations
+end
+
+class Senderapp
+attributes
+	id : String
+	codeQualifier : String
+operations
+end
+
+class Subset
+attributes
+	id : String
+	versionNum : String
+	releaseNum : String
+	controllingAgencyCode : String
+operations
+end
+
+class Syntaxidentifier
+attributes
+	id : String
+	versionNum : String
+	serviceCodeListDirVersion : String
+	codedCharacterEncoding : String
+	releaseNum : String
+operations
+end
+
+class Transferstatus
+attributes
+	sequence : String
+	firstAndLast : String
+operations
+end
+
+class Unb
+attributes
+	controlRef : String
+	applicationRef : String
+	processingPriorityCode : String
+	ackRequest : String
+	agreementId : String
+	testIndicator : String
+operations
+end
+
+class Une
+attributes
+	controlCount : String
+	groupRef : String
+operations
+end
+
+class UnEdifact
+attributes
+operations
+end
+
+class Ung
+attributes
+	groupId : String
+	groupRef : String
+	controllingAgencyCode : String
+	applicationPassword : String
+operations
+end
+
+class Unh
+attributes
+	messageRefNum : String
+	commonAccessRef : String
+operations
+end
+
+class Unt
+attributes
+	segmentCount : String
+	messageRefNum : String
+operations
+end
+
+class Unz
+attributes
+	controlCount : String
+	controlRef : String
+operations
+end
+
+composition xxx_DocumentRoot_unEdifact between
+	DocumentRoot[*] role xxx_DocumentRoot_unEdifact_src
+	UnEdifact[*] role unEdifact
+end
+
+composition xxx_InterchangeMessageType_uNH between
+	InterchangeMessageType[*] role xxx_InterchangeMessageType_uNH_src
+	Unh[1] role uNH
+end
+
+composition xxx_InterchangeMessageType_uNT between
+	InterchangeMessageType[*] role xxx_InterchangeMessageType_uNT_src
+	Unt[1] role uNT
+end
+
+composition xxx_Unb_syntaxIdentifier between
+	Unb[*] role xxx_Unb_syntaxIdentifier_src
+	Syntaxidentifier[1] role syntaxIdentifier
+end
+
+composition xxx_Unb_sender between
+	Unb[*] role xxx_Unb_sender_src
+	Sender[1] role sender
+end
+
+composition xxx_Unb_recipient between
+	Unb[*] role xxx_Unb_recipient_src
+	Recipient[1] role recipient
+end
+
+composition xxx_Unb_dateTime between
+	Unb[*] role xxx_Unb_dateTime_src
+	Datetime[1] role dateTime
+end
+
+composition xxx_Unb_recipientRef between
+	Unb[*] role xxx_Unb_recipientRef_src
+	Recipientref[0..1] role recipientRef
+end
+
+composition xxx_UnEdifact_uNB between
+	UnEdifact[*] role xxx_UnEdifact_uNB_src
+	Unb[1] role uNB
+end
+
+composition xxx_UnEdifact_interchangeMessage between
+	UnEdifact[0..1] role xxx_UnEdifact_interchangeMessage_src
+	InterchangeMessageType[1..*] role interchangeMessage
+end
+
+composition xxx_UnEdifact_uNZ between
+	UnEdifact[*] role xxx_UnEdifact_uNZ_src
+	Unz[1] role uNZ
+end
+
+composition xxx_Ung_senderApp between
+	Ung[*] role xxx_Ung_senderApp_src
+	Senderapp[0..1] role senderApp
+end
+
+composition xxx_Ung_recipientApp between
+	Ung[*] role xxx_Ung_recipientApp_src
+	Recipientapp[0..1] role recipientApp
+end
+
+composition xxx_Ung_dateTime between
+	Ung[*] role xxx_Ung_dateTime_src
+	Datetime[0..1] role dateTime
+end
+
+composition xxx_Ung_messageVersion between
+	Ung[*] role xxx_Ung_messageVersion_src
+	Messageversion[0..1] role messageVersion
+end
+
+composition xxx_Unh_messageIdentifier between
+	Unh[*] role xxx_Unh_messageIdentifier_src
+	Messageidentifier[1] role messageIdentifier
+end
+
+composition xxx_Unh_transferStatus between
+	Unh[*] role xxx_Unh_transferStatus_src
+	Transferstatus[0..1] role transferStatus
+end
+
+composition xxx_Unh_subset between
+	Unh[*] role xxx_Unh_subset_src
+	Subset[0..1] role subset
+end
+
+composition xxx_Unh_implementationGuideline between
+	Unh[*] role xxx_Unh_implementationGuideline_src
+	Implementationguideline[0..1] role implementationGuideline
+end
+
+composition xxx_Unh_scenario between
+	Unh[*] role xxx_Unh_scenario_src
+	Scenario[0..1] role scenario
+end
+

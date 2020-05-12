@@ -1,0 +1,302 @@
+model EpkDSL
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Epk<NamedElement
+attributes
+operations
+end
+
+class Edge<Epk
+attributes
+operations
+end
+
+class Node<Epk
+attributes
+operations
+end
+
+class Event<Node
+attributes
+operations
+end
+
+class Function<Node
+attributes
+operations
+end
+
+class InOutput<Node
+attributes
+operations
+end
+
+class OrgUnit<Node
+attributes
+operations
+end
+
+class ProcPath<Node
+attributes
+operations
+end
+
+class Connector<Node
+attributes
+operations
+end
+
+class EConnector<Connector
+attributes
+operations
+end
+
+class FConnector<Connector
+attributes
+operations
+end
+
+class DefaultConnection
+attributes
+operations
+end
+
+class EvToFuConnection<DefaultConnection
+attributes
+operations
+end
+
+class FuToEvConnection<DefaultConnection
+attributes
+operations
+end
+
+class EvToEConConnection<DefaultConnection
+attributes
+operations
+end
+
+class EConToFuConnection<DefaultConnection
+attributes
+operations
+end
+
+class FuToFConConnection<DefaultConnection
+attributes
+operations
+end
+
+class FConToEvConnection<DefaultConnection
+attributes
+operations
+end
+
+class OuToFuConnection<DefaultConnection
+attributes
+operations
+end
+
+class IoToFuConnection<DefaultConnection
+attributes
+operations
+end
+
+class NodeToPpConnection<DefaultConnection
+attributes
+operations
+end
+
+class PpToNodeConnection<DefaultConnection
+attributes
+operations
+end
+
+class StartEvent<Node
+attributes
+operations
+end
+
+class EndEvent<Node
+attributes
+operations
+end
+
+class StartEvToFuConnection<DefaultConnection
+attributes
+operations
+end
+
+class StartEvToEConConnection<DefaultConnection
+attributes
+operations
+end
+
+class FuToEndEvConnection<DefaultConnection
+attributes
+operations
+end
+
+class FConToEndEvConnection<DefaultConnection
+attributes
+operations
+end
+
+composition xxx_Epk_nodes between
+	Epk[0..1] role xxx_Epk_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_Epk_edges between
+	Epk[0..1] role xxx_Epk_edges_src
+	Edge[*] role edges
+end
+
+composition xxx_Epk_connections between
+	Epk[0..1] role xxx_Epk_connections_src
+	DefaultConnection[*] role connections
+end
+
+association xxx_EvToFuConnection_start between
+	EvToFuConnection[*] role xxx_EvToFuConnection_start_src
+	Event[1] role start
+end
+
+association xxx_EvToFuConnection_end_ between
+	EvToFuConnection[*] role xxx_EvToFuConnection_end__src
+	Function[1] role end_
+end
+
+association xxx_FuToEvConnection_start between
+	FuToEvConnection[*] role xxx_FuToEvConnection_start_src
+	Function[1] role start
+end
+
+association xxx_FuToEvConnection_end_ between
+	FuToEvConnection[*] role xxx_FuToEvConnection_end__src
+	Event[1] role end_
+end
+
+association xxx_EvToEConConnection_start between
+	EvToEConConnection[*] role xxx_EvToEConConnection_start_src
+	Event[1] role start
+end
+
+association xxx_EvToEConConnection_end_ between
+	EvToEConConnection[*] role xxx_EvToEConConnection_end__src
+	EConnector[1] role end_
+end
+
+association xxx_EConToFuConnection_start between
+	EConToFuConnection[*] role xxx_EConToFuConnection_start_src
+	EConnector[1] role start
+end
+
+association xxx_EConToFuConnection_end_ between
+	EConToFuConnection[*] role xxx_EConToFuConnection_end__src
+	Function[1] role end_
+end
+
+association xxx_FuToFConConnection_start between
+	FuToFConConnection[*] role xxx_FuToFConConnection_start_src
+	Function[1] role start
+end
+
+association xxx_FuToFConConnection_end_ between
+	FuToFConConnection[*] role xxx_FuToFConConnection_end__src
+	FConnector[1] role end_
+end
+
+association xxx_FConToEvConnection_start between
+	FConToEvConnection[*] role xxx_FConToEvConnection_start_src
+	FConnector[1] role start
+end
+
+association xxx_FConToEvConnection_end_ between
+	FConToEvConnection[*] role xxx_FConToEvConnection_end__src
+	Event[1] role end_
+end
+
+association xxx_OuToFuConnection_start between
+	OuToFuConnection[*] role xxx_OuToFuConnection_start_src
+	OrgUnit[1] role start
+end
+
+association xxx_OuToFuConnection_end_ between
+	OuToFuConnection[*] role xxx_OuToFuConnection_end__src
+	Function[1] role end_
+end
+
+association xxx_IoToFuConnection_start between
+	IoToFuConnection[*] role xxx_IoToFuConnection_start_src
+	InOutput[1] role start
+end
+
+association xxx_IoToFuConnection_end_ between
+	IoToFuConnection[*] role xxx_IoToFuConnection_end__src
+	Function[1] role end_
+end
+
+association xxx_NodeToPpConnection_start between
+	NodeToPpConnection[*] role xxx_NodeToPpConnection_start_src
+	Node[1] role start
+end
+
+association xxx_NodeToPpConnection_end_ between
+	NodeToPpConnection[*] role xxx_NodeToPpConnection_end__src
+	ProcPath[1] role end_
+end
+
+association xxx_PpToNodeConnection_start between
+	PpToNodeConnection[*] role xxx_PpToNodeConnection_start_src
+	ProcPath[1] role start
+end
+
+association xxx_PpToNodeConnection_end_ between
+	PpToNodeConnection[*] role xxx_PpToNodeConnection_end__src
+	Node[1] role end_
+end
+
+association xxx_StartEvToFuConnection_start between
+	StartEvToFuConnection[*] role xxx_StartEvToFuConnection_start_src
+	StartEvent[1] role start
+end
+
+association xxx_StartEvToFuConnection_end_ between
+	StartEvToFuConnection[*] role xxx_StartEvToFuConnection_end__src
+	Function[1] role end_
+end
+
+association xxx_StartEvToEConConnection_start between
+	StartEvToEConConnection[*] role xxx_StartEvToEConConnection_start_src
+	StartEvent[1] role start
+end
+
+association xxx_StartEvToEConConnection_end_ between
+	StartEvToEConConnection[*] role xxx_StartEvToEConConnection_end__src
+	EConnector[1] role end_
+end
+
+association xxx_FuToEndEvConnection_start between
+	FuToEndEvConnection[*] role xxx_FuToEndEvConnection_start_src
+	Function[1] role start
+end
+
+association xxx_FuToEndEvConnection_end_ between
+	FuToEndEvConnection[*] role xxx_FuToEndEvConnection_end__src
+	EndEvent[1] role end_
+end
+
+association xxx_FConToEndEvConnection_start between
+	FConToEndEvConnection[*] role xxx_FConToEndEvConnection_start_src
+	FConnector[1] role start
+end
+
+association xxx_FConToEndEvConnection_end_ between
+	FConToEndEvConnection[*] role xxx_FConToEndEvConnection_end__src
+	EndEvent[1] role end_
+end
+

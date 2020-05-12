@@ -1,0 +1,385 @@
+model gcomponent
+enum Status{
+default
+}
+
+enum BooleanOperator{
+default
+}
+
+class DummyClass
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Component<NamedElement
+attributes
+	owner : String
+	maintainer : String
+	version : String
+	status : Status
+operations
+end
+
+abstract class Model<NamedElement
+attributes
+operations
+end
+
+class ParameterModel<Model
+attributes
+	resourceName : String
+operations
+end
+
+class GeneratedModel<Model
+attributes
+operations
+end
+
+abstract class Tagged
+attributes
+operations
+end
+
+class TransformationComponent<Component,Tagged
+attributes
+	isM2M : Boolean
+operations
+end
+
+class CompositeComponent<Component
+attributes
+operations
+end
+
+class BindingDeclaration
+attributes
+	name : String
+	fileName : String
+operations
+end
+
+abstract class Template
+attributes
+operations
+end
+
+abstract class Constraint
+attributes
+operations
+end
+
+class OclConstraint<Constraint
+attributes
+operations
+end
+
+class Metamodel<NamedElement
+attributes
+	uri : String
+operations
+end
+
+class Tag
+attributes
+	value : String
+operations
+end
+
+class Concept<Metamodel,Tagged
+attributes
+operations
+end
+
+class Documentation
+attributes
+operations
+end
+
+abstract class Parameter<NamedElement
+attributes
+operations
+end
+
+abstract class Feature<Parameter
+attributes
+operations
+end
+
+class SingleFeature<Feature
+attributes
+operations
+end
+
+abstract class CompositeFeature<Feature
+attributes
+operations
+end
+
+class XorFeature<CompositeFeature
+attributes
+operations
+end
+
+class Composition<NamedElement
+attributes
+operations
+end
+
+abstract class CompositionStep
+attributes
+operations
+end
+
+class Apply<CompositionStep
+attributes
+operations
+end
+
+class ApplyParameter
+attributes
+operations
+end
+
+class Seq<CompositionStep
+attributes
+operations
+end
+
+class Xor<CompositionStep
+attributes
+operations
+end
+
+class XorCond
+attributes
+operations
+end
+
+class Par<CompositionStep
+attributes
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class Value
+attributes
+operations
+end
+
+class BooleanValue<Value
+attributes
+operations
+end
+
+class BooleanExpression<Expression,BooleanValue
+attributes
+	operator : BooleanOperator
+operations
+end
+
+class FeatureRef<Expression,BooleanValue
+attributes
+operations
+end
+
+class DefinitionRoot
+attributes
+operations
+end
+
+class AtlTemplate<Template
+attributes
+	template : String
+operations
+end
+
+class AtlParameter
+attributes
+	atlModelName : String
+	atlMetamodelName : String
+operations
+end
+
+class JavaTemplate<Template
+attributes
+	qualifiedClassname : String
+operations
+end
+
+composition xxx_Component_source between
+	Component[0..1] role xxx_Component_source_src
+	Concept[1..*] role source
+end
+
+composition xxx_Component_target between
+	Component[0..1] role xxx_Component_target_src
+	Concept[*] role target
+end
+
+composition xxx_Component_sourceModels between
+	Component[0..1] role xxx_Component_sourceModels_src
+	ParameterModel[*] role sourceModels
+end
+
+composition xxx_Component_targetModels between
+	Component[0..1] role xxx_Component_targetModels_src
+	ParameterModel[*] role targetModels
+end
+
+composition xxx_Component_generateModels between
+	Component[0..1] role xxx_Component_generateModels_src
+	GeneratedModel[*] role generateModels
+end
+
+composition xxx_Component_formalParameters between
+	Component[0..1] role xxx_Component_formalParameters_src
+	Parameter[*] role formalParameters
+end
+
+association xxx_ParameterModel_type between
+	ParameterModel[*] role xxx_ParameterModel_type_src
+	Concept[1] role type
+end
+
+composition xxx_Tagged_tags between
+	Tagged[0..1] role xxx_Tagged_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_TransformationComponent_template between
+	TransformationComponent[*] role xxx_TransformationComponent_template_src
+	Template[1] role template
+end
+
+composition xxx_TransformationComponent_constraints_ between
+	TransformationComponent[0..1] role xxx_TransformationComponent_constraints__src
+	Constraint[*] role constraints_
+end
+
+association xxx_CompositeComponent_uses between
+	CompositeComponent[0..1] role xxx_CompositeComponent_uses_src
+	Component[1..*] role uses
+end
+
+composition xxx_CompositeComponent_composition_ between
+	CompositeComponent[*] role xxx_CompositeComponent_composition__src
+	Composition[1] role composition_
+end
+
+composition xxx_CompositeComponent_bindings between
+	CompositeComponent[0..1] role xxx_CompositeComponent_bindings_src
+	BindingDeclaration[*] role bindings
+end
+
+composition xxx_Metamodel_constraints_ between
+	Metamodel[0..1] role xxx_Metamodel_constraints__src
+	Constraint[*] role constraints_
+end
+
+composition xxx_CompositeFeature_children between
+	CompositeFeature[0..1] role xxx_CompositeFeature_children_src
+	Feature[1..*] role children
+end
+
+composition xxx_Composition_step between
+	Composition[*] role xxx_Composition_step_src
+	CompositionStep[1] role step
+end
+
+association xxx_Apply_component between
+	Apply[*] role xxx_Apply_component_src
+	Component[1] role component
+end
+
+composition xxx_Apply_inputModels between
+	Apply[0..1] role xxx_Apply_inputModels_src
+	ApplyParameter[*] role inputModels
+end
+
+composition xxx_Apply_outputModels between
+	Apply[0..1] role xxx_Apply_outputModels_src
+	ApplyParameter[*] role outputModels
+end
+
+association xxx_ApplyParameter_model_ between
+	ApplyParameter[*] role xxx_ApplyParameter_model__src
+	Model[1] role model_
+end
+
+association xxx_ApplyParameter_boundConceptQualifier between
+	ApplyParameter[*] role xxx_ApplyParameter_boundConceptQualifier_src
+	Component[0..1] role boundConceptQualifier
+end
+
+association xxx_ApplyParameter_boundConcept between
+	ApplyParameter[*] role xxx_ApplyParameter_boundConcept_src
+	Concept[0..1] role boundConcept
+end
+
+association xxx_ApplyParameter_binding between
+	ApplyParameter[*] role xxx_ApplyParameter_binding_src
+	BindingDeclaration[0..1] role binding
+end
+
+composition xxx_Seq_steps between
+	Seq[0..1] role xxx_Seq_steps_src
+	CompositionStep[*] role steps
+end
+
+composition xxx_Xor_conditions between
+	Xor[0..1] role xxx_Xor_conditions_src
+	XorCond[1..*] role conditions
+end
+
+composition xxx_XorCond_value between
+	XorCond[*] role xxx_XorCond_value_src
+	BooleanValue[1] role value
+end
+
+composition xxx_XorCond_step between
+	XorCond[*] role xxx_XorCond_step_src
+	CompositionStep[1] role step
+end
+
+composition xxx_BooleanExpression_left between
+	BooleanExpression[*] role xxx_BooleanExpression_left_src
+	BooleanValue[1] role left
+end
+
+composition xxx_BooleanExpression_right between
+	BooleanExpression[*] role xxx_BooleanExpression_right_src
+	BooleanValue[1] role right
+end
+
+association xxx_FeatureRef_feature between
+	FeatureRef[*] role xxx_FeatureRef_feature_src
+	Feature[1] role feature
+end
+
+composition xxx_DefinitionRoot_component between
+	DefinitionRoot[*] role xxx_DefinitionRoot_component_src
+	Component[1] role component
+end
+
+composition xxx_AtlTemplate_parameters between
+	AtlTemplate[0..1] role xxx_AtlTemplate_parameters_src
+	AtlParameter[*] role parameters
+end
+
+association xxx_AtlParameter_model_ between
+	AtlParameter[*] role xxx_AtlParameter_model__src
+	Model[0..1] role model_
+end
+

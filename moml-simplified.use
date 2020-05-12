@@ -1,0 +1,182 @@
+model Moml_simplified
+class ClassType
+attributes
+	group : String
+	extends : String
+	name : String
+	source : String
+operations
+end
+
+class DirectorType
+attributes
+	group : String
+	class_ : String
+	name : String
+operations
+end
+
+class EntityType
+attributes
+	group : String
+	class1 : String
+	name : String
+	source : String
+operations
+end
+
+class LinkType
+attributes
+	port : String
+	relation : String
+	relation1 : String
+	relation2 : String
+	vertex : String
+operations
+end
+
+class LocationType
+attributes
+	value : String
+operations
+end
+
+class PortType
+attributes
+	group : String
+	class_ : String
+	name : String
+operations
+end
+
+class PropertyType
+attributes
+	group : String
+	class_ : String
+	name : String
+	value : String
+operations
+end
+
+class RelationType
+attributes
+	group : String
+	class_ : String
+	name : String
+operations
+end
+
+class VertexType
+attributes
+	group : String
+	name : String
+	pathTo : String
+	value : String
+operations
+end
+
+composition xxx_ClassType_class_ between
+	ClassType[0..1] role xxx_ClassType_class__src
+	ClassType[*] role class_
+end
+
+composition xxx_ClassType_director between
+	ClassType[0..1] role xxx_ClassType_director_src
+	DirectorType[*] role director
+end
+
+composition xxx_ClassType_entity between
+	ClassType[0..1] role xxx_ClassType_entity_src
+	EntityType[*] role entity
+end
+
+composition xxx_ClassType_link between
+	ClassType[0..1] role xxx_ClassType_link_src
+	LinkType[*] role link
+end
+
+composition xxx_ClassType_port between
+	ClassType[0..1] role xxx_ClassType_port_src
+	PortType[*] role port
+end
+
+composition xxx_ClassType_property between
+	ClassType[0..1] role xxx_ClassType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_ClassType_relation between
+	ClassType[0..1] role xxx_ClassType_relation_src
+	RelationType[*] role relation
+end
+
+composition xxx_DirectorType_property between
+	DirectorType[0..1] role xxx_DirectorType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_EntityType_class_ between
+	EntityType[0..1] role xxx_EntityType_class__src
+	ClassType[*] role class_
+end
+
+composition xxx_EntityType_director between
+	EntityType[0..1] role xxx_EntityType_director_src
+	DirectorType[*] role director
+end
+
+composition xxx_EntityType_entity between
+	EntityType[0..1] role xxx_EntityType_entity_src
+	EntityType[*] role entity
+end
+
+composition xxx_EntityType_link between
+	EntityType[0..1] role xxx_EntityType_link_src
+	LinkType[*] role link
+end
+
+composition xxx_EntityType_port between
+	EntityType[0..1] role xxx_EntityType_port_src
+	PortType[*] role port
+end
+
+composition xxx_EntityType_property between
+	EntityType[0..1] role xxx_EntityType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_EntityType_relation between
+	EntityType[0..1] role xxx_EntityType_relation_src
+	RelationType[*] role relation
+end
+
+composition xxx_PortType_property between
+	PortType[0..1] role xxx_PortType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_PropertyType_property between
+	PropertyType[0..1] role xxx_PropertyType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_RelationType_property between
+	RelationType[0..1] role xxx_RelationType_property_src
+	PropertyType[*] role property
+end
+
+composition xxx_RelationType_vertex between
+	RelationType[0..1] role xxx_RelationType_vertex_src
+	VertexType[*] role vertex
+end
+
+composition xxx_VertexType_location between
+	VertexType[0..1] role xxx_VertexType_location_src
+	LocationType[*] role location
+end
+
+composition xxx_VertexType_property between
+	VertexType[0..1] role xxx_VertexType_property_src
+	PropertyType[*] role property
+end
+

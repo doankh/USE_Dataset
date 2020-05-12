@@ -1,0 +1,61 @@
+model car
+class Car
+attributes
+operations
+end
+
+abstract class Motor
+attributes
+operations
+end
+
+class Petrol<Motor
+attributes
+operations
+end
+
+class Diesel<Motor
+attributes
+operations
+end
+
+abstract class Option
+attributes
+operations
+end
+
+class GPS<Option
+attributes
+operations
+end
+
+class AirCond<Option
+attributes
+operations
+end
+
+class Radio<Option
+attributes
+operations
+end
+
+class Aircond<Option
+attributes
+operations
+end
+
+class ABS<Option
+attributes
+operations
+end
+
+composition xxx_Car_motor between
+	Car[0..1] role xxx_Car_motor_src
+	Motor[1..*] role motor
+end
+
+composition xxx_Car_options between
+	Car[0..1] role xxx_Car_options_src
+	Option[*] role options
+end
+

@@ -1,0 +1,300 @@
+model business
+class Repository
+attributes
+operations
+end
+
+abstract class TalendItem
+attributes
+	id : String
+	label : String
+	author : String
+	version : String
+	comment : String
+operations
+end
+
+class BusinessProcess<TalendItem
+attributes
+operations
+end
+
+class Process<TalendItem
+attributes
+operations
+end
+
+class Routine<TalendItem
+attributes
+operations
+end
+
+class Documentation<TalendItem
+attributes
+operations
+end
+
+class DatabaseMetadata<TalendItem
+attributes
+operations
+end
+
+class SapFunctionMetadata<TalendItem
+attributes
+operations
+end
+
+class TableMetadata<TalendItem
+attributes
+operations
+end
+
+class FileDelimitedMetadata<TalendItem
+attributes
+operations
+end
+
+class FilePositionalMetadata<TalendItem
+attributes
+operations
+end
+
+class FileRegexpMetadata<TalendItem
+attributes
+operations
+end
+
+class FileXmlMetadata<TalendItem
+attributes
+operations
+end
+
+class FileExcelMetadata<TalendItem
+attributes
+operations
+end
+
+class FileLdifMetadata<TalendItem
+attributes
+operations
+end
+
+class GenericSchemaMetadata<TalendItem
+attributes
+operations
+end
+
+class Context<TalendItem
+attributes
+operations
+end
+
+class BusinessAssignment
+attributes
+	comment : String
+operations
+end
+
+abstract class BusinessItem
+attributes
+	name : String
+	vAlignment : String
+	hAlignment : String
+operations
+end
+
+abstract class BaseBusinessItemRelationship<BusinessItem
+attributes
+operations
+end
+
+class BusinessItemRelationship<BaseBusinessItemRelationship
+attributes
+operations
+end
+
+class DirectionalBusinessItemRelationship<BaseBusinessItemRelationship
+attributes
+operations
+end
+
+class BidirectionalBusinessItemRelationship<BaseBusinessItemRelationship
+attributes
+operations
+end
+
+abstract class BusinessItemShape<BusinessItem
+attributes
+operations
+end
+
+class DecisionBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class ActionBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class TerminalBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class DataBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class DocumentBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class InputBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class ListBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class DatabaseBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class ActorBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class EllipseBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class GearBusinessItem<BusinessItemShape
+attributes
+operations
+end
+
+class Query<TalendItem
+attributes
+operations
+end
+
+class Joblet<TalendItem
+attributes
+operations
+end
+
+class SQLPattern<TalendItem
+attributes
+operations
+end
+
+class Salesforce<TalendItem
+attributes
+operations
+end
+
+class Copybook<TalendItem
+attributes
+operations
+end
+
+class MDM<TalendItem
+attributes
+operations
+end
+
+class Wsdl<TalendItem
+attributes
+operations
+end
+
+class Ldap<TalendItem
+attributes
+operations
+end
+
+class SAPFunction<TalendItem
+attributes
+operations
+end
+
+class Service<TalendItem
+attributes
+operations
+end
+
+composition xxx_Repository_Talenditems between
+	Repository[0..1] role xxx_Repository_Talenditems_src
+	TalendItem[*] role Talenditems
+end
+
+association xxx_TalendItem_assignments between
+	TalendItem[0..1] role xxx_TalendItem_assignments_src
+	BusinessAssignment[*] role assignments
+end
+
+association xxx_TalendItem_repository between
+	TalendItem[*] role xxx_TalendItem_repository_src
+	Repository[0..1] role repository
+end
+
+composition xxx_BusinessProcess_businessItems between
+	BusinessProcess[0..1] role xxx_BusinessProcess_businessItems_src
+	BusinessItem[*] role businessItems
+end
+
+composition xxx_BusinessProcess_localRepositoryCopy between
+	BusinessProcess[*] role xxx_BusinessProcess_localRepositoryCopy_src
+	Repository[0..1] role localRepositoryCopy
+end
+
+association xxx_BusinessAssignment_businessItem between
+	BusinessAssignment[*] role xxx_BusinessAssignment_businessItem_src
+	BusinessItem[1] role businessItem
+end
+
+association xxx_BusinessAssignment_talendItem between
+	BusinessAssignment[*] role xxx_BusinessAssignment_talendItem_src
+	TalendItem[1] role talendItem
+end
+
+association xxx_BusinessItem_businessProcess between
+	BusinessItem[*] role xxx_BusinessItem_businessProcess_src
+	BusinessProcess[1] role businessProcess
+end
+
+composition xxx_BusinessItem_assignments between
+	BusinessItem[0..1] role xxx_BusinessItem_assignments_src
+	BusinessAssignment[*] role assignments
+end
+
+association xxx_BaseBusinessItemRelationship_source between
+	BaseBusinessItemRelationship[*] role xxx_BaseBusinessItemRelationship_source_src
+	BusinessItemShape[0..1] role source
+end
+
+association xxx_BaseBusinessItemRelationship_target between
+	BaseBusinessItemRelationship[*] role xxx_BaseBusinessItemRelationship_target_src
+	BusinessItemShape[0..1] role target
+end
+
+association xxx_BusinessItemShape_incomingRelationships between
+	BusinessItemShape[0..1] role xxx_BusinessItemShape_incomingRelationships_src
+	BaseBusinessItemRelationship[*] role incomingRelationships
+end
+
+association xxx_BusinessItemShape_outgoingRelationships between
+	BusinessItemShape[0..1] role xxx_BusinessItemShape_outgoingRelationships_src
+	BaseBusinessItemRelationship[*] role outgoingRelationships
+end
+

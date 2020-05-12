@@ -1,0 +1,149 @@
+model NUOPC
+enum IPDVersion{
+default
+}
+
+enum ESMF_STAGGERLOC{
+default
+}
+
+abstract class Component
+attributes
+	name : String
+	IPDVersion : IPDVersion
+operations
+end
+
+abstract class BaseModel<Component
+attributes
+operations
+end
+
+class Driver<Component
+attributes
+operations
+end
+
+class Model<BaseModel
+attributes
+operations
+end
+
+class Mediator<BaseModel
+attributes
+operations
+end
+
+class Connector<Component
+attributes
+operations
+end
+
+class Application
+attributes
+	name : String
+operations
+	getAllChildren():Component
+end
+
+class Field
+attributes
+	name : String
+	import : Boolean
+	export : Boolean
+	standardName : String
+operations
+end
+
+abstract class Grid
+attributes
+	name : String
+	minIndex : Integer
+	maxIndex : Integer
+operations
+end
+
+class UniformGrid<Grid
+attributes
+	minCornerCoord : Real
+	maxCornerCoord : Real
+	staggerLocToFillCoords : ESMF_STAGGERLOC
+operations
+end
+
+class Specialization
+attributes
+	phaseLabel : String
+operations
+end
+
+class Advance<Specialization
+attributes
+operations
+end
+
+composition xxx_Component_advance between
+	Component[0..1] role xxx_Component_advance_src
+	Advance[1..*] role advance
+end
+
+composition xxx_BaseModel_grids between
+	BaseModel[0..1] role xxx_BaseModel_grids_src
+	Grid[*] role grids
+end
+
+composition xxx_BaseModel_importFields between
+	BaseModel[0..1] role xxx_BaseModel_importFields_src
+	Field[*] role importFields
+end
+
+composition xxx_BaseModel_exportFields between
+	BaseModel[0..1] role xxx_BaseModel_exportFields_src
+	Field[*] role exportFields
+end
+
+composition xxx_Driver_children between
+	Driver[0..1] role xxx_Driver_children_src
+	Component[*] role children
+end
+
+association xxx_Driver_runSequence between
+	Driver[0..1] role xxx_Driver_runSequence_src
+	Advance[*] role runSequence
+end
+
+association xxx_Connector_source between
+	Connector[*] role xxx_Connector_source_src
+	BaseModel[1] role source
+end
+
+association xxx_Connector_destination between
+	Connector[*] role xxx_Connector_destination_src
+	BaseModel[1] role destination
+end
+
+composition xxx_Application_children between
+	Application[0..1] role xxx_Application_children_src
+	Component[*] role children
+end
+
+association xxx_Field_importedBy between
+	Field[*] role xxx_Field_importedBy_src
+	BaseModel[0..1] role importedBy
+end
+
+association xxx_Field_exportedBy between
+	Field[*] role xxx_Field_exportedBy_src
+	BaseModel[0..1] role exportedBy
+end
+
+association xxx_Field_grid between
+	Field[*] role xxx_Field_grid_src
+	Grid[1] role grid
+end
+
+association xxx_Advance_component between
+	Advance[*] role xxx_Advance_component_src
+	Component[1] role component
+end
+

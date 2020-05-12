@@ -1,0 +1,129 @@
+model svgd
+enum Linienart{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Form<NamedElement
+attributes
+operations
+end
+
+class Rechteck<Form
+attributes
+	hoehe : Real
+	breite : Real
+operations
+end
+
+class Kreis<Form
+attributes
+	radius : Real
+operations
+end
+
+class SVGModel
+attributes
+	fileName : String
+	hoehe : Real
+	breite : Real
+	version : String
+operations
+end
+
+class Linie<Form
+attributes
+	x2 : Real
+	y2 : Real
+operations
+end
+
+class Figure<Form
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class Import
+attributes
+operations
+end
+
+class EmbedForm
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+class LinienStil
+attributes
+	zug : Linienart
+	dicke : String
+	farbe : String
+operations
+end
+
+class FlaechenStil
+attributes
+	fuellung : String
+	muster : String
+operations
+end
+
+composition xxx_Rechteck_lineprops between
+	Rechteck[*] role xxx_Rechteck_lineprops_src
+	LinienStil[1] role lineprops
+end
+
+composition xxx_Rechteck_areaprops between
+	Rechteck[*] role xxx_Rechteck_areaprops_src
+	FlaechenStil[1] role areaprops
+end
+
+composition xxx_Kreis_lineprops between
+	Kreis[*] role xxx_Kreis_lineprops_src
+	LinienStil[1] role lineprops
+end
+
+composition xxx_Kreis_areaprops between
+	Kreis[*] role xxx_Kreis_areaprops_src
+	FlaechenStil[1] role areaprops
+end
+
+composition xxx_SVGModel_elements between
+	SVGModel[0..1] role xxx_SVGModel_elements_src
+	Form[1..*] role elements
+end
+
+composition xxx_SVGModel_imports between
+	SVGModel[*] role xxx_SVGModel_imports_src
+	Import[0..1] role imports
+end
+
+composition xxx_Linie_lineprops between
+	Linie[*] role xxx_Linie_lineprops_src
+	LinienStil[1] role lineprops
+end
+
+composition xxx_Figure_forms between
+	Figure[0..1] role xxx_Figure_forms_src
+	EmbedForm[1..*] role forms
+end
+
+association xxx_Import_importedRessource between
+	Import[0..1] role xxx_Import_importedRessource_src
+	SVGModel[1..*] role importedRessource
+end
+
+association xxx_EmbedForm_form between
+	EmbedForm[*] role xxx_EmbedForm_form_src
+	Form[1] role form
+end
+

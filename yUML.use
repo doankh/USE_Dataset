@@ -1,0 +1,175 @@
+model yUML
+enum AssociationType{
+	simpleAssociation,
+	aggregation,
+	composition
+}
+
+enum Visibility{
+	unspecified,
+	public,
+	private,
+	protected,
+	package
+}
+
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Model<LocatedElement
+attributes
+operations
+end
+
+class Class<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class ModelElement<LocatedElement
+attributes
+operations
+end
+
+abstract class ColorableElement<ModelElement
+attributes
+	color : String
+operations
+end
+
+class ClassReference<ColorableElement
+attributes
+	stereotype : String
+operations
+end
+
+abstract class Relationship<ModelElement
+attributes
+operations
+end
+
+class ClassDefinition<LocatedElement
+attributes
+operations
+end
+
+class Association<Relationship
+attributes
+	type : AssociationType
+	sourceLabel : String
+	navigableSource : Boolean
+	sourceVisibility : Visibility
+	targetLabel : String
+	navigableTarget : Boolean
+	targetVisibility : Visibility
+operations
+end
+
+class Inheritance<Relationship
+attributes
+operations
+end
+
+class Cardinality<LocatedElement
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+abstract class ClassMember<LocatedElement
+attributes
+	visibility : Visibility
+	name : String
+operations
+end
+
+class Attribute<ClassMember
+attributes
+	type : String
+operations
+end
+
+class Method<ClassMember
+attributes
+	arguments : String
+operations
+end
+
+class Note<ColorableElement
+attributes
+	text : String
+operations
+end
+
+class NoteAssociation<Relationship
+attributes
+operations
+end
+
+composition xxx_Model_classes between
+	Model[0..1] role xxx_Model_classes_src
+	Class[*] role classes
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	ModelElement[*] role elements
+end
+
+association xxx_ModelElement_model_ between
+	ModelElement[*] role xxx_ModelElement_model__src
+	Model[1] role model_
+end
+
+association xxx_ClassReference_class_ between
+	ClassReference[*] role xxx_ClassReference_class__src
+	Class[1] role class_
+end
+
+composition xxx_ClassReference_definition between
+	ClassReference[*] role xxx_ClassReference_definition_src
+	ClassDefinition[0..1] role definition
+end
+
+composition xxx_Relationship_source between
+	Relationship[*] role xxx_Relationship_source_src
+	ClassReference[1] role source
+end
+
+composition xxx_Relationship_target between
+	Relationship[*] role xxx_Relationship_target_src
+	ClassReference[1] role target
+end
+
+composition xxx_ClassDefinition_attributes_ between
+	ClassDefinition[0..1] role xxx_ClassDefinition_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_ClassDefinition_methods between
+	ClassDefinition[0..1] role xxx_ClassDefinition_methods_src
+	Method[*] role methods
+end
+
+composition xxx_Association_sourceCardinality between
+	Association[*] role xxx_Association_sourceCardinality_src
+	Cardinality[0..1] role sourceCardinality
+end
+
+composition xxx_Association_targetCardinality between
+	Association[*] role xxx_Association_targetCardinality_src
+	Cardinality[0..1] role targetCardinality
+end
+
+composition xxx_NoteAssociation_note between
+	NoteAssociation[*] role xxx_NoteAssociation_note_src
+	Note[1] role note
+end
+

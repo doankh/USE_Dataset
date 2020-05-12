@@ -1,0 +1,338 @@
+model jkind
+class File
+attributes
+operations
+end
+
+class Typedef
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+operations
+end
+
+class Field
+attributes
+	name : String
+operations
+end
+
+class Constant<IdRef
+attributes
+operations
+end
+
+class Node
+attributes
+	name : String
+	main : String
+operations
+end
+
+class VariableGroup
+attributes
+operations
+end
+
+class Variable<IdRef
+attributes
+operations
+end
+
+class Equation
+attributes
+operations
+end
+
+class Property
+attributes
+operations
+end
+
+class Assertion
+attributes
+operations
+end
+
+class Expr
+attributes
+operations
+end
+
+class IdRef
+attributes
+	name : String
+operations
+end
+
+class AbbreviationType<Typedef
+attributes
+operations
+end
+
+class RecordType<Typedef
+attributes
+operations
+end
+
+class IntType<Type
+attributes
+operations
+end
+
+class BoolType<Type
+attributes
+operations
+end
+
+class RealType<Type
+attributes
+operations
+end
+
+class SubrangeType<Type
+attributes
+	low : Integer
+	high : Integer
+operations
+end
+
+class UserType<Type
+attributes
+operations
+end
+
+class BinaryExpr<Expr
+attributes
+	op : String
+operations
+end
+
+class UnaryExpr<Expr
+attributes
+	op : String
+operations
+end
+
+class ProjectionExpr<Expr
+attributes
+operations
+end
+
+class IdExpr<Expr
+attributes
+operations
+end
+
+class IntExpr<Expr
+attributes
+	val : Integer
+operations
+end
+
+class RealExpr<Expr
+attributes
+	val : String
+operations
+end
+
+class BoolExpr<Expr
+attributes
+	val : String
+operations
+end
+
+class IfThenElseExpr<Expr
+attributes
+operations
+end
+
+class NodeCallExpr<Expr
+attributes
+operations
+end
+
+class RecordExpr<Expr
+attributes
+operations
+end
+
+composition xxx_File_typedefs between
+	File[0..1] role xxx_File_typedefs_src
+	Typedef[*] role typedefs
+end
+
+composition xxx_File_constants between
+	File[0..1] role xxx_File_constants_src
+	Constant[*] role constants
+end
+
+composition xxx_File_nodes between
+	File[0..1] role xxx_File_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_Constant_type between
+	Constant[*] role xxx_Constant_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Constant_expr between
+	Constant[*] role xxx_Constant_expr_src
+	Expr[0..1] role expr
+end
+
+composition xxx_Node_inputs between
+	Node[0..1] role xxx_Node_inputs_src
+	VariableGroup[*] role inputs
+end
+
+composition xxx_Node_outputs between
+	Node[0..1] role xxx_Node_outputs_src
+	VariableGroup[*] role outputs
+end
+
+composition xxx_Node_locals between
+	Node[0..1] role xxx_Node_locals_src
+	VariableGroup[*] role locals
+end
+
+composition xxx_Node_equations between
+	Node[0..1] role xxx_Node_equations_src
+	Equation[*] role equations
+end
+
+composition xxx_Node_assertions between
+	Node[0..1] role xxx_Node_assertions_src
+	Assertion[*] role assertions
+end
+
+composition xxx_Node_properties between
+	Node[0..1] role xxx_Node_properties_src
+	Property[*] role properties
+end
+
+composition xxx_VariableGroup_variables between
+	VariableGroup[0..1] role xxx_VariableGroup_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_VariableGroup_type between
+	VariableGroup[*] role xxx_VariableGroup_type_src
+	Type[0..1] role type
+end
+
+association xxx_Equation_lhs between
+	Equation[0..1] role xxx_Equation_lhs_src
+	Variable[*] role lhs
+end
+
+composition xxx_Equation_rhs between
+	Equation[*] role xxx_Equation_rhs_src
+	Expr[0..1] role rhs
+end
+
+association xxx_Property_ref between
+	Property[*] role xxx_Property_ref_src
+	Variable[0..1] role ref
+end
+
+composition xxx_Assertion_expr between
+	Assertion[*] role xxx_Assertion_expr_src
+	Expr[0..1] role expr
+end
+
+composition xxx_AbbreviationType_type between
+	AbbreviationType[*] role xxx_AbbreviationType_type_src
+	Type[0..1] role type
+end
+
+composition xxx_RecordType_fields between
+	RecordType[0..1] role xxx_RecordType_fields_src
+	Field[*] role fields
+end
+
+composition xxx_RecordType_types between
+	RecordType[0..1] role xxx_RecordType_types_src
+	Type[*] role types
+end
+
+association xxx_UserType_def between
+	UserType[*] role xxx_UserType_def_src
+	Typedef[0..1] role def
+end
+
+composition xxx_BinaryExpr_left between
+	BinaryExpr[*] role xxx_BinaryExpr_left_src
+	Expr[0..1] role left
+end
+
+composition xxx_BinaryExpr_right between
+	BinaryExpr[*] role xxx_BinaryExpr_right_src
+	Expr[0..1] role right
+end
+
+composition xxx_UnaryExpr_expr between
+	UnaryExpr[*] role xxx_UnaryExpr_expr_src
+	Expr[0..1] role expr
+end
+
+composition xxx_ProjectionExpr_expr between
+	ProjectionExpr[*] role xxx_ProjectionExpr_expr_src
+	Expr[0..1] role expr
+end
+
+association xxx_ProjectionExpr_field between
+	ProjectionExpr[*] role xxx_ProjectionExpr_field_src
+	Field[0..1] role field
+end
+
+association xxx_IdExpr_id between
+	IdExpr[*] role xxx_IdExpr_id_src
+	IdRef[0..1] role id
+end
+
+composition xxx_IfThenElseExpr_cond between
+	IfThenElseExpr[*] role xxx_IfThenElseExpr_cond_src
+	Expr[0..1] role cond
+end
+
+composition xxx_IfThenElseExpr_then_ between
+	IfThenElseExpr[*] role xxx_IfThenElseExpr_then__src
+	Expr[0..1] role then_
+end
+
+composition xxx_IfThenElseExpr_else_ between
+	IfThenElseExpr[*] role xxx_IfThenElseExpr_else__src
+	Expr[0..1] role else_
+end
+
+association xxx_NodeCallExpr_node between
+	NodeCallExpr[*] role xxx_NodeCallExpr_node_src
+	Node[0..1] role node
+end
+
+composition xxx_NodeCallExpr_args between
+	NodeCallExpr[0..1] role xxx_NodeCallExpr_args_src
+	Expr[*] role args
+end
+
+association xxx_RecordExpr_type between
+	RecordExpr[*] role xxx_RecordExpr_type_src
+	RecordType[0..1] role type
+end
+
+association xxx_RecordExpr_fields between
+	RecordExpr[0..1] role xxx_RecordExpr_fields_src
+	Field[*] role fields
+end
+
+composition xxx_RecordExpr_exprs between
+	RecordExpr[0..1] role xxx_RecordExpr_exprs_src
+	Expr[*] role exprs
+end
+

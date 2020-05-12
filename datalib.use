@@ -1,0 +1,185 @@
+model android
+enum ParseType{
+default
+}
+
+enum HttpMethod{
+default
+}
+
+enum DataLibOption{
+default
+}
+
+enum ParameterType{
+default
+}
+
+class DummyClass
+attributes
+operations
+end
+
+class WebService
+attributes
+	name : String
+	package : String
+	method : HttpMethod
+	parseType : ParseType
+	url : String
+	options : DataLibOption
+	cached : Boolean
+operations
+end
+
+class DataLibProject
+attributes
+	name : String
+	package : String
+	authority : String
+	databaseName : String
+	databaseVersion : String
+operations
+end
+
+class BusinessObject
+attributes
+	name : String
+	package : String
+	xmlName : String
+	parseId : Integer
+	javaName : String
+	javaTag : String
+operations
+end
+
+class BusinessObjectDAO<BusinessObject
+attributes
+operations
+end
+
+class ResponseBusinessObject<BusinessObject
+attributes
+operations
+end
+
+class ResponseBusinessObjectDAO<BusinessObjectDAO,ResponseBusinessObject
+attributes
+operations
+end
+
+class Field<Parameter
+attributes
+	defaultValue : String
+	xmlName : String
+	parseId : Integer
+	javaName : String
+	javaTag : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	type : ParameterType
+	description : String
+	urlParameter : Integer
+	fingerprintKey : Boolean
+operations
+end
+
+class FieldBusinessObject<Field
+attributes
+operations
+end
+
+composition xxx_WebService_parameters between
+	WebService[0..1] role xxx_WebService_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_WebService_contentResponse between
+	WebService[*] role xxx_WebService_contentResponse_src
+	ResponseBusinessObject[1] role contentResponse
+end
+
+composition xxx_WebService_urlParameters between
+	WebService[0..1] role xxx_WebService_urlParameters_src
+	Parameter[*] role urlParameters
+end
+
+composition xxx_DataLibProject_webservices between
+	DataLibProject[0..1] role xxx_DataLibProject_webservices_src
+	WebService[*] role webservices
+end
+
+composition xxx_BusinessObject_attributes_ between
+	BusinessObject[0..1] role xxx_BusinessObject_attributes__src
+	Field[*] role attributes_
+end
+
+composition xxx_BusinessObject_contentFields between
+	BusinessObject[0..1] role xxx_BusinessObject_contentFields_src
+	Field[*] role contentFields
+end
+
+composition xxx_BusinessObject_childs between
+	BusinessObject[0..1] role xxx_BusinessObject_childs_src
+	BusinessObject[*] role childs
+end
+
+association xxx_BusinessObject_parent between
+	BusinessObject[*] role xxx_BusinessObject_parent_src
+	BusinessObject[1] role parent
+end
+
+association xxx_BusinessObject_relatedField between
+	BusinessObject[*] role xxx_BusinessObject_relatedField_src
+	FieldBusinessObject[1] role relatedField
+end
+
+association xxx_BusinessObjectDAO_project between
+	BusinessObjectDAO[*] role xxx_BusinessObjectDAO_project_src
+	DataLibProject[1] role project
+end
+
+composition xxx_ResponseBusinessObject_xmlContentFields between
+	ResponseBusinessObject[0..1] role xxx_ResponseBusinessObject_xmlContentFields_src
+	Field[*] role xmlContentFields
+end
+
+composition xxx_ResponseBusinessObject_xmlAttributes between
+	ResponseBusinessObject[0..1] role xxx_ResponseBusinessObject_xmlAttributes_src
+	Field[*] role xmlAttributes
+end
+
+composition xxx_Field_xmlAttributes between
+	Field[0..1] role xxx_Field_xmlAttributes_src
+	Field[*] role xmlAttributes
+end
+
+association xxx_Field_businessObject between
+	Field[*] role xxx_Field_businessObject_src
+	BusinessObject[1] role businessObject
+end
+
+composition xxx_Field_xmlContentFields between
+	Field[0..1] role xxx_Field_xmlContentFields_src
+	Field[*] role xmlContentFields
+end
+
+association xxx_Field_xmlParent between
+	Field[*] role xxx_Field_xmlParent_src
+	Field[1] role xmlParent
+end
+
+association xxx_Field_relatedField between
+	Field[*] role xxx_Field_relatedField_src
+	Field[1] role relatedField
+end
+
+association xxx_FieldBusinessObject_content between
+	FieldBusinessObject[*] role xxx_FieldBusinessObject_content_src
+	BusinessObject[1] role content
+end
+

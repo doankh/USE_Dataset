@@ -1,0 +1,352 @@
+model LaTeX
+abstract class ValuedElement
+attributes
+	value : String
+operations
+end
+
+class Type<ValuedElement
+attributes
+operations
+end
+
+class Title<ValuedElement
+attributes
+operations
+end
+
+class Name<ValuedElement
+attributes
+operations
+end
+
+class Date<ValuedElement
+attributes
+operations
+end
+
+class Author
+attributes
+operations
+end
+
+class Adress<ValuedElement
+attributes
+operations
+end
+
+class Organisation
+attributes
+operations
+end
+
+class Phone<ValuedElement
+attributes
+operations
+end
+
+class Fax<ValuedElement
+attributes
+operations
+end
+
+class EMail<ValuedElement
+attributes
+operations
+end
+
+class Heading
+attributes
+operations
+end
+
+class Abstract<ValuedElement
+attributes
+operations
+end
+
+class Keywords<ValuedElement
+attributes
+operations
+end
+
+class SectionBody
+attributes
+operations
+end
+
+abstract class Corps
+attributes
+operations
+end
+
+class Value<ValuedElement
+attributes
+operations
+end
+
+class Cite<ValuedElement
+attributes
+operations
+end
+
+class Path<ValuedElement
+attributes
+operations
+end
+
+class Label<ValuedElement
+attributes
+operations
+end
+
+class Figure<Corps
+attributes
+operations
+end
+
+class Item<ValuedElement
+attributes
+operations
+end
+
+class Items<Corps
+attributes
+operations
+end
+
+class Enumerate<Corps
+attributes
+operations
+end
+
+class Section<Corps
+attributes
+operations
+end
+
+class Description<ValuedElement
+attributes
+operations
+end
+
+class Citation
+attributes
+operations
+end
+
+class Bibliography
+attributes
+operations
+end
+
+class DocumentBody
+attributes
+operations
+end
+
+class Document
+attributes
+operations
+end
+
+association xxx_Name_author between
+	Name[*] role xxx_Name_author_src
+	Author[0..1] role author
+end
+
+association xxx_Name_organisation between
+	Name[*] role xxx_Name_organisation_src
+	Organisation[0..1] role organisation
+end
+
+composition xxx_Author_names between
+	Author[0..1] role xxx_Author_names_src
+	Name[1..*] role names
+end
+
+composition xxx_Organisation_names between
+	Organisation[0..1] role xxx_Organisation_names_src
+	Name[1..*] role names
+end
+
+composition xxx_Organisation_adress between
+	Organisation[*] role xxx_Organisation_adress_src
+	Adress[1] role adress
+end
+
+association xxx_Organisation_heading between
+	Organisation[*] role xxx_Organisation_heading_src
+	Heading[1] role heading
+end
+
+composition xxx_Heading_organisations between
+	Heading[0..1] role xxx_Heading_organisations_src
+	Organisation[*] role organisations
+end
+
+composition xxx_Heading_phone between
+	Heading[*] role xxx_Heading_phone_src
+	Phone[0..1] role phone
+end
+
+composition xxx_Heading_fax between
+	Heading[*] role xxx_Heading_fax_src
+	Fax[0..1] role fax
+end
+
+composition xxx_Heading_email between
+	Heading[*] role xxx_Heading_email_src
+	EMail[0..1] role email
+end
+
+composition xxx_SectionBody_corps between
+	SectionBody[0..1] role xxx_SectionBody_corps_src
+	Corps[*] role corps
+end
+
+association xxx_SectionBody_section between
+	SectionBody[*] role xxx_SectionBody_section_src
+	Section[1] role section
+end
+
+association xxx_Corps_sectionbody between
+	Corps[*] role xxx_Corps_sectionbody_src
+	SectionBody[1] role sectionbody
+end
+
+composition xxx_Figure_path between
+	Figure[*] role xxx_Figure_path_src
+	Path[1] role path
+end
+
+composition xxx_Figure_label between
+	Figure[*] role xxx_Figure_label_src
+	Label[1] role label
+end
+
+composition xxx_Figure_title between
+	Figure[*] role xxx_Figure_title_src
+	Title[1] role title
+end
+
+association xxx_Item_itemscontainer between
+	Item[*] role xxx_Item_itemscontainer_src
+	Items[0..1] role itemscontainer
+end
+
+association xxx_Item_enumeratecontainer between
+	Item[*] role xxx_Item_enumeratecontainer_src
+	Enumerate[0..1] role enumeratecontainer
+end
+
+composition xxx_Items_item between
+	Items[0..1] role xxx_Items_item_src
+	Item[1..*] role item
+end
+
+composition xxx_Enumerate_item between
+	Enumerate[0..1] role xxx_Enumerate_item_src
+	Item[1..*] role item
+end
+
+composition xxx_Section_title between
+	Section[*] role xxx_Section_title_src
+	Title[1] role title
+end
+
+composition xxx_Section_sectionBody between
+	Section[*] role xxx_Section_sectionBody_src
+	SectionBody[1] role sectionBody
+end
+
+composition xxx_Description_date between
+	Description[*] role xxx_Description_date_src
+	Date[1] role date
+end
+
+composition xxx_Citation_label between
+	Citation[*] role xxx_Citation_label_src
+	Label[1] role label
+end
+
+composition xxx_Citation_author between
+	Citation[*] role xxx_Citation_author_src
+	Author[1] role author
+end
+
+composition xxx_Citation_description between
+	Citation[*] role xxx_Citation_description_src
+	Description[1] role description
+end
+
+association xxx_Citation_bibliography between
+	Citation[*] role xxx_Citation_bibliography_src
+	Bibliography[1] role bibliography
+end
+
+composition xxx_Bibliography_citations between
+	Bibliography[0..1] role xxx_Bibliography_citations_src
+	Citation[1..*] role citations
+end
+
+association xxx_Bibliography_documentbody between
+	Bibliography[*] role xxx_Bibliography_documentbody_src
+	DocumentBody[1] role documentbody
+end
+
+composition xxx_DocumentBody_sections between
+	DocumentBody[0..1] role xxx_DocumentBody_sections_src
+	Section[1..*] role sections
+end
+
+composition xxx_DocumentBody_bibliography between
+	DocumentBody[0..1] role xxx_DocumentBody_bibliography_src
+	Bibliography[*] role bibliography
+end
+
+association xxx_DocumentBody_document between
+	DocumentBody[*] role xxx_DocumentBody_document_src
+	Document[1] role document
+end
+
+composition xxx_Document_type between
+	Document[*] role xxx_Document_type_src
+	Type[1] role type
+end
+
+composition xxx_Document_title between
+	Document[*] role xxx_Document_title_src
+	Title[1] role title
+end
+
+composition xxx_Document_author between
+	Document[*] role xxx_Document_author_src
+	Author[0..1] role author
+end
+
+composition xxx_Document_date between
+	Document[*] role xxx_Document_date_src
+	Date[0..1] role date
+end
+
+composition xxx_Document_heading between
+	Document[*] role xxx_Document_heading_src
+	Heading[0..1] role heading
+end
+
+composition xxx_Document_abstract_ between
+	Document[*] role xxx_Document_abstract__src
+	Abstract[0..1] role abstract_
+end
+
+composition xxx_Document_keywords between
+	Document[*] role xxx_Document_keywords_src
+	Keywords[0..1] role keywords
+end
+
+composition xxx_Document_documentbody between
+	Document[*] role xxx_Document_documentbody_src
+	DocumentBody[1] role documentbody
+end
+

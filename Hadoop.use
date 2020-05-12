@@ -1,0 +1,77 @@
+model model_
+enum ServerStatus{
+default
+}
+
+class HDFSServer<Server
+attributes
+	loaded : Boolean
+	operationURIs : String
+	userId : String
+	groupIds : String
+operations
+end
+
+class Servers
+attributes
+	version : String
+operations
+end
+
+abstract class Server
+attributes
+	name : String
+	uri : String
+	statusCode : Integer
+	statusMessage : String
+	lastAccessed : Integer
+operations
+end
+
+class ZooKeeperServer<Server,ZNode
+attributes
+operations
+end
+
+class ZNode
+attributes
+	lastRefresh : Integer
+	refreshing : Boolean
+	ephermeral : Boolean
+	creationId : Integer
+	modifiedId : Integer
+	creationTime : Integer
+	modifiedTime : Integer
+	version : Integer
+	childrenVersion : Integer
+	aclVersion : Integer
+	ephermalOwnerSessionId : Integer
+	dataLength : Integer
+	childrenCount : Integer
+	nodeName : String
+	sequential : Boolean
+operations
+	getPath():String
+	getServer():ZooKeeperServer
+end
+
+composition xxx_Servers_hdfsServers between
+	Servers[0..1] role xxx_Servers_hdfsServers_src
+	HDFSServer[*] role hdfsServers
+end
+
+composition xxx_Servers_zookeeperServers between
+	Servers[0..1] role xxx_Servers_zookeeperServers_src
+	ZooKeeperServer[*] role zookeeperServers
+end
+
+composition xxx_ZNode_children between
+	ZNode[0..1] role xxx_ZNode_children_src
+	ZNode[*] role children
+end
+
+association xxx_ZNode_parent between
+	ZNode[*] role xxx_ZNode_parent_src
+	ZNode[0..1] role parent
+end
+

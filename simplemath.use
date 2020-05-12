@@ -1,0 +1,87 @@
+model simplemath
+abstract class Expression
+attributes
+	value : Real
+operations
+end
+
+class Additive<Expression
+attributes
+	operator : String
+operations
+end
+
+class Multiplicative<Expression
+attributes
+	operator : String
+operations
+end
+
+class Negation<Expression
+attributes
+	operator : String
+operations
+end
+
+class IntegerLiteralExp<Expression
+attributes
+	intValue : Integer
+operations
+end
+
+class RealLiteralExp<Expression
+attributes
+	floatValue : Real
+operations
+end
+
+class BracketExp<Expression
+attributes
+operations
+end
+
+class Potence<Expression
+attributes
+operations
+end
+
+composition xxx_Additive_left between
+	Additive[*] role xxx_Additive_left_src
+	Expression[1] role left
+end
+
+composition xxx_Additive_right between
+	Additive[*] role xxx_Additive_right_src
+	Expression[1] role right
+end
+
+composition xxx_Multiplicative_left between
+	Multiplicative[*] role xxx_Multiplicative_left_src
+	Expression[1] role left
+end
+
+composition xxx_Multiplicative_right between
+	Multiplicative[*] role xxx_Multiplicative_right_src
+	Expression[1] role right
+end
+
+composition xxx_Negation_body between
+	Negation[*] role xxx_Negation_body_src
+	Expression[1] role body
+end
+
+composition xxx_BracketExp_body between
+	BracketExp[*] role xxx_BracketExp_body_src
+	Expression[0..1] role body
+end
+
+composition xxx_Potence_exponent between
+	Potence[*] role xxx_Potence_exponent_src
+	Expression[1] role exponent
+end
+
+composition xxx_Potence_base between
+	Potence[*] role xxx_Potence_base_src
+	Expression[1] role base
+end
+

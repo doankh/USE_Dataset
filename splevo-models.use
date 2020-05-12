@@ -1,0 +1,96 @@
+model splevo
+enum DifferenceType{
+default
+}
+
+class DifferenceModel
+attributes
+operations
+end
+
+class Difference
+attributes
+	type : DifferenceType
+operations
+end
+
+class Match
+attributes
+operations
+end
+
+class SoftwareModel
+attributes
+operations
+end
+
+class Resource
+attributes
+operations
+end
+
+class SoftwareElement
+attributes
+operations
+end
+
+composition xxx_DifferenceModel_rootMatches between
+	DifferenceModel[0..1] role xxx_DifferenceModel_rootMatches_src
+	Match[*] role rootMatches
+end
+
+association xxx_Difference_match between
+	Difference[*] role xxx_Difference_match_src
+	Match[1] role match
+end
+
+association xxx_Difference_changedElement between
+	Difference[*] role xxx_Difference_changedElement_src
+	SoftwareElement[1] role changedElement
+end
+
+composition xxx_Match_differences between
+	Match[0..1] role xxx_Match_differences_src
+	Difference[*] role differences
+end
+
+composition xxx_Match_submatches between
+	Match[0..1] role xxx_Match_submatches_src
+	Match[*] role submatches
+end
+
+association xxx_Match_parent between
+	Match[*] role xxx_Match_parent_src
+	Match[1] role parent
+end
+
+association xxx_Match_integration between
+	Match[*] role xxx_Match_integration_src
+	SoftwareElement[0..1] role integration
+end
+
+association xxx_Match_leading between
+	Match[*] role xxx_Match_leading_src
+	SoftwareElement[0..1] role leading
+end
+
+composition xxx_SoftwareModel_resources between
+	SoftwareModel[0..1] role xxx_SoftwareModel_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_Resource_root between
+	Resource[*] role xxx_Resource_root_src
+	SoftwareElement[1] role root
+end
+
+composition xxx_SoftwareElement_childElements between
+	SoftwareElement[0..1] role xxx_SoftwareElement_childElements_src
+	SoftwareElement[*] role childElements
+end
+
+association xxx_SoftwareElement_parent between
+	SoftwareElement[*] role xxx_SoftwareElement_parent_src
+	SoftwareElement[1] role parent
+end
+

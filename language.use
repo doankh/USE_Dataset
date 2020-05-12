@@ -1,0 +1,527 @@
+model language
+class Sentence
+attributes
+operations
+	getBegin():Integer
+	getEnd():Integer
+	getWord(begin_ : Integer,end_ : Integer):Word
+	findWords(wordText : String):Word
+end
+
+class Word
+attributes
+	begin_ : Integer
+	end_ : Integer
+	text : String
+operations
+end
+
+class CC<Word
+attributes
+operations
+end
+
+class CD<Word
+attributes
+operations
+end
+
+class DT<Word
+attributes
+operations
+end
+
+class EX<Word
+attributes
+operations
+end
+
+class FW<Word
+attributes
+operations
+end
+
+class IN<Word
+attributes
+operations
+end
+
+class JJ<Word
+attributes
+operations
+end
+
+class JJR<Word
+attributes
+operations
+end
+
+class JJS<Word
+attributes
+operations
+end
+
+class LS<Word
+attributes
+operations
+end
+
+class MD<Word
+attributes
+operations
+end
+
+class NN<Word
+attributes
+operations
+end
+
+class NNS<Word
+attributes
+operations
+end
+
+class NNP<Word
+attributes
+operations
+end
+
+class NNPS<Word
+attributes
+operations
+end
+
+class PDT<Word
+attributes
+operations
+end
+
+class POS<Word
+attributes
+operations
+end
+
+class PRP<Word
+attributes
+operations
+end
+
+class PRPS<Word
+attributes
+operations
+end
+
+class RB<Word
+attributes
+operations
+end
+
+class RBR<Word
+attributes
+operations
+end
+
+class RBS<Word
+attributes
+operations
+end
+
+class RP<Word
+attributes
+operations
+end
+
+class SYM<Word
+attributes
+operations
+end
+
+class TO<Word
+attributes
+operations
+end
+
+class UH<Word
+attributes
+operations
+end
+
+class VB<Word
+attributes
+operations
+end
+
+class VBD<Word
+attributes
+operations
+end
+
+class VBG<Word
+attributes
+operations
+end
+
+class VBN<Word
+attributes
+operations
+end
+
+class VBP<Word
+attributes
+operations
+end
+
+class VBZ<Word
+attributes
+operations
+end
+
+class WDT<Word
+attributes
+operations
+end
+
+class WP<Word
+attributes
+operations
+end
+
+class WPS<Word
+attributes
+operations
+end
+
+class WRB<Word
+attributes
+operations
+end
+
+class PlainText
+attributes
+	content : String
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+class Dabbrev<Dependency
+attributes
+operations
+end
+
+class Dacomp<Dependency
+attributes
+operations
+end
+
+class Dadvcl<Dependency
+attributes
+operations
+end
+
+class Dadvmod<Dependency
+attributes
+operations
+end
+
+class Dagent<Dependency
+attributes
+operations
+end
+
+class Damod<Dependency
+attributes
+operations
+end
+
+class Dappos<Dependency
+attributes
+operations
+end
+
+class Dattr<Dependency
+attributes
+operations
+end
+
+class Daux<Dependency
+attributes
+operations
+end
+
+class Dauxpass<Dependency
+attributes
+operations
+end
+
+class Dcc<Dependency
+attributes
+operations
+end
+
+class Dccomp<Dependency
+attributes
+operations
+end
+
+class Dcomplm<Dependency
+attributes
+operations
+end
+
+class Dconj<Collapse
+attributes
+operations
+end
+
+class Dcop<Dependency
+attributes
+operations
+end
+
+class Dcsubj<Dependency
+attributes
+operations
+end
+
+class Dcsubjpass<Dependency
+attributes
+operations
+end
+
+class Ddep<Dependency
+attributes
+operations
+end
+
+class Ddet<Dependency
+attributes
+operations
+end
+
+class Ddobj<Dependency
+attributes
+operations
+end
+
+class Dexpl<Dependency
+attributes
+operations
+end
+
+class Dinfmod<Dependency
+attributes
+operations
+end
+
+class Diobj<Dependency
+attributes
+operations
+end
+
+class Dmark<Dependency
+attributes
+operations
+end
+
+class Dmwe<Dependency
+attributes
+operations
+end
+
+class Dneg<Dependency
+attributes
+operations
+end
+
+class Dnn<Dependency
+attributes
+operations
+end
+
+class Dnpadvmod<Dependency
+attributes
+operations
+end
+
+class Dnsubj<Dependency
+attributes
+operations
+end
+
+class Dnsubjpass<Dependency
+attributes
+operations
+end
+
+class Dnum<Dependency
+attributes
+operations
+end
+
+class Dnumber<Dependency
+attributes
+operations
+end
+
+class Dparataxis<Dependency
+attributes
+operations
+end
+
+class Dpartmod<Dependency
+attributes
+operations
+end
+
+class Dpcomp<Dependency
+attributes
+operations
+end
+
+class Dpobj<Dependency
+attributes
+operations
+end
+
+class Dposs<Dependency
+attributes
+operations
+end
+
+class Dpossessive<Dependency
+attributes
+operations
+end
+
+class Dpreconj<Collapse
+attributes
+operations
+end
+
+class Dpredet<Dependency
+attributes
+operations
+end
+
+class Dprep<Collapse
+attributes
+operations
+end
+
+class Dprepc<Collapse
+attributes
+operations
+end
+
+class Dprt<Dependency
+attributes
+operations
+end
+
+class Dpunct<Dependency
+attributes
+operations
+end
+
+class Dpurpcl<Dependency
+attributes
+operations
+end
+
+class Dquantmod<Dependency
+attributes
+operations
+end
+
+class Drcmod<Dependency
+attributes
+operations
+end
+
+class Dref<Collapse
+attributes
+operations
+end
+
+class Drel<Collapse
+attributes
+operations
+end
+
+class Dtmod<Dependency
+attributes
+operations
+end
+
+class Dxcomp<Dependency
+attributes
+operations
+end
+
+class Dxsubj<Dependency
+attributes
+operations
+end
+
+class Droot<Dependency
+attributes
+operations
+end
+
+class Collapse<Dependency
+attributes
+	collapsedWordString : String
+operations
+end
+
+class NLPParagraph
+attributes
+operations
+	getBegin():Integer
+	getEnd():Integer
+end
+
+composition xxx_Sentence_words between
+	Sentence[0..1] role xxx_Sentence_words_src
+	Word[*] role words
+end
+
+composition xxx_Sentence_dependencies between
+	Sentence[0..1] role xxx_Sentence_dependencies_src
+	Dependency[*] role dependencies
+end
+
+association xxx_Word_governors between
+	Word[0..1] role xxx_Word_governors_src
+	Dependency[*] role governors
+end
+
+association xxx_Word_dependents between
+	Word[0..1] role xxx_Word_dependents_src
+	Dependency[*] role dependents
+end
+
+association xxx_Dependency_governor between
+	Dependency[*] role xxx_Dependency_governor_src
+	Word[0..1] role governor
+end
+
+association xxx_Dependency_dependent between
+	Dependency[*] role xxx_Dependency_dependent_src
+	Word[1] role dependent
+end
+
+association xxx_Collapse_collapsedWord between
+	Collapse[*] role xxx_Collapse_collapsedWord_src
+	Word[0..1] role collapsedWord
+end
+
+composition xxx_NLPParagraph_sentences between
+	NLPParagraph[0..1] role xxx_NLPParagraph_sentences_src
+	Sentence[*] role sentences
+end
+

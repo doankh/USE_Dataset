@@ -1,0 +1,134 @@
+model XAML
+class Page
+attributes
+	title : String
+operations
+end
+
+class NameSpace
+attributes
+	namespace : String
+	identifier : String
+operations
+end
+
+class PageResource
+attributes
+operations
+end
+
+abstract class GraphicalContainer
+attributes
+operations
+end
+
+abstract class WinFXElement
+attributes
+operations
+end
+
+abstract class PerspectiveElement
+attributes
+operations
+end
+
+class ResourceDictionary
+attributes
+	source : String
+operations
+end
+
+class Grid<GraphicalContainer
+attributes
+operations
+end
+
+abstract class Object3D
+attributes
+operations
+end
+
+class Workshop3D<PerspectiveElement
+attributes
+operations
+end
+
+class Element3D
+attributes
+operations
+end
+
+class UI3Delement<Element3D
+attributes
+	transform : String
+	material : String
+operations
+end
+
+class XyzAxis3D<PerspectiveElement
+attributes
+	length : Real
+operations
+end
+
+class Box3D<PerspectiveElement
+attributes
+operations
+end
+
+class Square3D<PerspectiveElement
+attributes
+operations
+end
+
+class Name<WinFXElement
+attributes
+	name : String
+operations
+end
+
+composition xxx_Page_xmlns between
+	Page[0..1] role xxx_Page_xmlns_src
+	NameSpace[*] role xmlns
+end
+
+composition xxx_Page_graphContainer between
+	Page[*] role xxx_Page_graphContainer_src
+	GraphicalContainer[1] role graphContainer
+end
+
+composition xxx_Page_pageResources between
+	Page[*] role xxx_Page_pageResources_src
+	PageResource[1] role pageResources
+end
+
+composition xxx_PageResource_dictionaries between
+	PageResource[0..1] role xxx_PageResource_dictionaries_src
+	ResourceDictionary[*] role dictionaries
+end
+
+association xxx_WinFXElement_namespace between
+	WinFXElement[*] role xxx_WinFXElement_namespace_src
+	NameSpace[1] role namespace
+end
+
+association xxx_PerspectiveElement_namespace between
+	PerspectiveElement[*] role xxx_PerspectiveElement_namespace_src
+	NameSpace[1] role namespace
+end
+
+composition xxx_Grid_object3D between
+	Grid[0..1] role xxx_Grid_object3D_src
+	Object3D[*] role object3D
+end
+
+composition xxx_Workshop3D_elements3D between
+	Workshop3D[0..1] role xxx_Workshop3D_elements3D_src
+	Element3D[*] role elements3D
+end
+
+composition xxx_UI3Delement_name between
+	UI3Delement[*] role xxx_UI3Delement_name_src
+	Name[1] role name
+end
+

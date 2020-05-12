@@ -1,0 +1,259 @@
+model servicefeaturemodel
+enum AttributeDomain{
+default
+}
+
+enum AggregationRules{
+default
+}
+
+enum ScaleOrders{
+default
+}
+
+enum FeatureTypes{
+default
+}
+
+class Service
+attributes
+	description : String
+	id : String
+	name : String
+operations
+end
+
+abstract class ServiceFeature
+attributes
+	name : String
+	description : String
+	minAmount : Integer
+	maxAmount : Integer
+	mapsToGSMElement : Boolean
+	associatedGSMElement : String
+	id : String
+	featureType : FeatureTypes
+	required : Boolean
+operations
+	validate(diagnostic : String,context_ : String):Boolean
+end
+
+class OptionalServiceFeature<ServiceFeature
+attributes
+operations
+end
+
+class Attribute
+attributes
+	instantiationValue : String
+	id : String
+operations
+end
+
+class Requires
+attributes
+operations
+end
+
+class Excludes
+attributes
+operations
+end
+
+class OR<Variant
+attributes
+	minFeaturesToChoose : Integer
+	maxFeaturesToChoose : Integer
+operations
+end
+
+class XOR<Variant
+attributes
+operations
+end
+
+class ServiceFeatureDiagram
+attributes
+	name : String
+	description : String
+	id : String
+operations
+	validate(diagnostic : String,context_ : String):Boolean
+end
+
+class Configuration
+attributes
+	name : String
+	id : String
+	description : String
+operations
+	validate(diagnostic : String,context_ : String):Boolean
+end
+
+class Preference
+attributes
+	creationDate : String
+	description : String
+	value : Real
+	stakeholderGroup : String
+operations
+end
+
+abstract class Variant
+attributes
+operations
+end
+
+class MandatoryServiceFeature<ServiceFeature
+attributes
+operations
+end
+
+class PossibleConfigurations
+attributes
+operations
+end
+
+class AttributeTypes
+attributes
+operations
+end
+
+class AttributeType
+attributes
+	name : String
+	domain : AttributeDomain
+	aggregationRule : AggregationRules
+	scaleOrder : ScaleOrders
+	toBeEvaluated : Boolean
+	description : String
+	customAttributeTypePriority : Integer
+	requirement : String
+operations
+end
+
+abstract class ModifyRelationship
+attributes
+	name : String
+	orderNumber : Integer
+	function : String
+	targetParameterName : String
+operations
+end
+
+class AttributeToAttributeModifyRelationship<ModifyRelationship
+attributes
+	triggerParameterName : String
+operations
+end
+
+class FeatureToAttributeModifyRelationship<ModifyRelationship
+attributes
+operations
+end
+
+composition xxx_Service_representedBy between
+	Service[*] role xxx_Service_representedBy_src
+	ServiceFeatureDiagram[1] role representedBy
+end
+
+composition xxx_Service_enables between
+	Service[*] role xxx_Service_enables_src
+	PossibleConfigurations[1] role enables
+end
+
+composition xxx_Service_has between
+	Service[*] role xxx_Service_has_src
+	AttributeTypes[1] role has
+end
+
+composition xxx_ServiceFeature_describedBy between
+	ServiceFeature[0..1] role xxx_ServiceFeature_describedBy_src
+	Attribute[*] role describedBy
+end
+
+composition xxx_ServiceFeature_containsVariant between
+	ServiceFeature[*] role xxx_ServiceFeature_containsVariant_src
+	Variant[0..1] role containsVariant
+end
+
+composition xxx_ServiceFeature_containsRequires between
+	ServiceFeature[0..1] role xxx_ServiceFeature_containsRequires_src
+	Requires[*] role containsRequires
+end
+
+composition xxx_ServiceFeature_containsExcludes between
+	ServiceFeature[0..1] role xxx_ServiceFeature_containsExcludes_src
+	Excludes[*] role containsExcludes
+end
+
+composition xxx_ServiceFeature_decomposesInto between
+	ServiceFeature[0..1] role xxx_ServiceFeature_decomposesInto_src
+	ServiceFeature[*] role decomposesInto
+end
+
+association xxx_Attribute_ofAttributeType between
+	Attribute[*] role xxx_Attribute_ofAttributeType_src
+	AttributeType[1] role ofAttributeType
+end
+
+composition xxx_Attribute_containsModifyRelationship between
+	Attribute[0..1] role xxx_Attribute_containsModifyRelationship_src
+	ModifyRelationship[*] role containsModifyRelationship
+end
+
+association xxx_Requires_requiresServiceFeature between
+	Requires[*] role xxx_Requires_requiresServiceFeature_src
+	ServiceFeature[1] role requiresServiceFeature
+end
+
+association xxx_Excludes_excludesServiceFeature between
+	Excludes[*] role xxx_Excludes_excludesServiceFeature_src
+	ServiceFeature[1] role excludesServiceFeature
+end
+
+composition xxx_ServiceFeatureDiagram_containsFeatures between
+	ServiceFeatureDiagram[0..1] role xxx_ServiceFeatureDiagram_containsFeatures_src
+	ServiceFeature[*] role containsFeatures
+end
+
+association xxx_Configuration_groups between
+	Configuration[0..1] role xxx_Configuration_groups_src
+	ServiceFeature[*] role groups
+end
+
+composition xxx_Configuration_evaluatedBy between
+	Configuration[0..1] role xxx_Configuration_evaluatedBy_src
+	Preference[*] role evaluatedBy
+end
+
+composition xxx_Configuration_describedBy between
+	Configuration[0..1] role xxx_Configuration_describedBy_src
+	Attribute[*] role describedBy
+end
+
+composition xxx_Variant_contains between
+	Variant[0..1] role xxx_Variant_contains_src
+	OptionalServiceFeature[2..*] role contains
+end
+
+composition xxx_PossibleConfigurations_contains between
+	PossibleConfigurations[0..1] role xxx_PossibleConfigurations_contains_src
+	Configuration[*] role contains
+end
+
+composition xxx_AttributeTypes_contains between
+	AttributeTypes[0..1] role xxx_AttributeTypes_contains_src
+	AttributeType[*] role contains
+end
+
+association xxx_AttributeToAttributeModifyRelationship_triggeredByAttribute between
+	AttributeToAttributeModifyRelationship[*] role xxx_AttributeToAttributeModifyRelationship_triggeredByAttribute_src
+	Attribute[1] role triggeredByAttribute
+end
+
+association xxx_FeatureToAttributeModifyRelationship_triggeredByServiceFeature between
+	FeatureToAttributeModifyRelationship[*] role xxx_FeatureToAttributeModifyRelationship_triggeredByServiceFeature_src
+	ServiceFeature[1] role triggeredByServiceFeature
+end
+

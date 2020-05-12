@@ -1,0 +1,66 @@
+model modulecore
+enum DependencyType{
+default
+}
+
+class WorkbenchModule
+attributes
+	handle : String
+	deployedName : String
+operations
+end
+
+class WorkbenchModuleResource
+attributes
+	sourcePath : String
+	deployedPath : String
+	exclusions : String
+operations
+end
+
+class ModuleType
+attributes
+	metadataResources : String
+	moduleTypeId : String
+operations
+end
+
+class ProjectModules
+attributes
+	projectName : String
+operations
+end
+
+class DependentModule
+attributes
+	handle : String
+	deployedPath : String
+	dependencyType : DependencyType
+operations
+end
+
+composition xxx_WorkbenchModule_resources between
+	WorkbenchModule[0..1] role xxx_WorkbenchModule_resources_src
+	WorkbenchModuleResource[*] role resources
+end
+
+association xxx_WorkbenchModule_moduleType between
+	WorkbenchModule[*] role xxx_WorkbenchModule_moduleType_src
+	ModuleType[1] role moduleType
+end
+
+association xxx_WorkbenchModule_modules between
+	WorkbenchModule[0..1] role xxx_WorkbenchModule_modules_src
+	DependentModule[*] role modules
+end
+
+association xxx_WorkbenchModuleResource_module between
+	WorkbenchModuleResource[*] role xxx_WorkbenchModuleResource_module_src
+	WorkbenchModule[1] role module
+end
+
+composition xxx_ProjectModules_workbenchModules between
+	ProjectModules[0..1] role xxx_ProjectModules_workbenchModules_src
+	WorkbenchModule[*] role workbenchModules
+end
+

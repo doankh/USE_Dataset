@@ -1,0 +1,427 @@
+model eventOrientedLanguage
+enum Type{
+default
+}
+
+class Program
+attributes
+operations
+end
+
+class GlobalSection
+attributes
+operations
+end
+
+class EventSection
+attributes
+operations
+end
+
+class HandlerSection
+attributes
+operations
+end
+
+class EventDecl
+attributes
+	name : String
+operations
+end
+
+class HandlerDecl
+attributes
+	name : String
+operations
+end
+
+class AbstractBlock
+attributes
+operations
+end
+
+class Command<AbstractBlock
+attributes
+operations
+end
+
+class VariableDeclaration<Command
+attributes
+	type : Type
+	name : String
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Compound<AbstractBlock
+attributes
+operations
+end
+
+class VariableAssign<Command
+attributes
+operations
+end
+
+class BindHandler<Command
+attributes
+	consumable : Boolean
+operations
+end
+
+class RaiseEvent<Command
+attributes
+operations
+end
+
+class PrintOutput<Command
+attributes
+operations
+end
+
+class ReadInput<Command
+attributes
+operations
+end
+
+class IfThenElse<Command
+attributes
+	balanced : Boolean
+operations
+end
+
+class While<Command
+attributes
+operations
+end
+
+class And<Expression
+attributes
+operations
+end
+
+class Or<Expression
+attributes
+operations
+end
+
+class Leq<Expression
+attributes
+operations
+end
+
+class Less<Expression
+attributes
+operations
+end
+
+class Eq<Expression
+attributes
+operations
+end
+
+class Geq<Expression
+attributes
+operations
+end
+
+class Gtr<Expression
+attributes
+operations
+end
+
+class Plus<Expression
+attributes
+operations
+end
+
+class Minus<Expression
+attributes
+operations
+end
+
+class Multi<Expression
+attributes
+operations
+end
+
+class Div<Expression
+attributes
+operations
+end
+
+class Not<Expression
+attributes
+operations
+end
+
+class Literal<Expression
+attributes
+	value : String
+operations
+end
+
+class VariableReference<Expression
+attributes
+operations
+end
+
+composition xxx_Program_globals between
+	Program[*] role xxx_Program_globals_src
+	GlobalSection[0..1] role globals
+end
+
+composition xxx_Program_events between
+	Program[*] role xxx_Program_events_src
+	EventSection[0..1] role events
+end
+
+composition xxx_Program_handlers between
+	Program[*] role xxx_Program_handlers_src
+	HandlerSection[0..1] role handlers
+end
+
+composition xxx_Program_init between
+	Program[*] role xxx_Program_init_src
+	AbstractBlock[0..1] role init
+end
+
+composition xxx_GlobalSection_globals between
+	GlobalSection[0..1] role xxx_GlobalSection_globals_src
+	VariableDeclaration[*] role globals
+end
+
+composition xxx_EventSection_events between
+	EventSection[0..1] role xxx_EventSection_events_src
+	EventDecl[*] role events
+end
+
+composition xxx_HandlerSection_handlers between
+	HandlerSection[0..1] role xxx_HandlerSection_handlers_src
+	HandlerDecl[*] role handlers
+end
+
+composition xxx_EventDecl_params between
+	EventDecl[0..1] role xxx_EventDecl_params_src
+	VariableDeclaration[*] role params
+end
+
+composition xxx_HandlerDecl_bindParams between
+	HandlerDecl[0..1] role xxx_HandlerDecl_bindParams_src
+	VariableDeclaration[*] role bindParams
+end
+
+composition xxx_HandlerDecl_params between
+	HandlerDecl[0..1] role xxx_HandlerDecl_params_src
+	VariableDeclaration[*] role params
+end
+
+composition xxx_HandlerDecl_body between
+	HandlerDecl[*] role xxx_HandlerDecl_body_src
+	AbstractBlock[0..1] role body
+end
+
+composition xxx_Compound_body between
+	Compound[0..1] role xxx_Compound_body_src
+	AbstractBlock[*] role body
+end
+
+association xxx_VariableAssign_name between
+	VariableAssign[*] role xxx_VariableAssign_name_src
+	VariableDeclaration[0..1] role name
+end
+
+composition xxx_VariableAssign_value between
+	VariableAssign[*] role xxx_VariableAssign_value_src
+	Expression[0..1] role value
+end
+
+association xxx_BindHandler_eventName between
+	BindHandler[*] role xxx_BindHandler_eventName_src
+	EventDecl[0..1] role eventName
+end
+
+association xxx_BindHandler_handlerName between
+	BindHandler[*] role xxx_BindHandler_handlerName_src
+	HandlerDecl[0..1] role handlerName
+end
+
+composition xxx_BindHandler_consumability between
+	BindHandler[*] role xxx_BindHandler_consumability_src
+	Expression[0..1] role consumability
+end
+
+composition xxx_BindHandler_bindParams between
+	BindHandler[0..1] role xxx_BindHandler_bindParams_src
+	Expression[*] role bindParams
+end
+
+association xxx_RaiseEvent_event between
+	RaiseEvent[*] role xxx_RaiseEvent_event_src
+	EventDecl[0..1] role event
+end
+
+composition xxx_RaiseEvent_params between
+	RaiseEvent[0..1] role xxx_RaiseEvent_params_src
+	Expression[*] role params
+end
+
+composition xxx_PrintOutput_output between
+	PrintOutput[*] role xxx_PrintOutput_output_src
+	Expression[0..1] role output
+end
+
+association xxx_ReadInput_input between
+	ReadInput[*] role xxx_ReadInput_input_src
+	VariableDeclaration[0..1] role input
+end
+
+composition xxx_IfThenElse_condition between
+	IfThenElse[*] role xxx_IfThenElse_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_IfThenElse_thenBlock between
+	IfThenElse[*] role xxx_IfThenElse_thenBlock_src
+	AbstractBlock[0..1] role thenBlock
+end
+
+composition xxx_IfThenElse_elseBlock between
+	IfThenElse[*] role xxx_IfThenElse_elseBlock_src
+	AbstractBlock[0..1] role elseBlock
+end
+
+composition xxx_While_condition between
+	While[*] role xxx_While_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_While_block between
+	While[*] role xxx_While_block_src
+	AbstractBlock[0..1] role block
+end
+
+composition xxx_And_left between
+	And[*] role xxx_And_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_And_right between
+	And[*] role xxx_And_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Or_left between
+	Or[*] role xxx_Or_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Or_right between
+	Or[*] role xxx_Or_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Leq_left between
+	Leq[*] role xxx_Leq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Leq_right between
+	Leq[*] role xxx_Leq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Less_left between
+	Less[*] role xxx_Less_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Less_right between
+	Less[*] role xxx_Less_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Eq_left between
+	Eq[*] role xxx_Eq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Eq_right between
+	Eq[*] role xxx_Eq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Geq_left between
+	Geq[*] role xxx_Geq_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Geq_right between
+	Geq[*] role xxx_Geq_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Gtr_left between
+	Gtr[*] role xxx_Gtr_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Gtr_right between
+	Gtr[*] role xxx_Gtr_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Plus_left between
+	Plus[*] role xxx_Plus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Plus_right between
+	Plus[*] role xxx_Plus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Minus_left between
+	Minus[*] role xxx_Minus_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Minus_right between
+	Minus[*] role xxx_Minus_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Multi_left between
+	Multi[*] role xxx_Multi_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Multi_right between
+	Multi[*] role xxx_Multi_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Div_left between
+	Div[*] role xxx_Div_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Div_right between
+	Div[*] role xxx_Div_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Not_cond between
+	Not[*] role xxx_Not_cond_src
+	Expression[0..1] role cond
+end
+
+association xxx_VariableReference_var between
+	VariableReference[*] role xxx_VariableReference_var_src
+	VariableDeclaration[0..1] role var
+end
+

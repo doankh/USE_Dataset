@@ -1,0 +1,342 @@
+model PrimitiveTypes
+enum EventAttributes{
+	None,
+	ReservedMask,
+	RTSpecialName,
+	SpecialName
+}
+
+enum FieldAttributes{
+	FieldAccessMask,
+	PrivateScope,
+	Private,
+	Assembly,
+	Family,
+	FamANDAssem,
+	FamORAssem,
+	Public,
+	Shared,
+	InitOnly,
+	Literal,
+	NotSerialized,
+	SpecialName,
+	PinvokeImpl,
+	ReservedMask,
+	RTSpecialName,
+	HasFieldMarshal,
+	HasDefault,
+	HasFieldRVA,
+	Static
+}
+
+enum GenericParameterAttributes{
+	HasElementType,
+	Abstract,
+	AnsiClass,
+	AutoClass,
+	AutoLayout,
+	ByRef,
+	Class,
+	COMObject,
+	Contextful,
+	Enum,
+	ExplicitLayout,
+	Import,
+	Interface,
+	LayoutSequential,
+	MarshalByRef,
+	NestedAssembly,
+	NestedFamADNAssem,
+	NestedFamily,
+	NestedFamORAssem,
+	NestedPrivate,
+	NestedPublic,
+	NotPublic,
+	Pointer,
+	Primitive,
+	Public,
+	Sealed,
+	Serializable,
+	SpecialName,
+	UnicodeClass,
+	ValueType
+}
+
+enum MemberTypes{
+	Constructor,
+	Event,
+	Field,
+	Method,
+	Property,
+	TypeInfo,
+	Custom,
+	NestedType,
+	All
+}
+
+enum MethodAttributes{
+	Abstract,
+	Assembly,
+	ChekedAccessOnOverride,
+	FamADNAssem,
+	Family,
+	FamORAssem,
+	Final,
+	HasSecurity,
+	HideBySig,
+	MemberAccessMask,
+	NewSlot,
+	PInvokeImpl,
+	Private,
+	PrivateScope,
+	Public,
+	RequiredSecObject,
+	ReservedMask,
+	ReuseSlot,
+	RTSpecialName,
+	SpecialName,
+	Static,
+	UnmanagedExport,
+	Virtual,
+	VtableLayoutMask
+}
+
+enum ParameterAttributes{
+	HasDefault,
+	HasDefaultMArshal,
+	In,
+	Lcid,
+	None,
+	Optional,
+	Out,
+	Reserved3,
+	Reserved4,
+	ReservedMask,
+	RetVal
+}
+
+enum PropertyAttributes{
+	NotSupported,
+	Optional,
+	Read,
+	Required,
+	Write
+}
+
+enum TypeAttributes{
+	Abstract,
+	AnsiClass,
+	AutoClass,
+	AutoLayout,
+	BeforFieldInit,
+	Class,
+	ClassSemanticsMask,
+	ExplicitLayout,
+	HasSecutity,
+	Import,
+	Interface,
+	LayoutMask,
+	NestedAssembly,
+	NestedFamADNAssem,
+	NestedFamily,
+	NestedFamORAssem,
+	NestedPrivate,
+	NestedPublic,
+	NotPublic,
+	Public,
+	ReservedMask,
+	RTSpecialName,
+	Sealed,
+	SequentialLayout,
+	Serializable,
+	SpecialName,
+	StringFormatMask,
+	UnicodeClass,
+	VisibilityMask
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Assembly<NamedElement
+attributes
+	location : String
+	imageRuntimeVersion : String
+	evidence : String
+	codeBase : String
+operations
+end
+
+class ManifestResource
+attributes
+	content : String
+operations
+end
+
+class Module<NamedElement
+attributes
+	qualifiedName : String
+	scopeName : String
+operations
+end
+
+abstract class MemberInfo<NamedElement
+attributes
+	memberType : MemberTypes
+operations
+end
+
+class PropertyInfo<MemberInfo
+attributes
+	attributes_ : PropertyAttributes
+operations
+end
+
+class FieldInfo<MemberInfo
+attributes
+	attributes_ : FieldAttributes
+operations
+end
+
+class EventInfo<MemberInfo
+attributes
+	isMulticast : Boolean
+	attributes_ : EventAttributes
+operations
+end
+
+class ParameterInfo<NamedElement
+attributes
+	defaultValue : String
+	position : Integer
+	attributes_ : ParameterAttributes
+operations
+end
+
+abstract class MethodBase<MemberInfo
+attributes
+	attributes_ : MethodAttributes
+operations
+end
+
+class MethodInfo<MethodBase
+attributes
+operations
+end
+
+class ConstructorInfo<MethodBase
+attributes
+operations
+end
+
+class Type<MemberInfo
+attributes
+	namespace : String
+	genericParameterAttributes : GenericParameterAttributes
+	typeAttributes : TypeAttributes
+operations
+end
+
+association xxx_Assembly_entryPoint between
+	Assembly[*] role xxx_Assembly_entryPoint_src
+	MethodInfo[1] role entryPoint
+end
+
+composition xxx_Assembly_modules between
+	Assembly[0..1] role xxx_Assembly_modules_src
+	Module[*] role modules
+end
+
+association xxx_Assembly_manifestModule between
+	Assembly[*] role xxx_Assembly_manifestModule_src
+	Module[1] role manifestModule
+end
+
+association xxx_Assembly_referencedAssembly between
+	Assembly[0..1] role xxx_Assembly_referencedAssembly_src
+	Assembly[*] role referencedAssembly
+end
+
+composition xxx_Assembly_manifest between
+	Assembly[*] role xxx_Assembly_manifest_src
+	ManifestResource[1] role manifest
+end
+
+association xxx_ManifestResource_assembly between
+	ManifestResource[*] role xxx_ManifestResource_assembly_src
+	Assembly[1] role assembly
+end
+
+association xxx_Module_assembly between
+	Module[*] role xxx_Module_assembly_src
+	Assembly[1] role assembly
+end
+
+composition xxx_Module_types between
+	Module[0..1] role xxx_Module_types_src
+	Type[*] role types
+end
+
+association xxx_MemberInfo_declaringType between
+	MemberInfo[*] role xxx_MemberInfo_declaringType_src
+	Type[1] role declaringType
+end
+
+association xxx_PropertyInfo_propertyType between
+	PropertyInfo[*] role xxx_PropertyInfo_propertyType_src
+	Type[1] role propertyType
+end
+
+association xxx_FieldInfo_fieldType between
+	FieldInfo[*] role xxx_FieldInfo_fieldType_src
+	Type[1] role fieldType
+end
+
+association xxx_EventInfo_eventHandlerType between
+	EventInfo[*] role xxx_EventInfo_eventHandlerType_src
+	Type[1] role eventHandlerType
+end
+
+association xxx_ParameterInfo_parameterType between
+	ParameterInfo[*] role xxx_ParameterInfo_parameterType_src
+	Type[1] role parameterType
+end
+
+association xxx_ParameterInfo_member between
+	ParameterInfo[*] role xxx_ParameterInfo_member_src
+	MethodBase[1] role member
+end
+
+composition xxx_MethodBase_parameters between
+	MethodBase[0..1] role xxx_MethodBase_parameters_src
+	ParameterInfo[*] role parameters
+end
+
+association xxx_MethodInfo_returnType between
+	MethodInfo[*] role xxx_MethodInfo_returnType_src
+	Type[0..1] role returnType
+end
+
+association xxx_Type_baseType between
+	Type[*] role xxx_Type_baseType_src
+	Type[0..1] role baseType
+end
+
+association xxx_Type_module between
+	Type[*] role xxx_Type_module_src
+	Module[1] role module
+end
+
+association xxx_Type_interfaces between
+	Type[0..1] role xxx_Type_interfaces_src
+	Type[*] role interfaces
+end
+
+composition xxx_Type_members between
+	Type[0..1] role xxx_Type_members_src
+	MemberInfo[*] role members
+end
+

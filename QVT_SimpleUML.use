@@ -1,0 +1,103 @@
+model SimpleUML
+abstract class UMLModelElement
+attributes
+	kind : String
+	name : String
+operations
+end
+
+class Attribute<UMLModelElement
+attributes
+operations
+end
+
+class Package<UMLModelElement
+attributes
+operations
+end
+
+abstract class PackageElement<UMLModelElement
+attributes
+operations
+end
+
+abstract class Classifier<PackageElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+operations
+end
+
+class PrimitiveDataType<Classifier
+attributes
+operations
+end
+
+class Association<PackageElement
+attributes
+operations
+end
+
+association xxx_Attribute_owner between
+	Attribute[*] role xxx_Attribute_owner_src
+	Class[1] role owner
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Classifier[1] role type
+end
+
+composition xxx_Package_elements between
+	Package[0..1] role xxx_Package_elements_src
+	PackageElement[*] role elements
+end
+
+association xxx_PackageElement_namespace between
+	PackageElement[*] role xxx_PackageElement_namespace_src
+	Package[1] role namespace
+end
+
+association xxx_Classifier_typeOpposite between
+	Classifier[0..1] role xxx_Classifier_typeOpposite_src
+	Attribute[*] role typeOpposite
+end
+
+composition xxx_Class_attribute between
+	Class[0..1] role xxx_Class_attribute_src
+	Attribute[*] role attribute
+end
+
+association xxx_Class_general between
+	Class[0..1] role xxx_Class_general_src
+	Class[*] role general
+end
+
+association xxx_Class_generalOpposite between
+	Class[0..1] role xxx_Class_generalOpposite_src
+	Class[*] role generalOpposite
+end
+
+association xxx_Class_reverse between
+	Class[0..1] role xxx_Class_reverse_src
+	Association[*] role reverse
+end
+
+association xxx_Class_forward between
+	Class[0..1] role xxx_Class_forward_src
+	Association[*] role forward
+end
+
+association xxx_Association_source between
+	Association[*] role xxx_Association_source_src
+	Class[1] role source
+end
+
+association xxx_Association_destination between
+	Association[*] role xxx_Association_destination_src
+	Class[1] role destination
+end
+

@@ -1,0 +1,148 @@
+model OO_concept
+enum VisibilityKind{
+default
+}
+
+abstract class PackageableElement
+attributes
+operations
+end
+
+class Package<PackageableElement,NamedElement
+attributes
+operations
+end
+
+class Class<PackageableElement,Classifier,Type
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+	isAbstract : Boolean
+	visibility : VisibilityKind
+operations
+end
+
+class Model<Package
+attributes
+operations
+end
+
+class Operation<TypedElement,BehavioralFeature
+attributes
+operations
+end
+
+abstract class Feature<NamedElement
+attributes
+operations
+end
+
+class Property<TypedElement,Feature
+attributes
+operations
+end
+
+class Parameter<TypedElement
+attributes
+operations
+end
+
+class Generalization
+attributes
+operations
+end
+
+class Dependency<PackageableElement
+attributes
+operations
+end
+
+abstract class Classifier
+attributes
+operations
+end
+
+abstract class TypedElement<NamedElement
+attributes
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+abstract class BehavioralFeature<Feature
+attributes
+operations
+end
+
+class Behavior<Class
+attributes
+operations
+end
+
+composition xxx_Package_packagedElement between
+	Package[0..1] role xxx_Package_packagedElement_src
+	PackageableElement[*] role packagedElement
+end
+
+composition xxx_Class_ownedOperation between
+	Class[0..1] role xxx_Class_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+composition xxx_Class_ownedAttribute between
+	Class[0..1] role xxx_Class_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_Class_nestedClassifier between
+	Class[0..1] role xxx_Class_nestedClassifier_src
+	Classifier[*] role nestedClassifier
+end
+
+composition xxx_Operation_ownedParameter between
+	Operation[0..1] role xxx_Operation_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+association xxx_Generalization_general between
+	Generalization[*] role xxx_Generalization_general_src
+	Classifier[1] role general
+end
+
+association xxx_Generalization_specific between
+	Generalization[*] role xxx_Generalization_specific_src
+	Classifier[1] role specific
+end
+
+association xxx_Dependency_supplier between
+	Dependency[0..1] role xxx_Dependency_supplier_src
+	NamedElement[1..*] role supplier
+end
+
+association xxx_Dependency_client between
+	Dependency[0..1] role xxx_Dependency_client_src
+	NamedElement[1..*] role client
+end
+
+composition xxx_Classifier_generalization between
+	Classifier[0..1] role xxx_Classifier_generalization_src
+	Generalization[*] role generalization
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_BehavioralFeature_method between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_method_src
+	Behavior[*] role method
+end
+

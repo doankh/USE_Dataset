@@ -1,0 +1,103 @@
+model minuml2
+class Activity
+attributes
+operations
+end
+
+class ActivityNode
+attributes
+operations
+end
+
+abstract class ActivityGroup
+attributes
+operations
+end
+
+class ActivityPartition<ActivityGroup
+attributes
+operations
+end
+
+class OpaqueAction<ActivityNode
+attributes
+operations
+end
+
+class ForkNode<ActivityNode
+attributes
+operations
+end
+
+class JoinNode<ActivityNode
+attributes
+operations
+end
+
+class DecisionNode<ActivityNode
+attributes
+operations
+end
+
+class ActivityFinalNode<ActivityNode
+attributes
+operations
+end
+
+class ActivityEdge
+attributes
+operations
+end
+
+class ControlFlow<ActivityEdge
+attributes
+operations
+end
+
+class ObjectFlow<ActivityEdge
+attributes
+operations
+end
+
+class ValueSpecification
+attributes
+operations
+end
+
+class OpaqueExpression<ValueSpecification
+attributes
+	language : String
+	body : String
+operations
+end
+
+composition xxx_Activity_nodes between
+	Activity[0..1] role xxx_Activity_nodes_src
+	ActivityNode[*] role nodes
+end
+
+composition xxx_Activity_edges between
+	Activity[0..1] role xxx_Activity_edges_src
+	ActivityEdge[*] role edges
+end
+
+composition xxx_Activity_groups between
+	Activity[0..1] role xxx_Activity_groups_src
+	ActivityGroup[*] role groups
+end
+
+association xxx_ActivityEdge_source between
+	ActivityEdge[*] role xxx_ActivityEdge_source_src
+	ActivityNode[1] role source
+end
+
+association xxx_ActivityEdge_target between
+	ActivityEdge[*] role xxx_ActivityEdge_target_src
+	ActivityNode[1] role target
+end
+
+composition xxx_ActivityEdge_guard between
+	ActivityEdge[*] role xxx_ActivityEdge_guard_src
+	ValueSpecification[0..1] role guard
+end
+

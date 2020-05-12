@@ -1,0 +1,325 @@
+model PrimitiveTypes
+abstract class Label
+attributes
+operations
+end
+
+class SimpleLabel<Label
+attributes
+	content : String
+operations
+end
+
+class ComplexLabel<Label
+attributes
+operations
+end
+
+abstract class Compartment
+attributes
+operations
+end
+
+class VerticalCompartment<Compartment
+attributes
+operations
+end
+
+class HorizontalCompartment<Compartment
+attributes
+operations
+end
+
+class SimpleCompartment<Compartment
+attributes
+	content : String
+operations
+end
+
+class Anchor
+attributes
+	name : String
+operations
+end
+
+abstract class GraphElement
+attributes
+	name : String
+	style : String
+	color : String
+operations
+end
+
+class Graph<GraphElement
+attributes
+	type : String
+	rankDir : String
+	labeljust : String
+	labelloc : String
+	concentrate : Boolean
+	boundingBox : String
+	compound : Boolean
+	nodeSeparation : Real
+	ordering : String
+	size : String
+	ratio : String
+	center : Boolean
+operations
+end
+
+class Layer<GraphElement
+attributes
+	layerSeparator : String
+operations
+end
+
+abstract class Nodelike<GraphElement
+attributes
+operations
+end
+
+class SubGraph<Nodelike
+attributes
+	labelloc : String
+operations
+end
+
+class Node<Nodelike
+attributes
+	fixedSize : Boolean
+	fontname : String
+	fontsize : Integer
+	height : Integer
+	width : Integer
+operations
+end
+
+abstract class Arc<GraphElement
+attributes
+	constraint : Boolean
+	group : String
+	minlen : Integer
+	sameHead : String
+	sameTail : String
+	decorate : Boolean
+operations
+end
+
+class DirectedArc<Arc
+attributes
+	tail_lp : Real
+	head_lp : Real
+operations
+end
+
+class UndirectedArc<Arc
+attributes
+operations
+end
+
+abstract class Shape<GraphElement
+attributes
+	width : Integer
+	height : Integer
+	peripheries : Integer
+operations
+end
+
+abstract class NodeShape<Shape
+attributes
+operations
+end
+
+class SimpleNodeShape<NodeShape
+attributes
+operations
+end
+
+class PointNodeShape<NodeShape
+attributes
+operations
+end
+
+abstract class ComplexNodeShape<NodeShape
+attributes
+operations
+end
+
+class PolygonNodeShape<ComplexNodeShape
+attributes
+	sides : Integer
+	skew : Integer
+	distortion : Integer
+	isRegular : Boolean
+	orientation : Integer
+operations
+end
+
+class MNodeShape<ComplexNodeShape
+attributes
+operations
+end
+
+class RecordNodeShape<ComplexNodeShape
+attributes
+operations
+end
+
+class ArrowShape<Shape
+attributes
+	clipping : String
+	isPlain : Boolean
+	size : Integer
+operations
+end
+
+association xxx_Label_element between
+	Label[*] role xxx_Label_element_src
+	GraphElement[1] role element
+end
+
+composition xxx_ComplexLabel_compartments between
+	ComplexLabel[0..1] role xxx_ComplexLabel_compartments_src
+	Compartment[1..*] role compartments
+end
+
+association xxx_Compartment_complexLabel between
+	Compartment[*] role xxx_Compartment_complexLabel_src
+	ComplexLabel[1] role complexLabel
+end
+
+composition xxx_Compartment_compartments between
+	Compartment[*] role xxx_Compartment_compartments_src
+	Compartment[0..1] role compartments
+end
+
+association xxx_Compartment_anchor between
+	Compartment[*] role xxx_Compartment_anchor_src
+	Anchor[0..1] role anchor
+end
+
+association xxx_Anchor_source between
+	Anchor[*] role xxx_Anchor_source_src
+	Compartment[0..1] role source
+end
+
+composition xxx_GraphElement_label between
+	GraphElement[*] role xxx_GraphElement_label_src
+	Label[0..1] role label
+end
+
+composition xxx_Graph_nodes between
+	Graph[0..1] role xxx_Graph_nodes_src
+	Nodelike[*] role nodes
+end
+
+composition xxx_Graph_layers between
+	Graph[0..1] role xxx_Graph_layers_src
+	Layer[*] role layers
+end
+
+association xxx_Layer_nodes between
+	Layer[0..1] role xxx_Layer_nodes_src
+	Nodelike[*] role nodes
+end
+
+association xxx_Layer_arcs between
+	Layer[0..1] role xxx_Layer_arcs_src
+	Arc[*] role arcs
+end
+
+association xxx_Layer_graph between
+	Layer[*] role xxx_Layer_graph_src
+	Graph[1] role graph
+end
+
+association xxx_Nodelike_owner between
+	Nodelike[*] role xxx_Nodelike_owner_src
+	SubGraph[0..1] role owner
+end
+
+association xxx_Nodelike_refers between
+	Nodelike[0..1] role xxx_Nodelike_refers_src
+	Arc[*] role refers
+end
+
+association xxx_Nodelike_referredBy between
+	Nodelike[0..1] role xxx_Nodelike_referredBy_src
+	Arc[*] role referredBy
+end
+
+association xxx_Nodelike_graph between
+	Nodelike[*] role xxx_Nodelike_graph_src
+	Graph[0..1] role graph
+end
+
+association xxx_Nodelike_layers between
+	Nodelike[0..1] role xxx_Nodelike_layers_src
+	Layer[*] role layers
+end
+
+composition xxx_SubGraph_nodes between
+	SubGraph[0..1] role xxx_SubGraph_nodes_src
+	Nodelike[*] role nodes
+end
+
+composition xxx_Node_shape between
+	Node[*] role xxx_Node_shape_src
+	NodeShape[0..1] role shape
+end
+
+association xxx_Arc_fromNode between
+	Arc[*] role xxx_Arc_fromNode_src
+	Nodelike[1] role fromNode
+end
+
+association xxx_Arc_toNode between
+	Arc[*] role xxx_Arc_toNode_src
+	Nodelike[1] role toNode
+end
+
+association xxx_Arc_layers between
+	Arc[0..1] role xxx_Arc_layers_src
+	Layer[*] role layers
+end
+
+association xxx_Arc_lhead between
+	Arc[*] role xxx_Arc_lhead_src
+	Nodelike[0..1] role lhead
+end
+
+association xxx_Arc_ltail between
+	Arc[*] role xxx_Arc_ltail_src
+	Nodelike[0..1] role ltail
+end
+
+composition xxx_DirectedArc_arrowHead between
+	DirectedArc[*] role xxx_DirectedArc_arrowHead_src
+	ArrowShape[0..1] role arrowHead
+end
+
+association xxx_DirectedArc_headlabel between
+	DirectedArc[*] role xxx_DirectedArc_headlabel_src
+	Label[0..1] role headlabel
+end
+
+association xxx_DirectedArc_taillabel between
+	DirectedArc[*] role xxx_DirectedArc_taillabel_src
+	Label[0..1] role taillabel
+end
+
+composition xxx_DirectedArc_arrowTail between
+	DirectedArc[*] role xxx_DirectedArc_arrowTail_src
+	ArrowShape[0..1] role arrowTail
+end
+
+composition xxx_MNodeShape_toplabel between
+	MNodeShape[*] role xxx_MNodeShape_toplabel_src
+	Label[0..1] role toplabel
+end
+
+composition xxx_MNodeShape_bottomlabel between
+	MNodeShape[*] role xxx_MNodeShape_bottomlabel_src
+	Label[0..1] role bottomlabel
+end
+

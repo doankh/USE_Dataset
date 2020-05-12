@@ -1,0 +1,121 @@
+model OCLTypes
+abstract class Type
+attributes
+operations
+end
+
+abstract class BasicType<Type
+attributes
+operations
+end
+
+class InstanceType<Type
+attributes
+operations
+end
+
+class EnumType<Type
+attributes
+operations
+end
+
+class OclAnyType<Type
+attributes
+operations
+end
+
+class OclTypeType<Type
+attributes
+operations
+end
+
+abstract class CollectionType<Type
+attributes
+operations
+end
+
+class IntegerType<BasicType
+attributes
+operations
+end
+
+class RealType<BasicType
+attributes
+operations
+end
+
+class StringType<BasicType
+attributes
+operations
+end
+
+class BooleanType<BasicType
+attributes
+operations
+end
+
+class Classifier
+attributes
+operations
+end
+
+class EnumLiteral
+attributes
+operations
+end
+
+class SetType<CollectionType
+attributes
+operations
+end
+
+class SequenceType<CollectionType
+attributes
+operations
+end
+
+class BagType<CollectionType
+attributes
+operations
+end
+
+association xxx_Type_supertype between
+	Type[0..1] role xxx_Type_supertype_src
+	Type[*] role supertype
+end
+
+association xxx_Type_subtype between
+	Type[0..1] role xxx_Type_subtype_src
+	Type[*] role subtype
+end
+
+composition xxx_Type_collectionType between
+	Type[0..1] role xxx_Type_collectionType_src
+	CollectionType[*] role collectionType
+end
+
+composition xxx_InstanceType_classifier between
+	InstanceType[*] role xxx_InstanceType_classifier_src
+	Classifier[1] role classifier
+end
+
+composition xxx_EnumType_enumLiteral between
+	EnumType[0..1] role xxx_EnumType_enumLiteral_src
+	EnumLiteral[1..*] role enumLiteral
+end
+
+association xxx_CollectionType_elementType between
+	CollectionType[*] role xxx_CollectionType_elementType_src
+	Type[1] role elementType
+end
+
+association xxx_Classifier_instanceType between
+	Classifier[*] role xxx_Classifier_instanceType_src
+	InstanceType[0..1] role instanceType
+end
+
+association xxx_EnumLiteral_enumType between
+	EnumLiteral[*] role xxx_EnumLiteral_enumType_src
+	EnumType[0..1] role enumType
+end
+

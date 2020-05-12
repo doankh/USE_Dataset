@@ -1,0 +1,72 @@
+model contextModel
+enum Classification{
+default
+}
+
+class Container
+attributes
+operations
+end
+
+class Context
+attributes
+	name : String
+operations
+end
+
+abstract class AbstractLink
+attributes
+operations
+end
+
+class PriorLink<AbstractLink
+attributes
+operations
+end
+
+class ExcludeLink<AbstractLink
+attributes
+operations
+end
+
+class ExtendLink<AbstractLink
+attributes
+operations
+end
+
+class Feature
+attributes
+operations
+end
+
+class classifierMapEntry
+attributes
+	value : Classification
+operations
+end
+
+composition xxx_Container_contains between
+	Container[0..1] role xxx_Container_contains_src
+	Context[*] role contains
+end
+
+association xxx_Context_featureMap between
+	Context[0..1] role xxx_Context_featureMap_src
+	classifierMapEntry[*] role featureMap
+end
+
+association xxx_AbstractLink_outgoing between
+	AbstractLink[*] role xxx_AbstractLink_outgoing_src
+	Context[0..1] role outgoing
+end
+
+association xxx_AbstractLink_incoming between
+	AbstractLink[*] role xxx_AbstractLink_incoming_src
+	Context[0..1] role incoming
+end
+
+association xxx_classifierMapEntry_key between
+	classifierMapEntry[*] role xxx_classifierMapEntry_key_src
+	Feature[0..1] role key
+end
+

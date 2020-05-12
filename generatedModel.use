@@ -1,0 +1,63 @@
+model spreadsheet
+class Cell
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class BinExpression<Expression
+attributes
+	function : String
+operations
+	getFunction():String
+end
+
+class Value<Expression
+attributes
+	val : String
+operations
+	getVal():String
+	setVal(newVal : String)
+end
+
+class CellRef<Expression
+attributes
+operations
+end
+
+class Visitable
+attributes
+operations
+	accept(v : Visitor)
+end
+
+abstract class Visitor
+attributes
+operations
+	visit(v : Visitable)
+end
+
+composition xxx_Cell_expression between
+	Cell[*] role xxx_Cell_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_Expression_cell between
+	Expression[*] role xxx_Expression_cell_src
+	Cell[0..1] role cell
+end
+
+association xxx_BinExpression_subexprs between
+	BinExpression[0..1] role xxx_BinExpression_subexprs_src
+	Expression[*] role subexprs
+end
+
+association xxx_CellRef_ref between
+	CellRef[*] role xxx_CellRef_ref_src
+	Cell[0..1] role ref
+end
+

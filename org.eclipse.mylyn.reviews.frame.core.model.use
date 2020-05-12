@@ -1,0 +1,142 @@
+model model_
+class Review<ReviewComponent,SubModelRoot
+attributes
+operations
+end
+
+class Comment<ReviewComponent
+attributes
+	description : String
+operations
+end
+
+class Item<ReviewComponent
+attributes
+operations
+end
+
+abstract class Location
+attributes
+operations
+end
+
+class User
+attributes
+	id : String
+	email : String
+operations
+end
+
+class TaskReference<ReviewComponent
+attributes
+	taskId : String
+	repositoryURL : String
+operations
+end
+
+abstract class ReviewState<ReviewComponent
+attributes
+operations
+end
+
+class ReviewGroup<ReviewComponent,SubModelRoot
+attributes
+	description : String
+operations
+end
+
+abstract class CommentType
+attributes
+operations
+end
+
+class Topic<Comment
+attributes
+	title : String
+operations
+end
+
+class ReviewComponent
+attributes
+	enabled : Boolean
+operations
+end
+
+class SubModelRoot
+attributes
+	fragmentVersion : String
+	compatibility : Integer
+	applicationVersion : String
+operations
+end
+
+association xxx_Review_topics between
+	Review[0..1] role xxx_Review_topics_src
+	Topic[*] role topics
+end
+
+association xxx_Review_reviewItems between
+	Review[0..1] role xxx_Review_reviewItems_src
+	Item[*] role reviewItems
+end
+
+composition xxx_Review_reviewTask between
+	Review[*] role xxx_Review_reviewTask_src
+	TaskReference[0..1] role reviewTask
+end
+
+composition xxx_Review_state between
+	Review[*] role xxx_Review_state_src
+	ReviewState[1] role state
+end
+
+association xxx_Comment_user between
+	Comment[*] role xxx_Comment_user_src
+	User[1] role user
+end
+
+composition xxx_Comment_type between
+	Comment[*] role xxx_Comment_type_src
+	CommentType[1] role type
+end
+
+association xxx_Item_addedBy between
+	Item[*] role xxx_Item_addedBy_src
+	User[1] role addedBy
+end
+
+association xxx_Item_review between
+	Item[*] role xxx_Item_review_src
+	Review[1] role review
+end
+
+composition xxx_ReviewGroup_reviews between
+	ReviewGroup[0..1] role xxx_ReviewGroup_reviews_src
+	Review[*] role reviews
+end
+
+composition xxx_ReviewGroup_reviewGroupTask between
+	ReviewGroup[*] role xxx_ReviewGroup_reviewGroupTask_src
+	TaskReference[0..1] role reviewGroupTask
+end
+
+composition xxx_Topic_task between
+	Topic[*] role xxx_Topic_task_src
+	TaskReference[0..1] role task
+end
+
+composition xxx_Topic_location between
+	Topic[0..1] role xxx_Topic_location_src
+	Location[*] role location
+end
+
+association xxx_Topic_comments between
+	Topic[0..1] role xxx_Topic_comments_src
+	Comment[*] role comments
+end
+
+association xxx_Topic_review between
+	Topic[*] role xxx_Topic_review_src
+	Review[1] role review
+end
+

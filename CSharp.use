@@ -1,0 +1,118 @@
+model CSharp
+class Member
+attributes
+	name : String
+operations
+end
+
+class TypedAttribute<Member
+attributes
+operations
+end
+
+class Field<TypedAttribute
+attributes
+operations
+end
+
+class Property<TypedAttribute
+attributes
+	isReadable : Boolean
+	isWritable : Boolean
+operations
+end
+
+class MethodBase<Member
+attributes
+	visibility : String
+	isAbstract : Boolean
+	isFinal : Boolean
+	isStatic : Boolean
+operations
+end
+
+class Constructor<MethodBase
+attributes
+operations
+end
+
+class Method<MethodBase
+attributes
+operations
+end
+
+class Type<Member
+attributes
+	qualifiedName : String
+	isAbstract : Boolean
+	visibility : String
+	isSealed : Boolean
+	nameSpace : String
+operations
+end
+
+class Parameter
+attributes
+	isIn : Boolean
+	isOut : Boolean
+	name : Boolean
+	position : Integer
+operations
+end
+
+class Assembly
+attributes
+	name : String
+operations
+end
+
+association xxx_Member_owner between
+	Member[*] role xxx_Member_owner_src
+	Type[0..1] role owner
+end
+
+association xxx_TypedAttribute_type between
+	TypedAttribute[*] role xxx_TypedAttribute_type_src
+	Type[1] role type
+end
+
+composition xxx_MethodBase_parameters between
+	MethodBase[0..1] role xxx_MethodBase_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Method_returnType between
+	Method[*] role xxx_Method_returnType_src
+	Type[1] role returnType
+end
+
+composition xxx_Type_members between
+	Type[0..1] role xxx_Type_members_src
+	Member[*] role members
+end
+
+association xxx_Type_t_container between
+	Type[*] role xxx_Type_t_container_src
+	Assembly[0..1] role t_container
+end
+
+association xxx_Type_super between
+	Type[*] role xxx_Type_super_src
+	Type[0..1] role super
+end
+
+association xxx_Parameter_method between
+	Parameter[*] role xxx_Parameter_method_src
+	MethodBase[1] role method
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	Type[1] role type
+end
+
+composition xxx_Assembly_content between
+	Assembly[0..1] role xxx_Assembly_content_src
+	Type[*] role content
+end
+

@@ -1,0 +1,82 @@
+model propositionallogic
+class VariableDefinition
+attributes
+	name : String
+operations
+end
+
+abstract class Formula
+attributes
+operations
+end
+
+abstract class UnaryFormula<Formula
+attributes
+operations
+end
+
+abstract class BinaryFormula<Formula
+attributes
+operations
+end
+
+class Not<UnaryFormula
+attributes
+operations
+end
+
+class And<BinaryFormula
+attributes
+operations
+end
+
+class Or<BinaryFormula
+attributes
+operations
+end
+
+class Implication<BinaryFormula
+attributes
+operations
+end
+
+class Equivalence<BinaryFormula
+attributes
+operations
+end
+
+class VariableUse<Formula
+attributes
+operations
+end
+
+class True<Formula
+attributes
+operations
+end
+
+class False<Formula
+attributes
+operations
+end
+
+composition xxx_UnaryFormula_formula between
+	UnaryFormula[*] role xxx_UnaryFormula_formula_src
+	Formula[1] role formula
+end
+
+composition xxx_BinaryFormula_left between
+	BinaryFormula[*] role xxx_BinaryFormula_left_src
+	Formula[1] role left
+end
+
+composition xxx_BinaryFormula_right between
+	BinaryFormula[*] role xxx_BinaryFormula_right_src
+	Formula[1] role right
+end
+
+association xxx_VariableUse_variableDefinition between
+	VariableUse[*] role xxx_VariableUse_variableDefinition_src
+	VariableDefinition[1] role variableDefinition
+end
+

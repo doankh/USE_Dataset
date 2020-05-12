@@ -1,0 +1,171 @@
+model soundgates
+enum Direction{
+default
+}
+
+enum DataType{
+default
+}
+
+class Patch
+attributes
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+abstract class SoundComponent<NamedElement,Element
+attributes
+operations
+end
+
+class Port<NamedElement
+attributes
+	direction : Direction
+	dataType : DataType
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class CompositeSoundComponent<SoundComponent
+attributes
+operations
+end
+
+class AtomicSoundComponent<SoundComponent
+attributes
+	type : String
+operations
+end
+
+abstract class Connection
+attributes
+operations
+end
+
+class Delegation<Connection
+attributes
+operations
+end
+
+class Link<Connection,Element
+attributes
+operations
+end
+
+class StringToEFloatObject
+attributes
+	key : String
+	value : String
+operations
+end
+
+class StringToEIntegerObject
+attributes
+	key : String
+	value : Integer
+operations
+end
+
+class StringToBooleanObject
+attributes
+	key : String
+	value : String
+operations
+end
+
+class StringToString
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_Patch_elements between
+	Patch[0..1] role xxx_Patch_elements_src
+	Element[*] role elements
+end
+
+composition xxx_SoundComponent_ports between
+	SoundComponent[0..1] role xxx_SoundComponent_ports_src
+	Port[*] role ports
+end
+
+association xxx_SoundComponent_parentComponent between
+	SoundComponent[*] role xxx_SoundComponent_parentComponent_src
+	CompositeSoundComponent[0..1] role parentComponent
+end
+
+association xxx_Port_outgoingConnection between
+	Port[0..1] role xxx_Port_outgoingConnection_src
+	Connection[*] role outgoingConnection
+end
+
+association xxx_Port_incomingConnection between
+	Port[*] role xxx_Port_incomingConnection_src
+	Connection[0..1] role incomingConnection
+end
+
+association xxx_Port_component between
+	Port[*] role xxx_Port_component_src
+	SoundComponent[1] role component
+end
+
+composition xxx_CompositeSoundComponent_embeddedComponents between
+	CompositeSoundComponent[0..1] role xxx_CompositeSoundComponent_embeddedComponents_src
+	SoundComponent[*] role embeddedComponents
+end
+
+composition xxx_CompositeSoundComponent_links between
+	CompositeSoundComponent[0..1] role xxx_CompositeSoundComponent_links_src
+	Link[*] role links
+end
+
+composition xxx_CompositeSoundComponent_delegations between
+	CompositeSoundComponent[0..1] role xxx_CompositeSoundComponent_delegations_src
+	Delegation[*] role delegations
+end
+
+composition xxx_AtomicSoundComponent_floatProperties between
+	AtomicSoundComponent[0..1] role xxx_AtomicSoundComponent_floatProperties_src
+	StringToEFloatObject[*] role floatProperties
+end
+
+composition xxx_AtomicSoundComponent_integerProperties between
+	AtomicSoundComponent[0..1] role xxx_AtomicSoundComponent_integerProperties_src
+	StringToEIntegerObject[*] role integerProperties
+end
+
+composition xxx_AtomicSoundComponent_booleanProperties between
+	AtomicSoundComponent[0..1] role xxx_AtomicSoundComponent_booleanProperties_src
+	StringToBooleanObject[*] role booleanProperties
+end
+
+composition xxx_AtomicSoundComponent_stringProperties between
+	AtomicSoundComponent[0..1] role xxx_AtomicSoundComponent_stringProperties_src
+	StringToString[*] role stringProperties
+end
+
+composition xxx_AtomicSoundComponent_userStringProperties between
+	AtomicSoundComponent[0..1] role xxx_AtomicSoundComponent_userStringProperties_src
+	StringToString[*] role userStringProperties
+end
+
+association xxx_Connection_source between
+	Connection[*] role xxx_Connection_source_src
+	Port[1] role source
+end
+
+association xxx_Connection_target between
+	Connection[*] role xxx_Connection_target_src
+	Port[1] role target
+end
+

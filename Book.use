@@ -1,0 +1,25 @@
+model PrimitiveTypes
+class Book
+attributes
+	title : String
+operations
+end
+
+class Chapter
+attributes
+	title : String
+	nbPages : Integer
+	author : String
+operations
+end
+
+composition xxx_Book_chapters between
+	Book[0..1] role xxx_Book_chapters_src
+	Chapter[*] role chapters
+end
+
+association xxx_Chapter_book between
+	Chapter[*] role xxx_Chapter_book_src
+	Book[1] role book
+end
+

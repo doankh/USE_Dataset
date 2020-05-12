@@ -1,0 +1,97 @@
+model metro
+enum Shape{
+default
+}
+
+enum Color{
+default
+}
+
+class Metro
+attributes
+	city : String
+	noTunnels : Integer
+	noLines : Integer
+	noTrains : Integer
+	noCarriages : Integer
+operations
+end
+
+class Line
+attributes
+	color : Color
+operations
+end
+
+class Train
+attributes
+	carriages : Integer
+	id : String
+operations
+end
+
+class Station
+attributes
+	shape : Shape
+	id : String
+	disabledAccess : Boolean
+operations
+end
+
+class Person
+attributes
+	shape : Shape
+operations
+end
+
+class Region
+attributes
+	id : String
+operations
+end
+
+composition xxx_Metro_lines between
+	Metro[0..1] role xxx_Metro_lines_src
+	Line[*] role lines
+end
+
+composition xxx_Metro_stations between
+	Metro[0..1] role xxx_Metro_stations_src
+	Station[*] role stations
+end
+
+composition xxx_Metro_trains between
+	Metro[0..1] role xxx_Metro_trains_src
+	Train[*] role trains
+end
+
+composition xxx_Metro_regions between
+	Metro[0..1] role xxx_Metro_regions_src
+	Region[*] role regions
+end
+
+association xxx_Line_stations between
+	Line[0..1] role xxx_Line_stations_src
+	Station[*] role stations
+end
+
+association xxx_Line_trains between
+	Line[0..1] role xxx_Line_trains_src
+	Train[*] role trains
+end
+
+composition xxx_Train_persons between
+	Train[0..1] role xxx_Train_persons_src
+	Person[*] role persons
+end
+
+composition xxx_Station_persons between
+	Station[0..1] role xxx_Station_persons_src
+	Person[*] role persons
+end
+
+association xxx_Station_region between
+	Station[*] role xxx_Station_region_src
+	Region[0..1] role region
+end
+

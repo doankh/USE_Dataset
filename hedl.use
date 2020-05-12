@@ -1,0 +1,138 @@
+model hedl
+enum OptionType{
+default
+}
+
+class EntityModel
+attributes
+operations
+end
+
+class Option
+attributes
+	key : OptionType
+	value : String
+operations
+end
+
+abstract class Commentable
+attributes
+	comment : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+	getJavaClassname(canBePrimitive : Boolean):String
+end
+
+class Entity<Type,Commentable
+attributes
+operations
+	getConstructorProperties():Property
+end
+
+abstract class Constraint
+attributes
+operations
+end
+
+class UniqueConstraint<Constraint
+attributes
+operations
+end
+
+class Enum<Type,Commentable
+attributes
+operations
+end
+
+class EnumLiteral<NamedElement,Commentable
+attributes
+operations
+end
+
+class JavaType<Type
+attributes
+	javaClass : String
+	javaPrimitiveType : String
+operations
+end
+
+class Property<NamedElement,Commentable
+attributes
+	readonly : Boolean
+	unique : Boolean
+	nullable : Boolean
+	persist : Boolean
+	refresh : Boolean
+	eager : Boolean
+	fromMultiplicity : Boolean
+	toMultiplicity : Boolean
+operations
+	getTypeClassname():String
+	isToOneReference():Boolean
+end
+
+composition xxx_EntityModel_entities between
+	EntityModel[0..1] role xxx_EntityModel_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_EntityModel_enums between
+	EntityModel[0..1] role xxx_EntityModel_enums_src
+	Enum[*] role enums
+end
+
+composition xxx_EntityModel_options between
+	EntityModel[0..1] role xxx_EntityModel_options_src
+	Option[*] role options
+end
+
+association xxx_Entity_entityModel between
+	Entity[*] role xxx_Entity_entityModel_src
+	EntityModel[1] role entityModel
+end
+
+composition xxx_Entity_properties between
+	Entity[0..1] role xxx_Entity_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Entity_constraints_ between
+	Entity[0..1] role xxx_Entity_constraints__src
+	Constraint[*] role constraints_
+end
+
+association xxx_Entity_superType between
+	Entity[*] role xxx_Entity_superType_src
+	Entity[0..1] role superType
+end
+
+association xxx_UniqueConstraint_properties between
+	UniqueConstraint[0..1] role xxx_UniqueConstraint_properties_src
+	Property[2..*] role properties
+end
+
+composition xxx_Enum_literals between
+	Enum[0..1] role xxx_Enum_literals_src
+	EnumLiteral[*] role literals
+end
+
+association xxx_Property_type between
+	Property[*] role xxx_Property_type_src
+	Type[1] role type
+end
+
+association xxx_Property_mappedBy between
+	Property[*] role xxx_Property_mappedBy_src
+	Property[0..1] role mappedBy
+end
+

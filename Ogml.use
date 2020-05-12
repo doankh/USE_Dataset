@@ -1,0 +1,1024 @@
+model ogml
+enum AlignmentType{
+default
+}
+
+enum BoolIntType{
+default
+}
+
+enum BoolTFType{
+default
+}
+
+enum DecorationType{
+default
+}
+
+enum EndpointStylesType{
+default
+}
+
+enum FontStretchType{
+default
+}
+
+enum FontStyleType{
+default
+}
+
+enum FontVariantType{
+default
+}
+
+enum FontWeightType{
+default
+}
+
+enum LineStyleTypeType{
+default
+}
+
+enum PatternType{
+default
+}
+
+enum ShapeType{
+default
+}
+
+enum TransformType{
+default
+}
+
+class BooleanType
+attributes
+	name : String
+	value : BoolIntType
+operations
+end
+
+class BoolType
+attributes
+	name : String
+	value : BoolTFType
+operations
+end
+
+class ComposedType
+attributes
+	group : String
+	name : String
+operations
+end
+
+class ConstraintsType
+attributes
+	group : String
+operations
+end
+
+class DataType
+attributes
+	value : String
+	idRef : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	fontStretch : FontStretchType
+	fontStyle : FontStyleType
+	fontVariant : FontVariantType
+	fontWeight : FontWeightType
+	lineStyleType : LineStyleTypeType
+	pattern : PatternType
+operations
+end
+
+class EdgeConstraintType
+attributes
+	idRef : String
+	name : String
+operations
+end
+
+class EdgeLayoutType
+attributes
+	idRef : String
+operations
+end
+
+class EdgeStyleTemplateType
+attributes
+	id : String
+operations
+end
+
+class EdgeType
+attributes
+	group : String
+	id : String
+operations
+end
+
+class EndpointType
+attributes
+	color : String
+	idRef : String
+	port : Integer
+	size : Real
+	style : EndpointStylesType
+operations
+end
+
+class FillType
+attributes
+	color : String
+	pattern : PatternType
+	patternColor : String
+operations
+end
+
+class FontType
+attributes
+	color : String
+	family : String
+	size : Integer
+	stretch : FontStretchType
+	style : FontStyleType
+	variant : FontVariantType
+	weight : FontWeightType
+operations
+end
+
+class GraphStyleType
+attributes
+	defaultEdgeTemplate : String
+	defaultLabelTemplate : String
+	defaultNodeTemplate : String
+operations
+end
+
+class GraphType
+attributes
+operations
+end
+
+class IntType
+attributes
+	name : String
+	value : Integer
+operations
+end
+
+class KeysType
+attributes
+operations
+end
+
+class KeyType
+attributes
+	id : String
+operations
+end
+
+class KeyValueType
+attributes
+	dafault : String
+	name : String
+	type : String
+operations
+end
+
+class LabelConstraintType
+attributes
+	idRef : String
+	name : String
+operations
+end
+
+class LabelLayoutType
+attributes
+	idRef : String
+operations
+end
+
+class LabelStyleTemplateType
+attributes
+	id : String
+operations
+end
+
+class LabelType
+attributes
+	content : String
+	id : String
+operations
+end
+
+class LayoutType
+attributes
+operations
+end
+
+class LineStyleType
+attributes
+	color : String
+	style : LineStyleTypeType
+	width : String
+operations
+end
+
+class LineType
+attributes
+	color : String
+	type : LineStyleTypeType
+	width : Integer
+operations
+end
+
+class LocationType
+attributes
+	x : Real
+	y : Real
+	z : Real
+operations
+end
+
+class NodeConstraintType
+attributes
+	idRef : String
+	name : String
+operations
+end
+
+class NodeLayoutType
+attributes
+	idRef : String
+operations
+end
+
+class NodeStyleTemplateType
+attributes
+	id : String
+operations
+end
+
+class NodeType
+attributes
+	group : String
+	id : String
+operations
+end
+
+class NumberType
+attributes
+	name : String
+	value : Real
+operations
+end
+
+class OgmlType
+attributes
+operations
+end
+
+class PointType
+attributes
+	id : String
+	x : Real
+	y : Real
+	z : Real
+operations
+end
+
+class SegmentType
+attributes
+operations
+end
+
+class ShapeType1
+attributes
+	height : Integer
+	type : ShapeType
+	uri : String
+	width : Integer
+operations
+end
+
+class SourceStyleType
+attributes
+	color : String
+	type : EndpointStylesType
+	uri : String
+	width : Integer
+operations
+end
+
+class SourceTargetType
+attributes
+	id : String
+	idRef : String
+operations
+end
+
+class StructureType
+attributes
+	group : String
+operations
+end
+
+class StylesType
+attributes
+	group : String
+operations
+end
+
+class StyleTemplatesType
+attributes
+	group : String
+operations
+end
+
+class TargetStyleType
+attributes
+	color : String
+	type : EndpointStylesType
+	uri : String
+	width : Integer
+operations
+end
+
+class TemplateType
+attributes
+	idRef : String
+operations
+end
+
+class TextType
+attributes
+	alignment : AlignmentType
+	decoration : DecorationType
+	rotation : Integer
+	transform : TransformType
+operations
+end
+
+class UriType
+attributes
+	uri : String
+operations
+end
+
+composition xxx_ComposedType_number between
+	ComposedType[0..1] role xxx_ComposedType_number_src
+	NumberType[*] role number
+end
+
+composition xxx_ComposedType_int between
+	ComposedType[0..1] role xxx_ComposedType_int_src
+	IntType[*] role int
+end
+
+composition xxx_ComposedType_boolean between
+	ComposedType[0..1] role xxx_ComposedType_boolean_src
+	BooleanType[*] role boolean
+end
+
+composition xxx_ComposedType_node between
+	ComposedType[0..1] role xxx_ComposedType_node_src
+	NodeConstraintType[*] role node
+end
+
+composition xxx_ComposedType_edge between
+	ComposedType[0..1] role xxx_ComposedType_edge_src
+	EdgeConstraintType[*] role edge
+end
+
+composition xxx_ComposedType_label between
+	ComposedType[0..1] role xxx_ComposedType_label_src
+	LabelConstraintType[*] role label
+end
+
+composition xxx_ComposedType_composed between
+	ComposedType[0..1] role xxx_ComposedType_composed_src
+	ComposedType[*] role composed
+end
+
+composition xxx_ConstraintsType_number between
+	ConstraintsType[0..1] role xxx_ConstraintsType_number_src
+	NumberType[*] role number
+end
+
+composition xxx_ConstraintsType_int between
+	ConstraintsType[0..1] role xxx_ConstraintsType_int_src
+	IntType[*] role int
+end
+
+composition xxx_ConstraintsType_boolean between
+	ConstraintsType[0..1] role xxx_ConstraintsType_boolean_src
+	BooleanType[*] role boolean
+end
+
+composition xxx_ConstraintsType_nodeRef between
+	ConstraintsType[0..1] role xxx_ConstraintsType_nodeRef_src
+	NodeConstraintType[*] role nodeRef
+end
+
+composition xxx_ConstraintsType_edgeRef between
+	ConstraintsType[0..1] role xxx_ConstraintsType_edgeRef_src
+	EdgeConstraintType[*] role edgeRef
+end
+
+composition xxx_ConstraintsType_labelRef between
+	ConstraintsType[0..1] role xxx_ConstraintsType_labelRef_src
+	LabelConstraintType[*] role labelRef
+end
+
+composition xxx_ConstraintsType_composed between
+	ConstraintsType[0..1] role xxx_ConstraintsType_composed_src
+	ComposedType[*] role composed
+end
+
+composition xxx_DocumentRoot_bool between
+	DocumentRoot[*] role xxx_DocumentRoot_bool_src
+	BoolType[*] role bool
+end
+
+composition xxx_DocumentRoot_boolean between
+	DocumentRoot[*] role xxx_DocumentRoot_boolean_src
+	BooleanType[*] role boolean
+end
+
+composition xxx_DocumentRoot_composed between
+	DocumentRoot[*] role xxx_DocumentRoot_composed_src
+	ComposedType[*] role composed
+end
+
+composition xxx_DocumentRoot_constraints_ between
+	DocumentRoot[*] role xxx_DocumentRoot_constraints__src
+	ConstraintsType[*] role constraints_
+end
+
+composition xxx_DocumentRoot_data between
+	DocumentRoot[*] role xxx_DocumentRoot_data_src
+	DataType[*] role data
+end
+
+composition xxx_DocumentRoot_edge between
+	DocumentRoot[*] role xxx_DocumentRoot_edge_src
+	EdgeType[*] role edge
+end
+
+composition xxx_DocumentRoot_edgeConstraint between
+	DocumentRoot[*] role xxx_DocumentRoot_edgeConstraint_src
+	EdgeConstraintType[*] role edgeConstraint
+end
+
+composition xxx_DocumentRoot_edgeLayout between
+	DocumentRoot[*] role xxx_DocumentRoot_edgeLayout_src
+	EdgeLayoutType[*] role edgeLayout
+end
+
+composition xxx_DocumentRoot_edgeStyleTemplate between
+	DocumentRoot[*] role xxx_DocumentRoot_edgeStyleTemplate_src
+	EdgeStyleTemplateType[*] role edgeStyleTemplate
+end
+
+composition xxx_DocumentRoot_endpoint between
+	DocumentRoot[*] role xxx_DocumentRoot_endpoint_src
+	EndpointType[*] role endpoint
+end
+
+composition xxx_DocumentRoot_fill between
+	DocumentRoot[*] role xxx_DocumentRoot_fill_src
+	FillType[*] role fill
+end
+
+composition xxx_DocumentRoot_font between
+	DocumentRoot[*] role xxx_DocumentRoot_font_src
+	FontType[*] role font
+end
+
+composition xxx_DocumentRoot_graph between
+	DocumentRoot[*] role xxx_DocumentRoot_graph_src
+	GraphType[*] role graph
+end
+
+composition xxx_DocumentRoot_graphStyle between
+	DocumentRoot[*] role xxx_DocumentRoot_graphStyle_src
+	GraphStyleType[*] role graphStyle
+end
+
+composition xxx_DocumentRoot_int between
+	DocumentRoot[*] role xxx_DocumentRoot_int_src
+	IntType[*] role int
+end
+
+composition xxx_DocumentRoot_key between
+	DocumentRoot[*] role xxx_DocumentRoot_key_src
+	KeyType[*] role key
+end
+
+composition xxx_DocumentRoot_keys between
+	DocumentRoot[*] role xxx_DocumentRoot_keys_src
+	KeysType[*] role keys
+end
+
+composition xxx_DocumentRoot_keyValue between
+	DocumentRoot[*] role xxx_DocumentRoot_keyValue_src
+	KeyValueType[*] role keyValue
+end
+
+composition xxx_DocumentRoot_label between
+	DocumentRoot[*] role xxx_DocumentRoot_label_src
+	LabelType[*] role label
+end
+
+composition xxx_DocumentRoot_labelConstraint between
+	DocumentRoot[*] role xxx_DocumentRoot_labelConstraint_src
+	LabelConstraintType[*] role labelConstraint
+end
+
+composition xxx_DocumentRoot_labelLayout between
+	DocumentRoot[*] role xxx_DocumentRoot_labelLayout_src
+	LabelLayoutType[*] role labelLayout
+end
+
+composition xxx_DocumentRoot_labelStyleTemplate between
+	DocumentRoot[*] role xxx_DocumentRoot_labelStyleTemplate_src
+	LabelStyleTemplateType[*] role labelStyleTemplate
+end
+
+composition xxx_DocumentRoot_layout between
+	DocumentRoot[*] role xxx_DocumentRoot_layout_src
+	LayoutType[*] role layout
+end
+
+composition xxx_DocumentRoot_line between
+	DocumentRoot[*] role xxx_DocumentRoot_line_src
+	LineType[*] role line
+end
+
+composition xxx_DocumentRoot_lineStyle between
+	DocumentRoot[*] role xxx_DocumentRoot_lineStyle_src
+	LineStyleType[*] role lineStyle
+end
+
+composition xxx_DocumentRoot_location between
+	DocumentRoot[*] role xxx_DocumentRoot_location_src
+	LocationType[*] role location
+end
+
+composition xxx_DocumentRoot_node between
+	DocumentRoot[*] role xxx_DocumentRoot_node_src
+	NodeType[*] role node
+end
+
+composition xxx_DocumentRoot_nodeConstraint between
+	DocumentRoot[*] role xxx_DocumentRoot_nodeConstraint_src
+	NodeConstraintType[*] role nodeConstraint
+end
+
+composition xxx_DocumentRoot_nodeLayout between
+	DocumentRoot[*] role xxx_DocumentRoot_nodeLayout_src
+	NodeLayoutType[*] role nodeLayout
+end
+
+composition xxx_DocumentRoot_nodeStyleTemplate between
+	DocumentRoot[*] role xxx_DocumentRoot_nodeStyleTemplate_src
+	NodeStyleTemplateType[*] role nodeStyleTemplate
+end
+
+composition xxx_DocumentRoot_number between
+	DocumentRoot[*] role xxx_DocumentRoot_number_src
+	NumberType[*] role number
+end
+
+composition xxx_DocumentRoot_ogml between
+	DocumentRoot[*] role xxx_DocumentRoot_ogml_src
+	OgmlType[*] role ogml
+end
+
+composition xxx_DocumentRoot_point between
+	DocumentRoot[*] role xxx_DocumentRoot_point_src
+	PointType[*] role point
+end
+
+composition xxx_DocumentRoot_segment between
+	DocumentRoot[*] role xxx_DocumentRoot_segment_src
+	SegmentType[*] role segment
+end
+
+composition xxx_DocumentRoot_shape between
+	DocumentRoot[*] role xxx_DocumentRoot_shape_src
+	ShapeType1[*] role shape
+end
+
+composition xxx_DocumentRoot_sourceStyle between
+	DocumentRoot[*] role xxx_DocumentRoot_sourceStyle_src
+	SourceStyleType[*] role sourceStyle
+end
+
+composition xxx_DocumentRoot_sourceTarget between
+	DocumentRoot[*] role xxx_DocumentRoot_sourceTarget_src
+	SourceTargetType[*] role sourceTarget
+end
+
+composition xxx_DocumentRoot_structure between
+	DocumentRoot[*] role xxx_DocumentRoot_structure_src
+	StructureType[*] role structure
+end
+
+composition xxx_DocumentRoot_styles between
+	DocumentRoot[*] role xxx_DocumentRoot_styles_src
+	StylesType[*] role styles
+end
+
+composition xxx_DocumentRoot_styleTemplates between
+	DocumentRoot[*] role xxx_DocumentRoot_styleTemplates_src
+	StyleTemplatesType[*] role styleTemplates
+end
+
+composition xxx_DocumentRoot_targetStyle between
+	DocumentRoot[*] role xxx_DocumentRoot_targetStyle_src
+	TargetStyleType[*] role targetStyle
+end
+
+composition xxx_DocumentRoot_template between
+	DocumentRoot[*] role xxx_DocumentRoot_template_src
+	TemplateType[*] role template
+end
+
+composition xxx_DocumentRoot_text between
+	DocumentRoot[*] role xxx_DocumentRoot_text_src
+	TextType[*] role text
+end
+
+composition xxx_DocumentRoot_uri between
+	DocumentRoot[*] role xxx_DocumentRoot_uri_src
+	UriType[*] role uri
+end
+
+composition xxx_EdgeLayoutType_data between
+	EdgeLayoutType[0..1] role xxx_EdgeLayoutType_data_src
+	DataType[*] role data
+end
+
+composition xxx_EdgeLayoutType_template between
+	EdgeLayoutType[*] role xxx_EdgeLayoutType_template_src
+	TemplateType[0..1] role template
+end
+
+composition xxx_EdgeLayoutType_line between
+	EdgeLayoutType[*] role xxx_EdgeLayoutType_line_src
+	LineType[0..1] role line
+end
+
+composition xxx_EdgeLayoutType_sourceStyle between
+	EdgeLayoutType[*] role xxx_EdgeLayoutType_sourceStyle_src
+	SourceStyleType[0..1] role sourceStyle
+end
+
+composition xxx_EdgeLayoutType_targetStyle between
+	EdgeLayoutType[*] role xxx_EdgeLayoutType_targetStyle_src
+	TargetStyleType[0..1] role targetStyle
+end
+
+composition xxx_EdgeLayoutType_point between
+	EdgeLayoutType[0..1] role xxx_EdgeLayoutType_point_src
+	PointType[*] role point
+end
+
+composition xxx_EdgeLayoutType_segment between
+	EdgeLayoutType[0..1] role xxx_EdgeLayoutType_segment_src
+	SegmentType[*] role segment
+end
+
+composition xxx_EdgeStyleTemplateType_data between
+	EdgeStyleTemplateType[0..1] role xxx_EdgeStyleTemplateType_data_src
+	DataType[*] role data
+end
+
+composition xxx_EdgeStyleTemplateType_template between
+	EdgeStyleTemplateType[*] role xxx_EdgeStyleTemplateType_template_src
+	TemplateType[0..1] role template
+end
+
+composition xxx_EdgeStyleTemplateType_line between
+	EdgeStyleTemplateType[*] role xxx_EdgeStyleTemplateType_line_src
+	LineType[0..1] role line
+end
+
+composition xxx_EdgeStyleTemplateType_sourceStyle between
+	EdgeStyleTemplateType[*] role xxx_EdgeStyleTemplateType_sourceStyle_src
+	SourceStyleType[0..1] role sourceStyle
+end
+
+composition xxx_EdgeStyleTemplateType_targetStyle between
+	EdgeStyleTemplateType[*] role xxx_EdgeStyleTemplateType_targetStyle_src
+	TargetStyleType[0..1] role targetStyle
+end
+
+composition xxx_EdgeType_data between
+	EdgeType[0..1] role xxx_EdgeType_data_src
+	DataType[*] role data
+end
+
+composition xxx_EdgeType_label between
+	EdgeType[0..1] role xxx_EdgeType_label_src
+	LabelType[*] role label
+end
+
+composition xxx_EdgeType_source between
+	EdgeType[0..1] role xxx_EdgeType_source_src
+	SourceTargetType[*] role source
+end
+
+composition xxx_EdgeType_target between
+	EdgeType[0..1] role xxx_EdgeType_target_src
+	SourceTargetType[*] role target
+end
+
+composition xxx_EdgeType_label1 between
+	EdgeType[0..1] role xxx_EdgeType_label1_src
+	LabelType[*] role label1
+end
+
+composition xxx_GraphStyleType_data between
+	GraphStyleType[0..1] role xxx_GraphStyleType_data_src
+	DataType[*] role data
+end
+
+composition xxx_GraphType_data between
+	GraphType[0..1] role xxx_GraphType_data_src
+	DataType[*] role data
+end
+
+composition xxx_GraphType_structure between
+	GraphType[*] role xxx_GraphType_structure_src
+	StructureType[1] role structure
+end
+
+composition xxx_GraphType_layout between
+	GraphType[*] role xxx_GraphType_layout_src
+	LayoutType[0..1] role layout
+end
+
+composition xxx_KeysType_key between
+	KeysType[0..1] role xxx_KeysType_key_src
+	KeyType[*] role key
+end
+
+composition xxx_KeyType_keyValue between
+	KeyType[0..1] role xxx_KeyType_keyValue_src
+	KeyValueType[1..*] role keyValue
+end
+
+composition xxx_LabelLayoutType_data between
+	LabelLayoutType[0..1] role xxx_LabelLayoutType_data_src
+	DataType[*] role data
+end
+
+composition xxx_LabelLayoutType_template between
+	LabelLayoutType[*] role xxx_LabelLayoutType_template_src
+	TemplateType[0..1] role template
+end
+
+composition xxx_LabelLayoutType_location between
+	LabelLayoutType[*] role xxx_LabelLayoutType_location_src
+	LocationType[0..1] role location
+end
+
+composition xxx_LabelLayoutType_text between
+	LabelLayoutType[*] role xxx_LabelLayoutType_text_src
+	TextType[0..1] role text
+end
+
+composition xxx_LabelLayoutType_font between
+	LabelLayoutType[*] role xxx_LabelLayoutType_font_src
+	FontType[0..1] role font
+end
+
+composition xxx_LabelStyleTemplateType_data between
+	LabelStyleTemplateType[0..1] role xxx_LabelStyleTemplateType_data_src
+	DataType[*] role data
+end
+
+composition xxx_LabelStyleTemplateType_template between
+	LabelStyleTemplateType[*] role xxx_LabelStyleTemplateType_template_src
+	TemplateType[0..1] role template
+end
+
+composition xxx_LabelStyleTemplateType_text between
+	LabelStyleTemplateType[*] role xxx_LabelStyleTemplateType_text_src
+	TextType[1] role text
+end
+
+composition xxx_LabelStyleTemplateType_font between
+	LabelStyleTemplateType[*] role xxx_LabelStyleTemplateType_font_src
+	FontType[1] role font
+end
+
+composition xxx_LabelType_data between
+	LabelType[0..1] role xxx_LabelType_data_src
+	DataType[*] role data
+end
+
+composition xxx_LayoutType_data between
+	LayoutType[0..1] role xxx_LayoutType_data_src
+	DataType[*] role data
+end
+
+composition xxx_LayoutType_styleTemplates between
+	LayoutType[*] role xxx_LayoutType_styleTemplates_src
+	StyleTemplatesType[0..1] role styleTemplates
+end
+
+composition xxx_LayoutType_styles between
+	LayoutType[*] role xxx_LayoutType_styles_src
+	StylesType[0..1] role styles
+end
+
+composition xxx_LayoutType_constraints_ between
+	LayoutType[*] role xxx_LayoutType_constraints__src
+	ConstraintsType[0..1] role constraints_
+end
+
+composition xxx_NodeLayoutType_data between
+	NodeLayoutType[0..1] role xxx_NodeLayoutType_data_src
+	DataType[*] role data
+end
+
+composition xxx_NodeLayoutType_template between
+	NodeLayoutType[*] role xxx_NodeLayoutType_template_src
+	TemplateType[0..1] role template
+end
+
+composition xxx_NodeLayoutType_location between
+	NodeLayoutType[*] role xxx_NodeLayoutType_location_src
+	LocationType[0..1] role location
+end
+
+composition xxx_NodeLayoutType_shape between
+	NodeLayoutType[*] role xxx_NodeLayoutType_shape_src
+	ShapeType1[0..1] role shape
+end
+
+composition xxx_NodeLayoutType_fill between
+	NodeLayoutType[*] role xxx_NodeLayoutType_fill_src
+	FillType[0..1] role fill
+end
+
+composition xxx_NodeLayoutType_line between
+	NodeLayoutType[*] role xxx_NodeLayoutType_line_src
+	LineType[0..1] role line
+end
+
+composition xxx_NodeStyleTemplateType_data between
+	NodeStyleTemplateType[0..1] role xxx_NodeStyleTemplateType_data_src
+	DataType[*] role data
+end
+
+composition xxx_NodeStyleTemplateType_template between
+	NodeStyleTemplateType[*] role xxx_NodeStyleTemplateType_template_src
+	TemplateType[0..1] role template
+end
+
+composition xxx_NodeStyleTemplateType_shape between
+	NodeStyleTemplateType[*] role xxx_NodeStyleTemplateType_shape_src
+	ShapeType1[0..1] role shape
+end
+
+composition xxx_NodeStyleTemplateType_fill between
+	NodeStyleTemplateType[*] role xxx_NodeStyleTemplateType_fill_src
+	FillType[0..1] role fill
+end
+
+composition xxx_NodeStyleTemplateType_line between
+	NodeStyleTemplateType[*] role xxx_NodeStyleTemplateType_line_src
+	LineType[0..1] role line
+end
+
+composition xxx_NodeType_data between
+	NodeType[0..1] role xxx_NodeType_data_src
+	DataType[*] role data
+end
+
+composition xxx_NodeType_label between
+	NodeType[0..1] role xxx_NodeType_label_src
+	LabelType[*] role label
+end
+
+composition xxx_NodeType_node between
+	NodeType[0..1] role xxx_NodeType_node_src
+	NodeType[*] role node
+end
+
+composition xxx_OgmlType_keys between
+	OgmlType[*] role xxx_OgmlType_keys_src
+	KeysType[0..1] role keys
+end
+
+composition xxx_OgmlType_graph between
+	OgmlType[*] role xxx_OgmlType_graph_src
+	GraphType[1] role graph
+end
+
+composition xxx_PointType_data between
+	PointType[0..1] role xxx_PointType_data_src
+	DataType[*] role data
+end
+
+composition xxx_SegmentType_data between
+	SegmentType[0..1] role xxx_SegmentType_data_src
+	DataType[*] role data
+end
+
+composition xxx_SegmentType_line between
+	SegmentType[*] role xxx_SegmentType_line_src
+	LineType[0..1] role line
+end
+
+composition xxx_SegmentType_endpoint between
+	SegmentType[*] role xxx_SegmentType_endpoint_src
+	EndpointType[2] role endpoint
+end
+
+composition xxx_SourceTargetType_data between
+	SourceTargetType[0..1] role xxx_SourceTargetType_data_src
+	DataType[*] role data
+end
+
+composition xxx_SourceTargetType_label between
+	SourceTargetType[*] role xxx_SourceTargetType_label_src
+	LabelType[0..1] role label
+end
+
+composition xxx_StructureType_data between
+	StructureType[0..1] role xxx_StructureType_data_src
+	DataType[*] role data
+end
+
+composition xxx_StructureType_node between
+	StructureType[0..1] role xxx_StructureType_node_src
+	NodeType[*] role node
+end
+
+composition xxx_StructureType_edge between
+	StructureType[0..1] role xxx_StructureType_edge_src
+	EdgeType[*] role edge
+end
+
+composition xxx_StructureType_label between
+	StructureType[0..1] role xxx_StructureType_label_src
+	LabelType[*] role label
+end
+
+composition xxx_StylesType_graphStyle between
+	StylesType[*] role xxx_StylesType_graphStyle_src
+	GraphStyleType[0..1] role graphStyle
+end
+
+composition xxx_StylesType_data between
+	StylesType[0..1] role xxx_StylesType_data_src
+	DataType[*] role data
+end
+
+composition xxx_StylesType_nodeStyle between
+	StylesType[0..1] role xxx_StylesType_nodeStyle_src
+	NodeLayoutType[*] role nodeStyle
+end
+
+composition xxx_StylesType_edgeStyle between
+	StylesType[0..1] role xxx_StylesType_edgeStyle_src
+	EdgeLayoutType[*] role edgeStyle
+end
+
+composition xxx_StylesType_labelStyle between
+	StylesType[0..1] role xxx_StylesType_labelStyle_src
+	LabelLayoutType[*] role labelStyle
+end
+
+composition xxx_StyleTemplatesType_data between
+	StyleTemplatesType[0..1] role xxx_StyleTemplatesType_data_src
+	DataType[*] role data
+end
+
+composition xxx_StyleTemplatesType_nodeStyleTemplate between
+	StyleTemplatesType[0..1] role xxx_StyleTemplatesType_nodeStyleTemplate_src
+	NodeStyleTemplateType[*] role nodeStyleTemplate
+end
+
+composition xxx_StyleTemplatesType_edgeStyleTemplate between
+	StyleTemplatesType[0..1] role xxx_StyleTemplatesType_edgeStyleTemplate_src
+	EdgeStyleTemplateType[*] role edgeStyleTemplate
+end
+
+composition xxx_StyleTemplatesType_labelStyleTemplate between
+	StyleTemplatesType[0..1] role xxx_StyleTemplatesType_labelStyleTemplate_src
+	LabelStyleTemplateType[*] role labelStyleTemplate
+end
+

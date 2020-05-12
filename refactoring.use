@@ -1,0 +1,82 @@
+model refactoring
+class Property<NamedElement
+attributes
+operations
+end
+
+class Entity<NamedElement
+attributes
+operations
+end
+
+class Generalization
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Type<NamedElement
+attributes
+operations
+end
+
+class RefactoringModel
+attributes
+operations
+end
+
+association xxx_Property_type between
+	Property[*] role xxx_Property_type_src
+	Type[1] role type
+end
+
+association xxx_Entity_ownedAttribute between
+	Entity[0..1] role xxx_Entity_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+association xxx_Entity_specialization between
+	Entity[0..1] role xxx_Entity_specialization_src
+	Generalization[*] role specialization
+end
+
+association xxx_Entity_generalization between
+	Entity[*] role xxx_Entity_generalization_src
+	Generalization[0..1] role generalization
+end
+
+association xxx_Generalization_specific between
+	Generalization[*] role xxx_Generalization_specific_src
+	Entity[1] role specific
+end
+
+association xxx_Generalization_general between
+	Generalization[*] role xxx_Generalization_general_src
+	Entity[1] role general
+end
+
+composition xxx_RefactoringModel_properties between
+	RefactoringModel[0..1] role xxx_RefactoringModel_properties_src
+	Property[*] role properties
+end
+
+composition xxx_RefactoringModel_entities between
+	RefactoringModel[0..1] role xxx_RefactoringModel_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_RefactoringModel_types between
+	RefactoringModel[0..1] role xxx_RefactoringModel_types_src
+	Type[*] role types
+end
+
+composition xxx_RefactoringModel_generalizations between
+	RefactoringModel[0..1] role xxx_RefactoringModel_generalizations_src
+	Generalization[*] role generalizations
+end
+

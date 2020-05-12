@@ -1,0 +1,489 @@
+model oseeDsl
+enum RelationMultiplicityEnum{
+default
+}
+
+enum CompareOp{
+default
+}
+
+enum XLogicOperator{
+default
+}
+
+enum MatchField{
+default
+}
+
+enum AccessPermissionEnum{
+default
+}
+
+enum RelationTypeMatch{
+default
+}
+
+enum XRelationSideEnum{
+default
+}
+
+class OseeDsl
+attributes
+operations
+end
+
+class Import
+attributes
+	importURI : String
+operations
+end
+
+class OseeElement
+attributes
+operations
+end
+
+class OseeType<OseeElement
+attributes
+	name : String
+	typeGuid : String
+	uuid : String
+operations
+end
+
+class XArtifactType<OseeType
+attributes
+	abstract_ : Boolean
+operations
+end
+
+class XAttributeTypeRef
+attributes
+	branchGuid : String
+operations
+end
+
+class XAttributeType<OseeType
+attributes
+	baseAttributeType : String
+	dataProvider : String
+	min : String
+	max : String
+	taggerId : String
+	description : String
+	defaultValue : String
+	fileExtension : String
+	mediaType : String
+operations
+end
+
+class XOseeEnumType<OseeType
+attributes
+operations
+end
+
+class XOseeEnumEntry
+attributes
+	name : String
+	ordinal : String
+	entryGuid : String
+	description : String
+operations
+end
+
+class XOseeEnumOverride<OseeElement
+attributes
+	inheritAll : Boolean
+operations
+end
+
+class OverrideOption
+attributes
+operations
+end
+
+class AddEnum<OverrideOption
+attributes
+	enumEntry : String
+	ordinal : String
+	entryGuid : String
+	description : String
+operations
+end
+
+class RemoveEnum<OverrideOption
+attributes
+operations
+end
+
+class XOseeArtifactTypeOverride
+attributes
+	inheritAll : Boolean
+operations
+end
+
+class AttributeOverrideOption
+attributes
+operations
+end
+
+class AddAttribute<AttributeOverrideOption
+attributes
+operations
+end
+
+class RemoveAttribute<AttributeOverrideOption
+attributes
+operations
+end
+
+class UpdateAttribute<AttributeOverrideOption
+attributes
+operations
+end
+
+class XRelationType<OseeType
+attributes
+	sideAName : String
+	sideBName : String
+	defaultOrderType : String
+	multiplicity : RelationMultiplicityEnum
+operations
+end
+
+class Condition
+attributes
+operations
+end
+
+class SimpleCondition<Condition
+attributes
+	field : MatchField
+	op : CompareOp
+	expression : String
+operations
+end
+
+class CompoundCondition<Condition
+attributes
+	operators : XLogicOperator
+operations
+end
+
+class XArtifactMatcher
+attributes
+	name : String
+	operators : XLogicOperator
+operations
+end
+
+class Role
+attributes
+	name : String
+operations
+end
+
+class ReferencedContext
+attributes
+	accessContextRef : String
+operations
+end
+
+class UsersAndGroups
+attributes
+	userOrGroupGuid : String
+operations
+end
+
+class AccessContext
+attributes
+	name : String
+	guid : String
+operations
+end
+
+class HierarchyRestriction
+attributes
+operations
+end
+
+class RelationTypeArtifactTypePredicate<RelationTypePredicate
+attributes
+operations
+end
+
+class RelationTypeArtifactPredicate<RelationTypePredicate
+attributes
+operations
+end
+
+class RelationTypePredicate
+attributes
+operations
+end
+
+class ObjectRestriction
+attributes
+	permission : AccessPermissionEnum
+operations
+end
+
+class ArtifactMatchRestriction<ObjectRestriction
+attributes
+operations
+end
+
+class ArtifactTypeRestriction<ObjectRestriction
+attributes
+operations
+end
+
+class AttributeTypeRestriction<ObjectRestriction
+attributes
+operations
+end
+
+class LegacyRelationTypeRestriction
+attributes
+	permission : AccessPermissionEnum
+	restrictedToSide : XRelationSideEnum
+operations
+end
+
+class RelationTypeRestriction<ObjectRestriction
+attributes
+	relationTypeMatch : Boolean
+	restrictedToSide : XRelationSideEnum
+operations
+end
+
+composition xxx_OseeDsl_imports between
+	OseeDsl[0..1] role xxx_OseeDsl_imports_src
+	Import[*] role imports
+end
+
+composition xxx_OseeDsl_artifactTypes between
+	OseeDsl[0..1] role xxx_OseeDsl_artifactTypes_src
+	XArtifactType[*] role artifactTypes
+end
+
+composition xxx_OseeDsl_relationTypes between
+	OseeDsl[0..1] role xxx_OseeDsl_relationTypes_src
+	XRelationType[*] role relationTypes
+end
+
+composition xxx_OseeDsl_attributeTypes between
+	OseeDsl[0..1] role xxx_OseeDsl_attributeTypes_src
+	XAttributeType[*] role attributeTypes
+end
+
+composition xxx_OseeDsl_enumTypes between
+	OseeDsl[0..1] role xxx_OseeDsl_enumTypes_src
+	XOseeEnumType[*] role enumTypes
+end
+
+composition xxx_OseeDsl_enumOverrides between
+	OseeDsl[0..1] role xxx_OseeDsl_enumOverrides_src
+	XOseeEnumOverride[*] role enumOverrides
+end
+
+composition xxx_OseeDsl_artifactTypeOverrides between
+	OseeDsl[0..1] role xxx_OseeDsl_artifactTypeOverrides_src
+	XOseeArtifactTypeOverride[*] role artifactTypeOverrides
+end
+
+composition xxx_OseeDsl_artifactMatchRefs between
+	OseeDsl[0..1] role xxx_OseeDsl_artifactMatchRefs_src
+	XArtifactMatcher[*] role artifactMatchRefs
+end
+
+composition xxx_OseeDsl_accessDeclarations between
+	OseeDsl[0..1] role xxx_OseeDsl_accessDeclarations_src
+	AccessContext[*] role accessDeclarations
+end
+
+composition xxx_OseeDsl_roleDeclarations between
+	OseeDsl[0..1] role xxx_OseeDsl_roleDeclarations_src
+	Role[*] role roleDeclarations
+end
+
+association xxx_XArtifactType_superArtifactTypes between
+	XArtifactType[0..1] role xxx_XArtifactType_superArtifactTypes_src
+	XArtifactType[*] role superArtifactTypes
+end
+
+composition xxx_XArtifactType_validAttributeTypes between
+	XArtifactType[0..1] role xxx_XArtifactType_validAttributeTypes_src
+	XAttributeTypeRef[*] role validAttributeTypes
+end
+
+association xxx_XAttributeTypeRef_validAttributeType between
+	XAttributeTypeRef[*] role xxx_XAttributeTypeRef_validAttributeType_src
+	XAttributeType[0..1] role validAttributeType
+end
+
+association xxx_XAttributeType_override between
+	XAttributeType[*] role xxx_XAttributeType_override_src
+	XAttributeType[0..1] role override
+end
+
+association xxx_XAttributeType_enumType between
+	XAttributeType[*] role xxx_XAttributeType_enumType_src
+	XOseeEnumType[0..1] role enumType
+end
+
+composition xxx_XOseeEnumType_enumEntries between
+	XOseeEnumType[0..1] role xxx_XOseeEnumType_enumEntries_src
+	XOseeEnumEntry[*] role enumEntries
+end
+
+association xxx_XOseeEnumOverride_overridenEnumType between
+	XOseeEnumOverride[*] role xxx_XOseeEnumOverride_overridenEnumType_src
+	XOseeEnumType[0..1] role overridenEnumType
+end
+
+composition xxx_XOseeEnumOverride_overrideOptions between
+	XOseeEnumOverride[0..1] role xxx_XOseeEnumOverride_overrideOptions_src
+	OverrideOption[*] role overrideOptions
+end
+
+association xxx_RemoveEnum_enumEntry between
+	RemoveEnum[*] role xxx_RemoveEnum_enumEntry_src
+	XOseeEnumEntry[0..1] role enumEntry
+end
+
+association xxx_XOseeArtifactTypeOverride_overridenArtifactType between
+	XOseeArtifactTypeOverride[*] role xxx_XOseeArtifactTypeOverride_overridenArtifactType_src
+	XArtifactType[0..1] role overridenArtifactType
+end
+
+composition xxx_XOseeArtifactTypeOverride_overrideOptions between
+	XOseeArtifactTypeOverride[0..1] role xxx_XOseeArtifactTypeOverride_overrideOptions_src
+	AttributeOverrideOption[*] role overrideOptions
+end
+
+composition xxx_AddAttribute_attribute between
+	AddAttribute[*] role xxx_AddAttribute_attribute_src
+	XAttributeTypeRef[0..1] role attribute
+end
+
+association xxx_RemoveAttribute_attribute between
+	RemoveAttribute[*] role xxx_RemoveAttribute_attribute_src
+	XAttributeType[0..1] role attribute
+end
+
+composition xxx_UpdateAttribute_attribute between
+	UpdateAttribute[*] role xxx_UpdateAttribute_attribute_src
+	XAttributeTypeRef[0..1] role attribute
+end
+
+association xxx_XRelationType_sideAArtifactType between
+	XRelationType[*] role xxx_XRelationType_sideAArtifactType_src
+	XArtifactType[0..1] role sideAArtifactType
+end
+
+association xxx_XRelationType_sideBArtifactType between
+	XRelationType[*] role xxx_XRelationType_sideBArtifactType_src
+	XArtifactType[0..1] role sideBArtifactType
+end
+
+composition xxx_CompoundCondition_conditions between
+	CompoundCondition[0..1] role xxx_CompoundCondition_conditions_src
+	SimpleCondition[*] role conditions
+end
+
+composition xxx_XArtifactMatcher_conditions between
+	XArtifactMatcher[0..1] role xxx_XArtifactMatcher_conditions_src
+	Condition[*] role conditions
+end
+
+association xxx_Role_superRoles between
+	Role[0..1] role xxx_Role_superRoles_src
+	Role[*] role superRoles
+end
+
+composition xxx_Role_usersAndGroups between
+	Role[0..1] role xxx_Role_usersAndGroups_src
+	UsersAndGroups[*] role usersAndGroups
+end
+
+composition xxx_Role_referencedContexts between
+	Role[0..1] role xxx_Role_referencedContexts_src
+	ReferencedContext[*] role referencedContexts
+end
+
+association xxx_AccessContext_superAccessContexts between
+	AccessContext[0..1] role xxx_AccessContext_superAccessContexts_src
+	AccessContext[*] role superAccessContexts
+end
+
+composition xxx_AccessContext_accessRules between
+	AccessContext[0..1] role xxx_AccessContext_accessRules_src
+	ObjectRestriction[*] role accessRules
+end
+
+composition xxx_AccessContext_hierarchyRestrictions between
+	AccessContext[0..1] role xxx_AccessContext_hierarchyRestrictions_src
+	HierarchyRestriction[*] role hierarchyRestrictions
+end
+
+association xxx_HierarchyRestriction_artifactMatcherRef between
+	HierarchyRestriction[*] role xxx_HierarchyRestriction_artifactMatcherRef_src
+	XArtifactMatcher[0..1] role artifactMatcherRef
+end
+
+composition xxx_HierarchyRestriction_accessRules between
+	HierarchyRestriction[0..1] role xxx_HierarchyRestriction_accessRules_src
+	ObjectRestriction[*] role accessRules
+end
+
+association xxx_RelationTypeArtifactTypePredicate_artifactTypeRef between
+	RelationTypeArtifactTypePredicate[*] role xxx_RelationTypeArtifactTypePredicate_artifactTypeRef_src
+	XArtifactType[0..1] role artifactTypeRef
+end
+
+association xxx_RelationTypeArtifactPredicate_artifactMatcherRef between
+	RelationTypeArtifactPredicate[*] role xxx_RelationTypeArtifactPredicate_artifactMatcherRef_src
+	XArtifactMatcher[0..1] role artifactMatcherRef
+end
+
+association xxx_ArtifactMatchRestriction_artifactMatcherRef between
+	ArtifactMatchRestriction[*] role xxx_ArtifactMatchRestriction_artifactMatcherRef_src
+	XArtifactMatcher[0..1] role artifactMatcherRef
+end
+
+association xxx_ArtifactTypeRestriction_artifactTypeRef between
+	ArtifactTypeRestriction[*] role xxx_ArtifactTypeRestriction_artifactTypeRef_src
+	XArtifactType[0..1] role artifactTypeRef
+end
+
+association xxx_AttributeTypeRestriction_attributeTypeRef between
+	AttributeTypeRestriction[*] role xxx_AttributeTypeRestriction_attributeTypeRef_src
+	XAttributeType[0..1] role attributeTypeRef
+end
+
+association xxx_AttributeTypeRestriction_artifactTypeRef between
+	AttributeTypeRestriction[*] role xxx_AttributeTypeRestriction_artifactTypeRef_src
+	XArtifactType[0..1] role artifactTypeRef
+end
+
+association xxx_LegacyRelationTypeRestriction_relationTypeRef between
+	LegacyRelationTypeRestriction[*] role xxx_LegacyRelationTypeRestriction_relationTypeRef_src
+	XRelationType[0..1] role relationTypeRef
+end
+
+association xxx_LegacyRelationTypeRestriction_artifactMatcherRef between
+	LegacyRelationTypeRestriction[*] role xxx_LegacyRelationTypeRestriction_artifactMatcherRef_src
+	XArtifactMatcher[0..1] role artifactMatcherRef
+end
+
+association xxx_RelationTypeRestriction_relationTypeRef between
+	RelationTypeRestriction[*] role xxx_RelationTypeRestriction_relationTypeRef_src
+	XRelationType[0..1] role relationTypeRef
+end
+
+composition xxx_RelationTypeRestriction_predicate between
+	RelationTypeRestriction[*] role xxx_RelationTypeRestriction_predicate_src
+	RelationTypePredicate[0..1] role predicate
+end
+

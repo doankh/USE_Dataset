@@ -1,0 +1,159 @@
+model quantities
+class UReal
+attributes
+	x : String
+	u : String
+operations
+	add(r : UReal)
+	lt(r : UReal):Boolean
+end
+
+class SIUnit
+attributes
+	dimensions : String
+operations
+end
+
+class Unit<SIUnit
+attributes
+	name : String
+	symbol : String
+	conversionFactor : String
+	offset : String
+operations
+	isCompatibleWith(u : Unit):Boolean
+	equals(u : Unit):Boolean
+	isBaseUnit():Boolean
+	noOffset():Boolean
+	isDimensionless():Boolean
+	isUnitless():Boolean
+	factor():String
+	isDerivedUnit():Boolean
+	multiplyUnits(x : Unit):Unit
+	divideUnits(x : Unit):Unit
+	powerUnits(x : String):Unit
+end
+
+class Quantity
+attributes
+operations
+	getUnits():Unit
+	sameUnits(x : Quantity):Boolean
+	compatibleUnits(u : Unit):Boolean
+	convertTo(u : Unit)
+	convertToSIUnits()
+	convertFromSIUnits(v : UReal)
+	add(r : Quantity):Quantity
+	minus(x : Quantity):Quantity
+	mult(x : Quantity):Quantity
+	divideBy(x : Quantity):Quantity
+	foo():Boolean
+end
+
+class Length<Quantity
+attributes
+operations
+	add1(r : Length):Length
+	minus1(x : Length):Length
+	divideBy1(x : Time):LinearVelocity
+end
+
+class Time<Quantity
+attributes
+operations
+end
+
+class LinearVelocity<Quantity
+attributes
+operations
+	minus1(r : LinearVelocity):LinearVelocity
+	divideBy1(r : Time):LinearAcceleration
+end
+
+class LinearAcceleration<Quantity
+attributes
+operations
+	add1(r : LinearAcceleration):LinearAcceleration
+	minus1(r : LinearAcceleration):LinearAcceleration
+end
+
+class Vehicle
+attributes
+operations
+end
+
+class AccMeasure
+attributes
+operations
+end
+
+association xxx_Quantity_value between
+	Quantity[*] role xxx_Quantity_value_src
+	UReal[0..1] role value
+end
+
+association xxx_Quantity_unit between
+	Quantity[*] role xxx_Quantity_unit_src
+	Unit[0..1] role unit
+end
+
+association xxx_Vehicle_avgVelocity between
+	Vehicle[*] role xxx_Vehicle_avgVelocity_src
+	LinearVelocity[0..1] role avgVelocity
+end
+
+association xxx_Vehicle_avgAcceleration between
+	Vehicle[*] role xxx_Vehicle_avgAcceleration_src
+	LinearAcceleration[0..1] role avgAcceleration
+end
+
+association xxx_Vehicle_am between
+	Vehicle[0..1] role xxx_Vehicle_am_src
+	AccMeasure[*] role am
+end
+
+association xxx_AccMeasure_initialPosition between
+	AccMeasure[*] role xxx_AccMeasure_initialPosition_src
+	Length[0..1] role initialPosition
+end
+
+association xxx_AccMeasure_finalPosition between
+	AccMeasure[*] role xxx_AccMeasure_finalPosition_src
+	Length[0..1] role finalPosition
+end
+
+association xxx_AccMeasure_duration between
+	AccMeasure[*] role xxx_AccMeasure_duration_src
+	Time[0..1] role duration
+end
+
+association xxx_AccMeasure_initialVelocity between
+	AccMeasure[*] role xxx_AccMeasure_initialVelocity_src
+	LinearVelocity[0..1] role initialVelocity
+end
+
+association xxx_AccMeasure_finalVelocity between
+	AccMeasure[*] role xxx_AccMeasure_finalVelocity_src
+	LinearVelocity[0..1] role finalVelocity
+end
+
+association xxx_AccMeasure_distance between
+	AccMeasure[*] role xxx_AccMeasure_distance_src
+	Length[0..1] role distance
+end
+
+association xxx_AccMeasure_avgVelocity between
+	AccMeasure[*] role xxx_AccMeasure_avgVelocity_src
+	LinearVelocity[0..1] role avgVelocity
+end
+
+association xxx_AccMeasure_avgAcceleration between
+	AccMeasure[*] role xxx_AccMeasure_avgAcceleration_src
+	LinearAcceleration[0..1] role avgAcceleration
+end
+
+association xxx_AccMeasure_vehicle between
+	AccMeasure[*] role xxx_AccMeasure_vehicle_src
+	Vehicle[0..1] role vehicle
+end
+

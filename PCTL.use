@@ -1,0 +1,212 @@
+model pCTL
+class Start
+attributes
+operations
+end
+
+class Fragment
+attributes
+operations
+end
+
+class Comment<Fragment
+attributes
+	comment : String
+operations
+end
+
+class Rule<Fragment
+attributes
+operations
+end
+
+class SteadyState<Rule
+attributes
+operations
+end
+
+class QuantifiedProbability<Rule
+attributes
+operations
+end
+
+class BooleanRule<Rule
+attributes
+operations
+end
+
+class StateFormula<StateExpression,RightStateExpression
+attributes
+operations
+end
+
+class StateExpression
+attributes
+operations
+end
+
+class RightStateExpression
+attributes
+operations
+end
+
+class State<StateExpression
+attributes
+	value : String
+operations
+end
+
+class Label<StateExpression
+attributes
+	value : String
+operations
+end
+
+class Boolean<StateExpression
+attributes
+	value : String
+operations
+end
+
+class PathFormula
+attributes
+operations
+end
+
+class Until<PathFormula
+attributes
+	type : String
+operations
+end
+
+class Next<PathFormula
+attributes
+operations
+end
+
+class Future<PathFormula
+attributes
+operations
+end
+
+class Globally<PathFormula
+attributes
+operations
+end
+
+class CompareProbability
+attributes
+	operator : String
+	value : Real
+operations
+end
+
+class TimeBound
+attributes
+	operator : String
+	value : Real
+	from_ : Real
+	to : Real
+operations
+end
+
+class Conjunction<RightStateExpression
+attributes
+operations
+end
+
+class Disjunction<RightStateExpression
+attributes
+operations
+end
+
+class Probability<StateExpression
+attributes
+operations
+end
+
+composition xxx_Start_rule between
+	Start[0..1] role xxx_Start_rule_src
+	Fragment[*] role rule
+end
+
+composition xxx_SteadyState_bound between
+	SteadyState[*] role xxx_SteadyState_bound_src
+	CompareProbability[0..1] role bound
+end
+
+composition xxx_SteadyState_value between
+	SteadyState[*] role xxx_SteadyState_value_src
+	StateFormula[0..1] role value
+end
+
+composition xxx_QuantifiedProbability_value between
+	QuantifiedProbability[*] role xxx_QuantifiedProbability_value_src
+	PathFormula[0..1] role value
+end
+
+composition xxx_BooleanRule_value between
+	BooleanRule[*] role xxx_BooleanRule_value_src
+	StateFormula[0..1] role value
+end
+
+composition xxx_StateFormula_left between
+	StateFormula[*] role xxx_StateFormula_left_src
+	StateExpression[0..1] role left
+end
+
+composition xxx_RightStateExpression_right between
+	RightStateExpression[*] role xxx_RightStateExpression_right_src
+	RightStateExpression[0..1] role right
+end
+
+composition xxx_PathFormula_bound between
+	PathFormula[*] role xxx_PathFormula_bound_src
+	TimeBound[0..1] role bound
+end
+
+composition xxx_Until_left between
+	Until[*] role xxx_Until_left_src
+	StateFormula[0..1] role left
+end
+
+composition xxx_Until_right between
+	Until[*] role xxx_Until_right_src
+	StateFormula[0..1] role right
+end
+
+composition xxx_Next_value between
+	Next[*] role xxx_Next_value_src
+	StateFormula[0..1] role value
+end
+
+composition xxx_Future_value between
+	Future[*] role xxx_Future_value_src
+	StateFormula[0..1] role value
+end
+
+composition xxx_Globally_value between
+	Globally[*] role xxx_Globally_value_src
+	StateFormula[0..1] role value
+end
+
+composition xxx_Conjunction_left between
+	Conjunction[*] role xxx_Conjunction_left_src
+	RightStateExpression[0..1] role left
+end
+
+composition xxx_Disjunction_left between
+	Disjunction[*] role xxx_Disjunction_left_src
+	RightStateExpression[0..1] role left
+end
+
+composition xxx_Probability_comparator between
+	Probability[*] role xxx_Probability_comparator_src
+	CompareProbability[0..1] role comparator
+end
+
+composition xxx_Probability_path between
+	Probability[*] role xxx_Probability_path_src
+	PathFormula[0..1] role path
+end
+

@@ -1,0 +1,140 @@
+model MetaH
+class METAHFile
+attributes
+operations
+end
+
+abstract class METAHEntry
+attributes
+operations
+end
+
+class Package<METAHEntry
+attributes
+	packName : String
+operations
+end
+
+class PackageImplementation<METAHEntry
+attributes
+	implementationName : String
+	implements : String
+operations
+end
+
+class Data
+attributes
+	dataName : String
+operations
+end
+
+class Attribute
+attributes
+	attName : String
+	attValue : Integer
+	attValueType : String
+	attType : String
+operations
+end
+
+class ProcessDeclaration<METAHEntry
+attributes
+	procDecName : String
+operations
+end
+
+class ProcessImplementation<METAHEntry
+attributes
+	procImpName : String
+	declaration : String
+operations
+end
+
+class ProcessAttribute
+attributes
+	attName : String
+	attValue : Integer
+	attValueType : String
+operations
+end
+
+class Process
+attributes
+	procName : String
+	periodic : String
+	declaration : String
+	implementation : String
+operations
+end
+
+class Port
+attributes
+	portName : String
+	portCom : String
+	portPackage : String
+	portType : String
+operations
+end
+
+class Connection<METAHEntry
+attributes
+	compSrc : String
+	portSrc : String
+	compDest : String
+	portDest : String
+operations
+end
+
+class MacroDeclaration<METAHEntry
+attributes
+	name : String
+operations
+end
+
+class MacroImplementation<METAHEntry
+attributes
+	macroImpName : String
+	declaration : String
+operations
+end
+
+composition xxx_METAHFile_entries between
+	METAHFile[0..1] role xxx_METAHFile_entries_src
+	METAHEntry[*] role entries
+end
+
+composition xxx_Package_data between
+	Package[0..1] role xxx_Package_data_src
+	Data[*] role data
+end
+
+composition xxx_PackageImplementation_attributes_ between
+	PackageImplementation[0..1] role xxx_PackageImplementation_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_ProcessDeclaration_ports between
+	ProcessDeclaration[0..1] role xxx_ProcessDeclaration_ports_src
+	Port[*] role ports
+end
+
+composition xxx_ProcessImplementation_processAttributes between
+	ProcessImplementation[0..1] role xxx_ProcessImplementation_processAttributes_src
+	ProcessAttribute[*] role processAttributes
+end
+
+composition xxx_MacroDeclaration_ports between
+	MacroDeclaration[0..1] role xxx_MacroDeclaration_ports_src
+	Port[*] role ports
+end
+
+composition xxx_MacroImplementation_process between
+	MacroImplementation[0..1] role xxx_MacroImplementation_process_src
+	Process[*] role process
+end
+
+composition xxx_MacroImplementation_connections between
+	MacroImplementation[0..1] role xxx_MacroImplementation_connections_src
+	Connection[*] role connections
+end
+

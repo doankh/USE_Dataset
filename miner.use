@@ -1,0 +1,70 @@
+model miner
+enum ActivityType{
+default
+}
+
+class Process
+attributes
+	name : String
+operations
+end
+
+class ProcessInstance
+attributes
+	name : String
+operations
+end
+
+class Activity
+attributes
+	id : String
+	name : String
+	type : ActivityType
+	appClass : String
+operations
+end
+
+class Event
+attributes
+	date : String
+	lifecycleStatus : String
+operations
+end
+
+class Commit
+attributes
+	id : String
+	date : String
+operations
+end
+
+composition xxx_Process_activities between
+	Process[0..1] role xxx_Process_activities_src
+	Activity[*] role activities
+end
+
+composition xxx_Process_instances between
+	Process[0..1] role xxx_Process_instances_src
+	ProcessInstance[*] role instances
+end
+
+composition xxx_ProcessInstance_events between
+	ProcessInstance[*] role xxx_ProcessInstance_events_src
+	Event[0..1] role events
+end
+
+composition xxx_ProcessInstance_commits between
+	ProcessInstance[0..1] role xxx_ProcessInstance_commits_src
+	Commit[*] role commits
+end
+
+association xxx_Event_activity between
+	Event[*] role xxx_Event_activity_src
+	Activity[0..1] role activity
+end
+
+composition xxx_Commit_events between
+	Commit[0..1] role xxx_Commit_events_src
+	Event[*] role events
+end
+

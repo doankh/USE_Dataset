@@ -1,0 +1,56 @@
+model PetriNet
+class Place
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Net
+attributes
+operations
+end
+
+association xxx_Place_net between
+	Place[*] role xxx_Place_net_src
+	Net[1] role net
+end
+
+association xxx_Place_src between
+	Place[0..1] role xxx_Place_src_src
+	Transition[*] role src
+end
+
+association xxx_Place_dst between
+	Place[0..1] role xxx_Place_dst_src
+	Transition[*] role dst
+end
+
+association xxx_Transition_net between
+	Transition[*] role xxx_Transition_net_src
+	Net[1] role net
+end
+
+association xxx_Transition_src between
+	Transition[0..1] role xxx_Transition_src_src
+	Place[1..*] role src
+end
+
+association xxx_Transition_dst between
+	Transition[0..1] role xxx_Transition_dst_src
+	Place[1..*] role dst
+end
+
+composition xxx_Net_place between
+	Net[0..1] role xxx_Net_place_src
+	Place[*] role place
+end
+
+composition xxx_Net_transition between
+	Net[0..1] role xxx_Net_transition_src
+	Transition[*] role transition
+end
+

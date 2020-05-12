@@ -1,0 +1,70 @@
+model codegen
+class ImplementationSettings
+attributes
+	name : String
+	outputDir : String
+	template : String
+	generatorId : String
+	generatedOn : String
+	id : String
+	primary : Boolean
+operations
+end
+
+class Property
+attributes
+	id : String
+	value : String
+operations
+end
+
+class WaveDevSettings
+attributes
+operations
+end
+
+class ImplIdToSettingsMap
+attributes
+	key : String
+operations
+end
+
+class FileToCRCMap
+attributes
+	crc : Integer
+	file : String
+operations
+end
+
+class PortRepToGeneratorMap
+attributes
+	generator : String
+	repId : String
+operations
+end
+
+composition xxx_ImplementationSettings_properties between
+	ImplementationSettings[0..1] role xxx_ImplementationSettings_properties_src
+	Property[*] role properties
+end
+
+composition xxx_ImplementationSettings_generatedFileCRCs between
+	ImplementationSettings[0..1] role xxx_ImplementationSettings_generatedFileCRCs_src
+	FileToCRCMap[*] role generatedFileCRCs
+end
+
+composition xxx_ImplementationSettings_portGenerators between
+	ImplementationSettings[0..1] role xxx_ImplementationSettings_portGenerators_src
+	PortRepToGeneratorMap[*] role portGenerators
+end
+
+composition xxx_WaveDevSettings_implSettings between
+	WaveDevSettings[0..1] role xxx_WaveDevSettings_implSettings_src
+	ImplIdToSettingsMap[*] role implSettings
+end
+
+composition xxx_ImplIdToSettingsMap_value between
+	ImplIdToSettingsMap[*] role xxx_ImplIdToSettingsMap_value_src
+	ImplementationSettings[0..1] role value
+end
+

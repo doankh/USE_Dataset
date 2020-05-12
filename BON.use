@@ -1,0 +1,299 @@
+model BON
+enum Event_type{
+default
+}
+
+class System_chart<Chart,NamedElement
+attributes
+operations
+end
+
+abstract class Chart
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Cluster<DescriptionElement
+attributes
+operations
+end
+
+class Cluster_chart<Chart
+attributes
+operations
+end
+
+class Class_chart<Chart
+attributes
+operations
+end
+
+abstract class DescriptionElement<NamedElement
+attributes
+	description : String
+operations
+end
+
+class Indexing
+attributes
+operations
+end
+
+class ClassBON<DescriptionElement
+attributes
+operations
+end
+
+class Informal_charts
+attributes
+operations
+end
+
+class Query<NamedElement
+attributes
+operations
+end
+
+class Command<NamedElement
+attributes
+operations
+end
+
+class Constraint<NamedElement
+attributes
+operations
+end
+
+class Explanation<NamedElement
+attributes
+operations
+end
+
+class Index_Identifier<NamedElement
+attributes
+	index_string : String
+operations
+end
+
+class Part<NamedElement
+attributes
+operations
+end
+
+class Commands
+attributes
+operations
+end
+
+class Constraints
+attributes
+operations
+end
+
+class Queries
+attributes
+operations
+end
+
+class Event_chart<Chart
+attributes
+	event_type : Event_type
+operations
+end
+
+class Scenario_chart<Chart
+attributes
+operations
+end
+
+class Creation_chart<Chart
+attributes
+operations
+end
+
+class Event<NamedElement
+attributes
+operations
+end
+
+class Scenario<DescriptionElement
+attributes
+operations
+end
+
+class Creation
+attributes
+operations
+end
+
+composition xxx_System_chart_cluster_entries between
+	System_chart[0..1] role xxx_System_chart_cluster_entries_src
+	Cluster[*] role cluster_entries
+end
+
+composition xxx_Chart_chart_indexing between
+	Chart[*] role xxx_Chart_chart_indexing_src
+	Indexing[0..1] role chart_indexing
+end
+
+composition xxx_Chart_explanation between
+	Chart[*] role xxx_Chart_explanation_src
+	Explanation[0..1] role explanation
+end
+
+composition xxx_Chart_chart_part between
+	Chart[*] role xxx_Chart_chart_part_src
+	Part[0..1] role chart_part
+end
+
+association xxx_Cluster_parent between
+	Cluster[*] role xxx_Cluster_parent_src
+	Cluster[0..1] role parent
+end
+
+composition xxx_Cluster_chart_class_entries between
+	Cluster_chart[0..1] role xxx_Cluster_chart_class_entries_src
+	ClassBON[*] role class_entries
+end
+
+association xxx_Cluster_chart_cluster between
+	Cluster_chart[*] role xxx_Cluster_chart_cluster_src
+	Cluster[1] role cluster
+end
+
+composition xxx_Cluster_chart_clusterchart_entries between
+	Cluster_chart[0..1] role xxx_Cluster_chart_clusterchart_entries_src
+	Cluster[*] role clusterchart_entries
+end
+
+association xxx_Class_chart_class_ between
+	Class_chart[*] role xxx_Class_chart_class__src
+	ClassBON[1] role class_
+end
+
+association xxx_Class_chart_inherit between
+	Class_chart[0..1] role xxx_Class_chart_inherit_src
+	ClassBON[*] role inherit
+end
+
+composition xxx_Class_chart_commands between
+	Class_chart[*] role xxx_Class_chart_commands_src
+	Commands[0..1] role commands
+end
+
+composition xxx_Class_chart_constraints_ between
+	Class_chart[*] role xxx_Class_chart_constraints__src
+	Constraints[0..1] role constraints_
+end
+
+composition xxx_Class_chart_queries between
+	Class_chart[*] role xxx_Class_chart_queries_src
+	Queries[0..1] role queries
+end
+
+composition xxx_Indexing_index_term_list between
+	Indexing[0..1] role xxx_Indexing_index_term_list_src
+	Index_Identifier[1..*] role index_term_list
+end
+
+association xxx_ClassBON_parent between
+	ClassBON[*] role xxx_ClassBON_parent_src
+	Cluster[0..1] role parent
+end
+
+composition xxx_Informal_charts_system_chart between
+	Informal_charts[*] role xxx_Informal_charts_system_chart_src
+	System_chart[1] role system_chart
+end
+
+composition xxx_Informal_charts_class_charts between
+	Informal_charts[0..1] role xxx_Informal_charts_class_charts_src
+	Class_chart[*] role class_charts
+end
+
+composition xxx_Informal_charts_cluster_charts between
+	Informal_charts[0..1] role xxx_Informal_charts_cluster_charts_src
+	Cluster_chart[*] role cluster_charts
+end
+
+composition xxx_Informal_charts_event_charts between
+	Informal_charts[0..1] role xxx_Informal_charts_event_charts_src
+	Event_chart[*] role event_charts
+end
+
+composition xxx_Informal_charts_scenario_charts between
+	Informal_charts[0..1] role xxx_Informal_charts_scenario_charts_src
+	Scenario_chart[*] role scenario_charts
+end
+
+composition xxx_Informal_charts_creation_charts between
+	Informal_charts[0..1] role xxx_Informal_charts_creation_charts_src
+	Creation_chart[*] role creation_charts
+end
+
+composition xxx_Commands_command between
+	Commands[0..1] role xxx_Commands_command_src
+	Command[*] role command
+end
+
+composition xxx_Constraints_constraint between
+	Constraints[0..1] role xxx_Constraints_constraint_src
+	Constraint[*] role constraint
+end
+
+composition xxx_Queries_query between
+	Queries[0..1] role xxx_Queries_query_src
+	Query[*] role query
+end
+
+association xxx_Event_chart_system_name between
+	Event_chart[*] role xxx_Event_chart_system_name_src
+	System_chart[1] role system_name
+end
+
+composition xxx_Event_chart_event_entries between
+	Event_chart[0..1] role xxx_Event_chart_event_entries_src
+	Event[*] role event_entries
+end
+
+association xxx_Scenario_chart_system_name between
+	Scenario_chart[*] role xxx_Scenario_chart_system_name_src
+	System_chart[1] role system_name
+end
+
+composition xxx_Scenario_chart_scenario_entries between
+	Scenario_chart[0..1] role xxx_Scenario_chart_scenario_entries_src
+	Scenario[*] role scenario_entries
+end
+
+association xxx_Creation_chart_system_name between
+	Creation_chart[*] role xxx_Creation_chart_system_name_src
+	System_chart[1] role system_name
+end
+
+composition xxx_Creation_chart_creation_entries between
+	Creation_chart[0..1] role xxx_Creation_chart_creation_entries_src
+	Creation[*] role creation_entries
+end
+
+association xxx_Event_involves between
+	Event[0..1] role xxx_Event_involves_src
+	ClassBON[1..*] role involves
+end
+
+association xxx_Creation_creator between
+	Creation[*] role xxx_Creation_creator_src
+	ClassBON[1] role creator
+end
+
+association xxx_Creation_creates between
+	Creation[0..1] role xxx_Creation_creates_src
+	ClassBON[1..*] role creates
+end
+

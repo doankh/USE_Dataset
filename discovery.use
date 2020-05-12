@@ -1,0 +1,99 @@
+model discovery
+enum Severity{
+default
+}
+
+class InstallableComponent
+attributes
+	name : String
+	provider : String
+	sitesURLS : String
+	description : String
+	id : String
+	license : String
+	selected : Boolean
+	available : Boolean
+	installed : Boolean
+	image32 : String
+	incubation : Boolean
+	visible : Boolean
+	hiddingFeatureID : String
+operations
+end
+
+class Overview
+attributes
+	summary : String
+	screenshot : String
+	url : String
+operations
+end
+
+class Category
+attributes
+	name : String
+	description : String
+	relevance : Integer
+	image48 : String
+operations
+end
+
+class DiscoveryDefinition
+attributes
+operations
+end
+
+class Group
+attributes
+	name : String
+operations
+end
+
+class Message
+attributes
+	title : String
+	message : String
+	icon : Severity
+operations
+end
+
+composition xxx_InstallableComponent_overview between
+	InstallableComponent[*] role xxx_InstallableComponent_overview_src
+	Overview[0..1] role overview
+end
+
+association xxx_InstallableComponent_category between
+	InstallableComponent[*] role xxx_InstallableComponent_category_src
+	Category[1] role category
+end
+
+association xxx_InstallableComponent_groups between
+	InstallableComponent[0..1] role xxx_InstallableComponent_groups_src
+	Group[*] role groups
+end
+
+composition xxx_InstallableComponent_messages between
+	InstallableComponent[0..1] role xxx_InstallableComponent_messages_src
+	Message[*] role messages
+end
+
+composition xxx_Category_components between
+	Category[0..1] role xxx_Category_components_src
+	InstallableComponent[*] role components
+end
+
+composition xxx_Category_overview between
+	Category[*] role xxx_Category_overview_src
+	Overview[0..1] role overview
+end
+
+composition xxx_DiscoveryDefinition_categories between
+	DiscoveryDefinition[0..1] role xxx_DiscoveryDefinition_categories_src
+	Category[*] role categories
+end
+
+composition xxx_DiscoveryDefinition_filters between
+	DiscoveryDefinition[0..1] role xxx_DiscoveryDefinition_filters_src
+	Group[*] role filters
+end
+

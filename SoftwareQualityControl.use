@@ -1,0 +1,92 @@
+model SoftwareQualityControl
+enum BugStatusType{
+	bst_open,
+	bst_closed,
+	bst_skipped
+}
+
+class DateType
+attributes
+	day : Integer
+	month : Integer
+	year : Integer
+operations
+end
+
+class ControlsSequence
+attributes
+operations
+end
+
+class Control
+attributes
+	responsible : String
+	component : String
+	developmentPhase : String
+	scope : String
+	controlledElt : String
+	eltRef : String
+	eltAuthor : String
+	formRef : String
+operations
+end
+
+abstract class ControlType
+attributes
+operations
+end
+
+class BugTracking<ControlType
+attributes
+operations
+end
+
+class Bug
+attributes
+	number : Integer
+	componentVersion : String
+	description : String
+	status : BugStatusType
+	originator : String
+	responsible : String
+	commentsAnswers : String
+	openDate : String
+	closeDate : String
+operations
+end
+
+composition xxx_ControlsSequence_controls between
+	ControlsSequence[0..1] role xxx_ControlsSequence_controls_src
+	Control[*] role controls
+end
+
+association xxx_Control_c_controlsSequence between
+	Control[*] role xxx_Control_c_controlsSequence_src
+	ControlsSequence[1] role c_controlsSequence
+end
+
+composition xxx_Control_date between
+	Control[*] role xxx_Control_date_src
+	DateType[1] role date
+end
+
+composition xxx_Control_type between
+	Control[*] role xxx_Control_type_src
+	ControlType[1] role type
+end
+
+association xxx_ControlType_ct_control between
+	ControlType[*] role xxx_ControlType_ct_control_src
+	Control[1] role ct_control
+end
+
+composition xxx_BugTracking_bugs between
+	BugTracking[0..1] role xxx_BugTracking_bugs_src
+	Bug[*] role bugs
+end
+
+association xxx_Bug_b_bugTracking between
+	Bug[*] role xxx_Bug_b_bugTracking_src
+	BugTracking[1] role b_bugTracking
+end
+

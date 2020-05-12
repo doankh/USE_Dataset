@@ -1,0 +1,358 @@
+model pannotation
+enum CascadeType{
+default
+}
+
+enum DiscriminatorType{
+default
+}
+
+enum EnumType{
+default
+}
+
+enum FetchType{
+default
+}
+
+enum GenerationType{
+default
+}
+
+enum InheritanceType{
+default
+}
+
+enum TemporalType{
+default
+}
+
+enum OptimizerType{
+default
+}
+
+abstract class PAnnotation
+attributes
+operations
+end
+
+class AttributeOverride<PAnnotation
+attributes
+	name : String
+operations
+end
+
+class AssociationOverride<PAnnotation
+attributes
+	name : String
+operations
+end
+
+class Basic<PAnnotation
+attributes
+	fetch : FetchType
+	optional : Boolean
+operations
+end
+
+class Column<PAnnotation
+attributes
+	name : String
+	unique : Boolean
+	nullable : Boolean
+	insertable : Boolean
+	updatable : Boolean
+	columnDefinition : String
+	table : String
+	length : Integer
+	precision : Integer
+	scale : Integer
+operations
+end
+
+class DiscriminatorColumn<PAnnotation
+attributes
+	name : String
+	discriminatorType : DiscriminatorType
+	columnDefinition : String
+	length : Integer
+operations
+end
+
+class DiscriminatorValue<PAnnotation
+attributes
+	value : String
+operations
+end
+
+class Embeddable<PAnnotation
+attributes
+operations
+end
+
+class Embedded<PAnnotation
+attributes
+operations
+end
+
+class EmbeddedId<PAnnotation
+attributes
+operations
+end
+
+class Entity<PAnnotation
+attributes
+	name : String
+	extends : String
+operations
+end
+
+class Enumerated<PAnnotation
+attributes
+	value : EnumType
+operations
+end
+
+class GeneratedValue<PAnnotation
+attributes
+	strategy : GenerationType
+	generator : String
+operations
+end
+
+class Id<PAnnotation
+attributes
+operations
+end
+
+class IdClass<PAnnotation
+attributes
+	value : String
+operations
+end
+
+class Inheritance<PAnnotation
+attributes
+	strategy : InheritanceType
+operations
+end
+
+class JoinColumn<PAnnotation
+attributes
+	name : String
+	referencedColumnName : String
+	unique : Boolean
+	nullable : Boolean
+	insertable : Boolean
+	updatable : Boolean
+	columnDefinition : String
+	table : String
+operations
+end
+
+class JoinTable<PAnnotation
+attributes
+	name : String
+	catalog : String
+	schema : String
+operations
+end
+
+class Lob<PAnnotation
+attributes
+operations
+end
+
+class ManyToMany<PAnnotation
+attributes
+	targetEntity : String
+	cascade : CascadeType
+	fetch : FetchType
+	mappedBy : String
+	indexed : Boolean
+operations
+end
+
+class ManyToOne<PAnnotation
+attributes
+	targetEntity : String
+	cascade : CascadeType
+	fetch : FetchType
+	optional : Boolean
+operations
+end
+
+class MapKey<PAnnotation
+attributes
+	name : String
+operations
+end
+
+class MappedSuperclass<PAnnotation
+attributes
+operations
+end
+
+class OneToMany<PAnnotation
+attributes
+	targetEntity : String
+	cascade : CascadeType
+	fetch : FetchType
+	mappedBy : String
+	indexed : Boolean
+	unique : Boolean
+operations
+end
+
+class OneToOne<PAnnotation
+attributes
+	targetEntity : String
+	cascade : CascadeType
+	fetch : FetchType
+	optional : Boolean
+	mappedBy : String
+operations
+end
+
+class OrderBy<PAnnotation
+attributes
+	value : String
+operations
+end
+
+class PrimaryKeyJoinColumn<PAnnotation
+attributes
+	name : String
+	referencedColumnName : String
+	columnDefinition : String
+operations
+end
+
+class SecondaryTable<PAnnotation
+attributes
+	name : String
+	catalog : String
+	schema : String
+operations
+end
+
+class SequenceGenerator<PAnnotation
+attributes
+	name : String
+	sequenceName : String
+	initialValue : Integer
+	allocationSize : Integer
+operations
+end
+
+class Table<PAnnotation
+attributes
+	name : String
+	catalog : String
+	schema : String
+operations
+end
+
+class TableGenerator<PAnnotation
+attributes
+	name : String
+	table : String
+	catalog : String
+	schema : String
+	pkColumnName : String
+	valueColumnName : String
+	pkColumnValue : String
+	initialValue : Integer
+	allocationSize : Integer
+operations
+end
+
+class Temporal<PAnnotation
+attributes
+	value : TemporalType
+operations
+end
+
+class Transient<PAnnotation
+attributes
+operations
+end
+
+class UniqueConstraint<PAnnotation
+attributes
+	columnNames : String
+operations
+end
+
+class Version<PAnnotation
+attributes
+operations
+end
+
+class ForeignKey<PAnnotation
+attributes
+	name : String
+operations
+end
+
+class SequenceStyleGenerator<PAnnotation
+attributes
+	name : String
+	sequenceName : String
+	initialValue : Integer
+	incrementSize : Integer
+	optimizer : OptimizerType
+operations
+end
+
+class External<PAnnotation
+attributes
+	type : String
+operations
+end
+
+composition xxx_AttributeOverride_column between
+	AttributeOverride[*] role xxx_AttributeOverride_column_src
+	Column[1] role column
+end
+
+composition xxx_AssociationOverride_joinColumns between
+	AssociationOverride[0..1] role xxx_AssociationOverride_joinColumns_src
+	JoinColumn[1..*] role joinColumns
+end
+
+composition xxx_JoinTable_joinColumns between
+	JoinTable[0..1] role xxx_JoinTable_joinColumns_src
+	JoinColumn[*] role joinColumns
+end
+
+composition xxx_JoinTable_inverseJoinColumns between
+	JoinTable[0..1] role xxx_JoinTable_inverseJoinColumns_src
+	JoinColumn[*] role inverseJoinColumns
+end
+
+composition xxx_JoinTable_uniqueConstraints between
+	JoinTable[0..1] role xxx_JoinTable_uniqueConstraints_src
+	UniqueConstraint[*] role uniqueConstraints
+end
+
+composition xxx_SecondaryTable_pkJoinColumns between
+	SecondaryTable[0..1] role xxx_SecondaryTable_pkJoinColumns_src
+	PrimaryKeyJoinColumn[*] role pkJoinColumns
+end
+
+composition xxx_SecondaryTable_uniqueConstraints between
+	SecondaryTable[0..1] role xxx_SecondaryTable_uniqueConstraints_src
+	UniqueConstraint[*] role uniqueConstraints
+end
+
+composition xxx_Table_uniqueConstraints between
+	Table[0..1] role xxx_Table_uniqueConstraints_src
+	UniqueConstraint[*] role uniqueConstraints
+end
+
+composition xxx_TableGenerator_uniqueConstraints between
+	TableGenerator[0..1] role xxx_TableGenerator_uniqueConstraints_src
+	UniqueConstraint[*] role uniqueConstraints
+end
+

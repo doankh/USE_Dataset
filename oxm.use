@@ -1,0 +1,567 @@
+model oxm
+enum EXmlAccessOrder{
+default
+}
+
+enum EXmlAccessType{
+default
+}
+
+enum EXmlMarshalNullRepresentation{
+default
+}
+
+enum EXmlNsForm{
+default
+}
+
+enum EXmlVirtualAccessMethodsSchema{
+default
+}
+
+abstract class EAbstractTypeMapping
+attributes
+	xmlTransient : String
+operations
+end
+
+abstract class EAbstractXmlNullPolicy
+attributes
+	xsiNilRepresentsNull : Boolean
+	emptyNodeRepresentsNull : Boolean
+	nullRepresentationForXml : EXmlMarshalNullRepresentation
+operations
+end
+
+abstract class EAbstractXmlTransformer
+attributes
+	method : String
+	transformerClass : String
+operations
+end
+
+abstract class EAccessibleJavaAttribute
+attributes
+operations
+end
+
+abstract class EAdaptableJavaAttribute
+attributes
+operations
+end
+
+abstract class EContainerJavaAttribute
+attributes
+	containerType : String
+operations
+end
+
+abstract class EJavaAttribute
+attributes
+	javaAttribute : String
+	xmlAccessorType : EXmlAccessType
+operations
+end
+
+class EJavaType<EAbstractTypeMapping,EPropertyHolder
+attributes
+	name : String
+	superType : String
+	xmlAccessorOrder : EXmlAccessOrder
+	xmlAccessorType : EXmlAccessType
+	xmlCustomizer : String
+	xmlDiscriminatorNode : String
+	xmlDiscriminatorValue : String
+	xmlInlineBinaryData : Boolean
+	xmlNameTransformer : String
+operations
+end
+
+abstract class EPropertyHolder
+attributes
+operations
+end
+
+abstract class EReadWriteJavaAttribute
+attributes
+	readOnly : Boolean
+	writeOnly : Boolean
+operations
+end
+
+abstract class ETypedJavaAttribute
+attributes
+	type : String
+operations
+end
+
+class EXmlAccessMethods
+attributes
+	getMethod : String
+	setMethod : String
+operations
+end
+
+class EXmlAnyAttribute<EJavaAttribute,EAccessibleJavaAttribute,EContainerJavaAttribute,EReadWriteJavaAttribute,EPropertyHolder
+attributes
+	xmlPath : String
+operations
+end
+
+class EXmlAnyElement<EJavaAttribute,EAccessibleJavaAttribute,EAdaptableJavaAttribute,EContainerJavaAttribute,EReadWriteJavaAttribute,EPropertyHolder
+attributes
+	xmlMixed : Boolean
+	lax : Boolean
+	domHandler : String
+	xmlPath : String
+operations
+end
+
+class EXmlAttribute<EJavaAttribute,EAccessibleJavaAttribute,EAdaptableJavaAttribute,EContainerJavaAttribute,EReadWriteJavaAttribute,ETypedJavaAttribute,EPropertyHolder
+attributes
+	name : String
+	namespace : String
+	required : Boolean
+	xmlId : Boolean
+	xmlIdRef : Boolean
+	xmlKey : Boolean
+	xmlList : Boolean
+	xmlInlineBinaryData : Boolean
+	xmlAttachmentRef : Boolean
+	xmlMimeType : String
+	xmlPath : String
+operations
+end
+
+class EXmlBindings
+attributes
+	xmlAccessorType : EXmlAccessType
+	xmlAccessorOrder : EXmlAccessOrder
+	xmlMappingMetadataComplete : String
+	packageName : String
+	xmlNameTransformer : String
+operations
+end
+
+class EXmlClassExtractor
+attributes
+	className : String
+operations
+end
+
+class EXmlElement<EJavaAttribute,EAccessibleJavaAttribute,EAdaptableJavaAttribute,EContainerJavaAttribute,EPropertyHolder,EReadWriteJavaAttribute
+attributes
+	name : String
+	namespace : String
+	defaultValue : String
+	nillable : Boolean
+	required : Boolean
+	xmlId : Boolean
+	xmlIdRef : Boolean
+	xmlKey : Boolean
+	xmlList : Boolean
+	xmlInlineBinaryData : Boolean
+	xmlAttachmentRef : Boolean
+	xmlMimeType : String
+	cdata : Boolean
+	xmlPath : String
+	xmlLocation : Boolean
+operations
+end
+
+class EXmlElementDecl
+attributes
+	javaMethod : String
+	name : String
+	namespace : String
+	defaultValue : String
+	scope : String
+	substitutionHeadName : String
+	substitutionHeadNamespace : String
+	type : String
+operations
+end
+
+class EXmlElementRef<EJavaAttribute,EAccessibleJavaAttribute,EAdaptableJavaAttribute,EContainerJavaAttribute,EReadWriteJavaAttribute,ETypedJavaAttribute,EPropertyHolder
+attributes
+	name : String
+	namespace : String
+	xmlMixed : Boolean
+operations
+end
+
+class EXmlElementRefs<EJavaAttribute,EAccessibleJavaAttribute,EAdaptableJavaAttribute,EReadWriteJavaAttribute,EPropertyHolder
+attributes
+	xmlMixed : Boolean
+operations
+end
+
+class EXmlElements<EJavaAttribute,EAccessibleJavaAttribute,EContainerJavaAttribute,EReadWriteJavaAttribute,EPropertyHolder
+attributes
+	xmlIdRef : Boolean
+	xmlList : Boolean
+operations
+end
+
+class EXmlElementWrapper
+attributes
+	name : String
+	namespace : String
+	nillable : Boolean
+	required : Boolean
+operations
+end
+
+class EXmlEnum<EAbstractTypeMapping
+attributes
+	javaEnum : String
+	value : String
+operations
+end
+
+class EXmlEnumValue
+attributes
+	javaEnumValue : String
+operations
+end
+
+class EXmlInverseReference<EJavaAttribute,EAccessibleJavaAttribute,EContainerJavaAttribute,ETypedJavaAttribute,EPropertyHolder
+attributes
+	mappedBy : String
+operations
+end
+
+class EXmlIsSetNullPolicy<EAbstractXmlNullPolicy
+attributes
+	isSetMethodName : String
+operations
+end
+
+class EXmlIsSetParameter
+attributes
+	value : String
+	type : String
+operations
+end
+
+class EXmlJavaTypeAdapter<EJavaAttribute
+attributes
+	value : String
+	type : String
+	valueType : String
+operations
+end
+
+class EXmlJoinNode
+attributes
+	xmlPath : String
+	referencedXmlPath : String
+operations
+end
+
+class EXmlJoinNodes<EJavaAttribute,EContainerJavaAttribute,ETypedJavaAttribute
+attributes
+operations
+end
+
+class EXmlMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+class EXmlNullPolicy<EAbstractXmlNullPolicy
+attributes
+	isSetPerformedForAbsentNode : Boolean
+operations
+end
+
+class EXmlNs
+attributes
+	namespaceUri : String
+	prefix : String
+operations
+end
+
+class EXmlProperty
+attributes
+	name : String
+	value : String
+	valueType : String
+operations
+end
+
+class EXmlReadTransformer<EAbstractXmlTransformer
+attributes
+operations
+end
+
+class EXmlRegistry
+attributes
+	name : String
+operations
+end
+
+class EXmlRootElement
+attributes
+	name : String
+	namespace : String
+operations
+end
+
+class EXmlSchema
+attributes
+	attributeFormDefault : EXmlNsForm
+	elementFormDefault : EXmlNsForm
+	location : String
+	namespace : String
+operations
+end
+
+class EXmlSchemaType
+attributes
+	name : String
+	namespace : String
+	type : String
+operations
+end
+
+class EXmlSeeAlso
+attributes
+	classes : String
+operations
+end
+
+class EXmlTransformation<EJavaAttribute,EAccessibleJavaAttribute,EPropertyHolder
+attributes
+	optional : Boolean
+operations
+end
+
+class EXmlTransient<EJavaAttribute
+attributes
+	xmlLocation : Boolean
+operations
+end
+
+class EXmlType
+attributes
+	name : String
+	namespace : String
+	factoryClass : String
+	factoryMethod : String
+	propOrder : String
+operations
+end
+
+class EXmlValue<EJavaAttribute,EAccessibleJavaAttribute,EAdaptableJavaAttribute,EContainerJavaAttribute,EReadWriteJavaAttribute,ETypedJavaAttribute,EPropertyHolder
+attributes
+	cdata : Boolean
+operations
+end
+
+class EXmlVirtualAccessMethods
+attributes
+	getMethod : String
+	setMethod : String
+	schema : EXmlVirtualAccessMethodsSchema
+operations
+end
+
+class EXmlWriteTransformer<EAbstractXmlTransformer
+attributes
+	xmlPath : String
+operations
+end
+
+composition xxx_EAbstractTypeMapping_xmlType between
+	EAbstractTypeMapping[*] role xxx_EAbstractTypeMapping_xmlType_src
+	EXmlType[0..1] role xmlType
+end
+
+composition xxx_EAbstractTypeMapping_xmlRootElement between
+	EAbstractTypeMapping[*] role xxx_EAbstractTypeMapping_xmlRootElement_src
+	EXmlRootElement[0..1] role xmlRootElement
+end
+
+composition xxx_EAbstractTypeMapping_xmlSeeAlso between
+	EAbstractTypeMapping[*] role xxx_EAbstractTypeMapping_xmlSeeAlso_src
+	EXmlSeeAlso[0..1] role xmlSeeAlso
+end
+
+composition xxx_EAccessibleJavaAttribute_xmlAccessMethods between
+	EAccessibleJavaAttribute[*] role xxx_EAccessibleJavaAttribute_xmlAccessMethods_src
+	EXmlAccessMethods[0..1] role xmlAccessMethods
+end
+
+composition xxx_EAdaptableJavaAttribute_xmlJavaTypeAdapter between
+	EAdaptableJavaAttribute[*] role xxx_EAdaptableJavaAttribute_xmlJavaTypeAdapter_src
+	EXmlJavaTypeAdapter[0..1] role xmlJavaTypeAdapter
+end
+
+composition xxx_EJavaType_xmlVirtualAccessMethods between
+	EJavaType[*] role xxx_EJavaType_xmlVirtualAccessMethods_src
+	EXmlVirtualAccessMethods[0..1] role xmlVirtualAccessMethods
+end
+
+composition xxx_EJavaType_xmlJavaTypeAdapter between
+	EJavaType[*] role xxx_EJavaType_xmlJavaTypeAdapter_src
+	EXmlJavaTypeAdapter[0..1] role xmlJavaTypeAdapter
+end
+
+composition xxx_EJavaType_xmlClassExtractor between
+	EJavaType[*] role xxx_EJavaType_xmlClassExtractor_src
+	EXmlClassExtractor[0..1] role xmlClassExtractor
+end
+
+composition xxx_EJavaType_javaAttributes between
+	EJavaType[0..1] role xxx_EJavaType_javaAttributes_src
+	EJavaAttribute[*] role javaAttributes
+end
+
+composition xxx_EPropertyHolder_xmlProperties between
+	EPropertyHolder[0..1] role xxx_EPropertyHolder_xmlProperties_src
+	EXmlProperty[*] role xmlProperties
+end
+
+composition xxx_EXmlAnyElement_xmlElementRefs between
+	EXmlAnyElement[*] role xxx_EXmlAnyElement_xmlElementRefs_src
+	EXmlElementRefs[0..1] role xmlElementRefs
+end
+
+composition xxx_EXmlAttribute_xmlAbstractNullPolicy between
+	EXmlAttribute[*] role xxx_EXmlAttribute_xmlAbstractNullPolicy_src
+	EAbstractXmlNullPolicy[0..1] role xmlAbstractNullPolicy
+end
+
+composition xxx_EXmlAttribute_xmlSchemaType between
+	EXmlAttribute[*] role xxx_EXmlAttribute_xmlSchemaType_src
+	EXmlSchemaType[0..1] role xmlSchemaType
+end
+
+composition xxx_EXmlBindings_xmlSchema between
+	EXmlBindings[*] role xxx_EXmlBindings_xmlSchema_src
+	EXmlSchema[0..1] role xmlSchema
+end
+
+composition xxx_EXmlBindings_xmlSchemaType between
+	EXmlBindings[*] role xxx_EXmlBindings_xmlSchemaType_src
+	EXmlSchemaType[0..1] role xmlSchemaType
+end
+
+composition xxx_EXmlBindings_xmlSchemaTypes between
+	EXmlBindings[0..1] role xxx_EXmlBindings_xmlSchemaTypes_src
+	EXmlSchemaType[*] role xmlSchemaTypes
+end
+
+composition xxx_EXmlBindings_xmlJavaTypeAdapters between
+	EXmlBindings[0..1] role xxx_EXmlBindings_xmlJavaTypeAdapters_src
+	EXmlJavaTypeAdapter[*] role xmlJavaTypeAdapters
+end
+
+composition xxx_EXmlBindings_xmlRegistries between
+	EXmlBindings[0..1] role xxx_EXmlBindings_xmlRegistries_src
+	EXmlRegistry[*] role xmlRegistries
+end
+
+composition xxx_EXmlBindings_xmlEnums between
+	EXmlBindings[0..1] role xxx_EXmlBindings_xmlEnums_src
+	EXmlEnum[*] role xmlEnums
+end
+
+composition xxx_EXmlBindings_javaTypes between
+	EXmlBindings[0..1] role xxx_EXmlBindings_javaTypes_src
+	EJavaType[*] role javaTypes
+end
+
+composition xxx_EXmlElement_xmlAbstractNullPolicy between
+	EXmlElement[*] role xxx_EXmlElement_xmlAbstractNullPolicy_src
+	EAbstractXmlNullPolicy[0..1] role xmlAbstractNullPolicy
+end
+
+composition xxx_EXmlElement_xmlElementWrapper between
+	EXmlElement[*] role xxx_EXmlElement_xmlElementWrapper_src
+	EXmlElementWrapper[0..1] role xmlElementWrapper
+end
+
+composition xxx_EXmlElement_xmlMap between
+	EXmlElement[*] role xxx_EXmlElement_xmlMap_src
+	EXmlElementWrapper[0..1] role xmlMap
+end
+
+composition xxx_EXmlElement_xmlSchemaType between
+	EXmlElement[*] role xxx_EXmlElement_xmlSchemaType_src
+	EXmlSchemaType[0..1] role xmlSchemaType
+end
+
+composition xxx_EXmlElementRef_xmlElementWrapper between
+	EXmlElementRef[*] role xxx_EXmlElementRef_xmlElementWrapper_src
+	EXmlElementWrapper[0..1] role xmlElementWrapper
+end
+
+composition xxx_EXmlElementRefs_xmlElementRefs between
+	EXmlElementRefs[0..1] role xxx_EXmlElementRefs_xmlElementRefs_src
+	EXmlElementRef[*] role xmlElementRefs
+end
+
+composition xxx_EXmlElementRefs_xmlElementWrapper between
+	EXmlElementRefs[*] role xxx_EXmlElementRefs_xmlElementWrapper_src
+	EXmlElementWrapper[0..1] role xmlElementWrapper
+end
+
+composition xxx_EXmlElements_xmlElements between
+	EXmlElements[0..1] role xxx_EXmlElements_xmlElements_src
+	EXmlElement[*] role xmlElements
+end
+
+composition xxx_EXmlElements_xmlElementWrapper between
+	EXmlElements[*] role xxx_EXmlElements_xmlElementWrapper_src
+	EXmlElementWrapper[0..1] role xmlElementWrapper
+end
+
+composition xxx_EXmlElements_xmlJoinNodes between
+	EXmlElements[0..1] role xxx_EXmlElements_xmlJoinNodes_src
+	EXmlJoinNodes[*] role xmlJoinNodes
+end
+
+composition xxx_EXmlEnum_xmlEnumValues between
+	EXmlEnum[0..1] role xxx_EXmlEnum_xmlEnumValues_src
+	EXmlEnumValue[*] role xmlEnumValues
+end
+
+composition xxx_EXmlIsSetNullPolicy_xmlIsSetParameters between
+	EXmlIsSetNullPolicy[0..1] role xxx_EXmlIsSetNullPolicy_xmlIsSetParameters_src
+	EXmlIsSetParameter[*] role xmlIsSetParameters
+end
+
+composition xxx_EXmlJoinNodes_xmlJoinNodes between
+	EXmlJoinNodes[0..1] role xxx_EXmlJoinNodes_xmlJoinNodes_src
+	EXmlJoinNode[*] role xmlJoinNodes
+end
+
+composition xxx_EXmlRegistry_xmlElementDecls between
+	EXmlRegistry[0..1] role xxx_EXmlRegistry_xmlElementDecls_src
+	EXmlElementDecl[*] role xmlElementDecls
+end
+
+composition xxx_EXmlSchema_xmlns between
+	EXmlSchema[0..1] role xxx_EXmlSchema_xmlns_src
+	EXmlNs[*] role xmlns
+end
+
+composition xxx_EXmlTransformation_xmlReadTransformer between
+	EXmlTransformation[*] role xxx_EXmlTransformation_xmlReadTransformer_src
+	EXmlReadTransformer[0..1] role xmlReadTransformer
+end
+
+composition xxx_EXmlTransformation_xmlWriteTransformers between
+	EXmlTransformation[0..1] role xxx_EXmlTransformation_xmlWriteTransformers_src
+	EXmlWriteTransformer[*] role xmlWriteTransformers
+end
+
+composition xxx_EXmlValue_xmlAbstractNullPolicy between
+	EXmlValue[*] role xxx_EXmlValue_xmlAbstractNullPolicy_src
+	EAbstractXmlNullPolicy[0..1] role xmlAbstractNullPolicy
+end
+

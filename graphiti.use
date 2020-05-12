@@ -1,0 +1,500 @@
+model mm
+enum LineStyle{
+default
+}
+
+enum Orientation{
+default
+}
+
+enum LocationType{
+default
+}
+
+class Property
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class PropertyContainer
+attributes
+operations
+end
+
+abstract class GraphicsAlgorithmContainer<PropertyContainer
+attributes
+operations
+end
+
+abstract class StyleContainer
+attributes
+operations
+end
+
+class Shape<AnchorContainer
+attributes
+operations
+end
+
+class ContainerShape<Shape
+attributes
+operations
+end
+
+class Diagram<ContainerShape,StyleContainer
+attributes
+	gridUnit : Integer
+	diagramTypeId : String
+	name : String
+	snapToGrid : Boolean
+	showGuides : Boolean
+	verticalGridUnit : Integer
+	version : String
+operations
+end
+
+abstract class PictogramElement<GraphicsAlgorithmContainer
+attributes
+	visible : Boolean
+	active : Boolean
+operations
+end
+
+class Connection<AnchorContainer
+attributes
+operations
+end
+
+abstract class Anchor<PictogramElement
+attributes
+operations
+end
+
+abstract class AnchorContainer<PictogramElement
+attributes
+operations
+end
+
+class FixPointAnchor<AdvancedAnchor
+attributes
+operations
+end
+
+class BoxRelativeAnchor<AdvancedAnchor
+attributes
+	relativeWidth : Real
+	relativeHeight : Real
+operations
+end
+
+class ChopboxAnchor<Anchor
+attributes
+operations
+end
+
+class ConnectionDecorator<Shape
+attributes
+	locationRelative : Boolean
+	location : Real
+operations
+end
+
+class FreeFormConnection<Connection
+attributes
+operations
+end
+
+class ManhattanConnection<Connection
+attributes
+operations
+end
+
+class PictogramLink<PropertyContainer
+attributes
+operations
+end
+
+abstract class AdvancedAnchor<Anchor
+attributes
+	useAnchorLocationAsConnectionEndpoint : Boolean
+operations
+end
+
+class CurvedConnection<Connection
+attributes
+operations
+end
+
+class CompositeConnection<Connection
+attributes
+operations
+end
+
+abstract class GraphicsAlgorithm<GraphicsAlgorithmContainer,AbstractStyle
+attributes
+	width : Integer
+	height : Integer
+	x : Integer
+	y : Integer
+operations
+end
+
+class Polyline<GraphicsAlgorithm
+attributes
+operations
+end
+
+class Ellipse<GraphicsAlgorithm
+attributes
+operations
+end
+
+class Text<AbstractText
+attributes
+operations
+end
+
+class Polygon<Polyline
+attributes
+operations
+end
+
+class Rectangle<GraphicsAlgorithm
+attributes
+operations
+end
+
+class RoundedRectangle<GraphicsAlgorithm
+attributes
+	cornerHeight : Integer
+	cornerWidth : Integer
+operations
+end
+
+class Image<GraphicsAlgorithm
+attributes
+	id : String
+	stretchH : String
+	stretchV : String
+	proportional : String
+operations
+end
+
+class PlatformGraphicsAlgorithm<GraphicsAlgorithm
+attributes
+	id : String
+operations
+end
+
+abstract class AbstractText<GraphicsAlgorithm
+attributes
+	horizontalAlignment : Orientation
+	verticalAlignment : Orientation
+	angle : Integer
+	value : String
+operations
+end
+
+class MultiText<AbstractText
+attributes
+operations
+end
+
+class RenderingStyle
+attributes
+operations
+end
+
+class Style<StyleContainer,AbstractStyle
+attributes
+	id : String
+	description : String
+	horizontalAlignment : Orientation
+	verticalAlignment : Orientation
+	angle : Integer
+	stretchH : String
+	stretchV : String
+	proportional : String
+operations
+end
+
+abstract class AbstractStyle
+attributes
+	lineWidth : Integer
+	lineStyle : LineStyle
+	filled : String
+	lineVisible : String
+	transparency : String
+operations
+end
+
+class GradientColoredLocation
+attributes
+	locationType : LocationType
+	locationValue : Integer
+operations
+end
+
+class GradientColoredArea
+attributes
+operations
+end
+
+class GradientColoredAreas
+attributes
+	styleAdaption : Integer
+operations
+end
+
+class AdaptedGradientColoredAreas
+attributes
+	definedStyleId : String
+	gradientType : Integer
+operations
+end
+
+class Font
+attributes
+	name : String
+	size : Integer
+	italic : Boolean
+	bold : Boolean
+operations
+end
+
+class Point
+attributes
+	x : Integer
+	y : Integer
+	before : Integer
+	after : Integer
+operations
+end
+
+class Color
+attributes
+	red : Integer
+	green : Integer
+	blue : Integer
+operations
+end
+
+class PrecisionPoint
+attributes
+	x : Real
+	y : Real
+operations
+end
+
+composition xxx_PropertyContainer_properties between
+	PropertyContainer[0..1] role xxx_PropertyContainer_properties_src
+	Property[*] role properties
+end
+
+composition xxx_StyleContainer_styles between
+	StyleContainer[0..1] role xxx_StyleContainer_styles_src
+	Style[*] role styles
+end
+
+association xxx_Shape_container between
+	Shape[*] role xxx_Shape_container_src
+	ContainerShape[0..1] role container
+end
+
+composition xxx_ContainerShape_children between
+	ContainerShape[0..1] role xxx_ContainerShape_children_src
+	Shape[*] role children
+end
+
+composition xxx_Diagram_connections between
+	Diagram[0..1] role xxx_Diagram_connections_src
+	Connection[*] role connections
+end
+
+composition xxx_Diagram_colors between
+	Diagram[0..1] role xxx_Diagram_colors_src
+	Color[*] role colors
+end
+
+composition xxx_Diagram_fonts between
+	Diagram[0..1] role xxx_Diagram_fonts_src
+	Font[*] role fonts
+end
+
+association xxx_Diagram_pictogramLinks between
+	Diagram[0..1] role xxx_Diagram_pictogramLinks_src
+	PictogramLink[*] role pictogramLinks
+end
+
+composition xxx_PictogramElement_graphicsAlgorithm between
+	PictogramElement[*] role xxx_PictogramElement_graphicsAlgorithm_src
+	GraphicsAlgorithm[0..1] role graphicsAlgorithm
+end
+
+composition xxx_PictogramElement_link between
+	PictogramElement[*] role xxx_PictogramElement_link_src
+	PictogramLink[0..1] role link
+end
+
+association xxx_Connection_start between
+	Connection[*] role xxx_Connection_start_src
+	Anchor[1] role start
+end
+
+association xxx_Connection_end_ between
+	Connection[*] role xxx_Connection_end__src
+	Anchor[1] role end_
+end
+
+association xxx_Connection_parent between
+	Connection[*] role xxx_Connection_parent_src
+	Diagram[1] role parent
+end
+
+composition xxx_Connection_connectionDecorators between
+	Connection[0..1] role xxx_Connection_connectionDecorators_src
+	ConnectionDecorator[*] role connectionDecorators
+end
+
+association xxx_Anchor_parent between
+	Anchor[*] role xxx_Anchor_parent_src
+	AnchorContainer[1] role parent
+end
+
+association xxx_Anchor_outgoingConnections between
+	Anchor[0..1] role xxx_Anchor_outgoingConnections_src
+	Connection[*] role outgoingConnections
+end
+
+association xxx_Anchor_incomingConnections between
+	Anchor[0..1] role xxx_Anchor_incomingConnections_src
+	Connection[*] role incomingConnections
+end
+
+association xxx_Anchor_referencedGraphicsAlgorithm between
+	Anchor[*] role xxx_Anchor_referencedGraphicsAlgorithm_src
+	GraphicsAlgorithm[0..1] role referencedGraphicsAlgorithm
+end
+
+composition xxx_AnchorContainer_anchors between
+	AnchorContainer[0..1] role xxx_AnchorContainer_anchors_src
+	Anchor[*] role anchors
+end
+
+composition xxx_FixPointAnchor_location between
+	FixPointAnchor[*] role xxx_FixPointAnchor_location_src
+	Point[1] role location
+end
+
+association xxx_ConnectionDecorator_connection between
+	ConnectionDecorator[*] role xxx_ConnectionDecorator_connection_src
+	Connection[1] role connection
+end
+
+composition xxx_FreeFormConnection_bendpoints between
+	FreeFormConnection[0..1] role xxx_FreeFormConnection_bendpoints_src
+	Point[*] role bendpoints
+end
+
+association xxx_PictogramLink_pictogramElement between
+	PictogramLink[*] role xxx_PictogramLink_pictogramElement_src
+	PictogramElement[0..1] role pictogramElement
+end
+
+composition xxx_CurvedConnection_controlPoints between
+	CurvedConnection[0..1] role xxx_CurvedConnection_controlPoints_src
+	PrecisionPoint[*] role controlPoints
+end
+
+association xxx_CompositeConnection_children between
+	CompositeConnection[0..1] role xxx_CompositeConnection_children_src
+	CurvedConnection[*] role children
+end
+
+composition xxx_GraphicsAlgorithm_graphicsAlgorithmChildren between
+	GraphicsAlgorithm[0..1] role xxx_GraphicsAlgorithm_graphicsAlgorithmChildren_src
+	GraphicsAlgorithm[*] role graphicsAlgorithmChildren
+end
+
+association xxx_GraphicsAlgorithm_parentGraphicsAlgorithm between
+	GraphicsAlgorithm[*] role xxx_GraphicsAlgorithm_parentGraphicsAlgorithm_src
+	GraphicsAlgorithm[0..1] role parentGraphicsAlgorithm
+end
+
+association xxx_GraphicsAlgorithm_pictogramElement between
+	GraphicsAlgorithm[*] role xxx_GraphicsAlgorithm_pictogramElement_src
+	PictogramElement[0..1] role pictogramElement
+end
+
+association xxx_GraphicsAlgorithm_style between
+	GraphicsAlgorithm[*] role xxx_GraphicsAlgorithm_style_src
+	Style[0..1] role style
+end
+
+composition xxx_Polyline_points between
+	Polyline[0..1] role xxx_Polyline_points_src
+	Point[*] role points
+end
+
+association xxx_AbstractText_font between
+	AbstractText[*] role xxx_AbstractText_font_src
+	Font[0..1] role font
+end
+
+composition xxx_RenderingStyle_adaptedGradientColoredAreas between
+	RenderingStyle[*] role xxx_RenderingStyle_adaptedGradientColoredAreas_src
+	AdaptedGradientColoredAreas[0..1] role adaptedGradientColoredAreas
+end
+
+association xxx_Style_font between
+	Style[*] role xxx_Style_font_src
+	Font[0..1] role font
+end
+
+association xxx_Style_styleContainer between
+	Style[*] role xxx_Style_styleContainer_src
+	StyleContainer[1] role styleContainer
+end
+
+association xxx_AbstractStyle_background between
+	AbstractStyle[*] role xxx_AbstractStyle_background_src
+	Color[0..1] role background
+end
+
+association xxx_AbstractStyle_foreground between
+	AbstractStyle[*] role xxx_AbstractStyle_foreground_src
+	Color[0..1] role foreground
+end
+
+composition xxx_AbstractStyle_renderingStyle between
+	AbstractStyle[*] role xxx_AbstractStyle_renderingStyle_src
+	RenderingStyle[0..1] role renderingStyle
+end
+
+composition xxx_GradientColoredLocation_color between
+	GradientColoredLocation[*] role xxx_GradientColoredLocation_color_src
+	Color[1] role color
+end
+
+composition xxx_GradientColoredArea_start between
+	GradientColoredArea[*] role xxx_GradientColoredArea_start_src
+	GradientColoredLocation[0..1] role start
+end
+
+composition xxx_GradientColoredArea_end_ between
+	GradientColoredArea[*] role xxx_GradientColoredArea_end__src
+	GradientColoredLocation[0..1] role end_
+end
+
+composition xxx_GradientColoredAreas_gradientColor between
+	GradientColoredAreas[0..1] role xxx_GradientColoredAreas_gradientColor_src
+	GradientColoredArea[*] role gradientColor
+end
+
+composition xxx_AdaptedGradientColoredAreas_adaptedGradientColoredAreas between
+	AdaptedGradientColoredAreas[0..1] role xxx_AdaptedGradientColoredAreas_adaptedGradientColoredAreas_src
+	GradientColoredAreas[*] role adaptedGradientColoredAreas
+end
+

@@ -1,0 +1,177 @@
+model kompicsComponents
+class Component
+attributes
+	var : String
+operations
+end
+
+class Port
+attributes
+	provided : Boolean
+operations
+end
+
+class Handler
+attributes
+operations
+end
+
+class Channel
+attributes
+operations
+end
+
+class Event
+attributes
+	type : String
+operations
+end
+
+class PortType
+attributes
+	type : String
+operations
+end
+
+class ComponentDefinition
+attributes
+	type : String
+operations
+end
+
+class Model
+attributes
+	title : String
+operations
+end
+
+class Subscription
+attributes
+operations
+end
+
+composition xxx_Component_provides between
+	Component[0..1] role xxx_Component_provides_src
+	Port[*] role provides
+end
+
+composition xxx_Component_requires between
+	Component[0..1] role xxx_Component_requires_src
+	Port[*] role requires
+end
+
+association xxx_Component_type between
+	Component[*] role xxx_Component_type_src
+	ComponentDefinition[1] role type
+end
+
+association xxx_Port_subscribers between
+	Port[0..1] role xxx_Port_subscribers_src
+	Subscription[*] role subscribers
+end
+
+association xxx_Port_portType between
+	Port[*] role xxx_Port_portType_src
+	PortType[1] role portType
+end
+
+association xxx_Port_component between
+	Port[*] role xxx_Port_component_src
+	Component[1] role component
+end
+
+association xxx_Handler_eventType between
+	Handler[*] role xxx_Handler_eventType_src
+	Event[1] role eventType
+end
+
+association xxx_Handler_subscriptions between
+	Handler[0..1] role xxx_Handler_subscriptions_src
+	Subscription[*] role subscriptions
+end
+
+association xxx_Channel_connects between
+	Channel[*] role xxx_Channel_connects_src
+	Port[2] role connects
+end
+
+association xxx_Channel_portType between
+	Channel[*] role xxx_Channel_portType_src
+	PortType[1] role portType
+end
+
+association xxx_Channel_provided between
+	Channel[*] role xxx_Channel_provided_src
+	Port[1] role provided
+end
+
+association xxx_Channel_required between
+	Channel[*] role xxx_Channel_required_src
+	Port[1] role required
+end
+
+association xxx_PortType_indications between
+	PortType[0..1] role xxx_PortType_indications_src
+	Event[*] role indications
+end
+
+association xxx_PortType_requests between
+	PortType[0..1] role xxx_PortType_requests_src
+	Event[*] role requests
+end
+
+association xxx_ComponentDefinition_requires between
+	ComponentDefinition[0..1] role xxx_ComponentDefinition_requires_src
+	PortType[*] role requires
+end
+
+association xxx_ComponentDefinition_provides between
+	ComponentDefinition[0..1] role xxx_ComponentDefinition_provides_src
+	PortType[*] role provides
+end
+
+composition xxx_ComponentDefinition_handlers between
+	ComponentDefinition[0..1] role xxx_ComponentDefinition_handlers_src
+	Handler[*] role handlers
+end
+
+composition xxx_ComponentDefinition_instances between
+	ComponentDefinition[0..1] role xxx_ComponentDefinition_instances_src
+	Component[*] role instances
+end
+
+composition xxx_ComponentDefinition_subscriptions between
+	ComponentDefinition[0..1] role xxx_ComponentDefinition_subscriptions_src
+	Subscription[*] role subscriptions
+end
+
+composition xxx_Model_portTypes between
+	Model[0..1] role xxx_Model_portTypes_src
+	PortType[*] role portTypes
+end
+
+composition xxx_Model_events between
+	Model[0..1] role xxx_Model_events_src
+	Event[*] role events
+end
+
+composition xxx_Model_components between
+	Model[0..1] role xxx_Model_components_src
+	ComponentDefinition[*] role components
+end
+
+composition xxx_Model_channels between
+	Model[0..1] role xxx_Model_channels_src
+	Channel[*] role channels
+end
+
+association xxx_Subscription_handler between
+	Subscription[*] role xxx_Subscription_handler_src
+	Handler[1] role handler
+end
+
+association xxx_Subscription_port between
+	Subscription[*] role xxx_Subscription_port_src
+	Port[1] role port
+end
+

@@ -1,0 +1,61 @@
+model CpcModel
+class Component
+attributes
+	name : String
+operations
+end
+
+class InputPort
+attributes
+	name : String
+operations
+end
+
+class OutputPort
+attributes
+	name : String
+operations
+end
+
+class Connection
+attributes
+	name : String
+operations
+end
+
+class System
+attributes
+	name : String
+operations
+end
+
+association xxx_Component_contains between
+	Component[0..1] role xxx_Component_contains_src
+	Component[*] role contains
+end
+
+association xxx_Component_input between
+	Component[0..1] role xxx_Component_input_src
+	InputPort[*] role input
+end
+
+association xxx_Component_output between
+	Component[0..1] role xxx_Component_output_src
+	OutputPort[*] role output
+end
+
+association xxx_InputPort_connect_with between
+	InputPort[*] role xxx_InputPort_connect_with_src
+	Connection[1] role connect_with
+end
+
+association xxx_OutputPort_connect_with between
+	OutputPort[*] role xxx_OutputPort_connect_with_src
+	Connection[1] role connect_with
+end
+
+association xxx_System_contains between
+	System[0..1] role xxx_System_contains_src
+	Component[*] role contains
+end
+

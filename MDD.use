@@ -1,0 +1,835 @@
+model editor
+class dataDefinition
+attributes
+operations
+end
+
+class declaration
+attributes
+operations
+end
+
+class fieldDeclaration<declaration
+attributes
+	name : String
+operations
+end
+
+class modifiers
+attributes
+	unique : Boolean
+	fixed : Boolean
+	notNull : Boolean
+	notEmpty : Boolean
+operations
+end
+
+class fieldType
+attributes
+	type : String
+operations
+end
+
+class intEnum<fieldType,functionArgumentBody
+attributes
+operations
+end
+
+class charEnum<fieldType,functionArgumentBody
+attributes
+	values : String
+operations
+end
+
+class enumValue
+attributes
+	name : String
+	value : Integer
+operations
+end
+
+class charType<fieldType,functionArgumentBody
+attributes
+	length : Integer
+operations
+end
+
+class pointer<fieldType
+attributes
+operations
+end
+
+class setType<fieldType
+attributes
+operations
+end
+
+class subFieldDeclaration<declaration
+attributes
+operations
+end
+
+class titleDeclaration<declaration
+attributes
+operations
+end
+
+class title
+attributes
+	name : String
+operations
+end
+
+class includeDeclaration<declaration
+attributes
+	importedNamespace : String
+operations
+end
+
+class typeDeclaration<declaration
+attributes
+	name : String
+operations
+end
+
+class validationRuleDeclaration<declaration
+attributes
+	name : String
+operations
+end
+
+class comparisonValidationRuleDeclaration<validationRuleDeclaration
+attributes
+operations
+end
+
+class comparisonExpression
+attributes
+	o : String
+operations
+end
+
+class comparisonPart
+attributes
+	t : String
+	n : Integer
+	df : String
+	d : String
+operations
+end
+
+class upperFunction
+attributes
+	t : String
+operations
+end
+
+class lowerFunction
+attributes
+	t : String
+operations
+end
+
+class rangeValidationRuleDeclaration<validationRuleDeclaration
+attributes
+operations
+end
+
+class regexValidationRuleDeclaration<validationRuleDeclaration
+attributes
+	exp : String
+operations
+end
+
+class range
+attributes
+	f : String
+	t : String
+operations
+end
+
+class uniquenessValidationRuleDeclaration<validationRuleDeclaration
+attributes
+operations
+end
+
+class errorMessage
+attributes
+	message : String
+operations
+end
+
+class nativeValidationRuleDeclaration<declaration
+attributes
+	type : String
+	message : String
+operations
+end
+
+class functionDeclaration<declaration
+attributes
+	b : String
+	name : String
+operations
+end
+
+class functionArgumentDeclaration
+attributes
+operations
+end
+
+class functionArgumentBody
+attributes
+	name : String
+operations
+end
+
+class functionCall<title
+attributes
+operations
+end
+
+class functionArguments
+attributes
+	a : String
+operations
+end
+
+class functionBody
+attributes
+operations
+end
+
+class statement
+attributes
+operations
+end
+
+class unionRule
+attributes
+operations
+end
+
+class queryRule<statement
+attributes
+operations
+end
+
+class selectFrom<queryRule
+attributes
+operations
+end
+
+class selectClause
+attributes
+operations
+end
+
+class newExpression
+attributes
+	p : String
+operations
+end
+
+class fromClause
+attributes
+operations
+end
+
+class fromJoin
+attributes
+operations
+end
+
+class withClause
+attributes
+operations
+end
+
+class fromRange
+attributes
+	alias : String
+	p : String
+operations
+end
+
+class fromClassOrOuterQueryPath<fromJoin,fromRange
+attributes
+	propertyFetch : String
+operations
+end
+
+class inCollectionElementsDeclaration<fromRange
+attributes
+operations
+end
+
+class asAlias
+attributes
+	alias : String
+operations
+end
+
+class groupByClause
+attributes
+operations
+end
+
+class orderByClause
+attributes
+operations
+end
+
+class orderElement
+attributes
+operations
+end
+
+class havingClause
+attributes
+operations
+end
+
+class whereClause
+attributes
+operations
+end
+
+class selectedPropertiesList
+attributes
+operations
+end
+
+class aliasedExpression
+attributes
+operations
+end
+
+class expression<orderElement,aliasedExpression,expressionOrVector
+attributes
+	id : String
+operations
+end
+
+class logicalOrExpression<expression
+attributes
+operations
+end
+
+class logicalAndExpression
+attributes
+operations
+end
+
+class negatedExpression
+attributes
+operations
+end
+
+class equalityExpression<negatedExpression
+attributes
+operations
+end
+
+class relationalExpression
+attributes
+operations
+end
+
+class likeEscape
+attributes
+operations
+end
+
+class betweenList
+attributes
+operations
+end
+
+class concatenation<relationalExpression
+attributes
+	p : String
+operations
+end
+
+class additiveExpression<concatenation
+attributes
+operations
+end
+
+class multiplyExpression
+attributes
+operations
+end
+
+class unaryExpression
+attributes
+operations
+end
+
+class caseExpression<unaryExpression
+attributes
+operations
+end
+
+class whenClause
+attributes
+operations
+end
+
+class altWhenClause
+attributes
+operations
+end
+
+class elseClause
+attributes
+operations
+end
+
+class quantifiedExpression<unaryExpression
+attributes
+operations
+end
+
+class atom<unaryExpression
+attributes
+operations
+end
+
+class primaryExpression<atom
+attributes
+operations
+end
+
+class expressionOrVector<primaryExpression
+attributes
+operations
+end
+
+class vectorExpr
+attributes
+operations
+end
+
+class identPrimary
+attributes
+operations
+end
+
+class aggregate<identPrimary
+attributes
+operations
+end
+
+class compoundExpr
+attributes
+operations
+end
+
+class exprList
+attributes
+	id : String
+operations
+end
+
+class selectCause<selectClause
+attributes
+operations
+end
+
+composition xxx_dataDefinition_d between
+	dataDefinition[0..1] role xxx_dataDefinition_d_src
+	declaration[*] role d
+end
+
+composition xxx_fieldDeclaration_modifiers between
+	fieldDeclaration[*] role xxx_fieldDeclaration_modifiers_src
+	modifiers[0..1] role modifiers
+end
+
+composition xxx_fieldDeclaration_typedef between
+	fieldDeclaration[*] role xxx_fieldDeclaration_typedef_src
+	fieldType[0..1] role typedef
+end
+
+association xxx_fieldType_typeDec between
+	fieldType[*] role xxx_fieldType_typeDec_src
+	typeDeclaration[0..1] role typeDec
+end
+
+composition xxx_intEnum_values between
+	intEnum[0..1] role xxx_intEnum_values_src
+	enumValue[*] role values
+end
+
+association xxx_subFieldDeclaration_subFieldOf between
+	subFieldDeclaration[*] role xxx_subFieldDeclaration_subFieldOf_src
+	fieldDeclaration[0..1] role subFieldOf
+end
+
+composition xxx_subFieldDeclaration_d between
+	subFieldDeclaration[*] role xxx_subFieldDeclaration_d_src
+	declaration[0..1] role d
+end
+
+composition xxx_titleDeclaration_title between
+	titleDeclaration[*] role xxx_titleDeclaration_title_src
+	title[0..1] role title
+end
+
+composition xxx_typeDeclaration_fieldType between
+	typeDeclaration[*] role xxx_typeDeclaration_fieldType_src
+	fieldType[0..1] role fieldType
+end
+
+composition xxx_validationRuleDeclaration_errorMessage between
+	validationRuleDeclaration[*] role xxx_validationRuleDeclaration_errorMessage_src
+	errorMessage[0..1] role errorMessage
+end
+
+composition xxx_validationRuleDeclaration_args between
+	validationRuleDeclaration[*] role xxx_validationRuleDeclaration_args_src
+	functionArguments[0..1] role args
+end
+
+composition xxx_comparisonValidationRuleDeclaration_comparisonExp between
+	comparisonValidationRuleDeclaration[*] role xxx_comparisonValidationRuleDeclaration_comparisonExp_src
+	comparisonExpression[0..1] role comparisonExp
+end
+
+composition xxx_comparisonExpression_lhs between
+	comparisonExpression[*] role xxx_comparisonExpression_lhs_src
+	comparisonPart[0..1] role lhs
+end
+
+composition xxx_comparisonExpression_rhs between
+	comparisonExpression[*] role xxx_comparisonExpression_rhs_src
+	comparisonPart[0..1] role rhs
+end
+
+composition xxx_comparisonPart_u between
+	comparisonPart[*] role xxx_comparisonPart_u_src
+	upperFunction[0..1] role u
+end
+
+composition xxx_comparisonPart_l between
+	comparisonPart[*] role xxx_comparisonPart_l_src
+	lowerFunction[0..1] role l
+end
+
+composition xxx_rangeValidationRuleDeclaration_range between
+	rangeValidationRuleDeclaration[*] role xxx_rangeValidationRuleDeclaration_range_src
+	range[0..1] role range
+end
+
+association xxx_nativeValidationRuleDeclaration_field between
+	nativeValidationRuleDeclaration[*] role xxx_nativeValidationRuleDeclaration_field_src
+	fieldDeclaration[0..1] role field
+end
+
+composition xxx_functionDeclaration_arg between
+	functionDeclaration[*] role xxx_functionDeclaration_arg_src
+	functionArgumentDeclaration[0..1] role arg
+end
+
+composition xxx_functionDeclaration_body between
+	functionDeclaration[*] role xxx_functionDeclaration_body_src
+	functionBody[0..1] role body
+end
+
+composition xxx_functionDeclaration_m between
+	functionDeclaration[*] role xxx_functionDeclaration_m_src
+	errorMessage[0..1] role m
+end
+
+composition xxx_functionArgumentDeclaration_f between
+	functionArgumentDeclaration[0..1] role xxx_functionArgumentDeclaration_f_src
+	functionArgumentBody[*] role f
+end
+
+composition xxx_functionCall_f between
+	functionCall[*] role xxx_functionCall_f_src
+	functionArguments[0..1] role f
+end
+
+composition xxx_functionBody_s between
+	functionBody[*] role xxx_functionBody_s_src
+	statement[0..1] role s
+end
+
+composition xxx_functionBody_e between
+	functionBody[*] role xxx_functionBody_e_src
+	expression[0..1] role e
+end
+
+composition xxx_unionRule_q between
+	unionRule[0..1] role xxx_unionRule_q_src
+	queryRule[*] role q
+end
+
+composition xxx_selectFrom_where between
+	selectFrom[*] role xxx_selectFrom_where_src
+	whereClause[0..1] role where
+end
+
+composition xxx_selectFrom_groupBy between
+	selectFrom[*] role xxx_selectFrom_groupBy_src
+	groupByClause[0..1] role groupBy
+end
+
+composition xxx_selectFrom_orderBy between
+	selectFrom[*] role xxx_selectFrom_orderBy_src
+	orderByClause[0..1] role orderBy
+end
+
+composition xxx_selectFrom_s between
+	selectFrom[*] role xxx_selectFrom_s_src
+	selectClause[0..1] role s
+end
+
+composition xxx_selectFrom_from_ between
+	selectFrom[*] role xxx_selectFrom_from__src
+	fromClause[0..1] role from_
+end
+
+composition xxx_newExpression_s between
+	newExpression[*] role xxx_newExpression_s_src
+	selectedPropertiesList[0..1] role s
+end
+
+composition xxx_fromClause_fromRange between
+	fromClause[0..1] role xxx_fromClause_fromRange_src
+	fromRange[*] role fromRange
+end
+
+composition xxx_fromClause_fromJoin between
+	fromClause[0..1] role xxx_fromClause_fromJoin_src
+	fromJoin[*] role fromJoin
+end
+
+composition xxx_withClause_e between
+	withClause[*] role xxx_withClause_e_src
+	expression[0..1] role e
+end
+
+composition xxx_fromClassOrOuterQueryPath_w between
+	fromClassOrOuterQueryPath[*] role xxx_fromClassOrOuterQueryPath_w_src
+	withClause[0..1] role w
+end
+
+composition xxx_fromClassOrOuterQueryPath_asAlias between
+	fromClassOrOuterQueryPath[*] role xxx_fromClassOrOuterQueryPath_asAlias_src
+	asAlias[0..1] role asAlias
+end
+
+composition xxx_groupByClause_e between
+	groupByClause[0..1] role xxx_groupByClause_e_src
+	expression[*] role e
+end
+
+composition xxx_groupByClause_h between
+	groupByClause[*] role xxx_groupByClause_h_src
+	havingClause[0..1] role h
+end
+
+composition xxx_orderByClause_o between
+	orderByClause[0..1] role xxx_orderByClause_o_src
+	orderElement[*] role o
+end
+
+composition xxx_havingClause_e between
+	havingClause[*] role xxx_havingClause_e_src
+	expression[0..1] role e
+end
+
+composition xxx_whereClause_e between
+	whereClause[*] role xxx_whereClause_e_src
+	expression[0..1] role e
+end
+
+composition xxx_selectedPropertiesList_a between
+	selectedPropertiesList[0..1] role xxx_selectedPropertiesList_a_src
+	aliasedExpression[*] role a
+end
+
+composition xxx_expression_v between
+	expression[*] role xxx_expression_v_src
+	vectorExpr[0..1] role v
+end
+
+composition xxx_logicalOrExpression_l between
+	logicalOrExpression[0..1] role xxx_logicalOrExpression_l_src
+	logicalAndExpression[*] role l
+end
+
+composition xxx_logicalAndExpression_n between
+	logicalAndExpression[0..1] role xxx_logicalAndExpression_n_src
+	negatedExpression[*] role n
+end
+
+composition xxx_negatedExpression_n between
+	negatedExpression[*] role xxx_negatedExpression_n_src
+	negatedExpression[0..1] role n
+end
+
+composition xxx_equalityExpression_r between
+	equalityExpression[0..1] role xxx_equalityExpression_r_src
+	relationalExpression[*] role r
+end
+
+composition xxx_likeEscape_c between
+	likeEscape[*] role xxx_likeEscape_c_src
+	concatenation[0..1] role c
+end
+
+composition xxx_betweenList_c between
+	betweenList[0..1] role xxx_betweenList_c_src
+	concatenation[*] role c
+end
+
+composition xxx_concatenation_a between
+	concatenation[0..1] role xxx_concatenation_a_src
+	additiveExpression[*] role a
+end
+
+composition xxx_concatenation_i between
+	concatenation[*] role xxx_concatenation_i_src
+	compoundExpr[0..1] role i
+end
+
+composition xxx_concatenation_b between
+	concatenation[*] role xxx_concatenation_b_src
+	betweenList[0..1] role b
+end
+
+composition xxx_concatenation_c between
+	concatenation[*] role xxx_concatenation_c_src
+	concatenation[0..1] role c
+end
+
+composition xxx_concatenation_l between
+	concatenation[*] role xxx_concatenation_l_src
+	likeEscape[0..1] role l
+end
+
+composition xxx_additiveExpression_m between
+	additiveExpression[0..1] role xxx_additiveExpression_m_src
+	multiplyExpression[*] role m
+end
+
+composition xxx_multiplyExpression_u between
+	multiplyExpression[0..1] role xxx_multiplyExpression_u_src
+	unaryExpression[*] role u
+end
+
+composition xxx_unaryExpression_u between
+	unaryExpression[*] role xxx_unaryExpression_u_src
+	unaryExpression[0..1] role u
+end
+
+composition xxx_caseExpression_w between
+	caseExpression[0..1] role xxx_caseExpression_w_src
+	whenClause[*] role w
+end
+
+composition xxx_caseExpression_e between
+	caseExpression[*] role xxx_caseExpression_e_src
+	elseClause[0..1] role e
+end
+
+composition xxx_caseExpression_a between
+	caseExpression[0..1] role xxx_caseExpression_a_src
+	altWhenClause[*] role a
+end
+
+composition xxx_whenClause_whenExpr between
+	whenClause[*] role xxx_whenClause_whenExpr_src
+	expression[0..1] role whenExpr
+end
+
+composition xxx_whenClause_thenExpr between
+	whenClause[*] role xxx_whenClause_thenExpr_src
+	unaryExpression[0..1] role thenExpr
+end
+
+composition xxx_altWhenClause_w between
+	altWhenClause[*] role xxx_altWhenClause_w_src
+	unaryExpression[0..1] role w
+end
+
+composition xxx_altWhenClause_t between
+	altWhenClause[*] role xxx_altWhenClause_t_src
+	unaryExpression[0..1] role t
+end
+
+composition xxx_elseClause_u between
+	elseClause[*] role xxx_elseClause_u_src
+	unaryExpression[0..1] role u
+end
+
+composition xxx_quantifiedExpression_s between
+	quantifiedExpression[*] role xxx_quantifiedExpression_s_src
+	unionRule[0..1] role s
+end
+
+composition xxx_primaryExpression_e between
+	primaryExpression[0..1] role xxx_primaryExpression_e_src
+	exprList[*] role e
+end
+
+composition xxx_primaryExpression_exp between
+	primaryExpression[0..1] role xxx_primaryExpression_exp_src
+	expression[*] role exp
+end
+
+composition xxx_primaryExpression_ident between
+	primaryExpression[*] role xxx_primaryExpression_ident_src
+	identPrimary[0..1] role ident
+end
+
+composition xxx_primaryExpression_s between
+	primaryExpression[*] role xxx_primaryExpression_s_src
+	unionRule[0..1] role s
+end
+
+composition xxx_vectorExpr_e between
+	vectorExpr[0..1] role xxx_vectorExpr_e_src
+	expression[*] role e
+end
+
+composition xxx_identPrimary_e between
+	identPrimary[*] role xxx_identPrimary_e_src
+	exprList[0..1] role e
+end
+
+composition xxx_aggregate_a between
+	aggregate[*] role xxx_aggregate_a_src
+	additiveExpression[0..1] role a
+end
+
+composition xxx_compoundExpr_e between
+	compoundExpr[0..1] role xxx_compoundExpr_e_src
+	expression[*] role e
+end
+
+composition xxx_compoundExpr_s between
+	compoundExpr[*] role xxx_compoundExpr_s_src
+	unionRule[0..1] role s
+end
+
+composition xxx_exprList_e between
+	exprList[0..1] role xxx_exprList_e_src
+	expression[*] role e
+end
+
+composition xxx_selectCause_s between
+	selectCause[*] role xxx_selectCause_s_src
+	selectedPropertiesList[0..1] role s
+end
+
+composition xxx_selectCause_n between
+	selectCause[*] role xxx_selectCause_n_src
+	newExpression[0..1] role n
+end
+

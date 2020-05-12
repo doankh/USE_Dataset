@@ -1,0 +1,164 @@
+model House2
+class House<Container,Element
+attributes
+operations
+end
+
+class Room<Container
+attributes
+operations
+end
+
+abstract class Container<NamedElement
+attributes
+operations
+end
+
+abstract class Element<NamedElement
+attributes
+operations
+end
+
+abstract class Sensor<NamedElement
+attributes
+operations
+end
+
+abstract class Actor<NamedElement
+attributes
+operations
+end
+
+class TemperatureSensor<Sensor
+attributes
+	temp : Real
+operations
+end
+
+class TwilightSwitch<Sensor
+attributes
+	active : Boolean
+operations
+end
+
+class Boiler<Actor
+attributes
+	isOn : Boolean
+operations
+end
+
+class RollerBlind<Actor
+attributes
+	isUp : Boolean
+operations
+end
+
+class ControlRule
+attributes
+operations
+end
+
+abstract class Condition
+attributes
+operations
+end
+
+class LessThanCondition<Condition
+attributes
+	threshold : Real
+operations
+end
+
+class GreaterThanCondition<Condition
+attributes
+	threshold : Real
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class Lamp<Actor
+attributes
+	isOn : Boolean
+operations
+end
+
+class EqualCondition<Condition
+attributes
+	boolcond : Boolean
+	valuecond : Real
+operations
+end
+
+class RainSensor<Sensor
+attributes
+	active : Boolean
+operations
+end
+
+class BooleanAction<Action
+attributes
+	switchTo : Boolean
+operations
+end
+
+class ValueAction<Action
+attributes
+	switchToValue : Real
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+composition xxx_House_rooms between
+	House[0..1] role xxx_House_rooms_src
+	Room[*] role rooms
+end
+
+composition xxx_House_controlRules between
+	House[0..1] role xxx_House_controlRules_src
+	ControlRule[*] role controlRules
+end
+
+composition xxx_Container_elements between
+	Container[0..1] role xxx_Container_elements_src
+	Element[*] role elements
+end
+
+association xxx_Sensor_isLocatedIn between
+	Sensor[*] role xxx_Sensor_isLocatedIn_src
+	Container[0..1] role isLocatedIn
+end
+
+association xxx_Actor_isLocatedIn between
+	Actor[*] role xxx_Actor_isLocatedIn_src
+	Container[0..1] role isLocatedIn
+end
+
+composition xxx_ControlRule_condition between
+	ControlRule[*] role xxx_ControlRule_condition_src
+	Condition[0..1] role condition
+end
+
+composition xxx_ControlRule_action between
+	ControlRule[*] role xxx_ControlRule_action_src
+	Action[0..1] role action
+end
+
+composition xxx_Condition_sensor between
+	Condition[*] role xxx_Condition_sensor_src
+	Sensor[0..1] role sensor
+end
+
+composition xxx_Action_actor between
+	Action[*] role xxx_Action_actor_src
+	Actor[0..1] role actor
+end
+

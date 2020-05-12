@@ -1,0 +1,185 @@
+model Prom
+class ActivitiesType
+attributes
+operations
+end
+
+class ActivityType
+attributes
+	value : String
+	id : String
+	name : String
+operations
+end
+
+class ConnectorGraphicsInfosType
+attributes
+operations
+end
+
+class ConnectorGraphicsInfoType
+attributes
+	value : String
+	borderColor : String
+	toolId : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class PackageHeaderType
+attributes
+	xPDLVersion : String
+	vendor : String
+	created : String
+	description : String
+	documentation : String
+operations
+end
+
+class PackageType
+attributes
+	pools : String
+	id : String
+	name : String
+operations
+end
+
+class ParticipantType
+attributes
+	id : String
+operations
+end
+
+class ParticipantTypeType
+attributes
+	value : String
+	type : String
+operations
+end
+
+class ProcessHeaderType
+attributes
+	created : String
+	priority : String
+operations
+end
+
+class RedefinableHeaderType
+attributes
+	author : String
+	version : String
+operations
+end
+
+class TransitionsType
+attributes
+operations
+end
+
+class TransitionType
+attributes
+	from_ : String
+	id : String
+	to : String
+operations
+end
+
+class WorkflowProcessesType
+attributes
+operations
+end
+
+class WorkflowProcessType
+attributes
+	activitySets : String
+	accessLevel : String
+	id : String
+	name : String
+operations
+end
+
+class XpdlParticipantsType
+attributes
+operations
+end
+
+composition xxx_ActivitiesType_activity between
+	ActivitiesType[0..1] role xxx_ActivitiesType_activity_src
+	ActivityType[1..*] role activity
+end
+
+composition xxx_ConnectorGraphicsInfosType_connectorGraphicsInfo between
+	ConnectorGraphicsInfosType[*] role xxx_ConnectorGraphicsInfosType_connectorGraphicsInfo_src
+	ConnectorGraphicsInfoType[0..1] role connectorGraphicsInfo
+end
+
+composition xxx_DocumentRoot_package between
+	DocumentRoot[*] role xxx_DocumentRoot_package_src
+	PackageType[*] role package
+end
+
+composition xxx_PackageType_packageHeader between
+	PackageType[*] role xxx_PackageType_packageHeader_src
+	PackageHeaderType[0..1] role packageHeader
+end
+
+composition xxx_PackageType_workflowProcesses between
+	PackageType[*] role xxx_PackageType_workflowProcesses_src
+	WorkflowProcessesType[0..1] role workflowProcesses
+end
+
+composition xxx_ParticipantType_participantType between
+	ParticipantType[*] role xxx_ParticipantType_participantType_src
+	ParticipantTypeType[0..1] role participantType
+end
+
+composition xxx_TransitionsType_transition between
+	TransitionsType[0..1] role xxx_TransitionsType_transition_src
+	TransitionType[1..*] role transition
+end
+
+composition xxx_TransitionType_connectorGraphicsInfos between
+	TransitionType[*] role xxx_TransitionType_connectorGraphicsInfos_src
+	ConnectorGraphicsInfosType[0..1] role connectorGraphicsInfos
+end
+
+composition xxx_WorkflowProcessesType_workflowProcess between
+	WorkflowProcessesType[*] role xxx_WorkflowProcessesType_workflowProcess_src
+	WorkflowProcessType[0..1] role workflowProcess
+end
+
+composition xxx_WorkflowProcessType_processHeader between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_processHeader_src
+	ProcessHeaderType[0..1] role processHeader
+end
+
+composition xxx_WorkflowProcessType_redefinableHeader between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_redefinableHeader_src
+	RedefinableHeaderType[0..1] role redefinableHeader
+end
+
+composition xxx_WorkflowProcessType_xpdlParticipants between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_xpdlParticipants_src
+	XpdlParticipantsType[0..1] role xpdlParticipants
+end
+
+composition xxx_WorkflowProcessType_activities between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_activities_src
+	ActivitiesType[0..1] role activities
+end
+
+composition xxx_WorkflowProcessType_transitions_ between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_transitions__src
+	TransitionsType[0..1] role transitions_
+end
+
+composition xxx_XpdlParticipantsType_participant between
+	XpdlParticipantsType[*] role xxx_XpdlParticipantsType_participant_src
+	ParticipantType[0..1] role participant
+end
+

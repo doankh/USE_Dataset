@@ -1,0 +1,71 @@
+model modularization
+class Rule<ModuleElement
+attributes
+	bindingTypes : String
+	inPattElTypes : String
+	bindingNavigations : String
+operations
+end
+
+class Transformation<NamedElement
+attributes
+operations
+end
+
+class Module<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class ModuleElement<NamedElement
+attributes
+operations
+end
+
+class Helper<ModuleElement
+attributes
+	helperDepNames : String
+operations
+end
+
+association xxx_Rule_ruleDependencies between
+	Rule[0..1] role xxx_Rule_ruleDependencies_src
+	Rule[*] role ruleDependencies
+end
+
+association xxx_Rule_inheritsFrom between
+	Rule[0..1] role xxx_Rule_inheritsFrom_src
+	Rule[*] role inheritsFrom
+end
+
+association xxx_Rule_helperDependencies between
+	Rule[0..1] role xxx_Rule_helperDependencies_src
+	Helper[*] role helperDependencies
+end
+
+composition xxx_Transformation_modules between
+	Transformation[0..1] role xxx_Transformation_modules_src
+	Module[1..*] role modules
+end
+
+composition xxx_Module_rules between
+	Module[0..1] role xxx_Module_rules_src
+	Rule[*] role rules
+end
+
+composition xxx_Module_helpers between
+	Module[0..1] role xxx_Module_helpers_src
+	Helper[*] role helpers
+end
+
+association xxx_Helper_helperDependencies between
+	Helper[0..1] role xxx_Helper_helperDependencies_src
+	Helper[*] role helperDependencies
+end
+

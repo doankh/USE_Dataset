@@ -1,0 +1,148 @@
+model jqa
+enum AbstractionType{
+default
+}
+
+class Ruleset
+attributes
+	name : String
+operations
+end
+
+class Rule
+attributes
+	name : String
+	message : String
+	priority : String
+operations
+end
+
+abstract class Predicate
+attributes
+	name : String
+operations
+end
+
+class ContextProvidedPredicate<Predicate
+attributes
+	predicateName : String
+operations
+end
+
+class AbstractionPredicate<CheckPredicate
+attributes
+	abstractionType : AbstractionType
+operations
+end
+
+class AllocationPredicate<CheckPredicate
+attributes
+operations
+end
+
+class NamingPredicate<CheckPredicate
+attributes
+	namePattern : String
+operations
+end
+
+class ThrowingPredicate<CheckPredicate
+attributes
+operations
+end
+
+class TypingPredicate<CheckPredicate
+attributes
+operations
+end
+
+class UsagePredicate<CheckPredicate
+attributes
+operations
+end
+
+abstract class VarArgsLogicPredicate<Predicate
+attributes
+operations
+end
+
+class AndPredicate<VarArgsLogicPredicate
+attributes
+operations
+end
+
+class FalsePredicate<Predicate
+attributes
+operations
+end
+
+class NotPredicate<Predicate
+attributes
+operations
+end
+
+class OrPredicate<VarArgsLogicPredicate
+attributes
+operations
+end
+
+class TruePredicate<Predicate
+attributes
+operations
+end
+
+class XORPredicate<VarArgsLogicPredicate
+attributes
+operations
+end
+
+abstract class CheckPredicate<Predicate
+attributes
+operations
+end
+
+composition xxx_Ruleset_rule between
+	Ruleset[0..1] role xxx_Ruleset_rule_src
+	Rule[1..*] role rule
+end
+
+composition xxx_Rule_filterPredicate between
+	Rule[*] role xxx_Rule_filterPredicate_src
+	Predicate[1] role filterPredicate
+end
+
+composition xxx_Rule_checkPredicate between
+	Rule[*] role xxx_Rule_checkPredicate_src
+	CheckPredicate[1] role checkPredicate
+end
+
+composition xxx_AllocationPredicate_predicate between
+	AllocationPredicate[*] role xxx_AllocationPredicate_predicate_src
+	Predicate[1] role predicate
+end
+
+composition xxx_ThrowingPredicate_predicate between
+	ThrowingPredicate[*] role xxx_ThrowingPredicate_predicate_src
+	Predicate[1] role predicate
+end
+
+composition xxx_TypingPredicate_predicate between
+	TypingPredicate[*] role xxx_TypingPredicate_predicate_src
+	Predicate[1] role predicate
+end
+
+composition xxx_UsagePredicate_predicate between
+	UsagePredicate[*] role xxx_UsagePredicate_predicate_src
+	Predicate[1] role predicate
+end
+
+composition xxx_VarArgsLogicPredicate_predicate between
+	VarArgsLogicPredicate[0..1] role xxx_VarArgsLogicPredicate_predicate_src
+	Predicate[1..*] role predicate
+end
+
+composition xxx_NotPredicate_predicate between
+	NotPredicate[*] role xxx_NotPredicate_predicate_src
+	Predicate[1] role predicate
+end
+

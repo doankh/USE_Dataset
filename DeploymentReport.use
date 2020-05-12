@@ -1,0 +1,466 @@
+model DeploymentReport
+enum ProcessorArchitectures{
+	x86,
+	ia64,
+	amd64,
+	wow64,
+	msil,
+	shx,
+	arm,
+	data
+}
+
+enum Platform{
+	x86,
+	ia64,
+	amd64,
+	wow64,
+	msil,
+	shx,
+	arm,
+	data,
+	neutral
+}
+
+enum SettingState{
+	Set_,
+	NotSet,
+	Error
+}
+
+class DeploymentReport
+attributes
+operations
+end
+
+class DeploymentImport
+attributes
+operations
+end
+
+class ImportNamespaceIdentity<NamespaceIdentity
+attributes
+operations
+end
+
+class NamespaceIdentity
+attributes
+	platform : Platform
+operations
+end
+
+class Applications
+attributes
+operations
+end
+
+class LogicalServers
+attributes
+operations
+end
+
+class OuterSystem
+attributes
+	name : String
+operations
+end
+
+class Binding
+attributes
+operations
+end
+
+class Zone
+attributes
+	name : String
+operations
+end
+
+class ReportObject
+attributes
+	name : String
+	definition : String
+	extends : String
+	hostedOn : String
+operations
+end
+
+class SequenceReport
+attributes
+operations
+end
+
+class BoundLogicalServer
+attributes
+	name : String
+	definition : String
+	extends : String
+operations
+end
+
+class LogicalServer<ReportObject
+attributes
+operations
+end
+
+class Application<ReportObject
+attributes
+operations
+end
+
+class ReportSystem<ReportObject
+attributes
+operations
+end
+
+class ReportResource<ReportObject
+attributes
+operations
+end
+
+class ReportEndpoint<ReportObject
+attributes
+operations
+end
+
+class Setting
+attributes
+operations
+end
+
+class SettingFacet
+attributes
+operations
+end
+
+class SettingInstanceValue
+attributes
+	contents : String
+	isNull : Boolean
+operations
+end
+
+class SettingAttributes
+attributes
+	name : String
+	definition : String
+	state : SettingState
+	fixed : Boolean
+	list : Boolean
+	isNull : Boolean
+	secure : Boolean
+	failedToSerialize : Boolean
+operations
+end
+
+class SettingValue
+attributes
+	contents : String
+	isNull : Boolean
+	Secure : Boolean
+operations
+end
+
+class ErrorCollection
+attributes
+operations
+end
+
+class DocumentError
+attributes
+	Code : Integer
+	Level : Integer
+	File : String
+operations
+end
+
+class DocumentResolutionError<DocumentError
+attributes
+	Statement : String
+operations
+end
+
+class DocumentConstraintError<DocumentError
+attributes
+	constraintMember : String
+	constraintDefinition : String
+	targetInstancePath : String
+	ownerInstancePath : String
+	constraintErrorCode : String
+	constraintErrorMessage : String
+operations
+end
+
+class FailedInput
+attributes
+	contents : String
+operations
+end
+
+class Description
+attributes
+	contents : String
+operations
+end
+
+class Guid<Element
+attributes
+operations
+end
+
+class SimpleName<Element
+attributes
+operations
+end
+
+class Path<Element
+attributes
+operations
+end
+
+class FourPartVersionType<Element
+attributes
+operations
+end
+
+class PublicKeyType<Element
+attributes
+operations
+end
+
+class PublicKeyTokenType<Element
+attributes
+operations
+end
+
+class Culture<Element
+attributes
+operations
+end
+
+class CultureNeutral<Element
+attributes
+operations
+end
+
+class Element
+attributes
+	value : String
+operations
+end
+
+association xxx_DeploymentReport_import between
+	DeploymentReport[0..1] role xxx_DeploymentReport_import_src
+	DeploymentImport[*] role import
+end
+
+association xxx_DeploymentReport_applications between
+	DeploymentReport[*] role xxx_DeploymentReport_applications_src
+	Applications[0..1] role applications
+end
+
+association xxx_DeploymentReport_binding between
+	DeploymentReport[*] role xxx_DeploymentReport_binding_src
+	Binding[0..1] role binding
+end
+
+association xxx_DeploymentReport_logicalServers between
+	DeploymentReport[*] role xxx_DeploymentReport_logicalServers_src
+	LogicalServers[0..1] role logicalServers
+end
+
+association xxx_DeploymentReport_errors between
+	DeploymentReport[*] role xxx_DeploymentReport_errors_src
+	ErrorCollection[0..1] role errors
+end
+
+association xxx_DeploymentImport_alias between
+	DeploymentImport[*] role xxx_DeploymentImport_alias_src
+	SimpleName[1] role alias
+end
+
+composition xxx_DeploymentImport_identity between
+	DeploymentImport[*] role xxx_DeploymentImport_identity_src
+	ImportNamespaceIdentity[1] role identity
+end
+
+association xxx_ImportNamespaceIdentity_import between
+	ImportNamespaceIdentity[*] role xxx_ImportNamespaceIdentity_import_src
+	DeploymentImport[1] role import
+end
+
+association xxx_NamespaceIdentity_name between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_name_src
+	Path[1] role name
+end
+
+association xxx_NamespaceIdentity_version between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_version_src
+	FourPartVersionType[0..1] role version
+end
+
+association xxx_NamespaceIdentity_publicKey between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_publicKey_src
+	PublicKeyType[0..1] role publicKey
+end
+
+association xxx_NamespaceIdentity_publicKeyToken between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_publicKeyToken_src
+	PublicKeyTokenType[0..1] role publicKeyToken
+end
+
+association xxx_NamespaceIdentity_culture between
+	NamespaceIdentity[*] role xxx_NamespaceIdentity_culture_src
+	CultureNeutral[0..1] role culture
+end
+
+association xxx_Applications_system between
+	Applications[0..1] role xxx_Applications_system_src
+	OuterSystem[*] role system
+end
+
+association xxx_Applications_application between
+	Applications[0..1] role xxx_Applications_application_src
+	Application[*] role application
+end
+
+association xxx_LogicalServers_zone between
+	LogicalServers[0..1] role xxx_LogicalServers_zone_src
+	Zone[*] role zone
+end
+
+association xxx_LogicalServers_logicalServer between
+	LogicalServers[0..1] role xxx_LogicalServers_logicalServer_src
+	LogicalServer[*] role logicalServer
+end
+
+association xxx_OuterSystem_system between
+	OuterSystem[0..1] role xxx_OuterSystem_system_src
+	OuterSystem[*] role system
+end
+
+association xxx_OuterSystem_application between
+	OuterSystem[0..1] role xxx_OuterSystem_application_src
+	Application[*] role application
+end
+
+association xxx_Binding_zone between
+	Binding[0..1] role xxx_Binding_zone_src
+	Zone[*] role zone
+end
+
+association xxx_Binding_boundLogicalServer between
+	Binding[0..1] role xxx_Binding_boundLogicalServer_src
+	BoundLogicalServer[*] role boundLogicalServer
+end
+
+association xxx_Zone_zone between
+	Zone[0..1] role xxx_Zone_zone_src
+	Zone[*] role zone
+end
+
+association xxx_Zone_boundLogicalServer between
+	Zone[0..1] role xxx_Zone_boundLogicalServer_src
+	BoundLogicalServer[*] role boundLogicalServer
+end
+
+association xxx_Zone_logicalServer between
+	Zone[0..1] role xxx_Zone_logicalServer_src
+	LogicalServer[*] role logicalServer
+end
+
+composition xxx_ReportObject_sequence between
+	ReportObject[0..1] role xxx_ReportObject_sequence_src
+	SequenceReport[*] role sequence
+end
+
+association xxx_ReportObject_instanceId between
+	ReportObject[*] role xxx_ReportObject_instanceId_src
+	Guid[1] role instanceId
+end
+
+association xxx_SequenceReport_report between
+	SequenceReport[*] role xxx_SequenceReport_report_src
+	ReportObject[1] role report
+end
+
+association xxx_SequenceReport_setting between
+	SequenceReport[*] role xxx_SequenceReport_setting_src
+	Setting[1] role setting
+end
+
+association xxx_SequenceReport_system between
+	SequenceReport[0..1] role xxx_SequenceReport_system_src
+	ReportSystem[*] role system
+end
+
+association xxx_SequenceReport_resource between
+	SequenceReport[0..1] role xxx_SequenceReport_resource_src
+	ReportResource[*] role resource
+end
+
+association xxx_SequenceReport_endpoint between
+	SequenceReport[0..1] role xxx_SequenceReport_endpoint_src
+	ReportEndpoint[*] role endpoint
+end
+
+association xxx_BoundLogicalServer_setting between
+	BoundLogicalServer[0..1] role xxx_BoundLogicalServer_setting_src
+	Setting[*] role setting
+end
+
+association xxx_BoundLogicalServer_application between
+	BoundLogicalServer[0..1] role xxx_BoundLogicalServer_application_src
+	Application[*] role application
+end
+
+association xxx_Setting_value between
+	Setting[0..1] role xxx_Setting_value_src
+	SettingInstanceValue[*] role value
+end
+
+association xxx_Setting_facet between
+	Setting[0..1] role xxx_Setting_facet_src
+	SettingFacet[*] role facet
+end
+
+association xxx_Setting_settingAttributes between
+	Setting[*] role xxx_Setting_settingAttributes_src
+	SettingAttributes[1] role settingAttributes
+end
+
+association xxx_SettingFacet_value between
+	SettingFacet[*] role xxx_SettingFacet_value_src
+	SettingInstanceValue[0..1] role value
+end
+
+association xxx_SettingFacet_settingAttributes between
+	SettingFacet[*] role xxx_SettingFacet_settingAttributes_src
+	SettingAttributes[1] role settingAttributes
+end
+
+association xxx_ErrorCollection_documentError between
+	ErrorCollection[0..1] role xxx_ErrorCollection_documentError_src
+	DocumentError[*] role documentError
+end
+
+association xxx_ErrorCollection_documentResolutionError between
+	ErrorCollection[0..1] role xxx_ErrorCollection_documentResolutionError_src
+	DocumentResolutionError[*] role documentResolutionError
+end
+
+association xxx_ErrorCollection_documentConstraintError between
+	ErrorCollection[0..1] role xxx_ErrorCollection_documentConstraintError_src
+	DocumentConstraintError[*] role documentConstraintError
+end
+
+association xxx_DocumentError_description between
+	DocumentError[0..1] role xxx_DocumentError_description_src
+	Description[*] role description
+end
+
+association xxx_DocumentConstraintError_failedInput between
+	DocumentConstraintError[0..1] role xxx_DocumentConstraintError_failedInput_src
+	FailedInput[*] role failedInput
+end
+

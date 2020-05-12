@@ -1,0 +1,111 @@
+model featuremodels
+enum ConstraintType{
+default
+}
+
+class Feature
+attributes
+	name : String
+	root : Boolean
+	required : Boolean
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+class ContainmentAssociation
+attributes
+	upperBound : Integer
+	lowerBound : Integer
+operations
+end
+
+class FeatureModel
+attributes
+	name : String
+operations
+end
+
+class Constraint
+attributes
+	name : String
+	type : ConstraintType
+	rule : String
+operations
+end
+
+class Instance
+attributes
+	id : String
+	descritpion : String
+operations
+end
+
+abstract class Attribute
+attributes
+	name : String
+operations
+end
+
+class SimpleAttribute<Attribute
+attributes
+	type : String
+	value : String
+operations
+end
+
+composition xxx_Feature_subFeatures between
+	Feature[0..1] role xxx_Feature_subFeatures_src
+	Feature[*] role subFeatures
+end
+
+association xxx_Feature_featureParent between
+	Feature[*] role xxx_Feature_featureParent_src
+	Feature[0..1] role featureParent
+end
+
+composition xxx_Feature_containers between
+	Feature[0..1] role xxx_Feature_containers_src
+	ContainmentAssociation[*] role containers
+end
+
+association xxx_Feature_containerParent between
+	Feature[*] role xxx_Feature_containerParent_src
+	ContainmentAssociation[0..1] role containerParent
+end
+
+composition xxx_Feature_attributes_ between
+	Feature[0..1] role xxx_Feature_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_ContainmentAssociation_subFeatures between
+	ContainmentAssociation[0..1] role xxx_ContainmentAssociation_subFeatures_src
+	Feature[1..*] role subFeatures
+end
+
+association xxx_ContainmentAssociation_parent between
+	ContainmentAssociation[*] role xxx_ContainmentAssociation_parent_src
+	Feature[0..1] role parent
+end
+
+composition xxx_FeatureModel_rootFeature between
+	FeatureModel[*] role xxx_FeatureModel_rootFeature_src
+	Feature[1] role rootFeature
+end
+
+composition xxx_FeatureModel_constraints_ between
+	FeatureModel[0..1] role xxx_FeatureModel_constraints__src
+	Constraint[*] role constraints_
+end
+
+composition xxx_FeatureModel_instances between
+	FeatureModel[0..1] role xxx_FeatureModel_instances_src
+	Instance[*] role instances
+end
+
+association xxx_Instance_selectedFeatures between
+	Instance[0..1] role xxx_Instance_selectedFeatures_src
+	Feature[1..*] role selectedFeatures
+end
+

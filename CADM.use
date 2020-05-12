@@ -1,0 +1,518 @@
+model CADM
+class Element
+attributes
+	name : String
+	content : String
+operations
+end
+
+class Architecture<Element
+attributes
+operations
+end
+
+class Organization<Element
+attributes
+operations
+end
+
+class Guidance<Element
+attributes
+operations
+end
+
+class Document<Element
+attributes
+operations
+end
+
+class Action<Element
+attributes
+operations
+end
+
+class Agreement<Element
+attributes
+operations
+end
+
+class Standard<Agreement
+attributes
+operations
+end
+
+class Task<Element
+attributes
+operations
+end
+
+class InformationAsset<Element
+attributes
+operations
+end
+
+class ConceptualDataModel<InformationAsset
+attributes
+operations
+end
+
+class ActivityModel<InformationAsset
+attributes
+operations
+end
+
+class Node
+attributes
+operations
+end
+
+class Network<Element
+attributes
+operations
+end
+
+class Requirement<Guidance
+attributes
+operations
+end
+
+class InfoExchRequirement<Requirement
+attributes
+operations
+end
+
+class ExchangeNeedLineReq<Requirement
+attributes
+operations
+end
+
+class MissionArea<Element
+attributes
+operations
+end
+
+class System<Element
+attributes
+operations
+end
+
+class Mission<Element
+attributes
+operations
+end
+
+class FunctionalArea<Element
+attributes
+operations
+end
+
+class Capability<Element
+attributes
+operations
+end
+
+class MaterielItem<Element
+attributes
+operations
+end
+
+class EquipmentType<MaterielItem
+attributes
+operations
+end
+
+class SoftwareItem<MaterielItem
+attributes
+operations
+end
+
+class Facility<Element
+attributes
+operations
+end
+
+composition xxx_Architecture_isAssociatedWith between
+	Architecture[0..1] role xxx_Architecture_isAssociatedWith_src
+	Architecture[*] role isAssociatedWith
+end
+
+composition xxx_Architecture_missions between
+	Architecture[0..1] role xxx_Architecture_missions_src
+	Mission[*] role missions
+end
+
+association xxx_Architecture_isFocusOf between
+	Architecture[0..1] role xxx_Architecture_isFocusOf_src
+	FunctionalArea[*] role isFocusOf
+end
+
+association xxx_Architecture_uses between
+	Architecture[0..1] role xxx_Architecture_uses_src
+	Organization[*] role uses
+end
+
+association xxx_Organization_isAssociatedWith between
+	Organization[0..1] role xxx_Organization_isAssociatedWith_src
+	Organization[*] role isAssociatedWith
+end
+
+composition xxx_Organization_softwareItems between
+	Organization[0..1] role xxx_Organization_softwareItems_src
+	SoftwareItem[*] role softwareItems
+end
+
+association xxx_Organization_owns between
+	Organization[0..1] role xxx_Organization_owns_src
+	InformationAsset[*] role owns
+end
+
+association xxx_Organization_includes between
+	Organization[0..1] role xxx_Organization_includes_src
+	Node[*] role includes
+end
+
+association xxx_Organization_performsTo between
+	Organization[0..1] role xxx_Organization_performsTo_src
+	Capability[*] role performsTo
+end
+
+association xxx_Organization_hasRequirement between
+	Organization[0..1] role xxx_Organization_hasRequirement_src
+	Requirement[*] role hasRequirement
+end
+
+association xxx_Organization_hasMissionArea between
+	Organization[0..1] role xxx_Organization_hasMissionArea_src
+	MissionArea[*] role hasMissionArea
+end
+
+association xxx_Organization_associatedSystems between
+	Organization[0..1] role xxx_Organization_associatedSystems_src
+	System[*] role associatedSystems
+end
+
+association xxx_Organization_isProponentOf between
+	Organization[0..1] role xxx_Organization_isProponentOf_src
+	FunctionalArea[*] role isProponentOf
+end
+
+composition xxx_Guidance_isAssocitatedWith between
+	Guidance[0..1] role xxx_Guidance_isAssocitatedWith_src
+	Guidance[*] role isAssocitatedWith
+end
+
+association xxx_Guidance_isImplementedBy between
+	Guidance[0..1] role xxx_Guidance_isImplementedBy_src
+	Architecture[*] role isImplementedBy
+end
+
+association xxx_Guidance_isSpecifiedIn between
+	Guidance[0..1] role xxx_Guidance_isSpecifiedIn_src
+	Document[*] role isSpecifiedIn
+end
+
+association xxx_Guidance_providesAuthorityFor between
+	Guidance[0..1] role xxx_Guidance_providesAuthorityFor_src
+	InformationAsset[*] role providesAuthorityFor
+end
+
+association xxx_Guidance_defines between
+	Guidance[0..1] role xxx_Guidance_defines_src
+	MissionArea[*] role defines
+end
+
+composition xxx_Document_isAssociatedWith between
+	Document[0..1] role xxx_Document_isAssociatedWith_src
+	Document[*] role isAssociatedWith
+end
+
+association xxx_Document_describesArchitecture between
+	Document[*] role xxx_Document_describesArchitecture_src
+	Architecture[1] role describesArchitecture
+end
+
+association xxx_Document_describesSystem between
+	Document[0..1] role xxx_Document_describesSystem_src
+	System[*] role describesSystem
+end
+
+association xxx_Document_isSpecifiedUsing between
+	Document[0..1] role xxx_Document_isSpecifiedUsing_src
+	Agreement[*] role isSpecifiedUsing
+end
+
+association xxx_Document_cites between
+	Document[0..1] role xxx_Document_cites_src
+	InformationAsset[*] role cites
+end
+
+composition xxx_Action_mayBeA between
+	Action[*] role xxx_Action_mayBeA_src
+	Task[1] role mayBeA
+end
+
+composition xxx_Action_isAssociatedWith between
+	Action[0..1] role xxx_Action_isAssociatedWith_src
+	Action[*] role isAssociatedWith
+end
+
+association xxx_Action_involvedIn between
+	Action[0..1] role xxx_Action_involvedIn_src
+	ActivityModel[*] role involvedIn
+end
+
+composition xxx_Agreement_isAssociatedWith between
+	Agreement[0..1] role xxx_Agreement_isAssociatedWith_src
+	Agreement[*] role isAssociatedWith
+end
+
+association xxx_Agreement_isCitedBy between
+	Agreement[0..1] role xxx_Agreement_isCitedBy_src
+	Agreement[*] role isCitedBy
+end
+
+association xxx_Agreement_appliesTo between
+	Agreement[0..1] role xxx_Agreement_appliesTo_src
+	InformationAsset[*] role appliesTo
+end
+
+association xxx_Agreement_implements between
+	Agreement[0..1] role xxx_Agreement_implements_src
+	Guidance[*] role implements
+end
+
+composition xxx_Task_isAssociatedWith between
+	Task[0..1] role xxx_Task_isAssociatedWith_src
+	Task[*] role isAssociatedWith
+end
+
+association xxx_Task_isPerformedBy between
+	Task[0..1] role xxx_Task_isPerformedBy_src
+	Node[*] role isPerformedBy
+end
+
+association xxx_Task_isPerformedUsing between
+	Task[0..1] role xxx_Task_isPerformedUsing_src
+	System[*] role isPerformedUsing
+end
+
+association xxx_Task_specifies between
+	Task[0..1] role xxx_Task_specifies_src
+	Requirement[*] role specifies
+end
+
+composition xxx_InformationAsset_isAssociatedWith between
+	InformationAsset[0..1] role xxx_InformationAsset_isAssociatedWith_src
+	InformationAsset[*] role isAssociatedWith
+end
+
+association xxx_Node_isAssociatedWith between
+	Node[0..1] role xxx_Node_isAssociatedWith_src
+	Node[*] role isAssociatedWith
+end
+
+association xxx_Node_describes between
+	Node[0..1] role xxx_Node_describes_src
+	Architecture[*] role describes
+end
+
+association xxx_Node_hasServicesProvidedBy between
+	Node[0..1] role xxx_Node_hasServicesProvidedBy_src
+	Facility[*] role hasServicesProvidedBy
+end
+
+association xxx_Node_involvedIn between
+	Node[0..1] role xxx_Node_involvedIn_src
+	ActivityModel[*] role involvedIn
+end
+
+association xxx_Node_uses between
+	Node[0..1] role xxx_Node_uses_src
+	InformationAsset[*] role uses
+end
+
+association xxx_Node_involves between
+	Node[0..1] role xxx_Node_involves_src
+	InfoExchRequirement[*] role involves
+end
+
+association xxx_Node_isParticipedInBy between
+	Node[0..1] role xxx_Node_isParticipedInBy_src
+	Network[*] role isParticipedInBy
+end
+
+association xxx_Node_supports between
+	Node[0..1] role xxx_Node_supports_src
+	System[*] role supports
+end
+
+composition xxx_Network_isAssociatedWith between
+	Network[0..1] role xxx_Network_isAssociatedWith_src
+	Network[*] role isAssociatedWith
+end
+
+association xxx_Network_isDescribedIn between
+	Network[0..1] role xxx_Network_isDescribedIn_src
+	Document[*] role isDescribedIn
+end
+
+association xxx_Network_compliesWith between
+	Network[0..1] role xxx_Network_compliesWith_src
+	Standard[*] role compliesWith
+end
+
+association xxx_Network_has between
+	Network[0..1] role xxx_Network_has_src
+	Organization[*] role has
+end
+
+association xxx_Network_performsTo between
+	Network[0..1] role xxx_Network_performsTo_src
+	Capability[*] role performsTo
+end
+
+association xxx_Requirement_mayBeSatifiedBy between
+	Requirement[0..1] role xxx_Requirement_mayBeSatifiedBy_src
+	Architecture[*] role mayBeSatifiedBy
+end
+
+association xxx_Requirement_isSpecifiedUsing between
+	Requirement[0..1] role xxx_Requirement_isSpecifiedUsing_src
+	InformationAsset[*] role isSpecifiedUsing
+end
+
+association xxx_Requirement_specifiesNeedFor between
+	Requirement[0..1] role xxx_Requirement_specifiesNeedFor_src
+	MaterielItem[*] role specifiesNeedFor
+end
+
+association xxx_Requirement_cites between
+	Requirement[0..1] role xxx_Requirement_cites_src
+	MissionArea[*] role cites
+end
+
+association xxx_InfoExchRequirement_isCitedIn between
+	InfoExchRequirement[0..1] role xxx_InfoExchRequirement_isCitedIn_src
+	Document[*] role isCitedIn
+end
+
+association xxx_InfoExchRequirement_isSpecifiedInInfos between
+	InfoExchRequirement[0..1] role xxx_InfoExchRequirement_isSpecifiedInInfos_src
+	InformationAsset[*] role isSpecifiedInInfos
+end
+
+association xxx_MissionArea_supports between
+	MissionArea[0..1] role xxx_MissionArea_supports_src
+	Task[*] role supports
+end
+
+association xxx_System_isAssociatedWith between
+	System[0..1] role xxx_System_isAssociatedWith_src
+	System[*] role isAssociatedWith
+end
+
+association xxx_System_citedIn between
+	System[0..1] role xxx_System_citedIn_src
+	Architecture[*] role citedIn
+end
+
+association xxx_System_compliesWith between
+	System[0..1] role xxx_System_compliesWith_src
+	Standard[*] role compliesWith
+end
+
+association xxx_System_isDescribedBy between
+	System[0..1] role xxx_System_isDescribedBy_src
+	InformationAsset[*] role isDescribedBy
+end
+
+association xxx_System_uses between
+	System[0..1] role xxx_System_uses_src
+	MaterielItem[*] role uses
+end
+
+association xxx_System_operatesUsing between
+	System[0..1] role xxx_System_operatesUsing_src
+	Network[*] role operatesUsing
+end
+
+association xxx_System_performsTo between
+	System[0..1] role xxx_System_performsTo_src
+	Capability[*] role performsTo
+end
+
+association xxx_System_associatedOrganization between
+	System[0..1] role xxx_System_associatedOrganization_src
+	Organization[*] role associatedOrganization
+end
+
+association xxx_System_appliesTo between
+	System[0..1] role xxx_System_appliesTo_src
+	Requirement[*] role appliesTo
+end
+
+association xxx_Mission_isCitedBy between
+	Mission[*] role xxx_Mission_isCitedBy_src
+	Architecture[1] role isCitedBy
+end
+
+association xxx_Mission_requires between
+	Mission[0..1] role xxx_Mission_requires_src
+	Task[*] role requires
+end
+
+association xxx_Mission_isAssigned between
+	Mission[0..1] role xxx_Mission_isAssigned_src
+	Organization[*] role isAssigned
+end
+
+association xxx_Mission_mayCite between
+	Mission[0..1] role xxx_Mission_mayCite_src
+	FunctionalArea[*] role mayCite
+end
+
+association xxx_FunctionalArea_isPartOf between
+	FunctionalArea[0..1] role xxx_FunctionalArea_isPartOf_src
+	FunctionalArea[*] role isPartOf
+end
+
+association xxx_FunctionalArea_supports between
+	FunctionalArea[0..1] role xxx_FunctionalArea_supports_src
+	System[*] role supports
+end
+
+association xxx_FunctionalArea_cites between
+	FunctionalArea[0..1] role xxx_FunctionalArea_cites_src
+	MissionArea[*] role cites
+end
+
+association xxx_Capability_specifiesRequired between
+	Capability[0..1] role xxx_Capability_specifiesRequired_src
+	Requirement[*] role specifiesRequired
+end
+
+composition xxx_MaterielItem_establishedAs between
+	MaterielItem[0..1] role xxx_MaterielItem_establishedAs_src
+	MaterielItem[*] role establishedAs
+end
+
+association xxx_MaterielItem_conformsTo between
+	MaterielItem[0..1] role xxx_MaterielItem_conformsTo_src
+	Standard[*] role conformsTo
+end
+
+association xxx_MaterielItem_performsTo between
+	MaterielItem[0..1] role xxx_MaterielItem_performsTo_src
+	Capability[*] role performsTo
+end
+
+association xxx_SoftwareItem_uses between
+	SoftwareItem[0..1] role xxx_SoftwareItem_uses_src
+	EquipmentType[*] role uses
+end
+
+association xxx_SoftwareItem_isSourceFor between
+	SoftwareItem[*] role xxx_SoftwareItem_isSourceFor_src
+	Organization[1] role isSourceFor
+end
+

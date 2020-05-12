@@ -1,0 +1,455 @@
+model NQC
+enum TypeEnum{
+default
+}
+
+enum BinaryOperatorEnum{
+default
+}
+
+enum AssignmentStatementEnum{
+default
+}
+
+class Program
+attributes
+	Name : String
+operations
+end
+
+class Task
+attributes
+	Name : String
+operations
+end
+
+class Function
+attributes
+	Name : String
+operations
+end
+
+class Parameter<Variable
+attributes
+operations
+end
+
+class Subroutine
+attributes
+	Name : String
+operations
+end
+
+abstract class Variable
+attributes
+	Name : String
+	Type : TypeEnum
+operations
+end
+
+class LocalVariable<Variable
+attributes
+operations
+end
+
+class GlobalVariable<Variable
+attributes
+operations
+end
+
+class Label
+attributes
+	Label : String
+operations
+end
+
+abstract class Statement
+attributes
+operations
+end
+
+class AssignmentStatement<Statement
+attributes
+	Operator : AssignmentStatementEnum
+operations
+end
+
+class BlockStatement<Statement
+attributes
+operations
+end
+
+class BreakStatement<Statement
+attributes
+operations
+end
+
+class ContinueStatement<Statement
+attributes
+operations
+end
+
+abstract class ControlStructure<Statement
+attributes
+operations
+end
+
+class EmptyStatement<Statement
+attributes
+operations
+end
+
+abstract class Expression<Statement
+attributes
+operations
+end
+
+class ReturnStatement<Statement
+attributes
+operations
+end
+
+class StartStatement<Statement
+attributes
+operations
+end
+
+class StopStatement<Statement
+attributes
+operations
+end
+
+class DoWhileStatement<ControlStructure
+attributes
+operations
+end
+
+class ForStatement<ControlStructure
+attributes
+operations
+end
+
+class GoToStatement<ControlStructure
+attributes
+operations
+end
+
+class IfStatement<ControlStructure
+attributes
+operations
+end
+
+class RepeatStatement<ControlStructure
+attributes
+operations
+end
+
+class SwitchStatement<ControlStructure
+attributes
+operations
+end
+
+class UntilStatement<ControlStructure
+attributes
+operations
+end
+
+class WhileStatement<ControlStructure
+attributes
+operations
+end
+
+class Case
+attributes
+	IsDefault : Boolean
+operations
+end
+
+abstract class ValueExpression<Expression
+attributes
+operations
+end
+
+class VariableExpression<ValueExpression
+attributes
+operations
+end
+
+class ArrayExpression<VariableExpression
+attributes
+operations
+end
+
+abstract class ConstantExpression<ValueExpression
+attributes
+operations
+end
+
+class BooleanConstant<ConstantExpression
+attributes
+	Value : Boolean
+operations
+end
+
+class IntegerConstant<ConstantExpression
+attributes
+	Value : Integer
+operations
+end
+
+abstract class CompoundExpression<Expression
+attributes
+operations
+end
+
+class BinaryExpression<CompoundExpression
+attributes
+	Operator : BinaryOperatorEnum
+operations
+end
+
+abstract class CallStatement<Statement
+attributes
+operations
+end
+
+class FunctionCall<CallStatement
+attributes
+operations
+end
+
+class SubroutineCall<CallStatement
+attributes
+operations
+end
+
+composition xxx_Program_Tasks between
+	Program[0..1] role xxx_Program_Tasks_src
+	Task[*] role Tasks
+end
+
+composition xxx_Program_Functions between
+	Program[0..1] role xxx_Program_Functions_src
+	Function[*] role Functions
+end
+
+composition xxx_Program_Subroutines between
+	Program[0..1] role xxx_Program_Subroutines_src
+	Subroutine[*] role Subroutines
+end
+
+composition xxx_Program_GlobalVariables between
+	Program[*] role xxx_Program_GlobalVariables_src
+	GlobalVariable[0..32] role GlobalVariables
+end
+
+composition xxx_Task_Statements between
+	Task[0..1] role xxx_Task_Statements_src
+	Statement[*] role Statements
+end
+
+composition xxx_Task_LocalVariables between
+	Task[0..1] role xxx_Task_LocalVariables_src
+	LocalVariable[*] role LocalVariables
+end
+
+composition xxx_Function_Statements between
+	Function[0..1] role xxx_Function_Statements_src
+	Statement[*] role Statements
+end
+
+composition xxx_Function_LocalVariables between
+	Function[0..1] role xxx_Function_LocalVariables_src
+	LocalVariable[*] role LocalVariables
+end
+
+composition xxx_Function_Parameters between
+	Function[0..1] role xxx_Function_Parameters_src
+	Parameter[*] role Parameters
+end
+
+composition xxx_Subroutine_Statements between
+	Subroutine[0..1] role xxx_Subroutine_Statements_src
+	Statement[*] role Statements
+end
+
+composition xxx_Subroutine_LocalVariables between
+	Subroutine[0..1] role xxx_Subroutine_LocalVariables_src
+	LocalVariable[*] role LocalVariables
+end
+
+composition xxx_Variable_InitialValue between
+	Variable[*] role xxx_Variable_InitialValue_src
+	ConstantExpression[0..1] role InitialValue
+end
+
+association xxx_Variable_ArrayMaxSize between
+	Variable[*] role xxx_Variable_ArrayMaxSize_src
+	IntegerConstant[0..1] role ArrayMaxSize
+end
+
+composition xxx_Statement_Label between
+	Statement[*] role xxx_Statement_Label_src
+	Label[0..1] role Label
+end
+
+composition xxx_AssignmentStatement_Variable between
+	AssignmentStatement[*] role xxx_AssignmentStatement_Variable_src
+	VariableExpression[1] role Variable
+end
+
+composition xxx_AssignmentStatement_Expression between
+	AssignmentStatement[*] role xxx_AssignmentStatement_Expression_src
+	Expression[1] role Expression
+end
+
+composition xxx_BlockStatement_LocalVariables between
+	BlockStatement[0..1] role xxx_BlockStatement_LocalVariables_src
+	LocalVariable[*] role LocalVariables
+end
+
+composition xxx_BlockStatement_Statements between
+	BlockStatement[0..1] role xxx_BlockStatement_Statements_src
+	Statement[*] role Statements
+end
+
+association xxx_StartStatement_Task between
+	StartStatement[*] role xxx_StartStatement_Task_src
+	Task[1] role Task
+end
+
+association xxx_StopStatement_Task between
+	StopStatement[*] role xxx_StopStatement_Task_src
+	Task[1] role Task
+end
+
+composition xxx_DoWhileStatement_Body between
+	DoWhileStatement[*] role xxx_DoWhileStatement_Body_src
+	Statement[1] role Body
+end
+
+composition xxx_DoWhileStatement_Condition between
+	DoWhileStatement[*] role xxx_DoWhileStatement_Condition_src
+	Expression[1] role Condition
+end
+
+composition xxx_ForStatement_Initialization between
+	ForStatement[*] role xxx_ForStatement_Initialization_src
+	Statement[0..1] role Initialization
+end
+
+composition xxx_ForStatement_Condition between
+	ForStatement[*] role xxx_ForStatement_Condition_src
+	Expression[0..1] role Condition
+end
+
+composition xxx_ForStatement_Update between
+	ForStatement[*] role xxx_ForStatement_Update_src
+	Statement[0..1] role Update
+end
+
+association xxx_GoToStatement_JumpLabel between
+	GoToStatement[*] role xxx_GoToStatement_JumpLabel_src
+	Label[1] role JumpLabel
+end
+
+composition xxx_IfStatement_Condition between
+	IfStatement[*] role xxx_IfStatement_Condition_src
+	Expression[1] role Condition
+end
+
+composition xxx_IfStatement_Consequence between
+	IfStatement[*] role xxx_IfStatement_Consequence_src
+	Statement[1] role Consequence
+end
+
+composition xxx_IfStatement_Alternative between
+	IfStatement[*] role xxx_IfStatement_Alternative_src
+	Statement[0..1] role Alternative
+end
+
+composition xxx_RepeatStatement_Condition between
+	RepeatStatement[*] role xxx_RepeatStatement_Condition_src
+	Expression[1] role Condition
+end
+
+composition xxx_RepeatStatement_Body between
+	RepeatStatement[*] role xxx_RepeatStatement_Body_src
+	Statement[1] role Body
+end
+
+association xxx_SwitchStatement_Condition between
+	SwitchStatement[*] role xxx_SwitchStatement_Condition_src
+	Expression[1] role Condition
+end
+
+composition xxx_SwitchStatement_Cases between
+	SwitchStatement[0..1] role xxx_SwitchStatement_Cases_src
+	Case[*] role Cases
+end
+
+composition xxx_UntilStatement_Condition between
+	UntilStatement[*] role xxx_UntilStatement_Condition_src
+	Expression[1] role Condition
+end
+
+composition xxx_UntilStatement_Body between
+	UntilStatement[*] role xxx_UntilStatement_Body_src
+	Statement[1] role Body
+end
+
+composition xxx_WhileStatement_Condition between
+	WhileStatement[*] role xxx_WhileStatement_Condition_src
+	Expression[1] role Condition
+end
+
+composition xxx_WhileStatement_Body between
+	WhileStatement[*] role xxx_WhileStatement_Body_src
+	Statement[1] role Body
+end
+
+association xxx_Case_Label between
+	Case[0..1] role xxx_Case_Label_src
+	ConstantExpression[1..*] role Label
+end
+
+composition xxx_Case_Statements between
+	Case[0..1] role xxx_Case_Statements_src
+	Statement[*] role Statements
+end
+
+association xxx_VariableExpression_Variable between
+	VariableExpression[*] role xxx_VariableExpression_Variable_src
+	Variable[1] role Variable
+end
+
+composition xxx_ArrayExpression_index between
+	ArrayExpression[*] role xxx_ArrayExpression_index_src
+	Expression[0..1] role index
+end
+
+composition xxx_BinaryExpression_Operand1 between
+	BinaryExpression[*] role xxx_BinaryExpression_Operand1_src
+	Expression[1] role Operand1
+end
+
+composition xxx_BinaryExpression_Operand2 between
+	BinaryExpression[*] role xxx_BinaryExpression_Operand2_src
+	Expression[1] role Operand2
+end
+
+association xxx_FunctionCall_Callee between
+	FunctionCall[*] role xxx_FunctionCall_Callee_src
+	Function[1] role Callee
+end
+
+composition xxx_FunctionCall_Parameters between
+	FunctionCall[0..1] role xxx_FunctionCall_Parameters_src
+	Expression[*] role Parameters
+end
+
+association xxx_SubroutineCall_Callee between
+	SubroutineCall[*] role xxx_SubroutineCall_Callee_src
+	Subroutine[1] role Callee
+end
+

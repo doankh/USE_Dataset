@@ -1,0 +1,96 @@
+model PrimitiveTypes
+class QoSComponent
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+abstract class QoSProfile
+attributes
+operations
+end
+
+class CompoundProfile<QoSProfile
+attributes
+operations
+end
+
+class SimpleProfile<QoSProfile
+attributes
+operations
+end
+
+class QoSStatement
+attributes
+operations
+end
+
+class ProfileTransition
+attributes
+operations
+end
+
+composition xxx_QoSComponent_operations_ between
+	QoSComponent[*] role xxx_QoSComponent_operations__src
+	Operation[1] role operations_
+end
+
+association xxx_QoSComponent_profile between
+	QoSComponent[0..1] role xxx_QoSComponent_profile_src
+	QoSProfile[*] role profile
+end
+
+association xxx_QoSProfile_for_ between
+	QoSProfile[*] role xxx_QoSProfile_for__src
+	QoSComponent[1] role for_
+end
+
+association xxx_CompoundProfile_profileTransition between
+	CompoundProfile[0..1] role xxx_CompoundProfile_profileTransition_src
+	ProfileTransition[*] role profileTransition
+end
+
+composition xxx_CompoundProfile_simpleProfile between
+	CompoundProfile[0..1] role xxx_CompoundProfile_simpleProfile_src
+	SimpleProfile[1..*] role simpleProfile
+end
+
+association xxx_SimpleProfile_compoundProfile between
+	SimpleProfile[*] role xxx_SimpleProfile_compoundProfile_src
+	CompoundProfile[1] role compoundProfile
+end
+
+association xxx_SimpleProfile_uses between
+	SimpleProfile[*] role xxx_SimpleProfile_uses_src
+	QoSStatement[1] role uses
+end
+
+association xxx_SimpleProfile_provides between
+	SimpleProfile[*] role xxx_SimpleProfile_provides_src
+	QoSStatement[1] role provides
+end
+
+association xxx_ProfileTransition_operations_ between
+	ProfileTransition[0..1] role xxx_ProfileTransition_operations__src
+	Operation[*] role operations_
+end
+
+association xxx_ProfileTransition_from_ between
+	ProfileTransition[*] role xxx_ProfileTransition_from__src
+	SimpleProfile[1] role from_
+end
+
+association xxx_ProfileTransition_to between
+	ProfileTransition[*] role xxx_ProfileTransition_to_src
+	SimpleProfile[1] role to
+end
+
+composition xxx_ProfileTransition_compoundProfile between
+	ProfileTransition[*] role xxx_ProfileTransition_compoundProfile_src
+	CompoundProfile[1] role compoundProfile
+end
+

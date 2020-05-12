@@ -1,0 +1,214 @@
+model results
+class Chart<NamedElement
+attributes
+operations
+end
+
+abstract class ChartType<NamedElement
+attributes
+operations
+end
+
+abstract class ValueSpec<NamedElement
+attributes
+	column : Integer
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Axis<ValueSpec
+attributes
+	to : Real
+	from_ : Real
+operations
+end
+
+class Series<ValueSpec
+attributes
+operations
+end
+
+class Category<ValueSpec
+attributes
+operations
+end
+
+abstract class Result<NamedElement
+attributes
+	timestamp : String
+operations
+	exportCSV(name : String)
+end
+
+class XY<ChartType
+attributes
+operations
+end
+
+class BoxAndWhiskers<ChartType
+attributes
+operations
+end
+
+class Bar<ChartType
+attributes
+operations
+end
+
+class Results<Chart
+attributes
+operations
+	createNewNumericalResult(name : String):NumericalResult
+	createNewGroup(name : String):Results
+	getResult(name : String):Result
+	getGroup(name : String):Results
+	exportCSV(fileName : String)
+	createNewGraphResult(name : String):GraphResult
+end
+
+class EqualsConstraint<Constraint
+attributes
+	constraint : String
+operations
+	getValues():String
+end
+
+abstract class Constraint
+attributes
+operations
+	evaluate(entry : String):Boolean
+end
+
+class Or<Constraint
+attributes
+operations
+end
+
+class NumericalResult<Result
+attributes
+	data : String
+operations
+end
+
+class GraphResult<Result
+attributes
+operations
+end
+
+class GraphNode<NamedElement
+attributes
+operations
+end
+
+class GraphLink<NamedElement
+attributes
+operations
+end
+
+abstract class DataResultSet
+attributes
+operations
+end
+
+class XYDataResultSet<DataResultSet
+attributes
+	name : String
+operations
+end
+
+class DoubleDataResultValue<DataResultValue
+attributes
+	value : Real
+operations
+end
+
+abstract class DataResultValue
+attributes
+operations
+end
+
+composition xxx_Chart_type between
+	Chart[*] role xxx_Chart_type_src
+	ChartType[0..1] role type
+end
+
+composition xxx_Chart_valueSpecs between
+	Chart[0..1] role xxx_Chart_valueSpecs_src
+	ValueSpec[*] role valueSpecs
+end
+
+composition xxx_ValueSpec_constraint between
+	ValueSpec[*] role xxx_ValueSpec_constraint_src
+	Constraint[0..1] role constraint
+end
+
+composition xxx_Results_results between
+	Results[0..1] role xxx_Results_results_src
+	Result[*] role results
+end
+
+composition xxx_Results_groups between
+	Results[0..1] role xxx_Results_groups_src
+	Results[*] role groups
+end
+
+composition xxx_Or_ops between
+	Or[0..1] role xxx_Or_ops_src
+	Constraint[*] role ops
+end
+
+composition xxx_NumericalResult_charts between
+	NumericalResult[0..1] role xxx_NumericalResult_charts_src
+	Chart[*] role charts
+end
+
+association xxx_NumericalResult_dataResultSet between
+	NumericalResult[*] role xxx_NumericalResult_dataResultSet_src
+	DataResultSet[0..1] role dataResultSet
+end
+
+composition xxx_GraphResult_nodes between
+	GraphResult[0..1] role xxx_GraphResult_nodes_src
+	GraphNode[*] role nodes
+end
+
+composition xxx_GraphResult_links between
+	GraphResult[0..1] role xxx_GraphResult_links_src
+	GraphLink[*] role links
+end
+
+association xxx_GraphNode_outgoing between
+	GraphNode[0..1] role xxx_GraphNode_outgoing_src
+	GraphLink[*] role outgoing
+end
+
+association xxx_GraphNode_incoming between
+	GraphNode[0..1] role xxx_GraphNode_incoming_src
+	GraphLink[*] role incoming
+end
+
+association xxx_GraphLink_source between
+	GraphLink[*] role xxx_GraphLink_source_src
+	GraphNode[0..1] role source
+end
+
+association xxx_GraphLink_target between
+	GraphLink[*] role xxx_GraphLink_target_src
+	GraphNode[0..1] role target
+end
+
+composition xxx_XYDataResultSet_xValues between
+	XYDataResultSet[0..1] role xxx_XYDataResultSet_xValues_src
+	DataResultValue[*] role xValues
+end
+
+composition xxx_XYDataResultSet_yValues between
+	XYDataResultSet[0..1] role xxx_XYDataResultSet_yValues_src
+	DataResultValue[*] role yValues
+end
+

@@ -1,0 +1,268 @@
+model textct
+enum FiveWs{
+default
+}
+
+enum Validity{
+default
+}
+
+class TextCT
+attributes
+operations
+end
+
+class RequirementList
+attributes
+operations
+end
+
+class Requirement
+attributes
+	ref : String
+	val : String
+operations
+end
+
+class ComponentList
+attributes
+operations
+end
+
+class Component
+attributes
+	ref : String
+	val : String
+	quantifier : String
+operations
+end
+
+class SystemComponent<Component
+attributes
+operations
+end
+
+class OptionList
+attributes
+operations
+end
+
+class Option
+attributes
+	name : String
+	value : String
+operations
+end
+
+class CompositionTree
+attributes
+operations
+end
+
+abstract class AbstractBehavior
+attributes
+operations
+end
+
+class RelationalBehavior<AbstractBehavior
+attributes
+operations
+end
+
+class Relation
+attributes
+	question : String
+	preposition : String
+	componentRef : String
+	behaviorRef : String
+	level : String
+	componentLevel : String
+	componentSet : String
+	mci : String
+operations
+end
+
+abstract class Behavior<AbstractBehavior
+attributes
+	ref : String
+	val : String
+operations
+end
+
+class State<Behavior
+attributes
+operations
+end
+
+class Selection<Behavior
+attributes
+operations
+end
+
+class Event<Behavior
+attributes
+operations
+end
+
+class Guard<Behavior
+attributes
+operations
+end
+
+class InternalInput<Behavior
+attributes
+operations
+end
+
+class InternalOutput<Behavior
+attributes
+operations
+end
+
+class ExternalInput<Behavior
+attributes
+operations
+end
+
+class ExternalOutput<Behavior
+attributes
+operations
+end
+
+class Assertion<Behavior
+attributes
+operations
+end
+
+abstract class AbstractBlockOrNode
+attributes
+operations
+end
+
+abstract class AbstractBlock<AbstractBlockOrNode
+attributes
+operations
+end
+
+abstract class AbstractNode<AbstractBlockOrNode
+attributes
+	componentRef : String
+	requirementRef : String
+	traceabilityStatus : Validity
+	label : String
+	operator : String
+	componentSet : String
+	mci : String
+operations
+end
+
+class Node<AbstractNode
+attributes
+operations
+end
+
+class AggregatedNode<AbstractBlockOrNode,AbstractNode
+attributes
+operations
+end
+
+class InheritedNode<AbstractBlockOrNode,AbstractNode
+attributes
+operations
+end
+
+class AssociatedNode<AbstractBlockOrNode,AbstractNode
+attributes
+operations
+end
+
+class AlternativeBlock<AbstractBlock
+attributes
+operations
+end
+
+class AggregatedBlock<AbstractBlock
+attributes
+operations
+end
+
+class AssociatedBlock<AbstractBlock
+attributes
+operations
+end
+
+class InheritedBlock<AbstractBlock
+attributes
+operations
+end
+
+composition xxx_TextCT_options between
+	TextCT[*] role xxx_TextCT_options_src
+	OptionList[0..1] role options
+end
+
+composition xxx_TextCT_requirements between
+	TextCT[*] role xxx_TextCT_requirements_src
+	RequirementList[0..1] role requirements
+end
+
+composition xxx_TextCT_components between
+	TextCT[*] role xxx_TextCT_components_src
+	ComponentList[1] role components
+end
+
+composition xxx_TextCT_compositionTree between
+	TextCT[*] role xxx_TextCT_compositionTree_src
+	CompositionTree[1] role compositionTree
+end
+
+composition xxx_RequirementList_requirements between
+	RequirementList[0..1] role xxx_RequirementList_requirements_src
+	Requirement[1..*] role requirements
+end
+
+composition xxx_ComponentList_components between
+	ComponentList[0..1] role xxx_ComponentList_components_src
+	Component[1..*] role components
+end
+
+composition xxx_Component_behaviors between
+	Component[0..1] role xxx_Component_behaviors_src
+	AbstractBehavior[*] role behaviors
+end
+
+composition xxx_OptionList_options between
+	OptionList[0..1] role xxx_OptionList_options_src
+	Option[*] role options
+end
+
+composition xxx_CompositionTree_rootNode between
+	CompositionTree[*] role xxx_CompositionTree_rootNode_src
+	Node[1] role rootNode
+end
+
+composition xxx_RelationalBehavior_behavior between
+	RelationalBehavior[*] role xxx_RelationalBehavior_behavior_src
+	Behavior[1] role behavior
+end
+
+composition xxx_RelationalBehavior_relations between
+	RelationalBehavior[0..1] role xxx_RelationalBehavior_relations_src
+	Relation[1..*] role relations
+end
+
+composition xxx_Behavior_relations between
+	Behavior[0..1] role xxx_Behavior_relations_src
+	Relation[*] role relations
+end
+
+composition xxx_AbstractBlock_childNode between
+	AbstractBlock[0..1] role xxx_AbstractBlock_childNode_src
+	AbstractBlockOrNode[2..*] role childNode
+end
+
+composition xxx_AbstractNode_childNode between
+	AbstractNode[0..1] role xxx_AbstractNode_childNode_src
+	AbstractBlockOrNode[*] role childNode
+end
+

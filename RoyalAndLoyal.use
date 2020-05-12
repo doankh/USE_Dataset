@@ -1,0 +1,409 @@
+model RoyalAndLoyal
+enum RandLColor{
+default
+}
+
+enum Gender{
+default
+}
+
+class ServiceLevel
+attributes
+	name : String
+operations
+end
+
+abstract class Transaction
+attributes
+	amount : Real
+	points : Integer
+operations
+	program():LoyaltyProgram
+end
+
+class LoyaltyAccount
+attributes
+	points : Integer
+	totalPointsEarned : Integer
+	number : Integer
+operations
+	earn(i : Integer)
+	burn(i : Integer)
+	getCustomerName():String
+	isEmpty():Boolean
+end
+
+class Earning<Transaction
+attributes
+operations
+end
+
+class ProgramPartner
+attributes
+	name : String
+	numberOfCustomers : Integer
+operations
+end
+
+class Burning<Transaction
+attributes
+operations
+end
+
+class TransactionReport
+attributes
+	balance : Integer
+	totalEarned : Integer
+	totalBurned : Integer
+	number : Integer
+	name : String
+operations
+end
+
+class CustomerCard
+attributes
+	valid : Boolean
+	color : RandLColor
+	printedName : String
+operations
+	getTransactions(until : Date,from_ : Date):Transaction
+end
+
+class Date
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+operations
+	isBefore(t : Date):Boolean
+	isEqual(t : Date):Boolean
+	fromYMD(m : Integer,k : Integer,y : Integer):Date
+	isAfter(t : Date):Boolean
+end
+
+class Membership
+attributes
+operations
+end
+
+class Container_RandL
+attributes
+operations
+end
+
+class Service
+attributes
+	serviceNr : Integer
+	description : String
+	pointsEarned : Integer
+	condition : Boolean
+	pointsBurned : Integer
+operations
+	calcPoints():Integer
+	upgradePointsEarned(amount : Integer)
+end
+
+class Customer
+attributes
+	gender : Gender
+	isMale : Boolean
+	name : String
+	title : String
+	age : Integer
+operations
+	birthdayHappens()
+	age():Integer
+	updateName(name : String)
+end
+
+class TransactionReportLine
+attributes
+	partnerName : String
+	serviceDesc : String
+	points : Integer
+	amount : Real
+operations
+end
+
+class LoyaltyProgram
+attributes
+	name : String
+operations
+	selectPopularPartners(d : Date):ProgramPartner
+	addService(s : Service,l : ServiceLevel,p : ProgramPartner)
+	getServices(pp : ProgramPartner):Service
+	enrollAndCreateCustomer(n : String,d : Date):Customer
+	enroll(c : Customer)
+	addTransaction(d : Date,servId : Integer,pName : String,amnt : Real,accNr : Integer)
+end
+
+association xxx_ServiceLevel_program between
+	ServiceLevel[*] role xxx_ServiceLevel_program_src
+	LoyaltyProgram[0..1] role program
+end
+
+association xxx_ServiceLevel_availableServices between
+	ServiceLevel[0..1] role xxx_ServiceLevel_availableServices_src
+	Service[*] role availableServices
+end
+
+association xxx_ServiceLevel_Membership between
+	ServiceLevel[0..1] role xxx_ServiceLevel_Membership_src
+	Membership[*] role Membership
+end
+
+composition xxx_Transaction_tDate between
+	Transaction[*] role xxx_Transaction_tDate_src
+	Date[0..1] role tDate
+end
+
+association xxx_Transaction_account between
+	Transaction[*] role xxx_Transaction_account_src
+	LoyaltyAccount[0..1] role account
+end
+
+association xxx_Transaction_generatedBy between
+	Transaction[*] role xxx_Transaction_generatedBy_src
+	Service[0..1] role generatedBy
+end
+
+association xxx_Transaction_card between
+	Transaction[*] role xxx_Transaction_card_src
+	CustomerCard[0..1] role card
+end
+
+association xxx_LoyaltyAccount_usedServices between
+	LoyaltyAccount[0..1] role xxx_LoyaltyAccount_usedServices_src
+	Service[*] role usedServices
+end
+
+association xxx_LoyaltyAccount_Membership between
+	LoyaltyAccount[*] role xxx_LoyaltyAccount_Membership_src
+	Membership[0..1] role Membership
+end
+
+association xxx_LoyaltyAccount_transactions between
+	LoyaltyAccount[0..1] role xxx_LoyaltyAccount_transactions_src
+	Transaction[*] role transactions
+end
+
+association xxx_ProgramPartner_deliveredServices between
+	ProgramPartner[0..1] role xxx_ProgramPartner_deliveredServices_src
+	Service[*] role deliveredServices
+end
+
+association xxx_ProgramPartner_programs between
+	ProgramPartner[0..1] role xxx_ProgramPartner_programs_src
+	LoyaltyProgram[1..*] role programs
+end
+
+composition xxx_TransactionReport_until between
+	TransactionReport[*] role xxx_TransactionReport_until_src
+	Date[0..1] role until
+end
+
+composition xxx_TransactionReport_from_ between
+	TransactionReport[*] role xxx_TransactionReport_from__src
+	Date[0..1] role from_
+end
+
+association xxx_TransactionReport_lines between
+	TransactionReport[0..1] role xxx_TransactionReport_lines_src
+	TransactionReportLine[*] role lines
+end
+
+association xxx_TransactionReport_card between
+	TransactionReport[*] role xxx_TransactionReport_card_src
+	CustomerCard[0..1] role card
+end
+
+composition xxx_CustomerCard_goodThru between
+	CustomerCard[*] role xxx_CustomerCard_goodThru_src
+	Date[0..1] role goodThru
+end
+
+composition xxx_CustomerCard_validFrom between
+	CustomerCard[*] role xxx_CustomerCard_validFrom_src
+	Date[0..1] role validFrom
+end
+
+composition xxx_CustomerCard_myLevel between
+	CustomerCard[*] role xxx_CustomerCard_myLevel_src
+	ServiceLevel[0..1] role myLevel
+end
+
+association xxx_CustomerCard_owner between
+	CustomerCard[*] role xxx_CustomerCard_owner_src
+	Customer[0..1] role owner
+end
+
+association xxx_CustomerCard_Membership between
+	CustomerCard[*] role xxx_CustomerCard_Membership_src
+	Membership[0..1] role Membership
+end
+
+association xxx_CustomerCard_transactions between
+	CustomerCard[0..1] role xxx_CustomerCard_transactions_src
+	Transaction[*] role transactions
+end
+
+association xxx_Membership_currentLevel between
+	Membership[*] role xxx_Membership_currentLevel_src
+	ServiceLevel[0..1] role currentLevel
+end
+
+association xxx_Membership_card between
+	Membership[*] role xxx_Membership_card_src
+	CustomerCard[0..1] role card
+end
+
+association xxx_Membership_account between
+	Membership[*] role xxx_Membership_account_src
+	LoyaltyAccount[0..1] role account
+end
+
+association xxx_Membership_programs between
+	Membership[*] role xxx_Membership_programs_src
+	LoyaltyProgram[1] role programs
+end
+
+association xxx_Membership_participants between
+	Membership[*] role xxx_Membership_participants_src
+	Customer[1] role participants
+end
+
+composition xxx_Container_RandL_ref_RandL_Customer between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Customer_src
+	Customer[*] role ref_RandL_Customer
+end
+
+composition xxx_Container_RandL_ref_RandL_Date between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Date_src
+	Date[*] role ref_RandL_Date
+end
+
+composition xxx_Container_RandL_ref_RandL_CustomerCard between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_CustomerCard_src
+	CustomerCard[*] role ref_RandL_CustomerCard
+end
+
+composition xxx_Container_RandL_ref_RandL_Membership between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Membership_src
+	Membership[*] role ref_RandL_Membership
+end
+
+composition xxx_Container_RandL_ref_RandL_Service between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Service_src
+	Service[*] role ref_RandL_Service
+end
+
+composition xxx_Container_RandL_ref_RandL_LoyaltyProgram between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_LoyaltyProgram_src
+	LoyaltyProgram[*] role ref_RandL_LoyaltyProgram
+end
+
+composition xxx_Container_RandL_ref_RandL_Earning between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Earning_src
+	Earning[*] role ref_RandL_Earning
+end
+
+composition xxx_Container_RandL_ref_RandL_LoyaltyAccount between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_LoyaltyAccount_src
+	LoyaltyAccount[*] role ref_RandL_LoyaltyAccount
+end
+
+composition xxx_Container_RandL_ref_RandL_ServiceLevel between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_ServiceLevel_src
+	ServiceLevel[*] role ref_RandL_ServiceLevel
+end
+
+composition xxx_Container_RandL_ref_RandL_TransactionReport between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_TransactionReport_src
+	TransactionReport[*] role ref_RandL_TransactionReport
+end
+
+composition xxx_Container_RandL_ref_RandL_ProgramPartner between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_ProgramPartner_src
+	ProgramPartner[*] role ref_RandL_ProgramPartner
+end
+
+composition xxx_Container_RandL_ref_RandL_Burning between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_Burning_src
+	Burning[*] role ref_RandL_Burning
+end
+
+composition xxx_Container_RandL_ref_RandL_TransactionReportLine between
+	Container_RandL[0..1] role xxx_Container_RandL_ref_RandL_TransactionReportLine_src
+	TransactionReportLine[*] role ref_RandL_TransactionReportLine
+end
+
+association xxx_Service_partner between
+	Service[*] role xxx_Service_partner_src
+	ProgramPartner[0..1] role partner
+end
+
+association xxx_Service_transactions between
+	Service[0..1] role xxx_Service_transactions_src
+	Transaction[*] role transactions
+end
+
+association xxx_Service_level between
+	Service[*] role xxx_Service_level_src
+	ServiceLevel[0..1] role level
+end
+
+composition xxx_Customer_dateOfBirth between
+	Customer[*] role xxx_Customer_dateOfBirth_src
+	Date[0..1] role dateOfBirth
+end
+
+association xxx_Customer_programs between
+	Customer[0..1] role xxx_Customer_programs_src
+	LoyaltyProgram[*] role programs
+end
+
+association xxx_Customer_cards between
+	Customer[0..1] role xxx_Customer_cards_src
+	CustomerCard[*] role cards
+end
+
+association xxx_Customer_custmemberships between
+	Customer[0..1] role xxx_Customer_custmemberships_src
+	Membership[*] role custmemberships
+end
+
+composition xxx_TransactionReportLine_trlDate between
+	TransactionReportLine[*] role xxx_TransactionReportLine_trlDate_src
+	Date[0..1] role trlDate
+end
+
+association xxx_TransactionReportLine_transaction between
+	TransactionReportLine[*] role xxx_TransactionReportLine_transaction_src
+	Transaction[0..1] role transaction
+end
+
+association xxx_TransactionReportLine_report between
+	TransactionReportLine[*] role xxx_TransactionReportLine_report_src
+	TransactionReport[0..1] role report
+end
+
+association xxx_LoyaltyProgram_partners between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_partners_src
+	ProgramPartner[1..*] role partners
+end
+
+association xxx_LoyaltyProgram_levels between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_levels_src
+	ServiceLevel[1..*] role levels
+end
+
+association xxx_LoyaltyProgram_participants between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_participants_src
+	Customer[*] role participants
+end
+
+association xxx_LoyaltyProgram_loymemberships between
+	LoyaltyProgram[0..1] role xxx_LoyaltyProgram_loymemberships_src
+	Membership[*] role loymemberships
+end
+

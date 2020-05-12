@@ -1,0 +1,195 @@
+model RSS
+enum DayKind{
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+	Sunday
+}
+
+class RSS
+attributes
+	version : String
+operations
+end
+
+class Channel
+attributes
+	title : String
+	link : String
+	description : String
+	language : String
+	copyright : String
+	managingEditor : String
+	webmaster : String
+	generator : String
+	docs : String
+	ttl : Integer
+	rating : String
+	skipHours : Integer
+	skipDays : DayKind
+operations
+end
+
+class Item
+attributes
+	title : String
+	link : String
+	description : String
+	author : String
+	comments : String
+	guid : String
+operations
+end
+
+class Image
+attributes
+	url : String
+	title : String
+	link : String
+	description : String
+	width : Integer
+	height : Integer
+operations
+end
+
+class TextInput
+attributes
+	title : String
+	description : String
+	name : String
+	link : String
+operations
+end
+
+class Cloud
+attributes
+	domain : String
+	port : Integer
+	path : String
+	registerProcedure : String
+	protocol : String
+operations
+end
+
+class Category
+attributes
+	domain : String
+	value : String
+operations
+end
+
+class Enclosure
+attributes
+	url : String
+	lenght : Integer
+	type : String
+operations
+end
+
+class Source
+attributes
+	url : String
+	value : String
+operations
+end
+
+class Date
+attributes
+	eDay : DayKind
+	day : Integer
+	month : Integer
+	year : Integer
+	hours : Integer
+	minutes : Integer
+	seconds : Integer
+operations
+end
+
+composition xxx_RSS_channel between
+	RSS[*] role xxx_RSS_channel_src
+	Channel[1] role channel
+end
+
+association xxx_Channel_rss between
+	Channel[*] role xxx_Channel_rss_src
+	RSS[1] role rss
+end
+
+composition xxx_Channel_pubDate between
+	Channel[*] role xxx_Channel_pubDate_src
+	Date[0..1] role pubDate
+end
+
+composition xxx_Channel_lastBuildDate between
+	Channel[*] role xxx_Channel_lastBuildDate_src
+	Date[0..1] role lastBuildDate
+end
+
+composition xxx_Channel_image between
+	Channel[*] role xxx_Channel_image_src
+	Image[0..1] role image
+end
+
+composition xxx_Channel_textInput between
+	Channel[*] role xxx_Channel_textInput_src
+	TextInput[0..1] role textInput
+end
+
+composition xxx_Channel_cloud between
+	Channel[*] role xxx_Channel_cloud_src
+	Cloud[0..1] role cloud
+end
+
+composition xxx_Channel_category between
+	Channel[*] role xxx_Channel_category_src
+	Category[0..1] role category
+end
+
+composition xxx_Channel_items between
+	Channel[0..1] role xxx_Channel_items_src
+	Item[*] role items
+end
+
+composition xxx_Item_source between
+	Item[*] role xxx_Item_source_src
+	Source[0..1] role source
+end
+
+composition xxx_Item_pubDate between
+	Item[*] role xxx_Item_pubDate_src
+	Date[0..1] role pubDate
+end
+
+composition xxx_Item_enclosure between
+	Item[*] role xxx_Item_enclosure_src
+	Enclosure[0..1] role enclosure
+end
+
+composition xxx_Item_category between
+	Item[*] role xxx_Item_category_src
+	Category[0..1] role category
+end
+
+association xxx_Item_channel between
+	Item[*] role xxx_Item_channel_src
+	Channel[1] role channel
+end
+
+association xxx_Image_channel between
+	Image[*] role xxx_Image_channel_src
+	Channel[1] role channel
+end
+
+association xxx_TextInput_channel between
+	TextInput[*] role xxx_TextInput_channel_src
+	Channel[1] role channel
+end
+
+association xxx_Cloud_channel between
+	Cloud[*] role xxx_Cloud_channel_src
+	Channel[1] role channel
+end
+

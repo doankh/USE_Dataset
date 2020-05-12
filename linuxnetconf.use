@@ -1,0 +1,168 @@
+model linuxnetconf
+enum IFConfigType{
+default
+}
+
+enum BondMode{
+default
+}
+
+class CMDB
+attributes
+operations
+end
+
+class ServerGroup
+attributes
+	name : String
+operations
+end
+
+class ServerComputer
+attributes
+	name : String
+operations
+end
+
+class StaticIPConfig
+attributes
+	ipAddress : String
+	netmask : String
+	networkAddress : String
+	gateway : String
+	broadcast : String
+operations
+end
+
+abstract class AbstractInterface
+attributes
+	configType : IFConfigType
+	name : String
+operations
+end
+
+class EthernetInterface<PhysicalInterface
+attributes
+operations
+end
+
+class BondingInterface<PhysicalInterface
+attributes
+operations
+end
+
+class VlanInterface<Interface
+attributes
+operations
+end
+
+class Bridge<AbstractInterface
+attributes
+operations
+end
+
+abstract class Interface<AbstractInterface
+attributes
+operations
+end
+
+class SubInterface<AbstractInterface
+attributes
+operations
+end
+
+abstract class PhysicalInterface<Interface
+attributes
+operations
+end
+
+abstract class AbstractConnection
+attributes
+operations
+end
+
+class VlanToInterfaceConnection<AbstractConnection
+attributes
+operations
+end
+
+class EthernetToBondingConnection<AbstractConnection
+attributes
+operations
+end
+
+class SubToInterfaceConnection<AbstractConnection
+attributes
+operations
+end
+
+composition xxx_CMDB_groups between
+	CMDB[0..1] role xxx_CMDB_groups_src
+	ServerGroup[*] role groups
+end
+
+composition xxx_ServerGroup_servers between
+	ServerGroup[0..1] role xxx_ServerGroup_servers_src
+	ServerComputer[*] role servers
+end
+
+composition xxx_ServerComputer_interfaces between
+	ServerComputer[0..1] role xxx_ServerComputer_interfaces_src
+	AbstractInterface[*] role interfaces
+end
+
+composition xxx_ServerComputer_ipconfigs between
+	ServerComputer[0..1] role xxx_ServerComputer_ipconfigs_src
+	StaticIPConfig[*] role ipconfigs
+end
+
+composition xxx_ServerComputer_connections between
+	ServerComputer[0..1] role xxx_ServerComputer_connections_src
+	AbstractConnection[*] role connections
+end
+
+association xxx_ServerComputer_group between
+	ServerComputer[*] role xxx_ServerComputer_group_src
+	ServerGroup[0..1] role group
+end
+
+association xxx_AbstractInterface_ipconfig between
+	AbstractInterface[*] role xxx_AbstractInterface_ipconfig_src
+	StaticIPConfig[0..1] role ipconfig
+end
+
+association xxx_Bridge_bridgePorts between
+	Bridge[0..1] role xxx_Bridge_bridgePorts_src
+	Interface[1..*] role bridgePorts
+end
+
+association xxx_VlanToInterfaceConnection_vlan between
+	VlanToInterfaceConnection[*] role xxx_VlanToInterfaceConnection_vlan_src
+	VlanInterface[1] role vlan
+end
+
+association xxx_VlanToInterfaceConnection_rawInterface between
+	VlanToInterfaceConnection[*] role xxx_VlanToInterfaceConnection_rawInterface_src
+	PhysicalInterface[1] role rawInterface
+end
+
+association xxx_EthernetToBondingConnection_slave between
+	EthernetToBondingConnection[*] role xxx_EthernetToBondingConnection_slave_src
+	EthernetInterface[1] role slave
+end
+
+association xxx_EthernetToBondingConnection_master between
+	EthernetToBondingConnection[*] role xxx_EthernetToBondingConnection_master_src
+	BondingInterface[1] role master
+end
+
+association xxx_SubToInterfaceConnection_subInterface between
+	SubToInterfaceConnection[*] role xxx_SubToInterfaceConnection_subInterface_src
+	SubInterface[1] role subInterface
+end
+
+association xxx_SubToInterfaceConnection_mainInterface between
+	SubToInterfaceConnection[*] role xxx_SubToInterfaceConnection_mainInterface_src
+	Interface[1] role mainInterface
+end
+

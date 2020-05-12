@@ -1,0 +1,518 @@
+model DatadiagramMLSimplified
+class CellType
+attributes
+	unit : String
+	formula : String
+	err : String
+	value : String
+operations
+end
+
+class VisioDocument
+attributes
+operations
+end
+
+class PageSheet<PageElt
+attributes
+operations
+end
+
+abstract class NamedElt
+attributes
+	name : String
+	nameU : String
+operations
+end
+
+abstract class IdentifiedElt
+attributes
+	ID : Integer
+operations
+end
+
+abstract class UniqueIdElt
+attributes
+	UniqueID : String
+operations
+end
+
+class Shape
+attributes
+	lineStyle : Integer
+	fillStyle : Integer
+	textStyle : Integer
+operations
+end
+
+abstract class ShapeElt
+attributes
+operations
+end
+
+abstract class IXElt
+attributes
+	iX : Integer
+operations
+end
+
+abstract class DelElt
+attributes
+	del : Boolean
+operations
+end
+
+class Geom<DelElt
+attributes
+operations
+end
+
+abstract class XYElt<DelElt
+attributes
+operations
+end
+
+class LineTo<XYElt
+attributes
+operations
+end
+
+class MoveTo<XYElt
+attributes
+operations
+end
+
+abstract class XYAElt<XYElt
+attributes
+operations
+end
+
+class ArcTo<XYAElt
+attributes
+operations
+end
+
+class SplineKnot<XYAElt
+attributes
+operations
+end
+
+class PolylineTo<XYAElt
+attributes
+operations
+end
+
+abstract class XYABElt<XYAElt
+attributes
+operations
+end
+
+class InfiniteLine<XYABElt
+attributes
+operations
+end
+
+abstract class XYABCDElt<XYABElt
+attributes
+operations
+end
+
+class Ellipse<XYABCDElt
+attributes
+operations
+end
+
+class EllipticalArcTo<XYABCDElt
+attributes
+operations
+end
+
+class SplineStart<XYABCDElt
+attributes
+operations
+end
+
+abstract class XYABCDEElt<XYABCDElt
+attributes
+operations
+end
+
+class NURBSTo<XYABCDEElt
+attributes
+operations
+end
+
+class Text<ShapeElt
+attributes
+operations
+end
+
+abstract class TextElt
+attributes
+operations
+end
+
+class StringElt<TextElt
+attributes
+	value : String
+operations
+end
+
+class MastersCollection
+attributes
+operations
+end
+
+class MasterShortCut<NamedElt
+attributes
+	iconSize : Integer
+	patternFlags : Integer
+	prompt : String
+	shortcutURL : String
+	shortcutHelp : String
+	alignName : Integer
+operations
+end
+
+class Icon<MasterElt
+attributes
+	value : String
+operations
+end
+
+class Master<NamedElt
+attributes
+	baseID : String
+	matchByName : Boolean
+	iconSize : Integer
+	patternFlags : Integer
+	prompt : String
+	hidden : Boolean
+	iconUpdate : Boolean
+	alignName : Integer
+operations
+end
+
+class ShapesCollection<PageElt
+attributes
+operations
+end
+
+class ConnectsCollection<PageElt
+attributes
+operations
+end
+
+class Connect
+attributes
+	fromSheet : Integer
+	toSheet : Integer
+	fromCell : String
+	toCell : String
+	fromPart : Integer
+	toPart : Integer
+operations
+end
+
+abstract class MasterElt
+attributes
+operations
+end
+
+class PagesCollection
+attributes
+operations
+end
+
+class Page<NamedElt
+attributes
+	background : Boolean
+	backPage : Integer
+	viewScale : Real
+	viewCenterX : Real
+	ViewCenterY : Real
+	reviewerID : Integer
+	associatedPage : Integer
+operations
+end
+
+abstract class PageElt
+attributes
+operations
+end
+
+composition xxx_VisioDocument_docMasters between
+	VisioDocument[*] role xxx_VisioDocument_docMasters_src
+	MastersCollection[0..1] role docMasters
+end
+
+composition xxx_VisioDocument_docPages between
+	VisioDocument[*] role xxx_VisioDocument_docPages_src
+	PagesCollection[0..1] role docPages
+end
+
+association xxx_Shape_ss_shapes between
+	Shape[*] role xxx_Shape_ss_shapes_src
+	ShapesCollection[1] role ss_shapes
+end
+
+composition xxx_Shape_shapeElts between
+	Shape[0..1] role xxx_Shape_shapeElts_src
+	ShapeElt[*] role shapeElts
+end
+
+association xxx_ShapeElt_sse_shapeSheet between
+	ShapeElt[*] role xxx_ShapeElt_sse_shapeSheet_src
+	Shape[1] role sse_shapeSheet
+end
+
+composition xxx_Geom_noFill between
+	Geom[*] role xxx_Geom_noFill_src
+	CellType[0..1] role noFill
+end
+
+composition xxx_Geom_noLine between
+	Geom[*] role xxx_Geom_noLine_src
+	CellType[0..1] role noLine
+end
+
+composition xxx_Geom_noShow between
+	Geom[*] role xxx_Geom_noShow_src
+	CellType[0..1] role noShow
+end
+
+composition xxx_Geom_noSnap between
+	Geom[*] role xxx_Geom_noSnap_src
+	CellType[0..1] role noSnap
+end
+
+composition xxx_Geom_linesTo between
+	Geom[0..1] role xxx_Geom_linesTo_src
+	LineTo[*] role linesTo
+end
+
+composition xxx_Geom_movesTo between
+	Geom[0..1] role xxx_Geom_movesTo_src
+	MoveTo[*] role movesTo
+end
+
+composition xxx_Geom_arcsTo between
+	Geom[0..1] role xxx_Geom_arcsTo_src
+	ArcTo[*] role arcsTo
+end
+
+composition xxx_Geom_splineKnots between
+	Geom[0..1] role xxx_Geom_splineKnots_src
+	SplineKnot[*] role splineKnots
+end
+
+composition xxx_Geom_polylinesTo between
+	Geom[0..1] role xxx_Geom_polylinesTo_src
+	PolylineTo[*] role polylinesTo
+end
+
+composition xxx_Geom_infiniteLines between
+	Geom[0..1] role xxx_Geom_infiniteLines_src
+	InfiniteLine[*] role infiniteLines
+end
+
+composition xxx_Geom_ellipses between
+	Geom[0..1] role xxx_Geom_ellipses_src
+	Ellipse[*] role ellipses
+end
+
+composition xxx_Geom_ellipticalArcsTo between
+	Geom[0..1] role xxx_Geom_ellipticalArcsTo_src
+	EllipticalArcTo[*] role ellipticalArcsTo
+end
+
+composition xxx_Geom_splineStarts between
+	Geom[0..1] role xxx_Geom_splineStarts_src
+	SplineStart[*] role splineStarts
+end
+
+composition xxx_Geom_nurbsTo between
+	Geom[0..1] role xxx_Geom_nurbsTo_src
+	NURBSTo[*] role nurbsTo
+end
+
+composition xxx_XYElt_x between
+	XYElt[*] role xxx_XYElt_x_src
+	CellType[0..1] role x
+end
+
+composition xxx_XYElt_y between
+	XYElt[*] role xxx_XYElt_y_src
+	CellType[0..1] role y
+end
+
+association xxx_LineTo_lt_geom between
+	LineTo[*] role xxx_LineTo_lt_geom_src
+	Geom[1] role lt_geom
+end
+
+association xxx_MoveTo_mt_geom between
+	MoveTo[*] role xxx_MoveTo_mt_geom_src
+	Geom[1] role mt_geom
+end
+
+composition xxx_XYAElt_a between
+	XYAElt[*] role xxx_XYAElt_a_src
+	CellType[0..1] role a
+end
+
+association xxx_ArcTo_ac_geom between
+	ArcTo[*] role xxx_ArcTo_ac_geom_src
+	Geom[1] role ac_geom
+end
+
+association xxx_SplineKnot_sk_geom between
+	SplineKnot[*] role xxx_SplineKnot_sk_geom_src
+	Geom[1] role sk_geom
+end
+
+association xxx_PolylineTo_pt_geom between
+	PolylineTo[*] role xxx_PolylineTo_pt_geom_src
+	Geom[1] role pt_geom
+end
+
+composition xxx_XYABElt_b between
+	XYABElt[*] role xxx_XYABElt_b_src
+	CellType[0..1] role b
+end
+
+association xxx_InfiniteLine_il_geom between
+	InfiniteLine[*] role xxx_InfiniteLine_il_geom_src
+	Geom[1] role il_geom
+end
+
+composition xxx_XYABCDElt_c between
+	XYABCDElt[*] role xxx_XYABCDElt_c_src
+	CellType[0..1] role c
+end
+
+composition xxx_XYABCDElt_d between
+	XYABCDElt[*] role xxx_XYABCDElt_d_src
+	CellType[0..1] role d
+end
+
+association xxx_Ellipse_e_geom between
+	Ellipse[*] role xxx_Ellipse_e_geom_src
+	Geom[1] role e_geom
+end
+
+association xxx_EllipticalArcTo_eat_geom between
+	EllipticalArcTo[*] role xxx_EllipticalArcTo_eat_geom_src
+	Geom[1] role eat_geom
+end
+
+association xxx_SplineStart_ss_geom between
+	SplineStart[*] role xxx_SplineStart_ss_geom_src
+	Geom[1] role ss_geom
+end
+
+composition xxx_XYABCDEElt_e between
+	XYABCDEElt[*] role xxx_XYABCDEElt_e_src
+	CellType[0..1] role e
+end
+
+association xxx_NURBSTo_nt_geom between
+	NURBSTo[*] role xxx_NURBSTo_nt_geom_src
+	Geom[1] role nt_geom
+end
+
+composition xxx_Text_textElts between
+	Text[0..1] role xxx_Text_textElts_src
+	TextElt[*] role textElts
+end
+
+association xxx_TextElt_te_text between
+	TextElt[*] role xxx_TextElt_te_text_src
+	Text[1] role te_text
+end
+
+association xxx_MastersCollection_ms_visioDocument between
+	MastersCollection[*] role xxx_MastersCollection_ms_visioDocument_src
+	VisioDocument[1] role ms_visioDocument
+end
+
+composition xxx_MastersCollection_masters between
+	MastersCollection[0..1] role xxx_MastersCollection_masters_src
+	Master[*] role masters
+end
+
+composition xxx_MastersCollection_masterShortCuts between
+	MastersCollection[0..1] role xxx_MastersCollection_masterShortCuts_src
+	MasterShortCut[*] role masterShortCuts
+end
+
+association xxx_MasterShortCut_m_masterShortCuts between
+	MasterShortCut[*] role xxx_MasterShortCut_m_masterShortCuts_src
+	MastersCollection[1] role m_masterShortCuts
+end
+
+composition xxx_MasterShortCut_icons between
+	MasterShortCut[0..1] role xxx_MasterShortCut_icons_src
+	Icon[*] role icons
+end
+
+association xxx_Icon_i_masterShortCut between
+	Icon[*] role xxx_Icon_i_masterShortCut_src
+	MasterShortCut[1] role i_masterShortCut
+end
+
+association xxx_Master_m_masters between
+	Master[*] role xxx_Master_m_masters_src
+	MastersCollection[1] role m_masters
+end
+
+composition xxx_Master_masterElts between
+	Master[0..1] role xxx_Master_masterElts_src
+	MasterElt[*] role masterElts
+end
+
+composition xxx_ShapesCollection_shapes between
+	ShapesCollection[0..1] role xxx_ShapesCollection_shapes_src
+	Shape[*] role shapes
+end
+
+composition xxx_ConnectsCollection_connections between
+	ConnectsCollection[0..1] role xxx_ConnectsCollection_connections_src
+	Connect[*] role connections
+end
+
+association xxx_Connect_c_connects between
+	Connect[*] role xxx_Connect_c_connects_src
+	ConnectsCollection[1] role c_connects
+end
+
+association xxx_MasterElt_me_master between
+	MasterElt[*] role xxx_MasterElt_me_master_src
+	Master[1] role me_master
+end
+
+association xxx_PagesCollection_ps_visioDocument between
+	PagesCollection[*] role xxx_PagesCollection_ps_visioDocument_src
+	VisioDocument[1] role ps_visioDocument
+end
+
+composition xxx_PagesCollection_pages between
+	PagesCollection[0..1] role xxx_PagesCollection_pages_src
+	Page[*] role pages
+end
+
+association xxx_Page_p_pages between
+	Page[*] role xxx_Page_p_pages_src
+	PagesCollection[1] role p_pages
+end
+
+composition xxx_Page_pageElts between
+	Page[0..1] role xxx_Page_pageElts_src
+	PageElt[*] role pageElts
+end
+
+association xxx_PageElt_pe_page between
+	PageElt[*] role xxx_PageElt_pe_page_src
+	Page[1] role pe_page
+end
+

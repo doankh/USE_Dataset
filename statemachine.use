@@ -1,0 +1,197 @@
+model SimplStateMachine
+enum Operator{
+default
+}
+
+class StateMachine<CompositeState
+attributes
+operations
+end
+
+class State
+attributes
+	name : String
+	isActive : Boolean
+operations
+end
+
+class CompositeState<State
+attributes
+operations
+	activeSubTree():Boolean
+	unactiveSubTree():Boolean
+end
+
+class InitialState
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Event
+attributes
+	name : String
+operations
+end
+
+abstract class ExpressionElement
+attributes
+operations
+end
+
+class Expression<ExpressionElement
+attributes
+	operator : Operator
+	_name : String
+operations
+end
+
+abstract class Data<ExpressionElement
+attributes
+operations
+end
+
+class BooleanData<Data
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerData<Data
+attributes
+	value : Integer
+operations
+end
+
+abstract class Variable
+attributes
+	name : String
+operations
+end
+
+class BooleanVariable<Variable
+attributes
+operations
+end
+
+class IntegerVariable<Variable
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+class Assignment
+attributes
+	_name : String
+operations
+end
+
+class VariableReference<ExpressionElement
+attributes
+	_name : String
+operations
+end
+
+composition xxx_StateMachine_transitions_ between
+	StateMachine[0..1] role xxx_StateMachine_transitions__src
+	Transition[1..*] role transitions_
+end
+
+composition xxx_StateMachine_events between
+	StateMachine[0..1] role xxx_StateMachine_events_src
+	Event[1..*] role events
+end
+
+composition xxx_StateMachine_variables between
+	StateMachine[0..1] role xxx_StateMachine_variables_src
+	Variable[*] role variables
+end
+
+association xxx_State_container between
+	State[*] role xxx_State_container_src
+	CompositeState[0..1] role container
+end
+
+composition xxx_State_operation between
+	State[*] role xxx_State_operation_src
+	Operation[0..1] role operation
+end
+
+composition xxx_CompositeState_states_ between
+	CompositeState[0..1] role xxx_CompositeState_states__src
+	State[1..*] role states_
+end
+
+composition xxx_CompositeState_initialState between
+	CompositeState[*] role xxx_CompositeState_initialState_src
+	InitialState[1] role initialState
+end
+
+association xxx_InitialState_referencedState between
+	InitialState[*] role xxx_InitialState_referencedState_src
+	State[1] role referencedState
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	State[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+association xxx_Transition_event between
+	Transition[*] role xxx_Transition_event_src
+	Event[1] role event
+end
+
+composition xxx_Transition_guard between
+	Transition[*] role xxx_Transition_guard_src
+	Expression[0..1] role guard
+end
+
+composition xxx_Expression_left between
+	Expression[*] role xxx_Expression_left_src
+	ExpressionElement[1] role left
+end
+
+composition xxx_Expression_right between
+	Expression[*] role xxx_Expression_right_src
+	ExpressionElement[1] role right
+end
+
+composition xxx_Variable_value between
+	Variable[*] role xxx_Variable_value_src
+	Data[0..1] role value
+end
+
+composition xxx_Operation_contents between
+	Operation[0..1] role xxx_Operation_contents_src
+	Assignment[*] role contents
+end
+
+composition xxx_Assignment_expression between
+	Assignment[*] role xxx_Assignment_expression_src
+	ExpressionElement[1] role expression
+end
+
+association xxx_Assignment_variable between
+	Assignment[*] role xxx_Assignment_variable_src
+	Variable[1] role variable
+end
+
+association xxx_VariableReference_variable between
+	VariableReference[*] role xxx_VariableReference_variable_src
+	Variable[1] role variable
+end
+

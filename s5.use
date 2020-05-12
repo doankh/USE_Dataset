@@ -1,0 +1,50 @@
+model clafer
+abstract class Animal
+attributes
+	age : Integer
+	torso : String
+operations
+end
+
+class AnimalHead
+attributes
+	eye : String
+	ear : String
+	mouth : String
+operations
+end
+
+class AnimalLeg
+attributes
+	feet : String
+operations
+end
+
+class Cat
+attributes
+	whiskers : String
+operations
+end
+
+class Rhino
+attributes
+	horn : String
+operations
+end
+
+class Elephant
+attributes
+	trunk : String
+operations
+end
+
+composition xxx_Animal_head between
+	Animal[*] role xxx_Animal_head_src
+	AnimalHead[0..1] role head
+end
+
+composition xxx_Animal_leg between
+	Animal[*] role xxx_Animal_leg_src
+	AnimalLeg[0..1] role leg
+end
+

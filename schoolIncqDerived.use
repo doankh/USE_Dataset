@@ -1,0 +1,137 @@
+model schoolIncqDerived
+class Course
+attributes
+	subject : String
+	weight : Integer
+operations
+end
+
+class School
+attributes
+	name : String
+	address : String
+	numberOfTeachers : Integer
+	currentYear : Integer
+operations
+end
+
+class SchoolClass
+attributes
+	code : String
+operations
+end
+
+class SpecialisationCourse<Course
+attributes
+	specialisation : String
+operations
+end
+
+class Student
+attributes
+	name : String
+operations
+end
+
+class Teacher
+attributes
+	name : String
+operations
+end
+
+class Year
+attributes
+	startingDate : Integer
+operations
+end
+
+association xxx_Course_school between
+	Course[*] role xxx_Course_school_src
+	School[0..1] role school
+end
+
+association xxx_Course_teacher between
+	Course[*] role xxx_Course_teacher_src
+	Teacher[0..1] role teacher
+end
+
+association xxx_Course_schoolClass between
+	Course[*] role xxx_Course_schoolClass_src
+	SchoolClass[0..1] role schoolClass
+end
+
+composition xxx_School_years between
+	School[0..1] role xxx_School_years_src
+	Year[*] role years
+end
+
+composition xxx_School_teachers between
+	School[0..1] role xxx_School_teachers_src
+	Teacher[*] role teachers
+end
+
+composition xxx_School_courses between
+	School[0..1] role xxx_School_courses_src
+	Course[*] role courses
+end
+
+association xxx_School_teachersWithMostCourses between
+	School[0..1] role xxx_School_teachersWithMostCourses_src
+	Teacher[*] role teachersWithMostCourses
+end
+
+association xxx_School_lastYear between
+	School[*] role xxx_School_lastYear_src
+	Year[0..1] role lastYear
+end
+
+association xxx_SchoolClass_year between
+	SchoolClass[*] role xxx_SchoolClass_year_src
+	Year[0..1] role year
+end
+
+composition xxx_SchoolClass_students between
+	SchoolClass[0..1] role xxx_SchoolClass_students_src
+	Student[*] role students
+end
+
+association xxx_SchoolClass_courses between
+	SchoolClass[0..1] role xxx_SchoolClass_courses_src
+	Course[*] role courses
+end
+
+association xxx_SchoolClass_homeroomTeacher between
+	SchoolClass[*] role xxx_SchoolClass_homeroomTeacher_src
+	Teacher[0..1] role homeroomTeacher
+end
+
+association xxx_Student_schoolClass between
+	Student[*] role xxx_Student_schoolClass_src
+	SchoolClass[0..1] role schoolClass
+end
+
+association xxx_Teacher_school between
+	Teacher[*] role xxx_Teacher_school_src
+	School[0..1] role school
+end
+
+association xxx_Teacher_courses between
+	Teacher[0..1] role xxx_Teacher_courses_src
+	Course[*] role courses
+end
+
+association xxx_Teacher_homeroomedClass between
+	Teacher[*] role xxx_Teacher_homeroomedClass_src
+	SchoolClass[0..1] role homeroomedClass
+end
+
+association xxx_Year_school between
+	Year[*] role xxx_Year_school_src
+	School[0..1] role school
+end
+
+composition xxx_Year_schoolClasses between
+	Year[0..1] role xxx_Year_schoolClasses_src
+	SchoolClass[*] role schoolClasses
+end
+

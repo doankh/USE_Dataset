@@ -1,0 +1,346 @@
+model tm
+abstract class Control<ObjectData,Styled
+attributes
+	enabled : Boolean
+	visible : Boolean
+	toolTip : String
+operations
+end
+
+class Label<Control,Labeled
+attributes
+operations
+end
+
+class Text<Control
+attributes
+	editable : Boolean
+	modify : String
+	keyUp : String
+	text : String
+operations
+end
+
+abstract class List<Control,IndexSelection
+attributes
+	items : String
+operations
+end
+
+class SingleSelectionList<List
+attributes
+operations
+end
+
+class ComboBox<List,Text
+attributes
+operations
+end
+
+class MultipleSelectionList<List
+attributes
+operations
+end
+
+class Browser<Control
+attributes
+	location : String
+	url : String
+	text : String
+operations
+end
+
+abstract class Button<Control,Labeled
+attributes
+	selectionEvent : String
+operations
+end
+
+class PushButton<Button
+attributes
+operations
+end
+
+class CheckBox<Button
+attributes
+	selection : Boolean
+operations
+end
+
+class ToggleButton<Button
+attributes
+	selection : Boolean
+operations
+end
+
+abstract class BoundedValueControl<Control
+attributes
+	minimum : String
+	maximum : String
+	valueEvent : String
+	value : String
+operations
+end
+
+abstract class AbstractComposite<Control
+attributes
+operations
+end
+
+class Composite
+attributes
+operations
+end
+
+class GroupBox
+attributes
+operations
+end
+
+class TabFolder
+attributes
+operations
+end
+
+class Tab<Composite,Labeled
+attributes
+operations
+end
+
+class Shell
+attributes
+operations
+end
+
+class Separator<Control
+attributes
+operations
+end
+
+class ListViewer<Control,IndexSelection
+attributes
+operations
+end
+
+class SplitPane
+attributes
+	orientation : String
+operations
+end
+
+class PasswordField<Text
+attributes
+operations
+end
+
+class IndexSelection
+attributes
+	selectionEvent : String
+	selectionIndex : Integer
+	selectionIndices : Integer
+operations
+end
+
+class TreeViewer<Control
+attributes
+operations
+end
+
+class TableViewer<Control,IndexSelection
+attributes
+operations
+end
+
+abstract class StyleItem
+attributes
+	name : String
+	source : String
+operations
+end
+
+class StyleSelector
+attributes
+	property : String
+	selector : String
+operations
+end
+
+class Style
+attributes
+	name : String
+operations
+end
+
+class Styled
+attributes
+	name : String
+	role : String
+operations
+end
+
+class ColorItem<StyleItem
+attributes
+operations
+end
+
+class ImageItem<StyleItem
+attributes
+operations
+end
+
+class FontItem<StyleItem
+attributes
+operations
+end
+
+class LayoutData
+attributes
+operations
+end
+
+class Layout
+attributes
+operations
+	createLayoutData()
+end
+
+class RectangleLayout
+attributes
+operations
+end
+
+class RectangleLayoutData<LayoutData,Rectangle
+attributes
+operations
+end
+
+class Position
+attributes
+	x : Integer
+	y : Integer
+operations
+end
+
+class Dimension
+attributes
+	width : Integer
+	height : Integer
+operations
+end
+
+class Rectangle<Position,Dimension
+attributes
+operations
+end
+
+class ListData<ObjectData
+attributes
+	dataObjects : String
+operations
+end
+
+class TreeData<ListData
+attributes
+	parentDataObject : String
+	leaf : Boolean
+operations
+end
+
+class ObjectData<Scripted
+attributes
+	dataObject : String
+operations
+end
+
+abstract class Scripted
+attributes
+	scriptSource : String
+operations
+end
+
+class Labeled<ObjectData
+attributes
+	text : String
+	image : String
+	format : String
+operations
+end
+
+class FeaturesListData<ListData,FeatureNames
+attributes
+operations
+end
+
+class FeaturesLabeled<Labeled,FeatureNames
+attributes
+operations
+end
+
+class FeatureNames
+attributes
+	featureNames : String
+operations
+end
+
+
+composition xxx_Control_layoutData between
+	Control[*] role xxx_Control_layoutData_src
+	LayoutData[0..1] role layoutData
+end
+
+
+composition xxx_AbstractComposite_styles between
+	AbstractComposite[0..1] role xxx_AbstractComposite_styles_src
+	Style[*] role styles
+end
+
+composition xxx_ListViewer_viewProvider between
+	ListViewer[*] role xxx_ListViewer_viewProvider_src
+	Control[0..1] role viewProvider
+end
+
+composition xxx_ListViewer_contentProvider between
+	ListViewer[*] role xxx_ListViewer_contentProvider_src
+	ListData[0..1] role contentProvider
+end
+
+composition xxx_TreeViewer_viewProvider between
+	TreeViewer[*] role xxx_TreeViewer_viewProvider_src
+	Control[0..1] role viewProvider
+end
+
+composition xxx_TreeViewer_contentProvider between
+	TreeViewer[*] role xxx_TreeViewer_contentProvider_src
+	TreeData[0..1] role contentProvider
+end
+
+composition xxx_TableViewer_viewProviders between
+	TableViewer[0..1] role xxx_TableViewer_viewProviders_src
+	Control[*] role viewProviders
+end
+
+composition xxx_TableViewer_contentProvider between
+	TableViewer[*] role xxx_TableViewer_contentProvider_src
+	ListData[0..1] role contentProvider
+end
+
+composition xxx_Style_styleItems between
+	Style[0..1] role xxx_Style_styleItems_src
+	StyleItem[*] role styleItems
+end
+
+composition xxx_Style_styleSelectors between
+	Style[0..1] role xxx_Style_styleSelectors_src
+	StyleSelector[*] role styleSelectors
+end
+
+composition xxx_Styled_style between
+	Styled[*] role xxx_Styled_style_src
+	Style[0..1] role style
+end
+
+composition xxx_RectangleLayout_defaultLayoutData between
+	RectangleLayout[*] role xxx_RectangleLayout_defaultLayoutData_src
+	RectangleLayoutData[0..1] role defaultLayoutData
+end
+

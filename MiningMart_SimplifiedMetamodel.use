@@ -1,0 +1,101 @@
+model SimplifiedMiningMart
+class ModelElement
+attributes
+operations
+end
+
+class Classifier<ModelElement
+attributes
+operations
+end
+
+class StructuralFeature<ModelElement
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class Attribute<StructuralFeature
+attributes
+operations
+end
+
+class Concept<Class
+attributes
+operations
+end
+
+class ColumnSet<Class
+attributes
+operations
+end
+
+class Column<Attribute
+attributes
+operations
+end
+
+class FeatureAttribute<Attribute
+attributes
+operations
+end
+
+class Value<Attribute
+attributes
+operations
+end
+
+class RoleRestriction<Attribute
+attributes
+operations
+end
+
+class Integer<DataType
+attributes
+operations
+end
+
+class String<DataType
+attributes
+operations
+end
+
+class DomainDataType<DataType
+attributes
+operations
+end
+
+association xxx_Class_name between
+	Class[*] role xxx_Class_name_src
+	String[1] role name
+end
+
+composition xxx_Class_attributes_ between
+	Class[0..1] role xxx_Class_attributes__src
+	Attribute[1..*] role attributes_
+end
+
+association xxx_DataType_attribute between
+	DataType[*] role xxx_DataType_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Attribute_class_ between
+	Attribute[*] role xxx_Attribute_class__src
+	Class[1] role class_
+end
+
+association xxx_Attribute_has between
+	Attribute[*] role xxx_Attribute_has_src
+	DataType[1] role has
+end
+

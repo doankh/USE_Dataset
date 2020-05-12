@@ -1,0 +1,855 @@
+model thingml
+class ThingMLModel
+attributes
+operations
+end
+
+class Function<AnnotatedElement,TypedElement
+attributes
+operations
+end
+
+class Message<AnnotatedElement
+attributes
+operations
+end
+
+class Thing<Type
+attributes
+	fragment : Boolean
+operations
+end
+
+class Parameter<Variable
+attributes
+operations
+end
+
+abstract class Variable<TypedElement,AnnotatedElement
+attributes
+operations
+end
+
+abstract class ThingMLElement
+attributes
+	name : String
+operations
+end
+
+abstract class Type<AnnotatedElement
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+class Property<Variable
+attributes
+	changeable : Boolean
+operations
+end
+
+class PropertyAssign<AnnotatedElement
+attributes
+operations
+end
+
+class PlatformAnnotation<ThingMLElement
+attributes
+	value : String
+operations
+end
+
+class Enumeration<Type
+attributes
+operations
+end
+
+class PrimitiveType<Type
+attributes
+operations
+end
+
+class EnumerationLiteral<AnnotatedElement
+attributes
+operations
+end
+
+abstract class AnnotatedElement<ThingMLElement
+attributes
+operations
+end
+
+class StateMachine<CompositeState
+attributes
+operations
+end
+
+abstract class Handler<AnnotatedElement
+attributes
+operations
+end
+
+class Transition<Handler
+attributes
+operations
+end
+
+class InternalTransition<Handler
+attributes
+operations
+end
+
+class State<AnnotatedElement
+attributes
+operations
+end
+
+class CompositeState<State,Region
+attributes
+operations
+end
+
+abstract class Region<AnnotatedElement
+attributes
+	history : Boolean
+operations
+end
+
+class ParallelRegion<Region
+attributes
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class ActionBlock<Action
+attributes
+operations
+end
+
+class ExternStatement<Action
+attributes
+	statement : String
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class ExternExpression<Expression
+attributes
+	expression : String
+operations
+end
+
+class SendAction<Action
+attributes
+operations
+end
+
+class VariableAssignment<Action
+attributes
+operations
+end
+
+abstract class Event<ThingMLElement
+attributes
+operations
+end
+
+class ReceiveMessage<Event
+attributes
+operations
+end
+
+class Dictionary<Property
+attributes
+operations
+end
+
+abstract class Port<AnnotatedElement
+attributes
+operations
+end
+
+class RequiredPort<Port
+attributes
+	optional : Boolean
+operations
+end
+
+class ProvidedPort<Port
+attributes
+operations
+end
+
+class EventReference<Expression
+attributes
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class EnumLiteralRef<Literal
+attributes
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	intValue : Integer
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	boolValue : Boolean
+operations
+end
+
+class StringLiteral<Literal
+attributes
+	stringValue : String
+operations
+end
+
+class DoubleLiteral<Literal
+attributes
+	doubleValue : Real
+operations
+end
+
+abstract class UnaryExpression<Expression
+attributes
+operations
+end
+
+class NotExpression<UnaryExpression
+attributes
+operations
+end
+
+class UnaryMinus<UnaryExpression
+attributes
+operations
+end
+
+abstract class BinaryExpression<Expression
+attributes
+operations
+end
+
+class PlusExpression<BinaryExpression
+attributes
+operations
+end
+
+class MinusExpression<BinaryExpression
+attributes
+operations
+end
+
+class TimesExpression<BinaryExpression
+attributes
+operations
+end
+
+class DivExpression<BinaryExpression
+attributes
+operations
+end
+
+class ModExpression<BinaryExpression
+attributes
+operations
+end
+
+class EqualsExpression<BinaryExpression
+attributes
+operations
+end
+
+class GreaterExpression<BinaryExpression
+attributes
+operations
+end
+
+class LowerExpression<BinaryExpression
+attributes
+operations
+end
+
+class AndExpression<BinaryExpression
+attributes
+operations
+end
+
+class OrExpression<BinaryExpression
+attributes
+operations
+end
+
+abstract class ControlStructure<Action
+attributes
+operations
+end
+
+class LoopAction<ControlStructure
+attributes
+operations
+end
+
+class ConditionalAction<ControlStructure
+attributes
+operations
+end
+
+class PropertyReference<Expression
+attributes
+operations
+end
+
+class ArrayIndex<Expression
+attributes
+operations
+end
+
+class DictionaryReference<PropertyReference
+attributes
+operations
+end
+
+class ExpressionGroup<Expression
+attributes
+operations
+end
+
+class ReturnAction<Action
+attributes
+operations
+end
+
+class PrintAction<Action
+attributes
+operations
+end
+
+class ErrorAction<Action
+attributes
+operations
+end
+
+class Configuration<AnnotatedElement
+attributes
+	fragment : Boolean
+operations
+end
+
+class Instance<AnnotatedElement
+attributes
+operations
+end
+
+class Connector<AnnotatedElement
+attributes
+operations
+end
+
+class ConfigPropertyAssign<AnnotatedElement
+attributes
+operations
+end
+
+class ConfigInclude<AnnotatedElement
+attributes
+operations
+end
+
+class InstanceRef
+attributes
+operations
+end
+
+abstract class FunctionCall
+attributes
+operations
+end
+
+class FunctionCallStatement<Action,FunctionCall
+attributes
+operations
+end
+
+class FunctionCallExpression<FunctionCall,Expression
+attributes
+operations
+end
+
+class LocalVariable<Variable,Action
+attributes
+	changeable : Boolean
+operations
+end
+
+composition xxx_ThingMLModel_types between
+	ThingMLModel[0..1] role xxx_ThingMLModel_types_src
+	Type[*] role types
+end
+
+association xxx_ThingMLModel_imports between
+	ThingMLModel[0..1] role xxx_ThingMLModel_imports_src
+	ThingMLModel[*] role imports
+end
+
+composition xxx_ThingMLModel_configs between
+	ThingMLModel[0..1] role xxx_ThingMLModel_configs_src
+	Configuration[*] role configs
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	Action[1] role body
+end
+
+composition xxx_Message_parameters between
+	Message[0..1] role xxx_Message_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_Thing_properties between
+	Thing[0..1] role xxx_Thing_properties_src
+	Property[*] role properties
+end
+
+composition xxx_Thing_ports between
+	Thing[0..1] role xxx_Thing_ports_src
+	Port[*] role ports
+end
+
+composition xxx_Thing_behaviour between
+	Thing[0..1] role xxx_Thing_behaviour_src
+	StateMachine[*] role behaviour
+end
+
+association xxx_Thing_includes between
+	Thing[0..1] role xxx_Thing_includes_src
+	Thing[*] role includes
+end
+
+composition xxx_Thing_assign between
+	Thing[0..1] role xxx_Thing_assign_src
+	PropertyAssign[*] role assign
+end
+
+composition xxx_Thing_messages between
+	Thing[0..1] role xxx_Thing_messages_src
+	Message[*] role messages
+end
+
+composition xxx_Thing_functions between
+	Thing[0..1] role xxx_Thing_functions_src
+	Function[*] role functions
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[1] role type
+end
+
+composition xxx_TypedElement_cardinality between
+	TypedElement[*] role xxx_TypedElement_cardinality_src
+	Expression[0..1] role cardinality
+end
+
+composition xxx_Property_init between
+	Property[*] role xxx_Property_init_src
+	Expression[0..1] role init
+end
+
+composition xxx_PropertyAssign_init between
+	PropertyAssign[*] role xxx_PropertyAssign_init_src
+	Expression[1] role init
+end
+
+association xxx_PropertyAssign_property between
+	PropertyAssign[*] role xxx_PropertyAssign_property_src
+	Property[1] role property
+end
+
+composition xxx_PropertyAssign_index between
+	PropertyAssign[0..1] role xxx_PropertyAssign_index_src
+	Expression[*] role index
+end
+
+composition xxx_Enumeration_literals between
+	Enumeration[0..1] role xxx_Enumeration_literals_src
+	EnumerationLiteral[*] role literals
+end
+
+association xxx_EnumerationLiteral_enum_ between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enum__src
+	Enumeration[1] role enum_
+end
+
+composition xxx_AnnotatedElement_annotations between
+	AnnotatedElement[0..1] role xxx_AnnotatedElement_annotations_src
+	PlatformAnnotation[*] role annotations
+end
+
+composition xxx_Handler_event between
+	Handler[0..1] role xxx_Handler_event_src
+	Event[*] role event
+end
+
+composition xxx_Handler_guard between
+	Handler[*] role xxx_Handler_guard_src
+	Expression[0..1] role guard
+end
+
+composition xxx_Handler_action between
+	Handler[*] role xxx_Handler_action_src
+	Action[0..1] role action
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	State[1] role target
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	State[1] role source
+end
+
+composition xxx_Transition_after between
+	Transition[*] role xxx_Transition_after_src
+	Action[0..1] role after
+end
+
+composition xxx_Transition_before between
+	Transition[*] role xxx_Transition_before_src
+	Action[0..1] role before
+end
+
+composition xxx_State_outgoing between
+	State[0..1] role xxx_State_outgoing_src
+	Transition[*] role outgoing
+end
+
+association xxx_State_incoming between
+	State[0..1] role xxx_State_incoming_src
+	Transition[*] role incoming
+end
+
+composition xxx_State_entry between
+	State[*] role xxx_State_entry_src
+	Action[0..1] role entry
+end
+
+composition xxx_State_exit between
+	State[*] role xxx_State_exit_src
+	Action[0..1] role exit
+end
+
+composition xxx_State_properties between
+	State[0..1] role xxx_State_properties_src
+	Property[*] role properties
+end
+
+composition xxx_State_internal between
+	State[0..1] role xxx_State_internal_src
+	InternalTransition[*] role internal
+end
+
+composition xxx_CompositeState_region between
+	CompositeState[0..1] role xxx_CompositeState_region_src
+	ParallelRegion[*] role region
+end
+
+composition xxx_Region_substate between
+	Region[0..1] role xxx_Region_substate_src
+	State[*] role substate
+end
+
+association xxx_Region_initial between
+	Region[*] role xxx_Region_initial_src
+	State[1] role initial
+end
+
+composition xxx_ActionBlock_actions between
+	ActionBlock[0..1] role xxx_ActionBlock_actions_src
+	Action[*] role actions
+end
+
+composition xxx_ExternStatement_segments between
+	ExternStatement[0..1] role xxx_ExternStatement_segments_src
+	Expression[*] role segments
+end
+
+composition xxx_ExternExpression_segments between
+	ExternExpression[0..1] role xxx_ExternExpression_segments_src
+	Expression[*] role segments
+end
+
+composition xxx_SendAction_parameters between
+	SendAction[0..1] role xxx_SendAction_parameters_src
+	Expression[*] role parameters
+end
+
+association xxx_SendAction_message between
+	SendAction[*] role xxx_SendAction_message_src
+	Message[1] role message
+end
+
+association xxx_SendAction_port between
+	SendAction[*] role xxx_SendAction_port_src
+	Port[1] role port
+end
+
+association xxx_VariableAssignment_property between
+	VariableAssignment[*] role xxx_VariableAssignment_property_src
+	Variable[1] role property
+end
+
+composition xxx_VariableAssignment_expression between
+	VariableAssignment[*] role xxx_VariableAssignment_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_VariableAssignment_index between
+	VariableAssignment[0..1] role xxx_VariableAssignment_index_src
+	Expression[*] role index
+end
+
+association xxx_ReceiveMessage_message between
+	ReceiveMessage[*] role xxx_ReceiveMessage_message_src
+	Message[1] role message
+end
+
+association xxx_ReceiveMessage_port between
+	ReceiveMessage[*] role xxx_ReceiveMessage_port_src
+	Port[1] role port
+end
+
+association xxx_Dictionary_indexType between
+	Dictionary[*] role xxx_Dictionary_indexType_src
+	Type[1] role indexType
+end
+
+association xxx_Port_owner between
+	Port[*] role xxx_Port_owner_src
+	Thing[0..1] role owner
+end
+
+association xxx_Port_receives between
+	Port[0..1] role xxx_Port_receives_src
+	Message[*] role receives
+end
+
+association xxx_Port_sends between
+	Port[0..1] role xxx_Port_sends_src
+	Message[*] role sends
+end
+
+association xxx_EventReference_msgRef between
+	EventReference[*] role xxx_EventReference_msgRef_src
+	ReceiveMessage[1] role msgRef
+end
+
+association xxx_EventReference_paramRef between
+	EventReference[*] role xxx_EventReference_paramRef_src
+	Parameter[1] role paramRef
+end
+
+association xxx_EnumLiteralRef_enum_ between
+	EnumLiteralRef[*] role xxx_EnumLiteralRef_enum__src
+	Enumeration[1] role enum_
+end
+
+association xxx_EnumLiteralRef_literal between
+	EnumLiteralRef[*] role xxx_EnumLiteralRef_literal_src
+	EnumerationLiteral[1] role literal
+end
+
+composition xxx_UnaryExpression_term between
+	UnaryExpression[*] role xxx_UnaryExpression_term_src
+	Expression[1] role term
+end
+
+composition xxx_BinaryExpression_lhs between
+	BinaryExpression[*] role xxx_BinaryExpression_lhs_src
+	Expression[1] role lhs
+end
+
+composition xxx_BinaryExpression_rhs between
+	BinaryExpression[*] role xxx_BinaryExpression_rhs_src
+	Expression[1] role rhs
+end
+
+composition xxx_ControlStructure_action between
+	ControlStructure[*] role xxx_ControlStructure_action_src
+	Action[1] role action
+end
+
+composition xxx_ControlStructure_condition between
+	ControlStructure[*] role xxx_ControlStructure_condition_src
+	Expression[1] role condition
+end
+
+association xxx_PropertyReference_property between
+	PropertyReference[*] role xxx_PropertyReference_property_src
+	Variable[1] role property
+end
+
+composition xxx_ArrayIndex_array between
+	ArrayIndex[*] role xxx_ArrayIndex_array_src
+	Expression[1] role array
+end
+
+composition xxx_ArrayIndex_index between
+	ArrayIndex[*] role xxx_ArrayIndex_index_src
+	Expression[1] role index
+end
+
+composition xxx_DictionaryReference_index between
+	DictionaryReference[*] role xxx_DictionaryReference_index_src
+	Expression[1] role index
+end
+
+composition xxx_ExpressionGroup_exp between
+	ExpressionGroup[*] role xxx_ExpressionGroup_exp_src
+	Expression[1] role exp
+end
+
+composition xxx_ReturnAction_exp between
+	ReturnAction[*] role xxx_ReturnAction_exp_src
+	Expression[1] role exp
+end
+
+composition xxx_PrintAction_msg between
+	PrintAction[*] role xxx_PrintAction_msg_src
+	Expression[1] role msg
+end
+
+composition xxx_ErrorAction_msg between
+	ErrorAction[*] role xxx_ErrorAction_msg_src
+	Expression[1] role msg
+end
+
+composition xxx_Configuration_instances between
+	Configuration[0..1] role xxx_Configuration_instances_src
+	Instance[*] role instances
+end
+
+composition xxx_Configuration_connectors between
+	Configuration[0..1] role xxx_Configuration_connectors_src
+	Connector[*] role connectors
+end
+
+composition xxx_Configuration_configs between
+	Configuration[0..1] role xxx_Configuration_configs_src
+	ConfigInclude[*] role configs
+end
+
+composition xxx_Configuration_propassigns between
+	Configuration[0..1] role xxx_Configuration_propassigns_src
+	ConfigPropertyAssign[*] role propassigns
+end
+
+association xxx_Instance_type between
+	Instance[*] role xxx_Instance_type_src
+	Thing[1] role type
+end
+
+composition xxx_Instance_assign between
+	Instance[0..1] role xxx_Instance_assign_src
+	PropertyAssign[*] role assign
+end
+
+composition xxx_Connector_srv between
+	Connector[*] role xxx_Connector_srv_src
+	InstanceRef[1] role srv
+end
+
+composition xxx_Connector_cli between
+	Connector[*] role xxx_Connector_cli_src
+	InstanceRef[1] role cli
+end
+
+association xxx_Connector_required between
+	Connector[*] role xxx_Connector_required_src
+	RequiredPort[1] role required
+end
+
+association xxx_Connector_provided between
+	Connector[*] role xxx_Connector_provided_src
+	ProvidedPort[1] role provided
+end
+
+composition xxx_ConfigPropertyAssign_init between
+	ConfigPropertyAssign[*] role xxx_ConfigPropertyAssign_init_src
+	Expression[1] role init
+end
+
+association xxx_ConfigPropertyAssign_property between
+	ConfigPropertyAssign[*] role xxx_ConfigPropertyAssign_property_src
+	Property[1] role property
+end
+
+composition xxx_ConfigPropertyAssign_instance between
+	ConfigPropertyAssign[*] role xxx_ConfigPropertyAssign_instance_src
+	InstanceRef[1] role instance
+end
+
+composition xxx_ConfigPropertyAssign_index between
+	ConfigPropertyAssign[0..1] role xxx_ConfigPropertyAssign_index_src
+	Expression[*] role index
+end
+
+association xxx_ConfigInclude_config between
+	ConfigInclude[*] role xxx_ConfigInclude_config_src
+	Configuration[1] role config
+end
+
+association xxx_InstanceRef_config between
+	InstanceRef[0..1] role xxx_InstanceRef_config_src
+	ConfigInclude[*] role config
+end
+
+association xxx_InstanceRef_instance between
+	InstanceRef[*] role xxx_InstanceRef_instance_src
+	Instance[1] role instance
+end
+
+composition xxx_FunctionCall_parameters between
+	FunctionCall[0..1] role xxx_FunctionCall_parameters_src
+	Expression[*] role parameters
+end
+
+association xxx_FunctionCall_function between
+	FunctionCall[*] role xxx_FunctionCall_function_src
+	Function[1] role function
+end
+
+composition xxx_LocalVariable_init between
+	LocalVariable[*] role xxx_LocalVariable_init_src
+	Expression[0..1] role init
+end
+

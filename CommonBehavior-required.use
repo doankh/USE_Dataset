@@ -1,0 +1,66 @@
+model CommonBehaviorReq
+class BehavioredClassifier<Classifier
+attributes
+operations
+end
+
+abstract class Classifier<RedefinableElement
+attributes
+operations
+end
+
+abstract class Class<Classifier,BehavioredClassifier
+attributes
+operations
+end
+
+abstract class RedefinableElement
+attributes
+operations
+end
+
+class Parameter
+attributes
+operations
+end
+
+class OpaqueExpression
+attributes
+operations
+end
+
+class Constraint
+attributes
+operations
+end
+
+class Property
+attributes
+operations
+end
+
+class Interface<Classifier
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+abstract class PackageableElement
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+abstract class ValueSpecification
+attributes
+operations
+end
+

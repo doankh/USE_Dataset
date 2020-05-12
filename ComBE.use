@@ -1,0 +1,163 @@
+model ComBE
+enum BehaviorType{
+default
+}
+
+enum TraceabilityStatus{
+default
+}
+
+enum Operator{
+default
+}
+
+class Specification
+attributes
+operations
+end
+
+class Requirement
+attributes
+	id : String
+	label : String
+operations
+end
+
+class BehaviorSeq
+attributes
+	behaviortype : BehaviorType
+operations
+end
+
+class Behavior
+attributes
+	int : String
+	label : String
+operations
+end
+
+class Root
+attributes
+operations
+end
+
+abstract class Component
+attributes
+	id : String
+	label : String
+operations
+end
+
+class StandardComponent<Component
+attributes
+operations
+end
+
+class SystemComponent<Component
+attributes
+operations
+end
+
+abstract class BehaviorTree
+attributes
+operations
+end
+
+class AtomicSequence<BehaviorTree
+attributes
+operations
+end
+
+class AlternativeBranch<BehaviorTree
+attributes
+operations
+end
+
+class ParallelBranch<BehaviorTree
+attributes
+operations
+end
+
+abstract class Node
+attributes
+	label : String
+	operator : Operator
+operations
+end
+
+class StandardNode<Node
+attributes
+	traceabilitystatus : TraceabilityStatus
+operations
+end
+
+class EmptyNode<Node
+attributes
+operations
+end
+
+composition xxx_Specification_requirements between
+	Specification[0..1] role xxx_Specification_requirements_src
+	Requirement[*] role requirements
+end
+
+composition xxx_Specification_components between
+	Specification[0..1] role xxx_Specification_components_src
+	Component[*] role components
+end
+
+composition xxx_Specification_root between
+	Specification[*] role xxx_Specification_root_src
+	Root[0..1] role root
+end
+
+composition xxx_BehaviorSeq_behavior between
+	BehaviorSeq[0..1] role xxx_BehaviorSeq_behavior_src
+	Behavior[*] role behavior
+end
+
+composition xxx_Root_behaviortree between
+	Root[*] role xxx_Root_behaviortree_src
+	BehaviorTree[1] role behaviortree
+end
+
+composition xxx_Component_behaviorseqs between
+	Component[0..1] role xxx_Component_behaviorseqs_src
+	BehaviorSeq[*] role behaviorseqs
+end
+
+composition xxx_BehaviorTree_nodes between
+	BehaviorTree[0..1] role xxx_BehaviorTree_nodes_src
+	Node[1..*] role nodes
+end
+
+composition xxx_AtomicSequence_child between
+	AtomicSequence[*] role xxx_AtomicSequence_child_src
+	BehaviorTree[0..1] role child
+end
+
+composition xxx_AlternativeBranch_children between
+	AlternativeBranch[0..1] role xxx_AlternativeBranch_children_src
+	BehaviorTree[*] role children
+end
+
+composition xxx_ParallelBranch_children between
+	ParallelBranch[0..1] role xxx_ParallelBranch_children_src
+	BehaviorTree[*] role children
+end
+
+association xxx_StandardNode_requirement between
+	StandardNode[*] role xxx_StandardNode_requirement_src
+	Requirement[1] role requirement
+end
+
+association xxx_StandardNode_component between
+	StandardNode[*] role xxx_StandardNode_component_src
+	Component[1] role component
+end
+
+association xxx_StandardNode_behavior between
+	StandardNode[*] role xxx_StandardNode_behavior_src
+	Behavior[1] role behavior
+end
+

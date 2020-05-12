@@ -1,0 +1,248 @@
+model idlmm
+enum ParameterMode{
+default
+}
+
+enum PrimitiveKind{
+default
+}
+
+abstract class Container<Contained
+attributes
+operations
+end
+
+abstract class Contained
+attributes
+	identifier : String
+	repositoryId : String
+	version : String
+	absoluteName : String
+operations
+end
+
+class InterfaceDef<Container,TypedefDef
+attributes
+	isAbstract : Boolean
+	isCustom : Boolean
+	isTruncatable : Boolean
+operations
+end
+
+class ModuleDef<Container
+attributes
+	prefix : String
+operations
+end
+
+abstract class IDLType
+attributes
+	typeCode : String
+operations
+end
+
+class OperationDef<Contained,Typed
+attributes
+	isOneway : Boolean
+	contexts : String
+operations
+end
+
+class AttributeDef<Contained,Typed
+attributes
+	isReadonly : Boolean
+operations
+end
+
+class ConstantDef<Contained,Typed
+attributes
+	constValue : String
+operations
+end
+
+abstract class Typed
+attributes
+operations
+end
+
+class ParameterDef<Typed
+attributes
+	identifier : String
+	direction : ParameterMode
+operations
+end
+
+class PrimitiveDef<IDLType
+attributes
+	kind : PrimitiveKind
+operations
+end
+
+class ExceptionDef<Contained
+attributes
+	typeCode : String
+operations
+end
+
+class Field<Typed
+attributes
+	identifier : String
+operations
+end
+
+class FixedDef<IDLType
+attributes
+	digits : String
+	scale : String
+operations
+end
+
+class WstringDef<IDLType
+attributes
+	bound : String
+operations
+end
+
+class StringDef<IDLType
+attributes
+	bound : String
+operations
+end
+
+class AliasDef<Typed,TypedefDef
+attributes
+operations
+end
+
+class ArrayDef<Typed,IDLType
+attributes
+	bound : String
+operations
+end
+
+class SequenceDef<Typed,IDLType
+attributes
+	bound : String
+operations
+end
+
+class UnionField<Typed
+attributes
+	identifier : String
+	label : String
+operations
+end
+
+abstract class TypedefDef<IDLType,Contained
+attributes
+operations
+end
+
+class UnionDef<TypedefDef
+attributes
+operations
+end
+
+class EnumDef<TypedefDef
+attributes
+	members : String
+operations
+end
+
+class StructDef<TypedefDef
+attributes
+operations
+end
+
+class TranslationUnit
+attributes
+	identifier : String
+operations
+end
+
+class Include
+attributes
+	importURI : String
+operations
+end
+
+composition xxx_Container_contains between
+	Container[0..1] role xxx_Container_contains_src
+	Contained[*] role contains
+end
+
+association xxx_Contained_definedIn between
+	Contained[*] role xxx_Contained_definedIn_src
+	Container[0..1] role definedIn
+end
+
+association xxx_InterfaceDef_derivesFrom between
+	InterfaceDef[0..1] role xxx_InterfaceDef_derivesFrom_src
+	InterfaceDef[*] role derivesFrom
+end
+
+composition xxx_OperationDef_parameters between
+	OperationDef[0..1] role xxx_OperationDef_parameters_src
+	ParameterDef[*] role parameters
+end
+
+association xxx_OperationDef_canRaise between
+	OperationDef[0..1] role xxx_OperationDef_canRaise_src
+	ExceptionDef[*] role canRaise
+end
+
+association xxx_AttributeDef_getRaises between
+	AttributeDef[0..1] role xxx_AttributeDef_getRaises_src
+	ExceptionDef[*] role getRaises
+end
+
+association xxx_AttributeDef_setRaises between
+	AttributeDef[0..1] role xxx_AttributeDef_setRaises_src
+	ExceptionDef[*] role setRaises
+end
+
+composition xxx_Typed_containedType between
+	Typed[*] role xxx_Typed_containedType_src
+	IDLType[0..1] role containedType
+end
+
+association xxx_Typed_sharedType between
+	Typed[*] role xxx_Typed_sharedType_src
+	TypedefDef[0..1] role sharedType
+end
+
+composition xxx_ExceptionDef_members between
+	ExceptionDef[0..1] role xxx_ExceptionDef_members_src
+	Field[*] role members
+end
+
+composition xxx_UnionDef_unionMembers between
+	UnionDef[0..1] role xxx_UnionDef_unionMembers_src
+	UnionField[*] role unionMembers
+end
+
+composition xxx_UnionDef_containedDiscrim between
+	UnionDef[*] role xxx_UnionDef_containedDiscrim_src
+	IDLType[0..1] role containedDiscrim
+end
+
+association xxx_UnionDef_sharedDiscrim between
+	UnionDef[*] role xxx_UnionDef_sharedDiscrim_src
+	TypedefDef[0..1] role sharedDiscrim
+end
+
+composition xxx_StructDef_members between
+	StructDef[0..1] role xxx_StructDef_members_src
+	Field[*] role members
+end
+
+composition xxx_TranslationUnit_contains between
+	TranslationUnit[0..1] role xxx_TranslationUnit_contains_src
+	Contained[*] role contains
+end
+
+composition xxx_TranslationUnit_includes between
+	TranslationUnit[0..1] role xxx_TranslationUnit_includes_src
+	Include[*] role includes
+end
+

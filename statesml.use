@@ -1,0 +1,287 @@
+model statesml
+enum ParameterDirectionKind{
+default
+}
+
+class SystemUnit<NamedElement,BehavioredElement
+attributes
+operations
+end
+
+class Attribute<TypedElement,NamedElement
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+class DataType<BehavioredElement,NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Function<NamedElement
+attributes
+operations
+end
+
+class Parameter<NamedElement,TypedElement
+attributes
+	direction : ParameterDirectionKind
+operations
+end
+
+class StateSystem<NamedElement
+attributes
+operations
+end
+
+abstract class Node<NamedElement
+attributes
+operations
+end
+
+class Edge<NamedElement
+attributes
+operations
+end
+
+class SelectionDivergence<Node
+attributes
+operations
+end
+
+class SelectionConvergence<Node
+attributes
+operations
+end
+
+class State<Node
+attributes
+	initial : Boolean
+	terminal : Boolean
+operations
+end
+
+class Transition<Node
+attributes
+operations
+end
+
+class FunctionCall
+attributes
+operations
+end
+
+class ParameterValue
+attributes
+operations
+end
+
+abstract class ValueSpecification
+attributes
+operations
+end
+
+class IntegerValueSpecification<ValueSpecification
+attributes
+	value : Integer
+operations
+end
+
+class BooleanValueSpecification<ValueSpecification
+attributes
+	value : Boolean
+operations
+end
+
+class AttributeValueSpecification<ValueSpecification
+attributes
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+abstract class Event<NamedElement
+attributes
+operations
+end
+
+class ChangeEvent<Event
+attributes
+operations
+end
+
+class ChangeExpression
+attributes
+operations
+end
+
+abstract class BehavioredElement
+attributes
+operations
+end
+
+class StringValueSpecification<ValueSpecification
+attributes
+	value : String
+operations
+end
+
+class SystemUnitLibrary<NamedElement
+attributes
+operations
+end
+
+class DataTypeLibrary<NamedElement
+attributes
+operations
+end
+
+composition xxx_SystemUnit_attributes_ between
+	SystemUnit[0..1] role xxx_SystemUnit_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	DataType[1] role type
+end
+
+composition xxx_Function_parameters between
+	Function[0..1] role xxx_Function_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_StateSystem_nodes between
+	StateSystem[0..1] role xxx_StateSystem_nodes_src
+	Node[*] role nodes
+end
+
+composition xxx_StateSystem_edges between
+	StateSystem[0..1] role xxx_StateSystem_edges_src
+	Edge[*] role edges
+end
+
+composition xxx_StateSystem_processibleEvents between
+	StateSystem[0..1] role xxx_StateSystem_processibleEvents_src
+	Event[*] role processibleEvents
+end
+
+association xxx_StateSystem_systemUnit between
+	StateSystem[*] role xxx_StateSystem_systemUnit_src
+	SystemUnit[1] role systemUnit
+end
+
+composition xxx_StateSystem_attributes_ between
+	StateSystem[0..1] role xxx_StateSystem_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Node_outgoingEdges between
+	Node[0..1] role xxx_Node_outgoingEdges_src
+	Edge[*] role outgoingEdges
+end
+
+association xxx_Node_incomingEdges between
+	Node[0..1] role xxx_Node_incomingEdges_src
+	Edge[*] role incomingEdges
+end
+
+association xxx_Edge_source between
+	Edge[*] role xxx_Edge_source_src
+	Node[1] role source
+end
+
+association xxx_Edge_target between
+	Edge[*] role xxx_Edge_target_src
+	Node[1] role target
+end
+
+composition xxx_State_actionSequence between
+	State[0..1] role xxx_State_actionSequence_src
+	FunctionCall[*] role actionSequence
+end
+
+composition xxx_Transition_trigger between
+	Transition[*] role xxx_Transition_trigger_src
+	Trigger[0..1] role trigger
+end
+
+association xxx_FunctionCall_function between
+	FunctionCall[*] role xxx_FunctionCall_function_src
+	Function[1] role function
+end
+
+composition xxx_FunctionCall_parameters between
+	FunctionCall[0..1] role xxx_FunctionCall_parameters_src
+	ParameterValue[*] role parameters
+end
+
+composition xxx_ParameterValue_valueSpecification between
+	ParameterValue[*] role xxx_ParameterValue_valueSpecification_src
+	ValueSpecification[1] role valueSpecification
+end
+
+association xxx_ParameterValue_parameter between
+	ParameterValue[*] role xxx_ParameterValue_parameter_src
+	Parameter[1] role parameter
+end
+
+association xxx_ParameterValue_functionCall between
+	ParameterValue[*] role xxx_ParameterValue_functionCall_src
+	FunctionCall[1] role functionCall
+end
+
+association xxx_ValueSpecification_parameterValue between
+	ValueSpecification[*] role xxx_ValueSpecification_parameterValue_src
+	ParameterValue[1] role parameterValue
+end
+
+association xxx_AttributeValueSpecification_attribute between
+	AttributeValueSpecification[*] role xxx_AttributeValueSpecification_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_Trigger_event between
+	Trigger[*] role xxx_Trigger_event_src
+	Event[1] role event
+end
+
+composition xxx_ChangeEvent_changeExpression between
+	ChangeEvent[*] role xxx_ChangeEvent_changeExpression_src
+	ChangeExpression[1] role changeExpression
+end
+
+composition xxx_ChangeExpression_booleanFunctionCall between
+	ChangeExpression[*] role xxx_ChangeExpression_booleanFunctionCall_src
+	FunctionCall[1] role booleanFunctionCall
+end
+
+composition xxx_BehavioredElement_functions between
+	BehavioredElement[0..1] role xxx_BehavioredElement_functions_src
+	Function[*] role functions
+end
+
+composition xxx_SystemUnitLibrary_units between
+	SystemUnitLibrary[0..1] role xxx_SystemUnitLibrary_units_src
+	SystemUnit[*] role units
+end
+
+composition xxx_DataTypeLibrary_types between
+	DataTypeLibrary[0..1] role xxx_DataTypeLibrary_types_src
+	DataType[*] role types
+end
+

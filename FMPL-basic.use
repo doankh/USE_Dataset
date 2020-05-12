@@ -1,0 +1,203 @@
+model fmpl
+enum RelationalOperator{
+default
+}
+
+enum ArithmeticOperator{
+default
+}
+
+class Policy
+attributes
+	name : String
+	parserURI : String
+operations
+end
+
+class Automata
+attributes
+	name : String
+operations
+end
+
+class Transition
+attributes
+	name : String
+operations
+end
+
+class State
+attributes
+	name : String
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+class Exec<Expression
+attributes
+operations
+end
+
+class Cond<Expression
+attributes
+operations
+end
+
+class Read<Expression
+attributes
+	initBit : String
+	length : String
+operations
+end
+
+class Write<Expression
+attributes
+	initBit : String
+	length : String
+operations
+end
+
+class Init<Expression
+attributes
+operations
+end
+
+class Relational<Expression
+attributes
+	operator : RelationalOperator
+operations
+end
+
+class ArithmeticExpression<Expression
+attributes
+	operator : ArithmeticOperator
+operations
+end
+
+abstract class Literal<Expression
+attributes
+operations
+end
+
+class IntegerLit<Literal
+attributes
+	value : String
+operations
+end
+
+class StringLit<Literal
+attributes
+	value : String
+operations
+end
+
+class VarDeclaration<Expression
+attributes
+	name : String
+operations
+end
+
+class VarReference<Expression
+attributes
+operations
+end
+
+abstract class Field<Literal
+attributes
+operations
+end
+
+composition xxx_Policy_automatas between
+	Policy[0..1] role xxx_Policy_automatas_src
+	Automata[*] role automatas
+end
+
+composition xxx_Policy_statements between
+	Policy[0..1] role xxx_Policy_statements_src
+	Expression[*] role statements
+end
+
+composition xxx_Automata_states_ between
+	Automata[0..1] role xxx_Automata_states__src
+	State[*] role states_
+end
+
+composition xxx_Automata_transitions_ between
+	Automata[0..1] role xxx_Automata_transitions__src
+	Transition[*] role transitions_
+end
+
+association xxx_Automata_init between
+	Automata[*] role xxx_Automata_init_src
+	State[1] role init
+end
+
+association xxx_Transition_from_ between
+	Transition[*] role xxx_Transition_from__src
+	State[1] role from_
+end
+
+association xxx_Transition_to between
+	Transition[*] role xxx_Transition_to_src
+	State[1] role to
+end
+
+association xxx_Exec_transition between
+	Exec[*] role xxx_Exec_transition_src
+	Transition[1] role transition
+end
+
+composition xxx_Cond_if_ between
+	Cond[*] role xxx_Cond_if__src
+	Relational[1] role if_
+end
+
+composition xxx_Cond_then_ between
+	Cond[*] role xxx_Cond_then__src
+	Expression[1] role then_
+end
+
+association xxx_Write_var between
+	Write[*] role xxx_Write_var_src
+	VarReference[1] role var
+end
+
+association xxx_Init_automata between
+	Init[*] role xxx_Init_automata_src
+	Automata[1] role automata
+end
+
+composition xxx_Relational_left between
+	Relational[*] role xxx_Relational_left_src
+	Expression[1] role left
+end
+
+composition xxx_Relational_right between
+	Relational[*] role xxx_Relational_right_src
+	Expression[1] role right
+end
+
+composition xxx_ArithmeticExpression_left between
+	ArithmeticExpression[*] role xxx_ArithmeticExpression_left_src
+	Expression[1] role left
+end
+
+composition xxx_ArithmeticExpression_right between
+	ArithmeticExpression[*] role xxx_ArithmeticExpression_right_src
+	Expression[1] role right
+end
+
+composition xxx_VarDeclaration_expr between
+	VarDeclaration[*] role xxx_VarDeclaration_expr_src
+	Expression[1] role expr
+end
+
+association xxx_VarReference_name between
+	VarReference[*] role xxx_VarReference_name_src
+	VarDeclaration[0..1] role name
+end
+

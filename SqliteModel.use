@@ -1,0 +1,1079 @@
+model sqliteModel
+enum CompoundOperator{
+default
+}
+
+enum SqliteDataType{
+default
+}
+
+enum ColumnType{
+default
+}
+
+enum ConflictResolution{
+default
+}
+
+class Model
+attributes
+	packageName : String
+operations
+end
+
+class DatabaseBlock
+attributes
+	name : String
+operations
+end
+
+class ConfigBlock
+attributes
+operations
+end
+
+class InitBlock
+attributes
+operations
+end
+
+class ConfigurationStatement
+attributes
+	name : String
+operations
+end
+
+class FunctionArg
+attributes
+	type : ColumnType
+	name : String
+operations
+end
+
+class ContentUri
+attributes
+	type : String
+operations
+end
+
+class ContentUriSegment
+attributes
+	name : String
+operations
+end
+
+class MigrationBlock
+attributes
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class Case
+attributes
+operations
+end
+
+class SelectStatement<DMLStatement
+attributes
+operations
+end
+
+class OrderingTermList
+attributes
+operations
+end
+
+class SelectCoreExpression
+attributes
+operations
+end
+
+class SelectList
+attributes
+operations
+end
+
+class WhereExpressions
+attributes
+operations
+end
+
+class GroupByExpressions
+attributes
+operations
+end
+
+class HavingExpressions
+attributes
+operations
+end
+
+class OrderingTerm
+attributes
+	asc : Boolean
+	desc : Boolean
+operations
+end
+
+class JoinSource
+attributes
+operations
+end
+
+class SingleSource
+attributes
+operations
+end
+
+class SelectSource<SingleSource
+attributes
+	name : String
+operations
+end
+
+class SingleSourceJoin<SingleSource
+attributes
+operations
+end
+
+class JoinStatement
+attributes
+	natural : Boolean
+	left : Boolean
+	outer : Boolean
+	inner : Boolean
+	cross : Boolean
+operations
+end
+
+class ColumnSource
+attributes
+	name : String
+operations
+end
+
+class LiteralValue
+attributes
+operations
+end
+
+class DDLStatement
+attributes
+operations
+end
+
+class TableDefinition<DDLStatement
+attributes
+	name : String
+operations
+end
+
+class CreateTriggerStatement<DDLStatement
+attributes
+	temporary : Boolean
+	name : String
+	when : String
+	eventType : String
+	updateColumnNames : String
+	forEachRow : String
+operations
+end
+
+class AlterTableAddColumnStatement<DDLStatement
+attributes
+operations
+end
+
+class DropTableStatement<DDLStatement
+attributes
+	ifExists : Boolean
+operations
+end
+
+class DropTriggerStatement<DDLStatement
+attributes
+	ifExists : Boolean
+operations
+end
+
+class DropViewStatement<DDLStatement
+attributes
+	ifExists : Boolean
+operations
+end
+
+class CreateIndexStatement<DDLStatement
+attributes
+	unique : Boolean
+	name : String
+operations
+end
+
+class DropIndexStatement<DDLStatement
+attributes
+	ifExists : Boolean
+operations
+end
+
+class ColumnConstraint
+attributes
+operations
+end
+
+class TableConstraint
+attributes
+	name : String
+operations
+end
+
+class UniqueTableConstraint<TableConstraint
+attributes
+operations
+end
+
+class PrimaryConstraint<TableConstraint
+attributes
+operations
+end
+
+class CheckTableConstraint<TableConstraint
+attributes
+operations
+end
+
+class IndexedColumn
+attributes
+	collationName : String
+	asc : Boolean
+	desc : Boolean
+operations
+end
+
+class DefaultValue
+attributes
+operations
+end
+
+class ConflictClause
+attributes
+	resolution : ConflictResolution
+operations
+end
+
+class DMLStatement
+attributes
+operations
+end
+
+class DeleteStatement<DMLStatement
+attributes
+operations
+end
+
+class InsertStatement<DMLStatement
+attributes
+	conflictResolution : ConflictResolution
+operations
+end
+
+class UpdateStatement<DMLStatement
+attributes
+	conflictResolution : ConflictResolution
+operations
+end
+
+class UpdateColumnExpression
+attributes
+operations
+end
+
+class ActionStatement<ConfigurationStatement
+attributes
+operations
+end
+
+class Function<ConfigurationStatement,Expression
+attributes
+	all : Boolean
+operations
+end
+
+class ContentUriParamSegment<ContentUriSegment
+attributes
+	num : Boolean
+	text : Boolean
+operations
+end
+
+class ExprConcat<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprMult<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprAdd<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprBit<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprRelate<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprEqual<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprAnd<Expression
+attributes
+	op : String
+operations
+end
+
+class ExprOr<Expression
+attributes
+	op : String
+operations
+end
+
+class NullCheckExpression<Expression
+attributes
+operations
+end
+
+class IsNull<Expression
+attributes
+operations
+end
+
+class NotNull<Expression
+attributes
+operations
+end
+
+class NewColumn<Expression
+attributes
+operations
+end
+
+class OldColumn<Expression
+attributes
+operations
+end
+
+class ColumnSourceRef<Expression
+attributes
+	all : Boolean
+operations
+end
+
+class Literal<Expression
+attributes
+operations
+end
+
+class NestedExpression<Expression
+attributes
+operations
+end
+
+class SelectStatementExpression<Expression
+attributes
+	not_ : Boolean
+	exists : Boolean
+operations
+end
+
+class CaseExpression<Expression
+attributes
+operations
+end
+
+class CastExpression<Expression
+attributes
+	type : SqliteDataType
+operations
+end
+
+class FunctionArgument<Expression
+attributes
+operations
+end
+
+class SelectCore<SelectCoreExpression
+attributes
+	op : CompoundOperator
+operations
+end
+
+class SelectExpression<SelectCoreExpression
+attributes
+	distinct : Boolean
+	all : Boolean
+	allColumns : Boolean
+operations
+end
+
+class SingleSourceTable<SelectSource
+attributes
+operations
+end
+
+class SingleSourceSelectStatement<SelectSource
+attributes
+operations
+end
+
+class ResultColumn<ColumnSource
+attributes
+operations
+end
+
+class NumericLiteral<LiteralValue
+attributes
+	number : String
+operations
+end
+
+class StringLiteral<LiteralValue
+attributes
+	literal : String
+operations
+end
+
+class NullLiteral<LiteralValue
+attributes
+	literal : String
+operations
+end
+
+class CurrentTimeLiteral<LiteralValue
+attributes
+	literal : String
+operations
+end
+
+class CurrentDateLiteral<LiteralValue
+attributes
+	literal : String
+operations
+end
+
+class CurrentTimeStampLiteral<LiteralValue
+attributes
+	literal : String
+operations
+end
+
+class CreateTableStatement<TableDefinition
+attributes
+	temporary : Boolean
+operations
+end
+
+class CreateViewStatement<TableDefinition
+attributes
+	temporary : Boolean
+operations
+end
+
+class AlterTableRenameStatement<TableDefinition
+attributes
+operations
+end
+
+class ColumnDef<ColumnSource
+attributes
+	type : ColumnType
+operations
+end
+
+class PrimaryKeyColumnConstraint<ColumnConstraint
+attributes
+	asc : Boolean
+	desc : Boolean
+	autoincrement : Boolean
+operations
+end
+
+class NotNullConstraint<ColumnConstraint
+attributes
+operations
+end
+
+class UniqueConstraint<ColumnConstraint
+attributes
+operations
+end
+
+class DefaultConstraint<ColumnConstraint
+attributes
+operations
+end
+
+class LiteralDefaultValue<DefaultValue
+attributes
+operations
+end
+
+class ExpressionDefaultValue<DefaultValue
+attributes
+operations
+end
+
+composition xxx_Model_database between
+	Model[*] role xxx_Model_database_src
+	DatabaseBlock[0..1] role database
+end
+
+composition xxx_DatabaseBlock_config between
+	DatabaseBlock[*] role xxx_DatabaseBlock_config_src
+	ConfigBlock[0..1] role config
+end
+
+composition xxx_DatabaseBlock_init between
+	DatabaseBlock[*] role xxx_DatabaseBlock_init_src
+	InitBlock[0..1] role init
+end
+
+composition xxx_DatabaseBlock_migrations between
+	DatabaseBlock[0..1] role xxx_DatabaseBlock_migrations_src
+	MigrationBlock[*] role migrations
+end
+
+composition xxx_ConfigBlock_statements between
+	ConfigBlock[0..1] role xxx_ConfigBlock_statements_src
+	ConfigurationStatement[*] role statements
+end
+
+composition xxx_InitBlock_statements between
+	InitBlock[0..1] role xxx_InitBlock_statements_src
+	DDLStatement[*] role statements
+end
+
+composition xxx_ContentUri_segments between
+	ContentUri[0..1] role xxx_ContentUri_segments_src
+	ContentUriSegment[*] role segments
+end
+
+composition xxx_MigrationBlock_statements between
+	MigrationBlock[0..1] role xxx_MigrationBlock_statements_src
+	DDLStatement[*] role statements
+end
+
+composition xxx_Case_whenExpression between
+	Case[*] role xxx_Case_whenExpression_src
+	Expression[0..1] role whenExpression
+end
+
+composition xxx_Case_thenExpression between
+	Case[*] role xxx_Case_thenExpression_src
+	Expression[0..1] role thenExpression
+end
+
+composition xxx_SelectStatement_core between
+	SelectStatement[*] role xxx_SelectStatement_core_src
+	SelectCoreExpression[0..1] role core
+end
+
+composition xxx_SelectStatement_orderby between
+	SelectStatement[*] role xxx_SelectStatement_orderby_src
+	OrderingTermList[0..1] role orderby
+end
+
+composition xxx_SelectStatement_limit between
+	SelectStatement[*] role xxx_SelectStatement_limit_src
+	Expression[0..1] role limit
+end
+
+composition xxx_SelectStatement_limitOffset between
+	SelectStatement[*] role xxx_SelectStatement_limitOffset_src
+	Expression[0..1] role limitOffset
+end
+
+composition xxx_OrderingTermList_orderingTerms between
+	OrderingTermList[0..1] role xxx_OrderingTermList_orderingTerms_src
+	OrderingTerm[*] role orderingTerms
+end
+
+composition xxx_SelectList_resultColumns between
+	SelectList[0..1] role xxx_SelectList_resultColumns_src
+	ColumnSource[*] role resultColumns
+end
+
+composition xxx_WhereExpressions_expression between
+	WhereExpressions[*] role xxx_WhereExpressions_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_GroupByExpressions_groupByExpressions between
+	GroupByExpressions[0..1] role xxx_GroupByExpressions_groupByExpressions_src
+	Expression[*] role groupByExpressions
+end
+
+composition xxx_HavingExpressions_expression between
+	HavingExpressions[*] role xxx_HavingExpressions_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_OrderingTerm_expression between
+	OrderingTerm[*] role xxx_OrderingTerm_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_JoinSource_source between
+	JoinSource[*] role xxx_JoinSource_source_src
+	SingleSource[0..1] role source
+end
+
+composition xxx_JoinSource_joinStatements between
+	JoinSource[0..1] role xxx_JoinSource_joinStatements_src
+	JoinStatement[*] role joinStatements
+end
+
+composition xxx_SingleSourceJoin_joinSource between
+	SingleSourceJoin[*] role xxx_SingleSourceJoin_joinSource_src
+	JoinSource[0..1] role joinSource
+end
+
+composition xxx_JoinStatement_singleSource between
+	JoinStatement[*] role xxx_JoinStatement_singleSource_src
+	SingleSource[0..1] role singleSource
+end
+
+composition xxx_JoinStatement_expression between
+	JoinStatement[*] role xxx_JoinStatement_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_CreateTriggerStatement_table between
+	CreateTriggerStatement[*] role xxx_CreateTriggerStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+composition xxx_CreateTriggerStatement_whenExpression between
+	CreateTriggerStatement[*] role xxx_CreateTriggerStatement_whenExpression_src
+	Expression[0..1] role whenExpression
+end
+
+composition xxx_CreateTriggerStatement_statements between
+	CreateTriggerStatement[0..1] role xxx_CreateTriggerStatement_statements_src
+	DMLStatement[*] role statements
+end
+
+association xxx_AlterTableAddColumnStatement_table between
+	AlterTableAddColumnStatement[*] role xxx_AlterTableAddColumnStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+composition xxx_AlterTableAddColumnStatement_columnDef between
+	AlterTableAddColumnStatement[*] role xxx_AlterTableAddColumnStatement_columnDef_src
+	ColumnSource[0..1] role columnDef
+end
+
+association xxx_DropTableStatement_table between
+	DropTableStatement[*] role xxx_DropTableStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+association xxx_DropTriggerStatement_trigger between
+	DropTriggerStatement[*] role xxx_DropTriggerStatement_trigger_src
+	CreateTriggerStatement[0..1] role trigger
+end
+
+association xxx_DropViewStatement_view between
+	DropViewStatement[*] role xxx_DropViewStatement_view_src
+	CreateViewStatement[0..1] role view
+end
+
+association xxx_CreateIndexStatement_table between
+	CreateIndexStatement[*] role xxx_CreateIndexStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+composition xxx_CreateIndexStatement_columns between
+	CreateIndexStatement[0..1] role xxx_CreateIndexStatement_columns_src
+	IndexedColumn[*] role columns
+end
+
+association xxx_DropIndexStatement_index between
+	DropIndexStatement[*] role xxx_DropIndexStatement_index_src
+	CreateIndexStatement[0..1] role index
+end
+
+composition xxx_UniqueTableConstraint_columns between
+	UniqueTableConstraint[0..1] role xxx_UniqueTableConstraint_columns_src
+	IndexedColumn[*] role columns
+end
+
+composition xxx_UniqueTableConstraint_conflictClause between
+	UniqueTableConstraint[*] role xxx_UniqueTableConstraint_conflictClause_src
+	ConflictClause[0..1] role conflictClause
+end
+
+composition xxx_PrimaryConstraint_columns between
+	PrimaryConstraint[0..1] role xxx_PrimaryConstraint_columns_src
+	IndexedColumn[*] role columns
+end
+
+composition xxx_PrimaryConstraint_conflictClause between
+	PrimaryConstraint[*] role xxx_PrimaryConstraint_conflictClause_src
+	ConflictClause[0..1] role conflictClause
+end
+
+composition xxx_CheckTableConstraint_expression between
+	CheckTableConstraint[*] role xxx_CheckTableConstraint_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_IndexedColumn_columnReference between
+	IndexedColumn[*] role xxx_IndexedColumn_columnReference_src
+	ColumnDef[0..1] role columnReference
+end
+
+association xxx_DeleteStatement_table between
+	DeleteStatement[*] role xxx_DeleteStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+composition xxx_DeleteStatement_expression between
+	DeleteStatement[*] role xxx_DeleteStatement_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_InsertStatement_table between
+	InsertStatement[*] role xxx_InsertStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+association xxx_InsertStatement_columnNames between
+	InsertStatement[0..1] role xxx_InsertStatement_columnNames_src
+	ColumnDef[*] role columnNames
+end
+
+composition xxx_InsertStatement_expressions between
+	InsertStatement[0..1] role xxx_InsertStatement_expressions_src
+	Expression[*] role expressions
+end
+
+composition xxx_InsertStatement_selectStatement between
+	InsertStatement[*] role xxx_InsertStatement_selectStatement_src
+	SelectStatement[0..1] role selectStatement
+end
+
+association xxx_UpdateStatement_table between
+	UpdateStatement[*] role xxx_UpdateStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+composition xxx_UpdateStatement_updateColumnExpressions between
+	UpdateStatement[0..1] role xxx_UpdateStatement_updateColumnExpressions_src
+	UpdateColumnExpression[*] role updateColumnExpressions
+end
+
+composition xxx_UpdateStatement_whereExpression between
+	UpdateStatement[*] role xxx_UpdateStatement_whereExpression_src
+	Expression[0..1] role whereExpression
+end
+
+association xxx_UpdateColumnExpression_columnName between
+	UpdateColumnExpression[*] role xxx_UpdateColumnExpression_columnName_src
+	ColumnDef[0..1] role columnName
+end
+
+composition xxx_UpdateColumnExpression_expression between
+	UpdateColumnExpression[*] role xxx_UpdateColumnExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_ActionStatement_uri between
+	ActionStatement[*] role xxx_ActionStatement_uri_src
+	ContentUri[0..1] role uri
+end
+
+composition xxx_Function_args between
+	Function[0..1] role xxx_Function_args_src
+	FunctionArg[*] role args
+end
+
+composition xxx_Function_body between
+	Function[*] role xxx_Function_body_src
+	SelectStatement[0..1] role body
+end
+
+composition xxx_Function_arguments between
+	Function[0..1] role xxx_Function_arguments_src
+	Expression[*] role arguments
+end
+
+composition xxx_ExprConcat_left between
+	ExprConcat[*] role xxx_ExprConcat_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprConcat_right between
+	ExprConcat[*] role xxx_ExprConcat_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprMult_left between
+	ExprMult[*] role xxx_ExprMult_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprMult_right between
+	ExprMult[*] role xxx_ExprMult_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprAdd_left between
+	ExprAdd[*] role xxx_ExprAdd_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprAdd_right between
+	ExprAdd[*] role xxx_ExprAdd_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprBit_left between
+	ExprBit[*] role xxx_ExprBit_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprBit_right between
+	ExprBit[*] role xxx_ExprBit_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprRelate_left between
+	ExprRelate[*] role xxx_ExprRelate_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprRelate_right between
+	ExprRelate[*] role xxx_ExprRelate_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprEqual_left between
+	ExprEqual[*] role xxx_ExprEqual_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprEqual_right between
+	ExprEqual[*] role xxx_ExprEqual_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprAnd_left between
+	ExprAnd[*] role xxx_ExprAnd_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprAnd_right between
+	ExprAnd[*] role xxx_ExprAnd_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_ExprOr_left between
+	ExprOr[*] role xxx_ExprOr_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_ExprOr_right between
+	ExprOr[*] role xxx_ExprOr_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_NullCheckExpression_left between
+	NullCheckExpression[*] role xxx_NullCheckExpression_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_NullCheckExpression_right between
+	NullCheckExpression[*] role xxx_NullCheckExpression_right_src
+	Expression[0..1] role right
+end
+
+association xxx_NewColumn_column between
+	NewColumn[*] role xxx_NewColumn_column_src
+	ColumnSource[0..1] role column
+end
+
+association xxx_OldColumn_column between
+	OldColumn[*] role xxx_OldColumn_column_src
+	ColumnSource[0..1] role column
+end
+
+association xxx_ColumnSourceRef_source between
+	ColumnSourceRef[*] role xxx_ColumnSourceRef_source_src
+	SelectSource[0..1] role source
+end
+
+association xxx_ColumnSourceRef_column between
+	ColumnSourceRef[*] role xxx_ColumnSourceRef_column_src
+	ColumnSource[0..1] role column
+end
+
+composition xxx_Literal_literalValue between
+	Literal[*] role xxx_Literal_literalValue_src
+	LiteralValue[0..1] role literalValue
+end
+
+composition xxx_NestedExpression_expression between
+	NestedExpression[*] role xxx_NestedExpression_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_SelectStatementExpression_select between
+	SelectStatementExpression[*] role xxx_SelectStatementExpression_select_src
+	SelectStatement[0..1] role select
+end
+
+composition xxx_CaseExpression_caseExpression between
+	CaseExpression[*] role xxx_CaseExpression_caseExpression_src
+	Expression[0..1] role caseExpression
+end
+
+composition xxx_CaseExpression_cases between
+	CaseExpression[0..1] role xxx_CaseExpression_cases_src
+	Case[*] role cases
+end
+
+composition xxx_CaseExpression_elseExpression between
+	CaseExpression[*] role xxx_CaseExpression_elseExpression_src
+	Expression[0..1] role elseExpression
+end
+
+composition xxx_CastExpression_expression between
+	CastExpression[*] role xxx_CastExpression_expression_src
+	Expression[0..1] role expression
+end
+
+association xxx_FunctionArgument_arg between
+	FunctionArgument[*] role xxx_FunctionArgument_arg_src
+	FunctionArg[0..1] role arg
+end
+
+composition xxx_SelectCore_left between
+	SelectCore[*] role xxx_SelectCore_left_src
+	SelectCoreExpression[0..1] role left
+end
+
+composition xxx_SelectCore_right between
+	SelectCore[*] role xxx_SelectCore_right_src
+	SelectCoreExpression[0..1] role right
+end
+
+composition xxx_SelectExpression_selectList between
+	SelectExpression[*] role xxx_SelectExpression_selectList_src
+	SelectList[0..1] role selectList
+end
+
+composition xxx_SelectExpression_source between
+	SelectExpression[*] role xxx_SelectExpression_source_src
+	JoinSource[0..1] role source
+end
+
+composition xxx_SelectExpression_where between
+	SelectExpression[*] role xxx_SelectExpression_where_src
+	WhereExpressions[0..1] role where
+end
+
+composition xxx_SelectExpression_groupBy between
+	SelectExpression[*] role xxx_SelectExpression_groupBy_src
+	GroupByExpressions[0..1] role groupBy
+end
+
+composition xxx_SelectExpression_having between
+	SelectExpression[*] role xxx_SelectExpression_having_src
+	HavingExpressions[0..1] role having
+end
+
+association xxx_SingleSourceTable_tableReference between
+	SingleSourceTable[*] role xxx_SingleSourceTable_tableReference_src
+	TableDefinition[0..1] role tableReference
+end
+
+composition xxx_SingleSourceSelectStatement_selectStatement between
+	SingleSourceSelectStatement[*] role xxx_SingleSourceSelectStatement_selectStatement_src
+	SelectStatement[0..1] role selectStatement
+end
+
+composition xxx_ResultColumn_expression between
+	ResultColumn[*] role xxx_ResultColumn_expression_src
+	Expression[0..1] role expression
+end
+
+composition xxx_CreateTableStatement_columnDefs between
+	CreateTableStatement[0..1] role xxx_CreateTableStatement_columnDefs_src
+	ColumnSource[*] role columnDefs
+end
+
+composition xxx_CreateTableStatement_constraints_ between
+	CreateTableStatement[0..1] role xxx_CreateTableStatement_constraints__src
+	TableConstraint[*] role constraints_
+end
+
+composition xxx_CreateViewStatement_selectStatement between
+	CreateViewStatement[*] role xxx_CreateViewStatement_selectStatement_src
+	SelectStatement[0..1] role selectStatement
+end
+
+association xxx_AlterTableRenameStatement_table between
+	AlterTableRenameStatement[*] role xxx_AlterTableRenameStatement_table_src
+	TableDefinition[0..1] role table
+end
+
+composition xxx_ColumnDef_constraints_ between
+	ColumnDef[0..1] role xxx_ColumnDef_constraints__src
+	ColumnConstraint[*] role constraints_
+end
+
+composition xxx_NotNullConstraint_conflictClause between
+	NotNullConstraint[*] role xxx_NotNullConstraint_conflictClause_src
+	ConflictClause[0..1] role conflictClause
+end
+
+composition xxx_UniqueConstraint_conflictClause between
+	UniqueConstraint[*] role xxx_UniqueConstraint_conflictClause_src
+	ConflictClause[0..1] role conflictClause
+end
+
+composition xxx_DefaultConstraint_defaultValue between
+	DefaultConstraint[*] role xxx_DefaultConstraint_defaultValue_src
+	DefaultValue[0..1] role defaultValue
+end
+
+composition xxx_LiteralDefaultValue_literal between
+	LiteralDefaultValue[*] role xxx_LiteralDefaultValue_literal_src
+	LiteralValue[0..1] role literal
+end
+
+composition xxx_ExpressionDefaultValue_expression between
+	ExpressionDefaultValue[*] role xxx_ExpressionDefaultValue_expression_src
+	Expression[0..1] role expression
+end
+

@@ -1,0 +1,90 @@
+model survey
+class Survey
+attributes
+	name : String
+	title : String
+operations
+end
+
+class Page
+attributes
+	name : String
+operations
+end
+
+class FollowUp
+attributes
+operations
+end
+
+class Guard
+attributes
+operations
+end
+
+class Question
+attributes
+	name : String
+	text : String
+operations
+end
+
+class FreeTextQuestion<Question
+attributes
+operations
+end
+
+class ChoiceQuestion<Question
+attributes
+	single : Boolean
+operations
+end
+
+class Choice
+attributes
+	freetext : Boolean
+	name : String
+	text : String
+operations
+end
+
+composition xxx_Survey_pages between
+	Survey[0..1] role xxx_Survey_pages_src
+	Page[*] role pages
+end
+
+composition xxx_Page_questions between
+	Page[0..1] role xxx_Page_questions_src
+	Question[*] role questions
+end
+
+composition xxx_Page_followUps between
+	Page[0..1] role xxx_Page_followUps_src
+	FollowUp[*] role followUps
+end
+
+composition xxx_FollowUp_guard between
+	FollowUp[*] role xxx_FollowUp_guard_src
+	Guard[0..1] role guard
+end
+
+association xxx_FollowUp_next between
+	FollowUp[*] role xxx_FollowUp_next_src
+	Page[0..1] role next
+end
+
+association xxx_Guard_question between
+	Guard[*] role xxx_Guard_question_src
+	ChoiceQuestion[0..1] role question
+end
+
+association xxx_Guard_answer between
+	Guard[*] role xxx_Guard_answer_src
+	Choice[0..1] role answer
+end
+
+composition xxx_ChoiceQuestion_choices between
+	ChoiceQuestion[0..1] role xxx_ChoiceQuestion_choices_src
+	Choice[*] role choices
+end
+

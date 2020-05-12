@@ -1,0 +1,1711 @@
+model mods
+enum CodeOrTextDefinition{
+default
+}
+
+enum DateEncodingAttributeDefinition{
+default
+}
+
+enum DatePointAttributeDefinition{
+default
+}
+
+enum DateQualifierAttributeDefinition{
+default
+}
+
+enum DigitalOriginDefinition{
+default
+}
+
+enum EnumerationAndChronologyUnitTypeAttributeDefinition{
+default
+}
+
+enum IssuanceDefinition{
+default
+}
+
+enum LanguageAuthorityAttributeDefinition{
+default
+}
+
+enum ModsVersionAttributeDefinition{
+default
+}
+
+enum NamePartTypeAttributeDefinition{
+default
+}
+
+enum NameTypeAttributeDefinition{
+default
+}
+
+enum NoDefinition{
+default
+}
+
+enum PlaceAuthorityAttributeDefinition{
+default
+}
+
+enum ReformattingQualityDefinition{
+default
+}
+
+enum RelatedItemTypeAttributeDefinition{
+default
+}
+
+enum ResourceTypeDefinition{
+default
+}
+
+enum TitleInfoTypeAttributeDefinition{
+default
+}
+
+enum UrlAccessAttributeDefinition{
+default
+}
+
+enum UrlUsageAttributeDefinition{
+default
+}
+
+enum UsageAttributeDefinition{
+default
+}
+
+enum YesDefinition{
+default
+}
+
+class AbstractDefinition<UnstructuredTextDefinition
+attributes
+	altRepGroup : String
+	shareable : NoDefinition
+operations
+end
+
+class AccessConditionDefinition<ExtensionDefinition
+attributes
+	actuate : String
+	altRepGroup : String
+	arcrole : String
+	href : String
+	lang : String
+	lang1 : String
+	role : String
+	script : String
+	show : String
+	title : String
+	transliteration : String
+	type : String
+	type1 : String
+operations
+end
+
+class CartographicsDefinition
+attributes
+	authority : String
+	authorityURI : String
+	valueURI : String
+operations
+end
+
+class ClassificationDefinition<StringPlusAuthority
+attributes
+	altRepGroup : String
+	displayLabel : String
+	edition : String
+	usage : UsageAttributeDefinition
+operations
+end
+
+class CopyInformationDefinition
+attributes
+operations
+end
+
+class DateBaseDefinition<XsString
+attributes
+	encoding : DateEncodingAttributeDefinition
+	point : DatePointAttributeDefinition
+	qualifier : DateQualifierAttributeDefinition
+operations
+end
+
+class DateDefinition<DateBaseDefinition
+attributes
+	keyDate : YesDefinition
+operations
+end
+
+class DateOtherDefinition<DateDefinition
+attributes
+	type : String
+operations
+end
+
+class DetailDefinition
+attributes
+	group : String
+	level : String
+	type : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	digitalOrigin : DigitalOriginDefinition
+	issuance : IssuanceDefinition
+	reformattingQuality : ReformattingQualityDefinition
+	total : String
+operations
+end
+
+class EnumerationAndChronologyDefinition<XsString
+attributes
+	unitType : EnumerationAndChronologyUnitTypeAttributeDefinition
+operations
+end
+
+class ExtensionDefinition
+attributes
+	mixed : String
+	any : String
+	displayLabel : String
+operations
+end
+
+class ExtentDefinition
+attributes
+	total : String
+	unit : String
+operations
+end
+
+class GenreDefinition<StringPlusAuthorityPlusTypePlusDisplayLabel
+attributes
+	altRepGroup : String
+	usage : UsageAttributeDefinition
+operations
+end
+
+class GeographicCodeDefinition<XsString
+attributes
+	authority : PlaceAuthorityAttributeDefinition
+	authorityURI : String
+	valueURI : String
+operations
+end
+
+class HierarchicalGeographicDefinition
+attributes
+	group : String
+	authority : String
+	authorityURI : String
+	valueURI : String
+operations
+end
+
+class HoldingSimpleDefinition
+attributes
+operations
+end
+
+class IdentifierDefinition<XsString
+attributes
+	altRepGroup : String
+	displayLabel : String
+	invalid : YesDefinition
+	type : String
+operations
+end
+
+class LanguageDefinition
+attributes
+	altRepGroup : String
+	displayLabel : String
+	lang : String
+	lang1 : String
+	objectPart : String
+	script : String
+	transliteration : String
+	usage : UsageAttributeDefinition
+operations
+end
+
+class LanguageTermDefinition<XsString
+attributes
+	authority : LanguageAuthorityAttributeDefinition
+	authorityURI : String
+	type : CodeOrTextDefinition
+	valueURI : String
+operations
+end
+
+class LocationDefinition
+attributes
+	altRepGroup : String
+	displayLabel : String
+	lang : String
+	lang1 : String
+	script : String
+	transliteration : String
+operations
+end
+
+class ModsCollectionDefinition
+attributes
+operations
+end
+
+class ModsDefinition
+attributes
+	modsGroup : String
+	iD : String
+	version : ModsVersionAttributeDefinition
+operations
+end
+
+class NameBaseDefinition
+attributes
+	group : String
+	actuate : String
+	arcrole : String
+	authority : String
+	authorityURI : String
+	displayLabel : String
+	href : String
+	iD : String
+	lang : String
+	lang1 : String
+	role1 : String
+	script : String
+	show : String
+	title : String
+	transliteration : String
+	type : NameTypeAttributeDefinition
+	type1 : String
+	valueURI : String
+operations
+end
+
+class NameDefinition<NameBaseDefinition
+attributes
+	altRepGroup : String
+	nameTitleGroup : String
+	usage : UsageAttributeDefinition
+operations
+end
+
+class NamePartDefinition<XsString
+attributes
+	type : NamePartTypeAttributeDefinition
+operations
+end
+
+class NoteBaseDefinition<UnstructuredTextDefinition
+attributes
+	iD : String
+operations
+end
+
+class NoteDefinition<NoteBaseDefinition
+attributes
+	altRepGroup : String
+operations
+end
+
+class OriginInfoDefinition
+attributes
+	group : String
+	issuance : IssuanceDefinition
+	altRepGroup : String
+	displayLabel : String
+	lang : String
+	lang1 : String
+	script : String
+	transliteration : String
+operations
+end
+
+class PartDefinition
+attributes
+	group : String
+	altRepGroup : String
+	displayLabel : String
+	iD : String
+	lang : String
+	lang1 : String
+	order : Integer
+	script : String
+	transliteration : String
+	type : String
+operations
+end
+
+class PhysicalDescriptionDefinition
+attributes
+	group : String
+	reformattingQuality : ReformattingQualityDefinition
+	digitalOrigin : DigitalOriginDefinition
+	altRepGroup : String
+	displayLabel : String
+	lang : String
+	lang1 : String
+	script : String
+	transliteration : String
+operations
+end
+
+class PhysicalLocationDefinition<StringPlusAuthorityPlusTypePlusDisplayLabelPlusXlink
+attributes
+operations
+end
+
+class PlaceDefinition
+attributes
+	supplied : YesDefinition
+operations
+end
+
+class PlaceTermDefinition<XsString
+attributes
+	authority : PlaceAuthorityAttributeDefinition
+	authorityURI : String
+	type : CodeOrTextDefinition
+	valueURI : String
+operations
+end
+
+class RecordIdentifierDefinition<XsString
+attributes
+	source : String
+operations
+end
+
+class RecordInfoDefinition
+attributes
+	group : String
+	altRepGroup : String
+	displayLabel : String
+	lang : String
+	lang1 : String
+	script : String
+	transliteration : String
+operations
+end
+
+class RelatedItemDefinition
+attributes
+	modsGroup : String
+	actuate : String
+	arcrole : String
+	displayLabel : String
+	href : String
+	iD : String
+	role : String
+	show : String
+	title : String
+	type : RelatedItemTypeAttributeDefinition
+	type1 : String
+operations
+end
+
+class RoleDefinition
+attributes
+	group : String
+operations
+end
+
+class RoleTermDefinition<StringPlusAuthority
+attributes
+	type : CodeOrTextDefinition
+operations
+end
+
+class ScriptTermDefinition<StringPlusAuthority
+attributes
+	type : CodeOrTextDefinition
+operations
+end
+
+class StringPlusAuthority<XsString
+attributes
+	authority : String
+	authorityURI : String
+	valueURI : String
+operations
+end
+
+class StringPlusAuthorityPlusType<StringPlusAuthority
+attributes
+	type : String
+operations
+end
+
+class StringPlusAuthorityPlusTypePlusDisplayLabel<StringPlusAuthorityPlusType
+attributes
+	displayLabel : String
+operations
+end
+
+class StringPlusAuthorityPlusTypePlusDisplayLabelPlusXlink<StringPlusAuthorityPlusTypePlusDisplayLabel
+attributes
+	actuate : String
+	arcrole : String
+	href : String
+	role : String
+	show : String
+	title : String
+	type1 : String
+operations
+end
+
+class StringPlusSupplied<XsString
+attributes
+	supplied : YesDefinition
+operations
+end
+
+class SubjectDefinition
+attributes
+	group : String
+	actuate : String
+	altRepGroup : String
+	arcrole : String
+	authority : String
+	authorityURI : String
+	displayLabel : String
+	href : String
+	iD : String
+	lang : String
+	lang1 : String
+	role : String
+	script : String
+	show : String
+	title : String
+	transliteration : String
+	type : String
+	usage : UsageAttributeDefinition
+	valueURI : String
+operations
+end
+
+class SubjectNameDefinition<NameBaseDefinition
+attributes
+operations
+end
+
+class SubjectTitleInfoDefinition<TitleInfoBaseDefinition
+attributes
+	type1 : TitleInfoTypeAttributeDefinition
+operations
+end
+
+class TableOfContentsDefinition<UnstructuredTextDefinition
+attributes
+	altRepGroup : String
+	shareable : NoDefinition
+operations
+end
+
+class TargetAudienceDefinition<StringPlusAuthority
+attributes
+	altRepGroup : String
+	displayLabel : String
+operations
+end
+
+class TemporalDefinition<DateDefinition
+attributes
+	authority : String
+	authorityURI : String
+	valueURI : String
+operations
+end
+
+class TitleInfoBaseDefinition
+attributes
+	group : String
+	actuate : String
+	arcrole : String
+	authority : String
+	authorityURI : String
+	displayLabel : String
+	href : String
+	iD : String
+	lang : String
+	lang1 : String
+	role : String
+	script : String
+	show : String
+	title1 : String
+	transliteration : String
+	type : String
+	valueURI : String
+operations
+end
+
+class TitleInfoDefinition<TitleInfoBaseDefinition
+attributes
+	altRepGroup : String
+	nameTitleGroup : String
+	supplied : YesDefinition
+	type1 : TitleInfoTypeAttributeDefinition
+	usage : UsageAttributeDefinition
+operations
+end
+
+class TypeOfResourceDefinition
+attributes
+	value : ResourceTypeDefinition
+	altRepGroup : String
+	collection : YesDefinition
+	displayLabel : String
+	manuscript : YesDefinition
+	usage : UsageAttributeDefinition
+operations
+end
+
+class UnstructuredTextDefinition<XsString
+attributes
+	actuate : String
+	arcrole : String
+	displayLabel : String
+	href : String
+	role : String
+	show : String
+	title : String
+	type : String
+	type1 : String
+operations
+end
+
+class UrlDefinition
+attributes
+	value : String
+	access : UrlAccessAttributeDefinition
+	dateLastAccessed : String
+	displayLabel : String
+	note : String
+	usage : UrlUsageAttributeDefinition
+operations
+end
+
+class XsString
+attributes
+	value : String
+	lang : String
+	lang1 : String
+	script : String
+	transliteration : String
+operations
+end
+
+composition xxx_CartographicsDefinition_scale between
+	CartographicsDefinition[*] role xxx_CartographicsDefinition_scale_src
+	XsString[0..1] role scale
+end
+
+composition xxx_CartographicsDefinition_projection between
+	CartographicsDefinition[*] role xxx_CartographicsDefinition_projection_src
+	XsString[0..1] role projection
+end
+
+composition xxx_CartographicsDefinition_coordinates between
+	CartographicsDefinition[0..1] role xxx_CartographicsDefinition_coordinates_src
+	XsString[*] role coordinates
+end
+
+composition xxx_CopyInformationDefinition_form between
+	CopyInformationDefinition[*] role xxx_CopyInformationDefinition_form_src
+	StringPlusAuthorityPlusType[0..1] role form
+end
+
+composition xxx_CopyInformationDefinition_subLocation between
+	CopyInformationDefinition[0..1] role xxx_CopyInformationDefinition_subLocation_src
+	XsString[*] role subLocation
+end
+
+composition xxx_CopyInformationDefinition_shelfLocator between
+	CopyInformationDefinition[0..1] role xxx_CopyInformationDefinition_shelfLocator_src
+	XsString[*] role shelfLocator
+end
+
+composition xxx_CopyInformationDefinition_electronicLocator between
+	CopyInformationDefinition[0..1] role xxx_CopyInformationDefinition_electronicLocator_src
+	XsString[*] role electronicLocator
+end
+
+composition xxx_CopyInformationDefinition_note between
+	CopyInformationDefinition[0..1] role xxx_CopyInformationDefinition_note_src
+	NoteBaseDefinition[*] role note
+end
+
+composition xxx_CopyInformationDefinition_enumerationAndChronology between
+	CopyInformationDefinition[0..1] role xxx_CopyInformationDefinition_enumerationAndChronology_src
+	EnumerationAndChronologyDefinition[*] role enumerationAndChronology
+end
+
+composition xxx_DetailDefinition_number between
+	DetailDefinition[0..1] role xxx_DetailDefinition_number_src
+	XsString[*] role number
+end
+
+composition xxx_DetailDefinition_caption between
+	DetailDefinition[0..1] role xxx_DetailDefinition_caption_src
+	XsString[*] role caption
+end
+
+composition xxx_DetailDefinition_title between
+	DetailDefinition[0..1] role xxx_DetailDefinition_title_src
+	XsString[*] role title
+end
+
+composition xxx_DocumentRoot_abstract_ between
+	DocumentRoot[*] role xxx_DocumentRoot_abstract__src
+	AbstractDefinition[*] role abstract_
+end
+
+composition xxx_DocumentRoot_accessCondition between
+	DocumentRoot[*] role xxx_DocumentRoot_accessCondition_src
+	AccessConditionDefinition[*] role accessCondition
+end
+
+composition xxx_DocumentRoot_affiliation between
+	DocumentRoot[*] role xxx_DocumentRoot_affiliation_src
+	XsString[*] role affiliation
+end
+
+composition xxx_DocumentRoot_area between
+	DocumentRoot[*] role xxx_DocumentRoot_area_src
+	XsString[*] role area
+end
+
+composition xxx_DocumentRoot_caption between
+	DocumentRoot[*] role xxx_DocumentRoot_caption_src
+	XsString[*] role caption
+end
+
+composition xxx_DocumentRoot_cartographics between
+	DocumentRoot[*] role xxx_DocumentRoot_cartographics_src
+	CartographicsDefinition[*] role cartographics
+end
+
+composition xxx_DocumentRoot_city between
+	DocumentRoot[*] role xxx_DocumentRoot_city_src
+	XsString[*] role city
+end
+
+composition xxx_DocumentRoot_citySection between
+	DocumentRoot[*] role xxx_DocumentRoot_citySection_src
+	XsString[*] role citySection
+end
+
+composition xxx_DocumentRoot_classification between
+	DocumentRoot[*] role xxx_DocumentRoot_classification_src
+	ClassificationDefinition[*] role classification
+end
+
+composition xxx_DocumentRoot_continent between
+	DocumentRoot[*] role xxx_DocumentRoot_continent_src
+	XsString[*] role continent
+end
+
+composition xxx_DocumentRoot_coordinates between
+	DocumentRoot[*] role xxx_DocumentRoot_coordinates_src
+	XsString[*] role coordinates
+end
+
+composition xxx_DocumentRoot_copyInformation between
+	DocumentRoot[*] role xxx_DocumentRoot_copyInformation_src
+	CopyInformationDefinition[*] role copyInformation
+end
+
+composition xxx_DocumentRoot_copyrightDate between
+	DocumentRoot[*] role xxx_DocumentRoot_copyrightDate_src
+	DateDefinition[*] role copyrightDate
+end
+
+composition xxx_DocumentRoot_country between
+	DocumentRoot[*] role xxx_DocumentRoot_country_src
+	XsString[*] role country
+end
+
+composition xxx_DocumentRoot_county between
+	DocumentRoot[*] role xxx_DocumentRoot_county_src
+	XsString[*] role county
+end
+
+composition xxx_DocumentRoot_date between
+	DocumentRoot[*] role xxx_DocumentRoot_date_src
+	DateBaseDefinition[*] role date
+end
+
+composition xxx_DocumentRoot_dateCaptured between
+	DocumentRoot[*] role xxx_DocumentRoot_dateCaptured_src
+	DateDefinition[*] role dateCaptured
+end
+
+composition xxx_DocumentRoot_dateCreated between
+	DocumentRoot[*] role xxx_DocumentRoot_dateCreated_src
+	DateDefinition[*] role dateCreated
+end
+
+composition xxx_DocumentRoot_dateIssued between
+	DocumentRoot[*] role xxx_DocumentRoot_dateIssued_src
+	DateDefinition[*] role dateIssued
+end
+
+composition xxx_DocumentRoot_dateModified between
+	DocumentRoot[*] role xxx_DocumentRoot_dateModified_src
+	DateDefinition[*] role dateModified
+end
+
+composition xxx_DocumentRoot_dateOther between
+	DocumentRoot[*] role xxx_DocumentRoot_dateOther_src
+	DateOtherDefinition[*] role dateOther
+end
+
+composition xxx_DocumentRoot_dateValid between
+	DocumentRoot[*] role xxx_DocumentRoot_dateValid_src
+	DateDefinition[*] role dateValid
+end
+
+composition xxx_DocumentRoot_description between
+	DocumentRoot[*] role xxx_DocumentRoot_description_src
+	XsString[*] role description
+end
+
+composition xxx_DocumentRoot_descriptionStandard between
+	DocumentRoot[*] role xxx_DocumentRoot_descriptionStandard_src
+	StringPlusAuthority[*] role descriptionStandard
+end
+
+composition xxx_DocumentRoot_detail between
+	DocumentRoot[*] role xxx_DocumentRoot_detail_src
+	DetailDefinition[*] role detail
+end
+
+composition xxx_DocumentRoot_displayForm between
+	DocumentRoot[*] role xxx_DocumentRoot_displayForm_src
+	XsString[*] role displayForm
+end
+
+composition xxx_DocumentRoot_edition between
+	DocumentRoot[*] role xxx_DocumentRoot_edition_src
+	StringPlusSupplied[*] role edition
+end
+
+composition xxx_DocumentRoot_electronicLocator between
+	DocumentRoot[*] role xxx_DocumentRoot_electronicLocator_src
+	XsString[*] role electronicLocator
+end
+
+composition xxx_DocumentRoot_end_ between
+	DocumentRoot[*] role xxx_DocumentRoot_end__src
+	XsString[*] role end_
+end
+
+composition xxx_DocumentRoot_enumerationAndChronology between
+	DocumentRoot[*] role xxx_DocumentRoot_enumerationAndChronology_src
+	EnumerationAndChronologyDefinition[*] role enumerationAndChronology
+end
+
+composition xxx_DocumentRoot_extension between
+	DocumentRoot[*] role xxx_DocumentRoot_extension_src
+	ExtensionDefinition[*] role extension
+end
+
+composition xxx_DocumentRoot_extent between
+	DocumentRoot[*] role xxx_DocumentRoot_extent_src
+	StringPlusSupplied[*] role extent
+end
+
+composition xxx_DocumentRoot_extraterrestrialArea between
+	DocumentRoot[*] role xxx_DocumentRoot_extraterrestrialArea_src
+	XsString[*] role extraterrestrialArea
+end
+
+composition xxx_DocumentRoot_form between
+	DocumentRoot[*] role xxx_DocumentRoot_form_src
+	StringPlusAuthorityPlusType[*] role form
+end
+
+composition xxx_DocumentRoot_frequency between
+	DocumentRoot[*] role xxx_DocumentRoot_frequency_src
+	StringPlusAuthority[*] role frequency
+end
+
+composition xxx_DocumentRoot_genre between
+	DocumentRoot[*] role xxx_DocumentRoot_genre_src
+	GenreDefinition[*] role genre
+end
+
+composition xxx_DocumentRoot_geographic between
+	DocumentRoot[*] role xxx_DocumentRoot_geographic_src
+	StringPlusAuthority[*] role geographic
+end
+
+composition xxx_DocumentRoot_geographicCode between
+	DocumentRoot[*] role xxx_DocumentRoot_geographicCode_src
+	GeographicCodeDefinition[*] role geographicCode
+end
+
+composition xxx_DocumentRoot_hierarchicalGeographic between
+	DocumentRoot[*] role xxx_DocumentRoot_hierarchicalGeographic_src
+	HierarchicalGeographicDefinition[*] role hierarchicalGeographic
+end
+
+composition xxx_DocumentRoot_holdingExternal between
+	DocumentRoot[*] role xxx_DocumentRoot_holdingExternal_src
+	ExtensionDefinition[*] role holdingExternal
+end
+
+composition xxx_DocumentRoot_holdingSimple between
+	DocumentRoot[*] role xxx_DocumentRoot_holdingSimple_src
+	HoldingSimpleDefinition[*] role holdingSimple
+end
+
+composition xxx_DocumentRoot_identifier between
+	DocumentRoot[*] role xxx_DocumentRoot_identifier_src
+	IdentifierDefinition[*] role identifier
+end
+
+composition xxx_DocumentRoot_internetMediaType between
+	DocumentRoot[*] role xxx_DocumentRoot_internetMediaType_src
+	XsString[*] role internetMediaType
+end
+
+composition xxx_DocumentRoot_island between
+	DocumentRoot[*] role xxx_DocumentRoot_island_src
+	XsString[*] role island
+end
+
+composition xxx_DocumentRoot_language between
+	DocumentRoot[*] role xxx_DocumentRoot_language_src
+	LanguageDefinition[*] role language
+end
+
+composition xxx_DocumentRoot_languageOfCataloging between
+	DocumentRoot[*] role xxx_DocumentRoot_languageOfCataloging_src
+	LanguageDefinition[*] role languageOfCataloging
+end
+
+composition xxx_DocumentRoot_languageTerm between
+	DocumentRoot[*] role xxx_DocumentRoot_languageTerm_src
+	LanguageTermDefinition[*] role languageTerm
+end
+
+composition xxx_DocumentRoot_list between
+	DocumentRoot[*] role xxx_DocumentRoot_list_src
+	XsString[*] role list
+end
+
+composition xxx_DocumentRoot_location between
+	DocumentRoot[*] role xxx_DocumentRoot_location_src
+	LocationDefinition[*] role location
+end
+
+composition xxx_DocumentRoot_mods between
+	DocumentRoot[*] role xxx_DocumentRoot_mods_src
+	ModsDefinition[*] role mods
+end
+
+composition xxx_DocumentRoot_modsCollection between
+	DocumentRoot[*] role xxx_DocumentRoot_modsCollection_src
+	ModsCollectionDefinition[*] role modsCollection
+end
+
+composition xxx_DocumentRoot_name between
+	DocumentRoot[*] role xxx_DocumentRoot_name_src
+	NameDefinition[*] role name
+end
+
+composition xxx_DocumentRoot_namePart between
+	DocumentRoot[*] role xxx_DocumentRoot_namePart_src
+	NamePartDefinition[*] role namePart
+end
+
+composition xxx_DocumentRoot_nonSort between
+	DocumentRoot[*] role xxx_DocumentRoot_nonSort_src
+	XsString[*] role nonSort
+end
+
+composition xxx_DocumentRoot_note between
+	DocumentRoot[*] role xxx_DocumentRoot_note_src
+	NoteDefinition[*] role note
+end
+
+composition xxx_DocumentRoot_number between
+	DocumentRoot[*] role xxx_DocumentRoot_number_src
+	XsString[*] role number
+end
+
+composition xxx_DocumentRoot_occupation between
+	DocumentRoot[*] role xxx_DocumentRoot_occupation_src
+	StringPlusAuthority[*] role occupation
+end
+
+composition xxx_DocumentRoot_originInfo between
+	DocumentRoot[*] role xxx_DocumentRoot_originInfo_src
+	OriginInfoDefinition[*] role originInfo
+end
+
+composition xxx_DocumentRoot_part between
+	DocumentRoot[*] role xxx_DocumentRoot_part_src
+	PartDefinition[*] role part
+end
+
+composition xxx_DocumentRoot_partName between
+	DocumentRoot[*] role xxx_DocumentRoot_partName_src
+	XsString[*] role partName
+end
+
+composition xxx_DocumentRoot_partNumber between
+	DocumentRoot[*] role xxx_DocumentRoot_partNumber_src
+	XsString[*] role partNumber
+end
+
+composition xxx_DocumentRoot_physicalDescription between
+	DocumentRoot[*] role xxx_DocumentRoot_physicalDescription_src
+	PhysicalDescriptionDefinition[*] role physicalDescription
+end
+
+composition xxx_DocumentRoot_physicalLocation between
+	DocumentRoot[*] role xxx_DocumentRoot_physicalLocation_src
+	PhysicalLocationDefinition[*] role physicalLocation
+end
+
+composition xxx_DocumentRoot_place between
+	DocumentRoot[*] role xxx_DocumentRoot_place_src
+	PlaceDefinition[*] role place
+end
+
+composition xxx_DocumentRoot_placeTerm between
+	DocumentRoot[*] role xxx_DocumentRoot_placeTerm_src
+	PlaceTermDefinition[*] role placeTerm
+end
+
+composition xxx_DocumentRoot_projection between
+	DocumentRoot[*] role xxx_DocumentRoot_projection_src
+	XsString[*] role projection
+end
+
+composition xxx_DocumentRoot_province between
+	DocumentRoot[*] role xxx_DocumentRoot_province_src
+	XsString[*] role province
+end
+
+composition xxx_DocumentRoot_publisher between
+	DocumentRoot[*] role xxx_DocumentRoot_publisher_src
+	StringPlusSupplied[*] role publisher
+end
+
+composition xxx_DocumentRoot_recordChangeDate between
+	DocumentRoot[*] role xxx_DocumentRoot_recordChangeDate_src
+	DateDefinition[*] role recordChangeDate
+end
+
+composition xxx_DocumentRoot_recordContentSource between
+	DocumentRoot[*] role xxx_DocumentRoot_recordContentSource_src
+	StringPlusAuthority[*] role recordContentSource
+end
+
+composition xxx_DocumentRoot_recordCreationDate between
+	DocumentRoot[*] role xxx_DocumentRoot_recordCreationDate_src
+	DateDefinition[*] role recordCreationDate
+end
+
+composition xxx_DocumentRoot_recordIdentifier between
+	DocumentRoot[*] role xxx_DocumentRoot_recordIdentifier_src
+	RecordIdentifierDefinition[*] role recordIdentifier
+end
+
+composition xxx_DocumentRoot_recordInfo between
+	DocumentRoot[*] role xxx_DocumentRoot_recordInfo_src
+	RecordInfoDefinition[*] role recordInfo
+end
+
+composition xxx_DocumentRoot_recordOrigin between
+	DocumentRoot[*] role xxx_DocumentRoot_recordOrigin_src
+	XsString[*] role recordOrigin
+end
+
+composition xxx_DocumentRoot_region between
+	DocumentRoot[*] role xxx_DocumentRoot_region_src
+	XsString[*] role region
+end
+
+composition xxx_DocumentRoot_relatedItem between
+	DocumentRoot[*] role xxx_DocumentRoot_relatedItem_src
+	RelatedItemDefinition[*] role relatedItem
+end
+
+composition xxx_DocumentRoot_role between
+	DocumentRoot[*] role xxx_DocumentRoot_role_src
+	RoleDefinition[*] role role
+end
+
+composition xxx_DocumentRoot_roleTerm between
+	DocumentRoot[*] role xxx_DocumentRoot_roleTerm_src
+	RoleTermDefinition[*] role roleTerm
+end
+
+composition xxx_DocumentRoot_scale between
+	DocumentRoot[*] role xxx_DocumentRoot_scale_src
+	XsString[*] role scale
+end
+
+composition xxx_DocumentRoot_scriptTerm between
+	DocumentRoot[*] role xxx_DocumentRoot_scriptTerm_src
+	ScriptTermDefinition[*] role scriptTerm
+end
+
+composition xxx_DocumentRoot_shelfLocator between
+	DocumentRoot[*] role xxx_DocumentRoot_shelfLocator_src
+	XsString[*] role shelfLocator
+end
+
+composition xxx_DocumentRoot_start between
+	DocumentRoot[*] role xxx_DocumentRoot_start_src
+	XsString[*] role start
+end
+
+composition xxx_DocumentRoot_state between
+	DocumentRoot[*] role xxx_DocumentRoot_state_src
+	XsString[*] role state
+end
+
+composition xxx_DocumentRoot_subject between
+	DocumentRoot[*] role xxx_DocumentRoot_subject_src
+	SubjectDefinition[*] role subject
+end
+
+composition xxx_DocumentRoot_subLocation between
+	DocumentRoot[*] role xxx_DocumentRoot_subLocation_src
+	XsString[*] role subLocation
+end
+
+composition xxx_DocumentRoot_subTitle between
+	DocumentRoot[*] role xxx_DocumentRoot_subTitle_src
+	XsString[*] role subTitle
+end
+
+composition xxx_DocumentRoot_tableOfContents between
+	DocumentRoot[*] role xxx_DocumentRoot_tableOfContents_src
+	TableOfContentsDefinition[*] role tableOfContents
+end
+
+composition xxx_DocumentRoot_targetAudience between
+	DocumentRoot[*] role xxx_DocumentRoot_targetAudience_src
+	TargetAudienceDefinition[*] role targetAudience
+end
+
+composition xxx_DocumentRoot_temporal between
+	DocumentRoot[*] role xxx_DocumentRoot_temporal_src
+	TemporalDefinition[*] role temporal
+end
+
+composition xxx_DocumentRoot_territory between
+	DocumentRoot[*] role xxx_DocumentRoot_territory_src
+	XsString[*] role territory
+end
+
+composition xxx_DocumentRoot_text between
+	DocumentRoot[*] role xxx_DocumentRoot_text_src
+	UnstructuredTextDefinition[*] role text
+end
+
+composition xxx_DocumentRoot_title between
+	DocumentRoot[*] role xxx_DocumentRoot_title_src
+	XsString[*] role title
+end
+
+composition xxx_DocumentRoot_titleInfo between
+	DocumentRoot[*] role xxx_DocumentRoot_titleInfo_src
+	TitleInfoDefinition[*] role titleInfo
+end
+
+composition xxx_DocumentRoot_topic between
+	DocumentRoot[*] role xxx_DocumentRoot_topic_src
+	StringPlusAuthority[*] role topic
+end
+
+composition xxx_DocumentRoot_typeOfResource between
+	DocumentRoot[*] role xxx_DocumentRoot_typeOfResource_src
+	TypeOfResourceDefinition[*] role typeOfResource
+end
+
+composition xxx_DocumentRoot_url between
+	DocumentRoot[*] role xxx_DocumentRoot_url_src
+	UrlDefinition[*] role url
+end
+
+composition xxx_ExtentDefinition_start between
+	ExtentDefinition[*] role xxx_ExtentDefinition_start_src
+	XsString[0..1] role start
+end
+
+composition xxx_ExtentDefinition_end_ between
+	ExtentDefinition[*] role xxx_ExtentDefinition_end__src
+	XsString[0..1] role end_
+end
+
+composition xxx_ExtentDefinition_list between
+	ExtentDefinition[*] role xxx_ExtentDefinition_list_src
+	XsString[0..1] role list
+end
+
+composition xxx_HierarchicalGeographicDefinition_extraterrestrialArea between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_extraterrestrialArea_src
+	XsString[*] role extraterrestrialArea
+end
+
+composition xxx_HierarchicalGeographicDefinition_continent between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_continent_src
+	XsString[*] role continent
+end
+
+composition xxx_HierarchicalGeographicDefinition_country between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_country_src
+	XsString[*] role country
+end
+
+composition xxx_HierarchicalGeographicDefinition_province between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_province_src
+	XsString[*] role province
+end
+
+composition xxx_HierarchicalGeographicDefinition_region between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_region_src
+	XsString[*] role region
+end
+
+composition xxx_HierarchicalGeographicDefinition_state between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_state_src
+	XsString[*] role state
+end
+
+composition xxx_HierarchicalGeographicDefinition_territory between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_territory_src
+	XsString[*] role territory
+end
+
+composition xxx_HierarchicalGeographicDefinition_county between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_county_src
+	XsString[*] role county
+end
+
+composition xxx_HierarchicalGeographicDefinition_city between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_city_src
+	XsString[*] role city
+end
+
+composition xxx_HierarchicalGeographicDefinition_citySection between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_citySection_src
+	XsString[*] role citySection
+end
+
+composition xxx_HierarchicalGeographicDefinition_island between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_island_src
+	XsString[*] role island
+end
+
+composition xxx_HierarchicalGeographicDefinition_area between
+	HierarchicalGeographicDefinition[0..1] role xxx_HierarchicalGeographicDefinition_area_src
+	XsString[*] role area
+end
+
+composition xxx_HoldingSimpleDefinition_copyInformation between
+	HoldingSimpleDefinition[0..1] role xxx_HoldingSimpleDefinition_copyInformation_src
+	CopyInformationDefinition[1..*] role copyInformation
+end
+
+composition xxx_LanguageDefinition_languageTerm between
+	LanguageDefinition[0..1] role xxx_LanguageDefinition_languageTerm_src
+	LanguageTermDefinition[1..*] role languageTerm
+end
+
+composition xxx_LanguageDefinition_scriptTerm between
+	LanguageDefinition[0..1] role xxx_LanguageDefinition_scriptTerm_src
+	ScriptTermDefinition[*] role scriptTerm
+end
+
+composition xxx_LocationDefinition_physicalLocation between
+	LocationDefinition[0..1] role xxx_LocationDefinition_physicalLocation_src
+	PhysicalLocationDefinition[*] role physicalLocation
+end
+
+composition xxx_LocationDefinition_shelfLocator between
+	LocationDefinition[0..1] role xxx_LocationDefinition_shelfLocator_src
+	XsString[*] role shelfLocator
+end
+
+composition xxx_LocationDefinition_url between
+	LocationDefinition[0..1] role xxx_LocationDefinition_url_src
+	UrlDefinition[*] role url
+end
+
+composition xxx_LocationDefinition_holdingSimple between
+	LocationDefinition[*] role xxx_LocationDefinition_holdingSimple_src
+	HoldingSimpleDefinition[0..1] role holdingSimple
+end
+
+composition xxx_LocationDefinition_holdingExternal between
+	LocationDefinition[*] role xxx_LocationDefinition_holdingExternal_src
+	ExtensionDefinition[0..1] role holdingExternal
+end
+
+composition xxx_ModsCollectionDefinition_mods between
+	ModsCollectionDefinition[0..1] role xxx_ModsCollectionDefinition_mods_src
+	ModsDefinition[1..*] role mods
+end
+
+composition xxx_ModsDefinition_abstract_ between
+	ModsDefinition[0..1] role xxx_ModsDefinition_abstract__src
+	AbstractDefinition[*] role abstract_
+end
+
+composition xxx_ModsDefinition_accessCondition between
+	ModsDefinition[0..1] role xxx_ModsDefinition_accessCondition_src
+	AccessConditionDefinition[*] role accessCondition
+end
+
+composition xxx_ModsDefinition_classification between
+	ModsDefinition[0..1] role xxx_ModsDefinition_classification_src
+	ClassificationDefinition[*] role classification
+end
+
+composition xxx_ModsDefinition_extension between
+	ModsDefinition[0..1] role xxx_ModsDefinition_extension_src
+	ExtensionDefinition[*] role extension
+end
+
+composition xxx_ModsDefinition_genre between
+	ModsDefinition[0..1] role xxx_ModsDefinition_genre_src
+	GenreDefinition[*] role genre
+end
+
+composition xxx_ModsDefinition_identifier between
+	ModsDefinition[0..1] role xxx_ModsDefinition_identifier_src
+	IdentifierDefinition[*] role identifier
+end
+
+composition xxx_ModsDefinition_language between
+	ModsDefinition[0..1] role xxx_ModsDefinition_language_src
+	LanguageDefinition[*] role language
+end
+
+composition xxx_ModsDefinition_location between
+	ModsDefinition[0..1] role xxx_ModsDefinition_location_src
+	LocationDefinition[*] role location
+end
+
+composition xxx_ModsDefinition_name between
+	ModsDefinition[0..1] role xxx_ModsDefinition_name_src
+	NameDefinition[*] role name
+end
+
+composition xxx_ModsDefinition_note between
+	ModsDefinition[0..1] role xxx_ModsDefinition_note_src
+	NoteDefinition[*] role note
+end
+
+composition xxx_ModsDefinition_originInfo between
+	ModsDefinition[0..1] role xxx_ModsDefinition_originInfo_src
+	OriginInfoDefinition[*] role originInfo
+end
+
+composition xxx_ModsDefinition_part between
+	ModsDefinition[0..1] role xxx_ModsDefinition_part_src
+	PartDefinition[*] role part
+end
+
+composition xxx_ModsDefinition_physicalDescription between
+	ModsDefinition[0..1] role xxx_ModsDefinition_physicalDescription_src
+	PhysicalDescriptionDefinition[*] role physicalDescription
+end
+
+composition xxx_ModsDefinition_recordInfo between
+	ModsDefinition[0..1] role xxx_ModsDefinition_recordInfo_src
+	RecordInfoDefinition[*] role recordInfo
+end
+
+composition xxx_ModsDefinition_relatedItem between
+	ModsDefinition[0..1] role xxx_ModsDefinition_relatedItem_src
+	RelatedItemDefinition[*] role relatedItem
+end
+
+composition xxx_ModsDefinition_subject between
+	ModsDefinition[0..1] role xxx_ModsDefinition_subject_src
+	SubjectDefinition[*] role subject
+end
+
+composition xxx_ModsDefinition_tableOfContents between
+	ModsDefinition[0..1] role xxx_ModsDefinition_tableOfContents_src
+	TableOfContentsDefinition[*] role tableOfContents
+end
+
+composition xxx_ModsDefinition_targetAudience between
+	ModsDefinition[0..1] role xxx_ModsDefinition_targetAudience_src
+	TargetAudienceDefinition[*] role targetAudience
+end
+
+composition xxx_ModsDefinition_titleInfo between
+	ModsDefinition[0..1] role xxx_ModsDefinition_titleInfo_src
+	TitleInfoDefinition[*] role titleInfo
+end
+
+composition xxx_ModsDefinition_typeOfResource between
+	ModsDefinition[0..1] role xxx_ModsDefinition_typeOfResource_src
+	TypeOfResourceDefinition[*] role typeOfResource
+end
+
+composition xxx_NameBaseDefinition_namePart between
+	NameBaseDefinition[0..1] role xxx_NameBaseDefinition_namePart_src
+	NamePartDefinition[*] role namePart
+end
+
+composition xxx_NameBaseDefinition_displayForm between
+	NameBaseDefinition[0..1] role xxx_NameBaseDefinition_displayForm_src
+	XsString[*] role displayForm
+end
+
+composition xxx_NameBaseDefinition_affiliation between
+	NameBaseDefinition[0..1] role xxx_NameBaseDefinition_affiliation_src
+	XsString[*] role affiliation
+end
+
+composition xxx_NameBaseDefinition_role between
+	NameBaseDefinition[0..1] role xxx_NameBaseDefinition_role_src
+	RoleDefinition[*] role role
+end
+
+composition xxx_NameBaseDefinition_description between
+	NameBaseDefinition[0..1] role xxx_NameBaseDefinition_description_src
+	XsString[*] role description
+end
+
+composition xxx_OriginInfoDefinition_place between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_place_src
+	PlaceDefinition[*] role place
+end
+
+composition xxx_OriginInfoDefinition_publisher between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_publisher_src
+	StringPlusSupplied[*] role publisher
+end
+
+composition xxx_OriginInfoDefinition_dateIssued between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_dateIssued_src
+	DateDefinition[*] role dateIssued
+end
+
+composition xxx_OriginInfoDefinition_dateCreated between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_dateCreated_src
+	DateDefinition[*] role dateCreated
+end
+
+composition xxx_OriginInfoDefinition_dateCaptured between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_dateCaptured_src
+	DateDefinition[*] role dateCaptured
+end
+
+composition xxx_OriginInfoDefinition_dateValid between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_dateValid_src
+	DateDefinition[*] role dateValid
+end
+
+composition xxx_OriginInfoDefinition_dateModified between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_dateModified_src
+	DateDefinition[*] role dateModified
+end
+
+composition xxx_OriginInfoDefinition_copyrightDate between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_copyrightDate_src
+	DateDefinition[*] role copyrightDate
+end
+
+composition xxx_OriginInfoDefinition_dateOther between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_dateOther_src
+	DateOtherDefinition[*] role dateOther
+end
+
+composition xxx_OriginInfoDefinition_edition between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_edition_src
+	StringPlusSupplied[*] role edition
+end
+
+composition xxx_OriginInfoDefinition_frequency between
+	OriginInfoDefinition[0..1] role xxx_OriginInfoDefinition_frequency_src
+	StringPlusAuthority[*] role frequency
+end
+
+composition xxx_PartDefinition_detail between
+	PartDefinition[0..1] role xxx_PartDefinition_detail_src
+	DetailDefinition[*] role detail
+end
+
+composition xxx_PartDefinition_extent between
+	PartDefinition[0..1] role xxx_PartDefinition_extent_src
+	ExtentDefinition[*] role extent
+end
+
+composition xxx_PartDefinition_date between
+	PartDefinition[0..1] role xxx_PartDefinition_date_src
+	DateBaseDefinition[*] role date
+end
+
+composition xxx_PartDefinition_text between
+	PartDefinition[0..1] role xxx_PartDefinition_text_src
+	UnstructuredTextDefinition[*] role text
+end
+
+composition xxx_PhysicalDescriptionDefinition_form between
+	PhysicalDescriptionDefinition[0..1] role xxx_PhysicalDescriptionDefinition_form_src
+	StringPlusAuthorityPlusType[*] role form
+end
+
+composition xxx_PhysicalDescriptionDefinition_internetMediaType between
+	PhysicalDescriptionDefinition[0..1] role xxx_PhysicalDescriptionDefinition_internetMediaType_src
+	XsString[*] role internetMediaType
+end
+
+composition xxx_PhysicalDescriptionDefinition_extent between
+	PhysicalDescriptionDefinition[0..1] role xxx_PhysicalDescriptionDefinition_extent_src
+	StringPlusSupplied[*] role extent
+end
+
+composition xxx_PhysicalDescriptionDefinition_note between
+	PhysicalDescriptionDefinition[0..1] role xxx_PhysicalDescriptionDefinition_note_src
+	NoteBaseDefinition[*] role note
+end
+
+composition xxx_PlaceDefinition_placeTerm between
+	PlaceDefinition[0..1] role xxx_PlaceDefinition_placeTerm_src
+	PlaceTermDefinition[1..*] role placeTerm
+end
+
+composition xxx_RecordInfoDefinition_recordContentSource between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_recordContentSource_src
+	StringPlusAuthority[*] role recordContentSource
+end
+
+composition xxx_RecordInfoDefinition_recordCreationDate between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_recordCreationDate_src
+	DateDefinition[*] role recordCreationDate
+end
+
+composition xxx_RecordInfoDefinition_recordChangeDate between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_recordChangeDate_src
+	DateDefinition[*] role recordChangeDate
+end
+
+composition xxx_RecordInfoDefinition_recordIdentifier between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_recordIdentifier_src
+	RecordIdentifierDefinition[*] role recordIdentifier
+end
+
+composition xxx_RecordInfoDefinition_languageOfCataloging between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_languageOfCataloging_src
+	LanguageDefinition[*] role languageOfCataloging
+end
+
+composition xxx_RecordInfoDefinition_recordOrigin between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_recordOrigin_src
+	XsString[*] role recordOrigin
+end
+
+composition xxx_RecordInfoDefinition_descriptionStandard between
+	RecordInfoDefinition[0..1] role xxx_RecordInfoDefinition_descriptionStandard_src
+	StringPlusAuthority[*] role descriptionStandard
+end
+
+composition xxx_RelatedItemDefinition_abstract_ between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_abstract__src
+	AbstractDefinition[*] role abstract_
+end
+
+composition xxx_RelatedItemDefinition_accessCondition between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_accessCondition_src
+	AccessConditionDefinition[*] role accessCondition
+end
+
+composition xxx_RelatedItemDefinition_classification between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_classification_src
+	ClassificationDefinition[*] role classification
+end
+
+composition xxx_RelatedItemDefinition_extension between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_extension_src
+	ExtensionDefinition[*] role extension
+end
+
+composition xxx_RelatedItemDefinition_genre between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_genre_src
+	GenreDefinition[*] role genre
+end
+
+composition xxx_RelatedItemDefinition_identifier between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_identifier_src
+	IdentifierDefinition[*] role identifier
+end
+
+composition xxx_RelatedItemDefinition_language between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_language_src
+	LanguageDefinition[*] role language
+end
+
+composition xxx_RelatedItemDefinition_location between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_location_src
+	LocationDefinition[*] role location
+end
+
+composition xxx_RelatedItemDefinition_name between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_name_src
+	NameDefinition[*] role name
+end
+
+composition xxx_RelatedItemDefinition_note between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_note_src
+	NoteDefinition[*] role note
+end
+
+composition xxx_RelatedItemDefinition_originInfo between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_originInfo_src
+	OriginInfoDefinition[*] role originInfo
+end
+
+composition xxx_RelatedItemDefinition_part between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_part_src
+	PartDefinition[*] role part
+end
+
+composition xxx_RelatedItemDefinition_physicalDescription between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_physicalDescription_src
+	PhysicalDescriptionDefinition[*] role physicalDescription
+end
+
+composition xxx_RelatedItemDefinition_recordInfo between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_recordInfo_src
+	RecordInfoDefinition[*] role recordInfo
+end
+
+composition xxx_RelatedItemDefinition_relatedItem between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_relatedItem_src
+	RelatedItemDefinition[*] role relatedItem
+end
+
+composition xxx_RelatedItemDefinition_subject between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_subject_src
+	SubjectDefinition[*] role subject
+end
+
+composition xxx_RelatedItemDefinition_tableOfContents between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_tableOfContents_src
+	TableOfContentsDefinition[*] role tableOfContents
+end
+
+composition xxx_RelatedItemDefinition_targetAudience between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_targetAudience_src
+	TargetAudienceDefinition[*] role targetAudience
+end
+
+composition xxx_RelatedItemDefinition_titleInfo between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_titleInfo_src
+	TitleInfoDefinition[*] role titleInfo
+end
+
+composition xxx_RelatedItemDefinition_typeOfResource between
+	RelatedItemDefinition[0..1] role xxx_RelatedItemDefinition_typeOfResource_src
+	TypeOfResourceDefinition[*] role typeOfResource
+end
+
+composition xxx_RoleDefinition_roleTerm between
+	RoleDefinition[0..1] role xxx_RoleDefinition_roleTerm_src
+	RoleTermDefinition[1..*] role roleTerm
+end
+
+composition xxx_SubjectDefinition_topic between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_topic_src
+	StringPlusAuthority[*] role topic
+end
+
+composition xxx_SubjectDefinition_geographic between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_geographic_src
+	StringPlusAuthority[*] role geographic
+end
+
+composition xxx_SubjectDefinition_temporal between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_temporal_src
+	TemporalDefinition[*] role temporal
+end
+
+composition xxx_SubjectDefinition_titleInfo between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_titleInfo_src
+	SubjectTitleInfoDefinition[*] role titleInfo
+end
+
+composition xxx_SubjectDefinition_name between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_name_src
+	SubjectNameDefinition[*] role name
+end
+
+composition xxx_SubjectDefinition_geographicCode between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_geographicCode_src
+	GeographicCodeDefinition[*] role geographicCode
+end
+
+composition xxx_SubjectDefinition_hierarchicalGeographic between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_hierarchicalGeographic_src
+	HierarchicalGeographicDefinition[*] role hierarchicalGeographic
+end
+
+composition xxx_SubjectDefinition_cartographics between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_cartographics_src
+	CartographicsDefinition[*] role cartographics
+end
+
+composition xxx_SubjectDefinition_occupation between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_occupation_src
+	StringPlusAuthority[*] role occupation
+end
+
+composition xxx_SubjectDefinition_genre between
+	SubjectDefinition[0..1] role xxx_SubjectDefinition_genre_src
+	GenreDefinition[*] role genre
+end
+
+composition xxx_TitleInfoBaseDefinition_title between
+	TitleInfoBaseDefinition[0..1] role xxx_TitleInfoBaseDefinition_title_src
+	XsString[*] role title
+end
+
+composition xxx_TitleInfoBaseDefinition_subTitle between
+	TitleInfoBaseDefinition[0..1] role xxx_TitleInfoBaseDefinition_subTitle_src
+	XsString[*] role subTitle
+end
+
+composition xxx_TitleInfoBaseDefinition_partNumber between
+	TitleInfoBaseDefinition[0..1] role xxx_TitleInfoBaseDefinition_partNumber_src
+	XsString[*] role partNumber
+end
+
+composition xxx_TitleInfoBaseDefinition_partName between
+	TitleInfoBaseDefinition[0..1] role xxx_TitleInfoBaseDefinition_partName_src
+	XsString[*] role partName
+end
+
+composition xxx_TitleInfoBaseDefinition_nonSort between
+	TitleInfoBaseDefinition[0..1] role xxx_TitleInfoBaseDefinition_nonSort_src
+	XsString[*] role nonSort
+end
+

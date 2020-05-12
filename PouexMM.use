@@ -1,0 +1,224 @@
+model pouexmm
+enum InfluenceType{
+default
+}
+
+enum MathematicOperator{
+default
+}
+
+class Game
+attributes
+	name : String
+operations
+end
+
+class Pouex<LiveObject
+attributes
+	name : String
+	birthday : String
+operations
+end
+
+abstract class Feature
+attributes
+	default : Real
+	minimum : Real
+	maximum : Real
+	type : InfluenceType
+	name : String
+	MeasurementUnit : String
+operations
+end
+
+class Physic<Feature
+attributes
+operations
+end
+
+class Emotional<Feature
+attributes
+operations
+end
+
+class State
+attributes
+	name : String
+operations
+end
+
+abstract class ActivationCondition
+attributes
+	name : String
+operations
+end
+
+abstract class Action
+attributes
+	name : String
+	enable : Boolean
+operations
+end
+
+class TimeEvent<RepeatedAction
+attributes
+operations
+end
+
+class Influence
+attributes
+	operator : MathematicOperator
+	value : Real
+operations
+end
+
+class BodyPart
+attributes
+	name : String
+	image : String
+	width : Integer
+	height : Integer
+	left : Integer
+	top : Integer
+operations
+end
+
+class PouexAction<Action
+attributes
+operations
+end
+
+class MinThresholdActivationCondition<ThresholdActivationCondition
+attributes
+operations
+end
+
+class MaxThresholdActivationCondition<ThresholdActivationCondition
+attributes
+operations
+end
+
+abstract class ThresholdActivationCondition<ActivationCondition
+attributes
+	threshold : Real
+operations
+end
+
+class RepeatedAction<Action
+attributes
+	eachMillisec : Integer
+operations
+end
+
+class LiveObject
+attributes
+operations
+end
+
+class StateActivationCondition<ActivationCondition
+attributes
+	condition : Boolean
+operations
+end
+
+class BodyAlteration
+attributes
+	image : String
+operations
+end
+
+class StateDead<State
+attributes
+operations
+end
+
+abstract class LogicActivationCondition<ActivationCondition
+attributes
+operations
+end
+
+class AndLogicActivationCondition<LogicActivationCondition
+attributes
+operations
+end
+
+class OrLogicActivationCondition<LogicActivationCondition
+attributes
+operations
+end
+
+composition xxx_Game_pouex between
+	Game[*] role xxx_Game_pouex_src
+	Pouex[1] role pouex
+end
+
+composition xxx_State_activationConditions between
+	State[0..1] role xxx_State_activationConditions_src
+	ActivationCondition[1..*] role activationConditions
+end
+
+composition xxx_State_bodyAlterations between
+	State[0..1] role xxx_State_bodyAlterations_src
+	BodyAlteration[*] role bodyAlterations
+end
+
+composition xxx_Action_influences between
+	Action[0..1] role xxx_Action_influences_src
+	Influence[*] role influences
+end
+
+association xxx_Influence_feature between
+	Influence[*] role xxx_Influence_feature_src
+	Feature[1] role feature
+end
+
+composition xxx_BodyPart_subparts between
+	BodyPart[0..1] role xxx_BodyPart_subparts_src
+	BodyPart[*] role subparts
+end
+
+association xxx_BodyPart_parent between
+	BodyPart[*] role xxx_BodyPart_parent_src
+	BodyPart[0..1] role parent
+end
+
+association xxx_ThresholdActivationCondition_feature between
+	ThresholdActivationCondition[*] role xxx_ThresholdActivationCondition_feature_src
+	Feature[1] role feature
+end
+
+composition xxx_LiveObject_actions between
+	LiveObject[0..1] role xxx_LiveObject_actions_src
+	Action[*] role actions
+end
+
+composition xxx_LiveObject_states_ between
+	LiveObject[0..1] role xxx_LiveObject_states__src
+	State[*] role states_
+end
+
+composition xxx_LiveObject_features between
+	LiveObject[0..1] role xxx_LiveObject_features_src
+	Feature[*] role features
+end
+
+composition xxx_LiveObject_bodyparts between
+	LiveObject[0..1] role xxx_LiveObject_bodyparts_src
+	BodyPart[1..*] role bodyparts
+end
+
+association xxx_StateActivationCondition_state between
+	StateActivationCondition[*] role xxx_StateActivationCondition_state_src
+	State[1] role state
+end
+
+association xxx_BodyAlteration_bodyPart between
+	BodyAlteration[*] role xxx_BodyAlteration_bodyPart_src
+	BodyPart[1] role bodyPart
+end
+
+composition xxx_LogicActivationCondition_terms between
+	LogicActivationCondition[0..1] role xxx_LogicActivationCondition_terms_src
+	ActivationCondition[1..*] role terms
+end
+

@@ -1,0 +1,128 @@
+model javaz
+enum JavaVisibilityKind{
+default
+}
+
+enum JavaKind{
+default
+}
+
+enum JavaParameterKind{
+default
+}
+
+class Javaz<JavaElement
+attributes
+operations
+end
+
+class JavaClass<JavaElement
+attributes
+	kind : JavaKind
+	public : Boolean
+	final : Boolean
+	rewritable : Boolean
+	needToGenerate : Boolean
+operations
+end
+
+class JavaPackageX<JavaElement
+attributes
+	needToGenerate : Boolean
+operations
+end
+
+class JavaParameter<JavaElement
+attributes
+	final : Boolean
+	parameterKind : JavaParameterKind
+	type : String
+	kind : JavaParameterKind
+operations
+end
+
+class Method<JavaElement
+attributes
+	visibility : JavaVisibilityKind
+	final : Boolean
+	static : Boolean
+	synchronized : Boolean
+	constructor : Boolean
+	native : Boolean
+	abstract_ : Boolean
+operations
+end
+
+class Field<JavaElement
+attributes
+	visibility : JavaVisibilityKind
+	static : Boolean
+	transient : Boolean
+	volatile : Boolean
+	final : Boolean
+	type : String
+operations
+end
+
+class JavaElement
+attributes
+	name : String
+operations
+end
+
+class Block
+attributes
+	content : String
+operations
+end
+
+composition xxx_Javaz_packages between
+	Javaz[0..1] role xxx_Javaz_packages_src
+	JavaPackageX[*] role packages
+end
+
+composition xxx_Javaz_classes between
+	Javaz[0..1] role xxx_Javaz_classes_src
+	JavaClass[*] role classes
+end
+
+composition xxx_JavaClass_methods between
+	JavaClass[0..1] role xxx_JavaClass_methods_src
+	Method[*] role methods
+end
+
+composition xxx_JavaClass_fields between
+	JavaClass[0..1] role xxx_JavaClass_fields_src
+	Field[*] role fields
+end
+
+association xxx_JavaClass_imports between
+	JavaClass[0..1] role xxx_JavaClass_imports_src
+	JavaClass[*] role imports
+end
+
+association xxx_JavaClass_package between
+	JavaClass[*] role xxx_JavaClass_package_src
+	JavaPackageX[0..1] role package
+end
+
+association xxx_JavaClass_extends between
+	JavaClass[*] role xxx_JavaClass_extends_src
+	JavaClass[0..1] role extends
+end
+
+association xxx_JavaClass_implements between
+	JavaClass[0..1] role xxx_JavaClass_implements_src
+	JavaClass[*] role implements
+end
+
+composition xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	JavaParameter[*] role parameters
+end
+
+composition xxx_Method_block between
+	Method[*] role xxx_Method_block_src
+	Block[0..1] role block
+end
+

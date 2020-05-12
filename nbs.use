@@ -1,0 +1,125 @@
+model nowarebicycleshop
+enum Manufacturers{
+default
+}
+
+enum FrameType{
+default
+}
+
+enum Color{
+default
+}
+
+enum SaddleType{
+default
+}
+
+enum PedalTypes{
+default
+}
+
+abstract class Node
+attributes
+operations
+end
+
+abstract class Part<Node
+attributes
+	price : Real
+	manufacturer : Manufacturers
+	id : Boolean
+	name : String
+operations
+end
+
+class Frame<Part
+attributes
+	frameType : FrameType
+	color : Color
+operations
+end
+
+class Wheel<Part
+attributes
+operations
+end
+
+abstract class Gear<Part
+attributes
+operations
+end
+
+class InnerGear<Gear
+attributes
+operations
+end
+
+class OuterGear<Gear
+attributes
+operations
+end
+
+class Pedals<Part
+attributes
+	pedalType : PedalTypes
+operations
+end
+
+class Saddle<Part
+attributes
+	saddleType : SaddleType
+operations
+end
+
+class HandBrakes<Part
+attributes
+operations
+end
+
+class HandleBars<Part
+attributes
+operations
+end
+
+class Bicycle
+attributes
+	price : Real
+	deliveryDate : String
+operations
+end
+
+class CustomerData
+attributes
+	name : String
+	address : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+	value : String
+operations
+end
+
+composition xxx_Bicycle_parts between
+	Bicycle[0..1] role xxx_Bicycle_parts_src
+	Part[*] role parts
+end
+
+composition xxx_Bicycle_customerData between
+	Bicycle[0..1] role xxx_Bicycle_customerData_src
+	CustomerData[*] role customerData
+end
+
+composition xxx_Bicycle_parameters between
+	Bicycle[0..1] role xxx_Bicycle_parameters_src
+	Parameter[*] role parameters
+end
+
+composition xxx_CustomerData_parameters between
+	CustomerData[0..1] role xxx_CustomerData_parameters_src
+	Parameter[*] role parameters
+end
+

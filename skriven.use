@@ -1,0 +1,35 @@
+model prototip
+enum TezinaPosla{
+default
+}
+
+abstract class Angazovani_Radnik
+attributes
+operations
+end
+
+abstract class Visokokvalifikovani_Radnik<Angazovani_Radnik
+attributes
+operations
+end
+
+class Visa_Skola<Visokokvalifikovani_Radnik
+attributes
+operations
+end
+
+class Fakultetski_Obrazovan<Visokokvalifikovani_Radnik
+attributes
+operations
+end
+
+class Fizikalac<Angazovani_Radnik
+attributes
+operations
+end
+
+class Posao
+attributes
+operations
+end
+

@@ -1,0 +1,153 @@
+model planrouge
+class Intervention
+attributes
+	id : String
+	description : String
+operations
+end
+
+class Horodatage
+attributes
+	horodatage : String
+operations
+end
+
+class InterventionType
+attributes
+	code : String
+operations
+end
+
+class Position<Horodatage
+attributes
+operations
+end
+
+class GpsPoint<Position
+attributes
+	latitude : Integer
+	longitude : Integer
+	satellites_used : Integer
+	precision : Integer
+	altitude : Integer
+operations
+end
+
+class PositionCivil<Position
+attributes
+	nomRue : String
+	nomVille : String
+	cp : String
+	numeroRue : String
+	pays : String
+operations
+end
+
+class Agent
+attributes
+	matricule : String
+	nom : String
+	prenom : String
+	dateNaissance : String
+	sexe : String
+operations
+end
+
+class Victime
+attributes
+	id : String
+	nom : String
+	prenom : String
+	age : Integer
+	sexe : String
+	dateNaissance : String
+operations
+end
+
+class Categorie
+attributes
+	id : String
+	description : String
+operations
+end
+
+class ContainerRoot
+attributes
+operations
+end
+
+class Bilan<Horodatage
+attributes
+operations
+end
+
+class Urgence<Bilan
+attributes
+operations
+end
+
+class Complementaire<Bilan
+attributes
+operations
+end
+
+association xxx_Intervention_type between
+	Intervention[*] role xxx_Intervention_type_src
+	InterventionType[1] role type
+end
+
+composition xxx_Intervention_position between
+	Intervention[*] role xxx_Intervention_position_src
+	Position[0..1] role position
+end
+
+composition xxx_Intervention_victimes between
+	Intervention[0..1] role xxx_Intervention_victimes_src
+	Victime[*] role victimes
+end
+
+composition xxx_Intervention_affecte between
+	Intervention[0..1] role xxx_Intervention_affecte_src
+	Agent[*] role affecte
+end
+
+association xxx_Agent_intervention between
+	Agent[*] role xxx_Agent_intervention_src
+	Intervention[0..1] role intervention
+end
+
+association xxx_Victime_intervenants between
+	Victime[0..1] role xxx_Victime_intervenants_src
+	Agent[*] role intervenants
+end
+
+association xxx_Victime_priorite between
+	Victime[*] role xxx_Victime_priorite_src
+	Categorie[0..1] role priorite
+end
+
+composition xxx_Victime_posRef between
+	Victime[*] role xxx_Victime_posRef_src
+	Position[0..1] role posRef
+end
+
+composition xxx_Victime_posDestination between
+	Victime[0..1] role xxx_Victime_posDestination_src
+	Position[*] role posDestination
+end
+
+association xxx_Victime_bilans between
+	Victime[0..1] role xxx_Victime_bilans_src
+	Bilan[*] role bilans
+end
+
+composition xxx_ContainerRoot_interventions between
+	ContainerRoot[0..1] role xxx_ContainerRoot_interventions_src
+	Intervention[*] role interventions
+end
+
+composition xxx_ContainerRoot_agents between
+	ContainerRoot[0..1] role xxx_ContainerRoot_agents_src
+	Agent[*] role agents
+end
+

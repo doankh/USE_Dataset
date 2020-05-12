@@ -1,0 +1,1065 @@
+model haxe
+enum HaxeTarget{
+default
+}
+
+enum HaxeAttributeProperty{
+default
+}
+
+enum HaxePrefixOperators{
+default
+}
+
+enum HaxeAssignmentOperator{
+default
+}
+
+enum HaxeInfixOperators{
+default
+}
+
+class HaxeModel
+attributes
+	name : String
+	sourceFolder : String
+	targetFolder : String
+	target : HaxeTarget
+operations
+end
+
+abstract class HaxeModelElement
+attributes
+operations
+end
+
+abstract class HaxeASTNode<HaxeModelElement
+attributes
+operations
+end
+
+abstract class HaxeNamedElement<HaxeASTNode
+attributes
+	name : String
+operations
+end
+
+class HaxeComment<HaxeASTNode
+attributes
+	enclosedByParent : Boolean
+	prefixOfParent : Boolean
+	content : String
+	lineComment : Boolean
+operations
+end
+
+class HaxeHaxedocComment<HaxeComment
+attributes
+operations
+end
+
+class HaxeTagElement<HaxeASTNode
+attributes
+	tagName : String
+operations
+end
+
+class HaxeTextElement<HaxeASTNode
+attributes
+	text : String
+operations
+end
+
+abstract class HaxePathReferentiable<HaxeNamedElement
+attributes
+operations
+end
+
+abstract class HaxePathReference<HaxeModelElement
+attributes
+operations
+end
+
+abstract class HaxeFieldContainer<HaxeModelElement
+attributes
+operations
+end
+
+abstract class HaxeExpression<HaxeASTNode
+attributes
+operations
+end
+
+abstract class HaxeLoopStatement<HaxeExpression
+attributes
+operations
+end
+
+abstract class HaxeUnaryExpression<HaxeExpression
+attributes
+operations
+end
+
+abstract class HaxeBinaryExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeBlock<HaxeExpression
+attributes
+operations
+	isEmpty():Boolean
+end
+
+abstract class HaxeConditionalExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeIfStatement<HaxeConditionalExpression
+attributes
+operations
+end
+
+class HaxeTernaryExpression<HaxeConditionalExpression
+attributes
+operations
+end
+
+class HaxeForStatement<HaxeLoopStatement
+attributes
+operations
+end
+
+class HaxeWhileStatement<HaxeLoopStatement
+attributes
+operations
+end
+
+class HaxeInExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeDoWhileStatement<HaxeLoopStatement
+attributes
+operations
+end
+
+class HaxePrefixExpression<HaxeUnaryExpression
+attributes
+	operator : HaxePrefixOperators
+operations
+end
+
+class HaxeInfixExpression<HaxeBinaryExpression
+attributes
+	operator : HaxeInfixOperators
+operations
+end
+
+class HaxePostfixExpression<HaxeUnaryExpression
+attributes
+	isIncrement : Boolean
+operations
+end
+
+class HaxeReturn<HaxeExpressionStatement
+attributes
+operations
+end
+
+class HaxeBreak<HaxeExpression
+attributes
+operations
+end
+
+class HaxeContinue<HaxeExpression
+attributes
+operations
+end
+
+class HaxeThisExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeEmptyStatement<HaxeExpression
+attributes
+operations
+end
+
+abstract class HaxeConstant<HaxeExpression
+attributes
+operations
+end
+
+class HaxeStringLiteral<HaxeConstant
+attributes
+	escapedValue : String
+operations
+end
+
+class HaxeNullLiteral<HaxeConstant
+attributes
+operations
+end
+
+class HaxeBooleanLiteral<HaxeConstant
+attributes
+	value : Boolean
+operations
+end
+
+class HaxeNumberLiteral<HaxeConstant
+attributes
+	value : String
+operations
+end
+
+class HaxeIdentifierLiteral<HaxeConstant
+attributes
+	value : String
+operations
+end
+
+class HaxeRegexLiteral<HaxeConstant
+attributes
+	pattern : String
+	options : String
+operations
+end
+
+class HaxeFieldAccess<HaxeExpression
+attributes
+operations
+end
+
+class HaxeParenthizedExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeArrayInitializer<HaxeExpression
+attributes
+operations
+end
+
+class HaxeArrayCreation<HaxeExpression
+attributes
+operations
+end
+
+class HaxeArrayAccess<HaxeExpression
+attributes
+operations
+end
+
+class HaxeSwitch<HaxeExpression
+attributes
+operations
+end
+
+class HaxeCase<HaxeExpression
+attributes
+operations
+end
+
+class HaxeFunctionExpression<HaxeExpression,HaxeAbstractFunction
+attributes
+operations
+end
+
+class HaxeCallExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeObjectDeclaration<HaxeExpression
+attributes
+operations
+end
+
+class HaxeFieldDeclaration<HaxeNamedElement,HaxeTypedElement
+attributes
+operations
+end
+
+class HaxeTryExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeCatchClause<HaxeExpression
+attributes
+operations
+end
+
+class HaxeThrowExpression<HaxeExpressionStatement
+attributes
+operations
+end
+
+class HaxeExpressionStatement<HaxeExpression
+attributes
+operations
+end
+
+class HaxeCastingExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeUnsafeCastExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeTypeCheckExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeSuperMethodInvocation<HaxeExpression,HaxeAbstractMethodInvocation
+attributes
+operations
+end
+
+class HaxeMethodInvocation<HaxeExpression,HaxeAbstractMethodInvocation
+attributes
+operations
+end
+
+class HaxeSuperConstructorInvocation<HaxeMethodInvocation
+attributes
+operations
+end
+
+class HaxeSingleVariableAccess<HaxeExpression
+attributes
+operations
+end
+
+class HaxePackageAccess<HaxeExpression,HaxePathReference
+attributes
+operations
+end
+
+class HaxeAssignment<HaxeBinaryExpression
+attributes
+	operator : HaxeAssignmentOperator
+operations
+end
+
+abstract class HaxeAbstractMethodInvocation<HaxeASTNode
+attributes
+operations
+end
+
+abstract class HaxeVariableDeclaration<HaxeNamedElement
+attributes
+operations
+end
+
+class HaxeVariableDeclarationGroup<HaxeTypedElement
+attributes
+operations
+end
+
+class HaxeVariableDeclarationFragment<HaxeVariableDeclaration
+attributes
+operations
+end
+
+class HaxeVariableDeclarationExpression<HaxeExpression
+attributes
+operations
+end
+
+class HaxeSingleVariableDeclaration<HaxeVariableDeclaration,HaxeTypedElement
+attributes
+	isOptional : Boolean
+operations
+end
+
+class HaxePackage<HaxePathReferentiable
+attributes
+operations
+end
+
+class HaxeModule<HaxeNamedElement
+attributes
+operations
+end
+
+abstract class HaxeType<HaxePathReferentiable,HaxeASTNode
+attributes
+	private : Boolean
+	extern : Boolean
+operations
+end
+
+abstract class HaxeClassifier<HaxeType,HaxeFieldContainer,HaxeMetadataContainer
+attributes
+operations
+end
+
+class HaxeTypeParameter<HaxeType
+attributes
+operations
+end
+
+abstract class HaxeTypeAccess<HaxeExpression
+attributes
+operations
+end
+
+class HaxeFunctionTypeAccess<HaxeTypeAccess
+attributes
+operations
+end
+
+class HaxeClassifierAccess<HaxePathReference,HaxeTypeAccess
+attributes
+operations
+end
+
+abstract class HaxeTypedElement<HaxeModelElement
+attributes
+operations
+end
+
+class HaxeClass<HaxeClassifier
+attributes
+	isInterface : Boolean
+operations
+end
+
+class HaxeAbstract<HaxeClassifier
+attributes
+operations
+end
+
+class HaxeEnum<HaxeClassifier
+attributes
+operations
+end
+
+class HaxeTypedef<HaxeType
+attributes
+operations
+end
+
+abstract class HaxeField<HaxeNamedElement,HaxeMetadataContainer
+attributes
+	isStatic : Boolean
+	isPrivate : Boolean
+operations
+end
+
+class HaxeAttribute<HaxeField,HaxeSingleVariableDeclaration
+attributes
+	getterProperty : HaxeAttributeProperty
+	setterProperty : HaxeAttributeProperty
+operations
+end
+
+abstract class HaxeAbstractFunction<HaxeASTNode
+attributes
+operations
+end
+
+abstract class HaxeAbstractOperation<HaxeAbstractFunction
+attributes
+	isInline : Boolean
+	overrides : Boolean
+operations
+end
+
+class HaxeOperation<HaxeAbstractOperation,HaxeField,HaxeTypedElement
+attributes
+	macro : Boolean
+operations
+end
+
+class HaxeConstructor<HaxeAbstractOperation,HaxeField
+attributes
+operations
+end
+
+class HaxeEnumConstructor<HaxeVariableDeclaration,HaxeField
+attributes
+operations
+end
+
+abstract class HaxeDependencyDeclaration<HaxePathReference,HaxeASTNode
+attributes
+operations
+end
+
+class HaxeImportDeclaration<HaxeDependencyDeclaration
+attributes
+operations
+end
+
+class HaxeUsingDeclaration<HaxeDependencyDeclaration
+attributes
+operations
+end
+
+class HaxeMetadata<HaxeNamedElement,HaxeExpression
+attributes
+	compilerMetadata : Boolean
+operations
+end
+
+abstract class HaxeMetadataContainer<HaxeModelElement
+attributes
+operations
+end
+
+association xxx_HaxeModel_mainClass between
+	HaxeModel[*] role xxx_HaxeModel_mainClass_src
+	HaxeClass[1] role mainClass
+end
+
+composition xxx_HaxeModel_elements between
+	HaxeModel[0..1] role xxx_HaxeModel_elements_src
+	HaxePathReferentiable[*] role elements
+end
+
+composition xxx_HaxeModel_referenced between
+	HaxeModel[0..1] role xxx_HaxeModel_referenced_src
+	HaxePathReferentiable[*] role referenced
+end
+
+composition xxx_HaxeModel_haxeModules between
+	HaxeModel[0..1] role xxx_HaxeModel_haxeModules_src
+	HaxeModule[*] role haxeModules
+end
+
+composition xxx_HaxeASTNode_comments between
+	HaxeASTNode[0..1] role xxx_HaxeASTNode_comments_src
+	HaxeComment[*] role comments
+end
+
+composition xxx_HaxeHaxedocComment_tags between
+	HaxeHaxedocComment[0..1] role xxx_HaxeHaxedocComment_tags_src
+	HaxeTagElement[*] role tags
+end
+
+composition xxx_HaxeTagElement_fragments between
+	HaxeTagElement[0..1] role xxx_HaxeTagElement_fragments_src
+	HaxeASTNode[*] role fragments
+end
+
+association xxx_HaxePathReferentiable_parentReference between
+	HaxePathReferentiable[*] role xxx_HaxePathReferentiable_parentReference_src
+	HaxePackage[0..1] role parentReference
+end
+
+association xxx_HaxePathReferentiable_referencedIn between
+	HaxePathReferentiable[0..1] role xxx_HaxePathReferentiable_referencedIn_src
+	HaxePathReference[*] role referencedIn
+end
+
+association xxx_HaxePathReference_referencedTerminal between
+	HaxePathReference[*] role xxx_HaxePathReference_referencedTerminal_src
+	HaxePathReferentiable[0..1] role referencedTerminal
+end
+
+composition xxx_HaxeFieldContainer_haxeFields between
+	HaxeFieldContainer[0..1] role xxx_HaxeFieldContainer_haxeFields_src
+	HaxeField[*] role haxeFields
+end
+
+composition xxx_HaxeLoopStatement_theBody between
+	HaxeLoopStatement[*] role xxx_HaxeLoopStatement_theBody_src
+	HaxeExpression[1] role theBody
+end
+
+composition xxx_HaxeLoopStatement_expression between
+	HaxeLoopStatement[*] role xxx_HaxeLoopStatement_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeUnaryExpression_operand between
+	HaxeUnaryExpression[*] role xxx_HaxeUnaryExpression_operand_src
+	HaxeExpression[1] role operand
+end
+
+composition xxx_HaxeBinaryExpression_leftSide between
+	HaxeBinaryExpression[*] role xxx_HaxeBinaryExpression_leftSide_src
+	HaxeExpression[1] role leftSide
+end
+
+composition xxx_HaxeBinaryExpression_rightSide between
+	HaxeBinaryExpression[*] role xxx_HaxeBinaryExpression_rightSide_src
+	HaxeExpression[1] role rightSide
+end
+
+composition xxx_HaxeBlock_statements between
+	HaxeBlock[0..1] role xxx_HaxeBlock_statements_src
+	HaxeExpression[*] role statements
+end
+
+composition xxx_HaxeConditionalExpression_expression between
+	HaxeConditionalExpression[*] role xxx_HaxeConditionalExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeConditionalExpression_thenStatement between
+	HaxeConditionalExpression[*] role xxx_HaxeConditionalExpression_thenStatement_src
+	HaxeExpression[1] role thenStatement
+end
+
+composition xxx_HaxeIfStatement_elseStatement between
+	HaxeIfStatement[*] role xxx_HaxeIfStatement_elseStatement_src
+	HaxeExpression[0..1] role elseStatement
+end
+
+composition xxx_HaxeTernaryExpression_elseExpression between
+	HaxeTernaryExpression[*] role xxx_HaxeTernaryExpression_elseExpression_src
+	HaxeExpression[1] role elseExpression
+end
+
+composition xxx_HaxeForStatement_parameter between
+	HaxeForStatement[*] role xxx_HaxeForStatement_parameter_src
+	HaxeSingleVariableDeclaration[1] role parameter
+end
+
+composition xxx_HaxeInExpression_variable between
+	HaxeInExpression[*] role xxx_HaxeInExpression_variable_src
+	HaxeSingleVariableDeclaration[1] role variable
+end
+
+composition xxx_HaxeInExpression_expression between
+	HaxeInExpression[*] role xxx_HaxeInExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeInfixExpression_extendedSide between
+	HaxeInfixExpression[0..1] role xxx_HaxeInfixExpression_extendedSide_src
+	HaxeExpression[*] role extendedSide
+end
+
+composition xxx_HaxeFieldAccess_field between
+	HaxeFieldAccess[*] role xxx_HaxeFieldAccess_field_src
+	HaxeSingleVariableAccess[1] role field
+end
+
+composition xxx_HaxeFieldAccess_expression between
+	HaxeFieldAccess[*] role xxx_HaxeFieldAccess_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeParenthizedExpression_expression between
+	HaxeParenthizedExpression[*] role xxx_HaxeParenthizedExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeArrayInitializer_expressions between
+	HaxeArrayInitializer[0..1] role xxx_HaxeArrayInitializer_expressions_src
+	HaxeExpression[1..*] role expressions
+end
+
+composition xxx_HaxeArrayCreation_dimensions between
+	HaxeArrayCreation[0..1] role xxx_HaxeArrayCreation_dimensions_src
+	HaxeExpression[*] role dimensions
+end
+
+composition xxx_HaxeArrayCreation_initializer between
+	HaxeArrayCreation[*] role xxx_HaxeArrayCreation_initializer_src
+	HaxeArrayInitializer[0..1] role initializer
+end
+
+composition xxx_HaxeArrayCreation_type between
+	HaxeArrayCreation[*] role xxx_HaxeArrayCreation_type_src
+	HaxeTypeAccess[1] role type
+end
+
+composition xxx_HaxeArrayAccess_array between
+	HaxeArrayAccess[*] role xxx_HaxeArrayAccess_array_src
+	HaxeExpression[1] role array
+end
+
+composition xxx_HaxeArrayAccess_index between
+	HaxeArrayAccess[*] role xxx_HaxeArrayAccess_index_src
+	HaxeExpression[1] role index
+end
+
+composition xxx_HaxeSwitch_expression between
+	HaxeSwitch[*] role xxx_HaxeSwitch_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeSwitch_cases between
+	HaxeSwitch[0..1] role xxx_HaxeSwitch_cases_src
+	HaxeCase[*] role cases
+end
+
+composition xxx_HaxeSwitch_default between
+	HaxeSwitch[0..1] role xxx_HaxeSwitch_default_src
+	HaxeExpression[*] role default
+end
+
+composition xxx_HaxeCase_values between
+	HaxeCase[0..1] role xxx_HaxeCase_values_src
+	HaxeExpression[1..*] role values
+end
+
+composition xxx_HaxeCase_expression between
+	HaxeCase[*] role xxx_HaxeCase_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeCallExpression_expression between
+	HaxeCallExpression[*] role xxx_HaxeCallExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeCallExpression_arguments between
+	HaxeCallExpression[0..1] role xxx_HaxeCallExpression_arguments_src
+	HaxeExpression[*] role arguments
+end
+
+composition xxx_HaxeObjectDeclaration_extendsType between
+	HaxeObjectDeclaration[*] role xxx_HaxeObjectDeclaration_extendsType_src
+	HaxeTypeAccess[0..1] role extendsType
+end
+
+composition xxx_HaxeObjectDeclaration_fields between
+	HaxeObjectDeclaration[0..1] role xxx_HaxeObjectDeclaration_fields_src
+	HaxeFieldDeclaration[1..*] role fields
+end
+
+composition xxx_HaxeFieldDeclaration_value between
+	HaxeFieldDeclaration[*] role xxx_HaxeFieldDeclaration_value_src
+	HaxeExpression[1] role value
+end
+
+composition xxx_HaxeTryExpression_theBody between
+	HaxeTryExpression[*] role xxx_HaxeTryExpression_theBody_src
+	HaxeExpression[1] role theBody
+end
+
+composition xxx_HaxeTryExpression_catchClauses between
+	HaxeTryExpression[0..1] role xxx_HaxeTryExpression_catchClauses_src
+	HaxeCatchClause[*] role catchClauses
+end
+
+composition xxx_HaxeCatchClause_exception between
+	HaxeCatchClause[*] role xxx_HaxeCatchClause_exception_src
+	HaxeSingleVariableDeclaration[1] role exception
+end
+
+composition xxx_HaxeCatchClause_theBody between
+	HaxeCatchClause[*] role xxx_HaxeCatchClause_theBody_src
+	HaxeExpression[1] role theBody
+end
+
+composition xxx_HaxeExpressionStatement_expression between
+	HaxeExpressionStatement[*] role xxx_HaxeExpressionStatement_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeCastingExpression_expression between
+	HaxeCastingExpression[*] role xxx_HaxeCastingExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeCastingExpression_type between
+	HaxeCastingExpression[*] role xxx_HaxeCastingExpression_type_src
+	HaxeTypeAccess[1] role type
+end
+
+composition xxx_HaxeUnsafeCastExpression_expression between
+	HaxeUnsafeCastExpression[*] role xxx_HaxeUnsafeCastExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeTypeCheckExpression_expression between
+	HaxeTypeCheckExpression[*] role xxx_HaxeTypeCheckExpression_expression_src
+	HaxeExpression[1] role expression
+end
+
+composition xxx_HaxeTypeCheckExpression_type between
+	HaxeTypeCheckExpression[*] role xxx_HaxeTypeCheckExpression_type_src
+	HaxeTypeAccess[1] role type
+end
+
+composition xxx_HaxeMethodInvocation_expression between
+	HaxeMethodInvocation[*] role xxx_HaxeMethodInvocation_expression_src
+	HaxeExpression[0..1] role expression
+end
+
+composition xxx_HaxeSingleVariableAccess_qualifier between
+	HaxeSingleVariableAccess[*] role xxx_HaxeSingleVariableAccess_qualifier_src
+	HaxeExpression[0..1] role qualifier
+end
+
+association xxx_HaxeSingleVariableAccess_variable between
+	HaxeSingleVariableAccess[*] role xxx_HaxeSingleVariableAccess_variable_src
+	HaxeVariableDeclaration[1] role variable
+end
+
+composition xxx_HaxePackageAccess_qualifier between
+	HaxePackageAccess[*] role xxx_HaxePackageAccess_qualifier_src
+	HaxePackageAccess[0..1] role qualifier
+end
+
+association xxx_HaxeAbstractMethodInvocation_method between
+	HaxeAbstractMethodInvocation[*] role xxx_HaxeAbstractMethodInvocation_method_src
+	HaxeAbstractOperation[1] role method
+end
+
+composition xxx_HaxeAbstractMethodInvocation_arguments between
+	HaxeAbstractMethodInvocation[0..1] role xxx_HaxeAbstractMethodInvocation_arguments_src
+	HaxeExpression[*] role arguments
+end
+
+composition xxx_HaxeAbstractMethodInvocation_typeArguments between
+	HaxeAbstractMethodInvocation[0..1] role xxx_HaxeAbstractMethodInvocation_typeArguments_src
+	HaxeTypeAccess[*] role typeArguments
+end
+
+association xxx_HaxeVariableDeclaration_usageInVariableAccess between
+	HaxeVariableDeclaration[0..1] role xxx_HaxeVariableDeclaration_usageInVariableAccess_src
+	HaxeSingleVariableAccess[*] role usageInVariableAccess
+end
+
+composition xxx_HaxeVariableDeclaration_initializer between
+	HaxeVariableDeclaration[*] role xxx_HaxeVariableDeclaration_initializer_src
+	HaxeExpression[0..1] role initializer
+end
+
+association xxx_HaxeVariableDeclarationGroup_container between
+	HaxeVariableDeclarationGroup[*] role xxx_HaxeVariableDeclarationGroup_container_src
+	HaxeVariableDeclarationExpression[1] role container
+end
+
+composition xxx_HaxeVariableDeclarationGroup_initializer between
+	HaxeVariableDeclarationGroup[*] role xxx_HaxeVariableDeclarationGroup_initializer_src
+	HaxeExpression[0..1] role initializer
+end
+
+composition xxx_HaxeVariableDeclarationGroup_fragments between
+	HaxeVariableDeclarationGroup[0..1] role xxx_HaxeVariableDeclarationGroup_fragments_src
+	HaxeVariableDeclarationFragment[*] role fragments
+end
+
+association xxx_HaxeVariableDeclarationFragment_variablesContainer between
+	HaxeVariableDeclarationFragment[*] role xxx_HaxeVariableDeclarationFragment_variablesContainer_src
+	HaxeVariableDeclarationGroup[0..1] role variablesContainer
+end
+
+composition xxx_HaxeVariableDeclarationExpression_groups between
+	HaxeVariableDeclarationExpression[0..1] role xxx_HaxeVariableDeclarationExpression_groups_src
+	HaxeVariableDeclarationGroup[1..*] role groups
+end
+
+association xxx_HaxeSingleVariableDeclaration_catchClause between
+	HaxeSingleVariableDeclaration[*] role xxx_HaxeSingleVariableDeclaration_catchClause_src
+	HaxeCatchClause[0..1] role catchClause
+end
+
+composition xxx_HaxePackage_childrenReferences between
+	HaxePackage[0..1] role xxx_HaxePackage_childrenReferences_src
+	HaxePathReferentiable[*] role childrenReferences
+end
+
+association xxx_HaxePackage_childrenPackages between
+	HaxePackage[0..1] role xxx_HaxePackage_childrenPackages_src
+	HaxePackage[*] role childrenPackages
+end
+
+association xxx_HaxePackage_containedTypes between
+	HaxePackage[0..1] role xxx_HaxePackage_containedTypes_src
+	HaxeType[*] role containedTypes
+end
+
+association xxx_HaxeModule_commentList between
+	HaxeModule[0..1] role xxx_HaxeModule_commentList_src
+	HaxeComment[*] role commentList
+end
+
+composition xxx_HaxeModule_dependencies between
+	HaxeModule[0..1] role xxx_HaxeModule_dependencies_src
+	HaxeDependencyDeclaration[*] role dependencies
+end
+
+association xxx_HaxeModule_thePackage between
+	HaxeModule[*] role xxx_HaxeModule_thePackage_src
+	HaxePackage[0..1] role thePackage
+end
+
+association xxx_HaxeModule_theElements between
+	HaxeModule[0..1] role xxx_HaxeModule_theElements_src
+	HaxeType[*] role theElements
+end
+
+association xxx_HaxeType_containerModule between
+	HaxeType[*] role xxx_HaxeType_containerModule_src
+	HaxeModule[0..1] role containerModule
+end
+
+composition xxx_HaxeType_commentsAfterDeclaration between
+	HaxeType[0..1] role xxx_HaxeType_commentsAfterDeclaration_src
+	HaxeComment[*] role commentsAfterDeclaration
+end
+
+composition xxx_HaxeType_commentsBeforeDeclaration between
+	HaxeType[0..1] role xxx_HaxeType_commentsBeforeDeclaration_src
+	HaxeComment[*] role commentsBeforeDeclaration
+end
+
+composition xxx_HaxeType_typeParameters between
+	HaxeType[0..1] role xxx_HaxeType_typeParameters_src
+	HaxeTypeParameter[*] role typeParameters
+end
+
+association xxx_HaxeClassifier_containerPackage between
+	HaxeClassifier[*] role xxx_HaxeClassifier_containerPackage_src
+	HaxePackage[0..1] role containerPackage
+end
+
+association xxx_HaxeClassifier_haxeOperations between
+	HaxeClassifier[0..1] role xxx_HaxeClassifier_haxeOperations_src
+	HaxeOperation[*] role haxeOperations
+end
+
+association xxx_HaxeClassifier_haxeAttribute between
+	HaxeClassifier[0..1] role xxx_HaxeClassifier_haxeAttribute_src
+	HaxeAttribute[*] role haxeAttribute
+end
+
+association xxx_HaxeClassifier_haxeConstructors between
+	HaxeClassifier[0..1] role xxx_HaxeClassifier_haxeConstructors_src
+	HaxeConstructor[*] role haxeConstructors
+end
+
+composition xxx_HaxeTypeParameter_bounds between
+	HaxeTypeParameter[0..1] role xxx_HaxeTypeParameter_bounds_src
+	HaxeTypeAccess[*] role bounds
+end
+
+association xxx_HaxeFunctionTypeAccess_returnType between
+	HaxeFunctionTypeAccess[*] role xxx_HaxeFunctionTypeAccess_returnType_src
+	HaxeTypeAccess[1] role returnType
+end
+
+association xxx_HaxeFunctionTypeAccess_argumentTypes between
+	HaxeFunctionTypeAccess[0..1] role xxx_HaxeFunctionTypeAccess_argumentTypes_src
+	HaxeTypeAccess[*] role argumentTypes
+end
+
+composition xxx_HaxeClassifierAccess_parameterMapping between
+	HaxeClassifierAccess[0..1] role xxx_HaxeClassifierAccess_parameterMapping_src
+	HaxeTypeAccess[*] role parameterMapping
+end
+
+composition xxx_HaxeTypedElement_type between
+	HaxeTypedElement[*] role xxx_HaxeTypedElement_type_src
+	HaxeTypeAccess[0..1] role type
+end
+
+composition xxx_HaxeClass_generalization between
+	HaxeClass[*] role xxx_HaxeClass_generalization_src
+	HaxeClassifierAccess[0..1] role generalization
+end
+
+composition xxx_HaxeClass_implementation between
+	HaxeClass[0..1] role xxx_HaxeClass_implementation_src
+	HaxeClassifierAccess[*] role implementation
+end
+
+composition xxx_HaxeAbstract_underlyingType between
+	HaxeAbstract[*] role xxx_HaxeAbstract_underlyingType_src
+	HaxeTypeAccess[0..1] role underlyingType
+end
+
+composition xxx_HaxeAbstract_directCastingFromType between
+	HaxeAbstract[*] role xxx_HaxeAbstract_directCastingFromType_src
+	HaxeTypeAccess[0..1] role directCastingFromType
+end
+
+composition xxx_HaxeAbstract_directCastingToType between
+	HaxeAbstract[*] role xxx_HaxeAbstract_directCastingToType_src
+	HaxeTypeAccess[0..1] role directCastingToType
+end
+
+association xxx_HaxeEnum_literals between
+	HaxeEnum[0..1] role xxx_HaxeEnum_literals_src
+	HaxeEnumConstructor[*] role literals
+end
+
+composition xxx_HaxeTypedef_refType between
+	HaxeTypedef[*] role xxx_HaxeTypedef_refType_src
+	HaxeTypeAccess[1] role refType
+end
+
+association xxx_HaxeField_fieldContainer between
+	HaxeField[*] role xxx_HaxeField_fieldContainer_src
+	HaxeFieldContainer[1] role fieldContainer
+end
+
+association xxx_HaxeAttribute_getter between
+	HaxeAttribute[*] role xxx_HaxeAttribute_getter_src
+	HaxeOperation[0..1] role getter
+end
+
+association xxx_HaxeAttribute_setter between
+	HaxeAttribute[*] role xxx_HaxeAttribute_setter_src
+	HaxeOperation[0..1] role setter
+end
+
+composition xxx_HaxeAbstractFunction_formalParameters between
+	HaxeAbstractFunction[0..1] role xxx_HaxeAbstractFunction_formalParameters_src
+	HaxeSingleVariableDeclaration[*] role formalParameters
+end
+
+composition xxx_HaxeAbstractFunction_typeParameters between
+	HaxeAbstractFunction[0..1] role xxx_HaxeAbstractFunction_typeParameters_src
+	HaxeTypeParameter[*] role typeParameters
+end
+
+composition xxx_HaxeAbstractFunction_theBody between
+	HaxeAbstractFunction[*] role xxx_HaxeAbstractFunction_theBody_src
+	HaxeExpression[1] role theBody
+end
+
+association xxx_HaxeConstructor_constructedClass between
+	HaxeConstructor[*] role xxx_HaxeConstructor_constructedClass_src
+	HaxeClass[1] role constructedClass
+end
+
+composition xxx_HaxeEnumConstructor_parameters between
+	HaxeEnumConstructor[0..1] role xxx_HaxeEnumConstructor_parameters_src
+	HaxeSingleVariableDeclaration[*] role parameters
+end
+
+association xxx_HaxeImportDeclaration_staticElement between
+	HaxeImportDeclaration[*] role xxx_HaxeImportDeclaration_staticElement_src
+	HaxeField[0..1] role staticElement
+end
+
+association xxx_HaxeUsingDeclaration_staticField between
+	HaxeUsingDeclaration[*] role xxx_HaxeUsingDeclaration_staticField_src
+	HaxeField[1] role staticField
+end
+
+association xxx_HaxeMetadata_usedIn between
+	HaxeMetadata[*] role xxx_HaxeMetadata_usedIn_src
+	HaxeMetadataContainer[1] role usedIn
+end
+
+composition xxx_HaxeMetadata_parameters between
+	HaxeMetadata[0..1] role xxx_HaxeMetadata_parameters_src
+	HaxeExpression[*] role parameters
+end
+
+composition xxx_HaxeMetadataContainer_metadata between
+	HaxeMetadataContainer[0..1] role xxx_HaxeMetadataContainer_metadata_src
+	HaxeMetadata[*] role metadata
+end
+

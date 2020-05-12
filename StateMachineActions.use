@@ -1,0 +1,88 @@
+model stateMachineActions
+class Model
+attributes
+operations
+end
+
+class Action
+attributes
+operations
+end
+
+class Assignment
+attributes
+	leftvar : String
+operations
+end
+
+class EXPRESSION
+attributes
+	operator : String
+operations
+end
+
+class TERM
+attributes
+	variable : String
+	constant : Integer
+operations
+end
+
+class EventAction
+attributes
+	eventName : String
+	eventExtension : String
+operations
+end
+
+class Parameters
+attributes
+	param : String
+operations
+end
+
+composition xxx_Model_action between
+	Model[*] role xxx_Model_action_src
+	Action[0..1] role action
+end
+
+composition xxx_Action_assignment between
+	Action[*] role xxx_Action_assignment_src
+	Assignment[0..1] role assignment
+end
+
+composition xxx_Action_eventAction between
+	Action[*] role xxx_Action_eventAction_src
+	EventAction[0..1] role eventAction
+end
+
+composition xxx_Assignment_expression between
+	Assignment[*] role xxx_Assignment_expression_src
+	EXPRESSION[0..1] role expression
+end
+
+composition xxx_EXPRESSION_firstTerm between
+	EXPRESSION[*] role xxx_EXPRESSION_firstTerm_src
+	TERM[0..1] role firstTerm
+end
+
+composition xxx_EXPRESSION_secondTerm between
+	EXPRESSION[*] role xxx_EXPRESSION_secondTerm_src
+	TERM[0..1] role secondTerm
+end
+
+composition xxx_EXPRESSION_alone between
+	EXPRESSION[*] role xxx_EXPRESSION_alone_src
+	TERM[0..1] role alone
+end
+
+composition xxx_EventAction_parameters between
+	EventAction[*] role xxx_EventAction_parameters_src
+	Parameters[0..1] role parameters
+end
+
+composition xxx_Parameters_parameters between
+	Parameters[*] role xxx_Parameters_parameters_src
+	Parameters[0..1] role parameters
+end
+

@@ -1,0 +1,363 @@
+model timingd
+class DFrameContainer
+attributes
+operations
+end
+
+class DFrame
+attributes
+	displayName : String
+operations
+end
+
+class DBlock
+attributes
+	displayName : String
+operations
+end
+
+class DValueLine
+attributes
+	displayName : String
+operations
+end
+
+class DSegment
+attributes
+operations
+	isClosedSegment():Boolean
+end
+
+class DSegmentElement
+attributes
+	debugId : String
+operations
+end
+
+class DSegmentMiddlePoint<DSegmentElement
+attributes
+operations
+end
+
+class DSegmentStart<DSegmentElement
+attributes
+operations
+end
+
+class DSegmentEnd<DSegmentElement
+attributes
+operations
+end
+
+class DStateSwitch
+attributes
+operations
+end
+
+class DMessage
+attributes
+	displayName : String
+operations
+end
+
+class DInterval
+attributes
+	duration : String
+operations
+end
+
+class DPointConstraint
+attributes
+operations
+end
+
+class DTick
+attributes
+operations
+end
+
+abstract class UMLConstraint
+attributes
+operations
+end
+
+abstract class UMLStateInvariant
+attributes
+operations
+end
+
+abstract class UMLInteraction
+attributes
+operations
+end
+
+abstract class UMLPackage
+attributes
+operations
+end
+
+abstract class UMLLifeline
+attributes
+operations
+end
+
+abstract class UMLOccurrenceSpecification
+attributes
+operations
+end
+
+abstract class UMLMessage
+attributes
+operations
+end
+
+abstract class UMLDurationConstraint
+attributes
+operations
+end
+
+association xxx_DFrameContainer_pakkage between
+	DFrameContainer[*] role xxx_DFrameContainer_pakkage_src
+	UMLPackage[0..1] role pakkage
+end
+
+composition xxx_DFrameContainer_frames between
+	DFrameContainer[0..1] role xxx_DFrameContainer_frames_src
+	DFrame[*] role frames
+end
+
+association xxx_DFrame_container between
+	DFrame[*] role xxx_DFrame_container_src
+	DFrameContainer[0..1] role container
+end
+
+association xxx_DFrame_interaction between
+	DFrame[*] role xxx_DFrame_interaction_src
+	UMLInteraction[1] role interaction
+end
+
+composition xxx_DFrame_blocks between
+	DFrame[0..1] role xxx_DFrame_blocks_src
+	DBlock[1..*] role blocks
+end
+
+composition xxx_DFrame_intervals between
+	DFrame[0..1] role xxx_DFrame_intervals_src
+	DInterval[*] role intervals
+end
+
+composition xxx_DFrame_messages between
+	DFrame[0..1] role xxx_DFrame_messages_src
+	DMessage[*] role messages
+end
+
+association xxx_DBlock_lifeline between
+	DBlock[*] role xxx_DBlock_lifeline_src
+	UMLLifeline[0..1] role lifeline
+end
+
+association xxx_DBlock_frame between
+	DBlock[*] role xxx_DBlock_frame_src
+	DFrame[0..1] role frame
+end
+
+composition xxx_DBlock_states_ between
+	DBlock[0..1] role xxx_DBlock_states__src
+	DValueLine[*] role states_
+end
+
+composition xxx_DBlock_switches between
+	DBlock[0..1] role xxx_DBlock_switches_src
+	DStateSwitch[*] role switches
+end
+
+composition xxx_DBlock_constraint between
+	DBlock[0..1] role xxx_DBlock_constraint_src
+	DPointConstraint[*] role constraint
+end
+
+composition xxx_DBlock_ticks between
+	DBlock[0..1] role xxx_DBlock_ticks_src
+	DTick[*] role ticks
+end
+
+association xxx_DValueLine_block between
+	DValueLine[*] role xxx_DValueLine_block_src
+	DBlock[0..1] role block
+end
+
+composition xxx_DValueLine_invariantTemplate between
+	DValueLine[*] role xxx_DValueLine_invariantTemplate_src
+	UMLConstraint[0..1] role invariantTemplate
+end
+
+composition xxx_DValueLine_segments between
+	DValueLine[0..1] role xxx_DValueLine_segments_src
+	DSegment[*] role segments
+end
+
+association xxx_DSegment_state between
+	DSegment[*] role xxx_DSegment_state_src
+	DValueLine[0..1] role state
+end
+
+composition xxx_DSegment_start between
+	DSegment[*] role xxx_DSegment_start_src
+	DSegmentStart[0..1] role start
+end
+
+composition xxx_DSegment_end_ between
+	DSegment[*] role xxx_DSegment_end__src
+	DSegmentEnd[0..1] role end_
+end
+
+composition xxx_DSegment_middlePoints between
+	DSegment[0..1] role xxx_DSegment_middlePoints_src
+	DSegmentMiddlePoint[*] role middlePoints
+end
+
+association xxx_DSegment_endSwitch between
+	DSegment[*] role xxx_DSegment_endSwitch_src
+	DStateSwitch[0..1] role endSwitch
+end
+
+association xxx_DSegment_startOccurrence between
+	DSegment[*] role xxx_DSegment_startOccurrence_src
+	UMLOccurrenceSpecification[0..1] role startOccurrence
+end
+
+association xxx_DSegmentElement_occurrence between
+	DSegmentElement[*] role xxx_DSegmentElement_occurrence_src
+	UMLOccurrenceSpecification[0..1] role occurrence
+end
+
+association xxx_DSegmentElement_tick between
+	DSegmentElement[*] role xxx_DSegmentElement_tick_src
+	DTick[0..1] role tick
+end
+
+association xxx_DSegmentMiddlePoint_segment between
+	DSegmentMiddlePoint[*] role xxx_DSegmentMiddlePoint_segment_src
+	DSegment[0..1] role segment
+end
+
+association xxx_DSegmentStart_stateInvariant between
+	DSegmentStart[*] role xxx_DSegmentStart_stateInvariant_src
+	UMLStateInvariant[0..1] role stateInvariant
+end
+
+association xxx_DSegmentStart_segment between
+	DSegmentStart[*] role xxx_DSegmentStart_segment_src
+	DSegment[0..1] role segment
+end
+
+association xxx_DSegmentStart_incomingSwitch between
+	DSegmentStart[*] role xxx_DSegmentStart_incomingSwitch_src
+	DStateSwitch[0..1] role incomingSwitch
+end
+
+association xxx_DSegmentEnd_segment between
+	DSegmentEnd[*] role xxx_DSegmentEnd_segment_src
+	DSegment[0..1] role segment
+end
+
+association xxx_DSegmentEnd_switch between
+	DSegmentEnd[*] role xxx_DSegmentEnd_switch_src
+	DStateSwitch[0..1] role switch
+end
+
+association xxx_DStateSwitch_fromSegmentEnd between
+	DStateSwitch[*] role xxx_DStateSwitch_fromSegmentEnd_src
+	DSegmentEnd[0..1] role fromSegmentEnd
+end
+
+association xxx_DStateSwitch_toSegmentStart between
+	DStateSwitch[*] role xxx_DStateSwitch_toSegmentStart_src
+	DSegmentStart[0..1] role toSegmentStart
+end
+
+association xxx_DStateSwitch_fromSegment between
+	DStateSwitch[*] role xxx_DStateSwitch_fromSegment_src
+	DSegment[0..1] role fromSegment
+end
+
+association xxx_DStateSwitch_toSegment between
+	DStateSwitch[*] role xxx_DStateSwitch_toSegment_src
+	DSegment[0..1] role toSegment
+end
+
+association xxx_DStateSwitch_fromValueLine between
+	DStateSwitch[*] role xxx_DStateSwitch_fromValueLine_src
+	DValueLine[0..1] role fromValueLine
+end
+
+association xxx_DStateSwitch_toValueLine between
+	DStateSwitch[*] role xxx_DStateSwitch_toValueLine_src
+	DValueLine[0..1] role toValueLine
+end
+
+association xxx_DMessage_umlMessage between
+	DMessage[*] role xxx_DMessage_umlMessage_src
+	UMLMessage[0..1] role umlMessage
+end
+
+association xxx_DMessage_frame between
+	DMessage[*] role xxx_DMessage_frame_src
+	DFrame[0..1] role frame
+end
+
+association xxx_DMessage_messageSource between
+	DMessage[*] role xxx_DMessage_messageSource_src
+	DSegmentElement[0..1] role messageSource
+end
+
+association xxx_DMessage_messageTarget between
+	DMessage[*] role xxx_DMessage_messageTarget_src
+	DSegmentElement[0..1] role messageTarget
+end
+
+association xxx_DInterval_durationConstraint between
+	DInterval[*] role xxx_DInterval_durationConstraint_src
+	UMLDurationConstraint[0..1] role durationConstraint
+end
+
+association xxx_DInterval_frame between
+	DInterval[*] role xxx_DInterval_frame_src
+	DFrame[0..1] role frame
+end
+
+association xxx_DInterval_fromTick between
+	DInterval[*] role xxx_DInterval_fromTick_src
+	DTick[0..1] role fromTick
+end
+
+association xxx_DInterval_toTick between
+	DInterval[*] role xxx_DInterval_toTick_src
+	DTick[0..1] role toTick
+end
+
+association xxx_DPointConstraint_constraint between
+	DPointConstraint[*] role xxx_DPointConstraint_constraint_src
+	UMLConstraint[0..1] role constraint
+end
+
+association xxx_DPointConstraint_constraintedSegmentElement between
+	DPointConstraint[*] role xxx_DPointConstraint_constraintedSegmentElement_src
+	DSegmentElement[0..1] role constraintedSegmentElement
+end
+
+association xxx_DTick_occurrence between
+	DTick[*] role xxx_DTick_occurrence_src
+	UMLOccurrenceSpecification[0..1] role occurrence
+end
+
+association xxx_DTick_block between
+	DTick[*] role xxx_DTick_block_src
+	DBlock[0..1] role block
+end
+
+association xxx_DTick_subject between
+	DTick[*] role xxx_DTick_subject_src
+	DSegmentElement[0..1] role subject
+end
+

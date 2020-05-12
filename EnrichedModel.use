@@ -1,0 +1,162 @@
+model EnrichedModel
+class EnrichedModel
+attributes
+operations
+end
+
+class Method
+attributes
+	name : String
+	isStatic : Boolean
+	isInterrupted : Boolean
+operations
+end
+
+class InstanceType
+attributes
+	name : String
+operations
+end
+
+abstract class MethodParameter
+attributes
+	name : String
+	isStatic : Boolean
+operations
+end
+
+class SharedResource<MethodParameter
+attributes
+operations
+end
+
+class Thread<MethodParameter
+attributes
+operations
+end
+
+class Instance<MethodParameter
+attributes
+operations
+end
+
+class State
+attributes
+	id : Integer
+operations
+end
+
+class Jump
+attributes
+	condition : String
+operations
+end
+
+class ForkState<State
+attributes
+	threadCount : Integer
+operations
+end
+
+class MethodCallState<State
+attributes
+operations
+end
+
+class InterruptState<State
+attributes
+operations
+end
+
+class ThreadInit
+attributes
+	isDaemon : Boolean
+operations
+end
+
+class SleepState<State
+attributes
+	duration : Integer
+operations
+end
+
+class YieldState<State
+attributes
+operations
+end
+
+composition xxx_EnrichedModel_instanceTypes between
+	EnrichedModel[0..1] role xxx_EnrichedModel_instanceTypes_src
+	InstanceType[*] role instanceTypes
+end
+
+composition xxx_EnrichedModel_methodParameters between
+	EnrichedModel[0..1] role xxx_EnrichedModel_methodParameters_src
+	MethodParameter[*] role methodParameters
+end
+
+association xxx_Method_parameters between
+	Method[0..1] role xxx_Method_parameters_src
+	MethodParameter[*] role parameters
+end
+
+composition xxx_Method_states_ between
+	Method[0..1] role xxx_Method_states__src
+	State[*] role states_
+end
+
+association xxx_Method_lockedResources between
+	Method[0..1] role xxx_Method_lockedResources_src
+	SharedResource[*] role lockedResources
+end
+
+composition xxx_InstanceType_methods between
+	InstanceType[0..1] role xxx_InstanceType_methods_src
+	Method[*] role methods
+end
+
+association xxx_Instance_instanceType between
+	Instance[*] role xxx_Instance_instanceType_src
+	InstanceType[1] role instanceType
+end
+
+composition xxx_State_jumps between
+	State[0..1] role xxx_State_jumps_src
+	Jump[1..*] role jumps
+end
+
+association xxx_Jump_nextState between
+	Jump[*] role xxx_Jump_nextState_src
+	State[1] role nextState
+end
+
+composition xxx_ForkState_threadInits between
+	ForkState[0..1] role xxx_ForkState_threadInits_src
+	ThreadInit[1..*] role threadInits
+end
+
+association xxx_MethodCallState_calledMethod between
+	MethodCallState[*] role xxx_MethodCallState_calledMethod_src
+	Method[1] role calledMethod
+end
+
+association xxx_MethodCallState_targetInstance between
+	MethodCallState[*] role xxx_MethodCallState_targetInstance_src
+	Instance[0..1] role targetInstance
+end
+
+association xxx_InterruptState_interruptedThread between
+	InterruptState[*] role xxx_InterruptState_interruptedThread_src
+	Thread[1] role interruptedThread
+end
+
+association xxx_ThreadInit_calledMethod between
+	ThreadInit[*] role xxx_ThreadInit_calledMethod_src
+	Method[1] role calledMethod
+end
+
+association xxx_ThreadInit_targetInstance between
+	ThreadInit[*] role xxx_ThreadInit_targetInstance_src
+	Instance[0..1] role targetInstance
+end
+

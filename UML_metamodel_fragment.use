@@ -1,0 +1,147 @@
+model UMLMetamodelFragment
+class Class
+attributes
+operations
+end
+
+class Generalization
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+class Stereotype
+attributes
+	baseClass : String
+operations
+end
+
+class StateMachine
+attributes
+operations
+end
+
+class State<StateVertex
+attributes
+operations
+end
+
+class CompositeState<State
+attributes
+operations
+end
+
+class SimpleState<State
+attributes
+operations
+end
+
+class FinalState<State
+attributes
+operations
+end
+
+class StateVertex
+attributes
+operations
+end
+
+class PseudoState<StateVertex
+attributes
+operations
+end
+
+class Transition
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+association xxx_Class_parent between
+	Class[*] role xxx_Class_parent_src
+	Generalization[1] role parent
+end
+
+association xxx_Class_child between
+	Class[*] role xxx_Class_child_src
+	Generalization[1] role child
+end
+
+association xxx_Class_dependency between
+	Class[*] role xxx_Class_dependency_src
+	Dependency[1] role dependency
+end
+
+association xxx_Dependency_supplier between
+	Dependency[*] role xxx_Dependency_supplier_src
+	StateMachine[1] role supplier
+end
+
+association xxx_Dependency_client between
+	Dependency[*] role xxx_Dependency_client_src
+	Class[1] role client
+end
+
+association xxx_Dependency_stereotype between
+	Dependency[*] role xxx_Dependency_stereotype_src
+	Stereotype[1] role stereotype
+end
+
+association xxx_Stereotype_extendedElement between
+	Stereotype[*] role xxx_Stereotype_extendedElement_src
+	Dependency[1] role extendedElement
+end
+
+association xxx_StateMachine_context_ between
+	StateMachine[*] role xxx_StateMachine_context__src
+	Class[1] role context_
+end
+
+composition xxx_StateMachine_top between
+	StateMachine[*] role xxx_StateMachine_top_src
+	State[1] role top
+end
+
+association xxx_State_stateMachine between
+	State[*] role xxx_State_stateMachine_src
+	StateMachine[0..1] role stateMachine
+end
+
+composition xxx_State_internal between
+	State[*] role xxx_State_internal_src
+	Transition[1] role internal
+end
+
+composition xxx_CompositeState_subvertex between
+	CompositeState[*] role xxx_CompositeState_subvertex_src
+	StateVertex[1] role subvertex
+end
+
+association xxx_StateVertex_compositeState between
+	StateVertex[*] role xxx_StateVertex_compositeState_src
+	CompositeState[0..1] role compositeState
+end
+
+association xxx_Transition_trigger between
+	Transition[*] role xxx_Transition_trigger_src
+	Event[0..1] role trigger
+end
+
+association xxx_Transition_source between
+	Transition[*] role xxx_Transition_source_src
+	StateVertex[1] role source
+end
+
+association xxx_Transition_target between
+	Transition[*] role xxx_Transition_target_src
+	StateVertex[1] role target
+end
+

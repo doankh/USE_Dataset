@@ -1,0 +1,810 @@
+model brokermodel
+enum ScenarioStatus{
+default
+}
+
+enum ResourceType{
+default
+}
+
+enum ServiceResourceOperation{
+default
+}
+
+enum costUnit{
+default
+}
+
+enum RepatabilityScheme{
+default
+}
+
+enum RuntimeElementStatus{
+default
+}
+
+class Broker<NamedElement
+attributes
+	resourceURI : String
+	APIGateway : String
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+	id : Integer
+	description : String
+	uniqueID : String
+operations
+end
+
+class Account<NamedElement
+attributes
+	password : String
+	username : String
+operations
+end
+
+class ResourcesProvider<BrokerUser
+attributes
+operations
+end
+
+class TestbedDesigner<BrokerUser
+attributes
+operations
+end
+
+class Admin<BrokerPersonel
+attributes
+operations
+end
+
+class BrokerCustomer<BrokerUser
+attributes
+operations
+end
+
+abstract class BrokerUser<NamedElement
+attributes
+	organization : String
+	address : String
+	telephone : String
+operations
+end
+
+class BrokerPersonel<BrokerUser
+attributes
+operations
+end
+
+class Resource<NamedElement
+attributes
+operations
+	getFullQualifiedName():String
+end
+
+class OfferedResource<Resource
+attributes
+	resourceType : ResourceType
+	multitonMaxOccur : Integer
+	geocoords : String
+operations
+end
+
+class ResourceSetting<AbstractSetting
+attributes
+operations
+end
+
+class ResourceCategory<NamedElement
+attributes
+operations
+end
+
+class Device<NetworkElement
+attributes
+operations
+end
+
+class NetworkElement<NamedElement
+attributes
+operations
+end
+
+class DomainManager<NamedElement
+attributes
+	IP : String
+operations
+end
+
+class Site<NamedElement
+attributes
+operations
+end
+
+class SiteLocation<NamedElement
+attributes
+	address : String
+	geocoords : String
+operations
+end
+
+class SLA<NamedElement
+attributes
+	ValidFrom : String
+	ValidUntil : String
+operations
+end
+
+class ReservedResourceContract<NamedElement
+attributes
+	ValidFrom : String
+	ValidUntil : String
+operations
+end
+
+class RequestedFederationScenario<NamedElement
+attributes
+	isShared : Boolean
+	status : ScenarioStatus
+operations
+end
+
+class ServiceRequest<NamedElement
+attributes
+	numOfServices : Integer
+operations
+end
+
+class ResourceRequest<NamedElement
+attributes
+operations
+end
+
+class SettingInstance<NamedElement
+attributes
+	staticValue : String
+operations
+end
+
+class ServiceSettingInstance<SettingInstance
+attributes
+operations
+end
+
+class ResourceSettingInstance<SettingInstance
+attributes
+operations
+end
+
+class Credentials<NamedElement
+attributes
+	username : String
+	password : String
+operations
+end
+
+class ServicesRequest<NamedElement
+attributes
+operations
+end
+
+class InfrastructureRequest<NamedElement
+attributes
+operations
+end
+
+class ScheduledPlan
+attributes
+	ValidFrom : String
+	ValidUntil : String
+operations
+end
+
+class Import
+attributes
+	importURI : String
+operations
+end
+
+class ResourceGroup<NamedElement
+attributes
+operations
+end
+
+class Service<NamedElement
+attributes
+operations
+end
+
+class ServiceSetting<AbstractSetting
+attributes
+operations
+end
+
+class OfferedService<Service
+attributes
+operations
+end
+
+class ServiceComposition<NamedElement
+attributes
+operations
+end
+
+abstract class SettingType<NamedElement
+attributes
+operations
+end
+
+class brTypeString<SettingType
+attributes
+	defaultValue : String
+operations
+end
+
+class brTypeEnum<SettingType
+attributes
+operations
+end
+
+class brTypeList<SettingType
+attributes
+operations
+end
+
+class brTypeEnumItem
+attributes
+	value : String
+	description : String
+operations
+end
+
+class brTypeTideElement<SettingType
+attributes
+operations
+end
+
+class Taxonomy<NamedElement
+attributes
+operations
+end
+
+class AbstractSetting<NamedElement
+attributes
+	userExposed : Boolean
+	userEditable : Boolean
+	canBePublished : Boolean
+	Readable : Boolean
+	Writable : Boolean
+	Optional : Boolean
+operations
+end
+
+class SettingConstraint<NamedElement
+attributes
+	ForOperation : ServiceResourceOperation
+	AvailableAfterOperation : Boolean
+	RequiredBeforeOperation : Boolean
+operations
+end
+
+class ResourceServiceContract<NamedElement
+attributes
+	StartDate : String
+	EndDate : String
+operations
+end
+
+class Availability
+attributes
+	FromTime : String
+	ToTime : String
+	FromDate : String
+	ToDate : String
+	Repeatability : RepatabilityScheme
+	Repeat : Boolean
+	RepeatUntil : String
+operations
+end
+
+class Cost
+attributes
+	perUnit : costUnit
+	Amount : String
+operations
+end
+
+class ui_TaxonomyTreeItem
+attributes
+	DisplayName : String
+operations
+end
+
+class BrokerManager
+attributes
+operations
+end
+
+class RuntimeElement<NamedElement
+attributes
+	status : RuntimeElementStatus
+	GUID : String
+	context_ : String
+operations
+end
+
+class RunningScenarios
+attributes
+operations
+end
+
+abstract class IBrokerRepository
+attributes
+operations
+	getName():String
+	LoadScenario(fedScenario : RequestedFederationScenario)
+	registerBrokerRepositoryListener(listener : IBrokerRepositoryListener)
+	loadBrokers():Broker
+	getBrokers():Broker
+end
+
+abstract class IBrokerRepositoryListener
+attributes
+operations
+	RepositoryChanged()
+end
+
+abstract class IProvisionResource
+attributes
+operations
+	provisionResource(brokerName : String,scenario : RequestedFederationScenario,resourceReq : ResourceRequest):String
+	supportsBroker(brokerName : String):Boolean
+	getSupportedBrokerName():String
+	deleteResource(brokerName : String,scenario : RequestedFederationScenario,resourceReq : ResourceRequest):String
+	updateResource(brokerName : String,scenario : RequestedFederationScenario,resourceReq : ResourceRequest,assignedSetting : ResourceSettingInstance):String
+	readResource(brokerName : String,scenario : RequestedFederationScenario,resourceReq : ResourceRequest,assignedSetting : ResourceSettingInstance,forceUpdate : Boolean):String
+end
+
+abstract class IWorkflowEngine
+attributes
+operations
+	getEngineName():String
+	getRunningScenarios():RunningScenarios
+	ScheduleScenario(scenario : RequestedFederationScenario)
+	ShutDownScenario(scenario : RequestedFederationScenario)
+	DeletePermanentlyScenario(scenario : RequestedFederationScenario)
+	ShutDownResource(scenario : RequestedFederationScenario,resourceReq : ResourceRequest):String
+	UpdateResource(scenario : RequestedFederationScenario,resourceReq : ResourceRequest,assignedSetting : ResourceSettingInstance):String
+	ReadResource(scenario : RequestedFederationScenario,resourceReq : ResourceRequest,assignedSetting : ResourceSettingInstance,forceUpdate : Boolean):String
+end
+
+abstract class IProvisioningJobListener
+attributes
+operations
+	initialize(source : String)
+	eventOccured(event : IProvisioningJobEvent)
+	terminate()
+end
+
+abstract class IProvisioningJobEvent
+attributes
+operations
+	statusChangedOnScenario():RequestedFederationScenario
+	statusChangedOnResource():ResourceRequest
+end
+
+abstract class IFCIService
+attributes
+operations
+	getBroker(username : String,password : String,forceRefresh : Boolean):Broker
+	CreateResource(scenario : String,providerAlias : String,resourceTypeName : String,resourceReq : ResourceRequest):String
+	UpdateResource(scenario : String,providerAlias : String,resourceTypeName : String,runtimeID : String,resourceReq : ResourceRequest):String
+	DeleteResource(scenario : String,providerAlias : String,resourceTypeName : String,runtimeID : String,resourceReq : ResourceRequest):String
+	getParameterValueOfResource(scenario : String,providerAlias : String,runtimeID : String,paramName : String):String
+	getBroker1(authorizationKey : AuthorizationKey,forceRefresh : Boolean):Broker
+end
+
+class FCICredentials
+attributes
+	username : String
+	password : String
+operations
+end
+
+class AuthorizationKey
+attributes
+	username : String
+	password : String
+operations
+end
+
+class StringToStringMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_Broker_registeredUsers between
+	Broker[0..1] role xxx_Broker_registeredUsers_src
+	BrokerUser[*] role registeredUsers
+end
+
+composition xxx_Broker_contributedTaxonomies between
+	Broker[0..1] role xxx_Broker_contributedTaxonomies_src
+	Taxonomy[*] role contributedTaxonomies
+end
+
+composition xxx_Broker_offeredServices between
+	Broker[0..1] role xxx_Broker_offeredServices_src
+	OfferedService[*] role offeredServices
+end
+
+composition xxx_Broker_availableFederationScenarios between
+	Broker[0..1] role xxx_Broker_availableFederationScenarios_src
+	RequestedFederationScenario[*] role availableFederationScenarios
+end
+
+composition xxx_Broker_offeredServiceCompositions between
+	Broker[0..1] role xxx_Broker_offeredServiceCompositions_src
+	ServiceComposition[*] role offeredServiceCompositions
+end
+
+composition xxx_Broker_ResourceServiceContracts between
+	Broker[0..1] role xxx_Broker_ResourceServiceContracts_src
+	ResourceServiceContract[*] role ResourceServiceContracts
+end
+
+composition xxx_Broker_SLAs between
+	Broker[0..1] role xxx_Broker_SLAs_src
+	SLA[*] role SLAs
+end
+
+composition xxx_Account_authorizationKey between
+	Account[*] role xxx_Account_authorizationKey_src
+	AuthorizationKey[0..1] role authorizationKey
+end
+
+composition xxx_ResourcesProvider_offeredSiteList between
+	ResourcesProvider[0..1] role xxx_ResourcesProvider_offeredSiteList_src
+	Site[*] role offeredSiteList
+end
+
+association xxx_TestbedDesigner_designsVirtualTestbeds between
+	TestbedDesigner[0..1] role xxx_TestbedDesigner_designsVirtualTestbeds_src
+	RequestedFederationScenario[*] role designsVirtualTestbeds
+end
+
+association xxx_BrokerCustomer_utilizesVirtualTestbed between
+	BrokerCustomer[0..1] role xxx_BrokerCustomer_utilizesVirtualTestbed_src
+	RequestedFederationScenario[*] role utilizesVirtualTestbed
+end
+
+association xxx_BrokerCustomer_hasTestbedDesigner between
+	BrokerCustomer[*] role xxx_BrokerCustomer_hasTestbedDesigner_src
+	TestbedDesigner[0..1] role hasTestbedDesigner
+end
+
+composition xxx_BrokerUser_hasAccount between
+	BrokerUser[*] role xxx_BrokerUser_hasAccount_src
+	Account[0..1] role hasAccount
+end
+
+composition xxx_Resource_resourceSettings between
+	Resource[0..1] role xxx_Resource_resourceSettings_src
+	ResourceSetting[*] role resourceSettings
+end
+
+association xxx_Resource_contributesToCategories between
+	Resource[0..1] role xxx_Resource_contributesToCategories_src
+	ResourceCategory[*] role contributesToCategories
+end
+
+association xxx_Resource_requiresResources between
+	Resource[0..1] role xxx_Resource_requiresResources_src
+	Resource[*] role requiresResources
+end
+
+association xxx_OfferedResource_belongsToSite between
+	OfferedResource[*] role xxx_OfferedResource_belongsToSite_src
+	Site[0..1] role belongsToSite
+end
+
+association xxx_OfferedResource_implOfferedService between
+	OfferedResource[*] role xxx_OfferedResource_implOfferedService_src
+	Service[0..1] role implOfferedService
+end
+
+association xxx_ResourceSetting_OnlyConfiguredByResources between
+	ResourceSetting[0..1] role xxx_ResourceSetting_OnlyConfiguredByResources_src
+	Resource[*] role OnlyConfiguredByResources
+end
+
+association xxx_ResourceSetting_implServiceSetting between
+	ResourceSetting[*] role xxx_ResourceSetting_implServiceSetting_src
+	ServiceSetting[0..1] role implServiceSetting
+end
+
+association xxx_ResourceCategory_resourcelist between
+	ResourceCategory[0..1] role xxx_ResourceCategory_resourcelist_src
+	Resource[*] role resourcelist
+end
+
+association xxx_DomainManager_belongsToSite between
+	DomainManager[*] role xxx_DomainManager_belongsToSite_src
+	Site[0..1] role belongsToSite
+end
+
+composition xxx_Site_domainManager between
+	Site[*] role xxx_Site_domainManager_src
+	DomainManager[1] role domainManager
+end
+
+composition xxx_Site_locatedAt between
+	Site[*] role xxx_Site_locatedAt_src
+	SiteLocation[1] role locatedAt
+end
+
+composition xxx_Site_offeredResourcesList between
+	Site[0..1] role xxx_Site_offeredResourcesList_src
+	OfferedResource[*] role offeredResourcesList
+end
+
+association xxx_Site_belongsToProvider between
+	Site[*] role xxx_Site_belongsToProvider_src
+	ResourcesProvider[0..1] role belongsToProvider
+end
+
+composition xxx_SLA_ReservedRsources between
+	SLA[0..1] role xxx_SLA_ReservedRsources_src
+	ReservedResourceContract[*] role ReservedRsources
+end
+
+association xxx_SLA_forVT between
+	SLA[*] role xxx_SLA_forVT_src
+	RequestedFederationScenario[0..1] role forVT
+end
+
+association xxx_ReservedResourceContract_forResource between
+	ReservedResourceContract[*] role xxx_ReservedResourceContract_forResource_src
+	OfferedResource[0..1] role forResource
+end
+
+composition xxx_RequestedFederationScenario_VTCredentials between
+	RequestedFederationScenario[*] role xxx_RequestedFederationScenario_VTCredentials_src
+	Credentials[0..1] role VTCredentials
+end
+
+composition xxx_RequestedFederationScenario_servicesRequest between
+	RequestedFederationScenario[*] role xxx_RequestedFederationScenario_servicesRequest_src
+	ServicesRequest[0..1] role servicesRequest
+end
+
+composition xxx_RequestedFederationScenario_infrastructureRequest between
+	RequestedFederationScenario[*] role xxx_RequestedFederationScenario_infrastructureRequest_src
+	InfrastructureRequest[0..1] role infrastructureRequest
+end
+
+composition xxx_RequestedFederationScenario_scheduledPlan between
+	RequestedFederationScenario[*] role xxx_RequestedFederationScenario_scheduledPlan_src
+	ScheduledPlan[0..1] role scheduledPlan
+end
+
+composition xxx_RequestedFederationScenario_imports between
+	RequestedFederationScenario[0..1] role xxx_RequestedFederationScenario_imports_src
+	Import[*] role imports
+end
+
+composition xxx_RequestedFederationScenario_runtimeInfo between
+	RequestedFederationScenario[*] role xxx_RequestedFederationScenario_runtimeInfo_src
+	RuntimeElement[0..1] role runtimeInfo
+end
+
+association xxx_ServiceRequest_refService between
+	ServiceRequest[*] role xxx_ServiceRequest_refService_src
+	Service[1] role refService
+end
+
+association xxx_ServiceRequest_OfferedByProviders between
+	ServiceRequest[*] role xxx_ServiceRequest_OfferedByProviders_src
+	ResourcesProvider[0..1] role OfferedByProviders
+end
+
+composition xxx_ServiceRequest_reqServiceSettings between
+	ServiceRequest[0..1] role xxx_ServiceRequest_reqServiceSettings_src
+	ServiceSettingInstance[*] role reqServiceSettings
+end
+
+association xxx_ResourceRequest_refOfferedResource between
+	ResourceRequest[*] role xxx_ResourceRequest_refOfferedResource_src
+	OfferedResource[1] role refOfferedResource
+end
+
+composition xxx_ResourceRequest_reqResourceSettings between
+	ResourceRequest[0..1] role xxx_ResourceRequest_reqResourceSettings_src
+	ResourceSettingInstance[*] role reqResourceSettings
+end
+
+composition xxx_ResourceRequest_runtimeInfo between
+	ResourceRequest[*] role xxx_ResourceRequest_runtimeInfo_src
+	RuntimeElement[0..1] role runtimeInfo
+end
+
+association xxx_SettingInstance_assignSetting between
+	SettingInstance[0..1] role xxx_SettingInstance_assignSetting_src
+	SettingInstance[*] role assignSetting
+end
+
+association xxx_ServiceSettingInstance_refServiceSetting between
+	ServiceSettingInstance[*] role xxx_ServiceSettingInstance_refServiceSetting_src
+	ServiceSetting[1] role refServiceSetting
+end
+
+association xxx_ResourceSettingInstance_refResourceSetting between
+	ResourceSettingInstance[*] role xxx_ResourceSettingInstance_refResourceSetting_src
+	ResourceSetting[1] role refResourceSetting
+end
+
+composition xxx_ServicesRequest_serviceRequestList between
+	ServicesRequest[0..1] role xxx_ServicesRequest_serviceRequestList_src
+	ServiceRequest[*] role serviceRequestList
+end
+
+composition xxx_InfrastructureRequest_reqOfferedResources between
+	InfrastructureRequest[0..1] role xxx_InfrastructureRequest_reqOfferedResources_src
+	ResourceRequest[*] role reqOfferedResources
+end
+
+composition xxx_InfrastructureRequest_resourceGroups between
+	InfrastructureRequest[0..1] role xxx_InfrastructureRequest_resourceGroups_src
+	ResourceGroup[*] role resourceGroups
+end
+
+association xxx_ResourceGroup_groupedResources between
+	ResourceGroup[0..1] role xxx_ResourceGroup_groupedResources_src
+	ResourceRequest[*] role groupedResources
+end
+
+composition xxx_Service_serviceSettings between
+	Service[0..1] role xxx_Service_serviceSettings_src
+	ServiceSetting[*] role serviceSettings
+end
+
+association xxx_Service_requiresServices between
+	Service[0..1] role xxx_Service_requiresServices_src
+	Service[*] role requiresServices
+end
+
+association xxx_ServiceSetting_mappedToResourceSettings between
+	ServiceSetting[0..1] role xxx_ServiceSetting_mappedToResourceSettings_src
+	ResourceSetting[*] role mappedToResourceSettings
+end
+
+association xxx_ServiceSetting_providedByResources between
+	ServiceSetting[0..1] role xxx_ServiceSetting_providedByResources_src
+	Resource[*] role providedByResources
+end
+
+association xxx_ServiceComposition_hasServices between
+	ServiceComposition[0..1] role xxx_ServiceComposition_hasServices_src
+	Service[*] role hasServices
+end
+
+composition xxx_brTypeEnum_tideEnumlist between
+	brTypeEnum[0..1] role xxx_brTypeEnum_tideEnumlist_src
+	brTypeEnumItem[*] role tideEnumlist
+end
+
+association xxx_brTypeEnum_defaultValue between
+	brTypeEnum[*] role xxx_brTypeEnum_defaultValue_src
+	brTypeEnumItem[0..1] role defaultValue
+end
+
+association xxx_brTypeList_ContainsElementsOf between
+	brTypeList[*] role xxx_brTypeList_ContainsElementsOf_src
+	NamedElement[0..1] role ContainsElementsOf
+end
+
+association xxx_brTypeTideElement_ofTideElement between
+	brTypeTideElement[*] role xxx_brTypeTideElement_ofTideElement_src
+	NamedElement[0..1] role ofTideElement
+end
+
+composition xxx_Taxonomy_taxonomies between
+	Taxonomy[0..1] role xxx_Taxonomy_taxonomies_src
+	Taxonomy[*] role taxonomies
+end
+
+composition xxx_Taxonomy_categories between
+	Taxonomy[0..1] role xxx_Taxonomy_categories_src
+	ResourceCategory[*] role categories
+end
+
+association xxx_Taxonomy_hasScenarios between
+	Taxonomy[0..1] role xxx_Taxonomy_hasScenarios_src
+	RequestedFederationScenario[*] role hasScenarios
+end
+
+association xxx_Taxonomy_hasServices between
+	Taxonomy[0..1] role xxx_Taxonomy_hasServices_src
+	Service[*] role hasServices
+end
+
+composition xxx_AbstractSetting_settingType between
+	AbstractSetting[*] role xxx_AbstractSetting_settingType_src
+	SettingType[0..1] role settingType
+end
+
+composition xxx_AbstractSetting_settingConstraints between
+	AbstractSetting[0..1] role xxx_AbstractSetting_settingConstraints_src
+	SettingConstraint[*] role settingConstraints
+end
+
+association xxx_AbstractSetting_requiresParams between
+	AbstractSetting[0..1] role xxx_AbstractSetting_requiresParams_src
+	AbstractSetting[*] role requiresParams
+end
+
+association xxx_ResourceServiceContract_forOfferedService between
+	ResourceServiceContract[*] role xxx_ResourceServiceContract_forOfferedService_src
+	Service[1] role forOfferedService
+end
+
+association xxx_ResourceServiceContract_forOfferedResource between
+	ResourceServiceContract[*] role xxx_ResourceServiceContract_forOfferedResource_src
+	OfferedResource[1] role forOfferedResource
+end
+
+composition xxx_ResourceServiceContract_availability between
+	ResourceServiceContract[*] role xxx_ResourceServiceContract_availability_src
+	Availability[0..1] role availability
+end
+
+composition xxx_Availability_cost between
+	Availability[*] role xxx_Availability_cost_src
+	Cost[0..1] role cost
+end
+
+association xxx_ui_TaxonomyTreeItem_parentNode between
+	ui_TaxonomyTreeItem[*] role xxx_ui_TaxonomyTreeItem_parentNode_src
+	ui_TaxonomyTreeItem[0..1] role parentNode
+end
+
+composition xxx_ui_TaxonomyTreeItem_childNodes between
+	ui_TaxonomyTreeItem[0..1] role xxx_ui_TaxonomyTreeItem_childNodes_src
+	ui_TaxonomyTreeItem[*] role childNodes
+end
+
+association xxx_ui_TaxonomyTreeItem_brokerElement between
+	ui_TaxonomyTreeItem[*] role xxx_ui_TaxonomyTreeItem_brokerElement_src
+	NamedElement[0..1] role brokerElement
+end
+
+association xxx_BrokerManager_brokersRef between
+	BrokerManager[0..1] role xxx_BrokerManager_brokersRef_src
+	Broker[*] role brokersRef
+end
+
+association xxx_RunningScenarios_requestedScenarios between
+	RunningScenarios[0..1] role xxx_RunningScenarios_requestedScenarios_src
+	RequestedFederationScenario[*] role requestedScenarios
+end
+
+association xxx_IFCIService_broker between
+	IFCIService[*] role xxx_IFCIService_broker_src
+	Broker[0..1] role broker
+end
+
+composition xxx_FCICredentials_credoptions between
+	FCICredentials[0..1] role xxx_FCICredentials_credoptions_src
+	StringToStringMap[*] role credoptions
+end
+
+composition xxx_AuthorizationKey_credentials between
+	AuthorizationKey[*] role xxx_AuthorizationKey_credentials_src
+	FCICredentials[0..1] role credentials
+end
+

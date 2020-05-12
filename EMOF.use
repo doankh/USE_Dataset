@@ -1,0 +1,205 @@
+model emof
+class Class<Type
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class DataType<Type
+attributes
+operations
+end
+
+abstract class Element<Object
+attributes
+operations
+end
+
+class Tag<Element
+attributes
+	value : String
+	name : String
+operations
+end
+
+class Enumeration<DataType
+attributes
+operations
+end
+
+abstract class NamedElement<Element
+attributes
+	name : String
+operations
+end
+
+class Extent<Object
+attributes
+operations
+end
+
+class Object
+attributes
+operations
+end
+
+class Operation<MultiplicityElement,TypedElement
+attributes
+operations
+end
+
+abstract class MultiplicityElement
+attributes
+	isOrdered : Boolean
+	isUnique : Boolean
+	lower : Integer
+	upper : String
+operations
+end
+
+class Package<NamedElement
+attributes
+	uri : String
+operations
+end
+
+abstract class Type<NamedElement
+attributes
+operations
+end
+
+class Parameter<MultiplicityElement,TypedElement
+attributes
+operations
+end
+
+class EnumerationLiteral<NamedElement
+attributes
+operations
+end
+
+class Property<MultiplicityElement,TypedElement
+attributes
+	isReadOnly : Boolean
+	isDerived : Boolean
+	isComposite : Boolean
+	isId : Boolean
+	default : String
+operations
+end
+
+abstract class TypedElement<NamedElement
+attributes
+operations
+end
+
+class PrimitiveType<DataType
+attributes
+operations
+end
+
+class URIExtent<Extent
+attributes
+operations
+end
+
+class Comment<Element
+attributes
+operations
+end
+
+composition xxx_Class_ownedAttribute between
+	Class[0..1] role xxx_Class_ownedAttribute_src
+	Property[*] role ownedAttribute
+end
+
+composition xxx_Class_ownedOperation between
+	Class[0..1] role xxx_Class_ownedOperation_src
+	Operation[*] role ownedOperation
+end
+
+association xxx_Class_superClass between
+	Class[0..1] role xxx_Class_superClass_src
+	Class[*] role superClass
+end
+
+association xxx_Element_tag between
+	Element[0..1] role xxx_Element_tag_src
+	Tag[*] role tag
+end
+
+composition xxx_Element_ownedComment between
+	Element[0..1] role xxx_Element_ownedComment_src
+	Comment[*] role ownedComment
+end
+
+association xxx_Tag_element between
+	Tag[0..1] role xxx_Tag_element_src
+	Element[*] role element
+end
+
+composition xxx_Enumeration_ownedLiteral between
+	Enumeration[0..1] role xxx_Enumeration_ownedLiteral_src
+	EnumerationLiteral[*] role ownedLiteral
+end
+
+association xxx_Operation_class_ between
+	Operation[*] role xxx_Operation_class__src
+	Class[1] role class_
+end
+
+composition xxx_Operation_ownedParameter between
+	Operation[0..1] role xxx_Operation_ownedParameter_src
+	Parameter[*] role ownedParameter
+end
+
+association xxx_Operation_raisedException between
+	Operation[0..1] role xxx_Operation_raisedException_src
+	Type[*] role raisedException
+end
+
+composition xxx_Package_ownedType between
+	Package[0..1] role xxx_Package_ownedType_src
+	Type[*] role ownedType
+end
+
+composition xxx_Package_nestedPackage between
+	Package[0..1] role xxx_Package_nestedPackage_src
+	Package[*] role nestedPackage
+end
+
+association xxx_Type_package between
+	Type[*] role xxx_Type_package_src
+	Package[1] role package
+end
+
+association xxx_Parameter_operation between
+	Parameter[*] role xxx_Parameter_operation_src
+	Operation[0..1] role operation
+end
+
+association xxx_EnumerationLiteral_enumeration between
+	EnumerationLiteral[*] role xxx_EnumerationLiteral_enumeration_src
+	Enumeration[0..1] role enumeration
+end
+
+association xxx_Property_class_ between
+	Property[*] role xxx_Property_class__src
+	Class[1] role class_
+end
+
+association xxx_Property_opposite between
+	Property[*] role xxx_Property_opposite_src
+	Property[0..1] role opposite
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	Type[0..1] role type
+end
+
+association xxx_Comment_annotatedElement between
+	Comment[0..1] role xxx_Comment_annotatedElement_src
+	NamedElement[*] role annotatedElement
+end
+

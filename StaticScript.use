@@ -1,0 +1,811 @@
+model staticScript
+class Model
+attributes
+operations
+end
+
+class Statements
+attributes
+operations
+end
+
+class Statement
+attributes
+operations
+end
+
+class VariableDecl<Statement
+attributes
+operations
+end
+
+class FuncDecl<Statement
+attributes
+operations
+end
+
+class TypeDecl<Statement
+attributes
+operations
+end
+
+class InterfaceDecl<Statement
+attributes
+operations
+end
+
+class FunctionCallList
+attributes
+operations
+end
+
+class SSExpression<LowestValue
+attributes
+operations
+end
+
+class CrementOp
+attributes
+operations
+end
+
+class FactorOp
+attributes
+operations
+end
+
+class SumOp
+attributes
+operations
+end
+
+class BitshiftOp
+attributes
+operations
+end
+
+class RelationalOp
+attributes
+operations
+end
+
+class EqualityOp
+attributes
+operations
+end
+
+class AssignmentOp
+attributes
+operations
+end
+
+class LowestValue<Statement
+attributes
+operations
+end
+
+class TerminalValue<SSExpression
+attributes
+operations
+end
+
+class IfExpression<TerminalValue
+attributes
+operations
+end
+
+class ArgList
+attributes
+operations
+end
+
+class DefinedName
+attributes
+	name : String
+operations
+end
+
+class DefinedVariable<DefinedName
+attributes
+operations
+end
+
+class DefinedFunction<DefinedName
+attributes
+operations
+end
+
+class DefinedType<DefinedName
+attributes
+	paramPack : Boolean
+operations
+end
+
+class DefinedInterface<DefinedName
+attributes
+operations
+end
+
+class Type
+attributes
+operations
+end
+
+class TypeParams
+attributes
+operations
+end
+
+class Arg
+attributes
+operations
+end
+
+class SSPrimitive
+attributes
+operations
+end
+
+class FuncDeclRequirement<FuncDecl
+attributes
+operations
+end
+
+class FuncDeclDef<FuncDecl
+attributes
+operations
+end
+
+class FuncDeclOverride<FuncDecl
+attributes
+operations
+end
+
+class Parenthesized<SSExpression
+attributes
+operations
+end
+
+class Member<SSExpression
+attributes
+operations
+end
+
+class FuncCall<SSExpression
+attributes
+operations
+end
+
+class CrementInc<CrementOp
+attributes
+operations
+end
+
+class CrementDec<CrementOp
+attributes
+operations
+end
+
+class Precrement<SSExpression
+attributes
+operations
+end
+
+class Increment<SSExpression
+attributes
+operations
+end
+
+class FactorMult<FactorOp
+attributes
+operations
+end
+
+class FactorDiv<FactorOp
+attributes
+operations
+end
+
+class FactorMod<FactorOp
+attributes
+operations
+end
+
+class Factor<SSExpression
+attributes
+operations
+end
+
+class SumAdd<SumOp
+attributes
+operations
+end
+
+class SumSub<SumOp
+attributes
+operations
+end
+
+class Sum<SSExpression
+attributes
+operations
+end
+
+class BitshiftLeft<BitshiftOp
+attributes
+operations
+end
+
+class BitshiftRight<BitshiftOp
+attributes
+operations
+end
+
+class BitshiftZero<BitshiftOp
+attributes
+operations
+end
+
+class Bitshift<SSExpression
+attributes
+operations
+end
+
+class RelationalLT<RelationalOp
+attributes
+operations
+end
+
+class RelationalLTE<RelationalOp
+attributes
+operations
+end
+
+class RelationalGT<RelationalOp
+attributes
+operations
+end
+
+class RelationalGTE<RelationalOp
+attributes
+operations
+end
+
+class Relational<SSExpression
+attributes
+operations
+end
+
+class InOperator<SSExpression
+attributes
+operations
+end
+
+class InstanceOfOperator<SSExpression
+attributes
+operations
+end
+
+class EqualityEq<EqualityOp
+attributes
+operations
+end
+
+class EqualityNeq<EqualityOp
+attributes
+operations
+end
+
+class EqualityStrictEq<EqualityOp
+attributes
+operations
+end
+
+class EqualityStrictNeq<EqualityOp
+attributes
+operations
+end
+
+class Equality<SSExpression
+attributes
+operations
+end
+
+class BitwiseAnd<SSExpression
+attributes
+operations
+end
+
+class BitwiseXor<SSExpression
+attributes
+operations
+end
+
+class BitwiseOr<SSExpression
+attributes
+operations
+end
+
+class LogicalAnd<SSExpression
+attributes
+operations
+end
+
+class LogicalOr<SSExpression
+attributes
+operations
+end
+
+class Assignment<SSExpression
+attributes
+operations
+end
+
+class AssignmentTo<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentPlus<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentSub<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentMult<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentDiv<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentMod<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentLShift<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentRShift<AssignmentOp
+attributes
+operations
+end
+
+class AssignmentZShift<AssignmentOp
+attributes
+operations
+end
+
+class SSNumberValue<TerminalValue
+attributes
+	whole : Integer
+	part : Integer
+operations
+end
+
+class SSStringValue<TerminalValue
+attributes
+	string : String
+operations
+end
+
+class SSTrueValue<TerminalValue
+attributes
+operations
+end
+
+class SSFalseValue<TerminalValue
+attributes
+operations
+end
+
+class SSNamedValue<TerminalValue
+attributes
+operations
+end
+
+class SSVar<SSPrimitive
+attributes
+operations
+end
+
+class SSNumber<SSPrimitive
+attributes
+operations
+end
+
+class SSString<SSPrimitive
+attributes
+operations
+end
+
+class SSBoolean<SSPrimitive
+attributes
+operations
+end
+
+class SSNone<SSPrimitive
+attributes
+operations
+end
+
+class SSMaybe<SSPrimitive
+attributes
+operations
+end
+
+class SSArray<SSPrimitive
+attributes
+operations
+end
+
+class SSFunc<SSPrimitive
+attributes
+operations
+end
+
+composition xxx_Model_t between
+	Model[*] role xxx_Model_t_src
+	Statements[0..1] role t
+end
+
+composition xxx_Statements_stmts between
+	Statements[0..1] role xxx_Statements_stmts_src
+	Statement[*] role stmts
+end
+
+composition xxx_VariableDecl_t between
+	VariableDecl[*] role xxx_VariableDecl_t_src
+	Type[0..1] role t
+end
+
+composition xxx_VariableDecl_varname between
+	VariableDecl[*] role xxx_VariableDecl_varname_src
+	DefinedVariable[0..1] role varname
+end
+
+composition xxx_VariableDecl_v between
+	VariableDecl[*] role xxx_VariableDecl_v_src
+	LowestValue[0..1] role v
+end
+
+composition xxx_VariableDecl_fcl between
+	VariableDecl[*] role xxx_VariableDecl_fcl_src
+	FunctionCallList[0..1] role fcl
+end
+
+composition xxx_FuncDecl_name between
+	FuncDecl[*] role xxx_FuncDecl_name_src
+	DefinedFunction[0..1] role name
+end
+
+composition xxx_FuncDecl_typeParams between
+	FuncDecl[0..1] role xxx_FuncDecl_typeParams_src
+	DefinedType[*] role typeParams
+end
+
+composition xxx_FuncDecl_al between
+	FuncDecl[*] role xxx_FuncDecl_al_src
+	ArgList[0..1] role al
+end
+
+composition xxx_FuncDecl_ret between
+	FuncDecl[*] role xxx_FuncDecl_ret_src
+	Type[0..1] role ret
+end
+
+composition xxx_FuncDecl_stmts between
+	FuncDecl[*] role xxx_FuncDecl_stmts_src
+	Statements[0..1] role stmts
+end
+
+composition xxx_TypeDecl_name between
+	TypeDecl[*] role xxx_TypeDecl_name_src
+	DefinedType[0..1] role name
+end
+
+composition xxx_TypeDecl_typeParams between
+	TypeDecl[0..1] role xxx_TypeDecl_typeParams_src
+	DefinedType[*] role typeParams
+end
+
+composition xxx_TypeDecl_al between
+	TypeDecl[*] role xxx_TypeDecl_al_src
+	ArgList[0..1] role al
+end
+
+composition xxx_InterfaceDecl_name between
+	InterfaceDecl[*] role xxx_InterfaceDecl_name_src
+	DefinedInterface[0..1] role name
+end
+
+composition xxx_InterfaceDecl_typeParams between
+	InterfaceDecl[0..1] role xxx_InterfaceDecl_typeParams_src
+	DefinedType[*] role typeParams
+end
+
+composition xxx_InterfaceDecl_ret between
+	InterfaceDecl[*] role xxx_InterfaceDecl_ret_src
+	Type[0..1] role ret
+end
+
+composition xxx_FunctionCallList_vals between
+	FunctionCallList[0..1] role xxx_FunctionCallList_vals_src
+	LowestValue[*] role vals
+end
+
+composition xxx_IfExpression_cond between
+	IfExpression[*] role xxx_IfExpression_cond_src
+	LowestValue[0..1] role cond
+end
+
+composition xxx_IfExpression_posCase between
+	IfExpression[*] role xxx_IfExpression_posCase_src
+	Statements[0..1] role posCase
+end
+
+composition xxx_IfExpression_elif between
+	IfExpression[*] role xxx_IfExpression_elif_src
+	IfExpression[0..1] role elif
+end
+
+composition xxx_IfExpression_negCase between
+	IfExpression[*] role xxx_IfExpression_negCase_src
+	Statements[0..1] role negCase
+end
+
+composition xxx_ArgList_args between
+	ArgList[0..1] role xxx_ArgList_args_src
+	Arg[*] role args
+end
+
+composition xxx_Type_bit between
+	Type[*] role xxx_Type_bit_src
+	SSPrimitive[0..1] role bit
+end
+
+association xxx_Type_dt between
+	Type[*] role xxx_Type_dt_src
+	DefinedType[0..1] role dt
+end
+
+composition xxx_Type_tp between
+	Type[*] role xxx_Type_tp_src
+	TypeParams[0..1] role tp
+end
+
+composition xxx_TypeParams_typeParams between
+	TypeParams[0..1] role xxx_TypeParams_typeParams_src
+	Type[*] role typeParams
+end
+
+composition xxx_Arg_type between
+	Arg[*] role xxx_Arg_type_src
+	Type[0..1] role type
+end
+
+composition xxx_Arg_argName between
+	Arg[*] role xxx_Arg_argName_src
+	DefinedVariable[0..1] role argName
+end
+
+composition xxx_Parenthesized_a between
+	Parenthesized[*] role xxx_Parenthesized_a_src
+	LowestValue[0..1] role a
+end
+
+composition xxx_Member_mem between
+	Member[*] role xxx_Member_mem_src
+	SSExpression[0..1] role mem
+end
+
+association xxx_Member_prop between
+	Member[*] role xxx_Member_prop_src
+	DefinedName[0..1] role prop
+end
+
+composition xxx_FuncCall_mem between
+	FuncCall[*] role xxx_FuncCall_mem_src
+	SSExpression[0..1] role mem
+end
+
+composition xxx_FuncCall_fcl between
+	FuncCall[*] role xxx_FuncCall_fcl_src
+	FunctionCallList[0..1] role fcl
+end
+
+composition xxx_Precrement_op between
+	Precrement[*] role xxx_Precrement_op_src
+	CrementOp[0..1] role op
+end
+
+composition xxx_Precrement_term between
+	Precrement[*] role xxx_Precrement_term_src
+	SSExpression[0..1] role term
+end
+
+composition xxx_Increment_post_ between
+	Increment[*] role xxx_Increment_post__src
+	SSExpression[0..1] role post_
+end
+
+composition xxx_Increment_op between
+	Increment[*] role xxx_Increment_op_src
+	CrementOp[0..1] role op
+end
+
+composition xxx_Factor_left between
+	Factor[*] role xxx_Factor_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_Factor_op between
+	Factor[*] role xxx_Factor_op_src
+	FactorOp[0..1] role op
+end
+
+composition xxx_Factor_right between
+	Factor[*] role xxx_Factor_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_Sum_left between
+	Sum[*] role xxx_Sum_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_Sum_op between
+	Sum[*] role xxx_Sum_op_src
+	SumOp[0..1] role op
+end
+
+composition xxx_Sum_right between
+	Sum[*] role xxx_Sum_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_Bitshift_left between
+	Bitshift[*] role xxx_Bitshift_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_Bitshift_op between
+	Bitshift[*] role xxx_Bitshift_op_src
+	BitshiftOp[0..1] role op
+end
+
+composition xxx_Bitshift_right between
+	Bitshift[*] role xxx_Bitshift_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_Relational_left between
+	Relational[*] role xxx_Relational_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_Relational_op between
+	Relational[*] role xxx_Relational_op_src
+	RelationalOp[0..1] role op
+end
+
+composition xxx_Relational_right between
+	Relational[*] role xxx_Relational_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_InOperator_left between
+	InOperator[*] role xxx_InOperator_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_InOperator_right between
+	InOperator[*] role xxx_InOperator_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_InstanceOfOperator_left between
+	InstanceOfOperator[*] role xxx_InstanceOfOperator_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_InstanceOfOperator_right between
+	InstanceOfOperator[*] role xxx_InstanceOfOperator_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_Equality_left between
+	Equality[*] role xxx_Equality_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_Equality_op between
+	Equality[*] role xxx_Equality_op_src
+	EqualityOp[0..1] role op
+end
+
+composition xxx_Equality_right between
+	Equality[*] role xxx_Equality_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_BitwiseAnd_left between
+	BitwiseAnd[*] role xxx_BitwiseAnd_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_BitwiseAnd_right between
+	BitwiseAnd[*] role xxx_BitwiseAnd_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_BitwiseXor_left between
+	BitwiseXor[*] role xxx_BitwiseXor_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_BitwiseXor_right between
+	BitwiseXor[*] role xxx_BitwiseXor_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_BitwiseOr_left between
+	BitwiseOr[*] role xxx_BitwiseOr_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_BitwiseOr_right between
+	BitwiseOr[*] role xxx_BitwiseOr_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_LogicalAnd_left between
+	LogicalAnd[*] role xxx_LogicalAnd_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_LogicalAnd_right between
+	LogicalAnd[*] role xxx_LogicalAnd_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_LogicalOr_left between
+	LogicalOr[*] role xxx_LogicalOr_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_LogicalOr_right between
+	LogicalOr[*] role xxx_LogicalOr_right_src
+	SSExpression[0..1] role right
+end
+
+composition xxx_Assignment_left between
+	Assignment[*] role xxx_Assignment_left_src
+	SSExpression[0..1] role left
+end
+
+composition xxx_Assignment_op between
+	Assignment[*] role xxx_Assignment_op_src
+	AssignmentOp[0..1] role op
+end
+
+composition xxx_Assignment_right between
+	Assignment[*] role xxx_Assignment_right_src
+	SSExpression[0..1] role right
+end
+
+association xxx_SSNamedValue_nv between
+	SSNamedValue[*] role xxx_SSNamedValue_nv_src
+	DefinedName[0..1] role nv
+end
+

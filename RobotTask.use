@@ -1,0 +1,169 @@
+model task
+enum Type{
+default
+}
+
+class RobotTask
+attributes
+operations
+end
+
+class Project
+attributes
+	name : String
+operations
+end
+
+abstract class Resource<ExcludeableElementMixin
+attributes
+	name : String
+operations
+end
+
+class Folder<Resource
+attributes
+operations
+end
+
+abstract class File<Resource
+attributes
+operations
+	getContent(progressMonitor : String,data : String):String
+end
+
+class TemplatedFile<File
+attributes
+	generatorType : String
+operations
+end
+
+class DataFile<File
+attributes
+	content : String
+operations
+end
+
+class URLFile<File
+attributes
+	uri : String
+operations
+end
+
+class DynamicFile<File
+attributes
+	executionURI : String
+	type : String
+operations
+end
+
+class Variable
+attributes
+	key : String
+	defaultValue : String
+	description : String
+	type : Type
+operations
+end
+
+abstract class BooleanExpression
+attributes
+operations
+	execute(data : String):Boolean
+end
+
+class ReferencingBooleanExpression<BooleanExpression
+attributes
+	executionURI : String
+	type : String
+operations
+end
+
+class InlineBooleanExpression<BooleanExpression
+attributes
+	type : String
+	expression : String
+operations
+end
+
+class JDTProject<Project
+attributes
+operations
+end
+
+class SourceFragment<ExcludeableElementMixin
+attributes
+	name : String
+operations
+end
+
+class CompilationUnit<ExcludeableElementMixin
+attributes
+	packagename : String
+operations
+end
+
+abstract class ExcludeableElementMixin
+attributes
+operations
+end
+
+composition xxx_RobotTask_projects between
+	RobotTask[0..1] role xxx_RobotTask_projects_src
+	Project[*] role projects
+end
+
+composition xxx_RobotTask_variables between
+	RobotTask[0..1] role xxx_RobotTask_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_Project_resources between
+	Project[0..1] role xxx_Project_resources_src
+	Resource[*] role resources
+end
+
+composition xxx_Project_excludeExpression between
+	Project[*] role xxx_Project_excludeExpression_src
+	BooleanExpression[0..1] role excludeExpression
+end
+
+composition xxx_Folder_children between
+	Folder[0..1] role xxx_Folder_children_src
+	Resource[*] role children
+end
+
+composition xxx_DynamicFile_variables between
+	DynamicFile[0..1] role xxx_DynamicFile_variables_src
+	Variable[*] role variables
+end
+
+composition xxx_JDTProject_sourceFragments between
+	JDTProject[0..1] role xxx_JDTProject_sourceFragments_src
+	SourceFragment[*] role sourceFragments
+end
+
+composition xxx_JDTProject_compilationUnits between
+	JDTProject[0..1] role xxx_JDTProject_compilationUnits_src
+	CompilationUnit[*] role compilationUnits
+end
+
+association xxx_SourceFragment_folder between
+	SourceFragment[*] role xxx_SourceFragment_folder_src
+	Folder[0..1] role folder
+end
+
+composition xxx_CompilationUnit_file between
+	CompilationUnit[*] role xxx_CompilationUnit_file_src
+	File[0..1] role file
+end
+
+association xxx_CompilationUnit_sourcefragment between
+	CompilationUnit[*] role xxx_CompilationUnit_sourcefragment_src
+	SourceFragment[0..1] role sourcefragment
+end
+
+composition xxx_ExcludeableElementMixin_excludeExpression between
+	ExcludeableElementMixin[*] role xxx_ExcludeableElementMixin_excludeExpression_src
+	BooleanExpression[0..1] role excludeExpression
+end
+

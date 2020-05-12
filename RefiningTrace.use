@@ -1,0 +1,95 @@
+model RefiningTrace
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+class Element
+attributes
+	type : String
+	metamodel : String
+	toDelete : Boolean
+	persistedSourceElement : String
+operations
+end
+
+class Slot
+attributes
+	name : String
+	isAssignment : Boolean
+operations
+end
+
+abstract class Value
+attributes
+operations
+end
+
+class BooleanVal<Value
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerVal<Value
+attributes
+	value : Integer
+operations
+end
+
+class RealVal<Value
+attributes
+	value : Real
+operations
+end
+
+class StringVal<Value
+attributes
+	value : String
+operations
+end
+
+class NullVal<Value
+attributes
+operations
+end
+
+class EnumLiteralVal<Value
+attributes
+	value : String
+operations
+end
+
+class ElementVal<Value
+attributes
+operations
+end
+
+class CollectionVal<Value
+attributes
+operations
+end
+
+composition xxx_Element_slots between
+	Element[0..1] role xxx_Element_slots_src
+	Slot[*] role slots
+end
+
+composition xxx_Slot_value between
+	Slot[*] role xxx_Slot_value_src
+	Value[1] role value
+end
+
+association xxx_ElementVal_value between
+	ElementVal[*] role xxx_ElementVal_value_src
+	Element[1] role value
+end
+
+composition xxx_CollectionVal_elements between
+	CollectionVal[0..1] role xxx_CollectionVal_elements_src
+	Value[*] role elements
+end
+

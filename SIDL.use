@@ -1,0 +1,132 @@
+model sidl
+enum SimpleTypeEnum{
+default
+}
+
+enum ModeEnum{
+default
+}
+
+class Class
+attributes
+	name : String
+operations
+end
+
+class Specification
+attributes
+operations
+end
+
+class Interface
+attributes
+	name : String
+operations
+end
+
+class Package
+attributes
+	name : String
+operations
+end
+
+class Method
+attributes
+	shortname : String
+operations
+end
+
+class Argument
+attributes
+	name : String
+	mode : ModeEnum
+operations
+end
+
+abstract class SIDLType
+attributes
+operations
+end
+
+class ArrayType<SIDLType
+attributes
+	dim : Integer
+operations
+end
+
+class SimpleType<SIDLType
+attributes
+	simpleType : SimpleTypeEnum
+operations
+end
+
+composition xxx_Class_method between
+	Class[0..1] role xxx_Class_method_src
+	Method[*] role method
+end
+
+association xxx_Class_parentInterface between
+	Class[0..1] role xxx_Class_parentInterface_src
+	Interface[*] role parentInterface
+end
+
+association xxx_Class_package between
+	Class[*] role xxx_Class_package_src
+	Package[1] role package
+end
+
+composition xxx_Specification_package between
+	Specification[0..1] role xxx_Specification_package_src
+	Package[*] role package
+end
+
+composition xxx_Interface_method between
+	Interface[0..1] role xxx_Interface_method_src
+	Method[*] role method
+end
+
+association xxx_Interface_parentInterface between
+	Interface[0..1] role xxx_Interface_parentInterface_src
+	Interface[*] role parentInterface
+end
+
+composition xxx_Package_class_ between
+	Package[0..1] role xxx_Package_class__src
+	Class[*] role class_
+end
+
+composition xxx_Package_interface between
+	Package[0..1] role xxx_Package_interface_src
+	Interface[*] role interface
+end
+
+composition xxx_Method_type between
+	Method[*] role xxx_Method_type_src
+	SIDLType[1] role type
+end
+
+composition xxx_Method_argument between
+	Method[0..1] role xxx_Method_argument_src
+	Argument[*] role argument
+end
+
+association xxx_Method_class_ between
+	Method[*] role xxx_Method_class__src
+	Class[0..1] role class_
+end
+
+composition xxx_Argument_type between
+	Argument[*] role xxx_Argument_type_src
+	SIDLType[1] role type
+end
+
+association xxx_Argument_method between
+	Argument[*] role xxx_Argument_method_src
+	Method[1] role method
+end
+
+composition xxx_ArrayType_type between
+	ArrayType[*] role xxx_ArrayType_type_src
+	SIDLType[1] role type
+end
+

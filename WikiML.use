@@ -1,0 +1,274 @@
+model wikiML
+enum ViewType{
+default
+}
+
+enum HorizontalAlign{
+default
+}
+
+class WikiPage
+attributes
+	name : String
+operations
+end
+
+class ParagraphTypes
+attributes
+operations
+end
+
+class BlockQuote<ParagraphTypes
+attributes
+operations
+end
+
+class Template<ParagraphTypes
+attributes
+	type : String
+operations
+end
+
+class AboutTemplate<Template
+attributes
+operations
+end
+
+class MainTemplate<Template
+attributes
+operations
+end
+
+class QuoteTemplate<Template
+attributes
+operations
+end
+
+class OrderedList<ParagraphTypes
+attributes
+operations
+end
+
+class UnorderedList<ParagraphTypes
+attributes
+operations
+end
+
+class UnorderListItem
+attributes
+	level : String
+operations
+end
+
+class OrderListItem
+attributes
+operations
+end
+
+class Image<ParagraphTypes
+attributes
+	name : String
+	type : ViewType
+	hAlign : HorizontalAlign
+operations
+end
+
+class Category<ParagraphTypes
+attributes
+	value : String
+operations
+end
+
+class Heading2<ParagraphTypes
+attributes
+operations
+end
+
+class Heading3<ParagraphTypes
+attributes
+operations
+end
+
+class Heading4<ParagraphTypes
+attributes
+operations
+end
+
+class Heading5<ParagraphTypes
+attributes
+operations
+end
+
+class AbstractFormattedInlineContent<AnyText
+attributes
+operations
+end
+
+class Bold<AbstractFormattedInlineContent
+attributes
+operations
+end
+
+class Italic<AbstractFormattedInlineContent
+attributes
+operations
+end
+
+class ItalicBold<AbstractFormattedInlineContent
+attributes
+operations
+end
+
+class AbstractUnformattedInlineContent<AnyText
+attributes
+operations
+end
+
+class Text<AbstractUnformattedInlineContent
+attributes
+	name : String
+operations
+end
+
+class HyperLink<AbstractUnformattedInlineContent
+attributes
+operations
+end
+
+class Internal<HyperLink
+attributes
+operations
+end
+
+class External<HyperLink
+attributes
+	name : String
+operations
+end
+
+class AnyTextSequence
+attributes
+operations
+end
+
+class AnyText<ParagraphTypes
+attributes
+operations
+end
+
+class Paragraph<ParagraphTypes
+attributes
+	paragraph : String
+operations
+end
+
+composition xxx_WikiPage_elements between
+	WikiPage[0..1] role xxx_WikiPage_elements_src
+	ParagraphTypes[*] role elements
+end
+
+composition xxx_BlockQuote_content between
+	BlockQuote[*] role xxx_BlockQuote_content_src
+	AnyTextSequence[0..1] role content
+end
+
+composition xxx_AboutTemplate_content between
+	AboutTemplate[0..1] role xxx_AboutTemplate_content_src
+	AnyTextSequence[*] role content
+end
+
+composition xxx_MainTemplate_content between
+	MainTemplate[0..1] role xxx_MainTemplate_content_src
+	AnyTextSequence[*] role content
+end
+
+composition xxx_OrderedList_items between
+	OrderedList[0..1] role xxx_OrderedList_items_src
+	OrderListItem[*] role items
+end
+
+composition xxx_OrderedList_end_ between
+	OrderedList[*] role xxx_OrderedList_end__src
+	Paragraph[0..1] role end_
+end
+
+composition xxx_UnorderedList_items between
+	UnorderedList[0..1] role xxx_UnorderedList_items_src
+	UnorderListItem[*] role items
+end
+
+composition xxx_UnorderedList_end_ between
+	UnorderedList[*] role xxx_UnorderedList_end__src
+	Paragraph[0..1] role end_
+end
+
+composition xxx_UnorderListItem_itemtext between
+	UnorderListItem[*] role xxx_UnorderListItem_itemtext_src
+	AnyTextSequence[0..1] role itemtext
+end
+
+composition xxx_OrderListItem_itemtext between
+	OrderListItem[*] role xxx_OrderListItem_itemtext_src
+	AnyTextSequence[0..1] role itemtext
+end
+
+composition xxx_Image_altText between
+	Image[*] role xxx_Image_altText_src
+	AbstractUnformattedInlineContent[0..1] role altText
+end
+
+composition xxx_Image_caption between
+	Image[*] role xxx_Image_caption_src
+	AnyTextSequence[0..1] role caption
+end
+
+composition xxx_Category_name between
+	Category[*] role xxx_Category_name_src
+	Text[0..1] role name
+end
+
+composition xxx_Heading2_headingValue2 between
+	Heading2[*] role xxx_Heading2_headingValue2_src
+	AbstractUnformattedInlineContent[0..1] role headingValue2
+end
+
+composition xxx_Heading3_headingValue3 between
+	Heading3[*] role xxx_Heading3_headingValue3_src
+	AbstractUnformattedInlineContent[0..1] role headingValue3
+end
+
+composition xxx_Heading4_headingValue4 between
+	Heading4[*] role xxx_Heading4_headingValue4_src
+	AbstractUnformattedInlineContent[0..1] role headingValue4
+end
+
+composition xxx_Heading5_headingValue5 between
+	Heading5[*] role xxx_Heading5_headingValue5_src
+	AbstractUnformattedInlineContent[0..1] role headingValue5
+end
+
+composition xxx_AbstractFormattedInlineContent_name between
+	AbstractFormattedInlineContent[*] role xxx_AbstractFormattedInlineContent_name_src
+	AbstractUnformattedInlineContent[0..1] role name
+end
+
+composition xxx_HyperLink_altText between
+	HyperLink[*] role xxx_HyperLink_altText_src
+	AnyText[0..1] role altText
+end
+
+association xxx_Internal_link between
+	Internal[*] role xxx_Internal_link_src
+	WikiPage[0..1] role link
+end
+
+composition xxx_Internal_anchor between
+	Internal[*] role xxx_Internal_anchor_src
+	Text[0..1] role anchor
+end
+
+composition xxx_AnyTextSequence_content between
+	AnyTextSequence[0..1] role xxx_AnyTextSequence_content_src
+	AnyText[*] role content
+end
+

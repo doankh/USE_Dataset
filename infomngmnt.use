@@ -1,0 +1,444 @@
+model remus
+enum Rating{
+default
+}
+
+enum CalendarEntryType{
+default
+}
+
+enum SynchronizationState{
+default
+}
+
+enum SynchronizationAction{
+default
+}
+
+enum InformationStructureType{
+default
+}
+
+enum NotificationImportance{
+default
+}
+
+enum Severity{
+default
+}
+
+abstract class V__________InformationUnit__________V
+attributes
+operations
+end
+
+abstract class Adapter
+attributes
+operations
+end
+
+abstract class AbstractInformationUnit<Adapter
+attributes
+	id : String
+	label : String
+	type : String
+operations
+end
+
+class InformationUnit<AbstractInformationUnit
+attributes
+	stringValue : String
+	longValue : Integer
+	boolValue : Boolean
+	binaryValue : String
+	dateValue : String
+	doubleValue : Real
+	creationDate : String
+	description : String
+	keywords : String
+operations
+end
+
+class BinaryReference
+attributes
+	id : String
+	projectRelativePath : String
+	dirty : Boolean
+operations
+end
+
+class Link
+attributes
+	localInformationUnit : String
+	remoteUrl : String
+	type : String
+operations
+end
+
+class Comment
+attributes
+	author : String
+	comment : String
+	rating : Rating
+operations
+end
+
+class CalendarEntry
+attributes
+	id : String
+	start : String
+	end_ : String
+	entryType : CalendarEntryType
+	reminder : Integer
+	title : String
+operations
+end
+
+abstract class V__________NavigationObjects__________V
+attributes
+operations
+end
+
+class ApplicationRoot
+attributes
+operations
+end
+
+class Category<SynchronizableObject
+attributes
+	id : String
+	label : String
+	description : String
+operations
+end
+
+class InformationUnitListItem<AbstractInformationUnit,SynchronizableObject
+attributes
+	workspacePath : String
+	unread : Boolean
+	excerpt : String
+	imageUrl : String
+operations
+end
+
+abstract class V__________Semantics__________V
+attributes
+operations
+end
+
+class RecentlyUsedKeywords
+attributes
+	maxlength : Integer
+	keywords : String
+operations
+end
+
+class AvailableTags
+attributes
+operations
+end
+
+class Tag<Adapter
+attributes
+	name : String
+	infoUnits : String
+operations
+end
+
+abstract class V__________Synchronization__________V
+attributes
+operations
+end
+
+class RepositoryCollection
+attributes
+operations
+end
+
+class RemoteRepository<RemoteContainer
+attributes
+operations
+end
+
+class RemoteObject<Adapter
+attributes
+	possibleInfoTypeId : String
+	id : String
+	url : String
+	name : String
+	repositoryTypeId : String
+	repositoryTypeObjectId : String
+	wrappedObject : String
+	hash : String
+operations
+end
+
+class RemoteContainer<RemoteObject
+attributes
+operations
+end
+
+class SynchronizationMetadata<Adapter
+attributes
+	repositoryId : String
+	url : String
+	readonly : Boolean
+	lastSynchronisation : String
+	hash : String
+	syncState : SynchronizationState
+	currentlySyncing : Boolean
+	syncHash : String
+operations
+end
+
+class ChangeSet<Adapter
+attributes
+operations
+end
+
+class ChangeSetItem<Adapter
+attributes
+operations
+end
+
+class CategoryToSynchronizationActionMap
+attributes
+	value : SynchronizationAction
+operations
+end
+
+class InformationUnitListItemToInformationUnitMap
+attributes
+operations
+end
+
+class SynchronizableObjectToSynchronizationActionMap
+attributes
+	value : SynchronizationAction
+operations
+end
+
+abstract class SynchronizableObject<Adapter
+attributes
+operations
+end
+
+abstract class V__________InformationStructureDefinition__________V
+attributes
+operations
+end
+
+class InformationStructureDefinition<InformationStructure
+attributes
+operations
+end
+
+class InformationStructureItem<InformationStructure
+attributes
+	id : String
+	createAlways : Boolean
+operations
+end
+
+abstract class InformationStructure
+attributes
+	type : InformationStructureType
+	canHaveBinaryReferences : Boolean
+	label : String
+	description : String
+operations
+end
+
+class DynamicStructure<InformationStructureItem
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+abstract class V__________DesktopNotifications_________V
+attributes
+operations
+end
+
+class Notification
+attributes
+	timeStamp : String
+	importance : NotificationImportance
+	severity : Severity
+	noticed : Boolean
+	message : String
+	details : String
+	affectedInfoUnitIds : String
+	source : String
+	image : String
+operations
+end
+
+class NotificationCollection
+attributes
+operations
+end
+
+abstract class V__________Other__________V
+attributes
+operations
+end
+
+class StringToStringMap
+attributes
+	key : String
+	value : String
+operations
+end
+
+composition xxx_InformationUnit_childValues between
+	InformationUnit[0..1] role xxx_InformationUnit_childValues_src
+	InformationUnit[*] role childValues
+end
+
+composition xxx_InformationUnit_links between
+	InformationUnit[0..1] role xxx_InformationUnit_links_src
+	Link[*] role links
+end
+
+composition xxx_InformationUnit_calendarEntry between
+	InformationUnit[0..1] role xxx_InformationUnit_calendarEntry_src
+	CalendarEntry[*] role calendarEntry
+end
+
+composition xxx_InformationUnit_binaryReferences between
+	InformationUnit[*] role xxx_InformationUnit_binaryReferences_src
+	BinaryReference[0..1] role binaryReferences
+end
+
+composition xxx_InformationUnit_comments between
+	InformationUnit[0..1] role xxx_InformationUnit_comments_src
+	Comment[*] role comments
+end
+
+association xxx_ApplicationRoot_rootCategories between
+	ApplicationRoot[0..1] role xxx_ApplicationRoot_rootCategories_src
+	Category[*] role rootCategories
+end
+
+association xxx_ApplicationRoot_availableTags between
+	ApplicationRoot[*] role xxx_ApplicationRoot_availableTags_src
+	AvailableTags[1] role availableTags
+end
+
+composition xxx_Category_informationUnit between
+	Category[0..1] role xxx_Category_informationUnit_src
+	InformationUnitListItem[*] role informationUnit
+end
+
+composition xxx_AvailableTags_tags between
+	AvailableTags[0..1] role xxx_AvailableTags_tags_src
+	Tag[*] role tags
+end
+
+composition xxx_RepositoryCollection_repositories between
+	RepositoryCollection[0..1] role xxx_RepositoryCollection_repositories_src
+	RemoteRepository[*] role repositories
+end
+
+composition xxx_RemoteRepository_options between
+	RemoteRepository[0..1] role xxx_RemoteRepository_options_src
+	StringToStringMap[*] role options
+end
+
+composition xxx_RemoteContainer_children between
+	RemoteContainer[0..1] role xxx_RemoteContainer_children_src
+	RemoteObject[*] role children
+end
+
+association xxx_RemoteContainer_exclusionChildren between
+	RemoteContainer[0..1] role xxx_RemoteContainer_exclusionChildren_src
+	RemoteObject[*] role exclusionChildren
+end
+
+association xxx_ChangeSet_targetCategory between
+	ChangeSet[*] role xxx_ChangeSet_targetCategory_src
+	Category[1] role targetCategory
+end
+
+composition xxx_ChangeSet_changeSetItems between
+	ChangeSet[0..1] role xxx_ChangeSet_changeSetItems_src
+	ChangeSetItem[*] role changeSetItems
+end
+
+association xxx_ChangeSet_repository between
+	ChangeSet[*] role xxx_ChangeSet_repository_src
+	RemoteRepository[1] role repository
+end
+
+composition xxx_ChangeSetItem_remoteConvertedContainer between
+	ChangeSetItem[*] role xxx_ChangeSetItem_remoteConvertedContainer_src
+	Category[0..1] role remoteConvertedContainer
+end
+
+composition xxx_ChangeSetItem_remoteOriginalObject between
+	ChangeSetItem[*] role xxx_ChangeSetItem_remoteOriginalObject_src
+	RemoteContainer[0..1] role remoteOriginalObject
+end
+
+association xxx_ChangeSetItem_localContainer between
+	ChangeSetItem[*] role xxx_ChangeSetItem_localContainer_src
+	Category[0..1] role localContainer
+end
+
+composition xxx_ChangeSetItem_syncCategoryActionMap between
+	ChangeSetItem[0..1] role xxx_ChangeSetItem_syncCategoryActionMap_src
+	CategoryToSynchronizationActionMap[*] role syncCategoryActionMap
+end
+
+composition xxx_ChangeSetItem_syncObjectActionMap between
+	ChangeSetItem[0..1] role xxx_ChangeSetItem_syncObjectActionMap_src
+	SynchronizableObjectToSynchronizationActionMap[*] role syncObjectActionMap
+end
+
+composition xxx_ChangeSetItem_remoteFullObjectMap between
+	ChangeSetItem[0..1] role xxx_ChangeSetItem_remoteFullObjectMap_src
+	InformationUnitListItemToInformationUnitMap[*] role remoteFullObjectMap
+end
+
+association xxx_CategoryToSynchronizationActionMap_key between
+	CategoryToSynchronizationActionMap[*] role xxx_CategoryToSynchronizationActionMap_key_src
+	Category[0..1] role key
+end
+
+association xxx_InformationUnitListItemToInformationUnitMap_key between
+	InformationUnitListItemToInformationUnitMap[*] role xxx_InformationUnitListItemToInformationUnitMap_key_src
+	InformationUnitListItem[0..1] role key
+end
+
+composition xxx_InformationUnitListItemToInformationUnitMap_value between
+	InformationUnitListItemToInformationUnitMap[*] role xxx_InformationUnitListItemToInformationUnitMap_value_src
+	InformationUnit[0..1] role value
+end
+
+association xxx_SynchronizableObjectToSynchronizationActionMap_key between
+	SynchronizableObjectToSynchronizationActionMap[*] role xxx_SynchronizableObjectToSynchronizationActionMap_key_src
+	SynchronizableObject[0..1] role key
+end
+
+composition xxx_SynchronizableObject_synchronizationMetaData between
+	SynchronizableObject[*] role xxx_SynchronizableObject_synchronizationMetaData_src
+	SynchronizationMetadata[0..1] role synchronizationMetaData
+end
+
+composition xxx_InformationStructure_structureItems between
+	InformationStructure[0..1] role xxx_InformationStructure_structureItems_src
+	InformationStructureItem[*] role structureItems
+end
+
+composition xxx_Notification_children between
+	Notification[0..1] role xxx_Notification_children_src
+	Notification[*] role children
+end
+
+composition xxx_NotificationCollection_notifcations between
+	NotificationCollection[0..1] role xxx_NotificationCollection_notifcations_src
+	Notification[*] role notifcations
+end
+

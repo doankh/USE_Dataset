@@ -1,0 +1,95 @@
+model propertieseditor
+class Properties
+attributes
+	name : String
+	file : String
+	language : String
+operations
+end
+
+class Property
+attributes
+	key : String
+	value : String
+	oldKey : String
+	oldValue : String
+operations
+end
+
+class Annotation
+attributes
+	content : String
+operations
+end
+
+class PropertiesEditor
+attributes
+	modified : Boolean
+operations
+end
+
+class DefaultProperty<Property
+attributes
+operations
+end
+
+class DefaultProperties<Properties
+attributes
+operations
+end
+
+class SubProperties<Properties
+attributes
+operations
+end
+
+class Merge
+attributes
+operations
+end
+
+composition xxx_Properties_annotation between
+	Properties[0..1] role xxx_Properties_annotation_src
+	Annotation[*] role annotation
+end
+
+composition xxx_PropertiesEditor_subProperties between
+	PropertiesEditor[0..1] role xxx_PropertiesEditor_subProperties_src
+	SubProperties[*] role subProperties
+end
+
+composition xxx_PropertiesEditor_defaultProperties between
+	PropertiesEditor[*] role xxx_PropertiesEditor_defaultProperties_src
+	DefaultProperties[0..1] role defaultProperties
+end
+
+composition xxx_DefaultProperty_subProperty between
+	DefaultProperty[0..1] role xxx_DefaultProperty_subProperty_src
+	Property[*] role subProperty
+end
+
+composition xxx_DefaultProperties_property between
+	DefaultProperties[0..1] role xxx_DefaultProperties_property_src
+	DefaultProperty[*] role property
+end
+
+composition xxx_DefaultProperties_merges between
+	DefaultProperties[0..1] role xxx_DefaultProperties_merges_src
+	Merge[*] role merges
+end
+
+composition xxx_SubProperties_property between
+	SubProperties[0..1] role xxx_SubProperties_property_src
+	Property[*] role property
+end
+
+association xxx_Merge_property between
+	Merge[*] role xxx_Merge_property_src
+	DefaultProperty[0..1] role property
+end
+
+association xxx_Merge_mergedProperty between
+	Merge[0..1] role xxx_Merge_mergedProperty_src
+	DefaultProperty[*] role mergedProperty
+end
+

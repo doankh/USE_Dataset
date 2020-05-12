@@ -1,0 +1,58 @@
+model editor
+enum Status{
+default
+}
+
+enum Color{
+default
+}
+
+class InformationSystem
+attributes
+	name : String
+operations
+end
+
+abstract class Domain
+attributes
+	name : String
+	creationDate : String
+	description : String
+	color : Color
+operations
+end
+
+class SubDomain<Domain
+attributes
+operations
+end
+
+class Area<Domain
+attributes
+	purpose : String
+operations
+end
+
+class BusinessInformation
+attributes
+	name : String
+	description : String
+	tags : String
+operations
+end
+
+composition xxx_InformationSystem_businessDomains between
+	InformationSystem[0..1] role xxx_InformationSystem_businessDomains_src
+	Domain[*] role businessDomains
+end
+
+composition xxx_SubDomain_subDomains between
+	SubDomain[0..1] role xxx_SubDomain_subDomains_src
+	Domain[*] role subDomains
+end
+
+composition xxx_Area_businessInformationsNotUsed between
+	Area[0..1] role xxx_Area_businessInformationsNotUsed_src
+	BusinessInformation[*] role businessInformationsNotUsed
+end
+

@@ -1,0 +1,266 @@
+model mulemodel
+class InboundRouter<Router
+attributes
+operations
+end
+
+abstract class AbstractComponent
+attributes
+	name : String
+	comment : String
+operations
+end
+
+class MuleConfig
+attributes
+	version : String
+	description : String
+operations
+	addComponent()
+end
+
+abstract class Endpoint
+attributes
+	address : String
+operations
+end
+
+class OutboundRouter<Router
+attributes
+operations
+end
+
+class Interceptor
+attributes
+	name : String
+	className : String
+operations
+end
+
+class Connector
+attributes
+	comment : String
+	name : String
+	className : String
+operations
+end
+
+class Properties
+attributes
+operations
+end
+
+abstract class Property
+attributes
+	name : String
+operations
+end
+
+class TextProperty<Property
+attributes
+	value : String
+operations
+end
+
+class ListProperty<Property
+attributes
+operations
+end
+
+class MapProperty<Property
+attributes
+operations
+end
+
+class InterceptorStack
+attributes
+operations
+end
+
+class GenericComponent<AbstractComponent
+attributes
+	implementation : String
+operations
+end
+
+class BridgeComponent<AbstractComponent
+attributes
+operations
+end
+
+class LocalEndpoint<Endpoint
+attributes
+operations
+end
+
+class GlobalEndpoint<Endpoint
+attributes
+	name : String
+	comment : String
+operations
+end
+
+class Router
+attributes
+operations
+end
+
+class Transformer
+attributes
+	className : String
+	comment : String
+	returnClass : String
+	name : String
+operations
+end
+
+abstract class AbstractFilter
+attributes
+operations
+end
+
+class GenericFilter<AbstractFilter
+attributes
+operations
+end
+
+class BinaryFilter<AbstractFilter
+attributes
+operations
+end
+
+class XsltFilter<AbstractFilter
+attributes
+operations
+end
+
+class NotFilter<AbstractFilter
+attributes
+operations
+end
+
+association xxx_InboundRouter_inboundEndpoint between
+	InboundRouter[*] role xxx_InboundRouter_inboundEndpoint_src
+	Endpoint[0..1] role inboundEndpoint
+end
+
+composition xxx_AbstractComponent_outboundRouter between
+	AbstractComponent[0..1] role xxx_AbstractComponent_outboundRouter_src
+	OutboundRouter[*] role outboundRouter
+end
+
+composition xxx_AbstractComponent_inboundRouter between
+	AbstractComponent[0..1] role xxx_AbstractComponent_inboundRouter_src
+	InboundRouter[*] role inboundRouter
+end
+
+composition xxx_AbstractComponent_componentProperties between
+	AbstractComponent[*] role xxx_AbstractComponent_componentProperties_src
+	Property[0..1] role componentProperties
+end
+
+composition xxx_AbstractComponent_interceptors between
+	AbstractComponent[0..1] role xxx_AbstractComponent_interceptors_src
+	Interceptor[*] role interceptors
+end
+
+composition xxx_MuleConfig_properties between
+	MuleConfig[*] role xxx_MuleConfig_properties_src
+	Properties[0..1] role properties
+end
+
+composition xxx_MuleConfig_interceptors between
+	MuleConfig[0..1] role xxx_MuleConfig_interceptors_src
+	InterceptorStack[*] role interceptors
+end
+
+composition xxx_MuleConfig_connectors between
+	MuleConfig[0..1] role xxx_MuleConfig_connectors_src
+	Connector[*] role connectors
+end
+
+composition xxx_MuleConfig_transformers between
+	MuleConfig[0..1] role xxx_MuleConfig_transformers_src
+	Transformer[*] role transformers
+end
+
+composition xxx_MuleConfig_globalEndpoints between
+	MuleConfig[0..1] role xxx_MuleConfig_globalEndpoints_src
+	GlobalEndpoint[*] role globalEndpoints
+end
+
+composition xxx_MuleConfig_components between
+	MuleConfig[0..1] role xxx_MuleConfig_components_src
+	AbstractComponent[*] role components
+end
+
+association xxx_Endpoint_connector between
+	Endpoint[*] role xxx_Endpoint_connector_src
+	Connector[0..1] role connector
+end
+
+association xxx_Endpoint_filter between
+	Endpoint[*] role xxx_Endpoint_filter_src
+	AbstractFilter[0..1] role filter
+end
+
+association xxx_Endpoint_transformers between
+	Endpoint[0..1] role xxx_Endpoint_transformers_src
+	Transformer[*] role transformers
+end
+
+association xxx_Endpoint_responseTransformers between
+	Endpoint[0..1] role xxx_Endpoint_responseTransformers_src
+	Transformer[*] role responseTransformers
+end
+
+association xxx_OutboundRouter_outboundEndpoint between
+	OutboundRouter[*] role xxx_OutboundRouter_outboundEndpoint_src
+	Endpoint[0..1] role outboundEndpoint
+end
+
+association xxx_OutboundRouter_outboundTransformer between
+	OutboundRouter[*] role xxx_OutboundRouter_outboundTransformer_src
+	Transformer[0..1] role outboundTransformer
+end
+
+association xxx_Interceptor_groupDefinition between
+	Interceptor[*] role xxx_Interceptor_groupDefinition_src
+	InterceptorStack[0..1] role groupDefinition
+end
+
+composition xxx_Properties_properties between
+	Properties[0..1] role xxx_Properties_properties_src
+	Property[*] role properties
+end
+
+composition xxx_MapProperty_properties between
+	MapProperty[*] role xxx_MapProperty_properties_src
+	Properties[0..1] role properties
+end
+
+composition xxx_InterceptorStack_interceptors between
+	InterceptorStack[0..1] role xxx_InterceptorStack_interceptors_src
+	Interceptor[*] role interceptors
+end
+
+composition xxx_Router_localEndpoints between
+	Router[0..1] role xxx_Router_localEndpoints_src
+	LocalEndpoint[*] role localEndpoints
+end
+
+composition xxx_AbstractFilter_nestedFilter between
+	AbstractFilter[*] role xxx_AbstractFilter_nestedFilter_src
+	AbstractFilter[0..1] role nestedFilter
+end
+
+composition xxx_BinaryFilter_leftFilter between
+	BinaryFilter[*] role xxx_BinaryFilter_leftFilter_src
+	AbstractFilter[0..1] role leftFilter
+end
+
+composition xxx_BinaryFilter_rightFilter between
+	BinaryFilter[*] role xxx_BinaryFilter_rightFilter_src
+	AbstractFilter[0..1] role rightFilter
+end
+

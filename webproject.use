@@ -1,0 +1,75 @@
+model webproject
+class ERSystem
+attributes
+	name : String
+operations
+end
+
+class Declaration
+attributes
+operations
+end
+
+class Page<Declaration
+attributes
+	name : String
+operations
+end
+
+class Widget
+attributes
+operations
+end
+
+class Header
+attributes
+	title : String
+	headerTitle : String
+operations
+end
+
+class ListView
+attributes
+operations
+end
+
+class SimpleNavbar
+attributes
+	name : String
+operations
+end
+
+class BasicLinkedList<ListView
+attributes
+	name : String
+	dbName : String
+	db : String
+	tableName : String
+	table : String
+	rowId : String
+	row : String
+	rowValue : String
+	value : String
+operations
+end
+
+composition xxx_ERSystem_declarations between
+	ERSystem[0..1] role xxx_ERSystem_declarations_src
+	Declaration[*] role declarations
+end
+
+composition xxx_Page_widgets between
+	Page[0..1] role xxx_Page_widgets_src
+	Widget[*] role widgets
+end
+
+composition xxx_Widget_header between
+	Widget[*] role xxx_Widget_header_src
+	Header[0..1] role header
+end
+
+composition xxx_Widget_listview between
+	Widget[0..1] role xxx_Widget_listview_src
+	ListView[*] role listview
+end
+

@@ -1,0 +1,15 @@
+model PrimitiveTypes
+enum Severity{
+	error,
+	warning,
+	critic
+}
+
+class Problem
+attributes
+	severity : Severity
+	location : String
+	description : String
+operations
+end
+

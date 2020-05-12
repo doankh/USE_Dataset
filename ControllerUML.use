@@ -1,0 +1,111 @@
+model PrimitiveTypes
+class ControllerAttribute
+attributes
+operations
+end
+
+class Controller
+attributes
+operations
+end
+
+class StateMachine
+attributes
+operations
+end
+
+class State
+attributes
+operations
+end
+
+class SubControllerState<State
+attributes
+operations
+end
+
+class ViewState<State
+attributes
+operations
+end
+
+class StateTransition
+attributes
+operations
+end
+
+class StateMachineAction
+attributes
+operations
+end
+
+class Event
+attributes
+operations
+end
+
+association xxx_ControllerAttribute_controller between
+	ControllerAttribute[*] role xxx_ControllerAttribute_controller_src
+	Controller[1] role controller
+end
+
+association xxx_Controller_controllerAttribute between
+	Controller[0..1] role xxx_Controller_controllerAttribute_src
+	ControllerAttribute[*] role controllerAttribute
+end
+
+composition xxx_Controller_behavior between
+	Controller[*] role xxx_Controller_behavior_src
+	StateMachine[1] role behavior
+end
+
+composition xxx_StateMachine_states between
+	StateMachine[0..1] role xxx_StateMachine_states_src
+	State[*] role states_
+end
+
+composition xxx_State_substates between
+	State[0..1] role xxx_State_substates_src
+	State[*] role substates
+end
+
+association xxx_State_theContainer between
+	State[*] role xxx_State_theContainer_src
+	State[0..1] role theContainer
+end
+
+composition xxx_State_outGoing between
+	State[0..1] role xxx_State_outGoing_src
+	StateTransition[*] role outGoing
+end
+
+association xxx_State_incoming between
+	State[0..1] role xxx_State_incoming_src
+	StateTransition[*] role incoming
+end
+
+association xxx_SubControllerState_controller between
+	SubControllerState[*] role xxx_SubControllerState_controller_src
+	Controller[1] role controller
+end
+
+association xxx_StateTransition_source between
+	StateTransition[*] role xxx_StateTransition_source_src
+	State[1] role source
+end
+
+association xxx_StateTransition_target between
+	StateTransition[*] role xxx_StateTransition_target_src
+	State[1] role target
+end
+
+association xxx_StateTransition_trigger between
+	StateTransition[*] role xxx_StateTransition_trigger_src
+	Event[1] role trigger
+end
+
+composition xxx_StateTransition_effect between
+	StateTransition[*] role xxx_StateTransition_effect_src
+	StateMachineAction[0..1] role effect
+end
+

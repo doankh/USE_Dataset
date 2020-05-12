@@ -1,0 +1,98 @@
+model context_
+class ContextRoot
+attributes
+operations
+end
+
+class ContextModel<NamedElement
+attributes
+operations
+end
+
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class MetricType<NamedElement
+attributes
+	unit : String
+operations
+end
+
+abstract class Metric<NamedElement
+attributes
+	query : String
+	syncConstraints : String
+	sum : String
+operations
+end
+
+class MetricValue
+attributes
+	timestamp : String
+	value : String
+operations
+end
+
+class DurationMetricValue<MetricValue
+attributes
+	duration : String
+	durationUnit : String
+operations
+end
+
+class DurationHistoryMetric<Metric
+attributes
+	duration : String
+	durationUnit : String
+operations
+end
+
+class CounterHistoryMetric<Metric
+attributes
+	number : Integer
+operations
+end
+
+composition xxx_ContextRoot_context_ between
+	ContextRoot[0..1] role xxx_ContextRoot_context__src
+	ContextModel[*] role context_
+end
+
+composition xxx_ContextModel_types between
+	ContextModel[0..1] role xxx_ContextModel_types_src
+	MetricType[*] role types
+end
+
+composition xxx_MetricType_metrics between
+	MetricType[0..1] role xxx_MetricType_metrics_src
+	Metric[*] role metrics
+end
+
+composition xxx_Metric_values between
+	Metric[0..1] role xxx_Metric_values_src
+	MetricValue[*] role values
+end
+
+association xxx_Metric_min between
+	Metric[*] role xxx_Metric_min_src
+	MetricValue[0..1] role min
+end
+
+association xxx_Metric_max between
+	Metric[*] role xxx_Metric_max_src
+	MetricValue[0..1] role max
+end
+
+association xxx_Metric_first between
+	Metric[*] role xxx_Metric_first_src
+	MetricValue[0..1] role first
+end
+
+association xxx_Metric_last between
+	Metric[*] role xxx_Metric_last_src
+	MetricValue[0..1] role last
+end
+

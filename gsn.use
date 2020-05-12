@@ -1,0 +1,564 @@
+model GSN
+abstract class SACMElement
+attributes
+operations
+end
+
+abstract class ModelElement<SACMElement
+attributes
+	gid : String
+	name : String
+	uninstantiated : String
+operations
+end
+
+abstract class UtilityElement<SACMElement
+attributes
+	sExpression : String
+operations
+end
+
+abstract class ImplementationConstraint<UtilityElement
+attributes
+operations
+end
+
+abstract class Description<UtilityElement
+attributes
+operations
+end
+
+abstract class Note<UtilityElement
+attributes
+operations
+end
+
+abstract class TaggedValue<UtilityElement
+attributes
+	sKey : String
+operations
+end
+
+abstract class AssuranceCasePackage<ArtefactElement
+attributes
+operations
+end
+
+abstract class AssuranceCasePackageInterface<AssuranceCasePackage
+attributes
+operations
+end
+
+abstract class AssuranceCasePackageCitation<AssuranceCasePackage
+attributes
+operations
+end
+
+abstract class TerminologyElement<ModelElement
+attributes
+operations
+end
+
+abstract class TerminologyPackage<TerminologyElement
+attributes
+operations
+end
+
+abstract class TerminologyPackageCitation<TerminologyPackage
+attributes
+operations
+end
+
+abstract class TerminologyAsset<TerminologyElement
+attributes
+operations
+end
+
+abstract class Category<TerminologyAsset
+attributes
+operations
+end
+
+abstract class ExpressionElement<TerminologyAsset
+attributes
+operations
+end
+
+abstract class Expression<ExpressionElement
+attributes
+	value : String
+operations
+end
+
+abstract class Term<ExpressionElement
+attributes
+	value : String
+	externalReference : String
+operations
+end
+
+abstract class TerminologyAssetCitation<ExpressionElement
+attributes
+operations
+end
+
+abstract class ArgumentationElement<ModelElement
+attributes
+	content : String
+operations
+end
+
+abstract class ArgumentPackage<ArgumentationElement
+attributes
+operations
+end
+
+class Module<ArgumentPackage
+attributes
+operations
+end
+
+abstract class ArgumentPackageCitation<ArgumentPackage
+attributes
+operations
+end
+
+abstract class ArgumentPackageBinding<ArgumentPackage
+attributes
+operations
+end
+
+class Contract<ArgumentPackageBinding
+attributes
+operations
+end
+
+abstract class ArgumentPackageInterface<ArgumentPackage
+attributes
+operations
+end
+
+abstract class ArgumentAsset<ArgumentationElement
+attributes
+operations
+end
+
+abstract class Assertion<ArgumentAsset
+attributes
+operations
+end
+
+abstract class ArtefactElementCitation<ArgumentAsset
+attributes
+operations
+end
+
+class Solution<ArtefactElementCitation
+attributes
+	isPublic : String
+operations
+end
+
+abstract class ArgumentAssetCitation<ArgumentAsset
+attributes
+operations
+end
+
+class AwayGoal<ArgumentAssetCitation
+attributes
+operations
+end
+
+class AwaySolution<ArgumentAssetCitation
+attributes
+operations
+end
+
+class AwayContext<ArgumentAssetCitation
+attributes
+operations
+end
+
+abstract class Claim<Assertion
+attributes
+	toBeSupported : String
+operations
+end
+
+class Goal<Claim
+attributes
+	public : String
+	undeveloped : String
+operations
+end
+
+class Justification<Claim
+attributes
+operations
+end
+
+class Assumption<Claim
+attributes
+operations
+end
+
+abstract class ArgumentReasoning<ArgumentAsset
+attributes
+operations
+end
+
+class Strategy<ArgumentReasoning
+attributes
+	undeveloped : String
+operations
+end
+
+class Context<ArgumentAsset
+attributes
+	isPublic : String
+	refersToExternalMaterial : String
+operations
+end
+
+abstract class AssertedRelationship<Assertion
+attributes
+operations
+end
+
+abstract class AssertedInference<AssertedRelationship
+attributes
+operations
+end
+
+class SupportedBy<AssertedRelationship
+attributes
+	requires : Integer
+operations
+end
+
+abstract class AssertedEvidence<AssertedRelationship
+attributes
+operations
+end
+
+abstract class AssertedChallenge<AssertedRelationship
+attributes
+operations
+end
+
+abstract class AssertedCounterEvidence<AssertedRelationship
+attributes
+operations
+end
+
+abstract class AssertedContext<AssertedRelationship
+attributes
+operations
+end
+
+class InContextOf<AssertedContext
+attributes
+operations
+end
+
+abstract class ArtefactElement<ModelElement
+attributes
+operations
+end
+
+abstract class ArtefactPackage<ArtefactElement
+attributes
+operations
+end
+
+abstract class ArtefactPackageCitation<ArtefactPackage
+attributes
+operations
+end
+
+abstract class ArtefactPackageBinding<ArtefactPackage
+attributes
+operations
+end
+
+abstract class ArtefactPackageInterface<ArtefactPackage
+attributes
+operations
+end
+
+abstract class ArtefactAsset<ArtefactElement
+attributes
+operations
+end
+
+abstract class ArtefactAssetCitation<ArtefactAsset
+attributes
+operations
+end
+
+abstract class Artefact<ArtefactAsset
+attributes
+	version : String
+	date : String
+operations
+end
+
+abstract class ArtefactProperty<ArtefactAsset
+attributes
+operations
+end
+
+abstract class ArtefactEvent<ArtefactAsset
+attributes
+	date : String
+operations
+end
+
+abstract class Resource<ArtefactAsset
+attributes
+	location : String
+operations
+end
+
+abstract class Activity<ArtefactAsset
+attributes
+	startTime : String
+	endTime : String
+operations
+end
+
+abstract class Technique<ArtefactAsset
+attributes
+operations
+end
+
+abstract class Participant<ArtefactAsset
+attributes
+operations
+end
+
+abstract class ArtefactAssetRelationship<ArtefactAsset
+attributes
+operations
+end
+
+abstract class ArtefactRelationship<ArtefactAssetRelationship
+attributes
+operations
+end
+
+abstract class ActivityRelationship<ArtefactAssetRelationship
+attributes
+operations
+end
+
+abstract class ArtefactActivityRelationship<ArtefactAssetRelationship
+attributes
+operations
+end
+
+abstract class ArtefactTechniqueRelationship<ArtefactAssetRelationship
+attributes
+operations
+end
+
+abstract class ParticipantRoleRelationship<ArtefactAssetRelationship
+attributes
+operations
+end
+
+abstract class ArtefactResourceRelationship<ArtefactAssetRelationship
+attributes
+operations
+end
+
+composition xxx_UtilityElement_expression between
+	UtilityElement[*] role xxx_UtilityElement_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_TaggedValue_key between
+	TaggedValue[*] role xxx_TaggedValue_key_src
+	Expression[0..1] role key
+end
+
+composition xxx_AssuranceCasePackage_assuranceCasePackageCitation between
+	AssuranceCasePackage[0..1] role xxx_AssuranceCasePackage_assuranceCasePackageCitation_src
+	AssuranceCasePackageCitation[*] role assuranceCasePackageCitation
+end
+
+composition xxx_AssuranceCasePackage_assuranceCasePackage between
+	AssuranceCasePackage[0..1] role xxx_AssuranceCasePackage_assuranceCasePackage_src
+	AssuranceCasePackage[*] role assuranceCasePackage
+end
+
+association xxx_AssuranceCasePackage_interface between
+	AssuranceCasePackage[0..1] role xxx_AssuranceCasePackage_interface_src
+	AssuranceCasePackageInterface[*] role interface
+end
+
+composition xxx_AssuranceCasePackage_argumentPackage between
+	AssuranceCasePackage[0..1] role xxx_AssuranceCasePackage_argumentPackage_src
+	ArgumentPackage[*] role argumentPackage
+end
+
+composition xxx_AssuranceCasePackage_artefactPackage between
+	AssuranceCasePackage[0..1] role xxx_AssuranceCasePackage_artefactPackage_src
+	ArtefactPackage[*] role artefactPackage
+end
+
+composition xxx_AssuranceCasePackage_terminologyPackage between
+	AssuranceCasePackage[0..1] role xxx_AssuranceCasePackage_terminologyPackage_src
+	TerminologyPackage[*] role terminologyPackage
+end
+
+association xxx_AssuranceCasePackageCitation_citedPackage between
+	AssuranceCasePackageCitation[*] role xxx_AssuranceCasePackageCitation_citedPackage_src
+	AssuranceCasePackage[1] role citedPackage
+end
+
+composition xxx_TerminologyPackage_terminologyAsset between
+	TerminologyPackage[0..1] role xxx_TerminologyPackage_terminologyAsset_src
+	TerminologyAsset[*] role terminologyAsset
+end
+
+composition xxx_TerminologyPackage_terminologyPackage between
+	TerminologyPackage[0..1] role xxx_TerminologyPackage_terminologyPackage_src
+	TerminologyPackage[*] role terminologyPackage
+end
+
+composition xxx_TerminologyPackage_terminologyPackageCitation between
+	TerminologyPackage[0..1] role xxx_TerminologyPackage_terminologyPackageCitation_src
+	TerminologyPackageCitation[*] role terminologyPackageCitation
+end
+
+association xxx_TerminologyPackageCitation_citedPackage between
+	TerminologyPackageCitation[*] role xxx_TerminologyPackageCitation_citedPackage_src
+	TerminologyPackage[0..1] role citedPackage
+end
+
+association xxx_ExpressionElement_category between
+	ExpressionElement[0..1] role xxx_ExpressionElement_category_src
+	Category[*] role category
+end
+
+association xxx_Expression_element between
+	Expression[0..1] role xxx_Expression_element_src
+	ExpressionElement[*] role element
+end
+
+association xxx_TerminologyAssetCitation_citedElement between
+	TerminologyAssetCitation[*] role xxx_TerminologyAssetCitation_citedElement_src
+	TerminologyAsset[1] role citedElement
+end
+
+composition xxx_ArgumentPackage_argumentAsset between
+	ArgumentPackage[0..1] role xxx_ArgumentPackage_argumentAsset_src
+	ArgumentAsset[*] role argumentAsset
+end
+
+composition xxx_ArgumentPackage_argumentPackage between
+	ArgumentPackage[0..1] role xxx_ArgumentPackage_argumentPackage_src
+	ArgumentPackage[*] role argumentPackage
+end
+
+composition xxx_ArgumentPackage_argumentPackageCitation between
+	ArgumentPackage[0..1] role xxx_ArgumentPackage_argumentPackageCitation_src
+	ArgumentPackageCitation[*] role argumentPackageCitation
+end
+
+association xxx_ArgumentPackageCitation_citedPackage between
+	ArgumentPackageCitation[*] role xxx_ArgumentPackageCitation_citedPackage_src
+	ArgumentPackage[1] role citedPackage
+end
+
+association xxx_ArgumentPackageBinding_participantPackage between
+	ArgumentPackageBinding[0..1] role xxx_ArgumentPackageBinding_participantPackage_src
+	ArgumentPackage[2..*] role participantPackage
+end
+
+association xxx_ArgumentAssetCitation_citedAsset between
+	ArgumentAssetCitation[*] role xxx_ArgumentAssetCitation_citedAsset_src
+	ArgumentAsset[1] role citedAsset
+end
+
+association xxx_AwayGoal_awayGoal between
+	AwayGoal[*] role xxx_AwayGoal_awayGoal_src
+	Goal[0..1] role awayGoal
+end
+
+association xxx_AwaySolution_awaySolution between
+	AwaySolution[*] role xxx_AwaySolution_awaySolution_src
+	Solution[0..1] role awaySolution
+end
+
+association xxx_AwayContext_awayContext between
+	AwayContext[*] role xxx_AwayContext_awayContext_src
+	Context[0..1] role awayContext
+end
+
+association xxx_AssertedRelationship_source between
+	AssertedRelationship[0..1] role xxx_AssertedRelationship_source_src
+	ArgumentAsset[*] role source
+end
+
+association xxx_AssertedRelationship_target between
+	AssertedRelationship[0..1] role xxx_AssertedRelationship_target_src
+	ArgumentAsset[*] role target
+end
+
+composition xxx_ArtefactPackage_artefactPackageCitation between
+	ArtefactPackage[0..1] role xxx_ArtefactPackage_artefactPackageCitation_src
+	ArtefactPackageCitation[*] role artefactPackageCitation
+end
+
+composition xxx_ArtefactPackage_artefactAsset between
+	ArtefactPackage[0..1] role xxx_ArtefactPackage_artefactAsset_src
+	ArtefactAsset[*] role artefactAsset
+end
+
+composition xxx_ArtefactPackage_artefactPackage between
+	ArtefactPackage[0..1] role xxx_ArtefactPackage_artefactPackage_src
+	ArtefactPackage[*] role artefactPackage
+end
+
+association xxx_ArtefactPackage_interface between
+	ArtefactPackage[0..1] role xxx_ArtefactPackage_interface_src
+	ArtefactPackageInterface[*] role interface
+end
+
+association xxx_ArtefactPackageCitation_citedPackage between
+	ArtefactPackageCitation[*] role xxx_ArtefactPackageCitation_citedPackage_src
+	ArtefactPackage[1] role citedPackage
+end
+
+association xxx_ArtefactPackageBinding_participantpackage between
+	ArtefactPackageBinding[0..1] role xxx_ArtefactPackageBinding_participantpackage_src
+	ArtefactPackage[2..*] role participantpackage
+end
+
+association xxx_ArtefactAssetCitation_citedAsset between
+	ArtefactAssetCitation[*] role xxx_ArtefactAssetCitation_citedAsset_src
+	ArtefactAsset[1] role citedAsset
+end
+
+composition xxx_Artefact_artefactProperty between
+	Artefact[0..1] role xxx_Artefact_artefactProperty_src
+	ArtefactProperty[*] role artefactProperty
+end
+
+composition xxx_Artefact_artefactEvent between
+	Artefact[0..1] role xxx_Artefact_artefactEvent_src
+	ArtefactEvent[*] role artefactEvent
+end
+
+association xxx_ArtefactAssetRelationship_source between
+	ArtefactAssetRelationship[0..1] role xxx_ArtefactAssetRelationship_source_src
+	ArtefactAsset[*] role source
+end
+
+association xxx_ArtefactAssetRelationship_target between
+	ArtefactAssetRelationship[0..1] role xxx_ArtefactAssetRelationship_target_src
+	ArtefactAsset[*] role target
+end
+

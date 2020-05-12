@@ -1,0 +1,834 @@
+model metaabm
+enum SAttributeType{
+default
+}
+
+enum SBorderRule{
+default
+}
+
+enum SNeighborhoodType{
+default
+}
+
+enum SImplementationMode{
+default
+}
+
+enum SShapeType{
+default
+}
+
+enum ABuildSpaceTypes{
+default
+}
+
+enum ABuildNetworkTypes{
+default
+}
+
+enum ASelectTypes{
+default
+}
+
+abstract class IID
+attributes
+	label : String
+	ID : String
+operations
+end
+
+abstract class ITyped<IID
+attributes
+	sType : SAttributeType
+operations
+end
+
+abstract class ITypedArray<ITyped
+attributes
+	size : Integer
+operations
+end
+
+abstract class IValue<IID
+attributes
+	availableTypes : SAttributeType
+operations
+end
+
+abstract class IArtifact<IID
+attributes
+operations
+end
+
+abstract class IAct<IID
+attributes
+operations
+end
+
+abstract class SNamed<IID
+attributes
+	pluralLabel : String
+	description : String
+operations
+end
+
+abstract class SAttributed<SNamed
+attributes
+operations
+end
+
+abstract class SActable<SAttributed
+attributes
+operations
+end
+
+class SAttribute<SNamed,IValue,ITyped
+attributes
+	gatherData : Boolean
+	defaultValue : String
+	units : String
+	immutable : Boolean
+	derived_ : Boolean
+operations
+end
+
+class SAttributeArray<SAttribute,ITypedArray
+attributes
+operations
+end
+
+class SState<SAttribute
+attributes
+operations
+end
+
+class SStateValue<SNamed,IValue
+attributes
+operations
+end
+
+class SAgent<SActable,SImplemented
+attributes
+operations
+end
+
+class SContext<SAgent
+attributes
+operations
+end
+
+abstract class SProjection<SAttributed,IID
+attributes
+operations
+end
+
+abstract class SNDimensional<SProjection
+attributes
+	dimensionality : Integer
+	borderRule : SBorderRule
+operations
+end
+
+class SContinuousSpace<SNDimensional
+attributes
+operations
+end
+
+class SGrid<SNDimensional
+attributes
+	multiOccupant : Boolean
+	neighborhood : SNeighborhoodType
+operations
+end
+
+class SNetwork<SProjection
+attributes
+	directed : Boolean
+operations
+end
+
+class SGeography<SProjection
+attributes
+operations
+end
+
+class SValueLayer<SNamed
+attributes
+operations
+end
+
+abstract class SStyle<SActable,SImplemented
+attributes
+operations
+end
+
+class SStyle2D<SStyle
+attributes
+operations
+end
+
+class SStyleShape<SStyle2D
+attributes
+	shape : SShapeType
+operations
+end
+
+class SStyle3D<SStyle
+attributes
+operations
+end
+
+abstract class SImplemented<IID
+attributes
+operations
+end
+
+class SImplementation
+attributes
+	package : String
+	className : String
+	basePath : String
+	mode : SImplementationMode
+	qualifiedName : String
+	derivedPath : String
+	derivedPackage : String
+	javaFileLoc : String
+	srcDir : String
+	binDir : String
+	classFileLoc : String
+	derivedBinDir : String
+	derivedSrcDir : String
+operations
+end
+
+abstract class IAgentChild<IModelExtension
+attributes
+operations
+end
+
+abstract class IAttributeChild<IModelExtension
+attributes
+operations
+end
+
+abstract class IModelExtension
+attributes
+operations
+	getName():String
+	getPackage():String
+end
+
+class FArgumentPrototype<ITyped,SNamed
+attributes
+	optional : Boolean
+operations
+end
+
+class FArgumentArrayPrototype<FArgumentPrototype,ITypedArray
+attributes
+operations
+end
+
+abstract class FFunction<IID
+attributes
+	availableTypes : SAttributeType
+	multiValue : Boolean
+operations
+end
+
+abstract class FLogical<FFunction
+attributes
+operations
+end
+
+class FOperator<FFunction,SNamed
+attributes
+	symbol : String
+	arity : Integer
+operations
+end
+
+class FLogicalOperator<FOperator,FLogical
+attributes
+operations
+end
+
+abstract class FGeneric<FFunction,SNamed
+attributes
+operations
+end
+
+class FGenericFunction<FGeneric,FFunction
+attributes
+operations
+end
+
+class FGenericLogical<FGeneric,FLogical
+attributes
+operations
+end
+
+class FLibrary<SNamed,IArtifact
+attributes
+operations
+end
+
+class FImplementedLibrary<SImplemented,FLibrary
+attributes
+operations
+end
+
+class FMultiArgumentPrototype<FArgumentPrototype
+attributes
+operations
+end
+
+class AInput
+attributes
+operations
+end
+
+class ALiteral<IValue
+attributes
+	valueLiteral : String
+operations
+end
+
+class AMultiValue<ALiteral
+attributes
+operations
+end
+
+abstract class AShaped
+attributes
+	shape : SShapeType
+operations
+end
+
+abstract class AAct<IID,IAct
+attributes
+operations
+end
+
+abstract class AControl<AAct
+attributes
+operations
+end
+
+abstract class ARoot<ASelect
+attributes
+operations
+end
+
+class AGroup<AAct,SNamed
+attributes
+operations
+end
+
+class ASchedule<ARoot,SNamed
+attributes
+	start : Integer
+	interval : Integer
+	priority : Integer
+	pick : Integer
+operations
+end
+
+class ARule<ARoot,SNamed
+attributes
+operations
+end
+
+class ABuild<ARoot,SNamed
+attributes
+operations
+end
+
+class AInitialize<ARoot,SNamed
+attributes
+operations
+end
+
+class AMethod<AAct,SNamed
+attributes
+	body : String
+	generate : Boolean
+operations
+end
+
+abstract class ASink<AAct,IValue
+attributes
+operations
+end
+
+abstract class ALogic<AControl
+attributes
+operations
+end
+
+class AAny<ALogic
+attributes
+operations
+end
+
+class AAll<ALogic
+attributes
+operations
+end
+
+class ANone<ALogic
+attributes
+operations
+end
+
+class AQuery<ASink,AControl
+attributes
+operations
+end
+
+class AEvaluate<ASink
+attributes
+operations
+end
+
+abstract class AAccessor<AAct
+attributes
+operations
+end
+
+class AWatch<AAccessor,ARoot
+attributes
+operations
+end
+
+class ASet<AAccessor,ACommand
+attributes
+operations
+end
+
+class ACreateAgents<ASelect
+attributes
+operations
+end
+
+class ACreateShapedAgents<ACreateAgents,AShaped
+attributes
+operations
+end
+
+class ALoadAgents<ACreateAgents
+attributes
+	sourceURL : String
+operations
+end
+
+class ALoadShapedAgents<ALoadAgents,AShaped
+attributes
+operations
+end
+
+abstract class ABuildProjection<AAct,SNamed
+attributes
+operations
+end
+
+class ABuildNetwork<ABuildProjection
+attributes
+	networkType : ABuildNetworkTypes
+operations
+end
+
+class ABuildSpace<ABuildProjection
+attributes
+	spaceType : ABuildSpaceTypes
+operations
+end
+
+class ABuildGeography<ABuildProjection
+attributes
+operations
+end
+
+class ABuildGrid<ABuildSpace
+attributes
+operations
+end
+
+class ASelect<AAct,IID
+attributes
+	for_ : ASelectTypes
+operations
+end
+
+class AMove<ATransform
+attributes
+operations
+end
+
+abstract class ATransform<ACommand
+attributes
+operations
+end
+
+class ALeave<ATransform
+attributes
+operations
+end
+
+class ADie<ATransform
+attributes
+operations
+end
+
+class AConnect<ANetwork
+attributes
+	directed : Boolean
+operations
+end
+
+abstract class ANetwork<ATransform
+attributes
+operations
+end
+
+class ADisconnect<ANetwork
+attributes
+operations
+end
+
+class AReplace<AConnect
+attributes
+operations
+end
+
+abstract class ACommand<AAct
+attributes
+operations
+end
+
+class ACause<ACommand
+attributes
+operations
+end
+
+class ADiffuse<ARoot
+attributes
+operations
+end
+
+class APerform<ARoot
+attributes
+operations
+end
+
+class ADerive<AAccessor,ARoot
+attributes
+operations
+end
+
+composition xxx_SAttributed_attributes_ between
+	SAttributed[0..1] role xxx_SAttributed_attributes__src
+	SAttribute[*] role attributes_
+end
+
+composition xxx_SActable_rootActivity between
+	SActable[*] role xxx_SActable_rootActivity_src
+	IAct[0..1] role rootActivity
+end
+
+association xxx_SAttribute_owner between
+	SAttribute[*] role xxx_SAttribute_owner_src
+	SAttributed[1] role owner
+end
+
+composition xxx_SAttribute_children between
+	SAttribute[0..1] role xxx_SAttribute_children_src
+	IAttributeChild[*] role children
+end
+
+composition xxx_SState_options between
+	SState[0..1] role xxx_SState_options_src
+	SStateValue[1..*] role options
+end
+
+association xxx_SState_defaultOption between
+	SState[*] role xxx_SState_defaultOption_src
+	SStateValue[0..1] role defaultOption
+end
+
+association xxx_SStateValue_set between
+	SStateValue[*] role xxx_SStateValue_set_src
+	SState[1] role set
+end
+
+composition xxx_SAgent_styles between
+	SAgent[0..1] role xxx_SAgent_styles_src
+	SStyle[*] role styles
+end
+
+association xxx_SAgent_owner between
+	SAgent[*] role xxx_SAgent_owner_src
+	SContext[0..1] role owner
+end
+
+composition xxx_SAgent_children between
+	SAgent[0..1] role xxx_SAgent_children_src
+	IAgentChild[*] role children
+end
+
+composition xxx_SContext_agents between
+	SContext[0..1] role xxx_SContext_agents_src
+	SAgent[*] role agents
+end
+
+composition xxx_SContext_projections between
+	SContext[0..1] role xxx_SContext_projections_src
+	SProjection[*] role projections
+end
+
+composition xxx_SContext_valueLayers between
+	SContext[0..1] role xxx_SContext_valueLayers_src
+	SValueLayer[*] role valueLayers
+end
+
+composition xxx_SContext_library between
+	SContext[0..1] role xxx_SContext_library_src
+	IArtifact[*] role library
+end
+
+association xxx_SContext_allAgents between
+	SContext[0..1] role xxx_SContext_allAgents_src
+	SAgent[*] role allAgents
+end
+
+association xxx_SContext_allContexts between
+	SContext[0..1] role xxx_SContext_allContexts_src
+	SContext[*] role allContexts
+end
+
+association xxx_SProjection_owner between
+	SProjection[*] role xxx_SProjection_owner_src
+	SContext[0..1] role owner
+end
+
+association xxx_SStyle_agent between
+	SStyle[*] role xxx_SStyle_agent_src
+	SAgent[1] role agent
+end
+
+composition xxx_SImplemented_implementation between
+	SImplemented[*] role xxx_SImplemented_implementation_src
+	SImplementation[1] role implementation
+end
+
+association xxx_SImplemented_parent between
+	SImplemented[*] role xxx_SImplemented_parent_src
+	SImplemented[0..1] role parent
+end
+
+association xxx_SImplementation_target between
+	SImplementation[*] role xxx_SImplementation_target_src
+	SImplemented[1] role target
+end
+
+association xxx_IAgentChild_parent between
+	IAgentChild[*] role xxx_IAgentChild_parent_src
+	SAgent[0..1] role parent
+end
+
+association xxx_IAttributeChild_parent between
+	IAttributeChild[*] role xxx_IAttributeChild_parent_src
+	SAttribute[0..1] role parent
+end
+
+association xxx_FArgumentPrototype_inputFunction between
+	FArgumentPrototype[*] role xxx_FArgumentPrototype_inputFunction_src
+	FFunction[0..1] role inputFunction
+end
+
+association xxx_FArgumentPrototype_outputFunction between
+	FArgumentPrototype[*] role xxx_FArgumentPrototype_outputFunction_src
+	FGenericFunction[0..1] role outputFunction
+end
+
+composition xxx_FFunction_inputPrototypes between
+	FFunction[0..1] role xxx_FFunction_inputPrototypes_src
+	FArgumentPrototype[*] role inputPrototypes
+end
+
+composition xxx_FGenericFunction_outputPrototypes between
+	FGenericFunction[0..1] role xxx_FGenericFunction_outputPrototypes_src
+	FArgumentPrototype[*] role outputPrototypes
+end
+
+composition xxx_FLibrary_functions between
+	FLibrary[0..1] role xxx_FLibrary_functions_src
+	FFunction[*] role functions
+end
+
+composition xxx_FLibrary_subs between
+	FLibrary[0..1] role xxx_FLibrary_subs_src
+	FLibrary[*] role subs
+end
+
+association xxx_AInput_sink between
+	AInput[*] role xxx_AInput_sink_src
+	ASink[1] role sink
+end
+
+association xxx_AInput_selected between
+	AInput[*] role xxx_AInput_selected_src
+	ASelect[0..1] role selected
+end
+
+composition xxx_AInput_literal between
+	AInput[*] role xxx_AInput_literal_src
+	ALiteral[0..1] role literal
+end
+
+association xxx_AInput_value between
+	AInput[*] role xxx_AInput_value_src
+	IValue[0..1] role value
+end
+
+association xxx_AMultiValue_values between
+	AMultiValue[0..1] role xxx_AMultiValue_values_src
+	IValue[*] role values
+end
+
+association xxx_AAct_sources between
+	AAct[0..1] role xxx_AAct_sources_src
+	AAct[*] role sources
+end
+
+association xxx_AAct_targets between
+	AAct[0..1] role xxx_AAct_targets_src
+	AAct[*] role targets
+end
+
+association xxx_AAct_reference between
+	AAct[*] role xxx_AAct_reference_src
+	SAgent[1] role reference
+end
+
+association xxx_AAct_group between
+	AAct[*] role xxx_AAct_group_src
+	AGroup[0..1] role group
+end
+
+association xxx_AAct_selected between
+	AAct[*] role xxx_AAct_selected_src
+	ASelect[0..1] role selected
+end
+
+association xxx_AAct_allSources between
+	AAct[0..1] role xxx_AAct_allSources_src
+	AAct[*] role allSources
+end
+
+association xxx_AAct_allTargets between
+	AAct[0..1] role xxx_AAct_allTargets_src
+	AAct[*] role allTargets
+end
+
+association xxx_AAct_rootSelected between
+	AAct[*] role xxx_AAct_rootSelected_src
+	ASelect[0..1] role rootSelected
+end
+
+association xxx_AGroup_roots between
+	AGroup[0..1] role xxx_AGroup_roots_src
+	AAct[*] role roots
+end
+
+composition xxx_AGroup_members between
+	AGroup[0..1] role xxx_AGroup_members_src
+	AAct[*] role members
+end
+
+composition xxx_ASink_inputs between
+	ASink[0..1] role xxx_ASink_inputs_src
+	AInput[*] role inputs
+end
+
+association xxx_ASink_function between
+	ASink[*] role xxx_ASink_function_src
+	FFunction[1] role function
+end
+
+association xxx_AAccessor_attribute between
+	AAccessor[*] role xxx_AAccessor_attribute_src
+	SAttribute[1] role attribute
+end
+
+association xxx_ASet_parameter between
+	ASet[*] role xxx_ASet_parameter_src
+	IValue[1] role parameter
+end
+
+association xxx_ACreateAgents_agentCount between
+	ACreateAgents[*] role xxx_ACreateAgents_agentCount_src
+	IValue[0..1] role agentCount
+end
+
+association xxx_ABuildProjection_agents between
+	ABuildProjection[0..1] role xxx_ABuildProjection_agents_src
+	SAgent[*] role agents
+end
+
+association xxx_ABuildProjection_projection between
+	ABuildProjection[*] role xxx_ABuildProjection_projection_src
+	SProjection[1] role projection
+end
+
+association xxx_ABuildProjection_attributes_ between
+	ABuildProjection[0..1] role xxx_ABuildProjection_attributes__src
+	SAttribute[*] role attributes_
+end
+
+association xxx_ABuildGrid_fillAgent between
+	ABuildGrid[*] role xxx_ABuildGrid_fillAgent_src
+	SAgent[0..1] role fillAgent
+end
+
+association xxx_ASelect_agent between
+	ASelect[*] role xxx_ASelect_agent_src
+	SAgent[0..1] role agent
+end
+
+association xxx_ASelect_space between
+	ASelect[*] role xxx_ASelect_space_src
+	SProjection[0..1] role space
+end
+
+association xxx_ATransform_destination between
+	ATransform[*] role xxx_ATransform_destination_src
+	ASelect[1] role destination
+end
+
+association xxx_ANetwork_within between
+	ANetwork[*] role xxx_ANetwork_within_src
+	SNetwork[1] role within
+end
+
+association xxx_ACause_result between
+	ACause[*] role xxx_ACause_result_src
+	ARoot[1] role result
+end
+
+association xxx_ADiffuse_diffused between
+	ADiffuse[*] role xxx_ADiffuse_diffused_src
+	SAttribute[1] role diffused
+end
+
+association xxx_ADiffuse_diffusionRate between
+	ADiffuse[*] role xxx_ADiffuse_diffusionRate_src
+	SAttribute[0..1] role diffusionRate
+end
+
+association xxx_ADiffuse_evaporationRate between
+	ADiffuse[*] role xxx_ADiffuse_evaporationRate_src
+	SAttribute[0..1] role evaporationRate
+end
+

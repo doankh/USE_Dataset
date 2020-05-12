@@ -1,0 +1,184 @@
+model rdbms
+enum Action{
+default
+}
+
+enum DeferrableAct{
+default
+}
+
+enum DeferredAct{
+default
+}
+
+enum ReferencingType{
+default
+}
+
+class Database<ModelElement
+attributes
+operations
+end
+
+class Table<ModelElement
+attributes
+operations
+end
+
+class Column<ModelElement
+attributes
+	default : String
+	nullable : Boolean
+	precision : Integer
+	length : Integer
+operations
+end
+
+class ForeignKey<Constraints
+attributes
+	deleteActionRHS : Action
+	updateActionRHS : Action
+	match : ReferencingType
+	inverseReferentialIntegrityCon : Boolean
+operations
+end
+
+abstract class Constraints<ModelElement
+attributes
+	deferrable : DeferrableAct
+	deferred : DeferredAct
+operations
+end
+
+class CheckCon<Constraints
+attributes
+	checkCondition : String
+operations
+end
+
+abstract class PKeyAndUnique<Constraints
+attributes
+operations
+end
+
+class PrimaryKeyCon<PKeyAndUnique
+attributes
+operations
+end
+
+class UniqueCon<PKeyAndUnique
+attributes
+operations
+end
+
+class SystemDataType<DataType
+attributes
+	predefinedLength : Integer
+	predefinedDecPlaces : Integer
+operations
+end
+
+abstract class ModelElement
+attributes
+	name : String
+operations
+end
+
+class UserDefinedDataType<DataType
+attributes
+	precision : Integer
+	length : Integer
+	defaultValue : String
+operations
+end
+
+abstract class DataType<ModelElement
+attributes
+operations
+end
+
+composition xxx_Database_userDefinedDataTypes between
+	Database[0..1] role xxx_Database_userDefinedDataTypes_src
+	UserDefinedDataType[*] role userDefinedDataTypes
+end
+
+composition xxx_Database_tables between
+	Database[0..1] role xxx_Database_tables_src
+	Table[*] role tables
+end
+
+composition xxx_Database_dataTypes between
+	Database[0..1] role xxx_Database_dataTypes_src
+	SystemDataType[*] role dataTypes
+end
+
+composition xxx_Table_tableFKs between
+	Table[0..1] role xxx_Table_tableFKs_src
+	ForeignKey[*] role tableFKs
+end
+
+composition xxx_Table_tablePK between
+	Table[*] role xxx_Table_tablePK_src
+	PrimaryKeyCon[1] role tablePK
+end
+
+composition xxx_Table_tableUQ between
+	Table[0..1] role xxx_Table_tableUQ_src
+	UniqueCon[*] role tableUQ
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[1..*] role columns
+end
+
+composition xxx_Table_tableCHs between
+	Table[0..1] role xxx_Table_tableCHs_src
+	CheckCon[*] role tableCHs
+end
+
+association xxx_Column_columnInPKandUQ between
+	Column[*] role xxx_Column_columnInPKandUQ_src
+	PKeyAndUnique[0..1] role columnInPKandUQ
+end
+
+association xxx_Column_columnInFK between
+	Column[*] role xxx_Column_columnInFK_src
+	ForeignKey[0..1] role columnInFK
+end
+
+association xxx_Column_columnDataType between
+	Column[*] role xxx_Column_columnDataType_src
+	DataType[1] role columnDataType
+end
+
+association xxx_ForeignKey_rhsKey between
+	ForeignKey[*] role xxx_ForeignKey_rhsKey_src
+	PKeyAndUnique[1] role rhsKey
+end
+
+association xxx_ForeignKey_lhsAttr between
+	ForeignKey[0..1] role xxx_ForeignKey_lhsAttr_src
+	Column[1..*] role lhsAttr
+end
+
+association xxx_ForeignKey_refersTo between
+	ForeignKey[*] role xxx_ForeignKey_refersTo_src
+	Table[1] role refersTo
+end
+
+association xxx_ForeignKey_FKTable between
+	ForeignKey[*] role xxx_ForeignKey_FKTable_src
+	Table[1] role FKTable
+end
+
+association xxx_PKeyAndUnique_PKandUQColumns between
+	PKeyAndUnique[0..1] role xxx_PKeyAndUnique_PKandUQColumns_src
+	Column[1..*] role PKandUQColumns
+end
+
+association xxx_UserDefinedDataType_dataType between
+	UserDefinedDataType[*] role xxx_UserDefinedDataType_dataType_src
+	SystemDataType[1] role dataType
+end
+

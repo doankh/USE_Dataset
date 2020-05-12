@@ -1,0 +1,69 @@
+model InformationDefinition
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Entity<NamedElement
+attributes
+operations
+end
+
+class Attribute<NamedElement,MultiplicityElement
+attributes
+operations
+end
+
+class MultiplicityElement
+attributes
+	min : Integer
+	max : Integer
+operations
+end
+
+class Reference<MultiplicityElement,NamedElement
+attributes
+operations
+end
+
+class DataType
+attributes
+operations
+end
+
+class IntType<DataType
+attributes
+operations
+end
+
+class DoubleType<DataType
+attributes
+operations
+end
+
+class StringType<DataType
+attributes
+operations
+end
+
+association xxx_Entity_supers between
+	Entity[0..1] role xxx_Entity_supers_src
+	Entity[*] role supers
+end
+
+composition xxx_Entity_features between
+	Entity[0..1] role xxx_Entity_features_src
+	Attribute[*] role features
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	DataType[1] role type
+end
+
+association xxx_Reference_dest between
+	Reference[*] role xxx_Reference_dest_src
+	Entity[1] role dest
+end
+

@@ -1,0 +1,72 @@
+model ConceptMapDSL
+class NamedElement
+attributes
+	name : String
+operations
+end
+
+class ConceptMap<NamedElement
+attributes
+operations
+end
+
+class MapElements<NamedElement
+attributes
+operations
+end
+
+class Element<MapElements
+attributes
+operations
+end
+
+class ArrowConnection<MapElements
+attributes
+operations
+end
+
+class DoubleArrowConnection<MapElements
+attributes
+operations
+end
+
+class DefaultConnection<MapElements
+attributes
+operations
+end
+
+composition xxx_ConceptMap_mapelements between
+	ConceptMap[0..1] role xxx_ConceptMap_mapelements_src
+	MapElements[*] role mapelements
+end
+
+association xxx_ArrowConnection_fromElement between
+	ArrowConnection[*] role xxx_ArrowConnection_fromElement_src
+	Element[0..1] role fromElement
+end
+
+association xxx_ArrowConnection_toElement between
+	ArrowConnection[*] role xxx_ArrowConnection_toElement_src
+	Element[0..1] role toElement
+end
+
+association xxx_DoubleArrowConnection_fromElement between
+	DoubleArrowConnection[*] role xxx_DoubleArrowConnection_fromElement_src
+	Element[0..1] role fromElement
+end
+
+association xxx_DoubleArrowConnection_toElement between
+	DoubleArrowConnection[*] role xxx_DoubleArrowConnection_toElement_src
+	Element[0..1] role toElement
+end
+
+association xxx_DefaultConnection_fromElement between
+	DefaultConnection[*] role xxx_DefaultConnection_fromElement_src
+	Element[0..1] role fromElement
+end
+
+association xxx_DefaultConnection_toElement between
+	DefaultConnection[*] role xxx_DefaultConnection_toElement_src
+	Element[0..1] role toElement
+end
+

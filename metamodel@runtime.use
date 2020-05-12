@@ -1,0 +1,426 @@
+model art
+enum InstanceState{
+default
+}
+
+enum PortRole{
+default
+}
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+abstract class ModelElement<NamedElement
+attributes
+operations
+end
+
+class System<ModelElement
+attributes
+operations
+end
+
+class DataType<ModelElement
+attributes
+operations
+end
+
+abstract class TypedElement<ModelElement
+attributes
+operations
+end
+
+abstract class CardinalityElement<ModelElement
+attributes
+	lower : Integer
+	upper : Integer
+operations
+end
+
+abstract class ComponentInstance<ModelElement
+attributes
+	state : String
+operations
+end
+
+class PrimitiveInstance<ComponentInstance
+attributes
+operations
+end
+
+class CompositeInstance<ComponentInstance
+attributes
+operations
+end
+
+abstract class Binding
+attributes
+	id : String
+operations
+end
+
+class TransmissionBinding<Binding
+attributes
+operations
+end
+
+class DelegationBinding<Binding
+attributes
+operations
+end
+
+abstract class AttributeInstance
+attributes
+operations
+end
+
+class ValuedAttribute<AttributeInstance
+attributes
+	value : String
+operations
+end
+
+class DictionaryValuedAttribute<AttributeInstance
+attributes
+operations
+end
+
+abstract class Entry
+attributes
+	value : String
+operations
+end
+
+class DefaultEntry<Entry
+attributes
+operations
+end
+
+class OtherEntry<Entry
+attributes
+	key : String
+operations
+end
+
+abstract class ComponentType<ModelElement
+attributes
+operations
+end
+
+class PrimitiveType<ComponentType
+attributes
+operations
+end
+
+class CompositeType<ComponentType
+attributes
+operations
+end
+
+abstract class Service<ModelElement
+attributes
+operations
+end
+
+class Operation<ModelElement
+attributes
+operations
+end
+
+class Parameter<TypedElement
+attributes
+operations
+end
+
+class FunctionalService<Service
+attributes
+operations
+end
+
+class ControlService<Service
+attributes
+operations
+end
+
+abstract class AbstractPort<NamedElement
+attributes
+	role : String
+operations
+end
+
+class Port<CardinalityElement,AbstractPort
+attributes
+	isOptional : Boolean
+operations
+end
+
+class PortCollection<AbstractPort
+attributes
+operations
+end
+
+class PortId<NamedElement
+attributes
+operations
+end
+
+abstract class Attribute<TypedElement
+attributes
+operations
+end
+
+class BasicAttribute<Attribute
+attributes
+	defaultValue : String
+operations
+end
+
+class Dictionary<Attribute
+attributes
+operations
+end
+
+class DictionaryDefaultValue
+attributes
+	key : String
+	value : String
+operations
+end
+
+abstract class ComponentImplementation
+attributes
+operations
+end
+
+class FractalComponent<ComponentImplementation
+attributes
+	controllerDesc : String
+	contentDesc : String
+operations
+end
+
+class OSGiComponent<ComponentImplementation
+attributes
+	implementingClass : String
+operations
+end
+
+abstract class TypeImplementation
+attributes
+operations
+end
+
+class OSGiType<TypeImplementation
+attributes
+	generateInstanceBundle : Boolean
+operations
+end
+
+abstract class Group<NamedElement
+attributes
+operations
+end
+
+class TypeGroup<Group
+attributes
+operations
+end
+
+class InstanceGroup<Group
+attributes
+operations
+end
+
+composition xxx_System_root between
+	System[*] role xxx_System_root_src
+	CompositeInstance[1] role root
+end
+
+composition xxx_System_services between
+	System[0..1] role xxx_System_services_src
+	Service[*] role services
+end
+
+composition xxx_System_types between
+	System[0..1] role xxx_System_types_src
+	ComponentType[*] role types
+end
+
+composition xxx_System_dataTypes between
+	System[0..1] role xxx_System_dataTypes_src
+	DataType[*] role dataTypes
+end
+
+composition xxx_System_groups between
+	System[0..1] role xxx_System_groups_src
+	Group[*] role groups
+end
+
+association xxx_TypedElement_type between
+	TypedElement[*] role xxx_TypedElement_type_src
+	DataType[1] role type
+end
+
+association xxx_ComponentInstance_type between
+	ComponentInstance[*] role xxx_ComponentInstance_type_src
+	ComponentType[1] role type
+end
+
+association xxx_ComponentInstance_superComponent between
+	ComponentInstance[*] role xxx_ComponentInstance_superComponent_src
+	CompositeInstance[0..1] role superComponent
+end
+
+composition xxx_ComponentInstance_attribute between
+	ComponentInstance[0..1] role xxx_ComponentInstance_attribute_src
+	AttributeInstance[*] role attribute
+end
+
+composition xxx_ComponentInstance_binding between
+	ComponentInstance[0..1] role xxx_ComponentInstance_binding_src
+	TransmissionBinding[*] role binding
+end
+
+composition xxx_ComponentInstance_implem between
+	ComponentInstance[*] role xxx_ComponentInstance_implem_src
+	ComponentImplementation[0..1] role implem
+end
+
+association xxx_ComponentInstance_groups between
+	ComponentInstance[0..1] role xxx_ComponentInstance_groups_src
+	InstanceGroup[*] role groups
+end
+
+composition xxx_CompositeInstance_subComponent between
+	CompositeInstance[0..1] role xxx_CompositeInstance_subComponent_src
+	ComponentInstance[*] role subComponent
+end
+
+composition xxx_CompositeInstance_delegation between
+	CompositeInstance[0..1] role xxx_CompositeInstance_delegation_src
+	DelegationBinding[*] role delegation
+end
+
+association xxx_Binding_serverInstance between
+	Binding[*] role xxx_Binding_serverInstance_src
+	ComponentInstance[1] role serverInstance
+end
+
+association xxx_TransmissionBinding_client between
+	TransmissionBinding[*] role xxx_TransmissionBinding_client_src
+	AbstractPort[1] role client
+end
+
+association xxx_TransmissionBinding_server between
+	TransmissionBinding[*] role xxx_TransmissionBinding_server_src
+	AbstractPort[1] role server
+end
+
+association xxx_DelegationBinding_source between
+	DelegationBinding[*] role xxx_DelegationBinding_source_src
+	AbstractPort[1] role source
+end
+
+association xxx_DelegationBinding_exported between
+	DelegationBinding[*] role xxx_DelegationBinding_exported_src
+	AbstractPort[1] role exported
+end
+
+association xxx_ValuedAttribute_attribute between
+	ValuedAttribute[*] role xxx_ValuedAttribute_attribute_src
+	BasicAttribute[1] role attribute
+end
+
+composition xxx_DictionaryValuedAttribute_entries between
+	DictionaryValuedAttribute[0..1] role xxx_DictionaryValuedAttribute_entries_src
+	Entry[*] role entries
+end
+
+association xxx_DictionaryValuedAttribute_attribute between
+	DictionaryValuedAttribute[*] role xxx_DictionaryValuedAttribute_attribute_src
+	Dictionary[1] role attribute
+end
+
+association xxx_DefaultEntry_key between
+	DefaultEntry[*] role xxx_DefaultEntry_key_src
+	DictionaryDefaultValue[1] role key
+end
+
+composition xxx_ComponentType_port between
+	ComponentType[0..1] role xxx_ComponentType_port_src
+	AbstractPort[*] role port
+end
+
+composition xxx_ComponentType_attribute between
+	ComponentType[0..1] role xxx_ComponentType_attribute_src
+	Attribute[*] role attribute
+end
+
+association xxx_ComponentType_groups between
+	ComponentType[0..1] role xxx_ComponentType_groups_src
+	TypeGroup[*] role groups
+end
+
+composition xxx_ComponentType_implem between
+	ComponentType[*] role xxx_ComponentType_implem_src
+	TypeImplementation[0..1] role implem
+end
+
+composition xxx_Service_operation between
+	Service[0..1] role xxx_Service_operation_src
+	Operation[*] role operation
+end
+
+composition xxx_Operation_input between
+	Operation[0..1] role xxx_Operation_input_src
+	Parameter[*] role input
+end
+
+composition xxx_Operation_output between
+	Operation[0..1] role xxx_Operation_output_src
+	Parameter[*] role output
+end
+
+association xxx_AbstractPort_service between
+	AbstractPort[*] role xxx_AbstractPort_service_src
+	Service[1] role service
+end
+
+composition xxx_PortCollection_ids between
+	PortCollection[0..1] role xxx_PortCollection_ids_src
+	PortId[1..*] role ids
+end
+
+association xxx_Dictionary_valueType between
+	Dictionary[*] role xxx_Dictionary_valueType_src
+	DataType[1] role valueType
+end
+
+composition xxx_Dictionary_keys between
+	Dictionary[0..1] role xxx_Dictionary_keys_src
+	DictionaryDefaultValue[*] role keys
+end
+
+association xxx_TypeGroup_types between
+	TypeGroup[0..1] role xxx_TypeGroup_types_src
+	ComponentType[*] role types
+end
+
+composition xxx_TypeGroup_subGroups between
+	TypeGroup[0..1] role xxx_TypeGroup_subGroups_src
+	TypeGroup[*] role subGroups
+end
+
+association xxx_InstanceGroup_instances between
+	InstanceGroup[0..1] role xxx_InstanceGroup_instances_src
+	ComponentInstance[*] role instances
+end
+
+composition xxx_InstanceGroup_subGroups between
+	InstanceGroup[0..1] role xxx_InstanceGroup_subGroups_src
+	InstanceGroup[*] role subGroups
+end
+

@@ -1,0 +1,51 @@
+model DeploymentsReq
+abstract class Classifier
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Operation
+attributes
+operations
+end
+
+class Property
+attributes
+operations
+end
+
+class Abstraction
+attributes
+operations
+end
+
+class PackageableElement
+attributes
+operations
+end
+
+abstract class Class
+attributes
+operations
+end
+
+class Association
+attributes
+operations
+end
+
+class InstanceSpecification
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+

@@ -1,0 +1,203 @@
+model XPath
+abstract class LocatedElement
+attributes
+	location : String
+	commentsBefore : String
+	commentsAfter : String
+operations
+end
+
+abstract class NamedElement<LocatedElement
+attributes
+	name : String
+operations
+end
+
+abstract class Expression<LocatedElement
+attributes
+operations
+end
+
+class VariableExp<Expression,NamedElement
+attributes
+operations
+end
+
+class PathExpression<Expression
+attributes
+	isAbsolute : Boolean
+operations
+end
+
+class Step<LocatedElement
+attributes
+operations
+end
+
+class Predicate<LocatedElement
+attributes
+operations
+end
+
+class OperatorCallExp<Expression,NamedElement
+attributes
+operations
+end
+
+class FunctionCallExp<Expression,NamedElement
+attributes
+operations
+end
+
+abstract class LiteralExp<Expression
+attributes
+operations
+end
+
+class IntegerExp<LiteralExp
+attributes
+	symbol : Integer
+operations
+end
+
+class StringExp<LiteralExp
+attributes
+	symbol : String
+operations
+end
+
+abstract class NodeTest<LocatedElement
+attributes
+operations
+end
+
+class NameTest<NodeTest,NamedElement
+attributes
+operations
+end
+
+class WildCardTest<NodeTest
+attributes
+operations
+end
+
+class IsNodeTest<NodeTest
+attributes
+operations
+end
+
+class IsTextTest<NodeTest
+attributes
+operations
+end
+
+abstract class Axis<LocatedElement
+attributes
+operations
+end
+
+class AncestorAxis<Axis
+attributes
+operations
+end
+
+class AncestorOrSelfAxis<Axis
+attributes
+operations
+end
+
+class AttributeAxis<Axis
+attributes
+operations
+end
+
+class ChildAxis<Axis
+attributes
+operations
+end
+
+class DescendantAxis<Axis
+attributes
+operations
+end
+
+class DescendantOrSelfAxis<Axis
+attributes
+operations
+end
+
+class FollowingAxis<Axis
+attributes
+operations
+end
+
+class FollowingSiblingAxis<Axis
+attributes
+operations
+end
+
+class NamespaceAxis<Axis
+attributes
+operations
+end
+
+class ParentAxis<Axis
+attributes
+operations
+end
+
+class PrecedingAxis<Axis
+attributes
+operations
+end
+
+class PrecedingSiblingAxis<Axis
+attributes
+operations
+end
+
+class SelfAxis<Axis
+attributes
+operations
+end
+
+composition xxx_PathExpression_steps between
+	PathExpression[0..1] role xxx_PathExpression_steps_src
+	Step[*] role steps
+end
+
+composition xxx_Step_axis between
+	Step[*] role xxx_Step_axis_src
+	Axis[1] role axis
+end
+
+composition xxx_Step_nodeTest between
+	Step[*] role xxx_Step_nodeTest_src
+	NodeTest[1] role nodeTest
+end
+
+composition xxx_Step_predicates between
+	Step[0..1] role xxx_Step_predicates_src
+	Predicate[*] role predicates
+end
+
+composition xxx_Predicate_expression between
+	Predicate[*] role xxx_Predicate_expression_src
+	Expression[1] role expression
+end
+
+composition xxx_OperatorCallExp_left between
+	OperatorCallExp[*] role xxx_OperatorCallExp_left_src
+	Expression[1] role left
+end
+
+composition xxx_OperatorCallExp_right between
+	OperatorCallExp[*] role xxx_OperatorCallExp_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_FunctionCallExp_arguments between
+	FunctionCallExp[0..1] role xxx_FunctionCallExp_arguments_src
+	Expression[*] role arguments
+end
+

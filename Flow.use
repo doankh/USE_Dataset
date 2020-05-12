@@ -1,0 +1,264 @@
+model flow
+enum PoweredStatus{
+default
+}
+
+enum FlowElementStatus{
+default
+}
+
+enum FlowElementUsage{
+default
+}
+
+class StateProcessor<Processor
+attributes
+operations
+end
+
+class Fork
+attributes
+operations
+end
+
+abstract class AbstractState
+attributes
+operations
+end
+
+class Processor<FlowTarget,CapacityBound,FlowSource,Powered
+attributes
+	name : String
+	volume : Integer
+	weight : Integer
+operations
+end
+
+class Fan<FlowElement,Powered
+attributes
+	speed : Integer
+	weight : Integer
+operations
+end
+
+class Physical
+attributes
+operations
+end
+
+class CompositeProcessor<System,FlowTarget,CapacityBound,FlowSource
+attributes
+operations
+end
+
+class DataFlow<CapacityBound
+attributes
+operations
+end
+
+class CapacityBound<FlowElement
+attributes
+	capacity : Integer
+	load : Integer
+operations
+end
+
+class System<Powered
+attributes
+	name : String
+	temperature : Integer
+	weight : Integer
+operations
+end
+
+class PowerOutput
+attributes
+	power : Integer
+operations
+end
+
+abstract class Powered
+attributes
+	consumption : Integer
+	powerStatus : PoweredStatus
+operations
+end
+
+class PowerInput
+attributes
+operations
+end
+
+class PowerLink
+attributes
+operations
+end
+
+abstract class FlowSource<FlowElement
+attributes
+operations
+end
+
+abstract class FlowTarget<FlowElement
+attributes
+operations
+end
+
+class DataSource<FlowSource
+attributes
+	volume : Integer
+	name : String
+operations
+end
+
+class State<AbstractState
+attributes
+	name : String
+operations
+end
+
+class ComputationResult<FlowSource
+attributes
+operations
+end
+
+class Event
+attributes
+	name : String
+operations
+end
+
+class Operation
+attributes
+	volume : Integer
+	name : String
+operations
+end
+
+abstract class FlowElement
+attributes
+	status : FlowElementStatus
+	usage : FlowElementUsage
+operations
+end
+
+composition xxx_StateProcessor_outputs between
+	StateProcessor[0..1] role xxx_StateProcessor_outputs_src
+	ComputationResult[*] role outputs
+end
+
+composition xxx_StateProcessor_states_ between
+	StateProcessor[0..1] role xxx_StateProcessor_states__src
+	AbstractState[*] role states_
+end
+
+association xxx_StateProcessor_current between
+	StateProcessor[*] role xxx_StateProcessor_current_src
+	State[0..1] role current
+end
+
+association xxx_StateProcessor_first between
+	StateProcessor[*] role xxx_StateProcessor_first_src
+	State[0..1] role first
+end
+
+composition xxx_StateProcessor_events between
+	StateProcessor[0..1] role xxx_StateProcessor_events_src
+	Event[*] role events
+end
+
+composition xxx_StateProcessor_operations_ between
+	StateProcessor[0..1] role xxx_StateProcessor_operations__src
+	Operation[*] role operations_
+end
+
+association xxx_Fork_next between
+	Fork[0..1] role xxx_Fork_next_src
+	State[1..*] role next
+end
+
+association xxx_DataFlow_target between
+	DataFlow[*] role xxx_DataFlow_target_src
+	FlowTarget[1] role target
+end
+
+association xxx_DataFlow_source between
+	DataFlow[*] role xxx_DataFlow_source_src
+	FlowSource[1] role source
+end
+
+composition xxx_System_flows between
+	System[0..1] role xxx_System_flows_src
+	DataFlow[*] role flows
+end
+
+composition xxx_System_elements between
+	System[0..1] role xxx_System_elements_src
+	FlowElement[*] role elements
+end
+
+composition xxx_System_powerOutputs between
+	System[0..1] role xxx_System_powerOutputs_src
+	PowerOutput[*] role powerOutputs
+end
+
+composition xxx_System_powerInputs between
+	System[0..1] role xxx_System_powerInputs_src
+	PowerInput[*] role powerInputs
+end
+
+composition xxx_PowerOutput_links between
+	PowerOutput[0..1] role xxx_PowerOutput_links_src
+	PowerLink[*] role links
+end
+
+association xxx_PowerLink_target between
+	PowerLink[*] role xxx_PowerLink_target_src
+	PowerInput[0..1] role target
+end
+
+association xxx_PowerLink_source between
+	PowerLink[*] role xxx_PowerLink_source_src
+	PowerOutput[0..1] role source
+end
+
+composition xxx_FlowSource_outgoingFlows between
+	FlowSource[0..1] role xxx_FlowSource_outgoingFlows_src
+	DataFlow[*] role outgoingFlows
+end
+
+association xxx_FlowTarget_incomingFlows between
+	FlowTarget[0..1] role xxx_FlowTarget_incomingFlows_src
+	DataFlow[*] role incomingFlows
+end
+
+association xxx_State_catches between
+	State[0..1] role xxx_State_catches_src
+	Event[*] role catches
+end
+
+association xxx_State_execute between
+	State[0..1] role xxx_State_execute_src
+	Operation[*] role execute
+end
+
+association xxx_State_next between
+	State[*] role xxx_State_next_src
+	State[1] role next
+end
+
+association xxx_Event_next between
+	Event[*] role xxx_Event_next_src
+	State[1] role next
+end
+
+association xxx_Operation_output between
+	Operation[*] role xxx_Operation_output_src
+	ComputationResult[1] role output
+end
+
+association xxx_Operation_calledBy between
+	Operation[0..1] role xxx_Operation_calledBy_src
+	State[*] role calledBy
+end
+

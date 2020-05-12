@@ -1,0 +1,2123 @@
+model XHTML
+enum Shape{
+	rect,
+	circle,
+	poly,
+	default
+}
+
+enum Direction{
+	ltr,
+	rtl
+}
+
+enum ValueType{
+	data,
+	ref,
+	object
+}
+
+enum FomeMethod{
+	get,
+	post_
+}
+
+enum InputType{
+	text,
+	password,
+	checkbox,
+	radio,
+	submit,
+	reset,
+	file,
+	hidden,
+	image,
+	button
+}
+
+enum ButtonType{
+	button,
+	submit,
+	reset
+}
+
+enum TFrame{
+	void,
+	above,
+	below,
+	hsides,
+	lhs,
+	rhs,
+	vsides,
+	box,
+	border
+}
+
+enum TRules{
+	none,
+	groups,
+	rows,
+	cols,
+	all
+}
+
+enum CellHAlign{
+	left,
+	center,
+	right,
+	justify,
+	char
+}
+
+enum CellVAlign{
+	top,
+	middle,
+	bottom,
+	baseline
+}
+
+enum Scope{
+	row,
+	col,
+	rowgroup,
+	colgroup
+}
+
+abstract class ValuedElement
+attributes
+	value : String
+operations
+end
+
+class CDATA<ValuedElement
+attributes
+operations
+end
+
+class PCDATA<ValuedElement
+attributes
+operations
+end
+
+class NMTOKEN<ValuedElement
+attributes
+operations
+end
+
+class IDREF<ValuedElement
+attributes
+operations
+end
+
+class IDREFS
+attributes
+operations
+end
+
+class ID<ValuedElement
+attributes
+operations
+end
+
+class EMPTY
+attributes
+operations
+end
+
+class ContentType<CDATA
+attributes
+operations
+end
+
+class ContentTypes
+attributes
+operations
+end
+
+class Charset<CDATA
+attributes
+operations
+end
+
+class Charsets
+attributes
+operations
+end
+
+class LanguageCode<NMTOKEN
+attributes
+operations
+end
+
+class Character<CDATA
+attributes
+operations
+end
+
+class Number<CDATA
+attributes
+operations
+end
+
+class LinkTypes<CDATA
+attributes
+operations
+end
+
+class MediaDesc<CDATA
+attributes
+operations
+end
+
+class URI<CDATA
+attributes
+operations
+end
+
+class UriList
+attributes
+operations
+end
+
+class Datetime<CDATA
+attributes
+operations
+end
+
+class ScriptExpression<CDATA
+attributes
+operations
+end
+
+class StyleSheet<CDATA
+attributes
+operations
+end
+
+class Text<CDATA
+attributes
+operations
+end
+
+class Length<CDATA
+attributes
+operations
+end
+
+class MultiLength<CDATA
+attributes
+operations
+end
+
+class Pixels<CDATA
+attributes
+operations
+end
+
+class Coords
+attributes
+operations
+end
+
+abstract class CoreAttrs
+attributes
+operations
+end
+
+abstract class I18n
+attributes
+	dir : Direction
+operations
+end
+
+abstract class Events
+attributes
+operations
+end
+
+abstract class Attrs<Events
+attributes
+operations
+end
+
+abstract class Focus
+attributes
+operations
+end
+
+abstract class Specialpre<PreContent
+attributes
+operations
+end
+
+abstract class Special<ButtonContent
+attributes
+operations
+end
+
+abstract class Fontstyle<ButtonContent
+attributes
+operations
+end
+
+abstract class Phrase<ButtonContent
+attributes
+operations
+end
+
+abstract class Inlineforms<PreContent
+attributes
+operations
+end
+
+abstract class Miscinline<PreContent
+attributes
+operations
+end
+
+abstract class Misc<FieldsetElement
+attributes
+operations
+end
+
+abstract class inline<Inline
+attributes
+operations
+end
+
+abstract class Inline<FieldsetElement
+attributes
+operations
+end
+
+abstract class Heading<ButtonContent
+attributes
+operations
+end
+
+abstract class Lists<ButtonContent
+attributes
+operations
+end
+
+abstract class Blocktext<ButtonContent
+attributes
+operations
+end
+
+abstract class block<FieldsetElement
+attributes
+operations
+end
+
+abstract class Block
+attributes
+operations
+end
+
+abstract class Flow
+attributes
+operations
+end
+
+abstract class AContent
+attributes
+operations
+end
+
+abstract class PreContent
+attributes
+operations
+end
+
+abstract class FormContent
+attributes
+operations
+end
+
+abstract class ButtonContent
+attributes
+operations
+end
+
+class Html
+attributes
+operations
+end
+
+abstract class HeadMisc
+attributes
+operations
+end
+
+class Head
+attributes
+operations
+end
+
+abstract class HeadElement
+attributes
+operations
+end
+
+class TitleHeadElement<HeadElement
+attributes
+operations
+end
+
+class BaseTitleHeadElement
+attributes
+operations
+end
+
+class BaseHeadElement<HeadElement
+attributes
+operations
+end
+
+class TitleBaseHeadElement
+attributes
+operations
+end
+
+class Title<PCDATA
+attributes
+operations
+end
+
+class Base<EMPTY
+attributes
+operations
+end
+
+class Meta<HeadMisc
+attributes
+operations
+end
+
+class Link<HeadMisc
+attributes
+operations
+end
+
+class Style<HeadMisc
+attributes
+	xml_space : String
+operations
+end
+
+class Script<HeadMisc
+attributes
+	defer : String
+	xml_space : String
+operations
+end
+
+class Noscript<Misc
+attributes
+operations
+end
+
+class Body<Attrs
+attributes
+operations
+end
+
+class Div<ButtonContent
+attributes
+operations
+end
+
+class P<ButtonContent
+attributes
+operations
+end
+
+class H1<Heading
+attributes
+operations
+end
+
+class H2<Heading
+attributes
+operations
+end
+
+class H3<Heading
+attributes
+operations
+end
+
+class H4<Heading
+attributes
+operations
+end
+
+class H5<Heading
+attributes
+operations
+end
+
+class H6<Heading
+attributes
+operations
+end
+
+class Ul<Lists
+attributes
+operations
+end
+
+class Ol<Lists
+attributes
+operations
+end
+
+class Li<Attrs
+attributes
+operations
+end
+
+class Dl<Lists
+attributes
+operations
+end
+
+abstract class DlElement<Attrs
+attributes
+operations
+end
+
+class Dt<DlElement
+attributes
+operations
+end
+
+class Dd<DlElement
+attributes
+operations
+end
+
+class Address<Blocktext
+attributes
+operations
+end
+
+class Hr<Blocktext
+attributes
+operations
+end
+
+class Pre<Blocktext
+attributes
+	xml_space : String
+operations
+end
+
+class Blockquote<Blocktext
+attributes
+operations
+end
+
+class Ins<Miscinline
+attributes
+operations
+end
+
+class Del<Miscinline
+attributes
+operations
+end
+
+class A<PreContent
+attributes
+	shape : Shape
+operations
+end
+
+class Span<Specialpre
+attributes
+operations
+end
+
+class Bdo<Specialpre
+attributes
+	dir : Direction
+operations
+end
+
+class Br<Specialpre
+attributes
+operations
+end
+
+class Em<Phrase
+attributes
+operations
+end
+
+class Strong<Phrase
+attributes
+operations
+end
+
+class Dfn<Phrase
+attributes
+operations
+end
+
+class Code<Phrase
+attributes
+operations
+end
+
+class Samp<Phrase
+attributes
+operations
+end
+
+class Kbd<Phrase
+attributes
+operations
+end
+
+class Var<Phrase
+attributes
+operations
+end
+
+class Cite<Phrase
+attributes
+operations
+end
+
+class Abbr<Phrase
+attributes
+operations
+end
+
+class Acronym<Phrase
+attributes
+operations
+end
+
+class Q<Phrase
+attributes
+operations
+end
+
+class Sub<Phrase
+attributes
+operations
+end
+
+class Sup<Phrase
+attributes
+operations
+end
+
+class Tt<Fontstyle
+attributes
+operations
+end
+
+class I<Fontstyle
+attributes
+operations
+end
+
+class B<Fontstyle
+attributes
+operations
+end
+
+class Big<Fontstyle
+attributes
+operations
+end
+
+class Small<Fontstyle
+attributes
+operations
+end
+
+abstract class ObjectElement
+attributes
+operations
+end
+
+class Object<HeadMisc
+attributes
+	declare_ : Boolean
+operations
+end
+
+class Param<ObjectElement
+attributes
+	valuetype : ValueType
+operations
+end
+
+class Img<Special
+attributes
+	ismap : Boolean
+operations
+end
+
+class MapContent
+attributes
+operations
+end
+
+abstract class MapElement
+attributes
+operations
+end
+
+abstract class MapElementContent
+attributes
+operations
+end
+
+class Map<Specialpre
+attributes
+operations
+end
+
+class Area<MapElement
+attributes
+	shape : Shape
+	nohref : Boolean
+operations
+end
+
+class Form<FieldsetElement
+attributes
+	method : FomeMethod
+operations
+end
+
+class Label<Inlineforms
+attributes
+operations
+end
+
+class Input<Inlineforms
+attributes
+	type : InputType
+	checked : Boolean
+	disabled : Boolean
+	readonly : Boolean
+operations
+end
+
+class Select<Inlineforms
+attributes
+	multiple : Boolean
+	disabled : Boolean
+operations
+end
+
+abstract class SelectElement
+attributes
+operations
+end
+
+class Optgroup<Attrs
+attributes
+	disabled : Boolean
+operations
+end
+
+class Option<Attrs
+attributes
+	selected : Boolean
+	disabled : Boolean
+operations
+end
+
+class Textarea<Inlineforms
+attributes
+	disabled : Boolean
+	readonly : Boolean
+operations
+end
+
+abstract class FieldsetElement
+attributes
+operations
+end
+
+class Fieldset<block
+attributes
+operations
+end
+
+class Legend<FieldsetElement
+attributes
+operations
+end
+
+class Button<Inlineforms
+attributes
+	type : ButtonType
+	disabled : Boolean
+operations
+end
+
+abstract class Cellhalign
+attributes
+	align : CellHAlign
+operations
+end
+
+abstract class Cellvalign
+attributes
+	valign : CellVAlign
+operations
+end
+
+class Table<ButtonContent
+attributes
+	frame : TFrame
+	rules : TRules
+operations
+end
+
+class ColElement
+attributes
+operations
+end
+
+class TableElement
+attributes
+operations
+end
+
+class Caption<Attrs
+attributes
+operations
+end
+
+class Thead<Cellvalign
+attributes
+operations
+end
+
+class Tfoot<Cellvalign
+attributes
+operations
+end
+
+class Tbody<Cellvalign
+attributes
+operations
+end
+
+class Colgroup<Cellvalign
+attributes
+operations
+end
+
+class Col<Cellvalign
+attributes
+operations
+end
+
+class Tr<Cellvalign
+attributes
+operations
+end
+
+abstract class TrElement
+attributes
+operations
+end
+
+class Th<Cellhalign
+attributes
+	scope : Scope
+operations
+end
+
+class Td<Cellhalign
+attributes
+	scope : Scope
+operations
+end
+
+association xxx_IDREFS_idrefs between
+	IDREFS[0..1] role xxx_IDREFS_idrefs_src
+	IDREF[*] role idrefs
+end
+
+composition xxx_ContentTypes_contentTypes between
+	ContentTypes[0..1] role xxx_ContentTypes_contentTypes_src
+	ContentType[2..*] role contentTypes
+end
+
+composition xxx_Charsets_charsets between
+	Charsets[0..1] role xxx_Charsets_charsets_src
+	Charset[2..*] role charsets
+end
+
+association xxx_UriList_uris between
+	UriList[0..1] role xxx_UriList_uris_src
+	URI[2..*] role uris
+end
+
+composition xxx_Coords_lengths between
+	Coords[0..1] role xxx_Coords_lengths_src
+	Length[2..*] role lengths
+end
+
+composition xxx_CoreAttrs_id between
+	CoreAttrs[*] role xxx_CoreAttrs_id_src
+	ID[0..1] role id
+end
+
+composition xxx_CoreAttrs_class_ between
+	CoreAttrs[*] role xxx_CoreAttrs_class__src
+	CDATA[0..1] role class_
+end
+
+composition xxx_CoreAttrs_style between
+	CoreAttrs[*] role xxx_CoreAttrs_style_src
+	StyleSheet[0..1] role style
+end
+
+composition xxx_CoreAttrs_title between
+	CoreAttrs[*] role xxx_CoreAttrs_title_src
+	Text[0..1] role title
+end
+
+composition xxx_I18n_lang between
+	I18n[*] role xxx_I18n_lang_src
+	LanguageCode[0..1] role lang
+end
+
+composition xxx_I18n_xml_lang between
+	I18n[*] role xxx_I18n_xml_lang_src
+	LanguageCode[0..1] role xml_lang
+end
+
+composition xxx_Events_onclick between
+	Events[*] role xxx_Events_onclick_src
+	ScriptExpression[0..1] role onclick
+end
+
+composition xxx_Events_ondblclick between
+	Events[*] role xxx_Events_ondblclick_src
+	ScriptExpression[0..1] role ondblclick
+end
+
+composition xxx_Events_onmousedown between
+	Events[*] role xxx_Events_onmousedown_src
+	ScriptExpression[0..1] role onmousedown
+end
+
+composition xxx_Events_onmouseup between
+	Events[*] role xxx_Events_onmouseup_src
+	ScriptExpression[0..1] role onmouseup
+end
+
+composition xxx_Events_onmouseover between
+	Events[*] role xxx_Events_onmouseover_src
+	ScriptExpression[0..1] role onmouseover
+end
+
+composition xxx_Events_onmousemove between
+	Events[*] role xxx_Events_onmousemove_src
+	ScriptExpression[0..1] role onmousemove
+end
+
+composition xxx_Events_onmouseout between
+	Events[*] role xxx_Events_onmouseout_src
+	ScriptExpression[0..1] role onmouseout
+end
+
+composition xxx_Events_onkeypress between
+	Events[*] role xxx_Events_onkeypress_src
+	ScriptExpression[0..1] role onkeypress
+end
+
+composition xxx_Events_onkeydown between
+	Events[*] role xxx_Events_onkeydown_src
+	ScriptExpression[0..1] role onkeydown
+end
+
+composition xxx_Events_onkeyup between
+	Events[*] role xxx_Events_onkeyup_src
+	ScriptExpression[0..1] role onkeyup
+end
+
+composition xxx_Focus_accesskey between
+	Focus[*] role xxx_Focus_accesskey_src
+	Character[0..1] role accesskey
+end
+
+composition xxx_Focus_tabindex between
+	Focus[*] role xxx_Focus_tabindex_src
+	Number[0..1] role tabindex
+end
+
+composition xxx_Focus_onfocus between
+	Focus[*] role xxx_Focus_onfocus_src
+	ScriptExpression[0..1] role onfocus
+end
+
+composition xxx_Focus_onblur between
+	Focus[*] role xxx_Focus_onblur_src
+	ScriptExpression[0..1] role onblur
+end
+
+composition xxx_Inline_pcdataInline between
+	Inline[0..1] role xxx_Inline_pcdataInline_src
+	PCDATA[*] role pcdataInline
+end
+
+composition xxx_Flow_pcdataFlow between
+	Flow[0..1] role xxx_Flow_pcdataFlow_src
+	PCDATA[*] role pcdataFlow
+end
+
+composition xxx_AContent_pcdataAContent between
+	AContent[0..1] role xxx_AContent_pcdataAContent_src
+	PCDATA[*] role pcdataAContent
+end
+
+composition xxx_PreContent_pcdataPreContent between
+	PreContent[0..1] role xxx_PreContent_pcdataPreContent_src
+	PCDATA[*] role pcdataPreContent
+end
+
+composition xxx_ButtonContent_pcdataButtonContent between
+	ButtonContent[0..1] role xxx_ButtonContent_pcdataButtonContent_src
+	PCDATA[*] role pcdataButtonContent
+end
+
+composition xxx_Html_i18n between
+	Html[*] role xxx_Html_i18n_src
+	I18n[1] role i18n
+end
+
+composition xxx_Html_id between
+	Html[*] role xxx_Html_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Html_xmlns between
+	Html[*] role xxx_Html_xmlns_src
+	URI[1] role xmlns
+end
+
+composition xxx_Html_head between
+	Html[*] role xxx_Html_head_src
+	Head[1] role head
+end
+
+composition xxx_Html_body between
+	Html[*] role xxx_Html_body_src
+	Body[1] role body
+end
+
+composition xxx_Head_i18n between
+	Head[*] role xxx_Head_i18n_src
+	I18n[1] role i18n
+end
+
+composition xxx_Head_id between
+	Head[*] role xxx_Head_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Head_profile between
+	Head[*] role xxx_Head_profile_src
+	URI[0..1] role profile
+end
+
+composition xxx_Head_headmisc between
+	Head[0..1] role xxx_Head_headmisc_src
+	HeadMisc[*] role headmisc
+end
+
+composition xxx_Head_headelement between
+	Head[*] role xxx_Head_headelement_src
+	HeadElement[1] role headelement
+end
+
+association xxx_Head_html between
+	Head[*] role xxx_Head_html_src
+	Html[1] role html
+end
+
+composition xxx_TitleHeadElement_title between
+	TitleHeadElement[*] role xxx_TitleHeadElement_title_src
+	Title[1] role title
+end
+
+composition xxx_TitleHeadElement_headmisc between
+	TitleHeadElement[0..1] role xxx_TitleHeadElement_headmisc_src
+	HeadMisc[*] role headmisc
+end
+
+composition xxx_TitleHeadElement_baseTitleHeadElement between
+	TitleHeadElement[0..1] role xxx_TitleHeadElement_baseTitleHeadElement_src
+	BaseTitleHeadElement[1..*] role baseTitleHeadElement
+end
+
+composition xxx_BaseTitleHeadElement_base between
+	BaseTitleHeadElement[*] role xxx_BaseTitleHeadElement_base_src
+	Base[1] role base
+end
+
+composition xxx_BaseTitleHeadElement_headmisc between
+	BaseTitleHeadElement[0..1] role xxx_BaseTitleHeadElement_headmisc_src
+	HeadMisc[*] role headmisc
+end
+
+composition xxx_BaseHeadElement_base between
+	BaseHeadElement[*] role xxx_BaseHeadElement_base_src
+	Base[1] role base
+end
+
+composition xxx_BaseHeadElement_headmisc between
+	BaseHeadElement[0..1] role xxx_BaseHeadElement_headmisc_src
+	HeadMisc[*] role headmisc
+end
+
+composition xxx_BaseHeadElement_titleBaseHeadElement between
+	BaseHeadElement[0..1] role xxx_BaseHeadElement_titleBaseHeadElement_src
+	TitleBaseHeadElement[1..*] role titleBaseHeadElement
+end
+
+composition xxx_TitleBaseHeadElement_title between
+	TitleBaseHeadElement[*] role xxx_TitleBaseHeadElement_title_src
+	Title[1] role title
+end
+
+composition xxx_TitleBaseHeadElement_headmisc between
+	TitleBaseHeadElement[0..1] role xxx_TitleBaseHeadElement_headmisc_src
+	HeadMisc[*] role headmisc
+end
+
+composition xxx_Title_i18n between
+	Title[*] role xxx_Title_i18n_src
+	I18n[1] role i18n
+end
+
+composition xxx_Title_id between
+	Title[*] role xxx_Title_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Base_href between
+	Base[*] role xxx_Base_href_src
+	URI[1] role href
+end
+
+composition xxx_Base_id between
+	Base[*] role xxx_Base_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Meta_i18n between
+	Meta[*] role xxx_Meta_i18n_src
+	I18n[1] role i18n
+end
+
+composition xxx_Meta_id between
+	Meta[*] role xxx_Meta_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Meta_httpequiv between
+	Meta[*] role xxx_Meta_httpequiv_src
+	CDATA[0..1] role httpequiv
+end
+
+composition xxx_Meta_name between
+	Meta[*] role xxx_Meta_name_src
+	CDATA[0..1] role name
+end
+
+composition xxx_Meta_content between
+	Meta[*] role xxx_Meta_content_src
+	CDATA[0..1] role content
+end
+
+composition xxx_Meta_scheme between
+	Meta[*] role xxx_Meta_scheme_src
+	CDATA[0..1] role scheme
+end
+
+composition xxx_Link_charset between
+	Link[*] role xxx_Link_charset_src
+	Charset[0..1] role charset
+end
+
+composition xxx_Link_href between
+	Link[*] role xxx_Link_href_src
+	URI[0..1] role href
+end
+
+composition xxx_Link_hreflang between
+	Link[*] role xxx_Link_hreflang_src
+	LanguageCode[0..1] role hreflang
+end
+
+composition xxx_Link_type between
+	Link[*] role xxx_Link_type_src
+	ContentType[0..1] role type
+end
+
+composition xxx_Link_rel between
+	Link[*] role xxx_Link_rel_src
+	LinkTypes[0..1] role rel
+end
+
+composition xxx_Link_rev between
+	Link[*] role xxx_Link_rev_src
+	LinkTypes[0..1] role rev
+end
+
+composition xxx_Link_media between
+	Link[*] role xxx_Link_media_src
+	MediaDesc[0..1] role media
+end
+
+composition xxx_Style_i18n between
+	Style[*] role xxx_Style_i18n_src
+	I18n[1] role i18n
+end
+
+composition xxx_Style_id between
+	Style[*] role xxx_Style_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Style_type between
+	Style[*] role xxx_Style_type_src
+	ContentType[1] role type
+end
+
+composition xxx_Style_media between
+	Style[*] role xxx_Style_media_src
+	MediaDesc[0..1] role media
+end
+
+composition xxx_Style_title between
+	Style[*] role xxx_Style_title_src
+	Text[0..1] role title
+end
+
+composition xxx_Script_id between
+	Script[*] role xxx_Script_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Script_charset between
+	Script[*] role xxx_Script_charset_src
+	Charset[0..1] role charset
+end
+
+composition xxx_Script_type between
+	Script[*] role xxx_Script_type_src
+	ContentType[1] role type
+end
+
+composition xxx_Script_src between
+	Script[*] role xxx_Script_src_src
+	URI[0..1] role src
+end
+
+composition xxx_Noscript_block between
+	Noscript[*] role xxx_Noscript_block_src
+	Block[1] role block
+end
+
+composition xxx_Body_bodyElements between
+	Body[0..1] role xxx_Body_bodyElements_src
+	Block[*] role bodyElements
+end
+
+composition xxx_Body_onload between
+	Body[*] role xxx_Body_onload_src
+	ScriptExpression[0..1] role onload
+end
+
+composition xxx_Body_onunload between
+	Body[*] role xxx_Body_onunload_src
+	ScriptExpression[0..1] role onunload
+end
+
+association xxx_Body_html between
+	Body[*] role xxx_Body_html_src
+	Html[1] role html
+end
+
+composition xxx_Div_divElements between
+	Div[0..1] role xxx_Div_divElements_src
+	Flow[*] role divElements
+end
+
+composition xxx_P_pElements between
+	P[0..1] role xxx_P_pElements_src
+	Inline[*] role pElements
+end
+
+composition xxx_H1_h1Elements between
+	H1[0..1] role xxx_H1_h1Elements_src
+	Inline[*] role h1Elements
+end
+
+composition xxx_H2_h2Elements between
+	H2[0..1] role xxx_H2_h2Elements_src
+	Inline[*] role h2Elements
+end
+
+composition xxx_H3_h3Elements between
+	H3[0..1] role xxx_H3_h3Elements_src
+	Inline[*] role h3Elements
+end
+
+composition xxx_H4_h4Elements between
+	H4[0..1] role xxx_H4_h4Elements_src
+	Inline[*] role h4Elements
+end
+
+composition xxx_H5_h5Elements between
+	H5[0..1] role xxx_H5_h5Elements_src
+	Inline[*] role h5Elements
+end
+
+composition xxx_H6_h6Elements between
+	H6[0..1] role xxx_H6_h6Elements_src
+	Inline[*] role h6Elements
+end
+
+composition xxx_Ul_li between
+	Ul[0..1] role xxx_Ul_li_src
+	Li[1..*] role li
+end
+
+composition xxx_Ol_li between
+	Ol[0..1] role xxx_Ol_li_src
+	Li[1..*] role li
+end
+
+composition xxx_Li_liElements between
+	Li[0..1] role xxx_Li_liElements_src
+	Flow[*] role liElements
+end
+
+composition xxx_Dl_dlElements between
+	Dl[0..1] role xxx_Dl_dlElements_src
+	DlElement[1..*] role dlElements
+end
+
+composition xxx_Dt_dtElements between
+	Dt[0..1] role xxx_Dt_dtElements_src
+	Inline[*] role dtElements
+end
+
+composition xxx_Dd_ddElements between
+	Dd[0..1] role xxx_Dd_ddElements_src
+	Flow[*] role ddElements
+end
+
+composition xxx_Address_addressElements between
+	Address[0..1] role xxx_Address_addressElements_src
+	Inline[*] role addressElements
+end
+
+composition xxx_Pre_preElements between
+	Pre[0..1] role xxx_Pre_preElements_src
+	PreContent[*] role preElements
+end
+
+composition xxx_Blockquote_blockquoteElements between
+	Blockquote[0..1] role xxx_Blockquote_blockquoteElements_src
+	Block[*] role blockquoteElements
+end
+
+composition xxx_Blockquote_cite between
+	Blockquote[*] role xxx_Blockquote_cite_src
+	URI[0..1] role cite
+end
+
+composition xxx_Ins_flowelement between
+	Ins[0..1] role xxx_Ins_flowelement_src
+	Flow[*] role flowelement
+end
+
+composition xxx_Ins_cite between
+	Ins[*] role xxx_Ins_cite_src
+	URI[0..1] role cite
+end
+
+composition xxx_Ins_datetime between
+	Ins[*] role xxx_Ins_datetime_src
+	Datetime[0..1] role datetime
+end
+
+composition xxx_Del_flowelement between
+	Del[0..1] role xxx_Del_flowelement_src
+	Flow[*] role flowelement
+end
+
+composition xxx_Del_cite between
+	Del[*] role xxx_Del_cite_src
+	URI[0..1] role cite
+end
+
+composition xxx_Del_datetime between
+	Del[*] role xxx_Del_datetime_src
+	Datetime[0..1] role datetime
+end
+
+composition xxx_A_acontent between
+	A[0..1] role xxx_A_acontent_src
+	AContent[*] role acontent
+end
+
+composition xxx_A_charset between
+	A[*] role xxx_A_charset_src
+	Charset[0..1] role charset
+end
+
+composition xxx_A_type between
+	A[*] role xxx_A_type_src
+	ContentType[0..1] role type
+end
+
+composition xxx_A_name between
+	A[*] role xxx_A_name_src
+	NMTOKEN[0..1] role name
+end
+
+composition xxx_A_href between
+	A[*] role xxx_A_href_src
+	URI[0..1] role href
+end
+
+composition xxx_A_hreflang between
+	A[*] role xxx_A_hreflang_src
+	LanguageCode[0..1] role hreflang
+end
+
+composition xxx_A_rel between
+	A[*] role xxx_A_rel_src
+	LinkTypes[0..1] role rel
+end
+
+composition xxx_A_rev between
+	A[*] role xxx_A_rev_src
+	LinkTypes[0..1] role rev
+end
+
+composition xxx_A_coords between
+	A[*] role xxx_A_coords_src
+	Coords[0..1] role coords
+end
+
+association xxx_Span_spanElements between
+	Span[0..1] role xxx_Span_spanElements_src
+	Inline[*] role spanElements
+end
+
+composition xxx_Bdo_bdoElements between
+	Bdo[0..1] role xxx_Bdo_bdoElements_src
+	Inline[*] role bdoElements
+end
+
+composition xxx_Bdo_lang between
+	Bdo[*] role xxx_Bdo_lang_src
+	LanguageCode[0..1] role lang
+end
+
+composition xxx_Bdo_xml_lang between
+	Bdo[*] role xxx_Bdo_xml_lang_src
+	LanguageCode[0..1] role xml_lang
+end
+
+composition xxx_Em_emElements between
+	Em[0..1] role xxx_Em_emElements_src
+	Inline[*] role emElements
+end
+
+composition xxx_Strong_strongElements between
+	Strong[0..1] role xxx_Strong_strongElements_src
+	Inline[*] role strongElements
+end
+
+composition xxx_Dfn_dfnElements between
+	Dfn[0..1] role xxx_Dfn_dfnElements_src
+	Inline[*] role dfnElements
+end
+
+composition xxx_Code_codeElements between
+	Code[0..1] role xxx_Code_codeElements_src
+	Inline[*] role codeElements
+end
+
+composition xxx_Samp_sampElements between
+	Samp[0..1] role xxx_Samp_sampElements_src
+	Inline[*] role sampElements
+end
+
+composition xxx_Kbd_kbdElements between
+	Kbd[0..1] role xxx_Kbd_kbdElements_src
+	Inline[*] role kbdElements
+end
+
+composition xxx_Var_varElements between
+	Var[0..1] role xxx_Var_varElements_src
+	Inline[*] role varElements
+end
+
+composition xxx_Cite_citeElements between
+	Cite[0..1] role xxx_Cite_citeElements_src
+	Inline[*] role citeElements
+end
+
+composition xxx_Abbr_abbrElements between
+	Abbr[0..1] role xxx_Abbr_abbrElements_src
+	Inline[*] role abbrElements
+end
+
+composition xxx_Acronym_acronymElements between
+	Acronym[0..1] role xxx_Acronym_acronymElements_src
+	Inline[*] role acronymElements
+end
+
+composition xxx_Q_qElements between
+	Q[0..1] role xxx_Q_qElements_src
+	Inline[*] role qElements
+end
+
+composition xxx_Q_cite between
+	Q[*] role xxx_Q_cite_src
+	URI[0..1] role cite
+end
+
+composition xxx_Sub_subElements between
+	Sub[0..1] role xxx_Sub_subElements_src
+	Inline[*] role subElements
+end
+
+composition xxx_Sup_supElements between
+	Sup[0..1] role xxx_Sup_supElements_src
+	Inline[*] role supElements
+end
+
+composition xxx_Tt_ttElements between
+	Tt[0..1] role xxx_Tt_ttElements_src
+	Inline[*] role ttElements
+end
+
+composition xxx_I_iElements between
+	I[0..1] role xxx_I_iElements_src
+	Inline[*] role iElements
+end
+
+composition xxx_B_bElements between
+	B[0..1] role xxx_B_bElements_src
+	Inline[*] role bElements
+end
+
+composition xxx_Big_bigElements between
+	Big[0..1] role xxx_Big_bigElements_src
+	Inline[*] role bigElements
+end
+
+composition xxx_Small_smallElements between
+	Small[0..1] role xxx_Small_smallElements_src
+	Inline[*] role smallElements
+end
+
+composition xxx_ObjectElement_objectpcdata between
+	ObjectElement[0..1] role xxx_ObjectElement_objectpcdata_src
+	PCDATA[*] role objectpcdata
+end
+
+composition xxx_Object_objectelement between
+	Object[0..1] role xxx_Object_objectelement_src
+	ObjectElement[*] role objectelement
+end
+
+composition xxx_Object_classid between
+	Object[*] role xxx_Object_classid_src
+	URI[0..1] role classid
+end
+
+composition xxx_Object_codebase between
+	Object[*] role xxx_Object_codebase_src
+	URI[0..1] role codebase
+end
+
+composition xxx_Object_data between
+	Object[*] role xxx_Object_data_src
+	URI[0..1] role data
+end
+
+composition xxx_Object_type between
+	Object[*] role xxx_Object_type_src
+	ContentType[0..1] role type
+end
+
+composition xxx_Object_codetype between
+	Object[*] role xxx_Object_codetype_src
+	ContentType[0..1] role codetype
+end
+
+composition xxx_Object_archive between
+	Object[*] role xxx_Object_archive_src
+	UriList[0..1] role archive
+end
+
+composition xxx_Object_standby between
+	Object[*] role xxx_Object_standby_src
+	Text[0..1] role standby
+end
+
+composition xxx_Object_height between
+	Object[*] role xxx_Object_height_src
+	Length[0..1] role height
+end
+
+composition xxx_Object_width between
+	Object[*] role xxx_Object_width_src
+	Length[0..1] role width
+end
+
+composition xxx_Object_usemap between
+	Object[*] role xxx_Object_usemap_src
+	URI[0..1] role usemap
+end
+
+composition xxx_Object_name between
+	Object[*] role xxx_Object_name_src
+	NMTOKEN[0..1] role name
+end
+
+composition xxx_Object_tabindex between
+	Object[*] role xxx_Object_tabindex_src
+	Number[0..1] role tabindex
+end
+
+composition xxx_Param_id between
+	Param[*] role xxx_Param_id_src
+	ID[0..1] role id
+end
+
+composition xxx_Param_name between
+	Param[*] role xxx_Param_name_src
+	CDATA[0..1] role name
+end
+
+composition xxx_Param_value between
+	Param[*] role xxx_Param_value_src
+	CDATA[0..1] role value
+end
+
+composition xxx_Param_type between
+	Param[*] role xxx_Param_type_src
+	ContentType[0..1] role type
+end
+
+composition xxx_Img_src between
+	Img[*] role xxx_Img_src_src
+	URI[1] role src
+end
+
+composition xxx_Img_alt between
+	Img[*] role xxx_Img_alt_src
+	Text[1] role alt
+end
+
+composition xxx_Img_longdesc between
+	Img[*] role xxx_Img_longdesc_src
+	URI[0..1] role longdesc
+end
+
+composition xxx_Img_height between
+	Img[*] role xxx_Img_height_src
+	Length[0..1] role height
+end
+
+composition xxx_Img_width between
+	Img[*] role xxx_Img_width_src
+	Length[0..1] role width
+end
+
+composition xxx_Img_usemap between
+	Img[*] role xxx_Img_usemap_src
+	URI[0..1] role usemap
+end
+
+composition xxx_MapContent_mapElements between
+	MapContent[0..1] role xxx_MapContent_mapElements_src
+	MapElement[1..*] role mapElements
+end
+
+composition xxx_Map_mapelement between
+	Map[*] role xxx_Map_mapelement_src
+	MapContent[1] role mapelement
+end
+
+composition xxx_Map_id between
+	Map[*] role xxx_Map_id_src
+	ID[1] role id
+end
+
+composition xxx_Map_class_ between
+	Map[*] role xxx_Map_class__src
+	CDATA[0..1] role class_
+end
+
+composition xxx_Map_style between
+	Map[*] role xxx_Map_style_src
+	StyleSheet[0..1] role style
+end
+
+composition xxx_Map_title between
+	Map[*] role xxx_Map_title_src
+	Text[0..1] role title
+end
+
+composition xxx_Map_name between
+	Map[*] role xxx_Map_name_src
+	NMTOKEN[0..1] role name
+end
+
+composition xxx_Area_coords between
+	Area[*] role xxx_Area_coords_src
+	Coords[0..1] role coords
+end
+
+composition xxx_Area_href between
+	Area[*] role xxx_Area_href_src
+	URI[0..1] role href
+end
+
+composition xxx_Area_alt between
+	Area[*] role xxx_Area_alt_src
+	Text[1] role alt
+end
+
+composition xxx_Form_formelement between
+	Form[0..1] role xxx_Form_formelement_src
+	FormContent[*] role formelement
+end
+
+composition xxx_Form_action between
+	Form[*] role xxx_Form_action_src
+	URI[1] role action
+end
+
+composition xxx_Form_enctype between
+	Form[*] role xxx_Form_enctype_src
+	ContentType[1] role enctype
+end
+
+composition xxx_Form_onsubmit between
+	Form[*] role xxx_Form_onsubmit_src
+	ScriptExpression[0..1] role onsubmit
+end
+
+composition xxx_Form_onreset between
+	Form[*] role xxx_Form_onreset_src
+	ScriptExpression[0..1] role onreset
+end
+
+composition xxx_Form_accept between
+	Form[*] role xxx_Form_accept_src
+	ContentTypes[0..1] role accept
+end
+
+composition xxx_Form_accept_charset between
+	Form[*] role xxx_Form_accept_charset_src
+	Charsets[0..1] role accept_charset
+end
+
+composition xxx_Label_labelelements between
+	Label[0..1] role xxx_Label_labelelements_src
+	Inline[*] role labelelements
+end
+
+composition xxx_Label_for_ between
+	Label[*] role xxx_Label_for__src
+	IDREF[1] role for_
+end
+
+composition xxx_Label_accesskey between
+	Label[*] role xxx_Label_accesskey_src
+	Character[0..1] role accesskey
+end
+
+composition xxx_Label_onfocus between
+	Label[*] role xxx_Label_onfocus_src
+	ScriptExpression[0..1] role onfocus
+end
+
+composition xxx_Label_onblur between
+	Label[*] role xxx_Label_onblur_src
+	ScriptExpression[0..1] role onblur
+end
+
+composition xxx_Input_name between
+	Input[*] role xxx_Input_name_src
+	CDATA[0..1] role name
+end
+
+composition xxx_Input_value between
+	Input[*] role xxx_Input_value_src
+	CDATA[0..1] role value
+end
+
+composition xxx_Input_size between
+	Input[*] role xxx_Input_size_src
+	CDATA[0..1] role size
+end
+
+composition xxx_Input_maxlength between
+	Input[*] role xxx_Input_maxlength_src
+	Number[0..1] role maxlength
+end
+
+composition xxx_Input_src between
+	Input[*] role xxx_Input_src_src
+	URI[0..1] role src
+end
+
+composition xxx_Input_alt between
+	Input[*] role xxx_Input_alt_src
+	CDATA[0..1] role alt
+end
+
+composition xxx_Input_usemap between
+	Input[*] role xxx_Input_usemap_src
+	URI[0..1] role usemap
+end
+
+composition xxx_Input_onselect between
+	Input[*] role xxx_Input_onselect_src
+	ScriptExpression[0..1] role onselect
+end
+
+composition xxx_Input_onchange between
+	Input[*] role xxx_Input_onchange_src
+	ScriptExpression[0..1] role onchange
+end
+
+composition xxx_Input_accept between
+	Input[*] role xxx_Input_accept_src
+	ContentTypes[0..1] role accept
+end
+
+composition xxx_Select_selectelement between
+	Select[0..1] role xxx_Select_selectelement_src
+	SelectElement[1..*] role selectelement
+end
+
+composition xxx_Select_name between
+	Select[*] role xxx_Select_name_src
+	CDATA[0..1] role name
+end
+
+composition xxx_Select_size between
+	Select[*] role xxx_Select_size_src
+	Number[0..1] role size
+end
+
+composition xxx_Select_tabindex between
+	Select[*] role xxx_Select_tabindex_src
+	Number[0..1] role tabindex
+end
+
+composition xxx_Select_onfocus between
+	Select[*] role xxx_Select_onfocus_src
+	ScriptExpression[0..1] role onfocus
+end
+
+composition xxx_Select_onblur between
+	Select[*] role xxx_Select_onblur_src
+	ScriptExpression[0..1] role onblur
+end
+
+composition xxx_Select_onchange between
+	Select[*] role xxx_Select_onchange_src
+	ScriptExpression[0..1] role onchange
+end
+
+composition xxx_Optgroup_options between
+	Optgroup[0..1] role xxx_Optgroup_options_src
+	Option[1..*] role options
+end
+
+composition xxx_Optgroup_label between
+	Optgroup[*] role xxx_Optgroup_label_src
+	Text[1] role label
+end
+
+composition xxx_Option_label between
+	Option[*] role xxx_Option_label_src
+	Text[0..1] role label
+end
+
+composition xxx_Option_optionvalue between
+	Option[*] role xxx_Option_optionvalue_src
+	CDATA[0..1] role optionvalue
+end
+
+composition xxx_Textarea_name between
+	Textarea[*] role xxx_Textarea_name_src
+	CDATA[0..1] role name
+end
+
+composition xxx_Textarea_rows between
+	Textarea[*] role xxx_Textarea_rows_src
+	Number[1] role rows
+end
+
+composition xxx_Textarea_cols between
+	Textarea[*] role xxx_Textarea_cols_src
+	Number[1] role cols
+end
+
+composition xxx_Textarea_onselect between
+	Textarea[*] role xxx_Textarea_onselect_src
+	ScriptExpression[0..1] role onselect
+end
+
+composition xxx_Textarea_onchange between
+	Textarea[*] role xxx_Textarea_onchange_src
+	ScriptExpression[0..1] role onchange
+end
+
+composition xxx_FieldsetElement_fieldsetpcdata between
+	FieldsetElement[0..1] role xxx_FieldsetElement_fieldsetpcdata_src
+	PCDATA[*] role fieldsetpcdata
+end
+
+composition xxx_Fieldset_fieldsetelements between
+	Fieldset[0..1] role xxx_Fieldset_fieldsetelements_src
+	FieldsetElement[*] role fieldsetelements
+end
+
+composition xxx_Legend_legendelement between
+	Legend[0..1] role xxx_Legend_legendelement_src
+	Inline[*] role legendelement
+end
+
+composition xxx_Legend_accesskey between
+	Legend[*] role xxx_Legend_accesskey_src
+	Character[0..1] role accesskey
+end
+
+composition xxx_Button_buttoncontent between
+	Button[0..1] role xxx_Button_buttoncontent_src
+	ButtonContent[*] role buttoncontent
+end
+
+composition xxx_Button_name between
+	Button[*] role xxx_Button_name_src
+	CDATA[0..1] role name
+end
+
+composition xxx_Button_value between
+	Button[*] role xxx_Button_value_src
+	CDATA[0..1] role value
+end
+
+composition xxx_Cellhalign_char between
+	Cellhalign[*] role xxx_Cellhalign_char_src
+	Character[0..1] role char
+end
+
+composition xxx_Cellhalign_charoff between
+	Cellhalign[*] role xxx_Cellhalign_charoff_src
+	Length[0..1] role charoff
+end
+
+composition xxx_Table_caption between
+	Table[0..1] role xxx_Table_caption_src
+	Caption[1..*] role caption
+end
+
+composition xxx_Table_colelement between
+	Table[*] role xxx_Table_colelement_src
+	ColElement[1] role colelement
+end
+
+composition xxx_Table_thead between
+	Table[*] role xxx_Table_thead_src
+	Thead[1] role thead
+end
+
+composition xxx_Table_tfoot between
+	Table[*] role xxx_Table_tfoot_src
+	Tfoot[1] role tfoot
+end
+
+composition xxx_Table_tableelement between
+	Table[*] role xxx_Table_tableelement_src
+	TableElement[1] role tableelement
+end
+
+composition xxx_Table_summary between
+	Table[*] role xxx_Table_summary_src
+	Text[0..1] role summary
+end
+
+composition xxx_Table_width between
+	Table[*] role xxx_Table_width_src
+	Length[0..1] role width
+end
+
+composition xxx_Table_border between
+	Table[*] role xxx_Table_border_src
+	Pixels[0..1] role border
+end
+
+composition xxx_Table_cellspacing between
+	Table[*] role xxx_Table_cellspacing_src
+	Length[0..1] role cellspacing
+end
+
+composition xxx_Table_cellpadding between
+	Table[*] role xxx_Table_cellpadding_src
+	Length[0..1] role cellpadding
+end
+
+composition xxx_ColElement_cols between
+	ColElement[0..1] role xxx_ColElement_cols_src
+	Col[*] role cols
+end
+
+composition xxx_ColElement_colgroup between
+	ColElement[0..1] role xxx_ColElement_colgroup_src
+	Colgroup[*] role colgroup
+end
+
+composition xxx_TableElement_tbody between
+	TableElement[0..1] role xxx_TableElement_tbody_src
+	Tbody[1..*] role tbody
+end
+
+composition xxx_TableElement_tr between
+	TableElement[0..1] role xxx_TableElement_tr_src
+	Tr[1..*] role tr
+end
+
+composition xxx_Caption_captionelement between
+	Caption[0..1] role xxx_Caption_captionelement_src
+	Inline[*] role captionelement
+end
+
+composition xxx_Thead_tr between
+	Thead[0..1] role xxx_Thead_tr_src
+	Tr[1..*] role tr
+end
+
+composition xxx_Tfoot_tr between
+	Tfoot[0..1] role xxx_Tfoot_tr_src
+	Tr[1..*] role tr
+end
+
+composition xxx_Tbody_tr between
+	Tbody[0..1] role xxx_Tbody_tr_src
+	Tr[1..*] role tr
+end
+
+composition xxx_Colgroup_cols between
+	Colgroup[0..1] role xxx_Colgroup_cols_src
+	Col[*] role cols
+end
+
+composition xxx_Colgroup_span between
+	Colgroup[*] role xxx_Colgroup_span_src
+	Number[1] role span
+end
+
+composition xxx_Colgroup_width between
+	Colgroup[*] role xxx_Colgroup_width_src
+	MultiLength[0..1] role width
+end
+
+composition xxx_Col_span between
+	Col[*] role xxx_Col_span_src
+	Number[1] role span
+end
+
+composition xxx_Col_width between
+	Col[*] role xxx_Col_width_src
+	MultiLength[0..1] role width
+end
+
+composition xxx_Tr_trelements between
+	Tr[0..1] role xxx_Tr_trelements_src
+	TrElement[1..*] role trelements
+end
+
+composition xxx_Th_thelement between
+	Th[0..1] role xxx_Th_thelement_src
+	Flow[*] role thelement
+end
+
+composition xxx_Th_abbr between
+	Th[*] role xxx_Th_abbr_src
+	Text[0..1] role abbr
+end
+
+composition xxx_Th_axis between
+	Th[*] role xxx_Th_axis_src
+	CDATA[0..1] role axis
+end
+
+composition xxx_Th_headers between
+	Th[*] role xxx_Th_headers_src
+	IDREFS[0..1] role headers
+end
+
+composition xxx_Th_rowspan between
+	Th[*] role xxx_Th_rowspan_src
+	Number[1] role rowspan
+end
+
+composition xxx_Th_colspan between
+	Th[*] role xxx_Th_colspan_src
+	Number[1] role colspan
+end
+
+composition xxx_Td_tdelement between
+	Td[0..1] role xxx_Td_tdelement_src
+	Flow[*] role tdelement
+end
+
+composition xxx_Td_abbr between
+	Td[*] role xxx_Td_abbr_src
+	Text[0..1] role abbr
+end
+
+composition xxx_Td_axis between
+	Td[*] role xxx_Td_axis_src
+	CDATA[0..1] role axis
+end
+
+composition xxx_Td_headers between
+	Td[*] role xxx_Td_headers_src
+	IDREFS[0..1] role headers
+end
+
+composition xxx_Td_rowspan between
+	Td[*] role xxx_Td_rowspan_src
+	Number[1] role rowspan
+end
+
+composition xxx_Td_colspan between
+	Td[*] role xxx_Td_colspan_src
+	Number[1] role colspan
+end
+

@@ -1,0 +1,63 @@
+model service
+class ServiceGrounding
+attributes
+operations
+end
+
+class Service
+attributes
+operations
+end
+
+class ServiceModel
+attributes
+	id : Integer
+	version : Integer
+operations
+end
+
+class ServiceProfile
+attributes
+operations
+end
+
+class ServiceProvider
+attributes
+operations
+end
+
+association xxx_ServiceGrounding_supportedBy between
+	ServiceGrounding[*] role xxx_ServiceGrounding_supportedBy_src
+	Service[1] role supportedBy
+end
+
+composition xxx_Service_presents between
+	Service[0..1] role xxx_Service_presents_src
+	ServiceProfile[*] role presents
+end
+
+composition xxx_Service_describedBy between
+	Service[*] role xxx_Service_describedBy_src
+	ServiceModel[0..1] role describedBy
+end
+
+composition xxx_Service_supports between
+	Service[*] role xxx_Service_supports_src
+	ServiceGrounding[0..1] role supports
+end
+
+association xxx_Service_providedBy between
+	Service[0..1] role xxx_Service_providedBy_src
+	ServiceProvider[*] role providedBy
+end
+
+association xxx_ServiceProfile_presentedBy between
+	ServiceProfile[*] role xxx_ServiceProfile_presentedBy_src
+	Service[0..1] role presentedBy
+end
+
+association xxx_ServiceProvider_provides between
+	ServiceProvider[0..1] role xxx_ServiceProvider_provides_src
+	Service[*] role provides
+end
+

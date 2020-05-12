@@ -1,0 +1,268 @@
+model taipan
+class Aquatory
+attributes
+operations
+end
+
+abstract class Destination<DestinationType
+attributes
+operations
+end
+
+class Port<Destination,PortType
+attributes
+	location : String
+operations
+end
+
+class Building
+attributes
+	info : String
+	street : String
+operations
+end
+
+class Route<Destination,RouteType
+attributes
+	description : String
+	reliability : Real
+operations
+end
+
+class Ship
+attributes
+	name : String
+operations
+end
+
+abstract class Item<ItemType
+attributes
+	article : String
+operations
+end
+
+class LargeItem<Item
+attributes
+	weight : Real
+operations
+end
+
+class SmallItems<Item
+attributes
+	quantity : Integer
+operations
+end
+
+class EmptyBox<Item
+attributes
+operations
+end
+
+class Warship<Ship
+attributes
+operations
+end
+
+abstract class Order
+attributes
+operations
+end
+
+class EscortShipsOrder<Order
+attributes
+operations
+end
+
+class BesiegePortOrder<Order
+attributes
+operations
+end
+
+abstract class PortType<DestinationType
+attributes
+operations
+end
+
+abstract class AquatoryType
+attributes
+operations
+end
+
+abstract class LargeItemType<ItemType
+attributes
+operations
+end
+
+abstract class EscortShipsOrderType<OrderType
+attributes
+operations
+end
+
+abstract class ItemType
+attributes
+operations
+end
+
+abstract class BesiegePortOrderType<OrderType
+attributes
+operations
+end
+
+abstract class SmallItemsType<ItemType
+attributes
+operations
+end
+
+abstract class DestinationType
+attributes
+operations
+end
+
+abstract class EmptyBoxType<ItemType
+attributes
+operations
+end
+
+abstract class WarshipType<ShipType
+attributes
+operations
+end
+
+abstract class OrderType
+attributes
+operations
+end
+
+abstract class RouteType<DestinationType
+attributes
+operations
+end
+
+abstract class ShipType
+attributes
+operations
+end
+
+abstract class BuildingType
+attributes
+operations
+end
+
+class LargeItemHook<LargeItemType
+attributes
+	portName : String
+operations
+end
+
+class LargeItemPrototype<LargeItemType
+attributes
+operations
+end
+
+class ShipPrototype<ShipType
+attributes
+operations
+end
+
+class ShipHook<ShipType
+attributes
+operations
+end
+
+class PortSlot<PortType
+attributes
+	portName : String
+operations
+end
+
+class RouteSlot<RouteType
+attributes
+	portName : String
+operations
+end
+
+class PortAnchor<PortType
+attributes
+operations
+end
+
+class RouteAnchor<RouteType
+attributes
+operations
+end
+
+composition xxx_Aquatory_ports between
+	Aquatory[0..1] role xxx_Aquatory_ports_src
+	PortType[*] role ports
+end
+
+composition xxx_Aquatory_routes between
+	Aquatory[0..1] role xxx_Aquatory_routes_src
+	RouteType[*] role routes
+end
+
+composition xxx_Aquatory_ships between
+	Aquatory[0..1] role xxx_Aquatory_ships_src
+	Ship[*] role ships
+end
+
+composition xxx_Port_buildings between
+	Port[0..1] role xxx_Port_buildings_src
+	Building[*] role buildings
+end
+
+association xxx_Port_register between
+	Port[0..1] role xxx_Port_register_src
+	Ship[*] role register
+end
+
+association xxx_Route_source between
+	Route[*] role xxx_Route_source_src
+	DestinationType[1] role source
+end
+
+association xxx_Route_destination between
+	Route[*] role xxx_Route_destination_src
+	DestinationType[1] role destination
+end
+
+association xxx_Ship_destination between
+	Ship[*] role xxx_Ship_destination_src
+	PortType[0..1] role destination
+end
+
+association xxx_Ship_route between
+	Ship[*] role xxx_Ship_route_src
+	RouteType[0..1] role route
+end
+
+composition xxx_Ship_cargo between
+	Ship[0..1] role xxx_Ship_cargo_src
+	ItemType[*] role cargo
+end
+
+association xxx_Ship_aquatory between
+	Ship[*] role xxx_Ship_aquatory_src
+	Aquatory[1] role aquatory
+end
+
+composition xxx_Warship_escortOrder between
+	Warship[*] role xxx_Warship_escortOrder_src
+	EscortShipsOrder[0..1] role escortOrder
+end
+
+composition xxx_Warship_attackOrders between
+	Warship[0..1] role xxx_Warship_attackOrders_src
+	BesiegePortOrder[*] role attackOrders
+end
+
+association xxx_EscortShipsOrder_ships between
+	EscortShipsOrder[0..1] role xxx_EscortShipsOrder_ships_src
+	Ship[1..*] role ships
+end
+
+association xxx_BesiegePortOrder_port between
+	BesiegePortOrder[*] role xxx_BesiegePortOrder_port_src
+	PortType[1] role port
+end
+

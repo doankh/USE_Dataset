@@ -1,0 +1,458 @@
+model textbt
+enum TraceabilityStatus{
+default
+}
+
+class Specification<NamedElement
+attributes
+operations
+end
+
+abstract class BehaviorTree
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Component<NamedElement
+attributes
+	id : String
+operations
+end
+
+class ComponentType<NamedElement
+attributes
+	id : String
+operations
+end
+
+abstract class Behavior
+attributes
+	id : String
+operations
+end
+
+abstract class Event<Behavior
+attributes
+operations
+end
+
+abstract class Output<Event
+attributes
+operations
+end
+
+abstract class Input<Event
+attributes
+operations
+end
+
+class InternalOutput<Output
+attributes
+operations
+end
+
+class InternalInput<Input
+attributes
+operations
+end
+
+class ExternalInput<Input
+attributes
+operations
+end
+
+class ExternalOutput<Output
+attributes
+operations
+end
+
+abstract class EventDefinition
+attributes
+operations
+end
+
+class TextualEventDefinition<EventDefinition
+attributes
+	expression : String
+operations
+end
+
+abstract class StatefulBehavior<Behavior
+attributes
+operations
+end
+
+class StateRealization<StatefulBehavior
+attributes
+operations
+end
+
+class Selection<StatefulBehavior
+attributes
+operations
+end
+
+class Guard<StatefulBehavior
+attributes
+operations
+end
+
+abstract class StateDefinition
+attributes
+operations
+end
+
+class TextualStateDefinition<StateDefinition
+attributes
+	expression : String
+operations
+end
+
+abstract class Node
+attributes
+	label : String
+	root : Boolean
+	leaf : Boolean
+operations
+end
+
+class BehaviorNode<OperationNode
+attributes
+operations
+end
+
+class LabelOnlyNode<OperationNode
+attributes
+operations
+end
+
+abstract class OperationNode<Node
+attributes
+operations
+end
+
+abstract class QuantifyingNode<Node
+attributes
+operations
+end
+
+class ForAll<QuantifyingNode
+attributes
+operations
+end
+
+class ForSome<QuantifyingNode
+attributes
+operations
+end
+
+class AtLeastOne<QuantifyingNode
+attributes
+operations
+end
+
+class ForOneArbitrary<QuantifyingNode
+attributes
+operations
+end
+
+class TextualComponentSetDefinition<ComponentSetDefinition
+attributes
+	expression : String
+operations
+end
+
+abstract class ComponentSetDefinition
+attributes
+operations
+end
+
+abstract class Operation
+attributes
+operations
+end
+
+class Reference<Operation
+attributes
+operations
+end
+
+class Reversion<Operation
+attributes
+operations
+end
+
+class BranchKill<Operation
+attributes
+operations
+end
+
+class Synchronisation<Operation
+attributes
+operations
+end
+
+class May<Operation
+attributes
+operations
+end
+
+class StartNew<Operation
+attributes
+operations
+end
+
+abstract class Activity<BehaviorTree
+attributes
+operations
+end
+
+abstract class Sequence_<Activity
+attributes
+operations
+end
+
+class AtomicSequence<Sequence_
+attributes
+operations
+end
+
+class InterleavingSequence<Sequence_
+attributes
+operations
+end
+
+abstract class SystemStateGuard<Activity
+attributes
+operations
+end
+
+class Conjunction<SystemStateGuard
+attributes
+operations
+end
+
+class Disjunction<SystemStateGuard
+attributes
+operations
+end
+
+class MutualExclusion<SystemStateGuard
+attributes
+operations
+end
+
+abstract class Branch<BehaviorTree
+attributes
+operations
+end
+
+class ForkBranch<Branch
+attributes
+operations
+end
+
+class RandomChoiceBranch<Branch
+attributes
+operations
+end
+
+class Requirement<NamedElement
+attributes
+	id : String
+operations
+end
+
+class TraceabilityLink
+attributes
+	status : TraceabilityStatus
+	updatedInVersion : String
+operations
+end
+
+composition xxx_Specification_components between
+	Specification[0..1] role xxx_Specification_components_src
+	Component[1..*] role components
+end
+
+composition xxx_Specification_requirements between
+	Specification[0..1] role xxx_Specification_requirements_src
+	Requirement[1..*] role requirements
+end
+
+composition xxx_Specification_root between
+	Specification[*] role xxx_Specification_root_src
+	Activity[0..1] role root
+end
+
+association xxx_Specification_system between
+	Specification[*] role xxx_Specification_system_src
+	Component[0..1] role system
+end
+
+composition xxx_Specification_componentTypes between
+	Specification[0..1] role xxx_Specification_componentTypes_src
+	ComponentType[1..*] role componentTypes
+end
+
+association xxx_BehaviorTree_subtrees between
+	BehaviorTree[0..1] role xxx_BehaviorTree_subtrees_src
+	BehaviorTree[*] role subtrees
+end
+
+association xxx_Component_type between
+	Component[*] role xxx_Component_type_src
+	ComponentType[1] role type
+end
+
+composition xxx_ComponentType_behavior between
+	ComponentType[0..1] role xxx_ComponentType_behavior_src
+	Behavior[*] role behavior
+end
+
+composition xxx_Event_definition between
+	Event[*] role xxx_Event_definition_src
+	EventDefinition[1] role definition
+end
+
+composition xxx_StatefulBehavior_definition between
+	StatefulBehavior[*] role xxx_StatefulBehavior_definition_src
+	StateDefinition[1] role definition
+end
+
+association xxx_Node_parent between
+	Node[*] role xxx_Node_parent_src
+	Node[0..1] role parent
+end
+
+association xxx_Node_parents between
+	Node[*] role xxx_Node_parents_src
+	Node[0..1] role parents
+end
+
+association xxx_Node_siblings between
+	Node[0..1] role xxx_Node_siblings_src
+	Node[*] role siblings
+end
+
+association xxx_Node_children between
+	Node[0..1] role xxx_Node_children_src
+	Node[*] role children
+end
+
+association xxx_Node_descendants between
+	Node[*] role xxx_Node_descendants_src
+	Node[0..1] role descendants
+end
+
+association xxx_Node_siblingBranches between
+	Node[0..1] role xxx_Node_siblingBranches_src
+	Branch[*] role siblingBranches
+end
+
+composition xxx_Node_traceability between
+	Node[*] role xxx_Node_traceability_src
+	TraceabilityLink[1] role traceability
+end
+
+association xxx_BehaviorNode_behavior between
+	BehaviorNode[*] role xxx_BehaviorNode_behavior_src
+	Behavior[1] role behavior
+end
+
+association xxx_BehaviorNode_actor between
+	BehaviorNode[*] role xxx_BehaviorNode_actor_src
+	Component[1] role actor
+end
+
+composition xxx_OperationNode_operation between
+	OperationNode[*] role xxx_OperationNode_operation_src
+	Operation[0..1] role operation
+end
+
+composition xxx_QuantifyingNode_variable between
+	QuantifyingNode[*] role xxx_QuantifyingNode_variable_src
+	Component[1] role variable
+end
+
+composition xxx_QuantifyingNode_set between
+	QuantifyingNode[*] role xxx_QuantifyingNode_set_src
+	ComponentSetDefinition[1] role set
+end
+
+composition xxx_QuantifyingNode_definition between
+	QuantifyingNode[*] role xxx_QuantifyingNode_definition_src
+	ComponentSetDefinition[1] role definition
+end
+
+association xxx_Reference_continueLike between
+	Reference[*] role xxx_Reference_continueLike_src
+	Node[1] role continueLike
+end
+
+association xxx_Reversion_revertTo between
+	Reversion[*] role xxx_Reversion_revertTo_src
+	Node[1] role revertTo
+end
+
+association xxx_BranchKill_stop between
+	BranchKill[*] role xxx_BranchKill_stop_src
+	Node[1] role stop
+end
+
+association xxx_Synchronisation_waitFor between
+	Synchronisation[0..1] role xxx_Synchronisation_waitFor_src
+	BehaviorNode[1..*] role waitFor
+end
+
+association xxx_StartNew_startNew between
+	StartNew[*] role xxx_StartNew_startNew_src
+	Node[1] role startNew
+end
+
+composition xxx_Activity_child between
+	Activity[*] role xxx_Activity_child_src
+	BehaviorTree[0..1] role child
+end
+
+composition xxx_Sequence_step between
+	Sequence_[0..1] role xxx_Sequence_step_src
+	OperationNode[1..*] role step
+end
+
+composition xxx_Sequence_quantifier between
+	Sequence_[*] role xxx_Sequence_quantifier_src
+	QuantifyingNode[0..1] role quantifier
+end
+
+association xxx_SystemStateGuard_componentSelection between
+	SystemStateGuard[0..1] role xxx_SystemStateGuard_componentSelection_src
+	Selection[1..*] role componentSelection
+end
+
+composition xxx_ForkBranch_processes between
+	ForkBranch[0..1] role xxx_ForkBranch_processes_src
+	Sequence_[2..*] role processes
+end
+
+composition xxx_RandomChoiceBranch_choices between
+	RandomChoiceBranch[0..1] role xxx_RandomChoiceBranch_choices_src
+	Sequence_[2..*] role choices
+end
+
+association xxx_TraceabilityLink_requirement between
+	TraceabilityLink[0..1] role xxx_TraceabilityLink_requirement_src
+	Requirement[*] role requirement
+end
+
+association xxx_TraceabilityLink_node between
+	TraceabilityLink[*] role xxx_TraceabilityLink_node_src
+	Node[0..1] role node
+end
+

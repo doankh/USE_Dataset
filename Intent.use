@@ -1,0 +1,68 @@
+model intent
+enum ExtraType{
+default
+}
+
+enum IntentType{
+default
+}
+
+class Intent<NamedElement
+attributes
+	action : String
+	intentType : IntentType
+	category : String
+	type : String
+	data : String
+	exceptionName : String
+operations
+end
+
+class Extra<NamedElement
+attributes
+	value : String
+	type : ExtraType
+operations
+end
+
+class Callback<NamedElement
+attributes
+operations
+end
+
+class Permissions<NamedElement
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class Model<NamedElement
+attributes
+operations
+end
+
+composition xxx_Intent_extras between
+	Intent[0..1] role xxx_Intent_extras_src
+	Extra[*] role extras
+end
+
+composition xxx_Intent_sucessCallback between
+	Intent[*] role xxx_Intent_sucessCallback_src
+	Callback[0..1] role sucessCallback
+end
+
+composition xxx_Intent_permissions between
+	Intent[0..1] role xxx_Intent_permissions_src
+	Permissions[*] role permissions
+end
+
+composition xxx_Model_intents between
+	Model[0..1] role xxx_Model_intents_src
+	Intent[*] role intents
+end
+

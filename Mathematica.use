@@ -1,0 +1,60 @@
+model mathematica
+class Node
+attributes
+operations
+end
+
+class ASTNode<Node
+attributes
+	name : String
+operations
+end
+
+class BuiltInNode<Node
+attributes
+	keyword : String
+operations
+end
+
+class ASTLeaf<Node
+attributes
+operations
+end
+
+class IntLeaf<ASTLeaf
+attributes
+	signed : String
+	value : Integer
+operations
+end
+
+class StringLeaf<ASTLeaf
+attributes
+	value : String
+operations
+end
+
+class SymbolLeaf<ASTLeaf
+attributes
+	name : String
+operations
+end
+
+class FloatLeaf<ASTLeaf
+attributes
+	signed : String
+	a : Integer
+	b : Integer
+operations
+end
+
+composition xxx_ASTNode_children between
+	ASTNode[0..1] role xxx_ASTNode_children_src
+	Node[*] role children
+end
+
+composition xxx_BuiltInNode_children between
+	BuiltInNode[0..1] role xxx_BuiltInNode_children_src
+	Node[*] role children
+end
+

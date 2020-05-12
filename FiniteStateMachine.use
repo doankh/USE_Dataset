@@ -1,0 +1,99 @@
+model FSM
+class MgaObject
+attributes
+	name : String
+	position : String
+operations
+end
+
+class Transition<MgaObject
+attributes
+operations
+end
+
+class State<MgaObject
+attributes
+operations
+end
+
+class StateMachine<MgaObject
+attributes
+operations
+end
+
+class RootFolder
+attributes
+	name : String
+operations
+end
+
+class AssociationStateState
+attributes
+operations
+end
+
+association xxx_Transition_stateMachine between
+	Transition[*] role xxx_Transition_stateMachine_src
+	StateMachine[1] role stateMachine
+end
+
+association xxx_Transition_associationStateState between
+	Transition[*] role xxx_Transition_associationStateState_src
+	AssociationStateState[1] role associationStateState
+end
+
+association xxx_State_stateMachine between
+	State[*] role xxx_State_stateMachine_src
+	StateMachine[1] role stateMachine
+end
+
+association xxx_State_associationStateStatedst between
+	State[0..1] role xxx_State_associationStateStatedst_src
+	AssociationStateState[1..*] role associationStateStatedst
+end
+
+association xxx_State_associationStateStatesrc between
+	State[0..1] role xxx_State_associationStateStatesrc_src
+	AssociationStateState[1..*] role associationStateStatesrc
+end
+
+association xxx_StateMachine_rootFolder between
+	StateMachine[*] role xxx_StateMachine_rootFolder_src
+	RootFolder[1] role rootFolder
+end
+
+composition xxx_StateMachine_state between
+	StateMachine[0..1] role xxx_StateMachine_state_src
+	State[*] role state
+end
+
+composition xxx_StateMachine_transition between
+	StateMachine[0..1] role xxx_StateMachine_transition_src
+	Transition[*] role transition
+end
+
+composition xxx_RootFolder_rootFolders between
+	RootFolder[0..1] role xxx_RootFolder_rootFolders_src
+	RootFolder[*] role rootFolders
+end
+
+composition xxx_RootFolder_stateMachine between
+	RootFolder[0..1] role xxx_RootFolder_stateMachine_src
+	StateMachine[*] role stateMachine
+end
+
+association xxx_AssociationStateState_transition between
+	AssociationStateState[*] role xxx_AssociationStateState_transition_src
+	Transition[1] role transition
+end
+
+association xxx_AssociationStateState_dstTransition between
+	AssociationStateState[0..1] role xxx_AssociationStateState_dstTransition_src
+	State[1..*] role dstTransition
+end
+
+association xxx_AssociationStateState_srcTransition between
+	AssociationStateState[0..1] role xxx_AssociationStateState_srcTransition_src
+	State[1..*] role srcTransition
+end
+

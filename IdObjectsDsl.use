@@ -1,0 +1,118 @@
+model idObjectsDsl
+class Model
+attributes
+	name : String
+operations
+end
+
+class Package
+attributes
+	name : String
+operations
+end
+
+class Entity
+attributes
+	name : String
+operations
+end
+
+class EntityReference
+attributes
+	name : String
+	inverseName : String
+operations
+end
+
+class Persistence
+attributes
+operations
+end
+
+class PersistencePackage
+attributes
+	name : String
+operations
+end
+
+class PersistenceEntity
+attributes
+	name : String
+operations
+end
+
+class PersistenceProperty
+attributes
+	name : String
+operations
+end
+
+class PersistencePropertyConfig
+attributes
+	propertyConfigKey : String
+	propertyConfigValue : String
+operations
+end
+
+class EntityProperty
+attributes
+	propertyType : String
+	name : String
+operations
+end
+
+composition xxx_Model_packages between
+	Model[0..1] role xxx_Model_packages_src
+	Package[*] role packages
+end
+
+composition xxx_Model_persistenceModel between
+	Model[*] role xxx_Model_persistenceModel_src
+	Persistence[0..1] role persistenceModel
+end
+
+composition xxx_Package_entities between
+	Package[0..1] role xxx_Package_entities_src
+	Entity[*] role entities
+end
+
+composition xxx_Entity_properties between
+	Entity[0..1] role xxx_Entity_properties_src
+	EntityProperty[*] role properties
+end
+
+composition xxx_Entity_references between
+	Entity[0..1] role xxx_Entity_references_src
+	EntityReference[*] role references
+end
+
+association xxx_EntityReference_listDestination between
+	EntityReference[*] role xxx_EntityReference_listDestination_src
+	Entity[0..1] role listDestination
+end
+
+association xxx_EntityReference_singleDestination between
+	EntityReference[*] role xxx_EntityReference_singleDestination_src
+	Entity[0..1] role singleDestination
+end
+
+composition xxx_Persistence_persistencePackage between
+	Persistence[0..1] role xxx_Persistence_persistencePackage_src
+	PersistencePackage[*] role persistencePackage
+end
+
+composition xxx_PersistencePackage_persistenceEntities between
+	PersistencePackage[0..1] role xxx_PersistencePackage_persistenceEntities_src
+	PersistenceEntity[*] role persistenceEntities
+end
+
+composition xxx_PersistenceEntity_persistenceProperties between
+	PersistenceEntity[0..1] role xxx_PersistenceEntity_persistenceProperties_src
+	PersistenceProperty[*] role persistenceProperties
+end
+
+composition xxx_PersistenceProperty_config between
+	PersistenceProperty[0..1] role xxx_PersistenceProperty_config_src
+	PersistencePropertyConfig[*] role config
+end
+

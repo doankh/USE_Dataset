@@ -1,0 +1,182 @@
+model flowgraph
+abstract class Stmt<Item
+attributes
+operations
+end
+
+class SimpleStmt<Stmt,FlowInstr
+attributes
+operations
+end
+
+class Block<Stmt
+attributes
+operations
+end
+
+class If<Conditional
+attributes
+operations
+end
+
+class Expr<FlowInstr
+attributes
+operations
+end
+
+abstract class Item
+attributes
+	txt : String
+operations
+end
+
+class Return<Stmt,FlowInstr
+attributes
+operations
+end
+
+class Method<Block,FlowInstr
+attributes
+operations
+end
+
+class Exit<FlowInstr
+attributes
+operations
+end
+
+class Loop<Conditional
+attributes
+operations
+end
+
+abstract class Conditional<Stmt
+attributes
+operations
+end
+
+abstract class JumpStmt<Stmt,FlowInstr
+attributes
+operations
+end
+
+class Break<JumpStmt
+attributes
+operations
+end
+
+class Continue<JumpStmt
+attributes
+operations
+end
+
+abstract class FlowInstr<Item
+attributes
+operations
+end
+
+class Var<Item
+attributes
+operations
+end
+
+class Param<Var
+attributes
+operations
+end
+
+class Label<Stmt
+attributes
+operations
+end
+
+composition xxx_Block_stmts between
+	Block[0..1] role xxx_Block_stmts_src
+	Stmt[*] role stmts
+end
+
+composition xxx_If_then_ between
+	If[*] role xxx_If_then__src
+	Stmt[1] role then_
+end
+
+composition xxx_If_else_ between
+	If[*] role xxx_If_else__src
+	Stmt[0..1] role else_
+end
+
+composition xxx_Method_exit between
+	Method[*] role xxx_Method_exit_src
+	Exit[1] role exit
+end
+
+composition xxx_Method_vars between
+	Method[0..1] role xxx_Method_vars_src
+	Var[*] role vars
+end
+
+composition xxx_Loop_body between
+	Loop[*] role xxx_Loop_body_src
+	Stmt[1] role body
+end
+
+composition xxx_Conditional_expr between
+	Conditional[*] role xxx_Conditional_expr_src
+	Expr[1] role expr
+end
+
+association xxx_JumpStmt_label between
+	JumpStmt[*] role xxx_JumpStmt_label_src
+	Label[0..1] role label
+end
+
+association xxx_FlowInstr_cfNext between
+	FlowInstr[0..1] role xxx_FlowInstr_cfNext_src
+	FlowInstr[*] role cfNext
+end
+
+association xxx_FlowInstr_cfPrev between
+	FlowInstr[0..1] role xxx_FlowInstr_cfPrev_src
+	FlowInstr[*] role cfPrev
+end
+
+association xxx_FlowInstr_def between
+	FlowInstr[0..1] role xxx_FlowInstr_def_src
+	Var[*] role def
+end
+
+association xxx_FlowInstr_use between
+	FlowInstr[0..1] role xxx_FlowInstr_use_src
+	Var[*] role use
+end
+
+association xxx_FlowInstr_dfNext between
+	FlowInstr[0..1] role xxx_FlowInstr_dfNext_src
+	FlowInstr[*] role dfNext
+end
+
+association xxx_Var_definers between
+	Var[0..1] role xxx_Var_definers_src
+	FlowInstr[*] role definers
+end
+
+association xxx_Var_users between
+	Var[0..1] role xxx_Var_users_src
+	FlowInstr[*] role users
+end
+
+association xxx_Var_method between
+	Var[*] role xxx_Var_method_src
+	Method[0..1] role method
+end
+
+composition xxx_Label_stmt between
+	Label[*] role xxx_Label_stmt_src
+	Stmt[1] role stmt
+end
+
+association xxx_Label_jumps between
+	Label[0..1] role xxx_Label_jumps_src
+	JumpStmt[*] role jumps
+end
+

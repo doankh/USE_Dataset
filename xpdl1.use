@@ -1,0 +1,1447 @@
+model xpdl1
+enum AccessLevelType{
+default
+}
+
+enum DurationUnitType{
+default
+}
+
+enum ExecutionType{
+default
+}
+
+enum ExecutionType1{
+default
+}
+
+enum GraphConformanceType{
+default
+}
+
+enum InstantiationType{
+default
+}
+
+enum IsArrayType{
+default
+}
+
+enum ModeType{
+default
+}
+
+enum PublicationStatusType{
+default
+}
+
+enum TypeType{
+default
+}
+
+enum TypeType1{
+default
+}
+
+enum TypeType2{
+default
+}
+
+enum TypeType3{
+default
+}
+
+enum TypeType4{
+default
+}
+
+enum TypeType5{
+default
+}
+
+class ActivitiesType
+attributes
+operations
+end
+
+class ActivitySetsType
+attributes
+operations
+end
+
+class ActivitySetType
+attributes
+	id : String
+operations
+end
+
+class ActivityType
+attributes
+	description : String
+	limit : String
+	performer : String
+	priority : String
+	icon : String
+	documentation : String
+	id : String
+	name : String
+operations
+end
+
+class ActualParametersType
+attributes
+	actualParameter : String
+operations
+end
+
+class ApplicationsType
+attributes
+operations
+end
+
+class ApplicationType
+attributes
+	description : String
+	id : String
+	name : String
+operations
+end
+
+class ArrayTypeType
+attributes
+	lowerIndex : String
+	upperIndex : String
+operations
+end
+
+class AutomaticType
+attributes
+operations
+end
+
+class BasicTypeType
+attributes
+	type : TypeType3
+operations
+end
+
+class BlockActivityType
+attributes
+	blockId : String
+operations
+end
+
+class ConditionType
+attributes
+	mixed : String
+	group : String
+	type : TypeType2
+operations
+end
+
+class ConformanceClassType
+attributes
+	graphConformance : GraphConformanceType
+operations
+end
+
+class DataFieldsType
+attributes
+operations
+end
+
+class DataFieldType
+attributes
+	initialValue : String
+	length : String
+	description : String
+	id : String
+	isArray : IsArrayType
+	name : String
+operations
+end
+
+class DataTypeType
+attributes
+operations
+end
+
+class DeadlineType
+attributes
+	execution : ExecutionType
+operations
+end
+
+class DeclaredTypeType
+attributes
+	id : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+	actualParameter : String
+	author : String
+	codepage : String
+	cost : String
+	costUnit : String
+	countrykey : String
+	created : String
+	description : String
+	documentation : String
+	duration : String
+	icon : String
+	initialValue : String
+	length : String
+	limit : String
+	performer : String
+	priority : String
+	priorityUnit : String
+	responsible : String
+	validFrom : String
+	validTo : String
+	vendor : String
+	version : String
+	waitingTime : String
+	workingTime : String
+	xPDLVersion : String
+operations
+end
+
+class EnumerationTypeType
+attributes
+operations
+end
+
+class EnumerationValueType
+attributes
+	name : String
+operations
+end
+
+class ExtendedAttributesType
+attributes
+operations
+end
+
+class ExtendedAttributeType
+attributes
+	mixed : String
+	group : String
+	any : String
+	name : String
+	value : String
+operations
+end
+
+class ExternalPackagesType
+attributes
+operations
+end
+
+class ExternalPackageType
+attributes
+	href : String
+operations
+end
+
+class ExternalReferenceType
+attributes
+	location : String
+	namespace : String
+	xref : String
+operations
+end
+
+class FinishModeType
+attributes
+operations
+end
+
+class FormalParametersType
+attributes
+operations
+end
+
+class FormalParameterType
+attributes
+	description : String
+	id : String
+	index : String
+	mode : ModeType
+operations
+end
+
+class ImplementationType
+attributes
+operations
+end
+
+class JoinType
+attributes
+	type : TypeType
+operations
+end
+
+class ListTypeType
+attributes
+operations
+end
+
+class ManualType
+attributes
+operations
+end
+
+class MemberType
+attributes
+operations
+end
+
+class NoType
+attributes
+operations
+end
+
+class PackageHeaderType
+attributes
+	xPDLVersion : String
+	vendor : String
+	created : String
+	description : String
+	documentation : String
+	priorityUnit : String
+	costUnit : String
+operations
+end
+
+class PackageType
+attributes
+	id : String
+	name : String
+operations
+end
+
+class ParticipantsType
+attributes
+operations
+end
+
+class ParticipantType
+attributes
+	description : String
+	id : String
+	name : String
+operations
+end
+
+class ParticipantTypeType
+attributes
+	type : TypeType1
+operations
+end
+
+class ProcessHeaderType
+attributes
+	created : String
+	description : String
+	priority : String
+	limit : String
+	validFrom : String
+	validTo : String
+	durationUnit : DurationUnitType
+operations
+end
+
+class RecordTypeType
+attributes
+operations
+end
+
+class RedefinableHeaderType
+attributes
+	author : String
+	version : String
+	codepage : String
+	countrykey : String
+	publicationStatus : PublicationStatusType
+operations
+end
+
+class ResponsiblesType
+attributes
+	responsible : String
+operations
+end
+
+class RouteType
+attributes
+operations
+end
+
+class SchemaTypeType
+attributes
+	any : String
+operations
+end
+
+class ScriptType
+attributes
+	grammar : String
+	type : String
+	version : String
+operations
+end
+
+class SimulationInformationType
+attributes
+	cost : String
+	instantiation : InstantiationType
+operations
+end
+
+class SplitType
+attributes
+	type : TypeType4
+operations
+end
+
+class StartModeType
+attributes
+operations
+end
+
+class SubFlowType
+attributes
+	execution : ExecutionType1
+	id : String
+operations
+end
+
+class TimeEstimationType
+attributes
+	waitingTime : String
+	workingTime : String
+	duration : String
+operations
+end
+
+class ToolType
+attributes
+	description : String
+	id : String
+	type : TypeType5
+operations
+end
+
+class TransitionRefsType
+attributes
+operations
+end
+
+class TransitionRefType
+attributes
+	id : String
+operations
+end
+
+class TransitionRestrictionsType
+attributes
+operations
+end
+
+class TransitionRestrictionType
+attributes
+operations
+end
+
+class TransitionsType
+attributes
+operations
+end
+
+class TransitionType
+attributes
+	description : String
+	from_ : String
+	id : String
+	name : String
+	to : String
+operations
+end
+
+class TypeDeclarationsType
+attributes
+operations
+end
+
+class TypeDeclarationType
+attributes
+	description : String
+	id : String
+	name : String
+operations
+end
+
+class UnionTypeType
+attributes
+operations
+end
+
+class WorkflowProcessesType
+attributes
+operations
+end
+
+class WorkflowProcessType
+attributes
+	accessLevel : AccessLevelType
+	id : String
+	name : String
+operations
+end
+
+class XpressionType
+attributes
+	mixed : String
+	group : String
+	any : String
+operations
+end
+
+composition xxx_ActivitiesType_activity between
+	ActivitiesType[0..1] role xxx_ActivitiesType_activity_src
+	ActivityType[*] role activity
+end
+
+composition xxx_ActivitySetsType_activitySet between
+	ActivitySetsType[0..1] role xxx_ActivitySetsType_activitySet_src
+	ActivitySetType[*] role activitySet
+end
+
+composition xxx_ActivitySetType_activities between
+	ActivitySetType[*] role xxx_ActivitySetType_activities_src
+	ActivitiesType[0..1] role activities
+end
+
+composition xxx_ActivitySetType_transitions_ between
+	ActivitySetType[*] role xxx_ActivitySetType_transitions__src
+	TransitionsType[0..1] role transitions_
+end
+
+composition xxx_ActivityType_route between
+	ActivityType[*] role xxx_ActivityType_route_src
+	RouteType[0..1] role route
+end
+
+composition xxx_ActivityType_implementation between
+	ActivityType[*] role xxx_ActivityType_implementation_src
+	ImplementationType[0..1] role implementation
+end
+
+composition xxx_ActivityType_blockActivity between
+	ActivityType[*] role xxx_ActivityType_blockActivity_src
+	BlockActivityType[0..1] role blockActivity
+end
+
+composition xxx_ActivityType_startMode between
+	ActivityType[*] role xxx_ActivityType_startMode_src
+	StartModeType[0..1] role startMode
+end
+
+composition xxx_ActivityType_finishMode between
+	ActivityType[*] role xxx_ActivityType_finishMode_src
+	FinishModeType[0..1] role finishMode
+end
+
+composition xxx_ActivityType_deadline between
+	ActivityType[0..1] role xxx_ActivityType_deadline_src
+	DeadlineType[*] role deadline
+end
+
+composition xxx_ActivityType_simulationInformation between
+	ActivityType[*] role xxx_ActivityType_simulationInformation_src
+	SimulationInformationType[0..1] role simulationInformation
+end
+
+composition xxx_ActivityType_transitionRestrictions between
+	ActivityType[*] role xxx_ActivityType_transitionRestrictions_src
+	TransitionRestrictionsType[0..1] role transitionRestrictions
+end
+
+composition xxx_ActivityType_extendedAttributes between
+	ActivityType[*] role xxx_ActivityType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_ApplicationsType_application between
+	ApplicationsType[0..1] role xxx_ApplicationsType_application_src
+	ApplicationType[*] role application
+end
+
+composition xxx_ApplicationType_formalParameters between
+	ApplicationType[*] role xxx_ApplicationType_formalParameters_src
+	FormalParametersType[0..1] role formalParameters
+end
+
+composition xxx_ApplicationType_externalReference between
+	ApplicationType[*] role xxx_ApplicationType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_ApplicationType_extendedAttributes between
+	ApplicationType[*] role xxx_ApplicationType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_ArrayTypeType_basicType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_basicType_src
+	BasicTypeType[0..1] role basicType
+end
+
+composition xxx_ArrayTypeType_declaredType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_declaredType_src
+	DeclaredTypeType[0..1] role declaredType
+end
+
+composition xxx_ArrayTypeType_schemaType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_schemaType_src
+	SchemaTypeType[0..1] role schemaType
+end
+
+composition xxx_ArrayTypeType_externalReference between
+	ArrayTypeType[*] role xxx_ArrayTypeType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_ArrayTypeType_recordType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_recordType_src
+	RecordTypeType[0..1] role recordType
+end
+
+composition xxx_ArrayTypeType_unionType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_unionType_src
+	UnionTypeType[0..1] role unionType
+end
+
+composition xxx_ArrayTypeType_enumerationType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_enumerationType_src
+	EnumerationTypeType[0..1] role enumerationType
+end
+
+composition xxx_ArrayTypeType_arrayType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_arrayType_src
+	ArrayTypeType[0..1] role arrayType
+end
+
+composition xxx_ArrayTypeType_listType between
+	ArrayTypeType[*] role xxx_ArrayTypeType_listType_src
+	ListTypeType[0..1] role listType
+end
+
+composition xxx_ConditionType_xpression between
+	ConditionType[0..1] role xxx_ConditionType_xpression_src
+	XpressionType[*] role xpression
+end
+
+composition xxx_DataFieldsType_dataField between
+	DataFieldsType[0..1] role xxx_DataFieldsType_dataField_src
+	DataFieldType[*] role dataField
+end
+
+composition xxx_DataFieldType_dataType between
+	DataFieldType[*] role xxx_DataFieldType_dataType_src
+	DataTypeType[1] role dataType
+end
+
+composition xxx_DataFieldType_extendedAttributes between
+	DataFieldType[*] role xxx_DataFieldType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_DataTypeType_basicType between
+	DataTypeType[*] role xxx_DataTypeType_basicType_src
+	BasicTypeType[0..1] role basicType
+end
+
+composition xxx_DataTypeType_declaredType between
+	DataTypeType[*] role xxx_DataTypeType_declaredType_src
+	DeclaredTypeType[0..1] role declaredType
+end
+
+composition xxx_DataTypeType_schemaType between
+	DataTypeType[*] role xxx_DataTypeType_schemaType_src
+	SchemaTypeType[0..1] role schemaType
+end
+
+composition xxx_DataTypeType_externalReference between
+	DataTypeType[*] role xxx_DataTypeType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_DataTypeType_recordType between
+	DataTypeType[*] role xxx_DataTypeType_recordType_src
+	RecordTypeType[0..1] role recordType
+end
+
+composition xxx_DataTypeType_unionType between
+	DataTypeType[*] role xxx_DataTypeType_unionType_src
+	UnionTypeType[0..1] role unionType
+end
+
+composition xxx_DataTypeType_enumerationType between
+	DataTypeType[*] role xxx_DataTypeType_enumerationType_src
+	EnumerationTypeType[0..1] role enumerationType
+end
+
+composition xxx_DataTypeType_arrayType between
+	DataTypeType[*] role xxx_DataTypeType_arrayType_src
+	ArrayTypeType[0..1] role arrayType
+end
+
+composition xxx_DataTypeType_listType between
+	DataTypeType[*] role xxx_DataTypeType_listType_src
+	ListTypeType[0..1] role listType
+end
+
+composition xxx_DocumentRoot_activities between
+	DocumentRoot[*] role xxx_DocumentRoot_activities_src
+	ActivitiesType[*] role activities
+end
+
+composition xxx_DocumentRoot_activity between
+	DocumentRoot[*] role xxx_DocumentRoot_activity_src
+	ActivityType[*] role activity
+end
+
+composition xxx_DocumentRoot_activitySet between
+	DocumentRoot[*] role xxx_DocumentRoot_activitySet_src
+	ActivitySetType[*] role activitySet
+end
+
+composition xxx_DocumentRoot_activitySets between
+	DocumentRoot[*] role xxx_DocumentRoot_activitySets_src
+	ActivitySetsType[*] role activitySets
+end
+
+composition xxx_DocumentRoot_actualParameters between
+	DocumentRoot[*] role xxx_DocumentRoot_actualParameters_src
+	ActualParametersType[*] role actualParameters
+end
+
+composition xxx_DocumentRoot_application between
+	DocumentRoot[*] role xxx_DocumentRoot_application_src
+	ApplicationType[*] role application
+end
+
+composition xxx_DocumentRoot_applications between
+	DocumentRoot[*] role xxx_DocumentRoot_applications_src
+	ApplicationsType[*] role applications
+end
+
+composition xxx_DocumentRoot_arrayType between
+	DocumentRoot[*] role xxx_DocumentRoot_arrayType_src
+	ArrayTypeType[*] role arrayType
+end
+
+composition xxx_DocumentRoot_automatic between
+	DocumentRoot[*] role xxx_DocumentRoot_automatic_src
+	AutomaticType[*] role automatic
+end
+
+composition xxx_DocumentRoot_basicType between
+	DocumentRoot[*] role xxx_DocumentRoot_basicType_src
+	BasicTypeType[*] role basicType
+end
+
+composition xxx_DocumentRoot_blockActivity between
+	DocumentRoot[*] role xxx_DocumentRoot_blockActivity_src
+	BlockActivityType[*] role blockActivity
+end
+
+composition xxx_DocumentRoot_condition between
+	DocumentRoot[*] role xxx_DocumentRoot_condition_src
+	ConditionType[*] role condition
+end
+
+composition xxx_DocumentRoot_conformanceClass between
+	DocumentRoot[*] role xxx_DocumentRoot_conformanceClass_src
+	ConformanceClassType[*] role conformanceClass
+end
+
+composition xxx_DocumentRoot_dataField between
+	DocumentRoot[*] role xxx_DocumentRoot_dataField_src
+	DataFieldType[*] role dataField
+end
+
+composition xxx_DocumentRoot_dataFields between
+	DocumentRoot[*] role xxx_DocumentRoot_dataFields_src
+	DataFieldsType[*] role dataFields
+end
+
+composition xxx_DocumentRoot_dataType between
+	DocumentRoot[*] role xxx_DocumentRoot_dataType_src
+	DataTypeType[*] role dataType
+end
+
+composition xxx_DocumentRoot_deadline between
+	DocumentRoot[*] role xxx_DocumentRoot_deadline_src
+	DeadlineType[*] role deadline
+end
+
+composition xxx_DocumentRoot_declaredType between
+	DocumentRoot[*] role xxx_DocumentRoot_declaredType_src
+	DeclaredTypeType[*] role declaredType
+end
+
+composition xxx_DocumentRoot_enumerationType between
+	DocumentRoot[*] role xxx_DocumentRoot_enumerationType_src
+	EnumerationTypeType[*] role enumerationType
+end
+
+composition xxx_DocumentRoot_enumerationValue between
+	DocumentRoot[*] role xxx_DocumentRoot_enumerationValue_src
+	EnumerationValueType[*] role enumerationValue
+end
+
+composition xxx_DocumentRoot_extendedAttribute between
+	DocumentRoot[*] role xxx_DocumentRoot_extendedAttribute_src
+	ExtendedAttributeType[*] role extendedAttribute
+end
+
+composition xxx_DocumentRoot_extendedAttributes between
+	DocumentRoot[*] role xxx_DocumentRoot_extendedAttributes_src
+	ExtendedAttributesType[*] role extendedAttributes
+end
+
+composition xxx_DocumentRoot_externalPackage between
+	DocumentRoot[*] role xxx_DocumentRoot_externalPackage_src
+	ExternalPackageType[*] role externalPackage
+end
+
+composition xxx_DocumentRoot_externalPackages between
+	DocumentRoot[*] role xxx_DocumentRoot_externalPackages_src
+	ExternalPackagesType[*] role externalPackages
+end
+
+composition xxx_DocumentRoot_externalReference between
+	DocumentRoot[*] role xxx_DocumentRoot_externalReference_src
+	ExternalReferenceType[*] role externalReference
+end
+
+composition xxx_DocumentRoot_finishMode between
+	DocumentRoot[*] role xxx_DocumentRoot_finishMode_src
+	FinishModeType[*] role finishMode
+end
+
+composition xxx_DocumentRoot_formalParameter between
+	DocumentRoot[*] role xxx_DocumentRoot_formalParameter_src
+	FormalParameterType[*] role formalParameter
+end
+
+composition xxx_DocumentRoot_formalParameters between
+	DocumentRoot[*] role xxx_DocumentRoot_formalParameters_src
+	FormalParametersType[*] role formalParameters
+end
+
+composition xxx_DocumentRoot_implementation between
+	DocumentRoot[*] role xxx_DocumentRoot_implementation_src
+	ImplementationType[*] role implementation
+end
+
+composition xxx_DocumentRoot_join between
+	DocumentRoot[*] role xxx_DocumentRoot_join_src
+	JoinType[*] role join
+end
+
+composition xxx_DocumentRoot_listType between
+	DocumentRoot[*] role xxx_DocumentRoot_listType_src
+	ListTypeType[*] role listType
+end
+
+composition xxx_DocumentRoot_manual between
+	DocumentRoot[*] role xxx_DocumentRoot_manual_src
+	ManualType[*] role manual
+end
+
+composition xxx_DocumentRoot_member between
+	DocumentRoot[*] role xxx_DocumentRoot_member_src
+	MemberType[*] role member
+end
+
+composition xxx_DocumentRoot_no between
+	DocumentRoot[*] role xxx_DocumentRoot_no_src
+	NoType[*] role no
+end
+
+composition xxx_DocumentRoot_package between
+	DocumentRoot[*] role xxx_DocumentRoot_package_src
+	PackageType[*] role package
+end
+
+composition xxx_DocumentRoot_packageHeader between
+	DocumentRoot[*] role xxx_DocumentRoot_packageHeader_src
+	PackageHeaderType[*] role packageHeader
+end
+
+composition xxx_DocumentRoot_participant between
+	DocumentRoot[*] role xxx_DocumentRoot_participant_src
+	ParticipantType[*] role participant
+end
+
+composition xxx_DocumentRoot_participants between
+	DocumentRoot[*] role xxx_DocumentRoot_participants_src
+	ParticipantsType[*] role participants
+end
+
+composition xxx_DocumentRoot_participantType between
+	DocumentRoot[*] role xxx_DocumentRoot_participantType_src
+	ParticipantTypeType[*] role participantType
+end
+
+composition xxx_DocumentRoot_processHeader between
+	DocumentRoot[*] role xxx_DocumentRoot_processHeader_src
+	ProcessHeaderType[*] role processHeader
+end
+
+composition xxx_DocumentRoot_recordType between
+	DocumentRoot[*] role xxx_DocumentRoot_recordType_src
+	RecordTypeType[*] role recordType
+end
+
+composition xxx_DocumentRoot_redefinableHeader between
+	DocumentRoot[*] role xxx_DocumentRoot_redefinableHeader_src
+	RedefinableHeaderType[*] role redefinableHeader
+end
+
+composition xxx_DocumentRoot_responsibles between
+	DocumentRoot[*] role xxx_DocumentRoot_responsibles_src
+	ResponsiblesType[*] role responsibles
+end
+
+composition xxx_DocumentRoot_route between
+	DocumentRoot[*] role xxx_DocumentRoot_route_src
+	RouteType[*] role route
+end
+
+composition xxx_DocumentRoot_schemaType between
+	DocumentRoot[*] role xxx_DocumentRoot_schemaType_src
+	SchemaTypeType[*] role schemaType
+end
+
+composition xxx_DocumentRoot_script between
+	DocumentRoot[*] role xxx_DocumentRoot_script_src
+	ScriptType[*] role script
+end
+
+composition xxx_DocumentRoot_simulationInformation between
+	DocumentRoot[*] role xxx_DocumentRoot_simulationInformation_src
+	SimulationInformationType[*] role simulationInformation
+end
+
+composition xxx_DocumentRoot_split between
+	DocumentRoot[*] role xxx_DocumentRoot_split_src
+	SplitType[*] role split
+end
+
+composition xxx_DocumentRoot_startMode between
+	DocumentRoot[*] role xxx_DocumentRoot_startMode_src
+	StartModeType[*] role startMode
+end
+
+composition xxx_DocumentRoot_subFlow between
+	DocumentRoot[*] role xxx_DocumentRoot_subFlow_src
+	SubFlowType[*] role subFlow
+end
+
+composition xxx_DocumentRoot_timeEstimation between
+	DocumentRoot[*] role xxx_DocumentRoot_timeEstimation_src
+	TimeEstimationType[*] role timeEstimation
+end
+
+composition xxx_DocumentRoot_tool between
+	DocumentRoot[*] role xxx_DocumentRoot_tool_src
+	ToolType[*] role tool
+end
+
+composition xxx_DocumentRoot_transition between
+	DocumentRoot[*] role xxx_DocumentRoot_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_DocumentRoot_transitionRef between
+	DocumentRoot[*] role xxx_DocumentRoot_transitionRef_src
+	TransitionRefType[*] role transitionRef
+end
+
+composition xxx_DocumentRoot_transitionRefs between
+	DocumentRoot[*] role xxx_DocumentRoot_transitionRefs_src
+	TransitionRefsType[*] role transitionRefs
+end
+
+composition xxx_DocumentRoot_transitionRestriction between
+	DocumentRoot[*] role xxx_DocumentRoot_transitionRestriction_src
+	TransitionRestrictionType[*] role transitionRestriction
+end
+
+composition xxx_DocumentRoot_transitionRestrictions between
+	DocumentRoot[*] role xxx_DocumentRoot_transitionRestrictions_src
+	TransitionRestrictionsType[*] role transitionRestrictions
+end
+
+composition xxx_DocumentRoot_transitions_ between
+	DocumentRoot[*] role xxx_DocumentRoot_transitions__src
+	TransitionsType[*] role transitions_
+end
+
+composition xxx_DocumentRoot_typeDeclaration between
+	DocumentRoot[*] role xxx_DocumentRoot_typeDeclaration_src
+	TypeDeclarationType[*] role typeDeclaration
+end
+
+composition xxx_DocumentRoot_typeDeclarations between
+	DocumentRoot[*] role xxx_DocumentRoot_typeDeclarations_src
+	TypeDeclarationsType[*] role typeDeclarations
+end
+
+composition xxx_DocumentRoot_unionType between
+	DocumentRoot[*] role xxx_DocumentRoot_unionType_src
+	UnionTypeType[*] role unionType
+end
+
+composition xxx_DocumentRoot_workflowProcess between
+	DocumentRoot[*] role xxx_DocumentRoot_workflowProcess_src
+	WorkflowProcessType[*] role workflowProcess
+end
+
+composition xxx_DocumentRoot_workflowProcesses between
+	DocumentRoot[*] role xxx_DocumentRoot_workflowProcesses_src
+	WorkflowProcessesType[*] role workflowProcesses
+end
+
+composition xxx_DocumentRoot_xpression between
+	DocumentRoot[*] role xxx_DocumentRoot_xpression_src
+	XpressionType[*] role xpression
+end
+
+composition xxx_EnumerationTypeType_enumerationValue between
+	EnumerationTypeType[0..1] role xxx_EnumerationTypeType_enumerationValue_src
+	EnumerationValueType[1..*] role enumerationValue
+end
+
+composition xxx_ExtendedAttributesType_extendedAttribute between
+	ExtendedAttributesType[0..1] role xxx_ExtendedAttributesType_extendedAttribute_src
+	ExtendedAttributeType[*] role extendedAttribute
+end
+
+composition xxx_ExternalPackagesType_externalPackage between
+	ExternalPackagesType[0..1] role xxx_ExternalPackagesType_externalPackage_src
+	ExternalPackageType[*] role externalPackage
+end
+
+composition xxx_ExternalPackageType_extendedAttributes between
+	ExternalPackageType[*] role xxx_ExternalPackageType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_FinishModeType_automatic between
+	FinishModeType[*] role xxx_FinishModeType_automatic_src
+	AutomaticType[0..1] role automatic
+end
+
+composition xxx_FinishModeType_manual between
+	FinishModeType[*] role xxx_FinishModeType_manual_src
+	ManualType[0..1] role manual
+end
+
+composition xxx_FormalParametersType_formalParameter between
+	FormalParametersType[0..1] role xxx_FormalParametersType_formalParameter_src
+	FormalParameterType[*] role formalParameter
+end
+
+composition xxx_FormalParameterType_dataType between
+	FormalParameterType[*] role xxx_FormalParameterType_dataType_src
+	DataTypeType[1] role dataType
+end
+
+composition xxx_ImplementationType_no between
+	ImplementationType[*] role xxx_ImplementationType_no_src
+	NoType[0..1] role no
+end
+
+composition xxx_ImplementationType_tool between
+	ImplementationType[0..1] role xxx_ImplementationType_tool_src
+	ToolType[*] role tool
+end
+
+composition xxx_ImplementationType_subFlow between
+	ImplementationType[*] role xxx_ImplementationType_subFlow_src
+	SubFlowType[0..1] role subFlow
+end
+
+composition xxx_ListTypeType_basicType between
+	ListTypeType[*] role xxx_ListTypeType_basicType_src
+	BasicTypeType[0..1] role basicType
+end
+
+composition xxx_ListTypeType_declaredType between
+	ListTypeType[*] role xxx_ListTypeType_declaredType_src
+	DeclaredTypeType[0..1] role declaredType
+end
+
+composition xxx_ListTypeType_schemaType between
+	ListTypeType[*] role xxx_ListTypeType_schemaType_src
+	SchemaTypeType[0..1] role schemaType
+end
+
+composition xxx_ListTypeType_externalReference between
+	ListTypeType[*] role xxx_ListTypeType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_ListTypeType_recordType between
+	ListTypeType[*] role xxx_ListTypeType_recordType_src
+	RecordTypeType[0..1] role recordType
+end
+
+composition xxx_ListTypeType_unionType between
+	ListTypeType[*] role xxx_ListTypeType_unionType_src
+	UnionTypeType[0..1] role unionType
+end
+
+composition xxx_ListTypeType_enumerationType between
+	ListTypeType[*] role xxx_ListTypeType_enumerationType_src
+	EnumerationTypeType[0..1] role enumerationType
+end
+
+composition xxx_ListTypeType_arrayType between
+	ListTypeType[*] role xxx_ListTypeType_arrayType_src
+	ArrayTypeType[0..1] role arrayType
+end
+
+composition xxx_ListTypeType_listType between
+	ListTypeType[*] role xxx_ListTypeType_listType_src
+	ListTypeType[0..1] role listType
+end
+
+composition xxx_MemberType_basicType between
+	MemberType[*] role xxx_MemberType_basicType_src
+	BasicTypeType[0..1] role basicType
+end
+
+composition xxx_MemberType_declaredType between
+	MemberType[*] role xxx_MemberType_declaredType_src
+	DeclaredTypeType[0..1] role declaredType
+end
+
+composition xxx_MemberType_schemaType between
+	MemberType[*] role xxx_MemberType_schemaType_src
+	SchemaTypeType[0..1] role schemaType
+end
+
+composition xxx_MemberType_externalReference between
+	MemberType[*] role xxx_MemberType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_MemberType_recordType between
+	MemberType[*] role xxx_MemberType_recordType_src
+	RecordTypeType[0..1] role recordType
+end
+
+composition xxx_MemberType_unionType between
+	MemberType[*] role xxx_MemberType_unionType_src
+	UnionTypeType[0..1] role unionType
+end
+
+composition xxx_MemberType_enumerationType between
+	MemberType[*] role xxx_MemberType_enumerationType_src
+	EnumerationTypeType[0..1] role enumerationType
+end
+
+composition xxx_MemberType_arrayType between
+	MemberType[*] role xxx_MemberType_arrayType_src
+	ArrayTypeType[0..1] role arrayType
+end
+
+composition xxx_MemberType_listType between
+	MemberType[*] role xxx_MemberType_listType_src
+	ListTypeType[0..1] role listType
+end
+
+composition xxx_PackageType_packageHeader between
+	PackageType[*] role xxx_PackageType_packageHeader_src
+	PackageHeaderType[1] role packageHeader
+end
+
+composition xxx_PackageType_redefinableHeader between
+	PackageType[*] role xxx_PackageType_redefinableHeader_src
+	RedefinableHeaderType[0..1] role redefinableHeader
+end
+
+composition xxx_PackageType_conformanceClass between
+	PackageType[*] role xxx_PackageType_conformanceClass_src
+	ConformanceClassType[0..1] role conformanceClass
+end
+
+composition xxx_PackageType_script between
+	PackageType[*] role xxx_PackageType_script_src
+	ScriptType[0..1] role script
+end
+
+composition xxx_PackageType_externalPackages between
+	PackageType[*] role xxx_PackageType_externalPackages_src
+	ExternalPackagesType[0..1] role externalPackages
+end
+
+composition xxx_PackageType_typeDeclarations between
+	PackageType[*] role xxx_PackageType_typeDeclarations_src
+	TypeDeclarationsType[0..1] role typeDeclarations
+end
+
+composition xxx_PackageType_participants between
+	PackageType[*] role xxx_PackageType_participants_src
+	ParticipantsType[0..1] role participants
+end
+
+composition xxx_PackageType_applications between
+	PackageType[*] role xxx_PackageType_applications_src
+	ApplicationsType[0..1] role applications
+end
+
+composition xxx_PackageType_dataFields between
+	PackageType[*] role xxx_PackageType_dataFields_src
+	DataFieldsType[0..1] role dataFields
+end
+
+composition xxx_PackageType_workflowProcesses between
+	PackageType[*] role xxx_PackageType_workflowProcesses_src
+	WorkflowProcessesType[0..1] role workflowProcesses
+end
+
+composition xxx_PackageType_extendedAttributes between
+	PackageType[*] role xxx_PackageType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_ParticipantsType_participant between
+	ParticipantsType[0..1] role xxx_ParticipantsType_participant_src
+	ParticipantType[*] role participant
+end
+
+composition xxx_ParticipantType_participantType between
+	ParticipantType[*] role xxx_ParticipantType_participantType_src
+	ParticipantTypeType[1] role participantType
+end
+
+composition xxx_ParticipantType_externalReference between
+	ParticipantType[*] role xxx_ParticipantType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_ParticipantType_extendedAttributes between
+	ParticipantType[*] role xxx_ParticipantType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_ProcessHeaderType_timeEstimation between
+	ProcessHeaderType[*] role xxx_ProcessHeaderType_timeEstimation_src
+	TimeEstimationType[0..1] role timeEstimation
+end
+
+composition xxx_RecordTypeType_member between
+	RecordTypeType[0..1] role xxx_RecordTypeType_member_src
+	MemberType[1..*] role member
+end
+
+composition xxx_RedefinableHeaderType_responsibles between
+	RedefinableHeaderType[*] role xxx_RedefinableHeaderType_responsibles_src
+	ResponsiblesType[0..1] role responsibles
+end
+
+composition xxx_SimulationInformationType_timeEstimation between
+	SimulationInformationType[*] role xxx_SimulationInformationType_timeEstimation_src
+	TimeEstimationType[1] role timeEstimation
+end
+
+composition xxx_SplitType_transitionRefs between
+	SplitType[*] role xxx_SplitType_transitionRefs_src
+	TransitionRefsType[0..1] role transitionRefs
+end
+
+composition xxx_StartModeType_automatic between
+	StartModeType[*] role xxx_StartModeType_automatic_src
+	AutomaticType[0..1] role automatic
+end
+
+composition xxx_StartModeType_manual between
+	StartModeType[*] role xxx_StartModeType_manual_src
+	ManualType[0..1] role manual
+end
+
+composition xxx_SubFlowType_actualParameters between
+	SubFlowType[*] role xxx_SubFlowType_actualParameters_src
+	ActualParametersType[0..1] role actualParameters
+end
+
+composition xxx_ToolType_actualParameters between
+	ToolType[*] role xxx_ToolType_actualParameters_src
+	ActualParametersType[0..1] role actualParameters
+end
+
+composition xxx_ToolType_extendedAttributes between
+	ToolType[*] role xxx_ToolType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_TransitionRefsType_transitionRef between
+	TransitionRefsType[0..1] role xxx_TransitionRefsType_transitionRef_src
+	TransitionRefType[*] role transitionRef
+end
+
+composition xxx_TransitionRestrictionsType_transitionRestriction between
+	TransitionRestrictionsType[0..1] role xxx_TransitionRestrictionsType_transitionRestriction_src
+	TransitionRestrictionType[*] role transitionRestriction
+end
+
+composition xxx_TransitionRestrictionType_join between
+	TransitionRestrictionType[*] role xxx_TransitionRestrictionType_join_src
+	JoinType[0..1] role join
+end
+
+composition xxx_TransitionRestrictionType_split between
+	TransitionRestrictionType[*] role xxx_TransitionRestrictionType_split_src
+	SplitType[0..1] role split
+end
+
+composition xxx_TransitionsType_transition between
+	TransitionsType[0..1] role xxx_TransitionsType_transition_src
+	TransitionType[*] role transition
+end
+
+composition xxx_TransitionType_condition between
+	TransitionType[*] role xxx_TransitionType_condition_src
+	ConditionType[0..1] role condition
+end
+
+composition xxx_TransitionType_extendedAttributes between
+	TransitionType[*] role xxx_TransitionType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_TypeDeclarationsType_typeDeclaration between
+	TypeDeclarationsType[0..1] role xxx_TypeDeclarationsType_typeDeclaration_src
+	TypeDeclarationType[*] role typeDeclaration
+end
+
+composition xxx_TypeDeclarationType_basicType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_basicType_src
+	BasicTypeType[0..1] role basicType
+end
+
+composition xxx_TypeDeclarationType_declaredType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_declaredType_src
+	DeclaredTypeType[0..1] role declaredType
+end
+
+composition xxx_TypeDeclarationType_schemaType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_schemaType_src
+	SchemaTypeType[0..1] role schemaType
+end
+
+composition xxx_TypeDeclarationType_externalReference between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_externalReference_src
+	ExternalReferenceType[0..1] role externalReference
+end
+
+composition xxx_TypeDeclarationType_recordType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_recordType_src
+	RecordTypeType[0..1] role recordType
+end
+
+composition xxx_TypeDeclarationType_unionType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_unionType_src
+	UnionTypeType[0..1] role unionType
+end
+
+composition xxx_TypeDeclarationType_enumerationType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_enumerationType_src
+	EnumerationTypeType[0..1] role enumerationType
+end
+
+composition xxx_TypeDeclarationType_arrayType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_arrayType_src
+	ArrayTypeType[0..1] role arrayType
+end
+
+composition xxx_TypeDeclarationType_listType between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_listType_src
+	ListTypeType[0..1] role listType
+end
+
+composition xxx_TypeDeclarationType_extendedAttributes between
+	TypeDeclarationType[*] role xxx_TypeDeclarationType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+
+composition xxx_UnionTypeType_member between
+	UnionTypeType[0..1] role xxx_UnionTypeType_member_src
+	MemberType[1..*] role member
+end
+
+composition xxx_WorkflowProcessesType_workflowProcess between
+	WorkflowProcessesType[0..1] role xxx_WorkflowProcessesType_workflowProcess_src
+	WorkflowProcessType[*] role workflowProcess
+end
+
+composition xxx_WorkflowProcessType_processHeader between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_processHeader_src
+	ProcessHeaderType[1] role processHeader
+end
+
+composition xxx_WorkflowProcessType_redefinableHeader between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_redefinableHeader_src
+	RedefinableHeaderType[0..1] role redefinableHeader
+end
+
+composition xxx_WorkflowProcessType_formalParameters between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_formalParameters_src
+	FormalParametersType[0..1] role formalParameters
+end
+
+composition xxx_WorkflowProcessType_dataFields between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_dataFields_src
+	DataFieldsType[0..1] role dataFields
+end
+
+composition xxx_WorkflowProcessType_participants between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_participants_src
+	ParticipantsType[0..1] role participants
+end
+
+composition xxx_WorkflowProcessType_applications between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_applications_src
+	ApplicationsType[0..1] role applications
+end
+
+composition xxx_WorkflowProcessType_activitySets between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_activitySets_src
+	ActivitySetsType[0..1] role activitySets
+end
+
+composition xxx_WorkflowProcessType_activities between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_activities_src
+	ActivitiesType[0..1] role activities
+end
+
+composition xxx_WorkflowProcessType_transitions_ between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_transitions__src
+	TransitionsType[0..1] role transitions_
+end
+
+composition xxx_WorkflowProcessType_extendedAttributes between
+	WorkflowProcessType[*] role xxx_WorkflowProcessType_extendedAttributes_src
+	ExtendedAttributesType[0..1] role extendedAttributes
+end
+

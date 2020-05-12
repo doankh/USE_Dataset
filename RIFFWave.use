@@ -1,0 +1,271 @@
+model wav
+enum ChunkDataListTypeID{
+default
+}
+
+enum ChunkTypeID{
+default
+}
+
+enum CompressionCode{
+default
+}
+
+enum SampleLoopType{
+default
+}
+
+enum SMPTEFormat{
+default
+}
+
+class RIFFWave
+attributes
+	size : Integer
+operations
+	getChunksByEClass(eClass : String)
+	getFirstChunkByEClass(eClass : String):Chunk
+	init(buf : String)
+	toAudioFileFormat():String
+	toAudioFormat():String
+	toAudioInputStream():String
+	toByteArray():String
+	write(file : String)
+end
+
+class Channel
+attributes
+operations
+end
+
+abstract class Chunk
+attributes
+	blockAlignedSize : Integer
+	size : Integer
+	chunkTypeID : ChunkTypeID
+	chunkTypeIDValue : Integer
+operations
+	init(riffWave : RIFFWave,buf : String)
+	toByteArray():String
+end
+
+class ChunkCue<Chunk
+attributes
+	numberOfCuePoints : String
+operations
+end
+
+class ChunkData<Chunk
+attributes
+	sampleDataOriginal : String
+operations
+end
+
+class ChunkDataList<Chunk
+attributes
+	typeID : ChunkDataListTypeID
+operations
+end
+
+abstract class ChunkDataListType<Chunk
+attributes
+	cuePointID : String
+	text : String
+	textAsString : String
+operations
+end
+
+class ChunkDataListTypeLabel<ChunkDataListType
+attributes
+operations
+end
+
+class ChunkDataListTypeLabeledText<ChunkDataListType
+attributes
+	sampleLength : String
+	purposeID : String
+	country : String
+	language : String
+	dialect : String
+	codePage : String
+operations
+end
+
+class ChunkDataListTypeNote<ChunkDataListType
+attributes
+operations
+end
+
+class ChunkFact<Chunk
+attributes
+	formatDependantData : String
+operations
+end
+
+class ChunkFormat<Chunk
+attributes
+	compressionCode : CompressionCode
+	compressionCodeValue : String
+	numberOfChannels : String
+	sampleRate : String
+	averageBytesPerSecond : String
+	blockAlign : String
+	significantBitsPerSample : String
+	numberOfExtraFormatBytes : String
+	extraFormatBytes : String
+operations
+end
+
+class ChunkInstrument<Chunk
+attributes
+	unshiftedNote : Boolean
+	fineTune : Boolean
+	gain : Boolean
+	lowNote : Boolean
+	highNote : Boolean
+	lowVelocity : Boolean
+	highVelocity : Boolean
+operations
+end
+
+class ChunkPlayList<Chunk
+attributes
+	numberOfSegments : String
+operations
+end
+
+class ChunkSampler<Chunk
+attributes
+	manufacturer : String
+	product : String
+	samplePeriod : String
+	midiUnityNote : String
+	midiPitchFraction : String
+	smpteFormat : String
+	smpteOffset : String
+	numberOfSampleLoops : String
+	samplerDataSize : String
+	samplerData : String
+operations
+end
+
+class ChunkSilent<Chunk
+attributes
+	numberOfSilentSamples : String
+operations
+end
+
+class ChunkUnknown<Chunk
+attributes
+	data : String
+	unknownChunkTypeIdValue : String
+	wavRandomAccessFilePointer : Integer
+operations
+end
+
+class ChunkWaveList<Chunk
+attributes
+operations
+end
+
+class CuePoint
+attributes
+	cuePointID : String
+	position : String
+	dataChunkID : String
+	chunkStart : String
+	blockStart : String
+	sampleOffset : String
+operations
+end
+
+class ParseChunkException
+attributes
+	exception : String
+	stringCause : String
+	stringMessage : String
+	stringStackTrace : String
+operations
+end
+
+abstract class SampleData
+attributes
+operations
+end
+
+class SampleData8Bit<SampleData
+attributes
+	sample : Boolean
+operations
+end
+
+class SampleData16Bit<SampleData
+attributes
+	sample : Integer
+operations
+end
+
+class SampleLoop
+attributes
+	cuePointID : String
+	type : String
+	start : String
+	end_ : String
+	fraction : String
+	playCount : String
+operations
+end
+
+class Segment
+attributes
+	cuePointID : String
+	lengthInSamples : String
+	numberOfRepeats : String
+operations
+end
+
+composition xxx_RIFFWave_chunks between
+	RIFFWave[0..1] role xxx_RIFFWave_chunks_src
+	Chunk[*] role chunks
+end
+
+composition xxx_RIFFWave_parseChunkExceptions between
+	RIFFWave[0..1] role xxx_RIFFWave_parseChunkExceptions_src
+	ParseChunkException[*] role parseChunkExceptions
+end
+
+composition xxx_Channel_sampleData between
+	Channel[*] role xxx_Channel_sampleData_src
+	SampleData[0..1] role sampleData
+end
+
+association xxx_ChunkCue_cuePoints between
+	ChunkCue[0..1] role xxx_ChunkCue_cuePoints_src
+	CuePoint[*] role cuePoints
+end
+
+composition xxx_ChunkData_channels between
+	ChunkData[0..1] role xxx_ChunkData_channels_src
+	Channel[*] role channels
+end
+
+association xxx_ChunkDataList_dataListChunks between
+	ChunkDataList[0..1] role xxx_ChunkDataList_dataListChunks_src
+	ChunkDataListType[*] role dataListChunks
+end
+
+association xxx_ChunkPlayList_segments between
+	ChunkPlayList[0..1] role xxx_ChunkPlayList_segments_src
+	Segment[*] role segments
+end
+
+composition xxx_ChunkSampler_sampleLoops between
+	ChunkSampler[0..1] role xxx_ChunkSampler_sampleLoops_src
+	SampleLoop[*] role sampleLoops
+end
+
+composition xxx_ChunkWaveList_alternatingSilentAndDataChunks between
+	ChunkWaveList[0..1] role xxx_ChunkWaveList_alternatingSilentAndDataChunks_src
+	Chunk[*] role alternatingSilentAndDataChunks
+end
+

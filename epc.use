@@ -1,0 +1,169 @@
+model epc
+class EPCDiagram
+attributes
+operations
+end
+
+abstract class FlowConnector
+attributes
+operations
+end
+
+class ControlFlow<FlowConnector
+attributes
+operations
+end
+
+class OrganizationalFlow<FlowConnector
+attributes
+operations
+end
+
+class OrganizationalUnit
+attributes
+	name : String
+operations
+end
+
+abstract class ProcessObject
+attributes
+operations
+end
+
+abstract class Function<ProcessObject
+attributes
+	name : String
+operations
+end
+
+class BasicFunction<Function
+attributes
+operations
+end
+
+class ComplexFunction<Function
+attributes
+operations
+end
+
+abstract class LogicalOperator<ProcessObject
+attributes
+operations
+end
+
+class Event<ProcessObject
+attributes
+	name : String
+operations
+end
+
+class And<LogicalOperator
+attributes
+operations
+end
+
+class Or<LogicalOperator
+attributes
+operations
+end
+
+class Xor<LogicalOperator
+attributes
+operations
+end
+
+composition xxx_EPCDiagram_flows between
+	EPCDiagram[0..1] role xxx_EPCDiagram_flows_src
+	FlowConnector[*] role flows
+end
+
+composition xxx_EPCDiagram_objects between
+	EPCDiagram[0..1] role xxx_EPCDiagram_objects_src
+	ProcessObject[*] role objects
+end
+
+composition xxx_EPCDiagram_units between
+	EPCDiagram[0..1] role xxx_EPCDiagram_units_src
+	OrganizationalUnit[*] role units
+end
+
+association xxx_ControlFlow_fsource between
+	ControlFlow[*] role xxx_ControlFlow_fsource_src
+	Function[0..1] role fsource
+end
+
+association xxx_ControlFlow_ftarget between
+	ControlFlow[*] role xxx_ControlFlow_ftarget_src
+	Function[0..1] role ftarget
+end
+
+association xxx_ControlFlow_lsource between
+	ControlFlow[*] role xxx_ControlFlow_lsource_src
+	LogicalOperator[0..1] role lsource
+end
+
+association xxx_ControlFlow_ltarget between
+	ControlFlow[*] role xxx_ControlFlow_ltarget_src
+	LogicalOperator[0..1] role ltarget
+end
+
+association xxx_ControlFlow_esource between
+	ControlFlow[*] role xxx_ControlFlow_esource_src
+	Event[0..1] role esource
+end
+
+association xxx_ControlFlow_etarget between
+	ControlFlow[*] role xxx_ControlFlow_etarget_src
+	Event[0..1] role etarget
+end
+
+association xxx_OrganizationalFlow_target between
+	OrganizationalFlow[*] role xxx_OrganizationalFlow_target_src
+	Function[1] role target
+end
+
+association xxx_OrganizationalFlow_source between
+	OrganizationalFlow[0..1] role xxx_OrganizationalFlow_source_src
+	OrganizationalUnit[*] role source
+end
+
+association xxx_OrganizationalUnit_outgoing between
+	OrganizationalUnit[0..1] role xxx_OrganizationalUnit_outgoing_src
+	OrganizationalFlow[*] role outgoing
+end
+
+association xxx_Function_outgoing between
+	Function[*] role xxx_Function_outgoing_src
+	ControlFlow[1] role outgoing
+end
+
+association xxx_Function_incoming between
+	Function[*] role xxx_Function_incoming_src
+	ControlFlow[1] role incoming
+end
+
+association xxx_ComplexFunction_contents between
+	ComplexFunction[0..1] role xxx_ComplexFunction_contents_src
+	EPCDiagram[*] role contents
+end
+
+association xxx_LogicalOperator_outgoing between
+	LogicalOperator[0..1] role xxx_LogicalOperator_outgoing_src
+	ControlFlow[*] role outgoing
+end
+
+association xxx_LogicalOperator_incoming between
+	LogicalOperator[0..1] role xxx_LogicalOperator_incoming_src
+	ControlFlow[*] role incoming
+end
+
+association xxx_Event_outgoing between
+	Event[0..1] role xxx_Event_outgoing_src
+	ControlFlow[*] role outgoing
+end
+
+association xxx_Event_incoming between
+	Event[0..1] role xxx_Event_incoming_src
+	ControlFlow[*] role incoming
+end
+

@@ -1,0 +1,86 @@
+model planetlab
+class RSpec
+attributes
+	start_time : String
+	duration : String
+operations
+end
+
+class NetSpec
+attributes
+	name : String
+	start_time : String
+	duration : String
+operations
+end
+
+class NodeSpec
+attributes
+	name : String
+	type : String
+	init_params : String
+	cpu_min : Integer
+	cpu_share : Integer
+	cpu_pct : Integer
+	disk_max : Integer
+	start_time : String
+	duration : String
+operations
+end
+
+class LinkSpec
+attributes
+	type : String
+	init_params : String
+	bw : Integer
+	min_alloc : Integer
+	max_alloc : Integer
+	start_time : String
+	duration : String
+operations
+end
+
+class IfSpec
+attributes
+	name : String
+	addr : String
+	type : String
+	init_params : String
+	min_rate : Integer
+	max_rate : Integer
+	max_kbyte : Integer
+	ip_spoof : Boolean
+operations
+end
+
+class SwitchSpec<NodeSpec
+attributes
+	fib_max : Integer
+operations
+end
+
+association xxx_RSpec_networks between
+	RSpec[0..1] role xxx_RSpec_networks_src
+	NetSpec[1..*] role networks
+end
+
+association xxx_NetSpec_nodes between
+	NetSpec[0..1] role xxx_NetSpec_nodes_src
+	NodeSpec[1..*] role nodes
+end
+
+composition xxx_NetSpec_links between
+	NetSpec[0..1] role xxx_NetSpec_links_src
+	LinkSpec[*] role links
+end
+
+association xxx_NodeSpec_net_if between
+	NodeSpec[0..1] role xxx_NodeSpec_net_if_src
+	IfSpec[1..*] role net_if
+end
+
+association xxx_LinkSpec_endpoint between
+	LinkSpec[0..1] role xxx_LinkSpec_endpoint_src
+	IfSpec[1..*] role endpoint
+end
+

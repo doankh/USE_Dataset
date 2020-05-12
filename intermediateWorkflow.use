@@ -1,0 +1,273 @@
+model intermediateWorkflow
+class IwModel
+attributes
+	name : String
+operations
+end
+
+class IwConcern
+attributes
+	name : String
+operations
+end
+
+class IwStep
+attributes
+	name : String
+operations
+end
+
+class IwWorkflow
+attributes
+	name : String
+	isParentDynStub : Boolean
+operations
+end
+
+abstract class IwNode
+attributes
+	name : String
+operations
+end
+
+class IwNodeConnection
+attributes
+	conditionName : String
+	stubEntryIndexAsString : String
+	stubExitIndexAsString : String
+	trigger : Boolean
+	label : String
+	threshold : String
+operations
+end
+
+class IwInput<IwNode
+attributes
+operations
+end
+
+class IwCustomizableNode<IwNode
+attributes
+	customizableNodeRefId : String
+operations
+end
+
+class IwOutput<IwNode
+attributes
+operations
+end
+
+class IwStartPoint<IwNode
+attributes
+	startPointType : String
+operations
+end
+
+class IwEndPoint<IwNode
+attributes
+operations
+end
+
+class IwOrFork<IwNode
+attributes
+operations
+end
+
+class IwAndFork<IwNode
+attributes
+operations
+end
+
+class IwAndJoin<IwNode
+attributes
+operations
+end
+
+class IwWaitingPlace<IwNode
+attributes
+	transient : Boolean
+operations
+end
+
+class IwStub<IwNode
+attributes
+	stubType : String
+operations
+end
+
+class IwPluginBinding
+attributes
+	conditionLabel : String
+operations
+end
+
+class IwInBinding
+attributes
+operations
+end
+
+class IwOutBinding
+attributes
+operations
+end
+
+class IwTimer<IwWaitingPlace
+attributes
+operations
+end
+
+composition xxx_IwModel_concerns between
+	IwModel[0..1] role xxx_IwModel_concerns_src
+	IwConcern[*] role concerns
+end
+
+composition xxx_IwConcern_workflows between
+	IwConcern[0..1] role xxx_IwConcern_workflows_src
+	IwWorkflow[1..*] role workflows
+end
+
+composition xxx_IwConcern_steps between
+	IwConcern[0..1] role xxx_IwConcern_steps_src
+	IwStep[1..*] role steps
+end
+
+association xxx_IwConcern_model_ between
+	IwConcern[*] role xxx_IwConcern_model__src
+	IwModel[0..1] role model_
+end
+
+association xxx_IwStep_nodes between
+	IwStep[0..1] role xxx_IwStep_nodes_src
+	IwNode[1..*] role nodes
+end
+
+association xxx_IwStep_concern between
+	IwStep[*] role xxx_IwStep_concern_src
+	IwConcern[0..1] role concern
+end
+
+association xxx_IwStep_outboundStubs between
+	IwStep[0..1] role xxx_IwStep_outboundStubs_src
+	IwStub[*] role outboundStubs
+end
+
+composition xxx_IwWorkflow_nodes between
+	IwWorkflow[0..1] role xxx_IwWorkflow_nodes_src
+	IwNode[1..*] role nodes
+end
+
+association xxx_IwWorkflow_startPoints between
+	IwWorkflow[0..1] role xxx_IwWorkflow_startPoints_src
+	IwStartPoint[1..*] role startPoints
+end
+
+association xxx_IwWorkflow_concern between
+	IwWorkflow[*] role xxx_IwWorkflow_concern_src
+	IwConcern[0..1] role concern
+end
+
+composition xxx_IwNode_succs between
+	IwNode[0..1] role xxx_IwNode_succs_src
+	IwNodeConnection[*] role succs
+end
+
+association xxx_IwNode_preds between
+	IwNode[0..1] role xxx_IwNode_preds_src
+	IwNodeConnection[*] role preds
+end
+
+association xxx_IwNode_step between
+	IwNode[*] role xxx_IwNode_step_src
+	IwStep[0..1] role step
+end
+
+association xxx_IwNode_workflow between
+	IwNode[*] role xxx_IwNode_workflow_src
+	IwWorkflow[0..1] role workflow
+end
+
+association xxx_IwNodeConnection_source between
+	IwNodeConnection[*] role xxx_IwNodeConnection_source_src
+	IwNode[0..1] role source
+end
+
+association xxx_IwNodeConnection_target between
+	IwNodeConnection[*] role xxx_IwNodeConnection_target_src
+	IwNode[0..1] role target
+end
+
+association xxx_IwNodeConnection_inBinding between
+	IwNodeConnection[0..1] role xxx_IwNodeConnection_inBinding_src
+	IwInBinding[*] role inBinding
+end
+
+association xxx_IwNodeConnection_outBinding between
+	IwNodeConnection[0..1] role xxx_IwNodeConnection_outBinding_src
+	IwOutBinding[*] role outBinding
+end
+
+association xxx_IwStartPoint_inBindings between
+	IwStartPoint[0..1] role xxx_IwStartPoint_inBindings_src
+	IwInBinding[*] role inBindings
+end
+
+association xxx_IwEndPoint_outBindings between
+	IwEndPoint[0..1] role xxx_IwEndPoint_outBindings_src
+	IwOutBinding[*] role outBindings
+end
+
+composition xxx_IwStub_pluginBindings between
+	IwStub[0..1] role xxx_IwStub_pluginBindings_src
+	IwPluginBinding[*] role pluginBindings
+end
+
+association xxx_IwStub_outboundInSteps between
+	IwStub[0..1] role xxx_IwStub_outboundInSteps_src
+	IwStep[*] role outboundInSteps
+end
+
+composition xxx_IwPluginBinding_inBindings between
+	IwPluginBinding[0..1] role xxx_IwPluginBinding_inBindings_src
+	IwInBinding[*] role inBindings
+end
+
+composition xxx_IwPluginBinding_outBindings between
+	IwPluginBinding[0..1] role xxx_IwPluginBinding_outBindings_src
+	IwOutBinding[*] role outBindings
+end
+
+association xxx_IwPluginBinding_stub between
+	IwPluginBinding[*] role xxx_IwPluginBinding_stub_src
+	IwStub[0..1] role stub
+end
+
+association xxx_IwInBinding_disjunctiveStubEntries between
+	IwInBinding[0..1] role xxx_IwInBinding_disjunctiveStubEntries_src
+	IwNodeConnection[1..*] role disjunctiveStubEntries
+end
+
+association xxx_IwInBinding_pluginStartPoint between
+	IwInBinding[*] role xxx_IwInBinding_pluginStartPoint_src
+	IwStartPoint[0..1] role pluginStartPoint
+end
+
+association xxx_IwInBinding_pluginBinding between
+	IwInBinding[*] role xxx_IwInBinding_pluginBinding_src
+	IwPluginBinding[0..1] role pluginBinding
+end
+
+association xxx_IwOutBinding_stubExit between
+	IwOutBinding[*] role xxx_IwOutBinding_stubExit_src
+	IwNodeConnection[0..1] role stubExit
+end
+
+association xxx_IwOutBinding_pluginEndPoint between
+	IwOutBinding[*] role xxx_IwOutBinding_pluginEndPoint_src
+	IwEndPoint[0..1] role pluginEndPoint
+end
+
+association xxx_IwOutBinding_pluginBinding between
+	IwOutBinding[*] role xxx_IwOutBinding_pluginBinding_src
+	IwPluginBinding[0..1] role pluginBinding
+end
+

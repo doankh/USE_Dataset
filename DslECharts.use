@@ -1,0 +1,363 @@
+model dslECharts
+enum AccessModifiers{
+default
+}
+
+enum StateModifiers{
+default
+}
+
+class Root
+attributes
+operations
+end
+
+class Package
+attributes
+	name : String
+operations
+end
+
+class Imports
+attributes
+	name : String
+operations
+end
+
+class Machine
+attributes
+	name : String
+operations
+end
+
+class MachineBody
+attributes
+operations
+end
+
+class AccessAndMachineModifiers
+attributes
+	accessModifier : AccessModifiers
+operations
+end
+
+class MachineModifier
+attributes
+	concurrent : String
+operations
+end
+
+class States
+attributes
+	stateMods : StateModifiers
+	name : String
+operations
+end
+
+class Entry
+attributes
+operations
+end
+
+class Exit
+attributes
+operations
+end
+
+class MachineConstructor
+attributes
+operations
+end
+
+class MachineInvocation
+attributes
+operations
+end
+
+class paramsDeclaration
+attributes
+	paramtype : String
+	name : String
+operations
+end
+
+class Expression<AssingExpression
+attributes
+	name : String
+operations
+end
+
+class AssingExpression
+attributes
+operations
+end
+
+class NumberLiteral<Expression
+attributes
+	valueINT : Integer
+	valueID : String
+operations
+end
+
+class Action
+attributes
+	name : String
+operations
+end
+
+class ActionBlock<Action
+attributes
+operations
+end
+
+class ActionStatement<Action
+attributes
+operations
+end
+
+class Transition
+attributes
+	at : String
+operations
+end
+
+class TargetTrn
+attributes
+operations
+end
+
+class SingleState
+attributes
+operations
+end
+
+class ListStates
+attributes
+operations
+end
+
+class HostBlock
+attributes
+	text : String
+operations
+end
+
+class SubMachine
+attributes
+operations
+end
+
+class InnerMachine
+attributes
+	name : String
+operations
+end
+
+class ExternalMachine
+attributes
+	name : String
+operations
+end
+
+class ReflectMachine
+attributes
+	name : String
+operations
+end
+
+class VariableMachine
+attributes
+	name : String
+operations
+end
+
+class Uno<MachineBody
+attributes
+operations
+end
+
+class Addtion<Expression
+attributes
+operations
+end
+
+class Multiplication<Expression
+attributes
+operations
+end
+
+composition xxx_Root_package between
+	Root[*] role xxx_Root_package_src
+	Package[0..1] role package
+end
+
+composition xxx_Root_imports between
+	Root[0..1] role xxx_Root_imports_src
+	Imports[*] role imports
+end
+
+composition xxx_Root_machine between
+	Root[0..1] role xxx_Root_machine_src
+	Machine[*] role machine
+end
+
+composition xxx_Machine_accessAndMachineModifier between
+	Machine[*] role xxx_Machine_accessAndMachineModifier_src
+	AccessAndMachineModifiers[0..1] role accessAndMachineModifier
+end
+
+composition xxx_Machine_machineBody between
+	Machine[*] role xxx_Machine_machineBody_src
+	MachineBody[0..1] role machineBody
+end
+
+composition xxx_MachineBody_hostBlock between
+	MachineBody[*] role xxx_MachineBody_hostBlock_src
+	HostBlock[0..1] role hostBlock
+end
+
+composition xxx_MachineBody_machineConstructor between
+	MachineBody[*] role xxx_MachineBody_machineConstructor_src
+	MachineConstructor[0..1] role machineConstructor
+end
+
+composition xxx_MachineBody_states_ between
+	MachineBody[*] role xxx_MachineBody_states__src
+	States[0..1] role states_
+end
+
+composition xxx_MachineBody_transition between
+	MachineBody[*] role xxx_MachineBody_transition_src
+	Transition[0..1] role transition
+end
+
+composition xxx_AccessAndMachineModifiers_machineModifier between
+	AccessAndMachineModifiers[*] role xxx_AccessAndMachineModifiers_machineModifier_src
+	MachineModifier[0..1] role machineModifier
+end
+
+composition xxx_States_en between
+	States[*] role xxx_States_en_src
+	Entry[0..1] role en
+end
+
+composition xxx_States_ex between
+	States[*] role xxx_States_ex_src
+	Exit[0..1] role ex
+end
+
+composition xxx_States_submachine between
+	States[*] role xxx_States_submachine_src
+	SubMachine[0..1] role submachine
+end
+
+composition xxx_States_machineInvocations between
+	States[*] role xxx_States_machineInvocations_src
+	MachineInvocation[0..1] role machineInvocations
+end
+
+composition xxx_Entry_a between
+	Entry[*] role xxx_Entry_a_src
+	Action[0..1] role a
+end
+
+composition xxx_Exit_a between
+	Exit[*] role xxx_Exit_a_src
+	Action[0..1] role a
+end
+
+association xxx_MachineConstructor_machineName between
+	MachineConstructor[*] role xxx_MachineConstructor_machineName_src
+	Machine[0..1] role machineName
+end
+
+composition xxx_MachineConstructor_paramsMachine between
+	MachineConstructor[*] role xxx_MachineConstructor_paramsMachine_src
+	paramsDeclaration[0..1] role paramsMachine
+end
+
+composition xxx_MachineConstructor_expr between
+	MachineConstructor[0..1] role xxx_MachineConstructor_expr_src
+	Expression[*] role expr
+end
+
+composition xxx_Expression_second between
+	Expression[*] role xxx_Expression_second_src
+	AssingExpression[0..1] role second
+end
+
+association xxx_NumberLiteral_refValue between
+	NumberLiteral[*] role xxx_NumberLiteral_refValue_src
+	Expression[0..1] role refValue
+end
+
+composition xxx_Transition_from_ between
+	Transition[*] role xxx_Transition_from__src
+	TargetTrn[0..1] role from_
+end
+
+composition xxx_Transition_to between
+	Transition[*] role xxx_Transition_to_src
+	TargetTrn[0..1] role to
+end
+
+composition xxx_TargetTrn_fromTo between
+	TargetTrn[*] role xxx_TargetTrn_fromTo_src
+	SingleState[0..1] role fromTo
+end
+
+composition xxx_TargetTrn_fromToList between
+	TargetTrn[*] role xxx_TargetTrn_fromToList_src
+	ListStates[0..1] role fromToList
+end
+
+association xxx_SingleState_fromTo between
+	SingleState[*] role xxx_SingleState_fromTo_src
+	States[0..1] role fromTo
+end
+
+composition xxx_ListStates_list between
+	ListStates[0..1] role xxx_ListStates_list_src
+	SingleState[*] role list
+end
+
+composition xxx_SubMachine_machineModifier between
+	SubMachine[*] role xxx_SubMachine_machineModifier_src
+	MachineModifier[0..1] role machineModifier
+end
+
+composition xxx_SubMachine_MachineBody between
+	SubMachine[*] role xxx_SubMachine_MachineBody_src
+	MachineBody[0..1] role MachineBody
+end
+
+composition xxx_Uno_left between
+	Uno[*] role xxx_Uno_left_src
+	MachineBody[0..1] role left
+end
+
+composition xxx_Uno_right between
+	Uno[*] role xxx_Uno_right_src
+	MachineBody[0..1] role right
+end
+
+composition xxx_Addtion_left between
+	Addtion[*] role xxx_Addtion_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Addtion_right between
+	Addtion[*] role xxx_Addtion_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Multiplication_left between
+	Multiplication[*] role xxx_Multiplication_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Multiplication_right between
+	Multiplication[*] role xxx_Multiplication_right_src
+	Expression[0..1] role right
+end
+

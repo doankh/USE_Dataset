@@ -1,0 +1,240 @@
+model futsal
+enum CrewRole{
+default
+}
+
+enum FaultType{
+default
+}
+
+class Match
+attributes
+	date : String
+	chanmpionship : String
+	round : Integer
+	section : String
+	ageGroup : String
+	category : String
+	season : String
+	code : Integer
+operations
+end
+
+class Pitch
+attributes
+	Name : String
+	Address : String
+operations
+end
+
+class Team
+attributes
+	name : String
+operations
+end
+
+abstract class Person
+attributes
+	id : Integer
+	name : String
+	dateOfBirth : String
+	address : String
+operations
+end
+
+abstract class Official<Person
+attributes
+	identifier : Integer
+operations
+end
+
+class Referee<Official
+attributes
+operations
+end
+
+class Supervisor<Official
+attributes
+operations
+end
+
+abstract class TeamMember<Person
+attributes
+	licenceNumber : Integer
+operations
+end
+
+class Player<TeamMember
+attributes
+	squadNumber : Integer
+operations
+end
+
+class GoalKeeper<Player
+attributes
+operations
+end
+
+class Crew<TeamMember
+attributes
+	role : CrewRole
+operations
+end
+
+abstract class Event
+attributes
+	time : Integer
+operations
+end
+
+class Goal<Event
+attributes
+operations
+end
+
+class Fault<Event
+attributes
+	type : FaultType
+operations
+end
+
+class TimeOut<Event
+attributes
+operations
+end
+
+class Substitution<Event
+attributes
+operations
+end
+
+composition xxx_Match_team1 between
+	Match[*] role xxx_Match_team1_src
+	Team[1] role team1
+end
+
+composition xxx_Match_team2 between
+	Match[*] role xxx_Match_team2_src
+	Team[1] role team2
+end
+
+composition xxx_Match_referee1 between
+	Match[*] role xxx_Match_referee1_src
+	Referee[1] role referee1
+end
+
+composition xxx_Match_referee2 between
+	Match[*] role xxx_Match_referee2_src
+	Referee[1] role referee2
+end
+
+composition xxx_Match_referee3 between
+	Match[*] role xxx_Match_referee3_src
+	Referee[1] role referee3
+end
+
+composition xxx_Match_supervisor between
+	Match[*] role xxx_Match_supervisor_src
+	Supervisor[1] role supervisor
+end
+
+composition xxx_Match_Location between
+	Match[*] role xxx_Match_Location_src
+	Pitch[1] role Location
+end
+
+composition xxx_Match_events between
+	Match[0..1] role xxx_Match_events_src
+	Event[*] role events
+end
+
+association xxx_Match_firstEvent between
+	Match[*] role xxx_Match_firstEvent_src
+	Event[0..1] role firstEvent
+end
+
+association xxx_Match_lastEvent between
+	Match[*] role xxx_Match_lastEvent_src
+	Event[0..1] role lastEvent
+end
+
+association xxx_Team_subject between
+	Team[*] role xxx_Team_subject_src
+	Match[1] role subject
+end
+
+composition xxx_Team_goalKeeper between
+	Team[*] role xxx_Team_goalKeeper_src
+	GoalKeeper[1] role goalKeeper
+end
+
+composition xxx_Team_fieldPlayers between
+	Team[*] role xxx_Team_fieldPlayers_src
+	Player[4] role fieldPlayers
+end
+
+composition xxx_Team_subtitutePlayers between
+	Team[*] role xxx_Team_subtitutePlayers_src
+	Player[0..7] role subtitutePlayers
+end
+
+composition xxx_Team_subtituteGoalKeepers between
+	Team[*] role xxx_Team_subtituteGoalKeepers_src
+	GoalKeeper[0..7] role subtituteGoalKeepers
+end
+
+association xxx_Team_captain between
+	Team[*] role xxx_Team_captain_src
+	Player[1] role captain
+end
+
+composition xxx_Team_bench between
+	Team[0..1] role xxx_Team_bench_src
+	Crew[*] role bench
+end
+
+association xxx_TeamMember_team between
+	TeamMember[*] role xxx_TeamMember_team_src
+	Team[1] role team
+end
+
+association xxx_Event_previous between
+	Event[*] role xxx_Event_previous_src
+	Event[0..1] role previous
+end
+
+association xxx_Event_next between
+	Event[*] role xxx_Event_next_src
+	Event[0..1] role next
+end
+
+association xxx_Goal_player between
+	Goal[*] role xxx_Goal_player_src
+	Player[1] role player
+end
+
+association xxx_Goal_scorerTeam between
+	Goal[*] role xxx_Goal_scorerTeam_src
+	Team[1] role scorerTeam
+end
+
+association xxx_Fault_player between
+	Fault[*] role xxx_Fault_player_src
+	Player[1] role player
+end
+
+association xxx_TimeOut_team between
+	TimeOut[*] role xxx_TimeOut_team_src
+	Team[1] role team
+end
+
+association xxx_Substitution_substitute between
+	Substitution[*] role xxx_Substitution_substitute_src
+	Player[1] role substitute
+end
+
+association xxx_Substitution_instead between
+	Substitution[*] role xxx_Substitution_instead_src
+	Player[1] role instead
+end
+

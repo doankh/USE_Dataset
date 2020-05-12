@@ -1,0 +1,262 @@
+model feature
+enum SelectedState{
+default
+}
+
+enum AttributeComparisonOperator{
+default
+}
+
+class FeatureModel
+attributes
+	name : String
+operations
+end
+
+class Feature<Identifiable
+attributes
+	name : String
+	selected : SelectedState
+operations
+end
+
+class Group<Identifiable
+attributes
+	minCardinality : Integer
+	maxCardinality : Integer
+operations
+end
+
+class Constraint<Identifiable
+attributes
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	value : String
+operations
+end
+
+class Annotation
+attributes
+operations
+end
+
+class EnumDomain<Domain
+attributes
+	values : String
+operations
+end
+
+class ContinuousDomain<Domain
+attributes
+operations
+end
+
+abstract class Domain
+attributes
+operations
+end
+
+class Interval
+attributes
+	lowerBound : Integer
+	upperBound : Integer
+operations
+end
+
+abstract class Expression
+attributes
+operations
+end
+
+abstract class UnaryExpression<Expression
+attributes
+operations
+end
+
+abstract class BinaryExpression<Expression
+attributes
+operations
+end
+
+abstract class AtomicExpression<Expression
+attributes
+operations
+end
+
+class FeatureReference<AtomicExpression
+attributes
+operations
+end
+
+class NotExpression<UnaryExpression
+attributes
+operations
+end
+
+class AndExpression<BinaryExpression
+attributes
+operations
+end
+
+class OrExpression<BinaryExpression
+attributes
+operations
+end
+
+class ImpliesExpression<BinaryExpression
+attributes
+operations
+end
+
+class NestedExpression<UnaryExpression
+attributes
+operations
+end
+
+abstract class Identifiable
+attributes
+	id : String
+operations
+end
+
+class AttributeComparisonExpression<AtomicExpression
+attributes
+	operator : AttributeComparisonOperator
+operations
+end
+
+class ExcludesExpression<BinaryExpression
+attributes
+operations
+end
+
+class AttributeReference<AttributeOperand
+attributes
+operations
+end
+
+abstract class AttributeOperand
+attributes
+operations
+end
+
+class AttributeValueLiteral<AttributeOperand
+attributes
+	value : String
+operations
+end
+
+association xxx_FeatureModel_parent between
+	FeatureModel[*] role xxx_FeatureModel_parent_src
+	FeatureModel[0..1] role parent
+end
+
+composition xxx_FeatureModel_children between
+	FeatureModel[0..1] role xxx_FeatureModel_children_src
+	FeatureModel[*] role children
+end
+
+composition xxx_FeatureModel_root between
+	FeatureModel[*] role xxx_FeatureModel_root_src
+	Feature[1] role root
+end
+
+composition xxx_FeatureModel_constraints_ between
+	FeatureModel[0..1] role xxx_FeatureModel_constraints__src
+	Constraint[*] role constraints_
+end
+
+composition xxx_Feature_attributes_ between
+	Feature[0..1] role xxx_Feature_attributes__src
+	Attribute[*] role attributes_
+end
+
+composition xxx_Feature_groups between
+	Feature[0..1] role xxx_Feature_groups_src
+	Group[*] role groups
+end
+
+association xxx_Feature_parentGroup between
+	Feature[*] role xxx_Feature_parentGroup_src
+	Group[0..1] role parentGroup
+end
+
+composition xxx_Feature_annotations between
+	Feature[0..1] role xxx_Feature_annotations_src
+	Annotation[*] role annotations
+end
+
+association xxx_Group_parentFeature between
+	Group[*] role xxx_Group_parentFeature_src
+	Feature[1] role parentFeature
+end
+
+composition xxx_Group_childFeatures between
+	Group[0..1] role xxx_Group_childFeatures_src
+	Feature[1..*] role childFeatures
+end
+
+composition xxx_Constraint_expression between
+	Constraint[*] role xxx_Constraint_expression_src
+	Expression[1] role expression
+end
+
+association xxx_Attribute_feature between
+	Attribute[*] role xxx_Attribute_feature_src
+	Feature[1] role feature
+end
+
+composition xxx_Attribute_domain between
+	Attribute[*] role xxx_Attribute_domain_src
+	Domain[1] role domain
+end
+
+association xxx_Annotation_feature between
+	Annotation[*] role xxx_Annotation_feature_src
+	Feature[1] role feature
+end
+
+composition xxx_ContinuousDomain_intervals between
+	ContinuousDomain[0..1] role xxx_ContinuousDomain_intervals_src
+	Interval[1..*] role intervals
+end
+
+composition xxx_UnaryExpression_operand between
+	UnaryExpression[*] role xxx_UnaryExpression_operand_src
+	Expression[1] role operand
+end
+
+composition xxx_BinaryExpression_operand1 between
+	BinaryExpression[*] role xxx_BinaryExpression_operand1_src
+	Expression[1] role operand1
+end
+
+composition xxx_BinaryExpression_operand2 between
+	BinaryExpression[*] role xxx_BinaryExpression_operand2_src
+	Expression[1] role operand2
+end
+
+association xxx_FeatureReference_feature between
+	FeatureReference[*] role xxx_FeatureReference_feature_src
+	Feature[1] role feature
+end
+
+composition xxx_AttributeComparisonExpression_attribute1 between
+	AttributeComparisonExpression[*] role xxx_AttributeComparisonExpression_attribute1_src
+	AttributeOperand[1] role attribute1
+end
+
+composition xxx_AttributeComparisonExpression_attribute2 between
+	AttributeComparisonExpression[*] role xxx_AttributeComparisonExpression_attribute2_src
+	AttributeOperand[1] role attribute2
+end
+
+association xxx_AttributeReference_attribute between
+	AttributeReference[*] role xxx_AttributeReference_attribute_src
+	Attribute[1] role attribute
+end
+

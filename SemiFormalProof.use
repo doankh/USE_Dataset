@@ -1,0 +1,113 @@
+model semiFormalProof
+enum ValidationKind{
+default
+}
+
+class Proof
+attributes
+	title : String
+operations
+end
+
+class Justifications
+attributes
+operations
+end
+
+class Justification
+attributes
+	hypothesis : Boolean
+	epsilon : Boolean
+	numeral : String
+operations
+end
+
+class QuotedAssertion
+attributes
+	text : String
+operations
+end
+
+class Entailment
+attributes
+	tail : String
+operations
+end
+
+class Conjunction
+attributes
+	lhs : String
+operations
+end
+
+class ProofSteps
+attributes
+	epsilon : Boolean
+operations
+end
+
+class Statement
+attributes
+	id : String
+	statement : String
+operations
+end
+
+class Validation
+attributes
+	author : String
+	timeStamp : String
+	state : ValidationKind
+operations
+end
+
+composition xxx_Proof_justifications between
+	Proof[*] role xxx_Proof_justifications_src
+	Justifications[0..1] role justifications
+end
+
+composition xxx_Proof_proofSteps between
+	Proof[*] role xxx_Proof_proofSteps_src
+	ProofSteps[0..1] role proofSteps
+end
+
+composition xxx_Justifications_justifications between
+	Justifications[0..1] role xxx_Justifications_justifications_src
+	Justification[*] role justifications
+end
+
+composition xxx_Justification_assertion between
+	Justification[*] role xxx_Justification_assertion_src
+	QuotedAssertion[0..1] role assertion
+end
+
+composition xxx_Justification_entailment between
+	Justification[*] role xxx_Justification_entailment_src
+	Entailment[0..1] role entailment
+end
+
+composition xxx_Entailment_head between
+	Entailment[*] role xxx_Entailment_head_src
+	Conjunction[0..1] role head
+end
+
+composition xxx_Conjunction_rhs between
+	Conjunction[*] role xxx_Conjunction_rhs_src
+	Conjunction[0..1] role rhs
+end
+
+composition xxx_ProofSteps_statements between
+	ProofSteps[0..1] role xxx_ProofSteps_statements_src
+	Statement[*] role statements
+end
+
+composition xxx_Statement_justification between
+	Statement[*] role xxx_Statement_justification_src
+	Justifications[0..1] role justification
+end
+
+composition xxx_Statement_validation between
+	Statement[*] role xxx_Statement_validation_src
+	Validation[0..1] role validation
+end
+

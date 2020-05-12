@@ -1,0 +1,82 @@
+model library
+class UoD
+attributes
+operations
+end
+
+class Book
+attributes
+	title : String
+	isbn : String
+operations
+end
+
+abstract class AbstractPerson
+attributes
+	name : String
+operations
+	getFirstName():String
+	getLastName():String
+end
+
+class Library
+attributes
+	name : String
+operations
+end
+
+class Loan
+attributes
+operations
+end
+
+class Person<AbstractPerson
+attributes
+operations
+end
+
+class Author<AbstractPerson
+attributes
+operations
+end
+
+composition xxx_UoD_allLibraries between
+	UoD[0..1] role xxx_UoD_allLibraries_src
+	Library[*] role allLibraries
+end
+
+composition xxx_UoD_allPersons between
+	UoD[0..1] role xxx_UoD_allPersons_src
+	Person[*] role allPersons
+end
+
+composition xxx_UoD_allAuthors between
+	UoD[0..1] role xxx_UoD_allAuthors_src
+	Author[*] role allAuthors
+end
+
+association xxx_Book_author between
+	Book[*] role xxx_Book_author_src
+	Author[0..1] role author
+end
+
+composition xxx_Library_books between
+	Library[0..1] role xxx_Library_books_src
+	Book[*] role books
+end
+
+composition xxx_Library_loans between
+	Library[0..1] role xxx_Library_loans_src
+	Loan[*] role loans
+end
+
+association xxx_Loan_borrower between
+	Loan[*] role xxx_Loan_borrower_src
+	Person[0..1] role borrower
+end
+
+association xxx_Loan_book between
+	Loan[*] role xxx_Loan_book_src
+	Book[0..1] role book
+end
+

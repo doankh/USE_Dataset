@@ -1,0 +1,943 @@
+model evidence
+enum ConsistencyLevel{
+default
+}
+
+enum Level{
+default
+}
+
+enum OriginalityLevel{
+default
+}
+
+enum ReportingLevel{
+default
+}
+
+enum StandardOfProof{
+default
+}
+
+enum SupportLevel{
+default
+}
+
+enum CompletenessLevel{
+default
+}
+
+enum ReliabilityLevel{
+default
+}
+
+enum AccuracyLevel{
+default
+}
+
+enum ConfidenceLevel{
+default
+}
+
+abstract class EvidenceAttribute<EvaluationAttribute
+attributes
+operations
+end
+
+class Consistency<DocumentAttribute
+attributes
+	value : ConsistencyLevel
+operations
+end
+
+class Completeness<DocumentAttribute
+attributes
+	status : CompletenessLevel
+operations
+end
+
+abstract class Element
+attributes
+operations
+end
+
+class Document<Exhibit
+attributes
+	title : String
+operations
+end
+
+class Confidence<EvidenceAttribute
+attributes
+	value : ConfidenceLevel
+operations
+end
+
+class ApprovedBy<Provenance
+attributes
+operations
+end
+
+class Description<Element
+attributes
+	text : String
+operations
+end
+
+class CreatedBy<Provenance
+attributes
+operations
+end
+
+class Tool<CollectionMethod
+attributes
+	version : String
+operations
+end
+
+class Method<CollectionMethod
+attributes
+operations
+end
+
+class RequiresTool<EvidenceProperty
+attributes
+operations
+end
+
+abstract class EvidenceItem<EvidenceElement
+attributes
+operations
+end
+
+class IsBasedOn<DocumentProperty
+attributes
+operations
+end
+
+abstract class DomainAssertion<Meaning,Element
+attributes
+	stmt : String
+operations
+end
+
+class IsA<EvidenceInterpretation
+attributes
+operations
+end
+
+class IsCharacterizedBy<EvidenceInterpretation
+attributes
+operations
+end
+
+class Person<Originator
+attributes
+operations
+end
+
+class Organization<Originator
+attributes
+	address : String
+operations
+end
+
+class Package<AdministrativeElement
+attributes
+	consistency : ConsistencyLevel
+	version : String
+	criteria : StandardOfProof
+	completeness : CompletenessLevel
+operations
+end
+
+class EndTime<EffectiveTime
+attributes
+	datetime : String
+operations
+end
+
+class Assertion<DomainAssertion
+attributes
+	url : String
+	facttype : String
+operations
+end
+
+abstract class FormalObject<DomainObject
+attributes
+	concept : String
+	url : String
+operations
+end
+
+class Object<FormalObject
+attributes
+operations
+end
+
+class CompositeSubject<DomainObject
+attributes
+operations
+end
+
+class RoleBinding<Element
+attributes
+	role : String
+operations
+end
+
+class StartTime<EffectiveTime
+attributes
+	datetime : String
+operations
+end
+
+class Relevance<EvidenceAttribute
+attributes
+	value : Level
+operations
+end
+
+class Significance<EvidenceAttribute
+attributes
+	Value : Level
+operations
+end
+
+class Accuracy<EvidenceAttribute
+attributes
+	value : AccuracyLevel
+operations
+end
+
+class HasRoleIn<EvidenceProperty
+attributes
+	role : String
+operations
+end
+
+class IsScopedBy<EvidenceInterpretation
+attributes
+operations
+end
+
+abstract class EffectiveTime<TimingProperty
+attributes
+operations
+end
+
+class AtTime<TimingProperty
+attributes
+	dateTtime : String
+operations
+end
+
+class Originality<DocumentAttribute
+attributes
+	value : OriginalityLevel
+operations
+end
+
+class Reporting<EvidenceAttribute
+attributes
+	value : ReportingLevel
+operations
+end
+
+class Reliability<DocumentAttribute
+attributes
+	value : ReliabilityLevel
+operations
+end
+
+class Supports<EvidenceRelation
+attributes
+operations
+end
+
+class IsGeneratedAt<EvidenceEvent
+attributes
+operations
+end
+
+abstract class CollectionMethod<Object
+attributes
+operations
+end
+
+abstract class EvidenceRelation<EvidenceEvaluation
+attributes
+operations
+end
+
+class Support<EvidenceAttribute
+attributes
+	value : SupportLevel
+operations
+end
+
+class Conflicts<EvidenceObservation
+attributes
+operations
+end
+
+class Rationale<Element
+attributes
+	text : String
+operations
+end
+
+class Refutes<EvidenceResolution
+attributes
+operations
+end
+
+class Negates<EvidenceResolution
+attributes
+operations
+end
+
+class UnknownSubject<FormalObject
+attributes
+operations
+end
+
+abstract class EvidenceEvaluation<EvidenceElement
+attributes
+operations
+end
+
+class Resolves<EvidenceResolution
+attributes
+operations
+end
+
+abstract class Originator<Object
+attributes
+operations
+end
+
+class EvidenceRequest<AdministrativeElement
+attributes
+operations
+end
+
+class ProjectObjective<AdministrativeElement
+attributes
+	text : String
+operations
+end
+
+class Activity<AdministrativeElement
+attributes
+operations
+end
+
+class DependsOn<ActivityProperty
+attributes
+operations
+end
+
+class IsAssociatedWith<ActivityProperty
+attributes
+operations
+end
+
+class RequiresMethod<ActivityProperty
+attributes
+operations
+end
+
+class Satisfies<ActivityProperty
+attributes
+operations
+end
+
+abstract class AdministrativeElement<Element
+attributes
+	id : String
+	name : String
+operations
+end
+
+class DomainClaim<DomainAssertion
+attributes
+operations
+end
+
+abstract class EvidenceObservation<EvidenceEvaluation
+attributes
+operations
+end
+
+abstract class EvidenceResolution<EvidenceEvaluation
+attributes
+operations
+end
+
+class Weakens<Contributes
+attributes
+operations
+end
+
+class Amplifies<Contributes
+attributes
+operations
+end
+
+abstract class Contributes<EvidenceObservation
+attributes
+operations
+end
+
+class Challenges<EvidenceRelation
+attributes
+operations
+end
+
+class Strength<EvidenceAttribute
+attributes
+	value : Integer
+operations
+end
+
+class IsAcquiredAt<EvidenceEvent
+attributes
+operations
+end
+
+class IsTransferredTo<EvidenceEvent
+attributes
+operations
+end
+
+abstract class DocumentAttribute<EvaluationAttribute
+attributes
+operations
+end
+
+abstract class EvidenceEvent<EvidenceElement
+attributes
+operations
+end
+
+class OwnedBy<Provenance
+attributes
+operations
+end
+
+abstract class Provenance<EvidenceProperty
+attributes
+operations
+end
+
+abstract class TimingProperty<EvidenceProperty
+attributes
+operations
+end
+
+class IsPartOf<ExhibitProperty
+attributes
+operations
+end
+
+class IsRevokedAt<EvidenceEvent
+attributes
+operations
+end
+
+class ProvidesContext<EvidenceEvaluation
+attributes
+operations
+end
+
+abstract class DomainObject<Meaning
+attributes
+	name : String
+operations
+end
+
+class MeansThat<EvidenceInterpretation
+attributes
+operations
+end
+
+abstract class EvidenceElement<Element
+attributes
+	id : String
+operations
+end
+
+class CareOf<CustodyProperty
+attributes
+operations
+end
+
+abstract class CustodyProperty<EvidenceProperty
+attributes
+operations
+end
+
+class AtLocation<CustodyProperty
+attributes
+operations
+end
+
+class IsCreatedAt<EvidenceEvent
+attributes
+operations
+end
+
+class RequiresPackage<AdministrativeProperty
+attributes
+operations
+end
+
+abstract class ActivityProperty<AdministrativeProperty
+attributes
+operations
+end
+
+abstract class EvidenceProperty<Element
+attributes
+operations
+end
+
+abstract class AdministrativeProperty<Element
+attributes
+operations
+end
+
+class Service<CollectionMethod
+attributes
+operations
+end
+
+abstract class DocumentProperty<EvidenceProperty
+attributes
+operations
+end
+
+class HasElectronicSource<ExhibitProperty
+attributes
+	source : String
+	format : String
+	fileSize : Integer
+operations
+end
+
+class IsExpressedInLanguage<DocumentProperty
+attributes
+	language : String
+	IsPrimary : String
+operations
+end
+
+class UsingProcess<CustodyProperty
+attributes
+operations
+end
+
+class HasSecurityClassification<DocumentProperty
+attributes
+	securityClassification : String
+operations
+end
+
+class IsReleaseableTo<DocumentProperty
+attributes
+	releasability : String
+operations
+end
+
+class EvidenceGroup<EvidenceItem
+attributes
+	name : String
+operations
+end
+
+class HasVersion<DocumentProperty
+attributes
+	version : String
+operations
+end
+
+class EvaluationAttribute<Element
+attributes
+operations
+end
+
+class Supercedes<EvidenceEvaluation
+attributes
+operations
+end
+
+class HasMedia<ExhibitProperty
+attributes
+	media : String
+operations
+end
+
+class Exhibit<EvidenceItem
+attributes
+	name : String
+	url : String
+operations
+end
+
+abstract class Meaning<EvidenceItem
+attributes
+operations
+end
+
+abstract class ExhibitProperty<EvidenceProperty
+attributes
+operations
+end
+
+abstract class EvidenceInterpretation<EvidenceEvaluation
+attributes
+operations
+end
+
+composition xxx_Document_property between
+	Document[0..1] role xxx_Document_property_src
+	DocumentProperty[*] role property
+end
+
+composition xxx_Document_attribute between
+	Document[0..1] role xxx_Document_attribute_src
+	DocumentAttribute[*] role attribute
+end
+
+association xxx_ApprovedBy_supervisor between
+	ApprovedBy[*] role xxx_ApprovedBy_supervisor_src
+	Originator[1] role supervisor
+end
+
+association xxx_CreatedBy_source between
+	CreatedBy[*] role xxx_CreatedBy_source_src
+	Originator[1] role source
+end
+
+composition xxx_Method_tool between
+	Method[0..1] role xxx_Method_tool_src
+	RequiresTool[*] role tool
+end
+
+association xxx_RequiresTool_tool between
+	RequiresTool[*] role xxx_RequiresTool_tool_src
+	Tool[1] role tool
+end
+
+composition xxx_EvidenceItem_event between
+	EvidenceItem[0..1] role xxx_EvidenceItem_event_src
+	EvidenceEvent[*] role event
+end
+
+association xxx_IsBasedOn_source between
+	IsBasedOn[*] role xxx_IsBasedOn_source_src
+	EvidenceItem[1] role source
+end
+
+association xxx_IsA_definition between
+	IsA[*] role xxx_IsA_definition_src
+	Object[1] role definition
+end
+
+association xxx_IsCharacterizedBy_property between
+	IsCharacterizedBy[*] role xxx_IsCharacterizedBy_property_src
+	DomainAssertion[1] role property
+end
+
+composition xxx_Person_affiliation between
+	Person[0..1] role xxx_Person_affiliation_src
+	HasRoleIn[*] role affiliation
+end
+
+composition xxx_Organization_affiliation between
+	Organization[0..1] role xxx_Organization_affiliation_src
+	HasRoleIn[*] role affiliation
+end
+
+composition xxx_Package_method between
+	Package[0..1] role xxx_Package_method_src
+	CollectionMethod[*] role method
+end
+
+composition xxx_Package_originator between
+	Package[0..1] role xxx_Package_originator_src
+	Originator[*] role originator
+end
+
+composition xxx_Package_request between
+	Package[0..1] role xxx_Package_request_src
+	EvidenceRequest[*] role request
+end
+
+composition xxx_Package_objective between
+	Package[0..1] role xxx_Package_objective_src
+	ProjectObjective[*] role objective
+end
+
+composition xxx_Package_activity between
+	Package[0..1] role xxx_Package_activity_src
+	Activity[*] role activity
+end
+
+composition xxx_Package_item between
+	Package[0..1] role xxx_Package_item_src
+	EvidenceItem[*] role item
+end
+
+composition xxx_Package_RequiresPackage between
+	Package[0..1] role xxx_Package_RequiresPackage_src
+	RequiresPackage[*] role RequiresPackage
+end
+
+composition xxx_Package_evaluation between
+	Package[0..1] role xxx_Package_evaluation_src
+	EvidenceEvaluation[*] role evaluation
+end
+
+composition xxx_Assertion_role between
+	Assertion[0..1] role xxx_Assertion_role_src
+	RoleBinding[*] role role
+end
+
+composition xxx_CompositeSubject_element between
+	CompositeSubject[0..1] role xxx_CompositeSubject_element_src
+	DomainObject[*] role element
+end
+
+association xxx_RoleBinding_subject between
+	RoleBinding[*] role xxx_RoleBinding_subject_src
+	DomainObject[0..1] role subject
+end
+
+association xxx_HasRoleIn_organization between
+	HasRoleIn[*] role xxx_HasRoleIn_organization_src
+	Organization[1] role organization
+end
+
+association xxx_IsScopedBy_scope between
+	IsScopedBy[*] role xxx_IsScopedBy_scope_src
+	Object[1] role scope
+end
+
+association xxx_EvidenceRelation_item between
+	EvidenceRelation[*] role xxx_EvidenceRelation_item_src
+	EvidenceItem[1] role item
+end
+
+association xxx_EvidenceRelation_assertion between
+	EvidenceRelation[*] role xxx_EvidenceRelation_assertion_src
+	DomainAssertion[1] role assertion
+end
+
+association xxx_Conflicts_assertion1 between
+	Conflicts[*] role xxx_Conflicts_assertion1_src
+	DomainAssertion[1] role assertion1
+end
+
+association xxx_Conflicts_assertion2 between
+	Conflicts[*] role xxx_Conflicts_assertion2_src
+	DomainAssertion[1] role assertion2
+end
+
+association xxx_Refutes_element between
+	Refutes[*] role xxx_Refutes_element_src
+	DomainAssertion[1] role element
+end
+
+association xxx_Negates_element between
+	Negates[*] role xxx_Negates_element_src
+	EvidenceRelation[1] role element
+end
+
+composition xxx_EvidenceEvaluation_attribute between
+	EvidenceEvaluation[0..1] role xxx_EvidenceEvaluation_attribute_src
+	EvidenceAttribute[*] role attribute
+end
+
+association xxx_Resolves_element between
+	Resolves[*] role xxx_Resolves_element_src
+	EvidenceObservation[1] role element
+end
+
+association xxx_EvidenceRequest_item between
+	EvidenceRequest[0..1] role xxx_EvidenceRequest_item_src
+	EvidenceItem[*] role item
+end
+
+composition xxx_EvidenceRequest_provenance between
+	EvidenceRequest[0..1] role xxx_EvidenceRequest_provenance_src
+	Provenance[*] role provenance
+end
+
+composition xxx_Activity_property between
+	Activity[0..1] role xxx_Activity_property_src
+	ActivityProperty[*] role property
+end
+
+composition xxx_Activity_timing between
+	Activity[0..1] role xxx_Activity_timing_src
+	TimingProperty[*] role timing
+end
+
+composition xxx_Activity_provenance between
+	Activity[0..1] role xxx_Activity_provenance_src
+	Provenance[*] role provenance
+end
+
+association xxx_DependsOn_activity between
+	DependsOn[*] role xxx_DependsOn_activity_src
+	Activity[1] role activity
+end
+
+association xxx_IsAssociatedWith_request between
+	IsAssociatedWith[*] role xxx_IsAssociatedWith_request_src
+	EvidenceRequest[1] role request
+end
+
+association xxx_RequiresMethod_method between
+	RequiresMethod[*] role xxx_RequiresMethod_method_src
+	CollectionMethod[1] role method
+end
+
+association xxx_Satisfies_objective between
+	Satisfies[*] role xxx_Satisfies_objective_src
+	ProjectObjective[1] role objective
+end
+
+composition xxx_AdministrativeElement_description between
+	AdministrativeElement[0..1] role xxx_AdministrativeElement_description_src
+	Description[*] role description
+end
+
+composition xxx_EvidenceResolution_rationale between
+	EvidenceResolution[*] role xxx_EvidenceResolution_rationale_src
+	Rationale[1] role rationale
+end
+
+composition xxx_EvidenceResolution_context_ between
+	EvidenceResolution[*] role xxx_EvidenceResolution_context__src
+	EvidenceGroup[1] role context_
+end
+
+association xxx_Contributes_relation1 between
+	Contributes[*] role xxx_Contributes_relation1_src
+	EvidenceRelation[1] role relation1
+end
+
+association xxx_Contributes_relation2 between
+	Contributes[*] role xxx_Contributes_relation2_src
+	EvidenceRelation[1] role relation2
+end
+
+composition xxx_EvidenceEvent_custody between
+	EvidenceEvent[0..1] role xxx_EvidenceEvent_custody_src
+	CustodyProperty[*] role custody
+end
+
+association xxx_OwnedBy_owner between
+	OwnedBy[*] role xxx_OwnedBy_owner_src
+	Originator[1] role owner
+end
+
+association xxx_IsPartOf_whole between
+	IsPartOf[*] role xxx_IsPartOf_whole_src
+	Exhibit[1] role whole
+end
+
+association xxx_ProvidesContext_element between
+	ProvidesContext[*] role xxx_ProvidesContext_element_src
+	EvidenceElement[1] role element
+end
+
+association xxx_ProvidesContext_context_ between
+	ProvidesContext[*] role xxx_ProvidesContext_context__src
+	EvidenceGroup[1] role context_
+end
+
+association xxx_MeansThat_meaning between
+	MeansThat[*] role xxx_MeansThat_meaning_src
+	DomainAssertion[1] role meaning
+end
+
+composition xxx_EvidenceElement_description between
+	EvidenceElement[0..1] role xxx_EvidenceElement_description_src
+	Description[*] role description
+end
+
+composition xxx_EvidenceElement_provenance between
+	EvidenceElement[0..1] role xxx_EvidenceElement_provenance_src
+	Provenance[*] role provenance
+end
+
+composition xxx_EvidenceElement_timing between
+	EvidenceElement[0..1] role xxx_EvidenceElement_timing_src
+	TimingProperty[*] role timing
+end
+
+association xxx_CareOf_curator between
+	CareOf[*] role xxx_CareOf_curator_src
+	Person[1] role curator
+end
+
+association xxx_AtLocation_location between
+	AtLocation[*] role xxx_AtLocation_location_src
+	Organization[1] role location
+end
+
+association xxx_RequiresPackage_package between
+	RequiresPackage[*] role xxx_RequiresPackage_package_src
+	Package[1] role package
+end
+
+composition xxx_Service_tool between
+	Service[0..1] role xxx_Service_tool_src
+	RequiresTool[*] role tool
+end
+
+association xxx_UsingProcess_method between
+	UsingProcess[*] role xxx_UsingProcess_method_src
+	CollectionMethod[1] role method
+end
+
+association xxx_EvidenceGroup_element between
+	EvidenceGroup[0..1] role xxx_EvidenceGroup_element_src
+	EvidenceElement[*] role element
+end
+
+composition xxx_EvaluationAttribute_provenance between
+	EvaluationAttribute[0..1] role xxx_EvaluationAttribute_provenance_src
+	Provenance[*] role provenance
+end
+
+composition xxx_EvaluationAttribute_timing between
+	EvaluationAttribute[0..1] role xxx_EvaluationAttribute_timing_src
+	TimingProperty[*] role timing
+end
+
+association xxx_Supercedes_newAttribute between
+	Supercedes[*] role xxx_Supercedes_newAttribute_src
+	EvaluationAttribute[1] role newAttribute
+end
+
+association xxx_Supercedes_oldAttribute between
+	Supercedes[*] role xxx_Supercedes_oldAttribute_src
+	EvaluationAttribute[1] role oldAttribute
+end
+
+composition xxx_Exhibit_exhibitProperty between
+	Exhibit[0..1] role xxx_Exhibit_exhibitProperty_src
+	ExhibitProperty[*] role exhibitProperty
+end
+
+association xxx_EvidenceInterpretation_element between
+	EvidenceInterpretation[*] role xxx_EvidenceInterpretation_element_src
+	EvidenceElement[1] role element
+end
+

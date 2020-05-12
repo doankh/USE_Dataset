@@ -1,0 +1,209 @@
+model CommonBehaviorProv
+abstract class Behavior
+attributes
+	isReentrant : String
+operations
+end
+
+class OpaqueBehavior<Behavior
+attributes
+	body : String
+	language : String
+operations
+end
+
+class FunctionBehavior<OpaqueBehavior
+attributes
+operations
+end
+
+abstract class BehavioralFeature
+attributes
+operations
+end
+
+class Signal
+attributes
+operations
+end
+
+class Reception<BehavioralFeature
+attributes
+operations
+end
+
+class Trigger
+attributes
+operations
+end
+
+abstract class Event
+attributes
+operations
+end
+
+abstract class MessageEvent<Event
+attributes
+operations
+end
+
+class AnyReceiveEvent<MessageEvent
+attributes
+operations
+end
+
+class SignalEvent<MessageEvent
+attributes
+operations
+end
+
+class CallEvent<MessageEvent
+attributes
+operations
+end
+
+class ChangeEvent<Event
+attributes
+operations
+end
+
+class TimeEvent
+attributes
+	isRelative : String
+operations
+end
+
+class TimeExpression
+attributes
+operations
+end
+
+abstract class Observation
+attributes
+operations
+end
+
+class TimeObservation<Observation
+attributes
+	firstEvent : String
+operations
+end
+
+class DurationObservation<Observation
+attributes
+	firstEvent : String
+operations
+end
+
+class Duration
+attributes
+operations
+end
+
+class Interval
+attributes
+operations
+end
+
+class TimeInterval<Interval
+attributes
+operations
+end
+
+class DurationInterval<Interval
+attributes
+operations
+end
+
+class IntervalConstraint
+attributes
+operations
+end
+
+class TimeConstraint<IntervalConstraint
+attributes
+	firstEvent : String
+operations
+end
+
+class DurationConstraint<IntervalConstraint
+attributes
+	firstEvent : String
+operations
+end
+
+association xxx_Behavior_redefinedBehavior between
+	Behavior[0..1] role xxx_Behavior_redefinedBehavior_src
+	Behavior[*] role redefinedBehavior
+end
+
+association xxx_Behavior_specification between
+	Behavior[*] role xxx_Behavior_specification_src
+	BehavioralFeature[0..1] role specification
+end
+
+association xxx_BehavioralFeature_method between
+	BehavioralFeature[0..1] role xxx_BehavioralFeature_method_src
+	Behavior[*] role method
+end
+
+association xxx_Reception_signal between
+	Reception[*] role xxx_Reception_signal_src
+	Signal[1] role signal
+end
+
+association xxx_Trigger_event between
+	Trigger[*] role xxx_Trigger_event_src
+	Event[1] role event
+end
+
+association xxx_SignalEvent_signal between
+	SignalEvent[*] role xxx_SignalEvent_signal_src
+	Signal[1] role signal
+end
+
+composition xxx_TimeEvent_when between
+	TimeEvent[*] role xxx_TimeEvent_when_src
+	TimeExpression[1] role when
+end
+
+association xxx_TimeExpression_observation between
+	TimeExpression[0..1] role xxx_TimeExpression_observation_src
+	Observation[*] role observation
+end
+
+association xxx_Duration_observation between
+	Duration[0..1] role xxx_Duration_observation_src
+	Observation[*] role observation
+end
+
+association xxx_TimeInterval_timeMax between
+	TimeInterval[*] role xxx_TimeInterval_timeMax_src
+	TimeExpression[1] role timeMax
+end
+
+association xxx_TimeInterval_timeMin between
+	TimeInterval[*] role xxx_TimeInterval_timeMin_src
+	TimeExpression[1] role timeMin
+end
+
+association xxx_DurationInterval_durationMax between
+	DurationInterval[*] role xxx_DurationInterval_durationMax_src
+	Duration[1] role durationMax
+end
+
+association xxx_DurationInterval_durationMin between
+	DurationInterval[*] role xxx_DurationInterval_durationMin_src
+	Duration[1] role durationMin
+end
+
+association xxx_TimeConstraint_timeSpecification between
+	TimeConstraint[*] role xxx_TimeConstraint_timeSpecification_src
+	TimeInterval[1] role timeSpecification
+end
+
+association xxx_DurationConstraint_durationSpecification between
+	DurationConstraint[*] role xxx_DurationConstraint_durationSpecification_src
+	DurationInterval[1] role durationSpecification
+end
+

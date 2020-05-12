@@ -1,0 +1,166 @@
+model Ticket
+enum Area{
+default
+}
+
+enum CopyType{
+default
+}
+
+enum FieraTicket{
+default
+}
+
+class Person
+attributes
+	Name : String
+	Age : Integer
+operations
+end
+
+class Urban<CityTicket
+attributes
+operations
+end
+
+class Standard<ExtraUrban
+attributes
+operations
+end
+
+class ExtraUrban<CityTicket
+attributes
+	Zone : Integer
+operations
+end
+
+class CityTicket
+attributes
+	Price : Integer
+	Validity : String
+	Date : String
+operations
+end
+
+class TwoWay<Urban
+attributes
+operations
+end
+
+class OneWay<Urban
+attributes
+operations
+end
+
+class WeeklyPass<ExtraUrban
+attributes
+operations
+end
+
+class Luggage<ExtraUrban
+attributes
+operations
+end
+
+class CumulativeTickets<CityTicket
+attributes
+operations
+end
+
+class StandardCumulative<CumulativeTickets
+attributes
+operations
+end
+
+class CumulativeOneDay<CumulativeTickets
+attributes
+	Area : Area
+operations
+end
+
+class Weekly<CumulativeTickets
+attributes
+operations
+end
+
+class FairTicket<CityTicket
+attributes
+	FieraTicket : FieraTicket
+operations
+end
+
+class IntercityTicket
+attributes
+	Usage : String
+	Price : Integer
+	Stamped : Boolean
+	CopyType : CopyType
+operations
+end
+
+class SingleTicket<IntercityTicket
+attributes
+operations
+end
+
+class MultiJourney<IntercityTicket
+attributes
+	NumberOfJourney : Integer
+operations
+end
+
+class MultiDayTicket<IntercityTicket
+attributes
+	NumberOfDays : String
+operations
+end
+
+class Subscription
+attributes
+	DaysNumber : Integer
+	Price : Integer
+	ID : String
+operations
+end
+
+class Youth<Person
+attributes
+operations
+end
+
+class Child<Person
+attributes
+operations
+end
+
+class Adult<Person
+attributes
+operations
+end
+
+class TicketSystem
+attributes
+	City : String
+operations
+end
+
+composition xxx_Person_IntercityTickets between
+	Person[0..1] role xxx_Person_IntercityTickets_src
+	IntercityTicket[*] role IntercityTickets
+end
+
+composition xxx_Person_CityTickets between
+	Person[0..1] role xxx_Person_CityTickets_src
+	CityTicket[*] role CityTickets
+end
+
+composition xxx_Person_subscription between
+	Person[*] role xxx_Person_subscription_src
+	Subscription[0..1] role subscription
+end
+
+composition xxx_TicketSystem_persons between
+	TicketSystem[0..1] role xxx_TicketSystem_persons_src
+	Person[*] role persons
+end
+

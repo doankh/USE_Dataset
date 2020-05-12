@@ -1,0 +1,43 @@
+model primitivetypes
+abstract class StringElement
+attributes
+	value : String
+operations
+end
+
+abstract class BooleanElement
+attributes
+	value : Boolean
+operations
+end
+
+abstract class ECharElement
+attributes
+	value : String
+operations
+end
+
+abstract class EFloatElement
+attributes
+	value : Real
+operations
+end
+
+abstract class EDoubleElement
+attributes
+	value : Real
+operations
+end
+
+abstract class EIntElement
+attributes
+	value : Integer
+operations
+end
+
+abstract class EBigIntegerElement
+attributes
+	value : Integer
+operations
+end
+

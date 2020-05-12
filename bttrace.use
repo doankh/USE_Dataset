@@ -1,0 +1,95 @@
+model bttrace
+enum COLORS{
+default
+}
+
+class TextBTTrace
+attributes
+operations
+end
+
+class BT
+attributes
+	value : String
+operations
+end
+
+class Delay
+attributes
+	value : Integer
+operations
+end
+
+class Activate
+attributes
+	color : String
+operations
+end
+
+class Interleave
+attributes
+	color : String
+operations
+end
+
+class Trace
+attributes
+operations
+end
+
+class NodeGroup
+attributes
+operations
+end
+
+class Node
+attributes
+	value : Integer
+operations
+end
+
+composition xxx_TextBTTrace_bt between
+	TextBTTrace[*] role xxx_TextBTTrace_bt_src
+	BT[1] role bt
+end
+
+composition xxx_TextBTTrace_delay between
+	TextBTTrace[*] role xxx_TextBTTrace_delay_src
+	Delay[0..1] role delay
+end
+
+composition xxx_TextBTTrace_activate between
+	TextBTTrace[*] role xxx_TextBTTrace_activate_src
+	Activate[0..1] role activate
+end
+
+composition xxx_TextBTTrace_interleave between
+	TextBTTrace[*] role xxx_TextBTTrace_interleave_src
+	Interleave[0..1] role interleave
+end
+
+composition xxx_TextBTTrace_trace between
+	TextBTTrace[*] role xxx_TextBTTrace_trace_src
+	Trace[1] role trace
+end
+
+composition xxx_Trace_nodeGroup between
+	Trace[0..1] role xxx_Trace_nodeGroup_src
+	NodeGroup[1..*] role nodeGroup
+end
+
+composition xxx_Trace_loopNodeGroup between
+	Trace[0..1] role xxx_Trace_loopNodeGroup_src
+	NodeGroup[*] role loopNodeGroup
+end
+
+composition xxx_NodeGroup_activeNode between
+	NodeGroup[*] role xxx_NodeGroup_activeNode_src
+	Node[1] role activeNode
+end
+
+composition xxx_NodeGroup_interleaveNode between
+	NodeGroup[0..1] role xxx_NodeGroup_interleaveNode_src
+	Node[*] role interleaveNode
+end
+

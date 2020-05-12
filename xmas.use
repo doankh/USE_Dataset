@@ -1,0 +1,88 @@
+model xmas
+enum Mood{
+default
+}
+
+class Xmas
+attributes
+operations
+end
+
+class Continent
+attributes
+	name : String
+operations
+end
+
+class Location
+attributes
+	name : String
+operations
+end
+
+abstract class Object
+attributes
+operations
+end
+
+class Person<Object
+attributes
+	name : String
+	age : Integer
+	beenGood : Boolean
+	mood : Mood
+operations
+end
+
+class Reindeer<Object
+attributes
+	name : String
+operations
+end
+
+class Gift<Object
+attributes
+	name : String
+operations
+end
+
+composition xxx_Xmas_continents between
+	Xmas[0..1] role xxx_Xmas_continents_src
+	Continent[*] role continents
+end
+
+composition xxx_Xmas_objects between
+	Xmas[0..1] role xxx_Xmas_objects_src
+	Object[*] role objects
+end
+
+composition xxx_Continent_locations between
+	Continent[0..1] role xxx_Continent_locations_src
+	Location[*] role locations
+end
+
+association xxx_Location_continent between
+	Location[*] role xxx_Location_continent_src
+	Continent[1] role continent
+end
+
+association xxx_Location_objects between
+	Location[0..1] role xxx_Location_objects_src
+	Object[*] role objects
+end
+
+association xxx_Object_location between
+	Object[*] role xxx_Object_location_src
+	Location[1] role location
+end
+
+association xxx_Person_gift between
+	Person[*] role xxx_Person_gift_src
+	Gift[1] role gift
+end
+
+association xxx_Gift_receipients between
+	Gift[0..1] role xxx_Gift_receipients_src
+	Person[*] role receipients
+end
+

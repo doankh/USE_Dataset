@@ -1,0 +1,1307 @@
+model R2ML
+enum CollectionTypes{
+	individual,
+	set,
+	orderedSet,
+	bag,
+	sequence
+}
+
+enum PredicateCategory{
+	closed,
+	open,
+	partial
+}
+
+enum ExternalVocabularyLanguage{
+	RDFS,
+	UML,
+	OWL
+}
+
+enum PredicateType{
+	ObjectClassificationPredicate,
+	AttributionPredicate,
+	AssociationPredicate,
+	ReferencePropertyPredicate,
+	EqualityPredicate,
+	InequalityPredicate,
+	DatatypePredicate,
+	DataClassificationPredicate
+}
+
+class ReactionRuleSet<RuleSet
+attributes
+operations
+end
+
+class ProductionRuleSet<RuleSet
+attributes
+operations
+end
+
+class EventType
+attributes
+	eventTypeID : String
+operations
+end
+
+abstract class RuleSet
+attributes
+	ruleSetID : String
+operations
+end
+
+class RuleBase
+attributes
+	ruleBaseID : String
+operations
+end
+
+class IntegrityRuleSet<RuleSet
+attributes
+operations
+end
+
+class DerivationRuleSet<RuleSet
+attributes
+operations
+end
+
+abstract class AbstractTransformationRule<Rule
+attributes
+operations
+end
+
+class AbstractProductionRule<Rule
+attributes
+operations
+end
+
+class AbstractReactionRule<Rule
+attributes
+operations
+end
+
+class AbstractDerivationRule<Rule
+attributes
+operations
+end
+
+abstract class AbstractIntegrityRule<Rule
+attributes
+operations
+end
+
+abstract class Rule
+attributes
+	ruleID : String
+operations
+end
+
+class DerivationRule<AbstractDerivationRule
+attributes
+operations
+end
+
+class ReactionRule<AbstractReactionRule
+attributes
+operations
+end
+
+class ProductionRule<AbstractProductionRule
+attributes
+operations
+end
+
+class DeonticIntegrityRule<IntegrityRule
+attributes
+operations
+end
+
+class AlethicIntegrityRule<IntegrityRule
+attributes
+operations
+end
+
+abstract class IntegrityRule<AbstractIntegrityRule
+attributes
+operations
+end
+
+abstract class DataAtom<Atom
+attributes
+operations
+end
+
+abstract class ObjectAtom<Atom
+attributes
+operations
+end
+
+abstract class Atom<AndOrNafNegFormula
+attributes
+	isNegated : Boolean
+operations
+end
+
+class DataClassificationAtom<DataAtom
+attributes
+operations
+end
+
+class DatatypePredicateAtom<DataAtom
+attributes
+operations
+end
+
+class InequalityAtom<ObjectAtom
+attributes
+operations
+end
+
+class EqualityAtom<ObjectAtom
+attributes
+operations
+end
+
+class ObjectClassificationAtom<ObjectAtom
+attributes
+operations
+end
+
+class GenericAtom<Atom
+attributes
+operations
+end
+
+abstract class Slot
+attributes
+operations
+end
+
+class PropertyAtom<ObjectAtom
+attributes
+operations
+end
+
+class DataSlot<Slot
+attributes
+operations
+end
+
+class ObjectSlot<Slot
+attributes
+operations
+end
+
+class ReferencePropertyAtom<ObjectAtom
+attributes
+operations
+end
+
+class AttributionAtom<ObjectAtom
+attributes
+operations
+end
+
+class ObjectDescriptionAtom<ObjectAtom
+attributes
+operations
+end
+
+class AssociationAtom<ObjectAtom
+attributes
+operations
+end
+
+class DatatypeFunction<Function
+attributes
+	ap : String
+operations
+end
+
+class GenericFunction<Function
+attributes
+operations
+end
+
+abstract class Function<VocabularyEntry
+attributes
+	arity : Integer
+operations
+end
+
+class DataOperation<Operation
+attributes
+operations
+end
+
+class ObjectOperation<Operation
+attributes
+operations
+end
+
+abstract class Operation<Function
+attributes
+operations
+end
+
+class EnumerationDatatype<Datatype
+attributes
+operations
+end
+
+class ExternalVocabulary
+attributes
+	externalVocabularyID : String
+	externalVocabularyLanguage : ExternalVocabularyLanguage
+operations
+end
+
+class GenericEntityName<GenericTerm
+attributes
+operations
+end
+
+abstract class VocabularyEntry
+attributes
+	name : String
+operations
+end
+
+class Vocabulary
+attributes
+operations
+end
+
+abstract class Property<Predicate
+attributes
+operations
+end
+
+class DatatypePredicate<Predicate
+attributes
+	vp : String
+	arity : Integer
+operations
+end
+
+abstract class Predicate<VocabularyEntry
+attributes
+	predicateCategory : PredicateCategory
+operations
+end
+
+class Attribute<Property
+attributes
+	np : String
+operations
+end
+
+class TypedLiteral<DataLiteral
+attributes
+operations
+end
+
+class PlainLiteral<DataLiteral
+attributes
+	languageTag : String
+operations
+end
+
+abstract class DataLiteral<DataTerm
+attributes
+	lexicalValue : String
+operations
+end
+
+class ReferenceProperty<Property
+attributes
+	vp : String
+	domrm : String
+	rgrn : String
+operations
+end
+
+class ObjectName<ObjectTerm
+attributes
+operations
+end
+
+class Datatype<Type
+attributes
+operations
+end
+
+class Class<Type
+attributes
+	np : String
+operations
+end
+
+class Type<Predicate
+attributes
+operations
+end
+
+class AssociationPredicate<Predicate
+attributes
+	vp : String
+operations
+end
+
+class GenericPredicate<Predicate
+attributes
+	vp : String
+operations
+end
+
+class SOAPMessageBody
+attributes
+operations
+end
+
+class SOAPConversationalMsgEvtExpression<SOAPMessageEventExpression
+attributes
+operations
+end
+
+class SOAPRPCResponseMsgEvtExpression<SOAPMessageEventExpression
+attributes
+operations
+end
+
+class SOAPRPCRequestMsgEvtExpression<SOAPMessageEventExpression
+attributes
+operations
+end
+
+class SOAPMessageHeaderBlock
+attributes
+	nameSpaceName : String
+	localName : String
+	encodingStyle : String
+	mustUnderstand : Boolean
+	role : String
+	relay : Boolean
+operations
+end
+
+class SOAPMessageHeader
+attributes
+operations
+end
+
+class SOAPMessageBodyChild
+attributes
+	localName : String
+	nameSpaceName : String
+	encodingStyle : String
+operations
+end
+
+class EveryYearTimeEventExpression<PeriodicTimeEventExpression
+attributes
+	dayOfYear : Integer
+	time : String
+operations
+end
+
+class EveryMonthTimeEventExpression<PeriodicTimeEventExpression
+attributes
+	dayOfMonth : Integer
+	time : String
+operations
+end
+
+class EveryWeekTimeEventExpression<PeriodicTimeEventExpression
+attributes
+	dayOfWeek : Integer
+	time : String
+operations
+end
+
+class EveryDayTimeEventExpression<PeriodicTimeEventExpression
+attributes
+	time : String
+operations
+end
+
+class EveryHourTimeEventExpression<PeriodicTimeEventExpression
+attributes
+	minute : Integer
+	second : Integer
+operations
+end
+
+class EveryMinuteTimeEventExpression<PeriodicTimeEventExpression
+attributes
+	second : Integer
+operations
+end
+
+class MessageEventExpression<ActionEventExpression
+attributes
+	sender : String
+	receiver : String
+operations
+end
+
+class SOAPMessageEventExpression<MessageEventExpression
+attributes
+operations
+end
+
+class PeriodicTimeEventExpression<TimeEventExpression
+attributes
+operations
+end
+
+class SingularTimeEventExpression<TimeEventExpression
+attributes
+	dateTime : Integer
+operations
+end
+
+class ActionEventExpression<AtomicEventExpression
+attributes
+	actor : String
+operations
+end
+
+abstract class TimeEventExpression<AtomicEventExpression
+attributes
+operations
+end
+
+class ParallelEventExpression<EventExpression
+attributes
+	timeWindow : String
+operations
+end
+
+class SequenceEventExpression<EventExpression
+attributes
+	timeWindow : Integer
+operations
+end
+
+class ChoiceEventExpression<EventExpression
+attributes
+	minOccurs : Integer
+	maxOccurs : Integer
+	timeWindow : String
+operations
+end
+
+class AtomicEventExpression<EventExpression
+attributes
+operations
+end
+
+class AndNotEventExpression<EventExpression
+attributes
+	timeWndow : String
+operations
+end
+
+abstract class EventExpression
+attributes
+	startDateTime : String
+	duration : String
+	occurDateTime : String
+operations
+end
+
+class InvokeActionExpression<ActionExpression
+attributes
+operations
+end
+
+class SOAPRPCAction<SOAPAction
+attributes
+operations
+end
+
+class SOAPAction<MessageAction
+attributes
+operations
+end
+
+class DeleteActionExpression<ActionExpression
+attributes
+operations
+end
+
+class CreateActionExpression<ActionExpression
+attributes
+operations
+end
+
+class AssignActionExpression<ActionExpression
+attributes
+operations
+end
+
+class MessageAction<ActionExpression
+attributes
+operations
+end
+
+abstract class ActionExpression
+attributes
+operations
+end
+
+class AtLeastAndAtMostQuantifiedFormula<QuantifiedFormula
+attributes
+	maxCardinality : Integer
+	minCardinality : Integer
+operations
+end
+
+class AtMostQuantifiedFormula<QuantifiedFormula
+attributes
+	maxCardinality : Integer
+operations
+end
+
+class AtLeastQuantifiedFormula<QuantifiedFormula
+attributes
+	minCardinality : Integer
+operations
+end
+
+class Conjuction<LogicalFormula
+attributes
+operations
+end
+
+class UniversallyQuantifiedFormula<QuantifiedFormula
+attributes
+operations
+end
+
+class StrongNegation<LogicalFormula
+attributes
+operations
+end
+
+abstract class QuantifiedFormula<LogicalFormula
+attributes
+operations
+end
+
+class NegationAsFailure<LogicalFormula
+attributes
+operations
+end
+
+class Negation
+attributes
+operations
+end
+
+abstract class LogicalFormula
+attributes
+operations
+end
+
+class Implication<LogicalFormula
+attributes
+operations
+end
+
+class ExistentiallyQuantifiedFormula<QuantifiedFormula
+attributes
+operations
+end
+
+class Disjunction<LogicalFormula
+attributes
+operations
+end
+
+class QFStrongNegation<QFNegation
+attributes
+operations
+end
+
+class QFNegationAsFailure<QFNegation
+attributes
+operations
+end
+
+class QFNegation<AndOrNafNegFormula
+attributes
+operations
+end
+
+class LiteralConjunction
+attributes
+operations
+end
+
+class QFDisjunction<AndOrNafNegFormula
+attributes
+operations
+end
+
+class QFConjunction<AndOrNafNegFormula
+attributes
+operations
+end
+
+abstract class AndOrNafNegFormula
+attributes
+operations
+end
+
+abstract class GenericTerm<Term
+attributes
+operations
+end
+
+abstract class Term
+attributes
+	typeCategory : CollectionTypes
+operations
+end
+
+abstract class ObjectTerm<Term
+attributes
+operations
+end
+
+abstract class DataTerm<Term
+attributes
+operations
+end
+
+abstract class Variable
+attributes
+	name : String
+operations
+end
+
+class ObjectVariable<ObjectTerm
+attributes
+operations
+end
+
+class DataVariable<DataTerm
+attributes
+operations
+end
+
+class GenericVariable<Variable
+attributes
+operations
+end
+
+class DatatypeFunctionTerm<DataFunctionTerm
+attributes
+operations
+end
+
+abstract class DataFunctionTerm<DataTerm
+attributes
+operations
+end
+
+class AttributeFunctionTerm<DataFunctionTerm
+attributes
+operations
+end
+
+class DataOperationTerm<DataFunctionTerm
+attributes
+operations
+end
+
+class ReferencePropertyFunctionTerm<ObjectTerm
+attributes
+operations
+end
+
+class ObjectOperationTerm<ObjectTerm
+attributes
+operations
+end
+
+class GenericFunctionTerm<GenericTerm
+attributes
+operations
+end
+
+composition xxx_ReactionRuleSet_rules between
+	ReactionRuleSet[0..1] role xxx_ReactionRuleSet_rules_src
+	ReactionRule[*] role rules
+end
+
+composition xxx_ProductionRuleSet_rules between
+	ProductionRuleSet[0..1] role xxx_ProductionRuleSet_rules_src
+	ProductionRule[*] role rules
+end
+
+association xxx_RuleSet_variables between
+	RuleSet[0..1] role xxx_RuleSet_variables_src
+	Variable[*] role variables
+end
+
+association xxx_RuleSet_externalVocabulary between
+	RuleSet[*] role xxx_RuleSet_externalVocabulary_src
+	ExternalVocabulary[0..1] role externalVocabulary
+end
+
+composition xxx_RuleSet_vocabularies between
+	RuleSet[*] role xxx_RuleSet_vocabularies_src
+	Vocabulary[0..1] role vocabularies
+end
+
+composition xxx_RuleBase_vocabularies between
+	RuleBase[*] role xxx_RuleBase_vocabularies_src
+	Vocabulary[0..1] role vocabularies
+end
+
+association xxx_RuleBase_externalVocabulaires between
+	RuleBase[0..1] role xxx_RuleBase_externalVocabulaires_src
+	ExternalVocabulary[*] role externalVocabulaires
+end
+
+composition xxx_RuleBase_rules between
+	RuleBase[0..1] role xxx_RuleBase_rules_src
+	RuleSet[*] role rules
+end
+
+composition xxx_IntegrityRuleSet_rules between
+	IntegrityRuleSet[0..1] role xxx_IntegrityRuleSet_rules_src
+	IntegrityRule[*] role rules
+end
+
+composition xxx_DerivationRuleSet_rules between
+	DerivationRuleSet[0..1] role xxx_DerivationRuleSet_rules_src
+	DerivationRule[*] role rules
+end
+
+composition xxx_DerivationRule_conditions between
+	DerivationRule[0..1] role xxx_DerivationRule_conditions_src
+	AndOrNafNegFormula[1..*] role conditions
+end
+
+composition xxx_DerivationRule_conclusions between
+	DerivationRule[0..1] role xxx_DerivationRule_conclusions_src
+	LiteralConjunction[1..*] role conclusions
+end
+
+composition xxx_ReactionRule_conditions between
+	ReactionRule[0..1] role xxx_ReactionRule_conditions_src
+	AndOrNafNegFormula[*] role conditions
+end
+
+composition xxx_ReactionRule_producedAction between
+	ReactionRule[*] role xxx_ReactionRule_producedAction_src
+	ActionExpression[1] role producedAction
+end
+
+composition xxx_ReactionRule_postconditon between
+	ReactionRule[*] role xxx_ReactionRule_postconditon_src
+	AndOrNafNegFormula[0..1] role postconditon
+end
+
+composition xxx_ReactionRule_triggeringEvent between
+	ReactionRule[*] role xxx_ReactionRule_triggeringEvent_src
+	EventExpression[1] role triggeringEvent
+end
+
+association xxx_ProductionRule_conditions between
+	ProductionRule[0..1] role xxx_ProductionRule_conditions_src
+	AndOrNafNegFormula[1..*] role conditions
+end
+
+association xxx_ProductionRule_postcondition between
+	ProductionRule[*] role xxx_ProductionRule_postcondition_src
+	AndOrNafNegFormula[0..1] role postcondition
+end
+
+association xxx_ProductionRule_producedAction between
+	ProductionRule[*] role xxx_ProductionRule_producedAction_src
+	ActionExpression[1] role producedAction
+end
+
+association xxx_IntegrityRule_constraint between
+	IntegrityRule[*] role xxx_IntegrityRule_constraint_src
+	QuantifiedFormula[1] role constraint
+end
+
+association xxx_DataClassificationAtom_type between
+	DataClassificationAtom[*] role xxx_DataClassificationAtom_type_src
+	Datatype[1] role type
+end
+
+association xxx_DataClassificationAtom_term between
+	DataClassificationAtom[*] role xxx_DataClassificationAtom_term_src
+	DataTerm[1] role term
+end
+
+association xxx_DatatypePredicateAtom_predicate between
+	DatatypePredicateAtom[*] role xxx_DatatypePredicateAtom_predicate_src
+	DatatypePredicate[1] role predicate
+end
+
+association xxx_DatatypePredicateAtom_dataArguments between
+	DatatypePredicateAtom[0..1] role xxx_DatatypePredicateAtom_dataArguments_src
+	DataTerm[2..*] role dataArguments
+end
+
+association xxx_InequalityAtom_terms between
+	InequalityAtom[0..1] role xxx_InequalityAtom_terms_src
+	ObjectTerm[2..*] role terms
+end
+
+association xxx_EqualityAtom_terms between
+	EqualityAtom[0..1] role xxx_EqualityAtom_terms_src
+	ObjectTerm[2..*] role terms
+end
+
+association xxx_ObjectClassificationAtom_term between
+	ObjectClassificationAtom[*] role xxx_ObjectClassificationAtom_term_src
+	ObjectTerm[1] role term
+end
+
+association xxx_ObjectClassificationAtom_type between
+	ObjectClassificationAtom[*] role xxx_ObjectClassificationAtom_type_src
+	Class[1] role type
+end
+
+association xxx_GenericAtom_predicate between
+	GenericAtom[*] role xxx_GenericAtom_predicate_src
+	GenericPredicate[1] role predicate
+end
+
+association xxx_GenericAtom_arguments between
+	GenericAtom[0..1] role xxx_GenericAtom_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_PropertyAtom_property between
+	PropertyAtom[*] role xxx_PropertyAtom_property_src
+	Property[1] role property
+end
+
+association xxx_PropertyAtom_value between
+	PropertyAtom[*] role xxx_PropertyAtom_value_src
+	Term[1] role value
+end
+
+association xxx_PropertyAtom_subject between
+	PropertyAtom[*] role xxx_PropertyAtom_subject_src
+	ObjectTerm[1] role subject
+end
+
+association xxx_DataSlot_value between
+	DataSlot[*] role xxx_DataSlot_value_src
+	DataTerm[1] role value
+end
+
+association xxx_DataSlot_attribute between
+	DataSlot[*] role xxx_DataSlot_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_ObjectSlot_object between
+	ObjectSlot[*] role xxx_ObjectSlot_object_src
+	ObjectTerm[1] role object
+end
+
+association xxx_ObjectSlot_referenceProperty between
+	ObjectSlot[*] role xxx_ObjectSlot_referenceProperty_src
+	ReferenceProperty[1] role referenceProperty
+end
+
+association xxx_ReferencePropertyAtom_object between
+	ReferencePropertyAtom[*] role xxx_ReferencePropertyAtom_object_src
+	ObjectTerm[1] role object
+end
+
+association xxx_ReferencePropertyAtom_referenceProperty between
+	ReferencePropertyAtom[*] role xxx_ReferencePropertyAtom_referenceProperty_src
+	ReferenceProperty[1] role referenceProperty
+end
+
+association xxx_ReferencePropertyAtom_subject between
+	ReferencePropertyAtom[*] role xxx_ReferencePropertyAtom_subject_src
+	ObjectTerm[1] role subject
+end
+
+association xxx_AttributionAtom_attribute between
+	AttributionAtom[*] role xxx_AttributionAtom_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_AttributionAtom_subject between
+	AttributionAtom[*] role xxx_AttributionAtom_subject_src
+	ObjectTerm[1] role subject
+end
+
+association xxx_AttributionAtom_dataValue between
+	AttributionAtom[*] role xxx_AttributionAtom_dataValue_src
+	DataTerm[1] role dataValue
+end
+
+association xxx_ObjectDescriptionAtom_type between
+	ObjectDescriptionAtom[0..1] role xxx_ObjectDescriptionAtom_type_src
+	Class[*] role type
+end
+
+composition xxx_ObjectDescriptionAtom_objects between
+	ObjectDescriptionAtom[0..1] role xxx_ObjectDescriptionAtom_objects_src
+	ObjectSlot[*] role objects
+end
+
+association xxx_ObjectDescriptionAtom_subject between
+	ObjectDescriptionAtom[*] role xxx_ObjectDescriptionAtom_subject_src
+	ObjectTerm[1] role subject
+end
+
+composition xxx_ObjectDescriptionAtom_slots between
+	ObjectDescriptionAtom[0..1] role xxx_ObjectDescriptionAtom_slots_src
+	Slot[*] role slots
+end
+
+association xxx_ObjectDescriptionAtom_baseType between
+	ObjectDescriptionAtom[*] role xxx_ObjectDescriptionAtom_baseType_src
+	Class[1] role baseType
+end
+
+association xxx_AssociationAtom_associationPredicate between
+	AssociationAtom[*] role xxx_AssociationAtom_associationPredicate_src
+	AssociationPredicate[1] role associationPredicate
+end
+
+association xxx_AssociationAtom_dataArguments between
+	AssociationAtom[0..1] role xxx_AssociationAtom_dataArguments_src
+	DataTerm[*] role dataArguments
+end
+
+association xxx_AssociationAtom_objectArguments between
+	AssociationAtom[0..1] role xxx_AssociationAtom_objectArguments_src
+	ObjectTerm[2..*] role objectArguments
+end
+
+association xxx_DataOperation_returnType between
+	DataOperation[*] role xxx_DataOperation_returnType_src
+	Datatype[0..1] role returnType
+end
+
+association xxx_ObjectOperation_returnType between
+	ObjectOperation[*] role xxx_ObjectOperation_returnType_src
+	Class[0..1] role returnType
+end
+
+association xxx_Operation_contextType between
+	Operation[*] role xxx_Operation_contextType_src
+	Class[0..1] role contextType
+end
+
+association xxx_Operation_arguments between
+	Operation[0..1] role xxx_Operation_arguments_src
+	Type[*] role arguments
+end
+
+composition xxx_EnumerationDatatype_literals between
+	EnumerationDatatype[0..1] role xxx_EnumerationDatatype_literals_src
+	DataLiteral[*] role literals
+end
+
+association xxx_GenericEntityName_classRef between
+	GenericEntityName[*] role xxx_GenericEntityName_classRef_src
+	Class[0..1] role classRef
+end
+
+composition xxx_Vocabulary_entries between
+	Vocabulary[0..1] role xxx_Vocabulary_entries_src
+	VocabularyEntry[1..*] role entries
+end
+
+association xxx_Property_range between
+	Property[*] role xxx_Property_range_src
+	Type[0..1] role range
+end
+
+association xxx_Property_domain between
+	Property[*] role xxx_Property_domain_src
+	Class[0..1] role domain
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Class[0..1] role type
+end
+
+association xxx_TypedLiteral_type between
+	TypedLiteral[*] role xxx_TypedLiteral_type_src
+	Datatype[1] role type
+end
+
+association xxx_ObjectName_classRef between
+	ObjectName[*] role xxx_ObjectName_classRef_src
+	Class[0..1] role classRef
+end
+
+association xxx_AssociationPredicate_arguments between
+	AssociationPredicate[0..1] role xxx_AssociationPredicate_arguments_src
+	Type[*] role arguments
+end
+
+composition xxx_SOAPMessageBody_children between
+	SOAPMessageBody[0..1] role xxx_SOAPMessageBody_children_src
+	SOAPMessageBodyChild[*] role children
+end
+
+composition xxx_SOAPMessageHeader_headerBlocks between
+	SOAPMessageHeader[0..1] role xxx_SOAPMessageHeader_headerBlocks_src
+	SOAPMessageHeaderBlock[*] role headerBlocks
+end
+
+composition xxx_SOAPMessageEventExpression_body between
+	SOAPMessageEventExpression[*] role xxx_SOAPMessageEventExpression_body_src
+	SOAPMessageBody[1] role body
+end
+
+composition xxx_SOAPMessageEventExpression_header between
+	SOAPMessageEventExpression[*] role xxx_SOAPMessageEventExpression_header_src
+	SOAPMessageHeader[0..1] role header
+end
+
+composition xxx_ParallelEventExpression_expressions between
+	ParallelEventExpression[0..1] role xxx_ParallelEventExpression_expressions_src
+	EventExpression[*] role expressions
+end
+
+composition xxx_SequenceEventExpression_expressions between
+	SequenceEventExpression[0..1] role xxx_SequenceEventExpression_expressions_src
+	EventExpression[*] role expressions
+end
+
+composition xxx_ChoiceEventExpression_expressions between
+	ChoiceEventExpression[0..1] role xxx_ChoiceEventExpression_expressions_src
+	EventExpression[1..*] role expressions
+end
+
+composition xxx_AtomicEventExpression_arguments between
+	AtomicEventExpression[0..1] role xxx_AtomicEventExpression_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_AtomicEventExpression_type between
+	AtomicEventExpression[*] role xxx_AtomicEventExpression_type_src
+	EventType[1] role type
+end
+
+composition xxx_AndNotEventExpression_expressions between
+	AndNotEventExpression[0..1] role xxx_AndNotEventExpression_expressions_src
+	EventExpression[*] role expressions
+end
+
+association xxx_InvokeActionExpression_operation between
+	InvokeActionExpression[*] role xxx_InvokeActionExpression_operation_src
+	Operation[1] role operation
+end
+
+association xxx_InvokeActionExpression_arguments between
+	InvokeActionExpression[0..1] role xxx_InvokeActionExpression_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_InvokeActionExpression_contextArgument between
+	InvokeActionExpression[*] role xxx_InvokeActionExpression_contextArgument_src
+	ObjectTerm[0..1] role contextArgument
+end
+
+association xxx_SOAPRPCAction_arguments between
+	SOAPRPCAction[0..1] role xxx_SOAPRPCAction_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_SOAPAction_operation between
+	SOAPAction[*] role xxx_SOAPAction_operation_src
+	Operation[1] role operation
+end
+
+association xxx_DeleteActionExpression_contextArgument between
+	DeleteActionExpression[*] role xxx_DeleteActionExpression_contextArgument_src
+	ObjectTerm[1] role contextArgument
+end
+
+association xxx_DeleteActionExpression_context_ between
+	DeleteActionExpression[*] role xxx_DeleteActionExpression_context__src
+	Class[1] role context_
+end
+
+association xxx_CreateActionExpression_slots between
+	CreateActionExpression[0..1] role xxx_CreateActionExpression_slots_src
+	Slot[*] role slots
+end
+
+association xxx_CreateActionExpression_context_ between
+	CreateActionExpression[*] role xxx_CreateActionExpression_context__src
+	Class[1] role context_
+end
+
+association xxx_AssignActionExpression_contextArgument between
+	AssignActionExpression[*] role xxx_AssignActionExpression_contextArgument_src
+	ObjectTerm[1] role contextArgument
+end
+
+association xxx_AssignActionExpression_property between
+	AssignActionExpression[*] role xxx_AssignActionExpression_property_src
+	Property[1] role property
+end
+
+composition xxx_Conjuction_formulas between
+	Conjuction[0..1] role xxx_Conjuction_formulas_src
+	LogicalFormula[2..*] role formulas
+end
+
+composition xxx_StrongNegation_formula between
+	StrongNegation[*] role xxx_StrongNegation_formula_src
+	LogicalFormula[1] role formula
+end
+
+composition xxx_QuantifiedFormula_formula between
+	QuantifiedFormula[*] role xxx_QuantifiedFormula_formula_src
+	LogicalFormula[1] role formula
+end
+
+association xxx_QuantifiedFormula_variables between
+	QuantifiedFormula[0..1] role xxx_QuantifiedFormula_variables_src
+	Variable[1..*] role variables
+end
+
+composition xxx_NegationAsFailure_formula between
+	NegationAsFailure[*] role xxx_NegationAsFailure_formula_src
+	LogicalFormula[1] role formula
+end
+
+composition xxx_Implication_consequent between
+	Implication[*] role xxx_Implication_consequent_src
+	LogicalFormula[1] role consequent
+end
+
+composition xxx_Implication_antecedent between
+	Implication[*] role xxx_Implication_antecedent_src
+	LogicalFormula[1] role antecedent
+end
+
+composition xxx_Disjunction_formulas between
+	Disjunction[0..1] role xxx_Disjunction_formulas_src
+	LogicalFormula[2..*] role formulas
+end
+
+composition xxx_QFNegation_formula between
+	QFNegation[*] role xxx_QFNegation_formula_src
+	AndOrNafNegFormula[1] role formula
+end
+
+composition xxx_LiteralConjunction_atoms between
+	LiteralConjunction[0..1] role xxx_LiteralConjunction_atoms_src
+	Atom[1..*] role atoms
+end
+
+composition xxx_QFDisjunction_formulas between
+	QFDisjunction[0..1] role xxx_QFDisjunction_formulas_src
+	AndOrNafNegFormula[2..*] role formulas
+end
+
+composition xxx_QFConjunction_formulas between
+	QFConjunction[0..1] role xxx_QFConjunction_formulas_src
+	AndOrNafNegFormula[2..*] role formulas
+end
+
+association xxx_ObjectVariable_classRef between
+	ObjectVariable[*] role xxx_ObjectVariable_classRef_src
+	Class[0..1] role classRef
+end
+
+association xxx_DataVariable_datatypeRef between
+	DataVariable[*] role xxx_DataVariable_datatypeRef_src
+	Datatype[0..1] role datatypeRef
+end
+
+association xxx_GenericVariable_typeRef between
+	GenericVariable[*] role xxx_GenericVariable_typeRef_src
+	Type[0..1] role typeRef
+end
+
+association xxx_DatatypeFunctionTerm_function between
+	DatatypeFunctionTerm[*] role xxx_DatatypeFunctionTerm_function_src
+	DatatypeFunction[1] role function
+end
+
+association xxx_DatatypeFunctionTerm_dataArguments between
+	DatatypeFunctionTerm[0..1] role xxx_DatatypeFunctionTerm_dataArguments_src
+	DataTerm[1..*] role dataArguments
+end
+
+association xxx_AttributeFunctionTerm_contextArgument between
+	AttributeFunctionTerm[*] role xxx_AttributeFunctionTerm_contextArgument_src
+	ObjectTerm[1] role contextArgument
+end
+
+association xxx_AttributeFunctionTerm_attribute between
+	AttributeFunctionTerm[*] role xxx_AttributeFunctionTerm_attribute_src
+	Attribute[1] role attribute
+end
+
+association xxx_DataOperationTerm_dataOperationRef between
+	DataOperationTerm[*] role xxx_DataOperationTerm_dataOperationRef_src
+	DataOperation[1] role dataOperationRef
+end
+
+association xxx_DataOperationTerm_contextArgument between
+	DataOperationTerm[*] role xxx_DataOperationTerm_contextArgument_src
+	ObjectTerm[0..1] role contextArgument
+end
+
+association xxx_DataOperationTerm_arguments between
+	DataOperationTerm[0..1] role xxx_DataOperationTerm_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_ReferencePropertyFunctionTerm_contextArgument between
+	ReferencePropertyFunctionTerm[*] role xxx_ReferencePropertyFunctionTerm_contextArgument_src
+	ObjectTerm[1] role contextArgument
+end
+
+association xxx_ReferencePropertyFunctionTerm_referencePropertyRef between
+	ReferencePropertyFunctionTerm[*] role xxx_ReferencePropertyFunctionTerm_referencePropertyRef_src
+	ReferenceProperty[1] role referencePropertyRef
+end
+
+association xxx_ObjectOperationTerm_operation between
+	ObjectOperationTerm[*] role xxx_ObjectOperationTerm_operation_src
+	ObjectOperation[1] role operation
+end
+
+association xxx_ObjectOperationTerm_arguments between
+	ObjectOperationTerm[0..1] role xxx_ObjectOperationTerm_arguments_src
+	Term[*] role arguments
+end
+
+association xxx_ObjectOperationTerm_contextArgument between
+	ObjectOperationTerm[*] role xxx_ObjectOperationTerm_contextArgument_src
+	ObjectTerm[0..1] role contextArgument
+end
+
+association xxx_GenericFunctionTerm_arguments between
+	GenericFunctionTerm[0..1] role xxx_GenericFunctionTerm_arguments_src
+	GenericTerm[*] role arguments
+end
+
+association xxx_GenericFunctionTerm_functor between
+	GenericFunctionTerm[*] role xxx_GenericFunctionTerm_functor_src
+	GenericFunction[1] role functor
+end
+

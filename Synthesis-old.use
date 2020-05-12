@@ -1,0 +1,695 @@
+model Synthesis
+class SchemaDef<ModuleDef
+attributes
+operations
+end
+
+class ModuleDef<FrameDef
+attributes
+	moduleLayer : String
+operations
+end
+
+class ElementDef<ValueDef
+attributes
+	name : String
+operations
+end
+
+class FrameDef<ElementDef
+attributes
+operations
+end
+
+class TypeDef<FrameDef
+attributes
+	nonobject : String
+operations
+end
+
+class ADTDef<TypeDef
+attributes
+operations
+end
+
+class ParameterDef<ElementDef
+attributes
+	parameterKind : String
+	position : Integer
+operations
+end
+
+class SlotDef<ElementDef
+attributes
+operations
+end
+
+class AttributeDef<SlotDef
+attributes
+	cardinality : Integer
+	attributeKind : String
+operations
+end
+
+class ClassDef<FrameDef
+attributes
+operations
+end
+
+class MetaclassDef<ClassDef
+attributes
+operations
+end
+
+class ScalarDef<TypeDef
+attributes
+operations
+end
+
+class StringDef<ScalarDef
+attributes
+	length : Integer
+operations
+end
+
+class IntegerDef<ScalarDef
+attributes
+	base : Integer
+	precision : Integer
+	scale : Integer
+	unsigned : String
+operations
+end
+
+class EnumDef<ScalarDef
+attributes
+operations
+end
+
+class RealDef<ScalarDef
+attributes
+	precision : Integer
+operations
+end
+
+class CollectionDef<TypeDef
+attributes
+operations
+end
+
+class SetDef<CollectionDef
+attributes
+operations
+end
+
+class InvariantDef<TypeDef
+attributes
+	specification : String
+operations
+end
+
+class FunctionDef<TypeDef
+attributes
+	specification : String
+operations
+end
+
+class SelectorDef
+attributes
+	kind : String
+	name : String
+	priority : Integer
+operations
+end
+
+class AssociationDef<ElementDef
+attributes
+	maxCard : Integer
+	maxInverseCard : Integer
+	minCard : Integer
+	minInverseCard : Integer
+operations
+end
+
+class AssociationMetaclassDef<MetaclassDef,AssociationDef
+attributes
+operations
+end
+
+class MetatypeDef<MetaclassDef
+attributes
+operations
+end
+
+class ValueDef
+attributes
+operations
+end
+
+class StringValueDef<ValueDef
+attributes
+	value : String
+operations
+end
+
+class RealValueDef<ValueDef
+attributes
+	value : String
+operations
+end
+
+class IntegerValueDef<ValueDef
+attributes
+	value : Integer
+operations
+end
+
+class Program
+attributes
+operations
+end
+
+class RuleList<Program
+attributes
+operations
+end
+
+class Block<Program
+attributes
+operations
+end
+
+class ProgramSequence<Program
+attributes
+operations
+end
+
+class Rule
+attributes
+operations
+end
+
+class ConditionalRule
+attributes
+operations
+end
+
+class IterativeRule
+attributes
+operations
+end
+
+class QuantifiedFormula<Formula
+attributes
+operations
+end
+
+class Conjunction<Formula
+attributes
+operations
+end
+
+class Negation<Formula
+attributes
+operations
+end
+
+class Implication<Formula
+attributes
+operations
+end
+
+class Disjunction<Formula
+attributes
+operations
+end
+
+class ExsistentiallyQuantifiedFormula<QuantifiedFormula
+attributes
+operations
+end
+
+class UniversallyQuantifiedFormula<QuantifiedFormula
+attributes
+operations
+end
+
+class Formula
+attributes
+	stringRepr : String
+operations
+end
+
+class Term
+attributes
+operations
+end
+
+class Constant<Term
+attributes
+	value : String
+operations
+end
+
+class IntegerConstant<Constant
+attributes
+operations
+end
+
+class NonConstant<Term
+attributes
+	name : String
+operations
+end
+
+class Variable<NonConstant
+attributes
+operations
+end
+
+class CollectionComprehension<Constant
+attributes
+operations
+end
+
+class Atom<Formula
+attributes
+	symbol : String
+operations
+end
+
+class BuiltInPredicate<Atom
+attributes
+operations
+end
+
+class ArithmeticPredicate<Atom
+attributes
+operations
+end
+
+class BooleanConstant<Constant
+attributes
+operations
+end
+
+class ClassName<Constant
+attributes
+operations
+end
+
+class FunctionCall<NonConstant
+attributes
+operations
+end
+
+class AccessFunction<FunctionCall
+attributes
+operations
+end
+
+class SetFunction<AccessFunction
+attributes
+operations
+end
+
+class BuiltInFunction<FunctionCall
+attributes
+operations
+end
+
+class SetPredicate<Atom
+attributes
+operations
+end
+
+class StringConstant<Constant
+attributes
+operations
+end
+
+class GetFunction<AccessFunction
+attributes
+operations
+end
+
+association xxx_SchemaDef_modules between
+	SchemaDef[0..1] role xxx_SchemaDef_modules_src
+	ModuleDef[*] role modules
+end
+
+association xxx_ModuleDef_containedClasses between
+	ModuleDef[0..1] role xxx_ModuleDef_containedClasses_src
+	ClassDef[*] role containedClasses
+end
+
+association xxx_ModuleDef_containedFunctions between
+	ModuleDef[0..1] role xxx_ModuleDef_containedFunctions_src
+	FunctionDef[*] role containedFunctions
+end
+
+association xxx_ModuleDef_containedTypes between
+	ModuleDef[0..1] role xxx_ModuleDef_containedTypes_src
+	TypeDef[*] role containedTypes
+end
+
+association xxx_ModuleDef_imports between
+	ModuleDef[0..1] role xxx_ModuleDef_imports_src
+	FrameDef[*] role imports
+end
+
+association xxx_ModuleDef_schema between
+	ModuleDef[*] role xxx_ModuleDef_schema_src
+	SchemaDef[1] role schema
+end
+
+association xxx_FrameDef_classes between
+	FrameDef[0..1] role xxx_FrameDef_classes_src
+	ClassDef[1..*] role classes
+end
+
+association xxx_FrameDef_parameters between
+	FrameDef[0..1] role xxx_FrameDef_parameters_src
+	ParameterDef[*] role parameters
+end
+
+association xxx_FrameDef_slots between
+	FrameDef[0..1] role xxx_FrameDef_slots_src
+	SlotDef[*] role slots
+end
+
+association xxx_FrameDef_metavalueOf between
+	FrameDef[*] role xxx_FrameDef_metavalueOf_src
+	ValueDef[0..1] role metavalueOf
+end
+
+association xxx_FrameDef_metaslotOf between
+	FrameDef[*] role xxx_FrameDef_metaslotOf_src
+	SlotDef[0..1] role metaslotOf
+end
+
+association xxx_FrameDef_metaframe between
+	FrameDef[*] role xxx_FrameDef_metaframe_src
+	FrameDef[0..1] role metaframe
+end
+
+association xxx_FrameDef_metaframeOf between
+	FrameDef[*] role xxx_FrameDef_metaframeOf_src
+	FrameDef[1] role metaframeOf
+end
+
+association xxx_TypeDef_typeInModule between
+	TypeDef[*] role xxx_TypeDef_typeInModule_src
+	ModuleDef[1] role typeInModule
+end
+
+association xxx_TypeDef_values between
+	TypeDef[0..1] role xxx_TypeDef_values_src
+	ValueDef[*] role values
+end
+
+association xxx_ADTDef_attributes_ between
+	ADTDef[0..1] role xxx_ADTDef_attributes__src
+	AttributeDef[*] role attributes_
+end
+
+association xxx_ADTDef_invariants between
+	ADTDef[0..1] role xxx_ADTDef_invariants_src
+	InvariantDef[*] role invariants
+end
+
+association xxx_ADTDef_subtypes between
+	ADTDef[0..1] role xxx_ADTDef_subtypes_src
+	ADTDef[1..*] role subtypes
+end
+
+association xxx_ADTDef_supertypes between
+	ADTDef[0..1] role xxx_ADTDef_supertypes_src
+	ADTDef[*] role supertypes
+end
+
+association xxx_ParameterDef_parameterOf between
+	ParameterDef[*] role xxx_ParameterDef_parameterOf_src
+	FrameDef[1] role parameterOf
+end
+
+association xxx_ParameterDef_type between
+	ParameterDef[*] role xxx_ParameterDef_type_src
+	TypeDef[1] role type
+end
+
+association xxx_SlotDef_values between
+	SlotDef[0..1] role xxx_SlotDef_values_src
+	ValueDef[*] role values
+end
+
+association xxx_SlotDef_slotOf between
+	SlotDef[*] role xxx_SlotDef_slotOf_src
+	FrameDef[1] role slotOf
+end
+
+association xxx_SlotDef_metaslot between
+	SlotDef[*] role xxx_SlotDef_metaslot_src
+	FrameDef[1] role metaslot
+end
+
+composition xxx_AttributeDef_initialValue between
+	AttributeDef[*] role xxx_AttributeDef_initialValue_src
+	ValueDef[0..1] role initialValue
+end
+
+association xxx_AttributeDef_inverseAttribute between
+	AttributeDef[*] role xxx_AttributeDef_inverseAttribute_src
+	AttributeDef[0..1] role inverseAttribute
+end
+
+association xxx_AttributeDef_classes between
+	AttributeDef[0..1] role xxx_AttributeDef_classes_src
+	ClassDef[*] role classes
+end
+
+association xxx_AttributeDef_attributeOf between
+	AttributeDef[*] role xxx_AttributeDef_attributeOf_src
+	ADTDef[1] role attributeOf
+end
+
+association xxx_AttributeDef_type between
+	AttributeDef[*] role xxx_AttributeDef_type_src
+	TypeDef[1] role type
+end
+
+association xxx_ClassDef_instanceType between
+	ClassDef[*] role xxx_ClassDef_instanceType_src
+	TypeDef[0..1] role instanceType
+end
+
+association xxx_ClassDef_instances between
+	ClassDef[0..1] role xxx_ClassDef_instances_src
+	FrameDef[*] role instances
+end
+
+association xxx_ClassDef_classInModule between
+	ClassDef[*] role xxx_ClassDef_classInModule_src
+	ModuleDef[1] role classInModule
+end
+
+association xxx_ClassDef_primaryKey between
+	ClassDef[0..1] role xxx_ClassDef_primaryKey_src
+	AttributeDef[*] role primaryKey
+end
+
+association xxx_ClassDef_subclasses between
+	ClassDef[0..1] role xxx_ClassDef_subclasses_src
+	ClassDef[1..*] role subclasses
+end
+
+association xxx_ClassDef_superclasses between
+	ClassDef[0..1] role xxx_ClassDef_superclasses_src
+	ClassDef[*] role superclasses
+end
+
+composition xxx_MetaclassDef_instInstType between
+	MetaclassDef[*] role xxx_MetaclassDef_instInstType_src
+	ADTDef[0..1] role instInstType
+end
+
+association xxx_CollectionDef_ofType between
+	CollectionDef[*] role xxx_CollectionDef_ofType_src
+	TypeDef[1] role ofType
+end
+
+association xxx_InvariantDef_predicativeSpec between
+	InvariantDef[*] role xxx_InvariantDef_predicativeSpec_src
+	Formula[0..1] role predicativeSpec
+end
+
+association xxx_FunctionDef_functionInModule between
+	FunctionDef[*] role xxx_FunctionDef_functionInModule_src
+	ModuleDef[1] role functionInModule
+end
+
+association xxx_FunctionDef_exceptions between
+	FunctionDef[0..1] role xxx_FunctionDef_exceptions_src
+	TypeDef[*] role exceptions
+end
+
+association xxx_FunctionDef_selector between
+	FunctionDef[*] role xxx_FunctionDef_selector_src
+	SelectorDef[0..1] role selector
+end
+
+association xxx_FunctionDef_predicativeSpec between
+	FunctionDef[*] role xxx_FunctionDef_predicativeSpec_src
+	Formula[0..1] role predicativeSpec
+end
+
+association xxx_FunctionDef_implementation between
+	FunctionDef[*] role xxx_FunctionDef_implementation_src
+	Program[0..1] role implementation
+end
+
+association xxx_SelectorDef_selectorOf between
+	SelectorDef[*] role xxx_SelectorDef_selectorOf_src
+	FunctionDef[1] role selectorOf
+end
+
+association xxx_AssociationDef_domain between
+	AssociationDef[0..1] role xxx_AssociationDef_domain_src
+	ClassDef[*] role domain
+end
+
+association xxx_AssociationDef_range between
+	AssociationDef[0..1] role xxx_AssociationDef_range_src
+	ClassDef[*] role range
+end
+
+association xxx_AssociationDef_inverse between
+	AssociationDef[*] role xxx_AssociationDef_inverse_src
+	AssociationDef[0..1] role inverse
+end
+
+association xxx_ValueDef_typeOfValue between
+	ValueDef[*] role xxx_ValueDef_typeOfValue_src
+	TypeDef[1] role typeOfValue
+end
+
+association xxx_ValueDef_metavalue between
+	ValueDef[*] role xxx_ValueDef_metavalue_src
+	FrameDef[1] role metavalue
+end
+
+composition xxx_RuleList_rules between
+	RuleList[0..1] role xxx_RuleList_rules_src
+	Rule[1..*] role rules
+end
+
+composition xxx_Block_program between
+	Block[*] role xxx_Block_program_src
+	Program[1] role program
+end
+
+composition xxx_ProgramSequence_programs between
+	ProgramSequence[0..1] role xxx_ProgramSequence_programs_src
+	Program[*] role programs
+end
+
+association xxx_Rule_head between
+	Rule[*] role xxx_Rule_head_src
+	Atom[1] role head
+end
+
+association xxx_Rule_body between
+	Rule[*] role xxx_Rule_body_src
+	Formula[1] role body
+end
+
+composition xxx_ConditionalRule_condition between
+	ConditionalRule[*] role xxx_ConditionalRule_condition_src
+	Formula[1] role condition
+end
+
+composition xxx_ConditionalRule_block between
+	ConditionalRule[*] role xxx_ConditionalRule_block_src
+	Block[1] role block
+end
+
+composition xxx_IterativeRule_condition between
+	IterativeRule[*] role xxx_IterativeRule_condition_src
+	Formula[1] role condition
+end
+
+composition xxx_IterativeRule_block between
+	IterativeRule[*] role xxx_IterativeRule_block_src
+	Block[1] role block
+end
+
+composition xxx_QuantifiedFormula_formula between
+	QuantifiedFormula[*] role xxx_QuantifiedFormula_formula_src
+	Formula[1] role formula
+end
+
+association xxx_QuantifiedFormula_variables between
+	QuantifiedFormula[*] role xxx_QuantifiedFormula_variables_src
+	Variable[1] role variables
+end
+
+association xxx_Conjunction_formula between
+	Conjunction[0..1] role xxx_Conjunction_formula_src
+	Formula[2..*] role formula
+end
+
+composition xxx_Negation_formula between
+	Negation[*] role xxx_Negation_formula_src
+	Formula[1] role formula
+end
+
+composition xxx_Implication_consequent between
+	Implication[*] role xxx_Implication_consequent_src
+	Formula[1] role consequent
+end
+
+composition xxx_Implication_antecedent between
+	Implication[*] role xxx_Implication_antecedent_src
+	Formula[1] role antecedent
+end
+
+composition xxx_Disjunction_formula between
+	Disjunction[0..1] role xxx_Disjunction_formula_src
+	Formula[2..*] role formula
+end
+
+association xxx_Variable_variableOfType between
+	Variable[*] role xxx_Variable_variableOfType_src
+	TypeDef[1] role variableOfType
+end
+
+association xxx_CollectionComprehension_vars between
+	CollectionComprehension[0..1] role xxx_CollectionComprehension_vars_src
+	Variable[1..*] role vars
+end
+
+association xxx_CollectionComprehension_formula between
+	CollectionComprehension[*] role xxx_CollectionComprehension_formula_src
+	Formula[1] role formula
+end
+
+association xxx_Atom_terms between
+	Atom[0..1] role xxx_Atom_terms_src
+	Term[*] role terms
+end
+
+association xxx_ClassName_classNameOf between
+	ClassName[*] role xxx_ClassName_classNameOf_src
+	ClassDef[1] role classNameOf
+end
+
+association xxx_FunctionCall_terms between
+	FunctionCall[0..1] role xxx_FunctionCall_terms_src
+	Term[*] role terms
+end
+
+association xxx_AccessFunction_attributeNameOf between
+	AccessFunction[*] role xxx_AccessFunction_attributeNameOf_src
+	AttributeDef[1] role attributeNameOf
+end
+

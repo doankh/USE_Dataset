@@ -1,0 +1,228 @@
+model pacad
+enum CommandType{
+default
+}
+
+abstract class NamedElement
+attributes
+	declaredName : String
+	id : String
+operations
+	getName():String
+end
+
+abstract class AdventureElement
+attributes
+operations
+end
+
+class Object<NamedElement,AdventureElement
+attributes
+	definedPositionX : Integer
+	definedPositionY : Integer
+	visible : Boolean
+operations
+	isUsableAlone():Boolean
+	getAdventure():PointAndClickAdventure
+	getPositionX():Integer
+	getPositionY():Integer
+end
+
+class InternalObject<Object
+attributes
+	definedWidth : Integer
+	definedHeight : Integer
+operations
+	getWidth():Integer
+	getHeight():Integer
+end
+
+class Room<Object
+attributes
+	declaredBackgroundSound : String
+operations
+	getBackgroundSound():String
+end
+
+class Command<AdventureElement
+attributes
+	type : CommandType
+operations
+end
+
+abstract class Action
+attributes
+operations
+end
+
+class Hide<Action
+attributes
+operations
+end
+
+class Show<Action
+attributes
+operations
+end
+
+class MoveAbsolute<Action
+attributes
+	newPositionX : Integer
+	newPositionY : Integer
+operations
+end
+
+class MoveRelative<Action
+attributes
+	deltaX : Integer
+	deltaY : Integer
+operations
+end
+
+class PlaySound<Action
+attributes
+	soundfile : String
+operations
+end
+
+class ShowText<Action
+attributes
+	text : String
+operations
+end
+
+class PointAndClickAdventure
+attributes
+	main : Boolean
+operations
+	getThingObject():Object
+	getAllElements():AdventureElement
+	getAllObjects():Object
+	getImports():Import
+	getAllCommands():Command
+	getAvailableCommands(type : CommandType):Command
+end
+
+class ColorMapping
+attributes
+	red : String
+	green : String
+	blue : String
+operations
+end
+
+class Import<AdventureElement
+attributes
+operations
+end
+
+class Inventory
+attributes
+operations
+end
+
+class Store<Action
+attributes
+operations
+end
+
+class Remove<Action
+attributes
+operations
+end
+
+class InventoryObject<Object
+attributes
+operations
+end
+
+association xxx_Object_parent between
+	Object[*] role xxx_Object_parent_src
+	Object[0..1] role parent
+end
+
+composition xxx_Room_containedObjects between
+	Room[0..1] role xxx_Room_containedObjects_src
+	Object[*] role containedObjects
+end
+
+composition xxx_Command_actions between
+	Command[0..1] role xxx_Command_actions_src
+	Action[1..*] role actions
+end
+
+association xxx_Command_subjects between
+	Command[0..1] role xxx_Command_subjects_src
+	Object[1..*] role subjects
+end
+
+association xxx_Hide_subject between
+	Hide[*] role xxx_Hide_subject_src
+	Object[1] role subject
+end
+
+association xxx_Show_subject between
+	Show[*] role xxx_Show_subject_src
+	Object[1] role subject
+end
+
+association xxx_MoveAbsolute_subject between
+	MoveAbsolute[*] role xxx_MoveAbsolute_subject_src
+	Object[1] role subject
+end
+
+association xxx_MoveRelative_subject between
+	MoveRelative[*] role xxx_MoveRelative_subject_src
+	Object[1] role subject
+end
+
+association xxx_ShowText_speaker between
+	ShowText[*] role xxx_ShowText_speaker_src
+	Object[0..1] role speaker
+end
+
+composition xxx_PointAndClickAdventure_elements between
+	PointAndClickAdventure[0..1] role xxx_PointAndClickAdventure_elements_src
+	AdventureElement[*] role elements
+end
+
+association xxx_PointAndClickAdventure_initialRoom between
+	PointAndClickAdventure[*] role xxx_PointAndClickAdventure_initialRoom_src
+	Room[0..1] role initialRoom
+end
+
+composition xxx_PointAndClickAdventure_colorMappings between
+	PointAndClickAdventure[0..1] role xxx_PointAndClickAdventure_colorMappings_src
+	ColorMapping[*] role colorMappings
+end
+
+association xxx_PointAndClickAdventure_mainScript between
+	PointAndClickAdventure[*] role xxx_PointAndClickAdventure_mainScript_src
+	PointAndClickAdventure[0..1] role mainScript
+end
+
+association xxx_ColorMapping_person between
+	ColorMapping[*] role xxx_ColorMapping_person_src
+	Object[1] role person
+end
+
+association xxx_Import_importedAdventure between
+	Import[*] role xxx_Import_importedAdventure_src
+	PointAndClickAdventure[1] role importedAdventure
+end
+
+association xxx_Inventory_carriedObjects between
+	Inventory[0..1] role xxx_Inventory_carriedObjects_src
+	InventoryObject[*] role carriedObjects
+end
+
+association xxx_Store_subject between
+	Store[*] role xxx_Store_subject_src
+	Object[1] role subject
+end
+
+association xxx_Remove_subject between
+	Remove[*] role xxx_Remove_subject_src
+	Object[1] role subject
+end
+

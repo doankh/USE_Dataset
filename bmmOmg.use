@@ -1,0 +1,648 @@
+model bmm
+class Assessment<MotivationElement
+attributes
+operations
+end
+
+abstract class MotivationElement
+attributes
+	name : String
+	description : String
+operations
+end
+
+class Directive<Means
+attributes
+operations
+end
+
+class Means<MotivationElement
+attributes
+operations
+end
+
+class OrganizationUnit<MotivationElement
+attributes
+operations
+end
+
+class End<MotivationElement
+attributes
+operations
+end
+
+class BusinessProcess<MotivationElement
+attributes
+operations
+end
+
+class Offering<Asset
+attributes
+operations
+end
+
+class Asset<MotivationElement
+attributes
+operations
+end
+
+class CourseOfAction<Means
+attributes
+operations
+end
+
+class DesiredResult<End
+attributes
+operations
+end
+
+class Liability<MotivationElement
+attributes
+operations
+end
+
+class Resource<Asset
+attributes
+operations
+end
+
+class FixedAsset<Asset
+attributes
+operations
+end
+
+class BusinessPolicy<Directive
+attributes
+operations
+end
+
+class BusinessRule<Directive
+attributes
+operations
+end
+
+class Tactic<CourseOfAction
+attributes
+operations
+end
+
+class Strategy<CourseOfAction
+attributes
+operations
+end
+
+class Mission<Means
+attributes
+operations
+end
+
+class Vision<End
+attributes
+operations
+end
+
+class Goal<DesiredResult
+attributes
+operations
+end
+
+class Objective<DesiredResult
+attributes
+operations
+end
+
+class Influencer<MotivationElement
+attributes
+operations
+end
+
+class InfluencerCategory<MotivationElement
+attributes
+operations
+end
+
+class InfluencingOrganization<MotivationElement
+attributes
+operations
+end
+
+class OrganizationCategory<MotivationElement
+attributes
+operations
+end
+
+class PotentialImpact<MotivationElement
+attributes
+operations
+end
+
+class Regulation<Influencer
+attributes
+operations
+end
+
+class AssessmentCategory<MotivationElement
+attributes
+operations
+end
+
+class PotentialReward<PotentialImpact
+attributes
+operations
+end
+
+class Risk<PotentialImpact
+attributes
+operations
+end
+
+association xxx_Assessment_motivatedDirective between
+	Assessment[0..1] role xxx_Assessment_motivatedDirective_src
+	Directive[*] role motivatedDirective
+end
+
+association xxx_Assessment_affectedEnd between
+	Assessment[0..1] role xxx_Assessment_affectedEnd_src
+	End[*] role affectedEnd
+end
+
+association xxx_Assessment_judgedInfluencer between
+	Assessment[0..1] role xxx_Assessment_judgedInfluencer_src
+	Influencer[1..*] role judgedInfluencer
+end
+
+association xxx_Assessment_assessingOrganizationUnit between
+	Assessment[*] role xxx_Assessment_assessingOrganizationUnit_src
+	OrganizationUnit[1] role assessingOrganizationUnit
+end
+
+association xxx_Assessment_affectedMeans between
+	Assessment[0..1] role xxx_Assessment_affectedMeans_src
+	Means[*] role affectedMeans
+end
+
+association xxx_Assessment_identifiedPotentialImpact between
+	Assessment[0..1] role xxx_Assessment_identifiedPotentialImpact_src
+	PotentialImpact[*] role identifiedPotentialImpact
+end
+
+association xxx_Assessment_usedAssessment between
+	Assessment[0..1] role xxx_Assessment_usedAssessment_src
+	Assessment[*] role usedAssessment
+end
+
+association xxx_Assessment_usingAssessment between
+	Assessment[0..1] role xxx_Assessment_usingAssessment_src
+	Assessment[*] role usingAssessment
+end
+
+association xxx_Assessment_categorizingAssessmentCategory between
+	Assessment[0..1] role xxx_Assessment_categorizingAssessmentCategory_src
+	AssessmentCategory[*] role categorizingAssessmentCategory
+end
+
+association xxx_Directive_supportedDesiredResult between
+	Directive[0..1] role xxx_Directive_supportedDesiredResult_src
+	DesiredResult[*] role supportedDesiredResult
+end
+
+association xxx_Directive_governedCourseOfAction between
+	Directive[0..1] role xxx_Directive_governedCourseOfAction_src
+	CourseOfAction[*] role governedCourseOfAction
+end
+
+association xxx_Directive_derivedCourseOfAction between
+	Directive[0..1] role xxx_Directive_derivedCourseOfAction_src
+	CourseOfAction[*] role derivedCourseOfAction
+end
+
+association xxx_Directive_governedAsset between
+	Directive[0..1] role xxx_Directive_governedAsset_src
+	Asset[*] role governedAsset
+end
+
+association xxx_Directive_motivatingPotentialImpact between
+	Directive[0..1] role xxx_Directive_motivatingPotentialImpact_src
+	PotentialImpact[*] role motivatingPotentialImpact
+end
+
+association xxx_Directive_directiveRegulation between
+	Directive[0..1] role xxx_Directive_directiveRegulation_src
+	Regulation[*] role directiveRegulation
+end
+
+association xxx_Directive_motivatingAssessment between
+	Directive[0..1] role xxx_Directive_motivatingAssessment_src
+	Assessment[*] role motivatingAssessment
+end
+
+association xxx_Means_establishingOrganizationUnit between
+	Means[0..1] role xxx_Means_establishingOrganizationUnit_src
+	OrganizationUnit[*] role establishingOrganizationUnit
+end
+
+association xxx_Means_judgingAssessment between
+	Means[0..1] role xxx_Means_judgingAssessment_src
+	Assessment[*] role judgingAssessment
+end
+
+association xxx_OrganizationUnit_definedEnd between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_definedEnd_src
+	End[*] role definedEnd
+end
+
+association xxx_OrganizationUnit_managedBusinessProces between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_managedBusinessProces_src
+	BusinessProcess[*] role managedBusinessProces
+end
+
+association xxx_OrganizationUnit_managedLiability between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_managedLiability_src
+	Liability[*] role managedLiability
+end
+
+association xxx_OrganizationUnit_managedAsset between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_managedAsset_src
+	Asset[*] role managedAsset
+end
+
+association xxx_OrganizationUnit_determiningStrategy between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_determiningStrategy_src
+	Strategy[*] role determiningStrategy
+end
+
+association xxx_OrganizationUnit_recognizedInfluencer between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_recognizedInfluencer_src
+	Influencer[*] role recognizedInfluencer
+end
+
+association xxx_OrganizationUnit_internalInfluencingOrganization between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_internalInfluencingOrganization_src
+	InfluencingOrganization[*] role internalInfluencingOrganization
+end
+
+association xxx_OrganizationUnit_madeAssessment between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_madeAssessment_src
+	Assessment[*] role madeAssessment
+end
+
+association xxx_OrganizationUnit_establishedMeans between
+	OrganizationUnit[0..1] role xxx_OrganizationUnit_establishedMeans_src
+	Means[*] role establishedMeans
+end
+
+association xxx_End_judgingAssessment between
+	End[0..1] role xxx_End_judgingAssessment_src
+	Assessment[*] role judgingAssessment
+end
+
+association xxx_End_definingOrganizationUnit between
+	End[0..1] role xxx_End_definingOrganizationUnit_src
+	OrganizationUnit[*] role definingOrganizationUnit
+end
+
+association xxx_BusinessProcess_deliveredOffering between
+	BusinessProcess[0..1] role xxx_BusinessProcess_deliveredOffering_src
+	Offering[*] role deliveredOffering
+end
+
+association xxx_BusinessProcess_realizedCourseOfAction between
+	BusinessProcess[0..1] role xxx_BusinessProcess_realizedCourseOfAction_src
+	CourseOfAction[*] role realizedCourseOfAction
+end
+
+association xxx_BusinessProcess_managedAsset between
+	BusinessProcess[0..1] role xxx_BusinessProcess_managedAsset_src
+	Asset[*] role managedAsset
+end
+
+association xxx_BusinessProcess_governingBusinessPolicy between
+	BusinessProcess[0..1] role xxx_BusinessProcess_governingBusinessPolicy_src
+	BusinessPolicy[*] role governingBusinessPolicy
+end
+
+association xxx_BusinessProcess_guidingBusinessRule between
+	BusinessProcess[*] role xxx_BusinessProcess_guidingBusinessRule_src
+	BusinessRule[1] role guidingBusinessRule
+end
+
+association xxx_BusinessProcess_responsibleOrganizationUnit between
+	BusinessProcess[0..1] role xxx_BusinessProcess_responsibleOrganizationUnit_src
+	OrganizationUnit[*] role responsibleOrganizationUnit
+end
+
+association xxx_Offering_definingCourseOfAction between
+	Offering[0..1] role xxx_Offering_definingCourseOfAction_src
+	CourseOfAction[*] role definingCourseOfAction
+end
+
+association xxx_Offering_usedAsset between
+	Offering[0..1] role xxx_Offering_usedAsset_src
+	FixedAsset[*] role usedAsset
+end
+
+association xxx_Offering_requiredResource between
+	Offering[0..1] role xxx_Offering_requiredResource_src
+	Resource[*] role requiredResource
+end
+
+association xxx_Offering_deliveringBusinessProcess between
+	Offering[0..1] role xxx_Offering_deliveringBusinessProcess_src
+	BusinessProcess[*] role deliveringBusinessProcess
+end
+
+association xxx_Asset_deployingCourseOfAction between
+	Asset[0..1] role xxx_Asset_deployingCourseOfAction_src
+	CourseOfAction[*] role deployingCourseOfAction
+end
+
+association xxx_Asset_governingDirective between
+	Asset[0..1] role xxx_Asset_governingDirective_src
+	Directive[*] role governingDirective
+end
+
+association xxx_Asset_responsibleOrganizationUnit between
+	Asset[0..1] role xxx_Asset_responsibleOrganizationUnit_src
+	OrganizationUnit[*] role responsibleOrganizationUnit
+end
+
+association xxx_Asset_managingBusinessProcess between
+	Asset[0..1] role xxx_Asset_managingBusinessProcess_src
+	BusinessProcess[*] role managingBusinessProcess
+end
+
+association xxx_CourseOfAction_enabledCourseOfAction between
+	CourseOfAction[0..1] role xxx_CourseOfAction_enabledCourseOfAction_src
+	CourseOfAction[*] role enabledCourseOfAction
+end
+
+association xxx_CourseOfAction_enablingCourseOfAction between
+	CourseOfAction[0..1] role xxx_CourseOfAction_enablingCourseOfAction_src
+	CourseOfAction[*] role enablingCourseOfAction
+end
+
+association xxx_CourseOfAction_moreSpecficCourseOfAction between
+	CourseOfAction[0..1] role xxx_CourseOfAction_moreSpecficCourseOfAction_src
+	CourseOfAction[*] role moreSpecficCourseOfAction
+end
+
+association xxx_CourseOfAction_broaderCourseOfAction between
+	CourseOfAction[0..1] role xxx_CourseOfAction_broaderCourseOfAction_src
+	CourseOfAction[*] role broaderCourseOfAction
+end
+
+association xxx_CourseOfAction_supportedDesiredResult between
+	CourseOfAction[0..1] role xxx_CourseOfAction_supportedDesiredResult_src
+	DesiredResult[*] role supportedDesiredResult
+end
+
+association xxx_CourseOfAction_definedOffering between
+	CourseOfAction[0..1] role xxx_CourseOfAction_definedOffering_src
+	Offering[*] role definedOffering
+end
+
+association xxx_CourseOfAction_dischargedLiability between
+	CourseOfAction[0..1] role xxx_CourseOfAction_dischargedLiability_src
+	Liability[*] role dischargedLiability
+end
+
+association xxx_CourseOfAction_realizingBusinessProcess between
+	CourseOfAction[*] role xxx_CourseOfAction_realizingBusinessProcess_src
+	BusinessProcess[1] role realizingBusinessProcess
+end
+
+association xxx_CourseOfAction_governingDirective between
+	CourseOfAction[0..1] role xxx_CourseOfAction_governingDirective_src
+	Directive[*] role governingDirective
+end
+
+association xxx_CourseOfAction_baseDirective between
+	CourseOfAction[0..1] role xxx_CourseOfAction_baseDirective_src
+	Directive[*] role baseDirective
+end
+
+association xxx_CourseOfAction_deployedAsset between
+	CourseOfAction[0..1] role xxx_CourseOfAction_deployedAsset_src
+	Asset[*] role deployedAsset
+end
+
+association xxx_DesiredResult_moreSpecificDesiredResult between
+	DesiredResult[0..1] role xxx_DesiredResult_moreSpecificDesiredResult_src
+	DesiredResult[*] role moreSpecificDesiredResult
+end
+
+association xxx_DesiredResult_broaderDesiredResult between
+	DesiredResult[0..1] role xxx_DesiredResult_broaderDesiredResult_src
+	DesiredResult[*] role broaderDesiredResult
+end
+
+association xxx_DesiredResult_supportingDirective between
+	DesiredResult[0..1] role xxx_DesiredResult_supportingDirective_src
+	Directive[*] role supportingDirective
+end
+
+association xxx_DesiredResult_supportingCourseOfAction between
+	DesiredResult[0..1] role xxx_DesiredResult_supportingCourseOfAction_src
+	CourseOfAction[*] role supportingCourseOfAction
+end
+
+association xxx_Liability_claimedResource between
+	Liability[0..1] role xxx_Liability_claimedResource_src
+	Resource[*] role claimedResource
+end
+
+association xxx_Liability_responsibleOrganizationUnit between
+	Liability[0..1] role xxx_Liability_responsibleOrganizationUnit_src
+	OrganizationUnit[*] role responsibleOrganizationUnit
+end
+
+association xxx_Liability_dischargingCourseOfAction between
+	Liability[0..1] role xxx_Liability_dischargingCourseOfAction_src
+	CourseOfAction[*] role dischargingCourseOfAction
+end
+
+association xxx_Resource_providingFixedAsset between
+	Resource[0..1] role xxx_Resource_providingFixedAsset_src
+	FixedAsset[*] role providingFixedAsset
+end
+
+association xxx_Resource_requiringOffering between
+	Resource[0..1] role xxx_Resource_requiringOffering_src
+	Offering[*] role requiringOffering
+end
+
+association xxx_Resource_claimingLiability between
+	Resource[0..1] role xxx_Resource_claimingLiability_src
+	Liability[*] role claimingLiability
+end
+
+association xxx_FixedAsset_usingOffering between
+	FixedAsset[0..1] role xxx_FixedAsset_usingOffering_src
+	Offering[*] role usingOffering
+end
+
+association xxx_FixedAsset_providedResource between
+	FixedAsset[0..1] role xxx_FixedAsset_providedResource_src
+	Resource[*] role providedResource
+end
+
+association xxx_BusinessPolicy_moreSpecificBusinessPolicy between
+	BusinessPolicy[0..1] role xxx_BusinessPolicy_moreSpecificBusinessPolicy_src
+	BusinessPolicy[*] role moreSpecificBusinessPolicy
+end
+
+association xxx_BusinessPolicy_broaderBusinessPolicy between
+	BusinessPolicy[0..1] role xxx_BusinessPolicy_broaderBusinessPolicy_src
+	BusinessPolicy[*] role broaderBusinessPolicy
+end
+
+association xxx_BusinessPolicy_derivedBusinessRule between
+	BusinessPolicy[0..1] role xxx_BusinessPolicy_derivedBusinessRule_src
+	BusinessRule[*] role derivedBusinessRule
+end
+
+association xxx_BusinessPolicy_governedBusinessProcess between
+	BusinessPolicy[0..1] role xxx_BusinessPolicy_governedBusinessProcess_src
+	BusinessProcess[*] role governedBusinessProcess
+end
+
+association xxx_BusinessRule_effectingTactic between
+	BusinessRule[0..1] role xxx_BusinessRule_effectingTactic_src
+	Tactic[*] role effectingTactic
+end
+
+association xxx_BusinessRule_guidedBusinessProcess between
+	BusinessRule[0..1] role xxx_BusinessRule_guidedBusinessProcess_src
+	BusinessProcess[*] role guidedBusinessProcess
+end
+
+association xxx_BusinessRule_baseBusinessPolicy between
+	BusinessRule[0..1] role xxx_BusinessRule_baseBusinessPolicy_src
+	BusinessPolicy[*] role baseBusinessPolicy
+end
+
+association xxx_Tactic_implementedStrategy between
+	Tactic[0..1] role xxx_Tactic_implementedStrategy_src
+	Strategy[*] role implementedStrategy
+end
+
+association xxx_Tactic_enforcedBusinessRule between
+	Tactic[0..1] role xxx_Tactic_enforcedBusinessRule_src
+	BusinessRule[*] role enforcedBusinessRule
+end
+
+association xxx_Strategy_determinedOrganizationUnit between
+	Strategy[0..1] role xxx_Strategy_determinedOrganizationUnit_src
+	OrganizationUnit[*] role determinedOrganizationUnit
+end
+
+association xxx_Strategy_plannedMission between
+	Strategy[0..1] role xxx_Strategy_plannedMission_src
+	Mission[*] role plannedMission
+end
+
+association xxx_Strategy_implementingTactic between
+	Strategy[0..1] role xxx_Strategy_implementingTactic_src
+	Tactic[*] role implementingTactic
+end
+
+association xxx_Mission_operativeVision between
+	Mission[*] role xxx_Mission_operativeVision_src
+	Vision[0..1] role operativeVision
+end
+
+association xxx_Mission_componentStrategy between
+	Mission[0..1] role xxx_Mission_componentStrategy_src
+	Strategy[*] role componentStrategy
+end
+
+association xxx_Vision_amplifyingGoal between
+	Vision[0..1] role xxx_Vision_amplifyingGoal_src
+	Goal[*] role amplifyingGoal
+end
+
+association xxx_Vision_deliveringMission between
+	Vision[0..1] role xxx_Vision_deliveringMission_src
+	Mission[*] role deliveringMission
+end
+
+association xxx_Goal_quantifyingObjective between
+	Goal[0..1] role xxx_Goal_quantifyingObjective_src
+	Objective[*] role quantifyingObjective
+end
+
+association xxx_Goal_amplifiedVision between
+	Goal[*] role xxx_Goal_amplifiedVision_src
+	Vision[0..1] role amplifiedVision
+end
+
+association xxx_Objective_quantifiedGoal between
+	Objective[0..1] role xxx_Objective_quantifiedGoal_src
+	Goal[*] role quantifiedGoal
+end
+
+association xxx_Influencer_categorizingInfluencerCategory between
+	Influencer[0..1] role xxx_Influencer_categorizingInfluencerCategory_src
+	InfluencerCategory[*] role categorizingInfluencerCategory
+end
+
+association xxx_Influencer_sourceInfluencingOrganization between
+	Influencer[0..1] role xxx_Influencer_sourceInfluencingOrganization_src
+	InfluencingOrganization[*] role sourceInfluencingOrganization
+end
+
+association xxx_Influencer_judgingAssessment between
+	Influencer[0..1] role xxx_Influencer_judgingAssessment_src
+	Assessment[*] role judgingAssessment
+end
+
+association xxx_Influencer_recognizingOrganizationUnit between
+	Influencer[0..1] role xxx_Influencer_recognizingOrganizationUnit_src
+	OrganizationUnit[1..*] role recognizingOrganizationUnit
+end
+
+association xxx_InfluencerCategory_categorizedInfluencer between
+	InfluencerCategory[0..1] role xxx_InfluencerCategory_categorizedInfluencer_src
+	Influencer[*] role categorizedInfluencer
+end
+
+association xxx_InfluencingOrganization_categorizingOrganizationCategory between
+	InfluencingOrganization[0..1] role xxx_InfluencingOrganization_categorizingOrganizationCategory_src
+	OrganizationCategory[*] role categorizingOrganizationCategory
+end
+
+association xxx_InfluencingOrganization_influencingOrganizationUnit between
+	InfluencingOrganization[*] role xxx_InfluencingOrganization_influencingOrganizationUnit_src
+	OrganizationUnit[0..1] role influencingOrganizationUnit
+end
+
+association xxx_InfluencingOrganization_providedInfluencer between
+	InfluencingOrganization[0..1] role xxx_InfluencingOrganization_providedInfluencer_src
+	Influencer[*] role providedInfluencer
+end
+
+association xxx_OrganizationCategory_categorizedInfluencingOrganization between
+	OrganizationCategory[0..1] role xxx_OrganizationCategory_categorizedInfluencingOrganization_src
+	InfluencingOrganization[*] role categorizedInfluencingOrganization
+end
+
+association xxx_PotentialImpact_identifyingAssessment between
+	PotentialImpact[0..1] role xxx_PotentialImpact_identifyingAssessment_src
+	Assessment[*] role identifyingAssessment
+end
+
+association xxx_PotentialImpact_motivatedDirective between
+	PotentialImpact[0..1] role xxx_PotentialImpact_motivatedDirective_src
+	Directive[*] role motivatedDirective
+end
+
+association xxx_Regulation_regulatingDirective between
+	Regulation[*] role xxx_Regulation_regulatingDirective_src
+	Directive[0..1] role regulatingDirective
+end
+
+association xxx_AssessmentCategory_categorizedAssessment between
+	AssessmentCategory[0..1] role xxx_AssessmentCategory_categorizedAssessment_src
+	Assessment[*] role categorizedAssessment
+end
+

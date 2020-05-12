@@ -1,0 +1,169 @@
+model ErdiagramDSL
+class Erdiagram
+attributes
+operations
+end
+
+class DiagramElement
+attributes
+operations
+end
+
+class ChenElement<DiagramElement
+attributes
+	name : String
+operations
+end
+
+class ChenEntity<ChenElement
+attributes
+operations
+end
+
+class ChenRelationship<ChenElement
+attributes
+	description : String
+operations
+end
+
+class ChenAttribute<ChenElement
+attributes
+operations
+end
+
+class ChenConnection<DiagramElement
+attributes
+	value : String
+operations
+end
+
+class ChenNormalToWeakConnection<DiagramElement
+attributes
+	value : String
+operations
+end
+
+class ChenWeakElement<DiagramElement
+attributes
+	name : String
+operations
+end
+
+class ChenWeakEntity<ChenWeakElement
+attributes
+operations
+end
+
+class ChenWeakRelationship<ChenWeakElement
+attributes
+	description : String
+operations
+end
+
+class ChenWeakAttribute<ChenWeakElement
+attributes
+operations
+end
+
+class ChenWeakConnection<DiagramElement
+attributes
+	value : String
+operations
+end
+
+class MartinElement<DiagramElement
+attributes
+	name : String
+operations
+end
+
+class MartinEntity<MartinElement
+attributes
+operations
+end
+
+class MartinConnection<DiagramElement
+attributes
+	fromText : String
+	toText : String
+operations
+end
+
+class MinmaxEntity<DiagramElement
+attributes
+	name : String
+operations
+end
+
+class MinmaxConnection<DiagramElement
+attributes
+	fromText : String
+	toText : String
+operations
+end
+
+composition xxx_Erdiagram_elements between
+	Erdiagram[0..1] role xxx_Erdiagram_elements_src
+	DiagramElement[*] role elements
+end
+
+association xxx_ChenAttribute_parent between
+	ChenAttribute[*] role xxx_ChenAttribute_parent_src
+	ChenElement[1] role parent
+end
+
+association xxx_ChenConnection_fromEntity between
+	ChenConnection[*] role xxx_ChenConnection_fromEntity_src
+	ChenEntity[1] role fromEntity
+end
+
+association xxx_ChenConnection_toRelationship between
+	ChenConnection[*] role xxx_ChenConnection_toRelationship_src
+	ChenRelationship[1] role toRelationship
+end
+
+association xxx_ChenNormalToWeakConnection_fromEntity between
+	ChenNormalToWeakConnection[*] role xxx_ChenNormalToWeakConnection_fromEntity_src
+	ChenEntity[1] role fromEntity
+end
+
+association xxx_ChenNormalToWeakConnection_toRelationship between
+	ChenNormalToWeakConnection[*] role xxx_ChenNormalToWeakConnection_toRelationship_src
+	ChenWeakRelationship[1] role toRelationship
+end
+
+association xxx_ChenWeakAttribute_parent between
+	ChenWeakAttribute[*] role xxx_ChenWeakAttribute_parent_src
+	ChenWeakElement[1] role parent
+end
+
+association xxx_ChenWeakConnection_fromEntity between
+	ChenWeakConnection[*] role xxx_ChenWeakConnection_fromEntity_src
+	ChenWeakEntity[1] role fromEntity
+end
+
+association xxx_ChenWeakConnection_toRelationship between
+	ChenWeakConnection[*] role xxx_ChenWeakConnection_toRelationship_src
+	ChenWeakRelationship[1] role toRelationship
+end
+
+association xxx_MartinConnection_start between
+	MartinConnection[*] role xxx_MartinConnection_start_src
+	MartinEntity[1] role start
+end
+
+association xxx_MartinConnection_end_ between
+	MartinConnection[*] role xxx_MartinConnection_end__src
+	MartinEntity[1] role end_
+end
+
+association xxx_MinmaxConnection_start between
+	MinmaxConnection[*] role xxx_MinmaxConnection_start_src
+	MinmaxEntity[1] role start
+end
+
+association xxx_MinmaxConnection_end_ between
+	MinmaxConnection[*] role xxx_MinmaxConnection_end__src
+	MinmaxEntity[1] role end_
+end
+

@@ -1,0 +1,97 @@
+model mavo
+enum MayDecisionLogic{
+default
+}
+
+abstract class LogicElement
+attributes
+	formulaVariable : String
+operations
+end
+
+abstract class DecisionElement<LogicElement
+attributes
+	description : String
+operations
+end
+
+abstract class MAVORoot
+attributes
+	inc : Boolean
+operations
+end
+
+abstract class MAVOElement<LogicElement
+attributes
+	may : Boolean
+	set : Boolean
+	var : Boolean
+operations
+end
+
+abstract class MAVOReference<MAVOElement
+attributes
+operations
+end
+
+abstract class MAVODecision<DecisionElement
+attributes
+operations
+end
+
+class MAVOCollection<DecisionElement
+attributes
+operations
+end
+
+class MayDecision<MAVODecision
+attributes
+	logic : MayDecisionLogic
+operations
+end
+
+class VarDecision<MAVODecision
+attributes
+operations
+end
+
+class SetDecision<MAVODecision
+attributes
+operations
+end
+
+composition xxx_MAVORoot_decisions between
+	MAVORoot[0..1] role xxx_MAVORoot_decisions_src
+	MAVODecision[*] role decisions
+end
+
+association xxx_MAVOElement_collections between
+	MAVOElement[0..1] role xxx_MAVOElement_collections_src
+	MAVOCollection[*] role collections
+end
+
+association xxx_MAVODecision_requiredDecisions between
+	MAVODecision[0..1] role xxx_MAVODecision_requiredDecisions_src
+	MAVODecision[*] role requiredDecisions
+end
+
+association xxx_MAVOCollection_mavoElements between
+	MAVOCollection[0..1] role xxx_MAVOCollection_mavoElements_src
+	MAVOElement[*] role mavoElements
+end
+
+composition xxx_MayDecision_alternatives between
+	MayDecision[0..1] role xxx_MayDecision_alternatives_src
+	MAVOCollection[1..*] role alternatives
+end
+
+composition xxx_VarDecision_domain between
+	VarDecision[*] role xxx_VarDecision_domain_src
+	MAVOCollection[1] role domain
+end
+
+composition xxx_SetDecision_entity between
+	SetDecision[*] role xxx_SetDecision_entity_src
+	MAVOCollection[1] role entity
+end
+

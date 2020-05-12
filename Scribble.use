@@ -1,0 +1,184 @@
+model scribble
+class ScribbleProgram
+attributes
+operations
+end
+
+class IncludeDecl
+attributes
+	importURI : String
+operations
+end
+
+class InstGlobalProtocolDecl
+attributes
+	protocolName : String
+	roles : String
+	instantiatedProtocol : String
+operations
+end
+
+class TypeDecl
+attributes
+	typeName : String
+	schema : String
+	file : String
+	alias : String
+operations
+end
+
+class GlobalProtocolDecl
+attributes
+	protocolName : String
+	parameters : String
+	roles : String
+operations
+end
+
+class GlobalInteractionBlock
+attributes
+operations
+end
+
+class GlobalInteraction
+attributes
+operations
+end
+
+class Spawn<GlobalInteraction
+attributes
+	roleName : String
+	targetProtocolName : String
+	parameters : String
+	currentRoles : String
+	targetRoles : String
+operations
+end
+
+class Do<GlobalInteraction
+attributes
+	targetProtocolName : String
+	currentRoles : String
+	targetRoles : String
+operations
+end
+
+class Interruptible<GlobalInteraction
+attributes
+	roleNames : String
+operations
+end
+
+class Continue<GlobalInteraction
+attributes
+	loopName : String
+operations
+end
+
+class Recursion<GlobalInteraction
+attributes
+	loopName : String
+operations
+end
+
+class Parallel<GlobalInteraction
+attributes
+operations
+end
+
+class Choice<GlobalInteraction
+attributes
+	role : String
+operations
+end
+
+class Message<GlobalInteraction
+attributes
+	sender : String
+	receiver : String
+operations
+end
+
+class MessageSignature
+attributes
+	operator : String
+operations
+end
+
+class PayloadType
+attributes
+	payload : String
+	dataType : String
+operations
+end
+
+composition xxx_ScribbleProgram_includeDecl between
+	ScribbleProgram[0..1] role xxx_ScribbleProgram_includeDecl_src
+	IncludeDecl[*] role includeDecl
+end
+
+composition xxx_ScribbleProgram_typeDecl between
+	ScribbleProgram[0..1] role xxx_ScribbleProgram_typeDecl_src
+	TypeDecl[*] role typeDecl
+end
+
+composition xxx_ScribbleProgram_globalProtocolDecl between
+	ScribbleProgram[0..1] role xxx_ScribbleProgram_globalProtocolDecl_src
+	GlobalProtocolDecl[*] role globalProtocolDecl
+end
+
+composition xxx_ScribbleProgram_instGlobalProtocolDecl between
+	ScribbleProgram[0..1] role xxx_ScribbleProgram_instGlobalProtocolDecl_src
+	InstGlobalProtocolDecl[*] role instGlobalProtocolDecl
+end
+
+composition xxx_GlobalProtocolDecl_body between
+	GlobalProtocolDecl[*] role xxx_GlobalProtocolDecl_body_src
+	GlobalInteractionBlock[0..1] role body
+end
+
+composition xxx_GlobalInteractionBlock_interactionsequence between
+	GlobalInteractionBlock[0..1] role xxx_GlobalInteractionBlock_interactionsequence_src
+	GlobalInteraction[*] role interactionsequence
+end
+
+composition xxx_Do_arguments between
+	Do[0..1] role xxx_Do_arguments_src
+	MessageSignature[*] role arguments
+end
+
+composition xxx_Interruptible_body between
+	Interruptible[*] role xxx_Interruptible_body_src
+	GlobalInteractionBlock[0..1] role body
+end
+
+composition xxx_Interruptible_signatures between
+	Interruptible[0..1] role xxx_Interruptible_signatures_src
+	MessageSignature[*] role signatures
+end
+
+composition xxx_Recursion_body between
+	Recursion[*] role xxx_Recursion_body_src
+	GlobalInteractionBlock[0..1] role body
+end
+
+composition xxx_Parallel_branches between
+	Parallel[0..1] role xxx_Parallel_branches_src
+	GlobalInteractionBlock[*] role branches
+end
+
+composition xxx_Choice_branches between
+	Choice[0..1] role xxx_Choice_branches_src
+	GlobalInteractionBlock[*] role branches
+end
+
+composition xxx_Message_signature between
+	Message[*] role xxx_Message_signature_src
+	MessageSignature[0..1] role signature
+end
+
+composition xxx_MessageSignature_payloadTypes between
+	MessageSignature[0..1] role xxx_MessageSignature_payloadTypes_src
+	PayloadType[*] role payloadTypes
+end
+

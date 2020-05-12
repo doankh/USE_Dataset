@@ -1,0 +1,106 @@
+model Documentation
+class Book
+attributes
+	title : String
+operations
+end
+
+class Paragraph
+attributes
+operations
+end
+
+class Section
+attributes
+	title : String
+operations
+end
+
+abstract class ParagraphValue
+attributes
+operations
+end
+
+class TextualValue<ParagraphValue
+attributes
+	value : String
+operations
+end
+
+class ItemizedListValue<ParagraphValue
+attributes
+operations
+end
+
+class ItemizedListValueItem<Paragraph
+attributes
+operations
+end
+
+class EmphasisValue<ParagraphValue,TextualValue
+attributes
+	role : String
+operations
+end
+
+class XRefValue<ParagraphValue
+attributes
+operations
+end
+
+class InformalTableValue<ParagraphValue
+attributes
+	cols : Integer
+operations
+end
+
+class InformalTableValueRow
+attributes
+operations
+end
+
+composition xxx_Book_content between
+	Book[0..1] role xxx_Book_content_src
+	Section[*] role content
+end
+
+composition xxx_Paragraph_values between
+	Paragraph[0..1] role xxx_Paragraph_values_src
+	ParagraphValue[*] role values
+end
+
+composition xxx_Section_section between
+	Section[0..1] role xxx_Section_section_src
+	Section[*] role section
+end
+
+composition xxx_Section_para between
+	Section[0..1] role xxx_Section_para_src
+	Paragraph[*] role para
+end
+
+composition xxx_ItemizedListValue_items between
+	ItemizedListValue[0..1] role xxx_ItemizedListValue_items_src
+	ItemizedListValueItem[*] role items
+end
+
+association xxx_XRefValue_linkend between
+	XRefValue[*] role xxx_XRefValue_linkend_src
+	Section[1] role linkend
+end
+
+composition xxx_InformalTableValue_bodyRows between
+	InformalTableValue[0..1] role xxx_InformalTableValue_bodyRows_src
+	InformalTableValueRow[*] role bodyRows
+end
+
+composition xxx_InformalTableValue_headRows between
+	InformalTableValue[0..1] role xxx_InformalTableValue_headRows_src
+	InformalTableValueRow[*] role headRows
+end
+
+composition xxx_InformalTableValueRow_entry between
+	InformalTableValueRow[0..1] role xxx_InformalTableValueRow_entry_src
+	TextualValue[*] role entry
+end
+

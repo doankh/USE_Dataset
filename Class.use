@@ -1,0 +1,49 @@
+model PrimitiveTypes
+abstract class NamedElt
+attributes
+	name : String
+operations
+end
+
+abstract class Classifier<NamedElt
+attributes
+operations
+end
+
+class DataType<Classifier
+attributes
+operations
+end
+
+class Class<Classifier
+attributes
+	isAbstract : Boolean
+operations
+end
+
+class Attribute<NamedElt
+attributes
+	multiValued : Boolean
+operations
+end
+
+association xxx_Class_super between
+	Class[0..1] role xxx_Class_super_src
+	Class[*] role super
+end
+
+composition xxx_Class_attr between
+	Class[0..1] role xxx_Class_attr_src
+	Attribute[*] role attr
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Classifier[1] role type
+end
+
+association xxx_Attribute_owner between
+	Attribute[*] role xxx_Attribute_owner_src
+	Class[1] role owner
+end
+

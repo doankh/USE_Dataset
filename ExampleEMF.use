@@ -1,0 +1,61 @@
+model emfexample
+class Applicant<Person
+attributes
+operations
+end
+
+class City
+attributes
+	name : String
+operations
+end
+
+class Position
+attributes
+	title : String
+	pay : Real
+operations
+end
+
+class Person
+attributes
+	name : String
+	email : String
+operations
+end
+
+class Supervisor<Person
+attributes
+operations
+end
+
+association xxx_Applicant_applyingFor between
+	Applicant[0..1] role xxx_Applicant_applyingFor_src
+	Position[*] role applyingFor
+end
+
+association xxx_City_people between
+	City[0..1] role xxx_City_people_src
+	Person[*] role people
+end
+
+association xxx_Position_location between
+	Position[*] role xxx_Position_location_src
+	City[1] role location
+end
+
+association xxx_Position_managedBy between
+	Position[*] role xxx_Position_managedBy_src
+	Supervisor[1] role managedBy
+end
+
+association xxx_Person_livesIn between
+	Person[*] role xxx_Person_livesIn_src
+	City[1] role livesIn
+end
+
+association xxx_Supervisor_manages between
+	Supervisor[0..1] role xxx_Supervisor_manages_src
+	Position[*] role manages
+end
+

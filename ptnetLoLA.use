@@ -1,0 +1,160 @@
+model ptnetLoLA
+enum NodeType{
+default
+}
+
+class Place<Node
+attributes
+	token : Integer
+	finalMarking : Integer
+operations
+end
+
+class PtNet
+attributes
+operations
+end
+
+class Transition<Node
+attributes
+operations
+end
+
+class Node
+attributes
+	name : String
+	type : NodeType
+operations
+end
+
+class Marking
+attributes
+operations
+end
+
+class PlaceReference
+attributes
+operations
+end
+
+class RefMarkedPlace<PlaceReference
+attributes
+	token : Integer
+operations
+end
+
+class Annotation
+attributes
+	text : String
+operations
+end
+
+class Arc
+attributes
+	weight : Integer
+operations
+end
+
+class ArcToPlace<Arc
+attributes
+operations
+end
+
+class ArcToTransition<Arc
+attributes
+operations
+end
+
+class TransitionExt<Transition
+attributes
+	probability : Real
+	minTime : Integer
+	cost : Real
+	maxTime : Integer
+operations
+end
+
+class PlaceExt<Place
+attributes
+	probability : Real
+	isStart : Boolean
+operations
+end
+
+class ArcToPlaceExt<ArcToPlace
+attributes
+	probability : Real
+operations
+end
+
+class ArcToTransitionExt<ArcToTransition
+attributes
+	probability : Real
+operations
+end
+
+composition xxx_PtNet_places between
+	PtNet[0..1] role xxx_PtNet_places_src
+	Place[*] role places
+end
+
+composition xxx_PtNet_transitions_ between
+	PtNet[0..1] role xxx_PtNet_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_PtNet_initialMarking between
+	PtNet[*] role xxx_PtNet_initialMarking_src
+	Marking[1] role initialMarking
+end
+
+composition xxx_PtNet_annotation between
+	PtNet[*] role xxx_PtNet_annotation_src
+	Annotation[0..1] role annotation
+end
+
+composition xxx_PtNet_arcs between
+	PtNet[0..1] role xxx_PtNet_arcs_src
+	Arc[*] role arcs
+end
+
+composition xxx_PtNet_finalMarking between
+	PtNet[*] role xxx_PtNet_finalMarking_src
+	Marking[0..1] role finalMarking
+end
+
+composition xxx_Node_annotation between
+	Node[*] role xxx_Node_annotation_src
+	Annotation[0..1] role annotation
+end
+
+association xxx_Node_incoming between
+	Node[0..1] role xxx_Node_incoming_src
+	Arc[*] role incoming
+end
+
+association xxx_Node_outgoing between
+	Node[0..1] role xxx_Node_outgoing_src
+	Arc[*] role outgoing
+end
+
+composition xxx_Marking_places between
+	Marking[0..1] role xxx_Marking_places_src
+	RefMarkedPlace[*] role places
+end
+
+association xxx_PlaceReference_place between
+	PlaceReference[*] role xxx_PlaceReference_place_src
+	Place[1] role place
+end
+
+association xxx_Arc_source between
+	Arc[*] role xxx_Arc_source_src
+	Node[1] role source
+end
+
+association xxx_Arc_target between
+	Arc[*] role xxx_Arc_target_src
+	Node[1] role target
+end
+

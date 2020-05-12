@@ -1,0 +1,148 @@
+model tudresden
+class Feature
+attributes
+	id : String
+	name : String
+	version : String
+operations
+end
+
+class Plugin
+attributes
+	id : String
+	name : String
+	version : String
+	provider : String
+operations
+	getNameOf(feature : Feature):String
+end
+
+class ExtensionPoint
+attributes
+	id : String
+operations
+end
+
+class Extension
+attributes
+operations
+end
+
+class JavaType
+attributes
+	fullyQualifiedName : String
+operations
+end
+
+class Operation
+attributes
+	name : String
+operations
+end
+
+class Parameter
+attributes
+	name : String
+operations
+end
+
+class PluginPackage
+attributes
+operations
+end
+
+composition xxx_Feature_plugins between
+	Feature[0..1] role xxx_Feature_plugins_src
+	Plugin[*] role plugins
+end
+
+association xxx_Plugin_feature between
+	Plugin[*] role xxx_Plugin_feature_src
+	Feature[0..1] role feature
+end
+
+composition xxx_Plugin_extensionPoints between
+	Plugin[0..1] role xxx_Plugin_extensionPoints_src
+	ExtensionPoint[*] role extensionPoints
+end
+
+composition xxx_Plugin_extensions between
+	Plugin[0..1] role xxx_Plugin_extensions_src
+	Extension[*] role extensions
+end
+
+association xxx_Plugin_activator between
+	Plugin[*] role xxx_Plugin_activator_src
+	JavaType[1] role activator
+end
+
+association xxx_ExtensionPoint_plugin between
+	ExtensionPoint[*] role xxx_ExtensionPoint_plugin_src
+	Plugin[1] role plugin
+end
+
+association xxx_ExtensionPoint_interface between
+	ExtensionPoint[*] role xxx_ExtensionPoint_interface_src
+	JavaType[1] role interface
+end
+
+association xxx_Extension_implementation between
+	Extension[*] role xxx_Extension_implementation_src
+	JavaType[0..1] role implementation
+end
+
+association xxx_Extension_extensionPoint between
+	Extension[*] role xxx_Extension_extensionPoint_src
+	ExtensionPoint[1] role extensionPoint
+end
+
+association xxx_JavaType_implements between
+	JavaType[0..1] role xxx_JavaType_implements_src
+	JavaType[*] role implements
+end
+
+composition xxx_JavaType_operations_ between
+	JavaType[0..1] role xxx_JavaType_operations__src
+	Operation[*] role operations_
+end
+
+association xxx_Operation_returnType between
+	Operation[*] role xxx_Operation_returnType_src
+	JavaType[1] role returnType
+end
+
+composition xxx_Operation_parameters between
+	Operation[0..1] role xxx_Operation_parameters_src
+	Parameter[*] role parameters
+end
+
+association xxx_Operation_myType between
+	Operation[*] role xxx_Operation_myType_src
+	JavaType[1] role myType
+end
+
+association xxx_Parameter_type between
+	Parameter[*] role xxx_Parameter_type_src
+	JavaType[1] role type
+end
+
+association xxx_Parameter_operation between
+	Parameter[*] role xxx_Parameter_operation_src
+	Operation[1] role operation
+end
+
+composition xxx_PluginPackage_plugins between
+	PluginPackage[0..1] role xxx_PluginPackage_plugins_src
+	Plugin[*] role plugins
+end
+
+composition xxx_PluginPackage_types between
+	PluginPackage[0..1] role xxx_PluginPackage_types_src
+	JavaType[*] role types
+end
+
+composition xxx_PluginPackage_features between
+	PluginPackage[0..1] role xxx_PluginPackage_features_src
+	Feature[*] role features
+end
+

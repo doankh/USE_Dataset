@@ -1,0 +1,184 @@
+model gedcoml
+enum Sexus{
+default
+}
+
+class Projectdescription
+attributes
+	groupId : String
+	artifactId : String
+	version : String
+	publishingDate : String
+operations
+end
+
+class Family
+attributes
+	name : String
+operations
+end
+
+class BekanntePerson<Person
+attributes
+	firstName : String
+	lastName : String
+	middleName : String
+	birthDay : String
+	deathDay : String
+	birthName : String
+operations
+end
+
+class FamilyBook
+attributes
+operations
+end
+
+class FamilyImport
+attributes
+operations
+end
+
+class PostAddress<Address
+attributes
+	street : String
+	postcode : String
+	city : String
+operations
+end
+
+abstract class Address
+attributes
+	entry : String
+	exodus : String
+operations
+end
+
+class Married
+attributes
+	weddingDay : String
+	separationDay : String
+operations
+end
+
+class Note
+attributes
+	content : String
+operations
+end
+
+class Author
+attributes
+	firstName : String
+	lastName : String
+operations
+end
+
+abstract class Source
+attributes
+operations
+end
+
+class Others<Source
+attributes
+	description : String
+operations
+end
+
+class PersonRef<Source
+attributes
+operations
+end
+
+class UnbekanntePerson<Person
+attributes
+operations
+end
+
+abstract class Person
+attributes
+	id : String
+	sex : Sexus
+operations
+end
+
+composition xxx_Projectdescription_imports between
+	Projectdescription[0..1] role xxx_Projectdescription_imports_src
+	FamilyImport[*] role imports
+end
+
+composition xxx_Projectdescription_author between
+	Projectdescription[*] role xxx_Projectdescription_author_src
+	Author[1] role author
+end
+
+composition xxx_Family_members between
+	Family[0..1] role xxx_Family_members_src
+	Person[1..*] role members
+end
+
+composition xxx_Family_imports between
+	Family[0..1] role xxx_Family_imports_src
+	FamilyImport[*] role imports
+end
+
+association xxx_BekanntePerson_biologicalParentOf between
+	BekanntePerson[0..1] role xxx_BekanntePerson_biologicalParentOf_src
+	Person[*] role biologicalParentOf
+end
+
+association xxx_BekanntePerson_biologicalFatherIs between
+	BekanntePerson[*] role xxx_BekanntePerson_biologicalFatherIs_src
+	Person[1] role biologicalFatherIs
+end
+
+association xxx_BekanntePerson_biologicalMotherIs between
+	BekanntePerson[*] role xxx_BekanntePerson_biologicalMotherIs_src
+	Person[1] role biologicalMotherIs
+end
+
+composition xxx_BekanntePerson_marriedWith between
+	BekanntePerson[0..1] role xxx_BekanntePerson_marriedWith_src
+	Married[*] role marriedWith
+end
+
+composition xxx_BekanntePerson_notes between
+	BekanntePerson[0..1] role xxx_BekanntePerson_notes_src
+	Note[*] role notes
+end
+
+composition xxx_BekanntePerson_sources between
+	BekanntePerson[0..1] role xxx_BekanntePerson_sources_src
+	Source[1..*] role sources
+end
+
+composition xxx_FamilyBook_project between
+	FamilyBook[*] role xxx_FamilyBook_project_src
+	Projectdescription[0..1] role project
+end
+
+association xxx_FamilyImport_importedResource between
+	FamilyImport[*] role xxx_FamilyImport_importedResource_src
+	Family[1] role importedResource
+end
+
+association xxx_Married_partner between
+	Married[*] role xxx_Married_partner_src
+	Person[1] role partner
+end
+
+association xxx_Author_memberId between
+	Author[*] role xxx_Author_memberId_src
+	BekanntePerson[0..1] role memberId
+end
+
+association xxx_PersonRef_personID between
+	PersonRef[*] role xxx_PersonRef_personID_src
+	BekanntePerson[1] role personID
+end
+
+composition xxx_Person_addresses between
+	Person[0..1] role xxx_Person_addresses_src
+	Address[*] role addresses
+end
+

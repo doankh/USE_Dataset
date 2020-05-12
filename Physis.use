@@ -1,0 +1,55 @@
+model physis
+class Model
+attributes
+operations
+end
+
+class DataModel
+attributes
+	name : String
+operations
+end
+
+class Type
+attributes
+	name : String
+operations
+end
+
+class SimpleType<Type
+attributes
+operations
+end
+
+class Entity<Type
+attributes
+operations
+end
+
+class Attribute
+attributes
+	name : String
+	multiplicity : Boolean
+operations
+end
+
+composition xxx_Model_datamodels between
+	Model[0..1] role xxx_Model_datamodels_src
+	DataModel[*] role datamodels
+end
+
+composition xxx_DataModel_types between
+	DataModel[0..1] role xxx_DataModel_types_src
+	Type[*] role types
+end
+
+composition xxx_Entity_attributes_ between
+	Entity[0..1] role xxx_Entity_attributes__src
+	Attribute[*] role attributes_
+end
+
+association xxx_Attribute_type between
+	Attribute[*] role xxx_Attribute_type_src
+	Type[0..1] role type
+end
+

@@ -1,0 +1,335 @@
+model reviews
+enum RequirementStatus{
+default
+}
+
+enum ReviewStatus{
+default
+}
+
+abstract class CommentContainer
+attributes
+operations
+	createComment(initalLocation : Location,commentText : String):Comment
+end
+
+class Change<Dated
+attributes
+	id : String
+	key : String
+	subject : String
+	message : String
+	state : ReviewStatus
+operations
+end
+
+class Review<CommentContainer,Change
+attributes
+operations
+end
+
+class Comment<Indexed,Dated
+attributes
+	description : String
+	id : String
+	draft : Boolean
+	title : String
+operations
+end
+
+abstract class ReviewItem<CommentContainer
+attributes
+	name : String
+	id : String
+	reference : String
+operations
+end
+
+abstract class Location<Indexed
+attributes
+operations
+end
+
+class User
+attributes
+	id : String
+	email : String
+	displayName : String
+operations
+end
+
+class Repository
+attributes
+	taskRepositoryUrl : String
+	taskConnectorKind : String
+	taskRepository : String
+	description : String
+operations
+end
+
+class FileItem<ReviewItem
+attributes
+operations
+end
+
+class ReviewItemSet<ReviewItem,Dated
+attributes
+	revision : String
+operations
+end
+
+class LineLocation<Location
+attributes
+	rangeMin : Integer
+	rangeMax : Integer
+operations
+end
+
+class LineRange
+attributes
+	start : Integer
+	end_ : Integer
+operations
+end
+
+class FileVersion<ReviewItem
+attributes
+	path : String
+	description : String
+	content : String
+	fileRevision : String
+operations
+end
+
+abstract class Indexed
+attributes
+	index : Integer
+operations
+end
+
+abstract class Dated
+attributes
+	creationDate : String
+	modificationDate : String
+operations
+end
+
+class ApprovalType
+attributes
+	key : String
+	name : String
+operations
+end
+
+class UserApprovalsMap
+attributes
+operations
+end
+
+class ReviewerEntry
+attributes
+operations
+end
+
+class ApprovalValueMap
+attributes
+	value : Integer
+operations
+end
+
+class RequirementEntry
+attributes
+	status : RequirementStatus
+operations
+end
+
+class ReviewRequirementsMap
+attributes
+operations
+end
+
+association xxx_CommentContainer_allComments between
+	CommentContainer[0..1] role xxx_CommentContainer_allComments_src
+	Comment[*] role allComments
+end
+
+composition xxx_CommentContainer_comments between
+	CommentContainer[0..1] role xxx_CommentContainer_comments_src
+	Comment[*] role comments
+end
+
+association xxx_CommentContainer_allDrafts between
+	CommentContainer[0..1] role xxx_CommentContainer_allDrafts_src
+	Comment[*] role allDrafts
+end
+
+composition xxx_CommentContainer_drafts between
+	CommentContainer[0..1] role xxx_CommentContainer_drafts_src
+	Comment[*] role drafts
+end
+
+association xxx_Change_owner between
+	Change[*] role xxx_Change_owner_src
+	User[0..1] role owner
+end
+
+composition xxx_Review_sets between
+	Review[0..1] role xxx_Review_sets_src
+	ReviewItemSet[*] role sets
+end
+
+association xxx_Review_repository between
+	Review[*] role xxx_Review_repository_src
+	Repository[1] role repository
+end
+
+composition xxx_Review_parents between
+	Review[0..1] role xxx_Review_parents_src
+	Change[*] role parents
+end
+
+composition xxx_Review_children between
+	Review[0..1] role xxx_Review_children_src
+	Change[*] role children
+end
+
+composition xxx_Review_reviewerApprovals between
+	Review[0..1] role xxx_Review_reviewerApprovals_src
+	UserApprovalsMap[*] role reviewerApprovals
+end
+
+composition xxx_Review_requirements between
+	Review[0..1] role xxx_Review_requirements_src
+	ReviewRequirementsMap[*] role requirements
+end
+
+association xxx_Comment_author between
+	Comment[*] role xxx_Comment_author_src
+	User[1] role author
+end
+
+association xxx_Comment_replies between
+	Comment[0..1] role xxx_Comment_replies_src
+	Comment[*] role replies
+end
+
+composition xxx_Comment_locations between
+	Comment[0..1] role xxx_Comment_locations_src
+	Location[*] role locations
+end
+
+association xxx_Comment_review between
+	Comment[*] role xxx_Comment_review_src
+	Review[1] role review
+end
+
+association xxx_Comment_item between
+	Comment[*] role xxx_Comment_item_src
+	CommentContainer[0..1] role item
+end
+
+association xxx_ReviewItem_addedBy between
+	ReviewItem[*] role xxx_ReviewItem_addedBy_src
+	User[1] role addedBy
+end
+
+association xxx_ReviewItem_committedBy between
+	ReviewItem[*] role xxx_ReviewItem_committedBy_src
+	User[1] role committedBy
+end
+
+association xxx_ReviewItem_review between
+	ReviewItem[*] role xxx_ReviewItem_review_src
+	Review[1] role review
+end
+
+composition xxx_Repository_approvalTypes between
+	Repository[0..1] role xxx_Repository_approvalTypes_src
+	ApprovalType[*] role approvalTypes
+end
+
+association xxx_Repository_account between
+	Repository[*] role xxx_Repository_account_src
+	User[1] role account
+end
+
+composition xxx_Repository_reviews between
+	Repository[0..1] role xxx_Repository_reviews_src
+	Review[*] role reviews
+end
+
+composition xxx_Repository_users between
+	Repository[0..1] role xxx_Repository_users_src
+	User[*] role users
+end
+
+composition xxx_FileItem_base between
+	FileItem[*] role xxx_FileItem_base_src
+	FileVersion[0..1] role base
+end
+
+composition xxx_FileItem_target between
+	FileItem[*] role xxx_FileItem_target_src
+	FileVersion[0..1] role target
+end
+
+association xxx_FileItem_set between
+	FileItem[*] role xxx_FileItem_set_src
+	ReviewItemSet[0..1] role set
+end
+
+composition xxx_ReviewItemSet_items between
+	ReviewItemSet[0..1] role xxx_ReviewItemSet_items_src
+	FileItem[*] role items
+end
+
+association xxx_ReviewItemSet_parentReview between
+	ReviewItemSet[*] role xxx_ReviewItemSet_parentReview_src
+	Review[1] role parentReview
+end
+
+composition xxx_LineLocation_ranges between
+	LineLocation[0..1] role xxx_LineLocation_ranges_src
+	LineRange[*] role ranges
+end
+
+association xxx_FileVersion_file between
+	FileVersion[*] role xxx_FileVersion_file_src
+	FileItem[0..1] role file
+end
+
+association xxx_UserApprovalsMap_key between
+	UserApprovalsMap[*] role xxx_UserApprovalsMap_key_src
+	User[1] role key
+end
+
+composition xxx_UserApprovalsMap_value between
+	UserApprovalsMap[*] role xxx_UserApprovalsMap_value_src
+	ReviewerEntry[1] role value
+end
+
+composition xxx_ReviewerEntry_approvals between
+	ReviewerEntry[0..1] role xxx_ReviewerEntry_approvals_src
+	ApprovalValueMap[*] role approvals
+end
+
+association xxx_ApprovalValueMap_key between
+	ApprovalValueMap[*] role xxx_ApprovalValueMap_key_src
+	ApprovalType[1] role key
+end
+
+association xxx_RequirementEntry_by between
+	RequirementEntry[*] role xxx_RequirementEntry_by_src
+	User[0..1] role by
+end
+
+association xxx_ReviewRequirementsMap_key between
+	ReviewRequirementsMap[*] role xxx_ReviewRequirementsMap_key_src
+	ApprovalType[1] role key
+end
+
+composition xxx_ReviewRequirementsMap_value between
+	ReviewRequirementsMap[*] role xxx_ReviewRequirementsMap_value_src
+	RequirementEntry[1] role value
+end
+

@@ -1,0 +1,197 @@
+model proofprocess
+enum ProofFeatureType{
+default
+}
+
+class Intent
+attributes
+	name : String
+	description : String
+operations
+end
+
+abstract class Term
+attributes
+operations
+end
+
+abstract class Loc
+attributes
+operations
+end
+
+abstract class Trace
+attributes
+operations
+end
+
+class ProofStep
+attributes
+operations
+end
+
+class ProofInfo
+attributes
+	narrative : String
+operations
+end
+
+class ProofFeatureDef
+attributes
+	name : String
+	description : String
+operations
+end
+
+class ProofFeature
+attributes
+	type : ProofFeatureType
+operations
+end
+
+abstract class ProofElem
+attributes
+operations
+end
+
+class ProofEntry<ProofElem
+attributes
+operations
+end
+
+class ProofSeq<ProofElem
+attributes
+operations
+end
+
+class ProofParallel<ProofElem
+attributes
+operations
+end
+
+class ProofDecor<ProofElem
+attributes
+operations
+end
+
+class Attempt
+attributes
+operations
+end
+
+class Proof
+attributes
+	label : String
+operations
+end
+
+class ProofStore
+attributes
+operations
+end
+
+composition xxx_ProofStep_inGoals between
+	ProofStep[0..1] role xxx_ProofStep_inGoals_src
+	Term[1..*] role inGoals
+end
+
+composition xxx_ProofStep_outGoals between
+	ProofStep[0..1] role xxx_ProofStep_outGoals_src
+	Term[*] role outGoals
+end
+
+composition xxx_ProofStep_source between
+	ProofStep[*] role xxx_ProofStep_source_src
+	Loc[0..1] role source
+end
+
+composition xxx_ProofStep_trace between
+	ProofStep[*] role xxx_ProofStep_trace_src
+	Trace[1] role trace
+end
+
+association xxx_ProofInfo_intent between
+	ProofInfo[*] role xxx_ProofInfo_intent_src
+	Intent[0..1] role intent
+end
+
+composition xxx_ProofInfo_inFeatures between
+	ProofInfo[0..1] role xxx_ProofInfo_inFeatures_src
+	ProofFeature[*] role inFeatures
+end
+
+composition xxx_ProofInfo_outFeatures between
+	ProofInfo[0..1] role xxx_ProofInfo_outFeatures_src
+	ProofFeature[*] role outFeatures
+end
+
+association xxx_ProofFeature_name between
+	ProofFeature[*] role xxx_ProofFeature_name_src
+	ProofFeatureDef[1] role name
+end
+
+composition xxx_ProofFeature_params between
+	ProofFeature[0..1] role xxx_ProofFeature_params_src
+	Term[1..*] role params
+end
+
+composition xxx_ProofElem_info between
+	ProofElem[*] role xxx_ProofElem_info_src
+	ProofInfo[1] role info
+end
+
+composition xxx_ProofEntry_proofStep between
+	ProofEntry[*] role xxx_ProofEntry_proofStep_src
+	ProofStep[1] role proofStep
+end
+
+composition xxx_ProofSeq_entries between
+	ProofSeq[0..1] role xxx_ProofSeq_entries_src
+	ProofElem[1..*] role entries
+end
+
+composition xxx_ProofParallel_entries between
+	ProofParallel[0..1] role xxx_ProofParallel_entries_src
+	ProofElem[1..*] role entries
+end
+
+association xxx_ProofParallel_links between
+	ProofParallel[0..1] role xxx_ProofParallel_links_src
+	ProofEntry[*] role links
+end
+
+composition xxx_ProofDecor_entry between
+	ProofDecor[*] role xxx_ProofDecor_entry_src
+	ProofElem[1] role entry
+end
+
+composition xxx_Attempt_proof between
+	Attempt[*] role xxx_Attempt_proof_src
+	ProofElem[1] role proof
+end
+
+composition xxx_Proof_goals between
+	Proof[0..1] role xxx_Proof_goals_src
+	Term[1..*] role goals
+end
+
+composition xxx_Proof_attempts between
+	Proof[0..1] role xxx_Proof_attempts_src
+	Attempt[1..*] role attempts
+end
+
+composition xxx_ProofStore_proofs between
+	ProofStore[0..1] role xxx_ProofStore_proofs_src
+	Proof[*] role proofs
+end
+
+composition xxx_ProofStore_intents between
+	ProofStore[0..1] role xxx_ProofStore_intents_src
+	Intent[*] role intents
+end
+
+composition xxx_ProofStore_features between
+	ProofStore[0..1] role xxx_ProofStore_features_src
+	ProofFeatureDef[*] role features
+end
+

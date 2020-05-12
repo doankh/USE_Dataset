@@ -1,0 +1,227 @@
+model expressions
+enum binarySymbol{
+default
+}
+
+enum BinaryOperator{
+default
+}
+
+class Node
+attributes
+operations
+end
+
+class BehaviorNode<Node
+attributes
+	component : String
+operations
+end
+
+class Behavior
+attributes
+operations
+end
+
+class StateRealisation<Behavior
+attributes
+operations
+end
+
+class AttributeRealisation<Behavior
+attributes
+	attribute : String
+operations
+end
+
+class Selection<Behavior
+attributes
+operations
+end
+
+class Event<Behavior
+attributes
+operations
+end
+
+class Guard<Behavior
+attributes
+operations
+end
+
+class InternalOutputEvent<Behavior
+attributes
+operations
+end
+
+class InternalInputEvent<Behavior
+attributes
+operations
+end
+
+class ExternalOutputEvent<Behavior
+attributes
+operations
+end
+
+class ExternalInputEvent<Behavior
+attributes
+operations
+end
+
+class ComponentInstantiationNode<Node
+attributes
+operations
+end
+
+class ForAll<ComponentInstantiationNode
+attributes
+operations
+end
+
+class ForSome<ComponentInstantiationNode
+attributes
+operations
+end
+
+class AtLeastOne<ComponentInstantiationNode
+attributes
+operations
+end
+
+class ForOneArbitrary<ComponentInstantiationNode
+attributes
+operations
+end
+
+class ComponentInstantiation<ForAll,ForSome,AtLeastOne,ForOneArbitrary
+attributes
+	component : String
+operations
+end
+
+class BinaryRelation
+attributes
+	operator : binarySymbol
+operations
+end
+
+class BinaryExpression
+attributes
+	operator : BinaryOperator
+operations
+end
+
+class Value
+attributes
+operations
+end
+
+class Reference<Value
+attributes
+	object : String
+operations
+end
+
+class Number<Value
+attributes
+	value : Integer
+operations
+end
+
+class FunctionApplication<Selection,Event,InternalOutputEvent,InternalInputEvent,ExternalOutputEvent,ExternalInputEvent,Value
+attributes
+	functionName : String
+operations
+end
+
+class BracketedExpression<Value
+attributes
+operations
+end
+
+class Cardinality<Value
+attributes
+operations
+end
+
+class EnumeratedSet<Value
+attributes
+operations
+end
+
+class FuzzyExp<Value
+attributes
+operations
+end
+
+composition xxx_BehaviorNode_behavior between
+	BehaviorNode[*] role xxx_BehaviorNode_behavior_src
+	Behavior[0..1] role behavior
+end
+
+composition xxx_StateRealisation_state between
+	StateRealisation[*] role xxx_StateRealisation_state_src
+	BinaryExpression[0..1] role state
+end
+
+composition xxx_AttributeRealisation_value between
+	AttributeRealisation[*] role xxx_AttributeRealisation_value_src
+	BinaryExpression[0..1] role value
+end
+
+composition xxx_Guard_state between
+	Guard[*] role xxx_Guard_state_src
+	BinaryExpression[0..1] role state
+end
+
+composition xxx_ComponentInstantiation_componentSet between
+	ComponentInstantiation[*] role xxx_ComponentInstantiation_componentSet_src
+	BinaryExpression[0..1] role componentSet
+end
+
+composition xxx_BinaryRelation_left between
+	BinaryRelation[*] role xxx_BinaryRelation_left_src
+	BinaryExpression[0..1] role left
+end
+
+composition xxx_BinaryRelation_right between
+	BinaryRelation[*] role xxx_BinaryRelation_right_src
+	BinaryExpression[0..1] role right
+end
+
+composition xxx_BinaryExpression_leftExpression between
+	BinaryExpression[*] role xxx_BinaryExpression_leftExpression_src
+	Value[0..1] role leftExpression
+end
+
+composition xxx_BinaryExpression_rightExpression between
+	BinaryExpression[*] role xxx_BinaryExpression_rightExpression_src
+	BinaryExpression[0..1] role rightExpression
+end
+
+composition xxx_FunctionApplication_parameter between
+	FunctionApplication[0..1] role xxx_FunctionApplication_parameter_src
+	BinaryExpression[*] role parameter
+end
+
+composition xxx_BracketedExpression_expression between
+	BracketedExpression[*] role xxx_BracketedExpression_expression_src
+	BinaryRelation[0..1] role expression
+end
+
+composition xxx_Cardinality_expression between
+	Cardinality[*] role xxx_Cardinality_expression_src
+	BinaryExpression[0..1] role expression
+end
+
+composition xxx_EnumeratedSet_expressions between
+	EnumeratedSet[0..1] role xxx_EnumeratedSet_expressions_src
+	BinaryExpression[*] role expressions
+end
+
+composition xxx_FuzzyExp_expression between
+	FuzzyExp[*] role xxx_FuzzyExp_expression_src
+	BinaryExpression[0..1] role expression
+end
+

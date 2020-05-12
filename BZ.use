@@ -1,0 +1,155 @@
+model BZ
+class BZRepo
+attributes
+	repoURL : String
+operations
+end
+
+class BZProduct
+attributes
+	productId : String
+	productDescription : String
+	productURL : String
+operations
+end
+
+class BZComponent
+attributes
+	componentId : String
+	componentURL : String
+	componentDescription : String
+	defaultAssignee : String
+operations
+end
+
+class BZIssue
+attributes
+	issueId : Integer
+	issueTitle : String
+	issueURL : String
+	status : String
+	productName : String
+	componentName : String
+	classification : String
+	version : String
+	platform : String
+	importance : String
+	milestone : String
+	assignedTo : String
+	keywords : String
+	referenceURL : String
+	dependsOn : String
+	blocks : String
+	reportedBy : String
+	reportedByUsername : String
+	reportedOn : String
+	lastModifiedOn : String
+	ccList : String
+	seeAlso : String
+	latestCommit : String
+	versionFixedIn : String
+operations
+end
+
+class BZComment
+attributes
+	issueId : Integer
+	commentId : String
+	commentAuthor : String
+	commentTime : String
+	commentHTML : String
+	commentText : String
+operations
+end
+
+class BZEvent
+attributes
+	author : String
+	date : String
+	field : String
+	oldValue : String
+	newValue : String
+	issueId : Integer
+operations
+end
+
+composition xxx_BZRepo_products between
+	BZRepo[0..1] role xxx_BZRepo_products_src
+	BZProduct[*] role products
+end
+
+association xxx_BZRepo_components between
+	BZRepo[0..1] role xxx_BZRepo_components_src
+	BZComponent[*] role components
+end
+
+association xxx_BZRepo_issues between
+	BZRepo[0..1] role xxx_BZRepo_issues_src
+	BZIssue[*] role issues
+end
+
+association xxx_BZProduct_repo between
+	BZProduct[*] role xxx_BZProduct_repo_src
+	BZRepo[1] role repo
+end
+
+composition xxx_BZProduct_components between
+	BZProduct[0..1] role xxx_BZProduct_components_src
+	BZComponent[*] role components
+end
+
+association xxx_BZProduct_issues between
+	BZProduct[0..1] role xxx_BZProduct_issues_src
+	BZIssue[*] role issues
+end
+
+composition xxx_BZComponent_issues between
+	BZComponent[0..1] role xxx_BZComponent_issues_src
+	BZIssue[*] role issues
+end
+
+association xxx_BZComponent_product between
+	BZComponent[*] role xxx_BZComponent_product_src
+	BZProduct[1] role product
+end
+
+association xxx_BZComponent_repo between
+	BZComponent[*] role xxx_BZComponent_repo_src
+	BZRepo[1] role repo
+end
+
+association xxx_BZIssue_repo between
+	BZIssue[*] role xxx_BZIssue_repo_src
+	BZRepo[1] role repo
+end
+
+composition xxx_BZIssue_comments between
+	BZIssue[0..1] role xxx_BZIssue_comments_src
+	BZComment[*] role comments
+end
+
+composition xxx_BZIssue_events between
+	BZIssue[0..1] role xxx_BZIssue_events_src
+	BZEvent[*] role events
+end
+
+association xxx_BZIssue_component between
+	BZIssue[*] role xxx_BZIssue_component_src
+	BZComponent[1] role component
+end
+
+association xxx_BZIssue_product between
+	BZIssue[*] role xxx_BZIssue_product_src
+	BZProduct[1] role product
+end
+
+association xxx_BZComment_issue between
+	BZComment[*] role xxx_BZComment_issue_src
+	BZIssue[1] role issue
+end
+
+association xxx_BZEvent_issue between
+	BZEvent[*] role xxx_BZEvent_issue_src
+	BZIssue[1] role issue
+end
+

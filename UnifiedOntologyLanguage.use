@@ -1,0 +1,61 @@
+model PrimitiveTypes
+class Node
+attributes
+operations
+end
+
+class Resource<Node
+attributes
+operations
+end
+
+class Literal<Node
+attributes
+operations
+end
+
+class Fact
+attributes
+operations
+end
+
+class Package<Resource
+attributes
+operations
+end
+
+class Ontology<Package
+attributes
+operations
+end
+
+association xxx_Resource_context_ between
+	Resource[*] role xxx_Resource_context__src
+	Package[1] role context_
+end
+
+association xxx_Fact_object between
+	Fact[*] role xxx_Fact_object_src
+	Node[1] role object
+end
+
+association xxx_Fact_subject between
+	Fact[*] role xxx_Fact_subject_src
+	Resource[1] role subject
+end
+
+association xxx_Fact_predicate between
+	Fact[*] role xxx_Fact_predicate_src
+	Resource[1] role predicate
+end
+
+association xxx_Fact_context_ between
+	Fact[*] role xxx_Fact_context__src
+	Package[1] role context_
+end
+
+association xxx_Ontology_imports between
+	Ontology[0..1] role xxx_Ontology_imports_src
+	Package[*] role imports
+end
+

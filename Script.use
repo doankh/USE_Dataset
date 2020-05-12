@@ -1,0 +1,109 @@
+model script
+enum NativeTypeEnum{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class AbstractElement
+attributes
+operations
+end
+
+class NativeType<TypeRef
+attributes
+	type : NativeTypeEnum
+operations
+end
+
+class TypeRef<MultiTypeRef,ReturnTypeRef
+attributes
+	multi : Boolean
+operations
+end
+
+class MultiTypeRef
+attributes
+operations
+end
+
+class ReturnTypeRef
+attributes
+	isVoid : Boolean
+operations
+end
+
+class PackageDeclaration<AbstractElement
+attributes
+	name : String
+operations
+end
+
+class Import<AbstractElement
+attributes
+	importedNamespace : String
+operations
+end
+
+class Interface<AbstractElement
+attributes
+	name : String
+	singleton : Boolean
+operations
+end
+
+class MethodDeclaration
+attributes
+	name : String
+operations
+end
+
+class ArgumentDeclaration
+attributes
+	name : String
+operations
+end
+
+composition xxx_Model_elements between
+	Model[0..1] role xxx_Model_elements_src
+	AbstractElement[*] role elements
+end
+
+association xxx_TypeRef_referenced between
+	TypeRef[*] role xxx_TypeRef_referenced_src
+	Interface[0..1] role referenced
+end
+
+composition xxx_PackageDeclaration_elements between
+	PackageDeclaration[0..1] role xxx_PackageDeclaration_elements_src
+	AbstractElement[*] role elements
+end
+
+association xxx_Interface_superType between
+	Interface[*] role xxx_Interface_superType_src
+	Interface[0..1] role superType
+end
+
+composition xxx_Interface_methods between
+	Interface[0..1] role xxx_Interface_methods_src
+	MethodDeclaration[*] role methods
+end
+
+composition xxx_MethodDeclaration_returnType between
+	MethodDeclaration[*] role xxx_MethodDeclaration_returnType_src
+	ReturnTypeRef[0..1] role returnType
+end
+
+composition xxx_MethodDeclaration_args between
+	MethodDeclaration[0..1] role xxx_MethodDeclaration_args_src
+	ArgumentDeclaration[*] role args
+end
+
+composition xxx_ArgumentDeclaration_type between
+	ArgumentDeclaration[*] role xxx_ArgumentDeclaration_type_src
+	MultiTypeRef[0..1] role type
+end
+

@@ -1,0 +1,197 @@
+model Rss20
+enum CloudProtocol{
+default
+}
+
+enum SkipDay{
+default
+}
+
+class Category
+attributes
+	value : String
+	domain : String
+operations
+end
+
+class Cloud
+attributes
+	domain : String
+	path : String
+	port : String
+	protocol : CloudProtocol
+	registerProcedure : String
+operations
+end
+
+class DocumentRoot
+attributes
+	mixed : String
+operations
+end
+
+class Enclosure
+attributes
+	value : String
+	length : String
+	type : String
+	url : String
+operations
+end
+
+class Guid
+attributes
+	value : String
+	isPermaLink : Boolean
+operations
+end
+
+class Image
+attributes
+	url : String
+	title : String
+	link : String
+	width : String
+	height : String
+	description : String
+operations
+end
+
+class RssChannel
+attributes
+	group : String
+	title : String
+	link : String
+	description : String
+	language : String
+	copyright : String
+	managingEditor : String
+	webMaster : String
+	pubDate : String
+	lastBuildDate : String
+	generator : String
+	docs : String
+	ttl : String
+	rating : String
+	any : String
+	any1 : String
+	anyAttribute : String
+operations
+end
+
+class RssItem
+attributes
+	group : String
+	title : String
+	description : String
+	link : String
+	author : String
+	comments : String
+	pubDate : String
+	any : String
+	anyAttribute : String
+operations
+end
+
+class RssType
+attributes
+	any : String
+	version : String
+	anyAttribute : String
+operations
+end
+
+class SkipDaysList
+attributes
+	day : SkipDay
+operations
+end
+
+class SkipHoursList
+attributes
+	hour : String
+operations
+end
+
+class Source
+attributes
+	value : String
+	url : String
+operations
+end
+
+class TextInput
+attributes
+	title : String
+	description : String
+	name : String
+	link : String
+operations
+end
+
+
+composition xxx_DocumentRoot_rss between
+	DocumentRoot[*] role xxx_DocumentRoot_rss_src
+	RssType[*] role rss
+end
+
+composition xxx_RssChannel_category between
+	RssChannel[0..1] role xxx_RssChannel_category_src
+	Category[*] role category
+end
+
+composition xxx_RssChannel_cloud between
+	RssChannel[0..1] role xxx_RssChannel_cloud_src
+	Cloud[*] role cloud
+end
+
+composition xxx_RssChannel_image between
+	RssChannel[0..1] role xxx_RssChannel_image_src
+	Image[*] role image
+end
+
+composition xxx_RssChannel_textInput between
+	RssChannel[0..1] role xxx_RssChannel_textInput_src
+	TextInput[*] role textInput
+end
+
+composition xxx_RssChannel_skipHours between
+	RssChannel[0..1] role xxx_RssChannel_skipHours_src
+	SkipHoursList[*] role skipHours
+end
+
+composition xxx_RssChannel_skipDays between
+	RssChannel[0..1] role xxx_RssChannel_skipDays_src
+	SkipDaysList[*] role skipDays
+end
+
+composition xxx_RssChannel_item between
+	RssChannel[0..1] role xxx_RssChannel_item_src
+	RssItem[1..*] role item
+end
+
+composition xxx_RssItem_category between
+	RssItem[0..1] role xxx_RssItem_category_src
+	Category[*] role category
+end
+
+composition xxx_RssItem_enclosure between
+	RssItem[0..1] role xxx_RssItem_enclosure_src
+	Enclosure[*] role enclosure
+end
+
+composition xxx_RssItem_guid between
+	RssItem[0..1] role xxx_RssItem_guid_src
+	Guid[*] role guid
+end
+
+composition xxx_RssItem_source between
+	RssItem[0..1] role xxx_RssItem_source_src
+	Source[*] role source
+end
+
+composition xxx_RssType_channel between
+	RssType[*] role xxx_RssType_channel_src
+	RssChannel[1] role channel
+end
+

@@ -1,0 +1,147 @@
+model directives
+abstract class CompositionDirective
+attributes
+operations
+end
+
+abstract class ElementDirective<CompositionDirective
+attributes
+operations
+end
+
+class Create<UnaryDirective
+attributes
+	className : String
+operations
+end
+
+class Concat<BinaryDirective
+attributes
+	propertyNames : String
+operations
+end
+
+abstract class Change<BinaryDirective
+attributes
+	propertyName : String
+operations
+end
+
+class Destroy<UnaryDirective
+attributes
+operations
+end
+
+class Merge<BinaryDirective
+attributes
+operations
+end
+
+class Set_<Change
+attributes
+operations
+end
+
+class Add<Change
+attributes
+operations
+end
+
+class Remove<Change
+attributes
+operations
+end
+
+abstract class UnaryDirective<ElementDirective
+attributes
+operations
+end
+
+abstract class BinaryDirective<ElementDirective
+attributes
+operations
+end
+
+abstract class Literal<ElementRef
+attributes
+operations
+	getString():String
+end
+
+class StringLiteral<Literal
+attributes
+	value : String
+operations
+end
+
+class BooleanLiteral<Literal
+attributes
+	value : Boolean
+operations
+end
+
+class IntegerLiteral<Literal
+attributes
+	value : Integer
+operations
+end
+
+class VoidLiteral<Literal
+attributes
+operations
+end
+
+class IDRef<ObjectRef
+attributes
+	identifier : String
+operations
+end
+
+class NameRef<ObjectRef
+attributes
+	qname : String
+operations
+end
+
+abstract class ElementRef
+attributes
+operations
+end
+
+class MetaRef<ElementRef
+attributes
+	name : String
+operations
+end
+
+class PropRef<ElementRef
+attributes
+	property : String
+operations
+end
+
+class ObjectRef<ElementRef
+attributes
+operations
+end
+
+composition xxx_ElementDirective_target between
+	ElementDirective[*] role xxx_ElementDirective_target_src
+	ElementRef[1] role target
+end
+
+composition xxx_Create_type between
+	Create[*] role xxx_Create_type_src
+	MetaRef[1] role type
+end
+
+composition xxx_BinaryDirective_value between
+	BinaryDirective[0..1] role xxx_BinaryDirective_value_src
+	ElementRef[1..*] role value
+end
+
+composition xxx_PropRef_object between
+	PropRef[*] role xxx_PropRef_object_src
+	ObjectRef[1] role object
+end
+

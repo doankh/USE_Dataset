@@ -1,0 +1,216 @@
+model emf
+enum RateOperator{
+default
+}
+
+abstract class Action
+attributes
+operations
+end
+
+class Activity
+attributes
+operations
+end
+
+class Aggregation<Process
+attributes
+operations
+end
+
+abstract class BinaryOperator<Process
+attributes
+operations
+end
+
+class Choice<BinaryOperator
+attributes
+operations
+end
+
+class Cooperation<BinaryOperator,ProcessWithSet
+attributes
+operations
+end
+
+abstract class FiniteRate<Rate
+attributes
+operations
+end
+
+class Hiding<ProcessWithSet
+attributes
+operations
+end
+
+class Model
+attributes
+operations
+end
+
+class PassiveRate<Rate
+attributes
+	weight : Integer
+operations
+end
+
+class Prefix<Process
+attributes
+operations
+end
+
+abstract class Process
+attributes
+operations
+end
+
+abstract class ProcessWithSet<Process
+attributes
+operations
+end
+
+abstract class Rate
+attributes
+operations
+end
+
+class SilentAction<Action
+attributes
+operations
+end
+
+class ActionIdentifier<Action
+attributes
+	name : String
+operations
+end
+
+class NumberLiteral<FiniteRate
+attributes
+	value : Real
+operations
+end
+
+class ProcessAssignment
+attributes
+operations
+end
+
+class ProcessIdentifier<Process
+attributes
+	name : String
+operations
+end
+
+class RateAssignment
+attributes
+operations
+end
+
+class RateExpression<FiniteRate
+attributes
+	operator : RateOperator
+operations
+end
+
+class RateIdentifier<FiniteRate
+attributes
+	name : String
+operations
+end
+
+composition xxx_Activity_rate between
+	Activity[*] role xxx_Activity_rate_src
+	Rate[1] role rate
+end
+
+composition xxx_Activity_action between
+	Activity[*] role xxx_Activity_action_src
+	Action[1] role action
+end
+
+composition xxx_Aggregation_process between
+	Aggregation[*] role xxx_Aggregation_process_src
+	Process[1] role process
+end
+
+composition xxx_Aggregation_copies between
+	Aggregation[*] role xxx_Aggregation_copies_src
+	FiniteRate[0..1] role copies
+end
+
+composition xxx_BinaryOperator_rightHandSide between
+	BinaryOperator[*] role xxx_BinaryOperator_rightHandSide_src
+	Process[1] role rightHandSide
+end
+
+composition xxx_BinaryOperator_leftHandSide between
+	BinaryOperator[*] role xxx_BinaryOperator_leftHandSide_src
+	Process[1] role leftHandSide
+end
+
+composition xxx_Hiding_hiddenProcess between
+	Hiding[*] role xxx_Hiding_hiddenProcess_src
+	Process[1] role hiddenProcess
+end
+
+composition xxx_Model_systemEquation between
+	Model[*] role xxx_Model_systemEquation_src
+	Process[1] role systemEquation
+end
+
+composition xxx_Model_processAssignments between
+	Model[0..1] role xxx_Model_processAssignments_src
+	ProcessAssignment[*] role processAssignments
+end
+
+composition xxx_Model_rateAssignments between
+	Model[0..1] role xxx_Model_rateAssignments_src
+	RateAssignment[*] role rateAssignments
+end
+
+composition xxx_Prefix_targetProcess between
+	Prefix[*] role xxx_Prefix_targetProcess_src
+	Process[1] role targetProcess
+end
+
+composition xxx_Prefix_activity between
+	Prefix[*] role xxx_Prefix_activity_src
+	Activity[1] role activity
+end
+
+composition xxx_ProcessWithSet_actions between
+	ProcessWithSet[0..1] role xxx_ProcessWithSet_actions_src
+	ActionIdentifier[*] role actions
+end
+
+composition xxx_ProcessAssignment_processIdentifier between
+	ProcessAssignment[*] role xxx_ProcessAssignment_processIdentifier_src
+	ProcessIdentifier[1] role processIdentifier
+end
+
+composition xxx_ProcessAssignment_process between
+	ProcessAssignment[*] role xxx_ProcessAssignment_process_src
+	Process[1] role process
+end
+
+composition xxx_RateAssignment_rateIdentifier between
+	RateAssignment[*] role xxx_RateAssignment_rateIdentifier_src
+	RateIdentifier[1] role rateIdentifier
+end
+
+composition xxx_RateAssignment_rate between
+	RateAssignment[*] role xxx_RateAssignment_rate_src
+	FiniteRate[1] role rate
+end
+
+composition xxx_RateExpression_leftHandSide between
+	RateExpression[*] role xxx_RateExpression_leftHandSide_src
+	FiniteRate[1] role leftHandSide
+end
+
+composition xxx_RateExpression_rightHandSide between
+	RateExpression[*] role xxx_RateExpression_rightHandSide_src
+	FiniteRate[1] role rightHandSide
+end
+

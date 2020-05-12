@@ -1,0 +1,37 @@
+model extensions
+class BooleanExtensions
+attributes
+operations
+	toString():String
+end
+
+class NumberExtensions
+attributes
+operations
+	toString():String
+end
+
+class IntegerExtensions<NumberExtensions
+attributes
+operations
+end
+
+class RealExtensions<NumberExtensions
+attributes
+operations
+end
+
+class StringExtensions
+attributes
+operations
+	subString(fromIndex : Integer,toIndex : Integer):String
+end
+
+class CollectionExtensions
+attributes
+operations
+	isEmpty():Boolean
+	size():Integer
+	find(predicate : String):String
+end
+

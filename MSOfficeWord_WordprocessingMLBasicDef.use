@@ -1,0 +1,588 @@
+model WordprocessingMLBasicDef
+enum BreakType{
+	bt_page,
+	bt_column,
+	bt_text_wrapping
+}
+
+enum NoteValue{
+	ftn_normal,
+	ftn_separator,
+	ftn_continuation_separator,
+	ftn_continuation_notice
+}
+
+enum OnOffType{
+	oot_on,
+	oot_off
+}
+
+enum FldCharTypeProperty{
+	fctp_begin,
+	fctp_separate,
+	fctp_end
+}
+
+class DateTimeType
+attributes
+	year : Integer
+	month : Integer
+	day : Integer
+	hour : Integer
+	minute : Integer
+	second : Integer
+operations
+end
+
+class VersionType
+attributes
+	n : Integer
+	nn : Integer
+operations
+end
+
+abstract class ValueType
+attributes
+operations
+end
+
+class StringValue<ValueType
+attributes
+	value : String
+operations
+end
+
+class FloatValue<ValueType
+attributes
+	value : Real
+operations
+end
+
+class DateTimeTypeValue<ValueType
+attributes
+operations
+end
+
+class BooleanValue<ValueType
+attributes
+	value : Boolean
+operations
+end
+
+class DocumentPropertiesCollection
+attributes
+	title : String
+	subject : String
+	keywords : String
+	description : String
+	category : String
+	author : String
+	lastAuthor : String
+	manager : String
+	company : String
+	hyperlinkBase : String
+	revision : Integer
+	presentationFormat : String
+	guid : String
+	appName : String
+	totalTime : Integer
+	pages : Integer
+	words : Integer
+	characters : Integer
+	charactersWithSpaces : Integer
+	bytes : Integer
+	lines : Integer
+	paragraphs : Integer
+operations
+end
+
+class CustomDocumentPropertiesCollection
+attributes
+operations
+end
+
+class CustomDocumentProperty
+attributes
+	name : String
+operations
+end
+
+class SmartTagType
+attributes
+	namespaceuri : String
+	name : String
+	url : String
+operations
+end
+
+class SmartTagsCollection
+attributes
+operations
+end
+
+class StringProperty<StringType
+attributes
+operations
+end
+
+class StringType
+attributes
+	val : String
+operations
+end
+
+class WordDocument
+attributes
+operations
+end
+
+class DocPrElt
+attributes
+operations
+end
+
+class BodyElt
+attributes
+operations
+end
+
+abstract class BlockLevelElt
+attributes
+operations
+end
+
+abstract class BlockLevelChunkElt<BlockLevelElt
+attributes
+operations
+end
+
+class ParaElt<BlockLevelChunkElt
+attributes
+operations
+end
+
+class ParaPrElt
+attributes
+operations
+end
+
+abstract class ParaContentElt
+attributes
+operations
+end
+
+class RunElt<ParaContentElt
+attributes
+operations
+end
+
+class RunPrElt
+attributes
+operations
+end
+
+abstract class RunContentElt
+attributes
+operations
+end
+
+class BreakElt<RunContentElt
+attributes
+	type : BreakType
+operations
+end
+
+class Text<StringType
+attributes
+operations
+end
+
+class DelText<StringType
+attributes
+operations
+end
+
+class InstrText<StringType
+attributes
+operations
+end
+
+class DelInstrText<StringType
+attributes
+operations
+end
+
+class NoBreakHyphen<RunContentElt
+attributes
+operations
+end
+
+class SoftHyphen<RunContentElt
+attributes
+operations
+end
+
+class AnnotationRef<RunContentElt
+attributes
+operations
+end
+
+class FootnoteRef<RunContentElt
+attributes
+operations
+end
+
+class EndnoteRef<RunContentElt
+attributes
+operations
+end
+
+class Separator<RunContentElt
+attributes
+operations
+end
+
+class ContinuationSeparator<RunContentElt
+attributes
+operations
+end
+
+class PgNum<RunContentElt
+attributes
+operations
+end
+
+class Cr<RunContentElt
+attributes
+operations
+end
+
+class Footnote<NoteElt
+attributes
+operations
+end
+
+class Endnote<NoteElt
+attributes
+operations
+end
+
+abstract class NoteElt
+attributes
+	type : NoteValue
+	suppressRef : OnOffType
+operations
+end
+
+class Picture<PictureType
+attributes
+operations
+end
+
+class Symbol<SymElt
+attributes
+operations
+end
+
+class SymElt
+attributes
+operations
+end
+
+class Tab<TabElt
+attributes
+operations
+end
+
+class FldChar<FldCharElt
+attributes
+operations
+end
+
+class FldCharElt
+attributes
+	fldCharType : FldCharTypeProperty
+	fldLock : OnOffType
+operations
+end
+
+class FontsListElt
+attributes
+operations
+end
+
+class ListsElt
+attributes
+operations
+end
+
+class StylesElt
+attributes
+operations
+end
+
+class SectPrElt
+attributes
+operations
+end
+
+class RunLevelElt<BlockLevelChunkElt
+attributes
+operations
+end
+
+class CfChunk<BlockLevelElt
+attributes
+operations
+end
+
+class SimpleFieldElt<ParaContentElt
+attributes
+operations
+end
+
+class HLinkElt<ParaContentElt
+attributes
+operations
+end
+
+class SubDocElt<ParaContentElt
+attributes
+operations
+end
+
+class PictureType
+attributes
+operations
+end
+
+class TabElt
+attributes
+operations
+end
+
+association xxx_DateTimeTypeValue_value between
+	DateTimeTypeValue[*] role xxx_DateTimeTypeValue_value_src
+	DateTimeType[1] role value
+end
+
+association xxx_DocumentPropertiesCollection_dp_wordDocument between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_dp_wordDocument_src
+	WordDocument[1] role dp_wordDocument
+end
+
+composition xxx_DocumentPropertiesCollection_version between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_version_src
+	VersionType[0..1] role version
+end
+
+composition xxx_DocumentPropertiesCollection_lastPrinted between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_lastPrinted_src
+	DateTimeType[0..1] role lastPrinted
+end
+
+composition xxx_DocumentPropertiesCollection_created between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_created_src
+	DateTimeType[0..1] role created
+end
+
+composition xxx_DocumentPropertiesCollection_lastSaved between
+	DocumentPropertiesCollection[*] role xxx_DocumentPropertiesCollection_lastSaved_src
+	DateTimeType[0..1] role lastSaved
+end
+
+association xxx_CustomDocumentPropertiesCollection_cdp_wordDocument between
+	CustomDocumentPropertiesCollection[*] role xxx_CustomDocumentPropertiesCollection_cdp_wordDocument_src
+	WordDocument[1] role cdp_wordDocument
+end
+
+composition xxx_CustomDocumentPropertiesCollection_customDocumentProperties between
+	CustomDocumentPropertiesCollection[0..1] role xxx_CustomDocumentPropertiesCollection_customDocumentProperties_src
+	CustomDocumentProperty[1..*] role customDocumentProperties
+end
+
+association xxx_CustomDocumentProperty_customDocumentProperty_cdpe between
+	CustomDocumentProperty[*] role xxx_CustomDocumentProperty_customDocumentProperty_cdpe_src
+	CustomDocumentPropertiesCollection[1] role customDocumentProperty_cdpe
+end
+
+composition xxx_CustomDocumentProperty_value between
+	CustomDocumentProperty[*] role xxx_CustomDocumentProperty_value_src
+	ValueType[1] role value
+end
+
+association xxx_SmartTagType_smartTagType_ste between
+	SmartTagType[*] role xxx_SmartTagType_smartTagType_ste_src
+	SmartTagsCollection[1] role smartTagType_ste
+end
+
+association xxx_SmartTagsCollection_st_wordDocument between
+	SmartTagsCollection[*] role xxx_SmartTagsCollection_st_wordDocument_src
+	WordDocument[1] role st_wordDocument
+end
+
+composition xxx_SmartTagsCollection_smartTagTypes between
+	SmartTagsCollection[0..1] role xxx_SmartTagsCollection_smartTagTypes_src
+	SmartTagType[*] role smartTagTypes
+end
+
+composition xxx_WordDocument_wd_smartTags between
+	WordDocument[*] role xxx_WordDocument_wd_smartTags_src
+	SmartTagsCollection[0..1] role wd_smartTags
+end
+
+composition xxx_WordDocument_wd_docProperties between
+	WordDocument[*] role xxx_WordDocument_wd_docProperties_src
+	DocumentPropertiesCollection[0..1] role wd_docProperties
+end
+
+composition xxx_WordDocument_wd_customDocProperties between
+	WordDocument[*] role xxx_WordDocument_wd_customDocProperties_src
+	CustomDocumentPropertiesCollection[0..1] role wd_customDocProperties
+end
+
+composition xxx_WordDocument_ignoreSubtree between
+	WordDocument[*] role xxx_WordDocument_ignoreSubtree_src
+	StringProperty[0..1] role ignoreSubtree
+end
+
+composition xxx_WordDocument_ignoreElements between
+	WordDocument[*] role xxx_WordDocument_ignoreElements_src
+	StringProperty[0..1] role ignoreElements
+end
+
+composition xxx_WordDocument_fonts between
+	WordDocument[*] role xxx_WordDocument_fonts_src
+	FontsListElt[0..1] role fonts
+end
+
+composition xxx_WordDocument_lists between
+	WordDocument[*] role xxx_WordDocument_lists_src
+	ListsElt[0..1] role lists
+end
+
+composition xxx_WordDocument_styles between
+	WordDocument[*] role xxx_WordDocument_styles_src
+	StylesElt[0..1] role styles
+end
+
+composition xxx_WordDocument_docPr between
+	WordDocument[*] role xxx_WordDocument_docPr_src
+	DocPrElt[0..1] role docPr
+end
+
+composition xxx_WordDocument_body between
+	WordDocument[*] role xxx_WordDocument_body_src
+	BodyElt[1] role body
+end
+
+association xxx_DocPrElt_dpe_wordDocument between
+	DocPrElt[*] role xxx_DocPrElt_dpe_wordDocument_src
+	WordDocument[1] role dpe_wordDocument
+end
+
+association xxx_BodyElt_be_wordDocument between
+	BodyElt[*] role xxx_BodyElt_be_wordDocument_src
+	WordDocument[1] role be_wordDocument
+end
+
+composition xxx_BodyElt_blockLevelElts between
+	BodyElt[0..1] role xxx_BodyElt_blockLevelElts_src
+	BlockLevelElt[*] role blockLevelElts
+end
+
+composition xxx_BodyElt_sectPr between
+	BodyElt[*] role xxx_BodyElt_sectPr_src
+	SectPrElt[0..1] role sectPr
+end
+
+association xxx_BlockLevelElt_ble_bodyElt between
+	BlockLevelElt[*] role xxx_BlockLevelElt_ble_bodyElt_src
+	BodyElt[1] role ble_bodyElt
+end
+
+association xxx_BlockLevelElt_ble_note between
+	BlockLevelElt[*] role xxx_BlockLevelElt_ble_note_src
+	NoteElt[1] role ble_note
+end
+
+composition xxx_ParaElt_pPr between
+	ParaElt[*] role xxx_ParaElt_pPr_src
+	ParaPrElt[0..1] role pPr
+end
+
+composition xxx_ParaElt_pContentElts between
+	ParaElt[0..1] role xxx_ParaElt_pContentElts_src
+	ParaContentElt[*] role pContentElts
+end
+
+association xxx_ParaPrElt_ppe_pElt between
+	ParaPrElt[*] role xxx_ParaPrElt_ppe_pElt_src
+	ParaElt[1] role ppe_pElt
+end
+
+association xxx_ParaContentElt_pce_pElt between
+	ParaContentElt[*] role xxx_ParaContentElt_pce_pElt_src
+	ParaElt[1] role pce_pElt
+end
+
+composition xxx_RunElt_rPr between
+	RunElt[*] role xxx_RunElt_rPr_src
+	RunPrElt[0..1] role rPr
+end
+
+composition xxx_RunElt_rContentElts between
+	RunElt[0..1] role xxx_RunElt_rContentElts_src
+	RunContentElt[*] role rContentElts
+end
+
+association xxx_RunPrElt_rpe_rElt between
+	RunPrElt[*] role xxx_RunPrElt_rpe_rElt_src
+	RunElt[1] role rpe_rElt
+end
+
+association xxx_RunContentElt_rce_rElt between
+	RunContentElt[*] role xxx_RunContentElt_rce_rElt_src
+	RunElt[1] role rce_rElt
+end
+
+composition xxx_NoteElt_n_blockLevelElts between
+	NoteElt[0..1] role xxx_NoteElt_n_blockLevelElts_src
+	BlockLevelElt[1..*] role n_blockLevelElts
+end
+
+composition xxx_SymElt_font between
+	SymElt[*] role xxx_SymElt_font_src
+	StringType[1] role font
+end
+
+composition xxx_SymElt_char between
+	SymElt[*] role xxx_SymElt_char_src
+	StringType[1] role char
+end
+
+composition xxx_FldCharElt_fldData between
+	FldCharElt[*] role xxx_FldCharElt_fldData_src
+	StringType[0..1] role fldData
+end
+
+association xxx_FontsListElt_fle_wordDocument between
+	FontsListElt[*] role xxx_FontsListElt_fle_wordDocument_src
+	WordDocument[1] role fle_wordDocument
+end
+
+association xxx_ListsElt_le_wordDocument between
+	ListsElt[*] role xxx_ListsElt_le_wordDocument_src
+	WordDocument[1] role le_wordDocument
+end
+
+association xxx_StylesElt_se_wordDocument between
+	StylesElt[*] role xxx_StylesElt_se_wordDocument_src
+	WordDocument[1] role se_wordDocument
+end
+
+association xxx_SectPrElt_spe_bodyElt between
+	SectPrElt[*] role xxx_SectPrElt_spe_bodyElt_src
+	BodyElt[1] role spe_bodyElt
+end
+

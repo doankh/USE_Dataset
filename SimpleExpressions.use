@@ -1,0 +1,85 @@
+model simpleExpressions
+class IfCondition
+attributes
+	elseif : Boolean
+operations
+end
+
+class Expression
+attributes
+operations
+end
+
+class NumberLiteral<Expression
+attributes
+	value : Integer
+operations
+end
+
+class MethodCall<Expression
+attributes
+	value : String
+operations
+end
+
+class OrExpression<Expression
+attributes
+operations
+end
+
+class AndExpression<Expression
+attributes
+operations
+end
+
+class Comparison<Expression
+attributes
+	operator : String
+operations
+end
+
+class NotExpression<Expression
+attributes
+operations
+end
+
+composition xxx_IfCondition_condition between
+	IfCondition[*] role xxx_IfCondition_condition_src
+	Expression[0..1] role condition
+end
+
+composition xxx_OrExpression_left between
+	OrExpression[*] role xxx_OrExpression_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_OrExpression_right between
+	OrExpression[*] role xxx_OrExpression_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_AndExpression_left between
+	AndExpression[*] role xxx_AndExpression_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_AndExpression_right between
+	AndExpression[*] role xxx_AndExpression_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_Comparison_left between
+	Comparison[*] role xxx_Comparison_left_src
+	Expression[0..1] role left
+end
+
+composition xxx_Comparison_right between
+	Comparison[*] role xxx_Comparison_right_src
+	Expression[0..1] role right
+end
+
+composition xxx_NotExpression_expression between
+	NotExpression[*] role xxx_NotExpression_expression_src
+	Expression[0..1] role expression
+end
+

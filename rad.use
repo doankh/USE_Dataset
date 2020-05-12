@@ -1,0 +1,31 @@
+model rad
+class Posao
+attributes
+operations
+end
+
+abstract class Angazovani
+attributes
+operations
+end
+
+class VisokoObrazovan<Angazovani
+attributes
+operations
+end
+
+class Fizikalac<Angazovani
+attributes
+operations
+end
+
+class Fakultet<VisokoObrazovan
+attributes
+operations
+end
+
+class VisaSkola<VisokoObrazovan
+attributes
+operations
+end
+

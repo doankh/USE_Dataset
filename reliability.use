@@ -1,0 +1,87 @@
+model system
+enum PositionType{
+default
+}
+
+enum TransitionType{
+default
+}
+
+class Transition
+attributes
+	name : String
+	description : String
+	type : TransitionType
+operations
+end
+
+abstract class Position
+attributes
+	id : String
+operations
+end
+
+class TransitionMatrixElement
+attributes
+	necessity : Real
+	possibility : Real
+operations
+end
+
+class GeneralizedNet
+attributes
+	name : String
+operations
+end
+
+class Port<Position
+attributes
+	type : PositionType
+operations
+end
+
+class Failure<Position
+attributes
+operations
+end
+
+composition xxx_Transition_failureState between
+	Transition[*] role xxx_Transition_failureState_src
+	Failure[1] role failureState
+end
+
+association xxx_Transition_owner between
+	Transition[*] role xxx_Transition_owner_src
+	GeneralizedNet[0..1] role owner
+end
+
+association xxx_TransitionMatrixElement_oppositePosition between
+	TransitionMatrixElement[*] role xxx_TransitionMatrixElement_oppositePosition_src
+	Position[1] role oppositePosition
+end
+
+composition xxx_GeneralizedNet_transitions_ between
+	GeneralizedNet[0..1] role xxx_GeneralizedNet_transitions__src
+	Transition[*] role transitions_
+end
+
+composition xxx_GeneralizedNet_positions between
+	GeneralizedNet[0..1] role xxx_GeneralizedNet_positions_src
+	Port[*] role positions
+end
+
+composition xxx_Port_transitionRow between
+	Port[0..1] role xxx_Port_transitionRow_src
+	TransitionMatrixElement[*] role transitionRow
+end
+
+association xxx_Port_owner between
+	Port[*] role xxx_Port_owner_src
+	GeneralizedNet[0..1] role owner
+end
+
+association xxx_Failure_owner between
+	Failure[*] role xxx_Failure_owner_src
+	Transition[0..1] role owner
+end
+

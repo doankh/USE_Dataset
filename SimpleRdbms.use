@@ -1,0 +1,99 @@
+model rdbms
+class Column<RModelElement
+attributes
+	type : String
+operations
+end
+
+class ForeignKey<RModelElement
+attributes
+operations
+end
+
+class Key<RModelElement
+attributes
+operations
+end
+
+abstract class RModelElement
+attributes
+	name : String
+	kind : String
+operations
+end
+
+class Schema<RModelElement
+attributes
+operations
+end
+
+class Table<RModelElement
+attributes
+operations
+end
+
+association xxx_Column_owner between
+	Column[*] role xxx_Column_owner_src
+	Table[1] role owner
+end
+
+association xxx_Column_foreignKeys between
+	Column[0..1] role xxx_Column_foreignKeys_src
+	ForeignKey[*] role foreignKeys
+end
+
+association xxx_Column_keys between
+	Column[0..1] role xxx_Column_keys_src
+	Key[*] role keys
+end
+
+association xxx_ForeignKey_refersTo between
+	ForeignKey[*] role xxx_ForeignKey_refersTo_src
+	Key[1] role refersTo
+end
+
+association xxx_ForeignKey_columns between
+	ForeignKey[0..1] role xxx_ForeignKey_columns_src
+	Column[*] role columns
+end
+
+association xxx_ForeignKey_owner between
+	ForeignKey[*] role xxx_ForeignKey_owner_src
+	Table[1] role owner
+end
+
+association xxx_Key_owner between
+	Key[*] role xxx_Key_owner_src
+	Table[1] role owner
+end
+
+association xxx_Key_column between
+	Key[0..1] role xxx_Key_column_src
+	Column[*] role column
+end
+
+composition xxx_Schema_tables between
+	Schema[0..1] role xxx_Schema_tables_src
+	Table[*] role tables
+end
+
+composition xxx_Table_columns between
+	Table[0..1] role xxx_Table_columns_src
+	Column[*] role columns
+end
+
+association xxx_Table_schema between
+	Table[*] role xxx_Table_schema_src
+	Schema[1] role schema
+end
+
+composition xxx_Table_keys between
+	Table[0..1] role xxx_Table_keys_src
+	Key[*] role keys
+end
+
+composition xxx_Table_foreignKeys between
+	Table[0..1] role xxx_Table_foreignKeys_src
+	ForeignKey[*] role foreignKeys
+end
+

@@ -1,0 +1,839 @@
+model nano
+enum LengthUnit{
+default
+}
+
+enum TimeUnit{
+default
+}
+
+enum FrequencyUnit{
+default
+}
+
+enum LossUnit{
+default
+}
+
+enum PredefinedMaterial{
+default
+}
+
+enum LogicOperation{
+default
+}
+
+enum LatticeType{
+default
+}
+
+enum LineDirection{
+default
+}
+
+enum LineSelectionType{
+default
+}
+
+enum Boundaries{
+default
+}
+
+class Model
+attributes
+operations
+end
+
+class SetupSec
+attributes
+	projectName : String
+operations
+end
+
+class UnitSec
+attributes
+	lengthUnit : LengthUnit
+	timeUnit : TimeUnit
+	frequencyUnit : FrequencyUnit
+	lossUnit : LossUnit
+operations
+end
+
+class CodeSec
+attributes
+	codeBlock : String
+operations
+end
+
+class Coordinate2D
+attributes
+	x : String
+	y : String
+operations
+end
+
+class Coordinate3D
+attributes
+	x : String
+	y : String
+	z : String
+operations
+end
+
+class Coordinate3DSlab
+attributes
+operations
+end
+
+class StructureSec
+attributes
+operations
+end
+
+class Instance
+attributes
+	name : String
+	filepath : String
+operations
+end
+
+class Material
+attributes
+	name : String
+	index : String
+operations
+end
+
+class Objects
+attributes
+operations
+end
+
+class Slab
+attributes
+operations
+end
+
+class Dimension
+attributes
+	value : String
+operations
+end
+
+class Lattice
+attributes
+	latticeType : LatticeType
+	xNumber : String
+	yNumber : String
+	holeRadiusToDistance : String
+operations
+end
+
+class UnitOperation
+attributes
+operations
+end
+
+class Step
+attributes
+	steps : String
+operations
+end
+
+class Delete
+attributes
+operations
+end
+
+class SingleDelete
+attributes
+operations
+end
+
+class LineDelete
+attributes
+	direction : LineDirection
+	center : String
+	lineSelectType : LineSelectionType
+operations
+end
+
+class RangeDelete
+attributes
+operations
+end
+
+class Move
+attributes
+operations
+end
+
+class SingleMove
+attributes
+operations
+end
+
+class LineMove
+attributes
+	direction : LineDirection
+	center : String
+	lineSelectType : LineSelectionType
+operations
+end
+
+class RangeMove
+attributes
+operations
+end
+
+class Overwrite
+attributes
+operations
+end
+
+class SingleOverwrite
+attributes
+operations
+end
+
+class LineOverwrite
+attributes
+	direction : LineDirection
+	center : String
+	lineSelectType : LineSelectionType
+operations
+end
+
+class RangeOverwrite
+attributes
+operations
+end
+
+class Element
+attributes
+	material2 : PredefinedMaterial
+operations
+end
+
+class NewElement<Element
+attributes
+	name : String
+	logicoperation : LogicOperation
+operations
+end
+
+class Cuboid<Element
+attributes
+operations
+end
+
+class Cone<Element
+attributes
+operations
+end
+
+class Sphere<Element
+attributes
+operations
+end
+
+class Ring<Element
+attributes
+operations
+end
+
+class Pyramid<Element
+attributes
+operations
+end
+
+class SimulationSec
+attributes
+	simulationTime : String
+	bgIndex : String
+	xBoundary : Boundaries
+	yBoundary : Boundaries
+	zBoundary : Boundaries
+operations
+end
+
+class SourcesSec
+attributes
+operations
+end
+
+class BroadbandSource
+attributes
+operations
+end
+
+class NarrowbandSource
+attributes
+operations
+end
+
+class Dipole
+attributes
+	type : String
+operations
+end
+
+class MonitorsSec
+attributes
+operations
+end
+
+class Monitor
+attributes
+	type : String
+	name : String
+operations
+end
+
+class Calculation
+attributes
+	op : String
+operations
+end
+
+class NumberLiteral<Calculation
+attributes
+	value : String
+operations
+end
+
+class Binary<Calculation
+attributes
+operations
+end
+
+class Parenthesis<Calculation
+attributes
+operations
+end
+
+composition xxx_Model_setupSec between
+	Model[*] role xxx_Model_setupSec_src
+	SetupSec[0..1] role setupSec
+end
+
+composition xxx_Model_unitSec between
+	Model[*] role xxx_Model_unitSec_src
+	UnitSec[0..1] role unitSec
+end
+
+composition xxx_Model_codeSec between
+	Model[*] role xxx_Model_codeSec_src
+	CodeSec[0..1] role codeSec
+end
+
+composition xxx_Model_structureSec between
+	Model[*] role xxx_Model_structureSec_src
+	StructureSec[0..1] role structureSec
+end
+
+composition xxx_Model_simulationSec between
+	Model[*] role xxx_Model_simulationSec_src
+	SimulationSec[0..1] role simulationSec
+end
+
+composition xxx_Model_sourcesSec between
+	Model[*] role xxx_Model_sourcesSec_src
+	SourcesSec[0..1] role sourcesSec
+end
+
+composition xxx_Model_monitorsSec between
+	Model[*] role xxx_Model_monitorsSec_src
+	MonitorsSec[0..1] role monitorsSec
+end
+
+composition xxx_Model_codeSec2 between
+	Model[*] role xxx_Model_codeSec2_src
+	CodeSec[0..1] role codeSec2
+end
+
+composition xxx_SetupSec_values between
+	SetupSec[0..1] role xxx_SetupSec_values_src
+	Instance[*] role values
+end
+
+composition xxx_Coordinate3DSlab_x between
+	Coordinate3DSlab[*] role xxx_Coordinate3DSlab_x_src
+	Dimension[0..1] role x
+end
+
+composition xxx_Coordinate3DSlab_y between
+	Coordinate3DSlab[*] role xxx_Coordinate3DSlab_y_src
+	Dimension[0..1] role y
+end
+
+composition xxx_Coordinate3DSlab_z between
+	Coordinate3DSlab[*] role xxx_Coordinate3DSlab_z_src
+	Dimension[0..1] role z
+end
+
+composition xxx_StructureSec_material between
+	StructureSec[0..1] role xxx_StructureSec_material_src
+	Material[*] role material
+end
+
+composition xxx_StructureSec_objects between
+	StructureSec[0..1] role xxx_StructureSec_objects_src
+	Objects[*] role objects
+end
+
+composition xxx_Instance_number between
+	Instance[*] role xxx_Instance_number_src
+	Calculation[0..1] role number
+end
+
+composition xxx_Objects_slab between
+	Objects[*] role xxx_Objects_slab_src
+	Slab[0..1] role slab
+end
+
+composition xxx_Objects_lattice between
+	Objects[*] role xxx_Objects_lattice_src
+	Lattice[0..1] role lattice
+end
+
+composition xxx_Objects_element between
+	Objects[*] role xxx_Objects_element_src
+	Element[0..1] role element
+end
+
+composition xxx_Slab_coordinate between
+	Slab[*] role xxx_Slab_coordinate_src
+	Coordinate3DSlab[0..1] role coordinate
+end
+
+association xxx_Slab_material between
+	Slab[*] role xxx_Slab_material_src
+	Material[0..1] role material
+end
+
+composition xxx_Slab_thickness between
+	Slab[*] role xxx_Slab_thickness_src
+	Calculation[0..1] role thickness
+end
+
+composition xxx_Lattice_distance between
+	Lattice[*] role xxx_Lattice_distance_src
+	Calculation[0..1] role distance
+end
+
+composition xxx_Lattice_holeRadius between
+	Lattice[*] role xxx_Lattice_holeRadius_src
+	Calculation[0..1] role holeRadius
+end
+
+composition xxx_Lattice_unitOperations between
+	Lattice[0..1] role xxx_Lattice_unitOperations_src
+	UnitOperation[*] role unitOperations
+end
+
+composition xxx_UnitOperation_delete between
+	UnitOperation[*] role xxx_UnitOperation_delete_src
+	Delete[0..1] role delete_
+end
+
+composition xxx_UnitOperation_move between
+	UnitOperation[*] role xxx_UnitOperation_move_src
+	Move[0..1] role move
+end
+
+composition xxx_UnitOperation_overwrite between
+	UnitOperation[*] role xxx_UnitOperation_overwrite_src
+	Overwrite[0..1] role overwrite
+end
+
+composition xxx_Delete_single between
+	Delete[*] role xxx_Delete_single_src
+	SingleDelete[0..1] role single
+end
+
+composition xxx_Delete_line between
+	Delete[*] role xxx_Delete_line_src
+	LineDelete[0..1] role line
+end
+
+composition xxx_Delete_range between
+	Delete[*] role xxx_Delete_range_src
+	RangeDelete[0..1] role range
+end
+
+composition xxx_SingleDelete_coordinate between
+	SingleDelete[*] role xxx_SingleDelete_coordinate_src
+	Coordinate2D[0..1] role coordinate
+end
+
+composition xxx_LineDelete_coordinate1 between
+	LineDelete[*] role xxx_LineDelete_coordinate1_src
+	Coordinate2D[0..1] role coordinate1
+end
+
+composition xxx_LineDelete_coordinate2 between
+	LineDelete[*] role xxx_LineDelete_coordinate2_src
+	Coordinate2D[0..1] role coordinate2
+end
+
+composition xxx_LineDelete_step between
+	LineDelete[*] role xxx_LineDelete_step_src
+	Step[0..1] role step
+end
+
+composition xxx_RangeDelete_coordinate1 between
+	RangeDelete[*] role xxx_RangeDelete_coordinate1_src
+	Coordinate2D[0..1] role coordinate1
+end
+
+composition xxx_RangeDelete_coordinate2 between
+	RangeDelete[*] role xxx_RangeDelete_coordinate2_src
+	Coordinate2D[0..1] role coordinate2
+end
+
+composition xxx_Move_single between
+	Move[*] role xxx_Move_single_src
+	SingleMove[0..1] role single
+end
+
+composition xxx_Move_line between
+	Move[*] role xxx_Move_line_src
+	LineMove[0..1] role line
+end
+
+composition xxx_Move_range between
+	Move[*] role xxx_Move_range_src
+	RangeMove[0..1] role range
+end
+
+composition xxx_SingleMove_coordinate between
+	SingleMove[*] role xxx_SingleMove_coordinate_src
+	Coordinate2D[0..1] role coordinate
+end
+
+composition xxx_SingleMove_xOffset between
+	SingleMove[*] role xxx_SingleMove_xOffset_src
+	Calculation[0..1] role xOffset
+end
+
+composition xxx_SingleMove_yOffset between
+	SingleMove[*] role xxx_SingleMove_yOffset_src
+	Calculation[0..1] role yOffset
+end
+
+composition xxx_LineMove_coordinate1 between
+	LineMove[*] role xxx_LineMove_coordinate1_src
+	Coordinate2D[0..1] role coordinate1
+end
+
+composition xxx_LineMove_coordinate2 between
+	LineMove[*] role xxx_LineMove_coordinate2_src
+	Coordinate2D[0..1] role coordinate2
+end
+
+composition xxx_LineMove_step between
+	LineMove[*] role xxx_LineMove_step_src
+	Step[0..1] role step
+end
+
+composition xxx_LineMove_xOffset between
+	LineMove[*] role xxx_LineMove_xOffset_src
+	Calculation[0..1] role xOffset
+end
+
+composition xxx_LineMove_yOffset between
+	LineMove[*] role xxx_LineMove_yOffset_src
+	Calculation[0..1] role yOffset
+end
+
+composition xxx_RangeMove_coordinate1 between
+	RangeMove[*] role xxx_RangeMove_coordinate1_src
+	Coordinate2D[0..1] role coordinate1
+end
+
+composition xxx_RangeMove_coordinate2 between
+	RangeMove[*] role xxx_RangeMove_coordinate2_src
+	Coordinate2D[0..1] role coordinate2
+end
+
+composition xxx_RangeMove_xOffset between
+	RangeMove[*] role xxx_RangeMove_xOffset_src
+	Calculation[0..1] role xOffset
+end
+
+composition xxx_RangeMove_yOffset between
+	RangeMove[*] role xxx_RangeMove_yOffset_src
+	Calculation[0..1] role yOffset
+end
+
+composition xxx_Overwrite_single between
+	Overwrite[*] role xxx_Overwrite_single_src
+	SingleOverwrite[0..1] role single
+end
+
+composition xxx_Overwrite_line between
+	Overwrite[*] role xxx_Overwrite_line_src
+	LineOverwrite[0..1] role line
+end
+
+composition xxx_Overwrite_range between
+	Overwrite[*] role xxx_Overwrite_range_src
+	RangeOverwrite[0..1] role range
+end
+
+composition xxx_SingleOverwrite_coordinate between
+	SingleOverwrite[*] role xxx_SingleOverwrite_coordinate_src
+	Coordinate2D[0..1] role coordinate
+end
+
+composition xxx_SingleOverwrite_element between
+	SingleOverwrite[0..1] role xxx_SingleOverwrite_element_src
+	Element[*] role element
+end
+
+composition xxx_LineOverwrite_coordinate1 between
+	LineOverwrite[*] role xxx_LineOverwrite_coordinate1_src
+	Coordinate2D[0..1] role coordinate1
+end
+
+composition xxx_LineOverwrite_coordinate2 between
+	LineOverwrite[*] role xxx_LineOverwrite_coordinate2_src
+	Coordinate2D[0..1] role coordinate2
+end
+
+composition xxx_LineOverwrite_step between
+	LineOverwrite[*] role xxx_LineOverwrite_step_src
+	Step[0..1] role step
+end
+
+composition xxx_LineOverwrite_element between
+	LineOverwrite[0..1] role xxx_LineOverwrite_element_src
+	Element[*] role element
+end
+
+composition xxx_RangeOverwrite_coordinate1 between
+	RangeOverwrite[*] role xxx_RangeOverwrite_coordinate1_src
+	Coordinate2D[0..1] role coordinate1
+end
+
+composition xxx_RangeOverwrite_coordinate2 between
+	RangeOverwrite[*] role xxx_RangeOverwrite_coordinate2_src
+	Coordinate2D[0..1] role coordinate2
+end
+
+composition xxx_RangeOverwrite_element between
+	RangeOverwrite[0..1] role xxx_RangeOverwrite_element_src
+	Element[*] role element
+end
+
+composition xxx_Element_coordinate between
+	Element[*] role xxx_Element_coordinate_src
+	Coordinate3D[0..1] role coordinate
+end
+
+association xxx_Element_material between
+	Element[*] role xxx_Element_material_src
+	Material[0..1] role material
+end
+
+composition xxx_NewElement_element1 between
+	NewElement[*] role xxx_NewElement_element1_src
+	Element[0..1] role element1
+end
+
+composition xxx_NewElement_element2 between
+	NewElement[*] role xxx_NewElement_element2_src
+	Element[0..1] role element2
+end
+
+composition xxx_Cuboid_height between
+	Cuboid[*] role xxx_Cuboid_height_src
+	Calculation[0..1] role height
+end
+
+composition xxx_Cuboid_width between
+	Cuboid[*] role xxx_Cuboid_width_src
+	Calculation[0..1] role width
+end
+
+composition xxx_Cuboid_depth between
+	Cuboid[*] role xxx_Cuboid_depth_src
+	Calculation[0..1] role depth
+end
+
+composition xxx_Cone_radiusGround between
+	Cone[*] role xxx_Cone_radiusGround_src
+	Calculation[0..1] role radiusGround
+end
+
+composition xxx_Cone_radiusTop between
+	Cone[*] role xxx_Cone_radiusTop_src
+	Calculation[0..1] role radiusTop
+end
+
+composition xxx_Cone_height between
+	Cone[*] role xxx_Cone_height_src
+	Calculation[0..1] role height
+end
+
+composition xxx_Sphere_radius between
+	Sphere[*] role xxx_Sphere_radius_src
+	Calculation[0..1] role radius
+end
+
+composition xxx_Ring_innerRadius between
+	Ring[*] role xxx_Ring_innerRadius_src
+	Calculation[0..1] role innerRadius
+end
+
+composition xxx_Ring_outerRadius between
+	Ring[*] role xxx_Ring_outerRadius_src
+	Calculation[0..1] role outerRadius
+end
+
+composition xxx_Ring_height between
+	Ring[*] role xxx_Ring_height_src
+	Calculation[0..1] role height
+end
+
+composition xxx_Ring_thetaStart between
+	Ring[*] role xxx_Ring_thetaStart_src
+	Calculation[0..1] role thetaStart
+end
+
+composition xxx_Ring_thetaStop between
+	Ring[*] role xxx_Ring_thetaStop_src
+	Calculation[0..1] role thetaStop
+end
+
+composition xxx_Pyramid_height between
+	Pyramid[*] role xxx_Pyramid_height_src
+	Calculation[0..1] role height
+end
+
+composition xxx_Pyramid_xSpanBottom between
+	Pyramid[*] role xxx_Pyramid_xSpanBottom_src
+	Calculation[0..1] role xSpanBottom
+end
+
+composition xxx_Pyramid_ySpanBottom between
+	Pyramid[*] role xxx_Pyramid_ySpanBottom_src
+	Calculation[0..1] role ySpanBottom
+end
+
+composition xxx_Pyramid_xSpanTop between
+	Pyramid[*] role xxx_Pyramid_xSpanTop_src
+	Calculation[0..1] role xSpanTop
+end
+
+composition xxx_Pyramid_ySpanTop between
+	Pyramid[*] role xxx_Pyramid_ySpanTop_src
+	Calculation[0..1] role ySpanTop
+end
+
+composition xxx_SimulationSec_dx between
+	SimulationSec[*] role xxx_SimulationSec_dx_src
+	Calculation[0..1] role dx
+end
+
+composition xxx_SimulationSec_dy between
+	SimulationSec[*] role xxx_SimulationSec_dy_src
+	Calculation[0..1] role dy
+end
+
+composition xxx_SimulationSec_dz between
+	SimulationSec[*] role xxx_SimulationSec_dz_src
+	Calculation[0..1] role dz
+end
+
+composition xxx_SourcesSec_dipole between
+	SourcesSec[*] role xxx_SourcesSec_dipole_src
+	Dipole[0..1] role dipole
+end
+
+composition xxx_BroadbandSource_wavelengthCenter between
+	BroadbandSource[*] role xxx_BroadbandSource_wavelengthCenter_src
+	Calculation[0..1] role wavelengthCenter
+end
+
+composition xxx_BroadbandSource_wavelengthSpan between
+	BroadbandSource[*] role xxx_BroadbandSource_wavelengthSpan_src
+	Calculation[0..1] role wavelengthSpan
+end
+
+composition xxx_NarrowbandSource_frequency between
+	NarrowbandSource[*] role xxx_NarrowbandSource_frequency_src
+	Calculation[0..1] role frequency
+end
+
+composition xxx_NarrowbandSource_wavelength between
+	NarrowbandSource[*] role xxx_NarrowbandSource_wavelength_src
+	Calculation[0..1] role wavelength
+end
+
+composition xxx_NarrowbandSource_pulseLength between
+	NarrowbandSource[*] role xxx_NarrowbandSource_pulseLength_src
+	Calculation[0..1] role pulseLength
+end
+
+composition xxx_NarrowbandSource_pulseOffset between
+	NarrowbandSource[*] role xxx_NarrowbandSource_pulseOffset_src
+	Calculation[0..1] role pulseOffset
+end
+
+composition xxx_Dipole_coordinate between
+	Dipole[*] role xxx_Dipole_coordinate_src
+	Coordinate3D[0..1] role coordinate
+end
+
+composition xxx_Dipole_dipoleTheta between
+	Dipole[*] role xxx_Dipole_dipoleTheta_src
+	Calculation[0..1] role dipoleTheta
+end
+
+composition xxx_Dipole_dipolePhi between
+	Dipole[*] role xxx_Dipole_dipolePhi_src
+	Calculation[0..1] role dipolePhi
+end
+
+composition xxx_Dipole_broadbandSource between
+	Dipole[*] role xxx_Dipole_broadbandSource_src
+	BroadbandSource[0..1] role broadbandSource
+end
+
+composition xxx_Dipole_narrowbandSource between
+	Dipole[*] role xxx_Dipole_narrowbandSource_src
+	NarrowbandSource[0..1] role narrowbandSource
+end
+
+composition xxx_MonitorsSec_monitors between
+	MonitorsSec[0..1] role xxx_MonitorsSec_monitors_src
+	Monitor[*] role monitors
+end
+
+composition xxx_Monitor_coordinate between
+	Monitor[*] role xxx_Monitor_coordinate_src
+	Coordinate3D[0..1] role coordinate
+end
+
+composition xxx_Calculation_left between
+	Calculation[*] role xxx_Calculation_left_src
+	Calculation[0..1] role left
+end
+
+association xxx_NumberLiteral_value2 between
+	NumberLiteral[*] role xxx_NumberLiteral_value2_src
+	Instance[0..1] role value2
+end
+
+composition xxx_Binary_right between
+	Binary[*] role xxx_Binary_right_src
+	Calculation[0..1] role right
+end
+
+composition xxx_Parenthesis_expression between
+	Parenthesis[*] role xxx_Parenthesis_expression_src
+	Calculation[0..1] role expression
+end
+

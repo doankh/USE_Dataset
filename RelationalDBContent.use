@@ -1,0 +1,59 @@
+model RelationalDBContent
+abstract class NamedElement
+attributes
+	name : String
+operations
+end
+
+class DataBase<NamedElement
+attributes
+	SGBDname : String
+operations
+end
+
+class Table<NamedElement
+attributes
+operations
+end
+
+class Tuple_
+attributes
+operations
+end
+
+class TupleElement
+attributes
+	value : String
+operations
+end
+
+composition xxx_DataBase_tables between
+	DataBase[0..1] role xxx_DataBase_tables_src
+	Table[*] role tables
+end
+
+association xxx_Table_database between
+	Table[*] role xxx_Table_database_src
+	DataBase[1] role database
+end
+
+composition xxx_Table_tuples between
+	Table[0..1] role xxx_Table_tuples_src
+	Tuple_[*] role tuples
+end
+
+association xxx_Tuple_owner between
+	Tuple_[*] role xxx_Tuple_owner_src
+	Table[1] role owner
+end
+
+composition xxx_Tuple_elements between
+	Tuple_[0..1] role xxx_Tuple_elements_src
+	TupleElement[*] role elements
+end
+
+association xxx_TupleElement_tuple between
+	TupleElement[*] role xxx_TupleElement_tuple_src
+	Tuple_[1] role Tuple_
+end
+

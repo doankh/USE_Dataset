@@ -1,0 +1,556 @@
+model ODPEV
+class EnterpriseObject
+attributes
+operations
+end
+
+class ODPSystem<EnterpriseObject
+attributes
+operations
+end
+
+class Party<EnterpriseObject
+attributes
+operations
+end
+
+class Objective
+attributes
+operations
+end
+
+class Scope
+attributes
+operations
+end
+
+class EnterpriseSpecification
+attributes
+operations
+end
+
+class FieldOfApplication
+attributes
+operations
+end
+
+class Policy
+attributes
+operations
+end
+
+class PolicyEnvelope<Policy
+attributes
+operations
+end
+
+class PolicyValue<Policy
+attributes
+operations
+end
+
+class AssigmentPolicy<Policy
+attributes
+operations
+end
+
+class Contract
+attributes
+operations
+end
+
+class Process
+attributes
+operations
+end
+
+class Step
+attributes
+operations
+end
+
+class Action<Step
+attributes
+operations
+end
+
+abstract class AccountableAction<Action
+attributes
+operations
+end
+
+class Prescription<AccountableAction
+attributes
+operations
+end
+
+class Commitment<AccountableAction
+attributes
+operations
+end
+
+class Declaration<AccountableAction
+attributes
+operations
+end
+
+class Evaluation<AccountableAction
+attributes
+operations
+end
+
+class Delegation<AccountableAction
+attributes
+operations
+end
+
+class Behaviour
+attributes
+operations
+end
+
+class Community
+attributes
+operations
+end
+
+class CommunityObject<EnterpriseObject
+attributes
+operations
+end
+
+class Role
+attributes
+operations
+end
+
+class InterfaceRole<Role
+attributes
+operations
+end
+
+class Violation<Behaviour
+attributes
+operations
+end
+
+abstract class Rule
+attributes
+operations
+end
+
+class Obligation<Rule
+attributes
+operations
+end
+
+class Authorisation<Rule
+attributes
+operations
+end
+
+class Permission<Rule
+attributes
+operations
+end
+
+class Prohibition<Rule
+attributes
+operations
+end
+
+class EO_A_R
+attributes
+operations
+end
+
+class EO_P_D
+attributes
+operations
+end
+
+association xxx_EnterpriseObject_eoConfigurations between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoConfigurations_src
+	Community[*] role eoConfigurations
+end
+
+association xxx_EnterpriseObject_eoRoles between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoRoles_src
+	Role[*] role eoRoles
+end
+
+association xxx_EnterpriseObject_eoArtefactActions between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoArtefactActions_src
+	Action[1..*] role eoArtefactActions
+end
+
+association xxx_EnterpriseObject_eoResourceActions between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoResourceActions_src
+	Action[1..*] role eoResourceActions
+end
+
+association xxx_EnterpriseObject_eoActorActions between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoActorActions_src
+	Action[1..*] role eoActorActions
+end
+
+association xxx_EnterpriseObject_eoPolicy between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoPolicy_src
+	Policy[*] role eoPolicy
+end
+
+association xxx_EnterpriseObject_eoEOAR between
+	EnterpriseObject[0..1] role xxx_EnterpriseObject_eoEOAR_src
+	EO_A_R[*] role eoEOAR
+end
+
+association xxx_EnterpriseObject_eoEOPD between
+	EnterpriseObject[*] role xxx_EnterpriseObject_eoEOPD_src
+	EO_P_D[1] role eoEOPD
+end
+
+association xxx_ODPSystem_odpBehaviour between
+	ODPSystem[*] role xxx_ODPSystem_odpBehaviour_src
+	Scope[1] role odpBehaviour
+end
+
+association xxx_ODPSystem_odpObjectives between
+	ODPSystem[0..1] role xxx_ODPSystem_odpObjectives_src
+	Objective[1..*] role odpObjectives
+end
+
+association xxx_ODPSystem_odpSpecifier between
+	ODPSystem[*] role xxx_ODPSystem_odpSpecifier_src
+	EnterpriseSpecification[1] role odpSpecifier
+end
+
+association xxx_Party_ptyAccountableAction between
+	Party[0..1] role xxx_Party_ptyAccountableAction_src
+	AccountableAction[*] role ptyAccountableAction
+end
+
+association xxx_Party_ptyEOPD between
+	Party[*] role xxx_Party_ptyEOPD_src
+	EO_P_D[1] role ptyEOPD
+end
+
+association xxx_Objective_objFulfiller between
+	Objective[*] role xxx_Objective_objFulfiller_src
+	ODPSystem[0..1] role objFulfiller
+end
+
+association xxx_Objective_objSpecifier between
+	Objective[*] role xxx_Objective_objSpecifier_src
+	Contract[1] role objSpecifier
+end
+
+association xxx_Objective_objRefiners between
+	Objective[0..1] role xxx_Objective_objRefiners_src
+	Objective[*] role objRefiners
+end
+
+association xxx_Objective_objRefinement between
+	Objective[*] role xxx_Objective_objRefinement_src
+	Objective[0..1] role objRefinement
+end
+
+association xxx_Objective_objAchievers between
+	Objective[0..1] role xxx_Objective_objAchievers_src
+	Process[*] role objAchievers
+end
+
+association xxx_Objective_objFulfillers between
+	Objective[0..1] role xxx_Objective_objFulfillers_src
+	Behaviour[1..*] role objFulfillers
+end
+
+association xxx_Scope_scOdpSystem between
+	Scope[*] role xxx_Scope_scOdpSystem_src
+	ODPSystem[1] role scOdpSystem
+end
+
+association xxx_EnterpriseSpecification_esDescribedSystems between
+	EnterpriseSpecification[0..1] role xxx_EnterpriseSpecification_esDescribedSystems_src
+	ODPSystem[1..*] role esDescribedSystems
+end
+
+association xxx_EnterpriseSpecification_esContext between
+	EnterpriseSpecification[*] role xxx_EnterpriseSpecification_esContext_src
+	FieldOfApplication[1] role esContext
+end
+
+association xxx_FieldOfApplication_faEnterpriseSpecifications between
+	FieldOfApplication[*] role xxx_FieldOfApplication_faEnterpriseSpecifications_src
+	EnterpriseSpecification[1] role faEnterpriseSpecifications
+end
+
+association xxx_Policy_poSpecifier between
+	Policy[*] role xxx_Policy_poSpecifier_src
+	Contract[1] role poSpecifier
+end
+
+association xxx_Policy_poOwner between
+	Policy[*] role xxx_Policy_poOwner_src
+	Community[1] role poOwner
+end
+
+association xxx_Policy_poProcess between
+	Policy[0..1] role xxx_Policy_poProcess_src
+	Process[*] role poProcess
+end
+
+association xxx_Policy_poBehaviour between
+	Policy[0..1] role xxx_Policy_poBehaviour_src
+	Behaviour[*] role poBehaviour
+end
+
+association xxx_Policy_poChanger between
+	Policy[0..1] role xxx_Policy_poChanger_src
+	Behaviour[*] role poChanger
+end
+
+association xxx_Policy_poRole between
+	Policy[0..1] role xxx_Policy_poRole_src
+	Role[*] role poRole
+end
+
+association xxx_Policy_poEnterpriseObject between
+	Policy[0..1] role xxx_Policy_poEnterpriseObject_src
+	EnterpriseObject[*] role poEnterpriseObject
+end
+
+association xxx_PolicyEnvelope_pePolicySetter between
+	PolicyEnvelope[*] role xxx_PolicyEnvelope_pePolicySetter_src
+	Behaviour[1] role pePolicySetter
+end
+
+association xxx_PolicyEnvelope_peBehaviour between
+	PolicyEnvelope[*] role xxx_PolicyEnvelope_peBehaviour_src
+	Behaviour[0..1] role peBehaviour
+end
+
+composition xxx_PolicyEnvelope_peValues between
+	PolicyEnvelope[0..1] role xxx_PolicyEnvelope_peValues_src
+	PolicyValue[1..*] role peValues
+end
+
+association xxx_PolicyEnvelope_peCurrentValue between
+	PolicyEnvelope[*] role xxx_PolicyEnvelope_peCurrentValue_src
+	PolicyValue[1] role peCurrentValue
+end
+
+association xxx_PolicyValue_pvValue between
+	PolicyValue[*] role xxx_PolicyValue_pvValue_src
+	PolicyEnvelope[1] role pvValue
+end
+
+association xxx_AssigmentPolicy_apEOAR between
+	AssigmentPolicy[0..1] role xxx_AssigmentPolicy_apEOAR_src
+	EO_A_R[*] role apEOAR
+end
+
+association xxx_Contract_ctPolicies between
+	Contract[*] role xxx_Contract_ctPolicies_src
+	Policy[1] role ctPolicies
+end
+
+association xxx_Contract_ctObjective between
+	Contract[*] role xxx_Contract_ctObjective_src
+	Objective[1] role ctObjective
+end
+
+association xxx_Contract_ctBehaviours between
+	Contract[0..1] role xxx_Contract_ctBehaviours_src
+	Behaviour[1..*] role ctBehaviours
+end
+
+association xxx_Process_prObjectives between
+	Process[0..1] role xxx_Process_prObjectives_src
+	Objective[1..*] role prObjectives
+end
+
+association xxx_Process_prDetails between
+	Process[0..1] role xxx_Process_prDetails_src
+	Step[1..*] role prDetails
+end
+
+association xxx_Process_prRefinement between
+	Process[*] role xxx_Process_prRefinement_src
+	Step[0..1] role prRefinement
+end
+
+association xxx_Process_prConstrainer between
+	Process[0..1] role xxx_Process_prConstrainer_src
+	Policy[*] role prConstrainer
+end
+
+association xxx_Step_stGraphs between
+	Step[0..1] role xxx_Step_stGraphs_src
+	Process[1..*] role stGraphs
+end
+
+association xxx_Step_stAbstraction between
+	Step[*] role xxx_Step_stAbstraction_src
+	Process[0..1] role stAbstraction
+end
+
+association xxx_Action_actBehaviours between
+	Action[0..1] role xxx_Action_actBehaviours_src
+	Behaviour[1..*] role actBehaviours
+end
+
+association xxx_Action_actArtefactRoleFillers between
+	Action[0..1] role xxx_Action_actArtefactRoleFillers_src
+	EnterpriseObject[*] role actArtefactRoleFillers
+end
+
+association xxx_Action_actResourceRoleFillers between
+	Action[0..1] role xxx_Action_actResourceRoleFillers_src
+	EnterpriseObject[*] role actResourceRoleFillers
+end
+
+association xxx_Action_actActorRoleFillers between
+	Action[0..1] role xxx_Action_actActorRoleFillers_src
+	EnterpriseObject[*] role actActorRoleFillers
+end
+
+association xxx_AccountableAction_aaAccountableParty between
+	AccountableAction[0..1] role xxx_AccountableAction_aaAccountableParty_src
+	Party[1..*] role aaAccountableParty
+end
+
+association xxx_Delegation_dlgEOPD between
+	Delegation[*] role xxx_Delegation_dlgEOPD_src
+	EO_P_D[1] role dlgEOPD
+end
+
+association xxx_Behaviour_beObjectives between
+	Behaviour[0..1] role xxx_Behaviour_beObjectives_src
+	Objective[1..*] role beObjectives
+end
+
+association xxx_Behaviour_beSpecifiers between
+	Behaviour[0..1] role xxx_Behaviour_beSpecifiers_src
+	Contract[1..*] role beSpecifiers
+end
+
+association xxx_Behaviour_beActions between
+	Behaviour[0..1] role xxx_Behaviour_beActions_src
+	Action[1..*] role beActions
+end
+
+association xxx_Behaviour_beIdentifier between
+	Behaviour[*] role xxx_Behaviour_beIdentifier_src
+	Role[0..1] role beIdentifier
+end
+
+association xxx_Behaviour_bePolicyEnvelope between
+	Behaviour[*] role xxx_Behaviour_bePolicyEnvelope_src
+	PolicyEnvelope[0..1] role bePolicyEnvelope
+end
+
+association xxx_Behaviour_beConstrainer between
+	Behaviour[*] role xxx_Behaviour_beConstrainer_src
+	PolicyEnvelope[0..1] role beConstrainer
+end
+
+association xxx_Behaviour_bePolicyConstrainer between
+	Behaviour[0..1] role xxx_Behaviour_bePolicyConstrainer_src
+	Policy[*] role bePolicyConstrainer
+end
+
+association xxx_Behaviour_bePolicy between
+	Behaviour[0..1] role xxx_Behaviour_bePolicy_src
+	Policy[*] role bePolicy
+end
+
+association xxx_Community_coAbstraction between
+	Community[*] role xxx_Community_coAbstraction_src
+	CommunityObject[0..1] role coAbstraction
+end
+
+association xxx_Community_coMembers between
+	Community[0..1] role xxx_Community_coMembers_src
+	EnterpriseObject[*] role coMembers
+end
+
+association xxx_Community_coCommunityRoles between
+	Community[0..1] role xxx_Community_coCommunityRoles_src
+	Role[*] role coCommunityRoles
+end
+
+association xxx_Community_coPolicy between
+	Community[0..1] role xxx_Community_coPolicy_src
+	Policy[*] role coPolicy
+end
+
+association xxx_CommunityObject_cobjRefinement between
+	CommunityObject[*] role xxx_CommunityObject_cobjRefinement_src
+	Community[1] role cobjRefinement
+end
+
+association xxx_Role_roleBehaviour between
+	Role[*] role xxx_Role_roleBehaviour_src
+	Behaviour[1] role roleBehaviour
+end
+
+association xxx_Role_roleSpecifier between
+	Role[*] role xxx_Role_roleSpecifier_src
+	Community[1] role roleSpecifier
+end
+
+association xxx_Role_rolefillers between
+	Role[0..1] role xxx_Role_rolefillers_src
+	EnterpriseObject[*] role rolefillers
+end
+
+association xxx_Role_roleConstrainer between
+	Role[0..1] role xxx_Role_roleConstrainer_src
+	Policy[*] role roleConstrainer
+end
+
+association xxx_Role_roleEOAR between
+	Role[0..1] role xxx_Role_roleEOAR_src
+	EO_A_R[*] role roleEOAR
+end
+
+association xxx_Violation_vioProhibitor between
+	Violation[*] role xxx_Violation_vioProhibitor_src
+	Rule[1] role vioProhibitor
+end
+
+association xxx_Rule_ruViolation between
+	Rule[0..1] role xxx_Rule_ruViolation_src
+	Violation[*] role ruViolation
+end
+
+association xxx_EO_A_R_eoarSubject between
+	EO_A_R[0..1] role xxx_EO_A_R_eoarSubject_src
+	EnterpriseObject[*] role eoarSubject
+end
+
+association xxx_EO_A_R_eoarSubjectRole between
+	EO_A_R[0..1] role xxx_EO_A_R_eoarSubjectRole_src
+	Role[1..*] role eoarSubjectRole
+end
+
+association xxx_EO_A_R_eoarGovernor between
+	EO_A_R[0..1] role xxx_EO_A_R_eoarGovernor_src
+	AssigmentPolicy[*] role eoarGovernor
+end
+
+association xxx_EO_P_D_eopdAgent between
+	EO_P_D[*] role xxx_EO_P_D_eopdAgent_src
+	EnterpriseObject[1] role eopdAgent
+end
+
+association xxx_EO_P_D_eopdPrincipal between
+	EO_P_D[*] role xxx_EO_P_D_eopdPrincipal_src
+	Party[1] role eopdPrincipal
+end
+
+association xxx_EO_P_D_eopdAction between
+	EO_P_D[*] role xxx_EO_P_D_eopdAction_src
+	Delegation[1] role eopdAction
+end
+

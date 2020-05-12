@@ -1,0 +1,248 @@
+model realtimescheduling
+enum Periodicity{
+default
+}
+
+enum SchedulingAlgorithm{
+default
+}
+
+class HardwareResource
+attributes
+operations
+end
+
+class Task
+attributes
+	id : String
+	worstCaseExecTime : Integer
+	implicitDeadline : Integer
+	priority : Integer
+	responseTime : Integer
+	scheduleable : Boolean
+	criticalInstance : Integer
+	periodicity : Periodicity
+	characteristicPeriod : Integer
+operations
+end
+
+class Module
+attributes
+	utilization : Real
+	id : String
+	period : Integer
+	delay : Integer
+operations
+end
+
+class Partition
+attributes
+	id : String
+	period : Real
+	virtualProcessorUtilization : Real
+	availabilityFactor : Real
+	schedulingAlgorithm : SchedulingAlgorithm
+operations
+end
+
+class Interval
+attributes
+	start : Integer
+	end_ : Integer
+operations
+end
+
+class Network
+attributes
+	name : String
+	networkBandwidth : Integer
+	latency : Integer
+operations
+end
+
+class System
+attributes
+	name : String
+operations
+end
+
+class SoftwareResource
+attributes
+operations
+end
+
+class Processor
+attributes
+	id : String
+operations
+end
+
+class Switch
+attributes
+	id : String
+operations
+end
+
+class VirtualLink
+attributes
+	id : String
+	BAG : Integer
+	maxFrameSize : Integer
+operations
+end
+
+abstract class Port
+attributes
+	order : Integer
+	Bandwidth : Real
+	id : String
+operations
+end
+
+class Connection
+attributes
+	id : String
+operations
+end
+
+class Route
+attributes
+	endToEndDelay : Integer
+operations
+end
+
+class SwitchPort<Port
+attributes
+operations
+end
+
+class EndSystemPort<Port
+attributes
+operations
+end
+
+composition xxx_HardwareResource_modules between
+	HardwareResource[0..1] role xxx_HardwareResource_modules_src
+	Module[*] role modules
+end
+
+composition xxx_HardwareResource_network between
+	HardwareResource[*] role xxx_HardwareResource_network_src
+	Network[0..1] role network
+end
+
+association xxx_Task_partition between
+	Task[*] role xxx_Task_partition_src
+	Partition[1] role partition
+end
+
+association xxx_Module_partition between
+	Module[0..1] role xxx_Module_partition_src
+	Partition[*] role partition
+end
+
+composition xxx_Module_processors between
+	Module[0..1] role xxx_Module_processors_src
+	Processor[1..*] role processors
+end
+
+composition xxx_Module_modulePorts between
+	Module[0..1] role xxx_Module_modulePorts_src
+	EndSystemPort[*] role modulePorts
+end
+
+composition xxx_Partition_executionIntervals between
+	Partition[0..1] role xxx_Partition_executionIntervals_src
+	Interval[*] role executionIntervals
+end
+
+association xxx_Partition_tasks between
+	Partition[0..1] role xxx_Partition_tasks_src
+	Task[*] role tasks
+end
+
+association xxx_Partition_module between
+	Partition[*] role xxx_Partition_module_src
+	Module[1] role module
+end
+
+composition xxx_Network_switches between
+	Network[0..1] role xxx_Network_switches_src
+	Switch[*] role switches
+end
+
+composition xxx_Network_connections between
+	Network[0..1] role xxx_Network_connections_src
+	Connection[*] role connections
+end
+
+composition xxx_System_hardware between
+	System[*] role xxx_System_hardware_src
+	HardwareResource[1] role hardware
+end
+
+composition xxx_System_software between
+	System[*] role xxx_System_software_src
+	SoftwareResource[1] role software
+end
+
+composition xxx_SoftwareResource_executedTasks between
+	SoftwareResource[0..1] role xxx_SoftwareResource_executedTasks_src
+	Task[*] role executedTasks
+end
+
+composition xxx_SoftwareResource_containedPartitions between
+	SoftwareResource[0..1] role xxx_SoftwareResource_containedPartitions_src
+	Partition[1..*] role containedPartitions
+end
+
+composition xxx_SoftwareResource_virtualLinks between
+	SoftwareResource[0..1] role xxx_SoftwareResource_virtualLinks_src
+	VirtualLink[*] role virtualLinks
+end
+
+composition xxx_Switch_switchPorts between
+	Switch[0..1] role xxx_Switch_switchPorts_src
+	SwitchPort[1..*] role switchPorts
+end
+
+composition xxx_VirtualLink_routes between
+	VirtualLink[0..1] role xxx_VirtualLink_routes_src
+	Route[1..*] role routes
+end
+
+association xxx_VirtualLink_source between
+	VirtualLink[*] role xxx_VirtualLink_source_src
+	Module[1] role source
+end
+
+association xxx_VirtualLink_destinations between
+	VirtualLink[0..1] role xxx_VirtualLink_destinations_src
+	Module[1..*] role destinations
+end
+
+association xxx_Port_connection between
+	Port[*] role xxx_Port_connection_src
+	Connection[1] role connection
+end
+
+association xxx_Connection_routes between
+	Connection[0..1] role xxx_Connection_routes_src
+	Route[*] role routes
+end
+
+association xxx_Connection_B between
+	Connection[*] role xxx_Connection_B_src
+	Port[1] role B
+end
+
+association xxx_Connection_A between
+	Connection[*] role xxx_Connection_A_src
+	Port[1] role A
+end
+
+association xxx_Route_connections between
+	Route[0..1] role xxx_Route_connections_src
+	Connection[*] role connections
+end
+

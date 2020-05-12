@@ -1,0 +1,76 @@
+model ComponentsReq
+class Class
+attributes
+operations
+end
+
+abstract class NamedElement
+attributes
+operations
+end
+
+class Interface
+attributes
+operations
+end
+
+class Realization<Abstraction
+attributes
+operations
+end
+
+class Abstraction<Dependency
+attributes
+operations
+end
+
+class Dependency
+attributes
+operations
+end
+
+abstract class Classifier<Namespace
+attributes
+operations
+end
+
+abstract class Namespace<NamedElement
+attributes
+operations
+end
+
+abstract class Behavior
+attributes
+operations
+end
+
+class Property
+attributes
+operations
+end
+
+abstract class TypedElement
+attributes
+operations
+end
+
+abstract class PackageableElement
+attributes
+operations
+end
+
+association xxx_NamedElement_clientDependency between
+	NamedElement[0..1] role xxx_NamedElement_clientDependency_src
+	Dependency[*] role clientDependency
+end
+
+association xxx_Dependency_supplier between
+	Dependency[0..1] role xxx_Dependency_supplier_src
+	NamedElement[1..*] role supplier
+end
+
+association xxx_Dependency_client between
+	Dependency[0..1] role xxx_Dependency_client_src
+	NamedElement[1..*] role client
+end
+
